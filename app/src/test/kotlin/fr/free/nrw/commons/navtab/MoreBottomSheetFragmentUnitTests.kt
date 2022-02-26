@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.navtab
 
+import android.app.Dialog
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import fr.free.nrw.commons.CommonsApplication
+import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.profile.ProfileActivity
@@ -31,6 +33,8 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowAlertDialog
+import org.robolectric.shadows.ShadowDialog
+import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 
 
@@ -55,6 +59,7 @@ class MoreBottomSheetFragmentUnitTests {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         context = RuntimeEnvironment.application.applicationContext
+        AppAdapter.set(TestAppAdapter())
 
         activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         fragment = MoreBottomSheetFragment()
@@ -101,7 +106,7 @@ class MoreBottomSheetFragmentUnitTests {
     fun testOnFeedbackClicked() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onFeedbackClicked()
-        val dialog: AlertDialog = ShadowAlertDialog.getLatestDialog() as AlertDialog
+        val dialog: Dialog = ShadowDialog.getLatestDialog() as Dialog
         Assert.assertEquals(dialog.isShowing, true)
     }
 

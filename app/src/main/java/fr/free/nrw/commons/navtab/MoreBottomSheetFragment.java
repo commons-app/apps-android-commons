@@ -118,33 +118,33 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
 
     @OnClick(R.id.more_feedback)
     public void onFeedbackClicked() {
-        showAlertDialog();
+        showFeedbackDialog();
     }
 
     private void showFeedbackDialog() {
-        new FeedbackDialog(getContext(), onFeedbackSubmitCallback).show();
+        new FeedbackDialog(getContext(), new OnFeedbackSubmitCallback() {
+            @Override
+            public void onFeedbackSubmit(Feedback feedback) {
+                Single<Boolean> single = feedbackController
+                    .postFeedback(MoreBottomSheetFragment.this, feedback)
+                    .flatMapSingle(result -> Single.just(result))
+                    .firstOrError();
+
+                Single.defer((Callable<SingleSource<Boolean>>) () -> single)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(aBoolean -> {
+                        if (aBoolean) {
+                            Toast.makeText(getContext(), "Thanks for giving Feedback", Toast.LENGTH_SHORT)
+                                .show();
+                        } else {
+                            Toast.makeText(getContext(), "Error while sending feedback",
+                                Toast.LENGTH_SHORT).show();
+                        }
+                    });
+            }
+        }).show();
     }
-
-    private OnFeedbackSubmitCallback onFeedbackSubmitCallback = new OnFeedbackSubmitCallback() {
-        @Override
-        public void onFeedbackSubmit(Feedback feedback) {
-            Single<Boolean> single = feedbackController
-                .postFeedback(MoreBottomSheetFragment.this, feedback)
-                .flatMapSingle(result -> Single.just(result))
-                .firstOrError();
-
-            Single.defer((Callable<SingleSource<Boolean>>) () -> single)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        System.out.println("SUCCESS");
-                    } else {
-                        System.out.println("FAILURE");
-                    }
-                });
-        }
-    };
 
     /**
      * This method shows the alert dialog when a user wants to send feedback about the app.

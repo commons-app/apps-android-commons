@@ -693,4 +693,12 @@ Upload your first media by tapping on the add button.</string>
   <string name="leaderboard_unavailable_beta">The leaderboard is only available in the prod flavor.</string>
   <string name="copyright_popup">Please only upload pictures you have taken by yourself. Uploaders of copyrighted images will be blocked. This applies to the beta flavor too. Thank you for testing the app!</string>
   <string name="your_feedback">Your Feedback</string>
+  <string name="select_feedback_data_choice">Please deselect any information that you are not comfortable sharing publicly</string>
+  <string name="api_level">API Level</string>
+  <string name="android_version">Android Version</string>
+  <string name="device_manufacturer">Device manufacturer</string>
+  <string name="device_model">Device model</string>
+  <string name="device_name">Device name</string>
+  <string name="network_type">Network type</string>
+  <string name="wikimedia_user_name">Wikimedia user name</string>
 </resources>

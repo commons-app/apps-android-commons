@@ -4,12 +4,10 @@ import android.content.Context;
 import fr.free.nrw.commons.feedback.Feedback;
 
 public class FeedbackContentCreator {
-    private Context context;
     private StringBuilder stringBuilder;
     private Feedback feedback;
 
-    public FeedbackContentCreator(final Context context, Feedback feedback) {
-        this.context = context;
+    public FeedbackContentCreator(Feedback feedback) {
         this.feedback = feedback;
         init();
     }

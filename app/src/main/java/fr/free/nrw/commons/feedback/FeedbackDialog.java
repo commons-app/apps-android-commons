@@ -82,6 +82,7 @@ public class FeedbackDialog extends Dialog {
         String mNetworkType = networkType.isChecked() ? DeviceInfoUtil.getConnectionType(getContext()).toString() : null;
         Feedback feedback = new Feedback(mAppVersionVersion,mAPILevel, feedbackDescription.getText().toString(), mAndroidVersion, mDeviceModel, mDeviceManufacturer, mDeviceName, mNetworkType);;
         onFeedbackSubmitCallback.onFeedbackSubmit(feedback);
+        dismiss();
     }
 
 }

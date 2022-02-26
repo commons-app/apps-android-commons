@@ -17,12 +17,10 @@ import org.wikipedia.csrf.CsrfTokenClient;
 @Singleton
 public class FeedbackController {
 
-    private CsrfTokenClient csrfTokenClient;
     private final PageEditClient pageEditClient;
 
     @Inject
-    public FeedbackController(@Named(NAMED_COMMONS_CSRF) CsrfTokenClient csrfTokenClient, @Named("commons-page-edit") PageEditClient pageEditClient) {
-        this.csrfTokenClient = csrfTokenClient;
+    public FeedbackController(@Named("commons-page-edit") PageEditClient pageEditClient) {
         this.pageEditClient = pageEditClient;
     }
 
@@ -33,38 +31,8 @@ public class FeedbackController {
             .getCommonsApplicationComponent()
             .inject(moreBottomSheetFragment);
 
-        FeedbackContentCreator feedbackContentCreator = new FeedbackContentCreator(
-            moreBottomSheetFragment.getContext(), feedback);
+        FeedbackContentCreator feedbackContentCreator = new FeedbackContentCreator(feedback);
 
         return pageEditClient.prependEdit("Commons:Mobile_app/Feedback", feedbackContentCreator.toString(), "Summary");
-
-//        try {
-//            System.out.println("CSRF token " + token);
-//            FeedbackService feedbackService = FeedbackClient.getInstance().create(FeedbackService.class);
-//            feedbackService.postFeedback("/* Feedback for version "+feedback.getVersion() + " */", "addtopic", "Commons:Mobile_app/Feedback", "Feedback from " + getUserName(moreBottomSheetFragment), feedbackContentCreator.toString(), csrfTokenClient.getTokenBlocking())
-//                .enqueue(new Callback<Void>() {
-//                    @Override
-//                    public void onResponse(Call<Void> call, Response<Void> response) {
-//                        Toast.makeText(moreBottomSheetFragment.getContext(), "Your Feedback Received", Toast.LENGTH_LONG).show();
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<Void> call, Throwable t) {
-//                        Toast.makeText(moreBottomSheetFragment.getContext(), "Something went wrong", Toast.LENGTH_LONG).show();
-//                        t.printStackTrace();
-//                    }
-//                });
-//        } catch (Throwable throwable) {
-//            throwable.printStackTrace();
-//        }
-    }
-    private String getUserName(MoreBottomSheetFragment moreBottomSheetFragment){
-        final AccountManager accountManager = AccountManager.get(
-            moreBottomSheetFragment.getContext());
-        final Account[] allAccounts = accountManager.getAccountsByType(BuildConfig.ACCOUNT_TYPE);
-        if (allAccounts.length != 0) {
-            return allAccounts[0].name;
-        }
-        return "";
     }
 }
