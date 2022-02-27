@@ -15,18 +15,25 @@
       android:layout_width="match_parent"
       android:layout_height="0dp"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/toolbar_layout"/>
+      tools:layout_editor_absoluteX="16dp" />
 
     <LinearLayout
       android:id="@+id/linear_layout_noimage"
-      android:layout_width="193dp"
-      android:layout_height="42dp"
+      android:layout_width="204dp"
+      android:layout_height="47dp"
+      android:layout_marginBottom="320dp"
       android:orientation="horizontal"
-      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintBottom_toTopOf="@+id/fragment_container"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.66"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/fragment_container"
-      app:layout_constraintVertical_bias="0.481"/>
+      app:layout_constraintHorizontal_bias="0.574"
+      app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+          android:id="@+id/no_images_found"
+          android:layout_width="172dp"
+          android:layout_height="match_parent"
+          android:text="@string/no_images_found"
+          android:textSize="20sp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
