@@ -7,6 +7,7 @@ import android.content.Context;
 import static fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources;
 import android.content.Intent;
 import android.net.Uri;
+import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
@@ -186,20 +187,21 @@ public class DeleteHelper {
 
         alert.setPositiveButton(context.getString(R.string.ok), (dialogInterface, i) -> {
 
-            String reason = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_alert_set_positive_button_reason) + " ";
+            if(mUserReason.size() > 0){
+                String reason = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_alert_set_positive_button_reason) + " ";
 
-            for (int j = 0; j < mUserReason.size(); j++) {
-                reason = reason + reasonListEnglish[mUserReason.get(j)];
-                if (j != mUserReason.size() - 1) {
-                    reason = reason + ", ";
+                for (int j = 0; j < mUserReason.size(); j++) {
+                    reason = reason + reasonListEnglish[mUserReason.get(j)];
+                    if (j != mUserReason.size() - 1) {
+                        reason = reason + ", ";
+                    }
                 }
-            }
 
-            Timber.d("thread is askReasonAndExecute %s", Thread.currentThread().getName());
+                Timber.d("thread is askReasonAndExecute %s", Thread.currentThread().getName());
 
-            String finalReason = reason;
+                String finalReason = reason;
 
-            Single.defer((Callable<SingleSource<Boolean>>) () ->
+                Single.defer((Callable<SingleSource<Boolean>>) () ->
                     makeDeletion(context, media, finalReason))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -210,6 +212,9 @@ public class DeleteHelper {
                             reviewCallback.onFailure();
                         }
                     });
+            }else{
+                Toast.makeText(context, context.getString(R.string.select_one_reason), Toast.LENGTH_LONG).show();
+            }
 
         });
         alert.setNegativeButton(context.getString(R.string.cancel), (dialog, which) -> reviewCallback.onFailure());
