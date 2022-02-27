@@ -14,6 +14,9 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 import org.wikipedia.csrf.CsrfTokenClient;
 
+/**
+ * Performs uploading of feedback from user after formatting it
+ */
 @Singleton
 public class FeedbackController {
 
@@ -24,6 +27,12 @@ public class FeedbackController {
         this.pageEditClient = pageEditClient;
     }
 
+    /**
+     *  Performs POST request to upload the feedback collected from user
+     * @param moreBottomSheetFragment
+     * @param feedback
+     * @return
+     */
     public Observable<Boolean> postFeedback(MoreBottomSheetFragment moreBottomSheetFragment,
         Feedback feedback) {
         ApplicationlessInjection

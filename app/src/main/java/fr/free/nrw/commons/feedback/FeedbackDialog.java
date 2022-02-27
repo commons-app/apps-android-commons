@@ -28,6 +28,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Feedback dialog that asks user for message and
+ * other device specifications
+ */
 public class FeedbackDialog extends Dialog {
 
     @BindView(R.id.btn_submit_feedback)

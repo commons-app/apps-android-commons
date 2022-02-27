@@ -34,66 +34,136 @@ public class Feedback {
         this.networkType = networkType;
     }
 
+    /**
+     * Get the version from which this piece of feedback is being sent.
+     * Ex: 3.0.1
+     * @return
+     */
     public String getVersion() {
         return version;
     }
 
+    /**
+     * Set the version of app to given version
+     * @param version
+     */
     public void setVersion(final String version) {
         this.version = version;
     }
 
+    /**
+     * gets api level of device
+     * Ex: 28
+     * @return
+     */
     public String getApiLevel() {
         return apiLevel;
     }
 
+    /**
+     * sets api level value to given value
+     * @param apiLevel
+     */
     public void setApiLevel(final String apiLevel) {
         this.apiLevel = apiLevel;
     }
 
+    /**
+     * gets feedback text entered by user
+     * @return
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * sets feedback text
+     * @param title
+     */
     public void setTitle(final String title) {
         this.title = title;
     }
 
+    /**
+     * gets android version of device
+     * Ex: 9
+     * @return
+     */
     public String getAndroidVersion() {
         return androidVersion;
     }
 
+    /**
+     * sets value of android version
+     * @param androidVersion
+     */
     public void setAndroidVersion(final String androidVersion) {
         this.androidVersion = androidVersion;
     }
 
+    /**
+     * get device model of current device
+     * Ex: Redmi 6 Pro
+     * @return
+     */
     public String getDeviceModel() {
         return deviceModel;
     }
 
+    /**
+     * sets value of device model to a given value
+     * @param deviceModel
+     */
     public void setDeviceModel(final String deviceModel) {
         this.deviceModel = deviceModel;
     }
 
+    /**
+     * get device manufacturer of user's device
+     * Ex: Redmi
+     * @return
+     */
     public String getDeviceManufacturer() {
         return deviceManufacturer;
     }
 
+    /**
+     * set device manufacturer value to a given value
+     * @param deviceManufacturer
+     */
     public void setDeviceManufacturer(final String deviceManufacturer) {
         this.deviceManufacturer = deviceManufacturer;
     }
 
+    /**
+     * get device name of user's device
+     * @return
+     */
     public String getDevice() {
         return device;
     }
 
+    /**
+     * sets device name value to a given value
+     * @param device
+     */
     public void setDevice(final String device) {
         this.device = device;
     }
 
+    /**
+     * get network type of user's network
+     * Ex: wifi
+     * @return
+     */
     public String getNetworkType() {
         return networkType;
     }
 
+    /**
+     * sets network type to a given value
+     * @param networkType
+     */
     public void setNetworkType(final String networkType) {
         this.networkType = networkType;
     }
