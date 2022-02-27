@@ -16,6 +16,8 @@ public class FeedbackContentCreator {
      * Initializes the string buffer object to append content from feedback object
      */
     public void init() {
+        // Localization is not needed here, because this ends up on a page where developers read the feedback, so English is the most convenient.
+
         stringBuilder = new StringBuilder();
         stringBuilder.append("== ").append("Feedback for version").append(feedback.getVersion()).append(" ==");
         stringBuilder.append("\n");

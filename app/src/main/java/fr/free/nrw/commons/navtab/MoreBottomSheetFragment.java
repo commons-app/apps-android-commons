@@ -27,7 +27,6 @@ import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.feedback.Feedback;
-import fr.free.nrw.commons.feedback.FeedbackClient;
 import fr.free.nrw.commons.feedback.FeedbackController;
 import fr.free.nrw.commons.feedback.FeedbackDialog;
 import fr.free.nrw.commons.feedback.OnFeedbackSubmitCallback;
@@ -121,6 +120,9 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
         showFeedbackDialog();
     }
 
+    /**
+     * Creates and shows a dialog asking feedback from users
+     */
     private void showFeedbackDialog() {
         new FeedbackDialog(getContext(), new OnFeedbackSubmitCallback() {
             @Override
@@ -135,10 +137,10 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(aBoolean -> {
                         if (aBoolean) {
-                            Toast.makeText(getContext(), "Thanks for giving Feedback", Toast.LENGTH_SHORT)
+                            Toast.makeText(getContext(), getString(R.string.thanks_feedback), Toast.LENGTH_SHORT)
                                 .show();
                         } else {
-                            Toast.makeText(getContext(), "Error while sending feedback",
+                            Toast.makeText(getContext(), getString(R.string.error_feedback),
                                 Toast.LENGTH_SHORT).show();
                         }
                     });

@@ -70,7 +70,7 @@ public class FeedbackDialog extends Dialog {
     @OnClick(R.id.btn_submit_feedback)
     void submitFeedback() {
         if(feedbackDescription.getText().toString().equals("")) {
-            feedbackDescription.setError("Enter description");
+            feedbackDescription.setError(getContext().getString(R.string.enter_description));
             return;
         }
         String mAppVersionVersion = ConfigUtils.getVersionNameWithSha(getContext());

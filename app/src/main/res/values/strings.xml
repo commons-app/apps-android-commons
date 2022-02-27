@@ -701,4 +701,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="device_name">Device name</string>
   <string name="network_type">Network type</string>
   <string name="wikimedia_user_name">Wikimedia user name</string>
+  <string name="thanks_feedback">Thanks for giving feedback</string>
+  <string name="error_feedback">Error while sending feedback</string>
+  <string name="enter_description">Enter description</string>
 </resources>

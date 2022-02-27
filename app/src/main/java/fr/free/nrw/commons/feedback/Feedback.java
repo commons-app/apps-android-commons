@@ -1,13 +1,24 @@
 package fr.free.nrw.commons.feedback;
 
+/**
+ * Pojo class for storing information that are required while uploading a feedback
+ */
 public class Feedback {
+    // Version of app
     private String version;
+    // API level of user's phone
     private String apiLevel;
+    // Title/Description entered by user
     private String title;
+    // Android version of user's device
     private String androidVersion;
+    // Device Model of user's device
     private String deviceModel;
+    // Device manufacturer name
     private String deviceManufacturer;
+    // Device name stored on user's device
     private String device;
+    // network type user is having (Ex: Wifi)
     private String networkType;
 
     public Feedback(final String version, final String apiLevel, final String title, final String androidVersion,
