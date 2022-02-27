@@ -74,7 +74,7 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
         }
 
         // Open folder if saved in prefs.
-        if(prefs.contains(FOLDER_ID)) {
+        if(prefs.contains(FOLDER_ID)){
             val lastOpenFolderId: Long = prefs.getLong(FOLDER_ID, 0L)
             val lastOpenFolderName: String? = prefs.getString(FOLDER_NAME, null)
             val lastItemId: Long = prefs.getLong(ITEM_ID, 0)
