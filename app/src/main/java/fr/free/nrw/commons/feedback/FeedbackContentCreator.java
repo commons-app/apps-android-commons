@@ -3,6 +3,10 @@ package fr.free.nrw.commons.feedback;
 import android.content.Context;
 import fr.free.nrw.commons.feedback.Feedback;
 
+/**
+ * Creates a wikimedia recognizable format
+ * from feedback information
+ */
 public class FeedbackContentCreator {
     private StringBuilder stringBuilder;
     private Feedback feedback;
@@ -24,29 +28,29 @@ public class FeedbackContentCreator {
         stringBuilder.append(feedback.getTitle());
         stringBuilder.append("\n");
         stringBuilder.append("\n");
-        if(feedback.getApiLevel()!=null) {
+        if (feedback.getApiLevel() != null) {
             stringBuilder.append("* ").append("API level: ").append(feedback.getApiLevel());
             stringBuilder.append("\n");
         }
-        if(feedback.getAndroidVersion()!=null) {
-            stringBuilder.append("* ").append("Android Version: ")
+        if (feedback.getAndroidVersion() != null) {
+            stringBuilder.append("* ").append("Android version: ")
                 .append(feedback.getAndroidVersion());
             stringBuilder.append("\n");
         }
-        if(feedback.getDeviceManufacturer()!=null) {
+        if (feedback.getDeviceManufacturer() != null) {
             stringBuilder.append("* ").append("Device manufacturer: ")
                 .append(feedback.getDeviceManufacturer());
             stringBuilder.append("\n");
         }
-        if(feedback.getDeviceModel()!=null) {
+        if (feedback.getDeviceModel() != null) {
             stringBuilder.append("* ").append("Device model: ").append(feedback.getDeviceModel());
             stringBuilder.append("\n");
         }
-        if(feedback.getDevice()!=null) {
+        if (feedback.getDevice() != null) {
             stringBuilder.append("* ").append("Device: ").append(feedback.getDevice());
             stringBuilder.append("\n");
         }
-        if(feedback.getNetworkType()!=null) {
+        if (feedback.getNetworkType() != null) {
             stringBuilder.append("* ").append("Network type: ").append(feedback.getNetworkType());
             stringBuilder.append("\n");
         }

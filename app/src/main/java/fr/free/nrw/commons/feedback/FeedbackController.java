@@ -29,9 +29,6 @@ public class FeedbackController {
 
     /**
      *  Performs POST request to upload the feedback collected from user
-     * @param moreBottomSheetFragment
-     * @param feedback
-     * @return
      */
     public Observable<Boolean> postFeedback(MoreBottomSheetFragment moreBottomSheetFragment,
         Feedback feedback) {
