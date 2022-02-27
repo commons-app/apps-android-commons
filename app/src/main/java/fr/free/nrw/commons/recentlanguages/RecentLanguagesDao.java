@@ -29,7 +29,7 @@ public class RecentLanguagesDao {
     private final Provider<ContentProviderClient> clientProvider;
 
     @Inject
-    public RecentLanguagesDao(@Named("recentsearch") Provider<ContentProviderClient> clientProvider) {
+    public RecentLanguagesDao(@Named("recent_languages") Provider<ContentProviderClient> clientProvider) {
         this.clientProvider = clientProvider;
     }
 
@@ -76,7 +76,7 @@ public class RecentLanguagesDao {
      * Delete a bookmark from database
      * @param language : Bookmark to delete
      */
-    private void deleteBookmarkItem(final String language) {
+    private void deleteRecentLanguage(final String language) {
         final ContentProviderClient db = clientProvider.get();
         try {
             db.delete(RecentLanguagesContentProvider.uriForName(language), null, null);

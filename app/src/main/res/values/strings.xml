@@ -292,6 +292,7 @@
   <string name="title_activity_search">Search</string>
   <string name="search_recent_header">Recent searches:</string>
   <string name="provider_searches">Recently searched queries</string>
+  <string name="provider_recent_languages">Recent language queries</string>
   <string name="error_loading_categories">Error occurred while loading categories.</string>
   <string name="error_loading_depictions">Error occurred while loading depictions.</string>
   <string name="search_tab_title_media">Media</string>

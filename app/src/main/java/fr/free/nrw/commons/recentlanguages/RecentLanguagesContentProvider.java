@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.recentlanguages;
 
-import static fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.COLUMN_ID;
-import static fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.TABLE_NAME;
+import static fr.free.nrw.commons.recentlanguages.RecentLanguagesDao.Table.COLUMN_NAME;
+import static fr.free.nrw.commons.recentlanguages.RecentLanguagesDao.Table.TABLE_NAME;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -20,7 +20,7 @@ public class RecentLanguagesContentProvider extends CommonsDaggerContentProvider
 
     private static final String BASE_PATH = "recent_languages";
     public static final Uri BASE_URI =
-        Uri.parse("content://" + BuildConfig.BOOKMARK_ITEMS_AUTHORITY + "/" + BASE_PATH);
+        Uri.parse("content://" + BuildConfig.RECENT_LANGUAGE_AUTHORITY + "/" + BASE_PATH);
 
 
     /**
@@ -76,7 +76,7 @@ public class RecentLanguagesContentProvider extends CommonsDaggerContentProvider
             final int id = Integer.parseInt(uri.getLastPathSegment());
             rowsUpdated = sqlDB.update(TABLE_NAME,
                 contentValues,
-                COLUMN_ID + " = ?",
+                COLUMN_NAME + " = ?",
                 new String[]{String.valueOf(id)});
         } else {
             throw new IllegalArgumentException(
