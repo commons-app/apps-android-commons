@@ -1,141 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:orientation="vertical"
   xmlns:app="http://schemas.android.com/apk/res-auto">
-
-  <TextView
-    android:layout_margin="@dimen/dimen_6"
-    android:padding="@dimen/tiny_gap"
-    android:textSize="24sp"
-    android:textColor="@color/black"
-    android:text="@string/navigation_item_feedback"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
-
-  <com.google.android.material.textfield.TextInputLayout
-    android:id="@+id/feedback_item_edit_text_input_layout"
+  <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/dimen_6"
-    android:layout_marginEnd="@dimen/dimen_6"
+    android:orientation="vertical"
     >
 
-    <fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText
-      android:id="@+id/feedback_item_edit_text"
+    <TextView
+      android:layout_margin="@dimen/dimen_6"
+      android:padding="@dimen/tiny_gap"
+      android:textSize="24sp"
+      android:textColor="@color/black"
+      android:text="@string/navigation_item_feedback"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
+
+    <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/feedback_item_edit_text_input_layout"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:hint="@string/your_feedback"
-      android:imeOptions="actionNext|flagNoExtractUi"
-      android:lines="4"
-      android:inputType="text|textMultiLine"
-      app:allowFormatting="false" />
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/dimen_6"
+      android:layout_marginEnd="@dimen/dimen_6"
+      >
 
-  </com.google.android.material.textfield.TextInputLayout>
+      <fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText
+        android:id="@+id/feedback_item_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="@string/your_feedback"
+        android:imeOptions="actionNext|flagNoExtractUi"
+        android:lines="4"
+        android:inputType="text|textMultiLine"
+        app:allowFormatting="false" />
 
-  <TextView
-    android:layout_margin="@dimen/dimen_6"
-    android:padding="4dp"
-    android:textSize="21sp"
-    android:textColor="@color/black"
-    android:text="@string/select_feedback_data_choice"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+      android:layout_margin="@dimen/dimen_6"
+      android:padding="4dp"
+      android:textSize="21sp"
+      android:textColor="@color/black"
+      android:text="@string/select_feedback_data_choice"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
 
 
-  <CheckBox
-    android:id="@+id/api_level_checkbox"
-    android:text="@string/api_level"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:checkMark="?android:attr/textCheckMark"
-    android:checked="true"
-    android:gravity="center_vertical"
-    android:padding="@dimen/tiny_gap"
-    android:layout_margin="@dimen/dimen_6"
-    />
+    <CheckBox
+      android:id="@+id/api_level_checkbox"
+      android:text="@string/api_level"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:checkMark="?android:attr/textCheckMark"
+      android:checked="true"
+      android:gravity="center_vertical"
+      android:padding="@dimen/tiny_gap"
+      android:layout_margin="@dimen/dimen_6"
+      />
 
-  <CheckBox
-    android:id="@+id/android_version_checkbox"
-    android:text="@string/android_version"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:checkMark="?android:attr/textCheckMark"
-    android:checked="true"
-    android:gravity="center_vertical"
-    android:padding="@dimen/tiny_gap"
-    android:layout_margin="@dimen/dimen_6"
-    />
+    <CheckBox
+      android:id="@+id/android_version_checkbox"
+      android:text="@string/android_version"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:checkMark="?android:attr/textCheckMark"
+      android:checked="true"
+      android:gravity="center_vertical"
+      android:padding="@dimen/tiny_gap"
+      android:layout_margin="@dimen/dimen_6"
+      />
 
-  <CheckBox
-    android:id="@+id/device_manufacturer_checkbox"
-    android:text="@string/device_manufacturer"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:checkMark="?android:attr/textCheckMark"
-    android:checked="true"
-    android:gravity="center_vertical"
-    android:padding="@dimen/tiny_gap"
-    android:layout_margin="@dimen/dimen_6"
-    />
+    <CheckBox
+      android:id="@+id/device_manufacturer_checkbox"
+      android:text="@string/device_manufacturer"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:checkMark="?android:attr/textCheckMark"
+      android:checked="true"
+      android:gravity="center_vertical"
+      android:padding="@dimen/tiny_gap"
+      android:layout_margin="@dimen/dimen_6"
+      />
 
-  <CheckBox
-    android:id="@+id/device_model_checkbox"
-    android:text="@string/device_model"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:checkMark="?android:attr/textCheckMark"
-    android:checked="true"
-    android:gravity="center_vertical"
-    android:padding="@dimen/tiny_gap"
-    android:layout_margin="@dimen/dimen_6"
-    />
+    <CheckBox
+      android:id="@+id/device_model_checkbox"
+      android:text="@string/device_model"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:checkMark="?android:attr/textCheckMark"
+      android:checked="true"
+      android:gravity="center_vertical"
+      android:padding="@dimen/tiny_gap"
+      android:layout_margin="@dimen/dimen_6"
+      />
 
-  <CheckBox
-    android:id="@+id/device_name_checkbox"
-    android:text="@string/device_name"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:checkMark="?android:attr/textCheckMark"
-    android:checked="true"
-    android:gravity="center_vertical"
-    android:padding="@dimen/tiny_gap"
-    android:layout_margin="@dimen/dimen_6"
-    />
+    <CheckBox
+      android:id="@+id/device_name_checkbox"
+      android:text="@string/device_name"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:checkMark="?android:attr/textCheckMark"
+      android:checked="true"
+      android:gravity="center_vertical"
+      android:padding="@dimen/tiny_gap"
+      android:layout_margin="@dimen/dimen_6"
+      />
 
-  <CheckBox
-    android:id="@+id/network_type_checkbox"
-    android:text="@string/network_type"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:checkMark="?android:attr/textCheckMark"
-    android:checked="true"
-    android:gravity="center_vertical"
-    android:padding="@dimen/tiny_gap"
-    android:layout_margin="@dimen/dimen_6"
-    />
+    <CheckBox
+      android:id="@+id/network_type_checkbox"
+      android:text="@string/network_type"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:checkMark="?android:attr/textCheckMark"
+      android:checked="true"
+      android:gravity="center_vertical"
+      android:padding="@dimen/tiny_gap"
+      android:layout_margin="@dimen/dimen_6"
+      />
 
-  <CheckBox
-    android:id="@+id/username_checkbox"
-    android:text="@string/wikimedia_user_name"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:checkMark="?android:attr/textCheckMark"
-    android:checked="true"
-    android:gravity="center_vertical"
-    android:padding="@dimen/tiny_gap"
-    android:layout_margin="@dimen/dimen_6"
-    />
+    <CheckBox
+      android:id="@+id/username_checkbox"
+      android:text="@string/wikimedia_user_name"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:checkMark="?android:attr/textCheckMark"
+      android:checked="true"
+      android:gravity="center_vertical"
+      android:padding="@dimen/tiny_gap"
+      android:layout_margin="@dimen/dimen_6"
+      />
 
-  <Button
-    android:id="@+id/btn_submit_feedback"
-    android:textColor="@color/white"
-    android:layout_marginBottom="@dimen/dimen_10"
-    android:gravity="center"
-    android:layout_gravity="center"
-    android:text="@string/submit"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
+    <Button
+      android:id="@+id/btn_submit_feedback"
+      android:textColor="@color/white"
+      android:layout_marginBottom="@dimen/dimen_10"
+      android:gravity="center"
+      android:layout_gravity="center"
+      android:text="@string/submit"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
 
-</LinearLayout>
+  </LinearLayout>
+</ScrollView>

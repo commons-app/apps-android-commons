@@ -8,21 +8,27 @@ import android.net.Uri
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import fr.free.nrw.commons.CommonsApplication
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.feedback.FeedbackDialog
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.profile.ProfileActivity
+import fr.free.nrw.commons.utils.ConfigUtils
+import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
+import org.mockito.Mockito.doReturn
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
@@ -106,8 +112,11 @@ class MoreBottomSheetFragmentUnitTests {
     fun testOnFeedbackClicked() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onFeedbackClicked()
-        val dialog: Dialog = ShadowDialog.getLatestDialog() as Dialog
-        Assert.assertEquals(dialog.isShowing, true)
+        doReturn("123456").`when`(context).getVersionNameWithSha()
+        doReturn(true).when(androidVersion.isChecked())
+        ShadowDialog.getLatestDialog().findViewById<Button>(R.id.btn_submit_feedback).performClick()
+        Assert.assertEquals(true, ShadowDialog.getLatestDialog().isShowing)
+        Assert.assertEquals(ShadowDialog.getLatestDialog().findViewById<Button>(R.id.btn_submit_feedback).text, context.getString(R.string.submit));
     }
 
     @Test

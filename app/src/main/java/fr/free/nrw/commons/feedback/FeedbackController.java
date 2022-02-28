@@ -1,18 +1,13 @@
 package fr.free.nrw.commons.feedback;
 
-import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_CSRF;
-
-import android.accounts.Account;
-import android.accounts.AccountManager;
-import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.feedback.model.Feedback;
 import fr.free.nrw.commons.navtab.MoreBottomSheetFragment;
 import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
-import org.wikipedia.csrf.CsrfTokenClient;
 
 /**
  * Performs uploading of feedback from user after formatting it

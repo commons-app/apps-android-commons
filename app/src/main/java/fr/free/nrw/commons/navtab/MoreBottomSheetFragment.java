@@ -26,7 +26,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.feedback.Feedback;
+import fr.free.nrw.commons.feedback.model.Feedback;
 import fr.free.nrw.commons.feedback.FeedbackController;
 import fr.free.nrw.commons.feedback.FeedbackDialog;
 import fr.free.nrw.commons.feedback.OnFeedbackSubmitCallback;
@@ -42,7 +42,6 @@ import io.reactivex.schedulers.Schedulers;
 import java.util.concurrent.Callable;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.wikipedia.csrf.CsrfTokenClient;
 import timber.log.Timber;
 
 public class MoreBottomSheetFragment extends BottomSheetDialogFragment {

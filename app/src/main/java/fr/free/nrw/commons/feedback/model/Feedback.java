@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.feedback;
+package fr.free.nrw.commons.feedback.model;
 
 /**
  * Pojo class for storing information that are required while uploading a feedback

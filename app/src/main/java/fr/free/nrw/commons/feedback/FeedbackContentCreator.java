@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.feedback;
 
-import android.content.Context;
-import fr.free.nrw.commons.feedback.Feedback;
+import fr.free.nrw.commons.feedback.model.Feedback;
 
 /**
  * Creates a wikimedia recognizable format

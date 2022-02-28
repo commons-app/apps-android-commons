@@ -1,32 +1,19 @@
 package fr.free.nrw.commons.feedback;
 
-import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_CSRF;
-
-import android.accounts.Account;
-import android.accounts.AccountManager;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.di.ApplicationlessInjection;
-import fr.free.nrw.commons.navtab.MoreBottomSheetFragment;
+import fr.free.nrw.commons.feedback.model.Feedback;
 import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DeviceInfoUtil;
-import java.util.Date;
 import javax.inject.Inject;
-import org.wikipedia.csrf.CsrfTokenClient;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Feedback dialog that asks user for message and
@@ -85,7 +72,7 @@ public class FeedbackDialog extends Dialog {
         String mDeviceName = deviceName.isChecked() ? DeviceInfoUtil.getDevice() : null;
         String mNetworkType = networkType.isChecked() ? DeviceInfoUtil.getConnectionType(getContext()).toString() : null;
         Feedback feedback = new Feedback(mAppVersionVersion,mAPILevel, feedbackDescription.getText().toString(), mAndroidVersion, mDeviceModel, mDeviceManufacturer, mDeviceName, mNetworkType);;
-        onFeedbackSubmitCallback.onFeedbackSubmit(feedback);
+        onFeedbackSubmitCallback.onFeedbackSubmit(null);
         dismiss();
     }
 
