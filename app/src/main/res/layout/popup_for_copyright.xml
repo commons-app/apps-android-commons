@@ -22,7 +22,7 @@
     android:layout_below="@+id/copyright_icon"
     android:layout_centerHorizontal="true"
     android:layout_marginTop="21dp"
-    android:text="@string/please_only_upload_pictures_you_have_taken_by_yourself_uploaders_of_copyrighted_images_will_be_blocked_this_applies_to_the_beta_flavor_too_thank_you_for_testing_the_app"
+    android:text="@string/copyright_popup"
     android:textSize="20sp"
     android:textStyle="bold" />
 

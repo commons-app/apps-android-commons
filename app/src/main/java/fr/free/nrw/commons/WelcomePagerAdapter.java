@@ -1,13 +1,11 @@
 package fr.free.nrw.commons;
 
 import android.net.Uri;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.viewpager.widget.PagerAdapter;
 
 public class WelcomePagerAdapter extends PagerAdapter {
@@ -18,9 +16,6 @@ public class WelcomePagerAdapter extends PagerAdapter {
             R.layout.welcome_image_example,
             R.layout.welcome_final
     };
-
-    private AlertDialog.Builder dialogBuilder;
-    private AlertDialog dialog;
 
     /**
      * Gets total number of layouts
@@ -46,16 +41,6 @@ public class WelcomePagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         LayoutInflater inflater = LayoutInflater.from(container.getContext());
         ViewGroup layout = (ViewGroup) inflater.inflate(PAGE_LAYOUTS[position], container, false);
-
-        if(PAGE_LAYOUTS.length == 1)
-        {
-            dialogBuilder = new AlertDialog.Builder(this);
-            final View contactPopupView = getLayoutInflater().inflate(R.layout.popup_for_copyright,null);
-
-            dialogBuilder.setView(contactPopupView);
-            dialog = dialogBuilder.create();
-            dialog.show();
-        }
 
         // If final page
         if (position == PAGE_LAYOUTS.length - 1) {

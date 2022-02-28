@@ -1,14 +1,13 @@
 package fr.free.nrw.commons;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
+import android.widget.Button;
 import androidx.viewpager.widget.ViewPager;
-
 import com.viewpagerindicator.CirclePageIndicator;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -25,6 +24,9 @@ public class WelcomeActivity extends BaseActivity {
 
     private WelcomePagerAdapter adapter = new WelcomePagerAdapter();
     private boolean isQuiz;
+    private AlertDialog.Builder dialogBuilder;
+    private AlertDialog dialog;
+    Button okButton;
 
     /**
      * Initialises exiting fields and dependencies
@@ -48,6 +50,17 @@ public class WelcomeActivity extends BaseActivity {
         // Enable skip button if beta flavor
         if (ConfigUtils.isBetaFlavour()) {
             findViewById(R.id.finishTutorialButton).setVisibility(View.VISIBLE);
+
+            dialogBuilder = new AlertDialog.Builder(this);
+            final View contactPopupView = getLayoutInflater().inflate(R.layout.popup_for_copyright,null);
+            dialogBuilder.setView(contactPopupView);
+            dialog = dialogBuilder.create();
+            dialog.show();
+
+            okButton = dialog.findViewById(R.id.button_ok);
+            okButton.setOnClickListener(view -> dialog.dismiss());
+
+
         }
 
         ButterKnife.bind(this);

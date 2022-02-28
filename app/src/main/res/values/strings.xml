@@ -691,5 +691,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="feedback_sharing_data_alert">Please remove from this email any information that you are not comfortable sharing publicly. Also, please be aware that your email address with which you are posting, and the associated name and profile picture, will be visible publicly.</string>
   <string name="achievements_unavailable_beta">Achievements are only available in the prod flavor.</string>
   <string name="leaderboard_unavailable_beta">The leaderboard is only available in the prod flavor.</string>
-  <string name="please_only_upload_pictures_you_have_taken_by_yourself_uploaders_of_copyrighted_images_will_be_blocked_this_applies_to_the_beta_flavor_too_thank_you_for_testing_the_app">Please only upload pictures you have taken by yourself. Uploaders of copyrighted images will be blocked. This applies to the beta flavor too. Thank you for testing the app!</string>
+  <string name="copyright_popup">Please only upload pictures you have taken by yourself. Uploaders of copyrighted images will be blocked. This applies to the beta flavor too. Thank you for testing the app!</string>
 </resources>
