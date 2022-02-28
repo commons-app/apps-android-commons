@@ -6,19 +6,19 @@ import android.os.Build;
 import java.util.HashMap;
 import java.util.Map;
 
-import fr.free.nrw.commons.utils.model.ConnectionType;
-import fr.free.nrw.commons.utils.model.NetworkConnectionType;
+import fr.free.nrw.commons.data.models.utils.utils.ConnectionType;
+import fr.free.nrw.commons.data.models.utils.utils.NetworkConnectionType;
 
-import static fr.free.nrw.commons.utils.model.ConnectionType.CELLULAR;
-import static fr.free.nrw.commons.utils.model.ConnectionType.CELLULAR_3G;
-import static fr.free.nrw.commons.utils.model.ConnectionType.CELLULAR_4G;
-import static fr.free.nrw.commons.utils.model.ConnectionType.NO_INTERNET;
-import static fr.free.nrw.commons.utils.model.ConnectionType.WIFI_NETWORK;
-import static fr.free.nrw.commons.utils.model.NetworkConnectionType.FOUR_G;
-import static fr.free.nrw.commons.utils.model.NetworkConnectionType.THREE_G;
-import static fr.free.nrw.commons.utils.model.NetworkConnectionType.TWO_G;
-import static fr.free.nrw.commons.utils.model.NetworkConnectionType.UNKNOWN;
-import static fr.free.nrw.commons.utils.model.NetworkConnectionType.WIFI;
+import static fr.free.nrw.commons.data.models.utils.utils.ConnectionType.CELLULAR;
+import static fr.free.nrw.commons.data.models.utils.utils.ConnectionType.CELLULAR_3G;
+import static fr.free.nrw.commons.data.models.utils.utils.ConnectionType.CELLULAR_4G;
+import static fr.free.nrw.commons.data.models.utils.utils.ConnectionType.NO_INTERNET;
+import static fr.free.nrw.commons.data.models.utils.utils.ConnectionType.WIFI_NETWORK;
+import static fr.free.nrw.commons.data.models.utils.utils.NetworkConnectionType.FOUR_G;
+import static fr.free.nrw.commons.data.models.utils.utils.NetworkConnectionType.THREE_G;
+import static fr.free.nrw.commons.data.models.utils.utils.NetworkConnectionType.TWO_G;
+import static fr.free.nrw.commons.data.models.utils.utils.NetworkConnectionType.UNKNOWN;
+import static fr.free.nrw.commons.data.models.utils.utils.NetworkConnectionType.WIFI;
 
 /**
  * Util class to get any information about the user's device
