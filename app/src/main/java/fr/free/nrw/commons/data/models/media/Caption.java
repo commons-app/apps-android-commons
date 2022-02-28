@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.media;
+package fr.free.nrw.commons.data.models.media;
 
 import com.google.gson.annotations.SerializedName;
 

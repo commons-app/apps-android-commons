@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.data.models.media.Caption;
 import java.util.List;
 
 /**

@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.media.model
+package fr.free.nrw.commons.data.models.media
 
 data class PageMediaListResponse(
     val revision: String,

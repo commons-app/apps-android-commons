@@ -5,7 +5,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.explore.media.MediaConverter
-import fr.free.nrw.commons.media.model.PageMediaListResponse
+import fr.free.nrw.commons.data.models.media.PageMediaListResponse
 import io.reactivex.Single
 import media
 import org.junit.Before

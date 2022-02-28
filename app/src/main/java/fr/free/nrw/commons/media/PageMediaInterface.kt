@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.media
 
-import fr.free.nrw.commons.media.model.PageMediaListResponse
+import fr.free.nrw.commons.data.models.media.PageMediaListResponse
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
