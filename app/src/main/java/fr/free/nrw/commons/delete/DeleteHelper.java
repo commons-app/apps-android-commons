@@ -187,7 +187,7 @@ public class DeleteHelper {
 
         alert.setPositiveButton(context.getString(R.string.ok), (dialogInterface, i) -> {
 
-            if(mUserReason.size() > 0){
+            if(mUserReason.isEmpty()){
                 String reason = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_alert_set_positive_button_reason) + " ";
 
                 for (int j = 0; j < mUserReason.size(); j++) {
@@ -213,7 +213,8 @@ public class DeleteHelper {
                         }
                     });
             }else{
-                Toast.makeText(context, context.getString(R.string.select_one_reason), Toast.LENGTH_LONG).show();
+                // No reason selected
+                Toast.makeText(context, context.getString(R.string.no_reason_selected), Toast.LENGTH_LONG).show();
             }
 
         });
