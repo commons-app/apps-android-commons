@@ -122,9 +122,4 @@ public class ReviewHelper {
 
         return false;
     }
-
-    private void getCategoriesInfoList() {
-
-    }
-
 }

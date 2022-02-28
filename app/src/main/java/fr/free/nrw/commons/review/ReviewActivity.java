@@ -26,25 +26,19 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.viewpagerindicator.CirclePageIndicator;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.media.MediaDetailFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import java.util.ArrayList;
 import javax.inject.Inject;
 import org.wikipedia.dataclient.Service;
 import org.wikipedia.dataclient.ServiceFactory;
 import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.dataclient.mwapi.MwQueryPage.Category;
-import org.wikipedia.dataclient.mwapi.MwQueryPage.CategoryInfo;
-import org.wikipedia.json.GsonUtil;
-import retrofit2.Retrofit;
 
 public class ReviewActivity extends BaseActivity {
 
@@ -81,7 +75,10 @@ public class ReviewActivity extends BaseActivity {
      */
      private ReviewImageFragment reviewImageFragment;
 
-     boolean categoryExists = false;
+    /**
+     * Flag to check whether there are any non-hidden categories in the File
+     */
+    private boolean hasNonHiddenCategories = false;
 
     final String SAVED_MEDIA = "saved_media";
     private Media media;
@@ -165,13 +162,15 @@ public class ReviewActivity extends BaseActivity {
 
     @SuppressLint("CheckResult")
     public boolean runRandomizer() {
-        categoryExists = false;
+        hasNonHiddenCategories = false;
         progressBar.setVisibility(View.VISIBLE);
         reviewPager.setCurrentItem(0);
         compositeDisposable.add(reviewHelper.getRandomMedia()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(media -> {
+                    // This REST API request will respond with
+                    // category type (hidden/non-hidden) for each category in the file
                     Service service = ServiceFactory.get(new WikiSite(Service.COMMONS_URL)
                         , Service.COMMONS_URL, Service.class);
 
@@ -181,7 +180,7 @@ public class ReviewActivity extends BaseActivity {
                         .subscribe(response -> {
                             for(Category category : response.query().firstPage().categories()) {
                                 if(!category.hidden()) {
-                                    categoryExists = true;
+                                    hasNonHiddenCategories = true;
                                     break;
                                 }
                             }
@@ -225,11 +224,12 @@ public class ReviewActivity extends BaseActivity {
 
     public void swipeToNext() {
         int nextPos = reviewPager.getCurrentItem() + 1;
-        // If currently at category fragment, then check if category exists
+        // If currently at category fragment, then check whether the media has any non-hidden category
         if (nextPos <= 3) {
             reviewPager.setCurrentItem(nextPos);
             if (nextPos == 2) {
-                if (!categoryExists) {
+                // The media has no non-hidden category. Such media are already flagged by server-side bots, so no need to review manually.
+                if (!hasNonHiddenCategories) {
                     swipeToNext();
                     return;
                 }
