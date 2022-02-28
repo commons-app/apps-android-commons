@@ -93,7 +93,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.CheckBoxTriStates;
-import fr.free.nrw.commons.nearby.Label;
+import fr.free.nrw.commons.data.models.nearby.Label;
 import fr.free.nrw.commons.nearby.MarkerPlaceGroup;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.NearbyController;

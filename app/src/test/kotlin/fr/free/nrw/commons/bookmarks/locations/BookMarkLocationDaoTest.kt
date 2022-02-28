@@ -12,7 +12,7 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsContentProvider.BASE_URI
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.*
 import fr.free.nrw.commons.location.LatLng
-import fr.free.nrw.commons.nearby.Label
+import fr.free.nrw.commons.data.models.nearby.Label
 import fr.free.nrw.commons.data.models.nearby.Place
 import fr.free.nrw.commons.data.models.nearby.Sitelinks
 import org.junit.Assert.*

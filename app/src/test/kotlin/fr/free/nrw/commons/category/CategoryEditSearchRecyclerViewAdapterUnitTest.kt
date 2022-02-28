@@ -2,7 +2,7 @@ package fr.free.nrw.commons.category
 
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
-import fr.free.nrw.commons.nearby.Label
+import fr.free.nrw.commons.data.models.nearby.Label
 import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals

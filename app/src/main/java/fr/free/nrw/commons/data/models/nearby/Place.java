@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import androidx.annotation.Nullable;
 
-import fr.free.nrw.commons.nearby.Label;
 import org.apache.commons.lang3.StringUtils;
 
 import fr.free.nrw.commons.location.LatLng;

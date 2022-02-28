@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.nearby;
+package fr.free.nrw.commons.data.models.nearby;
 
 import android.os.Parcel;
 

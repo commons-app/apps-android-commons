@@ -6,6 +6,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.data.models.nearby.Label
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -48,7 +49,8 @@ class NearbyFilterSearchRecyclerViewAdapterUnitTests {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         context = RuntimeEnvironment.application.applicationContext
-        adapter = NearbyFilterSearchRecyclerViewAdapter(context, ArrayList<Label>(Label.valuesAsList()), recyclerView)
+        adapter = NearbyFilterSearchRecyclerViewAdapter(context, ArrayList<Label>(
+            Label.valuesAsList()), recyclerView)
         viewHolder.placeTypeIcon = imageView
         viewHolder.placeTypeLabel = textView
         viewHolder.placeTypeLayout = linearLayout

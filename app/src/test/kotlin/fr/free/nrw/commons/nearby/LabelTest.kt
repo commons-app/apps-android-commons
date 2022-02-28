@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.nearby
 
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.R.*
+import fr.free.nrw.commons.data.models.nearby.Label
 import org.junit.Before
 import org.junit.Test
 

@@ -18,7 +18,7 @@ import javax.inject.Named;
 import javax.inject.Provider;
 
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.nearby.Label;
+import fr.free.nrw.commons.data.models.nearby.Label;
 import fr.free.nrw.commons.data.models.nearby.Place;
 import fr.free.nrw.commons.data.models.nearby.Sitelinks;
 import timber.log.Timber;
