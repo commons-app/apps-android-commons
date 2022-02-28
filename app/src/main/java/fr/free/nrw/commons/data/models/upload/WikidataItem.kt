@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.upload
+package fr.free.nrw.commons.data.models.upload
 
 interface WikidataItem {
 val id:String

@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.Uri
 import androidx.exifinterface.media.ExifInterface
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.data.models.upload.ImageCoordinates
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.mwapi.CategoryApi
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient

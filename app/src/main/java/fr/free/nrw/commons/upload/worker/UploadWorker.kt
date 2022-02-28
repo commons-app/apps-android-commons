@@ -26,11 +26,11 @@ import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.theme.BaseActivity
-import fr.free.nrw.commons.upload.StashUploadResult
+import fr.free.nrw.commons.data.models.upload.StashUploadResult
 import fr.free.nrw.commons.upload.FileUtilsWrapper
-import fr.free.nrw.commons.upload.StashUploadState
+import fr.free.nrw.commons.data.models.upload.StashUploadState
+import fr.free.nrw.commons.data.models.upload.UploadResult
 import fr.free.nrw.commons.upload.UploadClient
-import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.wikidata.WikidataEditService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope

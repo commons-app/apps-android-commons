@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.upload
+package fr.free.nrw.commons.data.models.upload
 
 data class StashUploadResult(
     val state: StashUploadState,

@@ -1,8 +1,8 @@
-package fr.free.nrw.commons.upload.depicts
+package fr.free.nrw.commons.data.models.upload.depictions
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
+import fr.free.nrw.commons.data.models.upload.depictions.DepictedItem
 import java.util.*
 
 /**

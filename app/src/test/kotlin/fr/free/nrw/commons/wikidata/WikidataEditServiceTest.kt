@@ -7,7 +7,7 @@ import com.nhaarman.mockitokotlin2.verifyZeroInteractions
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.upload.UploadResult
-import fr.free.nrw.commons.upload.WikidataPlace
+import fr.free.nrw.commons.data.models.upload.WikidataPlace
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test

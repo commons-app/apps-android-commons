@@ -7,7 +7,7 @@ import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
-import fr.free.nrw.commons.upload.depicts.Depicts
+import fr.free.nrw.commons.data.models.upload.depictions.Depicts
 import fr.free.nrw.commons.upload.depicts.DepictsDao
 
 /**

@@ -1,11 +1,11 @@
-package fr.free.nrw.commons.upload.structure.depictions
+package fr.free.nrw.commons.data.models.upload.depictions
 
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.nearby.Place
-import fr.free.nrw.commons.upload.WikidataItem
+import fr.free.nrw.commons.data.models.upload.WikidataItem
 import fr.free.nrw.commons.wikidata.WikidataProperties
 import fr.free.nrw.commons.wikidata.WikidataProperties.*
 import kotlinx.android.parcel.Parcelize

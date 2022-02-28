@@ -7,11 +7,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.auth.SessionManager
-import fr.free.nrw.commons.upload.UploadItem
-import fr.free.nrw.commons.upload.UploadMediaDetail
-import fr.free.nrw.commons.upload.WikidataPlace
-import fr.free.nrw.commons.upload.WikidataPlace.Companion.from
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
+import fr.free.nrw.commons.data.models.upload.UploadItem
+import fr.free.nrw.commons.data.models.upload.UploadMediaDetail
+import fr.free.nrw.commons.data.models.upload.WikidataPlace
+import fr.free.nrw.commons.data.models.upload.WikidataPlace.Companion.from
+import fr.free.nrw.commons.data.models.upload.depictions.DepictedItem
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 

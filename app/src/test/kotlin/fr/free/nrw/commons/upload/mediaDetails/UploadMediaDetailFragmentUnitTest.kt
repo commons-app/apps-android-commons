@@ -27,9 +27,9 @@ import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.nearby.Place
-import fr.free.nrw.commons.upload.ImageCoordinates
+import fr.free.nrw.commons.data.models.upload.ImageCoordinates
 import fr.free.nrw.commons.upload.UploadActivity
-import fr.free.nrw.commons.upload.UploadItem
+import fr.free.nrw.commons.data.models.upload.UploadItem
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM
 import org.junit.Assert

@@ -4,6 +4,7 @@ import android.net.Uri;
 
 import androidx.annotation.IntDef;
 
+import fr.free.nrw.commons.data.models.upload.UploadItem;
 import java.lang.annotation.Retention;
 import java.util.List;
 

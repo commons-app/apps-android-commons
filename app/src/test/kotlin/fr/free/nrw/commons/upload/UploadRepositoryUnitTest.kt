@@ -5,6 +5,8 @@ import fr.free.nrw.commons.category.CategoriesModel
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
+import fr.free.nrw.commons.data.models.upload.ImageCoordinates
+import fr.free.nrw.commons.data.models.upload.UploadItem
 import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.NearbyPlaces

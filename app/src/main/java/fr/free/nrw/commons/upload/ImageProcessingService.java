@@ -5,6 +5,8 @@ import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
 import android.content.Context;
+import fr.free.nrw.commons.data.models.upload.UploadItem;
+import fr.free.nrw.commons.data.models.upload.UploadMediaDetail;
 import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.utils.ImageUtils;
