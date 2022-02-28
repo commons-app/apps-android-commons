@@ -14,6 +14,7 @@ import com.facebook.drawee.drawable.ProgressBarDrawable;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import fr.free.nrw.commons.data.models.quiz.QuizQuestion;
 import java.util.ArrayList;
 
 import butterknife.BindView;

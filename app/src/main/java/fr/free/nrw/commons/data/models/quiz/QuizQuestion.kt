@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.quiz
+package fr.free.nrw.commons.data.models.quiz
 
 import android.net.Uri
 

@@ -2,6 +2,7 @@ package fr.free.nrw.commons.quiz
 
 import android.net.Uri
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.data.models.quiz.QuizQuestion
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
