@@ -3,6 +3,7 @@ package fr.free.nrw.commons.profile.leaderboard;
 import androidx.lifecycle.MutableLiveData;
 import androidx.paging.DataSource;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.data.models.profile.LeaderboardList;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import io.reactivex.disposables.CompositeDisposable;
 

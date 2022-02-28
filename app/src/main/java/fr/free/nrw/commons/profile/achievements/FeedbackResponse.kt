@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.profile.achievements
 
+import fr.free.nrw.commons.data.models.profile.FeaturedImages
+
 /**
  * Represent the Feedback Response of the user
  */

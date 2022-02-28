@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.paging.PageKeyedDataSource;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.data.models.profile.LeaderboardList;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import io.reactivex.disposables.CompositeDisposable;
 import java.util.Objects;

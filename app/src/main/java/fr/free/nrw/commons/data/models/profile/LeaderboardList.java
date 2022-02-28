@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.profile.leaderboard;
+package fr.free.nrw.commons.data.models.profile;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;

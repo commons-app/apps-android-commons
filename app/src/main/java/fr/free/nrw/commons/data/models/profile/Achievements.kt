@@ -1,4 +1,6 @@
-package fr.free.nrw.commons.profile.achievements
+package fr.free.nrw.commons.data.models.profile
+
+import fr.free.nrw.commons.profile.achievements.FeedbackResponse
 
 /**
  * Represents Achievements class and stores all the parameters

@@ -13,7 +13,7 @@ import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.data.models.profile.LeaderboardList;
 import fr.free.nrw.commons.profile.ProfileActivity;
 
 /**

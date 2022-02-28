@@ -8,7 +8,7 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.soloader.SoLoader
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.profile.leaderboard.LeaderboardList
+import fr.free.nrw.commons.data.models.profile.LeaderboardList
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardListAdapter
 import org.junit.Before
 import org.junit.Test

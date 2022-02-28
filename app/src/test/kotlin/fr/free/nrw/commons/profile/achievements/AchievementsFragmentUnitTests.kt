@@ -16,6 +16,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.data.models.profile.Achievements
 import fr.free.nrw.commons.profile.ProfileActivity
 import org.junit.Assert
 import org.junit.Before

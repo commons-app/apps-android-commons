@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.profile.leaderboard;
+package fr.free.nrw.commons.data.models.profile;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.profile.achievements
+package fr.free.nrw.commons.data.models.profile
 
 import com.google.gson.annotations.SerializedName
 

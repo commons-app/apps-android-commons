@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.data.models.profile.LeaderboardResponse;
 
 /**
  * This class extends RecyclerView.Adapter and creates the UserDetail section of the leaderboard
