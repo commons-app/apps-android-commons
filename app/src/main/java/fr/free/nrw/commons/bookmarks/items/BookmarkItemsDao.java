@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.RemoteException;
 import fr.free.nrw.commons.category.CategoryItem;
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
+import fr.free.nrw.commons.data.models.upload.depictions.DepictedItem;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

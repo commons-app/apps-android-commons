@@ -1,11 +1,11 @@
 package fr.free.nrw.commons.explore.depictions
 
 import android.annotation.SuppressLint
+import fr.free.nrw.commons.data.models.upload.depictions.DepictedItem
+import fr.free.nrw.commons.data.models.upload.depictions.get
 import fr.free.nrw.commons.mwapi.Binding
 import fr.free.nrw.commons.mwapi.SparqlResponse
 import fr.free.nrw.commons.upload.depicts.DepictsInterface
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
-import fr.free.nrw.commons.upload.structure.depictions.get
 import fr.free.nrw.commons.wikidata.WikidataProperties
 import fr.free.nrw.commons.wikidata.model.DepictSearchItem
 import io.reactivex.Single

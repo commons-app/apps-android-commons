@@ -34,7 +34,7 @@ public class UploadItem {
 
 
     @SuppressLint("CheckResult")
-    UploadItem(final Uri mediaUri,
+    public UploadItem(final Uri mediaUri,
         final String mimeType,
         final ImageCoordinates gpsCoords,
         final Place place,

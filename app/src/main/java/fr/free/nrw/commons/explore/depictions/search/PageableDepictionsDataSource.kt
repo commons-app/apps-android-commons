@@ -1,10 +1,10 @@
 package fr.free.nrw.commons.explore.depictions.search
 
+import fr.free.nrw.commons.data.models.upload.depictions.DepictedItem
 import fr.free.nrw.commons.explore.paging.LiveDataConverter
 import fr.free.nrw.commons.explore.paging.LoadingState
 import fr.free.nrw.commons.explore.paging.PageableBaseDataSource
 import fr.free.nrw.commons.explore.depictions.DepictsClient
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import io.reactivex.processors.PublishProcessor
 import javax.inject.Inject
 

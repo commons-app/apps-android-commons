@@ -9,8 +9,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.drawee.view.SimpleDraweeView
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.data.models.upload.depictions.DepictedItem
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 
 /**
  * Helps to inflate Wikidata Items into Items tab

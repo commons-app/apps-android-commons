@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.upload.depicts
 
+import fr.free.nrw.commons.data.models.upload.depictions.DepictedItem
 import fr.free.nrw.commons.upload.categories.BaseDelegateAdapter
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 
 class UploadDepictsAdapter(onDepictsClicked: (DepictedItem) -> Unit) :
     BaseDelegateAdapter<DepictedItem>(

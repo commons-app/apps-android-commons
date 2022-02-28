@@ -1,11 +1,10 @@
 package fr.free.nrw.commons.category
 
 import android.text.TextUtils
+import fr.free.nrw.commons.data.models.upload.depictions.DepictedItem
 import fr.free.nrw.commons.upload.GpsCategoryModel
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.utils.StringSortingUtils
 import io.reactivex.Observable
-import io.reactivex.Single
 import io.reactivex.functions.Function4
 import timber.log.Timber
 import java.util.*
