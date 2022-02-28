@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.notification
 
+import fr.free.nrw.commons.data.models.notification.Notification
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers

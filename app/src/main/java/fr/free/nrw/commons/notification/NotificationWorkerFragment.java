@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
+import fr.free.nrw.commons.data.models.notification.Notification;
 import java.util.List;
 
 /**

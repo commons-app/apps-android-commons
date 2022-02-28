@@ -4,6 +4,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.data.models.notification.Notification
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test

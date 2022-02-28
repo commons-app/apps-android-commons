@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.notification
 
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
+import fr.free.nrw.commons.data.models.notification.Notification
 import fr.free.nrw.commons.databinding.ItemNotificationBinding
 import org.wikipedia.util.StringUtil
 

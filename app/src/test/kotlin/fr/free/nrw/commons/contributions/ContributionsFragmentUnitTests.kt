@@ -17,9 +17,9 @@ import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView
-import fr.free.nrw.commons.notification.Notification
+import fr.free.nrw.commons.data.models.notification.Notification
 import fr.free.nrw.commons.notification.NotificationController
-import fr.free.nrw.commons.notification.NotificationType
+import fr.free.nrw.commons.data.models.notification.NotificationType
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import org.junit.Assert

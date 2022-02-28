@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.notification;
 
+import fr.free.nrw.commons.data.models.notification.Notification;
 import java.util.List;
 
 import javax.inject.Inject;
