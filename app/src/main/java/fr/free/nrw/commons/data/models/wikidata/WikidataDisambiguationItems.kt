@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.wikidata
+package fr.free.nrw.commons.data.models.wikidata
 
 
 enum class WikidataDisambiguationItems(val id: String) {

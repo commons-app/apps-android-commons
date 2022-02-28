@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.wikidata.model;
+package fr.free.nrw.commons.data.models.wikidata;
 
 import java.util.List;
 

@@ -9,7 +9,7 @@ import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.DepictsContract
 import fr.free.nrw.commons.upload.depicts.DepictsPresenter
-import fr.free.nrw.commons.wikidata.WikidataDisambiguationItems
+import fr.free.nrw.commons.data.models.wikidata.WikidataDisambiguationItems
 import io.reactivex.Flowable
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Before

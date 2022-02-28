@@ -6,9 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import fr.free.nrw.commons.wikidata.model.AddEditTagResponse;
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import org.wikipedia.wikidata.Statement_partial;
 
 @Singleton

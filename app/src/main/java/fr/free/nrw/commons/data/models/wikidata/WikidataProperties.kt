@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.wikidata
+package fr.free.nrw.commons.data.models.wikidata
 
 import fr.free.nrw.commons.BuildConfig
 
