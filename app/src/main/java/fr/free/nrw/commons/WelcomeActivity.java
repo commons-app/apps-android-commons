@@ -1,19 +1,22 @@
 package fr.free.nrw.commons;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+
 import androidx.viewpager.widget.ViewPager;
+
 import com.viewpagerindicator.CirclePageIndicator;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.free.nrw.commons.quiz.QuizActivity;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.ConfigUtils;
+import android.app.AlertDialog;
+import android.widget.Button;
 
 public class WelcomeActivity extends BaseActivity {
 
@@ -59,8 +62,6 @@ public class WelcomeActivity extends BaseActivity {
 
             okButton = dialog.findViewById(R.id.button_ok);
             okButton.setOnClickListener(view -> dialog.dismiss());
-
-
         }
 
         ButterKnife.bind(this);
