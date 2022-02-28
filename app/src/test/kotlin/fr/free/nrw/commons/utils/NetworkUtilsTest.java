@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
 
-import fr.free.nrw.commons.data.models.utils.utils.NetworkConnectionType;
+import fr.free.nrw.commons.data.models.utils.NetworkConnectionType;
 
 import static android.telephony.TelephonyManager.NETWORK_TYPE_EDGE;
 import static android.telephony.TelephonyManager.NETWORK_TYPE_HSPA;

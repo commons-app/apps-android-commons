@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.data.models.utils.utils
+package fr.free.nrw.commons.data.models.utils
 
 enum class NetworkConnectionType {
     WIFI, TWO_G, THREE_G, FOUR_G, UNKNOWN
