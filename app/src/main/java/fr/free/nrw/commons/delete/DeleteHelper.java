@@ -187,7 +187,7 @@ public class DeleteHelper {
 
         alert.setPositiveButton(context.getString(R.string.ok), (dialogInterface, i) -> {
 
-            if(mUserReason.isEmpty()){
+            if(!mUserReason.isEmpty()){
                 String reason = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_alert_set_positive_button_reason) + " ";
 
                 for (int j = 0; j < mUserReason.size(); j++) {
