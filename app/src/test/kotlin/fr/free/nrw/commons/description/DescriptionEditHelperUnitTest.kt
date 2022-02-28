@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.description
 
 import android.content.Context
-import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.data.models.Media
 import fr.free.nrw.commons.actions.PageEditClient
 import fr.free.nrw.commons.notification.NotificationHelper
 import io.reactivex.Observable

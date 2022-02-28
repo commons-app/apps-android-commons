@@ -12,7 +12,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.data.models.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication

@@ -22,7 +22,7 @@ import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.snackbar.Snackbar;
-import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.data.models.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.Bookmark;

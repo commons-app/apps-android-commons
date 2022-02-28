@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
-import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.data.models.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import org.junit.Assert

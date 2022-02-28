@@ -1,6 +1,7 @@
-package fr.free.nrw.commons
+package fr.free.nrw.commons.data.models
 
 import android.os.Parcelable
+import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.location.LatLng
 import kotlinx.android.parcel.Parcelize
 import org.wikipedia.page.PageTitle

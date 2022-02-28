@@ -1,4 +1,4 @@
-package fr.free.nrw.commons;
+package fr.free.nrw.commons.data.models;
 
 import androidx.annotation.Nullable;
 

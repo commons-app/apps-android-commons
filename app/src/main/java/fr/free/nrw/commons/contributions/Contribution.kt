@@ -5,7 +5,7 @@ import android.os.Parcelable
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.data.models.Media
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.upload.UploadItem
 import fr.free.nrw.commons.upload.UploadMediaDetail

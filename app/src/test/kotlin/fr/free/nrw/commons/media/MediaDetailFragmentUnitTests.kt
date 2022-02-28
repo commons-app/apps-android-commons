@@ -33,7 +33,7 @@ import org.junit.Before
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
-import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.data.models.Media
 import fr.free.nrw.commons.contributions.ContributionViewHolder
 import fr.free.nrw.commons.delete.DeleteHelper
 import fr.free.nrw.commons.delete.ReasonBuilder

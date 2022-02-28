@@ -2,7 +2,7 @@ package fr.free.nrw.commons.upload;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
-import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.data.models.Media;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile.DateTimeWithSource;
 import fr.free.nrw.commons.settings.Prefs.Licenses;

@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.review
 
 import com.nhaarman.mockitokotlin2.whenever
-import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.data.models.Media
 import fr.free.nrw.commons.media.MediaClient
 import io.reactivex.Observable
 import io.reactivex.Single

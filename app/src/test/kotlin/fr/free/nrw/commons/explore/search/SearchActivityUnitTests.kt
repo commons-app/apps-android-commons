@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentController
 import androidx.fragment.app.FragmentManager
 import androidx.viewpager.widget.ViewPager
 import com.nhaarman.mockitokotlin2.verify
-import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.data.models.Media
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.ViewPagerAdapter
 import fr.free.nrw.commons.explore.SearchActivity

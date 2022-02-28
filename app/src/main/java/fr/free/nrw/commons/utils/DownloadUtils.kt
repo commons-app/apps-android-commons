@@ -7,7 +7,7 @@ import android.content.Context
 import android.net.Uri
 import android.os.Environment
 import android.widget.Toast
-import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.data.models.Media
 import fr.free.nrw.commons.R
 import timber.log.Timber
 

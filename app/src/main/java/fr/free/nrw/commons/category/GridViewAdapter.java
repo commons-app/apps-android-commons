@@ -15,7 +15,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.data.models.Media;
 import fr.free.nrw.commons.R;
 
 /**

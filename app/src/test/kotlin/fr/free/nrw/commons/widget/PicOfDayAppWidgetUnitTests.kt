@@ -5,7 +5,7 @@ import android.content.Context
 import android.widget.RemoteViews
 import com.facebook.imagepipeline.core.ImagePipelineFactory
 import com.facebook.soloader.SoLoader
-import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.data.models.Media
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.media.MediaClient

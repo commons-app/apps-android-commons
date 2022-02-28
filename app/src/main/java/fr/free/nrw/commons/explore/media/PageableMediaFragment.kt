@@ -3,7 +3,7 @@ package fr.free.nrw.commons.explore.media
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.data.models.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryImagesCallback
 import fr.free.nrw.commons.explore.paging.BasePagingFragment

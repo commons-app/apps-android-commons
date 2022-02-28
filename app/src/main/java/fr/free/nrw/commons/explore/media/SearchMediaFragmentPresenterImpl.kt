@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.explore.media
 
-import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.data.models.Media
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.explore.paging.PagingContract
 import fr.free.nrw.commons.explore.paging.BasePagingPresenter

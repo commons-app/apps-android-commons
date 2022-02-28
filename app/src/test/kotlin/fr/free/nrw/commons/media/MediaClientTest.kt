@@ -3,7 +3,7 @@ package fr.free.nrw.commons.media
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.BuildConfig
-import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.data.models.Media
 import fr.free.nrw.commons.explore.media.MediaConverter
 import fr.free.nrw.commons.media.model.PageMediaListResponse
 import io.reactivex.Single

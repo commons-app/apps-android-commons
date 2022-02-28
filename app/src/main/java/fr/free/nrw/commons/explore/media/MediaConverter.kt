@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.explore.media
 
-import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.data.models.Media
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.upload.structure.depictions.get
 import fr.free.nrw.commons.utils.CommonsDateUtil
