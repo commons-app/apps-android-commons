@@ -19,7 +19,6 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.generic.GenericDraweeHierarchy
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.soloader.SoLoader
-import fr.free.nrw.commons.*
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
 import org.robolectric.Shadows.shadowOf
 import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter
@@ -34,10 +33,8 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.data.models.Media
-import fr.free.nrw.commons.contributions.ContributionViewHolder
 import fr.free.nrw.commons.delete.DeleteHelper
 import fr.free.nrw.commons.delete.ReasonBuilder
-import fr.free.nrw.commons.utils.ImageUtils
 import io.reactivex.Single
 import org.junit.Test
 import org.junit.runner.RunWith
