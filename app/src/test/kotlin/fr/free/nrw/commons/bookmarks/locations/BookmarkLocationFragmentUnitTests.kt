@@ -16,7 +16,7 @@ import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import fr.free.nrw.commons.nearby.Place
+import fr.free.nrw.commons.data.models.nearby.Place
 import fr.free.nrw.commons.nearby.fragments.CommonPlaceClickActions
 import fr.free.nrw.commons.nearby.fragments.PlaceAdapter
 import fr.free.nrw.commons.profile.ProfileActivity
@@ -87,7 +87,8 @@ class BookmarkLocationFragmentUnitTests {
                     "a cat",
                     null,
                     null,
-                    true)
+                    true
+                )
             )
             return list
         }

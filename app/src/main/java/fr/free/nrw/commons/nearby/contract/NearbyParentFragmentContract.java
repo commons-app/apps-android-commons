@@ -12,7 +12,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
-import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.data.models.nearby.Place;
 
 public interface NearbyParentFragmentContract {
 

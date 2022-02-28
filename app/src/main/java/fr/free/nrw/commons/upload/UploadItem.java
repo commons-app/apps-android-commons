@@ -5,7 +5,7 @@ import android.net.Uri;
 import androidx.annotation.Nullable;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.filepicker.MimeTypeMapWrapper;
-import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.data.models.nearby.Place;
 import fr.free.nrw.commons.utils.ImageUtils;
 import io.reactivex.subjects.BehaviorSubject;
 import java.util.ArrayList;

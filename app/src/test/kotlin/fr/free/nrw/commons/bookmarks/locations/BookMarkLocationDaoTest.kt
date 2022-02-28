@@ -13,8 +13,8 @@ import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsContentProvider.
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.*
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.Label
-import fr.free.nrw.commons.nearby.Place
-import fr.free.nrw.commons.nearby.Sitelinks
+import fr.free.nrw.commons.data.models.nearby.Place
+import fr.free.nrw.commons.data.models.nearby.Sitelinks
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -62,8 +62,17 @@ class BookMarkLocationDaoTest {
         builder.setCommonsLink("commonsLink")
 
 
-        examplePlaceBookmark = Place("en", "placeName", exampleLabel, "placeDescription"
-                , exampleLocation, "placeCategory", builder.build(),"picName",false)
+        examplePlaceBookmark = Place(
+            "en",
+            "placeName",
+            exampleLabel,
+            "placeDescription",
+            exampleLocation,
+            "placeCategory",
+            builder.build(),
+            "picName",
+            false
+        )
         testObject = BookmarkLocationsDao { client }
     }
 

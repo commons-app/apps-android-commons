@@ -101,7 +101,7 @@ import fr.free.nrw.commons.nearby.NearbyController.NearbyPlacesInfo;
 import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter;
 import fr.free.nrw.commons.nearby.NearbyFilterState;
 import fr.free.nrw.commons.nearby.NearbyMarker;
-import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.data.models.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.fragments.AdvanceQueryFragment.Callback;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;

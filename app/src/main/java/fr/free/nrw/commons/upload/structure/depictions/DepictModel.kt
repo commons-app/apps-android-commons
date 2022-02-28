@@ -1,11 +1,10 @@
 package fr.free.nrw.commons.upload.structure.depictions
 
 import fr.free.nrw.commons.explore.depictions.DepictsClient
-import fr.free.nrw.commons.nearby.Place
+import fr.free.nrw.commons.data.models.nearby.Place
 import fr.free.nrw.commons.repository.UploadRepository
 import io.github.coordinates2country.Coordinates2Country
 import io.reactivex.Flowable
-import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.processors.BehaviorProcessor
 import timber.log.Timber

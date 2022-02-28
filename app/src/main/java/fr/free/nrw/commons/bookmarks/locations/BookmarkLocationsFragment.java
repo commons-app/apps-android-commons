@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
-import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.data.models.nearby.Place;
 import fr.free.nrw.commons.nearby.fragments.CommonPlaceClickActions;
 import fr.free.nrw.commons.nearby.fragments.PlaceAdapter;
 import java.util.List;

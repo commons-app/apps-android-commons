@@ -2,7 +2,7 @@ package fr.free.nrw.commons.upload
 
 import android.os.Parcelable
 import fr.free.nrw.commons.location.LatLng
-import fr.free.nrw.commons.nearby.Place
+import fr.free.nrw.commons.data.models.nearby.Place
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

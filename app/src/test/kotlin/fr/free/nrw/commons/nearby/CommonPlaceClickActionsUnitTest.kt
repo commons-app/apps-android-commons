@@ -3,6 +3,7 @@ package fr.free.nrw.commons.nearby
 import android.net.Uri
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.contributions.ContributionController
+import fr.free.nrw.commons.data.models.nearby.Place
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.nearby.fragments.CommonPlaceClickActions
 import fr.free.nrw.commons.profile.ProfileActivity

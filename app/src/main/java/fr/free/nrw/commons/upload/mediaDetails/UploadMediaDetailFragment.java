@@ -30,7 +30,7 @@ import fr.free.nrw.commons.LocationPicker.LocationPicker;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.data.models.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageDialogFragment;

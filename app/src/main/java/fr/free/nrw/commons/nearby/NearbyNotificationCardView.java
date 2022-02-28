@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.data.models.nearby.Place;
 import fr.free.nrw.commons.utils.SwipableCardView;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;

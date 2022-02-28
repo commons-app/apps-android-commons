@@ -16,7 +16,7 @@ import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment
 import fr.free.nrw.commons.explore.ExploreFragment
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.navtab.NavTabLayout
-import fr.free.nrw.commons.nearby.Place
+import fr.free.nrw.commons.data.models.nearby.Place
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment
 import org.junit.Assert
 import org.junit.Before

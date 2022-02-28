@@ -2,7 +2,7 @@ package fr.free.nrw.commons.upload.mediaDetails;
 
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.filepicker.UploadableFile;
-import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.data.models.nearby.Place;
 import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadMediaDetail;

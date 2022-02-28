@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.nearby.model
+package fr.free.nrw.commons.data.models.nearby.model
 
 import com.google.gson.annotations.SerializedName
 
@@ -73,7 +73,7 @@ class NearbyResultItem(private val item: ResultTuple?,
         return address?.value?:""
     }
 
-    fun getMonument():ResultTuple?{
+    fun getMonument(): ResultTuple?{
         return monument
     }
 }

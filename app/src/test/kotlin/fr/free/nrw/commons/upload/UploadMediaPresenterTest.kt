@@ -4,7 +4,7 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import fr.free.nrw.commons.nearby.Place
+import fr.free.nrw.commons.data.models.nearby.Place
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaPresenter

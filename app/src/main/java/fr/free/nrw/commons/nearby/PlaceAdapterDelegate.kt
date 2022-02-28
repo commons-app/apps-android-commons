@@ -9,6 +9,7 @@ import com.hannesdorfmann.adapterdelegates4.dsl.AdapterDelegateViewBindingViewHo
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
+import fr.free.nrw.commons.data.models.nearby.Place
 import fr.free.nrw.commons.databinding.ItemPlaceBinding
 
 

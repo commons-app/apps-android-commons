@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.nearby;
 
 import androidx.annotation.Nullable;
+import fr.free.nrw.commons.data.models.nearby.Place;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;

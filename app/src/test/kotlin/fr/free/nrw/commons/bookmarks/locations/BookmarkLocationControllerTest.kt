@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.bookmarks.locations
 
 import com.nhaarman.mockitokotlin2.whenever
-import fr.free.nrw.commons.nearby.Place
+import fr.free.nrw.commons.data.models.nearby.Place
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -32,7 +32,8 @@ class BookmarkLocationControllerTest {
             val list = ArrayList<Place>()
             list.add(
                 Place(
-                    "en", "a place", null, "a description", null, "a cat", null, null, true)
+                    "en", "a place", null, "a description", null, "a cat", null, null, true
+                )
             )
             list.add(
                 Place(
