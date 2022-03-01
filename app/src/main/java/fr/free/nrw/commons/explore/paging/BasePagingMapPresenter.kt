@@ -10,7 +10,8 @@ import timber.log.Timber
 
 abstract class BasePagingMapPresenter<T>(
     val mainThreadScheduler: Scheduler,
-    val pageableBaseDataSource: PageableBaseDataSource<T>
+    val pageableBaseDataSource: PageableBaseDataSource<T>,
+    val isFromSearchActivity: Boolean
 ) : PagingContract.Presenter<T> {
 
 private val DUMMY: PagingContract.View<T> = proxy()

@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.explore.map
 
+import dagger.Provides
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.explore.paging.BasePagingMapPresenter
@@ -15,6 +16,8 @@ interface ExploreMapMediaPresenter : PagingContract.Presenter<Media>
  */
 class ExploreMapMediaPresenterIml @Inject constructor(
     @Named(CommonsApplicationModule.MAIN_THREAD) mainThreadScheduler: Scheduler,
-    dataSourceFactory: ExploreMapMediaDataSource
-) : BasePagingMapPresenter<Media>(mainThreadScheduler, dataSourceFactory),
+    dataSourceFactory: ExploreMapMediaDataSource,
+    isFromSearchActivity: Boolean
+    //@Named(ExploreMapModule) isFromSearchActivity: Boolean
+) : BasePagingMapPresenter<Media>(mainThreadScheduler, dataSourceFactory, isFromSearchActivity),
     ExploreMapMediaPresenter

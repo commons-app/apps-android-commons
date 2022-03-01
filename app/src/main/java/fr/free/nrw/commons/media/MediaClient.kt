@@ -94,6 +94,10 @@ class MediaClient @Inject constructor(
     fun getMediaListFromSearch(keyword: String?, limit: Int, offset: Int) =
         responseMapper(mediaInterface.getMediaListFromSearch(keyword, limit, offset))
 
+    fun getMediaListFromSearchWithLocation(keyword: String?, limit: Int, offset: Int) : Single<List<Media>> {
+        return Single.just(responseMapper(mediaInterface.getMediaListFromSearch(keyword, limit, offset)).blockingGet().filter { it.coordinates != null })
+    }
+
     /**
      * This method takes a keyword as input and returns a list of  Media objects filtered using image generator query
      * It uses the generator query API to get the images searched using a query, 10 at a time.
@@ -189,9 +193,6 @@ class MediaClient @Inject constructor(
         networkResult: Single<MwQueryResponse>,
         key: String?
     ): Single<List<Media>> {
-        GlobalScope.launch(Dispatchers.IO) {
-            Log.d("nesli","network result is:" + networkResult.blockingGet())
-        }
         return networkResult.map {
             handleContinuationResponse(it.continuation(), key)
             it.query()?.pages() ?: emptyList()
@@ -200,15 +201,8 @@ class MediaClient @Inject constructor(
 
     private fun mediaFromPageAndEntity(pages: List<MwQueryPage>): Single<List<Media>> {
         return if (pages.isEmpty()) {
-            GlobalScope.launch(Dispatchers.IO) {
-                Log.d("nesli", "media from page entity pages empty:" + pages.size)
-            }
             Single.just(emptyList())
         } else {
-            GlobalScope.launch(Dispatchers.IO) {
-                Log.d("nesli", "media from page entity pages:" + pages.get(0))
-            }
-
             getEntities(pages.map { "$PAGE_ID_PREFIX${it.pageId()}" })
                 .map {
                     pages.zip(it.entities().values)

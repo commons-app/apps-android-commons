@@ -11,11 +11,16 @@ import javax.inject.Inject
 
 class ExploreMapMediaDataSource @Inject constructor(
     liveDataConverter: LiveDataConverter,
-    private val mediaClient: MediaClient
+    private val mediaClient: MediaClient,
+    val isFromSearchActivity: Boolean
 ) : PageableBaseDataSource<Media>(liveDataConverter) {
     override val loadFunction: LoadFunction<Media> = { loadSize: Int, startPosition: Int ->
         //TODO: change this method
         // TODO: filter this result by location or display all of them on map
-        mediaClient.getMediaListFromSearchWithLocation(query, loadSize, startPosition).blockingGet()
+        if (isFromSearchActivity) {
+            mediaClient.getMediaListFromSearchWithLocation(query, loadSize, startPosition).blockingGet()
+        } else {
+            mediaClient.getMediaListFromSearchWithLocation(query, loadSize, startPosition).blockingGet()
+        }
     }
 }

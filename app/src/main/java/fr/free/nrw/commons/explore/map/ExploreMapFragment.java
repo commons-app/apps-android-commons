@@ -50,12 +50,15 @@ import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment;
+import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.explore.SearchActivity;
+import fr.free.nrw.commons.explore.paging.LiveDataConverter;
 import fr.free.nrw.commons.explore.paging.PagingContract.Presenter;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
+import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.utils.ExecutorUtils;
@@ -67,6 +70,7 @@ import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.UiUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
@@ -101,9 +105,16 @@ public class ExploreMapFragment extends PageableMapFragment
     private ExploreFragmentInstanceReadyCallback exploreFragmentInstanceReadyCallback;
     IntentFilter intentFilter = new IntentFilter(MapUtils.NETWORK_INTENT_ACTION);
 
-
+    @Inject
+    ExploreMapMediaDataSource dataSourceFactory;
+    @Named(CommonsApplicationModule.MAIN_THREAD)
+    Scheduler scheduler;
     @Inject
     ExploreMapMediaPresenter mediaPresenter;
+    @Inject
+    LiveDataConverter liveDataConverter;
+    @Inject
+    MediaClient mediaClient;
     @Inject
     LocationServiceManager locationManager;
     @Inject
@@ -158,6 +169,14 @@ public class ExploreMapFragment extends PageableMapFragment
         //return getView();
     //}
 
+
+    @Override
+    public void onCreate(@Nullable final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //dataSourceFactory = new ExploreMapMediaDataSource(liveDataConverter, mediaClient, isFromSearchActivity);
+        //mediaPresenter = new ExploreMapMediaPresenterIml(scheduler, dataSourceFactory,isFromSearchActivity);
+    }
+
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -170,8 +189,8 @@ public class ExploreMapFragment extends PageableMapFragment
         } else {
             isFromSearchActivity = false;
         }
-
         initNetworkBroadCastReceiver();
+
         if (presenter == null) {
             presenter = new ExploreMapPresenter(bookmarkLocationDao);
         }
