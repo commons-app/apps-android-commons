@@ -2,6 +2,8 @@ package fr.free.nrw.commons.upload.structure.depictions
 
 import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.nearby.Place
+import fr.free.nrw.commons.repository.UploadRepository
+import io.github.coordinates2country.Coordinates2Country
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -25,27 +27,37 @@ class DepictModel @Inject constructor(private val depictsClient: DepictsClient) 
     /**
      * Search for depictions
      */
-    fun searchAllEntities(query: String): Flowable<List<DepictedItem>> {
-        return if (query.isBlank())
+    fun searchAllEntities(query: String, repository: UploadRepository): Flowable<List<DepictedItem>> {
+        return if (query.isBlank()) {
             nearbyPlaces.switchMap { places: List<Place> ->
-                getPlaceDepictions(places).toFlowable()
+                val qids = mutableSetOf<String>()
+                for(place in  places) {
+                    place.wikiDataEntityId?.let { qids.add(it) }
+                }
+                repository.uploads.forEach { item ->
+                    if(item.gpsCoords != null && item.gpsCoords.imageCoordsExists) {
+                        Coordinates2Country.countryQID(item.gpsCoords.decLatitude,
+                            item.gpsCoords.decLongitude)?.let { qids.add("Q$it") }
+                    }
+                }
+                getPlaceDepictions(ArrayList(qids)).toFlowable()
             }
-        else
+        } else
             networkItems(query)
     }
 
     /**
-     * Provides [DepictedItem] instances via a [Single] for a given list of [Place], providing an
-     * empty list if no places are provided or if there is an error
+     * Provides [DepictedItem] instances via a [Single] for a given list of ids, providing an
+     * empty list if no places/country are provided or if there is an error
      */
-    fun getPlaceDepictions(places: List<Place>): Single<List<DepictedItem>> =
-        places.toIds().let { ids ->
+    fun getPlaceDepictions(qids: List<String>): Single<List<DepictedItem>> =
+        qids.toIds().let { ids ->
             if (ids.isNotEmpty())
                 depictsClient.getEntities(ids)
                     .map{
                         it.entities()
                             .values
-                            .mapIndexed { index, entity ->  DepictedItem(entity, places[index])}
+                            .mapIndexed { index, entity ->  DepictedItem(entity)}
                     }
                     .onErrorResumeWithEmptyList()
             else Single.just(emptyList())
@@ -75,7 +87,7 @@ class DepictModel @Inject constructor(private val depictsClient: DepictsClient) 
 
 }
 
-private fun List<Place>.toIds() = mapNotNull { it.wikiDataEntityId }.joinToString("|")
+private fun List<String>.toIds() = mapNotNull { it }.joinToString("|")
 
 private fun <T> Single<List<T>>.onErrorResumeWithEmptyList() = onErrorResumeNext { t: Throwable ->
     Single.just(emptyList<T>()).also { Timber.e(t) }

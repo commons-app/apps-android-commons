@@ -15,7 +15,7 @@ public class NearbyFilterState {
      * Define initial filter values here
      */
     private NearbyFilterState() {
-        existsSelected = false;
+        existsSelected = true;
         needPhotoSelected = true;
         wlmSelected = true;
         checkBoxTriState = -1; // Unknown

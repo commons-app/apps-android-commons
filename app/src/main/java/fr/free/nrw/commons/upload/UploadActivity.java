@@ -55,6 +55,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -117,6 +118,12 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
     public static final String EXTRA_FILES = "commons_image_exta";
 
+    /**
+     * Stores all nearby places found and related users response for
+     * each place while uploading media
+     */
+    public static HashMap<Place,Boolean> nearbyPopupAnswers;
+
     @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,6 +134,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         ButterKnife.bind(this);
         compositeDisposable = new CompositeDisposable();
         init();
+        nearbyPopupAnswers = new HashMap<>();
 
         PermissionUtils.checkPermissionsAndPerformAction(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -240,8 +248,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
     @Override
     public void returnToMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
         finish();
     }
 

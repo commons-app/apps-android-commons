@@ -3,6 +3,7 @@ package fr.free.nrw.commons.profile.achievements;
 import android.accounts.Account;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -15,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -29,6 +31,7 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -179,9 +182,44 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
             tvAchievementsOfUser.setVisibility(View.VISIBLE);
             tvAchievementsOfUser.setText(getString(R.string.achievements_of_user,userName));
         }
+
+        // Achievements currently unimplemented in Beta flavor. Skip all API calls.
+        if(ConfigUtils.isBetaFlavour()) {
+            progressBar.setVisibility(View.GONE);
+            imageByWikiText.setText(R.string.no_image);
+            imageRevertedText.setText(R.string.no_image_reverted);
+            imageUploadedText.setText(R.string.no_image_uploaded);
+            wikidataEditsText.setText("0");
+            imagesFeatured.setText("0");
+            tvQualityImages.setText("0");
+            thanksReceived.setText("0");
+            setMenuVisibility(true);
+            return rootView;
+        }
         setWikidataEditCount();
         setAchievements();
         return rootView;
+    }
+
+    @Override
+    public void setMenuVisibility(boolean visible) {
+        super.setMenuVisibility(visible);
+
+        // Whenever this fragment is revealed in a menu,
+        // notify Beta users the page data is unavailable
+        if(ConfigUtils.isBetaFlavour() && visible) {
+            Context ctx = null;
+            if(getContext() != null) {
+                ctx = getContext();
+            } else if(getView() != null && getView().getContext() != null) {
+                ctx = getView().getContext();
+            }
+            if(ctx != null) {
+                Toast.makeText(ctx,
+                    R.string.achievements_unavailable_beta,
+                    Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     /**

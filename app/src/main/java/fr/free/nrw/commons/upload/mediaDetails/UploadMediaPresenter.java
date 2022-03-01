@@ -114,7 +114,6 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                         final ImageCoordinates gpsCoords = uploadItem.getGpsCoords();
                         final boolean hasImageCoordinates =
                           gpsCoords != null && gpsCoords.getImageCoordsExists();
-                        view.showMapWithImageCoordinates(hasImageCoordinates);
                         view.showProgress(false);
                         if (hasImageCoordinates && place == null) {
                             checkNearbyPlaces(uploadItem);
@@ -169,28 +168,54 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      */
     @Override
     public void verifyImageQuality(int uploadItemIndex) {
-        view.showProgress(true);
-
       final UploadItem uploadItem = repository.getUploads().get(uploadItemIndex);
-      compositeDisposable.add(
-            repository
-                .getImageQuality(uploadItem)
-                .observeOn(mainThreadScheduler)
-                .subscribe(imageResult -> {
-                            view.showProgress(false);
-                        handleImageResult(imageResult, uploadItem);
-                        },
-                        throwable -> {
-                            view.showProgress(false);
-                            if (throwable instanceof UnknownHostException) {
+
+      if (uploadItem.getGpsCoords().getDecimalCoords() == null) {
+          final Runnable onSkipClicked = () -> {
+              view.showProgress(true);
+              compositeDisposable.add(
+                  repository
+                      .getImageQuality(uploadItem)
+                      .observeOn(mainThreadScheduler)
+                      .subscribe(imageResult -> {
+                              view.showProgress(false);
+                              handleImageResult(imageResult, uploadItem);
+                          },
+                          throwable -> {
+                              view.showProgress(false);
+                              if (throwable instanceof UnknownHostException) {
+                                  view.showConnectionErrorPopup();
+                              } else {
+                                  view.showMessage("" + throwable.getLocalizedMessage(),
+                                      R.color.color_error);
+                              }
+                              Timber.e(throwable, "Error occurred while handling image");
+                          })
+              );
+          };
+          view.displayAddLocationDialog(onSkipClicked);
+      } else {
+          view.showProgress(true);
+          compositeDisposable.add(
+              repository
+                  .getImageQuality(uploadItem)
+                  .observeOn(mainThreadScheduler)
+                  .subscribe(imageResult -> {
+                          view.showProgress(false);
+                          handleImageResult(imageResult, uploadItem);
+                      },
+                      throwable -> {
+                          view.showProgress(false);
+                          if (throwable instanceof UnknownHostException) {
                               view.showConnectionErrorPopup();
-                            } else {
+                          } else {
                               view.showMessage("" + throwable.getLocalizedMessage(),
                                   R.color.color_error);
-                            }
-                            Timber.e(throwable, "Error occurred while handling image");
-                        })
-        );
+                          }
+                          Timber.e(throwable, "Error occurred while handling image");
+                      })
+          );
+      }
     }
 
 

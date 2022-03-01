@@ -47,29 +47,9 @@ public class CategoryEditSearchRecyclerViewAdapter
         }
     }
 
-    public void addToCategories(String categoryToBeAdded) {
-        if (!categories.contains(categoryToBeAdded)) {
-            categories.add(categoryToBeAdded);
-        }
-    }
-
-    public void removeFromCategories(String categoryToBeRemoved) {
-        if (categories.contains(categoryToBeRemoved)) {
-            categories.remove(categoryToBeRemoved);
-        }
-    }
-
     public void removeFromNewCategories(String categoryToBeRemoved) {
         if (newCategories.contains(categoryToBeRemoved)) {
             newCategories.remove(categoryToBeRemoved);
-        }
-    }
-
-    public void addToNewCategories(List<String> newCategories) {
-        for(String category : newCategories) {
-            if (!this.newCategories.contains(category)) {
-                this.newCategories.add(category);
-            }
         }
     }
 
@@ -94,8 +74,14 @@ public class CategoryEditSearchRecyclerViewAdapter
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults results = new FilterResults();
-                List<String> resultCategories = categoryClient.searchCategories(constraint.toString(), 10).blockingGet();
-                results.values = resultCategories;
+                List<CategoryItem> resultCategories = categoryClient
+                    .searchCategories(constraint.toString(), 10).blockingGet();
+                final List<String> namesOfCommonsCategories = new ArrayList<>();
+                for (final CategoryItem category :
+                    resultCategories) {
+                    namesOfCommonsCategories.add(category.getName());
+                }
+                results.values = namesOfCommonsCategories;
                 results.count = resultCategories.size();
                 return results;
             }

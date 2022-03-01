@@ -14,6 +14,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import org.junit.Assert
@@ -62,7 +63,10 @@ class BookmarkItemsFragmentUnitTest {
             list.add(
                 DepictedItem(
                     "name", "description", "image url", listOf("instance"),
-                    listOf("categories"), true, "id")
+                    listOf(
+                        CategoryItem("category name", "category description",
+                        "category thumbnail", false)
+                    ), true, "id")
             )
             return list
         }

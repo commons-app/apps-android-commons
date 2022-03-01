@@ -485,32 +485,52 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         registerNetworkReceiver();
         if (isResumed() && ((MainActivity)getActivity()).activeFragment == ActiveFragment.NEARBY) {
             if(!isPermissionDenied && !applicationKvStore.getBoolean("doNotAskForLocationPermission", false)){
-                startTheMap();
+                if (!locationManager.isGPSProviderEnabled()) {
+                    startMapWithCondition("Without GPS");
+                } else {
+                    startTheMap();
+                }
             }else{
-                startMapWithoutPermission();
+                startMapWithCondition("Without Permission");
             }
         }
     }
 
-    private void startMapWithoutPermission() {
+    /**
+     * Starts the map without GPS and without permission
+     * By default it points to 51.50550,-0.07520 coordinates, other than that it points to the
+     * last known location which can be get by the key "LastLocation" from applicationKvStore
+     *
+     * @param condition : for which condition the map should start
+     */
+    private void startMapWithCondition(final String condition) {
         mapView.onStart();
 
-        applicationKvStore.putBoolean("doNotAskForLocationPermission", true);
+        if (condition.equals("Without Permission")) {
+            applicationKvStore.putBoolean("doNotAskForLocationPermission", true);
+        }
+
         final CameraPosition position;
-        if(applicationKvStore.getString("LastLocation")!=null) { // Checking for last searched location
-            String[] locationLatLng = applicationKvStore.getString("LastLocation").split(",");
-            lastKnownLocation = new fr.free.nrw.commons.location.LatLng(Double.valueOf(locationLatLng[0]), Double.valueOf(locationLatLng[1]), 1f);
+        if (applicationKvStore.getString("LastLocation")!=null) {
+            final String[] locationLatLng
+                = applicationKvStore.getString("LastLocation").split(",");
+            lastKnownLocation
+                = new fr.free.nrw.commons.location.LatLng(Double.parseDouble(locationLatLng[0]),
+                Double.parseDouble(locationLatLng[1]), 1f);
             position = new CameraPosition.Builder()
                 .target(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation))
                 .zoom(ZOOM_LEVEL)
                 .build();
-        }else {
-            lastKnownLocation = new fr.free.nrw.commons.location.LatLng(51.50550,-0.07520,1f);
+
+        } else {
+            lastKnownLocation = new fr.free.nrw.commons.location.LatLng(51.50550,
+                -0.07520,1f);
             position = new CameraPosition.Builder()
                 .target(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation))
                 .zoom(ZOOM_OUT)
                 .build();
         }
+
         if(mapBox != null){
             mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
             addOnCameraMoveListener();
@@ -1368,7 +1388,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     @Override
     public void addCurrentLocationMarker(final fr.free.nrw.commons.location.LatLng curLatLng) {
-        if (null != curLatLng && !isPermissionDenied) {
+        if (null != curLatLng && !isPermissionDenied && locationManager.isGPSProviderEnabled()) {
             ExecutorUtils.get().submit(() -> {
                 mapView.post(() -> removeCurrentLocationMarker());
                 Timber.d("Adds current location marker");

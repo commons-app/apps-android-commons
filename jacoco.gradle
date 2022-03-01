@@ -18,9 +18,11 @@ project.afterEvaluate {
             .all { variant ->
                 def variantName = variant.name
                 def unitTestTask = "test${variantName.capitalize()}UnitTest"
+                def androidTestCoverageTask  = "create${variantName.capitalize()}CoverageReport"
 
                 tasks.create(name: "${unitTestTask}Coverage", type: JacocoReport, dependsOn: [
-                        "$unitTestTask"
+                        "$unitTestTask",
+                        "$androidTestCoverageTask",
                 ]) {
                     group = "Reporting"
                     description = "Generate Jacoco coverage reports for the ${variantName.capitalize()} build"
@@ -78,7 +80,17 @@ project.afterEvaluate {
                             '**/*Extensions*.*',
                             // sealed and data classes
                             '**/*$Result.*',
-                            '**/*$Result$*.*'
+                            '**/*$Result$*.*',
+                            // model
+                            '**/**/model/*',
+                            // concurrency
+                            '**/concurrency/*',
+                            // kvstore
+                            '**/kvstore/*',
+                            // db
+                            '**/db/*',
+                            // data
+                            '**/data/*',
                     ]
 
                     def javaClasses = fileTree(dir: variant.javaCompileProvider.get().destinationDir,
@@ -94,8 +106,13 @@ project.afterEvaluate {
                     def variantSourceSets = variant.sourceSets.java.srcDirs.collect { it.path }.flatten()
                     sourceDirectories.setFrom(project.files(variantSourceSets))
 
+                    def androidTestsData = fileTree(dir:
+                            "${buildDir}/outputs/code_coverage/${variantName}AndroidTest/connected/",
+                            includes: ["**/*.ec"])
+
                     executionData(files([
-                            "$project.buildDir/jacoco/${unitTestTask}.exec"
+                            "$project.buildDir/jacoco/${unitTestTask}.exec",
+                            androidTestsData
                     ]))
                 }
 
