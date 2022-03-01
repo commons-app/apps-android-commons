@@ -107,10 +107,10 @@ public class ExploreMapFragment extends PageableMapFragment
 
     @Inject
     ExploreMapMediaDataSource dataSourceFactory;
-    @Named(CommonsApplicationModule.MAIN_THREAD)
-    Scheduler scheduler;
     @Inject
     ExploreMapMediaPresenter mediaPresenter;
+    // Help wanted: Hey Madhur, one help need is binding these two variable above
+
     @Inject
     LiveDataConverter liveDataConverter;
     @Inject

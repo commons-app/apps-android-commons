@@ -165,29 +165,21 @@ public class ExploreMapController extends MapController {
                         explorePlace.location.getLatitude(),
                         explorePlace.location.getLongitude()));
                 nearbyBaseMarker.place(explorePlace);
-                // Check if string is only spaces or empty, if so place doesn't have any picture
-                /*ImageView imageView = new ImageView(context);
+                /* Help needed, Madhur another point that would be nice to have help is here where I want to create marker icons from thumbnails of places.
+                I guess a library like Glide should be used but tried once and couldn't make it work yet. I assume something like that:
 
-                try {
                     Drawable drawable = Glide.with(context).load(explorePlace.thumb).thumbnail(0.3f).submit().get();
-                    Log.d("nesli2", "setting nearby base marker for " + nearbyBaseMarker.getMarker().getTitle() + " and pic is " + explorePlace.thumb + " and resource is " + drawable);
                     nearbyBaseMarker.setIcon(IconFactory.getInstance(context).fromBitmap(UiUtils.drawableToBitmap(drawable)));
 
-                        baseMarkerOptions.add(nearbyBaseMarker);
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }*/
 
+                    OR
 
-                /*Glide.with(context).asBitmap().load(explorePlace.thumb).into(new CustomTarget<Bitmap>() {
+                    Glide.with(context).asBitmap().load(explorePlace.thumb).into(new CustomTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                         //imageView.setImageBitmap(resource);
                         //nearbyBaseMarker.icon(IconFactory.getInstance(context)
                           //  .fromBitmap(resource));
-                        Log.d("nesli2", "setting nearby base marker for " + nearbyBaseMarker.getMarker().getTitle() + " and pic is " + explorePlace.thumb + " and resource is " + resource);
                         nearbyBaseMarker.setIcon(IconFactory.getInstance(context)
                             .fromBitmap(resource));
                         baseMarkerOptions.add(nearbyBaseMarker);
