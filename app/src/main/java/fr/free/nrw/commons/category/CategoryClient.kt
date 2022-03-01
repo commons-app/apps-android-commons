@@ -49,6 +49,24 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
     }
 
     /**
+     * Fetches categories starting and ending with a specified name.
+     *
+     * @param startingCategoryName Name of the category to start
+     * @param endingCategoryName Name of the category to end
+     * @param itemLimit How many categories to return
+     * @param offset offset
+     * @return MwQueryResponse
+     */
+    @JvmOverloads
+    fun getCategoriesByName(startingCategoryName: String?, endingCategoryName: String?,
+                            itemLimit: Int, offset: Int = 0): Single<List<CategoryItem>> {
+        return responseMapper(
+            categoryInterface.getCategoriesByName(startingCategoryName, endingCategoryName,
+                itemLimit, offset)
+        )
+    }
+
+    /**
      * The method takes categoryName as input and returns a List of Subcategories
      * It uses the generator query API to get the subcategories in a category, 500 at a time.
      *

@@ -122,40 +122,41 @@ public class SearchActivity extends BaseActivity
                 .takeUntil(RxView.detaches(searchView))
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(query -> {
-                    //update image list
-                        if (!TextUtils.isEmpty(query)) {
-                            saveRecentSearch(query.toString());
-                            viewPager.setVisibility(View.VISIBLE);
-                            tabLayout.setVisibility(View.VISIBLE);
-                            searchHistoryContainer.setVisibility(View.GONE);
-
-                            if (FragmentUtils.isFragmentUIActive(searchDepictionsFragment)) {
-                                searchDepictionsFragment.onQueryUpdated(query.toString());
-                            }
-
-                            if (FragmentUtils.isFragmentUIActive(searchMediaFragment)) {
-                                searchMediaFragment.onQueryUpdated(query.toString());
-                            }
-
-                            if (FragmentUtils.isFragmentUIActive(searchCategoryFragment)) {
-                                searchCategoryFragment.onQueryUpdated(query.toString());
-                            }
-
-                            if (FragmentUtils.isFragmentUIActive(searchMapFragment)) {
-                                searchMapFragment.onQueryUpdated(query.toString());
-                            }
-
-                        } else {
-                            //Open RecentSearchesFragment
-                            recentSearchesFragment.updateRecentSearches();
-                            viewPager.setVisibility(View.GONE);
-                            tabLayout.setVisibility(View.GONE);
-                            setSearchHistoryFragment();
-                            searchHistoryContainer.setVisibility(View.VISIBLE);
-                        }
-                    }, Timber::e
+                .subscribe(this::handleSearch, Timber::e
                 ));
+    }
+
+    private void handleSearch(final CharSequence query) {
+        if (!TextUtils.isEmpty(query)) {
+            saveRecentSearch(query.toString());
+            viewPager.setVisibility(View.VISIBLE);
+            tabLayout.setVisibility(View.VISIBLE);
+            searchHistoryContainer.setVisibility(View.GONE);
+
+            if (FragmentUtils.isFragmentUIActive(searchDepictionsFragment)) {
+                searchDepictionsFragment.onQueryUpdated(query.toString());
+            }
+
+            if (FragmentUtils.isFragmentUIActive(searchMediaFragment)) {
+                searchMediaFragment.onQueryUpdated(query.toString());
+            }
+
+            if (FragmentUtils.isFragmentUIActive(searchCategoryFragment)) {
+                searchCategoryFragment.onQueryUpdated(query.toString());
+            }
+
+            if (FragmentUtils.isFragmentUIActive(searchMapFragment)) {
+                searchMapFragment.onQueryUpdated(query.toString());
+            }
+         }
+        else {
+                    //Open RecentSearchesFragment
+                    recentSearchesFragment.updateRecentSearches();
+                    viewPager.setVisibility(View.GONE);
+                    tabLayout.setVisibility(View.GONE);
+                    setSearchHistoryFragment();
+                    searchHistoryContainer.setVisibility(View.VISIBLE);
+                }
     }
 
     private void saveRecentSearch(@NonNull final String query) {

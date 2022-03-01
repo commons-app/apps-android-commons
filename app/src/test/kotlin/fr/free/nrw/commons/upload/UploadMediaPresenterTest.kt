@@ -45,6 +45,9 @@ class UploadMediaPresenterTest {
     private lateinit var uploadItem: UploadItem
 
     @Mock
+    private lateinit var imageCoordinates: ImageCoordinates
+
+    @Mock
     private lateinit var uploadMediaDetails: List<UploadMediaDetail>
 
     private lateinit var testObservableUploadItem: Observable<UploadItem>
@@ -93,18 +96,39 @@ class UploadMediaPresenterTest {
     }
 
     /**
-     * unit test for method UploadMediaPresenter.verifyImageQuality
+     * unit test for method UploadMediaPresenter.verifyImageQuality (For else case)
      */
     @Test
     fun verifyImageQualityTest() {
         whenever(repository.uploads).thenReturn(listOf(uploadItem))
         whenever(repository.getImageQuality(uploadItem))
             .thenReturn(testSingleImageResult)
-        whenever(uploadItem.imageQuality).thenReturn(ArgumentMatchers.anyInt())
+        whenever(uploadItem.imageQuality).thenReturn(0)
+        whenever(uploadItem.gpsCoords)
+            .thenReturn(imageCoordinates)
+        whenever(uploadItem.gpsCoords.decimalCoords)
+            .thenReturn("imageCoordinates")
         uploadMediaPresenter.verifyImageQuality(0)
         verify(view).showProgress(true)
         testScheduler.triggerActions()
         verify(view).showProgress(false)
+    }
+
+    /**
+     * unit test for method UploadMediaPresenter.verifyImageQuality (For if case)
+     */
+    @Test
+    fun `verify ImageQuality Test while coordinates equals to null`() {
+        whenever(repository.uploads).thenReturn(listOf(uploadItem))
+        whenever(repository.getImageQuality(uploadItem))
+            .thenReturn(testSingleImageResult)
+        whenever(uploadItem.imageQuality).thenReturn(0)
+        whenever(uploadItem.gpsCoords)
+            .thenReturn(imageCoordinates)
+        whenever(uploadItem.gpsCoords.decimalCoords)
+            .thenReturn(null)
+        uploadMediaPresenter.verifyImageQuality(0)
+        testScheduler.triggerActions()
     }
 
     /**

@@ -48,7 +48,7 @@
               android:layout_height="match_parent"
               android:hint="@string/share_caption_hint"
               android:imeOptions="actionNext|flagNoExtractUi"
-              android:inputType="textMultiLine"
+              android:inputType="text"
               app:allowFormatting="false" />
         </com.google.android.material.textfield.TextInputLayout>
 

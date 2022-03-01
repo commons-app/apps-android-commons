@@ -6,6 +6,8 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.visibility;
+import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION;
+import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -49,13 +51,17 @@ import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.theme.BaseActivity;
+import javax.inject.Inject;
+import javax.inject.Named;
 import org.jetbrains.annotations.NotNull;
 import timber.log.Timber;
 
 /**
  * Helps to pick location and return the result with an intent
  */
-public class LocationPickerActivity extends AppCompatActivity implements OnMapReadyCallback,
+public class LocationPickerActivity extends BaseActivity implements OnMapReadyCallback,
     OnCameraMoveStartedListener, OnCameraIdleListener, Observer<CameraPosition> {
 
     /**
@@ -114,6 +120,13 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
      * smallToolbarText : textView of shadow
      */
     private TextView smallToolbarText;
+    /**
+     * applicationKvStore : for storing values
+     */
+    @Inject
+    @Named("default_preferences")
+    public
+    JsonKvStore applicationKvStore;
 
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
@@ -211,44 +224,57 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
     @Override
     public void onMapReady(final MapboxMap mapboxMap) {
         this.mapboxMap = mapboxMap;
-        mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
+        mapboxMap.setStyle(Style.MAPBOX_STREETS, this::onStyleLoaded);
+    }
 
-            if (modifyLocationButton.getVisibility() == View.VISIBLE) {
-                initDroppedMarker(style);
-                adjustCameraBasedOnOptions();
-                enableLocationComponent(style);
-                if (style.getLayer(DROPPED_MARKER_LAYER_ID) != null) {
-                    final GeoJsonSource source = style.getSourceAs("dropped-marker-source-id");
-                    if (source != null) {
-                        source.setGeoJson(Point.fromLngLat(cameraPosition.target.getLongitude(),
-                            cameraPosition.target.getLatitude()));
-                    }
-                    droppedMarkerLayer = style.getLayer(DROPPED_MARKER_LAYER_ID);
-                    if (droppedMarkerLayer != null) {
-                        droppedMarkerLayer.setProperties(visibility(VISIBLE));
-                        markerImage.setVisibility(View.GONE);
-                        shadow.setVisibility(View.GONE);
-                    }
+    /**
+     * Initializes dropped marker and layer
+     * Handles camera position based on options
+     * Enables location components
+     *
+     * @param style style
+     */
+    private void onStyleLoaded(final Style style) {
+        if (modifyLocationButton.getVisibility() == View.VISIBLE) {
+            initDroppedMarker(style);
+            adjustCameraBasedOnOptions();
+            enableLocationComponent(style);
+            if (style.getLayer(DROPPED_MARKER_LAYER_ID) != null) {
+                final GeoJsonSource source = style.getSourceAs("dropped-marker-source-id");
+                if (source != null) {
+                    source.setGeoJson(Point.fromLngLat(cameraPosition.target.getLongitude(),
+                        cameraPosition.target.getLatitude()));
                 }
-            } else {
-                adjustCameraBasedOnOptions();
-                enableLocationComponent(style);
-                bindListeners();
+                droppedMarkerLayer = style.getLayer(DROPPED_MARKER_LAYER_ID);
+                if (droppedMarkerLayer != null) {
+                    droppedMarkerLayer.setProperties(visibility(VISIBLE));
+                    markerImage.setVisibility(View.GONE);
+                    shadow.setVisibility(View.GONE);
+                }
             }
-            modifyLocationButton.setOnClickListener(v -> {
-                placeSelectedButton.setVisibility(View.VISIBLE);
-                modifyLocationButton.setVisibility(View.GONE);
-                showInMapButton.setVisibility(View.GONE);
-                droppedMarkerLayer.setProperties(visibility(NONE));
-                markerImage.setVisibility(View.VISIBLE);
-                shadow.setVisibility(View.VISIBLE);
-                largeToolbarText.setText(getResources().getString(R.string.choose_a_location));
-                smallToolbarText.setText(getResources().getString(R.string.pan_and_zoom_to_adjust));
-                bindListeners();
-            });
+        } else {
+            adjustCameraBasedOnOptions();
+            enableLocationComponent(style);
+            bindListeners();
+        }
 
-            showInMapButton.setOnClickListener(v -> showInMap());
-        });
+        modifyLocationButton.setOnClickListener(v -> onClickModifyLocation());
+        showInMapButton.setOnClickListener(v -> showInMap());
+    }
+
+    /**
+     * Handles onclick event of modifyLocationButton
+     */
+    private void onClickModifyLocation() {
+        placeSelectedButton.setVisibility(View.VISIBLE);
+        modifyLocationButton.setVisibility(View.GONE);
+        showInMapButton.setVisibility(View.GONE);
+        droppedMarkerLayer.setProperties(visibility(NONE));
+        markerImage.setVisibility(View.VISIBLE);
+        shadow.setVisibility(View.VISIBLE);
+        largeToolbarText.setText(getResources().getString(R.string.choose_a_location));
+        smallToolbarText.setText(getResources().getString(R.string.pan_and_zoom_to_adjust));
+        bindListeners();
     }
 
     /**
@@ -277,6 +303,7 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
             iconIgnorePlacement(true)
         ));
     }
+
     /**
      * move the location to the current media coordinates
      */
@@ -365,6 +392,13 @@ public class LocationPickerActivity extends AppCompatActivity implements OnMapRe
      * Return the intent with required data
      */
     void placeSelected() {
+        if (activity.equals("NoLocationUploadActivity")) {
+            applicationKvStore.putString(LAST_LOCATION,
+                mapboxMap.getCameraPosition().target.getLatitude()
+                    + ","
+                    + mapboxMap.getCameraPosition().target.getLongitude());
+            applicationKvStore.putString(LAST_ZOOM, mapboxMap.getCameraPosition().zoom + "");
+        }
         final Intent returningIntent = new Intent();
         returningIntent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION,
             mapboxMap.getCameraPosition());

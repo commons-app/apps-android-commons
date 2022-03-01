@@ -1,17 +1,21 @@
 package fr.free.nrw.commons.nearby;
 
+import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-
 import androidx.annotation.MainThread;
 import androidx.annotation.Nullable;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
-
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
 
 import fr.free.nrw.commons.MapController;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.utils.UiUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -19,18 +23,14 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Locale;
 import java.util.Map;
-
 import javax.inject.Inject;
-
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.utils.UiUtils;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 public class NearbyController extends MapController {
+
     private static final int MAX_RESULTS = 1000;
     private final NearbyPlaces nearbyPlaces;
     public static double currentLocationSearchRadius = 10.0; //in kilometers
@@ -126,11 +126,8 @@ public class NearbyController extends MapController {
             }
 
 
-            return nearbyPlacesInfo;
         }
-        else {
-            return nearbyPlacesInfo;
-        }
+        return nearbyPlacesInfo;
     }
 
     /**
@@ -148,24 +145,6 @@ public class NearbyController extends MapController {
         final boolean shouldQueryForMonuments) throws Exception {
         return loadAttractionsFromLocation(curLatLng, searchLatLng, returnClosestResult,
             checkingAroundCurrentLocation, shouldQueryForMonuments, null);
-    }
-
-    /**
-     * Loads attractions from location for list view, we need to return Place data type.
-     *
-     * @param curLatLng users current location
-     * @param placeList list of nearby places in Place data type
-     * @return Place list that holds nearby places
-     */
-    public static List<Place> loadAttractionsFromLocationToPlaces(
-            LatLng curLatLng,
-            List<Place> placeList) {
-        placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
-        for (Place place : placeList) {
-            String distance = formatDistanceBetween(curLatLng, place.location);
-            place.setDistance(distance);
-        }
-        return placeList;
     }
 
     /**

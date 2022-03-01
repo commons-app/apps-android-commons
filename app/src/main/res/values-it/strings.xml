@@ -619,6 +619,8 @@
   <string name="modify_location">Modifica posizione</string>
   <string name="image_location">Posizione dell\'immagine</string>
   <string name="check_whether_location_is_correct">Verifica se la posizione è corretta</string>
+  <string name="label">Etichetta</string>
+  <string name="description">Descrizione</string>
   <string name="custom_selector_title">Selettore personalizzato</string>
   <string name="custom_selector_empty_text">Nessuna immagine</string>
   <string name="done">Fatto</string>
