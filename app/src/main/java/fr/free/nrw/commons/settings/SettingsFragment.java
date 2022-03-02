@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
 import androidx.preference.Preference;
@@ -39,6 +40,8 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
+import fr.free.nrw.commons.recentlanguages.Language;
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao;
 import fr.free.nrw.commons.upload.LanguagesAdapter;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -60,10 +63,16 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     @Inject
     CommonsLogSender commonsLogSender;
 
+    @Inject
+    RecentLanguagesDao recentLanguagesDao;
+
     private ListPreference themeListPreference;
     private Preference descriptionLanguageListPreference;
     private Preference appUiLanguageListPreference;
     private String keyLanguageListPreference;
+    private TextView recentLanguagesTextView;
+    private View separator;
+    private ListView languageHistoryListView;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -211,6 +220,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         // Gets current language code from shared preferences
         final String languageCode = getCurrentLanguageCode(keyListPreference);
+        final List<Language> recentLanguages = recentLanguagesDao.getRecentLanguages();
         HashMap<Integer, String> selectedLanguages = new HashMap<>();
 
         if (keyListPreference.equals("appUiDefaultLanguagePref")) {
@@ -246,8 +256,18 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         EditText editText = dialog.findViewById(R.id.search_language);
         ListView listView = dialog.findViewById(R.id.language_list);
+        languageHistoryListView = dialog.findViewById(R.id.language_history_list);
+        recentLanguagesTextView = dialog.findViewById(R.id.recent_searches_text_view);
+        separator = dialog.findViewById(R.id.separator);
+
+        if (recentLanguages.isEmpty()) {
+            languageHistoryListView.setVisibility(View.GONE);
+            recentLanguagesTextView.setVisibility(View.GONE);
+            separator.setVisibility(View.GONE);
+        }
 
         listView.setAdapter(languagesAdapter);
+
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override

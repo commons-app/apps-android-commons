@@ -37,8 +37,8 @@ public class RecentLanguagesDao {
      * Find all persisted items bookmarks on database
      * @return list of bookmarks
      */
-    public List<String> getRecentLanguages() {
-        final List<String> items = new ArrayList<>();
+    public List<Language> getRecentLanguages() {
+        final List<Language> items = new ArrayList<>();
         final ContentProviderClient db = clientProvider.get();
         try (final Cursor cursor = db.query(
             RecentLanguagesContentProvider.BASE_URI,
@@ -61,7 +61,7 @@ public class RecentLanguagesDao {
      * Add a Bookmark to database
      * @param language : Bookmark to add
      */
-    private void addRecentLanguage(final String language) {
+    private void addRecentLanguage(final Language language) {
         final ContentProviderClient db = clientProvider.get();
         try {
             db.insert(BookmarkItemsContentProvider.BASE_URI, toContentValues(language));
@@ -100,7 +100,7 @@ public class RecentLanguagesDao {
         try (final Cursor cursor = db.query(
             RecentLanguagesContentProvider.BASE_URI,
             RecentLanguagesDao.Table.ALL_FIELDS,
-            Table.COLUMN_NAME + "=?",
+            Table.COLUMN_CODE + "=?",
             new String[]{language},
             null
         )) {
@@ -121,18 +121,21 @@ public class RecentLanguagesDao {
      * @return RecentSearch object
      */
     @NonNull
-    String fromCursor(Cursor cursor) {
+    Language fromCursor(final Cursor cursor) {
         // Hardcoding column positions!
-        return cursor.getString(cursor.getColumnIndex(RecentLanguagesDao.Table.COLUMN_NAME));
+        final String languageName = cursor.getString(cursor.getColumnIndex(Table.COLUMN_NAME));
+        final String languageCode = cursor.getString(cursor.getColumnIndex(Table.COLUMN_CODE));
+        return new Language(languageName, languageCode);
     }
 
     /**
      * This class contains the database table architechture for recent searches,
      * It also contains queries and logic necessary to the create, update, delete this table.
      */
-    private ContentValues toContentValues(String recentLanguage) {
-        ContentValues cv = new ContentValues();
-        cv.put(RecentLanguagesDao.Table.COLUMN_NAME, recentLanguage);
+    private ContentValues toContentValues(final Language recentLanguage) {
+        final ContentValues cv = new ContentValues();
+        cv.put(Table.COLUMN_NAME, recentLanguage.getLanguageName());
+        cv.put(Table.COLUMN_CODE, recentLanguage.getLanguageCode());
         return cv;
     }
 
@@ -143,16 +146,19 @@ public class RecentLanguagesDao {
     public static class Table {
         public static final String TABLE_NAME = "recent_languages";
         static final String COLUMN_NAME = "language_name";
+        static final String COLUMN_CODE = "language_code";
 
         // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
         public static final String[] ALL_FIELDS = {
             COLUMN_NAME,
+            COLUMN_CODE
         };
 
         static final String DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS " + TABLE_NAME;
 
         static final String CREATE_TABLE_STATEMENT = "CREATE TABLE " + TABLE_NAME + " ("
-            + COLUMN_NAME + " STRING PRIMARY KEY"
+            + COLUMN_NAME + " STRING,"
+            + COLUMN_CODE + " STRING PRIMARY KEY"
             + ");";
 
         /**
