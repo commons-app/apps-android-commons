@@ -5,8 +5,13 @@ import static fr.free.nrw.commons.notification.NotificationHelper.NOTIFICATION_D
 import android.annotation.SuppressLint;
 import android.content.Context;
 import static fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources;
+
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnMultiChoiceClickListener;
+import android.content.DialogInterface.OnShowListener;
 import android.content.Intent;
 import android.net.Uri;
+import android.view.View.OnTouchListener;
 import androidx.appcompat.app.AlertDialog;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
@@ -182,6 +187,10 @@ public class DeleteHelper {
             } else {
                 mUserReason.remove((Integer.valueOf(position)));
             }
+
+            // disable the OK button if any reason is not selected
+            ((AlertDialog) dialogInterface).getButton(AlertDialog.BUTTON_POSITIVE)
+                .setEnabled(!mUserReason.isEmpty());
         });
 
         alert.setPositiveButton(context.getString(R.string.ok), (dialogInterface, i) -> {
@@ -215,5 +224,8 @@ public class DeleteHelper {
         alert.setNegativeButton(context.getString(R.string.cancel), (dialog, which) -> reviewCallback.onFailure());
         AlertDialog d = alert.create();
         d.show();
+
+        // set OK button disable by default
+        d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
     }
 }
