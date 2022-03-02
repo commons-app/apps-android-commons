@@ -183,43 +183,45 @@ public class DeleteHelper {
             } else {
                 mUserReason.remove((Integer.valueOf(position)));
             }
+
+            // disable the OK button if no reason selected
+            ((AlertDialog) dialogInterface).getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(
+                !mUserReason.isEmpty());
         });
 
         alert.setPositiveButton(context.getString(R.string.ok), (dialogInterface, i) -> {
 
-            if(!mUserReason.isEmpty()){
-                String reason = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_alert_set_positive_button_reason) + " ";
+            String reason = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_alert_set_positive_button_reason) + " ";
 
-                for (int j = 0; j < mUserReason.size(); j++) {
-                    reason = reason + reasonListEnglish[mUserReason.get(j)];
-                    if (j != mUserReason.size() - 1) {
-                        reason = reason + ", ";
-                    }
+            for (int j = 0; j < mUserReason.size(); j++) {
+                reason = reason + reasonListEnglish[mUserReason.get(j)];
+                if (j != mUserReason.size() - 1) {
+                    reason = reason + ", ";
                 }
-
-                Timber.d("thread is askReasonAndExecute %s", Thread.currentThread().getName());
-
-                String finalReason = reason;
-
-                Single.defer((Callable<SingleSource<Boolean>>) () ->
-                    makeDeletion(context, media, finalReason))
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(aBoolean -> {
-                        if (aBoolean) {
-                            reviewCallback.onSuccess();
-                        } else {
-                            reviewCallback.onFailure();
-                        }
-                    });
-            }else{
-                // No reason selected
-                Toast.makeText(context, context.getString(R.string.no_reason_selected), Toast.LENGTH_LONG).show();
             }
+
+            Timber.d("thread is askReasonAndExecute %s", Thread.currentThread().getName());
+
+            String finalReason = reason;
+
+            Single.defer((Callable<SingleSource<Boolean>>) () ->
+                makeDeletion(context, media, finalReason))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(aBoolean -> {
+                    if (aBoolean) {
+                        reviewCallback.onSuccess();
+                    } else {
+                        reviewCallback.onFailure();
+                    }
+                });
 
         });
         alert.setNegativeButton(context.getString(R.string.cancel), (dialog, which) -> reviewCallback.onFailure());
         AlertDialog d = alert.create();
         d.show();
+
+        // disable the OK button by default
+        d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
     }
 }
