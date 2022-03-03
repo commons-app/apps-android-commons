@@ -172,7 +172,7 @@ public class CommonsApplicationModule {
     @Provides
     @Named("recent_languages")
     public ContentProviderClient provideRecentLanguagesContentProviderClient(Context context) {
-        return context.getContentResolver().acquireContentProviderClient(BuildConfig.BOOKMARK_ITEMS_AUTHORITY);
+        return context.getContentResolver().acquireContentProviderClient(BuildConfig.RECENT_LANGUAGE_AUTHORITY);
     }
 
     /**

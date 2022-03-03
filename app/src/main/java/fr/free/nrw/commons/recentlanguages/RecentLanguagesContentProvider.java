@@ -117,7 +117,7 @@ public class RecentLanguagesContentProvider extends CommonsDaggerContentProvider
         Timber.d("Deleting bookmark name %s", uri.getLastPathSegment());
         rows = db.delete(
             TABLE_NAME,
-            "item_id = ?",
+            "language_code = ?",
             new String[]{uri.getLastPathSegment()}
         );
         getContext().getContentResolver().notifyChange(uri, null);

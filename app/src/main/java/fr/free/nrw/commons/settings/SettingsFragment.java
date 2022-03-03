@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
@@ -41,11 +42,13 @@ import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.recentlanguages.Language;
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter;
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao;
 import fr.free.nrw.commons.upload.LanguagesAdapter;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -257,23 +260,37 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         EditText editText = dialog.findViewById(R.id.search_language);
         ListView listView = dialog.findViewById(R.id.language_list);
         languageHistoryListView = dialog.findViewById(R.id.language_history_list);
-        recentLanguagesTextView = dialog.findViewById(R.id.recent_searches_text_view);
+        recentLanguagesTextView = dialog.findViewById(R.id.recent_searches);
         separator = dialog.findViewById(R.id.separator);
 
         if (recentLanguages.isEmpty()) {
             languageHistoryListView.setVisibility(View.GONE);
             recentLanguagesTextView.setVisibility(View.GONE);
             separator.setVisibility(View.GONE);
+        } else {
+            if (recentLanguages.size() > 5) {
+                for (int i = recentLanguages.size()-1; i >=5; i--) {
+                    recentLanguagesDao.deleteRecentLanguage(recentLanguages.get(i).getLanguageCode());
+                }
+            }
+            languageHistoryListView.setVisibility(View.VISIBLE);
+            recentLanguagesTextView.setVisibility(View.VISIBLE);
+            separator.setVisibility(View.VISIBLE);
+            RecentLanguagesAdapter recentLanguagesAdapter
+                = new RecentLanguagesAdapter(
+                    getActivity(), recentLanguagesDao.getRecentLanguages(), selectedLanguages);
+            languageHistoryListView.setAdapter(recentLanguagesAdapter);
         }
 
         listView.setAdapter(languagesAdapter);
-
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1,
                 int i2) {
-
+                languageHistoryListView.setVisibility(View.GONE);
+                recentLanguagesTextView.setVisibility(View.GONE);
+                separator.setVisibility(View.GONE);
             }
 
             @Override
@@ -294,6 +311,13 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 long l) {
                 String languageCode = ((LanguagesAdapter) adapterView.getAdapter())
                     .getLanguageCode(i);
+                String languageName = ((LanguagesAdapter) adapterView.getAdapter())
+                    .getLanguageName(i);
+                boolean isExists = recentLanguagesDao.findRecentLanguage(languageCode);
+                if (isExists) {
+                    recentLanguagesDao.deleteRecentLanguage(languageCode);
+                }
+                recentLanguagesDao.addRecentLanguage(new Language(languageName, languageCode));
                 saveLanguageValue(languageCode, keyListPreference);
                 Locale defLocale = new Locale(languageCode);
                 if(keyListPreference.equals("appUiDefaultLanguagePref")) {

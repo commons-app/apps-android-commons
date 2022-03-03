@@ -36,8 +36,11 @@ public class RecentLanguagesDao {
             null,
             new String[]{},
             null)) {
-            while (cursor != null && cursor.moveToNext()) {
-                items.add(fromCursor(cursor));
+            if(cursor != null ) {
+                cursor.moveToLast();
+                do {
+                    items.add(fromCursor(cursor));
+                } while (cursor.moveToPrevious());
             }
         } catch (final RemoteException e) {
             throw new RuntimeException(e);
@@ -51,7 +54,7 @@ public class RecentLanguagesDao {
      * Add a Bookmark to database
      * @param language : Bookmark to add
      */
-    private void addRecentLanguage(final Language language) {
+    public void addRecentLanguage(final Language language) {
         final ContentProviderClient db = clientProvider.get();
         try {
             db.insert(RecentLanguagesContentProvider.BASE_URI, toContentValues(language));
@@ -64,12 +67,12 @@ public class RecentLanguagesDao {
 
     /**
      * Delete a bookmark from database
-     * @param language : Bookmark to delete
+     * @param languageCode : Bookmark to delete
      */
-    private void deleteRecentLanguage(final String language) {
+    public void deleteRecentLanguage(final String languageCode) {
         final ContentProviderClient db = clientProvider.get();
         try {
-            db.delete(RecentLanguagesContentProvider.uriForName(language), null, null);
+            db.delete(RecentLanguagesContentProvider.uriForName(languageCode), null, null);
         } catch (final RemoteException e) {
             throw new RuntimeException(e);
         } finally {
@@ -79,11 +82,11 @@ public class RecentLanguagesDao {
 
     /**
      * Find a bookmark from database based on its name
-     * @param language : Bookmark to find
+     * @param languageCode : Bookmark to find
      * @return boolean : is bookmark in database ?
      */
-    public boolean findRecentLanguage(final String language) {
-        if (language == null) { //Avoiding NPE's
+    public boolean findRecentLanguage(final String languageCode) {
+        if (languageCode == null) { //Avoiding NPE's
             return false;
         }
         final ContentProviderClient db = clientProvider.get();
@@ -91,7 +94,7 @@ public class RecentLanguagesDao {
             RecentLanguagesContentProvider.BASE_URI,
             RecentLanguagesDao.Table.ALL_FIELDS,
             Table.COLUMN_CODE + "=?",
-            new String[]{language},
+            new String[]{languageCode},
             null
         )) {
             if (cursor != null && cursor.moveToFirst()) {
