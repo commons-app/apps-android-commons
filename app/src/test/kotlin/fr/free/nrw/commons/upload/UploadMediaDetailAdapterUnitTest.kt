@@ -5,6 +5,7 @@ import android.widget.GridLayout
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -36,12 +37,15 @@ class UploadMediaDetailAdapterUnitTest {
     @Mock
     private lateinit var eventListener: UploadMediaDetailAdapter.EventListener
 
+    @Mock
+    private lateinit var recentLanguagesDao: RecentLanguagesDao
+
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         uploadMediaDetails = mutableListOf(uploadMediaDetail, uploadMediaDetail)
         activity = Robolectric.buildActivity(UploadActivity::class.java).get()
-        adapter = UploadMediaDetailAdapter("")
+        adapter = UploadMediaDetailAdapter("", recentLanguagesDao)
         context = RuntimeEnvironment.application.applicationContext
         Whitebox.setInternalState(adapter, "uploadMediaDetails", uploadMediaDetails)
         Whitebox.setInternalState(adapter, "eventListener", eventListener)
