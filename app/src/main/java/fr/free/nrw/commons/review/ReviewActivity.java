@@ -170,10 +170,11 @@ public class ReviewActivity extends BaseActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(media -> {
-                    // This REST API request will respond with
-                    // category type (hidden/non-hidden) for each category in the file
+                    // Finds non-hidden categories from Media instance
                     for(String key : media.getDetailedCategories().keySet()) {
                         String value = media.getDetailedCategories().get(key);
+                        // If non-hidden category is found then set hasNonHiddenCategories to true
+                        // so that category review cannot be skipped
                         if(value.equals("false")) {
                             hasNonHiddenCategories = true;
                             break;
@@ -182,25 +183,6 @@ public class ReviewActivity extends BaseActivity {
                     reviewImageFragment = getInstanceOfReviewImageFragment();
                     reviewImageFragment.disableButtons();
                     updateImage(media);
-
-//                    Service service = ServiceFactory.get(new WikiSite(Service.COMMONS_URL)
-//                        , Service.COMMONS_URL, Service.class);
-//
-//                    service.getCategories(media.getPageTitle().getDisplayText())
-//                        .subscribeOn(Schedulers.io())
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribe(response -> {
-//                            for(Category category : response.query().firstPage().categories()) {
-//                                if(!category.hidden()) {
-//                                    hasNonHiddenCategories = true;
-//                                    break;
-//                                }
-//                            }
-//
-//
-//                        }, error -> {
-//                            error.printStackTrace();
-//                        });
                 }));
         return true;
     }

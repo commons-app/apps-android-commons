@@ -3,7 +3,6 @@ package fr.free.nrw.commons.media;
 import io.reactivex.Single;
 import java.util.Map;
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -16,7 +15,10 @@ public interface MediaInterface {
             "&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal" +
             "|Artist|LicenseShortName|LicenseUrl";
 
-    String MEDIA_PARAMS_CATEGORIES="&clprop=hidden&prop=categories|imageinfo&iiprop=url|extmetadata|user&&iiurlwidth=640" +
+    /**
+     * fetches category detail(title, hidden) for each category along with File information
+     */
+    String MEDIA_PARAMS_WITH_CATEGORY_DETAILS ="&clprop=hidden&prop=categories|imageinfo&iiprop=url|extmetadata|user&&iiurlwidth=640" +
         "&iiextmetadatafilter=DateTime|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal" +
         "|Artist|LicenseShortName|LicenseUrl";
 
@@ -85,7 +87,7 @@ public interface MediaInterface {
      * @return
      */
     @GET("w/api.php?action=query&format=json&formatversion=2" +
-        MEDIA_PARAMS_CATEGORIES)
+        MEDIA_PARAMS_WITH_CATEGORY_DETAILS)
     Single<MwQueryResponse> getMedia(@Query("titles") String title);
 
     /**

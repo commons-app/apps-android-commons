@@ -20,6 +20,7 @@ class MediaConverter @Inject constructor() {
     fun convert(page: MwQueryPage, entity: Entities.Entity, imageInfo: ImageInfo): Media {
         val metadata = imageInfo.metadata
         requireNotNull(metadata) { "No metadata" }
+        // Stores mapping of title attribute to hidden attribute of each category
         val myMap = mutableMapOf<String, String>()
         page.categories()?.forEach { myMap[it.title()] = ("" + it.hidden()) }
 
