@@ -169,10 +169,17 @@ public class CommonsApplicationModule {
         return context.getContentResolver().acquireContentProviderClient(BuildConfig.BOOKMARK_ITEMS_AUTHORITY);
     }
 
+    /**
+     * This method is used to provide instance of RecentLanguagesContentProvider
+     * which provides content of recent used languages from database
+     * @param context Context
+     * @return returns RecentLanguagesContentProvider
+     */
     @Provides
     @Named("recent_languages")
-    public ContentProviderClient provideRecentLanguagesContentProviderClient(Context context) {
-        return context.getContentResolver().acquireContentProviderClient(BuildConfig.RECENT_LANGUAGE_AUTHORITY);
+    public ContentProviderClient provideRecentLanguagesContentProviderClient(final Context context) {
+        return context.getContentResolver()
+            .acquireContentProviderClient(BuildConfig.RECENT_LANGUAGE_AUTHORITY);
     }
 
     /**

@@ -74,6 +74,9 @@ class LanguagesAdapter constructor(
         return languageCodesList[position]
     }
 
+    /**
+     * Provides name of a language from languages for a specific position
+     */
     fun getLanguageName(position: Int): String {
         return languageNamesList[position]
     }

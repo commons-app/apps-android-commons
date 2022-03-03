@@ -11,12 +11,19 @@ import kotlinx.android.synthetic.main.row_item_languages_spinner.view.*
 import org.apache.commons.lang3.StringUtils
 import java.util.HashMap
 
+/**
+ * Array adapter for recent languages
+ */
 class RecentLanguagesAdapter constructor(
     context: Context,
     var recentLanguages: List<Language>,
     private val selectedLanguages: HashMap<*, String>
 ) : ArrayAdapter<String?>(context, R.layout.row_item_languages_spinner) {
 
+    /**
+     * Selected language code in UploadMediaDetailAdapter
+     * Used for marking selected ones
+     */
     var selectedLangCode = ""
 
     override fun isEnabled(position: Int) = recentLanguages[position].languageCode.let {
@@ -25,14 +32,10 @@ class RecentLanguagesAdapter constructor(
 
     override fun getCount() = recentLanguages.size
 
-
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        var rowView: View
-        if(convertView != null) {
-            rowView =  convertView
-        }else {
-            rowView = LayoutInflater.from(context).inflate(R.layout.row_item_languages_spinner, parent, false)
-        }
+        val rowView: View = convertView
+            ?: LayoutInflater.from(context)
+                .inflate(R.layout.row_item_languages_spinner, parent, false)
         val languageCode = recentLanguages[position].languageCode
         val languageName = recentLanguages[position].languageName
         rowView.tv_language.let {
@@ -49,10 +52,16 @@ class RecentLanguagesAdapter constructor(
         return rowView
     }
 
+    /**
+     * Provides code of a language from recent languages for a specific position
+     */
     fun getLanguageCode(position: Int): String {
         return recentLanguages[position].languageCode
     }
 
+    /**
+     * Provides name of a language from recent languages for a specific position
+     */
     fun getLanguageName(position: Int): String {
         return recentLanguages[position].languageName
     }

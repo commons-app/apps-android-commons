@@ -233,7 +233,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                         languageHistoryListView.setVisibility(View.VISIBLE);
                         recentLanguagesTextView.setVisibility(View.VISIBLE);
                         separator.setVisibility(View.VISIBLE);
-                        RecentLanguagesAdapter recentLanguagesAdapter
+                        final RecentLanguagesAdapter recentLanguagesAdapter
                             = new RecentLanguagesAdapter(
                                 descriptionLanguages.getContext(),
                                 recentLanguagesDao.getRecentLanguages(),
@@ -266,12 +266,12 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
 
                     languageHistoryListView.setOnItemClickListener((adapterView, view1, position, id) -> {
                         description.setSelectedLanguageIndex(position);
-                        String languageCode = ((RecentLanguagesAdapter) adapterView.getAdapter())
+                        final String languageCode = ((RecentLanguagesAdapter) adapterView.getAdapter())
                             .getLanguageCode(position);
                         description.setLanguageCode(languageCode);
-                        String languageName = ((RecentLanguagesAdapter) adapterView.getAdapter())
+                        final String languageName = ((RecentLanguagesAdapter) adapterView.getAdapter())
                             .getLanguageName(position);
-                        boolean isExists = recentLanguagesDao.findRecentLanguage(languageCode);
+                        final boolean isExists = recentLanguagesDao.findRecentLanguage(languageCode);
                         if (isExists) {
                             recentLanguagesDao.deleteRecentLanguage(languageCode);
                         }
@@ -281,7 +281,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                         selectedLanguages.put(position, languageCode);
                         ((RecentLanguagesAdapter) adapterView
                             .getAdapter()).setSelectedLangCode(languageCode);
-                        Timber.d("Description language code is: " + languageCode);
+                        Timber.d("Description language code is: %s", languageCode);
                         descriptionLanguages.setText(languageCode);
                         dialog.dismiss();
                     });
@@ -294,13 +294,15 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                             String languageCode = ((LanguagesAdapter) adapterView.getAdapter())
                                 .getLanguageCode(i);
                             description.setLanguageCode(languageCode);
-                            String languageName = ((LanguagesAdapter) adapterView.getAdapter())
-                                .getLanguageName(i);
-                            boolean isExists = recentLanguagesDao.findRecentLanguage(languageCode);
+                            final String languageName
+                                = ((LanguagesAdapter) adapterView.getAdapter()).getLanguageName(i);
+                            final boolean isExists
+                                = recentLanguagesDao.findRecentLanguage(languageCode);
                             if (isExists) {
                                 recentLanguagesDao.deleteRecentLanguage(languageCode);
                             }
-                            recentLanguagesDao.addRecentLanguage(new Language(languageName, languageCode));
+                            recentLanguagesDao
+                                .addRecentLanguage(new Language(languageName, languageCode));
 
                             selectedLanguages.remove(position);
                             selectedLanguages.put(position, languageCode);

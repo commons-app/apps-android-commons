@@ -6,7 +6,6 @@ import fr.free.nrw.commons.explore.categories.CategoriesModule;
 import fr.free.nrw.commons.navtab.MoreBottomSheetFragment;
 import fr.free.nrw.commons.navtab.MoreBottomSheetLoggedOutFragment;
 import fr.free.nrw.commons.navtab.NavTabLayout;
-import fr.free.nrw.commons.upload.UploadMediaDetailAdapter;
 import fr.free.nrw.commons.upload.worker.UploadWorker;
 import javax.inject.Singleton;
 

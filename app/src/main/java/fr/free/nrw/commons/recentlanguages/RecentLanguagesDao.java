@@ -13,22 +13,26 @@ import javax.inject.Named;
 import javax.inject.Provider;
 import javax.inject.Singleton;
 
+/**
+ * Handles database operations for recently used languages
+ */
 @Singleton
 public class RecentLanguagesDao {
 
     private final Provider<ContentProviderClient> clientProvider;
 
     @Inject
-    public RecentLanguagesDao(@Named("recent_languages") Provider<ContentProviderClient> clientProvider) {
+    public RecentLanguagesDao
+        (@Named("recent_languages") final Provider<ContentProviderClient> clientProvider) {
         this.clientProvider = clientProvider;
     }
 
     /**
-     * Find all persisted items bookmarks on database
-     * @return list of bookmarks
+     * Find all persisted items recently used languages on database
+     * @return list of recently used languages
      */
     public List<Language> getRecentLanguages() {
-        final List<Language> items = new ArrayList<>();
+        final List<Language> languages = new ArrayList<>();
         final ContentProviderClient db = clientProvider.get();
         try (final Cursor cursor = db.query(
             RecentLanguagesContentProvider.BASE_URI,
@@ -38,7 +42,7 @@ public class RecentLanguagesDao {
             null)) {
             if(cursor != null && cursor.moveToLast()) {
                 do {
-                    items.add(fromCursor(cursor));
+                    languages.add(fromCursor(cursor));
                 } while (cursor.moveToPrevious());
             }
         } catch (final RemoteException e) {
@@ -46,12 +50,12 @@ public class RecentLanguagesDao {
         } finally {
             db.release();
         }
-        return items;
+        return languages;
     }
 
     /**
-     * Add a Bookmark to database
-     * @param language : Bookmark to add
+     * Add a Language to database
+     * @param language : Language to add
      */
     public void addRecentLanguage(final Language language) {
         final ContentProviderClient db = clientProvider.get();
@@ -65,8 +69,8 @@ public class RecentLanguagesDao {
     }
 
     /**
-     * Delete a bookmark from database
-     * @param languageCode : Bookmark to delete
+     * Delete a language from database
+     * @param languageCode : code of the Language to delete
      */
     public void deleteRecentLanguage(final String languageCode) {
         final ContentProviderClient db = clientProvider.get();
@@ -80,9 +84,9 @@ public class RecentLanguagesDao {
     }
 
     /**
-     * Find a bookmark from database based on its name
-     * @param languageCode : Bookmark to find
-     * @return boolean : is bookmark in database ?
+     * Find a language from database based on its name
+     * @param languageCode : code of the Language to find
+     * @return boolean : is language in database ?
      */
     public boolean findRecentLanguage(final String languageCode) {
         if (languageCode == null) { //Avoiding NPE's
@@ -108,9 +112,9 @@ public class RecentLanguagesDao {
     }
 
     /**
-     * It creates an Recent Searches object from data stored in the SQLite DB by using cursor
-     * @param cursor
-     * @return RecentSearch object
+     * It creates an Recent Language object from data stored in the SQLite DB by using cursor
+     * @param cursor cursor
+     * @return Language object
      */
     @NonNull
     Language fromCursor(final Cursor cursor) {
@@ -121,8 +125,9 @@ public class RecentLanguagesDao {
     }
 
     /**
-     * This class contains the database table architechture for recent searches,
-     * It also contains queries and logic necessary to the create, update, delete this table.
+     * Takes data from Language and create a content value object
+     * @param recentLanguage recently used language
+     * @return ContentValues
      */
     private ContentValues toContentValues(final Language recentLanguage) {
         final ContentValues cv = new ContentValues();
@@ -132,10 +137,10 @@ public class RecentLanguagesDao {
     }
 
     /**
-     * This class contains the database table architechture for recent searches,
+     * This class contains the database table architecture for recently used languages,
      * It also contains queries and logic necessary to the create, update, delete this table.
      */
-    public static class Table {
+    public static final class Table {
         public static final String TABLE_NAME = "recent_languages";
         static final String COLUMN_NAME = "language_name";
         static final String COLUMN_CODE = "language_code";
@@ -154,18 +159,18 @@ public class RecentLanguagesDao {
             + ");";
 
         /**
-         * This method creates a RecentSearchesTable in SQLiteDatabase
+         * This method creates a LanguagesTable in SQLiteDatabase
          * @param db SQLiteDatabase
          */
-        public static void onCreate(SQLiteDatabase db) {
+        public static void onCreate(final SQLiteDatabase db) {
             db.execSQL(CREATE_TABLE_STATEMENT);
         }
 
         /**
-         * This method deletes RecentSearchesTable from SQLiteDatabase
+         * This method deletes LanguagesTable from SQLiteDatabase
          * @param db SQLiteDatabase
          */
-        public static void onDelete(SQLiteDatabase db) {
+        public static void onDelete(final SQLiteDatabase db) {
             db.execSQL(DROP_TABLE_STATEMENT);
             onCreate(db);
         }
@@ -176,7 +181,7 @@ public class RecentLanguagesDao {
          * @param from Version from which we are migrating
          * @param to Version to which we are migrating
          */
-        public static void onUpdate(SQLiteDatabase db, int from, int to) {
+        public static void onUpdate(final SQLiteDatabase db, int from, final int to) {
             if (from == to) {
                 return;
             }

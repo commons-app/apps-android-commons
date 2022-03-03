@@ -16,6 +16,9 @@ import fr.free.nrw.commons.di.CommonsDaggerContentProvider;
 import javax.inject.Inject;
 import timber.log.Timber;
 
+/**
+ * Content provider of recently used languages
+ */
 public class RecentLanguagesContentProvider extends CommonsDaggerContentProvider {
 
     private static final String BASE_PATH = "recent_languages";
@@ -24,10 +27,11 @@ public class RecentLanguagesContentProvider extends CommonsDaggerContentProvider
 
 
     /**
-     * Append bookmark items ID to the base uri
+     * Append language code to the base uri
+     * @param languageCode Code of a language
      */
-    public static Uri uriForName(final String id) {
-        return Uri.parse(BASE_URI + "/" + id);
+    public static Uri uriForName(final String languageCode) {
+        return Uri.parse(BASE_URI + "/" + languageCode);
     }
 
     @Inject
@@ -39,14 +43,13 @@ public class RecentLanguagesContentProvider extends CommonsDaggerContentProvider
     }
 
     /**
-     * Queries the SQLite database for the bookmark items
-     * @param uri : contains the uri for bookmark items
+     * Queries the SQLite database for the recently used languages
+     * @param uri : contains the uri for recently used languages
      * @param projection : contains the all fields of the table
      * @param selection : handles Where
      * @param selectionArgs : the condition of Where clause
      * @param sortOrder : ascending or descending
      */
-    @SuppressWarnings("ConstantConditions")
     @Override
     public Cursor query(@NonNull final Uri uri, final String[] projection, final String selection,
         final String[] selectionArgs, final String sortOrder) {
@@ -61,12 +64,11 @@ public class RecentLanguagesContentProvider extends CommonsDaggerContentProvider
 
     /**
      * Handles the update query of local SQLite Database
-     * @param uri : contains the uri for bookmark items
+     * @param uri : contains the uri for recently used languages
      * @param contentValues : new values to be entered to db
      * @param selection : handles Where
      * @param selectionArgs : the condition of Where clause
      */
-    @SuppressWarnings("ConstantConditions")
     @Override
     public int update(@NonNull final Uri uri, final ContentValues contentValues,
         final String selection, final String[] selectionArgs) {
@@ -88,12 +90,10 @@ public class RecentLanguagesContentProvider extends CommonsDaggerContentProvider
     }
 
     /**
-     * Handles the insertion of new bookmark items record to local SQLite Database
-     * @param uri
-     * @param contentValues
-     * @return
+     * Handles the insertion of new recently used languages record to local SQLite Database
+     * @param uri : contains the uri for recently used languages
+     * @param contentValues : new values to be entered to db
      */
-    @SuppressWarnings("ConstantConditions")
     @Override
     public Uri insert(@NonNull final Uri uri, final ContentValues contentValues) {
         final SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
@@ -103,18 +103,14 @@ public class RecentLanguagesContentProvider extends CommonsDaggerContentProvider
     }
 
     /**
-     * Handles the deletion of new bookmark items record to local SQLite Database
-     * @param uri
-     * @param s
-     * @param strings
-     * @return
+     * Handles the deletion of new recently used languages record to local SQLite Database
+     * @param uri : contains the uri for recently used languages
      */
-    @SuppressWarnings("ConstantConditions")
     @Override
     public int delete(@NonNull final Uri uri, final String s, final String[] strings) {
         final int rows;
         final SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
-        Timber.d("Deleting bookmark name %s", uri.getLastPathSegment());
+        Timber.d("Deleting recently used language %s", uri.getLastPathSegment());
         rows = db.delete(
             TABLE_NAME,
             "language_code = ?",

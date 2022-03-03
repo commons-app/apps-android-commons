@@ -270,13 +270,14 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         } else {
             if (recentLanguages.size() > 5) {
                 for (int i = recentLanguages.size()-1; i >=5; i--) {
-                    recentLanguagesDao.deleteRecentLanguage(recentLanguages.get(i).getLanguageCode());
+                    recentLanguagesDao
+                        .deleteRecentLanguage(recentLanguages.get(i).getLanguageCode());
                 }
             }
             languageHistoryListView.setVisibility(View.VISIBLE);
             recentLanguagesTextView.setVisibility(View.VISIBLE);
             separator.setVisibility(View.VISIBLE);
-            RecentLanguagesAdapter recentLanguagesAdapter
+            final RecentLanguagesAdapter recentLanguagesAdapter
                 = new RecentLanguagesAdapter(
                     getActivity(),
                     recentLanguagesDao.getRecentLanguages(),
@@ -308,24 +309,25 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         });
 
         languageHistoryListView.setOnItemClickListener((adapterView, view, position, id) -> {
-            String recentLanguageCode = ((RecentLanguagesAdapter) adapterView.getAdapter())
+            final String recentLanguageCode = ((RecentLanguagesAdapter) adapterView.getAdapter())
                 .getLanguageCode(position);
-            String recentLanguageName = ((RecentLanguagesAdapter) adapterView.getAdapter())
+            final String recentLanguageName = ((RecentLanguagesAdapter) adapterView.getAdapter())
                 .getLanguageName(position);
-            boolean isExists = recentLanguagesDao.findRecentLanguage(recentLanguageCode);
+            final boolean isExists = recentLanguagesDao.findRecentLanguage(recentLanguageCode);
             if (isExists) {
                 recentLanguagesDao.deleteRecentLanguage(recentLanguageCode);
             }
-            recentLanguagesDao.addRecentLanguage(new Language(recentLanguageName, recentLanguageCode));
+            recentLanguagesDao.addRecentLanguage(
+                new Language(recentLanguageName, recentLanguageCode));
             saveLanguageValue(recentLanguageCode, keyListPreference);
-            Locale defLocale = new Locale(recentLanguageCode);
-            if(keyListPreference.equals("appUiDefaultLanguagePref")) {
+            final Locale defLocale = new Locale(recentLanguageCode);
+            if (keyListPreference.equals("appUiDefaultLanguagePref")) {
                 appUiLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
                 setLocale(Objects.requireNonNull(getActivity()), recentLanguageCode);
                 getActivity().recreate();
                 final Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
-            }else {
+            } else {
                 descriptionLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
             }
             dialog.dismiss();
@@ -337,9 +339,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 long l) {
                 String languageCode = ((LanguagesAdapter) adapterView.getAdapter())
                     .getLanguageCode(i);
-                String languageName = ((LanguagesAdapter) adapterView.getAdapter())
+                final String languageName = ((LanguagesAdapter) adapterView.getAdapter())
                     .getLanguageName(i);
-                boolean isExists = recentLanguagesDao.findRecentLanguage(languageCode);
+                final boolean isExists = recentLanguagesDao.findRecentLanguage(languageCode);
                 if (isExists) {
                     recentLanguagesDao.deleteRecentLanguage(languageCode);
                 }
