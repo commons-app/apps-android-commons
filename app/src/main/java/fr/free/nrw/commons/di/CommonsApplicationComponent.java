@@ -54,8 +54,6 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
     void inject(LoginActivity activity);
 
     void inject(SettingsFragment fragment);
-//
-//    void inject(UploadMediaDetailAdapter uploadMediaDetailAdapter);
 
     void inject(MoreBottomSheetFragment fragment);
 
