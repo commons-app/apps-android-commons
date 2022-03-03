@@ -11,13 +11,14 @@ import timber.log.Timber
 abstract class BasePagingMapPresenter<T>(
     val mainThreadScheduler: Scheduler,
     val pageableBaseDataSource: PageableBaseDataSource<T>,
-    val isFromSearchActivity: Boolean
 ) : PagingContract.Presenter<T> {
 
-private val DUMMY: PagingContract.View<T> = proxy()
-private var view: PagingContract.View<T> = DUMMY
+    val isFromSearchActivity: Boolean = false
 
-private val compositeDisposable = CompositeDisposable()
+    private val DUMMY: PagingContract.View<T> = proxy()
+    private var view: PagingContract.View<T> = DUMMY
+
+    private val compositeDisposable = CompositeDisposable()
     override val listFooterData = MutableLiveData<List<FooterItem>>().apply { value = emptyList() }
 
     override fun onAttachView(view: PagingContract.View<T>) {

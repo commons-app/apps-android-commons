@@ -16,8 +16,6 @@ interface ExploreMapMediaPresenter : PagingContract.Presenter<Media>
  */
 class ExploreMapMediaPresenterIml @Inject constructor(
     @Named(CommonsApplicationModule.MAIN_THREAD) mainThreadScheduler: Scheduler,
-    dataSourceFactory: ExploreMapMediaDataSource,
-    isFromSearchActivity: Boolean
-    //@Named(ExploreMapModule) isFromSearchActivity: Boolean
-) : BasePagingMapPresenter<Media>(mainThreadScheduler, dataSourceFactory, isFromSearchActivity),
+    dataSourceFactory: ExploreMapMediaDataSource
+) : BasePagingMapPresenter<Media>(mainThreadScheduler, dataSourceFactory),
     ExploreMapMediaPresenter
