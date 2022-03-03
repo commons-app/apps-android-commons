@@ -278,7 +278,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             separator.setVisibility(View.VISIBLE);
             RecentLanguagesAdapter recentLanguagesAdapter
                 = new RecentLanguagesAdapter(
-                    getActivity(), recentLanguagesDao.getRecentLanguages(), selectedLanguages);
+                    getActivity(),
+                    recentLanguagesDao.getRecentLanguages(),
+                    selectedLanguages);
             languageHistoryListView.setAdapter(recentLanguagesAdapter);
         }
 

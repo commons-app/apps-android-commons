@@ -6,6 +6,7 @@ import fr.free.nrw.commons.explore.categories.CategoriesModule;
 import fr.free.nrw.commons.navtab.MoreBottomSheetFragment;
 import fr.free.nrw.commons.navtab.MoreBottomSheetLoggedOutFragment;
 import fr.free.nrw.commons.navtab.NavTabLayout;
+import fr.free.nrw.commons.upload.UploadMediaDetailAdapter;
 import fr.free.nrw.commons.upload.worker.UploadWorker;
 import javax.inject.Singleton;
 
@@ -53,6 +54,8 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
     void inject(LoginActivity activity);
 
     void inject(SettingsFragment fragment);
+//
+//    void inject(UploadMediaDetailAdapter uploadMediaDetailAdapter);
 
     void inject(MoreBottomSheetFragment fragment);
 

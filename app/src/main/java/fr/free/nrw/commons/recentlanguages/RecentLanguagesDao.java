@@ -36,8 +36,7 @@ public class RecentLanguagesDao {
             null,
             new String[]{},
             null)) {
-            if(cursor != null ) {
-                cursor.moveToLast();
+            if(cursor != null && cursor.moveToLast()) {
                 do {
                     items.add(fromCursor(cursor));
                 } while (cursor.moveToPrevious());
