@@ -84,35 +84,35 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
             lastOpenFolderName?.let { onFolderClick(lastOpenFolderId, it, lastItemId) }
         }
 
-        // Checks if the Image gallery is empty.
-        if(isImageGalleryEmpty()) {
-            val linearLayout: LinearLayout = findViewById<View>(R.id.linear_layout_noimage) as LinearLayout
-            val textView = TextView(this)
-            textView.text = "No Image Found"
-            textView.textSize = 20f
-            linearLayout.addView(textView)
-        }
+//        // Checks if the Image gallery is empty.
+//        if(isImageGalleryEmpty()) {
+//            val linearLayout: LinearLayout = findViewById<View>(R.id.linear_layout_noimage) as LinearLayout
+//            val textView = TextView(this)
+//            textView.text = "No images found."
+//            textView.textSize = 20f
+//            linearLayout.addView(textView)
+//        }
     }
 
-    /**
-     * Checks for no image in gallery.
-     */
-    private fun isImageGalleryEmpty(): Boolean {
-        try {
-            val projection = arrayOf(MediaStore.Images.Media._ID)
-            val cursor: Cursor? = contentResolver.query(
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                projection, null, null, null
-            )
-
-            val size: Int? = cursor?.count
-            // If size is 0, there are no images on the SD Card.
-            return size == 0
-
-        } catch (e: Exception) {
-        }
-        return false
-    }
+//    /**
+//     * Checks for no image in gallery.
+//     */
+//    private fun isImageGalleryEmpty(): Boolean {
+//        try {
+//            val projection = arrayOf(MediaStore.Images.Media._ID)
+//            val cursor: Cursor? = contentResolver.query(
+//                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+//                projection, null, null, null
+//            )
+//
+//            val size: Int? = cursor?.count
+//            // If size is 0, there are no images on the SD Card.
+//            return size == 0
+//
+//        } catch (e: Exception) {
+//        }
+//        return false
+//    }
 
     /**
      * Show Custom Selector Welcome Dialog.
