@@ -6,21 +6,20 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.viewpager.widget.ViewPager;
+import fr.free.nrw.commons.databinding.ActivityWelcomeBinding;
+import fr.free.nrw.commons.utils.ConfigUtils;
 
 import com.viewpagerindicator.CirclePageIndicator;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
 import fr.free.nrw.commons.quiz.QuizActivity;
 import fr.free.nrw.commons.theme.BaseActivity;
-import fr.free.nrw.commons.utils.ConfigUtils;
 
 public class WelcomeActivity extends BaseActivity {
 
-    @BindView(R.id.welcomePager)
+    private ActivityWelcomeBinding binding;
+
     ViewPager pager;
-    @BindView(R.id.welcomePagerIndicator)
     CirclePageIndicator indicator;
 
     private WelcomePagerAdapter adapter = new WelcomePagerAdapter();
@@ -34,7 +33,10 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
+
+        binding = ActivityWelcomeBinding.inflate(getLayoutInflater());
+        final View view = binding.getRoot();
+        setContentView(view);
 
         if (getIntent() != null) {
             Bundle bundle = getIntent().getExtras();
@@ -47,14 +49,13 @@ public class WelcomeActivity extends BaseActivity {
 
         // Enable skip button if beta flavor
         if (ConfigUtils.isBetaFlavour()) {
-            findViewById(R.id.finishTutorialButton).setVisibility(View.VISIBLE);
+            binding.finishTutorialButton.setVisibility(View.VISIBLE);
         }
+        
+        binding.welcomePager.setAdapter(adapter);
+        binding.welcomePagerIndicator.setViewPager(binding.welcomePager);
 
-        ButterKnife.bind(this);
-
-        pager.setAdapter(adapter);
-        indicator.setViewPager(pager);
-    }
+        binding.finishTutorialButton.setOnClickListener(v -> finishTutorial());    }
 
     /**
      * References WelcomePageAdapter to null before the activity is destroyed
@@ -83,8 +84,8 @@ public class WelcomeActivity extends BaseActivity {
      */
     @Override
     public void onBackPressed() {
-        if (pager.getCurrentItem() != 0) {
-            pager.setCurrentItem(pager.getCurrentItem() - 1, true);
+        if (binding.welcomePager.getCurrentItem() != 0) {
+            binding.welcomePager.setCurrentItem(binding.welcomePager.getCurrentItem() - 1, true);
         } else {
             if (defaultKvStore.getBoolean("firstrun", true)) {
                 finishAffinity();
@@ -94,7 +95,6 @@ public class WelcomeActivity extends BaseActivity {
         }
     }
 
-    @OnClick(R.id.finishTutorialButton)
     public void finishTutorial() {
         defaultKvStore.putBoolean("firstrun", false);
         finish();
