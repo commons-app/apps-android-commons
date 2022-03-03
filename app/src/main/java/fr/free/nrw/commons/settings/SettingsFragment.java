@@ -305,6 +305,30 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             }
         });
 
+        languageHistoryListView.setOnItemClickListener((adapterView, view, position, id) -> {
+            String recentLanguageCode = ((RecentLanguagesAdapter) adapterView.getAdapter())
+                .getLanguageCode(position);
+            String recentLanguageName = ((RecentLanguagesAdapter) adapterView.getAdapter())
+                .getLanguageName(position);
+            boolean isExists = recentLanguagesDao.findRecentLanguage(recentLanguageCode);
+            if (isExists) {
+                recentLanguagesDao.deleteRecentLanguage(recentLanguageCode);
+            }
+            recentLanguagesDao.addRecentLanguage(new Language(recentLanguageName, recentLanguageCode));
+            saveLanguageValue(recentLanguageCode, keyListPreference);
+            Locale defLocale = new Locale(recentLanguageCode);
+            if(keyListPreference.equals("appUiDefaultLanguagePref")) {
+                appUiLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
+                setLocale(Objects.requireNonNull(getActivity()), recentLanguageCode);
+                getActivity().recreate();
+                final Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+            }else {
+                descriptionLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
+            }
+            dialog.dismiss();
+        });
+
         listView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i,

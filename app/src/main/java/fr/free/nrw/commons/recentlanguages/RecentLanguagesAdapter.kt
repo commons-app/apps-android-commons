@@ -53,4 +53,7 @@ class RecentLanguagesAdapter constructor(
         return recentLanguages[position].languageCode
     }
 
+    fun getLanguageName(position: Int): String {
+        return recentLanguages[position].languageName
+    }
 }
