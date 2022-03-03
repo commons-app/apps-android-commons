@@ -186,6 +186,7 @@ class MediaClient @Inject constructor(
                 .map {
                     pages.zip(it.entities().values)
                         .mapNotNull { (page, entity) ->
+                            println(entity.labels().values.joinToString("|") + " " + entity.id())
                             page.imageInfo()?.let {
                                 mediaConverter.convert(page, entity, it)
                             }

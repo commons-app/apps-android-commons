@@ -16,6 +16,10 @@ public interface MediaInterface {
             "&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal" +
             "|Artist|LicenseShortName|LicenseUrl";
 
+    String MEDIA_PARAMS_CATEGORIES="&clprop=hidden&prop=categories|imageinfo&iiprop=url|extmetadata|user&&iiurlwidth=640" +
+        "&iiextmetadatafilter=DateTime|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal" +
+        "|Artist|LicenseShortName|LicenseUrl";
+
     /**
      * Checks if a page exists or not.
      *
@@ -81,7 +85,7 @@ public interface MediaInterface {
      * @return
      */
     @GET("w/api.php?action=query&format=json&formatversion=2" +
-            MEDIA_PARAMS)
+        MEDIA_PARAMS_CATEGORIES)
     Single<MwQueryResponse> getMedia(@Query("titles") String title);
 
     /**

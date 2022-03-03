@@ -20,6 +20,9 @@ class MediaConverter @Inject constructor() {
     fun convert(page: MwQueryPage, entity: Entities.Entity, imageInfo: ImageInfo): Media {
         val metadata = imageInfo.metadata
         requireNotNull(metadata) { "No metadata" }
+        val myMap = mutableMapOf<String, String>()
+        page.categories()?.forEach { myMap[it.title()] = ("" + it.hidden()) }
+
         return Media(
             page.pageId().toString(),
             imageInfo.thumbUrl.takeIf { it.isNotBlank() } ?: imageInfo.originalUrl,
@@ -35,7 +38,8 @@ class MediaConverter @Inject constructor() {
             metadata.latLng,
             entity.labels().mapValues { it.value.value() },
             entity.descriptions().mapValues { it.value.value() },
-            entity.depictionIds()
+            entity.depictionIds(),
+            myMap
         )
     }
 

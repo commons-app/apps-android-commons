@@ -3,6 +3,7 @@ package fr.free.nrw.commons
 import android.os.Parcelable
 import fr.free.nrw.commons.location.LatLng
 import kotlinx.android.parcel.Parcelize
+import org.wikipedia.dataclient.mwapi.MwQueryPage
 import org.wikipedia.page.PageTitle
 import java.util.*
 
@@ -77,7 +78,8 @@ class Media constructor(
     var coordinates: LatLng? = null,
     var captions: Map<String, String> = emptyMap(),
     var descriptions: Map<String, String> = emptyMap(),
-    var depictionIds: List<String> = emptyList()
+    var depictionIds: List<String> = emptyList(),
+    var detailedCategories: Map<String, String> = emptyMap()
 ) : Parcelable {
 
     constructor(

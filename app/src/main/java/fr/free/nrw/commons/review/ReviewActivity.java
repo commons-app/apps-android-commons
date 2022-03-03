@@ -34,6 +34,7 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.Iterator;
 import javax.inject.Inject;
 import org.wikipedia.dataclient.Service;
 import org.wikipedia.dataclient.ServiceFactory;
@@ -171,26 +172,35 @@ public class ReviewActivity extends BaseActivity {
                 .subscribe(media -> {
                     // This REST API request will respond with
                     // category type (hidden/non-hidden) for each category in the file
-                    Service service = ServiceFactory.get(new WikiSite(Service.COMMONS_URL)
-                        , Service.COMMONS_URL, Service.class);
+                    for(String key : media.getDetailedCategories().keySet()) {
+                        String value = media.getDetailedCategories().get(key);
+                        if(value.equals("false")) {
+                            hasNonHiddenCategories = true;
+                            break;
+                        }
+                    }
+                    reviewImageFragment = getInstanceOfReviewImageFragment();
+                    reviewImageFragment.disableButtons();
+                    updateImage(media);
 
-                    service.getCategories(media.getPageTitle().getDisplayText())
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(response -> {
-                            for(Category category : response.query().firstPage().categories()) {
-                                if(!category.hidden()) {
-                                    hasNonHiddenCategories = true;
-                                    break;
-                                }
-                            }
-
-                            reviewImageFragment = getInstanceOfReviewImageFragment();
-                            reviewImageFragment.disableButtons();
-                            updateImage(media);
-                        }, error -> {
-                            error.printStackTrace();
-                        });
+//                    Service service = ServiceFactory.get(new WikiSite(Service.COMMONS_URL)
+//                        , Service.COMMONS_URL, Service.class);
+//
+//                    service.getCategories(media.getPageTitle().getDisplayText())
+//                        .subscribeOn(Schedulers.io())
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribe(response -> {
+//                            for(Category category : response.query().firstPage().categories()) {
+//                                if(!category.hidden()) {
+//                                    hasNonHiddenCategories = true;
+//                                    break;
+//                                }
+//                            }
+//
+//
+//                        }, error -> {
+//                            error.printStackTrace();
+//                        });
                 }));
         return true;
     }
