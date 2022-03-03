@@ -63,7 +63,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Barkerdışe %1$s sertera</string>
   <string name="upload_progress_notification_title_in_progress">%1$s beno bar!</string>
   <string name="upload_progress_notification_title_finishing">Barkerdışe %1$s qedya</string>
-  <string name="upload_failed_notification_title">%1$s bar nêbeno.</string>
+  <string name="upload_failed_notification_title" fuzzy="true">%1$s bar nêbeno.</string>
   <string name="upload_failed_notification_subtitle">pıpawane xo bıvin</string>
   <string name="upload_paused_notification_subtitle">Mocnayışi re bıvinê</string>
   <string name="title_activity_contributions">Barkerdışê mınê peyêni</string>

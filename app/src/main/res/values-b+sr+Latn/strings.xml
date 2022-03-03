@@ -50,7 +50,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Počinje otpremanje datoteke „%1$s”</string>
   <string name="upload_progress_notification_title_in_progress">Otpremanje datoteke „%1$s”</string>
   <string name="upload_progress_notification_title_finishing">Završavanje otpremanja datoteke „%1$s”</string>
-  <string name="upload_failed_notification_title">Otpremanje datoteke „%1$s” nije uspelo</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Otpremanje datoteke „%1$s” nije uspelo</string>
   <string name="upload_failed_notification_subtitle">Dodirnite da biste videli</string>
   <string name="title_activity_contributions">Moja nedavna otpremanja</string>
   <string name="contribution_state_queued">Na čekanju</string>

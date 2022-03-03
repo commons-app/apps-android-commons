@@ -77,7 +77,7 @@
   <string name="upload_progress_notification_title_start">A carregar o ficheiro %s</string>
   <string name="upload_progress_notification_title_in_progress">A carregar %1$s</string>
   <string name="upload_progress_notification_title_finishing">A terminar o carregamento de %1$s</string>
-  <string name="upload_failed_notification_title">O carregamento de %1$s falhou</string>
+  <string name="upload_failed_notification_title" fuzzy="true">O carregamento de %1$s falhou</string>
   <string name="upload_paused_notification_title">Carregamento de %1$s em pausa</string>
   <string name="upload_failed_notification_subtitle">Tocar para ver</string>
   <string name="upload_paused_notification_subtitle">Tocar para ver</string>
@@ -656,4 +656,6 @@
   <string name="no_location_found_message">Que tal adicionar o local onde a imagem foi tirada?\nOs dados de localização ajudam os editores da wiki a encontrarem a sua fotografia, tornando-a muito mais útil.\nObrigado!</string>
   <string name="add_location">Adicionar localização</string>
   <string name="feedback_sharing_data_alert">Remova desta mensagem de correio todas as informações que não se sinta à vontade em partilhar publicamente, por favor. Adicionalmente, esteja consciente de que o seu endereço de correio eletrónico, com o qual está a fazer esta publicação, e o nome e imagem de perfil a ele associados, serão visíveis pelo público geral.</string>
+  <string name="achievements_unavailable_beta">As realizações só estão disponíveis no sabor de produção.</string>
+  <string name="leaderboard_unavailable_beta">A tabela de classificação só está disponível no sabor de produção.</string>
 </resources>

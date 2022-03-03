@@ -48,7 +48,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">%1$s کی اپلوڈنگ شروع ہو رہی ہے</string>
   <string name="upload_progress_notification_title_in_progress">%1$s اپلوڈ جاری</string>
   <string name="upload_progress_notification_title_finishing">%1$s کی اپلوڈنگ مکمل ہو رہی ہے</string>
-  <string name="upload_failed_notification_title">اپلوڈ %1$s ہونے میں ناکام</string>
+  <string name="upload_failed_notification_title" fuzzy="true">اپلوڈ %1$s ہونے میں ناکام</string>
   <string name="upload_failed_notification_subtitle">دیکھنے کے لیے ٹیپ کریں</string>
   <string name="title_activity_contributions">میں حالیہ اپلوڈ</string>
   <string name="contribution_state_queued">قطار</string>

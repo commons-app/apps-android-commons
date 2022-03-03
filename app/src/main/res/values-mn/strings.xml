@@ -19,7 +19,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">%1$s upload хийж эхэлсэн</string>
   <string name="upload_progress_notification_title_in_progress">%1$s upload хийж байна</string>
   <string name="upload_progress_notification_title_finishing">%1$s upload хийж дуусаж байна</string>
-  <string name="upload_failed_notification_title">%1$s upload хийхэд алдаа</string>
+  <string name="upload_failed_notification_title" fuzzy="true">%1$s upload хийхэд алдаа</string>
   <string name="upload_failed_notification_subtitle">Энд дарж харна</string>
   <string name="title_activity_contributions" fuzzy="true">Миний хийсэн upload</string>
   <string name="contribution_state_queued">Жагсаалтад орууллаа</string>
