@@ -20,7 +20,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">t Opsturen van bestaand %1$s vangt an</string>
   <string name="upload_progress_notification_title_in_progress">%1$s wörden in-elaojen</string>
   <string name="upload_progress_notification_title_finishing">t Oplaojen van %1$s is klaor</string>
-  <string name="upload_failed_notification_title">t Oplaojen van %1$s is mislokt</string>
+  <string name="upload_failed_notification_title" fuzzy="true">t Oplaojen van %1$s is mislokt</string>
   <string name="upload_failed_notification_subtitle">Wies an um te bekieken</string>
   <string name="title_activity_contributions" fuzzy="true">De bestaanden die\'k op-estuurd hebbe</string>
   <string name="contribution_state_queued">In wachtrie</string>

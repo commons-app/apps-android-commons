@@ -142,6 +142,7 @@
   <string name="navigation_item_info">{{Identical|Tutorial}}</string>
   <string name="navigation_item_notification">{{Identical|Notification}}</string>
   <string name="navigation_item_review">{{Identical|Review}}</string>
+  <string name="upload_connection_error_alert_title">{{Identical/Connection Error}}</string>
   <string name="nominated_see_more">&lt;u&gt;See webpage for details&lt;/u&gt;</string>
   <string name="skip_login">{{Identical|Skip}}</string>
   <string name="navigation_item_login">{{Identical|Log in}}</string>

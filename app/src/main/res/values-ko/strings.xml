@@ -74,7 +74,7 @@
   <string name="upload_progress_notification_title_start">%1$s 파일 올리는 중</string>
   <string name="upload_progress_notification_title_in_progress">%1$s 파일을 올리는 중</string>
   <string name="upload_progress_notification_title_finishing">%1$s 파일 올리기를 끝내는 중</string>
-  <string name="upload_failed_notification_title">%1$s 파일 올리기 실패</string>
+  <string name="upload_failed_notification_title" fuzzy="true">%1$s 파일 올리기 실패</string>
   <string name="upload_paused_notification_title">%1$s 업로드 멈춤</string>
   <string name="upload_failed_notification_subtitle">보려면 탭하세요</string>
   <string name="upload_paused_notification_subtitle">보려면 탭하세요</string>

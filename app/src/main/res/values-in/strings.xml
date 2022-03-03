@@ -70,7 +70,7 @@
   <string name="upload_progress_notification_title_start">Mengunggah berkas: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s terunggah!</string>
   <string name="upload_progress_notification_title_finishing">Menyelesaikan pengunggahan %1$s</string>
-  <string name="upload_failed_notification_title">Mengunggah %1$s gagal</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Mengunggah %1$s gagal</string>
   <string name="upload_paused_notification_title">Mengunggah %1$s tertunda</string>
   <string name="upload_failed_notification_subtitle">Tekan untuk melihat</string>
   <string name="upload_paused_notification_subtitle">Tap untuk melihat</string>

@@ -46,7 +46,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Upload van %1$s aan \'nt vange</string>
   <string name="upload_progress_notification_title_in_progress">%1$s up \'nt loade</string>
   <string name="upload_progress_notification_title_finishing">d\'n Upload van %1$s is vaerdig</string>
-  <string name="upload_failed_notification_title">d\'n Upload van %1$s is mislök</string>
+  <string name="upload_failed_notification_title" fuzzy="true">d\'n Upload van %1$s is mislök</string>
   <string name="upload_failed_notification_subtitle">Wies aan veur te betrachte</string>
   <string name="title_activity_contributions">Mien recènte uploads</string>
   <string name="contribution_state_queued">Inne wachrie</string>
