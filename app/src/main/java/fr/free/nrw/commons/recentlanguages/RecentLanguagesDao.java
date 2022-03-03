@@ -6,22 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.RemoteException;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsContentProvider;
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao;
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table;
-import fr.free.nrw.commons.explore.recentsearches.RecentSearch;
-import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider;
-import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
 import javax.inject.Singleton;
-import timber.log.Timber;
 
 @Singleton
 public class RecentLanguagesDao {
@@ -64,7 +54,7 @@ public class RecentLanguagesDao {
     private void addRecentLanguage(final Language language) {
         final ContentProviderClient db = clientProvider.get();
         try {
-            db.insert(BookmarkItemsContentProvider.BASE_URI, toContentValues(language));
+            db.insert(RecentLanguagesContentProvider.BASE_URI, toContentValues(language));
         } catch (final RemoteException e) {
             throw new RuntimeException(e);
         } finally {
