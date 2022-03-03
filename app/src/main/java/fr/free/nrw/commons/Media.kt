@@ -80,9 +80,11 @@ class Media constructor(
     var descriptions: Map<String, String> = emptyMap(),
     var depictionIds: List<String> = emptyList(),
     /**
+     * This field was added to find non-hidden categories
      * Stores the mapping of category title to hidden attribute
+     * Example: Mountains => false, CC-BY-SA-2.0 => true
      */
-    var detailedCategories: Map<String, String> = emptyMap() // This field was added to find non-hidden categories
+    var detailedCategories: Map<String, String> = emptyMap()
 ) : Parcelable {
 
     constructor(
