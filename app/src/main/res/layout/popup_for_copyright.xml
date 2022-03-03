@@ -4,23 +4,25 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:id="@+id/popup_relative_layout"
   android:layout_width="350dp"
-  android:layout_height="450dp"
+  android:layout_height="350dp"
   android:layout_gravity="center">
 
-  <ImageView
-    android:id="@+id/copyright_icon"
-    android:layout_width="193dp"
-    android:layout_height="181dp"
+  <TextView
+    android:id="@+id/warning"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
-    android:contentDescription="@string/welcome_copyright_text"
-    app:srcCompat="@drawable/copyright" />
+    android:layout_marginTop="37dp"
+    android:text="@string/warning"
+    android:textColor="#FF0202"
+    android:textSize="34sp"
+    android:textStyle="bold" />
 
   <TextView
     android:id="@+id/copyright_messege"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/copyright_icon"
-    android:layout_centerHorizontal="true"
+    android:layout_below="@+id/warning"
     android:layout_marginTop="21dp"
     android:text="@string/copyright_popup"
     android:textSize="20sp"
