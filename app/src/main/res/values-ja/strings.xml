@@ -332,6 +332,7 @@
   <string name="error_fetching_nearby_places">付近の場所を取得しようとしてエラーが発生しました。</string>
   <string name="no_recent_searches">最近の検索はまだありません</string>
   <string name="delete_recent_searches_dialog">本当に検索履歴を消去しますか?</string>
+  <string name="cancel_upload_dialog">このアップロードを本当にキャンセルしますか？</string>
   <string name="delete_search_dialog">この検索を削除しますか?</string>
   <string name="search_history_deleted">検索履歴を削除しました</string>
   <string name="nominate_delete">削除候補</string>
@@ -578,6 +579,8 @@
   <string name="quality_images_info">上質な画像とは図や写真で一定の（主に技術的な）条件を満たすもので、ウィキメディアのプロジェクト群に使えそうなもののこと</string>
   <string name="resuming_upload">アップロードを再開中……</string>
   <string name="pausing_upload">アップロードを停止中……</string>
+  <string name="cancelling_upload">アップロードをキャンセルしています</string>
+  <string name="cancel_upload">アップロードをキャンセル</string>
   <string name="limited_connection_explanation">接続制限を有効にしました。無効にするまでアップロードはすべて一時停止されます。</string>
   <string name="limited_connection_is_on">接続制限は有効です。</string>
   <string name="media_details_tooltip">この写真の被写体について短く説明してください。文中にこの写真の見どころや特徴、特異性を書き、見てわかる文脈、写っていないけれど大切なことを加えます。専門用語も必要なだけ使えます。</string>

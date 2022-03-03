@@ -69,7 +69,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Začenjam nalaganje %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Nalagam %1$s</string>
   <string name="upload_progress_notification_title_finishing">Končujem nalaganje datoteke »%1$s«</string>
-  <string name="upload_failed_notification_title">Nalaganje datoteke »%1%s« ni uspelo</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Nalaganje datoteke »%1%s« ni uspelo</string>
   <string name="upload_paused_notification_title">Nalaganje datoteke »%1$s« je ustavljeno</string>
   <string name="upload_failed_notification_subtitle">Tapnite za ogled</string>
   <string name="upload_paused_notification_subtitle">Tapnite za ogled</string>

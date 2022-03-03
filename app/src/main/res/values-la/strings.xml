@@ -21,7 +21,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Incipere immissio %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s inmittens</string>
   <string name="upload_progress_notification_title_finishing">Conficiens immissio %1$s</string>
-  <string name="upload_failed_notification_title">Inmissio %1$s non perfecta</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Inmissio %1$s non perfecta</string>
   <string name="upload_failed_notification_subtitle">Tangere ad videndum</string>
   <string name="title_activity_contributions" fuzzy="true">Conlationes meae</string>
   <string name="contribution_state_queued">In serie</string>

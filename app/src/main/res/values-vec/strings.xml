@@ -59,7 +59,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Scumisio del cargamento de %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s cargà!</string>
   <string name="upload_progress_notification_title_finishing">Finio el cargamento de %1$s</string>
-  <string name="upload_failed_notification_title">Cargamento de %1$s no riusio</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Cargamento de %1$s no riusio</string>
   <string name="upload_failed_notification_subtitle">Schicia par vixuałixare</string>
   <string name="title_activity_contributions">I me ultimi cargamenti</string>
   <string name="contribution_state_queued">In coa...</string>

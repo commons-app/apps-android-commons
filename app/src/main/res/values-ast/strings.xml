@@ -60,7 +60,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Principiando la xuba de %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ta xubiendo</string>
   <string name="upload_progress_notification_title_finishing">Acabando de xubir %1$s</string>
-  <string name="upload_failed_notification_title">Falló la xuba de %1$s</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Falló la xuba de %1$s</string>
   <string name="upload_failed_notification_subtitle">Toque pa velo</string>
   <string name="title_activity_contributions">Les mios xubes recién</string>
   <string name="contribution_state_queued">En cola</string>

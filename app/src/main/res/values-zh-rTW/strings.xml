@@ -77,7 +77,7 @@
   <string name="upload_progress_notification_title_start">開始上傳檔案：$s</string>
   <string name="upload_progress_notification_title_in_progress">正在上傳%1$s</string>
   <string name="upload_progress_notification_title_finishing">即將完成上傳%1$s</string>
-  <string name="upload_failed_notification_title">上傳%1$s失敗</string>
+  <string name="upload_failed_notification_title" fuzzy="true">上傳%1$s失敗</string>
   <string name="upload_paused_notification_title">已暫停上傳%1$s</string>
   <string name="upload_failed_notification_subtitle">輕觸檢視</string>
   <string name="upload_paused_notification_subtitle">輕觸檢視</string>

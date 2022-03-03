@@ -55,7 +55,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">%1$s جو چاڙھ شروع ڪندي</string>
   <string name="upload_progress_notification_title_in_progress">%1$s چاڙھيندي</string>
   <string name="upload_progress_notification_title_finishing">%1$s جو چاڙھ مڪمل ٿيندي</string>
-  <string name="upload_failed_notification_title">%1$s جو چاڙھڻ ناڪام ويو</string>
+  <string name="upload_failed_notification_title" fuzzy="true">%1$s جو چاڙھڻ ناڪام ويو</string>
   <string name="upload_failed_notification_subtitle">ڏسڻ لاءِ ٺونگيو</string>
   <string name="title_activity_contributions">منھنجا تازا چاڙھ</string>
   <string name="contribution_state_queued">قطار ۾</string>

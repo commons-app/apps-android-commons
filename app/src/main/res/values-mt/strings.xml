@@ -19,7 +19,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Se jibda t-tlugħ ta\' %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Tiela\' %1$s</string>
   <string name="upload_progress_notification_title_finishing">It-tlugħ ta\' %1$s spiċċa</string>
-  <string name="upload_failed_notification_title">It-tlugħ ta\' %1$s ma rnexxiex</string>
+  <string name="upload_failed_notification_title" fuzzy="true">It-tlugħ ta\' %1$s ma rnexxiex</string>
   <string name="upload_failed_notification_subtitle">Agħfas biex tara</string>
   <string name="title_activity_contributions" fuzzy="true">It-tlugħ tiegħi</string>
   <string name="contribution_state_queued">Fil-kju</string>

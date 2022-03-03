@@ -81,7 +81,7 @@
   <string name="upload_progress_notification_title_start">Bestand wordt geüpload: %s</string>
   <string name="upload_progress_notification_title_in_progress">Bezig met het uploaden van %1$s</string>
   <string name="upload_progress_notification_title_finishing">Het uploaden van %1$s is afgerond</string>
-  <string name="upload_failed_notification_title">Het uploaden van %1$s is mislukt</string>
+  <string name="upload_failed_notification_title">Fout bij uploaden %1$s</string>
   <string name="upload_paused_notification_title">Het uploaden van %1$s is gepauzeerd</string>
   <string name="upload_failed_notification_subtitle">Wijs aan om te bekijken</string>
   <string name="upload_paused_notification_subtitle">Klik om te bekijken</string>
