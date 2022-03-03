@@ -62,7 +62,7 @@
   <string name="upload_progress_notification_title_start">Inissi dël cariament %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s carià</string>
   <string name="upload_progress_notification_title_finishing">Fin dël cariament %1$s</string>
-  <string name="upload_failed_notification_title">Cariament falì a %1$s</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Cariament falì a %1$s</string>
   <string name="upload_paused_notification_title">Cariament %1$s an pàusa</string>
   <string name="upload_failed_notification_subtitle">Sgnaché për ësmon-e</string>
   <string name="upload_paused_notification_subtitle">Sgnaché për vëdde</string>

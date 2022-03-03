@@ -42,7 +42,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">%1$s ਅੱਪਲੋਡ ਸ਼ੁਰੂ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ਅੱਪਲੋਡ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ</string>
   <string name="upload_progress_notification_title_finishing">%1$s ਦਾ ਅੱਪਲੋਡ ਖ਼ਤਮ ਹੋ ਰਿਹਾ ਹੈ</string>
-  <string name="upload_failed_notification_title">%1$s ਦਾ ਅੱਪਲੋਡ ਫੇਲ੍ਹ ਹੋਇਆ</string>
+  <string name="upload_failed_notification_title" fuzzy="true">%1$s ਦਾ ਅੱਪਲੋਡ ਫੇਲ੍ਹ ਹੋਇਆ</string>
   <string name="upload_failed_notification_subtitle">ਵੇਖਣ ਲਈ ਥਪੇੜੋ</string>
   <string name="title_activity_contributions" fuzzy="true">ਮੇਰੇ ਅੱਪਲੋਡ</string>
   <string name="contribution_state_queued">ਕਤਾਰ ਵਿਚ</string>

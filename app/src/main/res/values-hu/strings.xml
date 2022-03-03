@@ -74,7 +74,7 @@
   <string name="upload_progress_notification_title_start">Fájl feltöltése: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s feltöltése</string>
   <string name="upload_progress_notification_title_finishing">%1$s feltöltése befejezve</string>
-  <string name="upload_failed_notification_title">%1$s feltöltése sikertelen</string>
+  <string name="upload_failed_notification_title" fuzzy="true">%1$s feltöltése sikertelen</string>
   <string name="upload_paused_notification_title">%1$s feltöltés megállítva</string>
   <string name="upload_failed_notification_subtitle">Érintsd meg a megtekintéshez</string>
   <string name="upload_paused_notification_subtitle">Megnézéshez koppints</string>

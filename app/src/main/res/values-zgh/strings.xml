@@ -23,7 +23,7 @@
   <string name="upload_completed_notification_text">ⴰⴷⵔ ⵃⵎⴰ ⴰⴷ ⵜⵙⴽⵏⴷ ⴰⵙⴽⵜⵔ ⵏⵏⴽ</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">ⵉⵙⵙⵏⵜⵉ ⵓⵙⵙⴽⵜⵔ ⵏ %1$s</string>
   <string name="upload_progress_notification_title_in_progress">ⴰⵙⴽⵜⵓⵔ ⵏ %1$s</string>
-  <string name="upload_failed_notification_title">ⴰⵙⵙⴽⵜⵔ ⵏ %1$s ⵉⵣⴳⵍ</string>
+  <string name="upload_failed_notification_title" fuzzy="true">ⴰⵙⵙⴽⵜⵔ ⵏ %1$s ⵉⵣⴳⵍ</string>
   <string name="upload_failed_notification_subtitle">ⴰⴽⵍ ⴰⴼⴰⴷ ⴰⴷ ⵜⵙⴽⵏⴷ</string>
   <string name="title_activity_contributions">ⵉⵙⴽⵜⴰⵔⵏ ⵉⵏⵓ ⵉⵎⴳⴳⵓⵔⴰ</string>
   <string name="contribution_state_in_progress">ⵉⵙⵎⴷ %1$d%%</string>

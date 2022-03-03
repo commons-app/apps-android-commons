@@ -44,7 +44,7 @@
   <string name="upload_completed_notification_title">%1$s hat barkirin!</string>
   <string name="upload_completed_notification_text">Bo barkirina xwe bibînî bitikîne.</string>
   <string name="upload_progress_notification_title_in_progress">%1$s tê barkirin</string>
-  <string name="upload_failed_notification_title">Barkirina  %1$s bi ser neket</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Barkirina  %1$s bi ser neket</string>
   <string name="upload_failed_notification_subtitle">Bitikîne û bibîne</string>
   <string name="title_activity_contributions">Barkirinên min ên dawî</string>
   <string name="contribution_state_failed">Bi ser neket</string>

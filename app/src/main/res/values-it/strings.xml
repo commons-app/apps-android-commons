@@ -78,7 +78,7 @@
   <string name="upload_progress_notification_title_start">Caricamento file: %s</string>
   <string name="upload_progress_notification_title_in_progress">Sto caricando %1$s</string>
   <string name="upload_progress_notification_title_finishing">Terminato il caricamento di %1$s</string>
-  <string name="upload_failed_notification_title">Caricamento di %1$s non riuscito</string>
+  <string name="upload_failed_notification_title">Errore durante il caricamento di %1$s</string>
   <string name="upload_paused_notification_title">Caricamento di %1$s in pausa</string>
   <string name="upload_failed_notification_subtitle">Premi per visualizzare</string>
   <string name="upload_paused_notification_subtitle">Premi per visualizzare</string>

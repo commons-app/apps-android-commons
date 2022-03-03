@@ -55,7 +55,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Beddu n usali n %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ulin</string>
   <string name="upload_progress_notification_title_finishing">Tagara n usali n %1$s</string>
-  <string name="upload_failed_notification_title">Asali n  %1$s ur yeddi ara</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Asali n  %1$s ur yeddi ara</string>
   <string name="upload_failed_notification_subtitle">Senned akken ad sekneḍ</string>
   <string name="title_activity_contributions">Ifuyla yulin melmi kan</string>
   <string name="contribution_state_queued">Ttraǧun</string>

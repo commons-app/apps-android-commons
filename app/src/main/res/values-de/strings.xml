@@ -85,7 +85,7 @@
   <string name="upload_progress_notification_title_start">Hochlade von Datei: %s</string>
   <string name="upload_progress_notification_title_in_progress">„%1$s“ wird hochgeladen</string>
   <string name="upload_progress_notification_title_finishing">Hochladen von „%1$s“ abschließen</string>
-  <string name="upload_failed_notification_title">Hochladen von „%1$s“ fehlgeschlagen</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Hochladen von „%1$s“ fehlgeschlagen</string>
   <string name="upload_paused_notification_title">Hochladen von %1$s pausiert</string>
   <string name="upload_failed_notification_subtitle">Tippen zum Betrachten</string>
   <string name="upload_paused_notification_subtitle">Tippen zum Ansehen</string>

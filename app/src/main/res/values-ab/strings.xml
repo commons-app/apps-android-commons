@@ -25,7 +25,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Аҭагалара %1$s иалагоуп</string>
   <string name="upload_progress_notification_title_in_progress">%1$s иаҿуп аҭагалара</string>
   <string name="upload_progress_notification_title_finishing">Аҭагалара ахыркәшамҭа %1$s</string>
-  <string name="upload_failed_notification_title">Аҭагалара %1$s амуӡеит</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Аҭагалара %1$s амуӡеит</string>
   <string name="upload_failed_notification_subtitle">Шәақәыӷәӷәа ахәаԥшразы</string>
   <string name="contribution_state_failed">Аҭагалара агха.</string>
   <string name="contribution_state_in_progress">Инагӡоуп %1$d%%</string>

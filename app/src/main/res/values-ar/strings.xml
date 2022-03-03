@@ -104,7 +104,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">بدء رفع %1$s</string>
   <string name="upload_progress_notification_title_in_progress">يجري رفع %1$s</string>
   <string name="upload_progress_notification_title_finishing">اكتمال رفع %1$s</string>
-  <string name="upload_failed_notification_title">فشل رفع %1$s</string>
+  <string name="upload_failed_notification_title" fuzzy="true">فشل رفع %1$s</string>
   <string name="upload_failed_notification_subtitle">انقر لتشاهد</string>
   <string name="title_activity_contributions">مرفوعاتي الأخيرة</string>
   <string name="contribution_state_queued">في قائمة الانتظار</string>
