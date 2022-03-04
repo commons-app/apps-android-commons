@@ -14,7 +14,9 @@ import fr.free.nrw.commons.contributions.ContributionsListFragment
 import fr.free.nrw.commons.review.ReviewController
 import io.reactivex.Observable
 import io.reactivex.Single
-import org.junit.Assert.*
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertTrue
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

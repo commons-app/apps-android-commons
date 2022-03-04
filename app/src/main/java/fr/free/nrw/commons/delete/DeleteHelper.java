@@ -5,11 +5,9 @@ import static fr.free.nrw.commons.notification.NotificationHelper.NOTIFICATION_D
 import android.annotation.SuppressLint;
 import android.content.Context;
 import static fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
@@ -43,7 +41,6 @@ public class DeleteHelper {
     private final ViewUtilWrapper viewUtil;
     private final String username;
     private AlertDialog d;
-
     private DialogInterface.OnMultiChoiceClickListener listener;
 
     @Inject
@@ -231,11 +228,18 @@ public class DeleteHelper {
         d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
     }
 
-    // used for taking reference during unit test
+    /**
+     * returns the instance of shown AlertDialog,
+     * used for taking reference during unit test
+     * */
     public AlertDialog getDialog(){
         return  d;
     }
 
+    /**
+     * returns the instance of shown DialogInterface.OnMultiChoiceClickListener,
+     * used for taking reference during unit test
+     * */
     public DialogInterface.OnMultiChoiceClickListener getListener(){
         return listener;
     }
