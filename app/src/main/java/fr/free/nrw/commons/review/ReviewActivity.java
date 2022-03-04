@@ -34,12 +34,7 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import java.util.Iterator;
 import javax.inject.Inject;
-import org.wikipedia.dataclient.Service;
-import org.wikipedia.dataclient.ServiceFactory;
-import org.wikipedia.dataclient.WikiSite;
-import org.wikipedia.dataclient.mwapi.MwQueryPage.Category;
 
 public class ReviewActivity extends BaseActivity {
 
@@ -171,11 +166,11 @@ public class ReviewActivity extends BaseActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(media -> {
                     // Finds non-hidden categories from Media instance
-                    for(String key : media.getDetailedCategories().keySet()) {
-                        String value = media.getDetailedCategories().get(key);
+                    for(String key : media.getCategoriesHiddenStatus().keySet()) {
+                        Boolean value = media.getCategoriesHiddenStatus().get(key);
                         // If non-hidden category is found then set hasNonHiddenCategories to true
                         // so that category review cannot be skipped
-                        if(value.equals("false")) {
+                        if(!value) {
                             hasNonHiddenCategories = true;
                             break;
                         }

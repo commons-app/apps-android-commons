@@ -54,10 +54,10 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
     private String updateCategoriesQuestion() {
         Media media = getReviewActivity().getMedia();
-        if (media != null && media.getDetailedCategories() != null && isAdded()) {
+        if (media != null && media.getCategoriesHiddenStatus() != null && isAdded()) {
             // Filter category name attribute from all categories
             List<String> categories = new ArrayList<>();
-            for(String key : media.getDetailedCategories().keySet()) {
+            for(String key : media.getCategoriesHiddenStatus().keySet()) {
                 String value = String.valueOf(key);
                 // Each category returned has a format like "Category:<some-category-name>"
                 // so remove the prefix "Category:"
