@@ -9,12 +9,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
@@ -47,8 +45,6 @@ import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao;
 import fr.free.nrw.commons.upload.LanguagesAdapter;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -291,9 +287,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1,
                 int i2) {
-                languageHistoryListView.setVisibility(View.GONE);
-                recentLanguagesTextView.setVisibility(View.GONE);
-                separator.setVisibility(View.GONE);
+                removeRecentLanguages();
             }
 
             @Override
@@ -363,6 +357,15 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         dialog.setOnDismissListener(
             dialogInterface -> languagesAdapter.getFilter().filter(""));
+    }
+
+    /**
+     * Remove the section of recent languages
+     */
+    private void removeRecentLanguages() {
+        languageHistoryListView.setVisibility(View.GONE);
+        recentLanguagesTextView.setVisibility(View.GONE);
+        separator.setVisibility(View.GONE);
     }
 
     /**

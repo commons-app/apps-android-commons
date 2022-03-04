@@ -75,7 +75,7 @@ public class RecentLanguagesDao {
     public void deleteRecentLanguage(final String languageCode) {
         final ContentProviderClient db = clientProvider.get();
         try {
-            db.delete(RecentLanguagesContentProvider.uriForName(languageCode), null, null);
+            db.delete(RecentLanguagesContentProvider.uriForCode(languageCode), null, null);
         } catch (final RemoteException e) {
             throw new RuntimeException(e);
         } finally {

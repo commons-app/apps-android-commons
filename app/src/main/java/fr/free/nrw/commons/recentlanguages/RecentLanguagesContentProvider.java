@@ -30,7 +30,7 @@ public class RecentLanguagesContentProvider extends CommonsDaggerContentProvider
      * Append language code to the base uri
      * @param languageCode Code of a language
      */
-    public static Uri uriForName(final String languageCode) {
+    public static Uri uriForCode(final String languageCode) {
         return Uri.parse(BASE_URI + "/" + languageCode);
     }
 
