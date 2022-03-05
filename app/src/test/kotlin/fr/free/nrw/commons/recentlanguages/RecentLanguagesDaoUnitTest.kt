@@ -195,7 +195,7 @@ class RecentLanguagesDaoUnitTest {
     }
 
     @Test
-    fun addNewLanguage() {
+    fun testAddNewLanguage() {
         testObject.addRecentLanguage(exampleLanguage)
 
         verify(client).insert(eq(RecentLanguagesContentProvider.BASE_URI), captor.capture())
@@ -210,6 +210,12 @@ class RecentLanguagesDaoUnitTest {
                 cv.getAsString(COLUMN_CODE)
             )
         }
+    }
+
+    @Test
+    fun testDeleteLanguage() {
+        testObject.addRecentLanguage(exampleLanguage)
+        testObject.deleteRecentLanguage(exampleLanguage.languageCode)
     }
 
     private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
