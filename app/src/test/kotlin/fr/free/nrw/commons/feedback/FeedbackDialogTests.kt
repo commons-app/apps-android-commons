@@ -97,7 +97,9 @@ class FeedbackDialogTests {
 
     @Test
     fun testSubmitFeedbackError() {
-        doReturn("").`when`(feedbackDescription)?.text.toString()
+        val editable = mock(Editable::class.java)
+        doReturn(editable).`when`(feedbackDescription)?.text
+        doReturn("").`when`(editable).toString()
         dialog.submitFeedback()
     }
 
