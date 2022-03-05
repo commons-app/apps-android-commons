@@ -33,7 +33,7 @@ class ImageFileLoader(val context: Context) : CoroutineScope{
     /**
      * Load Device Images under coroutine.
      */
-    fun loadDeviceImages(listener: ImageLoaderListener, scope: CoroutineScope) {
+    fun loadDeviceImages(listener: ImageLoaderListener) {
         launch(Dispatchers.Main) {
             withContext(Dispatchers.IO) {
                 getImages(listener)
@@ -82,7 +82,7 @@ class ImageFileLoader(val context: Context) : CoroutineScope{
 
 
                 if (file != null && file.exists()) {
-                    if (id != null && name != null && path != null && bucketId != null && bucketName != null) {
+                    if (name != null && path != null && bucketName != null) {
                         val uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
                         val image = Image(id, name, uri, path, bucketId, bucketName)
                         images.add(image)

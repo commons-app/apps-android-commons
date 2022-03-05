@@ -16,7 +16,7 @@ const val CATEGORY_NEEDING_CATEGORIES = "needing categories"
  */
 @Singleton
 class CategoryClient @Inject constructor(private val categoryInterface: CategoryInterface) :
-    ContinuationClient<MwQueryResponse, String>() {
+    ContinuationClient<MwQueryResponse, CategoryItem>() {
 
     /**
      * Searches for categories containing the specified string.
@@ -28,7 +28,7 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
      */
     @JvmOverloads
     fun searchCategories(filter: String?, itemLimit: Int, offset: Int = 0):
-            Single<List<String>> {
+            Single<List<CategoryItem>> {
         return responseMapper(categoryInterface.searchCategories(filter, itemLimit, offset))
     }
 
@@ -42,9 +42,27 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
      */
     @JvmOverloads
     fun searchCategoriesForPrefix(prefix: String?, itemLimit: Int, offset: Int = 0):
-            Single<List<String>> {
+            Single<List<CategoryItem>> {
         return responseMapper(
             categoryInterface.searchCategoriesForPrefix(prefix, itemLimit, offset)
+        )
+    }
+
+    /**
+     * Fetches categories starting and ending with a specified name.
+     *
+     * @param startingCategoryName Name of the category to start
+     * @param endingCategoryName Name of the category to end
+     * @param itemLimit How many categories to return
+     * @param offset offset
+     * @return MwQueryResponse
+     */
+    @JvmOverloads
+    fun getCategoriesByName(startingCategoryName: String?, endingCategoryName: String?,
+                            itemLimit: Int, offset: Int = 0): Single<List<CategoryItem>> {
+        return responseMapper(
+            categoryInterface.getCategoriesByName(startingCategoryName, endingCategoryName,
+                itemLimit, offset)
         )
     }
 
@@ -55,7 +73,7 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
      * @param categoryName Category name as defined on commons
      * @return Observable emitting the categories returned. If our search yielded "Category:Test", "Test" is emitted.
      */
-    fun getSubCategoryList(categoryName: String): Single<List<String>> {
+    fun getSubCategoryList(categoryName: String): Single<List<CategoryItem>> {
         return continuationRequest(SUB_CATEGORY_CONTINUATION_PREFIX, categoryName) {
             categoryInterface.getSubCategoryList(
                 categoryName, it
@@ -70,7 +88,7 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
      * @param categoryName Category name as defined on commons
      * @return
      */
-    fun getParentCategoryList(categoryName: String): Single<List<String>> {
+    fun getParentCategoryList(categoryName: String): Single<List<CategoryItem>> {
         return continuationRequest(PARENT_CATEGORY_CONTINUATION_PREFIX, categoryName) {
             categoryInterface.getParentCategoryList(categoryName, it)
         }
@@ -87,7 +105,7 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
     override fun responseMapper(
         networkResult: Single<MwQueryResponse>,
         key: String?
-    ): Single<List<String>> {
+    ): Single<List<CategoryItem>> {
         return networkResult
             .map {
                 handleContinuationResponse(it.continuation(), key)
@@ -96,7 +114,10 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
             .map {
                 it.filter {
                     page -> page.categoryInfo() == null || !page.categoryInfo().isHidden
-                }.map { page -> page.title().replace(CATEGORY_PREFIX, "") }
+                }.map {
+                    CategoryItem(it.title().replace(CATEGORY_PREFIX, ""),
+                        it.description().toString(), it.thumbUrl().toString(), false)
+                }
             }
     }
 }

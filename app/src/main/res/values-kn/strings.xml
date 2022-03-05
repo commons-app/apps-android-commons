@@ -33,7 +33,7 @@
   <string name="upload_progress_notification_title_start">ಕಡತ ಅಪ್‌ಲೋಡ್ ಆಗುತ್ತಿದೆ: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ನಕಲೇರಿಕೆ  ಆಗಿದೆ!</string>
   <string name="upload_progress_notification_title_finishing">%1$s ಅಪ್ಲೋಡ್ ಮಾಡುವಿಕೆಯನ್ನು ಪೂರ್ಣಗೊಳಿಸಲಾಗುತ್ತಿದೆ</string>
-  <string name="upload_failed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಮಾಡುವಿಕೆ ವಿಫಲವಾಗಿದೆ</string>
+  <string name="upload_failed_notification_title" fuzzy="true">%1$s ಅಪ್ಲೋಡ್ ಮಾಡುವಿಕೆ ವಿಫಲವಾಗಿದೆ</string>
   <string name="upload_failed_notification_subtitle">ನೋಡಲು ಮೆಲ್ಲಗೆ ತಟ್ಟಿ</string>
   <string name="title_activity_contributions">ನನ್ನ ಇತ್ತಿಚಿನ ಅಪ್ಲೋಡ್ಗಳು</string>
   <string name="contribution_state_queued">ಸರತಿಸಾಲಿನಲ್ಲಿದೆ</string>
@@ -177,4 +177,7 @@
   <string name="no_categories_found">ಯಾವುದೇ ವರ್ಗಗಳು ಸಿಗಲಿಲ್ಲ</string>
   <string name="delete_helper_show_deletion_title_success">ಯಶಸ್ವಿ</string>
   <string name="read_help_link">ಇನ್ನೂ ಓದಿ</string>
+  <string name="no_location_found_title">ಯಾವುದೇ ಸ್ಥಳ ಕಂಡುಬಂದಿಲ್ಲ</string>
+  <string name="no_location_found_message">ಈ ಚಿತ್ರವನ್ನು ತೆಗೆದ ಸ್ಥಳವನ್ನು ಸೇರಿಸಿ?\nಸ್ಥಳ ಡೇಟಾವು ವಿಕಿ ಸಂಪಾದಕರಿಗೆ ನಿಮ್ಮ ಚಿತ್ರವನ್ನು ಹುಡುಕಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ, ಇದು ಹೆಚ್ಚು ಉಪಯುಕ್ತವಾಗಿದೆ.\nಧನ್ಯವಾದಗಳು.</string>
+  <string name="add_location">ಸ್ಥಳ ಸೇರಿಸಿ</string>
 </resources>

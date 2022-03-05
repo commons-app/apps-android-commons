@@ -70,7 +70,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Έναρξη  %1$s  επιφορτώθηκε</string>
   <string name="upload_progress_notification_title_in_progress">%1$s επιφορτώνεται</string>
   <string name="upload_progress_notification_title_finishing">Ολοκλήρωση επιφόρτωσης %1$s</string>
-  <string name="upload_failed_notification_title">Ανέβασμα του %1$s απέτυχε</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Ανέβασμα του %1$s απέτυχε</string>
   <string name="upload_failed_notification_subtitle">Πατήστε για να δείτε</string>
   <string name="title_activity_contributions">Οι Πρόσφατες Φορτώσεις Μου</string>
   <string name="contribution_state_queued">Στην ουρά</string>

@@ -76,7 +76,7 @@
   <string name="upload_progress_notification_title_start">Kopioidaan palvelimelle: %s</string>
   <string name="upload_progress_notification_title_in_progress">Tallennetaan %1$s</string>
   <string name="upload_progress_notification_title_finishing">%1$s tallennettu</string>
-  <string name="upload_failed_notification_title">Tiedoston %1$s tallentaminen epäonnistui</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Tiedoston %1$s tallentaminen epäonnistui</string>
   <string name="upload_paused_notification_title">Tiedoston %1$s tallentaminen pysäytetty</string>
   <string name="upload_failed_notification_subtitle">Napauta katsoaksesi</string>
   <string name="upload_paused_notification_subtitle">Paina nähdäksesi</string>
@@ -602,6 +602,8 @@
   <string name="modify_location">Muokkaa sijaintia</string>
   <string name="image_location">Kuvan sijainti</string>
   <string name="check_whether_location_is_correct">Tarkista, onko sijainti oikea</string>
+  <string name="label">Nimi</string>
+  <string name="description">Kuvaus</string>
   <string name="title_page_bookmarks_items">Kohteet</string>
   <string name="custom_selector_empty_text">Ei kuvia</string>
   <string name="done">Valmis</string>
@@ -617,4 +619,6 @@
   <string name="apply">Käytä</string>
   <string name="reset">Nollaa</string>
   <string name="location_message">Sijaintitiedot auttavat wikin muokkaajia löytämään kuvasi, mikä tekee siitä paljon hyödyllisemmän.\nViimeaikaisissa tallennuksissasi ei ole sijaintia.\nSuosittelemme, että otat sijainnin käyttöön kamerasovelluksesi asetuksista.\nKiitos latauksesta!</string>
+  <string name="no_location_found_title">Paikkaa ei löytynyt</string>
+  <string name="add_location">Lisää paikka</string>
 </resources>

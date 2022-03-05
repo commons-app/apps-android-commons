@@ -15,6 +15,7 @@
 * Sarah Bernabei
 * Senpremì
 * Una giornata uggiosa '94
+* Valerio Bozzolan
 * Wim b
 -->
 <resources>
@@ -77,7 +78,7 @@
   <string name="upload_progress_notification_title_start">Caricamento file: %s</string>
   <string name="upload_progress_notification_title_in_progress">Sto caricando %1$s</string>
   <string name="upload_progress_notification_title_finishing">Terminato il caricamento di %1$s</string>
-  <string name="upload_failed_notification_title">Caricamento di %1$s non riuscito</string>
+  <string name="upload_failed_notification_title">Errore durante il caricamento di %1$s</string>
   <string name="upload_paused_notification_title">Caricamento di %1$s in pausa</string>
   <string name="upload_failed_notification_subtitle">Premi per visualizzare</string>
   <string name="upload_paused_notification_subtitle">Premi per visualizzare</string>
@@ -602,6 +603,7 @@
   <string name="pausing_upload">Caricamento in pausa…</string>
   <string name="limited_connection_explanation">Hai abilitato la modalità di connessione limitata. Tutti i caricamenti vengono ora messi in pausa e riprenderanno quando disabiliterai questa modalità.</string>
   <string name="limited_connection_is_on">La modalità di connessione limitata è attiva.</string>
+  <string name="media_details_tooltip">Per favore scrivi una breve descrizione su cosa è ritratto nella tua immagine. Nella descrizione, indica che cosa rende l\'immagine interessante, tipica o rara, e spiega il contesto, visibile o non. Impiega il più possibile una terminologia esatta.</string>
   <string name="license_step_title">Licenza per il file</string>
   <string name="media_detail_step_title">Dettagli sul file</string>
   <string name="menu_view_category_page">Vedi la pagina della categoria</string>
@@ -617,6 +619,8 @@
   <string name="modify_location">Modifica posizione</string>
   <string name="image_location">Posizione dell\'immagine</string>
   <string name="check_whether_location_is_correct">Verifica se la posizione è corretta</string>
+  <string name="label">Etichetta</string>
+  <string name="description">Descrizione</string>
   <string name="custom_selector_title">Selettore personalizzato</string>
   <string name="custom_selector_empty_text">Nessuna immagine</string>
   <string name="done">Fatto</string>

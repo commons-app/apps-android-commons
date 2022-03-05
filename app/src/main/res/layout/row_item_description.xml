@@ -23,11 +23,14 @@
           app:layout_constraintEnd_toEndOf="parent"
           app:srcCompat="@drawable/ic_remove" />
 
-        <Spinner
-          android:id="@+id/spinner_description_languages"
+        <TextView
+          android:id="@+id/description_languages"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:spinnerMode="dialog"
+          android:clickable="true"
+          android:drawableRight="@drawable/ic_baseline_arrow_drop_down_24"
+          android:padding="@dimen/dimen_2"
+          android:textSize="18sp"
           app:layout_constraintBottom_toTopOf="@+id/caption_item_edit_text_input_layout"
           app:layout_constraintStart_toStartOf="parent" />
 
@@ -45,7 +48,7 @@
               android:layout_height="match_parent"
               android:hint="@string/share_caption_hint"
               android:imeOptions="actionNext|flagNoExtractUi"
-              android:inputType="textMultiLine"
+              android:inputType="text"
               app:allowFormatting="false" />
         </com.google.android.material.textfield.TextInputLayout>
 

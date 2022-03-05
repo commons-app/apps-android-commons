@@ -30,6 +30,8 @@
   <string name="signup">ߖߊ߬ߕߋ߬ߘߊ ߟߊߞߊ߬</string>
   <string name="logging_in_title">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߦߋ߫ ߛߋ߲߬ߠߊ߫</string>
   <string name="logging_in_message">ߡߊ߬ߞߐ߬ߣߐ߲߬ߠߌ߲ ߞߍ߫ ߖߊ߰ߣߌ߲߬...</string>
+  <string name="updating_caption_title">ߝߍ߬ߛߓߍߟߌ ߣߌ߫ ߞߊ߲߬ߛߓߍߟߌ ߟߊߞߎߘߦߊ ߦߴߌ ߘߐ߫</string>
+  <string name="updating_caption_message">ߡߊ߬ߞߐ߬ߣߐ߲߬ߠߌ߲ ߞߍ߫ ߖߊ߰ߣߌ߲߬...</string>
   <string name="login_success">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߓߘߊ߫ ߛߎߘߊ߲߫߹</string>
   <string name="login_failed">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߓߘߊ߫ ߗߌߙߏ߲߫߹</string>
   <string name="upload_failed">ߞߐߕߐ߮ ߡߊ߫ ߛߐ߬ߘߐ߲߬. ߘߏ߫ ߜߘߍ߫ ߡߊߝߍߣߍ߲߫ ߖߊ߰ߣߌ߲߫.</string>
@@ -40,7 +42,7 @@
   <string name="upload_progress_notification_title_start"> %1$s ߟߊ߬ߦߟߍ ߦߴߌ ߘߐ߫</string>
   <string name="upload_progress_notification_title_in_progress"> %1$s ߟߊ߬ߦߟߍ߬ߟߌ ߦߋ߫ ߛߋ߲߬ߠߊ߫</string>
   <string name="upload_progress_notification_title_finishing"> %1$s ߟߊ߬ߦߟߍ߬ߟߌ ߞߎ߲߬ߘߏ߲߬ߠߌ߲ ߦߴߌ ߘߐ߫</string>
-  <string name="upload_failed_notification_title"> %1$s ߟߊ߬ߦߟߍ߬ߟߌ ߓߘߊ߫ ߗߌߙߏ߲߫</string>
+  <string name="upload_failed_notification_title" fuzzy="true"> %1$s ߟߊ߬ߦߟߍ߬ߟߌ ߓߘߊ߫ ߗߌߙߏ߲߫</string>
   <string name="upload_paused_notification_title">%1$s ߟߊߦߟߍ߬ߟߌ ߓߘߊ߫ ߟߊߟߐ߬</string>
   <string name="upload_failed_notification_subtitle">ߊ߬ ߛߐ߲߬ߞߌ߲߫ ߞߵߊ߬ ߦߋ߫</string>
   <string name="upload_paused_notification_subtitle">ߊ߬ ߛߐ߲߬ߞߌ߲߫ ߞߵߊ߬ ߦߋ߫</string>
@@ -380,6 +382,13 @@
   <string name="category_edit_helper_show_edit_title_success">ߊ߬ ߓߘߊ߫ ߛߎߘߊ߲߫</string>
   <string name="category_edit_helper_edit_message_else">ߦߌߟߡߊ ߟߎ߬ ߕߴߛߋ߫ ߝߙߊ߬ ߟߊ߫.</string>
   <string name="category_edit_button_text">ߦߌߟߡߊ ߟߎ߬ ߟߏ߲ߘߐߦߊߟߌ</string>
+  <string name="description_edit_helper_show_edit_title">ߞߊ߲߬ߛߓߍߟߌ ߟߊߘߎߘߦߊߟߌ</string>
+  <string name="caption_edit_helper_show_edit_title">ߝߍ߬ߛߓߍߟߌ ߟߊߞߎߘߦߊߟߌ</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">ߊ߬ ߓߘߊ߫ ߛߎߘߊ߲߫</string>
+  <string name="description_edit_helper_show_edit_message">ߞߊ߲߬ߛߓߍߟߌ ߓߘߊ߫ ߝߙߊ߬.</string>
+  <string name="caption_edit_helper_show_edit_message">ߝߍ߬ߛߓߍߟߌ ߓߘߊ߫ ߝߙߊ߬.</string>
+  <string name="description_edit_helper_edit_message_else">ߞߊ߲߬ߛߓߍߟߌ ߕߍ߫ ߛߐ߲߬ ߝߙߊ߬ ߟߊ߫.</string>
+  <string name="caption_edit_helper_edit_message_else">ߝߍ߬ߛߓߍߟߌ ߕߍ߫ ߛߐ߲߬ ߝߙߊ߬ ߟߊ߫.</string>
   <string name="share_image_via">ߖߌ߬ߦߊ߬ߓߍ ߟߊߖߍ߲ߛߍ߲߫ ߞߊߕߙߍ߬</string>
   <string name="you_have_no_achievements_yet">ߌ ߡߊ߫ ߓߟߏߡߊߜߍ߲߫ ߛߌ߫ ߛߌ߲ߘߌ߫ ߡߎߣߎ߲߬</string>
   <string name="no_achievements_yet" fuzzy="true">ߌ ߡߊ߫ ߓߟߏߓߌߟߊߢߐ߲߯ߞߊ߲ ߛߌ߫ ߞߍ߫ ߡߎߣߎ߲߬</string>
@@ -438,7 +447,10 @@
   <string name="choose_a_location">ߘߌ߲߬ߞߌߙߊ ߘߏ߫ ߛߎߥߊ߲ߘߌ߫</string>
   <string name="image_location">ߖߌ߬ߦߊ߬ߓߍ ߘߌ߲߬ߞߌߙߊ</string>
   <string name="check_whether_location_is_correct">ߊ߬ ߡߊߝߟߍ߫ ߓߊ߫ ߣߌ߫ ߘߌ߲߬ߞߌߙߊ ߓߍ߲߬ߣߍ߲߫ ߞߍ߫ ߘߊ߫</string>
+  <string name="description">ߞߊ߲߬ߛߓߍߟߌ</string>
+  <string name="title_page_bookmarks_items">ߝߌ߬ߛߌ</string>
   <string name="custom_selector_empty_text">ߖߌ߬ߦߊ߬ߓߍ߫ ߕߴߦߋ߲߬</string>
+  <string name="done">ߊ߬ ߞߍ߫</string>
   <string name="back">ߌ ߞߐߛߊ߬ߦߌ߬</string>
   <string name="custom_selector_already_uploaded_image_text">ߖߌ߬ߦߊ߬ߓߍ ߣߌ߲߬ ߓߘߊ߫ ߓߊ߲߫ ߠߊߦߟߍ߬ ߟߊ߫ ߞߐߡߐ߲ߛ ߞߣߐ߫ ߞߘߐ߬ߡߊ߲߫</string>
   <string name="wlm_upload_info">ߖߌ߬ߦߊߓߍ ߣߌ߲߬ ߓߍߣߊ߬ ߟߊߕߘߍ߬ ߥߞߌ ߝߙߎߕߎ ߞߊ߬ߣߌ߲߬ߓߊ߮ ߂߀߂߁ ߜߊ߬ߛߊ ߘߐ߫</string>

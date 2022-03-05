@@ -63,7 +63,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Barkerdışe %1$s sertera</string>
   <string name="upload_progress_notification_title_in_progress">%1$s beno bar!</string>
   <string name="upload_progress_notification_title_finishing">Barkerdışe %1$s qedya</string>
-  <string name="upload_failed_notification_title">%1$s bar nêbeno.</string>
+  <string name="upload_failed_notification_title" fuzzy="true">%1$s bar nêbeno.</string>
   <string name="upload_failed_notification_subtitle">pıpawane xo bıvin</string>
   <string name="upload_paused_notification_subtitle">Mocnayışi re bıvinê</string>
   <string name="title_activity_contributions">Barkerdışê mınê peyêni</string>
@@ -218,7 +218,7 @@
   <string name="welcome_skip_button">Musnayoği ravêre</string>
   <string name="no_internet">İnternet nêresêno</string>
   <string name="no_notifications">Pêhesnayışi nêvineyay</string>
-  <string name="about_translate">Açarnayış</string>
+  <string name="about_translate">Bıçarne</string>
   <string name="about_translate_title">Zıwani</string>
   <string name="about_translate_message">Sega açarnayışa rıştışi rê yew zıwan weçine</string>
   <string name="about_translate_proceed">Ravêrê</string>

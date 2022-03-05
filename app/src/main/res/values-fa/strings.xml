@@ -81,7 +81,7 @@
   <string name="upload_progress_notification_title_start">بارگذاری پرونده: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">بارگذاری %1$s</string>
   <string name="upload_progress_notification_title_finishing">اتمام بارگذاری %1$s</string>
-  <string name="upload_failed_notification_title">%1$s بارگذاری نشد</string>
+  <string name="upload_failed_notification_title" fuzzy="true">%1$s بارگذاری نشد</string>
   <string name="upload_failed_notification_subtitle">برای دیدن انگشت بزنید</string>
   <string name="upload_paused_notification_subtitle">برای دیدن انگشت بزنید</string>
   <string name="title_activity_contributions">بارگذاری‌های اخیر من</string>
@@ -426,6 +426,7 @@
   <string name="delete_helper_ask_reason_copyright_internet_photo">عکس تصادفی از اینترنت</string>
   <string name="delete_helper_ask_reason_copyright_logo">لوگو</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">چون</string>
+  <string name="caption_edit_helper_show_edit_message">توضیح افزوده شد.</string>
   <string name="share_image_via">هم‌رسانی تصویر از طریق</string>
   <string name="no_achievements_yet" fuzzy="true">هنوز مشارکتی نکرده‌اید</string>
   <string name="account_created">حساب ساخته شد!</string>
@@ -457,6 +458,7 @@
   <string name="leaderboard_weekly">هفتگی</string>
   <string name="leaderboard_all_time">تمام وقت</string>
   <string name="leaderboard_upload">بارگذاری</string>
+  <string name="title_page_bookmarks_items">آیتم‌ها</string>
   <string name="custom_selector_title">انتخاب‌گر سفارشی</string>
   <string name="custom_selector_empty_text">فاقد تصویر</string>
   <string name="done">انجام شد</string>
@@ -470,4 +472,7 @@
   <string name="wlm_month_message">این ماه، ماه «ویکی دوست‌دار یادمان‌ها» است!</string>
   <string name="learn_more">بیشتر بدانید</string>
   <string name="menu_view_user_page">نمایش صفحهٔ کاربر</string>
+  <string name="advanced_options">گزینه‌های پیشرفته</string>
+  <string name="apply">اعمال</string>
+  <string name="reset">بازنشانی</string>
 </resources>

@@ -55,6 +55,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -117,6 +118,12 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
     public static final String EXTRA_FILES = "commons_image_exta";
 
+    /**
+     * Stores all nearby places found and related users response for
+     * each place while uploading media
+     */
+    public static HashMap<Place,Boolean> nearbyPopupAnswers;
+
     @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,6 +134,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         ButterKnife.bind(this);
         compositeDisposable = new CompositeDisposable();
         init();
+        nearbyPopupAnswers = new HashMap<>();
 
         PermissionUtils.checkPermissionsAndPerformAction(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -240,8 +248,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
     @Override
     public void returnToMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
         finish();
     }
 
@@ -469,6 +475,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         if (index < fragments.size() - 1) {
             vpUpload.setCurrentItem(index + 1, false);
             fragments.get(index + 1).onBecameVisible();
+            ((LinearLayoutManager) rvThumbnails.getLayoutManager())
+                .scrollToPositionWithOffset((index > 0) ? index-1 : 0, 0);
         } else {
             if(defaultKvStore.getInt(COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0) >= 10){
                 DialogUtil.showAlertDialog(this,
@@ -490,6 +498,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         if (index != 0) {
             vpUpload.setCurrentItem(index - 1, true);
             fragments.get(index - 1).onBecameVisible();
+            ((LinearLayoutManager) rvThumbnails.getLayoutManager())
+                .scrollToPositionWithOffset((index > 3) ? index-2 : 0, 0);
         }
     }
 

@@ -5,6 +5,7 @@
 * Andriykopanytsia
 * Base
 * DDPAT
+* Ice bulldog
 * Movses
 * Mykola Swarnyk
 * Piramidion
@@ -89,7 +90,7 @@
   <string name="upload_progress_notification_title_start">Завантаження файлу: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s завантажується</string>
   <string name="upload_progress_notification_title_finishing">Завершення завантаження %1$s</string>
-  <string name="upload_failed_notification_title">Не вдалося завантажити %1$s</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Не вдалося завантажити %1$s</string>
   <string name="upload_paused_notification_title">Завантаження %1$s призупинене</string>
   <string name="upload_failed_notification_subtitle">Торкніться, щоб переглянути</string>
   <string name="upload_paused_notification_subtitle">Торкніться, щоб переглянути</string>
@@ -639,6 +640,8 @@
   <string name="location_picker_image_view_shadow">Вигляд вибору розташування як тіні зображення</string>
   <string name="image_location">Підпис зображення</string>
   <string name="check_whether_location_is_correct">Перевірте правильність розташування</string>
+  <string name="label">Мітка</string>
+  <string name="description">Опис</string>
   <string name="title_page_bookmarks_items">Елементи</string>
   <string name="custom_selector_title">Користувацький селектор</string>
   <string name="custom_selector_empty_text">Без зображень</string>
@@ -664,4 +667,8 @@
   <string name="apply">Застосувати</string>
   <string name="reset">Скинути</string>
   <string name="location_message">Дані про місцезнаходження допомагають редакторам Вікі знайти ваше зображення, що робить його набагато кориснішим.\nВаші останні завантаження не мають місцезнаходження.\nПропонуємо ввімкнути місцезнаходження в налаштуваннях програми камери.\nДякуємо за завантаження!</string>
+  <string name="no_location_found_title">Розташування не знайдено</string>
+  <string name="no_location_found_message">Як щодо того, щоб додати місце, де було зроблене зображення? Дані про розташування допомогають вікіредакторам знайти ваше зображення, від чого воно стає ще більш корисним.\nДякуємо!</string>
+  <string name="add_location">Додати розташування</string>
+  <string name="feedback_sharing_data_alert">Будь ласка, видаліть з цього листа будь-яку інформацію, якою ви не бажаєте поділитися публічно. Також майте на увазі, що ваша адреса електронної пошти, за допомогою якої ви розміщуєте публікацію, а також пов’язане ім’я та зображення профілю будуть видимі для всіх.</string>
 </resources>

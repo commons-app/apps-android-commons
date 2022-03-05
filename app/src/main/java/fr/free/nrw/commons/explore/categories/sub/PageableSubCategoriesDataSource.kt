@@ -14,6 +14,6 @@ class PageableSubCategoriesDataSource @Inject constructor(
         if (startPosition == 0) {
             categoryClient.resetSubCategoryContinuation(query)
         }
-        categoryClient.getSubCategoryList(query).blockingGet()
+        categoryClient.getSubCategoryList(query).blockingGet().map { it.name }
     }
 }

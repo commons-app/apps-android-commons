@@ -44,8 +44,8 @@
   <string name="logging_in_message">Waart wgl. …</string>
   <string name="updating_caption_message">Waart wgl. ...</string>
   <string name="login_success">Umeldung huet geklappt!</string>
-  <string name="login_failed">D\'Aloggen huet net funktionéiert</string>
-  <string name="upload_failed">Fichier net fonnt. probéiert wgl. en anere Fichier.</string>
+  <string name="login_failed">D\'Aloggen huet net funktionéiert!</string>
+  <string name="upload_failed">Fichier net fonnt. Probéiert wgl. en anere Fichier.</string>
   <string name="authentication_failed">Authentifizéierung huet net funktionéiert, loggt Iech wgl. nach eng Kéier an.</string>
   <string name="uploading_started">D\'Eroplueden huet ugefaang!</string>
   <string name="upload_completed_notification_title">%1$s eropgelueden!</string>
@@ -53,7 +53,7 @@
   <string name="upload_progress_notification_title_start">Fichier eroplueden: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s gëtt eropgelueden</string>
   <string name="upload_progress_notification_title_finishing">Eroplueden vu(n) %1$s ofschléissen</string>
-  <string name="upload_failed_notification_title">D\'Eropluede vu(n) %1$s huet net funktionéiert</string>
+  <string name="upload_failed_notification_title">%1$s konnt net eropgeluede ginn</string>
   <string name="upload_failed_notification_subtitle">Dréckt fir nach eng Kéier ze probéieren</string>
   <string name="title_activity_contributions">Meng rezent eropgeluede Fichieren</string>
   <string name="contribution_state_queued">An der Queue</string>
@@ -349,11 +349,15 @@
   <string name="leaderboard_nearby">Nobäi</string>
   <string name="leaderboard_used">Benotzt</string>
   <string name="limited_connection_mode">Limitéierte Verbindungsmodus</string>
+  <string name="cancelling_upload">Eropluede gëtt ofgebrach....</string>
+  <string name="cancel_upload">Eroplueden ofbriechen</string>
   <string name="app_ui_language">Sprooch vum Interface vum Benotzer vun der App</string>
   <string name="read_help_link">Liest méi</string>
   <string name="media_detail_in_all_languages">An alle Sproochen</string>
   <string name="choose_a_location">Eng Plaz eraussichen</string>
   <string name="select_location_location_picker">Plaz eraussichen</string>
+  <string name="label">Etikett</string>
+  <string name="description">Beschreiwung</string>
   <string name="title_page_bookmarks_items">Elementer</string>
   <string name="custom_selector_empty_text">Keng Biller</string>
   <string name="done">Fäerdeg</string>
@@ -369,4 +373,5 @@
   <string name="advanced_options">Erweidert Optiounen</string>
   <string name="apply">Uwenden</string>
   <string name="reset">Zrécksetzen</string>
+  <string name="no_location_found_title">Keng Plaz fonnt</string>
 </resources>

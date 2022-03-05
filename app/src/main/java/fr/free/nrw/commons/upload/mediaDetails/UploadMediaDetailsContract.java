@@ -34,11 +34,11 @@ public interface UploadMediaDetailsContract {
 
         void showConnectionErrorPopup();
 
-        void showMapWithImageCoordinates(boolean shouldShow);
-
         void showExternalMap(UploadItem uploadItem);
 
         void updateMediaDetails(List<UploadMediaDetail> uploadMediaDetails);
+
+        void displayAddLocationDialog(Runnable runnable);
     }
 
     interface UserActionListener extends BasePresenter<View> {

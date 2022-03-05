@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * BaRaN6161 TURK
+* Can
 * Chansey
 * Dual
 * Emperyan
@@ -71,7 +72,7 @@
   <string name="signup">Kaydol</string>
   <string name="logging_in_title">Oturum açılıyor</string>
   <string name="logging_in_message">Lütfen bekleyin…</string>
-  <string name="updating_caption_title">Başlıklar ve açıklamalar güncelleniyor</string>
+  <string name="updating_caption_title">Altyazılar ve açıklamalar güncelleniyor</string>
   <string name="updating_caption_message">Lütfen bekleyin…</string>
   <string name="login_success">Oturum açma başarılı!</string>
   <string name="login_failed">Oturum açma başarısız oldu!</string>
@@ -84,7 +85,7 @@
   <string name="upload_progress_notification_title_start">Dosya yükleniyor: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s yükleniyor</string>
   <string name="upload_progress_notification_title_finishing">%1$s yüklemesi bitiriliyor</string>
-  <string name="upload_failed_notification_title">%1$s dosyasının yüklemesi başarısız oldu</string>
+  <string name="upload_failed_notification_title" fuzzy="true">%1$s dosyasının yüklemesi başarısız oldu</string>
   <string name="upload_paused_notification_title">%1$s yükleme duraklatıldı</string>
   <string name="upload_failed_notification_subtitle">Görüntülemek için tıklayın</string>
   <string name="upload_paused_notification_subtitle">Görüntülemek için tıklayın</string>
@@ -632,6 +633,9 @@
   <string name="location_picker_image_view_shadow">Konum seçicinin resim görünümünün gölgesi</string>
   <string name="image_location">Görüntü Konumu</string>
   <string name="check_whether_location_is_correct">Konumun doğru olup olmadığını kontrol edin</string>
+  <string name="label">Etiket</string>
+  <string name="description">Açıklama</string>
+  <string name="title_page_bookmarks_items">Ögeler</string>
   <string name="custom_selector_title">Özel Seçici</string>
   <string name="custom_selector_empty_text">Resim Yok</string>
   <string name="done">Yapıldı</string>
@@ -655,4 +659,9 @@
   <string name="advanced_query_info_text">Yakınlardakiler sorgusunu özelleştirebilirsiniz. Hata alırsanız, sıfırlayın ve uygulayın.</string>
   <string name="apply">Uygula</string>
   <string name="reset">Sıfırla</string>
+  <string name="location_message">Konum verisi Viki editörlerine, daha kullanışlı hale getirerek, fotoğrafınızı bulmaya yardımcı olur.\nSon yüklemelerinizde konum yok.\nKamera uygulamanızın ayarlarından konum seçeneğini etkinleştirmenizi öneririz.\nYükleme için teşekkürler!</string>
+  <string name="no_location_found_title">Konum bulunamadı</string>
+  <string name="no_location_found_message">Bu görüntünün çekildiği yeri eklemeye ne dersiniz?\nKonum verileri, Wiki düzenleyicilerinin resminizi bulmasına yardımcı olarak onu çok daha kullanışlı hale getirir.\nTeşekkürler!</string>
+  <string name="add_location">Konum ekle</string>
+  <string name="feedback_sharing_data_alert">Lütfen herkese açık olarak paylaşmaktan çekindiğiniz tüm bilgileri bu e-postadan kaldırın. Ayrıca gönderi paylaştığınız e-posta adresinizin ve ilgili ad ve profil resminizin herkese açık olarak görüneceğini lütfen unutmayın.</string>
 </resources>

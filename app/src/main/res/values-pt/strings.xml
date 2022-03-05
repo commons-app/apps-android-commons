@@ -64,6 +64,8 @@
   <string name="signup">Registar-se</string>
   <string name="logging_in_title">A iniciar sessão</string>
   <string name="logging_in_message">Aguarde, por favor…</string>
+  <string name="updating_caption_title">A atualizar legendas e descrições</string>
+  <string name="updating_caption_message">Aguarde, por favor…</string>
   <string name="login_success">Sessão iniciada!</string>
   <string name="login_failed">O início de sessão falhou!</string>
   <string name="upload_failed">O ficheiro não foi encontrado. Tente outro, por favor.</string>
@@ -75,7 +77,7 @@
   <string name="upload_progress_notification_title_start">A carregar o ficheiro %s</string>
   <string name="upload_progress_notification_title_in_progress">A carregar %1$s</string>
   <string name="upload_progress_notification_title_finishing">A terminar o carregamento de %1$s</string>
-  <string name="upload_failed_notification_title">O carregamento de %1$s falhou</string>
+  <string name="upload_failed_notification_title" fuzzy="true">O carregamento de %1$s falhou</string>
   <string name="upload_paused_notification_title">Carregamento de %1$s em pausa</string>
   <string name="upload_failed_notification_subtitle">Tocar para ver</string>
   <string name="upload_paused_notification_subtitle">Tocar para ver</string>
@@ -329,6 +331,7 @@
   <string name="quiz_screenshot_question">Esta captura de ecrã pode ser carregada?</string>
   <string name="share_app_title">Partilhar aplicação</string>
   <string name="error_fetching_nearby_places">Erro ao procurar locais próximos.</string>
+  <string name="no_nearby_places_around">Não existem locais próximos</string>
   <string name="error_fetching_nearby_monuments">Erro ao procurar monumentos próximos.</string>
   <string name="no_recent_searches">Não há pesquisas recentes</string>
   <string name="delete_recent_searches_dialog">Tem a certeza de que deseja limpar o historial de pesquisas?</string>
@@ -501,12 +504,21 @@
   <string name="category_edit_button_text">Atualizar categorias</string>
   <string name="coordinates_edit_helper_make_edit_toast">A tentar atualizar coordenadas.</string>
   <string name="coordinates_edit_helper_show_edit_title">Atualização de coordenadas</string>
+  <string name="description_edit_helper_show_edit_title">Atualização da descrição</string>
+  <string name="caption_edit_helper_show_edit_title">Atualização da legenda</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Êxito</string>
   <string name="coordinates_edit_helper_show_edit_message">As coordenadas %1$s foram adicionadas.</string>
+  <string name="description_edit_helper_show_edit_message">As descrições foram adicionadas.</string>
+  <string name="caption_edit_helper_show_edit_message">A legenda foi adicionada.</string>
   <string name="coordinates_edit_helper_edit_message_else">Não foi possível adicionar coordenadas.</string>
+  <string name="description_edit_helper_edit_message_else">Não foi possível adicionar as descrições.</string>
+  <string name="caption_edit_helper_edit_message_else">Não foi possível adicionar a legenda.</string>
   <string name="coordinates_picking_unsuccessful">Não foi possível obter coordenadas.</string>
+  <string name="descriptions_picking_unsuccessful">Não foi possível obter as descrições.</string>
+  <string name="description_activity_title">Editar descrições e legendas</string>
   <string name="share_image_via">Partilhar imagem via</string>
-  <string name="no_achievements_yet" fuzzy="true">Ainda não fez nenhuma contribuição</string>
+  <string name="you_have_no_achievements_yet">Ainda não fez nenhuma contribuição</string>
+  <string name="no_achievements_yet">%s ainda não fez nenhuma contribuição</string>
   <string name="account_created">Conta criada!</string>
   <string name="text_copy">Texto copiado para a área de transferência</string>
   <string name="notification_mark_read">Notificação marcada como lida</string>
@@ -558,6 +570,7 @@
   <string name="resume">continuar</string>
   <string name="paused">Em pausa</string>
   <string name="more">Mais</string>
+  <string name="bookmarks">Marcadores</string>
   <string name="achievements_tab_title">Realizações</string>
   <string name="leaderboard_tab_title">Tabela de classificação</string>
   <string name="rank_prefix">Classificação:</string>
@@ -612,6 +625,9 @@
   <string name="location_picker_image_view_shadow">A sombra da vista de imagem do selecionador de localização</string>
   <string name="image_location">Localização da imagem</string>
   <string name="check_whether_location_is_correct">Verificar se a localização está correta</string>
+  <string name="label">Etiqueta</string>
+  <string name="description">Descrição</string>
+  <string name="title_page_bookmarks_items">Elementos</string>
   <string name="custom_selector_title">Seletor personalizado</string>
   <string name="custom_selector_empty_text">Não existem imagens</string>
   <string name="done">Concluído</string>
@@ -621,9 +637,25 @@
   <string name="custom_selector_info_text2">Ao contrário da imagem à esquerda, a imagem à direita tem o logótipo da wiki Commons que indica que ela já foi carregada.\n Tocar e manter para uma antevisão da imagem.</string>
   <string name="welcome_custom_selector_ok">Excecional</string>
   <string name="custom_selector_already_uploaded_image_text">Esta imagem já foi carregada na wiki Commons.</string>
-  <string name="wlm_upload_info" fuzzy="true">Está a participar na campanha Wiki Loves Monuments. As predefinições associadas serão adicionadas.</string>
+  <string name="wlm_upload_info">Esta imagem será submetida ao concurso Wiki Loves Monuments 2021</string>
   <string name="display_monuments">Mostrar monumentos</string>
   <string name="wlm_month_message">É o mês da Wiki Loves Monuments!</string>
   <string name="learn_more">SABER MAIS</string>
   <string name="wlm_campaign_description">Wiki Loves Monuments é um concurso internacional de fotografias de monumentos, organizado pela Wikimedia</string>
+  <string name="need_permission">Necessitar de Permissão</string>
+  <string name="read_phone_state_permission_message">Os mapas de locais próximos precisam de ler ESTADO DO TELEFONE para funcionar devidamente</string>
+  <string name="contributions_of_user">Contribuições do utilizador: %s</string>
+  <string name="achievements_of_user">Realizações do utilizador: %s</string>
+  <string name="menu_view_user_page">Ver página de utilizador</string>
+  <string name="advanced_options">Opções avançadas</string>
+  <string name="advanced_query_info_text">Pode personalizar a consulta de locais próximos. Se obtiver erros, reiniciar e aplicar.</string>
+  <string name="apply">Aplicar</string>
+  <string name="reset">Reiniciar</string>
+  <string name="location_message">Os dados de localização ajudam os utilizadores da wiki a encontrar a sua imagem, tornando-a muito mais útil.\nOs seus carregamentos recentes não têm localização.\nSugerimos que ative a localização nos parâmetros da aplicação da sua câmara.\nObrigado pelo carregamento!</string>
+  <string name="no_location_found_title">Não foi encontrada nenhuma localização</string>
+  <string name="no_location_found_message">Que tal adicionar o local onde a imagem foi tirada?\nOs dados de localização ajudam os editores da wiki a encontrarem a sua fotografia, tornando-a muito mais útil.\nObrigado!</string>
+  <string name="add_location">Adicionar localização</string>
+  <string name="feedback_sharing_data_alert">Remova desta mensagem de correio todas as informações que não se sinta à vontade em partilhar publicamente, por favor. Adicionalmente, esteja consciente de que o seu endereço de correio eletrónico, com o qual está a fazer esta publicação, e o nome e imagem de perfil a ele associados, serão visíveis pelo público geral.</string>
+  <string name="achievements_unavailable_beta">As realizações só estão disponíveis no sabor de produção.</string>
+  <string name="leaderboard_unavailable_beta">A tabela de classificação só está disponível no sabor de produção.</string>
 </resources>

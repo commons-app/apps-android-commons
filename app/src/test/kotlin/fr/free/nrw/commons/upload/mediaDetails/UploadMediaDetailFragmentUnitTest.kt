@@ -21,6 +21,7 @@ import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.nhaarman.mockitokotlin2.mock
 import fr.free.nrw.commons.LocationPicker.LocationPicker
+import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
@@ -30,6 +31,7 @@ import fr.free.nrw.commons.upload.ImageCoordinates
 import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadItem
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -43,8 +45,11 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.robolectric.shadows.ShadowActivity
+import org.robolectric.shadows.ShadowIntent
 import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 
@@ -58,6 +63,7 @@ class UploadMediaDetailFragmentUnitTest {
     private lateinit var context: Context
     private lateinit var layoutInflater: LayoutInflater
     private lateinit var view: View
+    private lateinit var runnable: Runnable
 
     private lateinit var tvTitle: TextView
     private lateinit var tooltip: ImageView
@@ -97,6 +103,8 @@ class UploadMediaDetailFragmentUnitTest {
     @Mock
     private lateinit var imageCoordinates: ImageCoordinates
 
+    private lateinit var activity: UploadActivity
+
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
@@ -104,7 +112,7 @@ class UploadMediaDetailFragmentUnitTest {
         context = RuntimeEnvironment.application.applicationContext
         AppAdapter.set(TestAppAdapter())
 
-        val activity = Robolectric.buildActivity(UploadActivity::class.java).create().get()
+        activity = Robolectric.buildActivity(UploadActivity::class.java).create().get()
         layoutInflater = LayoutInflater.from(activity)
 
         view = LayoutInflater.from(activity)
@@ -340,25 +348,19 @@ class UploadMediaDetailFragmentUnitTest {
 
     @Test
     @Throws(Exception::class)
-    fun testShowMapWithImageCoordinates() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.showMapWithImageCoordinates(true)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testShowExternalMap() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        shadowOf(Looper.getMainLooper()).idle()
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
         `when`(imageCoordinates.decLatitude).thenReturn(0.0)
         `when`(imageCoordinates.decLongitude).thenReturn(0.0)
+        `when`(imageCoordinates.zoomLevel).thenReturn(16.0)
         fragment.showExternalMap(uploadItem)
     }
 
     @Test
     @Throws(Exception::class)
-    fun testOnActivityResult() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
+    fun testOnActivityResultOnMapIconClicked() {
+        shadowOf(Looper.getMainLooper()).idle()
         Mockito.mock(LocationPicker::class.java)
         val intent = Mockito.mock(Intent::class.java)
         val cameraPosition = Mockito.mock(CameraPosition::class.java)
@@ -372,6 +374,29 @@ class UploadMediaDetailFragmentUnitTest {
         `when`(latLng.longitude).thenReturn(0.0)
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
         fragment.onActivityResult(1211, Activity.RESULT_OK, intent)
+        Mockito.verify(presenter, Mockito.times(0)).verifyImageQuality(0)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnActivityResultAddLocationDialog() {
+        shadowOf(Looper.getMainLooper()).idle()
+        Mockito.mock(LocationPicker::class.java)
+        val intent = Mockito.mock(Intent::class.java)
+        val cameraPosition = Mockito.mock(CameraPosition::class.java)
+        val latLng = Mockito.mock(LatLng::class.java)
+
+        Whitebox.setInternalState(cameraPosition, "target", latLng)
+        Whitebox.setInternalState(fragment, "editableUploadItem", uploadItem)
+        Whitebox.setInternalState(fragment,"isMissingLocationDialog",true)
+        Whitebox.setInternalState(fragment, "presenter", presenter)
+
+        `when`(LocationPicker.getCameraPosition(intent)).thenReturn(cameraPosition)
+        `when`(latLng.latitude).thenReturn(0.0)
+        `when`(latLng.longitude).thenReturn(0.0)
+        `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
+        fragment.onActivityResult(1211, Activity.RESULT_OK, intent)
+        Mockito.verify(presenter, Mockito.times(1)).verifyImageQuality(0)
     }
 
     @Test
@@ -427,6 +452,47 @@ class UploadMediaDetailFragmentUnitTest {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         Whitebox.setInternalState(fragment, "presenter", presenter)
         fragment.onButtonCopyTitleDescToSubsequentMedia()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testDisplayAddLocationDialog() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        runnable = Runnable {  }
+        fragment.displayAddLocationDialog(runnable)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testRememberedZoomLevelOnNull(){
+        shadowOf(Looper.getMainLooper()).idle()
+        Whitebox.setInternalState(fragment, "defaultKvStore", defaultKvStore)
+        `when`(uploadItem.gpsCoords).thenReturn(null)
+        `when`(defaultKvStore.getString(LAST_ZOOM)).thenReturn("13.0")
+        fragment.showExternalMap(uploadItem)
+        Mockito.verify(uploadItem,Mockito.times(1)).gpsCoords
+        Mockito.verify(defaultKvStore,Mockito.times(2)).getString(LAST_ZOOM)
+        val shadowActivity: ShadowActivity = shadowOf(activity)
+        val startedIntent = shadowActivity.nextStartedActivity
+        val shadowIntent: ShadowIntent = shadowOf(startedIntent)
+        Assert.assertEquals(shadowIntent.intentClass, LocationPickerActivity::class.java)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testRememberedZoomLevelOnNotNull(){
+        shadowOf(Looper.getMainLooper()).idle()
+        `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
+        `when`(imageCoordinates.decLatitude).thenReturn(8.0)
+        `when`(imageCoordinates.decLongitude).thenReturn(-8.0)
+        `when`(imageCoordinates.zoomLevel).thenReturn(14.0)
+        `when`(defaultKvStore.getString(LAST_ZOOM)).thenReturn(null)
+        fragment.showExternalMap(uploadItem)
+        Mockito.verify(uploadItem.gpsCoords,Mockito.times(1)).zoomLevel
+        val shadowActivity: ShadowActivity = shadowOf(activity)
+        val startedIntent = shadowActivity.nextStartedActivity
+        val shadowIntent: ShadowIntent = shadowOf(startedIntent)
+        Assert.assertEquals(shadowIntent.intentClass, LocationPickerActivity::class.java)
     }
 
 }

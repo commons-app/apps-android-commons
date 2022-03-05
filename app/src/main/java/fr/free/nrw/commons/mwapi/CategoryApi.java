@@ -3,6 +3,7 @@ package fr.free.nrw.commons.mwapi;
 import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_PREFIX;
 
 import com.google.gson.Gson;
+import fr.free.nrw.commons.category.CategoryItem;
 import io.reactivex.Single;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,7 +41,7 @@ public class CategoryApi {
         this.gson = gson;
     }
 
-    public Single<List<String>> request(String coords) {
+    public Single<List<CategoryItem>> request(String coords) {
         return Single.fromCallable(() -> {
             HttpUrl apiUrl = buildUrl(coords);
             Timber.d("URL: %s", apiUrl.toString());
@@ -53,12 +54,12 @@ public class CategoryApi {
             }
 
             MwQueryResponse apiResponse = gson.fromJson(body.charStream(), MwQueryResponse.class);
-            Set<String> categories = new LinkedHashSet<>();
+            Set<CategoryItem> categories = new LinkedHashSet<>();
             if (apiResponse != null && apiResponse.query() != null && apiResponse.query().pages() != null) {
                 for (MwQueryPage page : apiResponse.query().pages()) {
                     if (page.categories() != null) {
                         for (MwQueryPage.Category category : page.categories()) {
-                            categories.add(category.title().replace(CATEGORY_PREFIX, ""));
+                            categories.add(new CategoryItem(category.title().replace(CATEGORY_PREFIX, ""), "", "", false));
                         }
                     }
                 }

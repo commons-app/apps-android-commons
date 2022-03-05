@@ -66,7 +66,7 @@
   <string name="upload_progress_notification_title_start">Alŝutas dosieron: %s</string>
   <string name="upload_progress_notification_title_in_progress">Alŝutante %1$s</string>
   <string name="upload_progress_notification_title_finishing">Finiĝis la alŝutado de %1$s</string>
-  <string name="upload_failed_notification_title">La alŝutado de %1$s malsukcesis</string>
+  <string name="upload_failed_notification_title" fuzzy="true">La alŝutado de %1$s malsukcesis</string>
   <string name="upload_failed_notification_subtitle">Tuŝetu por vidi</string>
   <string name="title_activity_contributions">Miaj lastaj alŝutoj</string>
   <string name="contribution_state_queued">Envicigita</string>
@@ -446,4 +446,5 @@
   <string name="delete_helper_ask_reason_copyright_logo">Emblemo</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Ĉar ĝi estas</string>
   <string name="mapbox_telemetry">Mapbox Telemetry</string>
+  <string name="description">Priskribo</string>
 </resources>

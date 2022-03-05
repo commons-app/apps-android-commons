@@ -352,6 +352,7 @@
   <string name="error_fetching_nearby_monuments">שגיאה באחזור אתרים בסביבתך.</string>
   <string name="no_recent_searches">אין חיפושים אחרונים</string>
   <string name="delete_recent_searches_dialog">האם באמת ברצונך לנקות את היסטוריית החיפוש שלך?</string>
+  <string name="cancel_upload_dialog">האם ברצונך באמת לבטל את ההעלאה הזאת?</string>
   <string name="delete_search_dialog">האם ברצונך למחוק חיפוש זה?</string>
   <string name="search_history_deleted">היסטוריית החיפוש נמחקה</string>
   <string name="nominate_delete">העמדה למחיקה</string>
@@ -619,6 +620,8 @@
   <string name="quality_images_info">תמונות איכות הן תרשימים או תמונות שעומדות בתקני איכות מסוימים (שמטבעם בעיקר טכניים) והן בעלות ערך למיזמי ויקימדיה</string>
   <string name="resuming_upload">ההעלאה ממשיכה…</string>
   <string name="pausing_upload">ההעלאה מושהית…</string>
+  <string name="cancelling_upload">ביטול ההעלאה...</string>
+  <string name="cancel_upload">ביטול ההעלאה</string>
   <string name="limited_connection_explanation">הפעלת מצב חיבור מוגבל. כל ההעלאות מושהות ותמשכנה לאחר השבתת המצב הזה.</string>
   <string name="limited_connection_is_on">מצב חיבור מוגבל פעיל.</string>
   <string name="media_details_tooltip">נא לכתוב תיאור קצר שמסביר מה מופיע בתמונה. בתיאור, כדאי לכתוב מה הופך את התמונה הזאת למעניינת, טיפוסית או נדירה ולהסביר את ההקשר, בין אם גלוי או סמוי. יש להשתמש במינוח מדויק ככל הניתן.</string>
@@ -644,6 +647,9 @@
   <string name="location_picker_image_view_shadow">הצל של תצוגת תמונה של בורר המיקום</string>
   <string name="image_location">מיקום תמונה</string>
   <string name="check_whether_location_is_correct">לבדוק האם המיקום נכון</string>
+  <string name="label">תווית</string>
+  <string name="description">תיאור</string>
+  <string name="title_page_bookmarks_items">פריטים</string>
   <string name="custom_selector_title">בורר מותאם אישית</string>
   <string name="custom_selector_empty_text">אין תמונות</string>
   <string name="done">בוצע</string>
@@ -668,4 +674,10 @@
   <string name="apply">החלה</string>
   <string name="reset">איפוס</string>
   <string name="location_message">נתוני מיקום עוזרים לעורכי ויקי למצוא את התמונה שלך, וזה גורם לה להיות הרבה יותר שימושית.\nבהעלאות האחרונות שלך אין מיקום.\nאנחנו ממליצים לך להפעיל את המיקום בהגדרות יישום המצלמה שלך.\nתודה על ההעלאה!</string>
+  <string name="no_location_found_title">לא נמצא מיקום</string>
+  <string name="no_location_found_message">מה עם להוסיף את המקום שהתמונה הזאת צולמה בו?\nנתוני מיקום עוזרים לעורכי ויקי למצוא את התמונה שלך, והופכים אותה לשימושית יותר.\nתודה!</string>
+  <string name="add_location">הוספת מיקום</string>
+  <string name="feedback_sharing_data_alert">נא להסיר מהמכתב הזה כל מידע שאינך רוצה לשתף באופן פומבי. כמו־כן, נא לזכור שכתובת הדוא\"ל שמכתב נשלח ממנה, השם המשויך והתמונה, יהיו מוצגות ציבורית.</string>
+  <string name="achievements_unavailable_beta">ההישגים זמינים רק בגרסה הראשית.</string>
+  <string name="leaderboard_unavailable_beta">לוח המובילים זמין רק בגרסה הראשית.</string>
 </resources>
