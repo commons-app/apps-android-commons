@@ -40,9 +40,6 @@ public class FeedbackDialog extends Dialog {
     @BindView(R.id.feedback_item_edit_text)
     PasteSensitiveTextInputEditText feedbackDescription;
 
-    @Inject
-    FeedbackController feedbackController;
-
     private OnFeedbackSubmitCallback onFeedbackSubmitCallback;
 
     public FeedbackDialog(Context context, OnFeedbackSubmitCallback onFeedbackSubmitCallback) {
@@ -72,7 +69,7 @@ public class FeedbackDialog extends Dialog {
         String mDeviceName = deviceName.isChecked() ? DeviceInfoUtil.getDevice() : null;
         String mNetworkType = networkType.isChecked() ? DeviceInfoUtil.getConnectionType(getContext()).toString() : null;
         Feedback feedback = new Feedback(mAppVersionVersion,mAPILevel, feedbackDescription.getText().toString(), mAndroidVersion, mDeviceModel, mDeviceManufacturer, mDeviceName, mNetworkType);;
-        onFeedbackSubmitCallback.onFeedbackSubmit(null);
+        onFeedbackSubmitCallback.onFeedbackSubmit(feedback);
         dismiss();
     }
 

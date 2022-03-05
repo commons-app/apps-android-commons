@@ -24,10 +24,11 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
+import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.feedback.FeedbackContentCreator;
 import fr.free.nrw.commons.feedback.model.Feedback;
-import fr.free.nrw.commons.feedback.FeedbackController;
 import fr.free.nrw.commons.feedback.FeedbackDialog;
 import fr.free.nrw.commons.feedback.OnFeedbackSubmitCallback;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -57,7 +58,8 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
     JsonKvStore store;
 
     @Inject
-    FeedbackController feedbackController;
+    @Named("commons-page-edit")
+    PageEditClient pageEditClient;
 
     @Nullable
     @Override
@@ -126,25 +128,31 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
         new FeedbackDialog(getContext(), new OnFeedbackSubmitCallback() {
             @Override
             public void onFeedbackSubmit(Feedback feedback) {
-                Single<Boolean> single = feedbackController
-                    .postFeedback(MoreBottomSheetFragment.this, feedback)
-                    .flatMapSingle(result -> Single.just(result))
-                    .firstOrError();
-
-                Single.defer((Callable<SingleSource<Boolean>>) () -> single)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(aBoolean -> {
-                        if (aBoolean) {
-                            Toast.makeText(getContext(), getString(R.string.thanks_feedback), Toast.LENGTH_SHORT)
-                                .show();
-                        } else {
-                            Toast.makeText(getContext(), getString(R.string.error_feedback),
-                                Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                uploadFeedback(feedback);
             }
         }).show();
+    }
+
+    void uploadFeedback(Feedback feedback) {
+        FeedbackContentCreator feedbackContentCreator = new FeedbackContentCreator(feedback);
+
+        Single<Boolean> single =
+            pageEditClient.prependEdit("Commons:Mobile_app/Feedback", feedbackContentCreator.toString(), "Summary")
+                .flatMapSingle(result -> Single.just(result))
+                .firstOrError();
+
+        Single.defer((Callable<SingleSource<Boolean>>) () -> single)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(aBoolean -> {
+                if (aBoolean) {
+                    Toast.makeText(getContext(), getString(R.string.thanks_feedback), Toast.LENGTH_SHORT)
+                        .show();
+                } else {
+                    Toast.makeText(getContext(), getString(R.string.error_feedback),
+                        Toast.LENGTH_SHORT).show();
+                }
+            });
     }
 
     /**

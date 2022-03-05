@@ -17,18 +17,24 @@ import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.actions.PageEditClient
 import fr.free.nrw.commons.feedback.FeedbackDialog
+import fr.free.nrw.commons.feedback.model.Feedback
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.utils.ConfigUtils
 import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
+import io.reactivex.Observable
+import io.reactivex.Single
+import io.reactivex.SingleSource
+import io.reactivex.functions.Function
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.doReturn
+import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
@@ -42,6 +48,7 @@ import org.robolectric.shadows.ShadowAlertDialog
 import org.robolectric.shadows.ShadowDialog
 import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
+import java.util.concurrent.Callable
 
 
 @RunWith(RobolectricTestRunner::class)
@@ -61,6 +68,9 @@ class MoreBottomSheetFragmentUnitTests {
     @Mock
     private lateinit var morePeerReview: TextView
 
+    @Mock
+    private lateinit var pageEditClient: PageEditClient
+
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
@@ -76,6 +86,7 @@ class MoreBottomSheetFragmentUnitTests {
 
         Whitebox.setInternalState(fragment, "store", store)
         Whitebox.setInternalState(fragment, "morePeerReview", morePeerReview)
+        Whitebox.setInternalState(fragment, "pageEditClient", pageEditClient)
 
         `when`(store.getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED)).thenReturn(
             true
@@ -112,11 +123,18 @@ class MoreBottomSheetFragmentUnitTests {
     fun testOnFeedbackClicked() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onFeedbackClicked()
-        doReturn("123456").`when`(context).getVersionNameWithSha()
-        doReturn(true).when(androidVersion.isChecked())
         ShadowDialog.getLatestDialog().findViewById<Button>(R.id.btn_submit_feedback).performClick()
-        Assert.assertEquals(true, ShadowDialog.getLatestDialog().isShowing)
-        Assert.assertEquals(ShadowDialog.getLatestDialog().findViewById<Button>(R.id.btn_submit_feedback).text, context.getString(R.string.submit));
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testUploadFeedback() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        val feedback = mock(Feedback::class.java)
+        val observable: Observable<Boolean> = Observable.just(false)
+        val observable2: Observable<Boolean> = Observable.just(true)
+        doReturn(observable, observable2).`when`(pageEditClient).prependEdit(anyString(), anyString(), anyString())
+        fragment.uploadFeedback(feedback)
     }
 
     @Test
