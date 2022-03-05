@@ -130,8 +130,14 @@ public class MainActivity  extends BaseActivity
         } else {
             if(savedInstanceState == null){
                 //starting a fresh fragment.
-                setTitle(getString(R.string.contributions_fragment));
-                loadFragment(ContributionsFragment.newInstance(),false);
+                if(applicationKvStore.getBoolean("last_opened_nearby")){
+                    setTitle(getString(R.string.nearby_fragment));
+                    showNearby();
+                    loadFragment(NearbyParentFragment.newInstance(),false);
+                }else{
+                    setTitle(getString(R.string.contributions_fragment));
+                    loadFragment(ContributionsFragment.newInstance(),false);
+                }
             }
             setUpPager();
         }
@@ -146,6 +152,11 @@ public class MainActivity  extends BaseActivity
             if (!item.getTitle().equals(getString(R.string.more))) {
                 // do not change title for more fragment
                 setTitle(item.getTitle());
+            }
+            if(item.getTitle().equals(getString(R.string.nearby_fragment))){
+                applicationKvStore.putBoolean("last_opened_nearby",true);
+            }else if(item.getTitle().equals(getString(R.string.contributions_fragment))){
+                applicationKvStore.putBoolean("last_opened_nearby",false);
             }
             final Fragment fragment = NavTab.of(item.getOrder()).newInstance();
             return loadFragment(fragment, true);
