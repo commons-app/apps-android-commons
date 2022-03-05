@@ -58,7 +58,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">កំពុងចាប់ផ្តើមផ្ទុកឡើង %1$s</string>
   <string name="upload_progress_notification_title_in_progress">កំពុងផ្ទុកឡើង %1$s</string>
   <string name="upload_progress_notification_title_finishing">កំពុងបញ្ចប់ការផ្ទុកឡើង  %1$s</string>
-  <string name="upload_failed_notification_title">ការផ្ទុកឡើង %1$s មិនបានសម្រេច</string>
+  <string name="upload_failed_notification_title" fuzzy="true">ការផ្ទុកឡើង %1$s មិនបានសម្រេច</string>
   <string name="upload_paused_notification_title">ការផ្ទុកឡើង %1$s បានផ្អាក</string>
   <string name="upload_failed_notification_subtitle">ចុចដើម្បីមើល</string>
   <string name="upload_paused_notification_subtitle">ចុចដើម្បីមើល</string>

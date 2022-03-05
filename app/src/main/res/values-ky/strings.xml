@@ -39,7 +39,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Жүктөө %1$s башталды</string>
   <string name="upload_progress_notification_title_in_progress">%1$s жүктөлүүдө</string>
   <string name="upload_progress_notification_title_finishing">Жүктөө соңуна жетти %1$s</string>
-  <string name="upload_failed_notification_title">Жүктөө %1$s иш жүзүнө ашкан жок</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Жүктөө %1$s иш жүзүнө ашкан жок</string>
   <string name="upload_failed_notification_subtitle">Көрүү үчүн басыңыз</string>
   <string name="title_activity_contributions" fuzzy="true">Менин жүктөөлөрүм</string>
   <string name="contribution_state_queued">Кезек</string>

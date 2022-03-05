@@ -95,7 +95,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Rozpoczęto przesyłanie pliku %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Wysyłanie %1$s</string>
   <string name="upload_progress_notification_title_finishing">Zakończono wysyłanie pliku %1$s</string>
-  <string name="upload_failed_notification_title">Wysyłanie %1$s nieudane</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Wysyłanie %1$s nieudane</string>
   <string name="upload_paused_notification_title">Zatrzymano przesyłanie %1$ plików</string>
   <string name="upload_failed_notification_subtitle">Dotknij, aby zobaczyć</string>
   <string name="upload_paused_notification_subtitle">Dotknij, aby zobaczyć</string>

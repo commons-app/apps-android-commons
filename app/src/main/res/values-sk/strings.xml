@@ -83,7 +83,7 @@
   <string name="upload_progress_notification_title_start">Nahrávanie súboru): %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s nahrávanie</string>
   <string name="upload_progress_notification_title_finishing">Dokončenie nahrávania %1$s</string>
-  <string name="upload_failed_notification_title">Nahrávanie %1$s zlyhalo</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Nahrávanie %1$s zlyhalo</string>
   <string name="upload_paused_notification_title">Nahrávanie %1$s je pozastavené</string>
   <string name="upload_failed_notification_subtitle">Ťuknutím zobrazíte</string>
   <string name="upload_paused_notification_subtitle">Ťuknutím zobrazíte</string>

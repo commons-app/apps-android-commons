@@ -32,7 +32,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">دەستپێکردنی بارکردنی %1</string>
   <string name="upload_progress_notification_title_in_progress">%1$ بار دەکرێت</string>
   <string name="upload_progress_notification_title_finishing">تەواو بوونی بارکردنی %1$</string>
-  <string name="upload_failed_notification_title">بارکردنی %1 شکستی ھێنا</string>
+  <string name="upload_failed_notification_title" fuzzy="true">بارکردنی %1 شکستی ھێنا</string>
   <string name="upload_failed_notification_subtitle">کرتە بکە بۆ بینین</string>
   <string name="contribution_state_failed">سەرکەوتوو نەبوو</string>
   <string name="contribution_state_in_progress">%1$d%% تەواو</string>

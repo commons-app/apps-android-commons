@@ -21,7 +21,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">%1$s अपलोड पैटौन्‍नाछ़</string>
   <string name="upload_progress_notification_title_in_progress">%1$s अपलोड अद्दाछ़</string>
   <string name="upload_progress_notification_title_finishing"> %1$s अपलोड सक्दाछ़</string>
-  <string name="upload_failed_notification_title">%1$s अपलोड असफल</string>
+  <string name="upload_failed_notification_title" fuzzy="true">%1$s अपलोड असफल</string>
   <string name="upload_failed_notification_subtitle">तक्दाइ ट्याप अरऽ</string>
   <string name="provider_contributions">मेरा अपलोडअन</string>
   <string name="menu_share">बाँँणऽ</string>

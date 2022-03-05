@@ -59,7 +59,7 @@
   <string name="upload_progress_notification_title_start">Fayl yuklanmoqda: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s yuklanmoqda</string>
   <string name="upload_progress_notification_title_finishing">%1$s yuklab boʻlindi</string>
-  <string name="upload_failed_notification_title">%1$sʼni yuklab boʻlmadi</string>
+  <string name="upload_failed_notification_title" fuzzy="true">%1$sʼni yuklab boʻlmadi</string>
   <string name="upload_paused_notification_title">%1$sʼni yuklash toʻxtatildi</string>
   <string name="upload_failed_notification_subtitle">Razm solish uchun bosing</string>
   <string name="upload_paused_notification_subtitle">Razm solish uchun bosing</string>
