@@ -28,7 +28,7 @@ public class RecentLanguagesDao {
     }
 
     /**
-     * Find all persisted items recently used languages on database
+     * Find all persisted recently used languages on database
      * @return list of recently used languages
      */
     public List<Language> getRecentLanguages() {
