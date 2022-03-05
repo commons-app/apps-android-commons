@@ -133,6 +133,9 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
         }).show();
     }
 
+    /**
+     * uploads feedback data on the server
+     */
     void uploadFeedback(Feedback feedback) {
         FeedbackContentCreator feedbackContentCreator = new FeedbackContentCreator(feedback);
 
