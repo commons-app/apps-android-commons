@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -19,6 +21,7 @@ import fr.free.nrw.commons.customselector.ui.adapter.FolderAdapter
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.upload.FileProcessor
+import kotlinx.android.synthetic.main.fragment_custom_selector.*
 import kotlinx.android.synthetic.main.fragment_custom_selector.view.*
 import javax.inject.Inject
 
@@ -110,6 +113,11 @@ class FolderFragment : CommonsDaggerSupportFragment() {
      * Load adapter.
      */
     private fun handleResult(result: Result) {
+        val images = result.images
+        if(images.isNotEmpty())
+        {
+            empty_text.visibility = View.GONE
+        }
         if(result.status is CallbackStatus.SUCCESS){
             folders = ImageHelper.folderListFromImages(result.images)
             folderAdapter.init(folders)
