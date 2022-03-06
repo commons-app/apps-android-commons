@@ -111,12 +111,12 @@ class FolderFragment : CommonsDaggerSupportFragment() {
      * Load adapter.
      */
     private fun handleResult(result: Result) {
-        val images = result.images
-        if(images.isNotEmpty())
-        {
-            empty_text.visibility = View.GONE
-        }
         if(result.status is CallbackStatus.SUCCESS){
+            val images = result.images
+            if(images.isNullOrEmpty())
+            {
+                empty_text.visibility = View.VISIBLE
+            }
             folders = ImageHelper.folderListFromImages(result.images)
             folderAdapter.init(folders)
             folderAdapter.notifyDataSetChanged()

@@ -154,6 +154,7 @@ class ImageFragment: CommonsDaggerSupportFragment() {
                 }
             }
             else{
+                empty_text.visibility = View.VISIBLE
                 selectorRV?.let{
                     it.visibility = View.GONE
                 }
