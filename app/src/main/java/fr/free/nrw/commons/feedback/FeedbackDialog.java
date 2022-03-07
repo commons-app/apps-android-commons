@@ -55,6 +55,9 @@ public class FeedbackDialog extends Dialog {
 
     }
 
+    /**
+     * Submit the feedback on server on button click
+     */
     @OnClick(R.id.btn_submit_feedback)
     void submitFeedback() {
         if(feedbackDescription.getText().toString().equals("")) {
