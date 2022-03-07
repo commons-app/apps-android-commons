@@ -56,7 +56,8 @@ public class FeedbackDialog extends Dialog {
     }
 
     /**
-     * Submit the feedback on server on button click
+     * When the button is clicked, it will create a feedback object
+     * and give a callback to calling activity/fragment
      */
     @OnClick(R.id.btn_submit_feedback)
     void submitFeedback() {
