@@ -77,7 +77,7 @@
   <string name="upload_progress_notification_title_start">A carregar o ficheiro %s</string>
   <string name="upload_progress_notification_title_in_progress">A carregar %1$s</string>
   <string name="upload_progress_notification_title_finishing">A terminar o carregamento de %1$s</string>
-  <string name="upload_failed_notification_title" fuzzy="true">O carregamento de %1$s falhou</string>
+  <string name="upload_failed_notification_title">O carregamento de %1$s falhou</string>
   <string name="upload_paused_notification_title">Carregamento de %1$s em pausa</string>
   <string name="upload_failed_notification_subtitle">Tocar para ver</string>
   <string name="upload_paused_notification_subtitle">Tocar para ver</string>
@@ -335,6 +335,7 @@
   <string name="error_fetching_nearby_monuments">Erro ao procurar monumentos próximos.</string>
   <string name="no_recent_searches">Não há pesquisas recentes</string>
   <string name="delete_recent_searches_dialog">Tem a certeza de que deseja limpar o historial de pesquisas?</string>
+  <string name="cancel_upload_dialog">Tem a certeza de que deseja cancelar este carregamento?</string>
   <string name="delete_search_dialog">Deseja eliminar esta pesquisa?</string>
   <string name="search_history_deleted">O historial de pesquisas foi eliminado</string>
   <string name="nominate_delete">Nomear para eliminação</string>
@@ -600,6 +601,8 @@
   <string name="quality_images_info">As imagens de qualidade são diagramas ou fotografias que satisfazem certos padrões de qualidade (principalmente de natureza técnica) e são valiosos para projetos da Wikimedia</string>
   <string name="resuming_upload">A retomar carregamento...</string>
   <string name="pausing_upload">A pausar carregamento...</string>
+  <string name="cancelling_upload">A cancelar o carregamento…</string>
+  <string name="cancel_upload">Cancelar carregamento</string>
   <string name="limited_connection_explanation">Ativou o modo de ligação limitada. Todos os carregamentos foram colocados em pausa e serão retomados quando desativar este modo.</string>
   <string name="limited_connection_is_on">O modo de ligação limitada está ligado.</string>
   <string name="media_details_tooltip">Escreva, por favor, uma pequena legenda a descrever o que é mostrado na sua imagem. Na descrição, explique o que torna a imagem interessante, ou típica, ou rara, e explique o contexto, seja este visível ou não. Use uma terminologia tão precisa quanto lhe seja possível.</string>

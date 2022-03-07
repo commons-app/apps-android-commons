@@ -69,7 +69,7 @@
   <string name="upload_progress_notification_title_start">Påbörjar uppladdning av %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s laddas upp</string>
   <string name="upload_progress_notification_title_finishing">Avslutar uppladdning av %1$s</string>
-  <string name="upload_failed_notification_title">Misslyckades att ladda upp %1$s</string>
+  <string name="upload_failed_notification_title">Kunde inte ladda upp %1$s</string>
   <string name="upload_paused_notification_title">Uppladdning av %1$s pausades</string>
   <string name="upload_failed_notification_subtitle">Tryck för att visa</string>
   <string name="upload_paused_notification_subtitle">Tryck för att visa</string>
