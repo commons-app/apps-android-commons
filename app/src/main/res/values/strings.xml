@@ -262,6 +262,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Rate us</string>
   <string name="about_faq">FAQ</string>
+  <string name="user_guide">User Guide</string>
   <string name="welcome_skip_button">Skip Tutorial</string>
   <string name="no_internet">Internet unavailable</string>
   <string name="error_notifications">Error fetching notifications</string>
