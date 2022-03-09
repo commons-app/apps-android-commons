@@ -115,7 +115,9 @@ class FolderFragment : CommonsDaggerSupportFragment() {
             val images = result.images
             if(images.isNullOrEmpty())
             {
-                empty_text.visibility = View.VISIBLE
+                empty_text?.let {
+                    it.visibility = View.VISIBLE
+                }
             }
             folders = ImageHelper.folderListFromImages(result.images)
             folderAdapter.init(folders)
