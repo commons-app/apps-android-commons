@@ -27,7 +27,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Uzsāk %1$s augšupielādi</string>
   <string name="upload_progress_notification_title_in_progress">%1$s augšupielādēti</string>
   <string name="upload_progress_notification_title_finishing">Pabeidz %1$s augšupielādi</string>
-  <string name="upload_failed_notification_title">Neizdevās augšupielādēt %1$s</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Neizdevās augšupielādēt %1$s</string>
   <string name="upload_failed_notification_subtitle">Pieskarieties, lai skatītu</string>
   <string name="title_activity_contributions">Manas nesenās augšupielādes</string>
   <string name="contribution_state_queued">Rindā iekļauts</string>

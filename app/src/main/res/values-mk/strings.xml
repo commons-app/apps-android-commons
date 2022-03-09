@@ -64,7 +64,7 @@
   <string name="upload_progress_notification_title_start">Подигање на податотеката: %s</string>
   <string name="upload_progress_notification_title_in_progress">Подигање на „%1$s“</string>
   <string name="upload_progress_notification_title_finishing">Завршувам со подигање на „%1$s“</string>
-  <string name="upload_failed_notification_title">Подигањето на „%1$s“ не успеа</string>
+  <string name="upload_failed_notification_title">Подигањето на %1$s не успеа</string>
   <string name="upload_paused_notification_title">Подигањето на %1$s е запрено</string>
   <string name="upload_failed_notification_subtitle">Допрете за да погледате</string>
   <string name="upload_paused_notification_subtitle">Допрете за да погледате</string>
@@ -322,6 +322,7 @@
   <string name="error_fetching_nearby_monuments">Грешка при добивањето на околните споменици.</string>
   <string name="no_recent_searches">Нема скорешни пребарувања</string>
   <string name="delete_recent_searches_dialog">Дали сте сигурни дека сакате да ја избришете историјата на пребарувања?</string>
+  <string name="cancel_upload_dialog">Дали сте сигурни дека сакате да го откажете подигањево?</string>
   <string name="delete_search_dialog">Дали би сакале да го избришете ова пребарување?</string>
   <string name="search_history_deleted">Историјата на пребарување е избришана</string>
   <string name="nominate_delete">Предложи за бришење</string>
@@ -587,6 +588,8 @@
   <string name="quality_images_info">Квалитетните слики се дијаграми или фотографии кои задоволуваат извесни стандарди за квалитет (кои се од претежно техничка природа) или имаат вредност за Викимедиините проекти</string>
   <string name="resuming_upload">Продолжувам со подигањето…</string>
   <string name="pausing_upload">Го паузирам подигањето…</string>
+  <string name="cancelling_upload">Го откажувам подигањето…</string>
+  <string name="cancel_upload">Откажи подигање</string>
   <string name="limited_connection_explanation">Овозможивте режим на ограничена врска. Сите подигања се времено запреми и ќе продолжат штом ќе го оневозможите овој режим.</string>
   <string name="limited_connection_is_on">Работи режимот на ограничена врска.</string>
   <string name="media_details_tooltip">Напишете кратко толкување кое кажува што е прикажано на сликата. Во него образложете зошто сликата е интересна, типична или ретка, и објаснете го контекстот, било да е видлив или не. Користете што поточни поими, секогаш кога можете.</string>
@@ -645,4 +648,6 @@
   <string name="no_location_found_message">Дали би го ставиле местото кајшто е направена сликата?\nМестоположбените податоци им помагаат на уредниците да ја најдат сликата, и со тоа таа станува покорисна.\nВи благодариме!</string>
   <string name="add_location">Додај местоположба</string>
   <string name="feedback_sharing_data_alert">Од оваа порака отстранете ги сите информации што не сакате да бидат јавни. Воедно, имајте на ум дека вашата е-поштенска адреса од која испраќате, името и профилна слика ќе бидат јавно видливи.</string>
+  <string name="achievements_unavailable_beta">Достигнувањата се достапни само во производниот вкус.</string>
+  <string name="leaderboard_unavailable_beta">Предводниците се достапни само во производниот вкус.</string>
 </resources>

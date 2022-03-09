@@ -115,6 +115,7 @@ class FolderFragment : CommonsDaggerSupportFragment() {
             val images = result.images
             if(images.isNullOrEmpty())
             {
+                new_no_image
                 empty_text?.let {
                     it.visibility = View.VISIBLE
                 }

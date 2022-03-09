@@ -63,7 +63,7 @@
   <string name="upload_progress_notification_title_start">Pujant el fitxer: %s</string>
   <string name="upload_progress_notification_title_in_progress">Carregant %1$s</string>
   <string name="upload_progress_notification_title_finishing">Acabant la càrrega al servidor de %1$s</string>
-  <string name="upload_failed_notification_title">Error al carregar %1$s</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Error al carregar %1$s</string>
   <string name="upload_failed_notification_subtitle">Prem per veure-ho</string>
   <string name="title_activity_contributions">Les meves càrregues recents</string>
   <string name="contribution_state_queued">En cua</string>

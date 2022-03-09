@@ -49,7 +49,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">%1$s тейәү башланды</string>
   <string name="upload_progress_notification_title_in_progress">%1$s тейәлә</string>
   <string name="upload_progress_notification_title_finishing">Тейәү %1$s тамамланды</string>
-  <string name="upload_failed_notification_title">Тейәү %1$s килеп сыҡманы</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Тейәү %1$s килеп сыҡманы</string>
   <string name="upload_failed_notification_subtitle">Ошонда баҫ та ҡара</string>
   <string name="title_activity_contributions">Һуңғы тейәүҙәрем</string>
   <string name="contribution_state_queued">Сират</string>

@@ -32,7 +32,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">باشلىنىۋاتىدۇ %1$s يۈكلەندى</string>
   <string name="upload_progress_notification_title_in_progress">%1$s يۈكلىنىۋاتىدۇ!</string>
   <string name="upload_progress_notification_title_finishing"> %1$s يۈكلەش تاماملىنىۋاتىدۇ</string>
-  <string name="upload_failed_notification_title">يۈكلىنىۋاتىدۇ %1$s مەغلۇپ بولدى</string>
+  <string name="upload_failed_notification_title" fuzzy="true">يۈكلىنىۋاتىدۇ %1$s مەغلۇپ بولدى</string>
   <string name="upload_failed_notification_subtitle">چېكىپ كۆرۈش</string>
   <string name="title_activity_contributions">يىقىندا يوللىغىنىم</string>
   <string name="contribution_state_queued">ئادەم كىردى</string>
