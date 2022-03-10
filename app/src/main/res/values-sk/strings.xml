@@ -83,7 +83,7 @@
   <string name="upload_progress_notification_title_start">Nahrávanie súboru): %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s nahrávanie</string>
   <string name="upload_progress_notification_title_finishing">Dokončenie nahrávania %1$s</string>
-  <string name="upload_failed_notification_title" fuzzy="true">Nahrávanie %1$s zlyhalo</string>
+  <string name="upload_failed_notification_title">Nahrávanie %1$s zlyhalo</string>
   <string name="upload_paused_notification_title">Nahrávanie %1$s je pozastavené</string>
   <string name="upload_failed_notification_subtitle">Ťuknutím zobrazíte</string>
   <string name="upload_paused_notification_subtitle">Ťuknutím zobrazíte</string>
@@ -341,6 +341,7 @@
   <string name="error_fetching_nearby_monuments">Nastala chyba pri načítavaní miest v okolí.</string>
   <string name="no_recent_searches">Žiadne nedávne hľadania</string>
   <string name="delete_recent_searches_dialog">Naozaj chcete odstrániť históriu vášho vyhľadávania?</string>
+  <string name="cancel_upload_dialog">Naozaj chcete zrušiť toto nahrávanie?</string>
   <string name="delete_search_dialog">Chcete odstrániť toto hľadanie?</string>
   <string name="search_history_deleted">História vyhľadávania bola odstránená</string>
   <string name="nominate_delete">Navrhnúť na zmazanie</string>
@@ -608,6 +609,8 @@
   <string name="quality_images_info">Kvalitné obrázky sú diagramy a fotografie, ktoré spĺňajú určité štandardy (ktoré sú väčšinou technického charakteru) a sú cenné pre projekty Wikimédie</string>
   <string name="resuming_upload">Pokračovanie nahrávania...</string>
   <string name="pausing_upload">Pozastavovanie nahrávania...</string>
+  <string name="cancelling_upload">Prerušovanie nahrávania...</string>
+  <string name="cancel_upload">Zrušiť nahrávanie</string>
   <string name="limited_connection_explanation">Zapli ste mód limitovaného pripojenia. Všetky nahrávania budú teraz pozastavené a budú pokračovať až po vypnutí tohto módu.</string>
   <string name="limited_connection_is_on">Mód limitovaného pripojenia je zapnutý.</string>
   <string name="media_details_tooltip">Prosím napíšte krátky popis, ktorý povie čo sa na obrázku nachádza. Uveďte v popise čím je obrázok zaujímavý alebo čo typické alebo vzácne na ňom je. Používajte čo najpresnejšiu terminológiu ako je možné.</string>
@@ -660,5 +663,11 @@
   <string name="apply">Požiadať</string>
   <string name="reset">Vynulovať</string>
   <string name="location_message">Údaje o polohe pomáhajú editorom nájsť Váš obrázok a spraviť ho viac užitočným. \nVaše nedávne nahrávania nemajú polohu.\nOdporúčame Vám zapnúť zisťovanie polohy v nastaveniach Vašej kamery. \nĎakujeme!</string>
+  <string name="no_location_found_title">Nenašli sa žiadne polohy</string>
+  <string name="no_location_found_message">Čo tak pridať miesto kde bol tento obrázok urobený? Údaje o polohe pomáhajú editorom Wiki nájsť Váš obrázok a urobiť ho tak viac užitočným. Ďakujeme!</string>
+  <string name="add_location">Pridať polohu</string>
   <string name="feedback_sharing_data_alert">Prosím odstráňte z tohto emailu informácie, ktoré nechcete zverejniť. Takisto berte prosím na vedomie, že vaša emailová adresa z ktorej posielate príspevky bude zverejnená.</string>
+  <string name="achievements_unavailable_beta">Úspechy sú dostupné len v prod flavor.</string>
+  <string name="leaderboard_unavailable_beta">Rebríček je dostupný len v prod flavor.</string>
+  <string name="copyright_popup">Prosím nahrajte len obrázky, ktoré ste urobili Vy sami. Obrázky podliehajúce autorským právam budú zablokované.</string>
 </resources>

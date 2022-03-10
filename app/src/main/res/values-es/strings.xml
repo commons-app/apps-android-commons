@@ -2,6 +2,7 @@
 <!-- Authors:
 * 2axterix2
 * AVIADOR71
+* Adilson
 * Adjen
 * Agent
 * Astroemi
@@ -653,4 +654,5 @@
   <string name="contributions_of_user">Contribuciones del usuario: %s</string>
   <string name="achievements_of_user">Logros del usuario: %s</string>
   <string name="menu_view_user_page">Ver página de usuario</string>
+  <string name="copyright_popup">Por favor, sólo cargue imágenes que haya tomado usted mismo. Personas que carguen imágenes con derechos de autor serán bloqueadas. Esto aplica para la versión beta también. Gracias por probar la aplicación!</string>
 </resources>
