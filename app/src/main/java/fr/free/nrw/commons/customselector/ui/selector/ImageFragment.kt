@@ -142,7 +142,6 @@ class ImageFragment: CommonsDaggerSupportFragment() {
         if(result.status is CallbackStatus.SUCCESS){
             val images = result.images
             if(images.isNotEmpty()) {
-                empty_text.visibility = View.GONE
                 filteredImages = ImageHelper.filterImages(images, bucketId)
                 imageAdapter.init(filteredImages)
                 selectorRV?.let {
