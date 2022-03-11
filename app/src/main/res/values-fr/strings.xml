@@ -678,4 +678,5 @@
   <string name="feedback_sharing_data_alert">Veuillez supprimer de ce courriel toute information que vous n’aimeriez pas diffuser publiquement. Également, veuillez prendre conscience du fait que votre adresse de messagerie avec laquelle vous publiez, ainsi que le nom et l’image de profil associés, seront visibles publiquement.</string>
   <string name="achievements_unavailable_beta">Les réalisations ne sont disponibles que dans la version de production.</string>
   <string name="leaderboard_unavailable_beta">Le classement n’est disponible que dans la version de production.</string>
+  <string name="copyright_popup">Veuillez ne téléverser que des images que vous avez créées vous-mêmes. Ceux qui téléversent des images soumises aux droits d’auteur seront bloqués. Ceci s’applique également à la version bêta. Merci pour votre test de l’application !</string>
 </resources>

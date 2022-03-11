@@ -85,7 +85,7 @@
   <string name="upload_progress_notification_title_start">Hochlade von Datei: %s</string>
   <string name="upload_progress_notification_title_in_progress">„%1$s“ wird hochgeladen</string>
   <string name="upload_progress_notification_title_finishing">Hochladen von „%1$s“ abschließen</string>
-  <string name="upload_failed_notification_title" fuzzy="true">Hochladen von „%1$s“ fehlgeschlagen</string>
+  <string name="upload_failed_notification_title">Hochladen von %1$s fehlgeschlagen</string>
   <string name="upload_paused_notification_title">Hochladen von %1$s pausiert</string>
   <string name="upload_failed_notification_subtitle">Tippen zum Betrachten</string>
   <string name="upload_paused_notification_subtitle">Tippen zum Ansehen</string>
@@ -343,6 +343,7 @@
   <string name="error_fetching_nearby_monuments">Fehler beim Abrufen von Denkmälern in der Nähe.</string>
   <string name="no_recent_searches">Keine letzten Suchanfragen</string>
   <string name="delete_recent_searches_dialog">Bist du sicher, dass du deinen Suchverlauf löschen möchtest?</string>
+  <string name="cancel_upload_dialog">Bist du sicher, dass du das Hochladen abbrechen möchtest?</string>
   <string name="delete_search_dialog">Möchtest du diese Suche löschen?</string>
   <string name="search_history_deleted">Suchverlauf gelöscht</string>
   <string name="nominate_delete">Zur Löschung vorschlagen</string>
@@ -608,6 +609,8 @@
   <string name="quality_images_info">Qualitätsbilder sind Diagramme oder Fotografien, die bestimmte Qualitätsstandards erfüllen (die meist technischer Natur sind) und für Wikimedia-Projekte wertvoll sind</string>
   <string name="resuming_upload">Hochladen fortsetzen …</string>
   <string name="pausing_upload">Hochladen pausieren …</string>
+  <string name="cancelling_upload">Abbrechen des Uploads …</string>
+  <string name="cancel_upload">Hochladen abbrechen</string>
   <string name="limited_connection_explanation">Du hast den eingeschränkten Verbindungsmodus aktiviert. Alle Uploads sind angehalten und werden fortgesetzt, sobald du diesen Modus deaktivierst.</string>
   <string name="limited_connection_is_on">Der begrenzte Verbindungsmodus ist aktiv.</string>
   <string name="media_details_tooltip">Bitte schreibe eine kurze Bildunterschrift, die sagt, was dein Bild zeigt. Sage in der Beschreibung, was das Bild interessant oder typisch oder selten macht, und erkläree den Kontext, sichtbar oder nicht. Verwende möglichst genaue Begriffe.</string>

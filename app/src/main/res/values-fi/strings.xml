@@ -76,7 +76,7 @@
   <string name="upload_progress_notification_title_start">Kopioidaan palvelimelle: %s</string>
   <string name="upload_progress_notification_title_in_progress">Tallennetaan %1$s</string>
   <string name="upload_progress_notification_title_finishing">%1$s tallennettu</string>
-  <string name="upload_failed_notification_title" fuzzy="true">Tiedoston %1$s tallentaminen epäonnistui</string>
+  <string name="upload_failed_notification_title">Tiedoston %1$s tallentaminen epäonnistui</string>
   <string name="upload_paused_notification_title">Tiedoston %1$s tallentaminen pysäytetty</string>
   <string name="upload_failed_notification_subtitle">Napauta katsoaksesi</string>
   <string name="upload_paused_notification_subtitle">Paina nähdäksesi</string>

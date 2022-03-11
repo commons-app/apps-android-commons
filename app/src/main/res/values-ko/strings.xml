@@ -74,7 +74,7 @@
   <string name="upload_progress_notification_title_start">%1$s 파일 올리는 중</string>
   <string name="upload_progress_notification_title_in_progress">%1$s 파일을 올리는 중</string>
   <string name="upload_progress_notification_title_finishing">%1$s 파일 올리기를 끝내는 중</string>
-  <string name="upload_failed_notification_title" fuzzy="true">%1$s 파일 올리기 실패</string>
+  <string name="upload_failed_notification_title">%1$s 올리기 실패</string>
   <string name="upload_paused_notification_title">%1$s 업로드 멈춤</string>
   <string name="upload_failed_notification_subtitle">보려면 탭하세요</string>
   <string name="upload_paused_notification_subtitle">보려면 탭하세요</string>
@@ -330,6 +330,7 @@
   <string name="no_nearby_places_around">근처에 장소가 없습니다</string>
   <string name="no_recent_searches">최근 검색 없음</string>
   <string name="delete_recent_searches_dialog">검색 기록을 지우겠습니까?</string>
+  <string name="cancel_upload_dialog">이 업로드를 취소하시겠습니까?</string>
   <string name="delete_search_dialog">이 검색을 삭제하시겠습니까?</string>
   <string name="search_history_deleted">검색 기록 삭제됨</string>
   <string name="nominate_delete">삭제 신청</string>
@@ -527,6 +528,8 @@
   <string name="leaderboard_upload">업로드</string>
   <string name="leaderboard_my_rank_button_text">내 순위</string>
   <string name="limited_connection_mode">제한된 연결 모드</string>
+  <string name="cancelling_upload">올리기를 취소하는 중…</string>
+  <string name="cancel_upload">올리기 취소</string>
   <string name="limited_connection_explanation">연결 제한 모드를 사용 중입니다. 모든 업로드는 일시 중단되며 이 모드를 끄면 재개됩니다.</string>
   <string name="limited_connection_is_on">연결 제한 모드가 켜져 있습니다.</string>
   <string name="license_step_title">미디어 라이선스</string>
@@ -550,4 +553,5 @@
   <string name="advanced_options">고급 옵션</string>
   <string name="apply">적용</string>
   <string name="reset">재설정</string>
+  <string name="copyright_popup">당신이 찍은 사진만 올려 주십시오. 저작권이 있는 이미지를 올린 사람은 차단됩니다. 양질의 이미지에도 해당합니다. 앱을 테스트해 주셔서 고맙습니다!</string>
 </resources>
