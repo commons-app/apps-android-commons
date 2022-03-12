@@ -137,7 +137,7 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
      * uploads feedback data on the server
      */
     void uploadFeedback(Feedback feedback) {
-        FeedbackContentCreator feedbackContentCreator = new FeedbackContentCreator(feedback);
+        FeedbackContentCreator feedbackContentCreator = new FeedbackContentCreator(getContext(), feedback);
 
         Single<Boolean> single =
             pageEditClient.prependEdit("Commons:Mobile_app/Feedback", feedbackContentCreator.toString(), "Summary")
