@@ -55,7 +55,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Hef innsendingu á %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Verið er að senda %1$s inn</string>
   <string name="upload_progress_notification_title_finishing">Lýk innsendingu á %1$s</string>
-  <string name="upload_failed_notification_title">Innsending á %1$s mistókst</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Innsending á %1$s mistókst</string>
   <string name="upload_failed_notification_subtitle">Bankaðu til að skoða</string>
   <string name="title_activity_contributions">Nýlega innsendar skrár</string>
   <string name="contribution_state_queued">Í biðröð</string>

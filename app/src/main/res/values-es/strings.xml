@@ -2,6 +2,7 @@
 <!-- Authors:
 * 2axterix2
 * AVIADOR71
+* Adilson
 * Adjen
 * Agent
 * Astroemi
@@ -9,6 +10,7 @@
 * Biancailin
 * Bruno44101
 * Carlosmg.dg
+* Chopan050
 * Ciencia Al Poder
 * Danniel07
 * DannyS712
@@ -98,7 +100,7 @@
   <string name="upload_progress_notification_title_start">Empezando la subida de %s</string>
   <string name="upload_progress_notification_title_in_progress">Subiendo %1$s</string>
   <string name="upload_progress_notification_title_finishing">Finalizando la subida de %1$s</string>
-  <string name="upload_failed_notification_title">Falló la carga de %1$s</string>
+  <string name="upload_failed_notification_title">Error al cargar %1$s</string>
   <string name="upload_paused_notification_title">Falló la subida de %1$s</string>
   <string name="upload_failed_notification_subtitle">Toca para ver</string>
   <string name="upload_paused_notification_subtitle">Tocar para ver</string>
@@ -354,6 +356,7 @@
   <string name="error_fetching_nearby_monuments">Error al encontrar monumentos cercanos.</string>
   <string name="no_recent_searches">No hay búsquedas recientes</string>
   <string name="delete_recent_searches_dialog">¿Confirmas que quieres vaciar el historial de búsquedas?</string>
+  <string name="cancel_upload_dialog">¿Seguro que quieres cancelar esta carga?</string>
   <string name="delete_search_dialog">¿Quieres eliminar esta búsqueda?</string>
   <string name="search_history_deleted">Historial de búsqueda eliminado</string>
   <string name="nominate_delete">Nominar para borrado</string>
@@ -610,6 +613,8 @@
   <string name="quality_images_info">Las imágenes de calidad son diagramas o fotografías que cumplen determinados estándares de calidad (mayormente de carácter técnico) y que son valiosas para proyectos de Wikimedia</string>
   <string name="resuming_upload">Reanudando carga...</string>
   <string name="pausing_upload">Pausando carga...</string>
+  <string name="cancelling_upload">Cancelando carga...</string>
+  <string name="cancel_upload">Cancelar carga</string>
   <string name="limited_connection_explanation">Has habilitado el modo de conexión limitada. Todas las cargas están pausadas y se reanudarán cuando deshabilites este modo.</string>
   <string name="limited_connection_is_on">El modo de conexión limitada está encendido.</string>
   <string name="media_details_tooltip">Por favor escribe un pie de foto corto que diga qué muesta tu imagen. En la descripción, indica qué hace interesante o típica o rara a la imagen, y explica el contexto, visible o no. Emplea terminología exacta tanto como sea posible.</string>
@@ -649,4 +654,5 @@
   <string name="contributions_of_user">Contribuciones del usuario: %s</string>
   <string name="achievements_of_user">Logros del usuario: %s</string>
   <string name="menu_view_user_page">Ver página de usuario</string>
+  <string name="copyright_popup">Por favor, sólo cargue imágenes que haya tomado usted mismo. Personas que carguen imágenes con derechos de autor serán bloqueadas. Esto aplica para la versión beta también. Gracias por probar la aplicación!</string>
 </resources>

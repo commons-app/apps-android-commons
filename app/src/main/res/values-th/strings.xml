@@ -57,7 +57,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">กำลังเริ่มการอัปโหลด %1$s</string>
   <string name="upload_progress_notification_title_in_progress">กำลังอัปโหลด %1$s</string>
   <string name="upload_progress_notification_title_finishing">กำลังเสร็จสิ้นการอัปโหลด %1$s</string>
-  <string name="upload_failed_notification_title">การอัปโหลด %1$s ล้มเหลว</string>
+  <string name="upload_failed_notification_title" fuzzy="true">การอัปโหลด %1$s ล้มเหลว</string>
   <string name="upload_failed_notification_subtitle">แตะเพื่อดู</string>
   <string name="upload_paused_notification_subtitle">แตะเพื่อดู</string>
   <string name="title_activity_contributions">การอัปโหลดล่าสุดของฉัน</string>

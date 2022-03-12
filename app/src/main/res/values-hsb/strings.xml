@@ -21,7 +21,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Nahraće %1$S startować</string>
   <string name="upload_progress_notification_title_in_progress">%1$s so nahrawa</string>
   <string name="upload_progress_notification_title_finishing">Nahraće %1$s so kónči</string>
-  <string name="upload_failed_notification_title">Nahraće %1$s je so njeporadźiło</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Nahraće %1$s je so njeporadźiło</string>
   <string name="upload_failed_notification_subtitle">Dótkń so, zo by sej wobhladał</string>
   <string name="title_activity_contributions" fuzzy="true">Moje nahraća</string>
   <string name="contribution_state_queued">W čakanskim rynku</string>

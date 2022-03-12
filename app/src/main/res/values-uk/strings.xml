@@ -90,7 +90,7 @@
   <string name="upload_progress_notification_title_start">Завантаження файлу: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s завантажується</string>
   <string name="upload_progress_notification_title_finishing">Завершення завантаження %1$s</string>
-  <string name="upload_failed_notification_title">Не вдалося завантажити %1$s</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Не вдалося завантажити %1$s</string>
   <string name="upload_paused_notification_title">Завантаження %1$s призупинене</string>
   <string name="upload_failed_notification_subtitle">Торкніться, щоб переглянути</string>
   <string name="upload_paused_notification_subtitle">Торкніться, щоб переглянути</string>

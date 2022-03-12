@@ -23,7 +23,7 @@
   <string name="upload_progress_notification_title_start">Incargante le file: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s es incargate ora</string>
   <string name="upload_progress_notification_title_finishing">Termina incargar %1$s</string>
-  <string name="upload_failed_notification_title">Incargamento de %1$s fallite</string>
+  <string name="upload_failed_notification_title">Error incargante %1$s</string>
   <string name="upload_failed_notification_subtitle">Tocca pro vider</string>
   <string name="title_activity_contributions">Mi incargamentos recente</string>
   <string name="contribution_state_queued">In cauda</string>

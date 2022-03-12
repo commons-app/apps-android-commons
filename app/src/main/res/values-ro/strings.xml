@@ -75,7 +75,7 @@
   <string name="upload_progress_notification_title_start">Se încarcă fișierul %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s se încarcă</string>
   <string name="upload_progress_notification_title_finishing">Se finalizează încărcarea fișierului %1$s</string>
-  <string name="upload_failed_notification_title">Încărcarea fișierului %1$s nu a reușit</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Încărcarea fișierului %1$s nu a reușit</string>
   <string name="upload_paused_notification_title">Încărcarea fișierului %1$s a fost întreruptă</string>
   <string name="upload_failed_notification_subtitle">Atingeți pentru a vizualiza</string>
   <string name="upload_paused_notification_subtitle">Atingeți pentru a vizualiza</string>

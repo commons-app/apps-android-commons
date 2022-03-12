@@ -81,7 +81,7 @@
   <string name="upload_progress_notification_title_start">بارگذاری پرونده: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">بارگذاری %1$s</string>
   <string name="upload_progress_notification_title_finishing">اتمام بارگذاری %1$s</string>
-  <string name="upload_failed_notification_title">%1$s بارگذاری نشد</string>
+  <string name="upload_failed_notification_title" fuzzy="true">%1$s بارگذاری نشد</string>
   <string name="upload_failed_notification_subtitle">برای دیدن انگشت بزنید</string>
   <string name="upload_paused_notification_subtitle">برای دیدن انگشت بزنید</string>
   <string name="title_activity_contributions">بارگذاری‌های اخیر من</string>
