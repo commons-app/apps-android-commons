@@ -27,6 +27,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
+import org.mockito.Mockito.doReturn
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
@@ -233,9 +234,17 @@ class LeaderboardFragmentUnitTests {
         )
         method.isAccessible = true
         method.invoke(fragment, true)
-        Assert.assertNotNull(ShadowToast.getTextOfLatestToast().toString())
-        Assert.assertEquals(ShadowToast.getTextOfLatestToast().toString()
-            , context.getString(R.string.leaderboard_unavailable_beta))
+        if(isBetaFlavour) {
+            Assert.assertEquals(
+                ShadowToast.getTextOfLatestToast().toString(),
+                context.getString(R.string.leaderboard_unavailable_beta)
+            )
+        } else {
+            Assert.assertNull(
+                ShadowToast.getTextOfLatestToast()
+            )
+        }
+
     }
 
 }
