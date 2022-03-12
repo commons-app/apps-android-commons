@@ -2,7 +2,6 @@ package fr.free.nrw.commons
 
 import android.app.Activity
 import android.content.pm.ActivityInfo
-import android.text.method.Touch.scrollTo
 import android.view.View
 import android.view.ViewGroup
 import androidx.test.espresso.Espresso.onView
@@ -19,6 +18,8 @@ class UITestHelper {
     companion object {
         fun skipWelcome() {
             try {
+                onView(ViewMatchers.withId(R.id.button_ok))
+                    .perform(ViewActions.click())
                 //Skip tutorial
                 onView(ViewMatchers.withId(R.id.finishTutorialButton))
                     .perform(ViewActions.click())
