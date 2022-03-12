@@ -74,6 +74,7 @@ public class MainActivity  extends BaseActivity
     private BookmarkFragment bookmarkFragment;
     public ActiveFragment activeFragment;
     private MediaDetailPagerFragment mediaDetailPagerFragment;
+    private NavTabLayout.OnNavigationItemSelectedListener navListener;
 
     @Inject
     public LocationServiceManager locationManager;
@@ -148,16 +149,13 @@ public class MainActivity  extends BaseActivity
     }
 
     private void setUpPager() {
-        tabLayout.setOnNavigationItemSelectedListener(item -> {
+        tabLayout.setOnNavigationItemSelectedListener(navListener = (item) -> {
             if (!item.getTitle().equals(getString(R.string.more))) {
                 // do not change title for more fragment
                 setTitle(item.getTitle());
             }
-            if(item.getTitle().equals(getString(R.string.nearby_fragment))){
-                applicationKvStore.putBoolean("last_opened_nearby",true);
-            }else if(item.getTitle().equals(getString(R.string.contributions_fragment))){
-                applicationKvStore.putBoolean("last_opened_nearby",false);
-            }
+            applicationKvStore.putBoolean("last_opened_nearby",
+                item.getTitle().equals(getString(R.string.nearby_fragment)));
             final Fragment fragment = NavTab.of(item.getOrder()).newInstance();
             return loadFragment(fragment, true);
         });
@@ -414,5 +412,9 @@ public class MainActivity  extends BaseActivity
         final String language = preferences.getString("language", "");
         final SettingsFragment settingsFragment = new SettingsFragment();
         settingsFragment.setLocale(this, language);
+    }
+
+    public NavTabLayout.OnNavigationItemSelectedListener getNavListener(){
+        return navListener;
     }
 }
