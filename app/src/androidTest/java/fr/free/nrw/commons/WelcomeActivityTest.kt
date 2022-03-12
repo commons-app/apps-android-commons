@@ -3,6 +3,7 @@ package fr.free.nrw.commons
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -36,6 +37,8 @@ class WelcomeActivityTest {
     @Test
     fun ifBetaShowsSkipButton() {
         if (ConfigUtils.isBetaFlavour) {
+            onView(withId(R.id.button_ok))
+                .perform(ViewActions.click())
             onView(withId(R.id.finishTutorialButton))
                 .check(matches(isDisplayed()))
         }
@@ -44,6 +47,8 @@ class WelcomeActivityTest {
     @Test
     fun ifProdHidesSkipButton() {
         if (!ConfigUtils.isBetaFlavour) {
+            onView(withId(R.id.button_ok))
+                .perform(ViewActions.click())
             onView(withId(R.id.finishTutorialButton))
                 .check(matches(not(isDisplayed())))
         }
@@ -52,6 +57,8 @@ class WelcomeActivityTest {
     @Test
     fun testBetaSkipButton() {
         if (ConfigUtils.isBetaFlavour) {
+            onView(withId(R.id.button_ok))
+                .perform(ViewActions.click())
             onView(withId(R.id.finishTutorialButton))
                 .perform(ViewActions.click())
             assert(activityRule.activity.isDestroyed)
@@ -60,6 +67,8 @@ class WelcomeActivityTest {
 
     @Test
     fun testSwipingOnce() {
+        onView(withId(R.id.button_ok))
+            .perform(ViewActions.click())
         onView(withId(R.id.welcomePager))
             .perform(ViewActions.swipeLeft())
         assert(true)
@@ -70,6 +79,8 @@ class WelcomeActivityTest {
 
     @Test
     fun testSwipingWholeTutorial() {
+        onView(withId(R.id.button_ok))
+            .perform(ViewActions.click())
         onView(withId(R.id.welcomePager))
             .perform(ViewActions.swipeLeft())
             .perform(ViewActions.swipeLeft())
@@ -106,6 +117,8 @@ class WelcomeActivityTest {
 
         viewPager.adapter?.let {
             if (viewPager.currentItem == 3) {
+                onView(withId(R.id.button_ok))
+                    .perform(ViewActions.click())
                 onView(withId(R.id.finishTutorialButton))
                     .perform(ViewActions.click())
                 assert(activityRule.activity.isDestroyed)
