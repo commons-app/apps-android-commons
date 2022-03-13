@@ -3,22 +3,12 @@ package fr.free.nrw.commons.feedback
 import android.content.Context
 import android.os.Looper.getMainLooper
 import android.text.Editable
-import android.view.LayoutInflater
-import android.view.View
-import android.widget.Button
-import android.widget.CheckBox
-import androidx.fragment.app.FragmentTransaction
 import com.nhaarman.mockitokotlin2.doReturn
-import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.contributions.MainActivity
-import fr.free.nrw.commons.explore.SearchActivity
-import fr.free.nrw.commons.profile.ProfileActivity
+import fr.free.nrw.commons.databinding.DialogFeedbackBinding
 import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText
-import fr.free.nrw.commons.upload.UploadActivity
-import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment
-import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -35,30 +25,12 @@ import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.wikipedia.AppAdapter
-import javax.inject.Inject
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class FeedbackDialogTests {
-    @Mock
-    var button: Button? = null
-    @Mock
-    var apiLevel: CheckBox? = null
-    @Mock
-    var androidVersion: CheckBox? = null
-    @Mock
-    var deviceManufacturer: CheckBox? = null
-    @Mock
-    var deviceModel: CheckBox? = null
-    @Mock
-    var deviceName: CheckBox? = null
-    @Mock
-    var networkType: CheckBox? = null
-    @Mock
-    var userName: CheckBox? = null
-    @Mock
-    var feedbackDescription: PasteSensitiveTextInputEditText? = null
+    private lateinit var dialogFeedbackBinding: DialogFeedbackBinding
 
     @Mock
     private val onFeedbackSubmitCallback: OnFeedbackSubmitCallback? = null
@@ -76,18 +48,11 @@ class FeedbackDialogTests {
         val activity = Robolectric.buildActivity(MainActivity::class.java).create().get()
 
         dialog = FeedbackDialog(activity.applicationContext, onFeedbackSubmitCallback)
+        dialogFeedbackBinding = DialogFeedbackBinding.inflate(dialog.layoutInflater)
         dialog.show()
 
-        Whitebox.setInternalState(dialog, "button", button)
-        Whitebox.setInternalState(dialog, "apiLevel", apiLevel)
-        Whitebox.setInternalState(dialog, "androidVersion", androidVersion)
-        Whitebox.setInternalState(dialog, "deviceManufacturer", deviceManufacturer)
-        Whitebox.setInternalState(dialog, "deviceModel", deviceModel)
-        Whitebox.setInternalState(dialog, "deviceName", deviceName)
-        Whitebox.setInternalState(dialog, "networkType", networkType)
-        Whitebox.setInternalState(dialog, "userName", userName)
-        Whitebox.setInternalState(dialog, "feedbackDescription", feedbackDescription)
         Whitebox.setInternalState(dialog, "onFeedbackSubmitCallback", onFeedbackSubmitCallback)
+        Whitebox.setInternalState(dialog, "dialogFeedbackBinding", dialogFeedbackBinding)
     }
 
     @Test
@@ -98,7 +63,10 @@ class FeedbackDialogTests {
     @Test
     fun testSubmitFeedbackError() {
         val editable = mock(Editable::class.java)
-        doReturn(editable).`when`(feedbackDescription)?.text
+        val ed = mock(PasteSensitiveTextInputEditText::class.java)
+        Whitebox.setInternalState(dialogFeedbackBinding, "feedbackItemEditText", ed)
+        `when`(ed?.text).thenReturn(editable)
+        doReturn(editable).`when`(dialogFeedbackBinding.feedbackItemEditText)?.text
         doReturn("").`when`(editable).toString()
         dialog.submitFeedback()
     }
@@ -107,11 +75,12 @@ class FeedbackDialogTests {
     fun testSubmitFeedback() {
         shadowOf(getMainLooper()).idle()
         val editable: Editable = mock(Editable::class.java)
-
-        `when`(feedbackDescription?.text).thenReturn(editable)
+        val ed = mock(PasteSensitiveTextInputEditText::class.java)
+        Whitebox.setInternalState(dialogFeedbackBinding, "feedbackItemEditText", ed)
+        `when`(ed?.text).thenReturn(editable)
         `when`(editable.toString()).thenReturn("1234")
 
-        Assert.assertEquals(feedbackDescription?.text.toString(), "1234")
+        Assert.assertEquals(dialogFeedbackBinding.feedbackItemEditText?.text.toString(), "1234")
         dialog.submitFeedback()
     }
 
