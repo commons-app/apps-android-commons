@@ -13,17 +13,19 @@ class ExploreMapMediaDataSource @Inject constructor(
     liveDataConverter: LiveDataConverter,
     private val mediaClient: MediaClient
     ) : PageableBaseDataSource<Media>(liveDataConverter) {
-
     fun setIsFromSearchActivity(isFromSearchActivity: Boolean) {
         this.isFromSearchActivity = isFromSearchActivity
     }
     override val loadFunction: LoadFunction<Media> = { loadSize: Int, startPosition: Int ->
+        Log.d("deneme","loadFunction")
         //TODO: change this method
         // TODO: filter this result by location or display all of them on map
         if (isFromSearchActivity) {
+            Log.d("deneme","isFromSearchActivity")
             mediaClient.getMediaListFromSearchWithLocation(query, loadSize, startPosition).blockingGet()
         } else {
-            mediaClient.getMediaListFromSearchWithLocation(query, loadSize, startPosition).blockingGet()
+            Log.d("deneme","not isFromSearchActivity")
+            mediaClient.getMediaListFromGeoSearch(coordinate, limit).blockingGet()
         }
     }
 }

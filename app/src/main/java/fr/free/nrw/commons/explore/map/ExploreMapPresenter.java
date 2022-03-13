@@ -10,6 +10,7 @@ import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import fr.free.nrw.commons.MapController;
+import fr.free.nrw.commons.MapController.ExplorePlacesInfo;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
@@ -17,6 +18,7 @@ import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.utils.LocationUtils;
+import io.reactivex.Observable;
 import java.lang.reflect.Proxy;
 import java.util.List;
 import timber.log.Timber;
@@ -28,6 +30,9 @@ public class ExploreMapPresenter
     private boolean isNearbyLocked;
     private boolean placesLoadedOnce;
     private LatLng curLatLng;
+    private String query;
+    private boolean isFromSearchActivity;
+    private ExploreMapController exploreMapController;
 
 
     private static final ExploreMapContract.View DUMMY = (ExploreMapContract.View) Proxy
@@ -75,7 +80,6 @@ public class ExploreMapPresenter
     @Override
     public void updateMap(LocationChangeType locationChangeType) {
         //TODO: write inside of all methods nesli
-        Log.d("nesli2","updteMap");
         Timber.d("Presenter updates map and list" + locationChangeType.toString());
         if (isNearbyLocked) {
             Timber.d("Nearby is locked, so updateMapAndList returns");
@@ -103,7 +107,6 @@ public class ExploreMapPresenter
          */
         if (locationChangeType.equals(LOCATION_SIGNIFICANTLY_CHANGED)) {
             Timber.d("LOCATION_SIGNIFICANTLY_CHANGED");
-            Log.d("nesli2", "location significany changed");
             lockUnlockNearby(true);
             //exploreMapFragmentView.setProgressBarVisibility(true);
             exploreMapFragmentView.populatePlaces(lastLocation);
@@ -166,11 +169,11 @@ public class ExploreMapPresenter
     public void onCameraMove(com.mapbox.mapboxsdk.geometry.LatLng latLng) {
         exploreMapFragmentView.setProjectorLatLngBounds();
         // If our nearby markers are calculated at least once
-        if (ExploreMapController.latestSearchLocation != null) {
+        if (exploreMapController.latestSearchLocation != null) {
             double distance = latLng.distanceTo
-                (LocationUtils.commonsLatLngToMapBoxLatLng(ExploreMapController.latestSearchLocation));
+                (LocationUtils.commonsLatLngToMapBoxLatLng(exploreMapController.latestSearchLocation));
             if (exploreMapFragmentView.isNetworkConnectionEstablished()) {
-                if (distance > ExploreMapController.latestSearchRadius) {
+                if (distance > exploreMapController.latestSearchRadius) {
                     exploreMapFragmentView.setSearchThisAreaButtonVisibility(true);
                 } else {
                     exploreMapFragmentView.setSearchThisAreaButtonVisibility(false);
@@ -191,7 +194,10 @@ public class ExploreMapPresenter
 
     }
 
-    public void onMapReady() {
+    public void onMapReady(boolean isFromSearchActivity, ExploreMapController exploreMapController, String query) {
+        this.isFromSearchActivity = isFromSearchActivity;
+        this.exploreMapController = exploreMapController;
+        this.query = query;
         if(null != exploreMapFragmentView) {
             exploreMapFragmentView.addSearchThisAreaButtonAction();
             initializeMapOperations();
@@ -202,6 +208,13 @@ public class ExploreMapPresenter
         lockUnlockNearby(false);
         updateMap(LOCATION_SIGNIFICANTLY_CHANGED);
         exploreMapFragmentView.addSearchThisAreaButtonAction();
+    }
+
+    public Observable<ExplorePlacesInfo> loadAttractionsFromLocation(LatLng curLatLng, LatLng searchLatLng, boolean checkingAroundCurrent, boolean isFromSearchActivity, String query) {
+        // TODO: Load attractionsta yapılanı onquery updated ile yapmanın yolunu bul
+        return Observable
+            .fromCallable(() -> exploreMapController
+                .loadAttractionsFromLocation(curLatLng, searchLatLng,checkingAroundCurrent, isFromSearchActivity, query));
     }
 
     /**

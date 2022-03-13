@@ -18,6 +18,8 @@ abstract class PageableBaseDataSource<T>(private val liveDataConverter: LiveData
 
     lateinit var query: String
     var isFromSearchActivity: Boolean = false
+    var coordinate: String = ""
+    var limit: Int = 30
     private val dataSourceFactoryFactory: () -> PagingDataSourceFactory<T> = {
         dataSourceFactory(
             _loadingStates,

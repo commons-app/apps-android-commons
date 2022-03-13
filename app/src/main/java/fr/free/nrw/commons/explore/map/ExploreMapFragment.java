@@ -13,18 +13,12 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
@@ -36,24 +30,17 @@ import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdate;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
-import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.maps.UiSettings;
 import com.mapbox.pluginscalebar.ScaleBarOptions;
 import com.mapbox.pluginscalebar.ScaleBarPlugin;
 import fr.free.nrw.commons.MapController;
-import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
-import fr.free.nrw.commons.contributions.MainActivity;
-import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment;
-import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.explore.paging.LiveDataConverter;
-import fr.free.nrw.commons.explore.paging.PagingContract.Presenter;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -70,11 +57,8 @@ import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.UiUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -106,12 +90,6 @@ public class ExploreMapFragment extends PageableMapFragment
     IntentFilter intentFilter = new IntentFilter(MapUtils.NETWORK_INTENT_ACTION);
 
     @Inject
-    ExploreMapMediaDataSource dataSourceFactory;
-    @Inject
-    ExploreMapMediaPresenter mediaPresenter;
-    // Help wanted: Hey Madhur, one help need is binding these two variable above
-
-    @Inject
     LiveDataConverter liveDataConverter;
     @Inject
     MediaClient mediaClient;
@@ -119,8 +97,6 @@ public class ExploreMapFragment extends PageableMapFragment
     LocationServiceManager locationManager;
     @Inject
     ExploreMapController exploreMapController;
-    @Inject
-    ExploreWithQueryMapController exploreWithQueryMapController;
     @Inject @Named("default_preferences")
     JsonKvStore applicationKvStore;
     @Inject
@@ -129,20 +105,8 @@ public class ExploreMapFragment extends PageableMapFragment
     SystemThemeUtils systemThemeUtils;
 
     private boolean isFromSearchActivity;
-
-    /*@BindView(R.id.map_view)
-    MapView mapView;
-    @BindView(R.id.bottom_sheet_details)
-    View bottomSheetDetails;
-    @BindView(R.id.map_progress_bar)
-    ProgressBar progressBar;
-    @BindView(R.id.fab_recenter)
-    FloatingActionButton fabRecenter;*/
-
-
-    //private View view;
     private ExploreMapPresenter presenter;
-    private String customQuery;
+    private String query = "";
 
 
     @NonNull
@@ -157,32 +121,15 @@ public class ExploreMapFragment extends PageableMapFragment
         return R.layout.fragment_search_map_paginated;
     }
 
-    //@Override
-    //public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
-        //final Bundle savedInstanceState) {
-        //super.onCreateView(inflater, container, savedInstanceState);
-        //view = inflater.inflate(R.layout.fragment_explore_map, container, false);
-        //ButterKnife.bind(this, getView());
-
-
-        // Inflate the layout for this fragmentz
-        //return getView();
-    //}
-
-
     @Override
     public void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //dataSourceFactory = new ExploreMapMediaDataSource(liveDataConverter, mediaClient, isFromSearchActivity);
-        //mediaPresenter = new ExploreMapMediaPresenterIml(scheduler, dataSourceFactory,isFromSearchActivity);
     }
+
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        /*if (savedInstanceState != null) {
-            onQueryUpdated(savedInstanceState.getString("placeName") + "map query");
-        }*/
 
         if (getActivity() instanceof SearchActivity) {
             isFromSearchActivity = true;
@@ -256,6 +203,11 @@ public class ExploreMapFragment extends PageableMapFragment
             }
     }
 
+    public void onQueryUpdated(String query) {
+        this.query = query;
+        performMapReadyActions();
+    }
+
     private void startTheMap() {
         mapView.onStart();
         performMapReadyActions();
@@ -270,7 +222,7 @@ public class ExploreMapFragment extends PageableMapFragment
         if (mapBox != null) {
             addOnCameraMoveListener();
         }
-        presenter.onMapReady();
+        presenter.onMapReady(isFromSearchActivity, exploreMapController, query);
         // TODO nesli removeCurrentLocationMarker();
     }
 
@@ -351,10 +303,8 @@ public class ExploreMapFragment extends PageableMapFragment
     @Override
     public void populatePlaces(LatLng curlatLng) {
         if (curlatLng.equals(lastFocusLocation) || lastFocusLocation == null || recenterToUserLocation) { // Means we are checking around current location
-            Log.d("nesli2","populate places populatePlacesForCurrentLocation called");
             populatePlacesForCurrentLocation(lastKnownLocation, curlatLng);
         } else {
-            Log.d("nesli2","populate places populatePlacesForAnotherLocation called");
             populatePlacesForAnotherLocation(lastKnownLocation, curlatLng);
         }
         if(recenterToUserLocation) {
@@ -365,17 +315,7 @@ public class ExploreMapFragment extends PageableMapFragment
     private void populatePlacesForCurrentLocation(final fr.free.nrw.commons.location.LatLng curlatLng,
         final fr.free.nrw.commons.location.LatLng searchLatLng){
         final Observable<MapController.ExplorePlacesInfo> nearbyPlacesInfoObservable;
-        if (!isFromSearchActivity) {
-            nearbyPlacesInfoObservable = Observable
-                .fromCallable(() -> exploreMapController
-                    .loadAttractionsFromLocation(curlatLng, searchLatLng,true));
-
-        } else {
-            //Log.d("nesli3","presenters data source is:"+getPagedListAdapter().getCurrentList().snapshot());
-            nearbyPlacesInfoObservable = Observable
-                .fromCallable(() -> exploreWithQueryMapController
-                    .loadAttractionsFromLocation(curlatLng, searchLatLng,true));
-        }
+        nearbyPlacesInfoObservable = presenter.loadAttractionsFromLocation(curlatLng, searchLatLng, true, isFromSearchActivity, query);
 
         compositeDisposable.add(nearbyPlacesInfoObservable
             .subscribeOn(Schedulers.io())
@@ -397,8 +337,8 @@ public class ExploreMapFragment extends PageableMapFragment
 
         final Observable<MapController.ExplorePlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> exploreMapController
-                .loadAttractionsFromLocation(curlatLng, searchLatLng,false));
-        // TODO: check loadAttractionsromLocation with query parameter
+                .loadAttractionsFromLocation(curlatLng, searchLatLng,false, isFromSearchActivity, query));
+        // TODO: nesli do this over the presenter
 
         compositeDisposable.add(nearbyPlacesInfoObservable
             .subscribeOn(Schedulers.io())
@@ -421,7 +361,6 @@ public class ExploreMapFragment extends PageableMapFragment
      * @param explorePlacesInfo This variable has place list information and distances.
      */
     private void updateMapMarkers(final MapController.ExplorePlacesInfo explorePlacesInfo, final boolean shouldUpdateSelectedMarker) {
-        Log.d("nesli2","updateMapMarkers1");
         presenter.updateMapMarkers(explorePlacesInfo, selectedMarker,shouldUpdateSelectedMarker);
     }
 
@@ -464,7 +403,7 @@ public class ExploreMapFragment extends PageableMapFragment
         else {
             Toast.makeText(getContext(), getString(R.string.nearby_location_not_available), Toast.LENGTH_LONG).show();
         }
-        presenter.onMapReady();
+        presenter.onMapReady(isFromSearchActivity, exploreMapController, query);
         registerUnregisterLocationListener(false);
         addOnCameraMoveListener();
     }
@@ -655,16 +594,14 @@ public class ExploreMapFragment extends PageableMapFragment
 
     @Override
     public void setCustomQuery(String customQuery) {
-        this.customQuery = customQuery;
+        this.query = query;
     }
 
     @Override
     public void addNearbyMarkersToMapBoxMap(List<NearbyBaseMarker> nearbyBaseMarkers,
         Marker selectedMarker) {
         if (isMapBoxReady && mapBox != null) {
-            //allMarkers = new ArrayList<>(nearbyBaseMarkers);
             mapBox.addMarkers(nearbyBaseMarkers);
-            //setMapMarkerActions(selectedMarker);
             presenter.updateMapMarkersToController(nearbyBaseMarkers);
         }
     }
@@ -672,12 +609,6 @@ public class ExploreMapFragment extends PageableMapFragment
     @Override
     public void setMapBoundaries(CameraUpdate cameaUpdate) {
         mapBox.easeCamera(cameaUpdate);
-    }
-
-    @NonNull
-    @Override
-    public Presenter<Media> getInjectedPresenter() {
-            return mediaPresenter;
     }
 
     @Override

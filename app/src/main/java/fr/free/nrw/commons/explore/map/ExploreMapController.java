@@ -40,9 +40,8 @@ import timber.log.Timber;
 public class ExploreMapController extends MapController {
     private static final int MAX_RESULTS = 1000;
     private final ExplorePlaces explorePlaces;
-    public static LatLng latestSearchLocation; // Can be current and camera target on search this area button is used
-    public static double latestSearchRadius = 10.0; // Any last search radius except closest result search
-    public static double farthestDistance;
+    public LatLng latestSearchLocation; // Can be current and camera target on search this area button is used
+    public double latestSearchRadius = 10.0; // Any last search radius except closest result search
 
 
     @Inject
@@ -50,7 +49,7 @@ public class ExploreMapController extends MapController {
         this.explorePlaces = explorePlaces;
     }
 
-    public ExplorePlacesInfo loadAttractionsFromLocation(LatLng curLatLng, LatLng searchLatLng, boolean checkingAroundCurrentLocation) {
+    public ExplorePlacesInfo loadAttractionsFromLocation(LatLng curLatLng, LatLng searchLatLng, boolean checkingAroundCurrentLocation, boolean isFromSearchActivity, String query) {
 
         // TODO: check nearbyPlacesInfo in NearbyController for search this area logic
 
@@ -63,8 +62,7 @@ public class ExploreMapController extends MapController {
         try {
             explorePlacesInfo.curLatLng = curLatLng;
             latestSearchLocation = searchLatLng;
-            List<Media> mediaList = explorePlaces.callCommonsQuery(searchLatLng, 30);
-
+            List<Media> mediaList = explorePlaces.callCommonsQuery(curLatLng, 30, isFromSearchActivity, query);
             LatLng[] boundaryCoordinates = {mediaList.get(0).getCoordinates(),   // south
                 mediaList.get(0).getCoordinates(), // north
                 mediaList.get(0).getCoordinates(), // west
@@ -98,15 +96,11 @@ public class ExploreMapController extends MapController {
                     }
                 );
             }
-
-            Log.d("nesli2","mediaList" + mediaList);
             explorePlacesInfo.explorePlaceList = mediaToExplorePlace(mediaList);
             explorePlacesInfo.boundaryCoordinates = boundaryCoordinates;
         } catch (Exception e) {
             e.printStackTrace();
-            Log.d("nesli2","error happened"+e.toString());
         }
-        //Log.d("nesli2","nearby places info" + explorePlacesInfo.explorePlaceList.get(0));
         return explorePlacesInfo;
     }
 
@@ -165,42 +159,10 @@ public class ExploreMapController extends MapController {
                         explorePlace.location.getLatitude(),
                         explorePlace.location.getLongitude()));
                 nearbyBaseMarker.place(explorePlace);
-                /* Help needed, Madhur another point that would be nice to have help is here where I want to create marker icons from thumbnails of places.
-                I guess a library like Glide should be used but tried once and couldn't make it work yet. I assume something like that:
-
-                    Drawable drawable = Glide.with(context).load(explorePlace.thumb).thumbnail(0.3f).submit().get();
-                    nearbyBaseMarker.setIcon(IconFactory.getInstance(context).fromBitmap(UiUtils.drawableToBitmap(drawable)));
-
-
-                    OR
-
-                    Glide.with(context).asBitmap().load(explorePlace.thumb).into(new CustomTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                        //imageView.setImageBitmap(resource);
-                        //nearbyBaseMarker.icon(IconFactory.getInstance(context)
-                          //  .fromBitmap(resource));
-                        nearbyBaseMarker.setIcon(IconFactory.getInstance(context)
-                            .fromBitmap(resource));
-                        baseMarkerOptions.add(nearbyBaseMarker);
-                    }
-                    @Override
-                    public void onLoadCleared(@Nullable Drawable placeholder) {
-                    }
-                });*/
+                // TODO Glide and thumbnails here
 
                 nearbyBaseMarker.icon(IconFactory.getInstance(context).fromBitmap(UiUtils.getBitmap(vectorDrawableGreen)));
                 baseMarkerOptions.add(nearbyBaseMarker);
-
-                /*if (!explorePlace.pic.trim().isEmpty()) {
-                    if (iconGreen != null) {
-                        nearbyBaseMarker.icon(IconFactory.getInstance(context)
-                            .fromBitmap(thumnail));
-                    }
-                }else {
-                    nearbyBaseMarker.icon(IconFactory.getInstance(context)
-                        .fromBitmap(thumnail));
-                }*/
             }
         }
 

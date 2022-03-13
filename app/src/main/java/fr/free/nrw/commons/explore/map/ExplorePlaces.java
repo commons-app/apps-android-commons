@@ -19,9 +19,6 @@ import timber.log.Timber;
 @Singleton
 public class ExplorePlaces {
 
-    private static final int MAX_LIMIT = 10000;
-    private static final int LIMIT_MULTIPLIER = 2;
-
     @Inject
     MediaClient mediaClient;
 
@@ -35,39 +32,31 @@ public class ExplorePlaces {
      * @param curLatLng           coordinates of search location
      * @return list of places obtained
      */
-    List<Media> callCommonsQuery(final LatLng curLatLng, int limit)
+    List<Media> callCommonsQuery(final LatLng curLatLng, int limit, boolean isFromSearchActivity, String query)
         throws Exception {
 
-        double farthestDistance = 0;
-
-        Single<List<Media>> mediaList = null;
-
-
-        // Increase the radius gradually to find a satisfactory number of nearby places
-        //while (limit <= MAX_LIMIT) {
-            mediaList = getFromCommonsQuery(curLatLng, limit);
-            Timber.d("%d results at limit: %d", mediaList.blockingGet().size(), limit);
-            //if (mediaList.blockingGet().size() >= minResults) {
-              //  break;
-            //}
-            //limit *= LIMIT_MULTIPLIER;
-        //}
-        // make sure we will be able to send at least one request next time
-
-       ExploreMapController.farthestDistance = farthestDistance;
+        Single<List<Media>> mediaList;
+        if (isFromSearchActivity) {
+            mediaList = getFromCommonsWithQuery(curLatLng, query);
+        } else {
+            mediaList = getFromCommonsWithoutQuery(curLatLng, limit);
+        }
         return mediaList.blockingGet();
     }
 
     /**
      * Runs the Wikidata query to populate the Places around search location
      *
-     * @param cur                     coordinates of search location
+     * @param cur coordinates of search location
      * @return list of places obtained
      * @throws IOException if query fails
      */
-    public Single<List<Media>> getFromCommonsQuery(final LatLng cur, final int limit) throws Exception {
-        Log.d("nesli","lat long is"+ cur.getLatitude() + "-" + cur.getLongitude());
+    public Single<List<Media>> getFromCommonsWithoutQuery(final LatLng cur, final int limit) throws Exception {
         String coordinates = cur.getLatitude() + "|" + cur.getLongitude();
         return mediaClient.getMediaListFromGeoSearch(coordinates, limit);
+    }
+
+    public Single<List<Media>> getFromCommonsWithQuery(final LatLng cur, final String query) throws Exception {
+        return mediaClient.getMediaListFromSearchWithLocation(query, 30, 0);
     }
 }

@@ -12,7 +12,10 @@ import fr.free.nrw.commons.explore.paging.BasePagingMapFragment
 @Module
 abstract class ExploreMapModule {
 
+    /*
     @Binds
     abstract fun ExploreMapMediaPresenterIml.bindsExploreMapMediaPresenter()
             : ExploreMapMediaPresenter
+
+     */
 }

@@ -23,22 +23,23 @@ import com.mapbox.mapboxsdk.maps.MapView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.explore.SearchActivity
+import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.utils.ViewUtil
 import kotlinx.android.synthetic.main.fragment_search_paginated.*
 
 
 abstract class BasePagingMapFragment<T> : CommonsDaggerSupportFragment(),
-    PagingContract.View<T> {
+    PagingMapContract.View<T> {
 
     abstract val pagedListAdapter: PagedListAdapter<T, *>
-    abstract val injectedPresenter: PagingContract.Presenter<T>
+    //abstract val injectedPresenter: PagingMapContract.Presenter<T>
     abstract val errorTextId: Int
     @BindView(R.id.map_view) lateinit var mapView: MapView
     @BindView(R.id.bottom_sheet_details) lateinit var bottomSheetDetails: View
     @BindView(R.id.map_progress_bar) lateinit var progressBar: ProgressBar
     @BindView(R.id.fab_recenter) lateinit var fabRecenter: FloatingActionButton
-    private val loadingAdapter by lazy { FooterAdapter { injectedPresenter.retryFailedRequest() } }
-    private val mergeAdapter by lazy { MergeAdapter(pagedListAdapter, loadingAdapter) }
+    //private val loadingAdapter by lazy { FooterAdapter { injectedPresenter.retryFailedRequest() } }
+    //private val mergeAdapter by lazy { MergeAdapter(pagedListAdapter, loadingAdapter) }
     private var searchResults: LiveData<PagedList<T>>? = null
 
     override fun onCreateView(
@@ -61,10 +62,10 @@ abstract class BasePagingMapFragment<T> : CommonsDaggerSupportFragment(),
             ButterKnife.bind(this, view!!)
             mapView.onStart();
         //if (activity is SearchActivity) {
-            injectedPresenter.listFooterData.observe(
+            /*injectedPresenter.listFooterData.observe(
                 viewLifecycleOwner,
                 Observer(loadingAdapter::submitList)
-            )
+            )*/
         //}
          // Else it is a general explore activity
     }
@@ -91,14 +92,14 @@ abstract class BasePagingMapFragment<T> : CommonsDaggerSupportFragment(),
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-            injectedPresenter?.let {
+            /*injectedPresenter?.let {
                 injectedPresenter.onAttachView(this)
-            }
+            }*/
     }
 
     override fun onDetach() {
         super.onDetach()
-        injectedPresenter.onDetachView()
+        // injectedPresenter.onDetachView()
     }
 
     override fun hideInitialLoadProgress() {
@@ -113,11 +114,8 @@ abstract class BasePagingMapFragment<T> : CommonsDaggerSupportFragment(),
         ViewUtil.showShortSnackbar(paginatedSearchResultsList, errorTextId)
     }
 
-    fun onQueryUpdated(query: String) {
-        //if (activity is SearchActivity) {
-            Log.d("nesli3", "on query updated base paging");
-            injectedPresenter.onQueryUpdated(query)
-        //}
+    fun onQueryUpdated(query: String, isFromSearchActivity: Boolean) {
+
     }
 
     override fun showEmptyText(query: String) {
