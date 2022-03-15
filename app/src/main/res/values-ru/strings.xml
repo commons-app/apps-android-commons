@@ -25,6 +25,7 @@
 * Patriccck
 * Redredsonia
 * Rubin16
+* StarryFairy
 * Tanzun
 * Thothsum
 * Vlad5250
@@ -109,7 +110,7 @@
   <string name="upload_progress_notification_title_start">Загрузка файла: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s загружается</string>
   <string name="upload_progress_notification_title_finishing">Завершение загрузки %1$s</string>
-  <string name="upload_failed_notification_title">Не удалась загрузить %1$s</string>
+  <string name="upload_failed_notification_title">Не удалось загрузить %1$s</string>
   <string name="upload_paused_notification_title">Загрузка %1$s приостановлена</string>
   <string name="upload_failed_notification_subtitle">Нажмите для просмотра</string>
   <string name="upload_paused_notification_subtitle">Нажмите для просмотра</string>
