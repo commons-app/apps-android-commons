@@ -166,20 +166,27 @@ public class ReviewActivity extends BaseActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(media -> {
                     // Finds non-hidden categories from Media instance
-                    for(String key : media.getCategoriesHiddenStatus().keySet()) {
-                        Boolean value = media.getCategoriesHiddenStatus().get(key);
-                        // If non-hidden category is found then set hasNonHiddenCategories to true
-                        // so that category review cannot be skipped
-                        if(!value) {
-                            hasNonHiddenCategories = true;
-                            break;
-                        }
-                    }
-                    reviewImageFragment = getInstanceOfReviewImageFragment();
-                    reviewImageFragment.disableButtons();
-                    updateImage(media);
+                    findNonHiddenCategories(media);
                 }));
         return true;
+    }
+
+    /**
+     * Finds non-hidden categories and updates current image
+     */
+    private void findNonHiddenCategories(Media media) {
+        for(String key : media.getCategoriesHiddenStatus().keySet()) {
+            Boolean value = media.getCategoriesHiddenStatus().get(key);
+            // If non-hidden category is found then set hasNonHiddenCategories to true
+            // so that category review cannot be skipped
+            if(!value) {
+                hasNonHiddenCategories = true;
+                break;
+            }
+        }
+        reviewImageFragment = getInstanceOfReviewImageFragment();
+        reviewImageFragment.disableButtons();
+        updateImage(media);
     }
 
     @SuppressLint("CheckResult")
