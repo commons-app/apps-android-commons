@@ -670,5 +670,4 @@
   <string name="achievements_unavailable_beta">Úspechy sú dostupné len v prod flavor.</string>
   <string name="leaderboard_unavailable_beta">Rebríček je dostupný len v prod flavor.</string>
   <string name="copyright_popup">Prosím nahrajte len obrázky, ktoré ste urobili Vy sami. Obrázky podliehajúce autorským právam budú zablokované.</string>
-  <string name="your_feedback">Your Feedback</string>
 </resources>
