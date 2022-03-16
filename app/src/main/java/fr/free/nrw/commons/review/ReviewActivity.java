@@ -172,7 +172,7 @@ public class ReviewActivity extends BaseActivity {
     }
 
     /**
-     * Finds non-hidden categories and updates current image
+     * Finds non-hidden categories and updates current image in peer review
      */
     private void findNonHiddenCategories(Media media) {
         for(String key : media.getCategoriesHiddenStatus().keySet()) {
