@@ -92,10 +92,11 @@ class MediaClient @Inject constructor(
      * @return
      */
     fun getMediaListFromSearch(keyword: String?, limit: Int, offset: Int) =
-        responseMapper(mediaInterface.getMediaListFromSearch(keyword, limit, offset))
+        responseMapper(mediaInterface.getMediaListFromSearch(keyword, limit, 0))
 
-    fun getMediaListFromSearchWithLocation(keyword: String?, limit: Int, offset: Int) : Single<List<Media>> {
-        return Single.just(responseMapper(mediaInterface.getMediaListFromSearch(keyword, limit, offset)).blockingGet().filter { it.coordinates != null })
+    fun getMediaListFromSearchWithLocation(keyword: String?, limit: Int, offset: Int) : List<Media> {
+        return responseMapper(mediaInterface.getMediaListFromSearch(keyword, limit, offset)).blockingGet().filter { it.coordinates != null }
+        //return responseMapper(mediaInterface.getMediaListFromSearch(keyword, limit, offset)).blockingGet()
     }
 
     /**

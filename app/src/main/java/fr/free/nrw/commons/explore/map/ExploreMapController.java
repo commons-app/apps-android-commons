@@ -9,11 +9,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build.VERSION_CODES;
 import android.provider.ContactsContract.CommonDataKinds.Im;
 import android.util.Log;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
@@ -76,9 +78,11 @@ public class ExploreMapController extends MapController {
                     distances.put(media, computeDistanceBetween(media.getCoordinates(), curLatLng));
                     // Find boundaries with basic find max approach
                     if (media.getCoordinates().getLatitude() < boundaryCoordinates[0].getLatitude()) {
+                        Log.d("deneme","media lat is: "+media.getCoordinates().getLatitude()+" smaller than bound lat is:"+ boundaryCoordinates[0].getLatitude());
                         boundaryCoordinates[0] = media.getCoordinates();
                     }
                     if (media.getCoordinates().getLatitude() > boundaryCoordinates[1].getLatitude()) {
+                        Log.d("deneme","media lat is: "+media.getCoordinates().getLatitude()+" bigger than bound lat is:"+ boundaryCoordinates[1].getLatitude());
                         boundaryCoordinates[1] = media.getCoordinates();
                     }
                     if (media.getCoordinates().getLongitude() < boundaryCoordinates[2].getLongitude()) {
@@ -88,16 +92,17 @@ public class ExploreMapController extends MapController {
                         boundaryCoordinates[3] = media.getCoordinates();
                     }
                 }
-                Collections.sort(mediaList,
+                /*Collections.sort(mediaList,
                     (lhs, rhs) -> {
                         double lhsDistance = distances.get(lhs);
                         double rhsDistance = distances.get(rhs);
                         return (int) (lhsDistance - rhsDistance);
                     }
-                );
+                );*/
             }
             explorePlacesInfo.explorePlaceList = mediaToExplorePlace(mediaList);
             explorePlacesInfo.boundaryCoordinates = boundaryCoordinates;
+            Log.d("deneme","boundary coords:"+boundaryCoordinates[0] + ", "+ boundaryCoordinates[1]+ ", "+ boundaryCoordinates[2]+ ", "+ boundaryCoordinates[3]);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -105,10 +110,7 @@ public class ExploreMapController extends MapController {
     }
 
     /**
-     * Loads attractions from location for map view, we need to return BaseMarkerOption data type.
-     *
-     * @param curLatLng users current location
-     * @param placeList list of nearby places in Place data type
+     * Loads attractions from location for map view, we need to return Bplaces in Place data type
      * @return BaseMarkerOptions list that holds nearby places
      */
     public static List<NearbyBaseMarker> loadAttractionsFromLocationToBaseMarkerOptions(

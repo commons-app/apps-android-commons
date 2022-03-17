@@ -33,6 +33,8 @@ public class ExploreMapPresenter
     private String query;
     private boolean isFromSearchActivity;
     private ExploreMapController exploreMapController;
+    private float ZOOM_LEVEL = 14f;
+
 
 
     private static final ExploreMapContract.View DUMMY = (ExploreMapContract.View) Proxy
@@ -198,6 +200,9 @@ public class ExploreMapPresenter
         this.isFromSearchActivity = isFromSearchActivity;
         this.exploreMapController = exploreMapController;
         this.query = query;
+        if (isFromSearchActivity && query.isEmpty()) {
+            return;
+        }
         if(null != exploreMapFragmentView) {
             exploreMapFragmentView.addSearchThisAreaButtonAction();
             initializeMapOperations();
@@ -227,7 +232,7 @@ public class ExploreMapPresenter
         Log.d("nesli2","updateMap marker with nearby place info:" + explorePlacesInfo);
         exploreMapFragmentView.setMapBoundaries(CameraUpdateFactory.newLatLngBounds(getLatLngBounds(explorePlacesInfo.boundaryCoordinates), 10));
         if(null != exploreMapFragmentView) {
-            List<NearbyBaseMarker> nearbyBaseMarkers = ExploreMapController
+            List<NearbyBaseMarker> nearbyBaseMarkers = exploreMapController
                 .loadAttractionsFromLocationToBaseMarkerOptions(explorePlacesInfo.curLatLng, // Curlatlang will be used to calculate distances
                     explorePlacesInfo.explorePlaceList,
                     exploreMapFragmentView.getContext(),

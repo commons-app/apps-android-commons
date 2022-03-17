@@ -21,8 +21,8 @@ import timber.log.Timber;
 
 public class MapUtils {
     public static final float ZOOM_LEVEL = 14f;
-    private static final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.005;
-    private static final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.004;
+    public static final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.005;
+    public static final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.004;
     public static final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
     public static final float ZOOM_OUT = 0f;
 

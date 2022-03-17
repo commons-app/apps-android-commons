@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.explore.map;
 
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
+import static fr.free.nrw.commons.utils.MapUtils.CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE;
+import static fr.free.nrw.commons.utils.MapUtils.CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT;
 import static fr.free.nrw.commons.utils.MapUtils.ZOOM_LEVEL;
 
 import android.Manifest;
@@ -9,6 +11,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -205,6 +208,9 @@ public class ExploreMapFragment extends PageableMapFragment
 
     public void onQueryUpdated(String query) {
         this.query = query;
+        if (query.isEmpty()) {
+            return;
+        }
         performMapReadyActions();
     }
 
@@ -540,7 +546,7 @@ public class ExploreMapFragment extends PageableMapFragment
 
     @Override
     public void updateMapToTrackPosition(LatLng curLatLng) {
-        Log.d("test","updateMapToTrackPosition");
+        /*Log.d("test","updateMapToTrackPosition");
         Timber.d("Updates map camera to track user position");
         final CameraPosition cameraPosition;
         if(isPermissionDenied){
@@ -554,7 +560,7 @@ public class ExploreMapFragment extends PageableMapFragment
             mapBox.setCameraPosition(cameraPosition);
             mapBox.animateCamera(CameraUpdateFactory
                 .newCameraPosition(cameraPosition), 1000);
-        }
+        }*/
     }
 
     @Override
@@ -568,8 +574,31 @@ public class ExploreMapFragment extends PageableMapFragment
     }
 
     @Override
-    public void centerMapToPlace(Place placeToCenter) {
-        MapUtils.centerMapToPlace(placeToCenter, mapBox, lastPlaceToCenter, getActivity());
+    public void centerMapToPlace(Place place) {
+        MapUtils.centerMapToPlace(place, mapBox, lastPlaceToCenter, getActivity());
+        Timber.d("Map is centered to place");
+        final double cameraShift;
+        if (null != place) {
+            lastPlaceToCenter = place;
+        }
+
+        if (null != lastPlaceToCenter) {
+            final Configuration configuration = getActivity().getResources().getConfiguration();
+            if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                cameraShift = CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT;
+            } else {
+                cameraShift = CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE;
+            }
+            final CameraPosition position = new CameraPosition.Builder()
+                .target(LocationUtils.commonsLatLngToMapBoxLatLng(
+                    new fr.free.nrw.commons.location.LatLng(
+                        lastPlaceToCenter.location.getLatitude() - cameraShift,
+                        lastPlaceToCenter.getLocation().getLongitude(),
+                        0))) // Sets the new camera position
+                .zoom(mapBox.getCameraPosition().zoom) // Same zoom level
+                .build();
+            mapBox.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
+        }
     }
 
     @Override
