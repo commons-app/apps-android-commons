@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Looper
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.work.Configuration
 import androidx.work.testing.WorkManagerTestInitHelper
@@ -23,6 +24,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
@@ -455,6 +457,28 @@ class MainActivityUnitTests {
         )
         method.isAccessible = true
         method.invoke(activity, bundle)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnSetUpPagerNearBy(){
+        val item = Mockito.mock(MenuItem::class.java)
+        `when`(item.title).thenReturn(activity.getString(R.string.nearby_fragment))
+        activity.navListener.onNavigationItemSelected(item)
+        verify(item, Mockito.times(3)).title
+        verify(applicationKvStore,Mockito.times(1))
+            .putBoolean("last_opened_nearby",true)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnSetUpPagerOtherThanNearBy(){
+        val item = Mockito.mock(MenuItem::class.java)
+        `when`(item.title).thenReturn(activity.getString(R.string.bookmarks))
+        activity.navListener.onNavigationItemSelected(item)
+        verify(item, Mockito.times(3)).title
+        verify(applicationKvStore,Mockito.times(1))
+            .putBoolean("last_opened_nearby",false)
     }
 
 }
