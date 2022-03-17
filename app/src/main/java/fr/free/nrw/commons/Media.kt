@@ -3,6 +3,7 @@ package fr.free.nrw.commons
 import android.os.Parcelable
 import fr.free.nrw.commons.location.LatLng
 import kotlinx.android.parcel.Parcelize
+import org.wikipedia.dataclient.mwapi.MwQueryPage
 import org.wikipedia.page.PageTitle
 import java.util.*
 
@@ -77,7 +78,13 @@ class Media constructor(
     var coordinates: LatLng? = null,
     var captions: Map<String, String> = emptyMap(),
     var descriptions: Map<String, String> = emptyMap(),
-    var depictionIds: List<String> = emptyList()
+    var depictionIds: List<String> = emptyList(),
+    /**
+     * This field was added to find non-hidden categories
+     * Stores the mapping of category title to hidden attribute
+     * Example: "Mountains" => false, "CC-BY-SA-2.0" => true
+     */
+    var categoriesHiddenStatus: Map<String, Boolean> = emptyMap()
 ) : Parcelable {
 
     constructor(

@@ -80,8 +80,18 @@ public class Converters {
     }
 
     @TypeConverter
+    public static String mapObjectToString2(Map<String,Boolean> objectList) {
+        return writeObjectToString(objectList);
+    }
+
+    @TypeConverter
     public static Map<String,String> stringToMap(String objectList) {
         return readObjectWithTypeToken(objectList, new TypeToken<Map<String,String>>(){});
+    }
+
+    @TypeConverter
+    public static Map<String,Boolean> stringToMap2(String objectList) {
+        return readObjectWithTypeToken(objectList, new TypeToken<Map<String,Boolean>>(){});
     }
 
     @TypeConverter
