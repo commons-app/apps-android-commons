@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.tabs.TabLayout;
@@ -71,6 +73,27 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setId(R.id.viewPager);
         tabLayout.setupWithViewPager(viewPager);
+        viewPager.addOnPageChangeListener(new OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset,
+                int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 2) {
+                    viewPager.setCanScroll(false);
+                } else {
+                    viewPager.setCanScroll(true);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         setTabs();
         setHasOptionsMenu(true);
         return view;
