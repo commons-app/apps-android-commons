@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -11,6 +12,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputLayout
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
@@ -63,6 +65,9 @@ class DepictsFragmentUnitTests {
     private lateinit var progressBar: ProgressBar
 
     @Mock
+    private lateinit var button: Button
+
+    @Mock
     private lateinit var textInputLayout: TextInputLayout
 
     @Mock
@@ -73,6 +78,9 @@ class DepictsFragmentUnitTests {
 
     @Mock
     private lateinit var adapter: UploadDepictsAdapter
+
+    @Mock
+    private lateinit var media: Media
 
     @Before
     fun setUp() {
@@ -95,6 +103,8 @@ class DepictsFragmentUnitTests {
         Whitebox.setInternalState(fragment, "depictsTitle", textView)
         Whitebox.setInternalState(fragment, "callback", callback)
         Whitebox.setInternalState(fragment, "tooltip", imageView)
+        Whitebox.setInternalState(fragment, "btnNext", button)
+        Whitebox.setInternalState(fragment, "btnPrevious", button)
         Whitebox.setInternalState(fragment, "depictsSubTitle", textView)
         Whitebox.setInternalState(fragment, "depictsRecyclerView", recyclerView)
         Whitebox.setInternalState(fragment, "depictsSearch", textInputEditText)
@@ -119,6 +129,17 @@ class DepictsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testInit() {
+        val method: Method = DepictsFragment::class.java.getDeclaredMethod(
+            "init"
+        )
+        method.isAccessible = true
+        method.invoke(fragment)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Test init when media is not null`() {
+        Whitebox.setInternalState(fragment, "media", media)
         val method: Method = DepictsFragment::class.java.getDeclaredMethod(
             "init"
         )
