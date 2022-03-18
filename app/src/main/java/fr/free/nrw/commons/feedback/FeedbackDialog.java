@@ -4,7 +4,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-import butterknife.OnClick;
+import android.view.View.OnClickListener;
+import android.widget.Toast;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.databinding.DialogFeedbackBinding;
 import fr.free.nrw.commons.feedback.model.Feedback;
@@ -31,13 +32,18 @@ public class FeedbackDialog extends Dialog {
         dialogFeedbackBinding = DialogFeedbackBinding.inflate(getLayoutInflater());
         final View view = dialogFeedbackBinding.getRoot();
         setContentView(view);
+        dialogFeedbackBinding.btnSubmitFeedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submitFeedback();
+            }
+        });
     }
 
     /**
      * When the button is clicked, it will create a feedback object
      * and give a callback to calling activity/fragment
      */
-    @OnClick(R.id.btn_submit_feedback)
     void submitFeedback() {
         if(dialogFeedbackBinding.feedbackItemEditText.getText().toString().equals("")) {
             dialogFeedbackBinding.feedbackItemEditText.setError(getContext().getString(R.string.enter_description));
@@ -52,6 +58,7 @@ public class FeedbackDialog extends Dialog {
         String mNetworkType = dialogFeedbackBinding.networkTypeCheckbox.isChecked() ? DeviceInfoUtil.getConnectionType(getContext()).toString() : null;
         Feedback feedback = new Feedback(mAppVersionVersion,mAPILevel, dialogFeedbackBinding.feedbackItemEditText.getText().toString(), mAndroidVersion, mDeviceModel, mDeviceManufacturer, mDeviceName, mNetworkType);;
         onFeedbackSubmitCallback.onFeedbackSubmit(feedback);
+        Toast.makeText(getContext(), getContext().getString(R.string.thanks_feedback), Toast.LENGTH_SHORT).show();
         dismiss();
     }
 
