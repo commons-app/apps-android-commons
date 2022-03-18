@@ -20,7 +20,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Hoʻomaka nei i ka hoʻouka ʻana o %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Hoʻouka nei ʻo %1$s</string>
   <string name="upload_progress_notification_title_finishing">Hele a pau ka hoʻouka ʻana o %1$s</string>
-  <string name="upload_failed_notification_title">Ua hāʻule ʻo %1$s i ka hoʻouka ʻana</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Ua hāʻule ʻo %1$s i ka hoʻouka ʻana</string>
   <string name="upload_failed_notification_subtitle">Kīkē no ka ʻike ʻana</string>
   <string name="title_activity_contributions" fuzzy="true">Kaʻu hoʻouka</string>
   <string name="contribution_state_queued">Kali</string>

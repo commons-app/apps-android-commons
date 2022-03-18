@@ -10,6 +10,7 @@
 * Fitoschido
 * Friday83260
 * Gomoko
+* GrandEscogriffe
 * Happy13241
 * Jean-Frédéric
 * JenyxGym
@@ -351,6 +352,7 @@
   <string name="error_fetching_nearby_monuments">Erreur de récupération des monuments à proximité.</string>
   <string name="no_recent_searches">Aucune recherche récente</string>
   <string name="delete_recent_searches_dialog">Voulez-vous vraiment effacer votre historique de recherche ?</string>
+  <string name="cancel_upload_dialog">Êtes-vous sûr(e) de vouloir annuler ce téléversement ?</string>
   <string name="delete_search_dialog">Voulez-vous supprimer cette recherche ?</string>
   <string name="search_history_deleted">Historique de recherche effacée</string>
   <string name="nominate_delete">Proposé à la suppression</string>
@@ -616,6 +618,8 @@
   <string name="quality_images_info">Les images de qualité sont des diagrammes ou des photographies qui respectent certains standards de qualité (qui sont, par nature, essentiellement techniques) et sont précieuses pour les projets Wikimedia.</string>
   <string name="resuming_upload">Reprise du téléversement...</string>
   <string name="pausing_upload">Mise en pause du téléversement...</string>
+  <string name="cancelling_upload">Annulation du téléversement...</string>
+  <string name="cancel_upload">Annuler le téléversement</string>
   <string name="limited_connection_explanation">Vous avez activé le mode de connexion limitée. Tous les téléversements sont suspendus et reprendront une fois ce mode désactivé.</string>
   <string name="limited_connection_is_on">Le mode de connexion limitée est actif.</string>
   <string name="media_details_tooltip">Veuillez écrire un court résumé qui décrit ce que montre votre image. Dans la description, dites ce qui rend l’image intéressante ou typique ou rare et expliquez-en le contexte, qu’il soit visible ou pas. Utilisez une terminologie aussi exacte que possible.</string>
@@ -672,4 +676,7 @@
   <string name="no_location_found_message">Pourquoi ne pas ajouter le lieu où cette image a été trouvée ?\nLes données de lieu aident les contributeurs de wikis à trouver votre image, ce qui la rend beaucoup plus utile.\nMerci !</string>
   <string name="add_location">Ajouter un lieu</string>
   <string name="feedback_sharing_data_alert">Veuillez supprimer de ce courriel toute information que vous n’aimeriez pas diffuser publiquement. Également, veuillez prendre conscience du fait que votre adresse de messagerie avec laquelle vous publiez, ainsi que le nom et l’image de profil associés, seront visibles publiquement.</string>
+  <string name="achievements_unavailable_beta">Les réalisations ne sont disponibles que dans la version de production.</string>
+  <string name="leaderboard_unavailable_beta">Le classement n’est disponible que dans la version de production.</string>
+  <string name="copyright_popup">Veuillez ne téléverser que des images que vous avez créées vous-même. Ceux qui téléversent des images soumises aux droits d’auteur seront bloqués. Ceci s’applique également à la version bêta. Merci pour votre test de l’application !</string>
 </resources>

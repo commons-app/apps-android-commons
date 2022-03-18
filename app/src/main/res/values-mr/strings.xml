@@ -50,7 +50,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">%1$s अपभारण सुरू करीत आहे</string>
   <string name="upload_progress_notification_title_in_progress">%1$s अपभारण करीत आहे</string>
   <string name="upload_progress_notification_title_finishing">%1$s अपभारण पूर्ण करीत आहे</string>
-  <string name="upload_failed_notification_title">%1$s अपभारण अयशस्वी</string>
+  <string name="upload_failed_notification_title" fuzzy="true">%1$s अपभारण अयशस्वी</string>
   <string name="upload_failed_notification_subtitle">बघण्यास अलगद टपली मारा</string>
   <string name="title_activity_contributions">माझी अपभारणे</string>
   <string name="contribution_state_queued">रांगेत आहे</string>

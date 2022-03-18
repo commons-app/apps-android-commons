@@ -65,7 +65,7 @@
   <string name="upload_progress_notification_title_start">Отпремање датотеке „%s”</string>
   <string name="upload_progress_notification_title_in_progress">Отпремање датотеке „%1$s”</string>
   <string name="upload_progress_notification_title_finishing">Завршавање отпремања датотеке „%1$s”</string>
-  <string name="upload_failed_notification_title">Отпремање датотеке „%1$s” није успело</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Отпремање датотеке „%1$s” није успело</string>
   <string name="upload_failed_notification_subtitle">Додирните да бисте видели</string>
   <string name="title_activity_contributions">Ваша недавна отпремања</string>
   <string name="contribution_state_queued">На чекању</string>

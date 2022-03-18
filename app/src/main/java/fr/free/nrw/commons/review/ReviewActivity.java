@@ -71,6 +71,11 @@ public class ReviewActivity extends BaseActivity {
      */
      private ReviewImageFragment reviewImageFragment;
 
+    /**
+     * Flag to check whether there are any non-hidden categories in the File
+     */
+    private boolean hasNonHiddenCategories = false;
+
     final String SAVED_MEDIA = "saved_media";
     private Media media;
 
@@ -153,17 +158,35 @@ public class ReviewActivity extends BaseActivity {
 
     @SuppressLint("CheckResult")
     public boolean runRandomizer() {
+        hasNonHiddenCategories = false;
         progressBar.setVisibility(View.VISIBLE);
         reviewPager.setCurrentItem(0);
         compositeDisposable.add(reviewHelper.getRandomMedia()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(media -> {
-                    reviewImageFragment = getInstanceOfReviewImageFragment();
-                    reviewImageFragment.disableButtons();
-                    updateImage(media);
+                    // Finds non-hidden categories from Media instance
+                    findNonHiddenCategories(media);
                 }));
         return true;
+    }
+
+    /**
+     * Finds non-hidden categories and updates current image
+     */
+    private void findNonHiddenCategories(Media media) {
+        for(String key : media.getCategoriesHiddenStatus().keySet()) {
+            Boolean value = media.getCategoriesHiddenStatus().get(key);
+            // If non-hidden category is found then set hasNonHiddenCategories to true
+            // so that category review cannot be skipped
+            if(!value) {
+                hasNonHiddenCategories = true;
+                break;
+            }
+        }
+        reviewImageFragment = getInstanceOfReviewImageFragment();
+        reviewImageFragment.disableButtons();
+        updateImage(media);
     }
 
     @SuppressLint("CheckResult")
@@ -195,8 +218,16 @@ public class ReviewActivity extends BaseActivity {
 
     public void swipeToNext() {
         int nextPos = reviewPager.getCurrentItem() + 1;
+        // If currently at category fragment, then check whether the media has any non-hidden category
         if (nextPos <= 3) {
             reviewPager.setCurrentItem(nextPos);
+            if (nextPos == 2) {
+                // The media has no non-hidden category. Such media are already flagged by server-side bots, so no need to review manually.
+                if (!hasNonHiddenCategories) {
+                    swipeToNext();
+                    return;
+                }
+            }
         } else {
             runRandomizer();
         }

@@ -59,7 +59,7 @@
   <string name="upload_progress_notification_title_start">Uploading file: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s uploading</string>
   <string name="upload_progress_notification_title_finishing">Finishing uploading %1$s</string>
-  <string name="upload_failed_notification_title">Uploading %1$s failed</string>
+  <string name="upload_failed_notification_title">Failed to upload %1$s</string>
   <string name="upload_paused_notification_title">Uploading %1$s paused</string>
   <string name="upload_failed_notification_subtitle">Tap to view</string>
   <string name="upload_paused_notification_subtitle">Tap to view</string>
@@ -330,6 +330,7 @@
   <string name="error_fetching_nearby_monuments">Error fetching nearby monuments.</string>
   <string name="no_recent_searches">No recent searches</string>
   <string name="delete_recent_searches_dialog">Are you sure you want to clear your search history?</string>
+  <string name="cancel_upload_dialog">Are you sure you want to cancel this upload?</string>
   <string name="delete_search_dialog">Do you want to delete this search?</string>
   <string name="search_history_deleted">Search history deleted</string>
 
@@ -634,6 +635,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="quality_images_info">Quality images are diagrams or photographs that meet certain quality standards (which are mostly technical in nature) and are valuable for Wikimedia projects</string>
   <string name="resuming_upload">Resuming upload…</string>
   <string name="pausing_upload">Pausing upload…</string>
+  <string name="cancelling_upload">Cancelling upload…</string>
+  <string name="cancel_upload">Cancel Upload</string>
   <string name="limited_connection_explanation">You have enabled limited connection mode. All uploads are paused and will resume once you disable this mode.</string>
   <string name="limited_connection_is_on">Limited connection mode is on.</string>
 
@@ -698,4 +701,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="feedback_sharing_data_alert">Please remove from this email any information that you are not comfortable sharing publicly. Also, please be aware that your email address with which you are posting, and the associated name and profile picture, will be visible publicly.</string>
   <string name="achievements_unavailable_beta">Achievements are only available in the prod flavor.</string>
   <string name="leaderboard_unavailable_beta">The leaderboard is only available in the prod flavor.</string>
+  <string name="copyright_popup">Please only upload pictures you have taken by yourself. Uploaders of copyrighted images will be blocked. This applies to the beta flavor too. Thank you for testing the app!</string>
 </resources>

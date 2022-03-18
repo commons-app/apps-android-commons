@@ -20,7 +20,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Byrjar %1$s útlegging</string>
   <string name="upload_progress_notification_title_in_progress">%1$s verður lagt út</string>
   <string name="upload_progress_notification_title_finishing">Útlegging av %1$s er við at vera liðug</string>
-  <string name="upload_failed_notification_title">Tað miseydnaðist at leggja %1$s út</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Tað miseydnaðist at leggja %1$s út</string>
   <string name="upload_failed_notification_subtitle">Trýst fyri at síggja</string>
   <string name="title_activity_contributions" fuzzy="true">Tað sum eg havi lagt út</string>
   <string name="contribution_state_queued">Í bíðirøð</string>

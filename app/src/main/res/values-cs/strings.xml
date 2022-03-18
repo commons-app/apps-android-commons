@@ -80,7 +80,7 @@
   <string name="upload_progress_notification_title_start">Načítání souboru: %s</string>
   <string name="upload_progress_notification_title_in_progress">Nahrává se soubor %1$s</string>
   <string name="upload_progress_notification_title_finishing">Dokončení nahrávání souboru %1$s</string>
-  <string name="upload_failed_notification_title">Načítání souboru %1$s se nezdařilo</string>
+  <string name="upload_failed_notification_title">Nepodařilo se nahrát soubor %1$s</string>
   <string name="upload_paused_notification_title">Načítání souboru %1$s bylo pozastaveno</string>
   <string name="upload_failed_notification_subtitle">Klepnutím zobrazíte</string>
   <string name="upload_paused_notification_subtitle">Klepnutím zobrazíte</string>

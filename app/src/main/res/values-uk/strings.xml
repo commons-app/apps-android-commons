@@ -10,6 +10,7 @@
 * Mykola Swarnyk
 * Piramidion
 * Renvoy
+* Samflint
 * SimondR
 * Viiictorrr
 * Vlad5250
@@ -348,6 +349,7 @@
   <string name="error_fetching_nearby_monuments">Помилка отримання пам\'ятників поблизу.</string>
   <string name="no_recent_searches">Історія пошуку порожня</string>
   <string name="delete_recent_searches_dialog">Ви впевнені, що хочете стерти історію пошукових запитів?</string>
+  <string name="cancel_upload_dialog">Ви впевнені, що хочете скасувати це завантаження?</string>
   <string name="delete_search_dialog">Вилучити цей пошук?</string>
   <string name="search_history_deleted">Історія пошуку очищена</string>
   <string name="nominate_delete">Номінувати на вилучення</string>
@@ -615,6 +617,8 @@
   <string name="quality_images_info">Якісні зображення — це діаграми чи фотографії, що відповідають певним стандартам якості (переважно технічним за природою) та цінні для проєктів Вікімедіа</string>
   <string name="resuming_upload">Продовження завантаження…</string>
   <string name="pausing_upload">Призупинення завантаження…</string>
+  <string name="cancelling_upload">Скасування завантаження…</string>
+  <string name="cancel_upload">Скасувати завантаження</string>
   <string name="limited_connection_explanation">Ви увімкнули режим обмеженого з\'єднання. Усі завантаження призупинено та буде відновлено коли Ви вимкнете цей режим.</string>
   <string name="limited_connection_is_on">Режим обмеженого з\'єднання увімкнено.</string>
   <string name="media_details_tooltip">Будь ласка, напишіть короткий опис, що розповідає що представлено на зображенні. В описі розкажіть що робить це зображення цікавим, типовим або рідкісним, опишіть контекст — видимий чи ні. Старайтесь максимально використовувати точну термінологію.</string>

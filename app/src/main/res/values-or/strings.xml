@@ -21,7 +21,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">%1$sତମ ଅପଲୋଡ଼ ଆରମ୍ଭ କରୁଛି</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ଅପଲୋଡ଼ ହୋଇଗଲା</string>
   <string name="upload_progress_notification_title_finishing">%1$s ଅପଲୋଡ଼ ସରୁଛି</string>
-  <string name="upload_failed_notification_title">%1$s ଅପଲୋଡ଼ କରିବାରେ ବିଫଳ ହେଲୁ</string>
+  <string name="upload_failed_notification_title" fuzzy="true">%1$s ଅପଲୋଡ଼ କରିବାରେ ବିଫଳ ହେଲୁ</string>
   <string name="upload_failed_notification_subtitle">ଦେଖିବା ପାଇଁ ଟ୍ୟାପ କରନ୍ତୁ</string>
   <string name="title_activity_contributions" fuzzy="true">ମୋ ଅପଲୋଡ଼ମାନ</string>
   <string name="contribution_state_queued">ଧାଡ଼ିରେ ଲାଗିଛି</string>
