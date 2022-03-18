@@ -68,7 +68,7 @@ class DepictEditHelper @Inject constructor (notificationHelper: NotificationHelp
      * @return Observable<Boolean>
      */
      private fun addDepiction(media: Media, depicts: List<String>): Observable<Boolean> {
-        Timber.d("thread is depict adding %s", Thread.currentThread().name)
+        Timber.d("thread is adding depiction %s", Thread.currentThread().name)
         return wikidataEditService.updateDepictsProperty(media.filename, depicts)
     }
 
