@@ -1,15 +1,12 @@
 package fr.free.nrw.commons.upload
 
 import android.content.Context
-import com.nhaarman.mockitokotlin2.whenever
-import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import media
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mock
 import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
 
