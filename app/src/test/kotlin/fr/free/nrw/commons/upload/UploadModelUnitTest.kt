@@ -1,12 +1,15 @@
 package fr.free.nrw.commons.upload
 
 import android.content.Context
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
+import media
 import org.junit.Before
 import org.junit.Test
+import org.mockito.Mock
 import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
 
@@ -29,8 +32,75 @@ class UploadModelUnitTest {
     }
 
     @Test
-    fun testOnDepictItemClicked(){
-        uploadModel.onDepictItemClicked(mock(DepictedItem::class.java), mock(Media::class.java))
+    fun `Test onDepictItemClicked when DepictedItem is selected`(){
+        uploadModel.onDepictItemClicked(
+            DepictedItem(
+            "Test",
+                "Test",
+                "test",
+                listOf(),
+                listOf(),
+                true,
+                "depictionId"
+            ), media(filename = "File:Example.jpg"))
+    }
+
+    @Test
+    fun `Test onDepictItemClicked when DepictedItem is not selected`(){
+        uploadModel.onDepictItemClicked(
+            DepictedItem(
+                "Test",
+                "Test",
+                "test",
+                listOf(),
+                listOf(),
+                false,
+                "depictionId"
+            ), media(filename = "File:Example.jpg")
+        )
+    }
+
+    @Test
+    fun `Test onDepictItemClicked when DepictedItem is not selected and not included in media`(){
+        uploadModel.onDepictItemClicked(
+            DepictedItem(
+                "Test",
+                "Test",
+                "test",
+                listOf(),
+                listOf(),
+                false,
+                "id"
+            ), media(filename = "File:Example.jpg")
+        )
+    }
+
+    @Test
+    fun `Test onDepictItemClicked when media is null and DepictedItem is not selected`(){
+        uploadModel.onDepictItemClicked(
+            DepictedItem(
+                "Test",
+                "Test",
+                "test",
+                listOf(),
+                listOf(),
+                false,
+                "id"
+            ), null)
+    }
+
+    @Test
+    fun `Test onDepictItemClicked when media is null and DepictedItem is selected`(){
+        uploadModel.onDepictItemClicked(
+            DepictedItem(
+                "Test",
+                "Test",
+                "test",
+                listOf(),
+                listOf(),
+                true,
+                "id"
+            ), null)
     }
 
     @Test
