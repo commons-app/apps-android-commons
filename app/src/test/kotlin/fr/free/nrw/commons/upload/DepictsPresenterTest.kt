@@ -5,6 +5,7 @@ import com.jraska.livedata.test
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import depictedItem
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.DepictsContract
@@ -17,7 +18,9 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
+import java.lang.reflect.Method
 
 
 class DepictsPresenterTest {
@@ -129,5 +132,15 @@ class DepictsPresenterTest {
         whenever(repository.selectedDepictions).thenReturn(emptyList())
         depictsPresenter.verifyDepictions()
         verify(view).noDepictionSelected()
+    }
+
+    @Test
+    fun testOnAttachViewWithMedia() {
+        depictsPresenter.onAttachViewWithMedia(view, Mockito.mock(Media::class.java))
+    }
+
+    @Test
+    fun testUpdateDepicts() {
+        depictsPresenter.updateDepicts(Mockito.mock(Media::class.java))
     }
 }
