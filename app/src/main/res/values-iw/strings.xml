@@ -680,4 +680,5 @@
   <string name="feedback_sharing_data_alert">נא להסיר מהמכתב הזה כל מידע שאינך רוצה לשתף באופן פומבי. כמו־כן, נא לזכור שכתובת הדוא\"ל שמכתב נשלח ממנה, השם המשויך והתמונה, יהיו מוצגות ציבורית.</string>
   <string name="achievements_unavailable_beta">ההישגים זמינים רק בגרסה הראשית.</string>
   <string name="leaderboard_unavailable_beta">לוח המובילים זמין רק בגרסה הראשית.</string>
+  <string name="copyright_popup">נא להעלות רק תמונות שצילמת בעצמך. אנשים שיעלו תמונות שמוגבלות בזכויות יוצרים ייחסמו. זה חל גם על גרסת הבטא. תודה על בדיקת היישום!</string>
 </resources>
