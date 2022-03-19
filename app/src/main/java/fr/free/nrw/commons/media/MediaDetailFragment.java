@@ -598,11 +598,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         image.getHierarchy().setFailureImage(R.drawable.image_placeholder);
 
         DraweeController controller = Fresco.newDraweeControllerBuilder()
-            .setLowResImageRequest(ImageRequest.fromUri(media != null ? media.getThumbUrl() : null))
-            .setImageRequest(ImageRequest.fromUri(media != null ? media.getImageUrl() : null))
-            .setControllerListener(aspectRatioListener)
-            .setOldController(image.getController())
-            .build();
+                .setLowResImageRequest(ImageRequest.fromUri(media != null ? media.getThumbUrl() : null))
+                .setImageRequest(ImageRequest.fromUri(media != null ? media.getImageUrl() : null))
+                .setControllerListener(aspectRatioListener)
+                .setOldController(image.getController())
+                .build();
         image.setController(controller);
     }
 
