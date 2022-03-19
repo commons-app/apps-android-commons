@@ -122,18 +122,6 @@
       android:layout_margin="@dimen/dimen_6"
       />
 
-    <CheckBox
-      android:id="@+id/username_checkbox"
-      android:text="@string/wikimedia_user_name"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:checkMark="?android:attr/textCheckMark"
-      android:checked="true"
-      android:gravity="center_vertical"
-      android:padding="@dimen/tiny_gap"
-      android:layout_margin="@dimen/dimen_6"
-      />
-
     <Button
       android:id="@+id/btn_submit_feedback"
       android:textColor="@color/white"

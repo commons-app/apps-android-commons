@@ -29,7 +29,7 @@ public class FeedbackContentCreator {
 
         stringBuilder = new StringBuilder();
         stringBuilder.append("== ");
-        stringBuilder.append("Feedback for version ");
+        stringBuilder.append("Feedback from ~~~ for version ");
         stringBuilder.append(feedback.getVersion());
         stringBuilder.append(" ==");
         stringBuilder.append("\n");
