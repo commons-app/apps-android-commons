@@ -1342,7 +1342,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     /**
-     * Returns captions for media details
+    * Returns captions for media details
      *
      * @param media object of class media
      * @return caption as string
