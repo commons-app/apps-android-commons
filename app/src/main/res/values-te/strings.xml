@@ -64,7 +64,7 @@
   <string name="upload_progress_notification_title_start">దస్త్రాన్ని ఎక్కిస్తున్నాం: $s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ను ఎక్కిస్తున్నాం</string>
   <string name="upload_progress_notification_title_finishing">%1$s ఎక్కింపు పూర్తికావస్తోంది</string>
-  <string name="upload_failed_notification_title" fuzzy="true">%1$s ఎక్కింపు విఫలమైంది</string>
+  <string name="upload_failed_notification_title">%1$s ఎక్కింపు విఫలమైంది</string>
   <string name="upload_paused_notification_title">%1$s ఎక్కింపు నిలిచింది</string>
   <string name="upload_failed_notification_subtitle">చూసేందుకు నొక్కండి</string>
   <string name="upload_paused_notification_subtitle">చూసేందుకు నొక్కండి</string>
@@ -317,6 +317,7 @@
   <string name="error_fetching_nearby_monuments">సమీపం లోని నిర్మాణాలను తేవడంలో లోపం.</string>
   <string name="no_recent_searches">ఇటీవలి వెతుకులాటలేమీ లేవు</string>
   <string name="delete_recent_searches_dialog">మీ వెతుకులాట చరిత్రను నిజంగానే తుడిచివేయాలనుకుంటున్నారా?</string>
+  <string name="cancel_upload_dialog">ఈ ఎక్కింపును రద్దు చెయ్యాలనే నిశ్చయించుకున్నారా?</string>
   <string name="delete_search_dialog">ఈ వెతుకులాటను తొలగించాలను అనుకుంటున్నారా?</string>
   <string name="search_history_deleted">వెతుకులాట చరిత్రను తొలగించాం</string>
   <string name="nominate_delete">తొలగించేందుకు నామినేటు చెయ్యండి</string>
@@ -574,6 +575,8 @@
   <string name="statistics_quality">నాణ్యమైన బొమ్మలు</string>
   <string name="resuming_upload">ఎక్కింపును తిరిగి మొదలెడుతున్నాం...</string>
   <string name="pausing_upload">ఎక్కింపును నిలుపుతున్నాం...</string>
+  <string name="cancelling_upload">ఎక్కింపును రద్దు చేస్తున్నాం...</string>
+  <string name="cancel_upload">ఎక్కింపును రద్దుచెయ్యి</string>
   <string name="limited_connection_explanation">మీరు పరిమిత కనెక్షను మోడ్‌ను చేతనం చేసారు. ఎక్కింపులన్నీ నిలిచిపోయాయి. మీరు ఈ మోడ్‌ను అచేతనం చెయ్యగానే అవి తిరిగి మొదలౌతాయి.</string>
   <string name="limited_connection_is_on">పరిమిత కనెక్షను మోడ్ ఆన్ అయింది.</string>
   <string name="license_tooltip">కామన్స్, మీ బొమ్మలను ఎవరైనా మళ్ళీ మళ్ళీ వాడేలా, మార్చుకునేలా చేస్తుంది. మీరు హక్కులన్నిటినీ వదులుకుంటారా? మీకు శ్రేయస్సు ఆపాదించాలా? మార్పుచేర్పులు కూడా అదే లైసెన్సు వాడాలని భావిస్తున్నారా?</string>
@@ -615,4 +618,5 @@
   <string name="no_location_found_message">ఈ బొమ్మను తీసిన స్థానాన్ని దీనికి చేరిస్తే బావుంటుంది గదా.\nస్థానం డేటా ఉంటే అది, ఈ బొమ్మను కనుక్కోవడంలో వికీ ఎడిటర్లకు సాయపడుతుంది. ఆ విధంగా బొమ్మ ఉపయోగం పెరుగుతుంది.\nధన్యవాదాలు!</string>
   <string name="add_location">స్థానాన్ని చేర్చండి</string>
   <string name="feedback_sharing_data_alert">బహిరంగంగా పంచుకోలేని సమాచారం ఏదైనా ఈ ఈమెయిల్లో ఉంటే దాన్ని తీసెయ్యండి. అలాగే, మీరు పోస్టు చేస్తున్న ఈమెయిలు చిరునామా, దానికి సంబంధించిన పేరు, ప్రొఫైలు బొమ్మా బహిరంగంగా అందరికీ కనిపిస్తాయని గమనంలో ఉంచుకోండి.</string>
+  <string name="copyright_popup">మీరు స్వయంగా తీసిన ఫొటోలను మాత్రమే ఎక్కించండి. కాపీహక్కులున్న బొమ్మలను ఎక్కించినవారిని నిరోధిస్తారు. ఇది బీటా కూర్పుకు కూడా వర్తిస్తుంది. యాప్‌ను పరీక్షిస్తున్నందుకు ధన్యవాదాలు.</string>
 </resources>

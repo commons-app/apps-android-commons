@@ -6,12 +6,14 @@
 * ButterflyOfFire
 * Claw eg
 * Dr. Mohammed
+* FiberAhmed
 * Kassem7899
 * Meno25
 * Mido
 * Monrokhoury
 * Mr. Ibrahem
 * NEHAOUA
+* NancyMilad
 * OsamaK
 * Tala Ali
 * ترجمان05
@@ -104,7 +106,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">بدء رفع %1$s</string>
   <string name="upload_progress_notification_title_in_progress">يجري رفع %1$s</string>
   <string name="upload_progress_notification_title_finishing">اكتمال رفع %1$s</string>
-  <string name="upload_failed_notification_title" fuzzy="true">فشل رفع %1$s</string>
+  <string name="upload_failed_notification_title">الفشل في التحميل</string>
   <string name="upload_failed_notification_subtitle">انقر لتشاهد</string>
   <string name="title_activity_contributions">مرفوعاتي الأخيرة</string>
   <string name="contribution_state_queued">في قائمة الانتظار</string>
@@ -354,6 +356,7 @@
   <string name="error_fetching_nearby_places">خطأ في جلب الأماكن المجاورة.</string>
   <string name="no_recent_searches">لا توجد عمليات بحث حديثة</string>
   <string name="delete_recent_searches_dialog">هل أنت متأكد من أنك تريد مسح سجل بحثك؟</string>
+  <string name="cancel_upload_dialog">هل انت متأكد انك تريد الغاء هذا التحميل</string>
   <string name="delete_search_dialog">هل تريد حذف هذا البحث؟</string>
   <string name="search_history_deleted">تم حذف سجل البحث</string>
   <string name="nominate_delete">ترشيح للحذف</string>
@@ -547,8 +550,11 @@
   <string name="confirm">تأكيد</string>
   <string name="instructions_title">التعليمات</string>
   <string name="limited_connection_mode" fuzzy="true">اتصال محدود</string>
+  <string name="cancelling_upload">الغاء التحميل</string>
+  <string name="cancel_upload">إلغاء الرفع</string>
   <string name="choose_a_location">اختر موقعًا</string>
   <string name="select_location_location_picker">حدد موقعًا</string>
   <string name="modify_location">أضف الموقع</string>
   <string name="image_location">مكان الصورة</string>
+  <string name="copyright_popup">يرجى فقط تحميل الصور التي قمت بالتقاطها بنفسك. المحملين من صور لديها حقوق النسخ سيتم منعهم من التحميل. وهذا ينطبق على مفضلي استخدام بيتا ايضا. شكرا لمشاركتكم في فحص هذ التطبيق</string>
 </resources>

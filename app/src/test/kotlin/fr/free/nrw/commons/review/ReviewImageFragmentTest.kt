@@ -11,6 +11,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
+import com.nhaarman.mockitokotlin2.doReturn
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
@@ -20,7 +22,10 @@ import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
+import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
@@ -51,6 +56,7 @@ class ReviewImageFragmentTest {
     @Mock
     private lateinit var savedInstanceState: Bundle
 
+    private lateinit var activity: ReviewActivity
 
     @Before
     fun setUp() {
@@ -61,7 +67,7 @@ class ReviewImageFragmentTest {
         SoLoader.setInTestMode()
 
         Fresco.initialize(context)
-        val activity = Robolectric.buildActivity(ReviewActivity::class.java).create().get()
+        activity = Robolectric.buildActivity(ReviewActivity::class.java).create().get()
         fragment = ReviewImageFragment()
         val bundle = Bundle()
         bundle.putInt("position", 1)
@@ -110,10 +116,17 @@ class ReviewImageFragmentTest {
     @Test
     @Throws(Exception::class)
     fun testOnUpdateCategoriesQuestion() {
+        shadowOf(Looper.getMainLooper()).idle()
+        val media = mock(Media::class.java)
+        Whitebox.setInternalState(activity, "media", media)
+        Assert.assertNotNull(media)
+        val categories = mapOf<String, Boolean>("Category:" to false)
+        doReturn(categories).`when`(media).categoriesHiddenStatus
+        Assert.assertNotNull(media.categoriesHiddenStatus)
+        Assert.assertNotNull(fragment.isAdded)
         val method: Method =
             ReviewImageFragment::class.java.getDeclaredMethod("updateCategoriesQuestion")
         method.isAccessible = true
-        shadowOf(Looper.getMainLooper()).idle()
         method.invoke(fragment)
     }
 

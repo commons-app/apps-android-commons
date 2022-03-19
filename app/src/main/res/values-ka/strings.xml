@@ -54,7 +54,7 @@
   <string name="upload_progress_notification_title_start">ფაილის ატვირთვა: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$ ატვირთვა</string>
   <string name="upload_progress_notification_title_finishing">ატვირთვის დასრულება %1$</string>
-  <string name="upload_failed_notification_title" fuzzy="true">%1$ ატვირთვა ვერ მოხერხდა</string>
+  <string name="upload_failed_notification_title">%1$ ატვირთვა ვერ მოხერხდა</string>
   <string name="upload_paused_notification_title">%1$s-ის ატვირთვა შეჩერებულია</string>
   <string name="upload_failed_notification_subtitle">დააჭირეთ სანახავად</string>
   <string name="upload_paused_notification_subtitle">სანახავად დააჭირეთ</string>
