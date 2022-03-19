@@ -761,11 +761,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         depictionContainer.removeAllViews();
         String locale = Locale.getDefault().getLanguage();
         for (IdAndCaptions idAndCaption : idAndCaptions) {
-            depictionContainer.addView(buildDepictLabel(
-                getDepictionCaption(idAndCaption, locale),
-                idAndCaption.getId(),
-                depictionContainer
-            ));
+                depictionContainer.addView(buildDepictLabel(
+                    getDepictionCaption(idAndCaption, locale),
+                    idAndCaption.getId(),
+                    depictionContainer
+                ));
         }
     }
 
