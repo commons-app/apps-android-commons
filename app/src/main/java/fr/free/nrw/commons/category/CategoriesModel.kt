@@ -42,10 +42,10 @@ class CategoriesModel @Inject constructor(
         return item.matches(".*(19|20)\\d{2}.*".toRegex())
                 && !item.contains(yearInString)
                 && !item.contains(prevYearInString)
-                || item.matches("(.*)needing(.*)".toRegex())
-                || item.matches("(.*)taken on(.*)".toRegex())
-                || item.matches(".*0s.*".toRegex())
-                && !item.matches(".*(200|201)0s.*".toRegex())
+                && (item.matches("(.*)needing(.*)".toRegex())
+                    || item.matches("(.*)taken on(.*)".toRegex()))
+                || (item.matches(".*0s.*".toRegex())
+                    && !item.matches(".*(200|201)0s.*".toRegex()))
     }
 
     /**
