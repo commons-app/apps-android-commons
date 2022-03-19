@@ -49,14 +49,16 @@ public class FeedbackDialog extends Dialog {
             dialogFeedbackBinding.feedbackItemEditText.setError(getContext().getString(R.string.enter_description));
             return;
         }
-        String mAppVersionVersion = ConfigUtils.getVersionNameWithSha(getContext());
-        String mAndroidVersion = dialogFeedbackBinding.androidVersionCheckbox.isChecked() ? DeviceInfoUtil.getAndroidVersion() : null;
-        String mAPILevel = dialogFeedbackBinding.apiLevelCheckbox.isChecked() ? DeviceInfoUtil.getAPILevel() : null;
-        String mDeviceManufacturer = dialogFeedbackBinding.deviceManufacturerCheckbox.isChecked() ? DeviceInfoUtil.getDeviceManufacturer() : null;
-        String mDeviceModel = dialogFeedbackBinding.deviceModelCheckbox.isChecked() ? DeviceInfoUtil.getDeviceModel() : null;
-        String mDeviceName = dialogFeedbackBinding.deviceNameCheckbox.isChecked() ? DeviceInfoUtil.getDevice() : null;
-        String mNetworkType = dialogFeedbackBinding.networkTypeCheckbox.isChecked() ? DeviceInfoUtil.getConnectionType(getContext()).toString() : null;
-        Feedback feedback = new Feedback(mAppVersionVersion,mAPILevel, dialogFeedbackBinding.feedbackItemEditText.getText().toString(), mAndroidVersion, mDeviceModel, mDeviceManufacturer, mDeviceName, mNetworkType);;
+        String appVersionVersion = ConfigUtils.getVersionNameWithSha(getContext());
+        String androidVersion = dialogFeedbackBinding.androidVersionCheckbox.isChecked() ? DeviceInfoUtil.getAndroidVersion() : null;
+        String apiLevel = dialogFeedbackBinding.apiLevelCheckbox.isChecked() ? DeviceInfoUtil.getAPILevel() : null;
+        String deviceManufacturer = dialogFeedbackBinding.deviceManufacturerCheckbox.isChecked() ? DeviceInfoUtil.getDeviceManufacturer() : null;
+        String deviceModel = dialogFeedbackBinding.deviceModelCheckbox.isChecked() ? DeviceInfoUtil.getDeviceModel() : null;
+        String deviceName = dialogFeedbackBinding.deviceNameCheckbox.isChecked() ? DeviceInfoUtil.getDevice() : null;
+        String networkType = dialogFeedbackBinding.networkTypeCheckbox.isChecked() ? DeviceInfoUtil.getConnectionType(getContext()).toString() : null;
+        Feedback feedback = new Feedback(appVersionVersion, apiLevel
+            , dialogFeedbackBinding.feedbackItemEditText.getText().toString()
+            , androidVersion, deviceModel, deviceManufacturer, deviceName, networkType);
         onFeedbackSubmitCallback.onFeedbackSubmit(feedback);
         Toast.makeText(getContext(), getContext().getString(R.string.thanks_feedback), Toast.LENGTH_SHORT).show();
         dismiss();
