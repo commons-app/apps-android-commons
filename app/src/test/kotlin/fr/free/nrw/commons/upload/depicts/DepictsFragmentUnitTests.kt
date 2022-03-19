@@ -230,8 +230,13 @@ class DepictsFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testSearForDepictions() {
+    fun testOnResume() {
         fragment.onResume()
     }
 
+    @Test
+    @Throws(Exception::class)
+    fun testOnStop() {
+        fragment.onStop()
+    }
 }
