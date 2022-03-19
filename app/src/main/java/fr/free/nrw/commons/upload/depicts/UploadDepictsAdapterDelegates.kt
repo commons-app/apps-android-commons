@@ -10,9 +10,7 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 
 
 fun uploadDepictsDelegate(onDepictClicked: (DepictedItem) -> Unit) =
-    adapterDelegateViewBinding<DepictedItem,
-            DepictedItem,
-            LayoutUploadDepictsItemBinding>({ layoutInflater, parent ->
+    adapterDelegateViewBinding<DepictedItem, DepictedItem, LayoutUploadDepictsItemBinding>({ layoutInflater, parent ->
         LayoutUploadDepictsItemBinding.inflate(layoutInflater, parent, false)
     }) {
         val onClickListener = { _: View? ->
