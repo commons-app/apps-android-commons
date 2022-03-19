@@ -154,6 +154,26 @@ class CategoryClientTest {
             .assertValues(emptyList())
     }
 
+    @Test
+    fun checkIrrelevantCategoryIsFilteredOut() {
+        val mockResponse = withMockResponse("Category:Photographs taken on 2015-11-08")
+        whenever(categoryInterface.searchCategories(anyString(), anyInt(), anyInt()))
+            .thenReturn(Single.just(mockResponse))
+        categoryClient.searchCategories("Photo", 10)
+            .test()
+            .assertValues(emptyList())
+    }
+
+    @Test
+    fun checkNotAllCategoriesWithDateAreFilteredOut() {
+        val mockResponse = withMockResponse("Category:Amavenita (ship, 2014)")
+        whenever(categoryInterface.searchCategories(anyString(), anyInt(), anyInt()))
+            .thenReturn(Single.just(mockResponse))
+        categoryClient.searchCategories("Amav", 10)
+            .test()
+            .assertValues(emptyList())
+    }
+
     private fun withMockResponse(title: String): MwQueryResponse? {
         val mwQueryPage: MwQueryPage = mock()
         whenever(mwQueryPage.title()).thenReturn(title)
