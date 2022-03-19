@@ -60,7 +60,6 @@ public class FeedbackDialog extends Dialog {
             , dialogFeedbackBinding.feedbackItemEditText.getText().toString()
             , androidVersion, deviceModel, deviceManufacturer, deviceName, networkType);
         onFeedbackSubmitCallback.onFeedbackSubmit(feedback);
-        Toast.makeText(getContext(), getContext().getString(R.string.thanks_feedback), Toast.LENGTH_SHORT).show();
         dismiss();
     }
 
