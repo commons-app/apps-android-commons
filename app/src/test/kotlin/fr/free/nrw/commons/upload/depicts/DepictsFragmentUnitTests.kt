@@ -228,4 +228,10 @@ class DepictsFragmentUnitTests {
         method.invoke(fragment, "")
     }
 
+    @Test
+    @Throws(Exception::class)
+    fun testSearForDepictions() {
+        fragment.onResume()
+    }
+
 }
