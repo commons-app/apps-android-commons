@@ -540,7 +540,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
     /**
      * The imageSpacer is Basically a transparent overlay for the SimpleDraweeView
      * which holds the image to be displayed( moreover this image is out of
