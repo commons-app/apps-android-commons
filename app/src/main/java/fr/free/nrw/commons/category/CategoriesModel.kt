@@ -45,7 +45,7 @@ class CategoriesModel @Inject constructor(
                 && (item.matches("(.*)needing(.*)".toRegex())
                     || item.matches("(.*)taken on(.*)".toRegex()))
                 || (item.matches(".*0s.*".toRegex())
-                    && !item.matches(".*(200|201)0s.*".toRegex()))
+                    && !item.matches(".*(200|201|202)0s.*".toRegex()))
     }
 
     /**
