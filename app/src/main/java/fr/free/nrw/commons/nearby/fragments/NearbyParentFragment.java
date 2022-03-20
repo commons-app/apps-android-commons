@@ -710,7 +710,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void setFilterState() {
-        Log.d("deneme5","setfilterState");
         chipNeedsPhoto.setChecked(NearbyFilterState.getInstance().isNeedPhotoSelected());
         chipExists.setChecked(NearbyFilterState.getInstance().isExistsSelected());
         chipWlm.setChecked(NearbyFilterState.getInstance().isWlmSelected());

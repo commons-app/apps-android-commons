@@ -25,5 +25,4 @@ abstract class SearchModule {
     @Binds
     abstract fun SearchMediaFragmentPresenterImpl.bindsSearchMediaFragmentPresenter()
             : SearchMediaFragmentPresenter
-
 }

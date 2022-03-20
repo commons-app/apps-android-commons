@@ -3,7 +3,6 @@ package fr.free.nrw.commons.di;
 import com.google.gson.Gson;
 
 import fr.free.nrw.commons.explore.categories.CategoriesModule;
-import fr.free.nrw.commons.explore.map.ExploreMapModule;
 import fr.free.nrw.commons.navtab.MoreBottomSheetFragment;
 import fr.free.nrw.commons.navtab.MoreBottomSheetLoggedOutFragment;
 import fr.free.nrw.commons.navtab.NavTabLayout;
@@ -44,8 +43,7 @@ import fr.free.nrw.commons.widget.PicOfDayAppWidget;
         ContributionsModule.class,
         SearchModule.class,
         DepictionModule.class,
-        CategoriesModule.class,
-        ExploreMapModule.class
+        CategoriesModule.class
 })
 public interface CommonsApplicationComponent extends AndroidInjector<ApplicationlessInjection> {
     void inject(CommonsApplication application);

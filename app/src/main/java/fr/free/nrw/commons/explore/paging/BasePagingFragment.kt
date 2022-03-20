@@ -68,9 +68,7 @@ abstract class BasePagingFragment<T> : CommonsDaggerSupportFragment(),
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        injectedPresenter?.let {
-            injectedPresenter.onAttachView(this)
-        }
+        injectedPresenter.onAttachView(this)
     }
 
     override fun onDetach() {

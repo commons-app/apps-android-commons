@@ -144,7 +144,6 @@ public class ExploreMapPresenter
     @Override
     public void attachView(ExploreMapContract.View view) {
         exploreMapFragmentView = view;
-        //TODO we have two attach detach method, give better namings
     }
 
     @Override
@@ -229,7 +228,6 @@ public class ExploreMapPresenter
      */
     public void updateMapMarkers(
         MapController.ExplorePlacesInfo explorePlacesInfo, Marker selectedMarker, boolean shouldTrackPosition) {
-        Log.d("nesli2","updateMap marker with nearby place info:" + explorePlacesInfo);
         exploreMapFragmentView.setMapBoundaries(CameraUpdateFactory.newLatLngBounds(getLatLngBounds(explorePlacesInfo.boundaryCoordinates), 10));
         if(null != exploreMapFragmentView) {
             List<NearbyBaseMarker> nearbyBaseMarkers = exploreMapController

@@ -17,9 +17,6 @@ private const val INITIAL_LOAD_SIZE = 50
 abstract class PageableBaseDataSource<T>(private val liveDataConverter: LiveDataConverter) {
 
     lateinit var query: String
-    var isFromSearchActivity: Boolean = false
-    var coordinate: String = ""
-    var limit: Int = 30
     private val dataSourceFactoryFactory: () -> PagingDataSourceFactory<T> = {
         dataSourceFactory(
             _loadingStates,

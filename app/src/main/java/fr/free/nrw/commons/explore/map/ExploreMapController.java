@@ -78,11 +78,9 @@ public class ExploreMapController extends MapController {
                     distances.put(media, computeDistanceBetween(media.getCoordinates(), curLatLng));
                     // Find boundaries with basic find max approach
                     if (media.getCoordinates().getLatitude() < boundaryCoordinates[0].getLatitude()) {
-                        Log.d("deneme","media lat is: "+media.getCoordinates().getLatitude()+" smaller than bound lat is:"+ boundaryCoordinates[0].getLatitude());
                         boundaryCoordinates[0] = media.getCoordinates();
                     }
                     if (media.getCoordinates().getLatitude() > boundaryCoordinates[1].getLatitude()) {
-                        Log.d("deneme","media lat is: "+media.getCoordinates().getLatitude()+" bigger than bound lat is:"+ boundaryCoordinates[1].getLatitude());
                         boundaryCoordinates[1] = media.getCoordinates();
                     }
                     if (media.getCoordinates().getLongitude() < boundaryCoordinates[2].getLongitude()) {
@@ -92,17 +90,9 @@ public class ExploreMapController extends MapController {
                         boundaryCoordinates[3] = media.getCoordinates();
                     }
                 }
-                /*Collections.sort(mediaList,
-                    (lhs, rhs) -> {
-                        double lhsDistance = distances.get(lhs);
-                        double rhsDistance = distances.get(rhs);
-                        return (int) (lhsDistance - rhsDistance);
-                    }
-                );*/
             }
             explorePlacesInfo.explorePlaceList = mediaToExplorePlace(mediaList);
             explorePlacesInfo.boundaryCoordinates = boundaryCoordinates;
-            Log.d("deneme","boundary coords:"+boundaryCoordinates[0] + ", "+ boundaryCoordinates[1]+ ", "+ boundaryCoordinates[2]+ ", "+ boundaryCoordinates[3]);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -127,29 +117,14 @@ public class ExploreMapController extends MapController {
         placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
 
         VectorDrawableCompat vectorDrawable = null;
-        VectorDrawableCompat vectorDrawableGreen = null;
-        VectorDrawableCompat vectorDrawableGrey = null;
-        VectorDrawableCompat vectorDrawableMonuments = null;
-        vectorDrawable = null;
         try {
             vectorDrawable = VectorDrawableCompat.create(
                 context.getResources(), R.drawable.ic_custom_map_marker, context.getTheme());
-            vectorDrawableGreen = VectorDrawableCompat.create(
-                context.getResources(), R.drawable.ic_custom_map_marker_green, context.getTheme());
-            vectorDrawableGrey = VectorDrawableCompat.create(
-                context.getResources(), R.drawable.ic_custom_map_marker_grey, context.getTheme());
-            vectorDrawableMonuments = VectorDrawableCompat
-                .create(context.getResources(), R.drawable.ic_custom_map_marker_monuments,
-                    context.getTheme());
+
         } catch (Resources.NotFoundException e) {
             // ignore when running tests.
         }
         if (vectorDrawable != null) {
-            Bitmap icon = UiUtils.getBitmap(vectorDrawable);
-            Bitmap iconGreen = UiUtils.getBitmap(vectorDrawableGreen);
-            Bitmap iconGrey = UiUtils.getBitmap(vectorDrawableGrey);
-            Bitmap iconMonuments = UiUtils.getBitmap(vectorDrawableMonuments);
-
             for (ExplorePlace explorePlace : placeList) {
                 final NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
                 String distance = formatDistanceBetween(curLatLng, explorePlace.location);
@@ -163,7 +138,7 @@ public class ExploreMapController extends MapController {
                 nearbyBaseMarker.place(explorePlace);
                 // TODO Glide and thumbnails here
 
-                nearbyBaseMarker.icon(IconFactory.getInstance(context).fromBitmap(UiUtils.getBitmap(vectorDrawableGreen)));
+                nearbyBaseMarker.icon(IconFactory.getInstance(context).fromBitmap(UiUtils.getBitmap(vectorDrawable)));
                 baseMarkerOptions.add(nearbyBaseMarker);
             }
         }
