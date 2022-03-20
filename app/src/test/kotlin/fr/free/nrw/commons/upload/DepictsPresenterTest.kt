@@ -153,7 +153,7 @@ class DepictsPresenterTest {
     @Test
     fun `Test searchResults when media is null`() {
         whenever(repository.searchAllEntities("querystring"))
-            .thenReturn(Flowable.just(listOf(Mockito.mock(DepictedItem::class.java))))
+            .thenReturn(Flowable.just(listOf(depictedItem())))
         val method: Method = DepictsPresenter::class.java.getDeclaredMethod(
             "searchResults",
             String::class.java
@@ -167,9 +167,9 @@ class DepictsPresenterTest {
     fun `Test searchResults when media is not null`() {
         Whitebox.setInternalState(depictsPresenter, "media", media)
         whenever(repository.getDepictions(repository.selectedExistingDepictions))
-            .thenReturn(Flowable.just(listOf(Mockito.mock(DepictedItem::class.java))))
+            .thenReturn(Flowable.just(listOf(depictedItem())))
         whenever(repository.searchAllEntities("querystring"))
-            .thenReturn(Flowable.just(listOf(Mockito.mock(DepictedItem::class.java))))
+            .thenReturn(Flowable.just(listOf(depictedItem())))
         val method: Method = DepictsPresenter::class.java.getDeclaredMethod(
             "searchResults",
             String::class.java
@@ -177,5 +177,25 @@ class DepictsPresenterTest {
         method.isAccessible = true
         method.invoke(depictsPresenter, "querystring")
         verify(repository, times(1)).searchAllEntities("querystring")
+    }
+
+    @Test
+    fun testSelectNewDepictions() {
+        Whitebox.setInternalState(depictsPresenter, "media", media)
+        val method: Method = DepictsPresenter::class.java.getDeclaredMethod(
+            "selectNewDepictions",
+            List::class.java
+        )
+        method.isAccessible = true
+        method.invoke(depictsPresenter, listOf(depictedItem()))
+    }
+
+    @Test
+    fun testClearPreviousSelection() {
+        val method: Method = DepictsPresenter::class.java.getDeclaredMethod(
+            "clearPreviousSelection"
+        )
+        method.isAccessible = true
+        method.invoke(depictsPresenter)
     }
 }
