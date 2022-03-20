@@ -85,6 +85,12 @@ class AboutActivityUnitTests {
 
     @Test
     @Throws(Exception::class)
+    fun testLaunchUserGuide() {
+        activity.launchUserGuide(null)
+    }
+
+    @Test
+    @Throws(Exception::class)
     fun testLaunchFrequentlyAskedQuestions() {
         activity.launchFrequentlyAskedQuesions(null)
     }
