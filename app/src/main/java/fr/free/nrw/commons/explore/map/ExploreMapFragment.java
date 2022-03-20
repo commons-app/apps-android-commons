@@ -451,12 +451,21 @@ public class ExploreMapFragment extends PageableMapFragment
 
     @Override
     public void addSearchThisAreaButtonAction() {
-
+        searchThisAreaButton.setOnClickListener(presenter.onSearchThisAreaClicked());
     }
 
     @Override
     public void setSearchThisAreaButtonVisibility(boolean isVisible) {
-
+        // Search activity search is a query based search of uploads that have location. So search this area button won't be used there
+        if (isFromSearchActivity) {
+            searchThisAreaButton.setVisibility(View.GONE);
+            return;
+        }
+        if (isVisible) {
+            searchThisAreaButton.setVisibility(View.VISIBLE);
+        } else {
+            searchThisAreaButton.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -570,7 +579,7 @@ public class ExploreMapFragment extends PageableMapFragment
 
     @Override
     public LatLng getCameraTarget() {
-        return null;
+        return mapBox==null?null:LocationUtils.mapBoxLatLngToCommonsLatLng(mapBox.getCameraPosition().target);
     }
 
     @Override

@@ -1,11 +1,10 @@
 package fr.free.nrw.commons.explore.map;
 
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.SEARCH_CUSTOM_AREA;
 
 
-import android.util.Log;
+import android.view.View;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
@@ -17,6 +16,7 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
+import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.utils.LocationUtils;
 import io.reactivex.Observable;
 import java.lang.reflect.Proxy;
@@ -190,15 +190,11 @@ public class ExploreMapPresenter
 
     }
 
-    @Override
-    public void searchViewGainedFocus() {
-
-    }
-
     public void onMapReady(boolean isFromSearchActivity, ExploreMapController exploreMapController, String query) {
         this.isFromSearchActivity = isFromSearchActivity;
         this.exploreMapController = exploreMapController;
         this.query = query;
+        exploreMapFragmentView.addSearchThisAreaButtonAction();
         if (isFromSearchActivity && query.isEmpty()) {
             return;
         }
@@ -266,4 +262,36 @@ public class ExploreMapPresenter
             exploreMapFragmentView.centerMapToPlace(null);
         }
     }
+
+    public View.OnClickListener onSearchThisAreaClicked() {
+        return v -> {
+            // Lock map operations during search this area operation
+            exploreMapFragmentView.setSearchThisAreaButtonVisibility(false);
+
+            if (searchCloseToCurrentLocation()){
+                updateMap(LOCATION_SIGNIFICANTLY_CHANGED);
+            } else {
+                updateMap(SEARCH_CUSTOM_AREA);
+            }
+        };
+    }
+
+    /**
+     * Returns true if search this area button is used around our current location, so that
+     * we can continue following our current location again
+     * @return Returns true if search this area button is used around our current location
+     */
+    public boolean searchCloseToCurrentLocation() {
+        if (null == exploreMapFragmentView.getLastFocusLocation()) {
+            return true;
+        }
+        double distance = LocationUtils.commonsLatLngToMapBoxLatLng(exploreMapFragmentView.getCameraTarget())
+            .distanceTo(exploreMapFragmentView.getLastFocusLocation());
+        if (distance > NearbyController.currentLocationSearchRadius * 3 / 4) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }

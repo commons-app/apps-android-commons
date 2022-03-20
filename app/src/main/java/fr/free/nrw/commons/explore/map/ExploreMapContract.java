@@ -55,7 +55,6 @@ public class ExploreMapContract {
         boolean backButtonClicked();
         void onCameraMove(com.mapbox.mapboxsdk.geometry.LatLng latLng);
         void updateMapMarkersToController(List<NearbyBaseMarker> nearbyBaseMarkers);
-        void searchViewGainedFocus();
     }
 
 }

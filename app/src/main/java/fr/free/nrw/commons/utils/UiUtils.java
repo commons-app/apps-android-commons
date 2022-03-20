@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UiUtils {
-    
+
     /**
      * Draws a vectorial image onto a bitmap.
      * @param vectorDrawable vectorial image
