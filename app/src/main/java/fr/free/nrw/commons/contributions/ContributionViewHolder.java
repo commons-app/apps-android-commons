@@ -3,6 +3,7 @@ package fr.free.nrw.commons.contributions;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
+import android.webkit.URLUtil;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -23,6 +24,7 @@ import fr.free.nrw.commons.media.MediaClient;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java.io.File;
 
 public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
@@ -96,11 +98,19 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
         final String imageSource = chooseImageSource(contribution.getMedia().getThumbUrl(),
             contribution.getLocalUri());
         if (!TextUtils.isEmpty(imageSource)) {
-            final ImageRequest imageRequest =
-                ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageSource))
+            ImageRequest imageRequest = null;
+            if(URLUtil.isHttpsUrl(imageSource)){
+                imageRequest = ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageSource))
                     .setProgressiveRenderingEnabled(true)
                     .build();
-            imageView.setImageRequest(imageRequest);
+            }else if(imageSource != null){
+                final File file = new File(imageSource);
+                imageRequest = ImageRequest.fromFile(file);
+            }
+
+            if(imageRequest != null){
+                imageView.setImageRequest(imageRequest);
+            }
         }
 
         seqNumView.setText(String.valueOf(position + 1));
