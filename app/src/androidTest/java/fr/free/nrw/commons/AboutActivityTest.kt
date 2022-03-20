@@ -125,7 +125,6 @@ class AboutActivityTest {
     }
 
     @Test
-    @Ignore("Fix Failing Test")
     fun testLaunchUserGuide() {
         Espresso.onView(ViewMatchers.withId(R.id.about_user_guide)).perform(ViewActions.click())
         Intents.intended(CoreMatchers.allOf(IntentMatchers.hasAction(Intent.ACTION_VIEW),
@@ -134,7 +133,6 @@ class AboutActivityTest {
 
 
     @Test
-    @Ignore("Fix Failing Test")
     fun testLaunchAboutFaq() {
         Espresso.onView(ViewMatchers.withId(R.id.about_faq)).perform(ViewActions.click())
         Intents.intended(
