@@ -54,11 +54,6 @@ public class WikiBaseClient {
             .map(response -> (long) (response.query().pages().get(0).pageId()));
     }
 
-    public Observable<Long> getFileEntityIdByFileName(String fileName) {
-        return wikiBaseInterface.getFileEntityId(fileName)
-            .map(response -> (long) (response.query().pages().get(0).pageId()));
-    }
-
     public Observable<MwPostResponse> addLabelstoWikidata(long fileEntityId,
         String languageCode, String captionValue) {
         return csrfToken()
