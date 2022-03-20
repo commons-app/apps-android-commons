@@ -262,6 +262,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Rate us</string>
   <string name="about_faq">FAQ</string>
+  <string name="user_guide">User Guide</string>
   <string name="welcome_skip_button">Skip Tutorial</string>
   <string name="no_internet">Internet unavailable</string>
   <string name="error_notifications">Error fetching notifications</string>
@@ -689,7 +690,18 @@ Upload your first media by tapping on the add button.</string>
   <string name="no_location_found_message">How about adding the place where this image was taken?\nLocation data helps Wiki editors find your picture, making it much more useful.\nThank you!</string>
   <string name="add_location">Add location</string>
   <string name="feedback_sharing_data_alert">Please remove from this email any information that you are not comfortable sharing publicly. Also, please be aware that your email address with which you are posting, and the associated name and profile picture, will be visible publicly.</string>
-  <string name="achievements_unavailable_beta">Achievements are only available in the prod flavor.</string>
-  <string name="leaderboard_unavailable_beta">The leaderboard is only available in the prod flavor.</string>
+  <string name="achievements_unavailable_beta">Achievements are only available in the prod flavor, please check the developer documentation.</string>
+  <string name="leaderboard_unavailable_beta">The leaderboard is only available in the prod flavor, please check the developer documentation.</string>
   <string name="copyright_popup">Please only upload pictures you have taken by yourself. Uploaders of copyrighted images will be blocked. This applies to the beta flavor too. Thank you for testing the app!</string>
+  <string name="select_feedback_data_choice">Please deselect any information that you are not comfortable sharing publicly.</string>
+  <string name="api_level">API level</string>
+  <string name="android_version">Android version</string>
+  <string name="device_manufacturer">Device manufacturer</string>
+  <string name="device_model">Device model</string>
+  <string name="device_name">Device name</string>
+  <string name="network_type">Network type</string>
+  <string name="thanks_feedback">Thanks for giving feedback</string>
+  <string name="error_feedback">Error while sending feedback</string>
+  <string name="enter_description">What is your feedback?</string>
+  <string name="your_feedback">Your feedback</string>
 </resources>
