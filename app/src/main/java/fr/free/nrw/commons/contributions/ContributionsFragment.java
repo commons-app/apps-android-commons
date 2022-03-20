@@ -576,6 +576,9 @@ public class ContributionsFragment
         if (NetworkUtils.isInternetConnectionEstablished(getContext())) {
             if (contribution.getState() == STATE_FAILED || contribution.getState() == STATE_PAUSED || contribution.getState()==Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE) {
                 contribution.setState(Contribution.STATE_QUEUED);
+                if(CommonsApplication.pauseUploads.get(contribution.getPageId()) != null){
+                    CommonsApplication.pauseUploads.put(contribution.getPageId(),false);
+                }
                 contributionsPresenter.saveContribution(contribution);
                 Timber.d("Restarting for %s", contribution.toString());
             } else {
