@@ -24,14 +24,13 @@ class FeedbackContentCreatorUnitTests {
     private lateinit var creator: FeedbackContentCreator
     private lateinit var feedback: Feedback
 
-    @Mock
     private lateinit var context: Context
     
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
         AppAdapter.set(TestAppAdapter())
-        context = RuntimeEnvironment.application.applicationContext
+        context = FakeContextWrapper(RuntimeEnvironment.application.applicationContext)
     }
 
     @Test
