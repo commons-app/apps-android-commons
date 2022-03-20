@@ -2,6 +2,7 @@ package fr.free.nrw.commons.feedback;
 
 import android.content.Context;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.feedback.model.Feedback;
 import fr.free.nrw.commons.utils.LangCodeUtils;
 import java.util.Locale;
@@ -29,7 +30,9 @@ public class FeedbackContentCreator {
 
         stringBuilder = new StringBuilder();
         stringBuilder.append("== ");
-        stringBuilder.append("Feedback from ~~~ for version ");
+        stringBuilder.append("Feedback from  ");
+        stringBuilder.append(AccountUtil.getUserName(context));
+        stringBuilder.append(" for version ");
         stringBuilder.append(feedback.getVersion());
         stringBuilder.append(" ==");
         stringBuilder.append("\n");
