@@ -5,10 +5,12 @@ import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 
+import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
+import com.google.android.material.snackbar.Snackbar;
 import org.wikipedia.dataclient.mwapi.MwQueryPage;
 
 import java.util.ArrayList;
@@ -166,7 +168,9 @@ public class ReviewController {
                         message = context.getString(R.string.send_thank_failure_message, media.getDisplayTitle());
                     }
 
-                    showNotification(title, message);
+                    View view = activity.findViewById(R.id.reviewActivityContainer);
+                    Snackbar snackbar = Snackbar.make(view,message,Snackbar.LENGTH_LONG);
+                    snackbar.show();
 
                 }, Timber::e);
     }
