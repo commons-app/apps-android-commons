@@ -60,6 +60,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     private boolean isWikipediaButtonDisplayed;
     private AlertDialog pausingPopUp;
     private View parent;
+    private ImageRequest imageRequest;
 
     ContributionViewHolder(final View parent, final Callback callback,
         final MediaClient mediaClient) {
@@ -98,12 +99,11 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
         final String imageSource = chooseImageSource(contribution.getMedia().getThumbUrl(),
             contribution.getLocalUri());
         if (!TextUtils.isEmpty(imageSource)) {
-            ImageRequest imageRequest = null;
-            if(URLUtil.isHttpsUrl(imageSource)){
+            if (URLUtil.isHttpsUrl(imageSource)) {
                 imageRequest = ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageSource))
                     .setProgressiveRenderingEnabled(true)
                     .build();
-            }else if(imageSource != null){
+            } else if(imageSource != null) {
                 final File file = new File(imageSource);
                 imageRequest = ImageRequest.fromFile(file);
             }
@@ -289,5 +289,9 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     private void setResume() {
         pauseResumeButton.setImageResource(R.drawable.play_icon);
         pauseResumeButton.setTag(parent.getContext().getString(R.string.resume));
+    }
+
+    public ImageRequest getImageRequest() {
+        return imageRequest;
     }
 }
