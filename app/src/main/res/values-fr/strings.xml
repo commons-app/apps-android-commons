@@ -289,6 +289,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Évaluez-nous</string>
   <string name="about_faq">FAQ</string>
+  <string name="user_guide">Guide de l’utilisateur</string>
   <string name="welcome_skip_button">Sauter le tutoriel</string>
   <string name="no_internet">Internet indisponible</string>
   <string name="error_notifications">Erreur lors de la récupération des notifications</string>
@@ -676,7 +677,18 @@
   <string name="no_location_found_message">Pourquoi ne pas ajouter le lieu où cette image a été trouvée ?\nLes données de lieu aident les contributeurs de wikis à trouver votre image, ce qui la rend beaucoup plus utile.\nMerci !</string>
   <string name="add_location">Ajouter un lieu</string>
   <string name="feedback_sharing_data_alert">Veuillez supprimer de ce courriel toute information que vous n’aimeriez pas diffuser publiquement. Également, veuillez prendre conscience du fait que votre adresse de messagerie avec laquelle vous publiez, ainsi que le nom et l’image de profil associés, seront visibles publiquement.</string>
-  <string name="achievements_unavailable_beta">Les réalisations ne sont disponibles que dans la version de production.</string>
-  <string name="leaderboard_unavailable_beta">Le classement n’est disponible que dans la version de production.</string>
+  <string name="achievements_unavailable_beta">Les réalisations ne sont disponibles que dans la version de production, veuillez consulter la documentation du développeur.</string>
+  <string name="leaderboard_unavailable_beta">Le classement n’est disponible que dans la version de production, veuillez consulter la documentation du développeur.</string>
   <string name="copyright_popup">Veuillez ne téléverser que des images que vous avez créées vous-même. Ceux qui téléversent des images soumises aux droits d’auteur seront bloqués. Ceci s’applique également à la version bêta. Merci pour votre test de l’application !</string>
+  <string name="select_feedback_data_choice">Veuillez désélectionner toute information que vous ne vous sentez pas à l’aise de partager publiquement.</string>
+  <string name="api_level">Niveau de l’API</string>
+  <string name="android_version">Version d’Android</string>
+  <string name="device_manufacturer">Fabricant de l’appareil</string>
+  <string name="device_model">Modèle de l’appareil</string>
+  <string name="device_name">Nom de l’appareil</string>
+  <string name="network_type">Type de réseau</string>
+  <string name="thanks_feedback">Merci pour avoir donné votre avis</string>
+  <string name="error_feedback">Erreur lors de l’envoi de l’avis</string>
+  <string name="enter_description">Quel est votre avis ?</string>
+  <string name="your_feedback">Votre avis</string>
 </resources>
