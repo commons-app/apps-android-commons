@@ -111,13 +111,13 @@ public class ExploreMapPresenter
             Timber.d("LOCATION_SIGNIFICANTLY_CHANGED");
             lockUnlockNearby(true);
             //exploreMapFragmentView.setProgressBarVisibility(true);
-            exploreMapFragmentView.populatePlaces(lastLocation);
+            exploreMapFragmentView.populatePlaces(curLatLng, lastLocation);
 
         } else if (locationChangeType.equals(SEARCH_CUSTOM_AREA)) {
             Timber.d("SEARCH_CUSTOM_AREA");
             lockUnlockNearby(true);
             exploreMapFragmentView.setProgressBarVisibility(true);
-            exploreMapFragmentView.populatePlaces(exploreMapFragmentView.getCameraTarget());
+            exploreMapFragmentView.populatePlaces(curLatLng, exploreMapFragmentView.getCameraTarget());
         } else { // Means location changed slightly, ie user is walking or driving.
             Timber.d("Means location changed slightly");
             if (exploreMapFragmentView.isCurrentLocationMarkerVisible()){ // Means user wants to see their live location
@@ -170,7 +170,7 @@ public class ExploreMapPresenter
     public void onCameraMove(com.mapbox.mapboxsdk.geometry.LatLng latLng) {
         exploreMapFragmentView.setProjectorLatLngBounds();
         // If our nearby markers are calculated at least once
-        if (exploreMapController.latestSearchLocation != null) {
+        if (exploreMapController.latestSearchLocation != null && !isFromSearchActivity) {
             double distance = latLng.distanceTo
                 (LocationUtils.commonsLatLngToMapBoxLatLng(exploreMapController.latestSearchLocation));
             if (exploreMapFragmentView.isNetworkConnectionEstablished()) {
@@ -282,12 +282,12 @@ public class ExploreMapPresenter
      * @return Returns true if search this area button is used around our current location
      */
     public boolean searchCloseToCurrentLocation() {
-        if (null == exploreMapFragmentView.getLastFocusLocation()) {
+        if (null == exploreMapFragmentView.getLastFocusLocation() || exploreMapController.latestSearchRadius == 0) {
             return true;
         }
         double distance = LocationUtils.commonsLatLngToMapBoxLatLng(exploreMapFragmentView.getCameraTarget())
             .distanceTo(exploreMapFragmentView.getLastFocusLocation());
-        if (distance > NearbyController.currentLocationSearchRadius * 3 / 4) {
+        if (distance > exploreMapController.latestSearchRadius * 3 / 4) {
             return false;
         } else {
             return true;

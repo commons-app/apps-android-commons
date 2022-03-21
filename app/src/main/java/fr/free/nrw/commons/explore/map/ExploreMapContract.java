@@ -14,7 +14,7 @@ public class ExploreMapContract {
 
     interface View {
         boolean isNetworkConnectionEstablished();
-        void populatePlaces(LatLng curlatLng);
+        void populatePlaces(LatLng curlatLng,LatLng searchLatLng);
         void checkPermissionsAndPerformAction();
         void recenterMap(LatLng curLatLng);
         void showLocationOffDialog();

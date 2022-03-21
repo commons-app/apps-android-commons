@@ -133,7 +133,7 @@ public class ExploreMapFragment extends PageableMapFragment
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        setSearchThisAreaButtonVisibility(false);
         if (getActivity() instanceof SearchActivity) {
             isFromSearchActivity = true;
         } else {
@@ -307,18 +307,35 @@ public class ExploreMapFragment extends PageableMapFragment
     }
 
     @Override
-    public void populatePlaces(LatLng curlatLng) {
-        if (curlatLng.equals(lastFocusLocation) || lastFocusLocation == null || recenterToUserLocation) { // Means we are checking around current location
-            populatePlacesForCurrentLocation(lastKnownLocation, curlatLng);
+    public void populatePlaces(LatLng curLatLng, LatLng searchLatLng) {
+        final Observable<MapController.ExplorePlacesInfo> nearbyPlacesInfoObservable;
+        if (searchLatLng.equals(lastFocusLocation) || lastFocusLocation == null) { // Means we are checking around current location
+            nearbyPlacesInfoObservable = presenter.loadAttractionsFromLocation(curLatLng, searchLatLng, true, isFromSearchActivity, query);
+            //populatePlacesForCurrentLocation(lastKnownLocation, curlatLng);
         } else {
-            populatePlacesForAnotherLocation(lastKnownLocation, curlatLng);
+            nearbyPlacesInfoObservable = presenter.loadAttractionsFromLocation(curLatLng, searchLatLng, false, isFromSearchActivity, query);
+
+            //populatePlacesForAnotherLocation(lastKnownLocation, curlatLng);
         }
-        if(recenterToUserLocation) {
+        compositeDisposable.add(nearbyPlacesInfoObservable
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(nearbyPlacesInfo -> {
+                    updateMapMarkers(nearbyPlacesInfo, true);
+                    lastFocusLocation = searchLatLng;
+                },
+                throwable -> {
+                    Timber.d(throwable);
+                    showErrorMessage(getString(R.string.error_fetching_nearby_places)+throwable.getLocalizedMessage());
+                    setProgressBarVisibility(false);
+                    presenter.lockUnlockNearby(false);
+                }));
+        /*if(recenterToUserLocation) {
             recenterToUserLocation = false;
-        }
+        }*/
     }
 
-    private void populatePlacesForCurrentLocation(final fr.free.nrw.commons.location.LatLng curlatLng,
+    /*private void populatePlacesForCurrentLocation(final fr.free.nrw.commons.location.LatLng curlatLng,
         final fr.free.nrw.commons.location.LatLng searchLatLng){
         final Observable<MapController.ExplorePlacesInfo> nearbyPlacesInfoObservable;
         nearbyPlacesInfoObservable = presenter.loadAttractionsFromLocation(curlatLng, searchLatLng, true, isFromSearchActivity, query);
@@ -336,30 +353,7 @@ public class ExploreMapFragment extends PageableMapFragment
                     setProgressBarVisibility(false);
                     presenter.lockUnlockNearby(false);
                 }));
-    }
-
-    private void populatePlacesForAnotherLocation(final fr.free.nrw.commons.location.LatLng curlatLng,
-        final fr.free.nrw.commons.location.LatLng searchLatLng){
-
-        final Observable<MapController.ExplorePlacesInfo> nearbyPlacesInfoObservable = Observable
-            .fromCallable(() -> exploreMapController
-                .loadAttractionsFromLocation(curlatLng, searchLatLng,false, isFromSearchActivity, query));
-        // TODO: nesli do this over the presenter
-
-        compositeDisposable.add(nearbyPlacesInfoObservable
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(nearbyPlacesInfo -> {
-                    updateMapMarkers(nearbyPlacesInfo, false);
-                    lastFocusLocation = searchLatLng;
-                },
-                throwable -> {
-                    Timber.e(throwable);
-                    showErrorMessage(getString(R.string.error_fetching_nearby_places)+throwable.getLocalizedMessage());
-                    setProgressBarVisibility(false);
-                    presenter.lockUnlockNearby(false);
-                }));
-    }
+    }*/
 
     /**
      * Populates places for your location, should be used for finding nearby places around a

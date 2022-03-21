@@ -29,6 +29,7 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.utils.ImageUtils;
+import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.UiUtils;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,7 +44,7 @@ public class ExploreMapController extends MapController {
     private static final int MAX_RESULTS = 1000;
     private final ExplorePlaces explorePlaces;
     public LatLng latestSearchLocation; // Can be current and camera target on search this area button is used
-    public double latestSearchRadius = 10.0; // Any last search radius except closest result search
+    public double latestSearchRadius = 0; // Any last search radius except closest result search
 
 
     @Inject
@@ -56,7 +57,7 @@ public class ExploreMapController extends MapController {
         // TODO: check nearbyPlacesInfo in NearbyController for search this area logic
 
         if (searchLatLng == null) {
-            Timber.d("Loading attractions explore map, but curLatLng is null");
+            Timber.d("Loading attractions explore map, but search is null");
             return null;
         }
 
@@ -64,18 +65,19 @@ public class ExploreMapController extends MapController {
         try {
             explorePlacesInfo.curLatLng = curLatLng;
             latestSearchLocation = searchLatLng;
-            List<Media> mediaList = explorePlaces.callCommonsQuery(curLatLng, 30, isFromSearchActivity, query);
+
+            List<Media> mediaList = explorePlaces.callCommonsQuery(searchLatLng, 30, isFromSearchActivity, query);
             LatLng[] boundaryCoordinates = {mediaList.get(0).getCoordinates(),   // south
                 mediaList.get(0).getCoordinates(), // north
                 mediaList.get(0).getCoordinates(), // west
                 mediaList.get(0).getCoordinates()};// east, init with a random location
 
 
-            if (curLatLng != null) {
+            if (searchLatLng != null) {
                 Timber.d("Sorting places by distance...");
                 final Map<Media, Double> distances = new HashMap<>();
                 for (Media media : mediaList) {
-                    distances.put(media, computeDistanceBetween(media.getCoordinates(), curLatLng));
+                    distances.put(media, computeDistanceBetween(media.getCoordinates(), searchLatLng));
                     // Find boundaries with basic find max approach
                     if (media.getCoordinates().getLatitude() < boundaryCoordinates[0].getLatitude()) {
                         boundaryCoordinates[0] = media.getCoordinates();
@@ -93,6 +95,14 @@ public class ExploreMapController extends MapController {
             }
             explorePlacesInfo.explorePlaceList = mediaToExplorePlace(mediaList);
             explorePlacesInfo.boundaryCoordinates = boundaryCoordinates;
+
+            // Sets latestSearchRadius to maximum distance amoung boundaries and search location
+            for (LatLng bound : boundaryCoordinates) {
+                double distance = LocationUtils.commonsLatLngToMapBoxLatLng(bound).distanceTo(LocationUtils.commonsLatLngToMapBoxLatLng(latestSearchLocation));
+                if (distance > latestSearchRadius) {
+                    latestSearchRadius = distance;
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
