@@ -665,7 +665,7 @@
   <string name="no_location_found_message">Misschien kunt u aangeven waar deze foto is genomen?\nLocatie data helpt Wiki redacteurs om uw afbeelding te vinden, waardoor deze veel nuttiger wordt.\nAlvast bedankt!</string>
   <string name="add_location">Locatie toevoegen</string>
   <string name="feedback_sharing_data_alert">Verwijder alstublieft informatie uit deze email die u liever niet openbaar wilt maken. Wees er ook van op de hoogte dat het emailadres en de bijbehorende gebruikersnaam en profielafbeelding die u gebruikt openbaar zichtbaar zullen zijn.</string>
-  <string name="achievements_unavailable_beta">Achievements zijn alleen beschikbaar in de productie versie.</string>
-  <string name="leaderboard_unavailable_beta">Het scorebord is alleen beschikbaar in de productie versie.</string>
+  <string name="achievements_unavailable_beta" fuzzy="true">Achievements zijn alleen beschikbaar in de productie versie.</string>
+  <string name="leaderboard_unavailable_beta" fuzzy="true">Het scorebord is alleen beschikbaar in de productie versie.</string>
   <string name="copyright_popup">Upload alleen afbeeldingen die u zelf heeft gemaakt. Gebruikers die afbeeldingen met copyright uploaden worden geblokkeerd. Dit is ook van toepassing op de beta versie. Bedankt voor het testen van de app!</string>
 </resources>

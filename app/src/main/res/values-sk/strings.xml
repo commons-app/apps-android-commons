@@ -667,7 +667,7 @@
   <string name="no_location_found_message">Čo tak pridať miesto kde bol tento obrázok urobený? Údaje o polohe pomáhajú editorom Wiki nájsť Váš obrázok a urobiť ho tak viac užitočným. Ďakujeme!</string>
   <string name="add_location">Pridať polohu</string>
   <string name="feedback_sharing_data_alert">Prosím odstráňte z tohto emailu informácie, ktoré nechcete zverejniť. Takisto berte prosím na vedomie, že vaša emailová adresa z ktorej posielate príspevky bude zverejnená.</string>
-  <string name="achievements_unavailable_beta">Úspechy sú dostupné len v prod flavor.</string>
-  <string name="leaderboard_unavailable_beta">Rebríček je dostupný len v prod flavor.</string>
+  <string name="achievements_unavailable_beta" fuzzy="true">Úspechy sú dostupné len v prod flavor.</string>
+  <string name="leaderboard_unavailable_beta" fuzzy="true">Rebríček je dostupný len v prod flavor.</string>
   <string name="copyright_popup">Prosím nahrajte len obrázky, ktoré ste urobili Vy sami. Obrázky podliehajúce autorským právam budú zablokované.</string>
 </resources>
