@@ -522,7 +522,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     /**
-     * By clicking on the edit depicts button, it will send user to depict fragment
+     * By clicking on the edit depictions button, it will send user to depict fragment
      */
     @OnClick(R.id.depictionsEditButton)
     public void onDepictionsEditButtonClicked() {
