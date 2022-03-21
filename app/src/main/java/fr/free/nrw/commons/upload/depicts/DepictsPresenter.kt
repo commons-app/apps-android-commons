@@ -186,9 +186,9 @@ class DepictsPresenter @Inject constructor(
      * and saves them in local storage
      */
     @SuppressLint("CheckResult")
-    override fun updateDepicts(media: Media) {
+    override fun updateDepictions(media: Media) {
         if (repository.selectedDepictions.isNotEmpty()
-            || repository.selectedExistingDepictions.size != view.existingDepicts.size
+            || repository.selectedExistingDepictions.size != view.existingDepictions.size
         ) {
             view.showProgressDialog()
             val selectedDepictions: MutableList<String> =
@@ -202,7 +202,7 @@ class DepictsPresenter @Inject constructor(
                 }
 
                 compositeDisposable.add(
-                    depictsHelper.makeDepictEdit(view.fragmentContext, media, selectedDepictions )
+                    depictsHelper.makeDepictionEdit(view.fragmentContext, media, selectedDepictions)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({
@@ -214,7 +214,7 @@ class DepictsPresenter @Inject constructor(
                         })
                         {
                             Timber.e(
-                                "Failed to update depicts"
+                                "Failed to update depictions"
                             )
                         }
                 )
@@ -229,7 +229,7 @@ class DepictsPresenter @Inject constructor(
     override fun onAttachViewWithMedia(view: DepictsContract.View, media: Media) {
         this.view = view
         this.media = media
-        repository.selectedExistingDepictions = view.existingDepicts
+        repository.selectedExistingDepictions = view.existingDepictions
         compositeDisposable.add(
             searchTerm
                 .observeOn(mainThreadScheduler)

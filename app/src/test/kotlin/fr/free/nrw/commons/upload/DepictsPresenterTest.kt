@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.upload
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.jraska.livedata.test
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
@@ -11,11 +10,9 @@ import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.DepictsContract
 import fr.free.nrw.commons.upload.depicts.DepictsPresenter
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.wikidata.WikidataDisambiguationItems
 import io.reactivex.Flowable
 import io.reactivex.schedulers.TestScheduler
-import media
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -147,7 +144,7 @@ class DepictsPresenterTest {
 
     @Test
     fun testUpdateDepicts() {
-        depictsPresenter.updateDepicts(Mockito.mock(Media::class.java))
+        depictsPresenter.updateDepictions(Mockito.mock(Media::class.java))
     }
 
     @Test

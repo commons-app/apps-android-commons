@@ -36,7 +36,6 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.DialogUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -116,7 +115,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
                 .setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
                     callback.getTotalNumberOfSteps(), getString(R.string.depicts_step_title)));
         } else {
-            depictsTitle.setText(R.string.edit_depicts);
+            depictsTitle.setText(R.string.edit_depictions);
             depictsSubTitle.setVisibility(View.GONE);
             btnNext.setText(R.string.menu_save_categories);
             btnPrevious.setText(R.string.menu_cancel_upload);
@@ -246,18 +245,27 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         depictsRecyclerView.smoothScrollToPosition(0);
     }
 
+    /**
+     * Returns required context
+     */
     @Override
     public Context getFragmentContext(){
         return requireContext();
     }
 
+    /**
+     * Returns to previous fragment
+     */
     @Override
     public void goBackToPreviousScreen() {
         getFragmentManager().popBackStack();
     }
 
+    /**
+     * Gets existing depictions IDs from media
+     */
     @Override
-    public List<String> getExistingDepicts(){
+    public List<String> getExistingDepictions(){
         return (media == null) ? null : media.getDepictionIds();
     }
 
@@ -295,7 +303,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     @OnClick(R.id.depicts_next)
     public void onNextButtonClicked() {
         if(media != null){
-            presenter.updateDepicts(media);
+            presenter.updateDepictions(media);
         } else {
             presenter.verifyDepictions();
         }

@@ -10,10 +10,8 @@ import static fr.free.nrw.commons.description.EditDescriptionConstants.LIST_OF_D
 import static fr.free.nrw.commons.description.EditDescriptionConstants.UPDATED_WIKITEXT;
 import static fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT;
 import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION;
-import android.content.res.Resources;
 import static fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources;
 import android.annotation.SuppressLint;
-import java.lang.reflect.Field;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -96,7 +94,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -179,7 +176,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     LinearLayout captionLayout;
     @BindView(R.id.depicts_layout)
     LinearLayout depictsLayout;
-    @BindView(R.id.depictEditButton)
+    @BindView(R.id.depictionsEditButton)
     Button depictEditButton;
     @BindView(R.id.media_detail_caption)
     TextView mediaCaption;
@@ -527,8 +524,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     /**
      * By clicking on the edit depicts button, it will send user to depict fragment
      */
-    @OnClick(R.id.depictEditButton)
-    public void onDepictEditButtonClicked() {
+    @OnClick(R.id.depictionsEditButton)
+    public void onDepictionsEditButtonClicked() {
         depictionContainer.removeAllViews();
         depictEditButton.setVisibility(GONE);
         final Fragment depictsFragment = new DepictsFragment();
