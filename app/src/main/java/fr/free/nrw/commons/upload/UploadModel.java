@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload;
 
 import android.content.Context;
 import android.net.Uri;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
@@ -40,6 +41,10 @@ public class UploadModel {
     private final ImageProcessingService imageProcessingService;
     private final List<String> selectedCategories = new ArrayList<>();
     private final List<DepictedItem> selectedDepictions = new ArrayList<>();
+    /**
+     * Existing depicts which are selected
+     */
+    private List<String> selectedExistingDepictions = new ArrayList<>();
 
     @Inject
     UploadModel(@Named("licenses") final List<String> licenses,
@@ -68,6 +73,7 @@ public class UploadModel {
         items.clear();
         selectedCategories.clear();
         selectedDepictions.clear();
+        selectedExistingDepictions.clear();
     }
 
     public void setSelectedCategories(List<String> selectedCategories) {
@@ -185,11 +191,33 @@ public class UploadModel {
         return items;
     }
 
-    public void onDepictItemClicked(DepictedItem depictedItem) {
-        if (depictedItem.isSelected()) {
-            selectedDepictions.add(depictedItem);
+    public void onDepictItemClicked(DepictedItem depictedItem, Media media) {
+        if (media == null) {
+            if (depictedItem.isSelected()) {
+                selectedDepictions.add(depictedItem);
+            } else {
+                selectedDepictions.remove(depictedItem);
+            }
         } else {
-            selectedDepictions.remove(depictedItem);
+            if (depictedItem.isSelected()) {
+                if (media.getDepictionIds().contains(depictedItem.getId())) {
+                    selectedExistingDepictions.add(depictedItem.getId());
+                } else {
+                    selectedDepictions.add(depictedItem);
+                }
+            } else {
+                if (media.getDepictionIds().contains(depictedItem.getId())) {
+                    selectedExistingDepictions.remove(depictedItem.getId());
+                    if (!media.getDepictionIds().contains(depictedItem.getId())) {
+                        final List<String> depictsList = new ArrayList<>();
+                        depictsList.add(depictedItem.getId());
+                        depictsList.addAll(media.getDepictionIds());
+                        media.setDepictionIds(depictsList);
+                    }
+                } else {
+                    selectedDepictions.remove(depictedItem);
+                }
+            }
         }
     }
 
@@ -207,4 +235,21 @@ public class UploadModel {
         return selectedDepictions;
     }
 
+    /**
+     * Provides selected existing depicts
+     *
+     * @return selected existing depicts
+     */
+    public List<String> getSelectedExistingDepictions() {
+        return selectedExistingDepictions;
+    }
+
+    /**
+     * Initialize existing depicts
+     *
+     * @param selectedExistingDepictions existing depicts
+     */
+    public void setSelectedExistingDepictions(final List<String> selectedExistingDepictions) {
+        this.selectedExistingDepictions = selectedExistingDepictions;
+    }
 }

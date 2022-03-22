@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.repository;
 
 import androidx.annotation.Nullable;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -233,8 +234,8 @@ public class UploadRepository {
         uploadModel.setSelectedLicense(licenseName);
     }
 
-    public void onDepictItemClicked(DepictedItem depictedItem) {
-        uploadModel.onDepictItemClicked(depictedItem);
+    public void onDepictItemClicked(DepictedItem depictedItem, final Media media) {
+        uploadModel.onDepictItemClicked(depictedItem, media);
     }
 
     /**
@@ -247,6 +248,23 @@ public class UploadRepository {
         return uploadModel.getSelectedDepictions();
     }
 
+    /**
+     * Provides selected existing depicts
+     *
+     * @return selected existing depicts
+     */
+    public List<String> getSelectedExistingDepictions() {
+        return uploadModel.getSelectedExistingDepictions();
+    }
+
+    /**
+     * Initialize existing depicts
+     *
+     * @param selectedExistingDepictions existing depicts
+     */
+    public void setSelectedExistingDepictions(final List<String> selectedExistingDepictions) {
+        uploadModel.setSelectedExistingDepictions(selectedExistingDepictions);
+    }
     /**
      * Search all depictions from
      *
@@ -273,6 +291,39 @@ public class UploadRepository {
             }
         }
         return depictModel.getPlaceDepictions(new ArrayList<>(qids));
+    }
+
+    /**
+     * Takes depict IDs as a parameter, converts into a slash separated String and Gets DepictItem
+     * from the server
+     *
+     * @param depictionsQIDs IDs of Depiction
+     * @return Flowable<List<DepictedItem>>
+     */
+    public Flowable<List<DepictedItem>> getDepictions(final List<String> depictionsQIDs){
+        final String ids = joinQIDs(depictionsQIDs);
+        return depictModel.getDepictions(ids).toFlowable();
+    }
+
+    /**
+     * Builds a string by joining all IDs divided by "|"
+     *
+     * @param depictionsQIDs IDs of depiction ex. ["Q11023","Q1356"]
+     * @return string ex. "Q11023|Q1356"
+     */
+    private String joinQIDs(final List<String> depictionsQIDs) {
+        if (depictionsQIDs != null && !depictionsQIDs.isEmpty()) {
+            final StringBuilder buffer = new StringBuilder(depictionsQIDs.get(0));
+
+            if (depictionsQIDs.size() > 1) {
+                for (int i = 1; i < depictionsQIDs.size(); i++) {
+                    buffer.append("|");
+                    buffer.append(depictionsQIDs.get(i));
+                }
+            }
+            return buffer.toString();
+        }
+        return null;
     }
 
     /**

@@ -15,7 +15,9 @@ import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.InjectMocks
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
+import org.wikipedia.wikidata.EditClaim
 
 class WikidataEditServiceTest {
     @Mock
@@ -46,6 +48,13 @@ class WikidataEditServiceTest {
     fun noClaimsWhenEntityIdIsNull() {
         wikidataEditService.createClaim(mock(), "Test.jpg", hashMapOf())
         verifyZeroInteractions(wikidataClient)
+    }
+
+    @Test
+    fun testUpdateDepictsProperty() {
+        whenever(wikibaseClient.postEditEntityByFilename("Test.jpg",
+            gson.toJson(Mockito.mock(EditClaim::class.java)))).thenReturn(Observable.just(true))
+        wikidataEditService.updateDepictsProperty("Test.jpg", listOf())
     }
 
     @Test
