@@ -7,9 +7,11 @@ data class EditClaim(val claims: List<Statement_partial>) {
 
     companion object {
         @JvmStatic
-        fun from(entityId: String, propertyName: String) =
-            EditClaim(
-                listOf(
+        fun from(entityIds: List<String>, propertyName: String): EditClaim {
+
+            val list = mutableListOf<Statement_partial>()
+            entityIds.forEach {
+                list.add(
                     Statement_partial(
                         Snak_partial(
                             "value",
@@ -17,8 +19,8 @@ data class EditClaim(val claims: List<Statement_partial>) {
                             EntityId(
                                 WikiBaseEntityValue(
                                     "item",
-                                    entityId,
-                                    entityId.removePrefix("Q").toLong()
+                                    it,
+                                    it.removePrefix("Q").toLong()
                                 )
                             )
                         ),
@@ -26,6 +28,8 @@ data class EditClaim(val claims: List<Statement_partial>) {
                         "preferred"
                     )
                 )
-            )
+            }
+            return EditClaim(list)
+        }
     }
 }
