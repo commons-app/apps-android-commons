@@ -259,27 +259,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         recentLanguagesTextView = dialog.findViewById(R.id.recent_searches);
         separator = dialog.findViewById(R.id.separator);
 
-        if (recentLanguages.isEmpty()) {
-            languageHistoryListView.setVisibility(View.GONE);
-            recentLanguagesTextView.setVisibility(View.GONE);
-            separator.setVisibility(View.GONE);
-        } else {
-            if (recentLanguages.size() > 5) {
-                for (int i = recentLanguages.size()-1; i >=5; i--) {
-                    recentLanguagesDao
-                        .deleteRecentLanguage(recentLanguages.get(i).getLanguageCode());
-                }
-            }
-            languageHistoryListView.setVisibility(View.VISIBLE);
-            recentLanguagesTextView.setVisibility(View.VISIBLE);
-            separator.setVisibility(View.VISIBLE);
-            final RecentLanguagesAdapter recentLanguagesAdapter
-                = new RecentLanguagesAdapter(
-                    getActivity(),
-                    recentLanguagesDao.getRecentLanguages(),
-                    selectedLanguages);
-            languageHistoryListView.setAdapter(recentLanguagesAdapter);
-        }
+        setUpRecentLanguagesSection(recentLanguages, selectedLanguages);
 
         listView.setAdapter(languagesAdapter);
 
@@ -287,7 +267,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1,
                 int i2) {
-                removeRecentLanguages();
+                hideRecentLanguagesSection();
             }
 
             @Override
@@ -303,28 +283,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         });
 
         languageHistoryListView.setOnItemClickListener((adapterView, view, position, id) -> {
-            final String recentLanguageCode = ((RecentLanguagesAdapter) adapterView.getAdapter())
-                .getLanguageCode(position);
-            final String recentLanguageName = ((RecentLanguagesAdapter) adapterView.getAdapter())
-                .getLanguageName(position);
-            final boolean isExists = recentLanguagesDao.findRecentLanguage(recentLanguageCode);
-            if (isExists) {
-                recentLanguagesDao.deleteRecentLanguage(recentLanguageCode);
-            }
-            recentLanguagesDao.addRecentLanguage(
-                new Language(recentLanguageName, recentLanguageCode));
-            saveLanguageValue(recentLanguageCode, keyListPreference);
-            final Locale defLocale = new Locale(recentLanguageCode);
-            if (keyListPreference.equals("appUiDefaultLanguagePref")) {
-                appUiLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
-                setLocale(Objects.requireNonNull(getActivity()), recentLanguageCode);
-                getActivity().recreate();
-                final Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-            } else {
-                descriptionLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
-            }
-            dialog.dismiss();
+            onRecentLanguageClicked(keyListPreference, dialog, adapterView, position);
         });
 
         listView.setOnItemClickListener(new OnItemClickListener() {
@@ -360,9 +319,69 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     /**
+     * Set up recent languages section
+     *
+     * @param recentLanguages recently used languages
+     * @param selectedLanguages selected languages
+     */
+    private void setUpRecentLanguagesSection(List<Language> recentLanguages,
+        HashMap<Integer, String> selectedLanguages) {
+        if (recentLanguages.isEmpty()) {
+            languageHistoryListView.setVisibility(View.GONE);
+            recentLanguagesTextView.setVisibility(View.GONE);
+            separator.setVisibility(View.GONE);
+        } else {
+            if (recentLanguages.size() > 5) {
+                for (int i = recentLanguages.size()-1; i >=5; i--) {
+                    recentLanguagesDao
+                        .deleteRecentLanguage(recentLanguages.get(i).getLanguageCode());
+                }
+            }
+            languageHistoryListView.setVisibility(View.VISIBLE);
+            recentLanguagesTextView.setVisibility(View.VISIBLE);
+            separator.setVisibility(View.VISIBLE);
+            final RecentLanguagesAdapter recentLanguagesAdapter
+                = new RecentLanguagesAdapter(
+                    getActivity(),
+                    recentLanguagesDao.getRecentLanguages(),
+                selectedLanguages);
+            languageHistoryListView.setAdapter(recentLanguagesAdapter);
+        }
+    }
+
+    /**
+     * Handles click event for recent language section
+     */
+    private void onRecentLanguageClicked(String keyListPreference, Dialog dialog, AdapterView<?> adapterView,
+        int position) {
+        final String recentLanguageCode = ((RecentLanguagesAdapter) adapterView.getAdapter())
+            .getLanguageCode(position);
+        final String recentLanguageName = ((RecentLanguagesAdapter) adapterView.getAdapter())
+            .getLanguageName(position);
+        final boolean isExists = recentLanguagesDao.findRecentLanguage(recentLanguageCode);
+        if (isExists) {
+            recentLanguagesDao.deleteRecentLanguage(recentLanguageCode);
+        }
+        recentLanguagesDao.addRecentLanguage(
+            new Language(recentLanguageName, recentLanguageCode));
+        saveLanguageValue(recentLanguageCode, keyListPreference);
+        final Locale defLocale = new Locale(recentLanguageCode);
+        if (keyListPreference.equals("appUiDefaultLanguagePref")) {
+            appUiLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
+            setLocale(Objects.requireNonNull(getActivity()), recentLanguageCode);
+            getActivity().recreate();
+            final Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
+        } else {
+            descriptionLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
+        }
+        dialog.dismiss();
+    }
+
+    /**
      * Remove the section of recent languages
      */
-    private void removeRecentLanguages() {
+    private void hideRecentLanguagesSection() {
         languageHistoryListView.setVisibility(View.GONE);
         recentLanguagesTextView.setVisibility(View.GONE);
         separator.setVisibility(View.GONE);
