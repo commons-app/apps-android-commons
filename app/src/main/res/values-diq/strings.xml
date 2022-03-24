@@ -215,6 +215,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Rey bıdê</string>
   <string name="about_faq">PZP</string>
+  <string name="user_guide">Rayberê karberi</string>
   <string name="welcome_skip_button">Musnayoği ravêre</string>
   <string name="no_internet">İnternet nêresêno</string>
   <string name="no_notifications">Pêhesnayışi nêvineyay</string>
@@ -261,6 +262,9 @@
   <string name="images_uploaded">Resımi biyê bar</string>
   <string name="image_reverts">Resımi peyser nêgeriyaye</string>
   <string name="images_used_by_wiki">Gureyniyaye resımi</string>
+  <string name="achievements_revert_limit_message">kemi zaruri:</string>
+  <string name="error_occurred">Xeta biye!</string>
+  <string name="notifications_channel_name_all">Cıresnayışê embari</string>
   <string name="preference_author_name_toggle">Nameyê nuştekariyo xısusiyi bıgurene</string>
   <string name="preference_author_name">Nameyê nuştekariyo xısusi</string>
   <string name="contributions_fragment">İştıraki</string>
@@ -269,6 +273,7 @@
   <string name="read_notifications">Pêhesnayışi (waniyayê)</string>
   <string name="display_nearby_notification">Nezdı ra peyhesnayışa bımocne</string>
   <string name="list_sheet">Liste</string>
+  <string name="storage_permission">İcazetê depoyi</string>
   <string name="next">Bahdoyên</string>
   <string name="previous">Verên</string>
   <string name="submit">Bırışe</string>

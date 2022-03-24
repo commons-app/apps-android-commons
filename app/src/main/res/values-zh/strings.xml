@@ -15,6 +15,7 @@
 * Kuailong
 * Liuxinyu970226
 * Looong
+* NACHOgao3
 * Qiyue2001
 * Shizhao
 * Shuiwater
@@ -294,6 +295,7 @@
   <string name="nearby_commons">共享资源</string>
   <string name="about_rate_us">评价我们</string>
   <string name="about_faq">常见问题</string>
+  <string name="user_guide">用户指南</string>
   <string name="welcome_skip_button">跳过指导</string>
   <string name="no_internet">互联网不可用</string>
   <string name="error_notifications">检索通知时出错</string>
@@ -676,4 +678,11 @@
   <string name="location_message">位置数据能帮助 Wiki 编辑者来找到您的图片，让他更加有用。\n您近期上传的内容没有位置。\n我们建议您在相机应用程序设置里打开位置。\n感谢您的上传！</string>
   <string name="no_location_found_title">没有找到位置</string>
   <string name="add_location">添加位置</string>
+  <string name="android_version">Android版本</string>
+  <string name="device_manufacturer">设备制造商</string>
+  <string name="device_model">设备型号</string>
+  <string name="device_name">设备名称</string>
+  <string name="thanks_feedback">感谢您提供反馈</string>
+  <string name="enter_description">您的反馈是？</string>
+  <string name="your_feedback">您的反馈</string>
 </resources>
