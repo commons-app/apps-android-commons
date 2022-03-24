@@ -287,6 +287,7 @@
   <string name="title_activity_search">Пребарај</string>
   <string name="search_recent_header">Скорешни пребарувања:</string>
   <string name="provider_searches">Скорешни пребарувања</string>
+  <string name="provider_recent_languages">Скорешни јазични барања</string>
   <string name="error_loading_categories">Се јави грешка при вчитувањето на категориите.</string>
   <string name="error_loading_depictions">Се јави грешка при вчитувањето на прикажувањата.</string>
   <string name="search_tab_title_media">Слики/снимки</string>
@@ -491,6 +492,13 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Не можев да ги додадам категориите.</string>
   <string name="category_edit_button_text">Поднови категории</string>
+  <string name="depictions_edit_helper_make_edit_toast">Се обидувам да ги подновам приказите.</string>
+  <string name="depictions_edit_helper_show_edit_title">Уреди прикази</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">Приказот %1$s е додаден.</item>
+    <item quantity="other">Приказите %1$s се додадени.</item>
+  </plurals>
+  <string name="depictions_edit_helper_edit_message_else">Не можев да додадам прикази.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Се обидувам да ги подоновам координатите.</string>
   <string name="coordinates_edit_helper_show_edit_title">Поднова на координати</string>
   <string name="description_edit_helper_show_edit_title">Поднова на опис</string>
@@ -640,6 +648,7 @@
   <string name="contributions_of_user">Придонеси на корисникот: %s</string>
   <string name="achievements_of_user">Достигнувања на корисникот: %s</string>
   <string name="menu_view_user_page">Преглед на корисничката страница</string>
+  <string name="edit_depictions">Уреди прикази</string>
   <string name="advanced_options">Напредни можности</string>
   <string name="advanced_query_info_text">Можете да го прилагодите барањето „Во близина“. Ако добиете грешки, вратете одново и применете.</string>
   <string name="apply">Примени</string>
