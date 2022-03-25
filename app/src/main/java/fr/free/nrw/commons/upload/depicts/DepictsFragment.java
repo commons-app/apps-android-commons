@@ -1,15 +1,21 @@
 package fr.free.nrw.commons.upload.depicts;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -18,7 +24,11 @@ import butterknife.OnClick;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.contributions.ContributionsFragment;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.media.MediaDetailFragment;
 import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText;
 import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
@@ -26,9 +36,12 @@ import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.DialogUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
+import javax.inject.Named;
 import kotlin.Unit;
 import timber.log.Timber;
 
@@ -52,11 +65,26 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     RecyclerView depictsRecyclerView;
     @BindView(R.id.tooltip)
     ImageView tooltip;
+    @BindView(R.id.depicts_next)
+    Button btnNext;
+    @BindView(R.id.depicts_previous)
+    Button btnPrevious;
+    @Inject
+    @Named("default_preferences")
+    public
+    JsonKvStore applicationKvStore;
 
     @Inject
     DepictsContract.UserActionListener presenter;
     private UploadDepictsAdapter adapter;
     private Disposable subscribe;
+    private Media media;
+    private ProgressDialog progressDialog;
+    /**
+     * Determines each encounter of edit depicts
+     */
+    private int count;
+
     @Nullable
     @Override
     public android.view.View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -67,7 +95,13 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     @Override
     public void onViewCreated(@NonNull android.view.View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         ButterKnife.bind(this, view);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            media = bundle.getParcelable("Existing_Depicts");
+        }
+
         init();
         presenter.getDepictedItems().observe(getViewLifecycleOwner(), this::setDepictsList);
     }
@@ -76,13 +110,27 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      * Initialize presenter and views
      */
     private void init() {
-        depictsTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
-            callback.getTotalNumberOfSteps(), getString(R.string.depicts_step_title)));
+
+        if (media == null) {
+            depictsTitle
+                .setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
+                    callback.getTotalNumberOfSteps(), getString(R.string.depicts_step_title)));
+        } else {
+            depictsTitle.setText(R.string.edit_depicts);
+            depictsSubTitle.setVisibility(View.GONE);
+            btnNext.setText(R.string.menu_save_categories);
+            btnPrevious.setText(R.string.menu_cancel_upload);
+        }
+
         setDepictsSubTitle();
         tooltip.setOnClickListener(v -> DialogUtil
             .showAlertDialog(getActivity(), getString(R.string.depicts_step_title),
                 getString(R.string.depicts_tooltip), getString(android.R.string.ok), null, true));
-        presenter.onAttachView(this);
+        if (media == null) {
+            presenter.onAttachView(this);
+        } else {
+            presenter.onAttachViewWithMedia(this, media);
+        }
         initRecyclerView();
         addTextChangeListenerToSearchBox();
     }
@@ -105,10 +153,17 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      * Initialise recyclerView and set adapter
      */
     private void initRecyclerView() {
-        adapter = new UploadDepictsAdapter(item -> {
-            presenter.onDepictItemClicked(item);
-            return Unit.INSTANCE;
-        });
+        if (media == null) {
+            adapter = new UploadDepictsAdapter(categoryItem -> {
+                presenter.onDepictItemClicked(categoryItem);
+                return Unit.INSTANCE;
+            });
+        } else {
+            adapter = new UploadDepictsAdapter(item -> {
+                presenter.onDepictItemClicked(item);
+                return Unit.INSTANCE;
+            });
+        }
         depictsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         depictsRecyclerView.setAdapter(adapter);
     }
@@ -133,19 +188,28 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
 
     @Override
     public void noDepictionSelected() {
-        DialogUtil.showAlertDialog(getActivity(),
-            getString(R.string.no_depictions_selected),
-            getString(R.string.no_depictions_selected_warning_desc),
-            getString(R.string.continue_message),
-            getString(R.string.cancel),
-            this::goToNextScreen,
-            null
-        );
+        if (media == null) {
+            DialogUtil.showAlertDialog(getActivity(),
+                getString(R.string.no_depictions_selected),
+                getString(R.string.no_depictions_selected_warning_desc),
+                getString(R.string.continue_message),
+                getString(R.string.cancel),
+                this::goToNextScreen,
+                null
+            );
+        } else {
+            Toast.makeText(requireContext(), getString(R.string.no_depictions_selected),
+                Toast.LENGTH_SHORT).show();
+            presenter.clearPreviousSelection();
+            updateDepicts();
+            goBackToPreviousScreen();
+        }
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        media = null;
         presenter.onDetachView();
         subscribe.dispose();
     }
@@ -166,18 +230,89 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
 
     @Override
     public void setDepictsList(List<DepictedItem> depictedItemList) {
-        adapter.setItems(depictedItemList);
+
+        if (applicationKvStore.getBoolean("first_edit_depict")) {
+            count = 1;
+            applicationKvStore.putBoolean("first_edit_depict", false);
+            adapter.setItems(depictedItemList);
+        } else {
+            if ((count == 0) && (!depictedItemList.isEmpty())) {
+                adapter.setItems(null);
+                count = 1;
+            } else {
+                adapter.setItems(depictedItemList);
+            }
+        }
         depictsRecyclerView.smoothScrollToPosition(0);
     }
 
-    @OnClick(R.id.depicts_next)
-    public void onNextButtonClicked() {
-        presenter.verifyDepictions();
+    @Override
+    public Context getFragmentContext(){
+        return requireContext();
     }
 
+    @Override
+    public void goBackToPreviousScreen() {
+        getFragmentManager().popBackStack();
+    }
+
+    @Override
+    public List<String> getExistingDepicts(){
+        return (media == null) ? null : media.getDepictionIds();
+    }
+
+    /**
+     * Shows the progress dialog
+     */
+    @Override
+    public void showProgressDialog() {
+        progressDialog = new ProgressDialog(requireContext());
+        progressDialog.setMessage(getString(R.string.please_wait));
+        progressDialog.show();
+    }
+
+    /**
+     * Hides the progress dialog
+     */
+    @Override
+    public void dismissProgressDialog() {
+        progressDialog.dismiss();
+    }
+
+    /**
+     * Update the depicts
+     */
+    @Override
+    public void updateDepicts() {
+        final MediaDetailFragment mediaDetailFragment = (MediaDetailFragment) getParentFragment();
+        assert mediaDetailFragment != null;
+        mediaDetailFragment.onResume();
+    }
+
+    /**
+     * Determines the calling fragment by media nullability and act accordingly
+     */
+    @OnClick(R.id.depicts_next)
+    public void onNextButtonClicked() {
+        if(media != null){
+            presenter.updateDepicts(media);
+        } else {
+            presenter.verifyDepictions();
+        }
+    }
+
+    /**
+     * Determines the calling fragment by media nullability and act accordingly
+     */
     @OnClick(R.id.depicts_previous)
     public void onPreviousButtonClicked() {
-        callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
+        if(media != null){
+            presenter.clearPreviousSelection();
+            updateDepicts();
+            goBackToPreviousScreen();
+        } else {
+            callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
+        }
     }
 
     /**
@@ -199,5 +334,64 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      */
     private void searchForDepictions(final String query) {
         presenter.searchForDepictions(query);
+    }
+
+
+
+    /**
+     * Hides the action bar while opening editing fragment
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (media != null) {
+            depictsSearch.setOnKeyListener((v, keyCode, event) -> {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    depictsSearch.clearFocus();
+                    presenter.clearPreviousSelection();
+                    updateDepicts();
+                    goBackToPreviousScreen();
+                    return true;
+                }
+                return false;
+            });
+
+            Objects.requireNonNull(getView()).setFocusableInTouchMode(true);
+            getView().requestFocus();
+            getView().setOnKeyListener((v, keyCode, event) -> {
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                    presenter.clearPreviousSelection();
+                    updateDepicts();
+                    goBackToPreviousScreen();
+                    return true;
+                }
+                return false;
+            });
+
+            Objects.requireNonNull(
+                ((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar())
+                .hide();
+
+            if (getParentFragment().getParentFragment().getParentFragment()
+                instanceof ContributionsFragment) {
+                ((ContributionsFragment) (getParentFragment()
+                    .getParentFragment().getParentFragment())).nearbyNotificationCardView
+                    .setVisibility(View.GONE);
+            }
+        }
+    }
+
+    /**
+     * Shows the action bar while closing editing fragment
+     */
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (media != null) {
+            Objects.requireNonNull(
+                ((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar())
+                .show();
+        }
     }
 }

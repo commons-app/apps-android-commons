@@ -1,15 +1,19 @@
 package fr.free.nrw.commons.upload.depicts
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.wikidata.WikidataDisambiguationItems
 import io.reactivex.Flowable
 import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.processors.PublishProcessor
+import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import java.lang.reflect.Proxy
 import java.util.*
@@ -35,8 +39,11 @@ class DepictsPresenter @Inject constructor(
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
     private val searchTerm: PublishProcessor<String> = PublishProcessor.create()
     private val depictedItems: MutableLiveData<List<DepictedItem>> = MutableLiveData()
+    private var media: Media? = null
     @Inject
-    lateinit var depictsDao: DepictsDao;
+    lateinit var depictsDao: DepictsDao
+    @Inject
+    lateinit var depictsHelper: DepictEditHelper
 
     override fun onAttachView(view: DepictsContract.View) {
         this.view = view
@@ -71,16 +78,37 @@ class DepictsPresenter @Inject constructor(
         if (querystring.isEmpty()) {
             recentDepictedItemList = getRecentDepictedItems();
         }
-        return repository.searchAllEntities(querystring)
-            .subscribeOn(ioScheduler)
-            .map { repository.selectedDepictions + it + recentDepictedItemList }
-            .map { it.filterNot { item -> WikidataDisambiguationItems.isDisambiguationItem(item.instanceOfs) } }
-            .map { it.distinctBy(DepictedItem::id) }
-    }
 
+        if (media == null) {
+            return repository.searchAllEntities(querystring)
+                .subscribeOn(ioScheduler)
+                .map { repository.selectedDepictions + it + recentDepictedItemList }
+                .map { it.filterNot { item -> WikidataDisambiguationItems.isDisambiguationItem(item.instanceOfs) } }
+                .map { it.distinctBy(DepictedItem::id) }
+
+        } else {
+            return Flowable.zip(repository.getDepictions(repository.selectedExistingDepictions)
+                .map { list -> list.map {
+                    DepictedItem(it.name, it.description, it.imageUrl, it.instanceOfs,
+                        it.commonsCategories, true, it.id)
+                }
+            },
+                repository.searchAllEntities(querystring),
+                { it1, it2 ->
+                    it1 + it2
+                }
+            )
+                .subscribeOn(ioScheduler)
+                .map { repository.selectedDepictions + it + recentDepictedItemList }
+                .map { it.filterNot { item -> WikidataDisambiguationItems.isDisambiguationItem(item.instanceOfs) } }
+                .map { it.distinctBy(DepictedItem::id) }
+
+        }
+    }
 
     override fun onDetachView() {
         view = DUMMY
+        media = null
         compositeDisposable.clear()
     }
 
@@ -102,7 +130,7 @@ class DepictsPresenter @Inject constructor(
     private fun selectNewDepictions(toSelect: List<DepictedItem>) {
         toSelect.forEach {
             it.isSelected = true
-            repository.onDepictItemClicked(it)
+            repository.onDepictItemClicked(it, media)
         }
 
         // Add the new selections to the list of depicted items so that the selections appear
@@ -113,12 +141,16 @@ class DepictsPresenter @Inject constructor(
             ?.let { depictedItems.value = it }
     }
 
+    override fun clearPreviousSelection() {
+        repository.cleanup()
+    }
+
     override fun onPreviousButtonClicked() {
         view.goToPreviousScreen()
     }
 
     override fun onDepictItemClicked(depictedItem: DepictedItem) {
-        repository.onDepictItemClicked(depictedItem)
+        repository.onDepictItemClicked(depictedItem, media)
     }
 
     override fun getDepictedItems(): LiveData<List<DepictedItem>> {
@@ -147,6 +179,76 @@ class DepictsPresenter @Inject constructor(
         } else {
             view.noDepictionSelected()
         }
+    }
+
+    /**
+     * Gets the selected depicts and send them for posting to the server
+     * and saves them in local storage
+     */
+    @SuppressLint("CheckResult")
+    override fun updateDepicts(media: Media) {
+        if (repository.selectedDepictions.isNotEmpty()
+            || repository.selectedExistingDepictions.size != view.existingDepicts.size
+        ) {
+            view.showProgressDialog()
+            val selectedDepictions: MutableList<String> =
+                (repository.selectedDepictions.map { it.id }.toMutableList()
+                        + repository.selectedExistingDepictions).toMutableList()
+
+            if (selectedDepictions.isNotEmpty()) {
+                if (::depictsDao.isInitialized) {
+                    //save all the selected Depicted item in room Database
+                    depictsDao.savingDepictsInRoomDataBase(repository.selectedDepictions)
+                }
+
+                compositeDisposable.add(
+                    depictsHelper.makeDepictEdit(view.fragmentContext, media, selectedDepictions )
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({
+                            media.depictionIds = selectedDepictions
+                            repository.cleanup()
+                            view.dismissProgressDialog()
+                            view.updateDepicts()
+                            view.goBackToPreviousScreen()
+                        })
+                        {
+                            Timber.e(
+                                "Failed to update depicts"
+                            )
+                        }
+                )
+
+            }
+        } else {
+            repository.cleanup()
+            view.noDepictionSelected()
+        }
+    }
+
+    override fun onAttachViewWithMedia(view: DepictsContract.View, media: Media) {
+        this.view = view
+        this.media = media
+        repository.selectedExistingDepictions = view.existingDepicts
+        compositeDisposable.add(
+            searchTerm
+                .observeOn(mainThreadScheduler)
+                .doOnNext { view.showProgress(true) }
+                .switchMap(::searchResultsWithTerm)
+                .observeOn(mainThreadScheduler)
+                .subscribe(
+                    { (results, term) ->
+                        view.showProgress(false)
+                        view.showError(results.isEmpty() && term.isNotEmpty())
+                        depictedItems.value = results
+                    },
+                    { t: Throwable? ->
+                        view.showProgress(false)
+                        view.showError(true)
+                        Timber.e(t)
+                    }
+                )
+        )
     }
 
     /**

@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.wikidata;
 
-import static fr.free.nrw.commons.media.MediaClientKt.PAGE_ID_PREFIX;
 import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_CSRF;
+import static fr.free.nrw.commons.media.MediaClientKt.PAGE_ID_PREFIX;
 
 import fr.free.nrw.commons.upload.UploadResult;
 import fr.free.nrw.commons.upload.WikiBaseInterface;
@@ -35,8 +35,27 @@ public class WikiBaseClient {
                 .map(response -> (response.getSuccessVal() == 1)));
     }
 
+    /**
+     * Makes the server call for posting new depicts
+     *
+     * @param filename name of the file
+     * @param data data of the depicts to be uploaded
+     * @return Observable<Boolean>
+     */
+    public Observable<Boolean> postEditEntityByFilename(final String filename, final String data) {
+        return csrfToken()
+            .switchMap(editToken -> wikiBaseInterface.postEditEntityByFilename(filename,
+                editToken, data)
+                .map(response -> (response.getSuccessVal() == 1)));
+    }
+
     public Observable<Long> getFileEntityId(UploadResult uploadResult) {
         return wikiBaseInterface.getFileEntityId(uploadResult.createCanonicalFileName())
+            .map(response -> (long) (response.query().pages().get(0).pageId()));
+    }
+
+    public Observable<Long> getFileEntityIdByFileName(String fileName) {
+        return wikiBaseInterface.getFileEntityId(fileName)
             .map(response -> (long) (response.query().pages().get(0).pageId()));
     }
 

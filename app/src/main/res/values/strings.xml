@@ -523,6 +523,14 @@ Upload your first media by tapping on the add button.</string>
   <string name="category_edit_helper_edit_message_else">Could not add categories.</string>
   <string name="category_edit_button_text">Update categories</string>
 
+  <string name="depict_edit_helper_make_edit_toast">Trying to update depictions.</string>
+  <string name="depict_edit_helper_show_edit_title">Edit depictions</string>
+  <plurals name="depict_edit_helper_show_edit_message_if">
+    <item quantity="one">Depiction %1$s is added.</item>
+    <item quantity="other">Depictions %1$s are added.</item>
+  </plurals>
+  <string name="depict_edit_helper_edit_message_else">Could not add depictions.</string>
+
   <string name="coordinates_edit_helper_make_edit_toast">Trying to update coordinates.</string>
   <string name="coordinates_edit_helper_show_edit_title">Coordinates update</string>
   <string name="description_edit_helper_show_edit_title">Description update</string>
@@ -680,6 +688,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="contributions_of_user">Contributions of User: %s</string>
   <string name="achievements_of_user">Achievements of User: %s</string>
   <string name="menu_view_user_page">View user page</string>
+  <string name="edit_depicts">Edit depictions</string>
   <string name="advanced_options">Advanced Options</string>
   <string name="advanced_query_info_text">You can customize the Nearby query. If you get errors, reset and apply.</string>
   <string name="apply">Apply</string>

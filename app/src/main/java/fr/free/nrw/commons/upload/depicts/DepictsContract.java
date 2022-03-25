@@ -1,7 +1,10 @@
 package fr.free.nrw.commons.upload.depicts;
 
+import android.content.Context;
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import fr.free.nrw.commons.BasePresenter;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import java.util.List;
 
@@ -40,6 +43,18 @@ public interface DepictsContract {
          * add depictions to list
          */
         void setDepictsList(List<DepictedItem> depictedItemList);
+
+        Context getFragmentContext();
+
+        void goBackToPreviousScreen();
+
+        List<String> getExistingDepicts();
+
+        void showProgressDialog();
+
+        void dismissProgressDialog();
+
+        void updateDepicts();
     }
 
     interface UserActionListener extends BasePresenter<View> {
@@ -71,6 +86,15 @@ public interface DepictsContract {
          */
         void verifyDepictions();
 
+        /**
+         * Clears previous selections
+         */
+        void clearPreviousSelection();
+
         LiveData<List<DepictedItem>> getDepictedItems();
+
+        void updateDepicts(Media media);
+
+        void onAttachViewWithMedia(@NonNull View view, Media media);
     }
 }
