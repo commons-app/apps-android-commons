@@ -271,6 +271,7 @@
   <string name="nearby_commons">コモンズ</string>
   <string name="about_rate_us">評価する</string>
   <string name="about_faq">よくある質問</string>
+  <string name="user_guide">ユーザーガイド</string>
   <string name="welcome_skip_button">チュートリアルをスキップする</string>
   <string name="no_internet">インターネットに接続していません</string>
   <string name="error_notifications">通知の取得に失敗しました</string>
@@ -599,4 +600,13 @@
   <string name="description">説明</string>
   <string name="title_page_bookmarks_items">項目</string>
   <string name="add_location">位置を追加</string>
+  <string name="api_level">APIレベル</string>
+  <string name="android_version">アンドロイドのバージョン</string>
+  <string name="device_manufacturer">デバイスの製造元</string>
+  <string name="device_name">デバイス名</string>
+  <string name="network_type">ネットワークの種類</string>
+  <string name="thanks_feedback">フィードバックをありがとうございました</string>
+  <string name="error_feedback">フィードバックを送る途中でエラーが起きました</string>
+  <string name="enter_description">あなたのフィードバックは何ですか？</string>
+  <string name="your_feedback">あなたのフィードバック</string>
 </resources>

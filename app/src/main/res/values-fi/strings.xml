@@ -2,6 +2,7 @@
 <!-- Authors:
 * 01miki10
 * 3Johnny
+* 4shadoww
 * Alluk.
 * Crt
 * FinlandMan
@@ -123,7 +124,7 @@
   <string name="title_activity_category_details">Luokka</string>
   <string name="title_activity_review">Vertaisarviointi</string>
   <string name="menu_about">Tietoja</string>
-  <string name="about_license">Wikimedia Commons -sovellus on avoin ohjelmisto, joka on luotu ja ylläpidetty Wikimedia-yhteisön apurahoilla ja vapaaehtoisilla. Wikimedia Foundation ei ollut mukana sovelluksen luomisessa, eikä se vastaa kehittämisestä tai ylläpidosta.</string>
+  <string name="about_license">Wikimedia Commons -sovellus on avoimen lähdekoodin ohjelmisto, joka on luotu ja ylläpidetty Wikimedia-yhteisön apurahoilla ja vapaaehtoisilla. Wikimedia Foundation ei ollut mukana sovelluksen luomisessa, eikä se vastaa kehittämisestä tai ylläpidosta.</string>
   <string name="about_improve">Luo uusi &lt;a href=\"%1$s\"&gt;GitHub-issue&lt;/a&gt; bugiraporteille ja ehdotuksille.</string>
   <string name="about_privacy_policy">Tietosuojakäytäntö</string>
   <string name="about_credits">Tekijät</string>

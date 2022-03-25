@@ -65,23 +65,17 @@ class DepictEditHelperUnitTest {
     fun testMakeDepictEdit() {
         whenever(wikidataEditService.updateDepictsProperty(media.filename, listOf("Q12")))
             .thenReturn(Observable.just(true))
-        helper.makeDepictEdit(context, media, listOf("Q12"))
+        helper.makeDepictionEdit(context, media, listOf("Q12"))
         Mockito.verify(viewUtilWrapper, Mockito.times(1)).showShortToast(
             context,
-            context.getString(R.string.depict_edit_helper_make_edit_toast)
+            context.getString(R.string.depictions_edit_helper_make_edit_toast)
         )
-//        Mockito.verify(pageEditClient, Mockito.times(1))
-//            .getCurrentWikiText(ArgumentMatchers.anyString())
-//        Mockito.verify(pageEditClient, Mockito.times(1)).edit(
-//            ArgumentMatchers.anyString(),
-//            ArgumentMatchers.anyString(),
-//            ArgumentMatchers.anyString()
-//        )
     }
 
     @Test
     @Throws(Exception::class)
     fun testShowCoordinatesEditNotificationCaseTrue() {
+        whenever(media.depictionIds).thenReturn(listOf("id", "id2"))
         val method: Method = DepictEditHelper::class.java.getDeclaredMethod(
             "showDepictionEditNotification",
             Context::class.java,

@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload.depicts
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,10 +13,13 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputLayout
+import com.nhaarman.mockitokotlin2.whenever
+import depictedItem
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText
 import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadBaseFragment
@@ -80,7 +84,13 @@ class DepictsFragmentUnitTests {
     private lateinit var adapter: UploadDepictsAdapter
 
     @Mock
+    private lateinit var applicationKvStore: JsonKvStore
+
+    @Mock
     private lateinit var media: Media
+
+    @Mock
+    private lateinit var progressDialog: ProgressDialog
 
     @Before
     fun setUp() {
@@ -207,6 +217,20 @@ class DepictsFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
+    fun `Test setDepictsList when list is not empty`() {
+        fragment.setDepictsList(listOf(depictedItem()))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Test setDepictsList when applicationKvStore returns true`() {
+        Whitebox.setInternalState(fragment, "applicationKvStore", applicationKvStore)
+        whenever(applicationKvStore.getBoolean("first_edit_depict")).thenReturn(true)
+        fragment.setDepictsList(listOf(depictedItem()))
+    }
+
+    @Test
+    @Throws(Exception::class)
     fun testOnNextButtonClicked() {
         fragment.onNextButtonClicked()
     }
@@ -228,4 +252,61 @@ class DepictsFragmentUnitTests {
         method.invoke(fragment, "")
     }
 
+    @Test
+    @Throws(Exception::class)
+    fun testOnResume() {
+        fragment.onResume()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnStop() {
+        fragment.onStop()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testInitRecyclerView() {
+        val method: Method = DepictsFragment::class.java.getDeclaredMethod(
+            "initRecyclerView"
+        )
+        method.isAccessible = true
+        method.invoke(fragment)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Test initRecyclerView when media is not null`() {
+        Whitebox.setInternalState(fragment, "media", media)
+        val method: Method = DepictsFragment::class.java.getDeclaredMethod(
+            "initRecyclerView"
+        )
+        method.isAccessible = true
+        method.invoke(fragment)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testGetFragmentContext() {
+        fragment.fragmentContext
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testGoBackToPreviousScreen() {
+        fragment.goBackToPreviousScreen()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testShowProgressDialog() {
+        fragment.showProgressDialog()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testDismissProgressDialog() {
+        Whitebox.setInternalState(fragment, "progressDialog", progressDialog)
+        fragment.dismissProgressDialog()
+    }
 }

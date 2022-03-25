@@ -125,6 +125,15 @@ public class MainActivity  extends BaseActivity
         toolbar.setNavigationOnClickListener(view -> {
             onSupportNavigateUp();
         });
+        /*
+        "first_edit_depict" is a key for getting information about opening the depiction editor
+        screen for the first time after opening the app.
+
+        Getting true by the key means the depiction editor screen is opened for the first time
+        after opening the app.
+        Getting false by the key means the depiction editor screen is not opened for the first time
+        after opening the app.
+         */
         applicationKvStore.putBoolean("first_edit_depict", true);
         if (applicationKvStore.getBoolean("login_skipped") == true) {
             setTitle(getString(R.string.navigation_item_explore));

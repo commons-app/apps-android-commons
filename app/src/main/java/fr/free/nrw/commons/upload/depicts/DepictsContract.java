@@ -44,16 +44,34 @@ public interface DepictsContract {
          */
         void setDepictsList(List<DepictedItem> depictedItemList);
 
+        /**
+         * Returns required context
+         */
         Context getFragmentContext();
 
+        /**
+         * Returns to previous fragment
+         */
         void goBackToPreviousScreen();
 
-        List<String> getExistingDepicts();
+        /**
+         * Gets existing depictions IDs from media
+         */
+        List<String> getExistingDepictions();
 
+        /**
+         * Shows the progress dialog
+         */
         void showProgressDialog();
 
+        /**
+         * Hides the progress dialog
+         */
         void dismissProgressDialog();
 
+        /**
+         * Update the depictions
+         */
         void updateDepicts();
     }
 
@@ -93,8 +111,14 @@ public interface DepictsContract {
 
         LiveData<List<DepictedItem>> getDepictedItems();
 
-        void updateDepicts(Media media);
+        /**
+         * Update the depictions
+         */
+        void updateDepictions(Media media);
 
+        /**
+         * Attaches view and media
+         */
         void onAttachViewWithMedia(@NonNull View view, Media media);
     }
 }

@@ -322,7 +322,7 @@ class UploadRepositoryUnitTest {
     @Test
     fun testJoinIDs() {
         val method: Method = UploadRepository::class.java.getDeclaredMethod(
-            "joinIDs",
+            "joinQIDs",
             List::class.java
         )
         method.isAccessible = true
@@ -332,7 +332,7 @@ class UploadRepositoryUnitTest {
     @Test
     fun `test joinIDs when depictIDs is null`() {
         val method: Method = UploadRepository::class.java.getDeclaredMethod(
-            "joinIDs",
+            "joinQIDs",
             List::class.java
         )
         method.isAccessible = true

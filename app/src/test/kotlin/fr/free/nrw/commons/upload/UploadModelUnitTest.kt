@@ -87,6 +87,20 @@ class UploadModelUnitTest {
     }
 
     @Test
+    fun `Test onDepictItemClicked when media is not null and DepictedItem is selected`(){
+        uploadModel.onDepictItemClicked(
+            DepictedItem(
+                "Test",
+                "Test",
+                "test",
+                listOf(),
+                listOf(),
+                true,
+                "id"
+            ), media(filename = "File:Example.jpg"))
+    }
+
+    @Test
     fun `Test onDepictItemClicked when media is null and DepictedItem is selected`(){
         uploadModel.onDepictItemClicked(
             DepictedItem(

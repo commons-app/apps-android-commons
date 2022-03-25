@@ -27,7 +27,7 @@ public class NotificationHelper {
     public static final int NOTIFICATION_EDIT_CATEGORY = 2;
     public static final int NOTIFICATION_EDIT_COORDINATES = 3;
     public static final int NOTIFICATION_EDIT_DESCRIPTION = 4;
-    public static final int NOTIFICATION_EDIT_DEPICT = 5;
+    public static final int NOTIFICATION_EDIT_DEPICTIONS = 5;
 
     private NotificationManager notificationManager;
     private NotificationCompat.Builder notificationBuilder;

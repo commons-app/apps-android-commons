@@ -15,6 +15,7 @@
 * Danniel07
 * DannyS712
 * Destinid10 2
+* DiegoAmbrocio
 * Fewasser Traduce
 * Fitoschido
 * Gastonsaenz
@@ -294,6 +295,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Valóranos</string>
   <string name="about_faq">Preguntas frecuentes</string>
+  <string name="user_guide">Guía de usuario</string>
   <string name="welcome_skip_button">Omitir tutorial</string>
   <string name="no_internet">Internet no disponible</string>
   <string name="error_notifications">Error al recuperar las notificaciones</string>
@@ -524,6 +526,13 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">No se pudieron añadir las categorías.</string>
   <string name="category_edit_button_text">Actualizar categorías</string>
+  <string name="depictions_edit_helper_make_edit_toast">Tratando de actualizar las descripciones.</string>
+  <string name="depictions_edit_helper_show_edit_title">Editar las descripciones</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">%1$s Se añade la descripción.</item>
+    <item quantity="other">Descripción %1$s se añadieron.</item>
+  </plurals>
+  <string name="depictions_edit_helper_edit_message_else">No se pueden añadir descripciones.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Intentando actualizar coordenadas.</string>
   <string name="coordinates_edit_helper_show_edit_title">Actualización de coordenadas</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Éxito</string>
@@ -654,5 +663,19 @@
   <string name="contributions_of_user">Contribuciones del usuario: %s</string>
   <string name="achievements_of_user">Logros del usuario: %s</string>
   <string name="menu_view_user_page">Ver página de usuario</string>
+  <string name="edit_depictions">Editar las descripciones</string>
+  <string name="achievements_unavailable_beta">Los logros sólo están disponibles en la versión de producción, por favor consulte la documentación del desarrollador.</string>
+  <string name="leaderboard_unavailable_beta">La tabla de clasificación sólo está disponible en la versión de producción, por favor, consulte la documentación del desarrollador.</string>
   <string name="copyright_popup">Por favor, sólo cargue imágenes que haya tomado usted mismo. Personas que carguen imágenes con derechos de autor serán bloqueadas. Esto aplica para la versión beta también. Gracias por probar la aplicación!</string>
+  <string name="select_feedback_data_choice">Por favor, desmarque cualquier información que no se sienta cómodo compartiendo públicamente.</string>
+  <string name="api_level">API Nivel</string>
+  <string name="android_version">Versión de android</string>
+  <string name="device_manufacturer">Fabricante del dispositivo</string>
+  <string name="device_model">Modelo de dispositivo</string>
+  <string name="device_name">Nombre de dispositivo</string>
+  <string name="network_type">Tipo de red</string>
+  <string name="thanks_feedback">Gracias por dar retroalimentación</string>
+  <string name="error_feedback">Error mientras se envía la retroalimentación</string>
+  <string name="enter_description">¿Cuál es su opinión?</string>
+  <string name="your_feedback">Tu retroalimentación</string>
 </resources>

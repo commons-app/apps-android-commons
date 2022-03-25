@@ -8,6 +8,21 @@
   android:background="?attr/mainBackground"
   android:id="@+id/mediaDetailFrameLayout"
   >
+
+    <LinearLayout
+      android:id="@+id/dummy_category_edit_container"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:elevation="35dp"
+      android:layout_gravity="bottom"
+      android:visibility="gone"
+      android:orientation="vertical"
+      android:weightSum="10">
+
+        <include
+          layout="@layout/layout_edit_categories" />
+    </LinearLayout>
+
     <LinearLayout
       android:id="@+id/dummy_caption_description_container"
       android:layout_width="match_parent"
@@ -322,7 +337,7 @@
                 </LinearLayout>
 
                 <Button
-                  android:id="@+id/depictEditButton"
+                  android:id="@+id/depictionsEditButton"
                   android:layout_width="24dp"
                   android:layout_height="24dp"
                   android:layout_margin="@dimen/standard_gap"

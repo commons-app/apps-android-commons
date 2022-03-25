@@ -10,10 +10,8 @@ import static fr.free.nrw.commons.description.EditDescriptionConstants.LIST_OF_D
 import static fr.free.nrw.commons.description.EditDescriptionConstants.UPDATED_WIKITEXT;
 import static fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT;
 import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION;
-import android.content.res.Resources;
 import static fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources;
 import android.annotation.SuppressLint;
-import java.lang.reflect.Field;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -96,7 +94,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -179,7 +176,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     LinearLayout captionLayout;
     @BindView(R.id.depicts_layout)
     LinearLayout depictsLayout;
-    @BindView(R.id.depictEditButton)
+    @BindView(R.id.depictionsEditButton)
     Button depictEditButton;
     @BindView(R.id.media_detail_caption)
     TextView mediaCaption;
@@ -525,10 +522,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     /**
-     * By clicking on the edit depicts button, it will send user to depict fragment
+     * By clicking on the edit depictions button, it will send user to depict fragment
      */
-    @OnClick(R.id.depictEditButton)
-    public void onDepictEditButtonClicked() {
+    @OnClick(R.id.depictionsEditButton)
+    public void onDepictionsEditButtonClicked() {
         depictionContainer.removeAllViews();
         depictEditButton.setVisibility(GONE);
         final Fragment depictsFragment = new DepictsFragment();
@@ -540,7 +537,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
     /**
      * The imageSpacer is Basically a transparent overlay for the SimpleDraweeView
      * which holds the image to be displayed( moreover this image is out of
@@ -598,11 +594,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         image.getHierarchy().setFailureImage(R.drawable.image_placeholder);
 
         DraweeController controller = Fresco.newDraweeControllerBuilder()
-            .setLowResImageRequest(ImageRequest.fromUri(media != null ? media.getThumbUrl() : null))
-            .setImageRequest(ImageRequest.fromUri(media != null ? media.getImageUrl() : null))
-            .setControllerListener(aspectRatioListener)
-            .setOldController(image.getController())
-            .build();
+                .setLowResImageRequest(ImageRequest.fromUri(media != null ? media.getThumbUrl() : null))
+                .setImageRequest(ImageRequest.fromUri(media != null ? media.getImageUrl() : null))
+                .setControllerListener(aspectRatioListener)
+                .setOldController(image.getController())
+                .build();
         image.setController(controller);
     }
 
@@ -761,11 +757,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         depictionContainer.removeAllViews();
         String locale = Locale.getDefault().getLanguage();
         for (IdAndCaptions idAndCaption : idAndCaptions) {
-            depictionContainer.addView(buildDepictLabel(
-                getDepictionCaption(idAndCaption, locale),
-                idAndCaption.getId(),
-                depictionContainer
-            ));
+                depictionContainer.addView(buildDepictLabel(
+                    getDepictionCaption(idAndCaption, locale),
+                    idAndCaption.getId(),
+                    depictionContainer
+                ));
         }
     }
 
@@ -1078,7 +1074,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
             LinkedHashMap<String, String> updatedCaptions = new LinkedHashMap<>();
             for (UploadMediaDetail mediaDetail:
-                uploadMediaDetails) {
+            uploadMediaDetails) {
                 compositeDisposable.add(descriptionEditHelper.addCaption(getContext(), media,
                     mediaDetail.getLanguageCode(), mediaDetail.getCaptionText())
                     .subscribeOn(Schedulers.io())
@@ -1161,73 +1157,73 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     @SuppressLint("StringFormatInvalid")
     @OnClick(R.id.nominateDeletion)
     public void onDeleteButtonClicked(){
-        if (AccountUtil.getUserName(getContext()) != null && AccountUtil.getUserName(getContext()).equals(media.getAuthor())) {
-            final ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(getActivity(),
-                R.layout.simple_spinner_dropdown_list, reasonList);
-            final Spinner spinner = new Spinner(getActivity());
-            spinner.setLayoutParams(
-                new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT));
-            spinner.setAdapter(languageAdapter);
-            spinner.setGravity(17);
+            if (AccountUtil.getUserName(getContext()) != null && AccountUtil.getUserName(getContext()).equals(media.getAuthor())) {
+                final ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(getActivity(),
+                    R.layout.simple_spinner_dropdown_list, reasonList);
+                final Spinner spinner = new Spinner(getActivity());
+                spinner.setLayoutParams(
+                    new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT));
+                spinner.setAdapter(languageAdapter);
+                spinner.setGravity(17);
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setView(spinner);
-            builder.setTitle(R.string.nominate_delete)
-                .setPositiveButton(R.string.about_translate_proceed,
-                    (dialog, which) -> onDeleteClicked(spinner));
-            builder.setNegativeButton(R.string.about_translate_cancel,
-                (dialog, which) -> dialog.dismiss());
-            AlertDialog dialog = builder.create();
-            dialog.show();
-            if (isDeleted) {
-                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setView(spinner);
+                builder.setTitle(R.string.nominate_delete)
+                    .setPositiveButton(R.string.about_translate_proceed,
+                        (dialog, which) -> onDeleteClicked(spinner));
+                builder.setNegativeButton(R.string.about_translate_cancel,
+                    (dialog, which) -> dialog.dismiss());
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                if (isDeleted) {
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                }
+            }
+            //Reviewer correct me if i have misunderstood something over here
+            //But how does this  if (delete.getVisibility() == View.VISIBLE) {
+            //            enableDeleteButton(true);   makes sense ?
+            else {
+                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                alert.setMessage(
+                    getString(R.string.dialog_box_text_nomination, media.getDisplayTitle()));
+                final EditText input = new EditText(getActivity());
+                alert.setView(input);
+                input.requestFocus();
+                alert.setPositiveButton(R.string.ok, (dialog1, whichButton) -> {
+                    String reason = input.getText().toString();
+                    onDeleteClickeddialogtext(reason);
+                });
+                alert.setNegativeButton(R.string.cancel, (dialog12, whichButton) -> {
+                });
+                AlertDialog d = alert.create();
+                input.addTextChangedListener(new TextWatcher() {
+                    private void handleText() {
+                        final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
+                        if (input.getText().length() == 0 || isDeleted) {
+                            okButton.setEnabled(false);
+                        } else {
+                            okButton.setEnabled(true);
+                        }
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable arg0) {
+                        handleText();
+                    }
+
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    }
+                });
+                d.show();
+                d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
             }
         }
-        //Reviewer correct me if i have misunderstood something over here
-        //But how does this  if (delete.getVisibility() == View.VISIBLE) {
-        //            enableDeleteButton(true);   makes sense ?
-        else {
-            AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-            alert.setMessage(
-                getString(R.string.dialog_box_text_nomination, media.getDisplayTitle()));
-            final EditText input = new EditText(getActivity());
-            alert.setView(input);
-            input.requestFocus();
-            alert.setPositiveButton(R.string.ok, (dialog1, whichButton) -> {
-                String reason = input.getText().toString();
-                onDeleteClickeddialogtext(reason);
-            });
-            alert.setNegativeButton(R.string.cancel, (dialog12, whichButton) -> {
-            });
-            AlertDialog d = alert.create();
-            input.addTextChangedListener(new TextWatcher() {
-                private void handleText() {
-                    final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
-                    if (input.getText().length() == 0 || isDeleted) {
-                        okButton.setEnabled(false);
-                    } else {
-                        okButton.setEnabled(true);
-                    }
-                }
-
-                @Override
-                public void afterTextChanged(Editable arg0) {
-                    handleText();
-                }
-
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                }
-            });
-            d.show();
-            d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-        }
-    }
 
     @SuppressLint("CheckResult")
     private void onDeleteClicked(Spinner spinner) {
@@ -1253,7 +1249,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         applicationKvStore.putBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), true);
         enableProgressBar();
         Single<Boolean> resultSingletext = reasonBuilder.getReason(media, reason)
-            .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
+                .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
         resultSingletext
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -1342,7 +1338,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     /**
-     * Returns captions for media details
+    * Returns captions for media details
      *
      * @param media object of class media
      * @return caption as string

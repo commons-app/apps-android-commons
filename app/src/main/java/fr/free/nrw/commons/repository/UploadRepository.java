@@ -297,28 +297,28 @@ public class UploadRepository {
      * Takes depict IDs as a parameter, converts into a slash separated String and Gets DepictItem
      * from the server
      *
-     * @param depictIDs IDs of Depiction
+     * @param depictionsQIDs IDs of Depiction
      * @return Flowable<List<DepictedItem>>
      */
-    public Flowable<List<DepictedItem>> getDepictions(final List<String> depictIDs){
-        final String ids = joinIDs(depictIDs);
+    public Flowable<List<DepictedItem>> getDepictions(final List<String> depictionsQIDs){
+        final String ids = joinQIDs(depictionsQIDs);
         return depictModel.getDepictions(ids).toFlowable();
     }
 
     /**
      * Builds a string by joining all IDs divided by "|"
      *
-     * @param depictIDs IDs of depiction ex. ["Q11023","Q1356"]
+     * @param depictionsQIDs IDs of depiction ex. ["Q11023","Q1356"]
      * @return string ex. "Q11023|Q1356"
      */
-    private String joinIDs(final List<String> depictIDs) {
-        if (depictIDs != null && !depictIDs.isEmpty()) {
-            final StringBuilder buffer = new StringBuilder(depictIDs.get(0));
+    private String joinQIDs(final List<String> depictionsQIDs) {
+        if (depictionsQIDs != null && !depictionsQIDs.isEmpty()) {
+            final StringBuilder buffer = new StringBuilder(depictionsQIDs.get(0));
 
-            if (depictIDs.size() > 1) {
-                for (int i = 1; i < depictIDs.size(); i++) {
+            if (depictionsQIDs.size() > 1) {
+                for (int i = 1; i < depictionsQIDs.size(); i++) {
                     buffer.append("|");
-                    buffer.append(depictIDs.get(i));
+                    buffer.append(depictionsQIDs.get(i));
                 }
             }
             return buffer.toString();

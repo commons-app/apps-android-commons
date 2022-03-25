@@ -36,23 +36,23 @@ class DepictEditHelper @Inject constructor (notificationHelper: NotificationHelp
     lateinit var viewUtilWrapper: ViewUtilWrapper
 
     /**
-     * Public interface to edit depicts
+     * Public interface to edit depictions
      *
      * @param context context
      * @param media media
-     * @param depicts selected depicts to be added
+     * @param depictions selected depictions to be added ex: ["Q12", "Q234"]
      * @return Single<Boolean>
      */
-    fun makeDepictEdit(
+    fun makeDepictionEdit(
         context: Context,
         media: Media,
-        depicts: List<String>
+        depictions: List<String>
     ): Observable<Boolean> {
         viewUtilWrapper.showShortToast(
             context,
-            context.getString(R.string.depict_edit_helper_make_edit_toast)
+            context.getString(R.string.depictions_edit_helper_make_edit_toast)
         )
-        return addDepiction(media, depicts)
+        return addDepiction(media, depictions)
             .flatMap { result: Boolean ->
                 Observable.just(
                     showDepictionEditNotification(context, media, result)
@@ -61,19 +61,19 @@ class DepictEditHelper @Inject constructor (notificationHelper: NotificationHelp
     }
 
     /**
-     * Appends new depicts
+     * Appends new depictions
      *
      * @param media media
-     * @param depicts to be added
+     * @param depictions to be added
      * @return Observable<Boolean>
      */
-     private fun addDepiction(media: Media, depicts: List<String>): Observable<Boolean> {
+     private fun addDepiction(media: Media, depictions: List<String>): Observable<Boolean> {
         Timber.d("thread is adding depiction %s", Thread.currentThread().name)
-        return wikidataEditService.updateDepictsProperty(media.filename, depicts)
+        return wikidataEditService.updateDepictsProperty(media.filename, depictions)
     }
 
     /**
-     * Helps to create notification about condition of editing depicts
+     * Helps to create notification about condition of editing depictions
      *
      * @param context context
      * @param media media
@@ -86,7 +86,7 @@ class DepictEditHelper @Inject constructor (notificationHelper: NotificationHelp
         result: Boolean
     ): Boolean {
         val message: String
-        var title = context.getString(R.string.depict_edit_helper_show_edit_title)
+        var title = context.getString(R.string.depictions_edit_helper_show_edit_title)
         if (result) {
             title += ": " + context.getString(R.string.category_edit_helper_show_edit_title_success)
             val depictsInMessage = StringBuilder()
@@ -99,13 +99,13 @@ class DepictEditHelper @Inject constructor (notificationHelper: NotificationHelp
                 depictsInMessage.append(",")
             }
             message = context.resources.getQuantityString(
-                R.plurals.depict_edit_helper_show_edit_message_if,
+                R.plurals.depictions_edit_helper_show_edit_message_if,
                 depictIdList.size,
                 depictsInMessage.toString()
             )
         } else {
-            title += ": " + context.getString(R.string.depict_edit_helper_show_edit_title)
-            message = context.getString(R.string.depict_edit_helper_edit_message_else)
+            title += ": " + context.getString(R.string.depictions_edit_helper_show_edit_title)
+            message = context.getString(R.string.depictions_edit_helper_edit_message_else)
         }
         val urlForFile = BuildConfig.COMMONS_URL + "/wiki/" + media.filename
         val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(urlForFile))
@@ -113,7 +113,7 @@ class DepictEditHelper @Inject constructor (notificationHelper: NotificationHelp
             context,
             title,
             message,
-            NotificationHelper.NOTIFICATION_EDIT_DEPICT,
+            NotificationHelper.NOTIFICATION_EDIT_DEPICTIONS,
             browserIntent
         )
         return result
