@@ -206,10 +206,6 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
         //check mediaDetailPage fragment is not null then we check mediaDetail.is Visible or not to avoid NullPointerException
         if (mediaDetails != null) {
             if (mediaDetails.isVisible()) {
-                if (mediaDetails.backButtonClicked()) {
-                    // mediaDetails handled the back clicked , no further action required.
-                    return true;
-                }
                 // todo add get list fragment
                 ((BookmarkFragment) getParentFragment()).setupTabLayout();
                 ArrayList<Integer> removed = mediaDetails.getRemovedItems();

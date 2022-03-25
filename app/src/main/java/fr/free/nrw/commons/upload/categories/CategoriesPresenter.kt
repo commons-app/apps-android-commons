@@ -1,15 +1,20 @@
 package fr.free.nrw.commons.upload.categories
 
 import android.text.TextUtils
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.category.CategoryEditHelper
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.proxy
 import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
@@ -28,6 +33,11 @@ class CategoriesPresenter @Inject constructor(
         private val DUMMY: CategoriesContract.View = proxy()
     }
 
+    /**
+     * Helper class for editing categories
+     */
+    @Inject
+    lateinit var categoryEditHelper: CategoryEditHelper
     var view = DUMMY
     private val compositeDisposable = CompositeDisposable()
     private val searchTerms = PublishSubject.create<String>()
@@ -43,7 +53,7 @@ class CategoriesPresenter @Inject constructor(
                     view.setCategories(null)
                 }
                 .switchMap(::searchResults)
-                .map { repository.selectedCategories + it }
+                .map { view.existingCategories + repository.selectedCategories + it }
                 .map { it.distinctBy { categoryItem -> categoryItem.name } }
                 .observeOn(mainThreadScheduler)
                 .subscribe(
@@ -101,11 +111,82 @@ class CategoriesPresenter @Inject constructor(
     }
 
     /**
+     * Take the categories selected and merge them with old categories and update those in the
+     * commons server
+     *
+     * @param media Media of edited categories
+     */
+    override fun updateCategories(media: Media) {
+        view.showProgressDialog()
+        val selectedCategories: MutableList<String> = repository.selectedCategories.map { it.name }.toMutableList()
+        if (selectedCategories.isNotEmpty()) {
+            for (category in selectedCategories){
+                if(media.categories?.contains(category) == true){
+                    selectedCategories.remove(category)
+                }
+            }
+            compositeDisposable.add(categoryEditHelper.makeCategoryEdit(
+                view.fragmentContext,
+                media,
+                selectedCategories
+            )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    media.addedCategories = selectedCategories
+                    view.goBackToPreviousScreen()
+                    view.dismissProgressDialog()
+                    updateCategoryList(media)
+                    repository.cleanup()
+                }) {
+                    Timber.e(
+                        "Failed to update categories"
+                    )
+                }
+            )
+        } else {
+            view.showNoCategorySelected()
+        }
+    }
+
+    /**
+     * Concat existing and new categories and update those in category layout of
+     * MediaDetailFragment
+     *
+     * @param media media
+     */
+    private fun updateCategoryList(media: Media) {
+        val allCategories: MutableList<String> = ArrayList<String>(media.categories)
+        if (media.addedCategories != null) {
+            // TODO this added categories logic should be removed.
+            //  It is just a short term hack. Categories should be fetch everytime they are updated.
+            // if media.getCategories contains addedCategory, then do not re-add them
+            for (addedCategory in media.addedCategories!!) {
+                if (allCategories.contains(addedCategory)) {
+                    media.addedCategories = null
+                    break
+                }
+            }
+            allCategories.addAll(media.addedCategories!!)
+        }
+        if (allCategories.isEmpty()) {
+            // Stick in a filler element.
+            allCategories.add(view.fragmentContext.getString(R.string.detail_panel_cats_none))
+        }
+
+        view.updateList(allCategories)
+    }
+
+    /**
      * ask repository to handle category clicked
      *
      * @param categoryItem
      */
     override fun onCategoryItemClicked(categoryItem: CategoryItem) {
         repository.onCategoryClicked(categoryItem)
+    }
+
+    override fun clearPreviousSelection() {
+        repository.cleanup()
     }
 }

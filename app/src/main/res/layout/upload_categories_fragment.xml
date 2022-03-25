@@ -6,18 +6,22 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:padding="@dimen/standard_gap"
+  android:background="?attr/mainBackground"
   >
+
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_above="@+id/button_divider"
     android:orientation="vertical">
+
     <LinearLayout
       android:layout_width="wrap_content"
       android:layout_height="@dimen/half_standard_height"
       android:layout_marginEnd="@dimen/standard_gap"
       android:layout_marginRight="@dimen/standard_gap"
       android:orientation="horizontal">
+
       <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
@@ -28,11 +32,12 @@
         android:textSize="@dimen/normal_text"
         android:textStyle="bold"
         tools:text="Step 1 of 15" />
+
       <ImageView
         android:id="@+id/tooltip"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:src="@drawable/mapbox_info_icon_default"/>
+        android:src="@drawable/mapbox_info_icon_default" />
     </LinearLayout>
 
     <TextView
@@ -44,14 +49,14 @@
       android:text="@string/upload_flow_all_images_in_set"
       android:textSize="@dimen/subtitle_text"
       android:visibility="visible"
-      tools:visibility="visible"/>
+      tools:visibility="visible" />
 
     <FrameLayout
       android:id="@+id/category_search_layout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="@dimen/standard_gap"
-      >
+      android:layout_marginTop="@dimen/standard_gap">
+
       <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_container_search"
         android:layout_width="match_parent"
@@ -73,13 +78,13 @@
         style="?android:progressBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|end"
         android:layout_marginEnd="@dimen/tiny_gap"
         android:layout_marginRight="@dimen/tiny_gap"
-        android:layout_gravity="center_vertical|end"
         android:indeterminate="true"
         android:indeterminateOnly="true"
         android:visibility="gone"
-        tools:visibility="visible"/>
+        tools:visibility="visible" />
     </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -87,7 +92,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_above="@+id/button_divider"
-      android:layout_below="@id/category_search_layout"/>
+      android:layout_below="@id/category_search_layout" />
 
   </LinearLayout>
 

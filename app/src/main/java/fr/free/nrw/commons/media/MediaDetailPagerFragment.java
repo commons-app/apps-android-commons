@@ -96,8 +96,8 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
     @Override
     public View onCreateView(LayoutInflater inflater,
-                             ViewGroup container,
-                             Bundle savedInstanceState) {
+        ViewGroup container,
+        Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_media_detail_pager, container, false);
         ButterKnife.bind(this,view);
         pager.addOnPageChangeListener(this);
@@ -269,9 +269,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     }
                     // Initialize bookmark object
                     bookmark = new Bookmark(
-                            m.getFilename(),
-                            m.getAuthor(),
-                            BookmarkPicturesContentProvider.uriForName(m.getFilename())
+                        m.getFilename(),
+                        m.getAuthor(),
+                        BookmarkPicturesContentProvider.uriForName(m.getFilename())
                     );
                     updateBookmarkState(menu.findItem(R.id.menu_bookmark_current_image));
                     final Integer contributionState = provider.getContributionStateAt(position);
@@ -281,15 +281,15 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                             case Contribution.STATE_IN_PROGRESS:
                             case Contribution.STATE_QUEUED:
                                 menu.findItem(R.id.menu_browser_current_image).setEnabled(false)
-                                        .setVisible(false);
+                                    .setVisible(false);
                                 menu.findItem(R.id.menu_share_current_image).setEnabled(false)
-                                        .setVisible(false);
+                                    .setVisible(false);
                                 menu.findItem(R.id.menu_download_current_image).setEnabled(false)
-                                        .setVisible(false);
+                                    .setVisible(false);
                                 menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false)
-                                        .setVisible(false);
+                                    .setVisible(false);
                                 menu.findItem(R.id.menu_set_as_wallpaper).setEnabled(false)
-                                        .setVisible(false);
+                                    .setVisible(false);
                                 break;
                             case Contribution.STATE_COMPLETED:
                                 // Default set of menu items works fine. Treat same as regular media object
@@ -298,15 +298,15 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     }
                 } else {
                     menu.findItem(R.id.menu_browser_current_image).setEnabled(false)
-                            .setVisible(false);
+                        .setVisible(false);
                     menu.findItem(R.id.menu_share_current_image).setEnabled(false)
-                            .setVisible(false);
+                        .setVisible(false);
                     menu.findItem(R.id.menu_download_current_image).setEnabled(false)
-                            .setVisible(false);
+                        .setVisible(false);
                     menu.findItem(R.id.menu_bookmark_current_image).setEnabled(false)
-                            .setVisible(false);
+                        .setVisible(false);
                     menu.findItem(R.id.menu_set_as_wallpaper).setEnabled(false)
-                            .setVisible(false);
+                        .setVisible(false);
                 }
 
                 if (!sessionManager.isUserLoggedIn()) {
@@ -402,17 +402,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
      */
     @Override
     public void nominatingForDeletion(int index) {
-      provider.refreshNominatedMedia(index);
-    }
-  
-    /**
-     * backButtonClicked is called on a back event in the media details pager.
-     * returns true after closing the categoryEditContainer if open, implying that event was handled.
-     * else returns false
-     * @return
-     */
-    public boolean backButtonClicked(){
-        return ((MediaDetailFragment)(adapter.getCurrentFragment())).hideCategoryEditContainerIfOpen();
+        provider.refreshNominatedMedia(index);
     }
 
     public interface MediaDetailProvider {

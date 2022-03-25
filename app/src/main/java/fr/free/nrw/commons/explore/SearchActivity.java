@@ -43,7 +43,7 @@ import timber.log.Timber;
  */
 
 public class SearchActivity extends BaseActivity
-        implements MediaDetailPagerFragment.MediaDetailProvider, CategoryImagesCallback {
+    implements MediaDetailPagerFragment.MediaDetailProvider, CategoryImagesCallback {
 
     @BindView(R.id.toolbar_search) Toolbar toolbar;
     @BindView(R.id.searchHistoryContainer) FrameLayout searchHistoryContainer;
@@ -114,40 +114,39 @@ public class SearchActivity extends BaseActivity
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
         compositeDisposable.add(RxSearchView.queryTextChanges(searchView)
-                .takeUntil(RxView.detaches(searchView))
-                .debounce(500, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::handleSearch, Timber::e
-                ));
-    }
+            .takeUntil(RxView.detaches(searchView))
+            .debounce(500, TimeUnit.MILLISECONDS)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(query -> {
+                    //update image list
+                    if (!TextUtils.isEmpty(query)) {
+                        saveRecentSearch(query.toString());
+                        viewPager.setVisibility(View.VISIBLE);
+                        tabLayout.setVisibility(View.VISIBLE);
+                        searchHistoryContainer.setVisibility(View.GONE);
 
-    private void handleSearch(final CharSequence query) {
-        if (!TextUtils.isEmpty(query)) {
-            saveRecentSearch(query.toString());
-            viewPager.setVisibility(View.VISIBLE);
-            tabLayout.setVisibility(View.VISIBLE);
-            searchHistoryContainer.setVisibility(View.GONE);
+                        if (FragmentUtils.isFragmentUIActive(searchDepictionsFragment)) {
+                            searchDepictionsFragment.onQueryUpdated(query.toString());
+                        }
 
-            if (FragmentUtils.isFragmentUIActive(searchDepictionsFragment)) {
-                searchDepictionsFragment.onQueryUpdated(query.toString());
-            }
+                        if (FragmentUtils.isFragmentUIActive(searchMediaFragment)) {
+                            searchMediaFragment.onQueryUpdated(query.toString());
+                        }
 
-            if (FragmentUtils.isFragmentUIActive(searchMediaFragment)) {
-                searchMediaFragment.onQueryUpdated(query.toString());
-            }
+                        if (FragmentUtils.isFragmentUIActive(searchCategoryFragment)) {
+                            searchCategoryFragment.onQueryUpdated(query.toString());
+                        }
 
-            if (FragmentUtils.isFragmentUIActive(searchCategoryFragment)) {
-                searchCategoryFragment.onQueryUpdated(query.toString());
-            }
-
-        } else {
-            //Open RecentSearchesFragment
-            recentSearchesFragment.updateRecentSearches();
-            viewPager.setVisibility(View.GONE);
-            tabLayout.setVisibility(View.GONE);
-            setSearchHistoryFragment();
-            searchHistoryContainer.setVisibility(View.VISIBLE);
-        }
+                    } else {
+                        //Open RecentSearchesFragment
+                        recentSearchesFragment.updateRecentSearches();
+                        viewPager.setVisibility(View.GONE);
+                        tabLayout.setVisibility(View.GONE);
+                        setSearchHistoryFragment();
+                        searchHistoryContainer.setVisibility(View.VISIBLE);
+                    }
+                }, Timber::e
+            ));
     }
 
     private void saveRecentSearch(@NonNull final String query) {
@@ -176,7 +175,7 @@ public class SearchActivity extends BaseActivity
      */
     @Override
     public int getTotalMediaCount() {
-       return searchMediaFragment.getTotalMediaCount();
+        return searchMediaFragment.getTotalMediaCount();
     }
 
     @Override
@@ -224,11 +223,11 @@ public class SearchActivity extends BaseActivity
             mediaDetails = new MediaDetailPagerFragment(false, true);
             FragmentManager supportFragmentManager = getSupportFragmentManager();
             supportFragmentManager
-                    .beginTransaction()
-                    .hide(supportFragmentManager.getFragments().get(supportFragmentManager.getBackStackEntryCount()))
-                    .add(R.id.mediaContainer, mediaDetails)
-                    .addToBackStack(null)
-                    .commit();
+                .beginTransaction()
+                .hide(supportFragmentManager.getFragments().get(supportFragmentManager.getBackStackEntryCount()))
+                .add(R.id.mediaContainer, mediaDetails)
+                .addToBackStack(null)
+                .commit();
             // Reason for using hide, add instead of replace is to maintain scroll position after
             // coming back to the search activity. See https://github.com/commons-app/apps-android-commons/issues/1631
             // https://stackoverflow.com/questions/11353075/how-can-i-maintain-fragment-state-when-added-to-the-back-stack/19022550#19022550
@@ -259,11 +258,6 @@ public class SearchActivity extends BaseActivity
     @Override
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() == 1){
-
-            // the back press is handled by the mediaDetails , no further action required.
-            if(mediaDetails.backButtonClicked()){
-                return;
-            }
 
             // back to search so show search toolbar and hide navigation toolbar
             searchView.setVisibility(View.VISIBLE);//set the searchview

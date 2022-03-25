@@ -216,12 +216,6 @@ public class CategoryDetailsActivity extends BaseActivity
     @Override
     public void onBackPressed() {
         if (supportFragmentManager.getBackStackEntryCount() == 1){
-
-            // the back press is handled by the mediaDetails , no further action required.
-            if(mediaDetails.backButtonClicked()){
-                return;
-            }
-
             tabLayout.setVisibility(View.VISIBLE);
             viewPager.setVisibility(View.VISIBLE);
             mediaContainer.setVisibility(View.GONE);

@@ -156,10 +156,10 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
             mediaDetailPagerFragment = new MediaDetailPagerFragment(false, true);
             FragmentManager supportFragmentManager = getSupportFragmentManager();
             supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.mediaContainer, mediaDetailPagerFragment)
-                    .addToBackStack(null)
-                    .commit();
+                .beginTransaction()
+                .replace(R.id.mediaContainer, mediaDetailPagerFragment)
+                .addToBackStack(null)
+                .commit();
             supportFragmentManager.executePendingTransactions();
         }
         mediaDetailPagerFragment.showImage(position);
@@ -183,12 +183,6 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
     @Override
     public void onBackPressed() {
         if (supportFragmentManager.getBackStackEntryCount() == 1){
-
-            // back pressed is handled by the mediaDetails , no further action required.
-            if(mediaDetailPagerFragment.backButtonClicked()){
-                return;
-            }
-
             tabLayout.setVisibility(View.VISIBLE);
             viewPager.setVisibility(View.VISIBLE);
             mediaContainer.setVisibility(View.GONE);

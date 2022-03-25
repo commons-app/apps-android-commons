@@ -1,38 +1,33 @@
 package fr.free.nrw.commons.upload.categories
 
-import android.view.View
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
-import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.databinding.LayoutUploadCategoriesItemBinding
 
-fun uploadCategoryDelegate(onCategoryClicked: (CategoryItem) -> Unit) =
-    adapterDelegateViewBinding<CategoryItem, CategoryItem,
-            LayoutUploadCategoriesItemBinding>({ layoutInflater, root ->
+fun uploadCategoryDelegate(
+    onCategoryClicked: (CategoryItem) -> Unit,
+    existingCategories: List<String>
+) =
+    adapterDelegateViewBinding<CategoryItem, CategoryItem, LayoutUploadCategoriesItemBinding>({ layoutInflater, root ->
         LayoutUploadCategoriesItemBinding.inflate(layoutInflater, root, false)
     }) {
-        val onClickListener = { _: View? ->
-            item.isSelected = !item.isSelected
-            binding.uploadCategoryCheckbox.isChecked = item.isSelected
-            onCategoryClicked(item)
-        }
 
-        binding.root.setOnClickListener(onClickListener)
-        binding.uploadCategoryCheckbox.setOnClickListener(onClickListener)
-
-        bind {
-            binding.uploadCategoryCheckbox.isChecked = item.isSelected
-            binding.categoryLabel.text = item.name
-            if(item.thumbnail != "null") {
-                binding.categoryImage.setImageURI(item.thumbnail)
+        binding.root.setOnClickListener {
+            if(existingCategories.contains(item.name)){
+                binding.uploadCategoryCheckbox.isChecked = true
             } else {
-                binding.categoryImage.setActualImageResource(R.drawable.commons)
+                item.isSelected = !item.isSelected
+                binding.uploadCategoryCheckbox.isChecked = item.isSelected
+                onCategoryClicked(item)
             }
+        }
+        bind {
 
-            if(item.description != "null") {
-                binding.categoryDescription.text = item.description
-            } else {
-                binding.categoryDescription.text = ""
+
+            binding.uploadCategoryCheckbox.isChecked = item.isSelected
+            binding.uploadCategoryCheckbox.text = item.name
+            if(existingCategories.contains(item.name)){
+                binding.uploadCategoryCheckbox.isChecked = true
             }
         }
     }
