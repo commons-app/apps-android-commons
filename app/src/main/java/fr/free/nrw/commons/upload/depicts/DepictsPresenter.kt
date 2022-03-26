@@ -90,8 +90,7 @@ class DepictsPresenter @Inject constructor(
         if (media == null) {
             return repository.searchAllEntities(querystring)
                 .subscribeOn(ioScheduler)
-                .map { repository.selectedDepictions + it + recentDepictedItemList +
-                        controller.loadFavoritesItems() }
+                .map { repository.selectedDepictions + it + recentDepictedItemList + controller.loadFavoritesItems() }
                 .map { it.filterNot { item -> WikidataDisambiguationItems.isDisambiguationItem(item.instanceOfs) } }
                 .map { it.distinctBy(DepictedItem::id) }
 
@@ -108,8 +107,7 @@ class DepictsPresenter @Inject constructor(
                 }
             )
                 .subscribeOn(ioScheduler)
-                .map { repository.selectedDepictions + it + recentDepictedItemList +
-                        controller.loadFavoritesItems() }
+                .map { repository.selectedDepictions + it + recentDepictedItemList + controller.loadFavoritesItems() }
                 .map { it.filterNot { item -> WikidataDisambiguationItems.isDisambiguationItem(item.instanceOfs) } }
                 .map { it.distinctBy(DepictedItem::id) }
 
