@@ -168,10 +168,7 @@ public class ReviewController {
                         message = context.getString(R.string.send_thank_failure_message, media.getDisplayTitle());
                     }
 
-                    View view = activity.findViewById(R.id.reviewActivityContainer);
-                    Snackbar snackbar = Snackbar.make(view,message,Snackbar.LENGTH_LONG);
-                    snackbar.show();
-
+                    ViewUtil.showShortToast(context,message);
                 }, Timber::e);
     }
 
