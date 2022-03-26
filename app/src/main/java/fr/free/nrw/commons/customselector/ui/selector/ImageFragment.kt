@@ -20,6 +20,7 @@ import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.theme.BaseActivity
+import kotlinx.android.synthetic.main.fragment_custom_selector.*
 import kotlinx.android.synthetic.main.fragment_custom_selector.view.*
 import java.io.File
 import java.io.FileInputStream
@@ -152,6 +153,9 @@ class ImageFragment: CommonsDaggerSupportFragment() {
                 }
             }
             else{
+                empty_text?.let {
+                    it.visibility = View.VISIBLE
+                }
                 selectorRV?.let{
                     it.visibility = View.GONE
                 }

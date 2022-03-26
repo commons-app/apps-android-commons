@@ -1,10 +1,11 @@
 package fr.free.nrw.commons.upload
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.jraska.livedata.test
+import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import depictedItem
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.DepictsContract
@@ -16,7 +17,10 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
+import org.powermock.reflect.Whitebox
+import java.lang.reflect.Method
 
 
 class DepictsPresenterTest {
@@ -36,6 +40,9 @@ class DepictsPresenterTest {
 
     @Mock
     lateinit var depictsClient: DepictsClient
+
+    @Mock
+    private lateinit var media: Media
 
     /**
      * initial setup
@@ -113,7 +120,7 @@ class DepictsPresenterTest {
     fun `onDepictItemClicked calls repository`() {
         val depictedItem = depictedItem()
         depictsPresenter.onDepictItemClicked(depictedItem)
-        verify(repository).onDepictItemClicked(depictedItem)
+        verify(repository).onDepictItemClicked(depictedItem, null)
     }
 
     @Test
@@ -128,5 +135,64 @@ class DepictsPresenterTest {
         whenever(repository.selectedDepictions).thenReturn(emptyList())
         depictsPresenter.verifyDepictions()
         verify(view).noDepictionSelected()
+    }
+
+    @Test
+    fun testOnAttachViewWithMedia() {
+        depictsPresenter.onAttachViewWithMedia(view, Mockito.mock(Media::class.java))
+    }
+
+    @Test
+    fun testUpdateDepicts() {
+        depictsPresenter.updateDepictions(Mockito.mock(Media::class.java))
+    }
+
+    @Test
+    fun `Test searchResults when media is null`() {
+        whenever(repository.searchAllEntities("querystring"))
+            .thenReturn(Flowable.just(listOf(depictedItem())))
+        val method: Method = DepictsPresenter::class.java.getDeclaredMethod(
+            "searchResults",
+            String::class.java
+        )
+        method.isAccessible = true
+        method.invoke(depictsPresenter, "querystring")
+        verify(repository, times(1)).searchAllEntities("querystring")
+    }
+
+    @Test
+    fun `Test searchResults when media is not null`() {
+        Whitebox.setInternalState(depictsPresenter, "media", media)
+        whenever(repository.getDepictions(repository.selectedExistingDepictions))
+            .thenReturn(Flowable.just(listOf(depictedItem())))
+        whenever(repository.searchAllEntities("querystring"))
+            .thenReturn(Flowable.just(listOf(depictedItem())))
+        val method: Method = DepictsPresenter::class.java.getDeclaredMethod(
+            "searchResults",
+            String::class.java
+        )
+        method.isAccessible = true
+        method.invoke(depictsPresenter, "querystring")
+        verify(repository, times(1)).searchAllEntities("querystring")
+    }
+
+    @Test
+    fun testSelectNewDepictions() {
+        Whitebox.setInternalState(depictsPresenter, "media", media)
+        val method: Method = DepictsPresenter::class.java.getDeclaredMethod(
+            "selectNewDepictions",
+            List::class.java
+        )
+        method.isAccessible = true
+        method.invoke(depictsPresenter, listOf(depictedItem()))
+    }
+
+    @Test
+    fun testClearPreviousSelection() {
+        val method: Method = DepictsPresenter::class.java.getDeclaredMethod(
+            "clearPreviousSelection"
+        )
+        method.isAccessible = true
+        method.invoke(depictsPresenter)
     }
 }

@@ -289,6 +289,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Évaluez-nous</string>
   <string name="about_faq">FAQ</string>
+  <string name="user_guide">Guide de l’utilisateur</string>
   <string name="welcome_skip_button">Sauter le tutoriel</string>
   <string name="no_internet">Internet indisponible</string>
   <string name="error_notifications">Erreur lors de la récupération des notifications</string>
@@ -316,6 +317,7 @@
   <string name="title_activity_search">Rechercher</string>
   <string name="search_recent_header">Recherches récentes :</string>
   <string name="provider_searches">Requêtes de recherches récentes</string>
+  <string name="provider_recent_languages">Demandes de langue récentes</string>
   <string name="error_loading_categories">Erreur durant le chargement des catégories.</string>
   <string name="error_loading_depictions">Erreur lors du chargement des éléments représentés.</string>
   <string name="search_tab_title_media">Média</string>
@@ -520,6 +522,13 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Impossible d’ajouter des catégories.</string>
   <string name="category_edit_button_text">Mettre à jour les catégories</string>
+  <string name="depictions_edit_helper_make_edit_toast">Tentative de mise à jour des éléments représentés.</string>
+  <string name="depictions_edit_helper_show_edit_title">Modifier les éléments représentés</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">L’élément représenté %1$s est ajouté.</item>
+    <item quantity="other">Les éléments représentés %$s sont ajoutés.</item>
+  </plurals>
+  <string name="depictions_edit_helper_edit_message_else">Impossible d’ajouter des éléments représentés.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Essai de mise à jour des coordonnées.</string>
   <string name="coordinates_edit_helper_show_edit_title">Mise à jour des coordonnées</string>
   <string name="description_edit_helper_show_edit_title">Mise à jour de la description</string>
@@ -623,7 +632,7 @@
   <string name="limited_connection_explanation">Vous avez activé le mode de connexion limitée. Tous les téléversements sont suspendus et reprendront une fois ce mode désactivé.</string>
   <string name="limited_connection_is_on">Le mode de connexion limitée est actif.</string>
   <string name="media_details_tooltip">Veuillez écrire un court résumé qui décrit ce que montre votre image. Dans la description, dites ce qui rend l’image intéressante ou typique ou rare et expliquez-en le contexte, qu’il soit visible ou pas. Utilisez une terminologie aussi exacte que possible.</string>
-  <string name="depicts_tooltip">Veuillez trouver et sélectionner tous les concepts dépeints par cette image. Soyez aussi spécifique que possible. Si l’image dépeint plusieurs éléments, choisissez-les tous de façon raisonnée. Ne choisissez pas d’étiquette générique si des étiquettes plus spécifiques sont disponibles.</string>
+  <string name="depicts_tooltip">Veuillez trouver et sélectionner tous les concepts dépeints par cette image. Soyez aussi spécifique que possible. Si l’image dépeint plusieurs éléments, choisissez-les tous de façon raisonnée. Ne choisissez pas des étiquettes génériques si des étiquettes plus spécifiques sont disponibles.</string>
   <string name="categories_tooltip">Veuillez sélectionner les catégories appropriées. À l’inverse des éléments représentés, les catégories ne sont qu’en anglais.</string>
   <string name="license_tooltip">Communs rend vos images réutilisables et adaptées à chacun. Voulez-vous renoncer à tous les droits ? Voulez-vous être crédité pour cela ? Voulez-vous que les adaptations utilisent la même licence ?</string>
   <string name="depicts_step_title">Éléments représentés</string>
@@ -667,6 +676,7 @@
   <string name="contributions_of_user">Contributions de l’utilisateur : %s</string>
   <string name="achievements_of_user">Réussites de l’utilisateur : %s</string>
   <string name="menu_view_user_page">Afficher la page utilisateur</string>
+  <string name="edit_depictions">Modifier les descriptions</string>
   <string name="advanced_options">Options avancées</string>
   <string name="advanced_query_info_text">Vous pouvez personnaliser la requête de proximité. Si vous obtenez des erreurs, réinitialisez et appliquez.</string>
   <string name="apply">Appliquer</string>
@@ -676,6 +686,18 @@
   <string name="no_location_found_message">Pourquoi ne pas ajouter le lieu où cette image a été trouvée ?\nLes données de lieu aident les contributeurs de wikis à trouver votre image, ce qui la rend beaucoup plus utile.\nMerci !</string>
   <string name="add_location">Ajouter un lieu</string>
   <string name="feedback_sharing_data_alert">Veuillez supprimer de ce courriel toute information que vous n’aimeriez pas diffuser publiquement. Également, veuillez prendre conscience du fait que votre adresse de messagerie avec laquelle vous publiez, ainsi que le nom et l’image de profil associés, seront visibles publiquement.</string>
-  <string name="achievements_unavailable_beta">Les réalisations ne sont disponibles que dans la version de production.</string>
-  <string name="leaderboard_unavailable_beta">Le classement n’est disponible que dans la version de production.</string>
+  <string name="achievements_unavailable_beta">Les réalisations ne sont disponibles que dans la version de production, veuillez consulter la documentation du développeur.</string>
+  <string name="leaderboard_unavailable_beta">Le classement n’est disponible que dans la version de production, veuillez consulter la documentation du développeur.</string>
+  <string name="copyright_popup">Veuillez ne téléverser que des images que vous avez créées vous-même. Ceux qui téléversent des images soumises aux droits d’auteur seront bloqués. Ceci s’applique également à la version bêta. Merci pour votre test de l’application !</string>
+  <string name="select_feedback_data_choice">Veuillez désélectionner toute information que vous ne vous sentez pas à l’aise de partager publiquement.</string>
+  <string name="api_level">Niveau de l’API</string>
+  <string name="android_version">Version d’Android</string>
+  <string name="device_manufacturer">Fabricant de l’appareil</string>
+  <string name="device_model">Modèle de l’appareil</string>
+  <string name="device_name">Nom de l’appareil</string>
+  <string name="network_type">Type de réseau</string>
+  <string name="thanks_feedback">Merci pour avoir donné votre avis</string>
+  <string name="error_feedback">Erreur lors de l’envoi de l’avis</string>
+  <string name="enter_description">Quel est votre avis ?</string>
+  <string name="your_feedback">Votre avis</string>
 </resources>

@@ -85,8 +85,6 @@ class ContributionBoundaryCallbackTest {
         whenever(mediaClient.getMediaListForUser(anyString()))
             .thenReturn(Single.just(listOf(media())))
         contributionBoundaryCallback.onItemAtFrontLoaded(mock(Contribution::class.java))
-        verify(repository).save(anyList());
-        verify(mediaClient).getMediaListForUser(anyString());
     }
 
     @Test

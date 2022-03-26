@@ -85,7 +85,7 @@
   <string name="upload_progress_notification_title_start">Dosya yükleniyor: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s yükleniyor</string>
   <string name="upload_progress_notification_title_finishing">%1$s yüklemesi bitiriliyor</string>
-  <string name="upload_failed_notification_title" fuzzy="true">%1$s dosyasının yüklemesi başarısız oldu</string>
+  <string name="upload_failed_notification_title">%1$s yüklemesi başarısız oldu</string>
   <string name="upload_paused_notification_title">%1$s yükleme duraklatıldı</string>
   <string name="upload_failed_notification_subtitle">Görüntülemek için tıklayın</string>
   <string name="upload_paused_notification_subtitle">Görüntülemek için tıklayın</string>
@@ -343,6 +343,7 @@
   <string name="error_fetching_nearby_monuments">Yakındaki anıtlar getirilirken hata oluştu.</string>
   <string name="no_recent_searches">Son arama yok</string>
   <string name="delete_recent_searches_dialog">Arama geçmişinizi silmek istediğinizden emin misiniz?</string>
+  <string name="cancel_upload_dialog">Bu yüklemeyi iptal etmek istediğinize emim misiniz?</string>
   <string name="delete_search_dialog">Bu aramayı silmek istiyor musunuz?</string>
   <string name="search_history_deleted">Arama geçmişi silindi</string>
   <string name="nominate_delete">Silinmeye Aday Göster</string>
@@ -608,6 +609,8 @@
   <string name="quality_images_info">Kaliteli resimler, belirli kalite standartlarını (doğası gereği çoğunlukla teknik olan) karşılayan ve Wikimedia projeleri için değerli olan diyagramlar veya fotoğraflardır.</string>
   <string name="resuming_upload">Yüklemeye devam ediliyor…</string>
   <string name="pausing_upload">Yükleme duraklatılıyor…</string>
+  <string name="cancelling_upload">Yükleme iptal ediliyor…</string>
+  <string name="cancel_upload">Yüklemeyi İptal Et</string>
   <string name="limited_connection_explanation">Sınırlı bağlantı modunu etkinleştirdiniz. Tüm yüklemeler duraklatılır ve bu modu devre dışı bıraktığınızda kaldığı yerden devam eder.</string>
   <string name="limited_connection_is_on">Sınırlı bağlantı modu açık.</string>
   <string name="media_details_tooltip">Lütfen resminizin ne gösterdiğini anlatan kısa bir başlık yazın. Açıklamada, resmi neyin ilginç veya tipik veya nadir kıldığını söyleyin ve bağlamı görünür olsun veya olmasın açıklayın. Mümkün olduğu kadar kesin terminoloji kullanın.</string>

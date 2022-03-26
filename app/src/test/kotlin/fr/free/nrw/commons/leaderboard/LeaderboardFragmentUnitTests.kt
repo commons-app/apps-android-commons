@@ -2,6 +2,7 @@ package fr.free.nrw.commons.leaderboard
 
 import android.accounts.Account
 import android.content.Context
+import android.os.Looper.getMainLooper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,11 +27,14 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
+import org.mockito.Mockito.doReturn
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
+import org.robolectric.Shadows
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowToast
@@ -222,6 +226,7 @@ class LeaderboardFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testMenuVisibilityOverrideVisibleWithContext() {
+        shadowOf(getMainLooper()).idle()
         `when`(parentView.context).thenReturn(context)
         val method: Method = LeaderboardFragment::class.java.getDeclaredMethod(
             "setMenuVisibility",
@@ -229,7 +234,17 @@ class LeaderboardFragmentUnitTests {
         )
         method.isAccessible = true
         method.invoke(fragment, true)
-        Assert.assertEquals(ShadowToast.getTextOfLatestToast().toString(), context.getString(R.string.leaderboard_unavailable_beta))
+        if(isBetaFlavour) {
+            Assert.assertEquals(
+                ShadowToast.getTextOfLatestToast().toString(),
+                context.getString(R.string.leaderboard_unavailable_beta)
+            )
+        } else {
+            Assert.assertNull(
+                ShadowToast.getTextOfLatestToast()
+            )
+        }
+
     }
 
 }

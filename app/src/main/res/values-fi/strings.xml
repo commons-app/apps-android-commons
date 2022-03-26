@@ -2,6 +2,7 @@
 <!-- Authors:
 * 01miki10
 * 3Johnny
+* 4shadoww
 * Alluk.
 * Crt
 * FinlandMan
@@ -9,6 +10,7 @@
 * Kyykaarme
 * MITO
 * Maantietäjä
+* Moottori
 * Nike
 * Olli
 * Pahkiqaz
@@ -76,7 +78,7 @@
   <string name="upload_progress_notification_title_start">Kopioidaan palvelimelle: %s</string>
   <string name="upload_progress_notification_title_in_progress">Tallennetaan %1$s</string>
   <string name="upload_progress_notification_title_finishing">%1$s tallennettu</string>
-  <string name="upload_failed_notification_title" fuzzy="true">Tiedoston %1$s tallentaminen epäonnistui</string>
+  <string name="upload_failed_notification_title">Tiedoston %1$s tallentaminen epäonnistui</string>
   <string name="upload_paused_notification_title">Tiedoston %1$s tallentaminen pysäytetty</string>
   <string name="upload_failed_notification_subtitle">Napauta katsoaksesi</string>
   <string name="upload_paused_notification_subtitle">Paina nähdäksesi</string>
@@ -122,7 +124,7 @@
   <string name="title_activity_category_details">Luokka</string>
   <string name="title_activity_review">Vertaisarviointi</string>
   <string name="menu_about">Tietoja</string>
-  <string name="about_license">Wikimedia Commons -sovellus on vapaan lähdekoodin ohjelmisto, joka on luotu ja ylläpidetty Wikimedia-yhteisön apurahoilla ja vapaaehtoisilla. Wikimedia Foundation ei ole sitoutunut sovelluksen luomiseen, kehittämiseen tai ylläpitoon.</string>
+  <string name="about_license">Wikimedia Commons -sovellus on avoimen lähdekoodin ohjelmisto, joka on luotu ja ylläpidetty Wikimedia-yhteisön apurahoilla ja vapaaehtoisilla. Wikimedia Foundation ei ollut mukana sovelluksen luomisessa, eikä se vastaa kehittämisestä tai ylläpidosta.</string>
   <string name="about_improve">Luo uusi &lt;a href=\"%1$s\"&gt;GitHub-issue&lt;/a&gt; bugiraporteille ja ehdotuksille.</string>
   <string name="about_privacy_policy">Tietosuojakäytäntö</string>
   <string name="about_credits">Tekijät</string>

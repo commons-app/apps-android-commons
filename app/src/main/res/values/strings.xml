@@ -262,6 +262,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Rate us</string>
   <string name="about_faq">FAQ</string>
+  <string name="user_guide">User Guide</string>
   <string name="welcome_skip_button">Skip Tutorial</string>
   <string name="no_internet">Internet unavailable</string>
   <string name="error_notifications">Error fetching notifications</string>
@@ -292,6 +293,7 @@
   <string name="title_activity_search">Search</string>
   <string name="search_recent_header">Recent searches:</string>
   <string name="provider_searches">Recently searched queries</string>
+  <string name="provider_recent_languages">Recent language queries</string>
   <string name="error_loading_categories">Error occurred while loading categories.</string>
   <string name="error_loading_depictions">Error occurred while loading depictions.</string>
   <string name="search_tab_title_media">Media</string>
@@ -454,7 +456,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="review_thanks_no_button_text">Yes, why not</string>
   <string name="skip_image_explanation">Clicking this button will give you another recently uploaded image from Wikimedia Commons</string>
 
-  <string name="review_image_explanation">You can review images and improve the quality of Wikimedia Commons.\n The four parameters of review are: \n - Is this image in-scope? \n - Does this image follow the rules of copyright? \n - Is this image correctly categorized? \n - If all goes well you can also thank the contributor.</string>
+  <string name="review_image_explanation">You can review images to improve the quality of Wikimedia Commons.\nThe three parameters of review are:\n\n- Is this image in-scope?\nWhen you tap No (out of scope), you are adding a deletion nomination template to this image.\n\n- Does this image follow the rules of copyright?\nWhen you tap No (does not follow the rules of copyright), you are adding a deletion nomination template to this image.\n\n- Is this image correctly categorized?\nWhen you tap No (not correctly categorized), you are adding a categorization request template to this image.\n\nIf everything is fine, no template is added to the image, and you get the opportunity thank the contributor.</string>
 
   <string name="no_image">No images used</string>
   <string name="no_image_reverted">No images reverted</string>
@@ -522,6 +524,14 @@ Upload your first media by tapping on the add button.</string>
   </plurals>
   <string name="category_edit_helper_edit_message_else">Could not add categories.</string>
   <string name="category_edit_button_text">Update categories</string>
+
+  <string name="depictions_edit_helper_make_edit_toast">Trying to update depictions.</string>
+  <string name="depictions_edit_helper_show_edit_title">Edit depictions</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">Depiction %1$s is added.</item>
+    <item quantity="other">Depictions %1$s are added.</item>
+  </plurals>
+  <string name="depictions_edit_helper_edit_message_else">Could not add depictions.</string>
 
   <string name="coordinates_edit_helper_make_edit_toast">Trying to update coordinates.</string>
   <string name="coordinates_edit_helper_show_edit_title">Coordinates update</string>
@@ -680,6 +690,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="contributions_of_user">Contributions of User: %s</string>
   <string name="achievements_of_user">Achievements of User: %s</string>
   <string name="menu_view_user_page">View user page</string>
+  <string name="edit_depictions">Edit depictions</string>
   <string name="advanced_options">Advanced Options</string>
   <string name="advanced_query_info_text">You can customize the Nearby query. If you get errors, reset and apply.</string>
   <string name="apply">Apply</string>
@@ -689,6 +700,18 @@ Upload your first media by tapping on the add button.</string>
   <string name="no_location_found_message">How about adding the place where this image was taken?\nLocation data helps Wiki editors find your picture, making it much more useful.\nThank you!</string>
   <string name="add_location">Add location</string>
   <string name="feedback_sharing_data_alert">Please remove from this email any information that you are not comfortable sharing publicly. Also, please be aware that your email address with which you are posting, and the associated name and profile picture, will be visible publicly.</string>
-  <string name="achievements_unavailable_beta">Achievements are only available in the prod flavor.</string>
-  <string name="leaderboard_unavailable_beta">The leaderboard is only available in the prod flavor.</string>
+  <string name="achievements_unavailable_beta">Achievements are only available in the prod flavor, please check the developer documentation.</string>
+  <string name="leaderboard_unavailable_beta">The leaderboard is only available in the prod flavor, please check the developer documentation.</string>
+  <string name="copyright_popup">Please only upload pictures you have taken by yourself. Uploaders of copyrighted images will be blocked. This applies to the beta flavor too. Thank you for testing the app!</string>
+  <string name="select_feedback_data_choice">Please deselect any information that you are not comfortable sharing publicly.</string>
+  <string name="api_level">API level</string>
+  <string name="android_version">Android version</string>
+  <string name="device_manufacturer">Device manufacturer</string>
+  <string name="device_model">Device model</string>
+  <string name="device_name">Device name</string>
+  <string name="network_type">Network type</string>
+  <string name="thanks_feedback">Thanks for giving feedback</string>
+  <string name="error_feedback">Error while sending feedback</string>
+  <string name="enter_description">What is your feedback?</string>
+  <string name="your_feedback">Your feedback</string>
 </resources>
