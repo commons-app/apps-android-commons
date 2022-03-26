@@ -2,6 +2,7 @@
 <!-- Authors:
 * Justincheng12345
 * Kly
+* Koala0090
 * LNDDYL
 * Liuxinyu970226
 * Madhurgupta10
@@ -19,8 +20,8 @@
 -->
 <resources>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">正在上載 %1$d 個檔案</item>
-    <item quantity="other">正在上載 %1$d 個檔案</item>
+    <item quantity="one">正在上傳%1$d個檔案</item>
+    <item quantity="other">正在上傳%1$d個檔案</item>
   </plurals>
   <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
@@ -28,30 +29,30 @@
   </plurals>
   <string name="starting_uploads">開始上傳</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">正在處理 $d 個上傳</item>
-    <item quantity="other">正在處理 $d 個上傳</item>
+    <item quantity="one">正在處理%d個上傳</item>
+    <item quantity="other">正在處理%d個上傳</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">$d 個上傳</item>
-    <item quantity="other">$d 個上傳</item>
+    <item quantity="one">%d個上傳</item>
+    <item quantity="other">%d個上傳</item>
   </plurals>
   <plurals name="share_license_summary">
-    <item quantity="one">此圖片會按 %1$s 協議授權上載</item>
-    <item quantity="other">這些圖片會按 %1$s 協議授權上載</item>
+    <item quantity="one">此圖片會按 %1$s 協議授權上傳</item>
+    <item quantity="other">這些圖片會按 %1$s 協議授權上傳</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d 個上傳</item>
     <item quantity="other">%1$d 個上傳</item>
   </plurals>
   <plurals name="receiving_shared_content">
-    <item quantity="one">接收分享內容。處理圖片可能花費的時間依據圖片大小與您的裝置</item>
-    <item quantity="other">接收分享內容。處理圖片可能花費的時間依據圖片大小與您的裝置</item>
+    <item quantity="one">接收分享內容。處理圖片的時間取決於圖片大小與您的裝置</item>
+    <item quantity="other">接收分享內容。處理圖片的時間取決於圖片大小與您的裝置</item>
   </plurals>
   <string name="navigation_item_explore">探索</string>
   <string name="preference_category_appearance">外觀</string>
   <string name="preference_category_general">一般</string>
   <string name="preference_category_feedback">意見回饋</string>
-  <string name="preference_category_privacy">隱私</string>
+  <string name="preference_category_privacy">隱私政策</string>
   <string name="app_name">維基共享資源</string>
   <string name="bullet">•</string>
   <string name="menu_settings">設定</string>
@@ -74,7 +75,7 @@
   <string name="uploading_queued">上傳已排定（限制連線模式已啟用）</string>
   <string name="upload_completed_notification_title">已上傳%1$s！</string>
   <string name="upload_completed_notification_text">輕觸來檢視您上傳的項目</string>
-  <string name="upload_progress_notification_title_start">開始上傳檔案：$s</string>
+  <string name="upload_progress_notification_title_start">開始上傳檔案：%s</string>
   <string name="upload_progress_notification_title_in_progress">正在上傳%1$s</string>
   <string name="upload_progress_notification_title_finishing">即將完成上傳%1$s</string>
   <string name="upload_failed_notification_title">上傳%1$s失敗</string>
@@ -92,7 +93,7 @@
   <string name="provider_contributions">我的上傳</string>
   <string name="menu_share">分享</string>
   <string name="menu_view_file_page">檢視檔案頁面</string>
-  <string name="share_title_hint">說明（需要）</string>
+  <string name="share_title_hint">說明（必填）</string>
   <string name="add_caption_toast">請提供此檔案的說明</string>
   <string name="share_description_hint">描述</string>
   <string name="share_caption_hint">說明</string>
@@ -102,7 +103,7 @@
   <string name="login_failed_2fa_needed">必須提供您的雙重驗證代碼。</string>
   <string name="login_failed_generic">登入失敗</string>
   <string name="share_upload_button">上傳</string>
-  <string name="multiple_share_base_title">命名此組</string>
+  <string name="multiple_share_base_title">命名此組圖像</string>
   <string name="provider_modifications">修改</string>
   <string name="menu_upload_single">上傳</string>
   <string name="categories_search_text_hint">搜尋分類</string>
@@ -124,7 +125,7 @@
   <string name="title_activity_category_details">分類</string>
   <string name="title_activity_review">同行評審</string>
   <string name="menu_about">關於</string>
-  <string name="about_license">維基共享資源應用程式是透過維基媒體社群上的受讓人，與志願者們所建立及維護的開放原始碼應用程式。維基媒體基金會並不涉及此應用程式的建立、開發，與維護方面。</string>
+  <string name="about_license">維基共享資源應用程式是透過維基媒體社群上的受讓人，與志願者們所建立及維護的開源應用程式。維基媒體基金會並不參與此應用程式的建立、開發，與維護。</string>
   <string name="about_improve">建立新的&lt;a href=\"%1$s\"&gt; GitHub 問題&lt;/a&gt;來回報程式錯誤和提出建議。</string>
   <string name="about_privacy_policy">隱私方針</string>
   <string name="about_credits">製作群</string>
@@ -209,12 +210,12 @@
   <string name="commons_github">Github 上的共享資源原始碼</string>
   <string name="mediaimage_failed">媒體圖片失敗</string>
   <string name="no_subcategory_found">找不到子分類</string>
-  <string name="no_parentcategory_found">找不到父分類</string>
+  <string name="no_parentcategory_found">找不到母分類</string>
   <string name="welcome_image_mount_zao">藏王連峰</string>
   <string name="welcome_image_llamas">大羊駝</string>
   <string name="welcome_image_rainbow_bridge">彩虹橋</string>
   <string name="welcome_image_tulip">鬱金香</string>
-  <string name="welcome_image_welcome_wikipedia">歡迎維基百科</string>
+  <string name="welcome_image_welcome_wikipedia">歡迎來到維基百科</string>
   <string name="welcome_image_welcome_copyright">歡迎版權</string>
   <string name="welcome_image_sydney_opera_house">雪梨歌劇院</string>
   <string name="cancel">取消</string>
@@ -234,7 +235,7 @@
   <string name="nearby_info_menu_commons_article">維基共享資源檔案頁面</string>
   <string name="nearby_info_menu_wikidata_article">維基數據項目</string>
   <string name="nearby_info_menu_wikipedia_article">維基百科條目</string>
-  <string name="description_info">請盡可能描述媒體內容：拍攝於何處？是顯示什麼事物？有什麼脈絡？請描述對象或人物。透露出一些較不易猜測的訊息，例如是風景的話，可以是一天裡的時間。如果媒體顯示出一些不正常的事物，請說明出造成不正常原因。</string>
+  <string name="description_info">請盡可能描述媒體內容：拍攝於何處？是顯示什麼事物？有什麼脈絡？請描述對象或人物。透露出一些較不易猜測的訊息，例如是風景的話，可以是一天裡的時間。如果媒體顯示出一些不尋常的事物，請說明不尋常原因。</string>
   <string name="caption_info">請寫入圖片的簡要描述。首個說明會作為圖片的標題。不能超過 225 個字元。</string>
   <string name="upload_problem_exist">此圖片有以下潛在問題：</string>
   <string name="upload_problem_image_dark">圖片太暗。</string>
@@ -245,10 +246,10 @@
   <string name="upload_problem_do_you_continue">您仍要上傳此圖片嗎？</string>
   <string name="upload_connection_error_alert_title">連接錯誤</string>
   <string name="upload_connection_error_alert_detail">更新處理需要有效的網際網路存取。請檢查您的網路連線。</string>
-  <string name="upload_problem_image">在圖片裡發現問題</string>
+  <string name="upload_problem_image">在圖片中發現的問題</string>
   <string name="internet_downloaded">請僅上傳您自己拍攝的圖片。不要上傳您從網路下載來的圖片。</string>
-  <string name="use_external_storage">儲存應用程式所提供的快照</string>
-  <string name="use_external_storage_summary">保存以應用程式相機所拍攝的圖片到您的裝置儲存裡</string>
+  <string name="use_external_storage">儲存應用程式所提供的截圖</string>
+  <string name="use_external_storage_summary">將應用程式相機所拍攝的圖片存到您的裝置空間裡</string>
   <string name="login_to_your_account">登入您的帳號</string>
   <string name="send_log_file">發送日誌檔案</string>
   <string name="send_log_file_description">透過電子郵件寄送日誌檔案給開發人員，來協助除錯應用程式上的問題。注意：日誌可能會包含識別方面的資訊</string>
@@ -645,7 +646,7 @@
   <string name="wlm_month_message">維基愛古蹟的月份！</string>
   <string name="learn_more">了解更多</string>
   <string name="wlm_campaign_description">維基愛古蹟是由維基媒體舉行的國際古蹟攝影比賽</string>
-  <string name="need_permission">需要\'權限</string>
+  <string name="need_permission">需要權限</string>
   <string name="read_phone_state_permission_message">附近地圖需要讀取手機狀態來正常運作</string>
   <string name="contributions_of_user">使用者貢獻：%s</string>
   <string name="achievements_of_user">使用者成果：%s</string>
@@ -656,10 +657,10 @@
   <string name="reset">重新設定</string>
   <string name="location_message">位置資料能幫助 Wiki 編輯者來找到您的圖片，來讓圖片更有用。\n您近期上傳的內容沒有位置。\n因此我們建議您啟動在您的相機應用程式設定裡的位置。\n非常感謝您的上傳！</string>
   <string name="no_location_found_title">沒有找到位置</string>
-  <string name="no_location_found_message">要不加入這張圖片拍攝的地點吧？\n位置資料有助於 Wiki 編輯者找到您的圖片，使其更有用。\n謝謝！</string>
+  <string name="no_location_found_message">是否要加入這張圖片拍攝的地點？\n位置資料有助於 Wiki 編輯者找到您的圖片，使其更有用。\n謝謝！</string>
   <string name="add_location">新增位置</string>
   <string name="feedback_sharing_data_alert">請移除來自此電子郵件中您無意公開分享的任何資訊。另外請注意，您用來發布訊息的電子郵件地址、關聯名稱、與個人資料圖片會公開顯示。</string>
-  <string name="achievements_unavailable_beta">成果僅在生產版本可用。</string>
-  <string name="leaderboard_unavailable_beta">排行榜僅在生產版本可用。</string>
-  <string name="copyright_popup">請只上傳由您自己拍攝的圖片。上傳受版權保護圖片的使用者將會被阻擋。Beta 測試版本也適用此規則。感謝您測試此應用程式！</string>
+  <string name="achievements_unavailable_beta" fuzzy="true">成果僅在生產版本可用。</string>
+  <string name="leaderboard_unavailable_beta" fuzzy="true">排行榜僅在生產版本可用。</string>
+  <string name="copyright_popup">請只上傳由您自己拍攝的圖片。上傳受版權保護圖片的使用者將會被阻擋。Beta測試版本也適用此規則。感謝您測試此應用程式！</string>
 </resources>

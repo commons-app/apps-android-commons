@@ -289,6 +289,7 @@
   <string name="nearby_commons">ויקישיתוף</string>
   <string name="about_rate_us">דרגו אותנו</string>
   <string name="about_faq">שאלות נפוצות</string>
+  <string name="user_guide">מדריך למשתמש</string>
   <string name="welcome_skip_button">לדלג על ההדרכה</string>
   <string name="no_internet">האינטרנט אינו זמין</string>
   <string name="error_notifications">שגיאה באחזור התראות</string>
@@ -316,6 +317,7 @@
   <string name="title_activity_search">חיפוש</string>
   <string name="search_recent_header">חיפוש אחרונים:</string>
   <string name="provider_searches">דברים שחיפשת לאחרונה</string>
+  <string name="provider_recent_languages">שאילתות שפה אחרונות</string>
   <string name="error_loading_categories">אירעה שגיאה בעת טעינת קטגוריות.</string>
   <string name="error_loading_depictions">אירעה שגיאה בטעינת מאפייני מוצגים.</string>
   <string name="search_tab_title_media">מדיה</string>
@@ -522,6 +524,15 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">לא ניתן להוסיף קטגוריות.</string>
   <string name="category_edit_button_text">עדכון קטגוריות</string>
+  <string name="depictions_edit_helper_make_edit_toast">מתבצע ניסיון לעדכן מוצגים.</string>
+  <string name="depictions_edit_helper_show_edit_title">עריכת מוצגים</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">נוסף מוצג %1$s</item>
+    <item quantity="two">נוספו המוצגים %1$s</item>
+    <item quantity="many">נוספו המוצגים %1$s</item>
+    <item quantity="other">נוספו המוצגים %1$s</item>
+  </plurals>
+  <string name="depictions_edit_helper_edit_message_else">לא היה אפשר להוסיף מוצגים.</string>
   <string name="coordinates_edit_helper_make_edit_toast">מנסים לעדכן נקודות ציון.</string>
   <string name="coordinates_edit_helper_show_edit_title">עדכון נקודות ציון</string>
   <string name="description_edit_helper_show_edit_title">עדכון תיאור</string>
@@ -669,6 +680,7 @@
   <string name="contributions_of_user">תרומות של המשתמש: %s</string>
   <string name="achievements_of_user">הישגי המשתמש: %s</string>
   <string name="menu_view_user_page">הצגת דף המשתמש</string>
+  <string name="edit_depictions">עריכת מוצגים</string>
   <string name="advanced_options">אפשרויות מתקדמות</string>
   <string name="advanced_query_info_text">באפשרותך לעשות התאמה אישית של שאילתת \"בסביבה\". אם זה מייצר לך שגיאות, נא לאפס ולנסות שוב.</string>
   <string name="apply">החלה</string>
@@ -678,7 +690,18 @@
   <string name="no_location_found_message">מה עם להוסיף את המקום שהתמונה הזאת צולמה בו?\nנתוני מיקום עוזרים לעורכי ויקי למצוא את התמונה שלך, והופכים אותה לשימושית יותר.\nתודה!</string>
   <string name="add_location">הוספת מיקום</string>
   <string name="feedback_sharing_data_alert">נא להסיר מהמכתב הזה כל מידע שאינך רוצה לשתף באופן פומבי. כמו־כן, נא לזכור שכתובת הדוא\"ל שמכתב נשלח ממנה, השם המשויך והתמונה, יהיו מוצגות ציבורית.</string>
-  <string name="achievements_unavailable_beta">ההישגים זמינים רק בגרסה הראשית.</string>
-  <string name="leaderboard_unavailable_beta">לוח המובילים זמין רק בגרסה הראשית.</string>
+  <string name="achievements_unavailable_beta">ההישגים זמינים רק בגרסה הראשית, נא לבדוק את התיעוד למפתחים.</string>
+  <string name="leaderboard_unavailable_beta">לוח המובילים זמין רק בגרסה הראשית, נא לבדוק את התיעוד למפתחים.</string>
   <string name="copyright_popup">נא להעלות רק תמונות שצילמת בעצמך. אנשים שיעלו תמונות שמוגבלות בזכויות יוצרים ייחסמו. זה חל גם על גרסת הבטא. תודה על בדיקת היישום!</string>
+  <string name="select_feedback_data_choice">נא לבטל את הבחירה של כל מידע שלא נוח לך לשתף באופן ציבורי.</string>
+  <string name="api_level">רמת API</string>
+  <string name="android_version">גרסת אנדרואיד</string>
+  <string name="device_manufacturer">יצרן המכשיר</string>
+  <string name="device_model">דגם המכשיר</string>
+  <string name="device_name">שם המכשיר</string>
+  <string name="network_type">סוג הרשת</string>
+  <string name="thanks_feedback">תודה על מתן המשוב</string>
+  <string name="error_feedback">שגיאה בעת שליחת המשוב</string>
+  <string name="enter_description">מה המשוב שלך?</string>
+  <string name="your_feedback">המשוב שלך</string>
 </resources>

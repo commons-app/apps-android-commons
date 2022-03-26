@@ -7,6 +7,7 @@ import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsContentProvider;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;
 import fr.free.nrw.commons.category.CategoryContentProvider;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider;
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesContentProvider;
 
 /**
  * This Class Represents the Module for dependency injection (using dagger)
@@ -31,4 +32,7 @@ public abstract class ContentProviderBuilderModule {
 
 	@ContributesAndroidInjector
 	abstract BookmarkItemsContentProvider bindBookmarkItemContentProvider();
+
+	@ContributesAndroidInjector
+	abstract RecentLanguagesContentProvider bindRecentLanguagesContentProvider();
 }

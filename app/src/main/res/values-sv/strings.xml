@@ -651,7 +651,7 @@
   <string name="no_location_found_message">Vad sägs om att lägga till platsen där denna bild togs?\nPlatsdata hjälper wikiredigerare att hitta din bild och göra den mycket mer användbar.\nTack!</string>
   <string name="add_location">Lägg till plats</string>
   <string name="feedback_sharing_data_alert">Var god ta bort all information från detta e-postmeddelande som du inte är bekväm med att dela offentligt. Observera även att e-postadressen du använder samt det associerade namnet och profilbilden kommer att synas offentligt.</string>
-  <string name="achievements_unavailable_beta">Prestationer är endast tillgängliga i produktionsversionen.</string>
-  <string name="leaderboard_unavailable_beta">Topplistan är endast tillgänglig i produktionsversionen.</string>
+  <string name="achievements_unavailable_beta" fuzzy="true">Prestationer är endast tillgängliga i produktionsversionen.</string>
+  <string name="leaderboard_unavailable_beta" fuzzy="true">Topplistan är endast tillgänglig i produktionsversionen.</string>
   <string name="copyright_popup">Var god ladda endast upp bilder du själv har tagit. Alla som laddar upp upphovsrättsskyddade bilder kommer att blockeras. Detta gäller även i betaversionen. Tack för att du testar appen!</string>
 </resources>

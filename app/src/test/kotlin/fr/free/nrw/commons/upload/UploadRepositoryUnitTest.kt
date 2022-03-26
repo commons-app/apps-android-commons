@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload
 
+import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.category.CategoriesModel
 import fr.free.nrw.commons.category.CategoryItem
@@ -13,12 +14,15 @@ import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.structure.depictions.DepictModel
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import io.reactivex.Completable
+import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
+import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
+import java.lang.reflect.Method
 
 class UploadRepositoryUnitTest {
 
@@ -205,16 +209,27 @@ class UploadRepositoryUnitTest {
     }
 
     @Test
+    fun testSetSelectedExistingDepictions() {
+        assertEquals(repository.setSelectedExistingDepictions(listOf("")),
+            uploadModel.setSelectedExistingDepictions(listOf("")))
+    }
+
+    @Test
     fun testOnDepictItemClicked() {
         assertEquals(
-            repository.onDepictItemClicked(depictedItem),
-            uploadModel.onDepictItemClicked(depictedItem)
+            repository.onDepictItemClicked(depictedItem, mock()),
+            uploadModel.onDepictItemClicked(depictedItem, mock())
         )
     }
 
     @Test
     fun testGetSelectedDepictions() {
         assertEquals(repository.selectedDepictions, uploadModel.selectedDepictions)
+    }
+
+    @Test
+    fun testGetSelectedExistingDepictions() {
+        assertEquals(repository.selectedExistingDepictions, uploadModel.selectedExistingDepictions)
     }
 
     @Test
@@ -290,6 +305,38 @@ class UploadRepositoryUnitTest {
             repository.isWMLSupportedForThisPlace,
             true
         )
+    }
+
+    @Test
+    fun testGetDepictions() {
+        `when`(depictModel.getDepictions("Q12"))
+            .thenReturn(Single.just(listOf(mock(DepictedItem::class.java))))
+        val method: Method = UploadRepository::class.java.getDeclaredMethod(
+            "getDepictions",
+            List::class.java
+        )
+        method.isAccessible = true
+        method.invoke(repository, listOf("Q12"))
+    }
+
+    @Test
+    fun testJoinIDs() {
+        val method: Method = UploadRepository::class.java.getDeclaredMethod(
+            "joinQIDs",
+            List::class.java
+        )
+        method.isAccessible = true
+        method.invoke(repository, listOf("Q12", "Q23"))
+    }
+
+    @Test
+    fun `test joinIDs when depictIDs is null`() {
+        val method: Method = UploadRepository::class.java.getDeclaredMethod(
+            "joinQIDs",
+            List::class.java
+        )
+        method.isAccessible = true
+        method.invoke(repository, null)
     }
 
 }
