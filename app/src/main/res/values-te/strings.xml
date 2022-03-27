@@ -282,6 +282,7 @@
   <string name="title_activity_search">వెతుకు</string>
   <string name="search_recent_header">ఇటీవల వెతికినవి:</string>
   <string name="provider_searches">ఈ మధ్య వెతికిన క్వేరీలు</string>
+  <string name="provider_recent_languages">ఇటీవలి భాష క్వెరీలు</string>
   <string name="error_loading_categories">వర్గాలను లోడు చేసేటపుడు లోపం దొర్లింది.</string>
   <string name="search_tab_title_media">మీడియా</string>
   <string name="search_tab_title_categories">వర్గాలు</string>
@@ -619,4 +620,13 @@
   <string name="add_location">స్థానాన్ని చేర్చండి</string>
   <string name="feedback_sharing_data_alert">బహిరంగంగా పంచుకోలేని సమాచారం ఏదైనా ఈ ఈమెయిల్లో ఉంటే దాన్ని తీసెయ్యండి. అలాగే, మీరు పోస్టు చేస్తున్న ఈమెయిలు చిరునామా, దానికి సంబంధించిన పేరు, ప్రొఫైలు బొమ్మా బహిరంగంగా అందరికీ కనిపిస్తాయని గమనంలో ఉంచుకోండి.</string>
   <string name="copyright_popup">మీరు స్వయంగా తీసిన ఫొటోలను మాత్రమే ఎక్కించండి. కాపీహక్కులున్న బొమ్మలను ఎక్కించినవారిని నిరోధిస్తారు. ఇది బీటా కూర్పుకు కూడా వర్తిస్తుంది. యాప్‌ను పరీక్షిస్తున్నందుకు ధన్యవాదాలు.</string>
+  <string name="select_feedback_data_choice">మీరు బహిరంగంగా చూపించడానికి ఇష్టపడని సమాచారాన్ని ఎంపిక నుండి తీసెయ్యండి.</string>
+  <string name="api_level">API లెవెల్</string>
+  <string name="android_version">యాండ్రాయిడ్ వెర్షను</string>
+  <string name="device_name">పరికరం పేరు</string>
+  <string name="network_type">నెట్‌వర్కు రకం</string>
+  <string name="thanks_feedback">ఫీడ్‌బ్యాకు ఇచ్చినందుకు ధన్యవాదాలు</string>
+  <string name="error_feedback">ఫీడ్‌బ్యాకు పంపించడంలో లోపం</string>
+  <string name="enter_description">మీ ఫీడ్‌బ్యాకు ఏమిటి?</string>
+  <string name="your_feedback">మీ ఫీడ్‌బ్యాకు</string>
 </resources>

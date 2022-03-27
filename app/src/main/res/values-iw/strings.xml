@@ -317,6 +317,7 @@
   <string name="title_activity_search">חיפוש</string>
   <string name="search_recent_header">חיפוש אחרונים:</string>
   <string name="provider_searches">דברים שחיפשת לאחרונה</string>
+  <string name="provider_recent_languages">שאילתות שפה אחרונות</string>
   <string name="error_loading_categories">אירעה שגיאה בעת טעינת קטגוריות.</string>
   <string name="error_loading_depictions">אירעה שגיאה בטעינת מאפייני מוצגים.</string>
   <string name="search_tab_title_media">מדיה</string>
@@ -523,6 +524,15 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">לא ניתן להוסיף קטגוריות.</string>
   <string name="category_edit_button_text">עדכון קטגוריות</string>
+  <string name="depictions_edit_helper_make_edit_toast">מתבצע ניסיון לעדכן מוצגים.</string>
+  <string name="depictions_edit_helper_show_edit_title">עריכת מוצגים</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">נוסף מוצג %1$s</item>
+    <item quantity="two">נוספו המוצגים %1$s</item>
+    <item quantity="many">נוספו המוצגים %1$s</item>
+    <item quantity="other">נוספו המוצגים %1$s</item>
+  </plurals>
+  <string name="depictions_edit_helper_edit_message_else">לא היה אפשר להוסיף מוצגים.</string>
   <string name="coordinates_edit_helper_make_edit_toast">מנסים לעדכן נקודות ציון.</string>
   <string name="coordinates_edit_helper_show_edit_title">עדכון נקודות ציון</string>
   <string name="description_edit_helper_show_edit_title">עדכון תיאור</string>
@@ -670,6 +680,7 @@
   <string name="contributions_of_user">תרומות של המשתמש: %s</string>
   <string name="achievements_of_user">הישגי המשתמש: %s</string>
   <string name="menu_view_user_page">הצגת דף המשתמש</string>
+  <string name="edit_depictions">עריכת מוצגים</string>
   <string name="advanced_options">אפשרויות מתקדמות</string>
   <string name="advanced_query_info_text">באפשרותך לעשות התאמה אישית של שאילתת \"בסביבה\". אם זה מייצר לך שגיאות, נא לאפס ולנסות שוב.</string>
   <string name="apply">החלה</string>
