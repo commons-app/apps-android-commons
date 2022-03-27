@@ -32,6 +32,13 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
         return responseMapper(categoryInterface.searchCategories(filter, itemLimit, offset))
     }
 
+    fun checkIfCategoryExists(query: String): Single<List<CategoryItem>> {
+        return responseMapper(
+            categoryInterface.checkIfCategoryExists(query)
+        )
+    }
+
+
     /**
      * Searches for categories starting with the specified string.
      *

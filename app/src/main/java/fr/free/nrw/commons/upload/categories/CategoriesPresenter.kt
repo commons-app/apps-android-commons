@@ -28,6 +28,10 @@ class CategoriesPresenter @Inject constructor(
         private val DUMMY: CategoriesContract.View = proxy()
     }
 
+    /**
+     * this variable stores query for current category being searched
+     */
+    private var currentQuery: String = ""
     var view = DUMMY
     private val compositeDisposable = CompositeDisposable()
     private val searchTerms = PublishSubject.create<String>()
@@ -48,14 +52,24 @@ class CategoriesPresenter @Inject constructor(
                 .observeOn(mainThreadScheduler)
                 .subscribe(
                     {
-                        view.setCategories(it)
-                        view.showProgress(false)
-                        if (it.isEmpty()) {
-                            view.showError(R.string.no_categories_found)
-                        }
+                        // Check if the category typed is a hidden category
+                        val myIt = it
+                        compositeDisposable.add(
+                            checkCategoryExist(currentQuery)
+                            .observeOn(ioScheduler)
+                            .subscribeOn(mainThreadScheduler)
+                            .subscribe({
+                                view.setCategories(myIt + it)
+                                view.showProgress(false)
+                                if ((myIt+it).isEmpty()) {
+                                    view.showError(R.string.no_categories_found)
+                                }
+                            }, Timber::e)
+                        )
                     },
                     Timber::e
                 )
+
         )
     }
 
@@ -63,6 +77,11 @@ class CategoriesPresenter @Inject constructor(
         repository.searchAll(term, getImageTitleList(), repository.selectedDepictions)
             .subscribeOn(ioScheduler)
             .map { it.filterNot { categoryItem -> repository.containsYear(categoryItem.name) } }
+
+    private fun checkCategoryExist(term: String) =
+        repository.checkCategoryExists(term)
+            .subscribeOn(ioScheduler)
+            .map { it }
 
     override fun onDetachView() {
         view = DUMMY
@@ -75,6 +94,7 @@ class CategoriesPresenter @Inject constructor(
      */
     override fun searchForCategories(query: String) {
         searchTerms.onNext(query)
+        currentQuery = query;
     }
 
     /**

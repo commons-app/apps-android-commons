@@ -27,6 +27,8 @@ import java.util.Locale;
 import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.wikipedia.dataclient.mwapi.MwQueryPage;
+import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import timber.log.Timber;
 
 /**
@@ -122,6 +124,10 @@ public class UploadRepository {
     public Observable<List<CategoryItem>> searchAll(String query, List<String> imageTitleList,
         List<DepictedItem> selectedDepictions) {
         return categoriesModel.searchAll(query, imageTitleList, selectedDepictions);
+    }
+
+    public Single<List<CategoryItem>> checkCategoryExists(String query) {
+        return categoriesModel.checkIfCategoryExists(query);
     }
 
     /**

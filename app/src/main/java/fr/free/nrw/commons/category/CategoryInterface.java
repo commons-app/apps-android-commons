@@ -68,4 +68,11 @@ public interface CategoryInterface {
     Single<MwQueryResponse> getParentCategoryList(@Query("titles") String categoryName,
         @QueryMap(encoded = true) Map<String, String> continuation);
 
+    /**
+     * this method is will get category detail if category exist
+     * else it will return an page with id -1 denoting an error
+     */
+    @GET("w/api.php?action=query&format=json&prop=categoryinfo&formatversion=2")
+    Single<MwQueryResponse> checkIfCategoryExists(@Query("titles") String query);
+
 }
