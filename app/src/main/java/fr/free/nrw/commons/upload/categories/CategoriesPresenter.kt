@@ -78,6 +78,9 @@ class CategoriesPresenter @Inject constructor(
             .subscribeOn(ioScheduler)
             .map { it.filterNot { categoryItem -> repository.containsYear(categoryItem.name) } }
 
+    /**
+     * checks if category exists
+     */
     private fun checkCategoryExist(term: String) =
         repository.checkCategoryExists(term)
             .subscribeOn(ioScheduler)

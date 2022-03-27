@@ -150,6 +150,9 @@ class CategoriesModel @Inject constructor(
         return categoryClient.searchCategories(title, SEARCH_CATS_LIMIT).toObservable()
     }
 
+    /**
+     * check if category exists
+     */
     fun checkIfCategoryExists(query: String): Single<List<CategoryItem>> {
         return categoryClient.checkIfCategoryExists(query)
     }

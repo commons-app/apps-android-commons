@@ -7,9 +7,11 @@ import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.categories.CategoriesContract
 import fr.free.nrw.commons.upload.categories.CategoriesPresenter
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
 import org.junit.Before
 import org.junit.Test
+import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
@@ -65,12 +67,17 @@ class CategoriesPresenterTest {
                     )
                 )
             )
+        whenever(repository.checkCategoryExists(ArgumentMatchers.anyString()))
+            .thenReturn(Single.just(listOf()))
         whenever(repository.containsYear("selected")).thenReturn(false)
         whenever(repository.containsYear("doesContainYear")).thenReturn(true)
         whenever(repository.selectedCategories).thenReturn(listOf(
             categoryItem("selected", "", "",true)))
         categoriesPresenter.searchForCategories("test")
         testScheduler.triggerActions()
+        testScheduler.triggerActions()
+        testScheduler.triggerActions()
+
         verify(view).showProgress(true)
         verify(view).showError(null)
         verify(view).setCategories(null)
@@ -85,8 +92,13 @@ class CategoriesPresenterTest {
         whenever(repository.uploads).thenReturn(listOf())
         whenever(repository.searchAll(any(), any(), any())).thenReturn(Observable.just(listOf()))
         whenever(repository.selectedCategories).thenReturn(listOf())
+        whenever(repository.checkCategoryExists(any())).thenReturn(Single.just(listOf()))
+
         categoriesPresenter.searchForCategories("test")
         testScheduler.triggerActions()
+        testScheduler.triggerActions()
+        testScheduler.triggerActions()
+
         verify(view).showProgress(true)
         verify(view).showError(null)
         verify(view).setCategories(null)

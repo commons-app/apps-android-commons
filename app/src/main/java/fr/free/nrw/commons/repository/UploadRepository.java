@@ -126,6 +126,9 @@ public class UploadRepository {
         return categoriesModel.searchAll(query, imageTitleList, selectedDepictions);
     }
 
+    /**
+     * check if category exists
+     */
     public Single<List<CategoryItem>> checkCategoryExists(String query) {
         return categoriesModel.checkIfCategoryExists(query);
     }
