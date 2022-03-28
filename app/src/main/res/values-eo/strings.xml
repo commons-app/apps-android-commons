@@ -397,7 +397,7 @@
   <string name="review_thanks_yes_button_text" fuzzy="true">Jes, kial ne</string>
   <string name="review_thanks_no_button_text" fuzzy="true">Sekva bildo</string>
   <string name="skip_image_explanation">Alklakado de ĉi tiu butono donos vin alia ĵus alŝutita bildo en Vikimedia Komunejo</string>
-  <string name="review_image_explanation">Vi povas revizii bildojn kaj plibonigi la kvaliton de Vikimedia Komunejo.\n Jen la kvar reviziaj parametroj: \n - Ĉu la bildo estas taŭga? \n - Ĉu la bildo observas la regulojn pri aŭtorrajtoj? \n - Ĉu la bildo estis ĝuste enkategoriigita? \n - Se ĉio estas bona, vi povas danki la kontribuinton.</string>
+  <string name="review_image_explanation" fuzzy="true">Vi povas revizii bildojn kaj plibonigi la kvaliton de Vikimedia Komunejo.\n Jen la kvar reviziaj parametroj: \n - Ĉu la bildo estas taŭga? \n - Ĉu la bildo observas la regulojn pri aŭtorrajtoj? \n - Ĉu la bildo estis ĝuste enkategoriigita? \n - Se ĉio estas bona, vi povas danki la kontribuinton.</string>
   <string name="no_image">Neniu uzita bildo</string>
   <string name="no_image_reverted">Neniu bildo estis malfarita</string>
   <string name="no_image_uploaded">Neniu alŝutita bildo</string>

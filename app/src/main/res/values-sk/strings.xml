@@ -449,7 +449,7 @@
   <string name="review_thanks_yes_button_text">Ďalší obrázok</string>
   <string name="review_thanks_no_button_text">Áno, prečo nie</string>
   <string name="skip_image_explanation">Kliknutím na toto tlačidlo sa zobrazí ďalší nedávno nahraný obrázok z Wikimedia Commons</string>
-  <string name="review_image_explanation">Môžete kontrolovať obrázky a zlepšiť kvalitu Wikimedia Commons.\n\nTri aspekty, ktoré sa posudzujú, sú:\n  - Je tento obrázok v poriadku?\n  - Dodržiava tento obrázok pravidlá autorských práv?\n  - Je tento obrázok správne kategorizovaný?\n\nAk je všetko v poriadku, autorovi môžete taktiež poďakovať.</string>
+  <string name="review_image_explanation" fuzzy="true">Môžete kontrolovať obrázky a zlepšiť kvalitu Wikimedia Commons.\n\nTri aspekty, ktoré sa posudzujú, sú:\n  - Je tento obrázok v poriadku?\n  - Dodržiava tento obrázok pravidlá autorských práv?\n  - Je tento obrázok správne kategorizovaný?\n\nAk je všetko v poriadku, autorovi môžete taktiež poďakovať.</string>
   <string name="no_image">Nie sú použité žiadne obrázky</string>
   <string name="no_image_reverted">Žiadne revertované obrázky</string>
   <string name="no_image_uploaded">Žiadne nahrané obrázky</string>

@@ -435,7 +435,7 @@
   <string name="review_thanks_yes_button_text">Nästa bild</string>
   <string name="review_thanks_no_button_text">Visst, varför inte</string>
   <string name="skip_image_explanation">När du klickar på knappen får du en annan bild från Wikimedia Commons som nyligen laddades upp</string>
-  <string name="review_image_explanation">Du kan granska bilder och förbättra kvaliteten för Wikimedia Commons.\n De fyra granskningsparametrarna är: \n - Är denna bild relevant \n - Följer denna bild upphovsrättsreglerna? \n - Är denna bild korrekt kategoriserad? \n - Om allting går bra kan du också tacka bidragsgivaren.</string>
+  <string name="review_image_explanation" fuzzy="true">Du kan granska bilder och förbättra kvaliteten för Wikimedia Commons.\n De fyra granskningsparametrarna är: \n - Är denna bild relevant \n - Följer denna bild upphovsrättsreglerna? \n - Är denna bild korrekt kategoriserad? \n - Om allting går bra kan du också tacka bidragsgivaren.</string>
   <string name="no_image">Inga bilder används</string>
   <string name="no_image_reverted">Inga återställda bilder</string>
   <string name="no_image_uploaded">Inga uppladdade bilder</string>

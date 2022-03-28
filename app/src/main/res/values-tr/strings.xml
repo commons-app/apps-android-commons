@@ -14,6 +14,7 @@
 * MuratTheTurkish
 * Neslihan Turan
 * Okkerem
+* Oyuncu
 * Rapsar
 * SaldırganSincap
 * Sayginer
@@ -307,6 +308,7 @@
   <string name="title_activity_search">Ara</string>
   <string name="search_recent_header">Son aramalar:</string>
   <string name="provider_searches">Son aranan sorgular</string>
+  <string name="provider_recent_languages">En son dil sorguları</string>
   <string name="error_loading_categories">Kategoriler yüklenirken hata oluştu.</string>
   <string name="error_loading_depictions">Tasvirler yüklenirken hata oluştu.</string>
   <string name="search_tab_title_media">Medya</string>
@@ -451,7 +453,7 @@
   <string name="review_thanks_yes_button_text">Sonraki resim</string>
   <string name="review_thanks_no_button_text">Evet, neden olmasın</string>
   <string name="skip_image_explanation">Bu butona tıkladığınızda Wikimedia Commons\'tan yeni yüklediğiniz başka bir resim elde edersiniz</string>
-  <string name="review_image_explanation">Görüntüleri inceleyebilir ve Wikimedia Commons\'un kalitesini iyileştirebilirsiniz.\n  İncelemenin dört parametresi:\n  - Bu görüntü kapsam dahilinde mi?\n  - Bu resim telif hakkı kurallarına uyuyor mu?\n  - Bu resim doğru sınıflandırılmış mı?\n  - Her şey yolunda giderse katılımcıya da teşekkür edebilirsiniz.</string>
+  <string name="review_image_explanation" fuzzy="true">Görüntüleri inceleyebilir ve Wikimedia Commons\'un kalitesini iyileştirebilirsiniz.\n  İncelemenin dört parametresi:\n  - Bu görüntü kapsam dahilinde mi?\n  - Bu resim telif hakkı kurallarına uyuyor mu?\n  - Bu resim doğru sınıflandırılmış mı?\n  - Her şey yolunda giderse katılımcıya da teşekkür edebilirsiniz.</string>
   <string name="no_image">Hiç resim kullanılmadı</string>
   <string name="no_image_reverted">Geri getirilen resim yok</string>
   <string name="no_image_uploaded">Yüklenen resim yok</string>

@@ -447,7 +447,7 @@
   <string name="review_thanks_yes_button_text">Volgende afbeelding</string>
   <string name="review_thanks_no_button_text">Ja, waarom niet</string>
   <string name="skip_image_explanation">Als u op deze knop klikt, krijgt u nog een recent geüploade afbeelding van Wikimedia Commons</string>
-  <string name="review_image_explanation">U kunt afbeeldingen bekijken en de kwaliteit van Wikimedia Commons verbeteren.\n De vier beoordelingsparameters zijn: \n - Valt deze afbeelding binnen de scope? \n - Voldoet deze afbeelding aan de regels van het auteursrecht? \n - Is deze afbeelding correct gecategoriseerd? \n - Als alles goed gaat kunt u ook de inzender bedanken.</string>
+  <string name="review_image_explanation" fuzzy="true">U kunt afbeeldingen bekijken en de kwaliteit van Wikimedia Commons verbeteren.\n De vier beoordelingsparameters zijn: \n - Valt deze afbeelding binnen de scope? \n - Voldoet deze afbeelding aan de regels van het auteursrecht? \n - Is deze afbeelding correct gecategoriseerd? \n - Als alles goed gaat kunt u ook de inzender bedanken.</string>
   <string name="no_image">Geen afbeeldingen gebruikt</string>
   <string name="no_image_reverted">Geen afbeeldingen teruggedraaid</string>
   <string name="no_image_uploaded">Geen afbeeldingen geüpload</string>
@@ -665,7 +665,7 @@
   <string name="no_location_found_message">Misschien kunt u aangeven waar deze foto is genomen?\nLocatie data helpt Wiki redacteurs om uw afbeelding te vinden, waardoor deze veel nuttiger wordt.\nAlvast bedankt!</string>
   <string name="add_location">Locatie toevoegen</string>
   <string name="feedback_sharing_data_alert">Verwijder alstublieft informatie uit deze email die u liever niet openbaar wilt maken. Wees er ook van op de hoogte dat het emailadres en de bijbehorende gebruikersnaam en profielafbeelding die u gebruikt openbaar zichtbaar zullen zijn.</string>
-  <string name="achievements_unavailable_beta" fuzzy="true">Achievements zijn alleen beschikbaar in de productie versie.</string>
-  <string name="leaderboard_unavailable_beta" fuzzy="true">Het scorebord is alleen beschikbaar in de productie versie.</string>
+  <string name="achievements_unavailable_beta">Achievements zijn alleen beschikbaar in de productieversie. Sla de ontwikkelaarsdocumentatie erop na.</string>
+  <string name="leaderboard_unavailable_beta">Het scorebord is alleen beschikbaar in de productieversie. Sla de ontwikkelaarsdocumentatie erop na.</string>
   <string name="copyright_popup">Upload alleen afbeeldingen die u zelf heeft gemaakt. Gebruikers die afbeeldingen met copyright uploaden worden geblokkeerd. Dit is ook van toepassing op de beta versie. Bedankt voor het testen van de app!</string>
 </resources>
