@@ -174,7 +174,7 @@ public class ExploreMapPresenter
             double distance = latLng.distanceTo
                 (LocationUtils.commonsLatLngToMapBoxLatLng(exploreMapController.latestSearchLocation));
             if (exploreMapFragmentView.isNetworkConnectionEstablished()) {
-                if (distance > exploreMapController.latestSearchRadius) {
+                if (distance > exploreMapController.latestSearchRadius && exploreMapController.latestSearchRadius != 0) {
                     exploreMapFragmentView.setSearchThisAreaButtonVisibility(true);
                 } else {
                     exploreMapFragmentView.setSearchThisAreaButtonVisibility(false);

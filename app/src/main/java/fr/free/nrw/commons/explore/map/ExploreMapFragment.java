@@ -14,6 +14,7 @@ import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -134,6 +135,7 @@ public class ExploreMapFragment extends PageableMapFragment
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setSearchThisAreaButtonVisibility(false);
+        tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution)));
         if (getActivity() instanceof SearchActivity) {
             isFromSearchActivity = true;
         } else {

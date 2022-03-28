@@ -10,6 +10,7 @@ import android.view.View.*
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -40,6 +41,7 @@ abstract class BasePagingMapFragment<T> : CommonsDaggerSupportFragment(),
     @BindView(R.id.map_progress_bar) lateinit var progressBar: ProgressBar
     @BindView(R.id.fab_recenter) lateinit var fabRecenter: FloatingActionButton
     @BindView(R.id.search_this_area_button) lateinit var searchThisAreaButton: Button
+    @BindView(R.id.tv_attribution) lateinit var tvAttribution: AppCompatTextView
     //private val loadingAdapter by lazy { FooterAdapter { injectedPresenter.retryFailedRequest() } }
     //private val mergeAdapter by lazy { MergeAdapter(pagedListAdapter, loadingAdapter) }
     private var searchResults: LiveData<PagedList<T>>? = null
