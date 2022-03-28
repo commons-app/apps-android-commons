@@ -185,11 +185,6 @@ public class ExploreMapPresenter
         }
     }
 
-    @Override
-    public void updateMapMarkersToController(List<NearbyBaseMarker> nearbyBaseMarkers) {
-
-    }
-
     public void onMapReady(boolean isFromSearchActivity, ExploreMapController exploreMapController, String query) {
         this.isFromSearchActivity = isFromSearchActivity;
         this.exploreMapController = exploreMapController;
@@ -294,4 +289,13 @@ public class ExploreMapPresenter
         }
     }
 
+    @Override
+    public void markerUnselected() {
+        exploreMapFragmentView.hideBottomDetailsSheet();
+    }
+
+    @Override
+    public void markerSelected(Marker marker) {
+        exploreMapFragmentView.displayBottomSheetWithInfo(marker);
+    }
 }

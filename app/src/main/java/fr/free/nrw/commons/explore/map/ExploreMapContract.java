@@ -54,7 +54,8 @@ public class ExploreMapContract {
         void removeNearbyPreferences(JsonKvStore applicationKvStore);
         boolean backButtonClicked();
         void onCameraMove(com.mapbox.mapboxsdk.geometry.LatLng latLng);
-        void updateMapMarkersToController(List<NearbyBaseMarker> nearbyBaseMarkers);
+        void markerUnselected();
+        void markerSelected(Marker marker);
     }
 
 }

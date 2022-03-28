@@ -41,6 +41,7 @@ import com.mapbox.pluginscalebar.ScaleBarOptions;
 import com.mapbox.pluginscalebar.ScaleBarPlugin;
 import fr.free.nrw.commons.MapController;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.explore.SearchActivity;
@@ -51,6 +52,7 @@ import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
+import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.utils.ExecutorUtils;
 import fr.free.nrw.commons.utils.LocationUtils;
@@ -432,12 +434,75 @@ public class ExploreMapFragment extends PageableMapFragment
 
     @Override
     public void hideBottomDetailsSheet() {
-
+        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
 
     @Override
-    public void displayBottomSheetWithInfo(Marker marker) {
+    public void displayBottomSheetWithInfo(final Marker marker) {
+        selectedMarker = marker;
+        final NearbyMarker nearbyMarker = (NearbyMarker) marker;
+        final Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
+        passInfoToSheet(place);
+        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+    }
 
+    /**
+     * Same bottom sheet carries information for all nearby places, so we need to pass information
+     * (title, description, distance and links) to view on nearby marker click
+     * @param place Place of clicked nearby marker
+     */
+    private void passInfoToSheet(final Place place) {
+        Log.d("deneme","nearby marker selected");
+        /***
+         *
+        selectedPlace = place;
+        updateBookmarkButtonImage(selectedPlace);
+
+        bookmarkButton.setOnClickListener(view -> {
+            final boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(selectedPlace);
+            updateBookmarkButtonImage(selectedPlace);
+            updateMarker(isBookmarked, selectedPlace, locationManager.getLastLocation());
+        });
+
+        wikipediaButton.setVisibility(place.hasWikipediaLink()?View.VISIBLE:View.GONE);
+        wikipediaButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), selectedPlace.siteLinks.getWikipediaLink()));
+
+        wikidataButton.setVisibility(place.hasWikidataLink()?View.VISIBLE:View.GONE);
+        wikidataButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), selectedPlace.siteLinks.getWikidataLink()));
+
+        directionsButton.setOnClickListener(view -> Utils.handleGeoCoordinates(getActivity(),
+            selectedPlace.getLocation()));
+
+        commonsButton.setVisibility(selectedPlace.hasCommonsLink()?View.VISIBLE:View.GONE);
+        commonsButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), selectedPlace.siteLinks.getCommonsLink()));
+
+        icon.setImageResource(selectedPlace.getLabel().getIcon());
+
+        title.setText(selectedPlace.name);
+        distance.setText(selectedPlace.distance);
+        // Remove label since it is double information
+        String descriptionText = selectedPlace.getLongDescription()
+            .replace(selectedPlace.getName() + " (","");
+        descriptionText = (descriptionText.equals(selectedPlace.getLongDescription()) ? descriptionText : descriptionText.replaceFirst(".$",""));
+        // Set the short description after we remove place name from long description
+        description.setText(descriptionText);
+
+        fabCamera.setOnClickListener(view -> {
+            if (fabCamera.isShown()) {
+                Timber.d("Camera button tapped. Place: %s", selectedPlace.toString());
+                storeSharedPrefs(selectedPlace);
+                controller.initiateCameraPick(getActivity());
+            }
+        });
+
+        fabGallery.setOnClickListener(view -> {
+            if (fabGallery.isShown()) {
+                Timber.d("Gallery button tapped. Place: %s", selectedPlace.toString());
+                storeSharedPrefs(selectedPlace);
+                controller.initiateGalleryPick(getActivity(), chipWlm.isChecked());
+            }
+        });
+        */
     }
 
     @Override
@@ -632,11 +697,28 @@ public class ExploreMapFragment extends PageableMapFragment
     }
 
     @Override
-    public void addNearbyMarkersToMapBoxMap(List<NearbyBaseMarker> nearbyBaseMarkers,
-        Marker selectedMarker) {
+    public void addNearbyMarkersToMapBoxMap(List<NearbyBaseMarker> nearbyBaseMarkers, Marker selectedMarker) {
+        mapBox.clear();
         if (isMapBoxReady && mapBox != null) {
             mapBox.addMarkers(nearbyBaseMarkers);
-            presenter.updateMapMarkersToController(nearbyBaseMarkers);
+            setMapMarkerActions(selectedMarker);
+        }
+    }
+
+    private void setMapMarkerActions(final Marker selectedMarker) {
+        if (mapBox != null) {
+            mapBox.setOnInfoWindowCloseListener(marker -> {
+                if (marker == selectedMarker) {
+                    presenter.markerUnselected();
+                }
+            });
+
+            mapBox.setOnMarkerClickListener(marker -> {
+                if (marker instanceof NearbyMarker) {
+                    presenter.markerSelected(marker);
+                }
+                return false;
+            });
         }
     }
 
