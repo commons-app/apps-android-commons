@@ -8,8 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ProgressBar
+import android.widget.*
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
@@ -42,6 +41,18 @@ abstract class BasePagingMapFragment<T> : CommonsDaggerSupportFragment(),
     @BindView(R.id.fab_recenter) lateinit var fabRecenter: FloatingActionButton
     @BindView(R.id.search_this_area_button) lateinit var searchThisAreaButton: Button
     @BindView(R.id.tv_attribution) lateinit var tvAttribution: AppCompatTextView
+
+    @BindView(R.id.bookmarkButtonImage) lateinit var bookmarkButtonImage: ImageView
+    @BindView(R.id.bookmarkButton) lateinit var bookmarkButton: LinearLayout
+    @BindView(R.id.wikipediaButton) lateinit var wikipediaButton: LinearLayout
+    @BindView(R.id.wikidataButton) lateinit var wikidataButton: LinearLayout
+    @BindView(R.id.directionsButton) lateinit var directionsButton: LinearLayout
+    @BindView(R.id.commonsButton) lateinit var commonsButton: LinearLayout
+    @BindView(R.id.description) lateinit var description: TextView
+    @BindView(R.id.title) lateinit var title: TextView
+    @BindView(R.id.icon) lateinit var icon: ImageView
+    @BindView(R.id.category) lateinit var distance: TextView
+
     //private val loadingAdapter by lazy { FooterAdapter { injectedPresenter.retryFailedRequest() } }
     //private val mergeAdapter by lazy { MergeAdapter(pagedListAdapter, loadingAdapter) }
     private var searchResults: LiveData<PagedList<T>>? = null

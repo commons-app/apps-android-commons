@@ -13,6 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.bookmarks.BookmarkFragment;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
@@ -31,6 +32,13 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
 
     public ExploreMapRootFragment() {
         //empty constructor necessary otherwise crashes on recreate
+    }
+
+    @NonNull
+    public static ExploreMapRootFragment newInstance() {
+        ExploreMapRootFragment fragment = new ExploreMapRootFragment();
+        fragment.setRetainInstance(true);
+        return fragment;
     }
 
     public ExploreMapRootFragment(Bundle bundle) {

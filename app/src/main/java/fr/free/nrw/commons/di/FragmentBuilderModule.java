@@ -132,7 +132,7 @@ public abstract class FragmentBuilderModule {
     @ContributesAndroidInjector
     abstract ExploreListRootFragment bindExploreFeaturedRootFragment();
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = ExploreMapFragmentModule.class)
     abstract ExploreMapFragment bindExploreNearbyUploadsFragment();
 
     @ContributesAndroidInjector

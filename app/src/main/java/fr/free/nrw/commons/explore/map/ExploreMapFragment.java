@@ -82,6 +82,7 @@ public class ExploreMapFragment extends PageableMapFragment
     private fr.free.nrw.commons.location.LatLng lastKnownLocation;
     private fr.free.nrw.commons.location.LatLng lastFocusLocation;
     private boolean recenterToUserLocation;
+    private Place selectedPlace;
 
 
     private MapboxMap.OnCameraMoveListener cameraMoveListener;
@@ -453,15 +454,11 @@ public class ExploreMapFragment extends PageableMapFragment
      */
     private void passInfoToSheet(final Place place) {
         Log.d("deneme","nearby marker selected");
-        /***
-         *
         selectedPlace = place;
-        updateBookmarkButtonImage(selectedPlace);
 
         bookmarkButton.setOnClickListener(view -> {
             final boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(selectedPlace);
-            updateBookmarkButtonImage(selectedPlace);
-            updateMarker(isBookmarked, selectedPlace, locationManager.getLastLocation());
+            //updateMarker(isBookmarked, selectedPlace, locationManager.getLastLocation());
         });
 
         wikipediaButton.setVisibility(place.hasWikipediaLink()?View.VISIBLE:View.GONE);
@@ -476,33 +473,16 @@ public class ExploreMapFragment extends PageableMapFragment
         commonsButton.setVisibility(selectedPlace.hasCommonsLink()?View.VISIBLE:View.GONE);
         commonsButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), selectedPlace.siteLinks.getCommonsLink()));
 
-        icon.setImageResource(selectedPlace.getLabel().getIcon());
+        //icon.setImageResource(selectedPlace.getLabel().getIcon());
 
         title.setText(selectedPlace.name);
         distance.setText(selectedPlace.distance);
         // Remove label since it is double information
-        String descriptionText = selectedPlace.getLongDescription()
-            .replace(selectedPlace.getName() + " (","");
-        descriptionText = (descriptionText.equals(selectedPlace.getLongDescription()) ? descriptionText : descriptionText.replaceFirst(".$",""));
+        //String descriptionText = selectedPlace.getLongDescription()
+          //  .replace(selectedPlace.getName() + " (","");
+        //descriptionText = (descriptionText.equals(selectedPlace.getLongDescription()) ? descriptionText : descriptionText.replaceFirst(".$",""));
         // Set the short description after we remove place name from long description
-        description.setText(descriptionText);
-
-        fabCamera.setOnClickListener(view -> {
-            if (fabCamera.isShown()) {
-                Timber.d("Camera button tapped. Place: %s", selectedPlace.toString());
-                storeSharedPrefs(selectedPlace);
-                controller.initiateCameraPick(getActivity());
-            }
-        });
-
-        fabGallery.setOnClickListener(view -> {
-            if (fabGallery.isShown()) {
-                Timber.d("Gallery button tapped. Place: %s", selectedPlace.toString());
-                storeSharedPrefs(selectedPlace);
-                controller.initiateGalleryPick(getActivity(), chipWlm.isChecked());
-            }
-        });
-        */
+        //description.setText(descriptionText);
     }
 
     @Override
