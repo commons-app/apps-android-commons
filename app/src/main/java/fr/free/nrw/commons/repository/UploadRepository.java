@@ -27,8 +27,6 @@ import java.util.Locale;
 import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import org.wikipedia.dataclient.mwapi.MwQueryPage;
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 import timber.log.Timber;
 
 /**
@@ -127,10 +125,10 @@ public class UploadRepository {
     }
 
     /**
-     * check if category exists
+     * check whether category exists
      */
-    public Single<List<CategoryItem>> checkCategoryExists(String query) {
-        return categoriesModel.checkIfCategoryExists(query);
+    public Single<List<CategoryItem>> checkWhetherCategoryExists(String query) {
+        return categoriesModel.checkWhetherCategoryExists(query);
     }
 
     /**

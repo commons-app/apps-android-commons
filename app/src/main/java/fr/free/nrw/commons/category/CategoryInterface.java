@@ -73,6 +73,6 @@ public interface CategoryInterface {
      * else it will return an page with id -1 denoting an error
      */
     @GET("w/api.php?action=query&format=json&prop=categoryinfo&formatversion=2")
-    Single<MwQueryResponse> checkIfCategoryExists(@Query("titles") String query);
+    Single<MwQueryResponse> checkWhetherCategoryExists(@Query("titles") String query);
 
 }

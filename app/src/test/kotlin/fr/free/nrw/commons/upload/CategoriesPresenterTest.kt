@@ -67,7 +67,7 @@ class CategoriesPresenterTest {
                     )
                 )
             )
-        whenever(repository.checkCategoryExists(ArgumentMatchers.anyString()))
+        whenever(repository.checkWhetherCategoryExists(ArgumentMatchers.anyString()))
             .thenReturn(Single.just(listOf()))
         whenever(repository.containsYear("selected")).thenReturn(false)
         whenever(repository.containsYear("doesContainYear")).thenReturn(true)
@@ -92,7 +92,7 @@ class CategoriesPresenterTest {
         whenever(repository.uploads).thenReturn(listOf())
         whenever(repository.searchAll(any(), any(), any())).thenReturn(Observable.just(listOf()))
         whenever(repository.selectedCategories).thenReturn(listOf())
-        whenever(repository.checkCategoryExists(any())).thenReturn(Single.just(listOf()))
+        whenever(repository.checkWhetherCategoryExists(any())).thenReturn(Single.just(listOf()))
 
         categoriesPresenter.searchForCategories("test")
         testScheduler.triggerActions()

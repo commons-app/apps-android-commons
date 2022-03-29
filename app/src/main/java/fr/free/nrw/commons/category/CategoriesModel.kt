@@ -7,7 +7,6 @@ import fr.free.nrw.commons.utils.StringSortingUtils
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.functions.Function4
-import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
@@ -151,10 +150,10 @@ class CategoriesModel @Inject constructor(
     }
 
     /**
-     * check if category exists
+     * check whether category exists
      */
-    fun checkIfCategoryExists(query: String): Single<List<CategoryItem>> {
-        return categoryClient.checkIfCategoryExists(query)
+    fun checkWhetherCategoryExists(query: String): Single<List<CategoryItem>> {
+        return categoryClient.checkWhetherCategoryExists(query)
     }
 
 

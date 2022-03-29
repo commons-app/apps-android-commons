@@ -55,7 +55,7 @@ class CategoriesPresenter @Inject constructor(
                         // Check if the category typed is a hidden category
                         val myIt = it
                         compositeDisposable.add(
-                            checkCategoryExist(currentQuery)
+                            checkWhetherCategoryExists(currentQuery)
                             .observeOn(ioScheduler)
                             .subscribeOn(mainThreadScheduler)
                             .subscribe({
@@ -79,10 +79,10 @@ class CategoriesPresenter @Inject constructor(
             .map { it.filterNot { categoryItem -> repository.containsYear(categoryItem.name) } }
 
     /**
-     * checks if category exists
+     * checks whether category exists
      */
-    private fun checkCategoryExist(term: String) =
-        repository.checkCategoryExists(term)
+    private fun checkWhetherCategoryExists(term: String) =
+        repository.checkWhetherCategoryExists(term)
             .subscribeOn(ioScheduler)
             .map { it }
 

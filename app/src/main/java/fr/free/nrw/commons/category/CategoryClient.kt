@@ -33,11 +33,11 @@ class CategoryClient @Inject constructor(private val categoryInterface: Category
     }
 
     /**
-     * check if category exists
+     * check whether category exists
      */
-    fun checkIfCategoryExists(query: String): Single<List<CategoryItem>> {
+    fun checkWhetherCategoryExists(query: String): Single<List<CategoryItem>> {
         return responseMapper(
-            categoryInterface.checkIfCategoryExists(query)
+            categoryInterface.checkWhetherCategoryExists(query)
         )
     }
 
