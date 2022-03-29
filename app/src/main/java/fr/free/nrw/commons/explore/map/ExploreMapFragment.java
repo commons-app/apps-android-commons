@@ -258,7 +258,7 @@ public class ExploreMapFragment extends PageableMapFragment
     private void initViews() {
         Timber.d("init views called");
         initBottomSheets();
-        // TODO nesli setBottomSheetCallbacks();
+        setBottomSheetCallbacks();
     }
 
     /**
@@ -288,6 +288,19 @@ public class ExploreMapFragment extends PageableMapFragment
                 }
             }
             return false;
+        });
+    }
+
+    /**
+     * Defines how bottom sheets will act on click
+     */
+    private void setBottomSheetCallbacks() {
+        bottomSheetDetails.setOnClickListener(v -> {
+            if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
+                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            } else if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
         });
     }
 
@@ -472,16 +485,14 @@ public class ExploreMapFragment extends PageableMapFragment
         commonsButton.setVisibility(place.hasCommonsLink()?View.VISIBLE:View.GONE);
         commonsButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), place.siteLinks.getCommonsLink()));
 
-        //icon.setImageResource(selectedPlace.getLabel().getIcon());
-
         title.setText(place.name);
         distance.setText(place.distance);
         // Remove label since it is double information
-        //String descriptionText = selectedPlace.getLongDescription()
-          //  .replace(selectedPlace.getName() + " (","");
-        //descriptionText = (descriptionText.equals(selectedPlace.getLongDescription()) ? descriptionText : descriptionText.replaceFirst(".$",""));
+        String descriptionText = place.getLongDescription()
+            .replace(place.getName() + " (","");
+        descriptionText = (descriptionText.equals(place.getLongDescription()) ? descriptionText : descriptionText.replaceFirst(".$",""));
         // Set the short description after we remove place name from long description
-        //description.setText(descriptionText);
+        description.setText(descriptionText);
     }
 
     @Override

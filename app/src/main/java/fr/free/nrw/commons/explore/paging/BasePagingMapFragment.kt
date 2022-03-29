@@ -50,7 +50,6 @@ abstract class BasePagingMapFragment<T> : CommonsDaggerSupportFragment(),
     @BindView(R.id.commonsButton) lateinit var commonsButton: LinearLayout
     @BindView(R.id.description) lateinit var description: TextView
     @BindView(R.id.title) lateinit var title: TextView
-    @BindView(R.id.icon) lateinit var icon: ImageView
     @BindView(R.id.category) lateinit var distance: TextView
 
     //private val loadingAdapter by lazy { FooterAdapter { injectedPresenter.retryFailedRequest() } }
