@@ -466,12 +466,10 @@ public class ExploreMapFragment extends PageableMapFragment
      * @param place Place of clicked nearby marker
      */
     private void passInfoToSheet(final Place place) {
-        Log.d("deneme","nearby marker selected");
-
-        bookmarkButton.setOnClickListener(view -> {
+        /*bookmarkButton.setOnClickListener(view -> {
             final boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(place);
             //updateMarker(isBookmarked, selectedPlace, locationManager.getLastLocation());
-        });
+        });*/
 
         directionsButton.setOnClickListener(view -> Utils.handleGeoCoordinates(getActivity(),
             place.getLocation()));
@@ -488,6 +486,7 @@ public class ExploreMapFragment extends PageableMapFragment
         // Set the short description after we remove place name from long description
         description.setText(descriptionText);
     }
+
 
     @Override
     public void addOnCameraMoveListener() {

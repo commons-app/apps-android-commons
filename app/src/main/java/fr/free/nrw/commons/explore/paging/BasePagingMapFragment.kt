@@ -42,8 +42,8 @@ abstract class BasePagingMapFragment<T> : CommonsDaggerSupportFragment(),
     @BindView(R.id.search_this_area_button) lateinit var searchThisAreaButton: Button
     @BindView(R.id.tv_attribution) lateinit var tvAttribution: AppCompatTextView
 
-    @BindView(R.id.bookmarkButtonImage) lateinit var bookmarkButtonImage: ImageView
-    @BindView(R.id.bookmarkButton) lateinit var bookmarkButton: LinearLayout
+    //@BindView(R.id.bookmarkButtonImage) lateinit var bookmarkButtonImage: ImageView
+    //@BindView(R.id.bookmarkButton) lateinit var bookmarkButton: LinearLayout
     @BindView(R.id.directionsButton) lateinit var directionsButton: LinearLayout
     @BindView(R.id.commonsButton) lateinit var commonsButton: LinearLayout
     @BindView(R.id.description) lateinit var description: TextView
