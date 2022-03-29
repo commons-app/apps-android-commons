@@ -473,12 +473,6 @@ public class ExploreMapFragment extends PageableMapFragment
             //updateMarker(isBookmarked, selectedPlace, locationManager.getLastLocation());
         });
 
-        wikipediaButton.setVisibility(place.hasWikipediaLink()?View.VISIBLE:View.GONE);
-        wikipediaButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), place.siteLinks.getWikipediaLink()));
-
-        wikidataButton.setVisibility(place.hasWikidataLink()?View.VISIBLE:View.GONE);
-        wikidataButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), place.siteLinks.getWikidataLink()));
-
         directionsButton.setOnClickListener(view -> Utils.handleGeoCoordinates(getActivity(),
             place.getLocation()));
 

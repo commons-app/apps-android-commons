@@ -44,8 +44,6 @@ abstract class BasePagingMapFragment<T> : CommonsDaggerSupportFragment(),
 
     @BindView(R.id.bookmarkButtonImage) lateinit var bookmarkButtonImage: ImageView
     @BindView(R.id.bookmarkButton) lateinit var bookmarkButton: LinearLayout
-    @BindView(R.id.wikipediaButton) lateinit var wikipediaButton: LinearLayout
-    @BindView(R.id.wikidataButton) lateinit var wikidataButton: LinearLayout
     @BindView(R.id.directionsButton) lateinit var directionsButton: LinearLayout
     @BindView(R.id.commonsButton) lateinit var commonsButton: LinearLayout
     @BindView(R.id.description) lateinit var description: TextView

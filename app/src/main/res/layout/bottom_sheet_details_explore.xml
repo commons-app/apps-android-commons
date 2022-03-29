@@ -112,66 +112,6 @@
                 android:textAllCaps="true"
                 />
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/wikidataButton"
-            android:layout_width="@dimen/dimen_0"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="@dimen/standard_gap"
-            android:clickable="true"
-            android:background="@drawable/button_background_selector"
-            android:orientation="vertical"
-            >
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:duplicateParentState="true"
-                app:srcCompat="@drawable/ic_wikidata_logo_24dp"
-                android:tint="?attr/rowButtonColor"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/wikidataButtonText"
-                android:paddingTop="@dimen/activity_margin_horizontal"
-                android:duplicateParentState="true"
-                android:textColor="@color/text_color_selector"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/nearby_wikidata"
-                android:textAllCaps="true"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/wikipediaButton"
-            android:layout_width="@dimen/dimen_0"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="@dimen/standard_gap"
-            android:clickable="true"
-            android:background="@drawable/button_background_selector"
-            android:orientation="vertical"
-            >
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:duplicateParentState="true"
-                app:srcCompat="@drawable/ic_wikipedia_logo_24dp"
-                android:tint="?attr/rowButtonColor"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/wikipediaButtonText"
-                android:paddingTop="@dimen/activity_margin_horizontal"
-                android:duplicateParentState="true"
-                android:textColor="@color/text_color_selector"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/nearby_wikipedia"
-                android:textAllCaps="true"
-                />
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/commonsButton"

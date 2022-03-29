@@ -24,12 +24,10 @@ import com.mapbox.mapboxsdk.annotations.IconFactory;
 import fr.free.nrw.commons.MapController;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.explore.ExplorePlace;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.Sitelinks;
-import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.UiUtils;
 import java.util.ArrayList;
@@ -165,8 +163,8 @@ public class ExploreMapController extends MapController {
                 media.getCoordinates(),
                 media.getCategories().toString(), // TODO make categories single string
                 new Sitelinks.Builder() // TODO add sitelinks
+                    .setCommonsLink(media.getPageTitle().getCanonicalUri())
                     .setWikipediaLink("")
-                    .setCommonsLink("")
                     .setWikidataLink("")
                     .build(),
                 media.getImageUrl(),
