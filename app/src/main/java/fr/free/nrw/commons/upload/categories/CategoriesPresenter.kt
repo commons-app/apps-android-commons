@@ -52,7 +52,7 @@ class CategoriesPresenter @Inject constructor(
                 .observeOn(mainThreadScheduler)
                 .subscribe(
                     {
-                        // Check if the category typed is a hidden category
+                        // Check whether the category typed is a hidden category
                         val myIt = it
                         compositeDisposable.add(
                             checkWhetherCategoryExists(currentQuery)
