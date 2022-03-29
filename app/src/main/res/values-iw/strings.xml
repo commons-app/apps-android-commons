@@ -462,7 +462,7 @@
   <string name="review_thanks_yes_button_text">התמונה הבאה</string>
   <string name="review_thanks_no_button_text">כן, למה לא</string>
   <string name="skip_image_explanation">לחיצה על הכפתור הזה תציג בפניך תמונה נוספת שנוספה לאחרונה לוויקישיתוף</string>
-  <string name="review_image_explanation">ניתן לסקור את התמונות ולשפר את האיכות של ויקישיתוף.\nארבע יסודות הסקירה הם:\n- האם התמונה קשורה לנושא?\n- האם התמונה תואמת לכללי זכויות היוצרים?\n- האם התמונה נמצאת בקטגוריה הנכונה?\n- אם הכול בסדר, ניתן גם להודות למי שתרם אותה.</string>
+  <string name="review_image_explanation" fuzzy="true">ניתן לסקור את התמונות ולשפר את האיכות של ויקישיתוף.\nארבע יסודות הסקירה הם:\n- האם התמונה קשורה לנושא?\n- האם התמונה תואמת לכללי זכויות היוצרים?\n- האם התמונה נמצאת בקטגוריה הנכונה?\n- אם הכול בסדר, ניתן גם להודות למי שתרם אותה.</string>
   <string name="no_image">לא נעשה שימוש בתמונות</string>
   <string name="no_image_reverted">לא שוחזרו תמונות</string>
   <string name="no_image_uploaded">לא הועלו תמונות</string>

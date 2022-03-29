@@ -280,6 +280,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Bewerte uns</string>
   <string name="about_faq">FAQ</string>
+  <string name="user_guide">Benutzerhandbuch</string>
   <string name="welcome_skip_button">Tutorial überspringen</string>
   <string name="no_internet">Internet nicht verfügbar</string>
   <string name="error_notifications">Fehler beim Abruf der Benachrichtigungen</string>
@@ -307,6 +308,7 @@
   <string name="title_activity_search">Suchen</string>
   <string name="search_recent_header">Letzte Suchanfragen:</string>
   <string name="provider_searches">Letzte Suchanfragen</string>
+  <string name="provider_recent_languages">Letzte Sprachabfragen</string>
   <string name="error_loading_categories">Beim Laden der Kategorien ist ein Fehler aufgetreten.</string>
   <string name="error_loading_depictions">Beim Laden von Darstellungen ist ein Fehler aufgetreten.</string>
   <string name="search_tab_title_media">Medien</string>
@@ -451,7 +453,7 @@
   <string name="review_thanks_yes_button_text">Nächstes Bild</string>
   <string name="review_thanks_no_button_text">Ja, warum nicht</string>
   <string name="skip_image_explanation">Das Anklicken dieser Schaltfläche gibt dir ein anderes kürzlich hochgeladenes Bild von Wikimedia Commons</string>
-  <string name="review_image_explanation">Du kannst Bilder überprüfen und die Qualität von Wikimedia Commons verbessern.\nDie vier Parameter der Überprüfung sind: \n- Ist dieses Bild im Geltungsbereich? \n- Folgt dieses Bild den Regeln des Urheberrechts? \n- Ist dieses Bild korrekt kategorisiert? \n- Falls alles gut geht, kannst du auch dem Beitrager danken.</string>
+  <string name="review_image_explanation" fuzzy="true">Du kannst Bilder überprüfen und die Qualität von Wikimedia Commons verbessern.\nDie vier Parameter der Überprüfung sind: \n- Ist dieses Bild im Geltungsbereich? \n- Folgt dieses Bild den Regeln des Urheberrechts? \n- Ist dieses Bild korrekt kategorisiert? \n- Falls alles gut geht, kannst du auch dem Beitrager danken.</string>
   <string name="no_image">Keine Bilder verwendet</string>
   <string name="no_image_reverted">Keine Bilder zurückgesetzt</string>
   <string name="no_image_uploaded">Keine Bilder hochgeladen</string>
@@ -668,4 +670,15 @@
   <string name="add_location">Standort hinzufügen</string>
   <string name="feedback_sharing_data_alert">Bitte entferne aus dieser E-Mail alle Informationen, die du nicht öffentlich mitteilen möchtest. Bitte beachte auch, dass deine E-Mail-Adresse, mit der du schreibst, sowie der dazugehörige Name und das Profilbild öffentlich sichtbar sind.</string>
   <string name="copyright_popup">Bitte lade nur Bilder hoch, die du selbst aufgenommen hast. Wer urheberrechtlich geschützte Bilder hochlädt, wird gesperrt. Dies gilt auch für die Beta-Variante. Vielen Dank, dass du die App getestet hast!</string>
+  <string name="select_feedback_data_choice">Bitte hebe die Markierung aller Informationen auf, die du nicht mit der Öffentlichkeit teilen möchtest.</string>
+  <string name="api_level">API-Level</string>
+  <string name="android_version">Android-Version</string>
+  <string name="device_manufacturer">Hersteller des Geräts</string>
+  <string name="device_model">Gerätemodell</string>
+  <string name="device_name">Gerätename</string>
+  <string name="network_type">Netzwerktyp</string>
+  <string name="thanks_feedback">Danke für dein Feedback</string>
+  <string name="error_feedback">Fehler beim Senden von Rückmeldungen</string>
+  <string name="enter_description">Wie lautet dein Feedback?</string>
+  <string name="your_feedback">Dein Feedback</string>
 </resources>

@@ -462,7 +462,7 @@
   <string name="review_thanks_yes_button_text">Image suivante</string>
   <string name="review_thanks_no_button_text">Oui, pourquoi pas</string>
   <string name="skip_image_explanation">Cliquer sur ce bouton vous donnera une autre image récemment téléversée sur Wikimédia Commons.</string>
-  <string name="review_image_explanation">Vous pouvez revoir les images et améliorer la qualité de Wikimedia Commons.\n Les quatre paramètres à revoir sont :\n – Cette image convient-elle au champ du projet ?\n – Cette image respecte-t-elle les règles de droits d’auteur ?\n – Cette image est-elle bien catégorisée ?\n – Si tout va bien, vous pouvez aussi remercier le contributeur.</string>
+  <string name="review_image_explanation" fuzzy="true">Vous pouvez revoir les images et améliorer la qualité de Wikimedia Commons.\n Les quatre paramètres à revoir sont :\n – Cette image convient-elle au champ du projet ?\n – Cette image respecte-t-elle les règles de droits d’auteur ?\n – Cette image est-elle bien catégorisée ?\n – Si tout va bien, vous pouvez aussi remercier le contributeur.</string>
   <string name="no_image">Aucune image utilisée</string>
   <string name="no_image_reverted">Aucune image annulée</string>
   <string name="no_image_uploaded">Aucune image téléversée</string>
@@ -526,7 +526,7 @@
   <string name="depictions_edit_helper_show_edit_title">Modifier les éléments représentés</string>
   <plurals name="depictions_edit_helper_show_edit_message_if">
     <item quantity="one">L’élément représenté %1$s est ajouté.</item>
-    <item quantity="other">Les éléments représentés %$s sont ajoutés.</item>
+    <item quantity="other">Les éléments représentés %1$s sont ajoutés.</item>
   </plurals>
   <string name="depictions_edit_helper_edit_message_else">Impossible d’ajouter des éléments représentés.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Essai de mise à jour des coordonnées.</string>
@@ -696,7 +696,7 @@
   <string name="device_model">Modèle de l’appareil</string>
   <string name="device_name">Nom de l’appareil</string>
   <string name="network_type">Type de réseau</string>
-  <string name="thanks_feedback">Merci pour avoir donné votre avis</string>
+  <string name="thanks_feedback">Merci d\'avoir donné votre avis</string>
   <string name="error_feedback">Erreur lors de l’envoi de l’avis</string>
   <string name="enter_description">Quel est votre avis ?</string>
   <string name="your_feedback">Votre avis</string>

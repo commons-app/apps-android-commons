@@ -272,6 +272,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Avalie-nos</string>
   <string name="about_faq">FAQ</string>
+  <string name="user_guide">Manual do utilizador</string>
   <string name="welcome_skip_button">Saltar a explicação</string>
   <string name="no_internet">A Internet não está disponível</string>
   <string name="error_notifications">Erro ao tentar obter as notificações</string>
@@ -299,6 +300,7 @@
   <string name="title_activity_search">Pesquisar</string>
   <string name="search_recent_header">Pesquisas recentes:</string>
   <string name="provider_searches">Consultas pesquisadas recentemente</string>
+  <string name="provider_recent_languages">Consultas de língua recentes</string>
   <string name="error_loading_categories">Ocorreu um erro ao carregar categorias.</string>
   <string name="error_loading_depictions">Ocorreu um erro ao carregar representações.</string>
   <string name="search_tab_title_media">Multimédia</string>
@@ -443,7 +445,7 @@
   <string name="review_thanks_yes_button_text">Imagem seguinte</string>
   <string name="review_thanks_no_button_text">Sim, por que não</string>
   <string name="skip_image_explanation">Clicar este botão dá-lhe outra imagem carregada recentemente da wiki Wikimedia Commons</string>
-  <string name="review_image_explanation">Pode rever imagens e melhorar a qualidade da wiki Wikimedia Commons.\n Os quatro parâmetros de revisão são:\n- Esta imagem está enquadrada no nosso âmbito?\n- Esta imagem respeita as regras dos direitos de autor?\n- Esta imagem está categorizada corretamente?\n- Se tudo correr bem, também poderá agradecer ao contribuidor.</string>
+  <string name="review_image_explanation" fuzzy="true">Pode rever imagens e melhorar a qualidade da wiki Wikimedia Commons.\n Os quatro parâmetros de revisão são:\n- Esta imagem está enquadrada no nosso âmbito?\n- Esta imagem respeita as regras dos direitos de autor?\n- Esta imagem está categorizada corretamente?\n- Se tudo correr bem, também poderá agradecer ao contribuidor.</string>
   <string name="no_image">Não foi usada nenhuma imagem</string>
   <string name="no_image_reverted">Não foi revertida nenhuma imagem</string>
   <string name="no_image_uploaded">Não foi carregada nenhuma imagem</string>
@@ -503,6 +505,13 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Não foi possível adicionar categorias.</string>
   <string name="category_edit_button_text">Atualizar categorias</string>
+  <string name="depictions_edit_helper_make_edit_toast">A tentar atualizar os elementos retratados.</string>
+  <string name="depictions_edit_helper_show_edit_title">Editar elementos retratados</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">O elemento retratado %1$s está adicionado.</item>
+    <item quantity="other">Os elementos retratados %1$s estão adicionados.</item>
+  </plurals>
+  <string name="depictions_edit_helper_edit_message_else">Não foi possível adicionar os elementos retratados.</string>
   <string name="coordinates_edit_helper_make_edit_toast">A tentar atualizar coordenadas.</string>
   <string name="coordinates_edit_helper_show_edit_title">Atualização de coordenadas</string>
   <string name="description_edit_helper_show_edit_title">Atualização da descrição</string>
@@ -650,6 +659,7 @@
   <string name="contributions_of_user">Contribuições do utilizador: %s</string>
   <string name="achievements_of_user">Realizações do utilizador: %s</string>
   <string name="menu_view_user_page">Ver página de utilizador</string>
+  <string name="edit_depictions">Editar elementos retratados</string>
   <string name="advanced_options">Opções avançadas</string>
   <string name="advanced_query_info_text">Pode personalizar a consulta de locais próximos. Se obtiver erros, reiniciar e aplicar.</string>
   <string name="apply">Aplicar</string>
@@ -659,7 +669,18 @@
   <string name="no_location_found_message">Que tal adicionar o local onde a imagem foi tirada?\nOs dados de localização ajudam os editores da wiki a encontrarem a sua fotografia, tornando-a muito mais útil.\nObrigado!</string>
   <string name="add_location">Adicionar localização</string>
   <string name="feedback_sharing_data_alert">Remova desta mensagem de correio todas as informações que não se sinta à vontade em partilhar publicamente, por favor. Adicionalmente, esteja consciente de que o seu endereço de correio eletrónico, com o qual está a fazer esta publicação, e o nome e imagem de perfil a ele associados, serão visíveis pelo público geral.</string>
-  <string name="achievements_unavailable_beta" fuzzy="true">As realizações só estão disponíveis no sabor de produção.</string>
-  <string name="leaderboard_unavailable_beta" fuzzy="true">A tabela de classificação só está disponível no sabor de produção.</string>
+  <string name="achievements_unavailable_beta">As realizações só estão disponíveis na versão de produção; consulte a documentação para programadores, por favor.</string>
+  <string name="leaderboard_unavailable_beta">A tabela de classificação só está disponível na versão de produção; consulte a documentação para programadores, por favor.</string>
   <string name="copyright_popup">Carregue somente fotografias tiradas por si. Os utilizadores que carregarem imagens cujos direitos de autor estão protegidos serão bloqueados. Isto também se aplica à versão beta. Obrigado por testar a aplicação!</string>
+  <string name="select_feedback_data_choice">Desmarque todas as informações que não se sente à vontade em tornar públicas.</string>
+  <string name="api_level">Nível da API</string>
+  <string name="android_version">Versão Android</string>
+  <string name="device_manufacturer">Fabricante do dispositivo</string>
+  <string name="device_model">Modelo do dispositivo</string>
+  <string name="device_name">Nome do dispositivo</string>
+  <string name="network_type">Tipo de rede</string>
+  <string name="thanks_feedback">Obrigado por dar a sua opinião</string>
+  <string name="error_feedback">Falha ao enviar opinião</string>
+  <string name="enter_description">Qual é a sua opinião?</string>
+  <string name="your_feedback">A sua opinião</string>
 </resources>

@@ -436,7 +436,7 @@
   <string name="review_thanks_yes_button_text">Gambar selanjutnya</string>
   <string name="review_thanks_no_button_text">Ya, mengapa tidak</string>
   <string name="skip_image_explanation">Menekan tombol ini akan memberikan Anda gambar lain yang baru diunggah dari Wikimedia Commons</string>
-  <string name="review_image_explanation">Anda dapat meninjau gambar dan meningkatkan kualitas Wikimedia Commons.\n Empat parameter peninjauan adalah: \n - Apakah gambar ini di dalam cakupan? \n - Apakah gambar ini mengikut aturan hak cipta? \n - Apakah gambar ini dikategorikan dengan benar? \n - Jika semuanya berjalan lancar Anda juga bisa berterima kasih kepada kontributor.</string>
+  <string name="review_image_explanation" fuzzy="true">Anda dapat meninjau gambar dan meningkatkan kualitas Wikimedia Commons.\n Empat parameter peninjauan adalah: \n - Apakah gambar ini di dalam cakupan? \n - Apakah gambar ini mengikut aturan hak cipta? \n - Apakah gambar ini dikategorikan dengan benar? \n - Jika semuanya berjalan lancar Anda juga bisa berterima kasih kepada kontributor.</string>
   <string name="no_image">Tidak ada gambar digunakan</string>
   <string name="no_image_reverted">Tidak ada gambar dibalikkan</string>
   <string name="no_image_uploaded">Tidak ada gambar diunggah</string>
