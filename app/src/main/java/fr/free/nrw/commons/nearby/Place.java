@@ -33,6 +33,7 @@ public class Place implements Parcelable {
     public String distance;
     public final Sitelinks siteLinks;
     private boolean isMonument;
+    private String thumb;
 
     public Place() {
         language = null;
@@ -57,6 +58,20 @@ public class Place implements Parcelable {
         this.pic = (pic == null) ? "":pic;
         this.exists = exists;
     }
+
+    public Place(String name, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, String thumb) {
+        this.name = name;
+        this.longDescription = longDescription;
+        this.location = location;
+        this.category = category;
+        this.siteLinks = siteLinks;
+        this.pic = (pic == null) ? "":pic;
+        this.thumb = thumb;
+        this.language = null;
+        this.label = null;
+        this.exists = true;
+    }
+
     public Place(Parcel in) {
         this.language = in.readString();
         this.name = in.readString();
@@ -279,4 +294,12 @@ public class Place implements Parcelable {
             return new Place[size];
         }
     };
+
+    public String getThumb() {
+        return thumb;
+    }
+
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
+    }
 }

@@ -454,29 +454,28 @@ public class ExploreMapFragment extends PageableMapFragment
      */
     private void passInfoToSheet(final Place place) {
         Log.d("deneme","nearby marker selected");
-        selectedPlace = place;
 
         bookmarkButton.setOnClickListener(view -> {
-            final boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(selectedPlace);
+            final boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(place);
             //updateMarker(isBookmarked, selectedPlace, locationManager.getLastLocation());
         });
 
         wikipediaButton.setVisibility(place.hasWikipediaLink()?View.VISIBLE:View.GONE);
-        wikipediaButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), selectedPlace.siteLinks.getWikipediaLink()));
+        wikipediaButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), place.siteLinks.getWikipediaLink()));
 
         wikidataButton.setVisibility(place.hasWikidataLink()?View.VISIBLE:View.GONE);
-        wikidataButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), selectedPlace.siteLinks.getWikidataLink()));
+        wikidataButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), place.siteLinks.getWikidataLink()));
 
         directionsButton.setOnClickListener(view -> Utils.handleGeoCoordinates(getActivity(),
-            selectedPlace.getLocation()));
+            place.getLocation()));
 
-        commonsButton.setVisibility(selectedPlace.hasCommonsLink()?View.VISIBLE:View.GONE);
-        commonsButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), selectedPlace.siteLinks.getCommonsLink()));
+        commonsButton.setVisibility(place.hasCommonsLink()?View.VISIBLE:View.GONE);
+        commonsButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), place.siteLinks.getCommonsLink()));
 
         //icon.setImageResource(selectedPlace.getLabel().getIcon());
 
-        title.setText(selectedPlace.name);
-        distance.setText(selectedPlace.distance);
+        title.setText(place.name);
+        distance.setText(place.distance);
         // Remove label since it is double information
         //String descriptionText = selectedPlace.getLongDescription()
           //  .replace(selectedPlace.getName() + " (","");

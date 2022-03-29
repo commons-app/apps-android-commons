@@ -22,7 +22,7 @@ public abstract class MapController {
      * We pass this variable as a group of placeList and boundaryCoordinates
      */
     public class ExplorePlacesInfo {
-        public List<ExplorePlace> explorePlaceList; // List of nearby places
+        public List<Place> explorePlaceList; // List of nearby places
         public LatLng[] boundaryCoordinates; // Corners of nearby area
         public LatLng curLatLng; // Current location when this places are populated
         public LatLng searchLatLng; // Search location for finding this places

@@ -28,6 +28,7 @@ import fr.free.nrw.commons.explore.ExplorePlace;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.nearby.Sitelinks;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.UiUtils;
@@ -115,7 +116,7 @@ public class ExploreMapController extends MapController {
      */
     public static List<NearbyBaseMarker> loadAttractionsFromLocationToBaseMarkerOptions(
         LatLng curLatLng,
-        List<ExplorePlace> placeList,
+        List<Place> placeList,
         Context context,
         List<Place> bookmarkLocations) {
         List<NearbyBaseMarker> baseMarkerOptions = new ArrayList<>();
@@ -135,7 +136,7 @@ public class ExploreMapController extends MapController {
             // ignore when running tests.
         }
         if (vectorDrawable != null) {
-            for (ExplorePlace explorePlace : placeList) {
+            for (Place explorePlace : placeList) {
                 final NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
                 String distance = formatDistanceBetween(curLatLng, explorePlace.location);
                 explorePlace.setDistance(distance);
@@ -156,13 +157,18 @@ public class ExploreMapController extends MapController {
         return baseMarkerOptions;
     }
 
-    private List<ExplorePlace> mediaToExplorePlace( List<Media> mediaList) {
-        List<ExplorePlace> explorePlaceList = new ArrayList<>();
+    private List<Place> mediaToExplorePlace( List<Media> mediaList) {
+        List<Place> explorePlaceList = new ArrayList<>();
         for (Media media :mediaList) {
-            explorePlaceList.add(new ExplorePlace(media.getFilename(),
+            explorePlaceList.add(new Place(media.getFilename(),
                 media.getFallbackDescription(),
                 media.getCoordinates(),
-                media.getImageUrl(),
+                media.getCategories().toString(), // TODO make categories single string
+                new Sitelinks.Builder() // TODO add sitelinks
+                    .setWikipediaLink("")
+                    .setCommonsLink("")
+                    .setWikidataLink("")
+                    .build(),
                 media.getImageUrl(),
                 media.getThumbUrl()));
         }
