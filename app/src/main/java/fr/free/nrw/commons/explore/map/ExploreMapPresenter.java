@@ -169,7 +169,7 @@ public class ExploreMapPresenter
 
     @Override
     public boolean backButtonClicked() {
-        return false;
+        return exploreMapFragmentView.backButtonClicked();
     }
 
     @Override

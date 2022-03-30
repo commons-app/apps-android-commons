@@ -141,8 +141,14 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
                     .setDisplayHomeAsUpEnabled(false);
                 return true;
             }
-        } else {
+        } else if (tabLayout.getSelectedTabPosition() == 1) { //Mobile root fragment
             if (mobileRootFragment.backPressed()) {
+                ((BaseActivity) getActivity()).getSupportActionBar()
+                    .setDisplayHomeAsUpEnabled(false);
+                return true;
+            }
+        } else { //explore map fragment
+            if (mapRootFragment.backPressed()) {
                 ((BaseActivity) getActivity()).getSupportActionBar()
                     .setDisplayHomeAsUpEnabled(false);
                 return true;

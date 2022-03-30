@@ -44,6 +44,7 @@ public class ExploreMapContract {
         void addNearbyMarkersToMapBoxMap(final List<NearbyBaseMarker> nearbyBaseMarkers, final Marker selectedMarker);
         void setMapBoundaries(CameraUpdate cameaUpdate);
         void setFABRecenterAction(android.view.View.OnClickListener onClickListener);
+        boolean backButtonClicked();
     }
 
     interface UserActions {

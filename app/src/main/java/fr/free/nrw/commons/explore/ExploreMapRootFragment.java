@@ -205,6 +205,14 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
                 ((MainActivity) getActivity()).showTabs();
                 return true;
             }
+        } if (mapFragment != null && mapFragment.isVisible()) {
+            if (mapFragment.backButtonClicked()) {
+                // Explore map fragment handled the event no further action required.
+                return true;
+            } else {
+                ((MainActivity) getActivity()).showTabs();
+                return false;
+            }
         } else {
             ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
         }

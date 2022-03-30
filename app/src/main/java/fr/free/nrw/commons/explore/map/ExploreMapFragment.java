@@ -115,7 +115,7 @@ public class ExploreMapFragment extends PageableMapFragment
     @Inject
     SystemThemeUtils systemThemeUtils;
 
-    private boolean isFromSearchActivity;
+    public boolean isFromSearchActivity;
     private ExploreMapPresenter presenter;
     private String query = "";
 
@@ -751,6 +751,21 @@ public class ExploreMapFragment extends PageableMapFragment
     @Override
     public void setFABRecenterAction(OnClickListener onClickListener) {
         fabRecenter.setOnClickListener(onClickListener);
+    }
+
+    @Override
+    public boolean backButtonClicked() {
+        if (!isFromSearchActivity) {
+            if (!(bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN)) {
+                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            // TODO
+            return true;
+        }
     }
 
     @Override
