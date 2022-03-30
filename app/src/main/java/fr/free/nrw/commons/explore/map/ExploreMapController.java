@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
+import com.mapbox.mapboxsdk.annotations.Marker;
 import fr.free.nrw.commons.MapController;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
@@ -114,16 +115,20 @@ public class ExploreMapController extends MapController {
      */
     public static List<NearbyBaseMarker> loadAttractionsFromLocationToBaseMarkerOptions(
         LatLng curLatLng,
-        List<Place> placeList,
+        final List<Place> placeList,
         Context context,
-        List<Place> bookmarkLocations) {
+        List<Place> bookmarkLocations,
+        NearbyBaseMarkerThumbCallback callback,
+        Marker selectedMarker,
+        boolean shouldTrackPosition,
+        ExplorePlacesInfo explorePlacesInfo) {
         List<NearbyBaseMarker> baseMarkerOptions = new ArrayList<>();
 
         if (placeList == null) {
             return baseMarkerOptions;
         }
 
-        placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
+        //placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
 
         VectorDrawableCompat vectorDrawable = null;
         try {
@@ -147,8 +152,26 @@ public class ExploreMapController extends MapController {
                 nearbyBaseMarker.place(explorePlace);
                 // TODO Glide and thumbnails here
 
-                nearbyBaseMarker.icon(IconFactory.getInstance(context).fromBitmap(UiUtils.getBitmap(vectorDrawable)));
-                baseMarkerOptions.add(nearbyBaseMarker);
+                Glide.with(context)
+                    .asBitmap()
+                    .load(explorePlace.getThumb())
+                    .into(new CustomTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                            nearbyBaseMarker.setIcon(IconFactory.getInstance(context).fromBitmap(resource));
+                            baseMarkerOptions.add(nearbyBaseMarker);
+                            if (baseMarkerOptions.size() == placeList.size()) {
+                                callback.onNearbyBaseMarkerThumbsReady(baseMarkerOptions, explorePlacesInfo, selectedMarker, shouldTrackPosition);
+                            }
+                        }
+
+                        @Override
+                        public void onLoadCleared(@Nullable Drawable placeholder) {
+                        }
+                    });
+
+                //nearbyBaseMarker.icon(IconFactory.getInstance(context).fromBitmap(UiUtils.getBitmap(vectorDrawable)));
+                //baseMarkerOptions.add(nearbyBaseMarker);
             }
         }
 
@@ -171,5 +194,10 @@ public class ExploreMapController extends MapController {
                 media.getThumbUrl()));
         }
         return explorePlaceList;
+    }
+
+
+    interface NearbyBaseMarkerThumbCallback {
+        void onNearbyBaseMarkerThumbsReady(List<NearbyBaseMarker> baseMarkers, ExplorePlacesInfo explorePlacesInfo, Marker selectedMarker, boolean shouldTrackPosition);
     }
 }

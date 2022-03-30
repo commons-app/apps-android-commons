@@ -763,7 +763,6 @@ public class ExploreMapFragment extends PageableMapFragment
                 return false;
             }
         } else {
-            // TODO
             return true;
         }
     }

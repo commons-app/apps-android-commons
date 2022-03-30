@@ -4,6 +4,7 @@ import static fr.free.nrw.commons.location.LocationServiceManager.LocationChange
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.SEARCH_CUSTOM_AREA;
 
 
+import android.content.Context;
 import android.view.View;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
@@ -11,12 +12,14 @@ import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import fr.free.nrw.commons.MapController;
 import fr.free.nrw.commons.MapController.ExplorePlacesInfo;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
+import fr.free.nrw.commons.explore.map.ExploreMapController.NearbyBaseMarkerThumbCallback;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.NearbyController;
+import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.utils.LocationUtils;
 import io.reactivex.Observable;
 import java.lang.reflect.Proxy;
@@ -25,7 +28,8 @@ import timber.log.Timber;
 
 public class ExploreMapPresenter
     implements ExploreMapContract.UserActions,
-    LocationUpdateListener{
+    LocationUpdateListener,
+    NearbyBaseMarkerThumbCallback {
     BookmarkLocationsDao bookmarkLocationDao;
     private boolean isNearbyLocked;
     private boolean placesLoadedOnce;
@@ -226,13 +230,25 @@ public class ExploreMapPresenter
     public void updateMapMarkers(
         MapController.ExplorePlacesInfo explorePlacesInfo, Marker selectedMarker, boolean shouldTrackPosition) {
         exploreMapFragmentView.setMapBoundaries(CameraUpdateFactory.newLatLngBounds(getLatLngBounds(explorePlacesInfo.boundaryCoordinates), 10));
+        prepareNearbyBaseMarkers(explorePlacesInfo, selectedMarker, shouldTrackPosition);
+    }
+
+    void prepareNearbyBaseMarkers(MapController.ExplorePlacesInfo explorePlacesInfo, Marker selectedMarker, boolean shouldTrackPosition) {
+        exploreMapController
+            .loadAttractionsFromLocationToBaseMarkerOptions(explorePlacesInfo.curLatLng, // Curlatlang will be used to calculate distances
+                explorePlacesInfo.explorePlaceList,
+                exploreMapFragmentView.getContext(),
+                bookmarkLocationDao.getAllBookmarksLocations(),
+                this,
+                selectedMarker,
+                shouldTrackPosition,
+                explorePlacesInfo);
+    }
+
+    @Override
+    public void onNearbyBaseMarkerThumbsReady(List<NearbyBaseMarker> baseMarkers, ExplorePlacesInfo explorePlacesInfo, Marker selectedMarker, boolean shouldTrackPosition) {
         if(null != exploreMapFragmentView) {
-            List<NearbyBaseMarker> nearbyBaseMarkers = exploreMapController
-                .loadAttractionsFromLocationToBaseMarkerOptions(explorePlacesInfo.curLatLng, // Curlatlang will be used to calculate distances
-                    explorePlacesInfo.explorePlaceList,
-                    exploreMapFragmentView.getContext(),
-                    bookmarkLocationDao.getAllBookmarksLocations());
-            exploreMapFragmentView.addNearbyMarkersToMapBoxMap(nearbyBaseMarkers, selectedMarker);
+            exploreMapFragmentView.addNearbyMarkersToMapBoxMap(baseMarkers, selectedMarker);
             exploreMapFragmentView.addCurrentLocationMarker(explorePlacesInfo.curLatLng);
             if(shouldTrackPosition){
                 exploreMapFragmentView.updateMapToTrackPosition(explorePlacesInfo.curLatLng);
@@ -304,4 +320,5 @@ public class ExploreMapPresenter
     public void markerSelected(Marker marker) {
         exploreMapFragmentView.displayBottomSheetWithInfo(marker);
     }
+
 }
