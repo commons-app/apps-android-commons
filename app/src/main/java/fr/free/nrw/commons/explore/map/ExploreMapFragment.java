@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -433,7 +434,21 @@ public class ExploreMapFragment extends PageableMapFragment
 
     @Override
     public void recenterMap(LatLng curLatLng) {
+        final CameraPosition position;
 
+        if (ViewUtil.isPortrait(getActivity())) {
+            position = new CameraPosition.Builder()
+                .target(new com.mapbox.mapboxsdk.geometry.LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
+                .zoom(mapBox.getCameraPosition().zoom) // Same zoom level
+                .build();
+        } else {
+            position = new CameraPosition.Builder()
+                .target(new com.mapbox.mapboxsdk.geometry.LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
+                .zoom(mapBox.getCameraPosition().zoom) // Same zoom level
+                .build();
+        }
+
+        mapBox.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
     }
 
     @Override
@@ -708,6 +723,11 @@ public class ExploreMapFragment extends PageableMapFragment
     @Override
     public void setMapBoundaries(CameraUpdate cameaUpdate) {
         mapBox.easeCamera(cameaUpdate);
+    }
+
+    @Override
+    public void setFABRecenterAction(OnClickListener onClickListener) {
+        fabRecenter.setOnClickListener(onClickListener);
     }
 
     @Override

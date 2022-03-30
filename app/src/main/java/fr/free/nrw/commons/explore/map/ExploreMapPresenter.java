@@ -151,8 +151,14 @@ public class ExploreMapPresenter
         exploreMapFragmentView = DUMMY;
     }
 
+    /**
+     * Sets click listener of FAB
+     */
     @Override
     public void setActionListeners(JsonKvStore applicationKvStore) {
+        exploreMapFragmentView.setFABRecenterAction(v -> {
+            exploreMapFragmentView.recenterMap(curLatLng);
+        });
 
     }
 

@@ -43,6 +43,7 @@ public class ExploreMapContract {
         void setCustomQuery(String customQuery);
         void addNearbyMarkersToMapBoxMap(final List<NearbyBaseMarker> nearbyBaseMarkers, final Marker selectedMarker);
         void setMapBoundaries(CameraUpdate cameaUpdate);
+        void setFABRecenterAction(android.view.View.OnClickListener onClickListener);
     }
 
     interface UserActions {
