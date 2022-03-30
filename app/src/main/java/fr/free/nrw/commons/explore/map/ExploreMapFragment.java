@@ -11,9 +11,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
@@ -55,6 +57,7 @@ import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ExecutorUtils;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.MapUtils;
@@ -434,8 +437,16 @@ public class ExploreMapFragment extends PageableMapFragment
 
     @Override
     public void recenterMap(LatLng curLatLng) {
-        final CameraPosition position;
+        if (isPermissionDenied || curLatLng == null) {
+            recenterToUserLocation = true;
+            checkPermissionsAndPerformAction();
+            if (!isPermissionDenied && !(locationManager.isNetworkProviderEnabled() || locationManager.isGPSProviderEnabled())) {
+                showLocationOffDialog();
+            }
+            return;
+        }
 
+        final CameraPosition position;
         if (ViewUtil.isPortrait(getActivity())) {
             position = new CameraPosition.Builder()
                 .target(new com.mapbox.mapboxsdk.geometry.LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
@@ -453,12 +464,24 @@ public class ExploreMapFragment extends PageableMapFragment
 
     @Override
     public void showLocationOffDialog() {
-
+        // This creates a dialog box that prompts the user to enable location
+        DialogUtil
+            .showAlertDialog(getActivity(), getString(R.string.ask_to_turn_location_on), getString(R.string.nearby_needs_location),
+                getString(R.string.yes), getString(R.string.no),  this::openLocationSettings, null);
     }
 
     @Override
     public void openLocationSettings() {
+        // This method opens the location settings of the device along with a followup toast.
+        final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        final PackageManager packageManager = getActivity().getPackageManager();
 
+        if (intent.resolveActivity(packageManager)!= null) {
+            startActivity(intent);
+            Toast.makeText(getContext(), R.string.recommend_high_accuracy_mode, Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getContext(), R.string.cannot_open_location_settings, Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
