@@ -5,12 +5,10 @@ import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 
-import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
-import com.google.android.material.snackbar.Snackbar;
 import org.wikipedia.dataclient.mwapi.MwQueryPage;
 
 import java.util.ArrayList;
@@ -158,18 +156,23 @@ public class ReviewController {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((result) -> {
-                    String message;
-                    String title;
-                    if (result) {
-                        title = context.getString(R.string.send_thank_success_title);
-                        message = context.getString(R.string.send_thank_success_message, media.getDisplayTitle());
-                    } else {
-                        title = context.getString(R.string.send_thank_failure_title);
-                        message = context.getString(R.string.send_thank_failure_message, media.getDisplayTitle());
-                    }
-
-                    ViewUtil.showShortToast(context,message);
+                    displayToast(context,result);
                 }, Timber::e);
+    }
+
+    @SuppressLint("StringFormatInvalid")
+    private void displayToast(final Context context, final boolean result){
+        final String message;
+        final String title;
+        if (result) {
+            title = context.getString(R.string.send_thank_success_title);
+            message = context.getString(R.string.send_thank_success_message, media.getDisplayTitle());
+        } else {
+            title = context.getString(R.string.send_thank_failure_title);
+            message = context.getString(R.string.send_thank_failure_message, media.getDisplayTitle());
+        }
+
+        ViewUtil.showShortToast(context,message);
     }
 
     private void showNotification(String title, String message) {
