@@ -394,7 +394,7 @@
   <string name="review_thanks_yes_button_text" fuzzy="true">Bona, parché no!</string>
   <string name="review_thanks_no_button_text" fuzzy="true">Imajine dopo</string>
   <string name="skip_image_explanation">Schiciando sto boton te vegnarà fora na imajine cargda ultimamente da Wikimedia Commons</string>
-  <string name="review_image_explanation">Te połi rivardare łe imajini par mejorar ła cuałità de Wikimedia Commons.\n I cuatro parametri par rivardare i xé:\n- L\'imajine xeła a tema?\n- Sta imajine segueła łe regołamentasion del copyright?\n- Sta imajine xeła sta categorixada ben?\n- Se tuto ndase ben, te podarisi anca ringrasiar el contributor.</string>
+  <string name="review_image_explanation" fuzzy="true">Te połi rivardare łe imajini par mejorar ła cuałità de Wikimedia Commons.\n I cuatro parametri par rivardare i xé:\n- L\'imajine xeła a tema?\n- Sta imajine segueła łe regołamentasion del copyright?\n- Sta imajine xeła sta categorixada ben?\n- Se tuto ndase ben, te podarisi anca ringrasiar el contributor.</string>
   <string name="no_image">Nisuna imajine doparada</string>
   <string name="no_image_reverted">Nisuna imajine trata fora</string>
   <string name="no_image_uploaded">Nisuna imajine cargada</string>

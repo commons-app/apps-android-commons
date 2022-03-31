@@ -421,7 +421,7 @@
   <string name="review_thanks_yes_button_text">Naslednja slika</string>
   <string name="review_thanks_no_button_text">Da, zakaj ne</string>
   <string name="skip_image_explanation">S klikom tega gumba boste pridobili še eno sliko, ki je bila pred kratkim naložena v Wikimedijino zbirko.</string>
-  <string name="review_image_explanation">Pregledujete lahko slike in izboljšujete kakovost Wikimedijine zbirke.\nŠtirje parametri pregledovanja so:\n– Ali slika spada v okvir projekta?\n– Ali slika upošteva avtorske pravice?\n– Ali je slika pravilno kategorizirana?\n– Če je vse v redu, se lahko tudi zahvalite naložniku.</string>
+  <string name="review_image_explanation" fuzzy="true">Pregledujete lahko slike in izboljšujete kakovost Wikimedijine zbirke.\nŠtirje parametri pregledovanja so:\n– Ali slika spada v okvir projekta?\n– Ali slika upošteva avtorske pravice?\n– Ali je slika pravilno kategorizirana?\n– Če je vse v redu, se lahko tudi zahvalite naložniku.</string>
   <string name="no_image">Ni uporabljenih slik</string>
   <string name="no_image_reverted">Ni vrnjenih slik</string>
   <string name="no_image_uploaded">Ni naloženih slik</string>
@@ -575,7 +575,7 @@
   <string name="license_step_title">Licenca datoteke</string>
   <string name="media_detail_step_title">Podatki o datoteki</string>
   <string name="menu_view_category_page">Prikaži stran kategorije</string>
-  <string name="menu_view_item_page">Prikaži stran predmeta</string>
+  <string name="menu_view_item_page">Ogled strani predmeta</string>
   <string name="app_ui_language">Jezik uporabniškega vmesnika aplikacije</string>
   <string name="read_help_link">Preberi več</string>
   <string name="media_detail_in_all_languages">V vseh jezikih</string>

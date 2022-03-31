@@ -466,7 +466,7 @@
   <string name="review_thanks_yes_button_text">Imagen siguiente</string>
   <string name="review_thanks_no_button_text">Sí, por qué no</string>
   <string name="skip_image_explanation">Haciendo clic a este botón obtendrá otra imagen de Wikimedia Commons subida recientemente</string>
-  <string name="review_image_explanation">Es posible revisar las imágenes y mejorar la calidad de Wikimedia Commons.\nLos cuatro criterios de revisión son:\n- ¿La imagen recae dentro del alcance del proyecto?\n- ¿La imagen sigue las normas de derechos de autor?\n- ¿Las categorías son las correctas?\n- Si todo va bien, es posible enviar un agradecimiento al contribuidor.</string>
+  <string name="review_image_explanation" fuzzy="true">Es posible revisar las imágenes y mejorar la calidad de Wikimedia Commons.\nLos cuatro criterios de revisión son:\n- ¿La imagen recae dentro del alcance del proyecto?\n- ¿La imagen sigue las normas de derechos de autor?\n- ¿Las categorías son las correctas?\n- Si todo va bien, es posible enviar un agradecimiento al contribuidor.</string>
   <string name="no_image">No se utilizó ninguna imagen</string>
   <string name="no_image_reverted">Ninguna imagen revertida</string>
   <string name="no_image_uploaded">Ninguna imagen subida</string>

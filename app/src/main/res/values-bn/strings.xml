@@ -284,6 +284,7 @@
   <string name="search_commons">কমন্সে অনুসন্ধান করুন</string>
   <string name="title_activity_search">অনুসন্ধান</string>
   <string name="search_recent_header">সাম্প্রতিক অনুসন্ধানগুলি:</string>
+  <string name="provider_recent_languages">সাম্প্রতিক ভাষা প্রশ্ন</string>
   <string name="search_tab_title_media">মিডিয়া</string>
   <string name="search_tab_title_categories">বিষয়শ্রেণীসমূহ</string>
   <string name="search_tab_title_depictions">আইটেম</string>
@@ -340,7 +341,7 @@
   <string name="review_copyright_explanation">প্রায়শ কপিরাইট লঙ্ঘন করে লোগো, স্ক্রিনশট, চলচ্চিত্রের পোস্টার আপলোড করা হয়।\nমুছে ফেলার জন্য এই চিত্রটি মনোনীত করতে “না” টিপুন</string>
   <string name="review_thanks_yes_button_text">পরবর্তী ছবি</string>
   <string name="review_thanks_no_button_text">হ্যাঁ, কেন নয়</string>
-  <string name="review_image_explanation">আপনি চিত্রগুলি পর্যালোচনা করতে এবং উইকিমিডিয়া কমন্সের গুণমান উন্নত করতে পারেন।\n পর্যালোচনার চারটি মানদণ্ড হল:\n - এই চিত্রটি কি প্রকল্পের উদ্দেশ্যগুলির সাথে সামঞ্জস্যপূর্ণ?\n - এই চিত্রটি কি কপিরাইটের নিয়ম অনুসরণ করে?\n - এই চিত্রটিকে কি সঠিকভাবে শ্রেণীবদ্ধ করা হয়েছে?\n - যদি সবকিছু ঠিক থাকে তবে আপনি অবদানকারীকে ধন্যবাদও জানাতে পারেন।</string>
+  <string name="review_image_explanation" fuzzy="true">আপনি চিত্রগুলি পর্যালোচনা করতে এবং উইকিমিডিয়া কমন্সের গুণমান উন্নত করতে পারেন।\n পর্যালোচনার চারটি মানদণ্ড হল:\n - এই চিত্রটি কি প্রকল্পের উদ্দেশ্যগুলির সাথে সামঞ্জস্যপূর্ণ?\n - এই চিত্রটি কি কপিরাইটের নিয়ম অনুসরণ করে?\n - এই চিত্রটিকে কি সঠিকভাবে শ্রেণীবদ্ধ করা হয়েছে?\n - যদি সবকিছু ঠিক থাকে তবে আপনি অবদানকারীকে ধন্যবাদও জানাতে পারেন।</string>
   <string name="no_image">কোনও চিত্র ব্যবহৃত হয়নি</string>
   <string name="menu_option_read">পঠিতগুলি দেখান</string>
   <string name="menu_option_unread">অপঠিতগুলি দেখান</string>
@@ -361,6 +362,7 @@
   <string name="category_edit_helper_show_edit_title_success">সফল</string>
   <string name="category_edit_helper_edit_message_else">বিষয়শ্রেণী হালনাগাদ করা সম্ভব হয়নি।</string>
   <string name="category_edit_button_text">বিষয়শ্রেণীগুলি হালনাগাদ করুন</string>
+  <string name="depictions_edit_helper_show_edit_title">চিত্রণ সম্পাদনা</string>
   <string name="coordinates_edit_helper_show_edit_title_success">সফল</string>
   <string name="you_have_no_achievements_yet">আপনি এখনও কোনও অবদান রাখেন নি</string>
   <string name="account_created">অ্যাকাউন্ট তৈরি করা হয়েছে!</string>
@@ -440,4 +442,10 @@
   <string name="reset">পুনঃস্থাপন</string>
   <string name="no_location_found_title">কোন অবস্থান পাওয়া যায়নি</string>
   <string name="add_location">অবস্থান যোগ করুন</string>
+  <string name="api_level">এপিআই লেভেল</string>
+  <string name="android_version">অ্যান্ড্রয়েড সংস্করণ</string>
+  <string name="device_manufacturer">ডিভাইস প্রস্তুতকারক</string>
+  <string name="device_name">ডিভাইসের নাম</string>
+  <string name="error_feedback">প্রতিক্রিয়া পাঠানোর সময় ত্রুটি ঘটেছে</string>
+  <string name="your_feedback">আপনার প্রতিক্রিয়া</string>
 </resources>
