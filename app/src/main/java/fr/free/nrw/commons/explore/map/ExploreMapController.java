@@ -18,6 +18,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
@@ -155,6 +157,7 @@ public class ExploreMapController extends MapController {
                 Glide.with(context)
                     .asBitmap()
                     .load(explorePlace.getThumb())
+                    .apply(new RequestOptions().override(48, 48).centerCrop().transform(new RoundedCorners(dp2px(context, 4))))
                     .into(new CustomTarget<Bitmap>() {
                         @Override
                         public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
@@ -169,15 +172,15 @@ public class ExploreMapController extends MapController {
                         public void onLoadCleared(@Nullable Drawable placeholder) {
                         }
                     });
-
-                //nearbyBaseMarker.icon(IconFactory.getInstance(context).fromBitmap(UiUtils.getBitmap(vectorDrawable)));
-                //baseMarkerOptions.add(nearbyBaseMarker);
             }
         }
 
         return baseMarkerOptions;
     }
-
+    public static int dp2px(Context context, float dp) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dp * scale + 0.5F);
+    }
     private List<Place> mediaToExplorePlace( List<Media> mediaList) {
         List<Place> explorePlaceList = new ArrayList<>();
         for (Media media :mediaList) {
