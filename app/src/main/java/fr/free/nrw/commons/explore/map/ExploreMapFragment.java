@@ -109,7 +109,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     private LatLngBounds latLngBounds;
     private Marker currentLocationMarker;
     private Polygon currentLocationPolygon;
-    private ExploreFragmentInstanceReadyCallback exploreFragmentInstanceReadyCallback;
     IntentFilter intentFilter = new IntentFilter(MapUtils.NETWORK_INTENT_ACTION);
 
     @Inject
@@ -206,9 +205,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                 uiSettings.setAttributionEnabled(false);
                 uiSettings.setRotateGesturesEnabled(false);
                 isMapBoxReady = true;
-                if(exploreFragmentInstanceReadyCallback!=null){
-                    exploreFragmentInstanceReadyCallback.onReady();
-                }
                 performMapReadyActions();
                 final CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(new com.mapbox.mapboxsdk.geometry.LatLng(51.50550, -0.07520))
@@ -777,15 +773,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         } else {
             return true;
         }
-    }
-
-    public interface  ExploreFragmentInstanceReadyCallback{
-        void onReady();
-    }
-
-    public void setExploreFragmentInstanceReadyCallback(
-        ExploreFragmentInstanceReadyCallback exploreFragmentInstanceReadyCallback) {
-        this.exploreFragmentInstanceReadyCallback = exploreFragmentInstanceReadyCallback;
     }
 
     /**
