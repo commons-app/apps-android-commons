@@ -15,15 +15,9 @@
     android:visibility="gone" />
 
   <include
-    android:id="@+id/paginatedSearchMap"
+    android:id="@+id/exploreMap"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     layout="@layout/fragment_explore_map" />
-
-  <ProgressBar
-    android:id="@+id/paginatedSearchInitialLoadProgress"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_centerInParent="true" />
 
 </RelativeLayout>

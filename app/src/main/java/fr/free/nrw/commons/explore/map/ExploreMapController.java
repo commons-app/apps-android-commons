@@ -157,7 +157,7 @@ public class ExploreMapController extends MapController {
                 Glide.with(context)
                     .asBitmap()
                     .load(explorePlace.getThumb())
-                    .apply(new RequestOptions().override(48, 48).centerCrop().transform(new RoundedCorners(dp2px(context, 4))))
+                    .apply(new RequestOptions().override(96, 96).centerCrop().transform(new RoundedCorners(dp2px(context, 4))))
                     .into(new CustomTarget<Bitmap>() {
                         @Override
                         public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {

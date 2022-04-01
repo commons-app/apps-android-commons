@@ -164,7 +164,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         ViewGroup container,
         Bundle savedInstanceState
     ) {
-        View v = inflater.inflate(R.layout.fragment_search_map_paginated, container, false);
+        View v = inflater.inflate(R.layout.fragment_explore_map, container, false);
         ButterKnife.bind(this, v);
         return v;
     }
@@ -429,7 +429,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                 .build();
             mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
         }
-        else if(locationManager.isGPSProviderEnabled()||locationManager.isNetworkProviderEnabled()){
+        else if(locationManager.isGPSProviderEnabled() || locationManager.isNetworkProviderEnabled()){
             locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
             locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
             setProgressBarVisibility(true);

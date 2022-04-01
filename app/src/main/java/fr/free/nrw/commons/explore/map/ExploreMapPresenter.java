@@ -114,7 +114,7 @@ public class ExploreMapPresenter
         if (locationChangeType.equals(LOCATION_SIGNIFICANTLY_CHANGED)) {
             Timber.d("LOCATION_SIGNIFICANTLY_CHANGED");
             lockUnlockNearby(true);
-            //exploreMapFragmentView.setProgressBarVisibility(true);
+            exploreMapFragmentView.setProgressBarVisibility(true);
             exploreMapFragmentView.populatePlaces(curLatLng, lastLocation);
 
         } else if (locationChangeType.equals(SEARCH_CUSTOM_AREA)) {

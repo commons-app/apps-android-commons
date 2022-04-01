@@ -162,7 +162,7 @@ public class SearchActivity extends BaseActivity
             if (FragmentUtils.isFragmentUIActive(searchCategoryFragment)) {
                 searchCategoryFragment.onQueryUpdated(query.toString());
             }
-            
+
          }
         else {
                     //Open RecentSearchesFragment
