@@ -26,7 +26,6 @@ public class ExploreMapContract {
         void setSearchThisAreaButtonVisibility(boolean isVisible);
         void setProgressBarVisibility(boolean isVisible);
         boolean isDetailsBottomSheetVisible();
-        void setBottomSheetDetailsSmaller();
         boolean isSearchThisAreaButtonVisible();
         void addCurrentLocationMarker(LatLng curLatLng);
         void updateMapToTrackPosition(LatLng curLatLng);

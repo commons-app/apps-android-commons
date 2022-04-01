@@ -152,7 +152,6 @@ public class ExploreMapController extends MapController {
                         explorePlace.location.getLatitude(),
                         explorePlace.location.getLongitude()));
                 nearbyBaseMarker.place(explorePlace);
-                // TODO Glide and thumbnails here
 
                 Glide.with(context)
                     .asBitmap()

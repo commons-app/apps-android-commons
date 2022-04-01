@@ -572,17 +572,20 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
     @Override
     public boolean isDetailsBottomSheetVisible() {
-        return false;
-    }
-
-    @Override
-    public void setBottomSheetDetailsSmaller() {
-
+        if (bottomSheetDetails.getVisibility() == View.VISIBLE) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public boolean isSearchThisAreaButtonVisible() {
-        return false;
+        if (searchThisAreaButton.getVisibility() == View.VISIBLE) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
