@@ -19,13 +19,23 @@ import android.provider.Settings;
 import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
@@ -37,6 +47,7 @@ import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdate;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
+import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.maps.UiSettings;
@@ -47,6 +58,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.explore.paging.LiveDataConverter;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -74,8 +86,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
 
-public class ExploreMapFragment extends PageableMapFragment
-    implements ExploreMapContract.View, LocationUpdateListener, CategoryImagesCallback {
+public class ExploreMapFragment extends CommonsDaggerSupportFragment
+    implements ExploreMapContract.View, LocationUpdateListener {
 
     private BottomSheetBehavior bottomSheetDetailsBehavior;
     private BroadcastReceiver broadcastReceiver;
@@ -119,6 +131,20 @@ public class ExploreMapFragment extends PageableMapFragment
     private ExploreMapPresenter presenter;
     private String query = "";
 
+    @BindView(R.id.map_view)
+    MapView mapView;
+    @BindView(R.id.bottom_sheet_details) View bottomSheetDetails;
+    @BindView(R.id.map_progress_bar) ProgressBar progressBar;
+    @BindView(R.id.fab_recenter) FloatingActionButton fabRecenter;
+    @BindView(R.id.search_this_area_button) Button searchThisAreaButton;
+    @BindView(R.id.tv_attribution) AppCompatTextView tvAttribution;
+
+    @BindView(R.id.directionsButton) LinearLayout directionsButton;
+    @BindView(R.id.commonsButton) LinearLayout commonsButton;
+    @BindView(R.id.mediaDetailsButton) LinearLayout mediaDetailsButton;
+    @BindView(R.id.description) TextView description;
+    @BindView(R.id.title) TextView title;
+    @BindView(R.id.category) TextView distance;
 
     @NonNull
     public static ExploreMapFragment newInstance() {
@@ -128,19 +154,25 @@ public class ExploreMapFragment extends PageableMapFragment
     }
 
     @Override
-    protected int getLayoutResource() {
-        return R.layout.fragment_search_map_paginated;
-    }
-
-    @Override
     public void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
+    @Override
+    public View onCreateView(
+        @NonNull LayoutInflater inflater,
+        ViewGroup container,
+        Bundle savedInstanceState
+    ) {
+        View v = inflater.inflate(R.layout.fragment_search_map_paginated, container, false);
+        ButterKnife.bind(this, v);
+        return v;
+    }
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mapView.onStart();
         setSearchThisAreaButtonVisibility(false);
         tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution)));
         if (getActivity() instanceof SearchActivity) {
@@ -153,7 +185,7 @@ public class ExploreMapFragment extends PageableMapFragment
         if (presenter == null) {
             presenter = new ExploreMapPresenter(bookmarkLocationDao);
         }
-        presenterReady(getContext());
+        //presenterReady(getContext());
         setHasOptionsMenu(true);
 
         isDarkTheme = systemThemeUtils.isDeviceInNightMode();
@@ -357,26 +389,6 @@ public class ExploreMapFragment extends PageableMapFragment
         }*/
     }
 
-    /*private void populatePlacesForCurrentLocation(final fr.free.nrw.commons.location.LatLng curlatLng,
-        final fr.free.nrw.commons.location.LatLng searchLatLng){
-        final Observable<MapController.ExplorePlacesInfo> nearbyPlacesInfoObservable;
-        nearbyPlacesInfoObservable = presenter.loadAttractionsFromLocation(curlatLng, searchLatLng, true, isFromSearchActivity, query);
-
-        compositeDisposable.add(nearbyPlacesInfoObservable
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(nearbyPlacesInfo -> {
-                    updateMapMarkers(nearbyPlacesInfo, true);
-                    lastFocusLocation=searchLatLng;
-                },
-                throwable -> {
-                    Timber.d(throwable);
-                    showErrorMessage(getString(R.string.error_fetching_nearby_places)+throwable.getLocalizedMessage());
-                    setProgressBarVisibility(false);
-                    presenter.lockUnlockNearby(false);
-                }));
-    }*/
-
     /**
      * Populates places for your location, should be used for finding nearby places around a
      * location where you are.
@@ -504,16 +516,13 @@ public class ExploreMapFragment extends PageableMapFragment
      * @param place Place of clicked nearby marker
      */
     private void passInfoToSheet(final Place place) {
-        /*bookmarkButton.setOnClickListener(view -> {
-            final boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(place);
-            //updateMarker(isBookmarked, selectedPlace, locationManager.getLastLocation());
-        });*/
-
         directionsButton.setOnClickListener(view -> Utils.handleGeoCoordinates(getActivity(),
             place.getLocation()));
 
         commonsButton.setVisibility(place.hasCommonsLink()?View.VISIBLE:View.GONE);
         commonsButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), place.siteLinks.getCommonsLink()));
+
+        // TODO media details mediaDetailsButton.setOnClickListener(view -> );
 
         title.setText(place.name);
         distance.setText(place.distance);
@@ -554,10 +563,10 @@ public class ExploreMapFragment extends PageableMapFragment
     public void setProgressBarVisibility(boolean isVisible) {
         if (isVisible) {
             progressBar.setVisibility(View.VISIBLE);
-            showInitialLoadInProgress();
+            //showInitialLoadInProgress();
         } else {
             progressBar.setVisibility(View.GONE);
-            hideInitialLoadProgress();
+            //hideInitialLoadProgress();
         }
     }
 
@@ -765,21 +774,6 @@ public class ExploreMapFragment extends PageableMapFragment
         } else {
             return true;
         }
-    }
-
-    @Override
-    public Integer getContributionStateAt(int position) {
-        return null;
-    }
-
-    @Override
-    public void viewPagerNotifyDataSetChanged() {
-
-    }
-
-    @Override
-    public void onMediaClicked(int position) {
-
     }
 
     public interface  ExploreFragmentInstanceReadyCallback{

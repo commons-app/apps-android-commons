@@ -135,7 +135,8 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
     @Override
     public Media getMediaAtPosition(int i) {
         if (mapFragment != null) {
-            return mapFragment.getMediaAtPosition(i);
+            //return mapFragment.getMediaAtPosition(i);
+            return null;
         } else {
             return null;
         }
@@ -150,7 +151,8 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
     @Override
     public int getTotalMediaCount() {
         if (mapFragment != null) {
-            return mapFragment.getTotalMediaCount();
+            //return mapFragment.getTotalMediaCount();
+            return 0;
         } else {
             return 0;
         }
