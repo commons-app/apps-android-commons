@@ -59,7 +59,6 @@ public class SearchActivity extends BaseActivity
 
     private SearchMediaFragment searchMediaFragment;
     private SearchCategoryFragment searchCategoryFragment;
-    private ExploreMapFragment searchMapFragment;
     private SearchDepictionsFragment searchDepictionsFragment;
     private RecentSearchesFragment recentSearchesFragment;
     private FragmentManager supportFragmentManager;
@@ -107,15 +106,12 @@ public class SearchActivity extends BaseActivity
         searchMediaFragment = new SearchMediaFragment();
         searchDepictionsFragment = new SearchDepictionsFragment();
         searchCategoryFragment= new SearchCategoryFragment();
-        searchMapFragment= new ExploreMapFragment();
         fragmentList.add(searchMediaFragment);
         titleList.add(getResources().getString(R.string.search_tab_title_media).toUpperCase());
         fragmentList.add(searchCategoryFragment);
         titleList.add(getResources().getString(R.string.search_tab_title_categories).toUpperCase());
         fragmentList.add(searchDepictionsFragment);
         titleList.add(getResources().getString(R.string.search_tab_title_depictions).toUpperCase());
-        fragmentList.add(searchMapFragment);
-        titleList.add(getResources().getString(R.string.explore_tab_title_map).toUpperCase());
 
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
@@ -166,10 +162,7 @@ public class SearchActivity extends BaseActivity
             if (FragmentUtils.isFragmentUIActive(searchCategoryFragment)) {
                 searchCategoryFragment.onQueryUpdated(query.toString());
             }
-
-            if (FragmentUtils.isFragmentUIActive(searchMapFragment)) {
-                searchMapFragment.onQueryUpdated(query.toString());
-            }
+            
          }
         else {
                     //Open RecentSearchesFragment
