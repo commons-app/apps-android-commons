@@ -95,6 +95,7 @@ public class ExploreMapController extends MapController {
                     }
                 }
             }
+            explorePlacesInfo.mediaList = mediaList;
             explorePlacesInfo.explorePlaceList = mediaToExplorePlace(mediaList);
             explorePlacesInfo.boundaryCoordinates = boundaryCoordinates;
 

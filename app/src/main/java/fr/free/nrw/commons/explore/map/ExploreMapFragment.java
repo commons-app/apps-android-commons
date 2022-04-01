@@ -54,11 +54,13 @@ import com.mapbox.mapboxsdk.maps.UiSettings;
 import com.mapbox.pluginscalebar.ScaleBarOptions;
 import com.mapbox.pluginscalebar.ScaleBarPlugin;
 import fr.free.nrw.commons.MapController;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.explore.ExploreMapRootFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.explore.paging.LiveDataConverter;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -97,6 +99,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     private boolean isPermissionDenied;
     private fr.free.nrw.commons.location.LatLng lastKnownLocation;
     private fr.free.nrw.commons.location.LatLng lastFocusLocation;
+    public List<Media> mediaList;
     private boolean recenterToUserLocation;
     private Place selectedPlace;
 
@@ -370,8 +373,9 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         compositeDisposable.add(nearbyPlacesInfoObservable
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(nearbyPlacesInfo -> {
-                    updateMapMarkers(nearbyPlacesInfo, true);
+            .subscribe(explorePlacesInfo -> {
+                    updateMapMarkers(explorePlacesInfo, true);
+                    mediaList = explorePlacesInfo.mediaList;
                     lastFocusLocation = searchLatLng;
                 },
                 throwable -> {
@@ -518,7 +522,16 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         commonsButton.setVisibility(place.hasCommonsLink()?View.VISIBLE:View.GONE);
         commonsButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), place.siteLinks.getCommonsLink()));
 
-        // TODO media details mediaDetailsButton.setOnClickListener(view -> );
+        int index = 0;
+        for (Media media : mediaList) {
+            if (media.getFilename().equals(place.name)) {
+                int finalIndex = index;
+                mediaDetailsButton.setOnClickListener(view -> {
+                    ((ExploreMapRootFragment) getParentFragment()).onMediaClicked(finalIndex);
+                });
+            }
+            index ++;
+        }
 
         title.setText(place.name);
         distance.setText(place.distance);
