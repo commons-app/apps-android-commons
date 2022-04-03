@@ -16,6 +16,7 @@ import android.content.res.Configuration;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.telephony.SignalStrength;
 import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
@@ -145,6 +146,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     @BindView(R.id.description) TextView description;
     @BindView(R.id.title) TextView title;
     @BindView(R.id.category) TextView distance;
+
 
     @NonNull
     public static ExploreMapFragment newInstance() {
@@ -333,6 +335,9 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
         @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
+            presenter.updateMap(LOCATION_SIGNIFICANTLY_CHANGED);
+
+            Timber.d("Location significantly changed");
 
     }
 
@@ -703,6 +708,9 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
     @Override
     public LatLng getLastLocation() {
+        if (lastKnownLocation == null) {
+            lastKnownLocation = locationManager.getLastLocation();
+        }
         return lastKnownLocation;
     }
 
