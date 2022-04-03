@@ -129,9 +129,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     @Inject
     SystemThemeUtils systemThemeUtils;
 
-    public boolean isFromSearchActivity;
     private ExploreMapPresenter presenter;
-    private String query = "";
 
     @BindView(R.id.map_view)
     MapView mapView;
@@ -177,11 +175,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         mapView.onStart();
         setSearchThisAreaButtonVisibility(false);
         tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution)));
-        if (getActivity() instanceof SearchActivity) {
-            isFromSearchActivity = true;
-        } else {
-            isFromSearchActivity = false;
-        }
         initNetworkBroadCastReceiver();
 
         if (presenter == null) {
@@ -247,7 +240,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     }
 
     public void onQueryUpdated(String query) {
-        this.query = query;
         if (query.isEmpty()) {
             return;
         }
@@ -268,7 +260,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         if (mapBox != null) {
             addOnCameraMoveListener();
         }
-        presenter.onMapReady(isFromSearchActivity, exploreMapController, query);
+        presenter.onMapReady(exploreMapController);
         // TODO nesli removeCurrentLocationMarker();
     }
 
@@ -362,13 +354,14 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     @Override
     public void populatePlaces(LatLng curLatLng, LatLng searchLatLng) {
         final Observable<MapController.ExplorePlacesInfo> nearbyPlacesInfoObservable;
+        if (curLatLng == null) {
+            checkPermissionsAndPerformAction();
+            return;
+        }
         if (searchLatLng.equals(lastFocusLocation) || lastFocusLocation == null) { // Means we are checking around current location
-            nearbyPlacesInfoObservable = presenter.loadAttractionsFromLocation(curLatLng, searchLatLng, true, isFromSearchActivity, query);
-            //populatePlacesForCurrentLocation(lastKnownLocation, curlatLng);
+            nearbyPlacesInfoObservable = presenter.loadAttractionsFromLocation(curLatLng, searchLatLng, true);
         } else {
-            nearbyPlacesInfoObservable = presenter.loadAttractionsFromLocation(curLatLng, searchLatLng, false, isFromSearchActivity, query);
-
-            //populatePlacesForAnotherLocation(lastKnownLocation, curlatLng);
+            nearbyPlacesInfoObservable = presenter.loadAttractionsFromLocation(curLatLng, searchLatLng, false);
         }
         compositeDisposable.add(nearbyPlacesInfoObservable
             .subscribeOn(Schedulers.io())
@@ -437,7 +430,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         else {
             Toast.makeText(getContext(), getString(R.string.nearby_location_not_available), Toast.LENGTH_LONG).show();
         }
-        presenter.onMapReady(isFromSearchActivity, exploreMapController, query);
+        presenter.onMapReady(exploreMapController);
         registerUnregisterLocationListener(false);
         addOnCameraMoveListener();
     }
@@ -556,11 +549,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void setSearchThisAreaButtonVisibility(boolean isVisible) {
-        // Search activity search is a query based search of uploads that have location. So search this area button won't be used there
-        if (isFromSearchActivity) {
-            searchThisAreaButton.setVisibility(View.GONE);
-            return;
-        }
         if (isVisible) {
             searchThisAreaButton.setVisibility(View.VISIBLE);
         } else {
@@ -734,11 +722,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void setCustomQuery(String customQuery) {
-        this.query = query;
-    }
-
-    @Override
     public void addNearbyMarkersToMapBoxMap(List<NearbyBaseMarker> nearbyBaseMarkers, Marker selectedMarker) {
         mapBox.clear();
         if (isMapBoxReady && mapBox != null) {
@@ -776,15 +759,11 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
     @Override
     public boolean backButtonClicked() {
-        if (!isFromSearchActivity) {
-            if (!(bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN)) {
-                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                return true;
-            } else {
-                return false;
-            }
-        } else {
+        if (!(bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN)) {
+            bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             return true;
+        } else {
+            return false;
         }
     }
 

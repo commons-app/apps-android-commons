@@ -35,15 +35,11 @@ public class ExplorePlaces {
      * @param curLatLng           coordinates of search location
      * @return list of places obtained
      */
-    List<Media> callCommonsQuery(final LatLng curLatLng, int limit, boolean isFromSearchActivity, String query)
+    List<Media> callCommonsQuery(final LatLng curLatLng, int limit)
         throws Exception {
         Single<List<Media>> mediaListSingle;
-        if (isFromSearchActivity) {
-            return getFromCommonsWithQuery(curLatLng, query);
-        } else {
             mediaListSingle =  getFromCommonsWithoutQuery(curLatLng, limit);
             return mediaListSingle.blockingGet();
-        }
     }
 
     /**
@@ -58,7 +54,4 @@ public class ExplorePlaces {
         return mediaClient.getMediaListFromGeoSearch(coordinates, limit);
     }
 
-    public List<Media> getFromCommonsWithQuery(final LatLng cur, final String query) throws Exception {
-        return mediaClient.getMediaListFromSearchWithLocation(query, 30, 0);
-    }
 }

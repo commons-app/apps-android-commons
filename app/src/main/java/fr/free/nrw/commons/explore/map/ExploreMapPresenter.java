@@ -34,8 +34,6 @@ public class ExploreMapPresenter
     private boolean isNearbyLocked;
     private boolean placesLoadedOnce;
     private LatLng curLatLng;
-    private String query;
-    private boolean isFromSearchActivity;
     private ExploreMapController exploreMapController;
     private float ZOOM_LEVEL = 14f;
 
@@ -180,7 +178,7 @@ public class ExploreMapPresenter
     public void onCameraMove(com.mapbox.mapboxsdk.geometry.LatLng latLng) {
         exploreMapFragmentView.setProjectorLatLngBounds();
         // If our nearby markers are calculated at least once
-        if (exploreMapController.latestSearchLocation != null && !isFromSearchActivity) {
+        if (exploreMapController.latestSearchLocation != null) {
             double distance = latLng.distanceTo
                 (LocationUtils.commonsLatLngToMapBoxLatLng(exploreMapController.latestSearchLocation));
             if (exploreMapFragmentView.isNetworkConnectionEstablished()) {
@@ -195,14 +193,9 @@ public class ExploreMapPresenter
         }
     }
 
-    public void onMapReady(boolean isFromSearchActivity, ExploreMapController exploreMapController, String query) {
-        this.isFromSearchActivity = isFromSearchActivity;
+    public void onMapReady(ExploreMapController exploreMapController) {
         this.exploreMapController = exploreMapController;
-        this.query = query;
         exploreMapFragmentView.addSearchThisAreaButtonAction();
-        if (isFromSearchActivity && query.isEmpty()) {
-            return;
-        }
         if(null != exploreMapFragmentView) {
             exploreMapFragmentView.addSearchThisAreaButtonAction();
             initializeMapOperations();
@@ -215,11 +208,11 @@ public class ExploreMapPresenter
         exploreMapFragmentView.addSearchThisAreaButtonAction();
     }
 
-    public Observable<ExplorePlacesInfo> loadAttractionsFromLocation(LatLng curLatLng, LatLng searchLatLng, boolean checkingAroundCurrent, boolean isFromSearchActivity, String query) {
+    public Observable<ExplorePlacesInfo> loadAttractionsFromLocation(LatLng curLatLng, LatLng searchLatLng, boolean checkingAroundCurrent) {
         // TODO: Load attractionsta yapılanı onquery updated ile yapmanın yolunu bul
         return Observable
             .fromCallable(() -> exploreMapController
-                .loadAttractionsFromLocation(curLatLng, searchLatLng,checkingAroundCurrent, isFromSearchActivity, query));
+                .loadAttractionsFromLocation(curLatLng, searchLatLng,checkingAroundCurrent));
     }
 
     /**

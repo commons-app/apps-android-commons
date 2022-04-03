@@ -54,7 +54,7 @@ public class ExploreMapController extends MapController {
         this.explorePlaces = explorePlaces;
     }
 
-    public ExplorePlacesInfo loadAttractionsFromLocation(LatLng curLatLng, LatLng searchLatLng, boolean checkingAroundCurrentLocation, boolean isFromSearchActivity, String query) {
+    public ExplorePlacesInfo loadAttractionsFromLocation(LatLng curLatLng, LatLng searchLatLng, boolean checkingAroundCurrentLocation) {
 
         // TODO: check nearbyPlacesInfo in NearbyController for search this area logic
 
@@ -68,7 +68,7 @@ public class ExploreMapController extends MapController {
             explorePlacesInfo.curLatLng = curLatLng;
             latestSearchLocation = searchLatLng;
 
-            List<Media> mediaList = explorePlaces.callCommonsQuery(searchLatLng, 30, isFromSearchActivity, query);
+            List<Media> mediaList = explorePlaces.callCommonsQuery(searchLatLng, 30);
             LatLng[] boundaryCoordinates = {mediaList.get(0).getCoordinates(),   // south
                 mediaList.get(0).getCoordinates(), // north
                 mediaList.get(0).getCoordinates(), // west

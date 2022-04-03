@@ -39,7 +39,6 @@ public class ExploreMapContract {
         void setProjectorLatLngBounds();
         void disableFABRecenter();
         void enableFABRecenter();
-        void setCustomQuery(String customQuery);
         void addNearbyMarkersToMapBoxMap(final List<NearbyBaseMarker> nearbyBaseMarkers, final Marker selectedMarker);
         void setMapBoundaries(CameraUpdate cameaUpdate);
         void setFABRecenterAction(android.view.View.OnClickListener onClickListener);
