@@ -83,7 +83,6 @@ public class ExploreMapPresenter
 
     @Override
     public void updateMap(LocationChangeType locationChangeType) {
-        //TODO: write inside of all methods nesli
         Timber.d("Presenter updates map and list" + locationChangeType.toString());
         if (isNearbyLocked) {
             Timber.d("Nearby is locked, so updateMapAndList returns");
@@ -91,8 +90,6 @@ public class ExploreMapPresenter
         }
 
         if (!exploreMapFragmentView.isNetworkConnectionEstablished()) {
-            //TODO nesli they are closed for now, open later Timber.d("Network connection is not established");
-            //TODO nesli they are closed for now, open later and add alert for network return;
             Timber.d("Network connection is not established");
             return;
         }

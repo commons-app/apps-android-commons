@@ -164,6 +164,7 @@ public class ExploreMapController extends MapController {
                 Glide.with(context)
                     .asBitmap()
                     .load(explorePlace.getThumb())
+                    .placeholder(R.drawable.image_placeholder_96)
                     .apply(new RequestOptions().override(96, 96).centerCrop().transform(new RoundedCorners(dp2px(context, 4))))
                     .into(new CustomTarget<Bitmap>() {
                         @Override
@@ -177,6 +178,16 @@ public class ExploreMapController extends MapController {
 
                         @Override
                         public void onLoadCleared(@Nullable Drawable placeholder) {
+                        }
+
+                        @Override
+                        public void onLoadFailed(@Nullable final Drawable errorDrawable) {
+                            super.onLoadFailed(errorDrawable);
+                            nearbyBaseMarker.setIcon(IconFactory.getInstance(context).fromResource(R.drawable.image_placeholder_96));
+                            baseMarkerOptions.add(nearbyBaseMarker);
+                            if (baseMarkerOptions.size() == placeList.size()) {
+                                callback.onNearbyBaseMarkerThumbsReady(baseMarkerOptions, explorePlacesInfo, selectedMarker, shouldTrackPosition);
+                            }
                         }
                     });
             }
