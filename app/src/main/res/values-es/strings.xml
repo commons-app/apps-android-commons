@@ -323,6 +323,7 @@
   <string name="title_activity_search">Buscar</string>
   <string name="search_recent_header">Búsquedas recientes:</string>
   <string name="provider_searches">Consultas recientemente buscadas</string>
+  <string name="provider_recent_languages">Consultas lingüísticas recientes</string>
   <string name="error_loading_categories">Se produjo un error al cargar las categorías.</string>
   <string name="error_loading_depictions">Se produjo un error al cargar las representaciones.</string>
   <string name="search_tab_title_media">Multimedia</string>
