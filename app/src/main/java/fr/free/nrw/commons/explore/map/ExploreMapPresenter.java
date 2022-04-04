@@ -222,7 +222,7 @@ public class ExploreMapPresenter
      */
     public void updateMapMarkers(
         MapController.ExplorePlacesInfo explorePlacesInfo, Marker selectedMarker, boolean shouldTrackPosition) {
-        exploreMapFragmentView.setMapBoundaries(CameraUpdateFactory.newLatLngBounds(getLatLngBounds(explorePlacesInfo.boundaryCoordinates), 10));
+        exploreMapFragmentView.setMapBoundaries(CameraUpdateFactory.newLatLngBounds(getLatLngBounds(explorePlacesInfo.boundaryCoordinates), 50));
         prepareNearbyBaseMarkers(explorePlacesInfo, selectedMarker, shouldTrackPosition);
     }
 
@@ -297,7 +297,7 @@ public class ExploreMapPresenter
         }
         double distance = LocationUtils.commonsLatLngToMapBoxLatLng(exploreMapFragmentView.getCameraTarget())
             .distanceTo(exploreMapFragmentView.getLastFocusLocation());
-        if (distance > exploreMapController.latestSearchRadius * 3 / 4) {
+        if (distance > exploreMapController.currentLocationSearchRadius * 3 / 4) {
             return false;
         } else {
             return true;
@@ -312,6 +312,16 @@ public class ExploreMapPresenter
     @Override
     public void markerSelected(Marker marker) {
         exploreMapFragmentView.displayBottomSheetWithInfo(marker);
+    }
+
+    public boolean areLocationsClose(LatLng cameraTarget, LatLng lastKnownLocation) {
+        double distance = LocationUtils.commonsLatLngToMapBoxLatLng(cameraTarget)
+            .distanceTo(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation));
+        if (distance > exploreMapController.currentLocationSearchRadius * 3 / 4) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }

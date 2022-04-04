@@ -43,10 +43,11 @@ import javax.inject.Inject;
 import timber.log.Timber;
 
 public class ExploreMapController extends MapController {
-    private static final int MAX_RESULTS = 1000;
     private final ExplorePlaces explorePlaces;
     public LatLng latestSearchLocation; // Can be current and camera target on search this area button is used
+    public LatLng currentLocation; // Can be current and camera target on search this area button is used
     public double latestSearchRadius = 0; // Any last search radius except closest result search
+    public double currentLocationSearchRadius = 0; // Any last search radius except closest result search
 
 
     @Inject
@@ -105,6 +106,12 @@ public class ExploreMapController extends MapController {
                 if (distance > latestSearchRadius) {
                     latestSearchRadius = distance;
                 }
+            }
+
+            // Our radius searched around us, will be used to understand when user search their own location, we will follow them
+            if (checkingAroundCurrentLocation) {
+                currentLocationSearchRadius = latestSearchRadius;
+                currentLocation = curLatLng;
             }
         } catch (Exception e) {
             e.printStackTrace();

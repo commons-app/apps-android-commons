@@ -30,7 +30,6 @@ public class ExploreMapContract {
         void addCurrentLocationMarker(LatLng curLatLng);
         void updateMapToTrackPosition(LatLng curLatLng);
         Context getContext();
-        void updateMapMarkers(List<NearbyBaseMarker> nearbyBaseMarkers, Marker selectedMarker);
         LatLng getCameraTarget();
         void centerMapToPlace(Place placeToCenter);
         LatLng getLastLocation();

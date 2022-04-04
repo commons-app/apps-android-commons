@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.explore.map;
 
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
 import static fr.free.nrw.commons.utils.MapUtils.CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE;
 import static fr.free.nrw.commons.utils.MapUtils.CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT;
 import static fr.free.nrw.commons.utils.MapUtils.ZOOM_LEVEL;
@@ -70,6 +71,7 @@ import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
+import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.utils.DialogUtil;
@@ -333,17 +335,31 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         });
     }
 
-        @Override
+    @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
-            presenter.updateMap(LOCATION_SIGNIFICANTLY_CHANGED);
+        Timber.d("Location significantly changed");
+        if (isMapBoxReady && latLng != null &&!isUserBrowsing()) {
+            handleLocationUpdate(latLng,LOCATION_SIGNIFICANTLY_CHANGED);
+        }
+    }
 
-            Timber.d("Location significantly changed");
-
+    private boolean isUserBrowsing() {
+        final boolean isUserBrowsing = lastKnownLocation!=null && !presenter.areLocationsClose(getCameraTarget(), lastKnownLocation);
+        return isUserBrowsing;
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
+        Timber.d("Location slightly changed");
+        if (isMapBoxReady && latLng != null &&!isUserBrowsing()) {//If the map has never ever shown the current location, lets do it know
+            handleLocationUpdate(latLng,LOCATION_SLIGHTLY_CHANGED);
+        }
+    }
 
+    private void handleLocationUpdate(final fr.free.nrw.commons.location.LatLng latLng, final LocationServiceManager.LocationChangeType locationChangeType){
+        lastKnownLocation = latLng;
+        exploreMapController.currentLocation = lastKnownLocation;
+        presenter.updateMap(locationChangeType);
     }
 
     @Override
@@ -363,7 +379,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             checkPermissionsAndPerformAction();
             return;
         }
-        if (searchLatLng.equals(lastFocusLocation) || lastFocusLocation == null) { // Means we are checking around current location
+        if (searchLatLng.equals(lastFocusLocation) || lastFocusLocation == null || recenterToUserLocation) { // Means we are checking around current location
             nearbyPlacesInfoObservable = presenter.loadAttractionsFromLocation(curLatLng, searchLatLng, true);
         } else {
             nearbyPlacesInfoObservable = presenter.loadAttractionsFromLocation(curLatLng, searchLatLng, false);
@@ -372,7 +388,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(explorePlacesInfo -> {
-                    updateMapMarkers(explorePlacesInfo, true);
+                    updateMapMarkers(explorePlacesInfo, isCurrentLocationMarkerVisible());
                     mediaList = explorePlacesInfo.mediaList;
                     lastFocusLocation = searchLatLng;
                 },
@@ -382,9 +398,9 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                     setProgressBarVisibility(false);
                     presenter.lockUnlockNearby(false);
                 }));
-        /*if(recenterToUserLocation) {
+        if(recenterToUserLocation) {
             recenterToUserLocation = false;
-        }*/
+        }
     }
 
     /**
@@ -392,8 +408,8 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
      * location where you are.
      * @param explorePlacesInfo This variable has place list information and distances.
      */
-    private void updateMapMarkers(final MapController.ExplorePlacesInfo explorePlacesInfo, final boolean shouldUpdateSelectedMarker) {
-        presenter.updateMapMarkers(explorePlacesInfo, selectedMarker,shouldUpdateSelectedMarker);
+    private void updateMapMarkers(final MapController.ExplorePlacesInfo explorePlacesInfo, final boolean shouldTrackPosition) {
+        presenter.updateMapMarkers(explorePlacesInfo, selectedMarker,shouldTrackPosition);
     }
 
     private void showErrorMessage(final String message) {
@@ -455,19 +471,12 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             }
             return;
         }
-
+        addCurrentLocationMarker(curLatLng);
         final CameraPosition position;
-        if (ViewUtil.isPortrait(getActivity())) {
-            position = new CameraPosition.Builder()
-                .target(new com.mapbox.mapboxsdk.geometry.LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
-                .zoom(mapBox.getCameraPosition().zoom) // Same zoom level
-                .build();
-        } else {
-            position = new CameraPosition.Builder()
-                .target(new com.mapbox.mapboxsdk.geometry.LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
-                .zoom(mapBox.getCameraPosition().zoom) // Same zoom level
-                .build();
-        }
+        position = new CameraPosition.Builder()
+            .target(new com.mapbox.mapboxsdk.geometry.LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
+            .zoom(mapBox.getCameraPosition().zoom) // Same zoom level
+            .build();
 
         mapBox.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
     }
@@ -626,7 +635,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
     @Override
     public boolean isCurrentLocationMarkerVisible() {
-        if (latLngBounds == null || currentLocationMarker==null) {
+        if (latLngBounds == null || currentLocationMarker == null) {
             Timber.d("Map projection bounds are null");
             return false;
         } else {
@@ -651,7 +660,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void updateMapToTrackPosition(LatLng curLatLng) {
-        /*Log.d("test","updateMapToTrackPosition");
         Timber.d("Updates map camera to track user position");
         final CameraPosition cameraPosition;
         if(isPermissionDenied){
@@ -665,17 +673,12 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             mapBox.setCameraPosition(cameraPosition);
             mapBox.animateCamera(CameraUpdateFactory
                 .newCameraPosition(cameraPosition), 1000);
-        }*/
-    }
-
-    @Override
-    public void updateMapMarkers(List<NearbyBaseMarker> nearbyBaseMarkers, Marker selectedMarker) {
-        Log.d("test","updateMapMarkers2");
+        }
     }
 
     @Override
     public LatLng getCameraTarget() {
-        return mapBox==null?null:LocationUtils.mapBoxLatLngToCommonsLatLng(mapBox.getCameraPosition().target);
+        return mapBox == null ? null : LocationUtils.mapBoxLatLngToCommonsLatLng(mapBox.getCameraPosition().target);
     }
 
     @Override
