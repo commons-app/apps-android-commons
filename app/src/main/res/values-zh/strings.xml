@@ -466,7 +466,7 @@
   <string name="review_thanks_yes_button_text">下一张图片</string>
   <string name="review_thanks_no_button_text">是的，为什么不</string>
   <string name="skip_image_explanation">点击这个按钮会给你另外一个来自于Wikimedia Common上传的图片</string>
-  <string name="review_image_explanation" fuzzy="true">你可以审查图片并提高Wikimedia Commoms的质量。\n审查的四个参数是：\n-图片尺寸是否在规定的范围\n-图片是否遵循版权规则\n-图片是否正确分类\n-如果一切正常你是否也可以感谢贡献者</string>
+  <string name="review_image_explanation">你可以审查图像来提高Wikimedia Commoms的质量。\n审查的三个参数是：\n\n- 图像尺寸是否在规定的范围？\n当您点按“否”（代表不在符合范围），您会对此图像添加删除题名模板。\n\n- 图像是否遵守版权规范？\n当您点按“否”（代表未遵守版权规范），您对此图像添加删除题名模板。\n\n- 图像是否被正确分类？\n当您点按“否”（代表未被正确分类），您对此图像添加分类请求模板。\n\n如果一切正常，就不会对图像添加任何模板，您也可对贡献者表达感谢。</string>
   <string name="no_image">没有被使用的图片</string>
   <string name="no_image_reverted">没有被撤回的图片</string>
   <string name="no_image_uploaded">还没有上传图片</string>
