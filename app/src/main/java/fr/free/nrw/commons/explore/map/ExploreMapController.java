@@ -7,6 +7,10 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build.VERSION_CODES;
@@ -16,6 +20,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
@@ -167,9 +172,11 @@ public class ExploreMapController extends MapController {
                     .placeholder(R.drawable.image_placeholder_96)
                     .apply(new RequestOptions().override(96, 96).centerCrop().transform(new RoundedCorners(dp2px(context, 4))))
                     .into(new CustomTarget<Bitmap>() {
+                        @RequiresApi(api = VERSION_CODES.LOLLIPOP)
                         @Override
                         public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                            nearbyBaseMarker.setIcon(IconFactory.getInstance(context).fromBitmap(resource));
+
+                            nearbyBaseMarker.setIcon(IconFactory.getInstance(context).fromBitmap(addBorder(resource, context)));
                             baseMarkerOptions.add(nearbyBaseMarker);
                             if (baseMarkerOptions.size() == placeList.size()) {
                                 callback.onNearbyBaseMarkerThumbsReady(baseMarkerOptions, explorePlacesInfo, selectedMarker, shouldTrackPosition);
@@ -195,6 +202,28 @@ public class ExploreMapController extends MapController {
 
         return baseMarkerOptions;
     }
+
+    @RequiresApi(api = VERSION_CODES.LOLLIPOP)
+    private static Bitmap addBorder(Bitmap resource, Context context) {
+        int width = resource.getWidth();
+        int height = resource.getHeight();
+        Bitmap output = Bitmap.createBitmap(width + 8, height + 8, Bitmap.Config.ARGB_8888);
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        Canvas canvas = new Canvas(output);
+        canvas.drawARGB(0, 0, 0, 0);
+        paint.setStyle(Paint.Style.FILL);
+        canvas.drawRoundRect(4.0f, 4.0f, width + 4.0f, height + 4.0f, 4.0f,4.0f, paint);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(resource, 4, 4, paint);
+        paint.setXfermode(null);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setColor(ContextCompat.getColor(context, R.color.deleteRed));
+        paint.setStrokeWidth(6);
+        canvas.drawRoundRect(4.0f, 4.0f, width + 4.0f, height + 4.0f, 4.0f,4.0f, paint);
+        return output;
+    }
+
     public static int dp2px(Context context, float dp) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dp * scale + 0.5F);
