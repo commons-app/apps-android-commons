@@ -160,7 +160,7 @@ public class ExploreMapController extends MapController {
                 String distance = formatDistanceBetween(curLatLng, explorePlace.location);
                 explorePlace.setDistance(distance);
 
-                nearbyBaseMarker.title(explorePlace.name);
+                nearbyBaseMarker.title(explorePlace.name.substring(5, explorePlace.name.lastIndexOf(".")));
                 nearbyBaseMarker.position(
                     new com.mapbox.mapboxsdk.geometry.LatLng(
                         explorePlace.location.getLatitude(),

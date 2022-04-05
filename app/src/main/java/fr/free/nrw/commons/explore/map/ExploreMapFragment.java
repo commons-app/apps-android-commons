@@ -539,8 +539,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             }
             index ++;
         }
-
-        title.setText(place.name);
+        title.setText(place.name.substring(5, place.name.lastIndexOf(".")));
         distance.setText(place.distance);
         // Remove label since it is double information
         String descriptionText = place.getLongDescription()
