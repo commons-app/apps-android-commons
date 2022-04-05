@@ -138,7 +138,7 @@
           android:duplicateParentState="true"
           android:textColor="@color/text_color_selector"
           android:layout_gravity="center_horizontal"
-          android:text="@string/media_detail_step_title"
+          android:text="@string/explore_map_details"
           android:textAllCaps="true"
           />
     </LinearLayout>
