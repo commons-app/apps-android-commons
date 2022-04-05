@@ -146,7 +146,7 @@ class ReviewControllerTest {
         )
 
         val method: Method = ReviewController::class.java.getDeclaredMethod(
-            "displayToast", Context::class.java, Boolean::class.java
+            "displayThanksToast", Context::class.java, Boolean::class.java
         )
 
         method.isAccessible = true
