@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
@@ -170,13 +171,13 @@ public class ExploreMapController extends MapController {
                     .asBitmap()
                     .load(explorePlace.getThumb())
                     .placeholder(R.drawable.image_placeholder_96)
-                    .apply(new RequestOptions().override(96, 96).centerCrop().transform(new RoundedCorners(dp2px(context, 4))))
+                    .apply(new RequestOptions().override(96, 96).centerCrop())
                     .into(new CustomTarget<Bitmap>() {
                         @RequiresApi(api = VERSION_CODES.LOLLIPOP)
                         @Override
                         public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
 
-                            nearbyBaseMarker.setIcon(IconFactory.getInstance(context).fromBitmap(addBorder(resource, context)));
+                            nearbyBaseMarker.setIcon(IconFactory.getInstance(context).fromBitmap(addRedBorder(resource, 6, context)));
                             baseMarkerOptions.add(nearbyBaseMarker);
                             if (baseMarkerOptions.size() == placeList.size()) {
                                 callback.onNearbyBaseMarkerThumbsReady(baseMarkerOptions, explorePlacesInfo, selectedMarker, shouldTrackPosition);
@@ -203,25 +204,12 @@ public class ExploreMapController extends MapController {
         return baseMarkerOptions;
     }
 
-    @RequiresApi(api = VERSION_CODES.LOLLIPOP)
-    private static Bitmap addBorder(Bitmap resource, Context context) {
-        int width = resource.getWidth();
-        int height = resource.getHeight();
-        Bitmap output = Bitmap.createBitmap(width + 8, height + 8, Bitmap.Config.ARGB_8888);
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        Canvas canvas = new Canvas(output);
-        canvas.drawARGB(0, 0, 0, 0);
-        paint.setStyle(Paint.Style.FILL);
-        canvas.drawRoundRect(4.0f, 4.0f, width + 4.0f, height + 4.0f, 4.0f,4.0f, paint);
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(resource, 4, 4, paint);
-        paint.setXfermode(null);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(ContextCompat.getColor(context, R.color.deleteRed));
-        paint.setStrokeWidth(6);
-        canvas.drawRoundRect(4.0f, 4.0f, width + 4.0f, height + 4.0f, 4.0f,4.0f, paint);
-        return output;
+    private static Bitmap addRedBorder(Bitmap bmp, int borderSize, Context context) {
+        Bitmap bmpWithBorder = Bitmap.createBitmap(bmp.getWidth() + borderSize * 2, bmp.getHeight() + borderSize * 2, bmp.getConfig());
+        Canvas canvas = new Canvas(bmpWithBorder);
+        canvas.drawColor(ContextCompat.getColor(context, R.color.deleteRed));
+        canvas.drawBitmap(bmp, borderSize, borderSize, null);
+        return bmpWithBorder;
     }
 
     public static int dp2px(Context context, float dp) {
