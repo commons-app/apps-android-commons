@@ -62,7 +62,7 @@
   <string name="upload_progress_notification_title_start">Inissi dël cariament %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s carià</string>
   <string name="upload_progress_notification_title_finishing">Fin dël cariament %1$s</string>
-  <string name="upload_failed_notification_title" fuzzy="true">Cariament falì a %1$s</string>
+  <string name="upload_failed_notification_title">Falì a carué %1$s</string>
   <string name="upload_paused_notification_title">Cariament %1$s an pàusa</string>
   <string name="upload_failed_notification_subtitle">Sgnaché për ësmon-e</string>
   <string name="upload_paused_notification_subtitle">Sgnaché për vëdde</string>
@@ -257,6 +257,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Ch\'an vàluta</string>
   <string name="about_faq">Chestion frequente</string>
+  <string name="user_guide">Guida dl\'utent</string>
   <string name="welcome_skip_button">Sauté lë spiegon</string>
   <string name="no_internet">Aragnà nen disponìbil</string>
   <string name="error_notifications">Eror an sl\'arserca dle notìfiche</string>
@@ -284,6 +285,7 @@
   <string name="title_activity_search">Arserché</string>
   <string name="search_recent_header">Arserche recente:</string>
   <string name="provider_searches">Domande arsercà ëd recent</string>
+  <string name="provider_recent_languages">Arceste ëd lenga recente</string>
   <string name="error_loading_categories">A l\'é ancapitaje n\'eror antramentre ch\'as cariavo le categorìe.</string>
   <string name="error_loading_depictions">Eror durant ël cariament ëd le descrission.</string>
   <string name="search_tab_title_media">Mojen</string>
@@ -320,6 +322,7 @@
   <string name="error_fetching_nearby_monuments">Eror d\'arcuperassion dij monument davzin.</string>
   <string name="no_recent_searches">Gnun-e arserche recente</string>
   <string name="delete_recent_searches_dialog">É-lo sigur ëd vorèj dëscancelé lë stòrich ëd soe arserche?</string>
+  <string name="cancel_upload_dialog">É-lo sigur ëd vorèj anulé ës cariament?</string>
   <string name="delete_search_dialog">Veul-lo dëscancelé costa arserca?</string>
   <string name="search_history_deleted">Lë stòrich ëd j\'arserche a l\'é stàit dëscancelà</string>
   <string name="nominate_delete">Propon-e për la scancelassion</string>
@@ -427,7 +430,7 @@
   <string name="review_thanks_yes_button_text">Plancia apress</string>
   <string name="review_thanks_no_button_text">É, përchè nò</string>
   <string name="skip_image_explanation">Sgnaché ansima a \'s boton a-j darà n\'àutra plancia carià ëd recent ëd Wikimedia Comun</string>
-  <string name="review_image_explanation" fuzzy="true">A peul revisioné le plance e amelioré la qualità ëd Wikimedia Comun.\nIj quatr paràmeter dla revision a son:\n- Costa plancia a l\'é an argoment?\n- Costa plancia a rëspeta le régole ëd drit d\'autor?\n- Costa plancia a l\'é categorisà për da bin?\n- Si tut a va bin, a peul ëdcò aringrassié ël contributor.</string>
+  <string name="review_image_explanation">A peul revisioné le plance për amelioré la qualità ëd Wikimedia Comun.\nIj tre paràmeter dla revision a son:\n\n- Costa plancia a l\'é an argoment?\nS\'a scriv Nò (fòra argoment), a gionta në stamp për propon-e l\'eliminassion.\n\n- Costa plancia a rëspeta le régole ëd drit d\'autor?\n\n- Costa plancia a l\'é categorisà për da bin?\nS\'a scriv Nò (nen categorisà për da bin), a gionta në stamp d\'arcesta ëd categorisassion.\n\nS\'a scriv Nò (a rëspeta nen le régole ëd drit d\'autor), a gionta në stamp për propon-e l\'eliminassion.\n\nSi tut a va bin, ag gionta gnun ëstamp e chiel a l\'ha la possibilità d\'aringrassié ël contributor.</string>
   <string name="no_image">Gnun-e plance dovrà</string>
   <string name="no_image_reverted">Gnun-e plance anvertìe</string>
   <string name="no_image_uploaded">Gnun-e plance carià</string>
@@ -487,6 +490,13 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Impossìbil gionté dle categorìe.</string>
   <string name="category_edit_button_text">Agiorné le categorìe</string>
+  <string name="depictions_edit_helper_make_edit_toast">Tentativ d\'agiornament ëd j\'element arpresentà.</string>
+  <string name="depictions_edit_helper_show_edit_title">Modifiché j\'element arpresentà</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">L\'element arpresentà %1$s a l\'é giontà.</item>
+    <item quantity="other">J\'element arpresentà %1$s a son giontà.</item>
+  </plurals>
+  <string name="depictions_edit_helper_edit_message_else">Impossìbil gionté dj\'element arpresentà.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Tentativ d\'agiorné le coordinà.</string>
   <string name="coordinates_edit_helper_show_edit_title">Agiornament ëd le coordinà</string>
   <string name="description_edit_helper_show_edit_title">Agiornament ëd la descrission</string>
@@ -585,6 +595,7 @@
   <string name="quality_images_info">Le plance ëd qualità a son dij diagrama o dle fòto che a sodisfo chèich criteri ëd qualità (dzortut ëd natura técnica) e a son pressiose për ij proget Wikimedia</string>
   <string name="resuming_upload">Arpijé ël cariament…</string>
   <string name="pausing_upload">Pàusa ant ël cariament…</string>
+  <string name="cancel_upload">Anulé ël cariament</string>
   <string name="limited_connection_explanation">A l\'ha abilità ël meud ëd conession limità. Tuti ij cariament a son an pàusa e a arpijëran na vira che chiel a l\'avrà disabilità ës meud.</string>
   <string name="limited_connection_is_on">Ël meud ëd conession limità a l\'e ativ.</string>
   <string name="media_details_tooltip">Për piasì, ch\'a scriva na curta legenda ch\'a disa lòn ch\'a smon la plancia. Ant la descrission, ch\'a disa lòn ch\'a rend la plancia anteressanta o tìpica o ràira, e ch\'a spiega ël contest, visìbil o pa. Dovré na terminologìa pi precisa ch\'a peul.</string>

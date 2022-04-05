@@ -65,10 +65,10 @@
   <string name="menu_settings">تنظیمات</string>
   <string name="intent_share_upload_label">بارگذاری در انبار</string>
   <string name="username">نام کاربری</string>
-  <string name="password">گذرواژه</string>
+  <string name="password">رمز عبور</string>
   <string name="login_credential">به حساب ویکی‌انبار آزمایشی خودتان وارد شوید</string>
   <string name="login">ورود</string>
-  <string name="forgot_password">رمز خود را فراموش کرده‌اید؟</string>
+  <string name="forgot_password">رمز عبور خودتان را فراموش کرده‌اید؟</string>
   <string name="signup">ثبت نام</string>
   <string name="logging_in_title">واردشدن</string>
   <string name="logging_in_message">شکیبا باشید...</string>
@@ -272,9 +272,9 @@
   <string name="about_faq">سؤال‌های متداول</string>
   <string name="welcome_skip_button">رهاکردن آموزش</string>
   <string name="no_internet">اینترنت در دسترس نیست</string>
-  <string name="error_notifications">خطا در آوردن اطلاعیه</string>
+  <string name="error_notifications">خطای واکشی کردن آگاه‌سازی‌ها</string>
   <string name="error_review">در تلاش برای بدست‌آوردن تصویر جهت بازبینی خطایی پیش آمد. لطفا برای تلاش مجدد بر روی ریفرش کلیک کنید.</string>
-  <string name="no_notifications">هشداری پیدا نشد</string>
+  <string name="no_notifications">آگاه‌سازی‌هایی پیدا نشد</string>
   <string name="about_translate">ترجمه</string>
   <string name="about_translate_title">زبان‌ها</string>
   <string name="about_translate_message">لطفا زبانی که مایلید در آنها ترجمه‌های خود را ثبت کنید انتخاب کنید.</string>
@@ -344,7 +344,7 @@
   <string name="contributions_fragment">مشارکت‌ها</string>
   <string name="nearby_fragment">در نزدیکی</string>
   <string name="notifications">آگاه‌سازی‌ها</string>
-  <string name="read_notifications">اعلان‌ها (خوانده‌شده)</string>
+  <string name="read_notifications">آگاه‌سازی‌ها (خوانده‌شده)</string>
   <string name="display_nearby_notification">نمایش اعلان اطراف</string>
   <string name="list_sheet">فهرست</string>
   <string name="storage_permission">اجازه ذخیره</string>
@@ -398,8 +398,8 @@
   <string name="no_image">هیچ تصویری به کار نرفته است</string>
   <string name="no_image_reverted">تصویر برگردانده نشد</string>
   <string name="no_image_uploaded">هیچ تصویری بارگذاری نشد</string>
-  <string name="no_notification">شما هیچ اعلان خوانده‌نشده‌ای ندارید</string>
-  <string name="no_read_notification">شما هیچ اعلان خوانده‌شده‌ای ندارید</string>
+  <string name="no_notification">شما هیچ آگاه‌سازی‌ خوانده‌نشده‌ای ندارید</string>
+  <string name="no_read_notification">شما هیچ آگاه‌سازی‌ خوانده‌شده‌ای ندارید</string>
   <string name="menu_option_read">نمایش دیده‌شده</string>
   <string name="menu_option_unread">مشاهده خوانده نشده ها</string>
   <string name="please_wait">لطفاً صبر کنید...</string>
