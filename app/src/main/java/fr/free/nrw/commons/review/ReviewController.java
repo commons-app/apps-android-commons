@@ -156,12 +156,12 @@ public class ReviewController {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((result) -> {
-                    displayToast(context,result);
+                    displayThanksToast(context,result);
                 }, Timber::e);
     }
 
     @SuppressLint("StringFormatInvalid")
-    private void displayToast(final Context context, final boolean result){
+    private void displayThanksToast(final Context context, final boolean result){
         final String message;
         final String title;
         if (result) {
