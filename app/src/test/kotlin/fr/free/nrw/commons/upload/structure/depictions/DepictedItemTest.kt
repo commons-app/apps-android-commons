@@ -4,6 +4,7 @@ import com.nhaarman.mockitokotlin2.mock
 import depictedItem
 import entity
 import entityId
+import fr.free.nrw.commons.upload.models.depictions.DepictedItem
 import fr.free.nrw.commons.wikidata.WikidataProperties
 import org.junit.Assert
 import org.junit.Test

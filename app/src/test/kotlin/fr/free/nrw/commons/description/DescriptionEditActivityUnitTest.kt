@@ -15,7 +15,7 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.databinding.ActivityDescriptionEditBinding
 import fr.free.nrw.commons.description.EditDescriptionConstants.LIST_OF_DESCRIPTION_AND_CAPTION
 import fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT
-import fr.free.nrw.commons.data.models.upload.UploadMediaDetail
+import fr.free.nrw.commons.upload.models.UploadMediaDetail
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
 import junit.framework.Assert.assertEquals
 import org.junit.Assert

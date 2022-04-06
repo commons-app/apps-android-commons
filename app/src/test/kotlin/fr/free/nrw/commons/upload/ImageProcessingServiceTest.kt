@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.upload
 
 import android.net.Uri
-import fr.free.nrw.commons.data.models.upload.UploadItem
-import fr.free.nrw.commons.data.models.upload.UploadMediaDetail
+import fr.free.nrw.commons.upload.models.UploadItem
+import fr.free.nrw.commons.upload.models.UploadMediaDetail
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.nearby.Place

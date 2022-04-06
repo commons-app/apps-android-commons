@@ -3,7 +3,7 @@ package fr.free.nrw.commons.upload;
 import androidx.annotation.NonNull;
 
 import com.google.gson.JsonObject;
-import fr.free.nrw.commons.data.models.upload.UploadResponse;
+import fr.free.nrw.commons.upload.models.UploadResponse;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;

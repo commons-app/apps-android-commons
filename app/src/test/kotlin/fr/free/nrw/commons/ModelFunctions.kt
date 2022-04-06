@@ -6,7 +6,7 @@ import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.Label
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.Sitelinks
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
+import fr.free.nrw.commons.upload.models.depictions.DepictedItem
 import fr.free.nrw.commons.wikidata.model.DepictSearchItem
 import org.wikipedia.wikidata.*
 import java.util.*

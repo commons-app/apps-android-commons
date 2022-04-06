@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.data.models.upload
+package fr.free.nrw.commons.upload.models
 
 /**
  * Holds a description of an item being uploaded by [UploadActivity]

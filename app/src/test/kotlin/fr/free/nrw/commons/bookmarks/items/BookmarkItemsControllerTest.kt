@@ -2,7 +2,7 @@ package fr.free.nrw.commons.bookmarks.items
 
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.category.CategoryItem
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
+import fr.free.nrw.commons.upload.models.depictions.DepictedItem
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test

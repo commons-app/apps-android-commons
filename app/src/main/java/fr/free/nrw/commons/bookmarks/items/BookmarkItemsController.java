@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.bookmarks.items;
 
-import fr.free.nrw.commons.data.models.upload.depictions.DepictedItem;
+import fr.free.nrw.commons.upload.models.depictions.DepictedItem;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;

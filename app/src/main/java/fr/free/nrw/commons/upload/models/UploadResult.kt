@@ -1,8 +1,7 @@
-package fr.free.nrw.commons.data.models.upload
+package fr.free.nrw.commons.upload.models
 
 import android.os.Parcel
 import android.os.Parcelable
-import org.wikipedia.gallery.ImageInfo
 
 private const val RESULT_SUCCESS = "Success"
 

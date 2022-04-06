@@ -5,7 +5,7 @@ import android.widget.GridLayout
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.data.models.upload.UploadMediaDetail
+import fr.free.nrw.commons.upload.models.UploadMediaDetail
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test

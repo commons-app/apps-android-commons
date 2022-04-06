@@ -2,7 +2,7 @@ package fr.free.nrw.commons.upload.depicts;
 
 import androidx.lifecycle.LiveData;
 import fr.free.nrw.commons.BasePresenter;
-import fr.free.nrw.commons.data.models.upload.depictions.DepictedItem;
+import fr.free.nrw.commons.upload.models.depictions.DepictedItem;
 import java.util.List;
 
 /**

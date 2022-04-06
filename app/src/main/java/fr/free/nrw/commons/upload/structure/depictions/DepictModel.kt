@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.upload.structure.depictions
 
-import fr.free.nrw.commons.data.models.upload.depictions.DepictedItem
+import fr.free.nrw.commons.upload.models.depictions.DepictedItem
 import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.repository.UploadRepository

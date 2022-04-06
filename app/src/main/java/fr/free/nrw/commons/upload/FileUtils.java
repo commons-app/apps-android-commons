@@ -7,7 +7,7 @@ import android.webkit.MimeTypeMap;
 
 import androidx.exifinterface.media.ExifInterface;
 
-import fr.free.nrw.commons.data.models.upload.ImageCoordinates;
+import fr.free.nrw.commons.upload.models.ImageCoordinates;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;

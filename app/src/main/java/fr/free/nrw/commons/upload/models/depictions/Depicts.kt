@@ -1,8 +1,7 @@
-package fr.free.nrw.commons.data.models.upload.depictions
+package fr.free.nrw.commons.upload.models.depictions
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import fr.free.nrw.commons.data.models.upload.depictions.DepictedItem
 import java.util.*
 
 /**

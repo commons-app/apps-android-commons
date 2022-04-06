@@ -2,9 +2,9 @@ package fr.free.nrw.commons.upload
 
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
-import fr.free.nrw.commons.data.models.upload.ImageCoordinates
-import fr.free.nrw.commons.data.models.upload.UploadItem
-import fr.free.nrw.commons.data.models.upload.UploadMediaDetail
+import fr.free.nrw.commons.upload.models.ImageCoordinates
+import fr.free.nrw.commons.upload.models.UploadItem
+import fr.free.nrw.commons.upload.models.UploadMediaDetail
 import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.nearby.Place

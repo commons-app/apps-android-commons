@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.data.models.upload
+package fr.free.nrw.commons.upload.models
 
 import androidx.exifinterface.media.ExifInterface
 import fr.free.nrw.commons.location.LatLng

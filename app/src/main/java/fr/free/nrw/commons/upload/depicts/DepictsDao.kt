@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.upload.depicts
 
 import androidx.room.*
-import fr.free.nrw.commons.data.models.upload.depictions.DepictedItem
-import fr.free.nrw.commons.data.models.upload.depictions.Depicts
+import fr.free.nrw.commons.upload.models.depictions.DepictedItem
+import fr.free.nrw.commons.upload.models.depictions.Depicts
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking

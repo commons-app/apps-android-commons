@@ -5,7 +5,7 @@ import android.text.TextUtils
 import android.view.View
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.data.models.upload.depictions.DepictedItem
+import fr.free.nrw.commons.upload.models.depictions.DepictedItem
 import fr.free.nrw.commons.databinding.LayoutUploadDepictsItemBinding
 
 

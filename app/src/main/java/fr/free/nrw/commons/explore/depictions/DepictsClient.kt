@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.explore.depictions
 
 import android.annotation.SuppressLint
-import fr.free.nrw.commons.data.models.upload.depictions.DepictedItem
-import fr.free.nrw.commons.data.models.upload.depictions.get
+import fr.free.nrw.commons.upload.models.depictions.DepictedItem
+import fr.free.nrw.commons.upload.models.depictions.get
 import fr.free.nrw.commons.mwapi.Binding
 import fr.free.nrw.commons.mwapi.SparqlResponse
 import fr.free.nrw.commons.upload.depicts.DepictsInterface

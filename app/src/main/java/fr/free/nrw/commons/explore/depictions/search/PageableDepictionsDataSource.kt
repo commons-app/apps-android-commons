@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.explore.depictions.search
 
-import fr.free.nrw.commons.data.models.upload.depictions.DepictedItem
+import fr.free.nrw.commons.upload.models.depictions.DepictedItem
 import fr.free.nrw.commons.explore.paging.LiveDataConverter
 import fr.free.nrw.commons.explore.paging.LoadingState
 import fr.free.nrw.commons.explore.paging.PageableBaseDataSource

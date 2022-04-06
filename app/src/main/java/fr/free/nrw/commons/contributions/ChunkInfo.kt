@@ -2,7 +2,7 @@ package fr.free.nrw.commons.contributions
 
 import android.os.Parcel
 import android.os.Parcelable
-import fr.free.nrw.commons.data.models.upload.UploadResult
+import fr.free.nrw.commons.upload.models.UploadResult
 
 data class ChunkInfo(
     val uploadResult: UploadResult?,

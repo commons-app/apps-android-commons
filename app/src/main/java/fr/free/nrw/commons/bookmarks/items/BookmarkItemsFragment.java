@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.data.models.upload.depictions.DepictedItem;
+import fr.free.nrw.commons.upload.models.depictions.DepictedItem;
 import java.util.List;
 import javax.inject.Inject;
 import org.jetbrains.annotations.NotNull;

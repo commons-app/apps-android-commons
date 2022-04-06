@@ -3,8 +3,8 @@ package fr.free.nrw.commons.upload
 import categoryItem
 import com.nhaarman.mockitokotlin2.*
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.data.models.upload.UploadItem
-import fr.free.nrw.commons.data.models.upload.UploadMediaDetail
+import fr.free.nrw.commons.upload.models.UploadItem
+import fr.free.nrw.commons.upload.models.UploadMediaDetail
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.categories.CategoriesContract
 import fr.free.nrw.commons.upload.categories.CategoriesPresenter

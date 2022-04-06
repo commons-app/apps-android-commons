@@ -3,10 +3,10 @@ package fr.free.nrw.commons.upload.mediaDetails;
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.data.models.upload.ImageCoordinates;
+import fr.free.nrw.commons.upload.models.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
-import fr.free.nrw.commons.data.models.upload.UploadMediaDetail;
-import fr.free.nrw.commons.data.models.upload.UploadItem;
+import fr.free.nrw.commons.upload.models.UploadMediaDetail;
+import fr.free.nrw.commons.upload.models.UploadItem;
 import java.util.List;
 
 /**

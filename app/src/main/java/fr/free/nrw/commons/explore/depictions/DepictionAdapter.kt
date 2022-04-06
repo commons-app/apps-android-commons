@@ -6,7 +6,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.data.models.upload.depictions.DepictedItem
+import fr.free.nrw.commons.upload.models.depictions.DepictedItem
 import fr.free.nrw.commons.databinding.ItemDepictionsBinding
 
 class DepictionAdapter(private val onDepictionClicked: (DepictedItem) -> Unit) :

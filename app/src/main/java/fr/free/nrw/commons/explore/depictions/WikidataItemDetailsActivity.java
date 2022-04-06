@@ -23,7 +23,7 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.ViewPagerAdapter;
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
-import fr.free.nrw.commons.data.models.upload.depictions.DepictedItem;
+import fr.free.nrw.commons.upload.models.depictions.DepictedItem;
 import fr.free.nrw.commons.explore.depictions.child.ChildDepictionsFragment;
 import fr.free.nrw.commons.explore.depictions.media.DepictedImagesFragment;
 import fr.free.nrw.commons.explore.depictions.parent.ParentDepictionsFragment;

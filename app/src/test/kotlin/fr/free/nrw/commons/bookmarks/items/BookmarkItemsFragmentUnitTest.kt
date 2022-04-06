@@ -16,7 +16,7 @@ import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.profile.ProfileActivity
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
+import fr.free.nrw.commons.upload.models.depictions.DepictedItem
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
