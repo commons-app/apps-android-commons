@@ -74,7 +74,7 @@
   <string name="upload_progress_notification_title_start">Fájl feltöltése: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s feltöltése</string>
   <string name="upload_progress_notification_title_finishing">%1$s feltöltése befejezve</string>
-  <string name="upload_failed_notification_title">%1$s feltöltése sikertelen</string>
+  <string name="upload_failed_notification_title" fuzzy="true">%1$s feltöltése sikertelen</string>
   <string name="upload_paused_notification_title">%1$s feltöltés megállítva</string>
   <string name="upload_failed_notification_subtitle">Érintsd meg a megtekintéshez</string>
   <string name="upload_paused_notification_subtitle">Megnézéshez koppints</string>
@@ -403,7 +403,7 @@
   <string name="review_thanks_yes_button_text">Következő kép</string>
   <string name="review_thanks_no_button_text">Miért ne?</string>
   <string name="skip_image_explanation">Erre a gombra kattintva egy másik mostanában feltöltött képet kaphatsz a Wikimedia Commonsból.</string>
-  <string name="review_image_explanation">Átnézheted a képeket, ezzel növelve a Wikimedia Commons minőségét.\nAz átnézés négy szempontja a következő:\n- Megfelelő a kép?\n- Megfelel a szerzői jogvédelmi szabályoknak?\n- Helyesen van kategorizálva?\n- Ha minden jól megy, meg is köszönheted a közreműködőnek.</string>
+  <string name="review_image_explanation" fuzzy="true">Átnézheted a képeket, ezzel növelve a Wikimedia Commons minőségét.\nAz átnézés négy szempontja a következő:\n- Megfelelő a kép?\n- Megfelel a szerzői jogvédelmi szabályoknak?\n- Helyesen van kategorizálva?\n- Ha minden jól megy, meg is köszönheted a közreműködőnek.</string>
   <string name="no_image">Nincs felhasznált kép</string>
   <string name="no_image_reverted">Nincs visszavont kép</string>
   <string name="no_image_uploaded">Nincs feltöltött kép</string>

@@ -10,10 +10,8 @@ import static fr.free.nrw.commons.description.EditDescriptionConstants.LIST_OF_D
 import static fr.free.nrw.commons.description.EditDescriptionConstants.UPDATED_WIKITEXT;
 import static fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT;
 import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION;
-import android.content.res.Resources;
 import static fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources;
 import android.annotation.SuppressLint;
-import java.lang.reflect.Field;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -45,6 +43,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -86,6 +86,7 @@ import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
+import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
@@ -93,7 +94,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -176,6 +176,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     LinearLayout captionLayout;
     @BindView(R.id.depicts_layout)
     LinearLayout depictsLayout;
+    @BindView(R.id.depictionsEditButton)
+    Button depictEditButton;
     @BindView(R.id.media_detail_caption)
     TextView mediaCaption;
     @BindView(R.id.mediaDetailDesc)
@@ -239,7 +241,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     @BindView(R.id.description_label)
     TextView descriptionLabel;
     @BindView(R.id.pb_circular)
-     ProgressBar progressBar;
+    ProgressBar progressBar;
     String descriptionHtmlCode;
     @BindView(R.id.progressBarDeletion)
     ProgressBar progressBarDeletion;
@@ -467,10 +469,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     private void displayMediaDetails() {
         setTextFields(media);
         compositeDisposable.addAll(
-            mediaDataExtractor.fetchDepictionIdsAndLabels(media)
+            mediaDataExtractor.refresh(media)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onDepictionsLoaded, Timber::e),
+                .subscribe(this::onMediaRefreshed, Timber::e),
             mediaDataExtractor.checkDeletionRequestExists(media)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -478,15 +480,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             mediaDataExtractor.fetchDiscussion(media)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onDiscussionLoaded, Timber::e),
-            mediaDataExtractor.refresh(media)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onMediaRefreshed, Timber::e)
+                .subscribe(this::onDiscussionLoaded, Timber::e)
         );
     }
 
     private void onMediaRefreshed(Media media) {
+        this.media = media;
         setTextFields(media);
         compositeDisposable.addAll(
             mediaDataExtractor.fetchDepictionIdsAndLabels(media)
@@ -517,8 +516,26 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     private void onDepictionsLoaded(List<IdAndCaptions> idAndCaptions){
-      depictsLayout.setVisibility(idAndCaptions.isEmpty() ? GONE : VISIBLE);
-      buildDepictionList(idAndCaptions);
+        depictsLayout.setVisibility(idAndCaptions.isEmpty() ? GONE : VISIBLE);
+        depictEditButton.setVisibility(idAndCaptions.isEmpty() ? GONE : VISIBLE);
+        buildDepictionList(idAndCaptions);
+    }
+
+    /**
+     * By clicking on the edit depictions button, it will send user to depict fragment
+     */
+    @OnClick(R.id.depictionsEditButton)
+    public void onDepictionsEditButtonClicked() {
+        depictionContainer.removeAllViews();
+        depictEditButton.setVisibility(GONE);
+        final Fragment depictsFragment = new DepictsFragment();
+        final Bundle bundle = new Bundle();
+        bundle.putParcelable("Existing_Depicts", media);
+        depictsFragment.setArguments(bundle);
+        final FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.mediaDetailFrameLayout, depictsFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
     /**
      * The imageSpacer is Basically a transparent overlay for the SimpleDraweeView

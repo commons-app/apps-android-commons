@@ -10,6 +10,7 @@
 * Nitisart Jungtrakungrat
 * Octahedron80
 * Patsagorn Y.
+* Trisorn Triboon
 -->
 <resources>
   <string name="uploads_pending_notification_indicator">กำลังอัปโหลดไฟล์ %1$d ไฟล์</string>
@@ -57,7 +58,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">กำลังเริ่มการอัปโหลด %1$s</string>
   <string name="upload_progress_notification_title_in_progress">กำลังอัปโหลด %1$s</string>
   <string name="upload_progress_notification_title_finishing">กำลังเสร็จสิ้นการอัปโหลด %1$s</string>
-  <string name="upload_failed_notification_title">การอัปโหลด %1$s ล้มเหลว</string>
+  <string name="upload_failed_notification_title" fuzzy="true">การอัปโหลด %1$s ล้มเหลว</string>
   <string name="upload_failed_notification_subtitle">แตะเพื่อดู</string>
   <string name="upload_paused_notification_subtitle">แตะเพื่อดู</string>
   <string name="title_activity_contributions">การอัปโหลดล่าสุดของฉัน</string>
@@ -373,4 +374,12 @@
   <string name="load_more">โหลดเพิ่มเติม</string>
   <string name="wikipedia_instructions_step_1">1. ใช้ข้อความวิกิดังต่อไปนี้:</string>
   <string name="leaderboard_nearby">สถานที่ใกล้เคียง</string>
+  <string name="cancelling_upload">กำลังยกเลิกอับโหลด…</string>
+  <string name="cancel_upload">ยกเลิกอับโหลด</string>
+  <string name="api_level">API level</string>
+  <string name="android_version">แอนดรอยด์เวอร์ชัน</string>
+  <string name="device_model">รุ่นอุปกรณ์</string>
+  <string name="device_name">ชื่ออุปกรณ์</string>
+  <string name="thanks_feedback">ขอขอบคุณสำหรับข้อเสนอแนะ</string>
+  <string name="your_feedback">ข้อเสนอแนะของคุณ</string>
 </resources>

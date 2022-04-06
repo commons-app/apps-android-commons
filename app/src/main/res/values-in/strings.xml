@@ -58,7 +58,7 @@
   <string name="logging_in_title">Memasuki log</string>
   <string name="logging_in_message">Silakan tunggu…</string>
   <string name="updating_caption_title">Memperbarui takarir dan deskripsi</string>
-  <string name="updating_caption_message">Harap tunggu...</string>
+  <string name="updating_caption_message">Mohon tunggu...</string>
   <string name="login_success">Berhasil masuk log!</string>
   <string name="login_failed">Gagal masuk log!</string>
   <string name="upload_failed">Berkas tidak ditemukan. Silakan coba berkas lain.</string>
@@ -70,7 +70,7 @@
   <string name="upload_progress_notification_title_start">Mengunggah berkas: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s terunggah!</string>
   <string name="upload_progress_notification_title_finishing">Menyelesaikan pengunggahan %1$s</string>
-  <string name="upload_failed_notification_title">Mengunggah %1$s gagal</string>
+  <string name="upload_failed_notification_title">Pengunggaha %1$s gagal</string>
   <string name="upload_paused_notification_title">Mengunggah %1$s tertunda</string>
   <string name="upload_failed_notification_subtitle">Tekan untuk melihat</string>
   <string name="upload_paused_notification_subtitle">Tap untuk melihat</string>
@@ -328,6 +328,7 @@
   <string name="error_fetching_nearby_monuments">Galat saat mengambil monumen terdekat.</string>
   <string name="no_recent_searches">Tidak ada pencarian terbaru</string>
   <string name="delete_recent_searches_dialog">Apakah Anda yakin ingin menghapus riwayat penelusuran?</string>
+  <string name="cancel_upload_dialog">Apakah Anda yakin ingin membatalkan unggahan ini?</string>
   <string name="delete_search_dialog">Anda ingin menghapus pencarian ini?</string>
   <string name="search_history_deleted">Riwayat pencarian dihapus</string>
   <string name="nominate_delete">Usulan Penghapusan</string>
@@ -435,7 +436,7 @@
   <string name="review_thanks_yes_button_text">Gambar selanjutnya</string>
   <string name="review_thanks_no_button_text">Ya, mengapa tidak</string>
   <string name="skip_image_explanation">Menekan tombol ini akan memberikan Anda gambar lain yang baru diunggah dari Wikimedia Commons</string>
-  <string name="review_image_explanation">Anda dapat meninjau gambar dan meningkatkan kualitas Wikimedia Commons.\n Empat parameter peninjauan adalah: \n - Apakah gambar ini di dalam cakupan? \n - Apakah gambar ini mengikut aturan hak cipta? \n - Apakah gambar ini dikategorikan dengan benar? \n - Jika semuanya berjalan lancar Anda juga bisa berterima kasih kepada kontributor.</string>
+  <string name="review_image_explanation" fuzzy="true">Anda dapat meninjau gambar dan meningkatkan kualitas Wikimedia Commons.\n Empat parameter peninjauan adalah: \n - Apakah gambar ini di dalam cakupan? \n - Apakah gambar ini mengikut aturan hak cipta? \n - Apakah gambar ini dikategorikan dengan benar? \n - Jika semuanya berjalan lancar Anda juga bisa berterima kasih kepada kontributor.</string>
   <string name="no_image">Tidak ada gambar digunakan</string>
   <string name="no_image_reverted">Tidak ada gambar dibalikkan</string>
   <string name="no_image_uploaded">Tidak ada gambar diunggah</string>
@@ -593,6 +594,8 @@
   <string name="quality_images_info">Gambar berkualitas adalah diagram atau foto yang memenuhi standar kualitas tertentu (yang sifatnya teknis) dan berharga bagi proyek Wikimedia</string>
   <string name="resuming_upload">Melanjutkan unggahan...</string>
   <string name="pausing_upload">Menunda unggahan...</string>
+  <string name="cancelling_upload">Membatalkan pengunggahan...</string>
+  <string name="cancel_upload">Batalkan pengunggahan</string>
   <string name="limited_connection_explanation">Anda menyalakan mode koneksi terbatas. Semua pengunggahan ditunda dan akan dilanjutkan begitu Anda mematikan mode ini.</string>
   <string name="limited_connection_is_on">Mode sambungan terbatas sedang menyala.</string>
   <string name="media_details_tooltip">Silakan tulis keterangan singkat yang menjelaskan apa yang gambar Anda tampilkan. Dalam deskripsi, katakan apa yang membuat gambar ini menarik atau biasa atau langka, dan jelaskan konteksnya, baik yang tampak maupun tidak. Gunakan istilah yang setepat mungkin.</string>
@@ -651,4 +654,5 @@
   <string name="no_location_found_message">Bagaimana jika Anda menambahkan tempat di mana gambar ini diambil?\nData lokasi membantu para penyunting Wiki menemukan gambar Anda, sehingga ia menjadi lebih berguna.\nTerima kasih!</string>
   <string name="add_location">Tambahkan lokasi</string>
   <string name="feedback_sharing_data_alert">Silakan hapus informasi yang menurut Anda tidak layak disebarkan ke masyarakat umum dari surel ini. Selain itu, perlu diperhatikan bahwa alamat surel yang Anda unggah, beserta foto penggunanya, akan dapat dilihat oleh masyarakat umum.</string>
+  <string name="copyright_popup">Silakan unggah gambar yang Anda buat sendiri. Pengunggah gambar yang melanggar hak cipta akan diblokir. Aturan ini juga berlaku untuk beta. Terima kasih telah menguji aplikasi ini!</string>
 </resources>

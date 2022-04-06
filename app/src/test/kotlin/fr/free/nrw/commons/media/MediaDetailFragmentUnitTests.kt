@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewTreeObserver
 import android.webkit.WebView
 import android.widget.*
@@ -19,7 +20,6 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.generic.GenericDraweeHierarchy
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.soloader.SoLoader
-import fr.free.nrw.commons.*
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
 import org.robolectric.Shadows.shadowOf
 import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter
@@ -34,10 +34,8 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.contributions.ContributionViewHolder
 import fr.free.nrw.commons.delete.DeleteHelper
 import fr.free.nrw.commons.delete.ReasonBuilder
-import fr.free.nrw.commons.utils.ImageUtils
 import io.reactivex.Single
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -218,6 +216,7 @@ class MediaDetailFragmentUnitTests {
         Whitebox.setInternalState(fragment, "showCaptionAndDescriptionContainer", linearLayout)
         Whitebox.setInternalState(fragment, "updateCategoriesButton", button)
         Whitebox.setInternalState(fragment, "editDescription", button)
+        Whitebox.setInternalState(fragment, "depictEditButton", button)
         Whitebox.setInternalState(fragment, "categoryContainer", linearLayout)
         Whitebox.setInternalState(fragment, "categorySearchView", searchView)
         Whitebox.setInternalState(fragment, "progressBarDeletion", progressBarDeletion)
@@ -656,4 +655,17 @@ class MediaDetailFragmentUnitTests {
         MediaDetailFragment.forMedia(0, true, true, true)
     }
 
+    @Test
+    @Throws(Exception::class)
+    fun testOnDepictEditButtonClicked() {
+        fragment.onDepictionsEditButtonClicked()
+        verify(linearLayout).removeAllViews()
+        verify(button).visibility = GONE
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnDeleteButtonClicked() {
+        fragment.onDeleteButtonClicked()
+    }
 }

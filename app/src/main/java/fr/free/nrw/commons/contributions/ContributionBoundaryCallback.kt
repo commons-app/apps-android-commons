@@ -36,11 +36,10 @@ class ContributionBoundaryCallback @Inject constructor(
     }
 
     /**
-     * It is triggered when the user scrolls to the top of the list User's Contributions are then
-     * fetched from the network
+     * It is triggered when the user scrolls to the top of the list
      * */
     override fun onItemAtFrontLoaded(itemAtFront: Contribution) {
-        fetchContributions()
+
     }
 
     /**

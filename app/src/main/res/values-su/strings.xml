@@ -65,7 +65,7 @@
   <string name="upload_progress_notification_title_start">Ngamuat berkas: %s</string>
   <string name="upload_progress_notification_title_in_progress">Ngunjal %1$s</string>
   <string name="upload_progress_notification_title_finishing">Méréskeun unjalan %1$s</string>
-  <string name="upload_failed_notification_title">Ngunjal %1$s gagal</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Ngunjal %1$s gagal</string>
   <string name="upload_paused_notification_title">Ngamuat %1$s eureun heula</string>
   <string name="upload_failed_notification_subtitle">Toél pikeun nempo</string>
   <string name="upload_paused_notification_subtitle">Toél pikeun nempo</string>

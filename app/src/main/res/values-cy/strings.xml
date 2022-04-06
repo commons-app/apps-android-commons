@@ -54,7 +54,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Yn dechrau uwchlwytho %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Wrthi\'n uwchlwytho %1$s</string>
   <string name="upload_progress_notification_title_finishing">Yn gorffen uwchlwytho %1$s</string>
-  <string name="upload_failed_notification_title">Methwyd uwchlwytho %1$s</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Methwyd uwchlwytho %1$s</string>
   <string name="upload_failed_notification_subtitle">Tapiwch i weld</string>
   <string name="title_activity_contributions">Fy Uwchlwythiadau Diweddaraf</string>
   <string name="contribution_state_queued">Yn y ciw</string>

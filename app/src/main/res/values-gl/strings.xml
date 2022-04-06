@@ -67,7 +67,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Comezando a carga de \"%1$s\"</string>
   <string name="upload_progress_notification_title_in_progress">Cargando \"%1$s\"</string>
   <string name="upload_progress_notification_title_finishing">Rematando a carga de \"%1$s\"</string>
-  <string name="upload_failed_notification_title">Erro ao cargar \"%1$s\"</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Erro ao cargar \"%1$s\"</string>
   <string name="upload_failed_notification_subtitle">Prema para amosalo</string>
   <string name="title_activity_contributions">As miñas subas recentes</string>
   <string name="contribution_state_queued">Na cola</string>

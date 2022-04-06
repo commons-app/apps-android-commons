@@ -50,7 +50,7 @@
   <string name="upload_progress_notification_title_start">Postavljam datoteku: %s</string>
   <string name="upload_progress_notification_title_in_progress">Postavljanje datoteke %1$s u toku</string>
   <string name="upload_progress_notification_title_finishing">Postavljanje datoteke %1$s završeno</string>
-  <string name="upload_failed_notification_title">Postavljanje datoteke %1$s nije uspjelo</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Postavljanje datoteke %1$s nije uspjelo</string>
   <string name="upload_paused_notification_title">Postavljanje %1$s pauzirano</string>
   <string name="upload_failed_notification_subtitle">Dodirnite da biste vidjeli</string>
   <string name="upload_paused_notification_subtitle">Dodirnite da biste vidjeli</string>

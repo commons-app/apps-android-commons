@@ -49,7 +49,7 @@
   <string name="upload_progress_notification_title_start">ဖိုင်အက်ပလုဒ်တင်နေသည်- %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ဖိုင်တင်နေသည်</string>
   <string name="upload_progress_notification_title_finishing">ဖိုင်တင်ခြင်း ပြီးဆုံးမှု %1$s</string>
-  <string name="upload_failed_notification_title">ဖိုင်တင်ခြင်း %1$s မအောင်မြင်ပါ</string>
+  <string name="upload_failed_notification_title" fuzzy="true">ဖိုင်တင်ခြင်း %1$s မအောင်မြင်ပါ</string>
   <string name="upload_paused_notification_title">ဖိုင်တင်ခြင်း %1$s မအောင်မြင်ပါ</string>
   <string name="upload_failed_notification_subtitle">ကြည့်ရန်နှိပ်ပါ</string>
   <string name="upload_paused_notification_subtitle">ကြည့်ရန်နှိပ်ပါ</string>

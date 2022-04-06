@@ -3,11 +3,14 @@ package fr.free.nrw.commons.contributions;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
+import android.webkit.URLUtil;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,6 +24,7 @@ import fr.free.nrw.commons.media.MediaClient;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java.io.File;
 
 public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
@@ -54,13 +58,24 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     private final MediaClient mediaClient;
     private boolean isWikipediaButtonDisplayed;
+    private AlertDialog pausingPopUp;
+    private View parent;
+    private ImageRequest imageRequest;
 
     ContributionViewHolder(final View parent, final Callback callback,
         final MediaClient mediaClient) {
         super(parent);
+        this.parent = parent;
         this.mediaClient = mediaClient;
         ButterKnife.bind(this, parent);
         this.callback = callback;
+
+        /* Set a dialog indicating that the upload is being paused. This is needed because pausing
+        an upload might take a dozen seconds. */
+        AlertDialog.Builder builder = new Builder(parent.getContext());
+        builder.setCancelable(false);
+        builder.setView(R.layout.progress_dialog);
+        pausingPopUp = builder.create();
     }
 
     public void init(final int position, final Contribution contribution) {
@@ -84,11 +99,18 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
         final String imageSource = chooseImageSource(contribution.getMedia().getThumbUrl(),
             contribution.getLocalUri());
         if (!TextUtils.isEmpty(imageSource)) {
-            final ImageRequest imageRequest =
-                ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageSource))
+            if (URLUtil.isHttpsUrl(imageSource)) {
+                imageRequest = ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageSource))
                     .setProgressiveRenderingEnabled(true)
                     .build();
-            imageView.setImageRequest(imageRequest);
+            } else if(imageSource != null) {
+                final File file = new File(imageSource);
+                imageRequest = ImageRequest.fromFile(file);
+            }
+
+            if(imageRequest != null){
+                imageView.setImageRequest(imageRequest);
+            }
         }
 
         seqNumView.setText(String.valueOf(position + 1));
@@ -105,8 +127,8 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
                 break;
             case Contribution.STATE_QUEUED:
             case Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE:
-                stateView.setVisibility(View.VISIBLE);
                 progressView.setVisibility(View.GONE);
+                stateView.setVisibility(View.VISIBLE);
                 stateView.setText(R.string.contribution_state_queued);
                 imageOptions.setVisibility(View.GONE);
                 break;
@@ -128,14 +150,17 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
                 }
                 break;
             case Contribution.STATE_PAUSED:
+                progressView.setVisibility(View.GONE);
                 stateView.setVisibility(View.VISIBLE);
                 stateView.setText(R.string.paused);
-                setResume();
-                progressView.setVisibility(View.GONE);
-                cancelButton.setVisibility(View.GONE);
+                cancelButton.setVisibility(View.VISIBLE);
                 retryButton.setVisibility(View.GONE);
                 pauseResumeButton.setVisibility(View.VISIBLE);
                 imageOptions.setVisibility(View.VISIBLE);
+                setResume();
+                if(pausingPopUp.isShowing()){
+                    pausingPopUp.hide();
+                }
                 break;
             case Contribution.STATE_FAILED:
                 stateView.setVisibility(View.VISIBLE);
@@ -245,6 +270,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void pause() {
+        pausingPopUp.show();
         callback.pauseUpload(contribution);
         setResume();
     }
@@ -254,7 +280,7 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
      */
     private void setPaused() {
         pauseResumeButton.setImageResource(R.drawable.pause_icon);
-        pauseResumeButton.setTag(R.string.pause);
+        pauseResumeButton.setTag(parent.getContext().getString(R.string.pause));
     }
 
     /**
@@ -262,6 +288,10 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
      */
     private void setResume() {
         pauseResumeButton.setImageResource(R.drawable.play_icon);
-        pauseResumeButton.setTag(R.string.resume);
+        pauseResumeButton.setTag(parent.getContext().getString(R.string.resume));
+    }
+
+    public ImageRequest getImageRequest() {
+        return imageRequest;
     }
 }
