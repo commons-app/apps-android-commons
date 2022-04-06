@@ -20,7 +20,7 @@ import fr.free.nrw.commons.profile.leaderboard.UpdateAvatarResponse;
 import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.ConfigUtils;
-import fr.free.nrw.commons.data.models.wikidata.GetWikidataEditCountResponse;
+import fr.free.nrw.commons.wikidata.models.GetWikidataEditCountResponse;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;

@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 
-import fr.free.nrw.commons.data.models.wikidata.WbCreateClaimResponse;
+import fr.free.nrw.commons.wikidata.models.WbCreateClaimResponse;
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;

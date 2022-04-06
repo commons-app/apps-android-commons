@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.upload.depicts;
 
-import fr.free.nrw.commons.data.models.wikidata.DepictSearchResponse;
+import fr.free.nrw.commons.wikidata.models.DepictSearchResponse;
 import io.reactivex.Single;
 import org.wikipedia.wikidata.Entities;
 import retrofit2.http.GET;

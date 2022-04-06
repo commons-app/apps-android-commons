@@ -2,8 +2,8 @@ package fr.free.nrw.commons.wikidata
 
 import com.google.gson.Gson
 import com.nhaarman.mockitokotlin2.whenever
-import fr.free.nrw.commons.data.models.wikidata.PageInfo
-import fr.free.nrw.commons.data.models.wikidata.WbCreateClaimResponse
+import fr.free.nrw.commons.wikidata.models.PageInfo
+import fr.free.nrw.commons.wikidata.models.WbCreateClaimResponse
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test

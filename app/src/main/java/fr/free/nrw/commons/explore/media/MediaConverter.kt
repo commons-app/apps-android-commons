@@ -5,7 +5,7 @@ import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.upload.structure.depictions.get
 import fr.free.nrw.commons.utils.CommonsDateUtil
 import fr.free.nrw.commons.utils.MediaDataExtractorUtil
-import fr.free.nrw.commons.data.models.wikidata.WikidataProperties
+import fr.free.nrw.commons.wikidata.models.WikidataProperties
 import org.apache.commons.lang3.StringUtils
 import org.wikipedia.dataclient.mwapi.MwQueryPage
 import org.wikipedia.gallery.ExtMetadata

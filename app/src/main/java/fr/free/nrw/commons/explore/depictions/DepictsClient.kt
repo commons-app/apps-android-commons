@@ -6,8 +6,8 @@ import fr.free.nrw.commons.mwapi.SparqlResponse
 import fr.free.nrw.commons.upload.depicts.DepictsInterface
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.upload.structure.depictions.get
-import fr.free.nrw.commons.data.models.wikidata.WikidataProperties
-import fr.free.nrw.commons.data.models.wikidata.DepictSearchItem
+import fr.free.nrw.commons.wikidata.models.WikidataProperties
+import fr.free.nrw.commons.wikidata.models.DepictSearchItem
 import io.reactivex.Single
 import org.wikipedia.wikidata.DataValue
 import org.wikipedia.wikidata.Entities

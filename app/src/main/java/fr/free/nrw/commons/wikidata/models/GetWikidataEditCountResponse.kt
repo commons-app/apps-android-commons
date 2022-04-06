@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.data.models.wikidata
+package fr.free.nrw.commons.wikidata.models
 
 import com.google.gson.annotations.SerializedName
 

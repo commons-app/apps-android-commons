@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.upload.WikidataItem
-import fr.free.nrw.commons.data.models.wikidata.WikidataProperties
-import fr.free.nrw.commons.data.models.wikidata.WikidataProperties.*
+import fr.free.nrw.commons.wikidata.models.WikidataProperties
+import fr.free.nrw.commons.wikidata.models.WikidataProperties.*
 import kotlinx.android.parcel.Parcelize
 import org.wikipedia.wikidata.DataValue
 import org.wikipedia.wikidata.Entities

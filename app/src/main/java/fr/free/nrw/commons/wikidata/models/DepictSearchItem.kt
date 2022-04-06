@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.data.models.wikidata
+package fr.free.nrw.commons.wikidata.models
 
 /**
  * Model class for Depiction item returned from API after calling searchForDepicts

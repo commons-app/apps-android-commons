@@ -8,7 +8,7 @@ import fr.free.nrw.commons.mwapi.Result
 import fr.free.nrw.commons.mwapi.SparqlResponse
 import fr.free.nrw.commons.upload.depicts.DepictsInterface
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
-import fr.free.nrw.commons.data.models.wikidata.DepictSearchResponse
+import fr.free.nrw.commons.wikidata.models.DepictSearchResponse
 import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
