@@ -3,15 +3,18 @@ package fr.free.nrw.commons.upload.categories;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -20,8 +23,10 @@ import butterknife.OnClick;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryItem;
+import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText;
 import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
@@ -29,6 +34,7 @@ import fr.free.nrw.commons.utils.DialogUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import kotlin.Unit;
@@ -50,11 +56,16 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     RecyclerView rvCategories;
     @BindView(R.id.tooltip)
     ImageView tooltip;
+    @BindView(R.id.btn_next)
+    Button btnNext;
+    @BindView(R.id.btn_previous)
+    Button btnPrevious;
 
     @Inject
     CategoriesContract.UserActionListener presenter;
     private UploadCategoryAdapter adapter;
     private Disposable subscribe;
+    private Media media;
 
     @Nullable
     @Override
@@ -67,12 +78,25 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            media = bundle.getParcelable("Existing_Categories");
+        }
+
         init();
     }
 
     private void init() {
-        tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
-            callback.getTotalNumberOfSteps(), getString(R.string.categories_activity_title)));
+        if (media == null) {
+            tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
+                callback.getTotalNumberOfSteps(), getString(R.string.categories_activity_title)));
+        } else {
+            tvTitle.setText(R.string.edit_categories);
+            tvSubTitle.setVisibility(View.GONE);
+            btnNext.setText(R.string.menu_save_categories);
+            btnPrevious.setText(R.string.menu_cancel_upload);
+        }
+
         setTvSubTitle();
         tooltip.setOnClickListener(new OnClickListener() {
             @Override
@@ -186,6 +210,63 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         final Editable text = etSearch.getText();
         if (text != null) {
             presenter.searchForCategories(text.toString());
+        }
+    }
+
+    /**
+     * Hides the action bar while opening editing fragment
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (media != null) {
+//            depictsSearch.setOnKeyListener((v, keyCode, event) -> {
+//                if (keyCode == KeyEvent.KEYCODE_BACK) {
+//                    depictsSearch.clearFocus();
+//                    presenter.clearPreviousSelection();
+//                    updateDepicts();
+//                    goBackToPreviousScreen();
+//                    return true;
+//                }
+//                return false;
+//            });
+//
+//            Objects.requireNonNull(getView()).setFocusableInTouchMode(true);
+//            getView().requestFocus();
+//            getView().setOnKeyListener((v, keyCode, event) -> {
+//                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+//                    presenter.clearPreviousSelection();
+//                    updateDepicts();
+//                    goBackToPreviousScreen();
+//                    return true;
+//                }
+//                return false;
+//            });
+
+            Objects.requireNonNull(
+                ((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar())
+                .hide();
+
+            if (getParentFragment().getParentFragment().getParentFragment()
+                instanceof ContributionsFragment) {
+                ((ContributionsFragment) (getParentFragment()
+                    .getParentFragment().getParentFragment())).nearbyNotificationCardView
+                    .setVisibility(View.GONE);
+            }
+        }
+    }
+
+    /**
+     * Shows the action bar while closing editing fragment
+     */
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (media != null) {
+            Objects.requireNonNull(
+                ((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar())
+                .show();
         }
     }
 }

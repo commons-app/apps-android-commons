@@ -86,6 +86,7 @@ import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
+import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
 import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
@@ -811,7 +812,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     @OnClick(R.id.categoryEditButton)
     public void onCategoryEditButtonClicked(){
-        displayHideCategorySearch();
+        final Fragment categoriesFragment = new UploadCategoriesFragment();
+        final Bundle bundle = new Bundle();
+        bundle.putParcelable("Existing_Categories", media);
+        categoriesFragment.setArguments(bundle);
+        final FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.mediaDetailFrameLayout, categoriesFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     /**
