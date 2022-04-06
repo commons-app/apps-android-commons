@@ -64,6 +64,7 @@ public class AboutActivity extends BaseActivity {
 
         Utils.setUnderlinedText(binding.aboutFaq, R.string.about_faq, getApplicationContext());
         Utils.setUnderlinedText(binding.aboutRateUs, R.string.about_rate_us, getApplicationContext());
+        Utils.setUnderlinedText(binding.aboutUserGuide, R.string.user_guide, getApplicationContext());
         Utils.setUnderlinedText(binding.aboutPrivacyPolicy, R.string.about_privacy_policy, getApplicationContext());
         Utils.setUnderlinedText(binding.aboutTranslate, R.string.about_translate, getApplicationContext());
         Utils.setUnderlinedText(binding.aboutCredits, R.string.about_credits, getApplicationContext());
@@ -77,6 +78,7 @@ public class AboutActivity extends BaseActivity {
         binding.aboutRateUs.setOnClickListener(this::launchRatings);
         binding.aboutCredits.setOnClickListener(this::launchCredits);
         binding.aboutPrivacyPolicy.setOnClickListener(this::launchPrivacyPolicy);
+        binding.aboutUserGuide.setOnClickListener(this::launchUserGuide);
         binding.aboutFaq.setOnClickListener(this::launchFrequentlyAskedQuesions);
         binding.aboutTranslate.setOnClickListener(this::launchTranslate);
     }
@@ -112,6 +114,10 @@ public class AboutActivity extends BaseActivity {
 
     public void launchCredits(View view) {
         Utils.handleWebUrl(this, Uri.parse(Urls.CREDITS_URL));
+    }
+
+    public void launchUserGuide(View view) {
+        Utils.handleWebUrl(this, Uri.parse(Urls.USER_GUIDE_URL));
     }
 
     public void launchPrivacyPolicy(View view) {

@@ -43,7 +43,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Començament de telecargament %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s telecargats</string>
   <string name="upload_progress_notification_title_finishing">Fin del telecargament %1$s</string>
-  <string name="upload_failed_notification_title">Telecargament fracassat a %1$s</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Telecargament fracassat a %1$s</string>
   <string name="upload_failed_notification_subtitle">Quichar per afichar</string>
   <string name="title_activity_contributions">Mos darrièrs cargaments</string>
   <string name="contribution_state_queued">Mes en fila d\'espèra</string>

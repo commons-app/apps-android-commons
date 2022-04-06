@@ -24,13 +24,23 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
+import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.feedback.FeedbackContentCreator;
+import fr.free.nrw.commons.feedback.model.Feedback;
+import fr.free.nrw.commons.feedback.FeedbackDialog;
+import fr.free.nrw.commons.feedback.OnFeedbackSubmitCallback;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
+import io.reactivex.Single;
+import io.reactivex.SingleSource;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import java.util.concurrent.Callable;
 import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
@@ -46,6 +56,10 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
 
     @Inject @Named("default_preferences")
     JsonKvStore store;
+
+    @Inject
+    @Named("commons-page-edit")
+    PageEditClient pageEditClient;
 
     @Nullable
     @Override
@@ -104,7 +118,44 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
 
     @OnClick(R.id.more_feedback)
     public void onFeedbackClicked() {
-        showAlertDialog();
+        showFeedbackDialog();
+    }
+
+    /**
+     * Creates and shows a dialog asking feedback from users
+     */
+    private void showFeedbackDialog() {
+        new FeedbackDialog(getContext(), new OnFeedbackSubmitCallback() {
+            @Override
+            public void onFeedbackSubmit(Feedback feedback) {
+                uploadFeedback(feedback);
+            }
+        }).show();
+    }
+
+    /**
+     * uploads feedback data on the server
+     */
+    void uploadFeedback(Feedback feedback) {
+        FeedbackContentCreator feedbackContentCreator = new FeedbackContentCreator(getContext(), feedback);
+
+        Single<Boolean> single =
+            pageEditClient.prependEdit("Commons:Mobile_app/Feedback", feedbackContentCreator.toString(), "Summary")
+                .flatMapSingle(result -> Single.just(result))
+                .firstOrError();
+
+        Single.defer((Callable<SingleSource<Boolean>>) () -> single)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(aBoolean -> {
+                if (aBoolean) {
+                    Toast.makeText(getContext(), getString(R.string.thanks_feedback), Toast.LENGTH_SHORT)
+                        .show();
+                } else {
+                    Toast.makeText(getContext(), getString(R.string.error_feedback),
+                        Toast.LENGTH_SHORT).show();
+                }
+            });
     }
 
     /**

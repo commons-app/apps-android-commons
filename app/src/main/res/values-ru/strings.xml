@@ -25,6 +25,7 @@
 * Patriccck
 * Redredsonia
 * Rubin16
+* StarryFairy
 * Tanzun
 * Thothsum
 * Vlad5250
@@ -109,7 +110,7 @@
   <string name="upload_progress_notification_title_start">Загрузка файла: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s загружается</string>
   <string name="upload_progress_notification_title_finishing">Завершение загрузки %1$s</string>
-  <string name="upload_failed_notification_title">Загрузка %1$s не удалась</string>
+  <string name="upload_failed_notification_title">Не удалось загрузить %1$s</string>
   <string name="upload_paused_notification_title">Загрузка %1$s приостановлена</string>
   <string name="upload_failed_notification_subtitle">Нажмите для просмотра</string>
   <string name="upload_paused_notification_subtitle">Нажмите для просмотра</string>
@@ -366,6 +367,7 @@
   <string name="error_fetching_nearby_monuments">Ошибка получения мест поблизости.</string>
   <string name="no_recent_searches">История поиска пуста</string>
   <string name="delete_recent_searches_dialog">Вы уверены, что хотите очистить историю поисковых запросов?</string>
+  <string name="cancel_upload_dialog">Вы уверены, что хотите отменить эту загрузку?</string>
   <string name="delete_search_dialog">Удалить этот поиск?</string>
   <string name="search_history_deleted">История поиска очищена</string>
   <string name="nominate_delete">Номинировать к удалению</string>
@@ -473,7 +475,7 @@
   <string name="review_thanks_yes_button_text">Следующее изображение</string>
   <string name="review_thanks_no_button_text">Да, почему бы нет</string>
   <string name="skip_image_explanation">Нажатие этой кнопки приводит к показу следующего недавно загруженного изображения с Викисклада</string>
-  <string name="review_image_explanation">Вы можете проверить файлы, и, таким образом, улучшить их качество на Викискладе.\n Есть четыре проверки:\n - Уместен ли файл на Викискладе?\n - Соответствует ли файл правилам об авторском праве?\n - Правильно ли файл категоризирован?\n - Если всё хорошо, можете поблагодарить загрузившего этот файл.</string>
+  <string name="review_image_explanation" fuzzy="true">Вы можете проверить файлы, и, таким образом, улучшить их качество на Викискладе.\n Есть четыре проверки:\n - Уместен ли файл на Викискладе?\n - Соответствует ли файл правилам об авторском праве?\n - Правильно ли файл категоризирован?\n - Если всё хорошо, можете поблагодарить загрузившего этот файл.</string>
   <string name="no_image">Нет использованных изображений</string>
   <string name="no_image_reverted">Нет откаченых изображений</string>
   <string name="no_image_uploaded">Нет загруженных изображений</string>
@@ -629,6 +631,8 @@
   <string name="quality_images_info">Качественные изображения - это диаграммы или фотографии, которые соответствуют определенным стандартам качества (которые в основном носят технический характер) и представляют ценность для проектов Викимедиа</string>
   <string name="resuming_upload">Возобновление загрузки...</string>
   <string name="pausing_upload">Приостановка загрузки...</string>
+  <string name="cancelling_upload">Отмена загрузки…</string>
+  <string name="cancel_upload">Отменить загрузку</string>
   <string name="limited_connection_explanation">Вы включили ограниченный режим подключения. Все загрузки приостановлены и возобновятся после отключения этого режима.</string>
   <string name="limited_connection_is_on">Включен ограниченный режим подключения.</string>
   <string name="media_details_tooltip">Добавьте короткую подпись, которая скажет, что изображено на вашей картинке. В описании укажите, что делает изображение интересным, обычным или редким, и поясните контекст, видимый или нет. По возможности используйте точную терминологию.</string>
@@ -676,6 +680,7 @@
   <string name="contributions_of_user">Вклад участника: %s</string>
   <string name="achievements_of_user">Достижения участника: %s</string>
   <string name="menu_view_user_page">Посмотреть страницу участника</string>
+  <string name="edit_depictions">Редактировать описания</string>
   <string name="advanced_options">Расширенные настройки</string>
   <string name="apply">Применить</string>
   <string name="reset">Сбросить</string>

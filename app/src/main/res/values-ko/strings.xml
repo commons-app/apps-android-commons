@@ -74,7 +74,7 @@
   <string name="upload_progress_notification_title_start">%1$s 파일 올리는 중</string>
   <string name="upload_progress_notification_title_in_progress">%1$s 파일을 올리는 중</string>
   <string name="upload_progress_notification_title_finishing">%1$s 파일 올리기를 끝내는 중</string>
-  <string name="upload_failed_notification_title">%1$s 파일 올리기 실패</string>
+  <string name="upload_failed_notification_title">%1$s 올리기 실패</string>
   <string name="upload_paused_notification_title">%1$s 업로드 멈춤</string>
   <string name="upload_failed_notification_subtitle">보려면 탭하세요</string>
   <string name="upload_paused_notification_subtitle">보려면 탭하세요</string>
@@ -268,6 +268,7 @@
   <string name="nearby_commons">공용</string>
   <string name="about_rate_us">평가</string>
   <string name="about_faq">FAQ</string>
+  <string name="user_guide">사용자 가이드</string>
   <string name="welcome_skip_button">강좌 건너뛰기</string>
   <string name="no_internet">인터넷 사용 불가</string>
   <string name="error_notifications">알림 가져오기 오류</string>
@@ -295,6 +296,7 @@
   <string name="title_activity_search">검색</string>
   <string name="search_recent_header">최근 검색:</string>
   <string name="provider_searches">최근 검색된 쿼리</string>
+  <string name="provider_recent_languages">최근 언어 조회</string>
   <string name="error_loading_categories">분류를 불러오는 동안 오류가 발생했습니다.</string>
   <string name="error_loading_depictions">서술을 불러오는 동안 오류가 발생했습니다.</string>
   <string name="search_tab_title_media">미디어</string>
@@ -330,6 +332,7 @@
   <string name="no_nearby_places_around">근처에 장소가 없습니다</string>
   <string name="no_recent_searches">최근 검색 없음</string>
   <string name="delete_recent_searches_dialog">검색 기록을 지우겠습니까?</string>
+  <string name="cancel_upload_dialog">이 업로드를 취소하시겠습니까?</string>
   <string name="delete_search_dialog">이 검색을 삭제하시겠습니까?</string>
   <string name="search_history_deleted">검색 기록 삭제됨</string>
   <string name="nominate_delete">삭제 신청</string>
@@ -416,7 +419,7 @@
   <string name="review_thanks_yes_button_text">다음 이미지</string>
   <string name="review_thanks_no_button_text">예</string>
   <string name="skip_image_explanation">이 버튼을 클릭하면 위키미디어 공용으로부터 최근 업로드된 다른 이미지를 제공합니다</string>
-  <string name="review_image_explanation">이미지를 검토하고 위키미디어 공용의 품질을 개선할 수 있습니다.\n 4가지 검토 변수가 있습니다:\n - 이 이미지가 범위 내에 있는가? \n - 이 이미지가 저작권 규정을 준수하고 있는가? \n - 이 이미지가 올바르게 분류되어 있는가? \n - 모든 것이 문제 없다면 기여자에게 감사를 표할 수도 있습니다.</string>
+  <string name="review_image_explanation" fuzzy="true">이미지를 검토하고 위키미디어 공용의 품질을 개선할 수 있습니다.\n 4가지 검토 변수가 있습니다:\n - 이 이미지가 범위 내에 있는가? \n - 이 이미지가 저작권 규정을 준수하고 있는가? \n - 이 이미지가 올바르게 분류되어 있는가? \n - 모든 것이 문제 없다면 기여자에게 감사를 표할 수도 있습니다.</string>
   <string name="no_image">이미지가 사용되지 않음</string>
   <string name="no_image_uploaded">이미지가 올려지지 않음</string>
   <string name="no_notification">읽지 않은 알림이 없습니다</string>
@@ -527,6 +530,8 @@
   <string name="leaderboard_upload">업로드</string>
   <string name="leaderboard_my_rank_button_text">내 순위</string>
   <string name="limited_connection_mode">제한된 연결 모드</string>
+  <string name="cancelling_upload">올리기를 취소하는 중…</string>
+  <string name="cancel_upload">올리기 취소</string>
   <string name="limited_connection_explanation">연결 제한 모드를 사용 중입니다. 모든 업로드는 일시 중단되며 이 모드를 끄면 재개됩니다.</string>
   <string name="limited_connection_is_on">연결 제한 모드가 켜져 있습니다.</string>
   <string name="license_step_title">미디어 라이선스</string>
@@ -550,4 +555,15 @@
   <string name="advanced_options">고급 옵션</string>
   <string name="apply">적용</string>
   <string name="reset">재설정</string>
+  <string name="copyright_popup">당신이 찍은 사진만 올려 주십시오. 저작권이 있는 이미지를 올린 사람은 차단됩니다. 양질의 이미지에도 해당합니다. 앱을 테스트해 주셔서 고맙습니다!</string>
+  <string name="api_level">API 레벨</string>
+  <string name="android_version">안드로이드 버전</string>
+  <string name="device_manufacturer">장치 제조사</string>
+  <string name="device_model">장치 모델</string>
+  <string name="device_name">장치 이름</string>
+  <string name="network_type">네트워크 유형</string>
+  <string name="thanks_feedback">피드백을 주셔서 고맙습니다</string>
+  <string name="error_feedback">피드백을 보내는 중 오류가 발생했습니다</string>
+  <string name="enter_description">당신의 피드백은 무엇입니까?</string>
+  <string name="your_feedback">피드백</string>
 </resources>

@@ -52,7 +52,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Wiwit nguggah %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Ngunggah %1$s</string>
   <string name="upload_progress_notification_title_finishing">Rampung ngunggah %1$s</string>
-  <string name="upload_failed_notification_title">Wurung ngunggah %1$s</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Wurung ngunggah %1$s</string>
   <string name="upload_failed_notification_subtitle">Tunyuk saperlu ndeleng</string>
   <string name="title_activity_contributions">Unggahanku Sing Anyar</string>
   <string name="contribution_state_queued">Antrian</string>

@@ -16,7 +16,6 @@ import fr.free.nrw.commons.upload.WikidataPlace;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -73,11 +72,12 @@ public class WikidataEditService {
      */
     @SuppressLint("CheckResult")
     private Observable<Boolean> addDepictsProperty(final String fileEntityId,
-        final WikidataItem depictedItem) {
+        final List<String> depictedItems) {
 
         final EditClaim data = editClaim(
-            ConfigUtils.isBetaFlavour() ? "Q10" // Wikipedia:Sandbox (Q10)
-                : depictedItem.getId()
+            ConfigUtils.isBetaFlavour() ? Collections.singletonList("Q10")
+                // Wikipedia:Sandbox (Q10)
+                : depictedItems
         );
 
         return wikiBaseClient.postEditEntity(PAGE_ID_PREFIX + fileEntityId, gson.toJson(data))
@@ -95,8 +95,42 @@ public class WikidataEditService {
             .subscribeOn(Schedulers.io());
     }
 
-    private EditClaim editClaim(final String entityId) {
-        return EditClaim.from(entityId, WikidataProperties.DEPICTS.getPropertyName());
+    /**
+     * Takes depicts ID as a parameter and create a uploadable data with the Id
+     * and send the data for POST operation
+     *
+     * @param filename name of the file
+     * @param depictedItems ID of the selected depict item
+     * @return Observable<Boolean>
+     */
+    @SuppressLint("CheckResult")
+    public Observable<Boolean> updateDepictsProperty(final String filename,
+        final List<String> depictedItems) {
+
+        final EditClaim data = editClaim(
+            ConfigUtils.isBetaFlavour() ? Collections.singletonList("Q10")
+                // Wikipedia:Sandbox (Q10)
+                : depictedItems
+        );
+
+        return wikiBaseClient.postEditEntityByFilename(filename,
+            gson.toJson(data))
+            .doOnNext(success -> {
+                if (success) {
+                    Timber.d("DEPICTS property was set successfully for %s", filename);
+                } else {
+                    Timber.d("Unable to set DEPICTS property for %s", filename);
+                }
+            })
+            .doOnError(throwable -> {
+                Timber.e(throwable, "Error occurred while setting DEPICTS property");
+                ViewUtil.showLongToast(context, throwable.toString());
+            })
+            .subscribeOn(Schedulers.io());
+    }
+
+    private EditClaim editClaim(final List<String> entityIds) {
+        return EditClaim.from(entityIds, WikidataProperties.DEPICTS.getPropertyName());
     }
 
     /**
@@ -209,7 +243,12 @@ public class WikidataEditService {
     }
 
     private Observable<Boolean> depictionEdits(Contribution contribution, Long fileEntityId) {
-        return Observable.fromIterable(contribution.getDepictedItems())
-            .concatMap(wikidataItem -> addDepictsProperty(fileEntityId.toString(), wikidataItem));
+        final List<String> depictIDs = new ArrayList<>();
+        for (final WikidataItem wikidataItem :
+            contribution.getDepictedItems()) {
+            depictIDs.add(wikidataItem.getId());
+        }
+        return addDepictsProperty(fileEntityId.toString(), depictIDs);
     }
 }
+

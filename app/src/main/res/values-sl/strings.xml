@@ -69,7 +69,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Začenjam nalaganje %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Nalagam %1$s</string>
   <string name="upload_progress_notification_title_finishing">Končujem nalaganje datoteke »%1$s«</string>
-  <string name="upload_failed_notification_title">Nalaganje datoteke »%1%s« ni uspelo</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Nalaganje datoteke »%1%s« ni uspelo</string>
   <string name="upload_paused_notification_title">Nalaganje datoteke »%1$s« je ustavljeno</string>
   <string name="upload_failed_notification_subtitle">Tapnite za ogled</string>
   <string name="upload_paused_notification_subtitle">Tapnite za ogled</string>
@@ -97,7 +97,7 @@
   <string name="multiple_share_base_title">Poimenuj skupino</string>
   <string name="provider_modifications">Spremembe</string>
   <string name="menu_upload_single">Naloži</string>
-  <string name="categories_search_text_hint">Preišči kategorije</string>
+  <string name="categories_search_text_hint">Poišči kategorije</string>
   <string name="depicts_search_text_hint">Poiščite predmete, ki jih vaša predstavnostna datoteka prikazuje (gora, Tadž Mahal, ...)</string>
   <string name="menu_save_categories">Shrani</string>
   <string name="refresh_button">Osveži</string>
@@ -246,8 +246,8 @@
   <string name="skip_login_title">Ali res želite preskočiti prijavo?</string>
   <string name="skip_login_message">V prihodnosti se boste morali za nalaganje slik prijaviti.</string>
   <string name="login_alert_message">Za uporabo te možnosti se prijavite</string>
-  <string name="copy_wikicode">Skopirajte vikibesedilo v odložišče</string>
-  <string name="wikicode_copied">Vikibesedilo je bilo skopirano v odložišče</string>
+  <string name="copy_wikicode">Skopiraj vikibesedilo v odložišče</string>
+  <string name="wikicode_copied">Vikibesedilo je skopirano v odložišče</string>
   <string name="nearby_location_not_available">Bližnje morda ne bo pravilno delovalo. Kraj ni na voljo.</string>
   <string name="location_permission_rationale_nearby">Za prikaz seznama bložnjih krajev je potrebno dovoljenje</string>
   <string name="nearby_directions">Smeri</string>
@@ -332,7 +332,7 @@
   <string name="image_reverts">Nevrnjene slike</string>
   <string name="images_used_by_wiki">Uporabljene slike</string>
   <string name="achievements_share_message">Delite svoje dosežke s prijatelji!</string>
-  <string name="achievements_info_message">Ko boste izpolnili te zahteve, se bo vaša raven zvišala. Predmeti v razdelku »Statistika« se ne štejejo.</string>
+  <string name="achievements_info_message">Ko boste izpolnili te zahteve, se bo vaša raven zvišala. Predmeti v razdelku »Statistika« ne štejejo.</string>
   <string name="achievements_revert_limit_message">Potrebno najmanj:</string>
   <string name="images_uploaded_explanation">Število slik, ki ste jih naložili v Zbirko, ne glede na program za nalaganje</string>
   <string name="images_reverted_explanation">Delež slik v Zbirki, ki niso bile izbrisane</string>
@@ -421,7 +421,7 @@
   <string name="review_thanks_yes_button_text">Naslednja slika</string>
   <string name="review_thanks_no_button_text">Da, zakaj ne</string>
   <string name="skip_image_explanation">S klikom tega gumba boste pridobili še eno sliko, ki je bila pred kratkim naložena v Wikimedijino zbirko.</string>
-  <string name="review_image_explanation">Pregledujete lahko slike in izboljšujete kakovost Wikimedijine zbirke.\nŠtirje parametri pregledovanja so:\n– Ali slika spada v okvir projekta?\n– Ali slika upošteva avtorske pravice?\n– Ali je slika pravilno katrgorizirana?\n– Če je vse v redu, se lahko tudi zahvalite naložniku.</string>
+  <string name="review_image_explanation" fuzzy="true">Pregledujete lahko slike in izboljšujete kakovost Wikimedijine zbirke.\nŠtirje parametri pregledovanja so:\n– Ali slika spada v okvir projekta?\n– Ali slika upošteva avtorske pravice?\n– Ali je slika pravilno kategorizirana?\n– Če je vse v redu, se lahko tudi zahvalite naložniku.</string>
   <string name="no_image">Ni uporabljenih slik</string>
   <string name="no_image_reverted">Ni vrnjenih slik</string>
   <string name="no_image_uploaded">Ni naloženih slik</string>
@@ -482,7 +482,7 @@
     <item quantity="other">Kategorije %1$s so dodane.</item>
   </plurals>
   <string name="category_edit_helper_edit_message_else">Kategorij ni mogoče dodati.</string>
-  <string name="category_edit_button_text">Pododobi kategorije</string>
+  <string name="category_edit_button_text">Posodobi kategorije</string>
   <string name="share_image_via">Deli slike prek ...</string>
   <string name="no_achievements_yet" fuzzy="true">Opravili niste še nobenega prispevka</string>
   <string name="account_created">Račun ustvarjen!</string>
@@ -507,7 +507,7 @@
   <string name="wallpaper_set_unsuccessfully">Nekaj je šlo narobe. Ozadja ni bilo mogoče nastaviti.</string>
   <string name="setting_wallpaper_dialog_title">Nastavi kot ozadje</string>
   <string name="setting_wallpaper_dialog_message">Nastavljam ozadje. Prosimo, počakajte ...</string>
-  <string name="theme_default_name">Sledite sistemu</string>
+  <string name="theme_default_name">Sledi sistemu</string>
   <string name="theme_dark_name">Temna</string>
   <string name="theme_light_name">Svetla</string>
   <string name="cannot_open_location_settings">Nastavitev kraja ni bilo mogoče odpreti. Kraj vklopite ročno.</string>
@@ -547,7 +547,7 @@
   <string name="setting_avatar_dialog_message">Nastavljam kot avatar; prosimo, počakajte</string>
   <string name="avatar_set_successfully">Avatar nastavljen</string>
   <string name="avatar_set_unsuccessfully">Napaka pri nastavljanju novega avatarja; prosimo, poskusite znova</string>
-  <string name="menu_set_avatar">Nastavljam kot avatar</string>
+  <string name="menu_set_avatar">Nastavi kot avatar</string>
   <string name="leaderboard_yearly">Letno</string>
   <string name="leaderboard_weekly">Tedensko</string>
   <string name="leaderboard_all_time">Ves čas</string>
@@ -562,7 +562,7 @@
   <string name="limited_connection_disabled">Način omejene povezanosti izklopljen. Nalaganje se bo zdaj nadaljevalo.</string>
   <string name="limited_connection_mode">Način omejene povezanosti</string>
   <string name="statistics_quality">Kakovostne slike</string>
-  <string name="quality_images_info">Kakovostne slike so ponazoritve ali fotografije, ki ustrezajo nekaterim merilom kakovosti (ta so predvsem tehnična) in so dragocena za projekte Wikimedie</string>
+  <string name="quality_images_info">Kakovostne slike so ponazoritve ali fotografije, ki ustrezajo nekaterim merilom kakovosti (ta so predvsem tehnična) in so dragocena za projekte Wikimedije</string>
   <string name="resuming_upload">Nalaganje se nadaljuje ...</string>
   <string name="pausing_upload">Zaustavljam nalaganje ...</string>
   <string name="limited_connection_explanation">Omogočili ste način omejene povezanosti. Vsa nalaganja so začasno ustavljena in se bodo nadaljevala, ko boste ta način izklopili.</string>
@@ -575,6 +575,8 @@
   <string name="license_step_title">Licenca datoteke</string>
   <string name="media_detail_step_title">Podatki o datoteki</string>
   <string name="menu_view_category_page">Prikaži stran kategorije</string>
-  <string name="menu_view_item_page">Prikaži stran predmeta</string>
+  <string name="menu_view_item_page">Ogled strani predmeta</string>
+  <string name="app_ui_language">Jezik uporabniškega vmesnika aplikacije</string>
   <string name="read_help_link">Preberi več</string>
+  <string name="media_detail_in_all_languages">V vseh jezikih</string>
 </resources>

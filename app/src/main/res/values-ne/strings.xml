@@ -37,7 +37,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true"> %1$s उर्ध्वभरण सुरू गर्दैै</string>
   <string name="upload_progress_notification_title_in_progress">%1$s उर्ध्वभरण गरिँदै</string>
   <string name="upload_progress_notification_title_finishing"> %1$s उर्ध्वभरण सकाउँदै</string>
-  <string name="upload_failed_notification_title"> %1$s उर्ध्वभरण असफल भयो</string>
+  <string name="upload_failed_notification_title" fuzzy="true"> %1$s उर्ध्वभरण असफल भयो</string>
   <string name="upload_failed_notification_subtitle">हेर्नको लागि ट्याप गर्नुहोस्</string>
   <string name="title_activity_contributions">मेरा हालैका उर्ध्वभरणहरू</string>
   <string name="contribution_state_queued">लाममा राखियो</string>

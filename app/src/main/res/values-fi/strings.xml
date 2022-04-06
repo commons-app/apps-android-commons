@@ -2,6 +2,7 @@
 <!-- Authors:
 * 01miki10
 * 3Johnny
+* 4shadoww
 * Alluk.
 * Crt
 * FinlandMan
@@ -9,6 +10,7 @@
 * Kyykaarme
 * MITO
 * Maantietäjä
+* Moottori
 * Nike
 * Olli
 * Pahkiqaz
@@ -122,7 +124,7 @@
   <string name="title_activity_category_details">Luokka</string>
   <string name="title_activity_review">Vertaisarviointi</string>
   <string name="menu_about">Tietoja</string>
-  <string name="about_license">Wikimedia Commons -sovellus on vapaan lähdekoodin ohjelmisto, joka on luotu ja ylläpidetty Wikimedia-yhteisön apurahoilla ja vapaaehtoisilla. Wikimedia Foundation ei ole sitoutunut sovelluksen luomiseen, kehittämiseen tai ylläpitoon.</string>
+  <string name="about_license">Wikimedia Commons -sovellus on avoimen lähdekoodin ohjelmisto, joka on luotu ja ylläpidetty Wikimedia-yhteisön apurahoilla ja vapaaehtoisilla. Wikimedia Foundation ei ollut mukana sovelluksen luomisessa, eikä se vastaa kehittämisestä tai ylläpidosta.</string>
   <string name="about_improve">Luo uusi &lt;a href=\"%1$s\"&gt;GitHub-issue&lt;/a&gt; bugiraporteille ja ehdotuksille.</string>
   <string name="about_privacy_policy">Tietosuojakäytäntö</string>
   <string name="about_credits">Tekijät</string>
@@ -439,7 +441,7 @@
   <string name="review_thanks_yes_button_text">Seuraava kuva</string>
   <string name="review_thanks_no_button_text">Kyllä, miksipä ei</string>
   <string name="skip_image_explanation">Tämän napin napsauttaminen antaa sinulle toisen äskettäin ladatun kuvan Wikimedia Commonsista.</string>
-  <string name="review_image_explanation">Voit arvioida kuvia ja parantaa Wikimedia Commons -sivuston laatua.\nArvioinnin neljä parametria ovat:\n- Sopiiko kuva palveluun?\n- Noudattaako kuva kopio-oikeuteen liittyviä sääntöjä?\n- Onko kuva luokiteltu oikein?\n- Jos kaikki meni hyvin, voit myös kiittää lahjoittajaa.</string>
+  <string name="review_image_explanation" fuzzy="true">Voit arvioida kuvia ja parantaa Wikimedia Commons -sivuston laatua.\nArvioinnin neljä parametria ovat:\n- Sopiiko kuva palveluun?\n- Noudattaako kuva kopio-oikeuteen liittyviä sääntöjä?\n- Onko kuva luokiteltu oikein?\n- Jos kaikki meni hyvin, voit myös kiittää lahjoittajaa.</string>
   <string name="no_image">Ei käytettyjä kuvia</string>
   <string name="no_image_reverted">Kuvia ei palautettu</string>
   <string name="no_image_uploaded">Kuvia ei lähetetty</string>

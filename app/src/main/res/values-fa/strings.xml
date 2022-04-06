@@ -5,6 +5,7 @@
 * Amirsara
 * Arash.pt
 * BaRaN6161 TURK
+* Beginneruser
 * Darafsh
 * Ebraminio
 * Eshagh79
@@ -64,10 +65,10 @@
   <string name="menu_settings">تنظیمات</string>
   <string name="intent_share_upload_label">بارگذاری در انبار</string>
   <string name="username">نام کاربری</string>
-  <string name="password">گذرواژه</string>
-  <string name="login_credential">به حساب کاربری ویکی‌انبار آزمایشی وارد شوید</string>
+  <string name="password">رمز عبور</string>
+  <string name="login_credential">به حساب ویکی‌انبار آزمایشی خودتان وارد شوید</string>
   <string name="login">ورود</string>
-  <string name="forgot_password">رمز خود را فراموش کرده‌اید؟</string>
+  <string name="forgot_password">رمز عبور خودتان را فراموش کرده‌اید؟</string>
   <string name="signup">ثبت نام</string>
   <string name="logging_in_title">واردشدن</string>
   <string name="logging_in_message">شکیبا باشید...</string>
@@ -81,7 +82,7 @@
   <string name="upload_progress_notification_title_start">بارگذاری پرونده: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">بارگذاری %1$s</string>
   <string name="upload_progress_notification_title_finishing">اتمام بارگذاری %1$s</string>
-  <string name="upload_failed_notification_title">%1$s بارگذاری نشد</string>
+  <string name="upload_failed_notification_title" fuzzy="true">%1$s بارگذاری نشد</string>
   <string name="upload_failed_notification_subtitle">برای دیدن انگشت بزنید</string>
   <string name="upload_paused_notification_subtitle">برای دیدن انگشت بزنید</string>
   <string name="title_activity_contributions">بارگذاری‌های اخیر من</string>
@@ -246,7 +247,7 @@
   <string name="internet_downloaded">لطفاً فقط تصاویری را بارگذاری کنید که خودتان گرفته‌اید. تصاویری را که از اینترنت بارگیری کرده‌اید بارگذاری نکنید.</string>
   <string name="use_external_storage">ذخیره‌سازی تصاویر درون‌برنامه‌ای</string>
   <string name="use_external_storage_summary">ذخیره‌ی تصاویر گرفته شده توسط اپلیکیشن درون‌برنامه‌ای دوربین بر روی حافظه‌ی دستگاه شما</string>
-  <string name="login_to_your_account">ورود به حساب کاربریتان</string>
+  <string name="login_to_your_account">ورود به حسابتان</string>
   <string name="send_log_file">ارسال فایل سیاهه</string>
   <string name="send_log_file_description">ارسال فایل سیاهه به‌وسیلهٔ ایمیل برای توسعه‌دهندگان برای رفع مشکل خطای اپلیکیشن. توجه: سیاه‌ها دارای اطلاعات شناسایی هستند</string>
   <string name="no_web_browser">مرورگر اینترنتی برای باز کردن نشانی یافت نشد</string>
@@ -271,9 +272,9 @@
   <string name="about_faq">سؤال‌های متداول</string>
   <string name="welcome_skip_button">رهاکردن آموزش</string>
   <string name="no_internet">اینترنت در دسترس نیست</string>
-  <string name="error_notifications">خطا در آوردن اطلاعیه</string>
+  <string name="error_notifications">خطای واکشی کردن آگاه‌سازی‌ها</string>
   <string name="error_review">در تلاش برای بدست‌آوردن تصویر جهت بازبینی خطایی پیش آمد. لطفا برای تلاش مجدد بر روی ریفرش کلیک کنید.</string>
-  <string name="no_notifications">هشداری پیدا نشد</string>
+  <string name="no_notifications">آگاه‌سازی‌هایی پیدا نشد</string>
   <string name="about_translate">ترجمه</string>
   <string name="about_translate_title">زبان‌ها</string>
   <string name="about_translate_message">لطفا زبانی که مایلید در آنها ترجمه‌های خود را ثبت کنید انتخاب کنید.</string>
@@ -319,7 +320,7 @@
   <string name="error_fetching_nearby_places">خطا در آوردن مکان‌های نزدیک.</string>
   <string name="error_fetching_nearby_monuments">خطا در واکشی یادمان‌های نزدیک.</string>
   <string name="no_recent_searches">جستجوهای اخیر وجود ندارد</string>
-  <string name="delete_recent_searches_dialog">آیا مطمئن هستید که می‌خواهید تاریخچه جستجو را حذف کنید؟</string>
+  <string name="delete_recent_searches_dialog">آیا مطمئن هستید که می‌خواهید تاریخچۀ جستجو را حذف کنید؟</string>
   <string name="delete_search_dialog">آیا می‌خواهید این جستجو را حذف کنید؟</string>
   <string name="search_history_deleted">جستجوی تاریخچهٔ حذف‌شده</string>
   <string name="nominate_delete">نامزد کردن برای حذف</string>
@@ -343,7 +344,7 @@
   <string name="contributions_fragment">مشارکت‌ها</string>
   <string name="nearby_fragment">در نزدیکی</string>
   <string name="notifications">آگاه‌سازی‌ها</string>
-  <string name="read_notifications">اعلان‌ها (خوانده‌شده)</string>
+  <string name="read_notifications">آگاه‌سازی‌ها (خوانده‌شده)</string>
   <string name="display_nearby_notification">نمایش اعلان اطراف</string>
   <string name="list_sheet">فهرست</string>
   <string name="storage_permission">اجازه ذخیره</string>
@@ -397,8 +398,8 @@
   <string name="no_image">هیچ تصویری به کار نرفته است</string>
   <string name="no_image_reverted">تصویر برگردانده نشد</string>
   <string name="no_image_uploaded">هیچ تصویری بارگذاری نشد</string>
-  <string name="no_notification">شما هیچ اعلان خوانده‌نشده‌ای ندارید</string>
-  <string name="no_read_notification">شما هیچ اعلان خوانده‌شده‌ای ندارید</string>
+  <string name="no_notification">شما هیچ آگاه‌سازی‌ خوانده‌نشده‌ای ندارید</string>
+  <string name="no_read_notification">شما هیچ آگاه‌سازی‌ خوانده‌شده‌ای ندارید</string>
   <string name="menu_option_read">نمایش دیده‌شده</string>
   <string name="menu_option_unread">مشاهده خوانده نشده ها</string>
   <string name="please_wait">لطفاً صبر کنید...</string>
@@ -429,7 +430,7 @@
   <string name="caption_edit_helper_show_edit_message">توضیح افزوده شد.</string>
   <string name="share_image_via">هم‌رسانی تصویر از طریق</string>
   <string name="no_achievements_yet" fuzzy="true">هنوز مشارکتی نکرده‌اید</string>
-  <string name="account_created">حساب ساخته شد!</string>
+  <string name="account_created">حساب ایجاد شد!</string>
   <string name="text_copy">متن در حافظهٔ موقت کپی شد.</string>
   <string name="notification_mark_read">علامت زدن اعلان به عنوان خوانده‌شده</string>
   <string name="some_error">خطایی پیش آمد!</string>
@@ -464,7 +465,7 @@
   <string name="done">انجام شد</string>
   <string name="back">بازگشت</string>
   <string name="welcome_custom_picture_selector_text">به انتخاب‌گر سفارشی تصویر خوش آمدید</string>
-  <string name="custom_selector_info_text2">برخلاف تصویر سمت چپ، تصویر سمت راست دارای نشان‌وارهٔ ویکی‌انبار است که نشان می‌دهد از پیش بارگذاری شده‌است.\nبرای مشاهدهٔ تصویر، صفحه را لمس کنید و نگه دارید.</string>
+  <string name="custom_selector_info_text2">برخلاف تصویر سمت چپ، تصویر سمت راست دارای نشان‌وارهٔ ویکی‌انبار است که نشان می‌دهد از پیش بارگذاری شده‌است.\nبرای پیش‌نمایش تصویر، صفحه را لمس کنید و نگه دارید.</string>
   <string name="welcome_custom_selector_ok">عالی</string>
   <string name="custom_selector_already_uploaded_image_text">این تصویر از پیش در ویکی‌انبار بارگذاری شده‌است.</string>
   <string name="wlm_upload_info" fuzzy="true">شما در حال مشارکت در پویش ویکی دوست‌دار یادمان‌ها هستید. الگوهای مرتبط متعاقباً افزوده خواهند شد.</string>
