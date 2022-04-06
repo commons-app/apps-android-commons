@@ -1,15 +1,11 @@
 package fr.free.nrw.commons.media
 
-import android.util.Log
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.category.ContinuationClient
 import fr.free.nrw.commons.explore.media.MediaConverter
 import fr.free.nrw.commons.utils.CommonsDateUtil
 import io.reactivex.Single
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.wikipedia.dataclient.mwapi.MwQueryPage
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import org.wikipedia.wikidata.Entities
@@ -19,6 +15,8 @@ import javax.inject.Singleton
 
 const val PAGE_ID_PREFIX = "M"
 const val CATEGORY_CONTINUATION_PREFIX = "category_"
+const val LIMIT = 30
+const val RADIUS = 10000
 
 /**
  * Media Client to handle custom calls to Commons MediaWiki APIs
@@ -94,23 +92,15 @@ class MediaClient @Inject constructor(
     fun getMediaListFromSearch(keyword: String?, limit: Int, offset: Int) =
         responseMapper(mediaInterface.getMediaListFromSearch(keyword, limit, 0))
 
-    fun getMediaListFromSearchWithLocation(keyword: String?, limit: Int, offset: Int) : List<Media> {
-        return responseMapper(mediaInterface.getMediaListFromSearch(keyword, limit, offset)).blockingGet().filter { it.coordinates != null }
-        //return responseMapper(mediaInterface.getMediaListFromSearch(keyword, limit, offset)).blockingGet()
-    }
-
     /**
-     * This method takes a keyword as input and returns a list of  Media objects filtered using image generator query
-     * It uses the generator query API to get the images searched using a query, 10 at a time.
+     * This method takes coordinate as input and returns a list of  Media objects.
+     * It uses the generator query API to get the images searched using a query.
      *
-     * @param coordinate the search keyword
-     * @param limit
-     * @param offset
+     * @param coordinate coordinate
      * @return
      */
-    fun getMediaListFromGeoSearch(coordinate: String?, limit: Int) =
-        //TODO radius and coords are hardcoded
-        responseMapper(mediaInterface.getMediaListFromGeoSearch(coordinate, 30, 10000))
+    fun getMediaListFromGeoSearch(coordinate: String?) =
+        responseMapper(mediaInterface.getMediaListFromGeoSearch(coordinate, LIMIT, RADIUS))
 
     /**
      * @return list of images for a particular depict entity

@@ -163,13 +163,13 @@ public class SearchActivity extends BaseActivity
 
          }
         else {
-                    //Open RecentSearchesFragment
-                    recentSearchesFragment.updateRecentSearches();
-                    viewPager.setVisibility(View.GONE);
-                    tabLayout.setVisibility(View.GONE);
-                    setSearchHistoryFragment();
-                    searchHistoryContainer.setVisibility(View.VISIBLE);
-                }
+            //Open RecentSearchesFragment
+            recentSearchesFragment.updateRecentSearches();
+            viewPager.setVisibility(View.GONE);
+            tabLayout.setVisibility(View.GONE);
+            setSearchHistoryFragment();
+            searchHistoryContainer.setVisibility(View.VISIBLE);
+        }
     }
 
     private void saveRecentSearch(@NonNull final String query) {

@@ -15,7 +15,6 @@ import fr.free.nrw.commons.explore.map.ExploreMapController.NearbyBaseMarkerThum
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
-import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.utils.LocationUtils;
 import io.reactivex.Observable;
@@ -25,16 +24,12 @@ import timber.log.Timber;
 
 public class ExploreMapPresenter
     implements ExploreMapContract.UserActions,
-    LocationUpdateListener,
     NearbyBaseMarkerThumbCallback {
     BookmarkLocationsDao bookmarkLocationDao;
     private boolean isNearbyLocked;
     private boolean placesLoadedOnce;
     private LatLng curLatLng;
     private ExploreMapController exploreMapController;
-    private float ZOOM_LEVEL = 14f;
-
-
 
     private static final ExploreMapContract.View DUMMY = (ExploreMapContract.View) Proxy
         .newProxyInstance(
@@ -61,21 +56,6 @@ public class ExploreMapPresenter
 
     public ExploreMapPresenter(BookmarkLocationsDao bookmarkLocationDao){
         this.bookmarkLocationDao = bookmarkLocationDao;
-    }
-
-    @Override
-    public void onLocationChangedSignificantly(LatLng latLng) {
-        updateMap(LOCATION_SIGNIFICANTLY_CHANGED);
-    }
-
-    @Override
-    public void onLocationChangedSlightly(LatLng latLng) {
-
-    }
-
-    @Override
-    public void onLocationChangedMedium(LatLng latLng) {
-
     }
 
     @Override
@@ -198,7 +178,6 @@ public class ExploreMapPresenter
     }
 
     public Observable<ExplorePlacesInfo> loadAttractionsFromLocation(LatLng curLatLng, LatLng searchLatLng, boolean checkingAroundCurrent) {
-        // TODO: Load attractionsta yapılanı onquery updated ile yapmanın yolunu bul
         return Observable
             .fromCallable(() -> exploreMapController
                 .loadAttractionsFromLocation(curLatLng, searchLatLng,checkingAroundCurrent));
@@ -311,5 +290,4 @@ public class ExploreMapPresenter
             return true;
         }
     }
-
 }

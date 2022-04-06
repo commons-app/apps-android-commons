@@ -75,7 +75,7 @@ public interface MediaInterface {
     Single<MwQueryResponse> getMediaListFromSearch(@Query("gsrsearch") String keyword, @Query("gsrlimit") int itemLimit, @Query("gsroffset") int offset);
 
     /**
-     * This method retrieves a list of Media objects filtered using list geosearch query
+     * This method retrieves a list of Media objects filtered using list geosearch query. Example: https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2&generator=geosearch&ggsnamespace=6&prop=imageinfo|coordinates&iiprop=url|extmetadata|user&&iiurlwidth=640&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl&ggscoord=37.45579%7C-122.31369&ggslimit=30&ggsradius=10000
      *
      * @param location     the search location
      * @param itemLimit    how many images are returned
@@ -85,7 +85,6 @@ public interface MediaInterface {
         "&generator=geosearch&ggsnamespace=6" + //Search parameters
         MEDIA_PARAMS)
     Single<MwQueryResponse> getMediaListFromGeoSearch(@Query("ggscoord") String location, @Query("ggslimit") int itemLimit, @Query("ggsradius") int radius);
-
 
     /**
      * Fetches Media object from the imageInfo API

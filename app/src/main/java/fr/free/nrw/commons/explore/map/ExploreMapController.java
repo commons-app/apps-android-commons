@@ -64,7 +64,7 @@ public class ExploreMapController extends MapController {
             explorePlacesInfo.curLatLng = curLatLng;
             latestSearchLocation = searchLatLng;
 
-            List<Media> mediaList = exploreMapCalls.callCommonsQuery(searchLatLng, 30);
+            List<Media> mediaList = exploreMapCalls.callCommonsQuery(searchLatLng);
             LatLng[] boundaryCoordinates = {mediaList.get(0).getCoordinates(),   // south
                 mediaList.get(0).getCoordinates(), // north
                 mediaList.get(0).getCoordinates(), // west

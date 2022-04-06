@@ -17,9 +17,7 @@ import android.content.res.Configuration;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.telephony.SignalStrength;
 import android.text.Html;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -60,10 +58,8 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
-import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.ExploreMapRootFragment;
-import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.explore.paging.LiveDataConverter;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
@@ -71,7 +67,6 @@ import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
-import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.utils.DialogUtil;
@@ -100,19 +95,18 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     private Snackbar snackbar;
     private boolean isDarkTheme;
     private boolean isPermissionDenied;
-    private fr.free.nrw.commons.location.LatLng lastKnownLocation;
-    private fr.free.nrw.commons.location.LatLng lastFocusLocation;
+    private fr.free.nrw.commons.location.LatLng lastKnownLocation; // lask location of user
+    private fr.free.nrw.commons.location.LatLng lastFocusLocation; // last location that map is focused
     public List<Media> mediaList;
-    private boolean recenterToUserLocation;
-    private Place selectedPlace;
+    private boolean recenterToUserLocation; // true is recenter is needed (ie. when current location is in visible map boundaries)
 
 
     private MapboxMap.OnCameraMoveListener cameraMoveListener;
     private MapboxMap mapBox;
-    private Place lastPlaceToCenter;
+    private Place lastPlaceToCenter; // the last place that we centered the map
     private boolean isMapBoxReady;
-    private Marker selectedMarker;
-    private LatLngBounds latLngBounds;
+    private Marker selectedMarker; // the marker that user selected
+    private LatLngBounds projectorLatLngBounds; // current windows borders
     private Marker currentLocationMarker;
     private Polygon currentLocationPolygon;
     IntentFilter intentFilter = new IntentFilter(MapUtils.NETWORK_INTENT_ACTION);
@@ -128,14 +122,13 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     @Inject @Named("default_preferences")
     JsonKvStore applicationKvStore;
     @Inject
-    BookmarkLocationsDao bookmarkLocationDao;
+    BookmarkLocationsDao bookmarkLocationDao; // May be needed in future if we want to integrate bookmarking explore places
     @Inject
     SystemThemeUtils systemThemeUtils;
 
     private ExploreMapPresenter presenter;
 
-    @BindView(R.id.map_view)
-    MapView mapView;
+    @BindView(R.id.map_view) MapView mapView;
     @BindView(R.id.bottom_sheet_details) View bottomSheetDetails;
     @BindView(R.id.map_progress_bar) ProgressBar progressBar;
     @BindView(R.id.fab_recenter) FloatingActionButton fabRecenter;
@@ -184,7 +177,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         if (presenter == null) {
             presenter = new ExploreMapPresenter(bookmarkLocationDao);
         }
-        //presenterReady(getContext());
         setHasOptionsMenu(true);
 
         isDarkTheme = systemThemeUtils.isDeviceInNightMode();
@@ -243,13 +235,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             }
     }
 
-    public void onQueryUpdated(String query) {
-        if (query.isEmpty()) {
-            return;
-        }
-        performMapReadyActions();
-    }
-
     private void startTheMap() {
         mapView.onStart();
         performMapReadyActions();
@@ -257,7 +242,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
     private void startMapWithoutPermission() {
         mapView.onStart();
-
         applicationKvStore.putBoolean("doNotAskForLocationPermission", true);
         lastKnownLocation = MapUtils.defaultLatLng;
         MapUtils.centerMapToDefaultLatLng(mapBox);
@@ -265,7 +249,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             addOnCameraMoveListener();
         }
         presenter.onMapReady(exploreMapController);
-        // TODO nesli removeCurrentLocationMarker();
     }
 
     private void registerNetworkReceiver() {
@@ -295,8 +278,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     /**
      * a) Creates bottom sheet behaviours from bottom sheet, sets initial states and visibility
      * b) Gets the touch event on the map to perform following actions:
-     *      if bottom sheet details are expanded then collapse bottom sheet details.
-     *      if bottom sheet details are collapsed then hide the bottom sheet details.
+     *      if bottom sheet details are expanded or collapsed hide the bottom sheet details.
      */
     @SuppressLint("ClickableViewAccessibility")
     private void initBottomSheets() {
@@ -404,9 +386,8 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Populates places for your location, should be used for finding nearby places around a
-     * location where you are.
-     * @param explorePlacesInfo This variable has place list information and distances.
+     * Updates map markers according to latest situation
+     * @param explorePlacesInfo holds several information as current location, marker list etc.
      */
     private void updateMapMarkers(final MapController.ExplorePlacesInfo explorePlacesInfo, final boolean shouldTrackPosition) {
         presenter.updateMapMarkers(explorePlacesInfo, selectedMarker,shouldTrackPosition);
@@ -429,7 +410,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
     private void locationPermissionGranted() {
         isPermissionDenied = false;
-
         applicationKvStore.putBoolean("doNotAskForLocationPermission", false);
         lastKnownLocation = locationManager.getLastLocation();
         fr.free.nrw.commons.location.LatLng target=lastFocusLocation;
@@ -457,7 +437,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     }
 
     public void registerUnregisterLocationListener(final boolean removeLocationListener) {
-        // TODO: do the same for nearby map
         MapUtils.registerUnregisterLocationListener(removeLocationListener, locationManager, this);
     }
 
@@ -573,10 +552,8 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     public void setProgressBarVisibility(boolean isVisible) {
         if (isVisible) {
             progressBar.setVisibility(View.VISIBLE);
-            //showInitialLoadInProgress();
         } else {
             progressBar.setVisibility(View.GONE);
-            //hideInitialLoadProgress();
         }
     }
 
@@ -598,6 +575,10 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         }
     }
 
+    /**
+     * Removes old current location marker and adds a new one to display current location
+     * @param curLatLng current location of user
+     */
     @Override
     public void addCurrentLocationMarker(LatLng curLatLng) {
         if (null != curLatLng && !isPermissionDenied) {
@@ -634,20 +615,26 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
     @Override
     public boolean isCurrentLocationMarkerVisible() {
-        if (latLngBounds == null || currentLocationMarker == null) {
+        if (projectorLatLngBounds == null || currentLocationMarker == null) {
             Timber.d("Map projection bounds are null");
             return false;
         } else {
-            Timber.d("Current location marker %s" , latLngBounds.contains(currentLocationMarker.getPosition()) ? "visible" : "invisible");
-            return latLngBounds.contains(currentLocationMarker.getPosition());
+            Timber.d("Current location marker %s" , projectorLatLngBounds.contains(currentLocationMarker.getPosition()) ? "visible" : "invisible");
+            return projectorLatLngBounds.contains(currentLocationMarker.getPosition());
         }
     }
 
+    /**
+     * Sets boundaries of visible region in terms of geolocation
+     */
     @Override
     public void setProjectorLatLngBounds() {
-        latLngBounds = mapBox.getProjection().getVisibleRegion().latLngBounds;
+        projectorLatLngBounds = mapBox.getProjection().getVisibleRegion().latLngBounds;
     }
 
+    /**
+     * Removes old current location marker
+     */
     private void removeCurrentLocationMarker() {
         if (currentLocationMarker != null && mapBox!=null) {
             mapBox.removeMarker(currentLocationMarker);
@@ -657,6 +644,10 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         }
     }
 
+    /**
+     * Update map camera to trac users current position
+     * @param curLatLng
+     */
     @Override
     public void updateMapToTrackPosition(LatLng curLatLng) {
         Timber.d("Updates map camera to track user position");
@@ -680,6 +671,10 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         return mapBox == null ? null : LocationUtils.mapBoxLatLngToCommonsLatLng(mapBox.getCameraPosition().target);
     }
 
+    /**
+     * Centers map to a given place
+     * @param place place to center
+     */
     @Override
     public void centerMapToPlace(Place place) {
         MapUtils.centerMapToPlace(place, mapBox, lastPlaceToCenter, getActivity());
@@ -809,5 +804,4 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             }
         };
     }
-
 }

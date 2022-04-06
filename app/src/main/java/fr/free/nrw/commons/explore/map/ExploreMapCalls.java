@@ -23,9 +23,9 @@ public class ExploreMapCalls {
      * @param curLatLng coordinates of search location
      * @return list of places obtained
      */
-    List<Media> callCommonsQuery(final LatLng curLatLng, int limit) {
+    List<Media> callCommonsQuery(final LatLng curLatLng) {
         String coordinates = curLatLng.getLatitude() + "|" + curLatLng.getLongitude();
-        return mediaClient.getMediaListFromGeoSearch(coordinates, limit).blockingGet();
+        return mediaClient.getMediaListFromGeoSearch(coordinates).blockingGet();
     }
 
 }
