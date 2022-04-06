@@ -9,7 +9,7 @@ import android.telephony.TelephonyManager;
 
 import androidx.annotation.Nullable;
 
-import fr.free.nrw.commons.data.models.utils.NetworkConnectionType;
+import fr.free.nrw.commons.utils.models.NetworkConnectionType;
 
 public class NetworkUtils {
 
