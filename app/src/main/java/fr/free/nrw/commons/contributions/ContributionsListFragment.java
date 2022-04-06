@@ -115,7 +115,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     private int contributionsSize;
     String userName;
 
-
     @Override
     public void onCreate(@Nullable @org.jetbrains.annotations.Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -389,7 +388,18 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
     @Override
     public void deleteUpload(final Contribution contribution) {
-        contributionsListPresenter.deleteUpload(contribution);
+        DialogUtil.showAlertDialog(getActivity(),
+            String.format(getString(R.string.cancelling_upload),
+                Locale.getDefault().getDisplayLanguage()),
+            String.format(getString(R.string.cancel_upload_dialog),
+                Locale.getDefault().getDisplayLanguage()),
+            "YES", "NO",
+            () -> {
+                ViewUtil.showShortToast(getContext(), R.string.cancelling_upload);
+                contributionsListPresenter.deleteUpload(contribution);
+            }, () -> {
+                // Do nothing
+            });
     }
 
     @Override

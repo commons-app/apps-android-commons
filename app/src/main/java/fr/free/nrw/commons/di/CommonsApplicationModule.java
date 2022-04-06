@@ -170,6 +170,19 @@ public class CommonsApplicationModule {
     }
 
     /**
+     * This method is used to provide instance of RecentLanguagesContentProvider
+     * which provides content of recent used languages from database
+     * @param context Context
+     * @return returns RecentLanguagesContentProvider
+     */
+    @Provides
+    @Named("recent_languages")
+    public ContentProviderClient provideRecentLanguagesContentProviderClient(final Context context) {
+        return context.getContentResolver()
+            .acquireContentProviderClient(BuildConfig.RECENT_LANGUAGE_AUTHORITY);
+    }
+
+    /**
      * Provides a Json store instance(JsonKvStore) which keeps
      * the provided Gson in it's instance
      * @param gson stored inside the store instance

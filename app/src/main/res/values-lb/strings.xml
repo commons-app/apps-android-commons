@@ -53,7 +53,7 @@
   <string name="upload_progress_notification_title_start">Fichier eroplueden: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s gëtt eropgelueden</string>
   <string name="upload_progress_notification_title_finishing">Eroplueden vu(n) %1$s ofschléissen</string>
-  <string name="upload_failed_notification_title">D\'Eropluede vu(n) %1$s huet net funktionéiert</string>
+  <string name="upload_failed_notification_title">%1$s konnt net eropgeluede ginn</string>
   <string name="upload_failed_notification_subtitle">Dréckt fir nach eng Kéier ze probéieren</string>
   <string name="title_activity_contributions">Meng rezent eropgeluede Fichieren</string>
   <string name="contribution_state_queued">An der Queue</string>
@@ -349,6 +349,8 @@
   <string name="leaderboard_nearby">Nobäi</string>
   <string name="leaderboard_used">Benotzt</string>
   <string name="limited_connection_mode">Limitéierte Verbindungsmodus</string>
+  <string name="cancelling_upload">Eropluede gëtt ofgebrach....</string>
+  <string name="cancel_upload">Eroplueden ofbriechen</string>
   <string name="app_ui_language">Sprooch vum Interface vum Benotzer vun der App</string>
   <string name="read_help_link">Liest méi</string>
   <string name="media_detail_in_all_languages">An alle Sproochen</string>

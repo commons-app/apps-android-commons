@@ -40,7 +40,7 @@
   <string name="upload_progress_notification_title_start">கோப்பை பதிவேற்றுகிறது: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s தரவேற்றப்படுகிறது</string>
   <string name="upload_progress_notification_title_finishing">%1$s தரவேற்றம் முடிக்கப்படுகிறது</string>
-  <string name="upload_failed_notification_title">%1$s பதிவேற்றுவது தோல்வியுற்றது</string>
+  <string name="upload_failed_notification_title" fuzzy="true">%1$s பதிவேற்றுவது தோல்வியுற்றது</string>
   <string name="upload_paused_notification_title">%1$s பதிவேற்றுவது இடைநிறுத்தப்பட்டுள்ளது</string>
   <string name="upload_failed_notification_subtitle">காண்பதற்கு தட்டுக</string>
   <string name="upload_paused_notification_subtitle">காண்பதற்கு தட்டுக</string>

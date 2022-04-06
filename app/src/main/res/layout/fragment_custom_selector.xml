@@ -16,14 +16,14 @@
     android:id="@+id/empty_text"
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
-    android:textSize="@dimen/normal_text"
+    android:textSize="20sp"
     android:padding="@dimen/standard_gap"
-    android:text="@string/custom_selector_empty_text"
+    android:text="@string/no_images_found"
     android:visibility="gone"
-    app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"/>
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
 
   <ProgressBar

@@ -48,7 +48,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">%1$s 서류 올리적재를 시작하는중</string>
   <string name="upload_progress_notification_title_in_progress">%1$s 서류를 올리적재하는중</string>
   <string name="upload_progress_notification_title_finishing">%1$s 서류 올리적재를 완료하는중</string>
-  <string name="upload_failed_notification_title">%1$s 서류 올리적재 실패</string>
+  <string name="upload_failed_notification_title" fuzzy="true">%1$s 서류 올리적재 실패</string>
   <string name="upload_failed_notification_subtitle">보려면 두드리세요</string>
   <string name="title_activity_contributions">내 최근 올리적재</string>
   <string name="contribution_state_queued">대기중</string>

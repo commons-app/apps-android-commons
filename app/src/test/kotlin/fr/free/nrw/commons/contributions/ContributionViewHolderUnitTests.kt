@@ -10,8 +10,10 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.view.SimpleDraweeView
+import com.facebook.imagepipeline.request.ImageRequest
 import com.facebook.soloader.SoLoader
 import fr.free.nrw.commons.models.Media
+import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.media.MediaClient
@@ -22,7 +24,8 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
+import org.mockito.Mockito
+import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
@@ -31,6 +34,7 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import java.io.File
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -324,4 +328,36 @@ class ContributionViewHolderUnitTests {
         contributionViewHolder.init(0, contribution)
     }
 
+    @Test
+    @Throws(Exception::class)
+    fun testInitCaseImageSource_HttpURL() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        `when`(contribution.media).thenReturn(media)
+        `when`(contribution.media.thumbUrl).thenReturn("https://demo/sample.png")
+        `when`(contribution.localUri).thenReturn(null)
+        contributionViewHolder.init(0, contribution)
+        Assert.assertNotNull(contributionViewHolder.imageRequest)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testInitCaseImageSource_NULL() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        `when`(contribution.media).thenReturn(media)
+        `when`(contribution.media.thumbUrl).thenReturn(null)
+        `when`(contribution.localUri).thenReturn(null)
+        contributionViewHolder.init(0, contribution)
+        Assert.assertNull(contributionViewHolder.imageRequest)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testInitCaseImageSource_LocalUri() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        `when`(contribution.media).thenReturn(media)
+        `when`(contribution.media.thumbUrl).thenReturn(null)
+        `when`(contribution.localUri).thenReturn(Uri.parse("/data/android/demo.png"))
+        contributionViewHolder.init(0, contribution)
+        Assert.assertNotNull(contributionViewHolder.imageRequest)
+    }
 }

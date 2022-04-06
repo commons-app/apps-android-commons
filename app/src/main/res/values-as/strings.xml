@@ -37,7 +37,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">%1$s আপল\'ড আৰম্ভ হৈছে</string>
   <string name="upload_progress_notification_title_in_progress">%1$s আপল\'ড হৈছে</string>
   <string name="upload_progress_notification_title_finishing">%1$s আপল\'ড শেষ হৈছে</string>
-  <string name="upload_failed_notification_title">%1$s আপল\'ড ব্যৰ্থ হৈছে</string>
+  <string name="upload_failed_notification_title" fuzzy="true">%1$s আপল\'ড ব্যৰ্থ হৈছে</string>
   <string name="upload_failed_notification_subtitle">চাবৰ বাবে স্পৰ্শ কৰক</string>
   <string name="upload_paused_notification_subtitle">চাবৰ বাবে স্পৰ্শ কৰক</string>
   <string name="title_activity_contributions">মোৰ শেহতীয়া আপল\'ড</string>

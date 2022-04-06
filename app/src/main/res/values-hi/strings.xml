@@ -68,7 +68,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">%1$s का अपलोड शुरू हुआ</string>
   <string name="upload_progress_notification_title_in_progress">%1$s अपलोड हो रहा</string>
   <string name="upload_progress_notification_title_finishing">%1$s का अपलोड पूरा हुआ</string>
-  <string name="upload_failed_notification_title">%1$s का अपलोड विफल हुआ</string>
+  <string name="upload_failed_notification_title" fuzzy="true">%1$s का अपलोड विफल हुआ</string>
   <string name="upload_failed_notification_subtitle">देखने हेतु टैप करें</string>
   <string name="title_activity_contributions">मेरे ताज़ा अपलोड</string>
   <string name="contribution_state_queued">प्रतीक्षा में</string>

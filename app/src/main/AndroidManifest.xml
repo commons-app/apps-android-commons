@@ -195,6 +195,13 @@
             android:syncable="false" />
 
         <provider
+          android:name=".recentlanguages.RecentLanguagesContentProvider"
+          android:authorities="${applicationId}.recentlanguages.contentprovider"
+          android:exported="false"
+          android:label="@string/provider_recent_languages"
+          android:syncable="false" />
+
+        <provider
             android:name=".bookmarks.pictures.BookmarkPicturesContentProvider"
             android:authorities="${applicationId}.bookmarks.contentprovider"
             android:exported="false"

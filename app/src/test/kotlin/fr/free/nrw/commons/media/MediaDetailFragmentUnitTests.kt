@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewTreeObserver
 import android.webkit.WebView
 import android.widget.*
@@ -215,6 +216,7 @@ class MediaDetailFragmentUnitTests {
         Whitebox.setInternalState(fragment, "showCaptionAndDescriptionContainer", linearLayout)
         Whitebox.setInternalState(fragment, "updateCategoriesButton", button)
         Whitebox.setInternalState(fragment, "editDescription", button)
+        Whitebox.setInternalState(fragment, "depictEditButton", button)
         Whitebox.setInternalState(fragment, "categoryContainer", linearLayout)
         Whitebox.setInternalState(fragment, "categorySearchView", searchView)
         Whitebox.setInternalState(fragment, "progressBarDeletion", progressBarDeletion)
@@ -653,4 +655,17 @@ class MediaDetailFragmentUnitTests {
         MediaDetailFragment.forMedia(0, true, true, true)
     }
 
+    @Test
+    @Throws(Exception::class)
+    fun testOnDepictEditButtonClicked() {
+        fragment.onDepictionsEditButtonClicked()
+        verify(linearLayout).removeAllViews()
+        verify(button).visibility = GONE
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnDeleteButtonClicked() {
+        fragment.onDeleteButtonClicked()
+    }
 }

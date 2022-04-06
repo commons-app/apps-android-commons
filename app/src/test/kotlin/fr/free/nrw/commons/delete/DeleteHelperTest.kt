@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.delete
 
+import android.app.AlertDialog
 import android.content.Context
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.mock
@@ -12,6 +13,7 @@ import fr.free.nrw.commons.review.ReviewController
 import io.reactivex.Observable
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -135,6 +137,21 @@ class DeleteHelperTest {
     fun askReasonAndExecuteCopyrightViolationTest() {
         val mContext = RuntimeEnvironment.getApplication().applicationContext
         deleteHelper.askReasonAndExecute(media, mContext, "My Question", ReviewController.DeleteReason.COPYRIGHT_VIOLATION, callback);
+    }
+
+    @Test
+    fun alertDialogPositiveButtonDisableTest() {
+        val mContext = RuntimeEnvironment.getApplication().applicationContext
+        deleteHelper.askReasonAndExecute(media, mContext, "My Question", ReviewController.DeleteReason.COPYRIGHT_VIOLATION, callback);
+        assertEquals(false, deleteHelper.dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled)
+    }
+
+        @Test
+    fun alertDialogPositiveButtonEnableTest() {
+        val mContext = RuntimeEnvironment.getApplication().applicationContext
+        deleteHelper.askReasonAndExecute(media, mContext, "My Question", ReviewController.DeleteReason.COPYRIGHT_VIOLATION, callback);
+        deleteHelper.listener.onClick(deleteHelper.dialog,1,true);
+        assertEquals(true, deleteHelper.dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled)
     }
 
     @Test(expected = RuntimeException::class)

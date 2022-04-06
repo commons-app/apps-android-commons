@@ -11,6 +11,7 @@ import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.category.CategoryDao;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao;
 
 public class DBOpenHelper  extends SQLiteOpenHelper {
 
@@ -34,6 +35,7 @@ public class DBOpenHelper  extends SQLiteOpenHelper {
         BookmarkLocationsDao.Table.onCreate(sqLiteDatabase);
         BookmarkItemsDao.Table.onCreate(sqLiteDatabase);
         RecentSearchesDao.Table.onCreate(sqLiteDatabase);
+        RecentLanguagesDao.Table.onCreate(sqLiteDatabase);
     }
 
     @Override
@@ -43,6 +45,7 @@ public class DBOpenHelper  extends SQLiteOpenHelper {
         BookmarkLocationsDao.Table.onUpdate(sqLiteDatabase, from, to);
         BookmarkItemsDao.Table.onUpdate(sqLiteDatabase, from, to);
         RecentSearchesDao.Table.onUpdate(sqLiteDatabase, from, to);
+        RecentLanguagesDao.Table.onUpdate(sqLiteDatabase, from, to);
         deleteTable(sqLiteDatabase,CONTRIBUTIONS_TABLE);
     }
 

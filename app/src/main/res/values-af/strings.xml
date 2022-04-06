@@ -56,7 +56,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Begin oplaai van %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Besig om %1$s op te laai</string>
   <string name="upload_progress_notification_title_finishing">Voltooi oplaai van %1$s</string>
-  <string name="upload_failed_notification_title">Oplaai van %1$s het gefaal</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Oplaai van %1$s het gefaal</string>
   <string name="upload_failed_notification_subtitle">Vat om te kyk</string>
   <string name="title_activity_contributions">Myn recente uploads</string>
   <string name="contribution_state_queued">Gewaglys</string>

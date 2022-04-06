@@ -19,6 +19,8 @@ import butterknife.OnClick;
 import fr.free.nrw.commons.models.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
@@ -52,8 +54,20 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
     private String updateCategoriesQuestion() {
         Media media = getReviewActivity().getMedia();
-        if (media != null && media.getCategories() != null && isAdded()) {
-            String catString = TextUtils.join(", ", media.getCategories());
+        if (media != null && media.getCategoriesHiddenStatus() != null && isAdded()) {
+            // Filter category name attribute from all categories
+            List<String> categories = new ArrayList<>();
+            for(String key : media.getCategoriesHiddenStatus().keySet()) {
+                String value = String.valueOf(key);
+                // Each category returned has a format like "Category:<some-category-name>"
+                // so remove the prefix "Category:"
+                int index = key.indexOf("Category:");
+                if(index == 0) {
+                    value = key.substring(9);
+                }
+                categories.add(value);
+            }
+            String catString = TextUtils.join(", ", categories);
             if (catString != null && !catString.equals("") && textViewQuestionContext != null) {
                 catString = "<b>" + catString + "</b>";
                 String stringToConvertHtml = String.format(getResources().getString(R.string.review_category_explanation), catString);

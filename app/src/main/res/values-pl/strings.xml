@@ -95,7 +95,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Rozpoczęto przesyłanie pliku %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Wysyłanie %1$s</string>
   <string name="upload_progress_notification_title_finishing">Zakończono wysyłanie pliku %1$s</string>
-  <string name="upload_failed_notification_title">Wysyłanie %1$s nieudane</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Wysyłanie %1$s nieudane</string>
   <string name="upload_paused_notification_title">Zatrzymano przesyłanie %1$ plików</string>
   <string name="upload_failed_notification_subtitle">Dotknij, aby zobaczyć</string>
   <string name="upload_paused_notification_subtitle">Dotknij, aby zobaczyć</string>
@@ -455,7 +455,7 @@
   <string name="review_thanks_yes_button_text">Następny obraz</string>
   <string name="review_thanks_no_button_text">Tak, dlaczego nie</string>
   <string name="skip_image_explanation">Kliknięcie tego przycisku spowoduje wyświetlenie kolejnego ostatnio przesłanego obrazu z Wikimedia Commons</string>
-  <string name="review_image_explanation">Możesz przeglądać obrazy i poprawiać jakość Wikimedia Commons.\n Cztery parametry przeglądu to:\n - Czy ten obraz jest objęty zakresem?\n - Czy ten obraz jest zgodny z zasadami praw autorskich?\n - Czy ten obraz jest poprawnie sklasyfikowany?\n - Jeśli wszystko pójdzie dobrze, możesz również podziękować autorowi.</string>
+  <string name="review_image_explanation" fuzzy="true">Możesz przeglądać obrazy i poprawiać jakość Wikimedia Commons.\n Cztery parametry przeglądu to:\n - Czy ten obraz jest objęty zakresem?\n - Czy ten obraz jest zgodny z zasadami praw autorskich?\n - Czy ten obraz jest poprawnie sklasyfikowany?\n - Jeśli wszystko pójdzie dobrze, możesz również podziękować autorowi.</string>
   <string name="no_image">Nie użyto żadnych obrazów</string>
   <string name="no_image_reverted">Żadne obrazy nie zostały przywrócone</string>
   <string name="no_image_uploaded">Nie przesłano żadnych obrazów</string>

@@ -42,7 +42,7 @@
   <string name="upload_progress_notification_title_start"> %1$s ߟߊ߬ߦߟߍ ߦߴߌ ߘߐ߫</string>
   <string name="upload_progress_notification_title_in_progress"> %1$s ߟߊ߬ߦߟߍ߬ߟߌ ߦߋ߫ ߛߋ߲߬ߠߊ߫</string>
   <string name="upload_progress_notification_title_finishing"> %1$s ߟߊ߬ߦߟߍ߬ߟߌ ߞߎ߲߬ߘߏ߲߬ߠߌ߲ ߦߴߌ ߘߐ߫</string>
-  <string name="upload_failed_notification_title"> %1$s ߟߊ߬ߦߟߍ߬ߟߌ ߓߘߊ߫ ߗߌߙߏ߲߫</string>
+  <string name="upload_failed_notification_title" fuzzy="true"> %1$s ߟߊ߬ߦߟߍ߬ߟߌ ߓߘߊ߫ ߗߌߙߏ߲߫</string>
   <string name="upload_paused_notification_title">%1$s ߟߊߦߟߍ߬ߟߌ ߓߘߊ߫ ߟߊߟߐ߬</string>
   <string name="upload_failed_notification_subtitle">ߊ߬ ߛߐ߲߬ߞߌ߲߫ ߞߵߊ߬ ߦߋ߫</string>
   <string name="upload_paused_notification_subtitle">ߊ߬ ߛߐ߲߬ߞߌ߲߫ ߞߵߊ߬ ߦߋ߫</string>

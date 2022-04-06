@@ -15,6 +15,7 @@
 * Kuailong
 * Liuxinyu970226
 * Looong
+* NACHOgao3
 * Qiyue2001
 * Shizhao
 * Shuiwater
@@ -22,6 +23,7 @@
 * Si109
 * SkyEye FAST
 * SomeyaMako
+* StarrySky
 * Tranve
 * Vikarna
 * VulpesVulpes825
@@ -294,6 +296,7 @@
   <string name="nearby_commons">共享资源</string>
   <string name="about_rate_us">评价我们</string>
   <string name="about_faq">常见问题</string>
+  <string name="user_guide">用户指南</string>
   <string name="welcome_skip_button">跳过指导</string>
   <string name="no_internet">互联网不可用</string>
   <string name="error_notifications">检索通知时出错</string>
@@ -321,6 +324,7 @@
   <string name="title_activity_search">搜索</string>
   <string name="search_recent_header">最近搜索：</string>
   <string name="provider_searches">最近的搜索查询</string>
+  <string name="provider_recent_languages">最近的语言查询</string>
   <string name="error_loading_categories">载入分类时发生错误。</string>
   <string name="error_loading_depictions">加载描述时出错。</string>
   <string name="search_tab_title_media">媒体</string>
@@ -357,6 +361,7 @@
   <string name="error_fetching_nearby_monuments">检索附近古迹时出错。</string>
   <string name="no_recent_searches">还没有最近搜索</string>
   <string name="delete_recent_searches_dialog">您确认要清除您的搜索历史？</string>
+  <string name="cancel_upload_dialog">您确定要取消此次上传么？</string>
   <string name="delete_search_dialog">你想删除本次检索吗？</string>
   <string name="search_history_deleted">搜索历史已删除</string>
   <string name="nominate_delete">提名删除</string>
@@ -464,7 +469,7 @@
   <string name="review_thanks_yes_button_text">下一张图片</string>
   <string name="review_thanks_no_button_text">是的，为什么不</string>
   <string name="skip_image_explanation">点击这个按钮会给你另外一个来自于Wikimedia Common上传的图片</string>
-  <string name="review_image_explanation">你可以审查图片并提高Wikimedia Commoms的质量。\n审查的四个参数是：\n-图片尺寸是否在规定的范围\n-图片是否遵循版权规则\n-图片是否正确分类\n-如果一切正常你是否也可以感谢贡献者</string>
+  <string name="review_image_explanation">你可以审查图像来提高Wikimedia Commoms的质量。\n审查的三个参数是：\n\n- 图像尺寸是否在规定的范围？\n当您点按“否”（代表不在符合范围），您会对此图像添加删除题名模板。\n\n- 图像是否遵守版权规范？\n当您点按“否”（代表未遵守版权规范），您对此图像添加删除题名模板。\n\n- 图像是否被正确分类？\n当您点按“否”（代表未被正确分类），您对此图像添加分类请求模板。\n\n如果一切正常，就不会对图像添加任何模板，您也可对贡献者表达感谢。</string>
   <string name="no_image">没有被使用的图片</string>
   <string name="no_image_reverted">没有被撤回的图片</string>
   <string name="no_image_uploaded">还没有上传图片</string>
@@ -524,6 +529,9 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">无法添加分类。</string>
   <string name="category_edit_button_text">更新分类</string>
+  <string name="depictions_edit_helper_make_edit_toast">正在尝试更新描述。</string>
+  <string name="depictions_edit_helper_show_edit_title">编辑描述</string>
+  <string name="depictions_edit_helper_edit_message_else">无法添加描述。</string>
   <string name="coordinates_edit_helper_make_edit_toast">尝试更新坐标。</string>
   <string name="coordinates_edit_helper_show_edit_title">坐标更新</string>
   <string name="description_edit_helper_show_edit_title">描述更新</string>
@@ -622,6 +630,8 @@
   <string name="quality_images_info">品质图像是符合一定质量标准（本质上大多是技术性的）的图表或照片，它们对维基媒体计划很有价值</string>
   <string name="resuming_upload">正在恢复上传...</string>
   <string name="pausing_upload">暂停上传...</string>
+  <string name="cancelling_upload">正在取消上传…</string>
+  <string name="cancel_upload">取消上传</string>
   <string name="limited_connection_explanation">您已启用限制连接模式。所有的上传已暂停并将在您禁用此模式后立刻恢复。</string>
   <string name="limited_connection_is_on">限制连接模式启用中。</string>
   <string name="media_details_tooltip">请编写一个简短的标题来介绍您的图片展示了什么。请介绍该图片是如何有趣、典型或罕见，并说明背景以及是否可见。请尽可能使用准确的术语。</string>
@@ -669,6 +679,7 @@
   <string name="contributions_of_user">用户贡献：%s</string>
   <string name="achievements_of_user">用户成就：%s</string>
   <string name="menu_view_user_page">查看用户页面</string>
+  <string name="edit_depictions">编辑描述</string>
   <string name="advanced_options">高级选项</string>
   <string name="advanced_query_info_text">您可以自定义附近查询。如果发生错误，请重置并应用。</string>
   <string name="apply">应用</string>
@@ -676,4 +687,12 @@
   <string name="location_message">位置数据能帮助 Wiki 编辑者来找到您的图片，让他更加有用。\n您近期上传的内容没有位置。\n我们建议您在相机应用程序设置里打开位置。\n感谢您的上传！</string>
   <string name="no_location_found_title">没有找到位置</string>
   <string name="add_location">添加位置</string>
+  <string name="android_version">Android版本</string>
+  <string name="device_manufacturer">设备制造商</string>
+  <string name="device_model">设备型号</string>
+  <string name="device_name">设备名称</string>
+  <string name="network_type">网络类型</string>
+  <string name="thanks_feedback">感谢您提供反馈</string>
+  <string name="enter_description">您的反馈是？</string>
+  <string name="your_feedback">您的反馈</string>
 </resources>

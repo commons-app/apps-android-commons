@@ -69,7 +69,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Starter opplasting av %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s lastet opp</string>
   <string name="upload_progress_notification_title_finishing">Avslutter opplasting av %1$s</string>
-  <string name="upload_failed_notification_title">Opplastingen av %1$s feilet</string>
+  <string name="upload_failed_notification_title">Kunne ikke laste opp %1$s</string>
   <string name="upload_paused_notification_title">Opplasting av %1$s pauset</string>
   <string name="upload_failed_notification_subtitle">Trykk for å vise</string>
   <string name="upload_paused_notification_subtitle">Trykk for å vise</string>
@@ -317,6 +317,7 @@
   <string name="error_fetching_nearby_places">Feil under henting av steder i nærheten.</string>
   <string name="no_recent_searches">Ingen nylige søk</string>
   <string name="delete_recent_searches_dialog">Er du sikker på at du vil tømme søkehistorikken din?</string>
+  <string name="cancel_upload_dialog">Er du sikker på at du vil avbryte denne opplastingen?</string>
   <string name="delete_search_dialog">Ønsker du å slette dette søket?</string>
   <string name="search_history_deleted">Søkehistorikk slettet</string>
   <string name="nominate_delete">Nominer for sletting</string>
@@ -417,7 +418,7 @@
   <string name="review_thanks_yes_button_text" fuzzy="true">Ja, hvorfor ikke</string>
   <string name="review_thanks_no_button_text" fuzzy="true">Neste bilde</string>
   <string name="skip_image_explanation">Når du klikker på denne knappen vil du få et nytt nylig opplastet bilde fra Wikimedia Commons</string>
-  <string name="review_image_explanation">Du kan gå gjennom bildene og forbedre kvaliteten på Wikimedia Commons.\nDe fire parameterne for gjennomgang er:\n• Er bildet relevant?\n• Følger bildet opphavsrettsreglene?\n• Er bildet riktig kategorisert?\n• Hvis alt ser greit ut kan du også takke bidragsyteren.</string>
+  <string name="review_image_explanation" fuzzy="true">Du kan gå gjennom bildene og forbedre kvaliteten på Wikimedia Commons.\nDe fire parameterne for gjennomgang er:\n• Er bildet relevant?\n• Følger bildet opphavsrettsreglene?\n• Er bildet riktig kategorisert?\n• Hvis alt ser greit ut kan du også takke bidragsyteren.</string>
   <string name="no_image">Ingen bilder brukt</string>
   <string name="no_image_reverted">Ingen bilder tilbakestilt</string>
   <string name="no_image_uploaded">Ingen bilder lastet opp</string>
@@ -472,4 +473,6 @@
   <string name="notification_mark_read">Varsel merket som lest</string>
   <string name="some_error">En feil oppsto!</string>
   <string name="you_must_reset_your_passsword">Noe gikk galt under innloggingen, du må tilbakestille passordet ditt!</string>
+  <string name="cancelling_upload">Avbryter opplasting.</string>
+  <string name="cancel_upload">Avbryt opplasting</string>
 </resources>

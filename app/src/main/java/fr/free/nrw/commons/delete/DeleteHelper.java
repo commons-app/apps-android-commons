@@ -5,6 +5,7 @@ import static fr.free.nrw.commons.notification.NotificationHelper.NOTIFICATION_D
 import android.annotation.SuppressLint;
 import android.content.Context;
 import static fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import androidx.appcompat.app.AlertDialog;
@@ -39,6 +40,8 @@ public class DeleteHelper {
     private final PageEditClient pageEditClient;
     private final ViewUtilWrapper viewUtil;
     private final String username;
+    private AlertDialog d;
+    private DialogInterface.OnMultiChoiceClickListener listener;
 
     @Inject
     public DeleteHelper(NotificationHelper notificationHelper,
@@ -176,12 +179,17 @@ public class DeleteHelper {
             reasonListEnglish[2] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_logo);
         }
 
-        alert.setMultiChoiceItems(reasonList, checkedItems, (dialogInterface, position, isChecked) -> {
+        alert.setMultiChoiceItems(reasonList, checkedItems, listener = (dialogInterface, position, isChecked) -> {
+
             if (isChecked) {
                 mUserReason.add(position);
             } else {
                 mUserReason.remove((Integer.valueOf(position)));
             }
+
+            // disable the OK button if no reason selected
+            ((AlertDialog) dialogInterface).getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(
+                !mUserReason.isEmpty());
         });
 
         alert.setPositiveButton(context.getString(R.string.ok), (dialogInterface, i) -> {
@@ -200,20 +208,39 @@ public class DeleteHelper {
             String finalReason = reason;
 
             Single.defer((Callable<SingleSource<Boolean>>) () ->
-                    makeDeletion(context, media, finalReason))
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(aBoolean -> {
-                        if (aBoolean) {
-                            reviewCallback.onSuccess();
-                        } else {
-                            reviewCallback.onFailure();
-                        }
-                    });
+                makeDeletion(context, media, finalReason))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(aBoolean -> {
+                    if (aBoolean) {
+                        reviewCallback.onSuccess();
+                    } else {
+                        reviewCallback.onFailure();
+                    }
+                });
 
         });
         alert.setNegativeButton(context.getString(R.string.cancel), (dialog, which) -> reviewCallback.onFailure());
-        AlertDialog d = alert.create();
+        d = alert.create();
         d.show();
+
+        // disable the OK button by default
+        d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+    }
+
+    /**
+     * returns the instance of shown AlertDialog,
+     * used for taking reference during unit test
+     * */
+    public AlertDialog getDialog(){
+        return  d;
+    }
+
+    /**
+     * returns the instance of shown DialogInterface.OnMultiChoiceClickListener,
+     * used for taking reference during unit test
+     * */
+    public DialogInterface.OnMultiChoiceClickListener getListener(){
+        return listener;
     }
 }

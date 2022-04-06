@@ -21,7 +21,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Hochloode von „%1$s“ oonfänge</string>
   <string name="upload_progress_notification_title_in_progress">„%1$s“ hochloode</string>
   <string name="upload_progress_notification_title_finishing">Hochloode von „%1$s“ abschliesse</string>
-  <string name="upload_failed_notification_title">Hochloode von „%1$s“ fehlgeschlooht</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Hochloode von „%1$s“ fehlgeschlooht</string>
   <string name="upload_failed_notification_subtitle">Tipp mit deine Fingerspitze für se siehn</string>
   <string name="title_activity_contributions" fuzzy="true">Mein hochgeloodne Dateie</string>
   <string name="contribution_state_queued">In der Woorteschlang</string>

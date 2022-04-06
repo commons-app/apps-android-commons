@@ -17,6 +17,7 @@ import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.profile.ProfileActivity
+import fr.free.nrw.commons.utils.ConfigUtils
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -372,7 +373,16 @@ class AchievementsFragmentUnitTests {
         )
         method.isAccessible = true
         method.invoke(fragment, true)
-        Assert.assertEquals(ShadowToast.getTextOfLatestToast().toString(), context.getString(R.string.achievements_unavailable_beta))
+        if(ConfigUtils.isBetaFlavour) {
+            Assert.assertEquals(
+                ShadowToast.getTextOfLatestToast().toString(),
+                context.getString(R.string.achievements_unavailable_beta)
+            )
+        } else {
+            Assert.assertNull(
+                ShadowToast.getTextOfLatestToast()
+            )
+        }
     }
 
 }

@@ -2,6 +2,7 @@
 <!-- Authors:
 * 2axterix2
 * AVIADOR71
+* Adilson
 * Adjen
 * Agent
 * Astroemi
@@ -9,10 +10,12 @@
 * Biancailin
 * Bruno44101
 * Carlosmg.dg
+* Chopan050
 * Ciencia Al Poder
 * Danniel07
 * DannyS712
 * Destinid10 2
+* DiegoAmbrocio
 * Fewasser Traduce
 * Fitoschido
 * Gastonsaenz
@@ -98,7 +101,7 @@
   <string name="upload_progress_notification_title_start">Empezando la subida de %s</string>
   <string name="upload_progress_notification_title_in_progress">Subiendo %1$s</string>
   <string name="upload_progress_notification_title_finishing">Finalizando la subida de %1$s</string>
-  <string name="upload_failed_notification_title">Falló la carga de %1$s</string>
+  <string name="upload_failed_notification_title">Error al cargar %1$s</string>
   <string name="upload_paused_notification_title">Falló la subida de %1$s</string>
   <string name="upload_failed_notification_subtitle">Toca para ver</string>
   <string name="upload_paused_notification_subtitle">Tocar para ver</string>
@@ -292,6 +295,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Valóranos</string>
   <string name="about_faq">Preguntas frecuentes</string>
+  <string name="user_guide">Guía de usuario</string>
   <string name="welcome_skip_button">Omitir tutorial</string>
   <string name="no_internet">Internet no disponible</string>
   <string name="error_notifications">Error al recuperar las notificaciones</string>
@@ -319,6 +323,7 @@
   <string name="title_activity_search">Buscar</string>
   <string name="search_recent_header">Búsquedas recientes:</string>
   <string name="provider_searches">Consultas recientemente buscadas</string>
+  <string name="provider_recent_languages">Consultas lingüísticas recientes</string>
   <string name="error_loading_categories">Se produjo un error al cargar las categorías.</string>
   <string name="error_loading_depictions">Se produjo un error al cargar las representaciones.</string>
   <string name="search_tab_title_media">Multimedia</string>
@@ -354,6 +359,7 @@
   <string name="error_fetching_nearby_monuments">Error al encontrar monumentos cercanos.</string>
   <string name="no_recent_searches">No hay búsquedas recientes</string>
   <string name="delete_recent_searches_dialog">¿Confirmas que quieres vaciar el historial de búsquedas?</string>
+  <string name="cancel_upload_dialog">¿Seguro que quieres cancelar esta carga?</string>
   <string name="delete_search_dialog">¿Quieres eliminar esta búsqueda?</string>
   <string name="search_history_deleted">Historial de búsqueda eliminado</string>
   <string name="nominate_delete">Nominar para borrado</string>
@@ -461,7 +467,7 @@
   <string name="review_thanks_yes_button_text">Imagen siguiente</string>
   <string name="review_thanks_no_button_text">Sí, por qué no</string>
   <string name="skip_image_explanation">Haciendo clic a este botón obtendrá otra imagen de Wikimedia Commons subida recientemente</string>
-  <string name="review_image_explanation">Es posible revisar las imágenes y mejorar la calidad de Wikimedia Commons.\nLos cuatro criterios de revisión son:\n- ¿La imagen recae dentro del alcance del proyecto?\n- ¿La imagen sigue las normas de derechos de autor?\n- ¿Las categorías son las correctas?\n- Si todo va bien, es posible enviar un agradecimiento al contribuidor.</string>
+  <string name="review_image_explanation" fuzzy="true">Es posible revisar las imágenes y mejorar la calidad de Wikimedia Commons.\nLos cuatro criterios de revisión son:\n- ¿La imagen recae dentro del alcance del proyecto?\n- ¿La imagen sigue las normas de derechos de autor?\n- ¿Las categorías son las correctas?\n- Si todo va bien, es posible enviar un agradecimiento al contribuidor.</string>
   <string name="no_image">No se utilizó ninguna imagen</string>
   <string name="no_image_reverted">Ninguna imagen revertida</string>
   <string name="no_image_uploaded">Ninguna imagen subida</string>
@@ -521,6 +527,13 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">No se pudieron añadir las categorías.</string>
   <string name="category_edit_button_text">Actualizar categorías</string>
+  <string name="depictions_edit_helper_make_edit_toast">Tratando de actualizar las descripciones.</string>
+  <string name="depictions_edit_helper_show_edit_title">Editar las descripciones</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">%1$s Se añade la descripción.</item>
+    <item quantity="other">Descripción %1$s se añadieron.</item>
+  </plurals>
+  <string name="depictions_edit_helper_edit_message_else">No se pueden añadir descripciones.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Intentando actualizar coordenadas.</string>
   <string name="coordinates_edit_helper_show_edit_title">Actualización de coordenadas</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Éxito</string>
@@ -610,6 +623,8 @@
   <string name="quality_images_info">Las imágenes de calidad son diagramas o fotografías que cumplen determinados estándares de calidad (mayormente de carácter técnico) y que son valiosas para proyectos de Wikimedia</string>
   <string name="resuming_upload">Reanudando carga...</string>
   <string name="pausing_upload">Pausando carga...</string>
+  <string name="cancelling_upload">Cancelando carga...</string>
+  <string name="cancel_upload">Cancelar carga</string>
   <string name="limited_connection_explanation">Has habilitado el modo de conexión limitada. Todas las cargas están pausadas y se reanudarán cuando deshabilites este modo.</string>
   <string name="limited_connection_is_on">El modo de conexión limitada está encendido.</string>
   <string name="media_details_tooltip">Por favor escribe un pie de foto corto que diga qué muesta tu imagen. En la descripción, indica qué hace interesante o típica o rara a la imagen, y explica el contexto, visible o no. Emplea terminología exacta tanto como sea posible.</string>
@@ -649,4 +664,19 @@
   <string name="contributions_of_user">Contribuciones del usuario: %s</string>
   <string name="achievements_of_user">Logros del usuario: %s</string>
   <string name="menu_view_user_page">Ver página de usuario</string>
+  <string name="edit_depictions">Editar las descripciones</string>
+  <string name="achievements_unavailable_beta">Los logros sólo están disponibles en la versión de producción, por favor consulte la documentación del desarrollador.</string>
+  <string name="leaderboard_unavailable_beta">La tabla de clasificación sólo está disponible en la versión de producción, por favor, consulte la documentación del desarrollador.</string>
+  <string name="copyright_popup">Por favor, sólo cargue imágenes que haya tomado usted mismo. Personas que carguen imágenes con derechos de autor serán bloqueadas. Esto aplica para la versión beta también. Gracias por probar la aplicación!</string>
+  <string name="select_feedback_data_choice">Por favor, desmarque cualquier información que no se sienta cómodo compartiendo públicamente.</string>
+  <string name="api_level">API Nivel</string>
+  <string name="android_version">Versión de android</string>
+  <string name="device_manufacturer">Fabricante del dispositivo</string>
+  <string name="device_model">Modelo de dispositivo</string>
+  <string name="device_name">Nombre de dispositivo</string>
+  <string name="network_type">Tipo de red</string>
+  <string name="thanks_feedback">Gracias por dar retroalimentación</string>
+  <string name="error_feedback">Error mientras se envía la retroalimentación</string>
+  <string name="enter_description">¿Cuál es su opinión?</string>
+  <string name="your_feedback">Tu retroalimentación</string>
 </resources>

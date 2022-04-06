@@ -19,6 +19,7 @@ import fr.free.nrw.commons.customselector.ui.adapter.FolderAdapter
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.upload.FileProcessor
+import kotlinx.android.synthetic.main.fragment_custom_selector.*
 import kotlinx.android.synthetic.main.fragment_custom_selector.view.*
 import javax.inject.Inject
 
@@ -111,6 +112,13 @@ class FolderFragment : CommonsDaggerSupportFragment() {
      */
     private fun handleResult(result: Result) {
         if(result.status is CallbackStatus.SUCCESS){
+            val images = result.images
+            if(images.isNullOrEmpty())
+            {
+                empty_text?.let {
+                    it.visibility = View.VISIBLE
+                }
+            }
             folders = ImageHelper.folderListFromImages(result.images)
             folderAdapter.init(folders)
             folderAdapter.notifyDataSetChanged()
