@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.data.models
+package fr.free.nrw.commons.models
 
 import android.os.Parcelable
 import fr.free.nrw.commons.Utils

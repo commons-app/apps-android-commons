@@ -19,7 +19,7 @@ import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
-import fr.free.nrw.commons.data.models.Media;
+import fr.free.nrw.commons.models.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.bookmarks.BookmarkListRootFragment;
 import fr.free.nrw.commons.category.GridViewAdapter;

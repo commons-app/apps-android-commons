@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.explore.categories.media
 
-import fr.free.nrw.commons.data.models.Media
+import fr.free.nrw.commons.models.Media
 import fr.free.nrw.commons.explore.depictions.search.LoadFunction
 import fr.free.nrw.commons.explore.paging.LiveDataConverter
 import fr.free.nrw.commons.explore.paging.PageableBaseDataSource

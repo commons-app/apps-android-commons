@@ -14,7 +14,7 @@ import androidx.work.WorkerParameters
 import com.mapbox.mapboxsdk.plugins.localization.BuildConfig
 import dagger.android.ContributesAndroidInjector
 import fr.free.nrw.commons.CommonsApplication
-import fr.free.nrw.commons.data.models.Media
+import fr.free.nrw.commons.models.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.ChunkInfo

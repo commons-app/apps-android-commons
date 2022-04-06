@@ -38,7 +38,7 @@ import javax.inject.Named;
 import androidx.work.WorkManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.data.models.Media;
+import fr.free.nrw.commons.models.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.campaigns.Campaign;
 import fr.free.nrw.commons.campaigns.CampaignView;

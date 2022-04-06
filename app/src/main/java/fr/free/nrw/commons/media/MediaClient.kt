@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.media
 
 import fr.free.nrw.commons.BuildConfig
-import fr.free.nrw.commons.data.models.Media
+import fr.free.nrw.commons.models.Media
 import fr.free.nrw.commons.category.ContinuationClient
 import fr.free.nrw.commons.explore.media.MediaConverter
 import fr.free.nrw.commons.utils.CommonsDateUtil

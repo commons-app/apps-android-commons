@@ -1,7 +1,7 @@
 package fr.free.nrw.commons
 
 import androidx.core.text.HtmlCompat
-import fr.free.nrw.commons.data.models.Media
+import fr.free.nrw.commons.models.Media
 import fr.free.nrw.commons.media.PAGE_ID_PREFIX
 import fr.free.nrw.commons.media.IdAndCaptions
 import fr.free.nrw.commons.media.MediaClient

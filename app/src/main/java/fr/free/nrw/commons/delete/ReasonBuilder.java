@@ -10,7 +10,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import fr.free.nrw.commons.data.models.Media;
+import fr.free.nrw.commons.models.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.profile.achievements.FeedbackResponse;
 import fr.free.nrw.commons.auth.SessionManager;

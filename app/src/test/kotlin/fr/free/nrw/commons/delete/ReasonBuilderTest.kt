@@ -2,7 +2,7 @@ package fr.free.nrw.commons.delete
 
 import android.content.Context
 import android.content.res.Resources
-import fr.free.nrw.commons.data.models.Media
+import fr.free.nrw.commons.models.Media
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.profile.achievements.FeedbackResponse

@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.explore.media
 
-import fr.free.nrw.commons.data.models.Media
+import fr.free.nrw.commons.models.Media
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

@@ -90,7 +90,7 @@ project.afterEvaluate {
                             // db
                             '**/db/*',
                             // data
-                            '**/data/*',
+                            'models/*',
                     ]
 
                     def javaClasses = fileTree(dir: variant.javaCompileProvider.get().destinationDir,

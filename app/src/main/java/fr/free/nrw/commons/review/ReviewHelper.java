@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.review;
 
 
-import fr.free.nrw.commons.data.models.Media;
+import fr.free.nrw.commons.models.Media;
 import fr.free.nrw.commons.media.MediaClient;
 import io.reactivex.Observable;
 import io.reactivex.Single;
