@@ -2,7 +2,7 @@ package fr.free.nrw.commons.quiz;
 
 import android.content.Context;
 
-import fr.free.nrw.commons.data.models.quiz.QuizQuestion;
+import fr.free.nrw.commons.quiz.models.QuizQuestion;
 import java.util.ArrayList;
 
 import fr.free.nrw.commons.R;

@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.upload.mediaDetails
+package fr.free.nrw.commons.upload.mediadetails
 
 import android.app.Activity
 import android.content.Context
@@ -31,7 +31,7 @@ import fr.free.nrw.commons.upload.ImageCoordinates
 import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadItem
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
-import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM
+import fr.free.nrw.commons.upload.mediadetails.UploadMediaDetailFragment.LAST_ZOOM
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test

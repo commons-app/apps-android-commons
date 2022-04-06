@@ -21,8 +21,8 @@ import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION
-import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM
+import fr.free.nrw.commons.upload.mediadetails.UploadMediaDetailFragment.LAST_LOCATION
+import fr.free.nrw.commons.upload.mediadetails.UploadMediaDetailFragment.LAST_ZOOM
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test

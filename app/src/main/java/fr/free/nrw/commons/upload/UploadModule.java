@@ -8,8 +8,8 @@ import fr.free.nrw.commons.upload.depicts.DepictsContract;
 import fr.free.nrw.commons.upload.depicts.DepictsPresenter;
 import fr.free.nrw.commons.upload.license.MediaLicenseContract;
 import fr.free.nrw.commons.upload.license.MediaLicensePresenter;
-import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract;
-import fr.free.nrw.commons.upload.mediaDetails.UploadMediaPresenter;
+import fr.free.nrw.commons.upload.mediadetails.UploadMediaDetailsContract;
+import fr.free.nrw.commons.upload.mediadetails.UploadMediaPresenter;
 
 /**
  * The Dagger Module for upload related presenters and (some other objects maybe in future)

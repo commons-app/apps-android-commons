@@ -6,8 +6,8 @@ import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.repository.UploadRepository
-import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract
-import fr.free.nrw.commons.upload.mediaDetails.UploadMediaPresenter
+import fr.free.nrw.commons.upload.mediadetails.UploadMediaDetailsContract
+import fr.free.nrw.commons.upload.mediadetails.UploadMediaPresenter
 import fr.free.nrw.commons.utils.ImageUtils.*
 import io.reactivex.Observable
 import io.reactivex.Single

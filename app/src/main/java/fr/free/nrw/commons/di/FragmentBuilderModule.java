@@ -35,7 +35,7 @@ import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
 import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
-import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
+import fr.free.nrw.commons.upload.mediadetails.UploadMediaDetailFragment;
 
 /**
  * This Class Represents the Module for dependency injection (using dagger)

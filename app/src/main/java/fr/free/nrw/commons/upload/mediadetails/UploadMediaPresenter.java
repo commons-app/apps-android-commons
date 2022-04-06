@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.upload.mediaDetails;
+package fr.free.nrw.commons.upload.mediadetails;
 
 import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
 import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
@@ -21,8 +21,8 @@ import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadItem;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
-import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract.UserActionListener;
-import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract.View;
+import fr.free.nrw.commons.upload.mediadetails.UploadMediaDetailsContract.UserActionListener;
+import fr.free.nrw.commons.upload.mediadetails.UploadMediaDetailsContract.View;
 import io.reactivex.Maybe;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;

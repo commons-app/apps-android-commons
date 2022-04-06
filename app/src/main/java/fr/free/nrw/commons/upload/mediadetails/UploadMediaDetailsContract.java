@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.upload.mediaDetails;
+package fr.free.nrw.commons.upload.mediadetails;
 
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.filepicker.UploadableFile;

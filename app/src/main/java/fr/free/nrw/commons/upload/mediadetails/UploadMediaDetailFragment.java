@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.upload.mediaDetails;
+package fr.free.nrw.commons.upload.mediadetails;
 
 import static android.app.Activity.RESULT_OK;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;

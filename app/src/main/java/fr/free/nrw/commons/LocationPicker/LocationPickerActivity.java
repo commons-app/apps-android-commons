@@ -6,8 +6,8 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.visibility;
-import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION;
-import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM;
+import static fr.free.nrw.commons.upload.mediadetails.UploadMediaDetailFragment.LAST_LOCATION;
+import static fr.free.nrw.commons.upload.mediadetails.UploadMediaDetailFragment.LAST_ZOOM;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
