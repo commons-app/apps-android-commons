@@ -4,7 +4,6 @@ import static fr.free.nrw.commons.location.LocationServiceManager.LocationChange
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.SEARCH_CUSTOM_AREA;
 
 
-import android.content.Context;
 import android.view.View;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
@@ -18,8 +17,6 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
-import fr.free.nrw.commons.nearby.NearbyController;
-import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.utils.LocationUtils;
 import io.reactivex.Observable;
 import java.lang.reflect.Proxy;
