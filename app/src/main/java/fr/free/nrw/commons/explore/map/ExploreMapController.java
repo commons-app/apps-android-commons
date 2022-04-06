@@ -6,25 +6,11 @@ import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Build.VERSION_CODES;
-import android.provider.ContactsContract.CommonDataKinds.Im;
-import android.util.Log;
-import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.core.content.ContextCompat;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
@@ -37,33 +23,37 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.Sitelinks;
+import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.LocationUtils;
-import fr.free.nrw.commons.utils.UiUtils;
+import fr.free.nrw.commons.utils.PlaceUtils;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 import javax.inject.Inject;
 import timber.log.Timber;
 
 public class ExploreMapController extends MapController {
-    private final ExplorePlaces explorePlaces;
+    private final ExploreMapCalls exploreMapCalls;
     public LatLng latestSearchLocation; // Can be current and camera target on search this area button is used
-    public LatLng currentLocation; // Can be current and camera target on search this area button is used
-    public double latestSearchRadius = 0; // Any last search radius except closest result search
-    public double currentLocationSearchRadius = 0; // Any last search radius except closest result search
+    public LatLng currentLocation; // current location of user
+    public double latestSearchRadius = 0; // Any last search radius
+    public double currentLocationSearchRadius = 0; // Search radius of only searches around current location
 
 
     @Inject
-    public ExploreMapController(ExplorePlaces explorePlaces) {
-        this.explorePlaces = explorePlaces;
+    public ExploreMapController(ExploreMapCalls explorePlaces) {
+        this.exploreMapCalls = explorePlaces;
     }
 
+    /**
+     * Takes location as parameter and returns ExplorePlaces info that holds curLatLng, mediaList, explorePlaceList and boundaryCoordinates
+     * @param curLatLng is current geolocation
+     * @param searchLatLng is the location that we want to search around
+     * @param checkingAroundCurrentLocation is a boolean flag. True if we want to check around current location, false if another location
+     * @return explorePlacesInfo info that holds curLatLng, mediaList, explorePlaceList and boundaryCoordinates
+     */
     public ExplorePlacesInfo loadAttractionsFromLocation(LatLng curLatLng, LatLng searchLatLng, boolean checkingAroundCurrentLocation) {
-
-        // TODO: check nearbyPlacesInfo in NearbyController for search this area logic
 
         if (searchLatLng == null) {
             Timber.d("Loading attractions explore map, but search is null");
@@ -75,12 +65,11 @@ public class ExploreMapController extends MapController {
             explorePlacesInfo.curLatLng = curLatLng;
             latestSearchLocation = searchLatLng;
 
-            List<Media> mediaList = explorePlaces.callCommonsQuery(searchLatLng, 30);
+            List<Media> mediaList = exploreMapCalls.callCommonsQuery(searchLatLng, 30);
             LatLng[] boundaryCoordinates = {mediaList.get(0).getCoordinates(),   // south
                 mediaList.get(0).getCoordinates(), // north
                 mediaList.get(0).getCoordinates(), // west
                 mediaList.get(0).getCoordinates()};// east, init with a random location
-
 
             if (searchLatLng != null) {
                 Timber.d("Sorting places by distance...");
@@ -103,10 +92,10 @@ public class ExploreMapController extends MapController {
                 }
             }
             explorePlacesInfo.mediaList = mediaList;
-            explorePlacesInfo.explorePlaceList = mediaToExplorePlace(mediaList);
+            explorePlacesInfo.explorePlaceList = PlaceUtils.mediaToExplorePlace(mediaList);
             explorePlacesInfo.boundaryCoordinates = boundaryCoordinates;
 
-            // Sets latestSearchRadius to maximum distance amoung boundaries and search location
+            // Sets latestSearchRadius to maximum distance among boundaries and search location
             for (LatLng bound : boundaryCoordinates) {
                 double distance = LocationUtils.commonsLatLngToMapBoxLatLng(bound).distanceTo(LocationUtils.commonsLatLngToMapBoxLatLng(latestSearchLocation));
                 if (distance > latestSearchRadius) {
@@ -126,14 +115,13 @@ public class ExploreMapController extends MapController {
     }
 
     /**
-     * Loads attractions from location for map view, we need to return Bplaces in Place data type
-     * @return BaseMarkerOptions list that holds nearby places
+     * Loads attractions from location for map view, we need to return places in Place data type
+     * @return baseMarkerOptions list that holds nearby places with their icons
      */
     public static List<NearbyBaseMarker> loadAttractionsFromLocationToBaseMarkerOptions(
         LatLng curLatLng,
         final List<Place> placeList,
         Context context,
-        List<Place> bookmarkLocations,
         NearbyBaseMarkerThumbCallback callback,
         Marker selectedMarker,
         boolean shouldTrackPosition,
@@ -143,8 +131,6 @@ public class ExploreMapController extends MapController {
         if (placeList == null) {
             return baseMarkerOptions;
         }
-
-        //placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
 
         VectorDrawableCompat vectorDrawable = null;
         try {
@@ -173,13 +159,13 @@ public class ExploreMapController extends MapController {
                     .placeholder(R.drawable.image_placeholder_96)
                     .apply(new RequestOptions().override(96, 96).centerCrop())
                     .into(new CustomTarget<Bitmap>() {
-                        @RequiresApi(api = VERSION_CODES.LOLLIPOP)
+                        // We add icons to markers when bitmaps are ready
                         @Override
                         public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-
-                            nearbyBaseMarker.setIcon(IconFactory.getInstance(context).fromBitmap(addRedBorder(resource, 6, context)));
+                            nearbyBaseMarker.setIcon(IconFactory.getInstance(context).fromBitmap(
+                                ImageUtils.addRedBorder(resource, 6, context)));
                             baseMarkerOptions.add(nearbyBaseMarker);
-                            if (baseMarkerOptions.size() == placeList.size()) {
+                            if (baseMarkerOptions.size() == placeList.size()) { // if true, we added all markers to list and can trigger thumbs ready callback
                                 callback.onNearbyBaseMarkerThumbsReady(baseMarkerOptions, explorePlacesInfo, selectedMarker, shouldTrackPosition);
                             }
                         }
@@ -188,54 +174,24 @@ public class ExploreMapController extends MapController {
                         public void onLoadCleared(@Nullable Drawable placeholder) {
                         }
 
+                        // We add thumbnail icon for images that couldn't be loaded
                         @Override
                         public void onLoadFailed(@Nullable final Drawable errorDrawable) {
                             super.onLoadFailed(errorDrawable);
                             nearbyBaseMarker.setIcon(IconFactory.getInstance(context).fromResource(R.drawable.image_placeholder_96));
                             baseMarkerOptions.add(nearbyBaseMarker);
-                            if (baseMarkerOptions.size() == placeList.size()) {
+                            if (baseMarkerOptions.size() == placeList.size()) { // if true, we added all markers to list and can trigger thumbs ready callback
                                 callback.onNearbyBaseMarkerThumbsReady(baseMarkerOptions, explorePlacesInfo, selectedMarker, shouldTrackPosition);
                             }
                         }
                     });
             }
         }
-
         return baseMarkerOptions;
     }
 
-    private static Bitmap addRedBorder(Bitmap bmp, int borderSize, Context context) {
-        Bitmap bmpWithBorder = Bitmap.createBitmap(bmp.getWidth() + borderSize * 2, bmp.getHeight() + borderSize * 2, bmp.getConfig());
-        Canvas canvas = new Canvas(bmpWithBorder);
-        canvas.drawColor(ContextCompat.getColor(context, R.color.deleteRed));
-        canvas.drawBitmap(bmp, borderSize, borderSize, null);
-        return bmpWithBorder;
-    }
-
-    public static int dp2px(Context context, float dp) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dp * scale + 0.5F);
-    }
-    private List<Place> mediaToExplorePlace( List<Media> mediaList) {
-        List<Place> explorePlaceList = new ArrayList<>();
-        for (Media media :mediaList) {
-            explorePlaceList.add(new Place(media.getFilename(),
-                media.getFallbackDescription(),
-                media.getCoordinates(),
-                media.getCategories().toString(), // TODO make categories single string
-                new Sitelinks.Builder() // TODO add sitelinks
-                    .setCommonsLink(media.getPageTitle().getCanonicalUri())
-                    .setWikipediaLink("")
-                    .setWikidataLink("")
-                    .build(),
-                media.getImageUrl(),
-                media.getThumbUrl()));
-        }
-        return explorePlaceList;
-    }
-
-
     interface NearbyBaseMarkerThumbCallback {
+        // Callback to notify thumbnails of explore markers are added as icons and ready
         void onNearbyBaseMarkerThumbsReady(List<NearbyBaseMarker> baseMarkers, ExplorePlacesInfo explorePlacesInfo, Marker selectedMarker, boolean shouldTrackPosition);
     }
 }

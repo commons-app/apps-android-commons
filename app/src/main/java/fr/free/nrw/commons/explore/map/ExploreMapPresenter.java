@@ -162,11 +162,6 @@ public class ExploreMapPresenter
     }
 
     @Override
-    public void removeNearbyPreferences(JsonKvStore applicationKvStore) {
-
-    }
-
-    @Override
     public boolean backButtonClicked() {
         return exploreMapFragmentView.backButtonClicked();
     }
@@ -228,7 +223,6 @@ public class ExploreMapPresenter
             .loadAttractionsFromLocationToBaseMarkerOptions(explorePlacesInfo.curLatLng, // Curlatlang will be used to calculate distances
                 explorePlacesInfo.explorePlaceList,
                 exploreMapFragmentView.getContext(),
-                bookmarkLocationDao.getAllBookmarksLocations(),
                 this,
                 selectedMarker,
                 shouldTrackPosition,
