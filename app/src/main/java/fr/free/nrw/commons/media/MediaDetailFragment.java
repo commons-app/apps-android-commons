@@ -486,6 +486,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     private void onMediaRefreshed(Media media) {
+        media.setCategories(this.media.getCategories());
         this.media = media;
         setTextFields(media);
         compositeDisposable.addAll(

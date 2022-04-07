@@ -1,11 +1,11 @@
 package fr.free.nrw.commons.category
 
 import android.text.TextUtils
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.upload.GpsCategoryModel
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.utils.StringSortingUtils
 import io.reactivex.Observable
-import io.reactivex.Single
 import io.reactivex.functions.Function4
 import timber.log.Timber
 import java.util.*
@@ -20,6 +20,11 @@ class CategoriesModel @Inject constructor(
     private val gpsCategoryModel: GpsCategoryModel
 ) {
     private val selectedCategories: MutableList<CategoryItem> = mutableListOf()
+
+    /**
+     * Existing categories which are selected
+     */
+    private var selectedExistingCategories: MutableList<String> = mutableListOf()
 
     /**
      * Returns if the item contains an year
@@ -119,6 +124,27 @@ class CategoriesModel @Inject constructor(
                 }.toList().toObservable()
     }
 
+    /**
+     * Fetches details of every category by their name, converts them into
+     * CategoryItem and returns them in a list.
+     *
+     * @param categoryNames selected Categories
+     * @return List of CategoryItem
+     */
+     fun getCategoriesByName(categoryNames: List<String>):
+            Observable<MutableList<CategoryItem>>? {
+        return Observable.fromIterable(categoryNames)
+            .map { categoryName ->
+                categoryClient.getCategoriesByName(categoryName,
+                    categoryName, SEARCH_CATS_LIMIT).map {
+
+                    CategoryItem(it[0].name, it[0].description,
+                        it[0].thumbnail, it[0].isSelected)
+
+                }.blockingGet()
+            }.toList().toObservable()
+    }
+
     private fun combine(
         depictionCategories: List<CategoryItem>,
         locationCategories: List<CategoryItem>,
@@ -154,12 +180,35 @@ class CategoriesModel @Inject constructor(
      * Handles category item selection
      * @param item
      */
-    fun onCategoryItemClicked(item: CategoryItem) {
-        if (item.isSelected) {
-            selectedCategories.add(item)
-            updateCategoryCount(item)
+    fun onCategoryItemClicked(item: CategoryItem, media: Media?) {
+        if (media == null) {
+            if (item.isSelected) {
+                selectedCategories.add(item)
+                updateCategoryCount(item)
+            } else {
+                selectedCategories.remove(item)
+            }
         } else {
-            selectedCategories.remove(item)
+            if (item.isSelected) {
+                if (media.categories?.contains(item.name) == true) {
+                    selectedExistingCategories.add(item.name)
+                } else {
+                    selectedCategories.add(item)
+                    updateCategoryCount(item)
+                }
+            } else {
+                if (media.categories?.contains(item.name) == true) {
+                    selectedExistingCategories.remove(item.name)
+                    if (!media.categories?.contains(item.name)!!) {
+                        val categoriesList: MutableList<String> = ArrayList()
+                        categoriesList.add(item.name)
+                        categoriesList.addAll(media.categories!!)
+                        media.categories = categoriesList
+                    }
+                } else {
+                    selectedCategories.remove(item)
+                }
+            }
         }
     }
 
@@ -176,9 +225,28 @@ class CategoriesModel @Inject constructor(
      */
     fun cleanUp() {
         selectedCategories.clear()
+        selectedExistingCategories.clear()
     }
 
     companion object {
         const val SEARCH_CATS_LIMIT = 25
+    }
+
+    /**
+     * Provides selected existing categories
+     *
+     * @return selected existing categories
+     */
+    fun getSelectedExistingCategories(): List<String> {
+        return selectedExistingCategories
+    }
+
+    /**
+     * Initialize existing categories
+     *
+     * @param selectedExistingCategories existing categories
+     */
+    fun setSelectedExistingCategories(selectedExistingCategories: MutableList<String>) {
+        this.selectedExistingCategories = selectedExistingCategories
     }
 }

@@ -1,11 +1,14 @@
 package fr.free.nrw.commons.upload.categories
 
 import android.text.TextUtils
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.proxy
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
+import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.PublishSubject
@@ -31,6 +34,7 @@ class CategoriesPresenter @Inject constructor(
     var view = DUMMY
     private val compositeDisposable = CompositeDisposable()
     private val searchTerms = PublishSubject.create<String>()
+    private var media: Media? = null
 
     override fun onAttachView(view: CategoriesContract.View) {
         this.view = view
@@ -59,10 +63,27 @@ class CategoriesPresenter @Inject constructor(
         )
     }
 
-    private fun searchResults(term: String) =
-        repository.searchAll(term, getImageTitleList(), repository.selectedDepictions)
-            .subscribeOn(ioScheduler)
-            .map { it.filterNot { categoryItem -> repository.containsYear(categoryItem.name) } }
+    private fun searchResults(term: String): Observable<List<CategoryItem>>? {
+        if (media == null) {
+            return repository.searchAll(term, getImageTitleList(), repository.selectedDepictions)
+                .subscribeOn(ioScheduler)
+                .map { it.filterNot { categoryItem -> repository.containsYear(categoryItem.name) } }
+        } else {
+            return Observable.zip(
+                repository.getCategories(repository.selectedExistingCategories)
+                    .map { list -> list.map {
+                        CategoryItem(it.name, it.description, it.thumbnail, true)
+                    }
+                    },
+                repository.searchAll(term, getImageTitleList(), repository.selectedDepictions),
+                { it1, it2 ->
+                    it1 + it2
+                }
+            )
+                .subscribeOn(ioScheduler)
+                .map { it.filterNot { categoryItem -> repository.containsYear(categoryItem.name) } }
+        }
+    }
 
     override fun onDetachView() {
         view = DUMMY
@@ -106,6 +127,35 @@ class CategoriesPresenter @Inject constructor(
      * @param categoryItem
      */
     override fun onCategoryItemClicked(categoryItem: CategoryItem) {
-        repository.onCategoryClicked(categoryItem)
+        repository.onCategoryClicked(categoryItem, media)
+    }
+
+    override fun onAttachViewWithMedia(view: CategoriesContract.View, media: Media) {
+        this.view = view
+        this.media = media
+        repository.selectedExistingCategories = view.existingCategories
+        compositeDisposable.add(
+            searchTerms
+                .observeOn(mainThreadScheduler)
+                .doOnNext {
+                    view.showProgress(true)
+                    view.showError(null)
+                    view.setCategories(null)
+                }
+                .switchMap(::searchResults)
+                .map { repository.selectedCategories + it }
+                .map { it.distinctBy { categoryItem -> categoryItem.name } }
+                .observeOn(mainThreadScheduler)
+                .subscribe(
+                    {
+                        view.setCategories(it)
+                        view.showProgress(false)
+                        if (it.isEmpty()) {
+                            view.showError(R.string.no_categories_found)
+                        }
+                    },
+                    Timber::e
+                )
+        )
     }
 }

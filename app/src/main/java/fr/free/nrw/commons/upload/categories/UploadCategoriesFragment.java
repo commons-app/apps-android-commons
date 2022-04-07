@@ -104,7 +104,11 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
                 DialogUtil.showAlertDialog(getActivity(), getString(R.string.categories_activity_title), getString(R.string.categories_tooltip), getString(android.R.string.ok), null, true);
             }
         });
-        presenter.onAttachView(this);
+        if (media == null) {
+            presenter.onAttachView(this);
+        } else {
+            presenter.onAttachViewWithMedia(this, media);
+        }
         initRecyclerView();
         addTextChangeListenerToEtSearch();
     }
@@ -192,6 +196,14 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
                 () -> goToNextScreen(),
                 null);
 
+    }
+
+    /**
+     * Gets existing categories from media
+     */
+    @Override
+    public List<String> getExistingCategories() {
+        return (media == null) ? null : media.getCategories();
     }
 
     @OnClick(R.id.btn_next)
