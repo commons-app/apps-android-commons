@@ -2,7 +2,7 @@ package fr.free.nrw.commons.media;
 
 import com.google.gson.annotations.SerializedName;
 
-import fr.free.nrw.commons.data.models.media.Caption;
+import fr.free.nrw.commons.media.media.Caption;
 import java.util.Map;
 
 

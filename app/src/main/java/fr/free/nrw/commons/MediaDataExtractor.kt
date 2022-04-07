@@ -2,7 +2,7 @@ package fr.free.nrw.commons
 
 import androidx.core.text.HtmlCompat
 import fr.free.nrw.commons.media.PAGE_ID_PREFIX
-import fr.free.nrw.commons.data.models.media.IdAndCaptions
+import fr.free.nrw.commons.media.media.IdAndCaptions
 import fr.free.nrw.commons.media.MediaClient
 import io.reactivex.Single
 import timber.log.Timber
