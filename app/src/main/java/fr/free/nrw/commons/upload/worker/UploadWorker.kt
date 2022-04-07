@@ -21,7 +21,7 @@ import fr.free.nrw.commons.contributions.ChunkInfo
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.contributions.MainActivity
-import fr.free.nrw.commons.data.models.customselector.UploadedStatus
+import fr.free.nrw.commons.customselector.models.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.media.MediaClient

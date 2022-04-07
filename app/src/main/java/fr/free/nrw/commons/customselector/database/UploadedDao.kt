@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.customselector.database
 
 import androidx.room.*
-import fr.free.nrw.commons.data.models.customselector.UploadedStatus
+import fr.free.nrw.commons.customselector.models.UploadedStatus
 import java.util.*
 
 /**

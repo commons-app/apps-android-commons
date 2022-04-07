@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
-import fr.free.nrw.commons.data.models.customselector.UploadedStatus
+import fr.free.nrw.commons.customselector.models.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.upload.depicts.Depicts
 import fr.free.nrw.commons.upload.depicts.DepictsDao

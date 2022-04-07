@@ -11,8 +11,8 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
-import fr.free.nrw.commons.data.models.customselector.Folder
-import fr.free.nrw.commons.data.models.customselector.Image
+import fr.free.nrw.commons.customselector.models.Folder
+import fr.free.nrw.commons.customselector.models.Image
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity
 import org.junit.Before
 import org.junit.Test

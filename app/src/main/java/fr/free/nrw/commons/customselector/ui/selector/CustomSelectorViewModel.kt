@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import fr.free.nrw.commons.customselector.listeners.ImageLoaderListener
-import fr.free.nrw.commons.data.models.customselector.CallbackStatus
-import fr.free.nrw.commons.data.models.customselector.Image
-import fr.free.nrw.commons.data.models.customselector.Result
+import fr.free.nrw.commons.customselector.models.CallbackStatus
+import fr.free.nrw.commons.customselector.models.Image
+import fr.free.nrw.commons.customselector.models.Result
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel

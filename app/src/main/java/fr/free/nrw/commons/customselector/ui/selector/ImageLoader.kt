@@ -3,9 +3,9 @@ package fr.free.nrw.commons.customselector.ui.selector
 import android.content.Context
 import android.net.Uri
 import androidx.exifinterface.media.ExifInterface
-import fr.free.nrw.commons.data.models.customselector.UploadedStatus
+import fr.free.nrw.commons.customselector.models.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
-import fr.free.nrw.commons.data.models.customselector.Image
+import fr.free.nrw.commons.customselector.models.Image
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter.ImageViewHolder
 import fr.free.nrw.commons.filepicker.PickedFiles
 import fr.free.nrw.commons.media.MediaClient

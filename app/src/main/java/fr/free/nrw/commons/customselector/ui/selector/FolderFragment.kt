@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.helper.ImageHelper
-import fr.free.nrw.commons.data.models.customselector.Result
+import fr.free.nrw.commons.customselector.models.Result
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
-import fr.free.nrw.commons.data.models.customselector.CallbackStatus
-import fr.free.nrw.commons.data.models.customselector.Folder
+import fr.free.nrw.commons.customselector.models.CallbackStatus
+import fr.free.nrw.commons.customselector.models.Folder
 import fr.free.nrw.commons.customselector.ui.adapter.FolderAdapter
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.media.MediaClient

@@ -4,7 +4,7 @@ import android.content.ContentUris
 import android.content.Context
 import android.provider.MediaStore
 import fr.free.nrw.commons.customselector.listeners.ImageLoaderListener
-import fr.free.nrw.commons.data.models.customselector.Image
+import fr.free.nrw.commons.customselector.models.Image
 import kotlinx.coroutines.*
 import java.io.File
 import kotlin.coroutines.CoroutineContext

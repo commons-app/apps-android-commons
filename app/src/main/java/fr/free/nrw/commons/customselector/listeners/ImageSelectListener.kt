@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.customselector.listeners
 
 import android.net.Uri
-import fr.free.nrw.commons.data.models.customselector.Image
+import fr.free.nrw.commons.customselector.models.Image
 
 /**
  * Custom selector Image select listener

@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.data.models.customselector
+package fr.free.nrw.commons.customselector.models
 
 import android.net.Uri
 import android.os.Parcel

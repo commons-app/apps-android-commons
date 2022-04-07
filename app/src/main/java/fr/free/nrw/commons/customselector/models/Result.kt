@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.data.models.customselector
+package fr.free.nrw.commons.customselector.models
 
 /**
  * Custom selector data class Result.
