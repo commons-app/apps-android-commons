@@ -3,7 +3,7 @@ package fr.free.nrw.commons.contributions
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import fr.free.nrw.commons.data.models.Contribution
+import fr.free.nrw.commons.contributions.models.Contribution
 import fr.free.nrw.commons.utils.createMockDataSourceFactory
 import io.reactivex.Scheduler
 import io.reactivex.Single

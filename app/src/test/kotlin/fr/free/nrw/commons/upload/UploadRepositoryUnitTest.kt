@@ -3,7 +3,7 @@ package fr.free.nrw.commons.upload
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.category.CategoriesModel
 import fr.free.nrw.commons.category.CategoryItem
-import fr.free.nrw.commons.data.models.Contribution
+import fr.free.nrw.commons.contributions.models.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.location.LatLng

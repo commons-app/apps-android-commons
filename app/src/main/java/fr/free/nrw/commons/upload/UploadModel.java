@@ -3,7 +3,7 @@ package fr.free.nrw.commons.upload;
 import android.content.Context;
 import android.net.Uri;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.data.models.Contribution;
+import fr.free.nrw.commons.contributions.models.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Place;

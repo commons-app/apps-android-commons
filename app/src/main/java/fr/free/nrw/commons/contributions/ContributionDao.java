@@ -9,7 +9,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Transaction;
 import androidx.room.Update;
-import fr.free.nrw.commons.data.models.Contribution;
+import fr.free.nrw.commons.contributions.models.Contribution;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import java.util.Calendar;

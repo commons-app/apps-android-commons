@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.contributions
 
 import androidx.paging.ItemKeyedDataSource
-import fr.free.nrw.commons.data.models.Contribution
+import fr.free.nrw.commons.contributions.models.Contribution
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.media.MediaClient
 import io.reactivex.Scheduler

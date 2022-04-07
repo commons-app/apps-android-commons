@@ -2,7 +2,7 @@ package fr.free.nrw.commons.upload
 
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.CommonsApplication
-import fr.free.nrw.commons.data.models.Contribution
+import fr.free.nrw.commons.contributions.models.Contribution
 import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.repository.UploadRepository

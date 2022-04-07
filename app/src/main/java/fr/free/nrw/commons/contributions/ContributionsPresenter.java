@@ -5,7 +5,7 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.contributions.ContributionsContract.UserActionListener;
-import fr.free.nrw.commons.data.models.Contribution;
+import fr.free.nrw.commons.contributions.models.Contribution;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.upload.worker.UploadWorker;
 import io.reactivex.Scheduler;

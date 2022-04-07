@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.contributions;
 
 import androidx.paging.DataSource.Factory;
-import fr.free.nrw.commons.data.models.Contribution;
+import fr.free.nrw.commons.contributions.models.Contribution;
 import io.reactivex.Completable;
 import java.util.ArrayList;
 import java.util.List;

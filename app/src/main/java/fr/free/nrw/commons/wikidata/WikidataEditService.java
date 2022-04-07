@@ -8,7 +8,7 @@ import android.content.Context;
 import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.data.models.Contribution;
+import fr.free.nrw.commons.contributions.models.Contribution;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.upload.UploadResult;
 import fr.free.nrw.commons.upload.WikidataItem;
