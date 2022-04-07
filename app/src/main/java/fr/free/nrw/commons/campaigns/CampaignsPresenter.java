@@ -2,7 +2,7 @@ package fr.free.nrw.commons.campaigns;
 
 import android.annotation.SuppressLint;
 
-import fr.free.nrw.commons.data.models.Campaign;
+import fr.free.nrw.commons.campaigns.models.Campaign;
 import java.text.ParseException;
 import java.util.Collections;
 import java.util.Date;
