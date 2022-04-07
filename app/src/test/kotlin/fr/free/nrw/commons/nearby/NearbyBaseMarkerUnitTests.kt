@@ -2,7 +2,7 @@ package fr.free.nrw.commons.nearby
 
 import android.os.Parcel
 import com.mapbox.mapboxsdk.annotations.Icon
-import fr.free.nrw.commons.data.models.nearby.Place
+import fr.free.nrw.commons.nearby.models.Place
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test

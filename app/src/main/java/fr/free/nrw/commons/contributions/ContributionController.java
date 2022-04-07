@@ -13,7 +13,7 @@ import fr.free.nrw.commons.filepicker.FilePicker;
 import fr.free.nrw.commons.filepicker.FilePicker.ImageSource;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.data.models.nearby.Place;
+import fr.free.nrw.commons.nearby.models.Place;
 import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;

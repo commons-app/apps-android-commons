@@ -6,7 +6,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.data.models.nearby.Label
+import fr.free.nrw.commons.nearby.models.Label
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test

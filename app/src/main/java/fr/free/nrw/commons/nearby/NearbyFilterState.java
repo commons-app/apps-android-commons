@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
-import fr.free.nrw.commons.data.models.nearby.Label;
+import fr.free.nrw.commons.nearby.models.Label;
 import java.util.ArrayList;
 
 public class NearbyFilterState {

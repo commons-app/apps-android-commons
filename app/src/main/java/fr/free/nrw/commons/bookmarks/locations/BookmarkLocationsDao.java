@@ -18,9 +18,9 @@ import javax.inject.Named;
 import javax.inject.Provider;
 
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.data.models.nearby.Label;
-import fr.free.nrw.commons.data.models.nearby.Place;
-import fr.free.nrw.commons.data.models.nearby.Sitelinks;
+import fr.free.nrw.commons.nearby.models.Label;
+import fr.free.nrw.commons.nearby.models.Place;
+import fr.free.nrw.commons.nearby.models.Sitelinks;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsContentProvider.BASE_URI;

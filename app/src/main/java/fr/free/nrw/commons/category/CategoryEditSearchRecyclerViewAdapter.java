@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter.RecyclerViewHolder;
-import fr.free.nrw.commons.data.models.nearby.Label;
+import fr.free.nrw.commons.nearby.models.Label;
 import java.util.ArrayList;
 import java.util.List;
 

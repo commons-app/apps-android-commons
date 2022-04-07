@@ -29,8 +29,8 @@ import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.contributions.MainActivity
-import fr.free.nrw.commons.data.models.nearby.Label
-import fr.free.nrw.commons.data.models.nearby.Place
+import fr.free.nrw.commons.nearby.models.Label
+import fr.free.nrw.commons.nearby.models.Place
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType

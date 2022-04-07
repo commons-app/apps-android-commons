@@ -26,7 +26,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import fr.free.nrw.commons.data.models.nearby.Place
+import fr.free.nrw.commons.nearby.models.Place
 import fr.free.nrw.commons.upload.ImageCoordinates
 import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadItem

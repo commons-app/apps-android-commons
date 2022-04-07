@@ -10,9 +10,9 @@ import java.util.List;
 
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.data.models.nearby.Label;
+import fr.free.nrw.commons.nearby.models.Label;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
-import fr.free.nrw.commons.data.models.nearby.Place;
+import fr.free.nrw.commons.nearby.models.Place;
 
 public interface NearbyParentFragmentContract {
 

@@ -5,9 +5,9 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.eq
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.data.models.nearby.Label
-import fr.free.nrw.commons.data.models.nearby.Place
-import fr.free.nrw.commons.data.models.nearby.Sitelinks
+import fr.free.nrw.commons.nearby.models.Label
+import fr.free.nrw.commons.nearby.models.Place
+import fr.free.nrw.commons.nearby.models.Sitelinks
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.NearbyController.loadAttractionsFromLocationToBaseMarkerOptions
 import fr.free.nrw.commons.nearby.NearbyController.updateMarkerLabelListBookmark

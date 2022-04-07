@@ -56,7 +56,7 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
-import fr.free.nrw.commons.data.models.nearby.Place;
+import fr.free.nrw.commons.nearby.models.Place;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.upload.worker.UploadWorker;
 import fr.free.nrw.commons.utils.ConfigUtils;

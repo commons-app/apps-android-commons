@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.nearby;
 
 import com.mapbox.mapboxsdk.annotations.Marker;
-import fr.free.nrw.commons.data.models.nearby.Place;
+import fr.free.nrw.commons.nearby.models.Place;
 
 public class NearbyMarker extends Marker {
     private final Place place;

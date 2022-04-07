@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.data.models.nearby;
+package fr.free.nrw.commons.nearby.models;
 
 import android.net.Uri;
 import android.os.Parcel;
@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
 
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.data.models.nearby.model.NearbyResultItem;
+import fr.free.nrw.commons.nearby.models.model.NearbyResultItem;
 import fr.free.nrw.commons.utils.PlaceUtils;
 import timber.log.Timber;
 

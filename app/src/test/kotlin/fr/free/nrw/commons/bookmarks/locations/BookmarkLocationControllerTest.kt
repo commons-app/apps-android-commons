@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.bookmarks.locations
 
 import com.nhaarman.mockitokotlin2.whenever
-import fr.free.nrw.commons.data.models.nearby.Place
+import fr.free.nrw.commons.nearby.models.Place
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test

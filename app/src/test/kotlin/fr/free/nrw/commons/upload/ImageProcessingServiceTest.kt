@@ -3,7 +3,7 @@ package fr.free.nrw.commons.upload
 import android.net.Uri
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.media.MediaClient
-import fr.free.nrw.commons.data.models.nearby.Place
+import fr.free.nrw.commons.nearby.models.Place
 import fr.free.nrw.commons.utils.ImageUtils
 import fr.free.nrw.commons.utils.ImageUtilsWrapper
 import io.reactivex.Single

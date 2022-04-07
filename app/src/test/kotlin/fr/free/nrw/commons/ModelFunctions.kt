@@ -3,9 +3,9 @@ import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.location.LatLng
-import fr.free.nrw.commons.data.models.nearby.Label
-import fr.free.nrw.commons.data.models.nearby.Place
-import fr.free.nrw.commons.data.models.nearby.Sitelinks
+import fr.free.nrw.commons.nearby.models.Label
+import fr.free.nrw.commons.nearby.models.Place
+import fr.free.nrw.commons.nearby.models.Sitelinks
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.wikidata.model.DepictSearchItem
 import org.wikipedia.wikidata.*

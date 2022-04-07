@@ -8,7 +8,7 @@ import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.NearbyPlaces
-import fr.free.nrw.commons.data.models.nearby.Place
+import fr.free.nrw.commons.nearby.models.Place
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.structure.depictions.DepictModel
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem

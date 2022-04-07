@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.nearby.fragments
 
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
-import fr.free.nrw.commons.data.models.nearby.Place
+import fr.free.nrw.commons.nearby.models.Place
 import fr.free.nrw.commons.nearby.placeAdapterDelegate
 import fr.free.nrw.commons.upload.categories.BaseDelegateAdapter
 

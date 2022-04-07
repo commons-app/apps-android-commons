@@ -4,7 +4,7 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import fr.free.nrw.commons.category.CategoryItem
-import fr.free.nrw.commons.data.models.nearby.Place
+import fr.free.nrw.commons.nearby.models.Place
 import fr.free.nrw.commons.upload.WikidataItem
 import fr.free.nrw.commons.wikidata.WikidataProperties
 import fr.free.nrw.commons.wikidata.WikidataProperties.*

@@ -38,7 +38,7 @@ import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.UserClient;
-import fr.free.nrw.commons.data.models.nearby.Place;
+import fr.free.nrw.commons.nearby.models.Place;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
 import fr.free.nrw.commons.upload.depicts.DepictsFragment;

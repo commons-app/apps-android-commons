@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.nearby;
 
 import com.mapbox.mapboxsdk.annotations.Marker;
-import fr.free.nrw.commons.data.models.nearby.Place;
+import fr.free.nrw.commons.nearby.models.Place;
 
 /**
  * This class groups visual map item Marker with the reated data of displayed place and information

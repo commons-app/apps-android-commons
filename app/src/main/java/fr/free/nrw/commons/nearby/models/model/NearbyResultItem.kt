@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.data.models.nearby.model
+package fr.free.nrw.commons.nearby.models.model
 
 import com.google.gson.annotations.SerializedName
 

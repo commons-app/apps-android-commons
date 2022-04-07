@@ -33,7 +33,7 @@ import fr.free.nrw.commons.navtab.MoreBottomSheetLoggedOutFragment;
 import fr.free.nrw.commons.navtab.NavTab;
 import fr.free.nrw.commons.navtab.NavTabLayout;
 import fr.free.nrw.commons.navtab.NavTabLoggedOut;
-import fr.free.nrw.commons.data.models.nearby.Place;
+import fr.free.nrw.commons.nearby.models.Place;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.NearbyParentFragmentInstanceReadyCallback;
 import fr.free.nrw.commons.notification.NotificationActivity;

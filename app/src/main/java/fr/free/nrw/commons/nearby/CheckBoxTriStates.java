@@ -7,7 +7,7 @@ import android.widget.CompoundButton;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatCheckBox;
 
-import fr.free.nrw.commons.data.models.nearby.Label;
+import fr.free.nrw.commons.nearby.models.Label;
 import java.util.List;
 
 import fr.free.nrw.commons.R;

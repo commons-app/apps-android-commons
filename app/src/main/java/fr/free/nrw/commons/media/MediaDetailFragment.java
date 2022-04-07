@@ -81,7 +81,7 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
-import fr.free.nrw.commons.data.models.nearby.Label;
+import fr.free.nrw.commons.nearby.models.Label;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.upload.UploadMediaDetail;

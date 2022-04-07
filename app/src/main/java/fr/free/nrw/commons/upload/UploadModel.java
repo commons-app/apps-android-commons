@@ -6,7 +6,7 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.data.models.nearby.Place;
+import fr.free.nrw.commons.nearby.models.Place;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import io.reactivex.Observable;
