@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.data.models.location;
+package fr.free.nrw.commons.location.models;
 
 import android.location.Location;
 import android.net.Uri;

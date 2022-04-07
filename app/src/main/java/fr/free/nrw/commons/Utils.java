@@ -24,7 +24,7 @@ import org.wikipedia.page.PageTitle;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-import fr.free.nrw.commons.data.models.location.LatLng;
+import fr.free.nrw.commons.location.models.LatLng;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;

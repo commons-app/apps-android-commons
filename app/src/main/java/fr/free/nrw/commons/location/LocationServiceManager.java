@@ -10,7 +10,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
-import fr.free.nrw.commons.data.models.location.LatLng;
+import fr.free.nrw.commons.location.models.LatLng;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

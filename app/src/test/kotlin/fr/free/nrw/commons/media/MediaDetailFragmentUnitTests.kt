@@ -24,7 +24,7 @@ import org.robolectric.Shadows.shadowOf
 import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter
 import fr.free.nrw.commons.explore.SearchActivity
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import fr.free.nrw.commons.data.models.location.LatLng
+import fr.free.nrw.commons.location.models.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.ui.widget.HtmlTextView
 import org.junit.Assert

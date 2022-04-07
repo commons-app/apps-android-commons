@@ -9,7 +9,7 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.actions.PageEditClient;
-import fr.free.nrw.commons.data.models.location.LatLng;
+import fr.free.nrw.commons.location.models.LatLng;
 import fr.free.nrw.commons.notification.NotificationHelper;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Observable;

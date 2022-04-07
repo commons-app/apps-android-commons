@@ -48,7 +48,7 @@ import fr.free.nrw.commons.contributions.ContributionsListFragment.Callback;
 import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.data.models.location.LatLng;
+import fr.free.nrw.commons.location.models.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;

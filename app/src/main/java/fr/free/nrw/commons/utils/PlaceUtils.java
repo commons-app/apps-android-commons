@@ -3,7 +3,7 @@ package fr.free.nrw.commons.utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import fr.free.nrw.commons.data.models.location.LatLng;
+import fr.free.nrw.commons.location.models.LatLng;
 
 public class PlaceUtils {
 

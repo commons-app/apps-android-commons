@@ -3,7 +3,7 @@ package fr.free.nrw.commons.nearby
 import com.mapbox.mapboxsdk.annotations.Marker
 import com.nhaarman.mockitokotlin2.*
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
-import fr.free.nrw.commons.data.models.location.LatLng
+import fr.free.nrw.commons.location.models.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter

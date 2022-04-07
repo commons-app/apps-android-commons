@@ -282,7 +282,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      */
     public void showInMap(){
         Utils.handleGeoCoordinates(this,
-            new fr.free.nrw.commons.data.models.location.LatLng(cameraPosition.target.getLatitude(),
+            new fr.free.nrw.commons.location.models.LatLng(cameraPosition.target.getLatitude(),
                 cameraPosition.target.getLongitude(), 0.0f));
     }
 

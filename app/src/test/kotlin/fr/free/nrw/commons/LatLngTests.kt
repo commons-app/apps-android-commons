@@ -1,6 +1,6 @@
 package fr.free.nrw.commons
 
-import fr.free.nrw.commons.data.models.location.LatLng
+import fr.free.nrw.commons.location.models.LatLng
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

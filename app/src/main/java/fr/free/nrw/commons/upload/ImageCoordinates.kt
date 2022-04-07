@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.upload
 
 import androidx.exifinterface.media.ExifInterface
-import fr.free.nrw.commons.data.models.location.LatLng
+import fr.free.nrw.commons.location.models.LatLng
 import timber.log.Timber
 import java.io.IOException
 import java.io.InputStream

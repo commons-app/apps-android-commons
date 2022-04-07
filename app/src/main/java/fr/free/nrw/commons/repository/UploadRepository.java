@@ -6,7 +6,7 @@ import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.filepicker.UploadableFile;
-import fr.free.nrw.commons.data.models.location.LatLng;
+import fr.free.nrw.commons.location.models.LatLng;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.ImageCoordinates;

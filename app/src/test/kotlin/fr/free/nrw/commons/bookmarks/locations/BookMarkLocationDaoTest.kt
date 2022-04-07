@@ -11,7 +11,7 @@ import com.nhaarman.mockitokotlin2.*
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsContentProvider.BASE_URI
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao.Table.*
-import fr.free.nrw.commons.data.models.location.LatLng
+import fr.free.nrw.commons.location.models.LatLng
 import fr.free.nrw.commons.nearby.Label
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.Sitelinks
