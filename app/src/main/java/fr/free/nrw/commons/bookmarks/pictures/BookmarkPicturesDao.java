@@ -16,7 +16,7 @@ import javax.inject.Named;
 import javax.inject.Provider;
 import javax.inject.Singleton;
 
-import fr.free.nrw.commons.data.models.Bookmark;
+import fr.free.nrw.commons.bookmarks.models.Bookmark;
 
 import static fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider.BASE_URI;
 

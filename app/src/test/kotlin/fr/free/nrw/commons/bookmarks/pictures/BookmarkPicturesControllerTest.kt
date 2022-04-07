@@ -3,7 +3,7 @@ package fr.free.nrw.commons.bookmarks.pictures
 import android.net.Uri
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.data.models.Bookmark
+import fr.free.nrw.commons.bookmarks.models.Bookmark
 import fr.free.nrw.commons.media.MediaClient
 import io.reactivex.Single
 import media
