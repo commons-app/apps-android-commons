@@ -137,10 +137,17 @@ class CategoriesModel @Inject constructor(
             .map { categoryName ->
                 categoryClient.getCategoriesByName(categoryName,
                     categoryName, SEARCH_CATS_LIMIT).map {
-
-                    CategoryItem(it[0].name, it[0].description,
-                        it[0].thumbnail, it[0].isSelected)
-
+                    if(it.isNotEmpty()) {
+                        CategoryItem(
+                            it[0].name, it[0].description,
+                            it[0].thumbnail, it[0].isSelected
+                        )
+                    } else {
+                        CategoryItem(
+                            "Hidden", "Hidden",
+                            "hidden", false
+                        )
+                    }
                 }.blockingGet()
             }.toList().toObservable()
     }

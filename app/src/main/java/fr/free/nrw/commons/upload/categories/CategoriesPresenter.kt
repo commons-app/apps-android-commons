@@ -82,6 +82,7 @@ class CategoriesPresenter @Inject constructor(
             )
                 .subscribeOn(ioScheduler)
                 .map { it.filterNot { categoryItem -> repository.containsYear(categoryItem.name) } }
+                .map { it.filterNot { categoryItem -> categoryItem.thumbnail == "hidden" } }
         }
     }
 
