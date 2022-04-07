@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.data.models.notification
+package fr.free.nrw.commons.notification.models
 
 import org.wikipedia.util.DateUtil
 
