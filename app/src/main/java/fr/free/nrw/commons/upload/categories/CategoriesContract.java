@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload.categories;
 
+import android.content.Context;
 import androidx.annotation.NonNull;
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.Media;
@@ -30,6 +31,26 @@ public interface CategoriesContract {
          */
         List<String> getExistingCategories();
 
+        /**
+         * Returns required context
+         */
+        Context getFragmentContext();
+
+        /**
+         * Returns to previous fragment
+         */
+        void goBackToPreviousScreen();
+
+        /**
+         * Shows the progress dialog
+         */
+        void showProgressDialog();
+
+        /**
+         * Hides the progress dialog
+         */
+        void dismissProgressDialog();
+
     }
 
     interface UserActionListener extends BasePresenter<View> {
@@ -44,6 +65,16 @@ public interface CategoriesContract {
          * Attaches view and media
          */
         void onAttachViewWithMedia(@NonNull CategoriesContract.View view, Media media);
+
+        /**
+         * Clears previous selections
+         */
+        void clearPreviousSelection();
+
+        /**
+         * Update the categories
+         */
+        void updateCategories(Media media);
     }
 
 

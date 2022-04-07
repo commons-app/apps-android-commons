@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.upload.categories;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.KeyEvent;
@@ -66,6 +68,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     private UploadCategoryAdapter adapter;
     private Disposable subscribe;
     private Media media;
+    private ProgressDialog progressDialog;
 
     @Nullable
     @Override
@@ -188,13 +191,18 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
 
     @Override
     public void showNoCategorySelected() {
-        DialogUtil.showAlertDialog(getActivity(),
+        if (media == null) {
+            DialogUtil.showAlertDialog(getActivity(),
                 getString(R.string.no_categories_selected),
                 getString(R.string.no_categories_selected_warning_desc),
                 getString(R.string.continue_message),
                 getString(R.string.cancel),
                 () -> goToNextScreen(),
                 null);
+        } else {
+            presenter.clearPreviousSelection();
+            goBackToPreviousScreen();
+        }
 
     }
 
@@ -206,14 +214,57 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         return (media == null) ? null : media.getCategories();
     }
 
+    /**
+     * Returns required context
+     */
+    @Override
+    public Context getFragmentContext() {
+        return requireContext();
+    }
+
+    /**
+     * Returns to previous fragment
+     */
+    @Override
+    public void goBackToPreviousScreen() {
+        getFragmentManager().popBackStack();
+    }
+
+    /**
+     * Shows the progress dialog
+     */
+    @Override
+    public void showProgressDialog() {
+        progressDialog = new ProgressDialog(requireContext());
+        progressDialog.setMessage(getString(R.string.please_wait));
+        progressDialog.show();
+    }
+
+    /**
+     * Hides the progress dialog
+     */
+    @Override
+    public void dismissProgressDialog() {
+        progressDialog.dismiss();
+    }
+
     @OnClick(R.id.btn_next)
     public void onNextButtonClicked() {
-        presenter.verifyCategories();
+        if (media != null) {
+            presenter.updateCategories(media);
+        } else {
+            presenter.verifyCategories();
+        }
     }
 
     @OnClick(R.id.btn_previous)
     public void onPreviousButtonClicked() {
-        callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
+        if (media != null) {
+            presenter.clearPreviousSelection();
+            goBackToPreviousScreen();
+        } else {
+            callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
+        }
     }
 
     @Override

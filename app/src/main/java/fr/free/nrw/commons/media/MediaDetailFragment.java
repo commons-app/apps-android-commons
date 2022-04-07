@@ -1134,7 +1134,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     public void updateCategories(List<String> selectedCategories) {
-        compositeDisposable.add(categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories, this)
+        compositeDisposable.add(categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(s -> {

@@ -3,14 +3,16 @@ package fr.free.nrw.commons.upload.categories
 import android.text.TextUtils
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.category.CategoryEditHelper
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.proxy
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import io.reactivex.Observable
 import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import timber.log.Timber
 import javax.inject.Inject
@@ -35,6 +37,8 @@ class CategoriesPresenter @Inject constructor(
     private val compositeDisposable = CompositeDisposable()
     private val searchTerms = PublishSubject.create<String>()
     private var media: Media? = null
+    @Inject
+    lateinit var categoryEditHelper: CategoryEditHelper
 
     override fun onAttachView(view: CategoriesContract.View) {
         this.view = view
@@ -158,5 +162,44 @@ class CategoriesPresenter @Inject constructor(
                     Timber::e
                 )
         )
+    }
+
+    override fun clearPreviousSelection() {
+        repository.cleanup()
+    }
+
+    override fun updateCategories(media: Media) {
+        if (repository.selectedCategories.isNotEmpty()
+            || repository.selectedExistingCategories.size != view.existingCategories.size
+        ) {
+            val selectedCategories: MutableList<String> =
+                (repository.selectedCategories.map { it.name }.toMutableList()
+                        + repository.selectedExistingCategories).toMutableList()
+
+            if (selectedCategories.isNotEmpty()) {
+                view.showProgressDialog()
+                compositeDisposable.add(
+                    categoryEditHelper.makeCategoryEdit(view.fragmentContext, media, selectedCategories)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({
+                            Timber.d("Categories are added.")
+                            media.addedCategories = selectedCategories
+                            repository.cleanup()
+                            view.dismissProgressDialog()
+                            view.goBackToPreviousScreen()
+                        })
+                        {
+                            Timber.e(
+                                "Failed to update depictions"
+                            )
+                        }
+                )
+
+            }
+        } else {
+            repository.cleanup()
+            view.showNoCategorySelected()
+        }
     }
 }
