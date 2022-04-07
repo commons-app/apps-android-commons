@@ -9,7 +9,7 @@ import android.os.RemoteException;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import fr.free.nrw.commons.data.models.Category;
+import fr.free.nrw.commons.category.models.Category;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

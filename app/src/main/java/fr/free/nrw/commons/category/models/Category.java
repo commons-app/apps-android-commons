@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.data.models;
+package fr.free.nrw.commons.category.models;
 
 import android.net.Uri;
 

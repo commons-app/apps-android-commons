@@ -11,7 +11,7 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.category.CategoryContentProvider.BASE_URI
 import fr.free.nrw.commons.category.CategoryContentProvider.uriForId
 import fr.free.nrw.commons.category.CategoryDao.Table.*
-import fr.free.nrw.commons.data.models.Category
+import fr.free.nrw.commons.category.models.Category
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test

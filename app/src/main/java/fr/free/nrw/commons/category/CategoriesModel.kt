@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.category
 
 import android.text.TextUtils
-import fr.free.nrw.commons.data.models.Category
+import fr.free.nrw.commons.category.models.Category
 import fr.free.nrw.commons.upload.GpsCategoryModel
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.utils.StringSortingUtils
