@@ -17,6 +17,7 @@
 * TheGabrielZaum
 * Tks4Fish
 * Tuliouel
+* YuriNikolai
 -->
 <resources>
   <plurals name="uploads_pending_notification_indicator">
@@ -624,4 +625,9 @@
   <string name="wlm_month_message">Estamos no mês no Wiki Loves Monuments!</string>
   <string name="learn_more">SABER MAIS</string>
   <string name="wlm_campaign_description">O Wiki Loves Monuments é um concurso internacional organizado pela Wikimedia sobre fotografias de monumentos</string>
+  <string name="api_level">Nível da API</string>
+  <string name="android_version">Versão do Android</string>
+  <string name="device_manufacturer">Fabricante do aparelho</string>
+  <string name="device_model">Modelo do aparelho</string>
+  <string name="device_name">Nome do aparelho</string>
 </resources>

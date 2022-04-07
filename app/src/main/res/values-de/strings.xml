@@ -453,7 +453,7 @@
   <string name="review_thanks_yes_button_text">Nächstes Bild</string>
   <string name="review_thanks_no_button_text">Ja, warum nicht</string>
   <string name="skip_image_explanation">Das Anklicken dieser Schaltfläche gibt dir ein anderes kürzlich hochgeladenes Bild von Wikimedia Commons</string>
-  <string name="review_image_explanation" fuzzy="true">Du kannst Bilder überprüfen und die Qualität von Wikimedia Commons verbessern.\nDie vier Parameter der Überprüfung sind: \n- Ist dieses Bild im Geltungsbereich? \n- Folgt dieses Bild den Regeln des Urheberrechts? \n- Ist dieses Bild korrekt kategorisiert? \n- Falls alles gut geht, kannst du auch dem Beitrager danken.</string>
+  <string name="review_image_explanation">Du kannst Bilder überprüfen, um die Qualität von Wikimedia Commons zu verbessern.\nDie drei Parameter der Überprüfung sind:\n\n- Ist dieses Bild im Projektbereich?\nWenn du auf Nein (außerhalb des Projektsbereich) tippst, fügen diesem Bild eine Vorlage für eine Löschung hinzu.\n\n- Entspricht das Bild den Regeln des Urheberrechts?\nWenn du auf Nein (entspricht nicht dem Urheberrecht) tippst, füge diesem Bild eine Löschvorlage hinzu.\n\n- Ist dieses Bild richtig kategorisiert?\nWenn du auf Nein (nicht korrekt kategorisiert) tippst, füge diesem Bild eine Vorlage für einen Kategorisierungswunsch hinzu.\n\nWenn alles in Ordnung ist, wird dem Bild keine Vorlage hinzugefügt und du erhältst die Möglichkeit, sich bei dem Urheber zu bedanken.</string>
   <string name="no_image">Keine Bilder verwendet</string>
   <string name="no_image_reverted">Keine Bilder zurückgesetzt</string>
   <string name="no_image_uploaded">Keine Bilder hochgeladen</string>
