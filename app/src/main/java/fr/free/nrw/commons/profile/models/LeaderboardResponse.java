@@ -1,6 +1,5 @@
-package fr.free.nrw.commons.data.models.profile;
+package fr.free.nrw.commons.profile.models;
 
-import fr.free.nrw.commons.data.models.profile.LeaderboardList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

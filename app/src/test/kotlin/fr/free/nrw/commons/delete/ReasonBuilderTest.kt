@@ -6,8 +6,8 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.profile.achievements.FeedbackResponse
-import fr.free.nrw.commons.data.models.profile.LeaderboardResponse
-import fr.free.nrw.commons.data.models.profile.UpdateAvatarResponse
+import fr.free.nrw.commons.profile.models.LeaderboardResponse
+import fr.free.nrw.commons.profile.models.UpdateAvatarResponse
 import fr.free.nrw.commons.utils.ViewUtilWrapper
 import io.reactivex.Observable
 import io.reactivex.Single

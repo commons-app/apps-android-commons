@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.data.models.profile.LeaderboardList;
+import fr.free.nrw.commons.profile.models.LeaderboardList;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import io.reactivex.disposables.CompositeDisposable;
 

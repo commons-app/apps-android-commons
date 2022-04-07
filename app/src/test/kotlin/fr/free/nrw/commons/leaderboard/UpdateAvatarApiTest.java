@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.leaderboard;
 
 import com.google.gson.Gson;
-import fr.free.nrw.commons.data.models.profile.UpdateAvatarResponse;
+import fr.free.nrw.commons.profile.models.UpdateAvatarResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

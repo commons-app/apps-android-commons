@@ -29,7 +29,7 @@ import com.dinuscxj.progressbar.CircleProgressBar;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.data.models.profile.Achievements;
+import fr.free.nrw.commons.profile.models.Achievements;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.utils.ConfigUtils;
