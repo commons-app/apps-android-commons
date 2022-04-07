@@ -48,8 +48,8 @@
     <item quantity="other">%d بارگذاری</item>
   </plurals>
   <plurals name="share_license_summary">
-    <item quantity="one">این نگاره تحت مجوز %1$s است</item>
-    <item quantity="other">این نگاره تحت مجوز %1$s است</item>
+    <item quantity="one">این تصویر تحت مجوز %1$s است</item>
+    <item quantity="other">این تصویر تحت مجوز %1$s است</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d بارگذاری</item>
@@ -75,7 +75,7 @@
   <string name="login_success">ورود موفق!</string>
   <string name="login_failed">ورود ناموفق!</string>
   <string name="upload_failed">پرونده یافت نشد لطفاً پرونده دیگری را امتحان کنید.</string>
-  <string name="authentication_failed">تأیید اعتبار انجام نشد! لطفاً دوباره وارد شوید.</string>
+  <string name="authentication_failed">تأیید اعتبار ناموفق بود! لطفاً دوباره وارد شوید.</string>
   <string name="uploading_started">بارگذاری آغاز شد!</string>
   <string name="upload_completed_notification_title">%1$s بارگذاری شد!</string>
   <string name="upload_completed_notification_text">برای دیدن بارگذاریتان بر روی صفحه انگشت بزنید</string>
@@ -103,7 +103,7 @@
   <string name="login_failed_network">قادر به ورود نیست - شکست شبکه‌ای</string>
   <string name="login_failed_throttled">تلاش ناموفق بیش از حد. لطفاً چند دقیقهٔ دیگر دوباره تلاش کنید</string>
   <string name="login_failed_blocked">پوزش، کاربر در ویکی‌انبار بسته شده‌است</string>
-  <string name="login_failed_2fa_needed">باید تأیید دومرحله‌ای را فعال کنید.</string>
+  <string name="login_failed_2fa_needed">شما باید کد تأیید اعتبار دومرحله‌ای را ارائه کنید.</string>
   <string name="login_failed_generic">ورود ناموفق بود</string>
   <string name="share_upload_button">بارگذاری</string>
   <string name="multiple_share_base_title">نام این مجموعه</string>
@@ -254,7 +254,7 @@
   <string name="null_url">خطا! نشانی یافت نشد</string>
   <string name="nominate_deletion">نامزد شده برای حذف</string>
   <string name="nominated_for_deletion">این تصویر برای حذف شدن علامت گذاری شده.</string>
-  <string name="nominated_see_more">برای جزئیات، صفحات وب را نگاه کنید</string>
+  <string name="nominated_see_more">برای جزئیات، صفحه‌های وب را نگاه کنید</string>
   <string name="skip_login">رها کردن</string>
   <string name="navigation_item_login">ورود به سامانه</string>
   <string name="skip_login_title">آیا واقعا میخواهید وارد شوید؟</string>
@@ -301,7 +301,7 @@
   <string name="explore_tab_title_featured">برگزیده</string>
   <string name="explore_tab_title_mobile">بارگذاری‌شده با تلفن همراه</string>
   <string name="successful_wikidata_edit">تصویر به %1$s در ویکی‌داده افزوده شد!</string>
-  <string name="wikidata_edit_failure">تلاش برای بروزرسانی موجودی ویکی‌دیتای مرتبط شکست خورد</string>
+  <string name="wikidata_edit_failure">تلاش برای به‌روزرسانی موجودی ویکی‌دیتای مرتبط شکست خورد</string>
   <string name="menu_set_wallpaper">انتخاب به عنوان پس‌زمینه</string>
   <string name="wallpaper_set_successfully">تصویر پس زمینه به طور موفقیت آمیز تنظیم شد!</string>
   <string name="quiz">امتحان</string>
