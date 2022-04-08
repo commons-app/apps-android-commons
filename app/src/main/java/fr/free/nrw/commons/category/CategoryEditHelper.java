@@ -14,6 +14,7 @@ import fr.free.nrw.commons.notification.NotificationHelper;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.schedulers.Schedulers;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -43,9 +44,10 @@ public class CategoryEditHelper {
      * @param categories
      * @return
      */
-    public Single<Boolean> makeCategoryEdit(Context context, Media media, List<String> categories) {
+    public Single<Boolean> makeCategoryEdit(Context context, Media media, List<String> categories,
+        final String wikiText) {
         viewUtil.showShortToast(context, context.getString(R.string.category_edit_helper_make_edit_toast));
-        return addCategory(media, categories)
+        return addCategory(media, categories, wikiText)
             .flatMapSingle(result -> Single.just(showCategoryEditNotification(context, media, result)))
             .firstOrError();
     }
@@ -56,11 +58,15 @@ public class CategoryEditHelper {
      * @param categories to be added
      * @return
      */
-    private Observable<Boolean> addCategory(Media media, List<String> categories) {
+    private Observable<Boolean> addCategory(Media media, List<String> categories,
+        final String wikiText) {
         Timber.d("thread is category adding %s", Thread.currentThread().getName());
         String summary = "Adding categories";
 
         StringBuilder buffer = new StringBuilder();
+
+        final String wikiTextWithoutCategory
+            = wikiText.substring(0, wikiText.indexOf("[[Category"));
 
         if (categories != null && categories.size() != 0) {
 
@@ -70,7 +76,7 @@ public class CategoryEditHelper {
         } else {
             buffer.append("{{subst:unc}}");
         }
-        String appendText = buffer.toString();
+        String appendText = wikiTextWithoutCategory + buffer;
         return pageEditClient.edit(media.getFilename(), appendText + "\n", summary);
     }
 

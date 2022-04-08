@@ -29,6 +29,7 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
+import fr.free.nrw.commons.media.MediaDetailFragment;
 import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText;
 import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
@@ -69,6 +70,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     private Disposable subscribe;
     private Media media;
     private ProgressDialog progressDialog;
+    private String wikiText;
 
     @Nullable
     @Override
@@ -84,6 +86,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         Bundle bundle = getArguments();
         if (bundle != null) {
             media = bundle.getParcelable("Existing_Categories");
+            wikiText = bundle.getString("WikiText");
         }
 
         init();
@@ -246,12 +249,15 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     @Override
     public void dismissProgressDialog() {
         progressDialog.dismiss();
+        final MediaDetailFragment mediaDetailFragment = (MediaDetailFragment) getParentFragment();
+        assert mediaDetailFragment != null;
+        mediaDetailFragment.updateCategories();
     }
 
     @OnClick(R.id.btn_next)
     public void onNextButtonClicked() {
         if (media != null) {
-            presenter.updateCategories(media);
+            presenter.updateCategories(media, wikiText);
         } else {
             presenter.verifyCategories();
         }
@@ -261,6 +267,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     public void onPreviousButtonClicked() {
         if (media != null) {
             presenter.clearPreviousSelection();
+            adapter.setItems(null);
             goBackToPreviousScreen();
         } else {
             callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));

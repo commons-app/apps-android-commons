@@ -248,6 +248,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     ProgressBar progressBarDeletion;
     @BindView(R.id.progressBarEdit)
     ProgressBar progressBarEditDescription;
+    @BindView(R.id.progressBarEditCategory)
+    ProgressBar progressBarEditCategory;
     @BindView(R.id.description_edit)
     Button editDescription;
 
@@ -722,6 +724,17 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         rebuildCatList(allCategories);
     }
 
+    public void updateCategories() {
+        List<String> allCategories = new ArrayList<String>(media.getAddedCategories());
+        media.setCategories(allCategories);
+        if (allCategories.isEmpty()) {
+            // Stick in a filler element.
+            allCategories.add(getString(R.string.detail_panel_cats_none));
+        }
+
+        rebuildCatList(allCategories);
+    }
+
     @Override
     public void updateSelectedCategoriesTextView(List<String> selectedCategories) {
         if (selectedCategories == null || selectedCategories.size() == 0) {
@@ -813,9 +826,26 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     @OnClick(R.id.categoryEditButton)
     public void onCategoryEditButtonClicked(){
+        progressBarEditCategory.setVisibility(VISIBLE);
+        categoryEditButton.setVisibility(GONE);
+        getWikiText();
+    }
+
+    private void getWikiText() {
+        compositeDisposable.add(mediaDataExtractor.getCurrentWikiText(
+            Objects.requireNonNull(media.getFilename()))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(this::gotoCategoryEditor, Timber::e));
+    }
+
+    private void gotoCategoryEditor(final String s) {
+        categoryEditButton.setVisibility(VISIBLE);
+        progressBarEditCategory.setVisibility(GONE);
         final Fragment categoriesFragment = new UploadCategoriesFragment();
         final Bundle bundle = new Bundle();
         bundle.putParcelable("Existing_Categories", media);
+        bundle.putString("WikiText", s);
         categoriesFragment.setArguments(bundle);
         final FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.mediaDetailFrameLayout, categoriesFragment);
@@ -1134,15 +1164,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     public void updateCategories(List<String> selectedCategories) {
-        compositeDisposable.add(categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(s -> {
-                Timber.d("Categories are added.");
-                onOutsideOfCategoryEditClicked();
-                media.setAddedCategories(selectedCategories);
-                updateCategoryList();
-            }));
+//        compositeDisposable.add(categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories)
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe(s -> {
+//                Timber.d("Categories are added.");
+//                onOutsideOfCategoryEditClicked();
+//                media.setAddedCategories(selectedCategories);
+//                updateCategoryList();
+//            }));
     }
 
     /**

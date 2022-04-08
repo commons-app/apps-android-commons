@@ -368,14 +368,38 @@
 
                 </LinearLayout>
 
-                <Button
-                  android:id="@+id/categoryEditButton"
-                  android:layout_width="24dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                  android:layout_width="match_parent"
                   android:layout_height="24dp"
-                  android:layout_margin="@dimen/standard_gap"
-                  android:layout_gravity="end"
-                  android:background="@drawable/ic_baseline_edit_24" />
+                  android:layout_margin="@dimen/standard_gap">
 
+                    <ProgressBar
+                      android:id="@+id/progressBarEditCategory"
+                      style="?android:progressBarStyleSmall"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginEnd="@dimen/tiny_gap"
+                      android:layout_marginRight="@dimen/tiny_gap"
+                      android:layout_gravity="center_vertical|end"
+                      android:indeterminate="true"
+                      android:indeterminateOnly="true"
+                      android:visibility="gone"
+                      tools:visibility="visible"
+                      app:layout_constraintEnd_toEndOf="parent"
+                      app:layout_constraintTop_toBottomOf="@id/mediaDetailCategoryContainer"
+                      app:layout_constraintBottom_toTopOf="@id/mediaDetailuploadeddate" />
+
+                    <Button
+                      android:id="@+id/categoryEditButton"
+                      android:layout_width="24dp"
+                      android:layout_height="24dp"
+                      android:layout_gravity="end"
+                      android:background="@drawable/ic_baseline_edit_24"
+                      app:layout_constraintEnd_toEndOf="parent"
+                      app:layout_constraintTop_toBottomOf="@id/mediaDetailCategoryContainer"
+                      app:layout_constraintBottom_toTopOf="@id/mediaDetailuploadeddate"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
                 <LinearLayout
                   style="@style/MediaDetailContainer"
                   android:layout_width="match_parent"

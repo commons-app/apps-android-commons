@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload.categories
 
 import android.text.TextUtils
+import android.util.Log
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryEditHelper
@@ -73,6 +74,7 @@ class CategoriesPresenter @Inject constructor(
                 .subscribeOn(ioScheduler)
                 .map { it.filterNot { categoryItem -> repository.containsYear(categoryItem.name) } }
         } else {
+            Log.d("haha", "searchResults: "+repository.selectedExistingCategories)
             return Observable.zip(
                 repository.getCategories(repository.selectedExistingCategories)
                     .map { list -> list.map {
@@ -168,18 +170,21 @@ class CategoriesPresenter @Inject constructor(
         repository.cleanup()
     }
 
-    override fun updateCategories(media: Media) {
+    override fun updateCategories(media: Media, wikiText: String) {
         if (repository.selectedCategories.isNotEmpty()
             || repository.selectedExistingCategories.size != view.existingCategories.size
         ) {
+            Log.d("haha", "updateCategories: 1 "+repository.selectedCategories)
+            Log.d("haha", "updateCategories: 2 "+repository.selectedExistingCategories)
             val selectedCategories: MutableList<String> =
                 (repository.selectedCategories.map { it.name }.toMutableList()
                         + repository.selectedExistingCategories).toMutableList()
-
+            Log.d("haha", "updateCategories: 3 $selectedCategories")
             if (selectedCategories.isNotEmpty()) {
                 view.showProgressDialog()
                 compositeDisposable.add(
-                    categoryEditHelper.makeCategoryEdit(view.fragmentContext, media, selectedCategories)
+                    categoryEditHelper.makeCategoryEdit(view.fragmentContext, media,
+                        selectedCategories, wikiText)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({
