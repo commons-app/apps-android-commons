@@ -404,16 +404,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     public void nominatingForDeletion(int index) {
       provider.refreshNominatedMedia(index);
     }
-  
-    /**
-     * backButtonClicked is called on a back event in the media details pager.
-     * returns true after closing the categoryEditContainer if open, implying that event was handled.
-     * else returns false
-     * @return
-     */
-    public boolean backButtonClicked(){
-        return ((MediaDetailFragment)(adapter.getCurrentFragment())).hideCategoryEditContainerIfOpen();
-    }
 
     public interface MediaDetailProvider {
         Media getMediaAtPosition(int i);

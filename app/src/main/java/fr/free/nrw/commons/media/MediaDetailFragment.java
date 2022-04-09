@@ -11,6 +11,7 @@ import static fr.free.nrw.commons.description.EditDescriptionConstants.UPDATED_W
 import static fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT;
 import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION;
 import static fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -20,7 +21,6 @@ import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -38,15 +38,12 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
-import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -57,8 +54,6 @@ import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
-import com.jakewharton.rxbinding2.view.RxView;
-import com.jakewharton.rxbinding2.widget.RxSearchView;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import fr.free.nrw.commons.LocationPicker.LocationPicker;
@@ -71,8 +66,6 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategoryClient;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.category.CategoryEditHelper;
-import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter;
-import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter.Callback;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.coordinates.CoordinateEditHelper;
 import fr.free.nrw.commons.delete.DeleteHelper;
@@ -83,7 +76,6 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
-import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
@@ -100,7 +92,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
@@ -108,7 +99,7 @@ import org.wikipedia.language.AppLanguageLookUpTable;
 import org.wikipedia.util.DateUtil;
 import timber.log.Timber;
 
-public class MediaDetailFragment extends CommonsDaggerSupportFragment implements Callback,
+public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     CategoryEditHelper.Callback {
 
     private static final int REQUEST_CODE = 1001 ;
@@ -213,24 +204,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     LinearLayout toDoLayout;
     @BindView(R.id.toDoReason)
     TextView toDoReason;
-    @BindView(R.id.category_edit_layout)
-    LinearLayout categoryEditLayout;
-    @BindView(R.id.et_search)
-    SearchView categorySearchView;
-    @BindView(R.id.rv_categories)
-    RecyclerView categoryRecyclerView;
-    @BindView(R.id.update_categories_button)
-    Button updateCategoriesButton;
     @BindView(R.id.coordinate_edit)
     Button coordinateEditButton;
-    @BindView(R.id.dummy_category_edit_container)
-    LinearLayout dummyCategoryEditContainer;
-    @BindView(R.id.pb_categories)
-    ProgressBar progressbarCategories;
-    @BindView(R.id.existing_categories)
-    TextView existingCategories;
-    @BindView(R.id.no_results_found)
-    TextView noResultsFound;
     @BindView(R.id.dummy_caption_description_container)
     LinearLayout showCaptionAndDescriptionContainer;
     @BindView(R.id.show_caption_description_textview)
@@ -266,7 +241,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     private int newWidthOfImageView;
     private boolean heightVerifyingBoolean = true; // helps in maintaining aspect ratio
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
-    private CategoryEditSearchRecyclerViewAdapter categoryEditSearchRecyclerViewAdapter;
 
     //Had to make this class variable, to implement various onClicks, which access the media, also I fell why make separate variables when one can serve the purpose
     private Media media;
@@ -399,11 +373,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                     .setVisibility(View.GONE);
             }
         }
-        categoryEditSearchRecyclerViewAdapter =
-            new CategoryEditSearchRecyclerViewAdapter(getContext(), new ArrayList<>(
-                Label.valuesAsList()), categoryRecyclerView, categoryClient, this);
-        categoryRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        categoryRecyclerView.setAdapter(categoryEditSearchRecyclerViewAdapter);
         // detail provider is null when fragment is shown in review activity
         if (detailProvider != null) {
             media = detailProvider.getMediaAtPosition(index);
@@ -503,7 +472,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 .subscribe(this::onDepictionsLoaded, Timber::e)
         );
         // compositeDisposable.add(disposable);
-        setupToDo();
     }
 
     private void onDiscussionLoaded(String discussion) {
@@ -611,30 +579,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         image.setController(controller);
     }
 
-    /**
-     * Displays layout about missing actions to inform user
-     * - Images that they uploaded with no categories/descriptions, so that they can add them
-     * - Images that can be added to associated Wikipedia articles that have no pictures
-     */
-    private void setupToDo() {
-        updateToDoWarning();
-        compositeDisposable.add(RxSearchView.queryTextChanges(categorySearchView)
-            .takeUntil(RxView.detaches(categorySearchView))
-            .debounce(500, TimeUnit.MILLISECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(query -> {
-                    this.categorySearchQuery = query.toString();
-                    //update image list
-                    if (!TextUtils.isEmpty(query)) {
-                        if (categoryEditLayout.getVisibility() == VISIBLE) {
-                            ((CategoryEditSearchRecyclerViewAdapter) categoryRecyclerView.getAdapter()).
-                                getFilter().filter(query.toString());
-                        }
-                    }
-                }, Timber::e
-            ));
-    }
-
     private void updateToDoWarning() {
         String toDoMessage = "";
         boolean toDoNeeded = false;
@@ -694,10 +638,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
         categoryNames.clear();
         categoryNames.addAll(media.getCategories());
-        categoryEditSearchRecyclerViewAdapter.addToCategories(media.getCategories());
-        updateSelectedCategoriesTextView(categoryEditSearchRecyclerViewAdapter.getCategories());
-
-        categoryRecyclerView.setVisibility(GONE);
 
         if (media.getAuthor() == null || media.getAuthor().equals("")) {
             authorLayout.setVisibility(GONE);
@@ -725,6 +665,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             // Stick in a filler element.
             allCategories.add(getString(R.string.detail_panel_cats_none));
         }
+        categoryEditButton.setVisibility(VISIBLE);
         rebuildCatList(allCategories);
     }
 
@@ -737,35 +678,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         }
 
         rebuildCatList(allCategories);
-    }
-
-    @Override
-    public void updateSelectedCategoriesTextView(List<String> selectedCategories) {
-        if (selectedCategories == null || selectedCategories.size() == 0) {
-            updateCategoriesButton.setClickable(false);
-            updateCategoriesButton.setAlpha(.5f);
-        } else {
-            existingCategories.setText(StringUtils.join(selectedCategories,", "));
-            if (selectedCategories.equals(media.getCategories())) {
-                updateCategoriesButton.setClickable(false);
-                updateCategoriesButton.setAlpha(.5f);
-            } else {
-                updateCategoriesButton.setClickable(true);
-                updateCategoriesButton.setAlpha(1f);
-            }
-        }
-    }
-
-    @Override
-    public void noResultsFound() {
-        categoryRecyclerView.setVisibility(GONE);
-        noResultsFound.setVisibility(VISIBLE);
-    }
-
-    @Override
-    public void someResultsFound() {
-        categoryRecyclerView.setVisibility(VISIBLE);
-        noResultsFound.setVisibility(GONE);
     }
 
     /**
@@ -821,13 +733,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         Toast.makeText(getContext(), getString(R.string.wikicode_copied), Toast.LENGTH_SHORT).show();
     }
 
-    @OnClick(R.id.dummy_category_edit_container)
-    public void onOutsideOfCategoryEditClicked() {
-        if (dummyCategoryEditContainer.getVisibility() == VISIBLE) {
-            dummyCategoryEditContainer.setVisibility(GONE);
-        }
-    }
-
     @OnClick(R.id.categoryEditButton)
     public void onCategoryEditButtonClicked(){
         progressBarEditCategory.setVisibility(VISIBLE);
@@ -863,31 +768,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         transaction.replace(R.id.mediaDetailFrameLayout, categoriesFragment);
         transaction.addToBackStack(null);
         transaction.commit();
-    }
-
-    /**
-     * Hides the categoryEditContainer.
-     * returns true after closing the categoryEditContainer if open, implying that event was handled.
-     * else returns false
-     * @return
-     */
-    public boolean hideCategoryEditContainerIfOpen(){
-        if (dummyCategoryEditContainer.getVisibility() == VISIBLE) {
-            // editCategory is open, close it and return true as the event was handled.
-            dummyCategoryEditContainer.setVisibility(GONE);
-            return true;
-        }
-        // Event was not handled.
-        return false;
-    }
-
-    public void displayHideCategorySearch() {
-        showCaptionAndDescriptionContainer.setVisibility(GONE);
-        if (dummyCategoryEditContainer.getVisibility() != VISIBLE) {
-            dummyCategoryEditContainer.setVisibility(VISIBLE);
-        } else {
-            dummyCategoryEditContainer.setVisibility(GONE);
-        }
     }
 
     @OnClick(R.id.coordinate_edit)
@@ -1162,17 +1042,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         LinkedHashMap<String, String> updatedCaptions) {
         updatedCaptions.put(mediaDetail.getLanguageCode(), mediaDetail.getCaptionText());
         media.setCaptions(updatedCaptions);
-    }
-
-    @OnClick(R.id.update_categories_button)
-    public void onUpdateCategoriesClicked() {
-        updateCategories(categoryEditSearchRecyclerViewAdapter.getNewCategories());
-        displayHideCategorySearch();
-    }
-
-    @OnClick(R.id.cancel_categories_button)
-    public void onCancelCategoriesClicked() {
-        displayHideCategorySearch();
     }
 
     /**
@@ -1456,7 +1325,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     @OnClick(R.id.show_caption_description_textview)
     void showCaptionAndDescription() {
-        dummyCategoryEditContainer.setVisibility(GONE);
         if (showCaptionAndDescriptionContainer.getVisibility() == GONE) {
             showCaptionAndDescriptionContainer.setVisibility(VISIBLE);
             setUpCaptionAndDescriptionLayout();

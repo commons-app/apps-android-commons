@@ -22,7 +22,6 @@ import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.soloader.SoLoader
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
 import org.robolectric.Shadows.shadowOf
-import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter
 import fr.free.nrw.commons.explore.SearchActivity
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng
