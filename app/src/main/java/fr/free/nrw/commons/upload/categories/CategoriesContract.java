@@ -75,6 +75,8 @@ public interface CategoriesContract {
          * Update the categories
          */
         void updateCategories(Media media, String wikiText);
+
+
     }
 
 

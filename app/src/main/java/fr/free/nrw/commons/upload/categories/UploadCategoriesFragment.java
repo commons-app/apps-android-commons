@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -68,8 +70,17 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     CategoriesContract.UserActionListener presenter;
     private UploadCategoryAdapter adapter;
     private Disposable subscribe;
+    /**
+     * Current media
+     */
     private Media media;
+    /**
+     * Progress Dialog for showing background process
+     */
     private ProgressDialog progressDialog;
+    /**
+     * WikiText from the server
+     */
     private String wikiText;
 
     @Nullable
@@ -83,7 +94,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-        Bundle bundle = getArguments();
+        final Bundle bundle = getArguments();
         if (bundle != null) {
             media = bundle.getParcelable("Existing_Categories");
             wikiText = bundle.getString("WikiText");
@@ -203,6 +214,8 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
                 () -> goToNextScreen(),
                 null);
         } else {
+            Toast.makeText(requireContext(), getString(R.string.no_categories_selected),
+                Toast.LENGTH_SHORT).show();
             presenter.clearPreviousSelection();
             goBackToPreviousScreen();
         }
@@ -268,6 +281,9 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         if (media != null) {
             presenter.clearPreviousSelection();
             adapter.setItems(null);
+            final MediaDetailFragment mediaDetailFragment = (MediaDetailFragment) getParentFragment();
+            assert mediaDetailFragment != null;
+            mediaDetailFragment.onResume();
             goBackToPreviousScreen();
         } else {
             callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
@@ -291,28 +307,32 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         super.onResume();
 
         if (media != null) {
-//            depictsSearch.setOnKeyListener((v, keyCode, event) -> {
-//                if (keyCode == KeyEvent.KEYCODE_BACK) {
-//                    depictsSearch.clearFocus();
-//                    presenter.clearPreviousSelection();
-//                    updateDepicts();
-//                    goBackToPreviousScreen();
-//                    return true;
-//                }
-//                return false;
-//            });
-//
-//            Objects.requireNonNull(getView()).setFocusableInTouchMode(true);
-//            getView().requestFocus();
-//            getView().setOnKeyListener((v, keyCode, event) -> {
-//                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-//                    presenter.clearPreviousSelection();
-//                    updateDepicts();
-//                    goBackToPreviousScreen();
-//                    return true;
-//                }
-//                return false;
-//            });
+            etSearch.setOnKeyListener((v, keyCode, event) -> {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    etSearch.clearFocus();
+                    presenter.clearPreviousSelection();
+                    final MediaDetailFragment mediaDetailFragment = (MediaDetailFragment) getParentFragment();
+                    assert mediaDetailFragment != null;
+                    mediaDetailFragment.onResume();
+                    goBackToPreviousScreen();
+                    return true;
+                }
+                return false;
+            });
+
+            Objects.requireNonNull(getView()).setFocusableInTouchMode(true);
+            getView().requestFocus();
+            getView().setOnKeyListener((v, keyCode, event) -> {
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                    presenter.clearPreviousSelection();
+                    final MediaDetailFragment mediaDetailFragment = (MediaDetailFragment) getParentFragment();
+                    assert mediaDetailFragment != null;
+                    mediaDetailFragment.onResume();
+                    goBackToPreviousScreen();
+                    return true;
+                }
+                return false;
+            });
 
             Objects.requireNonNull(
                 ((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar())

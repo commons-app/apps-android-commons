@@ -53,7 +53,8 @@ public class CategoryEditHelper {
     }
 
     /**
-     * Appends new categories
+     * Rebuilds the WikiText with new categpries and post it on server
+     *
      * @param media
      * @param categories to be added
      * @return
@@ -63,20 +64,19 @@ public class CategoryEditHelper {
         Timber.d("thread is category adding %s", Thread.currentThread().getName());
         String summary = "Adding categories";
 
-        StringBuilder buffer = new StringBuilder();
+        final StringBuilder buffer = new StringBuilder();
 
         final String wikiTextWithoutCategory
             = wikiText.substring(0, wikiText.indexOf("[[Category"));
 
         if (categories != null && categories.size() != 0) {
-
             for (int i = 0; i < categories.size(); i++) {
                 buffer.append("\n[[Category:").append(categories.get(i)).append("]]");
             }
         } else {
             buffer.append("{{subst:unc}}");
         }
-        String appendText = wikiTextWithoutCategory + buffer;
+        final String appendText = wikiTextWithoutCategory + buffer;
         return pageEditClient.edit(media.getFilename(), appendText + "\n", summary);
     }
 

@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -94,6 +95,7 @@ import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -407,8 +409,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         // detail provider is null when fragment is shown in review activity
         if (detailProvider != null) {
             media = detailProvider.getMediaAtPosition(index);
+            Log.d("haha", "onResume: 1 "+media.getCategories());
         } else {
             media = getArguments().getParcelable("media");
+            Log.d("haha", "onResume: 2 "+media.getCategories());
         }
 
         if(media != null && applicationKvStore.getBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), false)) {
@@ -476,6 +480,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onMediaRefreshed, Timber::e),
+            mediaDataExtractor.getCurrentWikiText(
+                Objects.requireNonNull(media.getFilename()))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::updateCategoryList, Timber::e),
             mediaDataExtractor.checkDeletionRequestExists(media)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -693,7 +702,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         updateSelectedCategoriesTextView(categoryEditSearchRecyclerViewAdapter.getCategories());
 
         categoryRecyclerView.setVisibility(GONE);
-        updateCategoryList();
 
         if (media.getAuthor() == null || media.getAuthor().equals("")) {
             authorLayout.setVisibility(GONE);
@@ -702,25 +710,25 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         }
     }
 
-    private void updateCategoryList() {
-        List<String> allCategories = new ArrayList<String>( media.getCategories());
-        if (media.getAddedCategories() != null) {
-            // TODO this added categories logic should be removed.
-            //  It is just a short term hack. Categories should be fetch everytime they are updated.
-            // if media.getCategories contains addedCategory, then do not re-add them
-            for (String addedCategory : media.getAddedCategories()) {
-                if (allCategories.contains(addedCategory)) {
-                    media.setAddedCategories(null);
-                    break;
-                }
-            }
-            allCategories.addAll(media.getAddedCategories());
+    /**
+     * Gets new categories from the WikiText and updates it on the UI
+     *
+     * @param s WikiText
+     */
+    private void updateCategoryList(final String s) {
+        final List<String> allCategories = new ArrayList<String>();
+        int i = s.indexOf("[[Category:");
+        while(i != -1){
+            final String category = s.substring(i+11, s.indexOf("]]", i));
+            allCategories.add(category);
+            i = s.indexOf("]]", i);
+            i = s.indexOf("[[Category:", i);
         }
+        media.setCategories(allCategories);
         if (allCategories.isEmpty()) {
             // Stick in a filler element.
             allCategories.add(getString(R.string.detail_panel_cats_none));
         }
-
         rebuildCatList(allCategories);
     }
 
@@ -831,6 +839,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         getWikiText();
     }
 
+    /**
+     * Gets WikiText from the server and send it to catgory editor
+     */
     private void getWikiText() {
         compositeDisposable.add(mediaDataExtractor.getCurrentWikiText(
             Objects.requireNonNull(media.getFilename()))
@@ -839,6 +850,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             .subscribe(this::gotoCategoryEditor, Timber::e));
     }
 
+    /**
+     * Opens the category editor
+     *
+     * @param s WikiText
+     */
     private void gotoCategoryEditor(final String s) {
         categoryEditButton.setVisibility(VISIBLE);
         progressBarEditCategory.setVisibility(GONE);
@@ -1161,18 +1177,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     @OnClick(R.id.cancel_categories_button)
     public void onCancelCategoriesClicked() {
         displayHideCategorySearch();
-    }
-
-    public void updateCategories(List<String> selectedCategories) {
-//        compositeDisposable.add(categoryEditHelper.makeCategoryEdit(getContext(), media, selectedCategories)
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe(s -> {
-//                Timber.d("Categories are added.");
-//                onOutsideOfCategoryEditClicked();
-//                media.setAddedCategories(selectedCategories);
-//                updateCategoryList();
-//            }));
     }
 
     /**

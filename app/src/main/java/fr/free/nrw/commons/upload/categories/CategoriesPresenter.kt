@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.upload.categories
 
 import android.text.TextUtils
-import android.util.Log
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryEditHelper
@@ -37,6 +36,9 @@ class CategoriesPresenter @Inject constructor(
     var view = DUMMY
     private val compositeDisposable = CompositeDisposable()
     private val searchTerms = PublishSubject.create<String>()
+    /**
+     * Current media
+     */
     private var media: Media? = null
     @Inject
     lateinit var categoryEditHelper: CategoryEditHelper
@@ -74,7 +76,6 @@ class CategoriesPresenter @Inject constructor(
                 .subscribeOn(ioScheduler)
                 .map { it.filterNot { categoryItem -> repository.containsYear(categoryItem.name) } }
         } else {
-            Log.d("haha", "searchResults: "+repository.selectedExistingCategories)
             return Observable.zip(
                 repository.getCategories(repository.selectedExistingCategories)
                     .map { list -> list.map {
@@ -137,6 +138,9 @@ class CategoriesPresenter @Inject constructor(
         repository.onCategoryClicked(categoryItem, media)
     }
 
+    /**
+     * Attaches view and media
+     */
     override fun onAttachViewWithMedia(view: CategoriesContract.View, media: Media) {
         this.view = view
         this.media = media
@@ -166,20 +170,27 @@ class CategoriesPresenter @Inject constructor(
         )
     }
 
+    /**
+     * Clears previous selections
+     */
     override fun clearPreviousSelection() {
         repository.cleanup()
     }
 
+    /**
+     * Gets the selected categories and send them for posting to the server
+     *
+     * @param media media
+     * @param wikiText current WikiText from server
+     */
     override fun updateCategories(media: Media, wikiText: String) {
         if (repository.selectedCategories.isNotEmpty()
             || repository.selectedExistingCategories.size != view.existingCategories.size
         ) {
-            Log.d("haha", "updateCategories: 1 "+repository.selectedCategories)
-            Log.d("haha", "updateCategories: 2 "+repository.selectedExistingCategories)
             val selectedCategories: MutableList<String> =
                 (repository.selectedCategories.map { it.name }.toMutableList()
                         + repository.selectedExistingCategories).toMutableList()
-            Log.d("haha", "updateCategories: 3 $selectedCategories")
+
             if (selectedCategories.isNotEmpty()) {
                 view.showProgressDialog()
                 compositeDisposable.add(
