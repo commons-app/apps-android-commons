@@ -22,7 +22,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -409,10 +408,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         // detail provider is null when fragment is shown in review activity
         if (detailProvider != null) {
             media = detailProvider.getMediaAtPosition(index);
-            Log.d("haha", "onResume: 1 "+media.getCategories());
         } else {
             media = getArguments().getParcelable("media");
-            Log.d("haha", "onResume: 2 "+media.getCategories());
         }
 
         if(media != null && applicationKvStore.getBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), false)) {
