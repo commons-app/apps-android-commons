@@ -176,6 +176,7 @@ class CategoriesModelTest {
                 true
             ), media())
     }
+
     @Test
     @Throws(Exception::class)
     fun `Test onCategoryItemClicked when media is not null and item is selected and media does not contains category`(){
