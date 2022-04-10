@@ -20,6 +20,7 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.generic.GenericDraweeHierarchy
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.soloader.SoLoader
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
 import org.robolectric.Shadows.shadowOf
 import fr.free.nrw.commons.explore.SearchActivity
@@ -97,9 +98,6 @@ class MediaDetailFragmentUnitTests {
     private lateinit var locationManager: LocationServiceManager
 
     @Mock
-    private lateinit var categoryEditSearchRecyclerViewAdapter: CategoryEditSearchRecyclerViewAdapter
-
-    @Mock
     private lateinit var savedInstanceState: Bundle
 
     @Mock
@@ -107,9 +105,6 @@ class MediaDetailFragmentUnitTests {
 
     @Mock
     private lateinit var media: Media
-
-    @Mock
-    private lateinit var categoryRecyclerView: RecyclerView
 
     @Mock
     private lateinit var simpleDraweeView: SimpleDraweeView
@@ -181,10 +176,8 @@ class MediaDetailFragmentUnitTests {
         scrollView = view.findViewById(R.id.mediaDetailScrollView)
         Whitebox.setInternalState(fragment, "scrollView", scrollView)
 
-        categoryRecyclerView = view.findViewById(R.id.rv_categories)
         progressBarDeletion = view.findViewById(R.id.progressBarDeletion)
         delete = view.findViewById(R.id.nominateDeletion)
-        Whitebox.setInternalState(fragment, "categoryRecyclerView", categoryRecyclerView)
 
         Whitebox.setInternalState(fragment, "media", media)
         Whitebox.setInternalState(fragment, "isDeleted", isDeleted)
@@ -211,21 +204,16 @@ class MediaDetailFragmentUnitTests {
         Whitebox.setInternalState(fragment, "delete", delete)
         Whitebox.setInternalState(fragment, "depictionContainer", linearLayout)
         Whitebox.setInternalState(fragment, "toDoLayout", linearLayout)
-        Whitebox.setInternalState(fragment, "dummyCategoryEditContainer", linearLayout)
+        Whitebox.setInternalState(fragment, "authorLayout", linearLayout)
         Whitebox.setInternalState(fragment, "showCaptionAndDescriptionContainer", linearLayout)
-        Whitebox.setInternalState(fragment, "updateCategoriesButton", button)
         Whitebox.setInternalState(fragment, "editDescription", button)
         Whitebox.setInternalState(fragment, "depictEditButton", button)
+        Whitebox.setInternalState(fragment, "categoryEditButton", button)
         Whitebox.setInternalState(fragment, "categoryContainer", linearLayout)
-        Whitebox.setInternalState(fragment, "categorySearchView", searchView)
         Whitebox.setInternalState(fragment, "progressBarDeletion", progressBarDeletion)
+        Whitebox.setInternalState(fragment, "progressBarEditCategory", progressBarDeletion)
         Whitebox.setInternalState(fragment, "mediaDiscussion", textView)
         Whitebox.setInternalState(fragment, "locationManager", locationManager)
-        Whitebox.setInternalState(
-            fragment,
-            "categoryEditSearchRecyclerViewAdapter",
-            categoryEditSearchRecyclerViewAdapter
-        )
 
         `when`(simpleDraweeView.hierarchy).thenReturn(genericDraweeHierarchy)
         val map = HashMap<String, String>()
@@ -607,16 +595,6 @@ class MediaDetailFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testSetupToDo() {
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "setupToDo"
-        )
-        method.isAccessible = true
-        method.invoke(fragment)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testOnDiscussionLoaded() {
         val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
             "onDiscussionLoaded",
@@ -666,5 +644,36 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testOnDeleteButtonClicked() {
         fragment.onDeleteButtonClicked()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnCategoryEditButtonClicked() {
+        whenever(media.filename).thenReturn("File:Example.jpg")
+        fragment.onCategoryEditButtonClicked()
+        verify(media, times(1)).filename
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testDisplayMediaDetails() {
+        whenever(media.filename).thenReturn("File:Example.jpg")
+        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
+            "displayMediaDetails"
+        )
+        method.isAccessible = true
+        method.invoke(fragment)
+        verify(media, times(4)).filename
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testGotoCategoryEditor() {
+        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
+            "gotoCategoryEditor",
+            String::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, "[[Category:Test]]")
     }
 }

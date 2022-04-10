@@ -203,6 +203,7 @@ class CategoriesPresenter @Inject constructor(
                             media.addedCategories = selectedCategories
                             repository.cleanup()
                             view.dismissProgressDialog()
+                            view.refreshCategories()
                             view.goBackToPreviousScreen()
                         })
                         {

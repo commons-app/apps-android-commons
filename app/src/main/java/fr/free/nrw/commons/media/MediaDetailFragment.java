@@ -11,7 +11,6 @@ import static fr.free.nrw.commons.description.EditDescriptionConstants.UPDATED_W
 import static fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT;
 import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION;
 import static fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;

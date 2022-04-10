@@ -1,10 +1,12 @@
 package fr.free.nrw.commons.upload.categories
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.os.Looper
 import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -12,6 +14,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputLayout
+import com.nhaarman.mockitokotlin2.times
+import com.nhaarman.mockitokotlin2.verify
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
@@ -54,6 +59,9 @@ class UploadCategoriesFragmentUnitTests {
     private lateinit var pbCategories: ProgressBar
 
     @Mock
+    private lateinit var progressDialog: ProgressDialog
+
+    @Mock
     private lateinit var tilContainerEtSearch: TextInputLayout
 
     @Mock
@@ -75,6 +83,9 @@ class UploadCategoriesFragmentUnitTests {
     private lateinit var editable: Editable
 
     @Mock
+    private lateinit var button: Button
+
+    @Mock
     private lateinit var adapter: UploadCategoryAdapter
 
     @Mock
@@ -82,6 +93,10 @@ class UploadCategoriesFragmentUnitTests {
 
     @Mock
     private lateinit var presenter: CategoriesContract.UserActionListener
+
+    @Mock
+    private lateinit var media: Media
+
 
     @Before
     fun setUp() {
@@ -108,6 +123,9 @@ class UploadCategoriesFragmentUnitTests {
         Whitebox.setInternalState(fragment, "tvTitle", tvTitle)
         Whitebox.setInternalState(fragment, "tooltip", tooltip)
         Whitebox.setInternalState(fragment, "tvSubTitle", tvSubTitle)
+        Whitebox.setInternalState(fragment, "btnNext", button)
+        Whitebox.setInternalState(fragment, "btnPrevious", button)
+        Whitebox.setInternalState(fragment, "progressDialog", progressDialog)
     }
 
     @Test
@@ -187,6 +205,51 @@ class UploadCategoriesFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
+    fun testGetExistingCategories() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.existingCategories
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testGetFragmentContext() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.fragmentContext
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testGoBackToPreviousScreen() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.goBackToPreviousScreen()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testShowProgressDialog() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.showProgressDialog()
+        verify(progressDialog, times(0)).show()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testDismissProgressDialog() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.dismissProgressDialog()
+        verify(progressDialog, times(1)).dismiss()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Test showNoCategorySelected when media is not null`() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        Whitebox.setInternalState(fragment, "media", media)
+        fragment.showNoCategorySelected()
+    }
+
+    @Test
+    @Throws(Exception::class)
     fun testOnNextButtonClicked() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onNextButtonClicked()
@@ -249,6 +312,18 @@ class UploadCategoriesFragmentUnitTests {
     @Throws(Exception::class)
     fun testInit() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
+        val method: Method = UploadCategoriesFragment::class.java.getDeclaredMethod(
+            "init"
+        )
+        method.isAccessible = true
+        method.invoke(fragment)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Test init when media is not null`() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        Whitebox.setInternalState(fragment, "media", media)
         val method: Method = UploadCategoriesFragment::class.java.getDeclaredMethod(
             "init"
         )

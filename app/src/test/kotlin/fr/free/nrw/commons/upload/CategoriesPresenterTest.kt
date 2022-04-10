@@ -8,6 +8,7 @@ import fr.free.nrw.commons.upload.categories.CategoriesContract
 import fr.free.nrw.commons.upload.categories.CategoriesPresenter
 import io.reactivex.Observable
 import io.reactivex.schedulers.TestScheduler
+import media
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -37,6 +38,12 @@ class CategoriesPresenterTest {
         testScheduler = TestScheduler()
         categoriesPresenter = CategoriesPresenter(repository, testScheduler, testScheduler)
         categoriesPresenter.onAttachView(view)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnAttachViewWithMedia() {
+        categoriesPresenter.onAttachViewWithMedia(view, media())
     }
 
     /**
@@ -122,6 +129,16 @@ class CategoriesPresenterTest {
     fun onCategoryItemClickedTest() {
         val categoryItem = categoryItem()
         categoriesPresenter.onCategoryItemClicked(categoryItem)
-        verify(repository).onCategoryClicked(categoryItem)
+        verify(repository).onCategoryClicked(categoryItem, null)
+    }
+
+    @Test
+    fun testClearPreviousSelection() {
+        categoriesPresenter.clearPreviousSelection()
+    }
+
+    @Test
+    fun testUpdateCategories() {
+        categoriesPresenter.updateCategories(media(), "[[Category:Test]]")
     }
 }

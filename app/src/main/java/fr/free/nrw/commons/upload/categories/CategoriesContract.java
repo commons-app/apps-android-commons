@@ -51,6 +51,10 @@ public interface CategoriesContract {
          */
         void dismissProgressDialog();
 
+        /**
+         * Refreshes the categories
+         */
+        void refreshCategories();
     }
 
     interface UserActionListener extends BasePresenter<View> {
