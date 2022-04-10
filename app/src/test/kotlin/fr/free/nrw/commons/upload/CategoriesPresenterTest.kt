@@ -14,6 +14,7 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
+import java.lang.reflect.Method
 
 /**
  * The class contains unit test cases for CategoriesPresenter
@@ -51,8 +52,16 @@ class CategoriesPresenterTest {
     @Throws(Exception::class)
     fun `Test onAttachViewWithMedia when media is not null`() {
         Whitebox.setInternalState(categoriesPresenter, "media", media())
-        categoriesPresenter.onAttachViewWithMedia(view, media())
-    }
+        whenever(repository.getCategories(repository.selectedExistingCategories))
+            .thenReturn(Observable.just(mutableListOf(categoryItem())))
+        whenever(repository.searchAll("mock", emptyList(), repository.selectedDepictions))
+            .thenReturn(Observable.just(mutableListOf(categoryItem())))
+        val method: Method = CategoriesPresenter::class.java.getDeclaredMethod(
+            "searchResults",
+            String::class.java
+        )
+        method.isAccessible = true
+        method.invoke(categoriesPresenter, "mock")    }
 
     /**
      * unit test case for method CategoriesPresenter.searchForCategories

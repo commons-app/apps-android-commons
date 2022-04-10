@@ -135,21 +135,25 @@ class CategoriesModel @Inject constructor(
             Observable<MutableList<CategoryItem>>? {
         return Observable.fromIterable(categoryNames)
             .map { categoryName ->
-                categoryClient.getCategoriesByName(categoryName,
-                    categoryName, SEARCH_CATS_LIMIT).map {
-                    if(it.isNotEmpty()) {
-                        CategoryItem(
-                            it[0].name, it[0].description,
-                            it[0].thumbnail, it[0].isSelected
-                        )
-                    } else {
-                        CategoryItem(
-                            "Hidden", "Hidden",
-                            "hidden", false
-                        )
-                    }
-                }.blockingGet()
+                buildCategories(categoryName)
             }.toList().toObservable()
+    }
+
+    fun buildCategories(categoryName: String): CategoryItem {
+        return categoryClient.getCategoriesByName(categoryName,
+            categoryName, SEARCH_CATS_LIMIT).map {
+            if(it.isNotEmpty()) {
+                CategoryItem(
+                    it[0].name, it[0].description,
+                    it[0].thumbnail, it[0].isSelected
+                )
+            } else {
+                CategoryItem(
+                    "Hidden", "Hidden",
+                    "hidden", false
+                )
+            }
+        }.blockingGet()
     }
 
     private fun combine(

@@ -119,6 +119,24 @@ class CategoriesModelTest {
 
     @Test
     @Throws(Exception::class)
+    fun `Test buildCategories when it returns non empty list`(){
+        whenever(categoryClient.getCategoriesByName("Test",
+            "Test", CategoriesModel.SEARCH_CATS_LIMIT
+        )).thenReturn(Single.just(listOf(categoryItem())))
+        categoriesModel.buildCategories("Test")
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Test buildCategories when it returns empty list`(){
+        whenever(categoryClient.getCategoriesByName("Test",
+            "Test", CategoriesModel.SEARCH_CATS_LIMIT
+        )).thenReturn(Single.just(emptyList()))
+        categoriesModel.buildCategories("Test")
+    }
+
+    @Test
+    @Throws(Exception::class)
     fun testGetSelectedExistingCategories(){
         categoriesModel.getSelectedExistingCategories()
     }

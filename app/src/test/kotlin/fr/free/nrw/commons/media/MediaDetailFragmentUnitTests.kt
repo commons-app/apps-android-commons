@@ -676,4 +676,15 @@ class MediaDetailFragmentUnitTests {
         method.isAccessible = true
         method.invoke(fragment, "[[Category:Test]]")
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnMediaRefreshed() {
+        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
+            "onMediaRefreshed",
+            Media::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, media)
+    }
 }
