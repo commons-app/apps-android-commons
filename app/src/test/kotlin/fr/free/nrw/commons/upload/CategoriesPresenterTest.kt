@@ -13,6 +13,7 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import org.powermock.reflect.Whitebox
 
 /**
  * The class contains unit test cases for CategoriesPresenter
@@ -43,6 +44,13 @@ class CategoriesPresenterTest {
     @Test
     @Throws(Exception::class)
     fun testOnAttachViewWithMedia() {
+        categoriesPresenter.onAttachViewWithMedia(view, media())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Test onAttachViewWithMedia when media is not null`() {
+        Whitebox.setInternalState(categoriesPresenter, "media", media())
         categoriesPresenter.onAttachViewWithMedia(view, media())
     }
 

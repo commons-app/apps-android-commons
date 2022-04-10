@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputLayout
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
@@ -126,6 +127,7 @@ class UploadCategoriesFragmentUnitTests {
         Whitebox.setInternalState(fragment, "btnNext", button)
         Whitebox.setInternalState(fragment, "btnPrevious", button)
         Whitebox.setInternalState(fragment, "progressDialog", progressDialog)
+        Whitebox.setInternalState(fragment, "wikiText", "[[Category:Test]]")
     }
 
     @Test
@@ -252,6 +254,14 @@ class UploadCategoriesFragmentUnitTests {
     @Throws(Exception::class)
     fun testOnNextButtonClicked() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.onNextButtonClicked()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Test onNextButtonClicked when media is not null`() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        Whitebox.setInternalState(fragment, "media", media)
         fragment.onNextButtonClicked()
     }
 

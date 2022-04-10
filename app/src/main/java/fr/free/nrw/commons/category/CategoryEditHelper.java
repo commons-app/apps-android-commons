@@ -71,7 +71,7 @@ public class CategoryEditHelper {
 
         if (categories != null && categories.size() != 0) {
             for (int i = 0; i < categories.size(); i++) {
-                buffer.append("\n[[Category:").append(categories.get(i)).append("]]");
+                buffer.append("[[Category:").append(categories.get(i)).append("]]\n");
             }
         } else {
             buffer.append("{{subst:unc}}");
