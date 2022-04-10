@@ -40,6 +40,10 @@ class CategoriesPresenter @Inject constructor(
      * Current media
      */
     private var media: Media? = null
+
+    /**
+     * helper class for editing categories
+     */
     @Inject
     lateinit var categoryEditHelper: CategoryEditHelper
 
@@ -70,6 +74,11 @@ class CategoriesPresenter @Inject constructor(
         )
     }
 
+    /**
+     * If media is null : Fetches categories from server according to the term
+     * Else : Fetches existing categories by their name, fetches categories from server according
+     * to the term and combines both in a list
+     */
     private fun searchResults(term: String): Observable<List<CategoryItem>>? {
         if (media == null) {
             return repository.searchAll(term, getImageTitleList(), repository.selectedDepictions)

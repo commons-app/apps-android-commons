@@ -263,6 +263,9 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         progressDialog.dismiss();
     }
 
+    /**
+     * Refreshes the categories
+     */
     @Override
     public void refreshCategories() {
         final MediaDetailFragment mediaDetailFragment = (MediaDetailFragment) getParentFragment();

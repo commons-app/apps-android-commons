@@ -139,6 +139,9 @@ class CategoriesModel @Inject constructor(
             }.toList().toObservable()
     }
 
+    /**
+     * Fetches the categories and converts them into CategoryItem
+     */
     fun buildCategories(categoryName: String): CategoryItem {
         return categoryClient.getCategoriesByName(categoryName,
             categoryName, SEARCH_CATS_LIMIT).map {

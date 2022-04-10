@@ -668,6 +668,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         rebuildCatList(allCategories);
     }
 
+    /**
+     * Updates the categories
+     */
     public void updateCategories() {
         List<String> allCategories = new ArrayList<String>(media.getAddedCategories());
         media.setCategories(allCategories);
