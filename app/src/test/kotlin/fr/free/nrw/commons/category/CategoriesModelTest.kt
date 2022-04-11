@@ -8,6 +8,7 @@ import depictedItem
 import fr.free.nrw.commons.upload.GpsCategoryModel
 import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject
+import media
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers
@@ -23,10 +24,16 @@ class CategoriesModelTest {
     @Mock
     internal lateinit var categoryClient: CategoryClient
 
+    @Mock
+    internal lateinit var gpsCategoryModel: GpsCategoryModel
+
+    private lateinit var categoriesModel: CategoriesModel
+
     @Before
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
+        categoriesModel = CategoriesModel(categoryClient, categoryDao, gpsCategoryModel)
     }
 
     // Test Case for verifying that Categories search (MW api calls)
@@ -102,5 +109,107 @@ class CategoriesModelTest {
         imageTitleList.forEach {
             verify(categoryClient).searchCategories(it, CategoriesModel.SEARCH_CATS_LIMIT)
         }
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testGetCategoriesByName(){
+        categoriesModel.getCategoriesByName(listOf("Test"))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Test buildCategories when it returns non empty list`(){
+        whenever(categoryClient.getCategoriesByName("Test",
+            "Test", CategoriesModel.SEARCH_CATS_LIMIT
+        )).thenReturn(Single.just(listOf(categoryItem())))
+        categoriesModel.buildCategories("Test")
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Test buildCategories when it returns empty list`(){
+        whenever(categoryClient.getCategoriesByName("Test",
+            "Test", CategoriesModel.SEARCH_CATS_LIMIT
+        )).thenReturn(Single.just(emptyList()))
+        categoriesModel.buildCategories("Test")
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testGetSelectedExistingCategories(){
+        categoriesModel.getSelectedExistingCategories()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testSetSelectedExistingCategories(){
+        categoriesModel.setSelectedExistingCategories(mutableListOf("Test"))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Test onCategoryItemClicked when media is null and item is selected`(){
+        categoriesModel.onCategoryItemClicked(
+            CategoryItem(
+                "name",
+                "des",
+                "image",
+                true
+            ), null)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Test onCategoryItemClicked when media is null and item is not selected`(){
+        categoriesModel.onCategoryItemClicked(categoryItem(), null)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Test onCategoryItemClicked when media is not null and item is selected and media contains category`(){
+        categoriesModel.onCategoryItemClicked(
+            CategoryItem(
+                "categories",
+                "des",
+                "image",
+                true
+            ), media())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Test onCategoryItemClicked when media is not null and item is selected and media does not contains category`(){
+        categoriesModel.onCategoryItemClicked(
+            CategoryItem(
+                "name",
+                "des",
+                "image",
+                true
+            ), media())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Test onCategoryItemClicked when media is not null and item is not selected and media contains category`(){
+        categoriesModel.onCategoryItemClicked(
+            CategoryItem(
+                "categories",
+                "des",
+                "image",
+                false
+            ), media())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Test onCategoryItemClicked when media is not null and item is not selected and media does not contains category`(){
+        categoriesModel.onCategoryItemClicked(
+            CategoryItem(
+                "name",
+                "des",
+                "image",
+                false
+            ), media())
     }
 }
