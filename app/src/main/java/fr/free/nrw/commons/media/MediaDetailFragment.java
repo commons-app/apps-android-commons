@@ -76,6 +76,7 @@ import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.profile.ProfileActivity;
+import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
 import fr.free.nrw.commons.upload.depicts.DepictsFragment;
@@ -899,6 +900,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         final Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION, descriptionAndCaptions);
         bundle.putString(WIKITEXT, s);
+        bundle.putString(Prefs.DESCRIPTION_LANGUAGE, applicationKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, ""));
         intent.putExtras(bundle);
         startActivityForResult(intent, REQUEST_CODE_EDIT_DESCRIPTION);
     }
