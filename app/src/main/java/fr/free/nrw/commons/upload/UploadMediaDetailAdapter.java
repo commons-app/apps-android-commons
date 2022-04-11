@@ -58,10 +58,11 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
     }
 
     public UploadMediaDetailAdapter(final String savedLanguageValue,
-        List<UploadMediaDetail> uploadMediaDetails) {
+        List<UploadMediaDetail> uploadMediaDetails, RecentLanguagesDao recentLanguagesDao) {
         this.uploadMediaDetails = uploadMediaDetails;
         selectedLanguages = new HashMap<>();
         this.savedLanguageValue = savedLanguageValue;
+        this.recentLanguagesDao = recentLanguagesDao;
     }
 
     public void setCallback(Callback callback) {

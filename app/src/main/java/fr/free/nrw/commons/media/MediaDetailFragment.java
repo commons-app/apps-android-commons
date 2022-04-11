@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,6 +86,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.profile.ProfileActivity;
+import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
@@ -903,7 +905,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     private void extractCaptionDescription(final String s) {
         final LinkedHashMap<String,String> descriptions = getDescriptions(s);
         final LinkedHashMap<String,String> captions = getCaptionsList();
-
+        Log.d("haha", "extractCaptionDescription: 1 "+ descriptions);
+        Log.d("haha", "extractCaptionDescription: 2 "+ captions);
         final ArrayList<UploadMediaDetail> descriptionAndCaptions = new ArrayList<>();
 
         if(captions.size() >= descriptions.size()) {
@@ -966,6 +969,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         final Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION, descriptionAndCaptions);
         bundle.putString(WIKITEXT, s);
+        bundle.putString(Prefs.DESCRIPTION_LANGUAGE, applicationKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, ""));
         intent.putExtras(bundle);
         startActivityForResult(intent, REQUEST_CODE_EDIT_DESCRIPTION);
     }
