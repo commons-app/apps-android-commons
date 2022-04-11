@@ -217,7 +217,7 @@ class CategoriesPresenter @Inject constructor(
                         })
                         {
                             Timber.e(
-                                "Failed to update depictions"
+                                "Failed to update categories"
                             )
                         }
                 )

@@ -14,7 +14,6 @@ import fr.free.nrw.commons.notification.NotificationHelper;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.schedulers.Schedulers;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
