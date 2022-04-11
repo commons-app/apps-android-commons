@@ -210,6 +210,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Bewäert eis</string>
   <string name="about_faq">FAQ</string>
+  <string name="user_guide">Benotzerhandbuch</string>
   <string name="no_internet">Internet net disponibel</string>
   <string name="error_notifications">Feeler beim Ofruffe vun den Notifikatiounen</string>
   <string name="no_notifications">Keng Notifikatioune fonnt</string>
@@ -282,8 +283,8 @@
   <string name="review_thanks_no_button_text">Jo, firwat net</string>
   <string name="no_image">Keng Biller benotzt</string>
   <string name="no_image_uploaded">Keng Biller eropgelueden</string>
-  <string name="no_read_notification">Dir hutt keng net-geliest Notifikatiounen</string>
-  <string name="menu_option_read">Déi geliest weisen</string>
+  <string name="no_read_notification">Dir hutt keng net-gelies Notifikatiounen</string>
+  <string name="menu_option_read">Déi geliese weisen</string>
   <string name="error_occurred_in_picking_images">Feeler beim Eraussiche vun de Biller</string>
   <string name="please_wait">Waart wgl. ...</string>
   <string name="skip_image">Dëst Bild iwwersprangen</string>
@@ -374,4 +375,7 @@
   <string name="apply">Uwenden</string>
   <string name="reset">Zrécksetzen</string>
   <string name="no_location_found_title">Keng Plaz fonnt</string>
+  <string name="error_feedback">Feeler beim Schécke vum Feedback</string>
+  <string name="enter_description">Wéi ass Äre Feedback?</string>
+  <string name="your_feedback">Äre Feedback</string>
 </resources>

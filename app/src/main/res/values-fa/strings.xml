@@ -18,6 +18,7 @@
 * Mehdi
 * Mjbmr
 * Mobin2008
+* Mojtabakd
 * Nightdevil
 * Omidh
 * Ommmmid
@@ -270,6 +271,7 @@
   <string name="nearby_commons">ویکی‌انبار</string>
   <string name="about_rate_us">به ما نمره دهید</string>
   <string name="about_faq">سؤال‌های متداول</string>
+  <string name="user_guide">راهنمای کاربر</string>
   <string name="welcome_skip_button">رهاکردن آموزش</string>
   <string name="no_internet">اینترنت در دسترس نیست</string>
   <string name="error_notifications">خطای واکشی کردن آگاه‌سازی‌ها</string>
@@ -295,6 +297,7 @@
   <string name="title_activity_search">جستجو</string>
   <string name="search_recent_header">جستجوهای اخیر:</string>
   <string name="provider_searches">کوئری‌های که اخیرا جستجو شده</string>
+  <string name="provider_recent_languages">پرسمان‌های زبانی اخیر</string>
   <string name="error_loading_categories">خطا هنگام بار کردن رده ها.</string>
   <string name="search_tab_title_media">رسانه</string>
   <string name="search_tab_title_categories">رده‌ها</string>
@@ -476,4 +479,7 @@
   <string name="advanced_options">گزینه‌های پیشرفته</string>
   <string name="apply">اعمال</string>
   <string name="reset">بازنشانی</string>
+  <string name="api_level">سطح API</string>
+  <string name="device_model">مدل دستگاه</string>
+  <string name="device_name">نام دستگاه</string>
 </resources>

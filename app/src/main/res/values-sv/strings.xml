@@ -654,4 +654,11 @@
   <string name="achievements_unavailable_beta" fuzzy="true">Prestationer är endast tillgängliga i produktionsversionen.</string>
   <string name="leaderboard_unavailable_beta" fuzzy="true">Topplistan är endast tillgänglig i produktionsversionen.</string>
   <string name="copyright_popup">Var god ladda endast upp bilder du själv har tagit. Alla som laddar upp upphovsrättsskyddade bilder kommer att blockeras. Detta gäller även i betaversionen. Tack för att du testar appen!</string>
+  <string name="api_level">API-nivå</string>
+  <string name="android_version">Android-version</string>
+  <string name="device_manufacturer">Enhetstillverkare</string>
+  <string name="device_model">Enhetsmodell</string>
+  <string name="device_name">Enhetsnamn</string>
+  <string name="network_type">Nätverkstyp</string>
+  <string name="your_feedback">Din återkoppling</string>
 </resources>

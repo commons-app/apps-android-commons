@@ -590,9 +590,9 @@
   <string name="wikipedia_instructions_step_3">3. Trouver une section appropriée pour votre image dans l’article</string>
   <string name="wikipedia_instructions_step_4">4. Cliquer sur le lien ou l’icône Modifier (ressemblant à un crayon) pour cette section.</string>
   <string name="wikipedia_instructions_step_5">5. Coller le texte wiki à l’endroit approprié.</string>
-  <string name="wikipedia_instructions_step_6">6. Modifier le wikitexte pour un positionnement approprié, si besoin. Pour plus d’informations, voir &lt;a href=\"https://www.mediawiki.org/wiki/Help:Images/fr#Affichage_d\'une_seule_image\"&gt;l’aide ici&lt;/a&gt;.</string>
+  <string name="wikipedia_instructions_step_6">6. Modifier le wikicode pour un positionnement approprié, si nécessaire. Pour plus d’informations, voir &lt;a href=\"https://www.mediawiki.org/wiki/Help:Images/fr#Affichage_d\'une_seule_image\"&gt;l’aide ici&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Publier l’article</string>
-  <string name="copy_wikicode_to_clipboard">Copier le wikitexte dans le presse-papier</string>
+  <string name="copy_wikicode_to_clipboard">Copier le wikicode dans le presse-papier</string>
   <string name="pause">pause</string>
   <string name="resume">reprendre</string>
   <string name="paused">En pause</string>
