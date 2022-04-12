@@ -192,17 +192,13 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
      */
     public boolean backPressed() {
         if (null != mediaDetails && mediaDetails.isVisible()) {
-            if (mediaDetails.backButtonClicked()) {
-                // MediaDetails handled the event no further action required.
-                return true;
-            } else {
-                ((ExploreFragment) getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
-                removeFragment(mediaDetails);
-                ((ExploreFragment) getParentFragment()).setScroll(true);
-                setFragment(mapFragment, mediaDetails);
-                ((MainActivity) getActivity()).showTabs();
-                return true;
-            }
+            ((ExploreFragment) getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
+            removeFragment(mediaDetails);
+            ((ExploreFragment) getParentFragment()).setScroll(true);
+            setFragment(mapFragment, mediaDetails);
+            ((MainActivity) getActivity()).showTabs();
+            return true;
+
         } if (mapFragment != null && mapFragment.isVisible()) {
             if (mapFragment.backButtonClicked()) {
                 // Explore map fragment handled the event no further action required.
