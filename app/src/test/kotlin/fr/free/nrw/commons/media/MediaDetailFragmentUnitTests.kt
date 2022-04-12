@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewTreeObserver
 import android.webkit.WebView
 import android.widget.*
@@ -19,10 +20,9 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.generic.GenericDraweeHierarchy
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.soloader.SoLoader
-import fr.free.nrw.commons.*
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
 import org.robolectric.Shadows.shadowOf
-import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter
 import fr.free.nrw.commons.explore.SearchActivity
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng
@@ -34,10 +34,8 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.contributions.ContributionViewHolder
 import fr.free.nrw.commons.delete.DeleteHelper
 import fr.free.nrw.commons.delete.ReasonBuilder
-import fr.free.nrw.commons.utils.ImageUtils
 import io.reactivex.Single
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -100,9 +98,6 @@ class MediaDetailFragmentUnitTests {
     private lateinit var locationManager: LocationServiceManager
 
     @Mock
-    private lateinit var categoryEditSearchRecyclerViewAdapter: CategoryEditSearchRecyclerViewAdapter
-
-    @Mock
     private lateinit var savedInstanceState: Bundle
 
     @Mock
@@ -110,9 +105,6 @@ class MediaDetailFragmentUnitTests {
 
     @Mock
     private lateinit var media: Media
-
-    @Mock
-    private lateinit var categoryRecyclerView: RecyclerView
 
     @Mock
     private lateinit var simpleDraweeView: SimpleDraweeView
@@ -184,10 +176,8 @@ class MediaDetailFragmentUnitTests {
         scrollView = view.findViewById(R.id.mediaDetailScrollView)
         Whitebox.setInternalState(fragment, "scrollView", scrollView)
 
-        categoryRecyclerView = view.findViewById(R.id.rv_categories)
         progressBarDeletion = view.findViewById(R.id.progressBarDeletion)
         delete = view.findViewById(R.id.nominateDeletion)
-        Whitebox.setInternalState(fragment, "categoryRecyclerView", categoryRecyclerView)
 
         Whitebox.setInternalState(fragment, "media", media)
         Whitebox.setInternalState(fragment, "isDeleted", isDeleted)
@@ -214,20 +204,16 @@ class MediaDetailFragmentUnitTests {
         Whitebox.setInternalState(fragment, "delete", delete)
         Whitebox.setInternalState(fragment, "depictionContainer", linearLayout)
         Whitebox.setInternalState(fragment, "toDoLayout", linearLayout)
-        Whitebox.setInternalState(fragment, "dummyCategoryEditContainer", linearLayout)
+        Whitebox.setInternalState(fragment, "authorLayout", linearLayout)
         Whitebox.setInternalState(fragment, "showCaptionAndDescriptionContainer", linearLayout)
-        Whitebox.setInternalState(fragment, "updateCategoriesButton", button)
         Whitebox.setInternalState(fragment, "editDescription", button)
+        Whitebox.setInternalState(fragment, "depictEditButton", button)
+        Whitebox.setInternalState(fragment, "categoryEditButton", button)
         Whitebox.setInternalState(fragment, "categoryContainer", linearLayout)
-        Whitebox.setInternalState(fragment, "categorySearchView", searchView)
         Whitebox.setInternalState(fragment, "progressBarDeletion", progressBarDeletion)
+        Whitebox.setInternalState(fragment, "progressBarEditCategory", progressBarDeletion)
         Whitebox.setInternalState(fragment, "mediaDiscussion", textView)
         Whitebox.setInternalState(fragment, "locationManager", locationManager)
-        Whitebox.setInternalState(
-            fragment,
-            "categoryEditSearchRecyclerViewAdapter",
-            categoryEditSearchRecyclerViewAdapter
-        )
 
         `when`(simpleDraweeView.hierarchy).thenReturn(genericDraweeHierarchy)
         val map = HashMap<String, String>()
@@ -609,16 +595,6 @@ class MediaDetailFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testSetupToDo() {
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "setupToDo"
-        )
-        method.isAccessible = true
-        method.invoke(fragment)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testOnDiscussionLoaded() {
         val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
             "onDiscussionLoaded",
@@ -656,4 +632,59 @@ class MediaDetailFragmentUnitTests {
         MediaDetailFragment.forMedia(0, true, true, true)
     }
 
+    @Test
+    @Throws(Exception::class)
+    fun testOnDepictEditButtonClicked() {
+        fragment.onDepictionsEditButtonClicked()
+        verify(linearLayout).removeAllViews()
+        verify(button).visibility = GONE
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnDeleteButtonClicked() {
+        fragment.onDeleteButtonClicked()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnCategoryEditButtonClicked() {
+        whenever(media.filename).thenReturn("File:Example.jpg")
+        fragment.onCategoryEditButtonClicked()
+        verify(media, times(1)).filename
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testDisplayMediaDetails() {
+        whenever(media.filename).thenReturn("File:Example.jpg")
+        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
+            "displayMediaDetails"
+        )
+        method.isAccessible = true
+        method.invoke(fragment)
+        verify(media, times(4)).filename
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testGotoCategoryEditor() {
+        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
+            "gotoCategoryEditor",
+            String::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, "[[Category:Test]]")
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnMediaRefreshed() {
+        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
+            "onMediaRefreshed",
+            Media::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, media)
+    }
 }

@@ -58,7 +58,7 @@
   <string name="upload_progress_notification_title_start">Качване на файл: %s</string>
   <string name="upload_progress_notification_title_in_progress">„%1$s“ е в процес на качване</string>
   <string name="upload_progress_notification_title_finishing">Завършвам с качване на „%1$s“</string>
-  <string name="upload_failed_notification_title">Качването на „%1$s“ е неуспешно</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Качването на „%1$s“ е неуспешно</string>
   <string name="upload_failed_notification_subtitle">Докоснете, за да видите</string>
   <string name="title_activity_contributions">Моите последни качвания</string>
   <string name="contribution_state_failed">Неуспешно</string>

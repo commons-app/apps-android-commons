@@ -51,7 +51,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Pradedamas įkėlimas %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s įkeliamas</string>
   <string name="upload_progress_notification_title_finishing">Baigiamas įkelti %1$s</string>
-  <string name="upload_failed_notification_title">Įkelti %1$s nepavyko</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Įkelti %1$s nepavyko</string>
   <string name="upload_failed_notification_subtitle">Bakstelėkite norėdami Rodyti</string>
   <string name="title_activity_contributions">Naujausi mano įkėlimai</string>
   <string name="contribution_state_queued">Eilėje</string>

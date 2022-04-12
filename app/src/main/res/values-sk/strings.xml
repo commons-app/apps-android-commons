@@ -278,6 +278,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Ohodnoťte nás</string>
   <string name="about_faq">Často kladené otázky</string>
+  <string name="user_guide">Príručka používateľa</string>
   <string name="welcome_skip_button">Preskočiť návod</string>
   <string name="no_internet">Internet nie je dostupný</string>
   <string name="error_notifications">Pri načítavaní upozornení došlo k chybe</string>
@@ -305,6 +306,7 @@
   <string name="title_activity_search">Hľadať</string>
   <string name="search_recent_header">Nedávne hľadania:</string>
   <string name="provider_searches">Nedávno hľadané dopyty</string>
+  <string name="provider_recent_languages">Poradie najnovších jazykov</string>
   <string name="error_loading_categories">Chyba pri načítaní kategórií.</string>
   <string name="error_loading_depictions">Chyba pri načítaní zobrazení.</string>
   <string name="search_tab_title_media">Multimediálne súbory</string>
@@ -341,6 +343,7 @@
   <string name="error_fetching_nearby_monuments">Nastala chyba pri načítavaní miest v okolí.</string>
   <string name="no_recent_searches">Žiadne nedávne hľadania</string>
   <string name="delete_recent_searches_dialog">Naozaj chcete odstrániť históriu vášho vyhľadávania?</string>
+  <string name="cancel_upload_dialog">Naozaj chcete zrušiť toto nahrávanie?</string>
   <string name="delete_search_dialog">Chcete odstrániť toto hľadanie?</string>
   <string name="search_history_deleted">História vyhľadávania bola odstránená</string>
   <string name="nominate_delete">Navrhnúť na zmazanie</string>
@@ -510,6 +513,15 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Nepodarilo sa pridať kategórie.</string>
   <string name="category_edit_button_text">Aktualizovať kategórie</string>
+  <string name="depictions_edit_helper_make_edit_toast">Pokus o aktualizáciu vyobrazenia.</string>
+  <string name="depictions_edit_helper_show_edit_title">Upraviť vyobrazenia</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">Vyobrazenie %1$s je pridané.</item>
+    <item quantity="few">Vyobrazenia %1$s sú pridané.</item>
+    <item quantity="many">Vyobrazenia %1$s sú pridané.</item>
+    <item quantity="other"/>
+  </plurals>
+  <string name="depictions_edit_helper_edit_message_else">Nepodarilo sa pridať vyobrazenia.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Pokus o aktualizáciu súradníc.</string>
   <string name="coordinates_edit_helper_show_edit_title">Aktualizácia súradníc</string>
   <string name="description_edit_helper_show_edit_title">Aktualizácia popisu</string>
@@ -608,6 +620,8 @@
   <string name="quality_images_info">Kvalitné obrázky sú diagramy a fotografie, ktoré spĺňajú určité štandardy (ktoré sú väčšinou technického charakteru) a sú cenné pre projekty Wikimédie</string>
   <string name="resuming_upload">Pokračovanie nahrávania...</string>
   <string name="pausing_upload">Pozastavovanie nahrávania...</string>
+  <string name="cancelling_upload">Prerušovanie nahrávania...</string>
+  <string name="cancel_upload">Zrušiť nahrávanie</string>
   <string name="limited_connection_explanation">Zapli ste mód limitovaného pripojenia. Všetky nahrávania budú teraz pozastavené a budú pokračovať až po vypnutí tohto módu.</string>
   <string name="limited_connection_is_on">Mód limitovaného pripojenia je zapnutý.</string>
   <string name="media_details_tooltip">Prosím napíšte krátky popis, ktorý povie čo sa na obrázku nachádza. Uveďte v popise čím je obrázok zaujímavý alebo čo typické alebo vzácne na ňom je. Používajte čo najpresnejšiu terminológiu ako je možné.</string>
@@ -655,10 +669,28 @@
   <string name="contributions_of_user">Príspevky používateľa:  %s</string>
   <string name="achievements_of_user">Úspechy používateľa: %s</string>
   <string name="menu_view_user_page">Zobraziť stránku používateľa</string>
+  <string name="edit_depictions">Upraviť vyobrazenia</string>
   <string name="advanced_options">Rozšírené možnosti</string>
   <string name="advanced_query_info_text">Blízke miesta si môžete upraviť podľa seba. Ak sa vyskytne chyba, vynulujte nastavenia.</string>
   <string name="apply">Požiadať</string>
   <string name="reset">Vynulovať</string>
   <string name="location_message">Údaje o polohe pomáhajú editorom nájsť Váš obrázok a spraviť ho viac užitočným. \nVaše nedávne nahrávania nemajú polohu.\nOdporúčame Vám zapnúť zisťovanie polohy v nastaveniach Vašej kamery. \nĎakujeme!</string>
+  <string name="no_location_found_title">Nenašli sa žiadne polohy</string>
+  <string name="no_location_found_message">Čo tak pridať miesto kde bol tento obrázok urobený? Údaje o polohe pomáhajú editorom Wiki nájsť Váš obrázok a urobiť ho tak viac užitočným. Ďakujeme!</string>
+  <string name="add_location">Pridať polohu</string>
   <string name="feedback_sharing_data_alert">Prosím odstráňte z tohto emailu informácie, ktoré nechcete zverejniť. Takisto berte prosím na vedomie, že vaša emailová adresa z ktorej posielate príspevky bude zverejnená.</string>
+  <string name="achievements_unavailable_beta">Úspechy sú dostupné len v prod flavor. Prosím skontrolujte vývojársku dokumentáciu.</string>
+  <string name="leaderboard_unavailable_beta">Rebríček je dostupný len v prod flavor. Prosím skontrolujte vývojársku dokumentáciu.</string>
+  <string name="copyright_popup">Prosím nahrajte len obrázky, ktoré ste urobili Vy sami. Obrázky podliehajúce autorským právam budú zablokované.</string>
+  <string name="select_feedback_data_choice">Prosím odznačte každú informáciu, ktorú nechcete verejne zdieľať.</string>
+  <string name="api_level">Úroveň API</string>
+  <string name="android_version">Verzia Androidu</string>
+  <string name="device_manufacturer">Výrobca zariadenia</string>
+  <string name="device_model">Model zariadenia</string>
+  <string name="device_name">Názov zariadenia</string>
+  <string name="network_type">Typ siete</string>
+  <string name="thanks_feedback">Ďakujem za Vašu spätnú väzbu</string>
+  <string name="error_feedback">Pri odosielaní spätnej väzby sa vyskytla chyba</string>
+  <string name="enter_description">Aká je Vaša spätná väzba?</string>
+  <string name="your_feedback">Vaša spätná väzba</string>
 </resources>

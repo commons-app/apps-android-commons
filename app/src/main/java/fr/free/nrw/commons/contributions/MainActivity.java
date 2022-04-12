@@ -74,6 +74,7 @@ public class MainActivity  extends BaseActivity
     private BookmarkFragment bookmarkFragment;
     public ActiveFragment activeFragment;
     private MediaDetailPagerFragment mediaDetailPagerFragment;
+    private NavTabLayout.OnNavigationItemSelectedListener navListener;
 
     @Inject
     public LocationServiceManager locationManager;
@@ -124,14 +125,31 @@ public class MainActivity  extends BaseActivity
         toolbar.setNavigationOnClickListener(view -> {
             onSupportNavigateUp();
         });
+        /*
+        "first_edit_depict" is a key for getting information about opening the depiction editor
+        screen for the first time after opening the app.
+
+        Getting true by the key means the depiction editor screen is opened for the first time
+        after opening the app.
+        Getting false by the key means the depiction editor screen is not opened for the first time
+        after opening the app.
+         */
+        applicationKvStore.putBoolean("first_edit_depict", true);
         if (applicationKvStore.getBoolean("login_skipped") == true) {
             setTitle(getString(R.string.navigation_item_explore));
             setUpLoggedOutPager();
         } else {
             if(savedInstanceState == null){
                 //starting a fresh fragment.
-                setTitle(getString(R.string.contributions_fragment));
-                loadFragment(ContributionsFragment.newInstance(),false);
+                // Open Last opened screen if it is Contributions or Nearby, otherwise Contributions
+                if(applicationKvStore.getBoolean("last_opened_nearby")){
+                    setTitle(getString(R.string.nearby_fragment));
+                    showNearby();
+                    loadFragment(NearbyParentFragment.newInstance(),false);
+                }else{
+                    setTitle(getString(R.string.contributions_fragment));
+                    loadFragment(ContributionsFragment.newInstance(),false);
+                }
             }
             setUpPager();
         }
@@ -142,11 +160,14 @@ public class MainActivity  extends BaseActivity
     }
 
     private void setUpPager() {
-        tabLayout.setOnNavigationItemSelectedListener(item -> {
+        tabLayout.setOnNavigationItemSelectedListener(navListener = (item) -> {
             if (!item.getTitle().equals(getString(R.string.more))) {
                 // do not change title for more fragment
                 setTitle(item.getTitle());
             }
+            // set last_opened_nearby true if item is nearby screen else set false
+            applicationKvStore.putBoolean("last_opened_nearby",
+                item.getTitle().equals(getString(R.string.nearby_fragment)));
             final Fragment fragment = NavTab.of(item.getOrder()).newInstance();
             return loadFragment(fragment, true);
         });
@@ -405,5 +426,9 @@ public class MainActivity  extends BaseActivity
         final String language = preferences.getString("language", "");
         final SettingsFragment settingsFragment = new SettingsFragment();
         settingsFragment.setLocale(this, language);
+    }
+
+    public NavTabLayout.OnNavigationItemSelectedListener getNavListener(){
+        return navListener;
     }
 }

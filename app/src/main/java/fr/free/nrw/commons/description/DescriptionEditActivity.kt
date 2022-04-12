@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.R
@@ -13,31 +12,22 @@ import fr.free.nrw.commons.databinding.ActivityDescriptionEditBinding
 import fr.free.nrw.commons.description.EditDescriptionConstants.LIST_OF_DESCRIPTION_AND_CAPTION
 import fr.free.nrw.commons.description.EditDescriptionConstants.UPDATED_WIKITEXT
 import fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT
-import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
 import fr.free.nrw.commons.settings.Prefs
+import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.UploadMediaDetail
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
-import java.util.*
 import javax.inject.Inject
-import javax.inject.Named
 
 /**
  * Activity for populating and editing existing description and caption
  */
-class DescriptionEditActivity : AppCompatActivity(), UploadMediaDetailAdapter.EventListener {
+class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventListener {
     /**
      * Adapter for showing UploadMediaDetail in the activity
      */
     private lateinit var uploadMediaDetailAdapter: UploadMediaDetailAdapter
-
-    /**
-     * For getting default preference
-     */
-    @JvmField
-    @Inject
-    @Named("default_preferences")
-    var defaultKvStore: JsonKvStore? = null
 
     /**
      * Recyclerview for recycling data in views
@@ -51,9 +41,17 @@ class DescriptionEditActivity : AppCompatActivity(), UploadMediaDetailAdapter.Ev
     var wikiText: String? = null
 
     /**
+     * Saved language
+     */
+    private lateinit var savedLanguageValue: String
+
+    /**
      * For showing progress dialog
      */
     private var progressDialog: ProgressDialog? = null
+
+    @Inject
+    lateinit var recentLanguagesDao: RecentLanguagesDao
 
     private lateinit var binding: ActivityDescriptionEditBinding
 
@@ -67,6 +65,7 @@ class DescriptionEditActivity : AppCompatActivity(), UploadMediaDetailAdapter.Ev
         val descriptionAndCaptions: ArrayList<UploadMediaDetail> =
             bundle!!.getParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION)!!
         wikiText = bundle.getString(WIKITEXT)
+        savedLanguageValue = bundle.getString(Prefs.DESCRIPTION_LANGUAGE)!!
         initRecyclerView(descriptionAndCaptions)
 
         binding.btnAddDescription.setOnClickListener(::onButtonAddDescriptionClicked)
@@ -80,8 +79,7 @@ class DescriptionEditActivity : AppCompatActivity(), UploadMediaDetailAdapter.Ev
      */
     private fun initRecyclerView(descriptionAndCaptions: ArrayList<UploadMediaDetail>?) {
         uploadMediaDetailAdapter = UploadMediaDetailAdapter(
-            defaultKvStore?.getString(Prefs.DESCRIPTION_LANGUAGE, ""),
-            descriptionAndCaptions)
+            savedLanguageValue, descriptionAndCaptions, recentLanguagesDao)
         uploadMediaDetailAdapter.setCallback { titleStringID: Int, messageStringId: Int ->
             showInfoAlert(
                 titleStringID,

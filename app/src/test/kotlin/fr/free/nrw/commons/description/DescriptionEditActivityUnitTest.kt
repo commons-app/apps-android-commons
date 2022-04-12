@@ -15,6 +15,7 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.databinding.ActivityDescriptionEditBinding
 import fr.free.nrw.commons.description.EditDescriptionConstants.LIST_OF_DESCRIPTION_AND_CAPTION
 import fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT
+import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.UploadMediaDetail
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
 import junit.framework.Assert.assertEquals
@@ -65,6 +66,7 @@ class DescriptionEditActivityUnitTest {
         val bundle = Bundle()
         bundle.putParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION, uploadMediaDetails)
         bundle.putString(WIKITEXT, "desc")
+        bundle.putString(Prefs.DESCRIPTION_LANGUAGE, "bn")
         intent.putExtras(bundle)
         activity =
             Robolectric.buildActivity(DescriptionEditActivity::class.java, intent).create().get()
@@ -75,6 +77,7 @@ class DescriptionEditActivityUnitTest {
         Whitebox.setInternalState(activity, "uploadMediaDetailAdapter", uploadMediaDetailAdapter)
         Whitebox.setInternalState(activity, "rvDescriptions", rvDescriptions)
         Whitebox.setInternalState(activity, "binding", binding)
+        Whitebox.setInternalState(activity, "savedLanguageValue", "bn")
         `when`(uploadMediaDetailAdapter.items).thenReturn(uploadMediaDetails)
     }
 

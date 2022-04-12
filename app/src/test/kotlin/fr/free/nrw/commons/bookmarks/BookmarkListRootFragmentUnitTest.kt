@@ -294,8 +294,7 @@ class BookmarkListRootFragmentUnitTest {
     @Throws(Exception::class)
     fun `testBackPressed Case NonNull isVisible and backButton clicked`() {
         whenever(mediaDetails.isVisible).thenReturn(true)
-        whenever(mediaDetails.backButtonClicked()).thenReturn(true)
-        Assert.assertEquals(fragment.backPressed(), true)
+        Assert.assertEquals(fragment.backPressed(), false)
     }
 
     @Test
@@ -303,7 +302,6 @@ class BookmarkListRootFragmentUnitTest {
     fun `testBackPressed Case NonNull isVisible and backButton not clicked`() {
         Whitebox.setInternalState(fragment, "listFragment", mock(BookmarkPicturesFragment::class.java))
         whenever(mediaDetails.isVisible).thenReturn(true)
-        whenever(mediaDetails.backButtonClicked()).thenReturn(false)
         whenever(mediaDetails.removedItems).thenReturn(ArrayList(0))
         Assert.assertEquals(fragment.backPressed(), false)
     }

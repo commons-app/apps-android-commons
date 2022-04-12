@@ -39,7 +39,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">Zrëszony wladënk lopka %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s wladënk</string>
   <string name="upload_progress_notification_title_finishing">Zakùńczony wladënk lopka %1$s</string>
-  <string name="upload_failed_notification_title">Wladënk %1$s nie darzëł sã</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Wladënk %1$s nie darzëł sã</string>
   <string name="upload_failed_notification_subtitle">Tkni, abë òbôczëc</string>
   <string name="title_activity_contributions">Mòjé slédno wladowóné lopczi</string>
   <string name="contribution_state_queued">Żdające</string>

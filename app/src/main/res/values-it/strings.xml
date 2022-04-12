@@ -78,7 +78,7 @@
   <string name="upload_progress_notification_title_start">Caricamento file: %s</string>
   <string name="upload_progress_notification_title_in_progress">Sto caricando %1$s</string>
   <string name="upload_progress_notification_title_finishing">Terminato il caricamento di %1$s</string>
-  <string name="upload_failed_notification_title">Caricamento di %1$s non riuscito</string>
+  <string name="upload_failed_notification_title">Errore durante il caricamento di %1$s</string>
   <string name="upload_paused_notification_title">Caricamento di %1$s in pausa</string>
   <string name="upload_failed_notification_subtitle">Premi per visualizzare</string>
   <string name="upload_paused_notification_subtitle">Premi per visualizzare</string>
@@ -443,7 +443,7 @@
   <string name="review_thanks_yes_button_text">Immagine successiva</string>
   <string name="review_thanks_no_button_text">Certo, perché no</string>
   <string name="skip_image_explanation">Cliccando questo bottone otterrai un\'altra immagine caricata di recente su  Wikimedia Commons</string>
-  <string name="review_image_explanation">È possibile revisionare le immagini e migliorare la qualità di Wikimedia Commons.\nI quattro criteri di revisione sono:\n- L\'immagine è compatibile con gli obiettivi di progetto?\n- L\'immagine rispetta le norme sul diritto d\'autore?\n- L\'immagine è categorizzata correttamente?\n- Se tutto va bene, potresti anche inviare un ringraziamento al contributore.</string>
+  <string name="review_image_explanation">È possibile revisionare le immagini per migliorare la qualità di Wikimedia Commons.\nI tre criteri di revisione sono:\n- L\'immagine è compatibile con gli obiettivi di progetto?\nQuando selezioni No (fuori scopo), stai aggiungendo un template di candidatura per la cancellazione a questa immagine.\n\n- L\'immagine segue le regole sul diritto d\'autore?\nQuando selezioni No (non segue le regole del copyright), stai aggiungendo un template di candidatura per la cancellazione a questa immagine.\n\n- L\'immagine è categorizzata correttamente?\nQuando selezioni No (non classificato correttamente), stai aggiungendo un template di richiesta di categorizzazione a questa immagine.\n\nSe tutto va bene, nessun template viene aggiunto all\'immagine e hai l\'opportunità di ringraziare il contributore.</string>
   <string name="no_image">Nessuna immagine utilizzata</string>
   <string name="no_image_reverted">Nessuna immagine ripristinata</string>
   <string name="no_image_uploaded">Nessuna immagine caricata</string>

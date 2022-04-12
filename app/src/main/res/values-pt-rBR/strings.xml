@@ -17,6 +17,7 @@
 * TheGabrielZaum
 * Tks4Fish
 * Tuliouel
+* YuriNikolai
 -->
 <resources>
   <plurals name="uploads_pending_notification_indicator">
@@ -76,7 +77,7 @@
   <string name="upload_progress_notification_title_start">Carregando arquivo: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s enviando!</string>
   <string name="upload_progress_notification_title_finishing">Terminando o envio de %1$s</string>
-  <string name="upload_failed_notification_title">Envio de %1$s falhou</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Envio de %1$s falhou</string>
   <string name="upload_paused_notification_title">Envio de %1$s em pausa</string>
   <string name="upload_failed_notification_subtitle">Toque para ver</string>
   <string name="upload_paused_notification_subtitle">Toque para ver</string>
@@ -440,7 +441,7 @@
   <string name="review_thanks_yes_button_text">Próxima imagem</string>
   <string name="review_thanks_no_button_text">Sim, porque não</string>
   <string name="skip_image_explanation">Clicando neste botão você terá uma outra imagem carregada recentemente do Wikimedia Commons</string>
-  <string name="review_image_explanation">Você pode rever imagens e melhorar a qualidade dos Wikimedia Commons.\n Os quatro parâmetros de revisão são:\n- Esta imagem está no escopo?\n- Esta imagem segue as regras de direitos autorais?\n- Esta imagem está categorizada corretamente?\n- Se tudo correr bem, você também pode agradecer ao colaborador.</string>
+  <string name="review_image_explanation" fuzzy="true">Você pode rever imagens e melhorar a qualidade dos Wikimedia Commons.\n Os quatro parâmetros de revisão são:\n- Esta imagem está no escopo?\n- Esta imagem segue as regras de direitos autorais?\n- Esta imagem está categorizada corretamente?\n- Se tudo correr bem, você também pode agradecer ao colaborador.</string>
   <string name="no_image">Nenhuma imagem usada</string>
   <string name="no_image_reverted">Nenhuma imagem revertida</string>
   <string name="no_image_uploaded">Nenhuma imagem enviada</string>
@@ -624,4 +625,9 @@
   <string name="wlm_month_message">Estamos no mês no Wiki Loves Monuments!</string>
   <string name="learn_more">SABER MAIS</string>
   <string name="wlm_campaign_description">O Wiki Loves Monuments é um concurso internacional organizado pela Wikimedia sobre fotografias de monumentos</string>
+  <string name="api_level">Nível da API</string>
+  <string name="android_version">Versão do Android</string>
+  <string name="device_manufacturer">Fabricante do aparelho</string>
+  <string name="device_model">Modelo do aparelho</string>
+  <string name="device_name">Nome do aparelho</string>
 </resources>
