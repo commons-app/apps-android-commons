@@ -265,6 +265,7 @@
   <string name="nearby_commons">কমন্স</string>
   <string name="about_rate_us">আমাদের মূল্যায়ন করুন</string>
   <string name="about_faq">প্রাজিপ্র</string>
+  <string name="user_guide">ব্যবহারকারী নির্দেশিকা</string>
   <string name="welcome_skip_button">টিউটোরিয়াল এড়ান</string>
   <string name="no_internet">ইন্টারনেট অনুপলব্ধ</string>
   <string name="no_notifications">কোন বিজ্ঞপ্তি পাওয়া যায়নি</string>
@@ -445,7 +446,11 @@
   <string name="api_level">এপিআই লেভেল</string>
   <string name="android_version">অ্যান্ড্রয়েড সংস্করণ</string>
   <string name="device_manufacturer">ডিভাইস প্রস্তুতকারক</string>
+  <string name="device_model">ডিভাইস মডেল</string>
   <string name="device_name">ডিভাইসের নাম</string>
+  <string name="network_type">নেটওয়ার্কের ধরন</string>
+  <string name="thanks_feedback">প্রতিক্রিয়া দেওয়ার জন্য ধন্যবাদ</string>
   <string name="error_feedback">প্রতিক্রিয়া পাঠানোর সময় ত্রুটি ঘটেছে</string>
+  <string name="enter_description">আপনার প্রতিক্রিয়া কী?</string>
   <string name="your_feedback">আপনার প্রতিক্রিয়া</string>
 </resources>

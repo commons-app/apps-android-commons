@@ -40,7 +40,7 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
         featuredArguments.putString("categoryName", title);
         listFragment.setArguments(featuredArguments);
     }
-  
+
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater,
@@ -185,18 +185,12 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
      */
     public boolean backPressed() {
         if (null != mediaDetails && mediaDetails.isVisible()) {
-            // todo add get list fragment
-            if (mediaDetails.backButtonClicked()) {
-                // MediaDetails handled the event no further action required.
-                return true;
-            } else {
-                ((ExploreFragment) getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
-                removeFragment(mediaDetails);
-                ((ExploreFragment) getParentFragment()).setScroll(true);
-                setFragment(listFragment, mediaDetails);
-                ((MainActivity) getActivity()).showTabs();
-                return true;
-            }
+            ((ExploreFragment) getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
+            removeFragment(mediaDetails);
+            ((ExploreFragment) getParentFragment()).setScroll(true);
+            setFragment(listFragment, mediaDetails);
+            ((MainActivity) getActivity()).showTabs();
+            return true;
         } else {
             ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
         }

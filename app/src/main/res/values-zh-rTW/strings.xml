@@ -306,12 +306,12 @@
   <string name="provider_searches">近期搜尋查詢</string>
   <string name="provider_recent_languages">近期語言查詢</string>
   <string name="error_loading_categories">當載入分類時發生錯誤。</string>
-  <string name="error_loading_depictions">當載入描寫時發生錯誤。</string>
+  <string name="error_loading_depictions">載入描述時發生錯誤。</string>
   <string name="search_tab_title_media">媒體</string>
   <string name="search_tab_title_categories">分類</string>
   <string name="search_tab_title_depictions">項目</string>
   <string name="explore_tab_title_featured">特色</string>
-  <string name="explore_tab_title_mobile">透過行動設備上傳</string>
+  <string name="explore_tab_title_mobile">透過行動裝置上傳</string>
   <string name="successful_wikidata_edit">圖片已添加到維基數據上的%1$s！</string>
   <string name="wikidata_edit_failure">更新所對應的維基數據項目失敗！</string>
   <string name="menu_set_wallpaper">設定為桌布</string>

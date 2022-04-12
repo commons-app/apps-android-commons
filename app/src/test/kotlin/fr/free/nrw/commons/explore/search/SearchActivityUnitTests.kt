@@ -204,7 +204,6 @@ class SearchActivityUnitTests {
         `when`(supportFragmentManager.backStackEntryCount).thenReturn(1)
         `when`(mediaDetails.isVisible).thenReturn(true)
         activity.refreshNominatedMedia(0)
-        verify(mediaDetails).backButtonClicked()
     }
 
     @Test
@@ -215,9 +214,7 @@ class SearchActivityUnitTests {
         `when`(mFragments.supportFragmentManager).thenReturn(supportFragmentManager)
         `when`(supportFragmentManager.backStackEntryCount).thenReturn(1)
         `when`(mediaDetails.isVisible).thenReturn(true)
-        `when`(mediaDetails.backButtonClicked()).thenReturn(true)
         activity.refreshNominatedMedia(0)
-        verify(mediaDetails).backButtonClicked()
     }
 
     @Test
@@ -228,12 +225,10 @@ class SearchActivityUnitTests {
         Whitebox.setInternalState(activity, "mediaDetails", mediaDetails)
         `when`(mFragments.supportFragmentManager).thenReturn(supportFragmentManager)
         `when`(supportFragmentManager.backStackEntryCount).thenReturn(1)
-        `when`(mediaDetails.backButtonClicked()).thenReturn(true)
         `when`(mediaDetails.isVisible).thenReturn(true)
         val method: Method = SearchActivity::class.java.getDeclaredMethod("onResume")
         method.isAccessible = true
         method.invoke(activity)
-        verify(mediaDetails).backButtonClicked()
     }
 
     @Test

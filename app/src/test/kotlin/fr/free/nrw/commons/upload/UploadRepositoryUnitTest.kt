@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload
 
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.category.CategoriesModel
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.contributions.Contribution
@@ -73,6 +74,9 @@ class UploadRepositoryUnitTest {
     @Mock
     private lateinit var imageCoordinates: ImageCoordinates
 
+    @Mock
+    private lateinit var media: Media
+
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
@@ -142,8 +146,8 @@ class UploadRepositoryUnitTest {
 
     @Test
     fun testOnCategoryClicked() {
-        repository.onCategoryClicked(categoryItem)
-        verify(categoriesModel).onCategoryItemClicked(categoryItem)
+        repository.onCategoryClicked(categoryItem, media)
+        verify(categoriesModel).onCategoryItemClicked(categoryItem, media)
     }
 
     @Test
@@ -339,4 +343,21 @@ class UploadRepositoryUnitTest {
         method.invoke(repository, null)
     }
 
+    @Test
+    fun testGetSelectedExistingCategories() {
+        assertEquals(repository.selectedExistingCategories,
+            categoriesModel.getSelectedExistingCategories())
+    }
+
+    @Test
+    fun testSetSelectedExistingCategories() {
+        assertEquals(repository.setSelectedExistingCategories(listOf("Test")),
+            categoriesModel.setSelectedExistingCategories(mutableListOf("Test")))
+    }
+
+    @Test
+    fun testGetCategories() {
+        assertEquals(repository.getCategories(listOf("Test")),
+            categoriesModel.getCategoriesByName(mutableListOf("Test")))
+    }
 }

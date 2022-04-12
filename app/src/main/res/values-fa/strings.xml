@@ -18,6 +18,7 @@
 * Mehdi
 * Mjbmr
 * Mobin2008
+* Mojtabakd
 * Nightdevil
 * Omidh
 * Ommmmid
@@ -48,8 +49,8 @@
     <item quantity="other">%d بارگذاری</item>
   </plurals>
   <plurals name="share_license_summary">
-    <item quantity="one">این نگاره تحت مجوز %1$s است</item>
-    <item quantity="other">این نگاره تحت مجوز %1$s است</item>
+    <item quantity="one">این تصویر تحت مجوز %1$s است</item>
+    <item quantity="other">این تصویر تحت مجوز %1$s است</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d بارگذاری</item>
@@ -75,7 +76,7 @@
   <string name="login_success">ورود موفق!</string>
   <string name="login_failed">ورود ناموفق!</string>
   <string name="upload_failed">پرونده یافت نشد لطفاً پرونده دیگری را امتحان کنید.</string>
-  <string name="authentication_failed">تأیید اعتبار انجام نشد! لطفاً دوباره وارد شوید.</string>
+  <string name="authentication_failed">تأیید اعتبار ناموفق بود! لطفاً دوباره وارد شوید.</string>
   <string name="uploading_started">بارگذاری آغاز شد!</string>
   <string name="upload_completed_notification_title">%1$s بارگذاری شد!</string>
   <string name="upload_completed_notification_text">برای دیدن بارگذاریتان بر روی صفحه انگشت بزنید</string>
@@ -103,7 +104,7 @@
   <string name="login_failed_network">قادر به ورود نیست - شکست شبکه‌ای</string>
   <string name="login_failed_throttled">تلاش ناموفق بیش از حد. لطفاً چند دقیقهٔ دیگر دوباره تلاش کنید</string>
   <string name="login_failed_blocked">پوزش، کاربر در ویکی‌انبار بسته شده‌است</string>
-  <string name="login_failed_2fa_needed">باید تأیید دومرحله‌ای را فعال کنید.</string>
+  <string name="login_failed_2fa_needed">شما باید کد تأیید اعتبار دومرحله‌ای را ارائه کنید.</string>
   <string name="login_failed_generic">ورود ناموفق بود</string>
   <string name="share_upload_button">بارگذاری</string>
   <string name="multiple_share_base_title">نام این مجموعه</string>
@@ -254,7 +255,7 @@
   <string name="null_url">خطا! نشانی یافت نشد</string>
   <string name="nominate_deletion">نامزد شده برای حذف</string>
   <string name="nominated_for_deletion">این تصویر برای حذف شدن علامت گذاری شده.</string>
-  <string name="nominated_see_more">برای جزئیات، صفحات وب را نگاه کنید</string>
+  <string name="nominated_see_more">برای جزئیات، صفحه‌های وب را نگاه کنید</string>
   <string name="skip_login">رها کردن</string>
   <string name="navigation_item_login">ورود به سامانه</string>
   <string name="skip_login_title">آیا واقعا میخواهید وارد شوید؟</string>
@@ -270,6 +271,7 @@
   <string name="nearby_commons">ویکی‌انبار</string>
   <string name="about_rate_us">به ما نمره دهید</string>
   <string name="about_faq">سؤال‌های متداول</string>
+  <string name="user_guide">راهنمای کاربر</string>
   <string name="welcome_skip_button">رهاکردن آموزش</string>
   <string name="no_internet">اینترنت در دسترس نیست</string>
   <string name="error_notifications">خطای واکشی کردن آگاه‌سازی‌ها</string>
@@ -295,13 +297,14 @@
   <string name="title_activity_search">جستجو</string>
   <string name="search_recent_header">جستجوهای اخیر:</string>
   <string name="provider_searches">کوئری‌های که اخیرا جستجو شده</string>
+  <string name="provider_recent_languages">پرسمان‌های زبانی اخیر</string>
   <string name="error_loading_categories">خطا هنگام بار کردن رده ها.</string>
   <string name="search_tab_title_media">رسانه</string>
   <string name="search_tab_title_categories">رده‌ها</string>
   <string name="explore_tab_title_featured">برگزیده</string>
   <string name="explore_tab_title_mobile">بارگذاری‌شده با تلفن همراه</string>
   <string name="successful_wikidata_edit">تصویر به %1$s در ویکی‌داده افزوده شد!</string>
-  <string name="wikidata_edit_failure">تلاش برای بروزرسانی موجودی ویکی‌دیتای مرتبط شکست خورد</string>
+  <string name="wikidata_edit_failure">تلاش برای به‌روزرسانی موجودی ویکی‌دیتای مرتبط شکست خورد</string>
   <string name="menu_set_wallpaper">انتخاب به عنوان پس‌زمینه</string>
   <string name="wallpaper_set_successfully">تصویر پس زمینه به طور موفقیت آمیز تنظیم شد!</string>
   <string name="quiz">امتحان</string>
@@ -476,4 +479,7 @@
   <string name="advanced_options">گزینه‌های پیشرفته</string>
   <string name="apply">اعمال</string>
   <string name="reset">بازنشانی</string>
+  <string name="api_level">سطح API</string>
+  <string name="device_model">مدل دستگاه</string>
+  <string name="device_name">نام دستگاه</string>
 </resources>
