@@ -10,7 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
+import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.tabs.TabLayout;
@@ -50,7 +50,7 @@ public class SearchActivity extends BaseActivity
     @BindView(R.id.mediaContainer) FrameLayout mediaContainer;
     @BindView(R.id.searchBox) SearchView searchView;
     @BindView(R.id.tab_layout) TabLayout tabLayout;
-    @BindView(R.id.viewPager) ParentViewPager viewPager;
+    @BindView(R.id.viewPager) ViewPager viewPager;
 
     @Inject
     RecentSearchesDao recentSearchesDao;
@@ -76,7 +76,7 @@ public class SearchActivity extends BaseActivity
         setSearchHistoryFragment();
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
-        viewPager.setOffscreenPageLimit(4); // Because we want all the fragments to be alive
+        viewPager.setOffscreenPageLimit(2); // Because we want all the fragments to be alive
         tabLayout.setupWithViewPager(viewPager);
         setTabs();
         searchView.setQueryHint(getString(R.string.search_commons));
@@ -119,27 +119,6 @@ public class SearchActivity extends BaseActivity
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::handleSearch, Timber::e
                 ));
-        viewPager.addOnPageChangeListener(new OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset,
-                int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                if (position == 3) {
-                    viewPager.setCanScroll(false);
-                } else {
-                    viewPager.setCanScroll(true);
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
     }
 
     private void handleSearch(final CharSequence query) {
@@ -177,8 +156,7 @@ public class SearchActivity extends BaseActivity
         // Newly searched query...
         if (recentSearch == null) {
             recentSearchesDao.save(new RecentSearch(null, query, new Date()));
-        }
-        else {
+        } else {
             recentSearch.setLastSearched(new Date());
             recentSearchesDao.save(recentSearch);
         }
