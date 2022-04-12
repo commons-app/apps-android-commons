@@ -717,5 +717,4 @@ Upload your first media by tapping on the add button.</string>
   <string name="error_feedback">Error while sending feedback</string>
   <string name="enter_description">What is your feedback?</string>
   <string name="your_feedback">Your feedback</string>
->>>>>>> upstream/master
 </resources>
