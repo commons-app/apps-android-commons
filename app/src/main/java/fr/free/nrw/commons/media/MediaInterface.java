@@ -78,7 +78,8 @@ public interface MediaInterface {
     @GET("w/api.php?action=query&format=json&formatversion=2" + //Basic parameters
             "&generator=search&gsrwhat=text&gsrnamespace=6" + //Search parameters
             MEDIA_PARAMS)
-    Single<MwQueryResponse> getMediaListFromSearch(@Query("gsrsearch") String keyword, @Query("gsrlimit") int itemLimit, @Query("gsroffset") int offset);
+    Single<MwQueryResponse> getMediaListFromSearch(@Query("gsrsearch") String keyword,
+        @Query("gsrlimit") int itemLimit, @Query("gsroffset") int offset);
 
     /**
      * This method retrieves a list of Media objects filtered using list geosearch query. Example: https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2&generator=geosearch&ggsnamespace=6&prop=imageinfo|coordinates&iiprop=url|extmetadata|user&&iiurlwidth=640&iiextmetadatafilter=DateTime|Categories|GPSLatitude|GPSLongitude|ImageDescription|DateTimeOriginal|Artist|LicenseShortName|LicenseUrl&ggscoord=37.45579%7C-122.31369&ggslimit=30&ggsradius=10000

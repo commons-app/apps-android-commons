@@ -90,7 +90,7 @@ class MediaClient @Inject constructor(
      * @return
      */
     fun getMediaListFromSearch(keyword: String?, limit: Int, offset: Int) =
-        responseMapper(mediaInterface.getMediaListFromSearch(keyword, limit, 0))
+        responseMapper(mediaInterface.getMediaListFromSearch(keyword, limit, offset))
 
     /**
      * This method takes coordinate as input and returns a list of  Media objects.
