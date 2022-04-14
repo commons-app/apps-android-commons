@@ -7,7 +7,6 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import androidx.annotation.Nullable;
 
-import fr.free.nrw.commons.nearby.NearbyController.NearbyPlacesInfo;
 import org.apache.commons.lang3.StringUtils;
 
 import fr.free.nrw.commons.location.LatLng;
@@ -34,7 +33,19 @@ public class Place implements Parcelable {
     public String distance;
     public final Sitelinks siteLinks;
     private boolean isMonument;
+    private String thumb;
 
+    public Place() {
+        language = null;
+        name = null;
+        label = null;
+        longDescription = null;
+        location = null;
+        category = null;
+        pic = null;
+        exists = null;
+        siteLinks = null;
+    }
 
     public Place(String language,String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, Boolean exists) {
         this.language = language;
@@ -47,6 +58,20 @@ public class Place implements Parcelable {
         this.pic = (pic == null) ? "":pic;
         this.exists = exists;
     }
+
+    public Place(String name, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, String thumb) {
+        this.name = name;
+        this.longDescription = longDescription;
+        this.location = location;
+        this.category = category;
+        this.siteLinks = siteLinks;
+        this.pic = (pic == null) ? "":pic;
+        this.thumb = thumb;
+        this.language = null;
+        this.label = null;
+        this.exists = true;
+    }
+
     public Place(Parcel in) {
         this.language = in.readString();
         this.name = in.readString();
@@ -269,4 +294,12 @@ public class Place implements Parcelable {
             return new Place[size];
         }
     };
+
+    public String getThumb() {
+        return thumb;
+    }
+
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
+    }
 }

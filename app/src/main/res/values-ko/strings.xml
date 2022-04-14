@@ -304,6 +304,7 @@
   <string name="search_tab_title_depictions">항목</string>
   <string name="explore_tab_title_featured">추천됨</string>
   <string name="explore_tab_title_mobile">모바일을 통해 업로드됨</string>
+  <string name="explore_tab_title_map">지도</string>
   <string name="successful_wikidata_edit">위키데이터의 %1$s에 그림을 추가했습니다!</string>
   <string name="wikidata_edit_failure">일치하는 위키데이터 엔티티의 업데이트를 실패했습니다!</string>
   <string name="menu_set_wallpaper">배경화면으로 설정</string>
@@ -552,9 +553,11 @@
   <string name="need_permission">권한 필요</string>
   <string name="contributions_of_user">사용자의 기여: %s</string>
   <string name="menu_view_user_page">사용자 문서 보기</string>
+  <string name="edit_categories">분류 편집</string>
   <string name="advanced_options">고급 옵션</string>
   <string name="apply">적용</string>
   <string name="reset">재설정</string>
+  <string name="explore_map_details">자세한 사항</string>
   <string name="copyright_popup">당신이 찍은 사진만 올려 주십시오. 저작권이 있는 이미지를 올린 사람은 차단됩니다. 양질의 이미지에도 해당합니다. 앱을 테스트해 주셔서 고맙습니다!</string>
   <string name="api_level">API 레벨</string>
   <string name="android_version">안드로이드 버전</string>

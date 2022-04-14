@@ -156,6 +156,7 @@
   <string name="showcase_view_whole_nearby_activity">\"Search this area\" refers to {{msg-wm|Commons-android-strings-search this area}}.</string>
   <string name="menu_search_button">{{Identical|Search}}</string>
   <string name="title_activity_search">{{Identical|Search}}</string>
+  <string name="explore_tab_title_map">{{Identical|Map}}</string>
   <string name="successful_wikidata_edit">Message shown in a dialog (\"success toast\") after a contribution by the user.\n\nParameter:\n* %1$s - title of the target page on Wikidata</string>
   <string name="question">{{Identical|Question}}</string>
   <string name="result">{{Identical|Result}}</string>
@@ -180,4 +181,5 @@
   <string name="description">{{Identical|Description}}</string>
   <string name="title_page_bookmarks_items">{{Identical|Item}}</string>
   <string name="done">{{identical|Done}}</string>
+  <string name="explore_map_details">{{Identical|Detail}}</string>
 </resources>

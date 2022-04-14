@@ -140,7 +140,8 @@ public class SearchActivity extends BaseActivity
                 searchCategoryFragment.onQueryUpdated(query.toString());
             }
 
-        } else {
+         }
+        else {
             //Open RecentSearchesFragment
             recentSearchesFragment.updateRecentSearches();
             viewPager.setVisibility(View.GONE);
@@ -155,8 +156,7 @@ public class SearchActivity extends BaseActivity
         // Newly searched query...
         if (recentSearch == null) {
             recentSearchesDao.save(new RecentSearch(null, query, new Date()));
-        }
-        else {
+        } else {
             recentSearch.setLastSearched(new Date());
             recentSearchesDao.save(recentSearch);
         }

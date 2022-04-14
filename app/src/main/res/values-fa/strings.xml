@@ -18,6 +18,7 @@
 * Mehdi
 * Mjbmr
 * Mobin2008
+* Mohammad ebz
 * Mojtabakd
 * Nightdevil
 * Omidh
@@ -229,7 +230,7 @@
   <string name="navigation_item_feedback">بازخورد</string>
   <string name="navigation_item_logout">خروج</string>
   <string name="navigation_item_info">آموزش</string>
-  <string name="navigation_item_notification">آگاه‌سازی‌ها</string>
+  <string name="navigation_item_notification">اعلان‌ها</string>
   <string name="navigation_item_review">بازبینی</string>
   <string name="no_description_found">توضیحی یافت نشد</string>
   <string name="nearby_info_menu_commons_article">صفحهٔ دروند در ویکی‌انبار</string>
@@ -274,9 +275,9 @@
   <string name="user_guide">راهنمای کاربر</string>
   <string name="welcome_skip_button">رهاکردن آموزش</string>
   <string name="no_internet">اینترنت در دسترس نیست</string>
-  <string name="error_notifications">خطای واکشی کردن آگاه‌سازی‌ها</string>
+  <string name="error_notifications">خطای واکشی کردن اعلان‌ها</string>
   <string name="error_review">در تلاش برای بدست‌آوردن تصویر جهت بازبینی خطایی پیش آمد. لطفا برای تلاش مجدد بر روی ریفرش کلیک کنید.</string>
-  <string name="no_notifications">آگاه‌سازی‌هایی پیدا نشد</string>
+  <string name="no_notifications">اعلان‌ها پیدا نشد</string>
   <string name="about_translate">ترجمه</string>
   <string name="about_translate_title">زبان‌ها</string>
   <string name="about_translate_message">لطفا زبانی که مایلید در آنها ترجمه‌های خود را ثبت کنید انتخاب کنید.</string>
@@ -303,6 +304,7 @@
   <string name="search_tab_title_categories">رده‌ها</string>
   <string name="explore_tab_title_featured">برگزیده</string>
   <string name="explore_tab_title_mobile">بارگذاری‌شده با تلفن همراه</string>
+  <string name="explore_tab_title_map">نقشه</string>
   <string name="successful_wikidata_edit">تصویر به %1$s در ویکی‌داده افزوده شد!</string>
   <string name="wikidata_edit_failure">تلاش برای به‌روزرسانی موجودی ویکی‌دیتای مرتبط شکست خورد</string>
   <string name="menu_set_wallpaper">انتخاب به عنوان پس‌زمینه</string>
@@ -346,8 +348,8 @@
   <string name="preference_author_name">نام مولف سفارشی</string>
   <string name="contributions_fragment">مشارکت‌ها</string>
   <string name="nearby_fragment">در نزدیکی</string>
-  <string name="notifications">آگاه‌سازی‌ها</string>
-  <string name="read_notifications">آگاه‌سازی‌ها (خوانده‌شده)</string>
+  <string name="notifications">اعلان‌ها</string>
+  <string name="read_notifications">اعلان‌ها (خوانده‌شده)</string>
   <string name="display_nearby_notification">نمایش اعلان اطراف</string>
   <string name="list_sheet">فهرست</string>
   <string name="storage_permission">اجازه ذخیره</string>
@@ -402,7 +404,7 @@
   <string name="no_image_reverted">تصویر برگردانده نشد</string>
   <string name="no_image_uploaded">هیچ تصویری بارگذاری نشد</string>
   <string name="no_notification">شما هیچ آگاه‌سازی‌ خوانده‌نشده‌ای ندارید</string>
-  <string name="no_read_notification">شما هیچ آگاه‌سازی‌ خوانده‌شده‌ای ندارید</string>
+  <string name="no_read_notification">شما هیچ اعلان خوانده‌شده‌ای ندارید</string>
   <string name="menu_option_read">نمایش دیده‌شده</string>
   <string name="menu_option_unread">مشاهده خوانده نشده ها</string>
   <string name="please_wait">لطفاً صبر کنید...</string>
@@ -479,7 +481,12 @@
   <string name="advanced_options">گزینه‌های پیشرفته</string>
   <string name="apply">اعمال</string>
   <string name="reset">بازنشانی</string>
+  <string name="explore_map_details">جزئیات</string>
   <string name="api_level">سطح API</string>
+  <string name="android_version">نسخهٔ اندروید</string>
   <string name="device_model">مدل دستگاه</string>
   <string name="device_name">نام دستگاه</string>
+  <string name="thanks_feedback">با تشکر از ارائه بازخورد</string>
+  <string name="enter_description">بازخورد شما چیست؟</string>
+  <string name="your_feedback">بازخورد شما</string>
 </resources>

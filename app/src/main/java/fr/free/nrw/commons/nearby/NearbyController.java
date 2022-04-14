@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
+
+import fr.free.nrw.commons.MapController;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.utils.UiUtils;
@@ -24,7 +26,11 @@ import java.util.Map;
 import javax.inject.Inject;
 import timber.log.Timber;
 
-public class NearbyController {
+import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
+
+public class NearbyController extends MapController {
+
     private static final int MAX_RESULTS = 1000;
     private final NearbyPlaces nearbyPlaces;
     public static double currentLocationSearchRadius = 10.0; //in kilometers
@@ -221,16 +227,6 @@ public class NearbyController {
         }
 
         return baseMarkerOptions;
-    }
-
-    /**
-     * We pass this variable as a group of placeList and boundaryCoordinates
-     */
-    public class NearbyPlacesInfo {
-        public List<Place> placeList; // List of nearby places
-        public LatLng[] boundaryCoordinates; // Corners of nearby area
-        public LatLng curLatLng; // Current location when this places are populated
-        public LatLng searchLatLng; // Search location for finding this places
     }
 
     /**

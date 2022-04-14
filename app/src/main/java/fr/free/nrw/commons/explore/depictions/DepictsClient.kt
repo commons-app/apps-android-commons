@@ -51,25 +51,41 @@ class DepictsClient @Inject constructor(private val depictsInterface: DepictsInt
         flatMap(::getEntities)
         .map { entities ->
             entities.entities().values.map { entity ->
-                if (entity.descriptions().byLanguageOrFirstOrEmpty() == "") {
-                    val entities: Entities = getEntities(entity[WikidataProperties.INSTANCE_OF]
-                        .toIds()[0]).blockingGet()
-                    val nameAsDescription = entities.entities().values.first().labels()
-                        .byLanguageOrFirstOrEmpty()
-                    DepictedItem(
-                        entity,
-                        entity.labels().byLanguageOrFirstOrEmpty(),
-                        nameAsDescription
-                    )
-                } else {
-                    DepictedItem(
-                        entity,
-                        entity.labels().byLanguageOrFirstOrEmpty(),
-                        entity.descriptions().byLanguageOrFirstOrEmpty()
-                    )
-                }
+                mapToDepictItem(entity)
             }
         }
+
+    /**
+     * Convert different entities into DepictedItem
+     */
+    private fun mapToDepictItem(entity: Entities.Entity): DepictedItem {
+        return if (entity.descriptions().byLanguageOrFirstOrEmpty() == "") {
+            val instanceOfIDs = entity[WikidataProperties.INSTANCE_OF]
+                .toIds()
+            if (instanceOfIDs.isNotEmpty()) {
+                val entities: Entities = getEntities(instanceOfIDs[0]).blockingGet()
+                val nameAsDescription = entities.entities().values.first().labels()
+                    .byLanguageOrFirstOrEmpty()
+                DepictedItem(
+                    entity,
+                    entity.labels().byLanguageOrFirstOrEmpty(),
+                    nameAsDescription
+                )
+            } else {
+                DepictedItem(
+                    entity,
+                    entity.labels().byLanguageOrFirstOrEmpty(),
+                    ""
+                )
+            }
+        } else {
+            DepictedItem(
+                entity,
+                entity.labels().byLanguageOrFirstOrEmpty(),
+                entity.descriptions().byLanguageOrFirstOrEmpty()
+            )
+        }
+    }
 
     /**
      * Tries to get Entities.Label by default language from the map.
