@@ -5,10 +5,12 @@ import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.net.Uri;
 import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.exifinterface.media.ExifInterface;
 import com.facebook.common.executors.CallerThreadExecutor;
 import com.facebook.common.references.CloseableReference;
@@ -339,5 +341,20 @@ public class ImageUtils {
         }
 
         return errorMessage.toString();
+    }
+
+    /**
+     * Adds red border to a bitmap
+     * @param bitmap
+     * @param borderSize
+     * @param context
+     * @return
+     */
+    public static Bitmap addRedBorder(Bitmap bitmap, int borderSize, Context context) {
+        Bitmap bmpWithBorder = Bitmap.createBitmap(bitmap.getWidth() + borderSize * 2, bitmap.getHeight() + borderSize * 2, bitmap.getConfig());
+        Canvas canvas = new Canvas(bmpWithBorder);
+        canvas.drawColor(ContextCompat.getColor(context, R.color.deleteRed));
+        canvas.drawBitmap(bitmap, borderSize, borderSize, null);
+        return bmpWithBorder;
     }
 }

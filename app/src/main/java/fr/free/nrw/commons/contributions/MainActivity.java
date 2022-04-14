@@ -318,6 +318,8 @@ public class MainActivity  extends BaseActivity
             if (!exploreFragment.onBackPressed()) {
                 if (applicationKvStore.getBoolean("login_skipped")) {
                     super.onBackPressed();
+                } else {
+                    setSelectedItemId(NavTab.CONTRIBUTIONS.code());
                 }
             }
         } else if (bookmarkFragment != null && activeFragment == ActiveFragment.BOOKMARK) {
