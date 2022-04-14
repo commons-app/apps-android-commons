@@ -664,6 +664,7 @@
   <string name="achievements_of_user">使用者成果：%s</string>
   <string name="menu_view_user_page">檢視使用者頁面</string>
   <string name="edit_depictions">編輯描寫</string>
+  <string name="edit_categories">編輯分類</string>
   <string name="advanced_options">進階選項</string>
   <string name="advanced_query_info_text">您可以自定義附近查詢。若發生錯誤，請重新設定並套用。</string>
   <string name="apply">套用</string>

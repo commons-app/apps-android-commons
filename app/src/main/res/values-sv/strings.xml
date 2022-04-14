@@ -264,6 +264,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Betygsätt oss</string>
   <string name="about_faq">Vanliga frågor</string>
+  <string name="user_guide">Användarguide</string>
   <string name="welcome_skip_button">Hoppa över övning</string>
   <string name="no_internet">Uppkopplingen bröts</string>
   <string name="error_notifications">Fel uppstod när aviseringar hämtades</string>
@@ -298,6 +299,7 @@
   <string name="search_tab_title_depictions">Objekt</string>
   <string name="explore_tab_title_featured">Utvald</string>
   <string name="explore_tab_title_mobile">Laddades upp via mobil</string>
+  <string name="explore_tab_title_map">Karta</string>
   <string name="successful_wikidata_edit">Bilden lades till i %1$s på Wikidata!</string>
   <string name="wikidata_edit_failure">Misslyckades att uppdatera motsvarande Wikidataentitet!</string>
   <string name="menu_set_wallpaper">Ange som bakgrundsbild</string>
@@ -495,6 +497,13 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Kunde inte lägga till kategorier.</string>
   <string name="category_edit_button_text">Uppdatera kategorier</string>
+  <string name="depictions_edit_helper_make_edit_toast">Försöker uppdatera beskrivningar.</string>
+  <string name="depictions_edit_helper_show_edit_title">Redigera beskrivningar</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">Beskrivning %1$s är tillagd.</item>
+    <item quantity="other">Beskrivningar %1$s är tillagda.</item>
+  </plurals>
+  <string name="depictions_edit_helper_edit_message_else">Kunde inte lägga till beskrivningar.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Försöker uppdatera koordinater.</string>
   <string name="coordinates_edit_helper_show_edit_title">Koordinater uppdaterades</string>
   <string name="description_edit_helper_show_edit_title">Uppdaterade beskrivning</string>
@@ -642,6 +651,8 @@
   <string name="contributions_of_user">Bidrag av användare: %s</string>
   <string name="achievements_of_user">Prestationer av användare: %s</string>
   <string name="menu_view_user_page">Visa användarsida</string>
+  <string name="edit_depictions">Redigera beskrivningar</string>
+  <string name="edit_categories">Redigera kategorier</string>
   <string name="advanced_options">Avancerade alternativ</string>
   <string name="advanced_query_info_text">Du kan anpassa begäran för \"I närheten\". Om du får felmeddelanden kan du återställa och verkställa.</string>
   <string name="apply">Verkställ</string>
@@ -651,6 +662,7 @@
   <string name="no_location_found_message">Vad sägs om att lägga till platsen där denna bild togs?\nPlatsdata hjälper wikiredigerare att hitta din bild och göra den mycket mer användbar.\nTack!</string>
   <string name="add_location">Lägg till plats</string>
   <string name="feedback_sharing_data_alert">Var god ta bort all information från detta e-postmeddelande som du inte är bekväm med att dela offentligt. Observera även att e-postadressen du använder samt det associerade namnet och profilbilden kommer att synas offentligt.</string>
+  <string name="explore_map_details">Detaljer</string>
   <string name="achievements_unavailable_beta" fuzzy="true">Prestationer är endast tillgängliga i produktionsversionen.</string>
   <string name="leaderboard_unavailable_beta" fuzzy="true">Topplistan är endast tillgänglig i produktionsversionen.</string>
   <string name="copyright_popup">Var god ladda endast upp bilder du själv har tagit. Alla som laddar upp upphovsrättsskyddade bilder kommer att blockeras. Detta gäller även i betaversionen. Tack för att du testar appen!</string>
@@ -660,5 +672,8 @@
   <string name="device_model">Enhetsmodell</string>
   <string name="device_name">Enhetsnamn</string>
   <string name="network_type">Nätverkstyp</string>
+  <string name="thanks_feedback">Tack för återkopplingen</string>
+  <string name="error_feedback">Fel när återkoppling skickades</string>
+  <string name="enter_description">Vad är din återkoppling?</string>
   <string name="your_feedback">Din återkoppling</string>
 </resources>

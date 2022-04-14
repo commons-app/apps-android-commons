@@ -14,6 +14,7 @@
 * Killarnee
 * ManuelFranz
 * Metalhead64
+* Ngschaider
 * Pyscowicz
 * Sujan
 * Sushi
@@ -660,6 +661,7 @@
   <string name="contributions_of_user">Beiträge von Benutzer: %s</string>
   <string name="achievements_of_user">Leistungen von Benutzer: %s</string>
   <string name="menu_view_user_page">Benutzerseite ansehen</string>
+  <string name="edit_categories">Kategorien bearbeiten</string>
   <string name="advanced_options">Erweiterte Optionen</string>
   <string name="advanced_query_info_text">Du kannst die In-der-Nähe-Abfrage anpassen. Wenn du Fehler erhältst, setze zurück und versuche es erneut.</string>
   <string name="apply">Anwenden</string>

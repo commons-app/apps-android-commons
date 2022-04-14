@@ -293,6 +293,7 @@
   <string name="search_tab_title_depictions">Element</string>
   <string name="explore_tab_title_featured">An evidensa</string>
   <string name="explore_tab_title_mobile">Carià da sacociàbil</string>
+  <string name="explore_tab_title_map">Carta</string>
   <string name="successful_wikidata_edit">Plancia giontà a %1$s su Wikidata!</string>
   <string name="wikidata_edit_failure">Falì a agiorné l\'entità ëd Wikidata corëspondenta!</string>
   <string name="menu_set_wallpaper">Definì \'me tapissarìa</string>
@@ -645,6 +646,7 @@
   <string name="achievements_of_user">Arzultà ëd l\'utent: %s</string>
   <string name="menu_view_user_page">Vëdde la pàgina ëd l\'utent</string>
   <string name="edit_depictions">Modifiché le descrission</string>
+  <string name="edit_categories">Modifiché le categorìe</string>
   <string name="advanced_options">Opsion avansà</string>
   <string name="advanced_query_info_text">A peul përsonalisé l\'arserca ant j\'anviron. S\'a oten dj\'eror, ch\'a ri-inissialisa e ch\'a àplica.</string>
   <string name="apply">Apliché</string>
@@ -654,6 +656,7 @@
   <string name="no_location_found_message">Përché nen gionté ël pòst andoa costa plancia a l\'é stàita fàita?\nIj dàit dij leu a giuto ij contibutor dle wiki a trové soa plancia, rendend-la pi ùtil.\nMersì!</string>
   <string name="add_location">Gionté un pòst</string>
   <string name="feedback_sharing_data_alert">Për piasì, ch\'a gava da \'s mëssage ògni anformassion ch\'a veul nen ch\'a sia spantià an manera pùblica. Ch\'a ten-a ëdcò da ment che l\'adrëssa ëd pòsta eletrònica con la qual chiel a pùblica e ël nòm e la plancia ëd profil assossià a saran visìbil publicaman.</string>
+  <string name="explore_map_details">Detaj</string>
   <string name="achievements_unavailable_beta">Le realisassion a son disponìbij mach ant la version ëd produssion; për piasì, ch\'a consulta la documentassion dël dësvlupador.</string>
   <string name="leaderboard_unavailable_beta">La classìfica a l\'é disponìbil mach ant la version ëd produssion; për piasì, ch\'a consulta la documentassion dël dësvlupador.</string>
   <string name="copyright_popup">Për piasì, ch\'a caria mach le fòto ch\'a l\'ha fàit chiel. Coj ch\'a cario dle plance sota drit d\'autor a saran blocà. Sòn as àplica ëdcò a la version beta. Mersì për soa preuva ëd l\'aplicassion!</string>

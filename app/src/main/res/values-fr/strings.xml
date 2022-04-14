@@ -325,6 +325,7 @@
   <string name="search_tab_title_depictions">Éléments</string>
   <string name="explore_tab_title_featured">Remarquable</string>
   <string name="explore_tab_title_mobile">Téléversé via mobile</string>
+  <string name="explore_tab_title_map">Carte</string>
   <string name="successful_wikidata_edit">Image bien ajoutée à %1$s sur Wikidata !</string>
   <string name="wikidata_edit_failure">Échec de la mise à jour de l’entité Wikidata correspondante !</string>
   <string name="menu_set_wallpaper">Définir comme fond d’écran</string>
@@ -677,6 +678,7 @@
   <string name="achievements_of_user">Réussites de l’utilisateur : %s</string>
   <string name="menu_view_user_page">Afficher la page utilisateur</string>
   <string name="edit_depictions">Modifier les descriptions</string>
+  <string name="edit_categories">Modifier les catégories</string>
   <string name="advanced_options">Options avancées</string>
   <string name="advanced_query_info_text">Vous pouvez personnaliser la requête de proximité. Si vous obtenez des erreurs, réinitialisez et appliquez.</string>
   <string name="apply">Appliquer</string>
@@ -686,6 +688,7 @@
   <string name="no_location_found_message">Pourquoi ne pas ajouter le lieu où cette image a été trouvée ?\nLes données de lieu aident les contributeurs de wikis à trouver votre image, ce qui la rend beaucoup plus utile.\nMerci !</string>
   <string name="add_location">Ajouter un lieu</string>
   <string name="feedback_sharing_data_alert">Veuillez supprimer de ce courriel toute information que vous n’aimeriez pas diffuser publiquement. Également, veuillez prendre conscience du fait que votre adresse de messagerie avec laquelle vous publiez, ainsi que le nom et l’image de profil associés, seront visibles publiquement.</string>
+  <string name="explore_map_details">Détails</string>
   <string name="achievements_unavailable_beta">Les réalisations ne sont disponibles que dans la version de production, veuillez consulter la documentation du développeur.</string>
   <string name="leaderboard_unavailable_beta">Le classement n’est disponible que dans la version de production, veuillez consulter la documentation du développeur.</string>
   <string name="copyright_popup">Veuillez ne téléverser que des images que vous avez créées vous-même. Ceux qui téléversent des images soumises aux droits d’auteur seront bloqués. Ceci s’applique également à la version bêta. Merci pour votre test de l’application !</string>
