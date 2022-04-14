@@ -9,12 +9,12 @@
     android:background="@color/white">
 
     <fr.free.nrw.commons.nearby.CheckBoxTriStates
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkbox_tri_states"
-        android:layout_margin="@dimen/dimen_10"
-        android:text="All"
-        />
+      android:id="@+id/checkbox_tri_states"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/dimen_10"
+      android:contentDescription="@string/near_by_all"
+      android:text="@string/near_by_all" />
 
     <View
         android:layout_width="match_parent"
@@ -32,9 +32,10 @@
     <androidx.appcompat.widget.AppCompatButton
       android:id="@+id/btn_advanced_options"
       android:layout_width="match_parent"
-      android:background="@color/status_bar_blue"
-      android:text="@string/advanced_options"
-      android:textColor="@color/white"
+      android:layout_height="48dp"
       android:layout_marginTop="-48dp"
-      android:layout_height="48dp"/>
+      android:background="@color/status_bar_blue"
+      android:contentDescription="@string/advanced_options"
+      android:text="@string/advanced_options"
+      android:textColor="@color/white" />
 </LinearLayout>

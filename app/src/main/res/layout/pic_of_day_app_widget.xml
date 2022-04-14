@@ -12,21 +12,22 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_10"
-            android:text="@string/app_widget_heading"
-            android:textColor="@color/white"
-            android:layout_centerHorizontal="true"
-            android:textSize="@dimen/subheading_text_size" />
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="@dimen/dimen_10"
+          android:text="@string/app_widget_heading"
+          android:textColor="@color/white"
+          android:textSize="@dimen/subheading_text_size" />
 
         <ImageView
-            android:id="@+id/camera_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/dimen_20"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_photo_camera_white_24dp" />
+          android:id="@+id/camera_button"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentEnd="true"
+          android:contentDescription="@string/pic_of_day_camera"
+          android:padding="@dimen/dimen_20"
+          android:src="@drawable/ic_photo_camera_white_24dp" />
 
     </RelativeLayout>
 

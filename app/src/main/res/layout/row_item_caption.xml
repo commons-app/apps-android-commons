@@ -6,13 +6,14 @@
     android:weightSum="8">
 
     <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spinner_caption_languages"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:minWidth="1dp"
-        android:padding="0dp"
-        android:spinnerMode="dialog" />
+      android:id="@+id/spinner_caption_languages"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_weight="0"
+      android:contentDescription="@string/row_item_caption"
+      android:minWidth="1dp"
+      android:padding="0dp"
+      android:spinnerMode="dialog" />
 
 
 </LinearLayout>

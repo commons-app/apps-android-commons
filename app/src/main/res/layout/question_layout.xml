@@ -14,14 +14,14 @@
         android:layout_marginVertical="@dimen/activity_margin_vertical" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="?android:textAppearanceMedium"
-        android:id="@+id/question_text"
-        android:layout_marginLeft="@dimen/activity_margin_horizontal"
-        android:layout_marginRight="@dimen/activity_margin_horizontal"
-        android:textColor="@color/secondaryTextColor"
-        android:text="Is Photograph of an Artwork allowed ?" />
+      android:id="@+id/question_text"
+      style="?android:textAppearanceMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="@dimen/activity_margin_horizontal"
+      android:layout_marginRight="@dimen/activity_margin_horizontal"
+      android:text="@string/question_layout_text"
+      android:textColor="@color/secondaryTextColor" />
 
 </LinearLayout>
 

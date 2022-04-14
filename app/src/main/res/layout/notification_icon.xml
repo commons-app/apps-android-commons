@@ -11,28 +11,30 @@
     tools:background="@color/black">
 
     <ImageView
-        android:id="@+id/cart_icon_image_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/activity_margin_horizontal"
-        android:gravity="center"
-        android:layout_marginRight="@dimen/activity_margin_horizontal"
-        app:srcCompat="?attr/notification_icon_drawable" />
+      android:id="@+id/cart_icon_image_view"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/activity_margin_horizontal"
+      android:layout_marginRight="@dimen/activity_margin_horizontal"
+      android:contentDescription="@string/notification_icon"
+      android:gravity="center"
+      app:srcCompat="?attr/notification_icon_drawable" />
 
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/notification_count_badge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/cart_icon_image_view"
-        android:layout_alignEnd="@id/cart_icon_image_view"
-        android:layout_alignRight="@id/cart_icon_image_view"
-        android:background="@drawable/notification_badge"
-        android:gravity="center"
-        android:padding="@dimen/miniscule_margin"
-        android:textColor="?attr/notification_icon_text_color"
-        android:textSize="7sp"
-        android:textStyle="bold"
-        android:visibility="gone"
-        tools:text="9+"
-        tools:visibility="visible" />
+    <TextView
+      android:id="@+id/notification_count_badge"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignTop="@id/cart_icon_image_view"
+      android:layout_alignEnd="@id/cart_icon_image_view"
+      android:layout_alignRight="@id/cart_icon_image_view"
+      android:background="@drawable/notification_badge"
+      android:contentDescription="@string/notification_number"
+      android:gravity="center"
+      android:padding="@dimen/miniscule_margin"
+      android:textColor="?attr/notification_icon_text_color"
+      android:textSize="7sp"
+      android:textStyle="bold"
+      android:visibility="gone"
+      tools:text="9+"
+      tools:visibility="visible" />
 </RelativeLayout>

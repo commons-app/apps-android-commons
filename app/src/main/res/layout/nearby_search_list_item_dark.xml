@@ -8,9 +8,10 @@
     android:background="@drawable/linearlayout_color_dark_selector">
 
     <ImageView
-        android:id="@+id/place_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+      android:id="@+id/place_icon"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:contentDescription="@string/nearby_search_item" />
 
     <TextView
         android:id="@+id/place_text"

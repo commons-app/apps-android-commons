@@ -11,58 +11,61 @@
   xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
-        android:id="@+id/cameraButton"
-        android:layout_width="@dimen/dimen_0"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:padding="@dimen/standard_gap"
-        android:clickable="true"
-        android:orientation="vertical"
-        android:background="@drawable/button_background_selector"
-        >
+      android:id="@+id/cameraButton"
+      android:layout_width="@dimen/dimen_0"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:background="@drawable/button_background_selector"
+      android:clickable="true"
+      android:contentDescription="@string/near_by_row_camera"
+      android:orientation="vertical"
+      android:padding="@dimen/standard_gap">
+
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:srcCompat="@drawable/ic_photo_camera_white_24dp"
-            android:tint="?attr/bookmarkButtonColor"/>
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:tint="?attr/bookmarkButtonColor"
+          app:srcCompat="@drawable/ic_photo_camera_white_24dp" />
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/cameraButtonText"
-            android:paddingTop="@dimen/activity_margin_horizontal"
-            android:layout_gravity="center_horizontal"
-            android:text="CAMERA"
-            android:visibility="gone"
-            />
+          android:id="@+id/cameraButtonText"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:paddingTop="@dimen/activity_margin_horizontal"
+          android:text="CAMERA"
+          android:visibility="gone" />
     </LinearLayout>
+
     <LinearLayout
-        android:id="@+id/galleryButton"
-        android:layout_width="@dimen/dimen_0"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:padding="@dimen/standard_gap"
-        android:clickable="true"
-        android:orientation="vertical"
-        android:background="@drawable/button_background_selector"
-        >
+      android:id="@+id/galleryButton"
+      android:layout_width="@dimen/dimen_0"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:background="@drawable/button_background_selector"
+      android:clickable="true"
+      android:contentDescription="@string/near_by_row_image"
+      android:orientation="vertical"
+      android:padding="@dimen/standard_gap">
+
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:srcCompat="@drawable/ic_photo_white_24dp"
-            android:tint="?attr/bookmarkButtonColor"
-            android:duplicateParentState="true"/>
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:duplicateParentState="true"
+          android:tint="?attr/bookmarkButtonColor"
+          app:srcCompat="@drawable/ic_photo_white_24dp" />
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/galleryButtonText"
-            android:paddingTop="@dimen/activity_margin_horizontal"
-            android:layout_gravity="center_horizontal"
-            android:text="GALLERY"
-            android:duplicateParentState="true"
-            android:visibility="gone"
-            />
+          android:id="@+id/galleryButtonText"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:duplicateParentState="true"
+          android:paddingTop="@dimen/activity_margin_horizontal"
+          android:text="GALLERY"
+          android:visibility="gone" />
     </LinearLayout>
 
     <LinearLayout
@@ -95,31 +98,32 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/iconOverflow"
-        android:layout_width="@dimen/dimen_0"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:padding="@dimen/standard_gap"
-        android:clickable="true"
-        android:orientation="vertical"
-        >
+      android:id="@+id/iconOverflow"
+      android:layout_width="@dimen/dimen_0"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:clickable="true"
+      android:contentDescription="@string/near_by_row_more"
+      android:orientation="vertical"
+      android:padding="@dimen/standard_gap">
+
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:srcCompat="@drawable/ic_overflow"
-            android:tint="?attr/bookmarkButtonColor"
-            android:duplicateParentState="true"/>
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:duplicateParentState="true"
+          android:tint="?attr/bookmarkButtonColor"
+          app:srcCompat="@drawable/ic_overflow" />
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/iconOverflowText"
-            android:paddingTop="@dimen/activity_margin_horizontal"
-            android:layout_gravity="center_horizontal"
-            android:text="MORE"
-            android:duplicateParentState="true"
-            android:visibility="gone"
-            />
+          android:id="@+id/iconOverflowText"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:duplicateParentState="true"
+          android:paddingTop="@dimen/activity_margin_horizontal"
+          android:text="MORE"
+          android:visibility="gone" />
 
     </LinearLayout>
 

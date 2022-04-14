@@ -13,14 +13,16 @@
     style="@style/MediaDetailTextLabel"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Captions"
+    android:text="@string/show_captions"
     android:textColor="?attr/caption_description_text_color" />
 
   <ListView
     android:id="@+id/caption_listview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/caption_label" />
+    android:layout_below="@+id/caption_label"
+    android:contentDescription="@string/show_captions"
+    tools:ignore="DuplicateSpeakableTextCheck" />
 
   <TextView
     android:id="@+id/description_label"
@@ -29,7 +31,7 @@
     android:layout_height="wrap_content"
     android:layout_below="@+id/caption_listview"
     android:layout_marginTop="@dimen/dimen_10"
-    android:text="Descriptions"
+    android:text="@string/show_captions_description"
     android:textColor="?attr/caption_description_text_color" />
 
   <ProgressBar
