@@ -325,6 +325,7 @@
   <string name="search_tab_title_depictions">פריטים</string>
   <string name="explore_tab_title_featured">מומלץ</string>
   <string name="explore_tab_title_mobile">העלאה דרך נייד</string>
+  <string name="explore_tab_title_map">מפה</string>
   <string name="successful_wikidata_edit">התמונה נוספה לדף %1$s בוויקינתונים!</string>
   <string name="wikidata_edit_failure">לא ניתן היה לעדכן הישות המתאימה בוויקינתונים!</string>
   <string name="menu_set_wallpaper">הגדרה בתור טפט</string>

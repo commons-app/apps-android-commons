@@ -201,6 +201,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
                 super.onItemRangeInserted(positionStart, itemCount);
+                contributionsSize = adapter.getItemCount();
+                if (callback != null) {
+                    callback.notifyDataSetChanged();
+                }
                 if (itemCount > 0 && positionStart == 0) {
                     if (adapter.getContributionForPosition(positionStart) != null) {
                         rvContributionsList

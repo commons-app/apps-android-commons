@@ -667,10 +667,12 @@
   <string name="custom_selector_info_text2">À l’inverse de l’image sur la gauche, l’image de droite comporte un logo Commons qui indique qu’elle a déjà été téléversée.\nToucher et maintenir pour avoir un aperçu de l’image.</string>
   <string name="welcome_custom_selector_ok">Génial</string>
   <string name="custom_selector_already_uploaded_image_text">Cette image a déjà été téléversée sur Commons.</string>
+  <string name="place_state_wlm">WLM</string>
   <string name="wlm_upload_info">Cette image sera entrée dans le concours « Wiki aime les monuments » de 2021</string>
   <string name="display_monuments">Afficher les monuments</string>
   <string name="wlm_month_message">C’est le mois de « Wiki  aime les monuments » !</string>
   <string name="learn_more">EN SAVOIR PLUS</string>
+  <string name="wlm_campaign_title">Wiki aime les monuments</string>
   <string name="wlm_campaign_description">« Wiki aime les monuments » est un concours international de photographie des monuments, organisé par Wikimédia.</string>
   <string name="need_permission">Nécessite une permission</string>
   <string name="read_phone_state_permission_message">Les cartes de proximité doivent pouvoir lire l’ÉTAT DU TÉLÉPHONE pour fonctionner correctement</string>

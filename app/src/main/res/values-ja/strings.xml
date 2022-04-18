@@ -306,6 +306,7 @@
   <string name="search_tab_title_depictions">項目</string>
   <string name="explore_tab_title_featured">秀逸</string>
   <string name="explore_tab_title_mobile">モバイル機器からアップロード</string>
+  <string name="explore_tab_title_map">地図</string>
   <string name="successful_wikidata_edit">ウィキデータの%1$sに画像を追加しました !</string>
   <string name="wikidata_edit_failure">対応するウィキデータの更新に失敗しました！</string>
   <string name="menu_set_wallpaper">壁紙として設定</string>
@@ -601,6 +602,7 @@
   <string name="title_page_bookmarks_items">項目</string>
   <string name="edit_categories">カテゴリを編集</string>
   <string name="add_location">位置を追加</string>
+  <string name="explore_map_details">詳細</string>
   <string name="api_level">APIレベル</string>
   <string name="android_version">アンドロイドのバージョン</string>
   <string name="device_manufacturer">デバイスの製造元</string>

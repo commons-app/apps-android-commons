@@ -6,6 +6,7 @@
 <resources>
   <string name="preference_category_privacy">ꯑꯔꯣꯟꯕꯥ</string>
   <string name="app_name">ꯀꯣꯃꯣꯟꯁ</string>
+  <string name="bullet">꯫</string>
   <string name="menu_settings">ꯁꯦꯝꯐꯝ</string>
   <string name="intent_share_upload_label">ꯀꯃꯣꯟꯁꯇ ꯈꯥꯒꯠꯂꯨ</string>
   <string name="username">ꯁꯤꯖꯤꯟꯅꯔꯤꯕ ꯃꯃꯤꯡ</string>
@@ -14,6 +15,7 @@
   <string name="signup">ꯈꯨꯠꯌꯦꯛ ꯄꯤꯈꯠꯂꯨ</string>
   <string name="logging_in_title">ꯃꯅꯨꯡ ꯆꯪꯁꯤꯟꯂꯤ</string>
   <string name="logging_in_message">ꯉꯥꯏꯍꯥꯛ ꯉꯥꯏꯕꯤꯌꯨ</string>
+  <string name="updating_caption_message">ꯉꯥꯏꯍꯥꯛꯇꯪ ꯉꯥꯏꯕꯤꯈꯣ...</string>
   <string name="login_success">ꯃꯥꯏꯄꯥꯛꯅꯥ ꯆꯪꯁꯤꯜꯂꯦ ꯫</string>
   <string name="login_failed">ꯆꯪꯁꯤꯟꯕ ꯃꯥꯏꯄꯥꯛꯇꯔꯦ!</string>
   <string name="upload_failed">ꯐꯥꯏꯜ ꯊꯤꯕꯥ ꯐꯪꯗꯔꯦ ꯫ ꯆꯥꯟꯕꯤꯗꯨꯅꯥ ꯑꯇꯣꯞꯄ ꯑꯃꯥ ꯇꯧꯕꯤꯔꯣ ꯫</string>
@@ -34,15 +36,15 @@
   <string name="title_activity_category_details">ꯃꯆꯥꯈꯥꯏꯕ</string>
   <string name="menu_about">ꯃꯔꯝꯗ</string>
   <string name="about_license">ꯋꯤꯀꯤꯃꯦꯗꯤꯌꯥ ꯀꯃꯣꯟꯁ ꯑꯦꯞꯁ ꯁꯤ ꯍꯥꯡꯗꯣꯛꯂꯕ-ꯍꯧꯔꯛꯐꯝ ꯑꯦꯞꯁꯅꯤ ꯋꯤꯀꯤꯃꯦꯗꯤꯌꯥ ꯚꯣꯂꯨꯟꯇꯤꯌꯔ ꯃꯤꯑꯣꯏꯁꯤꯡꯅꯥ ꯌꯦꯡꯁꯤꯟꯕ ꯫ ꯋꯤꯀꯤꯃꯦꯗꯤꯌꯥ ꯃꯈꯣꯡ (ꯌꯨꯝꯕꯤ) ꯑꯦꯞꯁ ꯌꯦꯡꯁꯤꯟꯕ ꯑꯃꯁꯨꯡ ꯆꯥꯎꯈꯠꯍꯟꯕꯗ ꯁꯔꯨꯛ ꯌꯥꯗꯦ ꯫</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;ꯑꯔꯣꯟꯕ ꯊꯧꯔꯥꯡ&lt;/u&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;ꯇꯧꯕꯤꯃꯜ&lt;/u&gt;</string>
+  <string name="about_privacy_policy">ꯑꯔꯣꯟꯕ ꯊꯧꯔꯥꯡ</string>
+  <string name="about_credits">ꯇꯧꯕꯤꯃꯜ</string>
   <string name="title_activity_about">ꯃꯔꯝꯗ</string>
   <string name="menu_feedback">ꯐꯥꯒꯠꯅꯕ-ꯋꯥꯍꯩ ꯊꯥꯔꯣ (ꯏꯃꯦꯜ ꯗꯒꯤ)</string>
   <string name="menu_cancel_upload">ꯇꯣꯛꯄ</string>
   <string name="menu_download">ꯆꯤꯡꯊꯕ</string>
   <string name="preference_license">ꯑꯌꯥꯕꯥ ꯱ ꯍꯦꯛꯇ</string>
-  <string name="use_previous" fuzzy="true">ꯁꯤꯖꯤꯟꯅꯧ ꯃꯃꯥꯡꯒꯤ ꯃꯃꯤꯡ/ꯑꯀꯨꯞꯄ ꯋꯥꯔꯣꯜ</string>
-  <string name="preference_theme" fuzzy="true">ꯅꯨꯡꯗꯥꯡ ꯃꯑꯣꯡ</string>
+  <string name="use_previous">ꯁꯤꯖꯤꯟꯅꯧ ꯃꯃꯥꯡꯒꯤ ꯃꯃꯤꯡ ꯱ꯁꯨꯡ ꯑꯀꯨꯞꯄ ꯋꯥꯔꯣꯜ</string>
+  <string name="preference_theme">ꯃꯑꯣꯡ</string>
   <string name="license_name_cc_by_sa_four">ꯑꯇ꯭ꯔꯤꯕꯨꯁꯟ-ꯁꯌꯥꯔꯑꯂꯥꯏꯛ ꯴.꯰</string>
   <string name="license_name_cc_by_four">ꯑꯇ꯭ꯔꯤꯕꯨꯁꯟ ꯴.꯰</string>
   <string name="license_name_cc_by_sa">ꯑꯇ꯭ꯔꯤꯕꯨꯁꯟ-ꯁꯌꯥꯔꯑꯂꯥꯏꯛ ꯳.꯰</string>
@@ -52,7 +54,7 @@
   <string name="tutorial_4_text">ꯊꯥꯒꯠꯄꯒꯤ ꯈꯨꯗꯝ:</string>
   <string name="welcome_final_text">ꯅꯪꯅꯥ ꯈꯟꯕ ꯅꯪꯅꯥ ꯐꯪꯉꯤ?</string>
   <string name="welcome_final_button_text">ꯍꯣꯏ!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;ꯑꯍꯦꯟꯕ ꯋꯥꯔꯣꯜ&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">ꯑꯍꯦꯟꯕ ꯋꯥꯔꯣꯜ</string>
   <string name="detail_panel_cats_label">ꯃꯆꯥꯈꯥꯏꯕꯁꯤꯡ</string>
   <string name="detail_panel_cats_loading">ꯆꯤꯡꯂꯤ/ꯎꯪꯂꯤ.....</string>
   <string name="detail_panel_cats_none">ꯑꯃꯠꯇ ꯈꯟꯗꯦ</string>
@@ -103,7 +105,7 @@
   <string name="nearby_wikipedia">ꯋꯤꯀꯤꯄꯦꯗꯤꯌꯥ</string>
   <string name="nearby_commons">ꯀꯣꯃꯣꯟꯁ</string>
   <string name="no_internet">ꯏꯟꯇꯔꯅꯦꯠ ꯐꯪꯗꯦ</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;ꯍꯟꯗꯣꯛꯎ&lt;/u&gt;</string>
+  <string name="about_translate">ꯍꯟꯗꯣꯛꯎ</string>
   <string name="about_translate_title">ꯂꯣꯟꯁꯤꯡ</string>
   <string name="about_translate_proceed">ꯃꯈꯥ ꯆꯠꯊꯧ</string>
   <string name="about_translate_cancel">ꯇꯣꯛꯄ</string>
@@ -133,4 +135,7 @@
   <string name="submit">ꯄꯤꯁꯤꯟꯕ</string>
   <string name="title_page_bookmarks_locations">ꯃꯐꯝꯁꯤꯡ</string>
   <string name="nearby_card_permission_title">ꯑꯌꯥꯕ ꯄꯤꯕꯤꯅꯕ ꯍꯥꯏꯕ</string>
+  <string name="title_app_shortcut_setting">ꯁꯦꯝꯐꯝ</string>
+  <string name="theme_dark_name">ꯑꯃꯝꯕ</string>
+  <string name="theme_light_name">ꯉꯥꯟꯊꯣꯛꯄ</string>
 </resources>
