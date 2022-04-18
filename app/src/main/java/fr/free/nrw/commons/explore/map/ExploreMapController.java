@@ -41,8 +41,8 @@ public class ExploreMapController extends MapController {
 
 
     @Inject
-    public ExploreMapController(ExploreMapCalls explorePlaces) {
-        this.exploreMapCalls = explorePlaces;
+    public ExploreMapController(ExploreMapCalls exploreMapCalls) {
+        this.exploreMapCalls = exploreMapCalls;
     }
 
     /**
