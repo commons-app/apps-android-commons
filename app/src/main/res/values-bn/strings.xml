@@ -6,6 +6,7 @@
 * Leemon2010
 * Md. Golam Mukit Khan
 * MdsShakil
+* Meghmollar2017
 * Mohammed Galib Hasan
 * Muktogayn
 * NahidHossain
@@ -291,6 +292,7 @@
   <string name="search_tab_title_depictions">আইটেম</string>
   <string name="explore_tab_title_featured">নির্বাচিত</string>
   <string name="explore_tab_title_mobile">মোবাইলের মাধ্যমে আপলোডকৃত</string>
+  <string name="explore_tab_title_map">মানচিত্র</string>
   <string name="menu_set_wallpaper">ওয়ালপেপার হিসেবে সেট করুন</string>
   <string name="quiz">কুইজ</string>
   <string name="quiz_question_string">এই চিত্রটি কি আপলোড করা ঠিক হয়েছে?</string>
@@ -443,6 +445,7 @@
   <string name="reset">পুনঃস্থাপন</string>
   <string name="no_location_found_title">কোন অবস্থান পাওয়া যায়নি</string>
   <string name="add_location">অবস্থান যোগ করুন</string>
+  <string name="explore_map_details">বিস্তারিত</string>
   <string name="api_level">এপিআই লেভেল</string>
   <string name="android_version">অ্যান্ড্রয়েড সংস্করণ</string>
   <string name="device_manufacturer">ডিভাইস প্রস্তুতকারক</string>

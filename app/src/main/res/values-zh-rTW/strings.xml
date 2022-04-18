@@ -312,6 +312,7 @@
   <string name="search_tab_title_depictions">項目</string>
   <string name="explore_tab_title_featured">特色</string>
   <string name="explore_tab_title_mobile">透過行動裝置上傳</string>
+  <string name="explore_tab_title_map">地圖</string>
   <string name="successful_wikidata_edit">圖片已添加到維基數據上的%1$s！</string>
   <string name="wikidata_edit_failure">更新所對應的維基數據項目失敗！</string>
   <string name="menu_set_wallpaper">設定為桌布</string>
@@ -674,6 +675,7 @@
   <string name="no_location_found_message">是否要加入這張圖片拍攝的地點？\n位置資料有助於 Wiki 編輯者找到您的圖片，使其更有用。\n謝謝！</string>
   <string name="add_location">新增位置</string>
   <string name="feedback_sharing_data_alert">請移除來自此電子郵件中您無意公開分享的任何資訊。另外請注意，您用來發布訊息的電子郵件地址、關聯名稱、與個人資料圖片會公開顯示。</string>
+  <string name="explore_map_details">詳細資料</string>
   <string name="achievements_unavailable_beta">成果僅在生產版本可用，請查閱開發者文件。</string>
   <string name="leaderboard_unavailable_beta">排行榜僅在生產版本可用，請查閱開發者文件。</string>
   <string name="copyright_popup">請只上傳由您自己拍攝的圖片。上傳受版權保護圖片的使用者將會被阻擋。Beta測試版本也適用此規則。感謝您測試此應用程式！</string>

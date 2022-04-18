@@ -308,6 +308,7 @@
   <string name="search_tab_title_depictions">Elementos</string>
   <string name="explore_tab_title_featured">Destacadas</string>
   <string name="explore_tab_title_mobile">Carregada via telemóvel</string>
+  <string name="explore_tab_title_map">Mapa</string>
   <string name="successful_wikidata_edit">Imagem adicionada a %1$s na wiki Wikidata!</string>
   <string name="wikidata_edit_failure">Falha ao atualizar a entidade Wikidata correspondente!</string>
   <string name="menu_set_wallpaper">Definir como imagem de fundo</string>
@@ -445,7 +446,7 @@
   <string name="review_thanks_yes_button_text">Imagem seguinte</string>
   <string name="review_thanks_no_button_text">Sim, por que não</string>
   <string name="skip_image_explanation">Clicar este botão dá-lhe outra imagem carregada recentemente da wiki Wikimedia Commons</string>
-  <string name="review_image_explanation" fuzzy="true">Pode rever imagens e melhorar a qualidade da wiki Wikimedia Commons.\n Os quatro parâmetros de revisão são:\n- Esta imagem está enquadrada no nosso âmbito?\n- Esta imagem respeita as regras dos direitos de autor?\n- Esta imagem está categorizada corretamente?\n- Se tudo correr bem, também poderá agradecer ao contribuidor.</string>
+  <string name="review_image_explanation">Pode rever imagens e melhorar a qualidade da wiki Wikimedia Commons.\nOs três parâmetros de revisão são:\n\n- Esta imagem está enquadrada no nosso âmbito?\nQuando toca em Não (fora do âmbito), está a adicionar a esta imagem uma predefinição de nomeação para eliminação.\n\n- Esta imagem respeita as regras dos direitos de autor?\nQuando toca em Não (não respeita as regras dos direitos de autor), está a adicionar a esta imagem uma predefinição de nomeação para eliminação.\n\n- Esta imagem está categorizada corretamente?\nQuando toca em Não (não está categorizada corretamente), está a adicionar a esta imagem uma predefinição de pedido de categorização.\n\nSe tudo estiver bem, não será adicionada nenhuma predefinição e terá a oportunidade de agradecer ao contribuidor.</string>
   <string name="no_image">Não foi usada nenhuma imagem</string>
   <string name="no_image_reverted">Não foi revertida nenhuma imagem</string>
   <string name="no_image_uploaded">Não foi carregada nenhuma imagem</string>
@@ -660,6 +661,7 @@
   <string name="achievements_of_user">Realizações do utilizador: %s</string>
   <string name="menu_view_user_page">Ver página de utilizador</string>
   <string name="edit_depictions">Editar elementos retratados</string>
+  <string name="edit_categories">Editar categorias</string>
   <string name="advanced_options">Opções avançadas</string>
   <string name="advanced_query_info_text">Pode personalizar a consulta de locais próximos. Se obtiver erros, reiniciar e aplicar.</string>
   <string name="apply">Aplicar</string>
@@ -669,6 +671,7 @@
   <string name="no_location_found_message">Que tal adicionar o local onde a imagem foi tirada?\nOs dados de localização ajudam os editores da wiki a encontrarem a sua fotografia, tornando-a muito mais útil.\nObrigado!</string>
   <string name="add_location">Adicionar localização</string>
   <string name="feedback_sharing_data_alert">Remova desta mensagem de correio todas as informações que não se sinta à vontade em partilhar publicamente, por favor. Adicionalmente, esteja consciente de que o seu endereço de correio eletrónico, com o qual está a fazer esta publicação, e o nome e imagem de perfil a ele associados, serão visíveis pelo público geral.</string>
+  <string name="explore_map_details">Detalhes</string>
   <string name="achievements_unavailable_beta">As realizações só estão disponíveis na versão de produção; consulte a documentação para programadores, por favor.</string>
   <string name="leaderboard_unavailable_beta">A tabela de classificação só está disponível na versão de produção; consulte a documentação para programadores, por favor.</string>
   <string name="copyright_popup">Carregue somente fotografias tiradas por si. Os utilizadores que carregarem imagens cujos direitos de autor estão protegidos serão bloqueados. Isto também se aplica à versão beta. Obrigado por testar a aplicação!</string>

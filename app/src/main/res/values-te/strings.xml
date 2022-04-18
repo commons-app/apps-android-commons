@@ -290,6 +290,7 @@
   <string name="search_tab_title_depictions">అంశాలు</string>
   <string name="explore_tab_title_featured">విశేష</string>
   <string name="explore_tab_title_mobile">మొబైలు ద్వారా ఎక్కించండి</string>
+  <string name="explore_tab_title_map">మ్యాపు</string>
   <string name="successful_wikidata_edit">వికీడేటా లోని %1$s లో బొమ్మ ఎక్కించారు!</string>
   <string name="wikidata_edit_failure">సంబంధిత వికీడేటా ఎంట్రీని తాజాకరించలేక పోయాం!</string>
   <string name="menu_set_wallpaper">వాల్‌పేపరుగా సెట్ చెయ్యి</string>
@@ -621,6 +622,7 @@
   <string name="no_location_found_message">ఈ బొమ్మను తీసిన స్థానాన్ని దీనికి చేరిస్తే బావుంటుంది గదా.\nస్థానం డేటా ఉంటే అది, ఈ బొమ్మను కనుక్కోవడంలో వికీ ఎడిటర్లకు సాయపడుతుంది. ఆ విధంగా బొమ్మ ఉపయోగం పెరుగుతుంది.\nధన్యవాదాలు!</string>
   <string name="add_location">స్థానాన్ని చేర్చండి</string>
   <string name="feedback_sharing_data_alert">బహిరంగంగా పంచుకోలేని సమాచారం ఏదైనా ఈ ఈమెయిల్లో ఉంటే దాన్ని తీసెయ్యండి. అలాగే, మీరు పోస్టు చేస్తున్న ఈమెయిలు చిరునామా, దానికి సంబంధించిన పేరు, ప్రొఫైలు బొమ్మా బహిరంగంగా అందరికీ కనిపిస్తాయని గమనంలో ఉంచుకోండి.</string>
+  <string name="explore_map_details">వివరాలు</string>
   <string name="copyright_popup">మీరు స్వయంగా తీసిన ఫొటోలను మాత్రమే ఎక్కించండి. కాపీహక్కులున్న బొమ్మలను ఎక్కించినవారిని నిరోధిస్తారు. ఇది బీటా కూర్పుకు కూడా వర్తిస్తుంది. యాప్‌ను పరీక్షిస్తున్నందుకు ధన్యవాదాలు.</string>
   <string name="select_feedback_data_choice">మీరు బహిరంగంగా చూపించడానికి ఇష్టపడని సమాచారాన్ని ఎంపిక నుండి తీసెయ్యండి.</string>
   <string name="api_level">API లెవెల్</string>

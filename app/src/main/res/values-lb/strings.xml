@@ -237,6 +237,7 @@
   <string name="search_tab_title_categories">Kategorien</string>
   <string name="search_tab_title_depictions">Elementer</string>
   <string name="explore_tab_title_mobile">mobil eropgelueden</string>
+  <string name="explore_tab_title_map">Kaart</string>
   <string name="wikidata_edit_failure">Déi entspriechend Wikidata-Entitéit konnt net aktualiséiert ginn!</string>
   <string name="menu_set_wallpaper">Als Hannergrondbild festleeën</string>
   <string name="wallpaper_set_successfully">Hannergrondbild festgeluecht</string>
@@ -375,6 +376,7 @@
   <string name="apply">Uwenden</string>
   <string name="reset">Zrécksetzen</string>
   <string name="no_location_found_title">Keng Plaz fonnt</string>
+  <string name="explore_map_details">Detailer</string>
   <string name="error_feedback">Feeler beim Schécke vum Feedback</string>
   <string name="enter_description">Wéi ass Äre Feedback?</string>
   <string name="your_feedback">Äre Feedback</string>
