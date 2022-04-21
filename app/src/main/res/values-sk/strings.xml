@@ -314,6 +314,7 @@
   <string name="search_tab_title_depictions">Položky</string>
   <string name="explore_tab_title_featured">Najlepšie</string>
   <string name="explore_tab_title_mobile">Nahrané mobilom</string>
+  <string name="explore_tab_title_map">Mapa</string>
   <string name="successful_wikidata_edit">Obrázok bol pridaný do položky %1$s na Wikiúdajoch!</string>
   <string name="wikidata_edit_failure">Nepodarilo sa aktualizovať príslušnú položku na Wikiúdajoch!</string>
   <string name="menu_set_wallpaper">Nastaviť ako tapetu</string>
@@ -670,6 +671,7 @@
   <string name="achievements_of_user">Úspechy používateľa: %s</string>
   <string name="menu_view_user_page">Zobraziť stránku používateľa</string>
   <string name="edit_depictions">Upraviť vyobrazenia</string>
+  <string name="edit_categories">Upraviť kategórie</string>
   <string name="advanced_options">Rozšírené možnosti</string>
   <string name="advanced_query_info_text">Blízke miesta si môžete upraviť podľa seba. Ak sa vyskytne chyba, vynulujte nastavenia.</string>
   <string name="apply">Požiadať</string>
@@ -679,6 +681,7 @@
   <string name="no_location_found_message">Čo tak pridať miesto kde bol tento obrázok urobený? Údaje o polohe pomáhajú editorom Wiki nájsť Váš obrázok a urobiť ho tak viac užitočným. Ďakujeme!</string>
   <string name="add_location">Pridať polohu</string>
   <string name="feedback_sharing_data_alert">Prosím odstráňte z tohto emailu informácie, ktoré nechcete zverejniť. Takisto berte prosím na vedomie, že vaša emailová adresa z ktorej posielate príspevky bude zverejnená.</string>
+  <string name="explore_map_details">Podrobnosti</string>
   <string name="achievements_unavailable_beta">Úspechy sú dostupné len v prod flavor. Prosím skontrolujte vývojársku dokumentáciu.</string>
   <string name="leaderboard_unavailable_beta">Rebríček je dostupný len v prod flavor. Prosím skontrolujte vývojársku dokumentáciu.</string>
   <string name="copyright_popup">Prosím nahrajte len obrázky, ktoré ste urobili Vy sami. Obrázky podliehajúce autorským právam budú zablokované.</string>
