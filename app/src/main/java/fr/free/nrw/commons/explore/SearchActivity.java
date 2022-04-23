@@ -18,6 +18,7 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.ViewPagerAdapter;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment;
 import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragment;
@@ -68,6 +69,8 @@ public class SearchActivity extends BaseActivity
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
         setTitle(getString(R.string.title_activity_search));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v->onBackPressed());
         supportFragmentManager = getSupportFragmentManager();
         setSearchHistoryFragment();
@@ -114,36 +117,38 @@ public class SearchActivity extends BaseActivity
                 .takeUntil(RxView.detaches(searchView))
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(query -> {
-                    //update image list
-                        if (!TextUtils.isEmpty(query)) {
-                            saveRecentSearch(query.toString());
-                            viewPager.setVisibility(View.VISIBLE);
-                            tabLayout.setVisibility(View.VISIBLE);
-                            searchHistoryContainer.setVisibility(View.GONE);
-
-                            if (FragmentUtils.isFragmentUIActive(searchDepictionsFragment)) {
-                                searchDepictionsFragment.onQueryUpdated(query.toString());
-                            }
-
-                            if (FragmentUtils.isFragmentUIActive(searchMediaFragment)) {
-                                searchMediaFragment.onQueryUpdated(query.toString());
-                            }
-
-                            if (FragmentUtils.isFragmentUIActive(searchCategoryFragment)) {
-                                searchCategoryFragment.onQueryUpdated(query.toString());
-                            }
-
-                        } else {
-                            //Open RecentSearchesFragment
-                            recentSearchesFragment.updateRecentSearches();
-                            viewPager.setVisibility(View.GONE);
-                            tabLayout.setVisibility(View.GONE);
-                            setSearchHistoryFragment();
-                            searchHistoryContainer.setVisibility(View.VISIBLE);
-                        }
-                    }, Timber::e
+                .subscribe(this::handleSearch, Timber::e
                 ));
+    }
+
+    private void handleSearch(final CharSequence query) {
+        if (!TextUtils.isEmpty(query)) {
+            saveRecentSearch(query.toString());
+            viewPager.setVisibility(View.VISIBLE);
+            tabLayout.setVisibility(View.VISIBLE);
+            searchHistoryContainer.setVisibility(View.GONE);
+
+            if (FragmentUtils.isFragmentUIActive(searchDepictionsFragment)) {
+                searchDepictionsFragment.onQueryUpdated(query.toString());
+            }
+
+            if (FragmentUtils.isFragmentUIActive(searchMediaFragment)) {
+                searchMediaFragment.onQueryUpdated(query.toString());
+            }
+
+            if (FragmentUtils.isFragmentUIActive(searchCategoryFragment)) {
+                searchCategoryFragment.onQueryUpdated(query.toString());
+            }
+
+         }
+        else {
+            //Open RecentSearchesFragment
+            recentSearchesFragment.updateRecentSearches();
+            viewPager.setVisibility(View.GONE);
+            tabLayout.setVisibility(View.GONE);
+            setSearchHistoryFragment();
+            searchHistoryContainer.setVisibility(View.VISIBLE);
+        }
     }
 
     private void saveRecentSearch(@NonNull final String query) {
@@ -151,8 +156,7 @@ public class SearchActivity extends BaseActivity
         // Newly searched query...
         if (recentSearch == null) {
             recentSearchesDao.save(new RecentSearch(null, query, new Date()));
-        }
-        else {
+        } else {
             recentSearch.setLastSearched(new Date());
             recentSearchesDao.save(recentSearch);
         }
@@ -181,6 +185,19 @@ public class SearchActivity extends BaseActivity
     }
 
     /**
+     * Reload media detail fragment once media is nominated
+     *
+     * @param index item position that has been nominated
+     */
+    @Override
+    public void refreshNominatedMedia(int index) {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+            onBackPressed();
+            onMediaClicked(index);
+        }
+    }
+
+    /**
      * This method is called on success of API call for image Search.
      * The viewpager will notified that number of items have changed.
      */
@@ -198,10 +215,10 @@ public class SearchActivity extends BaseActivity
     @Override
     public void onMediaClicked(int index) {
         ViewUtil.hideKeyboard(this.findViewById(R.id.searchBox));
-        toolbar.setVisibility(View.GONE);
         tabLayout.setVisibility(View.GONE);
         viewPager.setVisibility(View.GONE);
         mediaContainer.setVisibility(View.VISIBLE);
+        searchView.setVisibility(View.GONE);// to remove searchview when mediaDetails fragment open
         if (mediaDetails == null || !mediaDetails.isVisible()) {
             // set isFeaturedImage true for featured images, to include author field on media detail
             mediaDetails = new MediaDetailPagerFragment(false, true);
@@ -243,7 +260,7 @@ public class SearchActivity extends BaseActivity
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() == 1){
             // back to search so show search toolbar and hide navigation toolbar
-            toolbar.setVisibility(View.VISIBLE);
+            searchView.setVisibility(View.VISIBLE);//set the searchview
             tabLayout.setVisibility(View.VISIBLE);
             viewPager.setVisibility(View.VISIBLE);
             mediaContainer.setVisibility(View.GONE);

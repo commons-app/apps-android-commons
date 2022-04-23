@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.profile.leaderboard;
 
-import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.USER_LINK_PREFIX;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -14,13 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.profile.ProfileActivity;
 
 /**
  * This class extends RecyclerView.Adapter and creates the List section of the leaderboard
  */
 public class LeaderboardListAdapter extends PagedListAdapter<LeaderboardList, LeaderboardListAdapter.ListViewHolder> {
 
-    protected LeaderboardListAdapter() {
+    public LeaderboardListAdapter() {
         super(LeaderboardList.DIFF_CALLBACK);
     }
 
@@ -81,9 +82,13 @@ public class LeaderboardListAdapter extends PagedListAdapter<LeaderboardList, Le
         count.setText(getItem(position).getCategoryCount().toString());
 
         /*
-          Open the user profile in a webview when a username is clicked on leaderboard
+          Now that we have our in app profile-section, lets take the user there
          */
-        holder.itemView.setOnClickListener(view -> Utils.handleWebUrl(holder.getContext(), Uri.parse(
-            String.format("%s%s", USER_LINK_PREFIX, getItem(position).getUsername()))));
+        holder.itemView.setOnClickListener(view -> {
+            if (view.getContext() instanceof ProfileActivity) {
+                ((Activity) (view.getContext())).finish();
+            }
+            ProfileActivity.startYourself(view.getContext(), getItem(position).getUsername(), true);
+        });
     }
 }

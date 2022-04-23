@@ -15,6 +15,8 @@ import javax.inject.Singleton
 
 const val PAGE_ID_PREFIX = "M"
 const val CATEGORY_CONTINUATION_PREFIX = "category_"
+const val LIMIT = 30
+const val RADIUS = 10000
 
 /**
  * Media Client to handle custom calls to Commons MediaWiki APIs
@@ -91,6 +93,16 @@ class MediaClient @Inject constructor(
         responseMapper(mediaInterface.getMediaListFromSearch(keyword, limit, offset))
 
     /**
+     * This method takes coordinate as input and returns a list of  Media objects.
+     * It uses the generator query API to get the images searched using a query.
+     *
+     * @param coordinate coordinate
+     * @return
+     */
+    fun getMediaListFromGeoSearch(coordinate: String?) =
+        responseMapper(mediaInterface.getMediaListFromGeoSearch(coordinate, LIMIT, RADIUS))
+
+    /**
      * @return list of images for a particular depict entity
      */
     fun fetchImagesForDepictedItem(
@@ -149,6 +161,25 @@ class MediaClient @Inject constructor(
         resetContinuation(CATEGORY_CONTINUATION_PREFIX, category)
     }
 
+    /**
+     * Call the resetUserContinuation method
+     *
+     * @param userName the username
+     */
+    fun resetUserNameContinuation(userName: String) =
+        resetUserContinuation("user_", userName)
+
+    /**
+     * Get whole WikiText of required file
+     * @param title : Name of the file
+     * @return Observable<MwQueryResult>
+     */
+    fun getCurrentWikiText(title: String): Single<String?> {
+        return mediaDetailInterface.getWikiText(title).map {
+            it.query()?.pages()?.get(0)?.revisions()?.get(0)?.content()
+        }
+    }
+
     override fun responseMapper(
         networkResult: Single<MwQueryResponse>,
         key: String?
@@ -160,9 +191,9 @@ class MediaClient @Inject constructor(
     }
 
     private fun mediaFromPageAndEntity(pages: List<MwQueryPage>): Single<List<Media>> {
-        return if (pages.isEmpty())
+        return if (pages.isEmpty()) {
             Single.just(emptyList())
-        else
+        } else {
             getEntities(pages.map { "$PAGE_ID_PREFIX${it.pageId()}" })
                 .map {
                     pages.zip(it.entities().values)
@@ -172,5 +203,7 @@ class MediaClient @Inject constructor(
                             }
                         }
                 }
+        }
+
     }
 }

@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:showIn="@layout/activity_upload">
+    android:background="?attr/mainBackground">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -81,13 +82,14 @@
             android:layout_marginTop="@dimen/standard_gap"
             android:layout_height="wrap_content">
 
-            <com.google.android.material.textfield.TextInputEditText
+              <fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText
                 android:id="@+id/depicts_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
-                android:maxLines="1" />
+                android:maxLines="1"
+              app:allowFormatting="false" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <ProgressBar

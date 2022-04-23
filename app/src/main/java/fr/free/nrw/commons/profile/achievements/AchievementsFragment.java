@@ -2,14 +2,12 @@ package fr.free.nrw.commons.profile.achievements;
 
 import android.accounts.Account;
 import android.app.AlertDialog;
-import android.content.Intent;
-import android.graphics.Bitmap;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,21 +16,12 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.FileProvider;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
-
-import com.dinuscxj.progressbar.CircleProgressBar;
-import org.apache.commons.lang3.StringUtils;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Objects;
-
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -42,13 +31,12 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.profile.ProfileActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Objects;
 import javax.inject.Inject;
 import org.apache.commons.lang3.StringUtils;
@@ -61,6 +49,17 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
     private static final double BADGE_IMAGE_WIDTH_RATIO = 0.4;
     private static final double BADGE_IMAGE_HEIGHT_RATIO = 0.3;
+
+    /**
+     * Help link URLs
+     */
+    private static final String IMAGES_UPLOADED_URL = "https://commons.wikimedia.org/wiki/Commons:Project_scope";
+    private static final String IMAGES_REVERT_URL = "https://commons.wikimedia.org/wiki/Commons:Deletion_policy#Reasons_for_deletion";
+    private static final String IMAGES_USED_URL = "https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images";
+    private static final String IMAGES_NEARBY_PLACES_URL = "https://www.wikidata.org/wiki/Property:P18";
+    private static final String IMAGES_FEATURED_URL = "https://commons.wikimedia.org/wiki/Commons:Featured_pictures";
+    private static final String QUALITY_IMAGE_URL = "https://commons.wikimedia.org/wiki/Commons:Quality_images";
+    private static final String THANKS_URL = "https://www.mediawiki.org/wiki/Extension:Thanks";
 
     private LevelController.LevelInfo levelInfo;
 
@@ -121,6 +120,9 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.wikidata_edits)
     TextView wikidataEditsText;
 
+    @BindView(R.id.tv_achievements_of_user)
+    AppCompatTextView tvAchievementsOfUser;
+
     @Inject
     SessionManager sessionManager;
 
@@ -134,6 +136,16 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
     // menu item for action bar
     private MenuItem item;
+
+    private String userName;
+
+    @Override
+    public void onCreate(@Nullable final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            userName = getArguments().getString(ProfileActivity.KEY_USERNAME);
+        }
+    }
 
     /**
      * This method helps in the creation Achievement screen and
@@ -164,77 +176,49 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
         // Set the initial value of WikiData edits to 0
         wikidataEditsText.setText("0");
-        hideLayouts();
+        if(sessionManager.getUserName().equals(userName)){
+            tvAchievementsOfUser.setVisibility(View.GONE);
+        }else{
+            tvAchievementsOfUser.setVisibility(View.VISIBLE);
+            tvAchievementsOfUser.setText(getString(R.string.achievements_of_user,userName));
+        }
+
+        // Achievements currently unimplemented in Beta flavor. Skip all API calls.
+        if(ConfigUtils.isBetaFlavour()) {
+            progressBar.setVisibility(View.GONE);
+            imageByWikiText.setText(R.string.no_image);
+            imageRevertedText.setText(R.string.no_image_reverted);
+            imageUploadedText.setText(R.string.no_image_uploaded);
+            wikidataEditsText.setText("0");
+            imagesFeatured.setText("0");
+            tvQualityImages.setText("0");
+            thanksReceived.setText("0");
+            setMenuVisibility(true);
+            return rootView;
+        }
         setWikidataEditCount();
         setAchievements();
         return rootView;
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        super.onCreateOptionsMenu(menu, menuInflater);
-        menuInflater.inflate(R.menu.menu_about, menu);
-        item = menu.getItem(0);
-        item.setVisible(false);
-    }
+    public void setMenuVisibility(boolean visible) {
+        super.setMenuVisibility(visible);
 
-    /**
-     * To receive the id of selected item and handle further logic for that selected item
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        // take screenshot in form of bitmap and show it in Alert Dialog
-        if (id == R.id.share_app_icon) {
-            View rootView = getActivity().getWindow().getDecorView().findViewById(android.R.id.content);
-            Bitmap screenShot = Utils.getScreenShot(rootView);
-            showAlert(screenShot);
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * It displays the alertDialog with Image of screenshot
-     * @param screenshot
-     */
-    public void showAlert(Bitmap screenshot){
-        AlertDialog.Builder alertadd = new AlertDialog.Builder(getActivity());
-        LayoutInflater factory = LayoutInflater.from(getActivity());
-        final View view = factory.inflate(R.layout.image_alert_layout, null);
-        ImageView screenShotImage = view.findViewById(R.id.alert_image);
-        screenShotImage.setImageBitmap(screenshot);
-        TextView shareMessage = view.findViewById(R.id.alert_text);
-        shareMessage.setText(R.string.achievements_share_message);
-        alertadd.setView(view);
-        alertadd.setPositiveButton(R.string.about_translate_proceed, (dialog, which) -> shareScreen(screenshot));
-        alertadd.setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.cancel());
-        alertadd.show();
-    }
-
-    /**
-     * To take bitmap and store it temporary storage and share it
-     * @param bitmap
-     */
-    void shareScreen(Bitmap bitmap) {
-        try {
-            File file = new File(getActivity().getExternalCacheDir(), "screen.png");
-            FileOutputStream fOut = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
-            fOut.flush();
-            fOut.close();
-            file.setReadable(true, false);
-            Uri fileUri = FileProvider
-                .getUriForFile(getActivity().getApplicationContext(), getActivity().getPackageName()+".provider", file);
-            getActivity().grantUriPermission(getActivity().getPackageName(), fileUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra(Intent.EXTRA_STREAM, fileUri);
-            intent.setType("image/png");
-            startActivity(Intent.createChooser(intent, getString(R.string.share_image_via)));
-        } catch (IOException e) {
-            e.printStackTrace();
+        // Whenever this fragment is revealed in a menu,
+        // notify Beta users the page data is unavailable
+        if(ConfigUtils.isBetaFlavour() && visible) {
+            Context ctx = null;
+            if(getContext() != null) {
+                ctx = getContext();
+            } else if(getView() != null && getView().getContext() != null) {
+                ctx = getView().getContext();
+            }
+            if(ctx != null) {
+                Toast.makeText(ctx,
+                    R.string.achievements_unavailable_beta,
+                    Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -243,8 +227,9 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
      */
     @OnClick(R.id.achievement_info)
     public void showInfoDialog(){
-        launchAlert(getResources().getString(R.string.Achievements)
-                ,getResources().getString(R.string.achievements_info_message));
+        launchAlert(
+            getResources().getString(R.string.Achievements),
+            getResources().getString(R.string.achievements_info_message));
     }
 
     /**
@@ -257,7 +242,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
             try{
 
                 compositeDisposable.add(okHttpJsonApiClient
-                        .getAchievements(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
+                        .getAchievements(Objects.requireNonNull(userName))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
@@ -300,7 +285,6 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
      *  in the form of JavaRx Single object<JSONobject>
      */
     private void setWikidataEditCount() {
-        String userName = sessionManager.getUserName();
         if (StringUtils.isBlank(userName)) {
             return;
         }
@@ -349,7 +333,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     private void setUploadCount(Achievements achievements) {
         if (checkAccount()) {
             compositeDisposable.add(okHttpJsonApiClient
-                    .getUploadCount(Objects.requireNonNull(sessionManager.getCurrentAccount()).name)
+                    .getUploadCount(Objects.requireNonNull(userName))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
@@ -379,7 +363,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         if (uploadCount==0){
             setZeroAchievements();
         }else {
-
+            imagesUploadedProgressbar.setVisibility(View.VISIBLE);
             imagesUploadedProgressbar.setProgress
                     (100*uploadCount/levelInfo.getMaxUploadCount());
             imagesUploadedProgressbar.setProgressTextFormatPattern
@@ -389,10 +373,14 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     }
 
     private void setZeroAchievements() {
-        AlertDialog.Builder builder=new AlertDialog.Builder(getActivity())
-                .setMessage(getString(R.string.no_achievements_yet))
-                .setPositiveButton(getString(R.string.ok), (dialog, which) -> {
-                });
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+            .setMessage(
+                !Objects.equals(sessionManager.getUserName(), userName) ?
+                    getString(R.string.no_achievements_yet, userName) :
+                    getString(R.string.you_have_no_achievements_yet)
+            )
+            .setPositiveButton(getString(R.string.ok), (dialog, which) -> {
+            });
         AlertDialog dialog = builder.create();
         dialog.show();
         imagesUploadedProgressbar.setVisibility(View.INVISIBLE);
@@ -411,6 +399,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
      * @param notRevertPercentage
      */
     private void setImageRevertPercentage(int notRevertPercentage){
+        imageRevertsProgressbar.setVisibility(View.VISIBLE);
         imageRevertsProgressbar.setProgress(notRevertPercentage);
         String revertPercentage = Integer.toString(notRevertPercentage);
         imageRevertsProgressbar.setProgressTextFormatPattern(revertPercentage + "%%");
@@ -423,6 +412,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
      * @param achievements
      */
     private void inflateAchievements(Achievements achievements) {
+        imagesUsedByWikiProgressBar.setVisibility(View.VISIBLE);
         thanksReceived.setText(String.valueOf(achievements.getThanksReceived()));
         imagesUsedByWikiProgressBar.setProgress
                 (100 * achievements.getUniqueUsedImages() / levelInfo.getMaxUniqueImages());
@@ -451,67 +441,64 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
             setImageRevertPercentage(achievements.getNotRevertPercentage());
             progressBar.setVisibility(View.GONE);
             item.setVisible(true);
-            layoutImageReverts.setVisibility(View.VISIBLE);
-            layoutImageUploaded.setVisibility(View.VISIBLE);
-            layoutImageUsedByWiki.setVisibility(View.VISIBLE);
-            layoutStatistics.setVisibility(View.VISIBLE);
-            imageView.setVisibility(View.VISIBLE);
-            levelNumber.setVisibility(View.VISIBLE);
         }
     }
 
-    /**
-     * used to hide the layouts while fetching results from api
-     */
-    private void hideLayouts(){
-        layoutImageUsedByWiki.setVisibility(View.INVISIBLE);
-        layoutImageUploaded.setVisibility(View.INVISIBLE);
-        layoutImageReverts.setVisibility(View.INVISIBLE);
-        layoutStatistics.setVisibility(View.INVISIBLE);
-        imageView.setVisibility(View.INVISIBLE);
-        levelNumber.setVisibility(View.INVISIBLE);
-    }
 
     @OnClick(R.id.images_upload_info)
     public void showUploadInfo(){
-        launchAlert(getResources().getString(R.string.images_uploaded)
-                ,getResources().getString(R.string.images_uploaded_explanation));
+        launchAlertWithHelpLink(
+            getResources().getString(R.string.images_uploaded),
+            getResources().getString(R.string.images_uploaded_explanation),
+            IMAGES_UPLOADED_URL);
     }
 
     @OnClick(R.id.images_reverted_info)
     public void showRevertedInfo(){
-        launchAlert(getResources().getString(R.string.image_reverts)
-                ,getResources().getString(R.string.images_reverted_explanation));
+        launchAlertWithHelpLink(
+            getResources().getString(R.string.image_reverts),
+            getResources().getString(R.string.images_reverted_explanation),
+            IMAGES_REVERT_URL);
     }
 
     @OnClick(R.id.images_used_by_wiki_info)
     public void showUsedByWikiInfo(){
-        launchAlert(getResources().getString(R.string.images_used_by_wiki)
-                ,getResources().getString(R.string.images_used_explanation));
+        launchAlertWithHelpLink(
+            getResources().getString(R.string.images_used_by_wiki),
+            getResources().getString(R.string.images_used_explanation),
+            IMAGES_USED_URL);
     }
 
     @OnClick(R.id.images_nearby_info)
     public void showImagesViaNearbyInfo(){
-        launchAlert(getResources().getString(R.string.statistics_wikidata_edits)
-                ,getResources().getString(R.string.images_via_nearby_explanation));
+        launchAlertWithHelpLink(
+            getResources().getString(R.string.statistics_wikidata_edits),
+            getResources().getString(R.string.images_via_nearby_explanation),
+            IMAGES_NEARBY_PLACES_URL);
     }
 
     @OnClick(R.id.images_featured_info)
     public void showFeaturedImagesInfo(){
-        launchAlert(getResources().getString(R.string.statistics_featured)
-                ,getResources().getString(R.string.images_featured_explanation));
+        launchAlertWithHelpLink(
+            getResources().getString(R.string.statistics_featured),
+            getResources().getString(R.string.images_featured_explanation),
+            IMAGES_FEATURED_URL);
     }
 
     @OnClick(R.id.thanks_received_info)
     public void showThanksReceivedInfo(){
-        launchAlert(getResources().getString(R.string.statistics_thanks)
-                ,getResources().getString(R.string.thanks_received_explanation));
+        launchAlertWithHelpLink(
+            getResources().getString(R.string.statistics_thanks),
+            getResources().getString(R.string.thanks_received_explanation),
+            THANKS_URL);
     }
 
     @OnClick(R.id.quality_images_info)
     public void showQualityImagesInfo() {
-        launchAlert(getResources().getString(R.string.statistics_quality)
-            , getResources().getString(R.string.quality_images_info));
+        launchAlertWithHelpLink(
+            getResources().getString(R.string.statistics_quality),
+            getResources().getString(R.string.quality_images_info),
+            QUALITY_IMAGE_URL);
     }
 
     /**
@@ -530,6 +517,22 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     }
 
     /**
+     *  Launch Alert with a READ MORE button and clicking it open a custom webpage
+     */
+    private void launchAlertWithHelpLink(String title, String message, String helpLinkUrl){
+        new Builder(getActivity())
+            .setTitle(title)
+            .setMessage(message)
+            .setCancelable(true)
+            .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+            .setNegativeButton(R.string.read_help_link, (dialog ,id) ->{
+                Utils.handleWebUrl(requireContext(), Uri.parse(helpLinkUrl));;
+            })
+            .create()
+            .show();
+    }
+
+    /**
      * check to ensure that user is logged in
      * @return
      */
@@ -543,5 +546,4 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         }
         return true;
     }
-
 }

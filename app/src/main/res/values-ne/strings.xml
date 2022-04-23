@@ -10,13 +10,11 @@
 -->
 <resources>
   <string name="share_license_summary" fuzzy="true">यी तस्वीरहरू  %1$s अनुमतिपत्र अनुसार प्राप्त हुनेछ</string>
-  <string name="title_activity_explore">अन्वेषण</string>
   <string name="navigation_item_explore">अन्वेषण</string>
   <string name="preference_category_appearance">स्वरूप</string>
   <string name="preference_category_general">सामान्य</string>
   <string name="preference_category_feedback">प्रतिक्रिया</string>
   <string name="preference_category_privacy">गोपनीयता</string>
-  <string name="preference_category_location">स्थान</string>
   <string name="app_name">कमन्स</string>
   <string name="bullet">•</string>
   <string name="menu_settings">सेटिङहरू</string>
@@ -36,10 +34,10 @@
   <string name="uploading_started">उर्ध्वभरण सुरू भयो!</string>
   <string name="upload_completed_notification_title">%1$s उर्ध्वभरण गरियो !</string>
   <string name="upload_completed_notification_text">तपाईको उर्ध्वभरण हेर्नको लागि ट्याप गर्नुहोस्</string>
-  <string name="upload_progress_notification_title_start"> %1$s उर्ध्वभरण सुरू गर्दैै</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true"> %1$s उर्ध्वभरण सुरू गर्दैै</string>
   <string name="upload_progress_notification_title_in_progress">%1$s उर्ध्वभरण गरिँदै</string>
   <string name="upload_progress_notification_title_finishing"> %1$s उर्ध्वभरण सकाउँदै</string>
-  <string name="upload_failed_notification_title"> %1$s उर्ध्वभरण असफल भयो</string>
+  <string name="upload_failed_notification_title" fuzzy="true"> %1$s उर्ध्वभरण असफल भयो</string>
   <string name="upload_failed_notification_subtitle">हेर्नको लागि ट्याप गर्नुहोस्</string>
   <string name="title_activity_contributions">मेरा हालैका उर्ध्वभरणहरू</string>
   <string name="contribution_state_queued">लाममा राखियो</string>
@@ -51,26 +49,21 @@
   <string name="menu_nearby">वरिपरिका</string>
   <string name="provider_contributions">मेरा उर्ध्वभरणहरू</string>
   <string name="menu_share">बाड्ने</string>
-  <string name="menu_open_in_browser">ब्राउजरमा हेर्ने</string>
   <string name="share_title_hint" fuzzy="true">शीर्षक (आवश्यक)</string>
   <string name="share_description_hint">वर्णन</string>
   <string name="login_failed_network">प्रवेश गर्न असमर्थ - जडान खराबी</string>
-  <string name="login_failed_wrong_credentials">प्रव्रश गर्न असमर्थ - कृपया तपाईको प्रयोगकर्ता नाम र पासवर्ड जाँच गर्नुहोस्</string>
   <string name="login_failed_throttled">धेरै असफल प्रयासहरू भए। कृपया केही मिनेट पछि पुन: प्रयास गर्नुहोस</string>
   <string name="login_failed_blocked">माफ गर्नुहोस, यो प्रयोगकर्तालाई कमन्समा प्रतिबन्ध गरिएको छ</string>
   <string name="login_failed_2fa_needed">तपाईले आफ्नो दुई कारक प्रमाणीकरण अङ्क प्रदान गर्नुपर्नेछ।</string>
   <string name="login_failed_generic">प्रवेश सफल हुन सकेन</string>
   <string name="share_upload_button">उर्ध्वभरण गर्ने</string>
   <string name="multiple_share_base_title">यो सेटलाई नाम दिनुहोस्</string>
-  <string name="add_set_name_toast">कृपया यो समूह लागि नाम प्रदान गर्नुहाेस्</string>
   <string name="provider_modifications">परिवर्तनहरू</string>
   <string name="menu_upload_single">उर्ध्वभरण गर्ने</string>
   <string name="categories_search_text_hint">खोज श्रेणीहरू</string>
   <string name="menu_save_categories">सङ्ग्रह गर्ने</string>
   <string name="refresh_button">ताजा गर्नुहोस्</string>
   <string name="display_list_button">सूची</string>
-  <string name="gps_disabled">विश्वव्यापी स्थान निर्धारण प्रणाली तपाईको उपकरणमा असक्षम छ। के तपाइ यसलाई सक्षम गर्न चाहानुहुन्छ?</string>
-  <string name="enable_gps">विश्वव्यापी स्थान निर्धारण प्रणालीलाई सक्षम गर्नुहाेस्</string>
   <string name="contributions_subtitle_zero" fuzzy="true">कुनैपनि उर्ध्वभरण छैन</string>
   <string name="categories_not_found">मिल्दो वर्ग %1$s फेला परेन</string>
   <string name="categories_skip_explanation">विकिमिडिया कमन्समा आफ्नो तस्वीरहरू थप भेट्टाउने बनाउन श्रेणीहरू थप्नुहोस।\nश्रेणीहरू थप्नको लागि लेख्न सुरु गर्नुहोस्।</string>
@@ -95,7 +88,6 @@
   <string name="menu_download">डाउनलोड गर्ने</string>
   <string name="preference_license">पूर्वनिर्धारित अनुमति पत्र</string>
   <string name="use_previous">अघिल्लो शीर्षक र वर्णनकाे प्रयोग गर्नुहोस्</string>
-  <string name="allow_gps">स्वचालित रूपमा हालको स्थान प्राप्त गर्नुहोस्</string>
   <string name="preference_theme">थिम</string>
   <string name="license_name_cc_by_sa_four">एट्रिब्युसन- सेयरअलाइक ४.०</string>
   <string name="license_name_cc_by_four">एट्रिब्युसन ४.०</string>
@@ -103,20 +95,9 @@
   <string name="license_name_cc_by">एट्रिब्युसन ३.०</string>
   <string name="license_name_cc0">CC०</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA ३.०</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA ३.० (अस्ट्रिया)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA ३.० (जर्मनी)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA ३.० (इस्टोनिया)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA ३.० (स्पेन)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA ३.० (क्रोएसिया)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA ३.० (लक्जेम्बर्ग)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA ३.० (नेदरल्यान्ड)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA ३.० (नर्वे)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA ३.० (पोल्यान्ड)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA ३.० (रोमानिया)</string>
   <string name="license_name_cc_by_3_0">CC BY-SA ३.०</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA ४.०</string>
   <string name="license_name_cc_by_4_0">CC BY ४.०</string>
-  <string name="license_name_cc_zero">CC शुन्य</string>
   <string name="tutorial_1_text">विकिमिडिया कमन्सले विकिपिडियामा प्रयोग गरिने अधिकांश तस्वीरहरूकाे आयाेजना गर्दछ।</string>
   <string name="tutorial_1_subtext">तपाईको तस्वीरहरूले संसार भरिका मानिसहरूलाई शिक्षित बनाउन मद्दत गर्दछ!</string>
   <string name="tutorial_2_text">कृपया आफैले खिचेका वा पूर्ण रूपमा सृजना गरिएका तस्विरहरू उर्ध्वभरण गर्नुहाेस्</string>
@@ -143,10 +124,7 @@
   <string name="detail_license_empty">अज्ञान अनुमतिपत्र</string>
   <string name="menu_refresh">ताजागर्ने</string>
   <string name="location_permission_title">स्थान अनुमतिका लागि अनुराेध</string>
-  <string name="location_permission_rationale">वैकल्पिक अनुमति: श्रेणी सुझावहरूको लागि हालको स्थान प्राप्त गर्नुहोस्</string>
   <string name="ok">ठीक</string>
-  <string name="title_activity_nearby">नजिकका स्थानहरू</string>
-  <string name="no_nearby">नजिकका स्थानहरू भेटिएनन्</string>
   <string name="warning">चेतावनी</string>
   <string name="yes">हो</string>
   <string name="no">होइन</string>
@@ -158,23 +136,12 @@
   <string name="media_detail_license">इजाजतपत्र</string>
   <string name="media_detail_coordinates">अक्षाङ्शहरू</string>
   <string name="media_detail_coordinates_empty">कुनै उपलब्ध गराइएकाे छैन</string>
-  <string name="maximum_limit">अधिकतम सीमा</string>
-  <string name="invalid_zero">शून्य मान्य छैन</string>
-  <string name="maximum_limit_alert">5०० भन्दा बढी प्रदर्शन गर्न असमर्थ</string>
-  <string name="enter_valid">मान्य सङ्ख्या प्रविष्ट गर्नुहोस्</string>
-  <string name="cannot_be_zero">उर्ध्वभरण सीमा शून्य हुन सक्दैन</string>
-  <string name="set_limit">भर्खरको उर्ध्वभरण सीमा</string>
-  <string name="login_failed_2fa_not_supported">दुई कारक प्रमाणीकरण हाल समर्थित छैन।</string>
   <string name="logout_verification">के तपाई निर्गमन गर्न चाहानुहुन्छ?</string>
   <string name="commons_logo">कमन्सकाे लाेगाे</string>
   <string name="commons_website">कमन्सकाे वेबसाइट</string>
   <string name="commons_facebook">कमन्सकाे फेसबुक पृष्ठ</string>
-  <string name="background_image">पृष्ठभूमि तस्वीर</string>
-  <string name="no_image_found">कुनैपनि तस्वीर फेला परेन</string>
   <string name="no_subcategory_found">कुनैपनि उपश्रेणीहरू फेला परेनन्</string>
   <string name="no_parentcategory_found">कुनैपनि अभिभावक श्रेणीहरू फेला परेन</string>
-  <string name="upload_image">उर्ध्वभरण गरिएकाे मिति</string>
-  <string name="welcome_image_proprietary">स्वामित्व तस्वीर</string>
   <string name="welcome_image_welcome_wikipedia">विकिपिडियामा स्वागत छ</string>
   <string name="welcome_image_sydney_opera_house">सिड्नीकाे ओपेरा हाउस</string>
   <string name="cancel">रद्द गर्ने</string>
@@ -189,23 +156,13 @@
   <string name="navigation_item_logout">निर्गमन</string>
   <string name="navigation_item_info">प्रशिक्षण</string>
   <string name="navigation_item_notification">जानकारीहरू</string>
-  <string name="navigation_item_featured_images">प्रमुख</string>
   <string name="navigation_item_review">समीक्षा</string>
-  <string name="nearby_needs_permissions">नजिकका स्थानहरू स्थान अनुमतिहरू बिना प्रदर्शन गर्न सकिँदैन</string>
   <string name="no_description_found">कुनैपनि विवरण भेटिएन</string>
   <string name="nearby_info_menu_wikidata_article">विकिडाटा सामग्री</string>
   <string name="nearby_info_menu_wikipedia_article">विकिपिडियाकाे लेख</string>
-  <string name="give_permission">अनुमति दिनुहाेस्</string>
   <string name="login_to_your_account">आफ्नो खातामा प्रवेश गर्नुहोस्</string>
-  <string name="view_browser">ब्राउजरमा हेर्नुहाेस्</string>
   <string name="skip_login">छोड्नुहोस्</string>
   <string name="navigation_item_login">प्रवेश</string>
-  <string name="get_directions">दिशानिर्देशन प्राप्त गर्नुहोस्</string>
-  <string name="read_article">लेख पढ्नुहोस्</string>
-  <string name="notifications_talk_page_message">%1$s तपाईको वार्तालाप पृष्ठमा एक सन्देश छोडिएकाे छ</string>
-  <string name="notifications_thank_you_edit">सम्पादनका लागि धन्यवाद</string>
-  <string name="notifications_mention">%1$s मा तपाइलाई उल्लेख गरिएकाे छ %2$s.</string>
-  <string name="toggle_view_button">टगल दृश्य</string>
   <string name="nearby_directions">दिशाहरू</string>
   <string name="nearby_wikidata">विकिडाटा</string>
   <string name="nearby_wikipedia">विकिपिडिया</string>
@@ -213,7 +170,6 @@
   <string name="about_rate_us">मूल्याङ्कन गर्नुहाेस्</string>
   <string name="about_faq">प्राय सोधिएका प्रश्नहरू</string>
   <string name="no_internet">इन्टरनेट उपलब्ध छैन</string>
-  <string name="internet_established">इन्टरनेट उपलब्ध छ</string>
   <string name="no_notifications">कुनै सूचनाहरू फेला परेन</string>
   <string name="about_translate">अनुवाद</string>
   <string name="about_translate_title">भाषाहरू</string>
@@ -221,7 +177,6 @@
   <string name="about_translate_proceed">अगाडि बढ्नुहोस्</string>
   <string name="about_translate_cancel">रद्द गर्नुहोस्</string>
   <string name="retry">पुनः प्रयास गर्नुहोस्</string>
-  <string name="showcase_view_got_it_button">मैले बुझेँ!</string>
   <string name="no_images_found">कुनैपनि तस्वीर फेला परेन</string>
   <string name="block_notification_title">निषेधित</string>
   <string name="block_notification">तपाईलाई कमन्स सम्पादन गर्नबाट प्रतिबन्ध गरिएको छ</string>
@@ -259,25 +214,14 @@
   <string name="next">अर्को</string>
   <string name="previous">अघिल्लो</string>
   <string name="submit">बुझाउनुहोस्</string>
-  <string name="navigation_item_bookmarks">पुस्तक चिनोहरू</string>
-  <string name="title_activity_bookmarks">पुस्तक चिनोहरू</string>
   <string name="title_page_bookmarks_pictures">तस्वीरहरू</string>
   <string name="title_page_bookmarks_locations">स्थानहरू</string>
   <string name="provider_bookmarks">पुस्तक चिनोहरू</string>
   <string name="provider_bookmarks_location">पुस्तक चिनोहरू</string>
-  <string name="desc_language_Worldwide">विश्वव्यापी</string>
-  <string name="desc_language_America">अमेरिका</string>
-  <string name="desc_language_Europe">युरोप</string>
-  <string name="desc_language_Middle_East">मध्य पूर्व</string>
-  <string name="desc_language_Africa">अफ्रिका</string>
-  <string name="desc_language_Asia">एसिया</string>
-  <string name="desc_language_Pacific">प्रशान्त</string>
   <string name="no_categories_selected">कुनैपनि श्रेणीहरू छानिएका छैनन्</string>
   <string name="search_this_area">यस क्षेत्रमा खोज्नुहोस्</string>
   <string name="nearby_card_permission_title">अनुमति अनुरोध</string>
   <string name="nominate_for_deletion_done">सम्पन्न</string>
-  <string name="notsure">निश्चित छैन</string>
-  <string name="image_chooser_title">उर्ध्वभरण गर्ने तस्वीर छान्नुहाेस्</string>
   <string name="please_wait">कृपया प्रतिक्षा गर्नुहोस्…</string>
   <string name="exif_tag_name_author">लेखक</string>
   <string name="exif_tag_name_copyright">प्रतिलिपि अधिकार</string>
@@ -290,13 +234,10 @@
   <string name="delete_helper_show_deletion_title">मेटाउनका लागि नामाङ्कित</string>
   <string name="delete_helper_show_deletion_title_success">सफल</string>
   <string name="delete_helper_show_deletion_title_failed">असफल</string>
-  <string name="delete_helper_ask_spam_other">अन्य</string>
   <string name="delete_helper_ask_reason_copyright_logo">लोगो</string>
-  <string name="delete_helper_ask_reason_copyright_other">अन्य</string>
-  <string name="no_achievements_yet">तपाईले हालसम्म कुनैपनि सम्पादन गर्नु भएकाे छैन</string>
+  <string name="no_achievements_yet" fuzzy="true">तपाईले हालसम्म कुनैपनि सम्पादन गर्नु भएकाे छैन</string>
   <string name="account_created">खाता सृजना गरियो!</string>
   <string name="upload_nearby_place_found_title">नजिकैको स्थान भेटियो</string>
-  <string name="title_app_shortcut_explore">अन्वेषण</string>
   <string name="title_app_shortcut_bookmark">पुस्तक चिनोहरू</string>
   <string name="title_app_shortcut_setting">सेटिङ्गहरू</string>
   <string name="add_bookmark">पुस्तक चिनाेमा थपियाे</string>

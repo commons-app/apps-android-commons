@@ -2,10 +2,12 @@ package fr.free.nrw.commons.di;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsContentProvider;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsContentProvider;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;
 import fr.free.nrw.commons.category.CategoryContentProvider;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider;
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesContentProvider;
 
 /**
  * This Class Represents the Module for dependency injection (using dagger)
@@ -27,4 +29,10 @@ public abstract class ContentProviderBuilderModule {
 
 	@ContributesAndroidInjector
 	abstract BookmarkLocationsContentProvider bindBookmarkLocationContentProvider();
+
+	@ContributesAndroidInjector
+	abstract BookmarkItemsContentProvider bindBookmarkItemContentProvider();
+
+	@ContributesAndroidInjector
+	abstract RecentLanguagesContentProvider bindRecentLanguagesContentProvider();
 }

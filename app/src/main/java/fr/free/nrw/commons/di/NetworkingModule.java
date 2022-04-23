@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import com.google.gson.Gson;
 import dagger.Module;
 import dagger.Provides;
+import fr.free.nrw.commons.BetaConstants;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.actions.PageEditInterface;
@@ -14,6 +15,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.media.MediaDetailInterface;
 import fr.free.nrw.commons.media.MediaInterface;
 import fr.free.nrw.commons.media.PageMediaInterface;
+import fr.free.nrw.commons.media.WikidataMediaInterface;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.mwapi.UserInterface;
 import fr.free.nrw.commons.review.ReviewInterface;
@@ -216,15 +218,28 @@ public class NetworkingModule {
     @Provides
     @Singleton
     public PageEditClient provideCommonsPageEditClient(@Named(NAMED_COMMONS_CSRF) CsrfTokenClient csrfTokenClient,
-                                                       @Named("commons-page-edit-service") PageEditInterface pageEditInterface,
-                                                       @Named("commons-service") Service service) {
-        return new PageEditClient(csrfTokenClient, pageEditInterface, service);
+                                                       @Named("commons-page-edit-service") PageEditInterface pageEditInterface) {
+        return new PageEditClient(csrfTokenClient, pageEditInterface);
     }
 
     @Provides
     @Singleton
     public MediaInterface provideMediaInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
         return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, MediaInterface.class);
+    }
+
+    /**
+     * Add provider for WikidataMediaInterface
+     * It creates a retrofit service for the commons wiki site
+     * @param commonsWikiSite commonsWikiSite
+     * @return WikidataMediaInterface
+     */
+    @Provides
+    @Singleton
+    public WikidataMediaInterface provideWikidataMediaInterface(
+        @Named(NAMED_COMMONS_WIKI_SITE) final WikiSite commonsWikiSite) {
+        return ServiceFactory.get(commonsWikiSite,
+            BetaConstants.COMMONS_URL, WikidataMediaInterface.class);
     }
 
     @Provides
@@ -235,8 +250,10 @@ public class NetworkingModule {
 
     @Provides
     @Singleton
-    public CategoryInterface provideCategoryInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
-        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, CategoryInterface.class);
+    public CategoryInterface provideCategoryInterface(
+        @Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
+        return ServiceFactory
+               .get(commonsWikiSite, BuildConfig.COMMONS_URL, CategoryInterface.class);
     }
 
     @Provides

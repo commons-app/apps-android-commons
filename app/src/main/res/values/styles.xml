@@ -19,6 +19,7 @@
         <item name="rowButtonColor">@color/button_blue_dark</item>
         <item name="reviewHeading">@color/white</item>
         <item name="aboutIconsColor">@color/white</item>
+        <item name="caption_description_text_color">@color/white</item>
 
         <item name="semitransparentText">@color/commons_app_blue_dark</item>
         <item name="subBackground">@color/sub_background_dark</item>
@@ -51,8 +52,13 @@
         <item name="notification_icon_text_color">@color/white</item>
         <item name="toggle_theme">@style/SwitchThemeDark</item>
         <item name="contributionsListTextPrimary">@color/white</item>
-        <item name="contributionsListTextSecondary">@color/browser_actions_divider_color</item>
+        <item name="contributionsListTextSecondary">@color/white</item>
         <item name="menu_item_tint">@color/white</item>
+        <item name="search_icon">@drawable/ic_search_white_24dp</item>
+        <item name="custom_selector_done">@drawable/ic_done_white</item>
+        <item name="custom_selector_back">@drawable/ic_arrow_back_white</item>
+        <item name="android:windowEnableSplitTouch">false</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -73,6 +79,7 @@
         <item name="rowButtonColor">@color/button_blue</item>
         <item name="reviewHeading">@color/black</item>
         <item name="aboutIconsColor">@color/black</item>
+        <item name="caption_description_text_color">@color/black</item>
 
         <item name="semitransparentText">@color/commons_app_blue_light</item>
         <item name="subBackground">@color/sub_background_light</item>
@@ -107,6 +114,11 @@
         <item name="contributionsListTextPrimary">@color/black</item>
         <item name="contributionsListTextSecondary">@color/disabled_button_text_color_dark</item>
         <item name="menu_item_tint">@color/primaryDarkColor</item>
+        <item name="search_icon">@drawable/ic_search_blue_24dp</item>
+        <item name="custom_selector_done">@drawable/ic_done_black</item>
+        <item name="custom_selector_back">@drawable/ic_arrow_back_black</item>
+        <item name="android:windowEnableSplitTouch">false</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <style name="LightMoreBottomSheetStyle" parent="LightAppTheme">
@@ -198,6 +210,12 @@
         <item name="android:paddingLeft">@dimen/tiny_gap</item>
         <item name="android:textSize">@dimen/normal_text</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CaptionTextLabel">
+        <item name="android:paddingTop">@dimen/dimen_6</item>
+        <item name="android:paddingLeft">@dimen/tiny_gap</item>
+        <item name="android:textSize">@dimen/normal_text</item>
     </style>
 
     <style name="MediaDetailTextLabelTitle" parent="@style/MediaDetailTextLabel">

@@ -15,8 +15,11 @@
       style="?android:textAppearanceMedium"
       android:gravity="center_vertical|center_horizontal"
       android:layout_width="0dp"
-      android:layout_weight="0.1"
-      android:layout_height="match_parent"/>
+      android:layout_weight="0.15"
+      android:layout_height="match_parent"
+      android:maxLines="1"
+      android:inputType="text"
+      />
 
     <com.facebook.drawee.view.SimpleDraweeView
       android:id="@+id/user_avatar"
@@ -36,7 +39,7 @@
       style="?android:textAppearanceMedium"
       android:gravity="center_vertical|start"
       android:layout_width="0dp"
-      android:layout_weight="0.6"
+      android:layout_weight="0.55"
       android:layout_height="match_parent"/>
 
     <TextView

@@ -8,8 +8,9 @@ import fr.free.nrw.commons.explore.paging.LoadingState
 import fr.free.nrw.commons.explore.paging.PagingDataSource
 import fr.free.nrw.commons.explore.paging.PagingDataSourceFactory
 import io.reactivex.processors.PublishProcessor
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.instanceOf
+import org.hamcrest.CoreMatchers.instanceOf
+import org.hamcrest.MatcherAssert
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
@@ -38,7 +39,7 @@ class PagingDataSourceFactoryTest {
 
     @Test
     fun `create returns a dataSource`() {
-        assertThat(
+        MatcherAssert.assertThat(
             factory.create(),
             instanceOf(PagingDataSource::class.java)
         )

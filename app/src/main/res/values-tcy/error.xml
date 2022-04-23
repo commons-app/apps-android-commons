@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * BHARATHESHA ALASANDEMAJALU
+* Chidananda Kampa
 -->
 <resources>
   <string name="crash_dialog_text">ಉಸಬ್ಬಾ. ದಾದೋನಾ ತೊಂದರೆ ಅಂಡ್!</string>
-  <string name="crash_dialog_ok_toast">ಸೊಲ್ಮೆಲೋ</string>
+  <string name="crash_dialog_comment_prompt">ಈರ್ ದಾದ ಮಲ್ತರುಂದು ನಮಕ್ ಪನ್ಲೆ, ಅವೆನ್ ಬುಕ್ಕ ಇಮೇಲ್‌ದ್ ಪಟ್ಟೊನ್ಲೆ. ಅವೆನ್ ಸರಿ ಮಲ್ಪರ ಸಹಾಯೋ ಅಪುಂಡು!</string>
+  <string name="crash_dialog_ok_toast">ಸೊಲ್ಮೆಲೋ!</string>
 </resources>

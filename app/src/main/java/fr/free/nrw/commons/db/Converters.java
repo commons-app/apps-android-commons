@@ -23,6 +23,27 @@ public class Converters {
         return ApplicationlessInjection.getInstance(CommonsApplication.getInstance()).getCommonsApplicationComponent().gson();
     }
 
+    /**
+     * convert DepictedItem object to string
+     * input Example -> DepictedItem depictedItem=new DepictedItem ()
+     * output Example -> string
+     */
+    @TypeConverter
+    public static String depictsItemToString(DepictedItem objects) {
+        return writeObjectToString(objects);
+    }
+
+    /**
+     * convert string to DepictedItem object
+     * output Example -> DepictedItem depictedItem=new DepictedItem ()
+     * input Example -> string 
+     */
+    @TypeConverter
+    public static DepictedItem stringToDepicts(String objectList) {
+        return readObjectWithTypeToken(objectList, new TypeToken<DepictedItem>() {
+        });
+    }
+
     @TypeConverter
     public static Date fromTimestamp(Long value) {
         return value == null ? null : new Date(value);
@@ -59,8 +80,18 @@ public class Converters {
     }
 
     @TypeConverter
+    public static String mapObjectToString2(Map<String,Boolean> objectList) {
+        return writeObjectToString(objectList);
+    }
+
+    @TypeConverter
     public static Map<String,String> stringToMap(String objectList) {
         return readObjectWithTypeToken(objectList, new TypeToken<Map<String,String>>(){});
+    }
+
+    @TypeConverter
+    public static Map<String,Boolean> stringToMap2(String objectList) {
+        return readObjectWithTypeToken(objectList, new TypeToken<Map<String,Boolean>>(){});
     }
 
     @TypeConverter

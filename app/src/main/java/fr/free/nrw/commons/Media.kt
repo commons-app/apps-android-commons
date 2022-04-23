@@ -3,6 +3,7 @@ package fr.free.nrw.commons
 import android.os.Parcelable
 import fr.free.nrw.commons.location.LatLng
 import kotlinx.android.parcel.Parcelize
+import org.wikipedia.dataclient.mwapi.MwQueryPage
 import org.wikipedia.page.PageTitle
 import java.util.*
 
@@ -12,19 +13,19 @@ class Media constructor(
      * @return pageId for the current media object
      * Wikibase Identifier associated with media files
      */
-    val pageId: String = UUID.randomUUID().toString(),
-    val thumbUrl: String? = null,
+    var pageId: String = UUID.randomUUID().toString(),
+    var thumbUrl: String? = null,
 
     /**
      * Gets image URL
      * @return Image URL
      */
-    val imageUrl: String? = null,
+    var imageUrl: String? = null,
     /**
      * Gets the name of the file.
      * @return file name as a string
      */
-    val filename: String? = null,
+    var filename: String? = null,
     /**
      * Gets the file description.
      * @return file description as a string
@@ -41,7 +42,7 @@ class Media constructor(
      * Can be null.
      * @return upload date as a Date
      */
-    val dateUploaded: Date? = null,
+    var dateUploaded: Date? = null,
     /**
      * Gets the license name of the file.
      * @return license as a String
@@ -52,7 +53,7 @@ class Media constructor(
      * @param license license name as a String
      */
     var license: String? = null,
-    val licenseUrl: String? = null,
+    var licenseUrl: String? = null,
     /**
      * Gets the name of the creator of the file.
      * @return author name as a String
@@ -69,15 +70,21 @@ class Media constructor(
      * Gets the categories the file falls under.
      * @return file categories as an ArrayList of Strings
      */
-    val categories: List<String>? = null,
+    var categories: List<String>? = null,
     /**
      * Gets the coordinates of where the file was created.
      * @return file coordinates as a LatLng
      */
-    val coordinates: LatLng? = null,
-    val captions: Map<String, String> = emptyMap(),
-    val descriptions: Map<String, String> = emptyMap(),
-    val depictionIds: List<String> = emptyList()
+    var coordinates: LatLng? = null,
+    var captions: Map<String, String> = emptyMap(),
+    var descriptions: Map<String, String> = emptyMap(),
+    var depictionIds: List<String> = emptyList(),
+    /**
+     * This field was added to find non-hidden categories
+     * Stores the mapping of category title to hidden attribute
+     * Example: "Mountains" => false, "CC-BY-SA-2.0" => true
+     */
+    var categoriesHiddenStatus: Map<String, Boolean> = emptyMap()
 ) : Parcelable {
 
     constructor(

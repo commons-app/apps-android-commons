@@ -3,6 +3,24 @@
 * Kaszeba
 -->
 <resources>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">Wladënk %1$d lopka</item>
+    <item quantity="other">Wladënk %1$d lopków</item>
+  </plurals>
+  <plurals name="contributions_subtitle" fuzzy="true">
+    <item quantity="zero">Przesłano @string/contributions_subtitle_zero</item>
+    <item quantity="one">Przesłano %1$d lopk</item>
+    <item quantity="other">Przesłano %1$d lopczi</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">Naczãto %1$d wladënk</item>
+    <item quantity="other">Naczãto %1$d wladënczi</item>
+  </plurals>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d wladënk</item>
+    <item quantity="other">%1$d wladënczi</item>
+  </plurals>
+  <string name="share_license_summary" fuzzy="true">Nen òbrôzk bãdze ùprzistãpniony wedle licencëji %1$s</string>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Nastôwë</string>
   <string name="username">Miono brëkòwnika</string>
@@ -18,15 +36,11 @@
   <string name="uploading_started">Wladënk zrëszony!</string>
   <string name="upload_completed_notification_title">%1$s wladowóné!</string>
   <string name="upload_completed_notification_text">Tkni, abë òbôczëc ladowóny lopk</string>
-  <string name="upload_progress_notification_title_start">Zrëszony wladënk lopka %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Zrëszony wladënk lopka %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s wladënk</string>
   <string name="upload_progress_notification_title_finishing">Zakùńczony wladënk lopka %1$s</string>
-  <string name="upload_failed_notification_title">Wladënk %1$s nie darzëł sã</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Wladënk %1$s nie darzëł sã</string>
   <string name="upload_failed_notification_subtitle">Tkni, abë òbôczëc</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">Wladënk %1$d lopka</item>
-    <item quantity="other">Wladënk %1$d lopków</item>
-  </plurals>
   <string name="title_activity_contributions">Mòjé slédno wladowóné lopczi</string>
   <string name="contribution_state_queued">Żdające</string>
   <string name="contribution_state_failed">Nie dzarzëło sã</string>
@@ -37,7 +51,6 @@
   <string name="menu_nearby">W òkòlim</string>
   <string name="provider_contributions">Mòjé wladënczi</string>
   <string name="menu_share">Ùprzistãpni</string>
-  <string name="menu_open_in_browser">Òbôczë w przezérnikù</string>
   <string name="share_title_hint" fuzzy="true">Titel</string>
   <string name="share_description_hint">Òpisënk</string>
   <string name="login_failed_network">Ni mòże sã wlogòwac - fela sécë</string>
@@ -52,22 +65,7 @@
   <string name="categories_search_text_hint">Szëkba kategòrëjów</string>
   <string name="menu_save_categories">Zapiszë:</string>
   <string name="refresh_button">Òdswierzë</string>
-  <string name="gps_disabled">GPS je w twòjim ùrządzeniém wëłączony. Chcesz gò włączëc?</string>
-  <string name="enable_gps">Wëłączë GPS</string>
-  <string name="contributions_subtitle_zero">Nie dô jesz wladënków</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Przesłano @string/contributions_subtitle_zero</item>
-    <item quantity="one">Przesłano %1$d lopk</item>
-    <item quantity="other">Przesłano %1$d lopczi</item>
-  </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Naczãto %1$d wladënk</item>
-    <item quantity="other">Naczãto %1$d wladënczi</item>
-  </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d wladënk</item>
-    <item quantity="other">%1$d wladënczi</item>
-  </plurals>
+  <string name="contributions_subtitle_zero" fuzzy="true">Nie dô jesz wladënków</string>
   <string name="categories_not_found">Felënk pasowny kategòrëji do %1$s</string>
   <string name="categories_activity_title">Kategòrëje</string>
   <string name="title_activity_settings">Nastôwë</string>
@@ -83,33 +81,19 @@
   <string name="no_uploads_yet">Nie môsz jesz wladowónych òdjimków</string>
   <string name="menu_retry_upload">Próbùjë znowa</string>
   <string name="menu_cancel_upload">Òprzestóń</string>
-  <string name="share_license_summary" fuzzy="true">Nen òbrôzk bãdze ùprzistãpniony wedle licencëji %1$s</string>
   <string name="menu_download">Zladënk</string>
   <string name="preference_license" fuzzy="true">Licencëjô</string>
-  <string name="use_previous">Ùżëjë slédnegò titla/òpisënka</string>
-  <string name="allow_gps">Aùtomatno dobëjë aktualną lokalizacëjã</string>
-  <string name="preference_theme">Nocny trib</string>
-  <string name="preference_theme_summary">Ùżëjë cemny skórczi</string>
+  <string name="use_previous" fuzzy="true">Ùżëjë slédnegò titla/òpisënka</string>
+  <string name="preference_theme" fuzzy="true">Nocny trib</string>
   <string name="license_name_cc_by_sa_four">Ùznanié ùsôdztwa na równych prawach 4.0</string>
   <string name="license_name_cc_by_four">Ùznanié ùsôdztwa 4.0</string>
   <string name="license_name_cc_by_sa">Ùznanié ùsôdztwa na równych prawach 3.0</string>
   <string name="license_name_cc_by">Ùznanié ùsôdztwa 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Aùstrëjackô)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Miemieckô)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estóńskô)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Szpańskô)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Chòrwackô)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luksembùrskô)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Néderlandzkô)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norweskô)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Pòlskô)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumùńskô)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_3_text">Proszimë NIE wladowiwac:</string>
   <string name="tutorial_4_text">Przëmiôr wladënka:</string>
   <string name="welcome_final_button_text">Jo!</string>
@@ -133,15 +117,10 @@
   <string name="_2fa_code">Kòd 2FA</string>
   <string name="logout_verification">Pò prôwdze chcesz sã wëlogòwac?</string>
   <string name="commons_logo">Logò Commons</string>
-  <string name="background_image">Òbrôzk spódkù</string>
-  <string name="no_image_found">Felënk òbrôzka</string>
-  <string name="upload_image">Waldëjë òbrôzk</string>
   <string name="welcome_image_mount_zao">Zaō</string>
   <string name="welcome_image_llamas">Lamy</string>
   <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
   <string name="welcome_image_tulip">Tulpa</string>
-  <string name="welcome_image_no_selfies">Felënk \"selfies\"</string>
-  <string name="welcome_image_proprietary">Zazychrowóny òbrôzk</string>
   <string name="welcome_image_welcome_wikipedia">Witôj na Wikipediji</string>
   <string name="welcome_image_welcome_copyright">Witôj w prawnych zastrzégach</string>
   <string name="welcome_image_sydney_opera_house">Sydney Opera House</string>

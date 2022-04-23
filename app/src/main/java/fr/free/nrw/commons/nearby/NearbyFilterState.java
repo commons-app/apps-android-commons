@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class NearbyFilterState {
     private boolean existsSelected;
     private boolean needPhotoSelected;
+    private boolean wlmSelected;
     private int checkBoxTriState;
     private ArrayList<Label> selectedLabels;
 
@@ -14,8 +15,9 @@ public class NearbyFilterState {
      * Define initial filter values here
      */
     private NearbyFilterState() {
-        existsSelected = false;
+        existsSelected = true;
         needPhotoSelected = true;
+        wlmSelected = true;
         checkBoxTriState = -1; // Unknown
         selectedLabels = new ArrayList<>(); // Initially empty
     }
@@ -37,6 +39,14 @@ public class NearbyFilterState {
 
     public static void setNeedPhotoSelected(boolean needPhotoSelected) {
         getInstance().needPhotoSelected = needPhotoSelected;
+    }
+
+    public static void setWlmSelected(final boolean wlmSelected) {
+        getInstance().wlmSelected = wlmSelected;
+    }
+
+    public boolean isWlmSelected() {
+        return wlmSelected;
     }
 
     public boolean isExistsSelected() {

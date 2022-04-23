@@ -21,21 +21,25 @@ class ContributionBoundaryCallback @Inject constructor(
     @param:Named(CommonsApplicationModule.IO_THREAD) private val ioThreadScheduler: Scheduler
 ) : BoundaryCallback<Contribution>() {
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
+    lateinit var userName: String
+
 
     /**
      * It is triggered when the list has no items User's Contributions are then fetched from the
      * network
      */
     override fun onZeroItemsLoaded() {
+        if (sessionManager.userName != null) {
+            mediaClient.resetUserNameContinuation(sessionManager.userName!!)
+        }
         fetchContributions()
     }
 
     /**
-     * It is triggered when the user scrolls to the top of the list User's Contributions are then
-     * fetched from the network
+     * It is triggered when the user scrolls to the top of the list
      * */
     override fun onItemAtFrontLoaded(itemAtFront: Contribution) {
-        fetchContributions()
+
     }
 
     /**
@@ -50,21 +54,27 @@ class ContributionBoundaryCallback @Inject constructor(
      * Fetches contributions using the MediaWiki API
      */
     fun fetchContributions() {
-        compositeDisposable.add(
-            mediaClient.getMediaListForUser(sessionManager.userName!!)
-                .map { mediaList ->
-                    mediaList.map {
-                        Contribution(media=it, state=Contribution.STATE_COMPLETED)
+        if (sessionManager.userName != null) {
+            compositeDisposable.add(
+                mediaClient.getMediaListForUser(userName!!)
+                    .map { mediaList ->
+                        mediaList.map {
+                            Contribution(media = it, state = Contribution.STATE_COMPLETED)
+                        }
                     }
-                }
-                .subscribeOn(ioThreadScheduler)
-                .subscribe(::saveContributionsToDB) { error: Throwable ->
-                    Timber.e(
-                        "Failed to fetch contributions: %s",
-                        error.message
-                    )
-                }
-        )
+                    .subscribeOn(ioThreadScheduler)
+                    .subscribe(::saveContributionsToDB) { error: Throwable ->
+                        Timber.e(
+                            "Failed to fetch contributions: %s",
+                            error.message
+                        )
+                    }
+            )
+        }else {
+            if (compositeDisposable != null){
+                compositeDisposable.clear()
+            }
+        }
     }
 
     /**
@@ -78,5 +88,12 @@ class ContributionBoundaryCallback @Inject constructor(
                     repository["last_fetch_timestamp"] = System.currentTimeMillis()
                 }
         )
+    }
+
+    /**
+     * Clean up
+     */
+    fun dispose() {
+        compositeDisposable.dispose()
     }
 }

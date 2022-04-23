@@ -1,19 +1,38 @@
 package fr.free.nrw.commons.upload.categories
 
-import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
+import android.view.View
+import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryItem
-import kotlinx.android.synthetic.main.layout_upload_categories_item.*
+import fr.free.nrw.commons.databinding.LayoutUploadCategoriesItemBinding
 
 fun uploadCategoryDelegate(onCategoryClicked: (CategoryItem) -> Unit) =
-    adapterDelegateLayoutContainer<CategoryItem, CategoryItem>(R.layout.layout_upload_categories_item) {
-        containerView.setOnClickListener {
+    adapterDelegateViewBinding<CategoryItem, CategoryItem,
+            LayoutUploadCategoriesItemBinding>({ layoutInflater, root ->
+        LayoutUploadCategoriesItemBinding.inflate(layoutInflater, root, false)
+    }) {
+        val onClickListener = { _: View? ->
             item.isSelected = !item.isSelected
-            uploadCategoryCheckbox.isChecked = item.isSelected
+            binding.uploadCategoryCheckbox.isChecked = item.isSelected
             onCategoryClicked(item)
         }
+
+        binding.root.setOnClickListener(onClickListener)
+        binding.uploadCategoryCheckbox.setOnClickListener(onClickListener)
+
         bind {
-            uploadCategoryCheckbox.isChecked = item.isSelected
-            uploadCategoryCheckbox.text = item.name
+            binding.uploadCategoryCheckbox.isChecked = item.isSelected
+            binding.categoryLabel.text = item.name
+            if(item.thumbnail != "null") {
+                binding.categoryImage.setImageURI(item.thumbnail)
+            } else {
+                binding.categoryImage.setActualImageResource(R.drawable.commons)
+            }
+
+            if(item.description != "null") {
+                binding.categoryDescription.text = item.description
+            } else {
+                binding.categoryDescription.text = ""
+            }
         }
     }

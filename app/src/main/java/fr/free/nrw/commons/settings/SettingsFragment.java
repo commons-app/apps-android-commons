@@ -1,16 +1,32 @@
 package fr.free.nrw.commons.settings;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.Manifest;
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.InputFilter;
-import android.text.InputType;
-import androidx.preference.EditTextPreference;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
 import androidx.preference.Preference;
+import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceFragmentCompat;
-import com.google.android.material.snackbar.Snackbar;
+import androidx.preference.PreferenceGroupAdapter;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.PreferenceViewHolder;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.single.BasePermissionListener;
@@ -18,17 +34,22 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.TelemetryDefinition;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.campaigns.CampaignView;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
-import fr.free.nrw.commons.upload.Language;
+import fr.free.nrw.commons.recentlanguages.Language;
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter;
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao;
+import fr.free.nrw.commons.upload.LanguagesAdapter;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -41,8 +62,16 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     @Inject
     CommonsLogSender commonsLogSender;
 
+    @Inject
+    RecentLanguagesDao recentLanguagesDao;
+
     private ListPreference themeListPreference;
-    private ListPreference langListPreference;
+    private Preference descriptionLanguageListPreference;
+    private Preference appUiLanguageListPreference;
+    private String keyLanguageListPreference;
+    private TextView recentLanguagesTextView;
+    private View separator;
+    private ListView languageHistoryListView;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -67,8 +96,51 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             });
         }
 
-        langListPreference = findPreference("descriptionDefaultLanguagePref");
-        prepareLanguages();
+        // Gets current language code from shared preferences
+        String languageCode;
+
+        appUiLanguageListPreference = findPreference("appUiDefaultLanguagePref");
+        assert appUiLanguageListPreference != null;
+        keyLanguageListPreference = appUiLanguageListPreference.getKey();
+        languageCode = getCurrentLanguageCode(keyLanguageListPreference);
+        assert languageCode != null;
+        if (languageCode.equals("")) {
+            // If current language code is empty, means none selected by user yet so use phone local
+            appUiLanguageListPreference.setSummary(Locale.getDefault().getDisplayLanguage());
+        } else {
+            // If any language is selected by user previously, use it
+            Locale defLocale = new Locale(languageCode);
+            appUiLanguageListPreference.setSummary((defLocale).getDisplayLanguage(defLocale));
+        }
+        appUiLanguageListPreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                prepareAppLanguages(appUiLanguageListPreference.getKey());
+                return true;
+            }
+        });
+
+        descriptionLanguageListPreference = findPreference("descriptionDefaultLanguagePref");
+        assert descriptionLanguageListPreference != null;
+        keyLanguageListPreference = descriptionLanguageListPreference.getKey();
+        languageCode = getCurrentLanguageCode(keyLanguageListPreference);
+        assert languageCode != null;
+        if (languageCode.equals("")) {
+            // If current language code is empty, means none selected by user yet so use phone local
+            descriptionLanguageListPreference.setSummary(Locale.getDefault().getDisplayLanguage());
+        } else {
+            // If any language is selected by user previously, use it
+            Locale defLocale = new Locale(languageCode);
+            descriptionLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
+        }
+        descriptionLanguageListPreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                prepareAppLanguages(descriptionLanguageListPreference.getKey());
+                return true;
+            }
+        });
+
         Preference betaTesterPreference = findPreference("becomeBetaTester");
         betaTesterPreference.setOnPreferenceClickListener(preference -> {
             Utils.handleWebUrl(getActivity(), Uri.parse(getResources().getString(R.string.beta_opt_in_link)));
@@ -84,8 +156,10 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             findPreference("useExternalStorage").setEnabled(false);
             findPreference("useAuthorName").setEnabled(false);
             findPreference("displayNearbyCardView").setEnabled(false);
+            findPreference("descriptionDefaultLanguagePref").setEnabled(false);
             findPreference("displayLocationPermissionForCardView").setEnabled(false);
-            findPreference("displayCampaignsCardView").setEnabled(false);
+            findPreference(CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE).setEnabled(false);
+            findPreference("managed_exif_tags").setEnabled(false);
         }
 
         findPreference("telemetryOptOut").setOnPreferenceChangeListener(
@@ -107,6 +181,21 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         }
     }
 
+    @Override
+    protected Adapter onCreateAdapter(final PreferenceScreen preferenceScreen) {
+        return new PreferenceGroupAdapter(preferenceScreen) {
+            @Override
+            public void onBindViewHolder(PreferenceViewHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+                Preference preference = getItem(position);
+                View iconFrame = holder.itemView.findViewById(R.id.icon_frame);
+                if (iconFrame != null) {
+                    iconFrame.setVisibility(View.GONE);
+                }
+            }
+        };
+    }
+
     /**
      * Sets the theme pref
      */
@@ -118,66 +207,231 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     /**
-     * Prepares language summary and language codes list and adds them to list preference as pairs.
-     * Uses previously saved language if there is any, if not uses phone local as initial language.
-     * Adds preference changed listener and saves value chosen by user to shared preferences
-     * to remember later
+     * Prepare and Show language selection dialog box
+     * Uses previously saved language if there is any, if not uses phone locale as initial language.
+     * Disable default/already selected language from dialog box
+     * Get ListPreference key and act accordingly for each ListPreference.
+     * saves value chosen by user to shared preferences
+     * to remember later and recall MainActivity to reflect language changes
+     * @param keyListPreference
      */
-    private void prepareLanguages() {
-        List<String> languageNamesList = new ArrayList<>();
-        List<String> languageCodesList = new ArrayList<>();
-        List<Language> languages = getLanguagesSupportedByDevice();
+    private void prepareAppLanguages(final String keyListPreference) {
 
-        for(Language language: languages) {
-            // Go through all languages and add them to lists
-            if(!languageCodesList.contains(language.getLocale().getLanguage())) {
-                // This if prevents us from adding same language twice
-                languageNamesList.add(language.getLocale().getDisplayName());
-                languageCodesList.add(language.getLocale().getLanguage());
+        // Gets current language code from shared preferences
+        final String languageCode = getCurrentLanguageCode(keyListPreference);
+        final List<Language> recentLanguages = recentLanguagesDao.getRecentLanguages();
+        HashMap<Integer, String> selectedLanguages = new HashMap<>();
+
+        if (keyListPreference.equals("appUiDefaultLanguagePref")) {
+
+            assert languageCode != null;
+            if (languageCode.equals("")) {
+                selectedLanguages.put(0, Locale.getDefault().getLanguage());
+            } else {
+                selectedLanguages.put(0, languageCode);
+            }
+        } else if (keyListPreference.equals("descriptionDefaultLanguagePref")) {
+
+            assert languageCode != null;
+            if (languageCode.equals("")) {
+                selectedLanguages.put(0, Locale.getDefault().getLanguage());
+
+            } else {
+                selectedLanguages.put(0, languageCode);
             }
         }
 
-        CharSequence[] languageNames = languageNamesList.toArray(new CharSequence[0]);
-        CharSequence[] languageCodes = languageCodesList.toArray(new CharSequence[0]);
-        // Add all languages and languages codes to lists preference as pair
-        langListPreference.setEntries(languageNames);
-        langListPreference.setEntryValues(languageCodes);
+        LanguagesAdapter languagesAdapter = new LanguagesAdapter(
+            getActivity(),
+            selectedLanguages
+        );
 
-        // Gets current language code from shared preferences
-        String languageCode = getCurrentLanguageCode();
-        if (languageCode.equals("")){
-            // If current language code is empty, means none selected by user yet so use phone local
-            langListPreference.setValue(Locale.getDefault().getLanguage());
-        } else {
-            // If any language is selected by user previously, use it
-            langListPreference.setValue(languageCode);
-        }
+        Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.dialog_select_language);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.getWindow().setLayout((int)(getActivity().getResources().getDisplayMetrics().widthPixels*0.90),
+            (int)(getActivity().getResources().getDisplayMetrics().heightPixels*0.90));
+        dialog.show();
 
-        langListPreference.setOnPreferenceChangeListener((preference, newValue) -> {
-            String userSelectedValue = (String) newValue;
-            saveLanguageValue(userSelectedValue);
-            return true;
+        EditText editText = dialog.findViewById(R.id.search_language);
+        ListView listView = dialog.findViewById(R.id.language_list);
+        languageHistoryListView = dialog.findViewById(R.id.language_history_list);
+        recentLanguagesTextView = dialog.findViewById(R.id.recent_searches);
+        separator = dialog.findViewById(R.id.separator);
+
+        setUpRecentLanguagesSection(recentLanguages, selectedLanguages);
+
+        listView.setAdapter(languagesAdapter);
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1,
+                int i2) {
+                hideRecentLanguagesSection();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1,
+                int i2) {
+                languagesAdapter.getFilter().filter(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
         });
+
+        languageHistoryListView.setOnItemClickListener((adapterView, view, position, id) -> {
+            onRecentLanguageClicked(keyListPreference, dialog, adapterView, position);
+        });
+
+        listView.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i,
+                long l) {
+                String languageCode = ((LanguagesAdapter) adapterView.getAdapter())
+                    .getLanguageCode(i);
+                final String languageName = ((LanguagesAdapter) adapterView.getAdapter())
+                    .getLanguageName(i);
+                final boolean isExists = recentLanguagesDao.findRecentLanguage(languageCode);
+                if (isExists) {
+                    recentLanguagesDao.deleteRecentLanguage(languageCode);
+                }
+                recentLanguagesDao.addRecentLanguage(new Language(languageName, languageCode));
+                saveLanguageValue(languageCode, keyListPreference);
+                Locale defLocale = new Locale(languageCode);
+                if(keyListPreference.equals("appUiDefaultLanguagePref")) {
+                    appUiLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
+                    setLocale(Objects.requireNonNull(getActivity()), languageCode);
+                    getActivity().recreate();
+                    final Intent intent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intent);
+                }else {
+                    descriptionLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
+                }
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setOnDismissListener(
+            dialogInterface -> languagesAdapter.getFilter().filter(""));
     }
 
-    private void saveLanguageValue(String userSelectedValue) {
-        defaultKvStore.putString(Prefs.KEY_LANGUAGE_VALUE, userSelectedValue);
-    }
-
-    private String getCurrentLanguageCode() {
-        return defaultKvStore.getString(Prefs.KEY_LANGUAGE_VALUE, "");
-    }
-
-    private List<Language> getLanguagesSupportedByDevice() {
-        List<Language> languages = new ArrayList<>();
-        Locale[] localesArray = Locale.getAvailableLocales();
-        for (Locale locale : localesArray) {
-            languages.add(new Language(locale));
+    /**
+     * Set up recent languages section
+     *
+     * @param recentLanguages recently used languages
+     * @param selectedLanguages selected languages
+     */
+    private void setUpRecentLanguagesSection(List<Language> recentLanguages,
+        HashMap<Integer, String> selectedLanguages) {
+        if (recentLanguages.isEmpty()) {
+            languageHistoryListView.setVisibility(View.GONE);
+            recentLanguagesTextView.setVisibility(View.GONE);
+            separator.setVisibility(View.GONE);
+        } else {
+            if (recentLanguages.size() > 5) {
+                for (int i = recentLanguages.size()-1; i >=5; i--) {
+                    recentLanguagesDao
+                        .deleteRecentLanguage(recentLanguages.get(i).getLanguageCode());
+                }
+            }
+            languageHistoryListView.setVisibility(View.VISIBLE);
+            recentLanguagesTextView.setVisibility(View.VISIBLE);
+            separator.setVisibility(View.VISIBLE);
+            final RecentLanguagesAdapter recentLanguagesAdapter
+                = new RecentLanguagesAdapter(
+                    getActivity(),
+                    recentLanguagesDao.getRecentLanguages(),
+                selectedLanguages);
+            languageHistoryListView.setAdapter(recentLanguagesAdapter);
         }
+    }
 
-        Collections.sort(languages, (language, t1) -> language.getLocale().getDisplayName()
-                .compareTo(t1.getLocale().getDisplayName()));
-        return languages;
+    /**
+     * Handles click event for recent language section
+     */
+    private void onRecentLanguageClicked(String keyListPreference, Dialog dialog, AdapterView<?> adapterView,
+        int position) {
+        final String recentLanguageCode = ((RecentLanguagesAdapter) adapterView.getAdapter())
+            .getLanguageCode(position);
+        final String recentLanguageName = ((RecentLanguagesAdapter) adapterView.getAdapter())
+            .getLanguageName(position);
+        final boolean isExists = recentLanguagesDao.findRecentLanguage(recentLanguageCode);
+        if (isExists) {
+            recentLanguagesDao.deleteRecentLanguage(recentLanguageCode);
+        }
+        recentLanguagesDao.addRecentLanguage(
+            new Language(recentLanguageName, recentLanguageCode));
+        saveLanguageValue(recentLanguageCode, keyListPreference);
+        final Locale defLocale = new Locale(recentLanguageCode);
+        if (keyListPreference.equals("appUiDefaultLanguagePref")) {
+            appUiLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
+            setLocale(Objects.requireNonNull(getActivity()), recentLanguageCode);
+            getActivity().recreate();
+            final Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
+        } else {
+            descriptionLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
+        }
+        dialog.dismiss();
+    }
+
+    /**
+     * Remove the section of recent languages
+     */
+    private void hideRecentLanguagesSection() {
+        languageHistoryListView.setVisibility(View.GONE);
+        recentLanguagesTextView.setVisibility(View.GONE);
+        separator.setVisibility(View.GONE);
+    }
+
+    /**
+     * Changing the default app language with selected one and save it to SharedPreferences
+     */
+    public void setLocale(final Activity activity, String userSelectedValue) {
+        if (userSelectedValue.equals("")) {
+            userSelectedValue = Locale.getDefault().getLanguage();
+        }
+        final Locale locale = new Locale(userSelectedValue);
+        Locale.setDefault(locale);
+        final Configuration configuration = new Configuration();
+        configuration.locale = locale;
+        activity.getBaseContext().getResources().updateConfiguration(configuration,
+            activity.getBaseContext().getResources().getDisplayMetrics());
+
+        final SharedPreferences.Editor editor = activity.getSharedPreferences("Settings", MODE_PRIVATE).edit();
+        editor.putString("language", userSelectedValue);
+        editor.apply();
+    }
+
+    /**
+     * Save userselected language in List Preference
+     * @param userSelectedValue
+     * @param preferenceKey
+     */
+    private void saveLanguageValue(final String userSelectedValue, final String preferenceKey) {
+        if (preferenceKey.equals("appUiDefaultLanguagePref")) {
+            defaultKvStore.putString(Prefs.APP_UI_LANGUAGE, userSelectedValue);
+        } else if (preferenceKey.equals("descriptionDefaultLanguagePref")) {
+            defaultKvStore.putString(Prefs.DESCRIPTION_LANGUAGE, userSelectedValue);
+        }
+    }
+
+    /**
+     * Gets current language code from shared preferences
+     * @param preferenceKey
+     * @return
+     */
+    private String getCurrentLanguageCode(final String preferenceKey) {
+        if (preferenceKey.equals("appUiDefaultLanguagePref")) {
+            return defaultKvStore.getString(Prefs.APP_UI_LANGUAGE, "");
+        }
+        if (preferenceKey.equals("descriptionDefaultLanguagePref")) {
+            return defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, "");
+        }
+        return null;
     }
 
     /**

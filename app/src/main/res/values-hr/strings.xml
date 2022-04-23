@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * Anarhistička Maca
 * Astrind
 * Bugoslav
 * MaGa
 * Neptune, the Mystic
+* Ponor
 -->
 <resources>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
@@ -26,13 +26,11 @@
     <item quantity="other">%1$d postavljanja</item>
   </plurals>
   <string name="share_license_summary" fuzzy="true">Ova će slika biti licencirana pod %1$s</string>
-  <string name="title_activity_explore">Istraži</string>
   <string name="navigation_item_explore">Istraži</string>
   <string name="preference_category_appearance">Izgled</string>
   <string name="preference_category_general">Opće</string>
   <string name="preference_category_feedback">Povratna informacija</string>
   <string name="preference_category_privacy">Privatnost</string>
-  <string name="preference_category_location">Lokacija</string>
   <string name="app_name">Zajednički poslužitelj</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Postavke</string>
@@ -52,10 +50,10 @@
   <string name="uploading_started">Postavljanje započeto!</string>
   <string name="upload_completed_notification_title">%1$s postavljeno!</string>
   <string name="upload_completed_notification_text">Dodirnite da biste vidjeli datoteku</string>
-  <string name="upload_progress_notification_title_start">Počinje postavljanje %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Počinje postavljanje %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Postavljanje %1$s</string>
   <string name="upload_progress_notification_title_finishing">Završeno postavljanje %1$s</string>
-  <string name="upload_failed_notification_title">Postavljanje %1$s neuspješno</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Postavljanje %1$s neuspješno</string>
   <string name="upload_paused_notification_title">Postavljanje %1$s pauzirano</string>
   <string name="upload_failed_notification_subtitle">Dodirnite da biste vidjeli</string>
   <string name="upload_paused_notification_subtitle">Dodirnite da biste vidjeli</string>
@@ -69,13 +67,11 @@
   <string name="menu_nearby">U blizini</string>
   <string name="provider_contributions">Moja postavljanja</string>
   <string name="menu_share">Podijeli</string>
-  <string name="menu_open_in_browser">Pogledaj u pregledniku</string>
   <string name="share_title_hint" fuzzy="true">Naziv (obavezno)</string>
   <string name="share_description_hint">Opis</string>
-  <string name="login_failed_network">Prijava nije moguća - mrežna pogrješka</string>
-  <string name="login_failed_wrong_credentials">Prijava nije moguća - molimo provjerite suradničko ime i zaportku</string>
+  <string name="login_failed_network">Prijava nije moguća – mrežna pogreška</string>
   <string name="login_failed_throttled">Previše neuspješnih pokušaja, molimo probajte opet za par minuta.</string>
-  <string name="login_failed_blocked">Ispričavamo se, ovaj je suradnik blokiran na Zajendičkom poslužitelju</string>
+  <string name="login_failed_blocked">Ispričavamo se, ovaj je suradnik blokiran na Zajedničkom poslužitelju</string>
   <string name="login_failed_2fa_needed">Morate upisati autetifikacijski kôd od dva faktora</string>
   <string name="login_failed_generic">Prijava neuspješna</string>
   <string name="share_upload_button">Postavljanje</string>
@@ -86,8 +82,6 @@
   <string name="menu_save_categories">Spremi</string>
   <string name="refresh_button">Osvježi</string>
   <string name="display_list_button">Popis</string>
-  <string name="gps_disabled">GPS je onemogućen na Vašem uređaju. Želite li ga omogućiti?</string>
-  <string name="enable_gps">Omogući GPS</string>
   <string name="contributions_subtitle_zero" fuzzy="true">Nemate još postavljenih datoteka</string>
   <string name="categories_not_found">Nema kategorija koje odgovoraju upitu %1$s</string>
   <string name="categories_skip_explanation">Dodajte slikama kategorije kako bi se lakše pronašle. Da biste ih dodali, započnite s upisivanjem.</string>
@@ -114,8 +108,6 @@
   <string name="menu_download">Preuzmi</string>
   <string name="preference_license">Podrazumijevana licencija</string>
   <string name="use_previous">Rabite prethodni naziv i opis</string>
-  <string name="allow_gps">Automatski pribavi trenutačnu lokaciju</string>
-  <string name="allow_gps_summary" fuzzy="true">Ako slika nema oznaku lokacije, pribavi trenutačnu lokaciju kako bi se mogle ponuditi kategorije</string>
   <string name="preference_theme">Izgled</string>
   <string name="license_name_cc_by_sa_four"> Imenovanje-Dijeli pod istim uvjetima 4.0</string>
   <string name="license_name_cc_by_four"> Imenovanje 4.0</string>
@@ -123,20 +115,9 @@
   <string name="license_name_cc_by"> Imenovanje 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austrija)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Njemačka)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonija)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Španjolska)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Hrvatska)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luksemburg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Nizozemska)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norveška)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Poljska)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumunjska)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">Na Zajedničkom poslužitelju se nalazi većina slika rabljena na Wikipediji.</string>
   <string name="tutorial_1_subtext">Vaše slike pomažu u edukaciji ljudi diljem svijeta!</string>
   <string name="tutorial_2_text">Molimo postavite slike koje su u cijelosti Vaše djelo:</string>
@@ -166,10 +147,7 @@
   <string name="menu_refresh">Osvježi</string>
   <string name="read_storage_permission_rationale">Potrebno dopuštenje čitanja vanjske pohrane. Bez toga aplikacija ne može pristupiti Vašoj galeriji.</string>
   <string name="write_storage_permission_rationale">Potrebno dopuštenje spremanja na vanjsku pohranu. Bez toga aplikacija ne može pristupiti Vašoj kameri/galeriji.</string>
-  <string name="location_permission_rationale">Potrebno dopuštenje za određivanje trenutačne lokacije za prijedloge kategorija (nije obvezno)</string>
   <string name="ok">U redu</string>
-  <string name="title_activity_nearby">Mjesta u blizini</string>
-  <string name="no_nearby">Nisu pronađena mjesta u blizini</string>
   <string name="warning">Upozorenje</string>
   <string name="duplicate_image_found">Pronađena duplirana slika</string>
   <string name="upload">Postavi</string>
@@ -183,31 +161,20 @@
   <string name="media_detail_license">Licencija</string>
   <string name="media_detail_coordinates">Koordinate</string>
   <string name="media_detail_coordinates_empty">Ništa nije navedeno</string>
-  <string name="become_a_tester_title">Postani beta tester</string>
+  <string name="become_a_tester_title">Postani beta-tester</string>
   <string name="become_a_tester_description">Prijavite se na naš beta-kanal na Google Playu i dobijte raniji pristup novim mogućnostima i ispravkama pogrješaka</string>
   <string name="_2fa_code">Kôd za provjeru u 2 koraka</string>
-  <string name="number_of_uploads">Moje ograničenje nedavnih postavljanja</string>
-  <string name="maximum_limit">Najviše moguće</string>
-  <string name="maximum_limit_alert">Nije moguće prikazati više od 500</string>
-  <string name="enter_valid">Unesite važeći broj</string>
-  <string name="set_limit">Ograničenje nedavnih postavljanja</string>
-  <string name="login_failed_2fa_not_supported">Kôd za provjeru u 2 koraka nije podržan.</string>
   <string name="logout_verification">Zaista se želite odjaviti?</string>
   <string name="commons_logo">Logotip Zajedničkog poslužitelja</string>
   <string name="commons_website">Mrežno mjesto Zajedničkog poslužitelja</string>
   <string name="commons_facebook">Stranica Zajedničkog poslužitelja na Facebooku</string>
   <string name="commons_github">Izvorni kôd Zajedničkog poslužitelja na Githubu</string>
-  <string name="background_image">Pozadinska slika</string>
   <string name="mediaimage_failed">Slika nije uspjela</string>
-  <string name="no_image_found">Slika nije pronađena</string>
   <string name="no_subcategory_found">Potkategorije nisu pronađene</string>
-  <string name="upload_image">Postavi sliku</string>
   <string name="welcome_image_mount_zao">Planina Zao</string>
   <string name="welcome_image_llamas">Ljame</string>
   <string name="welcome_image_rainbow_bridge">Dugin most</string>
   <string name="welcome_image_tulip">Tulipan</string>
-  <string name="welcome_image_no_selfies">Bez selfija</string>
-  <string name="welcome_image_proprietary">Vlasnička slika</string>
   <string name="welcome_image_welcome_wikipedia">Welcome (Wikipedija)</string>
   <string name="welcome_image_welcome_copyright">Dobro došli (autorska prava)</string>
   <string name="welcome_image_sydney_opera_house">Sidnejska opera</string>
@@ -223,17 +190,11 @@
   <string name="navigation_item_logout">Odjava</string>
   <string name="navigation_item_info">Upute</string>
   <string name="navigation_item_notification">Obavijesti</string>
-  <string name="navigation_item_featured_images">Izabrano</string>
-  <string name="nearby_needs_permissions">Mjesta u blizini ne mogu biti prikazana bez dopuštenja određivanja lokacije</string>
   <string name="no_description_found">nema opisa</string>
   <string name="nearby_info_menu_commons_article">Stranica datoteke na Zajedničkom poslužitelju</string>
   <string name="nearby_info_menu_wikidata_article">Stavka na Wikidati</string>
   <string name="nearby_info_menu_wikipedia_article">Članak na Wikipediji</string>
-  <string name="error_while_cache">Pogrješka predmemoriranja slika</string>
-  <string name="title_info">Jedinstveni naziv datoteke koji će služiti kao njeno ime. Možete koristiti uobičajeni jezik s razmacima. Ne uključuje datotečni nastavak.</string>
   <string name="description_info">Opišite medij što je više moguće: gdje je napravljen, što prikazuje,... Opišite objekte ili osobe. Napišite informacije koje ne mogu biti lako okrivene, npr. doba dana ako je u pitanju pejzaž. Ako medij prikazuje nešto neobično, molimo objasnite što je neobično.</string>
-  <string name="upload_image_too_dark">Ova je slika pretamna, jeste li sigurni da je želite postaviti? Zajednički poslužitelj samo je za slike od enciklopedijskog značaja.</string>
-  <string name="upload_image_blurry">Ova je slika mutna, jeste li sigurni da je želite postaviti? Zajednički poslužitelj samo je za slike od enciklopedijskog značaja.</string>
   <string name="upload_problem_exist">Mogući problemi s ovom slikom:</string>
   <string name="upload_problem_image_dark">Slika je pretamna.</string>
   <string name="upload_problem_image_blurry">Slika je mutna.</string>
@@ -243,33 +204,23 @@
   <string name="upload_problem_do_you_continue">Želite li i dalje postaviti ovu sliku?</string>
   <string name="upload_problem_image">Pronađeni problemi sa slikom</string>
   <string name="internet_downloaded">Molimo Vas da samo postavljate slike koje ste sami snimili. Ne postavljajte slike koje ste preuzeli s interneta.</string>
-  <string name="give_permission">Daj dopuštenje</string>
   <string name="use_external_storage" fuzzy="true">Rabi vanjsku pohranu</string>
   <string name="use_external_storage_summary" fuzzy="true">Spremite slike načinjene kamerom Vašeg uređaja</string>
   <string name="login_to_your_account">Prijavite se na Vaš račun</string>
   <string name="send_log_file">Pošalji zapisnik</string>
   <string name="send_log_file_description" fuzzy="true">Pošalji zapisnik elektroničkom poštom razvijateljima</string>
   <string name="no_web_browser">Preglednik nije pronađen</string>
-  <string name="null_url">Pogrješka! URL nije pronađen</string>
+  <string name="null_url">Pogreška! URL nije pronađen</string>
   <string name="nominate_deletion">Predloži za brisanje</string>
   <string name="nominated_for_deletion">Slika je predložena za brisanje</string>
   <string name="nominated_see_more">Pogledajte mrežnu stranicu za više informacija</string>
-  <string name="view_browser">Pogledaj u pregledniku</string>
   <string name="skip_login">Preskoči</string>
   <string name="navigation_item_login">Prijavite se</string>
   <string name="skip_login_title">Želite li zbilja preskočiti prijavu?</string>
   <string name="skip_login_message">U budućnosti ćete se morati prijaviti kako biste postavili slike.</string>
   <string name="login_alert_message">Molimo da se prijavite kako biste se mogli koristiti ovom mogućnošću</string>
-  <string name="nearby_location_has_not_changed">Lokacija nepromijenjena.</string>
   <string name="nearby_location_not_available">„U blizini“ možda ne radi kako treba. Lokacija nije dostupna.</string>
   <string name="location_permission_rationale_nearby">Potrebno je dopuštenje za popis mjesta u blizini</string>
-  <string name="get_directions">Nabavi upute</string>
-  <string name="read_article">Pročitaj članak</string>
-  <string name="notifications_welcome">%1$s, dobro došli na Zajednički poslužitelj! Drago nam je da ste tu.</string>
-  <string name="notifications_talk_page_message">%1$s Vam je ostavio poruku na Vašoj razgovornoj stranici</string>
-  <string name="notifications_thank_you_edit">Hvala Vam na uređivanju</string>
-  <string name="notifications_mention">%1$s Vas je spomenuo na %2$s.</string>
-  <string name="toggle_view_button">Prebaci prikaz</string>
   <string name="nearby_directions">Upute</string>
   <string name="nearby_wikidata">Wikipodatci</string>
   <string name="nearby_wikipedia">Wikipedija</string>
@@ -278,7 +229,6 @@
   <string name="about_faq">ČPP</string>
   <string name="welcome_skip_button">Preskoči upute</string>
   <string name="no_internet">Internet nije dostupan</string>
-  <string name="internet_established">Internet je dostupan</string>
   <string name="error_notifications">Pogrješka dohvaćanja obavijesti</string>
   <string name="no_notifications">Nema obavijesti</string>
   <string name="about_translate">Prevedi</string>
@@ -287,10 +237,7 @@
   <string name="about_translate_proceed">Nastavi</string>
   <string name="about_translate_cancel">Odustani</string>
   <string name="retry">Pokušaj ponovo</string>
-  <string name="showcase_view_got_it_button">U redu!</string>
   <string name="showcase_view_whole_nearby_activity" fuzzy="true">Ovo su mjesta u blizini koja trebaju slike za ilustriranje članaka o njima na Wikipediji</string>
-  <string name="showcase_view_list_icon">Dodirnite da biste dobili popis ovih mjesta</string>
-  <string name="showcase_view_plus_fab">Možete postaviti sliku s bilo kojeg mjesta u Vašoj galeriji ili kameri</string>
   <string name="no_images_found">Slike nisu pronađene!</string>
   <string name="error_loading_images">Pogrješka prilikom učitavanja slika.</string>
   <string name="image_uploaded_by">Postavio: %1$s</string>
@@ -300,7 +247,6 @@
   <string name="menu_search_button">Pretraži</string>
   <string name="search_commons">Pretraga na Zajedničkom poslužitelju</string>
   <string name="error_loading_categories">Dogodila se pogrješka prilikom učitavanja kategorija.</string>
-  <string name="error_loading_subcategories">Dogodila se pogrješka prilikom učitavanja potkategorija</string>
   <string name="search_tab_title_media">Mediji</string>
   <string name="search_tab_title_categories">Kategorije</string>
   <string name="explore_tab_title_featured">Istaknuto</string>
@@ -320,8 +266,7 @@
   <string name="wrong">Pogrešan odgovor</string>
   <string name="quiz_screenshot_question">Želite li postaviti ovu snimku zaslona?</string>
   <string name="share_app_title">Aplikacija za dijeljenje</string>
-  <string name="share_coordinates_not_present">Prilikom označavanja slike koordinate nisu navedene</string>
-  <string name="error_fetching_nearby_places">Pogrješka prilikom dohvaćanja mjesta u blizini.</string>
+  <string name="error_fetching_nearby_places">Pogreška prilikom dohvaćanja mjesta u blizini.</string>
   <string name="delete_search_dialog">Želite li izbrisati ovu pretragu?</string>
   <string name="nominate_delete">Predloži za brisanje</string>
   <string name="delete">Izbriši</string>
@@ -343,7 +288,6 @@
   <string name="category_edit_helper_make_edit_toast">Pokušavanje ažuriranja kategorija.</string>
   <string name="category_edit_helper_show_edit_title_success">Uspješno!</string>
   <string name="category_edit_button_text">Ažuriraj kategorije</string>
-  <string name="title_app_shortcut_explore">Istraži</string>
   <string name="title_app_shortcut_bookmark">Oznake</string>
   <string name="title_app_shortcut_setting">Postavke</string>
   <string name="remove_bookmark">Uklonjeno iz oznaka</string>
@@ -355,7 +299,6 @@
   <string name="theme_dark_name">Tamno</string>
   <string name="theme_light_name">Svijetlo</string>
   <string name="load_more">Učitaj više</string>
-  <string name="edit_category">Uredi kategorije</string>
   <string name="pause">stanka</string>
   <string name="resume">nastavi</string>
   <string name="paused">Pauzirano</string>

@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
-import static fr.free.nrw.commons.upload.UploadService.EXTRA_FILES;
+import static fr.free.nrw.commons.upload.UploadPresenter.COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 import android.Manifest;
@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -23,6 +24,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -31,6 +35,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.UserClient;
@@ -41,6 +46,8 @@ import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback;
+import fr.free.nrw.commons.upload.worker.UploadWorker;
+import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -48,12 +55,14 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
 
 public class UploadActivity extends BaseActivity implements UploadContract.View, UploadBaseFragment.Callback {
+
     @Inject
     ContributionController contributionController;
     @Inject
@@ -102,6 +111,18 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private Place place;
     private List<UploadableFile> uploadableFiles = Collections.emptyList();
     private int currentSelectedPosition = 0;
+    /*
+     Checks for if multiple files selected
+     */
+    private boolean isMultipleFilesSelected = false;
+
+    public static final String EXTRA_FILES = "commons_image_exta";
+
+    /**
+     * Stores all nearby places found and related users response for
+     * each place while uploading media
+     */
+    public static HashMap<Place,Boolean> nearbyPopupAnswers;
 
     @SuppressLint("CheckResult")
     @Override
@@ -113,12 +134,20 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         ButterKnife.bind(this);
         compositeDisposable = new CompositeDisposable();
         init();
+        nearbyPopupAnswers = new HashMap<>();
 
         PermissionUtils.checkPermissionsAndPerformAction(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 this::receiveSharedItems,
                 R.string.storage_permission_title,
                 R.string.write_storage_permission_rationale_for_image_share);
+        //getting the current dpi of the device and if it is less than 320dp i.e. overlapping
+        //threshold, thumbnails automatically minimizes
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        float dpi = (metrics.widthPixels)/(metrics.density);
+        if (dpi<=321) {
+            onRlContainerTitleClicked();
+        }
     }
 
     private void init() {
@@ -131,6 +160,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private void initProgressDialog() {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getString(R.string.please_wait));
+        progressDialog.setCancelable(false);
     }
 
     private void initThumbnailsRecyclerView() {
@@ -216,6 +246,11 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         super.onStop();
     }
 
+    @Override
+    public void returnToMainActivity() {
+        finish();
+    }
+
     /**
      * Show/Hide the progress dialog
      */
@@ -240,6 +275,11 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     @Override
     public int getTotalNumberOfSteps() {
         return fragments.size();
+    }
+
+    @Override
+    public boolean isWLMUpload() {
+        return place!=null && place.isMonument();
     }
 
     @Override
@@ -272,6 +312,13 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
     @Override
+    public void makeUploadRequest() {
+        WorkManager.getInstance(getApplicationContext()).enqueueUniqueWork(
+            UploadWorker.class.getSimpleName(),
+            ExistingWorkPolicy.APPEND_OR_REPLACE, OneTimeWorkRequest.from(UploadWorker.class));
+    }
+
+    @Override
     public void askUserToLogIn() {
         Timber.d("current session is null, asking user to login");
         ViewUtil.showLongToast(this, getString(R.string.user_not_logged_in));
@@ -290,6 +337,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
     private void receiveSharedItems() {
+        thumbnailsAdapter.context=this;
         Intent intent = getIntent();
         String action = intent.getAction();
         if (Intent.ACTION_SEND.equals(action) || Intent.ACTION_SEND_MULTIPLE.equals(action)) {
@@ -345,6 +393,11 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                     public int getTotalNumberOfSteps() {
                         return fragments.size();
                     }
+
+                    @Override
+                    public boolean isWLMUpload() {
+                        return place!=null && place.isMonument();
+                    }
                 });
                 fragments.add(uploadMediaDetailFragment);
             }
@@ -377,10 +430,18 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         Timber.d("Received intent %s with action %s", intent.toString(), intent.getAction());
 
         uploadableFiles = intent.getParcelableArrayListExtra(EXTRA_FILES);
+        isMultipleFilesSelected = uploadableFiles.size() > 1;
         Timber.i("Received multiple upload %s", uploadableFiles.size());
 
         place = intent.getParcelableExtra(PLACE_OBJECT);
         resetDirectPrefs();
+    }
+
+    /**
+     * Returns if multiple files selected or not.
+     */
+    public boolean getIsMultipleFilesSelected() {
+        return isMultipleFilesSelected;
     }
 
     public void resetDirectPrefs() {
@@ -414,8 +475,21 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         if (index < fragments.size() - 1) {
             vpUpload.setCurrentItem(index + 1, false);
             fragments.get(index + 1).onBecameVisible();
+            ((LinearLayoutManager) rvThumbnails.getLayoutManager())
+                .scrollToPositionWithOffset((index > 0) ? index-1 : 0, 0);
         } else {
-            presenter.handleSubmit();
+            if(defaultKvStore.getInt(COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0) >= 10){
+                DialogUtil.showAlertDialog(this,
+                    "",
+                    getString(R.string.location_message),
+                    getString(R.string.ok),
+                    () -> {
+                        defaultKvStore.putInt(COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0);
+                        presenter.handleSubmit();
+                    }, false);
+            } else {
+                presenter.handleSubmit();
+            }
         }
     }
 
@@ -424,6 +498,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         if (index != 0) {
             vpUpload.setCurrentItem(index - 1, true);
             fragments.get(index - 1).onBecameVisible();
+            ((LinearLayoutManager) rvThumbnails.getLayoutManager())
+                .scrollToPositionWithOffset((index > 3) ? index-2 : 0, 0);
         }
     }
 
@@ -480,4 +556,20 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             uploadCategoriesFragment.setCallback(null);
         }
     }
+
+    /**
+     * Overrides the back button to make sure the user is prepared to lose their progress
+     */
+    @Override
+    public void onBackPressed() {
+        DialogUtil.showAlertDialog(this,
+            getString(R.string.back_button_warning),
+            getString(R.string.back_button_warning_desc),
+            getString(R.string.back_button_continue),
+            getString(R.string.back_button_warning),
+            null,
+            this::finish
+        );
+    }
+
 }

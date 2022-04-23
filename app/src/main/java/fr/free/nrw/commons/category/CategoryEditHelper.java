@@ -24,7 +24,6 @@ public class CategoryEditHelper {
     public final PageEditClient pageEditClient;
     private final ViewUtilWrapper viewUtil;
     private final String username;
-    private Callback callback;
 
     @Inject
     public CategoryEditHelper(NotificationHelper notificationHelper,
@@ -44,35 +43,40 @@ public class CategoryEditHelper {
      * @param categories
      * @return
      */
-    public Single<Boolean> makeCategoryEdit(Context context, Media media, List<String> categories, Callback callback) {
+    public Single<Boolean> makeCategoryEdit(Context context, Media media, List<String> categories,
+        final String wikiText) {
         viewUtil.showShortToast(context, context.getString(R.string.category_edit_helper_make_edit_toast));
-        return addCategory(media, categories)
+        return addCategory(media, categories, wikiText)
             .flatMapSingle(result -> Single.just(showCategoryEditNotification(context, media, result)))
             .firstOrError();
     }
 
     /**
-     * Appends new categories
+     * Rebuilds the WikiText with new categpries and post it on server
+     *
      * @param media
      * @param categories to be added
      * @return
      */
-    private Observable<Boolean> addCategory(Media media, List<String> categories) {
+    private Observable<Boolean> addCategory(Media media, List<String> categories,
+        final String wikiText) {
         Timber.d("thread is category adding %s", Thread.currentThread().getName());
         String summary = "Adding categories";
 
-        StringBuilder buffer = new StringBuilder();
+        final StringBuilder buffer = new StringBuilder();
+
+        final String wikiTextWithoutCategory
+            = wikiText.substring(0, wikiText.indexOf("[[Category"));
 
         if (categories != null && categories.size() != 0) {
-
             for (int i = 0; i < categories.size(); i++) {
-                buffer.append("\n[[Category:").append(categories.get(i)).append("]]");
+                buffer.append("[[Category:").append(categories.get(i)).append("]]\n");
             }
         } else {
             buffer.append("{{subst:unc}}");
         }
-        String appendText = buffer.toString();
-        return pageEditClient.appendEdit(media.getFilename(), appendText + "\n", summary);
+        final String appendText = wikiTextWithoutCategory + buffer;
+        return pageEditClient.edit(media.getFilename(), appendText + "\n", summary);
     }
 
     private boolean showCategoryEditNotification(Context context, Media media, boolean result) {

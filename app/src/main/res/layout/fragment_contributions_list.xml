@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -26,11 +27,28 @@
       android:layout_centerInParent="true"
       android:visibility="gone"
       />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/contributionsList"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        />
+
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/tv_contributions_of_user"
+          style="@style/MediaDetailTextLabel"
+          tools:text="Contributions of user : Ashish"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:padding="10dp"
+          tools:visibility="visible"
+          android:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/contributionsList"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_below="@id/tv_contributions_of_user" />
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/fab_layout"
@@ -68,6 +86,19 @@
             app:elevation="@dimen/tiny_margin"
             app:fabSize="mini"
             app:srcCompat="@drawable/ic_photo_white_24dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_custom_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tint="@color/button_blue"
+            android:visibility="gone"
+            app:backgroundTint="@color/main_background_light"
+            app:useCompatPadding="true"
+            app:elevation="@dimen/tiny_margin"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_custom_image_picker"
+            android:background="@drawable/commons"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_plus"

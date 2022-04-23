@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Afingba Mangang
 * Awangba Mangang
 -->
 <resources>
-  <string name="title_activity_explore">ꯇꯧꯔꯦ</string>
   <string name="preference_category_privacy">ꯑꯔꯣꯟꯕꯥ</string>
-  <string name="preference_category_location">ꯃꯐꯝ</string>
   <string name="app_name">ꯀꯣꯃꯣꯟꯁ</string>
+  <string name="bullet">꯫</string>
   <string name="menu_settings">ꯁꯦꯝꯐꯝ</string>
   <string name="intent_share_upload_label">ꯀꯃꯣꯟꯁꯇ ꯈꯥꯒꯠꯂꯨ</string>
   <string name="username">ꯁꯤꯖꯤꯟꯅꯔꯤꯕ ꯃꯃꯤꯡ</string>
@@ -15,6 +15,7 @@
   <string name="signup">ꯈꯨꯠꯌꯦꯛ ꯄꯤꯈꯠꯂꯨ</string>
   <string name="logging_in_title">ꯃꯅꯨꯡ ꯆꯪꯁꯤꯟꯂꯤ</string>
   <string name="logging_in_message">ꯉꯥꯏꯍꯥꯛ ꯉꯥꯏꯕꯤꯌꯨ</string>
+  <string name="updating_caption_message">ꯉꯥꯏꯍꯥꯛꯇꯪ ꯉꯥꯏꯕꯤꯈꯣ...</string>
   <string name="login_success">ꯃꯥꯏꯄꯥꯛꯅꯥ ꯆꯪꯁꯤꯜꯂꯦ ꯫</string>
   <string name="login_failed">ꯆꯪꯁꯤꯟꯕ ꯃꯥꯏꯄꯥꯛꯇꯔꯦ!</string>
   <string name="upload_failed">ꯐꯥꯏꯜ ꯊꯤꯕꯥ ꯐꯪꯗꯔꯦ ꯫ ꯆꯥꯟꯕꯤꯗꯨꯅꯥ ꯑꯇꯣꯞꯄ ꯑꯃꯥ ꯇꯧꯕꯤꯔꯣ ꯫</string>
@@ -30,32 +31,30 @@
   <string name="menu_save_categories">ꯇꯨꯡꯁꯤꯟꯕ</string>
   <string name="refresh_button">ꯇꯦꯛꯈꯠꯍꯟꯕꯥ</string>
   <string name="display_list_button">ꯄꯥꯔꯤꯡ</string>
-  <string name="enable_gps">ꯖꯤꯄꯦꯑꯦꯁ ꯌꯥꯍꯟꯕ</string>
-  <string name="contributions_subtitle_zero">ꯍꯧꯖꯤꯛꯐꯥꯎ ꯊꯥꯒꯠꯈꯤꯕ ꯂꯩꯇ꯭ꯔꯤ</string>
+  <string name="contributions_subtitle_zero">(ꯍꯧꯖꯤꯛꯐꯥꯎ ꯊꯥꯒꯠꯈꯤꯕ ꯂꯩꯇ꯭ꯔꯤ)</string>
   <string name="title_activity_settings">ꯁꯦꯝꯐꯝ</string>
   <string name="title_activity_category_details">ꯃꯆꯥꯈꯥꯏꯕ</string>
   <string name="menu_about">ꯃꯔꯝꯗ</string>
   <string name="about_license">ꯋꯤꯀꯤꯃꯦꯗꯤꯌꯥ ꯀꯃꯣꯟꯁ ꯑꯦꯞꯁ ꯁꯤ ꯍꯥꯡꯗꯣꯛꯂꯕ-ꯍꯧꯔꯛꯐꯝ ꯑꯦꯞꯁꯅꯤ ꯋꯤꯀꯤꯃꯦꯗꯤꯌꯥ ꯚꯣꯂꯨꯟꯇꯤꯌꯔ ꯃꯤꯑꯣꯏꯁꯤꯡꯅꯥ ꯌꯦꯡꯁꯤꯟꯕ ꯫ ꯋꯤꯀꯤꯃꯦꯗꯤꯌꯥ ꯃꯈꯣꯡ (ꯌꯨꯝꯕꯤ) ꯑꯦꯞꯁ ꯌꯦꯡꯁꯤꯟꯕ ꯑꯃꯁꯨꯡ ꯆꯥꯎꯈꯠꯍꯟꯕꯗ ꯁꯔꯨꯛ ꯌꯥꯗꯦ ꯫</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;ꯑꯔꯣꯟꯕ ꯊꯧꯔꯥꯡ&lt;/u&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;ꯇꯧꯕꯤꯃꯜ&lt;/u&gt;</string>
+  <string name="about_privacy_policy">ꯑꯔꯣꯟꯕ ꯊꯧꯔꯥꯡ</string>
+  <string name="about_credits">ꯇꯧꯕꯤꯃꯜ</string>
   <string name="title_activity_about">ꯃꯔꯝꯗ</string>
   <string name="menu_feedback">ꯐꯥꯒꯠꯅꯕ-ꯋꯥꯍꯩ ꯊꯥꯔꯣ (ꯏꯃꯦꯜ ꯗꯒꯤ)</string>
   <string name="menu_cancel_upload">ꯇꯣꯛꯄ</string>
   <string name="menu_download">ꯆꯤꯡꯊꯕ</string>
   <string name="preference_license">ꯑꯌꯥꯕꯥ ꯱ ꯍꯦꯛꯇ</string>
-  <string name="use_previous" fuzzy="true">ꯁꯤꯖꯤꯟꯅꯧ ꯃꯃꯥꯡꯒꯤ ꯃꯃꯤꯡ/ꯑꯀꯨꯞꯄ ꯋꯥꯔꯣꯜ</string>
-  <string name="preference_theme" fuzzy="true">ꯅꯨꯡꯗꯥꯡ ꯃꯑꯣꯡ</string>
+  <string name="use_previous">ꯁꯤꯖꯤꯟꯅꯧ ꯃꯃꯥꯡꯒꯤ ꯃꯃꯤꯡ ꯱ꯁꯨꯡ ꯑꯀꯨꯞꯄ ꯋꯥꯔꯣꯜ</string>
+  <string name="preference_theme">ꯃꯑꯣꯡ</string>
   <string name="license_name_cc_by_sa_four">ꯑꯇ꯭ꯔꯤꯕꯨꯁꯟ-ꯁꯌꯥꯔꯑꯂꯥꯏꯛ ꯴.꯰</string>
   <string name="license_name_cc_by_four">ꯑꯇ꯭ꯔꯤꯕꯨꯁꯟ ꯴.꯰</string>
   <string name="license_name_cc_by_sa">ꯑꯇ꯭ꯔꯤꯕꯨꯁꯟ-ꯁꯌꯥꯔꯑꯂꯥꯏꯛ ꯳.꯰</string>
   <string name="license_name_cc_by">ꯑꯇ꯭ꯔꯤꯕꯨꯁꯟ ꯳.꯰</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA ꯳.꯰ (ꯑꯁꯇ꯭ꯔꯤꯌꯥ)</string>
   <string name="tutorial_3_text">ꯆꯥꯟꯕꯤꯗꯨꯅꯥ ꯊꯥꯒꯠꯀꯅꯨ:</string>
   <string name="tutorial_3_subtext_1">ꯏꯁꯥ ꯏꯇꯣꯝ ꯃꯥꯏꯑꯣꯟꯁꯤꯟꯗꯨꯅꯥ ꯀꯥꯞꯆꯕ ꯅꯠꯇ꯭ꯔꯒ ꯅꯃꯥꯝꯅꯕꯒꯤ ꯃꯤꯔꯦꯜꯁꯤꯡ</string>
   <string name="tutorial_4_text">ꯊꯥꯒꯠꯄꯒꯤ ꯈꯨꯗꯝ:</string>
   <string name="welcome_final_text">ꯅꯪꯅꯥ ꯈꯟꯕ ꯅꯪꯅꯥ ꯐꯪꯉꯤ?</string>
   <string name="welcome_final_button_text">ꯍꯣꯏ!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;ꯑꯍꯦꯟꯕ ꯋꯥꯔꯣꯜ&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">ꯑꯍꯦꯟꯕ ꯋꯥꯔꯣꯜ</string>
   <string name="detail_panel_cats_label">ꯃꯆꯥꯈꯥꯏꯕꯁꯤꯡ</string>
   <string name="detail_panel_cats_loading">ꯆꯤꯡꯂꯤ/ꯎꯪꯂꯤ.....</string>
   <string name="detail_panel_cats_none">ꯑꯃꯠꯇ ꯈꯟꯗꯦ</string>
@@ -64,10 +63,7 @@
   <string name="detail_license_empty">ꯑꯌꯥꯕ ꯃꯁꯛ ꯈꯪꯗꯦ</string>
   <string name="menu_refresh">ꯇꯦꯛꯈꯠꯍꯟꯕꯥ</string>
   <string name="ok">ꯌꯥꯔꯦ</string>
-  <string name="title_activity_nearby">ꯑꯅꯛꯄ ꯃꯐꯝꯁꯤꯡ</string>
-  <string name="no_nearby">ꯑꯅꯛꯄ ꯃꯐꯝꯁꯤꯡ ꯊꯤꯕꯥ ꯐꯪꯗꯦ</string>
   <string name="warning">ꯆꯦꯛꯁꯤꯟꯅꯕ ꯄꯥꯎꯃꯦꯟꯕ</string>
-  <string name="upload_image_duplicate">ꯃꯁꯤꯒꯤ ꯐꯥꯏꯜꯁꯤ ꯀꯃꯣꯟꯁꯗ ꯌꯥꯎꯔꯦ ꯫ ꯅꯪ ꯁꯦꯡꯉꯕꯔꯣ ꯃꯈꯥ ꯇꯥꯅ ꯆꯠꯊꯕ?</string>
   <string name="yes">ꯍꯣꯏ</string>
   <string name="no">ꯅꯠꯇꯦ</string>
   <string name="media_detail_title">ꯃꯃꯤꯡ/ꯃꯀꯣꯛ</string>
@@ -78,11 +74,8 @@
   <string name="media_detail_license">ꯑꯌꯥꯕꯥ</string>
   <string name="media_detail_coordinates">ꯀꯣꯑꯣꯔꯗꯤꯅꯦꯠꯁ</string>
   <string name="become_a_tester_title">ꯕꯦꯇꯥ ꯆꯥꯡꯌꯦꯡ ꯇꯧꯕ ꯱ ꯑꯣꯏꯕꯤꯌꯨ</string>
-  <string name="invalid_zero">ꯐꯨꯟ ꯁꯤ ꯆꯠꯗꯦ</string>
-  <string name="invalid_input">ꯍꯥꯞꯆꯤꯟꯂꯤꯕꯁꯤ ꯆꯠꯗꯦ</string>
   <string name="commons_logo">ꯀꯃꯣꯟꯁ ꯁꯛꯇꯥꯛ</string>
   <string name="commons_website">ꯀꯃꯣꯟꯁ ꯋꯦꯕꯁꯥꯏꯠ</string>
-  <string name="no_image_found">ꯃꯤꯔꯦꯜ ꯊꯤꯕꯥ ꯐꯪꯗꯔꯦ</string>
   <string name="welcome_image_welcome_wikipedia">ꯂꯦꯡꯁꯤꯟꯕꯤꯔꯛꯁꯤ ꯋꯤꯀꯤꯄꯦꯗꯤꯌꯥ</string>
   <string name="welcome_image_welcome_copyright">ꯂꯦꯡꯁꯤꯟꯕꯤꯔꯛꯁꯤ ꯁꯤꯟꯗꯣꯛꯄ-ꯑꯌꯥꯕ</string>
   <string name="cancel">ꯇꯣꯛꯄ</string>
@@ -97,7 +90,6 @@
   <string name="navigation_item_logout">ꯊꯣꯛꯂꯛꯄꯥ</string>
   <string name="navigation_item_info">ꯇꯝꯕꯤꯕꯥ</string>
   <string name="navigation_item_notification">ꯈꯪꯍꯟꯕꯁꯤꯡ</string>
-  <string name="navigation_item_featured_images">ꯑꯣꯏꯒꯗ</string>
   <string name="navigation_item_review">ꯑꯃꯨꯛ ꯌꯦꯡꯁꯤꯟꯕ</string>
   <string name="nearby_info_menu_wikidata_article">ꯋꯤꯀꯤꯗꯥꯇꯥ ꯄꯣꯠꯂꯝ</string>
   <string name="nearby_info_menu_wikipedia_article">ꯋꯤꯀꯤꯄꯦꯗꯤꯌꯥ ꯋꯥꯔꯦꯡ</string>
@@ -105,28 +97,19 @@
   <string name="upload_problem_image_blurry">ꯃꯤꯔꯦꯜ ꯁꯤ ꯁꯦꯡꯗꯦ</string>
   <string name="upload_problem_image_duplicate">ꯃꯤꯔꯦꯜ ꯑꯁꯤ ꯀꯃꯣꯟꯁꯇ ꯍꯥꯟꯅꯗꯒꯤ ꯌꯥꯎꯔꯦ ꯫</string>
   <string name="upload_problem_different_geolocation">ꯃꯁꯤꯒꯤ ꯃꯤꯔꯦꯜꯁꯤ ꯇꯣꯉꯥꯟ ꯇꯣꯉꯥꯟꯕ ꯃꯐꯝꯗꯒꯤ ꯅꯝꯂꯛꯄꯅꯤ ꯫</string>
-  <string name="give_permission">ꯑꯌꯥꯕ ꯄꯤꯕꯥ</string>
   <string name="skip_login">ꯆꯣꯡꯕ</string>
   <string name="navigation_item_login">ꯆꯪꯁꯤꯟꯕ ꯃꯅꯨꯪꯗ</string>
   <string name="skip_login_title">ꯅꯪ ꯇꯁꯦꯡꯅꯥ ꯄꯥꯝꯕꯔꯥ \"ꯆꯟꯁꯤꯟꯕ\" ꯀꯥꯟꯊꯣꯛꯄ?</string>
-  <string name="get_directions">ꯃꯥꯏꯀꯩꯁꯤꯡ ꯐꯪꯕ</string>
-  <string name="read_article">ꯋꯥꯔꯦꯡ ꯄꯥꯑꯣ</string>
-  <string name="notifications_welcome">%1$s, ꯋꯤꯀꯤꯃꯦꯗꯤꯌꯥ ꯀꯃꯣꯟꯁꯇ ꯂꯦꯡꯁꯤꯟꯕꯤꯔꯛꯁꯤ, ꯑꯩꯈꯣꯏꯅꯥ ꯆꯥꯎꯊꯣꯛꯆꯩ ꯅꯪꯅꯥ ꯆꯪꯕꯤꯔꯛꯄꯒꯤ ꯫</string>
-  <string name="notifications_talk_page_message">%1$s ꯅꯥ ꯅꯪꯒꯤ ꯋꯥ ꯍꯥꯏꯐꯝ ꯂꯃꯥꯏꯗ ꯀꯔꯤꯒꯨꯝꯕ ꯈꯔꯥ ꯏꯔꯝꯂꯦ</string>
-  <string name="notifications_thank_you_edit">ꯊꯥꯒꯠꯄ ꯐꯣꯡꯗꯣꯛꯆꯔꯤ ꯁꯦꯝꯒꯠꯄꯤꯕꯒꯤ</string>
-  <string name="notifications_mention">%1$s ꯅꯥ ꯅꯪꯕꯨ %2$s ꯗ ꯄꯟꯂꯤ ꯫</string>
   <string name="nearby_directions">ꯃꯥꯏꯀꯩꯁꯤꯡ</string>
   <string name="nearby_wikidata">ꯋꯤꯀꯤꯗꯥꯇꯥ</string>
   <string name="nearby_wikipedia">ꯋꯤꯀꯤꯄꯦꯗꯤꯌꯥ</string>
   <string name="nearby_commons">ꯀꯣꯃꯣꯟꯁ</string>
   <string name="no_internet">ꯏꯟꯇꯔꯅꯦꯠ ꯐꯪꯗꯦ</string>
-  <string name="internet_established">ꯏꯟꯇꯔꯅꯦꯠ ꯐꯪꯂꯦ</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;ꯍꯟꯗꯣꯛꯎ&lt;/u&gt;</string>
+  <string name="about_translate">ꯍꯟꯗꯣꯛꯎ</string>
   <string name="about_translate_title">ꯂꯣꯟꯁꯤꯡ</string>
   <string name="about_translate_proceed">ꯃꯈꯥ ꯆꯠꯊꯧ</string>
   <string name="about_translate_cancel">ꯇꯣꯛꯄ</string>
   <string name="retry">ꯑꯃꯨꯛꯍꯟꯅꯥ ꯇꯧꯔꯣ</string>
-  <string name="showcase_view_got_it_button">ꯐꯪꯉꯦ!</string>
   <string name="no_images_found">ꯃꯤꯔꯦꯜꯁꯤꯡ ꯊꯤꯕꯥ ꯐꯪꯗꯦ!</string>
   <string name="image_uploaded_by">ꯊꯥꯒꯠꯂꯛꯈꯤꯕ:%1$s</string>
   <string name="block_notification">ꯅꯪ ꯀꯃꯣꯟꯁꯇ ꯁꯦꯝꯒꯠꯄ ꯊꯤꯡꯈꯔꯦ</string>
@@ -144,7 +127,6 @@
   <string name="continue_message">ꯂꯦꯞꯀꯅꯨ</string>
   <string name="correct">ꯑꯆꯨꯝꯕ ꯄꯥꯎꯈꯨꯝ</string>
   <string name="wrong">ꯑꯔꯥꯟꯕ ꯄꯥꯎꯈꯨꯝ</string>
-  <string name="add_description">+ ꯑꯀꯨꯞꯄ ꯃꯔꯣꯜ ꯍꯥꯞꯆꯤꯟꯂꯨ</string>
   <string name="delete">ꯀꯛꯊꯠꯄꯥ</string>
   <string name="statistics_thanks">ꯊꯥꯒꯠꯆꯔꯤ ꯐꯪꯖꯔꯦ</string>
   <string name="level">ꯊꯥꯛ</string>
@@ -152,12 +134,8 @@
   <string name="previous">ꯃꯃꯥꯡꯒꯤ</string>
   <string name="submit">ꯄꯤꯁꯤꯟꯕ</string>
   <string name="title_page_bookmarks_locations">ꯃꯐꯝꯁꯤꯡ</string>
-  <string name="desc_language_Worldwide">ꯃꯂꯦꯝꯁꯤꯟꯕ</string>
-  <string name="desc_language_America">ꯑꯃꯦꯔꯤꯀꯥ</string>
-  <string name="desc_language_Europe">ꯏꯎꯔꯣꯞ</string>
-  <string name="desc_language_Middle_East">ꯃꯌꯥꯏꯊꯪꯕ ꯅꯣꯡꯄꯣꯛ</string>
-  <string name="desc_language_Africa">ꯑꯐ꯭ꯔꯤꯀꯥ</string>
-  <string name="desc_language_Asia">ꯑꯦꯁꯤꯌꯥ</string>
-  <string name="desc_language_Pacific">ꯄꯦꯁꯤꯐꯤꯛ</string>
   <string name="nearby_card_permission_title">ꯑꯌꯥꯕ ꯄꯤꯕꯤꯅꯕ ꯍꯥꯏꯕ</string>
+  <string name="title_app_shortcut_setting">ꯁꯦꯝꯐꯝ</string>
+  <string name="theme_dark_name">ꯑꯃꯝꯕ</string>
+  <string name="theme_light_name">ꯉꯥꯟꯊꯣꯛꯄ</string>
 </resources>

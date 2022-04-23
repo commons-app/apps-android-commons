@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Brahim-essaidi
+* Hakim1bal
+-->
 <resources>
   <string name="preference_category_general">ⴰⵎⴰⵜⴰⵢ</string>
-  <string name="preference_category_location">ⴰⴷⵖⴰⵔ</string>
   <string name="app_name">ⴽⵓⵎⵏⵣ</string>
   <string name="bullet">•</string>
   <string name="menu_settings">ⵜⵉⵙⵖⴰⵍ</string>
   <string name="username">ⵉⵙⵎ ⵏ ⵓⵎⵙⵙⵎⵔⵙ</string>
-  <string name="password">ⵜⴰⴳⵓⵔⵉ ⵏ ⵓⵣⵣⵔⴰⵢ</string>
+  <string name="password">ⵜⴰⴳⵓⵔⵉ ⵏ ⵓⵣⵔⴰⵢ</string>
   <string name="login">ⴽⵛⵎ</string>
   <string name="forgot_password">ⵜⴻⵜⵜⵓⴷ ⵜⴰⴳⵓⵔⵉ ⵏ ⵓⵣⵣⵔⴰⵢ?</string>
   <string name="signup">ⵣⵎⵎⴻⵎ</string>
@@ -17,18 +20,17 @@
   <string name="upload_failed">ⴰⴼⴰⵢⵍⵓ ⵓⵔ ⵉⵜⵜⵢⵓⴼⴰ. ⴰⵎⵓⵔ ⵏⵏⴽ ⴰⵔⵎ ⴰⴼⴰⵢⵍⵓ ⵢⴰⴹⵏ.</string>
   <string name="uploading_started">ⴰⵙⴽⵜⵔ ⵉⵙⵙⵏⵜⵉ!</string>
   <string name="upload_completed_notification_title">ⵉⵜⵜⵓⵙⴽⵜⵔ%1$s!</string>
-  <string name="upload_completed_notification_text">ⴰⴽⵍ ⴰⴼⴰⴷ ⴰⴷ ⵜⵥⵔⴷ ⴰⵙⴽⵜⵔ ⵏⵏⴽ</string>
-  <string name="upload_progress_notification_title_start">ⵉⵙⵙⵏⵜⵉ ⵓⵙⵙⴽⵜⵔ ⵏ %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">ⴷⴰ ⵉⵜⵜⵓⵙⴽⵜⴰⵔ %1$s</string>
-  <string name="upload_failed_notification_title">ⴰⵙⵙⴽⵜⵔ ⵏ %1$s ⵉⵣⴳⵍ</string>
-  <string name="upload_failed_notification_subtitle">ⴰⴽⵍ ⴰⴼⴰⴷ ⴰⴷ ⵜⵥⵔⴷ</string>
+  <string name="upload_completed_notification_text">ⴰⴷⵔ ⵃⵎⴰ ⴰⴷ ⵜⵙⴽⵏⴷ ⴰⵙⴽⵜⵔ ⵏⵏⴽ</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">ⵉⵙⵙⵏⵜⵉ ⵓⵙⵙⴽⵜⵔ ⵏ %1$s</string>
+  <string name="upload_progress_notification_title_in_progress">ⴰⵙⴽⵜⵓⵔ ⵏ %1$s</string>
+  <string name="upload_failed_notification_title" fuzzy="true">ⴰⵙⵙⴽⵜⵔ ⵏ %1$s ⵉⵣⴳⵍ</string>
+  <string name="upload_failed_notification_subtitle">ⴰⴽⵍ ⴰⴼⴰⴷ ⴰⴷ ⵜⵙⴽⵏⴷ</string>
   <string name="title_activity_contributions">ⵉⵙⴽⵜⴰⵔⵏ ⵉⵏⵓ ⵉⵎⴳⴳⵓⵔⴰ</string>
   <string name="contribution_state_in_progress">ⵉⵙⵎⴷ %1$d%%</string>
   <string name="contribution_state_starting">ⴰⵙⵙⴽⵜⵔ</string>
   <string name="provider_contributions">ⵉⵙⴽⵜⴰⵔⵏ ⵉⵏⵓ</string>
   <string name="menu_share">ⴱⴹⵓ</string>
-  <string name="share_title_hint">ⴰⵣⵡⵍ</string>
-  <string name="add_title_toast">ⴰⵎⵓⵔ ⵏⵏⴽ ⴳ ⴽⵔⴰ ⵏ ⵓⵣⵡⵍ ⵉ ⵓⴼⴰⵢⵍⵓ ⴰⴷ</string>
+  <string name="share_title_hint">ⴰⴷⵓⵣⵡⵍ (ⵉⵇⵇⴰⵏ ⴷ)</string>
   <string name="share_description_hint">ⴰⴳⵍⴰⵎ</string>
   <string name="login_failed_throttled">ⵎⵏⵏⴰⵡⵜ ⵜⵓⵔⵎⵉⵡⵉⵏ ⵓⵔ ⵉⵎⵓⵔⵙⵏ. ⴰⵎⵓⵔ ⵏⵏⴽ ⴰⵔⵎ ⴷⴰⵖ ⴷⴼⴼⵉⵔ ⴽⵔⴰ ⵏ ⵜⵓⵙⴷⵉⴷⵉⵏ.</string>
   <string name="login_failed_blocked">ⴰⵙⵙⵓⵔⴼ, ⴰⵎⵙⵙⵎⵔⵙ ⴰⴷ ⵉⵜⵜⵓⴳⴷⴰⵍ ⴳ ⴽⵓⵎⵏⵣ</string>
@@ -38,8 +40,7 @@
   <string name="menu_upload_single">ⵙⵙⴽⵜⵔ</string>
   <string name="categories_search_text_hint">ⵔⵣⵓ ⵜⴰⴳⴳⴰⵢⵉⵏ</string>
   <string name="menu_save_categories">ⵃⴹⵓ</string>
-  <string name="enable_gps">ⵙⴻⵙⵡⵓⵔⵉ GPS</string>
-  <string name="contributions_subtitle_zero">ⵓⵔ ⵜⴰ ⵍⵍⵉⵏ ⵉⵙⴽⵜⴰⵔⵏ</string>
+  <string name="contributions_subtitle_zero" fuzzy="true">ⵓⵔ ⵜⴰ ⵍⵍⵉⵏ ⵉⵙⴽⵜⴰⵔⵏ</string>
   <string name="categories_not_found">ⵜⵉⵙⵖⴰⵍ</string>
   <string name="categories_activity_title">ⵜⴰⴳⴳⴰⵢⵉⵏ</string>
   <string name="title_activity_settings">ⵜⵉⵙⵖⴰⵍ</string>
@@ -49,13 +50,40 @@
   <string name="provider_categories">ⵜⴰⴳⴳⴰⵢⵉⵏ ⵉⵜⵜⵓⵙⵙⵎⵔⵙⵏ ⴷⵔⵓⵙ ⴰⵢⴰ</string>
   <string name="no_uploads_yet">ⵓⵔ ⵜⴰ ⵜⵙⵙⴽⵜⵉⵔⴷ ⴰⵡⴷ ⴽⴰ ⵏ ⵜⵡⵍⴰⴼⵉⵏ.</string>
   <string name="menu_retry_upload">ⴰⵔⵎ ⴷⴰⵖ</string>
-  <string name="menu_cancel_upload">ⵙⵙⵔ</string>
+  <string name="menu_cancel_upload">ⵙⵔ</string>
   <string name="menu_download">ⴰⴳⵎ</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ⵜⵓⵜⵔⵉⵛⵜ)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (ⴰⵍⵎⴰⵏⵢⴰ)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (ⵉⵙⵜⵓⵏⵢⴰ)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (ⵙⴱⴰⵏⵢⴰ)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (ⴽⵔⵡⴰⵜⵢⴰ)</string>
+  <string name="welcome_final_button_text">ⵢⴰⵀ!</string>
+  <string name="ok">ⵡⴰⵅⵅⴰ</string>
+  <string name="yes">ⵢⴰⵀ</string>
+  <string name="no">ⵓⵀⵓ</string>
+  <string name="media_detail_title">ⴰⵣⵡⵍ</string>
+  <string name="media_detail_description">ⴰⴳⵍⴰⵎ</string>
+  <string name="media_detail_discussion">ⴰⵎⵙⴰⵡⴰⵍ</string>
+  <string name="media_detail_author">ⴰⵎⴳⴰⵢ</string>
+  <string name="media_detail_license">ⵜⵓⵔⴰⴳⵜ</string>
+  <string name="cancel">ⵙⵔ</string>
+  <string name="navigation_drawer_open">ⵕⵥⵎ</string>
+  <string name="navigation_drawer_close">ⵔⴳⵍ</string>
+  <string name="navigation_item_home">ⴰⵙⵏⵓⴱⴳ</string>
+  <string name="navigation_item_about">ⵖⴼ</string>
+  <string name="navigation_item_settings">ⵜⵉⵙⵖⴰⵍ</string>
+  <string name="navigation_item_notification">ⵜⵉⵏⵖⵎⵉⵙⵉⵏ</string>
+  <string name="navigation_item_login">ⴽⵛⵎ</string>
+  <string name="nearby_wikipedia">ⵡⵉⴽⵉⴱⵉⴷⵢⴰ</string>
+  <string name="about_translate">ⵙⵙⵓⵖⵍ</string>
+  <string name="about_translate_title">ⵜⵓⵜⵍⴰⵢⵉⵏ</string>
+  <string name="menu_search_button">ⵔⵣⵓ</string>
+  <string name="title_activity_search">ⵔⵣⵓ</string>
+  <string name="delete">ⴽⴽⵙ</string>
+  <string name="Profile">ⵉⴼⵔⵙ</string>
+  <string name="statistics">ⵉⵙⵉⴹⵏⵏ</string>
+  <string name="title_app_shortcut_setting">ⵜⵉⵙⵖⴰⵍ</string>
+  <string name="leaderboard_column_user">ⴰⵏⵙⵙⵎⵔⵙ</string>
+  <string name="leaderboard_column_count">ⵙⵙⵉⴹⵏ</string>
+  <string name="leaderboard_yearly">ⴰⵙⴳⵯⵙⴰⵏ</string>
+  <string name="leaderboard_weekly">ⴰⵏⵎⵍⴰⵙⵙ</string>
+  <string name="leaderboard_upload">ⵙⴽⵜⵔ</string>
+  <string name="leaderboard_my_rank_button_text">ⴰⵏⵎⴰⵍⴰ ⵉⵏⵓ</string>
 </resources>

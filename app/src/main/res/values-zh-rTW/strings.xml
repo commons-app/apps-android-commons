@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
+* DinoWP
+* GuoPC
 * Justincheng12345
 * Kly
+* Koala0090
 * LNDDYL
 * Liuxinyu970226
 * Madhurgupta10
@@ -10,16 +12,19 @@
 * S099001
 * Simon Shek
 * StephDC
+* Tranve
+* Winston Sung
 * Wwycheuk
 * ZhaoGang
+* 列维劳德
 * 和平奮鬥救地球
 * 沈澄心
 * 烈羽
 -->
 <resources>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">正在上載 %1$d 個檔案</item>
-    <item quantity="other">正在上載 %1$d 個檔案</item>
+    <item quantity="one">正在上傳%1$d個檔案</item>
+    <item quantity="other">正在上傳%1$d個檔案</item>
   </plurals>
   <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
@@ -27,32 +32,30 @@
   </plurals>
   <string name="starting_uploads">開始上傳</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">開始 %1$d 次上傳</item>
-    <item quantity="other">開始 %1$d 次上傳</item>
+    <item quantity="one">正在處理%d個上傳</item>
+    <item quantity="other">正在處理%d個上傳</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d 次上傳</item>
-    <item quantity="other">%1$d 次上傳</item>
+    <item quantity="one">%d個上傳</item>
+    <item quantity="other">%d個上傳</item>
   </plurals>
   <plurals name="share_license_summary">
-    <item quantity="one">此圖片會按 %1$s 協議授權上載</item>
-    <item quantity="other">這些圖片會按 %1$s 協議授權上載</item>
+    <item quantity="one">此圖片會按 %1$s 協議授權上傳</item>
+    <item quantity="other">這些圖片會按 %1$s 協議授權上傳</item>
   </plurals>
   <plurals name="upload_count_title">
     <item quantity="one">%1$d 個上傳</item>
     <item quantity="other">%1$d 個上傳</item>
   </plurals>
   <plurals name="receiving_shared_content">
-    <item quantity="one">接收分享內容。處理圖片可能花費的時間依據圖片大小與您的裝置</item>
-    <item quantity="other">接收分享內容。處理圖片可能花費的時間依據圖片大小與您的裝置</item>
+    <item quantity="one">接收分享內容。處理圖片的時間取決於圖片大小與您的裝置</item>
+    <item quantity="other">接收分享內容。處理圖片的時間取決於圖片大小與您的裝置</item>
   </plurals>
-  <string name="title_activity_explore">探索</string>
   <string name="navigation_item_explore">探索</string>
   <string name="preference_category_appearance">外觀</string>
   <string name="preference_category_general">一般</string>
   <string name="preference_category_feedback">意見回饋</string>
-  <string name="preference_category_privacy">隱私</string>
-  <string name="preference_category_location">位置</string>
+  <string name="preference_category_privacy">隱私政策</string>
   <string name="app_name">維基共享資源</string>
   <string name="bullet">•</string>
   <string name="menu_settings">設定</string>
@@ -65,6 +68,8 @@
   <string name="signup">註冊</string>
   <string name="logging_in_title">登入中</string>
   <string name="logging_in_message">請稍候…</string>
+  <string name="updating_caption_title">正在更新說明與描述</string>
+  <string name="updating_caption_message">請稍候…</string>
   <string name="login_success">登入成功！</string>
   <string name="login_failed">登入失敗！</string>
   <string name="upload_failed">找不到檔案。請試試看其它檔案。</string>
@@ -73,7 +78,7 @@
   <string name="uploading_queued">上傳已排定（限制連線模式已啟用）</string>
   <string name="upload_completed_notification_title">已上傳%1$s！</string>
   <string name="upload_completed_notification_text">輕觸來檢視您上傳的項目</string>
-  <string name="upload_progress_notification_title_start">開始上傳%1$s</string>
+  <string name="upload_progress_notification_title_start">開始上傳檔案：%s</string>
   <string name="upload_progress_notification_title_in_progress">正在上傳%1$s</string>
   <string name="upload_progress_notification_title_finishing">即將完成上傳%1$s</string>
   <string name="upload_failed_notification_title">上傳%1$s失敗</string>
@@ -90,20 +95,18 @@
   <string name="menu_nearby">附近</string>
   <string name="provider_contributions">我的上傳</string>
   <string name="menu_share">分享</string>
-  <string name="menu_open_in_browser">於瀏覽器檢視</string>
-  <string name="share_title_hint">說明（需要）</string>
+  <string name="menu_view_file_page">檢視檔案頁面</string>
+  <string name="share_title_hint">說明（必填）</string>
   <string name="add_caption_toast">請提供此檔案的說明</string>
   <string name="share_description_hint">描述</string>
-  <string name="share_caption_hint">說明（不能超過 255 個字元）</string>
+  <string name="share_caption_hint">說明</string>
   <string name="login_failed_network">無法登入－網路故障</string>
-  <string name="login_failed_wrong_credentials">無法登入 - 請檢查您的使用者名稱與密碼</string>
   <string name="login_failed_throttled">失敗次數過多。請於幾分鐘後重試。</string>
   <string name="login_failed_blocked">很抱歉，該使用者已被維基共享資源封禁</string>
   <string name="login_failed_2fa_needed">必須提供您的雙重驗證代碼。</string>
   <string name="login_failed_generic">登入失敗</string>
   <string name="share_upload_button">上傳</string>
-  <string name="multiple_share_base_title">命名此組</string>
-  <string name="add_set_name_toast">請提供此設定的名稱</string>
+  <string name="multiple_share_base_title">命名此組圖像</string>
   <string name="provider_modifications">修改</string>
   <string name="menu_upload_single">上傳</string>
   <string name="categories_search_text_hint">搜尋分類</string>
@@ -111,23 +114,21 @@
   <string name="menu_save_categories">儲存</string>
   <string name="refresh_button">重新整理</string>
   <string name="display_list_button">清單</string>
-  <string name="gps_disabled">您的裝置停用了 GPS。想啟用嗎？</string>
-  <string name="enable_gps">啟用 GPS</string>
   <string name="contributions_subtitle_zero">（尚未上傳）</string>
   <string name="categories_not_found">沒有發現與 %1$s 相符的分類</string>
   <string name="depictions_not_found">找不到符合%1$s的維基數據項目</string>
   <string name="no_child_classes">%1$s沒有子類別</string>
   <string name="no_parent_classes">%1$s沒有父類別</string>
-  <string name="depictions_image_not_found">沒有圖片的描寫</string>
   <string name="categories_skip_explanation">為您的圖片添加分類，使別人在維基共享資源更容易找到。\n\n開始輸入以添加分類。</string>
   <string name="categories_activity_title">分類</string>
   <string name="title_activity_settings">設定</string>
   <string name="title_activity_signup">註冊</string>
   <string name="title_activity_featured_images">特色圖片</string>
+  <string name="title_activity_custom_selector">自訂選擇器</string>
   <string name="title_activity_category_details">分類</string>
   <string name="title_activity_review">同行評審</string>
   <string name="menu_about">關於</string>
-  <string name="about_license">維基共享資源應用程式是透過維基媒體社群上的受讓人，與志願者們所建立及維護的開放原始碼應用程式。維基媒體基金會並不涉及此應用程式的建立、開發，與維護方面。</string>
+  <string name="about_license">維基共享資源應用程式是透過維基媒體社群上的受讓人，與志願者們所建立及維護的開源應用程式。維基媒體基金會並不參與此應用程式的建立、開發，與維護。</string>
   <string name="about_improve">建立新的&lt;a href=\"%1$s\"&gt; GitHub 問題&lt;/a&gt;來回報程式錯誤和提出建議。</string>
   <string name="about_privacy_policy">隱私方針</string>
   <string name="about_credits">製作群</string>
@@ -135,7 +136,6 @@
   <string name="menu_feedback">發送回饋 （通過電子郵件）</string>
   <string name="no_email_client">未安裝電子郵件客戶端</string>
   <string name="provider_categories">最近使用過的分類</string>
-  <string name="provider_depictions">近期使用的描寫</string>
   <string name="waiting_first_sync">等待首次同步…</string>
   <string name="no_uploads_yet">您尚未上傳過任何照片。</string>
   <string name="menu_retry_upload">重試</string>
@@ -144,8 +144,6 @@
   <string name="menu_download">下載</string>
   <string name="preference_license">預設授權條款</string>
   <string name="use_previous">使用先前標題及描述</string>
-  <string name="allow_gps">自動獲取目前位置</string>
-  <string name="allow_gps_summary">如果圖片沒有地理標記，就索取目前位置的地理資訊來標記在圖片上。注意：這會透露出您目前所在的位置。</string>
   <string name="preference_theme">主題</string>
   <string name="license_name_cc_by_sa_four">姓名標示-相同方式分享4.0</string>
   <string name="license_name_cc_by_four">姓名標示4.0</string>
@@ -153,20 +151,9 @@
   <string name="license_name_cc_by">姓名標示3.0</string>
   <string name="license_name_cc0">公眾領域貢獻宣告</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC姓名標示-相同方式分享3.0（奧地利）</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC姓名標示-相同方式分享3.0（德國）</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC姓名標示-相同方式分享3.0（愛沙尼亞）</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC姓名標示-相同方式分享3.0（西班牙）</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC姓名標示-相同方式分享3.0（克羅埃西亞）</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC姓名標示-相同方式分享3.0（盧森堡）</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC姓名標示-相同方式分享3.0（荷蘭）</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC姓名標示-相同方式分享3.0（挪威）</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC姓名標示-相同方式分享3.0（波蘭）</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC姓名標示-相同方式分享3.0（羅馬尼亞）</string>
   <string name="license_name_cc_by_3_0">CC姓名標示3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC姓名標示-相同方式分享4.0</string>
   <string name="license_name_cc_by_4_0">創用CC姓名標示4.0</string>
-  <string name="license_name_cc_zero">公眾領域貢獻宣告</string>
   <string name="tutorial_1_text">維基共享資源管理大部份使用在維基百科的圖片。</string>
   <string name="tutorial_1_subtext">您的圖片幫助教育了世界上的人們！</string>
   <string name="tutorial_2_text">請上傳完全由您自己拍攝或創作的圖片：</string>
@@ -192,7 +179,6 @@
   <string name="detail_panel_cats_loading">載入中…</string>
   <string name="detail_panel_cats_none">未選擇</string>
   <string name="detail_caption_empty">沒有說明</string>
-  <string name="detail_depiction_empty">沒有描寫</string>
   <string name="detail_description_empty">無描述</string>
   <string name="detail_discussion_empty">沒有討論</string>
   <string name="detail_license_empty">不明授權</string>
@@ -201,13 +187,9 @@
   <string name="read_storage_permission_rationale">必要權限：讀取外部儲存裝置。否則應用程式無法存取您的圖庫。</string>
   <string name="write_storage_permission_rationale">必要權限：寫入外部存儲裝置。否則應用程式無法取用您的相機/圖庫。</string>
   <string name="location_permission_title">請求位置權限</string>
-  <string name="location_permission_rationale">可有可無的權限：獲取目前的地理位置，以用於分類建議</string>
   <string name="ok">好</string>
-  <string name="title_activity_nearby">附近地點</string>
-  <string name="no_nearby">找不到附近地點</string>
   <string name="warning">警告</string>
   <string name="duplicate_image_found">發現重複圖片</string>
-  <string name="upload_image_duplicate">維基共享資源已有此檔案。確定要繼續嗎？</string>
   <string name="upload">上傳</string>
   <string name="yes">是</string>
   <string name="no">否</string>
@@ -224,33 +206,19 @@
   <string name="become_a_tester_title">成為測試人員</string>
   <string name="become_a_tester_description">選擇加入我們在 Google Play 上的 beta 測試版本，以提早取用新功能及程式修正</string>
   <string name="_2fa_code">雙重驗證代碼</string>
-  <string name="number_of_uploads">我的最近上傳限制</string>
-  <string name="maximum_limit">最大限制</string>
-  <string name="invalid_zero">0 為無效</string>
-  <string name="invalid_input">無效的輸入</string>
-  <string name="maximum_limit_alert">無法顯示超過 500 項</string>
-  <string name="enter_valid">輸入有效數字</string>
-  <string name="cannot_be_zero">上傳限制不能為 0</string>
-  <string name="set_limit">最近上傳限制</string>
-  <string name="login_failed_2fa_not_supported">目前不支援雙重驗證。</string>
   <string name="logout_verification">您確定要登出嗎？</string>
   <string name="commons_logo">維基共享資源標誌</string>
   <string name="commons_website">共享資源網站</string>
   <string name="commons_facebook">維基共享資源臉書頁面</string>
   <string name="commons_github">Github 上的共享資源原始碼</string>
-  <string name="background_image">背景圖片</string>
   <string name="mediaimage_failed">媒體圖片失敗</string>
-  <string name="no_image_found">找不到圖片</string>
   <string name="no_subcategory_found">找不到子分類</string>
-  <string name="no_parentcategory_found">找不到父分類</string>
-  <string name="upload_image">上傳圖片</string>
+  <string name="no_parentcategory_found">找不到母分類</string>
   <string name="welcome_image_mount_zao">藏王連峰</string>
   <string name="welcome_image_llamas">大羊駝</string>
   <string name="welcome_image_rainbow_bridge">彩虹橋</string>
   <string name="welcome_image_tulip">鬱金香</string>
-  <string name="welcome_image_no_selfies">沒有自拍</string>
-  <string name="welcome_image_proprietary">有專利版權的圖片</string>
-  <string name="welcome_image_welcome_wikipedia">歡迎維基百科</string>
+  <string name="welcome_image_welcome_wikipedia">歡迎來到維基百科</string>
   <string name="welcome_image_welcome_copyright">歡迎版權</string>
   <string name="welcome_image_sydney_opera_house">雪梨歌劇院</string>
   <string name="cancel">取消</string>
@@ -265,19 +233,13 @@
   <string name="navigation_item_logout">登出</string>
   <string name="navigation_item_info">教程</string>
   <string name="navigation_item_notification">通知</string>
-  <string name="navigation_item_featured_images">特色</string>
   <string name="navigation_item_review">檢閱</string>
-  <string name="nearby_needs_permissions">附近地點需要位置權限才可顯示</string>
   <string name="no_description_found">找不到描述</string>
   <string name="nearby_info_menu_commons_article">維基共享資源檔案頁面</string>
   <string name="nearby_info_menu_wikidata_article">維基數據項目</string>
   <string name="nearby_info_menu_wikipedia_article">維基百科條目</string>
-  <string name="error_while_cache">在快取圖片時發生錯誤</string>
-  <string name="title_info">用於本檔案的唯一描述性標題。您可以使用帶有空格的簡明語言，另外請不要包含副檔名。</string>
-  <string name="description_info">請盡可能描述媒體內容：拍攝於何處？是顯示什麼事物？有什麼脈絡？請描述對象或人物。透露出一些較不易猜測的訊息，例如是風景的話，可以是一天裡的時間。如果媒體顯示出一些不正常的事物，請說明出造成不正常原因。</string>
-  <string name="caption_info">請寫入圖片的簡要描述。首個說明會作為圖片的標題。</string>
-  <string name="upload_image_too_dark">此圖片太暗，您確定您要上傳它嗎？維基共享資源僅適用對於百科全書有價值的圖片。</string>
-  <string name="upload_image_blurry">此圖片太模糊，您確定您要上傳它嗎？維基共享資源僅適用對於百科全書有價值的圖片。</string>
+  <string name="description_info">請盡可能描述媒體內容：拍攝於何處？是顯示什麼事物？有什麼脈絡？請描述對象或人物。透露出一些較不易猜測的訊息，例如是風景的話，可以是一天裡的時間。如果媒體顯示出一些不尋常的事物，請說明不尋常原因。</string>
+  <string name="caption_info">請寫入圖片的簡要描述。首個說明會作為圖片的標題。不能超過 225 個字元。</string>
   <string name="upload_problem_exist">此圖片有以下潛在問題：</string>
   <string name="upload_problem_image_dark">圖片太暗。</string>
   <string name="upload_problem_image_blurry">圖片模糊。</string>
@@ -285,11 +247,12 @@
   <string name="upload_problem_different_geolocation">此圖片是在不同的地點拍攝。</string>
   <string name="upload_problem_fbmd">請僅上傳您自己拍攝的圖片。不要上傳您從別人臉書帳號裡所找到的圖片。</string>
   <string name="upload_problem_do_you_continue">您仍要上傳此圖片嗎？</string>
-  <string name="upload_problem_image">在圖片裡發現問題</string>
+  <string name="upload_connection_error_alert_title">連接錯誤</string>
+  <string name="upload_connection_error_alert_detail">更新處理需要有效的網際網路存取。請檢查您的網路連線。</string>
+  <string name="upload_problem_image">在圖片中發現的問題</string>
   <string name="internet_downloaded">請僅上傳您自己拍攝的圖片。不要上傳您從網路下載來的圖片。</string>
-  <string name="give_permission">給予權限</string>
-  <string name="use_external_storage">儲存應用程式所提供的快照</string>
-  <string name="use_external_storage_summary">保存以應用程式相機所拍攝的圖片到您的裝置儲存裡</string>
+  <string name="use_external_storage">儲存應用程式所提供的截圖</string>
+  <string name="use_external_storage_summary">將應用程式相機所拍攝的圖片存到您的裝置空間裡</string>
   <string name="login_to_your_account">登入您的帳號</string>
   <string name="send_log_file">發送日誌檔案</string>
   <string name="send_log_file_description">透過電子郵件寄送日誌檔案給開發人員，來協助除錯應用程式上的問題。注意：日誌可能會包含識別方面的資訊</string>
@@ -298,38 +261,26 @@
   <string name="nominate_deletion">提名刪除</string>
   <string name="nominated_for_deletion">此圖片已被提名刪除。</string>
   <string name="nominated_see_more">有關詳細信息，請參閱網頁</string>
-  <string name="nominating_file_for_deletion">提名%1$s刪除。</string>
-  <string name="nominating_for_deletion_status">提名要刪除的檔案：%1$s</string>
-  <string name="view_browser">於瀏覽器檢視</string>
   <string name="skip_login">略過</string>
   <string name="navigation_item_login">登入</string>
   <string name="skip_login_title">您確定要略過登入嗎？</string>
   <string name="skip_login_message">在功能裡您需要登入來上傳圖片。</string>
   <string name="login_alert_message">請登入來使用此功能</string>
-  <string name="copy_wikicode">複製 wiki 語法到剪貼簿</string>
-  <string name="wikicode_copied">Wiki 文字已複製到剪貼簿</string>
-  <string name="nearby_location_has_not_changed">位置無法更改。</string>
+  <string name="copy_wikicode">複製 wikitext 到剪貼簿</string>
+  <string name="wikicode_copied">Wikitext 已複製到剪貼簿</string>
   <string name="nearby_location_not_available">附近可能無法正常運作。位置無效。</string>
   <string name="location_permission_rationale_nearby">需權限來顯示附近地點清單</string>
-  <string name="get_directions">取得方向</string>
-  <string name="read_article">讀取條目</string>
-  <string name="notifications_welcome">%1$s，歡迎來到維基共享資源！我們很高興您來到這裡。</string>
-  <string name="notifications_talk_page_message">%1$s 留了訊息在您的對話頁</string>
-  <string name="notifications_thank_you_edit">感謝您所做的編輯</string>
-  <string name="notifications_mention">%1$s 在 %2$s 提到了您。</string>
-  <string name="toggle_view_button">切換檢視</string>
   <string name="nearby_directions">方向</string>
   <string name="nearby_wikidata">維基數據</string>
   <string name="nearby_wikipedia">維基百科</string>
   <string name="nearby_commons">維基共享資源</string>
   <string name="about_rate_us">為我們評分</string>
   <string name="about_faq">常見問題</string>
+  <string name="user_guide">使用者指南</string>
   <string name="welcome_skip_button">跳過敎程</string>
   <string name="no_internet">網路不可用</string>
-  <string name="internet_established">網路可用</string>
   <string name="error_notifications">索取通知時錯誤</string>
   <string name="error_review">索取評審的圖片錯誤，請按下重新整理來重試。</string>
-  <string name="error_review_categories">索取評審的圖片分類錯誤，請按下重新整理來重試。</string>
   <string name="no_notifications">查無通知</string>
   <string name="about_translate">翻譯</string>
   <string name="about_translate_title">語言</string>
@@ -337,13 +288,10 @@
   <string name="about_translate_proceed">已進行</string>
   <string name="about_translate_cancel">取消</string>
   <string name="retry">重試</string>
-  <string name="showcase_view_got_it_button">了解！</string>
   <string name="showcase_view_whole_nearby_activity">這些是在您的周遭，並且需要圖片來圖解、描述它們本身的維基百科條目之地點。\n\n請點擊「搜尋此區域」來查看地圖，然後在位置啟動周遭搜尋。</string>
   <string name="showcase_view_needs_photo">此地點需要照片。</string>
   <string name="showcase_view_has_photo">此地點已有照片。</string>
   <string name="showcase_view_no_longer_exists">此地點已不存在。</string>
-  <string name="showcase_view_list_icon">輕觸此按鈕來帶出這些地點的清單</string>
-  <string name="showcase_view_plus_fab">您可從您的圖庫或相機，來上傳任何地點的圖片</string>
   <string name="no_images_found">找不到圖片！</string>
   <string name="error_loading_images">當載入圖片時發生錯誤。</string>
   <string name="image_uploaded_by">由：%1$s 上傳</string>
@@ -353,18 +301,18 @@
   <string name="app_widget_heading">每日圖片</string>
   <string name="menu_search_button">搜尋</string>
   <string name="search_commons">搜尋維基共享資源</string>
-  <string name="images_not_found">找不到符合%1$s的圖片</string>
   <string name="title_activity_search">搜尋</string>
   <string name="search_recent_header">近期搜尋：</string>
   <string name="provider_searches">近期搜尋查詢</string>
+  <string name="provider_recent_languages">近期語言查詢</string>
   <string name="error_loading_categories">當載入分類時發生錯誤。</string>
-  <string name="error_loading_depictions">當載入描寫時發生錯誤。</string>
-  <string name="error_loading_subcategories">當載入子分類時發生錯誤。</string>
+  <string name="error_loading_depictions">載入描述時發生錯誤。</string>
   <string name="search_tab_title_media">媒體</string>
   <string name="search_tab_title_categories">分類</string>
   <string name="search_tab_title_depictions">項目</string>
   <string name="explore_tab_title_featured">特色</string>
-  <string name="explore_tab_title_mobile">透過行動設備上傳</string>
+  <string name="explore_tab_title_mobile">透過行動裝置上傳</string>
+  <string name="explore_tab_title_map">地圖</string>
   <string name="successful_wikidata_edit">圖片已添加到維基數據上的%1$s！</string>
   <string name="wikidata_edit_failure">更新所對應的維基數據項目失敗！</string>
   <string name="menu_set_wallpaper">設定為桌布</string>
@@ -380,7 +328,6 @@
   <string name="screenshot_answer">網站的螢幕截圖被視為衍生作品，受到該網站本身所有著作權保護。這些截圖可以在獲得原作者許可之後使用。若未經許可，您根據他們的作品而創作的任何藝術品，在法律上均會被視為未經原作者許可的複製品。</string>
   <string name="blurry_image_answer">收錄高畫質圖像是維基共享資源的目標之一，所以不應該上傳模糊的圖片。儘量試著只上傳光線良好的優良圖片。</string>
   <string name="construction_event_answer">在維基共享資源上，展現科技或文化的圖片很受到歡迎。</string>
-  <string name="warning_for_image_reverts">警告：您所上傳的圖片中，超過 %1$s 張已經被刪除。如果您持續上傳那些需要被刪除的圖片，您的帳號可能會被封禁。</string>
   <string name="congratulatory_message_quiz">您答對了 %1$s 題，恭喜！</string>
   <string name="warning_for_no_answer">請在兩個選項中擇一，來回答這個問題。</string>
   <string name="user_not_logged_in">登入用 session 逾期，請重新登入。</string>
@@ -390,11 +337,12 @@
   <string name="wrong">錯誤答案</string>
   <string name="quiz_screenshot_question">這張截圖可以上傳嗎？</string>
   <string name="share_app_title">分享應用程式</string>
-  <string name="share_coordinates_not_present">當選擇圖片時未指定座標</string>
   <string name="error_fetching_nearby_places">索取附近地點時出錯。</string>
-  <string name="add_description">+ 添加描述</string>
+  <string name="no_nearby_places_around">找不到附近地點</string>
+  <string name="error_fetching_nearby_monuments">索取附近古蹟景點時出錯。</string>
   <string name="no_recent_searches">無近期搜尋</string>
   <string name="delete_recent_searches_dialog">確定要清除搜尋歷史嗎？</string>
+  <string name="cancel_upload_dialog">您確定要取消此次上傳？</string>
   <string name="delete_search_dialog">您要刪除此搜尋嗎？</string>
   <string name="search_history_deleted">搜尋歷史已刪除</string>
   <string name="nominate_delete">提名刪除</string>
@@ -426,20 +374,16 @@
   <string name="read_notifications">通知（已讀）</string>
   <string name="display_nearby_notification">顯示附近地點通知</string>
   <string name="display_nearby_notification_summary">顯示用於缺少圖片之最近地點的應用程式所提供通知</string>
-  <string name="no_close_nearby">查無靠近您的附近地點</string>
   <string name="list_sheet">清單</string>
   <string name="storage_permission">儲存裝置權限</string>
   <string name="write_storage_permission_rationale_for_image_share">為了上傳圖片，我們需要存取裝置的外部儲存空間的權限。</string>
   <string name="nearby_notification_dismiss_message">您不會再看到缺少圖片的最近地點。然而，若您有意的話您可以在設定裡重新啟動此通知。</string>
   <string name="step_count">步驟 %2$d 之 %1$d：%3$s</string>
-  <string name="image_in_set_label">圖片「%1$d」在集合裡</string>
   <string name="next">下一個</string>
   <string name="previous">上一個</string>
   <string name="submit">提交</string>
   <string name="upload_title_duplicate">檔案名稱為「%1$s」的檔案已存在，您確定要繼續嗎？\n\n註：合適的後綴會自動添加到檔案名稱。</string>
   <string name="map_application_missing">在您的裝置上找不到相容的地圖應用程式，請安裝地圖應用程式來使用此功能。</string>
-  <string name="navigation_item_bookmarks">書籤</string>
-  <string name="title_activity_bookmarks">書籤</string>
   <string name="title_page_bookmarks_pictures">圖片</string>
   <string name="title_page_bookmarks_locations">位置</string>
   <string name="menu_bookmark">添加/移除至書籤</string>
@@ -454,24 +398,20 @@
   <string name="deletion_reason_not_interesting">真抱歉，此圖片對於百科全書沒有意義</string>
   <string name="uploaded_by_myself">由我自己上傳於 %1$s，使用在 %2$d 個條目。</string>
   <string name="no_uploads">歡迎來到維基共享資源！\n\n透過觸碰添加按鈕來上傳您的首個多媒體內容。</string>
-  <string name="desc_language_Worldwide">全球</string>
-  <string name="desc_language_America">美洲</string>
-  <string name="desc_language_Europe">歐洲</string>
-  <string name="desc_language_Middle_East">中東</string>
-  <string name="desc_language_Africa">非洲</string>
-  <string name="desc_language_Asia">亞洲</string>
-  <string name="desc_language_Pacific">太平洋</string>
   <string name="no_categories_selected">未選擇分類</string>
   <string name="no_categories_selected_warning_desc">不帶分類的圖片很難有機會被利用到，您確定您要不選擇分類來繼續嗎？</string>
   <string name="no_depictions_selected">沒有選擇描寫</string>
   <string name="no_depictions_selected_warning_desc">帶有描寫的圖片會更容易被找到，並且更可能被拿來使用。您確定您要不選擇描寫來繼續嗎？</string>
+  <string name="back_button_warning">取消上傳</string>
+  <string name="back_button_warning_desc">使用倒退按鈕將會取消此上傳，您並且會失去您的進度</string>
+  <string name="back_button_continue">繼續上傳</string>
   <string name="upload_flow_all_images_in_set">（在集合的所有圖片）</string>
   <string name="search_this_area">搜尋此區域</string>
   <string name="nearby_card_permission_title">權限請求</string>
   <string name="nearby_card_permission_explanation">您是否願意讓我們使用您的目前位置，來顯示出缺少圖片的最近地點？</string>
   <string name="unable_to_display_nearest_place">沒有位置權限會無法顯示缺少圖片的最近地點</string>
   <string name="never_ask_again">永遠不再詢問</string>
-  <string name="display_location_permission_title">顯示位置權限</string>
+  <string name="display_location_permission_title">要求位置權限</string>
   <string name="display_location_permission_explanation">當需要附近地點通知卡片的檢視功能時，要求位置權限。</string>
   <string name="achievements_fetch_failed">發生了一些狀況，我們無法索取您的成果</string>
   <string name="achievements_fetch_failed_ultimate_achievement">您做出的貢獻多到讓我們的成果系統無法因應，此為終極成果。</string>
@@ -480,7 +420,6 @@
   <string name="display_campaigns_explanation">查看進行中的活動</string>
   <string name="nearby_campaign_dismiss_message">您不會再看到活動。然而，若您有意的話您可以在設定裡重新啟動此通知。</string>
   <string name="this_function_needs_network_connection">此功能需要連接到網路，請檢查您的連線設定。</string>
-  <string name="bad_token_error_proposed_solution">出於編輯訊標問題導致上傳失敗。請重試登入後再登入。</string>
   <string name="error_processing_image">處理圖片時出現錯誤。請重試！</string>
   <string name="getting_edit_token">取得編輯用訊標</string>
   <string name="check_category_adding_template">添加用於分類檢查的模板</string>
@@ -491,18 +430,11 @@
   <string name="check_category_success_message">已請求%1$s的分類檢查</string>
   <string name="check_category_failure_message">無法請求%1$s的分類檢查</string>
   <string name="check_category_toast">請求%1$s的分類檢查</string>
-  <string name="nominate_for_deletion_edit_file_page">添加刪除訊息至檔案</string>
   <string name="nominate_for_deletion_done">完成</string>
-  <string name="nominate_for_deletion_notify_user">在對話頁通知使用者</string>
-  <string name="nominate_for_deletion_edit_deletion_request_log">添加檔案至刪除請求日誌</string>
-  <string name="nominate_for_deletion_create_deletion_request">建立刪除請求子頁面</string>
-  <string name="notsure">不確定</string>
   <string name="send_thank_success_title">發送感謝：成功</string>
   <string name="send_thank_success_message">成功傳送感謝給：%1$s</string>
   <string name="send_thank_failure_message">發送感謝%1$s失敗</string>
   <string name="send_thank_failure_title">發送感謝：失敗</string>
-  <string name="send_thank_send">傳送感謝</string>
-  <string name="send_thank_notification_title">發送感謝</string>
   <string name="send_thank_toast">為%1$s發送感謝</string>
   <string name="review_copyright">這是否遵守版權規範？</string>
   <string name="review_category">這有分類正確嗎？</string>
@@ -515,16 +447,10 @@
   <string name="review_category_explanation">此圖片屬於%1$s分類。</string>
   <string name="review_spam_report_question">這超出範圍是因為</string>
   <string name="review_c_violation_report_question">這侵犯版權是因為</string>
-  <string name="review_category_yes_button_text">否，缺少分類</string>
-  <string name="review_category_no_button_text">看起來沒問題</string>
-  <string name="review_spam_yes_button_text">否，超出範圍</string>
-  <string name="review_spam_no_button_text">看起來沒問題</string>
-  <string name="review_copyright_yes_button_text">不，侵犯版權</string>
-  <string name="review_copyright_no_button_text">看起來沒問題</string>
-  <string name="review_thanks_yes_button_text">是的，為何不呢</string>
-  <string name="review_thanks_no_button_text">下一張圖片</string>
+  <string name="review_thanks_yes_button_text">下一張圖片</string>
+  <string name="review_thanks_no_button_text">是的，為何不呢</string>
   <string name="skip_image_explanation">點擊此按鈕會提供給您其它近期從維基共享資源上傳的圖片</string>
-  <string name="review_image_explanation">您可以檢閱和改善維基共享資源的品質。\n檢閱的四個項目有：\n - 此圖片是否符合範圍？\n - 此圖片是否遵守版權規範？\n - 此圖片是否有分類正確？\n - 如果一切沒問題，您可以感謝貢獻者。</string>
+  <string name="review_image_explanation">您可以檢閱來改善維基共享資源的品質。\n檢閱的三個項目有：\n- 此圖片是否符合範圍？\n當您輕觸「否」（代表不在符合範圍），您會對此圖片添加刪除提名模板。\n\n- 此圖片是否遵守版權規範？\n當您輕觸「否」（代表未遵守版權規範），您會對此圖片添加刪除提名模板。\n\n- 此圖片是否有分類正確？\n當您輕觸「否」（代表分類不正確），您會對此圖片添加分類請求模板。\n\n如果一切都沒問題，就不會對圖片添加模板，您另外可以對貢獻者表達感謝。</string>
   <string name="no_image">沒有圖片被使用到</string>
   <string name="no_image_reverted">沒有圖片被還原回復</string>
   <string name="no_image_uploaded">沒有圖片被上傳</string>
@@ -534,13 +460,12 @@
   <string name="menu_option_read">檢視已讀</string>
   <string name="menu_option_unread">檢視未讀</string>
   <string name="error_occurred_in_picking_images">當挑選圖片時發生錯誤</string>
-  <string name="image_chooser_title">選擇要上傳的圖片</string>
   <string name="please_wait">請稍待…</string>
   <string name="images_featured_explanation">特色圖片是出自於高水準技巧的攝影師或繪圖師，且被維基共享資源社群挑選為在站台上的最高品質圖片。</string>
   <string name="images_via_nearby_explanation">以「附近地點」所上傳的圖片，是透過找出在地圖上地點來上傳的。</string>
   <string name="thanks_received_explanation">此功能允許編輯者透過利用在歷史頁面或是差異頁面上的感謝連結，來發送感謝通知給做出有用編輯的使用者。</string>
-  <string name="previous_image_caption_description">複製先前說明與描述</string>
-  <string name="previous_button_tooltip_message">點擊來重新使用您在您的先前圖片所輸入之標題與描述，並修改來配合目前的圖片</string>
+  <string name="copy_image_caption_description">複製到後續媒體</string>
+  <string name="copied_successfully">已複製</string>
   <string name="welcome_do_upload_content_description">上傳到維基共享資源的優良圖片範例</string>
   <string name="welcome_dont_upload_content_description">未上傳範例圖片</string>
   <string name="skip_image">略過此圖片</string>
@@ -564,7 +489,6 @@
   <string name="dialog_box_text_nomination">為何應刪除%1$s？</string>
   <string name="review_is_uploaded_by">%1$s 是由 %2$s 所上傳</string>
   <string name="default_description_language">預設描述語言</string>
-  <string name="delete_helper_make_deletion_toast">嘗試向%1$s提名刪除</string>
   <string name="delete_helper_show_deletion_title">提名刪除</string>
   <string name="delete_helper_show_deletion_title_success">成功</string>
   <string name="delete_helper_show_deletion_message_if">已提名%1$s刪除。</string>
@@ -573,11 +497,9 @@
   <string name="delete_helper_ask_spam_selfie">自拍</string>
   <string name="delete_helper_ask_spam_blurry">糢糊</string>
   <string name="delete_helper_ask_spam_nonsense">無意義</string>
-  <string name="delete_helper_ask_spam_other">其它</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">按壓照片</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">來自網路的隨機照片</string>
   <string name="delete_helper_ask_reason_copyright_logo">標誌</string>
-  <string name="delete_helper_ask_reason_copyright_other">其它</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">因為這</string>
   <string name="category_edit_helper_make_edit_toast">嘗試更新分類。</string>
   <string name="category_edit_helper_show_edit_title">分類更新</string>
@@ -588,8 +510,30 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">無法添加分類。</string>
   <string name="category_edit_button_text">更新分類</string>
+  <string name="depictions_edit_helper_make_edit_toast">正在嘗試更新描寫。</string>
+  <string name="depictions_edit_helper_show_edit_title">編輯描寫</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">已添加 %1$s 個描寫。</item>
+    <item quantity="other">已添加 %1$s 個描寫。</item>
+  </plurals>
+  <string name="depictions_edit_helper_edit_message_else">無法添加描寫。</string>
+  <string name="coordinates_edit_helper_make_edit_toast">嘗試更新座標。</string>
+  <string name="coordinates_edit_helper_show_edit_title">座標更新</string>
+  <string name="description_edit_helper_show_edit_title">描述更新</string>
+  <string name="caption_edit_helper_show_edit_title">說明更新</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">成功</string>
+  <string name="coordinates_edit_helper_show_edit_message">座標 %1$s 已添加。</string>
+  <string name="description_edit_helper_show_edit_message">描述已添加。</string>
+  <string name="caption_edit_helper_show_edit_message">說明已添加。</string>
+  <string name="coordinates_edit_helper_edit_message_else">無法添加座標。</string>
+  <string name="description_edit_helper_edit_message_else">無法添加描述。</string>
+  <string name="caption_edit_helper_edit_message_else">無法添加說明。</string>
+  <string name="coordinates_picking_unsuccessful">無法取得座標。</string>
+  <string name="descriptions_picking_unsuccessful">無法取得描述。</string>
+  <string name="description_activity_title">編輯描述與說明</string>
   <string name="share_image_via">分享圖片透過</string>
-  <string name="no_achievements_yet">您還沒有做出任何貢獻</string>
+  <string name="you_have_no_achievements_yet">您還沒有做出任何貢獻</string>
+  <string name="no_achievements_yet">%s還沒有做出任何貢獻</string>
   <string name="account_created">已建立帳號！</string>
   <string name="text_copy">文字已複製至剪貼簿</string>
   <string name="notification_mark_read">通知標記為已讀</string>
@@ -605,7 +549,6 @@
   <string name="title_for_parent_classes">父類別</string>
   <string name="upload_nearby_place_found_title">找到附近地點</string>
   <string name="upload_nearby_place_found_description">這是地點%1$s的照片嗎？</string>
-  <string name="title_app_shortcut_explore">探索</string>
   <string name="title_app_shortcut_bookmark">書籤</string>
   <string name="title_app_shortcut_setting">設定</string>
   <string name="remove_bookmark">已從書籤刪除</string>
@@ -626,26 +569,23 @@
   <string name="todo_improve">建議改進：</string>
   <string name="missing_category">- 添加分類到此圖片以增加可用性。</string>
   <string name="missing_article">- 添加此圖片到相關但尚未有圖片的維基百科條目。</string>
-  <string name="edit_category">編輯分類</string>
   <string name="add_picture_to_wikipedia_article_title">添加圖片到維基百科</string>
   <string name="add_picture_to_wikipedia_article_desc">您想要添加此圖片到%1$s維基百科條目上嗎？</string>
-  <string name="add_picture_to_wikipedia_instructions_title">說明</string>
-  <string name="add_picture_to_wikipedia_instructions_desc">請留意遵循編輯準則！</string>
   <string name="confirm">確認</string>
   <string name="instructions_title">說明</string>
-  <string name="wikipedia_instructions_step_1">1. 使用以下維基語法：</string>
+  <string name="wikipedia_instructions_step_1">1. 使用以下wikitext：</string>
   <string name="wikipedia_instructions_step_2">2. 點擊確認後會開啟維基百科條目。</string>
   <string name="wikipedia_instructions_step_3">3. 尋找適合插入您的圖片的章節。</string>
   <string name="wikipedia_instructions_step_4">4. 點擊章節裡的編輯按鈕（為筆狀模樣的圖案）。</string>
-  <string name="wikipedia_instructions_step_5">5. 將維基語法貼到適當的位置。</string>
-  <string name="wikipedia_instructions_step_6">6. 若有需要，可編輯維基語法來調整到適當的定位。更多相關資訊請查看&lt;a href=\"https://zh.wikipedia.org/wiki/Help:%E5%9B%BE%E5%83%8F\"&gt;此頁面&lt;/a&gt;。</string>
+  <string name="wikipedia_instructions_step_5">5. 將wikitext貼到適當的位置。</string>
+  <string name="wikipedia_instructions_step_6">6. 若有需要，可編輯wikitext來調整到適當的定位。更多相關資訊請查看&lt;a href=\"https://zh.wikipedia.org/wiki/Help:%E5%9B%BE%E5%83%8F\"&gt;此頁面&lt;/a&gt;。</string>
   <string name="wikipedia_instructions_step_7">7. 發布條目</string>
   <string name="copy_wikicode_to_clipboard">複製維基代碼到剪貼簿</string>
   <string name="pause">暫停</string>
   <string name="resume">繼續</string>
   <string name="paused">已暫停</string>
   <string name="more">更多</string>
-  <string name="favorites">個人最愛</string>
+  <string name="bookmarks">書籤</string>
   <string name="achievements_tab_title">成果</string>
   <string name="leaderboard_tab_title">排行榜</string>
   <string name="rank_prefix">排名：</string>
@@ -665,16 +605,20 @@
   <string name="leaderboard_nearby">附近</string>
   <string name="leaderboard_used">已使用</string>
   <string name="leaderboard_my_rank_button_text">我的排名</string>
-  <string name="mapbox_telemetry">遙測退出</string>
+  <string name="mapbox_telemetry">Mapbox Telemetry</string>
   <string name="telemetry_opt_out_summary">當使用附近功能時，將匿名位置與使用情況資料發送到 Mapbox</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;改善此地圖&lt;/a&gt;</string>
   <string name="limited_connection_enabled">限制連線模式已啟用！</string>
   <string name="limited_connection_disabled">限制連線模式已停用。待定上傳將會立刻恢復。</string>
-  <string name="limited_connection">限制連線</string>
+  <string name="limited_connection_mode">限制連線模式</string>
   <string name="statistics_quality">品質圖片</string>
   <string name="quality_images_info">品質圖片是符合某些品質標準（本質上大多是技術性方面）的圖表或照片，並且對於維基媒體計劃很有價值</string>
   <string name="resuming_upload">重新開始上傳…</string>
   <string name="pausing_upload">暫停上傳…</string>
+  <string name="cancelling_upload">正在取消上傳…</string>
+  <string name="cancel_upload">取消上傳</string>
+  <string name="limited_connection_explanation">您已啟用限制連線模式。在您停用此模式前，所有上傳將會暫停。</string>
+  <string name="limited_connection_is_on">限制連線模式啟用中。</string>
   <string name="media_details_tooltip">請寫一個簡短說明來描述您的圖片所展示內容。在描述中，請說出是什麼內容讓圖片有趣、典型、或罕見，並解釋來龍去脈（可見或不可見）。另外盡可能使用確切的行話術語。</string>
   <string name="depicts_tooltip">請找出並選擇該圖片所描繪出的所有概念，並盡可能具體。若圖片描繪了多個項目，請依據合理的原因內將項目給全部選擇。如果有可用的特定標籤，就不必選擇通用標籤。</string>
   <string name="categories_tooltip">請選擇適當的分類。與描寫不同，分類僅使用英文。</string>
@@ -682,4 +626,68 @@
   <string name="depicts_step_title">描述</string>
   <string name="license_step_title">媒體授權條款</string>
   <string name="media_detail_step_title">媒體詳細資料</string>
+  <string name="menu_view_category_page">檢視分類頁面</string>
+  <string name="menu_view_item_page">檢視項目頁面</string>
+  <string name="app_ui_language">應用程式使用者介面語言</string>
+  <string name="remove">移除說明和描述</string>
+  <string name="read_help_link">延伸閱讀</string>
+  <string name="media_detail_in_all_languages">在所有語言</string>
+  <string name="choose_a_location">挑選一個位置</string>
+  <string name="pan_and_zoom_to_adjust">平移和縮放來進行調整</string>
+  <string name="exit_location_picker">離開位置點選器</string>
+  <string name="select_location_location_picker">選擇位置</string>
+  <string name="show_in_map_app">顯示在地圖應用程式</string>
+  <string name="modify_location">編輯位置</string>
+  <string name="location_picker_image_view">位置點選器的圖片檢視</string>
+  <string name="location_picker_image_view_shadow">位置點選器的圖片檢視陰影</string>
+  <string name="image_location">圖片位置</string>
+  <string name="check_whether_location_is_correct">檢查位置是否正確</string>
+  <string name="label">標籤</string>
+  <string name="description">描述</string>
+  <string name="title_page_bookmarks_items">項目</string>
+  <string name="custom_selector_title">自訂選擇器</string>
+  <string name="custom_selector_empty_text">沒有圖片</string>
+  <string name="done">完成</string>
+  <string name="back">返回</string>
+  <string name="welcome_custom_picture_selector_text">歡迎來到自訂圖片選擇器</string>
+  <string name="custom_selector_info_text1">此點選器顯示已在維基共享資源上的各種不同圖片。</string>
+  <string name="custom_selector_info_text2">右邊的圖片與與左邊圖片不同，它有代表已經上傳到維基共享資源的標誌。\n請輕壓圖片來預覽。</string>
+  <string name="welcome_custom_selector_ok">棒極了</string>
+  <string name="custom_selector_already_uploaded_image_text">此圖片已上傳到維基共享資源。</string>
+  <string name="wlm_upload_info">此圖片會進入2021年維基愛古蹟競賽</string>
+  <string name="display_monuments">顯示古蹟景點</string>
+  <string name="wlm_month_message">維基愛古蹟的月份！</string>
+  <string name="learn_more">了解更多</string>
+  <string name="wlm_campaign_description">維基愛古蹟是由維基媒體舉行的國際古蹟攝影比賽</string>
+  <string name="need_permission">需要權限</string>
+  <string name="read_phone_state_permission_message">附近地圖需要讀取手機狀態來正常運作</string>
+  <string name="contributions_of_user">使用者貢獻：%s</string>
+  <string name="achievements_of_user">使用者成果：%s</string>
+  <string name="menu_view_user_page">檢視使用者頁面</string>
+  <string name="edit_depictions">編輯描寫</string>
+  <string name="edit_categories">編輯分類</string>
+  <string name="advanced_options">進階選項</string>
+  <string name="advanced_query_info_text">您可以自定義附近查詢。若發生錯誤，請重新設定並套用。</string>
+  <string name="apply">套用</string>
+  <string name="reset">重新設定</string>
+  <string name="location_message">位置資料能幫助 Wiki 編輯者來找到您的圖片，來讓圖片更有用。\n您近期上傳的內容沒有位置。\n因此我們建議您啟動在您的相機應用程式設定裡的位置。\n非常感謝您的上傳！</string>
+  <string name="no_location_found_title">沒有找到位置</string>
+  <string name="no_location_found_message">是否要加入這張圖片拍攝的地點？\n位置資料有助於 Wiki 編輯者找到您的圖片，使其更有用。\n謝謝！</string>
+  <string name="add_location">新增位置</string>
+  <string name="feedback_sharing_data_alert">請移除來自此電子郵件中您無意公開分享的任何資訊。另外請注意，您用來發布訊息的電子郵件地址、關聯名稱、與個人資料圖片會公開顯示。</string>
+  <string name="explore_map_details">詳細資料</string>
+  <string name="achievements_unavailable_beta">成果僅在生產版本可用，請查閱開發者文件。</string>
+  <string name="leaderboard_unavailable_beta">排行榜僅在生產版本可用，請查閱開發者文件。</string>
+  <string name="copyright_popup">請只上傳由您自己拍攝的圖片。上傳受版權保護圖片的使用者將會被阻擋。Beta測試版本也適用此規則。感謝您測試此應用程式！</string>
+  <string name="select_feedback_data_choice">請取消選擇您不要公開分享的資訊。</string>
+  <string name="api_level">API 層級</string>
+  <string name="android_version">Android 版本</string>
+  <string name="device_manufacturer">裝置製造商</string>
+  <string name="device_model">裝置型號</string>
+  <string name="device_name">裝置名稱</string>
+  <string name="network_type">網路類型</string>
+  <string name="thanks_feedback">感謝您提供意見回饋</string>
+  <string name="error_feedback">在發送意見回饋時發生錯誤</string>
+  <string name="enter_description">您的意見回饋是？</string>
+  <string name="your_feedback">您的意見回饋</string>
 </resources>

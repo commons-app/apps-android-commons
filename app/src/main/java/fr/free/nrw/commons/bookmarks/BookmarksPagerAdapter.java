@@ -19,7 +19,14 @@ public class BookmarksPagerAdapter extends FragmentPagerAdapter {
 
     private ArrayList<BookmarkPages> pages;
 
-    BookmarksPagerAdapter(FragmentManager fm, Context context) {
+    /**
+     * Default Constructor
+     * @param fm
+     * @param context
+     * @param onlyPictures is true if the fragment requires only BookmarkPictureFragment
+     *                     (i.e. when no user is logged in).
+     */
+    BookmarksPagerAdapter(FragmentManager fm, Context context,boolean onlyPictures) {
         super(fm);
         pages = new ArrayList<>();
         Bundle picturesBundle = new Bundle();
@@ -28,13 +35,21 @@ public class BookmarksPagerAdapter extends FragmentPagerAdapter {
         pages.add(new BookmarkPages(
                 new BookmarkListRootFragment(picturesBundle, this),
                 context.getString(R.string.title_page_bookmarks_pictures)));
+        if (!onlyPictures) {
+            // if onlyPictures is false we also add the location fragment.
+            Bundle locationBundle = new Bundle();
+            locationBundle.putString("categoryName",
+                context.getString(R.string.title_page_bookmarks_locations));
+            locationBundle.putInt("order", 1);
+            pages.add(new BookmarkPages(
+                new BookmarkListRootFragment(locationBundle, this),
+                context.getString(R.string.title_page_bookmarks_locations)));
 
-        Bundle locationBundle = new Bundle();
-        locationBundle.putString("categoryName", context.getString(R.string.title_page_bookmarks_locations));
-        locationBundle.putInt("order", 1);
-        pages.add(new BookmarkPages(
-            new BookmarkListRootFragment(locationBundle, this),
-            context.getString(R.string.title_page_bookmarks_locations)));
+            locationBundle.putInt("orderItem", 2);
+            pages.add(new BookmarkPages(
+                new BookmarkListRootFragment(locationBundle, this),
+                context.getString(R.string.title_page_bookmarks_items)));
+        }
         notifyDataSetChanged();
     }
 

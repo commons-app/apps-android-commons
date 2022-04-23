@@ -32,11 +32,13 @@ public interface UploadMediaDetailsContract {
 
         void showBadImagePopup(Integer errorCode, UploadItem uploadItem);
 
-        void showMapWithImageCoordinates(boolean shouldShow);
+        void showConnectionErrorPopup();
 
         void showExternalMap(UploadItem uploadItem);
 
         void updateMediaDetails(List<UploadMediaDetail> uploadMediaDetails);
+
+        void displayAddLocationDialog(Runnable runnable);
     }
 
     interface UserActionListener extends BasePresenter<View> {
@@ -45,7 +47,9 @@ public interface UploadMediaDetailsContract {
 
         void verifyImageQuality(int uploadItemIndex);
 
-        void fetchPreviousTitleAndDescription(int indexInViewFlipper);
+        void copyTitleAndDescriptionToSubsequentMedia(int indexInViewFlipper);
+
+        void fetchTitleAndDescription(int indexInViewFlipper);
 
         void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex);
 

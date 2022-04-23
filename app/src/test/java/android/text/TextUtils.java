@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 /**
  * This Class Mocks TextUtils for the purpose of testing.
  * NOTE: This class would not change the function of the TextUtils used in app
- * it onlt mocks it for the unit tests
+ * it only mocks it for the unit tests
  *
  */
 public class TextUtils {

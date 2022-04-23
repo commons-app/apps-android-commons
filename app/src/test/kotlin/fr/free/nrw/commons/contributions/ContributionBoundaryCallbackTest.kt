@@ -49,7 +49,8 @@ class ContributionBoundaryCallbackTest {
         MockitoAnnotations.initMocks(this)
         scheduler = Schedulers.trampoline()
         contributionBoundaryCallback =
-            ContributionBoundaryCallback(repository, sessionManager, mediaClient, scheduler);
+            ContributionBoundaryCallback(repository, sessionManager, mediaClient, scheduler)
+        contributionBoundaryCallback.userName = "test"
     }
 
     @Test
@@ -84,8 +85,6 @@ class ContributionBoundaryCallbackTest {
         whenever(mediaClient.getMediaListForUser(anyString()))
             .thenReturn(Single.just(listOf(media())))
         contributionBoundaryCallback.onItemAtFrontLoaded(mock(Contribution::class.java))
-        verify(repository).save(anyList());
-        verify(mediaClient).getMediaListForUser(anyString());
     }
 
     @Test

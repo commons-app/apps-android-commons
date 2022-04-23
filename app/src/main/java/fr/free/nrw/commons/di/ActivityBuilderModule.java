@@ -3,12 +3,14 @@ package fr.free.nrw.commons.di;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import fr.free.nrw.commons.AboutActivity;
+import fr.free.nrw.commons.LocationPicker.LocationPickerActivity;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SignupActivity;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
-import fr.free.nrw.commons.category.CategoryImagesActivity;
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity;
+import fr.free.nrw.commons.description.DescriptionEditActivity;
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.notification.NotificationActivity;
@@ -36,19 +38,22 @@ public abstract class ActivityBuilderModule {
     abstract MainActivity bindContributionsActivity();
 
     @ContributesAndroidInjector
+    abstract CustomSelectorActivity bindCustomSelectorActivity();
+
+    @ContributesAndroidInjector
     abstract SettingsActivity bindSettingsActivity();
 
     @ContributesAndroidInjector
     abstract AboutActivity bindAboutActivity();
 
     @ContributesAndroidInjector
+    abstract LocationPickerActivity bindLocationPickerActivity();
+
+    @ContributesAndroidInjector
     abstract SignupActivity bindSignupActivity();
 
     @ContributesAndroidInjector
     abstract NotificationActivity bindNotificationActivity();
-
-    @ContributesAndroidInjector
-    abstract CategoryImagesActivity bindFeaturedImagesActivity();
 
     @ContributesAndroidInjector
     abstract UploadActivity bindUploadActivity();
@@ -67,4 +72,7 @@ public abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector
     abstract ReviewActivity bindReviewActivity();
+
+    @ContributesAndroidInjector
+    abstract DescriptionEditActivity bindDescriptionEditActivity();
 }

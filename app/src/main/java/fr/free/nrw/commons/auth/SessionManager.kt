@@ -111,4 +111,13 @@ class SessionManager @Inject constructor(
             .doOnComplete { currentAccount = null }
     }
 
+    /**
+     * Return a corresponding boolean preference
+     *
+     * @param key
+     * @return
+     */
+    fun getPreference(String key): boolean {
+        return defaultKvStore.getBoolean(key)
+    }
 }

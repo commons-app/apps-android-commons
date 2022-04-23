@@ -17,12 +17,15 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionDao;
+import fr.free.nrw.commons.customselector.database.UploadedStatusDao;
+import fr.free.nrw.commons.customselector.ui.selector.ImageFileLoader;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.db.AppDatabase;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadController;
+import fr.free.nrw.commons.upload.depicts.DepictsDao;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import fr.free.nrw.commons.wikidata.WikidataEditListenerImpl;
@@ -63,6 +66,16 @@ public class CommonsApplicationModule {
 
     public CommonsApplicationModule(Context applicationContext) {
         this.applicationContext = applicationContext;
+    }
+
+    /**
+     * Provides ImageFileLoader used to fetch device images.
+     * @param context
+     * @return
+     */
+    @Provides
+    public ImageFileLoader providesImageFileLoader(Context context) {
+        return new ImageFileLoader(context);
     }
 
     @Provides
@@ -145,6 +158,25 @@ public class CommonsApplicationModule {
         return context.getContentResolver().acquireContentProviderClient(BuildConfig.BOOKMARK_LOCATIONS_AUTHORITY);
     }
 
+    @Provides
+    @Named("bookmarksItem")
+    public ContentProviderClient provideBookmarkItemContentProviderClient(Context context) {
+        return context.getContentResolver().acquireContentProviderClient(BuildConfig.BOOKMARK_ITEMS_AUTHORITY);
+    }
+
+    /**
+     * This method is used to provide instance of RecentLanguagesContentProvider
+     * which provides content of recent used languages from database
+     * @param context Context
+     * @return returns RecentLanguagesContentProvider
+     */
+    @Provides
+    @Named("recent_languages")
+    public ContentProviderClient provideRecentLanguagesContentProviderClient(final Context context) {
+        return context.getContentResolver()
+            .acquireContentProviderClient(BuildConfig.RECENT_LANGUAGE_AUTHORITY);
+    }
+
     /**
      * Provides a Json store instance(JsonKvStore) which keeps
      * the provided Gson in it's instance
@@ -160,7 +192,7 @@ public class CommonsApplicationModule {
     @Provides
     public UploadController providesUploadController(SessionManager sessionManager,
                                                      @Named("default_preferences") JsonKvStore kvStore,
-                                                     Context context) {
+                                                     Context context, ContributionDao contributionDao) {
         return new UploadController(sessionManager, context, kvStore);
     }
 
@@ -235,6 +267,22 @@ public class CommonsApplicationModule {
     @Provides
     public ContributionDao providesContributionsDao(AppDatabase appDatabase) {
         return appDatabase.contributionDao();
+    }
+
+    /**
+     * Get the reference of DepictsDao class.
+     */
+    @Provides
+    public DepictsDao providesDepictDao(AppDatabase appDatabase) {
+        return appDatabase.DepictsDao();
+    }
+
+    /**
+     * Get the reference of UploadedStatus class.
+     */
+    @Provides
+    public UploadedStatusDao providesUploadedStatusDao(AppDatabase appDatabase) {
+        return appDatabase.UploadedStatusDao();
     }
 
     @Provides

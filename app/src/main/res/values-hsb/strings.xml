@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* J budissin
 * Michawiki
 -->
 <resources>
+  <string name="share_license_summary" fuzzy="true">Tutón wobraz so pod %1$s licencuje</string>
   <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Nastajenja</string>
   <string name="username">Wužiwarske mjeno</string>
@@ -16,10 +18,10 @@
   <string name="uploading_started">Nahraće je so započało!</string>
   <string name="upload_completed_notification_title">%1$s nahraty!</string>
   <string name="upload_completed_notification_text">Dótkń so, zo by swoje nahraće widźał</string>
-  <string name="upload_progress_notification_title_start">Nahraće %1$S startować</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Nahraće %1$S startować</string>
   <string name="upload_progress_notification_title_in_progress">%1$s so nahrawa</string>
   <string name="upload_progress_notification_title_finishing">Nahraće %1$s so kónči</string>
-  <string name="upload_failed_notification_title">Nahraće %1$s je so njeporadźiło</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Nahraće %1$s je so njeporadźiło</string>
   <string name="upload_failed_notification_subtitle">Dótkń so, zo by sej wobhladał</string>
   <string name="title_activity_contributions" fuzzy="true">Moje nahraća</string>
   <string name="contribution_state_queued">W čakanskim rynku</string>
@@ -30,8 +32,7 @@
   <string name="menu_from_camera">Fotografować</string>
   <string name="provider_contributions">Moje nahraća</string>
   <string name="menu_share">Dźělić</string>
-  <string name="menu_open_in_browser">We wobhladowaku pokazać</string>
-  <string name="share_title_hint">Titul</string>
+  <string name="share_title_hint" fuzzy="true">Titul</string>
   <string name="share_description_hint">Wopisanje</string>
   <string name="login_failed_network">Přizjewjenje je so njeporadźiło - syćowy zmylk</string>
   <string name="login_failed_throttled" fuzzy="true">Přewjele njewuspěšnych pospytow. Prošu spytaj za něšto mjeńšin hišće raz.</string>
@@ -57,25 +58,13 @@
   <string name="no_uploads_yet">Hišće njejsy žane fota nahrał.</string>
   <string name="menu_retry_upload">Hišće raz spytać</string>
   <string name="menu_cancel_upload">Přetorhnyć</string>
-  <string name="share_license_summary">Tutón wobraz so pod %1$s licencuje</string>
   <string name="menu_download">Sćahnyć</string>
   <string name="preference_license" fuzzy="true">Licenca</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Awstriska)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Němska)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estiska)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Španiska)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Chorwatska)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxemburgska)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Nižozemska)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norwegska)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Pólska)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumunska)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
   <string name="welcome_wikipedia_text">Přinošuj swoje wobrazy. Pomhaj, nastawki Wikipedije k žiwjenju zbudźić!</string>
   <string name="welcome_wikipedia_subtext">Wobrazy na Wikipedije pochadźeja z Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Twoje wobrazy pomhaja, ludźi w cyłym swěće kubłać.</string>
@@ -87,4 +76,5 @@
   <string name="detail_description_empty">Žane wopisanje</string>
   <string name="detail_license_empty">Njeznata licenca</string>
   <string name="menu_refresh">Aktualizować</string>
+  <string name="title_page_bookmarks_pictures">Wobrazy</string>
 </resources>

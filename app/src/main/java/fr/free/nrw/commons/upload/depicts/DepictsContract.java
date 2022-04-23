@@ -1,7 +1,10 @@
 package fr.free.nrw.commons.upload.depicts;
 
+import android.content.Context;
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import fr.free.nrw.commons.BasePresenter;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import java.util.List;
 
@@ -40,6 +43,36 @@ public interface DepictsContract {
          * add depictions to list
          */
         void setDepictsList(List<DepictedItem> depictedItemList);
+
+        /**
+         * Returns required context
+         */
+        Context getFragmentContext();
+
+        /**
+         * Returns to previous fragment
+         */
+        void goBackToPreviousScreen();
+
+        /**
+         * Gets existing depictions IDs from media
+         */
+        List<String> getExistingDepictions();
+
+        /**
+         * Shows the progress dialog
+         */
+        void showProgressDialog();
+
+        /**
+         * Hides the progress dialog
+         */
+        void dismissProgressDialog();
+
+        /**
+         * Update the depictions
+         */
+        void updateDepicts();
     }
 
     interface UserActionListener extends BasePresenter<View> {
@@ -61,11 +94,31 @@ public interface DepictsContract {
         void searchForDepictions(String query);
 
         /**
+         * Selects all associated places (if any) as depictions
+         */
+        void selectPlaceDepictions();
+
+        /**
          * Check if depictions were selected
          * from the depiction list
          */
         void verifyDepictions();
 
+        /**
+         * Clears previous selections
+         */
+        void clearPreviousSelection();
+
         LiveData<List<DepictedItem>> getDepictedItems();
+
+        /**
+         * Update the depictions
+         */
+        void updateDepictions(Media media);
+
+        /**
+         * Attaches view and media
+         */
+        void onAttachViewWithMedia(@NonNull View view, Media media);
     }
 }

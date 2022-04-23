@@ -6,6 +6,7 @@ import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.PAGE_
 import static fr.free.nrw.commons.profile.leaderboard.LeaderboardConstants.START_OFFSET;
 
 import android.accounts.Account;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.Toast;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.MergeAdapter;
@@ -26,6 +29,8 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
+import fr.free.nrw.commons.profile.ProfileActivity;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -103,13 +108,31 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
      */
     private boolean scrollToRank;
 
+    private String userName;
+
+    @Override
+    public void onCreate(@Nullable final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            userName = getArguments().getString(ProfileActivity.KEY_USERNAME);
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_leaderboard, container, false);
         ButterKnife.bind(this, rootView);
 
-        progressBar.setVisibility(View.VISIBLE);
         hideLayouts();
+
+        // Leaderboard currently unimplemented in Beta flavor. Skip all API calls and disable menu
+        if(ConfigUtils.isBetaFlavour()) {
+            progressBar.setVisibility(View.GONE);
+            scrollButton.setVisibility(View.GONE);
+            return rootView;
+        }
+
+        progressBar.setVisibility(View.VISIBLE);
         setSpinners();
 
         /**
@@ -154,9 +177,32 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
             }
         });
 
-        scrollButton.setOnClickListener(view -> scrollToUserRank());
+
+            scrollButton.setOnClickListener(view -> scrollToUserRank());
+
 
         return rootView;
+    }
+
+    @Override
+    public void setMenuVisibility(boolean visible) {
+        super.setMenuVisibility(visible);
+
+        // Whenever this fragment is revealed in a menu,
+        // notify Beta users the page data is unavailable
+        if(ConfigUtils.isBetaFlavour() && visible) {
+            Context ctx = null;
+            if(getContext() != null) {
+                ctx = getContext();
+            } else if(getView() != null && getView().getContext() != null) {
+                ctx = getView().getContext();
+            }
+            if(ctx != null) {
+                Toast.makeText(ctx,
+                    R.string.leaderboard_unavailable_beta,
+                    Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     /**
@@ -176,22 +222,22 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
      * If you are viewing the leaderboard below userRank, it scrolls to the user rank at the top
      */
     private void scrollToUserRank() {
-        if (Objects.requireNonNull(leaderboardListRecyclerView.getAdapter()).getItemCount() > userRank + 1) {
-            int currPosition = ((LinearLayoutManager) leaderboardListRecyclerView.getLayoutManager())
-                .findFirstCompletelyVisibleItemPosition();
-            // if you are below your rank, scroll to userRank
-            if (currPosition > userRank) {
-                leaderboardListRecyclerView.smoothScrollToPosition(userRank);
-            } else {
+
+        if(userRank==0){
+            Toast.makeText(getContext(),R.string.no_achievements_yet,Toast.LENGTH_SHORT).show();
+        }else {
+            if (Objects.requireNonNull(leaderboardListRecyclerView.getAdapter()).getItemCount()
+                > userRank + 1) {
                 leaderboardListRecyclerView.smoothScrollToPosition(userRank + 1);
-            }
-        } else {
-            if (viewModel != null) {
-                viewModel.refresh(duration, category, userRank + 1, 0);
-                setLeaderboard(duration, category, userRank + 1, 0);
-                scrollToRank = true;
+            } else {
+                if (viewModel != null) {
+                    viewModel.refresh(duration, category, userRank + 1, 0);
+                    setLeaderboard(duration, category, userRank + 1, 0);
+                    scrollToRank = true;
+                }
             }
         }
+              
     }
 
     /**
@@ -217,7 +263,7 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
         if (checkAccount()) {
             try {
                 compositeDisposable.add(okHttpJsonApiClient
-                    .getLeaderboard(Objects.requireNonNull(sessionManager.getCurrentAccount()).name,
+                    .getLeaderboard(Objects.requireNonNull(userName),
                         duration, category, null, null)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

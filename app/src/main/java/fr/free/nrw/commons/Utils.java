@@ -13,9 +13,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.browser.customtabs.CustomTabColorSchemeParams;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
 
+import fr.free.nrw.commons.kvstore.JsonKvStore;
+import java.util.Date;
 import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.page.PageTitle;
 
@@ -28,6 +31,7 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
 import static android.widget.Toast.LENGTH_SHORT;
+import static fr.free.nrw.commons.campaigns.CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE;
 
 public class Utils {
 
@@ -139,9 +143,13 @@ public class Utils {
             return;
         }
 
+        final CustomTabColorSchemeParams color = new CustomTabColorSchemeParams.Builder()
+            .setToolbarColor(ContextCompat.getColor(context, R.color.primaryColor))
+            .setSecondaryToolbarColor(ContextCompat.getColor(context, R.color.primaryDarkColor))
+            .build();
+
         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-        builder.setToolbarColor(ContextCompat.getColor(context, R.color.primaryColor));
-        builder.setSecondaryToolbarColor(ContextCompat.getColor(context, R.color.primaryDarkColor));
+        builder.setDefaultColorSchemeParams(color);
         builder.setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         CustomTabsIntent customTabsIntent = builder.build();
         // Clear previous browser tasks, so that back/exit buttons work as intended.
@@ -173,9 +181,13 @@ public class Utils {
     public static Bitmap getScreenShot(View view) {
         View screenView = view.getRootView();
         screenView.setDrawingCacheEnabled(true);
-        Bitmap bitmap = Bitmap.createBitmap(screenView.getDrawingCache());
-        screenView.setDrawingCacheEnabled(false);
-        return bitmap;
+        Bitmap drawingCache = screenView.getDrawingCache();
+        if (drawingCache != null) {
+            Bitmap bitmap = Bitmap.createBitmap(drawingCache);
+            screenView.setDrawingCacheEnabled(false);
+            return bitmap;
+        }
+        return null;
     }
 
     /*
@@ -199,6 +211,36 @@ public class Utils {
         SpannableString content = new SpannableString(context.getString(stringResourceName));
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         textView.setText(content);
+    }
+
+    /**
+     * For now we are enabling the monuments only when the date lies between 1 Sept & 31 OCt
+     * @param date
+     * @return
+     */
+    public static boolean isMonumentsEnabled(final Date date) {
+        if (date.getMonth() == 8) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Util function to get the start date of wlm monument
+     * For this release we are hardcoding it to be 1st September
+     * @return
+     */
+    public static String getWLMStartDate() {
+        return "1 Sep";
+    }
+
+    /***
+     * Util function to get the end date of wlm monument
+     * For this release we are hardcoding it to be 31st October
+     * @return
+     */
+    public static String getWLMEndDate() {
+        return "30 Sep";
     }
 
 }

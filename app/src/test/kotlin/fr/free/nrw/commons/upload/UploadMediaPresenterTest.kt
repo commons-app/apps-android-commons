@@ -45,6 +45,9 @@ class UploadMediaPresenterTest {
     private lateinit var uploadItem: UploadItem
 
     @Mock
+    private lateinit var imageCoordinates: ImageCoordinates
+
+    @Mock
     private lateinit var uploadMediaDetails: List<UploadMediaDetail>
 
     private lateinit var testObservableUploadItem: Observable<UploadItem>
@@ -93,18 +96,39 @@ class UploadMediaPresenterTest {
     }
 
     /**
-     * unit test for method UploadMediaPresenter.verifyImageQuality
+     * unit test for method UploadMediaPresenter.verifyImageQuality (For else case)
      */
     @Test
     fun verifyImageQualityTest() {
         whenever(repository.uploads).thenReturn(listOf(uploadItem))
         whenever(repository.getImageQuality(uploadItem))
             .thenReturn(testSingleImageResult)
-        whenever(uploadItem.imageQuality).thenReturn(ArgumentMatchers.anyInt())
+        whenever(uploadItem.imageQuality).thenReturn(0)
+        whenever(uploadItem.gpsCoords)
+            .thenReturn(imageCoordinates)
+        whenever(uploadItem.gpsCoords.decimalCoords)
+            .thenReturn("imageCoordinates")
         uploadMediaPresenter.verifyImageQuality(0)
         verify(view).showProgress(true)
         testScheduler.triggerActions()
         verify(view).showProgress(false)
+    }
+
+    /**
+     * unit test for method UploadMediaPresenter.verifyImageQuality (For if case)
+     */
+    @Test
+    fun `verify ImageQuality Test while coordinates equals to null`() {
+        whenever(repository.uploads).thenReturn(listOf(uploadItem))
+        whenever(repository.getImageQuality(uploadItem))
+            .thenReturn(testSingleImageResult)
+        whenever(uploadItem.imageQuality).thenReturn(0)
+        whenever(uploadItem.gpsCoords)
+            .thenReturn(imageCoordinates)
+        whenever(uploadItem.gpsCoords.decimalCoords)
+            .thenReturn(null)
+        uploadMediaPresenter.verifyImageQuality(0)
+        testScheduler.triggerActions()
     }
 
     /**
@@ -164,28 +188,17 @@ class UploadMediaPresenterTest {
     }
 
     /**
-     * Test fetch previous image title when there was one
+     * Test fetch image title when there was one
      */
     @Test
-    fun fetchPreviousImageAndTitleTestPositive() {
+    fun fetchImageAndTitleTest() {
         whenever(repository.uploads).thenReturn(listOf(uploadItem))
-        whenever(repository.getPreviousUploadItem(ArgumentMatchers.anyInt()))
+        whenever(repository.getUploadItem(ArgumentMatchers.anyInt()))
             .thenReturn(uploadItem)
         whenever(uploadItem.uploadMediaDetails).thenReturn(listOf())
 
-        uploadMediaPresenter.fetchPreviousTitleAndDescription(0)
+        uploadMediaPresenter.fetchTitleAndDescription(0)
         verify(view).updateMediaDetails(ArgumentMatchers.any())
-    }
-
-    /**
-     * Test fetch previous image title when there was none
-     */
-    @Test
-    fun fetchPreviousImageAndTitleTestNegative() {
-        whenever(repository.getPreviousUploadItem(ArgumentMatchers.anyInt()))
-            .thenReturn(null)
-        uploadMediaPresenter.fetchPreviousTitleAndDescription(0)
-        verify(view).showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
     }
 
     /**

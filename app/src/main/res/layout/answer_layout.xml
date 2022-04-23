@@ -1,65 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_marginTop="@dimen/activity_margin_vertical"
-    android:layout_marginBottom="@dimen/activity_margin_vertical">
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_marginTop="@dimen/activity_margin_vertical"
+  android:layout_marginBottom="@dimen/activity_margin_vertical"
+  android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+    <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_percent="0.5" />
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/quiz_positive_answer"
-            android:textIsSelectable="false"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal"
-            android:layout_marginRight="@dimen/activity_margin_horizontal"/>
+    <Button
+      android:id="@+id/quiz_positive_answer"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:text="@string/yes"
+      android:textColor="@color/white"
+      android:layout_marginLeft="@dimen/activity_margin_horizontal"
+      android:layout_marginRight="@dimen/activity_margin_horizontal"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@+id/guideline"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="YES"
-            style="?android:textAppearanceMedium"
-            android:textColor="@color/secondaryTextColor" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_done_black_24dp"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_margin_vertical"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textIsSelectable="false"
-            android:id="@+id/quiz_negative_answer"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal"
-            android:layout_marginRight="@dimen/activity_margin_horizontal"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="NO"
-            style="?android:textAppearanceMedium"
-            android:textColor="@color/secondaryTextColor" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_clear_black_24dp"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal" />
-    </LinearLayout>
-</LinearLayout>
+    <Button
+      android:id="@+id/quiz_negative_answer"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:text="@string/no"
+      android:textColor="@color/white"
+      android:layout_marginLeft="@dimen/activity_margin_horizontal"
+      android:layout_marginRight="@dimen/activity_margin_horizontal"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="@+id/guideline"
+      app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

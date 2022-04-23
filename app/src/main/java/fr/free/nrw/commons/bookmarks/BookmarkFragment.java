@@ -4,77 +4,108 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.explore.ParentViewPager;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.theme.BaseActivity;
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.contributions.ContributionController;
-import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import javax.inject.Named;
 
 public class BookmarkFragment extends CommonsDaggerSupportFragment {
 
-  private FragmentManager supportFragmentManager;
-  private BookmarksPagerAdapter adapter;
-  @BindView(R.id.viewPagerBookmarks)
-  ViewPager viewPager;
-  @BindView(R.id.tab_layout)
-  TabLayout tabLayout;
-  @BindView(R.id.fragmentContainer)
-  FrameLayout fragmentContainer;
+    private FragmentManager supportFragmentManager;
+    private BookmarksPagerAdapter adapter;
+    @BindView(R.id.viewPagerBookmarks)
+    ParentViewPager viewPager;
+    @BindView(R.id.tab_layout)
+    TabLayout tabLayout;
+    @BindView(R.id.fragmentContainer)
+    FrameLayout fragmentContainer;
 
-  @Inject
-  ContributionController controller;
+    @Inject
+    ContributionController controller;
+    /**
+     * To check if the user is loggedIn or not.
+     */
+    @Inject
+    @Named("default_preferences")
+    public
+    JsonKvStore applicationKvStore;
 
-  @NonNull
-  public static BookmarkFragment newInstance() {
-    BookmarkFragment fragment = new BookmarkFragment();
-    fragment.setRetainInstance(true);
-    return fragment;
-  }
+    @NonNull
+    public static BookmarkFragment newInstance() {
+        BookmarkFragment fragment = new BookmarkFragment();
+        fragment.setRetainInstance(true);
+        return fragment;
+    }
 
-  @Override
-  public void onCreate(@Nullable final Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-  }
+    public void setScroll(boolean canScroll) {
+        viewPager.setCanScroll(canScroll);
+    }
 
-  @Nullable
-  @Override
-  public View onCreateView(@NonNull final LayoutInflater inflater,
-      @Nullable final ViewGroup container,
-      @Nullable final Bundle savedInstanceState) {
-    super.onCreateView(inflater, container, savedInstanceState);
-    View view = inflater.inflate(R.layout.fragment_bookmarks, container, false);
-    ButterKnife.bind(this, view);
+    @Override
+    public void onCreate(@Nullable final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
-    // Activity can call methods in the fragment by acquiring a
-    // reference to the Fragment from FragmentManager, using findFragmentById()
-    supportFragmentManager = getChildFragmentManager();
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull final LayoutInflater inflater,
+        @Nullable final ViewGroup container,
+        @Nullable final Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_bookmarks, container, false);
+        ButterKnife.bind(this, view);
 
-    adapter = new BookmarksPagerAdapter(supportFragmentManager, getContext());
-    viewPager.setAdapter(adapter);
-    tabLayout.setupWithViewPager(viewPager);
-    return view;
-  }
+        // Activity can call methods in the fragment by acquiring a
+        // reference to the Fragment from FragmentManager, using findFragmentById()
+        supportFragmentManager = getChildFragmentManager();
 
-  public void onBackPressed() {
-    ((BookmarkListRootFragment) (adapter.getItem(tabLayout.getSelectedTabPosition())))
-        .backPressed();
-    ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-  }
+        adapter = new BookmarksPagerAdapter(supportFragmentManager, getContext(),
+            applicationKvStore.getBoolean("login_skipped"));
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
+
+        ((MainActivity) getActivity()).showTabs();
+        ((BaseActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+        setupTabLayout();
+        return view;
+    }
+
+    /**
+     * This method sets up the tab layout. If the adapter has only one element it sets the
+     * visibility of tabLayout to gone.
+     */
+    public void setupTabLayout() {
+        tabLayout.setVisibility(View.VISIBLE);
+        if (adapter.getCount() == 1) {
+            tabLayout.setVisibility(View.GONE);
+        }
+    }
+
+
+    public void onBackPressed() {
+        if (((BookmarkListRootFragment) (adapter.getItem(tabLayout.getSelectedTabPosition())))
+            .backPressed()) {
+            // The event is handled internally by the adapter , no further action required.
+            return;
+        }
+        // Event is not handled by the adapter ( performed back action ) change action bar.
+        ((BaseActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+    }
 }

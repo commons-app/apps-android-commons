@@ -199,6 +199,12 @@ class MediaClientTest {
         mediaClient.doesPageContainMedia("").test().assertValue(true)
     }
 
+    @Test
+    fun getWikiText() {
+        val wikiText = mock<MwQueryResponse>()
+        whenever(mediaDetailInterface.getWikiText("File:Test.jpg")).thenReturn(Single.just(wikiText))
+    }
+
     private fun mockQuery(queryReceiver: MwQueryResult.() -> Unit): MwQueryResponse {
         val mwQueryResponse = mock<MwQueryResponse>()
         val mwQueryResult = mock<MwQueryResult>()

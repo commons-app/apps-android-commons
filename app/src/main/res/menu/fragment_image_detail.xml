@@ -19,7 +19,7 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/menu_browser_current_image"
-        android:title="@string/menu_open_in_browser"
+        android:title="@string/menu_view_file_page"
         app:showAsAction="never" />
     <item
         android:id="@+id/menu_set_as_wallpaper"
@@ -28,6 +28,11 @@
     <item
       android:id="@+id/menu_set_as_avatar"
       android:title="@string/menu_set_avatar"
+      app:showAsAction="never" />
+
+    <item
+      android:id="@+id/menu_view_user_page"
+      android:title="@string/menu_view_user_page"
       app:showAsAction="never" />
 
 </menu>

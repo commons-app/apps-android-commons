@@ -3,6 +3,7 @@
 * EileenSanda
 -->
 <resources>
+  <string name="share_license_summary" fuzzy="true">Henda myndin kemur undir %1$s lisensin</string>
   <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Innstillingar</string>
   <string name="username">Brúkaranavn</string>
@@ -16,10 +17,10 @@
   <string name="uploading_started">Upplóting er byrjað!</string>
   <string name="upload_completed_notification_title">%1$s er lagt út!</string>
   <string name="upload_completed_notification_text">Trýst fyri at síggja tað sum tú legði út</string>
-  <string name="upload_progress_notification_title_start">Byrjar %1$s útlegging</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Byrjar %1$s útlegging</string>
   <string name="upload_progress_notification_title_in_progress">%1$s verður lagt út</string>
   <string name="upload_progress_notification_title_finishing">Útlegging av %1$s er við at vera liðug</string>
-  <string name="upload_failed_notification_title">Tað miseydnaðist at leggja %1$s út</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Tað miseydnaðist at leggja %1$s út</string>
   <string name="upload_failed_notification_subtitle">Trýst fyri at síggja</string>
   <string name="title_activity_contributions" fuzzy="true">Tað sum eg havi lagt út</string>
   <string name="contribution_state_queued">Í bíðirøð</string>
@@ -30,8 +31,7 @@
   <string name="menu_from_camera">Tak mynd</string>
   <string name="provider_contributions">Tað sum eg havi lagt út</string>
   <string name="menu_share">Deil</string>
-  <string name="menu_open_in_browser">Síggj í internetkaga</string>
-  <string name="share_title_hint">Heiti</string>
+  <string name="share_title_hint" fuzzy="true">Heiti</string>
   <string name="share_description_hint">Frágreiðing</string>
   <string name="login_failed_network">Ómøguligt at rita inn - feilur í netsambandinum</string>
   <string name="login_failed_throttled" fuzzy="true">Ov nógv miseydnaðar royndir. Vinarliga royn aftur um fáir minuttir</string>
@@ -58,25 +58,13 @@
   <string name="no_uploads_yet">Tú hevur ikki lagt nakrar myndir út enn.</string>
   <string name="menu_retry_upload">Royn aftur</string>
   <string name="menu_cancel_upload">Angra</string>
-  <string name="share_license_summary">Henda myndin kemur undir %1$s lisensin</string>
   <string name="menu_download">Tak niður</string>
   <string name="preference_license" fuzzy="true">Lisensur</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CC Navnageving-DeilLíka 3.0</string>
   <string name="license_name_cc_by" fuzzy="true">CC Navnageving 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Eysturríki)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Týskland)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estland)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spania)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroatia)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luksemburg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Niðurlond)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Noreg)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Pólland)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumenia)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
   <string name="welcome_wikipedia_text">Luttak við tínum myndum. Hjálp Wikipedia greinum at gerast livandi!</string>
   <string name="welcome_wikipedia_subtext">Myndir á Wikipedia koma frá Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Tínar myndir hjálpa við at útbúgva fólk kring heimin.</string>

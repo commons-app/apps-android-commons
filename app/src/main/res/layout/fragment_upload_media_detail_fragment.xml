@@ -61,7 +61,7 @@
                   android:layout_marginEnd="@dimen/standard_gap"
                   android:layout_marginRight="@dimen/standard_gap"
                   android:layout_toLeftOf="@id/ib_expand_collapse"
-                  android:visibility="gone"
+                  android:visibility="visible"
                   app:srcCompat="@drawable/ic_map_white_24dp"
                   tools:visibility="visible" />
 
@@ -99,11 +99,11 @@
 
 
                 <androidx.appcompat.widget.AppCompatButton
-                  android:id="@+id/btn_copy_prev_title_desc"
+                  android:id="@+id/btn_copy_subsequent_media"
                   style="@style/Widget.AppCompat.Button.Borderless"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:text="@string/previous_image_caption_description"
+                  android:text="@string/copy_image_caption_description"
                   android:padding="@dimen/miniscule_margin"
                   android:textAlignment="textEnd"
                   android:textColor="@color/button_blue"

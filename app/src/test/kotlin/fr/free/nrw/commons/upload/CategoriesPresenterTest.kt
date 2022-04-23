@@ -8,10 +8,13 @@ import fr.free.nrw.commons.upload.categories.CategoriesContract
 import fr.free.nrw.commons.upload.categories.CategoriesPresenter
 import io.reactivex.Observable
 import io.reactivex.schedulers.TestScheduler
+import media
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import org.powermock.reflect.Whitebox
+import java.lang.reflect.Method
 
 /**
  * The class contains unit test cases for CategoriesPresenter
@@ -38,6 +41,27 @@ class CategoriesPresenterTest {
         categoriesPresenter = CategoriesPresenter(repository, testScheduler, testScheduler)
         categoriesPresenter.onAttachView(view)
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnAttachViewWithMedia() {
+        categoriesPresenter.onAttachViewWithMedia(view, media())
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Test onAttachViewWithMedia when media is not null`() {
+        Whitebox.setInternalState(categoriesPresenter, "media", media())
+        whenever(repository.getCategories(repository.selectedExistingCategories))
+            .thenReturn(Observable.just(mutableListOf(categoryItem())))
+        whenever(repository.searchAll("mock", emptyList(), repository.selectedDepictions))
+            .thenReturn(Observable.just(mutableListOf(categoryItem())))
+        val method: Method = CategoriesPresenter::class.java.getDeclaredMethod(
+            "searchResults",
+            String::class.java
+        )
+        method.isAccessible = true
+        method.invoke(categoriesPresenter, "mock")    }
 
     /**
      * unit test case for method CategoriesPresenter.searchForCategories
@@ -67,13 +91,15 @@ class CategoriesPresenterTest {
             )
         whenever(repository.containsYear("selected")).thenReturn(false)
         whenever(repository.containsYear("doesContainYear")).thenReturn(true)
-        whenever(repository.selectedCategories).thenReturn(listOf(categoryItem("selected", true)))
+        whenever(repository.selectedCategories).thenReturn(listOf(
+            categoryItem("selected", "", "",true)))
         categoriesPresenter.searchForCategories("test")
         testScheduler.triggerActions()
         verify(view).showProgress(true)
         verify(view).showError(null)
         verify(view).setCategories(null)
-        verify(view).setCategories(listOf(categoryItem("selected", true)))
+        verify(view).setCategories(listOf(
+            categoryItem("selected", "", "", true)))
         verify(view).showProgress(false)
         verifyNoMoreInteractions(view)
     }
@@ -120,6 +146,16 @@ class CategoriesPresenterTest {
     fun onCategoryItemClickedTest() {
         val categoryItem = categoryItem()
         categoriesPresenter.onCategoryItemClicked(categoryItem)
-        verify(repository).onCategoryClicked(categoryItem)
+        verify(repository).onCategoryClicked(categoryItem, null)
+    }
+
+    @Test
+    fun testClearPreviousSelection() {
+        categoriesPresenter.clearPreviousSelection()
+    }
+
+    @Test
+    fun testUpdateCategories() {
+        categoriesPresenter.updateCategories(media(), "[[Category:Test]]")
     }
 }

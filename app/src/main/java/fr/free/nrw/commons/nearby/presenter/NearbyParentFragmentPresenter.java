@@ -1,11 +1,12 @@
 package fr.free.nrw.commons.nearby.presenter;
 
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.MainThread;
+import androidx.annotation.Nullable;
 import com.mapbox.mapboxsdk.annotations.Marker;
 
+import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +14,6 @@ import java.util.List;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.CheckBoxTriStates;
 import fr.free.nrw.commons.nearby.Label;
@@ -26,6 +26,7 @@ import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.CUSTOM_QUERY;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
@@ -33,6 +34,7 @@ import static fr.free.nrw.commons.location.LocationServiceManager.LocationChange
 import static fr.free.nrw.commons.nearby.CheckBoxTriStates.CHECKED;
 import static fr.free.nrw.commons.nearby.CheckBoxTriStates.UNCHECKED;
 import static fr.free.nrw.commons.nearby.CheckBoxTriStates.UNKNOWN;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 public class NearbyParentFragmentPresenter
         implements NearbyParentFragmentContract.UserActions,
@@ -45,6 +47,8 @@ public class NearbyParentFragmentPresenter
     private boolean placesLoadedOnce;
 
     BookmarkLocationsDao bookmarkLocationDao;
+
+    private @Nullable String customQuery;
 
     private static final NearbyParentFragmentContract.View DUMMY = (NearbyParentFragmentContract.View) Proxy.newProxyInstance(
             NearbyParentFragmentContract.View.class.getClassLoader(),
@@ -83,6 +87,12 @@ public class NearbyParentFragmentPresenter
         this.nearbyParentFragmentView=DUMMY;
     }
 
+    @Override
+    public void removeNearbyPreferences(JsonKvStore applicationKvStore) {
+        Timber.d("Remove place objects");
+        applicationKvStore.remove(PLACE_OBJECT);
+    }
+
     public void initializeMapOperations() {
         lockUnlockNearby(false);
         updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
@@ -112,7 +122,11 @@ public class NearbyParentFragmentPresenter
 
     @Override
     public boolean backButtonClicked() {
-        if(nearbyParentFragmentView.isListBottomSheetExpanded()) {
+        if (nearbyParentFragmentView.isAdvancedQueryFragmentVisible()) {
+            nearbyParentFragmentView.showHideAdvancedQueryFragment(false);
+            return true;
+        }
+        else if(nearbyParentFragmentView.isListBottomSheetExpanded()) {
             // Back should first hide the bottom sheet if it is expanded
             nearbyParentFragmentView.listOptionMenuItemClicked();
             return true;
@@ -154,7 +168,7 @@ public class NearbyParentFragmentPresenter
      * @param locationChangeType defines if location changed significantly or slightly
      */
     @Override
-    public void updateMapAndList(LocationServiceManager.LocationChangeType locationChangeType) {
+    public void updateMapAndList(LocationChangeType locationChangeType) {
         Timber.d("Presenter updates map and list");
         if (isNearbyLocked) {
             Timber.d("Nearby is locked, so updateMapAndList returns");
@@ -178,7 +192,17 @@ public class NearbyParentFragmentPresenter
          * Significant changed - Markers and current location will be updated together
          * Slightly changed - Only current position marker will be updated
          */
-        if (locationChangeType.equals(LOCATION_SIGNIFICANTLY_CHANGED)
+        if(locationChangeType.equals(CUSTOM_QUERY)){
+            Timber.d("ADVANCED_QUERY_SEARCH");
+            lockUnlockNearby(true);
+            nearbyParentFragmentView.setProgressBarVisibility(true);
+            LatLng updatedLocationByUser = LocationUtils.deriveUpdatedLocationFromSearchQuery(customQuery);
+            if (updatedLocationByUser == null) {
+                updatedLocationByUser = lastLocation;
+            }
+            nearbyParentFragmentView.populatePlaces(updatedLocationByUser, customQuery);
+        }
+        else if (locationChangeType.equals(LOCATION_SIGNIFICANTLY_CHANGED)
                 || locationChangeType.equals(MAP_UPDATED)) {
             Timber.d("LOCATION_SIGNIFICANTLY_CHANGED");
             lockUnlockNearby(true);
@@ -219,6 +243,7 @@ public class NearbyParentFragmentPresenter
             nearbyParentFragmentView.setProgressBarVisibility(false);
             nearbyParentFragmentView.updateListFragment(nearbyPlacesInfo.placeList);
             handleCenteringTaskIfAny();
+            nearbyParentFragmentView.centerMapToPosition(nearbyPlacesInfo.searchLatLng);
         }
     }
 
@@ -290,6 +315,7 @@ public class NearbyParentFragmentPresenter
                     nearbyParentFragmentView.filterMarkersByLabels(selectedLabels,
                         NearbyFilterState.getInstance().isExistsSelected(),
                         NearbyFilterState.getInstance().isNeedPhotoSelected(),
+                        NearbyFilterState.getInstance().isWlmSelected(),
                         filterForPlaceState, false);
                     nearbyParentFragmentView.setRecyclerViewAdapterAllSelected();
                     break;
@@ -298,6 +324,7 @@ public class NearbyParentFragmentPresenter
             nearbyParentFragmentView.filterMarkersByLabels(selectedLabels,
                     NearbyFilterState.getInstance().isExistsSelected(),
                     NearbyFilterState.getInstance().isNeedPhotoSelected(),
+                    NearbyFilterState.getInstance().isWlmSelected(),
                     filterForPlaceState, false);
         }
     }
@@ -321,6 +348,11 @@ public class NearbyParentFragmentPresenter
     @Override
     public void setCheckboxUnknown() {
         nearbyParentFragmentView.setCheckBoxState(CheckBoxTriStates.UNKNOWN);
+    }
+
+    @Override
+    public void setAdvancedQuery(String query) {
+        this.customQuery = query;
     }
 
     @Override

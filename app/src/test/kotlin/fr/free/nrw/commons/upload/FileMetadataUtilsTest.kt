@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.upload
 
 import androidx.exifinterface.media.ExifInterface.*
-import junit.framework.Assert.assertTrue
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.util.*
 
@@ -16,7 +16,7 @@ class FileMetadataUtilsTest {
     @Test
     fun getTagsFromPrefAuthor() {
         val author = FileMetadataUtils.getTagsFromPref("Author")
-        val authorRef = arrayOf(TAG_ARTIST, TAG_CAMARA_OWNER_NAME);
+        val authorRef = arrayOf(TAG_ARTIST, TAG_CAMERA_OWNER_NAME);
 
         assertTrue(Arrays.deepEquals(author, authorRef))
     }

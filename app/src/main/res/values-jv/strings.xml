@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
+* Bennylin
 * Diki Ananta
 * N219
 * NoiX180
@@ -17,21 +17,19 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Miwiti %1$d unggahan</item>
     <item quantity="other">Miwiti %1$d unggahan</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d unggahan</item>
     <item quantity="other">%1$d unggahan</item>
   </plurals>
   <string name="share_license_summary" fuzzy="true">Gambar iki bakal dilisènsèkaké nganggo %1$s</string>
-  <string name="title_activity_explore">Dlajah</string>
   <string name="navigation_item_explore">Dlajah</string>
   <string name="preference_category_appearance">Cakrik</string>
   <string name="preference_category_general">Umum</string>
   <string name="preference_category_feedback">Pamrayoga</string>
-  <string name="preference_category_location">Pernah</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Setèlan</string>
@@ -51,10 +49,10 @@
   <string name="uploading_started">Wiwit ngunggah!</string>
   <string name="upload_completed_notification_title">%1$s kaunggah!</string>
   <string name="upload_completed_notification_text">Dudul saperlu ndeleng unggahané panjenengan</string>
-  <string name="upload_progress_notification_title_start">Wiwit nguggah %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Wiwit nguggah %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Ngunggah %1$s</string>
   <string name="upload_progress_notification_title_finishing">Rampung ngunggah %1$s</string>
-  <string name="upload_failed_notification_title">Wurung ngunggah %1$s</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Wurung ngunggah %1$s</string>
   <string name="upload_failed_notification_subtitle">Tunyuk saperlu ndeleng</string>
   <string name="title_activity_contributions">Unggahanku Sing Anyar</string>
   <string name="contribution_state_queued">Antrian</string>
@@ -66,30 +64,25 @@
   <string name="menu_nearby">Cedhak kéné</string>
   <string name="provider_contributions">Unggahanku</string>
   <string name="menu_share">Dum</string>
-  <string name="menu_open_in_browser">Deleng ing Pangluru</string>
   <string name="share_title_hint">Sesirah (Kudu)</string>
   <string name="share_description_hint">Wedharan</string>
   <string name="login_failed_network">Ora bisa mlebu log - jaringané gagal</string>
-  <string name="login_failed_wrong_credentials">Ora bisa mlebu log - priksa jeneng naraguna lan tembung sandi panjenengan</string>
   <string name="login_failed_throttled">Kakèhan upaya sing gagal. Jajalana manèh mengko.</string>
   <string name="login_failed_blocked">Ngapunten, naraguna iki wis diblokir ing Commons</string>
   <string name="login_failed_2fa_needed">Panjenengan kudu ngisi kodhe otèntifikasi rong faktoré panjenengan</string>
   <string name="login_failed_generic">Wurung mlebu log</string>
   <string name="share_upload_button">Unggah</string>
   <string name="multiple_share_base_title">Jenengi sèt iki</string>
-  <string name="add_set_name_toast">Wènèhi setèlan iki sesirah</string>
   <string name="provider_modifications">Owahan</string>
   <string name="menu_upload_single">Unggah</string>
   <string name="categories_search_text_hint">Golèk kategori</string>
   <string name="menu_save_categories">Simpen</string>
   <string name="refresh_button">Anyarana</string>
   <string name="display_list_button">Pratélan</string>
-  <string name="gps_disabled">GPS dipatèni ing pirantiné panjenengan. Panjenengan arep ngurubaké?</string>
-  <string name="enable_gps">Urubaké GPS</string>
   <string name="contributions_subtitle_zero" fuzzy="true">Durung ana unggahan</string>
   <string name="categories_not_found">Ora ana kategori kang cocog karo %1$s</string>
   <string name="categories_skip_explanation">Wuwuh kategori supaya gambar-gambaré panjenengan gampang tinemu ing Wikimedia Commons.\nWiwit nulis saperlu muwuhi kategori.</string>
-  <string name="categories_activity_title">Kategori</string>
+  <string name="categories_activity_title">Katégori</string>
   <string name="title_activity_settings">Setèlan</string>
   <string name="title_activity_signup">Ndhaftar</string>
   <string name="title_activity_featured_images">Gambar Pilihan</string>
@@ -109,7 +102,6 @@
   <string name="menu_download">Undhuh</string>
   <string name="preference_license" fuzzy="true">Lisènsi</string>
   <string name="use_previous" fuzzy="true">Anggo sesirah/wedharan sadurungé</string>
-  <string name="allow_gps">Otomatis masang lokasi saiki</string>
   <string name="preference_theme" fuzzy="true">Modhe wengi</string>
   <string name="license_name_cc_by_sa_four">Atribusi-DumSaèmper 4.0</string>
   <string name="license_name_cc_by_four">Atribusi 4.0</string>
@@ -117,35 +109,21 @@
   <string name="license_name_cc_by">Atribusi 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Ostenrik)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Dhitslan)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Éstoniah)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spanyol)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroasiah)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luksemberg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Néderlan)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Nurwégen)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polen)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Ruminiah)</string>
   <string name="license_name_cc_by_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Nul</string>
   <string name="tutorial_3_text">Tulung AJA ngunggah:</string>
   <string name="tutorial_4_text">Contoné unggahan:</string>
   <string name="welcome_final_text">Panjenengan sumerep, ta?</string>
   <string name="welcome_final_button_text">Iya!</string>
-  <string name="detail_panel_cats_label">Kategori</string>
+  <string name="detail_panel_cats_label">Katégori</string>
   <string name="detail_panel_cats_loading">Ngamot…</string>
   <string name="detail_panel_cats_none">Ora ana sing dipilih</string>
   <string name="detail_description_empty">Tanpa katerangan</string>
   <string name="detail_license_empty">Lisènsi ora kaweruhan</string>
   <string name="menu_refresh">Anyarana</string>
   <string name="read_storage_permission_rationale" fuzzy="true">Butuh palilah: Maca panyimpenan njaba. Aplikasi mokal mlaku yèn tanpa iki.</string>
-  <string name="location_permission_rationale">Palilah manasuka: Njupuk pernah saiki kanggo saran ing kategori</string>
   <string name="ok">Oké</string>
-  <string name="title_activity_nearby">Papan Cedhak Kéné</string>
-  <string name="no_nearby">Ora ana papan cedhak kéné</string>
   <string name="warning">Pélik</string>
   <string name="yes">Iya</string>
   <string name="no">Ora</string>
@@ -158,33 +136,24 @@
   <string name="media_detail_coordinates_empty">Ora ana kang nyepakaké</string>
   <string name="become_a_tester_title">Dadi Pangetès Béta</string>
   <string name="_2fa_code">Kodhe 2FA</string>
-  <string name="number_of_uploads">Watesan Unggahan Anyarku</string>
-  <string name="maximum_limit">Watesan Akèh Dhéwé</string>
-  <string name="maximum_limit_alert">Mokal nuduhaké yèn punjul 500</string>
-  <string name="set_limit" fuzzy="true">Setèl Watesan Unggahan Anyar</string>
-  <string name="login_failed_2fa_not_supported">Otèntifikasi rong faktor saiki durung bisa.</string>
   <string name="logout_verification">Panjenengan yakin arep metu log?</string>
   <string name="commons_logo">Logo Commons</string>
   <string name="commons_website">Situswèb Commons</string>
   <string name="commons_facebook">Kaca Facebook Commons</string>
   <string name="commons_github">Kodhe Sumber Github Commons</string>
-  <string name="background_image">Gambar Latar Wuri</string>
   <string name="mediaimage_failed">Gambar Médhia Wurung</string>
-  <string name="no_image_found">Gambar Ora Katemu</string>
   <string name="no_subcategory_found">Anak kategori ora tinemu</string>
   <string name="no_parentcategory_found">Kategori babon ora tinemu</string>
-  <string name="upload_image">Unggah Gambar</string>
   <string name="welcome_image_mount_zao">Gunung Zao</string>
   <string name="welcome_image_llamas">Llama</string>
   <string name="welcome_image_rainbow_bridge">Kreteg Kluwung</string>
   <string name="welcome_image_tulip">Tulip</string>
-  <string name="welcome_image_no_selfies">Ora Ana Swafoto</string>
   <string name="welcome_image_welcome_wikipedia">Sugeng Rawuh ing Wikipédia</string>
   <string name="welcome_image_sydney_opera_house">Wisma Opera Sydney</string>
   <string name="cancel">Wurung</string>
   <string name="navigation_drawer_open">Bukak</string>
   <string name="navigation_drawer_close">Tutup</string>
-  <string name="navigation_item_home">Tepas</string>
+  <string name="navigation_item_home">Pendhapa</string>
   <string name="navigation_item_upload">Unggah</string>
   <string name="navigation_item_nearby">Cedhak kéné</string>
   <string name="navigation_item_about">Ngenani</string>
@@ -193,12 +162,10 @@
   <string name="navigation_item_logout">Metu log</string>
   <string name="navigation_item_info">Panuntun</string>
   <string name="navigation_item_notification">Pambiwara</string>
-  <string name="navigation_item_featured_images">Pinilih</string>
   <string name="no_description_found">dhèksripsi ora tinemu</string>
   <string name="nearby_info_menu_commons_article">Kaca barkas Commons</string>
-  <string name="nearby_info_menu_wikidata_article">Wiji Wikidhata</string>
+  <string name="nearby_info_menu_wikidata_article">Wiji Wikidata</string>
   <string name="nearby_info_menu_wikipedia_article">Artikel Wikipédia</string>
-  <string name="give_permission">Awèh idin</string>
   <string name="use_external_storage" fuzzy="true">Anggo panyimpenan njaba</string>
   <string name="login_to_your_account">Mlebu log ing akun panjenengan</string>
   <string name="send_log_file">Kirim barkas log</string>
@@ -213,7 +180,6 @@
   <string name="about_translate_proceed">Banjuraké</string>
   <string name="about_translate_cancel">Wurung</string>
   <string name="retry">Jajal manèh</string>
-  <string name="showcase_view_got_it_button">Mudheng!</string>
   <string name="menu_search_button">Golèk</string>
   <string name="search_commons">Golèk ing Commons</string>
   <string name="title_activity_search">Golèk</string>

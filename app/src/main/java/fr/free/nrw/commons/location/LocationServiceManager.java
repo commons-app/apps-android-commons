@@ -1,11 +1,16 @@
 package fr.free.nrw.commons.location;
 
+import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
+import android.Manifest.permission;
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
+import androidx.core.app.ActivityCompat;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,9 +42,40 @@ public class LocationServiceManager implements LocationListener {
 
     public LatLng getLastLocation() {
         if (lastLocation == null) {
-            return null;
+                lastLocation = getLastKnownLocation();
+                if(lastLocation != null) {
+                    return LatLng.from(lastLocation);
+                }
+                else {
+                    return null;
+                }
         }
         return LatLng.from(lastLocation);
+    }
+
+    private Location getLastKnownLocation() {
+        List<String> providers = locationManager.getProviders(true);
+        Location bestLocation = null;
+        for (String provider : providers) {
+            Location l=null;
+            if (ActivityCompat.checkSelfPermission(getApplicationContext(), permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(getApplicationContext(), permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+                l = locationManager.getLastKnownLocation(provider);
+            }
+            if (l == null) {
+                continue;
+            }
+            if (bestLocation == null
+                || l.getAccuracy() < bestLocation.getAccuracy()) {
+                bestLocation = l;
+            }
+        }
+        if (bestLocation == null) {
+            return null;
+        }
+        return bestLocation;
     }
 
     /**
@@ -58,11 +94,10 @@ public class LocationServiceManager implements LocationListener {
      * @param locationProvider the location provider
      * @return true if successful
      */
-    private boolean requestLocationUpdatesFromProvider(String locationProvider) {
+    public boolean requestLocationUpdatesFromProvider(String locationProvider) {
         try {
             // If both providers are not available
-            if (locationManager == null || !(locationManager.getAllProviders().contains(LocationManager.NETWORK_PROVIDER))
-                || !(locationManager.getAllProviders().contains(LocationManager.GPS_PROVIDER))) {
+            if (locationManager == null || !(locationManager.getAllProviders().contains(locationProvider))) {
                 return false;
             }
             locationManager.requestLocationUpdates(locationProvider,
@@ -233,6 +268,7 @@ public class LocationServiceManager implements LocationListener {
         LOCATION_NOT_CHANGED,
         PERMISSION_JUST_GRANTED,
         MAP_UPDATED,
-        SEARCH_CUSTOM_AREA
+        SEARCH_CUSTOM_AREA,
+        CUSTOM_QUERY
     }
 }

@@ -4,12 +4,17 @@ import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import fr.free.nrw.commons.bookmarks.BookmarkFragment;
 import fr.free.nrw.commons.bookmarks.BookmarkListRootFragment;
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsFragment;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsFragment;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.contributions.ContributionsListFragment;
+import fr.free.nrw.commons.customselector.ui.selector.FolderFragment;
+import fr.free.nrw.commons.customselector.ui.selector.ImageFragment;
 import fr.free.nrw.commons.explore.ExploreFragment;
 import fr.free.nrw.commons.explore.ExploreListRootFragment;
+import fr.free.nrw.commons.explore.ExploreMapRootFragment;
+import fr.free.nrw.commons.explore.map.ExploreMapFragment;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.explore.categories.parent.ParentCategoriesFragment;
 import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment;
@@ -50,6 +55,12 @@ public abstract class FragmentBuilderModule {
     abstract MediaDetailFragment bindMediaDetailFragment();
 
     @ContributesAndroidInjector
+    abstract FolderFragment bindFolderFragment();
+
+    @ContributesAndroidInjector
+    abstract ImageFragment bindImageFragment();
+
+    @ContributesAndroidInjector
     abstract MediaDetailPagerFragment bindMediaDetailPagerFragment();
 
     @ContributesAndroidInjector
@@ -81,6 +92,9 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector(modules = BookmarkLocationsFragmentModule.class)
     abstract BookmarkLocationsFragment bindBookmarkLocationListFragment();
+
+    @ContributesAndroidInjector(modules = BookmarkItemsFragmentModule.class)
+    abstract BookmarkItemsFragment bindBookmarkItemListFragment();
 
     @ContributesAndroidInjector
     abstract ReviewImageFragment bindReviewOutOfContextFragment();
@@ -117,6 +131,12 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract ExploreListRootFragment bindExploreFeaturedRootFragment();
+
+    @ContributesAndroidInjector(modules = ExploreMapFragmentModule.class)
+    abstract ExploreMapFragment bindExploreNearbyUploadsFragment();
+
+    @ContributesAndroidInjector
+    abstract ExploreMapRootFragment bindExploreNearbyUploadsRootFragment();
 
     @ContributesAndroidInjector
     abstract BookmarkListRootFragment bindBookmarkListRootFragment();

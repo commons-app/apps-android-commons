@@ -12,5 +12,6 @@ class PageableSearchCategoriesDataSource @Inject constructor(
 
     override val loadFunction = { loadSize: Int, startPosition: Int ->
         categoryClient.searchCategories(query, loadSize, startPosition).blockingGet()
+            .map { it.name }
     }
 }

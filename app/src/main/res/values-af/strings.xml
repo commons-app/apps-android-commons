@@ -14,11 +14,11 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Starting %1$d upload</item>
     <item quantity="other">Starting %1$d uploads</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uploads</item>
   </plurals>
@@ -30,13 +30,11 @@
     <item quantity="one">%1$d upload</item>
     <item quantity="other">%1$d uploads</item>
   </plurals>
-  <string name="title_activity_explore">verken</string>
   <string name="navigation_item_explore">Verken</string>
   <string name="preference_category_appearance">Voorkoms</string>
   <string name="preference_category_general">Algemene</string>
   <string name="preference_category_feedback">terugvoer</string>
   <string name="preference_category_privacy">privaatheid</string>
-  <string name="preference_category_location">Plek</string>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Voorkeure</string>
   <string name="intent_share_upload_label">Uploaden na Commons</string>
@@ -55,10 +53,10 @@
   <string name="uploading_started">Oplaai het begin!</string>
   <string name="upload_completed_notification_title">%1$s opgelaai!</string>
   <string name="upload_completed_notification_text">Vat om u oplaaie te sien</string>
-  <string name="upload_progress_notification_title_start">Begin oplaai van %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Begin oplaai van %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Besig om %1$s op te laai</string>
   <string name="upload_progress_notification_title_finishing">Voltooi oplaai van %1$s</string>
-  <string name="upload_failed_notification_title">Oplaai van %1$s het gefaal</string>
+  <string name="upload_failed_notification_title" fuzzy="true">Oplaai van %1$s het gefaal</string>
   <string name="upload_failed_notification_subtitle">Vat om te kyk</string>
   <string name="title_activity_contributions">Myn recente uploads</string>
   <string name="contribution_state_queued">Gewaglys</string>
@@ -70,26 +68,21 @@
   <string name="menu_nearby">Naby</string>
   <string name="provider_contributions">My oplaaie</string>
   <string name="menu_share">Deel</string>
-  <string name="menu_open_in_browser">Wys in blaaier</string>
   <string name="share_title_hint" fuzzy="true">Titel (verplig)</string>
   <string name="share_description_hint">Beskrywing</string>
   <string name="login_failed_network">Aanmelding nie moontlik - probleem met netwerk</string>
-  <string name="login_failed_wrong_credentials">Kan nie aanmeld nie - kyk asseblief na u gebruikersnaam en wagwoord</string>
   <string name="login_failed_throttled">Te veel onsuksesvolle pogings. Probeer \'n paar minute weer.</string>
   <string name="login_failed_blocked">Die gebruiker is op Commons geblokkeer</string>
   <string name="login_failed_2fa_needed">U moet u twee-faktor-verifikasiekode verskaf.</string>
   <string name="login_failed_generic">Aanmelding het gefaal</string>
   <string name="share_upload_button">Laai op</string>
   <string name="multiple_share_base_title">Gee hierdie versameling \'n naam</string>
-  <string name="add_set_name_toast">Verskaf \'n naam vir hierdie stel</string>
   <string name="provider_modifications">Wysigings</string>
   <string name="menu_upload_single">Laai op</string>
   <string name="categories_search_text_hint">Soek kategorieë</string>
   <string name="menu_save_categories">Stoor</string>
   <string name="refresh_button">Verfris</string>
   <string name="display_list_button">Lys</string>
-  <string name="gps_disabled">GPS is uitgesit in uw apparaat. Wil u die aansit?</string>
-  <string name="enable_gps">GPS aansit</string>
   <string name="contributions_subtitle_zero" fuzzy="true">Nog geen uploads</string>
   <string name="categories_not_found">Geen kategorieë met \"%1$s\" gevind nie</string>
   <string name="categories_skip_explanation">Voeg kategorieë by om u beelde meer sigbaar te maak op Wikimedia Commons.\nBegin tik om kategorieë by te voeg.</string>
@@ -116,23 +109,11 @@
   <string name="menu_download">Laai af</string>
   <string name="preference_license">Standaard lisensie</string>
   <string name="use_previous">Gebruik vorige titel en beskrywing</string>
-  <string name="allow_gps">Outomatiess huidige ligging ophaal</string>
-  <string name="allow_gps_summary">Haal die huidige ligging op as die prent nie geo-geëtiketteer is nie, en die beeld daarmee geëtiketteer word. Waarskuwing: dit sal u huidige ligging onthul.</string>
   <string name="preference_theme" fuzzy="true">Nag-modus</string>
   <string name="license_name_cc_by_sa_four">Erkenning-DeelAlle 4.0</string>
   <string name="license_name_cc_by_four">Erkenning 4.0</string>
   <string name="license_name_cc_by_sa">Erkenning-DeelAlik 3.0</string>
   <string name="license_name_cc_by">Erkenning 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Oostenryk)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Duitsland)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estland)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spanje)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroasië)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxemburg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Nederland)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Noorweë)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Pole)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Roemenië)</string>
   <string name="tutorial_1_text">Op Wikimediuma Commons staan die meeste afbeeldings dit word in Wikipedia gebruik.</string>
   <string name="tutorial_1_subtext">Uw afbeeldings help mense dwarsoor wêreld met kennis opdoen!</string>
   <string name="tutorial_2_text">Upload asseblief alleen afbeeldings dit volledig deur uzelf gemaak wees:</string>
@@ -165,12 +146,8 @@
   <string name="read_storage_permission_rationale">Vereiste toestemming: lees eksterne berging. Die app kan nie sonder jou gallery toegang verkry nie.</string>
   <string name="write_storage_permission_rationale">Vereiste toestemming: Skryf eksterne berging. Die app kan nie sonder u kamera / gallery toegang kry nie.</string>
   <string name="location_permission_title">Vra toestemming vir ligging aan</string>
-  <string name="location_permission_rationale">Opsionele toestemming: kry die huidige ligging vir kategorievoorstelle</string>
   <string name="ok">OK</string>
-  <string name="title_activity_nearby">Plekke in die buurt</string>
-  <string name="no_nearby">Geen nabygeleë plekke gevind nie</string>
   <string name="warning">waarskuwing</string>
-  <string name="upload_image_duplicate">Hierdie lêer is al op Commons vernietig. Is u seker dat u wil voortgaan?</string>
   <string name="yes">Ja</string>
   <string name="no">Nee</string>
   <string name="media_detail_title">Titel</string>
@@ -184,32 +161,18 @@
   <string name="become_a_tester_title">Word \'n bèta tester</string>
   <string name="become_a_tester_description">Sluit aan by ons beta-kanaal op Google Play en kry vroeë toegang tot nuwe funksies en foutoplossings</string>
   <string name="_2fa_code">2FA-kode</string>
-  <string name="number_of_uploads">My onlangse oplaailimiet</string>
-  <string name="maximum_limit">Maksimum limit</string>
-  <string name="invalid_zero">Kan nie nul wees</string>
-  <string name="invalid_input">Ongeldige invoer</string>
-  <string name="maximum_limit_alert">Kan nie meer as 500 vertoon nie</string>
-  <string name="enter_valid">Geldige syfer invoer</string>
-  <string name="cannot_be_zero">Oplaai-limiet kan nie 0 wees nie</string>
-  <string name="set_limit">Onlangse oplaai-limiet</string>
-  <string name="login_failed_2fa_not_supported">Twee faktor-verifikasie word tans nie ondersteun nie.</string>
   <string name="logout_verification">Wil u regtig afmeld?</string>
   <string name="commons_logo">Commons logo</string>
   <string name="commons_website">Commons webwerf</string>
   <string name="commons_facebook">Commons Facebook bladsy</string>
   <string name="commons_github">Commons Github-bronkode</string>
-  <string name="background_image">Agtergrondprent</string>
   <string name="mediaimage_failed">Mediabeeld misluk</string>
-  <string name="no_image_found">Geen afbeelding gevind</string>
   <string name="no_subcategory_found">Geen subkategorieë gevind nie</string>
   <string name="no_parentcategory_found">Geen ouerkategorieë gevind nie</string>
-  <string name="upload_image">Laai prent op</string>
   <string name="welcome_image_mount_zao">Mount Zao</string>
   <string name="welcome_image_llamas">llamas</string>
   <string name="welcome_image_rainbow_bridge">Reënboogbrug</string>
   <string name="welcome_image_tulip">Tulip</string>
-  <string name="welcome_image_no_selfies">Geen selfies</string>
-  <string name="welcome_image_proprietary">Eiendomsbeeld</string>
   <string name="welcome_image_welcome_wikipedia">Welkom Wikipedia</string>
   <string name="welcome_image_welcome_copyright">Welkom Kopiereg</string>
   <string name="welcome_image_sydney_opera_house">Sydney Opera Huis</string>
@@ -225,18 +188,12 @@
   <string name="navigation_item_logout">Teken uit</string>
   <string name="navigation_item_info">handleiding</string>
   <string name="navigation_item_notification">Kennisgewings</string>
-  <string name="navigation_item_featured_images">Gewilde</string>
   <string name="navigation_item_review">Resensie</string>
-  <string name="nearby_needs_permissions">Nabygeleë plekke kan nie sonder liggingtoestemmings vertoon word nie</string>
   <string name="no_description_found">geen beskrywing gevind nie</string>
   <string name="nearby_info_menu_commons_article">Commons lêer bladsy</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata item</string>
   <string name="nearby_info_menu_wikipedia_article">Wikipedia-artikel</string>
-  <string name="error_while_cache">Fout tydens die kas van foto\'s</string>
-  <string name="title_info">\'N Unieke beskrywende titel vir die lêer wat as lêernaam sal dien. U mag gewone taal met spasies gebruik. Moenie die lêeruitbreiding insluit nie</string>
   <string name="description_info">Beskryf die media so veel as moontlik: Waarheen is dit geneem? Wat wys dit? Wat is die konteks? Beskryf die voorwerpe of persone. Openbaar inligting wat nie maklik geraai kan word nie, byvoorbeeld die tyd van die dag as dit \'n landskap is. As die media iets ongewoon vertoon, verduidelik dan wat dit ongewoon maak.</string>
-  <string name="upload_image_too_dark">Hierdie foto is te donker. Wil u hom definitief oplaai? Wikimedia Commons is slegs vir foto\'s met ensiklopediese waarde.</string>
-  <string name="upload_image_blurry">Hierdie foto is vaag, is jy seker dat jy dit wil oplaai? Wikimedia Commons is slegs vir foto\'s met ensiklopediese waarde.</string>
   <string name="upload_problem_exist">Potensiële probleme met hierdie beeld:</string>
   <string name="upload_problem_image_dark">Beeld is te donker.</string>
   <string name="upload_problem_image_blurry">Beeld is vaag.</string>
@@ -245,7 +202,6 @@
   <string name="upload_problem_fbmd">Laai asseblief slegs foto\'s op wat u self geneem het. Moenie foto\'s oplaai wat u op ander mense se Facebook-rekeninge gevind het nie.</string>
   <string name="upload_problem_do_you_continue">Wil u nog hierdie foto oplaai?</string>
   <string name="internet_downloaded">Laai asseblief slegs foto\'s op wat u self geneem het. Moenie prente oplaai wat u van die internet afgelaai het nie.</string>
-  <string name="give_permission">Gee toestemming</string>
   <string name="use_external_storage" fuzzy="true">Gebruik eksterne stoor</string>
   <string name="use_external_storage_summary" fuzzy="true">Stoor foto\'s wat met die in-app-kamera op u toestel geneem is</string>
   <string name="login_to_your_account">Teken in op jou rekening</string>
@@ -256,9 +212,6 @@
   <string name="nominate_deletion">Nomineer vir Verwydering</string>
   <string name="nominated_for_deletion">Dié afbeelding is genomineer vir verwydering.</string>
   <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Sien webbladsy vir details se&lt;/u&gt;</string>
-  <string name="nominating_file_for_deletion">Nominasie van %1$ s vir skrapping.</string>
-  <string name="nominating_for_deletion_status">Nominasie lêer vir skrapping:%1$s</string>
-  <string name="view_browser">Bekyk in blaaier</string>
   <string name="skip_login">Huppel</string>
   <string name="navigation_item_login">Teken aan</string>
   <string name="skip_login_title">Wil u regtig die aanmelding oorslaan?</string>
@@ -266,16 +219,8 @@
   <string name="login_alert_message">Meld u aan om hierdie funksie te gebruik</string>
   <string name="copy_wikicode">Kopieer die wikitext na die knipbord</string>
   <string name="wikicode_copied">Die wikitext is na die knipbord gekopieër</string>
-  <string name="nearby_location_has_not_changed">Ligging het nie verander nie.</string>
   <string name="nearby_location_not_available" fuzzy="true">Ligging nie beskikbaar nie.</string>
   <string name="location_permission_rationale_nearby">Toestemming word benodig om \'n lys van nabygeleë plekke te vertoon</string>
-  <string name="get_directions">Kry aanwysings</string>
-  <string name="read_article">Lees artikel</string>
-  <string name="notifications_welcome">Welkom by Wikimedia Commons,% 1 $ s! Ons is bly jy is hier.</string>
-  <string name="notifications_talk_page_message">%1$s het \'n boodskap op u besprekingsblad gelaat</string>
-  <string name="notifications_thank_you_edit">Dankie dat u \'n redigering gemaak het</string>
-  <string name="notifications_mention">%1$s het u op %2$s genoem.</string>
-  <string name="toggle_view_button">Wissel aansig</string>
   <string name="nearby_directions">Rigtings</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -284,10 +229,8 @@
   <string name="about_faq" fuzzy="true">&lt;u&gt;FAQ&lt;/u&gt;</string>
   <string name="welcome_skip_button">Slaan tutoriaal oor</string>
   <string name="no_internet">Internet nie beskikbaar nie</string>
-  <string name="internet_established">Internet beskikbaar</string>
   <string name="error_notifications">Kon nie kennisgewings haal nie</string>
   <string name="error_review">Kon nie die beeld haal vir hersiening nie. Druk verfris om weer te probeer.</string>
-  <string name="error_review_categories">Kon nie prentkategorieë haal vir hersiening nie. Druk verfris om weer te probeer.</string>
   <string name="no_notifications">Geen kennisgewings gevind nie</string>
   <string name="about_translate" fuzzy="true">&lt;u&gt;Vertaal&lt;/ u&gt;</string>
   <string name="about_translate_title">Tale</string>
@@ -295,10 +238,7 @@
   <string name="about_translate_proceed">Voortgaan</string>
   <string name="about_translate_cancel">Kanselleer</string>
   <string name="retry">Probeer weer</string>
-  <string name="showcase_view_got_it_button">Het dit</string>
   <string name="showcase_view_whole_nearby_activity">Dit is die plekke in jou omgewing wat foto\'s benodig om hul Wikipedia-artikels te illustreer.\n\nAs u op \'SOEK HIERDIE GEBIED\' klik, word die kaart gesluit en \'n nabygeleë soektog na daardie plek begin.</string>
-  <string name="showcase_view_list_icon">Deur op hierdie knoppie te tik, word \'n lys van hierdie plekke opgesom</string>
-  <string name="showcase_view_plus_fab">U kan \'n foto vir enige plek vanaf u gallery of kamera oplaai</string>
   <string name="no_images_found">Geen afbeeldings gevind!</string>
   <string name="error_loading_images">Daar is \'n fout opgetree tydens se die laden van die afbeeldings.</string>
   <string name="image_uploaded_by">Opgelaai deur:%$1s</string>
@@ -308,12 +248,10 @@
   <string name="app_widget_heading">Foto van die dag</string>
   <string name="menu_search_button">Soek</string>
   <string name="search_commons">Commons deursoek</string>
-  <string name="images_not_found">Geen beelde wat ooreenstem met %1$s gevind nie</string>
   <string name="title_activity_search">Soek</string>
   <string name="search_recent_header">Onlangse soektogte:</string>
   <string name="provider_searches">Onlangse deursoekings</string>
   <string name="error_loading_categories">Fout het voorgekom tydens die laai van kategorieë.</string>
-  <string name="error_loading_subcategories">Fout het voorgekom tydens die laai van subkategorieë.</string>
   <string name="search_tab_title_media">media</string>
   <string name="search_tab_title_categories">Kategorieë</string>
   <string name="explore_tab_title_featured">Gewilde</string>
@@ -333,7 +271,6 @@
   <string name="screenshot_answer">Skermfoto\'s van webwerwe word as afgeleide werke beskou en is onderhewig aan enige outeursreg op die webwerf self. Dit kan gebruik word na toestemming van die outeur. Sonder sodanige toestemming word enige kuns wat u maak op grond van hul werk wettiglik beskou as \'n ongelisensieerde eksemplaar wat deur die oorspronklike outeur besit word.</string>
   <string name="blurry_image_answer">Een van die doelwitte van Commons is om kwaliteit beelde te versamel. Daarom moet onscherpe prente nie opgelaai word nie. Probeer altyd mooi foto\'s neem met goeie beligting.</string>
   <string name="construction_event_answer">Foto\'s wat tegnologie of kultuur toon, is baie welkom op Commons.</string>
-  <string name="warning_for_image_reverts">WAARSKUWING: Meer as %1$ s van die prente wat u opgelaai het, is uitgevee. As u prente oplaai wat verwyder moet word, sal u rekening waarskynlik verbied word.</string>
   <string name="congratulatory_message_quiz">U het %1$s van die antwoorde korrek. Baie geluk!</string>
   <string name="warning_for_no_answer">Kies een van die twee opsies om die vraag te beantwoord</string>
   <string name="user_not_logged_in">Aanmeldingsessie is verval, meld weer aan.</string>
@@ -343,9 +280,7 @@
   <string name="wrong">Verkeerde antwoord</string>
   <string name="quiz_screenshot_question">Is hierdie skermkiekie OK om op te laai?</string>
   <string name="share_app_title">Toepassing dele</string>
-  <string name="share_coordinates_not_present">Koördinate is nie gespesifiseer tydens beeldkeuse nie</string>
   <string name="error_fetching_nearby_places">Kon nie nabygeleë plekke gaan haal nie.</string>
-  <string name="add_description">+ Beschrijving toevoeg</string>
   <string name="no_recent_searches">Geen onlangse soektogte nie</string>
   <string name="delete_recent_searches_dialog">Is u seker dat u u soekgeskiedenis wil uitvee?</string>
   <string name="delete_search_dialog">Wil u hierdie soektog uitvee?</string>
@@ -378,20 +313,16 @@
   <string name="read_notifications" fuzzy="true">Kennisgewings (geargiveer)</string>
   <string name="display_nearby_notification">Vertoon kennisgewing in die buurt</string>
   <string name="display_nearby_notification_summary" fuzzy="true">Tik hier om die naaste plek te sien waar u foto\'s benodig</string>
-  <string name="no_close_nearby">Geen nabygeleë plekke gevind nie</string>
   <string name="list_sheet">Lys</string>
   <string name="storage_permission">Bergingstoestemming</string>
   <string name="write_storage_permission_rationale_for_image_share">Ons het u toestemming nodig om toegang tot die eksterne berging van u toestel te kry om beelde op te laai.</string>
   <string name="nearby_notification_dismiss_message">U sal nie meer die naaste plek sien waar u foto\'s nodig het nie. U kan hierdie kennisgewing egter weer instel in Instellings as u wil.</string>
   <string name="step_count" fuzzy="true">Stap %1$d van %2$d</string>
-  <string name="image_in_set_label">Beeld %1$d in stel</string>
   <string name="next">volgende</string>
   <string name="previous">Vorige</string>
   <string name="submit">Indien</string>
   <string name="upload_title_duplicate" fuzzy="true">\'N Lêer met die lêernaam %1$s bestaan. Is u seker dat u wil voortgaan?</string>
   <string name="map_application_missing">Geen versoenbare kaarttoepassing kon op u toestel gevind word nie. Installeer \'n kaarttoepassing om hierdie funksie te gebruik.</string>
-  <string name="navigation_item_bookmarks">Boekmerke</string>
-  <string name="title_activity_bookmarks">Boekmerke</string>
   <string name="title_page_bookmarks_pictures">Pictures</string>
   <string name="title_page_bookmarks_locations">Plekke</string>
   <string name="menu_bookmark">Voeg/verwyder by boekmerke</string>
@@ -406,22 +337,15 @@
   <string name="deletion_reason_not_interesting">Jammer, hierdie foto is nie interessant vir \'n ensiklopedie nie</string>
   <string name="uploaded_by_myself">Opgelaai deur myself op %1$s, gebruik in %2$d artikel(s).</string>
   <string name="no_uploads">Welkom by Commons!\n\nLaai u eerste media op deur op die byvoegknoppie te tik.</string>
-  <string name="desc_language_Worldwide">Wêreldwyd</string>
-  <string name="desc_language_America">Amerika</string>
-  <string name="desc_language_Europe">Europa</string>
-  <string name="desc_language_Middle_East">Midde Ooste</string>
-  <string name="desc_language_Africa">Afrika</string>
-  <string name="desc_language_Asia">Asië</string>
-  <string name="desc_language_Pacific">Pacific</string>
   <string name="no_categories_selected">Geen kategorieë gekies nie</string>
   <string name="no_categories_selected_warning_desc" fuzzy="true">Beelde sonder kategorieë is selde bruikbaar. Is u seker dat u wil indien sonder om kategorieë te kies?</string>
-  <string name="upload_flow_all_images_in_set">(Vir alle prente in stel)</string>
+  <string name="upload_flow_all_images_in_set" fuzzy="true">(Vir alle prente in stel)</string>
   <string name="search_this_area">Soek hierdie gebied</string>
   <string name="nearby_card_permission_title">Toestemmingsversoek</string>
   <string name="nearby_card_permission_explanation">Wil u hê ons moet u huidige ligging gebruik om die naaste plek waar u foto\'s benodig te vertoon?</string>
   <string name="unable_to_display_nearest_place">Kan nie die naaste plek wat foto\'s benodig sonder toestemming vir ligging, vertoon nie</string>
   <string name="never_ask_again">Moet dit nooit weer vra nie</string>
-  <string name="display_location_permission_title">Wys toestemming vir ligging</string>
+  <string name="display_location_permission_title" fuzzy="true">Wys toestemming vir ligging</string>
   <string name="display_location_permission_explanation">Vra vir liggingstoestemming indien nodig vir die nabygeleë kennisgewingkaartweergawe.</string>
   <string name="achievements_fetch_failed">Iets het verkeerd geloop. Ons kon nie u prestasies haal nie</string>
   <string name="ends_on">Eindig op:</string>
@@ -429,7 +353,6 @@
   <string name="display_campaigns_explanation">Kyk na die lopende veldtogte</string>
   <string name="nearby_campaign_dismiss_message">U sal nie meer die veldtogte sien nie. U kan hierdie kennisgewing egter weer instel in Instellings as u wil.</string>
   <string name="this_function_needs_network_connection">Kontroleer u verbindinginstellings vir hierdie funksie.</string>
-  <string name="bad_token_error_proposed_solution">Oplaai misluk as gevolg van probleme met redigeringstoken. Probeer asseblief afmeld en weer aanmeld.</string>
   <string name="error_processing_image">Fout het voorgekom tydens die verwerking van die prent. Probeer asseblief weer!</string>
   <string name="getting_edit_token">Kry teken vir redigering</string>
   <string name="check_category_adding_template">Voeg sjabloon by vir kategorie-kontrole</string>

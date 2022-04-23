@@ -13,9 +13,7 @@
           android:id="@+id/toolbar_layout"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:background="@color/primaryDarkColor">
-
-            <include layout="@layout/toolbar"/>
+          android:background="?attr/mainBackground">
 
             <com.google.android.material.tabs.TabLayout
               android:id="@+id/tab_layout"
@@ -29,7 +27,7 @@
               app:tabTextColor="?attr/tabTextColor" />
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.viewpager.widget.ViewPager
+        <fr.free.nrw.commons.explore.ParentViewPager
           android:id="@+id/viewPager"
           android:layout_width="match_parent"
           android:layout_height="match_parent"

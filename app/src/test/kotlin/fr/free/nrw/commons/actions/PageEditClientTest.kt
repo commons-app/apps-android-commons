@@ -18,8 +18,6 @@ class PageEditClientTest {
     private lateinit var csrfTokenClient: CsrfTokenClient
     @Mock
     private lateinit var pageEditInterface: PageEditInterface
-    @Mock
-    private lateinit var service: Service
 
     private lateinit var pageEditClient: PageEditClient
 
@@ -36,7 +34,7 @@ class PageEditClientTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        pageEditClient = PageEditClient(csrfTokenClient, pageEditInterface, service)
+        pageEditClient = PageEditClient(csrfTokenClient, pageEditInterface)
     }
 
     /**
@@ -82,5 +80,16 @@ class PageEditClientTest {
         Mockito.`when`(csrfTokenClient.tokenBlocking).thenReturn("test")
         pageEditClient.prependEdit("test", "test", "test")
         verify(pageEditInterface).postPrependEdit(eq("test"), eq("test"), eq("test"), eq("test"))
+    }
+
+    /**
+     * Test setCaptions
+     */
+    @Test
+    fun testSetCaptions() {
+        Mockito.`when`(csrfTokenClient.tokenBlocking).thenReturn("test")
+        pageEditClient.setCaptions("test", "test", "en", "test")
+        verify(pageEditInterface).postCaptions(eq("test"), eq("test"), eq("en"),
+            eq("test"), eq("test"))
     }
 }

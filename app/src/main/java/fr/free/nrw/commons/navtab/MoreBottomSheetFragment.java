@@ -24,13 +24,25 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
+import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.feedback.FeedbackContentCreator;
+import fr.free.nrw.commons.feedback.model.Feedback;
+import fr.free.nrw.commons.feedback.FeedbackDialog;
+import fr.free.nrw.commons.feedback.OnFeedbackSubmitCallback;
+import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
+import io.reactivex.Single;
+import io.reactivex.SingleSource;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import java.util.concurrent.Callable;
 import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
 
 public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
@@ -40,6 +52,15 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
     @BindView(R.id.more_profile)
     TextView moreProfile;
 
+    @BindView((R.id.more_peer_review)) TextView morePeerReview;
+
+    @Inject @Named("default_preferences")
+    JsonKvStore store;
+
+    @Inject
+    @Named("commons-page-edit")
+    PageEditClient pageEditClient;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater,
@@ -47,6 +68,9 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
         super.onCreateView(inflater, container, savedInstanceState);
         final View view = inflater.inflate(R.layout.fragment_more_bottom_sheet, container, false);
         ButterKnife.bind(this, view);
+        if(store.getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED)){
+            morePeerReview.setVisibility(View.GONE);
+        }
         setUserName();
         return view;
     }
@@ -64,12 +88,19 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
      * Set the username in navigationHeader.
      */
     private void setUserName() {
-        AccountManager accountManager = AccountManager.get(getActivity());
-        Account[] allAccounts = accountManager.getAccountsByType(BuildConfig.ACCOUNT_TYPE);
+        moreProfile.setText(getUserName());
+    }
+
+    private String getUserName(){
+        final AccountManager accountManager = AccountManager.get(getActivity());
+        final Account[] allAccounts = accountManager.getAccountsByType(BuildConfig.ACCOUNT_TYPE);
         if (allAccounts.length != 0) {
             moreProfile.setText(allAccounts[0].name);
+            return allAccounts[0].name;
         }
+        return "";
     }
+
 
     @OnClick(R.id.more_logout)
     public void onLogoutClicked() {
@@ -87,6 +118,64 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
 
     @OnClick(R.id.more_feedback)
     public void onFeedbackClicked() {
+        showFeedbackDialog();
+    }
+
+    /**
+     * Creates and shows a dialog asking feedback from users
+     */
+    private void showFeedbackDialog() {
+        new FeedbackDialog(getContext(), new OnFeedbackSubmitCallback() {
+            @Override
+            public void onFeedbackSubmit(Feedback feedback) {
+                uploadFeedback(feedback);
+            }
+        }).show();
+    }
+
+    /**
+     * uploads feedback data on the server
+     */
+    void uploadFeedback(Feedback feedback) {
+        FeedbackContentCreator feedbackContentCreator = new FeedbackContentCreator(getContext(), feedback);
+
+        Single<Boolean> single =
+            pageEditClient.prependEdit("Commons:Mobile_app/Feedback", feedbackContentCreator.toString(), "Summary")
+                .flatMapSingle(result -> Single.just(result))
+                .firstOrError();
+
+        Single.defer((Callable<SingleSource<Boolean>>) () -> single)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(aBoolean -> {
+                if (aBoolean) {
+                    Toast.makeText(getContext(), getString(R.string.thanks_feedback), Toast.LENGTH_SHORT)
+                        .show();
+                } else {
+                    Toast.makeText(getContext(), getString(R.string.error_feedback),
+                        Toast.LENGTH_SHORT).show();
+                }
+            });
+    }
+
+    /**
+     * This method shows the alert dialog when a user wants to send feedback about the app.
+     */
+    private void showAlertDialog() {
+        new AlertDialog.Builder(getActivity())
+            .setMessage(R.string.feedback_sharing_data_alert)
+            .setCancelable(false)
+            .setPositiveButton(R.string.ok, (dialog, which) -> {
+                sendFeedback();
+            })
+            .show();
+    }
+
+    /**
+     * This method collects the feedback message and starts the activity with implicit intent
+     * to available email client.
+     */
+    private void sendFeedback() {
         final String technicalInfo = commonsLogSender.getExtraInfo();
 
         final Intent feedbackIntent = new Intent(Intent.ACTION_SENDTO);
@@ -126,9 +215,7 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
 
     @OnClick(R.id.more_profile)
     public void onProfileClicked() {
-        final Intent intent = new Intent(getActivity(), ProfileActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        getActivity().startActivity(intent);
+        ProfileActivity.startYourself(getActivity(), getUserName(), false);
     }
 
     @OnClick(R.id.more_peer_review)

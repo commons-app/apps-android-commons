@@ -3,9 +3,9 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_marginBottom="@dimen/activity_margin_horizontal"
-  android:padding="@dimen/standard_gap"
-  >
+  android:padding="@dimen/standard_gap">
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -67,7 +67,28 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
+    android:padding="10dp"
     android:orientation="vertical">
+
+    <LinearLayout
+      android:id="@+id/ll_info_monument_upload"
+      android:visibility="gone"
+      tools:visibility="visible"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:orientation="horizontal">
+      <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        app:srcCompat="@drawable/ic_custom_map_marker_monuments"/>
+
+      <androidx.appcompat.widget.AppCompatTextView
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:text="@string/wlm_upload_info"
+        android:layout_height="wrap_content"/>
+    </LinearLayout>
 
     <fr.free.nrw.commons.ui.widget.HtmlTextView
       android:id="@+id/tv_media_upload_policy"

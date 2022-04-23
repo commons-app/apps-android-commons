@@ -2,47 +2,43 @@ package fr.free.nrw.commons.contributions;
 
 import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
 import static fr.free.nrw.commons.contributions.Contribution.STATE_PAUSED;
+import static fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.WLM_URL;
+import static fr.free.nrw.commons.profile.ProfileActivity.KEY_USERNAME;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
-
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.MediaDataExtractor;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.notification.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
+import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.theme.BaseActivity;
-import io.reactivex.disposables.Disposable;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Named;
-
+import androidx.work.WorkManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
@@ -65,7 +61,7 @@ import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.notification.NotificationActivity;
-import fr.free.nrw.commons.upload.UploadService;
+import fr.free.nrw.commons.upload.worker.UploadWorker;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -83,7 +79,7 @@ public class ContributionsFragment
         OnBackStackChangedListener,
         LocationUpdateListener,
     MediaDetailProvider,
-    ICampaignsView, ContributionsContract.View, Callback {
+    ICampaignsView, ContributionsContract.View, Callback{
     @Inject @Named("default_preferences") JsonKvStore store;
     @Inject NearbyController nearbyController;
     @Inject OkHttpJsonApiClient okHttpJsonApiClient;
@@ -91,8 +87,6 @@ public class ContributionsFragment
     @Inject LocationServiceManager locationManager;
     @Inject NotificationController notificationController;
 
-    private UploadService uploadService;
-    private boolean isUploadServiceConnected;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     private ContributionsListFragment contributionsListFragment;
@@ -102,6 +96,8 @@ public class ContributionsFragment
 
     @BindView(R.id.card_view_nearby) public NearbyNotificationCardView nearbyNotificationCardView;
     @BindView(R.id.campaigns_view) CampaignView campaignView;
+    @BindView(R.id.limited_connection_enabled_layout) LinearLayout limitedConnectionEnabledLayout;
+    @BindView(R.id.limited_connection_description_text_view) TextView limitedConnectionDescriptionTextView;
 
     @Inject ContributionsPresenter contributionsPresenter;
 
@@ -117,6 +113,11 @@ public class ContributionsFragment
 
     public TextView notificationCount;
 
+    private Campaign wlmCampaign;
+
+    String userName;
+    private boolean isUserProfile;
+
     @NonNull
     public static ContributionsFragment newInstance() {
         ContributionsFragment fragment = new ContributionsFragment();
@@ -124,36 +125,15 @@ public class ContributionsFragment
         return fragment;
     }
 
-    /**
-     * Since we will need to use parent activity on onAuthCookieAcquired, we have to wait
-     * fragment to be attached. Latch will be responsible for this sync.
-     */
-    private ServiceConnection uploadServiceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName componentName, IBinder binder) {
-            uploadService = (UploadService) ((UploadService.UploadServiceLocalBinder) binder)
-                    .getService();
-            isUploadServiceConnected = true;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName componentName) {
-            // this should never happen
-            Timber.e(new RuntimeException("UploadService died but the rest of the process did not!"));
-            isUploadServiceConnected = false;
-        }
-
-        @Override
-        public void onBindingDied(final ComponentName name) {
-            isUploadServiceConnected = false;
-        }
-    };
     private boolean shouldShowMediaDetailsFragment;
-    private boolean isAuthCookieAcquired;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null && getArguments().getString(KEY_USERNAME) != null) {
+            userName = getArguments().getString(KEY_USERNAME);
+            isUserProfile = true;
+        }
     }
 
     @Nullable
@@ -161,6 +141,7 @@ public class ContributionsFragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contributions, container, false);
         ButterKnife.bind(this, view);
+        initWLMCampaign();
         presenter.onAttachView(this);
         contributionsPresenter.onAttachView(this);
         campaignView.setVisibility(View.GONE);
@@ -182,19 +163,36 @@ public class ContributionsFragment
         }
 
         initFragments();
-
+        if(isUserProfile) {
+            limitedConnectionEnabledLayout.setVisibility(View.GONE);
+        }else {
+            upDateUploadCount();
+        }
         if(shouldShowMediaDetailsFragment){
             showMediaDetailPagerFragment();
         }else{
+            if (mediaDetailPagerFragment != null) {
+                removeFragment(mediaDetailPagerFragment);
+            }
             showContributionsListFragment();
         }
 
         if (!ConfigUtils.isBetaFlavour() && sessionManager.isUserLoggedIn()
-            && sessionManager.getCurrentAccount() != null) {
+            && sessionManager.getCurrentAccount() != null && !isUserProfile) {
             setUploadCount();
         }
+        limitedConnectionEnabledLayout.setOnClickListener(toggleDescriptionListener);
         setHasOptionsMenu(true);
         return view;
+    }
+
+    /**
+     * Initialise the campaign object for WML
+     */
+    private void initWLMCampaign() {
+        wlmCampaign = new Campaign(getString(R.string.wlm_campaign_title),
+            getString(R.string.wlm_campaign_description), Utils.getWLMStartDate().toString(),
+            Utils.getWLMEndDate().toString(), WLM_URL, true);
     }
 
     @Override
@@ -207,7 +205,6 @@ public class ContributionsFragment
         notification.setOnClickListener(view -> {
             NotificationActivity.startYourself(getContext(), "unread");
         });
-        setNotificationCount();
         updateLimitedConnectionToggle(menu);
     }
 
@@ -218,6 +215,12 @@ public class ContributionsFragment
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(this::initNotificationViews,
                 throwable -> Timber.e(throwable, "Error occurred while loading notifications")));
+    }
+
+    public void scrollToTop( ){
+        if (contributionsListFragment != null) {
+            contributionsListFragment.scrollToTop();
+        }
     }
 
     private void initNotificationViews(List<Notification> notificationList) {
@@ -236,14 +239,22 @@ public class ContributionsFragment
             .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
 
         checkable.setChecked(isEnabled);
-        /*final SwitchCompat switchToggleLimitedConnectionMode = checkable.getActionView()
-            .findViewById(R.id.switch_toggle_limited_connection_mode);*/
+        if (isEnabled) {
+            limitedConnectionEnabledLayout.setVisibility(View.VISIBLE);
+        } else {
+            limitedConnectionEnabledLayout.setVisibility(View.GONE);
+        }
         checkable.setIcon((isEnabled) ? R.drawable.ic_baseline_cloud_off_24:R.drawable.ic_baseline_cloud_queue_24);
         checkable.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 ((MainActivity) getActivity()).toggleLimitedConnectionMode();
                 boolean isEnabled = store.getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
+                if (isEnabled) {
+                    limitedConnectionEnabledLayout.setVisibility(View.VISIBLE);
+                } else {
+                    limitedConnectionEnabledLayout.setVisibility(View.GONE);
+                }
                 checkable.setIcon((isEnabled) ? R.drawable.ic_baseline_cloud_off_24:R.drawable.ic_baseline_cloud_queue_24);
                 return false;
             }
@@ -261,7 +272,6 @@ public class ContributionsFragment
         until fragment life time ends.
          */
         if (!isFragmentAttachedBefore && getActivity() != null) {
-            onAuthCookieAcquired();
             isFragmentAttachedBefore = true;
         }
     }
@@ -272,7 +282,7 @@ public class ContributionsFragment
      */
     private void showContributionsListFragment() {
         // show nearby card view on contributions list is visible
-        if (nearbyNotificationCardView != null) {
+        if (nearbyNotificationCardView != null && !isUserProfile) {
             if (store.getBoolean("displayNearbyCardView", true)) {
                 if (nearbyNotificationCardView.cardViewVisibilityState
                     == NearbyNotificationCardView.CardViewVisibilityState.READY) {
@@ -282,13 +292,13 @@ public class ContributionsFragment
                 nearbyNotificationCardView.setVisibility(View.GONE);
             }
         }
-        showFragment(contributionsListFragment, CONTRIBUTION_LIST_FRAGMENT_TAG);
+        showFragment(contributionsListFragment, CONTRIBUTION_LIST_FRAGMENT_TAG, mediaDetailPagerFragment);
     }
 
     private void showMediaDetailPagerFragment() {
         // hide nearby card view on media detail is visible
         setupViewForMediaDetails();
-        showFragment(mediaDetailPagerFragment, MEDIA_DETAIL_PAGER_FRAGMENT_TAG);
+        showFragment(mediaDetailPagerFragment, MEDIA_DETAIL_PAGER_FRAGMENT_TAG, contributionsListFragment);
     }
 
     private void setupViewForMediaDetails() {
@@ -301,22 +311,12 @@ public class ContributionsFragment
         fetchCampaigns();
     }
 
-    /**
-     * Called when onAuthCookieAcquired is called on authenticated parent activity
-     */
-    void onAuthCookieAcquired() {
-        // Since we call onAuthCookieAcquired method from onAttach, isAdded is still false. So don't use it
-        isAuthCookieAcquired=true;
-        if (getActivity() != null) { // If fragment is attached to parent activity
-            getActivity().bindService(getUploadServiceIntent(), uploadServiceConnection, Context.BIND_AUTO_CREATE);
-            isUploadServiceConnected = true;
-        }
-
-    }
-
     private void initFragments() {
         if (null == contributionsListFragment) {
             contributionsListFragment = new ContributionsListFragment();
+            Bundle contributionsListBundle = new Bundle();
+            contributionsListBundle.putString(KEY_USERNAME, userName);
+            contributionsListFragment.setArguments(contributionsListBundle);
         }
 
         if (shouldShowMediaDetailsFragment) {
@@ -325,7 +325,7 @@ public class ContributionsFragment
             showContributionsListFragment();
         }
 
-        showFragment(contributionsListFragment, CONTRIBUTION_LIST_FRAGMENT_TAG);
+        showFragment(contributionsListFragment, CONTRIBUTION_LIST_FRAGMENT_TAG, mediaDetailPagerFragment);
     }
 
     /**
@@ -333,19 +333,41 @@ public class ContributionsFragment
      *
      * @param fragment
      * @param tag
+     * @param otherFragment
      */
-    private void showFragment(Fragment fragment, String tag) {
+    private void showFragment(Fragment fragment, String tag, Fragment otherFragment) {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.root_frame, fragment, tag);
-        transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
-        transaction.commit();
-        getChildFragmentManager().executePendingTransactions();
+        if (fragment.isAdded() && otherFragment != null) {
+            transaction.hide(otherFragment);
+            transaction.show(fragment);
+            transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
+            transaction.commit();
+            getChildFragmentManager().executePendingTransactions();
+        } else if (fragment.isAdded() && otherFragment == null) {
+            transaction.show(fragment);
+            transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
+            transaction.commit();
+            getChildFragmentManager().executePendingTransactions();
+        }else if (!fragment.isAdded() && otherFragment != null ) {
+            transaction.hide(otherFragment);
+            transaction.add(R.id.root_frame, fragment, tag);
+            transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
+            transaction.commit();
+            getChildFragmentManager().executePendingTransactions();
+        } else if (!fragment.isAdded()) {
+            transaction.replace(R.id.root_frame, fragment, tag);
+            transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
+            transaction.commit();
+            getChildFragmentManager().executePendingTransactions();
+        }
     }
 
-    public Intent getUploadServiceIntent(){
-        Intent intent = new Intent(getActivity(), UploadService.class);
-        intent.setAction(UploadService.ACTION_START_SERVICE);
-        return intent;
+    public void removeFragment(Fragment fragment) {
+        getChildFragmentManager()
+            .beginTransaction()
+            .remove(fragment)
+            .commit();
+        getChildFragmentManager().executePendingTransactions();
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -391,18 +413,25 @@ public class ContributionsFragment
             showNearbyCardPermissionRationale();
         });
 
-        if (store.getBoolean("displayNearbyCardView", true)) {
-            checkPermissionsAndShowNearbyCardView();
-            if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
-                nearbyNotificationCardView.setVisibility(View.VISIBLE);
+        // Notification cards should only be seen on contributions list, not in media details
+        if (mediaDetailPagerFragment == null && !isUserProfile) {
+            if (store.getBoolean("displayNearbyCardView", true)) {
+                checkPermissionsAndShowNearbyCardView();
+                if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
+                    nearbyNotificationCardView.setVisibility(View.VISIBLE);
+                }
+
+            } else {
+                // Hide nearby notification card view if related shared preferences is false
+                nearbyNotificationCardView.setVisibility(View.GONE);
             }
 
-        } else {
-            // Hide nearby notification card view if related shared preferences is false
-            nearbyNotificationCardView.setVisibility(View.GONE);
+            // Notification Count and Campaigns should not be set, if it is used in User Profile
+            if(!isUserProfile) {
+                setNotificationCount();
+                fetchCampaigns();
+            }
         }
-
-        fetchCampaigns();
     }
 
     private void checkPermissionsAndShowNearbyCardView() {
@@ -410,6 +439,7 @@ public class ContributionsFragment
             onLocationPermissionGranted();
         } else if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
                 && store.getBoolean("displayLocationPermissionForCardView", true)
+                && !store.getBoolean("doNotAskForLocationPermission", false)
                 && (((MainActivity) getActivity()).activeFragment == ActiveFragment.CONTRIBUTIONS)) {
             nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
             showNearbyCardPermissionRationale();
@@ -442,13 +472,14 @@ public class ContributionsFragment
 
     private void displayYouWontSeeNearbyMessage() {
         ViewUtil.showLongToast(getActivity(), getResources().getString(R.string.unable_to_display_nearest_place));
+        store.putBoolean("doNotAskForLocationPermission", true);
     }
 
 
     private void updateClosestNearbyCardViewInfo() {
         curLatLng = locationManager.getLastLocation();
         compositeDisposable.add(Observable.fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(curLatLng, curLatLng, true, false)) // thanks to boolean, it will only return closest result
+                .loadAttractionsFromLocation(curLatLng, curLatLng, true, false, false)) // thanks to boolean, it will only return closest result
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::updateNearbyNotification,
@@ -478,13 +509,6 @@ public class ContributionsFragment
             locationManager.unregisterLocationManager();
             locationManager.removeLocationListener(this);
             super.onDestroy();
-
-            if (isUploadServiceConnected) {
-                if (getActivity() != null) {
-                    getActivity().unbindService(uploadServiceConnection);
-                    isUploadServiceConnected = false;
-                }
-            }
         } catch (IllegalArgumentException | IllegalStateException exception) {
             Timber.e(exception);
         }
@@ -524,11 +548,18 @@ public class ContributionsFragment
     }
 
     /**
-     * ask the presenter to fetch the campaigns only if user has not manually disabled it
+     * As the home screen has limited space, we have choosen to show either campaigns or WLM card.
+     * The WLM Card gets the priority over monuments, so if the WLM is going on we show that instead
+     * of campaigns on the campaigns card
      */
     private void fetchCampaigns() {
-        if (store.getBoolean("displayCampaignsCardView", true)) {
+        if (Utils.isMonumentsEnabled(new Date())) {
+            campaignView.setCampaign(wlmCampaign);
+            campaignView.setVisibility(View.VISIBLE);
+        } else if (store.getBoolean(CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE, true)) {
             presenter.getCampaigns();
+        } else {
+            campaignView.setVisibility(View.GONE);
         }
     }
 
@@ -537,15 +568,21 @@ public class ContributionsFragment
     }
 
     @Override public void showCampaigns(Campaign campaign) {
-        if (campaign != null) {
+        if (campaign != null && !isUserProfile) {
             campaignView.setCampaign(campaign);
         }
     }
 
     @Override public void onDestroyView() {
         super.onDestroyView();
-        isUploadServiceConnected = false;
         presenter.onDetachView();
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        if (mediaDetailPagerFragment != null) {
+            mediaDetailPagerFragment.notifyDataSetChanged();
+        }
     }
 
     /**
@@ -556,8 +593,9 @@ public class ContributionsFragment
     @Override
     public void retryUpload(Contribution contribution) {
         if (NetworkUtils.isInternetConnectionEstablished(getContext())) {
-            if (contribution.getState() == STATE_FAILED || contribution.getState() == STATE_PAUSED || contribution.getState()==Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE && null != uploadService) {
-                uploadService.queue(contribution);
+            if (contribution.getState() == STATE_FAILED || contribution.getState() == STATE_PAUSED || contribution.getState()==Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE) {
+                contribution.setState(Contribution.STATE_QUEUED);
+                contributionsPresenter.saveContribution(contribution);
                 Timber.d("Restarting for %s", contribution.toString());
             } else {
                 Timber.d("Skipping re-upload for non-failed %s", contribution.toString());
@@ -574,7 +612,21 @@ public class ContributionsFragment
      */
     @Override
     public void pauseUpload(Contribution contribution) {
-        uploadService.pauseUpload(contribution);
+        //Pause the upload in the global singleton
+        CommonsApplication.pauseUploads.put(contribution.getPageId(), true);
+        //Retain the paused state in DB
+        contribution.setState(STATE_PAUSED);
+        contributionsPresenter.saveContribution(contribution);
+    }
+
+    /**
+     * Notify the viewpager that number of items have changed.
+     */
+    @Override
+    public void viewPagerNotifyDataSetChanged() {
+        if (mediaDetailPagerFragment != null) {
+            mediaDetailPagerFragment.notifyDataSetChanged();
+        }
     }
 
     /**
@@ -586,6 +638,9 @@ public class ContributionsFragment
     public void showDetail(int position, boolean isWikipediaButtonDisplayed) {
         if (mediaDetailPagerFragment == null || !mediaDetailPagerFragment.isVisible()) {
             mediaDetailPagerFragment = new MediaDetailPagerFragment();
+            if(isUserProfile) {
+                ((ProfileActivity)getActivity()).setScroll(false);
+            }
             showMediaDetailPagerFragment();
         }
         mediaDetailPagerFragment.showImage(position, isWikipediaButtonDisplayed);
@@ -606,20 +661,83 @@ public class ContributionsFragment
         return contributionsListFragment.getContributionStateAt(position);
     }
 
-    public void backButtonClicked() {
-        if (mediaDetailPagerFragment.isVisible()) {
-            if (store.getBoolean("displayNearbyCardView", true)) {
+    public boolean backButtonClicked() {
+        if (null != mediaDetailPagerFragment && mediaDetailPagerFragment.isVisible()) {
+            if (store.getBoolean("displayNearbyCardView", true) && !isUserProfile) {
                 if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
                     nearbyNotificationCardView.setVisibility(View.VISIBLE);
                 }
             } else {
                 nearbyNotificationCardView.setVisibility(View.GONE);
             }
-            getChildFragmentManager().popBackStack();
-            ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            ((MainActivity)getActivity()).showTabs();
-            fetchCampaigns();
+            removeFragment(mediaDetailPagerFragment);
+            showFragment(contributionsListFragment, CONTRIBUTION_LIST_FRAGMENT_TAG, mediaDetailPagerFragment);
+            if(isUserProfile) {
+                // Fragment is associated with ProfileActivity
+                // Enable ParentViewPager Scroll
+                ((ProfileActivity)getActivity()).setScroll(true);
+            }else {
+                fetchCampaigns();
+            }
+            if(getActivity() instanceof MainActivity) {
+                // Fragment is associated with MainActivity
+                ((MainActivity)getActivity()).showTabs();
+            }
+            return true;
+        }
+        return false;
+    }
+
+    // Getter for mediaDetailPagerFragment
+    public MediaDetailPagerFragment getMediaDetailPagerFragment() {
+        return mediaDetailPagerFragment;
+    }
+
+
+    /**
+     * this function updates the number of contributions
+     */
+    void upDateUploadCount() {
+        WorkManager.getInstance(getContext())
+            .getWorkInfosForUniqueWorkLiveData(UploadWorker.class.getSimpleName()).observe(
+            getViewLifecycleOwner(), workInfos -> {
+                if (workInfos.size() > 0) {
+                    setUploadCount();
+                }
+            });
+    }
+
+
+    /**
+     * Reload media detail fragment once media is nominated
+     *
+     * @param index item position that has been nominated
+     */
+    @Override
+    public void refreshNominatedMedia(int index) {
+        if(mediaDetailPagerFragment != null && !contributionsListFragment.isVisible()) {
+            removeFragment(mediaDetailPagerFragment);
+            mediaDetailPagerFragment = new MediaDetailPagerFragment(false, true);
+            mediaDetailPagerFragment.showImage(index);
+            showMediaDetailPagerFragment();
         }
     }
+
+  // click listener to toggle description that means uses can press the limited connection
+  // banner and description will hide. Tap again to show description.
+  private View.OnClickListener toggleDescriptionListener = new View.OnClickListener() {
+
+      @Override
+      public void onClick(View view) {
+          View view2 = limitedConnectionDescriptionTextView;
+          if (view2.getVisibility() == View.GONE) {
+              view2.setVisibility(View.VISIBLE);
+          } else {
+              view2.setVisibility(View.GONE);
+          }
+      }
+  };
+
+
 }
 

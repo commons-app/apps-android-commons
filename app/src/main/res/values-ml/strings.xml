@@ -26,13 +26,11 @@
     <item quantity="other">%1$d അപ്‌ലോഡുകൾ</item>
   </plurals>
   <string name="share_license_summary" fuzzy="true">ചിത്രം %1$s പ്രകാരം അനുമതി നൽകപ്പെടുന്നതാണ്</string>
-  <string name="title_activity_explore">പര്യവേഷണം</string>
   <string name="navigation_item_explore">പര്യവേഷണം</string>
   <string name="preference_category_appearance">ദൃശ്യരൂപം</string>
   <string name="preference_category_general">സാർവത്രികം</string>
   <string name="preference_category_feedback">പ്രതികരണം</string>
   <string name="preference_category_privacy">സ്വകാര്യത</string>
-  <string name="preference_category_location">സ്ഥലം</string>
   <string name="app_name">കോമൺസ്</string>
   <string name="menu_settings">സജ്ജീകരണങ്ങൾ</string>
   <string name="username">ഉപയോക്തൃനാമം</string>
@@ -50,10 +48,10 @@
   <string name="uploading_started">അപ്‌ലോഡ് തുടങ്ങി!</string>
   <string name="upload_completed_notification_title">%1$s  അപ്‌ലോഡ് ചെയ്തിരിക്കുന്നു!</string>
   <string name="upload_completed_notification_text">താങ്കളുടെ അപ്‌ലോഡ് കാണാനായി ടാപ് ചെയ്യുക</string>
-  <string name="upload_progress_notification_title_start">%1$s അപ്‌ലോഡ് തുടങ്ങുന്നു</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s അപ്‌ലോഡ് തുടങ്ങുന്നു</string>
   <string name="upload_progress_notification_title_in_progress">%1$s അപ്‌ലോഡ് ചെയ്യുന്നു</string>
   <string name="upload_progress_notification_title_finishing">%1$s അപ്‌ലോഡിങ് പൂർത്തിയാക്കുന്നു</string>
-  <string name="upload_failed_notification_title">%1$s അപ്‌ലോഡിങ് പരാജയപ്പെട്ടു</string>
+  <string name="upload_failed_notification_title" fuzzy="true">%1$s അപ്‌ലോഡിങ് പരാജയപ്പെട്ടു</string>
   <string name="upload_failed_notification_subtitle">കാണാനായി ടാപ് ചെയ്യുക</string>
   <string name="upload_paused_notification_subtitle">കാണാനായി ടാപ് ചെയ്യുക</string>
   <string name="title_activity_contributions">എന്റെ സമീപകാല അപ്‌ലോഡുകൾ</string>
@@ -66,7 +64,6 @@
   <string name="menu_nearby">സമീപസ്ഥം</string>
   <string name="provider_contributions">എന്റെ അപ്‌ലോഡുകൾ</string>
   <string name="menu_share">പങ്ക് വെയ്ക്കുക</string>
-  <string name="menu_open_in_browser">ബ്രൗസറിൽ കാണുക</string>
   <string name="share_title_hint">അടിക്കുറിപ്പ് (നിർബന്ധം)</string>
   <string name="share_description_hint">വിവരണം</string>
   <string name="login_failed_network">പ്രവേശിക്കാനായില്ല - നെറ്റ്‌വർക്ക് പരാജയപ്പെട്ടു</string>
@@ -82,8 +79,6 @@
   <string name="menu_save_categories">സേവ് ചെയ്യുക</string>
   <string name="refresh_button">പുതുക്കുക</string>
   <string name="display_list_button">പട്ടിക</string>
-  <string name="gps_disabled">താങ്കളുടെ ഉപകരണത്തിൽ ജി.പി.എസ്. പ്രവർത്തനരഹിതമാണ്. അത് പ്രവർത്തനസജ്ജമാക്കണോ?</string>
-  <string name="enable_gps">ജി.പി.എസ്. സജ്ജമാക്കുക</string>
   <string name="contributions_subtitle_zero" fuzzy="true">ഇതുവരെ അപ്‌ലോഡുകൾ ഒന്നുമില്ല</string>
   <string name="categories_not_found">%1$s എന്നതുമായി പൊരുത്തമുള്ള ഒരു വർഗ്ഗവും കണ്ടെത്താനായില്ല</string>
   <string name="categories_skip_explanation">താങ്കളുടെ ചിത്രങ്ങൾ വിക്കിമീഡിയ കോമൺസിൽ കൂടുതൽ എളുപ്പത്തിൽ കണ്ടെത്തപ്പെടാനായി വർഗ്ഗങ്ങൾ ചേർക്കുക.\n\nവർഗ്ഗങ്ങൾ ചേർക്കാനായി ടൈപ്പ് ചെയ്ത് തുടങ്ങുക.\nഈ ഘട്ടം ഒഴിവാക്കാൻ ടാപ് ചെയ്യുക (അല്ലെങ്കിൽ പിന്നോട്ട് പോവുക).</string>
@@ -112,20 +107,9 @@
   <string name="license_name_cc_by">ആട്രിബ്യൂഷൻ 3.0</string>
   <string name="license_name_cc0">സി.സി.0</string>
   <string name="license_name_cc_by_sa_3_0">സി.സി. ബൈ-എസ്.എ. 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">സി.സി. ബൈ-എസ്.എ. 3.0 (ഓസ്ട്രിയ)</string>
-  <string name="license_name_cc_by_sa_3_0_de">സി.സി. ബൈ-എസ്.എ. 3.0 (ജർമ്മനി)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">സി.സി. ബൈ-എസ്.എ. 3.0 (എസ്റ്റോണിയ)</string>
-  <string name="license_name_cc_by_sa_3_0_es">സി.സി. ബൈ-എസ്.എ. 3.0 (സ്പെയിൻ)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">സി.സി. ബൈ-എസ്.എ. 3.0 (ക്രൊയേഷ്യ)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">സി.സി. ബൈ-എസ്.എ. 3.0 (ലക്സംബർഗ്)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">സി.സി. ബൈ-എസ്.എ. 3.0 (നെതെർലാൻഡ്സ്)</string>
-  <string name="license_name_cc_by_sa_3_0_no">സി.സി. ബൈ-എസ്.എ. 3.0 (നോർവേ)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">സി.സി. ബൈ-എസ്.എ. 3.0 (പോളണ്ട്)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">സി.സി. ബൈ-എസ്.എ. 3.0 (റൊമേനിയ)</string>
   <string name="license_name_cc_by_3_0">സി.സി. ബൈ 3.0</string>
   <string name="license_name_cc_by_sa_4_0">സി.സി. ബൈ-എസ്.എ. 4.0</string>
   <string name="license_name_cc_by_4_0">സി.സി. ബൈ 4.0</string>
-  <string name="license_name_cc_zero">സി.സി. സീറോ</string>
   <string name="welcome_wikipedia_text">താങ്കളെടുക്കുന്ന ചിത്രങ്ങൾ സംഭാവന ചെയ്യുക. വിക്കിപീഡിയ ലേഖനങ്ങൾ ജീവസ്സുറ്റതാക്കിത്തീർക്കുക!</string>
   <string name="welcome_wikipedia_subtext">വിക്കിപീഡിയയിലുള്ള ചിത്രങ്ങൾ വിക്കിമീഡിയ കോമൺസിൽ നിന്നാണ്</string>
   <string name="welcome_copyright_text">താങ്കളെടുക്കുന്ന ചിത്രങ്ങൾ ലോകമെമ്പാടുമുള്ള ജനങ്ങൾക്ക് വിജ്ഞാനദായകമായിത്തീരുന്നതാണ്.</string>
@@ -141,7 +125,6 @@
   <string name="detail_license_empty">അജ്ഞാതമായ അനുമതി</string>
   <string name="menu_refresh">പുതുക്കുക</string>
   <string name="ok">ശരി</string>
-  <string name="title_activity_nearby">സമീപ സ്ഥലങ്ങൾ</string>
   <string name="warning">മുന്നറിയിപ്പ്</string>
   <string name="upload">അപ്‌ലോഡ്</string>
   <string name="yes">അതെ</string>
@@ -155,14 +138,10 @@
   <string name="media_detail_coordinates_empty">ഒന്നും നൽകിയിട്ടില്ല</string>
   <string name="commons_logo">കോമൺസ് ലോഗോ</string>
   <string name="commons_website">കോമൺസ് വെബ്‌സൈറ്റ്</string>
-  <string name="background_image">പശ്ചാത്തല ചിത്രം</string>
-  <string name="upload_image">ചിത്രം അപ്‌ലോഡ് ചെയ്യുക</string>
   <string name="welcome_image_mount_zao">സാവോ പർവ്വതം</string>
   <string name="welcome_image_llamas">ലാമകൾ</string>
   <string name="welcome_image_rainbow_bridge">മഴവിൽ പാലം</string>
   <string name="welcome_image_tulip">തുലിപ്</string>
-  <string name="welcome_image_no_selfies">സെൽഫികൾ വേണ്ട</string>
-  <string name="welcome_image_proprietary">പകർപ്പവകാശ സംരക്ഷിത ചിത്രം</string>
   <string name="welcome_image_sydney_opera_house">സിഡ്നി ഓപെറാ ഹൗസ്</string>
   <string name="cancel">റദ്ദാക്കുക</string>
   <string name="navigation_drawer_open">തുറക്കുക</string>
@@ -176,14 +155,11 @@
   <string name="navigation_item_logout">ലോഗൗട്ട്</string>
   <string name="navigation_item_info">സഹായം</string>
   <string name="navigation_item_notification">അറിയിപ്പുകൾ</string>
-  <string name="navigation_item_featured_images">തിരഞ്ഞെടുക്കപ്പെട്ടത്</string>
   <string name="no_description_found">വിവരണങ്ങൾ ഒന്നും കണ്ടെത്തിയില്ല</string>
   <string name="nearby_info_menu_commons_article">കോമൺസ് പ്രമാണ താൾ</string>
   <string name="nearby_info_menu_wikidata_article">വിക്കിഡേറ്റാ ഇനം</string>
   <string name="nearby_info_menu_wikipedia_article">വിക്കിപീഡിയ ലേഖനം</string>
-  <string name="give_permission">അനുമതി നൽകുക</string>
   <string name="login_to_your_account">താങ്കളുടെ അംഗത്വത്തിൽ പ്രവേശിക്കുക</string>
-  <string name="view_browser">ബ്രൗസറിൽ കാണുക</string>
   <string name="navigation_item_login">പ്രവേശിക്കുക</string>
   <string name="nearby_wikidata">വിക്കിഡേറ്റാ</string>
   <string name="nearby_wikipedia">വിക്കിപീഡിയ</string>
@@ -200,12 +176,6 @@
   <string name="statistics">സ്ഥിതിവിവരക്കണക്കുകൾ</string>
   <string name="list_sheet">പട്ടിക</string>
   <string name="next">അടുത്തത്</string>
-  <string name="desc_language_America">അമേരിക്ക</string>
-  <string name="desc_language_Europe">യൂറോപ്പ്</string>
-  <string name="desc_language_Middle_East">മദ്ധ്യപൂർവേഷ്യ</string>
-  <string name="desc_language_Africa">ആഫ്രിക്ക</string>
-  <string name="desc_language_Asia">ഏഷ്യ</string>
-  <string name="desc_language_Pacific">പസഫിക്</string>
   <string name="no_categories_selected">വർഗ്ഗങ്ങൾ ഒന്നും തന്നെ തിരഞ്ഞെടുത്തിട്ടില്ല</string>
   <string name="ends_on">അവസാനിക്കുന്നത്:</string>
   <string name="exif_tag_name_author">സ്രഷ്ടാവ്</string>

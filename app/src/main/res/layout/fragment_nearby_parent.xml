@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,6 +18,35 @@
         <include
             layout="@layout/nearby_filter_all_items"
             android:id="@+id/nearby_filter"/>
+
+        <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:padding="12dp"
+          android:gravity="center"
+          android:id="@+id/rl_container_wlm_month_message"
+          android:background="@color/white"
+          tools:visibility="visible"
+          android:visibility="gone"
+          android:layout_below="@id/nearby_filter">
+            <androidx.appcompat.widget.AppCompatTextView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_toStartOf="@id/tv_learn_more"
+              android:textStyle="bold"
+              android:textColor="@color/secondaryTextColor"
+              android:text="@string/wlm_month_message"/>
+            <androidx.appcompat.widget.AppCompatTextView
+              android:id="@+id/tv_learn_more"
+              android:textColor="@color/status_bar_blue"
+              android:textStyle="bold"
+              android:layout_width="wrap_content"
+              android:layout_alignParentEnd="true"
+              android:text="@string/learn_more"
+              android:layout_height="wrap_content">
+
+            </androidx.appcompat.widget.AppCompatTextView>
+        </RelativeLayout>
 
         <include layout="@layout/nearby_filter_list"
             android:id="@+id/nearby_filter_list"
@@ -28,7 +61,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/nearby_filter">
+            android:layout_below="@id/rl_container_wlm_month_message">
 
             <com.mapbox.mapboxsdk.maps.MapView
                 android:id="@+id/map_view"
@@ -69,7 +102,8 @@
             android:textColor="@color/status_bar_blue"
             android:visibility="gone"
             app:elevation="@dimen/dimen_6"
-            android:layout_below="@id/nearby_filter"/>
+            android:layout_below="@id/rl_container_wlm_month_message"
+            />
 
         <View
             android:id="@+id/transparentView"
@@ -88,7 +122,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/nearby_filter"
+            android:layout_below="@id/rl_container_wlm_month_message"
             android:clickable="true"
             android:visibility="visible"
             app:backgroundTint="@color/main_background_light"
@@ -98,6 +132,11 @@
             app:srcCompat="@drawable/ic_my_location_black_24dp"
             app:useCompatPadding="true" />
 
+    </RelativeLayout>
+        <FrameLayout
+          android:id="@+id/fl_container_nearby_children"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"/>
     </RelativeLayout>
 
     <include layout="@layout/bottom_sheet_nearby" />

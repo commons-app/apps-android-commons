@@ -11,13 +11,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -64,6 +64,27 @@ public class MoreBottomSheetLoggedOutFragment extends BottomSheetDialogFragment 
 
     @OnClick(R.id.more_feedback)
     public void onFeedbackClicked() {
+        showAlertDialog();
+    }
+
+    /**
+     * This method shows the alert dialog when a user wants to send feedback about the app.
+     */
+    private void showAlertDialog() {
+        new AlertDialog.Builder(getActivity())
+            .setMessage(R.string.feedback_sharing_data_alert)
+            .setCancelable(false)
+            .setPositiveButton(R.string.ok, (dialog, which) -> {
+                sendFeedback();
+            })
+            .show();
+    }
+
+    /**
+     * This method collects the feedback message and starts and activity with implicit intent
+     * to available email client.
+     */
+    private void sendFeedback() {
         final String technicalInfo = commonsLogSender.getExtraInfo();
 
         final Intent feedbackIntent = new Intent(Intent.ACTION_SENDTO);
@@ -87,11 +108,6 @@ public class MoreBottomSheetLoggedOutFragment extends BottomSheetDialogFragment 
         final Intent intent = new Intent(getActivity(), AboutActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         getActivity().startActivity(intent);
-    }
-
-    @OnClick(R.id.more_tutorial)
-    public void onTutorialClicked() {
-        WelcomeActivity.startYourself(getActivity());
     }
 
     @OnClick(R.id.more_settings)

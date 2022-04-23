@@ -19,6 +19,8 @@ import butterknife.OnClick;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
@@ -43,7 +45,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
     // Constant variable used to store user's key name for onSaveInstanceState method
     private final String SAVED_USER = "saved_user";
 
-    //Variable that stores the value of user
+    // Variable that stores the value of user
     private String user;
 
     public void update(int position) {
@@ -52,8 +54,20 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
     private String updateCategoriesQuestion() {
         Media media = getReviewActivity().getMedia();
-        if (media != null && media.getCategories() != null && isAdded()) {
-            String catString = TextUtils.join(", ", media.getCategories());
+        if (media != null && media.getCategoriesHiddenStatus() != null && isAdded()) {
+            // Filter category name attribute from all categories
+            List<String> categories = new ArrayList<>();
+            for(String key : media.getCategoriesHiddenStatus().keySet()) {
+                String value = String.valueOf(key);
+                // Each category returned has a format like "Category:<some-category-name>"
+                // so remove the prefix "Category:"
+                int index = key.indexOf("Category:");
+                if(index == 0) {
+                    value = key.substring(9);
+                }
+                categories.add(value);
+            }
+            String catString = TextUtils.join(", ", categories);
             if (catString != null && !catString.equals("") && textViewQuestionContext != null) {
                 catString = "<b>" + catString + "</b>";
                 String stringToConvertHtml = String.format(getResources().getString(R.string.review_category_explanation), catString);
@@ -81,18 +95,18 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
             case SPAM:
                 question = getString(R.string.review_spam);
                 explanation = getString(R.string.review_spam_explanation);
-                yesButtonText = getString(R.string.review_spam_yes_button_text);
-                noButtonText = getString(R.string.review_spam_no_button_text);
-                yesButton.setOnClickListener(view -> getReviewActivity()
+                yesButtonText = getString(R.string.yes);
+                noButtonText = getString(R.string.no);
+                noButton.setOnClickListener(view -> getReviewActivity()
                         .reviewController.reportSpam(requireActivity(), getReviewCallback()));
                 break;
             case COPYRIGHT:
                 enableButtons();
                 question = getString(R.string.review_copyright);
                 explanation = getString(R.string.review_copyright_explanation);
-                yesButtonText = getString(R.string.review_copyright_yes_button_text);
-                noButtonText = getString(R.string.review_copyright_no_button_text);
-                yesButton.setOnClickListener(view -> getReviewActivity()
+                yesButtonText = getString(R.string.yes);
+                noButtonText = getString(R.string.no);
+                noButton.setOnClickListener(view -> getReviewActivity()
                         .reviewController
                         .reportPossibleCopyRightViolation(requireActivity(), getReviewCallback()));
                 break;
@@ -100,9 +114,9 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 enableButtons();
                 question = getString(R.string.review_category);
                 explanation = updateCategoriesQuestion();
-                yesButtonText = getString(R.string.review_category_yes_button_text);
-                noButtonText = getString(R.string.review_category_no_button_text);
-                yesButton.setOnClickListener(view -> {
+                yesButtonText = getString(R.string.yes);
+                noButtonText = getString(R.string.no);
+                noButton.setOnClickListener(view -> {
                     getReviewActivity()
                             .reviewController
                             .reportWrongCategory(requireActivity(), getReviewCallback());
@@ -113,9 +127,9 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 enableButtons();
                 question = getString(R.string.review_thanks);
 
-                //Get existing user name if it is already saved using savedInstanceState else get from reviewController
+                // Get existing user name if it is already saved using savedInstanceState else get from reviewController
                 if (savedInstanceState == null) {
-                    if (getReviewActivity().reviewController != null) {
+                    if (getReviewActivity().reviewController.firstRevision != null) {
                         user = getReviewActivity().reviewController.firstRevision.getUser();
                     }
                 } else {
@@ -127,11 +141,12 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                     explanation = getString(R.string.review_thanks_explanation, user);
                 }
 
+                // Note that the yes and no buttons are swapped in this section
                 yesButtonText = getString(R.string.review_thanks_yes_button_text);
                 noButtonText = getString(R.string.review_thanks_no_button_text);
-                yesButton.setTextColor(Color.parseColor("#228b22"));
-                noButton.setTextColor(Color.parseColor("#116aaa"));
-                yesButton.setOnClickListener(view -> {
+                yesButton.setTextColor(Color.parseColor("#116aaa"));
+                noButton.setTextColor(Color.parseColor("#228b22"));
+                noButton.setOnClickListener(view -> {
                     getReviewActivity().reviewController.sendThanks(getReviewActivity());
                     getReviewActivity().swipeToNext();
                 });
@@ -202,8 +217,8 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
         noButton.setAlpha(0.5f);
     }
 
-    @OnClick(R.id.button_no)
-    void onNoButtonClicked() {
+    @OnClick(R.id.button_yes)
+    void onYesButtonClicked() {
         getReviewActivity().swipeToNext();
     }
 

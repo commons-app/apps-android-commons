@@ -33,6 +33,7 @@ import fr.free.nrw.commons.utils.SystemThemeUtils
 import fr.free.nrw.commons.utils.ViewUtil
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_login.*
+import java.util.Locale
 import org.wikipedia.AppAdapter
 import org.wikipedia.dataclient.ServiceFactory
 import org.wikipedia.dataclient.WikiSite
@@ -149,9 +150,6 @@ class LoginActivity : AccountAuthenticatorActivity() {
 
     override fun onResume() {
         super.onResume()
-        if (applicationKvStore.getBoolean("firstrun", true)) {
-            WelcomeActivity.startYourself(this)
-        }
 
         if (sessionManager.currentAccount != null && sessionManager.isUserLoggedIn) {
             applicationKvStore.putBoolean("login_skipped", false)
@@ -269,6 +267,7 @@ class LoginActivity : AccountAuthenticatorActivity() {
             // no longer attached to activity!
             return
         }
+        compositeDisposable.clear()
         sessionManager.isUserLoggedIn = true
         AppAdapter.get().updateAccount(loginResult)
         progressDialog!!.dismiss()

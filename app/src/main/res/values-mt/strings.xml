@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Chrisportelli
+-->
 <resources>
+  <string name="share_license_summary" fuzzy="true">Din l-istampa se tiġi liċenzjata taħt %1$s</string>
   <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="username">Isem l-utent</string>
   <string name="password">Password</string>
@@ -8,14 +12,14 @@
   <string name="logging_in_message" fuzzy="true">Jekk jogħġbok stenna…</string>
   <string name="login_success">Dħalt b\'suċċess!</string>
   <string name="login_failed">Id-dħul fil-kont ma rnexxiex!</string>
-  <string name="authentication_failed">L-awtentikar falla!</string>
+  <string name="authentication_failed" fuzzy="true">L-awtentikar falla!</string>
   <string name="uploading_started">Beda t-tlugħ!</string>
   <string name="upload_completed_notification_title">%1$s tela\'!</string>
   <string name="upload_completed_notification_text">Agħfas sabiex tara t-tlugħ tiegħek</string>
-  <string name="upload_progress_notification_title_start">Se jibda t-tlugħ ta\' %1$s</string>
+  <string name="upload_progress_notification_title_start" fuzzy="true">Se jibda t-tlugħ ta\' %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Tiela\' %1$s</string>
   <string name="upload_progress_notification_title_finishing">It-tlugħ ta\' %1$s spiċċa</string>
-  <string name="upload_failed_notification_title">It-tlugħ ta\' %1$s ma rnexxiex</string>
+  <string name="upload_failed_notification_title" fuzzy="true">It-tlugħ ta\' %1$s ma rnexxiex</string>
   <string name="upload_failed_notification_subtitle">Agħfas biex tara</string>
   <string name="title_activity_contributions" fuzzy="true">It-tlugħ tiegħi</string>
   <string name="contribution_state_queued">Fil-kju</string>
@@ -26,8 +30,7 @@
   <string name="menu_from_camera">Ħu ritratt</string>
   <string name="provider_contributions">It-tlugħ tiegħi</string>
   <string name="menu_share">Aqsam</string>
-  <string name="menu_open_in_browser">Ara fil-brawżer</string>
-  <string name="share_title_hint">Titlu</string>
+  <string name="share_title_hint" fuzzy="true">Titlu</string>
   <string name="share_description_hint">Deskrizzjoni</string>
   <string name="login_failed_blocked">Jiddispjaċina, dan l-utent ġie mblukkat fuq Commons</string>
   <string name="login_failed_generic">Id-dħul fil-kont ma rnexxiex</string>
@@ -48,9 +51,8 @@
   <string name="title_activity_about">Dwar</string>
   <string name="provider_categories">Kategoriji wżati riċentament</string>
   <string name="no_uploads_yet">Għadek ma tellgħajt l-ebda ritratt.</string>
-  <string name="share_license_summary">Din l-istampa se tiġi liċenzjata taħt %1$s</string>
   <string name="menu_download">Niżżel</string>
-  <string name="preference_license">Liċenzja</string>
+  <string name="preference_license" fuzzy="true">Liċenzja</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike</string>
   <string name="license_name_cc_by" fuzzy="true">CC Attribution</string>
   <string name="license_name_cc0">CC0</string>

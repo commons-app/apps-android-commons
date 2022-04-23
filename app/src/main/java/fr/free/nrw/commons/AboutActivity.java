@@ -12,33 +12,25 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
+import fr.free.nrw.commons.databinding.ActivityAboutBinding;
 import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.utils.ConfigUtils;
 import java.util.Collections;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import fr.free.nrw.commons.ui.widget.HtmlTextView;
-import fr.free.nrw.commons.utils.ConfigUtils;
 
 /**
  * Represents about screen of this app
  */
 public class AboutActivity extends BaseActivity {
-    @BindView(R.id.about_version) TextView versionText;
-    @BindView(R.id.about_license) HtmlTextView aboutLicenseText;
-    @BindView(R.id.about_faq) TextView faqText;
-    @BindView(R.id.about_improve) HtmlTextView improve;
-    @BindView(R.id.about_rate_us) TextView rateUsText;
-    @BindView(R.id.about_privacy_policy) TextView privacyPolicyText;
-    @BindView(R.id.about_translate) TextView translateText;
-    @BindView(R.id.about_credits) TextView creditsText;
-    @BindView(R.id.toolbar) Toolbar toolbar;
+
+    /*
+      This View Binding class is auto-generated for each xml file. The format is usually the name
+      of the file with PascalCasing (The underscore characters will be ignored).
+      More information is available at https://developer.android.com/topic/libraries/view-binding
+     */
+    private ActivityAboutBinding binding;
+
     /**
      * This method helps in the creation About screen
      *
@@ -48,25 +40,47 @@ public class AboutActivity extends BaseActivity {
     @SuppressLint("StringFormatInvalid")
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about);
 
-        ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
+        /*
+          Instead of just setting the view with the xml file. We need to use View Binding class.
+         */
+        binding = ActivityAboutBinding.inflate(getLayoutInflater());
+        final View view = binding.getRoot();
+        setContentView(view);
+
+        setSupportActionBar(binding.toolbarBinding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        String aboutText = getString(R.string.about_license);
-        aboutLicenseText.setHtmlText(aboutText);
+        final String aboutText = getString(R.string.about_license);
+        /*
+          We can then access all the views by just using the id names like this.
+          camelCasing is used with underscore characters being ignored.
+         */
+        binding.aboutLicense.setHtmlText(aboutText);
 
         @SuppressLint("StringFormatMatches")
         String improveText = String.format(getString(R.string.about_improve), Urls.NEW_ISSUE_URL);
-        improve.setHtmlText(improveText);
+        binding.aboutImprove.setHtmlText(improveText);
+        binding.aboutVersion.setText(ConfigUtils.getVersionNameWithSha(getApplicationContext()));
 
-        versionText.setText(ConfigUtils.getVersionNameWithSha(getApplicationContext()));
+        Utils.setUnderlinedText(binding.aboutFaq, R.string.about_faq, getApplicationContext());
+        Utils.setUnderlinedText(binding.aboutRateUs, R.string.about_rate_us, getApplicationContext());
+        Utils.setUnderlinedText(binding.aboutUserGuide, R.string.user_guide, getApplicationContext());
+        Utils.setUnderlinedText(binding.aboutPrivacyPolicy, R.string.about_privacy_policy, getApplicationContext());
+        Utils.setUnderlinedText(binding.aboutTranslate, R.string.about_translate, getApplicationContext());
+        Utils.setUnderlinedText(binding.aboutCredits, R.string.about_credits, getApplicationContext());
 
-        Utils.setUnderlinedText(faqText, R.string.about_faq, getApplicationContext());
-        Utils.setUnderlinedText(rateUsText, R.string.about_rate_us, getApplicationContext());
-        Utils.setUnderlinedText(privacyPolicyText, R.string.about_privacy_policy, getApplicationContext());
-        Utils.setUnderlinedText(translateText, R.string.about_translate, getApplicationContext());
-        Utils.setUnderlinedText(creditsText, R.string.about_credits, getApplicationContext());
+        /*
+          To set listeners, we can create a separate method and use lambda syntax.
+        */
+        binding.facebookLaunchIcon.setOnClickListener(this::launchFacebook);
+        binding.githubLaunchIcon.setOnClickListener(this::launchGithub);
+        binding.websiteLaunchIcon.setOnClickListener(this::launchWebsite);
+        binding.aboutRateUs.setOnClickListener(this::launchRatings);
+        binding.aboutCredits.setOnClickListener(this::launchCredits);
+        binding.aboutPrivacyPolicy.setOnClickListener(this::launchPrivacyPolicy);
+        binding.aboutUserGuide.setOnClickListener(this::launchUserGuide);
+        binding.aboutFaq.setOnClickListener(this::launchFrequentlyAskedQuesions);
+        binding.aboutTranslate.setOnClickListener(this::launchTranslate);
     }
 
     @Override
@@ -75,7 +89,6 @@ public class AboutActivity extends BaseActivity {
         return true;
     }
 
-    @OnClick(R.id.facebook_launch_icon)
     public void launchFacebook(View view) {
         Intent intent;
         try {
@@ -87,33 +100,30 @@ public class AboutActivity extends BaseActivity {
         }
     }
 
-    @OnClick(R.id.github_launch_icon)
     public void launchGithub(View view) {
         Utils.handleWebUrl(this, Uri.parse(Urls.GITHUB_REPO_URL));
     }
 
-    @OnClick(R.id.website_launch_icon)
     public void launchWebsite(View view) {
         Utils.handleWebUrl(this, Uri.parse(Urls.WEBSITE_URL));
     }
 
-    @OnClick(R.id.about_rate_us)
     public void launchRatings(View view){
         Utils.rateApp(this);
     }
 
-    @OnClick(R.id.about_credits)
     public void launchCredits(View view) {
         Utils.handleWebUrl(this, Uri.parse(Urls.CREDITS_URL));
     }
 
-    @OnClick(R.id.about_privacy_policy)
+    public void launchUserGuide(View view) {
+        Utils.handleWebUrl(this, Uri.parse(Urls.USER_GUIDE_URL));
+    }
+
     public void launchPrivacyPolicy(View view) {
         Utils.handleWebUrl(this, Uri.parse(BuildConfig.PRIVACY_POLICY_URL));
     }
 
-
-    @OnClick(R.id.about_faq)
     public void launchFrequentlyAskedQuesions(View view) {
         Utils.handleWebUrl(this, Uri.parse(Urls.FAQ_URL));
     }
@@ -141,7 +151,6 @@ public class AboutActivity extends BaseActivity {
         }
     }
 
-    @OnClick(R.id.about_translate)
     public void launchTranslate(View view) {
         @NonNull List<String> sortedLocalizedNamesRef = CommonsApplication.getInstance().getLanguageLookUpTable().getCanonicalNames();
         Collections.sort(sortedLocalizedNamesRef);

@@ -5,15 +5,18 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao;
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.category.CategoryDao;
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao;
+import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao;
 
 public class DBOpenHelper  extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "commons.db";
-    private static final int DATABASE_VERSION = 13;
+    private static final int DATABASE_VERSION = 19;
     public static final String CONTRIBUTIONS_TABLE = "contributions";
     private final String DROP_TABLE_STATEMENT="DROP TABLE IF EXISTS %s";
 
@@ -30,7 +33,9 @@ public class DBOpenHelper  extends SQLiteOpenHelper {
         CategoryDao.Table.onCreate(sqLiteDatabase);
         BookmarkPicturesDao.Table.onCreate(sqLiteDatabase);
         BookmarkLocationsDao.Table.onCreate(sqLiteDatabase);
+        BookmarkItemsDao.Table.onCreate(sqLiteDatabase);
         RecentSearchesDao.Table.onCreate(sqLiteDatabase);
+        RecentLanguagesDao.Table.onCreate(sqLiteDatabase);
     }
 
     @Override
@@ -38,7 +43,9 @@ public class DBOpenHelper  extends SQLiteOpenHelper {
         CategoryDao.Table.onUpdate(sqLiteDatabase, from, to);
         BookmarkPicturesDao.Table.onUpdate(sqLiteDatabase, from, to);
         BookmarkLocationsDao.Table.onUpdate(sqLiteDatabase, from, to);
+        BookmarkItemsDao.Table.onUpdate(sqLiteDatabase, from, to);
         RecentSearchesDao.Table.onUpdate(sqLiteDatabase, from, to);
+        RecentLanguagesDao.Table.onUpdate(sqLiteDatabase, from, to);
         deleteTable(sqLiteDatabase,CONTRIBUTIONS_TABLE);
     }
 
@@ -50,6 +57,7 @@ public class DBOpenHelper  extends SQLiteOpenHelper {
     public void deleteTable(SQLiteDatabase db, String tableName) {
         try {
             db.execSQL(String.format(DROP_TABLE_STATEMENT, tableName));
+            onCreate(db);
         } catch (SQLiteException e) {
             e.printStackTrace();
         }

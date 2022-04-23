@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="fr.free.nrw.commons">
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
@@ -20,6 +19,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
 
+
     <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
     <uses-feature android:name="android.hardware.location.gps" />
 
@@ -32,7 +32,12 @@
         android:supportsRtl="true"
         tools:replace="android:appComponentFactory"
         android:appComponentFactory="commons"
+        android:requestLegacyExternalStorage = "true"
         tools:ignore="GoogleAppIndexingWarning">
+
+        <activity
+            android:name=".description.DescriptionEditActivity"
+            android:exported="true" />
 
         <activity android:name="org.acra.dialog.CrashReportDialog"
             android:process=":acra"
@@ -57,6 +62,7 @@
         <activity android:name=".WelcomeActivity" />
 
         <activity
+            android:hardwareAccelerated="false"
             android:name=".upload.UploadActivity"
             android:configChanges="orientation|screenSize|keyboard"
             android:icon="@mipmap/ic_launcher"
@@ -109,19 +115,21 @@
             android:label="@string/result"/>
 
         <activity
-            android:name=".category.CategoryImagesActivity"
-            android:label="@string/title_activity_featured_images"
-            android:parentActivityName=".contributions.MainActivity"
-            android:configChanges="orientation|screenSize|keyboard"/>
+            android:name=".customselector.ui.selector.CustomSelectorActivity"
+            android:label="@string/title_activity_custom_selector"
+            android:configChanges="screenSize|keyboard|orientation"
+            android:parentActivityName=".contributions.MainActivity" />
 
         <activity
             android:name=".category.CategoryDetailsActivity"
             android:label="@string/title_activity_featured_images"
+            android:configChanges="screenSize|keyboard|orientation"
             android:parentActivityName=".contributions.MainActivity" />
 
         <activity
             android:name=".explore.depictions.WikidataItemDetailsActivity"
             android:label="@string/title_activity_featured_images"
+            android:configChanges="screenSize|keyboard|orientation"
             android:parentActivityName=".contributions.MainActivity" />
 
         <activity
@@ -141,7 +149,10 @@
             android:name=".review.ReviewActivity"
             android:label="@string/title_activity_review" />
 
-        <service android:name=".upload.UploadService" />
+        <activity
+          android:name=".LocationPicker.LocationPickerActivity"
+          android:label="Location Picker" />
+
         <service
             android:name=".auth.WikiAccountAuthenticatorService"
             android:exported="true"
@@ -184,6 +195,13 @@
             android:syncable="false" />
 
         <provider
+          android:name=".recentlanguages.RecentLanguagesContentProvider"
+          android:authorities="${applicationId}.recentlanguages.contentprovider"
+          android:exported="false"
+          android:label="@string/provider_recent_languages"
+          android:syncable="false" />
+
+        <provider
             android:name=".bookmarks.pictures.BookmarkPicturesContentProvider"
             android:authorities="${applicationId}.bookmarks.contentprovider"
             android:exported="false"
@@ -197,7 +215,14 @@
             android:label="@string/provider_bookmarks_location"
             android:syncable="false" />
 
-        <receiver android:name=".widget.PicOfDayAppWidget">
+        <provider
+          android:name=".bookmarks.items.BookmarkItemsContentProvider"
+          android:authorities="${applicationId}.bookmarks.items.contentprovider"
+          android:exported="false"
+          android:label="@string/provider_bookmarks_location"
+          android:syncable="false" />
+
+      <receiver android:name=".widget.PicOfDayAppWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

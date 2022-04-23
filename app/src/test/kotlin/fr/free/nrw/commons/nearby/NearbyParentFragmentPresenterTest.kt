@@ -15,6 +15,7 @@ import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
+import java.util.*
 
 /**
  * The unit test class for NearbyParentFragmentPresenter
@@ -32,6 +33,8 @@ class NearbyParentFragmentPresenterTest {
     internal lateinit var selectedLabels: List<Label>
     @Mock
     internal lateinit var marker: Marker
+    @Mock
+    internal lateinit var nearbyPlaces: NearbyPlaces
 
     private lateinit var nearbyPresenter: NearbyParentFragmentPresenter
     private lateinit var mapboxCameraTarget: com.mapbox.mapboxsdk.geometry.LatLng
@@ -265,7 +268,14 @@ class NearbyParentFragmentPresenterTest {
     fun testFilterByMarkerTypeMultiSelectCHECKED() {
         val state = CheckBoxTriStates.CHECKED
         nearbyPresenter.filterByMarkerType(selectedLabels, state, false,true)
-        verify(nearbyParentFragmentView).filterMarkersByLabels(ArgumentMatchers.anyList(),ArgumentMatchers.anyBoolean(),ArgumentMatchers.anyBoolean(),ArgumentMatchers.anyBoolean(),ArgumentMatchers.anyBoolean());
+        verify(nearbyParentFragmentView).filterMarkersByLabels(
+            ArgumentMatchers.anyList(),
+            ArgumentMatchers.anyBoolean(),
+            ArgumentMatchers.anyBoolean(),
+            ArgumentMatchers.anyBoolean(),
+            ArgumentMatchers.anyBoolean(),
+            ArgumentMatchers.anyBoolean()
+        );
         verify(nearbyParentFragmentView).setRecyclerViewAdapterAllSelected()
         verifyNoMoreInteractions(nearbyParentFragmentView)
     }
@@ -276,7 +286,14 @@ class NearbyParentFragmentPresenterTest {
     @Test
     fun testFilterByMarkerTypeSingleSelect() {
         nearbyPresenter.filterByMarkerType(selectedLabels, 0, true,false)
-        verify(nearbyParentFragmentView).filterMarkersByLabels(any(), any(), any(), any(), any());
+        verify(nearbyParentFragmentView).filterMarkersByLabels(
+            any(),
+            any(),
+            any(),
+            any(),
+            any(),
+            any()
+        );
         verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 
@@ -379,6 +396,14 @@ class NearbyParentFragmentPresenterTest {
     }
 
     @Test
+    fun testBackButtonClickedWhenAdvancedFragmentIsVisible() {
+        whenever(nearbyParentFragmentView.isAdvancedQueryFragmentVisible()).thenReturn(true)
+        val hasNearbyHandledBackPress = nearbyPresenter.backButtonClicked()
+        verify(nearbyParentFragmentView).showHideAdvancedQueryFragment(false)
+        assertTrue(hasNearbyHandledBackPress)
+    }
+
+    @Test
     fun testMarkerUnselected() {
         nearbyPresenter.markerUnselected()
         verify(nearbyParentFragmentView).hideBottomSheet();
@@ -416,6 +441,50 @@ class NearbyParentFragmentPresenterTest {
     }
 
     @Test
+    fun testOnLocationChangeTypeCustomQuery() {
+        nearbyPresenter.setAdvancedQuery("Point(17.865 82.343)\"")
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
+        whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
+        nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
+        expectMapAndListUpdate()
+        verify(nearbyParentFragmentView).setProgressBarVisibility(true)
+        verify(nearbyParentFragmentView).populatePlaces(any(), any())
+    }
+
+    @Test
+    fun testOnLocationChangeTypeCustomQueryInvalidQuery() {
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished).thenReturn(true)
+        whenever(nearbyParentFragmentView.lastLocation).thenReturn(latestLocation)
+        nearbyPresenter.setAdvancedQuery("")
+        nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
+        expectMapAndListUpdate()
+        nearbyPresenter.setAdvancedQuery("Point(")
+        nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
+        expectMapAndListUpdate()
+    }
+
+    @Test
+    fun testOnLocationChangeTypeCustomQueryUnParsableQuery() {
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished).thenReturn(true)
+        whenever(nearbyParentFragmentView.lastLocation).thenReturn(latestLocation)
+        nearbyPresenter.setAdvancedQuery("Point()\"")
+        nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
+        expectMapAndListUpdate()
+
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished).thenReturn(true)
+        whenever(nearbyParentFragmentView.lastLocation).thenReturn(latestLocation)
+        nearbyPresenter.setAdvancedQuery("Point(ab)\"")
+        nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
+        expectMapAndListUpdate()
+
+        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished).thenReturn(true)
+        whenever(nearbyParentFragmentView.lastLocation).thenReturn(latestLocation)
+        nearbyPresenter.setAdvancedQuery("Point(ab ab)\"")
+        nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
+        expectMapAndListUpdate()
+    }
+
+    @Test
     fun testOnCameraMoveWhenSearchLocationNull() {
         NearbyController.latestSearchLocation = null
         nearbyPresenter.onCameraMove(Mockito.mock(com.mapbox.mapboxsdk.geometry.LatLng::class.java))
@@ -441,5 +510,28 @@ class NearbyParentFragmentPresenterTest {
         verify(nearbyParentFragmentView).setProjectorLatLngBounds()
         verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
         verifyZeroInteractions(nearbyParentFragmentView)
+    }
+
+    @Test
+    fun testSetAdvancedQuery(){
+        nearbyPresenter.setAdvancedQuery("test")
+    }
+
+    @Test
+    fun testUpdateMapMarkers(){
+        var nearbyPlacesInfo = NearbyController(nearbyPlaces).NearbyPlacesInfo()
+        nearbyPlacesInfo.boundaryCoordinates= arrayOf()
+        nearbyPlacesInfo.curLatLng=latestLocation
+        nearbyPlacesInfo.searchLatLng=latestLocation
+        nearbyPlacesInfo.placeList = null
+
+        whenever(bookmarkLocationsDao.allBookmarksLocations).thenReturn(Collections.emptyList())
+        nearbyPresenter.updateMapMarkers(nearbyPlacesInfo, marker, true)
+        Mockito.verify(nearbyParentFragmentView).updateMapMarkers(any(), eq(marker))
+        Mockito.verify(nearbyParentFragmentView).addCurrentLocationMarker(latestLocation)
+        Mockito.verify(nearbyParentFragmentView).updateMapToTrackPosition(latestLocation)
+        Mockito.verify(nearbyParentFragmentView).setProgressBarVisibility(false)
+        Mockito.verify(nearbyParentFragmentView).centerMapToPosition(latestLocation)
+
     }
 }

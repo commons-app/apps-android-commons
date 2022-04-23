@@ -1,16 +1,21 @@
 package fr.free.nrw.commons.nearby;
 
+import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-
 import androidx.annotation.MainThread;
+import androidx.annotation.Nullable;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
-
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
 
-import java.io.IOException;
+import fr.free.nrw.commons.MapController;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.utils.UiUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -18,18 +23,14 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Locale;
 import java.util.Map;
-
 import javax.inject.Inject;
-
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.utils.UiUtils;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
-public class NearbyController {
+public class NearbyController extends MapController {
+
     private static final int MAX_RESULTS = 1000;
     private final NearbyPlaces nearbyPlaces;
     public static double currentLocationSearchRadius = 10.0; //in kilometers
@@ -53,10 +54,13 @@ public class NearbyController {
      * @param curLatLng current location for user
      * @param searchLatLng the location user wants to search around
      * @param returnClosestResult if this search is done to find closest result or all results
+     * @param customQuery if this search is done via an advanced query
      * @return NearbyPlacesInfo a variable holds Place list without distance information
      * and boundary coordinates of current Place List
      */
-    public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng, LatLng searchLatLng, boolean returnClosestResult, boolean checkingAroundCurrentLocation) throws IOException {
+    public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng curLatLng, final LatLng searchLatLng,
+        final boolean returnClosestResult, final boolean checkingAroundCurrentLocation,
+        final boolean shouldQueryForMonuments, @Nullable final String customQuery) throws Exception {
 
         Timber.d("Loading attractions near %s", searchLatLng);
         NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();
@@ -65,7 +69,9 @@ public class NearbyController {
             Timber.d("Loading attractions nearby, but curLatLng is null");
             return null;
         }
-        List<Place> places = nearbyPlaces.radiusExpander(searchLatLng, Locale.getDefault().getLanguage(), returnClosestResult);
+        List<Place> places = nearbyPlaces
+            .radiusExpander(searchLatLng, Locale.getDefault().getLanguage(), returnClosestResult,
+                shouldQueryForMonuments, customQuery);
 
         if (null != places && places.size() > 0) {
             LatLng[] boundaryCoordinates = {places.get(0).location,   // south
@@ -120,29 +126,25 @@ public class NearbyController {
             }
 
 
-            return nearbyPlacesInfo;
         }
-        else {
-            return null;
-        }
+        return nearbyPlacesInfo;
     }
 
     /**
-     * Loads attractions from location for list view, we need to return Place data type.
+     * Prepares Place list to make their distance information update later.
      *
-     * @param curLatLng users current location
-     * @param placeList list of nearby places in Place data type
-     * @return Place list that holds nearby places
+     * @param curLatLng           current location for user
+     * @param searchLatLng        the location user wants to search around
+     * @param returnClosestResult if this search is done to find closest result or all results
+     * @return NearbyPlacesInfo a variable holds Place list without distance information and
+     * boundary coordinates of current Place List
      */
-    public static List<Place> loadAttractionsFromLocationToPlaces(
-            LatLng curLatLng,
-            List<Place> placeList) {
-        placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
-        for (Place place : placeList) {
-            String distance = formatDistanceBetween(curLatLng, place.location);
-            place.setDistance(distance);
-        }
-        return placeList;
+    public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng curLatLng,
+        final LatLng searchLatLng,
+        final boolean returnClosestResult, final boolean checkingAroundCurrentLocation,
+        final boolean shouldQueryForMonuments) throws Exception {
+        return loadAttractionsFromLocation(curLatLng, searchLatLng, returnClosestResult,
+            checkingAroundCurrentLocation, shouldQueryForMonuments, null);
     }
 
     /**
@@ -168,6 +170,7 @@ public class NearbyController {
         VectorDrawableCompat vectorDrawable = null;
         VectorDrawableCompat vectorDrawableGreen = null;
         VectorDrawableCompat vectorDrawableGrey = null;
+        VectorDrawableCompat vectorDrawableMonuments = null;
         vectorDrawable = null;
         try {
             vectorDrawable = VectorDrawableCompat.create(
@@ -176,6 +179,9 @@ public class NearbyController {
                     context.getResources(), R.drawable.ic_custom_map_marker_green, context.getTheme());
             vectorDrawableGrey = VectorDrawableCompat.create(
                     context.getResources(), R.drawable.ic_custom_map_marker_grey, context.getTheme());
+            vectorDrawableMonuments = VectorDrawableCompat
+                .create(context.getResources(), R.drawable.ic_custom_map_marker_monuments,
+                    context.getTheme());
         } catch (Resources.NotFoundException e) {
             // ignore when running tests.
         }
@@ -183,49 +189,44 @@ public class NearbyController {
             Bitmap icon = UiUtils.getBitmap(vectorDrawable);
             Bitmap iconGreen = UiUtils.getBitmap(vectorDrawableGreen);
             Bitmap iconGrey = UiUtils.getBitmap(vectorDrawableGrey);
+            Bitmap iconMonuments = UiUtils.getBitmap(vectorDrawableMonuments);
 
             for (Place place : placeList) {
+                NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
                 String distance = formatDistanceBetween(curLatLng, place.location);
                 place.setDistance(distance);
 
-                NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
                 nearbyBaseMarker.title(place.name);
                 nearbyBaseMarker.position(
-                        new com.mapbox.mapboxsdk.geometry.LatLng(
-                                place.location.getLatitude(),
-                                place.location.getLongitude()));
+                    new com.mapbox.mapboxsdk.geometry.LatLng(
+                        place.location.getLatitude(),
+                        place.location.getLongitude()));
                 nearbyBaseMarker.place(place);
                 // Check if string is only spaces or empty, if so place doesn't have any picture
-                if (!place.pic.trim().isEmpty()) {
+
+                if (place.isMonument()) {
+                    nearbyBaseMarker.icon(IconFactory.getInstance(context)
+                        .fromBitmap(iconMonuments));
+                }
+                else if (!place.pic.trim().isEmpty()) {
                     if (iconGreen != null) {
                         nearbyBaseMarker.icon(IconFactory.getInstance(context)
-                                .fromBitmap(iconGreen));
+                            .fromBitmap(iconGreen));
                     }
-                } else if (!place.destroyed.trim().isEmpty()) { // Means place is destroyed
+                } else if (!place.exists) { // Means that the topic of the Wikidata item does not exist in the real world anymore, for instance it is a past event, or a place that was destroyed
                     if (iconGrey != null) {
                         nearbyBaseMarker.icon(IconFactory.getInstance(context)
-                                .fromBitmap(iconGrey));
+                            .fromBitmap(iconGrey));
                     }
                 } else {
                     nearbyBaseMarker.icon(IconFactory.getInstance(context)
-                            .fromBitmap(icon));
+                        .fromBitmap(icon));
                 }
-
                 baseMarkerOptions.add(nearbyBaseMarker);
             }
         }
 
         return baseMarkerOptions;
-    }
-
-    /**
-     * We pass this variable as a group of placeList and boundaryCoordinates
-     */
-    public class NearbyPlacesInfo {
-        public List<Place> placeList; // List of nearby places
-        public LatLng[] boundaryCoordinates; // Corners of nearby area
-        public LatLng curLatLng; // Current location when this places are populated
-        public LatLng searchLatLng; // Search location for finding this places
     }
 
     /**

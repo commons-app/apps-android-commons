@@ -14,6 +14,6 @@ class PageableParentCategoriesDataSource @Inject constructor(
         if (startPosition == 0) {
             categoryClient.resetParentCategoryContinuation(query)
         }
-        categoryClient.getParentCategoryList(query).blockingGet()
+        categoryClient.getParentCategoryList(query).blockingGet().map { it.name }
     }
 }

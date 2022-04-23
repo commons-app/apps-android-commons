@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
-* Abijeet Patro
 * Les Meloures
 * Robby
 * Soued031
@@ -10,30 +9,27 @@
     <item quantity="one">ee Fichier eroplueden</item>
     <item quantity="other">%1$d Fichieren eroplueden</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">N@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Ugefaang 1 Fichier eropzelueden</item>
-    <item quantity="other">Ugefaang %1$d Fichieren eropzelueden</item>
+    <item quantity="one">Ugefaangen %d Fichier eropzelueden</item>
+    <item quantity="other">Ugefaangen %d Fichieren eropzelueden</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">Ee Fichier eropgelueden</item>
-    <item quantity="other">%1$d Fichieren eropgelueden</item>
+    <item quantity="other">%d Fichieren eropgelueden</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Dëst Bild gëtt ënner %1$s lizenzéiert</item>
     <item quantity="other">Dës Biller ginn ënner %1$s lizenzéiert</item>
   </plurals>
-  <string name="title_activity_explore">Entdecken</string>
   <string name="navigation_item_explore">Entdecken</string>
   <string name="preference_category_appearance">Ausgesinn</string>
   <string name="preference_category_general">Allgemeng</string>
   <string name="preference_category_feedback">Feedback</string>
   <string name="preference_category_privacy">Dateschutz</string>
-  <string name="preference_category_location">Plaz</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Astellungen</string>
@@ -46,17 +42,18 @@
   <string name="signup">Schreift Iech an</string>
   <string name="logging_in_title">Aloggen</string>
   <string name="logging_in_message">Waart wgl. …</string>
+  <string name="updating_caption_message">Waart wgl. ...</string>
   <string name="login_success">Umeldung huet geklappt!</string>
-  <string name="login_failed">D\'Aloggen huet net funktionéiert</string>
-  <string name="upload_failed">Fichier net fonnt. probéiert wgl. en anere Fichier.</string>
+  <string name="login_failed">D\'Aloggen huet net funktionéiert!</string>
+  <string name="upload_failed">Fichier net fonnt. Probéiert wgl. en anere Fichier.</string>
   <string name="authentication_failed">Authentifizéierung huet net funktionéiert, loggt Iech wgl. nach eng Kéier an.</string>
   <string name="uploading_started">D\'Eroplueden huet ugefaang!</string>
   <string name="upload_completed_notification_title">%1$s eropgelueden!</string>
   <string name="upload_completed_notification_text">Dréckt fir de Fichier ze gesinn deen Dir eropgelueden hutt</string>
-  <string name="upload_progress_notification_title_start">D\'Eropluede vu(n) %1$s ufänken</string>
+  <string name="upload_progress_notification_title_start">Fichier eroplueden: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s gëtt eropgelueden</string>
   <string name="upload_progress_notification_title_finishing">Eroplueden vu(n) %1$s ofschléissen</string>
-  <string name="upload_failed_notification_title">D\'Eropluede vu(n) %1$s huet net funktionéiert</string>
+  <string name="upload_failed_notification_title">%1$s konnt net eropgeluede ginn</string>
   <string name="upload_failed_notification_subtitle">Dréckt fir nach eng Kéier ze probéieren</string>
   <string name="title_activity_contributions">Meng rezent eropgeluede Fichieren</string>
   <string name="contribution_state_queued">An der Queue</string>
@@ -68,7 +65,6 @@
   <string name="menu_nearby">Nobäi</string>
   <string name="provider_contributions">Meng eropgeluede Fichieren</string>
   <string name="menu_share">Deelen</string>
-  <string name="menu_open_in_browser">Am Browser kucken</string>
   <string name="share_title_hint">Erklärung (Obligatoresch)</string>
   <string name="share_description_hint">Beschreiwung</string>
   <string name="login_failed_network">Aloggen huet net funktionéiert - Feeler mam Reseau</string>
@@ -83,9 +79,7 @@
   <string name="menu_save_categories">Späicheren</string>
   <string name="refresh_button">Aktualiséieren</string>
   <string name="display_list_button">Lëscht</string>
-  <string name="gps_disabled">GPS ass op Ärem Apparat ausgeschalt. Wëllt Dir en aktivéieren?</string>
-  <string name="enable_gps">GPS aktivéieren</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">Nach keng eropgeluede Fichieren</string>
+  <string name="contributions_subtitle_zero">(Nach keng eropgeluede Fichieren)</string>
   <string name="categories_not_found">D\'Kategorie %1$s gouf net fonnt</string>
   <string name="categories_skip_explanation">Setzt Kategorien derbäi fir datt Är Biller méi einfach op Wikimedia Commons ze fanne sinn.\n\nFänkt u mat Kategorien derbäizesetzen.</string>
   <string name="categories_activity_title">Kategorien</string>
@@ -95,7 +89,7 @@
   <string name="title_activity_category_details">Kategorie</string>
   <string name="menu_about">Iwwer</string>
   <string name="about_license">D\'App Wikimedia Commons ass eng \'Open-Source-App\' déi vu Fräiwëllege vun der Wikimedia Foundation entwéckelt gouf an och vun hinnen ënnerhal gëtt. D\'Wikimedia Foundation ass net an d\'Entwécklung oder den Ënnerhalt vun der App implizéiert.</string>
-  <string name="about_improve">Leet wgl. &lt;a href=\"%1$s\"&gt; e GitHub Problem&lt;/a&gt; fir Problemer ze mellen a Proposen ze maachen.</string>
+  <string name="about_improve">Leet wgl. &lt;a href=\"%1$s\"&gt; e GitHub Probleem&lt;/a&gt; fir Probleemer ze mellen a Proposen ze maachen.</string>
   <string name="about_privacy_policy">Dateschutz</string>
   <string name="about_credits">Merci</string>
   <string name="title_activity_about">Iwwer</string>
@@ -109,8 +103,6 @@
   <string name="menu_download">Eroflueden</string>
   <string name="preference_license">Standardlizenz</string>
   <string name="use_previous">Viregen Titel a Beschreiwung benotzen</string>
-  <string name="allow_gps">Automatesch déi aktuell Plaz kréien</string>
-  <string name="allow_gps_summary">Rifft déi aktuell Plaz of wann e Bild net georeferenzéiert ass a setzt Geotagge vun der aktueller Plaz. Opgepasst: Doduerch gëtt Är aktuell Plaz bekannt.</string>
   <string name="preference_theme">Thema</string>
   <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four">Attribution 4.0</string>
@@ -118,20 +110,9 @@
   <string name="license_name_cc_by">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Germany)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spain)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croatia)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Lëtzebuerg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Netherlands)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Germany)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Poland)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">Wikimedia Commons späichert déi meescht Biller, déi op Wikipedia benotzt ginn.</string>
   <string name="tutorial_1_subtext">Är Biller hëllefe Leit op der ganzer Welt ze forméieren!</string>
   <string name="tutorial_2_text">Luet wgl. nëmme Biller erop déi komplett vun Iech opgeholl oder gemaach goufen:</string>
@@ -159,10 +140,7 @@
   <string name="detail_license_empty">Onbekannt Lizenz</string>
   <string name="menu_refresh">Aktualiséieren</string>
   <string name="read_storage_permission_rationale">Obligatoresch Autorisatioun: Externe Späicher liesen. D\'App kann ouni dat net op d\'Galerie zougräifen.</string>
-  <string name="location_permission_rationale">Fakultativ Autorisatioun: Déi aktuell Plaz kréie fir Propose fir Kategorien</string>
   <string name="ok">OK</string>
-  <string name="title_activity_nearby">Plazen nobäi</string>
-  <string name="no_nearby">Keng Plazen nobäi fonnt</string>
   <string name="warning">Warnung</string>
   <string name="upload">Eroplueden</string>
   <string name="yes">Jo</string>
@@ -178,23 +156,15 @@
   <string name="become_a_tester_title">Beta-Tester ginn</string>
   <string name="become_a_tester_description">Schreift Iech op GooglePlay a fir eise Beta-Kanal a kritt fréi Zougang zu neie Funktiounen a Verbesserunge vu Feeler</string>
   <string name="_2fa_code">2FA-Code</string>
-  <string name="maximum_limit">Maximal Limite</string>
-  <string name="invalid_zero">Null ass net valabel</string>
-  <string name="maximum_limit_alert">Et kënnen der net méi wéi 500 gewise ginn</string>
   <string name="logout_verification">Wëllt dir Iech wierklech ausloggen?</string>
   <string name="commons_logo">Commons-Logo</string>
   <string name="commons_website">Internetsite vu Commons</string>
   <string name="commons_facebook">Commons-Facebook-Säit</string>
-  <string name="background_image">Hannergrondbild</string>
-  <string name="no_image_found">Kee Bild fonnt</string>
   <string name="no_subcategory_found">Keng Ënnerkategorie fonnt</string>
-  <string name="upload_image">Bild eroplueden</string>
   <string name="welcome_image_mount_zao">Bierg Zao</string>
   <string name="welcome_image_llamas">Lamaen</string>
   <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
   <string name="welcome_image_tulip">Tulp</string>
-  <string name="welcome_image_no_selfies">Keng Selfien</string>
-  <string name="welcome_image_proprietary">Geschützt Bild</string>
   <string name="welcome_image_welcome_wikipedia">Wëllkomm Wikipedia</string>
   <string name="welcome_image_welcome_copyright">Wëllkomm Copyright</string>
   <string name="welcome_image_sydney_opera_house">Oper vu Sydney</string>
@@ -210,9 +180,7 @@
   <string name="navigation_item_logout">Ausloggen</string>
   <string name="navigation_item_info">Uleedung</string>
   <string name="navigation_item_notification">Notifikatiounen</string>
-  <string name="navigation_item_featured_images">Bemierkenswäert</string>
   <string name="navigation_item_review">Nokucken</string>
-  <string name="nearby_needs_permissions">Plazen nobäi kënnen net gewise ginn ouni Rechter fir d\'Lokalisatioun</string>
   <string name="no_description_found">keng Beschreiwung fonnt</string>
   <string name="nearby_info_menu_commons_article">Commons-Fichierssäit</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-Element</string>
@@ -224,33 +192,26 @@
   <string name="upload_problem_different_geolocation">Dëst Bild gouf op enger anerer Plaz gemaach.</string>
   <string name="upload_problem_do_you_continue">Wëllt Dir dëst Bild nach ëmmer eroplueden?</string>
   <string name="internet_downloaded">Luet wgl. nëmme Biller erop déi Dir selwer opgeholl hutt. Luet keng Biller erop déi Dir aus dem Internet erofgelueden hutt.</string>
-  <string name="give_permission">Autorisatioun ginn</string>
   <string name="use_external_storage">Opnamen vun der In-App späicheren</string>
   <string name="use_external_storage_summary">Biller späicheren déi mat der in-app Kamera vun Ärem Apparat gemaach goufen</string>
   <string name="login_to_your_account">An Äre Benotzerkont aloggen</string>
   <string name="send_log_file">Log-Fichier schécken</string>
-  <string name="send_log_file_description">Log-Fichier per E-Mail un d\'Entwéckler schécke fir ze hëllefen fir Problemer mat der App z\'analyséieren. Notiz:A Logge kënne potenziell Informatiounen dra sinn déi Iech identifizéieren</string>
+  <string name="send_log_file_description">Log-Fichier per E-Mail un d\'Entwéckler schécke fir ze hëllefe fir Probleemer mat der App z\'analyséieren. Notiz: A Logge kënne potenziell Informatiounen dra sinn déi Iech identifizéieren</string>
   <string name="null_url">Feeler! URL net fonnt</string>
   <string name="nominate_deletion">Nominéiere fir ze Läschen</string>
   <string name="nominated_for_deletion">Dëst Bild gouf virgeschloe fir geläscht ze ginn.</string>
   <string name="nominated_see_more">Kuckt d\'Internetsäit fir Detailer</string>
-  <string name="view_browser">Am Browser weisen</string>
   <string name="skip_login">Iwwersprangen</string>
   <string name="navigation_item_login">Aloggen</string>
-  <string name="nearby_location_has_not_changed">De Plaz huet net geännert.</string>
   <string name="nearby_location_not_available">\"Nobäi\" funktionéiert eventuell net richteg, Plaz ass net disponibel.</string>
-  <string name="read_article">Artikel liesen</string>
-  <string name="notifications_welcome">Wëllkomm op Wikimedia Commons, %1$s! Mir si frou datt Dir hei sidd.</string>
-  <string name="notifications_thank_you_edit">Merci datt Dir eng Ännerung gemaach hutt</string>
-  <string name="notifications_mention">%1$s huet Iech op %2$s ernimmt.</string>
   <string name="nearby_directions">Richtungen</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Bewäert eis</string>
   <string name="about_faq">FAQ</string>
+  <string name="user_guide">Benotzerhandbuch</string>
   <string name="no_internet">Internet net disponibel</string>
-  <string name="internet_established">Internet disponibel</string>
   <string name="error_notifications">Feeler beim Ofruffe vun den Notifikatiounen</string>
   <string name="no_notifications">Keng Notifikatioune fonnt</string>
   <string name="about_translate">Iwwersetzen</string>
@@ -259,7 +220,6 @@
   <string name="about_translate_proceed">Virufueren</string>
   <string name="about_translate_cancel">Ofbriechen</string>
   <string name="retry">Nach eng Kéier probéieren</string>
-  <string name="showcase_view_got_it_button">Verstanen!</string>
   <string name="showcase_view_needs_photo">Dës Plaz brauch eng Foto.</string>
   <string name="showcase_view_has_photo">Dës Plaz brauch eng Foto.</string>
   <string name="showcase_view_no_longer_exists">Dës Plaz gëtt et net méi.</string>
@@ -277,6 +237,7 @@
   <string name="search_tab_title_categories">Kategorien</string>
   <string name="search_tab_title_depictions">Elementer</string>
   <string name="explore_tab_title_mobile">mobil eropgelueden</string>
+  <string name="explore_tab_title_map">Kaart</string>
   <string name="wikidata_edit_failure">Déi entspriechend Wikidata-Entitéit konnt net aktualiséiert ginn!</string>
   <string name="menu_set_wallpaper">Als Hannergrondbild festleeën</string>
   <string name="wallpaper_set_successfully">Hannergrondbild festgeluecht</string>
@@ -286,7 +247,6 @@
   <string name="continue_message">Virufueren</string>
   <string name="correct">Richteg Äntwert</string>
   <string name="wrong">Falsch Äntwert</string>
-  <string name="add_description">+ Beschreiwung derbäisetzen</string>
   <string name="nominate_delete">Nominéiere fir ze Läschen</string>
   <string name="delete">Läschen</string>
   <string name="Achievements">Realisatiounen</string>
@@ -303,12 +263,10 @@
   <string name="nearby_fragment">Nobäi</string>
   <string name="notifications">Notifikatiounen</string>
   <string name="list_sheet">Lëscht</string>
-  <string name="step_count" fuzzy="true">Schrëtt %1$d vu(n) %2$d</string>
+  <string name="step_count">Schrëtt %1$d vu(n) %2$d: %3$s</string>
   <string name="next">Weider</string>
   <string name="previous">Vireg</string>
   <string name="submit">Späicheren</string>
-  <string name="navigation_item_bookmarks">Lieszeechen</string>
-  <string name="title_activity_bookmarks">Lieszeechen</string>
   <string name="title_page_bookmarks_pictures">Biller</string>
   <string name="title_page_bookmarks_locations">Plazen</string>
   <string name="provider_bookmarks">Lieszeechen</string>
@@ -317,34 +275,18 @@
   <string name="deletion_reason_uploaded_by_mistake">Ech hunn et iertemlech eropgelueden</string>
   <string name="deletion_reason_publicly_visible">Ech wousst net datt et ëffentlech visibel wier</string>
   <string name="deletion_reason_not_interesting">Pardon, dëst Bild ass net interessant fir eng Enzyklopedie</string>
-  <string name="desc_language_Worldwide">Weltwäit</string>
-  <string name="desc_language_America">Amerika</string>
-  <string name="desc_language_Europe">Europa</string>
-  <string name="desc_language_Middle_East">Mëttleren Osten</string>
-  <string name="desc_language_Africa">Afrika</string>
-  <string name="desc_language_Asia">Asien</string>
-  <string name="desc_language_Pacific">Pazifik</string>
   <string name="no_categories_selected">Keng Kategorien erausgesicht</string>
   <string name="never_ask_again">Dëst ni méi froen</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Dir hutt esou vill Kontributioune gemaach datt eise Berechnungssystem iwwerfuerdert ass. Dëst ass déi bescht Leeschtung.</string>
   <string name="nominate_for_deletion_done">Fäerdeg</string>
-  <string name="notsure">Net sécher</string>
-  <string name="send_thank_send">Merci schécken</string>
-  <string name="send_thank_notification_title">Merci schécken</string>
   <string name="review_category">Ass dëst richteg kategoriséiert?</string>
-  <string name="review_category_yes_button_text">Neen, falsch kategoriséiert</string>
-  <string name="review_category_no_button_text">Gesäit gutt aus</string>
-  <string name="review_spam_no_button_text">Gesäit gutt aus</string>
-  <string name="review_copyright_yes_button_text">Keng Violatioun vum Copyright</string>
-  <string name="review_copyright_no_button_text">Gesäit gutt aus</string>
-  <string name="review_thanks_yes_button_text">Jo, firwat net</string>
-  <string name="review_thanks_no_button_text">Nächst BILD</string>
+  <string name="review_thanks_yes_button_text">Nächst Bild</string>
+  <string name="review_thanks_no_button_text">Jo, firwat net</string>
   <string name="no_image">Keng Biller benotzt</string>
   <string name="no_image_uploaded">Keng Biller eropgelueden</string>
-  <string name="no_read_notification">Dir hutt keng net-geliest Notifikatiounen</string>
-  <string name="menu_option_read">Déi geliest weisen</string>
+  <string name="no_read_notification">Dir hutt keng net-gelies Notifikatiounen</string>
+  <string name="menu_option_read">Déi geliese weisen</string>
   <string name="error_occurred_in_picking_images">Feeler beim Eraussiche vun de Biller</string>
-  <string name="image_chooser_title">Sicht Biller eraus fir eropzelueden</string>
   <string name="please_wait">Waart wgl. ...</string>
   <string name="skip_image">Dëst Bild iwwersprangen</string>
   <string name="exif_tag_name_author">Auteur</string>
@@ -361,10 +303,11 @@
   <string name="category_edit_helper_show_edit_title_success">Succès</string>
   <string name="category_edit_helper_edit_message_else">Kategorie konnten net derbäigesat ginn.</string>
   <string name="category_edit_button_text">Kategorien aktualiséieren</string>
+  <string name="coordinates_edit_helper_show_edit_title">Aktualiséierung vun de Koordinaten</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Succès</string>
   <string name="account_created">Benotzerkont ugeluecht!</string>
   <string name="place_state_needs_photo">Brauch eng Foto</string>
   <string name="upload_nearby_place_found_title">Plaz nobäi fonnt</string>
-  <string name="title_app_shortcut_explore">Entdecken</string>
   <string name="title_app_shortcut_bookmark">Lieszeechen</string>
   <string name="title_app_shortcut_setting">Astellungen</string>
   <string name="remove_bookmark">Vun de Lieszeechen ewechgeholl</string>
@@ -380,9 +323,7 @@
   <string name="todo_improve">Proposéiert Verbesserungen:</string>
   <string name="missing_category">- Kategorien bei dëst Bild derbäisetze fir seng Notzbarkeet ze verbesseren.</string>
   <string name="missing_article">- Dëst Bild op den associéierte Wikipedia-Artikel derbäisetzen dee keng Biller huet.</string>
-  <string name="edit_category">Kategorien änneren</string>
   <string name="add_picture_to_wikipedia_article_title">Bild op Wikipedia derbäisetzen</string>
-  <string name="add_picture_to_wikipedia_instructions_title">Instruktiounen</string>
   <string name="confirm">Confirméieren</string>
   <string name="instructions_title">Instruktiounen</string>
   <string name="wikipedia_instructions_step_7">7.Den Artikel publizéieren</string>
@@ -390,7 +331,7 @@
   <string name="resume">virufueren</string>
   <string name="paused">Ënnerbrach</string>
   <string name="more">Méi</string>
-  <string name="favorites">Favoritten</string>
+  <string name="bookmarks">Lieszeechen</string>
   <string name="achievements_tab_title">Realisatiounen</string>
   <string name="leaderboard_tab_title">Leaderboard</string>
   <string name="rank_prefix">Klassement:</string>
@@ -409,5 +350,34 @@
   <string name="leaderboard_upload">Eroplueden</string>
   <string name="leaderboard_nearby">Nobäi</string>
   <string name="leaderboard_used">Benotzt</string>
-  <string name="limited_connection">Limitéiert Verbindung</string>
+  <string name="limited_connection_mode">Limitéierte Verbindungsmodus</string>
+  <string name="cancelling_upload">Eropluede gëtt ofgebrach....</string>
+  <string name="cancel_upload">Eroplueden ofbriechen</string>
+  <string name="app_ui_language">Sprooch vum Interface vum Benotzer vun der App</string>
+  <string name="read_help_link">Liest méi</string>
+  <string name="media_detail_in_all_languages">An alle Sproochen</string>
+  <string name="choose_a_location">Eng Plaz eraussichen</string>
+  <string name="select_location_location_picker">Plaz eraussichen</string>
+  <string name="label">Etikett</string>
+  <string name="description">Beschreiwung</string>
+  <string name="title_page_bookmarks_items">Elementer</string>
+  <string name="custom_selector_empty_text">Keng Biller</string>
+  <string name="done">Fäerdeg</string>
+  <string name="back">Zréck</string>
+  <string name="welcome_custom_selector_ok">Genial</string>
+  <string name="wlm_upload_info">Dëst Bild wäert beim Concours Wiki Loves Monuments 2021 agereecht ginn.</string>
+  <string name="display_monuments">Monumenter weisen</string>
+  <string name="learn_more">FIR MÉI ZE WËSSEN</string>
+  <string name="need_permission">Autorisatioun gëtt gebraucht</string>
+  <string name="contributions_of_user">Kontributioune vum Benotzer: %s</string>
+  <string name="achievements_of_user">Leeschtunge vum Benotzer: %s</string>
+  <string name="menu_view_user_page">Benotzersäit weisen</string>
+  <string name="advanced_options">Erweidert Optiounen</string>
+  <string name="apply">Uwenden</string>
+  <string name="reset">Zrécksetzen</string>
+  <string name="no_location_found_title">Keng Plaz fonnt</string>
+  <string name="explore_map_details">Detailer</string>
+  <string name="error_feedback">Feeler beim Schécke vum Feedback</string>
+  <string name="enter_description">Wéi ass Äre Feedback?</string>
+  <string name="your_feedback">Äre Feedback</string>
 </resources>

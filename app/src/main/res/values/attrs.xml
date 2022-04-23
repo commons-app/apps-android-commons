@@ -47,10 +47,18 @@
     <attr name="contributionsListTextSecondary" format="reference"/>
     <attr name="contributionsListTextPrimary" format="reference"/>
     <attr name="menu_item_tint" format="reference"/>
+    <attr name="search_icon" format="reference"/>
+    <attr name="caption_description_text_color" format="reference" />
+    <attr name="custom_selector_done" format="reference"/>
+    <attr name="custom_selector_back" format="reference"/>
 
     <declare-styleable name="Badge">
         <attr name="boundary" format="color"/>
         <attr name="camera" format="color"/>
         <attr name="centerRegion" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="PasteSensitiveTextInputEditText">
+        <attr name="allowFormatting" format="boolean"/>
     </declare-styleable>
 </resources>

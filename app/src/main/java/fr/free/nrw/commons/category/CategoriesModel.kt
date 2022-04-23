@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.category
 
 import android.text.TextUtils
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.upload.GpsCategoryModel
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.utils.StringSortingUtils
@@ -19,6 +20,11 @@ class CategoriesModel @Inject constructor(
     private val gpsCategoryModel: GpsCategoryModel
 ) {
     private val selectedCategories: MutableList<CategoryItem> = mutableListOf()
+
+    /**
+     * Existing categories which are selected
+     */
+    private var selectedExistingCategories: MutableList<String> = mutableListOf()
 
     /**
      * Returns if the item contains an year
@@ -56,7 +62,7 @@ class CategoriesModel @Inject constructor(
 
         // Newly used category...
         if (category == null) {
-            category = Category(null, item.name, Date(), 0)
+            category = Category(null, item.name, item.description, item.thumbnail, Date(), 0)
         }
         category.incTimesUsed()
         categoryDao.save(category)
@@ -74,14 +80,14 @@ class CategoriesModel @Inject constructor(
         selectedDepictions: List<DepictedItem>
     ): Observable<List<CategoryItem>> {
         return suggestionsOrSearch(term, imageTitleList, selectedDepictions)
-            .map { it.map { CategoryItem(it, false) } }
+            .map { it.map { CategoryItem(it.name, it.description, it.thumbnail, false) } }
     }
 
     private fun suggestionsOrSearch(
         term: String,
         imageTitleList: List<String>,
         selectedDepictions: List<DepictedItem>
-    ): Observable<List<String>> {
+    ): Observable<List<CategoryItem>> {
         return if (TextUtils.isEmpty(term))
             Observable.combineLatest(
                 categoriesFromDepiction(selectedDepictions),
@@ -96,14 +102,68 @@ class CategoriesModel @Inject constructor(
                 .toObservable()
     }
 
-    private fun categoriesFromDepiction(selectedDepictions: List<DepictedItem>) =
-        Observable.just(selectedDepictions.map { it.commonsCategories }.flatten())
+    /**
+     * Fetches details of every category associated with selected depictions, converts them into
+     * CategoryItem and returns them in a list.
+     *
+     * @param selectedDepictions selected DepictItems
+     * @return List of CategoryItem associated with selected depictions
+     */
+    private fun categoriesFromDepiction(selectedDepictions: List<DepictedItem>):
+            Observable<MutableList<CategoryItem>>? {
+        return Observable.fromIterable(
+                selectedDepictions.map { it.commonsCategories }.flatten())
+                .map { categoryItem ->
+                    categoryClient.getCategoriesByName(categoryItem.name,
+                        categoryItem.name, SEARCH_CATS_LIMIT).map {
+
+                        CategoryItem(it[0].name, it[0].description,
+                            it[0].thumbnail, it[0].isSelected)
+
+                    }.blockingGet()
+                }.toList().toObservable()
+    }
+
+    /**
+     * Fetches details of every category by their name, converts them into
+     * CategoryItem and returns them in a list.
+     *
+     * @param categoryNames selected Categories
+     * @return List of CategoryItem
+     */
+     fun getCategoriesByName(categoryNames: List<String>):
+            Observable<MutableList<CategoryItem>>? {
+        return Observable.fromIterable(categoryNames)
+            .map { categoryName ->
+                buildCategories(categoryName)
+            }.toList().toObservable()
+    }
+
+    /**
+     * Fetches the categories and converts them into CategoryItem
+     */
+    fun buildCategories(categoryName: String): CategoryItem {
+        return categoryClient.getCategoriesByName(categoryName,
+            categoryName, SEARCH_CATS_LIMIT).map {
+            if(it.isNotEmpty()) {
+                CategoryItem(
+                    it[0].name, it[0].description,
+                    it[0].thumbnail, it[0].isSelected
+                )
+            } else {
+                CategoryItem(
+                    "Hidden", "Hidden",
+                    "hidden", false
+                )
+            }
+        }.blockingGet()
+    }
 
     private fun combine(
-        depictionCategories: List<String>,
-        locationCategories: List<String>,
-        titles: List<String>,
-        recents: List<String>
+        depictionCategories: List<CategoryItem>,
+        locationCategories: List<CategoryItem>,
+        titles: List<CategoryItem>,
+        recents: List<CategoryItem>
     ) = depictionCategories + locationCategories + titles + recents
 
 
@@ -115,7 +175,7 @@ class CategoriesModel @Inject constructor(
     private fun titleCategories(titleList: List<String>) =
         if (titleList.isNotEmpty())
             Observable.combineLatest(titleList.map { getTitleCategories(it) }) { searchResults ->
-                searchResults.map { it as List<String> }.flatten()
+                searchResults.map { it as List<CategoryItem> }.flatten()
             }
         else
             Observable.just(emptyList())
@@ -125,7 +185,7 @@ class CategoriesModel @Inject constructor(
      * @param title
      * @return
      */
-    private fun getTitleCategories(title: String): Observable<List<String>> {
+    private fun getTitleCategories(title: String): Observable<List<CategoryItem>> {
         return categoryClient.searchCategories(title, SEARCH_CATS_LIMIT).toObservable()
     }
 
@@ -134,12 +194,35 @@ class CategoriesModel @Inject constructor(
      * Handles category item selection
      * @param item
      */
-    fun onCategoryItemClicked(item: CategoryItem) {
-        if (item.isSelected) {
-            selectedCategories.add(item)
-            updateCategoryCount(item)
+    fun onCategoryItemClicked(item: CategoryItem, media: Media?) {
+        if (media == null) {
+            if (item.isSelected) {
+                selectedCategories.add(item)
+                updateCategoryCount(item)
+            } else {
+                selectedCategories.remove(item)
+            }
         } else {
-            selectedCategories.remove(item)
+            if (item.isSelected) {
+                if (media.categories?.contains(item.name) == true) {
+                    selectedExistingCategories.add(item.name)
+                } else {
+                    selectedCategories.add(item)
+                    updateCategoryCount(item)
+                }
+            } else {
+                if (media.categories?.contains(item.name) == true) {
+                    selectedExistingCategories.remove(item.name)
+                    if (!media.categories?.contains(item.name)!!) {
+                        val categoriesList: MutableList<String> = ArrayList()
+                        categoriesList.add(item.name)
+                        categoriesList.addAll(media.categories!!)
+                        media.categories = categoriesList
+                    }
+                } else {
+                    selectedCategories.remove(item)
+                }
+            }
         }
     }
 
@@ -156,9 +239,28 @@ class CategoriesModel @Inject constructor(
      */
     fun cleanUp() {
         selectedCategories.clear()
+        selectedExistingCategories.clear()
     }
 
     companion object {
         const val SEARCH_CATS_LIMIT = 25
+    }
+
+    /**
+     * Provides selected existing categories
+     *
+     * @return selected existing categories
+     */
+    fun getSelectedExistingCategories(): List<String> {
+        return selectedExistingCategories
+    }
+
+    /**
+     * Initialize existing categories
+     *
+     * @param selectedExistingCategories existing categories
+     */
+    fun setSelectedExistingCategories(selectedExistingCategories: MutableList<String>) {
+        this.selectedExistingCategories = selectedExistingCategories
     }
 }

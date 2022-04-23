@@ -16,6 +16,8 @@ public interface UploadContract {
 
         void finish();
 
+        void returnToMainActivity();
+
         void askUserToLogIn();
 
         void showProgress(boolean shouldShow);
@@ -29,6 +31,8 @@ public interface UploadContract {
         void onUploadMediaDeleted(int index);
 
         void updateTopCardTitle();
+
+        void makeUploadRequest();
     }
 
     public interface UserActionListener extends BasePresenter<View> {
