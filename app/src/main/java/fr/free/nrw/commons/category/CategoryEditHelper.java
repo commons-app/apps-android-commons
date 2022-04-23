@@ -62,15 +62,23 @@ public class CategoryEditHelper {
         final String wikiText) {
         Timber.d("thread is category adding %s", Thread.currentThread().getName());
         String summary = "Adding categories";
+        String wikiTextWithoutCategory=null;
 
+        boolean flag=false;
         final StringBuilder buffer = new StringBuilder();
-
-        final String wikiTextWithoutCategory
-            = wikiText.substring(0, wikiText.indexOf("[[Category"));
-
+        if(wikiText.contains("Uncategorized")){
+            flag=true;
+            wikiTextWithoutCategory=wikiText.substring(0, wikiText.indexOf("Uncategorized"));
+        }else if(wikiText.contains("[[Category")){
+            wikiTextWithoutCategory= wikiText.substring(0, wikiText.indexOf("[[Category"));
+        }
         if (categories != null && categories.size() != 0) {
             for (int i = 0; i < categories.size(); i++) {
-                buffer.append("[[Category:").append(categories.get(i)).append("]]\n");
+                if(!flag || !categories.get(i).equals("None selected")) {
+                    buffer.append("[[Category:").append(categories.get(i)).append("]]\n");
+                }else{
+                    categories.remove(i);
+                }
             }
         } else {
             buffer.append("{{subst:unc}}");
