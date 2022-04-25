@@ -139,7 +139,7 @@
   <string name="display_list_button">القائمة</string>
   <string name="contributions_subtitle_zero" fuzzy="true">لا مرفوعات بعد</string>
   <string name="categories_not_found">لا توجد تصنيفات تطابق %1$s</string>
-  <string name="depictions_not_found">لا توجد عناصر ويكيداتا مطابقة ل   s$%1</string>
+  <string name="depictions_not_found">لا توجد عناصر ويكي بيانات مطابقة لـ s$%1</string>
   <string name="no_child_classes">%1$s لا يملك تصنيف الأطفال</string>
   <string name="no_parent_classes">لا يملك تصنيف الأهل  s$%1</string>
   <string name="categories_skip_explanation">أضف تصنيفات لجعل صورك أكثر قابلية للاكتشاف على ويكيميديا ​​كومنز.\n\nابدأ الكتابة لإضافة تصنيفات.</string>

@@ -37,7 +37,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">ترتيبون</string>
   <string name="intent_share_upload_label">العام ۾ چاڙهيو</string>
-  <string name="username">واپرائيندڙ-نانءُ</string>
+  <string name="username">واپرائيندڙنانءُ</string>
   <string name="password">ڳجهولفظ</string>
   <string name="login_credential">وڪي ڪامنز جي آزمائشي کاتي ۾ داخل ٿيو</string>
   <string name="login">داخل ٿيو</string>
@@ -80,7 +80,7 @@
   <string name="menu_upload_single">چاڙھيو</string>
   <string name="categories_search_text_hint">زمرا ڳوليو</string>
   <string name="menu_save_categories">سانڍيو</string>
-  <string name="refresh_button">تازو ڪيو</string>
+  <string name="refresh_button">تازو ڪريو</string>
   <string name="display_list_button">فھرست</string>
   <string name="contributions_subtitle_zero" fuzzy="true">اڃا تائين ڪوبہ چاڙھ ناھي</string>
   <string name="categories_not_found">%1$s سان ملندڙ ڪوبہ زمرو نہ لڌو</string>
