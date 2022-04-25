@@ -144,7 +144,22 @@ class ReviewControllerTest {
                 R.string.send_thank_toast, media.displayTitle
             )
         )
+
+        val method: Method = ReviewController::class.java.getDeclaredMethod(
+            "displayThanksToast", Context::class.java, Boolean::class.java
+        )
+
+        method.isAccessible = true
+        method.invoke(controller,context,true)
+
+        assertEquals(
+            ShadowToast.getTextOfLatestToast().toString(),
+            context.getString(
+                R.string.send_thank_success_message, media.displayTitle
+            )
+        )
     }
+
 
     @Test
     fun testSendThanksCaseNull() {

@@ -156,19 +156,23 @@ public class ReviewController {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((result) -> {
-                    String message;
-                    String title;
-                    if (result) {
-                        title = context.getString(R.string.send_thank_success_title);
-                        message = context.getString(R.string.send_thank_success_message, media.getDisplayTitle());
-                    } else {
-                        title = context.getString(R.string.send_thank_failure_title);
-                        message = context.getString(R.string.send_thank_failure_message, media.getDisplayTitle());
-                    }
-
-                    showNotification(title, message);
-
+                    displayThanksToast(context,result);
                 }, Timber::e);
+    }
+
+    @SuppressLint("StringFormatInvalid")
+    private void displayThanksToast(final Context context, final boolean result){
+        final String message;
+        final String title;
+        if (result) {
+            title = context.getString(R.string.send_thank_success_title);
+            message = context.getString(R.string.send_thank_success_message, media.getDisplayTitle());
+        } else {
+            title = context.getString(R.string.send_thank_failure_title);
+            message = context.getString(R.string.send_thank_failure_message, media.getDisplayTitle());
+        }
+
+        ViewUtil.showShortToast(context,message);
     }
 
     private void showNotification(String title, String message) {
