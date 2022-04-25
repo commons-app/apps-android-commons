@@ -98,6 +98,7 @@
   <string name="signup">Регистрация</string>
   <string name="logging_in_title">Вход в систему</string>
   <string name="logging_in_message">Пожалуйста, подождите…</string>
+  <string name="updating_caption_title">Подписи и описания обновляются</string>
   <string name="updating_caption_message">Пожалуйста, подождите…</string>
   <string name="login_success">Вход выполнен успешно!</string>
   <string name="login_failed">Ошибка входа в систему!</string>
@@ -305,6 +306,7 @@
   <string name="nearby_commons">Викисклад</string>
   <string name="about_rate_us">Оцените нас</string>
   <string name="about_faq">Часто задаваемые вопросы</string>
+  <string name="user_guide">Руководство пользователя</string>
   <string name="welcome_skip_button">Пропустить руководство</string>
   <string name="no_internet">Интернет недоступен</string>
   <string name="error_notifications">Ошибка при получении уведомления</string>
@@ -339,6 +341,7 @@
   <string name="search_tab_title_depictions">Элементы</string>
   <string name="explore_tab_title_featured">Избранное</string>
   <string name="explore_tab_title_mobile">Загружено текущим приложением</string>
+  <string name="explore_tab_title_map">Карта</string>
   <string name="successful_wikidata_edit">Изображение добавлено на страницу %1$s Викиданных!</string>
   <string name="wikidata_edit_failure">Не удалось обновить соответствующую страницу викиданных!</string>
   <string name="menu_set_wallpaper">Сделать фоновой заставкой</string>
@@ -364,6 +367,7 @@
   <string name="quiz_screenshot_question">Этот скриншот подходит для загрузки на Викисклад?</string>
   <string name="share_app_title">Поделиться приложением</string>
   <string name="error_fetching_nearby_places">Ошибка получения мест поблизости</string>
+  <string name="no_nearby_places_around">Нет мест поблизости</string>
   <string name="error_fetching_nearby_monuments">Ошибка получения мест поблизости.</string>
   <string name="no_recent_searches">История поиска пуста</string>
   <string name="delete_recent_searches_dialog">Вы уверены, что хотите очистить историю поисковых запросов?</string>
@@ -475,7 +479,7 @@
   <string name="review_thanks_yes_button_text">Следующее изображение</string>
   <string name="review_thanks_no_button_text">Да, почему бы нет</string>
   <string name="skip_image_explanation">Нажатие этой кнопки приводит к показу следующего недавно загруженного изображения с Викисклада</string>
-  <string name="review_image_explanation" fuzzy="true">Вы можете проверить файлы, и, таким образом, улучшить их качество на Викискладе.\n Есть четыре проверки:\n - Уместен ли файл на Викискладе?\n - Соответствует ли файл правилам об авторском праве?\n - Правильно ли файл категоризирован?\n - Если всё хорошо, можете поблагодарить загрузившего этот файл.</string>
+  <string name="review_image_explanation">Вы можете проверять файлы и таким образом улучшать качество содержания на Викискладе.\nЕсть три параметра проверки:\n\n— Соответствует ли файл целям и задачам Викисклада?\nКогда вы нажимаете «Нет» (не соответствует целям и задачам), к этому файлу добавляется шаблон с номинацией на удаление от вашего имени.\n\n— Соответствует ли этот файл правилам об авторском праве?\nКогда вы нажимаете «Нет» (не соответствует правилам об авторских праве), к этому файлу добавляется шаблон с номинацией на удаление от вашего имени.\n\n— Корректно ли файл категоризирован?\nКогда вы нажимаете «Нет» (некорректно категоризирован), к этому файлу добавляется шаблон с запросом на категоризацию.\n\nЕсли всё хорошо и ни один шаблон не был добавлен к файлу, тогда вы получаете возможность поблагодарить участника_цу, сделавшего_ую вклад.</string>
   <string name="no_image">Нет использованных изображений</string>
   <string name="no_image_reverted">Нет откаченых изображений</string>
   <string name="no_image_uploaded">Нет загруженных изображений</string>
@@ -540,10 +544,14 @@
   <string name="coordinates_edit_helper_make_edit_toast">Попытка обновить координаты.</string>
   <string name="coordinates_edit_helper_show_edit_title">Обновление координат</string>
   <string name="description_edit_helper_show_edit_title">Обновление описания</string>
+  <string name="caption_edit_helper_show_edit_title">Обновление подписи</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Успешно</string>
   <string name="coordinates_edit_helper_show_edit_message">Координаты %1$s добавлены.</string>
   <string name="description_edit_helper_show_edit_message">Описания добавлены.</string>
+  <string name="caption_edit_helper_show_edit_message">Подпись добавлена.</string>
   <string name="coordinates_edit_helper_edit_message_else">Не удалось добавить координаты.</string>
+  <string name="description_edit_helper_edit_message_else">Не удалось добавить описания.</string>
+  <string name="caption_edit_helper_edit_message_else">Не удалось добавить подпись.</string>
   <string name="coordinates_picking_unsuccessful">Не удалось получить координаты.</string>
   <string name="descriptions_picking_unsuccessful">Не удалось получить описания.</string>
   <string name="description_activity_title">Редактировать описания и подписи</string>
@@ -681,10 +689,22 @@
   <string name="achievements_of_user">Достижения участника: %s</string>
   <string name="menu_view_user_page">Посмотреть страницу участника</string>
   <string name="edit_depictions">Редактировать описания</string>
+  <string name="edit_categories">Изменить категории</string>
   <string name="advanced_options">Расширенные настройки</string>
   <string name="apply">Применить</string>
   <string name="reset">Сбросить</string>
   <string name="no_location_found_title">Местоположение не найдено</string>
   <string name="add_location">Добавить местоположение</string>
   <string name="feedback_sharing_data_alert">Пожалуйста, удалите из этого письма любую информацию, которой вы не желаете делиться с другими. Кроме того, имейте в виду, что адрес вашей электронной почты, с которого вы отправляете сообщения, а также связанное с ним имя и изображение профиля, будут видны всем.</string>
+  <string name="explore_map_details">Подробности</string>
+  <string name="api_level">Уровень API</string>
+  <string name="android_version">Версия Андроида</string>
+  <string name="device_manufacturer">Производитель устройства</string>
+  <string name="device_model">Модель устройства</string>
+  <string name="device_name">Название устройства</string>
+  <string name="network_type">Тип сети</string>
+  <string name="thanks_feedback">Спасибо за данную обратную связь</string>
+  <string name="error_feedback">Ошибка при отправке обратной связи</string>
+  <string name="enter_description">Что вы хотите сообщить?</string>
+  <string name="your_feedback">Обратная связь от вас</string>
 </resources>

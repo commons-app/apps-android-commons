@@ -453,7 +453,7 @@
   <string name="review_thanks_yes_button_text">Sonraki resim</string>
   <string name="review_thanks_no_button_text">Evet, neden olmasın</string>
   <string name="skip_image_explanation">Bu butona tıkladığınızda Wikimedia Commons\'tan yeni yüklediğiniz başka bir resim elde edersiniz</string>
-  <string name="review_image_explanation" fuzzy="true">Görüntüleri inceleyebilir ve Wikimedia Commons\'un kalitesini iyileştirebilirsiniz.\n  İncelemenin dört parametresi:\n  - Bu görüntü kapsam dahilinde mi?\n  - Bu resim telif hakkı kurallarına uyuyor mu?\n  - Bu resim doğru sınıflandırılmış mı?\n  - Her şey yolunda giderse katılımcıya da teşekkür edebilirsiniz.</string>
+  <string name="review_image_explanation">Wikimedia Commons\'ın kalitesini artırmak için resimleri inceleyebilirsiniz.\nİncelemenin üç parametresi şunlardır:\n\n- Bu resim kapsam dahilinde mi?\nHayır\'a (kapsam dışı) dokunduğunuzda, bu resme bir silme adaylığı şablonu eklemiş olursunuz.\n\n- Bu resim telif hakkı kurallarına uyuyor mu?\nHayır\'a dokunduğunuzda (telif hakkı kurallarına uymuyor), bu resme bir silme adaylığı şablonu ekliyorsunuz.\n\n- Bu resim doğru bir şekilde kategorize edilmiş mi?\nHayır\'a (doğru şekilde kategorize edilmemiş) dokunduğunuzda, bu resme bir kategorizasyon isteği şablonu eklemiş olursunuz.\n\nHer şey yolundaysa, resme herhangi bir şablon eklenmez ve katkıda bulunana teşekkür etme fırsatı elde edersiniz.</string>
   <string name="no_image">Hiç resim kullanılmadı</string>
   <string name="no_image_reverted">Geri getirilen resim yok</string>
   <string name="no_image_uploaded">Yüklenen resim yok</string>
