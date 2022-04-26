@@ -25,7 +25,7 @@ import com.google.android.material.snackbar.Snackbar;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.bookmarks.Bookmark;
+import fr.free.nrw.commons.bookmarks.models.Bookmark;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.contributions.Contribution;
