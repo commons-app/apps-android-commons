@@ -71,6 +71,7 @@ project.afterEvaluate {
                         '**/*$Result$*.*',
                         // model
                         '**/**/model/*',
+                        '**/**/models/*',
                         '**/model/*',
                         // concurrency
                         '**/concurrency/*',
