@@ -25,7 +25,6 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_alignParentEnd="true"
-          android:contentDescription="@string/pic_of_day_camera"
           android:padding="@dimen/dimen_20"
           android:src="@drawable/ic_photo_camera_white_24dp" />
 
@@ -47,7 +46,6 @@
         android:padding="@dimen/filter_padding"
         android:id="@+id/appwidget_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/appwidget_img" />
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

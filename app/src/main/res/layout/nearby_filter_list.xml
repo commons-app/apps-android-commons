@@ -13,8 +13,8 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/dimen_10"
-      android:contentDescription="@string/near_by_all"
-      android:text="@string/near_by_all" />
+      android:contentDescription="@string/nearby_all"
+      android:text="@string/nearby_all" />
 
     <View
         android:layout_width="match_parent"

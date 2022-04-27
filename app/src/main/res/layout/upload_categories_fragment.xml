@@ -35,7 +35,6 @@
         android:id="@+id/tooltip"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:contentDescription="@string/upload_tooltip"
         android:src="@drawable/mapbox_info_icon_default" />
     </LinearLayout>
 

@@ -17,7 +17,6 @@
       android:layout_weight="1"
       android:background="@drawable/button_background_selector"
       android:clickable="true"
-      android:contentDescription="@string/near_by_row_camera"
       android:orientation="vertical"
       android:padding="@dimen/standard_gap">
 
@@ -45,7 +44,7 @@
       android:layout_weight="1"
       android:background="@drawable/button_background_selector"
       android:clickable="true"
-      android:contentDescription="@string/near_by_row_image"
+      android:contentDescription="@string/nearby_row_image"
       android:orientation="vertical"
       android:padding="@dimen/standard_gap">
 
@@ -103,7 +102,6 @@
       android:layout_height="wrap_content"
       android:layout_weight="1"
       android:clickable="true"
-      android:contentDescription="@string/near_by_row_more"
       android:orientation="vertical"
       android:padding="@dimen/standard_gap">
 

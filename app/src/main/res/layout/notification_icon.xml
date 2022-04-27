@@ -16,7 +16,6 @@
       android:layout_height="wrap_content"
       android:layout_marginEnd="@dimen/activity_margin_horizontal"
       android:layout_marginRight="@dimen/activity_margin_horizontal"
-      android:contentDescription="@string/notification_icon"
       android:gravity="center"
       app:srcCompat="?attr/notification_icon_drawable" />
 
@@ -28,7 +27,6 @@
       android:layout_alignEnd="@id/cart_icon_image_view"
       android:layout_alignRight="@id/cart_icon_image_view"
       android:background="@drawable/notification_badge"
-      android:contentDescription="@string/notification_number"
       android:gravity="center"
       android:padding="@dimen/miniscule_margin"
       android:textColor="?attr/notification_icon_text_color"
