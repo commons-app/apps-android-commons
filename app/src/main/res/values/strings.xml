@@ -23,15 +23,15 @@
   <string name="notification_icon">Notification</string>
   <string name="notification_number">Notification Number</string>
   <string name="nearby_search_item">Nearby Search Item</string>
-  <string name="near_by_row_camera">Camera</string>
-  <string name="near_by_row_image">Image</string>
-  <string name="near_by_row_map">Map</string>
-  <string name="near_by_row_more">More</string>
-  <string name="near_by_all">All</string>
-  <string name="near_by_filter_toggle">Toggle Up</string>
-  <string name="near_by_filter_search">Search View</string>
-  <string name="near_by_filter_state">Place State</string>
-  
+  <string name="nearby_row_camera">Camera</string>
+  <string name="nearby_row_image">Image</string>
+  <string name="nearby_row_map">Map</string>
+  <string name="nearby_row_more">More</string>
+  <string name="nearby_all">All</string>
+  <string name="nearby_filter_toggle">Toggle Up</string>
+  <string name="nearby_filter_search">Search View</string>
+  <string name="nearby_filter_state">Place State</string>
+
   <!--Other strings-->
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d file uploading</item>
