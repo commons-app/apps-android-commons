@@ -12,21 +12,11 @@
   <string name="add_contribution_from_camera">Add contribution from camera</string>
   <string name="add_contribution_from_photos">Add contribution from Photos</string>
   <string name="add_contribution_from_contributions_gallery">Add contribution from previous contributions gallery</string>
-  <string name="upload_tooltip">Tooltip</string>
   <string name="show_captions">Captions</string>
   <string name="row_item_language_description">Language Description</string>
   <string name="row_item_caption">Caption</string>
   <string name="show_captions_description">Description</string>
-  <string name="upload_categories_title">Step 1 of 15</string>
-  <string name="question_layout_text">Is Photograph of an Artwork allowed?</string>
-  <string name="pic_of_day_camera">Camera</string>
-  <string name="notification_icon">Notification</string>
-  <string name="notification_number">Notification Number</string>
-  <string name="nearby_search_item">Nearby Search Item</string>
-  <string name="nearby_row_camera">Camera</string>
   <string name="nearby_row_image">Image</string>
-  <string name="nearby_row_map">Map</string>
-  <string name="nearby_row_more">More</string>
   <string name="nearby_all">All</string>
   <string name="nearby_filter_toggle">Toggle Up</string>
   <string name="nearby_filter_search">Search View</string>
@@ -742,5 +732,4 @@ Upload your first media by tapping on the add button.</string>
   <string name="error_feedback">Error while sending feedback</string>
   <string name="enter_description">What is your feedback?</string>
   <string name="your_feedback">Your feedback</string>
-
 </resources>
