@@ -7,8 +7,8 @@ import android.database.MatrixCursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.RemoteException
 import com.nhaarman.mockitokotlin2.*
-import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.explore.models.RecentSearch
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.BASE_URI
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.uriForId
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.*
