@@ -73,9 +73,9 @@ public class CategoryEditHelper {
             wikiTextWithoutCategory = "";
         }
         if (categories != null && !categories.isEmpty()) {
-           //If the categories list is empty, when reading the categories of a picture,
+            //If the categories list is empty, when reading the categories of a picture,
             // the code will add "None selected" to categories list in order to see in picture's categories with "None selected".
-            // So that after selected some category,"None selected" should be remove from list
+            // So that after selected some category,"None selected" should be removed from list
             for (int i = 0; i < categories.size(); i++) {
                 if (!categories.get(i).equals("None selected")//Not to add "None selected" as category to wikiText
                     || !wikiText.contains("Uncategorized")) {
