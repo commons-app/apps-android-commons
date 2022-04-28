@@ -62,16 +62,27 @@ public class CategoryEditHelper {
         final String wikiText) {
         Timber.d("thread is category adding %s", Thread.currentThread().getName());
         String summary = "Adding categories";
-
         final StringBuilder buffer = new StringBuilder();
-
-        final String wikiTextWithoutCategory
-            = wikiText.substring(0, wikiText.indexOf("[[Category"));
-
-        if (categories != null && categories.size() != 0) {
+        final String wikiTextWithoutCategory;
+        //If the picture was uploaded without a category, the wikitext will contain "Uncategorized" instead of "[[Category"
+        if (wikiText.contains("Uncategorized")) {
+            wikiTextWithoutCategory = wikiText.substring(0, wikiText.indexOf("Uncategorized"));
+        } else if (wikiText.contains("[[Category")) {
+            wikiTextWithoutCategory = wikiText.substring(0, wikiText.indexOf("[[Category"));
+        } else {
+            wikiTextWithoutCategory = "";
+        }
+        if (categories != null && !categories.isEmpty()) {
+            //If the categories list is empty, when reading the categories of a picture,
+            // the code will add "None selected" to categories list in order to see in picture's categories with "None selected".
+            // So that after selected some category,"None selected" should be removed from list
             for (int i = 0; i < categories.size(); i++) {
-                buffer.append("[[Category:").append(categories.get(i)).append("]]\n");
+                if (!categories.get(i).equals("None selected")//Not to add "None selected" as category to wikiText
+                    || !wikiText.contains("Uncategorized")) {
+                        buffer.append("[[Category:").append(categories.get(i)).append("]]\n");
+                    }
             }
+            categories.remove("None selected");
         } else {
             buffer.append("{{subst:unc}}");
         }
