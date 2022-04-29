@@ -19,6 +19,7 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.category.GridViewAdapter
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.profile.ProfileActivity
+import media
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -102,7 +103,11 @@ class BookmarkPicturesFragmentUnitTests {
 
         fragment.controller = controller
 
-        Whitebox.setInternalState(fragment, "gridAdapter", gridAdapter)
+        Whitebox.setInternalState(fragment, "gridAdapter", GridViewAdapter(
+            context,
+            0,
+            listOf(media())
+        ))
     }
 
     @Test
@@ -169,6 +174,18 @@ class BookmarkPicturesFragmentUnitTests {
         )
         method.isAccessible = true
         method.invoke(fragment, throwable)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testHandleSuccess() {
+        gridAdapter.addItems(listOf(media()))
+        val method: Method = BookmarkPicturesFragment::class.java.getDeclaredMethod(
+            "handleSuccess",
+            List::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, listOf(media()))
     }
 
     @Test
