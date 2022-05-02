@@ -98,10 +98,10 @@
   <string name="provider_contributions">بارگذاری‌های من</string>
   <string name="menu_share">به اشتراک‌گذاشتن</string>
   <string name="menu_view_file_page">مشاهدهٔ صفحهٔ پرونده</string>
-  <string name="share_title_hint">شرح مختصر (الزامی)</string>
-  <string name="add_caption_toast">لطفاً شرح مختصری برای این پرونده بنویسید</string>
+  <string name="share_title_hint">برنگاشت (الزامی)</string>
+  <string name="add_caption_toast">لطفاً برنگاشتی برای این پرونده بنویسید</string>
   <string name="share_description_hint">توضیحات</string>
-  <string name="share_caption_hint">شرح مختصر</string>
+  <string name="share_caption_hint">برنگاشت</string>
   <string name="login_failed_network">قادر به ورود نیست - شکست شبکه‌ای</string>
   <string name="login_failed_throttled">تلاش ناموفق بیش از حد. لطفاً چند دقیقهٔ دیگر دوباره تلاش کنید</string>
   <string name="login_failed_blocked">پوزش، کاربر در ویکی‌انبار بسته شده‌است</string>
@@ -230,7 +230,7 @@
   <string name="navigation_item_feedback">بازخورد</string>
   <string name="navigation_item_logout">خروج</string>
   <string name="navigation_item_info">آموزش</string>
-  <string name="navigation_item_notification">اعلان‌ها</string>
+  <string name="navigation_item_notification">آگاه‌سازی‌ها</string>
   <string name="navigation_item_review">بازبینی</string>
   <string name="no_description_found">توضیحی یافت نشد</string>
   <string name="nearby_info_menu_commons_article">صفحهٔ دروند در ویکی‌انبار</string>
@@ -275,9 +275,9 @@
   <string name="user_guide">راهنمای کاربر</string>
   <string name="welcome_skip_button">رهاکردن آموزش</string>
   <string name="no_internet">اینترنت در دسترس نیست</string>
-  <string name="error_notifications">خطای واکشی کردن اعلان‌ها</string>
+  <string name="error_notifications">خطای واکشی کردن آگاه‌سازی‌ها</string>
   <string name="error_review">در تلاش برای بدست‌آوردن تصویر جهت بازبینی خطایی پیش آمد. لطفا برای تلاش مجدد بر روی ریفرش کلیک کنید.</string>
-  <string name="no_notifications">اعلان‌ها پیدا نشد</string>
+  <string name="no_notifications">هیج آگاه‌سازی پیدا نشد</string>
   <string name="about_translate">ترجمه</string>
   <string name="about_translate_title">زبان‌ها</string>
   <string name="about_translate_message">لطفا زبانی که مایلید در آنها ترجمه‌های خود را ثبت کنید انتخاب کنید.</string>
@@ -348,9 +348,9 @@
   <string name="preference_author_name">نام مولف سفارشی</string>
   <string name="contributions_fragment">مشارکت‌ها</string>
   <string name="nearby_fragment">در نزدیکی</string>
-  <string name="notifications">اعلان‌ها</string>
-  <string name="read_notifications">اعلان‌ها (خوانده‌شده)</string>
-  <string name="display_nearby_notification">نمایش اعلان اطراف</string>
+  <string name="notifications">آگاه‌سازی‌ها</string>
+  <string name="read_notifications">آگاه‌سازی‌ها (خوانده‌شده)</string>
+  <string name="display_nearby_notification">نمایش آگاه‌سازی اطراف</string>
   <string name="list_sheet">فهرست</string>
   <string name="storage_permission">اجازه ذخیره</string>
   <string name="step_count" fuzzy="true">گام %1$d از %2$d</string>
@@ -432,12 +432,12 @@
   <string name="delete_helper_ask_reason_copyright_internet_photo">عکس تصادفی از اینترنت</string>
   <string name="delete_helper_ask_reason_copyright_logo">لوگو</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">چون</string>
-  <string name="caption_edit_helper_show_edit_message">توضیح افزوده شد.</string>
+  <string name="caption_edit_helper_show_edit_message">برنگاشت افزوده شد.</string>
   <string name="share_image_via">هم‌رسانی تصویر از طریق</string>
   <string name="no_achievements_yet" fuzzy="true">هنوز مشارکتی نکرده‌اید</string>
   <string name="account_created">حساب ایجاد شد!</string>
   <string name="text_copy">متن در حافظهٔ موقت کپی شد.</string>
-  <string name="notification_mark_read">علامت زدن اعلان به عنوان خوانده‌شده</string>
+  <string name="notification_mark_read">علامت زدن آگاه‌سازی به عنوان خوانده‌شده</string>
   <string name="some_error">خطایی پیش آمد!</string>
   <string name="place_state">حالت مکان:</string>
   <string name="place_state_exists">موجود است</string>
