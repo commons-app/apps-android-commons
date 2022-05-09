@@ -6,7 +6,7 @@ import androidx.annotation.MainThread;
 import androidx.annotation.Nullable;
 import com.mapbox.mapboxsdk.annotations.Marker;
 
-import fr.free.nrw.commons.MapController.PlacesInfo;
+import fr.free.nrw.commons.PlacesInfo;
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
 import java.lang.reflect.Proxy;
 import java.util.HashMap;

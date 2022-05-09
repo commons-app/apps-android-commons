@@ -16,7 +16,7 @@ import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
-import fr.free.nrw.commons.MapController;
+import fr.free.nrw.commons.PlacesInfo;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
@@ -32,7 +32,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import timber.log.Timber;
 
-public class ExploreMapController extends MapController {
+public class ExploreMapController {
     private final ExploreMapCalls exploreMapCalls;
     public LatLng latestSearchLocation; // Can be current and camera target on search this area button is used
     public LatLng currentLocation; // current location of user

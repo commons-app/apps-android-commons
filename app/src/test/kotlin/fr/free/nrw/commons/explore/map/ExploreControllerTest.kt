@@ -5,7 +5,6 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.spy
 import fr.free.nrw.commons.BuildConfig
-import fr.free.nrw.commons.MapController
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.location.LatLng
@@ -14,7 +13,6 @@ import fr.free.nrw.commons.utils.PlaceUtils
 import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.assertThrows
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
@@ -42,8 +40,6 @@ class ExploreControllerTest {
 
     private lateinit var context: Context
     private lateinit var exploreMapController: ExploreMapController
-    @Mock
-    private lateinit var exploreMapControllerSpy: ExploreMapController
 
     @Before
     fun setUp() {

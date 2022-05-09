@@ -12,7 +12,7 @@ import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
 
-import fr.free.nrw.commons.MapController;
+import fr.free.nrw.commons.PlacesInfo;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.utils.UiUtils;
@@ -26,7 +26,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import timber.log.Timber;
 
-public class NearbyController extends MapController {
+public class NearbyController {
 
     private static final int MAX_RESULTS = 1000;
     private final NearbyPlaces nearbyPlaces;

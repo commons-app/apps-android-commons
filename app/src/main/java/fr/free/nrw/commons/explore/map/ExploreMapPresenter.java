@@ -8,7 +8,7 @@ import android.view.View;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
-import fr.free.nrw.commons.MapController.PlacesInfo;
+import fr.free.nrw.commons.PlacesInfo;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.explore.map.ExploreMapController.NearbyBaseMarkerThumbCallback;
 import fr.free.nrw.commons.kvstore.JsonKvStore;

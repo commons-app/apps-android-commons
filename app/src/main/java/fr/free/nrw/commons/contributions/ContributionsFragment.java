@@ -27,7 +27,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.MapController.PlacesInfo;
+import fr.free.nrw.commons.PlacesInfo;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.notification.models.Notification;

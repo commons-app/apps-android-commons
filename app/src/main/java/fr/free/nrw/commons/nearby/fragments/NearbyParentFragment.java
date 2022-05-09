@@ -80,7 +80,7 @@ import com.mapbox.mapboxsdk.maps.UiSettings;
 import com.mapbox.pluginscalebar.ScaleBarOptions;
 import com.mapbox.pluginscalebar.ScaleBarPlugin;
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.MapController.PlacesInfo;
+import fr.free.nrw.commons.PlacesInfo;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
