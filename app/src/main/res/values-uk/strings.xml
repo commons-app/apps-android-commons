@@ -5,6 +5,7 @@
 * Andriykopanytsia
 * Base
 * DDPAT
+* Fifty Pro
 * Ice bulldog
 * Movses
 * Mykola Swarnyk
@@ -286,6 +287,7 @@
   <string name="nearby_commons">Вікісховище</string>
   <string name="about_rate_us">Оцініть нас</string>
   <string name="about_faq">Часті запитання</string>
+  <string name="user_guide">Документація користувача</string>
   <string name="welcome_skip_button">Пропустити інструкцію</string>
   <string name="no_internet">Інтернет недоступний</string>
   <string name="error_notifications">Помилка при отриманні сповіщення</string>

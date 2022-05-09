@@ -303,7 +303,7 @@
   <string name="search_tab_title_media">رسانه</string>
   <string name="search_tab_title_categories">رده‌ها</string>
   <string name="explore_tab_title_featured">برگزیده</string>
-  <string name="explore_tab_title_mobile">بارگذاری‌شده با تلفن همراه</string>
+  <string name="explore_tab_title_mobile">بارگذاری‌شده با همراه</string>
   <string name="explore_tab_title_map">نقشه</string>
   <string name="successful_wikidata_edit">تصویر به %1$s در ویکی‌داده افزوده شد!</string>
   <string name="wikidata_edit_failure">تلاش برای به‌روزرسانی موجودی ویکی‌دیتای مرتبط شکست خورد</string>

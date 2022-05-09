@@ -103,11 +103,11 @@
   <string name="title_activity_featured_images">Resımê weçinıteyi</string>
   <string name="title_activity_category_details">Kategoriye</string>
   <string name="title_activity_review">Weynayışê Hakemi</string>
-  <string name="menu_about">Heq te cı</string>
+  <string name="menu_about">Heqa cı de</string>
   <string name="about_improve">Qandê yew &lt;a href=\"%1$s\"&gt;GitHub-cıkewtış&lt;/a&gt;ê neweyi rê rapor û teklifan bıaferne.</string>
   <string name="about_privacy_policy">Politikaya dızdêni</string>
   <string name="about_credits">İştırakwani</string>
-  <string name="title_activity_about">Heq te cı</string>
+  <string name="title_activity_about">Heqa cı de</string>
   <string name="menu_feedback">Peyd rışten bırış (E-posta ra)</string>
   <string name="no_email_client">E-posta eyar nêbi</string>
   <string name="provider_categories">Karıyaye Kategoriyê peyêni</string>
@@ -211,7 +211,7 @@
   <string name="navigation_item_login">Cı kewe</string>
   <string name="nearby_directions">Telimati</string>
   <string name="nearby_wikidata">Wikidata</string>
-  <string name="nearby_wikipedia">Wikipedia</string>
+  <string name="nearby_wikipedia">Wikipediya</string>
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Rey bıdê</string>
   <string name="about_faq">PZP</string>
