@@ -366,22 +366,27 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         } else {
             nearbyPlacesInfoObservable = presenter.loadAttractionsFromLocation(curLatLng, searchLatLng, false);
         }
-        compositeDisposable.add(nearbyPlacesInfoObservable
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(explorePlacesInfo -> {
-                    updateMapMarkers(explorePlacesInfo, isCurrentLocationMarkerVisible());
-                    mediaList = explorePlacesInfo.mediaList;
-                    lastFocusLocation = searchLatLng;
-                },
-                throwable -> {
-                    Timber.d(throwable);
-                    showErrorMessage(getString(R.string.error_fetching_nearby_places)+throwable.getLocalizedMessage());
-                    setProgressBarVisibility(false);
-                    presenter.lockUnlockNearby(false);
-                }));
-        if(recenterToUserLocation) {
-            recenterToUserLocation = false;
+        if (nearbyPlacesInfoObservable == null) {
+            // Display places can not be fetched message
+            showErrorMessage(getString(R.string.media_could_not_loaded));
+        } else {
+            compositeDisposable.add(nearbyPlacesInfoObservable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(explorePlacesInfo -> {
+                        updateMapMarkers(explorePlacesInfo, isCurrentLocationMarkerVisible());
+                        mediaList = explorePlacesInfo.mediaList;
+                        lastFocusLocation = searchLatLng;
+                    },
+                    throwable -> {
+                        Timber.d(throwable);
+                        showErrorMessage(getString(R.string.error_fetching_nearby_places)+throwable.getLocalizedMessage());
+                        setProgressBarVisibility(false);
+                        presenter.lockUnlockNearby(false);
+                    }));
+            if(recenterToUserLocation) {
+                recenterToUserLocation = false;
+            }
         }
     }
 

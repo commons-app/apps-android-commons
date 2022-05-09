@@ -62,9 +62,44 @@ public class ExploreMapController extends MapController {
         ExplorePlacesInfo explorePlacesInfo = new ExplorePlacesInfo();
         try {
             explorePlacesInfo.curLatLng = curLatLng;
+            explorePlacesInfo.searchLatLng = searchLatLng;
             latestSearchLocation = searchLatLng;
 
             List<Media> mediaList = exploreMapCalls.callCommonsQuery(searchLatLng);
+
+            if (mediaList == null || mediaList.isEmpty()) {
+                // This will be handled on the fragment with error message saying explore places couldn't fetched
+                return null;
+            }
+
+            LatLng[] boundaryCoordinates = calculateBoundaryCoordinates(mediaList, searchLatLng);
+            explorePlacesInfo.mediaList = mediaList;
+            explorePlacesInfo.explorePlaceList = PlaceUtils.mediaToExplorePlace(mediaList);
+            explorePlacesInfo.boundaryCoordinates = boundaryCoordinates;
+
+            // Sets latestSearchRadius to maximum distance among boundaries and search location
+            for (LatLng bound : boundaryCoordinates) {
+                double distance = LocationUtils.commonsLatLngToMapBoxLatLng(bound).distanceTo(LocationUtils.commonsLatLngToMapBoxLatLng(latestSearchLocation));
+                if (distance > latestSearchRadius) {
+                    latestSearchRadius = distance;
+                }
+            }
+
+            // Our radius searched around us, will be used to understand when user search their own location, we will follow them
+            if (checkingAroundCurrentLocation) {
+                currentLocationSearchRadius = latestSearchRadius;
+                currentLocation = curLatLng;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return explorePlacesInfo;
+    }
+
+    public LatLng[] calculateBoundaryCoordinates(List<Media> mediaList, LatLng searchLatLng) {
+        if (mediaList == null || mediaList.isEmpty()) {
+            return null;
+        } else {
             LatLng[] boundaryCoordinates = {mediaList.get(0).getCoordinates(),   // south
                 mediaList.get(0).getCoordinates(), // north
                 mediaList.get(0).getCoordinates(), // west
@@ -90,27 +125,8 @@ public class ExploreMapController extends MapController {
                     }
                 }
             }
-            explorePlacesInfo.mediaList = mediaList;
-            explorePlacesInfo.explorePlaceList = PlaceUtils.mediaToExplorePlace(mediaList);
-            explorePlacesInfo.boundaryCoordinates = boundaryCoordinates;
-
-            // Sets latestSearchRadius to maximum distance among boundaries and search location
-            for (LatLng bound : boundaryCoordinates) {
-                double distance = LocationUtils.commonsLatLngToMapBoxLatLng(bound).distanceTo(LocationUtils.commonsLatLngToMapBoxLatLng(latestSearchLocation));
-                if (distance > latestSearchRadius) {
-                    latestSearchRadius = distance;
-                }
-            }
-
-            // Our radius searched around us, will be used to understand when user search their own location, we will follow them
-            if (checkingAroundCurrentLocation) {
-                currentLocationSearchRadius = latestSearchRadius;
-                currentLocation = curLatLng;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+            return boundaryCoordinates;
         }
-        return explorePlacesInfo;
     }
 
     /**

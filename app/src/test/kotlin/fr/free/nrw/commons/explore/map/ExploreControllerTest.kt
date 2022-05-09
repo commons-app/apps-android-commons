@@ -1,30 +1,35 @@
 package fr.free.nrw.commons.explore.map
 
 import android.content.Context
-import android.provider.MediaStore
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.eq
+import com.nhaarman.mockitokotlin2.spy
+import fr.free.nrw.commons.BuildConfig
+import fr.free.nrw.commons.MapController
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.Utils
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.*
 import fr.free.nrw.commons.utils.PlaceUtils
 import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.assertThrows
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
-import org.powermock.api.mockito.PowerMockito
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
+import org.wikipedia.dataclient.WikiSite
+import org.wikipedia.page.PageTitle
 import java.util.*
 
 @RunWith(RobolectricTestRunner::class)
 class ExploreControllerTest {
 
     @Mock
-    private lateinit var searchLatLong: LatLng
+    private lateinit var searchLatLng: LatLng
 
     @Mock
     private lateinit var currentLatLng: LatLng
@@ -34,6 +39,8 @@ class ExploreControllerTest {
 
     private lateinit var context: Context
     private lateinit var exploreMapController: ExploreMapController
+    @Mock
+    private lateinit var exploreMapControllerSpy: ExploreMapController
 
     @Before
     fun setUp() {
@@ -43,11 +50,9 @@ class ExploreControllerTest {
     }
 
     @Test
-    fun testLoadAttractionsForLocationTest() {
-        Mockito.`when`(exploreMapCalls.callCommonsQuery(any()))
-            .thenReturn(Collections.emptyList())
+    fun testLoadAttractionsForLocationCommonsQueryIsCalled() {
         exploreMapController.loadAttractionsFromLocation(
-            searchLatLong,
+            searchLatLng,
             currentLatLng,
             false
         )
@@ -68,10 +73,10 @@ class ExploreControllerTest {
     }
 
     @Test
-    fun testLoadAttractionsFromLocationCase1() {
+    fun testLoadAttracomputeDistanceBetweenctionsFromLocationCaseTwoPlacesAdded() {
         val place1 = Place(
             "en",
-            "placeName",
+            "placeName1",
             Label.FOREST,
             "placeDescription",
             LatLng(0.0, 0.0, 1.0F),
@@ -82,7 +87,7 @@ class ExploreControllerTest {
         )
         val place2 = Place(
             "en",
-            "placeName",
+            "placeName2",
             Label.FOREST,
             "placeDescription",
             LatLng(-40.69, -74.04, 1.0F),
@@ -91,27 +96,44 @@ class ExploreControllerTest {
             "picName",
             false
         )
-        // TODO: stattiği mockla
-        PowerMockito.mock(Class<UUID>)
-        Mockito.`when`(UUID.randomUUID().toString()).thenReturn("")
-        val media1 = Media(any(), any(), any(), any(), any())
-        val media2 = Media(any(), any(), any(), any(), any())
+        val defaultUuid = UUID.fromString("8d8b30e3-de52-4f1c-a71c-9905a8043dac")
+        Mockito.mockStatic(UUID::class.java).use { mockedUuid ->
+            mockedUuid.`when`<Any> { UUID.randomUUID() }.thenReturn(defaultUuid)
+        }
+
+        val pageTitle = spy(PageTitle("title", WikiSite(BuildConfig.COMMONS_URL)))
+        Mockito.mockStatic(Utils::class.java).use { mockedPageTitle ->
+            mockedPageTitle.`when`<Any> { Utils.getPageTitle(any()) }.thenReturn(pageTitle)
+        }
+        Mockito.`when`(pageTitle.getCanonicalUri()).thenReturn("canonicalUri")
+
+        val media1 = Media()
+        val media2 = Media()
+        media1.categories = listOf("testCategory")
+        media2.categories = listOf("testCategory")
+        media1.filename = "placeName1"
+        media2.filename = "placeName2"
+        media1.coordinates = LatLng(0.0, 0.0, 1.0F)
+        media2.coordinates = LatLng(-40.69, -74.04, 1.0F)
+
         Mockito.`when`(
             exploreMapCalls.callCommonsQuery(
-                searchLatLong
+                searchLatLng
             )
-        ).thenReturn(mutableListOf(media1, media2))
-        Mockito.`when`(
-            PlaceUtils.mediaToExplorePlace(mutableListOf(media1, media2))
-        ).thenReturn(mutableListOf(place1,place2))
+        ).thenReturn(mutableListOf(media1,media2))
+
+        Mockito.mockStatic(PlaceUtils::class.java).use { mockedMediaList ->
+            mockedMediaList.`when`<Any> { PlaceUtils.mediaToExplorePlace(mutableListOf(media1, media2)) }
+                .thenReturn(mutableListOf(place1,place2))
+        }
         val result = exploreMapController.loadAttractionsFromLocation(
-            currentLatLng,
-            searchLatLong,
-            false
-        )
+                currentLatLng,
+                searchLatLng,
+                false
+            )
         Assertions.assertEquals(result.curLatLng, currentLatLng)
-        Assertions.assertEquals(result.searchLatLng, searchLatLong)
+        Assertions.assertEquals(result.searchLatLng, searchLatLng)
         Assertions.assertEquals(result.mediaList, mutableListOf(media1, media2))
-        Assertions.assertEquals(result.explorePlaceList, mutableListOf(place1, place2))
+        Assertions.assertEquals(mutableListOf(result.explorePlaceList[0].name, result.explorePlaceList[1].name), mutableListOf(place1.name, place2.name))
     }
 }
