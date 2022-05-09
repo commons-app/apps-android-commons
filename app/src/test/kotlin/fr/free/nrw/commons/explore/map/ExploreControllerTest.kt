@@ -37,6 +37,9 @@ class ExploreControllerTest {
     @Mock
     private lateinit var exploreMapCalls: ExploreMapCalls
 
+    @Mock
+    private lateinit var callback: ExploreMapController.NearbyBaseMarkerThumbCallback
+
     private lateinit var context: Context
     private lateinit var exploreMapController: ExploreMapController
     @Mock
@@ -135,5 +138,56 @@ class ExploreControllerTest {
         Assertions.assertEquals(result.searchLatLng, searchLatLng)
         Assertions.assertEquals(result.mediaList, mutableListOf(media1, media2))
         Assertions.assertEquals(mutableListOf(result.explorePlaceList[0].name, result.explorePlaceList[1].name), mutableListOf(place1.name, place2.name))
+    }
+
+    @Test
+    fun testLoadAttractionsFromLocationToBaseMarkerOptionsNullPlacelist() {
+        val result = exploreMapController.loadAttractionsFromLocationToBaseMarkerOptions(
+            any(),
+            null,
+            context,
+            any(),
+            any(),
+            any(),
+            any()
+        )
+        Assertions.assertEquals(result, listOf<NearbyBaseMarker>())
+    }
+
+    @Test
+    fun testLoadAttractionsFromLocationToBaseMarkerOptionsWithPlacelist() {
+        val place1 = Place(
+            "en",
+            "File:placeName1.jpg",
+            Label.FOREST,
+            "placeDescription",
+            LatLng(0.0, 0.0, 1.0F),
+            "placeCategory",
+            Sitelinks.Builder().build(),
+            "picName",
+            false
+        )
+        val place2 = Place(
+            "en",
+            "File:placeName2.jpg",
+            Label.FOREST,
+            "placeDescription",
+            LatLng(-40.69, -74.04, 1.0F),
+            "placeCategory",
+            Sitelinks.Builder().build(),
+            "picName",
+            false
+        )
+        val result = exploreMapController.loadAttractionsFromLocationToBaseMarkerOptions(
+            any(),
+            mutableListOf(place1, place2),
+            context,
+            callback,
+            any(),
+            any(),
+            any()
+        )
+        Assertions.assertEquals(result.get(0).place, place1)
+        Assertions.assertEquals(result.get(1).place, place2)
     }
 }

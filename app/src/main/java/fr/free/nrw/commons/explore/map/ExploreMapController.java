@@ -133,7 +133,7 @@ public class ExploreMapController extends MapController {
      * Loads attractions from location for map view, we need to return places in Place data type
      * @return baseMarkerOptions list that holds nearby places with their icons
      */
-    public static List<NearbyBaseMarker> loadAttractionsFromLocationToBaseMarkerOptions(
+    public List<NearbyBaseMarker> loadAttractionsFromLocationToBaseMarkerOptions(
         LatLng curLatLng,
         final List<Place> placeList,
         Context context,
