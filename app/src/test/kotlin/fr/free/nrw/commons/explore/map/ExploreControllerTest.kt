@@ -137,7 +137,7 @@ class ExploreControllerTest {
         Assertions.assertEquals(result.curLatLng, currentLatLng)
         Assertions.assertEquals(result.searchLatLng, searchLatLng)
         Assertions.assertEquals(result.mediaList, mutableListOf(media1, media2))
-        Assertions.assertEquals(mutableListOf(result.explorePlaceList[0].name, result.explorePlaceList[1].name), mutableListOf(place1.name, place2.name))
+        Assertions.assertEquals(mutableListOf(result.placeList[0].name, result.placeList[1].name), mutableListOf(place1.name, place2.name))
     }
 
     @Test

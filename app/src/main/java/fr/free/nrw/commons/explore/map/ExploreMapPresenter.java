@@ -8,8 +8,7 @@ import android.view.View;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
-import fr.free.nrw.commons.MapController;
-import fr.free.nrw.commons.MapController.ExplorePlacesInfo;
+import fr.free.nrw.commons.MapController.PlacesInfo;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.explore.map.ExploreMapController.NearbyBaseMarkerThumbCallback;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -177,7 +176,7 @@ public class ExploreMapPresenter
         exploreMapFragmentView.addSearchThisAreaButtonAction();
     }
 
-    public Observable<ExplorePlacesInfo> loadAttractionsFromLocation(LatLng curLatLng, LatLng searchLatLng, boolean checkingAroundCurrent) {
+    public Observable<PlacesInfo> loadAttractionsFromLocation(LatLng curLatLng, LatLng searchLatLng, boolean checkingAroundCurrent) {
         return Observable
             .fromCallable(() -> exploreMapController
                 .loadAttractionsFromLocation(curLatLng, searchLatLng,checkingAroundCurrent));
@@ -189,15 +188,15 @@ public class ExploreMapPresenter
      * @param explorePlacesInfo This variable has placeToCenter list information and distances.
      */
     public void updateMapMarkers(
-        MapController.ExplorePlacesInfo explorePlacesInfo, Marker selectedMarker, boolean shouldTrackPosition) {
+        PlacesInfo explorePlacesInfo, Marker selectedMarker, boolean shouldTrackPosition) {
         exploreMapFragmentView.setMapBoundaries(CameraUpdateFactory.newLatLngBounds(getLatLngBounds(explorePlacesInfo.boundaryCoordinates), 50));
         prepareNearbyBaseMarkers(explorePlacesInfo, selectedMarker, shouldTrackPosition);
     }
 
-    void prepareNearbyBaseMarkers(MapController.ExplorePlacesInfo explorePlacesInfo, Marker selectedMarker, boolean shouldTrackPosition) {
+    void prepareNearbyBaseMarkers(PlacesInfo explorePlacesInfo, Marker selectedMarker, boolean shouldTrackPosition) {
         exploreMapController
             .loadAttractionsFromLocationToBaseMarkerOptions(explorePlacesInfo.curLatLng, // Curlatlang will be used to calculate distances
-                explorePlacesInfo.explorePlaceList,
+                explorePlacesInfo.placeList,
                 exploreMapFragmentView.getContext(),
                 this,
                 selectedMarker,
@@ -206,7 +205,7 @@ public class ExploreMapPresenter
     }
 
     @Override
-    public void onNearbyBaseMarkerThumbsReady(List<NearbyBaseMarker> baseMarkers, ExplorePlacesInfo explorePlacesInfo, Marker selectedMarker, boolean shouldTrackPosition) {
+    public void onNearbyBaseMarkerThumbsReady(List<NearbyBaseMarker> baseMarkers, PlacesInfo explorePlacesInfo, Marker selectedMarker, boolean shouldTrackPosition) {
         if(null != exploreMapFragmentView) {
             exploreMapFragmentView.addNearbyMarkersToMapBoxMap(baseMarkers, selectedMarker);
             exploreMapFragmentView.addCurrentLocationMarker(explorePlacesInfo.curLatLng);

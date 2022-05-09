@@ -26,9 +26,6 @@ import java.util.Map;
 import javax.inject.Inject;
 import timber.log.Timber;
 
-import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
-import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
-
 public class NearbyController extends MapController {
 
     private static final int MAX_RESULTS = 1000;
@@ -58,12 +55,12 @@ public class NearbyController extends MapController {
      * @return NearbyPlacesInfo a variable holds Place list without distance information
      * and boundary coordinates of current Place List
      */
-    public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng curLatLng, final LatLng searchLatLng,
+    public PlacesInfo loadAttractionsFromLocation(final LatLng curLatLng, final LatLng searchLatLng,
         final boolean returnClosestResult, final boolean checkingAroundCurrentLocation,
         final boolean shouldQueryForMonuments, @Nullable final String customQuery) throws Exception {
 
         Timber.d("Loading attractions near %s", searchLatLng);
-        NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();
+        PlacesInfo nearbyPlacesInfo = new PlacesInfo();
 
         if (searchLatLng == null) {
             Timber.d("Loading attractions nearby, but curLatLng is null");
@@ -139,7 +136,7 @@ public class NearbyController extends MapController {
      * @return NearbyPlacesInfo a variable holds Place list without distance information and
      * boundary coordinates of current Place List
      */
-    public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng curLatLng,
+    public PlacesInfo loadAttractionsFromLocation(final LatLng curLatLng,
         final LatLng searchLatLng,
         final boolean returnClosestResult, final boolean checkingAroundCurrentLocation,
         final boolean shouldQueryForMonuments) throws Exception {

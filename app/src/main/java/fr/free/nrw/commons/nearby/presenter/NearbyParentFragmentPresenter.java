@@ -6,6 +6,7 @@ import androidx.annotation.MainThread;
 import androidx.annotation.Nullable;
 import com.mapbox.mapboxsdk.annotations.Marker;
 
+import fr.free.nrw.commons.MapController.PlacesInfo;
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
@@ -227,7 +228,7 @@ public class NearbyParentFragmentPresenter
      * location where you are not at.
      * @param nearbyPlacesInfo This variable has placeToCenter list information and distances.
      */
-    public void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo, Marker selectedMarker, boolean shouldTrackPosition) {
+    public void updateMapMarkers(PlacesInfo nearbyPlacesInfo, Marker selectedMarker, boolean shouldTrackPosition) {
         if(null!=nearbyParentFragmentView) {
             List<NearbyBaseMarker> nearbyBaseMarkers = NearbyController
                     .loadAttractionsFromLocationToBaseMarkerOptions(nearbyPlacesInfo.curLatLng, // Curlatlang will be used to calculate distances

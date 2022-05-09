@@ -22,7 +22,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -81,7 +80,7 @@ import com.mapbox.mapboxsdk.maps.UiSettings;
 import com.mapbox.pluginscalebar.ScaleBarOptions;
 import com.mapbox.pluginscalebar.ScaleBarPlugin;
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.MapController.NearbyPlacesInfo;
+import fr.free.nrw.commons.MapController.PlacesInfo;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
@@ -1076,7 +1075,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         final fr.free.nrw.commons.location.LatLng curlatLng,
         final fr.free.nrw.commons.location.LatLng searchLatLng, @Nullable final String customQuery){
 
-        final Observable<NearbyController.NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
+        final Observable<PlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> nearbyController
                 .loadAttractionsFromLocation(curlatLng, searchLatLng,
                     false, true, Utils.isMonumentsEnabled(new Date()), customQuery));
@@ -1104,7 +1103,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private void populatePlacesForAnotherLocation(
         final fr.free.nrw.commons.location.LatLng curlatLng,
         final fr.free.nrw.commons.location.LatLng searchLatLng, @Nullable final String customQuery){
-        final Observable<NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
+        final Observable<PlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> nearbyController
                 .loadAttractionsFromLocation(curlatLng, searchLatLng,
                     false, true, Utils.isMonumentsEnabled(new Date()), customQuery));
@@ -1136,7 +1135,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * location where you are.
      * @param nearbyPlacesInfo This variable has place list information and distances.
      */
-    private void updateMapMarkers(final NearbyController.NearbyPlacesInfo nearbyPlacesInfo, final boolean shouldUpdateSelectedMarker) {
+    private void updateMapMarkers(final PlacesInfo nearbyPlacesInfo, final boolean shouldUpdateSelectedMarker) {
         presenter.updateMapMarkers(nearbyPlacesInfo, selectedMarker,shouldUpdateSelectedMarker);
         setFilterState();
     }

@@ -27,12 +27,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import androidx.fragment.app.FragmentTransaction;
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.MapController.PlacesInfo;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.notification.models.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.profile.ProfileActivity;
-import fr.free.nrw.commons.theme.BaseActivity;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
@@ -488,7 +488,7 @@ public class ContributionsFragment
                         }));
     }
 
-    private void updateNearbyNotification(@Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
+    private void updateNearbyNotification(@Nullable PlacesInfo nearbyPlacesInfo) {
         if (nearbyPlacesInfo != null && nearbyPlacesInfo.placeList != null && nearbyPlacesInfo.placeList.size() > 0) {
             Place closestNearbyPlace = nearbyPlacesInfo.placeList.get(0);
             String distance = formatDistanceBetween(curLatLng, closestNearbyPlace.location);

@@ -52,14 +52,14 @@ public class ExploreMapController extends MapController {
      * @param checkingAroundCurrentLocation is a boolean flag. True if we want to check around current location, false if another location
      * @return explorePlacesInfo info that holds curLatLng, mediaList, explorePlaceList and boundaryCoordinates
      */
-    public ExplorePlacesInfo loadAttractionsFromLocation(LatLng curLatLng, LatLng searchLatLng, boolean checkingAroundCurrentLocation) {
+    public PlacesInfo loadAttractionsFromLocation(LatLng curLatLng, LatLng searchLatLng, boolean checkingAroundCurrentLocation) {
 
         if (searchLatLng == null) {
             Timber.d("Loading attractions explore map, but search is null");
             return null;
         }
 
-        ExplorePlacesInfo explorePlacesInfo = new ExplorePlacesInfo();
+        PlacesInfo explorePlacesInfo = new PlacesInfo();
         try {
             explorePlacesInfo.curLatLng = curLatLng;
             explorePlacesInfo.searchLatLng = searchLatLng;
@@ -74,7 +74,7 @@ public class ExploreMapController extends MapController {
 
             LatLng[] boundaryCoordinates = calculateBoundaryCoordinates(mediaList, searchLatLng);
             explorePlacesInfo.mediaList = mediaList;
-            explorePlacesInfo.explorePlaceList = PlaceUtils.mediaToExplorePlace(mediaList);
+            explorePlacesInfo.placeList = PlaceUtils.mediaToExplorePlace(mediaList);
             explorePlacesInfo.boundaryCoordinates = boundaryCoordinates;
 
             // Sets latestSearchRadius to maximum distance among boundaries and search location
@@ -140,7 +140,7 @@ public class ExploreMapController extends MapController {
         NearbyBaseMarkerThumbCallback callback,
         Marker selectedMarker,
         boolean shouldTrackPosition,
-        ExplorePlacesInfo explorePlacesInfo) {
+        PlacesInfo explorePlacesInfo) {
         List<NearbyBaseMarker> baseMarkerOptions = new ArrayList<>();
 
         if (placeList == null) {
@@ -207,6 +207,6 @@ public class ExploreMapController extends MapController {
 
     interface NearbyBaseMarkerThumbCallback {
         // Callback to notify thumbnails of explore markers are added as icons and ready
-        void onNearbyBaseMarkerThumbsReady(List<NearbyBaseMarker> baseMarkers, ExplorePlacesInfo explorePlacesInfo, Marker selectedMarker, boolean shouldTrackPosition);
+        void onNearbyBaseMarkerThumbsReady(List<NearbyBaseMarker> baseMarkers, PlacesInfo explorePlacesInfo, Marker selectedMarker, boolean shouldTrackPosition);
     }
 }

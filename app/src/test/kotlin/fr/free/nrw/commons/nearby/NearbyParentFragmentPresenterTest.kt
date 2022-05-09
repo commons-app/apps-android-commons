@@ -2,6 +2,7 @@ package fr.free.nrw.commons.nearby
 
 import com.mapbox.mapboxsdk.annotations.Marker
 import com.nhaarman.mockitokotlin2.*
+import fr.free.nrw.commons.MapController
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
@@ -519,7 +520,7 @@ class NearbyParentFragmentPresenterTest {
 
     @Test
     fun testUpdateMapMarkers(){
-        var nearbyPlacesInfo = NearbyController(nearbyPlaces).NearbyPlacesInfo()
+        var nearbyPlacesInfo = MapController.PlacesInfo()
         nearbyPlacesInfo.boundaryCoordinates= arrayOf()
         nearbyPlacesInfo.curLatLng=latestLocation
         nearbyPlacesInfo.searchLatLng=latestLocation

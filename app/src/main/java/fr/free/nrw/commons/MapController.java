@@ -9,7 +9,7 @@ public abstract class MapController {
     /**
      * We pass this variable as a group of placeList and boundaryCoordinates
      */
-    public class NearbyPlacesInfo {
+    public class PlacesInfo {
         public List<Place> placeList; // List of nearby places
         public LatLng[] boundaryCoordinates; // Corners of nearby area
         public LatLng curLatLng; // Current location when this places are populated
@@ -17,14 +17,4 @@ public abstract class MapController {
         public List<Media> mediaList; // Search location for finding this places
     }
 
-    /**
-     * We pass this variable as a group of placeList and boundaryCoordinates
-     */
-    public class ExplorePlacesInfo {
-        public List<Place> explorePlaceList; // List of nearby places
-        public LatLng[] boundaryCoordinates; // Corners of nearby area
-        public LatLng curLatLng; // Current location when this places are populated
-        public LatLng searchLatLng; // Search location for finding this places
-        public List<Media> mediaList; // Search location for finding this places
-    }
 }

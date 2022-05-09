@@ -53,7 +53,7 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.maps.UiSettings;
 import com.mapbox.pluginscalebar.ScaleBarOptions;
 import com.mapbox.pluginscalebar.ScaleBarPlugin;
-import fr.free.nrw.commons.MapController;
+import fr.free.nrw.commons.MapController.PlacesInfo;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -356,7 +356,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void populatePlaces(LatLng curLatLng, LatLng searchLatLng) {
-        final Observable<MapController.ExplorePlacesInfo> nearbyPlacesInfoObservable;
+        final Observable<PlacesInfo> nearbyPlacesInfoObservable;
         if (curLatLng == null) {
             checkPermissionsAndPerformAction();
             return;
@@ -394,7 +394,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
      * Updates map markers according to latest situation
      * @param explorePlacesInfo holds several information as current location, marker list etc.
      */
-    private void updateMapMarkers(final MapController.ExplorePlacesInfo explorePlacesInfo, final boolean shouldTrackPosition) {
+    private void updateMapMarkers(final PlacesInfo explorePlacesInfo, final boolean shouldTrackPosition) {
         presenter.updateMapMarkers(explorePlacesInfo, selectedMarker,shouldTrackPosition);
     }
 
