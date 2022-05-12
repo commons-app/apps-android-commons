@@ -119,7 +119,7 @@
   <string name="contribution_state_queued">В очереди</string>
   <string name="contribution_state_failed">Ошибка загрузки.</string>
   <string name="contribution_state_in_progress">Завершено %1$d%%</string>
-  <string name="contribution_state_starting">Загрузка</string>
+  <string name="contribution_state_starting">Загружается</string>
   <string name="menu_from_gallery">Из галереи</string>
   <string name="menu_from_camera">Сфотографировать</string>
   <string name="menu_nearby">Поблизости</string>
@@ -334,6 +334,7 @@
   <string name="title_activity_search">Найти</string>
   <string name="search_recent_header">Последние поиски:</string>
   <string name="provider_searches">Последние запросы</string>
+  <string name="provider_recent_languages">Последние языковые запросы</string>
   <string name="error_loading_categories">При загрузке категорий произошла ошибка.</string>
   <string name="error_loading_depictions">При загрузке описаний произошла ошибка.</string>
   <string name="search_tab_title_media">Мультимедиа</string>
@@ -697,6 +698,7 @@
   <string name="add_location">Добавить местоположение</string>
   <string name="feedback_sharing_data_alert">Пожалуйста, удалите из этого письма любую информацию, которой вы не желаете делиться с другими. Кроме того, имейте в виду, что адрес вашей электронной почты, с которого вы отправляете сообщения, а также связанное с ним имя и изображение профиля, будут видны всем.</string>
   <string name="explore_map_details">Подробности</string>
+  <string name="copyright_popup">Пожалуйста, загружайте только те фотографии, которые вы сделали сами. Участники, загружающие защищённые авторским правом изображения, будут заблокированы. Это относится и к бета-флейвору. Спасибо за тестирование приложения!</string>
   <string name="api_level">Уровень API</string>
   <string name="android_version">Версия Андроида</string>
   <string name="device_manufacturer">Производитель устройства</string>
