@@ -1052,10 +1052,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         } else if (requestCode == REQUEST_CODE_EDIT_DESCRIPTION && resultCode == RESULT_CANCELED) {
             progressBarEditDescription.setVisibility(GONE);
             editDescription.setVisibility(VISIBLE);
-
-            viewUtil.showShortToast(getContext(),
-                Objects.requireNonNull(getContext())
-                    .getString(R.string.descriptions_picking_unsuccessful));
         }
     }
 
