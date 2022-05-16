@@ -7,6 +7,7 @@
 * Leduyquang753
 * Minh Nguyen
 * Ngoxuannguyenchuong
+* NguoiDungKhongDinhDanh
 * Nguyễn Mạnh An
 * Nhatminh01
 * Phjtieudoc
@@ -214,7 +215,7 @@
   <string name="send_log_file_description" fuzzy="true">Gửi tập tin nhật trình cho nhà phát triển qua thư điện tử</string>
   <string name="no_web_browser">Không tìm thấy trình duyệt để mở URL</string>
   <string name="null_url">Lỗi! Không tìm thấy URL</string>
-  <string name="nominate_deletion">Bầu chọn để xóa</string>
+  <string name="nominate_deletion">Đề nghị xóa</string>
   <string name="nominated_for_deletion">Có đề nghị xóa hình này.</string>
   <string name="skip_login">Bỏ qua</string>
   <string name="navigation_item_login">Đăng nhập</string>

@@ -2,6 +2,7 @@
 <!-- Authors:
 * David1010
 * Mehman97
+* Გიო ოქრო
 -->
 <resources>
   <plurals name="uploads_pending_notification_indicator">
@@ -34,7 +35,7 @@
   <string name="app_name">ვიკისაწყობი</string>
   <string name="bullet">•</string>
   <string name="menu_settings">კონფიგურაცია</string>
-  <string name="intent_share_upload_label">ატვირთე ვიკისაწყობში</string>
+  <string name="intent_share_upload_label">ვიკისაწყობში ატვირთვა</string>
   <string name="username">მომხმარებლის სახელი</string>
   <string name="password">პაროლი</string>
   <string name="login_credential">შესვლა ვიკისაწყობის ბეტა ანგარიშზე</string>
