@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.category
 
 import android.content.Context
-import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.models.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.actions.PageEditClient

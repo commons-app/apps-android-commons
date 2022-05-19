@@ -17,7 +17,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import fr.free.nrw.commons.MapController;
-import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.models.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;

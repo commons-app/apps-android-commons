@@ -26,7 +26,7 @@ import butterknife.OnClick;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
-import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.models.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.ContributionsFragment;

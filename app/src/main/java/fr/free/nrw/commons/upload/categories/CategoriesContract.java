@@ -3,7 +3,7 @@ package fr.free.nrw.commons.upload.categories;
 import android.content.Context;
 import androidx.annotation.NonNull;
 import fr.free.nrw.commons.BasePresenter;
-import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.models.Media;
 import fr.free.nrw.commons.category.CategoryItem;
 import java.util.List;
 

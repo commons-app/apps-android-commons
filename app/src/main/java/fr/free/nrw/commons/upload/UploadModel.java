@@ -2,7 +2,7 @@ package fr.free.nrw.commons.upload;
 
 import android.content.Context;
 import android.net.Uri;
-import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.models.Media;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;

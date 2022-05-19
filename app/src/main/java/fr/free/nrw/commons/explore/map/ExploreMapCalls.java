@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.explore.map;
 
-import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.media.MediaClient;
+import fr.free.nrw.commons.models.Media;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;

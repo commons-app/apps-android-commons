@@ -4,7 +4,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import fr.free.nrw.commons.BasePresenter;
-import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.models.Media;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import java.util.List;
 

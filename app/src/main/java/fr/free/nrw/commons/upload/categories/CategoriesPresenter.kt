@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.upload.categories
 
 import android.text.TextUtils
-import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.models.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryEditHelper
 import fr.free.nrw.commons.category.CategoryItem

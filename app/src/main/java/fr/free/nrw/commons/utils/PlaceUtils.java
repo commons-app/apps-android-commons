@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.utils;
 
-import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.models.Media;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.Sitelinks;
 import java.util.ArrayList;

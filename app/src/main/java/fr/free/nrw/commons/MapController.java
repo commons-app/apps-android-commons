@@ -1,6 +1,7 @@
 package fr.free.nrw.commons;
 
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.models.Media;
 import fr.free.nrw.commons.nearby.Place;
 import java.util.List;
 

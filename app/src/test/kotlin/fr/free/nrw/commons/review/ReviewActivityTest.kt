@@ -9,7 +9,7 @@ import butterknife.BindView
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
 import com.nhaarman.mockitokotlin2.doNothing
-import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.models.Media
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import io.reactivex.Scheduler
