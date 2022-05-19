@@ -10,18 +10,15 @@ jobs:
   build:
     name: Run tests and generate APK
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        api-level: [23]
-
     steps:
-      - uses: actions/checkout@v2.4.0
+      - name: Checkout code
+        uses: actions/checkout@v2.4.0
 
       - name: Set up JDK
         uses: actions/setup-java@v2.5.0
         with:
           distribution: "temurin"
-          java-version: 8
+          java-version: 11
 
       - name: Cache packages
         id: cache-packages
@@ -33,43 +30,60 @@ jobs:
           key: gradle-packages-${{ runner.os }}-${{ hashFiles('**/*.gradle', '**/*.gradle.kts', 'gradle.properties') }}
           restore-keys: gradle-packages-${{ runner.os }}
 
+      - name: Access test login credentials
+        run: |
+          echo "TEST_USER_NAME=${{ secrets.TEST_USER_NAME }}" >> local.properties
+          echo "TEST_USER_PASSWORD=${{ secrets.TEST_USER_PASSWORD }}" >> local.properties
+
       - name: AVD cache
+        if: github.event_name != 'pull_request'
         uses: actions/cache@v2
         id: avd-cache
         with:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd-${{ matrix.api-level }}
+          key: avd-tablet-api-24
 
       - name: Create AVD and generate snapshot for caching
-        if: steps.avd-cache.outputs.cache-hit != 'true'
+        if: steps.avd-cache.outputs.cache-hit != 'true' && github.event_name != 'pull_request'
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: ${{ matrix.api-level }}
+          api-level: 24
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: false
+          disable-animations: true
           script: echo "Generated AVD snapshot for caching."
 
       - name: Run Instrumentation tests
+        if: github.event_name != 'pull_request'
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: ${{ matrix.api-level }}
+          api-level: 24
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
-          profile: Nexus 6
-          script: ./gradlew connectedBetaDebugAndroidTest --stacktrace
+          profile: Nexus 10
+          script: |
+            adb shell content insert --uri content://settings/system --bind name:s:accelerometer_rotation --bind value:i:0
+            adb shell content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0
+            adb emu geo fix 37.422131 -122.084801
+            ./gradlew connectedBetaDebugAndroidTest --stacktrace
 
-      - name: Run Unit tests
+      - name: Run Unit tests with unified coverage
+        if: github.event_name != 'pull_request'
+        run: ./gradlew -Pcoverage testBetaDebugUnitTestUnifiedCoverage --stacktrace
+
+      - name: Run Unit tests without unified coverage
+        if: github.event_name == 'pull_request'
         run: ./gradlew -Pcoverage testBetaDebugUnitTestCoverage --stacktrace
 
       - name: Upload Test Report to Codecov
+        if: github.event_name != 'pull_request'
         run: |
           curl -Os https://uploader.codecov.io/latest/linux/codecov
           chmod +x codecov
-          ./codecov -f "app/build/reports/jacoco/testBetaDebugUnitTestCoverage/testBetaDebugUnitTestCoverage.xml" -Z
+          ./codecov -f "app/build/reports/jacoco/testBetaDebugUnitTestUnifiedCoverage/testBetaDebugUnitTestUnifiedCoverage.xml" -Z
 
       - name: Generate betaDebug APK
         run: bash ./gradlew assembleBetaDebug --stacktrace

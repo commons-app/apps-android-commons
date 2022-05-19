@@ -20,9 +20,9 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.generic.GenericDraweeHierarchy
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.soloader.SoLoader
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
 import org.robolectric.Shadows.shadowOf
-import fr.free.nrw.commons.category.CategoryEditSearchRecyclerViewAdapter
 import fr.free.nrw.commons.explore.SearchActivity
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng
@@ -98,9 +98,6 @@ class MediaDetailFragmentUnitTests {
     private lateinit var locationManager: LocationServiceManager
 
     @Mock
-    private lateinit var categoryEditSearchRecyclerViewAdapter: CategoryEditSearchRecyclerViewAdapter
-
-    @Mock
     private lateinit var savedInstanceState: Bundle
 
     @Mock
@@ -108,9 +105,6 @@ class MediaDetailFragmentUnitTests {
 
     @Mock
     private lateinit var media: Media
-
-    @Mock
-    private lateinit var categoryRecyclerView: RecyclerView
 
     @Mock
     private lateinit var simpleDraweeView: SimpleDraweeView
@@ -182,10 +176,8 @@ class MediaDetailFragmentUnitTests {
         scrollView = view.findViewById(R.id.mediaDetailScrollView)
         Whitebox.setInternalState(fragment, "scrollView", scrollView)
 
-        categoryRecyclerView = view.findViewById(R.id.rv_categories)
         progressBarDeletion = view.findViewById(R.id.progressBarDeletion)
         delete = view.findViewById(R.id.nominateDeletion)
-        Whitebox.setInternalState(fragment, "categoryRecyclerView", categoryRecyclerView)
 
         Whitebox.setInternalState(fragment, "media", media)
         Whitebox.setInternalState(fragment, "isDeleted", isDeleted)
@@ -212,21 +204,16 @@ class MediaDetailFragmentUnitTests {
         Whitebox.setInternalState(fragment, "delete", delete)
         Whitebox.setInternalState(fragment, "depictionContainer", linearLayout)
         Whitebox.setInternalState(fragment, "toDoLayout", linearLayout)
-        Whitebox.setInternalState(fragment, "dummyCategoryEditContainer", linearLayout)
+        Whitebox.setInternalState(fragment, "authorLayout", linearLayout)
         Whitebox.setInternalState(fragment, "showCaptionAndDescriptionContainer", linearLayout)
-        Whitebox.setInternalState(fragment, "updateCategoriesButton", button)
         Whitebox.setInternalState(fragment, "editDescription", button)
         Whitebox.setInternalState(fragment, "depictEditButton", button)
+        Whitebox.setInternalState(fragment, "categoryEditButton", button)
         Whitebox.setInternalState(fragment, "categoryContainer", linearLayout)
-        Whitebox.setInternalState(fragment, "categorySearchView", searchView)
         Whitebox.setInternalState(fragment, "progressBarDeletion", progressBarDeletion)
+        Whitebox.setInternalState(fragment, "progressBarEditCategory", progressBarDeletion)
         Whitebox.setInternalState(fragment, "mediaDiscussion", textView)
         Whitebox.setInternalState(fragment, "locationManager", locationManager)
-        Whitebox.setInternalState(
-            fragment,
-            "categoryEditSearchRecyclerViewAdapter",
-            categoryEditSearchRecyclerViewAdapter
-        )
 
         `when`(simpleDraweeView.hierarchy).thenReturn(genericDraweeHierarchy)
         val map = HashMap<String, String>()
@@ -371,6 +358,112 @@ class MediaDetailFragmentUnitTests {
         )
         method.isAccessible = true
         method.invoke(fragment)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testGetDescriptionsWithComma() {
+        `when`(media.filename).thenReturn("")
+        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod("getDescriptions", String::class.java)
+        method.isAccessible = true
+        val s = "=={{int:filedesc}}==\n" +
+                "{{Information\n" +
+                "|description={{en|1=Antique cash register in a cafe, Darjeeling}}\n" +
+                "|date=2017-05-17 17:07:26\n" +
+                "|source={{own}}\n" +
+                "|author=[[User:Subhrajyoti07|Subhrajyoti07]]\n" +
+                "|permission=\n" +
+                "|other versions=\n" +
+                "}}\n" +
+                "{{Location|27.043186|88.267003}}\n" +
+                "{{Assessments|featured=1}}"
+        val map = linkedMapOf("en" to "Antique cash register in a cafe, Darjeeling")
+        Assert.assertEquals(map, method.invoke(fragment, s))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testGetDescriptionsWithNestedBrackets() {
+        `when`(media.filename).thenReturn("")
+        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod("getDescriptions", String::class.java)
+        method.isAccessible = true
+        val s = "=={{int:filedesc}}==\n" +
+                "{{Information\n" +
+                "|description={{en|1=[[:en:Fitzrovia Chapel|Fitzrovia Chapel]] ceiling<br/>\n" +
+                "{{On Wikidata|Q17549757}}}}\n" +
+                "|date=2017-09-17 13:09:39\n" +
+                "|source={{own}}\n" +
+                "|author=[[User:Colin|Colin]]\n" +
+                "|permission=\n" +
+                "|other versions=\n" +
+                "|Other fields = {{Credit line |Author = © [[User:Colin]] | Other = Wikimedia Commons |License = CC-BY-SA-4.0}}\n" +
+                "}}\n" +
+                "{{Location|51.519003|-0.138353}}\n" +
+                "{{Assessments|featured=1}}"
+        val map = linkedMapOf("en" to "[[:en:Fitzrovia Chapel|Fitzrovia Chapel]] ceiling<br/>\n{{On Wikidata|Q17549757}}")
+        Assert.assertEquals(map, method.invoke(fragment, s))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testGetDescriptionsWithInvalidLanguageCode() {
+        `when`(media.filename).thenReturn("")
+        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod("getDescriptions", String::class.java)
+        method.isAccessible = true
+        val s = "=={{int:filedesc}}==\n" +
+                "{{Information\n" +
+                "|description={{en|1=[[:en:Fitzrovia Chapel|Fitzrovia Chapel]] ceiling<br/>\n" +
+                "}}{{Listed building England|1223496}}\n" +
+                "|date=2017-09-17 13:09:39\n" +
+                "|source={{own}}\n" +
+                "|author=[[User:Colin|Colin]]\n" +
+                "|permission=\n" +
+                "|other versions=\n" +
+                "|Other fields = {{Credit line |Author = © [[User:Colin]] | Other = Wikimedia Commons |License = CC-BY-SA-4.0}}\n" +
+                "}}\n" +
+                "{{Location|51.519003|-0.138353}}\n" +
+                "{{Assessments|featured=1}}"
+        val map = linkedMapOf("en" to "[[:en:Fitzrovia Chapel|Fitzrovia Chapel]] ceiling<br/>\n")
+        Assert.assertEquals(map, method.invoke(fragment, s))
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testGetDescriptionsWithSpaces() {
+        `when`(media.filename).thenReturn("")
+        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod("getDescriptions", String::class.java)
+        method.isAccessible = true
+        val s = "=={{int:filedesc}}==\n" +
+                "{{Artwork\n" +
+                " |artist = {{Creator:Filippo Peroni}} Restored by {{Creator:Adam Cuerden}}\n" +
+                " |author = \n" +
+                " |title = Ricchi giardini nel Palazzo di Monforte a Palermo\n" +
+                " |description = {{en|''Ricchi giardini nel Palazzo di Monforte a Palermo'', set design for ''I Vespri siciliani'' act 5 (undated).}} {{it|''Ricchi giardini nel Palazzo di Monforte a Palermo'', bozzetto per ''I Vespri siciliani'' atto 5 (s.d.).}}\n" +
+                " |date = {{between|1855|1878}} (Premiére of the opera and death of the artist, respectively)\n" +
+                " |medium = {{technique|watercolor|and=tempera|and2=|over=paper}}\n" +
+                " |dimensions = {{Size|unit=mm|height=210|width=270}}\n" +
+                " |institution = {{Institution:Archivio Storico Ricordi}}\n" +
+                " |department = \n" +
+                " |place of discovery = \n" +
+                " |object history = \n" +
+                " |exhibition history = \n" +
+                " |credit line = \n" +
+                " |inscriptions = \n" +
+                " |notes = \n" +
+                " |accession number = ICON000132\n" +
+                " |place of creation = \n" +
+                " |source = [https://www.archivioricordi.com/chi-siamo/glam-archivio-ricordi/#/ Archivio Storico Ricordi], [https://www.digitalarchivioricordi.com/it/works/display/108/Vespri_Siciliani__I Collezione Digitale Ricordi]\n" +
+                " |permission={{PermissionTicket|id=2022031410007974|user=Ruthven}} \n" +
+                " |other_versions = \n" +
+                "* [[:File:Ricchi giardini nel Palazzo di Monforte a Palermo, bozzetto di Filippo Peroni per I Vespri siciliani (s.d.) - Archivio Storico Ricordi ICON000132 - Restoration.jpg]] - Restoration (JPEG)\n" +
+                "* [[:File:Ricchi giardini nel Palazzo di Monforte a Palermo, bozzetto di Filippo Peroni per I Vespri siciliani (s.d.) - Archivio Storico Ricordi ICON000132 - Restoration.png]] - Restoration (PNG)\n" +
+                "* [[:File:Ricchi giardini nel Palazzo di Monforte a Palermo, bozzetto di Filippo Peroni per I Vespri siciliani (s.d.) - Archivio Storico Ricordi ICON000132.jpg]] - Original (JPEG)\n" +
+                " |references = \n" +
+                " |wikidata = \n" +
+                "}}"
+        val map = linkedMapOf("en" to "''Ricchi giardini nel Palazzo di Monforte a Palermo'', set design for ''I Vespri siciliani'' act 5 (undated).",
+        "it" to "''Ricchi giardini nel Palazzo di Monforte a Palermo'', bozzetto per ''I Vespri siciliani'' atto 5 (s.d.).")
+        Assert.assertEquals(map, method.invoke(fragment, s))
     }
 
     @Test
@@ -608,16 +701,6 @@ class MediaDetailFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testSetupToDo() {
-        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
-            "setupToDo"
-        )
-        method.isAccessible = true
-        method.invoke(fragment)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testOnDiscussionLoaded() {
         val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
             "onDiscussionLoaded",
@@ -667,5 +750,47 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testOnDeleteButtonClicked() {
         fragment.onDeleteButtonClicked()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnCategoryEditButtonClicked() {
+        whenever(media.filename).thenReturn("File:Example.jpg")
+        fragment.onCategoryEditButtonClicked()
+        verify(media, times(1)).filename
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testDisplayMediaDetails() {
+        whenever(media.filename).thenReturn("File:Example.jpg")
+        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
+            "displayMediaDetails"
+        )
+        method.isAccessible = true
+        method.invoke(fragment)
+        verify(media, times(4)).filename
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testGotoCategoryEditor() {
+        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
+            "gotoCategoryEditor",
+            String::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, "[[Category:Test]]")
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnMediaRefreshed() {
+        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(
+            "onMediaRefreshed",
+            Media::class.java
+        )
+        method.isAccessible = true
+        method.invoke(fragment, media)
     }
 }

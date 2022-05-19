@@ -231,7 +231,7 @@
   <string name="skip_login_message">คุณควรที่จะเข้าสู่ระบบก่อนที่จะอัพโหลดรูปภาพใดๆ</string>
   <string name="login_alert_message">กรุณาเข้าสู่ระบบเพื่อใช้คุณลักษณะนี้</string>
   <string name="copy_wikicode">คัดลอก Wikitext ไปที่คลิปบอร์ด</string>
-  <string name="wikicode_copied">คัดลอกแล้ว</string>
+  <string name="wikicode_copied">wikitext ถูกคัดลอกไปที่คลิปบอร์ดแล้ว</string>
   <string name="nearby_location_not_available">ฟีเจอร์สถานที่ใกล้ฉันอาจไม่ทำงาน ตำแหน่งที่ตั้งไม่พร้อมใช้งาน</string>
   <string name="location_permission_rationale_nearby">ต้องการสิทธิเพื่อแสดงรายการสถานที่ใกล้เคียง</string>
   <string name="nearby_directions">เส้นทาง</string>
@@ -245,7 +245,7 @@
   <string name="error_notifications">เกิดข้อผิดพลาดในการดึงข้อมูลการแจ้งความ</string>
   <string name="error_review">เกิดข้อผิดพลาดสำหรับการแสดงตัวอย่าง กรุณาลองใหม่อีกครั้ง</string>
   <string name="no_notifications">ไม่พบการแจ้งความ</string>
-  <string name="about_translate">แปลภาษา</string>
+  <string name="about_translate">แปล</string>
   <string name="about_translate_title">ภาษา</string>
   <string name="about_translate_message">เลือกภาษาที่คุณต้องการส่งการแปล</string>
   <string name="about_translate_proceed">ดำเนินการต่อ</string>

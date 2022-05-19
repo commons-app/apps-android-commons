@@ -325,6 +325,7 @@
   <string name="search_tab_title_depictions">פריטים</string>
   <string name="explore_tab_title_featured">מומלץ</string>
   <string name="explore_tab_title_mobile">העלאה דרך נייד</string>
+  <string name="explore_tab_title_map">מפה</string>
   <string name="successful_wikidata_edit">התמונה נוספה לדף %1$s בוויקינתונים!</string>
   <string name="wikidata_edit_failure">לא ניתן היה לעדכן הישות המתאימה בוויקינתונים!</string>
   <string name="menu_set_wallpaper">הגדרה בתור טפט</string>
@@ -681,6 +682,7 @@
   <string name="achievements_of_user">הישגי המשתמש: %s</string>
   <string name="menu_view_user_page">הצגת דף המשתמש</string>
   <string name="edit_depictions">עריכת מוצגים</string>
+  <string name="edit_categories">עריכת קטגוריות</string>
   <string name="advanced_options">אפשרויות מתקדמות</string>
   <string name="advanced_query_info_text">באפשרותך לעשות התאמה אישית של שאילתת \"בסביבה\". אם זה מייצר לך שגיאות, נא לאפס ולנסות שוב.</string>
   <string name="apply">החלה</string>
@@ -690,6 +692,7 @@
   <string name="no_location_found_message">מה עם להוסיף את המקום שהתמונה הזאת צולמה בו?\nנתוני מיקום עוזרים לעורכי ויקי למצוא את התמונה שלך, והופכים אותה לשימושית יותר.\nתודה!</string>
   <string name="add_location">הוספת מיקום</string>
   <string name="feedback_sharing_data_alert">נא להסיר מהמכתב הזה כל מידע שאינך רוצה לשתף באופן פומבי. כמו־כן, נא לזכור שכתובת הדוא\"ל שמכתב נשלח ממנה, השם המשויך והתמונה, יהיו מוצגות ציבורית.</string>
+  <string name="explore_map_details">פרטים</string>
   <string name="achievements_unavailable_beta">ההישגים זמינים רק בגרסה הראשית, נא לבדוק את התיעוד למפתחים.</string>
   <string name="leaderboard_unavailable_beta">לוח המובילים זמין רק בגרסה הראשית, נא לבדוק את התיעוד למפתחים.</string>
   <string name="copyright_popup">נא להעלות רק תמונות שצילמת בעצמך. אנשים שיעלו תמונות שמוגבלות בזכויות יוצרים ייחסמו. זה חל גם על גרסת הבטא. תודה על בדיקת היישום!</string>

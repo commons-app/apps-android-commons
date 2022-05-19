@@ -18,80 +18,84 @@ project.afterEvaluate {
             .all { variant ->
                 def variantName = variant.name
                 def unitTestTask = "test${variantName.capitalize()}UnitTest"
-                def androidTestCoverageTask  = "create${variantName.capitalize()}CoverageReport"
+                def androidTestCoverageTask = "create${variantName.capitalize()}CoverageReport"
 
-                tasks.create(name: "${unitTestTask}Coverage", type: JacocoReport, dependsOn: [
+                def excludes = [
+                        // data binding
+                        'android/databinding/**/*.class',
+                        '**/android/databinding/*Binding.class',
+                        '**/android/databinding/*',
+                        '**/androidx/databinding/*',
+                        '**/BR.*',
+                        // android
+                        '**/R.class',
+                        '**/R$*.class',
+                        '**/BuildConfig.*',
+                        '**/Manifest*.*',
+                        '**/*Test*.*',
+                        'android/**/*.*',
+                        // butterKnife
+                        '**/*$ViewInjector*.*',
+                        '**/*$ViewBinder*.*',
+                        '**/*ViewBinding*.*',
+                        // dagger
+                        '**/*_MembersInjector.class',
+                        '**/Dagger*Component.class',
+                        '**/Dagger*Component$Builder.class',
+                        '**/*Module_*Factory.class',
+                        '**/di/*',
+                        '**/*_Factory*.*',
+                        '**/*Module*.*',
+                        '**/*Dagger*.*',
+                        '**/*Hilt*.*',
+                        // kotlin
+                        '**/*MapperImpl*.*',
+                        '**/*$ViewInjector*.*',
+                        '**/*$ViewBinder*.*',
+                        '**/BuildConfig.*',
+                        '**/*Component*.*',
+                        '**/*BR*.*',
+                        '**/Manifest*.*',
+                        '**/*$Lambda$*.*',
+                        '**/*Companion*.*',
+                        '**/*Module*.*',
+                        '**/*Dagger*.*',
+                        '**/*Hilt*.*',
+                        '**/*MembersInjector*.*',
+                        '**/*_MembersInjector.class',
+                        '**/*_Factory*.*',
+                        '**/*_Provide*Factory*.*',
+                        '**/*Extensions*.*',
+                        // sealed and data classes
+                        '**/*$Result.*',
+                        '**/*$Result$*.*',
+                        // model
+                        '**/**/model/*',
+                        '**/**/models/*',
+                        '**/model/*',
+                        // concurrency
+                        '**/concurrency/*',
+                        // kvstore
+                        '**/kvstore/*',
+                        // db
+                        '**/db/*',
+                        // data
+                        '**/data/*',
+                        // zoom controllers are part of external library
+                        '**/**/zoomControllers/*',
+                ]
+
+                tasks.create(name: "${unitTestTask}UnifiedCoverage", type: JacocoReport, dependsOn: [
                         "$unitTestTask",
                         "$androidTestCoverageTask",
                 ]) {
                     group = "Reporting"
-                    description = "Generate Jacoco coverage reports for the ${variantName.capitalize()} build"
+                    description = "Generate Jacoco unified coverage reports for the ${variantName.capitalize()} build"
 
                     reports {
                         html.enabled = true
                         xml.enabled = true
                     }
-
-                    def excludes = [
-                            // data binding
-                            'android/databinding/**/*.class',
-                            '**/android/databinding/*Binding.class',
-                            '**/android/databinding/*',
-                            '**/androidx/databinding/*',
-                            '**/BR.*',
-                            // android
-                            '**/R.class',
-                            '**/R$*.class',
-                            '**/BuildConfig.*',
-                            '**/Manifest*.*',
-                            '**/*Test*.*',
-                            'android/**/*.*',
-                            // butterKnife
-                            '**/*$ViewInjector*.*',
-                            '**/*$ViewBinder*.*',
-                            '**/*ViewBinding*.*',
-                            // dagger
-                            '**/*_MembersInjector.class',
-                            '**/Dagger*Component.class',
-                            '**/Dagger*Component$Builder.class',
-                            '**/*Module_*Factory.class',
-                            '**/di/*',
-                            '**/*_Factory*.*',
-                            '**/*Module*.*',
-                            '**/*Dagger*.*',
-                            '**/*Hilt*.*',
-                            // kotlin
-                            '**/*MapperImpl*.*',
-                            '**/*$ViewInjector*.*',
-                            '**/*$ViewBinder*.*',
-                            '**/BuildConfig.*',
-                            '**/*Component*.*',
-                            '**/*BR*.*',
-                            '**/Manifest*.*',
-                            '**/*$Lambda$*.*',
-                            '**/*Companion*.*',
-                            '**/*Module*.*',
-                            '**/*Dagger*.*',
-                            '**/*Hilt*.*',
-                            '**/*MembersInjector*.*',
-                            '**/*_MembersInjector.class',
-                            '**/*_Factory*.*',
-                            '**/*_Provide*Factory*.*',
-                            '**/*Extensions*.*',
-                            // sealed and data classes
-                            '**/*$Result.*',
-                            '**/*$Result$*.*',
-                            // model
-                            '**/**/model/*',
-                            // concurrency
-                            '**/concurrency/*',
-                            // kvstore
-                            '**/kvstore/*',
-                            // db
-                            '**/db/*',
-                            // data
-                            'models/*',
-                    ]
 
                     def javaClasses = fileTree(dir: variant.javaCompileProvider.get().destinationDir,
                             excludes: excludes)
@@ -116,7 +120,34 @@ project.afterEvaluate {
                     ]))
                 }
 
+                tasks.create(name: "${unitTestTask}Coverage", type: JacocoReport, dependsOn: [
+                        "$unitTestTask"
+                ]) {
+                    group = "Reporting"
+                    description = "Generate Jacoco coverage reports for the ${variantName.capitalize()} build"
+
+                    reports {
+                        html.enabled = true
+                        xml.enabled = true
+                    }
+
+                    def javaClasses = fileTree(dir: variant.javaCompileProvider.get().destinationDir,
+                            excludes: excludes)
+                    def kotlinClasses = fileTree(dir: "${buildDir}/tmp/kotlin-classes/${variantName}",
+                            excludes: excludes)
+
+                    classDirectories.setFrom(files([
+                            javaClasses,
+                            kotlinClasses
+                    ]))
+
+                    def variantSourceSets = variant.sourceSets.java.srcDirs.collect { it.path }.flatten()
+                    sourceDirectories.setFrom(project.files(variantSourceSets))
+
+                    executionData(files([
+                            "$project.buildDir/jacoco/${unitTestTask}.exec"
+                    ]))
+                }
+
             }
-
-
 }

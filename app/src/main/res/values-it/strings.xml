@@ -307,6 +307,7 @@
   <string name="search_tab_title_depictions">Elementi</string>
   <string name="explore_tab_title_featured">In vetrina</string>
   <string name="explore_tab_title_mobile">Caricato tramite dispositivi mobili</string>
+  <string name="explore_tab_title_map">Mappa</string>
   <string name="successful_wikidata_edit">Immagine aggiunta a %1$s su Wikidata!</string>
   <string name="wikidata_edit_failure">Impossibile aggiornare l\'entità Wikidata corrispondente!</string>
   <string name="menu_set_wallpaper">Imposta come sfondo</string>
@@ -637,8 +638,10 @@
   <string name="contributions_of_user">Contributi dell\'utente: %s</string>
   <string name="achievements_of_user">Traguardi dell\'utente: %s</string>
   <string name="menu_view_user_page">Vedi la pagina utente</string>
+  <string name="edit_categories">Modifica le categorie</string>
   <string name="advanced_options">Opzioni avanzate</string>
   <string name="advanced_query_info_text">Puoi personalizzare la ricerca nelle vicinanze. In caso di errore, reimposta e applica.</string>
   <string name="apply">Applica</string>
   <string name="reset">Reimposta</string>
+  <string name="explore_map_details">Dettagli</string>
 </resources>

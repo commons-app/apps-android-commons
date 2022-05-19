@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.notification;
+package fr.free.nrw.commons.notification.models;
 
 public enum NotificationType {
     THANK_YOU_EDIT("thank-you-edit"),

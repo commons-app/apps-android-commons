@@ -175,6 +175,7 @@
   <string name="search_tab_title_media">Media</string>
   <string name="search_tab_title_categories">Kategori</string>
   <string name="search_tab_title_depictions">Butir</string>
+  <string name="explore_tab_title_map">Peta</string>
   <string name="quiz">Kuiz</string>
   <string name="question">Soalan</string>
   <string name="result">Hasil</string>
@@ -220,4 +221,6 @@
   <string name="leaderboard_all_time">Sepanjang masa</string>
   <string name="leaderboard_upload">Muat naik</string>
   <string name="leaderboard_nearby">Berdekatan</string>
+  <string name="edit_categories">Sunting kategori</string>
+  <string name="explore_map_details">Butiran</string>
 </resources>

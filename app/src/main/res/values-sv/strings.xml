@@ -264,6 +264,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Betygsätt oss</string>
   <string name="about_faq">Vanliga frågor</string>
+  <string name="user_guide">Användarguide</string>
   <string name="welcome_skip_button">Hoppa över övning</string>
   <string name="no_internet">Uppkopplingen bröts</string>
   <string name="error_notifications">Fel uppstod när aviseringar hämtades</string>
@@ -291,6 +292,7 @@
   <string name="title_activity_search">Sök</string>
   <string name="search_recent_header">Senaste sökningar:</string>
   <string name="provider_searches">Senaste sökfrågor</string>
+  <string name="provider_recent_languages">Senaste språkbegäran</string>
   <string name="error_loading_categories">Fel uppstod när kategorier lästes in.</string>
   <string name="error_loading_depictions">Fel uppstod när beskrivningar lästes in.</string>
   <string name="search_tab_title_media">Media</string>
@@ -298,6 +300,7 @@
   <string name="search_tab_title_depictions">Objekt</string>
   <string name="explore_tab_title_featured">Utvald</string>
   <string name="explore_tab_title_mobile">Laddades upp via mobil</string>
+  <string name="explore_tab_title_map">Karta</string>
   <string name="successful_wikidata_edit">Bilden lades till i %1$s på Wikidata!</string>
   <string name="wikidata_edit_failure">Misslyckades att uppdatera motsvarande Wikidataentitet!</string>
   <string name="menu_set_wallpaper">Ange som bakgrundsbild</string>
@@ -435,7 +438,7 @@
   <string name="review_thanks_yes_button_text">Nästa bild</string>
   <string name="review_thanks_no_button_text">Visst, varför inte</string>
   <string name="skip_image_explanation">När du klickar på knappen får du en annan bild från Wikimedia Commons som nyligen laddades upp</string>
-  <string name="review_image_explanation" fuzzy="true">Du kan granska bilder och förbättra kvaliteten för Wikimedia Commons.\n De fyra granskningsparametrarna är: \n - Är denna bild relevant \n - Följer denna bild upphovsrättsreglerna? \n - Är denna bild korrekt kategoriserad? \n - Om allting går bra kan du också tacka bidragsgivaren.</string>
+  <string name="review_image_explanation">Du kan granska bilder och förbättra kvaliteten hos Wikimedia Commons.\nDe tre granskningsparametrarna är:\n\n- Är bilden relevant?\nNär du trycker på Nej (inte relevant) lägger du till en mall för att markera bilden för radering.\n\n- Följer bilden upphovsrättsreglerna? \nNär du trycker på Nej (följer inte upphovsrättsliga regler) lägger du till en mall för att markera bilden för radering.\n\n- Är bilden korrekt kategoriserad? \nNär du trycker på Nej (inte korrekt kategoriserad) lägger du till en mall för att begära kategorisering av denna bild.\n\nOm allt är som det ska läggs ingen mall till på bilden och om du vill kan du tacka bidragsgivaren.</string>
   <string name="no_image">Inga bilder används</string>
   <string name="no_image_reverted">Inga återställda bilder</string>
   <string name="no_image_uploaded">Inga uppladdade bilder</string>
@@ -495,6 +498,13 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Kunde inte lägga till kategorier.</string>
   <string name="category_edit_button_text">Uppdatera kategorier</string>
+  <string name="depictions_edit_helper_make_edit_toast">Försöker uppdatera beskrivningar.</string>
+  <string name="depictions_edit_helper_show_edit_title">Redigera beskrivningar</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">Beskrivning %1$s är tillagd.</item>
+    <item quantity="other">Beskrivningar %1$s är tillagda.</item>
+  </plurals>
+  <string name="depictions_edit_helper_edit_message_else">Kunde inte lägga till beskrivningar.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Försöker uppdatera koordinater.</string>
   <string name="coordinates_edit_helper_show_edit_title">Koordinater uppdaterades</string>
   <string name="description_edit_helper_show_edit_title">Uppdaterade beskrivning</string>
@@ -642,6 +652,8 @@
   <string name="contributions_of_user">Bidrag av användare: %s</string>
   <string name="achievements_of_user">Prestationer av användare: %s</string>
   <string name="menu_view_user_page">Visa användarsida</string>
+  <string name="edit_depictions">Redigera beskrivningar</string>
+  <string name="edit_categories">Redigera kategorier</string>
   <string name="advanced_options">Avancerade alternativ</string>
   <string name="advanced_query_info_text">Du kan anpassa begäran för \"I närheten\". Om du får felmeddelanden kan du återställa och verkställa.</string>
   <string name="apply">Verkställ</string>
@@ -651,7 +663,19 @@
   <string name="no_location_found_message">Vad sägs om att lägga till platsen där denna bild togs?\nPlatsdata hjälper wikiredigerare att hitta din bild och göra den mycket mer användbar.\nTack!</string>
   <string name="add_location">Lägg till plats</string>
   <string name="feedback_sharing_data_alert">Var god ta bort all information från detta e-postmeddelande som du inte är bekväm med att dela offentligt. Observera även att e-postadressen du använder samt det associerade namnet och profilbilden kommer att synas offentligt.</string>
-  <string name="achievements_unavailable_beta" fuzzy="true">Prestationer är endast tillgängliga i produktionsversionen.</string>
-  <string name="leaderboard_unavailable_beta" fuzzy="true">Topplistan är endast tillgänglig i produktionsversionen.</string>
+  <string name="explore_map_details">Detaljer</string>
+  <string name="achievements_unavailable_beta">Prestationer är endast tillgängliga i produktionsversionen. Se utvecklardokumentationen.</string>
+  <string name="leaderboard_unavailable_beta">Topplistan är endast tillgänglig i produktionsversionen. Se utvecklardokumentationen.</string>
   <string name="copyright_popup">Var god ladda endast upp bilder du själv har tagit. Alla som laddar upp upphovsrättsskyddade bilder kommer att blockeras. Detta gäller även i betaversionen. Tack för att du testar appen!</string>
+  <string name="select_feedback_data_choice">Avmarkera all information som du inte är bekväm med att dela offentligt.</string>
+  <string name="api_level">API-nivå</string>
+  <string name="android_version">Android-version</string>
+  <string name="device_manufacturer">Enhetstillverkare</string>
+  <string name="device_model">Enhetsmodell</string>
+  <string name="device_name">Enhetsnamn</string>
+  <string name="network_type">Nätverkstyp</string>
+  <string name="thanks_feedback">Tack för återkopplingen</string>
+  <string name="error_feedback">Fel när återkoppling skickades</string>
+  <string name="enter_description">Vad är din återkoppling?</string>
+  <string name="your_feedback">Din återkoppling</string>
 </resources>

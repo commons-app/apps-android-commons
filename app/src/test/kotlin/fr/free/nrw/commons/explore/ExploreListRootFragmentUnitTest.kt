@@ -259,7 +259,6 @@ class ExploreListRootFragmentUnitTest {
     @Throws(Exception::class)
     fun `testBackPressed_Case null != mediaDetails && mediaDetails_isVisible_backButtonNotClicked`() {
         `when`(mediaDetails.isVisible).thenReturn(true)
-        `when`(mediaDetails.backButtonClicked()).thenReturn(true)
         Assert.assertEquals(fragment.backPressed(), true)
     }
 

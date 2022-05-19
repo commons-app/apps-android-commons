@@ -65,7 +65,7 @@
   <string name="upload_progress_notification_title_start">Ngamuat berkas: %s</string>
   <string name="upload_progress_notification_title_in_progress">Ngunjal %1$s</string>
   <string name="upload_progress_notification_title_finishing">Méréskeun unjalan %1$s</string>
-  <string name="upload_failed_notification_title" fuzzy="true">Ngunjal %1$s gagal</string>
+  <string name="upload_failed_notification_title">Gagal ngunjal %1$s</string>
   <string name="upload_paused_notification_title">Ngamuat %1$s eureun heula</string>
   <string name="upload_failed_notification_subtitle">Toél pikeun nempo</string>
   <string name="upload_paused_notification_subtitle">Toél pikeun nempo</string>
@@ -108,6 +108,7 @@
   <string name="title_activity_settings">Séting</string>
   <string name="title_activity_signup">Daptar</string>
   <string name="title_activity_featured_images">Gambar petingan</string>
+  <string name="title_activity_custom_selector">Pamilih Kustom</string>
   <string name="title_activity_category_details">Kategori</string>
   <string name="title_activity_review">Titénan Sawawa</string>
   <string name="menu_about">Ngeunaan</string>
@@ -172,11 +173,13 @@
   <string name="location_permission_title">Mundut Idin Lokasi</string>
   <string name="ok">Oké</string>
   <string name="warning">Mangkahadé</string>
+  <string name="duplicate_image_found">Gambar Duplikat Kapanggih</string>
   <string name="upload">Unjal</string>
   <string name="yes">Nya</string>
   <string name="no">Henteu</string>
   <string name="media_detail_caption">Pertélaan</string>
   <string name="media_detail_title">Judul</string>
+  <string name="media_detail_depiction">Katrangan</string>
   <string name="media_detail_description">Déskripsi</string>
   <string name="media_detail_discussion">Sawala</string>
   <string name="media_detail_author">Pangarang</string>
@@ -220,6 +223,7 @@
   <string name="nearby_info_menu_wikidata_article">item Wikidata</string>
   <string name="nearby_info_menu_wikipedia_article">Artikel Wikipédia</string>
   <string name="description_info">Pék émbarkeun wincikan média saloba-lobabana: Dimana éta dicokot? Naon nu titojokeunna? Naon kontéksna? Pék jéntrékeun obyék atawa jalmana. Ébré informasi anu teu gampang kajudi, kawas wayah mun éta mangrupa pamandangan. Ari média nu némbongkeun perkara nu teu guyub, pék jéntrékeun naon nu ngabalukarkeun éta téh teu guyub.</string>
+  <string name="caption_info">Mangga tuliskeun pedaran pondok ngeunaan gambarna. Katrangan mimiti bakal dipaké jadi Judul gambarna. Wates 255 karakter.</string>
   <string name="upload_problem_exist">Ponténsi masalah na ieu gambar :</string>
   <string name="upload_problem_image_dark">Gambar poék teuing.</string>
   <string name="upload_problem_image_blurry">Gambar rumeuk.</string>
@@ -227,6 +231,9 @@
   <string name="upload_problem_different_geolocation">Ieu gambar dicomot ti lokasi nu béda.</string>
   <string name="upload_problem_fbmd">Wayahna nguunjal gambarna hasil sorangan hungkul. Ulah ngunjal gambar nu meunang manggih tina akun Facebook batur.</string>
   <string name="upload_problem_do_you_continue">Anjeun keukeuh rék ngunjal ieu gambar?</string>
+  <string name="upload_connection_error_alert_title">Galat Sambungan</string>
+  <string name="upload_connection_error_alert_detail">Prosés ngunggah butuh sambungan internét. Mangga pariksa sambungan jaringan anjeun.</string>
+  <string name="upload_problem_image">Aya masalah dina gambar</string>
   <string name="internet_downloaded">Wayahna nguunjal gambarna hasil sorangan hungkul. Ulah ngunjal gambar nu meunang ngundeur ti internet.</string>
   <string name="use_external_storage" fuzzy="true">Paké panyimpenan éksternal</string>
   <string name="use_external_storage_summary" fuzzy="true">Simpen gambar nu nyomotna ku aplikasi kaména na parangkat anjeun</string>

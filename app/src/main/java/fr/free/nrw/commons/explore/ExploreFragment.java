@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.tabs.TabLayout;
@@ -29,6 +30,7 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
 
     private static final String FEATURED_IMAGES_CATEGORY = "Featured_pictures_on_Wikimedia_Commons";
     private static final String MOBILE_UPLOADS_CATEGORY = "Uploaded_with_Mobile/Android";
+    private static final String EXPLORE_MAP = "Map";
     private static final String MEDIA_DETAILS_FRAGMENT_TAG = "MediaDetailsFragment";
 
     @BindView(R.id.tab_layout)
@@ -38,6 +40,7 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     ViewPagerAdapter viewPagerAdapter;
     private ExploreListRootFragment featuredRootFragment;
     private ExploreListRootFragment mobileRootFragment;
+    private ExploreMapRootFragment mapRootFragment;
     @Inject
     @Named("default_preferences")
     public JsonKvStore applicationKvStore;
@@ -68,6 +71,27 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setId(R.id.viewPager);
         tabLayout.setupWithViewPager(viewPager);
+        viewPager.addOnPageChangeListener(new OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset,
+                int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 2) {
+                    viewPager.setCanScroll(false);
+                } else {
+                    viewPager.setCanScroll(true);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         setTabs();
         setHasOptionsMenu(true);
         return view;
@@ -86,13 +110,20 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
         Bundle mobileArguments = new Bundle();
         mobileArguments.putString("categoryName", MOBILE_UPLOADS_CATEGORY);
 
+        Bundle mapArguments = new Bundle();
+        mapArguments.putString("categoryName", EXPLORE_MAP);
+
         featuredRootFragment = new ExploreListRootFragment(featuredArguments);
         mobileRootFragment = new ExploreListRootFragment(mobileArguments);
+        mapRootFragment = new ExploreMapRootFragment(mapArguments);
         fragmentList.add(featuredRootFragment);
         titleList.add(getString(R.string.explore_tab_title_featured).toUpperCase());
 
         fragmentList.add(mobileRootFragment);
         titleList.add(getString(R.string.explore_tab_title_mobile).toUpperCase());
+
+        fragmentList.add(mapRootFragment);
+        titleList.add(getString(R.string.explore_tab_title_map).toUpperCase());
 
         ((MainActivity)getActivity()).showTabs();
         ((BaseActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -108,8 +139,14 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
                     .setDisplayHomeAsUpEnabled(false);
                 return true;
             }
-        } else {
+        } else if (tabLayout.getSelectedTabPosition() == 1) { //Mobile root fragment
             if (mobileRootFragment.backPressed()) {
+                ((BaseActivity) getActivity()).getSupportActionBar()
+                    .setDisplayHomeAsUpEnabled(false);
+                return true;
+            }
+        } else { //explore map fragment
+            if (mapRootFragment.backPressed()) {
                 ((BaseActivity) getActivity()).getSupportActionBar()
                     .setDisplayHomeAsUpEnabled(false);
                 return true;

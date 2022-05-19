@@ -15,6 +15,8 @@ import javax.inject.Singleton
 
 const val PAGE_ID_PREFIX = "M"
 const val CATEGORY_CONTINUATION_PREFIX = "category_"
+const val LIMIT = 30
+const val RADIUS = 10000
 
 /**
  * Media Client to handle custom calls to Commons MediaWiki APIs
@@ -89,6 +91,16 @@ class MediaClient @Inject constructor(
      */
     fun getMediaListFromSearch(keyword: String?, limit: Int, offset: Int) =
         responseMapper(mediaInterface.getMediaListFromSearch(keyword, limit, offset))
+
+    /**
+     * This method takes coordinate as input and returns a list of  Media objects.
+     * It uses the generator query API to get the images searched using a query.
+     *
+     * @param coordinate coordinate
+     * @return
+     */
+    fun getMediaListFromGeoSearch(coordinate: String?) =
+        responseMapper(mediaInterface.getMediaListFromGeoSearch(coordinate, LIMIT, RADIUS))
 
     /**
      * @return list of images for a particular depict entity
@@ -179,9 +191,9 @@ class MediaClient @Inject constructor(
     }
 
     private fun mediaFromPageAndEntity(pages: List<MwQueryPage>): Single<List<Media>> {
-        return if (pages.isEmpty())
+        return if (pages.isEmpty()) {
             Single.just(emptyList())
-        else
+        } else {
             getEntities(pages.map { "$PAGE_ID_PREFIX${it.pageId()}" })
                 .map {
                     pages.zip(it.entities().values)
@@ -191,5 +203,7 @@ class MediaClient @Inject constructor(
                             }
                         }
                 }
+        }
+
     }
 }

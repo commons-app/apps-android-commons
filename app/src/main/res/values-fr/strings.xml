@@ -325,6 +325,7 @@
   <string name="search_tab_title_depictions">Éléments</string>
   <string name="explore_tab_title_featured">Remarquable</string>
   <string name="explore_tab_title_mobile">Téléversé via mobile</string>
+  <string name="explore_tab_title_map">Carte</string>
   <string name="successful_wikidata_edit">Image bien ajoutée à %1$s sur Wikidata !</string>
   <string name="wikidata_edit_failure">Échec de la mise à jour de l’entité Wikidata correspondante !</string>
   <string name="menu_set_wallpaper">Définir comme fond d’écran</string>
@@ -590,9 +591,9 @@
   <string name="wikipedia_instructions_step_3">3. Trouver une section appropriée pour votre image dans l’article</string>
   <string name="wikipedia_instructions_step_4">4. Cliquer sur le lien ou l’icône Modifier (ressemblant à un crayon) pour cette section.</string>
   <string name="wikipedia_instructions_step_5">5. Coller le texte wiki à l’endroit approprié.</string>
-  <string name="wikipedia_instructions_step_6">6. Modifier le wikitexte pour un positionnement approprié, si besoin. Pour plus d’informations, voir &lt;a href=\"https://www.mediawiki.org/wiki/Help:Images/fr#Affichage_d\'une_seule_image\"&gt;l’aide ici&lt;/a&gt;.</string>
+  <string name="wikipedia_instructions_step_6">6. Modifier le wikicode pour un positionnement approprié, si nécessaire. Pour plus d’informations, voir &lt;a href=\"https://www.mediawiki.org/wiki/Help:Images/fr#Affichage_d\'une_seule_image\"&gt;l’aide ici&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Publier l’article</string>
-  <string name="copy_wikicode_to_clipboard">Copier le wikitexte dans le presse-papier</string>
+  <string name="copy_wikicode_to_clipboard">Copier le wikicode dans le presse-papier</string>
   <string name="pause">pause</string>
   <string name="resume">reprendre</string>
   <string name="paused">En pause</string>
@@ -666,10 +667,12 @@
   <string name="custom_selector_info_text2">À l’inverse de l’image sur la gauche, l’image de droite comporte un logo Commons qui indique qu’elle a déjà été téléversée.\nToucher et maintenir pour avoir un aperçu de l’image.</string>
   <string name="welcome_custom_selector_ok">Génial</string>
   <string name="custom_selector_already_uploaded_image_text">Cette image a déjà été téléversée sur Commons.</string>
+  <string name="place_state_wlm">WLM</string>
   <string name="wlm_upload_info">Cette image sera entrée dans le concours « Wiki aime les monuments » de 2021</string>
   <string name="display_monuments">Afficher les monuments</string>
   <string name="wlm_month_message">C’est le mois de « Wiki  aime les monuments » !</string>
   <string name="learn_more">EN SAVOIR PLUS</string>
+  <string name="wlm_campaign_title">Wiki aime les monuments</string>
   <string name="wlm_campaign_description">« Wiki aime les monuments » est un concours international de photographie des monuments, organisé par Wikimédia.</string>
   <string name="need_permission">Nécessite une permission</string>
   <string name="read_phone_state_permission_message">Les cartes de proximité doivent pouvoir lire l’ÉTAT DU TÉLÉPHONE pour fonctionner correctement</string>
@@ -677,6 +680,7 @@
   <string name="achievements_of_user">Réussites de l’utilisateur : %s</string>
   <string name="menu_view_user_page">Afficher la page utilisateur</string>
   <string name="edit_depictions">Modifier les descriptions</string>
+  <string name="edit_categories">Modifier les catégories</string>
   <string name="advanced_options">Options avancées</string>
   <string name="advanced_query_info_text">Vous pouvez personnaliser la requête de proximité. Si vous obtenez des erreurs, réinitialisez et appliquez.</string>
   <string name="apply">Appliquer</string>
@@ -686,6 +690,7 @@
   <string name="no_location_found_message">Pourquoi ne pas ajouter le lieu où cette image a été trouvée ?\nLes données de lieu aident les contributeurs de wikis à trouver votre image, ce qui la rend beaucoup plus utile.\nMerci !</string>
   <string name="add_location">Ajouter un lieu</string>
   <string name="feedback_sharing_data_alert">Veuillez supprimer de ce courriel toute information que vous n’aimeriez pas diffuser publiquement. Également, veuillez prendre conscience du fait que votre adresse de messagerie avec laquelle vous publiez, ainsi que le nom et l’image de profil associés, seront visibles publiquement.</string>
+  <string name="explore_map_details">Détails</string>
   <string name="achievements_unavailable_beta">Les réalisations ne sont disponibles que dans la version de production, veuillez consulter la documentation du développeur.</string>
   <string name="leaderboard_unavailable_beta">Le classement n’est disponible que dans la version de production, veuillez consulter la documentation du développeur.</string>
   <string name="copyright_popup">Veuillez ne téléverser que des images que vous avez créées vous-même. Ceux qui téléversent des images soumises aux droits d’auteur seront bloqués. Ceci s’applique également à la version bêta. Merci pour votre test de l’application !</string>

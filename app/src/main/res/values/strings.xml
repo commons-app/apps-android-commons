@@ -302,6 +302,7 @@
 
   <string name="explore_tab_title_featured">Featured</string>
   <string name="explore_tab_title_mobile">Uploaded via mobile</string>
+  <string name="explore_tab_title_map">Map</string>
   <string name="successful_wikidata_edit">Image added to %1$s on Wikidata!</string>
   <string name="wikidata_edit_failure">Failed to update corresponding Wikidata entity!</string>
   <string name="menu_set_wallpaper">Set as wallpaper</string>
@@ -691,6 +692,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="achievements_of_user">Achievements of User: %s</string>
   <string name="menu_view_user_page">View user page</string>
   <string name="edit_depictions">Edit depictions</string>
+  <string name="edit_categories">Edit categories</string>
   <string name="advanced_options">Advanced Options</string>
   <string name="advanced_query_info_text">You can customize the Nearby query. If you get errors, reset and apply.</string>
   <string name="apply">Apply</string>
@@ -700,6 +702,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="no_location_found_message">How about adding the place where this image was taken?\nLocation data helps Wiki editors find your picture, making it much more useful.\nThank you!</string>
   <string name="add_location">Add location</string>
   <string name="feedback_sharing_data_alert">Please remove from this email any information that you are not comfortable sharing publicly. Also, please be aware that your email address with which you are posting, and the associated name and profile picture, will be visible publicly.</string>
+  <string name="explore_map_details">Details</string>
   <string name="achievements_unavailable_beta">Achievements are only available in the prod flavor, please check the developer documentation.</string>
   <string name="leaderboard_unavailable_beta">The leaderboard is only available in the prod flavor, please check the developer documentation.</string>
   <string name="copyright_popup">Please only upload pictures you have taken by yourself. Uploaders of copyrighted images will be blocked. This applies to the beta flavor too. Thank you for testing the app!</string>

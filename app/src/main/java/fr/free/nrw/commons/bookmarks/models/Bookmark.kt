@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.bookmarks
+package fr.free.nrw.commons.bookmarks.models
 
 import android.net.Uri
 

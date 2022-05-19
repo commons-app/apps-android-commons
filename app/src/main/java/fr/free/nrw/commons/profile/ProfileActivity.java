@@ -26,7 +26,9 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.ViewPagerAdapter;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.contributions.ContributionsListFragment;
+import fr.free.nrw.commons.explore.ParentViewPager;
 import fr.free.nrw.commons.profile.achievements.AchievementsFragment;
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
@@ -46,10 +48,10 @@ public class ProfileActivity extends BaseActivity {
     private FragmentManager supportFragmentManager;
 
     @BindView(R.id.viewPager)
-    ViewPager viewPager;
+    ParentViewPager viewPager;
 
     @BindView(R.id.tab_layout)
-    TabLayout tabLayout;
+    public TabLayout tabLayout;
 
     @Inject
     SessionManager sessionManager;
@@ -64,6 +66,11 @@ public class ProfileActivity extends BaseActivity {
     String userName;
     private boolean  shouldShowContributions;
 
+    ContributionsFragment contributionsFragment;
+
+    public void setScroll(boolean canScroll){
+        viewPager.setCanScroll(canScroll);
+    }
     @Override
     protected void onRestoreInstanceState(final Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
@@ -137,11 +144,11 @@ public class ProfileActivity extends BaseActivity {
         titleList.add(getResources().getString(R.string.leaderboard_tab_title).toUpperCase());
 
         if (shouldShowContributions) {
-            ContributionsListFragment contributionsListFragment = new ContributionsListFragment();
+            contributionsFragment = new ContributionsFragment();
             Bundle contributionsListBundle = new Bundle();
             contributionsListBundle.putString(KEY_USERNAME, userName);
-            contributionsListFragment.setArguments(contributionsListBundle);
-            fragmentList.add(contributionsListFragment);
+            contributionsFragment.setArguments(contributionsListBundle);
+            fragmentList.add(contributionsFragment);
             titleList.add(getString(R.string.contributions_fragment).toUpperCase());
         }
         viewPagerAdapter.setTabData(fragmentList, titleList);
@@ -232,6 +239,18 @@ public class ProfileActivity extends BaseActivity {
     @Override
     protected void onSaveInstanceState(@NonNull final Bundle outState) {
         outState.putString(KEY_USERNAME, userName);
+        outState.putBoolean(KEY_SHOULD_SHOW_CONTRIBUTIONS, shouldShowContributions);
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Checking if MediaDetailPagerFragment is visible, If visible then show ContributionListFragment else close the ProfileActivity
+        if(contributionsFragment != null && contributionsFragment.getMediaDetailPagerFragment() != null && contributionsFragment.getMediaDetailPagerFragment().isVisible()) {
+            contributionsFragment.backButtonClicked();
+            tabLayout.setVisibility(View.VISIBLE);
+        }else {
+            super.onBackPressed();
+        }
     }
 }

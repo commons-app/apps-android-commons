@@ -8,55 +8,59 @@ import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.Intents.intending
 import androidx.test.espresso.intent.matcher.IntentMatchers
-import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import androidx.test.espresso.intent.matcher.IntentMatchers.isInternal
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
-import androidx.test.runner.AndroidJUnit4
+import androidx.test.uiautomator.UiDevice
 import fr.free.nrw.commons.auth.LoginActivity
-import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.auth.SignupActivity
 import org.hamcrest.CoreMatchers
 import org.hamcrest.CoreMatchers.not
-import org.junit.Before
-import org.junit.Ignore
-import org.junit.Rule
-import org.junit.Test
+import org.junit.*
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class LoginActivityTest {
+
     @get:Rule
     var activityRule = ActivityTestRule(LoginActivity::class.java)
 
+    private val device: UiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+
     @Before
     fun setup() {
-        try {
-            Intents.init()
-        } catch (ex: IllegalStateException) {
-
-        }
+        device.setOrientationNatural()
+        device.freezeRotation()
+        Intents.init()
         UITestHelper.skipWelcome()
         intending(not(isInternal())).respondWith(ActivityResult(Activity.RESULT_OK, null))
     }
 
-    @Test
-    @Ignore("Fix Failing Test")
-    fun testLogin() {
-        UITestHelper.loginUser()
-        Intents.intended(hasComponent(MainActivity::class.java.name))
+    @After
+    fun cleanUp() {
+        Intents.release()
     }
 
     @Test
-    @Ignore("Fix Failing Test")
     fun testForgotPassword() {
-        UITestHelper.sleep(3000)
-        Espresso.onView(ViewMatchers.withId(R.id.forgot_password))
-                .perform(ViewActions.click())
-        Intents.intended(CoreMatchers.allOf(IntentMatchers.hasAction(Intent.ACTION_VIEW), IntentMatchers.hasData(BuildConfig.FORGOT_PASSWORD_URL)));
+        Espresso.onView(ViewMatchers.withId(R.id.forgot_password)).perform(ViewActions.click())
+        Intents.intended(
+            CoreMatchers.allOf(
+                IntentMatchers.hasAction(Intent.ACTION_VIEW),
+                IntentMatchers.hasData(BuildConfig.FORGOT_PASSWORD_URL)
+            )
+        )
     }
 
     @Test
-    @Ignore("Fix Failing Test")
+    fun testSignupButton() {
+        Espresso.onView(ViewMatchers.withId(R.id.sign_up_button)).perform(ViewActions.click())
+        Intents.intended(IntentMatchers.hasComponent(SignupActivity::class.java.name))
+    }
+
+    @Test
     fun orientationChange() {
         UITestHelper.changeOrientation(activityRule)
     }

@@ -295,6 +295,7 @@
   <string name="search_tab_title_depictions">Предмети</string>
   <string name="explore_tab_title_featured">Избрани</string>
   <string name="explore_tab_title_mobile">Подигнато преку мобилен уред</string>
+  <string name="explore_tab_title_map">Карта</string>
   <string name="successful_wikidata_edit">Сликата е додадена кон %1$s на Википодатоците!</string>
   <string name="wikidata_edit_failure">Не успеав да ја изменам соодветната единица на Википодатоците!</string>
   <string name="menu_set_wallpaper">Задај како позадина</string>
@@ -432,7 +433,7 @@
   <string name="review_thanks_yes_button_text">Следна слика</string>
   <string name="review_thanks_no_button_text">Да, што да не</string>
   <string name="skip_image_explanation">Копчево ќе ви даде друга неодамна подигната слика од Ризницата</string>
-  <string name="review_image_explanation" fuzzy="true">Можете да оценувате слики и да го подобрувате квалитетот на Ризницата.\n Четирите мерила за оценка се следниве: \n - Дали сликата е во делокругот? \n - Дали сликата ги следи правилата за авторски права? \n - Дали сликата е исправно категоризирана? \n - Ако сè е во ред, можете и да му се заблагодарите на подигачот.</string>
+  <string name="review_image_explanation">Можете да оценувате слики за да го подобрите квалитетот на Ризницата.\nТрите мерила за оценка се следниве:\n\n- Дали сликата е во делокругот?\nКога ќе допрете на „Не“ (вон делокругот), на сликата ѝ ставате предлошка која предлага бришење на сликата.\n\n- Дали сликата ги следи правилата за авторски права?\nКога ќе допрете на „Не“ (не се придржува кон авторскоправните правила), на сликата ѝ ставате предлошка која предлага бришење на сликата.\n\n- Дали сликата е исправно категоризирана?\nКога ќе допрете на „Не“ (не е исправно категоризирана), на сликата ѝ ставате предлошка со барање за категоризација.\n\nАко сè е воред, на сликата не ѝ се става предлошка, и имате прилика да му се заблагодарите на нејзиниот подигач.</string>
   <string name="no_image">Нема искористени слики</string>
   <string name="no_image_reverted">Нема вратени слики</string>
   <string name="no_image_uploaded">Нема подигнати слики</string>
@@ -649,6 +650,7 @@
   <string name="achievements_of_user">Достигнувања на корисникот: %s</string>
   <string name="menu_view_user_page">Преглед на корисничката страница</string>
   <string name="edit_depictions">Уреди прикази</string>
+  <string name="edit_categories">Уреди категории</string>
   <string name="advanced_options">Напредни можности</string>
   <string name="advanced_query_info_text">Можете да го прилагодите барањето „Во близина“. Ако добиете грешки, вратете одново и применете.</string>
   <string name="apply">Примени</string>
@@ -658,6 +660,7 @@
   <string name="no_location_found_message">Дали би го ставиле местото кајшто е направена сликата?\nМестоположбените податоци им помагаат на уредниците да ја најдат сликата, и со тоа таа станува покорисна.\nВи благодариме!</string>
   <string name="add_location">Додај местоположба</string>
   <string name="feedback_sharing_data_alert">Од оваа порака отстранете ги сите информации што не сакате да бидат јавни. Воедно, имајте на ум дека вашата е-поштенска адреса од која испраќате, името и профилна слика ќе бидат јавно видливи.</string>
+  <string name="explore_map_details">Подробно</string>
   <string name="achievements_unavailable_beta">Достигнувањата се достапни само во производниот вкус. Погледајте ја разработувачката документација.</string>
   <string name="leaderboard_unavailable_beta">Предводниците се достапни само во производниот вкус. Погледајте ја разработувачката документација.</string>
   <string name="copyright_popup">Подигајте само слики што сте ги направиле самите. Подигачите на слики заштитени со авторски права ќе бидат блокирани. Ова важи и за бета-верзијата. Ви благодариме што го испробувате прилогот!</string>

@@ -14,6 +14,7 @@
 * Killarnee
 * ManuelFranz
 * Metalhead64
+* Ngschaider
 * Pyscowicz
 * Sujan
 * Sushi
@@ -24,6 +25,7 @@
 * Umlaut
 * WikiBayer
 * Zauberzunge2000
+* ZiqiLiang
 -->
 <resources>
   <plurals name="uploads_pending_notification_indicator">
@@ -316,6 +318,7 @@
   <string name="search_tab_title_depictions">Objekte</string>
   <string name="explore_tab_title_featured">Vorgestellt</string>
   <string name="explore_tab_title_mobile">Über mobil hochgeladen</string>
+  <string name="explore_tab_title_map">Karte</string>
   <string name="successful_wikidata_edit">Bild zu %1$s auf Wikidata hinzugefügt!</string>
   <string name="wikidata_edit_failure">Fehler bei der Aktualisierung des dazugehörigen Wikidata-Objekts!</string>
   <string name="menu_set_wallpaper">Als Hintergrundbild festlegen</string>
@@ -453,7 +456,7 @@
   <string name="review_thanks_yes_button_text">Nächstes Bild</string>
   <string name="review_thanks_no_button_text">Ja, warum nicht</string>
   <string name="skip_image_explanation">Das Anklicken dieser Schaltfläche gibt dir ein anderes kürzlich hochgeladenes Bild von Wikimedia Commons</string>
-  <string name="review_image_explanation">Du kannst Bilder überprüfen, um die Qualität von Wikimedia Commons zu verbessern.\nDie drei Parameter der Überprüfung sind:\n\n- Ist dieses Bild im Projektbereich?\nWenn du auf Nein (außerhalb des Projektsbereich) tippst, fügen diesem Bild eine Vorlage für eine Löschung hinzu.\n\n- Entspricht das Bild den Regeln des Urheberrechts?\nWenn du auf Nein (entspricht nicht dem Urheberrecht) tippst, füge diesem Bild eine Löschvorlage hinzu.\n\n- Ist dieses Bild richtig kategorisiert?\nWenn du auf Nein (nicht korrekt kategorisiert) tippst, füge diesem Bild eine Vorlage für einen Kategorisierungswunsch hinzu.\n\nWenn alles in Ordnung ist, wird dem Bild keine Vorlage hinzugefügt und du erhältst die Möglichkeit, sich bei dem Urheber zu bedanken.</string>
+  <string name="review_image_explanation">Du kannst Bilder überprüfen, um die Qualität von Wikimedia Commons zu verbessern.\nDie drei Parameter der Überprüfung sind:\n\n- Ist dieses Bild im Projektbereich?\nWenn du auf Nein (außerhalb des Projektsbereich) tippst, fügen diesem Bild eine Vorlage für eine Löschung hinzu.\n\n- Entspricht das Bild den Regeln des Urheberrechts?\nWenn du auf Nein (entspricht nicht dem Urheberrecht) tippst, füge diesem Bild eine Löschvorlage hinzu.\n\n- Ist dieses Bild richtig kategorisiert?\nWenn du auf Nein (nicht korrekt kategorisiert) tippst, füge diesem Bild eine Vorlage für einen Kategorisierungswunsch hinzu.\n\nWenn alles in Ordnung ist, wird dem Bild keine Vorlage hinzugefügt und du erhältst die Möglichkeit, dich bei dem Urheber zu bedanken.</string>
   <string name="no_image">Keine Bilder verwendet</string>
   <string name="no_image_reverted">Keine Bilder zurückgesetzt</string>
   <string name="no_image_uploaded">Keine Bilder hochgeladen</string>
@@ -660,6 +663,7 @@
   <string name="contributions_of_user">Beiträge von Benutzer: %s</string>
   <string name="achievements_of_user">Leistungen von Benutzer: %s</string>
   <string name="menu_view_user_page">Benutzerseite ansehen</string>
+  <string name="edit_categories">Kategorien bearbeiten</string>
   <string name="advanced_options">Erweiterte Optionen</string>
   <string name="advanced_query_info_text">Du kannst die In-der-Nähe-Abfrage anpassen. Wenn du Fehler erhältst, setze zurück und versuche es erneut.</string>
   <string name="apply">Anwenden</string>
@@ -669,6 +673,7 @@
   <string name="no_location_found_message">Wie wäre es, den Ort hinzuzufügen, an dem das Bild aufgenommen wurde?\nOrtsangaben helfen Wiki-Benutzern, dein Bild zu finden, und machen es so viel nützlicher.\nDanke schön!</string>
   <string name="add_location">Standort hinzufügen</string>
   <string name="feedback_sharing_data_alert">Bitte entferne aus dieser E-Mail alle Informationen, die du nicht öffentlich mitteilen möchtest. Bitte beachte auch, dass deine E-Mail-Adresse, mit der du schreibst, sowie der dazugehörige Name und das Profilbild öffentlich sichtbar sind.</string>
+  <string name="explore_map_details">Einzelheiten</string>
   <string name="copyright_popup">Bitte lade nur Bilder hoch, die du selbst aufgenommen hast. Wer urheberrechtlich geschützte Bilder hochlädt, wird gesperrt. Dies gilt auch für die Beta-Variante. Vielen Dank, dass du die App getestet hast!</string>
   <string name="select_feedback_data_choice">Bitte hebe die Markierung aller Informationen auf, die du nicht mit der Öffentlichkeit teilen möchtest.</string>
   <string name="api_level">API-Level</string>

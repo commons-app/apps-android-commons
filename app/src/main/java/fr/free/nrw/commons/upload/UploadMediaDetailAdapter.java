@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload;
 import android.app.Dialog;
 import android.content.Intent;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -58,10 +59,11 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
     }
 
     public UploadMediaDetailAdapter(final String savedLanguageValue,
-        List<UploadMediaDetail> uploadMediaDetails) {
+        List<UploadMediaDetail> uploadMediaDetails, RecentLanguagesDao recentLanguagesDao) {
         this.uploadMediaDetails = uploadMediaDetails;
         selectedLanguages = new HashMap<>();
         this.savedLanguageValue = savedLanguageValue;
+        this.recentLanguagesDao = recentLanguagesDao;
     }
 
     public void setCallback(Callback callback) {
@@ -164,6 +166,9 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                 captionInputLayout.setEndIconDrawable(R.drawable.mapbox_info_icon_default);
                 captionInputLayout.setEndIconOnClickListener(v ->
                     callback.showAlert(R.string.media_detail_caption, R.string.caption_info));
+                Objects.requireNonNull(captionInputLayout.getEditText()).setFilters(new InputFilter[] {
+                    new UploadMediaDetailInputFilter()
+                });
 
                 descInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
                 descInputLayout.setEndIconDrawable(R.drawable.mapbox_info_icon_default);

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import fr.free.nrw.commons.campaigns.models.Campaign;
 import fr.free.nrw.commons.theme.BaseActivity;
 import org.wikipedia.util.DateUtil;
 

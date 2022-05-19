@@ -25,7 +25,7 @@ import com.google.android.material.snackbar.Snackbar;
 import fr.free.nrw.commons.models.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.bookmarks.Bookmark;
+import fr.free.nrw.commons.bookmarks.models.Bookmark;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesContentProvider;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -103,13 +103,17 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         pager.addOnPageChangeListener(this);
 
         adapter = new MediaDetailAdapter(getChildFragmentManager());
-        ((BaseActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if (getActivity() != null) {
             final ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
             if (actionBar != null) {
                 actionBar.setDisplayHomeAsUpEnabled(true);
             }
+        }
+
+        // If fragment is associated with ProfileActivity, then hide the tabLayout
+        if (getActivity() instanceof ProfileActivity) {
+            ((ProfileActivity)getActivity()).tabLayout.setVisibility(View.GONE);
         }
 
         pager.setAdapter(adapter);
@@ -403,16 +407,6 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     @Override
     public void nominatingForDeletion(int index) {
       provider.refreshNominatedMedia(index);
-    }
-  
-    /**
-     * backButtonClicked is called on a back event in the media details pager.
-     * returns true after closing the categoryEditContainer if open, implying that event was handled.
-     * else returns false
-     * @return
-     */
-    public boolean backButtonClicked(){
-        return ((MediaDetailFragment)(adapter.getCurrentFragment())).hideCategoryEditContainerIfOpen();
     }
 
     public interface MediaDetailProvider {

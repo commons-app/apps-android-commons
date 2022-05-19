@@ -23,7 +23,6 @@ public class CategoryEditHelper {
     public final PageEditClient pageEditClient;
     private final ViewUtilWrapper viewUtil;
     private final String username;
-    private Callback callback;
 
     @Inject
     public CategoryEditHelper(NotificationHelper notificationHelper,
@@ -43,35 +42,51 @@ public class CategoryEditHelper {
      * @param categories
      * @return
      */
-    public Single<Boolean> makeCategoryEdit(Context context, Media media, List<String> categories, Callback callback) {
+    public Single<Boolean> makeCategoryEdit(Context context, Media media, List<String> categories,
+        final String wikiText) {
         viewUtil.showShortToast(context, context.getString(R.string.category_edit_helper_make_edit_toast));
-        return addCategory(media, categories)
+        return addCategory(media, categories, wikiText)
             .flatMapSingle(result -> Single.just(showCategoryEditNotification(context, media, result)))
             .firstOrError();
     }
 
     /**
-     * Appends new categories
+     * Rebuilds the WikiText with new categpries and post it on server
+     *
      * @param media
      * @param categories to be added
      * @return
      */
-    private Observable<Boolean> addCategory(Media media, List<String> categories) {
+    private Observable<Boolean> addCategory(Media media, List<String> categories,
+        final String wikiText) {
         Timber.d("thread is category adding %s", Thread.currentThread().getName());
         String summary = "Adding categories";
-
-        StringBuilder buffer = new StringBuilder();
-
-        if (categories != null && categories.size() != 0) {
-
+        final StringBuilder buffer = new StringBuilder();
+        final String wikiTextWithoutCategory;
+        //If the picture was uploaded without a category, the wikitext will contain "Uncategorized" instead of "[[Category"
+        if (wikiText.contains("Uncategorized")) {
+            wikiTextWithoutCategory = wikiText.substring(0, wikiText.indexOf("Uncategorized"));
+        } else if (wikiText.contains("[[Category")) {
+            wikiTextWithoutCategory = wikiText.substring(0, wikiText.indexOf("[[Category"));
+        } else {
+            wikiTextWithoutCategory = "";
+        }
+        if (categories != null && !categories.isEmpty()) {
+            //If the categories list is empty, when reading the categories of a picture,
+            // the code will add "None selected" to categories list in order to see in picture's categories with "None selected".
+            // So that after selected some category,"None selected" should be removed from list
             for (int i = 0; i < categories.size(); i++) {
-                buffer.append("\n[[Category:").append(categories.get(i)).append("]]");
+                if (!categories.get(i).equals("None selected")//Not to add "None selected" as category to wikiText
+                    || !wikiText.contains("Uncategorized")) {
+                        buffer.append("[[Category:").append(categories.get(i)).append("]]\n");
+                    }
             }
+            categories.remove("None selected");
         } else {
             buffer.append("{{subst:unc}}");
         }
-        String appendText = buffer.toString();
-        return pageEditClient.appendEdit(media.getFilename(), appendText + "\n", summary);
+        final String appendText = wikiTextWithoutCategory + buffer;
+        return pageEditClient.edit(media.getFilename(), appendText + "\n", summary);
     }
 
     private boolean showCategoryEditNotification(Context context, Media media, boolean result) {

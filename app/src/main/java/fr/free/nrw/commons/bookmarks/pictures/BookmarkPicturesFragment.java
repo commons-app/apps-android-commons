@@ -188,6 +188,10 @@ public class BookmarkPicturesFragment extends DaggerFragment {
             setAdapter(collection);
         } else {
             if (gridAdapter.containsAll(collection)) {
+                progressBar.setVisibility(GONE);
+                statusTextView.setVisibility(GONE);
+                gridView.setVisibility(VISIBLE);
+                gridView.setAdapter(gridAdapter);
                 return;
             }
             gridAdapter.addItems(collection);

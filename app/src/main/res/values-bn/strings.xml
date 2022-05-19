@@ -6,6 +6,7 @@
 * Leemon2010
 * Md. Golam Mukit Khan
 * MdsShakil
+* Meghmollar2017
 * Mohammed Galib Hasan
 * Muktogayn
 * NahidHossain
@@ -265,6 +266,7 @@
   <string name="nearby_commons">কমন্স</string>
   <string name="about_rate_us">আমাদের মূল্যায়ন করুন</string>
   <string name="about_faq">প্রাজিপ্র</string>
+  <string name="user_guide">ব্যবহারকারী নির্দেশিকা</string>
   <string name="welcome_skip_button">টিউটোরিয়াল এড়ান</string>
   <string name="no_internet">ইন্টারনেট অনুপলব্ধ</string>
   <string name="no_notifications">কোন বিজ্ঞপ্তি পাওয়া যায়নি</string>
@@ -290,6 +292,7 @@
   <string name="search_tab_title_depictions">আইটেম</string>
   <string name="explore_tab_title_featured">নির্বাচিত</string>
   <string name="explore_tab_title_mobile">মোবাইলের মাধ্যমে আপলোডকৃত</string>
+  <string name="explore_tab_title_map">মানচিত্র</string>
   <string name="menu_set_wallpaper">ওয়ালপেপার হিসেবে সেট করুন</string>
   <string name="quiz">কুইজ</string>
   <string name="quiz_question_string">এই চিত্রটি কি আপলোড করা ঠিক হয়েছে?</string>
@@ -336,12 +339,15 @@
   <string name="back_button_warning">আপলোড বাতিল করুন</string>
   <string name="achievements_fetch_failed_ultimate_achievement">আপনি এত অবদান রেখেছেন যে আমাদের গণনা ব্যবস্থা তা গণনা করতে পারছে না। অভিনন্দন, এটাই চূড়ান্ত অর্জন।</string>
   <string name="nominate_for_deletion_done">সম্পন্ন</string>
-  <string name="review_spam">এটি কি প্রকল্পের উদ্দেশ্যগুলির সাথে সামঞ্জস্যপূর্ণ?</string>
-  <string name="review_spam_explanation">এই চিত্রটি এটি একেবারেই দরকারী না হলে এটি মুছে ফেলার জন্য মনোনীত করতে “না” টিপুন।</string>
+  <string name="review_copyright">এই চিত্রটি কি কপিরাইটের নিয়ম অনুসরণ করে?</string>
+  <string name="review_category">এই চিত্রটিকে কি সঠিকভাবে বিষয়শ্রেণীকরণ করা হয়েছে?</string>
+  <string name="review_spam">এই চিত্রটি কি প্রকল্পের উদ্দেশ্যের সাথে সামঞ্জস্যপূর্ণ?</string>
+  <string name="review_thanks">আপনি কি অবদানকারীকে ধন্যবাদ জানাবেন?</string>
+  <string name="review_spam_explanation">এই চিত্রটি একেবারেই দরকারি না হলে “না” বোতামে চেপে এটি মুছে ফেলার জন্য মনোনীত করুন।</string>
   <string name="review_copyright_explanation">প্রায়শ কপিরাইট লঙ্ঘন করে লোগো, স্ক্রিনশট, চলচ্চিত্রের পোস্টার আপলোড করা হয়।\nমুছে ফেলার জন্য এই চিত্রটি মনোনীত করতে “না” টিপুন</string>
   <string name="review_thanks_yes_button_text">পরবর্তী ছবি</string>
   <string name="review_thanks_no_button_text">হ্যাঁ, কেন নয়</string>
-  <string name="review_image_explanation" fuzzy="true">আপনি চিত্রগুলি পর্যালোচনা করতে এবং উইকিমিডিয়া কমন্সের গুণমান উন্নত করতে পারেন।\n পর্যালোচনার চারটি মানদণ্ড হল:\n - এই চিত্রটি কি প্রকল্পের উদ্দেশ্যগুলির সাথে সামঞ্জস্যপূর্ণ?\n - এই চিত্রটি কি কপিরাইটের নিয়ম অনুসরণ করে?\n - এই চিত্রটিকে কি সঠিকভাবে শ্রেণীবদ্ধ করা হয়েছে?\n - যদি সবকিছু ঠিক থাকে তবে আপনি অবদানকারীকে ধন্যবাদও জানাতে পারেন।</string>
+  <string name="review_image_explanation">আপনি চিত্রগুলো পর্যালোচনা করে উইকিমিডিয়া কমন্সের গুণমান উন্নত করতে পারেন।\nপর্যালোচনার তিনটি মানদণ্ড হলো:\n\n- এই চিত্রটি কি প্রকল্পের উদ্দেশ্যের সাথে সামঞ্জস্যপূর্ণ?\nআপনি না (সামঞ্জস্যপূর্ণ নয়) বোতামে চাপলে চিত্রে অপসারণ প্রস্তাবনার একটি টেমপ্লেট যুক্ত হবে।\n\n- এই চিত্রটি কি কপিরাইটের নিয়ম অনুসরণ করে?\nআপনি না (কপিরাইটের নিয়ম অনুসরণ করে না) বোতামে চাপলে চিত্রে অপসারণ প্রস্তাবনার একটি টেমপ্লেট যুক্ত হবে।\n\n- এই চিত্রটিকে কি সঠিকভাবে বিষয়শ্রেণীকরণ করা হয়েছে?\nআপনি না (সঠিকভাবে বিষয়শ্রেণীকরণ করা হয়নি) চাপলে বিষয়শ্রেণীকরণ অনুরোধের একটি টেমপ্লেট যুক্ত হবে।\n\nযদি সবকিছু ঠিক থাকে, তাহলে কোনো টেমপ্লেট যুক্ত হবে না। এখন আপনি এর অবদানকারীকে ধন্যবাদও জানাতে পারেন।</string>
   <string name="no_image">কোনও চিত্র ব্যবহৃত হয়নি</string>
   <string name="menu_option_read">পঠিতগুলি দেখান</string>
   <string name="menu_option_unread">অপঠিতগুলি দেখান</string>
@@ -442,10 +448,15 @@
   <string name="reset">পুনঃস্থাপন</string>
   <string name="no_location_found_title">কোন অবস্থান পাওয়া যায়নি</string>
   <string name="add_location">অবস্থান যোগ করুন</string>
+  <string name="explore_map_details">বিস্তারিত</string>
   <string name="api_level">এপিআই লেভেল</string>
   <string name="android_version">অ্যান্ড্রয়েড সংস্করণ</string>
   <string name="device_manufacturer">ডিভাইস প্রস্তুতকারক</string>
+  <string name="device_model">ডিভাইস মডেল</string>
   <string name="device_name">ডিভাইসের নাম</string>
+  <string name="network_type">নেটওয়ার্কের ধরন</string>
+  <string name="thanks_feedback">প্রতিক্রিয়া দেওয়ার জন্য ধন্যবাদ</string>
   <string name="error_feedback">প্রতিক্রিয়া পাঠানোর সময় ত্রুটি ঘটেছে</string>
+  <string name="enter_description">আপনার প্রতিক্রিয়া কী?</string>
   <string name="your_feedback">আপনার প্রতিক্রিয়া</string>
 </resources>

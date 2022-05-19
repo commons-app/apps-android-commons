@@ -138,8 +138,8 @@ public class UploadRepository {
      *
      * @param categoryItem
      */
-    public void onCategoryClicked(CategoryItem categoryItem) {
-        categoriesModel.onCategoryItemClicked(categoryItem);
+    public void onCategoryClicked(CategoryItem categoryItem, final Media media) {
+        categoriesModel.onCategoryItemClicked(categoryItem, media);
     }
 
     /**
@@ -353,5 +353,33 @@ public class UploadRepository {
 
     public boolean isWMLSupportedForThisPlace() {
         return uploadModel.getItems().get(0).isWLMUpload();
+    }
+
+    /**
+     * Provides selected existing categories
+     *
+     * @return selected existing categories
+     */
+    public List<String> getSelectedExistingCategories() {
+        return categoriesModel.getSelectedExistingCategories();
+    }
+
+    /**
+     * Initialize existing categories
+     *
+     * @param selectedExistingCategories existing categories
+     */
+    public void setSelectedExistingCategories(final List<String> selectedExistingCategories) {
+        categoriesModel.setSelectedExistingCategories(selectedExistingCategories);
+    }
+
+    /**
+     * Takes category names and Gets CategoryItem from the server
+     *
+     * @param categories names of Category
+     * @return Observable<List<CategoryItem>>
+     */
+    public Observable<List<CategoryItem>> getCategories(final List<String> categories){
+        return categoriesModel.getCategoriesByName(categories);
     }
 }
