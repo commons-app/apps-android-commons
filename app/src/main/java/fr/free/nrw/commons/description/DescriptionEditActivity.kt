@@ -154,8 +154,7 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
                     buffer.append("}}, ")
                 }
             }
-            buffer.deleteCharAt(buffer.length - 1)
-            buffer.deleteCharAt(buffer.length - 1)
+            buffer.replace(", $".toRegex(), "")
             buffer.append(descriptionEnd)
         }
         val returningIntent = Intent()
