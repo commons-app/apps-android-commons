@@ -62,7 +62,7 @@ class ExploreControllerTest {
         )
     }
 
-    /*@Test
+    @Test
     fun testLoadAttractionsForLocationSelectedLatLngNull() {
         Assertions.assertEquals(
             exploreMapController.loadAttractionsFromLocation(
@@ -73,7 +73,7 @@ class ExploreControllerTest {
         )
     }
 
-    @Test
+    /*@Test
     fun testLoadAttracomputeDistanceBetweenctionsFromLocationCaseTwoPlacesAdded() {
         val place1 = Place(
             "en",
