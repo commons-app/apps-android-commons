@@ -21,6 +21,7 @@
   <string name="nearby_filter_toggle">Toggle Up</string>
   <string name="nearby_filter_search">Search View</string>
   <string name="nearby_filter_state">Place State</string>
+  <string name="appwidget_img">Pic of the Day</string>
 
   <!--Other strings-->
   <plurals name="uploads_pending_notification_indicator">
@@ -305,7 +306,6 @@
   <string name="image_uploaded_by">Uploaded by: %1$s</string>
   <string name="block_notification_title">Blocked</string>
   <string name="block_notification">You are blocked from editing Commons</string>
-  <string name="appwidget_img">Pic of the Day</string>
   <string name="app_widget_heading">Pic of the Day</string>
   <string name="menu_search_button">Search</string>
   <string name="search_commons">Search Commons</string>
