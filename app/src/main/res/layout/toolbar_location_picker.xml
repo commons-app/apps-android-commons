@@ -27,13 +27,14 @@
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="72dp"
+    android:contentDescription="@string/pan_and_zoom_to_adjust"
     android:text="@string/pan_and_zoom_to_adjust"
     android:textColor="@color/white"
     android:textSize="14sp"
     android:textStyle="normal"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/location_picker_toolbar_primary_text_view"/>
+    app:layout_constraintTop_toBottomOf="@+id/location_picker_toolbar_primary_text_view" />
 
   <ImageView
     android:id="@+id/mapbox_place_picker_toolbar_back_button"
