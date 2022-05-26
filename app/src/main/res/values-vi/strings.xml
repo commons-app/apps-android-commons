@@ -18,6 +18,10 @@
 * Yuki Wulf
 -->
 <resources>
+  <string name="commons_facebook">Trang Commons tại Facebook</string>
+  <string name="commons_github">Mã nguồn Commons tại GitHub</string>
+  <string name="commons_logo">Biểu trưng Commons</string>
+  <string name="commons_website">Trang Web Commons</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d tập tin đang được tải lên</item>
     <item quantity="other">%1$d tập tin đang được tải lên</item>
@@ -173,10 +177,6 @@
   <string name="become_a_tester_description">Tham gia kênh thử nghiệm của chúng tôi trên Google Play và nhận các tính năng mới cùng những bản sửa lỗi sớm hơn</string>
   <string name="_2fa_code">Mã Hai Nhân tố</string>
   <string name="logout_verification">Bạn có chắc chắn muốn đăng xuất?</string>
-  <string name="commons_logo">Biểu trưng Commons</string>
-  <string name="commons_website">Trang Web Commons</string>
-  <string name="commons_facebook">Trang Commons tại Facebook</string>
-  <string name="commons_github">Mã nguồn Commons tại GitHub</string>
   <string name="mediaimage_failed">Hình ảnh bị Thất bại</string>
   <string name="welcome_image_mount_zao">Núi Zaō</string>
   <string name="welcome_image_llamas">Lạc đà không bướu</string>

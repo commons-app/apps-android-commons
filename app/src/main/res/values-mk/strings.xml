@@ -5,6 +5,27 @@
 * Vlad5250
 -->
 <resources>
+  <string name="commons_facebook">Ризницата на Facebook</string>
+  <string name="commons_github">Изворен код на Ризницата на Github</string>
+  <string name="commons_logo">Лого на Ризницата</string>
+  <string name="commons_website">Ризница</string>
+  <string name="exit_location_picker">Излези од избирачот на местоположба</string>
+  <string name="submit">Поднеси</string>
+  <string name="add_another_description">Додај друг опис</string>
+  <string name="add_new_contribution">Додај нов придонес</string>
+  <string name="add_contribution_from_camera">Додај придонес од камера</string>
+  <string name="add_contribution_from_photos">Додај придонес од слики</string>
+  <string name="add_contribution_from_contributions_gallery">Додај придонес од галерија на претходни придонеси</string>
+  <string name="show_captions">Толкувања</string>
+  <string name="row_item_language_description">Опис на јазикот</string>
+  <string name="row_item_caption">Толкување</string>
+  <string name="show_captions_description">Опис</string>
+  <string name="nearby_row_image">Слика</string>
+  <string name="nearby_all">Сè</string>
+  <string name="nearby_filter_toggle">Префрли</string>
+  <string name="nearby_filter_search">Поглед на пребарувањето</string>
+  <string name="nearby_filter_state">Земја на местото</string>
+  <string name="appwidget_img">Слика на денот</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Се подига %1$d податотека</item>
     <item quantity="other">Се подигаат %1$d податотеки</item>
@@ -190,10 +211,6 @@
   <string name="become_a_tester_description">Пријавете се на нашиот бета-канал на Google Play и добивајте ран пристап до нови можности и исправки на грешки</string>
   <string name="_2fa_code">2ЧЗ-код</string>
   <string name="logout_verification">Дали навистина сакате да се одјавите?</string>
-  <string name="commons_logo">Лого на Ризницата</string>
-  <string name="commons_website">Ризница</string>
-  <string name="commons_facebook">Ризницата на Facebook</string>
-  <string name="commons_github">Изворен код на Ризницата на Github</string>
   <string name="mediaimage_failed">Сликата не успеа</string>
   <string name="no_subcategory_found">Не пронајдов поткатегории</string>
   <string name="no_parentcategory_found">Не пронајдов матични категории</string>
@@ -280,7 +297,6 @@
   <string name="image_uploaded_by">Подигач: %1$s</string>
   <string name="block_notification_title">Блокирано</string>
   <string name="block_notification">Спречени сте да ја уредувате Ризницата</string>
-  <string name="appwidget_img">Слика на денот</string>
   <string name="app_widget_heading">Слика на денот</string>
   <string name="menu_search_button">Пребарај</string>
   <string name="search_commons">Пребарај по Ризницата</string>
@@ -364,7 +380,6 @@
   <string name="step_count">Чекор %1$d од %2$d: %3$s</string>
   <string name="next">Следно</string>
   <string name="previous">Претходно</string>
-  <string name="submit">Поднеси</string>
   <string name="upload_title_duplicate">Веќе постои податотека со име %1$s. Дали сигурно сакате да продолжите?\n\nНапомена: На податотечното име автоматски ќе му се додаде соодветна наставка.</string>
   <string name="map_application_missing">Не пронајдов складен картографски прилог на вашиот уред. Преземете еден таков за да можете да ја користите оваа можност.</string>
   <string name="title_page_bookmarks_pictures">Слики</string>
@@ -617,7 +632,6 @@
   <string name="media_detail_in_all_languages">На сите јазици</string>
   <string name="choose_a_location">Изберете местоположба</string>
   <string name="pan_and_zoom_to_adjust">Доведете го местото на картата и приближете го за да прилагодите</string>
-  <string name="exit_location_picker">Излези од избирачот на местоположба</string>
   <string name="select_location_location_picker">Изберете местоположба</string>
   <string name="show_in_map_app">Прикажи во прилог за карти</string>
   <string name="modify_location">Уреди местоположба</string>

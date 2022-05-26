@@ -20,6 +20,7 @@
 * Ата
 -->
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="all">
+  <string name="submit">{{Identical|Submit}}</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Status text about number of uploads left.\n* %1$d represents number of uploads left, including current one\n</item>
     <item quantity="other">Status text about number of uploads left.\n* %1$d represents number of uploads left, including current one\n</item>
@@ -166,7 +167,6 @@
   <string name="nearby_fragment">{{Identical|Nearby}}</string>
   <string name="next">Refers to the next \'\'\'step\'\'\' in the uploading process.</string>
   <string name="previous">Refers to the previous \'\'\'step\'\'\' in the uploading process.</string>
-  <string name="submit">{{Identical|Submit}}</string>
   <string name="log_collection_started">\"Send log file\" is {{msg-wm|Commons-android-strings-send log file}}.</string>
   <string name="nominate_for_deletion_done">{{Identical|Done}}</string>
   <string name="review_category_explanation">\'%1$s\' is replaced by a formatted number (of categories).</string>

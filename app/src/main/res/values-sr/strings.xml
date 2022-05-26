@@ -13,6 +13,12 @@
 * Милан Јелисавчић
 -->
 <resources>
+  <string name="commons_facebook">Фејсбук страница Оставе</string>
+  <string name="commons_github">Изворни код на Github-у</string>
+  <string name="commons_logo">Лого Оставе</string>
+  <string name="commons_website">Веб-сајт Оставе</string>
+  <string name="submit">Пошаљи</string>
+  <string name="appwidget_img">Слика дана</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d датотека се отпрема</item>
     <item quantity="other">%1$d датотеке се отпремају</item>
@@ -175,10 +181,6 @@
   <string name="become_a_tester_description">Прикључите се нашем каналу бета верзија на Google Play-у и раније приступајте новим функцијама и исправкама грешака</string>
   <string name="_2fa_code">2FA код</string>
   <string name="logout_verification">Заиста желите да се одјавите?</string>
-  <string name="commons_logo">Лого Оставе</string>
-  <string name="commons_website">Веб-сајт Оставе</string>
-  <string name="commons_facebook">Фејсбук страница Оставе</string>
-  <string name="commons_github">Изворни код на Github-у</string>
   <string name="mediaimage_failed">Медијска слика неуспешна</string>
   <string name="no_subcategory_found">Поткатегорије нису пронађене</string>
   <string name="no_parentcategory_found">Надређене категорије нису пронађене</string>
@@ -257,7 +259,6 @@
   <string name="image_uploaded_by">Отпремио/ла: %1$s</string>
   <string name="block_notification_title">Блокирано</string>
   <string name="block_notification">Блокирано вам је уређивање Оставе</string>
-  <string name="appwidget_img">Слика дана</string>
   <string name="app_widget_heading">Слика дана</string>
   <string name="menu_search_button">Претражи</string>
   <string name="search_commons">Претрага Оставе</string>
@@ -328,7 +329,6 @@
   <string name="step_count" fuzzy="true">Корак %1$d од %2$d</string>
   <string name="next">Следеће</string>
   <string name="previous">Претходно</string>
-  <string name="submit">Пошаљи</string>
   <string name="upload_title_duplicate" fuzzy="true">Већ постоји датотека са именом %1$s. Заиста желите да наставите?</string>
   <string name="map_application_missing">Није могуће пронаћи апликацију компатибилне мапе на вашем уређају. Инсталирајте апликацију мапе да бисте користили ову функцију.</string>
   <string name="title_page_bookmarks_pictures">Слике</string>

@@ -5,6 +5,12 @@
 * Გიო ოქრო
 -->
 <resources>
+  <string name="commons_facebook">ვიკისაწყობის Facebook-ის გვერდი</string>
+  <string name="commons_github">ვიკისაწყობის წყაროს კოდი Github-ზე</string>
+  <string name="commons_logo">ვიკისაწყობის ლოგო</string>
+  <string name="commons_website">ვიკისაწყობის საიტი</string>
+  <string name="submit">გაგზავნა</string>
+  <string name="appwidget_img">დღის სურათი</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d ფაილი იტვირთება</item>
     <item quantity="other">%1$d ფაილი იტვირთება</item>
@@ -171,10 +177,6 @@
   <string name="become_a_tester_title">ბეტა ტესტირებაში მონაწილეობა</string>
   <string name="_2fa_code">2ფა კოდი</string>
   <string name="logout_verification">ნამდვილად გსურთ გასვლა?</string>
-  <string name="commons_logo">ვიკისაწყობის ლოგო</string>
-  <string name="commons_website">ვიკისაწყობის საიტი</string>
-  <string name="commons_facebook">ვიკისაწყობის Facebook-ის გვერდი</string>
-  <string name="commons_github">ვიკისაწყობის წყაროს კოდი Github-ზე</string>
   <string name="mediaimage_failed">მედიაგამოსახულების შეცდომა</string>
   <string name="no_subcategory_found">ქვეკატეგორიები ვერ მოიძებნა</string>
   <string name="no_parentcategory_found">ზედა დონის კატეგორიები ვერ მოიძებნა</string>
@@ -229,7 +231,6 @@
   <string name="about_translate_cancel">გაუქმება</string>
   <string name="retry">გამეორება</string>
   <string name="no_images_found">სურათები ვერ მოიძებნა!</string>
-  <string name="appwidget_img">დღის სურათი</string>
   <string name="app_widget_heading">დღის სურათი</string>
   <string name="menu_search_button">ძიება</string>
   <string name="search_commons">ვიკისაწყობში ძებნა</string>
@@ -277,7 +278,6 @@
   <string name="step_count">ნაბიჯი %1$d %2$d-დან: %3$s</string>
   <string name="next">შემდეგი</string>
   <string name="previous">წინა</string>
-  <string name="submit">გაგზავნა</string>
   <string name="title_page_bookmarks_pictures">სურათები</string>
   <string name="title_page_bookmarks_locations">მდებარეობები</string>
   <string name="menu_bookmark">სანიშნებში დამატება/წაშლა</string>

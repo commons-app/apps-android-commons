@@ -10,6 +10,13 @@
 * WikiPhoenix
 -->
 <resources>
+  <string name="commons_facebook">Commons Facebook-sida</string>
+  <string name="commons_github">Commons Github-källkod</string>
+  <string name="commons_logo">Commons-logotyp</string>
+  <string name="commons_website">Commons webbplats</string>
+  <string name="exit_location_picker">Avsluta platsväljaren</string>
+  <string name="submit">Skicka</string>
+  <string name="appwidget_img">Dagens bild</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d fil laddas upp</item>
     <item quantity="other">%1$d filer laddas upp</item>
@@ -195,10 +202,6 @@
   <string name="become_a_tester_description">Registrera dig på våra betakanal på Google Play och få tidig åtkomst till nya funktioner och buggfixar</string>
   <string name="_2fa_code">2-stegsverif.kod</string>
   <string name="logout_verification">Vill du verkligen logga ut?</string>
-  <string name="commons_logo">Commons-logotyp</string>
-  <string name="commons_website">Commons webbplats</string>
-  <string name="commons_facebook">Commons Facebook-sida</string>
-  <string name="commons_github">Commons Github-källkod</string>
   <string name="mediaimage_failed">Mediabild misslyckades</string>
   <string name="no_subcategory_found">Inga underkategorier hittades</string>
   <string name="no_parentcategory_found">Inga överordnade kategorier hittades</string>
@@ -285,7 +288,6 @@
   <string name="image_uploaded_by">Uppladdad av: %1$s</string>
   <string name="block_notification_title">Blockerad</string>
   <string name="block_notification">Du har blockerats från att redigera på Commons</string>
-  <string name="appwidget_img">Dagens bild</string>
   <string name="app_widget_heading">Dagens bild</string>
   <string name="menu_search_button">Sök</string>
   <string name="search_commons">Sök på Commons</string>
@@ -369,7 +371,6 @@
   <string name="step_count">Steg %1$d av %2$d: %3$s</string>
   <string name="next">Nästa</string>
   <string name="previous">Föregående</string>
-  <string name="submit">Skicka</string>
   <string name="upload_title_duplicate">En fil med filnamnet %1$s finns. Är du säker på att du vill fortsätta?\n\nObs: ett lämpligt suffix till tilldelas filnamnet automatiskt.</string>
   <string name="map_application_missing">Ingen kompatibel kartapp hittades på din enhet. Installera en kartapp för att använda denna funktion.</string>
   <string name="title_page_bookmarks_pictures">Bilder</string>
@@ -622,7 +623,6 @@
   <string name="media_detail_in_all_languages">På alla språk</string>
   <string name="choose_a_location">Välj en plats</string>
   <string name="pan_and_zoom_to_adjust">Panorera och zooma för att justera</string>
-  <string name="exit_location_picker">Avsluta platsväljaren</string>
   <string name="select_location_location_picker">Välj plats</string>
   <string name="show_in_map_app">Visa i kartappen</string>
   <string name="modify_location">Redigera plats</string>

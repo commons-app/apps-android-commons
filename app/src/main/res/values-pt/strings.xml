@@ -18,6 +18,13 @@
 * Vitorvicentevalente
 -->
 <resources>
+  <string name="commons_facebook">Página da wiki Commons no Facebook</string>
+  <string name="commons_github">Código-fonte da wiki Commons no Github</string>
+  <string name="commons_logo">Logótipo da wiki Commons</string>
+  <string name="commons_website">Sítio da wiki Commons</string>
+  <string name="exit_location_picker">Sair do selecionador de localização</string>
+  <string name="submit">Enviar</string>
+  <string name="appwidget_img">Imagem do Dia</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">a carregar %1$d ficheiro</item>
     <item quantity="other">a carregar %1$d ficheiros</item>
@@ -203,10 +210,6 @@
   <string name="become_a_tester_description">Opte pelo nosso canal beta no Google Play e obtenha acesso antecipado às novas funcionalidades e às correções de erros</string>
   <string name="_2fa_code">Código de autenticação de dois fatores</string>
   <string name="logout_verification">Deseja realmente sair?</string>
-  <string name="commons_logo">Logótipo da wiki Commons</string>
-  <string name="commons_website">Sítio da wiki Commons</string>
-  <string name="commons_facebook">Página da wiki Commons no Facebook</string>
-  <string name="commons_github">Código-fonte da wiki Commons no Github</string>
   <string name="mediaimage_failed">Falha na imagem multimédia</string>
   <string name="no_subcategory_found">Não foi encontrada nenhuma subcategoria.</string>
   <string name="no_parentcategory_found">Não foi encontrada nenhuma categoria mãe</string>
@@ -293,7 +296,6 @@
   <string name="image_uploaded_by">Carregada por: %1$s</string>
   <string name="block_notification_title">Bloqueado</string>
   <string name="block_notification">Está bloqueado e impedido de editar a wiki Commons</string>
-  <string name="appwidget_img">Imagem do Dia</string>
   <string name="app_widget_heading">Imagem do Dia</string>
   <string name="menu_search_button">Pesquisar</string>
   <string name="search_commons">Pesquisar a wiki Commons</string>
@@ -377,7 +379,6 @@
   <string name="step_count">Passo %1$d de %2$d: %3$s</string>
   <string name="next">Seguinte</string>
   <string name="previous">Anterior</string>
-  <string name="submit">Enviar</string>
   <string name="upload_title_duplicate">Já existe um ficheiro com o nome %1$s. Tem a certeza de que deseja continuar?\n\n\nNota: será adicionado automaticamente ao nome do ficheiro um sufixo apropriado.</string>
   <string name="map_application_missing">Não foi encontrada no seu dispositivo nenhuma aplicação de mapas compatível. Para usar esta funcionalidade instale uma aplicação de mapas, por favor.</string>
   <string name="title_page_bookmarks_pictures">Fotografias</string>
@@ -630,7 +631,6 @@
   <string name="media_detail_in_all_languages">Em todas as línguas</string>
   <string name="choose_a_location">Escolher uma localização</string>
   <string name="pan_and_zoom_to_adjust">Fazer uma panorâmica e aproximar para ajustar</string>
-  <string name="exit_location_picker">Sair do selecionador de localização</string>
   <string name="select_location_location_picker">Selecionar localização</string>
   <string name="show_in_map_app">Mostrar na aplicação de mapa</string>
   <string name="modify_location">Editar localização</string>

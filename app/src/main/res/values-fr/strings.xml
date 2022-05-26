@@ -35,6 +35,27 @@
 * Y-M D
 -->
 <resources>
+  <string name="commons_facebook">Page Facebook de Commons</string>
+  <string name="commons_github">Code source Github de Commons</string>
+  <string name="commons_logo">Logo de Commons</string>
+  <string name="commons_website">Site web de Commons</string>
+  <string name="exit_location_picker">Sortir du sélecteur de lieu</string>
+  <string name="submit">Soumettre</string>
+  <string name="add_another_description">Ajouter une autre description</string>
+  <string name="add_new_contribution">Ajouter une nouvelle contribution</string>
+  <string name="add_contribution_from_camera">Ajouter une contribution depuis la caméra</string>
+  <string name="add_contribution_from_photos">Ajouter une contribution depuis les photos</string>
+  <string name="add_contribution_from_contributions_gallery">Ajouter une contribution depuis la galerie des contributions précédentes</string>
+  <string name="show_captions">Légendes</string>
+  <string name="row_item_language_description">Description de langue</string>
+  <string name="row_item_caption">Légende</string>
+  <string name="show_captions_description">Description</string>
+  <string name="nearby_row_image">Image</string>
+  <string name="nearby_all">Tous</string>
+  <string name="nearby_filter_toggle">Bascule haut / bas</string>
+  <string name="nearby_filter_search">Vue de recherche</string>
+  <string name="nearby_filter_state">État du lieu</string>
+  <string name="appwidget_img">Image du jour</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d fichier en cours de téléversement</item>
     <item quantity="other">%1$d fichiers en cours de téléversement</item>
@@ -220,10 +241,6 @@
   <string name="become_a_tester_description">S’inscrire à notre canal bêta sur Google Play et obtenir un accès anticipé aux nouvelles fonctionnalités et corrections d’anomalies</string>
   <string name="_2fa_code">Code 2FA</string>
   <string name="logout_verification">Voulez-vous vraiment vous déconnecter ?</string>
-  <string name="commons_logo">Logo de Commons</string>
-  <string name="commons_website">Site web de Commons</string>
-  <string name="commons_facebook">Page Facebook de Commons</string>
-  <string name="commons_github">Code source Github de Commons</string>
   <string name="mediaimage_failed">Échec sur l’image du média</string>
   <string name="no_subcategory_found">Aucune sous-catégorie trouvée</string>
   <string name="no_parentcategory_found">Aucune catégorie parente trouvée</string>
@@ -310,7 +327,6 @@
   <string name="image_uploaded_by">Téléversé par : %1$s</string>
   <string name="block_notification_title">Bloqué{{GENDER:||e}}</string>
   <string name="block_notification">Vous avez été bloqué et ne pouvez plus modifier sur  Commons</string>
-  <string name="appwidget_img">Image du jour</string>
   <string name="app_widget_heading">Image du jour</string>
   <string name="menu_search_button">Chercher</string>
   <string name="search_commons">Rechercher dans Commons</string>
@@ -394,7 +410,6 @@
   <string name="step_count">Étape %1$d sur %2$d : %3$s</string>
   <string name="next">Suivant</string>
   <string name="previous">Précédent</string>
-  <string name="submit">Soumettre</string>
   <string name="upload_title_duplicate">Un fichier avec le nom %1$s existe. Voulez-vous vraiment continuer ?\n\nNote : un suffixe approprié sera automatiquement ajouté au nom de fichier.</string>
   <string name="map_application_missing">Aucune application cartographique compatible n’a été trouvée sur votre appareil. Veuillez en installer une pour utiliser cette fonctionnalité.</string>
   <string name="title_page_bookmarks_pictures">Images</string>
@@ -647,7 +662,6 @@
   <string name="media_detail_in_all_languages">Dans toutes les langues</string>
   <string name="choose_a_location">Choisir un lieu</string>
   <string name="pan_and_zoom_to_adjust">Descendre et zoomer pour ajuster</string>
-  <string name="exit_location_picker">Sortir du sélecteur de lieu</string>
   <string name="select_location_location_picker">Sélectionner un lieu</string>
   <string name="show_in_map_app">Afficher dans l’application cartographique</string>
   <string name="modify_location">Modifier le lieu</string>

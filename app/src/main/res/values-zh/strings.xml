@@ -43,6 +43,13 @@
 * 阿pp
 -->
 <resources>
+  <string name="commons_facebook">共享资源Facebook页面</string>
+  <string name="commons_github">共享资源Github源代码</string>
+  <string name="commons_logo">共享资源标志</string>
+  <string name="commons_website">共享资源网站</string>
+  <string name="exit_location_picker">退出位置拾取器</string>
+  <string name="submit">发布</string>
+  <string name="appwidget_img">每日图片</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d个文件正在上传</item>
     <item quantity="other">%1$d个文件正在上传</item>
@@ -227,10 +234,6 @@
   <string name="become_a_tester_description">加入我们在Google Play上的测试计划，更早获取新功能以及错误修复</string>
   <string name="_2fa_code">2FA代码</string>
   <string name="logout_verification">您真的想要退出么？</string>
-  <string name="commons_logo">共享资源标志</string>
-  <string name="commons_website">共享资源网站</string>
-  <string name="commons_facebook">共享资源Facebook页面</string>
-  <string name="commons_github">共享资源Github源代码</string>
   <string name="mediaimage_failed">媒体图片失败</string>
   <string name="no_subcategory_found">找不到子分类</string>
   <string name="no_parentcategory_found">找不到父分类</string>
@@ -317,7 +320,6 @@
   <string name="image_uploaded_by">由%1$s上传: %1$s</string>
   <string name="block_notification_title">已封禁</string>
   <string name="block_notification">你被禁止编辑共享资源</string>
-  <string name="appwidget_img">每日图片</string>
   <string name="app_widget_heading">每日图片</string>
   <string name="menu_search_button">搜索</string>
   <string name="search_commons">搜索共享资源</string>
@@ -400,7 +402,6 @@
   <string name="step_count">%2$d中的第%1$d步：%3$s</string>
   <string name="next">下一个</string>
   <string name="previous">上一个</string>
-  <string name="submit">发布</string>
   <string name="upload_title_duplicate">名为%1$s的文件已经存在。您确定要继续吗？\n\n注意：将会自动将合适的后缀名添加到文件名中。</string>
   <string name="map_application_missing">您的设备上无法找到兼容的地图应用程序。请安装地图应用程序来使用此功能。</string>
   <string name="title_page_bookmarks_pictures">图片</string>
@@ -649,7 +650,6 @@
   <string name="media_detail_in_all_languages">在所有语言中</string>
   <string name="choose_a_location">选择一个地点</string>
   <string name="pan_and_zoom_to_adjust">放大和做小来调整</string>
-  <string name="exit_location_picker">退出位置拾取器</string>
   <string name="select_location_location_picker">选择地点</string>
   <string name="show_in_map_app">在地图应用中显示</string>
   <string name="modify_location">编辑位置</string>

@@ -19,6 +19,13 @@
 * Ата
 -->
 <resources>
+  <string name="commons_facebook">Facebook-сторінка Вікісховища</string>
+  <string name="commons_github">Програмний код Вікісховища на GitHub</string>
+  <string name="commons_logo">Логотип Вікісховища</string>
+  <string name="commons_website">Веб-сайт Вікісховища</string>
+  <string name="exit_location_picker">Вийти з вікна вибору розташування</string>
+  <string name="submit">Надіслати</string>
+  <string name="appwidget_img">Зображення дня</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Завантажується %1$d файл</item>
     <item quantity="few">Завантажуються %1$d файли</item>
@@ -218,10 +225,6 @@
   <string name="become_a_tester_description">Підпишіться на наш бета-канал на Google Play і отримайте ранній доступ до нових функцій та виправлень баґів</string>
   <string name="_2fa_code">Код 2FA</string>
   <string name="logout_verification">Ви справді хочете вийти із системи?</string>
-  <string name="commons_logo">Логотип Вікісховища</string>
-  <string name="commons_website">Веб-сайт Вікісховища</string>
-  <string name="commons_facebook">Facebook-сторінка Вікісховища</string>
-  <string name="commons_github">Програмний код Вікісховища на GitHub</string>
   <string name="mediaimage_failed">Помилка медіазображення</string>
   <string name="no_subcategory_found">Підкатегорій не знайдено</string>
   <string name="no_parentcategory_found">Не знайдено батьківських категорій</string>
@@ -308,7 +311,6 @@
   <string name="image_uploaded_by">Завантажено: %1$s</string>
   <string name="block_notification_title">Заблоковано</string>
   <string name="block_notification">Вам було заблоковано редагування у Вікісховищі</string>
-  <string name="appwidget_img">Зображення дня</string>
   <string name="app_widget_heading">Зображення дня</string>
   <string name="menu_search_button">Пошук</string>
   <string name="search_commons">Шукати у Вікісховищі</string>
@@ -390,7 +392,6 @@
   <string name="step_count">Крок %1$d із %2$d: %3$s</string>
   <string name="next">Наступне</string>
   <string name="previous">Попереднє</string>
-  <string name="submit">Надіслати</string>
   <string name="upload_title_duplicate">Файл із назвою %1$s існує. Ви впевнені, що хочете продовжити?\n\nПримітка: Відповідне розширення буде додано до назви файлу автоматично</string>
   <string name="map_application_missing">На Вашому пристрої не знайдено сумісного додатка з картами. Будь ласка, встановіть додаток з картами, якщо хочете скористатись цією функцією.</string>
   <string name="title_page_bookmarks_pictures">Зображення</string>
@@ -638,7 +639,6 @@
   <string name="media_detail_in_all_languages">Усіма мовами</string>
   <string name="choose_a_location">Вибрати розташування</string>
   <string name="pan_and_zoom_to_adjust">Панорамуйте і збільшуйте, щоб підлаштувати</string>
-  <string name="exit_location_picker">Вийти з вікна вибору розташування</string>
   <string name="select_location_location_picker">Вибрати розташування</string>
   <string name="show_in_map_app">Показати в додатку на мапі</string>
   <string name="modify_location">Редагувати підпис</string>

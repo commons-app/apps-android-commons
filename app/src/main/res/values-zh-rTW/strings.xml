@@ -22,6 +22,27 @@
 * 烈羽
 -->
 <resources>
+  <string name="commons_facebook">維基共享資源臉書頁面</string>
+  <string name="commons_github">Github 上的共享資源原始碼</string>
+  <string name="commons_logo">維基共享資源標誌</string>
+  <string name="commons_website">共享資源網站</string>
+  <string name="exit_location_picker">離開位置點選器</string>
+  <string name="submit">提交</string>
+  <string name="add_another_description">添加別的描述</string>
+  <string name="add_new_contribution">添加新的貢獻</string>
+  <string name="add_contribution_from_camera">添加來自相機的貢獻</string>
+  <string name="add_contribution_from_photos">添加來自照片的貢獻</string>
+  <string name="add_contribution_from_contributions_gallery">添加來自之前貢獻圖庫的貢獻</string>
+  <string name="show_captions">說明</string>
+  <string name="row_item_language_description">語言描述</string>
+  <string name="row_item_caption">說明</string>
+  <string name="show_captions_description">描述</string>
+  <string name="nearby_row_image">圖片</string>
+  <string name="nearby_all">全部</string>
+  <string name="nearby_filter_toggle">向上切換</string>
+  <string name="nearby_filter_search">搜尋檢視</string>
+  <string name="nearby_filter_state">地點狀態</string>
+  <string name="appwidget_img">每日圖片</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">正在上傳%1$d個檔案</item>
     <item quantity="other">正在上傳%1$d個檔案</item>
@@ -207,10 +228,6 @@
   <string name="become_a_tester_description">選擇加入我們在 Google Play 上的 beta 測試版本，以提早取用新功能及程式修正</string>
   <string name="_2fa_code">雙重驗證代碼</string>
   <string name="logout_verification">您確定要登出嗎？</string>
-  <string name="commons_logo">維基共享資源標誌</string>
-  <string name="commons_website">共享資源網站</string>
-  <string name="commons_facebook">維基共享資源臉書頁面</string>
-  <string name="commons_github">Github 上的共享資源原始碼</string>
   <string name="mediaimage_failed">媒體圖片失敗</string>
   <string name="no_subcategory_found">找不到子分類</string>
   <string name="no_parentcategory_found">找不到母分類</string>
@@ -297,7 +314,6 @@
   <string name="image_uploaded_by">由%1$s上傳</string>
   <string name="block_notification_title">已封鎖</string>
   <string name="block_notification">您被禁止編輯維基共享資源</string>
-  <string name="appwidget_img">每日圖片</string>
   <string name="app_widget_heading">每日圖片</string>
   <string name="menu_search_button">搜尋</string>
   <string name="search_commons">搜尋維基共享資源</string>
@@ -381,7 +397,6 @@
   <string name="step_count">步驟 %2$d 之 %1$d：%3$s</string>
   <string name="next">下一個</string>
   <string name="previous">上一個</string>
-  <string name="submit">提交</string>
   <string name="upload_title_duplicate">檔案名稱為「%1$s」的檔案已存在，您確定要繼續嗎？\n\n註：合適的後綴會自動添加到檔案名稱。</string>
   <string name="map_application_missing">在您的裝置上找不到相容的地圖應用程式，請安裝地圖應用程式來使用此功能。</string>
   <string name="title_page_bookmarks_pictures">圖片</string>
@@ -634,7 +649,6 @@
   <string name="media_detail_in_all_languages">在所有語言</string>
   <string name="choose_a_location">挑選一個位置</string>
   <string name="pan_and_zoom_to_adjust">平移和縮放來進行調整</string>
-  <string name="exit_location_picker">離開位置點選器</string>
   <string name="select_location_location_picker">選擇位置</string>
   <string name="show_in_map_app">顯示在地圖應用程式</string>
   <string name="modify_location">編輯位置</string>

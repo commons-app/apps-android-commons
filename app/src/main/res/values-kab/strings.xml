@@ -4,6 +4,10 @@
 * Hociben
 -->
 <resources>
+  <string name="commons_facebook">Asmel Facebook n Commons</string>
+  <string name="commons_github">Tangalt aɣbalu Github n Commons</string>
+  <string name="commons_logo">Alugu Commons</string>
+  <string name="commons_website">Asmel wen n Commons</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d n ufaylu yezga yettali</item>
     <item quantity="other">%1$d n ifuyla zgan ttalin</item>
@@ -147,10 +151,6 @@
   <string name="become_a_tester_description">Jerred ar ubadu-nneɣ Beta di Google Play sakin awi anekcum uzwir ar tmahilin timaynutin akked useɣti n ibugen.</string>
   <string name="_2fa_code">Tangalt 2FA</string>
   <string name="logout_verification">Tabɣiḍ ad teffɣeḍ?</string>
-  <string name="commons_logo">Alugu Commons</string>
-  <string name="commons_website">Asmel wen n Commons</string>
-  <string name="commons_facebook">Asmel Facebook n Commons</string>
-  <string name="commons_github">Tangalt aɣbalu Github n Commons</string>
   <string name="mediaimage_failed">Tugna n midya ur teddi ara</string>
   <string name="welcome_image_mount_zao">Taqirruct Zao</string>
   <string name="welcome_image_llamas">Lamas</string>

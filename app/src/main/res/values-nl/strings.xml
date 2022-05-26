@@ -22,6 +22,13 @@
 * Xbaked potatox
 -->
 <resources>
+  <string name="commons_facebook">Commons Facebookpagina</string>
+  <string name="commons_github">Commons Github-broncode</string>
+  <string name="commons_logo">Commons logo</string>
+  <string name="commons_website">Commons website</string>
+  <string name="exit_location_picker">Locatiekiezer afsluiten</string>
+  <string name="submit">Verzenden</string>
+  <string name="appwidget_img">Afbeelding van de dag</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d bestand aan het uploaden</item>
     <item quantity="other">%1$d bestanden aan het uploaden</item>
@@ -207,10 +214,6 @@
   <string name="become_a_tester_description">Meld u aan voor ons bètakanaal op Google Play en krijg vroege toegang tot nieuwe functies en bugfixes</string>
   <string name="_2fa_code">2FA-code</string>
   <string name="logout_verification">Wilt u echt uitloggen?</string>
-  <string name="commons_logo">Commons logo</string>
-  <string name="commons_website">Commons website</string>
-  <string name="commons_facebook">Commons Facebookpagina</string>
-  <string name="commons_github">Commons Github-broncode</string>
   <string name="mediaimage_failed">Media-afbeelding is mislukt</string>
   <string name="no_subcategory_found">Geen subcategorieën gevonden</string>
   <string name="no_parentcategory_found">Geen bovenliggende categorieën gevonden</string>
@@ -296,7 +299,6 @@
   <string name="image_uploaded_by">Geüpload door: %1$s</string>
   <string name="block_notification_title">Geblokkeerd</string>
   <string name="block_notification">U bent geblokkeerd voor het bewerken van Commons</string>
-  <string name="appwidget_img">Afbeelding van de dag</string>
   <string name="app_widget_heading">Afbeelding van de dag</string>
   <string name="menu_search_button">Zoeken</string>
   <string name="search_commons">Commons doorzoeken</string>
@@ -378,7 +380,6 @@
   <string name="step_count">Stap %1$d van %2$d: %3$s</string>
   <string name="next">Volgende</string>
   <string name="previous">Vorige</string>
-  <string name="submit">Verzenden</string>
   <string name="upload_title_duplicate">Er bestaat een bestand met de bestandsnaam %1$s . Weet u zeker dat u door wilt gaan?\n\nOpmerking: Er wordt automatisch een geschikt achtervoegsel aan de bestandsnaam toegevoegd.</string>
   <string name="map_application_missing">Er is geen compatibele kaarttoepassing gevonden op uw apparaat. Installeer een kaarttoepassing om deze functie te gebruiken.</string>
   <string name="title_page_bookmarks_pictures">Afbeeldingen</string>
@@ -624,7 +625,6 @@
   <string name="media_detail_in_all_languages">In alle talen</string>
   <string name="choose_a_location">Kies een locatie</string>
   <string name="pan_and_zoom_to_adjust">Pannen en zoomen om aan te passen</string>
-  <string name="exit_location_picker">Locatiekiezer afsluiten</string>
   <string name="select_location_location_picker">Selecteer locatie</string>
   <string name="show_in_map_app">Toon in kaart-app</string>
   <string name="modify_location">Locatie bewerken</string>

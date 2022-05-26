@@ -23,6 +23,12 @@
 * مشعل الحربي
 -->
 <resources>
+  <string name="commons_facebook">صفحة فيسبوك الخاصة بكومنز</string>
+  <string name="commons_github">كود مصدر كومنز في غيت هب</string>
+  <string name="commons_logo">شعار كومنز</string>
+  <string name="commons_website">موقع كومنز</string>
+  <string name="submit">إرسال</string>
+  <string name="appwidget_img">صورة اليوم</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="zero">%1$d ملف جاري رفعه</item>
     <item quantity="one">%1$d ملف جاري رفعه</item>
@@ -230,10 +236,6 @@
   <string name="become_a_tester_description">يمكنك الاشتراك في القناة التجريبية على جوجل بلاي والحصول على إمكانية الوصول المبكر إلى الميزات الجديدة وإصلاحات الأخطاء</string>
   <string name="_2fa_code">رمز التحقق المزدوج 2FA</string>
   <string name="logout_verification">أترغب فعلا في الخروج؟</string>
-  <string name="commons_logo">شعار كومنز</string>
-  <string name="commons_website">موقع كومنز</string>
-  <string name="commons_facebook">صفحة فيسبوك الخاصة بكومنز</string>
-  <string name="commons_github">كود مصدر كومنز في غيت هب</string>
   <string name="mediaimage_failed">صورة الوسائط فشلت</string>
   <string name="no_subcategory_found">لم يتم العثور على تصنيفات فرعية.</string>
   <string name="no_parentcategory_found">لم يتم العثور على تصنيفات رئيسية.</string>
@@ -317,7 +319,6 @@
   <string name="image_uploaded_by">%1$s :تم الرفع بواسطة</string>
   <string name="block_notification_title">ممنوع</string>
   <string name="block_notification">أنت ممنوع من تحرير كومنز</string>
-  <string name="appwidget_img">صورة اليوم</string>
   <string name="app_widget_heading">صورة اليوم</string>
   <string name="menu_search_button">بحث</string>
   <string name="search_commons">ابحث في كومنز</string>
@@ -396,7 +397,6 @@
   <string name="step_count" fuzzy="true">الخطوة %1$d من %2$d</string>
   <string name="next">التالي</string>
   <string name="previous">السابق</string>
-  <string name="submit">إرسال</string>
   <string name="upload_title_duplicate" fuzzy="true">يوجد ملف باسم الملف %1$s، هل أنت متأكد أنك تريد المتابعة؟</string>
   <string name="map_application_missing">لا يمكن العثور على تطبيق خرائط متوافق على جهازك; الرجاء تثبيت تطبيق خرائط لاستخدام هذه الميزة.</string>
   <string name="title_page_bookmarks_pictures">الصور</string>

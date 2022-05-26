@@ -6,6 +6,10 @@
 * Рустам Нурыев
 -->
 <resources>
+  <string name="commons_facebook">Commons Facebook-бите</string>
+  <string name="commons_github">Гитхабтағы Commons сығанаҡ кодтары</string>
+  <string name="commons_logo">Викисклад логотибы</string>
+  <string name="commons_website">Commons веб-сайты</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d файл тейәлә</item>
     <item quantity="other">%1$d файл тейәлә</item>
@@ -140,10 +144,6 @@
   <string name="become_a_tester_description">Google Play аша беҙҙең бета-версия каналына яҙыл һәм иң тәүгеләрҙән булып яңы көйләүҙәр,хата төҙәтеүҙәрҙе бел</string>
   <string name="_2fa_code">2ФА Коды</string>
   <string name="logout_verification">Ысынлап та сыҡҡың киләме?</string>
-  <string name="commons_logo">Викисклад логотибы</string>
-  <string name="commons_website">Commons веб-сайты</string>
-  <string name="commons_facebook">Commons Facebook-бите</string>
-  <string name="commons_github">Гитхабтағы Commons сығанаҡ кодтары</string>
   <string name="mediaimage_failed">Медиарәсем хатаһы</string>
   <string name="welcome_image_mount_zao">Зао тауы</string>
   <string name="welcome_image_llamas">Ламалар</string>

@@ -3,6 +3,13 @@
 * Sveinn í Felli
 -->
 <resources>
+  <string name="commons_facebook">Commons Facebook-síðan</string>
+  <string name="commons_github">Grunnkóði Commons á Github</string>
+  <string name="commons_logo">Táknmerki Commons</string>
+  <string name="commons_website">Commons vefsvæðið</string>
+  <string name="exit_location_picker">Hætta í staðsetningarveljara</string>
+  <string name="submit">Senda inn</string>
+  <string name="appwidget_img">Mynd dagsins</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d skrá að sendast inn</item>
     <item quantity="other">%1$d skrár að sendast inn</item>
@@ -188,10 +195,6 @@
   <string name="become_a_tester_description">Veldu að taka þátt í beta-forprófunarrásinni á Google Play og fáðu snemmbúinn aðgang að nýjum eiginleikum og villuleiðréttingum</string>
   <string name="_2fa_code">2FA-kóði</string>
   <string name="logout_verification">Viltu í alvörunni skrá þig út?</string>
-  <string name="commons_logo">Táknmerki Commons</string>
-  <string name="commons_website">Commons vefsvæðið</string>
-  <string name="commons_facebook">Commons Facebook-síðan</string>
-  <string name="commons_github">Grunnkóði Commons á Github</string>
   <string name="mediaimage_failed">Mynd gagnamiðils brást</string>
   <string name="no_subcategory_found">Engir undirflokkar fundust</string>
   <string name="no_parentcategory_found">Engir yfirflokkar fundust</string>
@@ -278,7 +281,6 @@
   <string name="image_uploaded_by">Sent inn af: %1$s</string>
   <string name="block_notification_title">Bannað</string>
   <string name="block_notification">Þú ert útilokaður frá breytingum á Commons</string>
-  <string name="appwidget_img">Mynd dagsins</string>
   <string name="app_widget_heading">Mynd dagsins</string>
   <string name="menu_search_button">Leita</string>
   <string name="search_commons">Leita á Commons</string>
@@ -362,7 +364,6 @@
   <string name="step_count">Skref %1$d af %2$d: %3$s</string>
   <string name="next">Næsta</string>
   <string name="previous">Fyrri</string>
-  <string name="submit">Senda inn</string>
   <string name="upload_title_duplicate">Skrá með heitinu %1$s er til staðar. Ertu viss um að þú viljir halda áfram?\n\nAthugaðu: Hentugri skráarendingu verður sjálfkrafa bætt við skráarheitið.</string>
   <string name="map_application_missing">Ekkert samhæft landakortaforrit fannst á tækinu þínu. Settu kortaforrit til að nýta þennan möguleika.</string>
   <string name="title_page_bookmarks_pictures">Ljósmyndir</string>
@@ -615,7 +616,6 @@
   <string name="media_detail_in_all_languages">Á öllum tungumálum</string>
   <string name="choose_a_location">Veldu staðsetningu</string>
   <string name="pan_and_zoom_to_adjust">Hliðraðu og breyttu aðdrætti til að aðlaga</string>
-  <string name="exit_location_picker">Hætta í staðsetningarveljara</string>
   <string name="select_location_location_picker">Veldu staðsetningu</string>
   <string name="show_in_map_app">Birta í landakortaforriti</string>
   <string name="modify_location">Breyta staðsetningu</string>

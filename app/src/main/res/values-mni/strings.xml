@@ -4,6 +4,10 @@
 * Awangba Mangang
 -->
 <resources>
+  <string name="commons_logo">ꯀꯃꯣꯟꯁ ꯁꯛꯇꯥꯛ</string>
+  <string name="commons_website">ꯀꯃꯣꯟꯁ ꯋꯦꯕꯁꯥꯏꯠ</string>
+  <string name="submit">ꯄꯤꯁꯤꯟꯕ</string>
+  <string name="appwidget_img">ꯅꯨꯃꯤꯠꯁꯤꯒꯤ ꯃꯤꯔꯦꯜ</string>
   <string name="preference_category_privacy">ꯑꯔꯣꯟꯕꯥ</string>
   <string name="app_name">ꯀꯣꯃꯣꯟꯁ</string>
   <string name="bullet">꯫</string>
@@ -74,8 +78,6 @@
   <string name="media_detail_license">ꯑꯌꯥꯕꯥ</string>
   <string name="media_detail_coordinates">ꯀꯣꯑꯣꯔꯗꯤꯅꯦꯠꯁ</string>
   <string name="become_a_tester_title">ꯕꯦꯇꯥ ꯆꯥꯡꯌꯦꯡ ꯇꯧꯕ ꯱ ꯑꯣꯏꯕꯤꯌꯨ</string>
-  <string name="commons_logo">ꯀꯃꯣꯟꯁ ꯁꯛꯇꯥꯛ</string>
-  <string name="commons_website">ꯀꯃꯣꯟꯁ ꯋꯦꯕꯁꯥꯏꯠ</string>
   <string name="welcome_image_welcome_wikipedia">ꯂꯦꯡꯁꯤꯟꯕꯤꯔꯛꯁꯤ ꯋꯤꯀꯤꯄꯦꯗꯤꯌꯥ</string>
   <string name="welcome_image_welcome_copyright">ꯂꯦꯡꯁꯤꯟꯕꯤꯔꯛꯁꯤ ꯁꯤꯟꯗꯣꯛꯄ-ꯑꯌꯥꯕ</string>
   <string name="cancel">ꯇꯣꯛꯄ</string>
@@ -113,7 +115,6 @@
   <string name="no_images_found">ꯃꯤꯔꯦꯜꯁꯤꯡ ꯊꯤꯕꯥ ꯐꯪꯗꯦ!</string>
   <string name="image_uploaded_by">ꯊꯥꯒꯠꯂꯛꯈꯤꯕ:%1$s</string>
   <string name="block_notification">ꯅꯪ ꯀꯃꯣꯟꯁꯇ ꯁꯦꯝꯒꯠꯄ ꯊꯤꯡꯈꯔꯦ</string>
-  <string name="appwidget_img">ꯅꯨꯃꯤꯠꯁꯤꯒꯤ ꯃꯤꯔꯦꯜ</string>
   <string name="app_widget_heading">ꯅꯨꯃꯤꯠꯁꯤꯒꯤ ꯃꯤꯔꯦꯜ</string>
   <string name="menu_search_button">ꯊꯤꯕꯥ</string>
   <string name="search_commons">ꯊꯤꯔꯣ</string>
@@ -132,7 +133,6 @@
   <string name="level">ꯊꯥꯛ</string>
   <string name="next">ꯃꯊꯪ</string>
   <string name="previous">ꯃꯃꯥꯡꯒꯤ</string>
-  <string name="submit">ꯄꯤꯁꯤꯟꯕ</string>
   <string name="title_page_bookmarks_locations">ꯃꯐꯝꯁꯤꯡ</string>
   <string name="nearby_card_permission_title">ꯑꯌꯥꯕ ꯄꯤꯕꯤꯅꯕ ꯍꯥꯏꯕ</string>
   <string name="title_app_shortcut_setting">ꯁꯦꯝꯐꯝ</string>

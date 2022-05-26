@@ -4,6 +4,12 @@
 * Fierodelveneto
 -->
 <resources>
+  <string name="commons_facebook">Pajina Facebook de Commons</string>
+  <string name="commons_github">Codaxe fonte Github de Commons</string>
+  <string name="commons_logo">Logo de Commons</string>
+  <string name="commons_website">Sito web de Commons</string>
+  <string name="submit">Envia</string>
+  <string name="appwidget_img">Someja del dì</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d file en cargamento</item>
     <item quantity="other">%1$d file en cargamento</item>
@@ -171,10 +177,6 @@
   <string name="become_a_tester_description">Va drento al nostro canałe beta so Google Play par torte suito łe nove funsionałità e i erori corexùi</string>
   <string name="_2fa_code">Codaxe 2FA</string>
   <string name="logout_verification">Vuto seriamente sevitar a ndaxer fora?</string>
-  <string name="commons_logo">Logo de Commons</string>
-  <string name="commons_website">Sito web de Commons</string>
-  <string name="commons_facebook">Pajina Facebook de Commons</string>
-  <string name="commons_github">Codaxe fonte Github de Commons</string>
   <string name="mediaimage_failed">Imajine multimediałe no riusìa</string>
   <string name="no_subcategory_found">Nisuna categoria catada</string>
   <string name="no_parentcategory_found">Nisuna categoria superiore catada</string>
@@ -254,7 +256,6 @@
   <string name="image_uploaded_by">Cargà da $1</string>
   <string name="block_notification_title">Blocà</string>
   <string name="block_notification">Te si sta blocà da ła modifega so Commons</string>
-  <string name="appwidget_img">Someja del dì</string>
   <string name="app_widget_heading">Someja del dì</string>
   <string name="menu_search_button">Serca</string>
   <string name="search_commons">Serca so Commons</string>
@@ -330,7 +331,6 @@
   <string name="step_count" fuzzy="true">Paso %1$d de %2$d</string>
   <string name="next">Dopo</string>
   <string name="previous">Prima</string>
-  <string name="submit">Envia</string>
   <string name="upload_title_duplicate" fuzzy="true">Xà ghe xé on file col nome %1$s. Sito seguro de vołer ndar vanti?</string>
   <string name="map_application_missing">Nisuna aplicasion de mape conpatibiłe ła xé sta catada sol to dispoxidivo. Instała on aplicasion par łe mape par poder doparare sta funsion.</string>
   <string name="title_page_bookmarks_pictures">Imajini</string>

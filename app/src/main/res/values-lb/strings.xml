@@ -5,6 +5,11 @@
 * Soued031
 -->
 <resources>
+  <string name="commons_facebook">Commons-Facebook-Säit</string>
+  <string name="commons_logo">Commons-Logo</string>
+  <string name="commons_website">Internetsite vu Commons</string>
+  <string name="submit">Späicheren</string>
+  <string name="appwidget_img">Bild vum Dag</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">ee Fichier eroplueden</item>
     <item quantity="other">%1$d Fichieren eroplueden</item>
@@ -157,9 +162,6 @@
   <string name="become_a_tester_description">Schreift Iech op GooglePlay a fir eise Beta-Kanal a kritt fréi Zougang zu neie Funktiounen a Verbesserunge vu Feeler</string>
   <string name="_2fa_code">2FA-Code</string>
   <string name="logout_verification">Wëllt dir Iech wierklech ausloggen?</string>
-  <string name="commons_logo">Commons-Logo</string>
-  <string name="commons_website">Internetsite vu Commons</string>
-  <string name="commons_facebook">Commons-Facebook-Säit</string>
   <string name="no_subcategory_found">Keng Ënnerkategorie fonnt</string>
   <string name="welcome_image_mount_zao">Bierg Zao</string>
   <string name="welcome_image_llamas">Lamaen</string>
@@ -228,7 +230,6 @@
   <string name="image_uploaded_by">Eropgeluede vum: %1$s</string>
   <string name="block_notification_title">Gespaart</string>
   <string name="block_notification">Dir sidd gespaart a kënnt keng Ännerungen op Commons maachen</string>
-  <string name="appwidget_img">Bild vum Dag</string>
   <string name="app_widget_heading">Bild vum Dag</string>
   <string name="menu_search_button">Sichen</string>
   <string name="search_commons">Op Commons sichen</string>
@@ -266,7 +267,6 @@
   <string name="step_count">Schrëtt %1$d vu(n) %2$d: %3$s</string>
   <string name="next">Weider</string>
   <string name="previous">Vireg</string>
-  <string name="submit">Späicheren</string>
   <string name="title_page_bookmarks_pictures">Biller</string>
   <string name="title_page_bookmarks_locations">Plazen</string>
   <string name="provider_bookmarks">Lieszeechen</string>

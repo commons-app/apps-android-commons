@@ -5,6 +5,12 @@
 * Xuacu
 -->
 <resources>
+  <string name="commons_facebook">Páxina de Facebook de Commons</string>
+  <string name="commons_github">Códigu fonte de Commons en GitHub</string>
+  <string name="commons_logo">Logo de Commons</string>
+  <string name="commons_website">Sitiu web de Commons</string>
+  <string name="submit">Unviar</string>
+  <string name="appwidget_img">Semeya del día</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Xubiendo un ficheru</item>
     <item quantity="other">Xubiendo %1$d ficheros</item>
@@ -182,10 +188,6 @@
   <string name="become_a_tester_description">Escueye\'l nuesu canal beta en Google Play y ten accesu tempranu a carauterístiques nueves ya igües de fallos</string>
   <string name="_2fa_code">Códigu I2F</string>
   <string name="logout_verification">¿Confirmes que quies salir?</string>
-  <string name="commons_logo">Logo de Commons</string>
-  <string name="commons_website">Sitiu web de Commons</string>
-  <string name="commons_facebook">Páxina de Facebook de Commons</string>
-  <string name="commons_github">Códigu fonte de Commons en GitHub</string>
   <string name="mediaimage_failed">Falló la imaxe multimedia</string>
   <string name="no_subcategory_found">Nun s\'alcontraron categoríes</string>
   <string name="no_parentcategory_found">Nun s\'atopó nenguna categoría padre</string>
@@ -266,7 +268,6 @@
   <string name="image_uploaded_by">Xubida por: %1$s</string>
   <string name="block_notification_title">Bloquiáu</string>
   <string name="block_notification">Tas bloquiáu pa editar en Commons</string>
-  <string name="appwidget_img">Semeya del día</string>
   <string name="app_widget_heading">Semeya del día</string>
   <string name="menu_search_button">Buscar</string>
   <string name="search_commons">Buscar en Commons</string>
@@ -344,7 +345,6 @@
   <string name="step_count">Pasu %1$d de %2$d: %3$s</string>
   <string name="next">Siguiente</string>
   <string name="previous">Anterior</string>
-  <string name="submit">Unviar</string>
   <string name="upload_title_duplicate" fuzzy="true">Yá esiste un ficheru col nome %1$. ¿Tas seguru de que quies siguir?</string>
   <string name="map_application_missing">Nun s\'atopó una aplicación de mapes compatible nel to preséu. Instala una pa usar esta carauterística.</string>
   <string name="title_page_bookmarks_pictures">Imaxes</string>

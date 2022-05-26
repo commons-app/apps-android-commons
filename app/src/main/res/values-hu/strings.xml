@@ -17,6 +17,12 @@
 * ViDam
 -->
 <resources>
+  <string name="commons_facebook">Commons Facebook-oldal</string>
+  <string name="commons_github">Commons Github forráskód</string>
+  <string name="commons_logo">Commons Logo</string>
+  <string name="commons_website">Commons weboldal</string>
+  <string name="submit">Küldés</string>
+  <string name="appwidget_img">A nap képe</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d fájl feltöltése folyamatban</item>
     <item quantity="other">%1$d fájl feltöltése folyamatban</item>
@@ -187,10 +193,6 @@
   <string name="become_a_tester_description">Jelentkezz a béta csatornánkra a Google Playen, hogy hamarabb megkapd a hibajavításokat és az új funkciókat</string>
   <string name="_2fa_code">2LH kód</string>
   <string name="logout_verification">Kilépsz?</string>
-  <string name="commons_logo">Commons Logo</string>
-  <string name="commons_website">Commons weboldal</string>
-  <string name="commons_facebook">Commons Facebook-oldal</string>
-  <string name="commons_github">Commons Github forráskód</string>
   <string name="mediaimage_failed">Médiakép sikertelen</string>
   <string name="no_subcategory_found">Nem található alkategória</string>
   <string name="no_parentcategory_found">Nem található szülő kategória</string>
@@ -271,7 +273,6 @@
   <string name="image_uploaded_by">Feltöltötte: %1$s</string>
   <string name="block_notification_title">Blokkolva</string>
   <string name="block_notification">Blokkolva vagy a Commons szerkesztésétől.</string>
-  <string name="appwidget_img">A nap képe</string>
   <string name="app_widget_heading">A nap képe</string>
   <string name="menu_search_button">Keresés</string>
   <string name="search_commons">Keresés a Commonson</string>
@@ -342,7 +343,6 @@
   <string name="step_count">%1$d. lépés, összesen: %2$d: %3$s</string>
   <string name="next">Következő</string>
   <string name="previous">Előző</string>
-  <string name="submit">Küldés</string>
   <string name="upload_title_duplicate">Létezik %1$s nevű fájl. Biztosan folytatja? Megjegyzés: A megfelelő utótag automatikusan hozzáadódik a fájlnévhez.</string>
   <string name="map_application_missing">Nem található kompatibilis térképalkalmazás az eszközödön. Kérjük rakj fel ilyen appot a funkció használatához.</string>
   <string name="title_page_bookmarks_pictures">Képek</string>

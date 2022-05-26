@@ -7,6 +7,11 @@
 * Tweety
 -->
 <resources>
+  <string name="commons_facebook">العام فيسبڪ صفحو</string>
+  <string name="commons_logo">العام لوگو</string>
+  <string name="commons_website">العام ويبسائيٽ</string>
+  <string name="submit">اماڻيو</string>
+  <string name="appwidget_img">اڄ جي تصوير</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d فائيل چاڙھيندي</item>
     <item quantity="other">%1$d فائيلَ چاڙھيندي</item>
@@ -152,9 +157,6 @@
   <string name="media_detail_coordinates">مڪانيت</string>
   <string name="become_a_tester_title">آزمائشي آزمائيندڙ ٿيو</string>
   <string name="logout_verification">ڇا توھان سچ ۾ خارج ٿيڻ ٿا چاھيو؟</string>
-  <string name="commons_logo">العام لوگو</string>
-  <string name="commons_website">العام ويبسائيٽ</string>
-  <string name="commons_facebook">العام فيسبڪ صفحو</string>
   <string name="welcome_image_rainbow_bridge">انڊلٺ پل</string>
   <string name="welcome_image_tulip">گل لالا (ٽيولپ)</string>
   <string name="welcome_image_welcome_wikipedia">وڪيپيڊيا ۾ ڀليڪار</string>
@@ -210,7 +212,6 @@
   <string name="no_images_found">ڪوبہ عڪس نہ لڌو!</string>
   <string name="error_loading_images">تصويرون لوڊ ڪرڻ دوران چُڪ ٿي آهي.</string>
   <string name="image_uploaded_by">پاران چاڙهيل: %1$s</string>
-  <string name="appwidget_img">اڄ جي تصوير</string>
   <string name="app_widget_heading">اڄ جي تصوير</string>
   <string name="menu_search_button">ڳوليو</string>
   <string name="search_commons">العام ۾ ڳوليو</string>
@@ -251,7 +252,6 @@
   <string name="write_storage_permission_rationale_for_image_share">اسان کي اوهان جي ڊوائس جي خارجي اسٽوريج تائين پھچ جي اجازت گهرجي تہ جيئن عڪس چاڙهي سگهجن.</string>
   <string name="next">اڳيون</string>
   <string name="previous">پويون</string>
-  <string name="submit">اماڻيو</string>
   <string name="title_page_bookmarks_pictures">تصويرون</string>
   <string name="title_page_bookmarks_locations">مڪانيتون</string>
   <string name="no_categories_selected">زمرا چونڊيل ناھن</string>

@@ -3,6 +3,7 @@
 * Joetaras
 -->
 <resources>
+  <string name="submit">Conferme</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d fail in caricamende</item>
     <item quantity="other">%1$d fail in caricamende</item>
@@ -108,7 +109,6 @@
   <string name="step_count">Passe %1$d de %2$d: %3$s</string>
   <string name="next">Prossime</string>
   <string name="previous">Precedende</string>
-  <string name="submit">Conferme</string>
   <string name="title_page_bookmarks_pictures">Fote</string>
   <string name="title_page_bookmarks_locations">Luèche</string>
   <string name="menu_bookmark">Aggiungi/Live le signalibbre</string>

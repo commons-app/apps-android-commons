@@ -12,6 +12,12 @@
 * Vivaelcelta
 -->
 <resources>
+  <string name="commons_facebook">Páxina de Facebook en Commons</string>
+  <string name="commons_github">Código fonte de Commons en Github</string>
+  <string name="commons_logo">Logo de Commons</string>
+  <string name="commons_website">Sitio web de Commons</string>
+  <string name="submit">Enviar</string>
+  <string name="appwidget_img">Imaxe do día</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Cargando %1$d ficheiro</item>
     <item quantity="other">Cargando %1$d ficheiros</item>
@@ -178,10 +184,6 @@
   <string name="become_a_tester_description">Siga a nosa canle beta en Google Play e obteña acceso a novas funcionalidades e correccións de erros</string>
   <string name="_2fa_code">Código de autenticación de dous pasos</string>
   <string name="logout_verification">Está seguro de querer saír?</string>
-  <string name="commons_logo">Logo de Commons</string>
-  <string name="commons_website">Sitio web de Commons</string>
-  <string name="commons_facebook">Páxina de Facebook en Commons</string>
-  <string name="commons_github">Código fonte de Commons en Github</string>
   <string name="mediaimage_failed">Fallou a imaxe de multimedia</string>
   <string name="no_subcategory_found">Non se atoparon subcategorías</string>
   <string name="no_parentcategory_found">Non se atoparon categorías nais</string>
@@ -260,7 +262,6 @@
   <string name="image_uploaded_by">Subida porː %1$s</string>
   <string name="block_notification_title">Bloqueado</string>
   <string name="block_notification">Está bloqueado e non pode editar en Commons</string>
-  <string name="appwidget_img">Imaxe do día</string>
   <string name="app_widget_heading">Imaxe do día</string>
   <string name="menu_search_button">Procurar</string>
   <string name="search_commons">Procurar en Commons</string>
@@ -336,7 +337,6 @@
   <string name="step_count">Paso %1$d de %2$d: %3$s</string>
   <string name="next">Seguinte</string>
   <string name="previous">Anterior</string>
-  <string name="submit">Enviar</string>
   <string name="upload_title_duplicate">Xa existe un ficheiro co nome %1$s. Quere continuar?\n\nNota: Engadirase automaticamente un sufixo axeitado ao nome do ficheiro.</string>
   <string name="map_application_missing">Non se atopou ningunha aplicación de mapas compatible no seu dispositivo. Por favor, instale unha aplicación de mapas para usar esta funcionalidade.</string>
   <string name="title_page_bookmarks_pictures">Imaxes</string>

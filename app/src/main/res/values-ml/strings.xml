@@ -8,6 +8,8 @@
 * Santhosh.thottingal
 -->
 <resources>
+  <string name="commons_logo">കോമൺസ് ലോഗോ</string>
+  <string name="commons_website">കോമൺസ് വെബ്‌സൈറ്റ്</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">ഒരു പ്രമാണം അപ്‌ലോഡ് ചെയ്യുന്നു</item>
     <item quantity="other">%1$d പ്രമാണങ്ങൾ അപ്‌ലോഡ് ചെയ്യുന്നു</item>
@@ -136,8 +138,6 @@
   <string name="media_detail_license">ഉപയോഗാനുമതി</string>
   <string name="media_detail_coordinates">നിർദ്ദേശാങ്കങ്ങൾ</string>
   <string name="media_detail_coordinates_empty">ഒന്നും നൽകിയിട്ടില്ല</string>
-  <string name="commons_logo">കോമൺസ് ലോഗോ</string>
-  <string name="commons_website">കോമൺസ് വെബ്‌സൈറ്റ്</string>
   <string name="welcome_image_mount_zao">സാവോ പർവ്വതം</string>
   <string name="welcome_image_llamas">ലാമകൾ</string>
   <string name="welcome_image_rainbow_bridge">മഴവിൽ പാലം</string>

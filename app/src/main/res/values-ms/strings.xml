@@ -6,6 +6,9 @@
 * Tofeiku
 -->
 <resources>
+  <string name="commons_facebook">Laman Facebook Commons</string>
+  <string name="commons_logo">Logo Commons</string>
+  <string name="commons_website">Tapak Sesawang Commons</string>
   <string name="uploads_pending_notification_indicator" fuzzy="true">%d fail sedang dimuat naik</string>
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Belum ada muatnaik</item>
@@ -126,9 +129,6 @@
   <string name="become_a_tester_title">Jadilah Penguji Beta</string>
   <string name="_2fa_code">Kod 2FA</string>
   <string name="logout_verification">Adakah anda benar-benar mahu log keluar?</string>
-  <string name="commons_logo">Logo Commons</string>
-  <string name="commons_website">Tapak Sesawang Commons</string>
-  <string name="commons_facebook">Laman Facebook Commons</string>
   <string name="mediaimage_failed">Imej Media Gagal</string>
   <string name="no_subcategory_found">Tiada subkategori dijumpai</string>
   <string name="cancel">Batalkan</string>

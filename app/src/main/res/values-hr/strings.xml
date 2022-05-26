@@ -8,6 +8,11 @@
 * Ponor
 -->
 <resources>
+  <string name="commons_facebook">Stranica Zajedničkog poslužitelja na Facebooku</string>
+  <string name="commons_github">Izvorni kôd Zajedničkog poslužitelja na Githubu</string>
+  <string name="commons_logo">Logotip Zajedničkog poslužitelja</string>
+  <string name="commons_website">Mrežno mjesto Zajedničkog poslužitelja</string>
+  <string name="appwidget_img">Slika dana</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">Postavlja se %1$d datoteka</item>
     <item quantity="other">Postavljaju se %1$d datoteke</item>
@@ -165,10 +170,6 @@
   <string name="become_a_tester_description">Prijavite se na naš beta-kanal na Google Playu i dobijte raniji pristup novim mogućnostima i ispravkama pogrješaka</string>
   <string name="_2fa_code">Kôd za provjeru u 2 koraka</string>
   <string name="logout_verification">Zaista se želite odjaviti?</string>
-  <string name="commons_logo">Logotip Zajedničkog poslužitelja</string>
-  <string name="commons_website">Mrežno mjesto Zajedničkog poslužitelja</string>
-  <string name="commons_facebook">Stranica Zajedničkog poslužitelja na Facebooku</string>
-  <string name="commons_github">Izvorni kôd Zajedničkog poslužitelja na Githubu</string>
   <string name="mediaimage_failed">Slika nije uspjela</string>
   <string name="no_subcategory_found">Potkategorije nisu pronađene</string>
   <string name="welcome_image_mount_zao">Planina Zao</string>
@@ -242,7 +243,6 @@
   <string name="error_loading_images">Pogrješka prilikom učitavanja slika.</string>
   <string name="image_uploaded_by">Postavio: %1$s</string>
   <string name="block_notification">Onemogućeno Vam je uređivanje na Zajedničkom poslužitelju</string>
-  <string name="appwidget_img">Slika dana</string>
   <string name="app_widget_heading">Slika dana</string>
   <string name="menu_search_button">Pretraži</string>
   <string name="search_commons">Pretraga na Zajedničkom poslužitelju</string>

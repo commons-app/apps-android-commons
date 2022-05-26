@@ -24,6 +24,17 @@
 * 神樂坂秀吉
 -->
 <resources>
+  <string name="commons_facebook">コモンズのフェイスブックページ</string>
+  <string name="commons_github">コモンズのGithubソースコード</string>
+  <string name="commons_logo">コモンズの商標</string>
+  <string name="commons_website">コモンズのウェブサイト</string>
+  <string name="submit">送信</string>
+  <string name="show_captions">キャプション</string>
+  <string name="row_item_caption">キャプション</string>
+  <string name="show_captions_description">説明</string>
+  <string name="nearby_row_image">画像</string>
+  <string name="nearby_all">すべて</string>
+  <string name="appwidget_img">今日の一枚</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="other">%1$d 件のファイルをアップロード中</item>
   </plurals>
@@ -202,10 +213,6 @@
   <string name="become_a_tester_description">Google Playのベータ版チャンネルにオプトインして、新機能やバグ修正プログラムに早期にアクセス</string>
   <string name="_2fa_code">2段階認証コード</string>
   <string name="logout_verification">ログアウトしてもよろしいですか？</string>
-  <string name="commons_logo">コモンズの商標</string>
-  <string name="commons_website">コモンズのウェブサイト</string>
-  <string name="commons_facebook">コモンズのフェイスブックページ</string>
-  <string name="commons_github">コモンズのGithubソースコード</string>
   <string name="mediaimage_failed">メディアイメージが失敗しました</string>
   <string name="no_subcategory_found">下位カテゴリは見つかりませんでした</string>
   <string name="no_parentcategory_found">上位カテゴリは見つかりませんでした</string>
@@ -292,7 +299,6 @@
   <string name="image_uploaded_by">アップロードした人: %1$s</string>
   <string name="block_notification_title">ブロック済</string>
   <string name="block_notification">あなたはコモンズの編集からブロックそれました。</string>
-  <string name="appwidget_img">今日の一枚</string>
   <string name="app_widget_heading">今日の一枚</string>
   <string name="menu_search_button">検索</string>
   <string name="search_commons">コモンズを検索</string>
@@ -373,7 +379,6 @@
   <string name="step_count">全部で%2$d件のうち%1$d件目の手順：%3$s</string>
   <string name="next">次へ</string>
   <string name="previous">前へ</string>
-  <string name="submit">送信</string>
   <string name="upload_title_duplicate">%1$s という題名のファイルはすでに保存されています。処理をほんとうに続けますか？\n\n注記：ファイル名には適切な接頭辞が自動的に付与されます。</string>
   <string name="map_application_missing">お使いの機器に適したアプリが見つかりませんでした。この機能を使用できる地図アプリをインストールしてください。</string>
   <string name="title_page_bookmarks_pictures">画像</string>

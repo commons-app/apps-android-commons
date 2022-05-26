@@ -24,6 +24,14 @@
 * আফতাবুজ্জামান
 -->
 <resources>
+  <string name="commons_facebook">কমন্সের ফেসবুক পাতা</string>
+  <string name="commons_github">কমন্স গিটহাব উৎস কোড</string>
+  <string name="commons_logo">কমন্সের লোগো</string>
+  <string name="commons_website">কমন্স ওয়েবসাইট</string>
+  <string name="submit">জমা দিন</string>
+  <string name="show_captions_description">বিবরণ</string>
+  <string name="nearby_row_image">চিত্র</string>
+  <string name="appwidget_img">আজকের চিত্র</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$dটি ফাইল আপলোড হচ্ছে</item>
     <item quantity="other">%1$dটি ফাইল আপলোড হচ্ছে</item>
@@ -199,10 +207,6 @@
   <string name="become_a_tester_description">গুগল প্লেতে আমাদের বেটা চ্যানেলে যুক্ত হন! এতে নতুন বৈশিষ্ট্যের পাশাপাশি পুরানো বাগগুলো\'র সংশোধিত রুপ সবার আগে ব্যবহারের সুযোগ পাবেন</string>
   <string name="_2fa_code">2FA কোড</string>
   <string name="logout_verification">আপনি কি সত্যিই প্রস্থান করতে চান?</string>
-  <string name="commons_logo">কমন্সের লোগো</string>
-  <string name="commons_website">কমন্স ওয়েবসাইট</string>
-  <string name="commons_facebook">কমন্সের ফেসবুক পাতা</string>
-  <string name="commons_github">কমন্স গিটহাব উৎস কোড</string>
   <string name="mediaimage_failed">মিডিয়া চিত্র ব্যর্থ হয়েছে</string>
   <string name="no_subcategory_found">কোন উপবিষয়শ্রেনী পাওয়া যায় নি।</string>
   <string name="welcome_image_mount_zao">জাও পর্বত</string>
@@ -280,7 +284,6 @@
   <string name="image_uploaded_by">আপলোড করেছেন: %1$s</string>
   <string name="block_notification_title">বাধাপ্রাপ্ত</string>
   <string name="block_notification">আপনাকে কমন্সে সম্পাদনা করা থেকে বাধা দেওয়া হয়েছে</string>
-  <string name="appwidget_img">আজকের চিত্র</string>
   <string name="app_widget_heading">আজকের চিত্র</string>
   <string name="menu_search_button">অনুসন্ধান</string>
   <string name="search_commons">কমন্সে অনুসন্ধান করুন</string>
@@ -327,7 +330,6 @@
   <string name="step_count">ধাপ %2$d এর %1$d: %3$s</string>
   <string name="next">পরবর্তী</string>
   <string name="previous">পূর্ববর্তী</string>
-  <string name="submit">জমা দিন</string>
   <string name="map_application_missing">আপনার ডিভাইসে কোনও উপযুক্ত মানচিত্রের অ্যাপ্লিকেশন খুঁজে পাওয়া যায়নি। এই বৈশিষ্ট্যটি ব্যবহার করতে অনুগ্রহ করে একটি মানচিত্রের অ্যাপ্লিকেশন ইনস্টল করুন।</string>
   <string name="title_page_bookmarks_pictures">চিত্র</string>
   <string name="title_page_bookmarks_locations">অবস্থান</string>

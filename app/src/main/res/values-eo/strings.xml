@@ -10,6 +10,12 @@
 * YvesNevelsteen
 -->
 <resources>
+  <string name="commons_facebook">Facebook-Paĝo de Komunejo</string>
+  <string name="commons_github">Fontokodo de Komunejo ĉe Github</string>
+  <string name="commons_logo">Emblemo de Komunejo</string>
+  <string name="commons_website">Retejo de Komunejo</string>
+  <string name="submit">Sendi</string>
+  <string name="appwidget_img">Bildo de la Tago</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d dosiero alŝutata</item>
     <item quantity="other">%1$d dosieroj alŝutataj</item>
@@ -177,10 +183,6 @@
   <string name="become_a_tester_description">Abonu nian beta-kanalon ĉe Google Play kaj frue ekprovu novajn trajtojn kaj riparojn de cimoj</string>
   <string name="_2fa_code">2FA-Kodo</string>
   <string name="logout_verification">Ĉu vi vere volas elsaluti?</string>
-  <string name="commons_logo">Emblemo de Komunejo</string>
-  <string name="commons_website">Retejo de Komunejo</string>
-  <string name="commons_facebook">Facebook-Paĝo de Komunejo</string>
-  <string name="commons_github">Fontokodo de Komunejo ĉe Github</string>
   <string name="mediaimage_failed">Aŭdvidaĵo-Bildo Malsukcesis</string>
   <string name="no_subcategory_found">Neniu subkategorio trovita</string>
   <string name="no_parentcategory_found">Neniu superkategorio trovita</string>
@@ -258,7 +260,6 @@
   <string name="error_loading_images">Okazis eraro ŝargante la bildojn.</string>
   <string name="image_uploaded_by">Alŝutita de: %1$s</string>
   <string name="block_notification">Vi estas forbarata el redaktado de Komunejo</string>
-  <string name="appwidget_img">Bildo de la Tago</string>
   <string name="app_widget_heading">Bildo de la Tago</string>
   <string name="menu_search_button">Serĉi</string>
   <string name="search_commons">Serĉi Komunejon</string>
@@ -334,7 +335,6 @@
   <string name="step_count" fuzzy="true">Paŝo %1$d el %2$d</string>
   <string name="next">Sekva</string>
   <string name="previous">Antaŭa</string>
-  <string name="submit">Sendi</string>
   <string name="upload_title_duplicate" fuzzy="true">Ekzistas dosiero kun la nomo %1$s. Ĉu vi certas ke vi volas daŭrigi?</string>
   <string name="map_application_missing">Neniu kongrua aplikaĵo troveblas en via aparato. Bonvolu instali tian por uzo kun ĉi tiu funkcio.</string>
   <string name="title_page_bookmarks_pictures">Bildoj</string>

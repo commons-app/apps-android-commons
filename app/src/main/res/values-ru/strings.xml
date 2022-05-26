@@ -38,6 +38,13 @@
 * ОйЛ
 -->
 <resources>
+  <string name="commons_facebook">Facebook-страница Викисклада</string>
+  <string name="commons_github">Исходные коды Викисклада на гитхабе</string>
+  <string name="commons_logo">Логотип Викисклада</string>
+  <string name="commons_website">Веб-сайт Викисклада</string>
+  <string name="exit_location_picker">Выйти из окна выбора местоположения</string>
+  <string name="submit">Отправить</string>
+  <string name="appwidget_img">Изображение дня</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d файл загружается</item>
     <item quantity="few">%1$d файла загружается</item>
@@ -237,10 +244,6 @@
   <string name="become_a_tester_description">Подпишитесь на наш канал бета-версии на Google Play и получите ранний доступ к новым функциям и исправлениям ошибок</string>
   <string name="_2fa_code">Код 2ФА</string>
   <string name="logout_verification">Вы действительно хотите выйти?</string>
-  <string name="commons_logo">Логотип Викисклада</string>
-  <string name="commons_website">Веб-сайт Викисклада</string>
-  <string name="commons_facebook">Facebook-страница Викисклада</string>
-  <string name="commons_github">Исходные коды Викисклада на гитхабе</string>
   <string name="mediaimage_failed">Ошибка медиафайла</string>
   <string name="no_subcategory_found">Подкатегории не найдены.</string>
   <string name="no_parentcategory_found">Не найдено родительских категорий</string>
@@ -327,7 +330,6 @@
   <string name="image_uploaded_by">Загружено участником %1$s</string>
   <string name="block_notification_title">Блокировка</string>
   <string name="block_notification">Редактирование на Викискладе вам было заблокировано</string>
-  <string name="appwidget_img">Изображение дня</string>
   <string name="app_widget_heading">Изображение дня</string>
   <string name="menu_search_button">Поиск</string>
   <string name="search_commons">Найти на Викискладе</string>
@@ -411,7 +413,6 @@
   <string name="step_count">Шаг %1$d из %2$d: %3$s</string>
   <string name="next">Далее</string>
   <string name="previous">Назад</string>
-  <string name="submit">Отправить</string>
   <string name="upload_title_duplicate">Уже существует файл с именем %1$s. Вы уверены, что хотите продолжить?\n\nПримечание: подходящий суффикс будет добавлен к имени файла автоматически.</string>
   <string name="map_application_missing">Не найдено совместимое картографическое приложение на вашем устройстве. Установите его, чтобы вы могли использовать эту функцию.</string>
   <string name="title_page_bookmarks_pictures">Изображения</string>
@@ -659,7 +660,6 @@
   <string name="media_detail_in_all_languages">На всех языках</string>
   <string name="choose_a_location">Выберите местоположение</string>
   <string name="pan_and_zoom_to_adjust">Панорамируйте и масштабируйте для настройки</string>
-  <string name="exit_location_picker">Выйти из окна выбора местоположения</string>
   <string name="select_location_location_picker">Выберите местоположение</string>
   <string name="show_in_map_app">Показать в приложении карты</string>
   <string name="modify_location">Изменить местоположение</string>

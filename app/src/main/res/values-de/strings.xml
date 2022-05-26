@@ -28,6 +28,15 @@
 * ZiqiLiang
 -->
 <resources>
+  <string name="commons_facebook">Commons-Facebookseite</string>
+  <string name="commons_github">Commons-Quellcode auf Github</string>
+  <string name="commons_logo">Commons-Logo</string>
+  <string name="commons_website">Commons-Website</string>
+  <string name="exit_location_picker">Beenden der Ortswahl</string>
+  <string name="submit">Einreichen</string>
+  <string name="nearby_row_image">Bild</string>
+  <string name="nearby_all">Alle</string>
+  <string name="appwidget_img">Bild des Tages</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Eine Datei wird hochgeladen</item>
     <item quantity="other">%1$d Dateien werden hochgeladen</item>
@@ -213,10 +222,6 @@
   <string name="become_a_tester_description">Melde dich bei unserem Beta-Kanal auf Google Play an und erhalte frühen Zugriff auf neue Funktionen und Fehlerbehebungen</string>
   <string name="_2fa_code">2FA-Code</string>
   <string name="logout_verification">Möchtest du dich wirklich abmelden?</string>
-  <string name="commons_logo">Commons-Logo</string>
-  <string name="commons_website">Commons-Website</string>
-  <string name="commons_facebook">Commons-Facebookseite</string>
-  <string name="commons_github">Commons-Quellcode auf Github</string>
   <string name="mediaimage_failed">Medienbild fehlgeschlagen</string>
   <string name="no_subcategory_found">Keine Unterkategorien gefunden</string>
   <string name="no_parentcategory_found">Keine übergeordneten Kategorien gefunden</string>
@@ -303,7 +308,6 @@
   <string name="image_uploaded_by">Hochgeladen von: %1$s</string>
   <string name="block_notification_title">Gesperrt</string>
   <string name="block_notification">Du bist für das Bearbeiten auf Commons gesperrt</string>
-  <string name="appwidget_img">Bild des Tages</string>
   <string name="app_widget_heading">Bild des Tages</string>
   <string name="menu_search_button">Suchen</string>
   <string name="search_commons">Commons durchsuchen</string>
@@ -387,7 +391,6 @@
   <string name="step_count">Schritt %1$d von %2$d: %3$s</string>
   <string name="next">Nächste</string>
   <string name="previous">Vorherige</string>
-  <string name="submit">Einreichen</string>
   <string name="upload_title_duplicate">Eine Datei mit dem Namen %1$s ist bereits vorhanden. Bist du sicher, dass du fortfahren möchtest?\n\nHinweis: Dem Dateinamen wird automatisch ein passendes Suffix hinzugefügt.</string>
   <string name="map_application_missing">Auf deinem Gerät konnte keine kompatible Karten-App gefunden werden. Bitte installiere eine Karten-App, um diese Funktion nutzen zu können.</string>
   <string name="title_page_bookmarks_pictures">Bilder</string>
@@ -633,7 +636,6 @@
   <string name="media_detail_in_all_languages">In allen Sprachen</string>
   <string name="choose_a_location">Wähle einen Ort</string>
   <string name="pan_and_zoom_to_adjust">Schwenken und Zoomen zum Einstellen</string>
-  <string name="exit_location_picker">Beenden der Ortswahl</string>
   <string name="select_location_location_picker">Ort auswählen</string>
   <string name="show_in_map_app">In Karten-App anzeigen</string>
   <string name="modify_location">Standort beabeiten</string>

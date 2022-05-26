@@ -11,6 +11,12 @@
 * WebSourceContentRO
 -->
 <resources>
+  <string name="commons_facebook">Pagina de Facebook a Commons</string>
+  <string name="commons_github">Codul Sursă de la Commons Github</string>
+  <string name="commons_logo">Logoul Commons</string>
+  <string name="commons_website">Site-ul Commons</string>
+  <string name="submit">Trimite</string>
+  <string name="appwidget_img">Imaginea zilei</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">1 fișier se încarcă</item>
     <item quantity="few">%1$d fișiere se încarcă</item>
@@ -201,10 +207,6 @@
   <string name="become_a_tester_description">Abonați-vă la canalul nostru beta pe Google Play și a obține acces rapid la noi caracteristici și corecții de erori</string>
   <string name="_2fa_code">Code 2FA</string>
   <string name="logout_verification">Chiar vrei să te deconectezi?</string>
-  <string name="commons_logo">Logoul Commons</string>
-  <string name="commons_website">Site-ul Commons</string>
-  <string name="commons_facebook">Pagina de Facebook a Commons</string>
-  <string name="commons_github">Codul Sursă de la Commons Github</string>
   <string name="mediaimage_failed">Imagine media nu a reușit</string>
   <string name="no_subcategory_found">Nu s-au găsit subcategorii</string>
   <string name="no_parentcategory_found">Nu au fost găsite categorii părinte</string>
@@ -290,7 +292,6 @@
   <string name="image_uploaded_by">Încărcată de: %1$s</string>
   <string name="block_notification_title">Blocat</string>
   <string name="block_notification">Sunteți blocat de la editarea Commons</string>
-  <string name="appwidget_img">Imaginea zilei</string>
   <string name="app_widget_heading">Imaginea zilei</string>
   <string name="menu_search_button">Căutare</string>
   <string name="search_commons">Căutare pe Commons</string>
@@ -370,7 +371,6 @@
   <string name="step_count">Pasul %1$d din %2$d: %3$s</string>
   <string name="next">Următor</string>
   <string name="previous">Precedent</string>
-  <string name="submit">Trimite</string>
   <string name="upload_title_duplicate">Există un fișier cu numele de fișier %1$s. Sunteți sigur că doriți să continuați?\n\nNotă: Un sufix adecvat va fi adăugat automat la numele fișierului.</string>
   <string name="map_application_missing">Nu s-a găsit nicio aplicație de hartă compatibilă pe dispozitiv. Instalați o aplicație de hartă pentru a utiliza această caracteristică.</string>
   <string name="title_page_bookmarks_pictures">Imagini</string>

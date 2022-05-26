@@ -5,6 +5,7 @@
 * 咽頭べさ
 -->
 <resources>
+  <string name="appwidget_img">ဟန်ႏနီꩻ ဓာတ်ပုင်ႏတဲးဝါး</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">အဝ်ႏထူႏဒင်ႏဖုဲင် %1$d ဗာႏကျာꩻ</item>
     <item quantity="other">အဝ်ႏထူႏဒင်ႏဖုဲင် %1$d ဗာႏကျာꩻ</item>
@@ -138,7 +139,6 @@
   <string name="showcase_view_has_photo">ခင်ႏလမ်းယိုနဝ်ꩻ ဓာတ်ပုင်ႏအဝ်ႏထွူလဲဉ်းတပုင်ႏသြ။</string>
   <string name="no_images_found">မော့ꩻတဝ်းဓာတ်ပုင်ႏ</string>
   <string name="block_notification_title">ပေ့ꩻဗိဉ်ႏခါꩻ</string>
-  <string name="appwidget_img">ဟန်ႏနီꩻ ဓာတ်ပုင်ႏတဲးဝါး</string>
   <string name="app_widget_heading">ဟန်ႏနီꩻ ဓာတ်ပုင်ႏတဲးဝါး</string>
   <string name="menu_search_button">ထိုမ်ႏ</string>
   <string name="search_commons">ထိုမ်ႏ ကောင်မွဉ်း</string>

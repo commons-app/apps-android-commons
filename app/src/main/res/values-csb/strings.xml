@@ -3,6 +3,7 @@
 * Kaszeba
 -->
 <resources>
+  <string name="commons_logo">Logò Commons</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Wladënk %1$d lopka</item>
     <item quantity="other">Wladënk %1$d lopków</item>
@@ -116,7 +117,6 @@
   <string name="become_a_tester_title">Bãdze beta-testerã</string>
   <string name="_2fa_code">Kòd 2FA</string>
   <string name="logout_verification">Pò prôwdze chcesz sã wëlogòwac?</string>
-  <string name="commons_logo">Logò Commons</string>
   <string name="welcome_image_mount_zao">Zaō</string>
   <string name="welcome_image_llamas">Lamy</string>
   <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>

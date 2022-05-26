@@ -6,6 +6,9 @@
 * 咽頭べさ
 -->
 <resources>
+  <string name="commons_facebook">Commons Facebook Page</string>
+  <string name="commons_logo">သၚ်္ကေတ Commons</string>
+  <string name="appwidget_img">ဗီုရုပ်တၟေင် သွက်တ္ၚဲဏအ်</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">ဝှာင် %1$d file uploadingဂှ် ပတိုန်ပၠုပ်ဒၟံင်</item>
     <item quantity="other">ဝှာင် %1$d files uploadingဂှ် ပတိုန်ပၠုပ်ဒၟံင်</item>
@@ -172,8 +175,6 @@
   <string name="media_detail_coordinates">မပံင်တောဲလဝ်</string>
   <string name="media_detail_coordinates_empty">ဟွံ ဗပေင်လဝ်</string>
   <string name="_2fa_code">2FA Code</string>
-  <string name="commons_logo">သၚ်္ကေတ Commons</string>
-  <string name="commons_facebook">Commons Facebook Page</string>
   <string name="no_subcategory_found">ဟွံဆဵုကေတ် ကဏ္ဍလပါ်ဂမၠိုင်</string>
   <string name="welcome_image_mount_zao">Mount Zao</string>
   <string name="welcome_image_llamas">Llamas</string>
@@ -248,7 +249,6 @@
   <string name="image_uploaded_by">ပတိုန်လဝ် နကဵု: %1$s</string>
   <string name="block_notification_title">စဵုဒၞာ</string>
   <string name="block_notification">မၞးဂှ် ဒးဒုင်စဵုဒၞာလဝ် သွက်ဂွံ ပလေဝ်ဒါန် ခမ်မောန်</string>
-  <string name="appwidget_img">ဗီုရုပ်တၟေင် သွက်တ္ၚဲဏအ်</string>
   <string name="app_widget_heading">ဗီုရုပ်တၟေင် သွက်တ္ၚဲဏအ်</string>
   <string name="menu_search_button">ဂၠာဲ</string>
   <string name="search_commons">ဂၠာဲ ခမ်မောန်</string>

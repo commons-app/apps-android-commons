@@ -8,6 +8,12 @@
 * Y-M D
 -->
 <resources>
+  <string name="commons_facebook">Pajenn Facebook Commons</string>
+  <string name="commons_github">Kod mammenn Github Commons</string>
+  <string name="commons_logo">Logo Commons</string>
+  <string name="commons_website">Lec\'hienn web Commons</string>
+  <string name="submit">Kas</string>
+  <string name="appwidget_img">Skeudenn an deiz</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">%1$d restr o vezañ karget</item>
     <item quantity="other">%1$d restr o vezañ karget</item>
@@ -165,10 +171,6 @@
   <string name="become_a_tester_description">En em enskrivañ en hor c\'hanol beta war Google Play ha kaout ur rakmoned d\'an arc\'hwelioù nevez d\'an drein difaziet</string>
   <string name="_2fa_code">Kod 2FA</string>
   <string name="logout_verification">Sur oc\'h e fell deoc\'h digevreañ ?</string>
-  <string name="commons_logo">Logo Commons</string>
-  <string name="commons_website">Lec\'hienn web Commons</string>
-  <string name="commons_facebook">Pajenn Facebook Commons</string>
-  <string name="commons_github">Kod mammenn Github Commons</string>
   <string name="mediaimage_failed">C\'hwitadenn war skeudenn ar media</string>
   <string name="no_subcategory_found">Isrummad ebet kavet</string>
   <string name="no_parentcategory_found">Rummad tad ebet kavet</string>
@@ -237,7 +239,6 @@
   <string name="error_loading_images">Ur fazi zo c\'hoarvezet p\'eo bet karget ar skeudennoù.</string>
   <string name="image_uploaded_by">Enporzhiet gant:%1$s</string>
   <string name="block_notification">Stanket oc\'h bet ha ne c\'hallit ket mui kemmañ war Commons</string>
-  <string name="appwidget_img">Skeudenn an deiz</string>
   <string name="app_widget_heading">Skeudenn an deiz</string>
   <string name="menu_search_button">Klask</string>
   <string name="search_commons">Klask e Commons</string>
@@ -275,7 +276,6 @@
   <string name="read_notifications" fuzzy="true">Kemennoù(diellaouet)</string>
   <string name="next">War-lerc\'h</string>
   <string name="previous">Kent</string>
-  <string name="submit">Kas</string>
   <string name="upload_title_duplicate" fuzzy="true">Ur restr gant an anv %1$s zo anezhi. Ha sur eo hoc\'h eus c\'hoant da genderc\'hel ?</string>
   <string name="title_page_bookmarks_pictures">Skeudennoù</string>
   <string name="title_page_bookmarks_locations">Lec\'hiadurioù</string>

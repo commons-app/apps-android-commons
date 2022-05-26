@@ -9,6 +9,11 @@
 * हिमाल सुबेदी
 -->
 <resources>
+  <string name="commons_facebook">कमन्सकाे फेसबुक पृष्ठ</string>
+  <string name="commons_logo">कमन्सकाे लाेगाे</string>
+  <string name="commons_website">कमन्सकाे वेबसाइट</string>
+  <string name="submit">बुझाउनुहोस्</string>
+  <string name="appwidget_img">दिनकाे उत्कृष्ट तस्वीर</string>
   <string name="share_license_summary" fuzzy="true">यी तस्वीरहरू  %1$s अनुमतिपत्र अनुसार प्राप्त हुनेछ</string>
   <string name="navigation_item_explore">अन्वेषण</string>
   <string name="preference_category_appearance">स्वरूप</string>
@@ -137,9 +142,6 @@
   <string name="media_detail_coordinates">अक्षाङ्शहरू</string>
   <string name="media_detail_coordinates_empty">कुनै उपलब्ध गराइएकाे छैन</string>
   <string name="logout_verification">के तपाई निर्गमन गर्न चाहानुहुन्छ?</string>
-  <string name="commons_logo">कमन्सकाे लाेगाे</string>
-  <string name="commons_website">कमन्सकाे वेबसाइट</string>
-  <string name="commons_facebook">कमन्सकाे फेसबुक पृष्ठ</string>
   <string name="no_subcategory_found">कुनैपनि उपश्रेणीहरू फेला परेनन्</string>
   <string name="no_parentcategory_found">कुनैपनि अभिभावक श्रेणीहरू फेला परेन</string>
   <string name="welcome_image_welcome_wikipedia">विकिपिडियामा स्वागत छ</string>
@@ -180,7 +182,6 @@
   <string name="no_images_found">कुनैपनि तस्वीर फेला परेन</string>
   <string name="block_notification_title">निषेधित</string>
   <string name="block_notification">तपाईलाई कमन्स सम्पादन गर्नबाट प्रतिबन्ध गरिएको छ</string>
-  <string name="appwidget_img">दिनकाे उत्कृष्ट तस्वीर</string>
   <string name="app_widget_heading">दिनकाे उत्कृष्ट तस्वीर</string>
   <string name="menu_search_button">खाेज्नुहाेस्</string>
   <string name="search_commons">कमन्समा खाेज्नुहाेस्</string>
@@ -213,7 +214,6 @@
   <string name="storage_permission">भण्डारण अनुमति</string>
   <string name="next">अर्को</string>
   <string name="previous">अघिल्लो</string>
-  <string name="submit">बुझाउनुहोस्</string>
   <string name="title_page_bookmarks_pictures">तस्वीरहरू</string>
   <string name="title_page_bookmarks_locations">स्थानहरू</string>
   <string name="provider_bookmarks">पुस्तक चिनोहरू</string>

@@ -12,6 +12,12 @@
 * XVEC
 -->
 <resources>
+  <string name="commons_facebook">Pàgina del Facebook del Commons</string>
+  <string name="commons_github">Codi font del Commons a GitHub</string>
+  <string name="commons_logo">Logo de Commons</string>
+  <string name="commons_website">Lloc web del Commons</string>
+  <string name="submit">Envia</string>
+  <string name="appwidget_img">Imatge del dia</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">s\'està carregant %1$d fitxer</item>
     <item quantity="other">s\'estan carregant %1$d fitxers</item>
@@ -175,10 +181,6 @@
   <string name="become_a_tester_title">Proveu la versió beta</string>
   <string name="_2fa_code">Codi 2FA</string>
   <string name="logout_verification">Realment voleu finalitzar la sessió?</string>
-  <string name="commons_logo">Logo de Commons</string>
-  <string name="commons_website">Lloc web del Commons</string>
-  <string name="commons_facebook">Pàgina del Facebook del Commons</string>
-  <string name="commons_github">Codi font del Commons a GitHub</string>
   <string name="mediaimage_failed">Ha fallat la imatge multimèdia</string>
   <string name="no_subcategory_found">No s\'han trobat subcategories</string>
   <string name="no_parentcategory_found">No s\'ha trobat cap categoria pare</string>
@@ -259,7 +261,6 @@
   <string name="image_uploaded_by">Carregada per: %1$s</string>
   <string name="block_notification_title">Blocat</string>
   <string name="block_notification">Esteu blocat d\'editar a Commons</string>
-  <string name="appwidget_img">Imatge del dia</string>
   <string name="app_widget_heading">Imatge del dia</string>
   <string name="menu_search_button">Cerca</string>
   <string name="search_commons">Cerca a Commons</string>
@@ -325,7 +326,6 @@
   <string name="step_count">Pas %1$d de %2$d: %3$s</string>
   <string name="next">Següent</string>
   <string name="previous">Anterior</string>
-  <string name="submit">Envia</string>
   <string name="upload_title_duplicate">Ja existeix un fitxer amb el nom %1$s. Segur que voleu procedir?\n\nNota: S\'afegirà un sufix adequat al nom del fitxer automàticament.</string>
   <string name="title_page_bookmarks_pictures">Imatges</string>
   <string name="title_page_bookmarks_locations">Ubicacions</string>

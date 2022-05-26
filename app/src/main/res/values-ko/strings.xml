@@ -20,6 +20,19 @@
 * 아라
 -->
 <resources>
+  <string name="commons_facebook">공용 페이스북 페이지</string>
+  <string name="commons_github">공용 GitHub 소스 코드</string>
+  <string name="commons_logo">공용 로고</string>
+  <string name="commons_website">공용 웹사이트</string>
+  <string name="submit">제출</string>
+  <string name="add_new_contribution">새 기여 추가</string>
+  <string name="show_captions">캡션</string>
+  <string name="row_item_language_description">언어 설명</string>
+  <string name="row_item_caption">캡션</string>
+  <string name="show_captions_description">설명</string>
+  <string name="nearby_row_image">이미지</string>
+  <string name="nearby_all">모두</string>
+  <string name="appwidget_img">오늘의 이미지</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d개의 파일을 올리는 중</item>
     <item quantity="other">%1$d개의 파일을 올리는 중</item>
@@ -199,10 +212,6 @@
   <string name="become_a_tester_description">구글 플레이 베타 채널에서 메일 발송을 허가해서 새로운 기능이나 버그 수정에 대한 정보를 빨리 얻어보세요</string>
   <string name="_2fa_code">2FA 코드</string>
   <string name="logout_verification">정말 로그아웃하시겠습니까?</string>
-  <string name="commons_logo">공용 로고</string>
-  <string name="commons_website">공용 웹사이트</string>
-  <string name="commons_facebook">공용 페이스북 페이지</string>
-  <string name="commons_github">공용 GitHub 소스 코드</string>
   <string name="mediaimage_failed">미디어 그림 실패</string>
   <string name="no_subcategory_found">하위 분류가 없습니다</string>
   <string name="no_parentcategory_found">부모 분류가 없습니다</string>
@@ -289,7 +298,6 @@
   <string name="image_uploaded_by">올린이: %1$s</string>
   <string name="block_notification_title">차단됨</string>
   <string name="block_notification">공용 편집이 차단되어 있습니다</string>
-  <string name="appwidget_img">오늘의 이미지</string>
   <string name="app_widget_heading">오늘의 이미지</string>
   <string name="menu_search_button">검색</string>
   <string name="search_commons">공용 검색</string>
@@ -370,7 +378,6 @@
   <string name="step_count">단계 %2$d 중 %1$d: %3$s</string>
   <string name="next">다음</string>
   <string name="previous">이전</string>
-  <string name="submit">제출</string>
   <string name="upload_title_duplicate">%1$s의 파일 이름이 존재합니다. 계속하시겠습니까?\n\n주의: 자동적으로 파일 이름에 알맞는 접미사가 붙게 됩니다.</string>
   <string name="map_application_missing">장치에서 호환되는 지도 애플리케이션을 찾지 못했습니다. 이 기능을 사용하려면 지도 애플리케이션을 설치해 주십시오.</string>
   <string name="title_page_bookmarks_pictures">사진</string>

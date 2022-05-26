@@ -32,6 +32,12 @@
 * درفش کاویانی
 -->
 <resources>
+  <string name="commons_facebook">صفحهٔ فیس‌بوک ویکی‌انبار</string>
+  <string name="commons_github">صفحهٔ کدهای گیت‌هاب ویکی‌انبار</string>
+  <string name="commons_logo">نشان ویکی‌انبار</string>
+  <string name="commons_website">وب‌سایت ویکی‌انبار</string>
+  <string name="submit">ارسال</string>
+  <string name="appwidget_img">تصویر روز</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d پرونده در حال بارگذاری</item>
     <item quantity="other">%1$d پرونده در حال بارگذاری</item>
@@ -205,10 +211,6 @@
   <string name="become_a_tester_description">به گروه آزمایشی ما در گوگل‌پلی بپیوندید و از خصوصیات جدید و خطاهای رفع‌شده زودتر از دیگران برخوردار شوید.</string>
   <string name="_2fa_code">کد 2FA</string>
   <string name="logout_verification">آیا واقعاً قصد خروج از سامانه را دارید؟</string>
-  <string name="commons_logo">نشان ویکی‌انبار</string>
-  <string name="commons_website">وب‌سایت ویکی‌انبار</string>
-  <string name="commons_facebook">صفحهٔ فیس‌بوک ویکی‌انبار</string>
-  <string name="commons_github">صفحهٔ کدهای گیت‌هاب ویکی‌انبار</string>
   <string name="mediaimage_failed">خطای تصویر رسانه</string>
   <string name="no_subcategory_found">هیچ زیررده‌ای یافت نشد</string>
   <string name="no_parentcategory_found">هیچ رده مادری یافت نشد</string>
@@ -291,7 +293,6 @@
   <string name="image_uploaded_by">بارگذاری‌شده توسط: %1$s</string>
   <string name="block_notification_title">بسته شده</string>
   <string name="block_notification">شما برای ویرایش در ویکی‌انبار قطع دسترسی شدید</string>
-  <string name="appwidget_img">تصویر روز</string>
   <string name="app_widget_heading">تصویر روز</string>
   <string name="menu_search_button">جستجو</string>
   <string name="search_commons">جستجوی ویکی‌انبار</string>
@@ -356,7 +357,6 @@
   <string name="step_count" fuzzy="true">گام %1$d از %2$d</string>
   <string name="next">بعدی</string>
   <string name="previous">قبلی</string>
-  <string name="submit">ارسال</string>
   <string name="upload_title_duplicate" fuzzy="true">پرونده‌ای با نام %1$s وجود دارد. آیا اطمینان دارید که می‌خواهید ادامه دهید؟</string>
   <string name="title_page_bookmarks_pictures">تصویرها</string>
   <string name="title_page_bookmarks_locations">مکان‌ها</string>

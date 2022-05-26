@@ -6,6 +6,12 @@
 * Uchup19
 -->
 <resources>
+  <string name="commons_facebook">Kaca Facebook Commons</string>
+  <string name="commons_github">Kode Sumber Github Commons</string>
+  <string name="commons_logo">Logo Commons</string>
+  <string name="commons_website">Situs wéb Commons</string>
+  <string name="submit">Kirim</string>
+  <string name="appwidget_img">Gambar poé ieu</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">ngunjal %1$d berkas</item>
     <item quantity="other">ngunjal %1$d berkas</item>
@@ -191,10 +197,6 @@
   <string name="become_a_tester_description">Pilihan asup kana saluran béta kami di Google Play sarta meunangkeun aksés munggaran pikeun fitur anyar jeung pameneran kutu</string>
   <string name="_2fa_code">Kode 2FA</string>
   <string name="logout_verification">Yakin anjeun rék kaluar?</string>
-  <string name="commons_logo">Logo Commons</string>
-  <string name="commons_website">Situs wéb Commons</string>
-  <string name="commons_facebook">Kaca Facebook Commons</string>
-  <string name="commons_github">Kode Sumber Github Commons</string>
   <string name="mediaimage_failed">Gambar Média Gagal</string>
   <string name="no_subcategory_found">Euweuh subkategorian</string>
   <string name="no_parentcategory_found">Euweuh kategorian</string>
@@ -276,7 +278,6 @@
   <string name="image_uploaded_by">Diunjal ku: %1$s</string>
   <string name="block_notification_title">Dipeungpeuk</string>
   <string name="block_notification">Anjeung dipeungpeuk tina ngédit Commons</string>
-  <string name="appwidget_img">Gambar poé ieu</string>
   <string name="app_widget_heading">Gambar poé ieu</string>
   <string name="menu_search_button">Paluruh</string>
   <string name="search_commons">Paluruh Commons</string>
@@ -339,7 +340,6 @@
   <string name="storage_permission">Idin Panyimpenan</string>
   <string name="next">Saterusna</string>
   <string name="previous">Saméméhna</string>
-  <string name="submit">Kirim</string>
   <string name="title_page_bookmarks_pictures">Gambar</string>
   <string name="title_page_bookmarks_locations">Perenah</string>
   <string name="menu_bookmark">Tambah/Piceun tatanda buku</string>

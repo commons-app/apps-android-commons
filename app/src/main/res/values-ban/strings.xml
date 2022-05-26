@@ -4,6 +4,20 @@
 * Joseagush
 -->
 <resources>
+  <string name="commons_facebook">Kaca Facebook Commons</string>
+  <string name="commons_github">Kode Wit Commons ring Github</string>
+  <string name="commons_logo">Logo Commons</string>
+  <string name="commons_website">Situs Commons</string>
+  <string name="submit">Kumpulang</string>
+  <string name="add_contribution_from_camera">Nambah kontributor saking kaméra</string>
+  <string name="add_contribution_from_photos">Nambah kontributor saking poto</string>
+  <string name="show_captions">Sesirah</string>
+  <string name="row_item_language_description">Déskripsi basa</string>
+  <string name="row_item_caption">Sesirah</string>
+  <string name="show_captions_description">Déskripsi</string>
+  <string name="nearby_row_image">Gambar</string>
+  <string name="nearby_all">Makejang</string>
+  <string name="appwidget_img">Gambar rahina mangkin</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d berkas kaunggah</item>
     <item quantity="other">%1$d berkas kaunggah</item>
@@ -164,10 +178,6 @@
   <string name="media_detail_coordinates_empty">Tan kaicain</string>
   <string name="_2fa_code">Kode O2F</string>
   <string name="logout_verification">Napiké ragané yakti jagi medal log?</string>
-  <string name="commons_logo">Logo Commons</string>
-  <string name="commons_website">Situs Commons</string>
-  <string name="commons_facebook">Kaca Facebook Commons</string>
-  <string name="commons_github">Kode Wit Commons ring Github</string>
   <string name="welcome_image_mount_zao">Gunung Zao</string>
   <string name="welcome_image_llamas">Llama</string>
   <string name="welcome_image_rainbow_bridge">Titi Kakuwung</string>
@@ -223,7 +233,6 @@
   <string name="no_images_found">Gambar ten katemu!</string>
   <string name="image_uploaded_by">Kaunggah olih: %1$s</string>
   <string name="block_notification_title">Kacadel</string>
-  <string name="appwidget_img">Gambar rahina mangkin</string>
   <string name="app_widget_heading">Gambar rahina mangkin</string>
   <string name="menu_search_button">Rereh</string>
   <string name="search_commons">Rereh Commons</string>
@@ -261,7 +270,6 @@
   <string name="step_count">Langkat %1$d saking %2$d: %3$s</string>
   <string name="next">Salanturné</string>
   <string name="previous">Sadurungné</string>
-  <string name="submit">Kumpulang</string>
   <string name="title_page_bookmarks_pictures">Gambar</string>
   <string name="title_page_bookmarks_locations">Genah</string>
   <string name="back_button_warning">Wangdé Unggah</string>
