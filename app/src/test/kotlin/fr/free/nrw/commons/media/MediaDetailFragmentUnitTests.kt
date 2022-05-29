@@ -468,6 +468,25 @@ class MediaDetailFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
+    fun testGetDescriptionsWithLongSpaces() {
+        `when`(media.filename).thenReturn("")
+        val method: Method = MediaDetailFragment::class.java.getDeclaredMethod("getDescriptions", String::class.java)
+        method.isAccessible = true
+        val s = "=={{int:filedesc}}==\n" +
+                "{{Information\n" +
+                "|Description   ={{en|1=The interior of Sacred Heart RC Church, Wimbledon, London.}}\n" +
+                "|Source        ={{own}}\n" +
+                "|Author        =[[User:Diliff|Diliff]]\n" +
+                "|Date          =2015-02-17\n" +
+                "|Permission    ={{Diliff/Licensing}}\n" +
+                "|other_versions=\n" +
+                "}}"
+        val map = linkedMapOf("en" to "The interior of Sacred Heart RC Church, Wimbledon, London.")
+        Assert.assertEquals(map, method.invoke(fragment, s))
+    }
+
+    @Test
+    @Throws(Exception::class)
     fun testGetDescriptionList() {
         `when`(media.filename).thenReturn("")
         val method: Method = MediaDetailFragment::class.java.getDeclaredMethod(

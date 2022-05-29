@@ -94,6 +94,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
@@ -914,19 +916,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
      * @return LinkedHashMap<LanguageCode,Description>
      */
     private LinkedHashMap<String,String> getDescriptions(String s) {
-        // trim spaces next to "=" and "|"
-        s = s.replace(" =", "=").replace(" |", "|").replace("= ","=").replace("| ","|");
-        int descriptionIndex = s.indexOf("description=");
-        if(descriptionIndex == -1){
-            descriptionIndex = s.indexOf("Description=");
+        final Pattern pattern = Pattern.compile("[dD]escription *=(.*?)\n *\\|", Pattern.DOTALL);
+        final Matcher matcher = pattern.matcher(s);
+        String description = null;
+        if (matcher.find()) {
+            description = matcher.group();
         }
-
-        if( descriptionIndex == -1 ){
+        if(description == null){
             return new LinkedHashMap<>();
         }
-        final String descriptionToEnd = s.substring(descriptionIndex+12);
-        final int descriptionEndIndex = descriptionToEnd.indexOf("\n|");
-        final String description = s.substring(descriptionIndex+12, descriptionIndex+12+descriptionEndIndex);
 
         final LinkedHashMap<String,String> descriptionList = new LinkedHashMap<>();
 
