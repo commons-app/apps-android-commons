@@ -28,6 +28,11 @@
   <string name="commons_logo">Commons-logo</string>
   <string name="commons_website">Commons-verkkosivu</string>
   <string name="submit">Lähetä</string>
+  <string name="show_captions">Kuvatekstit</string>
+  <string name="row_item_caption">Kuvateksti</string>
+  <string name="show_captions_description">Kuvaus</string>
+  <string name="nearby_row_image">Kuva</string>
+  <string name="nearby_all">Kaikki</string>
   <string name="appwidget_img">Päivän kuva</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">1 tiedosto tallentuu</item>

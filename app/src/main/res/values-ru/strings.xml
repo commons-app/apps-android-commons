@@ -44,6 +44,9 @@
   <string name="commons_website">Веб-сайт Викисклада</string>
   <string name="exit_location_picker">Выйти из окна выбора местоположения</string>
   <string name="submit">Отправить</string>
+  <string name="row_item_caption">Подпись</string>
+  <string name="show_captions_description">Описание</string>
+  <string name="nearby_row_image">Изображение</string>
   <string name="appwidget_img">Изображение дня</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d файл загружается</item>

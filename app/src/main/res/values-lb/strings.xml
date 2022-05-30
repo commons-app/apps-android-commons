@@ -9,6 +9,10 @@
   <string name="commons_logo">Commons-Logo</string>
   <string name="commons_website">Internetsite vu Commons</string>
   <string name="submit">Späicheren</string>
+  <string name="row_item_language_description">Sprooch-Beschreiwung</string>
+  <string name="show_captions_description">Beschreiwung</string>
+  <string name="nearby_row_image">Bild</string>
+  <string name="nearby_all">All</string>
   <string name="appwidget_img">Bild vum Dag</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">ee Fichier eroplueden</item>

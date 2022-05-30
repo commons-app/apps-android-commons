@@ -21,6 +21,7 @@
 -->
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="all">
   <string name="submit">{{Identical|Submit}}</string>
+  <string name="nearby_all">{{identical|All}}</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Status text about number of uploads left.\n* %1$d represents number of uploads left, including current one\n</item>
     <item quantity="other">Status text about number of uploads left.\n* %1$d represents number of uploads left, including current one\n</item>

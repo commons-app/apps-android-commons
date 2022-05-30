@@ -14,6 +14,7 @@
 * Nuevo Paso
 * Ohw0zuz4
 * Revi
+* Theshinster123
 * Ykhwong
 * YuzaTea
 * 그냥기여자
@@ -25,13 +26,18 @@
   <string name="commons_logo">공용 로고</string>
   <string name="commons_website">공용 웹사이트</string>
   <string name="submit">제출</string>
+  <string name="add_another_description">다른 설명 추가</string>
   <string name="add_new_contribution">새 기여 추가</string>
+  <string name="add_contribution_from_camera">카메라에서 기여 참가</string>
+  <string name="add_contribution_from_photos">사진에서 기여 참가</string>
+  <string name="add_contribution_from_contributions_gallery">이전 기여 갤러리에서 기여 참가</string>
   <string name="show_captions">캡션</string>
   <string name="row_item_language_description">언어 설명</string>
   <string name="row_item_caption">캡션</string>
   <string name="show_captions_description">설명</string>
   <string name="nearby_row_image">이미지</string>
   <string name="nearby_all">모두</string>
+  <string name="nearby_filter_search">검색 뷰</string>
   <string name="appwidget_img">오늘의 이미지</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d개의 파일을 올리는 중</item>
