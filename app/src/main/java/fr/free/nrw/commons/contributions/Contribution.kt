@@ -41,7 +41,8 @@ data class Contribution constructor(
     var dateModified: Date? = null,
     var hasInvalidLocation : Int =  0,
     var contentUri: Uri? = null,
-    var countryCode : String? = null
+    var countryCode : String? = null,
+    var imageSHA1 : String? = null
 ) : Parcelable {
 
     fun completeWith(media: Media): Contribution {
@@ -52,7 +53,8 @@ data class Contribution constructor(
         item: UploadItem,
         sessionManager: SessionManager,
         depictedItems: List<DepictedItem>,
-        categories: List<String>
+        categories: List<String>,
+        imageSHA1: String
     ) : this(
         Media(
             formatCaptions(item.uploadMediaDetails),
@@ -67,7 +69,8 @@ data class Contribution constructor(
         dateCreatedSource = "",
         depictedItems = depictedItems,
         wikidataPlace = from(item.place),
-        contentUri = item.contentUri
+        contentUri = item.contentUri,
+        imageSHA1 = imageSHA1
     )
 
     /**
