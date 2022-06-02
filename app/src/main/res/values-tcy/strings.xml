@@ -13,6 +13,8 @@
   <string name="commons_logo">ಕಾಮನ್ಸ್ ಲೋಗೋ</string>
   <string name="commons_website">ಕಾಮನ್ಸ್ ವೆಬ್ಸೈಟ್</string>
   <string name="submit">ಒಪ್ಪಿಸಾಲೆ</string>
+  <string name="nearby_row_image">ಚಿತ್ರೊ</string>
+  <string name="nearby_all">ಮಾತಾ</string>
   <string name="appwidget_img">ದಿನೊತ್ತ ಪಟ</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d ಕಡತ ಅಪ್ಲೊಡ್ ಆವೊಂದುಂಡು</item>
@@ -61,7 +63,7 @@
   <string name="uploading_started">ದಿಂಜಪುನಾ ಸುರು ಅಂಡ್!</string>
   <string name="upload_completed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಆಂಡ್!</string>
   <string name="upload_completed_notification_text">ಇರೆನ ಅಪ್ಲೋಡ್ ತೂಯೆರೆ ಒತ್ತುಲೆ</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s ಅಪ್ಲೋಡ್ ಸುರು ಆವೊಂದುಂಡು</string>
+  <string name="upload_progress_notification_title_start">%s ಅಪ್ಲೋಡ್ ಸುರು ಆವೊಂದುಂಡು</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ಅಪ್ಲೋಡ್ ಆವೊಂದುಂಡು</string>
   <string name="upload_progress_notification_title_finishing">%1$s ಅಪ್ಲೋಡ್ ಕೈದ್ ಆವೊಂದುಂಡು.</string>
   <string name="upload_failed_notification_title" fuzzy="true">%1$s ಅಪ್ಲೋಡ್ ಸರಿ ಆತಿಜಿ</string>
