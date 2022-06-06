@@ -2,6 +2,7 @@
 <!-- Authors:
 * Ali1
 * Antime
+* Asma
 * Azouz.anis
 * ButterflyOfFire
 * Claw eg
@@ -28,6 +29,15 @@
   <string name="commons_logo">شعار كومنز</string>
   <string name="commons_website">موقع كومنز</string>
   <string name="submit">إرسال</string>
+  <string name="add_another_description">أضف وصفًا آخر</string>
+  <string name="add_new_contribution">أضف مساهمة جديدة</string>
+  <string name="show_captions">نصوص توضيحية</string>
+  <string name="row_item_language_description">وصف اللغة</string>
+  <string name="row_item_caption">نصوص توضيحية</string>
+  <string name="show_captions_description">وصف</string>
+  <string name="nearby_row_image">صورة</string>
+  <string name="nearby_all">الكل</string>
+  <string name="nearby_filter_search">طريقة عرض البحث</string>
   <string name="appwidget_img">صورة اليوم</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="zero">%1$d ملف جاري رفعه</item>

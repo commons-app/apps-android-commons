@@ -554,6 +554,9 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Не удалось добавить категории.</string>
   <string name="category_edit_button_text">Обновить категории</string>
+  <string name="depictions_edit_helper_make_edit_toast">Пытаюсь обновить изображения.</string>
+  <string name="depictions_edit_helper_show_edit_title">Редактировать изображения</string>
+  <string name="depictions_edit_helper_edit_message_else">Не удалось добавить изображения.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Попытка обновить координаты.</string>
   <string name="coordinates_edit_helper_show_edit_title">Обновление координат</string>
   <string name="description_edit_helper_show_edit_title">Обновление описания</string>
@@ -705,11 +708,14 @@
   <string name="advanced_options">Расширенные настройки</string>
   <string name="apply">Применить</string>
   <string name="reset">Сбросить</string>
+  <string name="location_message">Данные о местоположении помогают редакторам Wiki найти вашу фотографию, что делает ее гораздо более полезной.\nУ ваших последних загрузках нет местоположения.\nМы предлагаем вам включить определение местоположения в настройках приложения камеры.\nСпасибо за загрузку!</string>
   <string name="no_location_found_title">Местоположение не найдено</string>
+  <string name="no_location_found_message">Как насчет добавления места, где было сделано это изображение?\nДанные о местоположении помогают редакторам Wiki найти вашу фотографию, что делает ее гораздо более полезной.\nБлагодарим вас!</string>
   <string name="add_location">Добавить местоположение</string>
   <string name="feedback_sharing_data_alert">Пожалуйста, удалите из этого письма любую информацию, которой вы не желаете делиться с другими. Кроме того, имейте в виду, что адрес вашей электронной почты, с которого вы отправляете сообщения, а также связанное с ним имя и изображение профиля, будут видны всем.</string>
   <string name="explore_map_details">Подробности</string>
   <string name="copyright_popup">Пожалуйста, загружайте только те фотографии, которые вы сделали сами. Участники, загружающие защищённые авторским правом изображения, будут заблокированы. Это относится и к бета-флейвору. Спасибо за тестирование приложения!</string>
+  <string name="select_feedback_data_choice">Пожалуйста, не отмечайте любую информации, которой вы не хотите делиться публично.</string>
   <string name="api_level">Уровень API</string>
   <string name="android_version">Версия Андроида</string>
   <string name="device_manufacturer">Производитель устройства</string>
