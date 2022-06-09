@@ -79,6 +79,7 @@
   <string name="display_list_button">Listar</string>
   <string name="contributions_subtitle_zero">(Nula arkivo sendita til nun)</string>
   <string name="categories_not_found">Nula kategorio trovita, portanta %1$s</string>
+  <string name="categories_activity_title">Kategorii</string>
   <string name="title_activity_settings">Preferaji</string>
   <string name="title_activity_signup">Enirez</string>
   <string name="title_activity_featured_images">Remarkinda imaji</string>
