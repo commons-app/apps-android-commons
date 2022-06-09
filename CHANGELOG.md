@@ -1,5 +1,9 @@
 # Wikimedia Commons for Android
 
+## v4.0.1
+- Fixed bug with no browser found
+- Updated Mapbox SDK to fix hamburger crash
+
 ## v4.0.0
 - Added map showing nearby Commons pictures
 - Added custom SPARQL queries
