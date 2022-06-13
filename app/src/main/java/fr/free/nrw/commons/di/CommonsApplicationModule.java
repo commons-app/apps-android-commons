@@ -17,6 +17,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionDao;
+import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao;
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao;
 import fr.free.nrw.commons.customselector.ui.selector.ImageFileLoader;
 import fr.free.nrw.commons.data.DBOpenHelper;
@@ -288,6 +289,14 @@ public class CommonsApplicationModule {
     @Provides
     public UploadedStatusDao providesUploadedStatusDao(AppDatabase appDatabase) {
         return appDatabase.UploadedStatusDao();
+    }
+
+    /**
+     * Get the reference of NotForUploadStatus class.
+     */
+    @Provides
+    public NotForUploadStatusDao providesNotForUploadStatusDao(AppDatabase appDatabase) {
+        return appDatabase.NotForUploadStatusDao();
     }
 
     @Provides

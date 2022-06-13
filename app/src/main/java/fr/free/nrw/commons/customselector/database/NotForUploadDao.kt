@@ -7,7 +7,7 @@ import androidx.room.*
  * Dao class for Not For Upload
  */
 @Dao
-abstract class NotForUploadDao {
+abstract class NotForUploadStatusDao {
 
     /**
      * Insert into Not For Upload status.
@@ -21,3 +21,5 @@ abstract class NotForUploadDao {
     @Delete
     abstract suspend fun delete(notForUploadStatus: NotForUploadStatus)
 }
+
+
