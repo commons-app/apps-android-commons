@@ -19,6 +19,7 @@
 * Sujan
 * Sushi
 * Tacsipacsi
+* ThisCarthing
 * Tobi 406
 * Ubahnverleih
 * Umherirrender
@@ -35,6 +36,7 @@
   <string name="exit_location_picker">Beenden der Ortswahl</string>
   <string name="submit">Einreichen</string>
   <string name="add_another_description">Weitere Beschreibung hinzufügen</string>
+  <string name="row_item_language_description">Sprachbeschreibung</string>
   <string name="show_captions_description">Beschreibung</string>
   <string name="nearby_row_image">Bild</string>
   <string name="nearby_all">Alle</string>
