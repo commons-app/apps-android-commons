@@ -11,6 +11,7 @@ import android.view.Window
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
@@ -128,7 +129,7 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
         val back : ImageButton = findViewById(R.id.back)
         back.setOnClickListener { onBackPressed() }
 
-        val done : ImageButton = findViewById(R.id.done)
+        val done : Button = findViewById(R.id.upload)
         done.setOnClickListener { onDone() }
     }
 
@@ -154,8 +155,8 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
     override fun onSelectedImagesChanged(selectedImages: ArrayList<Image>) {
         viewModel.selectedImages.value = selectedImages
 
-        val done : ImageButton = findViewById(R.id.done)
-        done.visibility = if (selectedImages.isEmpty()) View.INVISIBLE else View.VISIBLE
+        val bottomLayout : ConstraintLayout = findViewById(R.id.bottom_layout)
+        bottomLayout.visibility = if (selectedImages.isEmpty()) View.GONE else View.VISIBLE
     }
 
     /**

@@ -20,6 +20,32 @@ abstract class NotForUploadStatusDao {
      */
     @Delete
     abstract suspend fun delete(notForUploadStatus: NotForUploadStatus)
+
+    /**
+     * Query Not For Upload status with image sha1.
+     */
+    @Query("SELECT * FROM not_for_upload_table WHERE imageSHA1 = (:imageSHA1) ")
+    abstract suspend fun getFromImageSHA1(imageSHA1 : String) : NotForUploadStatus?
+
+    /**
+     * Asynchronous image sha1 query.
+     */
+    suspend fun getNotForUploadFromImageSHA1(imageSHA1: String):NotForUploadStatus? {
+        return getFromImageSHA1(imageSHA1)
+    }
+
+    /**
+     * Deletion Not For Upload status with image sha1.
+     */
+    @Query("DELETE FROM not_for_upload_table WHERE imageSHA1 = (:imageSHA1) ")
+    abstract suspend fun deleteWithImageSHA1(imageSHA1 : String)
+
+    /**
+     * Asynchronous image sha1 deletion.
+     */
+    suspend fun deleteNotForUploadWithImageSHA1(imageSHA1: String) {
+        return deleteWithImageSHA1(imageSHA1)
+    }
 }
 
 

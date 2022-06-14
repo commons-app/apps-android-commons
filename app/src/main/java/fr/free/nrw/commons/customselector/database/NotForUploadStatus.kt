@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.customselector.database
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 /**
  * Entity class for Not For Upload status.
@@ -13,5 +12,10 @@ data class NotForUploadStatus(
      * Original image sha1.
      */
     @PrimaryKey
-    val imageSHA1 : String
+    val imageSHA1 : String,
+
+    /**
+     * imageSHA1 query result from API.
+     */
+    var imageResult : Boolean
 )
