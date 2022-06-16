@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Tumbuka Arch
+-->
+<resources>
+  <string name="crash_dialog_title">Commons yatondeka</string>
+  <string name="crash_dialog_text">Awe! Chinyake chasuzga!</string>
+  <string name="crash_dialog_comment_prompt">Tiphalilani ivo mwachitanga,ndipo mutitumile mu email.Vitivwilenge pakunozga!</string>
+  <string name="crash_dialog_ok_toast">Yewo chomene!</string>
+</resources>
