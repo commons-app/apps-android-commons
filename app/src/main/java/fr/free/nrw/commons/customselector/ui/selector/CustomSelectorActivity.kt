@@ -103,6 +103,15 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
             .commit()
         fetchData()
         setUpToolbar()
+        setUpBottomLayout()
+    }
+
+    /**
+     * Set up bottom layout
+     */
+    private fun setUpBottomLayout() {
+        val done : Button = findViewById(R.id.upload)
+        done.setOnClickListener { onDone() }
     }
 
     /**
@@ -128,9 +137,6 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
     private fun setUpToolbar() {
         val back : ImageButton = findViewById(R.id.back)
         back.setOnClickListener { onBackPressed() }
-
-        val done : Button = findViewById(R.id.upload)
-        done.setOnClickListener { onDone() }
     }
 
     /**

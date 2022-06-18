@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  >
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/bottom_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:visibility="gone"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
+
+    <Button
+      android:id="@+id/not_for_upload"
+      android:layout_width="@dimen/dimen_0"
+      android:layout_height="wrap_content"
+      android:text="@string/mark_as_not_for_upload"
+      android:textColor="@color/white"
+      android:visibility="visible"
+      android:layout_margin="@dimen/dimen_5"
+      app:layout_constraintBottom_toBottomOf="@id/bottom_layout"
+      app:layout_constraintEnd_toStartOf="@+id/guideline3"
+      app:layout_constraintStart_toStartOf="@id/bottom_layout"
+      app:layout_constraintTop_toTopOf="@id/bottom_layout" />
+
+    <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline3"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_percent="0.5" />
+
+    <Button
+      android:id="@+id/upload"
+      android:layout_width="@dimen/dimen_0"
+      android:layout_height="@dimen/dimen_0"
+      android:text="@string/upload"
+      android:textColor="@color/white"
+      android:visibility="visible"
+      android:layout_margin="@dimen/dimen_5"
+      app:layout_constraintBottom_toBottomOf="@id/bottom_layout"
+      app:layout_constraintEnd_toEndOf="@id/bottom_layout"
+      app:layout_constraintStart_toStartOf="@+id/guideline3"
+      app:layout_constraintTop_toTopOf="@id/bottom_layout" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</merge>
