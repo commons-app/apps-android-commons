@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.Uri
 import com.nhaarman.mockitokotlin2.*
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.customselector.model.Image
@@ -62,6 +63,9 @@ class ImageLoaderTest {
     private lateinit var uploadedStatusDao: UploadedStatusDao
 
     @Mock
+    private lateinit var notForUploadStatusDao: NotForUploadStatusDao
+
+    @Mock
     private lateinit var holder: ImageAdapter.ImageViewHolder
 
     @Mock
@@ -97,7 +101,8 @@ class ImageLoaderTest {
         MockitoAnnotations.initMocks(this)
 
         imageLoader =
-            ImageLoader(mediaClient, fileProcessor, fileUtilsWrapper, uploadedStatusDao, context)
+            ImageLoader(mediaClient, fileProcessor, fileUtilsWrapper, uploadedStatusDao,
+                notForUploadStatusDao, context)
         uploadedStatus= UploadedStatus(
             "testSha1",
             "testSha1",
