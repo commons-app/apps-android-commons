@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Gurulenin
+* Siddhan
 * Yuvipanda
 -->
 <resources>
   <string name="crash_dialog_title">பொதுவகம் செயலிழந்தது</string>
   <string name="crash_dialog_text">ஏதோ தவறாகியுள்ளது!</string>
-  <string name="crash_dialog_comment_prompt">நீங்கள் என்ன செய்கிறீர்கள் என்று எங்களிடம் கூறுங்கள், பின்னர் அதை எங்களுக்கு மின்னஞ்சல் மூலம் பகிரவும். அதை சரிசெய்ய எங்களுக்கு உதவும்!</string>
+  <string name="crash_dialog_comment_prompt">நீங்கள் என்ன செய்து கொண்டிருந்தீர்கள் என்று எங்களிடம் கூறுங்கள், பின்னர் அதை எங்களுக்கு மின்னஞ்சல் மூலம் பகிரவும். அதை சரிசெய்ய எங்களுக்கு உதவும்!</string>
   <string name="crash_dialog_ok_toast">நன்றி!</string>
 </resources>

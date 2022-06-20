@@ -15,7 +15,11 @@
   <string name="commons_github">Codul Sursă de la Commons Github</string>
   <string name="commons_logo">Logoul Commons</string>
   <string name="commons_website">Site-ul Commons</string>
+  <string name="exit_location_picker">Ieșiți din selectorul de locații</string>
   <string name="submit">Trimite</string>
+  <string name="add_another_description">Adaugă altă descriere</string>
+  <string name="nearby_row_image">Imagine</string>
+  <string name="nearby_all">Toate</string>
   <string name="appwidget_img">Imaginea zilei</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">1 fișier se încarcă</item>
@@ -70,6 +74,7 @@
   <string name="signup">Înregistrare</string>
   <string name="logging_in_title">Se conectează</string>
   <string name="logging_in_message">Vă rugăm să așteptați ...</string>
+  <string name="updating_caption_message">Vă rugăm să așteptați ...</string>
   <string name="login_success">Autentificare reușită!</string>
   <string name="login_failed">Autentificare nereușită!</string>
   <string name="upload_failed">Fișierul nu a fost găsit. Încercați cu un alt fișier.</string>
@@ -81,7 +86,7 @@
   <string name="upload_progress_notification_title_start">Se încarcă fișierul %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s se încarcă</string>
   <string name="upload_progress_notification_title_finishing">Se finalizează încărcarea fișierului %1$s</string>
-  <string name="upload_failed_notification_title" fuzzy="true">Încărcarea fișierului %1$s nu a reușit</string>
+  <string name="upload_failed_notification_title">Încărcarea fișierului %1$s nu a reușit</string>
   <string name="upload_paused_notification_title">Încărcarea fișierului %1$s a fost întreruptă</string>
   <string name="upload_failed_notification_subtitle">Atingeți pentru a vizualiza</string>
   <string name="upload_paused_notification_subtitle">Atingeți pentru a vizualiza</string>
@@ -439,7 +444,7 @@
   <string name="review_thanks_yes_button_text">Imaginea următoare</string>
   <string name="review_thanks_no_button_text">Da, de ce nu</string>
   <string name="skip_image_explanation">Dacă faceți click pe acest buton vă va oferi o altă imagine încărcată recent de pe Wikimedia Commons</string>
-  <string name="review_image_explanation" fuzzy="true">Puteți revizui imaginile și îmbunătăți calitatea Wikimedia Commons.\n  Cei patru parametri ai revizuirii sunt:\n  - Această imagine este în scopul de aplicare?\n  - Această imagine respectă regulile dreptului de autor?\n  - Această imagine este corect clasificată?\n  - Dacă totul merge bine, puteți, de asemenea, să îi mulțumiți contribuitorului.</string>
+  <string name="review_image_explanation">Puteți revizui imaginile și îmbunătăți calitatea Wikimedia Commons.\n  Cei patru parametri ai revizuirii sunt:\n  - Această imagine este în scopul de aplicare?\nCând atingeți Nu (în afara domeniului de aplicare), adăugați un format de nominalizare pentru ștergere la această imagine.\n  - Această imagine respectă regulile dreptului de autor?\nCând atingeți Nu (nu respectă regulile dreptului de autor), adăugați un format de nominalizare pentru ștergere la această imagine.\n  - Această imagine este corect clasificată?\nCând atingeți Nu (nu este clasificat corect), adăugați un format de solicitare de clasificare la această imagine.\n  - Dacă totul merge bine, puteți, de asemenea, să îi mulțumiți contribuitorului.</string>
   <string name="no_image">Nu s-au folosit imagini</string>
   <string name="no_image_reverted">Nici o imagine nu a fost anulată</string>
   <string name="no_image_uploaded">Nu au fost încărcate imagini</string>
