@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.Button
@@ -53,6 +54,12 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
      * View Model Factory.
      */
     @Inject lateinit var customSelectorViewModelFactory: CustomSelectorViewModelFactory
+
+    /**
+     * Image Loader class for database operations
+     */
+    @Inject
+    lateinit var imageLoader: ImageLoader
 
     /**
      * onCreate Activity, sets theme, initialises the view model, setup view.
@@ -112,6 +119,38 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
     private fun setUpBottomLayout() {
         val done : Button = findViewById(R.id.upload)
         done.setOnClickListener { onDone() }
+
+        val notForUpload : Button = findViewById(R.id.not_for_upload)
+        notForUpload.setOnClickListener{ onClickNotForUpload() }
+    }
+
+    /**
+     * Gets selected images and proceed for database operations
+     */
+    private fun onClickNotForUpload() {
+        val selectedImages = viewModel.selectedImages.value
+        if(selectedImages.isNullOrEmpty()) {
+            markAsNotForUpload(arrayListOf())
+            return
+        }
+        var i = 0
+        while (i < selectedImages.size) {
+            val path = selectedImages[i].path
+            val file = File(path)
+            if (!file.exists()) {
+                selectedImages.removeAt(i)
+                i--
+            }
+            i++
+        }
+        markAsNotForUpload(selectedImages)
+    }
+
+    /**
+     * Insert selected images in the database
+     */
+    private fun markAsNotForUpload(images: ArrayList<Image>) {
+        imageLoader.insertIntoNotForUpload(images)
     }
 
     /**
