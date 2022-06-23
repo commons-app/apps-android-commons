@@ -68,7 +68,7 @@
   <string name="upload_progress_notification_title_start">Munggahang berkas: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s kaunggah</string>
   <string name="upload_progress_notification_title_finishing">Muputang pangunggahan %1$s</string>
-  <string name="upload_failed_notification_title" fuzzy="true">Ngunggahin %1$s wangdé</string>
+  <string name="upload_failed_notification_title">Ngunggahang %1$s gagal</string>
   <string name="upload_paused_notification_title">Ngunggahin %1$s katunda</string>
   <string name="upload_failed_notification_subtitle">Gecek antuk nyingakin</string>
   <string name="upload_paused_notification_subtitle">Gecek antuk nyingakin</string>
