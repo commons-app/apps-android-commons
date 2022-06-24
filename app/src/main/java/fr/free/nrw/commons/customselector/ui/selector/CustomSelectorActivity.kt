@@ -72,10 +72,15 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
     @Inject
     lateinit var fileUtilsWrapper: FileUtilsWrapper
 
+    /**
+     * Coroutine Dispatchers and Scope.
+     */
     private val scope : CoroutineScope = MainScope()
-    private var defaultDispatcher : CoroutineDispatcher = Dispatchers.Default
     private var ioDispatcher : CoroutineDispatcher = Dispatchers.IO
 
+    /**
+     * Image Fragment instance
+     */
     var imageFragment: ImageFragment? = null
 
     /**
@@ -170,10 +175,16 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
         insertIntoNotForUpload(images)
     }
 
+    /**
+     * Initializing ImageFragment
+     */
     fun setOnDataListener(imageFragment: ImageFragment?) {
         this.imageFragment = imageFragment
     }
 
+    /**
+     * Insert images into not for upload
+     */
     fun insertIntoNotForUpload(images: java.util.ArrayList<Image>) {
         scope.launch {
             images.forEach {

@@ -117,6 +117,8 @@ class ImageAdapter(
         } else {
             if(holder.isItemUploaded()){
                 Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
+            } else if(holder.isItemNotForUpload()){
+                Toast.makeText(context, R.string.custom_selector_not_for_upload_image_text, Toast.LENGTH_SHORT).show()
             } else {
                 selectedImages.add(images[position])
                 notifyItemChanged(position, ImageSelectedOrUpdated())
@@ -194,6 +196,9 @@ class ImageAdapter(
             uploadedGroup.visibility = View.VISIBLE
         }
 
+        /**
+         * Item is not for upload view
+         */
         fun itemNotForUpload() {
             notForUploadGroup.visibility = View.VISIBLE
         }
@@ -203,12 +208,22 @@ class ImageAdapter(
         }
 
         /**
+         * Item is not for upload
+         */
+        fun isItemNotForUpload():Boolean {
+            return notForUploadGroup.visibility == View.VISIBLE
+        }
+
+        /**
          * Item Not Uploaded view.
          */
         fun itemNotUploaded() {
             uploadedGroup.visibility = View.GONE
         }
 
+        /**
+         * Item can be uploaded view
+         */
         fun itemForUpload() {
             notForUploadGroup.visibility = View.GONE
         }

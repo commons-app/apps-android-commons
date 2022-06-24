@@ -137,6 +137,9 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
         return root
     }
 
+    /**
+     * Attaching data listener
+     */
     override fun onAttach(activity: Activity) {
         super.onAttach(activity)
         try {
