@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.Button
@@ -14,12 +15,17 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.customselector.database.NotForUploadStatus
+import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.media.ZoomableActivity
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.upload.FileUtilsWrapper
+import kotlinx.coroutines.*
 import java.io.File
+import java.io.FileNotFoundException
 import javax.inject.Inject
 
 
@@ -53,6 +59,24 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
      * View Model Factory.
      */
     @Inject lateinit var customSelectorViewModelFactory: CustomSelectorViewModelFactory
+
+    /**
+     * NotForUploadStatus Dao class for database operations
+     */
+    @Inject
+    lateinit var notForUploadStatusDao: NotForUploadStatusDao
+
+    /**
+     * FileUtilsWrapper class to get imageSHA1 from uri
+     */
+    @Inject
+    lateinit var fileUtilsWrapper: FileUtilsWrapper
+
+    private val scope : CoroutineScope = MainScope()
+    private var defaultDispatcher : CoroutineDispatcher = Dispatchers.Default
+    private var ioDispatcher : CoroutineDispatcher = Dispatchers.IO
+
+    var imageFragment: ImageFragment? = null
 
     /**
      * onCreate Activity, sets theme, initialises the view model, setup view.
@@ -112,6 +136,76 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
     private fun setUpBottomLayout() {
         val done : Button = findViewById(R.id.upload)
         done.setOnClickListener { onDone() }
+
+        val notForUpload : Button = findViewById(R.id.not_for_upload)
+        notForUpload.setOnClickListener{ onClickNotForUpload() }
+    }
+
+    /**
+     * Gets selected images and proceed for database operations
+     */
+    private fun onClickNotForUpload() {
+        val selectedImages = viewModel.selectedImages.value
+        if(selectedImages.isNullOrEmpty()) {
+            markAsNotForUpload(arrayListOf())
+            return
+        }
+        var i = 0
+        while (i < selectedImages.size) {
+            val path = selectedImages[i].path
+            val file = File(path)
+            if (!file.exists()) {
+                selectedImages.removeAt(i)
+                i--
+            }
+            i++
+        }
+        markAsNotForUpload(selectedImages)
+    }
+
+    /**
+     * Insert selected images in the database
+     */
+    private fun markAsNotForUpload(images: ArrayList<Image>) {
+        insertIntoNotForUpload(images)
+    }
+
+    fun setOnDataListener(imageFragment: ImageFragment?) {
+        this.imageFragment = imageFragment
+    }
+
+    fun insertIntoNotForUpload(images: java.util.ArrayList<Image>) {
+        scope.launch {
+            images.forEach {
+                val imageSHA1 = getImageSHA1(it.uri)
+                notForUploadStatusDao.insert(
+                    NotForUploadStatus(
+                        imageSHA1,
+                        true
+                    )
+                )
+            }
+            imageFragment!!.refresh()
+            val bottomLayout : ConstraintLayout = findViewById(R.id.bottom_layout)
+            bottomLayout.visibility = View.GONE
+        }
+    }
+
+    /**
+     * Get image sha1 from uri, used to retrieve the original image sha1.
+     */
+    suspend fun getImageSHA1(uri: Uri): String {
+        return withContext(ioDispatcher) {
+
+            try {
+                val result = fileUtilsWrapper.getSHA1(contentResolver.openInputStream(uri))
+
+                result
+            } catch (e: FileNotFoundException){
+                e.printStackTrace()
+                ""
+            }
+        }
     }
 
     /**

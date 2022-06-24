@@ -3,6 +3,7 @@ package fr.free.nrw.commons.customselector.ui.selector
 import android.content.Context
 import android.net.Uri
 import androidx.exifinterface.media.ExifInterface
+import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.customselector.model.Image
@@ -45,6 +46,11 @@ class ImageLoader @Inject constructor(
      * UploadedStatusDao for cache query.
      */
     var uploadedStatusDao: UploadedStatusDao,
+
+    /**
+     * NotForUploadDao for database operations
+     */
+    var notForUploadStatusDao: NotForUploadStatusDao,
 
     /**
      * Context for coroutine.
@@ -106,6 +112,8 @@ class ImageLoader @Inject constructor(
                 return@launch
             }
 
+            val exists = notForUploadStatusDao.find(imageSHA1)
+
             if (result in arrayOf(Result.NOTFOUND, Result.INVALID) && sha1.isNotEmpty()) {
                 // Query original image.
                 result = querySHA1(imageSHA1)
@@ -122,6 +130,7 @@ class ImageLoader @Inject constructor(
             }
             if(mapHolderImage[holder] == image) {
                 if (result is Result.TRUE) holder.itemUploaded() else holder.itemNotUploaded()
+                if (exists > 0) holder.itemNotForUpload() else holder.itemForUpload()
             }
         }
     }

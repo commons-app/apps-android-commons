@@ -82,6 +82,23 @@
         android:visibility="gone"
         app:constraint_referenced_ids="uploaded_overlay,uploaded_overlay_icon"/>
 
+      <ImageView
+        android:id="@+id/not_for_upload_overlay_icon"
+        android:layout_width="@dimen/dimen_50"
+        android:layout_height="@dimen/dimen_50"
+        android:paddingBottom="@dimen/dimen_20"
+        android:paddingEnd="@dimen/dimen_20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:srcCompat="@drawable/not_for_upload"
+        />
+
+      <androidx.constraintlayout.widget.Group
+        android:id="@+id/not_for_upload_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="selected_overlay,not_for_upload_overlay_icon"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
   </androidx.cardview.widget.CardView>

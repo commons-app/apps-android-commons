@@ -139,6 +139,17 @@ class ImageAdapter(
     }
 
     /**
+     * Refresh the data in the adapter
+     */
+    fun refresh(newImages: List<Image>) {
+        selectedImages.clear()
+        images.clear()
+        selectedImages = arrayListOf()
+        init(newImages)
+        notifyDataSetChanged()
+    }
+
+    /**
      * Returns the total number of items in the data set held by the adapter.
      *
      * @return The total number of items in this adapter.
@@ -158,6 +169,7 @@ class ImageAdapter(
         val image: ImageView = itemView.findViewById(R.id.image_thumbnail)
         private val selectedNumber: TextView = itemView.findViewById(R.id.selected_count)
         private val uploadedGroup: Group = itemView.findViewById(R.id.uploaded_group)
+        private val notForUploadGroup: Group = itemView.findViewById(R.id.not_for_upload_group)
         private val selectedGroup: Group = itemView.findViewById(R.id.selected_group)
 
         /**
@@ -182,9 +194,14 @@ class ImageAdapter(
             uploadedGroup.visibility = View.VISIBLE
         }
 
+        fun itemNotForUpload() {
+            notForUploadGroup.visibility = View.VISIBLE
+        }
+
         fun isItemUploaded():Boolean {
             return uploadedGroup.visibility == View.VISIBLE
         }
+
         /**
          * Item Not Uploaded view.
          */
@@ -192,6 +209,9 @@ class ImageAdapter(
             uploadedGroup.visibility = View.GONE
         }
 
+        fun itemForUpload() {
+            notForUploadGroup.visibility = View.GONE
+        }
     }
 
     /**
