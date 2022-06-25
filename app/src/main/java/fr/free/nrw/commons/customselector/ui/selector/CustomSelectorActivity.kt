@@ -187,14 +187,30 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
      */
     fun insertIntoNotForUpload(images: java.util.ArrayList<Image>) {
         scope.launch {
-            images.forEach {
+            var allImagesAlreadyNotForUpload = false
+            images.forEach{
                 val imageSHA1 = getImageSHA1(it.uri)
-                notForUploadStatusDao.insert(
-                    NotForUploadStatus(
-                        imageSHA1,
-                        true
+                val exists = notForUploadStatusDao.find(imageSHA1)
+                if (exists < 0) {
+                    allImagesAlreadyNotForUpload = true
+                }
+            }
+
+            if(!allImagesAlreadyNotForUpload) {
+                images.forEach {
+                    val imageSHA1 = getImageSHA1(it.uri)
+                    notForUploadStatusDao.insert(
+                        NotForUploadStatus(
+                            imageSHA1,
+                            true
+                        )
                     )
-                )
+                }
+            } else {
+                images.forEach {
+                    val imageSHA1 = getImageSHA1(it.uri)
+                    notForUploadStatusDao.deleteNotForUploadWithImageSHA1(imageSHA1)
+                }
             }
             imageFragment!!.refresh()
             val bottomLayout : ConstraintLayout = findViewById(R.id.bottom_layout)
