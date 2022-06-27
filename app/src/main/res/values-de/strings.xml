@@ -14,6 +14,7 @@
 * Killarnee
 * ManuelFranz
 * Metalhead64
+* Nekky-chan
 * Ngschaider
 * Pyscowicz
 * Sujan
@@ -36,10 +37,19 @@
   <string name="exit_location_picker">Beenden der Ortswahl</string>
   <string name="submit">Einreichen</string>
   <string name="add_another_description">Weitere Beschreibung hinzufügen</string>
+  <string name="add_new_contribution">Neuen Beitrag hinzufügen</string>
+  <string name="add_contribution_from_camera">Beitrag von der Kamera hinzufügen</string>
+  <string name="add_contribution_from_photos">Beitrag aus Fotos hinzufügen</string>
+  <string name="add_contribution_from_contributions_gallery">Beitrag aus der Galerie früherer Beiträge hinzufügen</string>
+  <string name="show_captions">Beschriftungen</string>
   <string name="row_item_language_description">Sprachbeschreibung</string>
+  <string name="row_item_caption">Beschriftung</string>
   <string name="show_captions_description">Beschreibung</string>
   <string name="nearby_row_image">Bild</string>
   <string name="nearby_all">Alle</string>
+  <string name="nearby_filter_toggle">Hochklappen</string>
+  <string name="nearby_filter_search">Suchansicht</string>
+  <string name="nearby_filter_state">Ort Staat</string>
   <string name="appwidget_img">Bild des Tages</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Eine Datei wird hochgeladen</item>
@@ -523,7 +533,10 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Kategorien konnten nicht hinzugefügt werden.</string>
   <string name="category_edit_button_text">Kategorien aktualisieren</string>
+  <string name="depictions_edit_helper_make_edit_toast">Versuche, die Darstellungen zu aktualisieren.</string>
   <string name="depictions_edit_helper_show_edit_title">Beschriftungen bearbeiten</string>
+  <string name="depictions_edit_helper_show_edit_message_if">{{PLURAL|one=Darstellung %1$s wird hinzugefügt.|Darstellungen %1$s werden hinzugefügt.</string>
+  <string name="depictions_edit_helper_edit_message_else">Es konnten keine Darstellungen hinzugefügt werden.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Versuche, die Koordinaten zu aktualisieren.</string>
   <string name="coordinates_edit_helper_show_edit_title">Koordinaten aktualisieren</string>
   <string name="description_edit_helper_show_edit_title">Beschreibung aktualieren</string>
@@ -682,6 +695,8 @@
   <string name="add_location">Standort hinzufügen</string>
   <string name="feedback_sharing_data_alert">Bitte entferne aus dieser E-Mail alle Informationen, die du nicht öffentlich mitteilen möchtest. Bitte beachte auch, dass deine E-Mail-Adresse, mit der du schreibst, sowie der dazugehörige Name und das Profilbild öffentlich sichtbar sind.</string>
   <string name="explore_map_details">Einzelheiten</string>
+  <string name="achievements_unavailable_beta">Erfolge sind nur in der Prod-Variante verfügbar, bitte schaue in der Entwicklerdokumentation nach.</string>
+  <string name="leaderboard_unavailable_beta">Die Bestenliste ist nur in der Prod-Variante verfügbar, bitte schaue in der Entwicklerdokumentation nach.</string>
   <string name="copyright_popup">Bitte lade nur Bilder hoch, die du selbst aufgenommen hast. Wer urheberrechtlich geschützte Bilder hochlädt, wird gesperrt. Dies gilt auch für die Beta-Variante. Vielen Dank, dass du die App getestet hast!</string>
   <string name="select_feedback_data_choice">Bitte hebe die Markierung aller Informationen auf, die du nicht mit der Öffentlichkeit teilen möchtest.</string>
   <string name="api_level">API-Level</string>
