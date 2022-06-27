@@ -735,5 +735,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="enter_description">What is your feedback?</string>
   <string name="your_feedback">Your feedback</string>
   <string name="mark_as_not_for_upload">Mark as not for upload</string>
-  <string name="custom_selector_not_for_upload_image_text">The images is marked as not for upload</string>
+  <string name="remove_from_not_for_upload">Remove from not for upload</string>
 </resources>

@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.Button
@@ -23,6 +22,7 @@ import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.media.ZoomableActivity
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileUtilsWrapper
+import kotlinx.android.synthetic.main.custom_selector_bottom_layout.*
 import kotlinx.coroutines.*
 import java.io.File
 import java.io.FileNotFoundException
@@ -184,19 +184,20 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
 
     /**
      * Insert images into not for upload
+     * Remove images from not for upload
      */
-    fun insertIntoNotForUpload(images: java.util.ArrayList<Image>) {
+    private fun insertIntoNotForUpload(images: ArrayList<Image>) {
         scope.launch {
-            var allImagesAlreadyNotForUpload = false
+            var allImagesAlreadyNotForUpload = true
             images.forEach{
                 val imageSHA1 = getImageSHA1(it.uri)
                 val exists = notForUploadStatusDao.find(imageSHA1)
-                if (exists < 0) {
-                    allImagesAlreadyNotForUpload = true
+                if (exists < 1) {
+                    allImagesAlreadyNotForUpload = false
                 }
             }
 
-            if(!allImagesAlreadyNotForUpload) {
+            if (!allImagesAlreadyNotForUpload) {
                 images.forEach {
                     val imageSHA1 = getImageSHA1(it.uri)
                     notForUploadStatusDao.insert(
@@ -212,6 +213,7 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
                     notForUploadStatusDao.deleteNotForUploadWithImageSHA1(imageSHA1)
                 }
             }
+
             imageFragment!!.refresh()
             val bottomLayout : ConstraintLayout = findViewById(R.id.bottom_layout)
             bottomLayout.visibility = View.GONE
@@ -277,10 +279,25 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
     }
 
     /**
-     * override Selected Images Change, update view model selected images.
+     * override Selected Images Change, update view model selected images and change UI.
      */
-    override fun onSelectedImagesChanged(selectedImages: ArrayList<Image>) {
+    override fun onSelectedImagesChanged(selectedImages: ArrayList<Image>,
+                                         selectedNotForUploadImages: Int) {
         viewModel.selectedImages.value = selectedImages
+
+        if (selectedNotForUploadImages > 0) {
+            upload.isEnabled = false
+            upload.alpha = 0.5f
+        } else {
+            upload.isEnabled = true
+            upload.alpha = 1f
+        }
+
+        not_for_upload.text =
+            if (selectedImages.size == selectedNotForUploadImages)
+                getString(R.string.remove_from_not_for_upload)
+            else
+                getString(R.string.mark_as_not_for_upload)
 
         val bottomLayout : ConstraintLayout = findViewById(R.id.bottom_layout)
         bottomLayout.visibility = if (selectedImages.isEmpty()) View.GONE else View.VISIBLE

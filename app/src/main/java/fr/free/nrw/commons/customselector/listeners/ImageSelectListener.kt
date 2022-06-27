@@ -11,8 +11,9 @@ interface ImageSelectListener {
     /**
      * onSelectedImagesChanged
      * @param selectedImages : new selected images.
+     * @param selectedNotForUploadImages : number of selected not for upload images
      */
-    fun onSelectedImagesChanged(selectedImages: ArrayList<Image>)
+    fun onSelectedImagesChanged(selectedImages: ArrayList<Image>, selectedNotForUploadImages: Int)
 
     /**
      * onLongPress

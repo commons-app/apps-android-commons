@@ -54,6 +54,11 @@ class ImageAdapter(
     private var selectedImages = arrayListOf<Image>()
 
     /**
+     * Number of selected not for upload images
+     */
+    private var selectedNotForUploadImages = 0
+
+    /**
      * List of all images in adapter.
      */
     private var images: ArrayList<Image> = ArrayList()
@@ -109,6 +114,9 @@ class ImageAdapter(
         val clickedIndex = ImageHelper.getIndex(selectedImages, images[position])
         if (clickedIndex != -1) {
             selectedImages.removeAt(clickedIndex)
+            if (holder.isItemNotForUpload()) {
+                selectedNotForUploadImages--
+            }
             notifyItemChanged(position, ImageUnselected())
             val indexes = ImageHelper.getIndexList(selectedImages, images)
             for (index in indexes) {
@@ -117,14 +125,15 @@ class ImageAdapter(
         } else {
             if(holder.isItemUploaded()){
                 Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
-            } else if(holder.isItemNotForUpload()){
-                Toast.makeText(context, R.string.custom_selector_not_for_upload_image_text, Toast.LENGTH_SHORT).show()
             } else {
+                if (holder.isItemNotForUpload()) {
+                    selectedNotForUploadImages++
+                }
                 selectedImages.add(images[position])
                 notifyItemChanged(position, ImageSelectedOrUpdated())
             }
         }
-        imageSelectListener.onSelectedImagesChanged(selectedImages)
+        imageSelectListener.onSelectedImagesChanged(selectedImages, selectedNotForUploadImages)
     }
 
     /**
@@ -144,6 +153,7 @@ class ImageAdapter(
      * Refresh the data in the adapter
      */
     fun refresh(newImages: List<Image>) {
+        selectedNotForUploadImages = 0
         selectedImages.clear()
         images.clear()
         selectedImages = arrayListOf()
