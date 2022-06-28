@@ -22,10 +22,10 @@ import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.media.ZoomableActivity
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileUtilsWrapper
+import fr.free.nrw.commons.utils.CustomSelectorUtils
 import kotlinx.android.synthetic.main.custom_selector_bottom_layout.*
 import kotlinx.coroutines.*
 import java.io.File
-import java.io.FileNotFoundException
 import javax.inject.Inject
 
 
@@ -185,12 +185,18 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
     /**
      * Insert images into not for upload
      * Remove images from not for upload
+     * Refresh the UI
      */
     private fun insertIntoNotForUpload(images: ArrayList<Image>) {
         scope.launch {
             var allImagesAlreadyNotForUpload = true
             images.forEach{
-                val imageSHA1 = getImageSHA1(it.uri)
+                val imageSHA1 = CustomSelectorUtils.getImageSHA1(
+                    it.uri,
+                    ioDispatcher,
+                    fileUtilsWrapper,
+                    contentResolver
+                )
                 val exists = notForUploadStatusDao.find(imageSHA1)
                 if (exists < 1) {
                     allImagesAlreadyNotForUpload = false
@@ -199,7 +205,12 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
 
             if (!allImagesAlreadyNotForUpload) {
                 images.forEach {
-                    val imageSHA1 = getImageSHA1(it.uri)
+                    val imageSHA1 = CustomSelectorUtils.getImageSHA1(
+                        it.uri,
+                        ioDispatcher,
+                        fileUtilsWrapper,
+                        contentResolver
+                    )
                     notForUploadStatusDao.insert(
                         NotForUploadStatus(
                             imageSHA1,
@@ -209,7 +220,12 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
                 }
             } else {
                 images.forEach {
-                    val imageSHA1 = getImageSHA1(it.uri)
+                    val imageSHA1 = CustomSelectorUtils.getImageSHA1(
+                        it.uri,
+                        ioDispatcher,
+                        fileUtilsWrapper,
+                        contentResolver
+                    )
                     notForUploadStatusDao.deleteNotForUploadWithImageSHA1(imageSHA1)
                 }
             }
@@ -217,23 +233,6 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
             imageFragment!!.refresh()
             val bottomLayout : ConstraintLayout = findViewById(R.id.bottom_layout)
             bottomLayout.visibility = View.GONE
-        }
-    }
-
-    /**
-     * Get image sha1 from uri, used to retrieve the original image sha1.
-     */
-    suspend fun getImageSHA1(uri: Uri): String {
-        return withContext(ioDispatcher) {
-
-            try {
-                val result = fileUtilsWrapper.getSHA1(contentResolver.openInputStream(uri))
-
-                result
-            } catch (e: FileNotFoundException){
-                e.printStackTrace()
-                ""
-            }
         }
     }
 
@@ -293,11 +292,10 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
             upload.alpha = 1f
         }
 
-        not_for_upload.text =
-            if (selectedImages.size == selectedNotForUploadImages)
-                getString(R.string.remove_from_not_for_upload)
-            else
-                getString(R.string.mark_as_not_for_upload)
+        not_for_upload.text = when (selectedImages.size == selectedNotForUploadImages) {
+                true -> getString(R.string.unmark_as_not_for_upload)
+                else -> getString(R.string.mark_as_not_for_upload)
+        }
 
         val bottomLayout : ConstraintLayout = findViewById(R.id.bottom_layout)
         bottomLayout.visibility = if (selectedImages.isEmpty()) View.GONE else View.VISIBLE

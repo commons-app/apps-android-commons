@@ -81,7 +81,7 @@ class CustomSelectorActivityTest {
     @Test
     @Throws(Exception::class)
     fun testOnSelectedImagesChanged() {
-        activity.onSelectedImagesChanged(ArrayList(),0)
+        activity.onSelectedImagesChanged(ArrayList(), 0)
     }
 
     /**
