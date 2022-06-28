@@ -49,6 +49,8 @@ public class NetworkUtils {
             return NetworkConnectionType.WIFI;
         }
 
+        // TODO for Android 12+ request permission from user is mandatory
+        /*
         int mobileNetwork = telephonyManager.getNetworkType();
         switch (mobileNetwork) {
             case TelephonyManager.NETWORK_TYPE_GPRS:
@@ -71,6 +73,8 @@ public class NetworkUtils {
             default:
                 return NetworkConnectionType.UNKNOWN;
         }
+         */
+        return NetworkConnectionType.UNKNOWN;
     }
 
     /**
