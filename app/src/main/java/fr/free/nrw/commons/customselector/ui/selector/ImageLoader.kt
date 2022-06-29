@@ -3,6 +3,7 @@ package fr.free.nrw.commons.customselector.ui.selector
 import android.content.Context
 import android.net.Uri
 import androidx.exifinterface.media.ExifInterface
+import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.customselector.model.Image
@@ -11,6 +12,7 @@ import fr.free.nrw.commons.filepicker.PickedFiles
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
+import fr.free.nrw.commons.utils.CustomSelectorUtils
 import kotlinx.coroutines.*
 import timber.log.Timber
 import java.io.FileNotFoundException
@@ -45,6 +47,11 @@ class ImageLoader @Inject constructor(
      * UploadedStatusDao for cache query.
      */
     var uploadedStatusDao: UploadedStatusDao,
+
+    /**
+     * NotForUploadDao for database operations
+     */
+    var notForUploadStatusDao: NotForUploadStatusDao,
 
     /**
      * Context for coroutine.
@@ -86,7 +93,11 @@ class ImageLoader @Inject constructor(
                 return@launch
             }
 
-            val imageSHA1 = getImageSHA1(image.uri)
+            val imageSHA1: String = when(mapImageSHA1[image.uri] != null) {
+                true -> mapImageSHA1[image.uri]!!
+                else -> CustomSelectorUtils.getImageSHA1(image.uri, ioDispatcher, fileUtilsWrapper, context.contentResolver)
+            }
+
             if(imageSHA1.isEmpty())
                 return@launch
             val uploadedStatus = getFromUploaded(imageSHA1)
@@ -106,6 +117,8 @@ class ImageLoader @Inject constructor(
                 return@launch
             }
 
+            val exists = notForUploadStatusDao.find(imageSHA1)
+
             if (result in arrayOf(Result.NOTFOUND, Result.INVALID) && sha1.isNotEmpty()) {
                 // Query original image.
                 result = querySHA1(imageSHA1)
@@ -122,6 +135,7 @@ class ImageLoader @Inject constructor(
             }
             if(mapHolderImage[holder] == image) {
                 if (result is Result.TRUE) holder.itemUploaded() else holder.itemNotUploaded()
+                if (exists > 0) holder.itemNotForUpload() else holder.itemForUpload()
             }
         }
     }
@@ -188,25 +202,6 @@ class ImageLoader @Inject constructor(
                 modifiedImageResult
             )
         )
-    }
-
-    /**
-     * Get image sha1 from uri, used to retrieve the original image sha1.
-     */
-    suspend fun getImageSHA1(uri: Uri): String {
-        return withContext(ioDispatcher) {
-            mapImageSHA1[uri]?.let{
-                return@withContext it
-            }
-            try {
-                val result = fileUtilsWrapper.getSHA1(context.contentResolver.openInputStream(uri))
-                mapImageSHA1[uri] = result
-                result
-            } catch (e: FileNotFoundException){
-                e.printStackTrace()
-                ""
-            }
-        }
     }
 
     /**

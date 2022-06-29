@@ -46,6 +46,12 @@ abstract class NotForUploadStatusDao {
     suspend fun deleteNotForUploadWithImageSHA1(imageSHA1: String) {
         return deleteWithImageSHA1(imageSHA1)
     }
+
+    /**
+     * Check whether the imageSHA1 is present in database
+     */
+    @Query("SELECT COUNT() FROM not_for_upload_table WHERE imageSHA1 = (:imageSHA1) ")
+    abstract suspend fun find(imageSHA1 : String): Int
 }
 
 

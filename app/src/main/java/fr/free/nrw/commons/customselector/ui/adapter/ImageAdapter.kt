@@ -54,6 +54,11 @@ class ImageAdapter(
     private var selectedImages = arrayListOf<Image>()
 
     /**
+     * Number of selected not for upload images
+     */
+    private var selectedNotForUploadImages = 0
+
+    /**
      * List of all images in adapter.
      */
     private var images: ArrayList<Image> = ArrayList()
@@ -109,6 +114,9 @@ class ImageAdapter(
         val clickedIndex = ImageHelper.getIndex(selectedImages, images[position])
         if (clickedIndex != -1) {
             selectedImages.removeAt(clickedIndex)
+            if (holder.isItemNotForUpload()) {
+                selectedNotForUploadImages--
+            }
             notifyItemChanged(position, ImageUnselected())
             val indexes = ImageHelper.getIndexList(selectedImages, images)
             for (index in indexes) {
@@ -118,11 +126,14 @@ class ImageAdapter(
             if(holder.isItemUploaded()){
                 Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
             } else {
+                if (holder.isItemNotForUpload()) {
+                    selectedNotForUploadImages++
+                }
                 selectedImages.add(images[position])
                 notifyItemChanged(position, ImageSelectedOrUpdated())
             }
         }
-        imageSelectListener.onSelectedImagesChanged(selectedImages)
+        imageSelectListener.onSelectedImagesChanged(selectedImages, selectedNotForUploadImages)
     }
 
     /**
@@ -136,6 +147,18 @@ class ImageAdapter(
         )
         images = newImageList
         diffResult.dispatchUpdatesTo(this)
+    }
+
+    /**
+     * Refresh the data in the adapter
+     */
+    fun refresh(newImages: List<Image>) {
+        selectedNotForUploadImages = 0
+        selectedImages.clear()
+        images.clear()
+        selectedImages = arrayListOf()
+        init(newImages)
+        notifyDataSetChanged()
     }
 
     /**
@@ -158,6 +181,7 @@ class ImageAdapter(
         val image: ImageView = itemView.findViewById(R.id.image_thumbnail)
         private val selectedNumber: TextView = itemView.findViewById(R.id.selected_count)
         private val uploadedGroup: Group = itemView.findViewById(R.id.uploaded_group)
+        private val notForUploadGroup: Group = itemView.findViewById(R.id.not_for_upload_group)
         private val selectedGroup: Group = itemView.findViewById(R.id.selected_group)
 
         /**
@@ -182,9 +206,24 @@ class ImageAdapter(
             uploadedGroup.visibility = View.VISIBLE
         }
 
+        /**
+         * Item is not for upload view
+         */
+        fun itemNotForUpload() {
+            notForUploadGroup.visibility = View.VISIBLE
+        }
+
         fun isItemUploaded():Boolean {
             return uploadedGroup.visibility == View.VISIBLE
         }
+
+        /**
+         * Item is not for upload
+         */
+        fun isItemNotForUpload():Boolean {
+            return notForUploadGroup.visibility == View.VISIBLE
+        }
+
         /**
          * Item Not Uploaded view.
          */
@@ -192,6 +231,12 @@ class ImageAdapter(
             uploadedGroup.visibility = View.GONE
         }
 
+        /**
+         * Item can be uploaded view
+         */
+        fun itemForUpload() {
+            notForUploadGroup.visibility = View.GONE
+        }
     }
 
     /**

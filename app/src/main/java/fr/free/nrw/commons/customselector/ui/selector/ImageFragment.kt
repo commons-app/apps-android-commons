@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
+import android.app.Activity
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
+import fr.free.nrw.commons.customselector.listeners.RefreshUIListener
 import fr.free.nrw.commons.customselector.model.CallbackStatus
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.model.Result
@@ -30,7 +32,7 @@ import javax.inject.Inject
 /**
  * Custom Selector Image Fragment.
  */
-class ImageFragment: CommonsDaggerSupportFragment() {
+class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
 
     /**
      * Current bucketId.
@@ -136,6 +138,18 @@ class ImageFragment: CommonsDaggerSupportFragment() {
     }
 
     /**
+     * Attaching data listener
+     */
+    override fun onAttach(activity: Activity) {
+        super.onAttach(activity)
+        try {
+            (getActivity() as CustomSelectorActivity).setOnDataListener(this)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+    }
+
+    /**
      * Handle view model result.
      */
     private fun handleResult(result:Result){
@@ -210,5 +224,9 @@ class ImageFragment: CommonsDaggerSupportFragment() {
             }
         }
         super.onDestroy()
+    }
+
+    override fun refresh() {
+        imageAdapter.refresh(filteredImages)
     }
 }

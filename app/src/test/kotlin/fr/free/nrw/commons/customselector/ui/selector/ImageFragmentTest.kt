@@ -47,6 +47,7 @@ import java.lang.reflect.Field
 class ImageFragmentTest {
 
     private lateinit var fragment: ImageFragment
+    private lateinit var activity: CustomSelectorActivity
     private lateinit var view: View
     private lateinit var selectorRV : RecyclerView
     private lateinit var loader : ProgressBar
@@ -76,7 +77,7 @@ class ImageFragmentTest {
         AppAdapter.set(TestAppAdapter())
         SoLoader.setInTestMode()
         Fresco.initialize(context)
-        val activity = Robolectric.buildActivity(CustomSelectorActivity::class.java).create().get()
+        activity = Robolectric.buildActivity(CustomSelectorActivity::class.java).create().get()
 
         fragment = ImageFragment.newInstance(1,0)
         val fragmentManager: FragmentManager = activity.supportFragmentManager
@@ -92,6 +93,7 @@ class ImageFragmentTest {
         Whitebox.setInternalState(fragment, "imageAdapter", adapter)
         Whitebox.setInternalState(fragment, "selectorRV", selectorRV )
         Whitebox.setInternalState(fragment, "loader", loader)
+        Whitebox.setInternalState(fragment, "filteredImages", arrayListOf(image,image))
 
         viewModelField = fragment.javaClass.getDeclaredField("viewModel")
         viewModelField.isAccessible = true
@@ -139,6 +141,21 @@ class ImageFragmentTest {
         assertEquals(3, func.invoke(fragment))
     }
 
+    /**
+     * Test onAttach function.
+     */
+    @Test
+    fun testOnAttach() {
+        fragment.onAttach(activity)
+    }
+
+    /**
+     * Test refresh function.
+     */
+    @Test
+    fun testRefresh() {
+        fragment.refresh()
+    }
 
     /**
      * Test onResume.

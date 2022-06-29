@@ -735,4 +735,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="enter_description">What is your feedback?</string>
   <string name="your_feedback">Your feedback</string>
   <string name="mark_as_not_for_upload">Mark as not for upload</string>
+  <string name="unmark_as_not_for_upload">Unmark as not for upload</string>
 </resources>

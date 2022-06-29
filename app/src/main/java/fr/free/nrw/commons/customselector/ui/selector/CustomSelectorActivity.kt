@@ -14,11 +14,17 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.customselector.database.NotForUploadStatus
+import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.media.ZoomableActivity
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.upload.FileUtilsWrapper
+import fr.free.nrw.commons.utils.CustomSelectorUtils
+import kotlinx.android.synthetic.main.custom_selector_bottom_layout.*
+import kotlinx.coroutines.*
 import java.io.File
 import javax.inject.Inject
 
@@ -53,6 +59,29 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
      * View Model Factory.
      */
     @Inject lateinit var customSelectorViewModelFactory: CustomSelectorViewModelFactory
+
+    /**
+     * NotForUploadStatus Dao class for database operations
+     */
+    @Inject
+    lateinit var notForUploadStatusDao: NotForUploadStatusDao
+
+    /**
+     * FileUtilsWrapper class to get imageSHA1 from uri
+     */
+    @Inject
+    lateinit var fileUtilsWrapper: FileUtilsWrapper
+
+    /**
+     * Coroutine Dispatchers and Scope.
+     */
+    private val scope : CoroutineScope = MainScope()
+    private var ioDispatcher : CoroutineDispatcher = Dispatchers.IO
+
+    /**
+     * Image Fragment instance
+     */
+    var imageFragment: ImageFragment? = null
 
     /**
      * onCreate Activity, sets theme, initialises the view model, setup view.
@@ -112,6 +141,99 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
     private fun setUpBottomLayout() {
         val done : Button = findViewById(R.id.upload)
         done.setOnClickListener { onDone() }
+
+        val notForUpload : Button = findViewById(R.id.not_for_upload)
+        notForUpload.setOnClickListener{ onClickNotForUpload() }
+    }
+
+    /**
+     * Gets selected images and proceed for database operations
+     */
+    private fun onClickNotForUpload() {
+        val selectedImages = viewModel.selectedImages.value
+        if(selectedImages.isNullOrEmpty()) {
+            markAsNotForUpload(arrayListOf())
+            return
+        }
+        var i = 0
+        while (i < selectedImages.size) {
+            val path = selectedImages[i].path
+            val file = File(path)
+            if (!file.exists()) {
+                selectedImages.removeAt(i)
+                i--
+            }
+            i++
+        }
+        markAsNotForUpload(selectedImages)
+    }
+
+    /**
+     * Insert selected images in the database
+     */
+    private fun markAsNotForUpload(images: ArrayList<Image>) {
+        insertIntoNotForUpload(images)
+    }
+
+    /**
+     * Initializing ImageFragment
+     */
+    fun setOnDataListener(imageFragment: ImageFragment?) {
+        this.imageFragment = imageFragment
+    }
+
+    /**
+     * Insert images into not for upload
+     * Remove images from not for upload
+     * Refresh the UI
+     */
+    private fun insertIntoNotForUpload(images: ArrayList<Image>) {
+        scope.launch {
+            var allImagesAlreadyNotForUpload = true
+            images.forEach{
+                val imageSHA1 = CustomSelectorUtils.getImageSHA1(
+                    it.uri,
+                    ioDispatcher,
+                    fileUtilsWrapper,
+                    contentResolver
+                )
+                val exists = notForUploadStatusDao.find(imageSHA1)
+                if (exists < 1) {
+                    allImagesAlreadyNotForUpload = false
+                }
+            }
+
+            if (!allImagesAlreadyNotForUpload) {
+                images.forEach {
+                    val imageSHA1 = CustomSelectorUtils.getImageSHA1(
+                        it.uri,
+                        ioDispatcher,
+                        fileUtilsWrapper,
+                        contentResolver
+                    )
+                    notForUploadStatusDao.insert(
+                        NotForUploadStatus(
+                            imageSHA1,
+                            true
+                        )
+                    )
+                }
+            } else {
+                images.forEach {
+                    val imageSHA1 = CustomSelectorUtils.getImageSHA1(
+                        it.uri,
+                        ioDispatcher,
+                        fileUtilsWrapper,
+                        contentResolver
+                    )
+                    notForUploadStatusDao.deleteNotForUploadWithImageSHA1(imageSHA1)
+                }
+            }
+
+            imageFragment!!.refresh()
+            val bottomLayout : ConstraintLayout = findViewById(R.id.bottom_layout)
+            bottomLayout.visibility = View.GONE
+        }
     }
 
     /**
@@ -156,10 +278,24 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
     }
 
     /**
-     * override Selected Images Change, update view model selected images.
+     * override Selected Images Change, update view model selected images and change UI.
      */
-    override fun onSelectedImagesChanged(selectedImages: ArrayList<Image>) {
+    override fun onSelectedImagesChanged(selectedImages: ArrayList<Image>,
+                                         selectedNotForUploadImages: Int) {
         viewModel.selectedImages.value = selectedImages
+
+        if (selectedNotForUploadImages > 0) {
+            upload.isEnabled = false
+            upload.alpha = 0.5f
+        } else {
+            upload.isEnabled = true
+            upload.alpha = 1f
+        }
+
+        not_for_upload.text = when (selectedImages.size == selectedNotForUploadImages) {
+                true -> getString(R.string.unmark_as_not_for_upload)
+                else -> getString(R.string.mark_as_not_for_upload)
+        }
 
         val bottomLayout : ConstraintLayout = findViewById(R.id.bottom_layout)
         bottomLayout.visibility = if (selectedImages.isEmpty()) View.GONE else View.VISIBLE
