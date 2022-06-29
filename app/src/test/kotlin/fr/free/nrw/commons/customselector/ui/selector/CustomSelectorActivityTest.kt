@@ -31,6 +31,8 @@ class CustomSelectorActivityTest {
 
     private lateinit var activity: CustomSelectorActivity
 
+    private lateinit var imageFragment: ImageFragment
+
     /**
      * Set up the tests.
      */
@@ -44,6 +46,7 @@ class CustomSelectorActivityTest {
         val onCreate = activity.javaClass.getDeclaredMethod("onCreate", Bundle::class.java)
         onCreate.isAccessible = true
         onCreate.invoke(activity, null)
+        imageFragment = ImageFragment.newInstance(1,0)
     }
 
     /**
@@ -96,6 +99,33 @@ class CustomSelectorActivityTest {
             1
         )
         activity.onDone()
+    }
+
+    /**
+     * Test onClickNotForUpload function.
+     */
+    @Test
+    @Throws(Exception::class)
+    fun testOnClickNotForUpload() {
+        val method: Method = CustomSelectorActivity::class.java.getDeclaredMethod(
+            "onClickNotForUpload"
+        )
+        method.isAccessible = true
+        method.invoke(activity)
+        activity.onSelectedImagesChanged(
+            ArrayList(arrayListOf(Image(1, "test", Uri.parse("test"), "test", 1))),
+            0
+        )
+        method.invoke(activity)
+    }
+
+    /**
+     * Test setOnDataListener Function.
+     */
+    @Test
+    @Throws(Exception::class)
+    fun testSetOnDataListener() {
+        activity.setOnDataListener(imageFragment)
     }
 
     /**
