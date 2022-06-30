@@ -218,8 +218,8 @@
   <string name="detail_license_empty">Licence inconnue</string>
   <string name="menu_refresh">Actualiser</string>
   <string name="storage_permission_title">Demande d’autorisation d’accès au stockage</string>
-  <string name="read_storage_permission_rationale">Autorisation nécessaire : lecture sur stockage externe. L’application ne peut pas accéder à votre galerie sans cela.</string>
-  <string name="write_storage_permission_rationale">Permission obligatoire : écriture sur stockage externe. L’application ne peut pas accéder à votre appareil photo/galerie sans cela.</string>
+  <string name="read_storage_permission_rationale">Permission nécessaire : lecture sur stockage externe. Sans cela, l’application ne peut pas accéder à votre galerie.</string>
+  <string name="write_storage_permission_rationale">Permission obligatoire : écriture sur stockage externe. Sans cela, l’application ne peut pas accéder à votre appareil photo ou votre galerie.</string>
   <string name="location_permission_title">Demande d’autorisation d’accès au stockage</string>
   <string name="ok">OK</string>
   <string name="warning">Avertissement</string>
