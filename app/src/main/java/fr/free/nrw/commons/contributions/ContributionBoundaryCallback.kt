@@ -21,7 +21,7 @@ class ContributionBoundaryCallback @Inject constructor(
     @param:Named(CommonsApplicationModule.IO_THREAD) private val ioThreadScheduler: Scheduler
 ) : BoundaryCallback<Contribution>() {
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
-    lateinit var userName: String
+    var userName: String? = null
 
 
     /**
@@ -53,13 +53,13 @@ class ContributionBoundaryCallback @Inject constructor(
     /**
      * Fetches contributions using the MediaWiki API
      */
-    fun fetchContributions() {
+    private fun fetchContributions() {
         if (sessionManager.userName != null) {
-            compositeDisposable.add(
-                mediaClient.getMediaListForUser(userName!!)
+            userName?.let { userName ->
+                mediaClient.getMediaListForUser(userName)
                     .map { mediaList ->
-                        mediaList.map {
-                            Contribution(media = it, state = Contribution.STATE_COMPLETED)
+                        mediaList.map { media ->
+                            Contribution(media = media, state = Contribution.STATE_COMPLETED)
                         }
                     }
                     .subscribeOn(ioThreadScheduler)
@@ -69,11 +69,13 @@ class ContributionBoundaryCallback @Inject constructor(
                             error.message
                         )
                     }
-            )
-        }else {
-            if (compositeDisposable != null){
-                compositeDisposable.clear()
+            }?.let {
+                compositeDisposable.add(
+                    it
+                )
             }
+        }else {
+            compositeDisposable.clear()
         }
     }
 
