@@ -89,7 +89,7 @@ class ImageAdapter(
             val selectedIndex = ImageHelper.getIndex(selectedImages, image)
             val isSelected = selectedIndex != -1
             if (isSelected) {
-                holder.itemSelected(selectedIndex + 1)
+                holder.itemSelected(selectedImages.size)
             } else {
                 holder.itemUnselected();
             }
@@ -130,7 +130,10 @@ class ImageAdapter(
                     selectedNotForUploadImages++
                 }
                 selectedImages.add(images[position])
-                notifyItemChanged(position, ImageSelectedOrUpdated())
+                val indexes = ImageHelper.getIndexList(selectedImages, images)
+                for (index in indexes) {
+                    notifyItemChanged(index, ImageSelectedOrUpdated())
+                }
             }
         }
         imageSelectListener.onSelectedImagesChanged(selectedImages, selectedNotForUploadImages)
