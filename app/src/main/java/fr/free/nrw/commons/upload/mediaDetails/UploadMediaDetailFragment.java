@@ -148,18 +148,16 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-        init();
+        if (callback != null) {
+            init();
+        }
     }
 
     private void init() {
         tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
             callback.getTotalNumberOfSteps(), getString(R.string.media_detail_step_title)));
-        tooltip.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showInfoAlert(R.string.media_detail_step_title, R.string.media_details_tooltip);
-            }
-        });
+        tooltip.setOnClickListener(
+            v -> showInfoAlert(R.string.media_detail_step_title, R.string.media_details_tooltip));
         initPresenter();
         presenter.receiveImage(uploadableFile, place);
         initRecyclerView();
