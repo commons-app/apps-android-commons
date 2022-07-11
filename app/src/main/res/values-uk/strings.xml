@@ -427,7 +427,7 @@
   <string name="no_categories_selected">Жодної категорії не вибрано</string>
   <string name="no_categories_selected_warning_desc">Зображення без категорій рідко використовуються. Ви впевнені, що хочете продовжити без вказаних категорій?</string>
   <string name="no_depictions_selected">Описів зображеного не вибрано</string>
-  <string name="no_depictions_selected_warning_desc">Медіа, у яких вказані зображувані об\'єкти, можуть бути легше знайдені та використані надалі. Ви впевнені, що хочете продовжити не вказавши що саме тут зображено?</string>
+  <string name="no_depictions_selected_warning_desc">Медіа, у яких вказані описи, можуть бути легше знайдені та використані надалі. Ви впевнені, що хочете продовжити не вказавши описи?</string>
   <string name="back_button_warning">Скасувати завантаження</string>
   <string name="back_button_warning_desc">Використання кнопки \"Назад\" скасує це завантаження</string>
   <string name="back_button_continue">Продовжити завантаження</string>
@@ -538,8 +538,14 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Неможливо додати категорії</string>
   <string name="category_edit_button_text">Оновити категорії</string>
-  <string name="depictions_edit_helper_make_edit_toast">Спроба оновити зображення.</string>
+  <string name="depictions_edit_helper_make_edit_toast">Спроба оновити описи.</string>
   <string name="depictions_edit_helper_show_edit_title">Редагувати зображення</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">Опис %1$s додано.</item>
+    <item quantity="few">Описи %1$s додані.</item>
+    <item quantity="many">Описи %1$s додані.</item>
+    <item quantity="other"/>
+  </plurals>
   <string name="depictions_edit_helper_edit_message_else">Не вдалося додати зображення.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Спроба оновити координати.</string>
   <string name="coordinates_edit_helper_show_edit_title">Оновлення координат</string>
@@ -687,7 +693,7 @@
   <string name="contributions_of_user">Внесок користувача: %s</string>
   <string name="achievements_of_user">Досягнення користувача: %s</string>
   <string name="menu_view_user_page">Переглянути сторінку користувача</string>
-  <string name="edit_depictions">Редагувати зображення</string>
+  <string name="edit_depictions">Редагувати описи</string>
   <string name="edit_categories">Редагувати категорії</string>
   <string name="advanced_options">Розширені параметри</string>
   <string name="advanced_query_info_text">Ви можете налаштувати запит поблизу. Якщо ви отримуєте помилки, скиньте налаштування та застосуйте.</string>

@@ -4,6 +4,7 @@
 * Ajeje Brazorf
 * Alno
 * BaRaN6161 TURK
+* Cigaryno
 * Cyclicus
 * Derugon
 * Eneelk
@@ -52,7 +53,7 @@
   <string name="show_captions_description">Description</string>
   <string name="nearby_row_image">Image</string>
   <string name="nearby_all">Tous</string>
-  <string name="nearby_filter_toggle">Bascule haut / bas</string>
+  <string name="nearby_filter_toggle">Basculer vers le haut</string>
   <string name="nearby_filter_search">Vue de recherche</string>
   <string name="nearby_filter_state">État du lieu</string>
   <string name="appwidget_img">Image du jour</string>
