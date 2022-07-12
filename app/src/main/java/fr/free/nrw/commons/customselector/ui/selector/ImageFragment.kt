@@ -1,18 +1,19 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
 import android.app.Activity
-import android.net.Uri
+import android.app.ProgressDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.Switch
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.listeners.RefreshUIListener
@@ -21,12 +22,15 @@ import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
+import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.upload.FileProcessor
+import fr.free.nrw.commons.upload.FileUtilsWrapper
+import fr.free.nrw.commons.utils.CustomSelectorUtils
+import fr.free.nrw.commons.utils.CustomSelectorUtils.Companion.querySHA1
 import kotlinx.android.synthetic.main.fragment_custom_selector.*
 import kotlinx.android.synthetic.main.fragment_custom_selector.view.*
-import java.io.File
-import java.io.FileInputStream
-import java.net.URI
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 /**
@@ -54,7 +58,13 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
      */
     private var selectorRV: RecyclerView? = null
     private var loader: ProgressBar? = null
+    private var switch: Switch? = null
     lateinit var filteredImages: ArrayList<Image>;
+
+    /**
+     * Hashmap to store removed images
+     */
+    private var removedImages: LinkedHashMap<Int,Image> = LinkedHashMap()
 
     /**
      * View model Factory.
@@ -78,6 +88,41 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
      */
     private lateinit var gridLayoutManager: GridLayoutManager
 
+    /**
+     * For showing progress dialog
+     */
+    private var progressDialog: ProgressDialog? = null
+
+    /**
+     * NotForUploadStatus Dao class for database operations
+     */
+    @Inject
+    lateinit var notForUploadStatusDao: NotForUploadStatusDao
+
+    /**
+     * FileUtilsWrapper class to get imageSHA1 from uri
+     */
+    @Inject
+    lateinit var fileUtilsWrapper: FileUtilsWrapper
+
+    /**
+     * FileProcessor to pre-process the file.
+     */
+    @Inject
+    lateinit var fileProcessor: FileProcessor
+
+    /**
+     * MediaClient for SHA1 query.
+     */
+    @Inject
+    lateinit var mediaClient: MediaClient
+
+    /**
+     * Coroutine Dispatchers and Scope.
+     */
+    private val scope : CoroutineScope = MainScope()
+    private var ioDispatcher : CoroutineDispatcher = Dispatchers.IO
+    private var defaultDispatcher : CoroutineDispatcher = Dispatchers.Default
 
     companion object {
 
@@ -131,10 +176,70 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
             handleResult(it)
         })
 
+        switch = root.switchWidget
+        switch?.visibility = View.VISIBLE
+        switch?.setOnCheckedChangeListener { _, isChecked -> onChangeSwitchState(isChecked) }
         selectorRV = root.selector_rv
         loader = root.loader
 
         return root
+    }
+
+    private fun onChangeSwitchState(checked: Boolean) {
+        if (checked) {
+            switch?.text = getString(R.string.hide_already_actioned_pictures)
+            if(removedImages.isNotEmpty()) {
+                removedImages.forEach { (key, value) ->
+                    filteredImages.add(key, value)
+                }
+                removedImages.clear()
+                imageAdapter.init(filteredImages)
+                imageAdapter.notifyDataSetChanged()
+            }
+        } else {
+            switch?.text = getString(R.string.show_already_actioned_pictures)
+            val currentRemovedImages: ArrayList<Image> = ArrayList()
+            scope.launch {
+                showProgressBar()
+                filteredImages.forEachIndexed{ index, it ->
+                    val imageSHA1 = CustomSelectorUtils.getImageSHA1(
+                        it.uri,
+                        ioDispatcher,
+                        fileUtilsWrapper,
+                        activity!!.contentResolver
+                    )
+                    val modifiedSHA1 = CustomSelectorUtils
+                        .generateModifiedSHA1(it,
+                            defaultDispatcher,
+                            requireContext(),
+                            fileProcessor,
+                            fileUtilsWrapper
+                        )
+                    var result = querySHA1(imageSHA1, ioDispatcher, mediaClient)
+                    when (result) {
+                        !is ImageLoader.Result.TRUE -> {
+                            // Original image not found, query modified image.
+                            result = querySHA1(modifiedSHA1, ioDispatcher, mediaClient)
+                        }
+                    }
+                    val exists = notForUploadStatusDao.find(imageSHA1)
+                    when {
+                        exists >= 1 || result is ImageLoader.Result.TRUE -> {
+                            removedImages[index] = it
+                            currentRemovedImages.add(it)
+                        }
+                    }
+                }
+                when {
+                    removedImages.isNotEmpty() -> {
+                        filteredImages.removeAll(currentRemovedImages)
+                        imageAdapter.init(filteredImages)
+                        imageAdapter.notifyDataSetChanged()
+                    }
+                }
+                progressDialog!!.dismiss()
+            }
+        }
     }
 
     /**
@@ -224,6 +329,18 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
             }
         }
         super.onDestroy()
+    }
+
+    /**
+     * Show progress bar
+     */
+    private fun showProgressBar() {
+        progressDialog = ProgressDialog(requireContext())
+        progressDialog!!.isIndeterminate = true
+        progressDialog!!.setTitle(getString(R.string.hiding_already_actioned_pictures))
+        progressDialog!!.setMessage(getString(R.string.please_wait))
+        progressDialog!!.setCanceledOnTouchOutside(false)
+        progressDialog!!.show()
     }
 
     override fun refresh() {
