@@ -161,19 +161,6 @@ class ImageLoaderTest {
     }
 
     /**
-     * Test querySha1
-     */
-    @Test
-    fun testQuerySha1() = testDispacher.runBlockingTest {
-
-        whenever(single.blockingGet()).thenReturn(true)
-        whenever(mediaClient.checkFileExistsUsingSha("testSha1")).thenReturn(single)
-        whenever(fileUtilsWrapper.getSHA1(any())).thenReturn("testSha1")
-
-        imageLoader.querySHA1("testSha1")
-    }
-
-    /**
      * Test getSha1
      */
     @Test
