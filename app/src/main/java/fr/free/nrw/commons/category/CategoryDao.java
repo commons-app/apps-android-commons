@@ -93,9 +93,11 @@ public class CategoryDao {
             // fixme add a limit on the original query instead of falling out of the loop?
             while (cursor != null && cursor.moveToNext()
                     && cursor.getPosition() < limit) {
-                items.add(new CategoryItem(fromCursor(cursor).getName(),
-                    fromCursor(cursor).getDescription(), fromCursor(cursor).getThumbnail(),
-                    false));
+                if (fromCursor(cursor).getName() != null ) {
+                    items.add(new CategoryItem(fromCursor(cursor).getName(),
+                        fromCursor(cursor).getDescription(), fromCursor(cursor).getThumbnail(),
+                        false));
+                }
             }
         } catch (RemoteException e) {
             throw new RuntimeException(e);
@@ -189,6 +191,13 @@ public class CategoryDao {
                 return;
             }
             if (from == 5) {
+                from++;
+                onUpdate(db, from, to);
+                return;
+            }
+            if (from == 17) {
+                db.execSQL("ALTER TABLE categories ADD COLUMN description STRING;");
+                db.execSQL("ALTER TABLE categories ADD COLUMN thumbnail STRING;");
                 from++;
                 onUpdate(db, from, to);
                 return;
