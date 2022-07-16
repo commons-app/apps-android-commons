@@ -223,8 +223,11 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
                         )
 
                     var result = uploadedStatusDao.findByImageSHA1(imageSHA1, true)
-                    if(result < 1) {
-                        result = uploadedStatusDao.findByModifiedImageSHA1(modifiedSHA1, true)
+                    when {
+                        result < 1 -> {
+                            result = uploadedStatusDao
+                                .findByModifiedImageSHA1(modifiedSHA1, true)
+                        }
                     }
                     val exists = notForUploadStatusDao.find(imageSHA1)
 
