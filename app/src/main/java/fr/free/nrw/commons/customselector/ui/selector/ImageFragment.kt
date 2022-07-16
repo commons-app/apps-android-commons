@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
+import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.listeners.RefreshUIListener
@@ -27,7 +28,6 @@ import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
-import fr.free.nrw.commons.utils.CustomSelectorUtils.Companion.querySHA1
 import kotlinx.android.synthetic.main.fragment_custom_selector.*
 import kotlinx.android.synthetic.main.fragment_custom_selector.view.*
 import kotlinx.coroutines.*
@@ -98,6 +98,12 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
      */
     @Inject
     lateinit var notForUploadStatusDao: NotForUploadStatusDao
+
+    /**
+     * UploadedStatus Dao class for database operations
+     */
+    @Inject
+    lateinit var uploadedStatusDao: UploadedStatusDao
 
     /**
      * FileUtilsWrapper class to get imageSHA1 from uri
@@ -215,16 +221,15 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
                             fileProcessor,
                             fileUtilsWrapper
                         )
-                    var result = querySHA1(imageSHA1, ioDispatcher, mediaClient)
-                    when (result) {
-                        !is ImageLoader.Result.TRUE -> {
-                            // Original image not found, query modified image.
-                            result = querySHA1(modifiedSHA1, ioDispatcher, mediaClient)
-                        }
+
+                    var result = uploadedStatusDao.findByImageSHA1(imageSHA1, true)
+                    if(result < 1) {
+                        result = uploadedStatusDao.findByModifiedImageSHA1(modifiedSHA1, true)
                     }
                     val exists = notForUploadStatusDao.find(imageSHA1)
+
                     when {
-                        exists >= 1 || result is ImageLoader.Result.TRUE -> {
+                        exists >= 1 || result >= 1 -> {
                             removedImages[index] = it
                             currentRemovedImages.add(it)
                         }
