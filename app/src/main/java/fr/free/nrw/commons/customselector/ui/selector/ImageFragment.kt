@@ -1,13 +1,13 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
 import android.app.Activity
-import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Switch
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -89,9 +89,9 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
     private lateinit var gridLayoutManager: GridLayoutManager
 
     /**
-     * For showing progress dialog
+     * For showing progress
      */
-    private var progressDialog: ProgressDialog? = null
+    private var progressLayout: ConstraintLayout? = null
 
     /**
      * NotForUploadStatus Dao class for database operations
@@ -187,6 +187,7 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
         switch?.setOnCheckedChangeListener { _, isChecked -> onChangeSwitchState(isChecked) }
         selectorRV = root.selector_rv
         loader = root.loader
+        progressLayout = root.progressLayout
 
         return root
     }
@@ -206,7 +207,8 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
             switch?.text = getString(R.string.show_already_actioned_pictures)
             val currentRemovedImages: ArrayList<Image> = ArrayList()
             scope.launch {
-                showProgressBar()
+                progressLayout!!.visibility = View.VISIBLE
+                switch!!.visibility = View.GONE
                 filteredImages.forEachIndexed{ index, it ->
                     val imageSHA1 = CustomSelectorUtils.getImageSHA1(
                         it.uri,
@@ -245,7 +247,8 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
                         imageAdapter.notifyDataSetChanged()
                     }
                 }
-                progressDialog!!.dismiss()
+                progressLayout!!.visibility = View.GONE
+                switch!!.visibility = View.VISIBLE
             }
         }
     }
@@ -337,18 +340,6 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
             }
         }
         super.onDestroy()
-    }
-
-    /**
-     * Show progress bar
-     */
-    private fun showProgressBar() {
-        progressDialog = ProgressDialog(requireContext())
-        progressDialog!!.isIndeterminate = true
-        progressDialog!!.setTitle(getString(R.string.hiding_already_actioned_pictures))
-        progressDialog!!.setMessage(getString(R.string.please_wait))
-        progressDialog!!.setCanceledOnTouchOutside(false)
-        progressDialog!!.show()
     }
 
     override fun refresh() {
