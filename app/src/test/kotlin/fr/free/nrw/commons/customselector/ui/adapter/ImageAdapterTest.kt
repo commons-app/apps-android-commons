@@ -88,7 +88,7 @@ class ImageAdapterTest {
 
         // Parameters.
         images.add(image)
-        imageAdapter.init(images)
+        imageAdapter.init(images, images)
 
         // Test conditions.
         imageAdapter.onBindViewHolder(holder, 0)
@@ -101,7 +101,7 @@ class ImageAdapterTest {
      */
     @Test
     fun init() {
-        imageAdapter.init(images)
+        imageAdapter.init(images, images)
     }
 
     /**
@@ -115,7 +115,7 @@ class ImageAdapterTest {
 
         // Parameters
         images.addAll(listOf(image, image))
-        imageAdapter.init(images)
+        imageAdapter.init(images, images)
 
         // Test conditions
         holder.itemUploaded()
@@ -142,7 +142,7 @@ class ImageAdapterTest {
      */
     @Test
     fun getImageIdAt() {
-        imageAdapter.init(listOf(image))
+        imageAdapter.init(listOf(image), listOf(image))
         Assertions.assertEquals(1, imageAdapter.getImageIdAt(0))
     }
 }

@@ -145,10 +145,10 @@ class ImageLoaderTest {
         mapImageSHA1[uri] = "testSha1"
 
         mapResult["testSha1"] = ImageLoader.Result.TRUE
-        imageLoader.queryAndSetView(holder, image)
+        imageLoader.queryAndSetView(holder, image, listOf(image))
 
         mapResult["testSha1"] = ImageLoader.Result.FALSE
-        imageLoader.queryAndSetView(holder, image)
+        imageLoader.queryAndSetView(holder, image, listOf(image))
     }
 
     /**
@@ -157,7 +157,7 @@ class ImageLoaderTest {
     @Test
     fun testQueryAndSetViewUploadedStatusNotNull() = testDispacher.runBlockingTest {
         whenever(uploadedStatusDao.getUploadedFromImageSHA1(any())).thenReturn(uploadedStatus)
-        imageLoader.queryAndSetView(holder, image)
+        imageLoader.queryAndSetView(holder, image, listOf(image))
     }
 
     /**
