@@ -27,11 +27,12 @@ import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
-import fr.free.nrw.commons.utils.CustomSelectorUtils
 import kotlinx.android.synthetic.main.fragment_custom_selector.*
 import kotlinx.android.synthetic.main.fragment_custom_selector.view.*
 import kotlinx.coroutines.*
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 /**
  * Custom Selector Image Fragment.
@@ -62,9 +63,14 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
     lateinit var filteredImages: ArrayList<Image>;
 
     /**
-     * Hashmap to store removed images
+     * Stores all images
      */
-    private var removedImages: LinkedHashMap<Int,Image> = LinkedHashMap()
+    var allImages: ArrayList<Image> = ArrayList()
+
+    /**
+     * Hashmap to store actioned images
+     */
+    private var actionedImages: TreeMap<Int,Image> = TreeMap()
 
     /**
      * View model Factory.
@@ -129,6 +135,7 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
     private val scope : CoroutineScope = MainScope()
     private var ioDispatcher : CoroutineDispatcher = Dispatchers.IO
     private var defaultDispatcher : CoroutineDispatcher = Dispatchers.Default
+    var switchState = true
 
     companion object {
 
@@ -188,67 +195,53 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
         selectorRV = root.selector_rv
         loader = root.loader
         progressLayout = root.progressLayout
+        selectorRV!!.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (!switchState) {
+                    actionedImages = imageLoader!!.getActionedImages()
+                    when {
+                        actionedImages.isNotEmpty() -> {
+                            val s = filteredImages.size
+                            filteredImages.removeAll(actionedImages.values)
+                            if (filteredImages.size != s) {
+                                imageAdapter.init(filteredImages, allImages)
+                                imageAdapter.notifyDataSetChanged()
+                            }
+                        }
+                    }
+                }
+            }
+        })
 
         return root
     }
 
     private fun onChangeSwitchState(checked: Boolean) {
         if (checked) {
+            switchState = true
             switch?.text = getString(R.string.hide_already_actioned_pictures)
-            if(removedImages.isNotEmpty()) {
-                removedImages.forEach { (key, value) ->
-                    filteredImages.add(key, value)
+            if (actionedImages.isNotEmpty()) {
+                actionedImages.forEach { (_, value) ->
+                    val position = allImages.indexOf(value)
+                    filteredImages.add(position, value)
                 }
-                removedImages.clear()
-                imageAdapter.init(filteredImages)
+                actionedImages.clear()
+                imageAdapter.init(filteredImages, allImages)
                 imageAdapter.notifyDataSetChanged()
             }
         } else {
+            switchState = false
             switch?.text = getString(R.string.show_already_actioned_pictures)
-            val currentRemovedImages: ArrayList<Image> = ArrayList()
             scope.launch {
-                progressLayout!!.visibility = View.VISIBLE
-                switch!!.visibility = View.GONE
-                filteredImages.forEachIndexed{ index, it ->
-                    val imageSHA1 = CustomSelectorUtils.getImageSHA1(
-                        it.uri,
-                        ioDispatcher,
-                        fileUtilsWrapper,
-                        activity!!.contentResolver
-                    )
-                    val modifiedSHA1 = CustomSelectorUtils
-                        .generateModifiedSHA1(it,
-                            defaultDispatcher,
-                            requireContext(),
-                            fileProcessor,
-                            fileUtilsWrapper
-                        )
-
-                    var result = uploadedStatusDao.findByImageSHA1(imageSHA1, true)
-                    when {
-                        result < 1 -> {
-                            result = uploadedStatusDao
-                                .findByModifiedImageSHA1(modifiedSHA1, true)
-                        }
-                    }
-                    val exists = notForUploadStatusDao.find(imageSHA1)
-
-                    when {
-                        exists >= 1 || result >= 1 -> {
-                            removedImages[index] = it
-                            currentRemovedImages.add(it)
-                        }
-                    }
-                }
+                actionedImages = imageLoader!!.getActionedImages()
                 when {
-                    removedImages.isNotEmpty() -> {
-                        filteredImages.removeAll(currentRemovedImages)
-                        imageAdapter.init(filteredImages)
+                    actionedImages.isNotEmpty() -> {
+                        filteredImages.removeAll(actionedImages.values)
+                        imageAdapter.init(filteredImages, allImages)
                         imageAdapter.notifyDataSetChanged()
                     }
                 }
-                progressLayout!!.visibility = View.GONE
-                switch!!.visibility = View.VISIBLE
             }
         }
     }
@@ -273,7 +266,8 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
             val images = result.images
             if(images.isNotEmpty()) {
                 filteredImages = ImageHelper.filterImages(images, bucketId)
-                imageAdapter.init(filteredImages)
+                allImages = ArrayList(filteredImages)
+                imageAdapter.init(filteredImages, allImages)
                 selectorRV?.let {
                     it.visibility = View.VISIBLE
                     lastItemId?.let { pos ->
@@ -343,6 +337,6 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
     }
 
     override fun refresh() {
-        imageAdapter.refresh(filteredImages)
+        imageAdapter.refresh(filteredImages, allImages)
     }
 }

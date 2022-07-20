@@ -64,6 +64,11 @@ class ImageAdapter(
     private var images: ArrayList<Image> = ArrayList()
 
     /**
+     * Stores all images
+     */
+    private var allImages: List<Image> = ArrayList()
+
+    /**
      * Create View holder.
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
@@ -94,7 +99,7 @@ class ImageAdapter(
                 holder.itemUnselected();
             }
             Glide.with(holder.image).load(image.uri).thumbnail(0.3f).into(holder.image)
-            imageLoader.queryAndSetView(holder, image)
+            imageLoader.queryAndSetView(holder, image, allImages)
             holder.itemView.setOnClickListener {
                 selectOrRemoveImage(holder, position)
             }
@@ -142,7 +147,8 @@ class ImageAdapter(
     /**
      * Initialize the data set.
      */
-    fun init(newImages: List<Image>) {
+    fun init(newImages: List<Image>, fixedImages: List<Image>) {
+        allImages = fixedImages
         val oldImageList:ArrayList<Image> = images
         val newImageList:ArrayList<Image> = ArrayList(newImages)
         val diffResult = DiffUtil.calculateDiff(
@@ -155,12 +161,12 @@ class ImageAdapter(
     /**
      * Refresh the data in the adapter
      */
-    fun refresh(newImages: List<Image>) {
+    fun refresh(newImages: List<Image>, fixedImages: List<Image>) {
         selectedNotForUploadImages = 0
         selectedImages.clear()
         images.clear()
         selectedImages = arrayListOf()
-        init(newImages)
+        init(newImages, fixedImages)
         notifyDataSetChanged()
     }
 

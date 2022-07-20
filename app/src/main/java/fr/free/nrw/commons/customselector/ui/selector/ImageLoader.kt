@@ -62,6 +62,11 @@ class ImageLoader @Inject constructor(
     private var mapImageSHA1: HashMap<Uri, String> = HashMap()
 
     /**
+     * Stores actioned images
+     */
+    private var actionedImages: TreeMap<Int, Image> = TreeMap()
+
+    /**
      * Coroutine Dispatchers and Scope.
      */
     private var defaultDispatcher : CoroutineDispatcher = Dispatchers.Default
@@ -71,7 +76,7 @@ class ImageLoader @Inject constructor(
     /**
      * Query image and setUp the view.
      */
-    fun queryAndSetView(holder: ImageViewHolder, image: Image) {
+    fun queryAndSetView(holder: ImageViewHolder, image: Image, fixedImages: List<Image>) {
 
         /**
          * Recycler view uses same view holder, so we can identify the latest query image from holder.
@@ -151,11 +156,34 @@ class ImageLoader @Inject constructor(
                     }
                 }
             }
+
             if(mapHolderImage[holder] == image) {
-                if (result is Result.TRUE) holder.itemUploaded() else holder.itemNotUploaded()
-                if (exists > 0) holder.itemNotForUpload() else holder.itemForUpload()
+                if (result is Result.TRUE) {
+                    holder.itemUploaded()
+
+                    val key = fixedImages.indexOf(image)
+                    if (!actionedImages.containsKey(key)) {
+                        actionedImages[key] = image
+                    }
+                } else holder.itemNotUploaded()
+
+                if (exists > 0) {
+                    holder.itemNotForUpload()
+
+                    val key = fixedImages.indexOf(image)
+                    if (!actionedImages.containsKey(key)) {
+                        actionedImages[key] = image
+                    }
+                } else holder.itemForUpload()
             }
         }
+    }
+
+    /**
+     * Helps to get actioned images
+     */
+    fun getActionedImages(): TreeMap<Int, Image> {
+        return actionedImages
     }
 
     /**
