@@ -67,16 +67,14 @@ class ImageLoader @Inject constructor(
     private var actionedImages: TreeMap<Int, Image> = TreeMap()
 
     /**
-     * Coroutine Dispatchers and Scope.
-     */
-    private var defaultDispatcher : CoroutineDispatcher = Dispatchers.Default
-    private var ioDispatcher : CoroutineDispatcher = Dispatchers.IO
-    private val scope : CoroutineScope = MainScope()
-
-    /**
      * Query image and setUp the view.
      */
-    fun queryAndSetView(holder: ImageViewHolder, image: Image, fixedImages: List<Image>) {
+    suspend fun queryAndSetView(
+        holder: ImageViewHolder,
+        image: Image, fixedImages: List<Image>,
+        ioDispatcher: CoroutineDispatcher,
+        defaultDispatcher: CoroutineDispatcher
+    ): Boolean {
 
         /**
          * Recycler view uses same view holder, so we can identify the latest query image from holder.
@@ -84,99 +82,101 @@ class ImageLoader @Inject constructor(
         mapHolderImage[holder] = image
         holder.itemNotUploaded()
 
-        scope.launch {
+        var result: Result = Result.NOTFOUND
 
-            var result: Result = Result.NOTFOUND
+        if (mapHolderImage[holder] != image) {
+            return false
+        }
 
-            if (mapHolderImage[holder] != image) {
-                return@launch
+        val imageSHA1: String = when(mapImageSHA1[image.uri] != null) {
+            true -> mapImageSHA1[image.uri]!!
+            else -> CustomSelectorUtils.getImageSHA1(image.uri, ioDispatcher, fileUtilsWrapper, context.contentResolver)
+        }
+
+        if(imageSHA1.isEmpty())
+            return false
+        val uploadedStatus = getFromUploaded(imageSHA1)
+
+        val sha1 = uploadedStatus?.let {
+            result = getResultFromUploadedStatus(uploadedStatus)
+            uploadedStatus.modifiedImageSHA1
+        } ?: run {
+            if (mapHolderImage[holder] == image) {
+                getSHA1(image, defaultDispatcher)
+            } else {
+                ""
             }
+        }
 
-            val imageSHA1: String = when(mapImageSHA1[image.uri] != null) {
-                true -> mapImageSHA1[image.uri]!!
-                else -> CustomSelectorUtils.getImageSHA1(image.uri, ioDispatcher, fileUtilsWrapper, context.contentResolver)
-            }
+        if (mapHolderImage[holder] != image) {
+            return false
+        }
 
-            if(imageSHA1.isEmpty())
-                return@launch
-            val uploadedStatus = getFromUploaded(imageSHA1)
+        val exists = notForUploadStatusDao.find(imageSHA1)
 
-            val sha1 = uploadedStatus?.let {
-                result = getResultFromUploadedStatus(uploadedStatus)
-                uploadedStatus.modifiedImageSHA1
-            } ?: run {
-                if (mapHolderImage[holder] == image) {
-                    getSHA1(image)
-                } else {
-                    ""
+        if (result in arrayOf(Result.NOTFOUND, Result.INVALID) && sha1.isNotEmpty()) {
+            when {
+                mapResult[imageSHA1] == null -> {
+                    // Query original image.
+                    result = querySHA1(imageSHA1, ioDispatcher, mediaClient)
+                    when (result) {
+                        is Result.TRUE -> {
+                            mapResult[imageSHA1] = Result.TRUE
+                        }
+                    }
+                }
+                else -> {
+                    result = mapResult[imageSHA1]!!
                 }
             }
-
-            if (mapHolderImage[holder] != image) {
-                return@launch
-            }
-
-            val exists = notForUploadStatusDao.find(imageSHA1)
-
-            if (result in arrayOf(Result.NOTFOUND, Result.INVALID) && sha1.isNotEmpty()) {
+            if (result is Result.TRUE) {
+                // Original image found.
+                insertIntoUploaded(imageSHA1, sha1, result is Result.TRUE, false)
+            } else {
                 when {
-                    mapResult[imageSHA1] == null -> {
-                        // Query original image.
-                        result = querySHA1(imageSHA1, ioDispatcher, mediaClient)
+                    mapResult[sha1] == null -> {
+                        // Original image not found, query modified image.
+                        result = querySHA1(sha1, ioDispatcher, mediaClient)
                         when (result) {
                             is Result.TRUE -> {
-                                mapResult[imageSHA1] = Result.TRUE
+                                mapResult[sha1] = Result.TRUE
                             }
                         }
                     }
                     else -> {
-                        result = mapResult[imageSHA1]!!
+                        result = mapResult[sha1]!!
                     }
                 }
-                if (result is Result.TRUE) {
-                    // Original image found.
-                    insertIntoUploaded(imageSHA1, sha1, result is Result.TRUE, false)
-                } else {
-                    when {
-                        mapResult[sha1] == null -> {
-                            // Original image not found, query modified image.
-                            result = querySHA1(sha1, ioDispatcher, mediaClient)
-                            when (result) {
-                                is Result.TRUE -> {
-                                    mapResult[sha1] = Result.TRUE
-                                }
-                            }
-                        }
-                        else -> {
-                            result = mapResult[sha1]!!
-                        }
-                    }
-                    if (result != Result.ERROR) {
-                        insertIntoUploaded(imageSHA1, sha1, false, result is Result.TRUE)
-                    }
+                if (result != Result.ERROR) {
+                    insertIntoUploaded(imageSHA1, sha1, false, result is Result.TRUE)
                 }
-            }
-
-            if(mapHolderImage[holder] == image) {
-                if (result is Result.TRUE) {
-                    holder.itemUploaded()
-
-                    val key = fixedImages.indexOf(image)
-                    if (!actionedImages.containsKey(key)) {
-                        actionedImages[key] = image
-                    }
-                } else holder.itemNotUploaded()
-
-                if (exists > 0) {
-                    holder.itemNotForUpload()
-
-                    val key = fixedImages.indexOf(image)
-                    if (!actionedImages.containsKey(key)) {
-                        actionedImages[key] = image
-                    }
-                } else holder.itemForUpload()
             }
         }
+
+        var isActionedImage = false
+
+        if(mapHolderImage[holder] == image) {
+            if (result is Result.TRUE) {
+                holder.itemUploaded()
+
+                val key = fixedImages.indexOf(image)
+                if (!actionedImages.containsKey(key)) {
+                    actionedImages[key] = image
+                    isActionedImage = true
+                }
+            } else holder.itemNotUploaded()
+
+            if (exists > 0) {
+                holder.itemNotForUpload()
+
+                val key = fixedImages.indexOf(image)
+                if (!actionedImages.containsKey(key)) {
+                    actionedImages[key] = image
+                    isActionedImage = true
+                }
+            } else holder.itemForUpload()
+        }
+        return isActionedImage
     }
 
     /**
@@ -191,7 +191,7 @@ class ImageLoader @Inject constructor(
      *
      * @return sha1 of the image
      */
-    suspend fun getSHA1(image: Image): String {
+    suspend fun getSHA1(image: Image, defaultDispatcher: CoroutineDispatcher): String {
         mapModifiedImageSHA1[image]?.let{
             return it
         }
@@ -242,13 +242,6 @@ class ImageLoader @Inject constructor(
             }
         }
         return Result.INVALID
-    }
-
-    /**
-     * CleanUp function.
-     */
-    fun cleanUP() {
-        scope.cancel()
     }
 
     /**

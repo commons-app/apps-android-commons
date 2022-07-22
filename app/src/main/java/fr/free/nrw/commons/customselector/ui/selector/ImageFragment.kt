@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
 import android.app.Activity
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +18,8 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.customselector.helper.ImageHelper
+import fr.free.nrw.commons.customselector.helper.ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY
+import fr.free.nrw.commons.customselector.helper.ImageHelper.SWITCH_STATE_PREFERENCE_KEY
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.listeners.RefreshUIListener
 import fr.free.nrw.commons.customselector.model.CallbackStatus
@@ -135,9 +139,13 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
     private val scope : CoroutineScope = MainScope()
     private var ioDispatcher : CoroutineDispatcher = Dispatchers.IO
     private var defaultDispatcher : CoroutineDispatcher = Dispatchers.Default
-    var switchState = true
 
     companion object {
+
+        /**
+         * Switch state
+         */
+        var switchState: Boolean = true
 
         /**
          * BucketId args name
@@ -196,23 +204,13 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
         loader = root.loader
         progressLayout = root.progressLayout
 
-        selectorRV!!
-            .viewTreeObserver
-            .addOnGlobalLayoutListener {
-                if (!switchState) {
-                    actionedImages = imageLoader!!.getActionedImages()
-                    when {
-                        actionedImages.isNotEmpty() -> {
-                            val totalImages = filteredImages.size
-                            filteredImages.removeAll(actionedImages.values)
-                            if (filteredImages.size != totalImages) {
-                                imageAdapter.init(filteredImages, allImages)
-                                imageAdapter.notifyDataSetChanged()
-                            }
-                        }
-                    }
-                }
-            }
+        val sharedPreferences: SharedPreferences =
+            requireContext().getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, MODE_PRIVATE)
+        switchState = sharedPreferences.getBoolean(SWITCH_STATE_PREFERENCE_KEY, true)
+        switch?.isChecked = switchState
+        switch?.text =
+            if (switchState) getString(R.string.hide_already_actioned_pictures)
+            else getString(R.string.show_already_actioned_pictures)
 
         return root
     }
@@ -220,7 +218,14 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
     private fun onChangeSwitchState(checked: Boolean) {
         if (checked) {
             switchState = true
+            val sharedPreferences: SharedPreferences =
+                requireContext().getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putBoolean(SWITCH_STATE_PREFERENCE_KEY, true)
+            editor.apply()
             switch?.text = getString(R.string.hide_already_actioned_pictures)
+
+            filteredImages = imageAdapter.getFilteredImages()
             if (actionedImages.isNotEmpty()) {
                 actionedImages.forEach { (_, value) ->
                     val position = allImages.indexOf(value)
@@ -232,7 +237,14 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
             }
         } else {
             switchState = false
+            val sharedPreferences: SharedPreferences =
+                requireContext().getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putBoolean(SWITCH_STATE_PREFERENCE_KEY, false)
+            editor.apply()
             switch?.text = getString(R.string.show_already_actioned_pictures)
+
+            filteredImages = imageAdapter.getFilteredImages()
             scope.launch {
                 actionedImages = imageLoader!!.getActionedImages()
                 when {
@@ -315,7 +327,7 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
      * Save the Image Fragment state.
      */
     override fun onDestroy() {
-        imageLoader?.cleanUP()
+        imageAdapter.cleanUP()
 
         val position = (selectorRV?.layoutManager as GridLayoutManager)
             .findFirstVisibleItemPosition()

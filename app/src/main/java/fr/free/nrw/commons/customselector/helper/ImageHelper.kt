@@ -4,9 +4,19 @@ import fr.free.nrw.commons.customselector.model.Folder
 import fr.free.nrw.commons.customselector.model.Image
 
 /**
- * Image Helper object, includes all the static functions required by custom selector.
+ * Image Helper object, includes all the static functions and variables required by custom selector.
  */
 object ImageHelper {
+
+    /**
+     * Custom selector preference key
+     */
+    const val CUSTOM_SELECTOR_PREFERENCE_KEY: String = "custom_selector"
+
+    /**
+     * Switch state preference key
+     */
+    const val SWITCH_STATE_PREFERENCE_KEY: String = "switch_state"
 
     /**
      * Returns the list of folders from given image list.

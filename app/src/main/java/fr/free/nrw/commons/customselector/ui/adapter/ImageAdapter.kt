@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.customselector.ui.adapter
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -12,9 +13,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.helper.ImageHelper
+import fr.free.nrw.commons.customselector.helper.ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY
+import fr.free.nrw.commons.customselector.helper.ImageHelper.SWITCH_STATE_PREFERENCE_KEY
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
+import kotlinx.coroutines.*
 
 /**
  * Custom selector ImageAdapter.
@@ -69,6 +73,13 @@ class ImageAdapter(
     private var allImages: List<Image> = ArrayList()
 
     /**
+     * Coroutine Dispatchers and Scope.
+     */
+    private var defaultDispatcher : CoroutineDispatcher = Dispatchers.Default
+    private var ioDispatcher : CoroutineDispatcher = Dispatchers.IO
+    private val scope : CoroutineScope = MainScope()
+
+    /**
      * Create View holder.
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
@@ -99,7 +110,19 @@ class ImageAdapter(
                 holder.itemUnselected();
             }
             Glide.with(holder.image).load(image.uri).thumbnail(0.3f).into(holder.image)
-            imageLoader.queryAndSetView(holder, image, allImages)
+            scope.launch {
+                val p = imageLoader.queryAndSetView(holder, image, allImages, ioDispatcher, defaultDispatcher)
+                val sharedPreferences: SharedPreferences =
+                    context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
+                val switchState = sharedPreferences.getBoolean(SWITCH_STATE_PREFERENCE_KEY, true)
+                if (!switchState) {
+                    if (p) {
+                        images.remove(image)
+                        init(images, allImages)
+                        notifyDataSetChanged()
+                    }
+                }
+            }
             holder.itemView.setOnClickListener {
                 selectOrRemoveImage(holder, position)
             }
@@ -110,6 +133,13 @@ class ImageAdapter(
                 true
             }
         }
+    }
+
+    /**
+     * Provides filtered images
+     */
+    fun getFilteredImages(): ArrayList<Image> {
+        return images
     }
 
     /**
@@ -181,6 +211,13 @@ class ImageAdapter(
 
     fun getImageIdAt(position: Int): Long {
         return images.get(position).id
+    }
+
+    /**
+     * CleanUp function.
+     */
+    fun cleanUP() {
+        scope.cancel()
     }
 
     /**
