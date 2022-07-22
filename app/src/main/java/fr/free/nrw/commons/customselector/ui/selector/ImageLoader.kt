@@ -71,7 +71,8 @@ class ImageLoader @Inject constructor(
      */
     suspend fun queryAndSetView(
         holder: ImageViewHolder,
-        image: Image, fixedImages: List<Image>,
+        image: Image,
+        fixedImages: List<Image>,
         ioDispatcher: CoroutineDispatcher,
         defaultDispatcher: CoroutineDispatcher
     ): Boolean {

@@ -117,8 +117,6 @@ class ImageLoaderTest {
         Whitebox.setInternalState(imageLoader, "mapModifiedImageSHA1", mapModifiedImageSHA1);
         Whitebox.setInternalState(imageLoader, "mapResult", mapResult);
         Whitebox.setInternalState(imageLoader, "context", context)
-        Whitebox.setInternalState(imageLoader, "ioDispatcher", testDispacher)
-        Whitebox.setInternalState(imageLoader, "defaultDispatcher", testDispacher)
 
         whenever(contentResolver.openInputStream(uri)).thenReturn(inputStream)
         whenever(context.contentResolver).thenReturn(contentResolver)
@@ -141,14 +139,15 @@ class ImageLoaderTest {
     @Test
     fun testQueryAndSetViewUploadedStatusNull() = testDispacher.runBlockingTest {
         whenever(uploadedStatusDao.getUploadedFromImageSHA1(any())).thenReturn(null)
+        whenever(notForUploadStatusDao.find(any())).thenReturn(0)
         mapModifiedImageSHA1[image] = "testSha1"
         mapImageSHA1[uri] = "testSha1"
 
         mapResult["testSha1"] = ImageLoader.Result.TRUE
-        imageLoader.queryAndSetView(holder, image, listOf(image))
+        imageLoader.queryAndSetView(holder, image, listOf(image), testDispacher, testDispacher)
 
         mapResult["testSha1"] = ImageLoader.Result.FALSE
-        imageLoader.queryAndSetView(holder, image, listOf(image))
+        imageLoader.queryAndSetView(holder, image, listOf(image), testDispacher, testDispacher)
     }
 
     /**
@@ -157,7 +156,8 @@ class ImageLoaderTest {
     @Test
     fun testQueryAndSetViewUploadedStatusNotNull() = testDispacher.runBlockingTest {
         whenever(uploadedStatusDao.getUploadedFromImageSHA1(any())).thenReturn(uploadedStatus)
-        imageLoader.queryAndSetView(holder, image, listOf(image))
+        whenever(notForUploadStatusDao.find(any())).thenReturn(0)
+        imageLoader.queryAndSetView(holder, image, listOf(image), testDispacher, testDispacher)
     }
 
     /**
@@ -175,13 +175,13 @@ class ImageLoaderTest {
         whenever(fileUtilsWrapper.getFileInputStream("ABC")).thenReturn(inputStream)
         whenever(fileUtilsWrapper.getSHA1(inputStream)).thenReturn("testSha1")
 
-        Assert.assertEquals("testSha1", imageLoader.getSHA1(image));
+        Assert.assertEquals("testSha1", imageLoader.getSHA1(image, testDispacher));
         whenever(PickedFiles.pickedExistingPicture(context, Uri.parse("test"))).thenReturn(
             uploadableFile
         )
 
         mapModifiedImageSHA1[image] = "testSha2"
-        Assert.assertEquals("testSha2", imageLoader.getSHA1(image));
+        Assert.assertEquals("testSha2", imageLoader.getSHA1(image, testDispacher));
     }
 
     /**
@@ -205,8 +205,4 @@ class ImageLoaderTest {
             imageLoader.getResultFromUploadedStatus(uploadedStatus))
     }
 
-    @Test
-    fun testCleanUP() {
-        imageLoader.cleanUP()
-    }
 }
