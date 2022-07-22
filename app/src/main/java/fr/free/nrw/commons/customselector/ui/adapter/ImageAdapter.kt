@@ -111,12 +111,15 @@ class ImageAdapter(
             }
             Glide.with(holder.image).load(image.uri).thumbnail(0.3f).into(holder.image)
             scope.launch {
-                val p = imageLoader.queryAndSetView(holder, image, allImages, ioDispatcher, defaultDispatcher)
+                val isActionedImage =
+                    imageLoader.queryAndSetView(
+                        holder, image, allImages, ioDispatcher, defaultDispatcher
+                    )
                 val sharedPreferences: SharedPreferences =
                     context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
                 val switchState = sharedPreferences.getBoolean(SWITCH_STATE_PREFERENCE_KEY, true)
                 if (!switchState) {
-                    if (p) {
+                    if (isActionedImage) {
                         images.remove(image)
                         init(images, allImages)
                         notifyDataSetChanged()
