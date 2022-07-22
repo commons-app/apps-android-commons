@@ -195,16 +195,17 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
         selectorRV = root.selector_rv
         loader = root.loader
         progressLayout = root.progressLayout
-        selectorRV!!.addOnScrollListener(object: RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
+
+        selectorRV!!
+            .viewTreeObserver
+            .addOnGlobalLayoutListener {
                 if (!switchState) {
                     actionedImages = imageLoader!!.getActionedImages()
                     when {
                         actionedImages.isNotEmpty() -> {
-                            val s = filteredImages.size
+                            val totalImages = filteredImages.size
                             filteredImages.removeAll(actionedImages.values)
-                            if (filteredImages.size != s) {
+                            if (filteredImages.size != totalImages) {
                                 imageAdapter.init(filteredImages, allImages)
                                 imageAdapter.notifyDataSetChanged()
                             }
@@ -212,7 +213,6 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
                     }
                 }
             }
-        })
 
         return root
     }
