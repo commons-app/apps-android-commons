@@ -510,7 +510,7 @@
   <string name="exif_tag_name_software">Logiciel</string>
   <string name="share_text">Téléversez des photos sur Wikimedia Commons directement depuis votre téléphone. Téléchargez l’application Commons maintenant : %1$s</string>
   <string name="share_via">Partager l’application via...</string>
-  <string name="image_info">Informations de l’image</string>
+  <string name="image_info">Informations sur l’image</string>
   <string name="no_categories_found">Aucune catégorie trouvée</string>
   <string name="no_depiction_found">Aucun élément représenté trouvé</string>
   <string name="upload_cancelled">Téléversement annulé</string>
