@@ -160,7 +160,8 @@ class ImageLoader @Inject constructor(
 
         var isActionedImage = -1
         val sharedPreferences: SharedPreferences =
-            context.getSharedPreferences(ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
+            context
+                .getSharedPreferences(ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
         val switchState =
             sharedPreferences.getBoolean(ImageHelper.SWITCH_STATE_PREFERENCE_KEY, true)
 

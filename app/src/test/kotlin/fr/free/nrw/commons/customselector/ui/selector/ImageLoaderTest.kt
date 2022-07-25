@@ -2,6 +2,7 @@ package fr.free.nrw.commons.customselector.ui.selector
 
 import android.content.ContentResolver
 import android.content.Context
+import android.content.SharedPreferences
 import android.net.Uri
 import com.nhaarman.mockitokotlin2.*
 import fr.free.nrw.commons.TestCommonsApplication
@@ -142,12 +143,14 @@ class ImageLoaderTest {
         whenever(notForUploadStatusDao.find(any())).thenReturn(0)
         mapModifiedImageSHA1[image] = "testSha1"
         mapImageSHA1[uri] = "testSha1"
+        whenever(context.getSharedPreferences("custom_selector", 0))
+            .thenReturn(Mockito.mock(SharedPreferences::class.java))
 
         mapResult["testSha1"] = ImageLoader.Result.TRUE
-        imageLoader.queryAndSetView(holder, image, listOf(image), testDispacher, testDispacher)
+        imageLoader.queryAndSetView(holder, image, listOf(image), testDispacher, testDispacher, 0)
 
         mapResult["testSha1"] = ImageLoader.Result.FALSE
-        imageLoader.queryAndSetView(holder, image, listOf(image), testDispacher, testDispacher)
+        imageLoader.queryAndSetView(holder, image, listOf(image), testDispacher, testDispacher, 0)
     }
 
     /**
@@ -157,7 +160,9 @@ class ImageLoaderTest {
     fun testQueryAndSetViewUploadedStatusNotNull() = testDispacher.runBlockingTest {
         whenever(uploadedStatusDao.getUploadedFromImageSHA1(any())).thenReturn(uploadedStatus)
         whenever(notForUploadStatusDao.find(any())).thenReturn(0)
-        imageLoader.queryAndSetView(holder, image, listOf(image), testDispacher, testDispacher)
+        whenever(context.getSharedPreferences("custom_selector", 0))
+            .thenReturn(Mockito.mock(SharedPreferences::class.java))
+        imageLoader.queryAndSetView(holder, image, listOf(image), testDispacher, testDispacher, 0)
     }
 
     /**
