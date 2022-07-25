@@ -225,16 +225,9 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
             editor.apply()
             switch?.text = getString(R.string.hide_already_actioned_pictures)
 
-            filteredImages = imageAdapter.getFilteredImages()
-            if (actionedImages.isNotEmpty()) {
-                actionedImages.forEach { (_, value) ->
-                    val position = allImages.indexOf(value)
-                    filteredImages.add(position, value)
-                }
-                actionedImages.clear()
-                imageAdapter.init(filteredImages, allImages)
-                imageAdapter.notifyDataSetChanged()
-            }
+            actionedImages.clear()
+            imageAdapter.init(allImages, allImages)
+            imageAdapter.notifyDataSetChanged()
         } else {
             switchState = false
             val sharedPreferences: SharedPreferences =

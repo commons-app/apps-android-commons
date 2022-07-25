@@ -92,7 +92,7 @@ class ImageAdapter(
      */
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val image=images[position]
-        holder.image.setImageDrawable (null)
+//        holder.image.setImageDrawable (null)
         if (context.contentResolver.getType(image.uri) == null) {
             // Image does not exist anymore, update adapter.
             holder.itemView.post {
@@ -109,7 +109,7 @@ class ImageAdapter(
             } else {
                 holder.itemUnselected();
             }
-            Glide.with(holder.image).load(image.uri).thumbnail(0.3f).into(holder.image)
+
             scope.launch {
                 val isActionedImage =
                     imageLoader.queryAndSetView(
@@ -122,8 +122,13 @@ class ImageAdapter(
                 if (!switchState) {
                     if (isActionedImage>=0) {
                         images.remove(image)
-                        notifyDataSetChanged()
+                        notifyItemRemoved(position)
+                        notifyItemRangeChanged(position, itemCount)
+                    } else {
+                        Glide.with(holder.image).load(image.uri).thumbnail(0.3f).into(holder.image)
                     }
+                } else {
+                    Glide.with(holder.image).load(image.uri).thumbnail(0.3f).into(holder.image)
                 }
             }
             holder.itemView.setOnClickListener {
