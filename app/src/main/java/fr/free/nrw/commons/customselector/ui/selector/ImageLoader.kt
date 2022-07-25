@@ -1,10 +1,12 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.net.Uri
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
+import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter.ImageViewHolder
 import fr.free.nrw.commons.media.MediaClient
@@ -74,19 +76,21 @@ class ImageLoader @Inject constructor(
         image: Image,
         fixedImages: List<Image>,
         ioDispatcher: CoroutineDispatcher,
-        defaultDispatcher: CoroutineDispatcher
-    ): Boolean {
+        defaultDispatcher: CoroutineDispatcher,
+        position: Int
+    ): Int {
 
         /**
          * Recycler view uses same view holder, so we can identify the latest query image from holder.
          */
         mapHolderImage[holder] = image
         holder.itemNotUploaded()
+        holder.itemForUpload()
 
         var result: Result = Result.NOTFOUND
 
         if (mapHolderImage[holder] != image) {
-            return false
+            return -1
         }
 
         val imageSHA1: String = when(mapImageSHA1[image.uri] != null) {
@@ -95,7 +99,7 @@ class ImageLoader @Inject constructor(
         }
 
         if(imageSHA1.isEmpty())
-            return false
+            return -1
         val uploadedStatus = getFromUploaded(imageSHA1)
 
         val sha1 = uploadedStatus?.let {
@@ -110,7 +114,7 @@ class ImageLoader @Inject constructor(
         }
 
         if (mapHolderImage[holder] != image) {
-            return false
+            return -1
         }
 
         val exists = notForUploadStatusDao.find(imageSHA1)
@@ -154,26 +158,51 @@ class ImageLoader @Inject constructor(
             }
         }
 
-        var isActionedImage = false
+        var isActionedImage = -1
+        val sharedPreferences: SharedPreferences =
+            context.getSharedPreferences(ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
+        val switchState =
+            sharedPreferences.getBoolean(ImageHelper.SWITCH_STATE_PREFERENCE_KEY, true)
 
         if(mapHolderImage[holder] == image) {
             if (result is Result.TRUE) {
-                holder.itemUploaded()
+                if (switchState) {
+                    holder.itemUploaded()
 
-                val key = fixedImages.indexOf(image)
-                if (!actionedImages.containsKey(key)) {
-                    actionedImages[key] = image
-                    isActionedImage = true
+                    val key = fixedImages.indexOf(image)
+                    if (!actionedImages.containsKey(key)) {
+                        actionedImages[key] = image
+
+                    }
+                    isActionedImage = position
+                } else {
+                    holder.itemNotUploaded()
+
+                    val key = fixedImages.indexOf(image)
+                    if (!actionedImages.containsKey(key)) {
+                        actionedImages[key] = image
+                    }
+                    isActionedImage = position
                 }
             } else holder.itemNotUploaded()
 
             if (exists > 0) {
-                holder.itemNotForUpload()
+                if (switchState) {
+                    holder.itemNotForUpload()
 
-                val key = fixedImages.indexOf(image)
-                if (!actionedImages.containsKey(key)) {
-                    actionedImages[key] = image
-                    isActionedImage = true
+                    val key = fixedImages.indexOf(image)
+                    if (!actionedImages.containsKey(key)) {
+                        actionedImages[key] = image
+                    }
+                    isActionedImage = position
+                } else {
+                    holder.itemForUpload()
+
+                    val key = fixedImages.indexOf(image)
+                    if (!actionedImages.containsKey(key)) {
+                        actionedImages[key] = image
+                    }
+                    isActionedImage = position
                 }
             } else holder.itemForUpload()
         }

@@ -113,15 +113,15 @@ class ImageAdapter(
             scope.launch {
                 val isActionedImage =
                     imageLoader.queryAndSetView(
-                        holder, image, allImages, ioDispatcher, defaultDispatcher
+                        holder, image, allImages, ioDispatcher, defaultDispatcher, position
                     )
                 val sharedPreferences: SharedPreferences =
                     context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
-                val switchState = sharedPreferences.getBoolean(SWITCH_STATE_PREFERENCE_KEY, true)
+                val switchState =
+                    sharedPreferences.getBoolean(SWITCH_STATE_PREFERENCE_KEY, true)
                 if (!switchState) {
-                    if (isActionedImage) {
+                    if (isActionedImage>=0) {
                         images.remove(image)
-                        init(images, allImages)
                         notifyDataSetChanged()
                     }
                 }
