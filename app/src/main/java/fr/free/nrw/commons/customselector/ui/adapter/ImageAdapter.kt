@@ -124,7 +124,7 @@ class ImageAdapter(
                         images.remove(image)
                         notifyItemRemoved(position)
                         notifyItemRangeChanged(position, itemCount)
-                    } else {
+                    } else if (isActionedImage == -1) {
                         Glide.with(holder.image).load(image.uri).thumbnail(0.3f).into(holder.image)
                     }
                 } else {
@@ -224,7 +224,7 @@ class ImageAdapter(
     /**
      * CleanUp function.
      */
-    fun cleanUP() {
+    fun cleanUp() {
         scope.cancel()
     }
 

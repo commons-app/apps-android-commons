@@ -3,6 +3,7 @@ package fr.free.nrw.commons.customselector.ui.selector
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
+import android.util.Log
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
@@ -97,9 +98,11 @@ class ImageLoader @Inject constructor(
             true -> mapImageSHA1[image.uri]!!
             else -> CustomSelectorUtils.getImageSHA1(image.uri, ioDispatcher, fileUtilsWrapper, context.contentResolver)
         }
+        mapImageSHA1[image.uri] = imageSHA1
 
-        if(imageSHA1.isEmpty())
+        if(imageSHA1.isEmpty()) {
             return -1
+        }
         val uploadedStatus = getFromUploaded(imageSHA1)
 
         val sha1 = uploadedStatus?.let {
@@ -114,7 +117,7 @@ class ImageLoader @Inject constructor(
         }
 
         if (mapHolderImage[holder] != image) {
-            return -1
+            return -2
         }
 
         val exists = notForUploadStatusDao.find(imageSHA1)
@@ -206,6 +209,8 @@ class ImageLoader @Inject constructor(
                     isActionedImage = position
                 }
             } else holder.itemForUpload()
+        } else {
+            return -2
         }
         return isActionedImage
     }
