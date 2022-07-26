@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.customselector.ui.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -10,6 +11,7 @@ import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
@@ -36,7 +38,7 @@ class ImageAdapter(
     private var imageLoader: ImageLoader
 ):
 
-    RecyclerViewAdapter<ImageAdapter.ImageViewHolder>(context) {
+    RecyclerViewAdapter<ImageAdapter.ImageViewHolder>(context), FastScrollRecyclerView.SectionedAdapter {
 
     /**
      * ImageSelectedOrUpdated payload class.
@@ -276,6 +278,11 @@ class ImageAdapter(
             return oldImageList[oldItemPosition].equals(newImageList[newItemPosition])
         }
 
+    }
+
+    override fun getSectionName(position: Int): String {
+        Log.d("haha", "getSectionName: "+images[position].date)
+        return images[position].date
     }
 
 }

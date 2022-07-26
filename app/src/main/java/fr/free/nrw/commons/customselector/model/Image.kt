@@ -41,7 +41,9 @@ data class Image(
     /**
     sha1 : sha1 of original image.
      */
-    var sha1: String = ""
+    var sha1: String = "",
+
+    var date: String = ""
 ) : Parcelable {
 
     /**
@@ -53,6 +55,7 @@ data class Image(
                 parcel.readParcelable(Uri::class.java.classLoader)!!,
                 parcel.readString()!!,
                 parcel.readLong(),
+                parcel.readString()!!,
                 parcel.readString()!!,
                 parcel.readString()!!
             )
@@ -68,6 +71,7 @@ data class Image(
         parcel.writeLong(bucketId)
         parcel.writeString(bucketName)
         parcel.writeString(sha1)
+        parcel.writeString(date)
     }
 
     /**

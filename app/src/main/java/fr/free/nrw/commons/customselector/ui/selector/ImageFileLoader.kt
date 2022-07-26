@@ -7,6 +7,9 @@ import fr.free.nrw.commons.customselector.listeners.ImageLoaderListener
 import fr.free.nrw.commons.customselector.model.Image
 import kotlinx.coroutines.*
 import java.io.File
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -28,7 +31,8 @@ class ImageFileLoader(val context: Context) : CoroutineScope{
         MediaStore.Images.Media.DISPLAY_NAME,
         MediaStore.Images.Media.DATA,
         MediaStore.Images.Media.BUCKET_ID,
-        MediaStore.Images.Media.BUCKET_DISPLAY_NAME)
+        MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
+        MediaStore.Images.Media.DATE_TAKEN)
 
     /**
      * Load Device Images under coroutine.
@@ -57,6 +61,7 @@ class ImageFileLoader(val context: Context) : CoroutineScope{
         val dataColumn = cursor.getColumnIndex(MediaStore.Images.Media.DATA)
         val bucketIdColumn = cursor.getColumnIndex(MediaStore.Images.Media.BUCKET_ID)
         val bucketNameColumn = cursor.getColumnIndex(MediaStore.Images.Media.BUCKET_DISPLAY_NAME)
+        val dateColumn = cursor.getColumnIndex(MediaStore.Images.Media.DATE_TAKEN)
 
         val images = arrayListOf<Image>()
         if (cursor.moveToFirst()) {
@@ -70,6 +75,7 @@ class ImageFileLoader(val context: Context) : CoroutineScope{
                 val path = cursor.getString(dataColumn)
                 val bucketId = cursor.getLong(bucketIdColumn)
                 val bucketName = cursor.getString(bucketNameColumn)
+                val date = cursor.getString(dateColumn)
 
                 val file =
                     if (path == null || path.isEmpty()) {
@@ -84,8 +90,13 @@ class ImageFileLoader(val context: Context) : CoroutineScope{
                 if (file != null && file.exists()) {
                     if (name != null && path != null && bucketName != null) {
                         val uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
-                        val image = Image(id, name, uri, path, bucketId, bucketName)
-                        images.add(image)
+                        val sdf = SimpleDateFormat("yyyyMMddHHmmss")
+                        try {
+                            val d: Date = sdf.parse(date)
+                            val image = Image(id, name, uri, path, bucketId, bucketName, date = (date.toString()))
+                            images.add(image)
+                        } catch (ex: ParseException) {
+                        }
                     }
                 }
 
