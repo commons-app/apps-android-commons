@@ -320,7 +320,7 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
      * Save the Image Fragment state.
      */
     override fun onDestroy() {
-        imageAdapter.cleanUP()
+        imageAdapter.cleanUp()
 
         val position = (selectorRV?.layoutManager as GridLayoutManager)
             .findFirstVisibleItemPosition()
