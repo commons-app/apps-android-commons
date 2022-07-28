@@ -12,6 +12,8 @@ import androidx.exifinterface.media.ExifInterface;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import fr.free.nrw.commons.upload.FileUtils;
@@ -124,12 +126,26 @@ public class UploadableFile implements Parcelable {
     private DateTimeWithSource getDateTimeFromExif() {
         try {
             ExifInterface exif = new ExifInterface(file.getAbsolutePath());
-            @SuppressLint("RestrictedApi") Long dateTime = exif.getDateTime();
+            String dateTimeSubString = exif.getAttribute(ExifInterface.TAG_DATETIME_ORIGINAL);
+
+            dateTimeSubString = "2022:ss:33";
+            String year = dateTimeSubString.substring(0,4);
+            Integer.parseInt(year);
+            String month = dateTimeSubString.substring(5,7);
+            Integer.parseInt(month);
+            String day = dateTimeSubString.substring(8,10);
+            Integer.parseInt(day);
+            String dateCreatedString = year+":"+month+":"+day;
+            @SuppressLint("RestrictedApi") Long dateTime = exif.getDateTimeOriginal();
             if(dateTime != null){
                 Date date = new Date(dateTime);
-                return new DateTimeWithSource(date, DateTimeWithSource.EXIF_SOURCE);
+                return new DateTimeWithSource(date, dateCreatedString, DateTimeWithSource.EXIF_SOURCE);
             }
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
         }
         return null;
@@ -149,6 +165,7 @@ public class UploadableFile implements Parcelable {
         public static final String EXIF_SOURCE = "exif";
 
         private final long epochDate;
+        private String dateString; // this does not includes timezone information
         private final String source;
 
         public DateTimeWithSource(long epochDate, String source) {
@@ -161,8 +178,18 @@ public class UploadableFile implements Parcelable {
             this.source = source;
         }
 
+        public DateTimeWithSource(Date date, String dateString, String source) {
+            this.epochDate = date.getTime();
+            this.dateString = dateString;
+            this.source = source;
+        }
+
         public long getEpochDate() {
             return epochDate;
+        }
+
+        public String getDateString() {
+            return dateString;
         }
 
         public String getSource() {
