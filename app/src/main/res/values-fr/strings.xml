@@ -141,7 +141,7 @@
   <string name="login_failed_2fa_needed">Vous devez fournir votre code d’authentification à deux facteurs.</string>
   <string name="login_failed_generic">Échec de connexion</string>
   <string name="share_upload_button">Téléverser</string>
-  <string name="multiple_share_base_title">Nommer ce jeu</string>
+  <string name="multiple_share_base_title">Nommer cet ensemble</string>
   <string name="provider_modifications">Modifications</string>
   <string name="menu_upload_single">Téléverser</string>
   <string name="categories_search_text_hint">Rechercher des catégories</string>
@@ -434,7 +434,7 @@
   <string name="back_button_warning">Annuler le téléversement</string>
   <string name="back_button_warning_desc">L’utilisation du bouton de retour annulera ce téléversement et vous perdrez votre progression</string>
   <string name="back_button_continue">Continuer le téléversement</string>
-  <string name="upload_flow_all_images_in_set">(Pour toutes les images dans le jeu)</string>
+  <string name="upload_flow_all_images_in_set">(Pour toutes les images de l’ensemble)</string>
   <string name="search_this_area">Chercher dans cette zone</string>
   <string name="nearby_card_permission_title">Demande d’autorisation</string>
   <string name="nearby_card_permission_explanation">Désirez-vous que nous utilisions votre géolocalisation actuelle pour afficher les endroits proches qui ont besoin d\'images ?</string>
@@ -700,7 +700,7 @@
   <string name="advanced_query_info_text">Vous pouvez personnaliser la requête de proximité. Si vous obtenez des erreurs, réinitialisez et appliquez.</string>
   <string name="apply">Appliquer</string>
   <string name="reset">Réinitialiser</string>
-  <string name="location_message">Les données de lieu aident les éditeurs de Wiki à trouver votre photo, ce qui la rend beaucoup plus utile.\nVos téléchargements récents n’indiquent aucun lieu.\nNous vous suggérons d’activer la géolocalisation dans les paramètres de votre application appareil photo.\nMerci pour vos téléversements !</string>
+  <string name="location_message">Les données de lieu aident les éditeurs de Wiki à trouver votre photo, ce qui la rend beaucoup plus utile.\nVos téléchargements récents n’indiquent aucun lieu.\nNous vous suggérons d’activer la géolocalisation dans les paramètres de votre application appareil photo.\nMerci pour vos téléversements !</string>
   <string name="no_location_found_title">Aucun lieu trouvé</string>
   <string name="no_location_found_message">Pourquoi ne pas ajouter le lieu où cette image a été trouvée ?\nLes données de lieu aident les contributeurs de wikis à trouver votre image, ce qui la rend beaucoup plus utile.\nMerci !</string>
   <string name="add_location">Ajouter un lieu</string>
