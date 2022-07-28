@@ -2,6 +2,7 @@ package fr.free.nrw.commons.customselector.ui.adapter
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -19,6 +20,8 @@ import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
 import kotlinx.coroutines.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Custom selector ImageAdapter.
@@ -72,6 +75,10 @@ class ImageAdapter(
      */
     private var allImages: List<Image> = ArrayList()
 
+    private var actionable: TreeMap<Int, Image> = TreeMap()
+    private var already: ArrayList<Int> = ArrayList()
+    private var nextImage = 0
+
     /**
      * Coroutine Dispatchers and Scope.
      */
@@ -91,7 +98,7 @@ class ImageAdapter(
      * Bind View holder, load image, selected view, click listeners.
      */
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        val image=images[position]
+        var image=images[position]
 //        holder.image.setImageDrawable (null)
         if (context.contentResolver.getType(image.uri) == null) {
             // Image does not exist anymore, update adapter.
@@ -109,8 +116,9 @@ class ImageAdapter(
             } else {
                 holder.itemUnselected();
             }
-
+//            Glide.with(holder.image).load(image.uri).thumbnail(0.3f).into(holder.image)
             scope.launch {
+                Log.d("hahaa", "onBindViewHolder1: "+(position))
                 val isActionedImage =
                     imageLoader.queryAndSetView(
                         holder, image, allImages, ioDispatcher, defaultDispatcher, position
@@ -120,13 +128,45 @@ class ImageAdapter(
                 val switchState =
                     sharedPreferences.getBoolean(SWITCH_STATE_PREFERENCE_KEY, true)
                 if (!switchState) {
-                    if (isActionedImage>=0) {
-                        images.remove(image)
-                        notifyItemRemoved(position)
-                        notifyItemRangeChanged(position, itemCount)
-                    } else if (isActionedImage == -1) {
+                    // only call if already not get the position
+                    Log.d("hahaa", "onBindViewHolder2: "+(position))
+
+                    Log.d("haha", "onBindViewHolder: "+(already)+" d "+(actionable.keys))
+                    if(!already.contains(position)) {
+                        val next = imageLoader.nextActionedImage(
+                            allImages, position, ioDispatcher,
+                            defaultDispatcher, nextImage
+                        )
+                        if (next > -1) {
+                            nextImage = next+1
+                            if (!actionable.containsKey(next)) {
+                                actionable[next] = allImages[next]
+                                already.add(position)
+                                Glide.with(holder.image).load(allImages[next].uri).thumbnail(0.3f).into(holder.image)
+                                notifyItemInserted(position)
+                                notifyItemRangeChanged(position, itemCount+1)
+                                // increase item count
+                                // notifydataadded
+                                val a: List<Image> = ArrayList(actionable.values)
+                                image = a[position]
+                            }
+//                            else if (actionable.containsKey(next) && !(already.contains(position))) {
+//
+//                            }
+                        }
+                    } else {
+                        val a: List<Image> = ArrayList(actionable.values)
+                        image = a[position]
                         Glide.with(holder.image).load(image.uri).thumbnail(0.3f).into(holder.image)
                     }
+//                    if (isActionedImage>=0) {
+//                        images.remove(image)
+//                        notifyItemRemoved(position)
+//                        notifyItemRangeChanged(position, itemCount)
+//                    } else if (isActionedImage == -1) {
+//
+//                    }
+
                 } else {
                     Glide.with(holder.image).load(image.uri).thumbnail(0.3f).into(holder.image)
                 }
@@ -185,10 +225,13 @@ class ImageAdapter(
     /**
      * Initialize the data set.
      */
-    fun init(newImages: List<Image>, fixedImages: List<Image>) {
+    fun init(newImages: List<Image>, fixedImages: List<Image>, emptyMap: TreeMap<Int, Image>) {
         allImages = fixedImages
         val oldImageList:ArrayList<Image> = images
         val newImageList:ArrayList<Image> = ArrayList(newImages)
+        actionable = emptyMap
+        already = ArrayList()
+        nextImage = 0
         val diffResult = DiffUtil.calculateDiff(
             ImagesDiffCallback(oldImageList, newImageList)
         )
@@ -204,7 +247,7 @@ class ImageAdapter(
         selectedImages.clear()
         images.clear()
         selectedImages = arrayListOf()
-        init(newImages, fixedImages)
+        init(newImages, fixedImages, TreeMap())
         notifyDataSetChanged()
     }
 
@@ -214,7 +257,15 @@ class ImageAdapter(
      * @return The total number of items in this adapter.
      */
     override fun getItemCount(): Int {
-        return images.size
+        val sharedPreferences: SharedPreferences =
+            context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
+        val switchState =
+            sharedPreferences.getBoolean(SWITCH_STATE_PREFERENCE_KEY, true)
+        return if(switchState) {
+            allImages.size
+        } else {
+            actionable.size+1
+        }
     }
 
     fun getImageIdAt(position: Int): Long {

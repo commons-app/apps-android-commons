@@ -62,6 +62,7 @@ class ImageLoader @Inject constructor(
     private var mapHolderImage : HashMap<ImageViewHolder, Image> = HashMap()
     private var mapResult: HashMap<String, Result> = HashMap()
     private var mapImageSHA1: HashMap<Uri, String> = HashMap()
+//    private var nextImage: Int = 0
 
     /**
      * Stores actioned images
@@ -212,6 +213,71 @@ class ImageLoader @Inject constructor(
             return -2
         }
         return isActionedImage
+    }
+
+    suspend fun nextActionedImage(
+        allImages: List<Image>, position: Int,
+        ioDispatcher: CoroutineDispatcher,
+        defaultDispatcher: CoroutineDispatcher,
+        nextImage: Int
+    ): Int {
+        var next = -1
+        // call from next checked pos
+        for (i in nextImage until allImages.size){
+            val it = allImages[i]
+            val imageSHA1: String = when (mapImageSHA1[it.uri] != null) {
+                true -> mapImageSHA1[it.uri]!!
+                else -> CustomSelectorUtils.getImageSHA1(
+                    it.uri,
+                    ioDispatcher,
+                    fileUtilsWrapper,
+                    context.contentResolver
+                )
+            }
+            next = notForUploadStatusDao.find(imageSHA1)
+            if(next > 0){
+                continue
+            } else {
+                next = uploadedStatusDao.findByImageSHA1(imageSHA1, true)
+                if (next <= 0) {
+                    val modifiedImageSha1 = getSHA1(it, defaultDispatcher)
+                    next = uploadedStatusDao.findByModifiedImageSHA1(modifiedImageSha1, true)
+                    if (next <= 0) {
+                        return i
+                    } else {
+                        continue
+                    }
+                } else {
+                    continue
+                }
+            }
+        }
+//        allImages.forEachIndexed { index, it ->
+//            val imageSHA1: String = when (mapImageSHA1[it.uri] != null) {
+//                true -> mapImageSHA1[it.uri]!!
+//                else -> CustomSelectorUtils.getImageSHA1(
+//                    it.uri,
+//                    ioDispatcher,
+//                    fileUtilsWrapper,
+//                    context.contentResolver
+//                )
+//            }
+//            next = notForUploadStatusDao.find(imageSHA1)
+//            if(next > 0){
+//                return index
+//            }
+//            next = uploadedStatusDao.findByImageSHA1(imageSHA1, true)
+//            if(next <=0 ){
+//                val modifiedImageSha1 = getSHA1(it, defaultDispatcher)
+//                next = uploadedStatusDao.findByModifiedImageSHA1(modifiedImageSha1, true)
+//                if(next > 0){
+//                    return index
+//                }
+//            } else {
+//                return index
+//            }
+//        }
+        return -1
     }
 
     /**

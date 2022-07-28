@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -226,7 +227,7 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
             switch?.text = getString(R.string.hide_already_actioned_pictures)
 
             actionedImages.clear()
-            imageAdapter.init(allImages, allImages)
+            imageAdapter.init(allImages, allImages, TreeMap())
             imageAdapter.notifyDataSetChanged()
         } else {
             switchState = false
@@ -237,17 +238,20 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
             editor.apply()
             switch?.text = getString(R.string.show_already_actioned_pictures)
 
-            filteredImages = imageAdapter.getFilteredImages()
-            scope.launch {
-                actionedImages = imageLoader!!.getActionedImages()
-                when {
-                    actionedImages.isNotEmpty() -> {
-                        filteredImages.removeAll(actionedImages.values)
-                        imageAdapter.init(filteredImages, allImages)
-                        imageAdapter.notifyDataSetChanged()
-                    }
-                }
-            }
+            Log.d("haha", "onChangeSwitchState: "+allImages.size)
+            imageAdapter.init(allImages, allImages, TreeMap())
+            imageAdapter.notifyDataSetChanged()
+//            filteredImages = imageAdapter.getFilteredImages()
+//            scope.launch {
+//                actionedImages = imageLoader!!.getActionedImages()
+//                when {
+//                    actionedImages.isNotEmpty() -> {
+//                        filteredImages.removeAll(actionedImages.values)
+//                        imageAdapter.init(filteredImages, allImages)
+//                        imageAdapter.notifyDataSetChanged()
+//                    }
+//                }
+//            }
         }
     }
 
@@ -272,7 +276,11 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
             if(images.isNotEmpty()) {
                 filteredImages = ImageHelper.filterImages(images, bucketId)
                 allImages = ArrayList(filteredImages)
-                imageAdapter.init(filteredImages, allImages)
+                if(switchState) {
+                    imageAdapter.init(filteredImages, allImages, TreeMap())
+                } else {
+                    imageAdapter.init(filteredImages, allImages, TreeMap())
+                }
                 selectorRV?.let {
                     it.visibility = View.VISIBLE
                     lastItemId?.let { pos ->
