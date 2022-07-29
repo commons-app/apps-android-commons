@@ -127,6 +127,7 @@ public class UploadableFile implements Parcelable {
         try {
             ExifInterface exif = new ExifInterface(file.getAbsolutePath());
             // TAG_DATETIME returns the last edited date, we need TAG_DATETIME_ORIGINAL for creation date
+            // See issue https://github.com/commons-app/apps-android-commons/issues/1971
             String dateTimeSubString = exif.getAttribute(ExifInterface.TAG_DATETIME_ORIGINAL);
 
             String year = dateTimeSubString.substring(0,4);
