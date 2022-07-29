@@ -163,8 +163,8 @@ class ImageAdapter(
                                 notifyItemRangeChanged(position, itemCount+1)
                                 // increase item count
                                 // notifydataadded
-                                val a: List<Image> = ArrayList(actionable.values)
-                                image = a[position]
+//                                val a: List<Image> = ArrayList(actionable.values)
+//                                image = a[position]
                             }
 //                            else if (actionable.containsKey(next) && !(already.contains(position))) {
 //
