@@ -126,15 +126,16 @@ public class UploadableFile implements Parcelable {
     private DateTimeWithSource getDateTimeFromExif() {
         try {
             ExifInterface exif = new ExifInterface(file.getAbsolutePath());
+            // TAG_DATETIME returns the last edited date, we need TAG_DATETIME_ORIGINAL for creation date
             String dateTimeSubString = exif.getAttribute(ExifInterface.TAG_DATETIME_ORIGINAL);
 
-            dateTimeSubString = "2022:ss:33";
             String year = dateTimeSubString.substring(0,4);
-            Integer.parseInt(year);
+            Integer.parseInt(year); //Parsing integers to just verify no NumberFormatException is thrown means strings are numbers
             String month = dateTimeSubString.substring(5,7);
             Integer.parseInt(month);
             String day = dateTimeSubString.substring(8,10);
             Integer.parseInt(day);
+            // This date is stored as a string (not as a date), the rason is we don't want to include timezones
             String dateCreatedString = year+":"+month+":"+day;
             @SuppressLint("RestrictedApi") Long dateTime = exif.getDateTimeOriginal();
             if(dateTime != null){
