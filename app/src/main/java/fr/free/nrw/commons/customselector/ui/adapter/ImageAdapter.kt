@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.customselector.ui.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -280,8 +279,10 @@ class ImageAdapter(
 
     }
 
+    /**
+     * Returns the text for showing inside the bubble
+     */
     override fun getSectionName(position: Int): String {
-        Log.d("haha", "getSectionName: "+images[position].date)
         return images[position].date
     }
 

@@ -43,7 +43,11 @@ data class Image(
      */
     var sha1: String = "",
 
+    /**
+     * date: Addition date of the image
+     */
     var date: String = ""
+
 ) : Parcelable {
 
     /**
