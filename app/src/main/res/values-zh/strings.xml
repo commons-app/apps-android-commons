@@ -24,6 +24,7 @@
 * Si109
 * SkyEye FAST
 * SomeyaMako
+* Stang
 * StarrySky
 * Tranve
 * Vikarna
@@ -204,7 +205,7 @@
   <string name="welcome_final_button_text">是！</string>
   <string name="welcome_help_button_text">更多信息</string>
   <string name="detail_panel_cats_label">分类</string>
-  <string name="detail_panel_cats_loading">正在载入……</string>
+  <string name="detail_panel_cats_loading">正在加载……</string>
   <string name="detail_panel_cats_none">未选择</string>
   <string name="detail_caption_empty">无字幕</string>
   <string name="detail_description_empty">没有说明</string>
@@ -328,7 +329,7 @@
   <string name="search_recent_header">最近搜索：</string>
   <string name="provider_searches">最近的搜索查询</string>
   <string name="provider_recent_languages">最近的语言查询</string>
-  <string name="error_loading_categories">载入分类时发生错误。</string>
+  <string name="error_loading_categories">加载分类时发生错误。</string>
   <string name="error_loading_depictions">加载描述时出错。</string>
   <string name="search_tab_title_media">媒体</string>
   <string name="search_tab_title_categories">分类</string>

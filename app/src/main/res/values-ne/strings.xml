@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Bada Kaji
 * Drjpoudel
 * Nirajan pant
 * Parbat subedi
@@ -13,6 +14,9 @@
   <string name="commons_logo">कमन्सकाे लाेगाे</string>
   <string name="commons_website">कमन्सकाे वेबसाइट</string>
   <string name="submit">बुझाउनुहोस्</string>
+  <string name="show_captions_description">विवरण</string>
+  <string name="nearby_row_image">चित्र</string>
+  <string name="nearby_all">सबै</string>
   <string name="appwidget_img">दिनकाे उत्कृष्ट तस्वीर</string>
   <string name="share_license_summary" fuzzy="true">यी तस्वीरहरू  %1$s अनुमतिपत्र अनुसार प्राप्त हुनेछ</string>
   <string name="navigation_item_explore">अन्वेषण</string>
@@ -34,7 +38,7 @@
   <string name="logging_in_message">कृपया प्रतीक्षा गर्नुहोस् …</string>
   <string name="login_success">प्रवेश सफल!</string>
   <string name="login_failed">प्रवेश सफल हुन सकेन!</string>
-  <string name="upload_failed">फाइल भेटिएन। कृपया अर्को फाइल प्रयास गर्नुहोस्।</string>
+  <string name="upload_failed">चित्र भेटिएन। कृपया अर्को चित्र प्रयास गर्नुहोस्।</string>
   <string name="authentication_failed">प्रमाणिकरण असफल भयो, कृपया पुनः प्रवेश गर्नुहोस्!</string>
   <string name="uploading_started">उर्ध्वभरण सुरू भयो!</string>
   <string name="upload_completed_notification_title">%1$s उर्ध्वभरण गरियो !</string>
@@ -54,6 +58,7 @@
   <string name="menu_nearby">वरिपरिका</string>
   <string name="provider_contributions">मेरा उर्ध्वभरणहरू</string>
   <string name="menu_share">बाड्ने</string>
+  <string name="menu_view_file_page">चित्र पृष्ठ हेर्नुहोस्</string>
   <string name="share_title_hint" fuzzy="true">शीर्षक (आवश्यक)</string>
   <string name="share_description_hint">वर्णन</string>
   <string name="login_failed_network">प्रवेश गर्न असमर्थ - जडान खराबी</string>
@@ -69,7 +74,7 @@
   <string name="menu_save_categories">सङ्ग्रह गर्ने</string>
   <string name="refresh_button">ताजा गर्नुहोस्</string>
   <string name="display_list_button">सूची</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">कुनैपनि उर्ध्वभरण छैन</string>
+  <string name="contributions_subtitle_zero">(अहिले सम्म कुनै उर्ध्वभरण छैन)</string>
   <string name="categories_not_found">मिल्दो वर्ग %1$s फेला परेन</string>
   <string name="categories_skip_explanation">विकिमिडिया कमन्समा आफ्नो तस्वीरहरू थप भेट्टाउने बनाउन श्रेणीहरू थप्नुहोस।\nश्रेणीहरू थप्नको लागि लेख्न सुरु गर्नुहोस्।</string>
   <string name="categories_activity_title">श्रेणीहरू</string>
@@ -131,9 +136,11 @@
   <string name="location_permission_title">स्थान अनुमतिका लागि अनुराेध</string>
   <string name="ok">ठीक</string>
   <string name="warning">चेतावनी</string>
+  <string name="upload">उर्ध्वभरण</string>
   <string name="yes">हो</string>
   <string name="no">होइन</string>
   <string name="media_detail_title">शीर्षक</string>
+  <string name="media_detail_depiction">चित्रणहरू</string>
   <string name="media_detail_description">विवरण</string>
   <string name="media_detail_discussion">छलफल</string>
   <string name="media_detail_author">सर्जक</string>
@@ -189,9 +196,12 @@
   <string name="search_recent_header">भर्खरैका खोजहरू:</string>
   <string name="search_tab_title_media">मिडिया</string>
   <string name="search_tab_title_categories">श्रेणीहरू</string>
+  <string name="search_tab_title_depictions">वस्तुहरू</string>
   <string name="explore_tab_title_featured">प्रमुख</string>
+  <string name="explore_tab_title_map">नक्सा</string>
   <string name="menu_set_wallpaper">भित्तेपत्रकाे रूपमा चयन गर्नुहोस्</string>
   <string name="wallpaper_set_successfully">भित्तेपत्र सफलतापूर्वक चयन भयो!</string>
+  <string name="quiz">प्रश्नोत्तरी</string>
   <string name="question">प्रश्न</string>
   <string name="result">नतिजा</string>
   <string name="continue_message">निरन्तरता दिनुहोस्</string>

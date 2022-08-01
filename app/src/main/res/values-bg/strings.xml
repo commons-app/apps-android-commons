@@ -37,7 +37,7 @@
   </plurals>
   <string name="navigation_item_explore">Изследвайте</string>
   <string name="preference_category_appearance">Изглед</string>
-  <string name="preference_category_general">Общи</string>
+  <string name="preference_category_general">Основни</string>
   <string name="preference_category_feedback">Обратна връзка</string>
   <string name="preference_category_privacy">Поверителност</string>
   <string name="app_name">Общомедия</string>
