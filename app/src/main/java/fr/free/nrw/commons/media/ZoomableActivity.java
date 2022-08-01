@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
@@ -19,6 +20,7 @@ import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.imagepipeline.image.ImageInfo;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.customselector.helper.OnSwipeTouchListener;
 import fr.free.nrw.commons.media.zoomControllers.zoomable.DoubleTapGestureListener;
 import fr.free.nrw.commons.media.zoomControllers.zoomable.ZoomableDraweeView;
 import timber.log.Timber;
@@ -45,6 +47,34 @@ public class ZoomableActivity extends AppCompatActivity {
         setContentView(R.layout.activity_zoomable);
         ButterKnife.bind(this);
         init();
+        onSwap();
+    }
+
+    private void onSwap() {
+        photo.setOnTouchListener(new OnSwipeTouchListener(this){
+            @Override
+            public void onSwipeLeft() {
+                super.onSwipeLeft();
+                Toast.makeText(ZoomableActivity.this, "lefffffffttttt", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onSwipeRight() {
+                super.onSwipeRight();
+                Toast.makeText(ZoomableActivity.this, "righhhhhhttttt", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onSwipeUp() {
+                super.onSwipeUp();
+                Toast.makeText(ZoomableActivity.this, "Uuuuuupppppppp", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onSwipeDown() {
+                super.onSwipeDown();
+                Toast.makeText(ZoomableActivity.this, "Dowwwwwwnnnnn", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     /**
