@@ -73,11 +73,6 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
     var allImages: ArrayList<Image> = ArrayList()
 
     /**
-     * Hashmap to store actioned images
-     */
-    private var actionedImages: TreeMap<Int,Image> = TreeMap()
-
-    /**
      * View model Factory.
      */
     lateinit var customSelectorViewModelFactory: CustomSelectorViewModelFactory
@@ -133,13 +128,6 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
      */
     @Inject
     lateinit var mediaClient: MediaClient
-
-    /**
-     * Coroutine Dispatchers and Scope.
-     */
-    private val scope : CoroutineScope = MainScope()
-    private var ioDispatcher : CoroutineDispatcher = Dispatchers.IO
-    private var defaultDispatcher : CoroutineDispatcher = Dispatchers.Default
 
     companion object {
 
@@ -226,7 +214,6 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
             editor.apply()
             switch?.text = getString(R.string.hide_already_actioned_pictures)
 
-            actionedImages.clear()
             imageAdapter.init(allImages, allImages, TreeMap())
             imageAdapter.notifyDataSetChanged()
         } else {
@@ -238,20 +225,8 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
             editor.apply()
             switch?.text = getString(R.string.show_already_actioned_pictures)
 
-            Log.d("haha", "onChangeSwitchState: "+allImages.size)
             imageAdapter.init(allImages, allImages, TreeMap())
             imageAdapter.notifyDataSetChanged()
-//            filteredImages = imageAdapter.getFilteredImages()
-//            scope.launch {
-//                actionedImages = imageLoader!!.getActionedImages()
-//                when {
-//                    actionedImages.isNotEmpty() -> {
-//                        filteredImages.removeAll(actionedImages.values)
-//                        imageAdapter.init(filteredImages, allImages)
-//                        imageAdapter.notifyDataSetChanged()
-//                    }
-//                }
-//            }
         }
     }
 

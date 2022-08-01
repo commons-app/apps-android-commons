@@ -2,6 +2,7 @@ package fr.free.nrw.commons.customselector.ui.adapter
 
 import android.content.ContentResolver
 import android.content.Context
+import android.content.SharedPreferences
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,8 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import java.lang.reflect.Field
+import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Custom Selector image adapter test.
@@ -88,8 +91,10 @@ class ImageAdapterTest {
 
         // Parameters.
         images.add(image)
-        imageAdapter.init(images, images)
+        imageAdapter.init(images, images, TreeMap())
 
+        whenever(context.getSharedPreferences("custom_selector", 0))
+            .thenReturn(Mockito.mock(SharedPreferences::class.java))
         // Test conditions.
         imageAdapter.onBindViewHolder(holder, 0)
         selectedImageField.set(imageAdapter, images)
@@ -101,7 +106,7 @@ class ImageAdapterTest {
      */
     @Test
     fun init() {
-        imageAdapter.init(images, images)
+        imageAdapter.init(images, images, TreeMap())
     }
 
     /**
@@ -115,7 +120,7 @@ class ImageAdapterTest {
 
         // Parameters
         images.addAll(listOf(image, image))
-        imageAdapter.init(images, images)
+        imageAdapter.init(images, images, TreeMap())
 
         // Test conditions
         holder.itemUploaded()
@@ -142,7 +147,7 @@ class ImageAdapterTest {
      */
     @Test
     fun getImageIdAt() {
-        imageAdapter.init(listOf(image), listOf(image))
+        imageAdapter.init(listOf(image), listOf(image), TreeMap())
         Assertions.assertEquals(1, imageAdapter.getImageIdAt(0))
     }
 }

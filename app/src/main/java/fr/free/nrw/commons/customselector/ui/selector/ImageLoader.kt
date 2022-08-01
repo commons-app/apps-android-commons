@@ -62,12 +62,6 @@ class ImageLoader @Inject constructor(
     private var mapHolderImage : HashMap<ImageViewHolder, Image> = HashMap()
     private var mapResult: HashMap<String, Result> = HashMap()
     private var mapImageSHA1: HashMap<Uri, String> = HashMap()
-//    private var nextImage: Int = 0
-
-    /**
-     * Stores actioned images
-     */
-    private var actionedImages: TreeMap<Int, Image> = TreeMap()
 
     /**
      * Query image and setUp the view.
@@ -75,11 +69,9 @@ class ImageLoader @Inject constructor(
     suspend fun queryAndSetView(
         holder: ImageViewHolder,
         image: Image,
-        fixedImages: List<Image>,
         ioDispatcher: CoroutineDispatcher,
-        defaultDispatcher: CoroutineDispatcher,
-        position: Int
-    ): Int {
+        defaultDispatcher: CoroutineDispatcher
+    ) {
 
         /**
          * Recycler view uses same view holder, so we can identify the latest query image from holder.
@@ -91,17 +83,22 @@ class ImageLoader @Inject constructor(
         var result: Result = Result.NOTFOUND
 
         if (mapHolderImage[holder] != image) {
-            return -1
+            return
         }
 
         val imageSHA1: String = when(mapImageSHA1[image.uri] != null) {
             true -> mapImageSHA1[image.uri]!!
-            else -> CustomSelectorUtils.getImageSHA1(image.uri, ioDispatcher, fileUtilsWrapper, context.contentResolver)
+            else -> CustomSelectorUtils.getImageSHA1(
+                image.uri,
+                ioDispatcher,
+                fileUtilsWrapper,
+                context.contentResolver
+            )
         }
         mapImageSHA1[image.uri] = imageSHA1
 
         if(imageSHA1.isEmpty()) {
-            return -1
+            return
         }
         val uploadedStatus = getFromUploaded(imageSHA1)
 
@@ -117,7 +114,7 @@ class ImageLoader @Inject constructor(
         }
 
         if (mapHolderImage[holder] != image) {
-            return -2
+            return
         }
 
         val exists = notForUploadStatusDao.find(imageSHA1)
@@ -161,7 +158,6 @@ class ImageLoader @Inject constructor(
             }
         }
 
-        var isActionedImage = -1
         val sharedPreferences: SharedPreferences =
             context
                 .getSharedPreferences(ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
@@ -170,60 +166,23 @@ class ImageLoader @Inject constructor(
 
         if(mapHolderImage[holder] == image) {
             if (result is Result.TRUE) {
-                if (switchState) {
-                    holder.itemUploaded()
-
-                    val key = fixedImages.indexOf(image)
-                    if (!actionedImages.containsKey(key)) {
-                        actionedImages[key] = image
-
-                    }
-                    isActionedImage = position
-                } else {
-                    holder.itemNotUploaded()
-
-                    val key = fixedImages.indexOf(image)
-                    if (!actionedImages.containsKey(key)) {
-                        actionedImages[key] = image
-                    }
-                    isActionedImage = position
-                }
+                if (switchState) holder.itemUploaded() else holder.itemNotUploaded()
             } else holder.itemNotUploaded()
 
             if (exists > 0) {
-                if (switchState) {
-                    holder.itemNotForUpload()
-
-                    val key = fixedImages.indexOf(image)
-                    if (!actionedImages.containsKey(key)) {
-                        actionedImages[key] = image
-                    }
-                    isActionedImage = position
-                } else {
-                    holder.itemForUpload()
-
-                    val key = fixedImages.indexOf(image)
-                    if (!actionedImages.containsKey(key)) {
-                        actionedImages[key] = image
-                    }
-                    isActionedImage = position
-                }
+                if (switchState) holder.itemNotForUpload() else holder.itemForUpload()
             } else holder.itemForUpload()
-        } else {
-            return -2
         }
-        return isActionedImage
     }
 
     suspend fun nextActionedImage(
-        allImages: List<Image>, position: Int,
-        ioDispatcher: CoroutineDispatcher,
+        allImages: List<Image>, ioDispatcher: CoroutineDispatcher,
         defaultDispatcher: CoroutineDispatcher,
-        nextImage: Int
+        nextImagePosition: Int
     ): Int {
         var next = -1
         // call from next checked pos
-        for (i in nextImage until allImages.size){
+        for (i in nextImagePosition until allImages.size){
             val it = allImages[i]
             val imageSHA1: String = when (mapImageSHA1[it.uri] != null) {
                 true -> mapImageSHA1[it.uri]!!
@@ -252,39 +211,7 @@ class ImageLoader @Inject constructor(
                 }
             }
         }
-//        allImages.forEachIndexed { index, it ->
-//            val imageSHA1: String = when (mapImageSHA1[it.uri] != null) {
-//                true -> mapImageSHA1[it.uri]!!
-//                else -> CustomSelectorUtils.getImageSHA1(
-//                    it.uri,
-//                    ioDispatcher,
-//                    fileUtilsWrapper,
-//                    context.contentResolver
-//                )
-//            }
-//            next = notForUploadStatusDao.find(imageSHA1)
-//            if(next > 0){
-//                return index
-//            }
-//            next = uploadedStatusDao.findByImageSHA1(imageSHA1, true)
-//            if(next <=0 ){
-//                val modifiedImageSha1 = getSHA1(it, defaultDispatcher)
-//                next = uploadedStatusDao.findByModifiedImageSHA1(modifiedImageSha1, true)
-//                if(next > 0){
-//                    return index
-//                }
-//            } else {
-//                return index
-//            }
-//        }
         return -1
-    }
-
-    /**
-     * Helps to get actioned images
-     */
-    fun getActionedImages(): TreeMap<Int, Image> {
-        return actionedImages
     }
 
     /**
