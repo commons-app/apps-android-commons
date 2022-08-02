@@ -129,20 +129,21 @@ public class UploadableFile implements Parcelable {
             // TAG_DATETIME returns the last edited date, we need TAG_DATETIME_ORIGINAL for creation date
             // See issue https://github.com/commons-app/apps-android-commons/issues/1971
             String dateTimeSubString = exif.getAttribute(ExifInterface.TAG_DATETIME_ORIGINAL);
-
-            String year = dateTimeSubString.substring(0,4);
-            Integer.parseInt(year); //Parsing integers to just verify no NumberFormatException is thrown means strings are numbers
-            String month = dateTimeSubString.substring(5,7);
-            Integer.parseInt(month);
-            String day = dateTimeSubString.substring(8,10);
-            Integer.parseInt(day);
-            // This date is stored as a string (not as a date), the rason is we don't want to include timezones
-            String dateCreatedString = year+":"+month+":"+day;
-            @SuppressLint("RestrictedApi") Long dateTime = exif.getDateTimeOriginal();
-            if(dateTime != null){
-                Date date = new Date(dateTime);
-                return new DateTimeWithSource(date, dateCreatedString, DateTimeWithSource.EXIF_SOURCE);
+            if (dateTimeSubString!=null) { //getAttribute may return null
+                String year = dateTimeSubString.substring(0,4);
+                String month = dateTimeSubString.substring(5,7);
+                String day = dateTimeSubString.substring(8,10);
+                // This date is stored as a string (not as a date), the rason is we don't want to include timezones
+                String dateCreatedString = String.format("%04d-%02d-%02d", Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
+                if (dateCreatedString.length() == 10) { //yyyy-MM-dd format of date is expected
+                    @SuppressLint("RestrictedApi") Long dateTime = exif.getDateTimeOriginal();
+                    if(dateTime != null){
+                        Date date = new Date(dateTime);
+                        return new DateTimeWithSource(date, dateCreatedString, DateTimeWithSource.EXIF_SOURCE);
+                    }
+                }
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (NumberFormatException e) {
