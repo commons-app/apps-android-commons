@@ -38,6 +38,7 @@ data class Contribution constructor(
     val localUri: Uri? = null,
     var dataLength: Long = 0,
     var dateCreated: Date? = null,
+    var dateCreatedString: String? = null,
     var dateModified: Date? = null,
     var hasInvalidLocation : Int =  0,
     var contentUri: Uri? = null,
@@ -67,7 +68,8 @@ data class Contribution constructor(
         dateCreatedSource = "",
         depictedItems = depictedItems,
         wikidataPlace = from(item.place),
-        contentUri = item.contentUri
+        contentUri = item.contentUri,
+        dateCreatedString = item.fileCreatedDateString
     )
 
     /**

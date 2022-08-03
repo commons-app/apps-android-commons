@@ -48,7 +48,7 @@ class PageContentsCreator {
             .append(media.getAuthor()).append("]]\n");
 
         final String templatizedCreatedDate = getTemplatizedCreatedDate(
-            contribution.getDateCreated(), contribution.getDateCreatedSource());
+            contribution.getDateCreatedString(), contribution.getDateCreated(), contribution.getDateCreatedSource());
         if (!StringUtils.isBlank(templatizedCreatedDate)) {
             buffer.append("|date=").append(templatizedCreatedDate);
         }
@@ -90,12 +90,12 @@ class PageContentsCreator {
      * @param dateCreatedSource
      * @return
      */
-    private String getTemplatizedCreatedDate(Date dateCreated, String dateCreatedSource) {
+    private String getTemplatizedCreatedDate(String dateCreatedString, Date dateCreated, String dateCreatedSource) {
         if (dateCreated != null) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             return String.format(Locale.ENGLISH,
                 isExif(dateCreatedSource) ? TEMPLATE_DATE_ACC_TO_EXIF : TEMPLATE_DATA_OTHER_SOURCE,
-                dateFormat.format(dateCreated)
+                isExif(dateCreatedSource) ? dateCreatedString: dateFormat.format(dateCreated)
             ) + "\n";
         }
         return "";
