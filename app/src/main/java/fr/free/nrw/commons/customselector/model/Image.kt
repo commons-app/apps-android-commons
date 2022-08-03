@@ -44,7 +44,7 @@ data class Image(
     var sha1: String = "",
 
     /**
-     * date: Addition date of the image
+     * date: Addition date of the image to show it inside the bubble during bubble scroll.
      */
     var date: String = ""
 

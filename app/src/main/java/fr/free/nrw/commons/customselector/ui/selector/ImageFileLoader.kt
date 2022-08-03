@@ -3,6 +3,7 @@ package fr.free.nrw.commons.customselector.ui.selector
 import android.content.ContentUris
 import android.content.Context
 import android.provider.MediaStore
+import android.text.format.DateFormat
 import fr.free.nrw.commons.customselector.listeners.ImageLoaderListener
 import fr.free.nrw.commons.customselector.model.Image
 import kotlinx.coroutines.CoroutineScope
@@ -10,7 +11,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.coroutines.CoroutineContext
 
@@ -97,7 +97,7 @@ class ImageFileLoader(val context: Context) : CoroutineScope{
                         val calendar = Calendar.getInstance()
                         calendar.timeInMillis = date * 1000L
                         val date: Date = calendar.time
-                        val dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
+                        val dateFormat = DateFormat.getMediumDateFormat(context)
                         val formattedDate = dateFormat.format(date)
 
                         val image = Image(

@@ -280,7 +280,7 @@ class ImageAdapter(
     }
 
     /**
-     * Returns the text for showing inside the bubble
+     * Returns the text for showing inside the bubble during bubble scroll.
      */
     override fun getSectionName(position: Int): String {
         return images[position].date
