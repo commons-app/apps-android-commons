@@ -22,7 +22,7 @@
     android:id="@+id/selector_rv"
     android:layout_width="match_parent"
     android:background="?attr/mainBackground"
-    android:layout_height="match_parent"
+    android:layout_height="@dimen/dimen_0"
     app:fastScrollPopupBgColor="@color/primaryColor"
     app:fastScrollPopupTextColor="@android:color/primary_text_dark"
     app:fastScrollPopupTextSize="@dimen/subheading_text_size"
@@ -30,6 +30,10 @@
     app:fastScrollThumbColor="@color/primaryColor"
     app:fastScrollTrackColor="@color/upload_overlay_background_light"
     app:fastScrollPopupPosition="adjacent"
+    app:layout_constraintBottom_toTopOf="@id/progressLayout"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/switchWidget"
     />
 
   <TextView
