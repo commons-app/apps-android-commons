@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.Group
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.helper.ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY
@@ -42,7 +43,7 @@ class ImageAdapter(
     private var imageLoader: ImageLoader
 ):
 
-    RecyclerViewAdapter<ImageAdapter.ImageViewHolder>(context) {
+    RecyclerViewAdapter<ImageAdapter.ImageViewHolder>(context), FastScrollRecyclerView.SectionedAdapter {
 
     /**
      * ImageSelectedOrUpdated payload class.
@@ -410,6 +411,13 @@ class ImageAdapter(
             return oldImageList[oldItemPosition].equals(newImageList[newItemPosition])
         }
 
+    }
+
+    /**
+     * Returns the text for showing inside the bubble during bubble scroll.
+     */
+    override fun getSectionName(position: Int): String {
+        return images[position].date
     }
 
 }
