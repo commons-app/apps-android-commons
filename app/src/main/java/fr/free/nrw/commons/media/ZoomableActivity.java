@@ -3,6 +3,8 @@ package fr.free.nrw.commons.media;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -21,8 +23,10 @@ import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.imagepipeline.image.ImageInfo;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.customselector.helper.OnSwipeTouchListener;
+import fr.free.nrw.commons.customselector.model.Image;
 import fr.free.nrw.commons.media.zoomControllers.zoomable.DoubleTapGestureListener;
 import fr.free.nrw.commons.media.zoomControllers.zoomable.ZoomableDraweeView;
+import java.util.ArrayList;
 import timber.log.Timber;
 
 
@@ -34,11 +38,18 @@ public class ZoomableActivity extends AppCompatActivity {
     @BindView(R.id.zoom_progress_bar)
     ProgressBar spinner;
 
+    private ArrayList<Image> images;
+    private int position;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        imageUri = getIntent().getData();
+        images = getIntent().getParcelableArrayListExtra(
+            "a");
+        position = getIntent().getIntExtra("b", 0);
+
+        imageUri = images.get(position).getUri();
         if (null == imageUri) {
             throw new IllegalArgumentException("No data to display");
         }
@@ -56,11 +67,15 @@ public class ZoomableActivity extends AppCompatActivity {
             public void onSwipeLeft() {
                 super.onSwipeLeft();
                 Toast.makeText(ZoomableActivity.this, "lefffffffttttt", Toast.LENGTH_SHORT).show();
+                DraweeController controller = getDraweeController(images.get(position++).getUri(), loadingListener);
+                photo.setController(controller);
             }
             @Override
             public void onSwipeRight() {
                 super.onSwipeRight();
                 Toast.makeText(ZoomableActivity.this, "righhhhhhttttt", Toast.LENGTH_SHORT).show();
+                DraweeController controller = getDraweeController(images.get(position--).getUri(), loadingListener);
+                photo.setController(controller);
             }
 
             @Override
@@ -110,12 +125,17 @@ public class ZoomableActivity extends AppCompatActivity {
             photo.setAllowTouchInterceptionWhileZoomed(true);
             photo.setIsLongpressEnabled(false);
             photo.setTapListener(new DoubleTapGestureListener(photo));
-            DraweeController controller = Fresco.newDraweeControllerBuilder()
-                    .setUri(imageUri)
-                    .setControllerListener(loadingListener)
-                    .build();
+            DraweeController controller = getDraweeController(imageUri, loadingListener);
             photo.setController(controller);
         }
+    }
+
+    private DraweeController getDraweeController(Uri imageUri, ControllerListener loadingListener) {
+        DraweeController controller = Fresco.newDraweeControllerBuilder()
+                .setUri(imageUri)
+                .setControllerListener(loadingListener)
+                .build();
+        return controller;
     }
 
 

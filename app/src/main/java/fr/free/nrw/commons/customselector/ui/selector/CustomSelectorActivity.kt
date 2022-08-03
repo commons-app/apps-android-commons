@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.Window
@@ -305,8 +304,10 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
      * onLongPress
      * @param imageUri : uri of image
      */
-    override fun onLongPress(imageUri: Uri) {
-        val intent = Intent(this, ZoomableActivity::class.java).setData(imageUri);
+    override fun onLongPress(position: Int, images: ArrayList<Image>) {
+        val intent = Intent(this, ZoomableActivity::class.java)
+        intent.putExtra("b", position);
+        intent.putParcelableArrayListExtra("a", images)
         startActivity(intent)
     }
 
