@@ -1,5 +1,9 @@
 # Wikimedia Commons for Android
 
+## v4.0.2
+- Fixed bug with wrong dates taken from EXIF
+- Fixed various crashes
+
 ## v4.0.1
 - Fixed bug with no browser found
 - Updated Mapbox SDK to fix hamburger crash
