@@ -112,7 +112,7 @@ public class CommonsApplication extends MultiDexApplication {
 
     public static final String REPORT_EMAIL = "commons-app-android@googlegroups.com";
 
-    public static final String REPORT_EMAIL_SUBJECT = "Report Violation";
+    public static final String REPORT_EMAIL_SUBJECT = "Report a violation";
 
     public static final String NOTIFICATION_CHANNEL_ID_ALL = "CommonsNotificationAll";
 

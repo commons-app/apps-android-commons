@@ -259,23 +259,34 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
         builder.append("Report type: ")
             .append(type)
-            .append("\n");
+            .append("\n\n");
 
-        builder.append("Media url: ")
+        builder.append("Image that you want to report: ")
             .append(media.getImageUrl())
-            .append("\n");
+            .append("\n\n");
 
-        builder.append("Author username: ")
+        builder.append("User that you want to report: ")
             .append(media.getAuthor())
-            .append("\n");
+            .append("\n\n");
 
         if (sessionManager.getUserName() != null) {
-            builder.append("Reporter username: ")
+            builder.append("Your username: ")
                 .append(sessionManager.getUserName())
-                .append("\n");
+                .append("\n\n");
         }
 
-        builder.append("Reason: ");
+        builder.append("Violation reason: ")
+            .append("\n");
+
+        builder.append("----------------------------------------------")
+            .append("\n")
+            .append("(please write reason here)")
+            .append("\n")
+            .append("----------------------------------------------")
+            .append("\n\n")
+            .append("Thank you for your report! Our team will investigate as soon as possible.")
+            .append("\n")
+            .append("Please note that images also have `Nominate for deletion` button.");
 
         return builder.toString();
     }
