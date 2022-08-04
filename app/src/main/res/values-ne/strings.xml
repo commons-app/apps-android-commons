@@ -26,7 +26,7 @@
   <string name="preference_category_privacy">गोपनीयता</string>
   <string name="app_name">कमन्स</string>
   <string name="bullet">•</string>
-  <string name="menu_settings">सेटिङहरू</string>
+  <string name="menu_settings">मेरो अभिरुचिहरू</string>
   <string name="intent_share_upload_label">कमन्समा उर्ध्वभरण गर्नुहाेस्</string>
   <string name="username">प्रयोगकर्ता नाम</string>
   <string name="password">पासवर्ड</string>
@@ -78,7 +78,7 @@
   <string name="categories_not_found">मिल्दो वर्ग %1$s फेला परेन</string>
   <string name="categories_skip_explanation">विकिमिडिया कमन्समा आफ्नो तस्वीरहरू थप भेट्टाउने बनाउन श्रेणीहरू थप्नुहोस।\nश्रेणीहरू थप्नको लागि लेख्न सुरु गर्नुहोस्।</string>
   <string name="categories_activity_title">श्रेणीहरू</string>
-  <string name="title_activity_settings">सेटिङ्गहरू</string>
+  <string name="title_activity_settings">मेरो अभिरुचिहरू</string>
   <string name="title_activity_signup">खाता खाेल्नुहाेस्</string>
   <string name="title_activity_featured_images">चित्रित तस्वीरहरू</string>
   <string name="title_activity_category_details">श्रेणी</string>
