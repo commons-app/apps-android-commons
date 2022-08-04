@@ -3,6 +3,7 @@ package fr.free.nrw.commons.media;
 import static fr.free.nrw.commons.Utils.handleWebUrl;
 
 import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,7 +13,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -22,6 +25,7 @@ import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.snackbar.Snackbar;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -33,7 +37,6 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.profile.ProfileActivity;
-import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.DownloadUtils;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -211,9 +214,70 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     ProfileActivity.startYourself(getActivity(), m.getUser(),
                         !Objects.equals(sessionManager.getUserName(), m.getUser()));
                 }
+                return true;
+            case R.id.menu_view_report:
+                showReportDialog(m);
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void showReportDialog(final Media media) {
+        if (media == null) {
+            return;
+        }
+        final AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+        final String[] values = requireContext().getResources()
+            .getStringArray(R.array.report_violation_options);
+        builder.setTitle(R.string.report_violation);
+        builder.setItems(R.array.report_violation_options, (dialog, which) -> {
+            sendReportEmail(media, values[which]);
+        });
+        builder.show();
+    }
+
+    private void sendReportEmail(final Media media, final String type) {
+        final String technicalInfo = getTechInfo(media, type);
+
+        final Intent feedbackIntent = new Intent(Intent.ACTION_SENDTO);
+        feedbackIntent.setType("message/rfc822");
+        feedbackIntent.setData(Uri.parse("mailto:"));
+        feedbackIntent.putExtra(Intent.EXTRA_EMAIL,
+            new String[]{CommonsApplication.REPORT_EMAIL});
+        feedbackIntent.putExtra(Intent.EXTRA_SUBJECT,
+            CommonsApplication.REPORT_EMAIL_SUBJECT);
+        feedbackIntent.putExtra(Intent.EXTRA_TEXT, technicalInfo);
+        try {
+            startActivity(feedbackIntent);
+        } catch (final ActivityNotFoundException e) {
+            Toast.makeText(getActivity(), R.string.no_email_client, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private String getTechInfo(final Media media, final String type) {
+        final StringBuilder builder = new StringBuilder();
+
+        builder.append("Report type: ")
+            .append(type)
+            .append("\n");
+
+        builder.append("Media url: ")
+            .append(media.getImageUrl())
+            .append("\n");
+
+        builder.append("Author username: ")
+            .append(media.getAuthor())
+            .append("\n");
+
+        if (sessionManager.getUserName() != null) {
+            builder.append("Reporter username: ")
+                .append(sessionManager.getUserName())
+                .append("\n");
+        }
+
+        builder.append("Reason: ");
+
+        return builder.toString();
     }
 
     /**

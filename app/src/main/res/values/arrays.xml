@@ -70,5 +70,10 @@
         <item>yearly</item>
         <item>all_time</item>
     </string-array>
-    
+    <string-array name="report_violation_options" >
+        <item>@string/report_user</item>
+        <item>@string/report_content</item>
+        <item>@string/request_user_block</item>
+    </string-array>
+
 </resources>
