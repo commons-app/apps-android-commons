@@ -92,6 +92,8 @@ class ImageAdapter(
      */
     private var nextImage = 0
 
+    private var count = 0
+
     /**
      * Coroutine Dispatchers and Scope.
      */
@@ -162,7 +164,8 @@ class ImageAdapter(
                             nextImage = next+1
                             if (!mapActionableImages.containsKey(next)) {
                                 mapActionableImages[next] = allImages[next]
-                                alreadyAddedPositions.add(position)
+                                alreadyAddedPositions.add(count)
+                                count++
                                 Glide.with(holder.image).load(allImages[next].uri)
                                     .thumbnail(0.3f).into(holder.image)
                                 notifyItemInserted(position)
@@ -258,6 +261,7 @@ class ImageAdapter(
         nextImage = 0
         stopAddition = false
         selectedImages = ArrayList()
+        count = 0
         val diffResult = DiffUtil.calculateDiff(
             ImagesDiffCallback(oldImageList, newImageList)
         )
