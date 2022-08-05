@@ -286,7 +286,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             .append("\n\n")
             .append("Thank you for your report! Our team will investigate as soon as possible.")
             .append("\n")
-            .append("Please note that images also have `Nominate for deletion` button.");
+            .append("Please note that images also have a `Nominate for deletion` button.");
 
         return builder.toString();
     }
