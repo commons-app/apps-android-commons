@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+## v4.0.3
+- Added "Report" button for Google UGC policy
+
 ## v4.0.2
 - Fixed bug with wrong dates taken from EXIF
 - Fixed various crashes
