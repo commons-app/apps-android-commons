@@ -110,6 +110,10 @@ public class CommonsApplication extends MultiDexApplication {
 
     public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App Feedback";
 
+    public static final String REPORT_EMAIL = "commons-app-android-private@googlegroups.com";
+
+    public static final String REPORT_EMAIL_SUBJECT = "Report a violation";
+
     public static final String NOTIFICATION_CHANNEL_ID_ALL = "CommonsNotificationAll";
 
     public static final String FEEDBACK_EMAIL_TEMPLATE_HEADER = "-- Technical information --";

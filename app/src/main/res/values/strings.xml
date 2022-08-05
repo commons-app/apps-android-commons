@@ -717,4 +717,9 @@ Upload your first media by tapping on the add button.</string>
   <string name="error_feedback">Error while sending feedback</string>
   <string name="enter_description">What is your feedback?</string>
   <string name="your_feedback">Your feedback</string>
+  <string name="menu_view_report">Report</string>
+  <string name="report_violation">Report violation</string>
+  <string name="report_user">Report this user</string>
+  <string name="report_content">Report this content</string>
+  <string name="request_user_block">Request to block this user</string>
 </resources>
