@@ -19,6 +19,13 @@
 * Wim b
 -->
 <resources>
+  <string name="commons_facebook">Pagina Facebook di Commons</string>
+  <string name="commons_github">Codice sorgente Github di Commons</string>
+  <string name="commons_logo">Logo di Commons</string>
+  <string name="commons_website">Sito web di Commons</string>
+  <string name="exit_location_picker">Esci dal selettore di ubicazione</string>
+  <string name="submit">Invia</string>
+  <string name="appwidget_img">Foto del giorno</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d file in caricamento</item>
     <item quantity="other">%1$d file in caricamento</item>
@@ -204,10 +211,6 @@
   <string name="become_a_tester_description">Accedi al nostro canale beta su Google Play per ottenere subito le nuove funzionalità e gli errori corretti</string>
   <string name="_2fa_code">Codice 2FA</string>
   <string name="logout_verification">Vuoi veramente uscire?</string>
-  <string name="commons_logo">Logo di Commons</string>
-  <string name="commons_website">Sito web di Commons</string>
-  <string name="commons_facebook">Pagina Facebook di Commons</string>
-  <string name="commons_github">Codice sorgente Github di Commons</string>
   <string name="mediaimage_failed">Immagine multimediale non riuscita</string>
   <string name="no_subcategory_found">Nessuna sottocategoria trovata</string>
   <string name="no_parentcategory_found">Nessuna categoria superiore trovata</string>
@@ -293,7 +296,6 @@
   <string name="image_uploaded_by">Caricato da: %1$s</string>
   <string name="block_notification_title">Bloccato</string>
   <string name="block_notification">Sei bloccato dalla modifica su Commons</string>
-  <string name="appwidget_img">Foto del giorno</string>
   <string name="app_widget_heading">Foto del giorno</string>
   <string name="menu_search_button">Cerca</string>
   <string name="search_commons">Cerca in Commons</string>
@@ -375,7 +377,6 @@
   <string name="step_count">Passo %1$d di %2$d: %3$s</string>
   <string name="next">Successivo</string>
   <string name="previous">Precedente</string>
-  <string name="submit">Invia</string>
   <string name="upload_title_duplicate">Esiste già un file con il nome %1$s. Sei sicuro di voler procedere?\n\nNota: verrà aggiunto automaticamente un suffisso adatto al nome del file.</string>
   <string name="map_application_missing">Nessuna applicazione di mappe compatibile è stata trovata sul tuo dispositivo. Installa un\'applicazione per le mappe per poter utilizzare questa funzionalità.</string>
   <string name="title_page_bookmarks_pictures">Immagini</string>
@@ -614,7 +615,6 @@
   <string name="read_help_link">Per saperne di più</string>
   <string name="media_detail_in_all_languages">In tutte le lingue</string>
   <string name="choose_a_location">Scegli una posizione</string>
-  <string name="exit_location_picker">Esci dal selettore di ubicazione</string>
   <string name="select_location_location_picker">Seleziona una posizione</string>
   <string name="show_in_map_app">Mostra nell\'applicazione mappa</string>
   <string name="modify_location">Modifica posizione</string>

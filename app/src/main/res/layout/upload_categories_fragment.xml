@@ -19,6 +19,7 @@
       android:layout_marginEnd="@dimen/standard_gap"
       android:layout_marginRight="@dimen/standard_gap"
       android:orientation="horizontal">
+
       <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
@@ -29,11 +30,12 @@
         android:textSize="@dimen/normal_text"
         android:textStyle="bold"
         tools:text="Step 1 of 15" />
+
       <ImageView
         android:id="@+id/tooltip"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:src="@drawable/mapbox_info_icon_default"/>
+        android:src="@drawable/mapbox_info_icon_default" />
     </LinearLayout>
 
     <TextView
@@ -66,7 +68,7 @@
           android:imeOptions="actionSearch"
           android:inputType="text"
           android:maxLines="1"
-          app:allowFormatting="false"/>
+          app:allowFormatting="false" />
       </com.google.android.material.textfield.TextInputLayout>
 
       <ProgressBar
@@ -107,21 +109,24 @@
     android:padding="@dimen/standard_gap"
     android:orientation="horizontal"
     >
+
     <androidx.appcompat.widget.AppCompatButton
       android:id="@+id/btn_previous"
       style="@style/Widget.AppCompat.Button.Borderless"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_weight="1"
-      android:text="@string/previous"/>
+      android:contentDescription="@string/previous"
+      android:text="@string/previous" />
 
     <androidx.appcompat.widget.AppCompatButton
       android:id="@+id/btn_next"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_weight="1"
+      android:contentDescription="@string/next"
       android:text="@string/next"
-      android:textColor="@android:color/white"/>
+      android:textColor="@android:color/white" />
 
   </LinearLayout>
 

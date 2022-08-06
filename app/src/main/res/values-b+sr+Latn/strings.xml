@@ -6,6 +6,11 @@
 * Zoranzoki21
 -->
 <resources>
+  <string name="commons_facebook">Fejsbuk stranica Ostave</string>
+  <string name="commons_github">Izvorni kod na Github-u</string>
+  <string name="commons_logo">Logo Ostave</string>
+  <string name="commons_website">Veb-sajt Ostave</string>
+  <string name="appwidget_img">Slika dana</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d datoteka se otprema</item>
     <item quantity="other">%1$d datoteke se otpremaju</item>
@@ -155,10 +160,6 @@
   <string name="become_a_tester_description">Priključite se na naš beta kanal na Gugl pleju i pristupite novim informacijama i ispravkama bagova</string>
   <string name="_2fa_code">2FA kod</string>
   <string name="logout_verification">Zaista želite da se odjavite?</string>
-  <string name="commons_logo">Logo Ostave</string>
-  <string name="commons_website">Veb-sajt Ostave</string>
-  <string name="commons_facebook">Fejsbuk stranica Ostave</string>
-  <string name="commons_github">Izvorni kod na Github-u</string>
   <string name="mediaimage_failed">Medijska slika neuspešna</string>
   <string name="no_subcategory_found">Potkategorije nisu pronađene</string>
   <string name="no_parentcategory_found">Nadređene kategorije nisu pronađene</string>
@@ -225,7 +226,6 @@
   <string name="error_loading_images">Došlo je do greške pri učitavanju slika.</string>
   <string name="image_uploaded_by">Otpremio/la: %1$s</string>
   <string name="block_notification">Blokirano vam je uređivanje Ostave</string>
-  <string name="appwidget_img">Slika dana</string>
   <string name="app_widget_heading">Slika dana</string>
   <string name="menu_search_button">Pretraži</string>
   <string name="search_commons">Pretraga Ostave</string>

@@ -35,11 +35,12 @@
               android:textSize="@dimen/normal_text"
               android:textStyle="bold"
               tools:text="Step 1 of 15" />
+
             <ImageView
               android:id="@+id/tooltip"
               android:layout_width="wrap_content"
               android:layout_height="match_parent"
-              android:src="@drawable/mapbox_info_icon_default"/>
+              android:src="@drawable/mapbox_info_icon_default" />
         </LinearLayout>
 
     <TextView
@@ -129,26 +130,28 @@
       android:id="@+id/depicts_next"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="24dp"
-      android:layout_marginEnd="24dp"
-      android:layout_marginRight="24dp"
-      android:layout_alignParentBottom="true"
       android:layout_alignParentEnd="true"
       android:layout_alignParentRight="true"
-      android:textColor="@android:color/white"
-      android:text="@string/next" />
+      android:layout_alignParentBottom="true"
+      android:layout_marginEnd="24dp"
+      android:layout_marginRight="24dp"
+      android:layout_marginBottom="24dp"
+      android:contentDescription="@string/next"
+      android:text="@string/next"
+      android:textColor="@android:color/white" />
 
     <Button
       android:id="@+id/depicts_previous"
       style="@style/Widget.AppCompat.Button.Borderless"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="24dp"
+      android:layout_alignParentBottom="true"
       android:layout_marginEnd="@dimen/standard_gap"
       android:layout_marginRight="@dimen/standard_gap"
-      android:layout_alignParentBottom="true"
-      android:layout_toLeftOf="@id/depicts_next"
+      android:layout_marginBottom="24dp"
       android:layout_toStartOf="@id/depicts_next"
+      android:layout_toLeftOf="@id/depicts_next"
+      android:contentDescription="@string/previous"
       android:text="@string/previous" />
 
 </RelativeLayout>

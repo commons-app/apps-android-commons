@@ -24,6 +24,12 @@
 * Walter Klosse
 -->
 <resources>
+  <string name="commons_facebook">Facebooková stránka Commons</string>
+  <string name="commons_github">Zdrojový kód Commons na GitHubu</string>
+  <string name="commons_logo">Logo Wikimedia Commons</string>
+  <string name="commons_website">Stránka Commons</string>
+  <string name="submit">Odeslat</string>
+  <string name="appwidget_img">Obrázek dne</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">%1$d soubor se nahrává</item>
     <item quantity="other">%1$d souborů se nahrává</item>
@@ -198,10 +204,6 @@
   <string name="become_a_tester_description">Přihlásit se do našeho beta kanálu na Google Play a dostávat včasný přístup k novinkám a opravám chyb</string>
   <string name="_2fa_code">Kód pro dvoufázové ověření (2FA)</string>
   <string name="logout_verification">Opravdu se chcete odhlásit?</string>
-  <string name="commons_logo">Logo Wikimedia Commons</string>
-  <string name="commons_website">Stránka Commons</string>
-  <string name="commons_facebook">Facebooková stránka Commons</string>
-  <string name="commons_github">Zdrojový kód Commons na GitHubu</string>
   <string name="mediaimage_failed">Obrázek</string>
   <string name="no_subcategory_found">Nebyly nalezeny podkategorie</string>
   <string name="no_parentcategory_found">Nebyly nalezeny rodičovské kategorie</string>
@@ -283,7 +285,6 @@
   <string name="image_uploaded_by">Nahrál/a: %1$s</string>
   <string name="block_notification_title">Zablokováno</string>
   <string name="block_notification">Máte zablokovanou možnost editace Wikimedia Commons.</string>
-  <string name="appwidget_img">Obrázek dne</string>
   <string name="app_widget_heading">Obrázek dne</string>
   <string name="menu_search_button">Hledat</string>
   <string name="search_commons">Hledat na Commons</string>
@@ -361,7 +362,6 @@
   <string name="step_count">Krok %1$d z %2$d: %3$s</string>
   <string name="next">Další</string>
   <string name="previous">Předchozí</string>
-  <string name="submit">Odeslat</string>
   <string name="upload_title_duplicate" fuzzy="true">Soubor s názvem %1$s již existuje. Opravdu chcete pokračovat?</string>
   <string name="map_application_missing">Na vašem zařízení nebyla nalezena žádná kompatibilní aplikace poskytující mapy. Pro použití této funkce nainstalujte aplikaci poskytující mapy.</string>
   <string name="title_page_bookmarks_pictures">Obrázky</string>

@@ -8,6 +8,10 @@
 * ಮಲ್ನಾಡಾಚ್ ಕೊಂಕ್ಣೊ
 -->
 <resources>
+  <string name="commons_facebook">ಕಾಮನ್ಸ್ ಫೇಸ್ಬುಕ್ ಪುಟ</string>
+  <string name="commons_website">ಕಾಮನ್ಸ್ ಜಾಲತಾಣ</string>
+  <string name="submit">ಸಲ್ಲಿಸಿ</string>
+  <string name="appwidget_img">ದಿನದ ಚಿತ್ರ</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d ಕಡತ ಅಪ್ಲೋಡ್ ಅಗುತ್ತಿದೆ</item>
     <item quantity="other">%1$d ಕಡತಗಳು ಅಪ್ಲೋಡ್ ಅಗುತ್ತಿದೆ</item>
@@ -106,8 +110,6 @@
   <string name="media_detail_discussion">ಚರ್ಚೆ</string>
   <string name="media_detail_author">ಕರ್ತೃ</string>
   <string name="media_detail_license">ಪರವಾನಗಿ</string>
-  <string name="commons_website">ಕಾಮನ್ಸ್ ಜಾಲತಾಣ</string>
-  <string name="commons_facebook">ಕಾಮನ್ಸ್ ಫೇಸ್ಬುಕ್ ಪುಟ</string>
   <string name="welcome_image_mount_zao">ಮೌಂಟ್ ಜಾವ್</string>
   <string name="welcome_image_llamas">ಲಾಮಾಗಳು</string>
   <string name="welcome_image_tulip">ಟ್ಯೂಲಿಪ್</string>
@@ -144,7 +146,6 @@
   <string name="retry">ಪುನಃ ಪ್ರಯತ್ನಿಸಿ</string>
   <string name="no_images_found">ಯಾವುದೇ ಚಿತ್ರಗಳು ಸಿಗಲಿಲ್ಲ!</string>
   <string name="block_notification_title">ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ</string>
-  <string name="appwidget_img">ದಿನದ ಚಿತ್ರ</string>
   <string name="app_widget_heading">ದಿನದ ಚಿತ್ರ</string>
   <string name="menu_search_button">ಹುಡುಕು</string>
   <string name="search_commons">ಕಾಮನ್ಸ್ ಹುಡುಕಿ</string>
@@ -167,7 +168,6 @@
   <string name="notifications">ಅಧಿಸೂಚನೆಗಳು</string>
   <string name="read_notifications">ಅಧಿಸೂಚನೆಗಳು (ಓದಲಾದ)</string>
   <string name="list_sheet">ಪಟ್ಟಿ</string>
-  <string name="submit">ಸಲ್ಲಿಸಿ</string>
   <string name="title_page_bookmarks_pictures">ಚಿತ್ರಗಳು</string>
   <string name="review_thanks_yes_button_text">ಮುಂದಿನ ಚಿತ್ರ</string>
   <string name="please_wait">ದಯವಿಟ್ಟು ನಿರೀಕ್ಷಿಸಿ…</string>

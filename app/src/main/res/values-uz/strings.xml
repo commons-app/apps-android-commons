@@ -5,6 +5,12 @@
 * Шоҳидахоним
 -->
 <resources>
+  <string name="commons_facebook">Vikiombor Facebook sahifasi</string>
+  <string name="commons_github">Vikiomborning GitHub manba kodi</string>
+  <string name="commons_logo">Vikiombor logosi</string>
+  <string name="commons_website">Vikiombor vebsayti</string>
+  <string name="submit">Joʻnatish</string>
+  <string name="appwidget_img">Kun tasviri</string>
   <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -135,10 +141,6 @@
   <string name="media_detail_license">Litsenziya</string>
   <string name="media_detail_coordinates">Koordinatalar</string>
   <string name="_2fa_code">2FA kod</string>
-  <string name="commons_logo">Vikiombor logosi</string>
-  <string name="commons_website">Vikiombor vebsayti</string>
-  <string name="commons_facebook">Vikiombor Facebook sahifasi</string>
-  <string name="commons_github">Vikiomborning GitHub manba kodi</string>
   <string name="welcome_image_welcome_wikipedia">Vikipediyaga xush kelibsiz</string>
   <string name="welcome_image_welcome_copyright">Mualliflik huquqlariga xush kelibsiz</string>
   <string name="welcome_image_sydney_opera_house">Sidney opera teatri</string>
@@ -179,7 +181,6 @@
   <string name="error_loading_images">Rasmlarni joylashda xatolik yuz berdi.</string>
   <string name="image_uploaded_by">%1$s tomonidan joylangan</string>
   <string name="block_notification_title">Bloklangan</string>
-  <string name="appwidget_img">Kun tasviri</string>
   <string name="app_widget_heading">Kun tasviri</string>
   <string name="menu_search_button">Qidirish</string>
   <string name="search_commons">Vikiombordan qidirish</string>
@@ -207,7 +208,6 @@
   <string name="list_sheet">Roʻyxat</string>
   <string name="next">Keyingisi</string>
   <string name="previous">Avvalgisi</string>
-  <string name="submit">Joʻnatish</string>
   <string name="title_page_bookmarks_pictures">Tasvirlar</string>
   <string name="title_page_bookmarks_locations">Joylashuvlar</string>
   <string name="menu_bookmark">Xatchoʻplarni qoʻshish/olib tashlash</string>

@@ -19,6 +19,12 @@
 * Tgkarounos
 -->
 <resources>
+  <string name="commons_facebook">Σελίδα των Κοινών στο Facebook</string>
+  <string name="commons_github">Κώδικας πηγής των Κοινών στο GitHub</string>
+  <string name="commons_logo">Κοινό Λογότυπο</string>
+  <string name="commons_website">Ιστοσελίδα των Κοινών</string>
+  <string name="submit">Υποβολή</string>
+  <string name="appwidget_img">Φωτογραφία της Ημέρας</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">1 αρχείο επιφορτώνεται</item>
     <item quantity="other">%1$d αρχεία επιφορτώνονται</item>
@@ -178,10 +184,6 @@
   <string name="become_a_tester_description">Συμμετέχετε στο κανάλι beta μας στο Google Play και αποκτήστε πρώιμη πρόσβαση σε νέες λειτουργίες και διορθώσεις σφαλμάτων</string>
   <string name="_2fa_code">Κωδικός 2FA</string>
   <string name="logout_verification">Θέλετε πράγματι να αποσυνδεθείτε;</string>
-  <string name="commons_logo">Κοινό Λογότυπο</string>
-  <string name="commons_website">Ιστοσελίδα των Κοινών</string>
-  <string name="commons_facebook">Σελίδα των Κοινών στο Facebook</string>
-  <string name="commons_github">Κώδικας πηγής των Κοινών στο GitHub</string>
   <string name="mediaimage_failed">Η Εικόνα των Μέσων Απέτυχε (δεν μπορεί να φορτωθεί)</string>
   <string name="no_subcategory_found">Δεν βρέθηκαν υποκατηγορίες</string>
   <string name="no_parentcategory_found">Δεν βρέθηκαν γονικές κατηγορίες</string>
@@ -256,7 +258,6 @@
   <string name="error_loading_images">Συνέβη σφάλμα κατά το ανέβασμα των εικόνων.</string>
   <string name="image_uploaded_by">Ανέβηκε από: %1$s</string>
   <string name="block_notification">Είστε αποκλεισμένοι από την επεξεργασία των Κοινών</string>
-  <string name="appwidget_img">Φωτογραφία της Ημέρας</string>
   <string name="app_widget_heading">Φωτογραφία της Ημέρας</string>
   <string name="menu_search_button">Αναζήτηση</string>
   <string name="search_commons">Αναζήτηση στα κοινά</string>
@@ -321,7 +322,6 @@
   <string name="nearby_notification_dismiss_message">Δεν θα δείτε την πιο κοντινή τοποθεσία που χρειάζεται επιπλέον εικόνες. Ωστόσο, μπορείτε να ενεργοποιήσετε ξανά αυτή την ειδοποίηση στις Ρυθμίσεις αν θέλετε.</string>
   <string name="next">Επόμενο</string>
   <string name="previous">Προηγούμενο</string>
-  <string name="submit">Υποβολή</string>
   <string name="upload_title_duplicate">Υπάρχει ήδη αρχείο με όνομα %1$s. Είστε σίγουροι πως θέλετε να προχωρήσετε;\n\nΣημείωση: θα προστεθεί αυτόματα μια διόρθωση όνομα αρχείου.</string>
   <string name="map_application_missing">Καμία εφαρμογή χάρτη δεν βρέθηκε στον υπολογιστή. Παρακαλώ εγκαταστήστε εφαρμογή χάρτη για να χρησιμοποιήσετε αυτήν την ιδιότητα.</string>
   <string name="title_page_bookmarks_pictures">εικόνες</string>

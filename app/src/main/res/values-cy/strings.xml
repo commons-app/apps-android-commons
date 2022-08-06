@@ -5,6 +5,10 @@
 * Robin Owain
 -->
 <resources>
+  <string name="commons_facebook">Tudalen Adborth Comin</string>
+  <string name="commons_logo">Logo Comin</string>
+  <string name="commons_website">Gwefan Comin</string>
+  <string name="appwidget_img">Llun y Dydd</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">%1$d ffeil yn uwchlwytho</item>
     <item quantity="other">%1$d ffeil yn uwchlwytho</item>
@@ -166,9 +170,6 @@
   <string name="media_detail_coordinates_empty">Dim</string>
   <string name="become_a_tester_title">Dewch yn Brofwr Beta</string>
   <string name="logout_verification">Ti\'n sicr dy fod am allgofnodi?</string>
-  <string name="commons_logo">Logo Comin</string>
-  <string name="commons_website">Gwefan Comin</string>
-  <string name="commons_facebook">Tudalen Adborth Comin</string>
   <string name="mediaimage_failed">Methodd y ddelwedd</string>
   <string name="no_subcategory_found">Ni chafwyd hyd i is-gategoriau</string>
   <string name="welcome_image_mount_zao">Mount Zao</string>
@@ -239,7 +240,6 @@
   <string name="image_uploaded_by">%1$s wedi uwchlwytho</string>
   <string name="block_notification_title">Blociwyd</string>
   <string name="block_notification">Rydych wedi eich blocio rhag golygu ar Comin</string>
-  <string name="appwidget_img">Llun y Dydd</string>
   <string name="app_widget_heading">Llun y Dydd</string>
   <string name="menu_search_button">Chwilio</string>
   <string name="search_commons">Chwilio o fewn Comin</string>

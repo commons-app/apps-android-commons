@@ -4,6 +4,7 @@
 * Ajeje Brazorf
 * Alno
 * BaRaN6161 TURK
+* Cigaryno
 * Cyclicus
 * Derugon
 * Eneelk
@@ -35,6 +36,27 @@
 * Y-M D
 -->
 <resources>
+  <string name="commons_facebook">Page Facebook de Commons</string>
+  <string name="commons_github">Code source Github de Commons</string>
+  <string name="commons_logo">Logo de Commons</string>
+  <string name="commons_website">Site web de Commons</string>
+  <string name="exit_location_picker">Sortir du sélecteur de lieu</string>
+  <string name="submit">Soumettre</string>
+  <string name="add_another_description">Ajouter une autre description</string>
+  <string name="add_new_contribution">Ajouter une nouvelle contribution</string>
+  <string name="add_contribution_from_camera">Ajouter une contribution depuis la caméra</string>
+  <string name="add_contribution_from_photos">Ajouter une contribution depuis les photos</string>
+  <string name="add_contribution_from_contributions_gallery">Ajouter une contribution depuis la galerie des contributions précédentes</string>
+  <string name="show_captions">Légendes</string>
+  <string name="row_item_language_description">Description de langue</string>
+  <string name="row_item_caption">Légende</string>
+  <string name="show_captions_description">Description</string>
+  <string name="nearby_row_image">Image</string>
+  <string name="nearby_all">Tous</string>
+  <string name="nearby_filter_toggle">Basculer vers le haut</string>
+  <string name="nearby_filter_search">Vue de recherche</string>
+  <string name="nearby_filter_state">État du lieu</string>
+  <string name="appwidget_img">Image du jour</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d fichier en cours de téléversement</item>
     <item quantity="other">%1$d fichiers en cours de téléversement</item>
@@ -119,7 +141,7 @@
   <string name="login_failed_2fa_needed">Vous devez fournir votre code d’authentification à deux facteurs.</string>
   <string name="login_failed_generic">Échec de connexion</string>
   <string name="share_upload_button">Téléverser</string>
-  <string name="multiple_share_base_title">Nommer ce jeu</string>
+  <string name="multiple_share_base_title">Nommer cet ensemble</string>
   <string name="provider_modifications">Modifications</string>
   <string name="menu_upload_single">Téléverser</string>
   <string name="categories_search_text_hint">Rechercher des catégories</string>
@@ -197,8 +219,8 @@
   <string name="detail_license_empty">Licence inconnue</string>
   <string name="menu_refresh">Actualiser</string>
   <string name="storage_permission_title">Demande d’autorisation d’accès au stockage</string>
-  <string name="read_storage_permission_rationale">Autorisation nécessaire : lecture sur stockage externe. L’application ne peut pas accéder à votre galerie sans cela.</string>
-  <string name="write_storage_permission_rationale">Permission obligatoire : écriture sur stockage externe. L’application ne peut pas accéder à votre appareil photo/galerie sans cela.</string>
+  <string name="read_storage_permission_rationale">Permission nécessaire : lecture sur stockage externe. Sans cela, l’application ne peut pas accéder à votre galerie.</string>
+  <string name="write_storage_permission_rationale">Permission obligatoire : écriture sur stockage externe. Sans cela, l’application ne peut pas accéder à votre appareil photo ou votre galerie.</string>
   <string name="location_permission_title">Demande d’autorisation d’accès au stockage</string>
   <string name="ok">OK</string>
   <string name="warning">Avertissement</string>
@@ -220,10 +242,6 @@
   <string name="become_a_tester_description">S’inscrire à notre canal bêta sur Google Play et obtenir un accès anticipé aux nouvelles fonctionnalités et corrections d’anomalies</string>
   <string name="_2fa_code">Code 2FA</string>
   <string name="logout_verification">Voulez-vous vraiment vous déconnecter ?</string>
-  <string name="commons_logo">Logo de Commons</string>
-  <string name="commons_website">Site web de Commons</string>
-  <string name="commons_facebook">Page Facebook de Commons</string>
-  <string name="commons_github">Code source Github de Commons</string>
   <string name="mediaimage_failed">Échec sur l’image du média</string>
   <string name="no_subcategory_found">Aucune sous-catégorie trouvée</string>
   <string name="no_parentcategory_found">Aucune catégorie parente trouvée</string>
@@ -310,7 +328,6 @@
   <string name="image_uploaded_by">Téléversé par : %1$s</string>
   <string name="block_notification_title">Bloqué{{GENDER:||e}}</string>
   <string name="block_notification">Vous avez été bloqué et ne pouvez plus modifier sur  Commons</string>
-  <string name="appwidget_img">Image du jour</string>
   <string name="app_widget_heading">Image du jour</string>
   <string name="menu_search_button">Chercher</string>
   <string name="search_commons">Rechercher dans Commons</string>
@@ -394,7 +411,6 @@
   <string name="step_count">Étape %1$d sur %2$d : %3$s</string>
   <string name="next">Suivant</string>
   <string name="previous">Précédent</string>
-  <string name="submit">Soumettre</string>
   <string name="upload_title_duplicate">Un fichier avec le nom %1$s existe. Voulez-vous vraiment continuer ?\n\nNote : un suffixe approprié sera automatiquement ajouté au nom de fichier.</string>
   <string name="map_application_missing">Aucune application cartographique compatible n’a été trouvée sur votre appareil. Veuillez en installer une pour utiliser cette fonctionnalité.</string>
   <string name="title_page_bookmarks_pictures">Images</string>
@@ -418,7 +434,7 @@
   <string name="back_button_warning">Annuler le téléversement</string>
   <string name="back_button_warning_desc">L’utilisation du bouton de retour annulera ce téléversement et vous perdrez votre progression</string>
   <string name="back_button_continue">Continuer le téléversement</string>
-  <string name="upload_flow_all_images_in_set">(Pour toutes les images dans le jeu)</string>
+  <string name="upload_flow_all_images_in_set">(Pour toutes les images de l’ensemble)</string>
   <string name="search_this_area">Chercher dans cette zone</string>
   <string name="nearby_card_permission_title">Demande d’autorisation</string>
   <string name="nearby_card_permission_explanation">Désirez-vous que nous utilisions votre géolocalisation actuelle pour afficher les endroits proches qui ont besoin d\'images ?</string>
@@ -494,7 +510,7 @@
   <string name="exif_tag_name_software">Logiciel</string>
   <string name="share_text">Téléversez des photos sur Wikimedia Commons directement depuis votre téléphone. Téléchargez l’application Commons maintenant : %1$s</string>
   <string name="share_via">Partager l’application via...</string>
-  <string name="image_info">Informations de l’image</string>
+  <string name="image_info">Informations sur l’image</string>
   <string name="no_categories_found">Aucune catégorie trouvée</string>
   <string name="no_depiction_found">Aucun élément représenté trouvé</string>
   <string name="upload_cancelled">Téléversement annulé</string>
@@ -647,7 +663,6 @@
   <string name="media_detail_in_all_languages">Dans toutes les langues</string>
   <string name="choose_a_location">Choisir un lieu</string>
   <string name="pan_and_zoom_to_adjust">Descendre et zoomer pour ajuster</string>
-  <string name="exit_location_picker">Sortir du sélecteur de lieu</string>
   <string name="select_location_location_picker">Sélectionner un lieu</string>
   <string name="show_in_map_app">Afficher dans l’application cartographique</string>
   <string name="modify_location">Modifier le lieu</string>
@@ -685,7 +700,7 @@
   <string name="advanced_query_info_text">Vous pouvez personnaliser la requête de proximité. Si vous obtenez des erreurs, réinitialisez et appliquez.</string>
   <string name="apply">Appliquer</string>
   <string name="reset">Réinitialiser</string>
-  <string name="location_message">Les données de lieu aident les éditeurs de Wiki à trouver votre photo, ce qui la rend beaucoup plus utile.\nVos téléchargements récents n’indiquent aucun lieu.\nNous vous suggérons d’activer la géolocalisation dans les paramètres de votre application appareil photo.\nMerci pour vos téléversements !</string>
+  <string name="location_message">Les données de lieu aident les éditeurs de Wiki à trouver votre photo, ce qui la rend beaucoup plus utile.\nVos téléchargements récents n’indiquent aucun lieu.\nNous vous suggérons d’activer la géolocalisation dans les paramètres de votre application appareil photo.\nMerci pour vos téléversements !</string>
   <string name="no_location_found_title">Aucun lieu trouvé</string>
   <string name="no_location_found_message">Pourquoi ne pas ajouter le lieu où cette image a été trouvée ?\nLes données de lieu aident les contributeurs de wikis à trouver votre image, ce qui la rend beaucoup plus utile.\nMerci !</string>
   <string name="add_location">Ajouter un lieu</string>

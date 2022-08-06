@@ -24,30 +24,37 @@
 * Woytecr
 -->
 <resources>
+  <string name="commons_facebook">Strona Commons na Facebooku</string>
+  <string name="commons_github">Kod źródłowy Commons na GitHubie</string>
+  <string name="commons_logo">Logo Commons</string>
+  <string name="commons_website">Strona internetowa Commons</string>
+  <string name="exit_location_picker">Wyjdź z selektora lokalizacji</string>
+  <string name="submit">Prześlij</string>
+  <string name="appwidget_img">Zdjęcie dnia</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Przesyłanie %1$d pliku</item>
     <item quantity="few">Przesyłanie %1$d plików</item>
     <item quantity="many">Przesyłanie %1$d plików</item>
     <item quantity="other">Przesyłanie %1$d plików</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="one">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">(%1$d)</item>
     <item quantity="few">(%1$d)</item>
     <item quantity="many">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Rozpoczynanie przesyłania</string>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Rozpoczęto %1$d przesyłanie</item>
-    <item quantity="few">Rozpoczęto %1$d przesyłania</item>
-    <item quantity="many">Rozpoczęto %1$d przesyłania</item>
-    <item quantity="other">Rozpoczęto %1$d przesyłania</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Rozpoczęto %d przesyłanie</item>
+    <item quantity="few">Rozpoczęto %d przesyłania</item>
+    <item quantity="many">Rozpoczęto %d przesyłań</item>
+    <item quantity="other">Rozpoczęto %d przesyłań</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d przesłanie</item>
-    <item quantity="few">%1$d przesłania</item>
-    <item quantity="many">%1$d przesłania</item>
-    <item quantity="other">%1$d przesłania</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d przesłanie</item>
+    <item quantity="few">%d przesłania</item>
+    <item quantity="many">%d przesłania</item>
+    <item quantity="other">%d przesłania</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Ten obraz będzie udostępniany na licencji %1$s</item>
@@ -84,6 +91,8 @@
   <string name="signup">Zarejestruj się</string>
   <string name="logging_in_title">Logowanie</string>
   <string name="logging_in_message">Proszę czekać…</string>
+  <string name="updating_caption_title">Aktualizowanie podpisów i opisów</string>
+  <string name="updating_caption_message">Proszę czekać…</string>
   <string name="login_success">Zalogowano pomyślnie!</string>
   <string name="login_failed">Logowanie nie powiodło się!</string>
   <string name="upload_failed">Nie znaleziono pliku. Spróbuj znaleźć inny.</string>
@@ -92,10 +101,10 @@
   <string name="uploading_queued">Prześlij w kolejce (włączony tryb ograniczonego połączenia)</string>
   <string name="upload_completed_notification_title">Przesłano %1$s!</string>
   <string name="upload_completed_notification_text">Dotknij, aby zobaczyć przesłany plik</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">Rozpoczęto przesyłanie pliku %1$s</string>
+  <string name="upload_progress_notification_title_start">Przesyłanie pliku: %s</string>
   <string name="upload_progress_notification_title_in_progress">Wysyłanie %1$s</string>
   <string name="upload_progress_notification_title_finishing">Zakończono wysyłanie pliku %1$s</string>
-  <string name="upload_failed_notification_title" fuzzy="true">Wysyłanie %1$s nieudane</string>
+  <string name="upload_failed_notification_title">Nieudane wysyłanie %1$s</string>
   <string name="upload_paused_notification_title">Zatrzymano przesyłanie %1$ plików</string>
   <string name="upload_failed_notification_subtitle">Dotknij, aby zobaczyć</string>
   <string name="upload_paused_notification_subtitle">Dotknij, aby zobaczyć</string>
@@ -138,6 +147,7 @@
   <string name="title_activity_settings">Ustawienia</string>
   <string name="title_activity_signup">Zarejestruj się</string>
   <string name="title_activity_featured_images">Wyróżniony obrazek</string>
+  <string name="title_activity_custom_selector">Selektor niestandardowy</string>
   <string name="title_activity_category_details">Kategoria</string>
   <string name="title_activity_review">Recenzja</string>
   <string name="menu_about">O aplikacji</string>
@@ -220,10 +230,6 @@
   <string name="become_a_tester_description">Dołącz do kanału bety w Google Play i dostań wczesny dostęp do nowych funkcji i łatek</string>
   <string name="_2fa_code">Kod 2FA</string>
   <string name="logout_verification">Czy na pewno wylogować?</string>
-  <string name="commons_logo">Logo Commons</string>
-  <string name="commons_website">Strona internetowa Commons</string>
-  <string name="commons_facebook">Strona Commons na Facebooku</string>
-  <string name="commons_github">Kod źródłowy Commons na GitHubie</string>
   <string name="mediaimage_failed">Błąd obrazu multimedialnego</string>
   <string name="no_subcategory_found">Nie znaleziono podkategorii</string>
   <string name="no_parentcategory_found">Nie znaleziono kategorii nadrzędnych</string>
@@ -260,6 +266,8 @@
   <string name="upload_problem_different_geolocation">To zdjęcie zostało zrobione w innym miejscu.</string>
   <string name="upload_problem_fbmd">Prześlij tylko zdjęcia, które sam wykonałeś. Nie przesyłaj zdjęć znalezionych na kontach innych osób na Facebooku.</string>
   <string name="upload_problem_do_you_continue">Czy nadal chcesz przesłać to zdjęcie?</string>
+  <string name="upload_connection_error_alert_title">Błąd połączenia</string>
+  <string name="upload_connection_error_alert_detail">Proces przesyłania wymaga aktywnego dostępu do Internetu. Sprawdź połączenie sieciowe.</string>
   <string name="upload_problem_image">Problemy znalezione na obrazie</string>
   <string name="internet_downloaded">Prześlij tylko zdjęcia, które sam wykonałeś. Nie przesyłaj zdjęć pobranych z Internetu.</string>
   <string name="use_external_storage">Zapisz zdjęcia wykonane w aplikacji</string>
@@ -287,6 +295,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Oceń nas</string>
   <string name="about_faq">FAQ</string>
+  <string name="user_guide">Przewodnik użytkownika</string>
   <string name="welcome_skip_button">Pomiń samouczek</string>
   <string name="no_internet">Brak połączenia z internetem</string>
   <string name="error_notifications">Błąd w trakcie pobierania powiadomień</string>
@@ -307,13 +316,13 @@
   <string name="image_uploaded_by">Przesłano przez %1$s</string>
   <string name="block_notification_title">Zablokowany(-a)</string>
   <string name="block_notification">Zostałeś zablokowany(-a) w Commons</string>
-  <string name="appwidget_img">Zdjęcie dnia</string>
   <string name="app_widget_heading">Zdjęcie dnia</string>
   <string name="menu_search_button">Szukaj</string>
   <string name="search_commons">Szukaj na Commons</string>
   <string name="title_activity_search">Szukaj</string>
   <string name="search_recent_header">Ostatnie wyszukiwania:</string>
   <string name="provider_searches">Ostatnio wyszukiwane zapytania</string>
+  <string name="provider_recent_languages">Ostatnie zapytania językowe</string>
   <string name="error_loading_categories">Wystąpił błąd podczas wczytywania kategorii.</string>
   <string name="error_loading_depictions">Wystąpił błąd podczas ładowania obrazów.</string>
   <string name="search_tab_title_media">Multimedia</string>
@@ -321,6 +330,7 @@
   <string name="search_tab_title_depictions">Elementy</string>
   <string name="explore_tab_title_featured">Wyróżnione</string>
   <string name="explore_tab_title_mobile">Przesłane z aplikacji</string>
+  <string name="explore_tab_title_map">Mapa</string>
   <string name="successful_wikidata_edit">Dodano do %1$s w Wikidanych!</string>
   <string name="wikidata_edit_failure">Nie udało się zaktualizować odpowiedniego obiektu Wikidata!</string>
   <string name="menu_set_wallpaper">Ustaw jako tapetę</string>
@@ -346,8 +356,11 @@
   <string name="quiz_screenshot_question">Czy ten zrzut ekranu nadaje się do przesłania?</string>
   <string name="share_app_title">Udostępnij aplikację</string>
   <string name="error_fetching_nearby_places">Błąd podczas pobierania pobliskich miejsc.</string>
+  <string name="no_nearby_places_around">Brak miejsc w pobliżu</string>
+  <string name="error_fetching_nearby_monuments">Błąd pobierania pobliskich zabytków.</string>
   <string name="no_recent_searches">Brak ostatnich wyszukiwań</string>
   <string name="delete_recent_searches_dialog">Czy na pewno chcesz usunąć swoją historię wyszukiwania?</string>
+  <string name="cancel_upload_dialog">Czy na pewno chcesz anulować to przesyłanie?</string>
   <string name="delete_search_dialog">Czy chcesz usunąć to wyszukiwanie?</string>
   <string name="search_history_deleted">Historia wyszukiwania została usunięta</string>
   <string name="nominate_delete">Zgłoś do usunięcia</string>
@@ -386,7 +399,6 @@
   <string name="step_count">Krok %1$d z %2$d: %3$s</string>
   <string name="next">Następny</string>
   <string name="previous">Poprzedni</string>
-  <string name="submit">Prześlij</string>
   <string name="upload_title_duplicate">Istnieje plik o nazwie %1$s. Na pewno chcesz kontynuować?\n\nUwaga: odpowiedni przyrostek zostanie automatycznie dodany do nazwy pliku.</string>
   <string name="map_application_missing">W twoim urządzeniu nie znaleziono kompatybilnej aplikacji mapowej. Zainstaluj aplikację mapową, aby korzystać z tej funkcji.</string>
   <string name="title_page_bookmarks_pictures">Zdjęcia</string>
@@ -455,7 +467,7 @@
   <string name="review_thanks_yes_button_text">Następny obraz</string>
   <string name="review_thanks_no_button_text">Tak, dlaczego nie</string>
   <string name="skip_image_explanation">Kliknięcie tego przycisku spowoduje wyświetlenie kolejnego ostatnio przesłanego obrazu z Wikimedia Commons</string>
-  <string name="review_image_explanation" fuzzy="true">Możesz przeglądać obrazy i poprawiać jakość Wikimedia Commons.\n Cztery parametry przeglądu to:\n - Czy ten obraz jest objęty zakresem?\n - Czy ten obraz jest zgodny z zasadami praw autorskich?\n - Czy ten obraz jest poprawnie sklasyfikowany?\n - Jeśli wszystko pójdzie dobrze, możesz również podziękować autorowi.</string>
+  <string name="review_image_explanation">Możesz przeglądać obrazy, aby poprawić jakość Wikimedia Commons.\nTrzy parametry przeglądu to:\n- Czy ten obraz jest objęty zakresem?\nKlikając Nie (poza zakresem), dodajesz szablon nominacji do usunięcia tego obrazu.\n\n- Czy ten obraz jest zgodny z zasadami praw autorskich?\nPo dotknięciu Nie (nie jest to zgodne z zasadami praw autorskich), dodajesz szablon nominacji do usunięcia tego obrazu.\n\n- Czy ten obraz jest prawidłowo skategoryzowany?\nPo dotknięciu Nie (niepoprawnie skategoryzowane), dodajesz szablon żądania kategoryzacji tego obrazu.\n\nJeśli wszystko jest w porządku, do obrazu nie zostanie dodany żaden szablon, a Ty możesz podziękować współtwórcy.</string>
   <string name="no_image">Nie użyto żadnych obrazów</string>
   <string name="no_image_reverted">Żadne obrazy nie zostały przywrócone</string>
   <string name="no_image_uploaded">Nie przesłano żadnych obrazów</string>
@@ -509,11 +521,40 @@
   <string name="category_edit_helper_make_edit_toast">Próba aktualizacji kategorii.</string>
   <string name="category_edit_helper_show_edit_title">Aktualizacja kategorii</string>
   <string name="category_edit_helper_show_edit_title_success">Powodzenie</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">Kategoria %1$s jest dodana.</item>
+    <item quantity="few">Kategorie %1$s są dodane.</item>
+    <item quantity="many">Kategorie %1$s są dodane.</item>
+    <item quantity="other"/>
+  </plurals>
   <string name="category_edit_helper_edit_message_else">Nie udało się dodać kategorii.</string>
   <string name="category_edit_button_text">Aktualizuj kategorie</string>
+  <string name="depictions_edit_helper_make_edit_toast">Próba aktualizacji przedstawień.</string>
+  <string name="depictions_edit_helper_show_edit_title">Edycja przedstawień</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">Przedstawienie %1$s jest dodane.</item>
+    <item quantity="few">Przedstawienia %1$s są dodane.</item>
+    <item quantity="many">Przedstawienia %1$s są dodane.</item>
+    <item quantity="other"/>
+  </plurals>
+  <string name="depictions_edit_helper_edit_message_else">Nie można dodać przedstawienia.</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Próba aktualizacji koordynatów.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Aktualizacja koordynatów</string>
+  <string name="description_edit_helper_show_edit_title">Aktualizacja opisu</string>
+  <string name="caption_edit_helper_show_edit_title">Aktualizacja przypisu</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Powodzenie</string>
+  <string name="coordinates_edit_helper_show_edit_message">Koordynaty %1$s zostały dodane.</string>
+  <string name="description_edit_helper_show_edit_message">Opisy zostały dodane.</string>
+  <string name="caption_edit_helper_show_edit_message">Przypis został dodany.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Nie można dodać koordynatów.</string>
+  <string name="description_edit_helper_edit_message_else">Nie można dodać opisów.</string>
+  <string name="caption_edit_helper_edit_message_else">Nie można dodać przypisu.</string>
+  <string name="coordinates_picking_unsuccessful">Nie można uzyskać koordynatów.</string>
+  <string name="descriptions_picking_unsuccessful">Nie można uzyskać opisów.</string>
+  <string name="description_activity_title">Edycja opisów i przypisów</string>
   <string name="share_image_via">Udostępnij obraz przez</string>
-  <string name="no_achievements_yet" fuzzy="true">Nie wykonałeś jeszcze żadnej edycji</string>
+  <string name="you_have_no_achievements_yet">Nie dokonałeś jeszcze żadnej edycji</string>
+  <string name="no_achievements_yet">%s nie dokonał jeszcze żadnej edycji</string>
   <string name="account_created">Konto zostało utworzone!</string>
   <string name="text_copy">Skopiowano tekst do schowka</string>
   <string name="notification_mark_read">Oznaczono powiadomienia jako przeczytane</string>
@@ -565,8 +606,10 @@
   <string name="resume">wznów</string>
   <string name="paused">Zatrzymano</string>
   <string name="more">Więcej</string>
+  <string name="bookmarks">Zakładki</string>
   <string name="achievements_tab_title">Osiągnięcia</string>
   <string name="leaderboard_tab_title">Ranking</string>
+  <string name="rank_prefix">Ranking:</string>
   <string name="count_prefix">Licznik:</string>
   <string name="leaderboard_column_rank">Ranga</string>
   <string name="leaderboard_column_user">Użytkownik</string>
@@ -593,8 +636,10 @@
   <string name="quality_images_info">Obrazy wysokiej jakości to diagramy lub fotografie, które spełniają określone standardy dotyczące jakości (które w większości są ściśle techniczne) i są wartościowymi materiałami dla projektów Wikimedii.</string>
   <string name="resuming_upload">Wznawianie przesyłania…</string>
   <string name="pausing_upload">Wstrzymywanie przesyłania…</string>
+  <string name="cancelling_upload">Anulowanie przesyłania…</string>
+  <string name="cancel_upload">Anuluj przesyłanie</string>
   <string name="limited_connection_explanation">Włączyłeś tryb ograniczonego połączenia. Wszystkie operacje przesyłania są wstrzymane i zostaną wznowione po wyłączeniu tego trybu.</string>
-  <string name="limited_connection_is_on">ryb ograniczonego połączenia jest włączony.</string>
+  <string name="limited_connection_is_on">Tryb ograniczonego połączenia jest włączony.</string>
   <string name="media_details_tooltip">Napisz krótki podpis z napisem, co pokazuje Twoje zdjęcie. W opisie powiedz, co sprawia, że obraz jest interesujący lub typowy lub rzadki, i wyjaśnij kontekst, widoczny lub nie. Użyj dokładnej terminologii, jak to tylko możliwe.</string>
   <string name="depicts_tooltip">Znajdź i zaznacz wszystkie koncepcje, które przedstawia ten obraz. Podaj jak najwięcej szczegółów. Jeśli obraz przedstawia wiele elementów, wybierz je wszystkie w rozsądnym zakresie. Nie wybieraj tagów ogólnych, jeśli dostępne są bardziej szczegółowe tagi.</string>
   <string name="categories_tooltip">Wybierz odpowiednie kategorie. W przeciwieństwie do przedstawień kategorie są dostępne tylko w języku angielskim.</string>
@@ -604,10 +649,65 @@
   <string name="media_detail_step_title">Szczegóły mediów</string>
   <string name="menu_view_category_page">Zobacz stronę kategorii</string>
   <string name="menu_view_item_page">Wyświetl stronę elementu</string>
+  <string name="app_ui_language">Język interfejsu użytkownika aplikacji</string>
+  <string name="remove">Usuwa przypisy i opisy</string>
   <string name="read_help_link">Czytaj więcej</string>
+  <string name="media_detail_in_all_languages">We wszystkich językach</string>
+  <string name="choose_a_location">Wybierz położenie</string>
+  <string name="pan_and_zoom_to_adjust">Przesuń i powiększ, aby dostosować</string>
+  <string name="select_location_location_picker">Wybierz położenie</string>
+  <string name="show_in_map_app">Pokaż w aplikacji mapowej</string>
+  <string name="modify_location">Edycja położenia</string>
+  <string name="location_picker_image_view">Widok obrazu selektora lokalizacji</string>
+  <string name="location_picker_image_view_shadow">\n    Cień widoku obrazu selektora lokalizacji</string>
+  <string name="image_location">Lokalizacja zdjęcia</string>
+  <string name="check_whether_location_is_correct">Sprawdź czy położenie jest poprawne</string>
+  <string name="label">Etykieta</string>
+  <string name="description">Opis</string>
+  <string name="title_page_bookmarks_items">Elementy</string>
   <string name="custom_selector_title">Niestandardowy selektor</string>
   <string name="custom_selector_empty_text">Brak obrazów</string>
+  <string name="done">Gotowe</string>
+  <string name="back">Cofnij</string>
+  <string name="welcome_custom_picture_selector_text">Witamy w niestandardowym selektorze zdjęć</string>
+  <string name="custom_selector_info_text1">Ten selektor pokazuje inaczej zdjęcia, które są już na Commons.</string>
+  <string name="custom_selector_info_text2">W przeciwieństwie do zdjęcia po lewej, zdjęcie po prawej ma logo Commons wskazujące, że zostało już przesłane.\n  Dotknij i przytrzymaj, aby wyświetlić podgląd obrazu.</string>
+  <string name="welcome_custom_selector_ok">Niesamowite</string>
   <string name="custom_selector_already_uploaded_image_text">Tez plik został już przesłany do Commons.</string>
+  <string name="wlm_upload_info">Ten obraz zostanie zgłoszony do konkursu Wiki Loves Monuments 2021</string>
   <string name="display_monuments">Pokaż zabytki</string>
+  <string name="wlm_month_message">To jest miesiąc Wiki Lovers Monuments!</string>
   <string name="learn_more">DOWIEDZ SIĘ WIĘCEJ</string>
+  <string name="wlm_campaign_description">Wiki Loves Monuments (Wiki Kocha Zabytki) to międzynarodowy konkurs fotograficzny skoncentrowany na zabytkach, organizowany przez Wikimedia</string>
+  <string name="need_permission">Wymagane uprawnienie</string>
+  <string name="read_phone_state_permission_message">Mapy znajdujące się w pobliżu muszą odczytywać STAN TELEFONU, aby działały poprawnie</string>
+  <string name="contributions_of_user">Wkład użytkownika: %s</string>
+  <string name="achievements_of_user">Osiągnięcia użytkownika: %s</string>
+  <string name="menu_view_user_page">Wyświetl stronę użytkownika</string>
+  <string name="edit_depictions">Edycja przedstawień</string>
+  <string name="edit_categories">Edycja kategorii</string>
+  <string name="advanced_options">Opcje zaawansowane</string>
+  <string name="advanced_query_info_text">Możesz dostosować zapytanie \"W pobliżu\". Jeśli pojawią się błędy, zresetuj i zastosuj.</string>
+  <string name="apply">Zastosuj</string>
+  <string name="reset">Zresetuj</string>
+  <string name="location_message">Dane o lokalizacji pomagają edytorom Wiki znaleźć Twoje zdjęcie, dzięki czemu jest ono znacznie bardziej przydatne.\nTwoje ostatnio przesłane pliki nie zawierają lokalizacji.\nSugerujemy włączenie lokalizacji w ustawieniach aplikacji aparatu.\nDziękujemy za przesłanie!</string>
+  <string name="no_location_found_title">Nie odnaleziono lokalizacji</string>
+  <string name="no_location_found_message">Co powiesz na dodanie miejsca, w którym zrobiono to zdjęcie?\nDane o lokalizacji pomagają edytorom Wiki znaleźć Twoje zdjęcie, dzięki czemu jest ono znacznie bardziej przydatne.\nDziękujemy!</string>
+  <string name="add_location">Dodaj położenie</string>
+  <string name="feedback_sharing_data_alert">Usuń z tego e-maila wszelkie informacje, których nie chcesz udostępniać publicznie. Pamiętaj również, że Twój adres e-mail, z którego publikujesz, oraz powiązane imię i nazwisko i zdjęcie profilowe będą widoczne publicznie.</string>
+  <string name="explore_map_details">Szczegóły</string>
+  <string name="achievements_unavailable_beta">Osiągnięcia są dostępne tylko w wersji prod, sprawdź dokumentację dla programistów.</string>
+  <string name="leaderboard_unavailable_beta">Tablica wyników jest dostępna tylko w wersji prod. Zapoznaj się z dokumentacją dla programistów.</string>
+  <string name="copyright_popup">Przesyłaj tylko zdjęcia zrobione przez siebie. Przesyłający obrazy chronione prawami autorskimi zostaną zablokowani. Dotyczy to również wersji beta. Dziękujemy za przetestowanie aplikacji!</string>
+  <string name="select_feedback_data_choice">Usuń zaznaczenie wszelkich informacji, których nie chcesz udostępniać publicznie.</string>
+  <string name="api_level">Poziom API</string>
+  <string name="android_version">Wersja Android</string>
+  <string name="device_manufacturer">Producent urządzenia</string>
+  <string name="device_model">Model urządzenia</string>
+  <string name="device_name">Nazwa urządzenia</string>
+  <string name="network_type">Rodzaj sieci</string>
+  <string name="thanks_feedback">Dziękujemy za przekazanie opinii</string>
+  <string name="error_feedback">Błąd podczas wysyłania opinii</string>
+  <string name="enter_description">Jaka jest Twoja opinia?</string>
+  <string name="your_feedback">Twoja opinia</string>
 </resources>

@@ -80,4 +80,32 @@ class CategoryEditHelperUnitTests {
             ArgumentMatchers.anyString()
         )
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun testMakeUnCategoryEdit() {
+        helper.makeCategoryEdit(context, media, listOf("Test"), "== {{int:filedesc}} ==\n" +
+                "{{Information\n" +
+                "|description=\n" +
+                "\n" +
+                "|source={{own}}\n" +
+                "|author=[[User:UserForthBeta|UserForthBeta]]\n" +
+                "|date={{According to Exif data|2022-03-06}}\n" +
+                "}}\n" +
+                "{{Location|22.538830555555556|114.08847222222222}}\n" +
+                "== {{int:license-header}} ==\n" +
+                "{{self|cc-zero}}\n" +
+                "\n" +
+                "{{Uploaded from Mobile|platform=Android|version=3.1.1-debug-master~e7a9ba9ad}}\n" +
+                "{{Uncategorized|year=2022|month=April|day=23}}")
+        Mockito.verify(viewUtilWrapper, Mockito.times(1)).showShortToast(
+            context,
+            context.getString(R.string.category_edit_helper_make_edit_toast)
+        )
+        Mockito.verify(pageEditClient, Mockito.times(1)).edit(
+            ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString(),
+            ArgumentMatchers.anyString()
+        )
+    }
 }

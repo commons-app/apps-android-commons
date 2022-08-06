@@ -7,6 +7,10 @@
 * Yuvipanda
 -->
 <resources>
+  <string name="commons_facebook">காமென்ஸ் முகநூல் பக்கம்</string>
+  <string name="commons_github">காமென்ஸ் கிட்கப் மூலம்</string>
+  <string name="commons_logo">பொதுவகம் இலச்சினை</string>
+  <string name="commons_website">காமென்ஸ் இணையதளம்</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d கோப்பு தரவேற்றப்படுகிறது</item>
     <item quantity="other">%1$d கோப்புகள்  தரவேற்றப்படுகின்றன</item>
@@ -152,10 +156,6 @@
   <string name="media_detail_coordinates">ஆயத்தொலைகள்</string>
   <string name="media_detail_coordinates_empty">வழங்கப்படவில்லை</string>
   <string name="logout_verification">தாங்கள் மெய்யாகவே மூடுவதற்கு விரும்புகிறீர்களா?</string>
-  <string name="commons_logo">பொதுவகம் இலச்சினை</string>
-  <string name="commons_website">காமென்ஸ் இணையதளம்</string>
-  <string name="commons_facebook">காமென்ஸ் முகநூல் பக்கம்</string>
-  <string name="commons_github">காமென்ஸ் கிட்கப் மூலம்</string>
   <string name="mediaimage_failed">பட ஊடகம் தோல்வியடைந்தது</string>
   <string name="no_subcategory_found">துணைப்பிரிவுகள் இல்லை</string>
   <string name="no_parentcategory_found">முதன்மை வகைகள் இல்லை</string>

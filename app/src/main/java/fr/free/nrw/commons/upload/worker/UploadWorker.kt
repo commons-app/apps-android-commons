@@ -418,7 +418,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
      */
     private fun saveIntoUploadedStatus(contribution: Contribution) {
         contribution.contentUri?.let {
-            val imageSha1 = fileUtilsWrapper.getSHA1(appContext.contentResolver.openInputStream(it))
+            val imageSha1 = contribution.imageSHA1.toString()
             val modifiedSha1 = fileUtilsWrapper.getSHA1(fileUtilsWrapper.getFileInputStream(contribution.localUri?.path))
             MainScope().launch {
                 uploadedStatusDao.insertUploaded(

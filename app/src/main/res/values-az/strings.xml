@@ -15,6 +15,7 @@
     <item quantity="one">%1$d fayl yüklənir</item>
     <item quantity="other">%1$d fayllar yüklənir</item>
   </plurals>
+  <string name="preference_category_general">Ümumi</string>
   <string name="preference_category_privacy">Məxfilik</string>
   <string name="app_name">Vikimedia Commons</string>
   <string name="menu_settings">Tənzimləmələr</string>

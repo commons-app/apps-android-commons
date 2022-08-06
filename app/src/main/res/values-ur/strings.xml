@@ -8,6 +8,7 @@
 * Sayam Asjad
 -->
 <resources>
+  <string name="commons_logo">کامنز لوگو</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d فائل اپلوڈ ہورہی ہے</item>
     <item quantity="other">%1$d فائلیں اپلوڈ ہورہی ہے</item>
@@ -120,7 +121,6 @@
   <string name="media_detail_author">مصنف</string>
   <string name="media_detail_license">اجازت نامہ</string>
   <string name="media_detail_coordinates">متناسقات</string>
-  <string name="commons_logo">کامنز لوگو</string>
   <string name="cancel">منسوخ</string>
   <string name="navigation_drawer_open">کھولیں</string>
   <string name="navigation_drawer_close">بند</string>

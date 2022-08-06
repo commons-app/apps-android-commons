@@ -21,9 +21,26 @@
 * WikiAbuHuraira
 * YahyA
 * Yahya
+* আজিজ
 * আফতাবুজ্জামান
 -->
 <resources>
+  <string name="commons_facebook">কমন্সের ফেসবুক পাতা</string>
+  <string name="commons_github">কমন্স গিটহাব উৎস কোড</string>
+  <string name="commons_logo">কমন্সের লোগো</string>
+  <string name="commons_website">কমন্স ওয়েবসাইট</string>
+  <string name="submit">জমা দিন</string>
+  <string name="add_another_description">আরেকটি বিবরণ যোগ করুন</string>
+  <string name="add_new_contribution">নতুন অবদান যোগ করুন</string>
+  <string name="add_contribution_from_camera">ক্যামেরা থেকে অবদান যোগ করুন</string>
+  <string name="add_contribution_from_photos">ফটো থেকে অবদান যোগ করুন</string>
+  <string name="add_contribution_from_contributions_gallery">পূর্ববর্তী অবদান গ্যালারি থেকে অবদান যোগ করুন</string>
+  <string name="show_captions">ক্যাপশন</string>
+  <string name="row_item_language_description">ভাষার বর্ণনা</string>
+  <string name="show_captions_description">বিবরণ</string>
+  <string name="nearby_row_image">চিত্র</string>
+  <string name="nearby_all">সব</string>
+  <string name="appwidget_img">আজকের চিত্র</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$dটি ফাইল আপলোড হচ্ছে</item>
     <item quantity="other">%1$dটি ফাইল আপলোড হচ্ছে</item>
@@ -73,6 +90,7 @@
   <string name="upload_failed">ফাইল পাওয়া যায়নি। আরেকটি ফাইল চেষ্টা করুন।</string>
   <string name="authentication_failed">প্রমাণীকরণ ব্যর্থ হয়েছে, অনুগ্রহ করে আবার প্রবেশ করুন</string>
   <string name="uploading_started">আপলোড আরম্ভ হয়েছে!</string>
+  <string name="uploading_queued">আপলোড সারিবদ্ধ করা হয়েছে (সীমিত সংযোগ মোড সক্রিয় করা)</string>
   <string name="upload_completed_notification_title">%1$ আপলোড হয়েছে!</string>
   <string name="upload_completed_notification_text">আপনার আপলোড দেখতে টোকা দিন</string>
   <string name="upload_progress_notification_title_start">ফাইল আপলোড করা হচ্ছে: %s</string>
@@ -180,6 +198,7 @@
   <string name="storage_permission_title">সঞ্জয়স্থলের অনুমতির অনুরোধ</string>
   <string name="read_storage_permission_rationale">প্রয়োজনীয় অনুমতি: বহিস্থ স্মৃতি পড়া। এটি ছাড়া এ্যাপ আপনার গ্যালারি দেখতে পাবে না।</string>
   <string name="write_storage_permission_rationale">অনুমতি প্রয়োজন: বাহ্যিক স্টোরেজে লেখা। এটি ছাড়া অ্যাপটি আপনার ক্যামেরা/গ্যালারিতে প্রবেশ করতে পারবে না।</string>
+  <string name="location_permission_title">অবস্থানের অনুমতির অনুরোধ</string>
   <string name="ok">ঠিক আছে</string>
   <string name="warning">সতর্কীকরণ</string>
   <string name="duplicate_image_found">সদৃশ চিত্র পাওয়া গেছে</string>
@@ -199,10 +218,6 @@
   <string name="become_a_tester_description">গুগল প্লেতে আমাদের বেটা চ্যানেলে যুক্ত হন! এতে নতুন বৈশিষ্ট্যের পাশাপাশি পুরানো বাগগুলো\'র সংশোধিত রুপ সবার আগে ব্যবহারের সুযোগ পাবেন</string>
   <string name="_2fa_code">2FA কোড</string>
   <string name="logout_verification">আপনি কি সত্যিই প্রস্থান করতে চান?</string>
-  <string name="commons_logo">কমন্সের লোগো</string>
-  <string name="commons_website">কমন্স ওয়েবসাইট</string>
-  <string name="commons_facebook">কমন্সের ফেসবুক পাতা</string>
-  <string name="commons_github">কমন্স গিটহাব উৎস কোড</string>
   <string name="mediaimage_failed">মিডিয়া চিত্র ব্যর্থ হয়েছে</string>
   <string name="no_subcategory_found">কোন উপবিষয়শ্রেনী পাওয়া যায় নি।</string>
   <string name="welcome_image_mount_zao">জাও পর্বত</string>
@@ -269,6 +284,7 @@
   <string name="user_guide">ব্যবহারকারী নির্দেশিকা</string>
   <string name="welcome_skip_button">টিউটোরিয়াল এড়ান</string>
   <string name="no_internet">ইন্টারনেট অনুপলব্ধ</string>
+  <string name="error_notifications">বিজ্ঞপ্তি আনয়নে ত্রুটি</string>
   <string name="no_notifications">কোন বিজ্ঞপ্তি পাওয়া যায়নি</string>
   <string name="about_translate">অনুবাদ করুন</string>
   <string name="about_translate_title">ভাষাসমূহ</string>
@@ -276,24 +292,28 @@
   <string name="about_translate_cancel">বাতিল</string>
   <string name="retry">পুনঃচেষ্টা করুন</string>
   <string name="showcase_view_needs_photo">এই স্থানটির একটি চিত্র দরকার।</string>
+  <string name="showcase_view_no_longer_exists">এই জায়গাটি আর নেই।</string>
   <string name="no_images_found">কোন চিত্র পাওয়া যায়নি!</string>
+  <string name="error_loading_images">ছবি লোড করার সময় ত্রুটি ঘটেছে৷</string>
   <string name="image_uploaded_by">আপলোড করেছেন: %1$s</string>
   <string name="block_notification_title">বাধাপ্রাপ্ত</string>
   <string name="block_notification">আপনাকে কমন্সে সম্পাদনা করা থেকে বাধা দেওয়া হয়েছে</string>
-  <string name="appwidget_img">আজকের চিত্র</string>
   <string name="app_widget_heading">আজকের চিত্র</string>
   <string name="menu_search_button">অনুসন্ধান</string>
   <string name="search_commons">কমন্সে অনুসন্ধান করুন</string>
   <string name="title_activity_search">অনুসন্ধান</string>
   <string name="search_recent_header">সাম্প্রতিক অনুসন্ধানগুলি:</string>
+  <string name="provider_searches">সম্প্রতি অনুসন্ধান করা প্রশ্ন</string>
   <string name="provider_recent_languages">সাম্প্রতিক ভাষা প্রশ্ন</string>
+  <string name="error_loading_categories">বিষয়শ্রেণী লোড করার সময় ত্রুটি ঘটেছে৷</string>
   <string name="search_tab_title_media">মিডিয়া</string>
   <string name="search_tab_title_categories">বিষয়শ্রেণীসমূহ</string>
   <string name="search_tab_title_depictions">আইটেম</string>
   <string name="explore_tab_title_featured">নির্বাচিত</string>
-  <string name="explore_tab_title_mobile">মোবাইলের মাধ্যমে আপলোডকৃত</string>
+  <string name="explore_tab_title_mobile">মোবাইল দিয়ে আপলোডকৃত</string>
   <string name="explore_tab_title_map">মানচিত্র</string>
   <string name="menu_set_wallpaper">ওয়ালপেপার হিসেবে সেট করুন</string>
+  <string name="wallpaper_set_successfully">ওয়ালপেপার সফলভাবে সেট করা হয়েছে!</string>
   <string name="quiz">কুইজ</string>
   <string name="quiz_question_string">এই চিত্রটি কি আপলোড করা ঠিক হয়েছে?</string>
   <string name="question">প্রশ্ন</string>
@@ -305,14 +325,17 @@
   <string name="quiz_screenshot_question">এই স্ক্রিনশটটি কি আপলোড করা ঠিক হয়েছে?</string>
   <string name="share_app_title">অ্যাপ শেয়ার করুন</string>
   <string name="error_fetching_nearby_places">কাছাকাছি স্থানগুলি আনতে ত্রুটি।</string>
+  <string name="error_fetching_nearby_monuments">আশেপাশের স্মৃতিস্তম্ভগুলি আনায়নে ত্রুটি৷</string>
   <string name="nominate_delete">অপসারণের জন্য মনোনীত করুন</string>
   <string name="delete">অপসারণ</string>
   <string name="Achievements">কৃতিত্বগুলি</string>
   <string name="Profile">প্রোফাইল</string>
   <string name="statistics">পরিসংখ্যান</string>
+  <string name="statistics_thanks">ধন্যবাদ পেয়েছেন</string>
   <string name="statistics_featured">নির্বাচিত ছবি</string>
   <string name="level">স্তর</string>
   <string name="images_uploaded">আপলোডকৃত চিত্র</string>
+  <string name="achievements_revert_limit_message">নূন্যতম আবশ্যকতা:</string>
   <string name="error_occurred">ত্রুটি ঘটেছে!</string>
   <string name="notifications_channel_name_all">কমন্স বিজ্ঞপ্তি</string>
   <string name="preference_author_name_toggle">স্বনির্ধারিত লেখক নাম ব্যবহার করুন</string>
@@ -324,10 +347,10 @@
   <string name="read_notifications">বিজ্ঞপ্তি (পঠিত)</string>
   <string name="display_nearby_notification">কাছাকাছি স্থানের বিজ্ঞপ্তি প্রদর্শন করুন</string>
   <string name="list_sheet">তালিকা</string>
+  <string name="storage_permission">সঞ্চয়স্থলের অনুমতি</string>
   <string name="step_count">ধাপ %2$d এর %1$d: %3$s</string>
   <string name="next">পরবর্তী</string>
   <string name="previous">পূর্ববর্তী</string>
-  <string name="submit">জমা দিন</string>
   <string name="map_application_missing">আপনার ডিভাইসে কোনও উপযুক্ত মানচিত্রের অ্যাপ্লিকেশন খুঁজে পাওয়া যায়নি। এই বৈশিষ্ট্যটি ব্যবহার করতে অনুগ্রহ করে একটি মানচিত্রের অ্যাপ্লিকেশন ইনস্টল করুন।</string>
   <string name="title_page_bookmarks_pictures">চিত্র</string>
   <string name="title_page_bookmarks_locations">অবস্থান</string>
@@ -362,6 +385,13 @@
   <string name="exif_tag_name_software">সফটওয়্যার</string>
   <string name="image_info">চিত্রের তথ্য</string>
   <string name="default_description_language">বিবরণের পূর্বনির্ধারিত ভাষা</string>
+  <string name="delete_helper_show_deletion_title_success">সফল</string>
+  <string name="delete_helper_show_deletion_title_failed">ব্যর্থ হয়েছে</string>
+  <string name="delete_helper_ask_spam_selfie">একটি সেলফি</string>
+  <string name="delete_helper_ask_spam_blurry">ঝাপসা</string>
+  <string name="delete_helper_ask_spam_nonsense">আজেবাজে</string>
+  <string name="delete_helper_ask_reason_copyright_press_photo">সংবাদপত্রের চিত্র</string>
+  <string name="delete_helper_ask_reason_copyright_internet_photo">ইন্টারনেট থেকে নেওয়া অজানা চিত্র</string>
   <string name="delete_helper_ask_reason_copyright_logo">লোগো</string>
   <string name="category_edit_helper_make_edit_toast">বিষয়শ্রেণীগুলি হালনাগাদ করার চেষ্টা চলছে।</string>
   <string name="category_edit_helper_show_edit_title">বিষয়শ্রেণী হালনাগাদ করুন</string>
@@ -372,8 +402,12 @@
   <string name="coordinates_edit_helper_show_edit_title_success">সফল</string>
   <string name="you_have_no_achievements_yet">আপনি এখনও কোনও অবদান রাখেন নি</string>
   <string name="account_created">অ্যাকাউন্ট তৈরি করা হয়েছে!</string>
+  <string name="some_error">একটি ত্রুটি হয়েছে!</string>
   <string name="place_state">স্থানের অবস্থা:</string>
+  <string name="place_state_exists">অস্তিত্ব আছে</string>
+  <string name="place_state_needs_photo">চিত্র প্রয়োজন</string>
   <string name="place_type">স্থানের ধরন:</string>
+  <string name="nearby_search_hint">সেতু, জাদুঘর, হোটেল ইত্যাদি।</string>
   <string name="title_for_media">মিডিয়া</string>
   <string name="upload_nearby_place_found_title">কাছাকাছি স্থান পাওয়া গেছে</string>
   <string name="upload_nearby_place_found_description">এটি কি %1$s স্থানের একটি চিত্র?</string>
@@ -385,6 +419,7 @@
   <string name="theme_dark_name">আঁধার</string>
   <string name="theme_light_name">উজ্জ্বল</string>
   <string name="ask_to_turn_location_on">অবস্থান চালু করবেন?</string>
+  <string name="nearby_needs_location">কাছাকাছি বৈশিষ্ট্য সঠিকভাবে কাজ করার জন্য অবস্থান সক্রিয় করা প্রয়োজন</string>
   <string name="load_more">আরও লোড করুন</string>
   <string name="todo_improve">প্রস্তাবিত উন্নতিসমূহ:</string>
   <string name="add_picture_to_wikipedia_article_title">উইকিপিডিয়ায় চিত্র যোগ করুন</string>
@@ -412,8 +447,14 @@
   <string name="leaderboard_nearby">কাছাকাছি</string>
   <string name="leaderboard_used">ব্যবহৃত</string>
   <string name="leaderboard_my_rank_button_text">আমার স্থান</string>
+  <string name="mapbox_telemetry">ম্যাপবক্স টেলিমেট্রি</string>
+  <string name="telemetry_opt_out_summary">কাছাকাছি বৈশিষ্ট্য ব্যবহার করার সময় ম্যাপবক্সে বেনামে অবস্থান ও ব্যবহারের তথ্য পাঠান</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;ম্যাপবক্স&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;ওপেনস্ট্রিটম্যাপ&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;এই মানচিত্রের উন্নয়ন করুন&lt;/a&gt;</string>
+  <string name="limited_connection_enabled">সীমিত সংযোগ মোড সক্রিয় করা হয়েছে!</string>
+  <string name="limited_connection_mode">সীমিত সংযোগ মোড</string>
   <string name="statistics_quality">মানসম্মত ছবি</string>
   <string name="cancel_upload">আপলোড বাতিল করুন</string>
+  <string name="limited_connection_explanation">আপনি সীমিত সংযোগ মোড সক্রিয় করেছেন। সমস্ত আপলোডকে এখন বিরাম দেওয়া হয়েছে ও আপনি এই মোডটি নিষ্ক্রিয় করলে আপলোড পুনরায় শুরু করা হবে।</string>
   <string name="license_step_title">মিডিয়ার লাইসেন্স</string>
   <string name="media_detail_step_title">মিডিয়ার বিস্তারিত</string>
   <string name="menu_view_category_page">বিষয়শ্রেণীর পাতাটি দেখুন</string>
@@ -439,6 +480,7 @@
   <string name="welcome_custom_selector_ok">দারুণ</string>
   <string name="custom_selector_already_uploaded_image_text">এই চিত্রটি ইতোমধ্যে কমন্সে আপলোড করা হয়েছে।</string>
   <string name="learn_more">আরও জানুন</string>
+  <string name="wlm_campaign_title">উইকি লাভস মনুমেন্টস</string>
   <string name="need_permission">অনুমতি দরকার</string>
   <string name="contributions_of_user">ব্যবহারকারীর অবদান: %s</string>
   <string name="achievements_of_user">ব্যবহারকারীর অর্জন: %s</string>

@@ -32,6 +32,12 @@
 * درفش کاویانی
 -->
 <resources>
+  <string name="commons_facebook">صفحهٔ فیس‌بوک ویکی‌انبار</string>
+  <string name="commons_github">صفحهٔ کدهای گیت‌هاب ویکی‌انبار</string>
+  <string name="commons_logo">نشان ویکی‌انبار</string>
+  <string name="commons_website">وب‌سایت ویکی‌انبار</string>
+  <string name="submit">ارسال</string>
+  <string name="appwidget_img">تصویر روز</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d پرونده در حال بارگذاری</item>
     <item quantity="other">%1$d پرونده در حال بارگذاری</item>
@@ -77,7 +83,7 @@
   <string name="login_success">ورود موفق!</string>
   <string name="login_failed">ورود ناموفق!</string>
   <string name="upload_failed">پرونده یافت نشد لطفاً پرونده دیگری را امتحان کنید.</string>
-  <string name="authentication_failed">تأیید اعتبار ناموفق بود! لطفاً دوباره وارد شوید.</string>
+  <string name="authentication_failed">اصالت‌سنجی شکست خورد! لطفاً دوباره وارد شوید.</string>
   <string name="uploading_started">بارگذاری آغاز شد!</string>
   <string name="upload_completed_notification_title">%1$s بارگذاری شد!</string>
   <string name="upload_completed_notification_text">برای دیدن بارگذاریتان بر روی صفحه انگشت بزنید</string>
@@ -98,14 +104,14 @@
   <string name="provider_contributions">بارگذاری‌های من</string>
   <string name="menu_share">به اشتراک‌گذاشتن</string>
   <string name="menu_view_file_page">مشاهدهٔ صفحهٔ پرونده</string>
-  <string name="share_title_hint">شرح مختصر (الزامی)</string>
-  <string name="add_caption_toast">لطفاً شرح مختصری برای این پرونده بنویسید</string>
+  <string name="share_title_hint">برنگاشت (الزامی)</string>
+  <string name="add_caption_toast">لطفاً برنگاشتی برای این پرونده بنویسید</string>
   <string name="share_description_hint">توضیحات</string>
-  <string name="share_caption_hint">شرح مختصر</string>
+  <string name="share_caption_hint">برنگاشت</string>
   <string name="login_failed_network">قادر به ورود نیست - شکست شبکه‌ای</string>
   <string name="login_failed_throttled">تلاش ناموفق بیش از حد. لطفاً چند دقیقهٔ دیگر دوباره تلاش کنید</string>
   <string name="login_failed_blocked">پوزش، کاربر در ویکی‌انبار بسته شده‌است</string>
-  <string name="login_failed_2fa_needed">شما باید کد تأیید اعتبار دومرحله‌ای را ارائه کنید.</string>
+  <string name="login_failed_2fa_needed">شما باید کد اصالت‌سنجی دومرحله‌ای را ارائه کنید.</string>
   <string name="login_failed_generic">ورود ناموفق بود</string>
   <string name="share_upload_button">بارگذاری</string>
   <string name="multiple_share_base_title">نام این مجموعه</string>
@@ -205,10 +211,6 @@
   <string name="become_a_tester_description">به گروه آزمایشی ما در گوگل‌پلی بپیوندید و از خصوصیات جدید و خطاهای رفع‌شده زودتر از دیگران برخوردار شوید.</string>
   <string name="_2fa_code">کد 2FA</string>
   <string name="logout_verification">آیا واقعاً قصد خروج از سامانه را دارید؟</string>
-  <string name="commons_logo">نشان ویکی‌انبار</string>
-  <string name="commons_website">وب‌سایت ویکی‌انبار</string>
-  <string name="commons_facebook">صفحهٔ فیس‌بوک ویکی‌انبار</string>
-  <string name="commons_github">صفحهٔ کدهای گیت‌هاب ویکی‌انبار</string>
   <string name="mediaimage_failed">خطای تصویر رسانه</string>
   <string name="no_subcategory_found">هیچ زیررده‌ای یافت نشد</string>
   <string name="no_parentcategory_found">هیچ رده مادری یافت نشد</string>
@@ -230,7 +232,7 @@
   <string name="navigation_item_feedback">بازخورد</string>
   <string name="navigation_item_logout">خروج</string>
   <string name="navigation_item_info">آموزش</string>
-  <string name="navigation_item_notification">اعلان‌ها</string>
+  <string name="navigation_item_notification">آگاه‌سازی‌ها</string>
   <string name="navigation_item_review">بازبینی</string>
   <string name="no_description_found">توضیحی یافت نشد</string>
   <string name="nearby_info_menu_commons_article">صفحهٔ دروند در ویکی‌انبار</string>
@@ -275,9 +277,9 @@
   <string name="user_guide">راهنمای کاربر</string>
   <string name="welcome_skip_button">رهاکردن آموزش</string>
   <string name="no_internet">اینترنت در دسترس نیست</string>
-  <string name="error_notifications">خطای واکشی کردن اعلان‌ها</string>
+  <string name="error_notifications">خطای واکشی کردن آگاه‌سازی‌ها</string>
   <string name="error_review">در تلاش برای بدست‌آوردن تصویر جهت بازبینی خطایی پیش آمد. لطفا برای تلاش مجدد بر روی ریفرش کلیک کنید.</string>
-  <string name="no_notifications">اعلان‌ها پیدا نشد</string>
+  <string name="no_notifications">هیج آگاه‌سازی پیدا نشد</string>
   <string name="about_translate">ترجمه</string>
   <string name="about_translate_title">زبان‌ها</string>
   <string name="about_translate_message">لطفا زبانی که مایلید در آنها ترجمه‌های خود را ثبت کنید انتخاب کنید.</string>
@@ -291,7 +293,6 @@
   <string name="image_uploaded_by">بارگذاری‌شده توسط: %1$s</string>
   <string name="block_notification_title">بسته شده</string>
   <string name="block_notification">شما برای ویرایش در ویکی‌انبار قطع دسترسی شدید</string>
-  <string name="appwidget_img">تصویر روز</string>
   <string name="app_widget_heading">تصویر روز</string>
   <string name="menu_search_button">جستجو</string>
   <string name="search_commons">جستجوی ویکی‌انبار</string>
@@ -303,7 +304,7 @@
   <string name="search_tab_title_media">رسانه</string>
   <string name="search_tab_title_categories">رده‌ها</string>
   <string name="explore_tab_title_featured">برگزیده</string>
-  <string name="explore_tab_title_mobile">بارگذاری‌شده با تلفن همراه</string>
+  <string name="explore_tab_title_mobile">بارگذاری‌شده با همراه</string>
   <string name="explore_tab_title_map">نقشه</string>
   <string name="successful_wikidata_edit">تصویر به %1$s در ویکی‌داده افزوده شد!</string>
   <string name="wikidata_edit_failure">تلاش برای به‌روزرسانی موجودی ویکی‌دیتای مرتبط شکست خورد</string>
@@ -348,15 +349,14 @@
   <string name="preference_author_name">نام مولف سفارشی</string>
   <string name="contributions_fragment">مشارکت‌ها</string>
   <string name="nearby_fragment">در نزدیکی</string>
-  <string name="notifications">اعلان‌ها</string>
-  <string name="read_notifications">اعلان‌ها (خوانده‌شده)</string>
-  <string name="display_nearby_notification">نمایش اعلان اطراف</string>
+  <string name="notifications">آگاه‌سازی‌ها</string>
+  <string name="read_notifications">آگاه‌سازی‌ها (خوانده‌شده)</string>
+  <string name="display_nearby_notification">نمایش آگاه‌سازی اطراف</string>
   <string name="list_sheet">فهرست</string>
   <string name="storage_permission">اجازه ذخیره</string>
   <string name="step_count" fuzzy="true">گام %1$d از %2$d</string>
   <string name="next">بعدی</string>
   <string name="previous">قبلی</string>
-  <string name="submit">ارسال</string>
   <string name="upload_title_duplicate" fuzzy="true">پرونده‌ای با نام %1$s وجود دارد. آیا اطمینان دارید که می‌خواهید ادامه دهید؟</string>
   <string name="title_page_bookmarks_pictures">تصویرها</string>
   <string name="title_page_bookmarks_locations">مکان‌ها</string>
@@ -432,12 +432,12 @@
   <string name="delete_helper_ask_reason_copyright_internet_photo">عکس تصادفی از اینترنت</string>
   <string name="delete_helper_ask_reason_copyright_logo">لوگو</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">چون</string>
-  <string name="caption_edit_helper_show_edit_message">توضیح افزوده شد.</string>
+  <string name="caption_edit_helper_show_edit_message">برنگاشت افزوده شد.</string>
   <string name="share_image_via">هم‌رسانی تصویر از طریق</string>
   <string name="no_achievements_yet" fuzzy="true">هنوز مشارکتی نکرده‌اید</string>
   <string name="account_created">حساب ایجاد شد!</string>
   <string name="text_copy">متن در حافظهٔ موقت کپی شد.</string>
-  <string name="notification_mark_read">علامت زدن اعلان به عنوان خوانده‌شده</string>
+  <string name="notification_mark_read">علامت زدن آگاه‌سازی به عنوان خوانده‌شده</string>
   <string name="some_error">خطایی پیش آمد!</string>
   <string name="place_state">حالت مکان:</string>
   <string name="place_state_exists">موجود است</string>

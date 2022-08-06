@@ -3,6 +3,8 @@
 * Saraiki
 -->
 <resources>
+  <string name="commons_logo">کامنز لوگو</string>
+  <string name="appwidget_img">اڄ دی تصویر</string>
   <string name="navigation_item_explore">پھرولو</string>
   <string name="preference_category_appearance">شکل و صورت</string>
   <string name="preference_category_general">عمومی</string>
@@ -92,7 +94,6 @@
   <string name="media_detail_coordinates_empty">کجھ نی ݙسیا</string>
   <string name="become_a_tester_title">بیٹا ٹیسٹر بݨو</string>
   <string name="logout_verification">بھلا تساں سچی دا لاگ آؤٹ تھیوݨ چاہندے ہو؟</string>
-  <string name="commons_logo">کامنز لوگو</string>
   <string name="mediaimage_failed">میڈیا فوٹو ناکام</string>
   <string name="welcome_image_welcome_wikipedia">وکی پیڈیا وچ ست بسم اللہ</string>
   <string name="cancel">منسوخ</string>
@@ -122,7 +123,6 @@
   <string name="about_translate_proceed">اڳوں تے تھیوو</string>
   <string name="about_translate_cancel">منسوخ</string>
   <string name="retry">ولدا کوشش کرو</string>
-  <string name="appwidget_img">اڄ دی تصویر</string>
   <string name="app_widget_heading">اڄ دی تصویر</string>
   <string name="menu_search_button">ڳولو</string>
   <string name="title_activity_search">ڳولو</string>

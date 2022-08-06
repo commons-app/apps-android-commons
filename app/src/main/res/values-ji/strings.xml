@@ -4,6 +4,8 @@
 * פוילישער
 -->
 <resources>
+  <string name="commons_logo">קאמאנס־לאגא</string>
+  <string name="appwidget_img">בילד פונעם טאָג</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d טעקע לאדט אן</item>
     <item quantity="other">%1$d טעקעס לאדן אן</item>
@@ -101,7 +103,6 @@
   <string name="media_detail_license">ליצענץ</string>
   <string name="media_detail_coordinates">קאארדינאטן</string>
   <string name="logout_verification">איר ווילט טאקע ארויסלאגירן?</string>
-  <string name="commons_logo">קאמאנס־לאגא</string>
   <string name="welcome_image_tulip">טולפאן</string>
   <string name="cancel">אַנולירן</string>
   <string name="navigation_drawer_open">אפֿן</string>
@@ -114,7 +115,6 @@
   <string name="navigation_item_feedback">פֿידבעק</string>
   <string name="navigation_item_logout">אַרויסלאָגירן</string>
   <string name="upload_problem_image_dark">בילד איז צו טונקל</string>
-  <string name="appwidget_img">בילד פונעם טאָג</string>
   <string name="app_widget_heading">בילד פונעם טאָג</string>
   <string name="search_tab_title_media" fuzzy="true">מעדיע</string>
   <string name="search_tab_title_categories" fuzzy="true">קאַטעגאריעס</string>

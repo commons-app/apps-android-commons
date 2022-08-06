@@ -44,6 +44,13 @@
 * Wizardeck
 -->
 <resources>
+  <string name="commons_facebook">Página de Facebook de Commons</string>
+  <string name="commons_github">Código fuente de Commons en GitHub</string>
+  <string name="commons_logo">Logo de Commons</string>
+  <string name="commons_website">Sitio web de Commons</string>
+  <string name="exit_location_picker">Salir del seleccionador de ubicación</string>
+  <string name="submit">Enviar</string>
+  <string name="appwidget_img">Foto del día</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Cargando %1$d archivo</item>
     <item quantity="other">Cargando %1$d archivos</item>
@@ -227,10 +234,6 @@
   <string name="become_a_tester_description">Apúntate a nuestro canal beta en Google Play y obtén acceso a funcionalidades nuevas y correcciones de errores</string>
   <string name="_2fa_code">Código de autenticación de 2 pasos</string>
   <string name="logout_verification">¿Confirmas que quieres salir?</string>
-  <string name="commons_logo">Logo de Commons</string>
-  <string name="commons_website">Sitio web de Commons</string>
-  <string name="commons_facebook">Página de Facebook de Commons</string>
-  <string name="commons_github">Código fuente de Commons en GitHub</string>
   <string name="mediaimage_failed">Falló la imagen de multimedia</string>
   <string name="no_subcategory_found">No se encontró ninguna subcategoría</string>
   <string name="no_parentcategory_found">No se encontró ninguna categoría contenedora</string>
@@ -316,7 +319,6 @@
   <string name="image_uploaded_by">Cargada por: %1$s</string>
   <string name="block_notification_title">Bloqueado</string>
   <string name="block_notification">Estás bloqueado para editar Commons</string>
-  <string name="appwidget_img">Foto del día</string>
   <string name="app_widget_heading">Foto del día</string>
   <string name="menu_search_button">Buscar</string>
   <string name="search_commons">Buscar en Commons</string>
@@ -398,7 +400,6 @@
   <string name="step_count">Paso %1$d de %2$d: %3$s</string>
   <string name="next">Siguiente</string>
   <string name="previous">Anterior</string>
-  <string name="submit">Enviar</string>
   <string name="upload_title_duplicate">Ya existe un archivo con el nombre %1$s. ¿Estás seguro que deseas continuar?\n\nNota: se añadirá un sufijo apropiado al nombre del archivo de manera automática.</string>
   <string name="map_application_missing">No se encontró una aplicación de mapas compatible en tu dispositivo. Instala una para usar esta característica.</string>
   <string name="title_page_bookmarks_pictures">Imágenes</string>
@@ -639,7 +640,6 @@
   <string name="read_help_link">Más información</string>
   <string name="choose_a_location">Escoge una ubicación</string>
   <string name="pan_and_zoom_to_adjust">Haz una panorámica y acércate para ajustar</string>
-  <string name="exit_location_picker">Salir del seleccionador de ubicación</string>
   <string name="select_location_location_picker">Seleccionar ubicación</string>
   <string name="show_in_map_app">Mostrar en la aplicación de mapa</string>
   <string name="modify_location">Editar ubicación</string>

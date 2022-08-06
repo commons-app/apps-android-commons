@@ -8,6 +8,8 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.ShadowActionBar
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.notification.models.Notification
+import fr.free.nrw.commons.notification.models.NotificationType
 import fr.free.nrw.commons.utils.NetworkUtils
 import org.junit.Assert
 import org.junit.Before

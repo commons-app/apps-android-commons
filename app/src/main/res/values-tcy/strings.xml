@@ -8,6 +8,14 @@
 * Vishwanatha Badikana
 -->
 <resources>
+  <string name="commons_facebook">ಕಾಮನ್ಸ್ ಫೇಸ್ಬುಕ್ ಪುಟೊ</string>
+  <string name="commons_github">ಕಾಮನ್ಸ್ ಗಿಥಬ್ ಮೂಲ ಕೋಡ್</string>
+  <string name="commons_logo">ಕಾಮನ್ಸ್ ಲೋಗೋ</string>
+  <string name="commons_website">ಕಾಮನ್ಸ್ ವೆಬ್ಸೈಟ್</string>
+  <string name="submit">ಒಪ್ಪಿಸಾಲೆ</string>
+  <string name="nearby_row_image">ಚಿತ್ರೊ</string>
+  <string name="nearby_all">ಮಾತಾ</string>
+  <string name="appwidget_img">ದಿನೊತ್ತ ಪಟ</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d ಕಡತ ಅಪ್ಲೊಡ್ ಆವೊಂದುಂಡು</item>
     <item quantity="other">%1$d ಕಡತೊಲು ಅಪ್ಲೋಡ್ ಆವೊಂದುಂಡು</item>
@@ -55,7 +63,7 @@
   <string name="uploading_started">ದಿಂಜಪುನಾ ಸುರು ಅಂಡ್!</string>
   <string name="upload_completed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಆಂಡ್!</string>
   <string name="upload_completed_notification_text">ಇರೆನ ಅಪ್ಲೋಡ್ ತೂಯೆರೆ ಒತ್ತುಲೆ</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s ಅಪ್ಲೋಡ್ ಸುರು ಆವೊಂದುಂಡು</string>
+  <string name="upload_progress_notification_title_start">%s ಅಪ್ಲೋಡ್ ಸುರು ಆವೊಂದುಂಡು</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ಅಪ್ಲೋಡ್ ಆವೊಂದುಂಡು</string>
   <string name="upload_progress_notification_title_finishing">%1$s ಅಪ್ಲೋಡ್ ಕೈದ್ ಆವೊಂದುಂಡು.</string>
   <string name="upload_failed_notification_title" fuzzy="true">%1$s ಅಪ್ಲೋಡ್ ಸರಿ ಆತಿಜಿ</string>
@@ -166,10 +174,6 @@
   <string name="become_a_tester_description">Google Play ತಲ್ಪ  ಇರ್ ಬೀಟಾ ಚಾನೆಲ್ ಆಯ್ಕೆ ಮಾಲ್ಪುಲೆ ಬುಕ್ಕ ಪೊಸ ವೈಶಿಷ್ಟ್ಯೊ ಅತ್ತಂದೆ ದೋಷ ಪರಿಹಾರಗ್ ದುಂಬು ಪ್ರವೇಶ ಪಡೆಲೆ.</string>
   <string name="_2fa_code">2FA Code</string>
   <string name="logout_verification">ಇರ್ ನಿಜವಾತ್ ಲಾಗ್ಔಟ್ ಮಾಲ್ಪಿಯರ ಬಯಸುವರಾ?</string>
-  <string name="commons_logo">ಕಾಮನ್ಸ್ ಲೋಗೋ</string>
-  <string name="commons_website">ಕಾಮನ್ಸ್ ವೆಬ್ಸೈಟ್</string>
-  <string name="commons_facebook">ಕಾಮನ್ಸ್ ಫೇಸ್ಬುಕ್ ಪುಟೊ</string>
-  <string name="commons_github">ಕಾಮನ್ಸ್ ಗಿಥಬ್ ಮೂಲ ಕೋಡ್</string>
   <string name="mediaimage_failed">ಮೀಡಿಯಾ ಪಟೊ ಅಪ್ಲೋಡ್ ಅತ್‌ಜ್ಜಿ.</string>
   <string name="no_subcategory_found">ಒವೆ ಉಪವರ್ಗೊಲು ಇಜ್ಜಿ.</string>
   <string name="no_parentcategory_found">ಇತ್ತೆ ಒವೆ ವರ್ಗೊಲು ಇಜ್ಜಿ.</string>
@@ -243,7 +247,6 @@
   <string name="error_loading_images">ಆಕೃತಿಲೆನ್ ಏರಾನಗ ದೋಷ ಆಂಡ್.</string>
   <string name="image_uploaded_by">ಮಿತೇರಾಯಿನಾರ್: %1$s</string>
   <string name="block_notification">ಇರೆನ್ ಕಾಮನ್ಸ್ ಸಂಪಾವಂದಿಲೆಕ್ಕ ತಡೆತುದುಂಡು.</string>
-  <string name="appwidget_img">ದಿನೊತ್ತ ಪಟ</string>
   <string name="app_widget_heading">ದಿನೊತ್ತ ಪಟ</string>
   <string name="menu_search_button">ನಾಡ್‍ಲೆ</string>
   <string name="search_commons">ಕಾಮನ್ಸ್ ಡ್ ನಾಡ್‍ಲೆ</string>
@@ -316,7 +319,6 @@
   <string name="step_count" fuzzy="true">%2$d ಉಂದೆತ  %1$d ಮುಟ್ಟು</string>
   <string name="next">ದುಂಬುದ</string>
   <string name="previous">ಪಿರವುದ</string>
-  <string name="submit">ಒಪ್ಪಿಸಾಲೆ</string>
   <string name="upload_title_duplicate" fuzzy="true">ಕಡತಪುದರ್ %1$s ದ ಒಂಜಿ ಕಡತ ಉಂಡು. ಈರ್ ಖಂಡಿತಾ ದುಂಬು ಪೋವರೆ ಬಯಕುವರಾ?\nA file with the file name  exists. Are you sure you want to proceed?</string>
   <string name="map_application_missing">ಹೊಂದುನ ನಕಾಶೆ ಪರಿಕರನ  ಇರೆನ ಸಲಕರಣೆಡ್ ತಿಕ್ಕುಜಿ. ಈ ಗುಣಧರ್ಮನ್ ಬಳಸರೆ  ದಯಮಲ್ತ್ ಒಂಜಿ ನಕಾಶೆ ಪರಿಕರನ  ತಾಪನೆ ಮಲ್ಪುಲೆ.</string>
   <string name="title_page_bookmarks_pictures">ಚಿತ್ರೊಲು</string>

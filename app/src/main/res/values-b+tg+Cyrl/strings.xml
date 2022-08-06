@@ -5,6 +5,10 @@
 * Vashgird
 -->
 <resources>
+  <string name="commons_facebook">Викианбор дар Фейсбук</string>
+  <string name="commons_logo">Логотипи Викианбор</string>
+  <string name="commons_website">Сомонаи Викианбор</string>
+  <string name="submit">Ирсол</string>
   <string name="navigation_item_explore">Омӯзиш</string>
   <string name="preference_category_appearance">Намуд</string>
   <string name="preference_category_general">Умумӣ</string>
@@ -84,9 +88,6 @@
   <string name="media_detail_license">Иҷозатнома</string>
   <string name="media_detail_coordinates">Координатҳо</string>
   <string name="media_detail_coordinates_empty">Пешниҳод нашудааст</string>
-  <string name="commons_logo">Логотипи Викианбор</string>
-  <string name="commons_website">Сомонаи Викианбор</string>
-  <string name="commons_facebook">Викианбор дар Фейсбук</string>
   <string name="no_subcategory_found">Ягон зергурӯҳе пайдо нашуд</string>
   <string name="welcome_image_welcome_wikipedia">Ба Википедиа хуш омадед.</string>
   <string name="cancel">Пӯшидан</string>
@@ -133,7 +134,6 @@
   <string name="list_sheet">Рӯйхат</string>
   <string name="next">Баъдӣ</string>
   <string name="previous">Пешина</string>
-  <string name="submit">Ирсол</string>
   <string name="title_page_bookmarks_pictures">Расмҳо</string>
   <string name="title_page_bookmarks_locations">Ҷойҳо</string>
   <string name="menu_bookmark">Илова/Ҳазв намудани маркаҳои китоб</string>

@@ -7,12 +7,16 @@
 * Tweety
 -->
 <resources>
+  <string name="commons_facebook">العام فيسبڪ صفحو</string>
+  <string name="commons_logo">العام لوگو</string>
+  <string name="commons_website">العام ويبسائيٽ</string>
+  <string name="submit">اماڻيو</string>
+  <string name="appwidget_img">اڄ جي تصوير</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d فائيل چاڙھيندي</item>
     <item quantity="other">%1$d فائيلَ چاڙھيندي</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -20,7 +24,7 @@
     <item quantity="one">چاڙھ %1$d شروع ڪندي</item>
     <item quantity="other">چاڙھَ %d$1 شروع ڪندي</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d چاڙھ</item>
     <item quantity="other">%1$d چاڙھَ</item>
   </plurals>
@@ -52,11 +56,11 @@
   <string name="uploading_started">چاڙھ شروع!</string>
   <string name="upload_completed_notification_title">%1$s چڙھي چڪا!</string>
   <string name="upload_completed_notification_text">پنھنجو چاڙھ ڏسڻ لاءِ ٺونگو ھڻو</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">%1$s جو چاڙھ شروع ڪندي</string>
+  <string name="upload_progress_notification_title_start">فائيل چاڙھيندي: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s چاڙھيندي</string>
   <string name="upload_progress_notification_title_finishing">%1$s جو چاڙھ مڪمل ٿيندي</string>
-  <string name="upload_failed_notification_title" fuzzy="true">%1$s جو چاڙھڻ ناڪام ويو</string>
-  <string name="upload_failed_notification_subtitle">ڏسڻ لاءِ ٺونگيو</string>
+  <string name="upload_failed_notification_title">%1$s چاڙھڻ ۾ ناڪام</string>
+  <string name="upload_failed_notification_subtitle">ڏسڻ لاءِ ڇھو</string>
   <string name="title_activity_contributions">منھنجا تازا چاڙھ</string>
   <string name="contribution_state_queued">قطار ۾</string>
   <string name="contribution_state_failed">ناڪام</string>
@@ -82,7 +86,7 @@
   <string name="menu_save_categories">سانڍيو</string>
   <string name="refresh_button">تازو ڪريو</string>
   <string name="display_list_button">فھرست</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">اڃا تائين ڪوبہ چاڙھ ناھي</string>
+  <string name="contributions_subtitle_zero">(اڃا تائين ڪوبہ چاڙھ ناھي)</string>
   <string name="categories_not_found">%1$s سان ملندڙ ڪوبہ زمرو نہ لڌو</string>
   <string name="categories_skip_explanation">پنھنجي عڪسن ۾ زمرا وجهو تہ جيئن اھي وڪيميڊيا العام تي وڌيڪ ڳولا لائق ٿي سگهن.\nزمرا وجهڻ لاءِ لکڻ شروع ڪريو.</string>
   <string name="categories_activity_title">زمرا</string>
@@ -92,7 +96,7 @@
   <string name="title_activity_category_details">زمرو</string>
   <string name="menu_about">بابت</string>
   <string name="about_privacy_policy">نويڪلائي نِيَمَ</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;ساراھون&lt;/u&gt;</string>
+  <string name="about_credits">ساراھون</string>
   <string name="title_activity_about">بابت</string>
   <string name="menu_feedback">موٽ موڪليو (ايميل ذريعي)</string>
   <string name="no_email_client">ڪوبہ ايميل ڪلائينٽ نصب ٿيل ناھي</string>
@@ -103,8 +107,8 @@
   <string name="menu_cancel_upload">رد</string>
   <string name="menu_download">لاھيو</string>
   <string name="preference_license">ڏنل اجازتنامو</string>
-  <string name="use_previous" fuzzy="true">گذريل عنوان/تشريح استعمال ڪريو</string>
-  <string name="preference_theme" fuzzy="true">رات جو ڏيک</string>
+  <string name="use_previous">گذريل عنوان ۽ تشريح استعمال ڪريو</string>
+  <string name="preference_theme">ڏيک</string>
   <string name="license_name_cc_by_sa_four">انتساب-ھجھڙي ڀاڱيداري 4.0</string>
   <string name="license_name_cc_by_four">وصف 4.0</string>
   <string name="license_name_cc_by_sa">ڪڪ انتساب-ھڪجھڙي_ڀاڱيداري 3.0</string>
@@ -131,7 +135,7 @@
   <string name="welcome_copyright_subtext">انٽرنيٽ تان لڌل ڪاپيرائيٽڊ مواد سان گڏوگڏ پوسٽرن، ڪتاب جي جلدن، وغيره جي عڪسن کان پاسو ڪريو.</string>
   <string name="welcome_final_text">توھان سمجھو ٿا توھان سمجھي ويئو؟</string>
   <string name="welcome_final_button_text">ھا!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;وڌيڪ معلومات&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">وڌيڪ معلومات</string>
   <string name="detail_panel_cats_label">زمرا</string>
   <string name="detail_panel_cats_loading">لاهيندي...</string>
   <string name="detail_panel_cats_none">ڪوبہ چونڊيل ناھي</string>
@@ -153,9 +157,6 @@
   <string name="media_detail_coordinates">مڪانيت</string>
   <string name="become_a_tester_title">آزمائشي آزمائيندڙ ٿيو</string>
   <string name="logout_verification">ڇا توھان سچ ۾ خارج ٿيڻ ٿا چاھيو؟</string>
-  <string name="commons_logo">العام لوگو</string>
-  <string name="commons_website">العام ويبسائيٽ</string>
-  <string name="commons_facebook">العام فيسبڪ صفحو</string>
   <string name="welcome_image_rainbow_bridge">انڊلٺ پل</string>
   <string name="welcome_image_tulip">گل لالا (ٽيولپ)</string>
   <string name="welcome_image_welcome_wikipedia">وڪيپيڊيا ۾ ڀليڪار</string>
@@ -186,7 +187,7 @@
   <string name="null_url">چُڪَ! يوآرايل نہ لڌي</string>
   <string name="nominate_deletion">ڊاھ لاءِ اميدوار ڪريو</string>
   <string name="nominated_for_deletion">هن تصوير کي ڊاهڻ لاءِ مقرر ڪيو ويو آهي.</string>
-  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;تفصيلن لاءِ ويب-صفحو ڏسو&lt;/u&gt;</string>
+  <string name="nominated_see_more">تفصيلن لاءِ ويب-صفحو ڏسو</string>
   <string name="skip_login">ڇڏيو</string>
   <string name="navigation_item_login">داخل ٿيو</string>
   <string name="skip_login_title">ڇا توھان سچ ۾ داخل-ٿيڻ ڇڏڻ چاھيو ٿا؟</string>
@@ -199,11 +200,11 @@
   <string name="nearby_wikipedia">وڪيپيڊيا</string>
   <string name="nearby_commons">العام</string>
   <string name="about_rate_us">اسان کي موٽ ڏيو</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;عام سوال&lt;/u&gt;</string>
+  <string name="about_faq">ڪپس</string>
   <string name="welcome_skip_button">سکيانامي کي ڇڏيو</string>
   <string name="no_internet">انٽرنيٽ ناهي</string>
   <string name="no_notifications">اطلاع نہ لڌا</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;ترجمو&lt;/u&gt;</string>
+  <string name="about_translate">ترجمو ڪريو</string>
   <string name="about_translate_title">ٻوليون</string>
   <string name="about_translate_proceed">وڌو</string>
   <string name="about_translate_cancel">رد</string>
@@ -211,7 +212,6 @@
   <string name="no_images_found">ڪوبہ عڪس نہ لڌو!</string>
   <string name="error_loading_images">تصويرون لوڊ ڪرڻ دوران چُڪ ٿي آهي.</string>
   <string name="image_uploaded_by">پاران چاڙهيل: %1$s</string>
-  <string name="appwidget_img">اڄ جي تصوير</string>
   <string name="app_widget_heading">اڄ جي تصوير</string>
   <string name="menu_search_button">ڳوليو</string>
   <string name="search_commons">العام ۾ ڳوليو</string>
@@ -252,7 +252,6 @@
   <string name="write_storage_permission_rationale_for_image_share">اسان کي اوهان جي ڊوائس جي خارجي اسٽوريج تائين پھچ جي اجازت گهرجي تہ جيئن عڪس چاڙهي سگهجن.</string>
   <string name="next">اڳيون</string>
   <string name="previous">پويون</string>
-  <string name="submit">اماڻيو</string>
   <string name="title_page_bookmarks_pictures">تصويرون</string>
   <string name="title_page_bookmarks_locations">مڪانيتون</string>
   <string name="no_categories_selected">زمرا چونڊيل ناھن</string>
@@ -291,5 +290,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">لوگو</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">ڇاڪاڻ تہ اھو آھي</string>
   <string name="title_for_media">ميڊيا</string>
+  <string name="count_prefix">ڳاڻيٽو:</string>
+  <string name="leaderboard_column_count">ڳاڻيٽو</string>
   <string name="description">تشريح</string>
 </resources>

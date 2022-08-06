@@ -5,6 +5,11 @@
 * Teitei Para
 -->
 <resources>
+  <string name="commons_facebook">ကွန်မွန်းစ် ဖေ့ဘုတ်စာမျက်နှာ</string>
+  <string name="commons_logo">ကွန်မွန်းစ် လိုဂို</string>
+  <string name="commons_website">ကွန်မွန်းစ် ဝဘ်ဆိုဒ်</string>
+  <string name="submit">ထည့်သွင်းရန်</string>
+  <string name="appwidget_img">ယနေ့အတွက် အထူးဓာတ်ပုံ</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">ဖိုင် %1$d ခု တင်နေသည်</item>
     <item quantity="other">ဖိုင် %1$d ခု တင်နေသည်</item>
@@ -146,9 +151,6 @@
   <string name="media_detail_coordinates">ကိုဩဒိနိတ်</string>
   <string name="media_detail_coordinates_empty">မဖြည့်ထားပါ</string>
   <string name="logout_verification">အမှန်တကယ် ထွက်သွားလိုပါသလား</string>
-  <string name="commons_logo">ကွန်မွန်းစ် လိုဂို</string>
-  <string name="commons_website">ကွန်မွန်းစ် ဝဘ်ဆိုဒ်</string>
-  <string name="commons_facebook">ကွန်မွန်းစ် ဖေ့ဘုတ်စာမျက်နှာ</string>
   <string name="mediaimage_failed">မီဒီယာရုပ်ပုံ မအောင်မြင်ပါ</string>
   <string name="no_subcategory_found">ကဏ္ဍခွဲများ မတွေ့ရှိပါ</string>
   <string name="no_parentcategory_found">ပင်မကဏ္ဍများ မတွေ့ရှိပါ</string>
@@ -216,7 +218,6 @@
   <string name="image_uploaded_by">အက်ပလုတ်တင်သူ: %1$s</string>
   <string name="block_notification_title">ပိတ်ပင်ထားသည်</string>
   <string name="block_notification">သင့်အား ကွန်မွန်းစ်တွင် တည်းဖြတ်ခြင်းကို ပိတ်ပင်လိုက်သည်</string>
-  <string name="appwidget_img">ယနေ့အတွက် အထူးဓာတ်ပုံ</string>
   <string name="app_widget_heading">ယနေ့အတွက် အထူးဓာတ်ပုံ</string>
   <string name="menu_search_button">ရှာဖွေရန်</string>
   <string name="search_commons">ကွန်မွန်းစ်တွင် ရှာဖွေရန်</string>
@@ -271,7 +272,6 @@
   <string name="step_count" fuzzy="true">%2$d ၏ အဆင့် %1$d</string>
   <string name="next">ရှေ့</string>
   <string name="previous">နောက်</string>
-  <string name="submit">ထည့်သွင်းရန်</string>
   <string name="title_page_bookmarks_pictures">ရုပ်ပုံများ</string>
   <string name="title_page_bookmarks_locations">တည်နေရာများ</string>
   <string name="provider_bookmarks">ဖတ်ရန်မှတ်ထားမှုများ</string>

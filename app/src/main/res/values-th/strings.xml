@@ -13,6 +13,12 @@
 * Trisorn Triboon
 -->
 <resources>
+  <string name="commons_facebook">หน้าเฟซบุ๊กคอมมอนส์</string>
+  <string name="commons_github">ซอร์สโค้ดคอมมอนส์บน GitHub</string>
+  <string name="commons_logo">โลโก้คอมมอนส์</string>
+  <string name="commons_website">เว็บไซต์คอมมอนส์</string>
+  <string name="submit">ส่ง</string>
+  <string name="appwidget_img">รูปภาพประจำวัน</string>
   <string name="uploads_pending_notification_indicator">กำลังอัปโหลดไฟล์ %1$d ไฟล์</string>
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
@@ -174,10 +180,6 @@
   <string name="become_a_tester_description">สมัครเข้าร่วมช่องทางบีตาบน Google Play และเข้าถึงคุณลักษณะใหม่ ๆ และการแก้ไขบั๊กก่อนเปิดตัว</string>
   <string name="_2fa_code">รหัส 2FA</string>
   <string name="logout_verification">คุณต้องการออกจากระบบจริง ๆ หรือไม่?</string>
-  <string name="commons_logo">โลโก้คอมมอนส์</string>
-  <string name="commons_website">เว็บไซต์คอมมอนส์</string>
-  <string name="commons_facebook">หน้าเฟซบุ๊กคอมมอนส์</string>
-  <string name="commons_github">ซอร์สโค้ดคอมมอนส์บน GitHub</string>
   <string name="mediaimage_failed">ภาพสื่อล้มเหลว</string>
   <string name="no_subcategory_found">ไม่พบหมวดหมู่รองที่ต้องการ</string>
   <string name="no_parentcategory_found">ไม่พบหมวดหมู่ต้นทางที่ต้องการ</string>
@@ -257,7 +259,6 @@
   <string name="image_uploaded_by">อัพโหลดโดย: %1$s</string>
   <string name="block_notification_title">ถูกบล็อก</string>
   <string name="block_notification">คุณกำลังถูกบล็อคไม่ให้แก้ไขคอมมอนส์</string>
-  <string name="appwidget_img">รูปภาพประจำวัน</string>
   <string name="app_widget_heading">รูปภาพประจำวัน</string>
   <string name="menu_search_button">ค้นหา</string>
   <string name="search_commons">ค้นหาคอมมอนส์</string>
@@ -309,7 +310,6 @@
   <string name="step_count" fuzzy="true">ขั้นตอนที่ %1$d จาก %2$d</string>
   <string name="next">ถัดไป</string>
   <string name="previous">ก่อนหน้า</string>
-  <string name="submit">ส่ง</string>
   <string name="title_page_bookmarks_pictures">รูปภาพ</string>
   <string name="title_page_bookmarks_locations">ที่ตั้ง</string>
   <string name="menu_bookmark">เพิ่มไปยัง/เอาออกจากที่คั่นหน้า</string>

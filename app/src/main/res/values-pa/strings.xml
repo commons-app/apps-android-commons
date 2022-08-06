@@ -7,6 +7,7 @@
 * ਗੁਰਪ੍ਰੀਤ ਹੁੰਦਲ
 -->
 <resources>
+  <string name="commons_logo">ਕਾਮਨਜ਼ ਲੋਗੋ</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">੧ ਫ਼ਾਈਲ ਚੜ੍ਹਾਈ ਜਾ ਰਹੀ ਹੈ</item>
     <item quantity="other">%1$d ਫ਼ਾਈਲਾਂ ਚੜ੍ਹਾਈਆਂ ਜਾ ਰਹੀਆਂ ਹਨ</item>
@@ -130,7 +131,6 @@
   <string name="media_detail_coordinates_empty">ਕੋਈ ਉਪਲਬਧ ਨਹੀਂ</string>
   <string name="_2fa_code">2FA ਕੋਡ</string>
   <string name="logout_verification">ਕੀ ਤੁਸੀਂ ਸੱਚੀਂ ਬੰਦ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?</string>
-  <string name="commons_logo">ਕਾਮਨਜ਼ ਲੋਗੋ</string>
   <string name="welcome_image_welcome_wikipedia">ਵਿਕੀਪੀਡੀਆ \'ਤੇ ਸੁਆਗਤ</string>
   <string name="welcome_image_welcome_copyright">ਕਾਪੀਰਾਈਟ ਸੁਆਗਤ</string>
   <string name="cancel">ਰੱਦ ਕਰੋ</string>

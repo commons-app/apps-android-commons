@@ -21,6 +21,12 @@
 * संजीव कुमार
 -->
 <resources>
+  <string name="commons_facebook">कॉमन्स फेसबुक पृष्ठ</string>
+  <string name="commons_github">कॉमन्स गिटहब स्त्रोत कूटशब्द</string>
+  <string name="commons_logo">कॉमन्स का प्रतीक चिन्ह</string>
+  <string name="commons_website">कॉमन्स जालस्थान</string>
+  <string name="submit">जमा करें</string>
+  <string name="appwidget_img">आज का चित्र</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d फ़ाइल अपलोड हो रही</item>
     <item quantity="other">%1$d फ़ाइलें अपलोड हो रहीं</item>
@@ -174,10 +180,6 @@
   <string name="become_a_tester_description">गूगल प्ले पर हमारे बीटा चैनल का चयन करें और नई सुविधाओं व त्रुटिसुधारों तक पहले पहुँचे</string>
   <string name="_2fa_code">2 एफए कोड</string>
   <string name="logout_verification">क्या आप वास्तव में निकास करना चाहते हैं?</string>
-  <string name="commons_logo">कॉमन्स का प्रतीक चिन्ह</string>
-  <string name="commons_website">कॉमन्स जालस्थान</string>
-  <string name="commons_facebook">कॉमन्स फेसबुक पृष्ठ</string>
-  <string name="commons_github">कॉमन्स गिटहब स्त्रोत कूटशब्द</string>
   <string name="mediaimage_failed">मीडिया छवि विफल</string>
   <string name="no_subcategory_found">कोई उपश्रेणी नहीं मिली</string>
   <string name="no_parentcategory_found">कोई मूल श्रेणी नहीं मिली</string>
@@ -249,7 +251,6 @@
   <string name="error_loading_images">चित्र अपलोड करते समय त्रुटि उत्पन्न हुई।</string>
   <string name="image_uploaded_by">अपलोड: %1$s</string>
   <string name="block_notification">कॉमन्स पर सम्पादन से आप अवरोधित हो चुके हैं</string>
-  <string name="appwidget_img">आज का चित्र</string>
   <string name="app_widget_heading">आज का चित्र</string>
   <string name="menu_search_button">खोजें</string>
   <string name="search_commons">कॉमन्स में खोजें</string>
@@ -301,7 +302,6 @@
   <string name="storage_permission">स्टोरेज अनुमति</string>
   <string name="next">अगला</string>
   <string name="previous">पिछला</string>
-  <string name="submit">जमा करें</string>
   <string name="title_page_bookmarks_pictures">चित्र</string>
   <string name="title_page_bookmarks_locations">स्थान</string>
   <string name="menu_bookmark">बुकमार्क से जोड़ें/हटायें</string>

@@ -4,6 +4,12 @@
 * Silovan
 -->
 <resources>
+  <string name="commons_facebook">ვიკიოწკარუეშ Facebook ხასჷლა</string>
+  <string name="commons_github">ვიკიოწკარუეს წყუშ კოდი Github-ის</string>
+  <string name="commons_logo">ვიკიოწკარუეშ ლოგო</string>
+  <string name="commons_website">ვიკიოწკარუეშ ვებ-ხასჷლა</string>
+  <string name="submit">ჯღონუა</string>
+  <string name="appwidget_img">დღაშ სურათი</string>
   <string name="uploads_pending_notification_indicator">%1$d {{PLURAL:%1$d|one=ფაილი იხარგუ|few=ფაილი იხარგუ}}</string>
   <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
@@ -175,10 +181,6 @@
   <string name="become_a_tester_title">ბეტა ტესტირებას კათაფი</string>
   <string name="_2fa_code">2ფა კოდი</string>
   <string name="logout_verification">გოკონანო გიშულა?</string>
-  <string name="commons_logo">ვიკიოწკარუეშ ლოგო</string>
-  <string name="commons_website">ვიკიოწკარუეშ ვებ-ხასჷლა</string>
-  <string name="commons_facebook">ვიკიოწკარუეშ Facebook ხასჷლა</string>
-  <string name="commons_github">ვიკიოწკარუეს წყუშ კოდი Github-ის</string>
   <string name="mediaimage_failed">მედიაფაილიშ ჩილათა</string>
   <string name="no_subcategory_found">გიმენკატეგორიეფქ ვეგორინუ</string>
   <string name="no_parentcategory_found">ომასქერე კატეგორიეფქ ვეგორინუ</string>
@@ -257,7 +259,6 @@
   <string name="image_uploaded_by">ეხარგილი რე $1-იშით</string>
   <string name="block_notification_title">ბლოკირი რე</string>
   <string name="block_notification">ვიკიოწკარუეს რედაქტირაფაშო თქვა ბლოკირი რეთ</string>
-  <string name="appwidget_img">დღაშ სურათი</string>
   <string name="app_widget_heading">დღაშ სურათი</string>
   <string name="menu_search_button">გორუა</string>
   <string name="search_commons">ვიკიოწკარუეს გორუა</string>
@@ -310,7 +311,6 @@
   <string name="step_count">ბიჯგი %1$d %2$d-შე: %3$s</string>
   <string name="next">უკული</string>
   <string name="previous">კინოხიანი</string>
-  <string name="submit">ჯღონუა</string>
   <string name="title_page_bookmarks_pictures">სურათეფი</string>
   <string name="title_page_bookmarks_locations">ორენეფი</string>
   <string name="menu_bookmark">მიკოწონებულეფშა გეძინა/ლასუა</string>

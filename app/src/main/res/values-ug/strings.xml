@@ -7,6 +7,8 @@
 * چۈشكۈن
 -->
 <resources>
+  <string name="commons_logo">بايلىقتىن ئورتاق بەھرىمەن بولۇش بەلگىسى</string>
+  <string name="commons_website">ئورتاق بەھرىمان بولىدىغان توربەت بايلىقى</string>
   <string name="navigation_item_explore">ئىزدىنىش</string>
   <string name="preference_category_appearance">تاشقى كۆرۈنۈش</string>
   <string name="preference_category_general">ئادەتتە</string>
@@ -102,8 +104,6 @@
   <string name="become_a_tester_description">بىز كىرگەن Google Play، ئۈستىدىكى ئۆلچەش قانىلى ، ھەمدە تېخىمۇ بالدۇر يېڭى ئىقتىدارى ۋە خاتا ئەسلىگە كەلتۈرۈش</string>
   <string name="_2fa_code">2FAكودى</string>
   <string name="logout_verification">سىز راستتىنلا چېكىنىپ چىقامسىز ؟</string>
-  <string name="commons_logo">بايلىقتىن ئورتاق بەھرىمەن بولۇش بەلگىسى</string>
-  <string name="commons_website">ئورتاق بەھرىمان بولىدىغان توربەت بايلىقى</string>
   <string name="mediaimage_failed">ۋاستە رەسىمى مەغلۇپ بولدى</string>
   <string name="welcome_image_rainbow_bridge">ھەسەت ھۈسەن كۆۋرۈك</string>
   <string name="review_thanks_yes_button_text">كېيىنكى سۈرەت</string>

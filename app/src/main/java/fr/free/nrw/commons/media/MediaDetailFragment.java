@@ -86,12 +86,16 @@ import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
@@ -912,32 +916,48 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
      * @return LinkedHashMap<LanguageCode,Description>
      */
     private LinkedHashMap<String,String> getDescriptions(String s) {
-        int descriptionIndex = s.indexOf("description=");
-        if(descriptionIndex == -1){
-            descriptionIndex = s.indexOf("Description=");
+        final Pattern pattern = Pattern.compile("[dD]escription *=(.*?)\n *\\|", Pattern.DOTALL);
+        final Matcher matcher = pattern.matcher(s);
+        String description = null;
+        if (matcher.find()) {
+            description = matcher.group();
         }
-
-        if( descriptionIndex == -1 ){
+        if(description == null){
             return new LinkedHashMap<>();
         }
-        final String descriptionToEnd = s.substring(descriptionIndex+12);
-        final int descriptionEndIndex = descriptionToEnd.indexOf("\n");
-        final String description = s.substring(descriptionIndex+12, descriptionIndex+12+descriptionEndIndex);
 
-        final String[] arr = description.trim().split(",");
         final LinkedHashMap<String,String> descriptionList = new LinkedHashMap<>();
 
-        if (!description.equals("")) {
-            for (final String string :
-                arr) {
-                final int startCode = string.indexOf("{{");
-                final int endCode = string.indexOf("|");
-                final String languageCode = string.substring(startCode + 2, endCode).trim();
-                final int startDescription = string.indexOf("=");
-                final int endDescription = string.indexOf("}}");
-                final String languageDescription = string
-                    .substring(startDescription + 1, endDescription);
-                descriptionList.put(languageCode, languageDescription);
+        int count = 0; // number of "{{"
+        int startCode = 0;
+        int endCode = 0;
+        int startDescription = 0;
+        int endDescription = 0;
+        final HashSet<String> allLanguageCodes = new HashSet<>(Arrays.asList("en","es","de","ja","fr","ru","pt","it","zh-hans","zh-hant","ar","ko","id","pl","nl","fa","hi","th","vi","sv","uk","cs","simple","hu","ro","fi","el","he","nb","da","sr","hr","ms","bg","ca","tr","sk","sh","bn","tl","mr","ta","kk","lt","az","bs","sl","sq","arz","zh-yue","ka","te","et","lv","ml","hy","uz","kn","af","nn","mk","gl","sw","eu","ur","ky","gu","bh","sco","ast","is","mn","be","an","km","si","ceb","jv","eo","als","ig","su","be-x-old","la","my","cy","ne","bar","azb","mzn","as","am","so","pa","map-bms","scn","tg","ckb","ga","lb","war","zh-min-nan","nds","fy","vec","pnb","zh-classical","lmo","tt","io","ia","br","hif","mg","wuu","gan","ang","or","oc","yi","ps","tk","ba","sah","fo","nap","vls","sa","ce","qu","ku","min","bcl","ilo","ht","li","wa","vo","nds-nl","pam","new","mai","sn","pms","eml","yo","ha","gn","frr","gd","hsb","cv","lo","os","se","cdo","sd","ksh","bat-smg","bo","nah","xmf","ace","roa-tara","hak","bjn","gv","mt","pfl","szl","bpy","rue","co","diq","sc","rw","vep","lij","kw","fur","pcd","lad","tpi","ext","csb","rm","kab","gom","udm","mhr","glk","za","pdc","om","iu","nv","mi","nrm","tcy","frp","myv","kbp","dsb","zu","ln","mwl","fiu-vro","tum","tet","tn","pnt","stq","nov","ny","xh","crh","lfn","st","pap","ay","zea","bxr","kl","sm","ak","ve","pag","nso","kaa","lez","gag","kv","bm","to","lbe","krc","jam","ss","roa-rup","dv","ie","av","cbk-zam","chy","inh","ug","ch","arc","pih","mrj","kg","rmy","dty","na","ts","xal","wo","fj","tyv","olo","ltg","ff","jbo","haw","ki","chr","sg","atj","sat","ady","ty","lrc","ti","din","gor","lg","rn","bi","cu","kbd","pi","cr","koi","ik","mdf","bug","ee","shn","tw","dz","srn","ks","test","en-x-piglatin","ab"));
+        for (int i = 0; i < description.length() - 1; i++) {
+            if (description.startsWith("{{", i)) {
+                if (count == 0) {
+                    startCode = i;
+                    endCode = description.indexOf("|", i);
+                    startDescription = endCode + 1;
+                    if (description.startsWith("1=", endCode + 1)) {
+                        startDescription += 2;
+                        i += 2;
+                    }
+                }
+                i++;
+                count++;
+            } else if (description.startsWith("}}", i)) {
+                count--;
+                if (count == 0) {
+                    endDescription = i;
+                    final String languageCode = description.substring(startCode + 2, endCode);
+                    final String languageDescription = description.substring(startDescription, endDescription);
+                    if (allLanguageCodes.contains(languageCode)) {
+                        descriptionList.put(languageCode, languageDescription);
+                    }
+                }
+                i++;
             }
         }
         return descriptionList;
@@ -1030,10 +1050,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         } else if (requestCode == REQUEST_CODE_EDIT_DESCRIPTION && resultCode == RESULT_CANCELED) {
             progressBarEditDescription.setVisibility(GONE);
             editDescription.setVisibility(VISIBLE);
-
-            viewUtil.showShortToast(getContext(),
-                Objects.requireNonNull(getContext())
-                    .getString(R.string.descriptions_picking_unsuccessful));
         }
     }
 

@@ -14,11 +14,13 @@
 * Killarnee
 * ManuelFranz
 * Metalhead64
+* Nekky-chan
 * Ngschaider
 * Pyscowicz
 * Sujan
 * Sushi
 * Tacsipacsi
+* ThisCarthing
 * Tobi 406
 * Ubahnverleih
 * Umherirrender
@@ -28,6 +30,27 @@
 * ZiqiLiang
 -->
 <resources>
+  <string name="commons_facebook">Commons-Facebookseite</string>
+  <string name="commons_github">Commons-Quellcode auf Github</string>
+  <string name="commons_logo">Commons-Logo</string>
+  <string name="commons_website">Commons-Website</string>
+  <string name="exit_location_picker">Beenden der Ortswahl</string>
+  <string name="submit">Einreichen</string>
+  <string name="add_another_description">Weitere Beschreibung hinzufügen</string>
+  <string name="add_new_contribution">Neuen Beitrag hinzufügen</string>
+  <string name="add_contribution_from_camera">Beitrag von der Kamera hinzufügen</string>
+  <string name="add_contribution_from_photos">Beitrag aus Fotos hinzufügen</string>
+  <string name="add_contribution_from_contributions_gallery">Beitrag aus der Galerie früherer Beiträge hinzufügen</string>
+  <string name="show_captions">Beschriftungen</string>
+  <string name="row_item_language_description">Sprachbeschreibung</string>
+  <string name="row_item_caption">Beschriftung</string>
+  <string name="show_captions_description">Beschreibung</string>
+  <string name="nearby_row_image">Bild</string>
+  <string name="nearby_all">Alle</string>
+  <string name="nearby_filter_toggle">Hochklappen</string>
+  <string name="nearby_filter_search">Suchansicht</string>
+  <string name="nearby_filter_state">Ort Staat</string>
+  <string name="appwidget_img">Bild des Tages</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Eine Datei wird hochgeladen</item>
     <item quantity="other">%1$d Dateien werden hochgeladen</item>
@@ -116,7 +139,7 @@
   <string name="provider_modifications">Anpassungen</string>
   <string name="menu_upload_single">Hochladen</string>
   <string name="categories_search_text_hint">Kategorien durchsuchen</string>
-  <string name="depicts_search_text_hint">Suche nach Objekten, die dein Medium abbildet (Berg, Taj Mahal, etc.)</string>
+  <string name="depicts_search_text_hint">Suche nach Objekten, die dein Medium abbildet (Berg, Taj Mahal etc.)</string>
   <string name="menu_save_categories">Speichern</string>
   <string name="refresh_button">Aktualisieren</string>
   <string name="display_list_button">Liste</string>
@@ -125,7 +148,7 @@
   <string name="depictions_not_found">Kein Wikidata-Objekt für %1$s gefunden</string>
   <string name="no_child_classes">%1$s hat keine child-Klasse</string>
   <string name="no_parent_classes">%1$s hat keine parent-Klasse</string>
-  <string name="categories_skip_explanation">Füge Kategorien hinzu, um deine Bilder auf Wikimedia Commons auffindbarer zu machen.\nBeginne mit der Eingabe, um Kategorien hinzuzufügen.</string>
+  <string name="categories_skip_explanation">Füge Kategorien hinzu, um deine Bilder auf Wikimedia Commons leichter auffindbar zu machen.\nBeginne mit der Eingabe, um Kategorien hinzuzufügen.</string>
   <string name="categories_activity_title">Kategorien</string>
   <string name="title_activity_settings">Einstellungen</string>
   <string name="title_activity_signup">Registrieren</string>
@@ -134,7 +157,7 @@
   <string name="title_activity_category_details">Kategorie</string>
   <string name="title_activity_review">Peer Review</string>
   <string name="menu_about">Über</string>
-  <string name="about_license">Die Wikimedia-Commons-App ist eine Open-Source-App, entwickelt und gewartet von Freiwilligen der Wikimedia-Gemeinschaft. Die Wikimedia Foundation ist nicht bei der Erstellung, Entwicklung oder Wartung der App beteiligt.</string>
+  <string name="about_license">Die Wikimedia-Commons-App ist eine Open-Source-App, entwickelt und gewartet von Freiwilligen der Wikimedia-Gemeinschaft. Die Wikimedia Foundation ist nicht an der Erstellung, Entwicklung oder Wartung der App beteiligt.</string>
   <string name="about_improve">Einen neuen &lt;a href=\"%1$s\"&gt;GitHub-Eintrag&lt;/a&gt; für Fehlerberichte und Vorschläge erstellen.</string>
   <string name="about_privacy_policy">Datenschutzbestimmungen</string>
   <string name="about_credits">Urheberschaft</string>
@@ -213,10 +236,6 @@
   <string name="become_a_tester_description">Melde dich bei unserem Beta-Kanal auf Google Play an und erhalte frühen Zugriff auf neue Funktionen und Fehlerbehebungen</string>
   <string name="_2fa_code">2FA-Code</string>
   <string name="logout_verification">Möchtest du dich wirklich abmelden?</string>
-  <string name="commons_logo">Commons-Logo</string>
-  <string name="commons_website">Commons-Website</string>
-  <string name="commons_facebook">Commons-Facebookseite</string>
-  <string name="commons_github">Commons-Quellcode auf Github</string>
   <string name="mediaimage_failed">Medienbild fehlgeschlagen</string>
   <string name="no_subcategory_found">Keine Unterkategorien gefunden</string>
   <string name="no_parentcategory_found">Keine übergeordneten Kategorien gefunden</string>
@@ -246,13 +265,13 @@
   <string name="nearby_info_menu_wikipedia_article">Wikipedia-Artikel</string>
   <string name="description_info">Bitte beschreibe das Medium so gut wie möglich: Wo wurde es aufgenommen? Was zeigt es? Was ist der Kontext? Bitte beschreibe die Objekte oder Personen. Zeige Informationen auf, die nicht einfach erraten werden können, zum Beispiel die Tageszeit, falls es eine Landschaft ist. Falls das Medium etwas Ungewöhnliches zeigt, erkläre bitte, was es ungewöhnlich macht.</string>
   <string name="caption_info">Bitte formuliere eine kurze Beschreibung des Bildes. Die erste Beschriftung würde als Titel für das Bild verwendet werden. Limit: 255 Zeichen.</string>
-  <string name="upload_problem_exist">Potentielle Probleme mit diesem Bild:</string>
+  <string name="upload_problem_exist">Mögliche Probleme mit diesem Bild:</string>
   <string name="upload_problem_image_dark">Das Bild ist zu dunkel.</string>
   <string name="upload_problem_image_blurry">Das Bild ist unscharf.</string>
   <string name="upload_problem_image_duplicate">Das Bild ist bereits auf Commons.</string>
   <string name="upload_problem_different_geolocation">Dieses Bild wurde an einem anderen Ort aufgenommen.</string>
   <string name="upload_problem_fbmd">Lade bitte nur Bilder hoch, die du selber erstellt hast. Lade keine Bilder hoch, die du auf Facebook-Konten anderer Personen gefunden hast.</string>
-  <string name="upload_problem_do_you_continue">Möchtest du immer noch dieses Bild hochladen?</string>
+  <string name="upload_problem_do_you_continue">Möchtest du dieses Bild immer noch hochladen?</string>
   <string name="upload_connection_error_alert_title">Verbindungsfehler</string>
   <string name="upload_connection_error_alert_detail">Der Hochlade-Vorgang erfordert einen aktiven Internetzugang. Bitte prüfe deine Netzwerkverbindung.</string>
   <string name="upload_problem_image">Im Bild gefundene Probleme</string>
@@ -303,7 +322,6 @@
   <string name="image_uploaded_by">Hochgeladen von: %1$s</string>
   <string name="block_notification_title">Gesperrt</string>
   <string name="block_notification">Du bist für das Bearbeiten auf Commons gesperrt</string>
-  <string name="appwidget_img">Bild des Tages</string>
   <string name="app_widget_heading">Bild des Tages</string>
   <string name="menu_search_button">Suchen</string>
   <string name="search_commons">Commons durchsuchen</string>
@@ -328,13 +346,13 @@
   <string name="question">Frage</string>
   <string name="result">Ergebnis</string>
   <string name="quiz_back_button">Falls du weiterhin Bilder hochlädst, die eine Löschung erfordern, wird dein Benutzerkonto vermutlich gesperrt. Bist du sicher, dass du das Quiz beenden möchtest?</string>
-  <string name="quiz_alert_message">Mehr als %1$s deiner hochgeladenen Bilder wurden gelöscht. Falls du weiterhin Bilder hochlädst, die eine Löschung erfordern, wird dein Benutzerkonto vermutlich gesperrt.\n\nMöchtest du die Anleitung erneut ansehen und anschließend ein Quiz machen, um dir beim Lernen zu helfen, welche Bildtypen du hochladen sollst und welche nicht?</string>
-  <string name="selfie_answer">Selfies haben nicht viel enzyklopädischen Wert. Lade bitte kein Bild von dir hoch, außer es gibt bereits einen Wikipedia-Artikel über dich.</string>
+  <string name="quiz_alert_message">Mehr als %1$s deiner hochgeladenen Bilder wurden gelöscht. Falls du weiterhin Bilder hochlädst, die eine Löschung erfordern, wird dein Benutzerkonto vermutlich gesperrt.\n\nMöchtest du die Anleitung erneut ansehen und anschließend ein Quiz machen, das dir hilft zu lernen, welche Bildtypen du hochladen sollst und welche nicht?</string>
+  <string name="selfie_answer">Selfies haben keinen großen enzyklopädischen Wert. Lade bitte kein Bild von dir hoch, außer es gibt bereits einen Wikipedia-Artikel über dich.</string>
   <string name="taj_mahal_answer">Bilder von Denkmälern und Landschaften dürfen in den meisten Staaten hochgeladen werden. Bitte beachte, dass vorübergehende Kunstinstallationen im Freien oftmals urheberrechtlich geschützt sind und nicht hochgeladen werden dürfen.</string>
   <string name="screenshot_answer">Bildschirmfotos von Websites sind abgeleitete Werke und Thema eines Urheberrechts der Website selbst. Diese können nach einer Genehmigung durch den Autor verwendet werden. Ohne eine solche Genehmigung basiert jede von dir erstellte Kunst auf ihrem Werk und wird rechtlich als unlizenzierte Kopie angesehen, die dem Originalautor gehört.</string>
   <string name="blurry_image_answer">Eines der Ziele von Commons ist das Sammeln von Qualitätsbildern. Deshalb sollten keine unscharfen Bilder hochgeladen werden. Versuche immer schöne Bilder mit einer guten Belichtung aufzunehmen.</string>
   <string name="construction_event_answer">Bilder, die Technik oder Kultur zeigen, sind auf Commons sehr willkommen.</string>
-  <string name="congratulatory_message_quiz">%1$s deiner Antworten waren korrekt. Gratulation!</string>
+  <string name="congratulatory_message_quiz">%1$s deiner Antworten waren korrekt. Glückwunsch!</string>
   <string name="warning_for_no_answer">Wähle eine der zwei Optionen aus, um die Frage zu beantworten.</string>
   <string name="user_not_logged_in">Sitzung abgelaufen. Bitte erneut anmelden.</string>
   <string name="quiz_result_share_message">Teile das Quiz mit deinen Freunden!</string>
@@ -368,7 +386,7 @@
   <string name="achievements_revert_limit_message">Mindestens erforderlich:</string>
   <string name="images_uploaded_explanation">Die Anzahl der Bilder, die du über eine Hochladesoftware auf Commons hochgeladen hast.</string>
   <string name="images_reverted_explanation">Der Prozentsatz an Bildern, die du auf Commons hochgeladen hast und die nicht gelöscht wurden.</string>
-  <string name="images_used_explanation">Die Anzahl der Bilder, die du auf Commons hochgeladen hast und in Wikimedia-Artikeln verwendet werden.</string>
+  <string name="images_used_explanation">Die Anzahl der Bilder, die du auf Commons hochgeladen hast und die in Wikimedia-Artikeln verwendet werden.</string>
   <string name="error_occurred">Fehler aufgetreten!</string>
   <string name="notifications_channel_name_all">Commons-Benachrichtigung</string>
   <string name="preference_author_name_toggle">Benutzerdefinierten Namen des Autors verwenden</string>
@@ -382,12 +400,11 @@
   <string name="display_nearby_notification_summary">In-App-Benachrichtigung für den nächstgelegenen Ort anzeigen, der Bilder benötigt</string>
   <string name="list_sheet">Liste</string>
   <string name="storage_permission">Speicherberechtigung</string>
-  <string name="write_storage_permission_rationale_for_image_share">Wir benötigen deine Berechtigung für den Zugriff auf den externen Speicher deines Geräts, um Bilder hochzuladen.</string>
-  <string name="nearby_notification_dismiss_message">Du wirst nicht mehr den nähersten Ort sehen, der noch Bilder braucht. Du kannst jedoch diese Benachrichtigung in den Einstellungen erneut aktivieren, falls du das zu wünschen tust.</string>
+  <string name="write_storage_permission_rationale_for_image_share">Wir benötigen deine Erlaubnis für den Zugriff auf den externen Speicher deines Geräts, um Bilder hochzuladen.</string>
+  <string name="nearby_notification_dismiss_message">Du wirst nicht mehr den nächsten Ort sehen, der noch Bilder braucht. Du kannst jedoch diese Benachrichtigung in den Einstellungen erneut aktivieren, falls du das möchtest.</string>
   <string name="step_count">Schritt %1$d von %2$d: %3$s</string>
   <string name="next">Nächste</string>
   <string name="previous">Vorherige</string>
-  <string name="submit">Einreichen</string>
   <string name="upload_title_duplicate">Eine Datei mit dem Namen %1$s ist bereits vorhanden. Bist du sicher, dass du fortfahren möchtest?\n\nHinweis: Dem Dateinamen wird automatisch ein passendes Suffix hinzugefügt.</string>
   <string name="map_application_missing">Auf deinem Gerät konnte keine kompatible Karten-App gefunden werden. Bitte installiere eine Karten-App, um diese Funktion nutzen zu können.</string>
   <string name="title_page_bookmarks_pictures">Bilder</string>
@@ -401,7 +418,7 @@
   <string name="deletion_reason_publicly_visible">Ich wusste nicht, dass es öffentlich sichtbar sein würde.</string>
   <string name="deletion_reason_bad_for_my_privacy">Ich habe erkannt, dass es schlecht für meine Privatsphäre ist.</string>
   <string name="deletion_reason_no_longer_want_public">Ich habe meine Meinung geändert. Ich möchte nicht mehr, dass es öffentlich sichtbar ist.</string>
-  <string name="deletion_reason_not_interesting">Entschuldigung, aber dieses Bild ist nicht für eine Enzyklopädie relevant.</string>
+  <string name="deletion_reason_not_interesting">Entschuldigung, aber dieses Bild ist für eine Enzyklopädie nicht relevant.</string>
   <string name="uploaded_by_myself">Von mir selbst hochgeladen am %1$s, verwendet in %2$d Artikel(n).</string>
   <string name="no_uploads">Willkommen bei Commons!\n\nLade deine erste Datei hoch, indem du auf die Hinzufügen-Schaltfläche tippst.</string>
   <string name="no_categories_selected">Keine Kategorien ausgewählt</string>
@@ -414,12 +431,12 @@
   <string name="upload_flow_all_images_in_set">(für alle Bilder im Satz)</string>
   <string name="search_this_area">Diesen Bereich durchsuchen</string>
   <string name="nearby_card_permission_title">Berechtigungsanfrage</string>
-  <string name="nearby_card_permission_explanation">Dürfen wir deinen aktuellen Standort verwenden, um den nächsten Ort anzuzeigen, der Bilder benötigt?</string>
+  <string name="nearby_card_permission_explanation">Sollen wir deinen aktuellen Standort verwenden, um den nächsten Ort anzuzeigen, der Bilder benötigt?</string>
   <string name="unable_to_display_nearest_place">Der nächste Ort, der Bilder benötigt, kann ohne Standortberechtigungen nicht angezeigt werden.</string>
   <string name="never_ask_again">Nicht erneut fragen</string>
   <string name="display_location_permission_title">Standortberechtigung anfragen</string>
   <string name="display_location_permission_explanation">Anfrage für eine Standortberechtigung, die für die Nachbarbenachrichtigungskartenansichtsfunktion erforderlich ist.</string>
-  <string name="achievements_fetch_failed">Etwas ist schief gelaufen. Wir konnten deine Errungenschaften nicht abrufen.</string>
+  <string name="achievements_fetch_failed">Etwas ist schiefgelaufen. Wir konnten deine Errungenschaften nicht abrufen.</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Du hast so viele Beiträge geleistet, dass unser Leistungsberechnungssystem damit nicht zurechtkommt. Dies ist die ultimative Leistung.</string>
   <string name="ends_on">Endet am:</string>
   <string name="display_campaigns">Kampagnen anzeigen</string>
@@ -432,7 +449,7 @@
   <string name="check_category_notification_title">Kategorieprüfung für %1$s anfordern</string>
   <string name="check_category_edit_summary">Kategorieprüfung anfordern</string>
   <string name="check_category_success_title">Kategorieprüfung angefordert</string>
-  <string name="check_category_failure_title">Die Anfrage zur Kategorieprüfung funktionierte nicht</string>
+  <string name="check_category_failure_title">Die Anfrage zur Kategorieprüfung hat nicht funktioniert.</string>
   <string name="check_category_success_message">Kategorieprüfung für %1$s angefordert</string>
   <string name="check_category_failure_message">Eine Kategorieprüfung für %1$s konnte nicht angefordert werden</string>
   <string name="check_category_toast">Kategorieprüfung für %1$s anfordern</string>
@@ -442,7 +459,7 @@
   <string name="send_thank_failure_message">Senden der Dankeschöns %1$s fehlgeschlagen</string>
   <string name="send_thank_failure_title">Dankeschöns senden: Fehler</string>
   <string name="send_thank_toast">Dankeschöns für %1$s senden</string>
-  <string name="review_copyright">Folgt dies den Regeln des Urheberrechts?</string>
+  <string name="review_copyright">Entspricht dies den Regeln des Urheberrechts?</string>
   <string name="review_category">Ist dies korrekt kategorisiert?</string>
   <string name="review_spam">Ist dies im Geltungsbereich?</string>
   <string name="review_thanks">Möchtest du dem Autor danken?</string>
@@ -474,7 +491,7 @@
   <string name="copied_successfully">Kopiert</string>
   <string name="welcome_do_upload_content_description">Beispiele guter Bilder zum Hochladen auf Commons</string>
   <string name="welcome_dont_upload_content_description">Beispiele von Bildern, die nicht hochgeladen werden sollen.</string>
-  <string name="skip_image">Dieses bild überspringen</string>
+  <string name="skip_image">Dieses Bild überspringen</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download fehlgeschlagen! Wir konnten die Datei nicht ohne externe Speicherberechtigung herunterladen!</string>
   <string name="manage_exif_tags">EXIF-Tags verwalten</string>
   <string name="manage_exif_tags_summary">Auswahl, welche EXIF-Tags beim Upload behalten werden sollen</string>
@@ -509,13 +526,17 @@
   <string name="delete_helper_ask_alert_set_positive_button_reason">Denn es ist</string>
   <string name="category_edit_helper_make_edit_toast">Versuche, Kategorien zu aktualisieren.</string>
   <string name="category_edit_helper_show_edit_title">Kategorie-Update</string>
-  <string name="category_edit_helper_show_edit_title_success">Erfolg</string>
+  <string name="category_edit_helper_show_edit_title_success">Erfolgreich</string>
   <plurals name="category_edit_helper_show_edit_message_if">
-    <item quantity="one">Kategorie %1$s hinzugügen.</item>
-    <item quantity="other">Kategorien %1$s hinzugügen.</item>
+    <item quantity="one">Kategorie %1$s wurde hinzugefügt.</item>
+    <item quantity="other">Kategorien %1$s wurden hinzugefügt.</item>
   </plurals>
-  <string name="category_edit_helper_edit_message_else">Konnte keine Kategorien hinzufügen.</string>
+  <string name="category_edit_helper_edit_message_else">Kategorien konnten nicht hinzugefügt werden.</string>
   <string name="category_edit_button_text">Kategorien aktualisieren</string>
+  <string name="depictions_edit_helper_make_edit_toast">Versuche, die Darstellungen zu aktualisieren.</string>
+  <string name="depictions_edit_helper_show_edit_title">Beschriftungen bearbeiten</string>
+  <string name="depictions_edit_helper_show_edit_message_if">{{PLURAL|one=Darstellung %1$s wird hinzugefügt.|Darstellungen %1$s werden hinzugefügt.</string>
+  <string name="depictions_edit_helper_edit_message_else">Es konnten keine Darstellungen hinzugefügt werden.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Versuche, die Koordinaten zu aktualisieren.</string>
   <string name="coordinates_edit_helper_show_edit_title">Koordinaten aktualisieren</string>
   <string name="description_edit_helper_show_edit_title">Beschreibung aktualieren</string>
@@ -542,7 +563,7 @@
   <string name="place_state_needs_photo">Benötigt Foto</string>
   <string name="place_type">Platztyp:</string>
   <string name="nearby_search_hint">Brücke, Museum, Hotel etc.</string>
-  <string name="you_must_reset_your_passsword">Bei der Anmeldung ist etwas schief gelaufen, du musst dein Passwort zurücksetzen!</string>
+  <string name="you_must_reset_your_passsword">Bei der Anmeldung ist etwas schiefgelaufen, du musst dein Passwort zurücksetzen!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">CHILD CLASSES</string>
   <string name="title_for_parent_classes">PARENT CLASSES</string>
@@ -552,7 +573,7 @@
   <string name="title_app_shortcut_setting">Einstellungen</string>
   <string name="remove_bookmark">aus den Lesezeichen entfernt</string>
   <string name="add_bookmark">zu den Lesezeichen hinzugefügt</string>
-  <string name="wallpaper_set_unsuccessfully">Etwas ist schief gelaufen. Konnte das Hintergrundbild nicht einstellen</string>
+  <string name="wallpaper_set_unsuccessfully">Etwas ist schiefgelaufen. Das Hintergrundbild konnte nicht eingestellt werden</string>
   <string name="setting_wallpaper_dialog_title">Als Hintergrundbild festlegen</string>
   <string name="setting_wallpaper_dialog_message">Hintergrundbild wird festgelegt. Bitte warten...</string>
   <string name="theme_default_name">System folgen</string>
@@ -576,7 +597,7 @@
   <string name="wikipedia_instructions_step_2">2. Mit einem Klick auf Bestätigen wird der Wikipedia-Artikel geöffnet</string>
   <string name="wikipedia_instructions_step_3">3. Suche einen geeigneten Abschnitt im Artikel für dein Bild</string>
   <string name="wikipedia_instructions_step_4">4. Klicken Sie auf das Symbol „Bearbeiten“ (das einem Stift ähnelt) für diesen Abschnitt.</string>
-  <string name="wikipedia_instructions_step_5">5. Füge den wikitext an der entsprechenden Stelle ein.</string>
+  <string name="wikipedia_instructions_step_5">5. Füge den Wikitext an der entsprechenden Stelle ein.</string>
   <string name="wikipedia_instructions_step_6">6. Bearbeite den Wikitext für eine geeignete Positionierung, falls erforderlich. Weitere Informationen findest du &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;hier&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Veröffentliche den Artikel</string>
   <string name="copy_wikicode_to_clipboard">wikicode in die Zwischenablage kopieren</string>
@@ -633,7 +654,6 @@
   <string name="media_detail_in_all_languages">In allen Sprachen</string>
   <string name="choose_a_location">Wähle einen Ort</string>
   <string name="pan_and_zoom_to_adjust">Schwenken und Zoomen zum Einstellen</string>
-  <string name="exit_location_picker">Beenden der Ortswahl</string>
   <string name="select_location_location_picker">Ort auswählen</string>
   <string name="show_in_map_app">In Karten-App anzeigen</string>
   <string name="modify_location">Standort beabeiten</string>
@@ -663,9 +683,10 @@
   <string name="contributions_of_user">Beiträge von Benutzer: %s</string>
   <string name="achievements_of_user">Leistungen von Benutzer: %s</string>
   <string name="menu_view_user_page">Benutzerseite ansehen</string>
+  <string name="edit_depictions">Beschriftungen bearbeiten</string>
   <string name="edit_categories">Kategorien bearbeiten</string>
   <string name="advanced_options">Erweiterte Optionen</string>
-  <string name="advanced_query_info_text">Du kannst die In-der-Nähe-Abfrage anpassen. Wenn du Fehler erhältst, setze zurück und versuche es erneut.</string>
+  <string name="advanced_query_info_text">Du kannst die In-der-Nähe-Abfrage anpassen. Wenn du Fehlermeldungen erhältst, setze zurück und versuche es erneut.</string>
   <string name="apply">Anwenden</string>
   <string name="reset">Zurücksetzen</string>
   <string name="location_message">Standortdaten helfen den Wiki-Benutzern, dein Bild zu finden, was es viel nützlicher macht.\nDeine zuletzt hochgaldenen Fotos haben keinen Standort.\nWir empfehlen dir, den Standort in den Einstellungen deiner Kamera-App zu aktivieren.\nVielen Dank für das Hochladen!</string>
@@ -674,6 +695,8 @@
   <string name="add_location">Standort hinzufügen</string>
   <string name="feedback_sharing_data_alert">Bitte entferne aus dieser E-Mail alle Informationen, die du nicht öffentlich mitteilen möchtest. Bitte beachte auch, dass deine E-Mail-Adresse, mit der du schreibst, sowie der dazugehörige Name und das Profilbild öffentlich sichtbar sind.</string>
   <string name="explore_map_details">Einzelheiten</string>
+  <string name="achievements_unavailable_beta">Erfolge sind nur in der Prod-Variante verfügbar, bitte schaue in der Entwicklerdokumentation nach.</string>
+  <string name="leaderboard_unavailable_beta">Die Bestenliste ist nur in der Prod-Variante verfügbar, bitte schaue in der Entwicklerdokumentation nach.</string>
   <string name="copyright_popup">Bitte lade nur Bilder hoch, die du selbst aufgenommen hast. Wer urheberrechtlich geschützte Bilder hochlädt, wird gesperrt. Dies gilt auch für die Beta-Variante. Vielen Dank, dass du die App getestet hast!</string>
   <string name="select_feedback_data_choice">Bitte hebe die Markierung aller Informationen auf, die du nicht mit der Öffentlichkeit teilen möchtest.</string>
   <string name="api_level">API-Level</string>
