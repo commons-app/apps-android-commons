@@ -188,7 +188,17 @@ class ImageAdapter(
             }
 
             holder.itemView.setOnClickListener {
-                selectOrRemoveImage(holder, position)
+                val sharedPreferences: SharedPreferences =
+                    context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
+                val switchState =
+                    sharedPreferences.getBoolean(SWITCH_STATE_PREFERENCE_KEY, true)
+                if (!switchState) {
+                    if (mapActionableImages.size > position) {
+                        selectOrRemoveImage(holder, position)
+                    }
+                } else {
+                    selectOrRemoveImage(holder, position)
+                }
             }
 
             // launch media preview on long click.
