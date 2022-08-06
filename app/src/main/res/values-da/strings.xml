@@ -9,6 +9,12 @@
 * Saederup92
 -->
 <resources>
+  <string name="commons_facebook">Commons Facebook-side</string>
+  <string name="commons_github">Commons Github-kildekode</string>
+  <string name="commons_logo">Commons-logo</string>
+  <string name="commons_website">Commons-hjemmeside</string>
+  <string name="submit">Indsend</string>
+  <string name="appwidget_img">Dagens billede</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d fil overføres</item>
     <item quantity="other">%1$d filer overføres</item>
@@ -162,10 +168,6 @@
   <string name="become_a_tester_description">Registrer dig på vores betakanal på Google Play og få tidlig tilgang til nye funktioner og feilrettelser</string>
   <string name="_2fa_code">2FA-kode</string>
   <string name="logout_verification">Ønsker du at logge ud?</string>
-  <string name="commons_logo">Commons-logo</string>
-  <string name="commons_website">Commons-hjemmeside</string>
-  <string name="commons_facebook">Commons Facebook-side</string>
-  <string name="commons_github">Commons Github-kildekode</string>
   <string name="mediaimage_failed">Mediebillede mislykkedes</string>
   <string name="no_subcategory_found">Ingen underkategorier fundet</string>
   <string name="no_parentcategory_found">Ingen overordnede kategorier fundet</string>
@@ -236,7 +238,6 @@
   <string name="image_uploaded_by">Lagt op af: %1$s</string>
   <string name="block_notification_title">Blokeret</string>
   <string name="block_notification">Du er blokeret fra at redigere Commons</string>
-  <string name="appwidget_img">Dagens billede</string>
   <string name="app_widget_heading">Dagens billede</string>
   <string name="menu_search_button">Søg</string>
   <string name="search_commons">Søgning på Commons</string>
@@ -278,7 +279,6 @@
   <string name="step_count">Trin %1$d af %2$d: %3$s</string>
   <string name="next">Næste</string>
   <string name="previous">Forrige</string>
-  <string name="submit">Indsend</string>
   <string name="title_page_bookmarks_pictures">Billeder</string>
   <string name="title_page_bookmarks_locations">Placeringer</string>
   <string name="menu_bookmark">Tilføj/Fjern bogmærker</string>

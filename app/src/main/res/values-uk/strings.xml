@@ -5,6 +5,7 @@
 * Andriykopanytsia
 * Base
 * DDPAT
+* Fifty Pro
 * Ice bulldog
 * Movses
 * Mykola Swarnyk
@@ -18,6 +19,27 @@
 * Ата
 -->
 <resources>
+  <string name="commons_facebook">Facebook-сторінка Вікісховища</string>
+  <string name="commons_github">Програмний код Вікісховища на GitHub</string>
+  <string name="commons_logo">Логотип Вікісховища</string>
+  <string name="commons_website">Веб-сайт Вікісховища</string>
+  <string name="exit_location_picker">Вийти з вікна вибору розташування</string>
+  <string name="submit">Надіслати</string>
+  <string name="add_another_description">Додати інший опис</string>
+  <string name="add_new_contribution">Додати новий внесок</string>
+  <string name="add_contribution_from_camera">Додайте внесок із камери</string>
+  <string name="add_contribution_from_photos">Додайте внесок із Фото</string>
+  <string name="add_contribution_from_contributions_gallery">Додайте внесок із галереї попередніх внесків</string>
+  <string name="show_captions">Підписи</string>
+  <string name="row_item_language_description">Опис мови</string>
+  <string name="row_item_caption">Підпис</string>
+  <string name="show_captions_description">Опис</string>
+  <string name="nearby_row_image">Зображення</string>
+  <string name="nearby_all">Усі</string>
+  <string name="nearby_filter_toggle">Перемкнути вгору</string>
+  <string name="nearby_filter_search">Перегляд пошуку</string>
+  <string name="nearby_filter_state">Місце штату</string>
+  <string name="appwidget_img">Зображення дня</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Завантажується %1$d файл</item>
     <item quantity="few">Завантажуються %1$d файли</item>
@@ -217,10 +239,6 @@
   <string name="become_a_tester_description">Підпишіться на наш бета-канал на Google Play і отримайте ранній доступ до нових функцій та виправлень баґів</string>
   <string name="_2fa_code">Код 2FA</string>
   <string name="logout_verification">Ви справді хочете вийти із системи?</string>
-  <string name="commons_logo">Логотип Вікісховища</string>
-  <string name="commons_website">Веб-сайт Вікісховища</string>
-  <string name="commons_facebook">Facebook-сторінка Вікісховища</string>
-  <string name="commons_github">Програмний код Вікісховища на GitHub</string>
   <string name="mediaimage_failed">Помилка медіазображення</string>
   <string name="no_subcategory_found">Підкатегорій не знайдено</string>
   <string name="no_parentcategory_found">Не знайдено батьківських категорій</string>
@@ -286,6 +304,7 @@
   <string name="nearby_commons">Вікісховище</string>
   <string name="about_rate_us">Оцініть нас</string>
   <string name="about_faq">Часті запитання</string>
+  <string name="user_guide">Документація користувача</string>
   <string name="welcome_skip_button">Пропустити інструкцію</string>
   <string name="no_internet">Інтернет недоступний</string>
   <string name="error_notifications">Помилка при отриманні сповіщення</string>
@@ -306,13 +325,13 @@
   <string name="image_uploaded_by">Завантажено: %1$s</string>
   <string name="block_notification_title">Заблоковано</string>
   <string name="block_notification">Вам було заблоковано редагування у Вікісховищі</string>
-  <string name="appwidget_img">Зображення дня</string>
   <string name="app_widget_heading">Зображення дня</string>
   <string name="menu_search_button">Пошук</string>
   <string name="search_commons">Шукати у Вікісховищі</string>
   <string name="title_activity_search">Пошук</string>
   <string name="search_recent_header">Недавні пошуки:</string>
   <string name="provider_searches">Недавні пошукові запити</string>
+  <string name="provider_recent_languages">Останні мовні запити</string>
   <string name="error_loading_categories">Сталася помилка під час завантаження категорій.</string>
   <string name="error_loading_depictions">Сталася помилка при завантаженні описів зображеного.</string>
   <string name="search_tab_title_media">Медіафайли</string>
@@ -320,6 +339,7 @@
   <string name="search_tab_title_depictions">Елементи</string>
   <string name="explore_tab_title_featured">Обране</string>
   <string name="explore_tab_title_mobile">Завантаження з мобільного</string>
+  <string name="explore_tab_title_map">Мапа</string>
   <string name="successful_wikidata_edit">Зображення додано до сторінки %1$s у Вікіданих!</string>
   <string name="wikidata_edit_failure">Не вдалось оновити відповідну сторінку Вікіданих!</string>
   <string name="menu_set_wallpaper">Поставити шпалерами екрану</string>
@@ -388,7 +408,6 @@
   <string name="step_count">Крок %1$d із %2$d: %3$s</string>
   <string name="next">Наступне</string>
   <string name="previous">Попереднє</string>
-  <string name="submit">Надіслати</string>
   <string name="upload_title_duplicate">Файл із назвою %1$s існує. Ви впевнені, що хочете продовжити?\n\nПримітка: Відповідне розширення буде додано до назви файлу автоматично</string>
   <string name="map_application_missing">На Вашому пристрої не знайдено сумісного додатка з картами. Будь ласка, встановіть додаток з картами, якщо хочете скористатись цією функцією.</string>
   <string name="title_page_bookmarks_pictures">Зображення</string>
@@ -408,7 +427,7 @@
   <string name="no_categories_selected">Жодної категорії не вибрано</string>
   <string name="no_categories_selected_warning_desc">Зображення без категорій рідко використовуються. Ви впевнені, що хочете продовжити без вказаних категорій?</string>
   <string name="no_depictions_selected">Описів зображеного не вибрано</string>
-  <string name="no_depictions_selected_warning_desc">Медіа, у яких вказані зображувані об\'єкти, можуть бути легше знайдені та використані надалі. Ви впевнені, що хочете продовжити не вказавши що саме тут зображено?</string>
+  <string name="no_depictions_selected_warning_desc">Медіа, у яких вказані описи, можуть бути легше знайдені та використані надалі. Ви впевнені, що хочете продовжити не вказавши описи?</string>
   <string name="back_button_warning">Скасувати завантаження</string>
   <string name="back_button_warning_desc">Використання кнопки \"Назад\" скасує це завантаження</string>
   <string name="back_button_continue">Продовжити завантаження</string>
@@ -457,7 +476,7 @@
   <string name="review_thanks_yes_button_text">Наступне зображення</string>
   <string name="review_thanks_no_button_text">Так, чому б і ні</string>
   <string name="skip_image_explanation">Натискання цієї кнопки дасть вам інше недавно завантажене зображення з Вікісховища</string>
-  <string name="review_image_explanation" fuzzy="true">Ви можете перевіряти зображення і покращувати якість Вікісховища.\nЄ чотири параметри перевірки:\n— Чи зображення відповідає призначенню Вікісховища?\n— Чи зображення відповідає правилам авторського права?\n— Чи зображення коректно категоризоване?\n— Якщо все добре, то ви можете подякувати завантажувачу.</string>
+  <string name="review_image_explanation">Ви можете переглядати зображення, щоб покращити якість Вікісховища.\nТри параметри огляду:\n\n— Чи входить це зображення у сферу проєкту?\nКоли Ви торкаєтесь Ні (не входить в сферу проекту), Ви додаєте шаблон номінації на видалення до цього зображення.\n\n— Чи відповідає це зображення правилам авторського права?\nКоли Ви торкаєтесь Ні (не дотримується правил авторського права), Ви додаєте шаблон номінації на видалення до цього зображення.\n\n— Чи правильно класифіковано це зображення?\nКоли Ви торкаєтесь Ні (неправильно категоризовано), Ви додаєте шаблон запиту на категоризацію до цього зображення.\n\nЯкщо все в порядку, шаблон до зображення не додається, і Ви отримуєте можливість подякувати авторові.</string>
   <string name="no_image">Використаних зображень немає</string>
   <string name="no_image_reverted">Відхилених зображень немає</string>
   <string name="no_image_uploaded">Завантажених зображень немає</string>
@@ -519,6 +538,15 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Неможливо додати категорії</string>
   <string name="category_edit_button_text">Оновити категорії</string>
+  <string name="depictions_edit_helper_make_edit_toast">Спроба оновити описи.</string>
+  <string name="depictions_edit_helper_show_edit_title">Редагувати зображення</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">Опис %1$s додано.</item>
+    <item quantity="few">Описи %1$s додані.</item>
+    <item quantity="many">Описи %1$s додані.</item>
+    <item quantity="other"/>
+  </plurals>
+  <string name="depictions_edit_helper_edit_message_else">Не вдалося додати зображення.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Спроба оновити координати.</string>
   <string name="coordinates_edit_helper_show_edit_title">Оновлення координат</string>
   <string name="description_edit_helper_show_edit_title">Оновити опис</string>
@@ -636,7 +664,6 @@
   <string name="media_detail_in_all_languages">Усіма мовами</string>
   <string name="choose_a_location">Вибрати розташування</string>
   <string name="pan_and_zoom_to_adjust">Панорамуйте і збільшуйте, щоб підлаштувати</string>
-  <string name="exit_location_picker">Вийти з вікна вибору розташування</string>
   <string name="select_location_location_picker">Вибрати розташування</string>
   <string name="show_in_map_app">Показати в додатку на мапі</string>
   <string name="modify_location">Редагувати підпис</string>
@@ -666,6 +693,8 @@
   <string name="contributions_of_user">Внесок користувача: %s</string>
   <string name="achievements_of_user">Досягнення користувача: %s</string>
   <string name="menu_view_user_page">Переглянути сторінку користувача</string>
+  <string name="edit_depictions">Редагувати описи</string>
+  <string name="edit_categories">Редагувати категорії</string>
   <string name="advanced_options">Розширені параметри</string>
   <string name="advanced_query_info_text">Ви можете налаштувати запит поблизу. Якщо ви отримуєте помилки, скиньте налаштування та застосуйте.</string>
   <string name="apply">Застосувати</string>
@@ -675,4 +704,19 @@
   <string name="no_location_found_message">Як щодо того, щоб додати місце, де було зроблене зображення? Дані про розташування допомогають вікіредакторам знайти ваше зображення, від чого воно стає ще більш корисним.\nДякуємо!</string>
   <string name="add_location">Додати розташування</string>
   <string name="feedback_sharing_data_alert">Будь ласка, видаліть з цього листа будь-яку інформацію, якою ви не бажаєте поділитися публічно. Також майте на увазі, що ваша адреса електронної пошти, за допомогою якої ви розміщуєте публікацію, а також пов’язане ім’я та зображення профілю будуть видимі для всіх.</string>
+  <string name="explore_map_details">Деталі</string>
+  <string name="achievements_unavailable_beta">Досягнення доступні лише у версії prod, будь ласка, перегляньте документацію розробника.</string>
+  <string name="leaderboard_unavailable_beta">Таблиця лідерів доступна лише в версії prod. Будь ласка, перегляньте документацію розробника.</string>
+  <string name="copyright_popup">Будь ласка, завантажуйте лише фотографії, які ви зробили самі. Користувачі, які завантажують зображення, захищені авторським правом, будуть заблоковані. Це стосується і бета-аромату. Дякуємо за тестування програми!</string>
+  <string name="select_feedback_data_choice">Будь ласка, зніміть прапорець з будь-якої інформації, якою ви не бажаєте ділитися публічно.</string>
+  <string name="api_level">Рівень API</string>
+  <string name="android_version">Версія Android</string>
+  <string name="device_manufacturer">Виробник пристрою</string>
+  <string name="device_model">Модель пристрою</string>
+  <string name="device_name">Назва пристрою</string>
+  <string name="network_type">Тип мережі</string>
+  <string name="thanks_feedback">Дякуємо за відгук</string>
+  <string name="error_feedback">Помилка під час надсилання відгуку</string>
+  <string name="enter_description">Який ваш відгук?</string>
+  <string name="your_feedback">Ваш відгук</string>
 </resources>

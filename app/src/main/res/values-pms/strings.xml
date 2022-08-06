@@ -3,6 +3,13 @@
 * Borichèt
 -->
 <resources>
+  <string name="commons_facebook">Pàgina su Facebook ëd Comun</string>
+  <string name="commons_github">Còdes sorgiss Github ëd Comun</string>
+  <string name="commons_logo">Marca ëd Comun</string>
+  <string name="commons_website">Sit an sl\'aragnà ëd Comun</string>
+  <string name="exit_location_picker">Seurte dal selessionador ëd locassion</string>
+  <string name="submit">Mandé</string>
+  <string name="appwidget_img">Plancia dël di</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d archivi an camin ch\'as caria</item>
     <item quantity="other">%1$d archivi an camin ch\'as cario</item>
@@ -188,10 +195,6 @@
   <string name="become_a_tester_description">Anscriv-se a nòstr canal beta su Google Play a oten-e n\'acess antissipà a le neuve fonsionalità e coression ëd givo</string>
   <string name="_2fa_code">Còdes 2FA</string>
   <string name="logout_verification">Veul-lo për da bon seurte dal sistema?</string>
-  <string name="commons_logo">Marca ëd Comun</string>
-  <string name="commons_website">Sit an sl\'aragnà ëd Comun</string>
-  <string name="commons_facebook">Pàgina su Facebook ëd Comun</string>
-  <string name="commons_github">Còdes sorgiss Github ëd Comun</string>
   <string name="mediaimage_failed">Faliment ëd la plancia dël mojen</string>
   <string name="no_subcategory_found">Gnun-e sot-categorìe trovà</string>
   <string name="no_parentcategory_found">Gnun-é categorìe ce trovà</string>
@@ -278,7 +281,6 @@
   <string name="image_uploaded_by">Carià da: %1$s</string>
   <string name="block_notification_title">Blocà</string>
   <string name="block_notification">Chiel a l\'é stàit blocà e a peul pa modifiché su Commons</string>
-  <string name="appwidget_img">Plancia dël di</string>
   <string name="app_widget_heading">Plancia dël di</string>
   <string name="menu_search_button">Arserché</string>
   <string name="search_commons">Arserché su Commons</string>
@@ -362,7 +364,6 @@
   <string name="step_count">Pass %1$d ëd %2$d: : %3$s</string>
   <string name="next">Apress</string>
   <string name="previous">Precedent</string>
-  <string name="submit">Mandé</string>
   <string name="upload_title_duplicate">N\'archivi con ël nòm %1$s a esist. É-lo sigur ëd vorèj andé anans?\n\nNòta: Un sufiss oportun a sarà giontà al nòm ëd l\'archivi an automàtich.</string>
   <string name="map_application_missing">Gnun-a aplicassion cartogràfica compatìbil a l\'é trovasse an sò angign. Për piasì, ch\'a na anstala un-a për dovré costa fonsionalità.</string>
   <string name="title_page_bookmarks_pictures">Plance</string>
@@ -615,7 +616,6 @@
   <string name="media_detail_in_all_languages">An tute le lenghe</string>
   <string name="choose_a_location">Serne na locassion</string>
   <string name="pan_and_zoom_to_adjust">Slarghé e strenze për buté bin</string>
-  <string name="exit_location_picker">Seurte dal selessionador ëd locassion</string>
   <string name="select_location_location_picker">Selessioné na locassion</string>
   <string name="show_in_map_app">Smon-e andrinta a l\'aplicassion carta</string>
   <string name="modify_location">Modifiché ël pòst</string>

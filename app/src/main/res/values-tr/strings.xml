@@ -27,6 +27,13 @@
 * VikipediBilgini
 -->
 <resources>
+  <string name="commons_facebook">Commons Facebook Sayfası</string>
+  <string name="commons_github">Commons Github Kaynak Kodu</string>
+  <string name="commons_logo">Commons Logosu</string>
+  <string name="commons_website">Commons Websitesi</string>
+  <string name="exit_location_picker">Konum seçiciden çık</string>
+  <string name="submit">Gönder</string>
+  <string name="appwidget_img">Günün Resmi</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d dosya yükleniyor</item>
     <item quantity="other">%1$d dosya yükleniyor</item>
@@ -212,10 +219,6 @@
   <string name="become_a_tester_description">Google Play\'de beta kanalımıza katılın ve yeni özelliklere ve hata düzeltmelerine erken erişin</string>
   <string name="_2fa_code">2 Faktörlü Kimlik Doğrulama (2FA) Kodu</string>
   <string name="logout_verification">Gerçekten çıkış yapmak istiyor musunuz?</string>
-  <string name="commons_logo">Commons Logosu</string>
-  <string name="commons_website">Commons Websitesi</string>
-  <string name="commons_facebook">Commons Facebook Sayfası</string>
-  <string name="commons_github">Commons Github Kaynak Kodu</string>
   <string name="mediaimage_failed">Medya Görüntüsü Başarısız Oldu</string>
   <string name="no_subcategory_found">Alt kategori bulunamadı</string>
   <string name="no_parentcategory_found">Üst kategori bulunamadı</string>
@@ -301,7 +304,6 @@
   <string name="image_uploaded_by">Yükleyen: %1$s</string>
   <string name="block_notification_title">Engellendi</string>
   <string name="block_notification">Commons\'ı düzenlemeniz engellendi</string>
-  <string name="appwidget_img">Günün Resmi</string>
   <string name="app_widget_heading">Günün Resmi</string>
   <string name="menu_search_button">Ara</string>
   <string name="search_commons">Commons\'ı Ara</string>
@@ -384,7 +386,6 @@
   <string name="step_count">Aşama %1$d/%2$d: %3$s</string>
   <string name="next">Sonraki</string>
   <string name="previous">Önceki</string>
-  <string name="submit">Gönder</string>
   <string name="upload_title_duplicate">%1$s adında zaten bir dosya var. Devam etmek istediğine emin misin?\n\nNot: Dosya adına otomatik olarak uygun bir sonek eklenecektir.</string>
   <string name="map_application_missing">Cihazınızda uyumlu bir harita uygulaması bulunamadı. Lütfen bu özelliği kullanmak için bir harita uygulaması yükleyin.</string>
   <string name="title_page_bookmarks_pictures">Resimler</string>
@@ -630,7 +631,6 @@
   <string name="media_detail_in_all_languages">Tüm dillerde</string>
   <string name="choose_a_location">Bir konum seçin</string>
   <string name="pan_and_zoom_to_adjust">Ayarlamak için kaydırma ve yakınlaştırma</string>
-  <string name="exit_location_picker">Konum seçiciden çık</string>
   <string name="select_location_location_picker">Konum seçin</string>
   <string name="show_in_map_app">Harita uygulamasında göster</string>
   <string name="modify_location">Konumu düzenle</string>

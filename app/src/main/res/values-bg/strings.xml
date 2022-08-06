@@ -11,6 +11,10 @@
 * АдмиралАнимЕ
 -->
 <resources>
+  <string name="commons_facebook">Facebook страница на Общомедия</string>
+  <string name="commons_logo">Лого на Общомедия</string>
+  <string name="commons_website">Общомедия</string>
+  <string name="submit">Изпращане</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Обработване на %d качване</item>
     <item quantity="other">Обработване на %d качвания</item>
@@ -33,7 +37,7 @@
   </plurals>
   <string name="navigation_item_explore">Изследвайте</string>
   <string name="preference_category_appearance">Изглед</string>
-  <string name="preference_category_general">Общи</string>
+  <string name="preference_category_general">Основни</string>
   <string name="preference_category_feedback">Обратна връзка</string>
   <string name="preference_category_privacy">Поверителност</string>
   <string name="app_name">Общомедия</string>
@@ -168,9 +172,6 @@
   <string name="become_a_tester_description">Включете се в нашия бета канал в Google Play, за да получите предварителен достъп до нови функционалности и поправки на бъгове.</string>
   <string name="_2fa_code">2FA код</string>
   <string name="logout_verification">Наистина ли искате да излезете от системата?</string>
-  <string name="commons_logo">Лого на Общомедия</string>
-  <string name="commons_website">Общомедия</string>
-  <string name="commons_facebook">Facebook страница на Общомедия</string>
   <string name="no_subcategory_found">Не са намерени подкатегории</string>
   <string name="no_parentcategory_found">Не са намерени надкатегории</string>
   <string name="welcome_image_mount_zao">Планината Зао</string>
@@ -272,7 +273,6 @@
   <string name="read_notifications">Известия (прочетени)</string>
   <string name="list_sheet">Списък</string>
   <string name="next">Следваща</string>
-  <string name="submit">Изпращане</string>
   <string name="deletion_reason_uploaded_by_mistake">Качих изображението по погрешка</string>
   <string name="deletion_reason_publicly_visible">Не знаех, че изображението ще бъде публично видимо</string>
   <string name="deletion_reason_bad_for_my_privacy">Осъзнах, че това компрометира личните ми данни</string>

@@ -6,6 +6,9 @@
 * 1100100
 -->
 <resources>
+  <string name="commons_facebook">කොමන්ස් ෆේස්බුක් පිටුව</string>
+  <string name="commons_logo">කොමන්ස් ලාන්චනය</string>
+  <string name="commons_website">කොමන්ස් වෙබ් අඩවිය</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 ගොනුවක් උඩුගත කෙරේ</item>
     <item quantity="other">ගොනු %d ක් උඩුගත කෙරේ</item>
@@ -123,9 +126,6 @@
   <string name="media_detail_coordinates_empty">කිසිවක් සපයා නොමැත</string>
   <string name="_2fa_code">දිවිත්ව තහවුරු කිරීමේ කේතය</string>
   <string name="logout_verification">ඔබට ඇත්තටම නික්මීමට අවශ්‍යද?</string>
-  <string name="commons_logo">කොමන්ස් ලාන්චනය</string>
-  <string name="commons_website">කොමන්ස් වෙබ් අඩවිය</string>
-  <string name="commons_facebook">කොමන්ස් ෆේස්බුක් පිටුව</string>
   <string name="welcome_image_llamas">ලාමා සතුන්</string>
   <string name="welcome_image_tulip">ටියුලිප්</string>
   <string name="welcome_image_welcome_wikipedia">විකිපීඩියා වෙතට ඔබව සාදරයෙන් පිළිගනිමු.</string>

@@ -4,6 +4,11 @@
 * Garam
 -->
 <resources>
+  <string name="commons_facebook">공용 페이스부크 페지</string>
+  <string name="commons_github">공용 GitHub 원천코드</string>
+  <string name="commons_logo">공용 로고</string>
+  <string name="commons_website">공용 웨브싸이트</string>
+  <string name="appwidget_img">오늘의 화상</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d개의 서류를 올리적재하는중</item>
     <item quantity="other">%1$d개의 서류를 올리적재하는중</item>
@@ -154,10 +159,6 @@
   <string name="become_a_tester_title">베타 시험자가 되세요</string>
   <string name="_2fa_code">2FA부호</string>
   <string name="logout_verification">정말 탈퇴하시겠습니까?</string>
-  <string name="commons_logo">공용 로고</string>
-  <string name="commons_website">공용 웨브싸이트</string>
-  <string name="commons_facebook">공용 페이스부크 페지</string>
-  <string name="commons_github">공용 GitHub 원천코드</string>
   <string name="mediaimage_failed">매체 그림 실패</string>
   <string name="no_subcategory_found">하위 분류가 없습니다</string>
   <string name="no_parentcategory_found">부모 분류가 없습니다</string>
@@ -223,7 +224,6 @@
   <string name="error_loading_images">그림을 불러오는 동안 오유가 생겼습니다.</string>
   <string name="image_uploaded_by">올리적재자: %1$s</string>
   <string name="block_notification">공용 편집이 막겨있습니다</string>
-  <string name="appwidget_img">오늘의 화상</string>
   <string name="app_widget_heading">오늘의 화상</string>
   <string name="menu_search_button">검색</string>
   <string name="search_commons">공용 검색</string>

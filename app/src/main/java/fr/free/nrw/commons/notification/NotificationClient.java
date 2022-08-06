@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.notification;
 
+import fr.free.nrw.commons.notification.models.Notification;
 import org.wikipedia.csrf.CsrfTokenClient;
 import org.wikipedia.dataclient.Service;
 

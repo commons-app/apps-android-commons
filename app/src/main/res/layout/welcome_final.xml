@@ -7,73 +7,71 @@
     >
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_vertical">
-    <LinearLayout
-        android:gravity="center_vertical"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_height="180dp"
-        >
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:gravity="center_vertical"
+      android:orientation="vertical">
 
-        <ImageView
-            android:src="@drawable/welcome_wikipedia"
-            android:id="@+id/welcome_wikipedia"
-            android:layout_width="150dp"
-            android:layout_height="180dp"
-            android:contentDescription="@string/welcome_image_welcome_wikipedia"
-            />
+        <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="180dp"
+          android:layout_gravity="center_horizontal"
+          android:gravity="center_vertical">
 
-        <ImageView
-            android:src="@drawable/welcome_copyright"
-            android:layout_width="@dimen/giant_height"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/standard_gap"
-            android:layout_marginStart="@dimen/standard_gap"
-            android:contentDescription="@string/welcome_image_welcome_copyright"
-            />
+            <ImageView
+              android:id="@+id/welcome_wikipedia"
+              android:layout_width="150dp"
+              android:layout_height="180dp"
+              android:contentDescription="@string/welcome_image_welcome_wikipedia"
+              android:src="@drawable/welcome_wikipedia" />
+
+            <ImageView
+              android:layout_width="@dimen/giant_height"
+              android:layout_height="120dp"
+              android:layout_gravity="center"
+              android:layout_marginStart="@dimen/standard_gap"
+              android:layout_marginLeft="@dimen/standard_gap"
+              android:contentDescription="@string/welcome_image_welcome_copyright"
+              android:src="@drawable/welcome_copyright" />
+
+        </LinearLayout>
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:gravity="center_horizontal"
+          android:maxWidth="@dimen/very_large_height"
+          android:text="@string/welcome_final_text"
+          android:textAlignment="center"
+          android:textColor="@android:color/white"
+          android:textSize="@dimen/normal_text"
+          android:textStyle="bold" />
+
+        <Button
+          android:id="@+id/finishTutorialButton"
+          android:layout_width="120dp"
+          android:layout_height="@dimen/overflow_button_dimen"
+          android:layout_gravity="center"
+          android:layout_marginTop="@dimen/standard_gap"
+          android:background="@android:color/white"
+          android:contentDescription="@string/welcome_final_button_text"
+          android:text="@string/welcome_final_button_text"
+          android:textColor="#0c609c"
+          android:textSize="@dimen/normal_text"
+          android:textStyle="bold" />
 
     </LinearLayout>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:maxWidth="@dimen/very_large_height"
-        android:text="@string/welcome_final_text"
-        android:layout_gravity="center"
-        android:textStyle="bold"
-        android:textSize="@dimen/normal_text"
-        android:textAlignment="center"
-        android:gravity="center_horizontal"
-        android:textColor="@android:color/white"
-        />
-
-    <Button
-        android:layout_width="120dp"
-        android:layout_height="@dimen/overflow_button_dimen"
-        android:layout_marginTop="@dimen/standard_gap"
-        android:text="@string/welcome_final_button_text"
-        android:id="@+id/finishTutorialButton"
-        android:textSize="@dimen/normal_text"
-        android:layout_gravity="center"
-        android:background="@android:color/white"
-        android:textColor="#0c609c"
-        android:textStyle="bold"
-        />
-
-    </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/welcomeInfo"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:textSize="@dimen/normal_text"
-        android:textColor="@android:color/white"
-        android:padding="@dimen/standard_gap"
-        android:layout_marginBottom="@dimen/standard_gap"
-        android:text="@string/welcome_help_button_text" />
+      android:id="@+id/welcomeInfo"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:layout_alignParentBottom="true"
+      android:layout_marginBottom="@dimen/standard_gap"
+      android:padding="@dimen/standard_gap"
+      android:text="@string/welcome_help_button_text"
+      android:textColor="@android:color/white"
+      android:textSize="@dimen/normal_text" />
 </RelativeLayout>

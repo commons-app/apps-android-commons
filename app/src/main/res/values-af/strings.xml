@@ -5,6 +5,12 @@
 * Naudefj
 -->
 <resources>
+  <string name="commons_facebook">Commons Facebook bladsy</string>
+  <string name="commons_github">Commons Github-bronkode</string>
+  <string name="commons_logo">Commons logo</string>
+  <string name="commons_website">Commons webwerf</string>
+  <string name="submit">Indien</string>
+  <string name="appwidget_img">Foto van die dag</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d lêer aan die uploaden</item>
     <item quantity="other">%1$d lêers aan die uploaden</item>
@@ -162,10 +168,6 @@
   <string name="become_a_tester_description">Sluit aan by ons beta-kanaal op Google Play en kry vroeë toegang tot nuwe funksies en foutoplossings</string>
   <string name="_2fa_code">2FA-kode</string>
   <string name="logout_verification">Wil u regtig afmeld?</string>
-  <string name="commons_logo">Commons logo</string>
-  <string name="commons_website">Commons webwerf</string>
-  <string name="commons_facebook">Commons Facebook bladsy</string>
-  <string name="commons_github">Commons Github-bronkode</string>
   <string name="mediaimage_failed">Mediabeeld misluk</string>
   <string name="no_subcategory_found">Geen subkategorieë gevind nie</string>
   <string name="no_parentcategory_found">Geen ouerkategorieë gevind nie</string>
@@ -244,7 +246,6 @@
   <string name="image_uploaded_by">Opgelaai deur:%$1s</string>
   <string name="block_notification_title">geblokkeer</string>
   <string name="block_notification">U word geblokkeer om Commons te redigeer</string>
-  <string name="appwidget_img">Foto van die dag</string>
   <string name="app_widget_heading">Foto van die dag</string>
   <string name="menu_search_button">Soek</string>
   <string name="search_commons">Commons deursoek</string>
@@ -320,7 +321,6 @@
   <string name="step_count" fuzzy="true">Stap %1$d van %2$d</string>
   <string name="next">volgende</string>
   <string name="previous">Vorige</string>
-  <string name="submit">Indien</string>
   <string name="upload_title_duplicate" fuzzy="true">\'N Lêer met die lêernaam %1$s bestaan. Is u seker dat u wil voortgaan?</string>
   <string name="map_application_missing">Geen versoenbare kaarttoepassing kon op u toestel gevind word nie. Installeer \'n kaarttoepassing om hierdie funksie te gebruik.</string>
   <string name="title_page_bookmarks_pictures">Pictures</string>

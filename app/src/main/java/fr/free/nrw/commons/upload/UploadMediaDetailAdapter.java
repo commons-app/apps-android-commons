@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload;
 import android.app.Dialog;
 import android.content.Intent;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -114,8 +115,16 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
      */
     public void removeDescription(final UploadMediaDetail uploadMediaDetail, final int position) {
         selectedLanguages.remove(position);
-        this.uploadMediaDetails.remove(uploadMediaDetail);
+        final int ListPosition =
+            (int) selectedLanguages.keySet().stream().filter(e -> e < position).count();
+        this.uploadMediaDetails.remove(uploadMediaDetails.get(ListPosition));
+        int i = position + 1;
+        while (selectedLanguages.containsKey(i)) {
+            selectedLanguages.remove(i);
+            i++;
+        }
         notifyItemRemoved(position);
+        notifyItemRangeChanged(position, uploadMediaDetails.size() - position);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -139,6 +148,10 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         @BindView(R.id.btn_remove)
         ImageView removeButton;
 
+        AbstractTextWatcher captionListener;
+
+        AbstractTextWatcher descriptionListener;
+
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -156,6 +169,8 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                         eventListener.onPrimaryCaptionTextChange(value.length() != 0);
                     }
                 }));
+            captionItemEditText.removeTextChangedListener(captionListener);
+            descItemEditText.removeTextChangedListener(descriptionListener);
             captionItemEditText.setText(uploadMediaDetail.getCaptionText());
             descItemEditText.setText(uploadMediaDetail.getDescriptionText());
 
@@ -165,6 +180,9 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                 captionInputLayout.setEndIconDrawable(R.drawable.mapbox_info_icon_default);
                 captionInputLayout.setEndIconOnClickListener(v ->
                     callback.showAlert(R.string.media_detail_caption, R.string.caption_info));
+                Objects.requireNonNull(captionInputLayout.getEditText()).setFilters(new InputFilter[] {
+                    new UploadMediaDetailInputFilter()
+                });
 
                 descInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
                 descInputLayout.setEndIconDrawable(R.drawable.mapbox_info_icon_default);
@@ -178,13 +196,14 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
             }
 
             removeButton.setOnClickListener(v -> removeDescription(uploadMediaDetail, position));
-
-            captionItemEditText.addTextChangedListener(new AbstractTextWatcher(
-                    captionText -> uploadMediaDetails.get(position).setCaptionText(captionText)));
+            captionListener = new AbstractTextWatcher(
+                captionText -> uploadMediaDetails.get(position).setCaptionText(captionText));
+            descriptionListener = new AbstractTextWatcher(
+                descriptionText -> uploadMediaDetails.get(position).setDescriptionText(descriptionText));
+            captionItemEditText.addTextChangedListener(captionListener);
             initLanguage(position, uploadMediaDetail);
 
-            descItemEditText.addTextChangedListener(new AbstractTextWatcher(
-                    descriptionText -> uploadMediaDetails.get(position).setDescriptionText(descriptionText)));
+            descItemEditText.addTextChangedListener(descriptionListener);
             initLanguage(position, uploadMediaDetail);
 
             //If the description was manually added by the user, it deserves focus, if not, let the user decide

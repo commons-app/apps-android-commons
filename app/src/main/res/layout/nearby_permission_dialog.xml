@@ -3,14 +3,15 @@
     android:layout_height="wrap_content" >
 
     <CheckBox
-        android:id="@+id/never_ask_again"
-        style="?android:attr/textAppearanceMedium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/never_ask_again"
-        android:layout_marginTop="@dimen/tiny_padding"
-        android:layout_marginBottom="@dimen/tiny_padding"
-        android:layout_marginEnd="@dimen/dimen_20"
-        android:layout_marginStart="@dimen/dimen_20"/>
+      android:id="@+id/never_ask_again"
+      style="?android:attr/textAppearanceMedium"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/dimen_20"
+      android:layout_marginTop="@dimen/tiny_padding"
+      android:layout_marginEnd="@dimen/dimen_20"
+      android:layout_marginBottom="@dimen/tiny_padding"
+      android:contentDescription="@string/never_ask_again"
+      android:text="@string/never_ask_again" />
 
 </FrameLayout>

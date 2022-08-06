@@ -7,6 +7,7 @@
 * Leduyquang753
 * Minh Nguyen
 * Ngoxuannguyenchuong
+* NguoiDungKhongDinhDanh
 * Nguyễn Mạnh An
 * Nhatminh01
 * Phjtieudoc
@@ -17,6 +18,10 @@
 * Yuki Wulf
 -->
 <resources>
+  <string name="commons_facebook">Trang Commons tại Facebook</string>
+  <string name="commons_github">Mã nguồn Commons tại GitHub</string>
+  <string name="commons_logo">Biểu trưng Commons</string>
+  <string name="commons_website">Trang Web Commons</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d tập tin đang được tải lên</item>
     <item quantity="other">%1$d tập tin đang được tải lên</item>
@@ -172,10 +177,6 @@
   <string name="become_a_tester_description">Tham gia kênh thử nghiệm của chúng tôi trên Google Play và nhận các tính năng mới cùng những bản sửa lỗi sớm hơn</string>
   <string name="_2fa_code">Mã Hai Nhân tố</string>
   <string name="logout_verification">Bạn có chắc chắn muốn đăng xuất?</string>
-  <string name="commons_logo">Biểu trưng Commons</string>
-  <string name="commons_website">Trang Web Commons</string>
-  <string name="commons_facebook">Trang Commons tại Facebook</string>
-  <string name="commons_github">Mã nguồn Commons tại GitHub</string>
   <string name="mediaimage_failed">Hình ảnh bị Thất bại</string>
   <string name="welcome_image_mount_zao">Núi Zaō</string>
   <string name="welcome_image_llamas">Lạc đà không bướu</string>
@@ -214,7 +215,7 @@
   <string name="send_log_file_description" fuzzy="true">Gửi tập tin nhật trình cho nhà phát triển qua thư điện tử</string>
   <string name="no_web_browser">Không tìm thấy trình duyệt để mở URL</string>
   <string name="null_url">Lỗi! Không tìm thấy URL</string>
-  <string name="nominate_deletion">Bầu chọn để xóa</string>
+  <string name="nominate_deletion">Đề nghị xóa</string>
   <string name="nominated_for_deletion">Có đề nghị xóa hình này.</string>
   <string name="skip_login">Bỏ qua</string>
   <string name="navigation_item_login">Đăng nhập</string>

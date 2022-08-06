@@ -4,6 +4,10 @@
 * StarrySky
 -->
 <resources>
+  <string name="commons_facebook">維基共享資源臉書頁</string>
+  <string name="commons_github">Github 上的共享資源原始碼</string>
+  <string name="commons_logo">維基共享資源標誌</string>
+  <string name="commons_website">共享資源網站</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">正在上傳%1$d個檔案</item>
     <item quantity="other">正在上傳%1$d個檔案</item>
@@ -182,10 +186,6 @@
   <string name="become_a_tester_description">選擇加入我們在 Google Play 上的 beta 測試版本，以提早取用新功能及程式修正</string>
   <string name="_2fa_code">雙重驗證代碼</string>
   <string name="logout_verification">您確定要登出嗎？</string>
-  <string name="commons_logo">維基共享資源標誌</string>
-  <string name="commons_website">共享資源網站</string>
-  <string name="commons_facebook">維基共享資源臉書頁</string>
-  <string name="commons_github">Github 上的共享資源原始碼</string>
   <string name="mediaimage_failed">媒體圖片失敗</string>
   <string name="no_subcategory_found">找不到子分類</string>
   <string name="no_parentcategory_found">找不到母分類</string>

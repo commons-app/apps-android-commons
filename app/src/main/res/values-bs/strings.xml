@@ -7,6 +7,7 @@
 * Srđan
 -->
 <resources>
+  <string name="commons_logo">Logo Commonsa</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">postavlja se %1$d datoteka</item>
     <item quantity="other">postavlja se %1$d datoteka</item>
@@ -151,7 +152,6 @@
   <string name="become_a_tester_description">Prijavite se na naš beta-kanal na Google Playu i dobijte raniji pristup novim mogućnostima i ispravkama grešaka</string>
   <string name="_2fa_code">Kôd za provjeru u 2 koraka</string>
   <string name="logout_verification">Želite li se zaista odjaviti?</string>
-  <string name="commons_logo">Logo Commonsa</string>
   <string name="mediaimage_failed">Slika nije uspjela</string>
   <string name="welcome_image_mount_zao">Zao</string>
   <string name="welcome_image_llamas">Ljame</string>

@@ -64,52 +64,56 @@
         >
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_camera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tint="@color/button_blue"
-            android:visibility="gone"
-            app:backgroundTint="@color/main_background_light"
-            app:useCompatPadding="true"
-            app:elevation="@dimen/tiny_margin"
-            app:fabSize="mini"
-            app:srcCompat="@drawable/ic_photo_camera_white_24dp" />
+          android:id="@+id/fab_camera"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:contentDescription="@string/add_contribution_from_camera"
+          android:tint="@color/button_blue"
+          android:visibility="gone"
+          app:backgroundTint="@color/main_background_light"
+          app:elevation="@dimen/tiny_margin"
+          app:fabSize="mini"
+          app:srcCompat="@drawable/ic_photo_camera_white_24dp"
+          app:useCompatPadding="true" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_gallery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tint="@color/button_blue"
-            android:visibility="gone"
-            app:backgroundTint="@color/main_background_light"
-            app:useCompatPadding="true"
-            app:elevation="@dimen/tiny_margin"
-            app:fabSize="mini"
-            app:srcCompat="@drawable/ic_photo_white_24dp" />
+          android:id="@+id/fab_gallery"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:contentDescription="@string/add_contribution_from_photos"
+          android:tint="@color/button_blue"
+          android:visibility="gone"
+          app:backgroundTint="@color/main_background_light"
+          app:elevation="@dimen/tiny_margin"
+          app:fabSize="mini"
+          app:srcCompat="@drawable/ic_photo_white_24dp"
+          app:useCompatPadding="true" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_custom_gallery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tint="@color/button_blue"
-            android:visibility="gone"
-            app:backgroundTint="@color/main_background_light"
-            app:useCompatPadding="true"
-            app:elevation="@dimen/tiny_margin"
-            app:fabSize="mini"
-            app:srcCompat="@drawable/ic_custom_image_picker"
-            android:background="@drawable/commons"/>
+          android:id="@+id/fab_custom_gallery"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@drawable/commons"
+          android:contentDescription="@string/add_contribution_from_contributions_gallery"
+          android:tint="@color/button_blue"
+          android:visibility="gone"
+          app:backgroundTint="@color/main_background_light"
+          app:elevation="@dimen/tiny_margin"
+          app:fabSize="mini"
+          app:srcCompat="@drawable/ic_custom_image_picker"
+          app:useCompatPadding="true" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_plus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:visibility="visible"
-            app:backgroundTint="@color/status_bar_blue"
-            app:useCompatPadding="true"
-            app:elevation="@dimen/tiny_margin"
-            app:srcCompat="@drawable/ic_add_white_24dp" />
+          android:id="@+id/fab_plus"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:contentDescription="@string/add_new_contribution"
+          android:gravity="center_vertical"
+          android:visibility="visible"
+          app:backgroundTint="@color/status_bar_blue"
+          app:elevation="@dimen/tiny_margin"
+          app:srcCompat="@drawable/ic_add_white_24dp"
+          app:useCompatPadding="true" />
 
     </LinearLayout>
 

@@ -7,6 +7,7 @@
 * Kur
 -->
 <resources>
+  <string name="appwidget_img">Wêneya rojê</string>
   <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
@@ -122,7 +123,6 @@
   <string name="retry">Dîsa bicerribîne</string>
   <string name="block_notification_title">Astengkirî</string>
   <string name="block_notification">Te hatiye astengkirin ji guherandina Commonsê</string>
-  <string name="appwidget_img">Wêneya rojê</string>
   <string name="app_widget_heading">Wêneya rojê</string>
   <string name="menu_search_button">Lê bigere</string>
   <string name="search_commons">Li Commonsê bigere</string>

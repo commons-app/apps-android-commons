@@ -8,6 +8,10 @@
 * Sumbukompor
 -->
 <resources>
+  <string name="commons_facebook">Kaca Facebook Commons</string>
+  <string name="commons_github">Kodhe Sumber Github Commons</string>
+  <string name="commons_logo">Logo Commons</string>
+  <string name="commons_website">Situswèb Commons</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d barkas lagi kaunggah</item>
     <item quantity="other">%1$d barkas lagi kaunggah</item>
@@ -137,10 +141,6 @@
   <string name="become_a_tester_title">Dadi Pangetès Béta</string>
   <string name="_2fa_code">Kodhe 2FA</string>
   <string name="logout_verification">Panjenengan yakin arep metu log?</string>
-  <string name="commons_logo">Logo Commons</string>
-  <string name="commons_website">Situswèb Commons</string>
-  <string name="commons_facebook">Kaca Facebook Commons</string>
-  <string name="commons_github">Kodhe Sumber Github Commons</string>
   <string name="mediaimage_failed">Gambar Médhia Wurung</string>
   <string name="no_subcategory_found">Anak kategori ora tinemu</string>
   <string name="no_parentcategory_found">Kategori babon ora tinemu</string>

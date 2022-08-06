@@ -10,6 +10,27 @@
 * Yardom78
 -->
 <resources>
+  <string name="commons_facebook">Facebooková stránka Commons</string>
+  <string name="commons_github">Zdrojový kód Commons na Githube</string>
+  <string name="commons_logo">Logo Commons</string>
+  <string name="commons_website">Webová stránka Commons</string>
+  <string name="exit_location_picker">Odísť z výberu polohy</string>
+  <string name="submit">Odoslať</string>
+  <string name="add_another_description">Pridať ďalší popis</string>
+  <string name="add_new_contribution">Pridať nový príspevok</string>
+  <string name="add_contribution_from_camera">Pridať príspevok z kamery</string>
+  <string name="add_contribution_from_photos">Pridať príspevok z fotiek</string>
+  <string name="add_contribution_from_contributions_gallery">Pridať príspevok z galérie predchádzajúcich príspevkov</string>
+  <string name="show_captions">Titulky</string>
+  <string name="row_item_language_description">Popis jazyka</string>
+  <string name="row_item_caption">Titulok</string>
+  <string name="show_captions_description">Popis</string>
+  <string name="nearby_row_image">Obrázok</string>
+  <string name="nearby_all">Všetko</string>
+  <string name="nearby_filter_toggle">Prepnúť na vrch</string>
+  <string name="nearby_filter_search">Zobrazenie vyhľadávania</string>
+  <string name="nearby_filter_state">Štát miesta</string>
+  <string name="appwidget_img">Obrázok dňa</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">nahráva sa %1$d súbor</item>
     <item quantity="few">nahrávajú sa %1$d súbory</item>
@@ -209,10 +230,6 @@
   <string name="become_a_tester_description">Prihlásiť sa do nášho beta kanálu na Google Play a získavať včasný prístup k novinkám a opravám chýb</string>
   <string name="_2fa_code">Kód pre dvojfaktorové overenie (2FA)</string>
   <string name="logout_verification">Naozaj sa chcete odhlásiť?</string>
-  <string name="commons_logo">Logo Commons</string>
-  <string name="commons_website">Webová stránka Commons</string>
-  <string name="commons_facebook">Facebooková stránka Commons</string>
-  <string name="commons_github">Zdrojový kód Commons na Githube</string>
   <string name="mediaimage_failed">Obrázok zlyhal</string>
   <string name="no_subcategory_found">Neboli nájdené žiadne podkategórie</string>
   <string name="no_parentcategory_found">Neboli nájdené žiadne rodičovské kategórie</string>
@@ -299,7 +316,6 @@
   <string name="image_uploaded_by">Nahral/a: %1$s</string>
   <string name="block_notification_title">Blokované</string>
   <string name="block_notification">Máte zablovanú možnosť úpravy Wikimedie Commons.</string>
-  <string name="appwidget_img">Obrázok dňa</string>
   <string name="app_widget_heading">Obrázok dňa</string>
   <string name="menu_search_button">Hľadať</string>
   <string name="search_commons">Hľadať na Commons</string>
@@ -383,7 +399,6 @@
   <string name="step_count">Krok %1$d z %2$d</string>
   <string name="next">Ďalej</string>
   <string name="previous">Späť</string>
-  <string name="submit">Odoslať</string>
   <string name="upload_title_duplicate">Súbor s názvom %1$s už existuje. Naozaj chcete pokračovať?\nPoznámka: Do názvu bude automaticky pridaná vhodná prípona.</string>
   <string name="map_application_missing">Nebola nájdená žiadna kompatibilná aplikácia s mapami. Pre použitie tejto fukncie si, prosím, nainštalujte aplikáciu poskytujúcu mapy.</string>
   <string name="title_page_bookmarks_pictures">Obrázky</string>
@@ -640,7 +655,6 @@
   <string name="media_detail_in_all_languages">Pre všetky jazyky</string>
   <string name="choose_a_location">Vybrať polohu</string>
   <string name="pan_and_zoom_to_adjust">Posúvať a zväčšovať pre nastavenie</string>
-  <string name="exit_location_picker">Odísť z výberu polohy</string>
   <string name="select_location_location_picker">Vybrať lokalizáciu</string>
   <string name="show_in_map_app">Zobraziť na mape v aplikácii</string>
   <string name="modify_location">Upraviť polohu</string>

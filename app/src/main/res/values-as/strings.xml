@@ -6,6 +6,8 @@
 * Simbu123
 -->
 <resources>
+  <string name="submit">দাখিল কৰক</string>
+  <string name="appwidget_img">দিনটোৰ ছবিখন</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$dটা ফাইল আপল\'ড হৈছে</item>
     <item quantity="other">%1$dটা ফাইল আপল\'ড হৈছে</item>
@@ -115,7 +117,6 @@
   <string name="skip_login">বাদ দিয়ক</string>
   <string name="nearby_wikipedia">ৱিকিপিডিয়া</string>
   <string name="nearby_commons">ক\'ম\'ঞ্চ</string>
-  <string name="appwidget_img">দিনটোৰ ছবিখন</string>
   <string name="app_widget_heading">দিনটোৰ ছবিখন</string>
   <string name="search_commons">ক\'ম\'ঞ্চত সন্ধান কৰক</string>
   <string name="delete">বিলোপ কৰক</string>
@@ -123,7 +124,6 @@
   <string name="level">স্তৰ</string>
   <string name="error_occurred">ত্ৰুটি সংঘটিত হ\'ল!</string>
   <string name="notifications">জাননী</string>
-  <string name="submit">দাখিল কৰক</string>
   <string name="dialog_box_text_nomination">%1$s কিয় বিলোপ কৰা হ\'ব লাগে?</string>
   <string name="delete_helper_show_deletion_title_success">সফল</string>
   <string name="delete_helper_show_deletion_title_failed">বিফল হ\'ল</string>

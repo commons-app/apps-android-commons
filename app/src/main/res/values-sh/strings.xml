@@ -3,6 +3,10 @@
 * Vlad5250
 -->
 <resources>
+  <string name="commons_facebook">Ostava na Facebooku</string>
+  <string name="commons_github">Izvorni kôd Ostave na Githubu</string>
+  <string name="commons_logo">Logo Ostave</string>
+  <string name="commons_website">Ostava</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">Otprema se %1$d datoteka</item>
     <item quantity="other">Otpremaju se %1$d datoteke</item>
@@ -147,10 +151,6 @@
   <string name="become_a_tester_title">Postanite beta-tester</string>
   <string name="become_a_tester_description">Prijavite se na naš beta-kanal na Google Playu i dobijte raniji pristup novim mogućnostima i ispravkama grešaka</string>
   <string name="logout_verification">Zaista želite da se odjavite?</string>
-  <string name="commons_logo">Logo Ostave</string>
-  <string name="commons_website">Ostava</string>
-  <string name="commons_facebook">Ostava na Facebooku</string>
-  <string name="commons_github">Izvorni kôd Ostave na Githubu</string>
   <string name="mediaimage_failed">Slika nije uspjela</string>
   <string name="no_subcategory_found">Nisam pronašao potkategorije</string>
   <string name="no_parentcategory_found">Nisam pronašao nadređene kategorije</string>

@@ -12,6 +12,11 @@
 * Theklan
 -->
 <resources>
+  <string name="commons_facebook">Commons-en Facebook orria</string>
+  <string name="commons_logo">Commonsen logoa</string>
+  <string name="commons_website">Commons webgunea</string>
+  <string name="submit">Bidali</string>
+  <string name="appwidget_img">Eguneko argazkia</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Fitxategi %1$d kargatzen</item>
     <item quantity="other">%1$d fitxategi kargatzen</item>
@@ -174,9 +179,6 @@
   <string name="become_a_tester_title">Beta testatzaile bihurtu</string>
   <string name="_2fa_code">2FA Kodea</string>
   <string name="logout_verification">Benetan itxi nahi duzu saioa?</string>
-  <string name="commons_logo">Commonsen logoa</string>
-  <string name="commons_website">Commons webgunea</string>
-  <string name="commons_facebook">Commons-en Facebook orria</string>
   <string name="mediaimage_failed">Media irudiak kale egin du</string>
   <string name="no_subcategory_found">Ez da azpikategoriarik aurkitu</string>
   <string name="no_parentcategory_found">Ez da guraso kategoriarik aurkitu</string>
@@ -251,7 +253,6 @@
   <string name="image_uploaded_by">Nork igota: %1$s</string>
   <string name="block_notification_title">Blokeatua</string>
   <string name="block_notification">Commons aldatzeko blokeatuta zaude</string>
-  <string name="appwidget_img">Eguneko argazkia</string>
   <string name="app_widget_heading">Eguneko argazkia</string>
   <string name="menu_search_button">Bilatu</string>
   <string name="search_commons">Commons-en bilatu</string>
@@ -314,7 +315,6 @@
   <string name="storage_permission">Biltegiratze baimena</string>
   <string name="next">Hurrengoa</string>
   <string name="previous">Aurrekoa</string>
-  <string name="submit">Bidali</string>
   <string name="title_page_bookmarks_pictures">Argazkiak</string>
   <string name="title_page_bookmarks_locations">Kokapenak</string>
   <string name="provider_bookmarks">Lastermarkak</string>

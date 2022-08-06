@@ -4,6 +4,10 @@
 * Joao Xavier
 -->
 <resources>
+  <string name="commons_facebook">Pagino di Commons che Facebook</string>
+  <string name="commons_github">Fonto-kodexo di Commons che Github</string>
+  <string name="commons_logo">Logotipo* di Commons</string>
+  <string name="commons_website">ret-situo di Commons</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d sendanta arkivo</item>
     <item quantity="other">%1$d sendanta arkivi</item>
@@ -75,6 +79,7 @@
   <string name="display_list_button">Listar</string>
   <string name="contributions_subtitle_zero">(Nula arkivo sendita til nun)</string>
   <string name="categories_not_found">Nula kategorio trovita, portanta %1$s</string>
+  <string name="categories_activity_title">Kategorii</string>
   <string name="title_activity_settings">Preferaji</string>
   <string name="title_activity_signup">Enirez</string>
   <string name="title_activity_featured_images">Remarkinda imaji</string>
@@ -129,10 +134,6 @@
   <string name="become_a_tester_title">Divenez probero di \'\'Beta\'\'-versioni</string>
   <string name="_2fa_code">Kodexo 2FA</string>
   <string name="logout_verification">Ka vu deziras ekirar?</string>
-  <string name="commons_logo">Logotipo* di Commons</string>
-  <string name="commons_website">ret-situo di Commons</string>
-  <string name="commons_facebook">Pagino di Commons che Facebook</string>
-  <string name="commons_github">Fonto-kodexo di Commons che Github</string>
   <string name="mediaimage_failed">Faliis montrar imajo</string>
   <string name="no_subcategory_found">Nula subkategorio trovesis</string>
   <string name="no_parentcategory_found">Nula kategorio precipua trovesis</string>
