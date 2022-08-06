@@ -304,10 +304,11 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
      * onLongPress
      * @param imageUri : uri of image
      */
-    override fun onLongPress(position: Int, images: ArrayList<Image>) {
+    override fun onLongPress(position: Int, images: ArrayList<Image>, selectedImages: ArrayList<Image>) {
         val intent = Intent(this, ZoomableActivity::class.java)
         intent.putExtra("b", position);
         intent.putParcelableArrayListExtra("a", images)
+        intent.putParcelableArrayListExtra("c", selectedImages)
         startActivity(intent)
     }
 

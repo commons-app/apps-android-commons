@@ -7,9 +7,11 @@ import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.Group;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -22,6 +24,7 @@ import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.imagepipeline.image.ImageInfo;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.customselector.helper.ImageHelper;
 import fr.free.nrw.commons.customselector.helper.OnSwipeTouchListener;
 import fr.free.nrw.commons.customselector.model.Image;
 import fr.free.nrw.commons.media.zoomControllers.zoomable.DoubleTapGestureListener;
@@ -37,8 +40,11 @@ public class ZoomableActivity extends AppCompatActivity {
     ZoomableDraweeView photo;
     @BindView(R.id.zoom_progress_bar)
     ProgressBar spinner;
+    @BindView(R.id.selection_count)
+    TextView selectedCount;
 
     private ArrayList<Image> images;
+    private ArrayList<Image> selectedImages;
     private int position;
 
     @Override
@@ -47,6 +53,8 @@ public class ZoomableActivity extends AppCompatActivity {
 
         images = getIntent().getParcelableArrayListExtra(
             "a");
+        selectedImages = getIntent().getParcelableArrayListExtra(
+            "c");
         position = getIntent().getIntExtra("b", 0);
 
         imageUri = images.get(position).getUri();
@@ -57,7 +65,7 @@ public class ZoomableActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_zoomable);
         ButterKnife.bind(this);
-        init();
+        init(imageUri);
         onSwap();
     }
 
@@ -67,15 +75,40 @@ public class ZoomableActivity extends AppCompatActivity {
             public void onSwipeLeft() {
                 super.onSwipeLeft();
                 Toast.makeText(ZoomableActivity.this, "lefffffffttttt", Toast.LENGTH_SHORT).show();
-                DraweeController controller = getDraweeController(images.get(position++).getUri(), loadingListener);
-                photo.setController(controller);
+                if (position < images.size()-1) {
+                    position++;
+                    init(images.get(position).getUri());
+                    int selectedIndex = getIndex(selectedImages, images.get(position));
+                    boolean isSelected = (selectedIndex != -1);
+                    Log.d("haha", "selectedIndex: "+isSelected);
+                    if (isSelected) {
+                        itemSelected(selectedIndex + 1);
+                    } else {
+                        itemUnselected();
+                    }
+                } else {
+                    Toast.makeText(ZoomableActivity.this, "No more images found", Toast.LENGTH_SHORT).show();
+                }
+                Log.d("haha", "onSwipeLeft: "+position);
             }
             @Override
             public void onSwipeRight() {
                 super.onSwipeRight();
                 Toast.makeText(ZoomableActivity.this, "righhhhhhttttt", Toast.LENGTH_SHORT).show();
-                DraweeController controller = getDraweeController(images.get(position--).getUri(), loadingListener);
-                photo.setController(controller);
+                if(position > 0) {
+                    position--;
+                    init(images.get(position).getUri());
+                    int selectedIndex = getIndex(selectedImages, images.get(position));
+                    boolean isSelected = (selectedIndex != -1);
+                    if (isSelected) {
+                        itemSelected(selectedIndex + 1);
+                    } else {
+                        itemUnselected();
+                    }
+                } else {
+                    Toast.makeText(ZoomableActivity.this, "No more images found", Toast.LENGTH_SHORT).show();
+                }
+                Log.d("haha", "onSwipeRight: "+position);
             }
 
             @Override
@@ -90,6 +123,19 @@ public class ZoomableActivity extends AppCompatActivity {
                 Toast.makeText(ZoomableActivity.this, "Dowwwwwwnnnnn", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void itemUnselected() {
+        selectedCount.setVisibility(View.INVISIBLE);
+    }
+
+    private void itemSelected(int i) {
+        selectedCount.setVisibility(View.VISIBLE);
+        selectedCount.setText(i);
+    }
+
+    private int getIndex(ArrayList<Image> list, Image image) {
+        return list.indexOf(image);
     }
 
     /**
@@ -114,7 +160,7 @@ public class ZoomableActivity extends AppCompatActivity {
             spinner.setVisibility(View.GONE);
         }
     };
-    private void init() {
+    private void init(Uri imageUri) {
         if( imageUri != null ) {
             GenericDraweeHierarchy hierarchy = GenericDraweeHierarchyBuilder.newInstance(getResources())
                     .setActualImageScaleType(ScalingUtils.ScaleType.FIT_CENTER)
@@ -125,18 +171,12 @@ public class ZoomableActivity extends AppCompatActivity {
             photo.setAllowTouchInterceptionWhileZoomed(true);
             photo.setIsLongpressEnabled(false);
             photo.setTapListener(new DoubleTapGestureListener(photo));
-            DraweeController controller = getDraweeController(imageUri, loadingListener);
-            photo.setController(controller);
-        }
-    }
-
-    private DraweeController getDraweeController(Uri imageUri, ControllerListener loadingListener) {
-        DraweeController controller = Fresco.newDraweeControllerBuilder()
+            DraweeController controller = Fresco.newDraweeControllerBuilder()
                 .setUri(imageUri)
                 .setControllerListener(loadingListener)
                 .build();
-        return controller;
+            photo.setController(controller);
+        }
     }
-
 
 }
