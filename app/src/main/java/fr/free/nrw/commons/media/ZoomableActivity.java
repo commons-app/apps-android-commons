@@ -27,13 +27,27 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.customselector.helper.ImageHelper;
 import fr.free.nrw.commons.customselector.helper.OnSwipeTouchListener;
 import fr.free.nrw.commons.customselector.model.Image;
+import fr.free.nrw.commons.customselector.ui.selector.FullScreenModeClient;
 import fr.free.nrw.commons.media.zoomControllers.zoomable.DoubleTapGestureListener;
 import fr.free.nrw.commons.media.zoomControllers.zoomable.ZoomableDraweeView;
+import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.utils.CustomSelectorUtils;
+import io.reactivex.disposables.CompositeDisposable;
 import java.util.ArrayList;
+import javax.inject.Inject;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.CoroutineContext;
+import kotlin.jvm.functions.Function2;
+import kotlinx.coroutines.BuildersKt;
+import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.CoroutineStart;
+import kotlinx.coroutines.Dispatchers;
+import kotlinx.coroutines.GlobalScope;
 import timber.log.Timber;
 
 
-public class ZoomableActivity extends AppCompatActivity {
+public class ZoomableActivity extends BaseActivity {
     private Uri imageUri;
 
     @BindView(R.id.zoomable)
@@ -46,6 +60,9 @@ public class ZoomableActivity extends AppCompatActivity {
     private ArrayList<Image> images;
     private ArrayList<Image> selectedImages;
     private int position;
+
+    @Inject
+    FullScreenModeClient fullScreenModeClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,14 +95,14 @@ public class ZoomableActivity extends AppCompatActivity {
                 if (position < images.size()-1) {
                     position++;
                     init(images.get(position).getUri());
-                    int selectedIndex = getIndex(selectedImages, images.get(position));
-                    boolean isSelected = (selectedIndex != -1);
-                    Log.d("haha", "selectedIndex: "+isSelected);
-                    if (isSelected) {
-                        itemSelected(selectedIndex + 1);
-                    } else {
-                        itemUnselected();
-                    }
+//                    int selectedIndex = getIndex(selectedImages, images.get(position));
+//                    boolean isSelected = (selectedIndex != -1);
+//                    Log.d("haha", "selectedIndex: "+isSelected);
+//                    if (isSelected) {
+//                        itemSelected(selectedIndex + 1);
+//                    } else {
+//                        itemUnselected();
+//                    }
                 } else {
                     Toast.makeText(ZoomableActivity.this, "No more images found", Toast.LENGTH_SHORT).show();
                 }
@@ -98,13 +115,13 @@ public class ZoomableActivity extends AppCompatActivity {
                 if(position > 0) {
                     position--;
                     init(images.get(position).getUri());
-                    int selectedIndex = getIndex(selectedImages, images.get(position));
-                    boolean isSelected = (selectedIndex != -1);
-                    if (isSelected) {
-                        itemSelected(selectedIndex + 1);
-                    } else {
-                        itemUnselected();
-                    }
+//                    int selectedIndex = getIndex(selectedImages, images.get(position));
+//                    boolean isSelected = (selectedIndex != -1);
+//                    if (isSelected) {
+//                        itemSelected(selectedIndex + 1);
+//                    } else {
+//                        itemUnselected();
+//                    }
                 } else {
                     Toast.makeText(ZoomableActivity.this, "No more images found", Toast.LENGTH_SHORT).show();
                 }
@@ -115,12 +132,47 @@ public class ZoomableActivity extends AppCompatActivity {
             public void onSwipeUp() {
                 super.onSwipeUp();
                 Toast.makeText(ZoomableActivity.this, "Uuuuuupppppppp", Toast.LENGTH_SHORT).show();
+                selectedImages.add(images.get(position));
+//                fullScreenModeClient.aa(selectedImages);
             }
 
             @Override
             public void onSwipeDown() {
                 super.onSwipeDown();
                 Toast.makeText(ZoomableActivity.this, "Dowwwwwwnnnnn", Toast.LENGTH_SHORT).show();
+//                BuildersKt.launch(
+//                    GlobalScope.INSTANCE,
+//                    (CoroutineContext) Dispatchers.getMain(),//context to be ran on
+//                    CoroutineStart.DEFAULT,
+//                    new Function2<CoroutineScope, Continuation<? super Unit>, Object>() {
+//                        @Override
+//                        public Object invoke(CoroutineScope coroutineScope,
+//                            Continuation<? super Unit> continuation) {
+//                            Uri imageSHA1 = CustomSelectorUtils.Companion.getImageSHA1(
+//                                images.get(position).getUri(),
+//                                ,
+//                                fileUtilsWrapper,
+//                                contentResolver)
+//                            return null;
+//                        }
+//                    }
+//                );
+                fullScreenModeClient.insertInNFU(images.get(position));
+                if (position < images.size()-1) {
+                    position++;
+                    init(images.get(position).getUri());
+//                    int selectedIndex = getIndex(selectedImages, images.get(position));
+//                    boolean isSelected = (selectedIndex != -1);
+//                    Log.d("haha", "selectedIndex: "+isSelected);
+//                    if (isSelected) {
+//                        itemSelected(selectedIndex + 1);
+//                    } else {
+//                        itemUnselected();
+//                    }
+                } else {
+                    Toast.makeText(ZoomableActivity.this, "No more images found", Toast.LENGTH_SHORT).show();
+                }
+                Log.d("haha", "onSwipeDown: ");
             }
         });
     }
@@ -131,7 +183,7 @@ public class ZoomableActivity extends AppCompatActivity {
 
     private void itemSelected(int i) {
         selectedCount.setVisibility(View.VISIBLE);
-        selectedCount.setText(i);
+        selectedCount.setText(Integer.toString(i));
     }
 
     private int getIndex(ArrayList<Image> list, Image image) {
@@ -176,6 +228,13 @@ public class ZoomableActivity extends AppCompatActivity {
                 .setControllerListener(loadingListener)
                 .build();
             photo.setController(controller);
+            int selectedIndex = getIndex(selectedImages, images.get(position));
+            boolean isSelected = (selectedIndex != -1);
+            if (isSelected) {
+                itemSelected(selectedIndex + 1);
+            } else {
+                itemUnselected();
+            }
         }
     }
 

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.helper.ImageHelper
+import fr.free.nrw.commons.customselector.listeners.FragmentCommunicator
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.listeners.RefreshUIListener
 import fr.free.nrw.commons.customselector.model.CallbackStatus
@@ -32,7 +33,7 @@ import javax.inject.Inject
 /**
  * Custom Selector Image Fragment.
  */
-class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
+class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, FragmentCommunicator {
 
     /**
      * Current bucketId.
@@ -195,6 +196,7 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
      * notifyDataSetChanged, rebuild the holder views to account for deleted images.
      */
     override fun onResume() {
+        Log.d("haha", "onResume: ")
         imageAdapter.notifyDataSetChanged()
         super.onResume()
     }
@@ -228,5 +230,9 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
 
     override fun refresh() {
         imageAdapter.refresh(filteredImages)
+    }
+
+    override fun passData(selectedImages: ArrayList<Image>){
+        Log.d("haha", "passData: "+selectedImages.size)
     }
 }
