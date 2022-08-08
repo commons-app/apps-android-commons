@@ -18,6 +18,7 @@ import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
+import java.lang.reflect.Method
 
 /**
  * The unit test class for ContributionBoundaryCallbackTest
@@ -95,7 +96,11 @@ class ContributionBoundaryCallbackTest {
         whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(
             Single.just(listOf(media()))
         )
-        contributionBoundaryCallback.fetchContributions()
+        val method: Method = ContributionBoundaryCallback::class.java.getDeclaredMethod(
+            "fetchContributions"
+        )
+        method.isAccessible = true
+        method.invoke(contributionBoundaryCallback)
         verify(repository).save(anyList());
         verify(mediaClient).getMediaListForUser(anyString());
     }
@@ -104,7 +109,11 @@ class ContributionBoundaryCallbackTest {
     fun testFetchContributionsFailed() {
         whenever(sessionManager.userName).thenReturn("Test")
         whenever(mediaClient.getMediaListForUser(anyString())).thenReturn(Single.error(Exception("Error")))
-        contributionBoundaryCallback.fetchContributions()
+        val method: Method = ContributionBoundaryCallback::class.java.getDeclaredMethod(
+            "fetchContributions"
+        )
+        method.isAccessible = true
+        method.invoke(contributionBoundaryCallback)
         verifyZeroInteractions(repository);
         verify(mediaClient).getMediaListForUser(anyString());
     }

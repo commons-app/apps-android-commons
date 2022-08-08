@@ -661,7 +661,7 @@ public class ContributionsFragment
     }
 
     public boolean backButtonClicked() {
-        if (null != mediaDetailPagerFragment && mediaDetailPagerFragment.isVisible()) {
+        if (mediaDetailPagerFragment != null && mediaDetailPagerFragment.isVisible()) {
             if (store.getBoolean("displayNearbyCardView", true) && !isUserProfile) {
                 if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
                     nearbyNotificationCardView.setVisibility(View.VISIBLE);
@@ -678,9 +678,10 @@ public class ContributionsFragment
             }else {
                 fetchCampaigns();
             }
-            if(getActivity() instanceof MainActivity) {
+            if (getActivity() instanceof MainActivity) {
                 // Fragment is associated with MainActivity
-                ((MainActivity)getActivity()).showTabs();
+                ((BaseActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                ((MainActivity) getActivity()).showTabs();
             }
             return true;
         }

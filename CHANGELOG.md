@@ -1,5 +1,24 @@
 # Wikimedia Commons for Android
 
+## v4.0.3
+- Added "Report" button for Google UGC policy
+
+## v4.0.2
+- Fixed bug with wrong dates taken from EXIF
+- Fixed various crashes
+
+## v4.0.1
+- Fixed bug with no browser found
+- Updated Mapbox SDK to fix hamburger crash
+
+## v4.0.0
+- Added map showing nearby Commons pictures
+- Added custom SPARQL queries
+- Added user profiles
+- Added custom picture selector
+- Various bugfixes
+- Updated target SDK to 30
+
 ## v3.1.1
 - Optimized Nearby query
 - Added Sweden's property for WLM 2021

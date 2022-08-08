@@ -185,23 +185,17 @@ public class RecentLanguagesDao {
             if (from == to) {
                 return;
             }
-            if (from < 6) {
+            if (from < 19) {
                 // doesn't exist yet
                 from++;
                 onUpdate(db, from, to);
                 return;
             }
-            if (from == 6) {
-                // table added in version 7
+            if (from == 19) {
+                // table added in version 20
                 onCreate(db);
                 from++;
                 onUpdate(db, from, to);
-                return;
-            }
-            if (from == 7) {
-                from++;
-                onUpdate(db, from, to);
-                return;
             }
         }
     }

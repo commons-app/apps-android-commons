@@ -155,7 +155,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
         addCredits();
         getToolbarUI();
 
-        if (activity.equals("UploadActivity")) {
+        if ("UploadActivity".equals(activity)) {
             placeSelectedButton.setVisibility(View.GONE);
             modifyLocationButton.setVisibility(View.VISIBLE);
             showInMapButton.setVisibility(View.VISIBLE);

@@ -12,6 +12,8 @@ import androidx.exifinterface.media.ExifInterface;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import fr.free.nrw.commons.upload.FileUtils;
@@ -124,12 +126,29 @@ public class UploadableFile implements Parcelable {
     private DateTimeWithSource getDateTimeFromExif() {
         try {
             ExifInterface exif = new ExifInterface(file.getAbsolutePath());
-            @SuppressLint("RestrictedApi") Long dateTime = exif.getDateTime();
-            if(dateTime != null){
-                Date date = new Date(dateTime);
-                return new DateTimeWithSource(date, DateTimeWithSource.EXIF_SOURCE);
+            // TAG_DATETIME returns the last edited date, we need TAG_DATETIME_ORIGINAL for creation date
+            // See issue https://github.com/commons-app/apps-android-commons/issues/1971
+            String dateTimeSubString = exif.getAttribute(ExifInterface.TAG_DATETIME_ORIGINAL);
+            if (dateTimeSubString!=null) { //getAttribute may return null
+                String year = dateTimeSubString.substring(0,4);
+                String month = dateTimeSubString.substring(5,7);
+                String day = dateTimeSubString.substring(8,10);
+                // This date is stored as a string (not as a date), the rason is we don't want to include timezones
+                String dateCreatedString = String.format("%04d-%02d-%02d", Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
+                if (dateCreatedString.length() == 10) { //yyyy-MM-dd format of date is expected
+                    @SuppressLint("RestrictedApi") Long dateTime = exif.getDateTimeOriginal();
+                    if(dateTime != null){
+                        Date date = new Date(dateTime);
+                        return new DateTimeWithSource(date, dateCreatedString, DateTimeWithSource.EXIF_SOURCE);
+                    }
+                }
             }
+
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();
         }
         return null;
@@ -149,6 +168,7 @@ public class UploadableFile implements Parcelable {
         public static final String EXIF_SOURCE = "exif";
 
         private final long epochDate;
+        private String dateString; // this does not includes timezone information
         private final String source;
 
         public DateTimeWithSource(long epochDate, String source) {
@@ -161,8 +181,18 @@ public class UploadableFile implements Parcelable {
             this.source = source;
         }
 
+        public DateTimeWithSource(Date date, String dateString, String source) {
+            this.epochDate = date.getTime();
+            this.dateString = dateString;
+            this.source = source;
+        }
+
         public long getEpochDate() {
             return epochDate;
+        }
+
+        public String getDateString() {
+            return dateString;
         }
 
         public String getSource() {

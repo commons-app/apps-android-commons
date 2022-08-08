@@ -309,20 +309,16 @@ public class BookmarkItemsDao {
             if (from == to) {
                 return;
             }
-            if (from < 7) {
+            if (from < 18) {
+                // doesn't exist yet
                 from++;
                 onUpdate(db, from, to);
                 return;
             }
 
-            if (from == 7) {
+            if (from == 18) {
+                // table added in version 19
                 onCreate(db);
-                from++;
-                onUpdate(db, from, to);
-                return;
-            }
-
-            if (from == 8) {
                 from++;
                 onUpdate(db, from, to);
             }
