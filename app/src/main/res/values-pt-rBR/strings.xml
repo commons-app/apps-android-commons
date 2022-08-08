@@ -2,6 +2,7 @@
 <!-- Authors:
 * Anaclaudiaml
 * Caio1478
+* Duke of Wikipädia
 * Eduardo Addad de Oliveira
 * Eduardoaddad
 * Fitoschido
@@ -26,6 +27,19 @@
   <string name="commons_website">Site do Commons</string>
   <string name="exit_location_picker">Sair do selecionador de localização</string>
   <string name="submit">Enviar</string>
+  <string name="add_another_description">Adicionar outra descrição</string>
+  <string name="add_new_contribution">Adicionar nova contribuição</string>
+  <string name="add_contribution_from_camera">Adicionar contribuição da câmera</string>
+  <string name="add_contribution_from_photos">Adicionar contribuição de Fotos</string>
+  <string name="add_contribution_from_contributions_gallery">Adicionar contribuição da galeria de contribuições anteriores</string>
+  <string name="show_captions">Legenda</string>
+  <string name="row_item_language_description">Descrição do idioma</string>
+  <string name="row_item_caption">Legenda</string>
+  <string name="show_captions_description">Descrição</string>
+  <string name="nearby_row_image">Imagem</string>
+  <string name="nearby_all">Tudo</string>
+  <string name="nearby_filter_toggle">Alternar para cima</string>
+  <string name="nearby_filter_state">Estado do local</string>
   <string name="appwidget_img">Imagem do Dia</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">carregando arquivo</item>
@@ -73,6 +87,8 @@
   <string name="signup">Cadastre-se</string>
   <string name="logging_in_title">Efetuar login</string>
   <string name="logging_in_message">Aguarde…</string>
+  <string name="updating_caption_title">Atualizando legendas e descrições</string>
+  <string name="updating_caption_message">Por favor, aguarde...</string>
   <string name="login_success">Login bem sucedido</string>
   <string name="login_failed">Falha na identificação</string>
   <string name="upload_failed">Arquivo não encontrado. Tente outro arquivo.</string>
@@ -84,7 +100,7 @@
   <string name="upload_progress_notification_title_start">Carregando arquivo: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s enviando!</string>
   <string name="upload_progress_notification_title_finishing">Terminando o envio de %1$s</string>
-  <string name="upload_failed_notification_title" fuzzy="true">Envio de %1$s falhou</string>
+  <string name="upload_failed_notification_title">Falha ao enviar %1$s</string>
   <string name="upload_paused_notification_title">Envio de %1$s em pausa</string>
   <string name="upload_failed_notification_subtitle">Toque para ver</string>
   <string name="upload_paused_notification_subtitle">Toque para ver</string>
@@ -275,6 +291,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Avalie-nos</string>
   <string name="about_faq">Perguntas frequentes</string>
+  <string name="user_guide">Guia de usuario</string>
   <string name="welcome_skip_button">Pular tutoril</string>
   <string name="no_internet">A Internet não está disponível</string>
   <string name="error_notifications">Erro ao tentar obter as notificações</string>
@@ -301,6 +318,7 @@
   <string name="title_activity_search">Pesquisar</string>
   <string name="search_recent_header">Pesquisas recentes:</string>
   <string name="provider_searches">Consultas recentemente pesquisadas</string>
+  <string name="provider_recent_languages">Consultas de idioma recentes</string>
   <string name="error_loading_categories">Ocorreu um erro ao carregar categorias.</string>
   <string name="error_loading_depictions">Ocorreu um erro ao carregar as representações.</string>
   <string name="search_tab_title_media">Mídia</string>
@@ -334,9 +352,11 @@
   <string name="quiz_screenshot_question">Esta captura de tela pode ser carregada?</string>
   <string name="share_app_title">Compartilhar o aplicativo</string>
   <string name="error_fetching_nearby_places">Erro ao buscar lugares próximos.</string>
+  <string name="no_nearby_places_around">Não há lugares próximos</string>
   <string name="error_fetching_nearby_monuments">Erro ao buscar monumentos próximos.</string>
   <string name="no_recent_searches">Nenhuma pesquisa recente</string>
   <string name="delete_recent_searches_dialog">Tem certeza de que deseja apagar o histórico de pesquisa?</string>
+  <string name="cancel_upload_dialog">Você tem certeza que deseja cancelar este carregamento?</string>
   <string name="delete_search_dialog">Deseja eliminar esta pesquisa?</string>
   <string name="search_history_deleted">Histórico de pesquisa excluído</string>
   <string name="nominate_delete">Nomear para exclusão</string>
@@ -443,7 +463,7 @@
   <string name="review_thanks_yes_button_text">Próxima imagem</string>
   <string name="review_thanks_no_button_text">Sim, porque não</string>
   <string name="skip_image_explanation">Clicando neste botão você terá uma outra imagem carregada recentemente do Wikimedia Commons</string>
-  <string name="review_image_explanation" fuzzy="true">Você pode rever imagens e melhorar a qualidade dos Wikimedia Commons.\n Os quatro parâmetros de revisão são:\n- Esta imagem está no escopo?\n- Esta imagem segue as regras de direitos autorais?\n- Esta imagem está categorizada corretamente?\n- Se tudo correr bem, você também pode agradecer ao colaborador.</string>
+  <string name="review_image_explanation">Você pode rever imagens e melhorar a qualidade dos Wikimedia Commons.\n Os quatro parâmetros de revisão são:\n- Esta imagem está dentro do escopo?\nAo tocar em Não (fora do escopo), você está adicionando uma predefinição de nomeação de exclusão a esta imagem.\n- Esta imagem segue as regras de direitos autorais?\nAo tocar em Não (não segue as regras de direitos autorais), você está adicionando uma predefinição de indicação de exclusão a esta imagem.\n- Esta imagem está categorizada corretamente?\nAo tocar em Não (não categorizado corretamente), você está adicionando uma predefinição de solicitação de categorização a esta imagem.\n- Se tudo correr bem, você também pode agradecer ao colaborador.</string>
   <string name="no_image">Nenhuma imagem usada</string>
   <string name="no_image_reverted">Nenhuma imagem revertida</string>
   <string name="no_image_uploaded">Nenhuma imagem enviada</string>
@@ -503,14 +523,30 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Não foi possível adicionar categorias.</string>
   <string name="category_edit_button_text">Atualizar categorias</string>
+  <string name="depictions_edit_helper_make_edit_toast">Tentando atualizar as representações.</string>
+  <string name="depictions_edit_helper_show_edit_title">Editar representações</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">O elemento retratado %1$s está adicionado.</item>
+    <item quantity="other">Os elementos retratados %1$s estão adicionados.</item>
+  </plurals>
+  <string name="depictions_edit_helper_edit_message_else">Não foi possível adicionar os elementos retratados.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Tentando atualizar as coordenadas.</string>
   <string name="coordinates_edit_helper_show_edit_title">Atualização de coordenadas</string>
+  <string name="description_edit_helper_show_edit_title">Atualização da descrição</string>
+  <string name="caption_edit_helper_show_edit_title">Atualização da legenda</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Sucesso</string>
   <string name="coordinates_edit_helper_show_edit_message">Coordenadas %1$s adicionadas.</string>
+  <string name="description_edit_helper_show_edit_message">As descrições foram adicionadas.</string>
+  <string name="caption_edit_helper_show_edit_message">A legenda foi adicionada.</string>
   <string name="coordinates_edit_helper_edit_message_else">Não foi possível adicionar coordenadas.</string>
+  <string name="description_edit_helper_edit_message_else">Não foi possível adicionar as descrições.</string>
+  <string name="caption_edit_helper_edit_message_else">Não foi possível adicionar a legenda.</string>
   <string name="coordinates_picking_unsuccessful">Incapaz de obter coordenadas.</string>
+  <string name="descriptions_picking_unsuccessful">Não foi possível obter as descrições.</string>
+  <string name="description_activity_title">Editar descrições e legendas</string>
   <string name="share_image_via">Compartilhar imagem via</string>
-  <string name="no_achievements_yet" fuzzy="true">Você ainda não fez nenhuma contribuição</string>
+  <string name="you_have_no_achievements_yet">Ainda não fez nenhuma contribuição</string>
+  <string name="no_achievements_yet">%s ainda não fez nenhuma contribuição</string>
   <string name="account_created">Conta criada!</string>
   <string name="text_copy">Texto copiado para a área de transferência</string>
   <string name="notification_mark_read">Notificação marcada como lida</string>
@@ -562,6 +598,7 @@
   <string name="resume">continuar</string>
   <string name="paused">Pausado</string>
   <string name="more">Mais</string>
+  <string name="bookmarks">Favoritos</string>
   <string name="achievements_tab_title">Conquistas</string>
   <string name="leaderboard_tab_title">Tabela de classificação</string>
   <string name="rank_prefix">Classificação:</string>
@@ -591,6 +628,8 @@
   <string name="quality_images_info">Imagens de qualidade são diagramas ou fotografias que atendem a certos padrões de qualidade (que são principalmente de natureza técnica) e são valiosos para projetos da Wikimedia</string>
   <string name="resuming_upload">Retomando carregamento…</string>
   <string name="pausing_upload">Pausando carregamento…</string>
+  <string name="cancelling_upload">Cancelando o envio…</string>
+  <string name="cancel_upload">Cancelar Envio</string>
   <string name="limited_connection_explanation">Você habilitou o modo de conexão limitada. Todos os carregamentos são pausados e serão retomados assim que você desativar este modo.</string>
   <string name="limited_connection_is_on">O modo de conexão limitada está ativado.</string>
   <string name="media_details_tooltip">Escreva uma pequena legenda que diga o que sua imagem mostra. Na descrição, diga o que torna a imagem interessante ou típica ou rara e explique o contexto, visível ou não. Use a terminologia exata tanto quanto você puder.</string>
@@ -607,17 +646,23 @@
   <string name="read_help_link">Leia mais</string>
   <string name="media_detail_in_all_languages">Em todas os idiomas</string>
   <string name="choose_a_location">Escolha uma localização</string>
+  <string name="pan_and_zoom_to_adjust">Fazer uma panorâmica e aproximar para ajustar</string>
   <string name="select_location_location_picker">Selecionar localização</string>
   <string name="show_in_map_app">Mostrar no aplicativo de mapa</string>
   <string name="modify_location">Editar localização</string>
+  <string name="location_picker_image_view">A visualização da imagem do seletor de local</string>
+  <string name="location_picker_image_view_shadow">A sombra da visualização da imagem do seletor de local</string>
   <string name="image_location">Localização da imagem</string>
   <string name="check_whether_location_is_correct">Verifique se a localização está correta</string>
+  <string name="label">Etiqueta</string>
+  <string name="description">Descrição</string>
+  <string name="title_page_bookmarks_items">Itens</string>
   <string name="custom_selector_title">Seletor personalizado</string>
   <string name="custom_selector_empty_text">Sem imagens</string>
   <string name="done">Feito</string>
   <string name="back">Voltar</string>
   <string name="welcome_custom_picture_selector_text">Boas-vindas ao seletor de imagens personalizado</string>
-  <string name="custom_selector_info_text1">Este seletor mostra de forma diferente imagens que já estão na wiki Commons.</string>
+  <string name="custom_selector_info_text1" fuzzy="true">Este seletor mostra de forma diferente imagens que já estão na wiki Commons.</string>
   <string name="custom_selector_info_text2">Diferente da imagem à esquerda, a da direita possui o logotipo do Commons, o que indica que o envio dela já está concluído.\n Toque e segure para pré-visualizar a imagem.</string>
   <string name="welcome_custom_selector_ok">Ótimo</string>
   <string name="custom_selector_already_uploaded_image_text">Esta imagem já foi enviada para Commons.</string>
@@ -626,10 +671,35 @@
   <string name="wlm_month_message">Estamos no mês no Wiki Loves Monuments!</string>
   <string name="learn_more">SABER MAIS</string>
   <string name="wlm_campaign_description">O Wiki Loves Monuments é um concurso internacional organizado pela Wikimedia sobre fotografias de monumentos</string>
+  <string name="need_permission">Precisa de permissão</string>
+  <string name="read_phone_state_permission_message">Os mapas próximos precisam ler ESTADO DO TELEFONE para funcionar corretamente</string>
+  <string name="contributions_of_user">Contribuições do usuário: %s</string>
+  <string name="achievements_of_user">Conquistas do usuário: %s</string>
+  <string name="menu_view_user_page">Ver página de usuário</string>
+  <string name="edit_depictions">Editar representações</string>
+  <string name="edit_categories">Editar categorias</string>
+  <string name="advanced_options">Opções avançadas</string>
+  <string name="advanced_query_info_text">Pode personalizar a consulta de locais próximos. Se você receber erros, redefina e aplique.</string>
+  <string name="apply">Aplicar</string>
+  <string name="reset">Redefinir</string>
+  <string name="location_message">Os dados de localização ajudam os utilizadores da wiki a encontrar a sua imagem, tornando-a muito mais útil.\nOs seus carregamentos recentes não têm localização.\nSugerimos que você ative a localização nas configurações do aplicativo da câmera.\nObrigado pelo carregamento!</string>
+  <string name="no_location_found_title">Não foi encontrada nenhuma localização</string>
+  <string name="no_location_found_message">Que tal adicionar o local onde a imagem foi tirada?\nOs dados de localização ajudam os editores da wiki a encontrarem a sua fotografia, tornando-a muito mais útil.\nObrigado!</string>
+  <string name="add_location">Adicionar local</string>
+  <string name="feedback_sharing_data_alert">Remova deste e-mail qualquer informação que você não se sinta à vontade para compartilhar publicamente. Além disso, esteja ciente de que seu endereço de e-mail com o qual você está postando e o nome associado e a foto do perfil serão visíveis publicamente.</string>
   <string name="explore_map_details">Detalhes</string>
+  <string name="achievements_unavailable_beta">As conquistas estão disponíveis apenas na versão de produção, verifique a documentação do desenvolvedor.</string>
+  <string name="leaderboard_unavailable_beta">A tabela de classificação só está disponível na versão de produção; consulte a documentação para programadores, por favor.</string>
+  <string name="copyright_popup">Por favor, envie apenas fotos tiradas por você mesmo. Os usuários que enviarem imagens protegidas por direitos autorais serão bloqueados. Isso se aplica à versão beta também. Obrigado por testar o aplicativo!</string>
+  <string name="select_feedback_data_choice">Desmarque qualquer informação que você não se sinta à vontade para compartilhar publicamente.</string>
   <string name="api_level">Nível da API</string>
   <string name="android_version">Versão do Android</string>
   <string name="device_manufacturer">Fabricante do aparelho</string>
   <string name="device_model">Modelo do aparelho</string>
   <string name="device_name">Nome do aparelho</string>
+  <string name="network_type">Tipo de rede</string>
+  <string name="thanks_feedback">Obrigado por dar a sua opinião</string>
+  <string name="error_feedback">Falha ao enviar opinião</string>
+  <string name="enter_description">Qual é a sua opinião?</string>
+  <string name="your_feedback">A sua opinião</string>
 </resources>

@@ -650,7 +650,7 @@
   <string name="done">Hecho</string>
   <string name="back">Atrás</string>
   <string name="welcome_custom_picture_selector_text">Bienvenido al Selector de Imagen Personalizado</string>
-  <string name="custom_selector_info_text1">Este selector muestra de manera diferente imágenes que ya están en Commons.</string>
+  <string name="custom_selector_info_text1" fuzzy="true">Este selector muestra de manera diferente imágenes que ya están en Commons.</string>
   <string name="custom_selector_info_text2">A diferencia de la imagen de la izquierda, la imagen de la derecha tiene el logo de Commons que indica que ha sido cargado. \nPara previsualizar la imagen toca y mantén</string>
   <string name="welcome_custom_selector_ok">Magnífico</string>
   <string name="custom_selector_already_uploaded_image_text">Esta imagen ya se ha subido a Commons.</string>

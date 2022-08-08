@@ -670,7 +670,7 @@
   <string name="done">Hotovo</string>
   <string name="back">Späť</string>
   <string name="welcome_custom_picture_selector_text">Vitajte vo vlastnom výbere obrázkov</string>
-  <string name="custom_selector_info_text1">Tento výber zobrazuje iné obrázky, ktoré už sú na Commons.</string>
+  <string name="custom_selector_info_text1" fuzzy="true">Tento výber zobrazuje iné obrázky, ktoré už sú na Commons.</string>
   <string name="custom_selector_info_text2">Na rozdiel od obrázka v ľavo, obrázkov v pravo má logo Commons, ktoré indikuje, že už je nahraný. Podržte kurzor nad obrázkom pre náhľad.</string>
   <string name="welcome_custom_selector_ok">Úžasné</string>
   <string name="custom_selector_already_uploaded_image_text">Tento obrázok už bol do Commons nahraný.</string>

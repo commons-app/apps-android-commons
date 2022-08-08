@@ -646,7 +646,7 @@
   <string name="done">Concluído</string>
   <string name="back">Voltar</string>
   <string name="welcome_custom_picture_selector_text">Bem-vindo ao seletor de imagens personalizado</string>
-  <string name="custom_selector_info_text1">Este seletor mostra de forma diferente imagens que já estão na wiki Commons.</string>
+  <string name="custom_selector_info_text1" fuzzy="true">Este seletor mostra de forma diferente imagens que já estão na wiki Commons.</string>
   <string name="custom_selector_info_text2">Ao contrário da imagem à esquerda, a imagem à direita tem o logótipo da wiki Commons que indica que ela já foi carregada.\n Tocar e manter para uma antevisão da imagem.</string>
   <string name="welcome_custom_selector_ok">Excecional</string>
   <string name="custom_selector_already_uploaded_image_text">Esta imagem já foi carregada na wiki Commons.</string>

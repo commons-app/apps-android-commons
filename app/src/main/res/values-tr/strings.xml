@@ -33,6 +33,17 @@
   <string name="commons_website">Commons Websitesi</string>
   <string name="exit_location_picker">Konum seçiciden çık</string>
   <string name="submit">Gönder</string>
+  <string name="add_another_description">Başka bir açıklama ekle</string>
+  <string name="add_new_contribution">Yeni katkıda bulun</string>
+  <string name="add_contribution_from_camera">Kamera ile katkıda bulun</string>
+  <string name="add_contribution_from_photos">Fotoğraflar ile katkıda bulun</string>
+  <string name="add_contribution_from_contributions_gallery">Önceki katkılar galerisi ile katkıda bulun</string>
+  <string name="show_captions">Altyazı</string>
+  <string name="row_item_language_description">Dil Açıklaması</string>
+  <string name="row_item_caption">Altyazı</string>
+  <string name="show_captions_description">Açıklama</string>
+  <string name="nearby_row_image">Resim</string>
+  <string name="nearby_all">Hepsi</string>
   <string name="appwidget_img">Günün Resmi</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d dosya yükleniyor</item>
@@ -284,6 +295,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Bizi oyla</string>
   <string name="about_faq">SSS</string>
+  <string name="user_guide">Kullanıcı Rehberi</string>
   <string name="welcome_skip_button">Eğiticiyi Atla</string>
   <string name="no_internet">İnternet kullanılamıyor</string>
   <string name="error_notifications">Bildirim alınırken hata oluştu</string>
@@ -318,6 +330,7 @@
   <string name="search_tab_title_depictions">Ögeler</string>
   <string name="explore_tab_title_featured">Seçkin</string>
   <string name="explore_tab_title_mobile">Mobil yoluyla yüklendi</string>
+  <string name="explore_tab_title_map">Harita</string>
   <string name="successful_wikidata_edit">Resim, Vikiveri\'de %1$s ögesine eklendi!</string>
   <string name="wikidata_edit_failure">Karşılık gelen Vikiveri varlığı güncellenemedi!</string>
   <string name="menu_set_wallpaper">Duvar kağıdı olarak ayarla</string>
@@ -514,6 +527,13 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Kategoriler eklenemedi.</string>
   <string name="category_edit_button_text">Kategorileri güncelle</string>
+  <string name="depictions_edit_helper_make_edit_toast">Betimlemeler güncellenmeye çalışılıyor</string>
+  <string name="depictions_edit_helper_show_edit_title">Betimlemeleri düzenle</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">%1$s betimleme eklendi.</item>
+    <item quantity="other">%1$s betimleme eklendi.</item>
+  </plurals>
+  <string name="depictions_edit_helper_edit_message_else">Betimleme eklenemedi.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Koordinatlar güncellenmeye çalışılıyor.</string>
   <string name="coordinates_edit_helper_show_edit_title">Koordinat güncellemesi</string>
   <string name="description_edit_helper_show_edit_title">Açıklama güncellemesi</string>
@@ -646,7 +666,7 @@
   <string name="done">Yapıldı</string>
   <string name="back">Geri</string>
   <string name="welcome_custom_picture_selector_text">Özel Resim Seçici\'ye Hoş Geldiniz</string>
-  <string name="custom_selector_info_text1">Bu seçici, halihazırda Commons\'ta bulunan farklı resimleri gösterir.</string>
+  <string name="custom_selector_info_text1" fuzzy="true">Bu seçici, halihazırda Commons\'ta bulunan farklı resimleri gösterir.</string>
   <string name="custom_selector_info_text2">Soldaki resimden farklı olarak, sağdaki resimde zaten yüklendiğini belirten Commons logosu var.\n Resim ön izlemesi için dokunup basılı tutun.</string>
   <string name="welcome_custom_selector_ok">Harika</string>
   <string name="custom_selector_already_uploaded_image_text">Bu resim zaten Commons\'a yüklendi.</string>
@@ -660,6 +680,8 @@
   <string name="contributions_of_user">Kullanıcının katkıları: %s</string>
   <string name="achievements_of_user">Kullanıcının başarıları: %s</string>
   <string name="menu_view_user_page">Kullanıcı sayfasını görüntüle</string>
+  <string name="edit_depictions">Betimlemeleri düzenle</string>
+  <string name="edit_categories">Kategorileri düzenle</string>
   <string name="advanced_options">Gelişmiş Seçenekler</string>
   <string name="advanced_query_info_text">Yakınlardakiler sorgusunu özelleştirebilirsiniz. Hata alırsanız, sıfırlayın ve uygulayın.</string>
   <string name="apply">Uygula</string>
@@ -669,4 +691,17 @@
   <string name="no_location_found_message">Bu görüntünün çekildiği yeri eklemeye ne dersiniz?\nKonum verileri, Wiki düzenleyicilerinin resminizi bulmasına yardımcı olarak onu çok daha kullanışlı hale getirir.\nTeşekkürler!</string>
   <string name="add_location">Konum ekle</string>
   <string name="feedback_sharing_data_alert">Lütfen herkese açık olarak paylaşmaktan çekindiğiniz tüm bilgileri bu e-postadan kaldırın. Ayrıca gönderi paylaştığınız e-posta adresinizin ve ilgili ad ve profil resminizin herkese açık olarak görüneceğini lütfen unutmayın.</string>
+  <string name="explore_map_details">Ayrıntılar</string>
+  <string name="copyright_popup">Lütfen sadece kendi çektiğiniz fotoğrafları yükleyin. Telif hakkıyla korunan resimleri yükleyenler engellenecektir. Bu beta için de geçerlidir. Uygulamayı test ettiğiniz için teşekkür ederiz!</string>
+  <string name="select_feedback_data_choice">Lütfen herkese açık olarak paylaşmaktan çekindiğiniz bilgilerin seçimini kaldırın.</string>
+  <string name="api_level">API seviyesi</string>
+  <string name="android_version">Android sürümü</string>
+  <string name="device_manufacturer">Cihaz üreticisi</string>
+  <string name="device_model">Cihaz modeli</string>
+  <string name="device_name">Cihaz adı</string>
+  <string name="network_type">Ağ tipi</string>
+  <string name="thanks_feedback">Geri bildirimde bulunduğunuz için teşekkürler</string>
+  <string name="error_feedback">Geri bildirim gönderilirken hata oluştu</string>
+  <string name="enter_description">Geri bildiriminiz nedir?</string>
+  <string name="your_feedback">Geri bildiriminiz</string>
 </resources>

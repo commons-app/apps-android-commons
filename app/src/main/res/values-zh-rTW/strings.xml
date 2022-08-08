@@ -665,7 +665,7 @@
   <string name="done">完成</string>
   <string name="back">返回</string>
   <string name="welcome_custom_picture_selector_text">歡迎來到自訂圖片選擇器</string>
-  <string name="custom_selector_info_text1">此點選器顯示已在維基共享資源上的各種不同圖片。</string>
+  <string name="custom_selector_info_text1" fuzzy="true">此點選器顯示已在維基共享資源上的各種不同圖片。</string>
   <string name="custom_selector_info_text2">右邊的圖片與與左邊圖片不同，它有代表已經上傳到維基共享資源的標誌。\n請輕壓圖片來預覽。</string>
   <string name="welcome_custom_selector_ok">棒極了</string>
   <string name="custom_selector_already_uploaded_image_text">此圖片已上傳到維基共享資源。</string>

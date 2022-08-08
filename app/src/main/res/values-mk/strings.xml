@@ -647,7 +647,7 @@
   <string name="done">Готово</string>
   <string name="back">Назад</string>
   <string name="welcome_custom_picture_selector_text">Добре дојдовте на Прилагодениот избирач</string>
-  <string name="custom_selector_info_text1">Овој избирач ги покажува поинаку сликите кои веќе се на Ризницата.</string>
+  <string name="custom_selector_info_text1" fuzzy="true">Овој избирач ги покажува поинаку сликите кои веќе се на Ризницата.</string>
   <string name="custom_selector_info_text2">За разлика од сликата лево, таа десно има лого на Ризницата, што значи дека веќе е подигната. \n Допрете и држете за да ја погледате сликата.</string>
   <string name="welcome_custom_selector_ok">Одлично</string>
   <string name="custom_selector_already_uploaded_image_text">Оваа слика е веќе подигната на Ризницата.</string>

@@ -646,7 +646,7 @@
   <string name="done">Lokið</string>
   <string name="back">Til baka</string>
   <string name="welcome_custom_picture_selector_text">Velkomin í sérsniðinn myndaveljara</string>
-  <string name="custom_selector_info_text1">Þessi veljari birtir þær myndir öðruvísi sem þegar er búið að senda inn í Commons.</string>
+  <string name="custom_selector_info_text1" fuzzy="true">Þessi veljari birtir þær myndir öðruvísi sem þegar er búið að senda inn í Commons.</string>
   <string name="custom_selector_info_text2">Ólíkt myndinni til vinstri, er hægri myndin með Commons-táknmyndina til að sýna að hún hefur þegar verið send inn. \n Ýttu og haltu niðri til að sjá forskoðun á myndinni.</string>
   <string name="welcome_custom_selector_ok">Æðislegt</string>
   <string name="custom_selector_already_uploaded_image_text">Þessa mynd er þegar búið að senda inn í Commons.</string>

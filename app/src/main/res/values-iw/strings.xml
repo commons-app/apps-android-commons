@@ -681,7 +681,7 @@
   <string name="done">בוצע</string>
   <string name="back">חזרה</string>
   <string name="welcome_custom_picture_selector_text">ברוך בואך לבוחר התמונות המותאמות</string>
-  <string name="custom_selector_info_text1">הבוחר מציג תמונות שונות מאלו שכבר בוויקישיתוף.</string>
+  <string name="custom_selector_info_text1" fuzzy="true">הבוחר מציג תמונות שונות מאלו שכבר בוויקישיתוף.</string>
   <string name="custom_selector_info_text2">בניגוד לתמונה מימין, על התמונה שמשמאל יש את הלוגו של ויקישיתוף שמעיד שהיא כבר הועלתה. יש לגעת ולהחזיר לקבלת תצוגה מקדימה של התמונה.</string>
   <string name="welcome_custom_selector_ok">מגניב</string>
   <string name="custom_selector_already_uploaded_image_text">התמונה הזאת כבר הועלתה לוויקישיתוף.</string>

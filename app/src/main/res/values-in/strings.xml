@@ -629,7 +629,7 @@
   <string name="done">Selesai</string>
   <string name="back">Kembali</string>
   <string name="welcome_custom_picture_selector_text">Selamat datang di Pemilih Gambar Kustom</string>
-  <string name="custom_selector_info_text1">Alat pemilih ini menunjukkan perbedaan gambar yang sudah ada di Commons.</string>
+  <string name="custom_selector_info_text1" fuzzy="true">Alat pemilih ini menunjukkan perbedaan gambar yang sudah ada di Commons.</string>
   <string name="custom_selector_info_text2">Berbeda dengan gambar di sebelah kiri, gambar di sebelah kanan memiliki logo Commons yang menandakan gambarnya sudah diunggah.\n  Sentuh dan tahan untuk pratinjau gambar.</string>
   <string name="welcome_custom_selector_ok">Bagus</string>
   <string name="custom_selector_already_uploaded_image_text">Gambar ini sudah diunggah di Commons.</string>

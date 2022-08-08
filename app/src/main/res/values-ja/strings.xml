@@ -26,7 +26,7 @@
 <resources>
   <string name="commons_facebook">コモンズのフェイスブックページ</string>
   <string name="commons_github">コモンズのGithubソースコード</string>
-  <string name="commons_logo">コモンズの商標</string>
+  <string name="commons_logo">コモンズのロゴ</string>
   <string name="commons_website">コモンズのウェブサイト</string>
   <string name="submit">送信</string>
   <string name="show_captions">キャプション</string>
@@ -82,7 +82,7 @@
   <string name="upload_failed">ファイルが見つかりません。別のファイルでお試しください。</string>
   <string name="authentication_failed">認証に失敗しました!　もう一度ログインしてください</string>
   <string name="uploading_started">アップロードを開始しました!</string>
-  <string name="uploading_queued">アップロードは待機中です（接続制限モードが有効）</string>
+  <string name="uploading_queued">アップロードは待機中です（限定接続モードが有効）</string>
   <string name="upload_completed_notification_title">%1$s をアップロードしました!</string>
   <string name="upload_completed_notification_text">アップロードしたものを表示するにはタップしてください</string>
   <string name="upload_progress_notification_title_start">%s のアップロードを開始中</string>
@@ -142,7 +142,7 @@
   <string name="menu_feedback">フィードバックを送信（メール）</string>
   <string name="no_email_client">メールアプリケーションが見つかりません</string>
   <string name="provider_categories">最近使用したカテゴリ</string>
-  <string name="waiting_first_sync">同期を待機中…</string>
+  <string name="waiting_first_sync">初回の同期を待機中…</string>
   <string name="no_uploads_yet">まだ写真をアップロードしていません。</string>
   <string name="menu_retry_upload">再試行</string>
   <string name="menu_cancel_upload">キャンセル</string>
@@ -165,7 +165,7 @@
   <string name="tutorial_2_text">アップロードする画像はあなたご本人が撮影したものかあなたが単独で制作したものに限定します。</string>
   <string name="tutorial_2_subtext_1">自然物 (動植物、山)</string>
   <string name="tutorial_2_subtext_2">道具 (自転車、駅)</string>
-  <string name="tutorial_2_subtext_3">著名人 (市区村長・都道府県知事、自分が会ったオリンピック選手)</string>
+  <string name="tutorial_2_subtext_3">著名人 (自分が会った自治体首長やオリンピック選手)</string>
   <string name="tutorial_3_text">アップロードが《禁止》のもの:</string>
   <string name="tutorial_3_subtext_1">自撮りもしくは友達を撮影した写真</string>
   <string name="tutorial_3_subtext_2">ウェブからダウンロードした画像</string>
@@ -435,7 +435,7 @@
   <string name="send_thank_toast">%1$sさんに感謝を送信中</string>
   <string name="review_copyright">著作権のルールを守っていますか？</string>
   <string name="review_category">カテゴリは正しいですか？</string>
-  <string name="review_spam">話題にぴったりですか？</string>
+  <string name="review_spam">プロジェクト基準に合致していますか？</string>
   <string name="review_thanks">投稿者に感謝を送りますか？</string>
   <string name="review_spam_explanation">この写真に使い道が全くない場合、「いいえ」をクリックして削除候補にします</string>
   <string name="review_copyright_explanation">ロゴやスクリーショット、映画のポスターの投稿はしばしば著作権違反です。「いいえ」「クリックして削除候補に指定</string>
@@ -576,12 +576,12 @@
   <string name="leaderboard_nearby">付近</string>
   <string name="leaderboard_used">使用済み</string>
   <string name="leaderboard_my_rank_button_text">あなたのランク</string>
-  <string name="mapbox_telemetry" fuzzy="true">測地を退出</string>
+  <string name="mapbox_telemetry">Mapboxテレメトリ</string>
   <string name="telemetry_opt_out_summary">周辺を表示させるときは現在地と使用状況データを匿名化してMapbox に送信</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;この地図を改善&lt;/a&gt;</string>
   <string name="limited_connection_enabled">接続制限を有効にしました。</string>
   <string name="limited_connection_disabled">接続制限モードを解除。待機中のアップロードを再開します。</string>
-  <string name="limited_connection_mode" fuzzy="true">接続制限</string>
+  <string name="limited_connection_mode">限定接続モード</string>
   <string name="statistics_quality">上質な画像</string>
   <string name="quality_images_info">上質な画像とは図や写真で一定の（主に技術的な）条件を満たすもので、ウィキメディアのプロジェクト群に使えそうなもののこと</string>
   <string name="resuming_upload">アップロードを再開中……</string>
@@ -617,4 +617,8 @@
   <string name="error_feedback">フィードバックを送る途中でエラーが起きました</string>
   <string name="enter_description">あなたのフィードバックは何ですか？</string>
   <string name="your_feedback">あなたのフィードバック</string>
+  <string name="menu_view_report">報告</string>
+  <string name="report_violation">違反を報告</string>
+  <string name="report_user">この利用者を報告</string>
+  <string name="report_content">このコンテンツを報告する</string>
 </resources>

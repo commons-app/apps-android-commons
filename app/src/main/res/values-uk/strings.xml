@@ -679,7 +679,7 @@
   <string name="done">Готово</string>
   <string name="back">Назад</string>
   <string name="welcome_custom_picture_selector_text">Ласкаво просимо до користувацького вибору зображень</string>
-  <string name="custom_selector_info_text1">Цей інструмент вибору по-різному показує зображення, які вже є у спільності.</string>
+  <string name="custom_selector_info_text1" fuzzy="true">Цей інструмент вибору по-різному показує зображення, які вже є у спільності.</string>
   <string name="custom_selector_info_text2">На відміну від зображення зліва, зображення праворуч має логотип Commons, яке вказує, що воно вже завантажене.\n  Натисніть і утримуйте для попереднього перегляду зображення.</string>
   <string name="welcome_custom_selector_ok">Чудово</string>
   <string name="custom_selector_already_uploaded_image_text">Це зображення вже завантажено на Спільний ресурс.</string>
