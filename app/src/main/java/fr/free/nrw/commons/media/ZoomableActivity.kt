@@ -379,4 +379,9 @@ class ZoomableActivity : BaseActivity() {
         }
         super.onBackPressed()
     }
+
+    override fun onDestroy() {
+        scope.cancel()
+        super.onDestroy()
+    }
 }
