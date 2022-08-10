@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
 import android.app.Activity
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,7 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.helper.ImageHelper
-import fr.free.nrw.commons.customselector.listeners.FragmentCommunicator
+import fr.free.nrw.commons.customselector.listeners.PassDataListener
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.listeners.RefreshUIListener
 import fr.free.nrw.commons.customselector.model.CallbackStatus
@@ -25,15 +24,12 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.theme.BaseActivity
 import kotlinx.android.synthetic.main.fragment_custom_selector.*
 import kotlinx.android.synthetic.main.fragment_custom_selector.view.*
-import java.io.File
-import java.io.FileInputStream
-import java.net.URI
 import javax.inject.Inject
 
 /**
  * Custom Selector Image Fragment.
  */
-class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, FragmentCommunicator {
+class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassDataListener {
 
     /**
      * Current bucketId.
@@ -232,7 +228,7 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, Fragment
         imageAdapter.refresh(filteredImages)
     }
 
-    override fun passData(selectedImages: ArrayList<Image>){
-        Log.d("haha", "passData: "+selectedImages.size)
+    override fun passSelectedImages(selectedImages: ArrayList<Image>){
+        imageAdapter.setSelectedImages(selectedImages)
     }
 }

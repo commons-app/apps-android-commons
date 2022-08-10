@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.database.NotForUploadStatus
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
+import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
@@ -108,6 +109,18 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
             val lastOpenFolderName: String? = prefs.getString(FOLDER_NAME, null)
             val lastItemId: Long = prefs.getLong(ITEM_ID, 0)
             lastOpenFolderName?.let { onFolderClick(lastOpenFolderId, it, lastItemId) }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 101) {
+            if (resultCode == Activity.RESULT_OK) {
+                val selectedImages: ArrayList<Image> =
+                    data!!
+                        .getParcelableArrayListExtra(CustomSelectorConstants.NEW_SELECTED_IMAGES)!!
+                imageFragment!!.passSelectedImages(selectedImages)
+            }
         }
     }
 
@@ -304,12 +317,19 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
      * onLongPress
      * @param imageUri : uri of image
      */
-    override fun onLongPress(position: Int, images: ArrayList<Image>, selectedImages: ArrayList<Image>) {
+    override fun onLongPress(
+        position: Int,
+        images: ArrayList<Image>,
+        selectedImages: ArrayList<Image>
+    ) {
         val intent = Intent(this, ZoomableActivity::class.java)
-        intent.putExtra("b", position);
-        intent.putParcelableArrayListExtra("a", images)
-        intent.putParcelableArrayListExtra("c", selectedImages)
-        startActivity(intent)
+        intent.putExtra(CustomSelectorConstants.PRESENT_POSITION, position);
+        intent.putParcelableArrayListExtra(CustomSelectorConstants.TOTAL_IMAGES, images)
+        intent.putParcelableArrayListExtra(
+            CustomSelectorConstants.TOTAL_SELECTED_IMAGES,
+            selectedImages
+        )
+        startActivityForResult(intent, 101)
     }
 
     /**

@@ -150,6 +150,13 @@ class ImageAdapter(
     }
 
     /**
+     * Set new selected images
+     */
+    fun setSelectedImages(newSelectedImages: ArrayList<Image>){
+        selectedImages = ArrayList(newSelectedImages)
+        imageSelectListener.onSelectedImagesChanged(selectedImages, 0)
+    }
+    /**
      * Refresh the data in the adapter
      */
     fun refresh(newImages: List<Image>) {
