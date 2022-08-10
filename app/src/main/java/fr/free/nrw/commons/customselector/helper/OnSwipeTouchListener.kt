@@ -4,7 +4,11 @@ import android.content.Context
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import kotlin.math.abs
 
+/**
+ * Class for detecting swipe gestures
+ */
 open class OnSwipeTouchListener(context: Context?) : View.OnTouchListener {
 
     private val gestureDetector: GestureDetector
@@ -22,27 +26,18 @@ open class OnSwipeTouchListener(context: Context?) : View.OnTouchListener {
             return true
         }
 
-        override fun onSingleTapUp(e: MotionEvent?): Boolean {
-            onClick()
-            return super.onSingleTapUp(e)
-        }
-
-        override fun onDoubleTap(e: MotionEvent?): Boolean {
-            onDoubleClick()
-            return super.onDoubleTap(e)
-        }
-
-        override fun onLongPress(e: MotionEvent?) {
-            onLongClick()
-            super.onLongPress(e)
-        }
-
-        override fun onFling(e1: MotionEvent, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
+        override fun onFling(
+            event1: MotionEvent,
+            event2: MotionEvent,
+            velocityX: Float,
+            velocityY: Float
+        ): Boolean {
             try {
-                val diffY: Float = e2.getY() - e1.getY()
-                val diffX: Float = e2.getX() - e1.getX()
-                if (Math.abs(diffX) > Math.abs(diffY)) {
-                    if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
+                val diffY: Float = event2.y - event1.y
+                val diffX: Float = event2.x - event1.x
+                if (abs(diffX) > abs(diffY)) {
+                    if (abs(diffX) > SWIPE_THRESHOLD && abs(velocityX) >
+                        SWIPE_VELOCITY_THRESHOLD) {
                         if (diffX > 0) {
                             onSwipeRight()
                         } else {
@@ -50,7 +45,8 @@ open class OnSwipeTouchListener(context: Context?) : View.OnTouchListener {
                         }
                     }
                 } else {
-                    if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
+                    if (abs(diffY) > SWIPE_THRESHOLD && abs(velocityY) >
+                        SWIPE_VELOCITY_THRESHOLD) {
                         if (diffY > 0) {
                             onSwipeDown()
                         } else {
@@ -69,9 +65,6 @@ open class OnSwipeTouchListener(context: Context?) : View.OnTouchListener {
     open fun onSwipeLeft() {}
     open fun onSwipeUp() {}
     open fun onSwipeDown() {}
-    private fun onClick() {}
-    private fun onDoubleClick() {}
-    private fun onLongClick() {}
 
     init {
         gestureDetector = GestureDetector(context, GestureListener())
