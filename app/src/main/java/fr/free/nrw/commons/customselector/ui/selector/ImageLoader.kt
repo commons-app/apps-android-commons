@@ -175,7 +175,7 @@ class ImageLoader @Inject constructor(
         }
     }
 
-    suspend fun nextActionedImage(
+    suspend fun nextActionableImage(
         allImages: List<Image>, ioDispatcher: CoroutineDispatcher,
         defaultDispatcher: CoroutineDispatcher,
         nextImagePosition: Int

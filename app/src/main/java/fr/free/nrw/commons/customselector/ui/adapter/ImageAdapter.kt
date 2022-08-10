@@ -155,7 +155,7 @@ class ImageAdapter(
                     sharedPreferences.getBoolean(SWITCH_STATE_PREFERENCE_KEY, true)
                 if (!switchState) {
                     if(!alreadyAddedPositions.contains(position)) {
-                        val next = imageLoader.nextActionedImage(
+                        val next = imageLoader.nextActionableImage(
                             allImages, ioDispatcher, defaultDispatcher,
                             nextImage
                         )
