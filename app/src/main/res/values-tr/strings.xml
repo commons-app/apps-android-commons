@@ -666,7 +666,7 @@
   <string name="done">Yapıldı</string>
   <string name="back">Geri</string>
   <string name="welcome_custom_picture_selector_text">Özel Resim Seçici\'ye Hoş Geldiniz</string>
-  <string name="custom_selector_info_text1" fuzzy="true">Bu seçici, halihazırda Commons\'ta bulunan farklı resimleri gösterir.</string>
+  <string name="custom_selector_info_text1">Bu seçici, Commons\'a hangi resimleri yüklediğinizi gösterir.</string>
   <string name="custom_selector_info_text2">Soldaki resimden farklı olarak, sağdaki resimde zaten yüklendiğini belirten Commons logosu var.\n Resim ön izlemesi için dokunup basılı tutun.</string>
   <string name="welcome_custom_selector_ok">Harika</string>
   <string name="custom_selector_already_uploaded_image_text">Bu resim zaten Commons\'a yüklendi.</string>
@@ -704,4 +704,9 @@
   <string name="error_feedback">Geri bildirim gönderilirken hata oluştu</string>
   <string name="enter_description">Geri bildiriminiz nedir?</string>
   <string name="your_feedback">Geri bildiriminiz</string>
+  <string name="menu_view_report">Bildir</string>
+  <string name="report_violation">İhlal bildir</string>
+  <string name="report_user">Bu kullanıcıyı bildir</string>
+  <string name="report_content">Bu içeriği bildir</string>
+  <string name="request_user_block">Bu kullanıcının engellemesini iste</string>
 </resources>

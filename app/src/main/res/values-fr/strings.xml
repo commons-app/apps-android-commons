@@ -678,7 +678,7 @@
   <string name="done">Fait</string>
   <string name="back">Retour</string>
   <string name="welcome_custom_picture_selector_text">Bienvenue dans le sélecteur d’image personnalisé</string>
-  <string name="custom_selector_info_text1" fuzzy="true">Ce sélecteur affiche différemment les images qui sont déjà dans Commons.</string>
+  <string name="custom_selector_info_text1">Ce sélecteur affiche quelles images vous avez déjà téléversées dans Commons.</string>
   <string name="custom_selector_info_text2">À l’inverse de l’image sur la gauche, l’image de droite comporte un logo Commons qui indique qu’elle a déjà été téléversée.\nToucher et maintenir pour avoir un aperçu de l’image.</string>
   <string name="welcome_custom_selector_ok">Génial</string>
   <string name="custom_selector_already_uploaded_image_text">Cette image a déjà été téléversée sur Commons.</string>
@@ -720,4 +720,9 @@
   <string name="error_feedback">Erreur lors de l’envoi de l’avis</string>
   <string name="enter_description">Quel est votre avis ?</string>
   <string name="your_feedback">Votre avis</string>
+  <string name="menu_view_report">Signaler</string>
+  <string name="report_violation">Signaler une infraction</string>
+  <string name="report_user">Signaler cet utilisateur</string>
+  <string name="report_content">Signaler ce contenu</string>
+  <string name="request_user_block">Demande de blocage de cet utilisateur</string>
 </resources>

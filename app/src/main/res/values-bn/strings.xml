@@ -501,4 +501,9 @@
   <string name="error_feedback">প্রতিক্রিয়া পাঠানোর সময় ত্রুটি ঘটেছে</string>
   <string name="enter_description">আপনার প্রতিক্রিয়া কী?</string>
   <string name="your_feedback">আপনার প্রতিক্রিয়া</string>
+  <string name="menu_view_report">প্রতিবেদন করুন</string>
+  <string name="report_violation">লঙ্ঘনের প্রতিবেদন করুন</string>
+  <string name="report_user">এই ব্যবহারকারীকে প্রতিবেদন করুন</string>
+  <string name="report_content">এই বিষয়বস্তু সম্পর্কে অভিযোগ জানান</string>
+  <string name="request_user_block">এই ব্যবহারকারীকে বাধাদনের অনুরোধ করুন</string>
 </resources>
