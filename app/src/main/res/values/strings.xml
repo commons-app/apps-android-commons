@@ -254,7 +254,8 @@
   <string name="copy_wikicode">Copy the wikitext to the clipboard</string>
   <string name="wikicode_copied">The wikitext was copied to the clipboard</string>
   <string name="nearby_location_not_available">Nearby might not work properly, Location not available.</string>
-  <string name="location_permission_rationale_nearby">Permission required to display a list of nearby places</string>
+  <string name="location_permission_rationale_nearby">The Commons app collects location data to
+    display nearby places that need photos even when the app is in background.</string>
 
   <string name="nearby_directions">Directions</string>
   <string name="nearby_wikidata">Wikidata</string>
