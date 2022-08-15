@@ -477,6 +477,7 @@
   <string name="done">সম্পন্ন</string>
   <string name="back">পিছনে</string>
   <string name="welcome_custom_picture_selector_text">স্বনির্ধারিত চিত্র নির্বাচকে স্বাগতম</string>
+  <string name="custom_selector_info_text1">এই পিকার আপনাকে দেখায় যে আপনি ইতিমধ্যে কমন্সে কোন ছবি আপলোড করেছেন৷</string>
   <string name="welcome_custom_selector_ok">দারুণ</string>
   <string name="custom_selector_already_uploaded_image_text">এই চিত্রটি ইতোমধ্যে কমন্সে আপলোড করা হয়েছে।</string>
   <string name="learn_more">আরও জানুন</string>

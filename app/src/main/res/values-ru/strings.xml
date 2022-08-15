@@ -699,7 +699,7 @@
   <string name="done">Готово</string>
   <string name="back">Назад</string>
   <string name="welcome_custom_picture_selector_text">Добро пожаловать в Custom Picture Selector</string>
-  <string name="custom_selector_info_text1" fuzzy="true">Этот сборщик по-другому показывает изображения, которые уже есть в Викискладе.</string>
+  <string name="custom_selector_info_text1">Этот сборщик показывает вам, какие изображения вы уже загрузили в Викисклад.</string>
   <string name="custom_selector_info_text2">В отличие от изображения слева, изображение справа имеет логотип Commons, указывающий, что оно уже загружено.\n Нажмите и удерживайте для предварительного просмотра изображения.</string>
   <string name="welcome_custom_selector_ok">Потрясающе</string>
   <string name="custom_selector_already_uploaded_image_text">Это изображение уже было загружено на Викисклад.</string>
@@ -739,4 +739,6 @@
   <string name="error_feedback">Ошибка при отправке обратной связи</string>
   <string name="enter_description">Что вы хотите сообщить?</string>
   <string name="your_feedback">Обратная связь от вас</string>
+  <string name="menu_view_report">Отчёт</string>
+  <string name="report_violation">Сообщить о нарушении</string>
 </resources>
