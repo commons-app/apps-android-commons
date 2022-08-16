@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+## v4.0.4
+- Added dialog for Google's location policy
+
 ## v4.0.3
 - Added "Report" button for Google UGC policy
 
