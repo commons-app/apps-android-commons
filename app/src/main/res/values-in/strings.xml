@@ -14,6 +14,7 @@
 * Pebaryan
 * Rachmat04
 * Rv77ax
+* Veracious
 * William Surya Permana
 -->
 <resources>
@@ -655,4 +656,7 @@
   <string name="add_location">Tambahkan lokasi</string>
   <string name="feedback_sharing_data_alert">Silakan hapus informasi yang menurut Anda tidak layak disebarkan ke masyarakat umum dari surel ini. Selain itu, perlu diperhatikan bahwa alamat surel yang Anda unggah, beserta foto penggunanya, akan dapat dilihat oleh masyarakat umum.</string>
   <string name="copyright_popup">Silakan unggah gambar yang Anda buat sendiri. Pengunggah gambar yang melanggar hak cipta akan diblokir. Aturan ini juga berlaku untuk beta. Terima kasih telah menguji aplikasi ini!</string>
+  <string name="report_user">Laporkan pengguna ini</string>
+  <string name="report_content">Laporkan konten ini</string>
+  <string name="request_user_block">Buat permohonan pemblokiran pengguna ini</string>
 </resources>
