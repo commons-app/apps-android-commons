@@ -175,13 +175,17 @@ class ImageLoader @Inject constructor(
         }
     }
 
+    /**
+     * Finds out the next actionable image position
+     */
     suspend fun nextActionableImage(
         allImages: List<Image>, ioDispatcher: CoroutineDispatcher,
         defaultDispatcher: CoroutineDispatcher,
         nextImagePosition: Int
     ): Int {
         var next = -1
-        // call from next checked pos
+
+        // Traversing from given position to the end
         for (i in nextImagePosition until allImages.size){
             val it = allImages[i]
             val imageSHA1: String = when (mapImageSHA1[it.uri] != null) {
@@ -194,18 +198,38 @@ class ImageLoader @Inject constructor(
                 )
             }
             next = notForUploadStatusDao.find(imageSHA1)
+
+            // After checking the image in the not for upload database, if the image is present then
+            // skips the image and moves to next image for checking
             if(next > 0){
                 continue
+
+            // Otherwise checks in already uploaded database
             } else {
                 next = uploadedStatusDao.findByImageSHA1(imageSHA1, true)
+
+                // If the image is not present in the already uploaded database, checks for it's
+                // modified SHA1 in already uploaded database
                 if (next <= 0) {
                     val modifiedImageSha1 = getSHA1(it, defaultDispatcher)
-                    next = uploadedStatusDao.findByModifiedImageSHA1(modifiedImageSha1, true)
+                    next = uploadedStatusDao.findByModifiedImageSHA1(
+                        modifiedImageSha1,
+                        true
+                    )
+
+                    // If the modified image SHA1 is not present in the already uploaded database,
+                    // returns the position as next actionable image position
                     if (next <= 0) {
                         return i
+
+                    // If present in tha db then skips iteration for the image and moves to the next
+                    // for checking
                     } else {
                         continue
                     }
+
+                // If present in tha db then skips iteration for the image and moves to the next
+                // for checking
                 } else {
                     continue
                 }
