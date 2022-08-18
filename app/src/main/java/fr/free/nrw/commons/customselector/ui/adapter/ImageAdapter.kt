@@ -128,16 +128,21 @@ class ImageAdapter(
                 context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
             val switchState =
                 sharedPreferences.getBoolean(SWITCH_STATE_PREFERENCE_KEY, true)
-            val selectedIndex: Int = if(switchState) {
+
+            // Getting selected index when switch is on
+            val selectedIndex: Int = if (switchState) {
                 ImageHelper.getIndex(selectedImages, image)
+
+            // Getting selected index when switch is off
+            } else if (mapActionableImages.size > position) {
+                ImageHelper
+                    .getIndex(selectedImages, ArrayList(mapActionableImages.values)[position])
+
+            // For any other case return -1
             } else {
-                if(mapActionableImages.size > position) {
-                    ImageHelper
-                        .getIndex(selectedImages, ArrayList(mapActionableImages.values)[position])
-                } else {
-                    -1
-                }
+                -1
             }
+
             val isSelected = selectedIndex != -1
             if (isSelected) {
                 holder.itemSelected(selectedImages.size)
@@ -154,14 +159,22 @@ class ImageAdapter(
                 val switchState =
                     sharedPreferences.getBoolean(SWITCH_STATE_PREFERENCE_KEY, true)
                 if (!switchState) {
+                    // If the position is not already visited, that means the position is new then
+                    // finds the next actionable image position from all images
                     if(!alreadyAddedPositions.contains(position)) {
                         val next = imageLoader.nextActionableImage(
                             allImages, ioDispatcher, defaultDispatcher,
                             nextImage
                         )
 
+                        // If next actionable image is found, saves it, as the the search for
+                        // finding next actionable image will start from this position
                         if (next > -1) {
                             nextImage = next+1
+
+                            // If map doesn't contains the next actionable image, that means it's a
+                            // new actionable image, if will put it to the map as actionable images
+                            // and it will load the new image in the view holder
                             if (!mapActionableImages.containsKey(next)) {
                                 mapActionableImages[next] = allImages[next]
                                 alreadyAddedPositions.add(count)
@@ -171,16 +184,25 @@ class ImageAdapter(
                                 notifyItemInserted(position)
                                 notifyItemRangeChanged(position, itemCount+1)
                             }
+
+                        // If next actionable image is not found, that means searching is
+                        // complete till end, and it will stop searching.
                         } else {
                             stopAddition = true
                             notifyItemRemoved(position)
                         }
+
+                    // If the position is already visited, that means the image is already present
+                    // inside map, so it will fetch the image from the map and load in the holder
                     } else {
                         val actionableImages: List<Image> = ArrayList(mapActionableImages.values)
                         image = actionableImages[position]
                         Glide.with(holder.image).load(image.uri)
                             .thumbnail(0.3f).into(holder.image)
                     }
+
+                // If switch is turned off, it just fetches the image from all images without any
+                // further operations
                 } else {
                     Glide.with(holder.image).load(image.uri)
                         .thumbnail(0.3f).into(holder.image)
@@ -192,6 +214,9 @@ class ImageAdapter(
                     context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
                 val switchState =
                     sharedPreferences.getBoolean(SWITCH_STATE_PREFERENCE_KEY, true)
+
+                // While switch is turned off, lets user click on image only if the position is
+                // added inside map
                 if (!switchState) {
                     if (mapActionableImages.size > position) {
                         selectOrRemoveImage(holder, position)
@@ -217,19 +242,28 @@ class ImageAdapter(
             context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
         val switchState =
             sharedPreferences.getBoolean(SWITCH_STATE_PREFERENCE_KEY, true)
+
+        // Getting clicked index from all images index when switch is on
         val clickedIndex: Int = if(switchState) {
             ImageHelper.getIndex(selectedImages, images[position])
+
+        // Getting clicked index from actionable images when switch is off
         } else {
             ImageHelper.getIndex(selectedImages, ArrayList(mapActionableImages.values)[position])
         }
+
         if (clickedIndex != -1) {
             selectedImages.removeAt(clickedIndex)
             if (holder.isItemNotForUpload()) {
                 selectedNotForUploadImages--
             }
             notifyItemChanged(position, ImageUnselected())
+
+            // Getting index from all images index when switch is on
             val indexes = if (switchState) {
                 ImageHelper.getIndexList(selectedImages, images)
+
+            // Getting index from actionable images when switch is off
             } else {
                 ImageHelper.getIndexList(selectedImages, ArrayList(mapActionableImages.values))
             }
@@ -243,9 +277,13 @@ class ImageAdapter(
                 if (holder.isItemNotForUpload()) {
                     selectedNotForUploadImages++
                 }
+
+                // Getting index from all images index when switch is on
                 val indexes: ArrayList<Int> = if (switchState) {
                     selectedImages.add(images[position])
                     ImageHelper.getIndexList(selectedImages, images)
+
+                // Getting index from actionable images when switch is off
                 } else {
                     selectedImages.add(ArrayList(mapActionableImages.values)[position])
                     ImageHelper.getIndexList(selectedImages, ArrayList(mapActionableImages.values))
@@ -301,14 +339,20 @@ class ImageAdapter(
             context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
         val switchState =
             sharedPreferences.getBoolean(SWITCH_STATE_PREFERENCE_KEY, true)
+
+        // While switch is on initializes the holder with all images size
         return if(switchState) {
             allImages.size
+
+        // While switch is off and searching for next actionable has ended, initializes the holder
+        // with size of all actionable images
+        } else if (mapActionableImages.size == allImages.size || stopAddition) {
+            mapActionableImages.size
+
+        // While switch is off, initializes the holder with and extra view holder so that finding
+        // and addition of the next actionable image in the adapter can be continued
         } else {
-            if (mapActionableImages.size == allImages.size || stopAddition) {
-                mapActionableImages.size
-            } else {
-                mapActionableImages.size + 1
-            }
+            mapActionableImages.size + 1
         }
     }
 
