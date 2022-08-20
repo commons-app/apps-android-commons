@@ -64,7 +64,8 @@ class ImageFileLoaderTest {
             MediaStore.Images.Media.DISPLAY_NAME,
             MediaStore.Images.Media.DATA,
             MediaStore.Images.Media.BUCKET_ID,
-            MediaStore.Images.Media.BUCKET_DISPLAY_NAME
+            MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
+            MediaStore.Images.Media.DATE_ADDED
         )
 
         Whitebox.setInternalState(imageFileLoader, "coroutineContext", coroutineContext)
@@ -100,6 +101,7 @@ class ImageFileLoaderTest {
             on {
                 query(
                     same(MediaStore.Images.Media.EXTERNAL_CONTENT_URI),
+                    anyOrNull(),
                     anyOrNull(),
                     anyOrNull(),
                     anyOrNull(),
