@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.customselector.ui.adapter
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -13,9 +14,14 @@ import com.bumptech.glide.Glide
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.helper.ImageHelper
+import fr.free.nrw.commons.customselector.helper.ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY
+import fr.free.nrw.commons.customselector.helper.ImageHelper.SWITCH_STATE_PREFERENCE_KEY
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
+import kotlinx.coroutines.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Custom selector ImageAdapter.
@@ -49,6 +55,8 @@ class ImageAdapter(
      */
     class ImageUnselected
 
+    private var stopAddition: Boolean = false
+
     /**
      * Currently selected images.
      */
@@ -65,6 +73,35 @@ class ImageAdapter(
     private var images: ArrayList<Image> = ArrayList()
 
     /**
+     * Stores all images
+     */
+    private var allImages: List<Image> = ArrayList()
+
+    /**
+     * Map to store actionable images
+     */
+    private var mapActionableImages: TreeMap<Int, Image> = TreeMap()
+
+    /**
+     * Stores already added positions of actionable images
+     */
+    private var alreadyAddedPositions: ArrayList<Int> = ArrayList()
+
+    /**
+     * Next starting index to initiate query to find next actionable image
+     */
+    private var nextImage = 0
+
+    private var count = 0
+
+    /**
+     * Coroutine Dispatchers and Scope.
+     */
+    private var defaultDispatcher : CoroutineDispatcher = Dispatchers.Default
+    private var ioDispatcher : CoroutineDispatcher = Dispatchers.IO
+    private val scope : CoroutineScope = MainScope()
+
+    /**
      * Create View holder.
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
@@ -76,7 +113,7 @@ class ImageAdapter(
      * Bind View holder, load image, selected view, click listeners.
      */
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        val image=images[position]
+        var image=images[position]
         holder.image.setImageDrawable (null)
         if (context.contentResolver.getType(image.uri) == null) {
             // Image does not exist anymore, update adapter.
@@ -87,17 +124,106 @@ class ImageAdapter(
                 notifyItemRangeChanged(updatedPosition, images.size)
             }
         } else {
-            val selectedIndex = ImageHelper.getIndex(selectedImages, image)
+            val sharedPreferences: SharedPreferences =
+                context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
+            val switchState =
+                sharedPreferences.getBoolean(SWITCH_STATE_PREFERENCE_KEY, true)
+
+            // Getting selected index when switch is on
+            val selectedIndex: Int = if (switchState) {
+                ImageHelper.getIndex(selectedImages, image)
+
+            // Getting selected index when switch is off
+            } else if (mapActionableImages.size > position) {
+                ImageHelper
+                    .getIndex(selectedImages, ArrayList(mapActionableImages.values)[position])
+
+            // For any other case return -1
+            } else {
+                -1
+            }
+
             val isSelected = selectedIndex != -1
             if (isSelected) {
-                holder.itemSelected(selectedIndex + 1)
+                holder.itemSelected(selectedImages.size)
             } else {
-                holder.itemUnselected();
+                holder.itemUnselected()
             }
-            Glide.with(holder.image).load(image.uri).thumbnail(0.3f).into(holder.image)
-            imageLoader.queryAndSetView(holder, image)
+
+            scope.launch {
+                imageLoader.queryAndSetView(
+                        holder, image, ioDispatcher, defaultDispatcher
+                )
+                val sharedPreferences: SharedPreferences =
+                    context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
+                val switchState =
+                    sharedPreferences.getBoolean(SWITCH_STATE_PREFERENCE_KEY, true)
+                if (!switchState) {
+                    // If the position is not already visited, that means the position is new then
+                    // finds the next actionable image position from all images
+                    if(!alreadyAddedPositions.contains(position)) {
+                        val next = imageLoader.nextActionableImage(
+                            allImages, ioDispatcher, defaultDispatcher,
+                            nextImage
+                        )
+
+                        // If next actionable image is found, saves it, as the the search for
+                        // finding next actionable image will start from this position
+                        if (next > -1) {
+                            nextImage = next+1
+
+                            // If map doesn't contains the next actionable image, that means it's a
+                            // new actionable image, if will put it to the map as actionable images
+                            // and it will load the new image in the view holder
+                            if (!mapActionableImages.containsKey(next)) {
+                                mapActionableImages[next] = allImages[next]
+                                alreadyAddedPositions.add(count)
+                                count++
+                                Glide.with(holder.image).load(allImages[next].uri)
+                                    .thumbnail(0.3f).into(holder.image)
+                                notifyItemInserted(position)
+                                notifyItemRangeChanged(position, itemCount+1)
+                            }
+
+                        // If next actionable image is not found, that means searching is
+                        // complete till end, and it will stop searching.
+                        } else {
+                            stopAddition = true
+                            notifyItemRemoved(position)
+                        }
+
+                    // If the position is already visited, that means the image is already present
+                    // inside map, so it will fetch the image from the map and load in the holder
+                    } else {
+                        val actionableImages: List<Image> = ArrayList(mapActionableImages.values)
+                        image = actionableImages[position]
+                        Glide.with(holder.image).load(image.uri)
+                            .thumbnail(0.3f).into(holder.image)
+                    }
+
+                // If switch is turned off, it just fetches the image from all images without any
+                // further operations
+                } else {
+                    Glide.with(holder.image).load(image.uri)
+                        .thumbnail(0.3f).into(holder.image)
+                }
+            }
+
             holder.itemView.setOnClickListener {
-                selectOrRemoveImage(holder, position)
+                val sharedPreferences: SharedPreferences =
+                    context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
+                val switchState =
+                    sharedPreferences.getBoolean(SWITCH_STATE_PREFERENCE_KEY, true)
+
+                // While switch is turned off, lets user click on image only if the position is
+                // added inside map
+                if (!switchState) {
+                    if (mapActionableImages.size > position) {
+                        selectOrRemoveImage(holder, position)
+                    }
+                } else {
+                    selectOrRemoveImage(holder, position)
+                }
             }
 
             // launch media preview on long click.
@@ -112,26 +238,60 @@ class ImageAdapter(
      * Handle click event on an image, update counter on images.
      */
     private fun selectOrRemoveImage(holder: ImageViewHolder, position: Int){
-        val clickedIndex = ImageHelper.getIndex(selectedImages, images[position])
+        val sharedPreferences: SharedPreferences =
+            context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
+        val switchState =
+            sharedPreferences.getBoolean(SWITCH_STATE_PREFERENCE_KEY, true)
+
+        // Getting clicked index from all images index when switch is on
+        val clickedIndex: Int = if(switchState) {
+            ImageHelper.getIndex(selectedImages, images[position])
+
+        // Getting clicked index from actionable images when switch is off
+        } else {
+            ImageHelper.getIndex(selectedImages, ArrayList(mapActionableImages.values)[position])
+        }
+
         if (clickedIndex != -1) {
             selectedImages.removeAt(clickedIndex)
             if (holder.isItemNotForUpload()) {
                 selectedNotForUploadImages--
             }
             notifyItemChanged(position, ImageUnselected())
-            val indexes = ImageHelper.getIndexList(selectedImages, images)
+
+            // Getting index from all images index when switch is on
+            val indexes = if (switchState) {
+                ImageHelper.getIndexList(selectedImages, images)
+
+            // Getting index from actionable images when switch is off
+            } else {
+                ImageHelper.getIndexList(selectedImages, ArrayList(mapActionableImages.values))
+            }
             for (index in indexes) {
                 notifyItemChanged(index, ImageSelectedOrUpdated())
             }
         } else {
-            if(holder.isItemUploaded()){
+            if (holder.isItemUploaded()) {
                 Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
             } else {
                 if (holder.isItemNotForUpload()) {
                     selectedNotForUploadImages++
                 }
-                selectedImages.add(images[position])
-                notifyItemChanged(position, ImageSelectedOrUpdated())
+
+                // Getting index from all images index when switch is on
+                val indexes: ArrayList<Int> = if (switchState) {
+                    selectedImages.add(images[position])
+                    ImageHelper.getIndexList(selectedImages, images)
+
+                // Getting index from actionable images when switch is off
+                } else {
+                    selectedImages.add(ArrayList(mapActionableImages.values)[position])
+                    ImageHelper.getIndexList(selectedImages, ArrayList(mapActionableImages.values))
+                }
+
+                for (index in indexes) {
+                    notifyItemChanged(index, ImageSelectedOrUpdated())
+                }
             }
         }
         imageSelectListener.onSelectedImagesChanged(selectedImages, selectedNotForUploadImages)
@@ -140,9 +300,16 @@ class ImageAdapter(
     /**
      * Initialize the data set.
      */
-    fun init(newImages: List<Image>) {
+    fun init(newImages: List<Image>, fixedImages: List<Image>, emptyMap: TreeMap<Int, Image>) {
+        allImages = fixedImages
         val oldImageList:ArrayList<Image> = images
         val newImageList:ArrayList<Image> = ArrayList(newImages)
+        mapActionableImages = emptyMap
+        alreadyAddedPositions = ArrayList()
+        nextImage = 0
+        stopAddition = false
+        selectedImages = ArrayList()
+        count = 0
         val diffResult = DiffUtil.calculateDiff(
             ImagesDiffCallback(oldImageList, newImageList)
         )
@@ -153,12 +320,12 @@ class ImageAdapter(
     /**
      * Refresh the data in the adapter
      */
-    fun refresh(newImages: List<Image>) {
+    fun refresh(newImages: List<Image>, fixedImages: List<Image>) {
         selectedNotForUploadImages = 0
         selectedImages.clear()
         images.clear()
         selectedImages = arrayListOf()
-        init(newImages)
+        init(newImages, fixedImages, TreeMap())
         notifyDataSetChanged()
     }
 
@@ -168,11 +335,36 @@ class ImageAdapter(
      * @return The total number of items in this adapter.
      */
     override fun getItemCount(): Int {
-        return images.size
+        val sharedPreferences: SharedPreferences =
+            context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
+        val switchState =
+            sharedPreferences.getBoolean(SWITCH_STATE_PREFERENCE_KEY, true)
+
+        // While switch is on initializes the holder with all images size
+        return if(switchState) {
+            allImages.size
+
+        // While switch is off and searching for next actionable has ended, initializes the holder
+        // with size of all actionable images
+        } else if (mapActionableImages.size == allImages.size || stopAddition) {
+            mapActionableImages.size
+
+        // While switch is off, initializes the holder with and extra view holder so that finding
+        // and addition of the next actionable image in the adapter can be continued
+        } else {
+            mapActionableImages.size + 1
+        }
     }
 
     fun getImageIdAt(position: Int): Long {
         return images.get(position).id
+    }
+
+    /**
+     * CleanUp function.
+     */
+    fun cleanUp() {
+        scope.cancel()
     }
 
     /**

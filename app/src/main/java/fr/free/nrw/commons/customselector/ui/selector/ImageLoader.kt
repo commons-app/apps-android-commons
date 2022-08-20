@@ -1,27 +1,23 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.net.Uri
-import androidx.exifinterface.media.ExifInterface
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
+import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter.ImageViewHolder
-import fr.free.nrw.commons.filepicker.PickedFiles
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
+import fr.free.nrw.commons.utils.CustomSelectorUtils.Companion.querySHA1
 import kotlinx.coroutines.*
-import timber.log.Timber
-import java.io.FileNotFoundException
-import java.io.IOException
-import java.net.UnknownHostException
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-import kotlin.collections.HashMap
 
 /**
  * Image Loader class, loads images, depending on API results.
@@ -68,105 +64,178 @@ class ImageLoader @Inject constructor(
     private var mapImageSHA1: HashMap<Uri, String> = HashMap()
 
     /**
-     * Coroutine Dispatchers and Scope.
-     */
-    private var defaultDispatcher : CoroutineDispatcher = Dispatchers.Default
-    private var ioDispatcher : CoroutineDispatcher = Dispatchers.IO
-    private val scope : CoroutineScope = MainScope()
-
-    /**
      * Query image and setUp the view.
      */
-    fun queryAndSetView(holder: ImageViewHolder, image: Image) {
+    suspend fun queryAndSetView(
+        holder: ImageViewHolder,
+        image: Image,
+        ioDispatcher: CoroutineDispatcher,
+        defaultDispatcher: CoroutineDispatcher
+    ) {
 
         /**
          * Recycler view uses same view holder, so we can identify the latest query image from holder.
          */
         mapHolderImage[holder] = image
         holder.itemNotUploaded()
+        holder.itemForUpload()
 
-        scope.launch {
+        var result: Result = Result.NOTFOUND
 
-            var result: Result = Result.NOTFOUND
+        if (mapHolderImage[holder] != image) {
+            return
+        }
 
-            if (mapHolderImage[holder] != image) {
-                return@launch
+        val imageSHA1: String = when(mapImageSHA1[image.uri] != null) {
+            true -> mapImageSHA1[image.uri]!!
+            else -> CustomSelectorUtils.getImageSHA1(
+                image.uri,
+                ioDispatcher,
+                fileUtilsWrapper,
+                context.contentResolver
+            )
+        }
+        mapImageSHA1[image.uri] = imageSHA1
+
+        if(imageSHA1.isEmpty()) {
+            return
+        }
+        val uploadedStatus = getFromUploaded(imageSHA1)
+
+        val sha1 = uploadedStatus?.let {
+            result = getResultFromUploadedStatus(uploadedStatus)
+            uploadedStatus.modifiedImageSHA1
+        } ?: run {
+            if (mapHolderImage[holder] == image) {
+                getSHA1(image, defaultDispatcher)
+            } else {
+                ""
             }
+        }
 
-            val imageSHA1: String = when(mapImageSHA1[image.uri] != null) {
-                true -> mapImageSHA1[image.uri]!!
-                else -> CustomSelectorUtils.getImageSHA1(image.uri, ioDispatcher, fileUtilsWrapper, context.contentResolver)
-            }
+        if (mapHolderImage[holder] != image) {
+            return
+        }
 
-            if(imageSHA1.isEmpty())
-                return@launch
-            val uploadedStatus = getFromUploaded(imageSHA1)
+        val exists = notForUploadStatusDao.find(imageSHA1)
 
-            val sha1 = uploadedStatus?.let {
-                result = getResultFromUploadedStatus(uploadedStatus)
-                uploadedStatus.modifiedImageSHA1
-            } ?: run {
-                if (mapHolderImage[holder] == image) {
-                    getSHA1(image)
-                } else {
-                    ""
-                }
-            }
-
-            if (mapHolderImage[holder] != image) {
-                return@launch
-            }
-
-            val exists = notForUploadStatusDao.find(imageSHA1)
-
-            if (result in arrayOf(Result.NOTFOUND, Result.INVALID) && sha1.isNotEmpty()) {
-                // Query original image.
-                result = querySHA1(imageSHA1)
-                if (result is Result.TRUE) {
-                    // Original image found.
-                    insertIntoUploaded(imageSHA1, sha1, result is Result.TRUE, false)
-                } else {
-                    // Original image not found, query modified image.
-                    result = querySHA1(sha1)
-                    if (result != Result.ERROR) {
-                        insertIntoUploaded(imageSHA1, sha1, false, result is Result.TRUE)
+        if (result in arrayOf(Result.NOTFOUND, Result.INVALID) && sha1.isNotEmpty()) {
+            when {
+                mapResult[imageSHA1] == null -> {
+                    // Query original image.
+                    result = querySHA1(imageSHA1, ioDispatcher, mediaClient)
+                    when (result) {
+                        is Result.TRUE -> {
+                            mapResult[imageSHA1] = Result.TRUE
+                        }
                     }
                 }
+                else -> {
+                    result = mapResult[imageSHA1]!!
+                }
             }
-            if(mapHolderImage[holder] == image) {
-                if (result is Result.TRUE) holder.itemUploaded() else holder.itemNotUploaded()
-                if (exists > 0) holder.itemNotForUpload() else holder.itemForUpload()
+            if (result is Result.TRUE) {
+                // Original image found.
+                insertIntoUploaded(imageSHA1, sha1, result is Result.TRUE, false)
+            } else {
+                when {
+                    mapResult[sha1] == null -> {
+                        // Original image not found, query modified image.
+                        result = querySHA1(sha1, ioDispatcher, mediaClient)
+                        when (result) {
+                            is Result.TRUE -> {
+                                mapResult[sha1] = Result.TRUE
+                            }
+                        }
+                    }
+                    else -> {
+                        result = mapResult[sha1]!!
+                    }
+                }
+                if (result != Result.ERROR) {
+                    insertIntoUploaded(imageSHA1, sha1, false, result is Result.TRUE)
+                }
             }
+        }
+
+        val sharedPreferences: SharedPreferences =
+            context
+                .getSharedPreferences(ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
+        val switchState =
+            sharedPreferences.getBoolean(ImageHelper.SWITCH_STATE_PREFERENCE_KEY, true)
+
+        if(mapHolderImage[holder] == image) {
+            if (result is Result.TRUE) {
+                if (switchState) holder.itemUploaded() else holder.itemNotUploaded()
+            } else holder.itemNotUploaded()
+
+            if (exists > 0) {
+                if (switchState) holder.itemNotForUpload() else holder.itemForUpload()
+            } else holder.itemForUpload()
         }
     }
 
     /**
-     * Query SHA1, return result if previously queried, otherwise start a new query.
-     *
-     * @return Query result.
+     * Finds out the next actionable image position
      */
+    suspend fun nextActionableImage(
+        allImages: List<Image>, ioDispatcher: CoroutineDispatcher,
+        defaultDispatcher: CoroutineDispatcher,
+        nextImagePosition: Int
+    ): Int {
+        var next = -1
 
-    suspend fun querySHA1(SHA1: String): Result {
-        return withContext(ioDispatcher) {
-            mapResult[SHA1]?.let {
-                return@withContext it
+        // Traversing from given position to the end
+        for (i in nextImagePosition until allImages.size){
+            val it = allImages[i]
+            val imageSHA1: String = when (mapImageSHA1[it.uri] != null) {
+                true -> mapImageSHA1[it.uri]!!
+                else -> CustomSelectorUtils.getImageSHA1(
+                    it.uri,
+                    ioDispatcher,
+                    fileUtilsWrapper,
+                    context.contentResolver
+                )
             }
-            var result: Result = Result.FALSE
-            try {
-                if (mediaClient.checkFileExistsUsingSha(SHA1).blockingGet()) {
-                    mapResult[SHA1] = Result.TRUE
-                    result = Result.TRUE
+            next = notForUploadStatusDao.find(imageSHA1)
+
+            // After checking the image in the not for upload database, if the image is present then
+            // skips the image and moves to next image for checking
+            if(next > 0){
+                continue
+
+            // Otherwise checks in already uploaded database
+            } else {
+                next = uploadedStatusDao.findByImageSHA1(imageSHA1, true)
+
+                // If the image is not present in the already uploaded database, checks for it's
+                // modified SHA1 in already uploaded database
+                if (next <= 0) {
+                    val modifiedImageSha1 = getSHA1(it, defaultDispatcher)
+                    next = uploadedStatusDao.findByModifiedImageSHA1(
+                        modifiedImageSha1,
+                        true
+                    )
+
+                    // If the modified image SHA1 is not present in the already uploaded database,
+                    // returns the position as next actionable image position
+                    if (next <= 0) {
+                        return i
+
+                    // If present in tha db then skips iteration for the image and moves to the next
+                    // for checking
+                    } else {
+                        continue
+                    }
+
+                // If present in tha db then skips iteration for the image and moves to the next
+                // for checking
+                } else {
+                    continue
                 }
-            } catch (e: Exception) {
-                if (e is UnknownHostException) {
-                    // Handle no network connection.
-                    Timber.e(e, "Network Connection Error")
-                }
-                result = Result.ERROR
-                e.printStackTrace()
             }
-            result
         }
+        return -1
     }
 
     /**
@@ -174,11 +243,17 @@ class ImageLoader @Inject constructor(
      *
      * @return sha1 of the image
      */
-    suspend fun getSHA1(image: Image): String {
+    suspend fun getSHA1(image: Image, defaultDispatcher: CoroutineDispatcher): String {
         mapModifiedImageSHA1[image]?.let{
             return it
         }
-        val sha1 = generateModifiedSHA1(image);
+        val sha1 = CustomSelectorUtils
+            .generateModifiedSHA1(image,
+                defaultDispatcher,
+                context,
+                fileProcessor,
+                fileUtilsWrapper
+            )
         mapModifiedImageSHA1[image] = sha1;
         return sha1;
     }
@@ -219,35 +294,6 @@ class ImageLoader @Inject constructor(
             }
         }
         return Result.INVALID
-    }
-
-    /**
-     * Generate Modified SHA1 using present Exif settings.
-     *
-     * @return modified sha1
-     */
-    private suspend fun generateModifiedSHA1(image: Image) : String {
-        return withContext(defaultDispatcher) {
-            val uploadableFile = PickedFiles.pickedExistingPicture(context, image.uri)
-            val exifInterface: ExifInterface? = try {
-                ExifInterface(uploadableFile.file!!)
-            } catch (e: IOException) {
-                Timber.e(e)
-                null
-            }
-            fileProcessor.redactExifTags(exifInterface, fileProcessor.getExifTagsToRedact())
-            val sha1 =
-                fileUtilsWrapper.getSHA1(fileUtilsWrapper.getFileInputStream(uploadableFile.filePath))
-            uploadableFile.file.delete()
-            sha1
-        }
-    }
-
-    /**
-     * CleanUp function.
-     */
-    fun cleanUP() {
-        scope.cancel()
     }
 
     /**

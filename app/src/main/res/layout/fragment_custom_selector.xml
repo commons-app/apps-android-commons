@@ -3,13 +3,26 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  xmlns:app="http://schemas.android.com/apk/res-auto">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:background="?attr/mainBackground">
+
+  <Switch
+    android:id="@+id/switchWidget"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:visibility="gone"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:text="@string/hide_already_actioned_pictures"
+    android:padding="@dimen/dimen_10"
+    android:checked="true" />
 
   <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
     android:id="@+id/selector_rv"
-    android:background="?attr/mainBackground"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:background="?attr/mainBackground"
+    android:layout_height="@dimen/dimen_0"
     app:fastScrollPopupBgColor="@color/primaryColor"
     app:fastScrollPopupTextColor="@android:color/primary_text_dark"
     app:fastScrollPopupTextSize="@dimen/subheading_text_size"
@@ -17,6 +30,10 @@
     app:fastScrollThumbColor="@color/primaryColor"
     app:fastScrollTrackColor="@color/upload_overlay_background_light"
     app:fastScrollPopupPosition="adjacent"
+    app:layout_constraintBottom_toTopOf="@id/progressLayout"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/switchWidget"
     />
 
   <TextView
@@ -44,5 +61,42 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     />
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/progressLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/dimen_5"
+    android:background="@color/drawerHeader_background_light"
+    android:visibility="gone"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/selector_rv">
+
+    <TextView
+      android:id="@+id/text"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/hiding_already_actioned_pictures"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      android:gravity="center"
+      android:padding="@dimen/dimen_5"/>
+
+    <ProgressBar
+      android:id="@+id/progressBar"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:visibility="visible"
+      app:layout_constraintTop_toBottomOf="@id/text"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
