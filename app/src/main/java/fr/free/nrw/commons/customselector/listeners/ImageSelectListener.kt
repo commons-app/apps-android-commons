@@ -19,5 +19,9 @@ interface ImageSelectListener {
      * onLongPress
      * @param imageUri : uri of image
      */
-    fun onLongPress(imageUri: Uri)
+    fun onLongPress(
+        position: Int,
+        images: ArrayList<Image>,
+        selectedImages: ArrayList<Image>
+    )
 }

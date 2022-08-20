@@ -19,6 +19,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.customselector.helper.ImageHelper
+import fr.free.nrw.commons.customselector.listeners.PassDataListener
 import fr.free.nrw.commons.customselector.helper.ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY
 import fr.free.nrw.commons.customselector.helper.ImageHelper.SWITCH_STATE_PREFERENCE_KEY
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
@@ -42,7 +43,7 @@ import kotlin.collections.ArrayList
 /**
  * Custom Selector Image Fragment.
  */
-class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
+class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassDataListener {
 
     /**
      * Current bucketId.
@@ -293,6 +294,7 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
      * notifyDataSetChanged, rebuild the holder views to account for deleted images.
      */
     override fun onResume() {
+        Log.d("haha", "onResume: ")
         imageAdapter.notifyDataSetChanged()
         super.onResume()
     }
@@ -326,5 +328,9 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener {
 
     override fun refresh() {
         imageAdapter.refresh(filteredImages, allImages)
+    }
+
+    override fun passSelectedImages(selectedImages: ArrayList<Image>){
+        imageAdapter.setSelectedImages(selectedImages)
     }
 }

@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.Uri
 import androidx.exifinterface.media.ExifInterface
 import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.filepicker.PickedFiles
 import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
 import fr.free.nrw.commons.filepicker.PickedFiles
 import fr.free.nrw.commons.media.MediaClient
@@ -26,17 +27,18 @@ class CustomSelectorUtils {
         /**
          * Get image sha1 from uri, used to retrieve the original image sha1.
          */
-        suspend fun getImageSHA1(uri: Uri,
-                                 ioDispatcher : CoroutineDispatcher,
-                                 fileUtilsWrapper: FileUtilsWrapper,
-                                 contentResolver: ContentResolver
+        suspend fun getImageSHA1(
+            uri: Uri,
+            ioDispatcher: CoroutineDispatcher,
+            fileUtilsWrapper: FileUtilsWrapper,
+            contentResolver: ContentResolver
         ): String {
             return withContext(ioDispatcher) {
 
                 try {
                     val result = fileUtilsWrapper.getSHA1(contentResolver.openInputStream(uri))
                     result
-                } catch (e: FileNotFoundException){
+                } catch (e: FileNotFoundException) {
                     e.printStackTrace()
                     ""
                 }
@@ -44,16 +46,15 @@ class CustomSelectorUtils {
         }
 
         /**
-         * Generate Modified SHA1 using present Exif settings.
-         *
-         * @return modified sha1
+         * Generates modified SHA1 of an image
          */
-        suspend fun generateModifiedSHA1(image: Image,
-                                         defaultDispatcher : CoroutineDispatcher,
-                                         context: Context,
-                                         fileProcessor: FileProcessor,
-                                         fileUtilsWrapper: FileUtilsWrapper
-        ) : String {
+        suspend fun generateModifiedSHA1(
+            image: Image,
+            defaultDispatcher: CoroutineDispatcher,
+            context: Context,
+            fileProcessor: FileProcessor,
+            fileUtilsWrapper: FileUtilsWrapper
+        ): String {
             return withContext(defaultDispatcher) {
                 val uploadableFile = PickedFiles.pickedExistingPicture(context, image.uri)
                 val exifInterface: ExifInterface? = try {
@@ -64,7 +65,9 @@ class CustomSelectorUtils {
                 }
                 fileProcessor.redactExifTags(exifInterface, fileProcessor.getExifTagsToRedact())
                 val sha1 =
-                    fileUtilsWrapper.getSHA1(fileUtilsWrapper.getFileInputStream(uploadableFile.filePath))
+                    fileUtilsWrapper.getSHA1(
+                        fileUtilsWrapper.getFileInputStream(uploadableFile.filePath)
+                    )
                 uploadableFile.file.delete()
                 sha1
             }

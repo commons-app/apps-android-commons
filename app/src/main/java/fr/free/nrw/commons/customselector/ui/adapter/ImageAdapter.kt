@@ -228,7 +228,7 @@ class ImageAdapter(
 
             // launch media preview on long click.
             holder.itemView.setOnLongClickListener {
-                imageSelectListener.onLongPress(image.uri)
+                imageSelectListener.onLongPress(position, images, selectedImages)
                 true
             }
         }
@@ -317,6 +317,13 @@ class ImageAdapter(
         diffResult.dispatchUpdatesTo(this)
     }
 
+    /**
+     * Set new selected images
+     */
+    fun setSelectedImages(newSelectedImages: ArrayList<Image>){
+        selectedImages = ArrayList(newSelectedImages)
+        imageSelectListener.onSelectedImagesChanged(selectedImages, 0)
+    }
     /**
      * Refresh the data in the adapter
      */
