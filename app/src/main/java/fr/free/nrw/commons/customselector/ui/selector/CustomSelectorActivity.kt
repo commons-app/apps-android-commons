@@ -16,6 +16,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.customselector.database.NotForUploadStatus
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants
+import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.SHOULD_REFRESH
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
@@ -119,7 +120,8 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
                 val selectedImages: ArrayList<Image> =
                     data!!
                         .getParcelableArrayListExtra(CustomSelectorConstants.NEW_SELECTED_IMAGES)!!
-                imageFragment!!.passSelectedImages(selectedImages)
+                val shouldRefresh = data.getBooleanExtra(SHOULD_REFRESH, false)
+                imageFragment!!.passSelectedImages(selectedImages, shouldRefresh)
             }
         }
     }

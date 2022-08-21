@@ -228,7 +228,7 @@ class ImageAdapter(
 
             // launch media preview on long click.
             holder.itemView.setOnLongClickListener {
-                imageSelectListener.onLongPress(position, images, selectedImages)
+                imageSelectListener.onLongPress(images.indexOf(image), images, selectedImages)
                 true
             }
         }

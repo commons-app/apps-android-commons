@@ -35,7 +35,6 @@ import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import kotlinx.android.synthetic.main.fragment_custom_selector.*
 import kotlinx.android.synthetic.main.fragment_custom_selector.view.*
-import kotlinx.coroutines.*
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -330,7 +329,12 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassData
         imageAdapter.refresh(filteredImages, allImages)
     }
 
-    override fun passSelectedImages(selectedImages: ArrayList<Image>){
+    override fun passSelectedImages(selectedImages: ArrayList<Image>, shouldRefresh: Boolean){
         imageAdapter.setSelectedImages(selectedImages)
+
+        if (!switchState && shouldRefresh) {
+            imageAdapter.init(filteredImages, allImages, TreeMap())
+            imageAdapter.setSelectedImages(selectedImages)
+        }
     }
 }

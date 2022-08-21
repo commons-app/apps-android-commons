@@ -7,7 +7,6 @@ import androidx.exifinterface.media.ExifInterface
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.filepicker.PickedFiles
 import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
-import fr.free.nrw.commons.filepicker.PickedFiles
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper

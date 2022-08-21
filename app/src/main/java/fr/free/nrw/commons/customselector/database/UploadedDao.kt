@@ -67,17 +67,4 @@ abstract class UploadedStatusDao {
         return getFromImageSHA1(imageSHA1)
     }
 
-    /**
-     * Check whether the imageSHA1 is present in database
-     */
-    @Query("SELECT COUNT() FROM uploaded_table WHERE imageSHA1 = (:imageSHA1) AND imageResult = (:imageResult) ")
-    abstract suspend fun findByImageSHA1(imageSHA1 : String, imageResult: Boolean): Int
-
-    /**
-     * Check whether the modifiedImageSHA1 is present in database
-     */
-    @Query("SELECT COUNT() FROM uploaded_table WHERE modifiedImageSHA1 = (:modifiedImageSHA1) AND modifiedImageResult = (:modifiedImageResult) ")
-    abstract suspend fun findByModifiedImageSHA1(modifiedImageSHA1 : String,
-                                                 modifiedImageResult: Boolean): Int
-
 }
