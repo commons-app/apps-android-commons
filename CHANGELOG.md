@@ -1,5 +1,9 @@
 # Wikimedia Commons for Android
 
+## v4.0.5
+- Bumped min SDK to 29 to try and solve Google policy issue
+- Reverted dialog
+
 ## v4.0.4
 - Added dialog for Google's location policy
 
