@@ -26,6 +26,9 @@ open class OnSwipeTouchListener(context: Context?) : View.OnTouchListener {
             return true
         }
 
+        /**
+         * Detects the gestures
+         */
         override fun onFling(
             event1: MotionEvent,
             event2: MotionEvent,
@@ -61,9 +64,27 @@ open class OnSwipeTouchListener(context: Context?) : View.OnTouchListener {
         }
     }
 
+    /**
+     * Swipe right to view previous image
+     */
     open fun onSwipeRight() {}
+
+    /**
+     * Swipe left to view next image
+     */
     open fun onSwipeLeft() {}
+
+    /**
+     * Swipe up to select the picture (the equivalent of tapping it in non-fullscreen mode)
+     * and show the next picture skipping pictures that have either already been uploaded or
+     * marked as not for upload
+     */
     open fun onSwipeUp() {}
+
+    /**
+     * Swipe down to mark that picture as "Not for upload" (the equivalent of selecting it then
+     * tapping "Mark as not for upload" in non-fullscreen mode), and show the next picture.
+     */
     open fun onSwipeDown() {}
 
     init {

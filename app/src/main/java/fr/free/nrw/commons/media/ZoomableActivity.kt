@@ -147,7 +147,7 @@ class ZoomableActivity : BaseActivity() {
                         } else {
                             Toast.makeText(
                                 this@ZoomableActivity,
-                                "No more images found",
+                                getString(R.string.no_more_images_found),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -160,7 +160,7 @@ class ZoomableActivity : BaseActivity() {
                         } else {
                             Toast.makeText(
                                 this@ZoomableActivity,
-                                "No more images found",
+                                getString(R.string.no_more_images_found),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -176,7 +176,7 @@ class ZoomableActivity : BaseActivity() {
                         } else {
                             Toast.makeText(
                                 this@ZoomableActivity,
-                                "No more images found",
+                                getString(R.string.no_more_images_found),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -189,7 +189,7 @@ class ZoomableActivity : BaseActivity() {
                         } else {
                             Toast.makeText(
                                 this@ZoomableActivity,
-                                "No more images found",
+                                getString(R.string.no_more_images_found),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -209,7 +209,8 @@ class ZoomableActivity : BaseActivity() {
                         if (isNonActionable > 0) {
                             Toast.makeText(
                                 this@ZoomableActivity,
-                                "Can't select this image for upload", Toast.LENGTH_SHORT
+                                getString(R.string.can_not_select_this_image_for_upload),
+                                Toast.LENGTH_SHORT
                             ).show()
                         } else {
                             isNonActionable =
@@ -217,7 +218,8 @@ class ZoomableActivity : BaseActivity() {
                             if (isNonActionable > 0) {
                                 Toast.makeText(
                                     this@ZoomableActivity,
-                                    "Can't select this image for upload", Toast.LENGTH_SHORT
+                                    getString(R.string.can_not_select_this_image_for_upload),
+                                    Toast.LENGTH_SHORT
                                 ).show()
                             } else {
                                 val imageModifiedSHA1 = CustomSelectorUtils.generateModifiedSHA1(
@@ -234,7 +236,7 @@ class ZoomableActivity : BaseActivity() {
                                 if (isNonActionable > 0) {
                                     Toast.makeText(
                                         this@ZoomableActivity,
-                                        "Can't select this image for upload",
+                                        getString(R.string.can_not_select_this_image_for_upload),
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 } else {
@@ -252,17 +254,51 @@ class ZoomableActivity : BaseActivity() {
                 override fun onSwipeDown() {
                     super.onSwipeDown()
                     scope.launch {
-                        insertInNotForUpload(images!![position])
-                        shouldRefresh = true
-                        if (position < images!!.size - 1) {
-                            position++
-                            init(images!![position].uri)
-                        } else {
+                        val imageSHA1 = CustomSelectorUtils.getImageSHA1(
+                            images!![position].uri,
+                            ioDispatcher,
+                            fileUtilsWrapper,
+                            contentResolver
+                        )
+                        var isUploaded = uploadedStatusDao.findByImageSHA1(imageSHA1, true)
+                        if (isUploaded <= 0) {
                             Toast.makeText(
                                 this@ZoomableActivity,
-                                "No more images found",
+                                getString(R.string.this_image_is_already_uploaded),
                                 Toast.LENGTH_SHORT
                             ).show()
+                        } else {
+                            val imageModifiedSHA1 = CustomSelectorUtils.generateModifiedSHA1(
+                                images!![position],
+                                defaultDispatcher,
+                                this@ZoomableActivity,
+                                fileProcessor,
+                                fileUtilsWrapper
+                            )
+                            isUploaded = uploadedStatusDao.findByModifiedImageSHA1(
+                                imageModifiedSHA1,
+                                true
+                            )
+                            if (isUploaded <= 0) {
+                                Toast.makeText(
+                                    this@ZoomableActivity,
+                                    getString(R.string.this_image_is_already_uploaded),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                insertInNotForUpload(images!![position])
+                                shouldRefresh = true
+                                if (position < images!!.size - 1) {
+                                    position++
+                                    init(images!![position].uri)
+                                } else {
+                                    Toast.makeText(
+                                        this@ZoomableActivity,
+                                        getString(R.string.no_more_images_found),
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
                         }
                     }
                 }

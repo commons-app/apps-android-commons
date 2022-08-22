@@ -737,6 +737,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="mark_as_not_for_upload">Mark as not for upload</string>
   <string name="unmark_as_not_for_upload">Unmark as not for upload</string>
   <string name="show_already_actioned_pictures">Show already actioned pictures</string>
-  <string name="hide_already_actioned_pictures">Hide already actioned pictures</string>
   <string name="hiding_already_actioned_pictures">Hiding already actioned pictures</string>
+  <string name="no_more_images_found">No more images found</string>
+  <string name="this_image_is_already_uploaded">This image is already uploaded</string>
+  <string name="can_not_select_this_image_for_upload">Can not select this image for upload</string>
 </resources>

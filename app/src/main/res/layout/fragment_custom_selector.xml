@@ -14,7 +14,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    android:text="@string/hide_already_actioned_pictures"
+    android:text="@string/show_already_actioned_pictures"
     android:padding="@dimen/dimen_10"
     android:checked="true" />
 

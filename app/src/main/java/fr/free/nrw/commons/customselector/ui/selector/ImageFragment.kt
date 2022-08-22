@@ -197,9 +197,6 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassData
             requireContext().getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, MODE_PRIVATE)
         switchState = sharedPreferences.getBoolean(SWITCH_STATE_PREFERENCE_KEY, true)
         switch?.isChecked = switchState
-        switch?.text =
-            if (switchState) getString(R.string.hide_already_actioned_pictures)
-            else getString(R.string.show_already_actioned_pictures)
 
         return root
     }
@@ -212,7 +209,6 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassData
             val editor = sharedPreferences.edit()
             editor.putBoolean(SWITCH_STATE_PREFERENCE_KEY, true)
             editor.apply()
-            switch?.text = getString(R.string.hide_already_actioned_pictures)
 
             imageAdapter.init(allImages, allImages, TreeMap())
             imageAdapter.notifyDataSetChanged()
@@ -223,7 +219,6 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassData
             val editor = sharedPreferences.edit()
             editor.putBoolean(SWITCH_STATE_PREFERENCE_KEY, false)
             editor.apply()
-            switch?.text = getString(R.string.show_already_actioned_pictures)
 
             imageAdapter.init(allImages, allImages, TreeMap())
             imageAdapter.notifyDataSetChanged()
