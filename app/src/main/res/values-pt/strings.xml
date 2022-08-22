@@ -24,6 +24,20 @@
   <string name="commons_website">Sítio da wiki Commons</string>
   <string name="exit_location_picker">Sair do selecionador de localização</string>
   <string name="submit">Enviar</string>
+  <string name="add_another_description">Adicionar outra descrição</string>
+  <string name="add_new_contribution">Adicionar nova contribuição</string>
+  <string name="add_contribution_from_camera">Adicionar contribuição da câmara</string>
+  <string name="add_contribution_from_photos">Adicionar contribuição de fotos</string>
+  <string name="add_contribution_from_contributions_gallery">Adicionar contribuição da galeria de contribuições anteriores</string>
+  <string name="show_captions">Legendas</string>
+  <string name="row_item_language_description">Descrição da língua</string>
+  <string name="row_item_caption">Legenda</string>
+  <string name="show_captions_description">Descrição</string>
+  <string name="nearby_row_image">Imagem</string>
+  <string name="nearby_all">Todas</string>
+  <string name="nearby_filter_toggle">Alternar para cima</string>
+  <string name="nearby_filter_search">Vista de pesquisa</string>
+  <string name="nearby_filter_state">Estado do local</string>
   <string name="appwidget_img">Imagem do Dia</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">a carregar %1$d ficheiro</item>
@@ -646,7 +660,7 @@
   <string name="done">Concluído</string>
   <string name="back">Voltar</string>
   <string name="welcome_custom_picture_selector_text">Bem-vindo ao seletor de imagens personalizado</string>
-  <string name="custom_selector_info_text1" fuzzy="true">Este seletor mostra de forma diferente imagens que já estão na wiki Commons.</string>
+  <string name="custom_selector_info_text1">Este seletor mostra-lhe que imagens já carregou na wiki Commons.</string>
   <string name="custom_selector_info_text2">Ao contrário da imagem à esquerda, a imagem à direita tem o logótipo da wiki Commons que indica que ela já foi carregada.\n Tocar e manter para uma antevisão da imagem.</string>
   <string name="welcome_custom_selector_ok">Excecional</string>
   <string name="custom_selector_already_uploaded_image_text">Esta imagem já foi carregada na wiki Commons.</string>
@@ -686,4 +700,9 @@
   <string name="error_feedback">Falha ao enviar opinião</string>
   <string name="enter_description">Qual é a sua opinião?</string>
   <string name="your_feedback">A sua opinião</string>
+  <string name="menu_view_report">Reportar</string>
+  <string name="report_violation">Reportar infração</string>
+  <string name="report_user">Reportar este utilizador</string>
+  <string name="report_content">Reportar este conteúdo</string>
+  <string name="request_user_block">Pedir o bloqueio deste utilizador</string>
 </resources>

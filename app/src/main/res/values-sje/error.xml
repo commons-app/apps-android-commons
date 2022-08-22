@@ -4,5 +4,7 @@
 -->
 <resources>
   <string name="crash_dialog_title">Commons lä våvvdåm</string>
+  <string name="crash_dialog_text">Gunnodis. Nágan vihke sjaddaj!</string>
+  <string name="crash_dialog_comment_prompt">Säddi mijjaj e-påståv gunne dån ságasta mav dån lijji sjaddamin. Dát viehkeda mijav dav divvot!</string>
   <string name="crash_dialog_ok_toast">Gijtov ane!</string>
 </resources>

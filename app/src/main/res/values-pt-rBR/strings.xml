@@ -629,7 +629,7 @@
   <string name="resuming_upload">Retomando carregamento…</string>
   <string name="pausing_upload">Pausando carregamento…</string>
   <string name="cancelling_upload">Cancelando o envio…</string>
-  <string name="cancel_upload">Cancelar Envio</string>
+  <string name="cancel_upload">Cancelar envio</string>
   <string name="limited_connection_explanation">Você habilitou o modo de conexão limitada. Todos os carregamentos são pausados e serão retomados assim que você desativar este modo.</string>
   <string name="limited_connection_is_on">O modo de conexão limitada está ativado.</string>
   <string name="media_details_tooltip">Escreva uma pequena legenda que diga o que sua imagem mostra. Na descrição, diga o que torna a imagem interessante ou típica ou rara e explique o contexto, visível ou não. Use a terminologia exata tanto quanto você puder.</string>

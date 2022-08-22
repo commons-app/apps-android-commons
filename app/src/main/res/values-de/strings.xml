@@ -669,7 +669,7 @@
   <string name="done">Fertig</string>
   <string name="back">Zurück</string>
   <string name="welcome_custom_picture_selector_text">Willkommen bei der benutzerdefinierten Auswahl</string>
-  <string name="custom_selector_info_text1" fuzzy="true">Diese Auswahl zeigt verschiedene Bilder, die bereits zu Commons gehören.</string>
+  <string name="custom_selector_info_text1">Diese Auswahl zeigt dir, welche Bilder du bereits auf Commons hochgeladen hast.</string>
   <string name="custom_selector_info_text2">Im Gegensatz zum Bild auf der linken Seite ist das Bild auf der rechten Seite mit dem Commons-Logo versehen, das anzeigt, dass es bereits hochgeladen wurde. Für die Bildvorschau berühren und halten.</string>
   <string name="welcome_custom_selector_ok">Großartig</string>
   <string name="custom_selector_already_uploaded_image_text">Dieses Bild ist bereits auf Commons hochgeladen worden.</string>
@@ -709,4 +709,9 @@
   <string name="error_feedback">Fehler beim Senden von Rückmeldungen</string>
   <string name="enter_description">Wie lautet dein Feedback?</string>
   <string name="your_feedback">Dein Feedback</string>
+  <string name="menu_view_report">Meldung</string>
+  <string name="report_violation">Verstoß melden</string>
+  <string name="report_user">Diesen Benutzer melden</string>
+  <string name="report_content">Diesen Inhalt melden</string>
+  <string name="request_user_block">Antrag auf Sperrung dieses Benutzers</string>
 </resources>
