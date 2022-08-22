@@ -31,7 +31,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatTextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -111,7 +110,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     private Marker currentLocationMarker;
     private Polygon currentLocationPolygon;
     IntentFilter intentFilter = new IntentFilter(MapUtils.NETWORK_INTENT_ACTION);
-    private AlertDialog locationDialog;
 
     @Inject
     LiveDataConverter liveDataConverter;
@@ -402,27 +400,9 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     @Override
     public void checkPermissionsAndPerformAction() {
         Timber.d("Checking permission and perfoming action");
-        if (PermissionUtils.hasPermission(getActivity(),
-            Manifest.permission.ACCESS_FINE_LOCATION)) {
-            Timber.d("Permission granted");
-            getPermissions();
-        } else {
-            if (locationDialog == null) {
-                locationDialog = new AlertDialog.Builder(requireActivity())
-                    .setTitle(R.string.location_permission_title)
-                    .setMessage(R.string.location_permission_rationale_nearby)
-                    .setPositiveButton(R.string.ok, (dialog, which) -> {
-                        dialog.dismiss();
-                        getPermissions();
-                    }).show();
-            }
-        }
-    }
-
-    private void getPermissions() {
         PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
             Manifest.permission.ACCESS_FINE_LOCATION,
-            this::locationPermissionGranted,
+            () -> locationPermissionGranted(),
             () -> isPermissionDenied = true,
             R.string.location_permission_title,
             R.string.location_permission_rationale_nearby);

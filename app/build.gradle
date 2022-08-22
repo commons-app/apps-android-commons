@@ -44,7 +44,7 @@ dependencies {
     implementation 'com.mapbox.mapboxsdk:mapbox-android-telemetry:7.0.0'
     implementation 'com.github.deano2390:MaterialShowcaseView:1.2.0'
     implementation 'com.dinuscxj:circleprogressbar:1.1.1'
-    implementation 'com.karumi:dexter:6.2.3'
+    implementation 'com.karumi:dexter:5.0.0'
     implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 

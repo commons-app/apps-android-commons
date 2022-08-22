@@ -130,7 +130,18 @@ public class PermissionUtils {
                 @Override
                 public void onPermissionRationaleShouldBeShown(PermissionRequest permission,
                     PermissionToken token) {
-                    token.continuePermissionRequest();
+                    if (rationaleTitle == -1 && rationaleMessage == -1) {
+                        token.continuePermissionRequest();
+                        return;
+                    }
+                    DialogUtil.showAlertDialog(activity, activity.getString(rationaleTitle),
+                        activity.getString(rationaleMessage),
+                        activity.getString(android.R.string.ok),
+                        activity.getString(android.R.string.cancel),
+                        token::continuePermissionRequest,
+                        token::cancelPermissionRequest,
+                        null,
+                        false);
                 }
             })
             .check();

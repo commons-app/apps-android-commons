@@ -241,7 +241,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private PlaceAdapter adapter;
     private NearbyParentFragmentInstanceReadyCallback nearbyParentFragmentInstanceReadyCallback;
     private boolean isAdvancedQueryFragmentVisible = false;
-    private AlertDialog locationDialog;
 
     /**
      * Holds filtered markers that are to be shown
@@ -439,7 +438,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private void performMapReadyActions() {
         if (((MainActivity)getActivity()).activeFragment == ActiveFragment.NEARBY && isMapBoxReady) {
-            if(!applicationKvStore.getBoolean("doNotAskForLocationPermission", false)){
+            if(!applicationKvStore.getBoolean("doNotAskForLocationPermission", false) ||
+                PermissionUtils.hasPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)){
                 checkPermissionsAndPerformAction();
             }else{
                 isPermissionDenied = true;
@@ -1212,30 +1212,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void checkPermissionsAndPerformAction() {
         Timber.d("Checking permission and perfoming action");
-        if (PermissionUtils.hasPermission(getActivity(),
-            Manifest.permission.ACCESS_FINE_LOCATION)) {
-            Timber.d("Permission granted");
-            getPermissions();
-        } else {
-            if (locationDialog == null) {
-                locationDialog = new AlertDialog.Builder(requireActivity())
-                    .setTitle(R.string.location_permission_title)
-                    .setMessage(R.string.location_permission_rationale_nearby)
-                    .setPositiveButton(R.string.ok, (dialog, which) -> {
-                        dialog.dismiss();
-                        getPermissions();
-                    }).show();
-            }
-        }
-    }
-
-    private void getPermissions() {
         PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            this::locationPermissionGranted,
-            () -> isPermissionDenied = true,
-            R.string.location_permission_title,
-            R.string.location_permission_rationale_nearby);
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                () -> locationPermissionGranted(),
+                () -> isPermissionDenied = true,
+                R.string.location_permission_title,
+                R.string.location_permission_rationale_nearby);
     }
 
     /**
