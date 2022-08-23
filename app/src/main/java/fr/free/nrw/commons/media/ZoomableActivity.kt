@@ -261,7 +261,7 @@ class ZoomableActivity : BaseActivity() {
                             contentResolver
                         )
                         var isUploaded = uploadedStatusDao.findByImageSHA1(imageSHA1, true)
-                        if (isUploaded <= 0) {
+                        if (isUploaded > 0) {
                             Toast.makeText(
                                 this@ZoomableActivity,
                                 getString(R.string.this_image_is_already_uploaded),
@@ -279,7 +279,7 @@ class ZoomableActivity : BaseActivity() {
                                 imageModifiedSHA1,
                                 true
                             )
-                            if (isUploaded <= 0) {
+                            if (isUploaded > 0) {
                                 Toast.makeText(
                                     this@ZoomableActivity,
                                     getString(R.string.this_image_is_already_uploaded),
