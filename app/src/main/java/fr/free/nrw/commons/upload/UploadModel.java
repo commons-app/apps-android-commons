@@ -102,8 +102,10 @@ public class UploadModel {
                 .getFileCreatedDate(context);
         long fileCreatedDate = -1;
         String createdTimestampSource = "";
+        String fileCreatedDateString = "";
         if (dateTimeWithSource != null) {
             fileCreatedDate = dateTimeWithSource.getEpochDate();
+            fileCreatedDateString = dateTimeWithSource.getDateString();
             createdTimestampSource = dateTimeWithSource.getSource();
         }
         Timber.d("File created date is %d", fileCreatedDate);
@@ -113,7 +115,8 @@ public class UploadModel {
             Uri.parse(uploadableFile.getFilePath()),
                 uploadableFile.getMimeType(context), imageCoordinates, place, fileCreatedDate,
                 createdTimestampSource,
-                uploadableFile.getContentUri());
+                uploadableFile.getContentUri(),
+                fileCreatedDateString);
         if (place != null) {
             uploadItem.getUploadMediaDetails().set(0, new UploadMediaDetail(place));
         }

@@ -18,6 +18,16 @@
     <uses-permission android:name="android.permission.SET_WALLPAPER"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
+    <queries>
+        <!-- Browser -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="https" />
+        </intent>
+        <!-- Google Maps -->
+        <package android:name="com.google.android.apps.maps" />
+    </queries>
 
 
     <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->

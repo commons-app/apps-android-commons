@@ -14,6 +14,7 @@
 * Pebaryan
 * Rachmat04
 * Rv77ax
+* Veracious
 * William Surya Permana
 -->
 <resources>
@@ -23,6 +24,17 @@
   <string name="commons_website">Situs Commons</string>
   <string name="exit_location_picker">Keluar dari pemilih lokasi</string>
   <string name="submit">Kirim</string>
+  <string name="add_another_description">Tambahkan deskripsi lain</string>
+  <string name="add_new_contribution">Tambahkan kontribusi baru</string>
+  <string name="add_contribution_from_camera">Tambahkan kontribusi dari kamera</string>
+  <string name="add_contribution_from_photos">Tambahkan kontribusi dari Foto</string>
+  <string name="add_contribution_from_contributions_gallery">Tambahkan kontribusi dari galeri kontribusi sebelumnya</string>
+  <string name="show_captions">Takarir</string>
+  <string name="row_item_language_description">Deskripsi Bahasa</string>
+  <string name="row_item_caption">Takarir</string>
+  <string name="show_captions_description">Deskripsi</string>
+  <string name="nearby_row_image">Gambar</string>
+  <string name="nearby_all">Semua</string>
   <string name="appwidget_img">Gambar hari ini</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="other">mengunggah %1$d berkas</item>
@@ -301,6 +313,7 @@
   <string name="search_tab_title_depictions">Butir</string>
   <string name="explore_tab_title_featured">Terpilih</string>
   <string name="explore_tab_title_mobile">Diunggah melalui ponsel</string>
+  <string name="explore_tab_title_map">Peta</string>
   <string name="successful_wikidata_edit">Gambar ditambahkan ke %1$s di Wikidata!</string>
   <string name="wikidata_edit_failure">Gagal mengubah entitas Wikidata yang bersangkutan!</string>
   <string name="menu_set_wallpaper">Jadikan Wallpaper</string>
@@ -629,7 +642,7 @@
   <string name="done">Selesai</string>
   <string name="back">Kembali</string>
   <string name="welcome_custom_picture_selector_text">Selamat datang di Pemilih Gambar Kustom</string>
-  <string name="custom_selector_info_text1">Alat pemilih ini menunjukkan perbedaan gambar yang sudah ada di Commons.</string>
+  <string name="custom_selector_info_text1" fuzzy="true">Alat pemilih ini menunjukkan perbedaan gambar yang sudah ada di Commons.</string>
   <string name="custom_selector_info_text2">Berbeda dengan gambar di sebelah kiri, gambar di sebelah kanan memiliki logo Commons yang menandakan gambarnya sudah diunggah.\n  Sentuh dan tahan untuk pratinjau gambar.</string>
   <string name="welcome_custom_selector_ok">Bagus</string>
   <string name="custom_selector_already_uploaded_image_text">Gambar ini sudah diunggah di Commons.</string>
@@ -645,6 +658,7 @@
   <string name="contributions_of_user">Kontribusi Pengguna: %s</string>
   <string name="achievements_of_user">Pencapaian Pengguna: %s</string>
   <string name="menu_view_user_page">Lihat halaman pengguna</string>
+  <string name="edit_categories">Sunting kategori</string>
   <string name="advanced_options">Opsi Lanjutan</string>
   <string name="advanced_query_info_text">Anda bisa menyesuaikan kueri Sekitar. Jika Anda mendapatkan galat, atur ulang dan terapkan.</string>
   <string name="apply">Terapkan</string>
@@ -654,5 +668,20 @@
   <string name="no_location_found_message">Bagaimana jika Anda menambahkan tempat di mana gambar ini diambil?\nData lokasi membantu para penyunting Wiki menemukan gambar Anda, sehingga ia menjadi lebih berguna.\nTerima kasih!</string>
   <string name="add_location">Tambahkan lokasi</string>
   <string name="feedback_sharing_data_alert">Silakan hapus informasi yang menurut Anda tidak layak disebarkan ke masyarakat umum dari surel ini. Selain itu, perlu diperhatikan bahwa alamat surel yang Anda unggah, beserta foto penggunanya, akan dapat dilihat oleh masyarakat umum.</string>
+  <string name="explore_map_details">Rincian</string>
   <string name="copyright_popup">Silakan unggah gambar yang Anda buat sendiri. Pengunggah gambar yang melanggar hak cipta akan diblokir. Aturan ini juga berlaku untuk beta. Terima kasih telah menguji aplikasi ini!</string>
+  <string name="api_level">Level API</string>
+  <string name="android_version">Versi Android</string>
+  <string name="device_manufacturer">Produsen perangkat</string>
+  <string name="device_model">Model perangkat</string>
+  <string name="device_name">Nama perangkat</string>
+  <string name="network_type">Tipe jaringan</string>
+  <string name="thanks_feedback">Terima kasih telah memberikan umpan balik</string>
+  <string name="error_feedback">Galat saat mengirim umpan balik</string>
+  <string name="enter_description">Apa tanggapan Anda?</string>
+  <string name="your_feedback">Umpan balik Anda</string>
+  <string name="report_violation">Laporkan pelanggaran</string>
+  <string name="report_user">Laporkan pengguna ini</string>
+  <string name="report_content">Laporkan konten ini</string>
+  <string name="request_user_block">Buat permohonan pemblokiran pengguna ini</string>
 </resources>

@@ -177,20 +177,103 @@ class RecentLanguagesDaoUnitTest {
     @Test
     fun migrateTableVersionFrom_v5_to_v6() {
         onUpdate(database, 5, 6)
-        // Table didnt exist before v7
+        // Table didnt exist in version 6
         verifyZeroInteractions(database)
     }
 
     @Test
     fun migrateTableVersionFrom_v6_to_v7() {
         onUpdate(database, 6, 7)
-        verify(database).execSQL(CREATE_TABLE_STATEMENT)
+        // Table didnt exist in version 7
+        verifyZeroInteractions(database)
     }
 
     @Test
     fun migrateTableVersionFrom_v7_to_v8() {
         onUpdate(database, 7, 8)
-        // Table didnt change in version 8
+        // Table didnt exist in version 8
+        verifyZeroInteractions(database)
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v8_to_v9() {
+        onUpdate(database, 8, 9)
+        // Table didnt exist in version 9
+        verifyZeroInteractions(database)
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v9_to_v10() {
+        onUpdate(database, 9, 10)
+        // Table didnt exist in version 10
+        verifyZeroInteractions(database)
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v10_to_v11() {
+        onUpdate(database, 10, 11)
+        // Table didnt exist in version 11
+        verifyZeroInteractions(database)
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v11_to_v12() {
+        onUpdate(database, 11, 12)
+        // Table didnt exist in version 12
+        verifyZeroInteractions(database)
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v12_to_v13() {
+        onUpdate(database, 12, 13)
+        // Table didnt exist in version 13
+        verifyZeroInteractions(database)
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v13_to_v14() {
+        onUpdate(database, 13, 14)
+        // Table didnt exist in version 14
+        verifyZeroInteractions(database)
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v14_to_v15() {
+        onUpdate(database, 14, 15)
+        // Table didnt exist in version 15
+        verifyZeroInteractions(database)
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v15_to_v16() {
+        onUpdate(database, 15, 16)
+        // Table didnt exist in version 16
+        verifyZeroInteractions(database)
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v16_to_v17() {
+        onUpdate(database, 16, 17)
+        // Table didnt exist in version 17
+        verifyZeroInteractions(database)
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v18_to_v19() {
+        onUpdate(database, 18, 19)
+        // Table didnt exist in version 18
+        verifyZeroInteractions(database)
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v19_to_v20() {
+        onUpdate(database, 19, 20)
+        verify(database).execSQL(CREATE_TABLE_STATEMENT)
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v20_to_v20() {
+        onUpdate(database, 20, 20)
         verifyZeroInteractions(database)
     }
 

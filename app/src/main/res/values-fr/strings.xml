@@ -4,6 +4,7 @@
 * Ajeje Brazorf
 * Alno
 * BaRaN6161 TURK
+* Cigaryno
 * Cyclicus
 * Derugon
 * Eneelk
@@ -52,7 +53,7 @@
   <string name="show_captions_description">Description</string>
   <string name="nearby_row_image">Image</string>
   <string name="nearby_all">Tous</string>
-  <string name="nearby_filter_toggle">Bascule haut / bas</string>
+  <string name="nearby_filter_toggle">Basculer vers le haut</string>
   <string name="nearby_filter_search">Vue de recherche</string>
   <string name="nearby_filter_state">État du lieu</string>
   <string name="appwidget_img">Image du jour</string>
@@ -140,7 +141,7 @@
   <string name="login_failed_2fa_needed">Vous devez fournir votre code d’authentification à deux facteurs.</string>
   <string name="login_failed_generic">Échec de connexion</string>
   <string name="share_upload_button">Téléverser</string>
-  <string name="multiple_share_base_title">Nommer ce jeu</string>
+  <string name="multiple_share_base_title">Nommer cet ensemble</string>
   <string name="provider_modifications">Modifications</string>
   <string name="menu_upload_single">Téléverser</string>
   <string name="categories_search_text_hint">Rechercher des catégories</string>
@@ -218,8 +219,8 @@
   <string name="detail_license_empty">Licence inconnue</string>
   <string name="menu_refresh">Actualiser</string>
   <string name="storage_permission_title">Demande d’autorisation d’accès au stockage</string>
-  <string name="read_storage_permission_rationale">Autorisation nécessaire : lecture sur stockage externe. L’application ne peut pas accéder à votre galerie sans cela.</string>
-  <string name="write_storage_permission_rationale">Permission obligatoire : écriture sur stockage externe. L’application ne peut pas accéder à votre appareil photo/galerie sans cela.</string>
+  <string name="read_storage_permission_rationale">Permission nécessaire : lecture sur stockage externe. Sans cela, l’application ne peut pas accéder à votre galerie.</string>
+  <string name="write_storage_permission_rationale">Permission obligatoire : écriture sur stockage externe. Sans cela, l’application ne peut pas accéder à votre appareil photo ou votre galerie.</string>
   <string name="location_permission_title">Demande d’autorisation d’accès au stockage</string>
   <string name="ok">OK</string>
   <string name="warning">Avertissement</string>
@@ -433,7 +434,7 @@
   <string name="back_button_warning">Annuler le téléversement</string>
   <string name="back_button_warning_desc">L’utilisation du bouton de retour annulera ce téléversement et vous perdrez votre progression</string>
   <string name="back_button_continue">Continuer le téléversement</string>
-  <string name="upload_flow_all_images_in_set">(Pour toutes les images dans le jeu)</string>
+  <string name="upload_flow_all_images_in_set">(Pour toutes les images de l’ensemble)</string>
   <string name="search_this_area">Chercher dans cette zone</string>
   <string name="nearby_card_permission_title">Demande d’autorisation</string>
   <string name="nearby_card_permission_explanation">Désirez-vous que nous utilisions votre géolocalisation actuelle pour afficher les endroits proches qui ont besoin d\'images ?</string>
@@ -509,7 +510,7 @@
   <string name="exif_tag_name_software">Logiciel</string>
   <string name="share_text">Téléversez des photos sur Wikimedia Commons directement depuis votre téléphone. Téléchargez l’application Commons maintenant : %1$s</string>
   <string name="share_via">Partager l’application via...</string>
-  <string name="image_info">Informations de l’image</string>
+  <string name="image_info">Informations sur l’image</string>
   <string name="no_categories_found">Aucune catégorie trouvée</string>
   <string name="no_depiction_found">Aucun élément représenté trouvé</string>
   <string name="upload_cancelled">Téléversement annulé</string>
@@ -677,7 +678,7 @@
   <string name="done">Fait</string>
   <string name="back">Retour</string>
   <string name="welcome_custom_picture_selector_text">Bienvenue dans le sélecteur d’image personnalisé</string>
-  <string name="custom_selector_info_text1">Ce sélecteur affiche différemment les images qui sont déjà dans Commons.</string>
+  <string name="custom_selector_info_text1">Ce sélecteur affiche quelles images vous avez déjà téléversées dans Commons.</string>
   <string name="custom_selector_info_text2">À l’inverse de l’image sur la gauche, l’image de droite comporte un logo Commons qui indique qu’elle a déjà été téléversée.\nToucher et maintenir pour avoir un aperçu de l’image.</string>
   <string name="welcome_custom_selector_ok">Génial</string>
   <string name="custom_selector_already_uploaded_image_text">Cette image a déjà été téléversée sur Commons.</string>
@@ -699,7 +700,7 @@
   <string name="advanced_query_info_text">Vous pouvez personnaliser la requête de proximité. Si vous obtenez des erreurs, réinitialisez et appliquez.</string>
   <string name="apply">Appliquer</string>
   <string name="reset">Réinitialiser</string>
-  <string name="location_message">Les données de lieu aident les éditeurs de Wiki à trouver votre photo, ce qui la rend beaucoup plus utile.\nVos téléchargements récents n’indiquent aucun lieu.\nNous vous suggérons d’activer la géolocalisation dans les paramètres de votre application appareil photo.\nMerci pour vos téléversements !</string>
+  <string name="location_message">Les données de lieu aident les éditeurs de Wiki à trouver votre photo, ce qui la rend beaucoup plus utile.\nVos téléchargements récents n’indiquent aucun lieu.\nNous vous suggérons d’activer la géolocalisation dans les paramètres de votre application appareil photo.\nMerci pour vos téléversements !</string>
   <string name="no_location_found_title">Aucun lieu trouvé</string>
   <string name="no_location_found_message">Pourquoi ne pas ajouter le lieu où cette image a été trouvée ?\nLes données de lieu aident les contributeurs de wikis à trouver votre image, ce qui la rend beaucoup plus utile.\nMerci !</string>
   <string name="add_location">Ajouter un lieu</string>
@@ -719,4 +720,9 @@
   <string name="error_feedback">Erreur lors de l’envoi de l’avis</string>
   <string name="enter_description">Quel est votre avis ?</string>
   <string name="your_feedback">Votre avis</string>
+  <string name="menu_view_report">Signaler</string>
+  <string name="report_violation">Signaler une infraction</string>
+  <string name="report_user">Signaler cet utilisateur</string>
+  <string name="report_content">Signaler ce contenu</string>
+  <string name="request_user_block">Demande de blocage de cet utilisateur</string>
 </resources>

@@ -670,7 +670,7 @@
   <string name="done">Gotowe</string>
   <string name="back">Cofnij</string>
   <string name="welcome_custom_picture_selector_text">Witamy w niestandardowym selektorze zdjęć</string>
-  <string name="custom_selector_info_text1">Ten selektor pokazuje inaczej zdjęcia, które są już na Commons.</string>
+  <string name="custom_selector_info_text1" fuzzy="true">Ten selektor pokazuje inaczej zdjęcia, które są już na Commons.</string>
   <string name="custom_selector_info_text2">W przeciwieństwie do zdjęcia po lewej, zdjęcie po prawej ma logo Commons wskazujące, że zostało już przesłane.\n  Dotknij i przytrzymaj, aby wyświetlić podgląd obrazu.</string>
   <string name="welcome_custom_selector_ok">Niesamowite</string>
   <string name="custom_selector_already_uploaded_image_text">Tez plik został już przesłany do Commons.</string>

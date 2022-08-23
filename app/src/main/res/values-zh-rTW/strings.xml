@@ -665,7 +665,7 @@
   <string name="done">完成</string>
   <string name="back">返回</string>
   <string name="welcome_custom_picture_selector_text">歡迎來到自訂圖片選擇器</string>
-  <string name="custom_selector_info_text1">此點選器顯示已在維基共享資源上的各種不同圖片。</string>
+  <string name="custom_selector_info_text1">此點選器會為您顯示出您上傳到維基共享資源的圖片。</string>
   <string name="custom_selector_info_text2">右邊的圖片與與左邊圖片不同，它有代表已經上傳到維基共享資源的標誌。\n請輕壓圖片來預覽。</string>
   <string name="welcome_custom_selector_ok">棒極了</string>
   <string name="custom_selector_already_uploaded_image_text">此圖片已上傳到維基共享資源。</string>
@@ -707,4 +707,9 @@
   <string name="error_feedback">在發送意見回饋時發生錯誤</string>
   <string name="enter_description">您的意見回饋是？</string>
   <string name="your_feedback">您的意見回饋</string>
+  <string name="menu_view_report">回報</string>
+  <string name="report_violation">回報違反行為</string>
+  <string name="report_user">回報該名使用者</string>
+  <string name="report_content">回報這份內容</string>
+  <string name="request_user_block">請求封鎖該名使用者</string>
 </resources>

@@ -631,7 +631,7 @@
   <string name="done">Fàit</string>
   <string name="back">André</string>
   <string name="welcome_custom_picture_selector_text">Bin-ëvnù ant ël seletor ëd plance përsonalisà</string>
-  <string name="custom_selector_info_text1">Ës seletor a smon ëd fasson diferenta dle plance ch\'a son già an Comun</string>
+  <string name="custom_selector_info_text1" fuzzy="true">Ës seletor a smon ëd fasson diferenta dle plance ch\'a son già an Comun</string>
   <string name="custom_selector_info_text2">A diferensa da la plancia a snistra, la plancia a drita a la marca Comun ch\'a mostra ch\'a l\'é già stàita carià.\n Toché e ten-e për avèj na previsualisassion ëd la plancia.</string>
   <string name="welcome_custom_selector_ok">Fiamengh</string>
   <string name="custom_selector_already_uploaded_image_text">La plancia a l\'é già stàita carià su Comun.</string>

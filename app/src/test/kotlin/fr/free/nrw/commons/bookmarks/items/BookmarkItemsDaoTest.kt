@@ -271,9 +271,84 @@ class BookmarkItemsDaoTest {
     @Test
     fun migrateTableVersionFrom_v7_to_v8() {
         onUpdate(database, 7, 8)
+        // Table didn't change in version 8
+        verifyZeroInteractions(database)
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v8_to_v9() {
+        onUpdate(database, 8, 9)
+        // Table didn't change in version 9
+        verifyZeroInteractions(database)
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v9_to_v10() {
+        onUpdate(database, 9, 10)
+        // Table didn't change in version 10
+        verifyZeroInteractions(database)
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v10_to_v11() {
+        onUpdate(database, 10, 11)
+        // Table didn't change in version 11
+        verifyZeroInteractions(database)
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v11_to_v12() {
+        onUpdate(database, 11, 12)
+        // Table didn't change in version 12
+        verifyZeroInteractions(database)
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v12_to_v13() {
+        onUpdate(database, 12, 13)
+        // Table didn't change in version 13
+        verifyZeroInteractions(database)
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v13_to_v14() {
+        onUpdate(database, 13, 14)
+        // Table didn't change in version 14
+        verifyZeroInteractions(database)
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v14_to_v15() {
+        onUpdate(database, 14, 15)
+        // Table didn't change in version 15
+        verifyZeroInteractions(database)
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v15_to_v16() {
+        onUpdate(database, 15, 16)
+        // Table didn't change in version 16
+        verifyZeroInteractions(database)
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v16_to_v17() {
+        onUpdate(database, 16, 17)
+        // Table didn't change in version 17
+        verifyZeroInteractions(database)
+    }
+
+    @Test
+    fun migrateTableVersionFrom_v18_to_v19() {
+        onUpdate(database, 18, 19)
         verify(database).execSQL(CREATE_TABLE_STATEMENT)
     }
 
+    @Test
+    fun migrateTableVersionFrom_v19_to_v19() {
+        onUpdate(database, 19, 19)
+        verifyZeroInteractions(database)
+    }
 
     private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
 

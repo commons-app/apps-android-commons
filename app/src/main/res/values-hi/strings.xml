@@ -12,6 +12,7 @@
 * Rajatkatiyar10
 * Rishi.Singh
 * Sachinkatiyar
+* Saurmandal
 * Sfic
 * Shypoetess
 * Siddhartha Ghai
@@ -204,7 +205,7 @@
   <string name="navigation_item_notification">सूचनायें</string>
   <string name="no_description_found">कोई विवरण नहीं मिला</string>
   <string name="nearby_info_menu_commons_article">कॉमन्स फाइल पृष्ठ</string>
-  <string name="nearby_info_menu_wikidata_article">विकिडाटा वस्तु</string>
+  <string name="nearby_info_menu_wikidata_article">विकिडेटा आयटम</string>
   <string name="nearby_info_menu_wikipedia_article">विकीपीडिया लेख</string>
   <string name="description_info">कृपया मीडिया जितना संभव हो उतना बताएं: यह कहां लिया गया? यह क्या दिखाता है? संदर्भ क्या है? कृपया वस्तुओं या व्यक्तियों का वर्णन करें। ऐसी जानकारी का खुलासा करें जिसे आसानी से अनुमानित नहीं किया जा सकता, उदाहरण के लिए दिन का समय यदि यह परिदृश्य है। अगर मीडिया कुछ असामान्य दिखाता है, तो कृपया बताएं कि इसे क्या असामान्य बनाता है।</string>
   <string name="upload_problem_exist">इस चित्र के साथ सम्भावित समस्या:</string>

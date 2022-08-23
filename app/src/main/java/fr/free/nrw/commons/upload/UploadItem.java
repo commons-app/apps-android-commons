@@ -25,6 +25,7 @@ public class UploadItem {
     private boolean hasInvalidLocation;
     private boolean isWLMUpload = false;
     private String countryCode;
+    private String fileCreatedDateString; //according to EXIF data
 
     /**
      * Uri of uploadItem
@@ -40,7 +41,8 @@ public class UploadItem {
         final Place place,
         final long createdTimestamp,
         final String createdTimestampSource,
-        final Uri contentUri) {
+        final Uri contentUri,
+        final String fileCreatedDateString) {
         this.createdTimestampSource = createdTimestampSource;
         uploadMediaDetails = new ArrayList<>(Collections.singletonList(new UploadMediaDetail()));
         this.place = place;
@@ -50,6 +52,7 @@ public class UploadItem {
         this.createdTimestamp = createdTimestamp;
         this.contentUri = contentUri;
         imageQuality = BehaviorSubject.createDefault(ImageUtils.IMAGE_WAIT);
+        this.fileCreatedDateString = fileCreatedDateString;
     }
 
     public String getCreatedTimestampSource() {
@@ -82,6 +85,8 @@ public class UploadItem {
      * Uri points to image location or name, eg content://media/external/images/camera/10495 (Android 10)
      */
     public Uri getContentUri() { return contentUri; }
+
+    public String getFileCreatedDateString() { return fileCreatedDateString; }
 
     public void setImageQuality(final int imageQuality) {
       this.imageQuality.onNext(imageQuality);

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Har-wradim
+* Pacha Tchernof
 * פוילישער
 -->
 <resources>
@@ -115,6 +116,7 @@
   <string name="navigation_item_feedback">פֿידבעק</string>
   <string name="navigation_item_logout">אַרויסלאָגירן</string>
   <string name="upload_problem_image_dark">בילד איז צו טונקל</string>
+  <string name="about_translate_cancel">אַנולירן</string>
   <string name="app_widget_heading">בילד פונעם טאָג</string>
   <string name="search_tab_title_media" fuzzy="true">מעדיע</string>
   <string name="search_tab_title_categories" fuzzy="true">קאַטעגאריעס</string>

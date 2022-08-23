@@ -24,6 +24,7 @@
 * Si109
 * SkyEye FAST
 * SomeyaMako
+* Stang
 * StarrySky
 * Tranve
 * Vikarna
@@ -204,7 +205,7 @@
   <string name="welcome_final_button_text">是！</string>
   <string name="welcome_help_button_text">更多信息</string>
   <string name="detail_panel_cats_label">分类</string>
-  <string name="detail_panel_cats_loading">正在载入……</string>
+  <string name="detail_panel_cats_loading">正在加载……</string>
   <string name="detail_panel_cats_none">未选择</string>
   <string name="detail_caption_empty">无字幕</string>
   <string name="detail_description_empty">没有说明</string>
@@ -328,7 +329,7 @@
   <string name="search_recent_header">最近搜索：</string>
   <string name="provider_searches">最近的搜索查询</string>
   <string name="provider_recent_languages">最近的语言查询</string>
-  <string name="error_loading_categories">载入分类时发生错误。</string>
+  <string name="error_loading_categories">加载分类时发生错误。</string>
   <string name="error_loading_depictions">加载描述时出错。</string>
   <string name="search_tab_title_media">媒体</string>
   <string name="search_tab_title_categories">分类</string>
@@ -666,7 +667,7 @@
   <string name="done">完成</string>
   <string name="back">返回</string>
   <string name="welcome_custom_picture_selector_text">欢迎来到自定义图片选择器</string>
-  <string name="custom_selector_info_text1">此拾取器显示已在维基共享资源上的各种不同图片。</string>
+  <string name="custom_selector_info_text1">此拾取器显示您已上传至维基共享资源的图片。</string>
   <string name="custom_selector_info_text2">右边的图片与左边的不同，它具有已上传至维基共享资源的标志。\n点击并长按来预览图像。</string>
   <string name="welcome_custom_selector_ok">棒极了</string>
   <string name="custom_selector_already_uploaded_image_text">此图像已上传至维基共享资源。</string>

@@ -681,14 +681,16 @@
   <string name="done">בוצע</string>
   <string name="back">חזרה</string>
   <string name="welcome_custom_picture_selector_text">ברוך בואך לבוחר התמונות המותאמות</string>
-  <string name="custom_selector_info_text1">הבוחר מציג תמונות שונות מאלו שכבר בוויקישיתוף.</string>
+  <string name="custom_selector_info_text1">הבורר מציג לך אילו תמונות כבר העלית לוויקישיתוף.</string>
   <string name="custom_selector_info_text2">בניגוד לתמונה מימין, על התמונה שמשמאל יש את הלוגו של ויקישיתוף שמעיד שהיא כבר הועלתה. יש לגעת ולהחזיר לקבלת תצוגה מקדימה של התמונה.</string>
   <string name="welcome_custom_selector_ok">מגניב</string>
   <string name="custom_selector_already_uploaded_image_text">התמונה הזאת כבר הועלתה לוויקישיתוף.</string>
+  <string name="place_state_wlm">ויקיפדיה אוהבת אתרי מורשת</string>
   <string name="wlm_upload_info">התמונה הזאת תוכנס לתחרות ויקי אוהבת אתרי מורשת 2021</string>
   <string name="display_monuments">הצגת אתרי מורשת</string>
   <string name="wlm_month_message">זהו חודש ויקי אוהבת אתרי מורשת!</string>
   <string name="learn_more">מידע נוסף</string>
+  <string name="wlm_campaign_title">ויקיפדיה אוהבת אתרי מורשת</string>
   <string name="wlm_campaign_description">ויקי אוהבת אתרי מורשת היא תחרות בין־לאומית לצילום אתרי מורשת שמאורגנת על־ידי ויקימדיה</string>
   <string name="need_permission">נדרשת הרשאה</string>
   <string name="read_phone_state_permission_message">מפות בסביבה זקוקות להרשאה מצב הטלפון כדי לפעול כראוי</string>
@@ -721,4 +723,9 @@
   <string name="error_feedback">שגיאה בעת שליחת המשוב</string>
   <string name="enter_description">מה המשוב שלך?</string>
   <string name="your_feedback">המשוב שלך</string>
+  <string name="menu_view_report">דיווח</string>
+  <string name="report_violation">דיווח על הפרה</string>
+  <string name="report_user">דיווח על המשתמש הזה</string>
+  <string name="report_content">דיווח על התוכן הזה</string>
+  <string name="request_user_block">בקשה לחסום את המשתמש הזה</string>
 </resources>

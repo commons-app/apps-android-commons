@@ -17,6 +17,7 @@
 * Vlad5250
 * Vlnt
 * Ата
+* Пан Хаунд
 -->
 <resources>
   <string name="commons_facebook">Facebook-сторінка Вікісховища</string>
@@ -427,7 +428,7 @@
   <string name="no_categories_selected">Жодної категорії не вибрано</string>
   <string name="no_categories_selected_warning_desc">Зображення без категорій рідко використовуються. Ви впевнені, що хочете продовжити без вказаних категорій?</string>
   <string name="no_depictions_selected">Описів зображеного не вибрано</string>
-  <string name="no_depictions_selected_warning_desc">Медіа, у яких вказані зображувані об\'єкти, можуть бути легше знайдені та використані надалі. Ви впевнені, що хочете продовжити не вказавши що саме тут зображено?</string>
+  <string name="no_depictions_selected_warning_desc">Медіа, у яких вказані описи, можуть бути легше знайдені та використані надалі. Ви впевнені, що хочете продовжити не вказавши описи?</string>
   <string name="back_button_warning">Скасувати завантаження</string>
   <string name="back_button_warning_desc">Використання кнопки \"Назад\" скасує це завантаження</string>
   <string name="back_button_continue">Продовжити завантаження</string>
@@ -476,7 +477,7 @@
   <string name="review_thanks_yes_button_text">Наступне зображення</string>
   <string name="review_thanks_no_button_text">Так, чому б і ні</string>
   <string name="skip_image_explanation">Натискання цієї кнопки дасть вам інше недавно завантажене зображення з Вікісховища</string>
-  <string name="review_image_explanation">Ви можете переглядати зображення, щоб покращити якість Wikimedia Commons.\nТри параметри огляду:\n\n— Чи входить це зображення у сферу проєкту?\nКоли ви торкаєтесь Ні (не входить в сферу проекту), ви додаєте шаблон номінації на видалення до цього зображення.\n\n— Чи відповідає це зображення правилам авторського права?\nКоли ви торкаєтесь Ні (не дотримується правил авторського права), ви додаєте шаблон номінації на видалення до цього зображення.\n\n— Чи правильно класифіковано це зображення?\nКоли ви натискаєте Ні (неправильно категоризовано), ви додаєте шаблон запиту на категоризацію до цього зображення.\n\nЯкщо все в порядку, шаблон до зображення не додається, і ви отримуєте можливість подякувати авторові.</string>
+  <string name="review_image_explanation">Ви можете переглядати зображення, щоб покращити якість Вікісховища.\nТри параметри огляду:\n\n— Чи входить це зображення у сферу проєкту?\nКоли Ви торкаєтесь Ні (не входить в сферу проекту), Ви додаєте шаблон номінації на видалення до цього зображення.\n\n— Чи відповідає це зображення правилам авторського права?\nКоли Ви торкаєтесь Ні (не дотримується правил авторського права), Ви додаєте шаблон номінації на видалення до цього зображення.\n\n— Чи правильно класифіковано це зображення?\nКоли Ви торкаєтесь Ні (неправильно категоризовано), Ви додаєте шаблон запиту на категоризацію до цього зображення.\n\nЯкщо все в порядку, шаблон до зображення не додається, і Ви отримуєте можливість подякувати авторові.</string>
   <string name="no_image">Використаних зображень немає</string>
   <string name="no_image_reverted">Відхилених зображень немає</string>
   <string name="no_image_uploaded">Завантажених зображень немає</string>
@@ -538,8 +539,14 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Неможливо додати категорії</string>
   <string name="category_edit_button_text">Оновити категорії</string>
-  <string name="depictions_edit_helper_make_edit_toast">Спроба оновити зображення.</string>
+  <string name="depictions_edit_helper_make_edit_toast">Спроба оновити описи.</string>
   <string name="depictions_edit_helper_show_edit_title">Редагувати зображення</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">Опис %1$s додано.</item>
+    <item quantity="few">Описи %1$s додані.</item>
+    <item quantity="many">Описи %1$s додані.</item>
+    <item quantity="other"/>
+  </plurals>
   <string name="depictions_edit_helper_edit_message_else">Не вдалося додати зображення.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Спроба оновити координати.</string>
   <string name="coordinates_edit_helper_show_edit_title">Оновлення координат</string>
@@ -673,7 +680,7 @@
   <string name="done">Готово</string>
   <string name="back">Назад</string>
   <string name="welcome_custom_picture_selector_text">Ласкаво просимо до користувацького вибору зображень</string>
-  <string name="custom_selector_info_text1">Цей інструмент вибору по-різному показує зображення, які вже є у спільності.</string>
+  <string name="custom_selector_info_text1">Цей засіб вибору показує вам, які зображення ви вже завантажили до Commons.</string>
   <string name="custom_selector_info_text2">На відміну від зображення зліва, зображення праворуч має логотип Commons, яке вказує, що воно вже завантажене.\n  Натисніть і утримуйте для попереднього перегляду зображення.</string>
   <string name="welcome_custom_selector_ok">Чудово</string>
   <string name="custom_selector_already_uploaded_image_text">Це зображення вже завантажено на Спільний ресурс.</string>
@@ -687,7 +694,7 @@
   <string name="contributions_of_user">Внесок користувача: %s</string>
   <string name="achievements_of_user">Досягнення користувача: %s</string>
   <string name="menu_view_user_page">Переглянути сторінку користувача</string>
-  <string name="edit_depictions">Редагувати зображення</string>
+  <string name="edit_depictions">Редагувати описи</string>
   <string name="edit_categories">Редагувати категорії</string>
   <string name="advanced_options">Розширені параметри</string>
   <string name="advanced_query_info_text">Ви можете налаштувати запит поблизу. Якщо ви отримуєте помилки, скиньте налаштування та застосуйте.</string>
@@ -713,4 +720,9 @@
   <string name="error_feedback">Помилка під час надсилання відгуку</string>
   <string name="enter_description">Який ваш відгук?</string>
   <string name="your_feedback">Ваш відгук</string>
+  <string name="menu_view_report">Повідомити</string>
+  <string name="report_violation">Повідомити про порушення</string>
+  <string name="report_user">Поскаржитись на користувача</string>
+  <string name="report_content">Поскаржитись на вміст</string>
+  <string name="request_user_block">Запит на блокування цього користувача</string>
 </resources>

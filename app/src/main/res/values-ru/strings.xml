@@ -50,11 +50,15 @@
   <string name="add_contribution_from_camera">Добавить вклад с камеры</string>
   <string name="add_contribution_from_photos">Добавить вклад из фотографий</string>
   <string name="add_contribution_from_contributions_gallery">Добавить вклад из галереи предыдущих вкладов</string>
+  <string name="show_captions">Подписи</string>
   <string name="row_item_language_description">Описание языка</string>
   <string name="row_item_caption">Подпись</string>
   <string name="show_captions_description">Описание</string>
   <string name="nearby_row_image">Изображение</string>
   <string name="nearby_all">Все</string>
+  <string name="nearby_filter_toggle">Переключить</string>
+  <string name="nearby_filter_search">Поиск вида</string>
+  <string name="nearby_filter_state">Состояние места</string>
   <string name="appwidget_img">Изображение дня</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d файл загружается</item>
@@ -556,6 +560,12 @@
   <string name="category_edit_button_text">Обновить категории</string>
   <string name="depictions_edit_helper_make_edit_toast">Пытаюсь обновить изображения.</string>
   <string name="depictions_edit_helper_show_edit_title">Редактировать изображения</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">Описание %1$s добавлено.</item>
+    <item quantity="few">Описания %1$s добавлены.</item>
+    <item quantity="many">Описания %1$s добавлены.</item>
+    <item quantity="other"/>
+  </plurals>
   <string name="depictions_edit_helper_edit_message_else">Не удалось добавить изображения.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Попытка обновить координаты.</string>
   <string name="coordinates_edit_helper_show_edit_title">Обновление координат</string>
@@ -689,7 +699,7 @@
   <string name="done">Готово</string>
   <string name="back">Назад</string>
   <string name="welcome_custom_picture_selector_text">Добро пожаловать в Custom Picture Selector</string>
-  <string name="custom_selector_info_text1">Этот сборщик по-другому показывает изображения, которые уже есть в Викискладе.</string>
+  <string name="custom_selector_info_text1">Этот сборщик показывает вам, какие изображения вы уже загрузили в Викисклад.</string>
   <string name="custom_selector_info_text2">В отличие от изображения слева, изображение справа имеет логотип Commons, указывающий, что оно уже загружено.\n Нажмите и удерживайте для предварительного просмотра изображения.</string>
   <string name="welcome_custom_selector_ok">Потрясающе</string>
   <string name="custom_selector_already_uploaded_image_text">Это изображение уже было загружено на Викисклад.</string>
@@ -706,6 +716,7 @@
   <string name="edit_depictions">Редактировать описания</string>
   <string name="edit_categories">Изменить категории</string>
   <string name="advanced_options">Расширенные настройки</string>
+  <string name="advanced_query_info_text">Вы можете настроить запрос в разделе «Поблизости». Если случаются ошибки, сделайте сброс и примените его.</string>
   <string name="apply">Применить</string>
   <string name="reset">Сбросить</string>
   <string name="location_message">Данные о местоположении помогают редакторам Wiki найти вашу фотографию, что делает ее гораздо более полезной.\nУ ваших последних загрузках нет местоположения.\nМы предлагаем вам включить определение местоположения в настройках приложения камеры.\nСпасибо за загрузку!</string>
@@ -714,6 +725,8 @@
   <string name="add_location">Добавить местоположение</string>
   <string name="feedback_sharing_data_alert">Пожалуйста, удалите из этого письма любую информацию, которой вы не желаете делиться с другими. Кроме того, имейте в виду, что адрес вашей электронной почты, с которого вы отправляете сообщения, а также связанное с ним имя и изображение профиля, будут видны всем.</string>
   <string name="explore_map_details">Подробности</string>
+  <string name="achievements_unavailable_beta">Достижения доступны только в версии \'\'prod\'\', пожалуйста, ознакомьтесь с документацией для разработчиков.</string>
+  <string name="leaderboard_unavailable_beta">Таблица лидеров доступна только в версии \'\'prod\'\', пожалуйста, ознакомьтесь с документацией для разработчиков.</string>
   <string name="copyright_popup">Пожалуйста, загружайте только те фотографии, которые вы сделали сами. Участники, загружающие защищённые авторским правом изображения, будут заблокированы. Это относится и к бета-флейвору. Спасибо за тестирование приложения!</string>
   <string name="select_feedback_data_choice">Пожалуйста, не отмечайте любую информации, которой вы не хотите делиться публично.</string>
   <string name="api_level">Уровень API</string>
@@ -726,4 +739,9 @@
   <string name="error_feedback">Ошибка при отправке обратной связи</string>
   <string name="enter_description">Что вы хотите сообщить?</string>
   <string name="your_feedback">Обратная связь от вас</string>
+  <string name="menu_view_report">Отчёт</string>
+  <string name="report_violation">Сообщить о нарушении</string>
+  <string name="report_user">Пожаловаться на участника_цу</string>
+  <string name="report_content">Пожаловаться на это содержимое</string>
+  <string name="request_user_block">Запросить блокировку участника_цы</string>
 </resources>

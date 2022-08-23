@@ -4,9 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao;
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao;
 import fr.free.nrw.commons.category.CategoryDao;
@@ -16,7 +14,7 @@ import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao;
 public class DBOpenHelper  extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "commons.db";
-    private static final int DATABASE_VERSION = 19;
+    private static final int DATABASE_VERSION = 20;
     public static final String CONTRIBUTIONS_TABLE = "contributions";
     private final String DROP_TABLE_STATEMENT="DROP TABLE IF EXISTS %s";
 

@@ -4,8 +4,8 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class CategoryItem(val name: String, val description: String,
-                        val thumbnail: String, var isSelected: Boolean) : Parcelable {
+data class CategoryItem(val name: String, val description: String?,
+                        val thumbnail: String?, var isSelected: Boolean) : Parcelable {
 
     override fun toString(): String {
         return "CategoryItem: '$name'"

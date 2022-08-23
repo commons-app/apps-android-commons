@@ -569,7 +569,7 @@
   <string name="limited_connection_is_on">Način omejene povezanosti je vklopljen.</string>
   <string name="media_details_tooltip">Prosimo, na kratko opišite vsebino slike. V opisu navedite, zakaj je slika zanimiva, značilna ali redka ter razložite vidni in nevidni konteks. Uporabite karseda točne izraze.</string>
   <string name="depicts_tooltip">Prosimo, poiščite in izberite vse koncepte, ki jih ta slika prikazuje. Bodite čim bolj natančni. Če slika prikazuje več predmetov, smiselno izberite vse. Ne uporabljajte splošnih oznak, če so na voljo natančnejše oznake.</string>
-  <string name="categories_tooltip">Prosimo, izberite ustrezne kategorije. V nasprotju z upodobitvami so kategorije samo v angleščini.</string>
+  <string name="categories_tooltip">Prosimo, izberite ustrezne kategorije. V nasprotju s slikami so kategorije samo v angleščini.</string>
   <string name="license_tooltip">Wikimedijina zbirka omogoča uporabo in predelavo vaših slik vsakomur. Ali se želite odreči vsem pravicam? Ali želite biti navedeni kot avtor/ica? Ali želite, da so predelave objavljene pod isto licenco?</string>
   <string name="depicts_step_title">Prikazuje</string>
   <string name="license_step_title">Licenca datoteke</string>

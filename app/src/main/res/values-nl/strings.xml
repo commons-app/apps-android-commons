@@ -640,7 +640,7 @@
   <string name="done">Afgerond</string>
   <string name="back">Terug</string>
   <string name="welcome_custom_picture_selector_text">Welkom bij de Aangepaste Afbeelding Kiezer</string>
-  <string name="custom_selector_info_text1">Deze kiezer toont verschillende afbeeldingen die al naar Commons zijn.</string>
+  <string name="custom_selector_info_text1" fuzzy="true">Deze kiezer toont verschillende afbeeldingen die al naar Commons zijn.</string>
   <string name="custom_selector_info_text2">In tegenstelling tot de afbeelding aan de linkerkant, heeft de afbeelding aan de rechterkant het Commons-logo om aan te geven dat deze al is geüpload.\n  Aanraken en vasthouden voor afbeeldingsvoorbeeld.</string>
   <string name="welcome_custom_selector_ok">Geweldig</string>
   <string name="custom_selector_already_uploaded_image_text">Deze afbeelding is al geüpload op Wikimedia Commons.</string>
