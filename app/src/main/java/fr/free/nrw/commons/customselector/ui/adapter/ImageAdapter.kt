@@ -98,7 +98,7 @@ class ImageAdapter(
     /**
      * Helps to maintain the increasing sequence of the position. eg- 0, 1, 2, 3
      */
-    private var count = 0
+    private var imagePositionAsPerIncreasingOrder = 0
 
     /**
      * Coroutine Dispatchers and Scope.
@@ -183,8 +183,8 @@ class ImageAdapter(
                             // and it will load the new image in the view holder
                             if (!actionableImagesMap.containsKey(next)) {
                                 actionableImagesMap[next] = allImages[next]
-                                alreadyAddedPositions.add(count)
-                                count++
+                                alreadyAddedPositions.add(imagePositionAsPerIncreasingOrder)
+                                imagePositionAsPerIncreasingOrder++
                                 Glide.with(holder.image).load(allImages[next].uri)
                                     .thumbnail(0.3f).into(holder.image)
                                 notifyItemInserted(position)
@@ -315,7 +315,7 @@ class ImageAdapter(
         nextImagePosition = 0
         reachedEndOfFolder = false
         selectedImages = ArrayList()
-        count = 0
+        imagePositionAsPerIncreasingOrder = 0
         val diffResult = DiffUtil.calculateDiff(
             ImagesDiffCallback(oldImageList, newImageList)
         )
