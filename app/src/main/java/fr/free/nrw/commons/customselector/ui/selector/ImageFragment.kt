@@ -21,7 +21,7 @@ import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.listeners.PassDataListener
 import fr.free.nrw.commons.customselector.helper.ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY
-import fr.free.nrw.commons.customselector.helper.ImageHelper.SWITCH_STATE_PREFERENCE_KEY
+import fr.free.nrw.commons.customselector.helper.ImageHelper.SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.listeners.RefreshUIListener
 import fr.free.nrw.commons.customselector.model.CallbackStatus
@@ -134,7 +134,7 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassData
         /**
          * Switch state
          */
-        var switchState: Boolean = true
+        var showAlreadyActionedImages: Boolean = true
 
         /**
          * BucketId args name
@@ -195,29 +195,29 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassData
 
         val sharedPreferences: SharedPreferences =
             requireContext().getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, MODE_PRIVATE)
-        switchState = sharedPreferences.getBoolean(SWITCH_STATE_PREFERENCE_KEY, true)
-        switch?.isChecked = switchState
+        showAlreadyActionedImages = sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
+        switch?.isChecked = showAlreadyActionedImages
 
         return root
     }
 
     private fun onChangeSwitchState(checked: Boolean) {
         if (checked) {
-            switchState = true
+            showAlreadyActionedImages = true
             val sharedPreferences: SharedPreferences =
                 requireContext().getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, MODE_PRIVATE)
             val editor = sharedPreferences.edit()
-            editor.putBoolean(SWITCH_STATE_PREFERENCE_KEY, true)
+            editor.putBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
             editor.apply()
 
             imageAdapter.init(allImages, allImages, TreeMap())
             imageAdapter.notifyDataSetChanged()
         } else {
-            switchState = false
+            showAlreadyActionedImages = false
             val sharedPreferences: SharedPreferences =
                 requireContext().getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, MODE_PRIVATE)
             val editor = sharedPreferences.edit()
-            editor.putBoolean(SWITCH_STATE_PREFERENCE_KEY, false)
+            editor.putBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, false)
             editor.apply()
 
             imageAdapter.init(allImages, allImages, TreeMap())
@@ -246,7 +246,7 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassData
             if(images.isNotEmpty()) {
                 filteredImages = ImageHelper.filterImages(images, bucketId)
                 allImages = ArrayList(filteredImages)
-                if(switchState) {
+                if(showAlreadyActionedImages) {
                     imageAdapter.init(filteredImages, allImages, TreeMap())
                 } else {
                     imageAdapter.init(filteredImages, allImages, TreeMap())
@@ -327,7 +327,7 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassData
     override fun passSelectedImages(selectedImages: ArrayList<Image>, shouldRefresh: Boolean){
         imageAdapter.setSelectedImages(selectedImages)
 
-        if (!switchState && shouldRefresh) {
+        if (!showAlreadyActionedImages && shouldRefresh) {
             imageAdapter.init(filteredImages, allImages, TreeMap())
             imageAdapter.setSelectedImages(selectedImages)
         }

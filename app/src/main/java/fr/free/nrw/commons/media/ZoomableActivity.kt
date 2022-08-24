@@ -133,14 +133,14 @@ class ZoomableActivity : BaseActivity() {
     private fun onSwap() {
         val sharedPreferences: SharedPreferences =
             getSharedPreferences(ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
-        val switchState =
-            sharedPreferences.getBoolean(ImageHelper.SWITCH_STATE_PREFERENCE_KEY, true)
+        val showAlreadyActionedImages =
+            sharedPreferences.getBoolean(ImageHelper.SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
 
         if (!images.isNullOrEmpty()) {
             photo!!.setOnTouchListener(object : OnSwipeTouchListener(this) {
                 override fun onSwipeLeft() {
                     super.onSwipeLeft()
-                    if (switchState) {
+                    if (showAlreadyActionedImages) {
                         if (position < images!!.size - 1) {
                             position++
                             init(images!![position].uri)
@@ -169,7 +169,7 @@ class ZoomableActivity : BaseActivity() {
 
                 override fun onSwipeRight() {
                     super.onSwipeRight()
-                    if (switchState) {
+                    if (showAlreadyActionedImages) {
                         if (position > 0) {
                             position--
                             init(images!![position].uri)
@@ -481,8 +481,7 @@ class ZoomableActivity : BaseActivity() {
         )
         notForUploadStatusDao.insert(
             NotForUploadStatus(
-                imageSHA1,
-                true
+                imageSHA1
             )
         )
     }

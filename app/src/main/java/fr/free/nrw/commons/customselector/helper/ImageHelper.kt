@@ -16,7 +16,7 @@ object ImageHelper {
     /**
      * Switch state preference key
      */
-    const val SWITCH_STATE_PREFERENCE_KEY: String = "switch_state"
+    const val SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY: String = "show_already_actioned_images"
 
     /**
      * Returns the list of folders from given image list.

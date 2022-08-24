@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.customselector.helper
 
+/**
+ * Stores constants related to custom image selector
+ */
 object CustomSelectorConstants {
 
     const val TOTAL_IMAGES = "total_images"

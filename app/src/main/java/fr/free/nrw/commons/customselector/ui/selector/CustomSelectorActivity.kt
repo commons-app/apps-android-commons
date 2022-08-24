@@ -20,6 +20,7 @@ import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.SHOULD_
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.filepicker.Constants
 import fr.free.nrw.commons.media.ZoomableActivity
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileUtilsWrapper
@@ -115,7 +116,7 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 101) {
+        if (requestCode == Constants.RequestCodes.RECEIVE_DATA_FROM_FULL_SCREEN_MODE) {
             if (resultCode == Activity.RESULT_OK) {
                 val selectedImages: ArrayList<Image> =
                     data!!
@@ -227,8 +228,7 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
                     )
                     notForUploadStatusDao.insert(
                         NotForUploadStatus(
-                            imageSHA1,
-                            true
+                            imageSHA1
                         )
                     )
                 }
@@ -331,7 +331,7 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
             CustomSelectorConstants.TOTAL_SELECTED_IMAGES,
             selectedImages
         )
-        startActivityForResult(intent, 101)
+        startActivityForResult(intent, Constants.RequestCodes.RECEIVE_DATA_FROM_FULL_SCREEN_MODE)
     }
 
     /**

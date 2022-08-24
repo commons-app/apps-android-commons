@@ -161,16 +161,16 @@ class ImageLoader @Inject constructor(
         val sharedPreferences: SharedPreferences =
             context
                 .getSharedPreferences(ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
-        val switchState =
-            sharedPreferences.getBoolean(ImageHelper.SWITCH_STATE_PREFERENCE_KEY, true)
+        val showAlreadyActionedImages =
+            sharedPreferences.getBoolean(ImageHelper.SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
 
         if(mapHolderImage[holder] == image) {
             if (result is Result.TRUE) {
-                if (switchState) holder.itemUploaded() else holder.itemNotUploaded()
+                if (showAlreadyActionedImages) holder.itemUploaded() else holder.itemNotUploaded()
             } else holder.itemNotUploaded()
 
             if (exists > 0) {
-                if (switchState) holder.itemNotForUpload() else holder.itemForUpload()
+                if (showAlreadyActionedImages) holder.itemNotForUpload() else holder.itemForUpload()
             } else holder.itemForUpload()
         }
     }
