@@ -132,11 +132,11 @@ class ImageAdapter(
         } else {
             val sharedPreferences: SharedPreferences =
                 context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
-            val switchState =
+            val showAlreadyActionedImages =
                 sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
 
             // Getting selected index when switch is on
-            val selectedIndex: Int = if (switchState) {
+            val selectedIndex: Int = if (showAlreadyActionedImages) {
                 ImageHelper.getIndex(selectedImages, image)
 
             // Getting selected index when switch is off
@@ -249,11 +249,13 @@ class ImageAdapter(
         val showAlreadyActionedImages =
             sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
 
-        // Getting clicked index from all images index when switch is on
+        // Getting clicked index from all images index when show_already_actioned_images
+        // switch is on
         val clickedIndex: Int = if(showAlreadyActionedImages) {
             ImageHelper.getIndex(selectedImages, images[position])
 
-        // Getting clicked index from actionable images when switch is off
+        // Getting clicked index from actionable images when show_already_actioned_images
+        // switch is off
         } else {
             ImageHelper.getIndex(selectedImages, ArrayList(actionableImagesMap.values)[position])
         }
