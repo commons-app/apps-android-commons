@@ -9,6 +9,11 @@
   <string name="commons_logo">ကွန်မွန်းစ် လိုဂို</string>
   <string name="commons_website">ကွန်မွန်းစ် ဝဘ်ဆိုဒ်</string>
   <string name="submit">ထည့်သွင်းရန်</string>
+  <string name="row_item_language_description">ဘာသာစကား ဖော်ပြချက်</string>
+  <string name="row_item_caption">ပုံစာ</string>
+  <string name="show_captions_description">ဖော်ပြချက်</string>
+  <string name="nearby_row_image">ရုပ်ပုံ</string>
+  <string name="nearby_all">အားလုံး</string>
   <string name="appwidget_img">ယနေ့အတွက် အထူးဓာတ်ပုံ</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">ဖိုင် %1$d ခု တင်နေသည်</item>
@@ -228,6 +233,7 @@
   <string name="search_tab_title_categories">ကဏ္ဍများ</string>
   <string name="explore_tab_title_featured">အထူး</string>
   <string name="explore_tab_title_mobile">မိုလ်ဘိုင်းမှတဆင့် တင်ခဲ့သည်</string>
+  <string name="explore_tab_title_map">မြေပုံ</string>
   <string name="menu_set_wallpaper">နောက်ခံရှုခင်းအဖြစ်သတ်မှတ်ရန်</string>
   <string name="wallpaper_set_successfully">နောက်ခံရှုခင်းအဖြစ် အောင်မြင်စွာသတ်မှတ်လိုက်သည်</string>
   <string name="quiz">ထွက်</string>
