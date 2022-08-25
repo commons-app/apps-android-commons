@@ -75,11 +75,11 @@ class CustomSelectorUtils {
         /**
          * Query SHA1, return result if previously queried, otherwise start a new query.
          *
-         * @return Query result.
+         * @return true if the image exists on Commons, false otherwise.
          */
-        suspend fun querySHA1(SHA1: String,
-                              ioDispatcher : CoroutineDispatcher,
-                              mediaClient: MediaClient
+        suspend fun checkWhetherFileExistsOnCommonsUsingSHA1(SHA1: String,
+                                                             ioDispatcher : CoroutineDispatcher,
+                                                             mediaClient: MediaClient
         ): ImageLoader.Result {
             return withContext(ioDispatcher) {
 

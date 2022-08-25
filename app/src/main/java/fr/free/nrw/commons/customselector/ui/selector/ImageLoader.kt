@@ -13,7 +13,7 @@ import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
-import fr.free.nrw.commons.utils.CustomSelectorUtils.Companion.querySHA1
+import fr.free.nrw.commons.utils.CustomSelectorUtils.Companion.checkWhetherFileExistsOnCommonsUsingSHA1
 import kotlinx.coroutines.*
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -117,13 +117,13 @@ class ImageLoader @Inject constructor(
             return
         }
 
-        val exists = notForUploadStatusDao.find(imageSHA1)
+        val existsInNotForUploadTable = notForUploadStatusDao.find(imageSHA1)
 
         if (result in arrayOf(Result.NOTFOUND, Result.INVALID) && sha1.isNotEmpty()) {
             when {
                 mapResult[imageSHA1] == null -> {
                     // Query original image.
-                    result = querySHA1(imageSHA1, ioDispatcher, mediaClient)
+                    result = checkWhetherFileExistsOnCommonsUsingSHA1(imageSHA1, ioDispatcher, mediaClient)
                     when (result) {
                         is Result.TRUE -> {
                             mapResult[imageSHA1] = Result.TRUE
@@ -141,7 +141,7 @@ class ImageLoader @Inject constructor(
                 when {
                     mapResult[sha1] == null -> {
                         // Original image not found, query modified image.
-                        result = querySHA1(sha1, ioDispatcher, mediaClient)
+                        result = checkWhetherFileExistsOnCommonsUsingSHA1(sha1, ioDispatcher, mediaClient)
                         when (result) {
                             is Result.TRUE -> {
                                 mapResult[sha1] = Result.TRUE
@@ -166,11 +166,13 @@ class ImageLoader @Inject constructor(
 
         if(mapHolderImage[holder] == image) {
             if (result is Result.TRUE) {
-                if (showAlreadyActionedImages) holder.itemUploaded() else holder.itemNotUploaded()
+                if (showAlreadyActionedImages) holder.itemUploaded()
+                else holder.itemNotUploaded()
             } else holder.itemNotUploaded()
 
-            if (exists > 0) {
-                if (showAlreadyActionedImages) holder.itemNotForUpload() else holder.itemForUpload()
+            if (existsInNotForUploadTable > 0) {
+                if (showAlreadyActionedImages) holder.itemNotForUpload()
+                else holder.itemForUpload()
             } else holder.itemForUpload()
         }
     }
@@ -199,17 +201,17 @@ class ImageLoader @Inject constructor(
             }
             next = notForUploadStatusDao.find(imageSHA1)
 
-            // After checking the image in the not for upload database, if the image is present then
+            // After checking the image in the not for upload table, if the image is present then
             // skips the image and moves to next image for checking
             if(next > 0){
                 continue
 
-            // Otherwise checks in already uploaded database
+            // Otherwise checks in already uploaded table
             } else {
                 next = uploadedStatusDao.findByImageSHA1(imageSHA1, true)
 
-                // If the image is not present in the already uploaded database, checks for it's
-                // modified SHA1 in already uploaded database
+                // If the image is not present in the already uploaded table, checks for its
+                // modified SHA1 in already uploaded table
                 if (next <= 0) {
                     val modifiedImageSha1 = getSHA1(it, defaultDispatcher)
                     next = uploadedStatusDao.findByModifiedImageSHA1(
@@ -217,18 +219,18 @@ class ImageLoader @Inject constructor(
                         true
                     )
 
-                    // If the modified image SHA1 is not present in the already uploaded database,
+                    // If the modified image SHA1 is not present in the already uploaded table,
                     // returns the position as next actionable image position
                     if (next <= 0) {
                         return i
 
-                    // If present in tha db then skips iteration for the image and moves to the next
+                    // If present in the db then skips iteration for the image and moves to the next
                     // for checking
                     } else {
                         continue
                     }
 
-                // If present in tha db then skips iteration for the image and moves to the next
+                // If present in the db then skips iteration for the image and moves to the next
                 // for checking
                 } else {
                     continue

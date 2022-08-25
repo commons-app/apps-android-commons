@@ -39,6 +39,10 @@ import kotlinx.coroutines.*
 import timber.log.Timber
 import javax.inject.Inject
 
+/**
+ * Activity for helping to view an image in full-screen mode with some other features
+ * like zoom, and swap gestures
+ */
 class ZoomableActivity : BaseActivity() {
 
     private lateinit var imageUri: Uri
@@ -120,7 +124,7 @@ class ZoomableActivity : BaseActivity() {
         } else {
             images!![position].uri
         }
-        Timber.d("URl = $imageUri")
+        Timber.d("URL = $imageUri")
         setContentView(R.layout.activity_zoomable)
         ButterKnife.bind(this)
         init(imageUri)
@@ -138,6 +142,7 @@ class ZoomableActivity : BaseActivity() {
 
         if (!images.isNullOrEmpty()) {
             photo!!.setOnTouchListener(object : OnSwipeTouchListener(this) {
+                // Swipe left to view next image in the folder. (if available)
                 override fun onSwipeLeft() {
                     super.onSwipeLeft()
                     if (showAlreadyActionedImages) {
@@ -167,6 +172,7 @@ class ZoomableActivity : BaseActivity() {
                     }
                 }
 
+                // Swipe right to view previous image in the folder. (if available)
                 override fun onSwipeRight() {
                     super.onSwipeRight()
                     if (showAlreadyActionedImages) {
@@ -196,6 +202,9 @@ class ZoomableActivity : BaseActivity() {
                     }
                 }
 
+                // Swipe up to select the picture (the equivalent of tapping it in non-fullscreen mode)
+                // and show the next picture skipping pictures that have either already been uploaded or
+                // marked as not for upload
                 override fun onSwipeUp() {
                     super.onSwipeUp()
                     scope.launch {
@@ -251,6 +260,8 @@ class ZoomableActivity : BaseActivity() {
                     }
                 }
 
+                // Swipe down to mark that picture as "Not for upload" (the equivalent of selecting it then
+                // tapping "Mark as not for upload" in non-fullscreen mode), and show the next picture.
                 override fun onSwipeDown() {
                     super.onSwipeDown()
                     scope.launch {
@@ -307,7 +318,10 @@ class ZoomableActivity : BaseActivity() {
     }
 
     /**
-     * Gets next actionable image
+     * Gets next actionable image.
+     * Iterates from an index to the end of the folder and check whether the current image is
+     * present in already uploaded table or in not for upload table,
+     * and returns the first actionable image it can find.
      */
     private suspend fun getNextActionableImage(index: Int): Int {
         var nextPosition = position
@@ -350,7 +364,10 @@ class ZoomableActivity : BaseActivity() {
     }
 
     /**
-     * Gets previous actionable image
+     * Gets previous actionable image.
+     * Iterates from an index to the first image of the folder and check whether the current image
+     * is present in already uploaded table or in not for upload table,
+     * and returns the first actionable image it can find
      */
     private suspend fun getPreviousActionableImage(index: Int): Int {
         var previousPosition = position
@@ -408,9 +425,9 @@ class ZoomableActivity : BaseActivity() {
     }
 
     /**
-     * Get index from list
+     * Get position of an image from list
      */
-    private fun getIndex(list: ArrayList<Image>?, image: Image): Int {
+    private fun getImagePosition(list: ArrayList<Image>?, image: Image): Int {
         return list!!.indexOf(image)
     }
 
@@ -458,7 +475,7 @@ class ZoomableActivity : BaseActivity() {
             photo!!.controller = controller
 
             if (!images.isNullOrEmpty()) {
-                val selectedIndex = getIndex(selectedImages, images!![position])
+                val selectedIndex = getImagePosition(selectedImages, images!![position])
                 val isSelected = selectedIndex != -1
                 if (isSelected) {
                     itemSelected(selectedImages!!.size)
@@ -470,7 +487,7 @@ class ZoomableActivity : BaseActivity() {
     }
 
     /**
-     * Inserts an image in Not For Upload Database
+     * Inserts an image in Not For Upload table
      */
     private suspend fun insertInNotForUpload(it: Image) {
         val imageSHA1 = CustomSelectorUtils.getImageSHA1(

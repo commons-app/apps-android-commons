@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -246,11 +245,7 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassData
             if(images.isNotEmpty()) {
                 filteredImages = ImageHelper.filterImages(images, bucketId)
                 allImages = ArrayList(filteredImages)
-                if(showAlreadyActionedImages) {
-                    imageAdapter.init(filteredImages, allImages, TreeMap())
-                } else {
-                    imageAdapter.init(filteredImages, allImages, TreeMap())
-                }
+                imageAdapter.init(filteredImages, allImages, TreeMap())
                 selectorRV?.let {
                     it.visibility = View.VISIBLE
                     lastItemId?.let { pos ->
@@ -288,7 +283,6 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassData
      * notifyDataSetChanged, rebuild the holder views to account for deleted images.
      */
     override fun onResume() {
-        Log.d("haha", "onResume: ")
         imageAdapter.notifyDataSetChanged()
         super.onResume()
     }
@@ -324,6 +318,10 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassData
         imageAdapter.refresh(filteredImages, allImages)
     }
 
+    /**
+     * Passes selected images and other information from Activity to Fragment and connects it with
+     * the adapter
+     */
     override fun passSelectedImages(selectedImages: ArrayList<Image>, shouldRefresh: Boolean){
         imageAdapter.setSelectedImages(selectedImages)
 
