@@ -5,7 +5,7 @@ import fr.free.nrw.commons.customselector.model.Folder
 import fr.free.nrw.commons.customselector.model.Image
 import org.junit.jupiter.api.Assertions.*
 
-import org.junit.jupiter.api.Test
+import org.junit.Test
 import org.mockito.Mockito.mock
 
 /**
