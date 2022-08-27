@@ -63,10 +63,14 @@ class ImageLoader @Inject constructor(
     private var mapResult: HashMap<String, Result> = HashMap()
     private var mapImageSHA1: HashMap<Uri, String> = HashMap()
 
+    private var defaultDispatcher : CoroutineDispatcher = Dispatchers.Default
+    private var ioDispatcher : CoroutineDispatcher = Dispatchers.IO
+    private val scope : CoroutineScope = MainScope()
+
     /**
      * Query image and setUp the view.
      */
-    suspend fun queryAndSetView(
+    fun queryAndSetView(
         holder: ImageViewHolder,
         image: Image,
         ioDispatcher: CoroutineDispatcher,
@@ -80,100 +84,113 @@ class ImageLoader @Inject constructor(
         holder.itemNotUploaded()
         holder.itemForUpload()
 
-        var result: Result = Result.NOTFOUND
+        scope.launch {
+            var result: Result = Result.NOTFOUND
 
-        if (mapHolderImage[holder] != image) {
-            return
-        }
-
-        val imageSHA1: String = when(mapImageSHA1[image.uri] != null) {
-            true -> mapImageSHA1[image.uri]!!
-            else -> CustomSelectorUtils.getImageSHA1(
-                image.uri,
-                ioDispatcher,
-                fileUtilsWrapper,
-                context.contentResolver
-            )
-        }
-        mapImageSHA1[image.uri] = imageSHA1
-
-        if(imageSHA1.isEmpty()) {
-            return
-        }
-        val uploadedStatus = getFromUploaded(imageSHA1)
-
-        val sha1 = uploadedStatus?.let {
-            result = getResultFromUploadedStatus(uploadedStatus)
-            uploadedStatus.modifiedImageSHA1
-        } ?: run {
-            if (mapHolderImage[holder] == image) {
-                getSHA1(image, defaultDispatcher)
-            } else {
-                ""
+            if (mapHolderImage[holder] != image) {
+                return@launch
             }
-        }
 
-        if (mapHolderImage[holder] != image) {
-            return
-        }
+            val imageSHA1: String = when (mapImageSHA1[image.uri] != null) {
+                true -> mapImageSHA1[image.uri]!!
+                else -> CustomSelectorUtils.getImageSHA1(
+                    image.uri,
+                    ioDispatcher,
+                    fileUtilsWrapper,
+                    context.contentResolver
+                )
+            }
+            mapImageSHA1[image.uri] = imageSHA1
 
-        val existsInNotForUploadTable = notForUploadStatusDao.find(imageSHA1)
+            if (imageSHA1.isEmpty()) {
+                return@launch
+            }
+            val uploadedStatus = getFromUploaded(imageSHA1)
 
-        if (result in arrayOf(Result.NOTFOUND, Result.INVALID) && sha1.isNotEmpty()) {
-            when {
-                mapResult[imageSHA1] == null -> {
-                    // Query original image.
-                    result = checkWhetherFileExistsOnCommonsUsingSHA1(imageSHA1, ioDispatcher, mediaClient)
-                    when (result) {
-                        is Result.TRUE -> {
-                            mapResult[imageSHA1] = Result.TRUE
-                        }
-                    }
-                }
-                else -> {
-                    result = mapResult[imageSHA1]!!
+            val sha1 = uploadedStatus?.let {
+                result = getResultFromUploadedStatus(uploadedStatus)
+                uploadedStatus.modifiedImageSHA1
+            } ?: run {
+                if (mapHolderImage[holder] == image) {
+                    getSHA1(image, defaultDispatcher)
+                } else {
+                    ""
                 }
             }
-            if (result is Result.TRUE) {
-                // Original image found.
-                insertIntoUploaded(imageSHA1, sha1, result is Result.TRUE, false)
-            } else {
+
+            if (mapHolderImage[holder] != image) {
+                return@launch
+            }
+
+            val existsInNotForUploadTable = notForUploadStatusDao.find(imageSHA1)
+
+            if (result in arrayOf(Result.NOTFOUND, Result.INVALID) && sha1.isNotEmpty()) {
                 when {
-                    mapResult[sha1] == null -> {
-                        // Original image not found, query modified image.
-                        result = checkWhetherFileExistsOnCommonsUsingSHA1(sha1, ioDispatcher, mediaClient)
+                    mapResult[imageSHA1] == null -> {
+                        // Query original image.
+                        result = checkWhetherFileExistsOnCommonsUsingSHA1(
+                            imageSHA1,
+                            ioDispatcher,
+                            mediaClient
+                        )
                         when (result) {
                             is Result.TRUE -> {
-                                mapResult[sha1] = Result.TRUE
+                                mapResult[imageSHA1] = Result.TRUE
                             }
                         }
                     }
                     else -> {
-                        result = mapResult[sha1]!!
+                        result = mapResult[imageSHA1]!!
                     }
                 }
-                if (result != Result.ERROR) {
-                    insertIntoUploaded(imageSHA1, sha1, false, result is Result.TRUE)
+                if (result is Result.TRUE) {
+                    // Original image found.
+                    insertIntoUploaded(imageSHA1, sha1, result is Result.TRUE, false)
+                } else {
+                    when {
+                        mapResult[sha1] == null -> {
+                            // Original image not found, query modified image.
+                            result = checkWhetherFileExistsOnCommonsUsingSHA1(
+                                sha1,
+                                ioDispatcher,
+                                mediaClient
+                            )
+                            when (result) {
+                                is Result.TRUE -> {
+                                    mapResult[sha1] = Result.TRUE
+                                }
+                            }
+                        }
+                        else -> {
+                            result = mapResult[sha1]!!
+                        }
+                    }
+                    if (result != Result.ERROR) {
+                        insertIntoUploaded(imageSHA1, sha1, false, result is Result.TRUE)
+                    }
                 }
             }
-        }
 
-        val sharedPreferences: SharedPreferences =
-            context
-                .getSharedPreferences(ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
-        val showAlreadyActionedImages =
-            sharedPreferences.getBoolean(ImageHelper.SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
+            val sharedPreferences: SharedPreferences =
+                context
+                    .getSharedPreferences(ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
+            val showAlreadyActionedImages =
+                sharedPreferences.getBoolean(
+                    ImageHelper.SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY,
+                    true
+                )
 
-        if(mapHolderImage[holder] == image) {
-            if (result is Result.TRUE) {
-                if (showAlreadyActionedImages) holder.itemUploaded()
-                else holder.itemNotUploaded()
-            } else holder.itemNotUploaded()
+            if (mapHolderImage[holder] == image) {
+                if (result is Result.TRUE) {
+                    if (showAlreadyActionedImages) holder.itemUploaded()
+                    else holder.itemNotUploaded()
+                } else holder.itemNotUploaded()
 
-            if (existsInNotForUploadTable > 0) {
-                if (showAlreadyActionedImages) holder.itemNotForUpload()
-                else holder.itemForUpload()
-            } else holder.itemForUpload()
+                if (existsInNotForUploadTable > 0) {
+                    if (showAlreadyActionedImages) holder.itemNotForUpload()
+                    else holder.itemForUpload()
+                } else holder.itemForUpload()
+            }
         }
     }
 

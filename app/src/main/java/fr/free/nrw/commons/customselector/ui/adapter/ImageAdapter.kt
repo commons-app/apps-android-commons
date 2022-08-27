@@ -156,10 +156,10 @@ class ImageAdapter(
                 holder.itemUnselected()
             }
 
+            imageLoader.queryAndSetView(
+                holder, image, ioDispatcher, defaultDispatcher
+            )
             scope.launch {
-                imageLoader.queryAndSetView(
-                        holder, image, ioDispatcher, defaultDispatcher
-                )
                 val sharedPreferences: SharedPreferences =
                     context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
                 val showAlreadyActionedImages =
