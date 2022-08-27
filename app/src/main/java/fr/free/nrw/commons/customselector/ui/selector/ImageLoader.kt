@@ -63,8 +63,9 @@ class ImageLoader @Inject constructor(
     private var mapResult: HashMap<String, Result> = HashMap()
     private var mapImageSHA1: HashMap<Uri, String> = HashMap()
 
-    private var defaultDispatcher : CoroutineDispatcher = Dispatchers.Default
-    private var ioDispatcher : CoroutineDispatcher = Dispatchers.IO
+    /**
+     * Coroutine Scope.
+     */
     private val scope : CoroutineScope = MainScope()
 
     /**
