@@ -5,6 +5,7 @@
 * Fulup
 * Gwendal
 * Gwenn-Ael
+* Huñvreüs
 * Y-M D
 -->
 <resources>
@@ -55,7 +56,7 @@
   <string name="upload_failed">N\'eo ket bet kavet ar restr. Klask gant unan all.</string>
   <string name="authentication_failed">Dilesadur c\'hwitet, kevreit en-dro mar plij</string>
   <string name="uploading_started">Kroget da enporzhiañ!</string>
-  <string name="upload_completed_notification_title">%1$s bet enporzhiet !</string>
+  <string name="upload_completed_notification_title">%1$s bet pellgaset !</string>
   <string name="upload_completed_notification_text">Pouezit evit gwelet hoc\'h enporzhiadenn</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">O kregiñ da enporzhiañ %1$s</string>
   <string name="upload_progress_notification_title_in_progress">O enporzhiañ %1$s !</string>
@@ -109,7 +110,7 @@
   <string name="no_email_client">N\'eus bet staliet arval postel ebet</string>
   <string name="provider_categories">Rummadoù bet implijet n\'eus ket pell</string>
   <string name="waiting_first_sync">O c\'hortoz ar sinkroneladur kentañ…</string>
-  <string name="no_uploads_yet">N\'ho peus ket enporzhiet skeudennoù c\'hoazh.</string>
+  <string name="no_uploads_yet">N\'ho peus pellgaset luc’hskeudenn ebet c\'hoazh.</string>
   <string name="menu_retry_upload">Klask en-dro</string>
   <string name="menu_cancel_upload">Nullañ</string>
   <string name="media_upload_policy">Dre gas ar skeudenn-mañ e tisklêrian eo bet graet ganin, n\'eus elfenn ebet gwarezet gant ar gwirioù oberour nag emboltredoù enni, hag emañ diouzh &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/fr\"&gt;reolennoù Wikimedia Commons&lt;/a&gt; a-hend-all.</string>
@@ -237,7 +238,7 @@
   <string name="showcase_view_whole_nearby_activity" fuzzy="true">Lec\'hioù zo en-dro deoc\'h zo ezhomm skeudennoù anezho evit skeudennaouiñ pennadoù Wikipedia</string>
   <string name="no_images_found">N\'eus bet kavet skeudenn ebet !</string>
   <string name="error_loading_images">Ur fazi zo c\'hoarvezet p\'eo bet karget ar skeudennoù.</string>
-  <string name="image_uploaded_by">Enporzhiet gant:%1$s</string>
+  <string name="image_uploaded_by">Pellgaset gant:%1$s</string>
   <string name="block_notification">Stanket oc\'h bet ha ne c\'hallit ket mui kemmañ war Commons</string>
   <string name="app_widget_heading">Skeudenn an deiz</string>
   <string name="menu_search_button">Klask</string>

@@ -9,7 +9,22 @@
   <string name="commons_github">Izvorna koda Zbirke v shrambi Github</string>
   <string name="commons_logo">Logotip Zbirke</string>
   <string name="commons_website">Spletno mesto Zbirke</string>
+  <string name="exit_location_picker">Izhod iz izbiralnika lokacije</string>
   <string name="submit">Pošlji</string>
+  <string name="add_another_description">Dodaj še en opis</string>
+  <string name="add_new_contribution">Dodaj nov prispevek</string>
+  <string name="add_contribution_from_camera">Dodaj prispevek iz fotoaparata</string>
+  <string name="add_contribution_from_photos">Dodaj prispevek iz fotografij</string>
+  <string name="add_contribution_from_contributions_gallery">Dodaj prispevek iz galerije predhodnih prispevkov</string>
+  <string name="show_captions">Napisi</string>
+  <string name="row_item_language_description">Opis jezika</string>
+  <string name="row_item_caption">Napis</string>
+  <string name="show_captions_description">Opis</string>
+  <string name="nearby_row_image">Slika</string>
+  <string name="nearby_all">Vse</string>
+  <string name="nearby_filter_toggle">Vklopi</string>
+  <string name="nearby_filter_search">Pogled iskanja</string>
+  <string name="nearby_filter_state">Država kraja</string>
   <string name="appwidget_img">Slika dneva</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Nalagam %1$d datoteko</item>
@@ -17,18 +32,24 @@
     <item quantity="few">Nalagam %1$d datoteke</item>
     <item quantity="other">Nalagam %1$d datotek</item>
   </plurals>
-  <string name="starting_uploads">Začenjam nalaganje</string>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Začenjam %1$d nalaganje</item>
-    <item quantity="two">Začenjam %1$d nalaganji</item>
-    <item quantity="few">Začenjam %1$d nalaganja</item>
-    <item quantity="other">Začenjam %1$d nalaganj</item>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">(%1$d)</item>
+    <item quantity="two">(%1$d)</item>
+    <item quantity="few">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d nalaganje</item>
-    <item quantity="two">%1$d nalaganji</item>
-    <item quantity="few">%1$d nalaganja</item>
-    <item quantity="other">%1$d nalaganj</item>
+  <string name="starting_uploads">Začenjam nalaganje</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Obdelujem %d nalaganje</item>
+    <item quantity="two">Obdelujem %d nalaganji</item>
+    <item quantity="few">Obdelujem %d nalaganja</item>
+    <item quantity="other">Obdelujem %d nalaganj</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d nalaganje</item>
+    <item quantity="two">%d nalaganji</item>
+    <item quantity="few">%d nalaganja</item>
+    <item quantity="other">%d nalaganj</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Slika bo objavljena pod licenco %1$s</item>
@@ -54,6 +75,7 @@
   <string name="preference_category_feedback">Povratne informacije</string>
   <string name="preference_category_privacy">Zasebnost</string>
   <string name="app_name">Zbirka</string>
+  <string name="bullet">•</string>
   <string name="menu_settings">Nastavitve</string>
   <string name="intent_share_upload_label">Naloži v Zbirko</string>
   <string name="username">Uporabniško ime</string>
@@ -64,6 +86,8 @@
   <string name="signup">Ustvari račun</string>
   <string name="logging_in_title">Prijavljanje</string>
   <string name="logging_in_message">Prosimo, počakajte ...</string>
+  <string name="updating_caption_title">Posodabljam napise in opise</string>
+  <string name="updating_caption_message">Prosimo, počakajte ...</string>
   <string name="login_success">Uspešno ste se prijavili!</string>
   <string name="login_failed">Prijava ni uspela!</string>
   <string name="upload_failed">Datoteke ni bilo mogoče najti. Prosimo, poskusite z drugo datoteko.</string>
@@ -72,10 +96,10 @@
   <string name="uploading_queued">Nalaganje na čakanju (omogočen je način omejene povezanosti)</string>
   <string name="upload_completed_notification_title">Datoteka »%1$s« je naložena!</string>
   <string name="upload_completed_notification_text">Tapnite za ogled naložene datoteke</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">Začenjam nalaganje %1$s</string>
+  <string name="upload_progress_notification_title_start">Nalagam datoteko: %s</string>
   <string name="upload_progress_notification_title_in_progress">Nalagam %1$s</string>
   <string name="upload_progress_notification_title_finishing">Končujem nalaganje datoteke »%1$s«</string>
-  <string name="upload_failed_notification_title" fuzzy="true">Nalaganje datoteke »%1%s« ni uspelo</string>
+  <string name="upload_failed_notification_title">Nalaganje datoteke »%1$s« ni uspelo</string>
   <string name="upload_paused_notification_title">Nalaganje datoteke »%1$s« je ustavljeno</string>
   <string name="upload_failed_notification_subtitle">Tapnite za ogled</string>
   <string name="upload_paused_notification_subtitle">Tapnite za ogled</string>
@@ -108,7 +132,7 @@
   <string name="menu_save_categories">Shrani</string>
   <string name="refresh_button">Osveži</string>
   <string name="display_list_button">Seznam</string>
-  <string name="contributions_subtitle_zero">(Ni še nalaganj)</string>
+  <string name="contributions_subtitle_zero">(Ni še naložitev)</string>
   <string name="categories_not_found">Kategorija »%1$s« ni bila najdena</string>
   <string name="depictions_not_found">Predmeti, ki bi se ujemali z »%1$s«, niso bili najdeni</string>
   <string name="no_child_classes">%1$s nima podrejenih razredov</string>
@@ -118,6 +142,7 @@
   <string name="title_activity_settings">Nastavitve</string>
   <string name="title_activity_signup">Ustvari račun</string>
   <string name="title_activity_featured_images">Izbrane slike</string>
+  <string name="title_activity_custom_selector">Izbiralnik po meri</string>
   <string name="title_activity_category_details">Kategorija</string>
   <string name="title_activity_review">Ocenjevanje</string>
   <string name="menu_about">O orodju</string>
@@ -139,9 +164,14 @@
   <string name="use_previous">Uporabi prejšnji naslov in opis</string>
   <string name="preference_theme">Tema</string>
   <string name="license_name_cc_by_sa_four">Priznanje avtorstva-Deljenje pod enakimi pogoji 4.0</string>
-  <string name="license_name_cc_by_four">Priznanje avtorstva 4.0</string>
+  <string name="license_name_cc_by_four"> Priznanje avtorstva 4.0</string>
   <string name="license_name_cc_by_sa">Priznanje avtorstva-Deljenje pod enakimi pogoji 3.0</string>
-  <string name="license_name_cc_by">Priznanje avtorstva 3.0</string>
+  <string name="license_name_cc_by"> Priznanje avtorstva 3.0</string>
+  <string name="license_name_cc0">CC0</string>
+  <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="tutorial_1_text">Wikimedijina zbirka gosti večino slik, ki se uporabljajo v Wikipediji.</string>
   <string name="tutorial_1_subtext">Vaše slike pomagajo izobraževati ljudi po vsem svetu</string>
   <string name="tutorial_2_text">Nalagajte samo slike, ki ste jih posneli ali ustvarili sami:</string>
@@ -231,6 +261,8 @@
   <string name="upload_problem_different_geolocation">Slika je bila posneta na drugem kraju.</string>
   <string name="upload_problem_fbmd">Nalagajte samo slike, ki ste jih ustvarili sami. Ne nalagajte slik, ki ste jih našli na Facebook računih drugih ljudi.</string>
   <string name="upload_problem_do_you_continue">Ali še vedno želite naložiti to sliko?</string>
+  <string name="upload_connection_error_alert_title">Napaka povezave</string>
+  <string name="upload_connection_error_alert_detail">Za postopek nalaganja je potrebna aktivna internetna povezava. Prosimo, preverite omrežno povezavo.</string>
   <string name="upload_problem_image">Najdene težave s sliko</string>
   <string name="internet_downloaded">Nalagajte samo slike, ki ste jih ustvarili sami. Ne nalagajte slik, ki ste jih prenesli s spleta.</string>
   <string name="use_external_storage">Shrani posnetke v aplikaciji</string>
@@ -258,6 +290,7 @@
   <string name="nearby_commons">Zbirka</string>
   <string name="about_rate_us">Ocenite nas</string>
   <string name="about_faq">PPV</string>
+  <string name="user_guide">Uporabniški priročnik</string>
   <string name="welcome_skip_button">Preskoči vadnico</string>
   <string name="no_internet">Internet ni na voljo</string>
   <string name="error_notifications">Napaka pri pridobivanju obvestil</string>
@@ -284,6 +317,7 @@
   <string name="title_activity_search">Išči</string>
   <string name="search_recent_header">Nedavna iskanja:</string>
   <string name="provider_searches">Pred kratkim opravljene poizvedbe</string>
+  <string name="provider_recent_languages">Nedavne poizvedbe jezikov</string>
   <string name="error_loading_categories">Pri nalaganju kategorij se je pojavila napaka.</string>
   <string name="error_loading_depictions">Pri nalaganju upodobitev se je pojavila napaka.</string>
   <string name="search_tab_title_media">Mediji</string>
@@ -291,6 +325,7 @@
   <string name="search_tab_title_depictions">Predmeti</string>
   <string name="explore_tab_title_featured">Izbrano</string>
   <string name="explore_tab_title_mobile">Mobilno naloženo</string>
+  <string name="explore_tab_title_map">Zemljevid</string>
   <string name="successful_wikidata_edit">Slika je bila dodana na stran %1$s v Wikipodatkih!</string>
   <string name="wikidata_edit_failure">Posodobitev ustrezne entitete v Wikipodatkih ni uspela!</string>
   <string name="menu_set_wallpaper">Nastavi kot ozadje</string>
@@ -316,8 +351,11 @@
   <string name="quiz_screenshot_question">Ali je ta zaslonski posnetek primeren za naložitev?</string>
   <string name="share_app_title">Delite aplikacijo</string>
   <string name="error_fetching_nearby_places">Napaka pri pridobivanju bližnjih krajev.</string>
+  <string name="no_nearby_places_around">Tu okoli ni bližnjih krajev</string>
+  <string name="error_fetching_nearby_monuments">Napaka pri pridobivanju bližnjih spomenikov.</string>
   <string name="no_recent_searches">Ni nedavnih iskanj</string>
   <string name="delete_recent_searches_dialog">Ali res želite izbrisati svojo zgodovino iskanja?</string>
+  <string name="cancel_upload_dialog">Ali res želite preklicati to nalaganje?</string>
   <string name="delete_search_dialog">Ali želite izbrisati to iskanje?</string>
   <string name="search_history_deleted">Zgodovina iskanja izbrisana</string>
   <string name="nominate_delete">Predlagaj za izbris</string>
@@ -376,6 +414,9 @@
   <string name="no_categories_selected_warning_desc">Slike brez kategorij so le redko uporabne. Ali res želite nadaljevati brez izbire kategorij?</string>
   <string name="no_depictions_selected">Izbrana ni nobena upodobitev</string>
   <string name="no_depictions_selected_warning_desc">Slike z upodobitvami je lažje najti in bodo verjetneje uporabljene. Ali res želite nadaljevati brez izbire upodobitev?</string>
+  <string name="back_button_warning">Preklic nalaganja</string>
+  <string name="back_button_warning_desc">Uporaba gumba Nazaj bo preklicala urejanje in bo opravljeno delo izgubljeno</string>
+  <string name="back_button_continue">Nadaljuj nalaganje</string>
   <string name="upload_flow_all_images_in_set">(Za vse slike v skupini)</string>
   <string name="search_this_area">Preišči to območje</string>
   <string name="nearby_card_permission_title">Zahtevek za dovoljenje</string>
@@ -387,7 +428,7 @@
   <string name="achievements_fetch_failed">Nekaj je šlo narobe. Vaših dosežkov nismo mogli pridobiti.</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Opravili ste toliko prispevkov, da jih naš sistem izračunavanja ne more razčleniti. To je vrhunski dosežek.</string>
   <string name="ends_on">Konec:</string>
-  <string name="display_campaigns">Prikaži kampanje</string>
+  <string name="display_campaigns">Prikaži akcije</string>
   <string name="display_campaigns_explanation">Nastavi tekoče kampanje</string>
   <string name="nearby_campaign_dismiss_message">Kampanj ne boste več videli. Če želite, lahko tovrstno obveščanje znova vklopite v nastavitvah.</string>
   <string name="this_function_needs_network_connection">Ta možnost zahteva omrežno povezavo. Prosimo, preverite vaše nastavitve povezave.</string>
@@ -421,7 +462,7 @@
   <string name="review_thanks_yes_button_text">Naslednja slika</string>
   <string name="review_thanks_no_button_text">Da, zakaj ne</string>
   <string name="skip_image_explanation">S klikom tega gumba boste pridobili še eno sliko, ki je bila pred kratkim naložena v Wikimedijino zbirko.</string>
-  <string name="review_image_explanation" fuzzy="true">Pregledujete lahko slike in izboljšujete kakovost Wikimedijine zbirke.\nŠtirje parametri pregledovanja so:\n– Ali slika spada v okvir projekta?\n– Ali slika upošteva avtorske pravice?\n– Ali je slika pravilno kategorizirana?\n– Če je vse v redu, se lahko tudi zahvalite naložniku.</string>
+  <string name="review_image_explanation">Pregledujete lahko slike, da izboljšate kakovost Wikimedijine zbirke.\n\nTrije parametri pregledovanja so:\n\n– Ali slika spada v okvir projekta?\nKo tapnete ne (zunaj projekta), sliko označite s predlogom za izbris.\n\n– Ali slika upošteva avtorske pravice?\nKo tapnete Ne (ne upošteva avtorskih pravic), sliko označite s predlogom za izbris.\n\n– Ali je slika pravilno kategorizirana?\n\nČe je vse v redu, se k sliki ne doda nobena oznaka in se lahko tudi zahvalite naložniku.</string>
   <string name="no_image">Ni uporabljenih slik</string>
   <string name="no_image_reverted">Ni vrnjenih slik</string>
   <string name="no_image_uploaded">Ni naloženih slik</string>
@@ -483,8 +524,32 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Kategorij ni mogoče dodati.</string>
   <string name="category_edit_button_text">Posodobi kategorije</string>
+  <string name="depictions_edit_helper_make_edit_toast">Poskušam posodobiti upodobitve.</string>
+  <string name="depictions_edit_helper_show_edit_title">Uredi upodobitve</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">Dodana je %1$s upodobitev.</item>
+    <item quantity="two">Dodani sta %1$s upodobitvi.</item>
+    <item quantity="few">Dodane so %1$s upodobitve.</item>
+    <item quantity="other">Dodanih je %1$s upodobitev.</item>
+  </plurals>
+  <string name="depictions_edit_helper_edit_message_else">Upodobitev ni bilo mogoče dodati.</string>
+  <string name="coordinates_edit_helper_make_edit_toast">Poskušam posodobiti koordinate.</string>
+  <string name="coordinates_edit_helper_show_edit_title">Posodobitev koordinat</string>
+  <string name="description_edit_helper_show_edit_title">Posodobitev opisa</string>
+  <string name="caption_edit_helper_show_edit_title">Posodobitev napisa</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Uspelo</string>
+  <string name="coordinates_edit_helper_show_edit_message">Koordinate %1$s so dodane.</string>
+  <string name="description_edit_helper_show_edit_message">Opisi so dodani.</string>
+  <string name="caption_edit_helper_show_edit_message">Napis je dodan.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Ni bilo mogoče dodati koordinat.</string>
+  <string name="description_edit_helper_edit_message_else">Ni bilo mogoče dodati opisov.</string>
+  <string name="caption_edit_helper_edit_message_else">Napisa ni bilo mogoče dodati.</string>
+  <string name="coordinates_picking_unsuccessful">Koordinat ni bilo mogoče pridobiti.</string>
+  <string name="descriptions_picking_unsuccessful">Ni bilo mogoče pridobiti opisov.</string>
+  <string name="description_activity_title">Uredi opise in napise</string>
   <string name="share_image_via">Deli slike prek ...</string>
-  <string name="no_achievements_yet" fuzzy="true">Opravili niste še nobenega prispevka</string>
+  <string name="you_have_no_achievements_yet">Ničesar še niste prispevali</string>
+  <string name="no_achievements_yet">%s ni opravil/a še nobenega prispevka</string>
   <string name="account_created">Račun ustvarjen!</string>
   <string name="text_copy">Besedilo skopirano na odložišče</string>
   <string name="notification_mark_read">Obvestilo označeno kot prebrano</string>
@@ -536,6 +601,7 @@
   <string name="resume">nadaljuj</string>
   <string name="paused">Premor</string>
   <string name="more">Več</string>
+  <string name="bookmarks">Zaznamki</string>
   <string name="achievements_tab_title">Dosežki</string>
   <string name="leaderboard_tab_title">Lestvica</string>
   <string name="rank_prefix">Mesto:</string>
@@ -565,6 +631,8 @@
   <string name="quality_images_info">Kakovostne slike so ponazoritve ali fotografije, ki ustrezajo nekaterim merilom kakovosti (ta so predvsem tehnična) in so dragocena za projekte Wikimedije</string>
   <string name="resuming_upload">Nalaganje se nadaljuje ...</string>
   <string name="pausing_upload">Zaustavljam nalaganje ...</string>
+  <string name="cancelling_upload">Preklicujem nalaganje ...</string>
+  <string name="cancel_upload">Preklic nalaganja</string>
   <string name="limited_connection_explanation">Omogočili ste način omejene povezanosti. Vsa nalaganja so začasno ustavljena in se bodo nadaljevala, ko boste ta način izklopili.</string>
   <string name="limited_connection_is_on">Način omejene povezanosti je vklopljen.</string>
   <string name="media_details_tooltip">Prosimo, na kratko opišite vsebino slike. V opisu navedite, zakaj je slika zanimiva, značilna ali redka ter razložite vidni in nevidni konteks. Uporabite karseda točne izraze.</string>
@@ -577,6 +645,71 @@
   <string name="menu_view_category_page">Prikaži stran kategorije</string>
   <string name="menu_view_item_page">Ogled strani predmeta</string>
   <string name="app_ui_language">Jezik uporabniškega vmesnika aplikacije</string>
+  <string name="remove">Odstrani napis in opis</string>
   <string name="read_help_link">Preberi več</string>
   <string name="media_detail_in_all_languages">V vseh jezikih</string>
+  <string name="choose_a_location">Izberite lokacijo</string>
+  <string name="pan_and_zoom_to_adjust">Nastavite s premikanjem in približevanjem</string>
+  <string name="select_location_location_picker">Izberite lokacijo</string>
+  <string name="show_in_map_app">Prikaži v apu</string>
+  <string name="modify_location">Uredi lokacijo</string>
+  <string name="location_picker_image_view">Slikovni prikaz izbiralnika lokacije</string>
+  <string name="location_picker_image_view_shadow">   Senca slikovnega prikaza izbiralnika lokacije</string>
+  <string name="image_location">Lokacija slike</string>
+  <string name="check_whether_location_is_correct">Preverite, ali je lokacija pravilna</string>
+  <string name="label">Oznaka</string>
+  <string name="description">Opis</string>
+  <string name="title_page_bookmarks_items">Predmeti</string>
+  <string name="custom_selector_title">Izbiralnik po meri</string>
+  <string name="custom_selector_empty_text">Ni slik</string>
+  <string name="done">Opravljeno</string>
+  <string name="back">Nazaj</string>
+  <string name="welcome_custom_picture_selector_text">Pozdravljeni v Izbiralniku slik po meri</string>
+  <string name="custom_selector_info_text1">Ta izbiralnik vam pokaže, katere slike ste že naložili v Zbirko.</string>
+  <string name="custom_selector_info_text2">V nasprotju s sliko na levi je slika na desni označena z logotipom Zbirke, kar pomeni, da je v projekt že naložena.\n Za predogled slike se je dotaknite in jo pridržite.</string>
+  <string name="welcome_custom_selector_ok">Odlično</string>
+  <string name="custom_selector_already_uploaded_image_text">Ta slika je že naložena v Zbirko.</string>
+  <string name="place_state_wlm">WLM</string>
+  <string name="wlm_upload_info">Ta slika bo vključena v natečaj Viki obožuje spomenike 2021</string>
+  <string name="display_monuments">Prikaži spomenike</string>
+  <string name="wlm_month_message">Spet je mesec natečaja Viki obožuje spomenike!</string>
+  <string name="learn_more">VEČ O TEM</string>
+  <string name="wlm_campaign_title">Viki obožuje spomenike</string>
+  <string name="wlm_campaign_description">Viki obožuje spomenike je mednarodni fotografski natečaj za spomenike, ki ga organizira fundacija Wikimedia.</string>
+  <string name="need_permission">Potrebno je dovoljenje</string>
+  <string name="read_phone_state_permission_message">Bližnji zemljevidi morajo za pravilno delovanje prebrati STANJE TELEFONA</string>
+  <string name="contributions_of_user">Prispevki uporabnika: %s</string>
+  <string name="achievements_of_user">Dosežki uporabnika: %s</string>
+  <string name="menu_view_user_page">Ogled uporabniške strani</string>
+  <string name="edit_depictions">Uredi slike</string>
+  <string name="edit_categories">Uredi kategorije</string>
+  <string name="advanced_options">Napredne možnosti</string>
+  <string name="advanced_query_info_text">Poizvedbo Bližnje lahko prilagodite. Če se pojavijo napake, ponastavite in ponovite postopek.</string>
+  <string name="apply">Uporabi</string>
+  <string name="reset">Ponastavi</string>
+  <string name="location_message">Podatki o lokaciji pomagajo urejevalcem vikijev najti vašo sliko, s čimer se močno poveča njena uporabnost.\nPredlagamo vam, da v nastavitvah aplikacije fotoaparata vklopite označevanje lokacije.\nHvala za prispevanje!</string>
+  <string name="no_location_found_title">Ni najdene lokacije</string>
+  <string name="no_location_found_message">Kaj, če bi dodali kraj, kjer je bila slika posneta?\nPodatki o lokaciji pomagajo vikiurejevalcem poiskati sliko, s čimer ta postane precej uporabnejša.\nHvala!</string>
+  <string name="add_location">Dodaj lokacijo</string>
+  <string name="feedback_sharing_data_alert">Iz te e-pošte odstranite vse podatke, ki jih ne želite javno deliti. Upoštevajte, da bodo vaš e-poštni naslov ter povezano ime in profilna slika javno vidni.</string>
+  <string name="explore_map_details">Podrobnosti</string>
+  <string name="achievements_unavailable_beta">Dosežki so na voljo samo v stabilni različici (preverite dokumentacijo razvijalcev).</string>
+  <string name="leaderboard_unavailable_beta">Lestvica uvrstitev je na voljo samo v stabilni različici (glejte dokumentacijo razvijalcev).</string>
+  <string name="copyright_popup">Prosimo, nalagajte samo slike, ki ste jih ustvarili sami. Nalagatelje avtorsko zavarovanega gradiva bomo blokirali. To velja tudi za betarazličico. Hvala za preizkušanje aplikacije!</string>
+  <string name="select_feedback_data_choice">Prosimo, odizberite vse podatke, ki jih ne želite deliti javno.</string>
+  <string name="api_level">Raven API</string>
+  <string name="android_version">Različica Androida</string>
+  <string name="device_manufacturer">Proizvajalec naprave</string>
+  <string name="device_model">Model naprave</string>
+  <string name="device_name">Ime naprave</string>
+  <string name="network_type">Vrsta omrežja</string>
+  <string name="thanks_feedback">Hvala za vaš odziv</string>
+  <string name="error_feedback">Napaka pri pošiljanju odziva</string>
+  <string name="enter_description">Kakšen je vaš odziv?</string>
+  <string name="your_feedback">Vaš odziv</string>
+  <string name="menu_view_report">Poročilo</string>
+  <string name="report_violation">Prijavi kršitev</string>
+  <string name="report_user">Prijavi uporabnika</string>
+  <string name="report_content">Prijavi to vsebino</string>
+  <string name="request_user_block">Zahtevaj blokiranje uporabnika</string>
 </resources>

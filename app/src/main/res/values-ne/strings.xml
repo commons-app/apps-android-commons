@@ -148,12 +148,12 @@
   <string name="media_detail_license">इजाजतपत्र</string>
   <string name="media_detail_coordinates">अक्षाङ्शहरू</string>
   <string name="media_detail_coordinates_empty">कुनै उपलब्ध गराइएकाे छैन</string>
-  <string name="logout_verification">के तपाई निर्गमन गर्न चाहानुहुन्छ?</string>
+  <string name="logout_verification">के तपाईं निर्गमन गर्न चाहानुहुन्छ?</string>
   <string name="no_subcategory_found">कुनैपनि उपश्रेणीहरू फेला परेनन्</string>
   <string name="no_parentcategory_found">कुनैपनि अभिभावक श्रेणीहरू फेला परेन</string>
   <string name="welcome_image_welcome_wikipedia">विकिपिडियामा स्वागत छ</string>
   <string name="welcome_image_sydney_opera_house">सिड्नीकाे ओपेरा हाउस</string>
-  <string name="cancel">रद्द गर्ने</string>
+  <string name="cancel">रद्द गर्नुहोस्</string>
   <string name="navigation_drawer_open">खोल्नुहोस्</string>
   <string name="navigation_drawer_close">बन्द गर्नुहोस्</string>
   <string name="navigation_item_home">गृह</string>
@@ -249,10 +249,13 @@
   <string name="account_created">खाता सृजना गरियो!</string>
   <string name="upload_nearby_place_found_title">नजिकैको स्थान भेटियो</string>
   <string name="title_app_shortcut_bookmark">पुस्तक चिनोहरू</string>
-  <string name="title_app_shortcut_setting">सेटिङ्गहरू</string>
+  <string name="title_app_shortcut_setting">मेरो अभिरुचिहरू</string>
   <string name="add_bookmark">पुस्तक चिनाेमा थपियाे</string>
   <string name="setting_wallpaper_dialog_title">भित्तेपत्रकाे रूपमा चयन गर्नुहोस्</string>
   <string name="theme_default_name" fuzzy="true">पुनर्निर्धारित</string>
   <string name="theme_dark_name">गाढा</string>
   <string name="theme_light_name">हल्का</string>
+  <string name="report_user">यस प्रयोगकर्तालाई उजुरी गर्नुहोस्</string>
+  <string name="report_content">यस प्रतिवेदनलाई उजुरी गर्नुहोस्</string>
+  <string name="request_user_block">यस प्रयोगकर्तालाई रोक लगाउन अनुरोध गर्नुहोस्</string>
 </resources>

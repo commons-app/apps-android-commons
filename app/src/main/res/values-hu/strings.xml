@@ -470,4 +470,9 @@
   <string name="limited_connection_enabled">Korlátozott kapcsolat-mód bekapcsolva!</string>
   <string name="limited_connection_disabled">Korlátozott kapcsolat-mód kikapcsolva. Függőben lévő feltöltések folytatása.</string>
   <string name="limited_connection_mode">Korlátozott kapcsolat mód</string>
+  <string name="menu_view_report">Jelentés</string>
+  <string name="report_violation">Szabálysértés jelentése</string>
+  <string name="report_user">Felhasználó jelentése</string>
+  <string name="report_content">Tartalom jelentése</string>
+  <string name="request_user_block">Kérelem a felhasználó letiltásához</string>
 </resources>

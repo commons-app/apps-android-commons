@@ -27,7 +27,9 @@
   <string name="commons_github">Commons Github lähdekoodi</string>
   <string name="commons_logo">Commons-logo</string>
   <string name="commons_website">Commons-verkkosivu</string>
+  <string name="exit_location_picker">Poistu sijainnin valitsimesta</string>
   <string name="submit">Lähetä</string>
+  <string name="add_another_description">Lisää toinen kuvaus</string>
   <string name="show_captions">Kuvatekstit</string>
   <string name="row_item_caption">Kuvateksti</string>
   <string name="show_captions_description">Kuvaus</string>
