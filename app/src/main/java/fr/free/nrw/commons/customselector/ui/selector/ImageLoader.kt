@@ -182,14 +182,12 @@ class ImageLoader @Inject constructor(
                 )
 
             if (mapHolderImage[holder] == image) {
-                if (result is Result.TRUE) {
-                    if (showAlreadyActionedImages) holder.itemUploaded()
-                    else holder.itemNotUploaded()
+                if ((result is Result.TRUE) && showAlreadyActionedImages) {
+                    holder.itemUploaded()
                 } else holder.itemNotUploaded()
 
-                if (existsInNotForUploadTable > 0) {
-                    if (showAlreadyActionedImages) holder.itemNotForUpload()
-                    else holder.itemForUpload()
+                if ((existsInNotForUploadTable > 0) && showAlreadyActionedImages) {
+                    holder.itemNotForUpload()
                 } else holder.itemForUpload()
             }
         }
