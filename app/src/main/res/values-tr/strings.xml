@@ -44,6 +44,8 @@
   <string name="show_captions_description">Açıklama</string>
   <string name="nearby_row_image">Resim</string>
   <string name="nearby_all">Hepsi</string>
+  <string name="nearby_filter_toggle">Aç/Kapat</string>
+  <string name="nearby_filter_state">Yer Durumu</string>
   <string name="appwidget_img">Günün Resmi</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d dosya yükleniyor</item>
