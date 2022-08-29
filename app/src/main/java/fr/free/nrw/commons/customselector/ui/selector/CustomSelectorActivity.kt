@@ -116,14 +116,13 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == Constants.RequestCodes.RECEIVE_DATA_FROM_FULL_SCREEN_MODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                val selectedImages: ArrayList<Image> =
-                    data!!
-                        .getParcelableArrayListExtra(CustomSelectorConstants.NEW_SELECTED_IMAGES)!!
-                val shouldRefresh = data.getBooleanExtra(SHOULD_REFRESH, false)
-                imageFragment!!.passSelectedImages(selectedImages, shouldRefresh)
-            }
+        if (requestCode == Constants.RequestCodes.RECEIVE_DATA_FROM_FULL_SCREEN_MODE &&
+            resultCode == Activity.RESULT_OK) {
+            val selectedImages: ArrayList<Image> =
+                data!!
+                    .getParcelableArrayListExtra(CustomSelectorConstants.NEW_SELECTED_IMAGES)!!
+            val shouldRefresh = data.getBooleanExtra(SHOULD_REFRESH, false)
+            imageFragment!!.passSelectedImages(selectedImages, shouldRefresh)
         }
     }
 
@@ -213,11 +212,15 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
                     contentResolver
                 )
                 val exists = notForUploadStatusDao.find(imageSHA1)
+
+                // If image exists in not for upload table make allImagesAlreadyNotForUpload false
                 if (exists < 1) {
                     allImagesAlreadyNotForUpload = false
                 }
             }
 
+            // if all images is not already marked as not for upload, insert all images in
+            // not for upload table
             if (!allImagesAlreadyNotForUpload) {
                 images.forEach {
                     val imageSHA1 = CustomSelectorUtils.getImageSHA1(
@@ -232,6 +235,9 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
                         )
                     )
                 }
+
+                // if all images is already marked as not for upload, delete all images from
+                // not for upload table
             } else {
                 images.forEach {
                     val imageSHA1 = CustomSelectorUtils.getImageSHA1(

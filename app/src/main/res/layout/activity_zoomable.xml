@@ -28,7 +28,7 @@
       android:layout_width="@dimen/dimen_20"
       android:layout_height="@dimen/dimen_20"
       app:layout_constraintDimensionRatio="H,1:1"
-      android:textSize="11sp"
+      android:textSize="@dimen/subtitle_text"
       android:textStyle="bold"
       android:textColor="@color/black"
       android:layout_margin="@dimen/dimen_6"
