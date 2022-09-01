@@ -128,13 +128,13 @@ class ZoomableActivity : BaseActivity() {
         setContentView(R.layout.activity_zoomable)
         ButterKnife.bind(this)
         init(imageUri)
-        onSwap()
+        onSwipe()
     }
 
     /**
      * Handle swap gestures. Ex. onSwipeLeft, onSwipeRight, onSwipeUp, onSwipeDown
      */
-    private fun onSwap() {
+    private fun onSwipe() {
         val sharedPreferences: SharedPreferences =
             getSharedPreferences(ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
         val showAlreadyActionedImages =
