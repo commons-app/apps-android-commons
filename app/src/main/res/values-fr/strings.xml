@@ -289,7 +289,7 @@
   <string name="send_log_file_description">Envoyer par courriel le journal aux développeurs pour aider à la correction des problèmes de l’application. Note : les journaux peuvent potentiellement comporter des informations d’identification</string>
   <string name="no_web_browser">Aucun afficheur web trouvé pour ouvrir l’URL</string>
   <string name="null_url">Erreur ! URL non trouvée</string>
-  <string name="nominate_deletion">Proposer pour suppression</string>
+  <string name="nominate_deletion">Nommer pour suppression</string>
   <string name="nominated_for_deletion">Cette image a été citée pour suppression.</string>
   <string name="nominated_see_more">Voir la page web pour les détails</string>
   <string name="skip_login">Passer</string>
@@ -375,7 +375,7 @@
   <string name="cancel_upload_dialog">Êtes-vous sûr(e) de vouloir annuler ce téléversement ?</string>
   <string name="delete_search_dialog">Voulez-vous supprimer cette recherche ?</string>
   <string name="search_history_deleted">Historique de recherche effacée</string>
-  <string name="nominate_delete">Proposé à la suppression</string>
+  <string name="nominate_delete">Nommer pour suppression</string>
   <string name="delete">Supprimer</string>
   <string name="Achievements">Accomplissements</string>
   <string name="Profile">Profil</string>
@@ -520,7 +520,7 @@
   <string name="default_description_language">Langue de description par défaut</string>
   <string name="delete_helper_show_deletion_title">Proposition en cours à la suppression</string>
   <string name="delete_helper_show_deletion_title_success">Succès</string>
-  <string name="delete_helper_show_deletion_message_if">%1$s nominé pour suppression.</string>
+  <string name="delete_helper_show_deletion_message_if">%1$s nommé pour suppression.</string>
   <string name="delete_helper_show_deletion_title_failed">Échec</string>
   <string name="delete_helper_show_deletion_message_else">Impossible de solliciter la suppression.</string>
   <string name="delete_helper_ask_spam_selfie">Un selfie</string>

@@ -151,6 +151,7 @@
   <string name="nearby_wikidata">{{Identical|Wikidata}}</string>
   <string name="nearby_wikipedia">{{Identical|Wikipedia}}</string>
   <string name="about_rate_us">Link text to rating the app in the apps market.\n\nThe word \"rate\" is supposed to be translated the same way as in the market app.</string>
+  <string name="about_faq">{{Identical|FAQ}}</string>
   <string name="about_translate">Link text with underline.\n{{Identical|Translate}}</string>
   <string name="about_translate_title">{{Identical|Language}}</string>
   <string name="about_translate_cancel">{{Identical|Cancel}}</string>
