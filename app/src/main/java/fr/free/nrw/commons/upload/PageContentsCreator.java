@@ -62,7 +62,7 @@ class PageContentsCreator {
         }
 
         if (contribution.getWikidataPlace()!=null && contribution.getWikidataPlace().isMonumentUpload()) {
-            buffer.append("{{Wiki Loves Monuments 2021|1= ")
+            buffer.append("{{Wiki Loves Monuments 2022|1= ")
                 .append(contribution.getCountryCode())
                 .append("}}").append("\n");
         }
