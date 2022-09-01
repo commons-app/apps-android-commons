@@ -332,11 +332,11 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
     ) {
         val intent = Intent(this, ZoomableActivity::class.java)
         intent.putExtra(CustomSelectorConstants.PRESENT_POSITION, position);
-        intent.putParcelableArrayListExtra(CustomSelectorConstants.TOTAL_IMAGES, images)
         intent.putParcelableArrayListExtra(
             CustomSelectorConstants.TOTAL_SELECTED_IMAGES,
             selectedImages
         )
+        intent.putExtra(CustomSelectorConstants.BUCKET_ID, bucketId)
         startActivityForResult(intent, Constants.RequestCodes.RECEIVE_DATA_FROM_FULL_SCREEN_MODE)
     }
 

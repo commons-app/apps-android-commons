@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -28,7 +29,11 @@ import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants
 import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.SHOULD_REFRESH
 import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.helper.OnSwipeTouchListener
+import fr.free.nrw.commons.customselector.model.CallbackStatus
 import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.customselector.model.Result
+import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorViewModel
+import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorViewModelFactory
 import fr.free.nrw.commons.media.zoomControllers.zoomable.DoubleTapGestureListener
 import fr.free.nrw.commons.media.zoomControllers.zoomable.ZoomableDraweeView
 import fr.free.nrw.commons.theme.BaseActivity
@@ -38,6 +43,7 @@ import fr.free.nrw.commons.utils.CustomSelectorUtils
 import kotlinx.coroutines.*
 import timber.log.Timber
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 /**
  * Activity for helping to view an image in full-screen mode with some other features
@@ -46,6 +52,11 @@ import javax.inject.Inject
 class ZoomableActivity : BaseActivity() {
 
     private lateinit var imageUri: Uri
+
+    /**
+     * View model.
+     */
+    private lateinit var viewModel: CustomSelectorViewModel
 
     @JvmField
     @BindView(R.id.zoomable)
@@ -73,6 +84,11 @@ class ZoomableActivity : BaseActivity() {
      * Present position of the image
      */
     private var position = 0
+
+    /**
+     * Present bucket ID
+     */
+    private var bucketId: Long = 0L
 
     /**
      * Determines whether the adapter should refresh
@@ -104,6 +120,12 @@ class ZoomableActivity : BaseActivity() {
     lateinit var uploadedStatusDao: UploadedStatusDao
 
     /**
+     * View Model Factory.
+     */
+    @Inject
+    lateinit var customSelectorViewModelFactory: CustomSelectorViewModelFactory
+
+    /**
     * Coroutine Dispatchers and Scope.
     */
     private var defaultDispatcher : CoroutineDispatcher = Dispatchers.Default
@@ -112,23 +134,44 @@ class ZoomableActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        images = intent.getParcelableArrayListExtra(
-            CustomSelectorConstants.TOTAL_IMAGES
-        )
+        setContentView(R.layout.activity_zoomable)
+        ButterKnife.bind(this)
+
         selectedImages = intent.getParcelableArrayListExtra(
             CustomSelectorConstants.TOTAL_SELECTED_IMAGES
         )
         position = intent.getIntExtra(CustomSelectorConstants.PRESENT_POSITION, 0)
-        imageUri = if (images.isNullOrEmpty()) {
-            intent.data as Uri
-        } else {
-            images!![position].uri
+        bucketId = intent.getLongExtra(CustomSelectorConstants.BUCKET_ID, 0L)
+        viewModel = ViewModelProvider(this, customSelectorViewModelFactory).get(
+            CustomSelectorViewModel::class.java
+        )
+        viewModel.fetchImages()
+        viewModel.result.observe(this) {
+            handleResult(it)
         }
-        Timber.d("URL = $imageUri")
-        setContentView(R.layout.activity_zoomable)
-        ButterKnife.bind(this)
-        init(imageUri)
-        onSwipe()
+    }
+
+    /**
+     * Handle view model result.
+     */
+    private fun handleResult(result: Result){
+        if(result.status is CallbackStatus.SUCCESS){
+            val images = result.images
+            if(images.isNotEmpty()) {
+                this@ZoomableActivity.images = ImageHelper.filterImages(images, bucketId)
+                imageUri = if (this@ZoomableActivity.images.isNullOrEmpty()) {
+                    intent.data as Uri
+                } else {
+                    this@ZoomableActivity.images!![position].uri
+                }
+                Timber.d("URL = $imageUri")
+                init(imageUri)
+                onSwipe()
+            }
+        }
+        spinner?.let {
+            it.visibility = if (result.status is CallbackStatus.FETCHING) View.VISIBLE else View.GONE
+        }
     }
 
     /**
