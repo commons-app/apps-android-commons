@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.graphics.drawable.Animatable
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -188,6 +189,10 @@ class ZoomableActivity : BaseActivity() {
                 // Swipe left to view next image in the folder. (if available)
                 override fun onSwipeLeft() {
                     super.onSwipeLeft()
+
+                    if (photo?.zoomableController?.isIdentity == false)
+                        return
+
                     if (showAlreadyActionedImages) {
                         if (position < images!!.size - 1) {
                             position++
@@ -218,6 +223,10 @@ class ZoomableActivity : BaseActivity() {
                 // Swipe right to view previous image in the folder. (if available)
                 override fun onSwipeRight() {
                     super.onSwipeRight()
+
+                    if (photo?.zoomableController?.isIdentity == false)
+                        return
+
                     if (showAlreadyActionedImages) {
                         if (position > 0) {
                             position--
@@ -250,6 +259,10 @@ class ZoomableActivity : BaseActivity() {
                 // marked as not for upload
                 override fun onSwipeUp() {
                     super.onSwipeUp()
+
+                    if (photo?.zoomableController?.isIdentity == false)
+                        return
+
                     scope.launch {
                         val imageSHA1 = CustomSelectorUtils.getImageSHA1(
                             images!![position].uri,
@@ -307,6 +320,10 @@ class ZoomableActivity : BaseActivity() {
                 // tapping "Mark as not for upload" in non-fullscreen mode), and show the next picture.
                 override fun onSwipeDown() {
                     super.onSwipeDown()
+
+                    if (photo?.zoomableController?.isIdentity == false)
+                        return
+
                     scope.launch {
                         val imageSHA1 = CustomSelectorUtils.getImageSHA1(
                             images!![position].uri,
