@@ -741,6 +741,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="no_more_images_found">No more images found</string>
   <string name="this_image_is_already_uploaded">This image is already uploaded</string>
   <string name="can_not_select_this_image_for_upload">Can not select this image for upload</string>
+  <string name="image_selected">Image selected</string>
+  <string name="image_marked_as_not_for_upload">Image marked as not for upload</string>
   <string name="menu_view_report">Report</string>
   <string name="report_violation">Report violation</string>
   <string name="report_user">Report this user</string>

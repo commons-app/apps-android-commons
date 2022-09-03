@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.graphics.drawable.Animatable
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -306,6 +307,11 @@ class ZoomableActivity : BaseActivity() {
                                 } else {
                                     if (!selectedImages!!.contains(images!![position])) {
                                         selectedImages!!.add(images!![position])
+                                        Toast.makeText(
+                                            this@ZoomableActivity,
+                                            getString(R.string.image_selected),
+                                            Toast.LENGTH_SHORT
+                                        ).show()
                                     }
                                     position = getNextActionableImage(position + 1)
                                     init(images!![position].uri)
@@ -357,6 +363,11 @@ class ZoomableActivity : BaseActivity() {
                                 ).show()
                             } else {
                                 insertInNotForUpload(images!![position])
+                                Toast.makeText(
+                                    this@ZoomableActivity,
+                                    getString(R.string.image_marked_as_not_for_upload),
+                                    Toast.LENGTH_SHORT
+                                ).show()
                                 shouldRefresh = true
                                 if (position < images!!.size - 1) {
                                     position++

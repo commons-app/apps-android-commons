@@ -1,9 +1,8 @@
 package fr.free.nrw.commons.customselector.helper
 
 import android.content.Context
-import android.view.GestureDetector
-import android.view.MotionEvent
-import android.view.View
+import android.util.DisplayMetrics
+import android.view.*
 import kotlin.math.abs
 
 /**
@@ -13,14 +12,25 @@ open class OnSwipeTouchListener(context: Context?) : View.OnTouchListener {
 
     private val gestureDetector: GestureDetector
 
+    private val SWIPE_THRESHOLD_HEIGHT = (getScreenResolution(context!!)).second / 3
+    private val SWIPE_THRESHOLD_WIDTH = (getScreenResolution(context!!)).first / 3
+    private val SWIPE_VELOCITY_THRESHOLD = 1000
+
     override fun onTouch(view: View?, motionEvent: MotionEvent?): Boolean {
         return gestureDetector.onTouchEvent(motionEvent)
     }
 
-    private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
+    fun getScreenResolution(context: Context): Pair<Int, Int> {
+        val wm: WindowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val display: Display = wm.getDefaultDisplay()
+        val metrics = DisplayMetrics()
+        display.getMetrics(metrics)
+        val width: Int = metrics.widthPixels
+        val height: Int = metrics.heightPixels
+        return width to height
+    }
 
-        private val SWIPE_THRESHOLD = 100
-        private val SWIPE_VELOCITY_THRESHOLD = 100
+    private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
 
         override fun onDown(e: MotionEvent?): Boolean {
             return true
@@ -39,7 +49,7 @@ open class OnSwipeTouchListener(context: Context?) : View.OnTouchListener {
                 val diffY: Float = event2.y - event1.y
                 val diffX: Float = event2.x - event1.x
                 if (abs(diffX) > abs(diffY)) {
-                    if (abs(diffX) > SWIPE_THRESHOLD && abs(velocityX) >
+                    if (abs(diffX) > SWIPE_THRESHOLD_WIDTH && abs(velocityX) >
                         SWIPE_VELOCITY_THRESHOLD) {
                         if (diffX > 0) {
                             onSwipeRight()
@@ -48,7 +58,7 @@ open class OnSwipeTouchListener(context: Context?) : View.OnTouchListener {
                         }
                     }
                 } else {
-                    if (abs(diffY) > SWIPE_THRESHOLD && abs(velocityY) >
+                    if (abs(diffY) > SWIPE_THRESHOLD_HEIGHT && abs(velocityY) >
                         SWIPE_VELOCITY_THRESHOLD) {
                         if (diffY > 0) {
                             onSwipeDown()
