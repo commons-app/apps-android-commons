@@ -315,7 +315,7 @@ class ZoomableActivity : BaseActivity() {
                             if (isNonActionable > 0) {
                                 Toast.makeText(
                                     this@ZoomableActivity,
-                                    getString(R.string.can_not_select_this_image_for_upload),
+                                    getString(R.string.this_image_is_already_uploaded),
                                     Toast.LENGTH_SHORT
                                 ).show()
                             } else {
@@ -333,7 +333,7 @@ class ZoomableActivity : BaseActivity() {
                                 if (isNonActionable > 0) {
                                     Toast.makeText(
                                         this@ZoomableActivity,
-                                        getString(R.string.can_not_select_this_image_for_upload),
+                                        getString(R.string.this_image_is_already_uploaded),
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 } else {
