@@ -10,5 +10,6 @@ object CustomSelectorConstants {
     const val PRESENT_POSITION = "present_position"
     const val NEW_SELECTED_IMAGES = "new_selected_images"
     const val SHOULD_REFRESH = "should_refresh"
+    const val FULL_SCREEN_MODE_FIRST_LUNCH = "full_screen_mode_first_launch"
 
 }

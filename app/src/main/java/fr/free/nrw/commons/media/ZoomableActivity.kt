@@ -1,13 +1,15 @@
 package fr.free.nrw.commons.media
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.drawable.Animatable
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.view.Window
+import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -58,6 +60,11 @@ class ZoomableActivity : BaseActivity() {
      * View model.
      */
     private lateinit var viewModel: CustomSelectorViewModel
+
+    /**
+     * Pref for saving states.
+     */
+    private lateinit var prefs: SharedPreferences
 
     @JvmField
     @BindView(R.id.zoomable)
@@ -138,6 +145,11 @@ class ZoomableActivity : BaseActivity() {
         setContentView(R.layout.activity_zoomable)
         ButterKnife.bind(this)
 
+        prefs =  applicationContext.getSharedPreferences(
+            ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY,
+            MODE_PRIVATE
+        )
+
         selectedImages = intent.getParcelableArrayListExtra(
             CustomSelectorConstants.TOTAL_SELECTED_IMAGES
         )
@@ -150,6 +162,26 @@ class ZoomableActivity : BaseActivity() {
         viewModel.result.observe(this) {
             handleResult(it)
         }
+
+        if(prefs.getBoolean(CustomSelectorConstants.FULL_SCREEN_MODE_FIRST_LUNCH, true)) {
+            // show welcome dialog on first launch
+            showWelcomeDialog()
+            prefs.edit().putBoolean(
+                CustomSelectorConstants.FULL_SCREEN_MODE_FIRST_LUNCH,
+                false
+            ).apply()
+        }
+    }
+
+    /**
+     * Show Full Screen Mode Welcome Dialog.
+     */
+    private fun showWelcomeDialog() {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.full_screen_mode_info_dialog)
+        (dialog.findViewById(R.id.btn_ok) as Button).setOnClickListener { dialog.dismiss() }
+        dialog.show()
     }
 
     /**
