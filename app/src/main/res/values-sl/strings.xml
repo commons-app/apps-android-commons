@@ -340,7 +340,7 @@
   <string name="taj_mahal_answer">Slike spomenikov in pokrajine so sprejemljive v večini držav. Upoštevajte, da so začasne umetniške instalacije pogosto avtorsko zavarovane in njihovih upodobitev ni dovoljeno nalagati. V Sloveniji je za pridobitni namen dovoljeno fotografirati samo tista javno razstavljena dela, katerih avtor je umrl leta {{#expr:{{CURRENTYEAR}}-71}}&lt;/&gt; ali prej. Za več o tem glejte [[Commons:Copyright rules by territory/Slovenia#Freedom of panorama]].</string>
   <string name="screenshot_answer">Zaslonski posnetki spletnih mest se štejejo kot izpeljana dela in zanje veljajo avtorske pravice izvornega spletnega mesta. Uporabljajo se lahko le z dovoljenjem izvornega avtorja. Brez takega dovoljenja se vsakršno izpeljano delo šteje za kršitev avtorskih pravic.</string>
   <string name="blurry_image_answer">Eden od ciljev Wikimedijine zbirke je zbiranje kakovostnih slik. Zamegljenih slik zato ne nalagajte. Vedno poskušajte posneti dobro sliko ob primerni svetlobi.</string>
-  <string name="construction_event_answer">V Wikimedijini zbirki so zelo dobrodošle slike, ki prikazujejo tehnologijo ali kulturo.</string>
+  <string name="construction_event_answer">V Wikimedijini zbirki so zelo dobrodošle slike, ki prikazujejo tehniko ali kulturo.</string>
   <string name="congratulatory_message_quiz">Pravilno ste odgovorili na %1$s vprašanj. Čestitamo!</string>
   <string name="warning_for_no_answer">Za odgovor na vprašanje izberite eno od dveh možnosti.</string>
   <string name="user_not_logged_in">Seja prijave je potekla. Poskusite se prijaviti znova.</string>

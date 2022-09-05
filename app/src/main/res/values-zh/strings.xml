@@ -51,6 +51,20 @@
   <string name="commons_website">共享资源网站</string>
   <string name="exit_location_picker">退出位置拾取器</string>
   <string name="submit">发布</string>
+  <string name="add_another_description">添加别的描述</string>
+  <string name="add_new_contribution">添加新的贡献</string>
+  <string name="add_contribution_from_camera">添加来自相机的贡献</string>
+  <string name="add_contribution_from_photos">添加来自照片的贡献</string>
+  <string name="add_contribution_from_contributions_gallery">添加来自之前贡献图库的贡献</string>
+  <string name="show_captions">说明</string>
+  <string name="row_item_language_description">语言描述</string>
+  <string name="row_item_caption">说明</string>
+  <string name="show_captions_description">描述</string>
+  <string name="nearby_row_image">图片</string>
+  <string name="nearby_all">全部</string>
+  <string name="nearby_filter_toggle">向上切换</string>
+  <string name="nearby_filter_search">搜索视图</string>
+  <string name="nearby_filter_state">地点状态</string>
   <string name="appwidget_img">每日图片</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d个文件正在上传</item>
@@ -336,6 +350,7 @@
   <string name="search_tab_title_depictions">项目</string>
   <string name="explore_tab_title_featured">特色</string>
   <string name="explore_tab_title_mobile">通过移动端上传</string>
+  <string name="explore_tab_title_map">地图</string>
   <string name="successful_wikidata_edit">图片已添加到维基数据上的%1$s！</string>
   <string name="wikidata_edit_failure">更新对应维基数据实体失败！</string>
   <string name="menu_set_wallpaper">设为壁纸</string>
@@ -534,6 +549,10 @@
   <string name="category_edit_button_text">更新分类</string>
   <string name="depictions_edit_helper_make_edit_toast">正在尝试更新描述。</string>
   <string name="depictions_edit_helper_show_edit_title">编辑描述</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">已添加 %1$s 个描写。</item>
+    <item quantity="other">已添加 %1$s 个描写。</item>
+  </plurals>
   <string name="depictions_edit_helper_edit_message_else">无法添加描述。</string>
   <string name="coordinates_edit_helper_make_edit_toast">尝试更新坐标。</string>
   <string name="coordinates_edit_helper_show_edit_title">坐标更新</string>
@@ -682,6 +701,7 @@
   <string name="achievements_of_user">用户成就：%s</string>
   <string name="menu_view_user_page">查看用户页面</string>
   <string name="edit_depictions">编辑描述</string>
+  <string name="edit_categories">编辑分类</string>
   <string name="advanced_options">高级选项</string>
   <string name="advanced_query_info_text">您可以自定义附近查询。如果发生错误，请重置并应用。</string>
   <string name="apply">应用</string>
@@ -689,12 +709,20 @@
   <string name="location_message">位置数据能帮助 Wiki 编辑者来找到您的图片，让他更加有用。\n您近期上传的内容没有位置。\n我们建议您在相机应用程序设置里打开位置。\n感谢您的上传！</string>
   <string name="no_location_found_title">没有找到位置</string>
   <string name="add_location">添加位置</string>
+  <string name="explore_map_details">详细</string>
+  <string name="api_level">API 级别</string>
   <string name="android_version">Android版本</string>
   <string name="device_manufacturer">设备制造商</string>
   <string name="device_model">设备型号</string>
   <string name="device_name">设备名称</string>
   <string name="network_type">网络类型</string>
   <string name="thanks_feedback">感谢您提供反馈</string>
+  <string name="error_feedback">发送反馈时发生错误</string>
   <string name="enter_description">您的反馈是？</string>
   <string name="your_feedback">您的反馈</string>
+  <string name="menu_view_report">报告</string>
+  <string name="report_violation">报告违规行为</string>
+  <string name="report_user">报告此用户</string>
+  <string name="report_content">报告此内容</string>
+  <string name="request_user_block">请求屏蔽此用户</string>
 </resources>

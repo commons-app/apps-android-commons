@@ -145,7 +145,7 @@
   <string name="welcome_copyright_subtext">Diarbenn an dafar gwarezet a vez kavet ganeoc\'h war ar Genrouedad, hag ivez ar skeudennoù skritelloù, ar goloioù levrioù ha kement zo…</string>
   <string name="welcome_final_text">Ha soñjal a rit eo mat ?</string>
   <string name="welcome_final_button_text">Ya !</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Gouzout hiroc\'h&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Gouzout hiroc\'h</string>
   <string name="detail_panel_cats_label">Rummadoù</string>
   <string name="detail_panel_cats_loading">O kargañ…</string>
   <string name="detail_panel_cats_none">Hini ebet diuzet</string>
