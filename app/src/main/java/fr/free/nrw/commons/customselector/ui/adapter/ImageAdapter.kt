@@ -216,20 +216,7 @@ class ImageAdapter(
             }
 
             holder.itemView.setOnClickListener {
-                val sharedPreferences: SharedPreferences =
-                    context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
-                val switchState =
-                    sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
-
-                // While switch is turned off, lets user click on image only if the position is
-                // added inside map
-                if (!switchState) {
-                    if (actionableImagesMap.size > position) {
-                        selectOrRemoveImage(holder, position)
-                    }
-                } else {
-                    selectOrRemoveImage(holder, position)
-                }
+                onThumbnailClicked(position, holder)
             }
 
             // launch media preview on long click.
@@ -237,6 +224,29 @@ class ImageAdapter(
                 imageSelectListener.onLongPress(images.indexOf(image), images, selectedImages)
                 true
             }
+        }
+    }
+
+    /**
+     * Handles click on thumbnail
+     */
+    private fun onThumbnailClicked(
+        position: Int,
+        holder: ImageViewHolder
+    ) {
+        val sharedPreferences: SharedPreferences =
+            context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
+        val switchState =
+            sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
+
+        // While switch is turned off, lets user click on image only if the position is
+        // added inside map
+        if (!switchState) {
+            if (actionableImagesMap.size > position) {
+                selectOrRemoveImage(holder, position)
+            }
+        } else {
+            selectOrRemoveImage(holder, position)
         }
     }
 

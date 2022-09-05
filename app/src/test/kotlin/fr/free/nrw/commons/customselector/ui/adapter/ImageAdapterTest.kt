@@ -18,14 +18,15 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions
 import org.junit.runner.RunWith
-import org.mockito.*
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import java.lang.reflect.Field
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * Custom Selector image adapter test.
@@ -41,6 +42,8 @@ class ImageAdapterTest {
     private lateinit var context: Context
     @Mock
     private lateinit var mockContentResolver: ContentResolver
+    @Mock
+    private lateinit var sharedPreferences: SharedPreferences
 
     private lateinit var activity: CustomSelectorActivity
     private lateinit var imageAdapter: ImageAdapter
@@ -94,7 +97,7 @@ class ImageAdapterTest {
         imageAdapter.init(images, images, TreeMap())
 
         whenever(context.getSharedPreferences("custom_selector", 0))
-            .thenReturn(Mockito.mock(SharedPreferences::class.java))
+            .thenReturn(sharedPreferences)
         // Test conditions.
         imageAdapter.onBindViewHolder(holder, 0)
         selectedImageField.set(imageAdapter, images)
@@ -135,11 +138,63 @@ class ImageAdapterTest {
     }
 
     /**
+     * Test private function onThumbnailClicked.
+     */
+    @Test
+    fun onThumbnailClicked() {
+        images.add(image)
+        Whitebox.setInternalState(imageAdapter, "images", images)
+        // Access function
+        val func = imageAdapter.javaClass.getDeclaredMethod(
+            "onThumbnailClicked",
+            Int::class.java,
+            ImageAdapter.ImageViewHolder::class.java
+        )
+        func.isAccessible = true
+        func.invoke(imageAdapter, 0, holder)
+    }
+
+    /**
      * Test get item count.
      */
     @Test
     fun getItemCount() {
         Assertions.assertEquals(0, imageAdapter.itemCount)
+    }
+
+    /**
+     * Test setSelectedImages.
+     */
+    @Test
+    fun setSelectedImages() {
+        images.add(image)
+        imageAdapter.setSelectedImages(images)
+    }
+
+    /**
+     * Test refresh.
+     */
+    @Test
+    fun refresh() {
+        imageAdapter.refresh(listOf(image), listOf(image))
+    }
+
+    /**
+     * Test getSectionName.
+     */
+    @Test
+    fun getSectionName() {
+        images.add(image)
+        Whitebox.setInternalState(imageAdapter, "images", images)
+        Assertions.assertEquals("", imageAdapter.getSectionName(0))
+    }
+
+    /**
+     * Test cleanUp.
+     */
+    @Test
+    fun cleanUp() {
+        imageAdapter.cleanUp()
     }
 
     /**
