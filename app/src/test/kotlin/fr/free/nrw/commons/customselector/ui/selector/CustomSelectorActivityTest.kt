@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Looper
@@ -9,17 +10,22 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.customselector.model.Folder
 import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter
 import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.runner.RunWith
+import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
+import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.wikipedia.AppAdapter
+import java.lang.reflect.Field
 import java.lang.reflect.Method
 
 /**
@@ -32,6 +38,12 @@ class CustomSelectorActivityTest {
     private lateinit var activity: CustomSelectorActivity
 
     private lateinit var imageFragment: ImageFragment
+
+    private lateinit var images : java.util.ArrayList<Image>
+
+    private var uri: Uri = Mockito.mock(Uri::class.java)
+
+    private lateinit var image: Image
 
     /**
      * Set up the tests.
@@ -47,6 +59,11 @@ class CustomSelectorActivityTest {
         onCreate.isAccessible = true
         onCreate.invoke(activity, null)
         imageFragment = ImageFragment.newInstance(1,0)
+        image = Image(1, "image", uri, "abc/abc", 1, "bucket1")
+        images = ArrayList()
+
+        Whitebox.setInternalState(activity, "imageFragment", imageFragment)
+        Whitebox.setInternalState(imageFragment, "imageAdapter", Mockito.mock(ImageAdapter::class.java))
     }
 
     /**
@@ -76,6 +93,54 @@ class CustomSelectorActivityTest {
     @Throws(Exception::class)
     fun testOnFolderClick() {
         activity.onFolderClick(1, "test", 0);
+    }
+
+    /**
+     * Test onActivityResult function.
+     */
+    @Test
+    @Throws(Exception::class)
+    fun testOnActivityResult() {
+        val func = activity.javaClass.getDeclaredMethod(
+            "onActivityResult",
+            Int::class.java,
+            Int::class.java,
+            Intent::class.java
+        )
+        func.isAccessible = true
+        func.invoke(activity, 512, -1, Mockito.mock(Intent::class.java))
+    }
+
+    /**
+     * Test showWelcomeDialog function.
+     */
+    @Test
+    @Throws(Exception::class)
+    fun testShowWelcomeDialog() {
+        val func = activity.javaClass.getDeclaredMethod(
+            "showWelcomeDialog"
+        )
+        func.isAccessible = true
+        func.invoke(activity)
+    }
+
+
+    /**
+     * Test onLongPress function.
+     */
+    @Test
+    @Throws(Exception::class)
+    fun testOnLongPress() {
+        val func = activity.javaClass.getDeclaredMethod(
+            "onLongPress",
+            Int::class.java,
+            ArrayList::class.java,
+            ArrayList::class.java
+        )
+        images.add(image)
+
+        func.isAccessible = true
+        func.invoke(activity, 0, images, images)
     }
 
     /**
