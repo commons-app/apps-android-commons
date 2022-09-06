@@ -114,6 +114,9 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
         }
     }
 
+    /**
+     * When data will be send from full screen mode, it will be passed to fragment
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == Constants.RequestCodes.RECEIVE_DATA_FROM_FULL_SCREEN_MODE &&

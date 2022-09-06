@@ -208,9 +208,6 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassData
             val editor = sharedPreferences.edit()
             editor.putBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
             editor.apply()
-
-            imageAdapter.init(allImages, allImages, TreeMap())
-            imageAdapter.notifyDataSetChanged()
         } else {
             showAlreadyActionedImages = false
             val sharedPreferences: SharedPreferences =
@@ -218,10 +215,10 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassData
             val editor = sharedPreferences.edit()
             editor.putBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, false)
             editor.apply()
-
-            imageAdapter.init(allImages, allImages, TreeMap())
-            imageAdapter.notifyDataSetChanged()
         }
+
+        imageAdapter.init(allImages, allImages, TreeMap())
+        imageAdapter.notifyDataSetChanged()
     }
 
     /**

@@ -201,7 +201,7 @@ class ImageLoader @Inject constructor(
         defaultDispatcher: CoroutineDispatcher,
         nextImagePosition: Int
     ): Int {
-        var next = -1
+        var next: Int
 
         // Traversing from given position to the end
         for (i in nextImagePosition until allImages.size){
