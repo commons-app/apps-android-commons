@@ -221,69 +221,13 @@ class ZoomableActivity : BaseActivity() {
                 // Swipe left to view next image in the folder. (if available)
                 override fun onSwipeLeft() {
                     super.onSwipeLeft()
-
-                    if (photo?.zoomableController?.isIdentity == false)
-                        return
-
-                    if (showAlreadyActionedImages) {
-                        if (position < images!!.size - 1) {
-                            position++
-                            init(images!![position].uri)
-                        } else {
-                            Toast.makeText(
-                                this@ZoomableActivity,
-                                getString(R.string.no_more_images_found),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    } else {
-                        if (position < images!!.size - 1) {
-                            scope.launch {
-                                position = getNextActionableImage(position + 1)
-                                init(images!![position].uri)
-                            }
-                        } else {
-                            Toast.makeText(
-                                this@ZoomableActivity,
-                                getString(R.string.no_more_images_found),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
+                    onLeftSwiped(showAlreadyActionedImages)
                 }
 
                 // Swipe right to view previous image in the folder. (if available)
                 override fun onSwipeRight() {
                     super.onSwipeRight()
-
-                    if (photo?.zoomableController?.isIdentity == false)
-                        return
-
-                    if (showAlreadyActionedImages) {
-                        if (position > 0) {
-                            position--
-                            init(images!![position].uri)
-                        } else {
-                            Toast.makeText(
-                                this@ZoomableActivity,
-                                getString(R.string.no_more_images_found),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    } else {
-                        if (position > 0) {
-                            scope.launch {
-                                position = getPreviousActionableImage(position - 1)
-                                init(images!![position].uri)
-                            }
-                        } else {
-                            Toast.makeText(
-                                this@ZoomableActivity,
-                                getString(R.string.no_more_images_found),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
+                    onRightSwiped(showAlreadyActionedImages)
                 }
 
                 // Swipe up to select the picture (the equivalent of tapping it in non-fullscreen mode)
@@ -291,131 +235,211 @@ class ZoomableActivity : BaseActivity() {
                 // marked as not for upload
                 override fun onSwipeUp() {
                     super.onSwipeUp()
-
-                    if (photo?.zoomableController?.isIdentity == false)
-                        return
-
-                    scope.launch {
-                        val imageSHA1 = CustomSelectorUtils.getImageSHA1(
-                            images!![position].uri,
-                            ioDispatcher,
-                            fileUtilsWrapper,
-                            contentResolver
-                        )
-                        var isNonActionable = notForUploadStatusDao.find(imageSHA1)
-                        if (isNonActionable > 0) {
-                            Toast.makeText(
-                                this@ZoomableActivity,
-                                getString(R.string.can_not_select_this_image_for_upload),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        } else {
-                            isNonActionable =
-                                uploadedStatusDao.findByImageSHA1(imageSHA1, true)
-                            if (isNonActionable > 0) {
-                                Toast.makeText(
-                                    this@ZoomableActivity,
-                                    getString(R.string.this_image_is_already_uploaded),
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            } else {
-                                val imageModifiedSHA1 = CustomSelectorUtils.generateModifiedSHA1(
-                                    images!![position],
-                                    defaultDispatcher,
-                                    this@ZoomableActivity,
-                                    fileProcessor,
-                                    fileUtilsWrapper
-                                )
-                                isNonActionable = uploadedStatusDao.findByModifiedImageSHA1(
-                                    imageModifiedSHA1,
-                                    true
-                                )
-                                if (isNonActionable > 0) {
-                                    Toast.makeText(
-                                        this@ZoomableActivity,
-                                        getString(R.string.this_image_is_already_uploaded),
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                } else {
-                                    if (!selectedImages!!.contains(images!![position])) {
-                                        selectedImages!!.add(images!![position])
-                                        Toast.makeText(
-                                            this@ZoomableActivity,
-                                            getString(R.string.image_selected),
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                    }
-                                    position = getNextActionableImage(position + 1)
-                                    init(images!![position].uri)
-                                }
-                            }
-                        }
-                    }
+                    onUpSwiped()
                 }
 
                 // Swipe down to mark that picture as "Not for upload" (the equivalent of selecting it then
                 // tapping "Mark as not for upload" in non-fullscreen mode), and show the next picture.
                 override fun onSwipeDown() {
                     super.onSwipeDown()
-
-                    if (photo?.zoomableController?.isIdentity == false)
-                        return
-
-                    scope.launch {
-                        val imageSHA1 = CustomSelectorUtils.getImageSHA1(
-                            images!![position].uri,
-                            ioDispatcher,
-                            fileUtilsWrapper,
-                            contentResolver
-                        )
-                        var isUploaded = uploadedStatusDao.findByImageSHA1(imageSHA1, true)
-                        if (isUploaded > 0) {
-                            Toast.makeText(
-                                this@ZoomableActivity,
-                                getString(R.string.this_image_is_already_uploaded),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        } else {
-                            val imageModifiedSHA1 = CustomSelectorUtils.generateModifiedSHA1(
-                                images!![position],
-                                defaultDispatcher,
-                                this@ZoomableActivity,
-                                fileProcessor,
-                                fileUtilsWrapper
-                            )
-                            isUploaded = uploadedStatusDao.findByModifiedImageSHA1(
-                                imageModifiedSHA1,
-                                true
-                            )
-                            if (isUploaded > 0) {
-                                Toast.makeText(
-                                    this@ZoomableActivity,
-                                    getString(R.string.this_image_is_already_uploaded),
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            } else {
-                                insertInNotForUpload(images!![position])
-                                Toast.makeText(
-                                    this@ZoomableActivity,
-                                    getString(R.string.image_marked_as_not_for_upload),
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                shouldRefresh = true
-                                if (position < images!!.size - 1) {
-                                    position++
-                                    init(images!![position].uri)
-                                } else {
-                                    Toast.makeText(
-                                        this@ZoomableActivity,
-                                        getString(R.string.no_more_images_found),
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
-                            }
-                        }
-                    }
+                    onDownSwiped()
                 }
             })
+        }
+    }
+
+    /**
+     * Handles down swipe action
+     */
+    private fun onDownSwiped() {
+        if (photo?.zoomableController?.isIdentity == false)
+            return
+
+        scope.launch {
+            val imageSHA1 = CustomSelectorUtils.getImageSHA1(
+                images!![position].uri,
+                ioDispatcher,
+                fileUtilsWrapper,
+                contentResolver
+            )
+            var isUploaded = uploadedStatusDao.findByImageSHA1(imageSHA1, true)
+            if (isUploaded > 0) {
+                Toast.makeText(
+                    this@ZoomableActivity,
+                    getString(R.string.this_image_is_already_uploaded),
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                val imageModifiedSHA1 = CustomSelectorUtils.generateModifiedSHA1(
+                    images!![position],
+                    defaultDispatcher,
+                    this@ZoomableActivity,
+                    fileProcessor,
+                    fileUtilsWrapper
+                )
+                isUploaded = uploadedStatusDao.findByModifiedImageSHA1(
+                    imageModifiedSHA1,
+                    true
+                )
+                if (isUploaded > 0) {
+                    Toast.makeText(
+                        this@ZoomableActivity,
+                        getString(R.string.this_image_is_already_uploaded),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    insertInNotForUpload(images!![position])
+                    Toast.makeText(
+                        this@ZoomableActivity,
+                        getString(R.string.image_marked_as_not_for_upload),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    shouldRefresh = true
+                    if (position < images!!.size - 1) {
+                        position++
+                        init(images!![position].uri)
+                    } else {
+                        Toast.makeText(
+                            this@ZoomableActivity,
+                            getString(R.string.no_more_images_found),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Handles up swipe action
+     */
+    private fun onUpSwiped() {
+        if (photo?.zoomableController?.isIdentity == false)
+            return
+
+        scope.launch {
+            val imageSHA1 = CustomSelectorUtils.getImageSHA1(
+                images!![position].uri,
+                ioDispatcher,
+                fileUtilsWrapper,
+                contentResolver
+            )
+            var isNonActionable = notForUploadStatusDao.find(imageSHA1)
+            if (isNonActionable > 0) {
+                Toast.makeText(
+                    this@ZoomableActivity,
+                    getString(R.string.can_not_select_this_image_for_upload),
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                isNonActionable =
+                    uploadedStatusDao.findByImageSHA1(imageSHA1, true)
+                if (isNonActionable > 0) {
+                    Toast.makeText(
+                        this@ZoomableActivity,
+                        getString(R.string.this_image_is_already_uploaded),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    val imageModifiedSHA1 = CustomSelectorUtils.generateModifiedSHA1(
+                        images!![position],
+                        defaultDispatcher,
+                        this@ZoomableActivity,
+                        fileProcessor,
+                        fileUtilsWrapper
+                    )
+                    isNonActionable = uploadedStatusDao.findByModifiedImageSHA1(
+                        imageModifiedSHA1,
+                        true
+                    )
+                    if (isNonActionable > 0) {
+                        Toast.makeText(
+                            this@ZoomableActivity,
+                            getString(R.string.this_image_is_already_uploaded),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        if (!selectedImages!!.contains(images!![position])) {
+                            selectedImages!!.add(images!![position])
+                            Toast.makeText(
+                                this@ZoomableActivity,
+                                getString(R.string.image_selected),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        position = getNextActionableImage(position + 1)
+                        init(images!![position].uri)
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Handles right swipe action
+     */
+    private fun onRightSwiped(showAlreadyActionedImages: Boolean) {
+        if (photo?.zoomableController?.isIdentity == false)
+            return
+
+        if (showAlreadyActionedImages) {
+            if (position > 0) {
+                position--
+                init(images!![position].uri)
+            } else {
+                Toast.makeText(
+                    this@ZoomableActivity,
+                    getString(R.string.no_more_images_found),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        } else {
+            if (position > 0) {
+                scope.launch {
+                    position = getPreviousActionableImage(position - 1)
+                    init(images!![position].uri)
+                }
+            } else {
+                Toast.makeText(
+                    this@ZoomableActivity,
+                    getString(R.string.no_more_images_found),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
+    /**
+     * Handles left swipe action
+     */
+    private fun onLeftSwiped(showAlreadyActionedImages: Boolean) {
+        if (photo?.zoomableController?.isIdentity == false)
+            return
+
+        if (showAlreadyActionedImages) {
+            if (position < images!!.size - 1) {
+                position++
+                init(images!![position].uri)
+            } else {
+                Toast.makeText(
+                    this@ZoomableActivity,
+                    getString(R.string.no_more_images_found),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        } else {
+            if (position < images!!.size - 1) {
+                scope.launch {
+                    position = getNextActionableImage(position + 1)
+                    init(images!![position].uri)
+                }
+            } else {
+                Toast.makeText(
+                    this@ZoomableActivity,
+                    getString(R.string.no_more_images_found),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 
