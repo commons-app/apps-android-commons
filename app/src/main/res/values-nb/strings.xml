@@ -10,6 +10,7 @@
 * Laaknor
 * Orf3us
 * SuperPotato
+* Telaneo
 -->
 <resources>
   <string name="commons_facebook">Commons\' Facebook-side</string>
@@ -97,7 +98,7 @@
   <string name="login_failed_network">Innlogging feilet - nettverksproblem</string>
   <string name="login_failed_throttled">For mange misslykkede forsøk. Vennligst prøv igjen om noen få minutter.</string>
   <string name="login_failed_blocked">Beklager, denne brukeren har blitt blokkert på Commons</string>
-  <string name="login_failed_2fa_needed">Du må oppgi koden din for totrinns pålogging.</string>
+  <string name="login_failed_2fa_needed">Du må oppgi tofaktorautentiseringskoden din.</string>
   <string name="login_failed_generic">Innlogging feilet</string>
   <string name="share_upload_button">Last opp</string>
   <string name="multiple_share_base_title">Navngi dette settet</string>
