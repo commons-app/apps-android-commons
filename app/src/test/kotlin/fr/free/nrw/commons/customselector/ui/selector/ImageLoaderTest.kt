@@ -166,6 +166,34 @@ class ImageLoaderTest {
     }
 
     /**
+     * Test nextActionableImage
+     */
+    @Test
+    fun testNextActionableImage() = testDispacher.runBlockingTest {
+        whenever(notForUploadStatusDao.find(any())).thenReturn(0)
+        whenever(uploadedStatusDao.findByImageSHA1(any(), any())).thenReturn(0)
+        whenever(uploadedStatusDao.findByModifiedImageSHA1(any(), any())).thenReturn(0)
+        PowerMockito.mockStatic(PickedFiles::class.java)
+        BDDMockito.given(PickedFiles.pickedExistingPicture(context, image.uri))
+            .willReturn(UploadableFile(uri, File("ABC")))
+        whenever(fileUtilsWrapper.getFileInputStream("ABC")).thenReturn(inputStream)
+        whenever(fileUtilsWrapper.getSHA1(inputStream)).thenReturn("testSha1")
+        whenever(PickedFiles.pickedExistingPicture(context, Uri.parse("test"))).thenReturn(
+            uploadableFile
+        )
+        imageLoader.nextActionableImage(listOf(image), testDispacher, testDispacher, 0)
+
+        whenever(notForUploadStatusDao.find(any())).thenReturn(1)
+        imageLoader.nextActionableImage(listOf(image), testDispacher, testDispacher, 0)
+
+        whenever(uploadedStatusDao.findByImageSHA1(any(), any())).thenReturn(2)
+        imageLoader.nextActionableImage(listOf(image), testDispacher, testDispacher, 0)
+
+        whenever(uploadedStatusDao.findByModifiedImageSHA1(any(), any())).thenReturn(2)
+        imageLoader.nextActionableImage(listOf(image), testDispacher, testDispacher, 0)
+    }
+
+    /**
      * Test getSha1
      */
     @Test
