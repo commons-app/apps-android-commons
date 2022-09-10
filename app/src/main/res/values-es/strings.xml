@@ -654,7 +654,7 @@
   <string name="custom_selector_info_text2">A diferencia de la imagen de la izquierda, la imagen de la derecha tiene el logo de Commons que indica que ha sido cargado. \nPara previsualizar la imagen toca y mantén</string>
   <string name="welcome_custom_selector_ok">Magnífico</string>
   <string name="custom_selector_already_uploaded_image_text">Esta imagen ya se ha subido a Commons.</string>
-  <string name="wlm_upload_info">Esta imagen será introducida al concurso Wiki Loves Monuments 2021</string>
+  <string name="wlm_upload_info">Esta imagen será introducida al concurso Wiki Loves Monuments</string>
   <string name="display_monuments">Mostrar monumentos</string>
   <string name="wlm_month_message">¡Es el mes de Wiki Loves Monuments!</string>
   <string name="learn_more">APRENDE MÁS</string>

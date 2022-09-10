@@ -684,7 +684,7 @@
   <string name="custom_selector_info_text2">На відміну від зображення зліва, зображення праворуч має логотип Commons, яке вказує, що воно вже завантажене.\n  Натисніть і утримуйте для попереднього перегляду зображення.</string>
   <string name="welcome_custom_selector_ok">Чудово</string>
   <string name="custom_selector_already_uploaded_image_text">Це зображення вже завантажено на Спільний ресурс.</string>
-  <string name="wlm_upload_info">Це зображення буде брати участь у конкурсі Wiki Loves Monuments 2021</string>
+  <string name="wlm_upload_info">Це зображення буде брати участь у конкурсі Wiki Loves Monuments</string>
   <string name="display_monuments">Показати пам’ятники</string>
   <string name="wlm_month_message">Цей місяць Wiki Loves Monuments!</string>
   <string name="learn_more">ДОСЛІДИТИ БІЛЬШЕ</string>

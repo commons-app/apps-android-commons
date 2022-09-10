@@ -666,7 +666,7 @@
   <string name="custom_selector_info_text2">Diferente da imagem à esquerda, a da direita possui o logotipo do Commons, o que indica que o envio dela já está concluído.\n Toque e segure para pré-visualizar a imagem.</string>
   <string name="welcome_custom_selector_ok">Ótimo</string>
   <string name="custom_selector_already_uploaded_image_text">Esta imagem já foi enviada para Commons.</string>
-  <string name="wlm_upload_info">Essa imagem será enviada ao concurso Wiki Loves Monuments 2021</string>
+  <string name="wlm_upload_info">Essa imagem será enviada ao concurso Wiki Loves Monuments</string>
   <string name="display_monuments">Monumentos de exibição</string>
   <string name="wlm_month_message">Estamos no mês no Wiki Loves Monuments!</string>
   <string name="learn_more">SABER MAIS</string>

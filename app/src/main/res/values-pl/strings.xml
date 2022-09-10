@@ -674,7 +674,7 @@
   <string name="custom_selector_info_text2">W przeciwieństwie do zdjęcia po lewej, zdjęcie po prawej ma logo Commons wskazujące, że zostało już przesłane.\n  Dotknij i przytrzymaj, aby wyświetlić podgląd obrazu.</string>
   <string name="welcome_custom_selector_ok">Niesamowite</string>
   <string name="custom_selector_already_uploaded_image_text">Tez plik został już przesłany do Commons.</string>
-  <string name="wlm_upload_info">Ten obraz zostanie zgłoszony do konkursu Wiki Loves Monuments 2021</string>
+  <string name="wlm_upload_info">Ten obraz zostanie zgłoszony do konkursu Wiki Loves Monuments</string>
   <string name="display_monuments">Pokaż zabytki</string>
   <string name="wlm_month_message">To jest miesiąc Wiki Lovers Monuments!</string>
   <string name="learn_more">DOWIEDZ SIĘ WIĘCEJ</string>
