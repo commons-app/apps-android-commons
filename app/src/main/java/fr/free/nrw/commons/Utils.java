@@ -18,6 +18,7 @@ import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
 
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import java.util.Calendar;
 import java.util.Date;
 import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.page.PageTitle;
@@ -243,4 +244,11 @@ public class Utils {
         return "30 Sep";
     }
 
+    public static int getWikiLovesMonumentsYear(Calendar calendar) {
+        int year = calendar.get(Calendar.YEAR);
+        if (calendar.get(Calendar.MONTH) < Calendar.SEPTEMBER) {
+            year -= 1;
+        }
+        return year;
+    }
 }

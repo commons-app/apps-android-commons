@@ -3,11 +3,13 @@ package fr.free.nrw.commons.upload;
 import android.content.Context;
 import androidx.annotation.NonNull;
 import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile.DateTimeWithSource;
 import fr.free.nrw.commons.settings.Prefs.Licenses;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -61,10 +63,9 @@ class PageContentsCreator {
             buffer.append("{{Location|").append(decimalCoords).append("}}").append("\n");
         }
 
-        if (contribution.getWikidataPlace()!=null && contribution.getWikidataPlace().isMonumentUpload()) {
-            buffer.append("{{Wiki Loves Monuments 2021|1= ")
-                .append(contribution.getCountryCode())
-                .append("}}").append("\n");
+        if (contribution.getWikidataPlace() != null && contribution.getWikidataPlace().isMonumentUpload()) {
+            buffer.append(String.format(Locale.ENGLISH, "{{Wiki Loves Monuments %d|1= %s}}\n",
+                Utils.getWikiLovesMonumentsYear(Calendar.getInstance()), contribution.getCountryCode()));
         }
 
         buffer.append("== {{int:license-header}} ==\n")
