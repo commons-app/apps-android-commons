@@ -23,6 +23,7 @@ internal class OnSwipeTouchListenerTest {
 
     private lateinit var context: Context
     private lateinit var onSwipeTouchListener: OnSwipeTouchListener
+    private lateinit var gesListener: OnSwipeTouchListener.GestureListener
 
     @Mock
     private lateinit var gestureDetector: GestureDetector
@@ -40,6 +41,7 @@ internal class OnSwipeTouchListenerTest {
 
         context = RuntimeEnvironment.application.applicationContext
         onSwipeTouchListener = OnSwipeTouchListener(context)
+        gesListener = OnSwipeTouchListener(context).GestureListener()
 
         Whitebox.setInternalState(onSwipeTouchListener, "gestureDetector", gestureDetector)
 
@@ -86,5 +88,21 @@ internal class OnSwipeTouchListenerTest {
     @Test
     fun onSwipeDown() {
         onSwipeTouchListener.onSwipeDown()
+    }
+
+    /**
+     * Test onDown
+     */
+    @Test
+    fun onDown() {
+        gesListener.onDown(motionEvent)
+    }
+
+    /**
+     * Test onFling
+     */
+    @Test
+    fun onFling() {
+        gesListener.onFling(motionEvent, motionEvent, 0f, 0f)
     }
 }

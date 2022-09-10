@@ -87,6 +87,7 @@ class ZoomableActivityUnitTests {
         func.invoke(activity, true)
 
         Whitebox.setInternalState(activity, "images", arrayListOf(image, image))
+        Whitebox.setInternalState(activity, "position", 0)
         func.invoke(activity, true)
 
         func.invoke(activity, false)
@@ -102,6 +103,7 @@ class ZoomableActivityUnitTests {
         func.invoke(activity, true)
 
         Whitebox.setInternalState(activity, "images", arrayListOf(image, image))
+        Whitebox.setInternalState(activity, "position", 1)
         func.invoke(activity, true)
 
         func.invoke(activity, false)

@@ -30,7 +30,7 @@ open class OnSwipeTouchListener(context: Context?) : View.OnTouchListener {
         return width to height
     }
 
-    private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
+    inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
 
         override fun onDown(e: MotionEvent?): Boolean {
             return true

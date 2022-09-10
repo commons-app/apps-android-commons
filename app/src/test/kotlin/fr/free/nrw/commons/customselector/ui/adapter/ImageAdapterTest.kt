@@ -14,6 +14,13 @@ import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity
 import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions
@@ -27,12 +34,14 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import java.lang.reflect.Field
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Custom Selector image adapter test.
  */
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
+@ExperimentalCoroutinesApi
 class ImageAdapterTest {
     @Mock
     private lateinit var imageLoader: ImageLoader
@@ -52,6 +61,7 @@ class ImageAdapterTest {
     private lateinit var selectedImageField: Field
     private var uri: Uri = Mockito.mock(Uri::class.java)
     private lateinit var image: Image
+    private val testDispatcher = TestCoroutineDispatcher()
 
 
     /**
@@ -61,6 +71,7 @@ class ImageAdapterTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
+        Dispatchers.setMain(testDispatcher)
         activity = Robolectric.buildActivity(CustomSelectorActivity::class.java).get()
         imageAdapter = ImageAdapter(activity, imageSelectListener, imageLoader)
         image = Image(1, "image", uri, "abc/abc", 1, "bucket1")
@@ -74,12 +85,26 @@ class ImageAdapterTest {
         selectedImageField.isAccessible = true
     }
 
+    @After
+    fun tearDown() {
+        Dispatchers.resetMain()
+        testDispatcher.cleanupTestCoroutines()
+    }
+
     /**
      * Test on create view holder.
      */
     @Test
     fun onCreateViewHolder() {
         imageAdapter.createViewHolder(GridLayout(activity), 0)
+    }
+
+    /**
+     * Test showThumbnail
+     */
+    @Test
+    fun showThumbnail() = runBlocking {
+        imageAdapter.showThumbnail(0, holder, image)
     }
 
     /**
