@@ -122,6 +122,29 @@ class ImageAdapterTest {
     }
 
     /**
+     * Test processThumbnailForActionedImage
+     */
+    @Test
+    fun processThumbnailForActionedImage() = runBlocking {
+        val actionableImagesMap: TreeMap<Int, Image> = TreeMap()
+        actionableImagesMap[0] = image
+        Whitebox.setInternalState(imageAdapter, "actionableImagesMap", actionableImagesMap)
+        whenever(imageLoader.nextActionableImage(ArrayList(), Dispatchers.IO, Dispatchers.Default,
+        0)).thenReturn(0)
+        imageAdapter.processThumbnailForActionedImage(holder, 0)
+    }
+
+    /**
+     * Test processThumbnailForActionedImage
+     */
+    @Test
+    fun `processThumbnailForActionedImage when reached end of the folder`() = runBlocking {
+        whenever(imageLoader.nextActionableImage(ArrayList(), Dispatchers.IO, Dispatchers.Default,
+            0)).thenReturn(-1)
+        imageAdapter.processThumbnailForActionedImage(holder, 0)
+    }
+
+    /**
      * Test init.
      */
     @Test

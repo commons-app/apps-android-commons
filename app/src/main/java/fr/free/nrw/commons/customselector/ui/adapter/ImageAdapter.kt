@@ -168,38 +168,10 @@ class ImageAdapter(
                     // If the position is not already visited, that means the position is new then
                     // finds the next actionable image position from all images
                     if (!alreadyAddedPositions.contains(position)) {
-                        val next = imageLoader.nextActionableImage(
-                            allImages, ioDispatcher, defaultDispatcher,
-                            nextImagePosition
-                        )
+                        processThumbnailForActionedImage(holder, position)
 
-                        // If next actionable image is found, saves it, as the the search for
-                        // finding next actionable image will start from this position
-                        if (next > -1) {
-                            nextImagePosition = next + 1
-
-                            // If map doesn't contains the next actionable image, that means it's a
-                            // new actionable image, it will put it to the map as actionable images
-                            // and it will load the new image in the view holder
-                            if (!actionableImagesMap.containsKey(next)) {
-                                actionableImagesMap[next] = allImages[next]
-                                alreadyAddedPositions.add(imagePositionAsPerIncreasingOrder)
-                                imagePositionAsPerIncreasingOrder++
-                                Glide.with(holder.image).load(allImages[next].uri)
-                                    .thumbnail(0.3f).into(holder.image)
-                                notifyItemInserted(position)
-                                notifyItemRangeChanged(position, itemCount+1)
-                            }
-
-                            // If next actionable image is not found, that means searching is
-                            // complete till end, and it will stop searching.
-                        } else {
-                            reachedEndOfFolder = true
-                            notifyItemRemoved(position)
-                        }
-
-                        // If the position is already visited, that means the image is already present
-                        // inside map, so it will fetch the image from the map and load in the holder
+                    // If the position is already visited, that means the image is already present
+                    // inside map, so it will fetch the image from the map and load in the holder
                     } else {
                         val actionableImages: List<Image> = ArrayList(actionableImagesMap.values)
                         image = actionableImages[position]
@@ -224,6 +196,44 @@ class ImageAdapter(
                 imageSelectListener.onLongPress(images.indexOf(image), images, selectedImages)
                 true
             }
+        }
+    }
+
+    /**
+     * Process thumbnail for actioned image
+     */
+    suspend fun processThumbnailForActionedImage(
+        holder: ImageViewHolder,
+        position: Int
+    ) {
+        val next = imageLoader.nextActionableImage(
+            allImages, ioDispatcher, defaultDispatcher,
+            nextImagePosition
+        )
+
+        // If next actionable image is found, saves it, as the the search for
+        // finding next actionable image will start from this position
+        if (next > -1) {
+            nextImagePosition = next + 1
+
+            // If map doesn't contains the next actionable image, that means it's a
+            // new actionable image, it will put it to the map as actionable images
+            // and it will load the new image in the view holder
+            if (!actionableImagesMap.containsKey(next)) {
+                actionableImagesMap[next] = allImages[next]
+                alreadyAddedPositions.add(imagePositionAsPerIncreasingOrder)
+                imagePositionAsPerIncreasingOrder++
+                Glide.with(holder.image).load(allImages[next].uri)
+                    .thumbnail(0.3f).into(holder.image)
+                notifyItemInserted(position)
+                notifyItemRangeChanged(position, itemCount + 1)
+            }
+
+            // If next actionable image is not found, that means searching is
+            // complete till end, and it will stop searching.
+        } else {
+            reachedEndOfFolder = true
+            notifyItemRemoved(position)
         }
     }
 
