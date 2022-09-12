@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import org.junit.Before
@@ -32,7 +33,10 @@ internal class OnSwipeTouchListenerTest {
     private lateinit var view: View
 
     @Mock
-    private lateinit var motionEvent: MotionEvent
+    private lateinit var motionEvent1: MotionEvent
+
+    @Mock
+    private lateinit var motionEvent2: MotionEvent
 
     @Before
     fun setUp() {
@@ -54,7 +58,7 @@ internal class OnSwipeTouchListenerTest {
     fun onTouch() {
         val func = onSwipeTouchListener.javaClass.getDeclaredMethod("onTouch", View::class.java, MotionEvent::class.java)
         func.isAccessible = true
-        func.invoke(onSwipeTouchListener, view, motionEvent)
+        func.invoke(onSwipeTouchListener, view, motionEvent1)
     }
 
 
@@ -95,14 +99,46 @@ internal class OnSwipeTouchListenerTest {
      */
     @Test
     fun onDown() {
-        gesListener.onDown(motionEvent)
+        gesListener.onDown(motionEvent1)
     }
 
     /**
-     * Test onFling
+     * Test onFling for onSwipeRight
      */
     @Test
-    fun onFling() {
-        gesListener.onFling(motionEvent, motionEvent, 0f, 0f)
+    fun `Test onFling for onSwipeRight`() {
+        whenever(motionEvent1.x).thenReturn(1f)
+        whenever(motionEvent2.x).thenReturn(110f)
+        gesListener.onFling(motionEvent1, motionEvent2, 2000f, 0f)
+    }
+
+    /**
+     * Test onFling for onSwipeLeft
+     */
+    @Test
+    fun `Test onFling for onSwipeLeft`() {
+        whenever(motionEvent1.x).thenReturn(110f)
+        whenever(motionEvent2.x).thenReturn(1f)
+        gesListener.onFling(motionEvent1, motionEvent2, 2000f, 0f)
+    }
+
+    /**
+     * Test onFling for onSwipeDown
+     */
+    @Test
+    fun `Test onFling for onSwipeDown`() {
+        whenever(motionEvent1.y).thenReturn(1f)
+        whenever(motionEvent2.y).thenReturn(110f)
+        gesListener.onFling(motionEvent1, motionEvent2, 0f, 2000f)
+    }
+
+    /**
+     * Test onFling for onSwipeUp
+     */
+    @Test
+    fun `Test onFling for onSwipeUp`() {
+        whenever(motionEvent1.y).thenReturn(110f)
+        whenever(motionEvent2.y).thenReturn(1f)
+        gesListener.onFling(motionEvent1, motionEvent2, 0f, 2000f)
     }
 }

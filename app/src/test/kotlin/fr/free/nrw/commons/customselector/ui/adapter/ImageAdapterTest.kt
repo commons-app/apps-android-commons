@@ -126,10 +126,8 @@ class ImageAdapterTest {
      */
     @Test
     fun processThumbnailForActionedImage() = runBlocking {
-        val actionableImagesMap: TreeMap<Int, Image> = TreeMap()
-        actionableImagesMap[0] = image
-        Whitebox.setInternalState(imageAdapter, "actionableImagesMap", actionableImagesMap)
-        whenever(imageLoader.nextActionableImage(ArrayList(), Dispatchers.IO, Dispatchers.Default,
+        Whitebox.setInternalState(imageAdapter, "allImages", listOf(image))
+        whenever(imageLoader.nextActionableImage(listOf(image), Dispatchers.IO, Dispatchers.Default,
         0)).thenReturn(0)
         imageAdapter.processThumbnailForActionedImage(holder, 0)
     }
