@@ -169,7 +169,7 @@
   <string name="about_credits">Crédits</string>
   <string name="title_activity_about">À propos</string>
   <string name="menu_feedback">Envoyer vos commentaires (par courriel)</string>
-  <string name="no_email_client">Aucun client de messagerie installé</string>
+  <string name="no_email_client">Aucun client de courriel installé</string>
   <string name="provider_categories">Catégories récemment utilisées</string>
   <string name="waiting_first_sync">En attente de première synchronisation...</string>
   <string name="no_uploads_yet">Vous n’avez encore téléchargé aucune photo.</string>

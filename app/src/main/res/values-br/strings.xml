@@ -64,7 +64,7 @@
   <string name="upload_failed_notification_title" fuzzy="true">C\'hwitet en deus enporzhiañ %1$s</string>
   <string name="upload_failed_notification_subtitle">Pouezit evit diskwel</string>
   <string name="title_activity_contributions">Ma enporzhiadennoù nevez</string>
-  <string name="contribution_state_queued">Lakaet el lostenn</string>
+  <string name="contribution_state_queued">Lakaet el lostennad</string>
   <string name="contribution_state_failed">C\'hwitet</string>
   <string name="contribution_state_in_progress">%1$d%% graet</string>
   <string name="contribution_state_starting">Oc\'h enporzhiañ</string>
