@@ -100,14 +100,6 @@ class ImageAdapterTest {
     }
 
     /**
-     * Test showThumbnail
-     */
-    @Test
-    fun showThumbnail() = runBlocking {
-        imageAdapter.showThumbnail(0, holder, image)
-    }
-
-    /**
      * Test on bind view holder.
      */
     @Test
