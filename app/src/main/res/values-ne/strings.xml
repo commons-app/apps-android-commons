@@ -32,7 +32,7 @@
   <string name="username">प्रयोगकर्ता नाम</string>
   <string name="password">पासवर्ड</string>
   <string name="login_credential">तपाईको कमन्स बिटा खातामा प्रवेश गर्नुहोस्</string>
-  <string name="login">प्रवेश</string>
+  <string name="login">प्रवेश गर्नुहोस्</string>
   <string name="forgot_password">पासवर्ड बिर्सिनुभयो?</string>
   <string name="signup">खाता खाेल्नुहाेस्</string>
   <string name="logging_in_title">प्रवेश गर्दै</string>
@@ -172,7 +172,7 @@
   <string name="nearby_info_menu_wikipedia_article">विकिपिडियाकाे लेख</string>
   <string name="login_to_your_account">आफ्नो खातामा प्रवेश गर्नुहोस्</string>
   <string name="skip_login">छोड्नुहोस्</string>
-  <string name="navigation_item_login">प्रवेश</string>
+  <string name="navigation_item_login">प्रवेश गर्नुहोस्</string>
   <string name="nearby_directions">दिशाहरू</string>
   <string name="nearby_wikidata">विकिडाटा</string>
   <string name="nearby_wikipedia">विकिपिडिया</string>

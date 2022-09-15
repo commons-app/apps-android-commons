@@ -77,7 +77,7 @@
   <string name="preference_category_appearance">外觀</string>
   <string name="preference_category_general">一般</string>
   <string name="preference_category_feedback">意見回饋</string>
-  <string name="preference_category_privacy">隱私政策</string>
+  <string name="preference_category_privacy">隱私權政策</string>
   <string name="app_name">維基共享資源</string>
   <string name="bullet">•</string>
   <string name="menu_settings">設定</string>
@@ -152,7 +152,7 @@
   <string name="menu_about">關於</string>
   <string name="about_license">維基共享資源應用程式是透過維基媒體社群上的受讓人，與志願者們所建立及維護的開源應用程式。維基媒體基金會並不參與此應用程式的建立、開發，與維護。</string>
   <string name="about_improve">建立新的&lt;a href=\"%1$s\"&gt; GitHub 問題&lt;/a&gt;來回報程式錯誤和提出建議。</string>
-  <string name="about_privacy_policy">隱私方針</string>
+  <string name="about_privacy_policy">隱私權政策</string>
   <string name="about_credits">製作群</string>
   <string name="title_activity_about">關於</string>
   <string name="menu_feedback">發送回饋 （通過電子郵件）</string>
