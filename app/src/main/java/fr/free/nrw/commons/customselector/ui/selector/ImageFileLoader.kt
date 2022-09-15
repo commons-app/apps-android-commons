@@ -81,12 +81,10 @@ class ImageFileLoader(val context: Context) : CoroutineScope{
                     }
 
 
-                if (file != null && file.exists()) {
-                    if (name != null && path != null && bucketName != null) {
-                        val uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
-                        val image = Image(id, name, uri, path, bucketId, bucketName)
-                        images.add(image)
-                    }
+                if (file != null && file.exists() && name != null && path != null && bucketName != null) {
+                    val uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
+                    val image = Image(id, name, uri, path, bucketId, bucketName)
+                    images.add(image)
                 }
 
             } while (cursor.moveToNext())
