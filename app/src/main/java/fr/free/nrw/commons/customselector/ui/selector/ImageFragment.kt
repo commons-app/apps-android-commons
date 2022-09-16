@@ -1,36 +1,47 @@
 package fr.free.nrw.commons.customselector.ui.selector
 
-import android.net.Uri
+import android.app.Activity
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.Switch
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
+import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.customselector.helper.ImageHelper
+import fr.free.nrw.commons.customselector.listeners.PassDataListener
+import fr.free.nrw.commons.customselector.helper.ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY
+import fr.free.nrw.commons.customselector.helper.ImageHelper.SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
+import fr.free.nrw.commons.customselector.listeners.RefreshUIListener
 import fr.free.nrw.commons.customselector.model.CallbackStatus
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
+import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.theme.BaseActivity
+import fr.free.nrw.commons.upload.FileProcessor
+import fr.free.nrw.commons.upload.FileUtilsWrapper
 import kotlinx.android.synthetic.main.fragment_custom_selector.*
 import kotlinx.android.synthetic.main.fragment_custom_selector.view.*
-import java.io.File
-import java.io.FileInputStream
-import java.net.URI
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 /**
  * Custom Selector Image Fragment.
  */
-class ImageFragment: CommonsDaggerSupportFragment() {
+class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassDataListener {
 
     /**
      * Current bucketId.
@@ -52,7 +63,13 @@ class ImageFragment: CommonsDaggerSupportFragment() {
      */
     private var selectorRV: RecyclerView? = null
     private var loader: ProgressBar? = null
+    private var switch: Switch? = null
     lateinit var filteredImages: ArrayList<Image>;
+
+    /**
+     * Stores all images
+     */
+    var allImages: ArrayList<Image> = ArrayList()
 
     /**
      * View model Factory.
@@ -76,8 +93,47 @@ class ImageFragment: CommonsDaggerSupportFragment() {
      */
     private lateinit var gridLayoutManager: GridLayoutManager
 
+    /**
+     * For showing progress
+     */
+    private var progressLayout: ConstraintLayout? = null
+
+    /**
+     * NotForUploadStatus Dao class for database operations
+     */
+    @Inject
+    lateinit var notForUploadStatusDao: NotForUploadStatusDao
+
+    /**
+     * UploadedStatus Dao class for database operations
+     */
+    @Inject
+    lateinit var uploadedStatusDao: UploadedStatusDao
+
+    /**
+     * FileUtilsWrapper class to get imageSHA1 from uri
+     */
+    @Inject
+    lateinit var fileUtilsWrapper: FileUtilsWrapper
+
+    /**
+     * FileProcessor to pre-process the file.
+     */
+    @Inject
+    lateinit var fileProcessor: FileProcessor
+
+    /**
+     * MediaClient for SHA1 query.
+     */
+    @Inject
+    lateinit var mediaClient: MediaClient
 
     companion object {
+
+        /**
+         * Switch state
+         */
+        var showAlreadyActionedImages: Boolean = true
 
         /**
          * BucketId args name
@@ -129,10 +185,52 @@ class ImageFragment: CommonsDaggerSupportFragment() {
             handleResult(it)
         })
 
+        switch = root.switchWidget
+        switch?.visibility = View.VISIBLE
+        switch?.setOnCheckedChangeListener { _, isChecked -> onChangeSwitchState(isChecked) }
         selectorRV = root.selector_rv
         loader = root.loader
+        progressLayout = root.progressLayout
+
+        val sharedPreferences: SharedPreferences =
+            requireContext().getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, MODE_PRIVATE)
+        showAlreadyActionedImages = sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
+        switch?.isChecked = showAlreadyActionedImages
 
         return root
+    }
+
+    private fun onChangeSwitchState(checked: Boolean) {
+        if (checked) {
+            showAlreadyActionedImages = true
+            val sharedPreferences: SharedPreferences =
+                requireContext().getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
+            editor.apply()
+        } else {
+            showAlreadyActionedImages = false
+            val sharedPreferences: SharedPreferences =
+                requireContext().getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, false)
+            editor.apply()
+        }
+
+        imageAdapter.init(allImages, allImages, TreeMap())
+        imageAdapter.notifyDataSetChanged()
+    }
+
+    /**
+     * Attaching data listener
+     */
+    override fun onAttach(activity: Activity) {
+        super.onAttach(activity)
+        try {
+            (getActivity() as CustomSelectorActivity).setOnDataListener(this)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
     }
 
     /**
@@ -143,7 +241,8 @@ class ImageFragment: CommonsDaggerSupportFragment() {
             val images = result.images
             if(images.isNotEmpty()) {
                 filteredImages = ImageHelper.filterImages(images, bucketId)
-                imageAdapter.init(filteredImages)
+                allImages = ArrayList(filteredImages)
+                imageAdapter.init(filteredImages, allImages, TreeMap())
                 selectorRV?.let {
                     it.visibility = View.VISIBLE
                     lastItemId?.let { pos ->
@@ -191,7 +290,7 @@ class ImageFragment: CommonsDaggerSupportFragment() {
      * Save the Image Fragment state.
      */
     override fun onDestroy() {
-        imageLoader?.cleanUP()
+        imageAdapter.cleanUp()
 
         val position = (selectorRV?.layoutManager as GridLayoutManager)
             .findFirstVisibleItemPosition()
@@ -210,5 +309,22 @@ class ImageFragment: CommonsDaggerSupportFragment() {
             }
         }
         super.onDestroy()
+    }
+
+    override fun refresh() {
+        imageAdapter.refresh(filteredImages, allImages)
+    }
+
+    /**
+     * Passes selected images and other information from Activity to Fragment and connects it with
+     * the adapter
+     */
+    override fun passSelectedImages(selectedImages: ArrayList<Image>, shouldRefresh: Boolean){
+        imageAdapter.setSelectedImages(selectedImages)
+
+        if (!showAlreadyActionedImages && shouldRefresh) {
+            imageAdapter.init(filteredImages, allImages, TreeMap())
+            imageAdapter.setSelectedImages(selectedImages)
+        }
     }
 }

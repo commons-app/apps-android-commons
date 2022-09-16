@@ -23,4 +23,21 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
+    <TextView
+      android:id="@+id/selection_count"
+      android:layout_width="@dimen/dimen_20"
+      android:layout_height="@dimen/dimen_20"
+      app:layout_constraintDimensionRatio="H,1:1"
+      android:textSize="@dimen/subtitle_text"
+      android:textStyle="bold"
+      android:textColor="@color/black"
+      android:layout_margin="@dimen/dimen_6"
+      android:gravity="center|center_vertical"
+      style="@style/TextAppearance.AppCompat.Small"
+      android:text="12"
+      android:visibility="gone"
+      android:background="@drawable/circle_shape"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

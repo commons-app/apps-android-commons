@@ -41,6 +41,7 @@
     <dimen name="progressbar_stroke">3dp</dimen>
     <dimen name="notification_width">110dp</dimen>
     <dimen name="notification_height">160dp</dimen>
+    <dimen name="bubble_size">36dp</dimen>
 
     <!-- Text sizes -->
     <dimen name="heading_text_size">24sp</dimen>
@@ -59,11 +60,13 @@
     <!-- Commonly used dimensions -->
     <dimen name="dimen_0">0dp</dimen>
     <dimen name="dimen_2">2dp</dimen>
+    <dimen name="dimen_5">5dp</dimen>
     <dimen name="dimen_6">6dp</dimen>
     <dimen name="dimen_10">10dp</dimen>
     <dimen name="dimen_20">20dp</dimen>
     <dimen name="dimen_40">40dp</dimen>
     <dimen name="dimen_42">42dp</dimen>
+    <dimen name="dimen_50">50dp</dimen>
     <dimen name="dimen_250">250dp</dimen>
     <dimen name="dimen_150">150dp</dimen>
     <dimen name="dimen_72">72dp</dimen>

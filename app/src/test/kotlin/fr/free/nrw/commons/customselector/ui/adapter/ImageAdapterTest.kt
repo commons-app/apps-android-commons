@@ -2,6 +2,7 @@ package fr.free.nrw.commons.customselector.ui.adapter
 
 import android.content.ContentResolver
 import android.content.Context
+import android.content.SharedPreferences
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -13,22 +14,34 @@ import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity
 import fr.free.nrw.commons.customselector.ui.selector.ImageLoader
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions
 import org.junit.runner.RunWith
-import org.mockito.*
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import java.lang.reflect.Field
+import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Custom Selector image adapter test.
  */
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
+@ExperimentalCoroutinesApi
 class ImageAdapterTest {
     @Mock
     private lateinit var imageLoader: ImageLoader
@@ -38,6 +51,8 @@ class ImageAdapterTest {
     private lateinit var context: Context
     @Mock
     private lateinit var mockContentResolver: ContentResolver
+    @Mock
+    private lateinit var sharedPreferences: SharedPreferences
 
     private lateinit var activity: CustomSelectorActivity
     private lateinit var imageAdapter: ImageAdapter
@@ -46,6 +61,7 @@ class ImageAdapterTest {
     private lateinit var selectedImageField: Field
     private var uri: Uri = Mockito.mock(Uri::class.java)
     private lateinit var image: Image
+    private val testDispatcher = TestCoroutineDispatcher()
 
 
     /**
@@ -55,6 +71,7 @@ class ImageAdapterTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
+        Dispatchers.setMain(testDispatcher)
         activity = Robolectric.buildActivity(CustomSelectorActivity::class.java).get()
         imageAdapter = ImageAdapter(activity, imageSelectListener, imageLoader)
         image = Image(1, "image", uri, "abc/abc", 1, "bucket1")
@@ -66,6 +83,12 @@ class ImageAdapterTest {
 
         selectedImageField = imageAdapter.javaClass.getDeclaredField("selectedImages")
         selectedImageField.isAccessible = true
+    }
+
+    @After
+    fun tearDown() {
+        Dispatchers.resetMain()
+        testDispatcher.cleanupTestCoroutines()
     }
 
     /**
@@ -88,8 +111,10 @@ class ImageAdapterTest {
 
         // Parameters.
         images.add(image)
-        imageAdapter.init(images)
+        imageAdapter.init(images, images, TreeMap())
 
+        whenever(context.getSharedPreferences("custom_selector", 0))
+            .thenReturn(sharedPreferences)
         // Test conditions.
         imageAdapter.onBindViewHolder(holder, 0)
         selectedImageField.set(imageAdapter, images)
@@ -97,11 +122,32 @@ class ImageAdapterTest {
     }
 
     /**
+     * Test processThumbnailForActionedImage
+     */
+    @Test
+    fun processThumbnailForActionedImage() = runBlocking {
+        Whitebox.setInternalState(imageAdapter, "allImages", listOf(image))
+        whenever(imageLoader.nextActionableImage(listOf(image), Dispatchers.IO, Dispatchers.Default,
+        0)).thenReturn(0)
+        imageAdapter.processThumbnailForActionedImage(holder, 0)
+    }
+
+    /**
+     * Test processThumbnailForActionedImage
+     */
+    @Test
+    fun `processThumbnailForActionedImage when reached end of the folder`() = runBlocking {
+        whenever(imageLoader.nextActionableImage(ArrayList(), Dispatchers.IO, Dispatchers.Default,
+            0)).thenReturn(-1)
+        imageAdapter.processThumbnailForActionedImage(holder, 0)
+    }
+
+    /**
      * Test init.
      */
     @Test
     fun init() {
-        imageAdapter.init(images)
+        imageAdapter.init(images, images, TreeMap())
     }
 
     /**
@@ -115,15 +161,35 @@ class ImageAdapterTest {
 
         // Parameters
         images.addAll(listOf(image, image))
-        imageAdapter.init(images)
+        imageAdapter.init(images, images, TreeMap())
 
         // Test conditions
         holder.itemUploaded()
         func.invoke(imageAdapter, holder, 0)
         holder.itemNotUploaded()
+        holder.itemNotForUpload()
+        func.invoke(imageAdapter, holder, 0)
+        holder.itemNotForUpload()
         func.invoke(imageAdapter, holder, 0)
         selectedImageField.set(imageAdapter, images)
         func.invoke(imageAdapter, holder, 1)
+    }
+
+    /**
+     * Test private function onThumbnailClicked.
+     */
+    @Test
+    fun onThumbnailClicked() {
+        images.add(image)
+        Whitebox.setInternalState(imageAdapter, "images", images)
+        // Access function
+        val func = imageAdapter.javaClass.getDeclaredMethod(
+            "onThumbnailClicked",
+            Int::class.java,
+            ImageAdapter.ImageViewHolder::class.java
+        )
+        func.isAccessible = true
+        func.invoke(imageAdapter, 0, holder)
     }
 
     /**
@@ -135,11 +201,46 @@ class ImageAdapterTest {
     }
 
     /**
+     * Test setSelectedImages.
+     */
+    @Test
+    fun setSelectedImages() {
+        images.add(image)
+        imageAdapter.setSelectedImages(images)
+    }
+
+    /**
+     * Test refresh.
+     */
+    @Test
+    fun refresh() {
+        imageAdapter.refresh(listOf(image), listOf(image))
+    }
+
+    /**
+     * Test getSectionName.
+     */
+    @Test
+    fun getSectionName() {
+        images.add(image)
+        Whitebox.setInternalState(imageAdapter, "images", images)
+        Assertions.assertEquals("", imageAdapter.getSectionName(0))
+    }
+
+    /**
+     * Test cleanUp.
+     */
+    @Test
+    fun cleanUp() {
+        imageAdapter.cleanUp()
+    }
+
+    /**
      * Test getImageId
      */
     @Test
     fun getImageIdAt() {
-        imageAdapter.init(listOf(image))
+        imageAdapter.init(listOf(image), listOf(image), TreeMap())
         Assertions.assertEquals(1, imageAdapter.getImageIdAt(0))
     }
 }

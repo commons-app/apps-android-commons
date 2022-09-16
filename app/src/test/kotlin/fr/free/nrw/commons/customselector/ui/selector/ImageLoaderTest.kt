@@ -2,9 +2,11 @@ package fr.free.nrw.commons.customselector.ui.selector
 
 import android.content.ContentResolver
 import android.content.Context
+import android.content.SharedPreferences
 import android.net.Uri
 import com.nhaarman.mockitokotlin2.*
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.customselector.model.Image
@@ -62,6 +64,9 @@ class ImageLoaderTest {
     private lateinit var uploadedStatusDao: UploadedStatusDao
 
     @Mock
+    private lateinit var notForUploadStatusDao: NotForUploadStatusDao
+
+    @Mock
     private lateinit var holder: ImageAdapter.ImageViewHolder
 
     @Mock
@@ -97,7 +102,8 @@ class ImageLoaderTest {
         MockitoAnnotations.initMocks(this)
 
         imageLoader =
-            ImageLoader(mediaClient, fileProcessor, fileUtilsWrapper, uploadedStatusDao, context)
+            ImageLoader(mediaClient, fileProcessor, fileUtilsWrapper, uploadedStatusDao,
+                notForUploadStatusDao, context)
         uploadedStatus= UploadedStatus(
             "testSha1",
             "testSha1",
@@ -112,8 +118,6 @@ class ImageLoaderTest {
         Whitebox.setInternalState(imageLoader, "mapModifiedImageSHA1", mapModifiedImageSHA1);
         Whitebox.setInternalState(imageLoader, "mapResult", mapResult);
         Whitebox.setInternalState(imageLoader, "context", context)
-        Whitebox.setInternalState(imageLoader, "ioDispatcher", testDispacher)
-        Whitebox.setInternalState(imageLoader, "defaultDispatcher", testDispacher)
 
         whenever(contentResolver.openInputStream(uri)).thenReturn(inputStream)
         whenever(context.contentResolver).thenReturn(contentResolver)
@@ -136,14 +140,17 @@ class ImageLoaderTest {
     @Test
     fun testQueryAndSetViewUploadedStatusNull() = testDispacher.runBlockingTest {
         whenever(uploadedStatusDao.getUploadedFromImageSHA1(any())).thenReturn(null)
+        whenever(notForUploadStatusDao.find(any())).thenReturn(0)
         mapModifiedImageSHA1[image] = "testSha1"
         mapImageSHA1[uri] = "testSha1"
+        whenever(context.getSharedPreferences("custom_selector", 0))
+            .thenReturn(Mockito.mock(SharedPreferences::class.java))
 
         mapResult["testSha1"] = ImageLoader.Result.TRUE
-        imageLoader.queryAndSetView(holder, image)
+        imageLoader.queryAndSetView(holder, image, testDispacher, testDispacher)
 
         mapResult["testSha1"] = ImageLoader.Result.FALSE
-        imageLoader.queryAndSetView(holder, image)
+        imageLoader.queryAndSetView(holder, image, testDispacher, testDispacher)
     }
 
     /**
@@ -152,20 +159,38 @@ class ImageLoaderTest {
     @Test
     fun testQueryAndSetViewUploadedStatusNotNull() = testDispacher.runBlockingTest {
         whenever(uploadedStatusDao.getUploadedFromImageSHA1(any())).thenReturn(uploadedStatus)
-        imageLoader.queryAndSetView(holder, image)
+        whenever(notForUploadStatusDao.find(any())).thenReturn(0)
+        whenever(context.getSharedPreferences("custom_selector", 0))
+            .thenReturn(Mockito.mock(SharedPreferences::class.java))
+        imageLoader.queryAndSetView(holder, image, testDispacher, testDispacher)
     }
 
     /**
-     * Test querySha1
+     * Test nextActionableImage
      */
     @Test
-    fun testQuerySha1() = testDispacher.runBlockingTest {
+    fun testNextActionableImage() = testDispacher.runBlockingTest {
+        whenever(notForUploadStatusDao.find(any())).thenReturn(0)
+        whenever(uploadedStatusDao.findByImageSHA1(any(), any())).thenReturn(0)
+        whenever(uploadedStatusDao.findByModifiedImageSHA1(any(), any())).thenReturn(0)
+        PowerMockito.mockStatic(PickedFiles::class.java)
+        BDDMockito.given(PickedFiles.pickedExistingPicture(context, image.uri))
+            .willReturn(UploadableFile(uri, File("ABC")))
+        whenever(fileUtilsWrapper.getFileInputStream("ABC")).thenReturn(inputStream)
+        whenever(fileUtilsWrapper.getSHA1(inputStream)).thenReturn("testSha1")
+        whenever(PickedFiles.pickedExistingPicture(context, Uri.parse("test"))).thenReturn(
+            uploadableFile
+        )
+        imageLoader.nextActionableImage(listOf(image), testDispacher, testDispacher, 0)
 
-        whenever(single.blockingGet()).thenReturn(true)
-        whenever(mediaClient.checkFileExistsUsingSha("testSha1")).thenReturn(single)
-        whenever(fileUtilsWrapper.getSHA1(any())).thenReturn("testSha1")
+        whenever(notForUploadStatusDao.find(any())).thenReturn(1)
+        imageLoader.nextActionableImage(listOf(image), testDispacher, testDispacher, 0)
 
-        imageLoader.querySHA1("testSha1")
+        whenever(uploadedStatusDao.findByImageSHA1(any(), any())).thenReturn(2)
+        imageLoader.nextActionableImage(listOf(image), testDispacher, testDispacher, 0)
+
+        whenever(uploadedStatusDao.findByModifiedImageSHA1(any(), any())).thenReturn(2)
+        imageLoader.nextActionableImage(listOf(image), testDispacher, testDispacher, 0)
     }
 
     /**
@@ -183,13 +208,13 @@ class ImageLoaderTest {
         whenever(fileUtilsWrapper.getFileInputStream("ABC")).thenReturn(inputStream)
         whenever(fileUtilsWrapper.getSHA1(inputStream)).thenReturn("testSha1")
 
-        Assert.assertEquals("testSha1", imageLoader.getSHA1(image));
+        Assert.assertEquals("testSha1", imageLoader.getSHA1(image, testDispacher));
         whenever(PickedFiles.pickedExistingPicture(context, Uri.parse("test"))).thenReturn(
             uploadableFile
         )
 
         mapModifiedImageSHA1[image] = "testSha2"
-        Assert.assertEquals("testSha2", imageLoader.getSHA1(image));
+        Assert.assertEquals("testSha2", imageLoader.getSHA1(image, testDispacher));
     }
 
     /**
@@ -213,8 +238,4 @@ class ImageLoaderTest {
             imageLoader.getResultFromUploadedStatus(uploadedStatus))
     }
 
-    @Test
-    fun testCleanUP() {
-        imageLoader.cleanUP()
-    }
 }

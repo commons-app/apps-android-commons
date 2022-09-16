@@ -11,12 +11,17 @@ interface ImageSelectListener {
     /**
      * onSelectedImagesChanged
      * @param selectedImages : new selected images.
+     * @param selectedNotForUploadImages : number of selected not for upload images
      */
-    fun onSelectedImagesChanged(selectedImages: ArrayList<Image>)
+    fun onSelectedImagesChanged(selectedImages: ArrayList<Image>, selectedNotForUploadImages: Int)
 
     /**
      * onLongPress
      * @param imageUri : uri of image
      */
-    fun onLongPress(imageUri: Uri)
+    fun onLongPress(
+        position: Int,
+        images: ArrayList<Image>,
+        selectedImages: ArrayList<Image>
+    )
 }

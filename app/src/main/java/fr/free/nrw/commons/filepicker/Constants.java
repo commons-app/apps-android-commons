@@ -15,6 +15,8 @@ public interface Constants {
         int PICK_PICTURE_FROM_GALLERY = FILE_PICKER_IMAGE_IDENTIFICATOR + (1 << 12);
         int TAKE_PICTURE = FILE_PICKER_IMAGE_IDENTIFICATOR + (1 << 13);
         int CAPTURE_VIDEO = FILE_PICKER_IMAGE_IDENTIFICATOR + (1 << 14);
+
+        int RECEIVE_DATA_FROM_FULL_SCREEN_MODE = 1 << 9;
     }
 
     /**

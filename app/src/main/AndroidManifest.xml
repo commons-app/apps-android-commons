@@ -56,7 +56,10 @@
             android:finishOnTaskLaunch="true" />
 
         <activity
-            android:name=".media.ZoomableActivity" />
+            android:name=".media.ZoomableActivity"
+            android:label="Zoomable Activity"
+            android:configChanges="screenSize|keyboard|orientation"
+            android:parentActivityName=".customselector.ui.selector.CustomSelectorActivity" />
 
         <activity android:name=".auth.LoginActivity">
             <intent-filter>
