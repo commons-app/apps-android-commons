@@ -244,6 +244,13 @@ public class Utils {
         return "30 Sep";
     }
 
+    /***
+     * Function to get the current WLM year
+     * It increments at the start of September in line with the other WLM functions
+     * (No consideration of locales for now)
+     * @param calendar
+     * @return
+     */
     public static int getWikiLovesMonumentsYear(Calendar calendar) {
         int year = calendar.get(Calendar.YEAR);
         if (calendar.get(Calendar.MONTH) < Calendar.SEPTEMBER) {
