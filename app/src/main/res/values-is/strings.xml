@@ -651,7 +651,7 @@
   <string name="welcome_custom_selector_ok">Æðislegt</string>
   <string name="custom_selector_already_uploaded_image_text">Þessa mynd er þegar búið að senda inn í Commons.</string>
   <string name="place_state_wlm">WLM</string>
-  <string name="wlm_upload_info">Þessi mynd verður send inn í Wiki Loves Monuments 2021 keppnina</string>
+  <string name="wlm_upload_info">Þessi mynd verður send inn í Wiki Loves Monuments keppnina</string>
   <string name="display_monuments">Birta minnismerki</string>
   <string name="wlm_month_message">Núna er Wiki Loves Monuments mánuðurinn!</string>
   <string name="learn_more">KANNA NÁNAR</string>
