@@ -723,9 +723,21 @@
   <string name="error_feedback">שגיאה בעת שליחת המשוב</string>
   <string name="enter_description">מה המשוב שלך?</string>
   <string name="your_feedback">המשוב שלך</string>
+  <string name="mark_as_not_for_upload">לסמן בתור \"לא להעלאה\"</string>
+  <string name="unmark_as_not_for_upload">לבטל את הסימון בתור \"לא להעלאה\"</string>
+  <string name="show_already_actioned_pictures">להציג תמונות שכבר בוצעו בהן פעולות</string>
+  <string name="hiding_already_actioned_pictures">הסתרת תמונות שכבר בוצעו בהן פעולות</string>
+  <string name="no_more_images_found">לא נמצאו עוד תמונות</string>
+  <string name="this_image_is_already_uploaded">התמונה הזאת כבר הועלתה</string>
+  <string name="can_not_select_this_image_for_upload">לא ניתן לבחור את התמונה הזאת להעלאה</string>
+  <string name="image_selected">נבחרה תמונה</string>
+  <string name="image_marked_as_not_for_upload">התמונה סומנה בתור \"לא להעלאה\"</string>
   <string name="menu_view_report">דיווח</string>
   <string name="report_violation">דיווח על הפרה</string>
   <string name="report_user">דיווח על המשתמש הזה</string>
   <string name="report_content">דיווח על התוכן הזה</string>
   <string name="request_user_block">בקשה לחסום את המשתמש הזה</string>
+  <string name="welcome_to_full_screen_mode_text">ברוך בואך למצב בחירה במסך מלא</string>
+  <string name="full_screen_mode_zoom_info">אפשר להשתמש בשתי אצבעות כדי להגדיל ולהקטין.</string>
+  <string name="full_screen_mode_features_info">אפשר לעשות החלקה מהירה וארוכה כדי לבצע את הפעולות הבאות: \n- שמאלה/ימינה: לעבור אל הקודם/הבא \n- למעלה: לבחור\n- למטה: לסמן בתור \"לא להעלאה\".</string>
 </resources>

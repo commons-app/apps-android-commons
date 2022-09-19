@@ -652,7 +652,7 @@
   <string name="done">Klar</string>
   <string name="back">Tillbaka</string>
   <string name="welcome_custom_picture_selector_text">Välkommen till anpassade bildselektorn</string>
-  <string name="custom_selector_info_text1" fuzzy="true">Denna väljare visar olika bilder som redan finns på Commons.</string>
+  <string name="custom_selector_info_text1">Denna väljare visar vilka bilder som du redan har laddat upp på Commons.</string>
   <string name="custom_selector_info_text2">Till skillnad från bilden till vänster har bilden till höger Commons-logotypen, vilket innebär att den redan är uppladdad.\n Tryck och håll ned för att förhandsgranska bilden.</string>
   <string name="welcome_custom_selector_ok">Häftigt</string>
   <string name="custom_selector_already_uploaded_image_text">Denna bild har redan laddats upp till Commons.</string>
@@ -692,4 +692,9 @@
   <string name="error_feedback">Fel när återkoppling skickades</string>
   <string name="enter_description">Vad är din återkoppling?</string>
   <string name="your_feedback">Din återkoppling</string>
+  <string name="menu_view_report">Rapportera</string>
+  <string name="report_violation">Rapportera överträdelse</string>
+  <string name="report_user">Rapportera denna användare</string>
+  <string name="report_content">Rapportera detta innehåll</string>
+  <string name="request_user_block">Begär att blockera denna användare</string>
 </resources>

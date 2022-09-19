@@ -689,9 +689,21 @@
   <string name="error_feedback">Грешка при испраќање на вашето мислење</string>
   <string name="enter_description">Што сакате да ни кажете?</string>
   <string name="your_feedback">Ваше мислење</string>
+  <string name="mark_as_not_for_upload">Означи дека не е за подигање</string>
+  <string name="unmark_as_not_for_upload">Отстрани ознака дека не е за подигање</string>
+  <string name="show_already_actioned_pictures">Прикажи веќе сработени слики</string>
+  <string name="hiding_already_actioned_pictures">Скривање на веќе сработени слики</string>
+  <string name="no_more_images_found">Не најдов повеќе слики</string>
+  <string name="this_image_is_already_uploaded">Оваа слика е веќе подигната</string>
+  <string name="can_not_select_this_image_for_upload">Не можев да ја изберам сликава за подигање</string>
+  <string name="image_selected">Избрана слика</string>
+  <string name="image_marked_as_not_for_upload">Сликата е означена дека не за подигање</string>
   <string name="menu_view_report">Пријави</string>
   <string name="report_violation">Пријави прекршок</string>
   <string name="report_user">Пријави го корисников</string>
   <string name="report_content">Пријави ја содржинава</string>
   <string name="request_user_block">Побарај да се блокира корисников</string>
+  <string name="welcome_to_full_screen_mode_text">Добре дојдовте во целоекранскиот режим за избор</string>
+  <string name="full_screen_mode_zoom_info">Користете два прста за да приближите или оддалечите.</string>
+  <string name="full_screen_mode_features_info">Поминувајте бргу и долго со простот за да ги извршите следниве дејства: \n- Лево/десно: Претходна/следна\n- Нагоре: Избирање\n- Надолу: Означување дека не е за подигање.</string>
 </resources>

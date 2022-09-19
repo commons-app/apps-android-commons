@@ -720,9 +720,21 @@
   <string name="error_feedback">Erreur lors de l’envoi de l’avis</string>
   <string name="enter_description">Quel est votre avis ?</string>
   <string name="your_feedback">Votre avis</string>
+  <string name="mark_as_not_for_upload">Marquer comme à ne pas téléverser</string>
+  <string name="unmark_as_not_for_upload">Démarquer comme à ne pas téléverser</string>
+  <string name="show_already_actioned_pictures">Afficher les images déjà actionnées</string>
+  <string name="hiding_already_actioned_pictures">Masquer les images déjà actionnées</string>
+  <string name="no_more_images_found">Aucune autre image trouvée</string>
+  <string name="this_image_is_already_uploaded">Cette image est déjà téléversée</string>
+  <string name="can_not_select_this_image_for_upload">Impossible de sélectionner cette image pour le téléversement</string>
+  <string name="image_selected">Image sélectionnée</string>
+  <string name="image_marked_as_not_for_upload">Image marquée comme à ne pas téléverser</string>
   <string name="menu_view_report">Signaler</string>
   <string name="report_violation">Signaler une infraction</string>
   <string name="report_user">Signaler cet utilisateur</string>
   <string name="report_content">Signaler ce contenu</string>
   <string name="request_user_block">Demande de blocage de cet utilisateur</string>
+  <string name="welcome_to_full_screen_mode_text">Bienvenue dans le mode de sélection en plein écran</string>
+  <string name="full_screen_mode_zoom_info">Utilisez deux doigts pour effectuer un zoom avant et arrière.</string>
+  <string name="full_screen_mode_features_info">Balayez rapidement et assez loin pour effectuer les actions suivantes :\n– vers la gauche / droite : aller au précédent / suivant ;\n– vers le haut : sélectionner ;\n– vers le bas : marquer comme à ne pas téléverser.</string>
 </resources>

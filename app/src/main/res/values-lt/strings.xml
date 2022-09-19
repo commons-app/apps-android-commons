@@ -5,6 +5,7 @@
 * Manvydasz
 * Naktis
 * Nersip
+* Pavel1513
 * Tomasdd
 * Zygimantus
 -->
@@ -154,4 +155,17 @@
   <string name="place_state_needs_photo">Reikia Nuotraukos</string>
   <string name="place_type">Vietos tipas:</string>
   <string name="nearby_search_hint">Tiltas, muziejus, viešbutis ir t.t.</string>
+  <string name="wlm_upload_info">Šis vaizdas bus įtrauktas į konkursą \"Wiki Loves Monuments\" (\"Wiki\" mėgsta paminklus)</string>
+  <string name="mark_as_not_for_upload">Pažymėti kaip neskirtą įkėlimui</string>
+  <string name="unmark_as_not_for_upload">Panaikinkite žymėjimą kaip neskirto įkėlimui</string>
+  <string name="show_already_actioned_pictures">Rodyti jau padarytas nuotraukas</string>
+  <string name="hiding_already_actioned_pictures">Slepiamos jau padarytos nuotraukos</string>
+  <string name="no_more_images_found">Daugiau paveikslėlių nerasta</string>
+  <string name="this_image_is_already_uploaded">Šis paveiklėlis jau yra įkeltas</string>
+  <string name="can_not_select_this_image_for_upload">Negalima pasirinkti šio vaizdo įkėlimui</string>
+  <string name="image_selected">Paveiklėlis pasirinktas</string>
+  <string name="image_marked_as_not_for_upload">Paveikslėlis pažymėtas kaip neskirtas įkėlimui</string>
+  <string name="welcome_to_full_screen_mode_text">Sveiki atvykę į \"Viso ekrano\" režimą</string>
+  <string name="full_screen_mode_zoom_info">Dviem pirštais priartinkite ir atitolinkite vaizdą.</string>
+  <string name="full_screen_mode_features_info">Norėdami atlikti šiuos veiksmus, braukite greitai ir ilgai: \n- Kairėn/dešinėn: Pereikite prie ankstesnio/kito\n- Į viršų: Pasirinkite\n- Žemyn: Pažymėti kaip neskirtą įkėlimui.</string>
 </resources>

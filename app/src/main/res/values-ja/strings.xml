@@ -617,6 +617,11 @@
   <string name="error_feedback">フィードバックを送る途中でエラーが起きました</string>
   <string name="enter_description">あなたのフィードバックは何ですか？</string>
   <string name="your_feedback">あなたのフィードバック</string>
+  <string name="mark_as_not_for_upload">アップロード不可としてマーク</string>
+  <string name="no_more_images_found">これ以上画像が見つかりません</string>
+  <string name="this_image_is_already_uploaded">この画像はすでにアップロードされています</string>
+  <string name="can_not_select_this_image_for_upload">この画像をアップロード用に選択できません</string>
+  <string name="image_selected">画像が選択されました</string>
   <string name="menu_view_report">報告</string>
   <string name="report_violation">違反を報告</string>
   <string name="report_user">この利用者を報告</string>

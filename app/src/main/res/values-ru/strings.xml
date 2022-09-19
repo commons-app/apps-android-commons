@@ -4,6 +4,7 @@
 * Alexandr Efremov
 * Av6
 * DDPAT
+* Deltaspace
 * Eleferen
 * Envlh
 * Facenapalm
@@ -739,9 +740,21 @@
   <string name="error_feedback">Ошибка при отправке обратной связи</string>
   <string name="enter_description">Что вы хотите сообщить?</string>
   <string name="your_feedback">Обратная связь от вас</string>
+  <string name="mark_as_not_for_upload">Отметить как не подлежащее загрузке</string>
+  <string name="unmark_as_not_for_upload">Снять пометку как не подлежащее загрузке</string>
+  <string name="show_already_actioned_pictures">Показать уже обработанные изображения</string>
+  <string name="hiding_already_actioned_pictures">Скрытие уже обработанных изображений</string>
+  <string name="no_more_images_found">Больше изображений не найдено</string>
+  <string name="this_image_is_already_uploaded">Это изображение уже загружено</string>
+  <string name="can_not_select_this_image_for_upload">Невозможно выбрать это изображение для загрузки</string>
+  <string name="image_selected">Изображение выбрано</string>
+  <string name="image_marked_as_not_for_upload">Изображение помечено как не подлежащее загрузке</string>
   <string name="menu_view_report">Отчёт</string>
   <string name="report_violation">Сообщить о нарушении</string>
   <string name="report_user">Пожаловаться на участника_цу</string>
   <string name="report_content">Пожаловаться на это содержимое</string>
   <string name="request_user_block">Запросить блокировку участника_цы</string>
+  <string name="welcome_to_full_screen_mode_text">Добро пожаловать в полноэкранный режим выбора</string>
+  <string name="full_screen_mode_zoom_info">Используйте два пальца для увеличения и уменьшения масштаба.</string>
+  <string name="full_screen_mode_features_info">Проведите быстро и широко, чтобы выполнить следующие действия: \n- Влево/вправо: переход к предыдущему/следующему \n- Вверх: выбрать\n- Вниз: пометить как не для загрузки.</string>
 </resources>

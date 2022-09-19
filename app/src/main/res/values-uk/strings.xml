@@ -720,6 +720,7 @@
   <string name="error_feedback">Помилка під час надсилання відгуку</string>
   <string name="enter_description">Який ваш відгук?</string>
   <string name="your_feedback">Ваш відгук</string>
+  <string name="no_more_images_found">Більше зображень не знайдено</string>
   <string name="menu_view_report">Повідомити</string>
   <string name="report_violation">Повідомити про порушення</string>
   <string name="report_user">Поскаржитись на користувача</string>

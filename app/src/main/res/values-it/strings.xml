@@ -644,4 +644,6 @@
   <string name="apply">Applica</string>
   <string name="reset">Reimposta</string>
   <string name="explore_map_details">Dettagli</string>
+  <string name="no_more_images_found">Nessuna altra immagine trovata</string>
+  <string name="this_image_is_already_uploaded">Questa immagine è già stata caricata</string>
 </resources>

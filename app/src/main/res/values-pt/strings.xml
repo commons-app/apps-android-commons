@@ -700,9 +700,21 @@
   <string name="error_feedback">Falha ao enviar opinião</string>
   <string name="enter_description">Qual é a sua opinião?</string>
   <string name="your_feedback">A sua opinião</string>
+  <string name="mark_as_not_for_upload">Marcar como não sendo para carregamento</string>
+  <string name="unmark_as_not_for_upload">Remover marcação de como não sendo para carregamento</string>
+  <string name="show_already_actioned_pictures">Mostrar imagens já processadas</string>
+  <string name="hiding_already_actioned_pictures">A ocultar as imagens já processadas</string>
+  <string name="no_more_images_found">Não foram encontradas mais imagens</string>
+  <string name="this_image_is_already_uploaded">Esta imagem já foi carregada</string>
+  <string name="can_not_select_this_image_for_upload">Não é possível selecionar esta imagem para carregamento</string>
+  <string name="image_selected">Imagem selecionada</string>
+  <string name="image_marked_as_not_for_upload">Imagem marcada como não sendo para carregamento</string>
   <string name="menu_view_report">Reportar</string>
   <string name="report_violation">Reportar infração</string>
   <string name="report_user">Reportar este utilizador</string>
   <string name="report_content">Reportar este conteúdo</string>
   <string name="request_user_block">Pedir o bloqueio deste utilizador</string>
+  <string name="welcome_to_full_screen_mode_text">Bem-vindo ao modo de seleção em ecrã completo</string>
+  <string name="full_screen_mode_zoom_info">Use dois dedos para aumentar e diminuir a ampliação.</string>
+  <string name="full_screen_mode_features_info">Passe o dedo com um gesto rápido e longo para executar estas operações: \n- Esquerda/direita: Ir para o anterior/seguinte\n- Cima: Selecionar\n- Baixo: Marcar como não sendo para carregamento.</string>
 </resources>

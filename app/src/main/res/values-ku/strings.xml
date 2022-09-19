@@ -7,6 +7,25 @@
 * Kur
 -->
 <resources>
+  <string name="commons_facebook">Rûpela Facebookê ya Commonsê</string>
+  <string name="commons_github">Koda ÇavkanÎ ya Githuba Commonsê</string>
+  <string name="commons_logo">Logoya Commonsê</string>
+  <string name="commons_website">Malpera Commonsê</string>
+  <string name="exit_location_picker">Ji bijêra lokasyonê derkeve</string>
+  <string name="submit">Bişîne</string>
+  <string name="add_another_description">Danasîneke din tevlî bike</string>
+  <string name="add_new_contribution">Beşdariya nû tevlî bike</string>
+  <string name="add_contribution_from_camera">Bi kamerayê beşdarî bike</string>
+  <string name="add_contribution_from_photos">Ji fotografan tevkarî bike</string>
+  <string name="add_contribution_from_contributions_gallery">Beşdariyê ji galeriya beşdariyên berê tevlî bike</string>
+  <string name="show_captions">Binnivîs</string>
+  <string name="row_item_language_description">Danasîna Zimanê</string>
+  <string name="row_item_caption">Sernav</string>
+  <string name="show_captions_description">Danasîn</string>
+  <string name="nearby_row_image">Wêne</string>
+  <string name="nearby_all">Hemû</string>
+  <string name="nearby_filter_toggle">Derbasî Ya din Bibe</string>
+  <string name="nearby_filter_search">Xuyabûna Lêgerînê</string>
   <string name="appwidget_img">Wêneya rojê</string>
   <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
@@ -45,7 +64,7 @@
   <string name="upload_completed_notification_title">%1$s hat barkirin!</string>
   <string name="upload_completed_notification_text">Bo barkirina xwe bibînî bitikîne.</string>
   <string name="upload_progress_notification_title_in_progress">%1$s tê barkirin</string>
-  <string name="upload_failed_notification_title" fuzzy="true">Barkirina  %1$s bi ser neket</string>
+  <string name="upload_failed_notification_title">Bi ser neket ku %1$s bar bike</string>
   <string name="upload_failed_notification_subtitle">Bitikîne û bibîne</string>
   <string name="title_activity_contributions">Barkirinên min ên dawî</string>
   <string name="contribution_state_failed">Bi ser neket</string>
