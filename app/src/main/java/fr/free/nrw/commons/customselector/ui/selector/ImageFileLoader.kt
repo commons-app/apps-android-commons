@@ -89,28 +89,25 @@ class ImageFileLoader(val context: Context) : CoroutineScope{
                         null
                     }
 
+                if (file != null && file.exists() && name != null && path != null && bucketName != null) {
+                    val uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
 
-                if (file != null && file.exists()) {
-                    if (name != null && path != null && bucketName != null) {
-                        val uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
+                    val calendar = Calendar.getInstance()
+                    calendar.timeInMillis = date * 1000L
+                    val date: Date = calendar.time
+                    val dateFormat = DateFormat.getMediumDateFormat(context)
+                    val formattedDate = dateFormat.format(date)
 
-                        val calendar = Calendar.getInstance()
-                        calendar.timeInMillis = date * 1000L
-                        val date: Date = calendar.time
-                        val dateFormat = DateFormat.getMediumDateFormat(context)
-                        val formattedDate = dateFormat.format(date)
-
-                        val image = Image(
-                            id,
-                            name,
-                            uri,
-                            path,
-                            bucketId,
-                            bucketName,
-                            date = (formattedDate)
-                        )
-                        images.add(image)
-                    }
+                    val image = Image(
+                        id,
+                        name,
+                        uri,
+                        path,
+                        bucketId,
+                        bucketName,
+                        date = (formattedDate)
+                    )
+                    images.add(image)
                 }
 
             } while (cursor.moveToNext())
