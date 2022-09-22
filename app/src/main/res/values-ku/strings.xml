@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Bikarhêner
+* Biyolojiyabikurdi
 * Cûndûllah el-Kurdî
 * George Animal
 * Ghybu
@@ -8,17 +9,17 @@
 -->
 <resources>
   <string name="commons_facebook">Rûpela Facebookê ya Commonsê</string>
-  <string name="commons_github">Koda ÇavkanÎ ya Githuba Commonsê</string>
+  <string name="commons_github">Koda Çavkanî ya Githuba Commonsê</string>
   <string name="commons_logo">Logoya Commonsê</string>
   <string name="commons_website">Malpera Commonsê</string>
   <string name="exit_location_picker">Ji bijêra lokasyonê derkeve</string>
   <string name="submit">Bişîne</string>
   <string name="add_another_description">Danasîneke din tevlî bike</string>
   <string name="add_new_contribution">Beşdariya nû tevlî bike</string>
-  <string name="add_contribution_from_camera">Bi kamerayê beşdarî bike</string>
-  <string name="add_contribution_from_photos">Ji fotografan tevkarî bike</string>
+  <string name="add_contribution_from_camera">Beşdariyê ji kamerayê tevlî bike</string>
+  <string name="add_contribution_from_photos">Beşdariyê ji wêneyan tevlî bike</string>
   <string name="add_contribution_from_contributions_gallery">Beşdariyê ji galeriya beşdariyên berê tevlî bike</string>
-  <string name="show_captions">Binnivîs</string>
+  <string name="show_captions">Sernav</string>
   <string name="row_item_language_description">Danasîna Zimanê</string>
   <string name="row_item_caption">Sernav</string>
   <string name="show_captions_description">Danasîn</string>
@@ -26,12 +27,17 @@
   <string name="nearby_all">Hemû</string>
   <string name="nearby_filter_toggle">Derbasî Ya din Bibe</string>
   <string name="nearby_filter_search">Xuyabûna Lêgerînê</string>
-  <string name="appwidget_img">Wêneya rojê</string>
+  <string name="nearby_filter_state">Halê Cihê</string>
+  <string name="appwidget_img">Wêneyî rojê</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d dosye tê barkirin</item>
+    <item quantity="other">%1$d dosye tên barkirin</item>
+  </plurals>
   <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <string name="starting_uploads">Hilbarkirinan bide dest pê kirin</string>
+  <string name="starting_uploads">Barkirin ên destpêkirin</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">%1$d barkirinê dide xebitandin</item>
     <item quantity="other">%1$d barkirinan dide xebitandin</item>
@@ -40,33 +46,41 @@
     <item quantity="one">%d barkirin</item>
     <item quantity="other">%d barkirin</item>
   </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Ev wêne wê li bin %1$s were lîsanskirin</item>
+    <item quantity="other">Ev wêne wê li bin %1$s werin lîsanskirin</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d Barkirin</item>
+    <item quantity="other">%1$d Barkirin</item>
+  </plurals>
   <string name="navigation_item_explore">Kişf bike</string>
-  <string name="preference_category_appearance">Xuyabûn</string>
+  <string name="preference_category_appearance">Xuyabûnî</string>
   <string name="preference_category_general">Giştî</string>
   <string name="preference_category_feedback">Paşragihandin</string>
   <string name="preference_category_privacy">Veşarîtî</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
   <string name="menu_settings">Eyar</string>
-  <string name="intent_share_upload_label">Hilbarê Commons-ê bike</string>
+  <string name="intent_share_upload_label">Li Commons-ê bar bike</string>
   <string name="username">Navê bikarhêner</string>
   <string name="password">Şîfre</string>
-  <string name="login_credential">Têkeve hesabê xwe ya Commons Betayê</string>
+  <string name="login_credential">Têkeve hesabê xwe yê Commons Betayê</string>
   <string name="login">Têkeve</string>
   <string name="forgot_password">Te şîfreya xwe ji bîr kir?</string>
-  <string name="signup">Hesabek nû çêke</string>
+  <string name="signup">Xwe tomar bike</string>
   <string name="logging_in_title">Têdikeve</string>
-  <string name="logging_in_message">Ji kerema xwere bisekine ...</string>
-  <string name="login_success">Têketin serkeftî bû.</string>
+  <string name="logging_in_message">Ji kerema xwe piçek bisekine ...</string>
+  <string name="login_success">Têketin biserkeftî ye!</string>
   <string name="login_failed">Têketin biser neket!</string>
   <string name="upload_failed">Dosye nehat dîtin. Ji kerema xwe re dosyeyek din biceribîne.</string>
   <string name="uploading_started">Barkirin dest pê kir!</string>
   <string name="upload_completed_notification_title">%1$s hat barkirin!</string>
   <string name="upload_completed_notification_text">Bo barkirina xwe bibînî bitikîne.</string>
   <string name="upload_progress_notification_title_in_progress">%1$s tê barkirin</string>
-  <string name="upload_failed_notification_title">Bi ser neket ku %1$s bar bike</string>
+  <string name="upload_failed_notification_title">Barkirina %1$s biser neket</string>
   <string name="upload_failed_notification_subtitle">Bitikîne û bibîne</string>
-  <string name="title_activity_contributions">Barkirinên min ên dawî</string>
+  <string name="title_activity_contributions">Barkirinên Min Ên Dawî</string>
   <string name="contribution_state_failed">Bi ser neket</string>
   <string name="contribution_state_starting">Tê barkirin</string>
   <string name="menu_from_gallery">Ji wênedankê</string>
@@ -77,7 +91,7 @@
   <string name="share_description_hint">Danasîn</string>
   <string name="login_failed_generic">Têketin têk çû</string>
   <string name="share_upload_button">Bar bike</string>
-  <string name="multiple_share_base_title">Nav bide vê mîhengê</string>
+  <string name="multiple_share_base_title">Nav bide vê desteyê</string>
   <string name="menu_upload_single">Bar bike</string>
   <string name="categories_search_text_hint">Li kategoriyan bigere</string>
   <string name="menu_save_categories">Tomar bike</string>
@@ -85,16 +99,16 @@
   <string name="display_list_button">Lîste</string>
   <string name="contributions_subtitle_zero">(Hê barkirin nîne)</string>
   <string name="categories_activity_title">Kategorî</string>
-  <string name="title_activity_settings">Eyar</string>
-  <string name="title_activity_signup">Hesabek nû çêke</string>
+  <string name="title_activity_settings">Mîheng</string>
+  <string name="title_activity_signup">Xwe tomar bike</string>
   <string name="title_activity_category_details">Kategorî</string>
   <string name="menu_about">Derbar</string>
   <string name="about_privacy_policy">Siyaseta Veşarîtiyê</string>
   <string name="title_activity_about">Derbar</string>
-  <string name="menu_feedback">Paşragihandinê bişîne (bi rêya e-peyamê)</string>
+  <string name="menu_feedback">Paşragihandin bişîne (bi rêya e-peyamê)</string>
   <string name="menu_retry_upload">Dîsa hewl bide</string>
   <string name="menu_cancel_upload">Betal bike</string>
-  <string name="menu_download">Daxe</string>
+  <string name="menu_download">Daxîne</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 3.0</string>
@@ -118,7 +132,7 @@
   <string name="navigation_drawer_open">Veke</string>
   <string name="navigation_drawer_close">Bigre</string>
   <string name="navigation_item_home">Destpêk</string>
-  <string name="navigation_item_upload">Hilbar bike</string>
+  <string name="navigation_item_upload">Bar bike</string>
   <string name="navigation_item_nearby">Yên nêzîk</string>
   <string name="navigation_item_about">Derbar</string>
   <string name="navigation_item_settings">Mîheng</string>
@@ -132,48 +146,48 @@
   <string name="nearby_wikipedia">Wîkîpediya</string>
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Me binirxîne</string>
-  <string name="about_faq">Pirsên ku Pir têne Pirsîn</string>
+  <string name="about_faq">Pirsên Ku Pir Têne Pirsîn</string>
   <string name="welcome_skip_button">Rênîşandanê derbas bike</string>
   <string name="no_internet">Înternet neberdest e</string>
   <string name="about_translate">Wergerîne</string>
   <string name="about_translate_title">Ziman</string>
-  <string name="about_translate_proceed">Tê pêşxistin</string>
+  <string name="about_translate_proceed">Didome</string>
   <string name="about_translate_cancel">Betal bike</string>
   <string name="retry">Dîsa bicerribîne</string>
   <string name="block_notification_title">Astengkirî</string>
   <string name="block_notification">Te hatiye astengkirin ji guherandina Commonsê</string>
-  <string name="app_widget_heading">Wêneya rojê</string>
+  <string name="app_widget_heading">Wêneyê rojê</string>
   <string name="menu_search_button">Lê bigere</string>
   <string name="search_commons">Li Commonsê bigere</string>
   <string name="search_tab_title_media">Medya</string>
   <string name="search_tab_title_categories">Kategorî</string>
   <string name="search_tab_title_depictions">Obje</string>
   <string name="explore_tab_title_featured">Bijarte</string>
-  <string name="explore_tab_title_mobile">Hatiye hilbarkirin bi riya mobîl</string>
+  <string name="explore_tab_title_mobile">Bi riya mobîl hatiye barkirin</string>
   <string name="question">Pirs</string>
   <string name="result">Encam</string>
-  <string name="continue_message">Dewam bike</string>
+  <string name="continue_message">Bidome</string>
   <string name="correct">Bersiva Rast</string>
-  <string name="wrong">Cewaba Xelet</string>
+  <string name="wrong">Bersiva Şaş</string>
   <string name="share_app_title">Sepanê Parve Bike</string>
   <string name="delete">Jê bibe</string>
   <string name="Achievements">Serkeftin</string>
   <string name="Profile">Profîl</string>
   <string name="statistics">Statîstîk</string>
   <string name="statistics_thanks">Spasî Hate Wergirtin</string>
-  <string name="statistics_featured">Wêneyên Bijare</string>
+  <string name="statistics_featured">Wêneyên Bijartî</string>
   <string name="statistics_wikidata_edits">Wêneyên bi riya \"Cihên Nêz\"</string>
-  <string name="level">Derece</string>
-  <string name="images_uploaded">Wêneyên Hilbarkirî</string>
-  <string name="review_thanks_yes_button_text">Rûpela din</string>
+  <string name="level">Pile</string>
+  <string name="images_uploaded">Wêneyên Barkirî</string>
+  <string name="review_thanks_yes_button_text">Wêneyê din</string>
   <string name="review_thanks_no_button_text">Belê, çima na</string>
-  <string name="please_wait">Ji kerema xwe re bisekine ...</string>
+  <string name="please_wait">Ji kerema xwe piçek bisekine ...</string>
   <string name="add_picture_to_wikipedia_article_title">Wêne tevlî Wîkîpediyayê bike</string>
   <string name="add_picture_to_wikipedia_article_desc">Tu dixwazî vê wêneyê tevlî gotara Wîkîpediyayê ya bi zimanê %1$s bikî?</string>
-  <string name="confirm">Bipejirîne</string>
+  <string name="confirm">Pişrast bike</string>
   <string name="instructions_title">Talîmat</string>
-  <string name="wikipedia_instructions_step_3">3. Qismeke misaîd bibîne di nav nivîsarê de ji bo wêneya xwe</string>
-  <string name="wikipedia_instructions_step_4">4. Bitikîne ser îkona \"Sererast Bike\"yê (yê dişibe qelemekê) ji bo wê qismê.</string>
+  <string name="wikipedia_instructions_step_3">3. Ji bo wêneyê xwe di nav gotarê de beşek guncav bibîne</string>
+  <string name="wikipedia_instructions_step_4">4. Ji bo wê beşê bitikîne ser îkona \"Sererast Bike\"yê (yê dişibe qelemekê)</string>
   <string name="wikipedia_instructions_step_5">5. Nivîsa wîkiyê bi cihekî misaîd ve bizeliqîne.</string>
   <string name="wikipedia_instructions_step_7">7. Nivîsarê biweşîne</string>
   <string name="pause">rawestîne</string>

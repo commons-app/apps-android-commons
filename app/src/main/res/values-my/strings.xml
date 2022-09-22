@@ -9,6 +9,7 @@
   <string name="commons_logo">ကွန်မွန်းစ် လိုဂို</string>
   <string name="commons_website">ကွန်မွန်းစ် ဝဘ်ဆိုဒ်</string>
   <string name="submit">ထည့်သွင်းရန်</string>
+  <string name="add_another_description">အခြားဖော်ပြချက်ကို ထည့်ပါ</string>
   <string name="row_item_language_description">ဘာသာစကား ဖော်ပြချက်</string>
   <string name="row_item_caption">ပုံစာ</string>
   <string name="show_captions_description">ဖော်ပြချက်</string>
@@ -207,6 +208,7 @@
   <string name="nearby_wikipedia">ဝီကီပီးဒီးယား</string>
   <string name="nearby_commons">ကွန်မွန်းစ်</string>
   <string name="about_faq">မေးလေ့ရှိကြသည်များ</string>
+  <string name="user_guide">အသုံးပြုသူလမ်းညွှန်</string>
   <string name="welcome_skip_button">သင်ခန်းစာကို ကျော်သွားရန်</string>
   <string name="no_internet">အင်တာနက် မရရှိပါ</string>
   <string name="no_notifications">အသိပေးချက်များ မတွေ့ပါ</string>
@@ -384,6 +386,7 @@
   <string name="select_location_location_picker">တည်နေရာ ရွေးချယ်ရန်</string>
   <string name="modify_location">တည်နေရာ ပြင်ဆင်ရန်</string>
   <string name="image_location">ရုပ်ပုံ တည်နေရာ</string>
+  <string name="description">ဖော်ပြချက်</string>
   <string name="custom_selector_empty_text">ရုပ်ပုံများမရှိ</string>
   <string name="done">ပြီးပြီ</string>
   <string name="back">နောက်သို့</string>
@@ -394,4 +397,9 @@
   <string name="contributions_of_user">အသုံးပြုသူ၏ ပံ့ပိုးမှုများ- %s</string>
   <string name="achievements_of_user">အသုံးပြုသူ၏ အောင်မြင်မှုများ- %s</string>
   <string name="menu_view_user_page">အသုံးပြုသူ၏ စာမျက်နှာကို ကြည့်ရန်</string>
+  <string name="edit_categories">ကဏ္ဍများ တည်းဖြတ်ရန်</string>
+  <string name="menu_view_report">အစီရင်ခံရန်</string>
+  <string name="report_violation">ချိုးဖောက်မှုကို တိုင်ကြားရန်</string>
+  <string name="report_user">ဤအသုံးပြုသူကို တိုင်ကြားရန်</string>
+  <string name="report_content">ဤအကြောင်းအရာကို တိုင်ကြားရန်</string>
 </resources>

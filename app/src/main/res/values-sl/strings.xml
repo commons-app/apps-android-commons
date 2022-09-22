@@ -707,9 +707,20 @@
   <string name="error_feedback">Napaka pri pošiljanju odziva</string>
   <string name="enter_description">Kakšen je vaš odziv?</string>
   <string name="your_feedback">Vaš odziv</string>
+  <string name="mark_as_not_for_upload">Označi kot ni za nalaganje</string>
+  <string name="unmark_as_not_for_upload">Odznači kot ni za nalaganje</string>
+  <string name="show_already_actioned_pictures">Prikaži že obdelane slike</string>
+  <string name="hiding_already_actioned_pictures">Skrivanje že obdelanih slik</string>
+  <string name="no_more_images_found">Ni drugih najdenih slik</string>
+  <string name="this_image_is_already_uploaded">Ta slika je že naložena</string>
+  <string name="can_not_select_this_image_for_upload">Te slike ni mogoče izbrati za naložitev</string>
+  <string name="image_selected">Slika izbrana</string>
+  <string name="image_marked_as_not_for_upload">Slika je označena kot ni za nalaganje</string>
   <string name="menu_view_report">Poročilo</string>
   <string name="report_violation">Prijavi kršitev</string>
   <string name="report_user">Prijavi uporabnika</string>
   <string name="report_content">Prijavi to vsebino</string>
   <string name="request_user_block">Zahtevaj blokiranje uporabnika</string>
+  <string name="welcome_to_full_screen_mode_text">Pozdravljeni v celozaslonskem načinu izbire</string>
+  <string name="full_screen_mode_zoom_info">Za povečavo in pomanjšanje uporabite dva prsta.</string>
 </resources>

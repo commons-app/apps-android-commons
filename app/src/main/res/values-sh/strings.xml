@@ -13,9 +13,10 @@
   <string name="show_captions_description">Opis</string>
   <string name="nearby_row_image">Slika</string>
   <string name="nearby_all">Sve</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">Otprema se %1$d datoteka</item>
-    <item quantity="other">Otpremaju se %1$d datoteke</item>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d datoteka se otprema</item>
+    <item quantity="few">%1$d datoteke se otpremaju</item>
+    <item quantity="other">%1$d datoteka se otprema</item>
   </plurals>
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
@@ -26,9 +27,10 @@
     <item quantity="one">Počinje %1$d otpremanje</item>
     <item quantity="other">Počinju %1$d otpremanja</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d otpremanje</item>
-    <item quantity="other">%1$d otpremanja</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d otpremanje</item>
+    <item quantity="few">%d otpremanja</item>
+    <item quantity="other">%d otpremanja</item>
   </plurals>
   <plurals name="share_license_summary" fuzzy="true">
     <item quantity="one">Ova slika će se izvoditi pod licencom %1$s</item>
@@ -78,6 +80,7 @@
   <string name="menu_view_file_page">Vidi stranicu datoteke/fajla</string>
   <string name="share_title_hint" fuzzy="true">Naslov (obavez.)</string>
   <string name="share_description_hint">Opis</string>
+  <string name="share_caption_hint">Opis</string>
   <string name="login_failed_network">Ne mogu Vas prijaviti — mreža ne radi</string>
   <string name="login_failed_throttled">Napraveni su previše neuspješnih pokušaja. Pokušajte pak za neku minutu.</string>
   <string name="login_failed_blocked">Žao nam je, korisnik je blokiran na Ostavi</string>
@@ -190,7 +193,7 @@
   <string name="navigation_item_info">Uputstva</string>
   <string name="navigation_item_notification">Obavještenja</string>
   <string name="navigation_item_review">Ocijeni</string>
-  <string name="use_external_storage" fuzzy="true">Koristi spoljašnju memoriju</string>
+  <string name="use_external_storage">Sačuvaj snimke unutar priloga</string>
   <string name="use_external_storage_summary">Spremanje napravljenih slika u privitku s kamerom na Vašem uređaju</string>
   <string name="login_to_your_account">Prijavite se s svojim računom</string>
   <string name="send_log_file">Pošalji dnevničku datoteku</string>
@@ -199,12 +202,14 @@
   <string name="null_url">Greška! Nisam pronašao URL-u</string>
   <string name="nominate_deletion">Predloži za brisanje</string>
   <string name="nominated_for_deletion">Ova slika je predložena za brisanje</string>
-  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Pojedinije ćete naći na webstranici&lt;/u&gt;</string>
+  <string name="nominated_see_more">Pogledajte mrežnu stranicu za više informacija</string>
   <string name="skip_login">Preskoči</string>
   <string name="navigation_item_login">Prijavi se</string>
   <string name="skip_login_title">Zaista želite da preskočite prijavu?</string>
   <string name="skip_login_message">U budućnosti ćete se morati prijaviti kako biste postavili slike.</string>
   <string name="login_alert_message">Prijavite se da biste koristili ovu funkciju</string>
+  <string name="nearby_location_not_available">„U blizini“ možda ne radi kako treba. Lokacija nije dostupna.</string>
+  <string name="location_permission_rationale_nearby">Potrebna je dozvola za popis liste lokacija u blizini</string>
   <string name="nearby_directions">Upute</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>

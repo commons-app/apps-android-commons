@@ -10,6 +10,7 @@
 * FF11
 * Ferdinand0101
 * Inkowik
+* Justman10000
 * Kghbln
 * Killarnee
 * ManuelFranz
@@ -709,9 +710,21 @@
   <string name="error_feedback">Fehler beim Senden von Rückmeldungen</string>
   <string name="enter_description">Wie lautet dein Feedback?</string>
   <string name="your_feedback">Dein Feedback</string>
+  <string name="mark_as_not_for_upload">Als nicht zum Hochladen markieren</string>
+  <string name="unmark_as_not_for_upload">Markierung als nicht zum Hochladen aufheben</string>
+  <string name="show_already_actioned_pictures">Bereits bearbeitete Bilder anzeigen</string>
+  <string name="hiding_already_actioned_pictures">Ausblenden bereits bearbeiteter Bilder</string>
+  <string name="no_more_images_found">Keine Bilder mehr gefunden</string>
+  <string name="this_image_is_already_uploaded">Dieses Bild wurde bereits hochgeladen</string>
+  <string name="can_not_select_this_image_for_upload">Dieses Bild kann nicht zum Hochladen ausgewählt werden</string>
+  <string name="image_selected">Bild ausgewählt</string>
+  <string name="image_marked_as_not_for_upload">Bild als nicht zum Hochladen markiert</string>
   <string name="menu_view_report">Meldung</string>
   <string name="report_violation">Verstoß melden</string>
   <string name="report_user">Diesen Benutzer melden</string>
   <string name="report_content">Diesen Inhalt melden</string>
   <string name="request_user_block">Antrag auf Sperrung dieses Benutzers</string>
+  <string name="welcome_to_full_screen_mode_text">Willkommen im Vollbild-Auswahlmodus</string>
+  <string name="full_screen_mode_zoom_info">Verwende zwei Finger, um hinein- und herauszuzoomen.</string>
+  <string name="full_screen_mode_features_info">Wische schnell und lange, um diese Aktionen auszuführen:\n- Links/Rechts: Zum vorherigen/nächsten gehen\n- Nach oben: Auswählen\n- Unten: Als nicht zum Hochladen markieren.</string>
 </resources>
