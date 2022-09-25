@@ -115,9 +115,9 @@ class FileProcessor @Inject constructor(
         Timber.d("Checking for tag: %s", tag)
         exifInterface?.getAttribute(tag)
             ?.takeIf { it.isNotEmpty() }
-            ?.let {
+            ?.let { attributeName ->
                 exifInterface.setAttribute(tag, null).also {
-                    Timber.d("Exif tag $tag with value $it redacted.")
+                    Timber.d("Exif tag $tag with value $attributeName redacted.")
                 }
             }
     }
