@@ -726,5 +726,5 @@
   <string name="request_user_block">Antrag auf Sperrung dieses Benutzers</string>
   <string name="welcome_to_full_screen_mode_text">Willkommen im Vollbild-Auswahlmodus</string>
   <string name="full_screen_mode_zoom_info">Verwende zwei Finger, um hinein- und herauszuzoomen.</string>
-  <string name="full_screen_mode_features_info">Wische schnell und lange, um diese Aktionen auszuführen:\n- Links/Rechts: Zum vorherigen/nächsten gehen\n- Nach oben: Auswählen\n- Unten: Als nicht zum Hochladen markieren.</string>
+  <string name="full_screen_mode_features_info">Wische schnell und lange, um diese Aktionen auszuführen:\n- Links/Rechts: Zum vorherigen/nächsten gehen\n- Nach oben: Auswählen\n- Nach unten: Als nicht zum Hochladen markieren.</string>
 </resources>

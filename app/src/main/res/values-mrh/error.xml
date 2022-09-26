@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Teitei Para
+-->
+<resources>
+  <string name="crash_dialog_title">Common cha a crash haw</string>
+  <string name="crash_dialog_text">Oh. Sâ khakha ado vei!</string>
+  <string name="crash_dialog_comment_prompt">Khâpa e na tao hai tahpa miah chhao la, email tawh paphao mah y. Cha cha eima paraihna lia miah a baokhâ aw!</string>
+  <string name="crash_dialog_ok_toast">Châly kaw!</string>
+</resources>

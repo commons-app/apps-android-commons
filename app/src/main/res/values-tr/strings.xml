@@ -706,6 +706,13 @@
   <string name="error_feedback">Geri bildirim gönderilirken hata oluştu</string>
   <string name="enter_description">Geri bildiriminiz nedir?</string>
   <string name="your_feedback">Geri bildiriminiz</string>
+  <string name="mark_as_not_for_upload">Yükleme için değil olarak işaretle</string>
+  <string name="unmark_as_not_for_upload">Yükleme için değil işaretini kaldır</string>
+  <string name="no_more_images_found">Başka resim bulunamadı</string>
+  <string name="this_image_is_already_uploaded">Bu resim zaten yüklendi</string>
+  <string name="can_not_select_this_image_for_upload">Bu resim yüklemek için seçilemiyor</string>
+  <string name="image_selected">Resim seçildi</string>
+  <string name="image_marked_as_not_for_upload">Resim, yükleme için değil olarak işaretlendi</string>
   <string name="menu_view_report">Bildir</string>
   <string name="report_violation">İhlal bildir</string>
   <string name="report_user">Bu kullanıcıyı bildir</string>

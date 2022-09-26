@@ -720,10 +720,19 @@
   <string name="error_feedback">Помилка під час надсилання відгуку</string>
   <string name="enter_description">Який ваш відгук?</string>
   <string name="your_feedback">Ваш відгук</string>
+  <string name="mark_as_not_for_upload">Позначити як не для завантаження</string>
+  <string name="show_already_actioned_pictures">Показати вже виконані картинки</string>
+  <string name="hiding_already_actioned_pictures">Приховування вже активованих картинок</string>
   <string name="no_more_images_found">Більше зображень не знайдено</string>
+  <string name="this_image_is_already_uploaded">Це зображення вже завантажено</string>
+  <string name="can_not_select_this_image_for_upload">Неможливо вибрати це зображення для завантаження</string>
+  <string name="image_selected">Зображення вибрано</string>
+  <string name="image_marked_as_not_for_upload">Зображення позначено як не для завантаження</string>
   <string name="menu_view_report">Повідомити</string>
   <string name="report_violation">Повідомити про порушення</string>
   <string name="report_user">Поскаржитись на користувача</string>
   <string name="report_content">Поскаржитись на вміст</string>
   <string name="request_user_block">Запит на блокування цього користувача</string>
+  <string name="welcome_to_full_screen_mode_text">Ласкаво просимо до Повноекранного Режиму Вибору</string>
+  <string name="full_screen_mode_zoom_info">Використовуйте два пальці для збільшення та зменшення масштабу.</string>
 </resources>

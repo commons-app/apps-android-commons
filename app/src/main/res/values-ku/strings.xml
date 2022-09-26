@@ -71,9 +71,11 @@
   <string name="signup">Xwe tomar bike</string>
   <string name="logging_in_title">Têdikeve</string>
   <string name="logging_in_message">Ji kerema xwe piçek bisekine ...</string>
+  <string name="updating_caption_message">Xêra xwe hinek bisekine...</string>
   <string name="login_success">Têketin biserkeftî ye!</string>
   <string name="login_failed">Têketin biser neket!</string>
   <string name="upload_failed">Dosye nehat dîtin. Ji kerema xwe re dosyeyek din biceribîne.</string>
+  <string name="authentication_failed">Teyîdkirina nasnameyê bi ser neket, ji kerema xwe cardin têkeve</string>
   <string name="uploading_started">Barkirin dest pê kir!</string>
   <string name="upload_completed_notification_title">%1$s hat barkirin!</string>
   <string name="upload_completed_notification_text">Bo barkirina xwe bibînî bitikîne.</string>

@@ -290,7 +290,7 @@
   <string name="nearby_commons">Zbirka</string>
   <string name="about_rate_us">Ocenite nas</string>
   <string name="about_faq">PPV</string>
-  <string name="user_guide">Uporabniški priročnik</string>
+  <string name="user_guide">Vodnik za uporabo</string>
   <string name="welcome_skip_button">Preskoči vadnico</string>
   <string name="no_internet">Internet ni na voljo</string>
   <string name="error_notifications">Napaka pri pridobivanju obvestil</string>
@@ -617,9 +617,9 @@
   <string name="leaderboard_yearly">Letno</string>
   <string name="leaderboard_weekly">Tedensko</string>
   <string name="leaderboard_all_time">Ves čas</string>
-  <string name="leaderboard_upload">Naloži</string>
+  <string name="leaderboard_upload">Naloženo</string>
   <string name="leaderboard_nearby">Bližnje</string>
-  <string name="leaderboard_used">Uporabljenih</string>
+  <string name="leaderboard_used">Uporabljeno</string>
   <string name="leaderboard_my_rank_button_text">Moje mesto</string>
   <string name="mapbox_telemetry">Telemetrija Mapbox</string>
   <string name="telemetry_opt_out_summary">Pri uporabi možnosti Bližnje pošiljaj anonimizirane podatke o kraju in uporabi v Mapbox</string>
@@ -628,7 +628,7 @@
   <string name="limited_connection_disabled">Način omejene povezanosti izklopljen. Nalaganje se bo zdaj nadaljevalo.</string>
   <string name="limited_connection_mode">Način omejene povezanosti</string>
   <string name="statistics_quality">Kakovostne slike</string>
-  <string name="quality_images_info">Kakovostne slike so ponazoritve ali fotografije, ki ustrezajo nekaterim merilom kakovosti (ta so predvsem tehnična) in so dragocena za projekte Wikimedije</string>
+  <string name="quality_images_info">Kakovostne slike so ponazoritve ali fotografije, ki ustrezajo nekaterim merilom kakovosti (ta so predvsem tehnična) in so dragocene za projekte Wikimedije</string>
   <string name="resuming_upload">Nalaganje se nadaljuje ...</string>
   <string name="pausing_upload">Zaustavljam nalaganje ...</string>
   <string name="cancelling_upload">Preklicujem nalaganje ...</string>
@@ -672,7 +672,7 @@
   <string name="place_state_wlm">WLM</string>
   <string name="wlm_upload_info">Ta slika bo vključena v natečaj Viki obožuje spomenike 2021</string>
   <string name="display_monuments">Prikaži spomenike</string>
-  <string name="wlm_month_message">Spet je mesec natečaja Viki obožuje spomenike!</string>
+  <string name="wlm_month_message">Odprt je natečaj Viki obožuje spomenike!</string>
   <string name="learn_more">VEČ O TEM</string>
   <string name="wlm_campaign_title">Viki obožuje spomenike</string>
   <string name="wlm_campaign_description">Viki obožuje spomenike je mednarodni fotografski natečaj za spomenike, ki ga organizira fundacija Wikimedia.</string>
@@ -723,4 +723,5 @@
   <string name="request_user_block">Zahtevaj blokiranje uporabnika</string>
   <string name="welcome_to_full_screen_mode_text">Pozdravljeni v celozaslonskem načinu izbire</string>
   <string name="full_screen_mode_zoom_info">Za povečavo in pomanjšanje uporabite dva prsta.</string>
+  <string name="full_screen_mode_features_info">Hitro in dolgo podrsajte, da izvedete naslednja dejanja:\n– levo/desno: pojdi na prejšnje/naslednje\n– gor: izberi\n– dol: označi, da ni za nalaganje</string>
 </resources>
