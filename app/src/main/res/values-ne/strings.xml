@@ -65,7 +65,7 @@
   <string name="login_failed_network">प्रवेश गर्न असमर्थ - जडान खराबी</string>
   <string name="login_failed_throttled">धेरै असफल प्रयासहरू भए। कृपया केही मिनेट पछि पुन: प्रयास गर्नुहोस</string>
   <string name="login_failed_blocked">माफ गर्नुहोस, यो प्रयोगकर्तालाई कमन्समा प्रतिबन्ध गरिएको छ</string>
-  <string name="login_failed_2fa_needed">तपाईले आफ्नो दुई कारक प्रमाणीकरण अङ्क प्रदान गर्नुपर्नेछ।</string>
+  <string name="login_failed_2fa_needed">तपाईंले आफ्नो दुई कारक प्रमाणीकरण अङ्क प्रदान गर्नुपर्नेछ।</string>
   <string name="login_failed_generic">प्रवेश सफल हुन सकेन</string>
   <string name="share_upload_button">उर्ध्वभरण गर्ने</string>
   <string name="multiple_share_base_title">यो सेटलाई नाम दिनुहोस्</string>
@@ -116,14 +116,14 @@
   <string name="tutorial_2_subtext_2">उपयोगी वस्तुहरू (साइकल, रेल स्टेसनहरू)</string>
   <string name="tutorial_3_text">कृपया उर्ध्वभरण नगर्नुहोलाः</string>
   <string name="tutorial_3_subtext_1">सेल्फी वा तपाईको साथीहरूको तस्वीर</string>
-  <string name="tutorial_3_subtext_2">तपाईले इन्टरनेटबाट डाउनलोड गर्नुभएका तस्वीरहरू</string>
+  <string name="tutorial_3_subtext_2">तपाईंले इन्टरनेटबाट डाउनलोड गर्नुभएका तस्वीरहरू</string>
   <string name="tutorial_3_subtext_3">स्वामित्व अनुप्रयाेगहरूकाे पर्दा चित्रण</string>
   <string name="tutorial_4_text">उदाहरण उर्ध्वभरणः</string>
   <string name="tutorial_4_subtext_1">शीर्षक: सिड्नीकाे ओपेरा हाउस</string>
   <string name="welcome_wikipedia_text">आफ्नो तस्वीरहरूको योगदान दिनुहोस्। विकिपिडियाका लेखलाई जीवनन्तता पाउन मद्दत गर्नुहोस्!</string>
   <string name="welcome_wikipedia_subtext">विकिपिडियाका तस्वीरहरू विकिमिडिया कमन्सबाट आउँछन्।</string>
   <string name="welcome_copyright_text">तपाईंको तस्वीरहरूले संसारभरिका मानिसहरूलाई शिक्षित बनाउन मद्दत गर्छन्।</string>
-  <string name="welcome_copyright_subtext">तपाईले इन्टरनेटमा भेट्टाउनुभएका प्रतिलिपि अधिकार युक्त सामग्रीहरू साथै पोस्टरहरू, पुस्तक आवरणहरू, आदिका तस्वीरहरू रोक्नुहोस्।</string>
+  <string name="welcome_copyright_subtext">तपाईंले इन्टरनेटमा भेट्टाउनुभएका प्रतिलिपि अधिकार युक्त सामग्रीहरू साथै पोस्टरहरू, पुस्तक आवरणहरू, आदिका तस्वीरहरू रोक्नुहोस्।</string>
   <string name="welcome_final_text">के तपाईंले कुरा बुझ्नु भए जस्तो लाग्छ ?</string>
   <string name="welcome_final_button_text">हो!</string>
   <string name="welcome_help_button_text">थप जानकारी</string>

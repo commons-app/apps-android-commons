@@ -23,8 +23,7 @@
     <item quantity="one">%1$d датотека се отпрема</item>
     <item quantity="other">%1$d датотеке се отпремају</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">%1$d отпремање</item>
     <item quantity="other">%1$d отпремања</item>
   </plurals>
@@ -83,7 +82,7 @@
   <string name="menu_nearby">У близини</string>
   <string name="provider_contributions">Моја отпремања</string>
   <string name="menu_share">Дели</string>
-  <string name="share_title_hint" fuzzy="true">Наслов (обавезно)</string>
+  <string name="share_title_hint">Натпис (обавезно)</string>
   <string name="share_description_hint">Опис</string>
   <string name="login_failed_network">Пријава није могућа — грешка на мрежи</string>
   <string name="login_failed_throttled">Превише неуспешних покушаја. Покушајте поново за неколико минута.</string>
@@ -319,7 +318,7 @@
   <string name="contributions_fragment">Доприноси</string>
   <string name="nearby_fragment">У близини</string>
   <string name="notifications">Обавештења</string>
-  <string name="read_notifications" fuzzy="true">Обавештења (архивирана)</string>
+  <string name="read_notifications">Обавештења (прочитана)</string>
   <string name="display_nearby_notification">Прикажи обавештење у близини</string>
   <string name="display_nearby_notification_summary" fuzzy="true">Притисните овде да бисте видели најближе место којем треба слика</string>
   <string name="list_sheet">Списак</string>
@@ -352,7 +351,7 @@
   <string name="nearby_card_permission_explanation">Желите ли да користимо вашу тренутну локацију да би приказали најближе место којем требају слике?</string>
   <string name="unable_to_display_nearest_place">Није могуће приказати најближе место којем требају слике без дозволе за локацију.</string>
   <string name="never_ask_again">Не питај ово поново</string>
-  <string name="display_location_permission_title" fuzzy="true">Дозвола за приказ локације</string>
+  <string name="display_location_permission_title">Дозвола за приказ локације</string>
   <string name="display_location_permission_explanation">Тражи дозволу за локацију када је то потребно за функцију приказа картице обавештења у близини.</string>
   <string name="achievements_fetch_failed">Нешто није у реду. Није могуће добавити достигнућа.</string>
   <string name="ends_on">Завршава:</string>
@@ -385,9 +384,9 @@
   <string name="no_image_reverted">Нема враћених слика</string>
   <string name="no_image_uploaded">Нема отпремљених слика</string>
   <string name="no_notification">Немате непрочитаних обавештења.</string>
-  <string name="no_read_notification" fuzzy="true">Немате архивираних обавештења</string>
+  <string name="no_read_notification">Немате прочитаних обавештења</string>
   <string name="share_logs_using">Подели дневнике користећи</string>
-  <string name="menu_option_read" fuzzy="true">Прикажи архивирано</string>
+  <string name="menu_option_read">Прикажи прочитано</string>
   <string name="menu_option_unread">Прикажи непрочитано</string>
   <string name="error_occurred_in_picking_images">Дошло је до грешке при избору слика</string>
   <string name="please_wait">Сачекајте…</string>

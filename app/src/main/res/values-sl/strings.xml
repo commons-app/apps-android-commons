@@ -576,7 +576,7 @@
   <string name="theme_dark_name">Temna</string>
   <string name="theme_light_name">Svetla</string>
   <string name="cannot_open_location_settings">Nastavitev kraja ni bilo mogoče odpreti. Kraj vklopite ročno.</string>
-  <string name="recommend_high_accuracy_mode">Za najboljše rezultate izberite način Visoka natančnost.</string>
+  <string name="recommend_high_accuracy_mode">Za najboljše zadetke izberite način Visoka natančnost.</string>
   <string name="ask_to_turn_location_on">Vklopim kraj?</string>
   <string name="nearby_needs_location">Za Bližnje je trebs vklopiti kraj</string>
   <string name="use_location_from_similar_image">Ali ste sliki posneli na istem kraju? Ali želite uporabiti geografsko širino/dolžino desne slike?</string>
@@ -628,7 +628,7 @@
   <string name="limited_connection_disabled">Način omejene povezanosti izklopljen. Nalaganje se bo zdaj nadaljevalo.</string>
   <string name="limited_connection_mode">Način omejene povezanosti</string>
   <string name="statistics_quality">Kakovostne slike</string>
-  <string name="quality_images_info">Kakovostne slike so ponazoritve ali fotografije, ki ustrezajo nekaterim merilom kakovosti (ta so predvsem tehnična) in so dragocene za projekte Wikimedije</string>
+  <string name="quality_images_info">Kakovostne slike so ponazoritve ali fotografije, ki ustrezajo nekaterim merilom kakovosti (ta so predvsem tehnična) in so dragocene za projekte Wikimedie</string>
   <string name="resuming_upload">Nalaganje se nadaljuje ...</string>
   <string name="pausing_upload">Zaustavljam nalaganje ...</string>
   <string name="cancelling_upload">Preklicujem nalaganje ...</string>
