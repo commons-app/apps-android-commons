@@ -1,35 +1,25 @@
 package fr.free.nrw.commons;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
-import androidx.viewpager.widget.ViewPager;
-
-import com.viewpagerindicator.CirclePageIndicator;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import fr.free.nrw.commons.databinding.ActivityWelcomeBinding;
+import fr.free.nrw.commons.databinding.PopupForCopyrightBinding;
 import fr.free.nrw.commons.quiz.QuizActivity;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.ConfigUtils;
-import android.app.AlertDialog;
-import android.widget.Button;
 
 public class WelcomeActivity extends BaseActivity {
 
-    @BindView(R.id.welcomePager)
-    ViewPager pager;
-    @BindView(R.id.welcomePagerIndicator)
-    CirclePageIndicator indicator;
+    private ActivityWelcomeBinding binding;
+    private PopupForCopyrightBinding copyrightBinding;
 
-    private WelcomePagerAdapter adapter = new WelcomePagerAdapter();
+    private final WelcomePagerAdapter adapter = new WelcomePagerAdapter();
     private boolean isQuiz;
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
-    Button okButton;
 
     /**
      * Initialises exiting fields and dependencies
@@ -37,12 +27,14 @@ public class WelcomeActivity extends BaseActivity {
      * @param savedInstanceState WelcomeActivity bundled data
      */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
+        binding = ActivityWelcomeBinding.inflate(getLayoutInflater());
+        final View view = binding.getRoot();
+        setContentView(view);
 
         if (getIntent() != null) {
-            Bundle bundle = getIntent().getExtras();
+            final Bundle bundle = getIntent().getExtras();
             if (bundle != null) {
                 isQuiz = bundle.getBoolean("isQuiz");
             }
@@ -52,22 +44,23 @@ public class WelcomeActivity extends BaseActivity {
 
         // Enable skip button if beta flavor
         if (ConfigUtils.isBetaFlavour()) {
-            findViewById(R.id.finishTutorialButton).setVisibility(View.VISIBLE);
+            binding.finishTutorialButton.setVisibility(View.VISIBLE);
 
             dialogBuilder = new AlertDialog.Builder(this);
-            final View contactPopupView = getLayoutInflater().inflate(R.layout.popup_for_copyright,null);
+            copyrightBinding = PopupForCopyrightBinding.inflate(getLayoutInflater());
+            final View contactPopupView = copyrightBinding.getRoot();
             dialogBuilder.setView(contactPopupView);
             dialog = dialogBuilder.create();
             dialog.show();
 
-            okButton = dialog.findViewById(R.id.button_ok);
-            okButton.setOnClickListener(view -> dialog.dismiss());
+            copyrightBinding.buttonOk.setOnClickListener(v -> dialog.dismiss());
         }
 
-        ButterKnife.bind(this);
+        binding.welcomePager.setAdapter(adapter);
+        binding.welcomePagerIndicator.setViewPager(binding.welcomePager);
 
-        pager.setAdapter(adapter);
-        indicator.setViewPager(pager);
+        binding.finishTutorialButton.setOnClickListener(v -> finishTutorial());
+
     }
 
     /**
@@ -76,7 +69,7 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     public void onDestroy() {
         if (isQuiz) {
-            Intent i = new Intent(WelcomeActivity.this, QuizActivity.class);
+            final Intent i = new Intent(this, QuizActivity.class);
             startActivity(i);
         }
         super.onDestroy();
@@ -87,8 +80,8 @@ public class WelcomeActivity extends BaseActivity {
      *
      * @param context Activity context
      */
-    public static void startYourself(Context context) {
-        Intent welcomeIntent = new Intent(context, WelcomeActivity.class);
+    public static void startYourself(final Context context) {
+        final Intent welcomeIntent = new Intent(context, WelcomeActivity.class);
         context.startActivity(welcomeIntent);
     }
 
@@ -97,8 +90,8 @@ public class WelcomeActivity extends BaseActivity {
      */
     @Override
     public void onBackPressed() {
-        if (pager.getCurrentItem() != 0) {
-            pager.setCurrentItem(pager.getCurrentItem() - 1, true);
+        if (binding.welcomePager.getCurrentItem() != 0) {
+            binding.welcomePager.setCurrentItem(binding.welcomePager.getCurrentItem() - 1, true);
         } else {
             if (defaultKvStore.getBoolean("firstrun", true)) {
                 finishAffinity();
@@ -108,7 +101,6 @@ public class WelcomeActivity extends BaseActivity {
         }
     }
 
-    @OnClick(R.id.finishTutorialButton)
     public void finishTutorial() {
         defaultKvStore.putBoolean("firstrun", false);
         finish();
