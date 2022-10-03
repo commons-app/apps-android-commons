@@ -635,4 +635,5 @@
   <string name="error_feedback">ఫీడ్‌బ్యాకు పంపించడంలో లోపం</string>
   <string name="enter_description">మీ ఫీడ్‌బ్యాకు ఏమిటి?</string>
   <string name="your_feedback">మీ ఫీడ్‌బ్యాకు</string>
+  <string name="this_image_is_already_uploaded">ఈ బొమ్మ ఇదివరకే ఎక్కించబడింది</string>
 </resources>

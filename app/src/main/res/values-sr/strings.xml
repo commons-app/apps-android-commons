@@ -82,7 +82,7 @@
   <string name="menu_nearby">У близини</string>
   <string name="provider_contributions">Моја отпремања</string>
   <string name="menu_share">Дели</string>
-  <string name="share_title_hint">Натпис (обавезно)</string>
+  <string name="share_title_hint">Опис (обавезно)</string>
   <string name="share_description_hint">Опис</string>
   <string name="login_failed_network">Пријава није могућа — грешка на мрежи</string>
   <string name="login_failed_throttled">Превише неуспешних покушаја. Покушајте поново за неколико минута.</string>

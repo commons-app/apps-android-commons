@@ -705,6 +705,7 @@
   <string name="mark_as_not_for_upload">Marcar como não sendo para carregamento</string>
   <string name="unmark_as_not_for_upload">Remover marcação de como não sendo para carregamento</string>
   <string name="show_already_actioned_pictures">Mostrar imagens já processadas</string>
+  <string name="hiding_already_actioned_pictures">Ocultando as imagens já processadas</string>
   <string name="no_more_images_found">Não foram encontradas mais imagens</string>
   <string name="this_image_is_already_uploaded">Esta imagem já foi carregada</string>
   <string name="can_not_select_this_image_for_upload">Não é possível selecionar esta imagem para carregamento</string>
