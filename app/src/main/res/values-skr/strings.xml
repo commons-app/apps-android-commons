@@ -63,7 +63,7 @@
   <string name="provider_categories">حالیہ ورتیاں ڳیاں ونکیاں</string>
   <string name="menu_retry_upload">ولدا کوشش کرو</string>
   <string name="menu_cancel_upload">منسوخ</string>
-  <string name="menu_download">ڈاؤن لوڈ کرو ، لہاؤ</string>
+  <string name="menu_download">ڈاؤن لوڈ</string>
   <string name="preference_license">پہلے طے تھیا لائسنس</string>
   <string name="preference_theme">مرکزی خیال</string>
   <string name="license_name_cc0">سی سی او</string>

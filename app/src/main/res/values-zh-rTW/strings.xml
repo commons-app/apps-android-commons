@@ -707,9 +707,21 @@
   <string name="error_feedback">在發送意見回饋時發生錯誤</string>
   <string name="enter_description">您的意見回饋是？</string>
   <string name="your_feedback">您的意見回饋</string>
+  <string name="mark_as_not_for_upload">標記為不上傳</string>
+  <string name="unmark_as_not_for_upload">取消標記為不上傳</string>
+  <string name="show_already_actioned_pictures">顯示已操作的圖片</string>
+  <string name="hiding_already_actioned_pictures">隱藏已操作的圖片</string>
+  <string name="no_more_images_found">找不到更多圖片</string>
+  <string name="this_image_is_already_uploaded">已上傳此圖片</string>
+  <string name="can_not_select_this_image_for_upload">無法選擇此圖片來進行上傳</string>
+  <string name="image_selected">已選圖片</string>
+  <string name="image_marked_as_not_for_upload">圖片標記為不上傳</string>
   <string name="menu_view_report">回報</string>
   <string name="report_violation">回報違反行為</string>
   <string name="report_user">回報該名使用者</string>
   <string name="report_content">回報這份內容</string>
   <string name="request_user_block">請求封鎖該名使用者</string>
+  <string name="welcome_to_full_screen_mode_text">歡迎使用全螢幕選擇模式</string>
+  <string name="full_screen_mode_zoom_info">用兩根手指來放大和縮小。</string>
+  <string name="full_screen_mode_features_info">快速長滑來執行以下操作：\n- 左/右：跳到上一張/下一張\n- 上：選擇\n- 下：標記為不上傳。</string>
 </resources>
