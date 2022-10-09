@@ -20,12 +20,14 @@ import fr.free.nrw.commons.customselector.helper.CustomSelectorConstants.SHOULD_
 import fr.free.nrw.commons.customselector.listeners.FolderClickListener
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
+import fr.free.nrw.commons.databinding.ActivityCustomSelectorBinding
+import fr.free.nrw.commons.databinding.CustomSelectorBottomLayoutBinding
+import fr.free.nrw.commons.databinding.CustomSelectorToolbarBinding
 import fr.free.nrw.commons.filepicker.Constants
 import fr.free.nrw.commons.media.ZoomableActivity
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
-import kotlinx.android.synthetic.main.custom_selector_bottom_layout.*
 import kotlinx.coroutines.*
 import java.io.File
 import javax.inject.Inject
@@ -34,7 +36,14 @@ import javax.inject.Inject
 /**
  * Custom Selector Activity.
  */
-class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectListener {
+class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectListener {
+
+    /**
+     * ViewBindings
+     */
+    private lateinit var binding: ActivityCustomSelectorBinding
+    private lateinit var toolbarBinding: CustomSelectorToolbarBinding
+    private lateinit var bottomSheetBinding: CustomSelectorBottomLayoutBinding
 
     /**
      * View model.
@@ -60,7 +69,8 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
     /**
      * View Model Factory.
      */
-    @Inject lateinit var customSelectorViewModelFactory: CustomSelectorViewModelFactory
+    @Inject
+    lateinit var customSelectorViewModelFactory: CustomSelectorViewModelFactory
 
     /**
      * NotForUploadStatus Dao class for database operations
@@ -77,8 +87,8 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
     /**
      * Coroutine Dispatchers and Scope.
      */
-    private val scope : CoroutineScope = MainScope()
-    private var ioDispatcher : CoroutineDispatcher = Dispatchers.IO
+    private val scope: CoroutineScope = MainScope()
+    private var ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 
     /**
      * Image Fragment instance
@@ -90,23 +100,27 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_custom_selector)
+        binding = ActivityCustomSelectorBinding.inflate(layoutInflater)
+        toolbarBinding = CustomSelectorToolbarBinding.bind(binding.root)
+        bottomSheetBinding = CustomSelectorBottomLayoutBinding.bind(binding.root)
+        val view = binding.root
+        setContentView(view)
 
-        prefs =  applicationContext.getSharedPreferences("CustomSelector", MODE_PRIVATE)
+        prefs = applicationContext.getSharedPreferences("CustomSelector", MODE_PRIVATE)
         viewModel = ViewModelProvider(this, customSelectorViewModelFactory).get(
             CustomSelectorViewModel::class.java
         )
 
         setupViews()
 
-        if(prefs.getBoolean("customSelectorFirstLaunch", true)) {
+        if (prefs.getBoolean("customSelectorFirstLaunch", true)) {
             // show welcome dialog on first launch
             showWelcomeDialog()
             prefs.edit().putBoolean("customSelectorFirstLaunch", false).apply()
         }
 
         // Open folder if saved in prefs.
-        if(prefs.contains(FOLDER_ID)){
+        if (prefs.contains(FOLDER_ID)) {
             val lastOpenFolderId: Long = prefs.getLong(FOLDER_ID, 0L)
             val lastOpenFolderName: String? = prefs.getString(FOLDER_NAME, null)
             val lastItemId: Long = prefs.getLong(ITEM_ID, 0)
@@ -120,7 +134,8 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == Constants.RequestCodes.RECEIVE_DATA_FROM_FULL_SCREEN_MODE &&
-            resultCode == Activity.RESULT_OK) {
+            resultCode == Activity.RESULT_OK
+        ) {
             val selectedImages: ArrayList<Image> =
                 data!!
                     .getParcelableArrayListExtra(CustomSelectorConstants.NEW_SELECTED_IMAGES)!!
@@ -156,11 +171,11 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
      * Set up bottom layout
      */
     private fun setUpBottomLayout() {
-        val done : Button = findViewById(R.id.upload)
+        val done: Button = findViewById(R.id.upload)
         done.setOnClickListener { onDone() }
 
-        val notForUpload : Button = findViewById(R.id.not_for_upload)
-        notForUpload.setOnClickListener{ onClickNotForUpload() }
+        val notForUpload: Button = findViewById(R.id.not_for_upload)
+        notForUpload.setOnClickListener { onClickNotForUpload() }
     }
 
     /**
@@ -168,7 +183,7 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
      */
     private fun onClickNotForUpload() {
         val selectedImages = viewModel.selectedImages.value
-        if(selectedImages.isNullOrEmpty()) {
+        if (selectedImages.isNullOrEmpty()) {
             markAsNotForUpload(arrayListOf())
             return
         }
@@ -207,7 +222,7 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
     private fun insertIntoNotForUpload(images: ArrayList<Image>) {
         scope.launch {
             var allImagesAlreadyNotForUpload = true
-            images.forEach{
+            images.forEach {
                 val imageSHA1 = CustomSelectorUtils.getImageSHA1(
                     it.uri,
                     ioDispatcher,
@@ -254,7 +269,7 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
             }
 
             imageFragment!!.refresh()
-            val bottomLayout : ConstraintLayout = findViewById(R.id.bottom_layout)
+            val bottomLayout: ConstraintLayout = findViewById(R.id.bottom_layout)
             bottomLayout.visibility = View.GONE
         }
     }
@@ -270,8 +285,8 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
      * Change the title of the toolbar.
      */
     private fun changeTitle(title: String) {
-        val titleText =  findViewById<TextView>(R.id.title)
-        if(titleText != null) {
+        val titleText = findViewById<TextView>(R.id.title)
+        if (titleText != null) {
             titleText.text = title
         }
     }
@@ -280,7 +295,7 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
      * Set up the toolbar, back listener, done listener.
      */
     private fun setUpToolbar() {
-        val back : ImageButton = findViewById(R.id.back)
+        val back: ImageButton = findViewById(R.id.back)
         back.setOnClickListener { onBackPressed() }
     }
 
@@ -303,24 +318,27 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
     /**
      * override Selected Images Change, update view model selected images and change UI.
      */
-    override fun onSelectedImagesChanged(selectedImages: ArrayList<Image>,
-                                         selectedNotForUploadImages: Int) {
+    override fun onSelectedImagesChanged(
+        selectedImages: ArrayList<Image>,
+        selectedNotForUploadImages: Int
+    ) {
         viewModel.selectedImages.value = selectedImages
 
         if (selectedNotForUploadImages > 0) {
-            upload.isEnabled = false
-            upload.alpha = 0.5f
+            bottomSheetBinding.upload.isEnabled = false
+            bottomSheetBinding.upload.alpha = 0.5f
         } else {
-            upload.isEnabled = true
-            upload.alpha = 1f
+            bottomSheetBinding.upload.isEnabled = true
+            bottomSheetBinding.upload.alpha = 1f
         }
 
-        not_for_upload.text = when (selectedImages.size == selectedNotForUploadImages) {
+        bottomSheetBinding.notForUpload.text =
+            when (selectedImages.size == selectedNotForUploadImages) {
                 true -> getString(R.string.unmark_as_not_for_upload)
                 else -> getString(R.string.mark_as_not_for_upload)
-        }
+            }
 
-        val bottomLayout : ConstraintLayout = findViewById(R.id.bottom_layout)
+        val bottomLayout: ConstraintLayout = findViewById(R.id.bottom_layout)
         bottomLayout.visibility = if (selectedImages.isEmpty()) View.GONE else View.VISIBLE
     }
 
@@ -334,7 +352,7 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
         selectedImages: ArrayList<Image>
     ) {
         val intent = Intent(this, ZoomableActivity::class.java)
-        intent.putExtra(CustomSelectorConstants.PRESENT_POSITION, position);
+        intent.putExtra(CustomSelectorConstants.PRESENT_POSITION, position)
         intent.putParcelableArrayListExtra(
             CustomSelectorConstants.TOTAL_SELECTED_IMAGES,
             selectedImages
@@ -349,8 +367,8 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
      */
     fun onDone() {
         val selectedImages = viewModel.selectedImages.value
-        if(selectedImages.isNullOrEmpty()) {
-           finishPickImages(arrayListOf())
+        if (selectedImages.isNullOrEmpty()) {
+            finishPickImages(arrayListOf())
             return
         }
         var i = 0
@@ -384,7 +402,7 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
     override fun onBackPressed() {
         super.onBackPressed()
         val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
-        if(fragment != null && fragment is FolderFragment){
+        if (fragment != null && fragment is FolderFragment) {
             isImageFragmentOpen = false
             changeTitle(getString(R.string.custom_selector_title))
         }
@@ -395,7 +413,7 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
      * If image fragment is open, overwrite its attributes otherwise discard the values.
      */
     override fun onDestroy() {
-        if(isImageFragmentOpen){
+        if (isImageFragmentOpen) {
             prefs.edit().putLong(FOLDER_ID, bucketId).putString(FOLDER_NAME, bucketName).apply()
         } else {
             prefs.edit().remove(FOLDER_ID).remove(FOLDER_NAME).apply()
@@ -404,8 +422,8 @@ class CustomSelectorActivity: BaseActivity(), FolderClickListener, ImageSelectLi
     }
 
     companion object {
-        const val FOLDER_ID : String = "FolderId"
-        const val FOLDER_NAME : String = "FolderName"
-        const val ITEM_ID : String = "ItemId"
+        const val FOLDER_ID: String = "FolderId"
+        const val FOLDER_NAME: String = "FolderName"
+        const val ITEM_ID: String = "ItemId"
     }
 }
