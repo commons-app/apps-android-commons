@@ -39,14 +39,12 @@ class WelcomeActivityUnitTest {
     }
 
     /**
-     * Checks if the activity is not null and member variables are not null
+     * Checks if the activity is not null
      */
     @Test
     @Throws(Exception::class)
     fun checkActivityNotNull() {
         assertNotNull(activity)
-        assertNotNull(activity.pager)
-        assertNotNull(activity.indicator)
     }
 
     /**
