@@ -16,7 +16,9 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/miniscule_margin"
-      android:layout_margin="@dimen/very_tiny_gap"/>
+      android:layout_margin="@dimen/very_tiny_gap">
+
+  </fr.free.nrw.commons.campaigns.CampaignView>
 
   <LinearLayout
     android:id="@+id/limited_connection_enabled_layout"
@@ -46,15 +48,24 @@
       android:textColor="@android:color/white"
       android:textSize="@dimen/description_text_size"
       android:text="@string/limited_connection_explanation"/>
+
   </LinearLayout>
 
   <FrameLayout
+    android:id="@+id/explore_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:visibility="visible">
+
+    <FrameLayout
       android:id="@+id/root_frame"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_marginTop="@dimen/miniscule_margin"
-      android:background="#000"
-      >
+      android:background="#000">
+
+    </FrameLayout>
   </FrameLayout>
 
 </LinearLayout>

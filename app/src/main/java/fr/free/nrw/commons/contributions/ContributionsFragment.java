@@ -196,6 +196,10 @@ public class ContributionsFragment
 
     @Override
     public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
+
+        // Removing contributions menu items for ProfileActivity
+        if(getActivity() instanceof ProfileActivity){ return;}
+
         inflater.inflate(R.menu.contribution_activity_notification_menu, menu);
 
         MenuItem notificationsMenuItem = menu.findItem(R.id.notifications);
@@ -339,23 +343,23 @@ public class ContributionsFragment
         if (fragment.isAdded() && otherFragment != null) {
             transaction.hide(otherFragment);
             transaction.show(fragment);
-            transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
+            transaction.addToBackStack(tag);
             transaction.commit();
             getChildFragmentManager().executePendingTransactions();
         } else if (fragment.isAdded() && otherFragment == null) {
             transaction.show(fragment);
-            transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
+            transaction.addToBackStack(tag);
             transaction.commit();
             getChildFragmentManager().executePendingTransactions();
         }else if (!fragment.isAdded() && otherFragment != null ) {
             transaction.hide(otherFragment);
             transaction.add(R.id.root_frame, fragment, tag);
-            transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
+            transaction.addToBackStack(tag);
             transaction.commit();
             getChildFragmentManager().executePendingTransactions();
         } else if (!fragment.isAdded()) {
             transaction.replace(R.id.root_frame, fragment, tag);
-            transaction.addToBackStack(CONTRIBUTION_LIST_FRAGMENT_TAG);
+            transaction.addToBackStack(tag);
             transaction.commit();
             getChildFragmentManager().executePendingTransactions();
         }
@@ -636,7 +640,7 @@ public class ContributionsFragment
     @Override
     public void showDetail(int position, boolean isWikipediaButtonDisplayed) {
         if (mediaDetailPagerFragment == null || !mediaDetailPagerFragment.isVisible()) {
-            mediaDetailPagerFragment = new MediaDetailPagerFragment();
+            mediaDetailPagerFragment = new MediaDetailPagerFragment(false, true);
             if(isUserProfile) {
                 ((ProfileActivity)getActivity()).setScroll(false);
             }
