@@ -21,7 +21,7 @@
   <string name="commons_facebook">Halaman Facebook Commons</string>
   <string name="commons_github">Kode Sumber Commons di Github</string>
   <string name="commons_logo">Logo Commons</string>
-  <string name="commons_website">Situs Commons</string>
+  <string name="commons_website">Situs Web Commons</string>
   <string name="exit_location_picker">Keluar dari pemilih lokasi</string>
   <string name="submit">Kirim</string>
   <string name="add_another_description">Tambahkan deskripsi lain</string>
@@ -280,6 +280,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Beri rating</string>
   <string name="about_faq">Pertanyaan Umum</string>
+  <string name="user_guide">Panduan pengguna</string>
   <string name="welcome_skip_button">Lewati Tutorial</string>
   <string name="no_internet">Internet tidak terhubung</string>
   <string name="error_notifications">Galat penyampaian pemberitahuan</string>
@@ -306,6 +307,7 @@
   <string name="title_activity_search">Cari</string>
   <string name="search_recent_header">Pencarian terkini:</string>
   <string name="provider_searches">Kueri pencarian terkini</string>
+  <string name="provider_recent_languages">Kueri bahasa terbaru</string>
   <string name="error_loading_categories">Terjadi kesalah ketika memuat kategori-kategori.</string>
   <string name="error_loading_depictions">Terjadi kesalahan saat memuat gambaran.</string>
   <string name="search_tab_title_media">Media</string>
@@ -510,6 +512,9 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Tidak bisa menambahkan kategori.</string>
   <string name="category_edit_button_text">Perbarui kategori</string>
+  <string name="depictions_edit_helper_make_edit_toast">Mencoba memperbarui penggambaran.</string>
+  <string name="depictions_edit_helper_show_edit_title">Sunting penggambaran</string>
+  <string name="depictions_edit_helper_edit_message_else">Tak dapat menambahkan penggambaran.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Mencoba memperbarui koordinat.</string>
   <string name="coordinates_edit_helper_show_edit_title">Pembaruan koordinat</string>
   <string name="description_edit_helper_show_edit_title">Pembaruan deskripsi</string>
@@ -642,7 +647,7 @@
   <string name="done">Selesai</string>
   <string name="back">Kembali</string>
   <string name="welcome_custom_picture_selector_text">Selamat datang di Pemilih Gambar Kustom</string>
-  <string name="custom_selector_info_text1" fuzzy="true">Alat pemilih ini menunjukkan perbedaan gambar yang sudah ada di Commons.</string>
+  <string name="custom_selector_info_text1">Alat pemilih ini menunjukkan gambar mana yang sudah Anda unggah ke Commons.</string>
   <string name="custom_selector_info_text2">Berbeda dengan gambar di sebelah kiri, gambar di sebelah kanan memiliki logo Commons yang menandakan gambarnya sudah diunggah.\n  Sentuh dan tahan untuk pratinjau gambar.</string>
   <string name="welcome_custom_selector_ok">Bagus</string>
   <string name="custom_selector_already_uploaded_image_text">Gambar ini sudah diunggah di Commons.</string>
@@ -658,6 +663,7 @@
   <string name="contributions_of_user">Kontribusi Pengguna: %s</string>
   <string name="achievements_of_user">Pencapaian Pengguna: %s</string>
   <string name="menu_view_user_page">Lihat halaman pengguna</string>
+  <string name="edit_depictions">Sunting penggambaran</string>
   <string name="edit_categories">Sunting kategori</string>
   <string name="advanced_options">Opsi Lanjutan</string>
   <string name="advanced_query_info_text">Anda bisa menyesuaikan kueri Sekitar. Jika Anda mendapatkan galat, atur ulang dan terapkan.</string>
@@ -680,8 +686,17 @@
   <string name="error_feedback">Galat saat mengirim umpan balik</string>
   <string name="enter_description">Apa tanggapan Anda?</string>
   <string name="your_feedback">Umpan balik Anda</string>
+  <string name="mark_as_not_for_upload">Tandai sebagai bukan untuk diunggah</string>
+  <string name="unmark_as_not_for_upload">Hapus tanda tidak untuk diunggah</string>
+  <string name="show_already_actioned_pictures">Tampilkan gambar yang sudah ditindaklanjuti</string>
+  <string name="hiding_already_actioned_pictures">Sembunyikan gambar yang sudah ditindaklanjuti</string>
+  <string name="no_more_images_found">Tidak ada lagi gambar ditemukan</string>
+  <string name="this_image_is_already_uploaded">Gambar ini sudah diunggah</string>
+  <string name="can_not_select_this_image_for_upload">Tidak dapat memilih gambar ini untuk diunggah</string>
+  <string name="menu_view_report">Laporkan</string>
   <string name="report_violation">Laporkan pelanggaran</string>
   <string name="report_user">Laporkan pengguna ini</string>
   <string name="report_content">Laporkan konten ini</string>
   <string name="request_user_block">Buat permohonan pemblokiran pengguna ini</string>
+  <string name="welcome_to_full_screen_mode_text">Selamat datang di Mode Pemilihan Layar Penuh</string>
 </resources>

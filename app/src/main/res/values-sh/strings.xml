@@ -18,9 +18,9 @@
     <item quantity="few">%1$d datoteke se otpremaju</item>
     <item quantity="other">%1$d datoteka se otprema</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
+    <item quantity="few">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
@@ -180,6 +180,7 @@
   <string name="welcome_image_llamas">Ljame</string>
   <string name="welcome_image_rainbow_bridge">Dugin most</string>
   <string name="welcome_image_tulip">Tulipan</string>
+  <string name="welcome_image_sydney_opera_house">Sidnejska opera</string>
   <string name="cancel">Otkaži</string>
   <string name="navigation_drawer_open">Otvori</string>
   <string name="navigation_drawer_close">Zatvori</string>
@@ -193,6 +194,10 @@
   <string name="navigation_item_info">Uputstva</string>
   <string name="navigation_item_notification">Obavještenja</string>
   <string name="navigation_item_review">Ocijeni</string>
+  <string name="no_description_found">nema opisa</string>
+  <string name="nearby_info_menu_commons_article">Stranica datoteke na Ostavi</string>
+  <string name="nearby_info_menu_wikidata_article">Stavka na Wikipodacima</string>
+  <string name="nearby_info_menu_wikipedia_article">Članak na Wikipediji</string>
   <string name="use_external_storage">Sačuvaj snimke unutar priloga</string>
   <string name="use_external_storage_summary">Spremanje napravljenih slika u privitku s kamerom na Vašem uređaju</string>
   <string name="login_to_your_account">Prijavite se s svojim računom</string>
