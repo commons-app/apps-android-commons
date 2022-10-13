@@ -156,7 +156,7 @@
   <string name="provider_categories">Pred kratkim uporabljene kategorije</string>
   <string name="waiting_first_sync">Čakam na prvo sinhronizacijo ...</string>
   <string name="no_uploads_yet">Naložili niste še nobene fotografije.</string>
-  <string name="menu_retry_upload">Poskusi znova</string>
+  <string name="menu_retry_upload">Poskusite znova</string>
   <string name="menu_cancel_upload">Prekliči</string>
   <string name="media_upload_policy">Ob objavi te slike izjavljam, da je slika moje lastno delo, da ne vsebuje avtorsko zavarovanega gradiva ali sebka in da je tudi drugače skladna s pravili projekta &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Prenesi</string>
@@ -301,7 +301,7 @@
   <string name="about_translate_message">Izberite jezike, za katere želite pošiljati prevode</string>
   <string name="about_translate_proceed">Nadaljuj</string>
   <string name="about_translate_cancel">Prekliči</string>
-  <string name="retry">Poskusi znova</string>
+  <string name="retry">Poskusite znova</string>
   <string name="showcase_view_whole_nearby_activity">To so kraji blizu vas, katerih članke v Wikipediji je treba opremiti s sliko.\n\nKlik gumba \'PREIŠČI OBMOČJE\' zaklene zemljevid in začne iskanje v bližini zaklenjenega mesta.</string>
   <string name="showcase_view_needs_photo">Ta kraj potrebuje fotografijo</string>
   <string name="showcase_view_has_photo">Ta kraj že ima fotografijo.</string>
