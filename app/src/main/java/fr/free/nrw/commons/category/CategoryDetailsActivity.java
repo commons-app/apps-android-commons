@@ -86,11 +86,11 @@ public class CategoryDetailsActivity extends BaseActivity
             parentCategoriesFragment.setArguments(arguments);
         }
         fragmentList.add(categoriesMediaFragment);
-        titleList.add("MEDIA");
+        titleList.add(R.string.media);
         fragmentList.add(subCategoryListFragment);
-        titleList.add("SUBCATEGORIES");
+        titleList.add(R.string.subcategories);
         fragmentList.add(parentCategoriesFragment);
-        titleList.add("PARENT CATEGORIES");
+        titleList.add(R.string.parent_categories);
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
 
