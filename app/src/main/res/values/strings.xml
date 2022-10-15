@@ -751,4 +751,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="welcome_to_full_screen_mode_text">Welcome to Full-Screen Selection Mode</string>
   <string name="full_screen_mode_zoom_info">Use two fingers to zoom in and out.</string>
   <string name="full_screen_mode_features_info">Swipe fast and long to perform these actions: \n- Left/Right: Go to previous/next \n- Up: Select\n- Down: Mark as not for upload.</string>
+  <string name="media">MEDIA</string>
+  <string name="subcategories">SUBCATEGORIES</string>
+  <string name="parent_categories">PARENT CATEGORIES</string>
 </resources>
