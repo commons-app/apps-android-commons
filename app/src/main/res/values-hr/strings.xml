@@ -272,6 +272,7 @@
   <string name="delete">Izbriši</string>
   <string name="Profile">Podatci o suradnici/suradniku</string>
   <string name="statistics">Statistike</string>
+  <string name="statistics_thanks">Primljeno zahvala</string>
   <string name="level">Razina</string>
   <string name="error_occurred">Došlo je do pogrješke!</string>
   <string name="notifications_channel_name_all">Obavijesti Zajedničkoga poslužitelja</string>
