@@ -96,6 +96,8 @@
   <string name="menu_from_camera">Take photo</string>
   <string name="menu_nearby">Nearby</string>
   <string name="provider_contributions">My uploads</string>
+  <string name="menu_copy_link">Copy Link</string>
+  <string name="menu_link_copied">The link has copied to the clipboard</string>
   <string name="menu_share">Share</string>
   <string name="menu_view_file_page">View file page</string>
   <string name="share_title_hint">Caption (Required)</string>

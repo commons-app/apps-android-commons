@@ -30,6 +30,8 @@
   <string name="menu_from_gallery">从图库</string>
   <string name="menu_from_camera">拍照</string>
   <string name="provider_contributions">我的上传</string>
+  <string name="menu_copy_link">复制链接</string>
+  <string name="menu_link_copied">链接已复制到剪贴板</string>
   <string name="menu_share">分享</string>
   <string name="menu_open_in_browser">在浏览器中查看</string>
   <string name="share_title_hint">标题</string>
