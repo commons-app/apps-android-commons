@@ -221,12 +221,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @OnClick(R.id.btn_next)
     public void onNextButtonClicked() {
-        presenter.verifyImageQuality(callback.getIndexInViewFlipper(this));
+        presenter.verifyImageQuality(callback.getIndexInViewFlipper(this)+1);
     }
 
     @OnClick(R.id.btn_previous)
     public void onPreviousButtonClicked() {
-        callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
+        callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this)-1);
     }
 
     @OnClick(R.id.btn_add_description)
@@ -320,7 +320,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @Override
     public void onImageValidationSuccess() {
-        callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
+        callback.onNextButtonClicked(callback.getIndexInViewFlipper(this)+1);
     }
 
     /**
