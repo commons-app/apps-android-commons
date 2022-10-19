@@ -64,7 +64,7 @@
   <string name="forgot_password">Glemt passordet?</string>
   <string name="signup">Registrer deg</string>
   <string name="logging_in_title">Logger inn</string>
-  <string name="logging_in_message">Vennligst vent …</string>
+  <string name="logging_in_message">Vennligst vent…</string>
   <string name="login_success">Innloggingen var vellykket!</string>
   <string name="login_failed">Innloggingen feilet!</string>
   <string name="upload_failed">Filen ble ikke funnet. Forsøk med en annen fil.</string>
@@ -98,7 +98,7 @@
   <string name="login_failed_network">Innlogging feilet - nettverksproblem</string>
   <string name="login_failed_throttled">For mange misslykkede forsøk. Vennligst prøv igjen om noen få minutter.</string>
   <string name="login_failed_blocked">Beklager, denne brukeren har blitt blokkert på Commons</string>
-  <string name="login_failed_2fa_needed">Du må oppgi koden din for totrinns pålogging.</string>
+  <string name="login_failed_2fa_needed">Du må oppgi koden din for tofaktorautentisering.</string>
   <string name="login_failed_generic">Innlogging feilet</string>
   <string name="share_upload_button">Last opp</string>
   <string name="multiple_share_base_title">Navngi dette settet</string>
@@ -429,7 +429,7 @@
   <string name="menu_option_read" fuzzy="true">Vis arkiverte</string>
   <string name="menu_option_unread">Vis uleste</string>
   <string name="error_occurred_in_picking_images">Feil under utvalg av bilder</string>
-  <string name="please_wait">Vent…</string>
+  <string name="please_wait">Vennligst vent…</string>
   <string name="images_featured_explanation">Fremhevede bilder er bilder fra dyktige fotografer og illustratører som fellesskapet på Wikimedia Commons har utpekt som blant de bildene med høyest kvalitet på nettstedet.</string>
   <string name="images_via_nearby_explanation">Bilder lastet opp via steder i nærheten er bilder som lastes opp ved å oppdage steder på kartet.</string>
   <string name="thanks_received_explanation">Denne funksjonen lar brukere sende takk til brukere som gjør nyttige endringer – ved å bruke en liten takkelenke på historikksider eller diffsider.</string>
