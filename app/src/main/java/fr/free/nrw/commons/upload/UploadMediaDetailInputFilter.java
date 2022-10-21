@@ -98,13 +98,11 @@ public class UploadMediaDetailInputFilter implements InputFilter {
                 return dest;
             }
 
-            return removeBlocklisted(source);
-        }
-        if (checkTrailingWhitespace(source)) {
-            if (start == dstart) {
-                return dest;
+            if (checkTrailingWhitespace(source)) {
+                source = removeTrailingWhitespace(source);
             }
-            return removeTrailingWhitespace(source);
+
+            return removeBlocklisted(source);
         }
         return null;
     }
