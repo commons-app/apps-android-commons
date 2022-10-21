@@ -659,7 +659,7 @@
   <string name="menu_view_item_page">Voir la page de l’élément</string>
   <string name="app_ui_language">Langue d’interface utilisateur de l’application</string>
   <string name="remove">Supprime une légende et une description</string>
-  <string name="read_help_link">En savoir plus</string>
+  <string name="read_help_link">Lire la suite</string>
   <string name="media_detail_in_all_languages">Dans toutes les langues</string>
   <string name="choose_a_location">Choisir un lieu</string>
   <string name="pan_and_zoom_to_adjust">Descendre et zoomer pour ajuster</string>
