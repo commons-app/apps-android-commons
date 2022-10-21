@@ -81,7 +81,7 @@ public class UploadMediaDetailInputFilter implements InputFilter {
     }
 
     /**
-     * Filters out any blocklisted characters.
+     * Filters out any blocklisted characters and trailing white spaces.
      * @param source {@inheritDoc}
      * @param start {@inheritDoc}
      * @param end {@inheritDoc}
@@ -93,13 +93,12 @@ public class UploadMediaDetailInputFilter implements InputFilter {
     @Override
     public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart,
         int dend) {
+        if (checkTrailingWhitespace(source)) {
+            source = removeTrailingWhitespace(source);
+        }
         if (checkBlocklisted(source)) {
             if (start == dstart) {
                 return dest;
-            }
-
-            if (checkTrailingWhitespace(source)) {
-                source = removeTrailingWhitespace(source);
             }
 
             return removeBlocklisted(source);
