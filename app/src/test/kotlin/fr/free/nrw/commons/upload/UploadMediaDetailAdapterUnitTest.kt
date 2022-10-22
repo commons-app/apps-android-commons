@@ -247,4 +247,16 @@ class UploadMediaDetailAdapterUnitTest {
         verify(adapterView, times(3)).adapter
     }
 
+    @Test
+    fun testRemoveTrailingWhitespace() {
+        val test1 = "test  "
+        val expected1 = "test"
+        Assert.assertTrue(viewHolder.checkTrailingWhitespace(test1));
+        Assert.assertEquals(expected1, viewHolder.removeTrailingWhitespace(test1))
+
+        val test2 = "test test "
+        val expected2 = "test test"
+        Assert.assertTrue(viewHolder.checkTrailingWhitespace(test2));
+        Assert.assertEquals(expected2, viewHolder.removeTrailingWhitespace(test2))
+    }
 }

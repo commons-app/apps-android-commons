@@ -56,32 +56,7 @@ public class UploadMediaDetailInputFilter implements InputFilter {
     }
 
     /**
-     * Checks if the source text contains trailing whitespace
-     * @param source input text
-     * @return contains trailing whitespace
-     */
-    private Boolean checkTrailingWhitespace(final CharSequence source) {
-        int len = source.length();
-        if (len == 0) {
-            return false;
-        }
-        return Character.isWhitespace(source.charAt(len - 1));
-    }
-
-    /**
-     * Removes any trailing whitespace from the source text.
-     * @param source input text
-     * @return a character sequence without trailing whitespace
-     */
-    private CharSequence removeTrailingWhitespace(CharSequence source) {
-        while (checkTrailingWhitespace(source)) {
-            source = source.subSequence(0, source.length() - 1);
-        }
-        return source;
-    }
-
-    /**
-     * Filters out any blocklisted characters and trailing white spaces.
+     * Filters out any blocklisted characters.
      * @param source {@inheritDoc}
      * @param start {@inheritDoc}
      * @param end {@inheritDoc}
@@ -93,16 +68,12 @@ public class UploadMediaDetailInputFilter implements InputFilter {
     @Override
     public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart,
         int dend) {
-        if (checkBlocklisted(source) || checkTrailingWhitespace(source)) {
-
-            if (checkBlocklisted(source)) {
-                if (start == dstart) {
-                    return dest;
-                }
-                source = removeBlocklisted(source);
+        if (checkBlocklisted(source)) {
+            if (start == dstart) {
+                return dest;
             }
 
-            return removeTrailingWhitespace(source);
+            return removeBlocklisted(source);
         }
         return null;
     }

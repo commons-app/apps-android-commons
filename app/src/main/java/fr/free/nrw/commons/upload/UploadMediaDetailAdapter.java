@@ -197,7 +197,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
 
             removeButton.setOnClickListener(v -> removeDescription(uploadMediaDetail, position));
             captionListener = new AbstractTextWatcher(
-                captionText -> uploadMediaDetails.get(position).setCaptionText(captionText));
+                captionText -> uploadMediaDetails.get(position).setCaptionText(removeTrailingWhitespace(captionText)));
             descriptionListener = new AbstractTextWatcher(
                 descriptionText -> uploadMediaDetails.get(position).setDescriptionText(descriptionText));
             captionItemEditText.addTextChangedListener(captionListener);
@@ -417,6 +417,31 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                         selectedLanguages);
                 languageHistoryListView.setAdapter(recentLanguagesAdapter);
             }
+        }
+
+        /**
+         * Checks if the source text contains trailing whitespace
+         * @param source input text
+         * @return contains trailing whitespace
+         */
+        public Boolean checkTrailingWhitespace(String source) {
+            int len = source.length();
+            if (len == 0) {
+                return false;
+            }
+            return Character.isWhitespace(source.charAt(len - 1));
+        }
+
+        /**
+         * Removes any trailing whitespace from the source text.
+         * @param source input text
+         * @return a character sequence without trailing whitespace
+         */
+        public String removeTrailingWhitespace(String source) {
+            while (checkTrailingWhitespace(source)) {
+                source = source.substring(0, source.length() - 1);
+            }
+            return source;
         }
     }
 
