@@ -75,7 +75,7 @@ public class UploadMediaDetailInputFilter implements InputFilter {
      */
     private CharSequence removeTrailingWhitespace(CharSequence source) {
         while (checkTrailingWhitespace(source)) {
-            source = source.subSequence(0, source.length());
+            source = source.subSequence(0, source.length() - 1);
         }
         return source;
     }
@@ -93,15 +93,16 @@ public class UploadMediaDetailInputFilter implements InputFilter {
     @Override
     public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart,
         int dend) {
-        if (checkTrailingWhitespace(source)) {
-            source = removeTrailingWhitespace(source);
-        }
-        if (checkBlocklisted(source)) {
-            if (start == dstart) {
-                return dest;
+        if (checkBlocklisted(source) || checkTrailingWhitespace(source)) {
+
+            if (checkBlocklisted(source)) {
+                if (start == dstart) {
+                    return dest;
+                }
+                source = removeBlocklisted(source);
             }
 
-            return removeBlocklisted(source);
+            return removeTrailingWhitespace(source);
         }
         return null;
     }

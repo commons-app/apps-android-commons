@@ -125,4 +125,16 @@ class UploadMediaDetailInputFilterTest {
         }
         Assert.assertEquals(builder.toString(), expected.toString())
     }
+
+    @Test
+    fun testFilterTrailingWhitespace() {
+        val builder = SpannableStringBuilder("")
+        builder.filters = arrayOf(UploadMediaDetailInputFilter())
+
+        val test: CharSequence = "test  "
+        val expected = "test"
+        builder.insert(0, test)
+        Assert.assertEquals(expected, builder.toString())
+        builder.clear()
+    }
 }
