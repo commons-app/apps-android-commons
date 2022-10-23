@@ -1,31 +1,39 @@
 package fr.free.nrw.commons.upload
 
+import android.net.Uri
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaPresenter
 import fr.free.nrw.commons.utils.ImageUtils.*
+import io.github.coordinates2country.Coordinates2Country
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
+import junit.framework.TestCase.assertEquals
 import org.junit.Before
 import org.junit.Test
-import org.mockito.ArgumentMatchers
+import org.junit.runner.RunWith
+import org.mockito.*
 import org.mockito.ArgumentMatchers.eq
-import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.verify
-import org.mockito.MockitoAnnotations
+import org.powermock.api.mockito.PowerMockito
+import org.powermock.core.classloader.annotations.PrepareForTest
+import org.powermock.modules.junit4.PowerMockRunner
+import java.io.File
 import java.util.*
 
 
 /**
  * The class contains unit test cases for UploadMediaPresenter
  */
+@RunWith(PowerMockRunner::class)
+@PrepareForTest(Coordinates2Country::class)
 class UploadMediaPresenterTest {
     @Mock
     internal lateinit var repository: UploadRepository
@@ -57,6 +65,9 @@ class UploadMediaPresenterTest {
 
     @Mock
     private lateinit var jsonKvStore: JsonKvStore
+
+    @Mock
+    private lateinit var file: File
 
     /**
      * initial setup unit test environment
@@ -239,4 +250,41 @@ class UploadMediaPresenterTest {
         verify(view).showSimilarImageFragment("original", "possible", similar)
     }
 
+    @Test
+    fun setCorrectCountryCodeForReceivedImage() {
+
+        PowerMockito.mockStatic(Coordinates2Country::class.java)
+
+        whenever(
+            Coordinates2Country.country(ArgumentMatchers.anyDouble(), ArgumentMatchers.anyDouble())
+        ).thenReturn("Germany")
+
+
+        val germanyAsPlace = Place(null,null, null, null, LatLng(50.1, 10.2, 1.0f), null, null, null, true)
+        germanyAsPlace.isMonument = true
+
+        val item: Observable<UploadItem> = Observable.just(UploadItem(Uri.EMPTY, null, null, germanyAsPlace, 0, null, null, null))
+
+        whenever(
+            repository.preProcessImage(
+                ArgumentMatchers.any(UploadableFile::class.java),
+                ArgumentMatchers.any(Place::class.java),
+                ArgumentMatchers.any(UploadMediaPresenter::class.java)
+            )
+        ).thenReturn(item)
+
+        uploadMediaPresenter.receiveImage(uploadableFile, germanyAsPlace)
+        verify(view).showProgress(true)
+        testScheduler.triggerActions()
+
+        val captor: ArgumentCaptor<UploadItem> = ArgumentCaptor.forClass(UploadItem::class.java)
+        verify(view).onImageProcessed(
+            captor.capture(),
+            ArgumentMatchers.any(Place::class.java)
+        )
+
+        assertEquals("Exptected contry code", "de", captor.value.countryCode);
+
+        verify(view).showProgress(false)
+    }
 }
