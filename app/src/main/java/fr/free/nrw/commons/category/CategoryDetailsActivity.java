@@ -2,8 +2,10 @@ package fr.free.nrw.commons.category;
 
 import static fr.free.nrw.commons.category.CategoryClientKt.CATEGORY_PREFIX;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -65,7 +67,22 @@ public class CategoryDetailsActivity extends BaseActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTabs();
         setPageTitle();
+
+        if (null != savedInstanceState) {
+            categoryName = savedInstanceState.getString("categoryName");
+        }
     }
+
+    /**
+     * Save categoryName
+     * @param outState
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("categoryName", categoryName);
+    }
+
 
     /**
      * This activity contains 3 tabs and a viewpager. This method is used to set the titles of tab,
