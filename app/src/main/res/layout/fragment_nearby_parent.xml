@@ -66,12 +66,13 @@
             <com.mapbox.mapboxsdk.maps.MapView
                 android:id="@+id/map_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent" >
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent" />
+                <View
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:background="@android:color/transparent" />
+            </com.mapbox.mapboxsdk.maps.MapView>
 
             <androidx.appcompat.widget.AppCompatTextView
               android:id="@+id/tv_attribution"
@@ -189,6 +190,14 @@
         app:layout_anchor="@id/fab_plus"
         app:layout_anchorGravity="center_horizontal" />
 
+    <View
+      android:id="@+id/empty_view2"
+      android:layout_width="56dp"
+      android:layout_height="302dp"
+      android:visibility="invisible"
+      app:layout_anchor="@id/fab_plus"
+      app:layout_anchorGravity="center_horizontal" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_camera"
         android:layout_width="wrap_content"
@@ -218,5 +227,20 @@
         app:layout_anchorGravity="center_horizontal"
         app:pressedTranslationZ="@dimen/medium_height"
         app:srcCompat="@drawable/ic_photo_white_24dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+      android:id="@+id/fab_custom_gallery"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:scaleType="center"
+      android:tint="@color/button_blue"
+      android:visibility="invisible"
+      app:backgroundTint="@color/main_background_light"
+      app:elevation="@dimen/dimen_6"
+      app:fabSize="mini"
+      app:layout_anchor="@id/empty_view2"
+      app:layout_anchorGravity="center_horizontal"
+      app:pressedTranslationZ="@dimen/medium_height"
+      app:srcCompat="@drawable/ic_custom_image_picker" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

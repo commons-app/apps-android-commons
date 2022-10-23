@@ -188,6 +188,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @BindView(R.id.fl_container_nearby_children)
     FrameLayout flConainerNearbyChildren;
 
+    @BindView(R.id.fab_custom_gallery)
+    FloatingActionButton fabCustomGallery;
+
     @Inject LocationServiceManager locationManager;
     @Inject NearbyController nearbyController;
     @Inject @Named("default_preferences") JsonKvStore applicationKvStore;
@@ -1239,6 +1242,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         fabPlus.show();
         NearbyFABUtils.addAnchorToSmallFABs(fabGallery, getView().findViewById(R.id.empty_view).getId());
         NearbyFABUtils.addAnchorToSmallFABs(fabCamera, getView().findViewById(R.id.empty_view1).getId());
+
+        NearbyFABUtils.addAnchorToSmallFABs(fabCustomGallery, getView().findViewById(R.id.empty_view2).getId());
     }
 
     /**
@@ -1251,6 +1256,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             fabPlus.startAnimation(rotate_forward);
             fabCamera.startAnimation(fab_open);
             fabGallery.startAnimation(fab_open);
+
+            fabCustomGallery.startAnimation(fab_open);
+            fabCustomGallery.show();
+
             fabCamera.show();
             fabGallery.show();
             this.isFABsExpanded = true;
@@ -1267,6 +1276,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         fabCamera.hide();
         NearbyFABUtils.removeAnchorFromFAB(fabGallery);
         fabGallery.hide();
+
+        NearbyFABUtils.removeAnchorFromFAB(fabCustomGallery);
+        fabCustomGallery.hide();
+
     }
 
     /**
@@ -1278,6 +1291,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             fabPlus.startAnimation(rotate_backward);
             fabCamera.startAnimation(fab_close);
             fabGallery.startAnimation(fab_close);
+
+            fabCustomGallery.startAnimation(fab_close);
+            fabCustomGallery.hide();
+
             fabCamera.hide();
             fabGallery.hide();
             this.isFABsExpanded = false;
@@ -1824,6 +1841,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 controller.initiateGalleryPick(getActivity(), chipWlm.isChecked());
             }
         });
+
+        fabCustomGallery.setOnClickListener(view -> {
+            if (fabCustomGallery.isShown()) {
+                Timber.d("Gallery button tapped. Place: %s", selectedPlace.toString());
+                storeSharedPrefs(selectedPlace);
+                controller.initiateCustomGalleryPickWithPermission(getActivity());
+            }
+        });
+
     }
 
     private void storeSharedPrefs(final Place selectedPlace) {
