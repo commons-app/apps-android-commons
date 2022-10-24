@@ -177,7 +177,7 @@
     <View
         android:id="@+id/empty_view1"
         android:layout_width="56dp"
-        android:layout_height="174dp"
+        android:layout_height="285dp"
         android:visibility="invisible"
         app:layout_anchor="@id/fab_plus"
         app:layout_anchorGravity="center_horizontal" />
@@ -185,7 +185,7 @@
     <View
         android:id="@+id/empty_view"
         android:layout_width="56dp"
-        android:layout_height="46dp"
+        android:layout_height="174dp"
         android:visibility="invisible"
         app:layout_anchor="@id/fab_plus"
         app:layout_anchorGravity="center_horizontal" />
@@ -193,7 +193,7 @@
     <View
       android:id="@+id/empty_view2"
       android:layout_width="56dp"
-      android:layout_height="302dp"
+      android:layout_height="46dp"
       android:visibility="invisible"
       app:layout_anchor="@id/fab_plus"
       app:layout_anchorGravity="center_horizontal" />
