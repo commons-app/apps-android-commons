@@ -736,5 +736,5 @@
   <string name="request_user_block">Запит на блокування цього користувача</string>
   <string name="welcome_to_full_screen_mode_text">Ласкаво просимо до Повноекранного Режиму Вибору</string>
   <string name="full_screen_mode_zoom_info">Використовуйте два пальці для збільшення та зменшення масштабу.</string>
-  <string name="full_screen_mode_features_info">Швидко та довго гортайте, щоб виконати ці дії: \n- Left/Right: Перейти до попер/наст\n- Up: Виберіть\n- Down: Позначити як не для завантаження.</string>
+  <string name="full_screen_mode_features_info">Швидко та довго гортайте, щоб виконати ці дії: \n- Left/Right: Перейти до попер/наст\n- Up: Вибрати\n- Down: Позначити як не для завантаження.</string>
 </resources>
