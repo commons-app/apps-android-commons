@@ -24,7 +24,6 @@ import org.mockito.Mockito.verify
 import org.powermock.api.mockito.PowerMockito
 import org.powermock.core.classloader.annotations.PrepareForTest
 import org.powermock.modules.junit4.PowerMockRunner
-import java.io.File
 import java.util.*
 
 
@@ -64,9 +63,6 @@ class UploadMediaPresenterTest {
 
     @Mock
     private lateinit var jsonKvStore: JsonKvStore
-
-    @Mock
-    private lateinit var file: File
 
     /**
      * initial setup unit test environment
