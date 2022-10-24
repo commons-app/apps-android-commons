@@ -20,7 +20,6 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.*
-import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mockito.verify
 import org.powermock.api.mockito.PowerMockito
 import org.powermock.core.classloader.annotations.PrepareForTest
@@ -162,7 +161,7 @@ class UploadMediaPresenterTest {
         //Bad Picture test
         //Empty Caption test
         uploadMediaPresenter.handleImageResult(-7, uploadItem)
-        verify(view)?.showBadImagePopup(ArgumentMatchers.anyInt(), eq(uploadItem))
+        verify(view)?.showBadImagePopup(ArgumentMatchers.anyInt(), ArgumentMatchers.eq(uploadItem))
 
     }
 
@@ -253,15 +252,17 @@ class UploadMediaPresenterTest {
     @Test
     fun setCorrectCountryCodeForReceivedImage() {
 
+        val germanyAsPlace = Place(null,null, null, null, LatLng(50.1, 10.2, 1.0f), null, null, null, true)
+        germanyAsPlace.isMonument = true
+
         PowerMockito.mockStatic(Coordinates2Country::class.java)
 
         whenever(
-            Coordinates2Country.country(ArgumentMatchers.anyDouble(), ArgumentMatchers.anyDouble())
+            Coordinates2Country.country(
+                ArgumentMatchers.eq(germanyAsPlace.getLocation().latitude),
+                ArgumentMatchers.eq(germanyAsPlace.getLocation().longitude)
+            )
         ).thenReturn("Germany")
-
-
-        val germanyAsPlace = Place(null,null, null, null, LatLng(50.1, 10.2, 1.0f), null, null, null, true)
-        germanyAsPlace.isMonument = true
 
         val item: Observable<UploadItem> = Observable.just(UploadItem(Uri.EMPTY, null, null, germanyAsPlace, 0, null, null, null))
 
