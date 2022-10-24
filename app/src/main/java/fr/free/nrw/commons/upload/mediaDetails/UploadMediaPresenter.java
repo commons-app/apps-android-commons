@@ -56,7 +56,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     private Scheduler mainThreadScheduler;
 
     private final List<String> WLM_SUPPORTED_COUNTRIES= Arrays.asList("am","at","az","br","hr","sv","fi","fr","de","gh","in","ie","il","mk","my","mt","pk","pe","pl","ru","rw","si","es","se","tw","ug","ua","us");
-    private final Map<String, String> countryNamesAndCodes;
+    private Map<String, String> countryNamesAndCodes = null;
 
     @Inject
     public UploadMediaPresenter(UploadRepository uploadRepository,
@@ -68,23 +68,6 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
         this.ioScheduler = ioScheduler;
         this.mainThreadScheduler = mainThreadScheduler;
         compositeDisposable = new CompositeDisposable();
-
-        countryNamesAndCodes = getCountryNamesAndCodes();
-    }
-
-    private Map<String, String> getCountryNamesAndCodes(){
-        final Map<String, String> result = new HashMap<>();
-
-        final String[] isoCountries = Locale.getISOCountries();
-
-        for (final String isoCountry : isoCountries) {
-            result.put(
-                new Locale("en", isoCountry).getDisplayCountry(Locale.ENGLISH),
-                isoCountry
-            );
-        }
-
-        return result;
     }
 
     @Override
@@ -141,7 +124,32 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
 
     @Nullable
     private String reverseGeoCode(final LatLng latLng){
+        if(countryNamesAndCodes == null){
+            countryNamesAndCodes = getCountryNamesAndCodes();
+        }
         return countryNamesAndCodes.get(Coordinates2Country.country(latLng.getLatitude(), latLng.getLongitude()));
+    }
+
+    /**
+     * Creates HashMap containing all ISO countries 2-letter codes provided by <code>Locale.getISOCountries()</code>
+     * and their english names
+     *
+     * @return HashMap where Key is country english name and Value is 2-letter country code
+     * e.g. ["Germany":"DE", ...]
+     */
+    private Map<String, String> getCountryNamesAndCodes(){
+        final Map<String, String> result = new HashMap<>();
+
+        final String[] isoCountries = Locale.getISOCountries();
+
+        for (final String isoCountry : isoCountries) {
+            result.put(
+                new Locale("en", isoCountry).getDisplayCountry(Locale.ENGLISH),
+                isoCountry
+            );
+        }
+
+        return result;
     }
 
     /**
