@@ -55,6 +55,7 @@ class ImageUtilsTest {
             , ImageUtils.IMAGE_OK)
     }
 
+    // Refer: testCheckIfImageIsTooDarkCaseException()
     @Test
     fun testCheckIfProperImageIsTooDark() {
         Assert.assertEquals(ImageUtils.checkIfImageIsTooDark("src/test/resources/ImageTest/ok1.jpg")
@@ -67,6 +68,7 @@ class ImageUtilsTest {
             , ImageUtils.IMAGE_OK)
     }
 
+    // Refer: testCheckIfImageIsTooDarkCaseException()
     @Test
     fun testCheckIfDarkImageIsTooDark() {
         Assert.assertEquals(ImageUtils.checkIfImageIsTooDark("src/test/resources/ImageTest/dark1.jpg")
