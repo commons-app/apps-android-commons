@@ -11,6 +11,7 @@ import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.location.Location;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -29,6 +30,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.mapbox.android.core.location.LocationEngineCallback;
+import com.mapbox.android.core.location.LocationEngineResult;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
@@ -93,6 +96,10 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      */
     private String activity;
     /**
+     * location : location
+     */
+    private Location location;
+    /**
      * modifyLocationButton : button for start editing location
      */
     Button modifyLocationButton;
@@ -105,6 +112,10 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      */
     FloatingActionButton placeSelectedButton;
     /**
+     * cGPS: button for centre on location;
+     */
+    FloatingActionButton cGPS;
+    /**
      * droppedMarkerLayer : Layer for static screen
      */
     private Layer droppedMarkerLayer;
@@ -113,7 +124,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      */
     private ImageView shadow;
     /**
-     * largeToolbarText : textView of shadow
+     * cGPS : textView of centre to location
      */
     private TextView largeToolbarText;
     /**
@@ -154,6 +165,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
         addPlaceSelectedButton();
         addCredits();
         getToolbarUI();
+        addCentreOnGPSButton();
 
         if ("UploadActivity".equals(activity)) {
             placeSelectedButton.setVisibility(View.GONE);
@@ -162,6 +174,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
             largeToolbarText.setText(getResources().getString(R.string.image_location));
             smallToolbarText.setText(getResources().
                 getString(R.string.check_whether_location_is_correct));
+            cGPS.setVisibility(View.GONE);
         }
 
         mapView.onCreate(savedInstanceState);
@@ -275,6 +288,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
         largeToolbarText.setText(getResources().getString(R.string.choose_a_location));
         smallToolbarText.setText(getResources().getString(R.string.pan_and_zoom_to_adjust));
         bindListeners();
+        cGPS.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -338,6 +352,20 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
 
             // Set the component's render mode
             locationComponent.setRenderMode(RenderMode.NORMAL);
+
+            locationComponent.getLocationEngine().getLastLocation(
+                new LocationEngineCallback<LocationEngineResult>() {
+                    @Override
+                    public void onSuccess(LocationEngineResult result) {
+                        location = result.getLastLocation();
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+
+                    }
+                });
+
 
         }
     }
@@ -404,6 +432,16 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
             mapboxMap.getCameraPosition());
         setResult(AppCompatActivity.RESULT_OK, returningIntent);
         finish();
+    }
+    /**
+     * Centre the camera on the last saved location
+     */
+    private void addCentreOnGPSButton(){
+        cGPS = findViewById(R.id.centre_on_gps);
+        cGPS.setOnClickListener(view -> getCentre());
+    }
+    void getCentre() {
+        mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()),15.0));
     }
 
     @Override
