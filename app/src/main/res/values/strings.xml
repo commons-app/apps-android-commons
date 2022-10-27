@@ -295,7 +295,7 @@
 
   <string name="about_translate_cancel">Cancel</string>
   <string name="retry">Retry</string>
-  <string name="showcase_view_whole_nearby_activity">These are the places near you that need pictures to illustrate their Wikipedia articles.\n\nClicking on \'Search this area \' locks the map and launches a nearby search around that location.</string>
+  <string name="showcase_view_whole_nearby_activity">These are the places near you that need pictures to illustrate their Wikipedia articles.\n\nClicking on \'Search this area\' locks the map and launches a nearby search around that location.</string>
   <string name="showcase_view_needs_photo">This place needs a photo.</string>
   <string name="showcase_view_has_photo">This place already has a photo.</string>
   <string name="showcase_view_no_longer_exists">This place no longer exists.</string>

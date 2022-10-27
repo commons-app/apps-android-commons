@@ -53,20 +53,20 @@
     </RelativeLayout>
 
   <Button
-      android:id="@+id/search_this_area_button"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_centerHorizontal="true"
-      android:layout_gravity="center_horizontal"
-      android:layout_margin="@dimen/activity_margin_horizontal"
-      android:background="@color/white"
-      android:padding="@dimen/activity_margin_horizontal"
-      android:singleLine="true"
-      android:text="@string/search_this_area"
-      android:textColor="@color/status_bar_blue"
-      android:visibility="gone"
-      app:elevation="@dimen/dimen_6"
-      />
+    android:id="@+id/search_this_area_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_gravity="center_horizontal"
+    android:layout_margin="@dimen/activity_margin_horizontal"
+    android:background="@color/white"
+    android:capitalize="sentences"
+    android:padding="@dimen/activity_margin_horizontal"
+    android:singleLine="true"
+    android:text="@string/search_this_area"
+    android:textColor="@color/status_bar_blue"
+    android:visibility="gone"
+    app:elevation="@dimen/dimen_6" />
 
   <include
     android:id="@+id/bottom_sheet_details"

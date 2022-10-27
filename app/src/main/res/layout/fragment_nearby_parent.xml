@@ -104,9 +104,9 @@
           android:padding="@dimen/activity_margin_horizontal"
           android:singleLine="true"
           android:text="@string/search_this_area"
-          android:textAllCaps="false"
+          android:textAllCaps="true"
           android:textColor="@color/status_bar_blue"
-          android:visibility="visible"
+          android:visibility="gone"
           app:elevation="@dimen/dimen_6" />
 
         <View
