@@ -69,9 +69,9 @@
                 android:layout_height="match_parent" />
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent" />
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@android:color/transparent" />
 
             <androidx.appcompat.widget.AppCompatTextView
               android:id="@+id/tv_attribution"
@@ -89,21 +89,25 @@
 
 
         <Button
-            android:id="@+id/search_this_area_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/activity_margin_horizontal"
-            android:background="@color/white"
-            android:padding="@dimen/activity_margin_horizontal"
-            android:singleLine="true"
-            android:text="@string/search_this_area"
-            android:textColor="@color/status_bar_blue"
-            android:visibility="gone"
-            app:elevation="@dimen/dimen_6"
-            android:layout_below="@id/rl_container_wlm_month_message"
-            />
+          android:id="@+id/search_this_area_button"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/rl_container_wlm_month_message"
+          android:layout_centerHorizontal="true"
+          android:layout_gravity="center_horizontal"
+          android:layout_marginStart="@dimen/activity_margin_horizontal"
+          android:layout_marginTop="@dimen/activity_margin_horizontal"
+          android:layout_marginEnd="@dimen/activity_margin_horizontal"
+          android:layout_marginBottom="@dimen/activity_margin_horizontal"
+          android:background="@color/white"
+          android:capitalize="sentences"
+          android:padding="@dimen/activity_margin_horizontal"
+          android:singleLine="true"
+          android:text="@string/search_this_area"
+          android:textAllCaps="false"
+          android:textColor="@color/status_bar_blue"
+          android:visibility="visible"
+          app:elevation="@dimen/dimen_6" />
 
         <View
             android:id="@+id/transparentView"
@@ -133,10 +137,11 @@
             app:useCompatPadding="true" />
 
     </RelativeLayout>
+
         <FrameLayout
           android:id="@+id/fl_container_nearby_children"
           android:layout_width="match_parent"
-          android:layout_height="match_parent"/>
+          android:layout_height="match_parent" />
     </RelativeLayout>
 
     <include layout="@layout/bottom_sheet_nearby" />
