@@ -60,10 +60,10 @@
     android:layout_gravity="center_horizontal"
     android:layout_margin="@dimen/activity_margin_horizontal"
     android:background="@color/white"
-    android:capitalize="sentences"
     android:padding="@dimen/activity_margin_horizontal"
     android:singleLine="true"
     android:text="@string/search_this_area"
+    android:textAllCaps="false"
     android:textColor="@color/status_bar_blue"
     android:visibility="gone"
     app:elevation="@dimen/dimen_6" />
