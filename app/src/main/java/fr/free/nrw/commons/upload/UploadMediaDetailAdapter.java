@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.regex.Pattern;
 import javax.inject.Inject;
 import timber.log.Timber;
 
@@ -197,7 +198,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
 
             removeButton.setOnClickListener(v -> removeDescription(uploadMediaDetail, position));
             captionListener = new AbstractTextWatcher(
-                captionText -> uploadMediaDetails.get(position).setCaptionText(removeTrailingWhitespace(captionText)));
+                captionText -> uploadMediaDetails.get(position).setCaptionText(convertJapSpaceToEngSpace(removeTrailingWhitespace(captionText))));
             descriptionListener = new AbstractTextWatcher(
                 descriptionText -> uploadMediaDetails.get(position).setDescriptionText(descriptionText));
             captionItemEditText.addTextChangedListener(captionListener);
@@ -443,10 +444,20 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
             }
             return source;
         }
+
+        /**
+         * Convert Japanese spaces to English spaces
+         * @param source the source text
+         * @return a string with English space instead of Japanese space
+         */
+        public String convertJapSpaceToEngSpace(String source) {
+            Pattern JapSpacePattern = Pattern.compile("\\x{3000}");
+            return JapSpacePattern.matcher(source).replaceAll(" ");
+        }
+
     }
 
     public interface Callback {
-
         void showAlert(int mediaDetailDescription, int descriptionInfo);
     }
 

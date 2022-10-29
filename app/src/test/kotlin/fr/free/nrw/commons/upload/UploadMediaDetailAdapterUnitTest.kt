@@ -284,10 +284,14 @@ class UploadMediaDetailAdapterUnitTest {
     }
 
     @Test
-    fun testRemoveTrailingJapaneseWhitespace() {
-        val test = "テスト　\r　\t　"
-        val expected = "テスト"
-        Assert.assertTrue(viewHolder.checkTrailingWhitespace(test));
-        Assert.assertEquals(expected, viewHolder.removeTrailingWhitespace(test))
+    fun testCaptionJapaneseCharacters() {
+        val test1 = "テスト　テスト"
+        val expected1 = "テスト テスト"
+        Assert.assertEquals(expected1, viewHolder.convertJapSpaceToEngSpace(test1));
+
+        val test2 = "テスト　\r　\t　"
+        val expected2 = "テスト"
+        Assert.assertTrue(viewHolder.checkTrailingWhitespace(test2));
+        Assert.assertEquals(expected2, viewHolder.removeTrailingWhitespace(test2))
     }
 }

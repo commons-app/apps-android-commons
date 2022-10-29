@@ -17,7 +17,7 @@ public class UploadMediaDetailInputFilter implements InputFilter {
      */
     public UploadMediaDetailInputFilter() {
         patterns = new Pattern[]{
-            Pattern.compile("[\\x{00A0}\\x{1680}\\x{180E}\\x{2000}-\\x{200B}\\x{2028}\\x{2029}\\x{202F}\\x{205F}\\x{3000}]"),
+            Pattern.compile("[\\x{00A0}\\x{1680}\\x{180E}\\x{2000}-\\x{200B}\\x{2028}\\x{2029}\\x{202F}\\x{205F}]"),
             Pattern.compile("[\\x{202A}-\\x{202E}]"),
             Pattern.compile("\\p{Cc}"),
             Pattern.compile("\\x{FEFF}"),
