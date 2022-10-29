@@ -526,9 +526,9 @@ Upload your first media by tapping on the add button.</string>
   <string name="delete_helper_show_deletion_message_if">Nominated %1$s for deletion.</string>
   <string name="delete_helper_show_deletion_title_failed">Failed</string>
   <string name="delete_helper_show_deletion_message_else">Could not request deletion.</string>
-  <string name="delete_helper_ask_spam_selfie">A selfie</string>
-  <string name="delete_helper_ask_spam_blurry">Blurry</string>
-  <string name="delete_helper_ask_spam_nonsense">Nonsense</string>
+  <string name="delete_helper_ask_spam_selfie">a selfie which is not used in any article</string>
+  <string name="delete_helper_ask_spam_blurry">totally blurry</string>
+  <string name="delete_helper_ask_spam_nonsense">nonsense, absolutely unusable in any article</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Press photo</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Random photo from internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
