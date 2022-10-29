@@ -21,6 +21,7 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -112,9 +113,9 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      */
     FloatingActionButton placeSelectedButton;
     /**
-     * cGPS: button for centre on location;
+     * fabCenterOnLocation: button for center on location;
      */
-    FloatingActionButton cGPS;
+    FloatingActionButton fabCenterOnLocation;
     /**
      * droppedMarkerLayer : Layer for static screen
      */
@@ -124,7 +125,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      */
     private ImageView shadow;
     /**
-     * cGPS : textView of centre to location
+     * largeToolbarText : textView of shadow
      */
     private TextView largeToolbarText;
     /**
@@ -165,7 +166,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
         addPlaceSelectedButton();
         addCredits();
         getToolbarUI();
-        addCentreOnGPSButton();
+        addCenterOnGPSButton();
 
         if ("UploadActivity".equals(activity)) {
             placeSelectedButton.setVisibility(View.GONE);
@@ -174,7 +175,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
             largeToolbarText.setText(getResources().getString(R.string.image_location));
             smallToolbarText.setText(getResources().
                 getString(R.string.check_whether_location_is_correct));
-            cGPS.setVisibility(View.GONE);
+            fabCenterOnLocation.setVisibility(View.GONE);
         }
 
         mapView.onCreate(savedInstanceState);
@@ -288,7 +289,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
         largeToolbarText.setText(getResources().getString(R.string.choose_a_location));
         smallToolbarText.setText(getResources().getString(R.string.pan_and_zoom_to_adjust));
         bindListeners();
-        cGPS.setVisibility(View.VISIBLE);
+        fabCenterOnLocation.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -353,6 +354,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
             // Set the component's render mode
             locationComponent.setRenderMode(RenderMode.NORMAL);
 
+            // Get the component's location engine to receive user's last location
             locationComponent.getLocationEngine().getLastLocation(
                 new LocationEngineCallback<LocationEngineResult>() {
                     @Override
@@ -362,7 +364,6 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
 
                     @Override
                     public void onFailure(@NonNull Exception exception) {
-
                     }
                 });
 
@@ -436,9 +437,9 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
     /**
      * Centre the camera on the last saved location
      */
-    private void addCentreOnGPSButton(){
-        cGPS = findViewById(R.id.centre_on_gps);
-        cGPS.setOnClickListener(view -> getCentre());
+    private void addCenterOnGPSButton(){
+        fabCenterOnLocation = findViewById(R.id.centre_on_gps);
+        fabCenterOnLocation.setOnClickListener(view -> getCentre());
     }
     void getCentre() {
         mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()),15.0));
