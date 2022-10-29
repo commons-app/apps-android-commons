@@ -47,6 +47,7 @@ dependencies {
     implementation 'com.karumi:dexter:5.0.0'
     implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'com.google.firebase:firebase-firestore:24.1.2'
 
     kapt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
     implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:$ADAPTER_DELEGATES_VERSION"

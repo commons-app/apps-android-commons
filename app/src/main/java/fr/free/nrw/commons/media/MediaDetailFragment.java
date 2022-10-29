@@ -1,5 +1,4 @@
 package fr.free.nrw.commons.media;
-
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 import static android.view.View.GONE;
@@ -11,6 +10,11 @@ import static fr.free.nrw.commons.description.EditDescriptionConstants.UPDATED_W
 import static fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT;
 import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION;
 import static fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources;
+//import org.junit.Test;
+//import static org.junit.Assert.assertThat;
+//import static org.hamcrest.Matchers.is;
+//import static org.hamcrest.Matchers.not;
+//import static org.hamcrest.Matchers.nullValue;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -53,6 +57,7 @@ import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
+import com.google.firebase.firestore.util.Assert;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import fr.free.nrw.commons.LocationPicker.LocationPicker;
@@ -991,6 +996,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
 
+//            assertThat(data, not(nullValue()));
             assert data != null;
             final CameraPosition cameraPosition = LocationPicker.getCameraPosition(data);
 
