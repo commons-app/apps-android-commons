@@ -692,9 +692,21 @@
   <string name="error_feedback">Fel när återkoppling skickades</string>
   <string name="enter_description">Vad är din återkoppling?</string>
   <string name="your_feedback">Din återkoppling</string>
+  <string name="mark_as_not_for_upload">Markera som inte för uppladdning</string>
+  <string name="unmark_as_not_for_upload">Avmarkera som inte för uppladdning</string>
+  <string name="show_already_actioned_pictures">Visa redan åtgärdade bilder</string>
+  <string name="hiding_already_actioned_pictures">Döljer redan åtgärdade bilder</string>
+  <string name="no_more_images_found">Inga fler bilder hittades</string>
+  <string name="this_image_is_already_uploaded">Denna bild är redan uppladdad</string>
+  <string name="can_not_select_this_image_for_upload">Kan inte markera denna bild för uppladdning</string>
+  <string name="image_selected">Bild markerad</string>
+  <string name="image_marked_as_not_for_upload">Bild markerad som inte för uppladdning</string>
   <string name="menu_view_report">Rapportera</string>
   <string name="report_violation">Rapportera överträdelse</string>
   <string name="report_user">Rapportera denna användare</string>
   <string name="report_content">Rapportera detta innehåll</string>
   <string name="request_user_block">Begär att blockera denna användare</string>
+  <string name="welcome_to_full_screen_mode_text">Välkommen till markeringsläget i helskärm</string>
+  <string name="full_screen_mode_zoom_info">Använd två fingrar för att zooma in och ut.</string>
+  <string name="full_screen_mode_features_info">Svep snabbt och länge för att utföra dessa åtgärder: \n- Vänster/Höger: Gå till föregående/nästa \n- Upp: Markera\n- Ned: Markera som inte för uppladdning.</string>
 </resources>

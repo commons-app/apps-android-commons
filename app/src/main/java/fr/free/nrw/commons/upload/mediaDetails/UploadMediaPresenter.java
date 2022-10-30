@@ -7,10 +7,7 @@ import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
-import android.location.Address;
-import android.location.Geocoder;
 import androidx.annotation.Nullable;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -23,17 +20,19 @@ import fr.free.nrw.commons.upload.UploadItem;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract.UserActionListener;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract.View;
+import io.github.coordinates2country.Coordinates2Country;
 import io.reactivex.Maybe;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import java.io.IOException;
 import java.lang.reflect.Proxy;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.jetbrains.annotations.NotNull;
@@ -57,6 +56,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     private Scheduler mainThreadScheduler;
 
     private final List<String> WLM_SUPPORTED_COUNTRIES= Arrays.asList("am","at","az","br","hr","sv","fi","fr","de","gh","in","ie","il","mk","my","mt","pk","pe","pl","ru","rw","si","es","se","tw","ug","ua","us");
+    private Map<String, String> countryNamesAndCodes = null;
 
     @Inject
     public UploadMediaPresenter(UploadRepository uploadRepository,
@@ -124,22 +124,32 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
 
     @Nullable
     private String reverseGeoCode(final LatLng latLng){
-        final Geocoder geocoder = new Geocoder(
-            CommonsApplication.getInstance().getApplicationContext(), Locale
-            .getDefault());
-        try {
-            final List<Address> addresses = geocoder
-                .getFromLocation(latLng.getLatitude(), latLng.getLongitude(), 1);
-            for (final Address address : addresses) {
-                if (address != null && address.getCountryCode() != null) {
-                    String countryCode = address.getCountryCode();
-                    return countryCode;
-                }
-            }
-        } catch (final IOException e) {
-            Timber.e(e);
+        if(countryNamesAndCodes == null){
+            countryNamesAndCodes = getCountryNamesAndCodes();
         }
-        return null;
+        return countryNamesAndCodes.get(Coordinates2Country.country(latLng.getLatitude(), latLng.getLongitude()));
+    }
+
+    /**
+     * Creates HashMap containing all ISO countries 2-letter codes provided by <code>Locale.getISOCountries()</code>
+     * and their english names
+     *
+     * @return HashMap where Key is country english name and Value is 2-letter country code
+     * e.g. ["Germany":"DE", ...]
+     */
+    private Map<String, String> getCountryNamesAndCodes(){
+        final Map<String, String> result = new HashMap<>();
+
+        final String[] isoCountries = Locale.getISOCountries();
+
+        for (final String isoCountry : isoCountries) {
+            result.put(
+                new Locale("en", isoCountry).getDisplayCountry(Locale.ENGLISH),
+                isoCountry
+            );
+        }
+
+        return result;
     }
 
     /**

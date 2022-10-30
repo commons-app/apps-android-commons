@@ -36,7 +36,10 @@
   <string name="commons_github">صفحهٔ کدهای گیت‌هاب ویکی‌انبار</string>
   <string name="commons_logo">نشان ویکی‌انبار</string>
   <string name="commons_website">وب‌سایت ویکی‌انبار</string>
+  <string name="exit_location_picker">خروج از انتخابگر مکان</string>
   <string name="submit">ارسال</string>
+  <string name="add_another_description">توضیح دیگری را بیفزایید</string>
+  <string name="add_new_contribution">افزودن مشارکت جدید</string>
   <string name="appwidget_img">تصویر روز</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d پرونده در حال بارگذاری</item>

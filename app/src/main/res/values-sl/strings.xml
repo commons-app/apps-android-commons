@@ -93,7 +93,7 @@
   <string name="upload_failed">Datoteke ni bilo mogoče najti. Prosimo, poskusite z drugo datoteko.</string>
   <string name="authentication_failed">Avtentikacija ni uspela; prosimo, prijavite se znova</string>
   <string name="uploading_started">Nalaganje se je začelo!</string>
-  <string name="uploading_queued">Nalaganje na čakanju (omogočen je način omejene povezanosti)</string>
+  <string name="uploading_queued">Nalaganje na čakanju (vklopljen je način omejene povezanosti)</string>
   <string name="upload_completed_notification_title">Datoteka »%1$s« je naložena!</string>
   <string name="upload_completed_notification_text">Tapnite za ogled naložene datoteke</string>
   <string name="upload_progress_notification_title_start">Nalagam datoteko: %s</string>
@@ -104,7 +104,7 @@
   <string name="upload_failed_notification_subtitle">Tapnite za ogled</string>
   <string name="upload_paused_notification_subtitle">Tapnite za ogled</string>
   <string name="title_activity_contributions">Moja nedavna nalaganja</string>
-  <string name="contribution_state_queued">Na čakanju</string>
+  <string name="contribution_state_queued">V čakalni vrsti</string>
   <string name="contribution_state_failed">Spodletelo</string>
   <string name="contribution_state_in_progress">Opravljeno %1$d%% nalaganja</string>
   <string name="contribution_state_starting">Nalagam</string>
@@ -156,7 +156,7 @@
   <string name="provider_categories">Pred kratkim uporabljene kategorije</string>
   <string name="waiting_first_sync">Čakam na prvo sinhronizacijo ...</string>
   <string name="no_uploads_yet">Naložili niste še nobene fotografije.</string>
-  <string name="menu_retry_upload">Poskusite znova</string>
+  <string name="menu_retry_upload">Poskusi znova</string>
   <string name="menu_cancel_upload">Prekliči</string>
   <string name="media_upload_policy">Ob objavi te slike izjavljam, da je slika moje lastno delo, da ne vsebuje avtorsko zavarovanega gradiva ali sebka in da je tudi drugače skladna s pravili projekta &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Prenesi</string>
@@ -204,7 +204,7 @@
   <string name="storage_permission_title">Prosim za dovoljenje za shranjevanje</string>
   <string name="read_storage_permission_rationale">Potrebno dovoljenje: branje zunanjega pomnilnika. Aplikacija brez tega dovoljenja ne more dostopati do vaše galerije.</string>
   <string name="write_storage_permission_rationale">Potrebno dovoljenje: zapisovanje v zunanji pomnilnik. Aplikacija brez tega dovoljenja ne more dostopati do vašega fotoaparata/galerije.</string>
-  <string name="location_permission_title">Zahtevam dovoljenje za kraj</string>
+  <string name="location_permission_title">Zahtevam dovoljenje za lokacijo</string>
   <string name="ok">V redu</string>
   <string name="warning">Opozorilo</string>
   <string name="duplicate_image_found">Najdena podvojena slika</string>
@@ -280,7 +280,7 @@
   <string name="skip_login_title">Ali res želite preskočiti prijavo?</string>
   <string name="skip_login_message">V prihodnosti se boste morali za nalaganje slik prijaviti.</string>
   <string name="login_alert_message">Za uporabo te možnosti se prijavite</string>
-  <string name="copy_wikicode">Skopiraj vikibesedilo v odložišče</string>
+  <string name="copy_wikicode">Kopiraj vikibesedilo v odložišče</string>
   <string name="wikicode_copied">Vikibesedilo je skopirano v odložišče</string>
   <string name="nearby_location_not_available">Bližnje morda ne bo pravilno delovalo. Kraj ni na voljo.</string>
   <string name="location_permission_rationale_nearby">Za prikaz seznama bložnjih krajev je potrebno dovoljenje</string>
@@ -301,13 +301,13 @@
   <string name="about_translate_message">Izberite jezike, za katere želite pošiljati prevode</string>
   <string name="about_translate_proceed">Nadaljuj</string>
   <string name="about_translate_cancel">Prekliči</string>
-  <string name="retry">Poskusite znova</string>
+  <string name="retry">Poskusi znova</string>
   <string name="showcase_view_whole_nearby_activity">To so kraji blizu vas, katerih članke v Wikipediji je treba opremiti s sliko.\n\nKlik gumba \'PREIŠČI OBMOČJE\' zaklene zemljevid in začne iskanje v bližini zaklenjenega mesta.</string>
   <string name="showcase_view_needs_photo">Ta kraj potrebuje fotografijo</string>
   <string name="showcase_view_has_photo">Ta kraj že ima fotografijo.</string>
   <string name="showcase_view_no_longer_exists">Ta kraj ne obstaja več.</string>
   <string name="no_images_found">Ni najdenih slik!</string>
-  <string name="error_loading_images">Pri nalaganju slik se je pojavila napaka.</string>
+  <string name="error_loading_images">Pri nalaganju slik je prišlo do napake.</string>
   <string name="image_uploaded_by">Naložil/a: %1$s</string>
   <string name="block_notification_title">Blokiran/a</string>
   <string name="block_notification">Urejanje Zbirke vam je preprečeno</string>
@@ -318,8 +318,8 @@
   <string name="search_recent_header">Nedavna iskanja:</string>
   <string name="provider_searches">Pred kratkim opravljene poizvedbe</string>
   <string name="provider_recent_languages">Nedavne poizvedbe jezikov</string>
-  <string name="error_loading_categories">Pri nalaganju kategorij se je pojavila napaka.</string>
-  <string name="error_loading_depictions">Pri nalaganju upodobitev se je pojavila napaka.</string>
+  <string name="error_loading_categories">Pri nalaganju kategorij je prišlo do napake.</string>
+  <string name="error_loading_depictions">Pri nalaganju upodobitev je prišlo do napake.</string>
   <string name="search_tab_title_media">Mediji</string>
   <string name="search_tab_title_categories">Kategorije</string>
   <string name="search_tab_title_depictions">Predmeti</string>
@@ -376,7 +376,7 @@
   <string name="images_uploaded_explanation">Število slik, ki ste jih naložili v Zbirko, ne glede na program za nalaganje</string>
   <string name="images_reverted_explanation">Delež slik v Zbirki, ki niso bile izbrisane</string>
   <string name="images_used_explanation">Število slik, ki ste jih naložili v Zbirko in se uporabljajo v člankih Wikipedije</string>
-  <string name="error_occurred">Pojavila se je napaka!</string>
+  <string name="error_occurred">Prišlo je do napake!</string>
   <string name="notifications_channel_name_all">Obvestilo v Zbirki</string>
   <string name="preference_author_name_toggle">Uporabi ime avtorja po meri</string>
   <string name="preference_author_name_toggle_summary">Pri nalaganju slik namesto uporabniškega imena uporabi ime avtorja po meri</string>
@@ -423,7 +423,7 @@
   <string name="nearby_card_permission_explanation">Ali bi želeli uporabljati trenutno lokacijo za prikaz najbližjega kraja, ki potrebuje slike?</string>
   <string name="unable_to_display_nearest_place">Najbližjega kraja, ki potrebuje slike, ni mogoče prikazati brez dovoljenja za uporabo lokacije.</string>
   <string name="never_ask_again">Nikoli več ne vprašaj</string>
-  <string name="display_location_permission_title">Vprašaj za dovoljenje za kraj</string>
+  <string name="display_location_permission_title">Vprašaj za dovoljenje za lokacijo</string>
   <string name="display_location_permission_explanation">Vprašaj za dovoljenje za uporabo lokacije, ko je to potrebno za ogled obvestila o bližnjih krajih.</string>
   <string name="achievements_fetch_failed">Nekaj je šlo narobe. Vaših dosežkov nismo mogli pridobiti.</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Opravili ste toliko prispevkov, da jih naš sistem izračunavanja ne more razčleniti. To je vrhunski dosežek.</string>
@@ -432,7 +432,7 @@
   <string name="display_campaigns_explanation">Nastavi tekoče kampanje</string>
   <string name="nearby_campaign_dismiss_message">Kampanj ne boste več videli. Če želite, lahko tovrstno obveščanje znova vklopite v nastavitvah.</string>
   <string name="this_function_needs_network_connection">Ta možnost zahteva omrežno povezavo. Prosimo, preverite vaše nastavitve povezave.</string>
-  <string name="error_processing_image">Pri obdelavi slike se je pojavila napaka. Prosimo, poskusite znova!</string>
+  <string name="error_processing_image">Pri obdelavi slike je prišlo do napake. Prosimo, poskusite znova!</string>
   <string name="getting_edit_token">Pridobivam žeton za urejanje</string>
   <string name="check_category_adding_template">Dodajam predlogo za preverjanje kategorije</string>
   <string name="check_category_notification_title">Zahtevam preverjanje kategorije za %1$s</string>
@@ -476,7 +476,7 @@
   <string name="images_featured_explanation">Izbrane slike so slike visokousposobljenih fotografov in ilustratorjev, ki jih je skupnost Wikimedijine zbirke prepoznala kot najbolj kakovostne na tem spletnem mestu.</string>
   <string name="images_via_nearby_explanation">Slike, naložene z Bližnjimi kraji, so slike, ki so naložene z odkrivanjem krajev na zemljevidu.</string>
   <string name="thanks_received_explanation">Ta možnost vam omogoča, da urejevalcem, ki so opravili koristno urejanje, pošljete zahvalo – z uporabo kratke povezave na strani zgodovine ali strani primerjave.</string>
-  <string name="copy_image_caption_description">Skopiraj na naslednjo predstavnostno datoteko</string>
+  <string name="copy_image_caption_description">Kopiraj na naslednjo predstavnostno datoteko</string>
   <string name="copied_successfully">Skopirano</string>
   <string name="welcome_do_upload_content_description">Zgledi dobrih slik za nalaganje v Zbirko</string>
   <string name="welcome_dont_upload_content_description">Zgledi slik, ki niso primerne za nalaganje</string>
@@ -551,9 +551,9 @@
   <string name="you_have_no_achievements_yet">Ničesar še niste prispevali</string>
   <string name="no_achievements_yet">%s ni opravil/a še nobenega prispevka</string>
   <string name="account_created">Račun ustvarjen!</string>
-  <string name="text_copy">Besedilo skopirano na odložišče</string>
+  <string name="text_copy">Besedilo kopirano v odložišče</string>
   <string name="notification_mark_read">Obvestilo označeno kot prebrano</string>
-  <string name="some_error">Pojavila se je napaka!</string>
+  <string name="some_error">Prišlo je do neke napake!</string>
   <string name="place_state">Stanje kraja:</string>
   <string name="place_state_exists">Obstaja</string>
   <string name="place_state_needs_photo">Potrebuje fotografijo</string>
@@ -596,7 +596,7 @@
   <string name="wikipedia_instructions_step_5">5. Prilepite vikibesedilo na ustrezno mesto.</string>
   <string name="wikipedia_instructions_step_6">6. Po potrebi vikibesedilo uredite, da popravite položaj slike. Za več informacij glejte &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;here&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Objavite članek.</string>
-  <string name="copy_wikicode_to_clipboard">Skopiraj vikibesedilo v odložišče</string>
+  <string name="copy_wikicode_to_clipboard">Kopiraj vikibesedilo v odložišče</string>
   <string name="pause">premor</string>
   <string name="resume">nadaljuj</string>
   <string name="paused">Premor</string>
@@ -624,7 +624,7 @@
   <string name="mapbox_telemetry">Telemetrija Mapbox</string>
   <string name="telemetry_opt_out_summary">Pri uporabi možnosti Bližnje pošiljaj anonimizirane podatke o kraju in uporabi v Mapbox</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Izboljšajte zemljevid&lt;/a&gt;</string>
-  <string name="limited_connection_enabled">Način omejene povezanosti je vklopljen!</string>
+  <string name="limited_connection_enabled">Vklopljen je način omejene povezanosti!</string>
   <string name="limited_connection_disabled">Način omejene povezanosti izklopljen. Nalaganje se bo zdaj nadaljevalo.</string>
   <string name="limited_connection_mode">Način omejene povezanosti</string>
   <string name="statistics_quality">Kakovostne slike</string>
@@ -633,7 +633,7 @@
   <string name="pausing_upload">Zaustavljam nalaganje ...</string>
   <string name="cancelling_upload">Preklicujem nalaganje ...</string>
   <string name="cancel_upload">Preklic nalaganja</string>
-  <string name="limited_connection_explanation">Omogočili ste način omejene povezanosti. Vsa nalaganja so začasno ustavljena in se bodo nadaljevala, ko boste ta način izklopili.</string>
+  <string name="limited_connection_explanation">Vklopili ste način omejene povezanosti. Vsa nalaganja so začasno ustavljena in se bodo nadaljevala, ko boste ta način izklopili.</string>
   <string name="limited_connection_is_on">Način omejene povezanosti je vklopljen.</string>
   <string name="media_details_tooltip">Prosimo, na kratko opišite vsebino slike. V opisu navedite, zakaj je slika zanimiva, značilna ali redka ter razložite vidni in nevidni konteks. Uporabite karseda točne izraze.</string>
   <string name="depicts_tooltip">Prosimo, poiščite in izberite vse koncepte, ki jih ta slika prikazuje. Bodite čim bolj natančni. Če slika prikazuje več predmetov, smiselno izberite vse. Ne uporabljajte splošnih oznak, če so na voljo natančnejše oznake.</string>
