@@ -435,12 +435,15 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
         finish();
     }
     /**
-     * Centre the camera on the last saved location
+     * Center the camera on the last saved location
      */
     private void addCenterOnGPSButton(){
         fabCenterOnLocation = findViewById(R.id.centre_on_gps);
         fabCenterOnLocation.setOnClickListener(view -> getCentre());
     }
+    /**
+     * Animate map to move to desired Latitude and Longitude
+     */
     void getCentre() {
         mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()),15.0));
     }
