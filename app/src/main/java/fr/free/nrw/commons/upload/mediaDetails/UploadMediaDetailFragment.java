@@ -173,7 +173,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
         //If this is the last media, we have nothing to copy, lets not show the button
 
-
         if (callback.getIndexInViewFlipper(this) != callback.getTotalNumberOfSteps()-4){
             btnCopyToSubsequentMedia.setVisibility(View.VISIBLE);
 
@@ -182,6 +181,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             btnCopyToSubsequentMedia.setVisibility(View.GONE);
 
         }
+
+
 
 
 
