@@ -451,8 +451,8 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
          * @return a string with Latin spaces instead of Ideographic spaces
          */
         public String convertIdeographicSpaceToLatinSpace(String source) {
-            Pattern JapSpacePattern = Pattern.compile("\\x{3000}");
-            return JapSpacePattern.matcher(source).replaceAll(" ");
+            Pattern ideographicSpacePattern = Pattern.compile("\\x{3000}");
+            return ideographicSpacePattern.matcher(source).replaceAll(" ");
         }
 
     }
