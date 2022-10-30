@@ -198,7 +198,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
 
             removeButton.setOnClickListener(v -> removeDescription(uploadMediaDetail, position));
             captionListener = new AbstractTextWatcher(
-                captionText -> uploadMediaDetails.get(position).setCaptionText(convertJapSpaceToEngSpace(removeTrailingWhitespace(captionText))));
+                captionText -> uploadMediaDetails.get(position).setCaptionText(convertIdeographicSpaceToLatinSpace(removeTrailingWhitespace(captionText))));
             descriptionListener = new AbstractTextWatcher(
                 descriptionText -> uploadMediaDetails.get(position).setDescriptionText(descriptionText));
             captionItemEditText.addTextChangedListener(captionListener);
@@ -446,11 +446,11 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         }
 
         /**
-         * Convert Japanese spaces to English spaces
+         * Convert Ideographic space to Latin space
          * @param source the source text
-         * @return a string with English space instead of Japanese space
+         * @return a string with Latin spaces instead of Ideographic spaces
          */
-        public String convertJapSpaceToEngSpace(String source) {
+        public String convertIdeographicSpaceToLatinSpace(String source) {
             Pattern JapSpacePattern = Pattern.compile("\\x{3000}");
             return JapSpacePattern.matcher(source).replaceAll(" ");
         }

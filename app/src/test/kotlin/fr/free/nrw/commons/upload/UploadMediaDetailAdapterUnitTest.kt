@@ -287,7 +287,7 @@ class UploadMediaDetailAdapterUnitTest {
     fun testCaptionJapaneseCharacters() {
         val test1 = "テスト　テスト"
         val expected1 = "テスト テスト"
-        Assert.assertEquals(expected1, viewHolder.convertJapSpaceToEngSpace(test1));
+        Assert.assertEquals(expected1, viewHolder.convertIdeographicSpaceToLatinSpace(test1));
 
         val test2 = "テスト　\r　\t　"
         val expected2 = "テスト"
