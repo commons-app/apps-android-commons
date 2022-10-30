@@ -247,4 +247,51 @@ class UploadMediaDetailAdapterUnitTest {
         verify(adapterView, times(3)).adapter
     }
 
+    @Test
+    fun testRemoveTrailingWhitespace() {
+        // empty space
+        val test1 = "test  "
+        val expected1 = "test"
+        Assert.assertTrue(viewHolder.checkTrailingWhitespace(test1));
+        Assert.assertEquals(expected1, viewHolder.removeTrailingWhitespace(test1))
+
+        val test2 = "test test "
+        val expected2 = "test test"
+        Assert.assertTrue(viewHolder.checkTrailingWhitespace(test2));
+        Assert.assertEquals(expected2, viewHolder.removeTrailingWhitespace(test2))
+
+        // No whitespace
+        val test3 = "No trailing space";
+        val expected3 = "No trailing space";
+        Assert.assertFalse(viewHolder.checkTrailingWhitespace(test3))
+        Assert.assertEquals(expected3, viewHolder.removeTrailingWhitespace(test3))
+    }
+
+    @Test
+    fun testRemoveTrailingInstanceTab() {
+        val test = "test\t"
+        val expected = "test"
+        Assert.assertTrue(viewHolder.checkTrailingWhitespace(test));
+        Assert.assertEquals(expected, viewHolder.removeTrailingWhitespace(test))
+    }
+
+    @Test
+    fun testRemoveTrailingCarriageReturn() {
+        val test = "test\r"
+        val expected = "test"
+        Assert.assertTrue(viewHolder.checkTrailingWhitespace(test));
+        Assert.assertEquals(expected, viewHolder.removeTrailingWhitespace(test))
+    }
+
+    @Test
+    fun testCaptionJapaneseCharacters() {
+        val test1 = "テスト　テスト"
+        val expected1 = "テスト テスト"
+        Assert.assertEquals(expected1, viewHolder.convertIdeographicSpaceToLatinSpace(test1));
+
+        val test2 = "テスト　\r　\t　"
+        val expected2 = "テスト"
+        Assert.assertTrue(viewHolder.checkTrailingWhitespace(test2));
+        Assert.assertEquals(expected2, viewHolder.removeTrailingWhitespace(test2))
+    }
 }

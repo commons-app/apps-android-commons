@@ -33,7 +33,7 @@ class UploadMediaDetailInputFilterTest {
         builder.filters = arrayOf(UploadMediaDetailInputFilter())
 
         //All unusual space characters
-        val tests = intArrayOf(0x00A0, 0x1680, 0x180E, 0x2000, 0x2005, 0x200B, 0x2028, 0x2029, 0x202F, 0x205F, 0x3000)
+        val tests = intArrayOf(0x00A0, 0x1680, 0x180E, 0x2000, 0x2005, 0x200B, 0x2028, 0x2029, 0x202F, 0x205F)
         for (test: Int in tests) {
             builder.insert(0, String(Character.toChars(test)))
             Assert.assertEquals(builder.toString(), "")
