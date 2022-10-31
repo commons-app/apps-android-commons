@@ -174,8 +174,8 @@
   <string name="exif_tag_name_serialNumbers">Sērijas numuri</string>
   <string name="exif_tag_name_software">Programmatūra</string>
   <string name="delete_helper_show_deletion_title_failed">Neizdevās</string>
-  <string name="delete_helper_ask_spam_selfie">Pašbilde</string>
-  <string name="delete_helper_ask_spam_blurry">Miglains</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Pašbilde</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Miglains</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Nejaušs foto no interneta</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logotips</string>
   <string name="account_created">Konts izveidots!</string>

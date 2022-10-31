@@ -121,7 +121,7 @@
   <string name="no_categories_found">تياد کاتݢوري دجومڤاءي</string>
   <string name="delete_helper_show_deletion_title_success">برجاي</string>
   <string name="delete_helper_show_deletion_title_failed">ݢاݢل</string>
-  <string name="delete_helper_ask_spam_selfie">سوافوتو</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">سوافوتو</string>
   <string name="delete_helper_ask_reason_copyright_logo">لوݢو</string>
   <string name="category_edit_helper_show_edit_title">کمس کيني کاتݢوري</string>
   <string name="category_edit_helper_show_edit_title_success">برجاي</string>

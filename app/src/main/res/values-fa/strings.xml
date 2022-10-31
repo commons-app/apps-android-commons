@@ -428,9 +428,9 @@
   <string name="upload_cancelled">بارگذاری لغو شد</string>
   <string name="delete_helper_show_deletion_title_success">موفق</string>
   <string name="delete_helper_show_deletion_title_failed">ناموفق</string>
-  <string name="delete_helper_ask_spam_selfie">یک سلفی</string>
-  <string name="delete_helper_ask_spam_blurry">تار</string>
-  <string name="delete_helper_ask_spam_nonsense">مهمل</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">یک سلفی</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">تار</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">مهمل</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">عکس مطبوعاتی</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">عکس تصادفی از اینترنت</string>
   <string name="delete_helper_ask_reason_copyright_logo">لوگو</string>

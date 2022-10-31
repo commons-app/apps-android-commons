@@ -387,9 +387,9 @@
   <string name="default_description_language">বিবরণের পূর্বনির্ধারিত ভাষা</string>
   <string name="delete_helper_show_deletion_title_success">সফল</string>
   <string name="delete_helper_show_deletion_title_failed">ব্যর্থ হয়েছে</string>
-  <string name="delete_helper_ask_spam_selfie">একটি সেলফি</string>
-  <string name="delete_helper_ask_spam_blurry">ঝাপসা</string>
-  <string name="delete_helper_ask_spam_nonsense">আজেবাজে</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">একটি সেলফি</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">ঝাপসা</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">আজেবাজে</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">সংবাদপত্রের চিত্র</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">ইন্টারনেট থেকে নেওয়া অজানা চিত্র</string>
   <string name="delete_helper_ask_reason_copyright_logo">লোগো</string>

@@ -293,8 +293,8 @@
   <string name="exif_tag_name_lensModel">ლინზის მოდელი</string>
   <string name="exif_tag_name_serialNumbers">სერიული ნომერი</string>
   <string name="exif_tag_name_software">პროგრამული უზრუნველყოფა</string>
-  <string name="delete_helper_ask_spam_selfie">სელფი</string>
-  <string name="delete_helper_ask_spam_blurry">გაბუნტებული</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">სელფი</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">გაბუნტებული</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">შემთხვევითი ფოტო ინტერნეტიდან</string>
   <string name="delete_helper_ask_reason_copyright_logo">ლოგო</string>
   <string name="account_created">ანგარიში შეიქმნა!</string>

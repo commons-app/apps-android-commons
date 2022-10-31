@@ -511,9 +511,9 @@
   <string name="delete_helper_show_deletion_message_if">Nominowane %1$s do usunięcia.</string>
   <string name="delete_helper_show_deletion_title_failed">Nie powiodło się</string>
   <string name="delete_helper_show_deletion_message_else">Nie można zażądać usunięcia.</string>
-  <string name="delete_helper_ask_spam_selfie">Selfie</string>
-  <string name="delete_helper_ask_spam_blurry">Niewyraźne</string>
-  <string name="delete_helper_ask_spam_nonsense">Nonsens</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Selfie</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Niewyraźne</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Nonsens</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Zdjęcie prasowe</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Losowe zdjęcie z internetu</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

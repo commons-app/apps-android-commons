@@ -510,9 +510,9 @@
   <string name="delete_helper_show_deletion_message_if">已提名%1$s刪除。</string>
   <string name="delete_helper_show_deletion_title_failed">失敗</string>
   <string name="delete_helper_show_deletion_message_else">無法請求刪除。</string>
-  <string name="delete_helper_ask_spam_selfie">自拍</string>
-  <string name="delete_helper_ask_spam_blurry">糢糊</string>
-  <string name="delete_helper_ask_spam_nonsense">無意義</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">自拍</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">糢糊</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">無意義</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">按壓照片</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">來自網路的隨機照片</string>
   <string name="delete_helper_ask_reason_copyright_logo">標誌</string>

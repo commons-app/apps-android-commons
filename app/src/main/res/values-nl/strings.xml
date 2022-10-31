@@ -492,9 +492,9 @@
   <string name="delete_helper_show_deletion_message_if">%1$s genomineerd voor verwijdering.</string>
   <string name="delete_helper_show_deletion_title_failed">Mislukt</string>
   <string name="delete_helper_show_deletion_message_else">Kan verwijdering niet aanvragen.</string>
-  <string name="delete_helper_ask_spam_selfie">Een selfie</string>
-  <string name="delete_helper_ask_spam_blurry">Wazig</string>
-  <string name="delete_helper_ask_spam_nonsense">Onzin</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Een selfie</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Wazig</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Onzin</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Persfoto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Willekeurige foto van internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

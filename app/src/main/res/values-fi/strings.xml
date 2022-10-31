@@ -487,9 +487,9 @@
   <string name="delete_helper_show_deletion_message_if">Ehdotettu %1$s poistettavaksi.</string>
   <string name="delete_helper_show_deletion_title_failed">Epäonnistui</string>
   <string name="delete_helper_show_deletion_message_else">Ei voitu pyytää poistoa.</string>
-  <string name="delete_helper_ask_spam_selfie">Selfie</string>
-  <string name="delete_helper_ask_spam_blurry">Sumea</string>
-  <string name="delete_helper_ask_spam_nonsense">Roskaa</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Selfie</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Sumea</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Roskaa</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Lehdistökuva</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Satunnainen kuva internetistä</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

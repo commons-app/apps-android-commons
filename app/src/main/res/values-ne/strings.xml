@@ -245,6 +245,8 @@
   <string name="delete_helper_show_deletion_title">मेटाउनका लागि नामाङ्कित</string>
   <string name="delete_helper_show_deletion_title_success">सफल</string>
   <string name="delete_helper_show_deletion_title_failed">असफल</string>
+  <string name="delete_helper_ask_spam_selfie">एउटा सेल्फी जुन कुनै पनि लेखहरूमा प्रयोग गरिएको छैन्</string>
+  <string name="delete_helper_ask_spam_blurry">पुरै धमिलो</string>
   <string name="delete_helper_ask_reason_copyright_logo">लोगो</string>
   <string name="no_achievements_yet" fuzzy="true">तपाईले हालसम्म कुनैपनि सम्पादन गर्नु भएकाे छैन</string>
   <string name="account_created">खाता सृजना गरियो!</string>

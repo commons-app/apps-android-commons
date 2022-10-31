@@ -511,9 +511,9 @@
   <string name="delete_helper_show_deletion_message_if">%1$s úspešne nominované na zmazanie.</string>
   <string name="delete_helper_show_deletion_title_failed">Chyba</string>
   <string name="delete_helper_show_deletion_message_else">Nepodarilo sa požiadať o zmazanie.</string>
-  <string name="delete_helper_ask_spam_selfie">Selfie</string>
-  <string name="delete_helper_ask_spam_blurry">Rozmazané</string>
-  <string name="delete_helper_ask_spam_nonsense">Nezmysel</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Selfie</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Rozmazané</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Nezmysel</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Tlačová fotka</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Náhodná fotka z internetu</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

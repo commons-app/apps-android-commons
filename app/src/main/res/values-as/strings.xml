@@ -127,9 +127,9 @@
   <string name="dialog_box_text_nomination">%1$s কিয় বিলোপ কৰা হ\'ব লাগে?</string>
   <string name="delete_helper_show_deletion_title_success">সফল</string>
   <string name="delete_helper_show_deletion_title_failed">বিফল হ\'ল</string>
-  <string name="delete_helper_ask_spam_selfie">এটা ছেল্ফি</string>
-  <string name="delete_helper_ask_spam_blurry">ধোঁৱা-ধোঁৱা</string>
-  <string name="delete_helper_ask_spam_nonsense">অৰ্থহীন</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">এটা ছেল্ফি</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">ধোঁৱা-ধোঁৱা</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">অৰ্থহীন</string>
   <string name="delete_helper_ask_reason_copyright_logo">ল\'গ\'</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">কাৰণ এয়া</string>
 </resources>

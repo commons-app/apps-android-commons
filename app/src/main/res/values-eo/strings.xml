@@ -438,9 +438,9 @@
   <string name="delete_helper_show_deletion_message_if" fuzzy="true">Sukcese proponis la forigon de %1$s.</string>
   <string name="delete_helper_show_deletion_title_failed">Malsukcesis</string>
   <string name="delete_helper_show_deletion_message_else">Ne povis proponi forigon.</string>
-  <string name="delete_helper_ask_spam_selfie">Memfoto</string>
-  <string name="delete_helper_ask_spam_blurry">Malklara</string>
-  <string name="delete_helper_ask_spam_nonsense">Sensencaĵo</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Memfoto</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Malklara</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Sensencaĵo</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Gazetara showImageWithItem</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Hazarda foto el Interreto</string>
   <string name="delete_helper_ask_reason_copyright_logo">Emblemo</string>

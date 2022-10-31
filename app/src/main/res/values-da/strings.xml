@@ -314,9 +314,9 @@
   <string name="exif_tag_name_serialNumbers">Serienumre</string>
   <string name="share_via">Del app via...</string>
   <string name="no_categories_found">Ingen kategorier blev fundet</string>
-  <string name="delete_helper_ask_spam_selfie">Et selvportræt</string>
-  <string name="delete_helper_ask_spam_blurry">Sløret</string>
-  <string name="delete_helper_ask_spam_nonsense">Vrøvl</string>
+  <string name="delete_helper_ask_spam_selfie">et selvportræt der ikke bruges i nogen artikel</string>
+  <string name="delete_helper_ask_spam_blurry">totalt sløret</string>
+  <string name="delete_helper_ask_spam_nonsense">vrøvl, fuldstændigt ubrugeligt i nogen artikel</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Vilkårligt billede fra internettet</string>
   <string name="category_edit_helper_make_edit_toast">Prøver på at opdatere kategorier.</string>
   <string name="category_edit_helper_show_edit_title_success">Succes</string>

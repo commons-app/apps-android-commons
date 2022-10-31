@@ -332,7 +332,7 @@
   <string name="exif_tag_name_software">Softwarea</string>
   <string name="delete_helper_show_deletion_title_success">Arrakasta</string>
   <string name="delete_helper_show_deletion_title_failed">Hutsegitea</string>
-  <string name="delete_helper_ask_spam_selfie">Selfiea</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Selfiea</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Prentsarako argazkia</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="category_edit_helper_show_edit_title_success">Arrakasta</string>

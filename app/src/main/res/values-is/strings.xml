@@ -491,9 +491,9 @@
   <string name="delete_helper_show_deletion_message_if">Tilnefndi %1$s til eyðingar.</string>
   <string name="delete_helper_show_deletion_title_failed">Mistókst</string>
   <string name="delete_helper_show_deletion_message_else">Gat ekki beðið um eyðingu.</string>
-  <string name="delete_helper_ask_spam_selfie">Sjálfsmynd</string>
-  <string name="delete_helper_ask_spam_blurry">Móskuleg</string>
-  <string name="delete_helper_ask_spam_nonsense">Vitleysa</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Sjálfsmynd</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Móskuleg</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Vitleysa</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Fréttaljósmynd</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Einhver mynd af internetinu</string>
   <string name="delete_helper_ask_reason_copyright_logo">Táknmynd</string>

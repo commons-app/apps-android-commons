@@ -3,6 +3,7 @@
 * Aefgh39622
 * B20180
 * Bebiezaza
+* Ekminarin
 * Geonuch
 * Horus
 * Just Sayori
@@ -18,6 +19,7 @@
   <string name="commons_logo">โลโก้คอมมอนส์</string>
   <string name="commons_website">เว็บไซต์คอมมอนส์</string>
   <string name="submit">ส่ง</string>
+  <string name="nearby_all">ทั้งหมด</string>
   <string name="appwidget_img">รูปภาพประจำวัน</string>
   <string name="uploads_pending_notification_indicator">กำลังอัปโหลดไฟล์ %1$d ไฟล์</string>
   <plurals name="contributions_subtitle" fuzzy="true">
@@ -54,6 +56,7 @@
   <string name="signup">สมัครสมาชิก</string>
   <string name="logging_in_title">กำลังเข้าสู่ระบบ</string>
   <string name="logging_in_message">กรุณารอสักครู่…</string>
+  <string name="updating_caption_message">กรุณารอสักครู่…</string>
   <string name="login_success">การเข้าสู่ระบบสำเร็จแล้ว!</string>
   <string name="login_failed">การเข้าสู่ระบบล้มเหลว!</string>
   <string name="upload_failed">ไม่พบไฟล์ กรุณาลองใช้ไฟล์อื่น</string>
@@ -322,6 +325,7 @@
   <string name="deletion_reason_no_longer_want_public">ฉันเปลี่ยนใจแล้ว ฉันไม่อยากให้ทุกคนสามารถเห็นได้อีกต่อไป</string>
   <string name="no_uploads">ยินดีต้อนรับสู่คอมมอนส์!\n\nอัพโหลดสื่อแรกของคุณด้วยการแตะที่ปุ่ม \"+\"</string>
   <string name="no_categories_selected">ไม่ได้เลือกหมวดหมู่ใด</string>
+  <string name="back_button_warning">ยกเลิกการอัปโหลด</string>
   <string name="search_this_area">ค้นหาพื้นที่นี้</string>
   <string name="never_ask_again">อย่าถามคำถามนี้อีก</string>
   <string name="display_location_permission_title" fuzzy="true">แสดงสิทธิอนุญาตที่ตั้ง</string>
@@ -348,9 +352,9 @@
   <string name="exif_tag_name_software">ซอฟต์แวร์</string>
   <string name="share_via">แบ่งปันแอปผ่าน...</string>
   <string name="no_categories_found">ไม่พบหมวดหมู่</string>
-  <string name="delete_helper_ask_spam_selfie">ภาพเซลฟี</string>
-  <string name="delete_helper_ask_spam_blurry">ภาพเบลอ</string>
-  <string name="delete_helper_ask_spam_nonsense">ไร้สาระ</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">ภาพเซลฟี</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">ภาพเบลอ</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">ไร้สาระ</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">ภาพจากสื่อข่าว</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">ภาพสุ่มจากอินเทอร์เน็ต</string>
   <string name="delete_helper_ask_reason_copyright_logo">โลโก้</string>

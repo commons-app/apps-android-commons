@@ -488,9 +488,9 @@
   <string name="delete_helper_show_deletion_message_if">Nominalizat %1$s pentru ștergere.</string>
   <string name="delete_helper_show_deletion_title_failed">Eșuat</string>
   <string name="delete_helper_show_deletion_message_else">Nu s-a putut solicita ștergerea.</string>
-  <string name="delete_helper_ask_spam_selfie">Un selfie</string>
-  <string name="delete_helper_ask_spam_blurry">În ceață</string>
-  <string name="delete_helper_ask_spam_nonsense">Prostii</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Un selfie</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">În ceață</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Prostii</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Foto din presă</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Fotografie aleatorie de pe internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

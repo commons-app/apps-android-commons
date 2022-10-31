@@ -390,8 +390,8 @@
   <string name="delete_helper_show_deletion_message_if">%1$s ߕߐ߯ߦߊߟߌ ߦߴߌ ߘߐ߫ ߖߏ߬ߛߌ߬ߟߌ ߞߊ߲ߡߊ߬</string>
   <string name="delete_helper_show_deletion_title_failed">ߊ߬ ߓߘߊ߫ ߗߌߙߏ߲߫</string>
   <string name="delete_helper_show_deletion_message_else">ߌ ߕߍ߫ ߛߋ߫ ߖߏ߰ߛߌ߬ߟߌ ߡߊߢߌߣߌ߲߫ ߠߊ߫</string>
-  <string name="delete_helper_ask_spam_selfie">ߛߍߟߑߝߌ ߘߏ߫</string>
-  <string name="delete_helper_ask_spam_blurry">ߢߟߊߝߎ߬ߟߎ߲߬ߜߊ߬ߣߍ߲</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">ߛߍߟߑߝߌ ߘߏ߫</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">ߢߟߊߝߎ߬ߟߎ߲߬ߜߊ߬ߣߍ߲</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">ߖߌ߬ߦߊ߬ߓߍ ߜߍ߬ߙߍ߲߬ߘߍ߬ߣߍ߲</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">ߓߍ߲߬ߛߋ߲߬ߡߊ߫ ߖߌߦߊߓߍ ߟߎ߬ ߞߊ߬ ߝߘߊ߫ ߓߟߐߟߐ ߟߊ߫</string>
   <string name="delete_helper_ask_reason_copyright_logo">ߛߌ߲ߞߐ߲</string>

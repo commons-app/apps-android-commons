@@ -521,9 +521,9 @@
   <string name="delete_helper_show_deletion_message_if">Номіновано %1$s до вилучення.</string>
   <string name="delete_helper_show_deletion_title_failed">Не вдалося</string>
   <string name="delete_helper_show_deletion_message_else">Неможливо запитати видалення.</string>
-  <string name="delete_helper_ask_spam_selfie">Селфі</string>
-  <string name="delete_helper_ask_spam_blurry">Розмито</string>
-  <string name="delete_helper_ask_spam_nonsense">Безглуздя</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Селфі</string>
+  <string name="delete_helper_ask_spam_blurry">повністю розмито</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Безглуздя</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Фото з новин</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Випадкове фото з інтернет</string>
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>

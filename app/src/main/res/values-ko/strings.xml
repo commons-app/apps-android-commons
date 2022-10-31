@@ -467,8 +467,8 @@
   <string name="delete_helper_show_deletion_message_if">%1$s을(를) 삭제 신청함</string>
   <string name="delete_helper_show_deletion_title_failed">실패</string>
   <string name="delete_helper_show_deletion_message_else">삭제를 요청하지 못했습니다.</string>
-  <string name="delete_helper_ask_spam_selfie">셀카</string>
-  <string name="delete_helper_ask_spam_blurry">흐림</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">셀카</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">흐림</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">보도 사진</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">인터넷상의 무작위 이미지</string>
   <string name="delete_helper_ask_reason_copyright_logo">로고</string>

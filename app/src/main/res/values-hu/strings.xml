@@ -442,9 +442,9 @@
   <string name="delete_helper_show_deletion_message_if">Törlésre jelölve: %1$s.</string>
   <string name="delete_helper_show_deletion_title_failed">Sikertelen</string>
   <string name="delete_helper_show_deletion_message_else">Nem sikerült a törlés kérése.</string>
-  <string name="delete_helper_ask_spam_selfie">Egy szelfi</string>
-  <string name="delete_helper_ask_spam_blurry">Homályos</string>
-  <string name="delete_helper_ask_spam_nonsense">Nonszensz</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Egy szelfi</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Homályos</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Nonszensz</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Sajtófotó</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Random fénykép az Internetről</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logó</string>

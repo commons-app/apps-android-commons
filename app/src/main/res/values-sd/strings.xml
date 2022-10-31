@@ -285,7 +285,7 @@
   <string name="delete_helper_show_deletion_message_if">%1$s ڊاھ لاءِ اميدوار ڪيو ويو.</string>
   <string name="delete_helper_show_deletion_title_failed">ناڪام</string>
   <string name="delete_helper_show_deletion_message_else">ڊاھ جي درخواست نہ ٿي سگهي.</string>
-  <string name="delete_helper_ask_spam_selfie">ھڪ سيلفي</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">ھڪ سيلفي</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">انٽرنيٽ مان بلاترتيب ڦوٽو</string>
   <string name="delete_helper_ask_reason_copyright_logo">لوگو</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">ڇاڪاڻ تہ اھو آھي</string>

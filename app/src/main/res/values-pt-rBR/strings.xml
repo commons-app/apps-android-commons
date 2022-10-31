@@ -507,9 +507,9 @@
   <string name="delete_helper_show_deletion_message_if">Nomeado %1$s para exclusão.</string>
   <string name="delete_helper_show_deletion_title_failed">Falhou</string>
   <string name="delete_helper_show_deletion_message_else">Não foi possível pedir eliminação.</string>
-  <string name="delete_helper_ask_spam_selfie">Uma selfie</string>
-  <string name="delete_helper_ask_spam_blurry">Embaçado</string>
-  <string name="delete_helper_ask_spam_nonsense">Sem sentido</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Uma selfie</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Embaçado</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Sem sentido</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Divulgação</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Foto aleatória da internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logótipo</string>

@@ -531,9 +531,9 @@
   <string name="delete_helper_show_deletion_message_if">已提出将%1删除</string>
   <string name="delete_helper_show_deletion_title_failed">失败了</string>
   <string name="delete_helper_show_deletion_message_else">不能请求删除</string>
-  <string name="delete_helper_ask_spam_selfie">自拍</string>
-  <string name="delete_helper_ask_spam_blurry">模糊</string>
-  <string name="delete_helper_ask_spam_nonsense">无意义</string>
+  <string name="delete_helper_ask_spam_selfie">未在任何条目中使用的自拍</string>
+  <string name="delete_helper_ask_spam_blurry">完全模糊</string>
+  <string name="delete_helper_ask_spam_nonsense">无意义，在任何条目中都完全无法使用</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">按压图片</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">来自网络的随机图片</string>
   <string name="delete_helper_ask_reason_copyright_logo">标志</string>

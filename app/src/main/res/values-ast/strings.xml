@@ -452,9 +452,9 @@
   <string name="delete_helper_show_deletion_message_if">Marcóse %1$s pa desaniciar.</string>
   <string name="delete_helper_show_deletion_title_failed">Falló</string>
   <string name="delete_helper_show_deletion_message_else">Non pudo pidise\'l desaniciu.</string>
-  <string name="delete_helper_ask_spam_selfie">Un autorretratu</string>
-  <string name="delete_helper_ask_spam_blurry">Borrosa</string>
-  <string name="delete_helper_ask_spam_nonsense">Xirigonza</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Un autorretratu</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Borrosa</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Xirigonza</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Semeya de la prensa</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Semeya tomada d\'internet al debalu</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

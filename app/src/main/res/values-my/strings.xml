@@ -335,8 +335,8 @@
   <string name="delete_helper_show_deletion_message_if">%1$s ဖျက်ပစ်ရန် အဆိုပြုခဲ့သည်</string>
   <string name="delete_helper_show_deletion_title_failed">မအောင်မြင်ပါ</string>
   <string name="delete_helper_show_deletion_message_else">ပယ်ဖျက်ရန် မတောင်းဆိုနိုင်ပါ</string>
-  <string name="delete_helper_ask_spam_blurry">မှုန်ဝါး</string>
-  <string name="delete_helper_ask_spam_nonsense">အဓိပ္ပါယ်မရှိ</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">မှုန်ဝါး</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">အဓိပ္ပါယ်မရှိ</string>
   <string name="delete_helper_ask_reason_copyright_logo">လိုဂို</string>
   <string name="category_edit_helper_make_edit_toast">ကဏ္ဍများမွမ်းမံရန် ကြိုးစားနေသည်။</string>
   <string name="category_edit_helper_show_edit_title">ကဏ္ဍမွမ်းမံ</string>

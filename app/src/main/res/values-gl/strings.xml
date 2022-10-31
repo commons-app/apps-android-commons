@@ -410,9 +410,9 @@
   <string name="delete_helper_show_deletion_title">Nomeando para borrado</string>
   <string name="delete_helper_show_deletion_title_success">Todo correcto</string>
   <string name="delete_helper_show_deletion_title_failed">Fallou</string>
-  <string name="delete_helper_ask_spam_selfie">Un autorretrato</string>
-  <string name="delete_helper_ask_spam_blurry">Borrosa</string>
-  <string name="delete_helper_ask_spam_nonsense">Sen sentido</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Un autorretrato</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Borrosa</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Sen sentido</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Foto de prensa</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Foto aleatoria de internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

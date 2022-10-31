@@ -6,6 +6,7 @@
 * BaRaN6161 TURK
 * Cigaryno
 * Cyclicus
+* DavidL
 * Derugon
 * Eneelk
 * Fitoschido
@@ -523,9 +524,9 @@
   <string name="delete_helper_show_deletion_message_if">%1$s nommé pour suppression.</string>
   <string name="delete_helper_show_deletion_title_failed">Échec</string>
   <string name="delete_helper_show_deletion_message_else">Impossible de solliciter la suppression.</string>
-  <string name="delete_helper_ask_spam_selfie">Un selfie</string>
-  <string name="delete_helper_ask_spam_blurry">Flou</string>
-  <string name="delete_helper_ask_spam_nonsense">Non-sens</string>
+  <string name="delete_helper_ask_spam_selfie">un selfie qui n’est utilisé dans aucun article</string>
+  <string name="delete_helper_ask_spam_blurry">totalement flou</string>
+  <string name="delete_helper_ask_spam_nonsense">non-sens, absolument inutilisable dans n’importe quel article</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Photo de presse</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Photo aléatoire reprise d’Internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

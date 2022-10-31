@@ -512,9 +512,9 @@
   <string name="delete_helper_show_deletion_message_if">Nominando %1$s para borrado.</string>
   <string name="delete_helper_show_deletion_title_failed">Falló</string>
   <string name="delete_helper_show_deletion_message_else">No se pudo solicitar el borrado.</string>
-  <string name="delete_helper_ask_spam_selfie">Un autorretrato</string>
-  <string name="delete_helper_ask_spam_blurry">Borrosa</string>
-  <string name="delete_helper_ask_spam_nonsense">Sinsentido</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Un autorretrato</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Borrosa</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Sinsentido</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Fotografía para prensa</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Foto cualquiera tomada de internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

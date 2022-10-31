@@ -469,9 +469,9 @@
   <string name="delete_helper_show_deletion_message_if">%1$s ను తొలగింపుకు నామినేటు చేసాం.</string>
   <string name="delete_helper_show_deletion_title_failed">విఫలమైంది</string>
   <string name="delete_helper_show_deletion_message_else">తొలగింపును అభ్యర్ధించలేక పోయాం</string>
-  <string name="delete_helper_ask_spam_selfie">ఇదో సెల్ఫీ</string>
-  <string name="delete_helper_ask_spam_blurry">మసగ్గా ఉంది</string>
-  <string name="delete_helper_ask_spam_nonsense">చెత్త</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">ఇదో సెల్ఫీ</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">మసగ్గా ఉంది</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">చెత్త</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">ప్రెస్ ఫోటో</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">అంతర్జాలం నుండి సంగ్రహించిన ఫోటో</string>
   <string name="delete_helper_ask_reason_copyright_logo">లోగో</string>

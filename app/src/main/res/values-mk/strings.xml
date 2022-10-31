@@ -492,9 +492,9 @@
   <string name="delete_helper_show_deletion_message_if">%1$s е предложена за бришење.</string>
   <string name="delete_helper_show_deletion_title_failed">Не успеа</string>
   <string name="delete_helper_show_deletion_message_else">Не можев да побарам бришење.</string>
-  <string name="delete_helper_ask_spam_selfie">Самослик</string>
-  <string name="delete_helper_ask_spam_blurry">Матно</string>
-  <string name="delete_helper_ask_spam_nonsense">Бесмислено</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Самослик</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Матно</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Бесмислено</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Новинарска слика</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Произволна слика од семрежјето</string>
   <string name="delete_helper_ask_reason_copyright_logo">Лого</string>

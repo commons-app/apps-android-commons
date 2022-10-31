@@ -435,9 +435,9 @@
   <string name="delete_helper_show_deletion_message_if">Nominà %1$s par ła scançełasion.</string>
   <string name="delete_helper_show_deletion_title_failed">Fałimento</string>
   <string name="delete_helper_show_deletion_message_else">Inposibiłe domandarghene ła scançełasion</string>
-  <string name="delete_helper_ask_spam_selfie">On selfie</string>
-  <string name="delete_helper_ask_spam_blurry">Sfogà</string>
-  <string name="delete_helper_ask_spam_nonsense">Sensa senso</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">On selfie</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Sfogà</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Sensa senso</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Stanpa foto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Foto a ocio da internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

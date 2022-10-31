@@ -406,9 +406,9 @@
   <string name="delete_helper_show_deletion_message_if">S\'ha nominat %1$s per a eliminar.</string>
   <string name="delete_helper_show_deletion_title_failed">Ha fallat</string>
   <string name="delete_helper_show_deletion_message_else">No s\'ha pogut sol·licitar l\'eliminació.</string>
-  <string name="delete_helper_ask_spam_selfie">Una autofoto</string>
-  <string name="delete_helper_ask_spam_blurry">Borrosa</string>
-  <string name="delete_helper_ask_spam_nonsense">Sense sentit</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Una autofoto</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Borrosa</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Sense sentit</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Foto de premsa</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Foto aleatòria d\'Internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logotip</string>

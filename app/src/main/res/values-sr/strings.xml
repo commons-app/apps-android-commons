@@ -417,9 +417,9 @@
   <string name="delete_helper_show_deletion_message_if">Номинован %1$s за брисање.</string>
   <string name="delete_helper_show_deletion_title_failed">Није успело</string>
   <string name="delete_helper_show_deletion_message_else">Није могуће затражити брисање.</string>
-  <string name="delete_helper_ask_spam_selfie">Селфи</string>
-  <string name="delete_helper_ask_spam_blurry">Замагљено</string>
-  <string name="delete_helper_ask_spam_nonsense">Бесмислено</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Селфи</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Замагљено</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Бесмислено</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Фото репортажа</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Насумична фотографија са интерната</string>
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>

@@ -541,9 +541,9 @@
   <string name="delete_helper_show_deletion_message_if">Номинировано %1$s на удаление.</string>
   <string name="delete_helper_show_deletion_title_failed">Не удалось</string>
   <string name="delete_helper_show_deletion_message_else">Невозможно запросить удаление.</string>
-  <string name="delete_helper_ask_spam_selfie">Селфи</string>
-  <string name="delete_helper_ask_spam_blurry">Размыто</string>
-  <string name="delete_helper_ask_spam_nonsense">Бессмыслица</string>
+  <string name="delete_helper_ask_spam_selfie">селфи, которое не используется ни в одной статье</string>
+  <string name="delete_helper_ask_spam_blurry">полностью размыто</string>
+  <string name="delete_helper_ask_spam_nonsense">бессмыслица, абсолютно неуместная ни в какой статье</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Новостное фото</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Случайное фото из интернет</string>
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>

@@ -540,9 +540,9 @@
   <string name="delete_helper_show_deletion_message_if">تم ترشيح %1$s للحذف.</string>
   <string name="delete_helper_show_deletion_title_failed">فشل</string>
   <string name="delete_helper_show_deletion_message_else">لا يمكن طلب الحذف.</string>
-  <string name="delete_helper_ask_spam_selfie">سيلفي</string>
-  <string name="delete_helper_ask_spam_blurry">ضبابية</string>
-  <string name="delete_helper_ask_spam_nonsense">كلام فارغ</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">سيلفي</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">ضبابية</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">كلام فارغ</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">اضغط على الصورة</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">صورة عشوائية من الإنترنت</string>
   <string name="delete_helper_ask_reason_copyright_logo">شعار</string>

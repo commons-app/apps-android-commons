@@ -298,8 +298,8 @@
   <string name="exif_tag_name_location">Herune</string>
   <string name="exif_tag_name_cameraModel">Modelê kamera</string>
   <string name="image_info">Melumatê resımi</string>
-  <string name="delete_helper_ask_spam_blurry">Xesratın</string>
-  <string name="delete_helper_ask_spam_nonsense">Bêmena</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Xesratın</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Bêmena</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Fotrafi çap kerê</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">İnternet ra resimo raştameye</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

@@ -506,9 +506,9 @@
   <string name="delete_helper_show_deletion_message_if">Datoteka »%1$s« je predlagana za izbris.</string>
   <string name="delete_helper_show_deletion_title_failed">Neuspešno</string>
   <string name="delete_helper_show_deletion_message_else">Izbrisa ni bilo mogoče zahtevati.</string>
-  <string name="delete_helper_ask_spam_selfie">Sebek</string>
-  <string name="delete_helper_ask_spam_blurry">Zamegljeno</string>
-  <string name="delete_helper_ask_spam_nonsense">Nesmisel</string>
+  <string name="delete_helper_ask_spam_selfie">sebek, ki ni uporabljen v članku</string>
+  <string name="delete_helper_ask_spam_blurry">popolnoma zamegljeno</string>
+  <string name="delete_helper_ask_spam_nonsense">nesmisel, absolutno neuporaben v katerem koli članku</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Tiskovna fotografija</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Naključna fotografija s spleta</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logotip</string>

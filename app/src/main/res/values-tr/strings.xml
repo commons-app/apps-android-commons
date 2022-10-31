@@ -513,9 +513,9 @@
   <string name="delete_helper_show_deletion_message_if">%1$s, silme için aday gösterildi.</string>
   <string name="delete_helper_show_deletion_title_failed">Başarısız</string>
   <string name="delete_helper_show_deletion_message_else">Silme işlemi istenemedi.</string>
-  <string name="delete_helper_ask_spam_selfie">Selfie</string>
-  <string name="delete_helper_ask_spam_blurry">Bulanık</string>
-  <string name="delete_helper_ask_spam_nonsense">Anlamsız</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Selfie</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Bulanık</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Anlamsız</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Basın fotoğrafı</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">İnternetten rastgele fotoğraf</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

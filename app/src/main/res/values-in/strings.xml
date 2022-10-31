@@ -496,9 +496,9 @@
   <string name="delete_helper_show_deletion_message_if">Berhasil menominasikan %1$ untuk dihapus.</string>
   <string name="delete_helper_show_deletion_title_failed">Gagal</string>
   <string name="delete_helper_show_deletion_message_else">Tidak dapat meminta penghapusan.</string>
-  <string name="delete_helper_ask_spam_selfie">Foto selfi</string>
-  <string name="delete_helper_ask_spam_blurry">Buram</string>
-  <string name="delete_helper_ask_spam_nonsense">Omong kosong</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Foto selfi</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Buram</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Omong kosong</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Tekan foto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Foto acak dari internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

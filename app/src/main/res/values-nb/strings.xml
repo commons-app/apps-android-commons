@@ -460,9 +460,9 @@
   <string name="delete_helper_show_deletion_message_if">Nominerte %1$s for sletting</string>
   <string name="delete_helper_show_deletion_title_failed">Mislyktes</string>
   <string name="delete_helper_show_deletion_message_else">Kunne ikke be om sletting.</string>
-  <string name="delete_helper_ask_spam_selfie">En selfie</string>
-  <string name="delete_helper_ask_spam_blurry">Sløret</string>
-  <string name="delete_helper_ask_spam_nonsense">Vrøvl</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">En selfie</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Sløret</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Vrøvl</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Pressefoto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Tilfeldig bilde fra internett</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

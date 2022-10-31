@@ -490,9 +490,9 @@
   <string name="delete_helper_show_deletion_message_if">%1$sの削除依頼が成功しました。</string>
   <string name="delete_helper_show_deletion_title_failed">失敗しました</string>
   <string name="delete_helper_show_deletion_message_else">削除のリクエストができません。</string>
-  <string name="delete_helper_ask_spam_selfie">自撮り</string>
-  <string name="delete_helper_ask_spam_blurry">ぼやけている</string>
-  <string name="delete_helper_ask_spam_nonsense">いたずら</string>
+  <string name="delete_helper_ask_spam_selfie" fuzzy="true">自撮り</string>
+  <string name="delete_helper_ask_spam_blurry" fuzzy="true">ぼやけている</string>
+  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">いたずら</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">広報用の写真</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">インターネットで拾った無関係な画像です</string>
   <string name="delete_helper_ask_reason_copyright_logo">ロゴ</string>
