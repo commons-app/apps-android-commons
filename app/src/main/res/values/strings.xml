@@ -532,8 +532,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Press photo</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Random photo from internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
+  <string name="delete_helper_ask_reason_copyright_panorama">Breach of Freedom of Panorama rules</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Because it is</string>
-
   <string name="category_edit_helper_make_edit_toast">Trying to update categories.</string>
   <string name="category_edit_helper_show_edit_title">Category update</string>
   <string name="category_edit_helper_show_edit_title_success">Success</string>

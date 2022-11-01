@@ -171,12 +171,16 @@ public class DeleteHelper {
             reasonListEnglish[1] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_spam_blurry);
             reasonListEnglish[2] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_spam_nonsense);
         } else if (problem == ReviewController.DeleteReason.COPYRIGHT_VIOLATION) {
+            reasonList = new String[]{"Reason 1", "Reason 2", "Reason 3", "Reason 4"};
+            reasonListEnglish = new String[]{"Eng1", "Eng2", "Eng3", "Eng4"};
             reasonList[0] = context.getString(R.string.delete_helper_ask_reason_copyright_press_photo);
             reasonList[1] = context.getString(R.string.delete_helper_ask_reason_copyright_internet_photo);
             reasonList[2] = context.getString(R.string.delete_helper_ask_reason_copyright_logo);
+            reasonList[3] = context.getString(R.string.delete_helper_ask_reason_copyright_panorama);
             reasonListEnglish[0] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_press_photo);
             reasonListEnglish[1] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_internet_photo);
             reasonListEnglish[2] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_logo);
+            reasonListEnglish[3] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_panorama);
         }
 
         alert.setMultiChoiceItems(reasonList, checkedItems, listener = (dialogInterface, position, isChecked) -> {
@@ -192,12 +196,13 @@ public class DeleteHelper {
                 !mUserReason.isEmpty());
         });
 
+        String[] newReasonListEnglish = reasonListEnglish;
         alert.setPositiveButton(context.getString(R.string.ok), (dialogInterface, i) -> {
 
             String reason = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_alert_set_positive_button_reason) + " ";
 
             for (int j = 0; j < mUserReason.size(); j++) {
-                reason = reason + reasonListEnglish[mUserReason.get(j)];
+                reason = reason + newReasonListEnglish[mUserReason.get(j)];
                 if (j != mUserReason.size() - 1) {
                     reason = reason + ", ";
                 }
