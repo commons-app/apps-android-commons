@@ -125,7 +125,9 @@ public class UploadableFile implements Parcelable {
      */
     private DateTimeWithSource getDateTimeFromExif() {
         try {
-            ExifInterface exif = new ExifInterface(file.getAbsolutePath());
+            ExifInterface exif = new ExifInterface(file.getAbsolutePath() /* unfortunately at this point the file (/data/user/0/fr.free.nrw.commons/cache/CommonsContributions/15d5892c-d7c4-46f7-8645-020a7ab032ab.jpg) has 0,0 as EXIF lat/lon */);
+            double[] location = exif.getLatLong();
+            exif.getAltitude(-1);
             // TAG_DATETIME returns the last edited date, we need TAG_DATETIME_ORIGINAL for creation date
             // See issue https://github.com/commons-app/apps-android-commons/issues/1971
             String dateTimeSubString = exif.getAttribute(ExifInterface.TAG_DATETIME_ORIGINAL);

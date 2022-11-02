@@ -4,7 +4,10 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static fr.free.nrw.commons.di.NetworkingModule.NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE;
 
+import android.Manifest;
+import android.Manifest.permission;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +24,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +32,8 @@ import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
 import androidx.recyclerview.widget.RecyclerView.ItemAnimator;
 import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener;
 import androidx.recyclerview.widget.SimpleItemAnimator;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -319,6 +325,24 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         rvContributionsList.smoothScrollToPosition(0);
     }
 
+    // Register the permissions callback, which handles the user's response to the
+    // system permissions dialog. Save the return value, an instance of
+    // ActivityResultLauncher, as an instance variable.
+    private ActivityResultLauncher<String> requestPermissionLauncher =
+        registerForActivityResult(new RequestPermission(), isGranted -> {
+            if (isGranted) {
+                // Permission is granted. Continue the action or workflow in your
+                // app.
+            } else {
+                // Explain to the user that the feature is unavailable because the
+                // feature requires a permission that the user has denied. At the
+                // same time, respect the user's decision. Don't link to system
+                // settings in an effort to convince the user to change their
+                // decision.
+            }
+        });
+
+
     private void animateFAB(final boolean isFabOpen) {
         this.isFabOpen = !isFabOpen;
         if (fabPlus.isShown()) {
@@ -338,6 +362,26 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
             fabCamera.show();
             fabGallery.show();
             fabCustomGallery.show();
+
+            //int i = ContextCompat.checkSelfPermission(
+            //    getContext(), permission.ACCESS_MEDIA_LOCATION);
+            //if (i !=
+            //        PackageManager.PERMISSION_GRANTED) {
+
+                /*if (shouldShowRequestPermissionRationale(...)) {
+                    // In an educational UI, explain to the user why your app requires this
+                    // permission for a specific feature to behave as expected, and what
+                    // features are disabled if it's declined. In this UI, include a
+                    // "cancel" or "no thanks" button that lets the user continue
+                    // using your app without granting the permission.
+                    showInContextUI(...);
+                } else {*/
+                    // You can directly ask for the permission.
+                    // The registered ActivityResultCallback gets the result of this request.
+                    requestPermissionLauncher.launch(
+                            Manifest.permission.ACCESS_MEDIA_LOCATION);
+                //}
+            //}
         }
         this.isFabOpen = !isFabOpen;
         }

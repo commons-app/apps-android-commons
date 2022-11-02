@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import androidx.exifinterface.media.ExifInterface;
 import androidx.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -19,6 +20,7 @@ import fr.free.nrw.commons.customselector.model.Image;
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -270,11 +272,29 @@ public class FilePicker implements Constants {
         ClipData clipData = data.getClipData();
         if (clipData == null) {
             Uri uri = data.getData();
+
+            InputStream stream = activity.getBaseContext().getContentResolver().openInputStream(uri);
+            //if (stream == null) {
+                //Log.w(TAG, "Got a null input stream for " + photoUri);
+                //continue;
+            //}
+            ExifInterface exif = new ExifInterface(stream);
+            double[] location = exif.getLatLong();
+
             UploadableFile file = PickedFiles.pickedExistingPicture(activity, uri);
             files.add(file);
         } else {
             for (int i = 0; i < clipData.getItemCount(); i++) {
                 Uri uri = clipData.getItemAt(i).getUri();
+
+                InputStream stream = activity.getBaseContext().getContentResolver().openInputStream(uri);
+                //if (stream == null) {
+                //Log.w(TAG, "Got a null input stream for " + photoUri);
+                //continue;
+                //}
+                ExifInterface exif = new ExifInterface(stream);
+                double[] location = exif.getLatLong();
+
                 UploadableFile file = PickedFiles.pickedExistingPicture(activity, uri);
                 files.add(file);
             }
