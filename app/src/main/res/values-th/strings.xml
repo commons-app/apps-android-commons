@@ -19,6 +19,7 @@
   <string name="commons_logo">โลโก้คอมมอนส์</string>
   <string name="commons_website">เว็บไซต์คอมมอนส์</string>
   <string name="submit">ส่ง</string>
+  <string name="nearby_row_image">รูปภาพ</string>
   <string name="nearby_all">ทั้งหมด</string>
   <string name="appwidget_img">รูปภาพประจำวัน</string>
   <string name="uploads_pending_notification_indicator">กำลังอัปโหลดไฟล์ %1$d ไฟล์</string>
@@ -82,7 +83,7 @@
   <string name="menu_share">แชร์</string>
   <string name="share_title_hint">คำบรรยาย (จำเป็น)</string>
   <string name="share_description_hint">คำอธิบาย</string>
-  <string name="share_caption_hint" fuzzy="true">คำอธิบายภาพ (จำกัดที่ 255 อักขระ)</string>
+  <string name="share_caption_hint">คำอธิบาย</string>
   <string name="login_failed_network">ไม่สามารถเข้าสู่ระบบได้ - ความล้มเหลวของเครือข่าย</string>
   <string name="login_failed_throttled">จำนวนครั้งที่พยายามไม่สำเร็จมากเกินไป กรุณาลองอีกครั้งในอีกสักครู่</string>
   <string name="login_failed_blocked">ขออภัย ผู้ใช้นี้ถูกบล็อกบนคอมมอนส์อยู่</string>
@@ -96,7 +97,7 @@
   <string name="menu_save_categories">บันทึก</string>
   <string name="refresh_button">รีเฟรช</string>
   <string name="display_list_button">รายการ</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">ยังไม่มีการอัปโหลด</string>
+  <string name="contributions_subtitle_zero">ยังไม่มีการอัปโหลด</string>
   <string name="categories_not_found">ไม่พบหมวดหมู่ที่ตรงกับ %$1s</string>
   <string name="categories_skip_explanation">เพิ่มหมวดหมู่เพื่อทำให้รูปภาพของคุณค้นพบได้ง่ายขึ้นบนวิกิมีเดียคอมมอนส์\nเริ่มพิมพ์เพื่อเพิ่มหมวดหมู่</string>
   <string name="categories_activity_title">หมวดหมู่</string>

@@ -2,6 +2,7 @@
 <!-- Authors:
 * DCLXVI
 * Datawiki30
+* Kareyac
 * MegaAlex
 * Spiritia
 * StanProg
@@ -304,4 +305,5 @@
   <string name="menu_option_unread">Преглеждане на непрочетени</string>
   <string name="error_occurred_in_picking_images">Възникна грешка при избирането на изображенията</string>
   <string name="please_wait">Моля, изчакайте...</string>
+  <string name="delete_helper_ask_spam_blurry">напълно размазано</string>
 </resources>

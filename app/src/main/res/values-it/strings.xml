@@ -489,9 +489,9 @@
   <string name="delete_helper_show_deletion_message_if">Proponi %1$s per la cancellazione.</string>
   <string name="delete_helper_show_deletion_title_failed">Non riuscito</string>
   <string name="delete_helper_show_deletion_message_else">Impossibile richiedere la cancellazione.</string>
-  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Un selfie</string>
-  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Sfocato</string>
-  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Senza senso</string>
+  <string name="delete_helper_ask_spam_selfie">un selfie che non viene utilizzato in nessuna voce</string>
+  <string name="delete_helper_ask_spam_blurry">totalmente sfocato</string>
+  <string name="delete_helper_ask_spam_nonsense">senza senso, assolutamente inutilizzabili in qualsiasi voce</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Stampa foto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Foto casuale presa da internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>

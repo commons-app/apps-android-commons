@@ -292,5 +292,6 @@
   <string name="title_for_media">ميڊيا</string>
   <string name="count_prefix">ڳاڻيٽو:</string>
   <string name="leaderboard_column_count">ڳاڻيٽو</string>
+  <string name="label">ليبل</string>
   <string name="description">تشريح</string>
 </resources>

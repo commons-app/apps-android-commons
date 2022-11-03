@@ -54,7 +54,7 @@
     <item quantity="many">%1$d ملف جاري رفعه</item>
     <item quantity="other">%1$d ملفات جاري رفعها</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">(%1$d)</item>
     <item quantity="two">(%1$d)</item>
@@ -63,21 +63,21 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">بدء التحميلات</string>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="zero">جارٍ بدء %1$d رفع</item>
-    <item quantity="one">جارٍ بدء %1$d رفع</item>
-    <item quantity="two">جارٍ بدء %1$d رفع</item>
-    <item quantity="few">جارٍ بدء %1$d رفع</item>
-    <item quantity="many">جارٍ بدء %1$d رفع</item>
-    <item quantity="other">جارٍ بدء %1$d مرفوعات</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="zero">لا معالج</item>
+    <item quantity="one">معالجة %d تحميل </item>
+    <item quantity="two">معالجان</item>
+    <item quantity="few">معالج</item>
+    <item quantity="many">معالجة</item>
+    <item quantity="other">معالجة %d تحميلات</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="zero">%1$d رفع</item>
-    <item quantity="one">%1$d رفع</item>
-    <item quantity="two">%1$d رفع</item>
-    <item quantity="few">%1$d رفع</item>
-    <item quantity="many">%1$d رفع</item>
-    <item quantity="other">%1$d رفع</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="zero">لا مرفوعات</item>
+    <item quantity="one">%d تحميل</item>
+    <item quantity="two">مرفوعان</item>
+    <item quantity="few">مرفوع</item>
+    <item quantity="many">مرفوع</item>
+    <item quantity="other">%d تحميلات</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="zero">سيتم ترخيص هذه الصور تحت %1$s</item>
@@ -540,9 +540,9 @@
   <string name="delete_helper_show_deletion_message_if">تم ترشيح %1$s للحذف.</string>
   <string name="delete_helper_show_deletion_title_failed">فشل</string>
   <string name="delete_helper_show_deletion_message_else">لا يمكن طلب الحذف.</string>
-  <string name="delete_helper_ask_spam_selfie" fuzzy="true">سيلفي</string>
-  <string name="delete_helper_ask_spam_blurry" fuzzy="true">ضبابية</string>
-  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">كلام فارغ</string>
+  <string name="delete_helper_ask_spam_selfie">سيلفي</string>
+  <string name="delete_helper_ask_spam_blurry">ضبابية</string>
+  <string name="delete_helper_ask_spam_nonsense">كلام فارغ</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">اضغط على الصورة</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">صورة عشوائية من الإنترنت</string>
   <string name="delete_helper_ask_reason_copyright_logo">شعار</string>
@@ -550,8 +550,27 @@
   <string name="category_edit_helper_make_edit_toast">محاولة تحديث التصنيفات.</string>
   <string name="category_edit_helper_show_edit_title">تحديث التصنيف</string>
   <string name="category_edit_helper_show_edit_title_success">نجاح</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="zero">صفر تصنيف</item>
+    <item quantity="one">تصنيف واحد</item>
+    <item quantity="two">تصنيفان</item>
+    <item quantity="few">%1$s تصنيف</item>
+    <item quantity="many">%1$s تصنيفات</item>
+    <item quantity="other">%1$s تصنيف</item>
+  </plurals>
   <string name="category_edit_helper_edit_message_else">تعذر إضافة التصنيفات.</string>
   <string name="category_edit_button_text">تحديث التصنيفات</string>
+  <string name="depictions_edit_helper_make_edit_toast">محاولة تحديث الصور.</string>
+  <string name="depictions_edit_helper_show_edit_title">تحرير الصور</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="zero">صفر وصف</item>
+    <item quantity="one">وصف واحد</item>
+    <item quantity="two">وصفان</item>
+    <item quantity="few">%1$s وصف</item>
+    <item quantity="many">%1$s وصوفات</item>
+    <item quantity="other">%1$s وصف</item>
+  </plurals>
+  <string name="depictions_edit_helper_edit_message_else">لا يمكن إضافة الصور.</string>
   <string name="coordinates_edit_helper_make_edit_toast">محاولة تحديث الإحداثيات.</string>
   <string name="coordinates_edit_helper_show_edit_title">تحديث الإحداثيات</string>
   <string name="description_edit_helper_show_edit_title">تحديث الوصف</string>
@@ -622,7 +641,10 @@
   <string name="more">المزيد</string>
   <string name="bookmarks">إشارات مرجعية</string>
   <string name="achievements_tab_title">إنجازات</string>
+  <string name="leaderboard_tab_title">ليدربورد</string>
   <string name="rank_prefix">مرتبة:</string>
+  <string name="count_prefix">العدد:</string>
+  <string name="leaderboard_column_rank">مرتبة</string>
   <string name="leaderboard_column_user">مستخدم</string>
   <string name="leaderboard_column_count">العدد</string>
   <string name="setting_avatar_dialog_title">تعيين كصورة شخصية في لوحة الصدارة</string>
@@ -631,9 +653,12 @@
   <string name="avatar_set_unsuccessfully">خطأ في تعيين الصورة الرمزية الجديدة، يرجى المحاولة مرة أخرى</string>
   <string name="menu_set_avatar">تعيين كصورة رمزية</string>
   <string name="leaderboard_yearly">سنويا</string>
+  <string name="leaderboard_weekly">أسبوعيا</string>
+  <string name="leaderboard_all_time">كل الوقت</string>
   <string name="leaderboard_upload">رفع</string>
   <string name="leaderboard_nearby">مجاور</string>
   <string name="leaderboard_used">مستخدَم</string>
+  <string name="leaderboard_my_rank_button_text">ترتيبي</string>
   <string name="mapbox_telemetry">القياس عن بعد Mapbox</string>
   <string name="telemetry_opt_out_summary">أرسل بيانات الاستخدام والموقع المجهول إلى Mapbox عند استخدام ميزة قريبة</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;تحسين هذه الخريطة&lt;/a&gt;</string>
@@ -652,13 +677,88 @@
   <string name="depicts_tooltip">يرجى البحث وتحديد جميع المفاهيم التي تصورها هذه الصورة. كن دقيق بقدر استطاعتك. إذا كانت الصورة تصور عناصر متعددة، فاخترها جميعًا في حدود المعقول. لا تختر علامات عامة في حالة توفر المزيد من العلامات المحددة.</string>
   <string name="categories_tooltip">الرجاء تحديد التصنيفات المناسبة. على عكس الصور، تتوفر التصنيفات باللغة الإنجليزية فقط.</string>
   <string name="license_tooltip">كومنز يجعل صورك قابلة لإعادة الاستخدام وتكييفها من قبل الجميع. هل تريد التنازل عن جميع الحقوق؟ هل تريد أن تُنسب إليك؟ هل تريد أن تستخدام التكييفات نفس الترخيص؟</string>
+  <string name="depicts_step_title">يصور</string>
+  <string name="license_step_title">رخصة وسائل الإعلام</string>
+  <string name="media_detail_step_title">تفاصيل الوسائط</string>
   <string name="menu_view_category_page">عرض صفحة التصنيف</string>
+  <string name="menu_view_item_page">عرض صفحة البند</string>
+  <string name="app_ui_language">لغة واجهة مستخدم التطبيق</string>
+  <string name="remove">يزيل التسمية التوضيحية والوصف</string>
+  <string name="read_help_link">اقرأ المزيد</string>
+  <string name="media_detail_in_all_languages">بكل اللغات</string>
   <string name="choose_a_location">اختر موقعًا</string>
+  <string name="pan_and_zoom_to_adjust">التحريك والتكبير للضبط</string>
   <string name="select_location_location_picker">حدد موقعًا</string>
+  <string name="show_in_map_app">إظهار في تطبيق الخريطة</string>
   <string name="modify_location">أضف الموقع</string>
+  <string name="location_picker_image_view">عرض صورة منتقي الموقع</string>
+  <string name="location_picker_image_view_shadow">ظل عرض الصورة لمنتقي الموقع</string>
   <string name="image_location">مكان الصورة</string>
+  <string name="check_whether_location_is_correct">تحقق مما إذا كان الموقع صحيحًا</string>
+  <string name="label">التسمية</string>
+  <string name="description">الوصف</string>
+  <string name="title_page_bookmarks_items">العناصر</string>
+  <string name="custom_selector_title">محدد مخصص</string>
+  <string name="custom_selector_empty_text">لا توجد صور</string>
+  <string name="done">تم</string>
+  <string name="back">رجوع</string>
+  <string name="welcome_custom_picture_selector_text">مرحبًا بك في محدد الصورة المخصص</string>
+  <string name="custom_selector_info_text1">يعرض لك هذا المنتقي الصور التي قمت بتحميلها بالفعل إلى العموم.</string>
+  <string name="custom_selector_info_text2">على عكس الصورة الموجودة على اليسار ، فإن الصورة الموجودة على اليمين بها شعار كومنز يشير إلى أنه تم تحميلها بالفعل. !ن! المس مع الاستمرار لمعاينة الصورة.</string>
+  <string name="welcome_custom_selector_ok">رائع</string>
+  <string name="custom_selector_already_uploaded_image_text">تم تحميل هذه الصورة بالفعل إلى العموم.</string>
+  <string name="wlm_upload_info">سيتم إدخال هذه الصورة في مسابقة Wiki Loves Monuments</string>
+  <string name="display_monuments">عرض الآثار</string>
+  <string name="wlm_month_message">إنه شهر Wiki Loves Monuments!</string>
+  <string name="learn_more">يتعلم أكثر</string>
+  <string name="wlm_campaign_title">الويكي تهوى المعالم</string>
+  <string name="wlm_campaign_description">Wiki Loves Monuments هي مسابقة صور دولية للآثار تنظمها ويكيميديا</string>
+  <string name="need_permission">تحتاج إذن</string>
+  <string name="read_phone_state_permission_message">تحتاج الخرائط المجاورة لقراءة PHONE STATE لتعمل بشكل صحيح</string>
+  <string name="contributions_of_user">مساهمات المستخدم: %s</string>
+  <string name="achievements_of_user">إنجازات المستخدم: %s</string>
+  <string name="menu_view_user_page">اعرض صفحة المستخدم</string>
+  <string name="edit_depictions">تحرير الصور</string>
+  <string name="edit_categories">تحرير الفئات</string>
+  <string name="advanced_options">خيارات متقدمة</string>
+  <string name="advanced_query_info_text">يمكنك تخصيص استعلام قريب. إذا حصلت على أخطاء ، قم بإعادة التعيين والتطبيق.</string>
+  <string name="apply">تطبيق</string>
+  <string name="reset">إعادة ضبط</string>
+  <string name="location_message">تساعد بيانات الموقع محرري Wiki في العثور على صورتك ، مما يجعلها أكثر فائدة.! N! لا يوجد موقع لعمليات التحميل الأخيرة.! N! نقترح عليك تشغيل الموقع في إعدادات تطبيق الكاميرا.</string>
+  <string name="no_location_found_title">لم يتم العثور على موقع</string>
+  <string name="no_location_found_message">ماذا عن إضافة المكان الذي تم التقاط هذه الصورة فيه؟! N! تساعد بيانات الموقع محرري Wiki في العثور على صورتك ، مما يجعلها أكثر فائدة.! N! شكرًا لك!</string>
+  <string name="add_location">أضف الموقع</string>
+  <string name="feedback_sharing_data_alert">يُرجى إزالة أي معلومات لا تشعر بالارتياح عند مشاركتها علنًا من هذا البريد الإلكتروني. أيضًا ، يرجى العلم أن عنوان بريدك الإلكتروني الذي تنشر به ، والاسم المرتبط وصورة الملف الشخصي ، سيكونان مرئيين للجمهور.</string>
+  <string name="explore_map_details">التفاصيل</string>
+  <string name="achievements_unavailable_beta">الإنجازات متوفرة فقط في نكهة المنتج ، يرجى مراجعة وثائق المطور.</string>
+  <string name="leaderboard_unavailable_beta">لوحة الصدارة متوفرة فقط في نكهة المنتج ، يرجى مراجعة وثائق المطور.</string>
   <string name="copyright_popup">يرجى فقط تحميل الصور التي قمت بالتقاطها بنفسك. المحملين من صور لديها حقوق النسخ سيتم منعهم من التحميل. وهذا ينطبق على مفضلي استخدام بيتا ايضا. شكرا لمشاركتكم في فحص هذ التطبيق</string>
+  <string name="select_feedback_data_choice">يرجى إلغاء تحديد أي معلومات لا تشعر بالارتياح لمشاركتها علنًا.</string>
+  <string name="api_level">مستوى API</string>
   <string name="android_version">إصدار الأندرويد</string>
+  <string name="device_manufacturer">الشركة المصنعة للجهاز</string>
+  <string name="device_model">طراز الجهاز</string>
   <string name="device_name">اسم الجهاز</string>
   <string name="network_type">نوع الشبكة</string>
+  <string name="thanks_feedback">شكرا لإبداء الرأي</string>
+  <string name="error_feedback">خطأ أثناء إرسال الملاحظات</string>
+  <string name="enter_description">ما هو رأيك؟</string>
+  <string name="your_feedback">تعليقاتك</string>
+  <string name="mark_as_not_for_upload">وضع علامة على أنه ليس للتحميل</string>
+  <string name="unmark_as_not_for_upload">إلغاء علامة على أنه ليس للتحميل</string>
+  <string name="show_already_actioned_pictures">عرض الصور بالفعل</string>
+  <string name="hiding_already_actioned_pictures">إخفاء الصور بالفعل</string>
+  <string name="no_more_images_found">لم يتم العثور على المزيد من الصور</string>
+  <string name="this_image_is_already_uploaded">تم تحميل هذه الصورة بالفعل</string>
+  <string name="can_not_select_this_image_for_upload">لا يمكن تحديد هذه الصورة للتحميل</string>
+  <string name="image_selected">تم تحديد الصورة</string>
+  <string name="image_marked_as_not_for_upload">تم وضع علامة على الصورة على أنها ليست للتحميل</string>
+  <string name="menu_view_report">تقرير</string>
+  <string name="report_violation">تبليغ عن عنف</string>
+  <string name="report_user">أخطر عن هذا المستخدم</string>
+  <string name="report_content">الإبلاغ عن هذا المحتوى</string>
+  <string name="request_user_block">طلب منع هذا المستخدم</string>
+  <string name="welcome_to_full_screen_mode_text">مرحبًا بك في وضع التحديد بملء الشاشة</string>
+  <string name="full_screen_mode_zoom_info">استخدم إصبعين للتكبير والتصغير.</string>
+  <string name="full_screen_mode_features_info">مرر سريعًا وطويلًا لتنفيذ هذه الإجراءات:! N! - يسار / يمين: انتقل إلى السابق / التالي! N! - لأعلى: حدد! N! - أسفل: وضع علامة على أنه ليس للتحميل.</string>
 </resources>
