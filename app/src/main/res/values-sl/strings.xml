@@ -103,15 +103,15 @@
   <string name="upload_paused_notification_title">Nalaganje datoteke »%1$s« je ustavljeno</string>
   <string name="upload_failed_notification_subtitle">Tapnite za ogled</string>
   <string name="upload_paused_notification_subtitle">Tapnite za ogled</string>
-  <string name="title_activity_contributions">Moja nedavna nalaganja</string>
+  <string name="title_activity_contributions">Moje nedavne naložitve</string>
   <string name="contribution_state_queued">V čakalni vrsti</string>
   <string name="contribution_state_failed">Spodletelo</string>
-  <string name="contribution_state_in_progress">Opravljeno %1$d%% nalaganja</string>
+  <string name="contribution_state_in_progress">Opravljeno %1$d%&amp;nbsp;% nalaganja</string>
   <string name="contribution_state_starting">Nalagam</string>
   <string name="menu_from_gallery">Iz galerije</string>
   <string name="menu_from_camera">Posnemi fotografijo</string>
   <string name="menu_nearby">Bližnje</string>
-  <string name="provider_contributions">Moja nalaganja</string>
+  <string name="provider_contributions">Moje naložitve</string>
   <string name="menu_share">Deli</string>
   <string name="menu_view_file_page">Ogled opisne strani</string>
   <string name="share_title_hint">Napis (obvezen)</string>
@@ -182,7 +182,7 @@
   <string name="tutorial_3_subtext_1">Sebkov ali fotografij prijateljev</string>
   <string name="tutorial_3_subtext_2">Slik, ki ste jih prenesli s spleta</string>
   <string name="tutorial_3_subtext_3">Zaslonskih posnetkov lastniških aplikacij</string>
-  <string name="tutorial_4_text">Zgled nalaganja:</string>
+  <string name="tutorial_4_text">Zgled naložitve:</string>
   <string name="tutorial_4_subtext_1">Naslov: Syndeyjska opera</string>
   <string name="tutorial_4_subtext_2">Opis: Pogled na sydneyjsko opero prek zaliva</string>
   <string name="tutorial_4_subtext_3">Kategorije: Sydney Opera House from the west, Sydney Opera House remote views</string>
@@ -217,7 +217,7 @@
   <string name="media_detail_description">Opis</string>
   <string name="media_detail_discussion">Pogovor</string>
   <string name="media_detail_author">Avtor</string>
-  <string name="media_detail_uploaded_date">Datum nalaganja</string>
+  <string name="media_detail_uploaded_date">Datum naložitve</string>
   <string name="media_detail_license">Licenca</string>
   <string name="media_detail_coordinates">Koordinate</string>
   <string name="media_detail_coordinates_empty">Niso navedene</string>

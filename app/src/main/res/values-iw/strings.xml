@@ -522,9 +522,9 @@
   <string name="delete_helper_show_deletion_message_if">הקובץ %1$s הועמד למחיקה.</string>
   <string name="delete_helper_show_deletion_title_failed">כשלון</string>
   <string name="delete_helper_show_deletion_message_else">לא ניתן לבקש מחיקה</string>
-  <string name="delete_helper_ask_spam_selfie" fuzzy="true">סלפי</string>
-  <string name="delete_helper_ask_spam_blurry" fuzzy="true">מטושטש</string>
-  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">חסר ערך</string>
+  <string name="delete_helper_ask_spam_selfie">תמונה עצמית (סלפי) שלא משמשת בשום ערך</string>
+  <string name="delete_helper_ask_spam_blurry">תמונה מטושטשת לגמרי</string>
+  <string name="delete_helper_ask_spam_nonsense">שטויות בלתי־שימושיות בעליל בשום ערך</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">תמונת יח״צ</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">תמונה אקראית מהאינטרנט</string>
   <string name="delete_helper_ask_reason_copyright_logo">לוגו</string>

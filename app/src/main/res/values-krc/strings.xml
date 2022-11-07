@@ -2,6 +2,7 @@
 <!-- Authors:
 * Envlh
 * Ernác
+* Къарачайлы
 -->
 <resources>
   <string name="app_name" fuzzy="true">Викигёзен</string>
@@ -38,8 +39,8 @@
   <string name="menu_save_categories">Сакъла</string>
   <string name="categories_activity_title">Категорияла</string>
   <string name="title_activity_settings">Джарашдырыула</string>
-  <string name="menu_about">Ачыкълау</string>
-  <string name="title_activity_about">Ачыкълау</string>
+  <string name="menu_about">Юсюнден</string>
+  <string name="title_activity_about">Юсюнден</string>
   <string name="menu_feedback">Оюмунгу билдир (эл. почта бла)</string>
   <string name="menu_cancel_upload">Ызына алыу</string>
   <string name="menu_download">Эндир</string>
