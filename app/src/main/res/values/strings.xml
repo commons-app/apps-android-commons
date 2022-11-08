@@ -393,7 +393,7 @@
 
   <string name="write_storage_permission_rationale_for_image_share">We need your permission to access the external storage of your device in order to upload images.</string>
   <string name="nearby_notification_dismiss_message">You won\'t see the nearest place that needs pictures anymore. However, you can re-enable this notification in Settings if you wish.</string>
-  <string name="step_count">Step %1$d of %2$d: %3$s</string>
+  <string name="step_count">%1$d/%2$d: %3$s</string>
   <string name="next">Next</string>
   <string name="previous">Previous</string>
   <string name="upload_title_duplicate" formatted="true">A file with the file name %1$s exists. Are you sure you want to proceed?\n\nNote: A suitable suffix will be added to the file name automatically.</string>
