@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import androidx.exifinterface.media.ExifInterface;
 import androidx.preference.PreferenceManager;
 import android.provider.MediaStore;
@@ -273,13 +275,17 @@ public class FilePicker implements Constants {
         if (clipData == null) {
             Uri uri = data.getData();
 
-            InputStream stream = activity.getBaseContext().getContentResolver().openInputStream(uri);
-            //if (stream == null) {
+            if (VERSION.SDK_INT >= VERSION_CODES.Q) {
+                Uri uriWithLocation = MediaStore.setRequireOriginal(uri);
+                InputStream stream = activity.getBaseContext().getContentResolver().openInputStream(uriWithLocation);
+                //if (stream == null) {
                 //Log.w(TAG, "Got a null input stream for " + photoUri);
                 //continue;
-            //}
-            ExifInterface exif = new ExifInterface(stream);
-            double[] location = exif.getLatLong();
+                //}
+                ExifInterface exif = new ExifInterface(stream);
+                double[] location = exif.getLatLong();
+            }
+
 
             UploadableFile file = PickedFiles.pickedExistingPicture(activity, uri);
             files.add(file);
@@ -287,13 +293,17 @@ public class FilePicker implements Constants {
             for (int i = 0; i < clipData.getItemCount(); i++) {
                 Uri uri = clipData.getItemAt(i).getUri();
 
-                InputStream stream = activity.getBaseContext().getContentResolver().openInputStream(uri);
-                //if (stream == null) {
-                //Log.w(TAG, "Got a null input stream for " + photoUri);
-                //continue;
-                //}
-                ExifInterface exif = new ExifInterface(stream);
-                double[] location = exif.getLatLong();
+                if (VERSION.SDK_INT >= VERSION_CODES.Q) {
+                    Uri uriWithLocation = MediaStore.setRequireOriginal(uri);
+                    InputStream stream = activity.getBaseContext().getContentResolver().openInputStream(uriWithLocation);
+                    //if (stream == null) {
+                    //Log.w(TAG, "Got a null input stream for " + photoUri);
+                    //continue;
+                    //}
+                    ExifInterface exif = new ExifInterface(stream);
+                    double[] location = exif.getLatLong();
+                }
+
 
                 UploadableFile file = PickedFiles.pickedExistingPicture(activity, uri);
                 files.add(file);
