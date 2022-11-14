@@ -19,8 +19,13 @@
   <string name="commons_logo">โลโก้คอมมอนส์</string>
   <string name="commons_website">เว็บไซต์คอมมอนส์</string>
   <string name="submit">ส่ง</string>
+  <string name="show_captions">คำบรรยายโดยย่อ</string>
+  <string name="row_item_language_description">คำบรรยายภาษาโดยย่อ</string>
+  <string name="row_item_caption">คำบรรยายโดยย่อ</string>
+  <string name="show_captions_description">คำอธิบาย</string>
   <string name="nearby_row_image">รูปภาพ</string>
   <string name="nearby_all">ทั้งหมด</string>
+  <string name="nearby_filter_search">ค้นหาดู</string>
   <string name="appwidget_img">รูปภาพประจำวัน</string>
   <string name="uploads_pending_notification_indicator">กำลังอัปโหลดไฟล์ %1$d ไฟล์</string>
   <plurals name="contributions_subtitle" fuzzy="true">
@@ -28,6 +33,7 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads">กำลังเริ่มอัปโหลด</string>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">กำลังเริ่มอัปโหลด %1$d รายการ</item>
     <item quantity="other">กำลังเริ่มอัปโหลด %1$d รายการ</item>
@@ -68,7 +74,7 @@
   <string name="upload_progress_notification_title_start" fuzzy="true">กำลังเริ่มการอัปโหลด %1$s</string>
   <string name="upload_progress_notification_title_in_progress">กำลังอัปโหลด %1$s</string>
   <string name="upload_progress_notification_title_finishing">กำลังเสร็จสิ้นการอัปโหลด %1$s</string>
-  <string name="upload_failed_notification_title" fuzzy="true">การอัปโหลด %1$s ล้มเหลว</string>
+  <string name="upload_failed_notification_title">อัปโหลดล้มเหลว %1$s</string>
   <string name="upload_failed_notification_subtitle">แตะเพื่อดู</string>
   <string name="upload_paused_notification_subtitle">แตะเพื่อดู</string>
   <string name="title_activity_contributions">การอัปโหลดล่าสุดของฉัน</string>
@@ -81,6 +87,7 @@
   <string name="menu_nearby">ใกล้เคียง</string>
   <string name="provider_contributions">การอัปโหลดของฉัน</string>
   <string name="menu_share">แชร์</string>
+  <string name="menu_view_file_page">ดูหน้าไฟล์</string>
   <string name="share_title_hint">คำบรรยาย (จำเป็น)</string>
   <string name="share_description_hint">คำอธิบาย</string>
   <string name="share_caption_hint">คำอธิบาย</string>
@@ -172,6 +179,7 @@
   <string name="upload">อัปโหลด</string>
   <string name="yes">ใช่</string>
   <string name="no">ไม่</string>
+  <string name="media_detail_caption">คำบรรยายโดยย่อ</string>
   <string name="media_detail_title">ชื่อเรื่อง</string>
   <string name="media_detail_description">คำอธิบาย</string>
   <string name="media_detail_discussion">พูดคุย</string>
