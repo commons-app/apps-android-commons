@@ -491,9 +491,9 @@
   <string name="delete_helper_show_deletion_message_if">Tilnefndi %1$s til eyðingar.</string>
   <string name="delete_helper_show_deletion_title_failed">Mistókst</string>
   <string name="delete_helper_show_deletion_message_else">Gat ekki beðið um eyðingu.</string>
-  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Sjálfsmynd</string>
-  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Móskuleg</string>
-  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Vitleysa</string>
+  <string name="delete_helper_ask_spam_selfie">sjálfsmynd sem er ekki notuð í neinni grein</string>
+  <string name="delete_helper_ask_spam_blurry">algjörlega óskýr</string>
+  <string name="delete_helper_ask_spam_nonsense">bull, algjörlega ónothæft í hvaða grein sem er</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Fréttaljósmynd</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Einhver mynd af internetinu</string>
   <string name="delete_helper_ask_reason_copyright_logo">Táknmynd</string>
@@ -646,7 +646,7 @@
   <string name="done">Lokið</string>
   <string name="back">Til baka</string>
   <string name="welcome_custom_picture_selector_text">Velkomin í sérsniðinn myndaveljara</string>
-  <string name="custom_selector_info_text1" fuzzy="true">Þessi veljari birtir þær myndir öðruvísi sem þegar er búið að senda inn í Commons.</string>
+  <string name="custom_selector_info_text1">Þessi veljari sýnir þér hvaða myndir sé þegar er búið að senda inn í Commons.</string>
   <string name="custom_selector_info_text2">Ólíkt myndinni til vinstri, er hægri myndin með Commons-táknmyndina til að sýna að hún hefur þegar verið send inn. \n Ýttu og haltu niðri til að sjá forskoðun á myndinni.</string>
   <string name="welcome_custom_selector_ok">Æðislegt</string>
   <string name="custom_selector_already_uploaded_image_text">Þessa mynd er þegar búið að senda inn í Commons.</string>
@@ -688,4 +688,19 @@
   <string name="error_feedback">Villa við að senda umsögn</string>
   <string name="enter_description">Hver er umsögnin þín?</string>
   <string name="your_feedback">Umsögn þín</string>
+  <string name="mark_as_not_for_upload">Merkja sem ekki fyrir innsendingu</string>
+  <string name="unmark_as_not_for_upload">Afmerkja sem ekki fyrir innsendingu</string>
+  <string name="no_more_images_found">Engar fleiri myndir fundust</string>
+  <string name="this_image_is_already_uploaded">Þessa mynd er þegar búið að senda inn</string>
+  <string name="can_not_select_this_image_for_upload">Get ekki valið þessa mynd til innsendingar</string>
+  <string name="image_selected">Mynd valin</string>
+  <string name="image_marked_as_not_for_upload">Mynd merkt sem ekki til innsendingar</string>
+  <string name="menu_view_report">Kæra</string>
+  <string name="report_violation">Tilkynna brot</string>
+  <string name="report_user">Kæra þennan notanda</string>
+  <string name="report_content">Kæra þetta efni</string>
+  <string name="request_user_block">Biðja um að loka á þennan notanda</string>
+  <string name="welcome_to_full_screen_mode_text">Velkomin í val á fullum skjá</string>
+  <string name="full_screen_mode_zoom_info">Notaðu tvo fingur til að renna að og frá.</string>
+  <string name="full_screen_mode_features_info">Strjúktu hratt og lengi til að framkvæma þessar aðgerðir: \n- Vinstri/Hægri: Fara í fyrri/næsta \n- Upp: Velja\n- Niður: Merkja sem ekki til innsendingar.</string>
 </resources>
