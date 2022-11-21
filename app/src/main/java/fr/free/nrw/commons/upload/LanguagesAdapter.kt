@@ -8,13 +8,11 @@ import android.widget.ArrayAdapter
 import android.widget.Filter
 import androidx.core.os.ConfigurationCompat
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.databinding.RowItemLanguagesSpinnerBinding
 import fr.free.nrw.commons.utils.LangCodeUtils
-import kotlinx.android.synthetic.main.row_item_languages_spinner.view.*
 import org.apache.commons.lang3.StringUtils
 import org.wikipedia.language.AppLanguageLookUpTable
 import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.LinkedHashMap
 
 /**
  * This class handles the display of language dialog and their views for UploadMediaDetailFragment
@@ -48,15 +46,21 @@ class LanguagesAdapter constructor(
 
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        var rowView: View
-        if(convertView != null) {
-            rowView =  convertView
-        }else {
-            rowView = LayoutInflater.from(context).inflate(R.layout.row_item_languages_spinner, parent, false)
+        val binding: RowItemLanguagesSpinnerBinding
+        var rowView = convertView
+
+        if (rowView == null) {
+            val layoutInflater =
+                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            binding = RowItemLanguagesSpinnerBinding.inflate(layoutInflater, parent, false)
+            rowView = binding.root
+        } else {
+            binding = RowItemLanguagesSpinnerBinding.bind(rowView)
         }
         val languageCode = languageCodesList[position]
         val languageName = languageNamesList[position]
-        rowView.tv_language.let {
+
+        binding.tvLanguage.let {
             it.isEnabled = isEnabled(position)
             if (languageCode.isEmpty()) {
                 it.text = StringUtils.capitalize(languageName)
