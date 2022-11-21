@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.databinding.RowItemLanguagesSpinnerBinding
 import fr.free.nrw.commons.utils.LangCodeUtils
-import kotlinx.android.synthetic.main.row_item_languages_spinner.view.*
 import org.apache.commons.lang3.StringUtils
 import java.util.HashMap
 
@@ -33,12 +33,21 @@ class RecentLanguagesAdapter constructor(
     override fun getCount() = recentLanguages.size
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val rowView: View = convertView
-            ?: LayoutInflater.from(context)
-                .inflate(R.layout.row_item_languages_spinner, parent, false)
+        val binding: RowItemLanguagesSpinnerBinding
+        var rowView = convertView
+
+        if (rowView == null) {
+            val layoutInflater =
+                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            binding = RowItemLanguagesSpinnerBinding.inflate(layoutInflater, parent, false)
+            rowView = binding.root
+        } else {
+            binding = RowItemLanguagesSpinnerBinding.bind(rowView)
+        }
+
         val languageCode = recentLanguages[position].languageCode
         val languageName = recentLanguages[position].languageName
-        rowView.tv_language.let {
+        binding.tvLanguage.let {
             it.isEnabled = isEnabled(position)
             if (languageCode.isEmpty()) {
                 it.text = StringUtils.capitalize(languageName)
