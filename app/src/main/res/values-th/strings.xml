@@ -7,6 +7,7 @@
 * Geonuch
 * Horus
 * Just Sayori
+* Kaoavi
 * Korrawit
 * Nitisart Jungtrakungrat
 * Octahedron80
@@ -18,14 +19,22 @@
   <string name="commons_github">ซอร์สโค้ดคอมมอนส์บน GitHub</string>
   <string name="commons_logo">โลโก้คอมมอนส์</string>
   <string name="commons_website">เว็บไซต์คอมมอนส์</string>
+  <string name="exit_location_picker">ออกจากเครื่องมือเมื่อเลือกตำแหน่ง</string>
   <string name="submit">ส่ง</string>
+  <string name="add_another_description">เพิ่มคำอธิบายอื่น</string>
+  <string name="add_new_contribution">การมีส่วนร่วมใหม่</string>
+  <string name="add_contribution_from_camera">เพิ่มการมีส่วนร่วมจากกล้อง</string>
+  <string name="add_contribution_from_photos">เพิ่มผลงานจากภาพถ่าย</string>
+  <string name="add_contribution_from_contributions_gallery">เพิ่มการมีส่วนร่วมจากแกลเลอรีการมีส่วนร่วมก่อนหน้า</string>
   <string name="show_captions">คำบรรยายโดยย่อ</string>
   <string name="row_item_language_description">คำบรรยายภาษาโดยย่อ</string>
   <string name="row_item_caption">คำบรรยายโดยย่อ</string>
   <string name="show_captions_description">คำอธิบาย</string>
   <string name="nearby_row_image">รูปภาพ</string>
   <string name="nearby_all">ทั้งหมด</string>
+  <string name="nearby_filter_toggle">สลับขึ้น</string>
   <string name="nearby_filter_search">ค้นหาดู</string>
+  <string name="nearby_filter_state">สถานะของสถานที่:</string>
   <string name="appwidget_img">รูปภาพประจำวัน</string>
   <string name="uploads_pending_notification_indicator">กำลังอัปโหลดไฟล์ %1$d ไฟล์</string>
   <plurals name="contributions_subtitle" fuzzy="true">
@@ -63,12 +72,14 @@
   <string name="signup">สมัครสมาชิก</string>
   <string name="logging_in_title">กำลังเข้าสู่ระบบ</string>
   <string name="logging_in_message">กรุณารอสักครู่…</string>
+  <string name="updating_caption_title">กำลังอัปเดตคำบรรยายและคำอธิบาย</string>
   <string name="updating_caption_message">กรุณารอสักครู่…</string>
   <string name="login_success">การเข้าสู่ระบบสำเร็จแล้ว!</string>
   <string name="login_failed">การเข้าสู่ระบบล้มเหลว!</string>
   <string name="upload_failed">ไม่พบไฟล์ กรุณาลองใช้ไฟล์อื่น</string>
   <string name="authentication_failed">การตรวจสอบล้มเหลว โปรดเข้าสู่ระบบอีกครั้ง</string>
   <string name="uploading_started">เริ่มการอัปโหลดแล้ว!</string>
+  <string name="uploading_queued">อัปโหลดอยู่ในคิว (เปิดใช้งานโหมดการเชื่อมต่อแบบจำกัด)</string>
   <string name="upload_completed_notification_title">อัปโหลด %1$s แล้ว!</string>
   <string name="upload_completed_notification_text">แตะเพื่อดูการอัปโหลดของคุณ</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">กำลังเริ่มการอัปโหลด %1$s</string>
@@ -89,6 +100,7 @@
   <string name="menu_share">แชร์</string>
   <string name="menu_view_file_page">ดูหน้าไฟล์</string>
   <string name="share_title_hint">คำบรรยาย (จำเป็น)</string>
+  <string name="add_caption_toast">โปรดระบุคำอธิบายสำหรับไฟล์นี้</string>
   <string name="share_description_hint">คำอธิบาย</string>
   <string name="share_caption_hint">คำอธิบาย</string>
   <string name="login_failed_network">ไม่สามารถเข้าสู่ระบบได้ - ความล้มเหลวของเครือข่าย</string>
@@ -106,11 +118,13 @@
   <string name="display_list_button">รายการ</string>
   <string name="contributions_subtitle_zero">ยังไม่มีการอัปโหลด</string>
   <string name="categories_not_found">ไม่พบหมวดหมู่ที่ตรงกับ %$1s</string>
+  <string name="depictions_not_found">ไม่พบรายการ Wikidata ที่ตรงกับ %1$s</string>
   <string name="categories_skip_explanation">เพิ่มหมวดหมู่เพื่อทำให้รูปภาพของคุณค้นพบได้ง่ายขึ้นบนวิกิมีเดียคอมมอนส์\nเริ่มพิมพ์เพื่อเพิ่มหมวดหมู่</string>
   <string name="categories_activity_title">หมวดหมู่</string>
   <string name="title_activity_settings">การตั้งค่า</string>
   <string name="title_activity_signup">สมัครใช้งาน</string>
   <string name="title_activity_featured_images">ภาพคัดสรร</string>
+  <string name="title_activity_custom_selector">ตัวเลือกที่กำหนดเอง</string>
   <string name="title_activity_category_details">หมวดหมู่</string>
   <string name="title_activity_review">ตรวจสอบภาพ</string>
   <string name="menu_about">เกี่ยวกับ</string>
@@ -181,6 +195,7 @@
   <string name="no">ไม่</string>
   <string name="media_detail_caption">คำบรรยายโดยย่อ</string>
   <string name="media_detail_title">ชื่อเรื่อง</string>
+  <string name="media_detail_depiction">เห็นภาพ</string>
   <string name="media_detail_description">คำอธิบาย</string>
   <string name="media_detail_discussion">พูดคุย</string>
   <string name="media_detail_author">ผู้สร้างสรรค์</string>
@@ -220,6 +235,7 @@
   <string name="nearby_info_menu_wikidata_article">รายการวิกิสนเทศ</string>
   <string name="nearby_info_menu_wikipedia_article">บทความวิกิพีเดีย</string>
   <string name="description_info">โปรดอธิบายสื่อดังกล่าวให้มากที่สุดเท่าที่จะได้: สื่อนี้ถูกถ่ายที่ไหน? สื่อนี้แสดงถึงอะไร? บริบทคืออะไร? โปรดอธิบายถึงวัตถุหรือบุคคล เปิดเผยข้อมูลที่ไม่อาจคาดเดาได้อย่างง่ายดาย เช่น เวลาที่ถ่าย หากเป็นภาพทิวทัศน์ หากสื่อแสดงถึงสิ่งที่ไม่ธรรมดา โปรดอธิบายว่าอะไรทำให้สื่อดังกล่าวไม่ธรรมดา</string>
+  <string name="caption_info">กรุณาเขียนคำอธิบายสั้น ๆ ของภาพ คำบรรยายแรกจะใช้เป็นชื่อเรื่องของภาพ จำกัด 255 ตัวอักษร</string>
   <string name="upload_problem_exist">พบปัญหาบางประการกับรูปนี้</string>
   <string name="upload_problem_image_dark">ภาพมืดเกินไป</string>
   <string name="upload_problem_image_blurry">ภาพมัวมาก</string>
@@ -229,8 +245,8 @@
   <string name="upload_problem_do_you_continue">คุณยังต้องการอัพโหลดภาพนี้อยู่หรือไม่</string>
   <string name="upload_problem_image">พบปัญหาในภาพ</string>
   <string name="internet_downloaded">กรุณาอัพโหลดเฉพาะภาพที่คุณเป็นคนถ่ายหรือสร้างสรรค์ขึ้นมาเองเท่านั้น อย่าอัพโหลดรูปภาพที่คุณได้มาจากการดาวน์โหลดบนอินเทอร์เน็ต</string>
-  <string name="use_external_storage" fuzzy="true">ใช้ที่จัดเก็บข้อมูลภายนอก</string>
-  <string name="use_external_storage_summary" fuzzy="true">บันทึกรูปภาพที่ถ่ายด้วยกล้องในแอปบนอุปกรณ์ของคุณ</string>
+  <string name="use_external_storage">ใช้ที่จัดเก็บข้อมูลภายนอก</string>
+  <string name="use_external_storage_summary">บันทึกรูปภาพที่ถ่ายด้วยกล้องในแอปบนอุปกรณ์ของคุณ</string>
   <string name="login_to_your_account">ลงชื่อเข้าใช้บัญชีของคุณ</string>
   <string name="send_log_file">ส่งไฟล์ปูม</string>
   <string name="send_log_file_description">ส่งไฟล์ปูมไปให้กับผู้พัฒนาทางอีเมล สำหระบการแก้ไขข้อผืดพลาดที่คุณพบ (ไฟล์ปูมจะไม่มีข้อมูลส่วนบุคคลหรือการยืนยันตัวตนรวมอยู่ด้วย)</string>
@@ -254,6 +270,7 @@
   <string name="nearby_commons">คอมมอนส์</string>
   <string name="about_rate_us">ให้คะแนน</string>
   <string name="about_faq">คำถามที่พบบ่อย</string>
+  <string name="user_guide">คู่มือผู้ใช้</string>
   <string name="welcome_skip_button">ข้ามบทช่วยสอน</string>
   <string name="no_internet">อินเทอร์เน็ตไม่พร้อมใช้งาน</string>
   <string name="error_notifications">เกิดข้อผิดพลาดในการดึงข้อมูลการแจ้งความ</string>
@@ -266,6 +283,9 @@
   <string name="about_translate_cancel">ยกเลิก</string>
   <string name="retry">ลองใหม่</string>
   <string name="showcase_view_whole_nearby_activity">สถานที่เหล่านี้คือสถานที่ที่อยู่ใกล้คุณ และต้องการภาพสำหรับเพิ่มเข้าไปในบทความบนวิกิพีเดีย\n\nกดที่\'{{Wikimedia:Commons-android-strings-search this area}}\'เพื่อดูแผนที่และสำรวจว่าสิ่งใดบ้างที่ต้องการภาพ และถ่ายมันมาหากคุณสะดวก</string>
+  <string name="showcase_view_needs_photo">สถานที่นี้ต้องการรูปภาพ</string>
+  <string name="showcase_view_has_photo">สถานที่นี้มีรูปถ่ายอยู่แล้ว</string>
+  <string name="showcase_view_no_longer_exists">สถานที่นี้ไม่มีอยู่แล้ว</string>
   <string name="no_images_found">ไม่พบรูปภาพ!</string>
   <string name="error_loading_images">เกิดข้อผิดพลาดระหว่างการโหลดภาะ</string>
   <string name="image_uploaded_by">อัพโหลดโดย: %1$s</string>
@@ -277,12 +297,15 @@
   <string name="title_activity_search">ค้นหา</string>
   <string name="search_recent_header">การค้นหาล่าสุด:</string>
   <string name="provider_searches">คิวรีที่ค้นหาเมื่อล่าสุด</string>
+  <string name="provider_recent_languages">แบบสอบถามภาษาล่าสุด</string>
   <string name="error_loading_categories">เกิดข้อผิดพลาดขณะโหลดหมวดหมู่</string>
+  <string name="error_loading_depictions">เกิดข้อผิดพลาดขณะโหลดคำอธิบาย</string>
   <string name="search_tab_title_media">สื่อ</string>
   <string name="search_tab_title_categories">หมวดหมู่</string>
   <string name="search_tab_title_depictions">รายการ</string>
   <string name="explore_tab_title_featured">แนะนำ</string>
   <string name="explore_tab_title_mobile">อัปโหลดผ่านอุปกรณ์เคลื่อนที่</string>
+  <string name="explore_tab_title_map">แผนที่</string>
   <string name="successful_wikidata_edit">เพิ่มภาพไปยัง %1$s บนวิกิสนเทศแล้ว!</string>
   <string name="wikidata_edit_failure">ไม่สามารถอัปเดตเอนทิตีวิกิสนเทศที่สอดคล้องกันได้!</string>
   <string name="menu_set_wallpaper">ตั้งเป็นภาพพื้นหลัง</string>
@@ -294,6 +317,7 @@
   <string name="quiz_back_button">หากคุณยังคงอัปโหลดภาพที่ต้องการให้ลบต่อไป บัญชีของคุณอาจถูกห้ามได้ คุณแน่ใจหรือไม่ว่าต้องการจบคำถาม?</string>
   <string name="quiz_alert_message">ภาพมากกว่า %1$s ภาพที่คุณอัปโหลดได้ถูกลบแล้ว หากคุณยังคงอัปโหลดภาพที่จำเป็นต้องลบอีก บัญชีของคุณอาจถูกห้ามได้\n\nคุณต้องการดูบทช่วยสอนอีกครั้งแล้วตอบคำถามเพื่อช่วยคุณเรียนรู้ว่าภาพประเภทใดบ้างที่คุณควรหรือไม่ควรอัปโหลด?</string>
   <string name="selfie_answer">ภาพเซลฟีไม่มีคุณค่าทางสารานุกรมมากนัก โปรดอย่าอัปโหลดรูปภาพตัวคุณเอง นอกจากคุณมีบทความวิกิพีเดียที่เกี่ยวกับคุณอยู่แล้ว</string>
+  <string name="taj_mahal_answer">รูปภาพของอนุสาวรีย์และทิวทัศน์ภายนอกสามารถอัปโหลดได้ในประเทศส่วนใหญ่ โปรดทราบว่าผลงานศิลปะชั่วคราวภายนอกมักมีลิขสิทธิ์และไม่สามารถอัปโหลดได้</string>
   <string name="continue_message">ดำเนินการต่อ</string>
   <string name="correct">คำตอบที่ถูกต้อง</string>
   <string name="wrong">คำตอบที่ไม่ถูกต้อง</string>

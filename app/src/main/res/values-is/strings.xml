@@ -690,6 +690,8 @@
   <string name="your_feedback">Umsögn þín</string>
   <string name="mark_as_not_for_upload">Merkja sem ekki fyrir innsendingu</string>
   <string name="unmark_as_not_for_upload">Afmerkja sem ekki fyrir innsendingu</string>
+  <string name="show_already_actioned_pictures">Sýna myndir sem þegar hefur verið átt við</string>
+  <string name="hiding_already_actioned_pictures">Fel myndir sem þegar hefur verið átt við</string>
   <string name="no_more_images_found">Engar fleiri myndir fundust</string>
   <string name="this_image_is_already_uploaded">Þessa mynd er þegar búið að senda inn</string>
   <string name="can_not_select_this_image_for_upload">Get ekki valið þessa mynd til innsendingar</string>
