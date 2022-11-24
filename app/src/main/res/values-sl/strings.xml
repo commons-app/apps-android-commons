@@ -404,7 +404,7 @@
   <string name="provider_bookmarks_location">Zaznamki</string>
   <string name="log_collection_started">Dnevniško beleženje se je začelo. Prosimo, ZNOVA ZAŽENITE aplikacijo, opravite dejanje, ki ga želite zabeležiti, in nato znova tapnite »Pošlji dnevniški zapis«.</string>
   <string name="deletion_reason_uploaded_by_mistake">Naložil sem jo pomotoma</string>
-  <string name="deletion_reason_publicly_visible">Nisem vedel/a, da bo javno vidna</string>
+  <string name="deletion_reason_publicly_visible">Nisem vedel_a, da bo javno vidna</string>
   <string name="deletion_reason_bad_for_my_privacy">Spoznal sem, da je to slabo za mojo zasebnost</string>
   <string name="deletion_reason_no_longer_want_public">Prrmislil/a sem si, ne želim več biti javno viden/na</string>
   <string name="deletion_reason_not_interesting">Ta slika žal ni zanimiva za enciklopedijo.</string>
