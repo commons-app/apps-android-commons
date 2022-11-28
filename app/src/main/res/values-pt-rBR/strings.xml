@@ -507,9 +507,9 @@
   <string name="delete_helper_show_deletion_message_if">Nomeado %1$s para exclusão.</string>
   <string name="delete_helper_show_deletion_title_failed">Falhou</string>
   <string name="delete_helper_show_deletion_message_else">Não foi possível pedir eliminação.</string>
-  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Uma selfie</string>
-  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Embaçado</string>
-  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Sem sentido</string>
+  <string name="delete_helper_ask_spam_selfie">uma selfie que não é usada em nenhum artigo</string>
+  <string name="delete_helper_ask_spam_blurry">totalmente embaçado</string>
+  <string name="delete_helper_ask_spam_nonsense">absurdo, absolutamente inutilizável em qualquer artigo</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Divulgação</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Foto aleatória da internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logótipo</string>
@@ -662,14 +662,16 @@
   <string name="done">Feito</string>
   <string name="back">Voltar</string>
   <string name="welcome_custom_picture_selector_text">Boas-vindas ao seletor de imagens personalizado</string>
-  <string name="custom_selector_info_text1" fuzzy="true">Este seletor mostra de forma diferente imagens que já estão na wiki Commons.</string>
+  <string name="custom_selector_info_text1">Este seletor mostra quais imagens você já carregou para o Commons.</string>
   <string name="custom_selector_info_text2">Diferente da imagem à esquerda, a da direita possui o logotipo do Commons, o que indica que o envio dela já está concluído.\n Toque e segure para pré-visualizar a imagem.</string>
   <string name="welcome_custom_selector_ok">Ótimo</string>
   <string name="custom_selector_already_uploaded_image_text">Esta imagem já foi enviada para Commons.</string>
+  <string name="place_state_wlm">WLM</string>
   <string name="wlm_upload_info">Essa imagem será enviada ao concurso Wiki Loves Monuments</string>
   <string name="display_monuments">Monumentos de exibição</string>
   <string name="wlm_month_message">Estamos no mês no Wiki Loves Monuments!</string>
   <string name="learn_more">SABER MAIS</string>
+  <string name="wlm_campaign_title">Wiki Loves Monuments</string>
   <string name="wlm_campaign_description">O Wiki Loves Monuments é um concurso internacional organizado pela Wikimedia sobre fotografias de monumentos</string>
   <string name="need_permission">Precisa de permissão</string>
   <string name="read_phone_state_permission_message">Os mapas próximos precisam ler ESTADO DO TELEFONE para funcionar corretamente</string>
@@ -716,6 +718,7 @@
   <string name="report_user">Reportar este usuário</string>
   <string name="report_content">Reportar este conteúdo</string>
   <string name="request_user_block">Pedir o bloqueio deste usuário</string>
+  <string name="welcome_to_full_screen_mode_text">Bem-vindo(a) ao Modo de Seleção de Tela Cheia</string>
   <string name="full_screen_mode_zoom_info">Use dois dedos para aumentar e diminuir a ampliação.</string>
   <string name="full_screen_mode_features_info">Passe o dedo com um gesto rápido e longo para executar estas operações: \n- Esquerda/direita: Ir para o anterior/seguinte\n- Cima: Selecionar\n- Baixo: Marcar como não sendo para carregamento.</string>
 </resources>

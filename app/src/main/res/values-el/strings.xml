@@ -7,6 +7,7 @@
 * Giannaras99
 * Giorgos456
 * Glavkos
+* Jimkats
 * KATRINE1992
 * KATRINE1993
 * ManosHacker
@@ -24,6 +25,12 @@
   <string name="commons_logo">Κοινό Λογότυπο</string>
   <string name="commons_website">Ιστοσελίδα των Κοινών</string>
   <string name="submit">Υποβολή</string>
+  <string name="show_captions">Λεζάντες</string>
+  <string name="row_item_language_description">Περιγραφή Γλώσσας</string>
+  <string name="row_item_caption">Λεζάντα</string>
+  <string name="show_captions_description">Περιγραφή</string>
+  <string name="nearby_row_image">Εικόνα</string>
+  <string name="nearby_all">Όλα</string>
   <string name="appwidget_img">Φωτογραφία της Ημέρας</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">1 αρχείο επιφορτώνεται</item>
@@ -33,13 +40,14 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Έναρξη %1$d επιφόρτωσης</item>
-    <item quantity="other">Έναρξη %1$d επιφορτώσεων</item>
+  <string name="starting_uploads">Έναρξη Μεταφορτώσεων</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Επεξεργασία %d μεταφόρτωσης</item>
+    <item quantity="other">Επεξεργασία %d μεταφορτώσεων</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d επιφόρτωση</item>
-    <item quantity="other">%1$d επιφορτώσεις</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d μεταφορτώνεται</item>
+    <item quantity="other">%d μεταφορτώνονται</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Αυτή η εικόνα θα αδειοδοτηθεί υπό την %1$s</item>
@@ -48,6 +56,10 @@
   <plurals name="upload_count_title">
     <item quantity="one">%1$d Ανέβασμα στον υπολογιστή</item>
     <item quantity="other">%1$d Ανεβάσματα στον υπολογιστή</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Λήψη κοινόχρηστου περιεχομένου. Η επεξεργασία της εικόνας μπορεί να πάρει κάποιο χρόνο ανάλογα με το μέγεθος της εικόνας και τη συσκευή σας</item>
+    <item quantity="other">Λήψη κοινόχρηστου περιεχομένου. Η επεξεργασία των εικόνων μπορεί να πάρει κάποιο χρόνο ανάλογα με το μέγεθος των εικόνων και τη συσκευή σας</item>
   </plurals>
   <string name="navigation_item_explore">Εξερεύνηση</string>
   <string name="preference_category_appearance">Εμφάνιση</string>
@@ -66,17 +78,21 @@
   <string name="signup">Εγγραφή</string>
   <string name="logging_in_title">Γίνεται σύνδεση…</string>
   <string name="logging_in_message">Παρακαλούμε περιμένετε…</string>
+  <string name="updating_caption_title">Ενημέρωση λεζάντων και περιγραφών</string>
+  <string name="updating_caption_message">Παρακαλούμε περιμένετε…</string>
   <string name="login_success">Επιτυχής σύνδεση!</string>
   <string name="login_failed">Η είσοδος απέτυχε!</string>
   <string name="upload_failed">Το αρχείο δεν βρέθηκε. Παρακαλώ δοκιμάστε ένα άλλο αρχείο.</string>
   <string name="authentication_failed">Απέτυχε ο έλεγχος ταυτότητας, παρακαλώ συνδεθείτε ξανά</string>
   <string name="uploading_started">Η αποστολή ξεκίνησε!</string>
+  <string name="uploading_queued">Η μεταφόρτωση βρίσκεται σε ουρά (ενεργοποιημένη λειτουργία περιορισμένης σύνδεσης)</string>
   <string name="upload_completed_notification_title">%1$s επιφορτώθηκε!</string>
   <string name="upload_completed_notification_text">Πατήστε για να προβάλλετε την αποστολή</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">Έναρξη  %1$s  επιφορτώθηκε</string>
+  <string name="upload_progress_notification_title_start">Μεταφόρτωση αρχείου: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s επιφορτώνεται</string>
   <string name="upload_progress_notification_title_finishing">Ολοκλήρωση επιφόρτωσης %1$s</string>
-  <string name="upload_failed_notification_title" fuzzy="true">Ανέβασμα του %1$s απέτυχε</string>
+  <string name="upload_failed_notification_title">Απέτυχε η μεταφόρτωση του %1$s</string>
+  <string name="upload_paused_notification_title">Η μεταφόρτωση %1$s τέθηκε σε παύση</string>
   <string name="upload_failed_notification_subtitle">Πατήστε για να δείτε</string>
   <string name="title_activity_contributions">Οι Πρόσφατες Φορτώσεις Μου</string>
   <string name="contribution_state_queued">Στην ουρά</string>
@@ -88,8 +104,11 @@
   <string name="menu_nearby">Κοντά</string>
   <string name="provider_contributions">Οι επιφορτώσεις μου</string>
   <string name="menu_share">Κοινοποίηση</string>
-  <string name="share_title_hint" fuzzy="true">Τίτλος (Υποχρεωτικό)</string>
+  <string name="menu_view_file_page">Προβολή σελίδας αρχείου</string>
+  <string name="share_title_hint">Λεζάντα (Απαιτείται)</string>
+  <string name="add_caption_toast">Παρακαλώ δώστε μια λεζάντα για αυτό το αρχείο</string>
   <string name="share_description_hint">Περιγραφή</string>
+  <string name="share_caption_hint">Λεζάντα</string>
   <string name="login_failed_network">Δεν είναι δυνατή η σύνδεση - αποτυχία του δικτύου</string>
   <string name="login_failed_throttled">Πάρα πολλές ανεπιτυχείς προσπάθειες. Παρακαλώ δοκιμάστε ξανά σε λίγα λεπτά.</string>
   <string name="login_failed_blocked">Συγνώμη, αυτός ο χρήστης έχει αποκλειστεί από τα Commons</string>
@@ -128,7 +147,7 @@
   <string name="menu_download">Λήψη</string>
   <string name="preference_license">Προεπιλεγμένη άδεια</string>
   <string name="use_previous" fuzzy="true">Χρήση προηγούμενου τίτλου/περιγραφής</string>
-  <string name="preference_theme" fuzzy="true">Νυχτερινή λειτουργία</string>
+  <string name="preference_theme">Θέμα</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
@@ -158,21 +177,28 @@
   <string name="welcome_copyright_subtext">Αποφύγετε προστατευμένο υλικό  που βρήκατε από το Internet, καθώς και εικόνες, αφίσες, εξώφυλλα βιβλίων, κλπ.</string>
   <string name="welcome_final_text">Τι λες, μπορείς;</string>
   <string name="welcome_final_button_text">Ναι!</string>
-  <string name="welcome_help_button_text" fuzzy="true"/>
+  <string name="welcome_help_button_text">Περισσότερες Πληροφορίες</string>
   <string name="detail_panel_cats_label">Κατηγορίες</string>
   <string name="detail_panel_cats_loading">Φόρτωση…</string>
   <string name="detail_panel_cats_none">Καμία επιλεγμένη</string>
+  <string name="detail_caption_empty">Καμία λεζάντα</string>
   <string name="detail_description_empty">Καμία περιγραφή</string>
+  <string name="detail_discussion_empty">Καμία συζήτηση</string>
   <string name="detail_license_empty">Άγνωστη άδεια</string>
   <string name="menu_refresh">Ανανέωση</string>
   <string name="storage_permission_title">Αιτείται Άδεια Αποθήκευσης</string>
   <string name="read_storage_permission_rationale">Απαιτούμενη άδεια: Ανάγνωση εξωτερικής αποθήκευσης. Η εφαρμογή δεν μπορεί να έχει πρόσβαση στην συλλογή σας χωρίς αυτή.</string>
   <string name="write_storage_permission_rationale">Απαιτούμενη άδεια: Εγγραφή σε εξωτερική αποθήκευση. Το πρόγραμμα δεν θα έχει πρόσβαση στην κάμερα/συλλογή σας χωρίς αυτήν.</string>
+  <string name="location_permission_title">Αιτείται Άδεια Τοποθεσίας</string>
   <string name="ok">Εντάξει</string>
   <string name="warning">Προειδοποίηση</string>
+  <string name="duplicate_image_found">Βρέθηκε Διπλότυπη Εικόνα</string>
+  <string name="upload">Μεταφόρτωση</string>
   <string name="yes">Ναι</string>
   <string name="no">Όχι</string>
+  <string name="media_detail_caption">Λεζάντα</string>
   <string name="media_detail_title">Τίτλος</string>
+  <string name="media_detail_depiction">Απεικονίσεις</string>
   <string name="media_detail_description">Περιγραφή</string>
   <string name="media_detail_discussion">Συζήτηση</string>
   <string name="media_detail_author">Συγγραφέας</string>
@@ -211,13 +237,16 @@
   <string name="nearby_info_menu_wikidata_article">Τεμάχιο Wikidata</string>
   <string name="nearby_info_menu_wikipedia_article">Λήμμα Βικιπαίδειας</string>
   <string name="description_info">\nΠαρακαλώ περιγράψετε τα μέσα το δυνατό περισσότερο : Πού οδηγήθηκε αυτό; Τι δείχνει; Ποιο είναι το περιεχόμενο του; Παρακαλώ περιγράψετε τα αντικείμενα ή τα πρόσωπα. Αποκαλύψετε πληροφορίες που δεν μπορούν εύκολο να μαντέψει κανείς, για παράδειγμα την ώρα εντός της ημέρας αν πρόκειται για τοπίο. Αν τα μέσα δείξουν κάτι ασύνηθες, παρακαλώ εξηγήστε τι το καθιστά μη συνηθισμένα.</string>
+  <string name="upload_problem_exist">Πιθανά προβλήματα με αυτήν την εικόνα:</string>
   <string name="upload_problem_image_dark">Η εικόνα είναι πολύ σκοτεινή.</string>
   <string name="upload_problem_image_blurry">Η εικόνα είναι θολή.</string>
   <string name="upload_problem_image_duplicate">Η εικόνα βρίσκεται ήδη στα Commons.</string>
   <string name="upload_problem_different_geolocation">Η εικόνα λήφθηκε σε διαφορετική τοποθεσία.</string>
   <string name="upload_problem_do_you_continue">Θέλετε ακόμη να ανεβάσετε αυτή την εικόνα;</string>
-  <string name="use_external_storage" fuzzy="true">Χρησιμοποιήσετε την εξωτερική αποθήκευση</string>
-  <string name="use_external_storage_summary" fuzzy="true">Αποθηκεύσετε εικόνες που παίρνονται στην κάμερα εφαρμογής στην συσκευή σας</string>
+  <string name="upload_connection_error_alert_title">Σφάλμα Σύνδεσης</string>
+  <string name="upload_problem_image">Βρέθηκαν προβλήματα στην εικόνα</string>
+  <string name="use_external_storage">Αποθηκεύστε φωτογραφίες εντός εφαρμογής</string>
+  <string name="use_external_storage_summary">Αποθηκεύστε φωτογραφίες που τραβήξατε με την κάμερα εντός εφαρμογής στο χώρο αποθήκευσης της συσκευής σας</string>
   <string name="login_to_your_account">Συνδεθείτε στο λογαριασμό σας.</string>
   <string name="send_log_file">Αποστείλατε τον φάκελλο σύνδεσης</string>
   <string name="send_log_file_description">Στείλτε το αρχείο καταγραφής στους προγραμματιστές μέσω email για να βοηθήσετε τη διόρθωση σφαλμάτων της εφαρμογής. Σημείωση: οι καταγραφές ενδέχεται να περιλαμβάνουν αναγνωριστικές πληροφορίες</string>
@@ -225,7 +254,7 @@
   <string name="null_url">Σφάλμα! Η διεύθυνση URL δεν βρέθηκε</string>
   <string name="nominate_deletion">Προτείνετε για διαγραφή</string>
   <string name="nominated_for_deletion">Αυτή εικόνα έχει προταθεί για διαγραφή.</string>
-  <string name="nominated_see_more" fuzzy="true"/>
+  <string name="nominated_see_more">Δείτε την ιστοσελίδα για λεπτομέρειες</string>
   <string name="skip_login">Παράβλεψη</string>
   <string name="navigation_item_login">Είσοδος</string>
   <string name="skip_login_title">Θέλετε πραγματικά να παραβλέψετε τη σύνδεση;</string>
@@ -237,8 +266,8 @@
   <string name="nearby_wikidata">Δεδομένα wiki</string>
   <string name="nearby_wikipedia">Βικιπαίδεια</string>
   <string name="nearby_commons">Κοινά</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Βαθμολογήστε μας&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;Συχνές ερωτήσεις&lt;/u&gt;</string>
+  <string name="about_rate_us">Βαθμολογήστε μας</string>
+  <string name="about_faq">Συχνές ερωτήσεις</string>
   <string name="user_guide">Οδηγός χρήστη</string>
   <string name="welcome_skip_button">Παράβλεψη εισαγωγής</string>
   <string name="no_internet">Το διαδίκτυο δεν είναι διαθέσιμο</string>
@@ -257,6 +286,7 @@
   <string name="no_images_found">Δεν βρέθηκαν εικόνες!</string>
   <string name="error_loading_images">Συνέβη σφάλμα κατά το ανέβασμα των εικόνων.</string>
   <string name="image_uploaded_by">Ανέβηκε από: %1$s</string>
+  <string name="block_notification_title">Αποκλεισμένος</string>
   <string name="block_notification">Είστε αποκλεισμένοι από την επεξεργασία των Κοινών</string>
   <string name="app_widget_heading">Φωτογραφία της Ημέρας</string>
   <string name="menu_search_button">Αναζήτηση</string>
@@ -264,10 +294,13 @@
   <string name="title_activity_search">Αναζήτηση</string>
   <string name="search_recent_header">Πρόσφατες αναζητήσεις:</string>
   <string name="provider_searches">Πρόσφατα αναζητημένα ερωτήματα</string>
+  <string name="provider_recent_languages">Πρόσφατα ερωτήματα γλώσσας</string>
   <string name="error_loading_categories">Συνέβη σφάλμα κατά τη φόρτωση κατηγοριών.</string>
   <string name="search_tab_title_media">Μέσα</string>
   <string name="search_tab_title_categories">Κατηγορίες</string>
   <string name="search_tab_title_depictions">Αντικείμενα</string>
+  <string name="explore_tab_title_mobile">Μεταφορτώθηκε μέσω κινητού</string>
+  <string name="explore_tab_title_map">Χάρτης</string>
   <string name="successful_wikidata_edit" fuzzy="true">Η εικόνα προστέθηκε επιτυχώς στο %1$s στο Wikidata!</string>
   <string name="wikidata_edit_failure">Αποτυχία ενημέρωσης της αντιστοιχούσας οντότητας του Wikidata!</string>
   <string name="menu_set_wallpaper">Ρύθμιση ως ταπετσαρία</string>
@@ -293,6 +326,7 @@
   <string name="quiz_screenshot_question">Αυτό το στιγμιότυπο είναι εντάξει για ανέβασμα;</string>
   <string name="share_app_title">Κοινοποίηση εφαρμογής</string>
   <string name="error_fetching_nearby_places">Σφάλμα κατά την εύρεση κοντινών μερών.</string>
+  <string name="no_recent_searches">Καμία πρόσφατη αναζήτηση</string>
   <string name="delete_recent_searches_dialog">Είστε σίγουρος ότι θέλετε να καθαρίσετε το ιστορικό αναζήτησης;</string>
   <string name="search_history_deleted">Το ιστορικό αναζήτησης διεγράφη</string>
   <string name="nominate_delete">Ορίστε για Αφαίρεση</string>
@@ -317,15 +351,19 @@
   <string name="contributions_fragment">Συνεισφορές</string>
   <string name="nearby_fragment">Κοντά σας</string>
   <string name="notifications">Ενημερώσεις</string>
+  <string name="read_notifications">Ειδοποιήσεις (ανάγνωση)</string>
   <string name="display_nearby_notification_summary" fuzzy="true">Πατήστε εδώ για να δείτε την πιο κοντινή θέση που χρειάζεται εικόνες</string>
   <string name="list_sheet">Λίστα</string>
+  <string name="storage_permission">Άδεια Αποθήκευσης</string>
   <string name="nearby_notification_dismiss_message">Δεν θα δείτε την πιο κοντινή τοποθεσία που χρειάζεται επιπλέον εικόνες. Ωστόσο, μπορείτε να ενεργοποιήσετε ξανά αυτή την ειδοποίηση στις Ρυθμίσεις αν θέλετε.</string>
+  <string name="step_count">Βήμα %1$d από %2$d: %3$s</string>
   <string name="next">Επόμενο</string>
   <string name="previous">Προηγούμενο</string>
   <string name="upload_title_duplicate">Υπάρχει ήδη αρχείο με όνομα %1$s. Είστε σίγουροι πως θέλετε να προχωρήσετε;\n\nΣημείωση: θα προστεθεί αυτόματα μια διόρθωση όνομα αρχείου.</string>
   <string name="map_application_missing">Καμία εφαρμογή χάρτη δεν βρέθηκε στον υπολογιστή. Παρακαλώ εγκαταστήστε εφαρμογή χάρτη για να χρησιμοποιήσετε αυτήν την ιδιότητα.</string>
   <string name="title_page_bookmarks_pictures">εικόνες</string>
   <string name="title_page_bookmarks_locations">Τοποθεσίες</string>
+  <string name="menu_bookmark">Προσθήκη/Κατάργηση σε σελιδοδείκτες</string>
   <string name="provider_bookmarks">Σελιδοδείκτες</string>
   <string name="provider_bookmarks_location">Σελιδοδείκτες</string>
   <string name="deletion_reason_uploaded_by_mistake">Το ανέβασα κατά λάθος</string>
@@ -335,6 +373,14 @@
   <string name="deletion_reason_not_interesting">Λυπάμαι αυτή η εικόνα δεν έχει ενδιαφέρον για εγκυκλοπαίδεια</string>
   <string name="uploaded_by_myself" fuzzy="true">Φορτώθηκε από μένα σε</string>
   <string name="no_categories_selected_warning_desc" fuzzy="true">Εικόνες χωρίς κατηγορίες χρησιμοποιούνται σπάνια. Θέλετε πράγματι να στείλετε δίχως να επιλέξετε κατηγορίες?</string>
+  <string name="back_button_warning">Ακύρωση Μεταφόρτωσης</string>
+  <string name="back_button_continue">Συνέχιση Μεταφόρτωσης</string>
+  <string name="upload_flow_all_images_in_set">(Για όλες τις εικόνες στο σετ)</string>
+  <string name="search_this_area">Αναζήτηση στην περιοχή</string>
+  <string name="nearby_card_permission_title">Αίτημα Άδειας</string>
+  <string name="never_ask_again">Μην το ρωτήσετε ξανά αυτό</string>
+  <string name="display_location_permission_title">Ζητήστε άδεια τοποθεσίας</string>
+  <string name="ends_on">Τελειώνει σε:</string>
   <string name="review_thanks_yes_button_text" fuzzy="true">Ναι, γιατί όχι</string>
   <string name="review_thanks_no_button_text" fuzzy="true">Επόμενη εικόνα</string>
   <string name="no_image">Δεν χρησιμοποιούνται εικόνες</string>
