@@ -155,7 +155,7 @@
   <string name="menu_about">Hakkında</string>
   <string name="about_license">Wikimedia Commons uygulaması, Wikimedia topluluğunun hibeleri ve gönüllüleri tarafından oluşturulan ve sürdürülen açık kaynaklı bir uygulamadır. Wikimedia Vakfı, uygulamanın oluşturulması, geliştirilmesi veya bakımı ile ilgili değildir.</string>
   <string name="about_improve">Hata raporları ve önerileri için yeni bir &lt;a href=\"%1$s\"&gt;GitHub sorunu&lt;/a&gt; oluşturun.</string>
-  <string name="about_privacy_policy">Gizlilik ilkesi</string>
+  <string name="about_privacy_policy">Gizlilik politikası</string>
   <string name="about_credits">Katkıda bulunanlar</string>
   <string name="title_activity_about">Hakkında</string>
   <string name="menu_feedback">Geri Bildirim Gönder (E-posta ile)</string>
