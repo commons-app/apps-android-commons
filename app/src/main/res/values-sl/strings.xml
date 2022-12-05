@@ -115,7 +115,7 @@
   <string name="menu_share">Deli</string>
   <string name="menu_view_file_page">Ogled opisne strani</string>
   <string name="share_title_hint">Napis (obvezen)</string>
-  <string name="add_caption_toast">Prosimo, dodajte napis k sliki</string>
+  <string name="add_caption_toast">Prosimo, dodajte sliki napis</string>
   <string name="share_description_hint">Opis</string>
   <string name="share_caption_hint">Napis</string>
   <string name="login_failed_network">Prijava ni uspela – omrežna napaka</string>
@@ -675,7 +675,7 @@
   <string name="wlm_month_message">Odprt je natečaj Viki obožuje spomenike!</string>
   <string name="learn_more">VEČ O TEM</string>
   <string name="wlm_campaign_title">Viki obožuje spomenike</string>
-  <string name="wlm_campaign_description">Viki obožuje spomenike je mednarodni fotografski natečaj za spomenike, ki ga organizira fundacija Wikimedia.</string>
+  <string name="wlm_campaign_description">Viki obožuje spomenike je mednarodni fotografski natečaj za spomenike, ki ga organizira Fundacija Wikimedia.</string>
   <string name="need_permission">Potrebno je dovoljenje</string>
   <string name="read_phone_state_permission_message">Bližnji zemljevidi morajo za pravilno delovanje prebrati STANJE TELEFONA</string>
   <string name="contributions_of_user">Prispevki uporabnika: %s</string>
