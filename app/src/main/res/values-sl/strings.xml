@@ -147,7 +147,7 @@
   <string name="title_activity_review">Ocenjevanje</string>
   <string name="menu_about">O orodju</string>
   <string name="about_license">Aplikacija Wikimedia Commons je odprtokodna aplikacija, ki jo ustvarjajo in vzdržujejo prostovoljci skupnosti Wikimedia. Fundacija Wikimedia pri ustvarjanju, razvoju in vzdrževanju aplikacije ne sodeluje.</string>
-  <string name="about_improve">Za poročanje o hrošču ali predlog ustvarite nov &lt;a href=\"%1$s\"&gt;vnos GitHub&lt;/a&gt;.</string>
+  <string name="about_improve">Za poročanje o hrošču ali predlog ustvarite novo &lt;a href=\"%1$s\"&gt;zahtevek v GitHubu&lt;/a&gt;.</string>
   <string name="about_privacy_policy">Pravilnik o zasebnosti</string>
   <string name="about_credits">Zasluge</string>
   <string name="title_activity_about">O aplikaciji</string>
@@ -308,8 +308,8 @@
   <string name="showcase_view_no_longer_exists">Ta kraj ne obstaja več.</string>
   <string name="no_images_found">Ni najdenih slik!</string>
   <string name="error_loading_images">Pri nalaganju slik je prišlo do napake.</string>
-  <string name="image_uploaded_by">Naložil/a: %1$s</string>
-  <string name="block_notification_title">Blokiran/a</string>
+  <string name="image_uploaded_by">Naložil_a: %1$s</string>
+  <string name="block_notification_title">Blokiran_a</string>
   <string name="block_notification">Urejanje Zbirke vam je preprečeno</string>
   <string name="app_widget_heading">Slika dneva</string>
   <string name="menu_search_button">Išči</string>
@@ -406,7 +406,7 @@
   <string name="deletion_reason_uploaded_by_mistake">Naložil sem jo pomotoma</string>
   <string name="deletion_reason_publicly_visible">Nisem vedel_a, da bo javno vidna</string>
   <string name="deletion_reason_bad_for_my_privacy">Spoznal sem, da je to slabo za mojo zasebnost</string>
-  <string name="deletion_reason_no_longer_want_public">Prrmislil/a sem si, ne želim več biti javno viden/na</string>
+  <string name="deletion_reason_no_longer_want_public">Premislil_a sem si, ne želim več biti javno viden_na</string>
   <string name="deletion_reason_not_interesting">Ta slika žal ni zanimiva za enciklopedijo.</string>
   <string name="uploaded_by_myself">Sliko sem naložil/a sam/a dne %1$s. Uporablja se v %2$d članku(ih).</string>
   <string name="no_uploads">Pozdravljeni v Wikimedijini zbirki!\n\nTapnite gumb dodaj in naložite svojo prvo predstavnostno datoteko.</string>
@@ -549,7 +549,7 @@
   <string name="description_activity_title">Uredi opise in napise</string>
   <string name="share_image_via">Deli slike prek ...</string>
   <string name="you_have_no_achievements_yet">Ničesar še niste prispevali</string>
-  <string name="no_achievements_yet">%s ni opravil/a še nobenega prispevka</string>
+  <string name="no_achievements_yet">%s ni opravil_a še nobenega prispevka</string>
   <string name="account_created">Račun ustvarjen!</string>
   <string name="text_copy">Besedilo kopirano v odložišče</string>
   <string name="notification_mark_read">Obvestilo označeno kot prebrano</string>

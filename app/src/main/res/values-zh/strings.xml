@@ -14,6 +14,7 @@
 * Hydra
 * Ken418
 * Kuailong
+* Lantianjialiang
 * Liuxinyu970226
 * Looong
 * NACHOgao3
@@ -725,4 +726,5 @@
   <string name="report_user">报告此用户</string>
   <string name="report_content">报告此内容</string>
   <string name="request_user_block">请求屏蔽此用户</string>
+  <string name="full_screen_mode_features_info">快速长划来执行一下操作：\n- 左/右：跳到上一页/下一页\n- 上：选择\n- 下：标记为不上传。</string>
 </resources>

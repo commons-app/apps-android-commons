@@ -10,6 +10,7 @@
 * Sator
 * Subi
 * Theklan
+* Xabier Armendaritz
 -->
 <resources>
   <string name="commons_facebook">Commons-en Facebook orria</string>
@@ -120,7 +121,7 @@
   <string name="menu_retry_upload">Berriz saiatu</string>
   <string name="menu_cancel_upload">Utzi</string>
   <string name="media_upload_policy">Irudi hau bidaltzen, nire lan propioa dela aitortzen dut, copyrighta duten materiala edo selfiak ez duela, eta beste motatakoak &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Ohikoaren arauak&lt;/a&gt;</string>
-  <string name="menu_download">Jaitsi</string>
+  <string name="menu_download">Deskargatu</string>
   <string name="preference_license">Berezko lizentzia</string>
   <string name="use_previous">Aurreko izenburu eta deskribapena erabili</string>
   <string name="preference_theme">Gaia</string>
