@@ -216,12 +216,12 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
 
     @OnClick(R.id.btn_previous)
     public void onPreviousButtonClicked() {
-        callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
+        callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this)-1);
     }
 
     @OnClick(R.id.btn_submit)
     public void onSubmitButtonClicked() {
-        callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
+        callback.onNextButtonClicked(callback.getIndexInViewFlipper(this)+1);
     }
 
     @Override

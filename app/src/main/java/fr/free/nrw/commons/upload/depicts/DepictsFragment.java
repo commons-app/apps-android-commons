@@ -177,12 +177,12 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
 
     @Override
     public void goToNextScreen() {
-        callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
+        callback.onNextButtonClicked(callback.getIndexInViewFlipper(this)+1);
     }
 
     @Override
     public void goToPreviousScreen() {
-        callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
+        callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this)-1);
     }
 
     @Override
@@ -319,7 +319,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
             updateDepicts();
             goBackToPreviousScreen();
         } else {
-            callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
+            callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this)-1);
         }
     }
 

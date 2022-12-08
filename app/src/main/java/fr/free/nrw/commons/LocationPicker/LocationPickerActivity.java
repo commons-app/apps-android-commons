@@ -11,6 +11,7 @@ import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.location.Location;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -20,6 +21,7 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -29,6 +31,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.mapbox.android.core.location.LocationEngine;
+import com.mapbox.android.core.location.LocationEngineCallback;
+import com.mapbox.android.core.location.LocationEngineResult;
+import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
@@ -53,6 +59,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.theme.BaseActivity;
+import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.jetbrains.annotations.NotNull;
@@ -62,7 +69,8 @@ import timber.log.Timber;
  * Helps to pick location and return the result with an intent
  */
 public class LocationPickerActivity extends BaseActivity implements OnMapReadyCallback,
-    OnCameraMoveStartedListener, OnCameraIdleListener, Observer<CameraPosition> {
+    OnCameraMoveStartedListener, OnCameraIdleListener, Observer<CameraPosition>,
+    PermissionsListener {
 
     /**
      * DROPPED_MARKER_LAYER_ID : id for layer
@@ -72,6 +80,10 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      * cameraPosition : position of picker
      */
     private CameraPosition cameraPosition;
+    /**
+     * deviceLocation : position of device
+     */
+    private Location deviceLocation;
     /**
      * markerImage : picker image
      */
@@ -84,6 +96,10 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      * mapView : view of the map
      */
     private MapView mapView;
+    /**
+     * permissionsManager : permissions of the location
+     */
+    private PermissionsManager permissionsManager;
     /**
      * tvAttribution : credit
      */
@@ -104,6 +120,10 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      * placeSelectedButton : fab for selecting location
      */
     FloatingActionButton placeSelectedButton;
+    /**
+     * centerDeviceLocationButton : fab for center the camera to device's location
+     */
+    FloatingActionButton centerDeviceLocationButton;
     /**
      * droppedMarkerLayer : Layer for static screen
      */
@@ -152,11 +172,13 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
         bindViews();
         addBackButtonListener();
         addPlaceSelectedButton();
+        addCenterDeviceLocationButton();
         addCredits();
         getToolbarUI();
 
         if ("UploadActivity".equals(activity)) {
             placeSelectedButton.setVisibility(View.GONE);
+            centerDeviceLocationButton.setVisibility(View.GONE);
             modifyLocationButton.setVisibility(View.VISIBLE);
             showInMapButton.setVisibility(View.VISIBLE);
             largeToolbarText.setText(getResources().getString(R.string.image_location));
@@ -267,6 +289,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      */
     private void onClickModifyLocation() {
         placeSelectedButton.setVisibility(View.VISIBLE);
+        centerDeviceLocationButton.setVisibility(View.VISIBLE);
         modifyLocationButton.setVisibility(View.GONE);
         showInMapButton.setVisibility(View.GONE);
         droppedMarkerLayer.setProperties(visibility(NONE));
@@ -334,11 +357,27 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
             locationComponent.setLocationComponentEnabled(true);
 
             // Set the component's camera mode
-            locationComponent.setCameraMode(CameraMode.NONE);
+            locationComponent.setCameraMode(CameraMode.TRACKING);
 
             // Set the component's render mode
             locationComponent.setRenderMode(RenderMode.NORMAL);
 
+            locationComponent.getLocationEngine().getLastLocation(
+                new LocationEngineCallback<LocationEngineResult>() {
+                    @Override
+                    public void onSuccess(LocationEngineResult result) {
+                        deviceLocation = result.getLastLocation();
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+
+                    }
+                });
+
+        } else {
+            permissionsManager = new PermissionsManager(this);
+            permissionsManager.requestLocationPermissions(this);
         }
     }
 
@@ -406,6 +445,22 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
         finish();
     }
 
+    /**
+     * Center the camera to current device's location
+     */
+    private void addCenterDeviceLocationButton() {
+        centerDeviceLocationButton = findViewById(R.id.current_location_button);
+        enableLocationComponent(mapboxMap.getStyle());
+        centerDeviceLocationButton.setOnClickListener(view -> centerCameraPosition());
+    }
+
+    /**
+     * Center the camera to current device's location
+     */
+    void centerCameraPosition(){
+        mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(deviceLocation.getLatitude(), deviceLocation.getLongitude()),13.0));
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -447,4 +502,26 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
         super.onLowMemory();
         mapView.onLowMemory();
     }
+
+    @Override
+    public void onExplanationNeeded(List<String> permissionsToExplain) {
+        Toast.makeText(this, "Permission required to get current location", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPermissionResult(boolean granted) {
+        if (granted){
+            enableLocationComponent(mapboxMap.getStyle());
+        } else {
+            Toast.makeText(this, "Permission not granted!", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(final int requestCode, @NonNull final String[] permissions,
+        @NonNull final int[] grantResults) {
+        permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
 }
