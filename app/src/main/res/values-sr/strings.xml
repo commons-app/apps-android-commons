@@ -18,6 +18,8 @@
   <string name="commons_logo">Лого Оставе</string>
   <string name="commons_website">Веб-сајт Оставе</string>
   <string name="submit">Пошаљи</string>
+  <string name="nearby_row_image">Слика</string>
+  <string name="nearby_all">Све</string>
   <string name="appwidget_img">Слика дана</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d датотека се отпрема</item>
@@ -60,6 +62,7 @@
   <string name="signup">Отвори налог</string>
   <string name="logging_in_title">Пријављивање</string>
   <string name="logging_in_message">Сачекајте…</string>
+  <string name="updating_caption_message">Сачекајте…</string>
   <string name="login_success">Успешно сте пријављени.</string>
   <string name="login_failed">Пријављивање није успело.</string>
   <string name="upload_failed">Датотека није пронађена. Покушајте са другом датотеком.</string>
@@ -82,6 +85,7 @@
   <string name="menu_nearby">У близини</string>
   <string name="provider_contributions">Моја отпремања</string>
   <string name="menu_share">Дели</string>
+  <string name="menu_view_file_page">Види страницу датотеке</string>
   <string name="share_title_hint">Опис (обавезно)</string>
   <string name="share_description_hint">Опис</string>
   <string name="login_failed_network">Пријава није могућа — грешка на мрежи</string>
@@ -241,6 +245,7 @@
   <string name="nearby_commons">Остава</string>
   <string name="about_rate_us">Оцените нас</string>
   <string name="about_faq">ЧПП</string>
+  <string name="user_guide">Кориснички водич</string>
   <string name="welcome_skip_button">Прескочи упутство</string>
   <string name="no_internet">Интернет није доступан</string>
   <string name="error_notifications">Грешка при добављању обавештења</string>
@@ -269,6 +274,7 @@
   <string name="search_tab_title_categories">Категорије</string>
   <string name="explore_tab_title_featured">Изабрано</string>
   <string name="explore_tab_title_mobile">Отпремљено путем мобилног уређаја</string>
+  <string name="explore_tab_title_map">Мапа</string>
   <string name="successful_wikidata_edit">Слика је додата у %1$s на Википодацима.</string>
   <string name="wikidata_edit_failure">Ажурирање одговарајућег ентитета на Википодацима није успело.</string>
   <string name="menu_set_wallpaper">Постави као позадину</string>
@@ -345,6 +351,8 @@
   <string name="no_uploads">Добро дошли на Оставу!\n\nОтпремите прве медије додиром дугмета за додавање.</string>
   <string name="no_categories_selected">Категорије нису изабране</string>
   <string name="no_categories_selected_warning_desc" fuzzy="true">Слике без категорија ретко су употребљиве. Заиста желите да пошаљете без избора категорија?</string>
+  <string name="back_button_warning">Откажи отпремање</string>
+  <string name="back_button_continue">Настави отпремање</string>
   <string name="upload_flow_all_images_in_set">(За све слике у скупу)</string>
   <string name="search_this_area">Претражите ову област</string>
   <string name="nearby_card_permission_title">Захтев за дозволу</string>
@@ -424,6 +432,7 @@
   <string name="delete_helper_ask_reason_copyright_internet_photo">Насумична фотографија са интерната</string>
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Зато што је то</string>
+  <string name="category_edit_helper_show_edit_title_success">Успешно</string>
   <string name="share_image_via">Подели слику преко</string>
   <string name="no_achievements_yet" fuzzy="true">Још нисте допринели</string>
   <string name="account_created">Налог је отворен.</string>
@@ -435,8 +444,18 @@
   <string name="place_type">Тип места:</string>
   <string name="nearby_search_hint">Мост, музеј, хотел итд.</string>
   <string name="upload_nearby_place_found_title">Оближње место је пронађено</string>
+  <string name="title_app_shortcut_bookmark">Обележивачи</string>
+  <string name="title_app_shortcut_setting">Подешавања</string>
   <string name="remove_bookmark">Уклоњено из обележивача</string>
   <string name="add_bookmark">Додато у обележиваче</string>
+  <string name="setting_wallpaper_dialog_title">Постави као позадину</string>
+  <string name="setting_wallpaper_dialog_message">Постављам позадину, сачекајте…</string>
+  <string name="theme_default_name">Као на уређају</string>
+  <string name="theme_dark_name">Тамна</string>
+  <string name="theme_light_name">Светла</string>
+  <string name="load_more">Учитај још</string>
+  <string name="more">Више</string>
+  <string name="bookmarks">Обележивачи</string>
   <string name="achievements_tab_title">Достигнућа</string>
   <string name="rank_prefix">Ранг:</string>
   <string name="count_prefix">Број:</string>
@@ -450,8 +469,25 @@
   <string name="leaderboard_yearly">Годишње</string>
   <string name="leaderboard_weekly">Недељно</string>
   <string name="leaderboard_nearby">У близини</string>
+  <string name="statistics_quality">Квалитетне слике</string>
+  <string name="resuming_upload">Настављам отпремање…</string>
+  <string name="pausing_upload">Паузирам отпремање…</string>
+  <string name="cancelling_upload">Отказујем отпремање…</string>
+  <string name="depicts_step_title">Приказује</string>
+  <string name="read_help_link">Детаљније</string>
+  <string name="label">Назив</string>
+  <string name="description">Опис</string>
   <string name="custom_selector_empty_text">Нема слика</string>
   <string name="done">Готово</string>
   <string name="back">Назад</string>
   <string name="custom_selector_already_uploaded_image_text">Ова слика је већ отпремљена на Оставу.</string>
+  <string name="menu_view_user_page">Прикажи корисничку страницу</string>
+  <string name="apply">Примени</string>
+  <string name="reset">Ресетуј</string>
+  <string name="add_location">Додај локацију</string>
+  <string name="explore_map_details">Детаљи</string>
+  <string name="android_version">Верзија Андроида</string>
+  <string name="device_manufacturer">Произвођач уређаја</string>
+  <string name="device_model">Модел уређаја</string>
+  <string name="device_name">Назив уређаја</string>
 </resources>
