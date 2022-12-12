@@ -52,25 +52,21 @@ class AdvanceQueryFragment : Fragment() {
 
     private fun setClickListeners() {
         btnReset?.setOnClickListener {
-            it?.post {
-                etQuery?.setText(arguments?.getString("query")!!)
-                etQuery?.clearFocus()
-                hideKeyBoard()
-                callback.reset()
-            }
+            etQuery?.setText(arguments?.getString("query")!!)
+            etQuery?.clearFocus()
+            hideKeyBoard()
+            callback.reset()
         }
 
         btnApply?.setOnClickListener {
-            it?.post {
-                etQuery?.clearFocus()
-                hideKeyBoard()
-                callback.apply(etQuery?.text.toString())
-                callback.close()
-            }
+            etQuery?.clearFocus()
+            hideKeyBoard()
+            callback.apply(etQuery?.text.toString())
+            callback.close()
         }
     }
 
-    private fun hideKeyBoard() {
+    fun hideKeyBoard() {
         val inputMethodManager =
             context?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
         inputMethodManager?.hideSoftInputFromWindow(view?.windowToken, 0)

@@ -14,12 +14,14 @@ import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.nearby.fragments.AdvanceQueryFragment
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
@@ -40,6 +42,8 @@ class AdvanceQueryFragmentUnitTests {
     private lateinit var activity: MainActivity
     private lateinit var layoutInflater: LayoutInflater
     private lateinit var fragment: AdvanceQueryFragment
+
+    private val defaultQuery = "test"
 
     @Mock
     private lateinit var bundle: Bundle
@@ -84,8 +88,8 @@ class AdvanceQueryFragmentUnitTests {
         Whitebox.setInternalState(fragment, "btnApply", btnApply)
         Whitebox.setInternalState(fragment, "btnReset", btnReset)
 
-        // setting initial query
-        `when`(bundle.getString("query")).thenReturn("test")
+        // setting default query
+        `when`(bundle.getString("query")).thenReturn(defaultQuery)
     }
 
     @Test
@@ -102,7 +106,7 @@ class AdvanceQueryFragmentUnitTests {
     fun `when query passed in fragment argument, it is visible in text field`() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onViewCreated(view, bundle)
-        assertEquals("test", etQuery.text.toString())
+        assertEquals(defaultQuery, etQuery.text.toString())
     }
 
 
@@ -116,11 +120,54 @@ class AdvanceQueryFragmentUnitTests {
 
     @Test
     fun `when apply button is clicked, callback is notified with new string and screen is closed`() {
+        // Checking initial query is showing on text view
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.onViewCreated(view, bundle)
+        assertEquals(defaultQuery, etQuery.text.toString())
 
+        // Setting new query to text view
+        val newQuery = "$defaultQuery 2"
+        etQuery.setText(newQuery)
+
+        // Clicking apply button
+        btnApply.performClick()
+
+        // Verifying if call is notified with changed argument query
+        verify(callback).apply(newQuery)
+        verify(callback).close()
     }
 
     @Test
     fun `when reset button is clicked, initial query is visible in text field`() {
+        // Checking initial query is showing on text view
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.onViewCreated(view, bundle)
+        assertEquals(defaultQuery, etQuery.text.toString())
 
+        // Setting new query to text view
+        val newQuery = "$defaultQuery 2"
+        etQuery.setText(newQuery)
+
+        // Clicking reset button
+        btnReset.performClick()
+
+        // Verifying if text view is showing initial query and callback is notified
+        assertEquals(defaultQuery, etQuery.text.toString())
+        verify(callback).reset()
+    }
+
+    @Test
+    fun `when apply button is clicked with no change, callback is notified and screen is closed`() {
+        // Checking initial query is showing on text view
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.onViewCreated(view, bundle)
+        assertEquals(defaultQuery, etQuery.text.toString())
+
+        // Clicking apply button
+        btnApply.performClick()
+
+        // Verifying if call is notified with initial argument query
+        verify(callback).apply(defaultQuery)
+        verify(callback).close()
     }
 }
