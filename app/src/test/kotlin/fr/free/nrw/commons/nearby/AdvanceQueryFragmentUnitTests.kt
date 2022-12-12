@@ -5,26 +5,23 @@ import android.os.Bundle
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.FrameLayout
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.nearby.fragments.AdvanceQueryFragment
-import org.junit.Assert
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito
+import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
+import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
@@ -37,20 +34,15 @@ import org.wikipedia.AppAdapter
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class AdvanceQueryFragmentUnitTests {
+
+    private lateinit var view: View
     private lateinit var context: Context
     private lateinit var activity: MainActivity
+    private lateinit var layoutInflater: LayoutInflater
     private lateinit var fragment: AdvanceQueryFragment
 
-    private lateinit var viewGroup: ViewGroup
-
     @Mock
-    private lateinit var layoutInflater: LayoutInflater
-
-    @Mock
-    private lateinit var callback: AdvanceQueryFragment.Callback
-
-    @Mock
-    private lateinit var view: View
+    private lateinit var bundle: Bundle
 
     @Mock
     private lateinit var etQuery: AppCompatEditText
@@ -62,68 +54,73 @@ class AdvanceQueryFragmentUnitTests {
     private lateinit var btnApply: AppCompatButton
 
     @Mock
-    private lateinit var bundle: Bundle
+    private lateinit var callback: AdvanceQueryFragment.Callback
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-
+        context = RuntimeEnvironment.getApplication().applicationContext
         AppAdapter.set(TestAppAdapter())
-        context = RuntimeEnvironment.application.applicationContext
         activity = Robolectric.buildActivity(MainActivity::class.java).create().get()
-        viewGroup = FrameLayout(context)
-
-        Mockito.`when`(bundle.getString("query")).thenReturn("test")
 
         fragment = AdvanceQueryFragment()
-        fragment.callback = callback
         fragment.arguments = bundle
-
+        fragment.callback = callback
         val fragmentManager: FragmentManager = activity.supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(fragment, null)
         fragmentTransaction.commit()
 
-        Mockito.`when`(layoutInflater.inflate(R.layout.fragment_advance_query, viewGroup, false))
-            .thenReturn(view)
-        Mockito.`when`(view.findViewById<AppCompatEditText>(R.id.et_query)).thenReturn(etQuery)
-        Mockito.`when`(view.findViewById<AppCompatButton>(R.id.btn_apply)).thenReturn(btnApply)
-        Mockito.`when`(view.findViewById<AppCompatButton>(R.id.btn_reset)).thenReturn(btnReset)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun checkFragmentNotNull() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        Assert.assertNotNull(fragment)
+
+        layoutInflater = LayoutInflater.from(activity)
+        view = layoutInflater.inflate(R.layout.fragment_advance_query, null)
+
+        etQuery = view.findViewById(R.id.et_query)
+        btnApply = view.findViewById(R.id.btn_apply)
+        btnReset = view.findViewById(R.id.btn_reset)
+
+        Whitebox.setInternalState(fragment, "etQuery", etQuery)
+        Whitebox.setInternalState(fragment, "btnApply", btnApply)
+        Whitebox.setInternalState(fragment, "btnReset", btnReset)
+
+        // setting initial query
+        `when`(bundle.getString("query")).thenReturn("test")
     }
 
     @Test
-    fun testOnCreateView() {
+    fun `check none of the views are null`() {
+        assertNotNull(activity)
+        assertNotNull(fragment)
+        assertNotNull(bundle)
+        assertNotNull("EditText could not be found", etQuery)
+        assertNotNull("Button could not be found", btnReset)
+        assertNotNull("Button could not be found", btnApply)
+    }
+
+    @Test
+    fun `when query passed in fragment argument, it is visible in text field`() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.onCreateView(layoutInflater, viewGroup, bundle)
-        verify(layoutInflater).inflate(R.layout.fragment_advance_query, viewGroup, false)
-    }
-
-    @Test
-    fun testOnViewCreated() {
-        fragment.onCreateView(layoutInflater, viewGroup, bundle)
         fragment.onViewCreated(view, bundle)
-        verify(etQuery).setText("test")
+        assertEquals("test", etQuery.text.toString())
+    }
 
-        Mockito.`when`(btnReset.post(any())).thenAnswer {
-            it.getArgument(0, Runnable::class.java).run()
-        }
 
-        Mockito.`when`(btnApply.post(any())).thenAnswer {
-            it.getArgument(0, Runnable::class.java).run()
-        }
-        btnReset.performClick()
-        btnApply.performClick()
+    @Test
+    fun `when no query is passed in fragment argument, nothing is visible in text field`() {
+        `when`(bundle.getString("query")).thenReturn("")
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.onViewCreated(view, bundle)
+        assertEquals("", etQuery.text.toString())
     }
 
     @Test
-    fun testHideKeyboard() {
-        fragment.hideKeyBoard()
+    fun `when apply button is clicked, callback is notified with new string and screen is closed`() {
+
+    }
+
+    @Test
+    fun `when reset button is clicked, initial query is visible in text field`() {
+
     }
 }
