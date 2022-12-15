@@ -19,6 +19,7 @@
 * ZhaoGang
 * 列维劳德
 * 和平奮鬥救地球
+* 捍粵者
 * 沈澄心
 * 烈羽
 -->
@@ -177,7 +178,7 @@
   <string name="license_name_cc_by_sa_4_0">CC姓名標示-相同方式分享4.0</string>
   <string name="license_name_cc_by_4_0">創用CC姓名標示4.0</string>
   <string name="tutorial_1_text">維基共享資源管理大部份使用在維基百科的圖片。</string>
-  <string name="tutorial_1_subtext">您的圖片幫助教育了世界上的人們！</string>
+  <string name="tutorial_1_subtext">您的圖片有助教育世人！</string>
   <string name="tutorial_2_text">請上傳完全由您自己拍攝或創作的圖片：</string>
   <string name="tutorial_2_subtext_1">自然事物（花、動物、山峰）</string>
   <string name="tutorial_2_subtext_2">可利用的事物（腳踏車、車站）</string>
@@ -195,7 +196,7 @@
   <string name="welcome_copyright_text">您的圖片可以幫助教育世界各地的人。</string>
   <string name="welcome_copyright_subtext">避免使用受版權保護的材料，例如從網際網路找來的圖片、海報、書籍封面等</string>
   <string name="welcome_final_text">以上您明白了嗎？</string>
-  <string name="welcome_final_button_text">是的！</string>
+  <string name="welcome_final_button_text">了解！</string>
   <string name="welcome_help_button_text">更多信息</string>
   <string name="detail_panel_cats_label">分類</string>
   <string name="detail_panel_cats_loading">載入中…</string>
@@ -303,7 +304,7 @@
   <string name="about_translate">翻譯</string>
   <string name="about_translate_title">語言</string>
   <string name="about_translate_message">選擇您想要提交翻譯的語言</string>
-  <string name="about_translate_proceed">已進行</string>
+  <string name="about_translate_proceed">已完成</string>
   <string name="about_translate_cancel">取消</string>
   <string name="retry">重試</string>
   <string name="showcase_view_whole_nearby_activity">這些是在您的周遭，並且需要圖片來圖解、描述它們本身的維基百科條目之地點。\n\n請點擊「搜尋此區域」來查看地圖，然後在位置啟動周遭搜尋。</string>
@@ -328,7 +329,7 @@
   <string name="search_tab_title_categories">分類</string>
   <string name="search_tab_title_depictions">項目</string>
   <string name="explore_tab_title_featured">特色</string>
-  <string name="explore_tab_title_mobile">透過行動裝置上傳</string>
+  <string name="explore_tab_title_mobile">以流動裝置上傳</string>
   <string name="explore_tab_title_map">地圖</string>
   <string name="successful_wikidata_edit">圖片已添加到維基數據上的%1$s！</string>
   <string name="wikidata_edit_failure">更新所對應的維基數據項目失敗！</string>
@@ -433,7 +434,7 @@
   <string name="achievements_fetch_failed_ultimate_achievement">您做出的貢獻多到讓我們的成果系統無法因應，此為終極成果。</string>
   <string name="ends_on">結束於：</string>
   <string name="display_campaigns">顯示活動</string>
-  <string name="display_campaigns_explanation">查看進行中的活動</string>
+  <string name="display_campaigns_explanation">檢視發生中的活動</string>
   <string name="nearby_campaign_dismiss_message">您不會再看到活動。然而，若您有意的話您可以在設定裡重新啟動此通知。</string>
   <string name="this_function_needs_network_connection">此功能需要連接到網路，請檢查您的連線設定。</string>
   <string name="error_processing_image">處理圖片時出現錯誤。請重試！</string>
@@ -469,7 +470,7 @@
   <string name="review_image_explanation">您可以檢閱來改善維基共享資源的品質。\n檢閱的三個項目有：\n- 此圖片是否符合範圍？\n當您輕觸「否」（代表不在符合範圍），您會對此圖片添加刪除提名模板。\n\n- 此圖片是否遵守版權規範？\n當您輕觸「否」（代表未遵守版權規範），您會對此圖片添加刪除提名模板。\n\n- 此圖片是否有分類正確？\n當您輕觸「否」（代表分類不正確），您會對此圖片添加分類請求模板。\n\n如果一切都沒問題，就不會對圖片添加模板，您另外可以對貢獻者表達感謝。</string>
   <string name="no_image">沒有圖片被使用到</string>
   <string name="no_image_reverted">沒有圖片被還原回復</string>
-  <string name="no_image_uploaded">沒有圖片被上傳</string>
+  <string name="no_image_uploaded">未上傳圖片</string>
   <string name="no_notification">您有尚未讀取的通知</string>
   <string name="no_read_notification">您沒有已讀的通知</string>
   <string name="share_logs_using">分享日誌使用</string>
@@ -510,9 +511,9 @@
   <string name="delete_helper_show_deletion_message_if">已提名%1$s刪除。</string>
   <string name="delete_helper_show_deletion_title_failed">失敗</string>
   <string name="delete_helper_show_deletion_message_else">無法請求刪除。</string>
-  <string name="delete_helper_ask_spam_selfie" fuzzy="true">自拍</string>
-  <string name="delete_helper_ask_spam_blurry" fuzzy="true">糢糊</string>
-  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">無意義</string>
+  <string name="delete_helper_ask_spam_selfie">未在任何條目中使用的自拍照</string>
+  <string name="delete_helper_ask_spam_blurry">完全糢糊</string>
+  <string name="delete_helper_ask_spam_nonsense">無意義，無法使用在任何條目</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">按壓照片</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">來自網路的隨機照片</string>
   <string name="delete_helper_ask_reason_copyright_logo">標誌</string>
@@ -649,7 +650,7 @@
   <string name="read_help_link">延伸閱讀</string>
   <string name="media_detail_in_all_languages">在所有語言</string>
   <string name="choose_a_location">挑選一個位置</string>
-  <string name="pan_and_zoom_to_adjust">平移和縮放來進行調整</string>
+  <string name="pan_and_zoom_to_adjust">平移和縮放以調整</string>
   <string name="select_location_location_picker">選擇位置</string>
   <string name="show_in_map_app">顯示在地圖應用程式</string>
   <string name="modify_location">編輯位置</string>
@@ -713,7 +714,7 @@
   <string name="hiding_already_actioned_pictures">隱藏已操作的圖片</string>
   <string name="no_more_images_found">找不到更多圖片</string>
   <string name="this_image_is_already_uploaded">已上傳此圖片</string>
-  <string name="can_not_select_this_image_for_upload">無法選擇此圖片來進行上傳</string>
+  <string name="can_not_select_this_image_for_upload">無法選擇此圖片來上載</string>
   <string name="image_selected">已選圖片</string>
   <string name="image_marked_as_not_for_upload">圖片標記為不上傳</string>
   <string name="menu_view_report">回報</string>

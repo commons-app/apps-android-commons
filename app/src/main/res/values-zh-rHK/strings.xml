@@ -2,6 +2,7 @@
 <!-- Authors:
 * Liuxinyu970226
 * StarrySky
+* 捍粵者
 -->
 <resources>
   <string name="commons_facebook">維基共享資源臉書頁</string>
@@ -9,8 +10,8 @@
   <string name="commons_logo">維基共享資源標誌</string>
   <string name="commons_website">共享資源網站</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">正在上傳%1$d個檔案</item>
-    <item quantity="other">正在上傳%1$d個檔案</item>
+    <item quantity="one">正在上傳%1$d份檔案</item>
+    <item quantity="other">正在上傳%1$d份檔案</item>
   </plurals>
   <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
@@ -18,12 +19,12 @@
   </plurals>
   <string name="starting_uploads">開始上傳</string>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">正在處理%d個上傳</item>
-    <item quantity="other">正在處理%d個上傳</item>
+    <item quantity="one">正在處理%d項上傳</item>
+    <item quantity="other">正在處理%d項上傳</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d個上傳</item>
-    <item quantity="other">%d個上傳</item>
+    <item quantity="one">%d次上傳</item>
+    <item quantity="other">%d次上傳</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">此圖片會按 %1$s 協議授權上傳</item>
@@ -85,8 +86,8 @@
   <string name="share_description_hint">描述</string>
   <string name="share_caption_hint">說明</string>
   <string name="login_failed_network">無法登入－網路故障</string>
-  <string name="login_failed_throttled">失敗次數過多。請於幾分鐘後重試。</string>
-  <string name="login_failed_blocked">很抱歉，該使用者已被維基共享資源封鎖</string>
+  <string name="login_failed_throttled">失敗次數過多，請於幾分鐘後重試。</string>
+  <string name="login_failed_blocked">很抱歉，維基共享資源已封鎖該使用者</string>
   <string name="login_failed_2fa_needed">必須提供您的雙重驗證代碼。</string>
   <string name="login_failed_generic">登入失敗！</string>
   <string name="share_upload_button">上載</string>
@@ -99,7 +100,7 @@
   <string name="refresh_button">刷新</string>
   <string name="display_list_button">清單</string>
   <string name="contributions_subtitle_zero">（尚未上傳）</string>
-  <string name="categories_not_found">沒有發現與 %1$s 相符的分類</string>
+  <string name="categories_not_found">無發現符合%1$s的分類</string>
   <string name="depictions_not_found">找不到符合%1$s的維基數據項目</string>
   <string name="no_child_classes">%1$s沒有子類別</string>
   <string name="no_parent_classes">%1$s沒有父類別</string>
@@ -112,7 +113,7 @@
   <string name="title_activity_category_details">分類</string>
   <string name="title_activity_review">同行評審</string>
   <string name="menu_about">關於</string>
-  <string name="about_license">維基共享資源應用程式是透過維基媒體社群上的受讓人，與志願者們所建立及維護的開源應用程式。維基媒體基金會並不參與此應用程式的建立、開發，與維護。</string>
+  <string name="about_license">維基共享資源應用程式是透過維基媒體社群上的受讓人，與志願者所建立及維護的開源應用程式。維基媒體基金會並不參與此應用程式的建立、開發，與維護。</string>
   <string name="about_improve">建立新的&lt;a href=\"%1$s\"&gt; GitHub 問題&lt;/a&gt;來回報程式錯誤和提出建議。</string>
   <string name="about_privacy_policy">&lt;u&gt;私隱政策&lt;/u&gt;</string>
   <string name="about_credits">製作人員</string>
@@ -134,7 +135,7 @@
   <string name="license_name_cc_by_sa"> 姓名標示-相同方式分享3.0</string>
   <string name="license_name_cc_by">姓名標示3.0</string>
   <string name="tutorial_1_text">維基共享資源管理大部份使用在維基百科的圖片。</string>
-  <string name="tutorial_1_subtext">您的圖片可以幫助教育世界上的人們！</string>
+  <string name="tutorial_1_subtext">您的圖片有助教育世人！</string>
   <string name="tutorial_2_text">請上傳完全由您自己拍攝或創作的圖片：</string>
   <string name="tutorial_2_subtext_1">自然事物（花、動物、山峰等）</string>
   <string name="tutorial_2_subtext_2">可利用的事物（腳踏車、車站等）</string>
@@ -149,7 +150,7 @@
   <string name="tutorial_4_subtext_3">分類：Sydney Opera House from the west（雪梨歌劇院的西側）、Sydney Opera House remote views（雪梨歌劇院的遠方外觀）</string>
   <string name="welcome_wikipedia_text">貢獻您的圖片，使維基百科的文章更加生動！</string>
   <string name="welcome_wikipedia_subtext">維基百科上的圖像來自維基共享資源。</string>
-  <string name="welcome_copyright_text">您的圖片可以幫助教育世界上的人們！</string>
+  <string name="welcome_copyright_text">您的圖片有助教育世人！</string>
   <string name="welcome_copyright_subtext">避免使用受版權保護的材料，例如從網際網路找來的圖片、海報、書籍封面等</string>
   <string name="welcome_final_text">以上您明白了嗎？</string>
   <string name="welcome_final_button_text">是！</string>
