@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Button
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import fr.free.nrw.commons.databinding.FragmentAdvanceQueryBinding
 
@@ -13,8 +15,15 @@ class AdvanceQueryFragment : Fragment() {
 
     private var _binding: FragmentAdvanceQueryBinding? = null
     private val binding get() = _binding
-    lateinit var originalQuery: String
+
     lateinit var callback: Callback
+
+    /**
+     * View Elements
+     */
+    private var etQuery: EditText? = null
+    private var btnApply: Button? = null
+    private var btnReset: Button? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,7 +31,9 @@ class AdvanceQueryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentAdvanceQueryBinding.inflate(inflater, container, false)
-        originalQuery = arguments?.getString("query")!!
+        etQuery = binding?.etQuery
+        btnApply = binding?.btnApply
+        btnReset = binding?.btnReset
         setHasOptionsMenu(false)
         return binding?.root
     }
@@ -30,25 +41,28 @@ class AdvanceQueryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(requireNotNull(binding)) {
-            etQuery.setText(originalQuery)
-            btnReset.setOnClickListener {
-                btnReset.post {
-                    etQuery.setText(originalQuery)
-                    etQuery.clearFocus()
-                    hideKeyBoard()
-                    callback.reset()
-                }
-            }
+        setUi()
 
-            btnApply.setOnClickListener {
-                btnApply.post {
-                    etQuery.clearFocus()
-                    hideKeyBoard()
-                    callback.apply(etQuery.text.toString())
-                    callback.close()
-                }
-            }
+        setClickListeners()
+    }
+
+    private fun setUi() {
+        etQuery?.setText(arguments?.getString("query")!!)
+    }
+
+    private fun setClickListeners() {
+        btnReset?.setOnClickListener {
+            etQuery?.setText(arguments?.getString("query")!!)
+            etQuery?.clearFocus()
+            hideKeyBoard()
+            callback.reset()
+        }
+
+        btnApply?.setOnClickListener {
+            etQuery?.clearFocus()
+            hideKeyBoard()
+            callback.apply(etQuery?.text.toString())
+            callback.close()
         }
     }
 
@@ -56,6 +70,11 @@ class AdvanceQueryFragment : Fragment() {
         val inputMethodManager =
             context?.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
         inputMethodManager?.hideSoftInputFromWindow(view?.windowToken, 0)
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 
     interface Callback {
