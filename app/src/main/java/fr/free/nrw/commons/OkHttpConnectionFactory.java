@@ -19,34 +19,30 @@ import org.wikipedia.dataclient.okhttp.HttpStatusException;
 import timber.log.Timber;
 
 public final class OkHttpConnectionFactory {
-
     private static final String CACHE_DIR_NAME = "okhttp-cache";
     private static final long NET_CACHE_SIZE = 64 * 1024 * 1024;
-    @NonNull
-    private static final Cache NET_CACHE = new Cache(
-        new File(CommonsApplication.getInstance().getCacheDir(),
+    @NonNull private static final Cache NET_CACHE = new Cache(new File(CommonsApplication.getInstance().getCacheDir(),
             CACHE_DIR_NAME), NET_CACHE_SIZE);
 
     @NonNull
     private static final OkHttpClient CLIENT = createClient();
 
-    @NonNull
-    public static OkHttpClient getClient() {
+    @NonNull public static OkHttpClient getClient() {
         return CLIENT;
     }
 
     @NonNull
     private static OkHttpClient createClient() {
         return new OkHttpClient.Builder()
-            .cookieJar(SharedPreferenceCookieManager.getInstance())
-            .cache(NET_CACHE)
-            .connectTimeout(120, TimeUnit.SECONDS)
-            .writeTimeout(120, TimeUnit.SECONDS)
-            .readTimeout(120, TimeUnit.SECONDS)
-            .addInterceptor(getLoggingInterceptor())
-            .addInterceptor(new UnsuccessfulResponseInterceptor())
-            .addInterceptor(new CommonHeaderRequestInterceptor())
-            .build();
+                .cookieJar(SharedPreferenceCookieManager.getInstance())
+                .cache(NET_CACHE)
+                .connectTimeout(120, TimeUnit.SECONDS)
+                .writeTimeout(120, TimeUnit.SECONDS)
+                .readTimeout(120, TimeUnit.SECONDS)
+                .addInterceptor(getLoggingInterceptor())
+                .addInterceptor(new UnsuccessfulResponseInterceptor())
+                .addInterceptor(new CommonHeaderRequestInterceptor())
+                .build();
     }
 
     private static HttpLoggingInterceptor getLoggingInterceptor() {
@@ -65,14 +61,13 @@ public final class OkHttpConnectionFactory {
         @NonNull
         public Response intercept(@NonNull final Chain chain) throws IOException {
             final Request request = chain.request().newBuilder()
-                .header("User-Agent", CommonsApplication.getInstance().getUserAgent())
-                .build();
+                    .header("User-Agent", CommonsApplication.getInstance().getUserAgent())
+                    .build();
             return chain.proceed(request);
         }
     }
 
     public static class UnsuccessfulResponseInterceptor implements Interceptor {
-
         private static final List<String> DO_NOT_INTERCEPT = Collections.singletonList(
             "api.php?format=json&formatversion=2&errorformat=plaintext&action=upload&ignorewarnings=1");
 
@@ -84,7 +79,7 @@ public final class OkHttpConnectionFactory {
             final Response rsp = chain.proceed(chain.request());
 
             // Do not intercept certain requests and let the caller handle the errors
-            if (isExcludedUrl(chain.request())) {
+            if(isExcludedUrl(chain.request())) {
                 return rsp;
             }
             if (rsp.isSuccessful()) {
@@ -102,8 +97,8 @@ public final class OkHttpConnectionFactory {
 
         private boolean isExcludedUrl(final Request request) {
             final String requestUrl = request.url().toString();
-            for (final String url : DO_NOT_INTERCEPT) {
-                if (requestUrl.contains(url)) {
+            for(final String url: DO_NOT_INTERCEPT) {
+                if(requestUrl.contains(url)) {
                     return true;
                 }
             }
