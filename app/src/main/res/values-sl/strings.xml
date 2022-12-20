@@ -473,7 +473,7 @@
   <string name="menu_option_unread">Ogled neprebranih</string>
   <string name="error_occurred_in_picking_images">Pri izbiri slik je prišlo do napake</string>
   <string name="please_wait">Prosimo, počakajte ...</string>
-  <string name="images_featured_explanation">Izbrane slike so slike visokousposobljenih fotografov in ilustratorjev, ki jih je skupnost Wikimedijine zbirke prepoznala kot najbolj kakovostne na tem spletnem mestu.</string>
+  <string name="images_featured_explanation">Izbrane slike so slike izvrstnih fotografov in ilustratorjev, ki jih je skupnost Wikimedijine zbirke prepoznala kot najbolj kakovostne v tem projektu.</string>
   <string name="images_via_nearby_explanation">Slike, naložene z Bližnjimi kraji, so slike, ki so naložene z odkrivanjem krajev na zemljevidu.</string>
   <string name="thanks_received_explanation">Ta možnost vam omogoča, da urejevalcem, ki so opravili koristno urejanje, pošljete zahvalo – z uporabo kratke povezave na strani zgodovine ali strani primerjave.</string>
   <string name="copy_image_caption_description">Kopiraj na naslednjo predstavnostno datoteko</string>
