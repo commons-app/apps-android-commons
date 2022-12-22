@@ -700,5 +700,4 @@
   <string name="report_content">Laporkan konten ini</string>
   <string name="request_user_block">Buat permohonan pemblokiran pengguna ini</string>
   <string name="welcome_to_full_screen_mode_text">Selamat datang di Mode Pemilihan Layar Penuh</string>
-  <string name="full_screen_mode_features_info">Swipe fast and long to perform these actions: \n- Left/Right: Go to previous/next \n- Up: Select\n- Down: Mark as not for upload.</string>
 </resources>

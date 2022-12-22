@@ -8,6 +8,7 @@
 * Minh Nguyen
 * Ngoxuannguyenchuong
 * NguoiDungKhongDinhDanh
+* Nguyenphutrong2
 * Nguyễn Mạnh An
 * Nhatminh01
 * Phjtieudoc
@@ -256,4 +257,5 @@
   <string name="missing_article">- Thêm hình ảnh này vào bài viết Wikipedia được liên kết không có hình ảnh.</string>
   <string name="bookmarks">Dấu trang</string>
   <string name="android_version">Phiên bản Android</string>
+  <string name="full_screen_mode_features_info">Vuốt nhanh và lâu để thực hiện các thao tác sau: - Trái/Phải: Đi tới trước/tiếp theo - Lên: Chọn - Xuống: Đánh dấu là không tải lên.</string>
 </resources>

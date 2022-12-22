@@ -469,7 +469,7 @@
   <string name="review_copyright">Ceci est-il conforme aux règles des droits d’auteur ?</string>
   <string name="review_category">Est-ce la bonne catégorie ?</string>
   <string name="review_spam">Est-ce dans le champ du projet ?</string>
-  <string name="review_thanks">Désirez-vous remercier le contributeur ?</string>
+  <string name="review_thanks">Désirez-vous remercier le contributeur ou la contributrice ?</string>
   <string name="review_spam_explanation">Cliquer sur NON pour proposer cette image à la suppression si elle n’est pas du tout utile.</string>
   <string name="review_copyright_explanation">Les logos, copies d’écran, posters de film sont souvent des violations de droits d’auteur.\nCliquer sur NON pour proposer la suppression de cette image.</string>
   <string name="review_thanks_explanation">%1$s sera encouragé par votre appréciation</string>

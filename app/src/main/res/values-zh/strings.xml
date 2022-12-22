@@ -15,6 +15,7 @@
 * Ken418
 * Kuailong
 * Lantianjialiang
+* LittlePaw365
 * Liuxinyu970226
 * Looong
 * NACHOgao3
@@ -98,7 +99,7 @@
   </plurals>
   <string name="navigation_item_explore">探索</string>
   <string name="preference_category_appearance">外观</string>
-  <string name="preference_category_general">一般</string>
+  <string name="preference_category_general">常规</string>
   <string name="preference_category_feedback">反馈</string>
   <string name="preference_category_privacy">隐私</string>
   <string name="app_name">共享资源</string>
@@ -190,10 +191,10 @@
   <string name="preference_license">默认许可协议</string>
   <string name="use_previous">使用之前的标题及描述</string>
   <string name="preference_theme">主题</string>
-  <string name="license_name_cc_by_sa_four">署名-ShareAlike4.0</string>
-  <string name="license_name_cc_by_four">署名4.0</string>
-  <string name="license_name_cc_by_sa">署名-ShareAlike3.0</string>
-  <string name="license_name_cc_by">署名3.0</string>
+  <string name="license_name_cc_by_sa_four">署名-相同方式共享 4.0</string>
+  <string name="license_name_cc_by_four">署名 4.0</string>
+  <string name="license_name_cc_by_sa">署名-相同方式共享 3.0</string>
+  <string name="license_name_cc_by">署名 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
@@ -302,7 +303,7 @@
   <string name="nominate_deletion">提交删除</string>
   <string name="nominated_for_deletion">此图片已被提交删除。</string>
   <string name="nominated_see_more">查看网页获取详情</string>
-  <string name="skip_login">忽略</string>
+  <string name="skip_login">跳过</string>
   <string name="navigation_item_login">登录</string>
   <string name="skip_login_title">你真的不要登录吗？</string>
   <string name="skip_login_message">您在未来将需要登陆才能上传图片。</string>
@@ -696,6 +697,7 @@
   <string name="display_monuments">显示古迹</string>
   <string name="wlm_month_message">维基爱古迹的月份！</string>
   <string name="learn_more">了解更多</string>
+  <string name="wlm_campaign_title">维基爱古迹</string>
   <string name="wlm_campaign_description">维基爱古迹是由维基媒体举行的国际古迹摄影比赛</string>
   <string name="need_permission">需要权限</string>
   <string name="read_phone_state_permission_message">附近的地图需要读取手机状态以正常运作</string>
@@ -728,5 +730,7 @@
   <string name="report_user">报告此用户</string>
   <string name="report_content">报告此内容</string>
   <string name="request_user_block">请求屏蔽此用户</string>
-  <string name="full_screen_mode_features_info">快速长划来执行一下操作：\n- 左/右：跳到上一页/下一页\n- 上：选择\n- 下：标记为不上传。</string>
+  <string name="welcome_to_full_screen_mode_text">欢迎使用全屏选择模式</string>
+  <string name="full_screen_mode_zoom_info">用两根手指放大和缩小。</string>
+  <string name="full_screen_mode_features_info">快速长距离滑动来执行以下操作：\n- 向左/右：前往上一个/下一个\n- 向上：选择\n- 向下：标记为不上传</string>
 </resources>
