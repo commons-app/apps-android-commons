@@ -81,6 +81,9 @@ class LocationPickerActivityUnitTests {
     private lateinit var smallToolbarText: TextView
 
     @Mock
+    private lateinit var fabCenterOnLocation: FloatingActionButton
+
+    @Mock
     private lateinit var tvAttribution: AppCompatTextView
 
     @Mock
@@ -89,7 +92,7 @@ class LocationPickerActivityUnitTests {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        context = RuntimeEnvironment.application.applicationContext
+        context = RuntimeEnvironment.getApplication().applicationContext
         activity = Robolectric.buildActivity(LocationPickerActivity::class.java).get()
 
         Whitebox.setInternalState(activity, "mapboxMap", mapboxMap)
@@ -103,6 +106,7 @@ class LocationPickerActivityUnitTests {
         Whitebox.setInternalState(activity, "shadow", shadow)
         Whitebox.setInternalState(activity, "largeToolbarText", largeToolbarText)
         Whitebox.setInternalState(activity, "smallToolbarText", smallToolbarText)
+        Whitebox.setInternalState(activity, "fabCenterOnLocation", fabCenterOnLocation)
         Whitebox.setInternalState(activity, "tvAttribution", tvAttribution)
     }
 
@@ -206,6 +210,7 @@ class LocationPickerActivityUnitTests {
         verify(droppedMarkerLayer, times(1)).setProperties(any())
         verify(largeToolbarText, times(1)).text = "Choose a location"
         verify(smallToolbarText, times(1)).text = "Pan and zoom to adjust"
+        verify(fabCenterOnLocation, times(1)).visibility = View.VISIBLE
         verify(mapboxMap, times(1)).addOnCameraMoveStartedListener(activity)
         verify(mapboxMap, times(1)).addOnCameraIdleListener(activity)
     }
