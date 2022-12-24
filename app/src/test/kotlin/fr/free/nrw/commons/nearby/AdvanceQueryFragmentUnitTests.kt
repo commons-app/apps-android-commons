@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.nearby
 
-import android.content.Context
 import android.os.Bundle
 import android.os.Looper
 import android.view.LayoutInflater
@@ -26,7 +25,6 @@ import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
@@ -38,7 +36,6 @@ import org.wikipedia.AppAdapter
 class AdvanceQueryFragmentUnitTests {
 
     private lateinit var view: View
-    private lateinit var context: Context
     private lateinit var activity: MainActivity
     private lateinit var layoutInflater: LayoutInflater
     private lateinit var fragment: AdvanceQueryFragment
@@ -63,7 +60,6 @@ class AdvanceQueryFragmentUnitTests {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        context = RuntimeEnvironment.getApplication().applicationContext
         AppAdapter.set(TestAppAdapter())
         activity = Robolectric.buildActivity(MainActivity::class.java).create().get()
 
