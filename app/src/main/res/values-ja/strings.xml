@@ -10,6 +10,7 @@
 * Kkairri
 * Kokage si
 * LaMagiaaa
+* MagicAho
 * MathXplore
 * Nicolas Raoul
 * Omotecho
@@ -295,7 +296,7 @@
   <string name="showcase_view_whole_nearby_activity">以下のとおり、近くにウィキペディアの記事に使う写真が足りない場所があります。\n\n\'この近くを検索\' ボタンを押すと、地図をロックしてその地点周辺の検索結果を表示します。</string>
   <string name="showcase_view_needs_photo">この場所の写真を募集中です。</string>
   <string name="showcase_view_has_photo">この場所の写真はすでにあります。</string>
-  <string name="showcase_view_no_longer_exists">この場所はもうありません。</string>
+  <string name="showcase_view_no_longer_exists">この場所はもうありません</string>
   <string name="no_images_found">画像がありません</string>
   <string name="error_loading_images">画像の読み込み中にエラーが発生しました</string>
   <string name="image_uploaded_by">アップロードした人: %1$s</string>
@@ -323,9 +324,9 @@
   <string name="quiz_question_string">本当にアップロードしますか？</string>
   <string name="question">質問</string>
   <string name="result">結果</string>
-  <string name="quiz_back_button">削除対象の画像を投稿し続けた場合、あなたのアカウントは停止されます。クイズの終了に同意しますか？</string>
+  <string name="quiz_back_button">削除対象の画像を投稿し続けた場合、あなたのアカウントはブロックされます。クイズの終了に同意しますか？</string>
   <string name="quiz_alert_message">あなたがアップロードした画像のうち、最低%1$s件がその後、削除されました。もし今後も削除が必要な画像のアップロードを続けるなら、あなたのアカウントは禁止される可能性があります。\n\nどんな画像をアップロードしてよいか禁止されているか覚えるため、もう一度チュートリアルを閲覧してクイズを受けますか？</string>
-  <string name="selfie_answer">自撮りは百科事典において殆ど価値がありません。あなた自身に関する記事が現時点でウィキペディアにない場合、あなたの自撮り画像はアップロードしないでください。</string>
+  <string name="selfie_answer">自撮りは百科事典においてほとんど価値がありません。あなた自身に関する記事が現時点でウィキペディアにない場合、あなたの自撮り画像はアップロードしないでください。</string>
   <string name="taj_mahal_answer">ほとんどの国で屋外の記念と風景のアップロードが認められています。ただし期間限定で屋外に展示された作品はしばしば著作権の対象であり、アップロードは禁止されています。</string>
   <string name="screenshot_answer">ウェブサイトのスクリーンショットは二次的製作物と見なされ、当該のウェブサイトに認められる著作権すべてが適用されます。著作者の許諾を得た後で利用することは可能です。そのような許諾のない場合、他人の作品を利用したあなたの製作物は法的に原著作者に所属する未認可の複製物と見なされます。</string>
   <string name="blurry_image_answer">コモンズが目指すもののひとつに、質の高い画像の収集があります。そのためピンぼけ画像はアップロードしてはいけません。明るさに注意して画質の良い写真の撮影を心がけましょう。</string>

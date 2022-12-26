@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Askar Nazyrov
+* Bosogo
 * Maksat
 * NR Deblocked
 -->
@@ -23,7 +24,7 @@
     <item quantity="other">%1$d жүктөө</item>
   </plurals>
   <string name="share_license_summary" fuzzy="true">Бул сүрөт %1$s лицензияланат</string>
-  <string name="app_name" fuzzy="true">Уикиказына</string>
+  <string name="app_name">Викиказына</string>
   <string name="menu_settings">Ырастоолор</string>
   <string name="username">Колдонуучунун аты</string>
   <string name="password">Сырсөз</string>

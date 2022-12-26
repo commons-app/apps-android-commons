@@ -97,7 +97,7 @@
   <string name="menu_upload_single">Bar bike</string>
   <string name="categories_search_text_hint">Li kategoriyan bigere</string>
   <string name="menu_save_categories">Tomar bike</string>
-  <string name="refresh_button">Nû bike</string>
+  <string name="refresh_button">Rojane bike</string>
   <string name="display_list_button">Lîste</string>
   <string name="contributions_subtitle_zero">(Hê barkirin nîne)</string>
   <string name="categories_activity_title">Kategorî</string>
@@ -122,7 +122,7 @@
   <string name="detail_description_empty">Bê danasîn</string>
   <string name="detail_discussion_empty">Bê gotûbêj</string>
   <string name="detail_license_empty">Lîsansa nenas</string>
-  <string name="menu_refresh">Nû bike</string>
+  <string name="menu_refresh">Rojane bike</string>
   <string name="ok">Baş e</string>
   <string name="warning">Hişyarî</string>
   <string name="yes">Erê</string>

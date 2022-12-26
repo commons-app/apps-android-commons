@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Agam Riyandana
 * Akmaie Ajam
 * Arifin.wijaya
 * DARMAS BUDI SANTOSO
@@ -700,4 +701,5 @@
   <string name="report_content">Laporkan konten ini</string>
   <string name="request_user_block">Buat permohonan pemblokiran pengguna ini</string>
   <string name="welcome_to_full_screen_mode_text">Selamat datang di Mode Pemilihan Layar Penuh</string>
+  <string name="full_screen_mode_features_info">Gesek dengan cepat dan panjang untuk melakukan tindakan ini: \n- Kiri/Kanan: Pergi ke sebelum/selanjutnya \n- Atas: Pilih\n- Bawah: Tandai sebagai bukan untuk diunggah.</string>
 </resources>

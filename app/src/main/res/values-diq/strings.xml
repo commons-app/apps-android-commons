@@ -15,6 +15,12 @@
   <string name="commons_logo">Logoy Commonsi</string>
   <string name="commons_website">Websitey Commonsi</string>
   <string name="submit">Bırışe</string>
+  <string name="show_captions">Bınnuşte</string>
+  <string name="row_item_language_description">Şınasnayışê zıwani</string>
+  <string name="row_item_caption">Bınnuşte</string>
+  <string name="show_captions_description">Şınasnayış</string>
+  <string name="nearby_row_image">Resım</string>
+  <string name="nearby_all">Pêro</string>
   <string name="appwidget_img">Fotrafê roci</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">1 dosya bar bena</item>
