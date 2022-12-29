@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Afalau
 * Cymrodor
 * Lloffiwr
 * Robin Owain
@@ -48,6 +49,7 @@
   <string name="signup">Cofrestru</string>
   <string name="logging_in_title">Wrthi\'n mewngofnodi</string>
   <string name="logging_in_message">Disgwyliwch…</string>
+  <string name="updating_caption_message">Arhoswch…</string>
   <string name="login_success">Llwyddodd y mewngofnodi!</string>
   <string name="login_failed">Methodd y mewngofnodi!</string>
   <string name="upload_failed">Ni chafwyd hyd i\'r ffeil. Ceisiwch un arall.</string>
@@ -156,6 +158,7 @@
   <string name="location_permission_title">Yn Ceisio Caniatad Lleol</string>
   <string name="ok">Iawn</string>
   <string name="warning">Rhybudd</string>
+  <string name="upload">Uwchlwytho</string>
   <string name="yes">Ydw</string>
   <string name="no">Nac ydw</string>
   <string name="media_detail_caption">Testun</string>
@@ -169,6 +172,7 @@
   <string name="media_detail_coordinates">Cyfesurynnau</string>
   <string name="media_detail_coordinates_empty">Dim</string>
   <string name="become_a_tester_title">Dewch yn Brofwr Beta</string>
+  <string name="_2fa_code">Cod 2FA</string>
   <string name="logout_verification">Ti\'n sicr dy fod am allgofnodi?</string>
   <string name="mediaimage_failed">Methodd y ddelwedd</string>
   <string name="no_subcategory_found">Ni chafwyd hyd i is-gategoriau</string>
@@ -253,6 +257,7 @@
   <string name="search_tab_title_depictions">Eitemau</string>
   <string name="explore_tab_title_featured">Detholiad</string>
   <string name="explore_tab_title_mobile">Uwchlwytho drwy declyn symudol</string>
+  <string name="explore_tab_title_map">Map</string>
   <string name="successful_wikidata_edit" fuzzy="true">Mae %1$s o luniau wedi\'u hychwanegu ar Wicidata!</string>
   <string name="menu_set_wallpaper">Gosod fel papur wal</string>
   <string name="wallpaper_set_successfully">Gosodwyd y papur wal!</string>
@@ -261,4 +266,6 @@
   <string name="question">Cwestiwn</string>
   <string name="result">Canlyniad</string>
   <string name="quiz_back_button">Os ydych yn parhau i uwchlwytho lluniau sy\'n cael eu dileu, fe gaiffeich cyfri ei flocio. Gorffen y cwis?</string>
+  <string name="learn_more">DYSGU MWY</string>
+  <string name="explore_map_details">Manylion</string>
 </resources>
