@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Seipinne
+* Yupik
+-->
+<resources>
+  <string name="crash_dialog_title">Commons lii kománâm</string>
+  <string name="crash_dialog_ok_toast">Takkâ!</string>
+</resources>

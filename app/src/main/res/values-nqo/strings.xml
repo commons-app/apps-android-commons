@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Aboubacar.banamoridou.toure
 * Lamine
 * Lancine.kounfantoh.fofana
 * MuratTheTurkish
@@ -10,6 +11,19 @@
   <string name="commons_logo">ߞߐߡߐ߲ ߛߌ߲ߞߐ߲</string>
   <string name="commons_website">ߞߐߡߐ߲ ߞߍߦߙߐ</string>
   <string name="submit">ߊ߬ ߞߘߊߡߊ߫</string>
+  <string name="add_another_description">ߡߊ߲߬ߞߕߎ߬ߟߌ ߘߏ߫ ߜߘߍ߫ ߝߊ߬ߙߴߊ߬ ߞߊ߲߬</string>
+  <string name="add_new_contribution">ߓߟߏߓߌߟߊߢߐ߲߯ߞߊ߲߫ ߞߎߘߊ ߝߊ߬ߙߴߊ߬ ߞߊ߲߬</string>
+  <string name="add_contribution_from_camera">ߓߟߏߓߌߟߊߢߐ߲߯ߞߊ߲ ߝߊ߬ߙߴߊ߬ ߞߊ߲߬ ߞߊ߬ ߝߘߊ߫ ߖߌ߬ߦߕߊ߬ߟߊ߲ ߠߊ߫</string>
+  <string name="add_contribution_from_photos">ߓߟߏߓߌߟߊߢߐ߲߯ߞߊ߲ ߝߊ߬ߙߴߊ߬ ߞߊ߲߬ ߞߊ߬ ߝߘߊ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߎ߬ ߟߊ߫</string>
+  <string name="add_contribution_from_contributions_gallery">ߓߟߏߓߌߟߊߢߐ߲߯ߞߊ߲ ߝߊ߬ߙߴߊ߬ ߞߊ߲߬ ߞߊ߬ ߝߘߊ߫ ߓߟߏߓߌߟߊߢߐ߲߯ߞߊ߲ ߖߌ߬ߦߊ߬ߝߍ߫ ߕߊ߬ߡߌ߲߬ߣߍ߲ ߠߎ߬ ߟߊ߫</string>
+  <string name="show_captions">ߞߘߐߝߐ (ߞߘߐߦߌߘߊ)</string>
+  <string name="row_item_language_description">ߞߊ߲ ߡߊ߲߬ߞߕߎ߬ߟߌ</string>
+  <string name="row_item_caption">ߞߘߐߝߐ (ߞߘߐߦߌߘߊ)</string>
+  <string name="show_captions_description">ߡߊ߲߬ߞߕߎ߬ߟߌ</string>
+  <string name="nearby_row_image">ߖߌ߬ߦߊ</string>
+  <string name="nearby_all">ߊ߬ ߓߍ߯</string>
+  <string name="nearby_filter_search">ߢߌߣߌ߲ߠߌ߲ ߦߌ߬ߘߊ</string>
+  <string name="nearby_filter_state">ߦߙߐ ߛߎ߯ߦߊ:</string>
   <string name="appwidget_img">ߟߏ߲ ߖߌ߬ߦߊ߬ߓߍ</string>
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>

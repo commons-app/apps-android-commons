@@ -5,6 +5,7 @@
 * Cûndûllah el-Kurdî
 * George Animal
 * Ghybu
+* Guherto
 * Kur
 -->
 <resources>
@@ -155,7 +156,7 @@
   <string name="about_translate_title">Ziman</string>
   <string name="about_translate_proceed">Didome</string>
   <string name="about_translate_cancel">Betal bike</string>
-  <string name="retry">Dîsa bicerribîne</string>
+  <string name="retry">Dîsa biceribîne</string>
   <string name="block_notification_title">Astengkirî</string>
   <string name="block_notification">Te hatiye astengkirin ji guherandina Commonsê</string>
   <string name="app_widget_heading">Wêneyê rojê</string>
