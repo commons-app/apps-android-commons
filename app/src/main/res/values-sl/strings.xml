@@ -337,7 +337,7 @@
   <string name="quiz_back_button">Če boste še naprej nalagali slike, ki jih je treba izbrisati, bo vaš račun verjetno blokiran. Ali res želite končati kviz?</string>
   <string name="quiz_alert_message">Izbrisanih je bilo več kot %1$s slik, ki ste jih naložili. Če boste še naprej nalagali slike, ki jih je treba izbrisati, bo vaš račun verjetno izbrisan.\n\nAli bi si želeli znova ogledati vadnico in nato opraviti kviz, da se boste lahko naučili, katere vrste slik smete in ne smete nalagati?</string>
   <string name="selfie_answer">Sebki nimajo posebne enciklopedične vrednosti. Prosimo, ne nalagajte slik sebe, razen če je v Wikipediji že ustvarjen članek o vas.</string>
-  <string name="taj_mahal_answer">Slike spomenikov in pokrajine so sprejemljive v večini držav. Upoštevajte, da so začasne umetniške instalacije pogosto avtorsko zavarovane in njihovih upodobitev ni dovoljeno nalagati. V Sloveniji je za pridobitni namen dovoljeno fotografirati samo tista javno razstavljena dela, katerih avtor je umrl leta {{#expr:{{CURRENTYEAR}}-71}}&lt;/&gt; ali prej. Za več o tem glejte [[Commons:Copyright rules by territory/Slovenia#Freedom of panorama]].</string>
+  <string name="taj_mahal_answer">Slike spomenikov in pokrajine so sprejemljive v večini držav. Upoštevajte, da so začasne umetniške instalacije pogosto avtorsko zavarovane in njihovih upodobitev ni dovoljeno nalagati. V Sloveniji je v gospodarski namen dovoljeno fotografirati samo tista javno razstavljena dela, katerih avtor je umrl leta {{#expr:{{CURRENTYEAR}}-71}}&lt;/&gt; ali prej. Za več o tem glejte [[Commons:Copyright rules by territory/Slovenia#Freedom of panorama]].</string>
   <string name="screenshot_answer">Zaslonski posnetki spletnih mest se štejejo kot izpeljana dela in zanje veljajo avtorske pravice izvornega spletnega mesta. Uporabljajo se lahko le z dovoljenjem izvornega avtorja. Brez takega dovoljenja se vsakršno izpeljano delo šteje za kršitev avtorskih pravic.</string>
   <string name="blurry_image_answer">Eden od ciljev Wikimedijine zbirke je zbiranje kakovostnih slik. Zamegljenih slik zato ne nalagajte. Vedno poskušajte posneti dobro sliko ob primerni svetlobi.</string>
   <string name="construction_event_answer">V Wikimedijini zbirki so zelo dobrodošle slike, ki prikazujejo tehniko ali kulturo.</string>
@@ -444,8 +444,8 @@
   <string name="check_category_toast">Zahtevam preverjanje kategorij za »%1$s«</string>
   <string name="nominate_for_deletion_done">Opravljeno</string>
   <string name="send_thank_success_title">Pošiljanje zahvale: uspešno</string>
-  <string name="send_thank_success_message">Zahvala uporabniku/ci $1$s je bila uspešno poslana</string>
-  <string name="send_thank_failure_message">Pošiljanje zahvale uporabniku/ci %1$s ni uspelo</string>
+  <string name="send_thank_success_message">Zahvala uporabniku_ci %1$s je bila uspešno poslana</string>
+  <string name="send_thank_failure_message">Pošiljanje zahvale uporabniku_ci %1$s ni uspelo</string>
   <string name="send_thank_failure_title">Pošiljanje zahvale: neuspešno</string>
   <string name="send_thank_toast">Pošiljam zahvalo uporabniku/ici %1$s</string>
   <string name="review_copyright">Ali so tu upoštevane avtorske pravice?</string>

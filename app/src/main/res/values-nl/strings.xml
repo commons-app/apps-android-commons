@@ -5,6 +5,7 @@
 * Dutchy45
 * Elroy
 * Festina90
+* Jillids
 * Klaas van Buiten
 * KlaasZ4usV
 * Mainframe98
@@ -28,6 +29,19 @@
   <string name="commons_website">Commons website</string>
   <string name="exit_location_picker">Locatiekiezer afsluiten</string>
   <string name="submit">Verzenden</string>
+  <string name="add_another_description">Voeg nog een andere beschrijving toe</string>
+  <string name="add_new_contribution">Nieuwe bijdrage toevoegen</string>
+  <string name="add_contribution_from_camera">Bijdrage van de camera toevoegen</string>
+  <string name="add_contribution_from_photos">Bijdrage van Foto\'s toevoegen</string>
+  <string name="add_contribution_from_contributions_gallery">Voeg een bijdrage toe uit de galerij met eerdere bijdragen</string>
+  <string name="show_captions">Bijschriften</string>
+  <string name="row_item_language_description">Taalbeschrijving</string>
+  <string name="row_item_caption">Bijschrift</string>
+  <string name="show_captions_description">Beschrijving</string>
+  <string name="nearby_row_image">Afbeelding</string>
+  <string name="nearby_all">Alle</string>
+  <string name="nearby_filter_toggle">Schakel omhoog</string>
+  <string name="nearby_filter_search">Zoek weergave</string>
   <string name="appwidget_img">Afbeelding van de dag</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d bestand aan het uploaden</item>
@@ -279,6 +293,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Waardeer ons</string>
   <string name="about_faq">Vraag en antwoord</string>
+  <string name="user_guide">Gebruikershandleiding</string>
   <string name="welcome_skip_button">Zelfstudie overslaan</string>
   <string name="no_internet">Geen internet</string>
   <string name="error_notifications">Fout bij ophalen berichten.</string>
@@ -305,6 +320,7 @@
   <string name="title_activity_search">Zoeken</string>
   <string name="search_recent_header">Recente zoekopdrachten:</string>
   <string name="provider_searches">Recente zoekopdrachten</string>
+  <string name="provider_recent_languages">Recente taalvragen</string>
   <string name="error_loading_categories">Er is een fout opgetreden bij het laden van categorieën.</string>
   <string name="error_loading_depictions">Er is een fout opgetreden tijdens het laden van de beschrijvingen.</string>
   <string name="search_tab_title_media">Media</string>
@@ -312,6 +328,7 @@
   <string name="search_tab_title_depictions">Items</string>
   <string name="explore_tab_title_featured">Uitgelicht</string>
   <string name="explore_tab_title_mobile">Geüpload via mobiel</string>
+  <string name="explore_tab_title_map">Kaart</string>
   <string name="successful_wikidata_edit">Afbeelding toegevoegd aan %1$s op Wikidata!</string>
   <string name="wikidata_edit_failure">Het bijwerken van corresponderende Wikidata-entiteit is mislukt!</string>
   <string name="menu_set_wallpaper">Stel in als achtergrond</string>
@@ -492,9 +509,9 @@
   <string name="delete_helper_show_deletion_message_if">%1$s genomineerd voor verwijdering.</string>
   <string name="delete_helper_show_deletion_title_failed">Mislukt</string>
   <string name="delete_helper_show_deletion_message_else">Kan verwijdering niet aanvragen.</string>
-  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Een selfie</string>
-  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Wazig</string>
-  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Onzin</string>
+  <string name="delete_helper_ask_spam_selfie">een selfie die in geen enkel artikel wordt gebruikt</string>
+  <string name="delete_helper_ask_spam_blurry">helemaal wazig</string>
+  <string name="delete_helper_ask_spam_nonsense">onzin, absoluut onbruikbaar in elk artikel</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Persfoto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Willekeurige foto van internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
@@ -508,6 +525,13 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Kan geen categorieën toevoegen.</string>
   <string name="category_edit_button_text">Categorieën bijwerken</string>
+  <string name="depictions_edit_helper_make_edit_toast">Proberen items bij te werken.</string>
+  <string name="depictions_edit_helper_show_edit_title">Wijzig items</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="one">Item %1$s is toegevoegd.</item>
+    <item quantity="other">Items %1$s zijn toegevoegd.</item>
+  </plurals>
+  <string name="depictions_edit_helper_edit_message_else">Kan items niet toevoegen.</string>
   <string name="coordinates_edit_helper_make_edit_toast">Ik probeer de coördinaten bij te werken.</string>
   <string name="coordinates_edit_helper_show_edit_title">Coördinaten bijwerken</string>
   <string name="description_edit_helper_show_edit_title">Bijwerking beschrijving</string>
@@ -656,6 +680,8 @@
   <string name="contributions_of_user">Bijdragen door Gebruiker: %s</string>
   <string name="achievements_of_user">Prestaties van Gebruiker: %s</string>
   <string name="menu_view_user_page">Gebruikerspagina bekijken</string>
+  <string name="edit_depictions">Wijzig items</string>
+  <string name="edit_categories">Categorieën bewerken</string>
   <string name="advanced_options">Geavanceerde Opties</string>
   <string name="advanced_query_info_text">U kunt de zoekopdracht Dichtbij aanpassen. Als u fouten krijgt, kunt u opnieuw instellen en toepassen.</string>
   <string name="apply">Toepassen</string>
@@ -665,9 +691,21 @@
   <string name="no_location_found_message">Misschien kunt u aangeven waar deze foto is genomen?\nLocatie data helpt Wiki redacteurs om uw afbeelding te vinden, waardoor deze veel nuttiger wordt.\nAlvast bedankt!</string>
   <string name="add_location">Locatie toevoegen</string>
   <string name="feedback_sharing_data_alert">Verwijder alstublieft informatie uit deze email die u liever niet openbaar wilt maken. Wees er ook van op de hoogte dat het emailadres en de bijbehorende gebruikersnaam en profielafbeelding die u gebruikt openbaar zichtbaar zullen zijn.</string>
+  <string name="explore_map_details">Details</string>
   <string name="achievements_unavailable_beta">Achievements zijn alleen beschikbaar in de productieversie. Sla de ontwikkelaarsdocumentatie erop na.</string>
   <string name="leaderboard_unavailable_beta">Het scorebord is alleen beschikbaar in de productieversie. Sla de ontwikkelaarsdocumentatie erop na.</string>
   <string name="copyright_popup">Upload alleen afbeeldingen die u zelf heeft gemaakt. Gebruikers die afbeeldingen met copyright uploaden worden geblokkeerd. Dit is ook van toepassing op de beta versie. Bedankt voor het testen van de app!</string>
+  <string name="select_feedback_data_choice">Deselecteer alle informatie die u liever niet openbaar deelt.</string>
+  <string name="api_level">API-niveau</string>
+  <string name="android_version">Android-versie</string>
+  <string name="device_manufacturer">Fabrikant van het apparaat</string>
+  <string name="device_model">Apparaat model</string>
+  <string name="device_name">Toestelnaam</string>
+  <string name="network_type">Netwerktype</string>
+  <string name="thanks_feedback">Bedankt voor het geven van feedback</string>
+  <string name="error_feedback">Fout tijdens het verzenden van feedback</string>
+  <string name="enter_description">Wat is uw feedback?</string>
+  <string name="your_feedback">Uw feedback</string>
   <string name="mark_as_not_for_upload">Markeren als niet voor uploaden</string>
   <string name="unmark_as_not_for_upload">Markeren als niet voor uploaden</string>
   <string name="show_already_actioned_pictures">Reeds behandelde afbeeldingen tonen</string>
@@ -677,6 +715,11 @@
   <string name="can_not_select_this_image_for_upload">Kan deze afbeelding niet selecteren om te uploaden</string>
   <string name="image_selected">Afbeelding geselecteerd</string>
   <string name="image_marked_as_not_for_upload">Afbeelding gemarkeerd als niet voor uploaden</string>
+  <string name="menu_view_report">Rapporteren</string>
+  <string name="report_violation">Rapporteer overtredingen</string>
+  <string name="report_user">Rapporteer deze Gebruiker</string>
+  <string name="report_content">Rapporteer deze inhoud</string>
+  <string name="request_user_block">Verzoek om deze gebruiker te blokkeren</string>
   <string name="welcome_to_full_screen_mode_text">Welkom bij de selectiemodus op volledig scherm</string>
   <string name="full_screen_mode_zoom_info">Gebruik twee vingers om in en uit te zoomen.</string>
   <string name="full_screen_mode_features_info">Veeg snel en lang om deze acties uit te voeren: \n- Links/Rechts: Naar vorige/volgende gaan\n- Omhoog: Selecteren\n- Omlaag: Als niet voor uploaden markeren</string>

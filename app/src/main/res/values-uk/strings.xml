@@ -684,10 +684,12 @@
   <string name="custom_selector_info_text2">На відміну від зображення зліва, зображення праворуч має логотип Commons, яке вказує, що воно вже завантажене.\n  Натисніть і утримуйте для попереднього перегляду зображення.</string>
   <string name="welcome_custom_selector_ok">Чудово</string>
   <string name="custom_selector_already_uploaded_image_text">Це зображення вже завантажено на Спільний ресурс.</string>
+  <string name="place_state_wlm">ВЛП</string>
   <string name="wlm_upload_info">Це зображення буде брати участь у конкурсі Wiki Loves Monuments</string>
   <string name="display_monuments">Показати пам’ятники</string>
   <string name="wlm_month_message">Цей місяць Wiki Loves Monuments!</string>
   <string name="learn_more">ДОСЛІДИТИ БІЛЬШЕ</string>
+  <string name="wlm_campaign_title">Вікі любить пам\'ятки</string>
   <string name="wlm_campaign_description">Wiki Loves Monuments — це міжнародний фотоконкурс пам’яток, організований Вікімедією</string>
   <string name="need_permission">Потрібен дозвіл</string>
   <string name="read_phone_state_permission_message">Для належної роботи мапи поблизу мають відображати стан PHONE STATE</string>
