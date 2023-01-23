@@ -42,6 +42,7 @@
   <string name="nearby_all">Alle</string>
   <string name="nearby_filter_toggle">Schakel omhoog</string>
   <string name="nearby_filter_search">Zoek weergave</string>
+  <string name="nearby_filter_state">Staat v.d. plaats</string>
   <string name="appwidget_img">Afbeelding van de dag</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d bestand aan het uploaden</item>
