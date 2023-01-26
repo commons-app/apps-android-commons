@@ -37,7 +37,7 @@
   <string name="upload_progress_notification_title_start">ಕಡತ ಅಪ್‌ಲೋಡ್ ಆಗುತ್ತಿದೆ: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ನಕಲೇರಿಕೆ  ಆಗಿದೆ!</string>
   <string name="upload_progress_notification_title_finishing">%1$s ಅಪ್ಲೋಡ್ ಮಾಡುವಿಕೆಯನ್ನು ಪೂರ್ಣಗೊಳಿಸಲಾಗುತ್ತಿದೆ</string>
-  <string name="upload_failed_notification_title" fuzzy="true">%1$s ಅಪ್ಲೋಡ್ ಮಾಡುವಿಕೆ ವಿಫಲವಾಗಿದೆ</string>
+  <string name="upload_failed_notification_title">%1$s ಅನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಲು ವಿಫಲವಾಗಿದೆ</string>
   <string name="upload_failed_notification_subtitle">ನೋಡಲು ಮೆಲ್ಲಗೆ ತಟ್ಟಿ</string>
   <string name="title_activity_contributions">ನನ್ನ ಇತ್ತಿಚಿನ ಅಪ್ಲೋಡ್ಗಳು</string>
   <string name="contribution_state_queued">ಸರತಿಸಾಲಿನಲ್ಲಿದೆ</string>

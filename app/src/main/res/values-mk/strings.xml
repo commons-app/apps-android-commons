@@ -573,8 +573,8 @@
   <string name="instructions_title">Напатствија</string>
   <string name="wikipedia_instructions_step_1">1. Употребете го следниов викитекст:</string>
   <string name="wikipedia_instructions_step_2">2. Стискајќи на „Потврди“ ќе ја отворите википедиската статија</string>
-  <string name="wikipedia_instructions_step_3">3. Најдете го соодвениот поднаслов во статијата кајшто би ја ставиле сликата</string>
-  <string name="wikipedia_instructions_step_4">4. Стиснете на иконката за уредување (моливче) за тој поднаслов.</string>
+  <string name="wikipedia_instructions_step_3">3. Најдете го соодвениот оддел во статијата кајшто би ја ставиле сликата</string>
+  <string name="wikipedia_instructions_step_4">4. Стиснете на иконката за уредување (моливче) за тој оддел.</string>
   <string name="wikipedia_instructions_step_5">5. Прекопирајте го викитекстот во соодветното место.</string>
   <string name="wikipedia_instructions_step_6">6. По потреба, уредете го викитекстот за да ја ставите сликата во прикладна положба во одност на текстот. Повеќе информации за тоа ќе видите &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;тука&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Објавете ја статијата</string>
