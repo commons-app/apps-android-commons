@@ -11,6 +11,9 @@ import static fr.free.nrw.commons.description.EditDescriptionConstants.UPDATED_W
 import static fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT;
 import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION;
 import static fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources;
+
+import android.Manifest;
+import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -81,6 +84,7 @@ import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
 import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
+import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -356,11 +360,37 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     @OnClick(R.id.mediaDetailImageViewSpacer)
-    public void launchZoomActivity(View view) {
+    public void launchZoomActivity(final View view) {
+        final boolean permission = PermissionUtils.
+            hasPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE);
+
+        if (permission) {
+            launchZoomActivityAfterPermissionCheck(view);
+        }
+        else {
+            PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                () -> {
+                    launchZoomActivityAfterPermissionCheck(view);
+                },
+                R.string.storage_permission_title,
+                R.string.read_storage_permission_rationale
+            );
+        }
+    }
+
+    /**
+     * launch zoom acitivity after permission check
+     * @param view as ImageView
+     */
+    private void launchZoomActivityAfterPermissionCheck(final View view) {
         if (media.getImageUrl() != null) {
-            Context ctx = view.getContext();
+            final Context ctx = view.getContext();
+            final Intent zoomableIntent = new Intent(ctx, ZoomableActivity.class);
+            zoomableIntent.setData(Uri.parse(media.getImageUrl()));
+            zoomableIntent.putExtra("Origin", "MediaDetail");
             ctx.startActivity(
-                new Intent(ctx, ZoomableActivity.class).setData(Uri.parse(media.getImageUrl()))
+                zoomableIntent
             );
         }
     }

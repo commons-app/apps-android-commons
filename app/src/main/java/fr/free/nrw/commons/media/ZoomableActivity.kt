@@ -163,13 +163,17 @@ class ZoomableActivity : BaseActivity() {
             handleResult(it)
         }
 
-        if(prefs.getBoolean(CustomSelectorConstants.FULL_SCREEN_MODE_FIRST_LUNCH, true)) {
-            // show welcome dialog on first launch
-            showWelcomeDialog()
-            prefs.edit().putBoolean(
-                CustomSelectorConstants.FULL_SCREEN_MODE_FIRST_LUNCH,
-                false
-            ).apply()
+        val origin = intent.getStringExtra("Origin")
+
+        if (origin == null) {
+            if (prefs.getBoolean(CustomSelectorConstants.FULL_SCREEN_MODE_FIRST_LUNCH, true)) {
+                // show welcome dialog on first launch
+                showWelcomeDialog()
+                prefs.edit().putBoolean(
+                    CustomSelectorConstants.FULL_SCREEN_MODE_FIRST_LUNCH,
+                    false
+                ).apply()
+            }
         }
     }
 
