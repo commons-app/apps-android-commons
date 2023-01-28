@@ -133,6 +133,8 @@ class ZoomableActivity : BaseActivity() {
     @Inject
     lateinit var customSelectorViewModelFactory: CustomSelectorViewModelFactory
 
+    private val originLabel = "Origin";
+
     /**
     * Coroutine Dispatchers and Scope.
     */
@@ -163,7 +165,7 @@ class ZoomableActivity : BaseActivity() {
             handleResult(it)
         }
 
-        val origin = intent.getStringExtra("Origin")
+        val origin = intent.getStringExtra(originLabel);
 
         if (origin == null) {
             if (prefs.getBoolean(CustomSelectorConstants.FULL_SCREEN_MODE_FIRST_LUNCH, true)) {

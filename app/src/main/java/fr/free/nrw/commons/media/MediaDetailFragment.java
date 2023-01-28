@@ -388,7 +388,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             final Context ctx = view.getContext();
             final Intent zoomableIntent = new Intent(ctx, ZoomableActivity.class);
             zoomableIntent.setData(Uri.parse(media.getImageUrl()));
-            zoomableIntent.putExtra("Origin", "MediaDetail");
+            zoomableIntent.putExtra("Origin", "MediaDetails");
             ctx.startActivity(
                 zoomableIntent
             );
