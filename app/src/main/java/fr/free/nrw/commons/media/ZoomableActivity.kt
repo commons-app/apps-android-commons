@@ -163,7 +163,7 @@ class ZoomableActivity : BaseActivity() {
             handleResult(it)
         }
 
-        val origin = intent.getStringExtra(ORIGIN_LABEL);
+        val origin = intent.getStringExtra(ZoomableActivityConstants.ORIGIN);
 
         /**
          * If origin is "null" it means that ZoomableActivity was created by the custom picker
@@ -660,12 +660,12 @@ class ZoomableActivity : BaseActivity() {
         super.onDestroy()
     }
 
-    companion object {
+    object ZoomableActivityConstants  {
         /**
          * Key for Accessing Intent Data Named "Origin", The value indicates what fragment
          * ZoomableActivity was created by. It is null if ZoomableActivity was created by
          * the custom picker.
          */
-        private const val ORIGIN_LABEL = "Origin";
+        const val ORIGIN = "Origin";
     }
 }
