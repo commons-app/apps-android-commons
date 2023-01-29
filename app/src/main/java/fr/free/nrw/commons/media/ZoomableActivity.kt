@@ -133,8 +133,6 @@ class ZoomableActivity : BaseActivity() {
     @Inject
     lateinit var customSelectorViewModelFactory: CustomSelectorViewModelFactory
 
-    private val originLabel = "Origin";
-
     /**
     * Coroutine Dispatchers and Scope.
     */
@@ -165,8 +163,12 @@ class ZoomableActivity : BaseActivity() {
             handleResult(it)
         }
 
-        val origin = intent.getStringExtra(originLabel);
+        val origin = intent.getStringExtra(ORIGIN_LABEL);
 
+        /**
+         * If origin is "null" means that ZoomableActivity is not created by MediaDetailsFragment,
+         * so we need to check for the first time popup in full screen mode.
+         */
         if (origin == null) {
             if (prefs.getBoolean(CustomSelectorConstants.FULL_SCREEN_MODE_FIRST_LUNCH, true)) {
                 // show welcome dialog on first launch
@@ -655,5 +657,12 @@ class ZoomableActivity : BaseActivity() {
     override fun onDestroy() {
         scope.cancel()
         super.onDestroy()
+    }
+
+    companion object {
+        /**
+         * Key for Accessing Intent Data Named "Origin"
+         */
+        private const val ORIGIN_LABEL = "Origin";
     }
 }
