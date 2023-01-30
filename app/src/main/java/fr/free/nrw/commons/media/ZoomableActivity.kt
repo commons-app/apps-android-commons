@@ -163,13 +163,22 @@ class ZoomableActivity : BaseActivity() {
             handleResult(it)
         }
 
-        if(prefs.getBoolean(CustomSelectorConstants.FULL_SCREEN_MODE_FIRST_LUNCH, true)) {
-            // show welcome dialog on first launch
-            showWelcomeDialog()
-            prefs.edit().putBoolean(
-                CustomSelectorConstants.FULL_SCREEN_MODE_FIRST_LUNCH,
-                false
-            ).apply()
+        val origin = intent.getStringExtra(ZoomableActivityConstants.ORIGIN);
+
+        /**
+         * If origin is "null" it means that ZoomableActivity was created by the custom picker
+         * (rather than by MediaDetailsFragment) so we need to show the first time popup in
+         * full screen mode if needed.
+         */
+        if (origin == null) {
+            if (prefs.getBoolean(CustomSelectorConstants.FULL_SCREEN_MODE_FIRST_LUNCH, true)) {
+                // show welcome dialog on first launch
+                showWelcomeDialog()
+                prefs.edit().putBoolean(
+                    CustomSelectorConstants.FULL_SCREEN_MODE_FIRST_LUNCH,
+                    false
+                ).apply()
+            }
         }
     }
 
@@ -649,5 +658,14 @@ class ZoomableActivity : BaseActivity() {
     override fun onDestroy() {
         scope.cancel()
         super.onDestroy()
+    }
+
+    object ZoomableActivityConstants  {
+        /**
+         * Key for Accessing Intent Data Named "Origin", The value indicates what fragment
+         * ZoomableActivity was created by. It is null if ZoomableActivity was created by
+         * the custom picker.
+         */
+        const val ORIGIN = "Origin";
     }
 }
