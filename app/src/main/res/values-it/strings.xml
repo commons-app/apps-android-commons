@@ -5,6 +5,7 @@
 * Albe Albe460
 * Ale.salmo
 * Beta16
+* Black Sky83
 * Davio
 * Gianfranco
 * Lorelai87
@@ -25,6 +26,20 @@
   <string name="commons_website">Sito web di Commons</string>
   <string name="exit_location_picker">Esci dal selettore di ubicazione</string>
   <string name="submit">Invia</string>
+  <string name="add_another_description">Aggiungi un\'altra descrizione</string>
+  <string name="add_new_contribution">Aggiungi nuovo contributo</string>
+  <string name="add_contribution_from_camera">Aggiungi contributo dalla fotocamera</string>
+  <string name="add_contribution_from_photos">Aggiungi contributo da Foto</string>
+  <string name="add_contribution_from_contributions_gallery">Aggiungi contributo dalla galleria dei contributi precedenti</string>
+  <string name="show_captions">Didascalie</string>
+  <string name="row_item_language_description">Descrizione della lingua</string>
+  <string name="row_item_caption">Didascalia</string>
+  <string name="show_captions_description">Descrizione</string>
+  <string name="nearby_row_image">Immagine</string>
+  <string name="nearby_all">Tutto</string>
+  <string name="nearby_filter_toggle">Attiva/disattiva</string>
+  <string name="nearby_filter_search">Cerca nei file</string>
+  <string name="nearby_filter_state">Stato del luogo</string>
   <string name="appwidget_img">Foto del giorno</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d file in caricamento</item>
@@ -276,6 +291,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Valutaci</string>
   <string name="about_faq">Domande frequenti</string>
+  <string name="user_guide">Guida utente</string>
   <string name="welcome_skip_button">Salta Tutorial</string>
   <string name="no_internet">Internet non disponibile</string>
   <string name="error_notifications">Errore durante il recupero delle notifiche</string>
@@ -302,6 +318,7 @@
   <string name="title_activity_search">Ricerca</string>
   <string name="search_recent_header">Ricerche recenti:</string>
   <string name="provider_searches">Query effettuate di recente</string>
+  <string name="provider_recent_languages">Ricerche linguistiche recenti</string>
   <string name="error_loading_categories">Si è verificato un errore durante il caricamento delle categorie.</string>
   <string name="error_loading_depictions">Si è verificato un errore durante il caricamento degli elementi raffigurati.</string>
   <string name="search_tab_title_media">Media</string>
@@ -339,6 +356,7 @@
   <string name="error_fetching_nearby_monuments">Errore durante la ricerca di monumenti nei pressi.</string>
   <string name="no_recent_searches">Nessuna ricerca recente</string>
   <string name="delete_recent_searches_dialog">Sei sicuro di voler cancellare la tua cronologia di ricerca?</string>
+  <string name="cancel_upload_dialog">Sei sicuro di voler annullare questo caricamento?</string>
   <string name="delete_search_dialog">Vuoi eliminare questa ricerca?</string>
   <string name="search_history_deleted">Cronologia di ricerca cancellata</string>
   <string name="nominate_delete">Proponi per la cancellazione</string>
@@ -505,6 +523,8 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">Non è stato possibile aggiungere le categorie.</string>
   <string name="category_edit_button_text">Aggiorna le categorie</string>
+  <string name="depictions_edit_helper_make_edit_toast">Tentativo di aggiornare le rappresentazioni.</string>
+  <string name="depictions_edit_helper_show_edit_title">Modifica le raffigurazioni</string>
   <string name="coordinates_edit_helper_make_edit_toast">Tentativo di aggiornare le coordinate.</string>
   <string name="coordinates_edit_helper_show_edit_title">Coordinate aggiornate</string>
   <string name="description_edit_helper_show_edit_title">Aggiornamento della descrizione</string>
@@ -603,9 +623,12 @@
   <string name="quality_images_info">Le immagini di qualità sono diagrammi o fotografie che rispondono a determinati standard di qualità (maggiormente di carattere tecnico) e che sono preziosi per i progetti Wikimedia</string>
   <string name="resuming_upload">Riavvio del caricamento…</string>
   <string name="pausing_upload">Caricamento in pausa…</string>
+  <string name="cancel_upload">Annulla caricamento</string>
   <string name="limited_connection_explanation">Hai abilitato la modalità di connessione limitata. Tutti i caricamenti vengono ora messi in pausa e riprenderanno quando disabiliterai questa modalità.</string>
   <string name="limited_connection_is_on">La modalità di connessione limitata è attiva.</string>
   <string name="media_details_tooltip">Per favore scrivi una breve descrizione su cosa è ritratto nella tua immagine. Nella descrizione, indica che cosa rende l\'immagine interessante, tipica o rara, e spiega il contesto, visibile o non. Impiega il più possibile una terminologia esatta.</string>
+  <string name="depicts_tooltip">Trova e seleziona tutti i concetti rappresentati da questa immagine. Sii il più specifico possibile. Se l\'immagine ritrae più elementi, sceglili tutti entro limiti ragionevoli. Non scegliere etichette generali se sono disponibili etichette più specifiche.</string>
+  <string name="categories_tooltip">Si prega di selezionare le categorie appropriate. A differenza delle raffigurazioni, le categorie sono solo in inglese.</string>
   <string name="license_step_title">Licenza per il file</string>
   <string name="media_detail_step_title">Dettagli sul file</string>
   <string name="menu_view_category_page">Vedi la pagina della categoria</string>
@@ -622,6 +645,7 @@
   <string name="check_whether_location_is_correct">Verifica se la posizione è corretta</string>
   <string name="label">Etichetta</string>
   <string name="description">Descrizione</string>
+  <string name="title_page_bookmarks_items">Elementi</string>
   <string name="custom_selector_title">Selettore personalizzato</string>
   <string name="custom_selector_empty_text">Nessuna immagine</string>
   <string name="done">Fatto</string>
@@ -644,6 +668,19 @@
   <string name="apply">Applica</string>
   <string name="reset">Reimposta</string>
   <string name="explore_map_details">Dettagli</string>
+  <string name="android_version">Versione Android</string>
+  <string name="your_feedback">I tuoi commenti</string>
   <string name="no_more_images_found">Nessuna altra immagine trovata</string>
   <string name="this_image_is_already_uploaded">Questa immagine è già stata caricata</string>
+  <string name="can_not_select_this_image_for_upload">Impossibile selezionare questa immagine per il caricamento</string>
+  <string name="image_selected">Immagine selezionata</string>
+  <string name="image_marked_as_not_for_upload">Immagine contrassegnata come da non caricare</string>
+  <string name="menu_view_report">Segnalazioni</string>
+  <string name="report_violation">Segnala violazione</string>
+  <string name="report_user">Segnala questo utente</string>
+  <string name="report_content">Segnala questo contenuto</string>
+  <string name="request_user_block">Richiedi di bloccare questo utente</string>
+  <string name="welcome_to_full_screen_mode_text">Benvenuto nella modalità di selezione a schermo intero</string>
+  <string name="full_screen_mode_zoom_info">Usa due dita per ingrandire e rimpicciolire.</string>
+  <string name="full_screen_mode_features_info">Scorri velocemente e a lungo per eseguire queste azioni: \n- Sinistra/destra: vai al precedente/successivo \n- Su: seleziona\n- Giù: contrassegna come da non caricare.</string>
 </resources>
