@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
+import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
@@ -25,7 +26,6 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.wikipedia.AppAdapter
@@ -77,7 +77,7 @@ class BookmarkItemsFragmentUnitTest {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
         AppAdapter.set(TestAppAdapter())
         val activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         fragment = BookmarkItemsFragment.newInstance()

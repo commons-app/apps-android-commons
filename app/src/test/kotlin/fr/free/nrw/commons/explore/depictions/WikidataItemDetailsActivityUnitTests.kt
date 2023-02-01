@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
 import androidx.fragment.app.FragmentManager
+import androidx.test.core.app.ApplicationProvider
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import fr.free.nrw.commons.R
@@ -23,7 +24,6 @@ import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.fakes.RoboMenu
@@ -67,7 +67,7 @@ class WikidataItemDetailsActivityUnitTests {
         MockitoAnnotations.initMocks(this)
         AppAdapter.set(TestAppAdapter())
         val intent = Intent(
-            RuntimeEnvironment.application.applicationContext,
+            ApplicationProvider.getApplicationContext(),
             WikidataItemDetailsActivity::class.java
         )
         intent.putExtra("wikidataItemName", "depictionName")

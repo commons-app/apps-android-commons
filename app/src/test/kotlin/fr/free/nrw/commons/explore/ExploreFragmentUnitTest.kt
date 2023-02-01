@@ -5,6 +5,7 @@ import android.os.Looper.getMainLooper
 import android.view.*
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.test.core.app.ApplicationProvider
 import com.google.android.material.tabs.TabLayout
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
@@ -21,7 +22,6 @@ import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
@@ -54,7 +54,7 @@ class ExploreFragmentUnitTest {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
 
         AppAdapter.set(TestAppAdapter())
 

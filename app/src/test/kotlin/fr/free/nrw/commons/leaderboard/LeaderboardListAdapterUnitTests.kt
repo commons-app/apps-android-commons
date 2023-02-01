@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.TextView
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.RecyclerView
+import androidx.test.core.app.ApplicationProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.soloader.SoLoader
@@ -19,7 +20,6 @@ import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.lang.reflect.Field
@@ -43,7 +43,7 @@ class LeaderboardListAdapterUnitTests {
 
     @Before
     fun setUp() {
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
         MockitoAnnotations.initMocks(this)
         SoLoader.setInTestMode()
         Fresco.initialize(context)

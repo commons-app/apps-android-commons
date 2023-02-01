@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
@@ -14,7 +15,6 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.wikipedia.AppAdapter
 
@@ -43,7 +43,7 @@ internal class OnSwipeTouchListenerTest {
         MockitoAnnotations.initMocks(this)
         AppAdapter.set(TestAppAdapter())
 
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
         onSwipeTouchListener = OnSwipeTouchListener(context)
         gesListener = OnSwipeTouchListener(context).GestureListener()
 

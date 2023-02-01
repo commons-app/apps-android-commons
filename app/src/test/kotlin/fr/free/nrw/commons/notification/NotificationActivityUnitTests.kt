@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
+import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.ShadowActionBar
 import fr.free.nrw.commons.TestAppAdapter
@@ -21,7 +22,6 @@ import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
@@ -65,7 +65,7 @@ class NotificationActivityUnitTests {
         activity =
             Robolectric.buildActivity(NotificationActivity::class.java, intent).create().get()
 
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
 
         menuItemWithId = RoboMenuItem(R.id.archived)
 

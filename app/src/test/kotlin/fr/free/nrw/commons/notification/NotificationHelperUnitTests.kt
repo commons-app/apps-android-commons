@@ -3,6 +3,7 @@ package fr.free.nrw.commons.notification
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
+import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.notification.models.Notification
 import fr.free.nrw.commons.notification.models.NotificationType
@@ -13,7 +14,6 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import java.lang.reflect.Field
 
@@ -33,7 +33,7 @@ class NotificationHelperUnitTests {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
         notificationHelper = NotificationHelper(context)
 
         val fieldNotificationManager: Field =

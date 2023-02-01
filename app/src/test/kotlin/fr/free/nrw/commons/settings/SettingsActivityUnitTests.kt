@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Looper
 import android.view.MenuItem
+import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.TestCommonsApplication
 import org.junit.Assert
 import org.junit.Before
@@ -13,7 +14,6 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
@@ -35,7 +35,7 @@ class SettingsActivityUnitTests {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
         activity = Robolectric.buildActivity(SettingsActivity::class.java).create().get()
         menuItem = RoboMenuItem(null)
     }

@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import androidx.preference.PreferenceManager
+import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.filepicker.Constants.RequestCodes
@@ -18,7 +19,6 @@ import org.mockito.*
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.lang.reflect.Method
@@ -52,7 +52,7 @@ class FilePickerTest {
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
     }
 
     @Test

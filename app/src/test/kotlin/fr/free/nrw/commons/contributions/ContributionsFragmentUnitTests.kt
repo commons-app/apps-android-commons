@@ -8,17 +8,18 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.campaigns.models.Campaign
 import fr.free.nrw.commons.campaigns.CampaignView
+import fr.free.nrw.commons.campaigns.models.Campaign
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.nearby.NearbyNotificationCardView
-import fr.free.nrw.commons.notification.models.Notification
 import fr.free.nrw.commons.notification.NotificationController
+import fr.free.nrw.commons.notification.models.Notification
 import fr.free.nrw.commons.notification.models.NotificationType
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
@@ -28,13 +29,12 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.*
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
@@ -101,7 +101,7 @@ class ContributionsFragmentUnitTests {
 
         AppAdapter.set(TestAppAdapter())
 
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
         activity = Robolectric.buildActivity(MainActivity::class.java).create().get()
 
 

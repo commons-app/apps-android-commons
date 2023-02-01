@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.feedback
 
 import android.content.Context
+import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.FakeContextWrapper
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
@@ -14,7 +15,6 @@ import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.wikipedia.AppAdapter
 
@@ -30,7 +30,7 @@ class FeedbackContentCreatorUnitTests {
     fun setup() {
         MockitoAnnotations.initMocks(this)
         AppAdapter.set(TestAppAdapter())
-        context = FakeContextWrapper(RuntimeEnvironment.application.applicationContext)
+        context = FakeContextWrapper(ApplicationProvider.getApplicationContext())
     }
 
     @Test

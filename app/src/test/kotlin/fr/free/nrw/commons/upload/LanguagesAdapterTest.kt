@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.ConfigurationCompat
+import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import org.junit.Assert
@@ -16,7 +17,6 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.wikipedia.language.AppLanguageLookUpTable
@@ -46,7 +46,7 @@ class LanguagesAdapterTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
         language = AppLanguageLookUpTable(context)
         convertView = LayoutInflater.from(context)
             .inflate(R.layout.row_item_languages_spinner, null) as View

@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.quiz
 
 import android.app.Activity
+import androidx.test.core.app.ApplicationProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
 import com.nhaarman.mockitokotlin2.any
@@ -20,7 +21,6 @@ import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import java.lang.reflect.Method
 
@@ -47,7 +47,7 @@ class QuizCheckerUnitTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         SoLoader.setInTestMode()
-        Fresco.initialize(RuntimeEnvironment.application.applicationContext)
+        Fresco.initialize(ApplicationProvider.getApplicationContext())
         activity = Robolectric.buildActivity(QuizActivity::class.java).create().get()
         quizChecker = QuizChecker(sessionManager, okHttpJsonApiClient, jsonKvStore)
         Mockito.`when`(sessionManager.userName).thenReturn("")

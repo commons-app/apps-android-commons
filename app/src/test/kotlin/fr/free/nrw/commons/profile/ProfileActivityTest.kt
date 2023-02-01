@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
+import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import org.junit.Assert
@@ -15,7 +16,6 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenu
@@ -40,7 +40,7 @@ class ProfileActivityTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
-        mockContext = RuntimeEnvironment.application.applicationContext
+        mockContext = ApplicationProvider.getApplicationContext()
     }
 
     @Test

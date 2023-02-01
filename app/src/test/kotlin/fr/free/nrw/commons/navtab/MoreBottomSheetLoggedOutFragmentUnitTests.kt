@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Looper
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.profile.ProfileActivity
 import org.junit.Assert
@@ -12,7 +13,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
@@ -29,7 +29,7 @@ class MoreBottomSheetLoggedOutFragmentUnitTests {
     @Before
     fun setUp() {
 
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
 
         val activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         fragment = MoreBottomSheetLoggedOutFragment()

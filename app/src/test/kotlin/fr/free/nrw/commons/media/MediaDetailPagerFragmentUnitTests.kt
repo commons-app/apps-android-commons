@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Looper
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.test.core.app.ApplicationProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
 import fr.free.nrw.commons.Media
@@ -23,7 +24,6 @@ import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
@@ -57,7 +57,7 @@ class MediaDetailPagerFragmentUnitTests {
 
         MockitoAnnotations.initMocks(this)
 
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
 
         AppAdapter.set(TestAppAdapter())
 

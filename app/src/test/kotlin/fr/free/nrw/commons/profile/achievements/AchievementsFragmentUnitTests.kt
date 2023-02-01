@@ -11,6 +11,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.test.core.app.ApplicationProvider
 import com.dinuscxj.progressbar.CircleProgressBar
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
@@ -28,7 +29,6 @@ import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
@@ -106,7 +106,7 @@ class AchievementsFragmentUnitTests {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
         menuItem = RoboMenuItem(context)
         AppAdapter.set(TestAppAdapter())
         val activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()

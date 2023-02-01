@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.media
 
-import org.robolectric.shadows.ShadowActivity
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -15,28 +14,27 @@ import android.webkit.WebView
 import android.widget.*
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import androidx.recyclerview.widget.RecyclerView
+import androidx.test.core.app.ApplicationProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.generic.GenericDraweeHierarchy
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.soloader.SoLoader
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
-import org.robolectric.Shadows.shadowOf
+import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.R
+import fr.free.nrw.commons.TestAppAdapter
+import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.delete.DeleteHelper
+import fr.free.nrw.commons.delete.ReasonBuilder
 import fr.free.nrw.commons.explore.SearchActivity
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.ui.widget.HtmlTextView
+import io.reactivex.Single
 import org.junit.Assert
 import org.junit.Before
-import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
-import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.delete.DeleteHelper
-import fr.free.nrw.commons.delete.ReasonBuilder
-import io.reactivex.Single
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.*
@@ -44,17 +42,16 @@ import org.mockito.Mockito.*
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowIntent
 import org.wikipedia.AppAdapter
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -152,13 +149,13 @@ class MediaDetailFragmentUnitTests {
 
         MockitoAnnotations.initMocks(this)
 
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
 
         AppAdapter.set(TestAppAdapter())
 
         SoLoader.setInTestMode()
 
-        Fresco.initialize(RuntimeEnvironment.application.applicationContext)
+        Fresco.initialize(ApplicationProvider.getApplicationContext())
 
         activity = Robolectric.buildActivity(SearchActivity::class.java).create().get()
 

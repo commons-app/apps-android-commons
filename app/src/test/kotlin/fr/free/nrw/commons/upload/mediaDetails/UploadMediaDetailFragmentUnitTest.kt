@@ -16,6 +16,7 @@ import androidx.appcompat.widget.AppCompatImageButton
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
+import androidx.test.core.app.ApplicationProvider
 import com.github.chrisbanes.photoview.PhotoView
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.geometry.LatLng
@@ -43,7 +44,6 @@ import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
@@ -109,7 +109,7 @@ class UploadMediaDetailFragmentUnitTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
 
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
         AppAdapter.set(TestAppAdapter())
 
         activity = Robolectric.buildActivity(UploadActivity::class.java).create().get()

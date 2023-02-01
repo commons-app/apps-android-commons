@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
+import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
@@ -24,7 +25,6 @@ import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenuItem
 import org.wikipedia.AppAdapter
@@ -77,7 +77,7 @@ class LoginActivityUnitTests {
         MockitoAnnotations.initMocks(this)
         AppAdapter.set(TestAppAdapter())
         activity = Robolectric.buildActivity(LoginActivity::class.java).create().get()
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
         menuItem = RoboMenuItem(null)
         Whitebox.setInternalState(activity, "progressDialog", progressDialog)
         Whitebox.setInternalState(activity, "applicationKvStore", applicationKvStore)

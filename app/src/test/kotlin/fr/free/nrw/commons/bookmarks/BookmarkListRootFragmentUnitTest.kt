@@ -8,6 +8,7 @@ import android.widget.ListAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.test.core.app.ApplicationProvider
 import com.google.android.material.tabs.TabLayout
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.times
@@ -32,7 +33,6 @@ import org.powermock.api.mockito.PowerMockito.mock
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.wikipedia.AppAdapter
@@ -86,7 +86,7 @@ class BookmarkListRootFragmentUnitTest {
         MockitoAnnotations.initMocks(this)
         AppAdapter.set(TestAppAdapter())
         activity = Robolectric.buildActivity(MainActivity::class.java).create().get()
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
 
         fragment = BookmarkListRootFragment()
         fragmentManager = activity.supportFragmentManager

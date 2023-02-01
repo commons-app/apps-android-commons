@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.auth
 
+import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.FakeContextWrapper
 import fr.free.nrw.commons.FakeContextWrapperWithException
 import fr.free.nrw.commons.TestCommonsApplication
@@ -8,7 +9,6 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
@@ -21,7 +21,7 @@ class AccountUtilUnitTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        context = FakeContextWrapper(RuntimeEnvironment.application.applicationContext)
+        context = FakeContextWrapper(ApplicationProvider.getApplicationContext())
         accountUtil = AccountUtil()
     }
 
@@ -41,7 +41,7 @@ class AccountUtilUnitTest {
     @Throws(Exception::class)
     fun testGetUserNameWithException() {
         val context =
-            FakeContextWrapperWithException(RuntimeEnvironment.application.applicationContext)
+            FakeContextWrapperWithException(ApplicationProvider.getApplicationContext())
         Assert.assertEquals(AccountUtil.getUserName(context), null)
     }
 
@@ -55,7 +55,7 @@ class AccountUtilUnitTest {
     @Throws(Exception::class)
     fun testAccountWithException() {
         val context =
-            FakeContextWrapperWithException(RuntimeEnvironment.application.applicationContext)
+            FakeContextWrapperWithException(ApplicationProvider.getApplicationContext())
         Assert.assertEquals(AccountUtil.account(context), null)
     }
 }

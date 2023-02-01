@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import androidx.test.core.app.ApplicationProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
 import fr.free.nrw.commons.R
@@ -19,7 +20,6 @@ import org.powermock.api.mockito.PowerMockito.mock
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
@@ -42,7 +42,7 @@ class QuizActivityUnitTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         SoLoader.setInTestMode()
-        Fresco.initialize(RuntimeEnvironment.application.applicationContext)
+        Fresco.initialize(ApplicationProvider.getApplicationContext())
         activity = Robolectric.buildActivity(QuizActivity::class.java).create().get()
         context = mock(Context::class.java)
         view = LayoutInflater.from(activity)
