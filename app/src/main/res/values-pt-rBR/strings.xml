@@ -14,6 +14,7 @@
 * Luckas
 * Mariagarbin
 * Maxan
+* Mello25
 * TheEduGobi
 * TheGabrielZaum
 * Tks4Fish
@@ -39,6 +40,7 @@
   <string name="nearby_row_image">Imagem</string>
   <string name="nearby_all">Tudo</string>
   <string name="nearby_filter_toggle">Alternar para cima</string>
+  <string name="nearby_filter_search">Visualização de pesquisa</string>
   <string name="nearby_filter_state">Estado do local</string>
   <string name="appwidget_img">Imagem do Dia</string>
   <plurals name="uploads_pending_notification_indicator">
