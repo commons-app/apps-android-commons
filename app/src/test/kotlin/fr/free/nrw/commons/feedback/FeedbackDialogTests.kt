@@ -3,6 +3,7 @@ package fr.free.nrw.commons.feedback
 import android.content.Context
 import android.os.Looper.getMainLooper
 import android.text.Editable
+import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.doReturn
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
@@ -20,7 +21,6 @@ import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
@@ -42,7 +42,7 @@ class FeedbackDialogTests {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
 
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
         AppAdapter.set(TestAppAdapter())
 
         val activity = Robolectric.buildActivity(MainActivity::class.java).create().get()

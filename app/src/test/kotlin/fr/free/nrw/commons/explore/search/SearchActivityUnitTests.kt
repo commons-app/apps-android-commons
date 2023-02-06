@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.SearchView
 import androidx.fragment.app.FragmentController
 import androidx.fragment.app.FragmentManager
+import androidx.test.core.app.ApplicationProvider
 import androidx.viewpager.widget.ViewPager
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.Media
@@ -31,7 +32,6 @@ import org.powermock.api.mockito.PowerMockito.mock
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.lang.reflect.Method
@@ -88,7 +88,7 @@ class SearchActivityUnitTests {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         activity = Robolectric.buildActivity(SearchActivity::class.java).create().get()
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
     }
 
     @Test

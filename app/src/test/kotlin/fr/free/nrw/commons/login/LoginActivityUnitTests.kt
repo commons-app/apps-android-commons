@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
@@ -17,7 +18,6 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenuItem
 import org.wikipedia.AppAdapter
@@ -53,7 +53,7 @@ class LoginActivityUnitTests {
 
         activity = Robolectric.buildActivity(LoginActivity::class.java).create().get()
 
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
 
         val fieldProgressDialog: Field =
             LoginActivity::class.java.getDeclaredField("progressDialog")

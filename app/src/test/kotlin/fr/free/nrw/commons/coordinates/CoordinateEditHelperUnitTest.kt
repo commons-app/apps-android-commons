@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.coordinates
 
 import android.content.Context
+import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
@@ -19,7 +20,6 @@ import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.lang.reflect.Method
@@ -47,7 +47,7 @@ class CoordinateEditHelperUnitTest {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
         helper = CoordinateEditHelper(notificationHelper, pageEditClient, viewUtilWrapper)
         `when`(media.filename).thenReturn("")
         `when`(pageEditClient.getCurrentWikiText(anyString())).thenReturn(Single.just(""))

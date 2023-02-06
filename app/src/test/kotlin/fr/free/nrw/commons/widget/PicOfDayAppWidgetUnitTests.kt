@@ -3,6 +3,7 @@ package fr.free.nrw.commons.widget
 import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.widget.RemoteViews
+import androidx.test.core.app.ApplicationProvider
 import com.facebook.imagepipeline.core.ImagePipelineFactory
 import com.facebook.soloader.SoLoader
 import fr.free.nrw.commons.Media
@@ -20,7 +21,6 @@ import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
@@ -47,7 +47,7 @@ class PicOfDayAppWidgetUnitTests {
     @Before
     fun setUp() {
         AppAdapter.set(TestAppAdapter())
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
         SoLoader.setInTestMode()
         ImagePipelineFactory.initialize(context)
         MockitoAnnotations.initMocks(this)

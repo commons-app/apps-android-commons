@@ -5,6 +5,7 @@ import android.os.Looper.getMainLooper
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
+import androidx.test.core.app.ApplicationProvider
 import butterknife.BindView
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
@@ -28,7 +29,6 @@ import org.mockito.Spy
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
@@ -68,7 +68,7 @@ class ReviewActivityTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
 
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
 
         AppAdapter.set(TestAppAdapter())
 

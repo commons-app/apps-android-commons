@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload.depicts
 
 import android.content.Context
+import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
@@ -19,7 +20,6 @@ import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.lang.reflect.Method
@@ -47,7 +47,7 @@ class DepictEditHelperUnitTest {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
         helper = DepictEditHelper(notificationHelper, wikidataEditService, viewUtilWrapper)
         Whitebox.setInternalState(helper, "viewUtilWrapper", viewUtilWrapper)
         Whitebox.setInternalState(helper, "notificationHelper", notificationHelper)

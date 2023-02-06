@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.navtab
 
-import android.app.Dialog
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -13,33 +12,26 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.actions.PageEditClient
-import fr.free.nrw.commons.feedback.FeedbackDialog
 import fr.free.nrw.commons.feedback.model.Feedback
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.profile.ProfileActivity
-import fr.free.nrw.commons.utils.ConfigUtils
-import fr.free.nrw.commons.utils.ConfigUtils.getVersionNameWithSha
 import io.reactivex.Observable
-import io.reactivex.Single
-import io.reactivex.SingleSource
-import io.reactivex.functions.Function
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
@@ -48,7 +40,6 @@ import org.robolectric.shadows.ShadowAlertDialog
 import org.robolectric.shadows.ShadowDialog
 import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
-import java.util.concurrent.Callable
 
 
 @RunWith(RobolectricTestRunner::class)
@@ -74,7 +65,7 @@ class MoreBottomSheetFragmentUnitTests {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
         AppAdapter.set(TestAppAdapter())
 
         activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()

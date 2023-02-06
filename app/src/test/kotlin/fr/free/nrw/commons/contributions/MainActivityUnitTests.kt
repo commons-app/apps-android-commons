@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Looper
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
+import androidx.test.core.app.ApplicationProvider
 import androidx.work.Configuration
 import androidx.work.testing.WorkManagerTestInitHelper
 import fr.free.nrw.commons.CommonsApplication
@@ -25,13 +26,12 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
-import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.api.mockito.PowerMockito
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
@@ -89,7 +89,7 @@ class MainActivityUnitTests {
 
         activity = Robolectric.buildActivity(MainActivity::class.java).create().get()
         activity.applicationKvStore = applicationKvStore
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
         menuItem = RoboMenuItem(context)
         mockContext = PowerMockito.mock(Context::class.java)
         mainActivity = PowerMockito.mock(MainActivity::class.java)

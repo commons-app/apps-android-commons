@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.category
 
 import android.content.Context
+import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
@@ -18,7 +19,6 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 
@@ -45,7 +45,7 @@ class CategoryEditHelperUnitTests {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
         helper = CategoryEditHelper(notificationHelper, pageEditClient, viewUtilWrapper,
             "")
         Mockito.`when`(media.filename).thenReturn("File:Example.jpg")

@@ -3,6 +3,7 @@ package fr.free.nrw.commons.category
 import android.content.Context
 import android.view.Menu
 import android.view.MenuItem
+import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment
@@ -14,7 +15,6 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
@@ -43,7 +43,7 @@ class CategoryDetailsActivityUnitTests {
 
         AppAdapter.set(TestAppAdapter())
 
-        context = RuntimeEnvironment.application.applicationContext
+        context = ApplicationProvider.getApplicationContext()
 
         activity = Robolectric.buildActivity(CategoryDetailsActivity::class.java).create().get()
 

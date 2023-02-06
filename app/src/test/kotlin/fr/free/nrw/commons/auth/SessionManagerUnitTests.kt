@@ -3,6 +3,7 @@ package fr.free.nrw.commons.auth
 import android.accounts.Account
 import android.accounts.AccountManager
 import android.content.Context
+import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import org.junit.Assert
@@ -13,7 +14,6 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.powermock.api.mockito.PowerMockito.`when`
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
@@ -44,10 +44,10 @@ class SessionManagerUnitTests {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        accountManager = AccountManager.get(RuntimeEnvironment.application)
+        accountManager = AccountManager.get(ApplicationProvider.getApplicationContext())
         shadowOf(accountManager).addAccount(account)
         sessionManager =
-            SessionManager(RuntimeEnvironment.application.applicationContext, defaultKvStore)
+            SessionManager(ApplicationProvider.getApplicationContext(), defaultKvStore)
     }
 
     @Test
