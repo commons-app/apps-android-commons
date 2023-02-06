@@ -80,6 +80,7 @@
   <string name="signup">利用者登録</string>
   <string name="logging_in_title">ログイン中</string>
   <string name="logging_in_message">お待ちください…</string>
+  <string name="updating_caption_message">お待ちください…</string>
   <string name="login_success">ログインしました!</string>
   <string name="login_failed">ログインに失敗しました!</string>
   <string name="upload_failed">ファイルが見つかりません。別のファイルでお試しください。</string>
@@ -196,7 +197,7 @@
   <string name="read_storage_permission_rationale">必要な権限：外部ストレージを読み込みます。これがなければアプリはギャラリーを開けません。</string>
   <string name="write_storage_permission_rationale">必要な権限: 外部ストレージに入力します。これがないとアプリはカメラ/ギャラリーにアクセスできません。</string>
   <string name="location_permission_title">位置権限の申請</string>
-  <string name="ok">承認</string>
+  <string name="ok">OK</string>
   <string name="warning">警告</string>
   <string name="duplicate_image_found">重複する画像が見つかりました</string>
   <string name="upload">アップロード</string>
@@ -492,9 +493,9 @@
   <string name="delete_helper_show_deletion_message_if">%1$sの削除依頼が成功しました。</string>
   <string name="delete_helper_show_deletion_title_failed">失敗しました</string>
   <string name="delete_helper_show_deletion_message_else">削除のリクエストができません。</string>
-  <string name="delete_helper_ask_spam_selfie" fuzzy="true">自撮り</string>
-  <string name="delete_helper_ask_spam_blurry" fuzzy="true">ぼやけている</string>
-  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">いたずら</string>
+  <string name="delete_helper_ask_spam_selfie">どの記事にも使われていない自撮り</string>
+  <string name="delete_helper_ask_spam_blurry">完全にぼやけている</string>
+  <string name="delete_helper_ask_spam_nonsense">無意味、どの記事にも全く使えない</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">広報用の写真</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">インターネットで拾った無関係な画像です</string>
   <string name="delete_helper_ask_reason_copyright_logo">ロゴ</string>
@@ -508,7 +509,7 @@
   <string name="category_edit_helper_edit_message_else">カテゴリを付与できませんでした。</string>
   <string name="category_edit_button_text">カテゴリを更新</string>
   <string name="share_image_via">画像をシェア</string>
-  <string name="no_achievements_yet" fuzzy="true">まだ投稿をしたことがありません</string>
+  <string name="no_achievements_yet">%sはまだ投稿をしたことがありません</string>
   <string name="account_created">アカウントを作成しました</string>
   <string name="text_copy">テキストをクリップボードにコピー済み</string>
   <string name="notification_mark_read">通知を既読にしました</string>
@@ -602,6 +603,8 @@
   <string name="license_step_title">メディアのライセンス</string>
   <string name="media_detail_step_title">メディアの詳細</string>
   <string name="menu_view_category_page">カテゴリのページを表示</string>
+  <string name="app_ui_language">アプリのユーザーインターフェース言語</string>
+  <string name="read_help_link">さらに詳しく</string>
   <string name="media_detail_in_all_languages">すべての言語</string>
   <string name="show_in_map_app">地図アプリで表示</string>
   <string name="modify_location">位置を編集</string>
@@ -609,7 +612,11 @@
   <string name="label">ラベル</string>
   <string name="description">説明</string>
   <string name="title_page_bookmarks_items">項目</string>
+  <string name="done">完了</string>
+  <string name="back">戻る</string>
   <string name="edit_categories">カテゴリを編集</string>
+  <string name="apply">適用</string>
+  <string name="reset">リセット</string>
   <string name="add_location">位置を追加</string>
   <string name="explore_map_details">詳細</string>
   <string name="api_level">APIレベル</string>

@@ -347,7 +347,7 @@
   <string name="successful_wikidata_edit">Image bien ajoutée à %1$s sur Wikidata !</string>
   <string name="wikidata_edit_failure">Échec de la mise à jour de l’entité Wikidata correspondante !</string>
   <string name="menu_set_wallpaper">Définir comme fond d’écran</string>
-  <string name="wallpaper_set_successfully">Papier-peint configuré avec succès !</string>
+  <string name="wallpaper_set_successfully">Fond d’écran configuré avec succès !</string>
   <string name="quiz">Quiz</string>
   <string name="quiz_question_string">Est-ce que cette photo est prête pour être téléversée ?</string>
   <string name="question">Question</string>
@@ -565,7 +565,7 @@
   <string name="you_have_no_achievements_yet">Vous n’avez encore fait aucune contribution</string>
   <string name="no_achievements_yet">%s n’a encore fait aucune contribution</string>
   <string name="account_created">Compte créé !</string>
-  <string name="text_copy">Texte copié dans le presse-papier</string>
+  <string name="text_copy">Texte copié dans le presse-papiers</string>
   <string name="notification_mark_read">Notification marquée comme lue</string>
   <string name="some_error">Il y a eu une erreur !</string>
   <string name="place_state">État du lieu :</string>
@@ -610,7 +610,7 @@
   <string name="wikipedia_instructions_step_5">5. Coller le texte wiki à l’endroit approprié.</string>
   <string name="wikipedia_instructions_step_6">6. Modifier le wikicode pour un positionnement approprié, si nécessaire. Pour plus d’informations, voir &lt;a href=\"https://www.mediawiki.org/wiki/Help:Images/fr#Affichage_d\'une_seule_image\"&gt;l’aide ici&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Publier l’article</string>
-  <string name="copy_wikicode_to_clipboard">Copier le wikicode dans le presse-papier</string>
+  <string name="copy_wikicode_to_clipboard">Copier le wikicode dans le presse-papiers</string>
   <string name="pause">pause</string>
   <string name="resume">reprendre</string>
   <string name="paused">En pause</string>

@@ -347,5 +347,6 @@
   <string name="license_step_title">Lisansê Medya</string>
   <string name="media_detail_step_title">Teferuatê medya</string>
   <string name="read_help_link">Tayêna bıwane</string>
+  <string name="description">Şınasnayış</string>
   <string name="reset">Raçarne</string>
 </resources>

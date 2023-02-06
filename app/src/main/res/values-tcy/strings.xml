@@ -309,7 +309,7 @@
   <string name="contributions_fragment">ಕಾನಿಕೆಲು</string>
   <string name="nearby_fragment">ಕೈತಲ್‍ದ</string>
   <string name="notifications">ಅಧಿಸೂಚನೆಲು</string>
-  <string name="read_notifications" fuzzy="true">ಅಧಿಸೂಚನೆಲು(ಅನುರಕ್ಷಿತ)</string>
+  <string name="read_notifications">ಅಧಿಸೂಚನೆಲು(ಓದಿನ)</string>
   <string name="display_nearby_notification">ಕೈತಲ್ದ ಅಧಿಸೂಚನೆ ತೋಜಾಲೆ</string>
   <string name="display_nearby_notification_summary" fuzzy="true">ಚಿತ್ರ ಬೋಡಾಯಿನ ಕೈತಲ್ದ ಜಾಗ ತೂವರೆ ಮುಲ್ಪ ತಟ್ಟ್\'ಲೆ</string>
   <string name="list_sheet">ಪಟ್ಟಿ</string>
