@@ -418,19 +418,6 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         }
 
         /**
-         * Checks if the source string contains trailing whitespace
-         * @param source input string
-         * @return true if contains trailing whitespace and false otherwise
-         */
-        public Boolean checkTrailingWhitespace(String source) {
-            int len = source.length();
-            if (len == 0) {
-                return false;
-            }
-            return Character.isWhitespace(source.charAt(len - 1));
-        }
-
-        /**
          * Removes any leading and trailing whitespace from the source text.
          * @param source input string
          * @return a string without leading and trailing whitespace
