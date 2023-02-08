@@ -423,6 +423,8 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
          * @return a string without leading and trailing whitespace
          */
         public String removeLeadingAndTrailingWhitespace(String source) {
+            // This method can be replaced with the inbuilt String::strip when updated to JDK 11.
+            // Note that String::trim does not adequately remove all whitespace chars.
             int firstNonWhitespaceIndex = 0;
             while (firstNonWhitespaceIndex < source.length()) {
                 if (Character.isWhitespace(source.charAt(firstNonWhitespaceIndex))) {
