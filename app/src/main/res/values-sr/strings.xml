@@ -18,6 +18,13 @@
   <string name="commons_logo">Лого Оставе</string>
   <string name="commons_website">Веб-сајт Оставе</string>
   <string name="submit">Пошаљи</string>
+  <string name="add_another_description">Додај други опис</string>
+  <string name="add_new_contribution">Додај нови допринос</string>
+  <string name="add_contribution_from_camera">Додај допринос из камере</string>
+  <string name="show_captions">Натписи</string>
+  <string name="row_item_language_description">Опис језика</string>
+  <string name="row_item_caption">Натпис</string>
+  <string name="show_captions_description">Опис</string>
   <string name="nearby_row_image">Слика</string>
   <string name="nearby_all">Све</string>
   <string name="appwidget_img">Слика дана</string>
@@ -29,13 +36,13 @@
     <item quantity="one">%1$d отпремање</item>
     <item quantity="other">%1$d отпремања</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Почиње %1$d отпремање</item>
-    <item quantity="other">Почињу %1$d отпремања</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Процесуирање %d отпремање</item>
+    <item quantity="other">Процесуирање %d отпремања</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d отпремање</item>
-    <item quantity="other">%1$d отпремања</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d отпремање</item>
+    <item quantity="other">%d отпремања</item>
   </plurals>
   <plurals name="share_license_summary">
     <item quantity="one">Слика ће се водити под лиценцом %1$s</item>
@@ -73,7 +80,7 @@
   <string name="upload_progress_notification_title_start">Отпремање датотеке „%s”</string>
   <string name="upload_progress_notification_title_in_progress">Отпремање датотеке „%1$s”</string>
   <string name="upload_progress_notification_title_finishing">Завршавање отпремања датотеке „%1$s”</string>
-  <string name="upload_failed_notification_title" fuzzy="true">Отпремање датотеке „%1$s” није успело</string>
+  <string name="upload_failed_notification_title">Отпремање датотеке „%1$s” није успело</string>
   <string name="upload_failed_notification_subtitle">Додирните да бисте видели</string>
   <string name="title_activity_contributions">Ваша недавна отпремања</string>
   <string name="contribution_state_queued">На чекању</string>
@@ -88,6 +95,7 @@
   <string name="menu_view_file_page">Види страницу датотеке</string>
   <string name="share_title_hint">Опис (обавезно)</string>
   <string name="share_description_hint">Опис</string>
+  <string name="share_caption_hint">Натпис</string>
   <string name="login_failed_network">Пријава није могућа — грешка на мрежи</string>
   <string name="login_failed_throttled">Превише неуспешних покушаја. Покушајте поново за неколико минута.</string>
   <string name="login_failed_blocked">Овај корисник је блокиран на Остави</string>
@@ -101,7 +109,7 @@
   <string name="menu_save_categories">Сачувај</string>
   <string name="refresh_button">Освежи</string>
   <string name="display_list_button">Списак</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">Још увек нема отпремања</string>
+  <string name="contributions_subtitle_zero">(Још увек нема отпремања)</string>
   <string name="categories_not_found">Нема категорија које одговарају %1$s</string>
   <string name="categories_skip_explanation">Додајте категорије на слике да бисте олакшали корисницима њихово проналажење на Остави.\n\nДа бисте додали категорију, почните са писањем њеног имена.</string>
   <string name="categories_activity_title">Категорије</string>
@@ -160,6 +168,7 @@
   <string name="detail_panel_cats_label">Категорије</string>
   <string name="detail_panel_cats_loading">Учитавање…</string>
   <string name="detail_panel_cats_none">Ништа није изабрано</string>
+  <string name="detail_caption_empty">Нема описа</string>
   <string name="detail_description_empty">Нема описа</string>
   <string name="detail_discussion_empty">Нема расправе</string>
   <string name="detail_license_empty">Непозната лиценца</string>
@@ -170,8 +179,11 @@
   <string name="location_permission_title">Захтевање дозволе за локацију</string>
   <string name="ok">У реду</string>
   <string name="warning">Упозорење</string>
+  <string name="duplicate_image_found">Пронађен је дупликат слике</string>
+  <string name="upload">Отпреми</string>
   <string name="yes">Да</string>
   <string name="no">Не</string>
+  <string name="media_detail_caption">Натпис</string>
   <string name="media_detail_title">Наслов</string>
   <string name="media_detail_description">Опис</string>
   <string name="media_detail_discussion">Дискусија</string>
@@ -219,9 +231,10 @@
   <string name="upload_problem_different_geolocation">Ова слика је снимљена на другој локацији.</string>
   <string name="upload_problem_fbmd">Молимо Вас да само отпремате слике које сте ви направили. Не отпремајте слике које сте пронашли на другим налозима на Фејсбуку.</string>
   <string name="upload_problem_do_you_continue">Желите ли још увек да отпремите ову слику?</string>
+  <string name="upload_connection_error_alert_title">Грешка у вези</string>
   <string name="internet_downloaded">Молимо Вас да отпремате слике које сте ви направили. Не отпремајте слике које сте преузели са интернета.</string>
-  <string name="use_external_storage" fuzzy="true">Користи спољашње складиште</string>
-  <string name="use_external_storage_summary" fuzzy="true">Чување слика снимљених камером у апликацији на вашем уређају</string>
+  <string name="use_external_storage">Чувај снимке у апликацији</string>
+  <string name="use_external_storage_summary">Чување слика снимљених камером у меморији на вашем уређају</string>
   <string name="login_to_your_account">Пријава на налог</string>
   <string name="send_log_file">Пошаљи датотеку евиденције</string>
   <string name="send_log_file_description">Пошаљите датотеку евиденције програмерима путем е-поште да бисте помогли у решавању проблема са апликацијом. Напомена: евиденције могу потенцијално садржавати идентификационе информације</string>
@@ -258,6 +271,9 @@
   <string name="about_translate_cancel">Откажи</string>
   <string name="retry">Покушај поново</string>
   <string name="showcase_view_whole_nearby_activity">Ово су места у Вашој близини којима је потребна слика да илуструје њихове чланке на Википедији.\n\nКликом на \"ПРЕТРАЖИТЕ ОВУ ОБЛАСТ\" закључава се мапа и покреће претрагу у близини те локације.</string>
+  <string name="showcase_view_needs_photo">Овом месту је потребна фотографија.</string>
+  <string name="showcase_view_has_photo">Ово место већ има фотографију.</string>
+  <string name="showcase_view_no_longer_exists">Ово место више не постоји.</string>
   <string name="no_images_found">Слике нису пронађене.</string>
   <string name="error_loading_images">Дошло је до грешке при учитавању слика.</string>
   <string name="image_uploaded_by">Отпремио/ла: %1$s</string>
@@ -269,9 +285,11 @@
   <string name="title_activity_search">Претрага</string>
   <string name="search_recent_header">Недавне претраге:</string>
   <string name="provider_searches">Недавнo претражени упити</string>
+  <string name="provider_recent_languages">Скорашњи упити језика</string>
   <string name="error_loading_categories">Дошло је до грешке при учитавању категорија.</string>
   <string name="search_tab_title_media">Медији</string>
   <string name="search_tab_title_categories">Категорије</string>
+  <string name="search_tab_title_depictions">Ставке</string>
   <string name="explore_tab_title_featured">Изабрано</string>
   <string name="explore_tab_title_mobile">Отпремљено путем мобилног уређаја</string>
   <string name="explore_tab_title_map">Мапа</string>
@@ -295,6 +313,7 @@
   <string name="quiz_screenshot_question">Желите ли да отпремите овај снимак екрана?</string>
   <string name="share_app_title">Дели апликацију</string>
   <string name="error_fetching_nearby_places">Грешка при добављању места у близини.</string>
+  <string name="no_nearby_places_around">Не постоје најближа места у близини</string>
   <string name="no_recent_searches">Нема недавних претрага</string>
   <string name="delete_recent_searches_dialog">Да ли сте сигурни да желите да очистите своју историју претраге?</string>
   <string name="delete_search_dialog">Да ли желите да избришете ову претрагу?</string>
@@ -326,15 +345,15 @@
   <string name="notifications">Обавештења</string>
   <string name="read_notifications">Обавештења (прочитана)</string>
   <string name="display_nearby_notification">Прикажи обавештење у близини</string>
-  <string name="display_nearby_notification_summary" fuzzy="true">Притисните овде да бисте видели најближе место којем треба слика</string>
+  <string name="display_nearby_notification_summary">Прикажи обавештења у апликацији за најближе место којем треба слика</string>
   <string name="list_sheet">Списак</string>
   <string name="storage_permission">Дозвола за складиштење</string>
   <string name="write_storage_permission_rationale_for_image_share">Потребна нам је ваша дозвола да бисмо приступили спољашњем складишту вашег уређаја како бисмо отпремали слике.</string>
   <string name="nearby_notification_dismiss_message">Више нећете видети најближе место којем требају слике. Међутим, ако желите, можете поново да омогућите ово обавештење у Подешавањима.</string>
-  <string name="step_count" fuzzy="true">Корак %1$d од %2$d</string>
+  <string name="step_count">Корак %1$d од %2$d: %3$s</string>
   <string name="next">Следеће</string>
   <string name="previous">Претходно</string>
-  <string name="upload_title_duplicate" fuzzy="true">Већ постоји датотека са именом %1$s. Заиста желите да наставите?</string>
+  <string name="upload_title_duplicate">Већ постоји датотека са именом %1$s. Заиста желите да наставите?\n\nНапомена: Одговарајући суфикс ће се аутоматски додати имену датотеке.</string>
   <string name="map_application_missing">Није могуће пронаћи апликацију компатибилне мапе на вашем уређају. Инсталирајте апликацију мапе да бисте користили ову функцију.</string>
   <string name="title_page_bookmarks_pictures">Слике</string>
   <string name="title_page_bookmarks_locations">Локације</string>
@@ -350,7 +369,8 @@
   <string name="uploaded_by_myself">Отпремио/ла сам на %1$s, користи се у чланку/цима — %2$d.</string>
   <string name="no_uploads">Добро дошли на Оставу!\n\nОтпремите прве медије додиром дугмета за додавање.</string>
   <string name="no_categories_selected">Категорије нису изабране</string>
-  <string name="no_categories_selected_warning_desc" fuzzy="true">Слике без категорија ретко су употребљиве. Заиста желите да пошаљете без избора категорија?</string>
+  <string name="no_categories_selected_warning_desc">Слике без категорија ретко су употребљиве. Заиста желите да наставите без избора категорија?</string>
+  <string name="no_depictions_selected">Опис није одабран</string>
   <string name="back_button_warning">Откажи отпремање</string>
   <string name="back_button_continue">Настави отпремање</string>
   <string name="upload_flow_all_images_in_set">(За све слике у скупу)</string>
@@ -385,6 +405,7 @@
   <string name="review_copyright">Да ли прати правила ауторских права?</string>
   <string name="review_category">Да ли је ово коректно категоризовано?</string>
   <string name="review_thanks">Да ли желите да се захвалите доприносиоцу?</string>
+  <string name="review_no_category">Ох, ово чак није категоризовано!</string>
   <string name="review_category_explanation">Ова слика је под %1$s категорије.</string>
   <string name="review_thanks_yes_button_text">Следећа слика</string>
   <string name="review_thanks_no_button_text">Да, зашто не</string>
@@ -398,6 +419,7 @@
   <string name="menu_option_unread">Прикажи непрочитано</string>
   <string name="error_occurred_in_picking_images">Дошло је до грешке при избору слика</string>
   <string name="please_wait">Сачекајте…</string>
+  <string name="copied_successfully">Копирано</string>
   <string name="welcome_do_upload_content_description">Примери добрих слика за отпремање на Оставу</string>
   <string name="welcome_dont_upload_content_description">Примери слика које нису за отпремање</string>
   <string name="skip_image">Прескочи ову слику</string>
@@ -411,7 +433,7 @@
   <string name="exif_tag_name_lensModel">Модел објектива</string>
   <string name="exif_tag_name_serialNumbers">Серијски бројеви</string>
   <string name="exif_tag_name_software">Софтвер</string>
-  <string name="share_text" fuzzy="true">Отпреми фотографије на Викимедијину Оставу са свог телефона. Преузми апликацију Оставе: %1$s</string>
+  <string name="share_text">Отпреми фотографије на Викимедијину Оставу директно са свог телефона. Преузми апликацију Оставе сада: %1$s</string>
   <string name="share_via">Подели апликацију преко...</string>
   <string name="image_info">Информације о слици</string>
   <string name="no_categories_found">Нису пронађене категорије</string>
@@ -425,20 +447,28 @@
   <string name="delete_helper_show_deletion_message_if">Номинован %1$s за брисање.</string>
   <string name="delete_helper_show_deletion_title_failed">Није успело</string>
   <string name="delete_helper_show_deletion_message_else">Није могуће затражити брисање.</string>
-  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Селфи</string>
-  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Замагљено</string>
-  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Бесмислено</string>
+  <string name="delete_helper_ask_spam_selfie">Селфи који се не користи ни у једном чланку</string>
+  <string name="delete_helper_ask_spam_blurry">Тотално замагљено</string>
+  <string name="delete_helper_ask_spam_nonsense">Бесмислено, апсолутно неупотребљиво ни у једном чланку</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Фото репортажа</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Насумична фотографија са интерната</string>
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Зато што је то</string>
   <string name="category_edit_helper_show_edit_title_success">Успешно</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Успешно</string>
+  <string name="coordinates_edit_helper_show_edit_message">координате %1$s су додате.</string>
+  <string name="description_edit_helper_show_edit_message">Описи су додати.</string>
+  <string name="caption_edit_helper_show_edit_message">Натписи су додати.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Није могуће додавање координата.</string>
+  <string name="description_edit_helper_edit_message_else">Није могуће додавање описа.</string>
+  <string name="caption_edit_helper_edit_message_else">Није могуће додавање натписа.</string>
   <string name="share_image_via">Подели слику преко</string>
-  <string name="no_achievements_yet" fuzzy="true">Још нисте допринели</string>
+  <string name="no_achievements_yet">%s још није доприносио/ла</string>
   <string name="account_created">Налог је отворен.</string>
   <string name="text_copy">Текст је копиран у оставу</string>
   <string name="notification_mark_read">Обавештење је означено прочитаним</string>
   <string name="some_error">Дошло је до грешке.</string>
+  <string name="place_state">Тип места:</string>
   <string name="place_state_exists">Постоји</string>
   <string name="place_state_needs_photo">Потребна слика</string>
   <string name="place_type">Тип места:</string>
@@ -454,9 +484,14 @@
   <string name="theme_dark_name">Тамна</string>
   <string name="theme_light_name">Светла</string>
   <string name="load_more">Учитај још</string>
+  <string name="add_picture_to_wikipedia_article_title">Додај слику на Википедији</string>
+  <string name="confirm">Потврди</string>
+  <string name="instructions_title">Упутства</string>
+  <string name="paused">Паузирано</string>
   <string name="more">Више</string>
   <string name="bookmarks">Обележивачи</string>
   <string name="achievements_tab_title">Достигнућа</string>
+  <string name="leaderboard_tab_title">Поредак</string>
   <string name="rank_prefix">Ранг:</string>
   <string name="count_prefix">Број:</string>
   <string name="leaderboard_column_rank">Ранг</string>
@@ -468,26 +503,51 @@
   <string name="menu_set_avatar">Постави за аватара</string>
   <string name="leaderboard_yearly">Годишње</string>
   <string name="leaderboard_weekly">Недељно</string>
+  <string name="leaderboard_all_time">Сво време</string>
   <string name="leaderboard_nearby">У близини</string>
+  <string name="leaderboard_used">Употребе</string>
+  <string name="leaderboard_my_rank_button_text">Мој ранк</string>
   <string name="statistics_quality">Квалитетне слике</string>
   <string name="resuming_upload">Настављам отпремање…</string>
   <string name="pausing_upload">Паузирам отпремање…</string>
   <string name="cancelling_upload">Отказујем отпремање…</string>
   <string name="depicts_step_title">Приказује</string>
+  <string name="license_step_title">Лиценца медија</string>
+  <string name="media_detail_step_title">Детаљи медија</string>
+  <string name="menu_view_category_page">Прикажи страницу категорије</string>
+  <string name="menu_view_item_page">Прикажи страницу ставке</string>
+  <string name="remove">Уклања натпис и опис</string>
   <string name="read_help_link">Детаљније</string>
+  <string name="media_detail_in_all_languages">На свим језицима</string>
+  <string name="choose_a_location">Одабери локацију</string>
+  <string name="select_location_location_picker">Изабери локацију</string>
+  <string name="modify_location">Измени локацију</string>
+  <string name="image_location">Локација слике</string>
   <string name="label">Назив</string>
   <string name="description">Опис</string>
+  <string name="title_page_bookmarks_items">Ставке</string>
   <string name="custom_selector_empty_text">Нема слика</string>
   <string name="done">Готово</string>
   <string name="back">Назад</string>
   <string name="custom_selector_already_uploaded_image_text">Ова слика је већ отпремљена на Оставу.</string>
+  <string name="wlm_campaign_title">Вики воли споменике</string>
+  <string name="need_permission">Потребна је дозвола</string>
+  <string name="contributions_of_user">Доприноси корисника/це: %s</string>
   <string name="menu_view_user_page">Прикажи корисничку страницу</string>
+  <string name="edit_categories">Измени категорије</string>
+  <string name="advanced_options">Напредне опције</string>
   <string name="apply">Примени</string>
   <string name="reset">Ресетуј</string>
+  <string name="no_location_found_title">Локација није пронађена</string>
   <string name="add_location">Додај локацију</string>
   <string name="explore_map_details">Детаљи</string>
   <string name="android_version">Верзија Андроида</string>
   <string name="device_manufacturer">Произвођач уређаја</string>
   <string name="device_model">Модел уређаја</string>
   <string name="device_name">Назив уређаја</string>
+  <string name="network_type">Тип мреже</string>
+  <string name="your_feedback">Ваша повратна информација</string>
+  <string name="no_more_images_found">Није пронађено више слика</string>
+  <string name="this_image_is_already_uploaded">Ова слика је већ отпремљена</string>
+  <string name="image_selected">Одабрана слика</string>
 </resources>
