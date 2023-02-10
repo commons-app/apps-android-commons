@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.upload;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
@@ -23,7 +22,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.textfield.TextInputLayout;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.recentlanguages.Language;
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter;
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao;
@@ -32,10 +30,8 @@ import fr.free.nrw.commons.utils.AbstractTextWatcher;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Pattern;
-import javax.inject.Inject;
 import timber.log.Timber;
 
 public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDetailAdapter.ViewHolder> {
@@ -198,7 +194,8 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
 
             removeButton.setOnClickListener(v -> removeDescription(uploadMediaDetail, position));
             captionListener = new AbstractTextWatcher(
-                captionText -> uploadMediaDetails.get(position).setCaptionText(convertIdeographicSpaceToLatinSpace(removeTrailingWhitespace(captionText))));
+                captionText -> uploadMediaDetails.get(position).setCaptionText(convertIdeographicSpaceToLatinSpace(
+                    removeLeadingAndTrailingWhitespace(captionText))));
             descriptionListener = new AbstractTextWatcher(
                 descriptionText -> uploadMediaDetails.get(position).setDescriptionText(descriptionText));
             captionItemEditText.addTextChangedListener(captionListener);
@@ -421,28 +418,35 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         }
 
         /**
-         * Checks if the source string contains trailing whitespace
+         * Removes any leading and trailing whitespace from the source text.
          * @param source input string
-         * @return true if contains trailing whitespace and false otherwise
+         * @return a string without leading and trailing whitespace
          */
-        public Boolean checkTrailingWhitespace(String source) {
-            int len = source.length();
-            if (len == 0) {
-                return false;
+        public String removeLeadingAndTrailingWhitespace(String source) {
+            // This method can be replaced with the inbuilt String::strip when updated to JDK 11.
+            // Note that String::trim does not adequately remove all whitespace chars.
+            int firstNonWhitespaceIndex = 0;
+            while (firstNonWhitespaceIndex < source.length()) {
+                if (Character.isWhitespace(source.charAt(firstNonWhitespaceIndex))) {
+                    firstNonWhitespaceIndex++;
+                } else {
+                    break;
+                }
             }
-            return Character.isWhitespace(source.charAt(len - 1));
-        }
+            if (firstNonWhitespaceIndex == source.length()) {
+                return "";
+            }
 
-        /**
-         * Removes any trailing whitespace from the source text.
-         * @param source input string
-         * @return a string without trailing whitespace
-         */
-        public String removeTrailingWhitespace(String source) {
-            while (checkTrailingWhitespace(source)) {
-                source = source.substring(0, source.length() - 1);
+            int lastNonWhitespaceIndex = source.length() - 1;
+            while (lastNonWhitespaceIndex > firstNonWhitespaceIndex) {
+                if (Character.isWhitespace(source.charAt(lastNonWhitespaceIndex))) {
+                    lastNonWhitespaceIndex--;
+                } else {
+                    break;
+                }
             }
-            return source;
+
+            return source.substring(firstNonWhitespaceIndex, lastNonWhitespaceIndex + 1);
         }
 
         /**
