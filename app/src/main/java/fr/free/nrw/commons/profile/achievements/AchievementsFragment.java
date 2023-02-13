@@ -78,8 +78,14 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.images_uploaded_progressbar)
     CircleProgressBar imagesUploadedProgressbar;
 
+    @BindView(R.id.tv_uploaded_images)
+    AppCompatTextView uploadedImagesTextview;
+
     @BindView(R.id.images_used_by_wiki_progress_bar)
     CircleProgressBar imagesUsedByWikiProgressBar;
+
+    @BindView(R.id.tv_wiki_pb)
+    AppCompatTextView imagesUsedByWikiTextview;
 
     @BindView(R.id.image_reverts_progressbar)
     CircleProgressBar imageRevertsProgressbar;
@@ -366,8 +372,8 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
             imagesUploadedProgressbar.setVisibility(View.VISIBLE);
             imagesUploadedProgressbar.setProgress
                     (100*uploadCount/levelInfo.getMaxUploadCount());
-            imagesUploadedProgressbar.setProgressTextFormatPattern
-                    (uploadCount +"/" + levelInfo.getMaxUploadCount() );
+            uploadedImagesTextview.setText
+                (uploadCount + "/" + levelInfo.getMaxUploadCount());
         }
 
     }
@@ -416,8 +422,8 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         thanksReceived.setText(String.valueOf(achievements.getThanksReceived()));
         imagesUsedByWikiProgressBar.setProgress
                 (100 * achievements.getUniqueUsedImages() / levelInfo.getMaxUniqueImages());
-        imagesUsedByWikiProgressBar.setProgressTextFormatPattern
-                (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
+        imagesUsedByWikiTextview.setText
+            (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
         imagesFeatured.setText(String.valueOf(achievements.getFeaturedImages()));
         tvQualityImages.setText(String.valueOf(achievements.getQualityImages()));
         String levelUpInfoString = getString(R.string.level).toUpperCase();
