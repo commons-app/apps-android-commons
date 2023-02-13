@@ -115,6 +115,7 @@
   <string name="tutorial_4_subtext_2">Deskripturo: L\'opero-domo di Sydney, vidita trans la bayo</string>
   <string name="welcome_final_button_text">Yes!</string>
   <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Plusa informo&lt;/u&gt;</string>
+  <string name="detail_panel_cats_label">Kategorii</string>
   <string name="detail_panel_cats_loading">Karganta...</string>
   <string name="detail_panel_cats_none">Nulo selektesis</string>
   <string name="menu_refresh">Rinovigar</string>
