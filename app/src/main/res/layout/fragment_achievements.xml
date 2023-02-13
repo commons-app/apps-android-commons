@@ -6,14 +6,14 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
-    <ScrollView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content">
+  <ScrollView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
-      <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
 
       <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_achievements_of_user"
@@ -24,117 +24,117 @@
         tools:text="Achievements of user : Ashish" />
 
 
-        <RelativeLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_below="@+id/toolbar"
-          android:background="?attr/achievementBackground"
-          android:orientation="vertical">
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:background="?attr/achievementBackground"
+        android:orientation="vertical">
 
-          <TextView
-            style="?android:textAppearanceLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal"
-            android:layout_marginStart="@dimen/activity_margin_horizontal"
-            android:layout_marginTop="@dimen/activity_margin_horizontal"
-            android:text="@string/level"
-            android:id="@+id/achievement_level"
-            android:textAllCaps="true"/>
+        <TextView
+          style="?android:textAppearanceLarge"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/activity_margin_horizontal"
+          android:layout_marginStart="@dimen/activity_margin_horizontal"
+          android:layout_marginTop="@dimen/activity_margin_horizontal"
+          android:text="@string/level"
+          android:id="@+id/achievement_level"
+          android:textAllCaps="true"/>
+
+        <ImageView
+          android:id="@+id/achievement_info"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/activity_margin_vertical"
+          android:layout_marginRight="@dimen/activity_margin_horizontal"
+          android:layout_marginEnd="@dimen/activity_margin_horizontal"
+          android:layout_alignParentRight="true"
+          android:layout_alignParentEnd="true"
+          app:srcCompat="@drawable/ic_info_outline_24dp"
+          android:tint="@color/black"
+          android:layout_marginVertical="@dimen/activity_margin_vertical" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/badge_layout"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/achievement_info"
+          android:layout_centerHorizontal="true">
 
           <ImageView
-            android:id="@+id/achievement_info"
+            android:id="@+id/achievement_badge_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_margin_vertical"
-            android:layout_marginRight="@dimen/activity_margin_horizontal"
-            android:layout_marginEnd="@dimen/activity_margin_horizontal"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            app:srcCompat="@drawable/ic_info_outline_24dp"
-            android:tint="@color/black"
-            android:layout_marginVertical="@dimen/activity_margin_vertical" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/badge" />
 
-          <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/badge_layout"
+          <TextView
+            android:id="@+id/achievement_badge_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/achievement_info"
-            android:layout_centerHorizontal="true">
+            android:textAlignment="center"
+            android:textColor="@color/achievement_badge_text"
+            android:textSize="75sp"
+            app:layout_constraintBottom_toBottomOf="@+id/achievement_badge_image"
+            app:layout_constraintEnd_toEndOf="@+id/achievement_badge_image"
+            app:layout_constraintStart_toStartOf="@+id/achievement_badge_image"
+            app:layout_constraintTop_toTopOf="@+id/achievement_badge_image"
+            app:layout_constraintVertical_bias="0.58" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageView
-              android:id="@+id/achievement_badge_image"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              app:layout_constraintLeft_toLeftOf="parent"
-              app:layout_constraintRight_toRightOf="parent"
-              app:layout_constraintTop_toTopOf="parent"
-              app:srcCompat="@drawable/badge" />
+        <RelativeLayout
+          android:id="@+id/layout_image_uploaded"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/badge_layout"
+          android:layout_marginEnd="@dimen/activity_margin_horizontal"
+          android:layout_marginLeft="@dimen/activity_margin_horizontal"
+          android:layout_marginRight="@dimen/activity_margin_horizontal"
+          android:layout_marginStart="@dimen/activity_margin_horizontal">
+
+
+          <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/images_upload_info"
+            android:orientation="horizontal"
+            >
 
             <TextView
-              android:id="@+id/achievement_badge_text"
+              style="?android:textAppearanceMedium"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:textAlignment="center"
-              android:textColor="@color/achievement_badge_text"
-              android:textSize="75sp"
-              app:layout_constraintBottom_toBottomOf="@+id/achievement_badge_image"
-              app:layout_constraintEnd_toEndOf="@+id/achievement_badge_image"
-              app:layout_constraintStart_toStartOf="@+id/achievement_badge_image"
-              app:layout_constraintTop_toTopOf="@+id/achievement_badge_image"
-              app:layout_constraintVertical_bias="0.58" />
-          </androidx.constraintlayout.widget.ConstraintLayout>
+              android:layout_marginLeft="@dimen/activity_margin_horizontal"
+              android:layout_marginStart="@dimen/activity_margin_horizontal"
+              android:id="@+id/images_upload_text_param"
+              android:layout_marginTop="@dimen/achievements_activity_margin_vertical"
+              android:text="@string/images_uploaded" />
 
-          <RelativeLayout
-            android:id="@+id/layout_image_uploaded"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/badge_layout"
-            android:layout_marginEnd="@dimen/activity_margin_horizontal"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal"
-            android:layout_marginRight="@dimen/activity_margin_horizontal"
-            android:layout_marginStart="@dimen/activity_margin_horizontal">
+            <ImageView
+              android:layout_width="@dimen/quarter_standard_height"
+              android:layout_height="@dimen/quarter_standard_height"
+              android:layout_marginTop="@dimen/activity_margin_horizontal"
+              android:layout_marginRight="@dimen/activity_margin_horizontal"
+              android:layout_marginEnd="@dimen/activity_margin_horizontal"
+              android:layout_toRightOf="@+id/images_upload_text_param"
+              android:layout_toEndOf="@+id/images_upload_text_param"
+              app:srcCompat="@drawable/ic_info_outline_24dp"
+              android:tint="@color/primaryDarkColor"
+              android:layout_marginLeft="@dimen/activity_margin_horizontal"
+              android:layout_marginStart="@dimen/activity_margin_horizontal"/>
 
+          </LinearLayout>
 
-            <LinearLayout
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:id="@+id/images_upload_info"
-              android:orientation="horizontal"
-              >
-
-              <TextView
-                style="?android:textAppearanceMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"
-                android:id="@+id/images_upload_text_param"
-                android:layout_marginTop="@dimen/achievements_activity_margin_vertical"
-                android:text="@string/images_uploaded" />
-
-              <ImageView
-                android:layout_width="@dimen/quarter_standard_height"
-                android:layout_height="@dimen/quarter_standard_height"
-                android:layout_marginTop="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                android:layout_toRightOf="@+id/images_upload_text_param"
-                android:layout_toEndOf="@+id/images_upload_text_param"
-                app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryDarkColor"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"/>
-
-            </LinearLayout>
-
-            <FrameLayout
-              android:layout_width="@dimen/dimen_40"
-              android:layout_height="@dimen/dimen_40"
-              android:layout_alignParentEnd="true"
-              android:layout_alignParentRight="true"
-              android:layout_marginEnd="32dp"
-              android:layout_marginRight="32dp">
+          <FrameLayout
+            android:layout_width="@dimen/dimen_40"
+            android:layout_height="@dimen/dimen_40"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp">
 
               <com.dinuscxj.progressbar.CircleProgressBar
                 android:layout_width="@dimen/dimen_40"
@@ -169,126 +169,130 @@
 
             </FrameLayout>
 
+        </RelativeLayout>
 
+        <RelativeLayout
+          android:id="@+id/layout_image_reverts"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/tiny_margin"
+          android:layout_below="@+id/layout_image_uploaded"
+          android:layout_marginEnd="@dimen/activity_margin_horizontal"
+          android:layout_marginLeft="@dimen/activity_margin_horizontal"
+          android:layout_marginRight="@dimen/activity_margin_horizontal"
+          android:layout_marginStart="@dimen/activity_margin_horizontal">
 
-          </RelativeLayout>
-
-          <RelativeLayout
-            android:id="@+id/layout_image_reverts"
-            android:layout_width="match_parent"
+          <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/tiny_margin"
-            android:layout_below="@+id/layout_image_uploaded"
-            android:layout_marginEnd="@dimen/activity_margin_horizontal"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal"
-            android:layout_marginRight="@dimen/activity_margin_horizontal"
-            android:layout_marginStart="@dimen/activity_margin_horizontal">
-
-            <LinearLayout
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:id="@+id/images_reverted_info"
-              android:orientation="horizontal"
-              >
-
-              <TextView
-                style="?android:textAppearanceMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:id="@+id/images_reverted_text"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"
-                android:text="@string/image_reverts" />
-
-              <ImageView
-                android:layout_width="@dimen/medium_width"
-                android:layout_height="@dimen/medium_height"
-                android:layout_marginTop="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                android:layout_toRightOf="@+id/images_reverted_text"
-                android:layout_toEndOf="@+id/images_reverted_text"
-                app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryDarkColor"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"/>
-
-            </LinearLayout>
-
-
+            android:id="@+id/images_reverted_info"
+            android:orientation="horizontal"
+            >
 
             <TextView
+              style="?android:textAppearanceMedium"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="@string/achievements_revert_limit_message"
-              android:textSize="@dimen/small_text"
-              android:id="@+id/images_revert_limit_text"
+              android:layout_marginLeft="@dimen/activity_margin_horizontal"
+              android:id="@+id/images_reverted_text"
+              android:layout_marginStart="@dimen/activity_margin_horizontal"
+              android:text="@string/image_reverts" />
+
+            <ImageView
+              android:layout_width="@dimen/medium_width"
+              android:layout_height="@dimen/medium_height"
+              android:layout_marginTop="@dimen/activity_margin_horizontal"
+              android:layout_marginRight="@dimen/activity_margin_horizontal"
+              android:layout_marginEnd="@dimen/activity_margin_horizontal"
+              android:layout_toRightOf="@+id/images_reverted_text"
+              android:layout_toEndOf="@+id/images_reverted_text"
+              app:srcCompat="@drawable/ic_info_outline_24dp"
+              android:tint="@color/primaryDarkColor"
+              android:layout_marginLeft="@dimen/activity_margin_horizontal"
+              android:layout_marginStart="@dimen/activity_margin_horizontal"/>
+
+          </LinearLayout>
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/achievements_revert_limit_message"
+            android:textSize="@dimen/small_text"
+            android:id="@+id/images_revert_limit_text"
+            android:layout_marginLeft="@dimen/activity_margin_horizontal"
+            android:layout_marginStart="@dimen/activity_margin_horizontal"
+            android:layout_below="@id/images_reverted_info"/>
+
+          <com.dinuscxj.progressbar.CircleProgressBar
+            android:layout_width="@dimen/dimen_40"
+            android:layout_height="@dimen/dimen_40"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/large_gap"
+            android:layout_marginEnd="@dimen/large_gap"
+            android:progress="50"
+            android:visibility="gone"
+            android:id="@+id/image_reverts_progressbar"
+            app:progress_end_color="#8C8B98"
+            app:progress_start_color="#3A3381"
+            app:progress_text_size="@dimen/progressbar_text"
+            app:progress_stroke_width="@dimen/progressbar_stroke"
+            app:progress_text_format_pattern="92%%"
+            app:progress_text_color="@color/secondaryColor"
+            app:style="solid_line" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+          android:id="@+id/layout_image_used_by_wiki"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/tiny_margin"
+          android:layout_below="@+id/layout_image_reverts"
+          android:layout_marginBottom="@dimen/activity_margin_vertical"
+          android:layout_marginEnd="@dimen/activity_margin_horizontal"
+          android:layout_marginLeft="@dimen/activity_margin_horizontal"
+          android:layout_marginRight="@dimen/activity_margin_horizontal"
+          android:layout_marginStart="@dimen/activity_margin_horizontal">
+
+          <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/images_used_by_wiki_info"
+            android:orientation="horizontal">
+
+            <TextView
+              style="?android:textAppearanceMedium"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/images_used_by_wiki_text"
               android:layout_marginLeft="@dimen/activity_margin_horizontal"
               android:layout_marginStart="@dimen/activity_margin_horizontal"
-              android:layout_below="@id/images_reverted_info"/>
+              android:layout_marginTop="@dimen/achievements_activity_margin_vertical"
+              android:text="@string/images_used_by_wiki" />
 
-            <com.dinuscxj.progressbar.CircleProgressBar
-              android:layout_width="@dimen/dimen_40"
-              android:layout_height="@dimen/dimen_40"
-              android:layout_alignParentRight="true"
-              android:layout_alignParentEnd="true"
-              android:layout_marginRight="@dimen/large_gap"
-              android:layout_marginEnd="@dimen/large_gap"
-              android:progress="50"
-              android:visibility="gone"
-              android:id="@+id/image_reverts_progressbar"
-              app:progress_end_color="#8C8B98"
-              app:progress_start_color="#3A3381"
-              app:progress_text_size="@dimen/progressbar_text"
-              app:progress_stroke_width="@dimen/progressbar_stroke"
-              app:progress_text_format_pattern="92%%"
-              app:progress_text_color="@color/secondaryColor"
-              app:style="solid_line" />
+            <ImageView
+              android:layout_width="@dimen/medium_width"
+              android:layout_height="@dimen/medium_height"
+              android:layout_marginTop="@dimen/activity_margin_horizontal"
+              android:layout_marginRight="@dimen/activity_margin_horizontal"
+              android:layout_marginEnd="@dimen/activity_margin_horizontal"
+              android:layout_toRightOf="@+id/images_used_by_wiki_text"
+              android:layout_toEndOf="@+id/images_used_by_wiki_text"
+              app:srcCompat="@drawable/ic_info_outline_24dp"
+              android:tint="@color/primaryDarkColor"
+              android:layout_marginLeft="@dimen/activity_margin_horizontal"
+              android:layout_marginStart="@dimen/activity_margin_horizontal"/>
 
-          </RelativeLayout>
+          </LinearLayout>
 
-          <RelativeLayout
-            android:id="@+id/layout_image_used_by_wiki"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/tiny_margin"
-            android:layout_below="@+id/layout_image_reverts"
-            android:layout_marginBottom="@dimen/activity_margin_vertical"
-            android:layout_marginEnd="@dimen/activity_margin_horizontal"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal"
-            android:layout_marginRight="@dimen/activity_margin_horizontal"
-            android:layout_marginStart="@dimen/activity_margin_horizontal">
-
-            <LinearLayout
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:id="@+id/images_used_by_wiki_info"
-              android:orientation="horizontal">
-
-              <TextView
-                style="?android:textAppearanceMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/images_used_by_wiki_text"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"
-                android:layout_marginTop="@dimen/achievements_activity_margin_vertical"
-                android:text="@string/images_used_by_wiki" />
-
-              <ImageView
-                android:layout_width="@dimen/medium_width"
-                android:layout_height="@dimen/medium_height"
-                android:layout_marginTop="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                android:layout_toRightOf="@+id/images_used_by_wiki_text"
-                android:layout_toEndOf="@+id/images_used_by_wiki_text"
-                app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryDarkColor"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"/>
-
-            </LinearLayout>
+          <FrameLayout
+            android:layout_width="@dimen/dimen_40"
+            android:layout_height="@dimen/dimen_40"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp">
 
             <FrameLayout
               android:layout_width="@dimen/dimen_40"
@@ -331,346 +335,346 @@
 
             </FrameLayout>
 
-          </RelativeLayout>
-
-          <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_centerVertical="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
         </RelativeLayout>
 
-        <LinearLayout
+        <ProgressBar
+          android:id="@+id/progressBar"
+          android:layout_centerVertical="true"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" />
+
+      </RelativeLayout>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layout_statistics"
+        android:orientation="vertical">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/statistics"
+          style="?android:textAppearanceLarge"
+          android:layout_marginLeft="@dimen/activity_margin_horizontal"
+          android:layout_marginStart="@dimen/activity_margin_horizontal"
+          android:layout_marginTop="@dimen/activity_margin_vertical"
+          android:textAllCaps="true"/>
+
+        <RelativeLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:id="@+id/layout_statistics"
-          android:orientation="vertical">
+          android:layout_marginLeft="@dimen/activity_margin_horizontal"
+          android:layout_marginRight="@dimen/activity_margin_horizontal"
+          android:layout_marginEnd="@dimen/activity_margin_horizontal"
+          android:layout_marginStart="@dimen/activity_margin_horizontal"
+          android:layout_marginTop="@dimen/activity_margin_horizontal">
+
+          <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/images_nearby_info"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toStartOf="@+id/wikidata_edits"
+            android:layout_toLeftOf="@+id/wikidata_edits"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+              android:id="@+id/wikidata_edits_icon"
+              android:layout_width="@dimen/overflow_icon_dimen"
+              android:layout_height="@dimen/overflow_icon_dimen"
+              app:layout_constraintLeft_toLeftOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              app:srcCompat="@drawable/ic_custom_map_marker" />
+
+            <TextView
+              android:layout_width="0dp"
+              android:layout_height="0dp"
+              android:id="@+id/images_nearby_data"
+              style="?android:textAppearanceMedium"
+              android:layout_marginStart="@dimen/activity_margin_horizontal"
+              android:layout_marginLeft="@dimen/activity_margin_horizontal"
+              android:layout_marginEnd="@dimen/activity_margin_horizontal"
+              android:layout_marginRight="@dimen/activity_margin_horizontal"
+              app:layout_constraintLeft_toRightOf="@id/wikidata_edits_icon"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintRight_toLeftOf="@id/images_nearby_info_icon"
+              android:text="@string/statistics_wikidata_edits"  />
+
+            <ImageView
+              android:layout_width="@dimen/medium_width"
+              android:layout_height="@dimen/medium_height"
+              android:id="@+id/images_nearby_info_icon"
+              android:layout_marginTop="@dimen/activity_margin_horizontal"
+              android:layout_marginRight="@dimen/activity_margin_horizontal"
+              android:layout_marginEnd="@dimen/activity_margin_horizontal"
+              android:layout_gravity="top"
+              app:layout_constraintLeft_toRightOf="@id/images_nearby_data"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintRight_toRightOf="parent"
+              app:srcCompat="@drawable/ic_info_outline_24dp"
+              android:tint="@color/primaryDarkColor" />
+
+          </androidx.constraintlayout.widget.ConstraintLayout>
+
 
           <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/statistics"
-            style="?android:textAppearanceLarge"
+            style="?android:textAppearanceMedium"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginLeft="@dimen/activity_margin_horizontal"
-            android:layout_marginStart="@dimen/activity_margin_horizontal"
-            android:layout_marginTop="@dimen/activity_margin_vertical"
-            android:textAllCaps="true"/>
-
-          <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal"
-            android:layout_marginRight="@dimen/activity_margin_horizontal"
-            android:layout_marginEnd="@dimen/activity_margin_horizontal"
-            android:layout_marginStart="@dimen/activity_margin_horizontal"
-            android:layout_marginTop="@dimen/activity_margin_horizontal">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:id="@+id/images_nearby_info"
-              android:layout_centerVertical="true"
-              android:layout_alignParentStart="true"
-              android:layout_alignParentLeft="true"
-              android:layout_toStartOf="@+id/wikidata_edits"
-              android:layout_toLeftOf="@+id/wikidata_edits"
-              android:orientation="horizontal"
-              android:gravity="center_vertical">
-
-              <ImageView
-                android:id="@+id/wikidata_edits_icon"
-                android:layout_width="@dimen/overflow_icon_dimen"
-                android:layout_height="@dimen/overflow_icon_dimen"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_custom_map_marker" />
-
-              <TextView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:id="@+id/images_nearby_data"
-                style="?android:textAppearanceMedium"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                app:layout_constraintLeft_toRightOf="@id/wikidata_edits_icon"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/images_nearby_info_icon"
-                android:text="@string/statistics_wikidata_edits"  />
-
-              <ImageView
-                android:layout_width="@dimen/medium_width"
-                android:layout_height="@dimen/medium_height"
-                android:id="@+id/images_nearby_info_icon"
-                android:layout_marginTop="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                android:layout_gravity="top"
-                app:layout_constraintLeft_toRightOf="@id/images_nearby_data"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryDarkColor" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              style="?android:textAppearanceMedium"
-              android:layout_alignParentRight="true"
-              android:layout_alignParentEnd="true"
-              android:layout_marginLeft="@dimen/activity_margin_horizontal"
-              android:layout_marginEnd="@dimen/half_standard_height"
-              android:layout_marginTop="@dimen/activity_margin_horizontal"
-              android:layout_marginStart="@dimen/activity_margin_horizontal"
-              android:layout_centerVertical="true"
-              tools:text="2"
-              android:id="@+id/wikidata_edits"
-              android:layout_marginRight="@dimen/half_standard_height" />
-
-          </RelativeLayout>
-
-          <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal"
-            android:layout_marginRight="@dimen/activity_margin_horizontal"
-            android:layout_marginEnd="@dimen/activity_margin_horizontal"
-            android:layout_marginStart="@dimen/activity_margin_horizontal"
-            android:layout_marginTop="@dimen/activity_margin_horizontal">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:id="@+id/images_featured_info"
-              android:layout_centerVertical="true"
-              android:layout_alignParentStart="true"
-              android:layout_alignParentLeft="true"
-              android:layout_toStartOf="@+id/image_featured"
-              android:layout_toLeftOf="@+id/image_featured"
-              android:orientation="horizontal"
-              android:gravity="center_vertical">
-
-              <ImageView
-                android:layout_width="@dimen/overflow_icon_dimen"
-                android:layout_height="@dimen/overflow_icon_dimen"
-                android:id="@+id/featured_image_icon"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/featured"
-                android:scaleType="centerCrop" />
-
-              <TextView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                style="?android:textAppearanceMedium"
-                android:id="@+id/images_featured_data"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                app:layout_constraintLeft_toRightOf="@id/featured_image_icon"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/images_featured_info_icon"
-                android:text="@string/statistics_featured"  />
-
-              <ImageView
-                android:layout_width="@dimen/medium_width"
-                android:layout_height="@dimen/medium_height"
-                android:id="@+id/images_featured_info_icon"
-                android:layout_marginTop="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                app:layout_constraintLeft_toRightOf="@id/images_featured_data"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_gravity="top"
-                app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryDarkColor" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              style="?android:textAppearanceMedium"
-              android:layout_alignParentRight="true"
-              android:layout_alignParentEnd="true"
-              android:layout_marginTop="@dimen/activity_margin_horizontal"
-              android:layout_marginStart="@dimen/activity_margin_horizontal"
-              android:layout_centerVertical="true"
-              tools:text="2"
-              android:id="@+id/image_featured"
-              android:layout_marginLeft="@dimen/activity_margin_horizontal"
-              android:layout_marginEnd="@dimen/half_standard_height"
-              android:layout_marginRight="@dimen/half_standard_height" />
-
-          </RelativeLayout>
-
-          <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal"
-            android:layout_marginRight="@dimen/activity_margin_horizontal"
-            android:layout_marginEnd="@dimen/activity_margin_horizontal"
-            android:layout_marginStart="@dimen/activity_margin_horizontal"
-            android:layout_marginTop="@dimen/activity_margin_horizontal">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:id="@+id/quality_images_info"
-              android:layout_centerVertical="true"
-              android:layout_alignParentStart="true"
-              android:layout_alignParentLeft="true"
-              android:layout_toStartOf="@+id/quality_images"
-              android:layout_toLeftOf="@+id/quality_images"
-              android:orientation="horizontal"
-              android:gravity="center_vertical">
-
-              <ImageView
-                android:layout_width="@dimen/overflow_icon_dimen"
-                android:layout_height="@dimen/overflow_icon_dimen"
-                android:id="@+id/quality_image_icon"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_quality_images_logo"
-                android:scaleType="centerInside" />
-
-              <TextView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                style="?android:textAppearanceMedium"
-                android:id="@+id/quality_images_data"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                app:layout_constraintLeft_toRightOf="@id/quality_image_icon"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/quality_images_info_icon"
-                android:text="@string/statistics_quality"  />
-
-              <ImageView
-                android:layout_width="@dimen/medium_width"
-                android:layout_height="@dimen/medium_height"
-                android:id="@+id/quality_images_info_icon"
-                android:layout_marginTop="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                app:layout_constraintLeft_toRightOf="@id/quality_images_data"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_gravity="top"
-                app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryDarkColor" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              style="?android:textAppearanceMedium"
-              android:layout_alignParentRight="true"
-              android:layout_alignParentEnd="true"
-              android:layout_marginTop="@dimen/activity_margin_horizontal"
-              android:layout_marginStart="@dimen/activity_margin_horizontal"
-              android:layout_centerVertical="true"
-              tools:text="2"
-              android:text="0"
-              android:id="@+id/quality_images"
-              android:layout_marginLeft="@dimen/activity_margin_horizontal"
-              android:layout_marginEnd="@dimen/half_standard_height"
-              android:layout_marginRight="@dimen/half_standard_height" />
-
-          </RelativeLayout>
-
-          <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal"
-            android:layout_marginRight="@dimen/activity_margin_horizontal"
-            android:layout_marginStart="@dimen/activity_margin_horizontal"
+            android:layout_marginEnd="@dimen/half_standard_height"
             android:layout_marginTop="@dimen/activity_margin_horizontal"
-            android:layout_marginEnd="@dimen/activity_margin_horizontal">
+            android:layout_marginStart="@dimen/activity_margin_horizontal"
+            android:layout_centerVertical="true"
+            tools:text="2"
+            android:id="@+id/wikidata_edits"
+            android:layout_marginRight="@dimen/half_standard_height" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:id="@+id/thanks_received_info"
-              android:layout_centerVertical="true"
-              android:layout_alignParentStart="true"
-              android:layout_alignParentLeft="true"
-              android:layout_toStartOf="@+id/thanks_received"
-              android:layout_toLeftOf="@+id/thanks_received"
-              android:orientation="horizontal"
-              android:gravity="center_vertical">
+        </RelativeLayout>
 
-              <ImageView
-                android:layout_width="@dimen/overflow_icon_dimen"
-                android:layout_height="@dimen/overflow_icon_dimen"
-                android:id="@+id/thanks_image_icon"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_thanks"
-                android:scaleType="centerCrop" />
+        <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/activity_margin_horizontal"
+          android:layout_marginRight="@dimen/activity_margin_horizontal"
+          android:layout_marginEnd="@dimen/activity_margin_horizontal"
+          android:layout_marginStart="@dimen/activity_margin_horizontal"
+          android:layout_marginTop="@dimen/activity_margin_horizontal">
 
-              <TextView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                style="?android:textAppearanceMedium"
-                android:id="@+id/thanks_received_data"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                app:layout_constraintLeft_toRightOf="@id/thanks_image_icon"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/thanks_received_info_icon"
-                android:text="@string/statistics_thanks"  />
+          <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/images_featured_info"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toStartOf="@+id/image_featured"
+            android:layout_toLeftOf="@+id/image_featured"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-              <ImageView
-                android:layout_width="@dimen/medium_width"
-                android:layout_height="@dimen/medium_height"
-                android:id="@+id/thanks_received_info_icon"
-                android:layout_marginTop="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                app:layout_constraintLeft_toRightOf="@id/thanks_received_data"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_gravity="top"
-                app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryDarkColor" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+              android:layout_width="@dimen/overflow_icon_dimen"
+              android:layout_height="@dimen/overflow_icon_dimen"
+              android:id="@+id/featured_image_icon"
+              app:layout_constraintLeft_toLeftOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              app:srcCompat="@drawable/featured"
+              android:scaleType="centerCrop" />
 
             <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
+              android:layout_width="0dp"
+              android:layout_height="0dp"
               style="?android:textAppearanceMedium"
-              android:layout_alignParentRight="true"
-              android:layout_alignParentEnd="true"
-              android:layout_marginTop="@dimen/activity_margin_horizontal"
+              android:id="@+id/images_featured_data"
               android:layout_marginStart="@dimen/activity_margin_horizontal"
               android:layout_marginLeft="@dimen/activity_margin_horizontal"
-              android:layout_centerVertical="true"
-              tools:text="2"
-              android:id="@+id/thanks_received"
-              android:layout_marginEnd="@dimen/half_standard_height"
-              android:layout_marginRight="@dimen/half_standard_height" />
+              android:layout_marginEnd="@dimen/activity_margin_horizontal"
+              android:layout_marginRight="@dimen/activity_margin_horizontal"
+              app:layout_constraintLeft_toRightOf="@id/featured_image_icon"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintRight_toLeftOf="@id/images_featured_info_icon"
+              android:text="@string/statistics_featured"  />
 
-          </RelativeLayout>
+            <ImageView
+              android:layout_width="@dimen/medium_width"
+              android:layout_height="@dimen/medium_height"
+              android:id="@+id/images_featured_info_icon"
+              android:layout_marginTop="@dimen/activity_margin_horizontal"
+              android:layout_marginRight="@dimen/activity_margin_horizontal"
+              android:layout_marginEnd="@dimen/activity_margin_horizontal"
+              app:layout_constraintLeft_toRightOf="@id/images_featured_data"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintRight_toRightOf="parent"
+              android:layout_gravity="top"
+              app:srcCompat="@drawable/ic_info_outline_24dp"
+              android:tint="@color/primaryDarkColor" />
 
-        </LinearLayout>
+          </androidx.constraintlayout.widget.ConstraintLayout>
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:textAppearanceMedium"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/activity_margin_horizontal"
+            android:layout_marginStart="@dimen/activity_margin_horizontal"
+            android:layout_centerVertical="true"
+            tools:text="2"
+            android:id="@+id/image_featured"
+            android:layout_marginLeft="@dimen/activity_margin_horizontal"
+            android:layout_marginEnd="@dimen/half_standard_height"
+            android:layout_marginRight="@dimen/half_standard_height" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/activity_margin_horizontal"
+          android:layout_marginRight="@dimen/activity_margin_horizontal"
+          android:layout_marginEnd="@dimen/activity_margin_horizontal"
+          android:layout_marginStart="@dimen/activity_margin_horizontal"
+          android:layout_marginTop="@dimen/activity_margin_horizontal">
+
+          <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/quality_images_info"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toStartOf="@+id/quality_images"
+            android:layout_toLeftOf="@+id/quality_images"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+              android:layout_width="@dimen/overflow_icon_dimen"
+              android:layout_height="@dimen/overflow_icon_dimen"
+              android:id="@+id/quality_image_icon"
+              app:layout_constraintLeft_toLeftOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              app:srcCompat="@drawable/ic_quality_images_logo"
+              android:scaleType="centerInside" />
+
+            <TextView
+              android:layout_width="0dp"
+              android:layout_height="0dp"
+              style="?android:textAppearanceMedium"
+              android:id="@+id/quality_images_data"
+              android:layout_marginStart="@dimen/activity_margin_horizontal"
+              android:layout_marginLeft="@dimen/activity_margin_horizontal"
+              android:layout_marginEnd="@dimen/activity_margin_horizontal"
+              android:layout_marginRight="@dimen/activity_margin_horizontal"
+              app:layout_constraintLeft_toRightOf="@id/quality_image_icon"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintRight_toLeftOf="@id/quality_images_info_icon"
+              android:text="@string/statistics_quality"  />
+
+            <ImageView
+              android:layout_width="@dimen/medium_width"
+              android:layout_height="@dimen/medium_height"
+              android:id="@+id/quality_images_info_icon"
+              android:layout_marginTop="@dimen/activity_margin_horizontal"
+              android:layout_marginRight="@dimen/activity_margin_horizontal"
+              android:layout_marginEnd="@dimen/activity_margin_horizontal"
+              app:layout_constraintLeft_toRightOf="@id/quality_images_data"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintRight_toRightOf="parent"
+              android:layout_gravity="top"
+              app:srcCompat="@drawable/ic_info_outline_24dp"
+              android:tint="@color/primaryDarkColor" />
+
+          </androidx.constraintlayout.widget.ConstraintLayout>
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:textAppearanceMedium"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/activity_margin_horizontal"
+            android:layout_marginStart="@dimen/activity_margin_horizontal"
+            android:layout_centerVertical="true"
+            tools:text="2"
+            android:text="0"
+            android:id="@+id/quality_images"
+            android:layout_marginLeft="@dimen/activity_margin_horizontal"
+            android:layout_marginEnd="@dimen/half_standard_height"
+            android:layout_marginRight="@dimen/half_standard_height" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/activity_margin_horizontal"
+          android:layout_marginRight="@dimen/activity_margin_horizontal"
+          android:layout_marginStart="@dimen/activity_margin_horizontal"
+          android:layout_marginTop="@dimen/activity_margin_horizontal"
+          android:layout_marginEnd="@dimen/activity_margin_horizontal">
+
+          <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/thanks_received_info"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toStartOf="@+id/thanks_received"
+            android:layout_toLeftOf="@+id/thanks_received"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+              android:layout_width="@dimen/overflow_icon_dimen"
+              android:layout_height="@dimen/overflow_icon_dimen"
+              android:id="@+id/thanks_image_icon"
+              app:layout_constraintLeft_toLeftOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              app:srcCompat="@drawable/ic_thanks"
+              android:scaleType="centerCrop" />
+
+            <TextView
+              android:layout_width="0dp"
+              android:layout_height="0dp"
+              style="?android:textAppearanceMedium"
+              android:id="@+id/thanks_received_data"
+              android:layout_marginStart="@dimen/activity_margin_horizontal"
+              android:layout_marginLeft="@dimen/activity_margin_horizontal"
+              android:layout_marginEnd="@dimen/activity_margin_horizontal"
+              android:layout_marginRight="@dimen/activity_margin_horizontal"
+              app:layout_constraintLeft_toRightOf="@id/thanks_image_icon"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintRight_toLeftOf="@id/thanks_received_info_icon"
+              android:text="@string/statistics_thanks"  />
+
+            <ImageView
+              android:layout_width="@dimen/medium_width"
+              android:layout_height="@dimen/medium_height"
+              android:id="@+id/thanks_received_info_icon"
+              android:layout_marginTop="@dimen/activity_margin_horizontal"
+              android:layout_marginRight="@dimen/activity_margin_horizontal"
+              android:layout_marginEnd="@dimen/activity_margin_horizontal"
+              app:layout_constraintLeft_toRightOf="@id/thanks_received_data"
+              app:layout_constraintTop_toTopOf="parent"
+              app:layout_constraintRight_toRightOf="parent"
+              android:layout_gravity="top"
+              app:srcCompat="@drawable/ic_info_outline_24dp"
+              android:tint="@color/primaryDarkColor" />
+
+          </androidx.constraintlayout.widget.ConstraintLayout>
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:textAppearanceMedium"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/activity_margin_horizontal"
+            android:layout_marginStart="@dimen/activity_margin_horizontal"
+            android:layout_marginLeft="@dimen/activity_margin_horizontal"
+            android:layout_centerVertical="true"
+            tools:text="2"
+            android:id="@+id/thanks_received"
+            android:layout_marginEnd="@dimen/half_standard_height"
+            android:layout_marginRight="@dimen/half_standard_height" />
+
+        </RelativeLayout>
+
       </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
+  </ScrollView>
 </androidx.drawerlayout.widget.DrawerLayout>

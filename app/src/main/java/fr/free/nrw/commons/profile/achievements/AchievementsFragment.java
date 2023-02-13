@@ -373,7 +373,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
             imagesUploadedProgressbar.setProgress
                     (100*uploadCount/levelInfo.getMaxUploadCount());
             uploadedImagesTextview.setText
-                (uploadCount + "/" + levelInfo.getMaxUploadCount());
+                    (uploadCount + "/" + levelInfo.getMaxUploadCount());
         }
 
     }
@@ -423,7 +423,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         imagesUsedByWikiProgressBar.setProgress
                 (100 * achievements.getUniqueUsedImages() / levelInfo.getMaxUniqueImages());
         imagesUsedByWikiTextview.setText
-            (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
+                (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
         imagesFeatured.setText(String.valueOf(achievements.getFeaturedImages()));
         tvQualityImages.setText(String.valueOf(achievements.getQualityImages()));
         String levelUpInfoString = getString(R.string.level).toUpperCase();
