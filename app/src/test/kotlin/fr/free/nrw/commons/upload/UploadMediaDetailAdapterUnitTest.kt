@@ -248,39 +248,39 @@ class UploadMediaDetailAdapterUnitTest {
     }
 
     @Test
-    fun testRemoveTrailingWhitespace() {
+    fun testRemoveLeadingAndTrailingWhitespace() {
         // empty space
-        val test1 = "test  "
+        val test1 = "  test  "
         val expected1 = "test"
-        Assert.assertTrue(viewHolder.checkTrailingWhitespace(test1));
-        Assert.assertEquals(expected1, viewHolder.removeTrailingWhitespace(test1))
+        Assert.assertEquals(expected1, viewHolder.removeLeadingAndTrailingWhitespace(test1))
 
-        val test2 = "test test "
+        val test2 = "  test test "
         val expected2 = "test test"
-        Assert.assertTrue(viewHolder.checkTrailingWhitespace(test2));
-        Assert.assertEquals(expected2, viewHolder.removeTrailingWhitespace(test2))
+        Assert.assertEquals(expected2, viewHolder.removeLeadingAndTrailingWhitespace(test2))
 
         // No whitespace
         val test3 = "No trailing space";
         val expected3 = "No trailing space";
-        Assert.assertFalse(viewHolder.checkTrailingWhitespace(test3))
-        Assert.assertEquals(expected3, viewHolder.removeTrailingWhitespace(test3))
+        Assert.assertEquals(expected3, viewHolder.removeLeadingAndTrailingWhitespace(test3))
+
+        // blank string
+        val test4 = " \r \t  "
+        val expected4 = "";
+        Assert.assertEquals(expected4, viewHolder.removeLeadingAndTrailingWhitespace(test4))
     }
 
     @Test
-    fun testRemoveTrailingInstanceTab() {
-        val test = "test\t"
+    fun testRemoveLeadingAndTrailingInstanceTab() {
+        val test = "\ttest\t"
         val expected = "test"
-        Assert.assertTrue(viewHolder.checkTrailingWhitespace(test));
-        Assert.assertEquals(expected, viewHolder.removeTrailingWhitespace(test))
+        Assert.assertEquals(expected, viewHolder.removeLeadingAndTrailingWhitespace(test))
     }
 
     @Test
-    fun testRemoveTrailingCarriageReturn() {
-        val test = "test\r"
+    fun testRemoveLeadingAndTrailingCarriageReturn() {
+        val test = "\rtest\r"
         val expected = "test"
-        Assert.assertTrue(viewHolder.checkTrailingWhitespace(test));
-        Assert.assertEquals(expected, viewHolder.removeTrailingWhitespace(test))
+        Assert.assertEquals(expected, viewHolder.removeLeadingAndTrailingWhitespace(test))
     }
 
     @Test
@@ -289,9 +289,8 @@ class UploadMediaDetailAdapterUnitTest {
         val expected1 = "テスト テスト"
         Assert.assertEquals(expected1, viewHolder.convertIdeographicSpaceToLatinSpace(test1));
 
-        val test2 = "テスト　\r　\t　"
+        val test2 = "　\r　\t　テスト　\r　\t　"
         val expected2 = "テスト"
-        Assert.assertTrue(viewHolder.checkTrailingWhitespace(test2));
-        Assert.assertEquals(expected2, viewHolder.removeTrailingWhitespace(test2))
+        Assert.assertEquals(expected2, viewHolder.removeLeadingAndTrailingWhitespace(test2))
     }
 }
