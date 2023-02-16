@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Rich Farmbrough
+* Wangombe
 -->
 <resources>
-  <string name="crash_dialog_title">Commons wa kuvunjika</string>
+  <string name="crash_dialog_title">Commons imeanguka</string>
   <string name="crash_dialog_ok_toast">Asante!</string>
 </resources>
