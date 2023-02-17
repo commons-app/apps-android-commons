@@ -488,18 +488,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             ((LinearLayoutManager) rvThumbnails.getLayoutManager())
                 .scrollToPositionWithOffset((index > 0) ? index-1 : 0, 0);
         } else {
-            if(defaultKvStore.getInt(COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0) >= 10){
-                DialogUtil.showAlertDialog(this,
-                    "",
-                    getString(R.string.location_message),
-                    getString(R.string.ok),
-                    () -> {
-                        defaultKvStore.putInt(COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0);
-                        presenter.handleSubmit();
-                    }, false);
-            } else {
-                presenter.handleSubmit();
-            }
+            presenter.handleSubmit();
         }
     }
 
