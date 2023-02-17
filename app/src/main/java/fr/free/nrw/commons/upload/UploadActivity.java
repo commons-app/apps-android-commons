@@ -471,6 +471,16 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
     @Override
+    public void showAlertDialog(int messageResourceId, Runnable onPositiveClick) {
+        DialogUtil.showAlertDialog(this,
+            "",
+            getString(messageResourceId),
+            getString(R.string.ok),
+            onPositiveClick,
+            false);
+    }
+
+    @Override
     public void onNextButtonClicked(int index) {
         if (index < fragments.size() - 1) {
             vpUpload.setCurrentItem(index + 1, false);

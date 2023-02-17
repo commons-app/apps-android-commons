@@ -24,6 +24,12 @@ public interface UploadContract {
 
         void showMessage(int messageResourceId);
 
+        /**
+         * Displays an alert with message given by {@code messageResourceId}.
+         * {@code onPositiveClick} is run after acknowledgement.
+         */
+        void showAlertDialog(int messageResourceId, Runnable onPositiveClick);
+
         List<UploadableFile> getUploadableFiles();
 
         void showHideTopCard(boolean shouldShow);
