@@ -471,6 +471,16 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
     @Override
+    public void showAlertDialog(int messageResourceId, Runnable onPositiveClick) {
+        DialogUtil.showAlertDialog(this,
+            "",
+            getString(messageResourceId),
+            getString(R.string.ok),
+            onPositiveClick,
+            false);
+    }
+
+    @Override
     public void onNextButtonClicked(int index) {
         if (index < fragments.size() - 1) {
             vpUpload.setCurrentItem(index + 1, false);
@@ -478,18 +488,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             ((LinearLayoutManager) rvThumbnails.getLayoutManager())
                 .scrollToPositionWithOffset((index > 0) ? index-1 : 0, 0);
         } else {
-            if(defaultKvStore.getInt(COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0) >= 10){
-                DialogUtil.showAlertDialog(this,
-                    "",
-                    getString(R.string.location_message),
-                    getString(R.string.ok),
-                    () -> {
-                        defaultKvStore.putInt(COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0);
-                        presenter.handleSubmit();
-                    }, false);
-            } else {
-                presenter.handleSubmit();
-            }
+            presenter.handleSubmit();
         }
     }
 

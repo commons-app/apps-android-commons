@@ -35,6 +35,8 @@ public class UploadPresenter implements UploadContract.UserActionListener {
     public static final String COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES
         = "number_of_consecutive_uploads_without_coordinates";
 
+    public static final int CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES_REMINDER_THRESHOLD = 10;
+
 
     @Inject
     UploadPresenter(UploadRepository uploadRepository,
@@ -51,6 +53,31 @@ public class UploadPresenter implements UploadContract.UserActionListener {
     @SuppressLint("CheckResult")
     @Override
     public void handleSubmit() {
+        boolean hasLocationProvidedForNewUploads = false;
+        for (UploadItem item : repository.getUploads()) {
+            if (item.getGpsCoords().getImageCoordsExists()) {
+                hasLocationProvidedForNewUploads = true;
+            }
+        }
+        boolean hasManyConsecutiveUploadsWithoutLocation = defaultKvStore.getInt(
+            COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0) >=
+            CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES_REMINDER_THRESHOLD;
+
+        if (hasManyConsecutiveUploadsWithoutLocation && !hasLocationProvidedForNewUploads) {
+            defaultKvStore.putInt(COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0);
+            view.showAlertDialog(
+                R.string.location_message,
+                () -> {defaultKvStore.putInt(
+                    COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES,
+                    0);
+                    processContributionsForSubmission();
+                });
+        } else {
+            processContributionsForSubmission();
+        }
+    }
+
+    private void processContributionsForSubmission() {
         if (view.isLoggedIn()) {
             view.showProgress(true);
             repository.buildContributions()
@@ -72,9 +99,8 @@ public class UploadPresenter implements UploadContract.UserActionListener {
 
                         @Override
                         public void onNext(Contribution contribution) {
-                            if(contribution.getDecimalCoords() == null){
-                                final int recentCount
-                                    = defaultKvStore.getInt(
+                            if (contribution.getDecimalCoords() == null) {
+                                final int recentCount = defaultKvStore.getInt(
                                     COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0);
                                 defaultKvStore.putInt(
                                     COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, recentCount + 1);
