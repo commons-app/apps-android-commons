@@ -35,7 +35,7 @@ public class UploadPresenter implements UploadContract.UserActionListener {
     public static final String COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES
         = "number_of_consecutive_uploads_without_coordinates";
 
-    public static final int CONSECUTIVE_UPLOADS_REMINDER_THRESHOLD = 10;
+    public static final int CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES_REMINDER_THRESHOLD = 10;
 
 
     @Inject
@@ -61,7 +61,7 @@ public class UploadPresenter implements UploadContract.UserActionListener {
         }
         boolean hasManyConsecutiveUploadsWithoutLocation = defaultKvStore.getInt(
             COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0) >=
-            CONSECUTIVE_UPLOADS_REMINDER_THRESHOLD;
+            CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES_REMINDER_THRESHOLD;
 
         if (hasManyConsecutiveUploadsWithoutLocation && !hasLocationProvidedForNewUploads) {
             defaultKvStore.putInt(COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0);
