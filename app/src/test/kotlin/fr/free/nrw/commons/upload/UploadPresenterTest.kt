@@ -88,7 +88,7 @@ class UploadPresenterTest {
         // test 1 - insufficient count
         `when`(
             defaultKvStore.getInt(UploadPresenter.COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0))
-                .thenReturn(UploadPresenter.CONSECUTIVE_UPLOADS_REMINDER_THRESHOLD - 1)
+                .thenReturn(UploadPresenter.CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES_REMINDER_THRESHOLD - 1)
         uploadPresenter.handleSubmit()
         // no alert dialog expected as insufficient consecutive count
         verify(view, times(0)).showAlertDialog(ArgumentMatchers.anyInt(), ArgumentMatchers.any<Runnable>())
@@ -96,7 +96,7 @@ class UploadPresenterTest {
         // test 2 - sufficient count
         `when`(
             defaultKvStore.getInt(UploadPresenter.COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0))
-            .thenReturn(UploadPresenter.CONSECUTIVE_UPLOADS_REMINDER_THRESHOLD)
+            .thenReturn(UploadPresenter.CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES_REMINDER_THRESHOLD)
         uploadPresenter.handleSubmit()
         // alert dialog expected as consecutive count is at threshold
         verify(view).showAlertDialog(ArgumentMatchers.anyInt(), ArgumentMatchers.any<Runnable>())
@@ -106,7 +106,7 @@ class UploadPresenterTest {
     fun handleSubmitImagesWithLocationWithConsecutiveNoLocationUploads() {
         `when`(
             defaultKvStore.getInt(UploadPresenter.COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES, 0))
-            .thenReturn(UploadPresenter.CONSECUTIVE_UPLOADS_REMINDER_THRESHOLD)
+            .thenReturn(UploadPresenter.CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES_REMINDER_THRESHOLD)
         `when`(imageCoords.imageCoordsExists).thenReturn(true)
         `when`(uploadItem.getGpsCoords()).thenReturn(imageCoords)
         `when`(repository.uploads).thenReturn(uploadableItems)
