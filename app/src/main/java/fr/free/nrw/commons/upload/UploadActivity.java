@@ -225,9 +225,13 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .filter(result -> result)
-                .subscribe(result -> showInfoAlert(R.string.block_notification_title,
-                        R.string.block_notification, UploadActivity.this::finish)
-                ));
+                .subscribe(result -> DialogUtil.showAlertDialog(
+                    this,
+                    getString(R.string.block_notification_title),
+                    getString(R.string.block_notification),
+                    getString(R.string.ok),
+                    this::finish,
+                    true)));
     }
 
     private void checkStoragePermissions() {
@@ -457,18 +461,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         finish();
     }
 
-    private void showInfoAlert(int titleStringID, int messageStringId, Runnable positive, String... formatArgs) {
-        new AlertDialog.Builder(this)
-                .setTitle(titleStringID)
-                .setMessage(getString(messageStringId, (Object[]) formatArgs))
-                .setCancelable(true)
-                .setPositiveButton(android.R.string.ok, (dialog, id) -> {
-                    positive.run();
-                    dialog.cancel();
-                })
-                .create()
-                .show();
-    }
 
     @Override
     public void showAlertDialog(int messageResourceId, Runnable onPositiveClick) {

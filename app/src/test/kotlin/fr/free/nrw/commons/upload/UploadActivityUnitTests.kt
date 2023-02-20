@@ -235,26 +235,6 @@ class UploadActivityUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testShowInfoAlert() {
-        val method: Method = UploadActivity::class.java.getDeclaredMethod(
-            "showInfoAlert",
-            Int::class.java,
-            Int::class.java,
-            Runnable::class.java,
-            Array<String>::class.java
-        )
-        method.isAccessible = true
-        method.invoke(
-            activity,
-            R.string.block_notification_title,
-            R.string.block_notification,
-            mock(Runnable::class.java),
-            arrayOf("")
-        )
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testOnNextButtonClicked() {
         activity.onNextButtonClicked(-1)
     }
