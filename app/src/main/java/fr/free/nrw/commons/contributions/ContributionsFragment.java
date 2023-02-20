@@ -498,6 +498,9 @@ public class ContributionsFragment
             // Means that no close nearby place is found
             nearbyNotificationCardView.setVisibility(View.GONE);
         }
+        if(mediaDetailPagerFragment!=null && !contributionsListFragment.isVisible()) {
+            nearbyNotificationCardView.setVisibility(View.GONE);
+        }
     }
 
     @Override
