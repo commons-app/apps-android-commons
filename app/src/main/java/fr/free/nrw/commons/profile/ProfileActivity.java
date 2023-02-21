@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.profile;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,11 +13,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.tabs.TabLayout;
@@ -27,11 +24,11 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.ViewPagerAdapter;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
-import fr.free.nrw.commons.contributions.ContributionsListFragment;
 import fr.free.nrw.commons.explore.ParentViewPager;
 import fr.free.nrw.commons.profile.achievements.AchievementsFragment;
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.utils.DialogUtil;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -196,17 +193,21 @@ public class ProfileActivity extends BaseActivity {
      * @param screenshot screenshot of the present screen
      */
     public void showAlert(final Bitmap screenshot) {
-        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
         final LayoutInflater factory = LayoutInflater.from(this);
         final View view = factory.inflate(R.layout.image_alert_layout, null);
         final ImageView screenShotImage = view.findViewById(R.id.alert_image);
         screenShotImage.setImageBitmap(screenshot);
         final TextView shareMessage = view.findViewById(R.id.alert_text);
         shareMessage.setText(R.string.achievements_share_message);
-        alert.setView(view);
-        alert.setPositiveButton(R.string.about_translate_proceed, (dialog, which) -> shareScreen(screenshot));
-        alert.setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.cancel());
-        alert.show();
+        DialogUtil.showAlertDialog(this,
+            "",
+            getString(R.string.achievements_share_message),
+            getString(R.string.about_translate_proceed),
+            getString(R.string.cancel),
+            () -> shareScreen(screenshot),
+            () -> {},
+            view,
+            true);
     }
 
     /**
