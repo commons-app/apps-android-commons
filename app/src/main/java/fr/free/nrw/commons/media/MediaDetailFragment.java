@@ -13,7 +13,6 @@ import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.
 import static fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources;
 
 import android.Manifest;
-import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -84,6 +83,7 @@ import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
 import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
+import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
@@ -1126,15 +1126,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 spinner.setAdapter(languageAdapter);
                 spinner.setGravity(17);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setView(spinner);
-                builder.setTitle(R.string.nominate_delete)
-                    .setPositiveButton(R.string.about_translate_proceed,
-                        (dialog, which) -> onDeleteClicked(spinner));
-                builder.setNegativeButton(R.string.about_translate_cancel,
-                    (dialog, which) -> dialog.dismiss());
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                AlertDialog dialog = DialogUtil.showAlertDialog(getActivity(),
+                    getString(R.string.nominate_delete),
+                    "",
+                    getString(R.string.about_translate_proceed),
+                    getString(R.string.about_translate_cancel),
+                    () -> onDeleteClicked(spinner),
+                    () -> {},
+                    spinner,
+                    true);
                 if (isDeleted) {
                     dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
                 }
