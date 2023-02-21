@@ -1,8 +1,6 @@
 package fr.free.nrw.commons.profile.achievements;
 
 import android.accounts.Account;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,6 +30,7 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.utils.ConfigUtils;
+import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -373,16 +372,15 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     }
 
     private void setZeroAchievements() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
-            .setMessage(
-                !Objects.equals(sessionManager.getUserName(), userName) ?
-                    getString(R.string.no_achievements_yet, userName) :
-                    getString(R.string.you_have_no_achievements_yet)
-            )
-            .setPositiveButton(getString(R.string.ok), (dialog, which) -> {
-            });
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        String message = !Objects.equals(sessionManager.getUserName(), userName) ?
+                getString(R.string.no_achievements_yet, userName) :
+                getString(R.string.you_have_no_achievements_yet);
+        DialogUtil.showAlertDialog(getActivity(),
+            "",
+            message,
+            getString(R.string.ok),
+            () -> {},
+            true);
         imagesUploadedProgressbar.setVisibility(View.INVISIBLE);
         imageRevertsProgressbar.setVisibility(View.INVISIBLE);
         imagesUsedByWikiProgressBar.setVisibility(View.INVISIBLE);
@@ -391,7 +389,6 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         imageRevertedText.setText(R.string.no_image_reverted);
         imageUploadedText.setText(R.string.no_image_uploaded);
         imageView.setVisibility(View.INVISIBLE);
-
     }
 
     /**
@@ -507,29 +504,27 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
      * @param message
      */
     private void launchAlert(String title, String message){
-        new AlertDialog.Builder(getActivity())
-                .setTitle(title)
-                .setMessage(message)
-                .setCancelable(true)
-                .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                .create()
-                .show();
+        DialogUtil.showAlertDialog(getActivity(),
+            title,
+            message,
+            getString(R.string.ok),
+            () -> {},
+            true);
     }
 
     /**
      *  Launch Alert with a READ MORE button and clicking it open a custom webpage
      */
-    private void launchAlertWithHelpLink(String title, String message, String helpLinkUrl){
-        new Builder(getActivity())
-            .setTitle(title)
-            .setMessage(message)
-            .setCancelable(true)
-            .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-            .setNegativeButton(R.string.read_help_link, (dialog ,id) ->{
-                Utils.handleWebUrl(requireContext(), Uri.parse(helpLinkUrl));;
-            })
-            .create()
-            .show();
+    private void launchAlertWithHelpLink(String title, String message, String helpLinkUrl) {
+        DialogUtil.showAlertDialog(getActivity(),
+            title,
+            message,
+            getString(R.string.ok),
+            getString(R.string.read_help_link),
+            () -> {},
+            () -> Utils.handleWebUrl(requireContext(), Uri.parse(helpLinkUrl)),
+            null,
+            true);
     }
 
     /**
