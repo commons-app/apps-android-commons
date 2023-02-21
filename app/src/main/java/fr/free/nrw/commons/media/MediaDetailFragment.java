@@ -1128,7 +1128,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
                 AlertDialog dialog = DialogUtil.showAlertDialog(getActivity(),
                     getString(R.string.nominate_delete),
-                    "",
+                    null,
                     getString(R.string.about_translate_proceed),
                     getString(R.string.about_translate_cancel),
                     () -> onDeleteClicked(spinner),

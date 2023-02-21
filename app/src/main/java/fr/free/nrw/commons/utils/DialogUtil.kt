@@ -34,8 +34,8 @@ object DialogUtil {
     @JvmStatic
     fun showAlertDialog(
         activity: Activity,
-        title: String,
-        message: String,
+        title: String?,
+        message: String?,
         onPositiveBtnClick: Runnable?,
         onNegativeBtnClick: Runnable?
     ): AlertDialog? {
@@ -53,8 +53,8 @@ object DialogUtil {
     @JvmStatic
     fun showAlertDialog(
         activity: Activity,
-        title: String,
-        message: String,
+        title: String?,
+        message: String?,
         positiveButtonText: String?,
         negativeButtonText: String?,
         onPositiveBtnClick: Runnable?,
@@ -74,8 +74,8 @@ object DialogUtil {
     @JvmStatic
     fun showAlertDialog(
         activity: Activity,
-        title: String,
-        message: String,
+        title: String?,
+        message: String?,
         onPositiveBtnClick: Runnable?,
         onNegativeBtnClick: Runnable?,
         customView: View?,
@@ -97,8 +97,8 @@ object DialogUtil {
     @JvmStatic
     fun showAlertDialog(
         activity: Activity,
-        title: String,
-        message: String,
+        title: String?,
+        message: String?,
         positiveButtonText: String?,
         negativeButtonText: String?,
         onPositiveBtnClick: Runnable?,
@@ -122,8 +122,8 @@ object DialogUtil {
     @JvmStatic
     fun showAlertDialog(
         activity: Activity,
-        title: String,
-        message: String,
+        title: String?,
+        message: String?,
         positiveButtonText: String?,
         onPositiveBtnClick: Runnable?,
         cancelable: Boolean
@@ -152,8 +152,8 @@ object DialogUtil {
      */
     private fun createAndShowDialogSafely(
         activity: Activity,
-        title: String,
-        message: String,
+        title: String?,
+        message: String?,
         positiveButtonText: String? = null,
         negativeButtonText: String? = null,
         onPositiveBtnClick: Runnable? = null,
@@ -171,8 +171,8 @@ object DialogUtil {
         }
 
         return showSafely(activity, AlertDialog.Builder(activity).apply {
-            setTitle(title)
-            setMessage(message)
+            title?.also{setTitle(title)}
+            message?.also{setMessage(message)}
             setView(customView)
             setCancelable(cancelable)
             positiveButtonText?.let {
