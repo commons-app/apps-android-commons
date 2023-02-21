@@ -498,6 +498,11 @@ public class ContributionsFragment
             // Means that no close nearby place is found
             nearbyNotificationCardView.setVisibility(View.GONE);
         }
+
+        // Prevent Nearby banner from appearing in Media Details, fixing bug https://github.com/commons-app/apps-android-commons/issues/4731
+        if (mediaDetailPagerFragment != null && !contributionsListFragment.isVisible()) {
+            nearbyNotificationCardView.setVisibility(View.GONE);
+        }
     }
 
     @Override
