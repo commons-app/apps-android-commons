@@ -376,7 +376,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
                 getString(R.string.no_achievements_yet, userName) :
                 getString(R.string.you_have_no_achievements_yet);
         DialogUtil.showAlertDialog(getActivity(),
-            "",
+            null,
             message,
             getString(R.string.ok),
             () -> {},

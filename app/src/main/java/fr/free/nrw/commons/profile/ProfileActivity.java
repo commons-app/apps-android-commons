@@ -200,8 +200,8 @@ public class ProfileActivity extends BaseActivity {
         final TextView shareMessage = view.findViewById(R.id.alert_text);
         shareMessage.setText(R.string.achievements_share_message);
         DialogUtil.showAlertDialog(this,
-            "",
-            "",
+            null,
+            null,
             getString(R.string.about_translate_proceed),
             getString(R.string.cancel),
             () -> shareScreen(screenshot),
