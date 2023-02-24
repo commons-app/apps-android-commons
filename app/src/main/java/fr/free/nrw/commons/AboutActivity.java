@@ -1,7 +1,6 @@
 package fr.free.nrw.commons;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +15,7 @@ import androidx.annotation.NonNull;
 import fr.free.nrw.commons.databinding.ActivityAboutBinding;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.ConfigUtils;
+import fr.free.nrw.commons.utils.DialogUtil;
 import java.util.Collections;
 import java.util.List;
 
@@ -161,17 +161,20 @@ public class AboutActivity extends BaseActivity {
         spinner.setAdapter(languageAdapter);
         spinner.setGravity(17);
         spinner.setPadding(50,0,0,0);
-        AlertDialog.Builder builder = new AlertDialog.Builder(AboutActivity.this);
-        builder.setView(spinner);
-        builder.setTitle(R.string.about_translate_title)
-                .setMessage(R.string.about_translate_message)
-                .setPositiveButton(R.string.about_translate_proceed, (dialog, which) -> {
-                    String langCode = CommonsApplication.getInstance().getLanguageLookUpTable().getCodes().get(spinner.getSelectedItemPosition());
-                    Utils.handleWebUrl(AboutActivity.this, Uri.parse(Urls.TRANSLATE_WIKI_URL + langCode));
-                });
-        builder.setNegativeButton(R.string.about_translate_cancel, (dialog, which) -> dialog.cancel());
-        builder.create().show();
 
+        Runnable positiveButtonRunnable = () -> {
+            String langCode = CommonsApplication.getInstance().getLanguageLookUpTable().getCodes().get(spinner.getSelectedItemPosition());
+            Utils.handleWebUrl(AboutActivity.this, Uri.parse(Urls.TRANSLATE_WIKI_URL + langCode));
+        };
+        DialogUtil.showAlertDialog(this,
+            getString(R.string.about_translate_title),
+            getString(R.string.about_translate_message),
+            getString(R.string.about_translate_proceed),
+            getString(R.string.about_translate_cancel),
+            positiveButtonRunnable,
+            () -> {},
+            spinner,
+            true);
     }
 
 }
