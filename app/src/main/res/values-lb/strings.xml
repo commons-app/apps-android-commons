@@ -24,6 +24,7 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads">Eropluede starten</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Ugefaangen %d Fichier eropzelueden</item>
     <item quantity="other">Ugefaangen %d Fichieren eropzelueden</item>
@@ -66,6 +67,7 @@
   <string name="upload_progress_notification_title_finishing">Eroplueden vu(n) %1$s ofschléissen</string>
   <string name="upload_failed_notification_title">%1$s konnt net eropgeluede ginn</string>
   <string name="upload_failed_notification_subtitle">Dréckt fir nach eng Kéier ze probéieren</string>
+  <string name="upload_paused_notification_subtitle">Tippe fir ze kucken</string>
   <string name="title_activity_contributions">Meng rezent eropgeluede Fichieren</string>
   <string name="contribution_state_queued">An der Queue</string>
   <string name="contribution_state_failed">Huet net funktionéiert</string>
@@ -293,9 +295,13 @@
   <string name="bookmark_empty">Dir hutt keng Lieszeechen derbäigesat</string>
   <string name="provider_bookmarks_location">Lieszeechen</string>
   <string name="deletion_reason_uploaded_by_mistake">Ech hunn et iertemlech eropgelueden</string>
-  <string name="deletion_reason_publicly_visible">Ech wousst net datt et ëffentlech visibel wier</string>
+  <string name="deletion_reason_publicly_visible">Ech wousst net, datt et ëffentlech visibel wier</string>
+  <string name="deletion_reason_bad_for_my_privacy">Ech hu gemierkt, datt et schlecht fir meng Privatsphär ass</string>
+  <string name="deletion_reason_no_longer_want_public">Ech hu meng Meenung geännert, ech wëll net méi, datt et ëffentlech siichtbar ass</string>
   <string name="deletion_reason_not_interesting">Pardon, dëst Bild ass net interessant fir eng Enzyklopedie</string>
+  <string name="uploaded_by_myself">Vu mir selwer de(n) %1$s eropgelueden, benotzt a(n) %2$d Artikel(en).</string>
   <string name="no_categories_selected">Keng Kategorien erausgesicht</string>
+  <string name="no_categories_selected_warning_desc">Biller ouni Kategorië si meeschtens net benotzbar. Sidd Dir sécher, datt Dir weider maache wëllt ouni eng Kategorie auszewielen?</string>
   <string name="back_button_warning">Eroplueden ofbriechen</string>
   <string name="back_button_continue">Eropluede weiderféieren</string>
   <string name="never_ask_again">Dëst ni méi froen</string>
@@ -303,7 +309,9 @@
   <string name="nominate_for_deletion_done">Fäerdeg</string>
   <string name="review_copyright">Entsprécht dat de Copyright-Reegelen?</string>
   <string name="review_category">Ass dëst richteg kategoriséiert?</string>
+  <string name="review_spam_explanation">Klickt op NEEN fir dëst Bild fir d\'Läsche virzeschloen, falls et guer net nëtzlech ass.</string>
   <string name="review_copyright_explanation">Logoen, Screenshotten oder Filmplakate sinn oft Urheberrechtsverletzungen. Klickt op NEEN fir virzeschloen, datt dëst Bild geläscht gëtt</string>
+  <string name="review_no_category">Oh, dat ass mol net kategoriséiert!</string>
   <string name="review_c_violation_report_question">Et ass eng Urheberrechtsverletzung, well et</string>
   <string name="review_thanks_yes_button_text">Nächst Bild</string>
   <string name="review_thanks_no_button_text">Jo, firwat net</string>
@@ -313,6 +321,7 @@
   <string name="no_notification">Dir hutt keng net geliesen Notifikatiounen</string>
   <string name="no_read_notification">Dir hutt keng net-gelies Notifikatiounen</string>
   <string name="menu_option_read">Déi geliese weisen</string>
+  <string name="menu_option_unread">Déi net geliese weisen</string>
   <string name="error_occurred_in_picking_images">Feeler beim Eraussiche vun de Biller</string>
   <string name="please_wait">Waart wgl. ...</string>
   <string name="copied_successfully">Kopéiert</string>
@@ -328,8 +337,11 @@
   <string name="image_info">Bildinformatiounen</string>
   <string name="no_categories_found">Keng Kategorie fonnt.</string>
   <string name="upload_cancelled">Eroplueden ofgebrach</string>
+  <string name="dialog_box_text_nomination">Firwat soll %1$s geläscht ginn?</string>
+  <string name="review_is_uploaded_by">%1$s gëtt eropgeluede vun: %2$s</string>
   <string name="default_description_language">Standard-Beschreiwungssprooch</string>
   <string name="delete_helper_show_deletion_message_if">%1$s gouf nominéiert fir ze läschen</string>
+  <string name="delete_helper_ask_spam_selfie">e Selfie, deen a kengem Artikel benotzt gëtt</string>
   <string name="delete_helper_ask_spam_blurry">komplett verschwommen</string>
   <string name="delete_helper_ask_spam_nonsense">Blödsinn, absolut onbrauchbar fir all Artikel</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Zoufälleg Foto aus dem Internet</string>
@@ -341,6 +353,7 @@
   <string name="category_edit_button_text">Kategorien aktualiséieren</string>
   <string name="coordinates_edit_helper_show_edit_title">Aktualiséierung vun de Koordinaten</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Succès</string>
+  <string name="coordinates_edit_helper_show_edit_message">Koordinaten %1$s ginn derbäigesat.</string>
   <string name="you_have_no_achievements_yet">Dir hutt nach keng Kontributioune gemaach</string>
   <string name="no_achievements_yet">%s huet nach keng Kontributioune gemaach</string>
   <string name="account_created">Benotzerkont ugeluecht!</string>
@@ -369,8 +382,10 @@
   <string name="missing_category">- Kategorien bei dëst Bild derbäisetze fir seng Notzbarkeet ze verbesseren.</string>
   <string name="missing_article">- Dëst Bild op den associéierte Wikipedia-Artikel derbäisetzen dee keng Biller huet.</string>
   <string name="add_picture_to_wikipedia_article_title">Bild op Wikipedia derbäisetzen</string>
+  <string name="add_picture_to_wikipedia_article_desc">Wëllt Dir dëst Bild an de Wikipedia-Artikel an der Sprooch %1$s derbäisetzen?</string>
   <string name="confirm">Confirméieren</string>
   <string name="instructions_title">Instruktiounen</string>
+  <string name="wikipedia_instructions_step_1">1. Benotzt de follgende Wikitext:</string>
   <string name="wikipedia_instructions_step_7">7.Den Artikel publizéieren</string>
   <string name="copy_wikicode_to_clipboard">De Wikicode an den Tëschespäicher kopéieren</string>
   <string name="pause">ënnerbriechen</string>
@@ -414,9 +429,12 @@
   <string name="done">Fäerdeg</string>
   <string name="back">Zréck</string>
   <string name="welcome_custom_selector_ok">Genial</string>
+  <string name="custom_selector_already_uploaded_image_text">Dëst Bild gouf schonn op Commons eropgelueden.</string>
   <string name="wlm_upload_info">Dëst Bild wäert beim Concours Wiki Loves Monuments agereecht ginn.</string>
   <string name="display_monuments">Monumenter weisen</string>
   <string name="learn_more">FIR MÉI ZE WËSSEN</string>
+  <string name="wlm_campaign_title">Wiki Loves Monuments</string>
+  <string name="wlm_campaign_description">Wiki Loves Monuments ass een internationale Fotosconcours fir Monumenter, dee vu Wikimedia organiséiert gëtt</string>
   <string name="need_permission">Autorisatioun gëtt gebraucht</string>
   <string name="contributions_of_user">Kontributioune vum Benotzer: %s</string>
   <string name="achievements_of_user">Leeschtunge vum Benotzer: %s</string>
