@@ -28,7 +28,7 @@ object DialogUtil {
         } catch (e: IllegalStateException) {
             Timber.e(e, "Could not show dialog.")
         }
-        return dialog;
+        return dialog
     }
 
     @JvmStatic
@@ -167,7 +167,7 @@ object DialogUtil {
          * will still show
          */
         if (customView?.parent != null) {
-            return null;
+            return null
         }
 
         return showSafely(activity, AlertDialog.Builder(activity).apply {
@@ -181,6 +181,6 @@ object DialogUtil {
             negativeButtonText?.let {
                 setNegativeButton(it) { _, _ -> onNegativeBtnClick?.run() }
             }
-        }.create());
+        }.create())
     }
 }
