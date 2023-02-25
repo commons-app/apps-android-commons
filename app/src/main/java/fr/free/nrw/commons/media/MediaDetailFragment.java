@@ -13,7 +13,6 @@ import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.
 import static fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources;
 
 import android.Manifest;
-import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -84,6 +83,7 @@ import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
 import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
+import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Single;
@@ -1126,15 +1126,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 spinner.setAdapter(languageAdapter);
                 spinner.setGravity(17);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setView(spinner);
-                builder.setTitle(R.string.nominate_delete)
-                    .setPositiveButton(R.string.about_translate_proceed,
-                        (dialog, which) -> onDeleteClicked(spinner));
-                builder.setNegativeButton(R.string.about_translate_cancel,
-                    (dialog, which) -> dialog.dismiss());
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                AlertDialog dialog = DialogUtil.showAlertDialog(getActivity(),
+                    getString(R.string.nominate_delete),
+                    null,
+                    getString(R.string.about_translate_proceed),
+                    getString(R.string.about_translate_cancel),
+                    () -> onDeleteClicked(spinner),
+                    () -> {},
+                    spinner,
+                    true);
                 if (isDeleted) {
                     dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
                 }
@@ -1143,19 +1143,20 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             //But how does this  if (delete.getVisibility() == View.VISIBLE) {
             //            enableDeleteButton(true);   makes sense ?
             else {
-                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-                alert.setMessage(
-                    getString(R.string.dialog_box_text_nomination, media.getDisplayTitle()));
                 final EditText input = new EditText(getActivity());
-                alert.setView(input);
                 input.requestFocus();
-                alert.setPositiveButton(R.string.ok, (dialog1, whichButton) -> {
-                    String reason = input.getText().toString();
-                    onDeleteClickeddialogtext(reason);
-                });
-                alert.setNegativeButton(R.string.cancel, (dialog12, whichButton) -> {
-                });
-                AlertDialog d = alert.create();
+                AlertDialog d = DialogUtil.showAlertDialog(getActivity(),
+                    null,
+                    getString(R.string.dialog_box_text_nomination, media.getDisplayTitle()),
+                    getString(R.string.ok),
+                    getString(R.string.cancel),
+                    () -> {
+                        String reason = input.getText().toString();
+                        onDeleteClickeddialogtext(reason);
+                    },
+                    () -> {},
+                    input,
+                    true);
                 input.addTextChangedListener(new TextWatcher() {
                     private void handleText() {
                         final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -1179,7 +1180,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
                     }
                 });
-                d.show();
                 d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
             }
         }
