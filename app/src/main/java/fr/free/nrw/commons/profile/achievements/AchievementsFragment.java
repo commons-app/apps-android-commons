@@ -422,8 +422,10 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         thanksReceived.setText(String.valueOf(achievements.getThanksReceived()));
         imagesUsedByWikiProgressBar.setProgress
                 (100 * achievements.getUniqueUsedImages() / levelInfo.getMaxUniqueImages());
-        imagesUsedByWikiTextview.setText
-            (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
+        if(imagesUsedByWikiTextview != null) {
+            imagesUsedByWikiTextview.setText
+                (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
+        }
         imagesFeatured.setText(String.valueOf(achievements.getFeaturedImages()));
         tvQualityImages.setText(String.valueOf(achievements.getQualityImages()));
         String levelUpInfoString = getString(R.string.level).toUpperCase();
