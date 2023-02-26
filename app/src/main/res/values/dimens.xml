@@ -32,6 +32,7 @@
     <dimen name="very_large_height">240dp</dimen>
     <dimen name="fragment_height">48dp</dimen>
     <dimen name="filter_padding">15dp</dimen>
+    <dimen name="progressbar_padding">3.5dp</dimen>
 
     <!-- Component sizes -->
     <dimen name="overflow_icon_dimen">56dp</dimen>
@@ -52,7 +53,7 @@
     <dimen name="first_fab">15dp</dimen>
     <dimen name="second_fab">25dp</dimen>
     <dimen name="subtitle_text">12sp</dimen>
-    <dimen name="progressbar_text">9dp</dimen>
+    <dimen name="progressbar_text">9sp</dimen>
 
     <!-- App widget margin -->
     <dimen name="widget_margin">0dp</dimen>
