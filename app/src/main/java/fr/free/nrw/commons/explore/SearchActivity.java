@@ -227,7 +227,7 @@ public class SearchActivity extends BaseActivity
                     .beginTransaction()
                     .hide(supportFragmentManager.getFragments().get(supportFragmentManager.getBackStackEntryCount()))
                     .add(R.id.mediaContainer, mediaDetails)
-                    .addToBackStack(searchMediaFragment.getClass().getName())
+                    .addToBackStack(null)
                     .commit();
             // Reason for using hide, add instead of replace is to maintain scroll position after
             // coming back to the search activity. See https://github.com/commons-app/apps-android-commons/issues/1631
@@ -268,7 +268,8 @@ public class SearchActivity extends BaseActivity
                 .commit();
             supportFragmentManager.popBackStack();
             supportFragmentManager.executePendingTransactions();
-        } else if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+        }
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
             // back to search so show search toolbar and hide navigation toolbar
             searchView.setVisibility(View.VISIBLE);//set the searchview
             tabLayout.setVisibility(View.VISIBLE);
