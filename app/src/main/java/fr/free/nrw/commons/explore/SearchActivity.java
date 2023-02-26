@@ -227,7 +227,7 @@ public class SearchActivity extends BaseActivity
                     .beginTransaction()
                     .hide(supportFragmentManager.getFragments().get(supportFragmentManager.getBackStackEntryCount()))
                     .add(R.id.mediaContainer, mediaDetails)
-                    .addToBackStack(null)
+                    .addToBackStack(searchMediaFragment.getClass().getName())
                     .commit();
             // Reason for using hide, add instead of replace is to maintain scroll position after
             // coming back to the search activity. See https://github.com/commons-app/apps-android-commons/issues/1631

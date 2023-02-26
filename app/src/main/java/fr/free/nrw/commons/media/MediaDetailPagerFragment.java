@@ -192,7 +192,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 //Add media detail to backstack when the share button is clicked
                 //So that when the share is cancelled or completed the media detail page is on top
                 // of back stack fixing:https://github.com/commons-app/apps-android-commons/issues/2296
-                final FragmentManager supportFragmentManager = getActivity().getSupportFragmentManager();
+                FragmentManager supportFragmentManager = getActivity().getSupportFragmentManager();
                 if (supportFragmentManager.getBackStackEntryCount() < 2) {
                     supportFragmentManager
                         .beginTransaction()
