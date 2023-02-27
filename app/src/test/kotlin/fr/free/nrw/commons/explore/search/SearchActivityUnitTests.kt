@@ -26,6 +26,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito.times
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.api.mockito.PowerMockito.mock
@@ -124,7 +125,7 @@ class SearchActivityUnitTests {
         `when`(mFragments.supportFragmentManager).thenReturn(supportFragmentManager)
         `when`(supportFragmentManager.backStackEntryCount).thenReturn(0)
         activity.onBackPressed()
-        verify(supportFragmentManager).backStackEntryCount
+        verify(supportFragmentManager, times(2)).backStackEntryCount
     }
 
     @Test

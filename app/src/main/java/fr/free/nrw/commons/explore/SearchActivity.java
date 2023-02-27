@@ -222,7 +222,6 @@ public class SearchActivity extends BaseActivity
         if (mediaDetails == null || !mediaDetails.isVisible()) {
             // set isFeaturedImage true for featured images, to include author field on media detail
             mediaDetails = new MediaDetailPagerFragment(false, true);
-            FragmentManager supportFragmentManager = getSupportFragmentManager();
             supportFragmentManager
                     .beginTransaction()
                     .hide(supportFragmentManager.getFragments().get(supportFragmentManager.getBackStackEntryCount()))
@@ -261,7 +260,6 @@ public class SearchActivity extends BaseActivity
         //Remove the backstack entry that gets added when share button is clicked
         //fixing:https://github.com/commons-app/apps-android-commons/issues/2296
         if (getSupportFragmentManager().getBackStackEntryCount() == 2) {
-            FragmentManager supportFragmentManager = getSupportFragmentManager();
             supportFragmentManager
                 .beginTransaction()
                 .remove(mediaDetails)
