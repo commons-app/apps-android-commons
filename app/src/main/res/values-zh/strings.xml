@@ -53,9 +53,9 @@
   <string name="commons_logo">共享资源标志</string>
   <string name="commons_website">共享资源网站</string>
   <string name="exit_location_picker">退出位置拾取器</string>
-  <string name="submit">发布</string>
-  <string name="add_another_description">添加别的描述</string>
-  <string name="add_new_contribution">添加新的贡献</string>
+  <string name="submit">提交</string>
+  <string name="add_another_description">添加其他说明</string>
+  <string name="add_new_contribution">新增贡献</string>
   <string name="add_contribution_from_camera">从相机添加贡献</string>
   <string name="add_contribution_from_photos">从相册添加贡献</string>
   <string name="add_contribution_from_contributions_gallery">从以往贡献图库添加贡献</string>
@@ -63,7 +63,7 @@
   <string name="row_item_language_description">语言描述</string>
   <string name="row_item_caption">说明</string>
   <string name="show_captions_description">描述</string>
-  <string name="nearby_row_image">图片</string>
+  <string name="nearby_row_image">图像</string>
   <string name="nearby_all">全部</string>
   <string name="nearby_filter_toggle">向上切换</string>
   <string name="nearby_filter_search">搜索视图</string>
@@ -224,8 +224,8 @@
   <string name="detail_panel_cats_label">分类</string>
   <string name="detail_panel_cats_loading">正在加载……</string>
   <string name="detail_panel_cats_none">未选择</string>
-  <string name="detail_caption_empty">无字幕</string>
-  <string name="detail_description_empty">没有说明</string>
+  <string name="detail_caption_empty">没有说明</string>
+  <string name="detail_description_empty">没有描述</string>
   <string name="detail_discussion_empty">没有讨论</string>
   <string name="detail_license_empty">未知许可协议</string>
   <string name="menu_refresh">刷新</string>
@@ -461,7 +461,7 @@
   <string name="nearby_campaign_dismiss_message">你不会再看到这个活动。如果需要可以在设置里重新启用此通知。</string>
   <string name="this_function_needs_network_connection">这个功能需要网络连接，请检查你的网络设置。</string>
   <string name="error_processing_image">处理图像时出错。请再试一次！</string>
-  <string name="getting_edit_token">获取编辑标记</string>
+  <string name="getting_edit_token">获取编辑令牌</string>
   <string name="check_category_adding_template">添加类别检查模板</string>
   <string name="check_category_notification_title">请求对%1$s进行类别检查</string>
   <string name="check_category_edit_summary">请求类别检查</string>
@@ -651,7 +651,7 @@
   <string name="limited_connection_enabled">限制连接模式已启用！</string>
   <string name="limited_connection_disabled">限制连接模式已禁用。挂起的上传将会立即恢复。</string>
   <string name="limited_connection_mode">限制连接模式</string>
-  <string name="statistics_quality">品质图像</string>
+  <string name="statistics_quality">优良图片</string>
   <string name="quality_images_info">品质图像是符合一定质量标准（本质上大多是技术性的）的图表或照片，它们对维基媒体计划很有价值</string>
   <string name="resuming_upload">正在恢复上传...</string>
   <string name="pausing_upload">暂停上传...</string>
