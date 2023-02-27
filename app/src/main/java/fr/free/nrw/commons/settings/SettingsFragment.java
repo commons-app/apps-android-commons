@@ -162,12 +162,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             findPreference("managed_exif_tags").setEnabled(false);
         }
 
-        findPreference("telemetryOptOut").setOnPreferenceChangeListener(
-            (preference, newValue) -> {
-                telemetryOptInOut((boolean)newValue);
-                defaultKvStore.putBoolean(Prefs.TELEMETRY_PREFERENCE,(boolean)newValue);
-                return true;
-            });
+        // Opting out of telemetry due to app's privacy policy
+        telemetryOptInOut(false);
+        defaultKvStore.putBoolean(Prefs.TELEMETRY_PREFERENCE,false);
     }
 
     /**

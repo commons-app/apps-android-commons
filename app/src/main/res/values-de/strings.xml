@@ -626,8 +626,6 @@
   <string name="leaderboard_nearby">In der Nähe</string>
   <string name="leaderboard_used">Verwendet</string>
   <string name="leaderboard_my_rank_button_text">Mein Rang</string>
-  <string name="mapbox_telemetry">Mapbox-Telemetrie</string>
-  <string name="telemetry_opt_out_summary">Senden von anonymisierten Standort- und Nutzungsdaten an Mapbox bei Verwendung der In-der-Nähe-Funktion</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Verbessere diese Karte&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Begrenzter Verbindungsmodus aktiviert!</string>
   <string name="limited_connection_disabled">Eingeschränkter Verbindungsmodus deaktiviert. Ausstehende Uploads werden jetzt fortgesetzt.</string>

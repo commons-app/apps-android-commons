@@ -82,14 +82,6 @@
           app:singleLineTitle="false"
           android:summary="@string/manage_exif_tags_summary"
           android:title="@string/manage_exif_tags" />
-
-        <SwitchPreference
-          android:defaultValue="true"
-          android:key="telemetryOptOut"
-          app:singleLineTitle="false"
-          android:summary="@string/telemetry_opt_out_summary"
-          android:title="@string/mapbox_telemetry" />
-
     </PreferenceCategory>
 
     <!-- The key 'allowGps' was used before and has since been removed based on the discussion at #1599.

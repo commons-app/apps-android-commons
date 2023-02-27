@@ -626,8 +626,6 @@
   <string name="leaderboard_nearby">W pobliżu</string>
   <string name="leaderboard_used">Użyj</string>
   <string name="leaderboard_my_rank_button_text">Moja Ranga</string>
-  <string name="mapbox_telemetry">Telemetria Mapbox</string>
-  <string name="telemetry_opt_out_summary">Wysyłaj anonimowe dane o lokalizacji i wykorzystywaniu danych do Mapboxa, gdy używasz funkcji „W pobliżu”</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Ulepsz tę mapę&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Tryb ograniczonego połączenia włączony!</string>
   <string name="limited_connection_disabled">Tryb ograniczonego połączenia wyłączony. Przesyłanie oczekujące zostanie teraz wznowione.</string>
