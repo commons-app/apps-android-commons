@@ -188,6 +188,18 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 shareIntent.setType("text/plain");
                 shareIntent.putExtra(Intent.EXTRA_TEXT, m.getDisplayTitle() + " \n" + m.getPageTitle().getCanonicalUri());
                 startActivity(Intent.createChooser(shareIntent, "Share image via..."));
+
+                //Add media detail to backstack when the share button is clicked
+                //So that when the share is cancelled or completed the media detail page is on top
+                // of back stack fixing:https://github.com/commons-app/apps-android-commons/issues/2296
+                FragmentManager supportFragmentManager = getActivity().getSupportFragmentManager();
+                if (supportFragmentManager.getBackStackEntryCount() < 2) {
+                    supportFragmentManager
+                        .beginTransaction()
+                        .addToBackStack(MediaDetailPagerFragment.class.getName())
+                        .commit();
+                    supportFragmentManager.executePendingTransactions();
+                }
                 return true;
             case R.id.menu_browser_current_image:
                 // View in browser
