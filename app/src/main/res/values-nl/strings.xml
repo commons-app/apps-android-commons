@@ -621,8 +621,6 @@
   <string name="leaderboard_nearby">In de buurt</string>
   <string name="leaderboard_used">Gebruikt</string>
   <string name="leaderboard_my_rank_button_text">Mijn ranking</string>
-  <string name="mapbox_telemetry">Mapbox-telemetrie</string>
-  <string name="telemetry_opt_out_summary">Stuur geanonimiseerde locatie- en gebruiksgegevens naar Mapbox bij gebruik van de functie In de buurt</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Verbeter deze kaart&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Beperkte verbindingsmodus ingeschakeld!</string>
   <string name="limited_connection_disabled">Beperkte verbindingsmodus uitgeschakeld. Uploads die in behandeling zijn, worden nu hervat.</string>

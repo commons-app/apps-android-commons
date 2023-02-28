@@ -605,8 +605,6 @@
   <string name="leaderboard_nearby">Sekitaran</string>
   <string name="leaderboard_used">Digunakan</string>
   <string name="leaderboard_my_rank_button_text">Peringkat Saya</string>
-  <string name="mapbox_telemetry">Telemetri Mapbox</string>
-  <string name="telemetry_opt_out_summary">Mengirim lokasi anonim dan data penggunaan ke Mapbox ketika menggunakan fitur Sekitaran</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Perbaiki peta ini&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Mode sambungan terbatas diaktifkan!</string>
   <string name="limited_connection_disabled">Mode sambungan terbatas dimatikan. Unggahan dijeda akan dilanjutkan.</string>

@@ -620,8 +620,6 @@
   <string name="leaderboard_nearby">Próximo</string>
   <string name="leaderboard_used">Usado</string>
   <string name="leaderboard_my_rank_button_text">Minha classificação</string>
-  <string name="mapbox_telemetry">Telemetria do Mapbox</string>
-  <string name="telemetry_opt_out_summary">Enviar localização anônima e dados de uso para Mapbox ao usar o recurso nas proximidades</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Melhorar o mapa&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Modo de conexão limitada habilitado!</string>
   <string name="limited_connection_disabled">Modo de conexão limitada desativado. Os carregamentos pendentes serão retomados agora.</string>

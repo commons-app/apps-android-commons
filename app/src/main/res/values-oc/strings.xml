@@ -138,5 +138,4 @@
   <string name="theme_default_name" fuzzy="true">Per defaut</string>
   <string name="theme_dark_name">Fosc</string>
   <string name="theme_light_name">Clar</string>
-  <string name="mapbox_telemetry">Telemetria de Mapbox</string>
 </resources>

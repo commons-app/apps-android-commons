@@ -447,8 +447,6 @@
   <string name="leaderboard_nearby">কাছাকাছি</string>
   <string name="leaderboard_used">ব্যবহৃত</string>
   <string name="leaderboard_my_rank_button_text">আমার স্থান</string>
-  <string name="mapbox_telemetry">ম্যাপবক্স টেলিমেট্রি</string>
-  <string name="telemetry_opt_out_summary">কাছাকাছি বৈশিষ্ট্য ব্যবহার করার সময় ম্যাপবক্সে বেনামে অবস্থান ও ব্যবহারের তথ্য পাঠান</string>
   <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;ম্যাপবক্স&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;ওপেনস্ট্রিটম্যাপ&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;এই মানচিত্রের উন্নয়ন করুন&lt;/a&gt;</string>
   <string name="limited_connection_enabled">সীমিত সংযোগ মোড সক্রিয় করা হয়েছে!</string>
   <string name="limited_connection_mode">সীমিত সংযোগ মোড</string>
