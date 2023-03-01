@@ -1,15 +1,21 @@
 package fr.free.nrw.commons.profile.leaderboard;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import butterknife.internal.DebouncingOnClickListener;
 import com.facebook.drawee.view.SimpleDraweeView;
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
+
 
 /**
  * This class extends RecyclerView.Adapter and creates the UserDetail section of the leaderboard
@@ -17,6 +23,9 @@ import fr.free.nrw.commons.R;
 public class UserDetailAdapter extends RecyclerView.Adapter<UserDetailAdapter.DataViewHolder> {
 
     private LeaderboardResponse leaderboardResponse;
+
+    //stores the username of current login
+    private String  currentLoginUserName="";
 
     public UserDetailAdapter(LeaderboardResponse leaderboardResponse) {
         this.leaderboardResponse = leaderboardResponse;
@@ -84,6 +93,23 @@ public class UserDetailAdapter extends RecyclerView.Adapter<UserDetailAdapter.Da
             holder.getContext().getResources().getString(R.string.count_prefix),
             leaderboardResponse.getCategoryCount()));
 
+        //When user tap on avatar shows the toast on how to change avatar
+        //fixing:https://github.com/commons-app/apps-android-commons/issues/47747
+        final AccountManager accountManager = AccountManager.get(username.getContext());
+        final Account[] allAccounts = accountManager.getAccountsByType(BuildConfig.ACCOUNT_TYPE);
+        if (allAccounts.length != 0) {
+            currentLoginUserName = allAccounts[0].name;
+        }
+        if (currentLoginUserName.equals(leaderboardResponse.getUsername())) {
+            avatar.setOnClickListener(new DebouncingOnClickListener() {
+                @Override
+                public void doClick(View v) {
+                    Toast.makeText(v.getContext(),
+                        "To set up your leaderboard avatar, tap Set as avatar in the three-dots menu of any image",
+                        Toast.LENGTH_LONG).show();
+                }
+            });
+        }
     }
 
     @Override
