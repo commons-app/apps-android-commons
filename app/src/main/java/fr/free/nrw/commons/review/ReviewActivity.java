@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -161,14 +162,35 @@ public class ReviewActivity extends BaseActivity {
         hasNonHiddenCategories = false;
         progressBar.setVisibility(View.VISIBLE);
         reviewPager.setCurrentItem(0);
+        // Finds non-hidden categories from Media instance
         compositeDisposable.add(reviewHelper.getRandomMedia()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(media -> {
-                    // Finds non-hidden categories from Media instance
-                    findNonHiddenCategories(media);
+                    Log.e("Media Fetched : " , media.getFilename());
+                    getGlobalUsage(media);
                 }));
         return true;
+    }
+
+    /**
+     * Get The Global Usage
+     *
+     */
+    @SuppressLint("CheckResult")
+    private void getGlobalUsage(final Media media) {
+        compositeDisposable.add(reviewHelper.getUsageOfFile(media.getFilename())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(result -> {
+                Log.e("Result : " , result+"");
+                // Finds non-hidden categories from Media instance
+                if (!result) {
+                    findNonHiddenCategories(media);
+                } else {
+                    runRandomizer();
+                }
+            }));
     }
 
     /**

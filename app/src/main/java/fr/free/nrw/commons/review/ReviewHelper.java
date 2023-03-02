@@ -101,6 +101,16 @@ public class ReviewHelper {
     }
 
     /**
+     * Get The Count of Global Usages Of file
+     *
+     * @return
+     */
+     Observable<Boolean> getUsageOfFile(final String filename) {
+         return reviewInterface.getGlobalUsageInfo(filename)
+             .map(mwQueryResponse -> mwQueryResponse.query().firstPage().checkFileInUse());
+     }
+
+    /**
      * Checks if the change is reviewable or not.
      * - checks the type and revisionId of the change
      * - checks supported image extensions

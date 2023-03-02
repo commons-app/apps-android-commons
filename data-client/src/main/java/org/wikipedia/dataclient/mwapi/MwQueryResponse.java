@@ -13,7 +13,7 @@ public class MwQueryResponse extends MwResponse {
 
     @SuppressWarnings("unused") @SerializedName("continue") @Nullable private Map<String, String> continuation;
 
-    @Nullable private MwQueryResult query;
+    @SerializedName("query") @Nullable private MwQueryResult query;
 
     public boolean batchComplete() {
         return batchComplete;
