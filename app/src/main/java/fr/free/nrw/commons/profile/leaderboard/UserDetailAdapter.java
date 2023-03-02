@@ -25,7 +25,7 @@ public class UserDetailAdapter extends RecyclerView.Adapter<UserDetailAdapter.Da
     private LeaderboardResponse leaderboardResponse;
 
     // stores the username of current login
-    private String  currentLoginUserName=null;
+    private String currentLoginUserName = null;
 
     public UserDetailAdapter(LeaderboardResponse leaderboardResponse) {
         this.leaderboardResponse = leaderboardResponse;
@@ -94,7 +94,7 @@ public class UserDetailAdapter extends RecyclerView.Adapter<UserDetailAdapter.Da
             leaderboardResponse.getCategoryCount()));
 
         // When user tap on avatar shows the toast on how to change avatar
-        // fixing:https://github.com/commons-app/apps-android-commons/issues/47747
+        // fixing: https://github.com/commons-app/apps-android-commons/issues/47747
         if (currentLoginUserName == null) {
             // check current login username is not fetched then fetch it
             final AccountManager accountManager = AccountManager.get(username.getContext());
