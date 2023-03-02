@@ -282,7 +282,7 @@
   <string name="login_alert_message">Za uporabo te možnosti se prijavite</string>
   <string name="copy_wikicode">Kopiraj vikibesedilo v odložišče</string>
   <string name="wikicode_copied">Vikibesedilo je skopirano v odložišče</string>
-  <string name="nearby_location_not_available">Bližnje morda ne bo pravilno delovalo. Kraj ni na voljo.</string>
+  <string name="nearby_location_not_available">Bližnje mogoče ne bo pravilno delovalo. Kraj ni na voljo.</string>
   <string name="location_permission_rationale_nearby">Za prikaz seznama bložnjih krajev je potrebno dovoljenje</string>
   <string name="nearby_directions">Smeri</string>
   <string name="nearby_wikidata">Wikipodatki</string>
