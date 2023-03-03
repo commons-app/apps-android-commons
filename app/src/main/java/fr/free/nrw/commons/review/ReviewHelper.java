@@ -101,13 +101,16 @@ public class ReviewHelper {
     }
 
     /**
-     * Get The Count of Global Usages Of file
+     * Checks Whether Given File is used in any Wiki page or not
+     * by calling api for given file
      *
+     * @param filename
      * @return
      */
-     Observable<Boolean> getUsageOfFile(final String filename) {
+     Observable<Boolean> checkFileUsage(final String filename) {
          return reviewInterface.getGlobalUsageInfo(filename)
-             .map(mwQueryResponse -> mwQueryResponse.query().firstPage().checkFileInUse());
+             .map(mwQueryResponse -> mwQueryResponse.query().firstPage()
+                 .checkWhetherFileIsUsedInWikis());
      }
 
     /**

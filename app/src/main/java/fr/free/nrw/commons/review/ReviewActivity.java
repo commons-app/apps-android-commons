@@ -166,26 +166,22 @@ public class ReviewActivity extends BaseActivity {
         compositeDisposable.add(reviewHelper.getRandomMedia()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(media -> {
-                    Log.e("Media Fetched : " , media.getFilename());
-                    getGlobalUsage(media);
-                }));
+                .subscribe(this::checkUsageOfMedia));
         return true;
     }
 
     /**
-     * Get The Global Usage
-     *
+     * Check whether media is used or not in any Wiki Page
      */
     @SuppressLint("CheckResult")
-    private void getGlobalUsage(final Media media) {
-        compositeDisposable.add(reviewHelper.getUsageOfFile(media.getFilename())
+    private void checkUsageOfMedia(final Media media) {
+        compositeDisposable.add(reviewHelper.checkFileUsage(media.getFilename())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(result -> {
-                Log.e("Result : " , result+"");
-                // Finds non-hidden categories from Media instance
+                // result false indicates media is not used in any wiki
                 if (!result) {
+                    // Finds non-hidden categories from Media instance
                     findNonHiddenCategories(media);
                 } else {
                     runRandomizer();

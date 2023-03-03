@@ -151,29 +151,25 @@ public class MwQueryPage extends BaseModel {
         title += "#" + fragment;
     }
 
-    public boolean checkFileInUse() {
+    public boolean checkWhetherFileIsUsedInWikis() {
         if (globalUsages == null || globalUsages.size() == 0) {
-            return checkUseInFileUsage();
+            if (fileUsages == null || fileUsages.size() == 0) {
+                return false;
+            }
+
+            final int totalCount = fileUsages.size();
+            int ignoreCount = 0;
+
+            for (final FileUsage cur : fileUsages) {
+                if (cur.title().contains("User:Didym/Mobile upload")) {
+                    ignoreCount++;
+                }
+            }
+
+            return !(ignoreCount == totalCount);
         }
 
         return true;
-    }
-
-    public boolean checkUseInFileUsage() {
-        if (fileUsages == null || fileUsages.size() == 0) {
-            return false;
-        }
-
-        final int totalCount = fileUsages.size();
-        int ignoreCount = 0;
-
-        for (final FileUsage cur : fileUsages) {
-            if (cur.title().contains("User:Didym/Mobile upload")) {
-                ignoreCount++;
-            }
-        }
-
-        return !(ignoreCount == totalCount);
     }
 
     public static class Revision {
