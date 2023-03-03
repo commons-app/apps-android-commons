@@ -166,7 +166,7 @@ public class ReviewActivity extends BaseActivity {
         compositeDisposable.add(reviewHelper.getRandomMedia()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::checkUsageOfMedia));
+                .subscribe(this::checkWhetherFileIsUsedInWikis));
         return true;
     }
 
@@ -174,7 +174,7 @@ public class ReviewActivity extends BaseActivity {
      * Check whether media is used or not in any Wiki Page
      */
     @SuppressLint("CheckResult")
-    private void checkUsageOfMedia(final Media media) {
+    private void checkWhetherFileIsUsedInWikis(final Media media) {
         compositeDisposable.add(reviewHelper.checkFileUsage(media.getFilename())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
