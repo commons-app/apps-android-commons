@@ -274,7 +274,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public void onNearbyPlaceFound(UploadItem uploadItem, Place place) {
         nearbyPlace = place;
         this.uploadItem = uploadItem;
-        showNearbyFound = true;
+        showNearbyFound = false;
         if(callback.getIndexInViewFlipper(this) == 0) {
             if (UploadActivity.nearbyPopupAnswers.containsKey(nearbyPlace)) {
                 final boolean response = UploadActivity.nearbyPopupAnswers.get(nearbyPlace);
