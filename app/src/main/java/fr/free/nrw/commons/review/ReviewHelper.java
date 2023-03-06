@@ -31,20 +31,14 @@ public class ReviewHelper {
 
     /**
      * Fetches recent changes from MediaWiki API
-     * Calls the API to get 10 changes in the last 1 hour
-     * Earlier we were getting changes for the last 30 days but as the API returns just 10 results
-     * its best to fetch for just last 1 hour.
+     * Calls the API to get the latest 20 changes
+     * When more results are available, the query gets continued beyond this range
+     * The query uses the default value of rccontinue
      *
      * @return
      */
     private Observable<RecentChange> getRecentChanges() {
-        final int RANDOM_SECONDS = 60 * 60;
-        Random r = new Random();
-        Date now = new Date();
-        Date startDate = new Date(now.getTime() - r.nextInt(RANDOM_SECONDS) * 1000L);
-
-        String rcStart = DateUtil.iso8601DateFormat(startDate);
-        return reviewInterface.getRecentChanges(rcStart)
+        return reviewInterface.getRecentChanges()
                 .map(mwQueryResponse -> mwQueryResponse.query().getRecentChanges())
                 .map(recentChanges -> {
                     Collections.shuffle(recentChanges);

@@ -54,7 +54,7 @@ class ReviewHelperTest {
         `when`(mwQueryResult.pages()).thenReturn(listOf(mwQueryPage))
         val mockResponse = mock(MwQueryResponse::class.java)
         `when`(mockResponse.query()).thenReturn(mwQueryResult)
-        `when`(reviewInterface?.getRecentChanges(ArgumentMatchers.anyString()))
+        `when`(reviewInterface?.getRecentChanges())
                 .thenReturn(Observable.just(mockResponse))
 
         `when`(reviewInterface?.getFirstRevisionOfFile(ArgumentMatchers.anyString()))
@@ -78,7 +78,7 @@ class ReviewHelperTest {
                 .thenReturn(Single.just(false))
 
         reviewHelper?.randomMedia
-        verify(reviewInterface, times(1))!!.getRecentChanges(ArgumentMatchers.anyString())
+        verify(reviewInterface, times(1))!!.getRecentChanges()
     }
 
     /**
@@ -90,7 +90,7 @@ class ReviewHelperTest {
                 .thenReturn(Single.just(true))
         val media = reviewHelper?.randomMedia?.blockingGet()
         assertNull(media)
-        verify(reviewInterface, times(1))!!.getRecentChanges(ArgumentMatchers.anyString())
+        verify(reviewInterface, times(1))!!.getRecentChanges()
     }
 
     /**
@@ -106,7 +106,7 @@ class ReviewHelperTest {
                 .thenReturn(Single.just(true))
 
         reviewHelper?.randomMedia
-        verify(reviewInterface, times(1))!!.getRecentChanges(ArgumentMatchers.anyString())
+        verify(reviewInterface, times(1))!!.getRecentChanges()
     }
 
     private fun getMockRecentChange(type: String, title: String, oldRevisionId: Long): RecentChange {
