@@ -161,17 +161,16 @@ public class MwQueryPage extends BaseModel {
         }
 
         final int totalCount = fileUsages.size();
-        int ignoreCount = 0;
 
         /* Ignore usage under https://commons.wikimedia.org/wiki/User:Didym/Mobile_upload/
            which has been a gallery of all of our uploads since 2014 */
-        for (final FileUsage cur : fileUsages) {
-            if (cur.title().contains("User:Didym/Mobile upload")) {
-                ignoreCount++;
+        for (final FileUsage fileUsage : fileUsages) {
+            if ( ! fileUsage.title().contains("User:Didym/Mobile upload")) {
+                return true;
             }
         }
 
-        return !(ignoreCount == totalCount);
+        return false;
     }
 
     public static class Revision {
