@@ -24,8 +24,10 @@ public class UserDetailAdapter extends RecyclerView.Adapter<UserDetailAdapter.Da
 
     private LeaderboardResponse leaderboardResponse;
 
-    // stores the username of current login
-    private String currentLoginUserName = null;
+    /**
+     * Stores the username of currently logged in user.
+     */
+    private String currentlyLoggedInUserName = null;
 
     public UserDetailAdapter(LeaderboardResponse leaderboardResponse) {
         this.leaderboardResponse = leaderboardResponse;
@@ -95,16 +97,16 @@ public class UserDetailAdapter extends RecyclerView.Adapter<UserDetailAdapter.Da
 
         // When user tap on avatar shows the toast on how to change avatar
         // fixing: https://github.com/commons-app/apps-android-commons/issues/47747
-        if (currentLoginUserName == null) {
-            // check current login username is not fetched then fetch it
+        if (currentlyLoggedInUserName == null) {
+            // If the current login username has not been fetched yet, then fetch it.
             final AccountManager accountManager = AccountManager.get(username.getContext());
             final Account[] allAccounts = accountManager.getAccountsByType(
                 BuildConfig.ACCOUNT_TYPE);
             if (allAccounts.length != 0) {
-                currentLoginUserName = allAccounts[0].name;
+                currentlyLoggedInUserName = allAccounts[0].name;
             }
         }
-        if (currentLoginUserName != null && currentLoginUserName.equals(
+        if (currentlyLoggedInUserName != null && currentlyLoggedInUserName.equals(
             leaderboardResponse.getUsername())) {
             avatar.setOnClickListener(new DebouncingOnClickListener() {
                 @Override
