@@ -138,6 +138,18 @@ class ImageLoader @Inject constructor(
                             is Result.TRUE -> {
                                 mapResult[imageSHA1] = Result.TRUE
                             }
+                            is Result.ERROR -> {
+                                mapResult[imageSHA1] = Result.ERROR
+                            }
+                            is Result.FALSE -> {
+                                mapResult[imageSHA1] = Result.FALSE
+                            }
+                            is Result.INVALID -> {
+                                mapResult[imageSHA1] = Result.INVALID
+                            }
+                            is Result.NOTFOUND -> {
+                                mapResult[imageSHA1] = Result.NOTFOUND
+                            }
                         }
                     }
                     else -> {
@@ -159,6 +171,18 @@ class ImageLoader @Inject constructor(
                             when (result) {
                                 is Result.TRUE -> {
                                     mapResult[sha1] = Result.TRUE
+                                }
+                                is Result.ERROR -> {
+                                    mapResult[sha1] = Result.ERROR
+                                }
+                                is Result.FALSE -> {
+                                    mapResult[sha1] = Result.FALSE
+                                }
+                                is Result.INVALID -> {
+                                    mapResult[sha1] = Result.INVALID
+                                }
+                                is Result.NOTFOUND -> {
+                                    mapResult[sha1] = Result.NOTFOUND
                                 }
                             }
                         }
