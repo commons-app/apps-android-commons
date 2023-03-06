@@ -721,5 +721,5 @@
   <string name="request_user_block">Verzoek om deze gebruiker te blokkeren</string>
   <string name="welcome_to_full_screen_mode_text">Welkom bij de selectiemodus op volledig scherm</string>
   <string name="full_screen_mode_zoom_info">Gebruik twee vingers om in en uit te zoomen.</string>
-  <string name="full_screen_mode_features_info">Veeg snel en lang om deze acties uit te voeren: \n- Links/Rechts: Naar vorige/volgende gaan\n- Omhoog: Selecteren\n- Omlaag: Als niet voor uploaden markeren</string>
+  <string name="full_screen_mode_features_info">Veeg snel en lang om deze handelingen te verrichten: \n- Links/Rechts: Naar vorige/volgende gaan\n- Omhoog: Selecteren\n- Omlaag: Als niet voor uploaden markeren</string>
 </resources>

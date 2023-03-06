@@ -499,8 +499,8 @@
   <string name="delete_helper_show_deletion_title_failed">Gagal</string>
   <string name="delete_helper_show_deletion_message_else">Tidak dapat meminta penghapusan.</string>
   <string name="delete_helper_ask_spam_selfie" fuzzy="true">Foto selfi</string>
-  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Buram</string>
-  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Omong kosong</string>
+  <string name="delete_helper_ask_spam_blurry">buram sekali</string>
+  <string name="delete_helper_ask_spam_nonsense">omong kosong, sama sekali tak bisa digunakan dalam artikel manapun</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Tekan foto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Foto acak dari internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
@@ -693,6 +693,7 @@
   <string name="no_more_images_found">Tidak ada lagi gambar ditemukan</string>
   <string name="this_image_is_already_uploaded">Gambar ini sudah diunggah</string>
   <string name="can_not_select_this_image_for_upload">Tidak dapat memilih gambar ini untuk diunggah</string>
+  <string name="image_selected">Gambar dipilih</string>
   <string name="menu_view_report">Laporkan</string>
   <string name="report_violation">Laporkan pelanggaran</string>
   <string name="report_user">Laporkan pengguna ini</string>

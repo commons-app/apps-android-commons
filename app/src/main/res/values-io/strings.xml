@@ -113,6 +113,7 @@
   <string name="tutorial_3_subtext_2">Imaji quin vu kopiis del interreto</string>
   <string name="tutorial_4_subtext_1">Titulo: L\'opero-domo di Sydney</string>
   <string name="tutorial_4_subtext_2">Deskripturo: L\'opero-domo di Sydney, vidita trans la bayo</string>
+  <string name="welcome_wikipedia_text">Kontributez kun vua imaji. Helpez artikli de Wikipedia esar vivanta!</string>
   <string name="welcome_final_button_text">Yes!</string>
   <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Plusa informo&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Kategorii</string>
