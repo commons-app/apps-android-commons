@@ -25,6 +25,8 @@ public class MwQueryPage extends BaseModel {
     @SuppressWarnings("unused,NullableProblems") @NonNull private CategoryInfo categoryinfo;
     @SuppressWarnings("unused") @Nullable private List<LangLink> langlinks;
     @SuppressWarnings("unused") @Nullable private List<Revision> revisions;
+    @SuppressWarnings("unused") @SerializedName("fileusage") @Nullable private List<FileUsage> fileUsages;
+    @SuppressWarnings("unused") @SerializedName("globalusage") @Nullable private List<GlobalUsage> globalUsages;
     @SuppressWarnings("unused") @Nullable private List<Coordinates> coordinates;
     @SuppressWarnings("unused") @Nullable private List<Category> categories;
     @SuppressWarnings("unused") @Nullable private PageProps pageprops;
@@ -65,6 +67,14 @@ public class MwQueryPage extends BaseModel {
 
     @Nullable public List<Category> categories() {
         return categories;
+    }
+
+    @Nullable public List<GlobalUsage> globalUsages() {
+        return globalUsages;
+    }
+
+    @Nullable public List<FileUsage> fileUsages() {
+        return fileUsages;
     }
 
     @Nullable public List<Coordinates> coordinates() {
@@ -139,6 +149,28 @@ public class MwQueryPage extends BaseModel {
 
     public void appendTitleFragment(@Nullable String fragment) {
         title += "#" + fragment;
+    }
+
+    public boolean checkWhetherFileIsUsedInWikis() {
+        if (globalUsages != null && globalUsages.size() > 0) {
+            return true;
+        }
+
+        if (fileUsages == null || fileUsages.size() == 0) {
+            return false;
+        }
+
+        final int totalCount = fileUsages.size();
+
+        /* Ignore usage under https://commons.wikimedia.org/wiki/User:Didym/Mobile_upload/
+           which has been a gallery of all of our uploads since 2014 */
+        for (final FileUsage fileUsage : fileUsages) {
+            if ( ! fileUsage.title().contains("User:Didym/Mobile upload")) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public static class Revision {
@@ -225,6 +257,44 @@ public class MwQueryPage extends BaseModel {
 
         public boolean isDisambiguation() {
             return disambiguation != null;
+        }
+    }
+
+    public static class GlobalUsage {
+        @SerializedName("title") private String title;
+        @SerializedName("wiki")private String wiki;
+        @SerializedName("url") private String url;
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getWiki() {
+            return wiki;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+
+    }
+
+    public static class FileUsage {
+        @SerializedName("pageid") private int pageid;
+        @SerializedName("ns") private int ns;
+        @SerializedName("title") private String title;
+
+        public int pageId() {
+            return pageid;
+        }
+
+        public int ns() {
+            return ns;
+        }
+
+        public String title() {
+            return title;
         }
     }
 

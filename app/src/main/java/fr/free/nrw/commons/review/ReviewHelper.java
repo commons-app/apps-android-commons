@@ -101,6 +101,19 @@ public class ReviewHelper {
     }
 
     /**
+     * Checks Whether Given File is used in any Wiki page or not
+     * by calling api for given file
+     *
+     * @param filename
+     * @return
+     */
+     Observable<Boolean> checkFileUsage(final String filename) {
+         return reviewInterface.getGlobalUsageInfo(filename)
+             .map(mwQueryResponse -> mwQueryResponse.query().firstPage()
+                 .checkWhetherFileIsUsedInWikis());
+     }
+
+    /**
      * Checks if the change is reviewable or not.
      * - checks the type and revisionId of the change
      * - checks supported image extensions

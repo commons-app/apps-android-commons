@@ -15,4 +15,7 @@ public interface ReviewInterface {
 
     @GET("w/api.php?action=query&format=json&formatversion=2&prop=revisions&rvprop=timestamp|ids|user&rvdir=newer&rvlimit=1")
     Observable<MwQueryResponse> getFirstRevisionOfFile(@Query("titles") String titles);
+
+    @GET("w/api.php?action=query&format=json&formatversion=2&prop=fileusage|globalusage")
+    Observable<MwQueryResponse> getGlobalUsageInfo(@Query("titles") String title);
 }

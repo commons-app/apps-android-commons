@@ -23,7 +23,7 @@ import java.util.Map;
 
 @SuppressWarnings("unused")
 public class MwQueryResult extends BaseModel implements PostProcessingTypeAdapter.PostProcessable {
-    @Nullable private List<MwQueryPage> pages;
+    @SerializedName("pages") @Nullable private List<MwQueryPage> pages;
     @Nullable private List<Redirect> redirects;
     @Nullable private List<ConvertedTitle> converted;
     @SerializedName("userinfo") private UserInfo userInfo;
