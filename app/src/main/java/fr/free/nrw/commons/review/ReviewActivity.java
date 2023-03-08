@@ -113,6 +113,7 @@ public class ReviewActivity extends BaseActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        
         reviewController = new ReviewController(deleteHelper, this);
 
         reviewPagerAdapter = new ReviewPagerAdapter(getSupportFragmentManager());
