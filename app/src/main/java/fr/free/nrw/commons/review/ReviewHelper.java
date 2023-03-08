@@ -145,7 +145,7 @@ public class ReviewHelper {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(() -> {
                 // Inserted successfully
-                Timber.e("Image inserted successfully.");
+                Timber.i("Image inserted successfully.");
                 },
                 throwable -> {
                     Timber.e("Image not inserted into the reviewed images database");
