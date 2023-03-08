@@ -159,9 +159,9 @@ public class DeleteHelper {
         boolean[] checkedItems = {false, false, false, false};
         ArrayList<Integer> mUserReason = new ArrayList<>();
 
-        String[] reasonList = {"Reason 1", "Reason 2", "Reason 3"};
+        String[] reasonList = {"Reason 1", "Reason 2", "Reason 3", ""};
         // Messages posted on-wiki should not be in the app user's locale, but rather in Commons' lingua franca English.
-        String[] reasonListEnglish = {"Eng1", "Eng2", "Eng3"};
+        String[] reasonListEnglish = {"Eng1", "Eng2", "Eng3", ""};
 
         if (problem == ReviewController.DeleteReason.SPAM) {
             reasonList[0] = context.getString(R.string.delete_helper_ask_spam_selfie);
@@ -174,9 +174,11 @@ public class DeleteHelper {
             reasonList[0] = context.getString(R.string.delete_helper_ask_reason_copyright_press_photo);
             reasonList[1] = context.getString(R.string.delete_helper_ask_reason_copyright_internet_photo);
             reasonList[2] = context.getString(R.string.delete_helper_ask_reason_copyright_logo);
+            reasonList[3] = context.getString(R.string.delete_helper_ask_reason_copyright_no_freedom_of_panorama);
             reasonListEnglish[0] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_press_photo);
             reasonListEnglish[1] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_internet_photo);
             reasonListEnglish[2] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_logo);
+            reasonListEnglish[3] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_no_freedom_of_panorama);
         }
 
         alert.setMultiChoiceItems(reasonList, checkedItems, listener = (dialogInterface, position, isChecked) -> {
