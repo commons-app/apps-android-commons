@@ -4,13 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+/**
+ * Entity to store reviewed/skipped images identifier
+ */
 @Entity(tableName = "reviewed-images")
 public class ReviewEntity {
     @PrimaryKey
     @NonNull
-    String filename;
+    String imageId;
 
-    public ReviewEntity(String filename) {
-        this.filename = filename;
+    public ReviewEntity(String imageId) {
+        this.imageId = imageId;
     }
 }
