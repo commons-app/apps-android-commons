@@ -246,6 +246,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             public void onPositiveResponse() {
                 Timber.d("positive response from similar image fragment");
                 presenter.useSimilarPictureCoordinates(similarImageCoordinates, callback.getIndexInViewFlipper(UploadMediaDetailFragment.this));
+
+                // set the description text when user selects to use coordinate from the other image
+                // which was taken within 20s
+                // fixing: https://github.com/commons-app/apps-android-commons/issues/4700
+                uploadMediaDetailAdapter.getItems().get(0).setDescriptionText(
+                    getString(R.string.similar_coordinate_description_auto_set));
+                updateMediaDetails(uploadMediaDetailAdapter.getItems());
             }
 
             @Override
