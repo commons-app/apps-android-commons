@@ -9,11 +9,8 @@ import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import java.util.Collections;
-import java.util.Date;
-import java.util.Random;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import kotlin.jvm.Volatile;
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.dataclient.mwapi.MwQueryPage;
 import org.wikipedia.dataclient.mwapi.RecentChange;
@@ -27,8 +24,6 @@ public class ReviewHelper {
     private final MediaClient mediaClient;
     private final ReviewInterface reviewInterface;
 
-    @Volatile
-    static Boolean isReviewed = false;
     @Inject
     ReviewDao dao;
 
@@ -40,7 +35,7 @@ public class ReviewHelper {
 
     /**
      * Fetches recent changes from MediaWiki API
-     * Calls the API to get the latest 20 changes
+     * Calls the API to get the latest 10 changes
      * When more results are available, the query gets continued beyond this range
      * The query uses the default value of rccontinue
      *
@@ -70,7 +65,7 @@ public class ReviewHelper {
         return getRecentChanges()
                 .flatMapSingle(change -> getRandomMediaFromRecentChange(change))
                 .filter(media -> !StringUtils.isBlank(media.getFilename())
-                   && !isShownAlready(media.getPageId())    // Check if the image has already been shown to the user
+                   && !getReviewStatus(media.getPageId())    // Check if the image has already been shown to the user
                 )
                 .firstOrError();
     }
@@ -95,30 +90,15 @@ public class ReviewHelper {
     }
 
     /**
-     * Returns the review status of the image
-     *
-     * @param image
-     * @return
-     */
-    private boolean isShownAlready(String image){
-        getReviewStatus(image).subscribe(
-            isShown -> isReviewed = isShown
-        );
-        return isReviewed;
-    }
-
-    /**
      * Checks if the image exists in the reviewed images entity
      *
      * @param image
      * @return
      */
-    private Observable<Boolean> getReviewStatus(String image){
-        Observable<Boolean> reviewObservable = Observable.fromCallable(()->
-                                                dao.isReviewedAlready(image))
-                                                .subscribeOn(Schedulers.io())
-                                                .observeOn(AndroidSchedulers.mainThread());
-        return reviewObservable.observeOn(AndroidSchedulers.mainThread());
+    private Boolean getReviewStatus(String image){
+        return Observable.fromCallable(()-> dao.isReviewedAlready(image))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).blockingSingle();
     }
 
     /**
@@ -141,8 +121,7 @@ public class ReviewHelper {
      * @return
      */
     private boolean isChangeReviewable(RecentChange recentChange) {
-        if ((recentChange.getType().equals("log") && !(recentChange.getOldRevisionId() == 0))
-                || !recentChange.getType().equals("log")) {
+        if ((recentChange.getType().equals("log") && !(recentChange.getOldRevisionId() == 0))) {
             return false;
         }
 
@@ -166,6 +145,7 @@ public class ReviewHelper {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(() -> {
                 // Inserted successfully
+                Timber.e("Image inserted successfully.");
                 },
                 throwable -> {
                     Timber.e("Image not inserted into the reviewed images database");
