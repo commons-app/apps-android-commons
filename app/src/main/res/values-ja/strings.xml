@@ -23,6 +23,7 @@
 * Whym
 * Yusuke1109
 * Yuukin0248
+* もなー(偽物)
 * バレロン
 * 神樂坂秀吉
 -->
@@ -635,4 +636,5 @@
   <string name="report_violation">違反を報告</string>
   <string name="report_user">この利用者を報告</string>
   <string name="report_content">このコンテンツを報告する</string>
+  <string name="set_up_avatar_toast_string">リーダーボードのアバターを設定するには、任意の画像の 3 つのドット メニューで [アバターとして設定] をタップします。</string>
 </resources>

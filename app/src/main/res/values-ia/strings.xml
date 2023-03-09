@@ -58,4 +58,7 @@
   <string name="you_must_reset_your_passsword">Un error ha occurrite durante le apertura de session. Es necessari reinitialisar tu contrasigno.</string>
   <string name="title_app_shortcut_bookmark">Marcapaginas</string>
   <string name="title_app_shortcut_setting">Configurationes</string>
+  <string name="leaderboard_tab_title">Tabula de classamento</string>
+  <string name="menu_set_avatar">Eliger como avatar</string>
+  <string name="set_up_avatar_toast_string">Pro eliger tu avatar pro le tabula de classamento, tocca \"Eliger como avatar\" in le menu a tres punctos de qualcunque imagine.</string>
 </resources>

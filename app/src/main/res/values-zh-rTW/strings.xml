@@ -723,4 +723,5 @@
   <string name="welcome_to_full_screen_mode_text">歡迎使用全螢幕選擇模式</string>
   <string name="full_screen_mode_zoom_info">用兩根手指來放大和縮小。</string>
   <string name="full_screen_mode_features_info">快速長滑來執行以下操作：\n- 左/右：跳到上一張/下一張\n- 上：選擇\n- 下：標記為不上傳。</string>
+  <string name="set_up_avatar_toast_string">要設定您的排行榜頭像，請在任何圖片裡輕觸三點樣式選單中的「設定成頭像」。</string>
 </resources>

@@ -609,11 +609,11 @@
   <string name="leaderboard_column_rank">Ranking</string>
   <string name="leaderboard_column_user">Gebruiker</string>
   <string name="leaderboard_column_count">Aantal</string>
-  <string name="setting_avatar_dialog_title">Instellen als leaderboard-avatar</string>
-  <string name="setting_avatar_dialog_message">Instellen als avatar, even geduld aub</string>
+  <string name="setting_avatar_dialog_title">Als leaderboard-avatar instellen</string>
+  <string name="setting_avatar_dialog_message">Wordt als avatar ingesteld, even geduld a.u.b.</string>
   <string name="avatar_set_successfully">Avatar ingesteld</string>
   <string name="avatar_set_unsuccessfully">Fout bij instellen nieuwe avatar, probeer het opnieuw</string>
-  <string name="menu_set_avatar">Instellen als avatar</string>
+  <string name="menu_set_avatar">Als avatar instellen</string>
   <string name="leaderboard_yearly">Jaarlijks</string>
   <string name="leaderboard_weekly">Wekelijks</string>
   <string name="leaderboard_all_time">Alle tijden</string>
@@ -722,4 +722,5 @@
   <string name="welcome_to_full_screen_mode_text">Welkom bij de selectiemodus op volledig scherm</string>
   <string name="full_screen_mode_zoom_info">Gebruik twee vingers om in en uit te zoomen.</string>
   <string name="full_screen_mode_features_info">Veeg snel en lang om deze handelingen te verrichten: \n- Links/Rechts: Naar vorige/volgende gaan\n- Omhoog: Selecteren\n- Omlaag: Als niet voor uploaden markeren</string>
+  <string name="set_up_avatar_toast_string">Om uw leaderboard-avatar te kiezen tikt u op \"Als avatar instellen\" in het driestippenmenu van een afbeelding.</string>
 </resources>

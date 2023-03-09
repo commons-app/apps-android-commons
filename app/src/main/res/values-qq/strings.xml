@@ -5,6 +5,7 @@
 * LeGuyanaisPure
 * Liuxinyu970226
 * Madhurgupta10
+* McDutchie
 * Minh Nguyen
 * MuratTheTurkish
 * Nemo bis
@@ -185,4 +186,5 @@
   <string name="done">{{identical|Done}}</string>
   <string name="advanced_options">{{Identical|Advanced options}}</string>
   <string name="explore_map_details">{{Identical|Detail}}</string>
+  <string name="set_up_avatar_toast_string">\"Set as avatar\" should be translated the same as {{msg-wm|Commons-android-strings-menu set avatar}}.</string>
 </resources>

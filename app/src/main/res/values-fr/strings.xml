@@ -736,4 +736,5 @@
   <string name="welcome_to_full_screen_mode_text">Bienvenue dans le mode de sélection en plein écran</string>
   <string name="full_screen_mode_zoom_info">Utilisez deux doigts pour effectuer un zoom avant et arrière.</string>
   <string name="full_screen_mode_features_info">Balayez rapidement et assez loin pour effectuer les actions suivantes :\n– vers la gauche / droite : aller au précédent / suivant ;\n– vers le haut : sélectionner ;\n– vers le bas : marquer comme à ne pas téléverser.</string>
+  <string name="set_up_avatar_toast_string">Pour configurer votre avatar de classement, appuyez sur « Définir comme avatar » dans le menu à trois points de n’importe quelle image.</string>
 </resources>

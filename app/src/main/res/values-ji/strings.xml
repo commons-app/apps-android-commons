@@ -73,7 +73,7 @@
   <string name="title_activity_settings">איינשטעלונגען</string>
   <string name="title_activity_signup">איינשרייבן</string>
   <string name="title_activity_featured_images">רעקאמענדירטע בילדער</string>
-  <string name="title_activity_category_details">קאַטעגאריע</string>
+  <string name="title_activity_category_details">קאַטעגאָריע</string>
   <string name="menu_about">וועגן</string>
   <string name="title_activity_about">וועגן</string>
   <string name="menu_feedback">שיקן פֿידבעק (דורך בליצפאסט)</string>
@@ -116,6 +116,8 @@
   <string name="navigation_item_feedback">פֿידבעק</string>
   <string name="navigation_item_logout">אַרויסלאָגירן</string>
   <string name="upload_problem_image_dark">בילד איז צו טונקל</string>
+  <string name="about_faq">מ.ג.פֿ.</string>
+  <string name="about_translate_title">שפּראַכן</string>
   <string name="about_translate_cancel">אַנולירן</string>
   <string name="app_widget_heading">בילד פונעם טאָג</string>
   <string name="search_tab_title_media" fuzzy="true">מעדיע</string>
