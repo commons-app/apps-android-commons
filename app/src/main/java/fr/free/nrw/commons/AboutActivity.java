@@ -101,7 +101,14 @@ public class AboutActivity extends BaseActivity {
     }
 
     public void launchGithub(View view) {
-        Utils.handleWebUrl(this, Uri.parse(Urls.GITHUB_REPO_URL));
+        Intent intent;
+        try {
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Urls.GITHUB_REPO_URL));
+            intent.setPackage(Urls.GITHUB_PACKAGE_NAME);
+            startActivity(intent);
+        } catch (Exception e) {
+            Utils.handleWebUrl(this, Uri.parse(Urls.GITHUB_REPO_URL));
+        }
     }
 
     public void launchWebsite(View view) {
