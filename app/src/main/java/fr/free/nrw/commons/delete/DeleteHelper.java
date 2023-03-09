@@ -159,24 +159,36 @@ public class DeleteHelper {
         boolean[] checkedItems = {false, false, false, false};
         ArrayList<Integer> mUserReason = new ArrayList<>();
 
-        String[] reasonList = {"Reason 1", "Reason 2", "Reason 3"};
-        // Messages posted on-wiki should not be in the app user's locale, but rather in Commons' lingua franca English.
-        String[] reasonListEnglish = {"Eng1", "Eng2", "Eng3"};
+        final String[] reasonList;
+        final String[] reasonListEnglish;
 
         if (problem == ReviewController.DeleteReason.SPAM) {
-            reasonList[0] = context.getString(R.string.delete_helper_ask_spam_selfie);
-            reasonList[1] = context.getString(R.string.delete_helper_ask_spam_blurry);
-            reasonList[2] = context.getString(R.string.delete_helper_ask_spam_nonsense);
-            reasonListEnglish[0] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_spam_selfie);
-            reasonListEnglish[1] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_spam_blurry);
-            reasonListEnglish[2] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_spam_nonsense);
+            reasonList = new String[] {
+                context.getString(R.string.delete_helper_ask_spam_selfie),
+                context.getString(R.string.delete_helper_ask_spam_blurry),
+                context.getString(R.string.delete_helper_ask_spam_nonsense)
+            };
+            reasonListEnglish = new String[] {
+                getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_spam_selfie),
+                getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_spam_blurry),
+                getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_spam_nonsense)
+            };
         } else if (problem == ReviewController.DeleteReason.COPYRIGHT_VIOLATION) {
-            reasonList[0] = context.getString(R.string.delete_helper_ask_reason_copyright_press_photo);
-            reasonList[1] = context.getString(R.string.delete_helper_ask_reason_copyright_internet_photo);
-            reasonList[2] = context.getString(R.string.delete_helper_ask_reason_copyright_logo);
-            reasonListEnglish[0] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_press_photo);
-            reasonListEnglish[1] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_internet_photo);
-            reasonListEnglish[2] = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_logo);
+            reasonList = new String[] {
+                context.getString(R.string.delete_helper_ask_reason_copyright_press_photo),
+                context.getString(R.string.delete_helper_ask_reason_copyright_internet_photo),
+                context.getString(R.string.delete_helper_ask_reason_copyright_logo),
+                context.getString(R.string.delete_helper_ask_reason_copyright_no_freedom_of_panorama)
+            };
+            reasonListEnglish = new String[] {
+                getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_press_photo),
+                getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_internet_photo),
+                getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_logo),
+                getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_reason_copyright_no_freedom_of_panorama)
+            };
+        } else {
+            reasonList = new String[] {};
+            reasonListEnglish = new String[] {};
         }
 
         alert.setMultiChoiceItems(reasonList, checkedItems, listener = (dialogInterface, position, isChecked) -> {
