@@ -24,8 +24,6 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
@@ -55,6 +53,7 @@ import java.util.Map;
 import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Named;
+import leakcanary.ObjectWatcher;
 import org.acra.ACRA;
 import org.acra.annotation.AcraCore;
 import org.acra.annotation.AcraDialog;
@@ -122,7 +121,7 @@ public class CommonsApplication extends MultiDexApplication {
      * Constants End
      */
 
-    private RefWatcher refWatcher;
+    private ObjectWatcher objectWatcher;
 
     private static CommonsApplication INSTANCE;
 
@@ -193,9 +192,6 @@ public class CommonsApplication extends MultiDexApplication {
         // or from Observables that are (deliberately or not) missing an onError handler.
         RxJavaPlugins.setErrorHandler(Functions.emptyConsumer());
 
-        if (setupLeakCanary() == RefWatcher.DISABLED) {
-            return;
-        }
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
     }
@@ -273,26 +269,14 @@ public class CommonsApplication extends MultiDexApplication {
     }
 
     /**
-     * Helps in setting up LeakCanary library
-     *
-     * @return instance of LeakCanary
-     */
-    protected RefWatcher setupLeakCanary() {
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return RefWatcher.DISABLED;
-        }
-        return LeakCanary.install(this);
-    }
-
-    /**
-     * Provides a way to get member refWatcher
+     * Provides a way to get member objectWatcher
      *
      * @param context Application context
-     * @return application member refWatcher
+     * @return application member objectWatcher
      */
-    public static RefWatcher getRefWatcher(Context context) {
+    public static ObjectWatcher getObjectWatcher(Context context) {
         CommonsApplication application = (CommonsApplication) context.getApplicationContext();
-        return application.refWatcher;
+        return application.objectWatcher;
     }
 
     /**
