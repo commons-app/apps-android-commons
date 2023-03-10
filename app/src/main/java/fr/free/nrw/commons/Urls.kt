@@ -3,6 +3,7 @@ package fr.free.nrw.commons
 internal object Urls {
     const val NEW_ISSUE_URL = "https://github.com/commons-app/apps-android-commons/issues"
     const val GITHUB_REPO_URL = "https://github.com/commons-app/apps-android-commons"
+    const val GITHUB_PACKAGE_NAME = "com.github.android"
     const val WEBSITE_URL = "https://commons-app.github.io"
     const val CREDITS_URL = "https://github.com/commons-app/apps-android-commons/blob/master/CREDITS"
     const val USER_GUIDE_URL = "https://commons-app.github.io/docs.html"
