@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 
 import org.wikipedia.feed.model.UtcDate;
 
+import java.time.format.DateTimeFormatter;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,6 +23,10 @@ public final class DateUtil {
     private static Map<String, SimpleDateFormat> DATE_FORMATS = new HashMap<>();
 
     // TODO: Switch to DateTimeFormatter when minSdk = 26.
+    //the new iso8601DateFormat method that uses DateTimeFormatter
+     public static synchronized String iso8601DateFormat(Date date) {
+    return DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ROOT).format(date.toInstant());
+}
 
     public static synchronized String iso8601DateFormat(Date date) {
         return getCachedDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ROOT, true).format(date);
