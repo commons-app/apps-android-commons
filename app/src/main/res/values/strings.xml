@@ -750,4 +750,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="full_screen_mode_zoom_info">Use two fingers to zoom in and out.</string>
   <string name="full_screen_mode_features_info">Swipe fast and long to perform these actions: \n- Left/Right: Go to previous/next \n- Up: Select\n- Down: Mark as not for upload.</string>
   <string name="set_up_avatar_toast_string">To set up your leaderboard avatar, tap \"Set as avatar\" in the three-dots menu of any image.</string>
+  <string name="similar_coordinate_description_auto_set">The coordinates are not the exact coordinates, but the person who uploaded this picture thinks they are close enough.</string>
 </resources>
