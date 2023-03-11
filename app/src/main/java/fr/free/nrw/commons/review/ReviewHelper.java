@@ -37,13 +37,12 @@ public class ReviewHelper {
      * Fetches recent changes from MediaWiki API
      * Calls the API to get the latest 10 changes
      * When more results are available, the query gets continued beyond this range
-     * The query uses the default value of rccontinue
      *
      * @return
      */
-    private Observable<RecentChange> getRecentChanges() {
+    private Observable<MwQueryPage> getRecentChanges() {
         return reviewInterface.getRecentChanges()
-                .map(mwQueryResponse -> mwQueryResponse.query().getRecentChanges())
+                .map(mwQueryResponse -> mwQueryResponse.query().pages())
                 .map(recentChanges -> {
                     Collections.shuffle(recentChanges);
                     return recentChanges;
@@ -54,7 +53,6 @@ public class ReviewHelper {
 
     /**
      * Gets a random file change for review.
-     * - Picks the most recent changes in the last 30 day window
      * - Picks a random file from those changes
      * - Checks if the file is nominated for deletion
      * - Retries upto 5 times for getting a file which is not nominated for deletion
@@ -77,14 +75,14 @@ public class ReviewHelper {
      * @param recentChange
      * @return
      */
-    private Single<Media> getRandomMediaFromRecentChange(RecentChange recentChange) {
+    private Single<Media> getRandomMediaFromRecentChange(MwQueryPage recentChange) {
         return Single.just(recentChange)
-                .flatMap(change -> mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + change.getTitle()))
+                .flatMap(change -> mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + change.title()))
                 .flatMap(isDeleted -> {
                     if (isDeleted) {
-                        return Single.error(new Exception(recentChange.getTitle() + " is deleted"));
+                        return Single.error(new Exception(recentChange.title() + " is deleted"));
                     }
-                    return mediaClient.getMedia(recentChange.getTitle());
+                    return mediaClient.getMedia(recentChange.title());
                 });
 
     }
@@ -120,13 +118,9 @@ public class ReviewHelper {
      * @param recentChange
      * @return
      */
-    private boolean isChangeReviewable(RecentChange recentChange) {
-        if ((recentChange.getType().equals("log") && !(recentChange.getOldRevisionId() == 0))) {
-            return false;
-        }
-
+    private boolean isChangeReviewable(MwQueryPage recentChange) {
         for (String extension : imageExtensions) {
-            if (recentChange.getTitle().endsWith(extension)) {
+            if (recentChange.title().endsWith(extension)) {
                 return true;
             }
         }

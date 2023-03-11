@@ -10,7 +10,7 @@ import retrofit2.http.Query;
  * Interface class for peer review calls
  */
 public interface ReviewInterface {
-    @GET("w/api.php?action=query&format=json&list=recentchanges&continue=-||&formatversion=2&rcnamespace=6&rcprop=title|ids&rctype=new|log&rctoponly=1&rctag=android%20app%20edit")
+    @GET("w/api.php?action=query&format=json&formatversion=2&generator=categorymembers&gcmtype=file&gcmsort=timestamp&gcmdir=desc&gcmtitle=Category:Uploaded_with_Mobile/Android&gcmlimit=50")
     Observable<MwQueryResponse> getRecentChanges();
 
     @GET("w/api.php?action=query&format=json&formatversion=2&prop=revisions&rvprop=timestamp|ids|user&rvdir=newer&rvlimit=1")
