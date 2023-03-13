@@ -314,6 +314,7 @@
   <string name="search_tab_title_depictions">Kohteet</string>
   <string name="explore_tab_title_featured">Suositeltu</string>
   <string name="explore_tab_title_mobile">Tallennettu mobiilin kautta</string>
+  <string name="explore_tab_title_map">Kartta</string>
   <string name="successful_wikidata_edit">Kuva lisätty Wikidata-kohteeseen %1$s!</string>
   <string name="wikidata_edit_failure">Vastaavaa Wikidata-kohdetta ei voitu päivittää!</string>
   <string name="menu_set_wallpaper">Aseta taustakuvaksi</string>
@@ -342,6 +343,7 @@
   <string name="error_fetching_nearby_monuments">Virhe läheisiä monumentteja haettaessa.</string>
   <string name="no_recent_searches">Ei viimeaikaisia hakuja</string>
   <string name="delete_recent_searches_dialog">Haluatko varmasti tyhjentää hakuhistoriasi?</string>
+  <string name="cancel_upload_dialog">Haluatko varmasti peruuttaa tämän latauksen?</string>
   <string name="delete_search_dialog">Haluatko poistaa tämän haun?</string>
   <string name="search_history_deleted">Hakuhistoria poistettu</string>
   <string name="nominate_delete">Ehdota poistettavaksi</string>
@@ -488,7 +490,7 @@
   <string name="delete_helper_show_deletion_title_failed">Epäonnistui</string>
   <string name="delete_helper_show_deletion_message_else">Ei voitu pyytää poistoa.</string>
   <string name="delete_helper_ask_spam_selfie" fuzzy="true">Selfie</string>
-  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Sumea</string>
+  <string name="delete_helper_ask_spam_blurry">täysin sumea</string>
   <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Roskaa</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Lehdistökuva</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Satunnainen kuva internetistä</string>
@@ -623,10 +625,13 @@
   <string name="contributions_of_user">Käyttäjän muokkaukset: %s</string>
   <string name="achievements_of_user">Käyttäjän saavutukset: %s</string>
   <string name="menu_view_user_page">Näytä käyttäjäsivu</string>
+  <string name="edit_categories">Muokkaa luokkia</string>
   <string name="advanced_options">Lisäasetukset</string>
   <string name="apply">Käytä</string>
   <string name="reset">Nollaa</string>
   <string name="location_message">Sijaintitiedot auttavat wikin muokkaajia löytämään kuvasi, mikä tekee siitä paljon hyödyllisemmän.\nViimeaikaisissa tallennuksissasi ei ole sijaintia.\nSuosittelemme, että otat sijainnin käyttöön kamerasovelluksesi asetuksista.\nKiitos latauksesta!</string>
   <string name="no_location_found_title">Paikkaa ei löytynyt</string>
   <string name="add_location">Lisää paikka</string>
+  <string name="explore_map_details">Tiedot</string>
+  <string name="your_feedback">Palautteesi</string>
 </resources>

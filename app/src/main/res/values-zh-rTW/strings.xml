@@ -517,6 +517,7 @@
   <string name="delete_helper_ask_reason_copyright_press_photo">按壓照片</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">來自網路的隨機照片</string>
   <string name="delete_helper_ask_reason_copyright_logo">標誌</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">違反全景自由</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">因為這</string>
   <string name="category_edit_helper_make_edit_toast">嘗試更新分類。</string>
   <string name="category_edit_helper_show_edit_title">分類更新</string>
@@ -724,4 +725,5 @@
   <string name="full_screen_mode_zoom_info">用兩根手指來放大和縮小。</string>
   <string name="full_screen_mode_features_info">快速長滑來執行以下操作：\n- 左/右：跳到上一張/下一張\n- 上：選擇\n- 下：標記為不上傳。</string>
   <string name="set_up_avatar_toast_string">要設定您的排行榜頭像，請在任何圖片裡輕觸三點樣式選單中的「設定成頭像」。</string>
+  <string name="similar_coordinate_description_auto_set">座標雖不準確，但上傳這張圖片的人認為已經足夠接近了。</string>
 </resources>

@@ -530,6 +530,7 @@
   <string name="delete_helper_ask_reason_copyright_press_photo">Photo de presse</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Photo aléatoire reprise d’Internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">Atteinte à la liberté de panorama</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Parce qu’elle est</string>
   <string name="category_edit_helper_make_edit_toast">Tentative en cours de mise à jour des catégories.</string>
   <string name="category_edit_helper_show_edit_title">Mise à jour de la catégorie</string>
@@ -737,4 +738,5 @@
   <string name="full_screen_mode_zoom_info">Utilisez deux doigts pour effectuer un zoom avant et arrière.</string>
   <string name="full_screen_mode_features_info">Balayez rapidement et assez loin pour effectuer les actions suivantes :\n– vers la gauche / droite : aller au précédent / suivant ;\n– vers le haut : sélectionner ;\n– vers le bas : marquer comme à ne pas téléverser.</string>
   <string name="set_up_avatar_toast_string">Pour configurer votre avatar de classement, appuyez sur « Définir comme avatar » dans le menu à trois points de n’importe quelle image.</string>
+  <string name="similar_coordinate_description_auto_set">Les coordonnées ne sont pas les coordonnées exactes, mais la personne qui a téléversé cette image pense qu’elles sont suffisamment proches.</string>
 </resources>

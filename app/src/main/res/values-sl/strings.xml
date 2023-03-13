@@ -512,6 +512,7 @@
   <string name="delete_helper_ask_reason_copyright_press_photo">Tiskovna fotografija</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Naključna fotografija s spleta</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logotip</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">Kršitev svobode panorame</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Ker je</string>
   <string name="category_edit_helper_make_edit_toast">Poskušam posodobiti kategorije.</string>
   <string name="category_edit_helper_show_edit_title">Posodobitev kategorije</string>
@@ -722,4 +723,6 @@
   <string name="welcome_to_full_screen_mode_text">Pozdravljeni v celozaslonskem načinu izbire</string>
   <string name="full_screen_mode_zoom_info">Za povečavo in pomanjšanje uporabite dva prsta.</string>
   <string name="full_screen_mode_features_info">Hitro in dolgo podrsajte, da izvedete naslednja dejanja:\n– levo/desno: pojdi na prejšnje/naslednje\n– gor: izberi\n– dol: označi, da ni za nalaganje</string>
+  <string name="set_up_avatar_toast_string">Za nastavitev svojega avatarja na lestvici vodilnih tapnite »Nastavi kot avatar« v meniju s tremi pikami katere koli slike.</string>
+  <string name="similar_coordinate_description_auto_set">Koordinate niso točne koordinate, vendar oseba, ki je naložila to sliko, meni, da so ustrezen približek.</string>
 </resources>

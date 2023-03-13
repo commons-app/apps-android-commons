@@ -55,10 +55,12 @@
   <string name="no_uploads">Benvenite a Commons!\n\nPro incargar tu prime file multimedial, tocca le button Adder.</string>
   <string name="skip_image">Saltar iste imagine</string>
   <string name="review_is_uploaded_by">%1$s es incargate per: %2$s</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">Violation del libertate de panorama</string>
   <string name="you_must_reset_your_passsword">Un error ha occurrite durante le apertura de session. Es necessari reinitialisar tu contrasigno.</string>
   <string name="title_app_shortcut_bookmark">Marcapaginas</string>
   <string name="title_app_shortcut_setting">Configurationes</string>
   <string name="leaderboard_tab_title">Tabula de classamento</string>
   <string name="menu_set_avatar">Eliger como avatar</string>
   <string name="set_up_avatar_toast_string">Pro eliger tu avatar pro le tabula de classamento, tocca \"Eliger como avatar\" in le menu a tres punctos de qualcunque imagine.</string>
+  <string name="similar_coordinate_description_auto_set">Le coordinatas non es exacte, ma le persona qui ha incargate iste imagine pensa que illos es satis proxime.</string>
 </resources>

@@ -528,6 +528,7 @@
   <string name="delete_helper_ask_reason_copyright_press_photo">תמונת יח״צ</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">תמונה אקראית מהאינטרנט</string>
   <string name="delete_helper_ask_reason_copyright_logo">לוגו</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">הפרת חופש הפנורמה</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">כיוון שזה</string>
   <string name="category_edit_helper_make_edit_toast">מתבצע ניסיון לעדכון הקטגוריות.</string>
   <string name="category_edit_helper_show_edit_title">עדכון קטגוריות</string>
@@ -739,4 +740,5 @@
   <string name="full_screen_mode_zoom_info">אפשר להשתמש בשתי אצבעות כדי להגדיל ולהקטין.</string>
   <string name="full_screen_mode_features_info">אפשר לעשות החלקה מהירה וארוכה כדי לבצע את הפעולות הבאות: \n- שמאלה/ימינה: לעבור אל הקודם/הבא \n- למעלה: לבחור\n- למטה: לסמן בתור \"לא להעלאה\".</string>
   <string name="set_up_avatar_toast_string">כדי להגדיר את התמונה שמייצגת אותך בלוח התוצאות, יש לגעת ב\"הגדרה כתמונה ייצוגית\" בתפריט שלוש־הנקודות של תמונה כלשהי.</string>
+  <string name="similar_coordinate_description_auto_set">נקודות הציון אינן מדויקות, אבל האדם שהעלה את התמונה הזאת חושב שהן קרובות מספיק.</string>
 </resources>

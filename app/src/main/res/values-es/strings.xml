@@ -677,4 +677,5 @@
   <string name="error_feedback">Error mientras se envía la retroalimentación</string>
   <string name="enter_description">¿Cuál es su opinión?</string>
   <string name="your_feedback">Tu retroalimentación</string>
+  <string name="similar_coordinate_description_auto_set">Las coordenadas no son exactas, pero la persona que ha cargado esta imagen cree que se acercan lo suficiente.</string>
 </resources>
