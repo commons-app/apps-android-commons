@@ -124,13 +124,13 @@ class ReviewHelperTest {
      *  Case 1: Image identifier exists in the database
      */
     @Test
-    fun getReviewStatusReturnsTrue() {
-        val imageId1 = "123456"
-        `when`(dao.isReviewedAlready(imageId1)).thenReturn(true)
+    fun getReviewStatusWhenImageHasBeenReviewedAlready() {
+        val testImageId1 = "123456"
+        `when`(dao.isReviewedAlready(testImageId1)).thenReturn(true)
 
         val observer = io.reactivex.observers.TestObserver<Boolean>()
         Observable.fromCallable(Callable<Boolean> {
-            dao.isReviewedAlready(imageId1)
+            dao.isReviewedAlready(testImageId1)
         }).subscribeWith(observer)
         observer.assertValue(true)
         observer.dispose()
@@ -141,13 +141,13 @@ class ReviewHelperTest {
      *  Case 2: Image identifier does not exist in the database
      */
     @Test
-    fun getReviewStatusReturnsFalse() {
-        val imageId2 = "789101"
-        `when`(dao.isReviewedAlready(imageId2)).thenReturn(false)
+    fun getReviewStatusWhenImageHasBeenNotReviewedAlready() {
+        val testImageId2 = "789101"
+        `when`(dao.isReviewedAlready(testImageId2)).thenReturn(false)
 
         val observer = io.reactivex.observers.TestObserver<Boolean>()
         Observable.fromCallable(Callable<Boolean> {
-            dao.isReviewedAlready(imageId2)
+            dao.isReviewedAlready(testImageId2)
         }).subscribeWith(observer)
         observer.assertValue(false)
         observer.dispose()
@@ -158,11 +158,11 @@ class ReviewHelperTest {
      */
     @Test
     fun addViewedImagesToDB() {
-        val imageId = "123456"
+        val testImageId = "123456"
 
         val observer = io.reactivex.observers.TestObserver<Boolean>()
         Completable.fromAction {
-            dao.insert(ReviewEntity(imageId))
+            dao.insert(ReviewEntity(testImageId))
         }.subscribeWith(observer)
         observer.assertComplete()
         observer.dispose()
