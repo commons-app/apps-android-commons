@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.review;
 
 
+import androidx.annotation.VisibleForTesting;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.media.MediaClient;
 import io.reactivex.Completable;
@@ -92,7 +93,11 @@ public class ReviewHelper {
      * @param image
      * @return
      */
-    private Boolean getReviewStatus(String image){
+    @VisibleForTesting
+    Boolean getReviewStatus(String image){
+        if(dao == null){
+            return false;
+        }
         return Observable.fromCallable(()-> dao.isReviewedAlready(image))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).blockingSingle();
