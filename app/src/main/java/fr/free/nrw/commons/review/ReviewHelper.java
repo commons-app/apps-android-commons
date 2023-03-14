@@ -35,7 +35,7 @@ public class ReviewHelper {
 
     /**
      * Fetches recent changes from MediaWiki API
-     * Calls the API to get the latest 10 changes
+     * Calls the API to get the latest 50 changes
      * When more results are available, the query gets continued beyond this range
      *
      * @return
