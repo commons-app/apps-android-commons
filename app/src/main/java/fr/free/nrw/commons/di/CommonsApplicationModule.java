@@ -24,6 +24,7 @@ import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.db.AppDatabase;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.review.ReviewDao;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadController;
 import fr.free.nrw.commons.upload.depicts.DepictsDao;
@@ -297,6 +298,14 @@ public class CommonsApplicationModule {
     @Provides
     public NotForUploadStatusDao providesNotForUploadStatusDao(AppDatabase appDatabase) {
         return appDatabase.NotForUploadStatusDao();
+    }
+
+    /**
+     * Get the reference of ReviewDao class
+     */
+    @Provides
+    public ReviewDao providesReviewDao(AppDatabase appDatabase){
+        return appDatabase.ReviewDao();
     }
 
     @Provides

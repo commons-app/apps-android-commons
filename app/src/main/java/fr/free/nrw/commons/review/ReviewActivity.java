@@ -114,7 +114,7 @@ public class ReviewActivity extends BaseActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        
         reviewController = new ReviewController(deleteHelper, this);
 
         reviewPagerAdapter = new ReviewPagerAdapter(getSupportFragmentManager());
@@ -209,6 +209,7 @@ public class ReviewActivity extends BaseActivity {
 
     @SuppressLint("CheckResult")
     private void updateImage(Media media) {
+        reviewHelper.addViewedImagesToDB(media.getPageId());
         this.media = media;
         String fileName = media.getFilename();
         if (fileName.length() == 0) {
@@ -225,7 +226,7 @@ public class ReviewActivity extends BaseActivity {
                 .subscribe(revision -> {
                     reviewController.firstRevision = revision;
                     reviewPagerAdapter.updateFileInformation();
-                    String caption = String.format(getString(R.string.review_is_uploaded_by), fileName, revision.getUser());
+                    @SuppressLint({"StringFormatInvalid", "LocalSuppress"}) String caption = String.format(getString(R.string.review_is_uploaded_by), fileName, revision.getUser());
                     imageCaption.setText(caption);
                     progressBar.setVisibility(View.GONE);
                     reviewImageFragment = getInstanceOfReviewImageFragment();

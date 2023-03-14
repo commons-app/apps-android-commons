@@ -1,19 +1,20 @@
 package fr.free.nrw.commons.review;
 
 
+import androidx.annotation.VisibleForTesting;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.media.MediaClient;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import java.util.Collections;
-import java.util.Date;
-import java.util.Random;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.dataclient.mwapi.MwQueryPage;
-import org.wikipedia.dataclient.mwapi.RecentChange;
-import org.wikipedia.util.DateUtil;
+import timber.log.Timber;
 
 @Singleton
 public class ReviewHelper {
@@ -24,6 +25,9 @@ public class ReviewHelper {
     private final ReviewInterface reviewInterface;
 
     @Inject
+    ReviewDao dao;
+
+    @Inject
     public ReviewHelper(MediaClient mediaClient, ReviewInterface reviewInterface) {
         this.mediaClient = mediaClient;
         this.reviewInterface = reviewInterface;
@@ -31,21 +35,14 @@ public class ReviewHelper {
 
     /**
      * Fetches recent changes from MediaWiki API
-     * Calls the API to get 10 changes in the last 1 hour
-     * Earlier we were getting changes for the last 30 days but as the API returns just 10 results
-     * its best to fetch for just last 1 hour.
+     * Calls the API to get the latest 50 changes
+     * When more results are available, the query gets continued beyond this range
      *
      * @return
      */
-    private Observable<RecentChange> getRecentChanges() {
-        final int RANDOM_SECONDS = 60 * 60;
-        Random r = new Random();
-        Date now = new Date();
-        Date startDate = new Date(now.getTime() - r.nextInt(RANDOM_SECONDS) * 1000L);
-
-        String rcStart = DateUtil.iso8601DateFormat(startDate);
-        return reviewInterface.getRecentChanges(rcStart)
-                .map(mwQueryResponse -> mwQueryResponse.query().getRecentChanges())
+    private Observable<MwQueryPage> getRecentChanges() {
+        return reviewInterface.getRecentChanges()
+                .map(mwQueryResponse -> mwQueryResponse.query().pages())
                 .map(recentChanges -> {
                     Collections.shuffle(recentChanges);
                     return recentChanges;
@@ -56,7 +53,6 @@ public class ReviewHelper {
 
     /**
      * Gets a random file change for review.
-     * - Picks the most recent changes in the last 30 day window
      * - Picks a random file from those changes
      * - Checks if the file is nominated for deletion
      * - Retries upto 5 times for getting a file which is not nominated for deletion
@@ -66,7 +62,9 @@ public class ReviewHelper {
     public Single<Media> getRandomMedia() {
         return getRecentChanges()
                 .flatMapSingle(change -> getRandomMediaFromRecentChange(change))
-                .filter(media -> !StringUtils.isBlank(media.getFilename()))
+                .filter(media -> !StringUtils.isBlank(media.getFilename())
+                   && !getReviewStatus(media.getPageId())    // Check if the image has already been shown to the user
+                )
                 .firstOrError();
     }
 
@@ -77,16 +75,32 @@ public class ReviewHelper {
      * @param recentChange
      * @return
      */
-    private Single<Media> getRandomMediaFromRecentChange(RecentChange recentChange) {
+    private Single<Media> getRandomMediaFromRecentChange(MwQueryPage recentChange) {
         return Single.just(recentChange)
-                .flatMap(change -> mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + change.getTitle()))
+                .flatMap(change -> mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/" + change.title()))
                 .flatMap(isDeleted -> {
                     if (isDeleted) {
-                        return Single.error(new Exception(recentChange.getTitle() + " is deleted"));
+                        return Single.error(new Exception(recentChange.title() + " is deleted"));
                     }
-                    return mediaClient.getMedia(recentChange.getTitle());
+                    return mediaClient.getMedia(recentChange.title());
                 });
 
+    }
+
+    /**
+     * Checks if the image exists in the reviewed images entity
+     *
+     * @param image
+     * @return
+     */
+    @VisibleForTesting
+    Boolean getReviewStatus(String image){
+        if(dao == null){
+            return false;
+        }
+        return Observable.fromCallable(()-> dao.isReviewedAlready(image))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).blockingSingle();
     }
 
     /**
@@ -121,18 +135,32 @@ public class ReviewHelper {
      * @param recentChange
      * @return
      */
-    private boolean isChangeReviewable(RecentChange recentChange) {
-        if ((recentChange.getType().equals("log") && !(recentChange.getOldRevisionId() == 0))
-                || !recentChange.getType().equals("log")) {
-            return false;
-        }
-
+    private boolean isChangeReviewable(MwQueryPage recentChange) {
         for (String extension : imageExtensions) {
-            if (recentChange.getTitle().endsWith(extension)) {
+            if (recentChange.title().endsWith(extension)) {
                 return true;
             }
         }
 
         return false;
+    }
+
+    /**
+     * Adds reviewed/skipped images to the database
+     *
+     * @param imageId
+     */
+    public void addViewedImagesToDB(String imageId) {
+        Completable.fromAction(() -> dao.insert(new ReviewEntity(imageId)))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(() -> {
+                // Inserted successfully
+                Timber.i("Image inserted successfully.");
+                },
+                throwable -> {
+                    Timber.e("Image not inserted into the reviewed images database");
+                }
+            );
     }
 }
