@@ -5,6 +5,7 @@
 * Dutchy45
 * Elroy
 * Festina90
+* HanV
 * Jillids
 * Klaas van Buiten
 * KlaasZ4usV
@@ -516,6 +517,7 @@
   <string name="delete_helper_ask_reason_copyright_press_photo">Persfoto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Willekeurige foto van internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">Schending van de vrijheid van panorama</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Want het is</string>
   <string name="category_edit_helper_make_edit_toast">Ik probeer categorieën bij te werken.</string>
   <string name="category_edit_helper_show_edit_title">Categorie-update</string>
@@ -723,4 +725,5 @@
   <string name="full_screen_mode_zoom_info">Gebruik twee vingers om in en uit te zoomen.</string>
   <string name="full_screen_mode_features_info">Veeg snel en lang om deze handelingen te verrichten: \n- Links/Rechts: Naar vorige/volgende gaan\n- Omhoog: Selecteren\n- Omlaag: Als niet voor uploaden markeren</string>
   <string name="set_up_avatar_toast_string">Om uw leaderboard-avatar te kiezen tikt u op \"Als avatar instellen\" in het driestippenmenu van een afbeelding.</string>
+  <string name="similar_coordinate_description_auto_set">De coördinaten zijn niet de exacte coördinaten, maar de persoon die deze foto heeft geüpload denkt dat ze dichtbij genoeg zijn.</string>
 </resources>

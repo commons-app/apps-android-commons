@@ -547,6 +547,7 @@
   <string name="delete_helper_ask_reason_copyright_press_photo">Новостное фото</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Случайное фото из интернет</string>
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">Нарушение Свободы панорамы</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Поскольку</string>
   <string name="category_edit_helper_make_edit_toast">Обновление категорий.</string>
   <string name="category_edit_helper_show_edit_title">Обновление категории</string>
@@ -755,4 +756,6 @@
   <string name="welcome_to_full_screen_mode_text">Добро пожаловать в полноэкранный режим выбора</string>
   <string name="full_screen_mode_zoom_info">Используйте два пальца для увеличения и уменьшения масштаба.</string>
   <string name="full_screen_mode_features_info">Проведите быстро и широко, чтобы выполнить следующие действия: \n- Влево/вправо: переход к предыдущему/следующему \n- Вверх: выбрать\n- Вниз: пометить как не для загрузки.</string>
+  <string name="set_up_avatar_toast_string">Чтобы установить свой аватар в таблице лидеров, на любом изображении в меню с тремя точками нажмите «Установить как аватар».</string>
+  <string name="similar_coordinate_description_auto_set">Координаты не являются точными, но человек, загрузивший эту фотографию, считает, что они достаточно близки.</string>
 </resources>

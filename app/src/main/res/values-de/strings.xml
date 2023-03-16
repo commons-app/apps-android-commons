@@ -9,6 +9,7 @@
 * FF-11
 * FF11
 * Ferdinand0101
+* Icke
 * Inkowik
 * Justman10000
 * Kghbln
@@ -524,6 +525,7 @@
   <string name="delete_helper_ask_reason_copyright_press_photo">Pressefoto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Bild aus dem Internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">Aussicht versperren</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Denn es ist</string>
   <string name="category_edit_helper_make_edit_toast">Versuche, Kategorien zu aktualisieren.</string>
   <string name="category_edit_helper_show_edit_title">Kategorie-Update</string>
@@ -725,4 +727,6 @@
   <string name="welcome_to_full_screen_mode_text">Willkommen im Vollbild-Auswahlmodus</string>
   <string name="full_screen_mode_zoom_info">Verwende zwei Finger, um hinein- und herauszuzoomen.</string>
   <string name="full_screen_mode_features_info">Wische schnell und lange, um diese Aktionen auszuführen:\n- Links/Rechts: Zum vorherigen/nächsten gehen\n- Nach oben: Auswählen\n- Nach unten: Als nicht zum Hochladen markieren.</string>
+  <string name="set_up_avatar_toast_string">Um deinen Bestenlisten Avatar einzustellen, klicke \"Set as avatar\" in dem Drei-Punkte-Menü bei jedem Bild.</string>
+  <string name="similar_coordinate_description_auto_set">Die Koordinaten sind nicht exakt genug, aber der Uploader dieses Bildes denkt, sie sind nah genug.</string>
 </resources>
