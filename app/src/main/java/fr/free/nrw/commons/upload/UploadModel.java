@@ -117,6 +117,13 @@ public class UploadModel {
                 createdTimestampSource,
                 uploadableFile.getContentUri(),
                 fileCreatedDateString);
+
+        // If an uploadItem of the same uploadableFile has been created before, we return that.
+        // This is to avoid multiple instances of uploadItem of same file passed around.
+        if (items.contains(uploadItem)) {
+            return items.get(items.indexOf(uploadItem));
+        }
+
         if (place != null) {
             uploadItem.getUploadMediaDetails().set(0, new UploadMediaDetail(place));
         }
