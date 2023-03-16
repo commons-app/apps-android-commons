@@ -86,7 +86,7 @@ class LanguagesAdapter constructor(
     }
 
     fun getIndexOfUserDefaultLocale(context: Context): Int {
-        return language.codes.indexOf(context.locale.language)
+        return language.codes.indexOf(context.locale!!.language)
     }
 
     fun getIndexOfLanguageCode(languageCode: String): Int {
@@ -138,5 +138,5 @@ class LanguagesAdapter constructor(
 
 }
 
-private val Context.locale: Locale
+private val Context.locale: Locale?
     get() = ConfigurationCompat.getLocales(resources.configuration)[0]

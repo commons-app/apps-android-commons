@@ -2,6 +2,7 @@ package org.wikipedia.dataclient.page;
 
 import androidx.annotation.NonNull;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.wikipedia.dataclient.Service;
 import org.wikipedia.test.MockRetrofitTest;
@@ -13,6 +14,7 @@ import retrofit2.Response;
 import static org.wikipedia.dataclient.Service.PREFERRED_THUMB_SIZE;
 
 public abstract class BasePageClientTest extends MockRetrofitTest {
+    @Ignore("MobileView API is deprecated. Remove test cases after fixing #5165")
     @Test public void testLeadCacheControl() {
         TestObserver<Response<PageLead>> observer = new TestObserver<>();
         subject().lead(wikiSite(), CacheControl.FORCE_NETWORK, null, null, "foo", 0).subscribe(observer);
@@ -20,6 +22,7 @@ public abstract class BasePageClientTest extends MockRetrofitTest {
                 .assertValue(result -> result.raw().request().header("Cache-Control").contains("no-cache"));
     }
 
+    @Ignore("MobileView API is deprecated. Remove test cases after fixing #5165")
     @Test public void testLeadHttpRefererUrl() {
         String refererUrl = "https://en.wikipedia.org/wiki/United_States";
         TestObserver<Response<PageLead>> observer = new TestObserver<>();
@@ -28,6 +31,7 @@ public abstract class BasePageClientTest extends MockRetrofitTest {
                 .assertValue(result -> result.raw().request().header("Referer").contains(refererUrl));
     }
 
+    @Ignore("MobileView API is deprecated. Remove test cases after fixing #5165")
     @Test public void testLeadCacheOptionCache() {
         TestObserver<Response<PageLead>> observer = new TestObserver<>();
         subject().lead(wikiSite(), null, null, null, "foo", 0).subscribe(observer);
@@ -35,12 +39,14 @@ public abstract class BasePageClientTest extends MockRetrofitTest {
                 .assertValue(result -> result.raw().request().header(Service.OFFLINE_SAVE_HEADER) == null);
     }
 
+    @Ignore("MobileView API is deprecated. Remove test cases after fixing #5165")
     @Test public void testLeadCacheOptionSave() {
         TestObserver<Response<PageLead>> observer = new TestObserver<>();
         subject().lead(wikiSite(), null, Service.OFFLINE_SAVE_HEADER_SAVE, null, "foo", 0).subscribe(observer);
         observer.assertComplete().assertValue(result -> result.raw().request().header(Service.OFFLINE_SAVE_HEADER).contains(Service.OFFLINE_SAVE_HEADER_SAVE));
     }
 
+    @Ignore("MobileView API is deprecated. Remove test cases after fixing #5165")
     @Test public void testLeadTitle() {
         TestObserver<Response<PageLead>> observer = new TestObserver<>();
         subject().lead(wikiSite(), null, null, null, "Title", 0).subscribe(observer);

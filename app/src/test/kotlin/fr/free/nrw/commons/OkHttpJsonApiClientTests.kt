@@ -63,7 +63,7 @@ class OkHttpJsonApiClientTests {
 
     @Test
     fun testGetNearbyPlacesCustomQuery() {
-        Mockito.`when`(response.message()).thenReturn("test")
+        Mockito.`when`(response.message).thenReturn("test")
         try {
             okHttpJsonApiClient.getNearbyPlaces(latLng, "test", 10.0, true, "test")
         } catch (e: Exception) {
@@ -76,7 +76,7 @@ class OkHttpJsonApiClientTests {
 
     @Test
     fun testGetNearbyPlaces() {
-        Mockito.`when`(response.message()).thenReturn("test")
+        Mockito.`when`(response.message).thenReturn("test")
         try {
             okHttpJsonApiClient.getNearbyPlaces(latLng, "test", 10.0, true)
         } catch (e: Exception) {

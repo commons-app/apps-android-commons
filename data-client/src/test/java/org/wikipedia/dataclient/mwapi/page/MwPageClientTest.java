@@ -3,6 +3,7 @@ package org.wikipedia.dataclient.mwapi.page;
 import androidx.annotation.NonNull;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.wikipedia.dataclient.page.BasePageClientTest;
 import org.wikipedia.dataclient.page.PageClient;
@@ -19,6 +20,7 @@ public class MwPageClientTest extends BasePageClientTest {
         subject = new MwPageClient();
     }
 
+    @Ignore("MobileView API is deprecated. Remove test cases after fixing #5165")
     @Test public void testLeadThumbnailWidth() {
 
         TestObserver<Response<PageLead>> observer = new TestObserver<>();

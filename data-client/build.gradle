@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.5.10'
+    ext.kotlin_version = '1.7.20'
     repositories {
         jcenter()
         google()
@@ -32,11 +32,11 @@ version = "${VERSION_NAME}"
 group = "${GROUP_ID}"
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 31
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 28
+        minSdkVersion 21
+        targetSdkVersion 31
         versionCode 1
         versionName "${VERSION_NAME}"
 
@@ -74,10 +74,11 @@ dependencies {
 
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:2.8.9'
-    testImplementation 'org.robolectric:robolectric:3.8'
-    testImplementation "com.squareup.okhttp3:mockwebserver:3.12.1"
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.mockito:mockito-core:2.25.1'
+    testImplementation 'org.robolectric:robolectric:4.6.1'
+    testImplementation 'org.hamcrest:hamcrest-junit:2.0.0.0'
+    testImplementation "com.squareup.okhttp3:mockwebserver:4.10.0"
     testImplementation "commons-io:commons-io:2.6"
 }
 

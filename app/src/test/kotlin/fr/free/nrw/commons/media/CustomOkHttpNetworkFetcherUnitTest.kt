@@ -149,9 +149,9 @@ class CustomOkHttpNetworkFetcherUnitTest {
     @Test
     @Throws(Exception::class)
     fun testOnFetchResponseCaseReturn() {
-        whenever(response.body()).thenReturn(body)
+        whenever(response.body).thenReturn(body)
         whenever(response.isSuccessful).thenReturn(false)
-        whenever(call.isCanceled).thenReturn(true)
+        whenever(call.isCanceled()).thenReturn(true)
         val method: Method = CustomOkHttpNetworkFetcher::class.java.getDeclaredMethod(
             "onFetchResponse",
             CustomOkHttpNetworkFetcher.OkHttpNetworkFetchState::class.java,
@@ -167,11 +167,22 @@ class CustomOkHttpNetworkFetcherUnitTest {
     @Test
     @Throws(Exception::class)
     fun testOnFetchResponse() {
-        whenever(response.body()).thenReturn(body)
+        whenever(response.body).thenReturn(body)
         whenever(response.isSuccessful).thenReturn(true)
-        whenever(response.header("Content-Range")).thenReturn("bytes 200-1000/67589")
-        whenever(call.isCanceled).thenReturn(true)
+
+        whenever(call.isCanceled()).thenReturn(true)
         whenever(body.contentLength()).thenReturn(-1)
+
+        // Build Response object with Content-Range header
+        val responseBuilder = Response.Builder()
+            .request(Request.Builder().url("http://example.com").build())
+            .protocol(Protocol.HTTP_1_1)
+            .code(200)
+            .message("OK")
+            .header("Content-Range", "bytes 200-1000/67589")
+            .body(body)
+        whenever(call.execute()).thenReturn(responseBuilder.build())
+
         val method: Method = CustomOkHttpNetworkFetcher::class.java.getDeclaredMethod(
             "onFetchResponse",
             CustomOkHttpNetworkFetcher.OkHttpNetworkFetchState::class.java,
@@ -180,18 +191,29 @@ class CustomOkHttpNetworkFetcherUnitTest {
             NetworkFetcher.Callback::class.java,
         )
         method.isAccessible = true
-        method.invoke(fetcher, state, call, response, callback)
+        method.invoke(fetcher, state, call, responseBuilder.build(), callback)
         verify(callback).onResponse(null, 0)
     }
 
     @Test
     @Throws(Exception::class)
     fun testOnFetchResponseCaseException() {
-        whenever(response.body()).thenReturn(body)
+        whenever(response.body).thenReturn(body)
         whenever(response.isSuccessful).thenReturn(true)
-        whenever(response.header("Content-Range")).thenReturn("test")
-        whenever(call.isCanceled).thenReturn(false)
+
+        whenever(call.isCanceled()).thenReturn(false)
         whenever(body.contentLength()).thenReturn(-1)
+
+        // Build Response object with Content-Range header
+        val responseBuilder = Response.Builder()
+            .request(Request.Builder().url("http://example.com").build())
+            .protocol(Protocol.HTTP_1_1)
+            .code(200)
+            .message("OK")
+            .header("Content-Range", "Test")
+            .body(body)
+        whenever(call.execute()).thenReturn(responseBuilder.build())
+
         val method: Method = CustomOkHttpNetworkFetcher::class.java.getDeclaredMethod(
             "onFetchResponse",
             CustomOkHttpNetworkFetcher.OkHttpNetworkFetchState::class.java,
@@ -200,7 +222,7 @@ class CustomOkHttpNetworkFetcherUnitTest {
             NetworkFetcher.Callback::class.java,
         )
         method.isAccessible = true
-        method.invoke(fetcher, state, call, response, callback)
+        method.invoke(fetcher, state, call, responseBuilder.build(), callback)
         verify(callback).onFailure(any())
     }
 
