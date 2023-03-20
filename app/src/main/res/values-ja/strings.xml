@@ -550,7 +550,7 @@
   <string name="add_picture_to_wikipedia_article_desc">この画像を%1$s語版ウィキペディアの記事に追加しますか？</string>
   <string name="confirm">確定</string>
   <string name="instructions_title">手順</string>
-  <string name="wikipedia_instructions_step_1">1. 次のウィキ文を使用します：</string>
+  <string name="wikipedia_instructions_step_1">1. 次のウィキテキストを使用します：</string>
   <string name="wikipedia_instructions_step_2">2. 確定を押すとウィキペディアの記事を表示します</string>
   <string name="wikipedia_instructions_step_3">3. 記事の見出しから、その画像にふさわしいものを選びます</string>
   <string name="wikipedia_instructions_step_4">4. 選んだ見出しの端の編集アイコン (鉛筆型のボタン) をクリック。</string>
