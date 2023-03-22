@@ -374,7 +374,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 }
             });
             DialogUtil.showAlertDialog(getActivity(),
-                getString(R.string.duplicate_image_found),
+                getString(R.string.duplicate_file_name),
                 String.format(Locale.getDefault(),
                     uploadTitleFormat,
                     uploadItem.getFileName()),
