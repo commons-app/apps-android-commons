@@ -174,7 +174,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
             if (position == 0) {
                 removeButton.setVisibility(View.GONE);
                 captionInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
-                captionInputLayout.setEndIconDrawable(R.drawable.mapbox_info_icon_default);
+                captionInputLayout.setEndIconDrawable(R.drawable.maplibre_info_icon_default);
                 captionInputLayout.setEndIconOnClickListener(v ->
                     callback.showAlert(R.string.media_detail_caption, R.string.caption_info));
                 Objects.requireNonNull(captionInputLayout.getEditText()).setFilters(new InputFilter[] {
@@ -182,7 +182,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                 });
 
                 descInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
-                descInputLayout.setEndIconDrawable(R.drawable.mapbox_info_icon_default);
+                descInputLayout.setEndIconDrawable(R.drawable.maplibre_info_icon_default);
                 descInputLayout.setEndIconOnClickListener(v ->
                     callback.showAlert(R.string.media_detail_description, R.string.description_info));
 

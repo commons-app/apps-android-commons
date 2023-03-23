@@ -100,17 +100,6 @@ class SettingsFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testTelemetryOptInOut() {
-        val method: Method = SettingsFragment::class.java.getDeclaredMethod(
-            "telemetryOptInOut",
-            Boolean::class.java
-        )
-        method.isAccessible = true
-        method.invoke(fragment, true)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testCheckPermissionsAndSendLogs() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         val method: Method = SettingsFragment::class.java.getDeclaredMethod(

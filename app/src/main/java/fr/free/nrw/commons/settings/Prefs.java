@@ -10,7 +10,6 @@ public class Prefs {
     public static final String DESCRIPTION_LANGUAGE = "languageDescription";
     public static final String APP_UI_LANGUAGE = "appUiLanguage";
     public static final String KEY_THEME_VALUE = "appThemePref";
-    public static final String TELEMETRY_PREFERENCE = "telemetryPref";
 
     public static class Licenses {
         public static final String CC_BY_SA_3 = "CC BY-SA 3.0";

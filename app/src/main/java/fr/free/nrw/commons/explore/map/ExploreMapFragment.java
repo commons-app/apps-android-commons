@@ -81,6 +81,7 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import java.util.Arrays;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -189,7 +190,8 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             mapBox = mapBoxMap;
             initViews();
             presenter.setActionListeners(applicationKvStore);
-            mapBoxMap.setStyle(isDarkTheme? Style.DARK:Style.OUTDOORS, style -> {
+            mapBoxMap.setStyle(isDarkTheme? Style.getPredefinedStyle("Dark"):
+                Style.getPredefinedStyle("Outdoors"), style -> {
                 final UiSettings uiSettings = mapBoxMap.getUiSettings();
                 uiSettings.setCompassGravity(Gravity.BOTTOM | Gravity.LEFT);
                 uiSettings.setCompassMargins(12, 0, 0, 24);
