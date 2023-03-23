@@ -450,7 +450,7 @@
   <string name="review_thanks_yes_button_text">Seuraava kuva</string>
   <string name="review_thanks_no_button_text">Kyllä, miksipä ei</string>
   <string name="skip_image_explanation">Tämän napin napsauttaminen antaa sinulle toisen äskettäin ladatun kuvan Wikimedia Commonsista.</string>
-  <string name="review_image_explanation" fuzzy="true">Voit arvioida kuvia ja parantaa Wikimedia Commons -sivuston laatua.\nArvioinnin neljä parametria ovat:\n- Sopiiko kuva palveluun?\n- Noudattaako kuva kopio-oikeuteen liittyviä sääntöjä?\n- Onko kuva luokiteltu oikein?\n- Jos kaikki meni hyvin, voit myös kiittää lahjoittajaa.</string>
+  <string name="review_image_explanation">Voit arvioida kuvia ja parantaa Wikimedia Commons -sivuston laatua.\nArvioinnin kolme parametria ovat:\n\n- Sopiiko kuva palveluun?\nKun napautat ei (sopimaton), olet lisäämässä tähän kuvaan poistoehdokasmallineen.\n\n- Noudattaako kuva kopio-oikeuteen liittyviä sääntöjä?\nKun napautat ei (ei noudata kopio-oikeuteen liittyviä sääntöjä), olet lisäämässä tähän kuvaan poistoehdokasmallineen.\n\n- Onko kuva luokiteltu oikein?\nKun napautat ei (ei ole luokiteltu oikein), olet lisäämässä tähän kuvaan luokittelupyyntömallineen.\n\nJos kaikki meni hyvin, mallinetta ei lisätä kuvaan ja voit kiittää muokkaajaa.</string>
   <string name="no_image">Ei käytettyjä kuvia</string>
   <string name="no_image_reverted">Kuvia ei palautettu</string>
   <string name="no_image_uploaded">Kuvia ei lähetetty</string>
