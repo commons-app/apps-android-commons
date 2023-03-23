@@ -115,6 +115,30 @@ class Media constructor(
                 ""
 
     /**
+     * Gets media display title
+     * @return Media title
+     */
+
+    fun getDisplayAuthor(): String{
+        if (author == null)
+            return ""
+
+        val completeHtmlTagCheck = "<.*>(.*)<.*>".toRegex() // Detect if complete html tags present
+        var completeCheckResult = completeHtmlTagCheck.findAll(author!!) // Find matching cases, return text between tag
+        if(completeCheckResult.count()==1) return completeCheckResult.toList().get(0).groupValues.get(1) // Get matching result and return text between tag - text between tag is inside a capture group
+        else if (completeCheckResult.count()>1) return "" // If there are multiple cases we return nothing --> can multiple cases occur?
+
+        val hrefTagCheck = "<.*>(.*)".toRegex() // Detect if half html tags present -> <a href= XXX> case
+        var hrefTagCheckResult = hrefTagCheck.findAll(author!!) // Find matching cases, return text between tag
+        if(hrefTagCheckResult.count()==1) return hrefTagCheckResult.toList().get(0).groupValues.get(1) // Get matching result and return text between tag
+        else if (hrefTagCheckResult.count()>1) return "" // If there are multiple cases we return nothing --> can multiple cases occur?
+
+        return author!! // If this is reached then html tags are not present, return author text as is
+
+    }
+
+
+    /**
      * Gets file page title
      * @return New media page title
      */
