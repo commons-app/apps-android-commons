@@ -21,6 +21,7 @@ class MediaTest {
         val m = media(filename = "File:Example 1_2.jpg")
         assertEquals("Example 1 2", m.displayTitle)
     }
+
     @Test
     fun testGetDisplayAuthorWithCompleteHtmlTags() {
         // Test with author containing complete html tags
@@ -40,6 +41,13 @@ class MediaTest {
         // Test with author containing no html tags
         val media = media(author = "John Doe")
         assertEquals("John Doe", media.getDisplayAuthor())
+    }
+
+    @Test
+    fun testGetDisplayAuthorWithMultipleHtmlTags() {
+        // Test with author containing multiple html tags
+        val media = media(author = "<b><i>John Doe</i></b>")
+        assertEquals("", media.getDisplayAuthor())
     }
 
     @Test
