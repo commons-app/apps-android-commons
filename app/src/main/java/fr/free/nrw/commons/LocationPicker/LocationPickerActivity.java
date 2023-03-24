@@ -142,9 +142,9 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
 
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         super.onCreate(savedInstanceState);
 
-        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.hide();
