@@ -118,7 +118,7 @@ class Media constructor(
      * Gets media display title
      * @return Media title
      */
-    fun getDisplayAuthor(): String{
+    fun getDisplayAuthor(): String {
 
         if (author == null)
             return ""
@@ -127,22 +127,22 @@ class Media constructor(
         var completeCheckResult = completeHtmlTagCheck.findAll(author!!) // Find matching cases, return text between tag
 
         // Get matching result and return text between tag - text between tag is inside a capture group
-        if(completeCheckResult.count()==1)
+        if (completeCheckResult.count() == 1)
             return completeCheckResult.toList().get(0).groupValues.get(1)
 
         // If there are multiple cases we return nothing --> can multiple cases occur?
-        else if (completeCheckResult.count()>1)
+        else if (completeCheckResult.count() > 1)
             return ""
 
         val hrefTagCheck = "<.*>(.*)".toRegex() // Detect if half html tags present -> <a href= XXX> case
         var hrefTagCheckResult = hrefTagCheck.findAll(author!!) // Find matching cases, return text between tag
 
         // Get matching result and return text between tag
-        if(hrefTagCheckResult.count()==1)
+        if (hrefTagCheckResult.count() == 1)
             return hrefTagCheckResult.toList().get(0).groupValues.get(1) // Get matching result and return text between tag
 
         // If there are multiple cases we return nothing --> can multiple cases occur?
-        else if (hrefTagCheckResult.count()>1) return ""
+        else if (hrefTagCheckResult.count() > 1) return ""
 
         return author!! // If this is reached then html tags are not present, return author text as is
     }
