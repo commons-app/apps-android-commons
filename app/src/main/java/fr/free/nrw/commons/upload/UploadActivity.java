@@ -426,6 +426,14 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
     private void receiveExternalSharedItems() {
         uploadableFiles = contributionController.handleExternalImagesPicked(this, getIntent());
+
+        try {
+            Collections.sort(uploadableFiles, (f1, f2) -> (int) (
+                f2.getFileCreatedDate(this).getEpochDate() -
+                    f1.getFileCreatedDate(this).getEpochDate()));
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
     }
 
     private void receiveInternalSharedItems() {
