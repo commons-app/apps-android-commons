@@ -49,12 +49,20 @@
   </LinearLayout>
 
   <FrameLayout
+    android:id="@+id/explore_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:visibility="visible">
+
+  <FrameLayout
       android:id="@+id/root_frame"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_marginTop="@dimen/miniscule_margin"
-      android:background="#000"
-      >
+      android:background="#000">
+
+  </FrameLayout>
   </FrameLayout>
 
 </LinearLayout>
