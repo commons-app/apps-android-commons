@@ -674,7 +674,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         categoryNames.clear();
         categoryNames.addAll(media.getCategories());
 
-        if (media.getDisplayAuthor().equals("")) {
+        if (media.getDisplayAuthor() == null || media.getDisplayAuthor().equals("")) {
             authorLayout.setVisibility(GONE);
         } else {
             author.setText(media.getDisplayAuthor());
