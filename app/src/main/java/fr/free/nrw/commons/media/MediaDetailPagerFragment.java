@@ -109,7 +109,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        else {throw new AssertionError("Action bar should not be null!");}
+        else {
+            throw new AssertionError("Action bar should not be null!");
+        }
 
         // If fragment is associated with ProfileActivity, then hide the tabLayout
         if (getActivity() instanceof ProfileActivity) {
