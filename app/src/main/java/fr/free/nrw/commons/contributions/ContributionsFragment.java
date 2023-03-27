@@ -198,7 +198,7 @@ public class ContributionsFragment
     public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
 
         // Removing contributions menu items for ProfileActivity
-        if (getActivity() instanceof ProfileActivity) { return;}
+        if (getActivity() instanceof ProfileActivity) { return; }
 
         inflater.inflate(R.menu.contribution_activity_notification_menu, menu);
 
