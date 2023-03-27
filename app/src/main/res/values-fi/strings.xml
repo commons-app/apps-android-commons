@@ -214,7 +214,7 @@
   <string name="media_detail_coordinates_empty">Ei mitään annettu</string>
   <string name="become_a_tester_title">Ryhdy beetatestaajaksi</string>
   <string name="become_a_tester_description">Valitse beeta-kanavamme Google Playssa ja hanki varhainen pääsy uusiin ominaisuuksiin ja virheenkorjauksiin</string>
-  <string name="_2fa_code">2FA koodi</string>
+  <string name="_2fa_code">Kaksivaiheisen tunnistautumisen koodi</string>
   <string name="logout_verification">Haluatko varmasti kirjautua ulos?</string>
   <string name="mediaimage_failed">Mediakuva epäonnistui</string>
   <string name="no_subcategory_found">Alaluokkia ei löytynyt</string>
