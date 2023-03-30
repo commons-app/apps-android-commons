@@ -8,26 +8,24 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.mapbox.mapboxsdk.Mapbox
-import com.mapbox.mapboxsdk.WellKnownTileServer
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
+import com.mapbox.mapboxsdk.exceptions.MapboxConfigurationException
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.Style
 import com.mapbox.mapboxsdk.maps.UiSettings
 import com.mapbox.mapboxsdk.style.layers.Layer
-import com.mapbox.mapboxsdk.util.TileServerOptions
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
-import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM
 import org.junit.Assert
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -41,6 +39,7 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -135,18 +134,22 @@ class LocationPickerActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnMapReady() {
-        Mapbox.getInstance(
-            context,
-            context.getString(R.string.mapbox_commons_app_token),
-            WellKnownTileServer.Mapbox
-        )
-
         val method: Method = LocationPickerActivity::class.java.getDeclaredMethod(
             "onMapReady",
             MapboxMap::class.java
         )
         method.isAccessible = true
-        method.invoke(activity, mapboxMap)
+        try {
+            method.invoke(activity, mapboxMap)
+            fail("Expected an exception to be thrown")
+        } catch (e: InvocationTargetException) {
+            assertTrue(e.targetException is MapboxConfigurationException)
+            assertEquals(
+                "\nUsing MapView requires calling Mapbox.getInstance(Context context, String apiKey,"
+                        + " WellKnownTileServer wellKnownTileServer) before inflating or creating the view.",
+                e.targetException.message
+            )
+        }
     }
 
     @Test
