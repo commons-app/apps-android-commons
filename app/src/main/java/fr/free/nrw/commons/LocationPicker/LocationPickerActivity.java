@@ -57,6 +57,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.utils.SystemThemeUtils;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.jetbrains.annotations.NotNull;
@@ -139,10 +140,18 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
     @Named("default_preferences")
     public
     JsonKvStore applicationKvStore;
+    /**
+     * isDarkTheme: for keeping a track of the device theme and modifying the map theme accordingly
+     */
+    @Inject
+    SystemThemeUtils systemThemeUtils;
+    private boolean isDarkTheme;
 
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        isDarkTheme = systemThemeUtils.isDeviceInNightMode();
 
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         final ActionBar actionBar = getSupportActionBar();
@@ -238,7 +247,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
     @Override
     public void onMapReady(final MapboxMap mapboxMap) {
         this.mapboxMap = mapboxMap;
-        mapboxMap.setStyle(Style.MAPBOX_STREETS, this::onStyleLoaded);
+        mapboxMap.setStyle(isDarkTheme ? Style.DARK : Style.MAPBOX_STREETS, this::onStyleLoaded);
     }
 
     /**
