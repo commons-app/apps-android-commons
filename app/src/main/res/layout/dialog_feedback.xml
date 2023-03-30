@@ -15,7 +15,7 @@
       android:layout_margin="@dimen/dimen_6"
       android:padding="@dimen/tiny_gap"
       android:textSize="24sp"
-      android:textColor="@color/black"
+      android:textColor="?android:attr/textColorPrimary"
       android:text="@string/navigation_item_feedback"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content" />
@@ -44,7 +44,7 @@
       android:layout_margin="@dimen/dimen_6"
       android:padding="4dp"
       android:textSize="21sp"
-      android:textColor="@color/black"
+      android:textColor="?android:attr/textColorPrimary"
       android:text="@string/select_feedback_data_choice"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content" />
