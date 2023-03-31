@@ -152,12 +152,9 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         super.onCreate(savedInstanceState);
 
-<<<<<<< HEAD
-=======
         isDarkTheme = systemThemeUtils.isDeviceInNightMode();
 
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
->>>>>>> LocationPickerActivity: fix light map in dark mode
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.hide();
@@ -251,11 +248,8 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
     @Override
     public void onMapReady(final MapboxMap mapboxMap) {
         this.mapboxMap = mapboxMap;
-<<<<<<< HEAD
-        mapboxMap.setStyle(Style.getPredefinedStyle("Streets"), this::onStyleLoaded);
-=======
-        mapboxMap.setStyle(isDarkTheme ? Style.DARK : Style.MAPBOX_STREETS, this::onStyleLoaded);
->>>>>>> LocationPickerActivity: fix light map in dark mode
+        mapboxMap.setStyle(isDarkTheme ? LocationPickerConstants.DARK_MAP_STYLE :
+            LocationPickerConstants.STREETS_MAP_STYLE, this::onStyleLoaded);
     }
 
     /**
