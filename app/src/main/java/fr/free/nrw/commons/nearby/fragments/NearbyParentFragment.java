@@ -316,7 +316,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             initViews();
             presenter.setActionListeners(applicationKvStore);
             initNearbyFilter();
-            mapBoxMap.setStyle(isDarkTheme?Style.DARK:Style.OUTDOORS, style -> {
+            mapBoxMap.setStyle(isDarkTheme?Style.getPredefinedStyle("Dark"):Style.getPredefinedStyle("Outdoors"), style -> {
                 final UiSettings uiSettings = mapBoxMap.getUiSettings();
                 uiSettings.setCompassGravity(Gravity.BOTTOM | Gravity.LEFT);
                 uiSettings.setCompassMargins(12, 0, 0, 24);

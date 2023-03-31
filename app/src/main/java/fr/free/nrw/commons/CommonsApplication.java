@@ -24,6 +24,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.WellKnownTileServer;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
@@ -53,7 +54,6 @@ import java.util.Map;
 import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Named;
-import leakcanary.ObjectWatcher;
 import org.acra.ACRA;
 import org.acra.annotation.AcraCore;
 import org.acra.annotation.AcraDialog;
@@ -121,8 +121,6 @@ public class CommonsApplication extends MultiDexApplication {
      * Constants End
      */
 
-    private ObjectWatcher objectWatcher;
-
     private static CommonsApplication INSTANCE;
 
     public static CommonsApplication getInstance() {
@@ -152,7 +150,7 @@ public class CommonsApplication extends MultiDexApplication {
 
         INSTANCE = this;
         ACRA.init(this);
-        Mapbox.getInstance(this, getString(R.string.mapbox_commons_app_token));
+        Mapbox.getInstance(this, getString(R.string.mapbox_commons_app_token), WellKnownTileServer.Mapbox);
 
         ApplicationlessInjection
             .getInstance(this)
@@ -266,17 +264,6 @@ public class CommonsApplication extends MultiDexApplication {
     public String getUserAgent() {
         return "Commons/" + ConfigUtils.getVersionNameWithSha(this)
             + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE;
-    }
-
-    /**
-     * Provides a way to get member objectWatcher
-     *
-     * @param context Application context
-     * @return application member objectWatcher
-     */
-    public static ObjectWatcher getObjectWatcher(Context context) {
-        CommonsApplication application = (CommonsApplication) context.getApplicationContext();
-        return application.objectWatcher;
     }
 
     /**

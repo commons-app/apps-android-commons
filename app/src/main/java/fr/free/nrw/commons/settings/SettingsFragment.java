@@ -31,7 +31,6 @@ import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.single.BasePermissionListener;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.maps.TelemetryDefinition;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.campaigns.CampaignView;
@@ -160,21 +159,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             findPreference("displayLocationPermissionForCardView").setEnabled(false);
             findPreference(CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE).setEnabled(false);
             findPreference("managed_exif_tags").setEnabled(false);
-        }
-
-        // Opting out of telemetry due to app's privacy policy
-        telemetryOptInOut(false);
-        defaultKvStore.putBoolean(Prefs.TELEMETRY_PREFERENCE,false);
-    }
-
-    /**
-     * Opt in or out of MapBox telemetry
-     * @param shouldOptIn
-     */
-    private void telemetryOptInOut(boolean shouldOptIn){
-        TelemetryDefinition telemetry = Mapbox.getTelemetry();
-        if (telemetry != null) {
-            telemetry.setUserTelemetryRequestState(shouldOptIn);
         }
     }
 
