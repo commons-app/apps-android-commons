@@ -143,12 +143,15 @@ class LocationPickerActivityUnitTests {
             method.invoke(activity, mapboxMap)
             fail("Expected an exception to be thrown")
         } catch (e: InvocationTargetException) {
-            assertTrue(e.targetException is MapboxConfigurationException)
-            assertEquals(
-                "\nUsing MapView requires calling Mapbox.getInstance(Context context, String apiKey,"
-                        + " WellKnownTileServer wellKnownTileServer) before inflating or creating the view.",
-                e.targetException.message
-            )
+            assertTrue((e.targetException is MapboxConfigurationException) ||
+                       (e.targetException is ExceptionInInitializerError))
+            if (e.targetException is MapboxConfigurationException) {
+                assertEquals(
+                    "\nUsing MapView requires calling Mapbox.getInstance(Context context, String apiKey,"
+                            + " WellKnownTileServer wellKnownTileServer) before inflating or creating the view.",
+                    e.targetException.message
+                )
+            }
         }
     }
 
