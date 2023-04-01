@@ -20,7 +20,6 @@ public final class LocationPickerConstants {
         = Style.getPredefinedStyle("Streets");
 
 
-
     private LocationPickerConstants() {
     }
 }
