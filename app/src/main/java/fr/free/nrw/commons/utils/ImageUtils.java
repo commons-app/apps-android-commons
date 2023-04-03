@@ -45,7 +45,7 @@ public class ImageUtils {
     /**
      * Set 1st bit as 1 for blurry image ie. 0010
      */
-    static final int IMAGE_BLURRY = 1 << 1; // 2
+    public static final int IMAGE_BLURRY = 1 << 1; // 2
     /**
      * Set 2nd bit as 1 for duplicate image ie. 0100
      */
@@ -68,7 +68,7 @@ public class ImageUtils {
     public static final int IMAGE_KEEP = -1;
     public static final int IMAGE_WAIT = -2;
     public static final int EMPTY_CAPTION = -3;
-    public static final int FILE_NAME_EXISTS = -4;
+    public static final int FILE_NAME_EXISTS = 1 << 6;
     static final int NO_CATEGORY_SELECTED = -5;
 
     private static ProgressDialog progressDialogWallpaper;
