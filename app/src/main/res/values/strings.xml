@@ -192,7 +192,7 @@
   <string name="location_permission_title">Requesting Location Permission</string>
   <string name="ok">OK</string>
   <string name="warning">Warning</string>
-  <string name="duplicate_image_found">Duplicate Image Found</string>
+  <string name="duplicate_file_name">Duplicate File Name found</string>
   <string name="upload">Upload</string>
   <string name="yes">Yes</string>
   <string name="no">No</string>
