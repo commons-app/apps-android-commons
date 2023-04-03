@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -50,6 +51,9 @@ public class ProfileActivity extends BaseActivity {
     @BindView(R.id.tab_layout)
     public TabLayout tabLayout;
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
     @Inject
     SessionManager sessionManager;
 
@@ -83,9 +87,14 @@ public class ProfileActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
-        setTitle(sessionManager.getUserName());
+
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(view -> {
+            onSupportNavigateUp();
+        });
 
         userName = getIntent().getStringExtra(KEY_USERNAME);
+        setTitle(userName);
         shouldShowContributions = getIntent().getBooleanExtra(KEY_SHOULD_SHOW_CONTRIBUTIONS, false);
 
         supportFragmentManager = getSupportFragmentManager();
@@ -140,14 +149,13 @@ public class ProfileActivity extends BaseActivity {
         fragmentList.add(leaderboardFragment);
         titleList.add(getResources().getString(R.string.leaderboard_tab_title).toUpperCase());
 
-        if (shouldShowContributions) {
-            contributionsFragment = new ContributionsFragment();
-            Bundle contributionsListBundle = new Bundle();
-            contributionsListBundle.putString(KEY_USERNAME, userName);
-            contributionsFragment.setArguments(contributionsListBundle);
-            fragmentList.add(contributionsFragment);
-            titleList.add(getString(R.string.contributions_fragment).toUpperCase());
-        }
+        contributionsFragment = new ContributionsFragment();
+        Bundle contributionsListBundle = new Bundle();
+        contributionsListBundle.putString(KEY_USERNAME, userName);
+        contributionsFragment.setArguments(contributionsListBundle);
+        fragmentList.add(contributionsFragment);
+        titleList.add(getString(R.string.contributions_fragment).toUpperCase());
+
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
 
