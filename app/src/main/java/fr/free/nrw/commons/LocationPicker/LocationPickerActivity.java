@@ -53,6 +53,7 @@ import com.mapbox.mapboxsdk.maps.UiSettings;
 import com.mapbox.mapboxsdk.style.layers.Layer;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+import fr.free.nrw.commons.MapStyle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -248,8 +249,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
     @Override
     public void onMapReady(final MapboxMap mapboxMap) {
         this.mapboxMap = mapboxMap;
-        mapboxMap.setStyle(isDarkTheme ? LocationPickerConstants.DARK_MAP_STYLE :
-            LocationPickerConstants.STREETS_MAP_STYLE, this::onStyleLoaded);
+        mapboxMap.setStyle(isDarkTheme ? MapStyle.DARK : MapStyle.STREETS, this::onStyleLoaded);
     }
 
     /**

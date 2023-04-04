@@ -82,6 +82,7 @@ import com.mapbox.pluginscalebar.ScaleBarOptions;
 import com.mapbox.pluginscalebar.ScaleBarPlugin;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.MapController.NearbyPlacesInfo;
+import fr.free.nrw.commons.MapStyle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
@@ -316,7 +317,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             initViews();
             presenter.setActionListeners(applicationKvStore);
             initNearbyFilter();
-            mapBoxMap.setStyle(isDarkTheme?Style.getPredefinedStyle("Dark"):Style.getPredefinedStyle("Outdoors"), style -> {
+            mapBoxMap.setStyle(isDarkTheme? MapStyle.DARK :
+                MapStyle.OUTDOORS, style -> {
                 final UiSettings uiSettings = mapBoxMap.getUiSettings();
                 uiSettings.setCompassGravity(Gravity.BOTTOM | Gravity.LEFT);
                 uiSettings.setCompassMargins(12, 0, 0, 24);
