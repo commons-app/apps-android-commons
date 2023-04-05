@@ -54,6 +54,7 @@ import com.mapbox.mapboxsdk.maps.UiSettings;
 import com.mapbox.pluginscalebar.ScaleBarOptions;
 import com.mapbox.pluginscalebar.ScaleBarPlugin;
 import fr.free.nrw.commons.MapController;
+import fr.free.nrw.commons.MapStyle;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -190,8 +191,8 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             mapBox = mapBoxMap;
             initViews();
             presenter.setActionListeners(applicationKvStore);
-            mapBoxMap.setStyle(isDarkTheme? Style.getPredefinedStyle("Dark"):
-                Style.getPredefinedStyle("Outdoors"), style -> {
+            mapBoxMap.setStyle(isDarkTheme? MapStyle.DARK :
+                MapStyle.OUTDOORS, style -> {
                 final UiSettings uiSettings = mapBoxMap.getUiSettings();
                 uiSettings.setCompassGravity(Gravity.BOTTOM | Gravity.LEFT);
                 uiSettings.setCompassMargins(12, 0, 0, 24);
