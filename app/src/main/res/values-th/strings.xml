@@ -192,7 +192,6 @@
   <string name="location_permission_title">ขอสิทธิในการเข้าถึงตำแหน่ง</string>
   <string name="ok">ตกลง</string>
   <string name="warning">คำเตือน</string>
-  <string name="duplicate_image_found">พบภาพซ้ำซ้อน</string>
   <string name="upload">อัปโหลด</string>
   <string name="yes">ใช่</string>
   <string name="no">ไม่</string>

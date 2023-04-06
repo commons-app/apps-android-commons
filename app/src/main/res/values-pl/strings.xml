@@ -212,7 +212,6 @@
   <string name="location_permission_title">Prośba o dostęp do lokalizacji</string>
   <string name="ok">OK</string>
   <string name="warning">Ostrzeżenie</string>
-  <string name="duplicate_image_found">Znaleziono zduplikowany obraz</string>
   <string name="upload">Prześlij</string>
   <string name="yes">Tak</string>
   <string name="no">Nie</string>

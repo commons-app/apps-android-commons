@@ -200,7 +200,7 @@
   <string name="location_permission_title">位置権限の申請</string>
   <string name="ok">OK</string>
   <string name="warning">警告</string>
-  <string name="duplicate_image_found">重複する画像が見つかりました</string>
+  <string name="duplicate_file_name">重複したファイル名が見つかりました</string>
   <string name="upload">アップロード</string>
   <string name="yes">はい</string>
   <string name="no">いいえ</string>

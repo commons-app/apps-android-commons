@@ -241,7 +241,6 @@
   <string name="location_permission_title">جارٍ طلب إذن الموقع</string>
   <string name="ok">موافق</string>
   <string name="warning">تحذير</string>
-  <string name="duplicate_image_found">تم العثور على صورة مكررة</string>
   <string name="upload">رفع</string>
   <string name="yes">نعم</string>
   <string name="no">لا</string>

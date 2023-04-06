@@ -198,7 +198,6 @@
   <string name="location_permission_title">Pyydetään sijaintilupaa</string>
   <string name="ok">OK</string>
   <string name="warning">Varoitus</string>
-  <string name="duplicate_image_found">Kopio löydetty</string>
   <string name="upload">Tallenna</string>
   <string name="yes">Kyllä</string>
   <string name="no">Ei</string>

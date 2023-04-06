@@ -212,7 +212,7 @@
   <string name="location_permission_title">請求位置權限</string>
   <string name="ok">好</string>
   <string name="warning">警告</string>
-  <string name="duplicate_image_found">發現重複圖片</string>
+  <string name="duplicate_file_name">找到重複的檔案名稱</string>
   <string name="upload">上傳</string>
   <string name="yes">是</string>
   <string name="no">否</string>
@@ -496,6 +496,8 @@
   <string name="exif_tag_name_lensModel">透鏡型號</string>
   <string name="exif_tag_name_serialNumbers">序號</string>
   <string name="exif_tag_name_software">軟體</string>
+  <string name="media_location_permission_denied">已拒絕媒體位置存取</string>
+  <string name="add_location_manually">我們無法從您上傳的圖片裡自動取得位置資料。請在提交前為每張圖片添加恰當的位置</string>
   <string name="share_text">從您的手機上直接上傳照片到維基共享資源，立即下載共享資源應用程式：%1$s</string>
   <string name="share_via">分享應用程式透過…</string>
   <string name="image_info">圖片資訊</string>

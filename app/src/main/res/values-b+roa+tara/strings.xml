@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Joetaras
+* S4b1nuz E.656
 -->
 <resources>
   <string name="submit">Conferme</string>
@@ -89,7 +90,7 @@
   <string name="upload_problem_different_geolocation">Sta fote ha state pigghiate da \'nu luèche diverse.</string>
   <string name="navigation_item_login">Tràse</string>
   <string name="nearby_directions">Direziune</string>
-  <string name="nearby_wikidata">Uicchidata</string>
+  <string name="nearby_wikidata">Uicchidate</string>
   <string name="nearby_wikipedia">Uicchipèdie</string>
   <string name="nearby_commons">Commons</string>
   <string name="block_notification_title">Bloccate</string>

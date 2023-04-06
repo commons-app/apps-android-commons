@@ -192,7 +192,6 @@
   <string name="location_permission_title">Αιτείται Άδεια Τοποθεσίας</string>
   <string name="ok">Εντάξει</string>
   <string name="warning">Προειδοποίηση</string>
-  <string name="duplicate_image_found">Βρέθηκε Διπλότυπη Εικόνα</string>
   <string name="upload">Μεταφόρτωση</string>
   <string name="yes">Ναι</string>
   <string name="no">Όχι</string>

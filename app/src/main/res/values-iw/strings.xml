@@ -223,7 +223,7 @@
   <string name="location_permission_title">בקשת הרשאה למיקום</string>
   <string name="ok">אישור</string>
   <string name="warning">אזהרה</string>
-  <string name="duplicate_image_found">נמצאה תמונה כפולה</string>
+  <string name="duplicate_file_name">נמצא שם קובץ כפול</string>
   <string name="upload">העלאה</string>
   <string name="yes">כן</string>
   <string name="no">לא</string>
@@ -507,6 +507,8 @@
   <string name="exif_tag_name_lensModel">דגם העדשה</string>
   <string name="exif_tag_name_serialNumbers">מספרים סידוריים</string>
   <string name="exif_tag_name_software">תוכנה</string>
+  <string name="media_location_permission_denied">הגישה למקום המדיה נדחתה</string>
+  <string name="add_location_manually">ייתכן שלא נוכל לאתר את נתוני המקום מתמונות שהעלית. נא להוסיף את המקום המתאים לכל תמונה בטרם הגשתה</string>
   <string name="share_text">כדי להעלות תמונות לוויקינתונים של ויקימדיה ישר מהטלפון שלך. אתם מוזמנים להוריד את היישום של ויקינתונים עכשיו: %1$s</string>
   <string name="share_via">שיתוף היישום דרך...</string>
   <string name="image_info">פרטי תמונה</string>
