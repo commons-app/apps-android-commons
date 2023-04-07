@@ -1233,7 +1233,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             return;
         }
         if (sessionManager.getUserName() == null) {
-            String userProfileLink = "https://commons.wikimedia.org/wiki/User:" + media.getAuthor();
+            String userProfileLink = "https://commons.wikimedia.org/wiki/User:" + media.getUser();
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(userProfileLink));
             startActivity(browserIntent);
             return;
