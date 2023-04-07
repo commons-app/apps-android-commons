@@ -225,7 +225,7 @@
   <string name="location_permission_title">Demande d’autorisation d’accès au stockage</string>
   <string name="ok">OK</string>
   <string name="warning">Avertissement</string>
-  <string name="duplicate_image_found">Image en doublon trouvée</string>
+  <string name="duplicate_file_name">Nom de fichier en doublon trouvé</string>
   <string name="upload">Téléverser</string>
   <string name="yes">Oui</string>
   <string name="no">Non</string>
@@ -509,6 +509,8 @@
   <string name="exif_tag_name_lensModel">Modèle de lentille</string>
   <string name="exif_tag_name_serialNumbers">Numéros de série</string>
   <string name="exif_tag_name_software">Logiciel</string>
+  <string name="media_location_permission_denied">Accès à l’emplacement du média refusé</string>
+  <string name="add_location_manually">Nous ne pourrons pas obtenir automatiquement les données de localisation des images que vous téléchargez. Veuillez ajouter l’emplacement approprié pour chaque image avant de la soumettre.</string>
   <string name="share_text">Téléversez des photos sur Wikimedia Commons directement depuis votre téléphone. Téléchargez l’application Commons maintenant : %1$s</string>
   <string name="share_via">Partager l’application via...</string>
   <string name="image_info">Informations sur l’image</string>

@@ -2,6 +2,7 @@
 <!-- Authors:
 * Anakmalaysia
 * Aurora
+* Hakimi97
 * Muhdnurhidayat
 * Tofeiku
 -->
@@ -205,6 +206,8 @@
   <string name="ends_on">Tamat pada:</string>
   <string name="review_thanks_yes_button_text">Imej berikutnya</string>
   <string name="review_thanks_no_button_text">Ya, kenapa tidak</string>
+  <string name="media_location_permission_denied">Akses lokasi media ditolak</string>
+  <string name="add_location_manually">Kami mungkin tidak dapat memperolehi data tempat dari gambar yang anda muat naik secara automatik. Sila tambah tempat sewajarnya pada setiap gambar sebelum menyerahnya</string>
   <string name="category_edit_helper_show_edit_title">Kemas kini kategori</string>
   <string name="category_edit_button_text">Kemas kini kategori</string>
   <string name="add_picture_to_wikipedia_article_title">Tambah imej ke Wikipedia</string>

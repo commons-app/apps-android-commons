@@ -154,7 +154,6 @@
   <string name="write_storage_permission_rationale">Potrebno dopuštenje spremanja na vanjsku pohranu. Bez toga aplikacija ne može pristupiti Vašoj kameri/galeriji.</string>
   <string name="ok">U redu</string>
   <string name="warning">Upozorenje</string>
-  <string name="duplicate_image_found">Pronađena duplirana slika</string>
   <string name="upload">Postavi</string>
   <string name="yes">Da</string>
   <string name="no">Ne</string>

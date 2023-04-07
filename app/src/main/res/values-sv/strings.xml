@@ -198,7 +198,6 @@
   <string name="location_permission_title">Begär platsbehörighet</string>
   <string name="ok">OK</string>
   <string name="warning">Varning</string>
-  <string name="duplicate_image_found">Dubblettbild hittades</string>
   <string name="upload">Ladda upp</string>
   <string name="yes">Ja</string>
   <string name="no">Nej</string>
@@ -482,6 +481,8 @@
   <string name="exif_tag_name_lensModel">Objektiv</string>
   <string name="exif_tag_name_serialNumbers">Serienummer</string>
   <string name="exif_tag_name_software">Programvara</string>
+  <string name="media_location_permission_denied">Åtkomst till mediaplats nekades</string>
+  <string name="add_location_manually">Vi kanske inte automatiskt kan få platsdata från bilder du laddar upp. Lägg till lämplig plats för varje bild innan du skickar in</string>
   <string name="share_text">Ladda upp foton till Wikimedia Commons direkt från din telefon. Ladda ned Commons-appen nu: %1$s</string>
   <string name="share_via">Dela appen via...</string>
   <string name="image_info">Bildinfo</string>
@@ -503,6 +504,7 @@
   <string name="delete_helper_ask_reason_copyright_press_photo">Pressfoto</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Slumpbild från Internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logotyp</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">Brott mot panoramafriheten</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Eftersom den är</string>
   <string name="category_edit_helper_make_edit_toast">Försöker uppdatera kategorier.</string>
   <string name="category_edit_helper_show_edit_title">Uppdatering av kategorier</string>
@@ -707,4 +709,6 @@
   <string name="welcome_to_full_screen_mode_text">Välkommen till markeringsläget i helskärm</string>
   <string name="full_screen_mode_zoom_info">Använd två fingrar för att zooma in och ut.</string>
   <string name="full_screen_mode_features_info">Svep snabbt och länge för att utföra dessa åtgärder: \n- Vänster/Höger: Gå till föregående/nästa \n- Upp: Markera\n- Ned: Markera som inte för uppladdning.</string>
+  <string name="set_up_avatar_toast_string">För att ange din avatar för topplistan trycker du på \"Använd som avatar\" i menyn med de tre punkter på valfri bild.</string>
+  <string name="similar_coordinate_description_auto_set">Koordinaterna är inte de exakta koordinaterna, men personen som laddade upp denna bild tycker att de är tillräckligt nära.</string>
 </resources>

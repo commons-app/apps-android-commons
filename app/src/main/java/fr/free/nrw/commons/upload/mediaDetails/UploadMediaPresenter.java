@@ -3,7 +3,12 @@ package fr.free.nrw.commons.upload.mediaDetails;
 import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
 import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_CAPTION;
+import static fr.free.nrw.commons.utils.ImageUtils.FILE_FBMD;
 import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
+import static fr.free.nrw.commons.utils.ImageUtils.FILE_NO_EXIF;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_BLURRY;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_DARK;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_GEOLOCATION_DIFFERENT;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
@@ -314,18 +319,26 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
             uploadItem.setHasInvalidLocation(true);
         }
 
-        switch (errorCode) {
-            case EMPTY_CAPTION:
-                Timber.d("Captions are empty. Showing toast");
-                view.showMessage(R.string.add_caption_toast, R.color.color_error);
-                break;
-            case FILE_NAME_EXISTS:
-                Timber.d("Trying to show duplicate picture popup");
-                view.showDuplicatePicturePopup(uploadItem);
-                break;
-            default:
-                view.showBadImagePopup(errorCode, uploadItem);
+        // If errorCode is empty caption show message
+        if (errorCode == EMPTY_CAPTION) {
+            Timber.d("Captions are empty. Showing toast");
+            view.showMessage(R.string.add_caption_toast, R.color.color_error);
         }
+
+        // If image with same file name exists check the bit in errorCode is set or not
+        if ((errorCode & FILE_NAME_EXISTS) != 0) {
+            Timber.d("Trying to show duplicate picture popup");
+            view.showDuplicatePicturePopup(uploadItem);
+        }
+
+        // If image has some problems check if the bits are set in errorCode and
+        // show popup accordingly
+        if (((errorCode & FILE_NO_EXIF) != 0) || ((errorCode & IMAGE_DARK) != 0) ||
+            ((errorCode & FILE_FBMD) != 0) || ((errorCode & IMAGE_GEOLOCATION_DIFFERENT) != 0) ||
+            ((errorCode & IMAGE_BLURRY) != 0)) {
+            view.showBadImagePopup(errorCode, uploadItem);
+        }
+
     }
 
     /**

@@ -222,7 +222,6 @@
   <string name="location_permission_title">Запит на визначення розташування</string>
   <string name="ok">Гаразд</string>
   <string name="warning">Попередження</string>
-  <string name="duplicate_image_found">Виявлено дублікат зображення</string>
   <string name="upload">Завантажити</string>
   <string name="yes">Так</string>
   <string name="no">Ні</string>

@@ -158,7 +158,6 @@
   <string name="location_permission_title">Изисква се разрешение за съхранение на геолокационни данни</string>
   <string name="ok">Добре</string>
   <string name="warning">Предупреждение</string>
-  <string name="duplicate_image_found">Открит е дубликат на файла</string>
   <string name="upload">Качване</string>
   <string name="yes">Да</string>
   <string name="no">Не</string>

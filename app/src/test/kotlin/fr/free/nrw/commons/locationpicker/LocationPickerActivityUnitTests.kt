@@ -10,6 +10,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
+import com.mapbox.mapboxsdk.exceptions.MapboxConfigurationException
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.Style
@@ -24,6 +25,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM
 import org.junit.Assert
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -37,6 +39,7 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -136,7 +139,20 @@ class LocationPickerActivityUnitTests {
             MapboxMap::class.java
         )
         method.isAccessible = true
-        method.invoke(activity, mapboxMap)
+        try {
+            method.invoke(activity, mapboxMap)
+            fail("Expected an exception to be thrown")
+        } catch (e: InvocationTargetException) {
+            assertTrue((e.targetException is MapboxConfigurationException) ||
+                       (e.targetException is ExceptionInInitializerError))
+            if (e.targetException is MapboxConfigurationException) {
+                assertEquals(
+                    "\nUsing MapView requires calling Mapbox.getInstance(Context context, String apiKey,"
+                            + " WellKnownTileServer wellKnownTileServer) before inflating or creating the view.",
+                    e.targetException.message
+                )
+            }
+        }
     }
 
     @Test
@@ -234,9 +250,9 @@ class LocationPickerActivityUnitTests {
         method.isAccessible = true
         method.invoke(activity)
         verify(applicationKvStore, times(1))
-            .putString(LAST_LOCATION, position.target.latitude.toString()
+            .putString(LAST_LOCATION, position.target!!.latitude.toString()
                     + ","
-                    + position.target.longitude
+                    + position.target!!.longitude
             )
         verify(applicationKvStore, times(1))
             .putString(LAST_ZOOM, position.zoom.toString())

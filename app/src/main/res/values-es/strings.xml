@@ -216,7 +216,6 @@
   <string name="location_permission_title">Pidiendo Permiso de Ubicación</string>
   <string name="ok">Aceptar</string>
   <string name="warning">Atención</string>
-  <string name="duplicate_image_found">Se encontró una imagen duplicada</string>
   <string name="upload">Cargar</string>
   <string name="yes">Sí</string>
   <string name="no">No</string>

@@ -192,7 +192,7 @@
   <string name="location_permission_title">Requesting Location Permission</string>
   <string name="ok">OK</string>
   <string name="warning">Warning</string>
-  <string name="duplicate_image_found">Duplicate Image Found</string>
+  <string name="duplicate_file_name">Duplicate File Name found</string>
   <string name="upload">Upload</string>
   <string name="yes">Yes</string>
   <string name="no">No</string>
@@ -510,6 +510,9 @@ Upload your first media by tapping on the add button.</string>
   <string name="exif_tag_name_lensModel">Lens Model</string>
   <string name="exif_tag_name_serialNumbers">Serial Numbers</string>
   <string name="exif_tag_name_software">Software</string>
+
+  <string name="media_location_permission_denied">Media location access denied</string>
+  <string name="add_location_manually">We may not be able to automatically obtain location data from pictures you upload. Please add the appropriate location for each picture before submitting</string>
 
   <string name="share_text">Upload photos to Wikimedia Commons directly from your phone. Download the Commons App now: %1$s</string>
   <string name="share_via">Share app via...</string>

@@ -220,7 +220,6 @@
   <string name="location_permission_title">Anfordern der Standortfreigabe</string>
   <string name="ok">Okay</string>
   <string name="warning">Warnung</string>
-  <string name="duplicate_image_found">Doppeltes Bild gefunden</string>
   <string name="upload">Hochladen</string>
   <string name="yes">Ja</string>
   <string name="no">Nein</string>

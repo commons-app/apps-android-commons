@@ -197,7 +197,6 @@
   <string name="location_permission_title">درخواست مجوز موقعیت مکانی</string>
   <string name="ok">تأیید</string>
   <string name="warning">هشدار</string>
-  <string name="duplicate_image_found">عکس تکراری پیدا شد</string>
   <string name="upload">بارگذاری</string>
   <string name="yes">بله</string>
   <string name="no">خیر</string>

@@ -206,7 +206,6 @@
   <string name="location_permission_title">Autorização para identificar localização</string>
   <string name="ok">OK</string>
   <string name="warning">Aviso</string>
-  <string name="duplicate_image_found">Foi encontrada uma imagem duplicada</string>
   <string name="upload">Carregar</string>
   <string name="yes">Sim</string>
   <string name="no">Não</string>

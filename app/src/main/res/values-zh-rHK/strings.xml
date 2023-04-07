@@ -169,7 +169,6 @@
   <string name="location_permission_title">請求儲存裝置權限</string>
   <string name="ok">確定</string>
   <string name="warning">警告！</string>
-  <string name="duplicate_image_found">發現重複圖片</string>
   <string name="upload">上載</string>
   <string name="yes">是</string>
   <string name="no">否</string>

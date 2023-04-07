@@ -207,7 +207,7 @@
   <string name="location_permission_title">Zahtevam dovoljenje za lokacijo</string>
   <string name="ok">V redu</string>
   <string name="warning">Opozorilo</string>
-  <string name="duplicate_image_found">Najdena podvojena slika</string>
+  <string name="duplicate_file_name">Najdeno podvojeno ime datoteke</string>
   <string name="upload">Naloži</string>
   <string name="yes">Da</string>
   <string name="no">Ne</string>
@@ -491,6 +491,8 @@
   <string name="exif_tag_name_lensModel">Model leče</string>
   <string name="exif_tag_name_serialNumbers">Serijske številke</string>
   <string name="exif_tag_name_software">Programska oprema</string>
+  <string name="media_location_permission_denied">Dostop do lokacije predstavnosti zavrnjen</string>
+  <string name="add_location_manually">Za slike, ki jih nalagate, ne moremo samodejno pridobiti lokacije. Pred pošiljanjem dodajte za vsako sliko ustrezno lokacijo.</string>
   <string name="share_text">Nalagajte slike v Wikimedijino zbirko neposredno iz telefona. Prenesite aplikacijo Commons zdaj: %1$s</string>
   <string name="share_via">Deli aplikacijo prek ...</string>
   <string name="image_info">Informacije o sliki</string>

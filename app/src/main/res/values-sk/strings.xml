@@ -212,7 +212,6 @@
   <string name="location_permission_title">Požiadavka na prístup k polohe</string>
   <string name="ok">OK</string>
   <string name="warning">Upozornenie</string>
-  <string name="duplicate_image_found">Nájdený duplicitný obrázok</string>
   <string name="upload">Nahrať</string>
   <string name="yes">Áno</string>
   <string name="no">Nie</string>

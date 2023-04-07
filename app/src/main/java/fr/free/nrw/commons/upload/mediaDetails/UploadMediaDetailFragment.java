@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
 import static android.app.Activity.RESULT_OK;
+import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
 import android.annotation.SuppressLint;
@@ -374,7 +375,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 }
             });
             DialogUtil.showAlertDialog(getActivity(),
-                getString(R.string.duplicate_image_found),
+                getString(R.string.duplicate_file_name),
                 String.format(Locale.getDefault(),
                     uploadTitleFormat,
                     uploadItem.getFileName()),
@@ -403,13 +404,18 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 getString(R.string.upload),
                 getString(R.string.cancel),
                 () -> {
-                    uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
                     /*
                         User skipped the warning of low quality image, so we call
                         onImageValidationSuccess rather than onNextButtonClicked to avoid showing
                         other warning popups again.
                     */
-                    onImageValidationSuccess();
+
+                    // validate image only when same file name error does not occur
+                    // show the same file name error if exists.
+                    if ((errorCode & FILE_NAME_EXISTS) == 0) {
+                        uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
+                        onImageValidationSuccess();
+                    }
                 },
                 () -> deleteThisPicture()
             );

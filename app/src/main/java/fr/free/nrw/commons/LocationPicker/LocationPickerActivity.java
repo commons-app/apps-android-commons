@@ -31,9 +31,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.mapbox.android.core.location.LocationEngineCallback;
-import com.mapbox.android.core.location.LocationEngineResult;
-import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraPosition.Builder;
@@ -41,8 +38,11 @@ import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationComponent;
 import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions;
+import com.mapbox.mapboxsdk.location.engine.LocationEngineCallback;
+import com.mapbox.mapboxsdk.location.engine.LocationEngineResult;
 import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
+import com.mapbox.mapboxsdk.location.permissions.PermissionsManager;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMap.OnCameraIdleListener;
@@ -53,10 +53,12 @@ import com.mapbox.mapboxsdk.maps.UiSettings;
 import com.mapbox.mapboxsdk.style.layers.Layer;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+import fr.free.nrw.commons.MapStyle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.utils.SystemThemeUtils;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.jetbrains.annotations.NotNull;
@@ -139,10 +141,19 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
     @Named("default_preferences")
     public
     JsonKvStore applicationKvStore;
+    /**
+     * isDarkTheme: for keeping a track of the device theme and modifying the map theme accordingly
+     */
+    @Inject
+    SystemThemeUtils systemThemeUtils;
+    private boolean isDarkTheme;
 
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         super.onCreate(savedInstanceState);
+
+        isDarkTheme = systemThemeUtils.isDeviceInNightMode();
 
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         final ActionBar actionBar = getSupportActionBar();
@@ -194,7 +205,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      * Clicking back button destroy locationPickerActivity
      */
     private void addBackButtonListener() {
-        final ImageView backButton = findViewById(R.id.mapbox_place_picker_toolbar_back_button);
+        final ImageView backButton = findViewById(R.id.maplibre_place_picker_toolbar_back_button);
         backButton.setOnClickListener(view -> finish());
     }
 
@@ -238,7 +249,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
     @Override
     public void onMapReady(final MapboxMap mapboxMap) {
         this.mapboxMap = mapboxMap;
-        mapboxMap.setStyle(Style.MAPBOX_STREETS, this::onStyleLoaded);
+        mapboxMap.setStyle(isDarkTheme ? MapStyle.DARK : MapStyle.STREETS, this::onStyleLoaded);
     }
 
     /**

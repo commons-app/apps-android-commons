@@ -78,10 +78,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         return removedItems;
     }
 
-    public MediaDetailPagerFragment() {
-        this(false, false);
-    }
-
+    private MediaDetailPagerFragment() {}; // Constructor calls made to be explicit
     @SuppressLint("ValidFragment")
     public MediaDetailPagerFragment(Boolean editable, boolean isFeaturedImage) {
         this.editable = editable;
@@ -107,16 +104,23 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
         adapter = new MediaDetailAdapter(getChildFragmentManager());
 
-        if (getActivity() != null) {
-            final ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.setDisplayHomeAsUpEnabled(true);
-            }
+        // ActionBar is now supported in both activities - if this crashes something is quite wrong
+        final ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+        else {
+            throw new AssertionError("Action bar should not be null!");
         }
 
         // If fragment is associated with ProfileActivity, then hide the tabLayout
         if (getActivity() instanceof ProfileActivity) {
             ((ProfileActivity)getActivity()).tabLayout.setVisibility(View.GONE);
+        }
+
+        // Else if fragment is associated with MainActivity then hide that tab layout
+        else if (getActivity() instanceof MainActivity) {
+            ((MainActivity)getActivity()).hideTabs();
         }
 
         pager.setAdapter(adapter);
@@ -127,9 +131,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
             getActivity().invalidateOptionsMenu();
         }
         adapter.notifyDataSetChanged();
-        if (getActivity() instanceof MainActivity) {
-            ((MainActivity)getActivity()).hideTabs();
-        }
+
         return view;
     }
 

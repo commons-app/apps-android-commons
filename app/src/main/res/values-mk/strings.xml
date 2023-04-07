@@ -193,7 +193,7 @@
   <string name="location_permission_title">Се бара дозвола за утврдување на местоположбата</string>
   <string name="ok">ОК</string>
   <string name="warning">Предупредување</string>
-  <string name="duplicate_image_found">Пронајдена дуплирана слика</string>
+  <string name="duplicate_file_name">Пронајдено дуплирано име на податоека</string>
   <string name="upload">Подигни</string>
   <string name="yes">Да</string>
   <string name="no">Не</string>
@@ -477,6 +477,8 @@
   <string name="exif_tag_name_lensModel">Модел на објективот</string>
   <string name="exif_tag_name_serialNumbers">Сериски броеви</string>
   <string name="exif_tag_name_software">Програми</string>
+  <string name="media_location_permission_denied">Одибиен пристапот до местоположбата на сликата</string>
+  <string name="add_location_manually">Можеби нема да можеме автоматски да ги добиеме податоците за местоположба од сликите што ги подигате. Ставете ја соодветната местоположба за секоја слика пред да подигате</string>
   <string name="share_text">Подигајте слики непосредно на Ризницата од телефон. Преземете го прилогот на Ризницата сега: %1$s</string>
   <string name="share_via">Сподели преку...</string>
   <string name="image_info">Инфо за сликата</string>

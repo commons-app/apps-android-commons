@@ -214,7 +214,6 @@
   <string name="location_permission_title">Konum İzni İsteği</string>
   <string name="ok">Tamam</string>
   <string name="warning">Uyarı</string>
-  <string name="duplicate_image_found">Yinelenen Resim Bulundu</string>
   <string name="upload">Yükle</string>
   <string name="yes">Evet</string>
   <string name="no">Hayır</string>

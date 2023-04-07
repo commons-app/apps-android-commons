@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.LocationPicker;
 
+import com.mapbox.mapboxsdk.maps.Style;
+
 /**
  * Constants need for location picking
  */

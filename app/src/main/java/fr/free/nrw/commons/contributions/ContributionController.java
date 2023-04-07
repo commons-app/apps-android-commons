@@ -3,9 +3,12 @@ package fr.free.nrw.commons.contributions;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 import android.Manifest;
+import android.Manifest.permission;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import androidx.annotation.NonNull;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.DefaultCallback;
@@ -66,7 +69,18 @@ public class ContributionController {
 
         PermissionUtils.checkPermissionsAndPerformAction(activity,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            () -> FilePicker.openCustomSelector(activity, 0),
+            () -> {
+                if (VERSION.SDK_INT >= VERSION_CODES.Q) {
+                    PermissionUtils.checkPermissionsAndPerformAction(
+                        activity,
+                        permission.ACCESS_MEDIA_LOCATION,
+                        () -> {},
+                        R.string.media_location_permission_denied,
+                        R.string.add_location_manually
+                    );
+                }
+                FilePicker.openCustomSelector(activity, 0);
+            },
             R.string.storage_permission_title,
             R.string.write_storage_permission_rationale);
     }

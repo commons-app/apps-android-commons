@@ -208,7 +208,6 @@
   <string name="location_permission_title">Richiesta dell\'autorizzazione di posizione</string>
   <string name="ok">OK</string>
   <string name="warning">Attenzione</string>
-  <string name="duplicate_image_found">Trovata un\'immagine duplicata</string>
   <string name="upload">Carica</string>
   <string name="yes">Sì</string>
   <string name="no">No</string>
