@@ -212,6 +212,7 @@
   <string name="location_permission_title">Prośba o dostęp do lokalizacji</string>
   <string name="ok">OK</string>
   <string name="warning">Ostrzeżenie</string>
+  <string name="duplicate_file_name">Znaleziono zduplikowaną nazwę pliku</string>
   <string name="upload">Prześlij</string>
   <string name="yes">Tak</string>
   <string name="no">Nie</string>
@@ -495,6 +496,8 @@
   <string name="exif_tag_name_lensModel">Model obiektywu</string>
   <string name="exif_tag_name_serialNumbers">Numery seryjne</string>
   <string name="exif_tag_name_software">Oprogramowanie</string>
+  <string name="media_location_permission_denied">Odmowa dostępu do lokalizacji multimediów</string>
+  <string name="add_location_manually">Możemy nie być w stanie automatycznie uzyskać danych o lokalizacji z przesyłanych zdjęć. Przed przesłaniem dodaj odpowiednią lokalizację dla każdego zdjęcia</string>
   <string name="share_text">Prześlij zdjęcia do Wikimedia Commons bezpośrednio z telefonu. Pobierz teraz aplikację Commons: %1$s</string>
   <string name="share_via">Udostępnij za pośrednictwem…</string>
   <string name="image_info">Informacje o obrazie</string>
