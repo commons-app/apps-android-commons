@@ -325,17 +325,15 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
             view.showMessage(R.string.add_caption_toast, R.color.color_error);
         }
 
-        // If image with same file name exists check the bit in errorCode is set or not
-        if ((errorCode & FILE_NAME_EXISTS) != 0) {
+        else if (errorCode == FILE_NAME_EXISTS) {
             Timber.d("Trying to show duplicate picture popup");
             view.showDuplicatePicturePopup(uploadItem);
         }
 
-        // If image has some problems check if the bits are set in errorCode and
-        // show popup accordingly
-        if (((errorCode & FILE_NO_EXIF) != 0) || ((errorCode & IMAGE_DARK) != 0) ||
-            ((errorCode & FILE_FBMD) != 0) || ((errorCode & IMAGE_GEOLOCATION_DIFFERENT) != 0) ||
-            ((errorCode & IMAGE_BLURRY) != 0)) {
+        // If image has some problems, show popup accordingly
+        if ((errorCode == FILE_NO_EXIF) || (errorCode == IMAGE_DARK) ||
+            (errorCode == FILE_FBMD) || (errorCode == IMAGE_GEOLOCATION_DIFFERENT) ||
+            (errorCode == IMAGE_BLURRY)) {
             view.showBadImagePopup(errorCode, uploadItem);
         }
 
