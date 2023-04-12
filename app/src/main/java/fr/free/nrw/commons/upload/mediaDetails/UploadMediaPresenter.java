@@ -8,6 +8,7 @@ import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
 import static fr.free.nrw.commons.utils.ImageUtils.FILE_NO_EXIF;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_BLURRY;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_DARK;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_DUPLICATE;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_GEOLOCATION_DIFFERENT;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
@@ -325,7 +326,8 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
             view.showMessage(R.string.add_caption_toast, R.color.color_error);
         }
 
-        if (errorCode == FILE_NAME_EXISTS) {
+        if ((errorCode == FILE_NAME_EXISTS) || (errorCode == (FILE_NO_EXIF | FILE_NAME_EXISTS)) ||
+            (errorCode == (IMAGE_DUPLICATE | FILE_NAME_EXISTS))) {
             Timber.d("Trying to show duplicate picture popup");
             view.showDuplicatePicturePopup(uploadItem);
         }
@@ -333,7 +335,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
         // If image has some problems, show popup accordingly
         if ((errorCode == FILE_NO_EXIF) || (errorCode == IMAGE_DARK) ||
             (errorCode == FILE_FBMD) || (errorCode == IMAGE_GEOLOCATION_DIFFERENT) ||
-            (errorCode == IMAGE_BLURRY)) {
+            (errorCode == IMAGE_BLURRY) || errorCode == (FILE_NO_EXIF | FILE_NAME_EXISTS)) {
             view.showBadImagePopup(errorCode, uploadItem);
         }
 
