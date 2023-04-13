@@ -326,6 +326,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
             view.showMessage(R.string.add_caption_toast, R.color.color_error);
         }
 
+        // If image with same file name exists check the bit in errorCode is set or not
         if ((errorCode & FILE_NAME_EXISTS) != 0) {
             Timber.d("Trying to show duplicate picture popup");
             view.showDuplicatePicturePopup(uploadItem);
