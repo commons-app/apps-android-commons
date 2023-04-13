@@ -154,14 +154,8 @@ class UploadMediaPresenterTest {
         uploadMediaPresenter.handleImageResult(EMPTY_CAPTION, uploadItem)
         verify(view).showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
 
-        /**
-         * Bad Picture Test
-         * Handle any error code corresponding to:
-         * FILE_NO_EXIF, IMAGE_DARK, FILE_FBMD, IMAGE_GEOLOCATION_DIFFERENT, IMAGE_BLURRY
-         * FILE_NO_EXIF | FILE_NAME_EXISTS
-         */
-        val badImageErrorCodes = listOf(1, 2, 8, 16, 32, 96)
-        uploadMediaPresenter.handleImageResult(badImageErrorCodes.random(), uploadItem)
+        // Bad Picture Test
+        uploadMediaPresenter.handleImageResult(-7, uploadItem)
         verify(view)?.showBadImagePopup(ArgumentMatchers.anyInt(), ArgumentMatchers.eq(uploadItem))
     }
 
