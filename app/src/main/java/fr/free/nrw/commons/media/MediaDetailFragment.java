@@ -57,6 +57,7 @@ import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.LocationPicker.LocationPicker;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
@@ -1230,6 +1231,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     @OnClick(R.id.mediaDetailAuthor)
     public void onAuthorViewClicked() {
         if (media == null || media.getUser() == null) {
+            return;
+        }
+        if (sessionManager.getUserName() == null) {
+            String userProfileLink = BuildConfig.COMMONS_URL + "/wiki/User:" + media.getUser();
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(userProfileLink));
+            startActivity(browserIntent);
             return;
         }
         ProfileActivity.startYourself(getActivity(), media.getUser(), !Objects
