@@ -3,13 +3,7 @@ package fr.free.nrw.commons.upload.mediaDetails;
 import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
 import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_CAPTION;
-import static fr.free.nrw.commons.utils.ImageUtils.FILE_FBMD;
 import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
-import static fr.free.nrw.commons.utils.ImageUtils.FILE_NO_EXIF;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_BLURRY;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_DARK;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_DUPLICATE;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_GEOLOCATION_DIFFERENT;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
