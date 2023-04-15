@@ -9,11 +9,11 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.visibility;
 import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION;
 import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM;
 
-import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Html;
@@ -152,6 +152,9 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
     @Inject
     SystemThemeUtils systemThemeUtils;
     private boolean isDarkTheme;
+
+    @Inject
+    LocationServiceManager locationManager;
 
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
@@ -370,12 +373,6 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
             // Set the component's render mode
             locationComponent.setRenderMode(RenderMode.NORMAL);
 
-            /** User's last location is unknown in case the access to location is turned off
-             * Ask for location access in case it is unavailable
-             */
-            if(locationComponent.getLastKnownLocation() == null){
-                showLocationOffDialog();
-            }
 
             // Get the component's location engine to receive user's last location
             locationComponent.getLocationEngine().getLastLocation(
@@ -383,8 +380,6 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
                     @Override
                     public void onSuccess(LocationEngineResult result) {
                         location = result.getLastLocation();
-                        mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                            new LatLng(location.getLatitude(), location.getLongitude()), 15.0));
                     }
 
                     @Override
@@ -464,9 +459,26 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      */
     private void addCenterOnGPSButton(){
         fabCenterOnLocation = findViewById(R.id.center_on_gps);
-        fabCenterOnLocation.setOnClickListener(view -> enableLocationComponent(mapboxMap.getStyle()));
+        fabCenterOnLocation.setOnClickListener(view -> getCenter());
     }
 
+    /**
+     * Center the map at user's current location
+     */
+    private void getCenter() {
+        fr.free.nrw.commons.location.LatLng currLocation = locationManager.getLastLocation();
+        if (currLocation != null) {
+            mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                    new LatLng(currLocation.getLatitude(), currLocation.getLongitude()), 15.0));
+        } else if (locationManager.isGPSProviderEnabled() ||
+            locationManager.isNetworkProviderEnabled()) {
+            locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
+            locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
+        } else {
+            showLocationOffDialog();
+        }
+    }
+    
     /**
      * Inform the user that the access to location is turned off
      * And ask for location access
@@ -488,7 +500,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
         final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         final PackageManager packageManager = getPackageManager();
 
-        if (intent.resolveActivity(packageManager)!= null) {
+        if (intent.resolveActivity(packageManager) != null) {
             startActivity(intent);
             Toast.makeText(this, R.string.recommend_high_accuracy_mode, Toast.LENGTH_LONG).show();
         } else {
