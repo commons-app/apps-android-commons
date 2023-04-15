@@ -129,6 +129,10 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
                 if (getReviewActivity().reviewController.firstRevision != null) {
                     user = getReviewActivity().reviewController.firstRevision.getUser();
+                } else {
+                    if(savedInstanceState != null) {
+                        user = savedInstanceState.getString(SAVED_USER);
+                    }
                 }
 
                 //if the user is null because of whatsoever reason, review will not be sent anyways
