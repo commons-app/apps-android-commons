@@ -373,7 +373,6 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
             // Set the component's render mode
             locationComponent.setRenderMode(RenderMode.NORMAL);
 
-
             // Get the component's location engine to receive user's last location
             locationComponent.getLocationEngine().getLastLocation(
                 new LocationEngineCallback<LocationEngineResult>() {
