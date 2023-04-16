@@ -146,7 +146,7 @@ public class ReviewController {
                 .getInstance(context)
                 .getCommonsApplicationComponent()
                 .inject(this);
-        ViewUtil.showShortToast(context, context.getString(R.string.send_thank_toast, media.getDisplayTitle()));
+        ViewUtil.showShortToast(context, context.getString(R.string.send_thank_toast, media.getAuthor(), media.getDisplayTitle()));
 
         if (firstRevision == null) {
             return;
@@ -166,7 +166,7 @@ public class ReviewController {
         final String title;
         if (result) {
             title = context.getString(R.string.send_thank_success_title);
-            message = context.getString(R.string.send_thank_success_message, media.getDisplayTitle());
+            message = context.getString(R.string.send_thank_success_message, media.getAuthor(), media.getDisplayTitle());
         } else {
             title = context.getString(R.string.send_thank_failure_title);
             message = context.getString(R.string.send_thank_failure_message, media.getDisplayTitle());
