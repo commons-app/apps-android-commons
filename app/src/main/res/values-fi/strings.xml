@@ -31,13 +31,14 @@
   <string name="submit">Lähetä</string>
   <string name="add_another_description">Lisää toinen kuvaus</string>
   <string name="show_captions">Kuvatekstit</string>
+  <string name="row_item_language_description">Kielen kuvaus</string>
   <string name="row_item_caption">Kuvateksti</string>
   <string name="show_captions_description">Kuvaus</string>
   <string name="nearby_row_image">Kuva</string>
   <string name="nearby_all">Kaikki</string>
   <string name="appwidget_img">Päivän kuva</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">1 tiedosto tallentuu</item>
+    <item quantity="one">%1$d tiedosto tallentuu</item>
     <item quantity="other">%1$d tiedostoa tallentuu</item>
   </plurals>
   <plurals name="contributions_subtitle">
@@ -591,6 +592,8 @@
   <string name="statistics_quality">Laatukuvat</string>
   <string name="resuming_upload">Jatketaan lähettämistä...</string>
   <string name="pausing_upload">Keskeytetään lähetys...</string>
+  <string name="cancelling_upload">Peruutetaan tallennusta…</string>
+  <string name="cancel_upload">Peruuta tallennus</string>
   <string name="limited_connection_is_on">Rajoitettu yhteystila on päällä.</string>
   <string name="media_details_tooltip">Kirjoita lyhyt kuvateksti. Kerro miksi kuva on kiinnostava, tyypillinen tai harvinainen ja selitä asiayhteys, näkyy se kuvassa tai ei. Käytä mahdollisimman tarkkaa terminologiaa.</string>
   <string name="depicts_tooltip">Etsi ja valitse kaikki tämän kuvan kuvaamat käsitteet. Ole mahdollisimman tarkka. Mikäli kuvattuna on monta kohdetta, valitse ne kaikki kohtuullisuuden rajoissa. Älä valitse yleisiä tunnisteita mikäli tarkempia on saatavilla.</string>
@@ -632,5 +635,20 @@
   <string name="no_location_found_title">Paikkaa ei löytynyt</string>
   <string name="add_location">Lisää paikka</string>
   <string name="explore_map_details">Tiedot</string>
+  <string name="api_level">API-taso</string>
+  <string name="android_version">Android-versio</string>
+  <string name="device_manufacturer">Laitteen valmistaja</string>
+  <string name="device_model">Laitteen malli</string>
+  <string name="device_name">Laitteen nimi</string>
+  <string name="network_type">Verkkotyyppi</string>
+  <string name="thanks_feedback">Kiitos palautteen antamisesta</string>
+  <string name="error_feedback">Virhe palautetta lähetettäessä</string>
+  <string name="enter_description">Mikä on palautteesi?</string>
   <string name="your_feedback">Palautteesi</string>
+  <string name="mark_as_not_for_upload">Merkitse ei-tallennettavaksi</string>
+  <string name="this_image_is_already_uploaded">Tämä kuva on jo tallennettu</string>
+  <string name="image_selected">Kuva valittu</string>
+  <string name="welcome_to_full_screen_mode_text">Tervetuloa koko näytön valintatilaan</string>
+  <string name="full_screen_mode_zoom_info">Käytä kahta sormea lähentääksesi ja loitontaaksesi.</string>
+  <string name="full_screen_mode_features_info">Pyyhkäise nopeasti ja pitkään suorittaaksesi nämä toiminnot: \n- Vasen/Oikea: Siirry edelliseen/seuraavaan \n- Ylös: Valitse\n- Alas: Merkitse ei-tallennettavaksi.</string>
 </resources>

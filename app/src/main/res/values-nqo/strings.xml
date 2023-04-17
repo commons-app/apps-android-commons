@@ -110,6 +110,7 @@
   <string name="title_activity_review">ߘߐ߬ߞߊ߬ߙߊ߲߬ߠߌ߲ ߞߍ߫ ߘߊߓߍ߲ ߡߊ߬</string>
   <string name="menu_about">ߞߊ߬ ߓߍ߲߬</string>
   <string name="about_privacy_policy">ߜߎ߲߬ߘߎ߬ߢߐ߲߰ߦߊ ߞߎߙߎ߲߬ߘߎ</string>
+  <string name="about_credits">ߟߊߒߠߦߊ</string>
   <string name="title_activity_about">ߞߊ߬ ߓߍ߲߬</string>
   <string name="menu_feedback">ߞߙߐ߬ߛߌ߬ߕߊ ߗߋ߫ (ߢ:ߞߏ߲ߘߏ ߟߊ߫)</string>
   <string name="no_email_client">ߢߎߡߍߙߋ߲ߞߏ߲ߘߏ ߛߊ߲߬ߠߌ߲߬ߢߐ߲߰ ߡߊߞߍߣߍ߲߫ ߕߴߦߋ߲߬</string>
@@ -123,6 +124,8 @@
   <string name="preference_license">ߕߦߊ ߓߐߛߎ߲</string>
   <string name="use_previous">ߢߍߦߋߟߌ ߞߎ߲߬ߕߐ߮ ߟߊߓߊ߯ߙߊ߫ ߊ߬ ߣߌ߫ ߞߊ߲߬ߛߓߍ߬ߟߌ</string>
   <string name="preference_theme">ߞߍߗߏ߮</string>
+  <string name="license_name_cc_by_four">ߘߍ߬ߡߍ߲߬ߘߌ߬ߟߌ ߄.߀</string>
+  <string name="license_name_cc_by">ߘߍ߬ߡߍ߲߬ߘߌ߬ߟߌ ߃.߀</string>
   <string name="tutorial_1_text">ߥߞߌߡߋߘߌߦߊ ߞߐߡߐ߲ߛ ߟߋ߬ ߦߋ߫ ߖߌ߬ߦߊ߬ߓߍ ߝߊ߲߬ߓߊ ߡߊߛߐ߫ ߟߊ߫ ߡߍ߲ ߠߎ߬ ߦߋ߫ ߟߊߓߞߊߙߊ߫ ߟߊ߫ ߥߞߌߔߋߘߌߦߊ ߟߊ߫.</string>
   <string name="tutorial_1_subtext">ߌ ߟߊ߫ ߖߌ߬ߦߊ߬ߓߍ ߦߋ߫ ߡߐ߱ ߟߎ߬ ߘߍ߬ߡߍ߲߬ ߠߊ߫ ߞߊ߬ߙߊ߲ ߡߊ߬ ߘߎߢߊ߫ ߝߊ߲߭ ߓߍ߯߹</string>
   <string name="tutorial_2_text">ߖߊ߰ߣߌ߲߫ ߌ ߦߋ߫ ߖߌ߬ߦߊ߬ߓߍ߫ ߟߎ߫ ߟߋ߬ ߟߊߦߟߍ߬ ߡߍ߲ ߠߎ߬ ߕߊ߬ߣߍ߲߫ ߥߟߊ߫ ߛߌ߲ߘߌߣߍ߲߫ ߦߴߌ ߖߍ߬ߘߍ ߓߟߏ߫:</string>
@@ -306,6 +309,7 @@
   <string name="delete">ߊ߬ ߖߏ߬ߛߌ߫</string>
   <string name="Achievements">ߞߎ߲߬ߝߊ߰ߟߌ</string>
   <string name="Profile">ߢߊߞߙߍ</string>
+  <string name="statistics">ߖߊ߬ߕߋ߬ߛߎ߬ߓߐ ߟߎ߬</string>
   <string name="statistics_thanks">ߞߎߟߎ߲ߖߋߟߌ ߓߘߊ߫ ߟߊߛߐ߬ߘߐ߲߬</string>
   <string name="statistics_featured">ߖߌ߬ߦߊ߬ߓߍ߫ ߟߊߓߊ߯ߙߕߊ ߟߎ߬</string>
   <string name="statistics_wikidata_edits">ߖߌ߬ߦߊ߬ߓߍ ߞߊߕߙߍ߬ \"ߛߌ߰ߢߐ߲߰ ߦߙߐ\" ߡߊ߬</string>
@@ -363,6 +367,8 @@
   <string name="never_ask_again">ߏ߬ ߞߊ߫ ߡߊߢߌ߬ߣߌ߲߬ߞߊ߫ ߏ߬ ߞߐ߫ ߡߎ߰ߡߍ߫</string>
   <string name="display_location_permission_title">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߞߍ߫ ߘߌ߲߬ߞߌߙߊ ߟߊ߬ߘߌ߬ߢߍ߬ߟߌ߬ ߞߏ ߘߐ߫</string>
   <string name="ends_on">ߘߌ߫ ߓߊ߲߫:</string>
+  <string name="display_campaigns">ߦߌ߬ߘߊ߬ߟߌ ߓߙߊߡߊߖߊ߲ߓߊ߲</string>
+  <string name="display_campaigns_explanation">ߓߙߊߡߊߖߊ߲ߓߊ߲ ߡߍ߲ ߠߎ߬ ߦߴߌ ߘߐ߫߸ ߏ߬ ߟߎ߫ ߦߌ߬ߘߊ߬</string>
   <string name="error_processing_image">ߝߎ߬ߕߎ߲߬ߕߌ ߘߏ߫ ߓߘߊ߫ ߓߌ߬ߟߵߊ߬ ߘߐ߫ ߞߵߌ ߕߏ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߊߦߍ߬ߟߍ ߞߊ߲߬߸ ߊ߬ ߡߊߝߍߣߍ߲߫ ߌߞߐ߫ ߖߊ߰ߣߌ߲߬߹</string>
   <string name="getting_edit_token">ߖߐߟߐ߲ߞߐ ߘߏ߫ ߟߊߛߐ߬ߘߐ߲߬ ߡߊ߬ߦߟߍ߬ߡߊ߲߬ߠߌ߲߬ ߞߊ߲ߡߊ߬</string>
   <string name="check_category_adding_template">ߞߙߊߞߏ ߟߊߘߏ߲߬ߠߌ߲ ߦߌߟߡߊ ߝߛߍ߬ߝߛߍ߬ ߞߊ߲ߡߊ߬.</string>
@@ -525,6 +531,7 @@
   <string name="custom_selector_empty_text">ߖߌ߬ߦߊ߬ߓߍ߫ ߕߴߦߋ߲߬</string>
   <string name="done">ߊ߬ ߞߍ߫</string>
   <string name="back">ߌ ߞߐߛߊ߬ߦߌ߬</string>
+  <string name="welcome_custom_selector_ok">ߡߊ߲߬ߕߊ߬ߣߌ߲߬ߡߊ߬ߞߏ</string>
   <string name="custom_selector_already_uploaded_image_text">ߖߌ߬ߦߊ߬ߓߍ ߣߌ߲߬ ߓߘߊ߫ ߓߊ߲߫ ߠߊߦߟߍ߬ ߟߊ߫ ߞߐߡߐ߲ߛ ߞߣߐ߫ ߞߘߐ߬ߡߊ߲߫</string>
   <string name="wlm_upload_info">ߖߌ߬ߦߊߓߍ ߣߌ߲߬ ߓߍߣߊ߬ ߟߊߕߘߍ߬ ߥߞߌ ߝߙߎߕߎ ߞߊ߬ߣߌ߲߬ߓߊ߮ ߂߀߂߁ ߜߊ߬ߛߊ ߘߐ߫</string>
   <string name="display_monuments">ߝߙߎߕߎ ߟߎ߬ ߟߊߓߊ߯ߙߊ߫</string>
