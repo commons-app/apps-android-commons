@@ -589,7 +589,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="title_for_parent_classes">PARENT CLASSES</string>
 
   <string name="upload_nearby_place_found_title">Nearby Place Found</string>
-  <string name="upload_nearby_place_found_description">Is this a photo of Place %1$s?</string>
+  <string name="upload_nearby_place_found_description">Is this a photo of %1$s?</string>
   <string name="title_app_shortcut_bookmark">Bookmarks</string>
   <string name="title_app_shortcut_setting">Settings</string>
   <string name="remove_bookmark">Removed from bookmarks</string>
