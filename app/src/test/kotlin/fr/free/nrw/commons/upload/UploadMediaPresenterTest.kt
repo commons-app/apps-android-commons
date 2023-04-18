@@ -154,10 +154,9 @@ class UploadMediaPresenterTest {
         uploadMediaPresenter.handleImageResult(EMPTY_CAPTION, uploadItem)
         verify(view).showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
 
-        //Bad Picture test
-        //Empty Caption test
+        // Bad Picture Test
         uploadMediaPresenter.handleImageResult(-7, uploadItem)
-        // TODO https://github.com/commons-app/apps-android-commons/issues/5204 verify(view)?.showBadImagePopup(ArgumentMatchers.anyInt(), ArgumentMatchers.eq(uploadItem))
+        verify(view)?.showBadImagePopup(ArgumentMatchers.anyInt(), ArgumentMatchers.eq(uploadItem))
     }
 
     @Test
@@ -229,7 +228,7 @@ class UploadMediaPresenterTest {
      */
     @Test
     fun handleBadImageBaseTestFileNameExists() {
-        uploadMediaPresenter.handleBadImage(-4, uploadItem)
+        uploadMediaPresenter.handleBadImage(64, uploadItem)
         verify(view).showDuplicatePicturePopup(uploadItem)
     }
 
