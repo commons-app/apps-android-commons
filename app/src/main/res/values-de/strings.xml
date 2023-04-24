@@ -570,7 +570,7 @@
   <string name="title_for_child_classes">CHILD CLASSES</string>
   <string name="title_for_parent_classes">PARENT CLASSES</string>
   <string name="upload_nearby_place_found_title">Ort in der Nähe gefunden</string>
-  <string name="upload_nearby_place_found_description">Ist dies ein Foto vom Ort %1$s?</string>
+  <string name="upload_nearby_place_found_description" fuzzy="true">Ist dies ein Foto vom Ort %1$s?</string>
   <string name="title_app_shortcut_bookmark">Lesezeichen</string>
   <string name="title_app_shortcut_setting">Einstellungen</string>
   <string name="remove_bookmark">aus den Lesezeichen entfernt</string>

@@ -406,6 +406,7 @@
   <string name="menu_option_unread">ߘߐ߬ߞߊ߬ߙߊ߲߬ߓߊߟߌ ߟߎ߬ ߦߋ߫</string>
   <string name="error_occurred_in_picking_images">ߝߎ߬ߕߎ߲߬ߕߌ ߓߌ߬ߟߊ߬ߣߍ߲߫ ߊ߬ ߘߐ߫ ߞߵߌ ߕߏ߫ ߖߌ߬ߦߊ߬ߓߍ ߓߊߕߐ߬ߡߐ߲ ߞߊ߲߬.</string>
   <string name="please_wait">ߡߊ߬ߞߐ߬ߣߐ߲߬ߠߌ߲ ߞߍ߫ ߖߊ߰ߣߌ߲߬...</string>
+  <string name="copied_successfully">ߓߘߊ߫ ߓߊߓߌ߬ߟߊ߬</string>
   <string name="welcome_do_upload_content_description">ߖߌ߬ߦߊ߬ߓߍ߬ ߢߌ߬ߡߊ߬ ߟߊߦߟߍ߬ߕߊ ߟߎ߬ ߞߏߟߊ߲ߞߏߡߊ</string>
   <string name="welcome_dont_upload_content_description">ߖߌ߬ߦߊ߬ߓߍ߬ ߖߎ߰ ߟߊߦߟߍ߬ߓߊߟߌ ߟߎ߬ ߞߏߟߊ߲ߞߏߡߊ</string>
   <string name="skip_image">ߖߌ߬ߦߊ߬ߓߍ ߣߌ߲߬ ߠߊߜߊ߲߫</string>
@@ -462,13 +463,18 @@
   <string name="title_for_child_classes">ߘߋ߲ ߠߎ߬ ߟߊ߫ ߛߊ߯ߘߊ ߟߎ߫</string>
   <string name="title_for_parent_classes">ߡߏߦߌߓߊ߮ ߟߎ߬ ߟߊ߫ ߛߊ߯ߘߊ ߟߎ߫</string>
   <string name="upload_nearby_place_found_title">ߛߌ߰ߢߐ߲߰ ߦߙߐ ߦߴߊ߬ ߘߐ߫</string>
-  <string name="upload_nearby_place_found_description">ߦߙߐ %1$s ߖߌ߬ߦߊ߬ߓߍ ߟߋ߬ ߦߋ߫ ߣߌ߲߬ ߘߌ߫ ߓߊ߬؟</string>
+  <string name="upload_nearby_place_found_description" fuzzy="true">ߦߙߐ %1$s ߖߌ߬ߦߊ߬ߓߍ ߟߋ߬ ߦߋ߫ ߣߌ߲߬ ߘߌ߫ ߓߊ߬؟</string>
+  <string name="title_app_shortcut_bookmark">ߟߊ߬ߡߊ</string>
   <string name="title_app_shortcut_setting">ߟߊ߬ߓߍ߲߬ߢߐ߲߰ߡߦߊ߬ߘߊ</string>
+  <string name="remove_bookmark">ߟߊߕߊ߲߬ߞߌ߫ ߞߊ߬ ߓߐ߫ ߟߊ߬ߡߊ ߘߐ߫</string>
+  <string name="add_bookmark">ߊ߬ ߓߌ߬ߟߊ߬ ߟߊ߬ߡߊ ߘߐ߫</string>
   <string name="wallpaper_set_unsuccessfully">ߞߏ ߘߏ߫ ߓߍ߲߬ߣߍ߫ ߕߎ߲߬ ߕߍ߫. ߘߊ߲߬ߘߊ߲߬ߥߟߊ ߕߍ߫ ߛߐ߲߬ ߘߐߓߍ߲߬ ߠߊ߫.</string>
   <string name="setting_wallpaper_dialog_title">ߊ߬ ߓߌ߬ߟߊ߬ ߘߊ߬ߣߊ߲߬ߥߟߊ ߟߊ߫.</string>
   <string name="setting_wallpaper_dialog_message">ߘߊ߬ߣߊ߲߬ߥߟߊ ߘߊߘߐߓߍ߲߭ ߦߴߌ ߘߐ߫. ߌ ߟߐ߬ ߖߊ߰ߣߌ߲߫...</string>
+  <string name="theme_default_name">ߞߊ߲ߞߋ ߟߊߓߊ߬ߕߏ߬</string>
   <string name="theme_dark_name">ߘߌ߬ߓߌ</string>
   <string name="theme_light_name">ߦߋߟߋ߲</string>
+  <string name="cannot_open_location_settings">ߗߌߙߏ߲߫ ߓߘߊ߫ ߞߍ߫ ߘߌ߲߬ߞߌߙߊ ߟߊ߬ߓߍ߲߬ߢߐ߲߰ߡߦߊ߬ߘߊ ߟߊߞߊ߭ ߘߐ߫. ߘߌ߲߬ߞߌߙߊ ߓߌ߬ߟߴߊ߬ ߟߴߌ ߓߟߏ ߟߊ߫ ߖߊ߰ߣߌ߲߫</string>
   <string name="ask_to_turn_location_on">ߞߊ߬ ߘߌ߲߬ߞߌ߬ߙߊ߬ߟߐ߲ ߓߌ߬ߟߵߊ߬ ߟߊ߫؟</string>
   <string name="nearby_needs_location">ߞߙߍ߬ߝߍ߬ߡߐ߮ ߟߎ߬ ߡߊ߬ߞߏ ߦߋ߫ ߘߌ߲߬ߞߌ߬ߙߊ߬ߟߐ߲ ߓߌ߬ߟߊ ߟߴߊ߬ ߟߊ߫ ߞߊ߬ ߛߋ߫ ߓߊ߯ߙߊ߫ ߟߊ߫ ߞߏߟߌߞߏߟߌ߫</string>
   <string name="load_more">ߘߏߜߘߍ߫ ߟߎ߫ ߟߊߢߎ߲߫</string>

@@ -525,7 +525,7 @@
   <string name="title_for_child_classes">子分類</string>
   <string name="title_for_parent_classes">親クラス</string>
   <string name="upload_nearby_place_found_title">付近の場所が見つかりました</string>
-  <string name="upload_nearby_place_found_description">これは場所%1$sの写真ですか？</string>
+  <string name="upload_nearby_place_found_description" fuzzy="true">これは場所%1$sの写真ですか？</string>
   <string name="title_app_shortcut_bookmark">ブックマーク</string>
   <string name="title_app_shortcut_setting">設定</string>
   <string name="remove_bookmark">ブックマークから除去</string>

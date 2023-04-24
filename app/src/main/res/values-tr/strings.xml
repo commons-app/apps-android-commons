@@ -45,6 +45,7 @@
   <string name="nearby_row_image">Resim</string>
   <string name="nearby_all">Hepsi</string>
   <string name="nearby_filter_toggle">Aç/Kapat</string>
+  <string name="nearby_filter_search">Arama Görünümü</string>
   <string name="nearby_filter_state">Yer Durumu</string>
   <string name="appwidget_img">Günün Resmi</string>
   <plurals name="uploads_pending_notification_indicator">
@@ -498,6 +499,7 @@
   <string name="exif_tag_name_lensModel">Lens Modeli</string>
   <string name="exif_tag_name_serialNumbers">Seri Numaraları</string>
   <string name="exif_tag_name_software">Yazılım</string>
+  <string name="media_location_permission_denied">Medya konumu erişimi reddedildi</string>
   <string name="share_text">Fotoğrafları doğrudan telefonunuzdan Wikimedia Commons\'a yükleyin. Commons Uygulamasını şimdi indirin: %1$s</string>
   <string name="share_via">Uygulamayı şununla paylaşın:</string>
   <string name="image_info">Resim Bilgisi</string>
@@ -514,8 +516,8 @@
   <string name="delete_helper_show_deletion_title_failed">Başarısız</string>
   <string name="delete_helper_show_deletion_message_else">Silme işlemi istenemedi.</string>
   <string name="delete_helper_ask_spam_selfie" fuzzy="true">Selfie</string>
-  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Bulanık</string>
-  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Anlamsız</string>
+  <string name="delete_helper_ask_spam_blurry">tamamen bulanık</string>
+  <string name="delete_helper_ask_spam_nonsense">anlamsız, herhangi bir makalede kesinlikle kullanılamaz</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Basın fotoğrafı</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">İnternetten rastgele fotoğraf</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
@@ -567,7 +569,7 @@
   <string name="title_for_child_classes">ALT SINIFLAR</string>
   <string name="title_for_parent_classes">ÜST SINIFLAR</string>
   <string name="upload_nearby_place_found_title">Yakındaki Yer Bulundu</string>
-  <string name="upload_nearby_place_found_description">Bu fotoğraf, %1$s yerinin bir fotoğrafı mı?</string>
+  <string name="upload_nearby_place_found_description" fuzzy="true">Bu fotoğraf, %1$s yerinin bir fotoğrafı mı?</string>
   <string name="title_app_shortcut_bookmark">Yer imleri</string>
   <string name="title_app_shortcut_setting">Ayarlar</string>
   <string name="remove_bookmark">Yer işaretlerinden kaldırıldı</string>

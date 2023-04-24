@@ -11,6 +11,7 @@
   <string name="commons_logo">العام لوگو</string>
   <string name="commons_website">العام ويبسائيٽ</string>
   <string name="submit">اماڻيو</string>
+  <string name="nearby_all">سڀ</string>
   <string name="appwidget_img">اڄ جي تصوير</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d فائيل چاڙھيندي</item>
@@ -111,13 +112,13 @@
   <string name="preference_theme">ڏيک</string>
   <string name="license_name_cc_by_sa_four">انتساب-ھجھڙي ڀاڱيداري 4.0</string>
   <string name="license_name_cc_by_four">وصف 4.0</string>
-  <string name="license_name_cc_by_sa">ڪڪ انتساب-ھڪجھڙي_ڀاڱيداري 3.0</string>
+  <string name="license_name_cc_by_sa">انتساب-ھڪجھڙي-ونڊ 3.0</string>
   <string name="license_name_cc_by">ڪڪ انتساب 3.0</string>
   <string name="license_name_cc0">ڪڪ0</string>
-  <string name="license_name_cc_by_sa_3_0">ڪڪ BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0">ڪڪ بو-سا 3.0</string>
   <string name="license_name_cc_by_3_0">ڪڪ BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">ڪڪ BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">ڪڪ BY 4.0</string>
+  <string name="license_name_cc_by_sa_4_0">ڪڪ بو-سا 4.0</string>
+  <string name="license_name_cc_by_4_0">ڪڪ بو 4.0</string>
   <string name="tutorial_1_text">وڪيپيڊيا تي استعمال ٿيندڙ گھڻن عڪسن جي وڪيميڊيا العام ميزباني ڪري ٿو.</string>
   <string name="tutorial_1_subtext">توھان جا عڪس سڄي دنيا جي ماڻھن کي تعليم يافتا ڪرڻ ۾ مدد ڪن ٿا</string>
   <string name="tutorial_2_text">مھرباني ڪري اھي تصويرون چاڙھيو جيڪي مڪمل طور تي توھان پاران ڪڍيل يا سرجيل آھن:</string>
@@ -290,8 +291,10 @@
   <string name="delete_helper_ask_reason_copyright_logo">لوگو</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">ڇاڪاڻ تہ اھو آھي</string>
   <string name="title_for_media">ميڊيا</string>
+  <string name="more">وڌيڪ</string>
   <string name="count_prefix">ڳاڻيٽو:</string>
   <string name="leaderboard_column_count">ڳاڻيٽو</string>
+  <string name="media_detail_in_all_languages">سڀ ٻوليون</string>
   <string name="label">ليبل</string>
   <string name="description">تشريح</string>
 </resources>

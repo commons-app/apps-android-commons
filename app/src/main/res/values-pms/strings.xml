@@ -529,7 +529,7 @@
   <string name="title_for_child_classes">CLASSE MASNÀ</string>
   <string name="title_for_parent_classes">CLASSE CE</string>
   <string name="upload_nearby_place_found_title">Trovà un pòst davzin</string>
-  <string name="upload_nearby_place_found_description">É-lo na fòto dël pòst %1$s?</string>
+  <string name="upload_nearby_place_found_description" fuzzy="true">É-lo na fòto dël pòst %1$s?</string>
   <string name="title_app_shortcut_bookmark">Marcapàgine</string>
   <string name="title_app_shortcut_setting">Paràmeter</string>
   <string name="remove_bookmark">Gavà dai marca-pàgina</string>

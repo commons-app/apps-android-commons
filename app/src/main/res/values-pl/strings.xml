@@ -571,7 +571,7 @@
   <string name="title_for_child_classes">KLASY POTOMNE</string>
   <string name="title_for_parent_classes">KLASY NADRZĘDNE</string>
   <string name="upload_nearby_place_found_title">Znaleziono miejsce w pobliżu</string>
-  <string name="upload_nearby_place_found_description">Czy jest to zdjęcie miejsca %1$s?</string>
+  <string name="upload_nearby_place_found_description" fuzzy="true">Czy jest to zdjęcie miejsca %1$s?</string>
   <string name="title_app_shortcut_bookmark">Zakładki</string>
   <string name="title_app_shortcut_setting">Ustawienia</string>
   <string name="remove_bookmark">Usunięto z zakładek</string>
