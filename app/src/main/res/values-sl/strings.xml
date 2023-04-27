@@ -158,7 +158,7 @@
   <string name="no_uploads_yet">Naložili niste še nobene fotografije.</string>
   <string name="menu_retry_upload">Poskusi znova</string>
   <string name="menu_cancel_upload">Prekliči</string>
-  <string name="media_upload_policy">Ob objavi te slike izjavljam, da je slika moje lastno delo, da ne vsebuje avtorsko zavarovanega gradiva ali sebka in da je tudi drugače skladna s pravili projekta &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons&lt;/a&gt;.</string>
+  <string name="media_upload_policy">Ob objavi te slike izjavljam, da je slika moje lastno delo, da ne vsebuje avtorsko varovanega gradiva ali sebka in da je tudi drugače skladna s pravili projekta &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Prenesi</string>
   <string name="preference_license">Privzeta licenca</string>
   <string name="use_previous">Uporabi prejšnji naslov in opis</string>
@@ -189,7 +189,7 @@
   <string name="welcome_wikipedia_text">Prispevajte svoje slike. Pomagajte člankom Wikipedije, da oživijo!</string>
   <string name="welcome_wikipedia_subtext">Slike v Wikipediji izvirajo iz Wikimedijine zbirke.</string>
   <string name="welcome_copyright_text">Vaše slike pomagajo pri izobraževanju ljudi po vsem svetu.</string>
-  <string name="welcome_copyright_subtext">Izogibajte se avtorsko zavarovanemu gradivu s spleta in slikam plakatov, knjižnih platnic idr.</string>
+  <string name="welcome_copyright_subtext">Izogibajte se avtorsko varovanemu gradivu s spleta in slikam plakatov, knjižnih platnic idr.</string>
   <string name="welcome_final_text">Ste razumeli?</string>
   <string name="welcome_final_button_text">Da!</string>
   <string name="welcome_help_button_text">Več informacij</string>
@@ -337,7 +337,7 @@
   <string name="quiz_back_button">Če boste še naprej nalagali slike, ki jih je treba izbrisati, bo vaš račun verjetno blokiran. Ali res želite končati kviz?</string>
   <string name="quiz_alert_message">Izbrisanih je bilo več kot %1$s slik, ki ste jih naložili. Če boste še naprej nalagali slike, ki jih je treba izbrisati, bo vaš račun verjetno izbrisan.\n\nAli bi si želeli znova ogledati vadnico in nato opraviti kviz, da se boste lahko naučili, katere vrste slik smete in ne smete nalagati?</string>
   <string name="selfie_answer">Sebki nimajo posebne enciklopedične vrednosti. Prosimo, ne nalagajte slik sebe, razen če je v Wikipediji že ustvarjen članek o vas.</string>
-  <string name="taj_mahal_answer">Slike spomenikov in pokrajine so sprejemljive v večini držav. Upoštevajte, da so začasne umetniške instalacije pogosto avtorsko zavarovane in njihovih upodobitev ni dovoljeno nalagati. V Sloveniji je v gospodarski namen dovoljeno fotografirati samo tista javno razstavljena dela, katerih avtor je umrl leta {{#expr:{{CURRENTYEAR}}-71}}&lt;/&gt; ali prej. Za več o tem glejte [[Commons:Copyright rules by territory/Slovenia#Freedom of panorama]].</string>
+  <string name="taj_mahal_answer">Slike spomenikov in pokrajine so sprejemljive v večini držav. Upoštevajte, da so začasne umetniške instalacije pogosto avtorsko varovane in njihovih upodobitev ni dovoljeno nalagati. V Sloveniji je v gospodarski namen dovoljeno fotografirati samo tista javno razstavljena dela, katerih avtor je umrl leta {{#expr:{{CURRENTYEAR}}-71}}&lt;/&gt; ali prej. Za več o tem glejte [[Commons:Copyright rules by territory/Slovenia#Freedom of panorama]].</string>
   <string name="screenshot_answer">Zaslonski posnetki spletnih mest se štejejo kot izpeljana dela in zanje veljajo avtorske pravice izvornega spletnega mesta. Uporabljajo se lahko le z dovoljenjem izvornega avtorja. Brez takega dovoljenja se vsakršno izpeljano delo šteje za kršitev avtorskih pravic.</string>
   <string name="blurry_image_answer">Eden od ciljev Wikimedijine zbirke je zbiranje kakovostnih slik. Zamegljenih slik zato ne nalagajte. Vedno poskušajte posneti dobro sliko ob primerni svetlobi.</string>
   <string name="construction_event_answer">V Wikimedijini zbirki so zelo dobrodošle slike, ki prikazujejo tehniko ali kulturo.</string>
@@ -696,7 +696,7 @@
   <string name="explore_map_details">Podrobnosti</string>
   <string name="achievements_unavailable_beta">Dosežki so na voljo samo v stabilni različici (preverite dokumentacijo razvijalcev).</string>
   <string name="leaderboard_unavailable_beta">Lestvica uvrstitev je na voljo samo v stabilni različici (glejte dokumentacijo razvijalcev).</string>
-  <string name="copyright_popup">Prosimo, nalagajte samo slike, ki ste jih ustvarili sami. Nalagatelje avtorsko zavarovanega gradiva bomo blokirali. To velja tudi za betarazličico. Hvala za preizkušanje aplikacije!</string>
+  <string name="copyright_popup">Prosimo, nalagajte samo slike, ki ste jih ustvarili sami. Naložnike avtorsko varovanega gradiva bomo blokirali. To velja tudi za betarazličico. Hvala za preizkušanje aplikacije!</string>
   <string name="select_feedback_data_choice">Prosimo, odizberite vse podatke, ki jih ne želite deliti javno.</string>
   <string name="api_level">Raven API</string>
   <string name="android_version">Različica Androida</string>
