@@ -1,5 +1,13 @@
 # Wikimedia Commons for Android
 
+## v4.0.5
+- Bumped min SDK to 29 to try and solve Google policy issue
+- Reverted dialog
+- Note: This encompasses versions 1031, 1032, and 1033, due to the Play Store's requirements to overwrite all the tracks with a post-fix version (otherwise no single track can be published)
+
+## v4.0.4
+- Added dialog for Google's location policy
+
 ## v4.0.3
 - Added "Report" button for Google UGC policy
 
