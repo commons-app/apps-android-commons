@@ -43,13 +43,13 @@ jobs:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd-tablet-api-24
+          key: avd-tablet-api-29
 
       - name: Create AVD and generate snapshot for caching
         if: steps.avd-cache.outputs.cache-hit != 'true' && github.event_name != 'pull_request'
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 24
+          api-level: 29
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
@@ -59,7 +59,7 @@ jobs:
         if: github.event_name != 'pull_request'
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 24
+          api-level: 29
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
