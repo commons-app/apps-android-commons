@@ -220,6 +220,7 @@
   <string name="location_permission_title">Anfordern der Standortfreigabe</string>
   <string name="ok">Okay</string>
   <string name="warning">Warnung</string>
+  <string name="duplicate_file_name">Duplizierter Dateiname gefunden</string>
   <string name="upload">Hochladen</string>
   <string name="yes">Ja</string>
   <string name="no">Nein</string>
@@ -503,6 +504,8 @@
   <string name="exif_tag_name_lensModel">Kameralinse</string>
   <string name="exif_tag_name_serialNumbers">Seriennummer</string>
   <string name="exif_tag_name_software">Software</string>
+  <string name="media_location_permission_denied">Zugriff auf Medienstandort verweigert</string>
+  <string name="add_location_manually">Es kann sein, dass wir nicht in der Lage sind, automatisch Standortdaten von Bildern zu erhalten, die du hochlädst. Bitte füge den entsprechenden Ort für jedes Bild hinzu, bevor du es einreichst.</string>
   <string name="share_text">Lade Fotos direkt von deinem Telefon auf Wikimedia Commons hoch. Lade die Commons-App jetzt herunter: %1$s</string>
   <string name="share_via">App teilen über …</string>
   <string name="image_info">Bildinformationen</string>
@@ -570,7 +573,7 @@
   <string name="title_for_child_classes">CHILD CLASSES</string>
   <string name="title_for_parent_classes">PARENT CLASSES</string>
   <string name="upload_nearby_place_found_title">Ort in der Nähe gefunden</string>
-  <string name="upload_nearby_place_found_description" fuzzy="true">Ist dies ein Foto vom Ort %1$s?</string>
+  <string name="upload_nearby_place_found_description">Ist das ein Foto von %1$s?</string>
   <string name="title_app_shortcut_bookmark">Lesezeichen</string>
   <string name="title_app_shortcut_setting">Einstellungen</string>
   <string name="remove_bookmark">aus den Lesezeichen entfernt</string>

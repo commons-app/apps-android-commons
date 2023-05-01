@@ -568,7 +568,7 @@
   <string name="title_for_child_classes">SUBKLASSEN</string>
   <string name="title_for_parent_classes">HOOFDKLASSEN</string>
   <string name="upload_nearby_place_found_title">Plaats in de buurt gevonden</string>
-  <string name="upload_nearby_place_found_description" fuzzy="true">Is dit een foto van plaats %1$s?</string>
+  <string name="upload_nearby_place_found_description">Is dit een foto van %1$s?</string>
   <string name="title_app_shortcut_bookmark">Bladwijzers</string>
   <string name="title_app_shortcut_setting">Instellingen</string>
   <string name="remove_bookmark">Bladwijzer verwijderd</string>

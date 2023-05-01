@@ -291,9 +291,11 @@
   <string name="delete_helper_ask_reason_copyright_logo">لوگو</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">ڇاڪاڻ تہ اھو آھي</string>
   <string name="title_for_media">ميڊيا</string>
+  <string name="upload_nearby_place_found_title">ويجهي جاءِ لڌي</string>
   <string name="more">وڌيڪ</string>
   <string name="count_prefix">ڳاڻيٽو:</string>
   <string name="leaderboard_column_count">ڳاڻيٽو</string>
+  <string name="leaderboard_nearby">ويجها</string>
   <string name="media_detail_in_all_languages">سڀ ٻوليون</string>
   <string name="label">ليبل</string>
   <string name="description">تشريح</string>

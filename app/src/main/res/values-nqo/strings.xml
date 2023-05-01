@@ -428,24 +428,36 @@
   <string name="delete_helper_show_deletion_message_if">%1$s ߕߐ߯ߦߊߟߌ ߦߴߌ ߘߐ߫ ߖߏ߬ߛߌ߬ߟߌ ߞߊ߲ߡߊ߬</string>
   <string name="delete_helper_show_deletion_title_failed">ߊ߬ ߓߘߊ߫ ߗߌߙߏ߲߫</string>
   <string name="delete_helper_show_deletion_message_else">ߌ ߕߍ߫ ߛߋ߫ ߖߏ߰ߛߌ߬ߟߌ ߡߊߢߌߣߌ߲߫ ߠߊ߫</string>
-  <string name="delete_helper_ask_spam_selfie" fuzzy="true">ߛߍߟߑߝߌ ߘߏ߫</string>
-  <string name="delete_helper_ask_spam_blurry" fuzzy="true">ߢߟߊߝߎ߬ߟߎ߲߬ߜߊ߬ߣߍ߲</string>
+  <string name="delete_helper_ask_spam_selfie">ߛߍߟߑߝߌ ߡߍ߲ ߟߊߓߊ߯ߙߊߣߍ߲߫ ߕߍ߫ ߞߎߡߘߊ߫ ߛߌ߫ ߟߊ߫</string>
+  <string name="delete_helper_ask_spam_blurry">ߢߟߊߝߎ߬ߟߎ߲߬ߜߊ߬ߣߍ߲ ߓߎߘߎ߲ߛߊ߫</string>
+  <string name="delete_helper_ask_spam_nonsense">ߞߎ߲߬ߕߋ߬ߟߋ߲߬ ߕߴߊ߬ ߟߊ߫߸ ߊ߬ ߕߴߛߋ߫ ߟߊߓߊ߯ߙߊ߫ ߟߊ߫ ߞߎߡߘߊ߫ ߛߌ߫ ߡߎ߰ߡߍ߫</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">ߖߌ߬ߦߊ߬ߓߍ ߜߍ߬ߙߍ߲߬ߘߍ߬ߣߍ߲</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">ߓߍ߲߬ߛߋ߲߬ߡߊ߫ ߖߌߦߊߓߍ ߟߎ߬ ߞߊ߬ ߝߘߊ߫ ߓߟߐߟߐ ߟߊ߫</string>
   <string name="delete_helper_ask_reason_copyright_logo">ߛߌ߲ߞߐ߲</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">ߊ߬ ߓߘߊ߫ ߛߋ߫ ߔߊߣߏߙߡߊ ߞߊ߲ߠߊߓߌߟߊ ߘߐ߫</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">ߓߊߏ߬ ߊ߬ ߦߋ߫</string>
   <string name="category_edit_helper_make_edit_toast">ߞߊߘߊ߲ߠߌ߲ ߦߴߌ ߘߐ߫ ߞߊ߬ ߦߌߟߡߊ ߟߎ߬ ߟߏ߲ߘߐߦߊ߫</string>
   <string name="category_edit_helper_show_edit_title">ߦߌߟߡߊ ߓߘߊ߫ ߟߏ߲ߘߐߦߊ߫</string>
   <string name="category_edit_helper_show_edit_title_success">ߊ߬ ߓߘߊ߫ ߛߎߘߊ߲߫</string>
   <string name="category_edit_helper_edit_message_else">ߦߌߟߡߊ ߟߎ߬ ߕߴߛߋ߫ ߝߙߊ߬ ߟߊ߫.</string>
   <string name="category_edit_button_text">ߦߌߟߡߊ ߟߎ߬ ߟߏ߲ߘߐߦߊߟߌ</string>
+  <string name="depictions_edit_helper_make_edit_toast">ߞߊߘߊ߲߫ ߞߍ ߦߴߌ ߘߐ߫ ߞߊ߬ ߝߌ߬ߛߌ߫ ߦߌ߬ߘߊ߬ߣߍ߲ ߟߊߞߎߘߦߊ߫.</string>
+  <string name="depictions_edit_helper_show_edit_title">ߞߐߦߌߘߊߟߌ ߟߎ߬ ߡߊߦߟߍ߬ߡߊ߲߫</string>
+  <string name="depictions_edit_helper_edit_message_else">ߝߌ߬ߛߌ߫ ߞߐߦߌ߬ߘߊ߬ߣߍ߲ ߕߍ߫ ߛߐ߲߬ ߡߊߦߟߍ߬ߡߊ߲߫ ߠߊ߫.</string>
+  <string name="coordinates_edit_helper_make_edit_toast">ߞߊߘߊ߲߫ ߞߍ ߦߴߌ ߘߐ߫ ߞߊ߬ ߘߏ߲߬ߖߟߎ߬ߡߊ߬ߣߍ߲ ߟߊߞߎߘߦߊ߫.</string>
+  <string name="coordinates_edit_helper_show_edit_title">ߘߏ߲߬ߖߟߎ߬ߡߊ߬ߣߍ߲ ߟߊߞߎߘߦߊ߫</string>
   <string name="description_edit_helper_show_edit_title">ߞߊ߲߬ߛߓߍߟߌ ߟߊߘߎߘߦߊߟߌ</string>
   <string name="caption_edit_helper_show_edit_title">ߝߍ߬ߛߓߍߟߌ ߟߊߞߎߘߦߊߟߌ</string>
   <string name="coordinates_edit_helper_show_edit_title_success">ߊ߬ ߓߘߊ߫ ߛߎߘߊ߲߫</string>
+  <string name="coordinates_edit_helper_show_edit_message">ߘߏ߲߬ߖߟߎ߬ߡߊ߬ߣߍ߲ %1$s ߓߘߊ߫ ߝߊ߬ߙߊ߫.</string>
   <string name="description_edit_helper_show_edit_message">ߞߊ߲߬ߛߓߍߟߌ ߓߘߊ߫ ߝߙߊ߬.</string>
   <string name="caption_edit_helper_show_edit_message">ߝߍ߬ߛߓߍߟߌ ߓߘߊ߫ ߝߙߊ߬.</string>
+  <string name="coordinates_edit_helper_edit_message_else">ߘߏ߲߬ߖߟߎ߬ߡߊ߬ߣߍ߲ ߕߍ߫ ߛߐ߲߬ ߝߙߊ߬ ߟߊ߫.</string>
   <string name="description_edit_helper_edit_message_else">ߞߊ߲߬ߛߓߍߟߌ ߕߍ߫ ߛߐ߲߬ ߝߙߊ߬ ߟߊ߫.</string>
   <string name="caption_edit_helper_edit_message_else">ߝߍ߬ߛߓߍߟߌ ߕߍ߫ ߛߐ߲߬ ߝߙߊ߬ ߟߊ߫.</string>
+  <string name="coordinates_picking_unsuccessful">ߘߏ߲߬ߖߟߎ߬ߡߊ߬ߣߍ߲ ߕߍ߫ ߛߐ߲߬ ߡߊߛߐ߬ߘߐ߲߬ ߠߊ߫.</string>
+  <string name="descriptions_picking_unsuccessful">ߞߊ߲߬ߛߓߍߟߌ ߕߍ߫ ߛߐ߲߬ ߡߊߛߐ߬ߘߐ߲߬ ߠߊ߫.</string>
+  <string name="description_activity_title">ߞߊ߲߬ߛߓߍߟߌ ߣߌ߫ ߝߍ߬ߛߓߍߟߌ ߟߎ߫ ߡߊߦߟߍ߬ߡߊ߲߫</string>
   <string name="share_image_via">ߖߌ߬ߦߊ߬ߓߍ ߟߊߖߍ߲ߛߍ߲߫ ߞߊߕߙߍ߬</string>
   <string name="you_have_no_achievements_yet">ߌ ߡߊ߫ ߓߟߏߡߊߜߍ߲߫ ߛߌ߫ ߛߌ߲ߘߌ߫ ߡߎߣߎ߲߬</string>
   <string name="no_achievements_yet">%s ߡߊ߫ ߓߟߏߡߊߜߍ߲߫ ߛߌ߫ ߞߍ߫ ߡߎߣߎ߲߬</string>
@@ -463,7 +475,7 @@
   <string name="title_for_child_classes">ߘߋ߲ ߠߎ߬ ߟߊ߫ ߛߊ߯ߘߊ ߟߎ߫</string>
   <string name="title_for_parent_classes">ߡߏߦߌߓߊ߮ ߟߎ߬ ߟߊ߫ ߛߊ߯ߘߊ ߟߎ߫</string>
   <string name="upload_nearby_place_found_title">ߛߌ߰ߢߐ߲߰ ߦߙߐ ߦߴߊ߬ ߘߐ߫</string>
-  <string name="upload_nearby_place_found_description" fuzzy="true">ߦߙߐ %1$s ߖߌ߬ߦߊ߬ߓߍ ߟߋ߬ ߦߋ߫ ߣߌ߲߬ ߘߌ߫ ߓߊ߬؟</string>
+  <string name="upload_nearby_place_found_description">ߊ߬ ߝߐ߫ %1$s ߖߌ߬ߦߊ߬ߓߍ ߟߋ߬ ߦߋ߫ ߣߌ߲߬ ߘߌ߫؟</string>
   <string name="title_app_shortcut_bookmark">ߟߊ߬ߡߊ</string>
   <string name="title_app_shortcut_setting">ߟߊ߬ߓߍ߲߬ߢߐ߲߰ߡߦߊ߬ߘߊ</string>
   <string name="remove_bookmark">ߟߊߕߊ߲߬ߞߌ߫ ߞߊ߬ ߓߐ߫ ߟߊ߬ߡߊ ߘߐ߫</string>
@@ -475,15 +487,19 @@
   <string name="theme_dark_name">ߘߌ߬ߓߌ</string>
   <string name="theme_light_name">ߦߋߟߋ߲</string>
   <string name="cannot_open_location_settings">ߗߌߙߏ߲߫ ߓߘߊ߫ ߞߍ߫ ߘߌ߲߬ߞߌߙߊ ߟߊ߬ߓߍ߲߬ߢߐ߲߰ߡߦߊ߬ߘߊ ߟߊߞߊ߭ ߘߐ߫. ߘߌ߲߬ߞߌߙߊ ߓߌ߬ߟߴߊ߬ ߟߴߌ ߓߟߏ ߟߊ߫ ߖߊ߰ߣߌ߲߫</string>
+  <string name="recommend_high_accuracy_mode">ߖߐ߲߬ߛߊ߫ ߘߐߝߟߌ߫ ߢߌߡߊ߫ ߘߌ߫ ߛߐ߬ߘߐ߲߬߸ ߡߊ߬ߕߍ߰ߟߌ ߛߎ߯ߦߊ߫ ߛߊ߲ߘߐߕߊ ߛߎߥߊ߲ߘߌ.</string>
   <string name="ask_to_turn_location_on">ߞߊ߬ ߘߌ߲߬ߞߌ߬ߙߊ߬ߟߐ߲ ߓߌ߬ߟߵߊ߬ ߟߊ߫؟</string>
   <string name="nearby_needs_location">ߞߙߍ߬ߝߍ߬ߡߐ߮ ߟߎ߬ ߡߊ߬ߞߏ ߦߋ߫ ߘߌ߲߬ߞߌ߬ߙߊ߬ߟߐ߲ ߓߌ߬ߟߊ ߟߴߊ߬ ߟߊ߫ ߞߊ߬ ߛߋ߫ ߓߊ߯ߙߊ߫ ߟߊ߫ ߞߏߟߌߞߏߟߌ߫</string>
+  <string name="use_location_from_similar_image">ߊ߬ ߝߐ߫ ߌ ߞߊ߬ ߖߌ߬ߦߊ߬ߓߍ߫ ߝߌ߬ߟߊ ߣߌ߲߬ ߣߊ߫ ߦߙߐ߫ ߞߋߟߋ߲߫ ߠߋ߬ ߘߐ߫؟ ߊ߬ ߝߐ߫ ߌ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߞߌߣߌ߲߫ ߝߍ߫ ߖߌ߬ߦߊ߬ߓߍ ߣߌ߲߬ ߘߟߊߕߍ߮ \\ ߕߍߟߍ߲ ߠߎ߬ ߟߊߓߊ߯ߙߊ߫؟</string>
   <string name="load_more">ߘߏߜߘߍ߫ ߟߎ߫ ߟߊߢߎ߲߫</string>
   <string name="nearby_no_results">ߦߙߐ߫ ߡߊ߫ ߛߐ߬ߘߐ߲߫߸ ߌ ߞߊߘߊ߲߫ ߞߵߌ ߟߊ߫ ߕߌߙߌ߲ߠߌ߲ ߞߍߗߏ߮ ߡߊߝߊ߬ߟߋ߲߬.</string>
+  <string name="todo_improve">ߟߢߊ߬ߟߌ ߘߐ߬ߛߎ߬ߟߌ ߟߎ߫:</string>
   <string name="missing_category">ߦߌߟߡߊ ߟߎ߬ ߝߙߊ߬ ߖߌ߬ߦߊ߬ߓߍ ߣߌ߲߬ ߠߊ߫ ߞߵߊ߬ ߟߊߓߊ߯ߙߊߟߌ ߟߊߢߊ߬.</string>
   <string name="missing_article">ߖߌ߬ߦߊ߬ߓߍ ߣߌ߲߬ ߓߌ߬ߟߊ߬ ߥߞߌߔߋߘߌߦߊ ߞߎߡߘߊ߫ ߞߏߟߏ߲ߛߏ߲ߣߍ߲ ߠߎ߬ ߟߊ߫ ߖߌ߬ߦߊ߬ߓߍ߬ ߛߌ߫ ߕߍ߫ ߡߍ߲ ߠߎ߬ ߟߊ߫.</string>
   <string name="add_picture_to_wikipedia_article_title">ߖߌ߬ߦߊ߬ߓߍ ߝߙߊ߬ ߥߞߌߔߋߘߌߦߊ ߞߊ߲߬</string>
   <string name="add_picture_to_wikipedia_article_desc">ߌ ߦߴߊ߬ ߝߍ߬ ߞߊ߬ ߖߌ߬ߦߊ߬ߓߍ ߣߌ߲߬ ߓߌ߬ߟߊ߬ %1$ ߞߊ߲ ߥߞߌߔߋߘߌߦߊ ߞߎߡߘߊ ߟߊ߫ ߓߊ߬؟</string>
   <string name="confirm">ߊ߬ ߟߊߛߙߋߦߊ߫</string>
+  <string name="instructions_title">ߟߊ߬ߟߌ߰ߟߌ ߟߎ߫</string>
   <string name="wikipedia_instructions_step_1">߁߭. ߥߞߌߛߓߍߟߌ ߢߌ߲߬ ߠߎ߬ ߟߊߓߊ߯ߙߊ߫:</string>
   <string name="wikipedia_instructions_step_2">߂.ߟߊ߬ߛߙߋ߬ߦߊ߬ߟߌ ߛߐ߲߬ߞߌ߲ ߓߍߣߊ߬ ߥߞߌߔߋߘߌߦߊ ߞߎߡߘߊ ߘߊߦߟߍ߬</string>
   <string name="wikipedia_instructions_step_7">߇߲. ߞߎߡߘߊ ߟߊߥߊ߲߬ߞߊ߫</string>

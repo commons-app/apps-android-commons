@@ -9,6 +9,8 @@
   <string name="commons_website">Sit an sl\'aragnà ëd Comun</string>
   <string name="exit_location_picker">Seurte dal selessionador ëd locassion</string>
   <string name="submit">Mandé</string>
+  <string name="add_another_description">Gionté n\'àutra descrission</string>
+  <string name="add_new_contribution">Gionté na neuva contribussion</string>
   <string name="appwidget_img">Plancia dël di</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d archivi an camin ch\'as caria</item>
