@@ -151,7 +151,7 @@ class ImageAdapter(
 
             val isSelected = selectedIndex != -1
             if (isSelected) {
-                holder.itemSelected(selectedImages.size)
+                holder.itemSelected(selectedIndex + 1)
             } else {
                 holder.itemUnselected()
             }
