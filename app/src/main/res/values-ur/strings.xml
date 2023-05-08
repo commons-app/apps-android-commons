@@ -31,7 +31,7 @@
   <string name="preference_category_appearance">ظاہریت</string>
   <string name="preference_category_general">عمومی</string>
   <string name="preference_category_feedback">آپ کی رائے</string>
-  <string name="app_name">کامنز</string>
+  <string name="app_name">ویکی ذخائر</string>
   <string name="menu_settings">ترتیبات</string>
   <string name="username">صارف نام</string>
   <string name="password">پاس ورڈ</string>
@@ -84,7 +84,7 @@
   <string name="title_activity_signup">کھاتہ بنائیں</string>
   <string name="title_activity_category_details">زمرہ</string>
   <string name="menu_about">بابت</string>
-  <string name="about_license">ویکیمیڈیا کامنز ایپ ایک اوپن سورس ایپ ہے جو موہوب الیہ اور رضاکاروں کی جانب سے برقرار رکھی جاتی اور بنائی گئی ہے۔ ویکیمیڈیا فاؤنڈیش کا اس ایپ کی برقراری اور تخلیق سے کوئی واسطہ نہیں ہے۔</string>
+  <string name="about_license">ویکی ذخائر ایک آزاد مصدر اطلاقیہ ہے جسے ویکیمیڈیا برادری کے رضاکاروںنے بنایا ہے اور وہی اس کی دیکھ بھال کرتے ہیں۔ ویکیمیڈیا فاؤنڈیشن اس کی تیاری، ترقی یا انتظام و انصرام میں شریک نہیں ہے۔</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;ماخذ&lt;/a&gt; اور &lt;a href=\"https://commons-app.github.io/\"&gt;ویب سائٹ&lt;/a&gt; در گٹ ہب۔&lt;a href=\"%1$s\"&gt;نیا گٹ ہب اجرا بنائیں&lt;/a&gt; تاکہ آپ bug شکایتیں اور تجایز دیں سکیں</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;سرگرمی کی تدبیر&lt;/a&gt;</string>
   <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;کریڈٹ&lt;/a&gt;</string>
