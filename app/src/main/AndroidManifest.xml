@@ -50,6 +50,10 @@
             android:name=".description.DescriptionEditActivity"
             android:exported="true" />
 
+        <activity
+          android:name=".edit.EditActivity"
+          android:exported="false" />
+
         <activity android:name="org.acra.dialog.CrashReportDialog"
             android:process=":acra"
             android:launchMode="singleInstance"

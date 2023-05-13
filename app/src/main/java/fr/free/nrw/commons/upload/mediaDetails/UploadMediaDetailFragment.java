@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -29,6 +28,7 @@ import com.github.chrisbanes.photoview.PhotoView;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import fr.free.nrw.commons.LocationPicker.LocationPicker;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.edit.EditActivity;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.nearby.Place;
@@ -79,6 +79,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     AppCompatButton btnNext;
     @BindView(R.id.btn_previous)
     AppCompatButton btnPrevious;
+    @BindView(R.id.edit_image)
+    AppCompatButton editImage;
     @BindView(R.id.tooltip)
     ImageView tooltip;
     private UploadMediaDetailAdapter uploadMediaDetailAdapter;
@@ -236,6 +238,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         uploadMediaDetail.setManuallyAdded(true);//This was manually added by the user
         uploadMediaDetailAdapter.addDescription(uploadMediaDetail);
         rvDescriptions.smoothScrollToPosition(uploadMediaDetailAdapter.getItemCount()-1);
+    }
+
+    @OnClick(R.id.edit_image)
+    public void onEditButtonClicked() {
+        Intent intent = new Intent(getContext(), EditActivity.class);
+        intent.putExtra("image",uploadableFile.getFilePath().toString());
+        startActivity(intent);
     }
 
     @Override

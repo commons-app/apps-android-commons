@@ -47,6 +47,7 @@ dependencies {
     implementation 'com.karumi:dexter:5.0.0'
     implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
 
     kapt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
     implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:$ADAPTER_DELEGATES_VERSION"
@@ -139,6 +140,8 @@ dependencies {
     implementation "androidx.preference:preference:$PREFERENCE_VERSION"
     // Kotlin
     implementation "androidx.preference:preference-ktx:$PREFERENCE_VERSION"
+    //Android Media
+    implementation 'com.github.juanitobananas:AndroidMediaUtil:v1.0-1'
 
     implementation "androidx.multidex:multidex:$MULTIDEX_VERSION"
 
