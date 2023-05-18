@@ -703,4 +703,6 @@
   <string name="welcome_to_full_screen_mode_text">Bin-ëvnù ant ël meud ëd selession a scren antregh</string>
   <string name="full_screen_mode_zoom_info">Ch\'a deuvra doi dij për agrandì o strenze.</string>
   <string name="full_screen_mode_features_info">Fé score an pressa e assè leugn për fé coste assion-sì: \n- vers ësnistra/vers drita: andé a col prima/col apress\n- an su: selessioné\n- an giù: marché coma da nen carié.</string>
+  <string name="set_up_avatar_toast_string">Për configuré soa plancia virtual ëd classìfica, ch\'a sgnaca su «Definì tanme plancia virtual» ant lë mnu a tre pontin ëd na plancia qualsëssìa.</string>
+  <string name="similar_coordinate_description_auto_set">Le coordinà a son nen le coordinà precise, ma la përson-a che a l\'ha carià costa plancia a pensa che a son davzin-e a basta.</string>
 </resources>
