@@ -11,6 +11,7 @@
 * Joseph
 * McAang
 * Mirzali
+* MrSchipunov
 * MuratTheTurkish
 * Neslihan Turan
 * Okkerem
@@ -500,6 +501,7 @@
   <string name="exif_tag_name_serialNumbers">Seri Numaraları</string>
   <string name="exif_tag_name_software">Yazılım</string>
   <string name="media_location_permission_denied">Medya konumu erişimi reddedildi</string>
+  <string name="add_location_manually">Yüklediğiniz resimlerden konum verilerini otomatik olarak elde edemeyebiliriz. Lütfen göndermeden önce her resim için uygun konumu ekleyin</string>
   <string name="share_text">Fotoğrafları doğrudan telefonunuzdan Wikimedia Commons\'a yükleyin. Commons Uygulamasını şimdi indirin: %1$s</string>
   <string name="share_via">Uygulamayı şununla paylaşın:</string>
   <string name="image_info">Resim Bilgisi</string>
@@ -515,12 +517,13 @@
   <string name="delete_helper_show_deletion_message_if">%1$s, silme için aday gösterildi.</string>
   <string name="delete_helper_show_deletion_title_failed">Başarısız</string>
   <string name="delete_helper_show_deletion_message_else">Silme işlemi istenemedi.</string>
-  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Selfie</string>
+  <string name="delete_helper_ask_spam_selfie">hiçbir maddede kullanılmayan bir selfie</string>
   <string name="delete_helper_ask_spam_blurry">tamamen bulanık</string>
   <string name="delete_helper_ask_spam_nonsense">anlamsız, herhangi bir makalede kesinlikle kullanılamaz</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Basın fotoğrafı</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">İnternetten rastgele fotoğraf</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">Panorama Özgürlüğünün İhlali</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Çünkü</string>
   <string name="category_edit_helper_make_edit_toast">Kategorileri güncellemeye çalışıyor.</string>
   <string name="category_edit_helper_show_edit_title">Kategori güncellemesi</string>
@@ -569,7 +572,7 @@
   <string name="title_for_child_classes">ALT SINIFLAR</string>
   <string name="title_for_parent_classes">ÜST SINIFLAR</string>
   <string name="upload_nearby_place_found_title">Yakındaki Yer Bulundu</string>
-  <string name="upload_nearby_place_found_description" fuzzy="true">Bu fotoğraf, %1$s yerinin bir fotoğrafı mı?</string>
+  <string name="upload_nearby_place_found_description">Bu bir %1$s fotoğrafı mı?</string>
   <string name="title_app_shortcut_bookmark">Yer imleri</string>
   <string name="title_app_shortcut_setting">Ayarlar</string>
   <string name="remove_bookmark">Yer işaretlerinden kaldırıldı</string>
@@ -708,6 +711,8 @@
   <string name="your_feedback">Geri bildiriminiz</string>
   <string name="mark_as_not_for_upload">Yükleme için değil olarak işaretle</string>
   <string name="unmark_as_not_for_upload">Yükleme için değil işaretini kaldır</string>
+  <string name="show_already_actioned_pictures">Halihazırda işlem görmüş resimleri göster</string>
+  <string name="hiding_already_actioned_pictures">Halihazırda işlem görmüş resimler gizleniyor</string>
   <string name="no_more_images_found">Başka resim bulunamadı</string>
   <string name="this_image_is_already_uploaded">Bu resim zaten yüklendi</string>
   <string name="can_not_select_this_image_for_upload">Bu resim yüklemek için seçilemiyor</string>
@@ -718,4 +723,6 @@
   <string name="report_user">Bu kullanıcıyı bildir</string>
   <string name="report_content">Bu içeriği bildir</string>
   <string name="request_user_block">Bu kullanıcının engellemesini iste</string>
+  <string name="full_screen_mode_zoom_info">Yakınlaştırmak ve uzaklaştırmak için iki parmağınızı kullanın.</string>
+  <string name="full_screen_mode_features_info">Bu eylemleri gerçekleştirmek için hızlı ve uzun kaydırın: \n- Sol/Sağ: Önceki/sonraki \n- Yukarı: Seç\n- Aşağı: Yükleme için değil olarak işaretle.</string>
 </resources>
