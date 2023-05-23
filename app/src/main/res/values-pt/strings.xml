@@ -206,6 +206,7 @@
   <string name="location_permission_title">Autorização para identificar localização</string>
   <string name="ok">OK</string>
   <string name="warning">Aviso</string>
+  <string name="duplicate_file_name">Encontrado nome de ficheiro duplicado</string>
   <string name="upload">Carregar</string>
   <string name="yes">Sim</string>
   <string name="no">Não</string>
@@ -489,6 +490,8 @@
   <string name="exif_tag_name_lensModel">Modelo da lente</string>
   <string name="exif_tag_name_serialNumbers">Números de série</string>
   <string name="exif_tag_name_software">\'\'Software\'\'</string>
+  <string name="media_location_permission_denied">Acesso à localização de multimédia negado</string>
+  <string name="add_location_manually">Podemos não conseguir obter automaticamente os dados de localização das fotografias que carregar. Adicione a localização apropriada de cada fotografia antes de a enviar, por favor</string>
   <string name="share_text">Carregue fotografias na wiki Wikimedia Commons, diretamente do seu telemóvel. Descarregue a aplicação Commons agora: %1$s</string>
   <string name="share_via">Partilhar aplicação por...</string>
   <string name="image_info">Informação da imagem</string>
@@ -504,12 +507,13 @@
   <string name="delete_helper_show_deletion_message_if">%1$s foi nomeado para eliminação.</string>
   <string name="delete_helper_show_deletion_title_failed">Falhou</string>
   <string name="delete_helper_show_deletion_message_else">Não foi possível pedir eliminação.</string>
-  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Um autorretrato</string>
-  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Desfocada</string>
-  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Sem sentido</string>
+  <string name="delete_helper_ask_spam_selfie">um autorretrato que não é usado em nenhum artigo</string>
+  <string name="delete_helper_ask_spam_blurry">completamente desfocada</string>
+  <string name="delete_helper_ask_spam_nonsense">sem sentido, absolutamente não utilizável em nenhum artigo</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Fotografia de imprensa</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Fotografia aleatória da Internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logótipo</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">Violação da \"liberdade de panorama\"</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Porque é</string>
   <string name="category_edit_helper_make_edit_toast">A tentar atualizar categorias.</string>
   <string name="category_edit_helper_show_edit_title">Atualização da categoria</string>
@@ -558,7 +562,7 @@
   <string name="title_for_child_classes">CLASSES DESCENDENTES</string>
   <string name="title_for_parent_classes">CLASSES PROGENITORAS</string>
   <string name="upload_nearby_place_found_title">Foi encontrado um local próximo</string>
-  <string name="upload_nearby_place_found_description" fuzzy="true">Isto é uma foto do local %1$s?</string>
+  <string name="upload_nearby_place_found_description">Isto é uma fotografia de %1$s?</string>
   <string name="title_app_shortcut_bookmark">Marcadores</string>
   <string name="title_app_shortcut_setting">Definições</string>
   <string name="remove_bookmark">Removido dos marcadores</string>
@@ -714,4 +718,6 @@
   <string name="welcome_to_full_screen_mode_text">Bem-vindo ao modo de seleção em ecrã completo</string>
   <string name="full_screen_mode_zoom_info">Use dois dedos para aumentar e diminuir a ampliação.</string>
   <string name="full_screen_mode_features_info">Passe o dedo com um gesto rápido e longo para executar estas operações: \n- Esquerda/direita: Ir para o anterior/seguinte\n- Cima: Selecionar\n- Baixo: Marcar como não sendo para carregamento.</string>
+  <string name="set_up_avatar_toast_string">Para configurar o seu avatar da tabela de classificação, toque em \"definir como avatar\" no menu dos três pontos de qualquer imagem.</string>
+  <string name="similar_coordinate_description_auto_set">As coordenadas não são as exatas, mas a pessoa que carregou esta imagem acha que são suficientemente aproximadas.</string>
 </resources>
