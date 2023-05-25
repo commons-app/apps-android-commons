@@ -124,7 +124,7 @@
   <string name="title_activity_category_details">Kategorija</string>
   <string name="menu_about">Apie</string>
   <string name="about_license">Vikitekos programėlė yra atviro kodo programėlė, kurią sukūrė ir prižiūri Vikitekos bendruomenės dotacijų gavėjai ir savanoriai. „Wikimedia Foundation“ nedalyvauja kuriant, plėtojant ar prižiūrint programėlę.</string>
-  <string name="about_improve">Sukurkite naują &lt;a href=\"&lt;span class=\"notranslate\" translate=\"no\"&gt;%1$s \"&gt;GitHub pranešimą&lt;/a&gt;, siekiant pranešti apie klaidas ir pateikti siūlymus.</string>
+  <string name="about_improve" fuzzy="true">Sukurkite naują &lt;a href=\"%1$s\"&gt;GitHub pranešimą&lt;/a&gt;, siekiant pranešti apie klaidas ir pateikti siūlymus.</string>
   <string name="about_privacy_policy">Privatumo politika</string>
   <string name="about_credits">Kūrėjai</string>
   <string name="title_activity_about">Apie</string>
