@@ -549,7 +549,7 @@
   <string name="title_for_child_classes">ЗАВИСНИ КЛАСИ</string>
   <string name="title_for_parent_classes">МАТИЧНИ КЛАСИ</string>
   <string name="upload_nearby_place_found_title">Пронајдено околно место</string>
-  <string name="upload_nearby_place_found_description" fuzzy="true">Дали ова е слика од местото %1$s?</string>
+  <string name="upload_nearby_place_found_description">Дали ова е слика од %1$s?</string>
   <string name="title_app_shortcut_bookmark">Обележани</string>
   <string name="title_app_shortcut_setting">Нагодувања</string>
   <string name="remove_bookmark">Отстрането од обележани</string>
