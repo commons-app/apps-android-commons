@@ -402,6 +402,7 @@
   <string name="no_image_uploaded">ߖߌ߬ߦߊ߬ߓߍ߫ ߡߊ߫ ߟߊߦߟߍ߬</string>
   <string name="no_notification">ߖߊ߲߬ߓߌ߬ߟߊ߬ߟߌ߫ ߘߐߞߊ߬ߙߊ߲߬ߓߊߟߌ ߝߋ߲߫ ߕߴߌ ߓߟߏ߫</string>
   <string name="no_read_notification">ߖߊ߲߬ߓߌ߬ߟߊ߬ߟߌ߫ ߘߐߞߊ߬ߙߊ߲߬ߣߍ߲߫ ߛߌ߫ ߕߴߌ ߓߟߏ߫</string>
+  <string name="share_logs_using">ߝߐ߰߰߰߰߰ߓߍ߬ ߟߊߓߊ߯ߙߊߣߍ߲ ߟߊߖߍ߲ߛߍ߲߫</string>
   <string name="menu_option_read">ߘߐ߬ߞߊ߬ߙߊ߲߬ߣߍ߲ ߠߎ߬ ߦߋ߫</string>
   <string name="menu_option_unread">ߘߐ߬ߞߊ߬ߙߊ߲߬ߓߊߟߌ ߟߎ߬ ߦߋ߫</string>
   <string name="error_occurred_in_picking_images">ߝߎ߬ߕߎ߲߬ߕߌ ߓߌ߬ߟߊ߬ߣߍ߲߫ ߊ߬ ߘߐ߫ ߞߵߌ ߕߏ߫ ߖߌ߬ߦߊ߬ߓߍ ߓߊߕߐ߬ߡߐ߲ ߞߊ߲߬.</string>
@@ -414,6 +415,7 @@
   <string name="exif_tag_name_copyright">ߓߊߦߟߍߡߊ߲ ߤߊߞߍ</string>
   <string name="exif_tag_name_location">ߘߌ߲߬ߞߌߙߊ</string>
   <string name="exif_tag_name_cameraModel">ߖߌ߬ߦߊ߬ߕߊ߬ߟߊ߲ ߛߎ߮ߦߊ</string>
+  <string name="exif_tag_name_software">ߛߎ߲ߝߘߍ</string>
   <string name="share_via">ߟߥߊ߬ߟߌ߬ߟߊ߲ ߠߊߖߍ߲ߛߍ߲ ߢߌ߲߬ ߠߎ߫ ߞߊ߲߬...</string>
   <string name="image_info">ߖߌ߬ߦߊ߬ߓߍ ߞߌ߬ߓߊ߬ߙߏ߬ߦߊ</string>
   <string name="no_categories_found">ߦߌߟߡߊߙߋ߲߫ ߕߴߦߋ߲߬</string>

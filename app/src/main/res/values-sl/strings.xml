@@ -90,7 +90,7 @@
   <string name="updating_caption_message">Prosimo, počakajte ...</string>
   <string name="login_success">Uspešno ste se prijavili!</string>
   <string name="login_failed">Prijava ni uspela!</string>
-  <string name="upload_failed">Datoteke ni bilo mogoče najti. Prosimo, poskusite z drugo datoteko.</string>
+  <string name="upload_failed">Datoteka ni bila najdena. Prosimo, poskusite z drugo datoteko.</string>
   <string name="authentication_failed">Avtentikacija ni uspela; prosimo, prijavite se znova</string>
   <string name="uploading_started">Nalaganje se je začelo!</string>
   <string name="uploading_queued">Nalaganje na čakanju (vklopljen je način omejene povezanosti)</string>
@@ -717,7 +717,7 @@
   <string name="can_not_select_this_image_for_upload">Te slike ni mogoče izbrati za naložitev</string>
   <string name="image_selected">Slika izbrana</string>
   <string name="image_marked_as_not_for_upload">Slika je označena kot ni za nalaganje</string>
-  <string name="menu_view_report">Poročilo</string>
+  <string name="menu_view_report">Prijava</string>
   <string name="report_violation">Prijavi kršitev</string>
   <string name="report_user">Prijavi uporabnika</string>
   <string name="report_content">Prijavi to vsebino</string>
