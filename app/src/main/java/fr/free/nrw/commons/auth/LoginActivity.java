@@ -147,7 +147,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             loginCredentials.setVisibility(View.GONE);
         }
     }
-
+    // Hides the keyboard if the user's focus is not on the password (hasFocus is false).
     @OnFocusChange(R.id.login_password)
     void onPasswordFocusChanged(View view, boolean hasFocus) {
         if (!hasFocus) {
