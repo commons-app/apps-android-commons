@@ -38,7 +38,10 @@ public class LatLng implements Parcelable {
         this.latitude = Math.max(-90.0D, Math.min(90.0D, latitude));
         this.accuracy = accuracy;
     }
-
+    /**
+     * An alternate constructor for this class.
+     * @param in A parcelable which contains the latitude, longitude, and accuracy
+     */
     public LatLng(Parcel in) {
         latitude = in.readDouble();
         longitude = in.readDouble();
