@@ -201,6 +201,33 @@ public class FilePicker implements Constants {
     }
 
     private static Intent plainGalleryPickerIntent() {
+        /**
+         * Asking for ACCESS_MEDIA_LOCATION at runtime solved the location-loss issue
+         * in the custom selector in Contributions fragment.
+         * Detailed discussion: https://github.com/commons-app/apps-android-commons/issues/5015
+         *
+         * This permission check, however, was insufficient to fix location-loss in
+         * the regular selector in Contributions fragment and Nearby fragment,
+         * especially on some devices running Android 13 that use the new Photo Picker by default.
+         *
+         * New Photo Picker: https://developer.android.com/training/data-storage/shared/photopicker
+         *
+         * The new Photo Picker introduced by Android redacts location tags from EXIF metadata.
+         * Reported on the Google Issue Tracker: https://issuetracker.google.com/issues/243294058
+         * Status: Won't fix (Intended behaviour)
+         *
+         * Switched intent from ACTION_GET_CONTENT to ACTION_OPEN_DOCUMENT as:
+         *
+         * ACTION_GET_CONTENT opens the 'best application' for choosing that kind of data
+         * The best application is the new Photo Picker that redacts the location tags
+         *
+         * ACTION_OPEN_DOCUMENT, however,  displays the various DocumentsProvider instances
+         * installed on the device, letting the user interactively navigate through them.
+         *
+         * So, this allows us to use the traditional file picker that does not redact location tags from EXIF.
+         *
+         * Note: The traditional file picker might get deprecated in future.
+         */
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.setType("image/*");
         return intent;
