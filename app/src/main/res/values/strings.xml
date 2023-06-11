@@ -346,6 +346,7 @@
   <string name="wrong">Wrong Answer</string>
   <string name="quiz_screenshot_question">Is this screenshot OK to upload?</string>
   <string name="share_app_title">Share App</string>
+  <string name="rotate">Rotate</string>
 
   <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
   <string name="no_nearby_places_around">No nearby places around</string>

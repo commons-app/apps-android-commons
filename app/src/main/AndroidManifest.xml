@@ -47,6 +47,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
+          android:theme="@style/EditActivityTheme"
             android:name=".description.DescriptionEditActivity"
             android:exported="true" />
 

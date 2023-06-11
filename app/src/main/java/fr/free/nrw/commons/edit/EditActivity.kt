@@ -11,19 +11,27 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.rotationMatrix
 import androidx.core.graphics.scaleMatrix
+import androidx.lifecycle.ViewModelProvider
 import fr.free.nrw.commons.R
 import kotlinx.android.synthetic.main.activity_edit.*
+import timber.log.Timber
 
 
 var imageUri = ""
+lateinit var vm:EditViewModel
 
 class EditActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
+        supportActionBar?.title = "Your Activity Title"; // for set actionbar title
+
         val intent = intent
         imageUri = intent.getStringExtra("image") ?: ""
+         vm = ViewModelProvider(this).get(EditViewModel::class.java)
+
         init()
+
 
     }
 
@@ -41,7 +49,7 @@ class EditActivity : AppCompatActivity() {
                 iv.imageMatrix = scaleMatrix(scale, scale)
             }
         })
-        iv.setOnClickListener {
+        crop_btn.setOnClickListener {
             animateImageHeight()
         }
     }
@@ -49,6 +57,8 @@ class EditActivity : AppCompatActivity() {
     var imageRotation = 0
 
     private fun animateImageHeight() {
+        vm.transformImage
+
         val drawableWidth: Float = iv.getDrawable().getIntrinsicWidth().toFloat()
         val drawableHeight: Float = iv.getDrawable().getIntrinsicHeight().toFloat()
         val viewWidth: Float = iv.getMeasuredWidth().toFloat()
@@ -59,6 +69,10 @@ class EditActivity : AppCompatActivity() {
         val newViewHeight: Int
         val imageScale: Float
         val newImageScale: Float
+
+        Timber.d("Rotation $rotation")
+        Timber.d("new Rotation $newRotation")
+
 
         if (rotation == 0 || rotation == 180) {
             imageScale = viewWidth / drawableWidth
