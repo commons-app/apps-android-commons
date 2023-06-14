@@ -176,8 +176,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     /**
-     * The new Photo Picker with GET_CONTENT takeover redacts location tags
-     * from EXIF metadata.
+     * On some devices, the new Photo Picker with GET_CONTENT takeover
+     * redacts location tags from EXIF metadata
      *
      * Show warning to the user when ACTION_GET_CONTENT intent is enabled
      */
