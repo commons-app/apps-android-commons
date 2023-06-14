@@ -42,6 +42,7 @@ import fr.free.nrw.commons.recentlanguages.Language;
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter;
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao;
 import fr.free.nrw.commons.upload.LanguagesAdapter;
+import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import java.util.HashMap;
@@ -71,6 +72,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     private TextView recentLanguagesTextView;
     private View separator;
     private ListView languageHistoryListView;
+    private static final String GET_CONTENT_PICKER_HELP_URL = "https://commons-app.github.io/docs.html#get-content";
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -150,6 +152,17 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             checkPermissionsAndSendLogs();
             return true;
         });
+
+        Preference getContentPickerPreference = findPreference("getContentPhotoPickerPref");
+        getContentPickerPreference.setOnPreferenceChangeListener(
+            (preference, newValue) -> {
+                boolean isGetContentPickerTurnedOn = (boolean) newValue;
+                if (isGetContentPickerTurnedOn) {
+                    showLocationLossWarning();
+                }
+                return true;
+            }
+        );
         // Disable some settings when not logged in.
         if (defaultKvStore.getBoolean("login_skipped", false)) {
             findPreference("useExternalStorage").setEnabled(false);
@@ -160,6 +173,26 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             findPreference(CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE).setEnabled(false);
             findPreference("managed_exif_tags").setEnabled(false);
         }
+    }
+
+    /**
+     * The new Photo Picker with GET_CONTENT takeover redacts location tags
+     * from EXIF metadata.
+     *
+     * Show warning to the user when ACTION_GET_CONTENT intent is enabled
+     */
+    private void showLocationLossWarning() {
+        DialogUtil.showAlertDialog(
+            getActivity(),
+            null,
+            getString(R.string.location_loss_warning),
+            getString(R.string.ok),
+            getString(R.string.read_help_link),
+            () -> {},
+            () -> Utils.handleWebUrl(requireContext(), Uri.parse(GET_CONTENT_PICKER_HELP_URL)),
+            null,
+            true
+        );
     }
 
     @Override
