@@ -46,10 +46,11 @@ public class FilePicker implements Constants {
         return uri;
     }
 
-    private static Intent createGalleryIntent(@NonNull Context context, int type) {
+    private static Intent createGalleryIntent(@NonNull Context context, int type,
+                                              boolean isGetContentPickerPreferred) {
         // storing picked image type to shared preferences
         storeType(context, type);
-        return plainGalleryPickerIntent()
+        return plainGalleryPickerIntent(isGetContentPickerPreferred)
                 .putExtra(Intent.EXTRA_ALLOW_MULTIPLE, configuration(context).allowsMultiplePickingInGallery());
     }
 
@@ -105,8 +106,8 @@ public class FilePicker implements Constants {
      *
      * @param type Custom type of your choice, which will be returned with the images
      */
-    public static void openGallery(Activity activity, int type) {
-        Intent intent = createGalleryIntent(activity, type);
+    public static void openGallery(Activity activity, int type, boolean isGetContentPickerPreferred) {
+        Intent intent = createGalleryIntent(activity, type, isGetContentPickerPreferred);
         activity.startActivityForResult(intent, RequestCodes.PICK_PICTURE_FROM_GALLERY);
     }
 
@@ -200,7 +201,7 @@ public class FilePicker implements Constants {
         return data == null || (data.getData() == null && data.getClipData() == null);
     }
 
-    private static Intent plainGalleryPickerIntent() {
+    private static Intent plainGalleryPickerIntent(boolean isGetContentPickerPreferred) {
         /**
          * Asking for ACCESS_MEDIA_LOCATION at runtime solved the location-loss issue
          * in the custom selector in Contributions fragment.
@@ -216,7 +217,8 @@ public class FilePicker implements Constants {
          * Reported on the Google Issue Tracker: https://issuetracker.google.com/issues/243294058
          * Status: Won't fix (Intended behaviour)
          *
-         * Switched intent from ACTION_GET_CONTENT to ACTION_OPEN_DOCUMENT as:
+         * Switched intent from ACTION_GET_CONTENT to ACTION_OPEN_DOCUMENT
+         * (based on user's preference) as:
          *
          * ACTION_GET_CONTENT opens the 'best application' for choosing that kind of data
          * The best application is the new Photo Picker that redacts the location tags
@@ -226,9 +228,13 @@ public class FilePicker implements Constants {
          *
          * So, this allows us to use the traditional file picker that does not redact location tags from EXIF.
          *
-         * Note: The traditional file picker might get deprecated in future.
          */
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        Intent intent;
+        if (isGetContentPickerPreferred) {
+            intent = new Intent(Intent.ACTION_GET_CONTENT);
+        } else {
+            intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        }
         intent.setType("image/*");
         return intent;
     }
