@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -152,6 +151,20 @@ public class MainActivity  extends BaseActivity
                 }
             }
             setUpPager();
+            /**
+             * Ask the user for media location access just after login
+             * so that location in the EXIF metadata of the images shared by the user
+             * is retained on devices running Android 10 or above
+             */
+            if (VERSION.SDK_INT >= VERSION_CODES.Q) {
+                PermissionUtils.checkPermissionsAndPerformAction(
+                    this,
+                    permission.ACCESS_MEDIA_LOCATION,
+                    () -> {},
+                    R.string.media_location_permission_denied,
+                    R.string.add_location_manually
+                );
+            }
         }
     }
 

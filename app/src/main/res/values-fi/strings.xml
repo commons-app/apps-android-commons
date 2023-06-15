@@ -648,6 +648,8 @@
   <string name="mark_as_not_for_upload">Merkitse ei-tallennettavaksi</string>
   <string name="this_image_is_already_uploaded">Tämä kuva on jo tallennettu</string>
   <string name="image_selected">Kuva valittu</string>
+  <string name="report_user">Ilmianna käyttäjä</string>
+  <string name="request_user_block">Pyydä tämän käyttäjän estämistä</string>
   <string name="welcome_to_full_screen_mode_text">Tervetuloa koko näytön valintatilaan</string>
   <string name="full_screen_mode_zoom_info">Käytä kahta sormea lähentääksesi ja loitontaaksesi.</string>
   <string name="full_screen_mode_features_info">Pyyhkäise nopeasti ja pitkään suorittaaksesi nämä toiminnot: \n- Vasen/Oikea: Siirry edelliseen/seuraavaan \n- Ylös: Valitse\n- Alas: Merkitse ei-tallennettavaksi.</string>

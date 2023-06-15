@@ -430,6 +430,9 @@
   <string name="ends_on">Konec:</string>
   <string name="display_campaigns">Prikaži akcije</string>
   <string name="display_campaigns_explanation">Nastavi tekoče kampanje</string>
+  <string name="get_content_photo_picker_title">Uporaba izbirnika fotografij GET_CONTENT</string>
+  <string name="get_content_photo_picker_explanation">Onemogočite, če se vaše slike naložijo brez lokacije</string>
+  <string name="location_loss_warning">Zagotovite, da ta novi izbirnik za Android ne odstranjuje lokacije iz vaših slik.</string>
   <string name="nearby_campaign_dismiss_message">Kampanj ne boste več videli. Če želite, lahko tovrstno obveščanje znova vklopite v nastavitvah.</string>
   <string name="this_function_needs_network_connection">Ta možnost zahteva omrežno povezavo. Prosimo, preverite vaše nastavitve povezave.</string>
   <string name="error_processing_image">Pri obdelavi slike je prišlo do napake. Prosimo, poskusite znova!</string>
@@ -597,7 +600,7 @@
   <string name="wikipedia_instructions_step_3">3. V članku poiščite ustrezen razdelek za svojo sliko.</string>
   <string name="wikipedia_instructions_step_4">4. Kliknite ikono Uredi (svinčnik) tega razdelka.</string>
   <string name="wikipedia_instructions_step_5">5. Prilepite vikibesedilo na ustrezno mesto.</string>
-  <string name="wikipedia_instructions_step_6">6. Po potrebi vikibesedilo uredite, da popravite položaj slike. Za več informacij glejte &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;here&lt;/a&gt;.</string>
+  <string name="wikipedia_instructions_step_6">6. Po potrebi vikibesedilo uredite, da popravite položaj slike. Za več informacij glejte &lt;a href=\"https://sl.wikipedia.org/wiki/Wikipedija:Raz%C5%A1irjena_skladnja_za_slike\"&gt;tukaj&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Objavite članek.</string>
   <string name="copy_wikicode_to_clipboard">Kopiraj vikibesedilo v odložišče</string>
   <string name="pause">premor</string>

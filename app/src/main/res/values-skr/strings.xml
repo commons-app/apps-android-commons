@@ -3,15 +3,29 @@
 * Saraiki
 -->
 <resources>
+  <string name="commons_facebook">کامنز فیس بک ورقہ</string>
+  <string name="commons_github">کامنز گٹ ہب ماخذ کوڈ</string>
   <string name="commons_logo">کامنز لوگو</string>
+  <string name="commons_website">کامنز ویب سائٹ</string>
+  <string name="submit">جمع کرواؤ</string>
+  <string name="show_captions">عنوان</string>
+  <string name="row_item_language_description">زبان تفصیل</string>
+  <string name="row_item_caption">عنوان</string>
+  <string name="show_captions_description">تفصیل</string>
+  <string name="nearby_row_image">تصویر</string>
+  <string name="nearby_all">یکے</string>
+  <string name="nearby_filter_toggle">ٹوگل اپ</string>
+  <string name="nearby_filter_search">ڳولݨ ݙکھالا</string>
   <string name="appwidget_img">اڄ دی تصویر</string>
   <string name="navigation_item_explore">پھرولو</string>
   <string name="preference_category_appearance">شکل و صورت</string>
   <string name="preference_category_general">عمومی</string>
   <string name="preference_category_feedback">تہاڈی رائے</string>
+  <string name="preference_category_privacy">رازداری</string>
   <string name="app_name">کامنز</string>
   <string name="bullet">•</string>
   <string name="menu_settings">ترتیباں</string>
+  <string name="intent_share_upload_label">کامنز تے اپ لوڈ کرو</string>
   <string name="username">ورتݨ آلا ناں</string>
   <string name="password">پاس ورڈ</string>
   <string name="login">لاگ ان تھیوو</string>
@@ -19,6 +33,7 @@
   <string name="signup">سائن اپ</string>
   <string name="logging_in_title">لاگ ان تھیندا پئے</string>
   <string name="logging_in_message">انتظار کرو۔۔۔</string>
+  <string name="updating_caption_message">انتظار کرو۔۔۔</string>
   <string name="login_success">لاگ ان کامیاب!</string>
   <string name="login_failed">لاگ ان ناکام!</string>
   <string name="upload_failed">فائل کائنی لبھی،ٻئی فائل کیتے کوشش کرو۔</string>
@@ -30,6 +45,7 @@
   <string name="upload_progress_notification_title_in_progress">%1$s اپ لوڈ تھیندا پئے</string>
   <string name="upload_progress_notification_title_finishing">%1$s اپ لوڈ پورا تھیندا پئے</string>
   <string name="upload_failed_notification_subtitle">ݙیکھݨ کیتے انگل پھیرو</string>
+  <string name="upload_paused_notification_subtitle">ݙیکھݨ کیتے انگل پھیرو</string>
   <string name="title_activity_contributions">میݙے حالیہ اپ لوڈ</string>
   <string name="contribution_state_queued">قطار وچ</string>
   <string name="contribution_state_failed">ناکام</string>
@@ -40,8 +56,10 @@
   <string name="menu_nearby">نیڑے</string>
   <string name="provider_contributions">میݙے اپ لوڈ</string>
   <string name="menu_share">شیئر</string>
-  <string name="share_title_hint" fuzzy="true">عنوان</string>
+  <string name="menu_view_file_page">فائل آلا ورقہ ݙیکھو</string>
+  <string name="share_title_hint">عنوان (ضروری ہے)</string>
   <string name="share_description_hint">تفصیل</string>
+  <string name="share_caption_hint">عنوان</string>
   <string name="login_failed_generic">لاگ ان ناکام</string>
   <string name="share_upload_button">اپلوڈ</string>
   <string name="multiple_share_base_title">ایں سیٹ دا ناں ݙسو</string>
@@ -58,7 +76,8 @@
   <string name="title_activity_featured_images">خاص تصویراں</string>
   <string name="title_activity_category_details">ونکی</string>
   <string name="menu_about">تعارف</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;رازداری پالیسی&lt;/u&gt;</string>
+  <string name="about_privacy_policy">رازداری پالیسی</string>
+  <string name="about_credits">کریڈٹ</string>
   <string name="title_activity_about">تعارف</string>
   <string name="provider_categories">حالیہ ورتیاں ڳیاں ونکیاں</string>
   <string name="menu_retry_upload">ولدا کوشش کرو</string>
@@ -75,18 +94,24 @@
   <string name="welcome_wikipedia_subtext">وکی پیڈیا تے فوٹو وکی میڈیا کامنز کنوں امدن۔</string>
   <string name="welcome_copyright_text">تہاݙے فوٹو پوری دنیا دے لوکاں کوں تعلیم ݙیوݨ کیتے مدد ݙیندن</string>
   <string name="welcome_final_button_text">جیا!</string>
+  <string name="welcome_help_button_text">ٻیاں معلومات</string>
   <string name="detail_panel_cats_label">ونکیاں</string>
   <string name="detail_panel_cats_loading">لوڈ تھین٘دا پئے۔۔۔</string>
   <string name="detail_panel_cats_none">کجھ نی چݨیا</string>
+  <string name="detail_caption_empty">کوئی عنوان کائنی</string>
   <string name="detail_description_empty">کوئی تفصیل کائنی</string>
+  <string name="detail_discussion_empty">کوئی بحث کائنی</string>
   <string name="detail_license_empty">نامعلوم لائسنس</string>
   <string name="menu_refresh">تازہ کرو</string>
   <string name="ok">ٹھیک ہے</string>
   <string name="warning">ݙراوا</string>
+  <string name="upload">اپلوڈ</string>
   <string name="yes">جیا</string>
   <string name="no">کو</string>
+  <string name="media_detail_caption">عنوان</string>
   <string name="media_detail_title">عنوان</string>
   <string name="media_detail_description">تفصیل</string>
+  <string name="media_detail_discussion">بحث مباحثہ</string>
   <string name="media_detail_author">مصنف</string>
   <string name="media_detail_uploaded_date">اپ لوڈ تھیوݨ دی تریخ</string>
   <string name="media_detail_license">لائیسنس</string>
@@ -95,6 +120,7 @@
   <string name="become_a_tester_title">بیٹا ٹیسٹر بݨو</string>
   <string name="logout_verification">بھلا تساں سچی دا لاگ آؤٹ تھیوݨ چاہندے ہو؟</string>
   <string name="mediaimage_failed">میڈیا فوٹو ناکام</string>
+  <string name="welcome_image_tulip">گل لالہ</string>
   <string name="welcome_image_welcome_wikipedia">وکی پیڈیا وچ ست بسم اللہ</string>
   <string name="cancel">منسوخ</string>
   <string name="navigation_drawer_open">کھولو</string>
@@ -114,11 +140,12 @@
   <string name="send_log_file">لاگ فائل بھیڄو</string>
   <string name="skip_login">چھوڑو</string>
   <string name="navigation_item_login">لاگ ان تھیوو</string>
-  <string name="nearby_wikidata" fuzzy="true">وکی ڈیٹا</string>
-  <string name="nearby_wikipedia" fuzzy="true">وکی پیڈیا</string>
-  <string name="nearby_commons" fuzzy="true">عام</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;عام طور تے پچھے ونڄݨ آلے سوال&lt;/u&gt;</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;ترجمہ کرو&lt;/u&gt;</string>
+  <string name="nearby_directions">سمتاں</string>
+  <string name="nearby_wikidata">وکی ڈیٹا</string>
+  <string name="nearby_wikipedia">وکی پیڈیا</string>
+  <string name="nearby_commons">کامنز</string>
+  <string name="about_faq">عمومی سوالات</string>
+  <string name="about_translate">ترجمہ کرو</string>
   <string name="about_translate_title">زباناں</string>
   <string name="about_translate_proceed">اڳوں تے تھیوو</string>
   <string name="about_translate_cancel">منسوخ</string>
@@ -127,29 +154,106 @@
   <string name="menu_search_button">ڳولو</string>
   <string name="title_activity_search">ڳولو</string>
   <string name="search_recent_header">حالیہ ڳول:</string>
-  <string name="search_tab_title_media" fuzzy="true">میݙیا</string>
-  <string name="search_tab_title_categories" fuzzy="true">ونکیاں</string>
+  <string name="search_tab_title_media">میڈیا</string>
+  <string name="search_tab_title_categories">ونکیاں</string>
+  <string name="search_tab_title_depictions">آئٹم</string>
+  <string name="explore_tab_title_featured">خاص</string>
+  <string name="explore_tab_title_map">نقشہ</string>
+  <string name="menu_set_wallpaper">وال پیپر مقرر کرو</string>
   <string name="question">سوال</string>
   <string name="result">نتیجہ</string>
   <string name="continue_message">جاری رکھو</string>
+  <string name="correct">درست جواب</string>
+  <string name="wrong">غلط جواب</string>
+  <string name="delete">مٹاؤ</string>
+  <string name="Achievements">کامیابیاں</string>
   <string name="Profile">پروفائل</string>
-  <string name="statistics" fuzzy="true">شماریات</string>
-  <string name="level" fuzzy="true">سطح</string>
+  <string name="statistics">شماريات</string>
+  <string name="level">درجہ</string>
   <string name="error_occurred">خرابی تھی ڳئی ہے!</string>
+  <string name="contributions_fragment">ونگاراں</string>
+  <string name="nearby_fragment">نیڑے</string>
+  <string name="notifications">اطلاع نامے</string>
+  <string name="list_sheet">تندیر</string>
+  <string name="next">اڳلا</string>
+  <string name="previous">پچھلا</string>
   <string name="title_page_bookmarks_pictures">تصویراں</string>
   <string name="title_page_bookmarks_locations">محل وقوع</string>
   <string name="provider_bookmarks">کتاب نشان</string>
   <string name="provider_bookmarks_location">کتاب نشان</string>
+  <string name="back_button_warning">اپ لوڈ منسوخ کرو</string>
+  <string name="nominate_for_deletion_done">تھی ڳیا</string>
+  <string name="review_thanks_yes_button_text">اڳلی تصویر</string>
+  <string name="please_wait">سوپݨا، انتظار کرو۔۔۔</string>
+  <string name="copied_successfully">نقل تھی ڳئے</string>
+  <string name="skip_image">ایہ تصویر چھوڑو</string>
+  <string name="exif_tag_name_author">مصنف</string>
+  <string name="exif_tag_name_copyright">نقل حقوق</string>
+  <string name="exif_tag_name_location">محل وقوع</string>
+  <string name="exif_tag_name_cameraModel">کیمرے دا ماڈل</string>
+  <string name="exif_tag_name_lensModel">لینز ماڈل</string>
+  <string name="exif_tag_name_serialNumbers">سلسلہ نمبر</string>
+  <string name="exif_tag_name_software">سافٹ ویئر</string>
+  <string name="image_info">تصویر معلومات</string>
+  <string name="no_categories_found">کوئی ونکیاں کائنی لبھیاں</string>
+  <string name="delete_helper_show_deletion_title_success">کامیابی</string>
   <string name="delete_helper_show_deletion_title_failed">ناکام تھیا</string>
+  <string name="delete_helper_ask_reason_copyright_logo">لوگو</string>
   <string name="category_edit_helper_show_edit_title_success">کامیابی</string>
+  <string name="category_edit_button_text">ونکیاں اپ ڈیٹ کرو</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">کامیابی</string>
+  <string name="title_for_media">میڈیا</string>
+  <string name="title_app_shortcut_bookmark">نشانیاں</string>
+  <string name="title_app_shortcut_setting">ترتیباں</string>
   <string name="theme_dark_name">ڳوڑھا</string>
   <string name="theme_light_name">پھکّا</string>
+  <string name="load_more">ٻئے لوݙ کرو</string>
   <string name="confirm">تصدیق</string>
+  <string name="instructions_title">ہدایات</string>
+  <string name="pause">اجھکو</string>
+  <string name="resume">ولدا شروع کرو</string>
+  <string name="paused">جمب ڳیا</string>
+  <string name="more">ٻئے</string>
+  <string name="bookmarks">نشانیاں</string>
+  <string name="achievements_tab_title">کامیابیاں</string>
   <string name="leaderboard_tab_title">لیڈر بورڈ</string>
+  <string name="rank_prefix">درجہ:</string>
   <string name="count_prefix">ڳیݨ:</string>
   <string name="leaderboard_column_rank">درجہ</string>
   <string name="leaderboard_column_user">ورتݨ آلا</string>
+  <string name="leaderboard_column_count">ڳیݨ</string>
   <string name="leaderboard_yearly">سالانہ</string>
   <string name="leaderboard_weekly">ہفتہ وار</string>
   <string name="leaderboard_all_time">سارے ویلے</string>
+  <string name="leaderboard_upload">اپلوڈ</string>
+  <string name="leaderboard_nearby">نیڑے</string>
+  <string name="leaderboard_used">ورتے ہوئے</string>
+  <string name="leaderboard_my_rank_button_text">میݙا رینک</string>
+  <string name="license_step_title">میڈیا لائسنس</string>
+  <string name="media_detail_step_title">میڈیا تفصیلاں</string>
+  <string name="menu_view_category_page">ونکی ورقہ ݙیکھو</string>
+  <string name="menu_view_item_page">آئٹم ورقہ ݙیکھو</string>
+  <string name="read_help_link">ٻیا پڑھو</string>
+  <string name="media_detail_in_all_languages">ساریاں زباناں وچ</string>
+  <string name="label">لیبل</string>
+  <string name="description">تفصیل</string>
+  <string name="title_page_bookmarks_items">آئٹم</string>
+  <string name="custom_selector_empty_text">کوئی تصویر کائنی</string>
+  <string name="done">تھی ڳیا</string>
+  <string name="back">پچھوں</string>
+  <string name="welcome_custom_selector_ok">کمال ہے!</string>
+  <string name="learn_more">ٻیا سکھو</string>
+  <string name="need_permission">اجازت دی لوڑ ہے</string>
+  <string name="edit_categories">ونکیاں وچ تبدیلی کرو</string>
+  <string name="advanced_options">اعلیٰ اختیارات</string>
+  <string name="apply">لاڳو کرو</string>
+  <string name="reset">ولدا ٹھیک کرو</string>
+  <string name="add_location">محل وقوع شامل کرو</string>
+  <string name="explore_map_details">تفصیلاں</string>
+  <string name="android_version">انڈرائیڈ ورژن</string>
+  <string name="device_model">ڈیوائس ماڈل</string>
+  <string name="device_name">ڈیوائس ناں</string>
+  <string name="network_type">نیٹ ورک قسم</string>
+  <string name="your_feedback">تہاݙی فیڈ بیک</string>
+  <string name="menu_view_report">رپورٹ</string>
 </resources>

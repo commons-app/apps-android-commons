@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Sagan
 * Рустам Нурыев
 -->
 <resources>
+  <string name="crash_dialog_title">Викимилек боҙолдо</string>
+  <string name="crash_dialog_text">Ой. Нимәлер дөрөҫ эшләнмәне!</string>
+  <string name="crash_dialog_comment_prompt">Нимә эшләгәнегеҙҙе электорн почтаға ебәрегеҙ. Был проблеманы хәл итергә ярҙам итәсәк.</string>
   <string name="crash_dialog_ok_toast">Рәхмәт!</string>
 </resources>
