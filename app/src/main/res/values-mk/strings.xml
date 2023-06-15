@@ -416,6 +416,9 @@
   <string name="ends_on">Завршува:</string>
   <string name="display_campaigns">Прикажи походи</string>
   <string name="display_campaigns_explanation">Погледајте ги тековните походи</string>
+  <string name="get_content_photo_picker_title">Користи го сликоизбирачот GET_CONTENT</string>
+  <string name="get_content_photo_picker_explanation">Оневозможи ако сликите се подигаат без местоположба</string>
+  <string name="location_loss_warning">Осигурајте се дека овој нов избирач за Андроид не ги трга местоположбите од вашите слики.</string>
   <string name="nearby_campaign_dismiss_message">Повеќе нема да ви се прикажуваат походите. Доколку се премислите, таа поставка ќе ја најдете во Нагодувањата.</string>
   <string name="this_function_needs_network_connection">Оваа можност бара да бидете поврзани со мрежата. Проверете ги поставките за поврзување.</string>
   <string name="error_processing_image">Се појави грешка при обработката на сликата. Обидете се повторно!</string>

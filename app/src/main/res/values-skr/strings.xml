@@ -15,6 +15,7 @@
   <string name="nearby_row_image">تصویر</string>
   <string name="nearby_all">یکے</string>
   <string name="nearby_filter_toggle">ٹوگل اپ</string>
+  <string name="nearby_filter_search">ڳولݨ ݙکھالا</string>
   <string name="appwidget_img">اڄ دی تصویر</string>
   <string name="navigation_item_explore">پھرولو</string>
   <string name="preference_category_appearance">شکل و صورت</string>
@@ -44,6 +45,7 @@
   <string name="upload_progress_notification_title_in_progress">%1$s اپ لوڈ تھیندا پئے</string>
   <string name="upload_progress_notification_title_finishing">%1$s اپ لوڈ پورا تھیندا پئے</string>
   <string name="upload_failed_notification_subtitle">ݙیکھݨ کیتے انگل پھیرو</string>
+  <string name="upload_paused_notification_subtitle">ݙیکھݨ کیتے انگل پھیرو</string>
   <string name="title_activity_contributions">میݙے حالیہ اپ لوڈ</string>
   <string name="contribution_state_queued">قطار وچ</string>
   <string name="contribution_state_failed">ناکام</string>
@@ -54,7 +56,8 @@
   <string name="menu_nearby">نیڑے</string>
   <string name="provider_contributions">میݙے اپ لوڈ</string>
   <string name="menu_share">شیئر</string>
-  <string name="share_title_hint" fuzzy="true">عنوان</string>
+  <string name="menu_view_file_page">فائل آلا ورقہ ݙیکھو</string>
+  <string name="share_title_hint">عنوان (ضروری ہے)</string>
   <string name="share_description_hint">تفصیل</string>
   <string name="share_caption_hint">عنوان</string>
   <string name="login_failed_generic">لاگ ان ناکام</string>
@@ -95,7 +98,9 @@
   <string name="detail_panel_cats_label">ونکیاں</string>
   <string name="detail_panel_cats_loading">لوڈ تھین٘دا پئے۔۔۔</string>
   <string name="detail_panel_cats_none">کجھ نی چݨیا</string>
+  <string name="detail_caption_empty">کوئی عنوان کائنی</string>
   <string name="detail_description_empty">کوئی تفصیل کائنی</string>
+  <string name="detail_discussion_empty">کوئی بحث کائنی</string>
   <string name="detail_license_empty">نامعلوم لائسنس</string>
   <string name="menu_refresh">تازہ کرو</string>
   <string name="ok">ٹھیک ہے</string>
