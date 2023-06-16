@@ -177,7 +177,7 @@ android {
         versionName '4.1.0'
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
 
-        minSdkVersion 29
+        minSdkVersion 21
         targetSdkVersion 31
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments clearPackageData: 'true'
