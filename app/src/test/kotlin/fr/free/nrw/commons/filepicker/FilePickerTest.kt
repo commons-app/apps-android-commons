@@ -22,6 +22,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.lang.reflect.Method
+import kotlin.random.Random.Default.nextBoolean
 
 @RunWith(RobolectricTestRunner::class)
 @Config(
@@ -60,7 +61,7 @@ class FilePickerTest {
         `when`(PreferenceManager.getDefaultSharedPreferences(activity)).thenReturn(sharedPref)
         `when`(sharedPref.edit()).thenReturn(sharedPreferencesEditor)
         `when`(sharedPref.edit().putInt("type", 0)).thenReturn(sharedPreferencesEditor)
-        FilePicker.openGallery(activity, 0)
+        FilePicker.openGallery(activity, 0, nextBoolean())
         verify(activity).startActivityForResult(
             ArgumentMatchers.anyObject(),
             requestCodeCaptor?.capture()?.toInt()!!
