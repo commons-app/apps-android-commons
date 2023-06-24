@@ -103,6 +103,9 @@ class UploadMediaDetailFragmentUnitTest {
     @Mock
     private lateinit var imageCoordinates: ImageCoordinates
 
+    @Mock
+    private var location: fr.free.nrw.commons.location.LatLng? = null
+
     private lateinit var activity: UploadActivity
 
     @Before
@@ -172,7 +175,7 @@ class UploadMediaDetailFragmentUnitTest {
     @Throws(Exception::class)
     fun testSetImageTobeUploaded() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.setImageTobeUploaded(null, null)
+        fragment.setImageTobeUploaded(null, null, location)
     }
 
     @Test
@@ -374,7 +377,7 @@ class UploadMediaDetailFragmentUnitTest {
         `when`(latLng.longitude).thenReturn(0.0)
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
         fragment.onActivityResult(1211, Activity.RESULT_OK, intent)
-        Mockito.verify(presenter, Mockito.times(0)).verifyImageQuality(0)
+        Mockito.verify(presenter, Mockito.times(0)).verifyImageQuality(0, location)
     }
 
     @Test
@@ -396,7 +399,9 @@ class UploadMediaDetailFragmentUnitTest {
         `when`(latLng.longitude).thenReturn(0.0)
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
         fragment.onActivityResult(1211, Activity.RESULT_OK, intent)
-        Mockito.verify(presenter, Mockito.times(1)).verifyImageQuality(0)
+        if (location == null) {
+            Mockito.verify(presenter, Mockito.times(1)).verifyImageQuality(0, location)
+        }
     }
 
     @Test

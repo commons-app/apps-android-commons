@@ -48,6 +48,9 @@ class UploadMediaPresenterTest {
     private lateinit var place: Place
 
     @Mock
+    private var location: LatLng? = null
+
+    @Mock
     private lateinit var uploadItem: UploadItem
 
     @Mock
@@ -88,10 +91,11 @@ class UploadMediaPresenterTest {
             repository.preProcessImage(
                 ArgumentMatchers.any(UploadableFile::class.java),
                 ArgumentMatchers.any(Place::class.java),
-                ArgumentMatchers.any(UploadMediaPresenter::class.java)
+                ArgumentMatchers.any(UploadMediaPresenter::class.java),
+                ArgumentMatchers.any(LatLng::class.java)
             )
         ).thenReturn(testObservableUploadItem)
-        uploadMediaPresenter.receiveImage(uploadableFile, place)
+        uploadMediaPresenter.receiveImage(uploadableFile, place, location)
         verify(view).showProgress(true)
         testScheduler.triggerActions()
         verify(view).onImageProcessed(
@@ -114,7 +118,7 @@ class UploadMediaPresenterTest {
             .thenReturn(imageCoordinates)
         whenever(uploadItem.gpsCoords.decimalCoords)
             .thenReturn("imageCoordinates")
-        uploadMediaPresenter.verifyImageQuality(0)
+        uploadMediaPresenter.verifyImageQuality(0, location)
         verify(view).showProgress(true)
         testScheduler.triggerActions()
         verify(view).showProgress(false)
@@ -133,7 +137,7 @@ class UploadMediaPresenterTest {
             .thenReturn(imageCoordinates)
         whenever(uploadItem.gpsCoords.decimalCoords)
             .thenReturn(null)
-        uploadMediaPresenter.verifyImageQuality(0)
+        uploadMediaPresenter.verifyImageQuality(0, location)
         testScheduler.triggerActions()
     }
 
@@ -264,11 +268,12 @@ class UploadMediaPresenterTest {
             repository.preProcessImage(
                 ArgumentMatchers.any(UploadableFile::class.java),
                 ArgumentMatchers.any(Place::class.java),
-                ArgumentMatchers.any(UploadMediaPresenter::class.java)
+                ArgumentMatchers.any(UploadMediaPresenter::class.java),
+                ArgumentMatchers.any(LatLng::class.java)
             )
         ).thenReturn(item)
 
-        uploadMediaPresenter.receiveImage(uploadableFile, germanyAsPlace)
+        uploadMediaPresenter.receiveImage(uploadableFile, germanyAsPlace, location)
         verify(view).showProgress(true)
         testScheduler.triggerActions()
 
