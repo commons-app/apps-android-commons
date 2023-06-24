@@ -103,8 +103,6 @@ class UploadMediaDetailFragmentUnitTest {
     @Mock
     private lateinit var imageCoordinates: ImageCoordinates
 
-    @Mock
-    private var location: fr.free.nrw.commons.location.LatLng? = null
 
     private lateinit var activity: UploadActivity
 
@@ -399,9 +397,7 @@ class UploadMediaDetailFragmentUnitTest {
         `when`(latLng.longitude).thenReturn(0.0)
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
         fragment.onActivityResult(1211, Activity.RESULT_OK, intent)
-        if (location == null) {
-            Mockito.verify(presenter, Mockito.times(1)).verifyImageQuality(0, location)
-        }
+        Mockito.verify(presenter, Mockito.times(1)).verifyImageQuality(0, null)
     }
 
     @Test
