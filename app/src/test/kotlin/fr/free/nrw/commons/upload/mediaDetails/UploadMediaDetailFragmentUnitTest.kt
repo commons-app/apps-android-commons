@@ -98,6 +98,9 @@ class UploadMediaDetailFragmentUnitTest {
     private lateinit var place: Place
 
     @Mock
+    private var location: fr.free.nrw.commons.location.LatLng? = null
+
+    @Mock
     private lateinit var defaultKvStore: JsonKvStore
 
     @Mock
