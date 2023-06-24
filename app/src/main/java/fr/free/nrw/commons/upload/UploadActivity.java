@@ -8,6 +8,8 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -38,6 +40,8 @@ import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.mwapi.UserClient;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.theme.BaseActivity;
@@ -74,6 +78,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     SessionManager sessionManager;
     @Inject
     UserClient userClient;
+    @Inject
+    LocationServiceManager locationManager;
 
 
     @BindView(R.id.cv_container_top_card)
@@ -109,6 +115,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private ThumbnailsAdapter thumbnailsAdapter;
 
     private Place place;
+    private LatLng prevLocation;
+    private LatLng currLocation;
     private List<UploadableFile> uploadableFiles = Collections.emptyList();
     private int currentSelectedPosition = 0;
     /*
@@ -117,6 +125,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private boolean isMultipleFilesSelected = false;
 
     public static final String EXTRA_FILES = "commons_image_exta";
+    public static final String LOCATION_BEFORE_IMAGE_CAPTURE = "user_location_before_image_capture";
 
     /**
      * Stores all nearby places found and related users response for
@@ -148,6 +157,11 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         if (dpi<=321) {
             onRlContainerTitleClicked();
         }
+        if (PermissionUtils.hasPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+            locationManager.registerLocationManager();
+        }
+        locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
+        locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
     }
 
     private void init() {
@@ -366,7 +380,21 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             fragments = new ArrayList<>();
             for (UploadableFile uploadableFile : uploadableFiles) {
                 UploadMediaDetailFragment uploadMediaDetailFragment = new UploadMediaDetailFragment();
-                uploadMediaDetailFragment.setImageTobeUploaded(uploadableFile, place);
+                currLocation = locationManager.getLastLocation();
+                if (currLocation != null) {
+                    float locationDifference = getLocationDifference(currLocation, prevLocation);
+                    /* Remove location if app has access to it and is recording it but user
+                       has tapped on "No, do not attach location".
+                       Also, location information is discarded if the difference between
+                       current location and location recorded just before capturing the image
+                       is greater than 100 meters */
+                    if (!defaultKvStore.getBoolean("locationInfoPref")
+                        || locationDifference > 100) {
+                        currLocation = null;
+                    }
+                }
+                uploadMediaDetailFragment.setImageTobeUploaded(uploadableFile, place, currLocation);
+                locationManager.unregisterLocationManager();
                 uploadMediaDetailFragment.setCallback(new UploadMediaDetailFragmentCallback() {
                     @Override
                     public void deletePictureAtIndex(int index) {
@@ -424,6 +452,25 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         }
     }
 
+    /**
+     * Calculate the difference between current location and
+     * location recorded before capturing the image
+     *
+     * @param currLocation
+     * @param prevLocation
+     * @return
+     */
+    private float getLocationDifference(LatLng currLocation, LatLng prevLocation) {
+        if (prevLocation == null) {
+            return 0.0f;
+        }
+        float[] distance = new float[2];
+        Location.distanceBetween(
+                currLocation.getLatitude(), currLocation.getLongitude(),
+                prevLocation.getLatitude(), prevLocation.getLongitude(), distance);
+        return distance[0];
+    }
+
     private void receiveExternalSharedItems() {
         uploadableFiles = contributionController.handleExternalImagesPicked(this, getIntent());
     }
@@ -438,6 +485,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         Timber.i("Received multiple upload %s", uploadableFiles.size());
 
         place = intent.getParcelableExtra(PLACE_OBJECT);
+        prevLocation = intent.getParcelableExtra(LOCATION_BEFORE_IMAGE_CAPTURE);
         resetDirectPrefs();
     }
 

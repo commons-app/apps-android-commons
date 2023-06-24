@@ -188,9 +188,9 @@ public class UploadRepository {
      * @return
      */
     public Observable<UploadItem> preProcessImage(UploadableFile uploadableFile, Place place,
-        SimilarImageInterface similarImageInterface) {
+        SimilarImageInterface similarImageInterface, LatLng location) {
         return uploadModel.preProcessImage(uploadableFile, place,
-            similarImageInterface);
+            similarImageInterface, location);
     }
 
     /**

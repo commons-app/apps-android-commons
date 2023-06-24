@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.exifinterface.media.ExifInterface
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.mwapi.CategoryApi
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.settings.Prefs
@@ -48,7 +49,8 @@ class FileProcessor @Inject constructor(
     /**
      * Processes filePath coordinates, either from EXIF data or user location
      */
-    fun processFileCoordinates(similarImageInterface: SimilarImageInterface, filePath: String?)
+    fun processFileCoordinates(similarImageInterface: SimilarImageInterface,
+                               filePath: String?, location: LatLng?)
             : ImageCoordinates {
         val exifInterface: ExifInterface? = try {
             ExifInterface(filePath!!)
@@ -61,11 +63,13 @@ class FileProcessor @Inject constructor(
         Timber.d("Calling GPSExtractor")
         val originalImageCoordinates = ImageCoordinates(exifInterface)
         if (originalImageCoordinates.decimalCoords == null) {
-            //Find other photos taken around the same time which has gps coordinates
-            findOtherImages(
-                File(filePath),
-                similarImageInterface
-            )
+            if (location == null) {
+                //Find other photos taken around the same time which has gps coordinates
+                findOtherImages(
+                    File(filePath),
+                    similarImageInterface
+                )
+            }
         } else {
             prePopulateCategoriesAndDepictionsBy(originalImageCoordinates)
         }
@@ -82,6 +86,12 @@ class FileProcessor @Inject constructor(
             defaultKvStore.getStringSet(Prefs.MANAGED_EXIF_TAGS) ?: emptySet()
         val redactTags: Set<String> =
             context.resources.getStringArray(R.array.pref_exifTag_values).toSet()
+        /* Remove EXIF location if user has chosen
+           "No, do not attach location" while using in-app camera */
+        if (!defaultKvStore.getBoolean("locationInfoPref")) {
+            val locationTag: String = context.getString(R.string.exif_tag_location)
+            return redactTags - prefManageEXIFTags.minus(locationTag)
+        }
         return redactTags - prefManageEXIFTags
     }
 

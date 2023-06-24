@@ -31,6 +31,8 @@ import fr.free.nrw.commons.LocationPicker.LocationPicker;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao;
 import fr.free.nrw.commons.settings.Prefs;
@@ -117,6 +119,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     private Place nearbyPlace;
     private UploadItem uploadItem;
+    private LatLng location;
     /**
      * editableUploadItem : Storing the upload item before going to update the coordinates
      */
@@ -133,9 +136,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         super.onCreate(savedInstanceState);
     }
 
-    public void setImageTobeUploaded(UploadableFile uploadableFile, Place place) {
+    public void setImageTobeUploaded(UploadableFile uploadableFile, Place place, LatLng location) {
         this.uploadableFile = uploadableFile;
         this.place = place;
+        this.location = location;
     }
 
     @Nullable
@@ -160,7 +164,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         tooltip.setOnClickListener(
             v -> showInfoAlert(R.string.media_detail_step_title, R.string.media_details_tooltip));
         initPresenter();
-        presenter.receiveImage(uploadableFile, place);
+        presenter.receiveImage(uploadableFile, place, location);
         initRecyclerView();
 
         if (callback.getIndexInViewFlipper(this) == 0) {
@@ -222,7 +226,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @OnClick(R.id.btn_next)
     public void onNextButtonClicked() {
-        presenter.verifyImageQuality(callback.getIndexInViewFlipper(this));
+        presenter.verifyImageQuality(callback.getIndexInViewFlipper(this), location);
     }
 
     @OnClick(R.id.btn_previous)
@@ -448,12 +452,31 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         double defaultLongitude = -122.431297;
         double defaultZoom = 16.0;
 
+        /* Retrieve image location from EXIF if present or
+           check if user has provided location while using the in-app camera.
+           Use location of last UploadItem if none of them is available */
         if (uploadItem.getGpsCoords() != null && uploadItem.getGpsCoords()
             .getDecLatitude() != 0.0 && uploadItem.getGpsCoords().getDecLongitude() != 0.0) {
+            Timber.d("Image coordinates taken from the EXIF metadata");
             defaultLatitude = uploadItem.getGpsCoords()
                 .getDecLatitude();
             defaultLongitude = uploadItem.getGpsCoords().getDecLongitude();
             defaultZoom = uploadItem.getGpsCoords().getZoomLevel();
+            startActivityForResult(new LocationPicker.IntentBuilder()
+                .defaultLocation(new CameraPosition.Builder()
+                    .target(
+                        new com.mapbox.mapboxsdk.geometry.LatLng(defaultLatitude, defaultLongitude))
+                    .zoom(defaultZoom).build())
+                .activityKey("UploadActivity")
+                .build(getActivity()), REQUEST_CODE);
+        } else if (location != null && location.getLatitude() != 0.0 && location.getLongitude() != 0.0) {
+            Timber.d("Image coordinates recorded while using the in-app camera");
+            defaultLatitude = location.getLatitude();
+            defaultLongitude = location.getLongitude();
+
+            if(defaultKvStore.getString(LAST_ZOOM) != null){
+                defaultZoom = Double.parseDouble(defaultKvStore.getString(LAST_ZOOM));
+            }
             startActivityForResult(new LocationPicker.IntentBuilder()
                 .defaultLocation(new CameraPosition.Builder()
                     .target(
