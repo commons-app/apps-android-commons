@@ -106,7 +106,6 @@ class UploadMediaDetailFragmentUnitTest {
     @Mock
     private lateinit var imageCoordinates: ImageCoordinates
 
-
     private lateinit var activity: UploadActivity
 
     @Before

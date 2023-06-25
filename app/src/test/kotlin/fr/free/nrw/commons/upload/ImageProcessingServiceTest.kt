@@ -64,7 +64,7 @@ class u {
         `when`(fileUtilsWrapper!!.getSHA1(any(FileInputStream::class.java)))
                 .thenReturn("fileSha")
 
-        `when`(fileUtilsWrapper!!.getGeolocationOfFile(ArgumentMatchers.anyString(), location))
+        `when`(fileUtilsWrapper!!.getGeolocationOfFile(ArgumentMatchers.anyString(), any(LatLng::class.java)))
                 .thenReturn("latLng")
 
         `when`(imageUtilsWrapper?.checkIfImageIsTooDark(ArgumentMatchers.anyString()))
