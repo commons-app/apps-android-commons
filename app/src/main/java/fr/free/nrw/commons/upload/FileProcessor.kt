@@ -61,15 +61,13 @@ class FileProcessor @Inject constructor(
         // Redact EXIF data as indicated in preferences.
         redactExifTags(exifInterface, getExifTagsToRedact())
         Timber.d("Calling GPSExtractor")
-        val originalImageCoordinates = ImageCoordinates(exifInterface)
+        val originalImageCoordinates = ImageCoordinates(exifInterface, location)
         if (originalImageCoordinates.decimalCoords == null) {
-            if (location == null) {
                 //Find other photos taken around the same time which has gps coordinates
                 findOtherImages(
                     File(filePath),
                     similarImageInterface
                 )
-            }
         } else {
             prePopulateCategoriesAndDepictionsBy(originalImageCoordinates)
         }
@@ -166,11 +164,11 @@ class FileProcessor @Inject constructor(
 
     private fun readImageCoordinates(file: File) =
         try {
-            ImageCoordinates(contentResolver.openInputStream(Uri.fromFile(file))!!)
+            ImageCoordinates(contentResolver.openInputStream(Uri.fromFile(file))!!, null)
         } catch (e: IOException) {
             Timber.e(e)
             try {
-                ImageCoordinates(file.absolutePath)
+                ImageCoordinates(file.absolutePath, null)
             } catch (ex: IOException) {
                 Timber.e(ex)
                 null

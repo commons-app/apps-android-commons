@@ -185,7 +185,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
               view.showProgress(true);
               compositeDisposable.add(
                   repository
-                      .getImageQuality(uploadItem)
+                      .getImageQuality(uploadItem, location)
                       .observeOn(mainThreadScheduler)
                       .subscribe(imageResult -> {
                               view.showProgress(false);
@@ -208,7 +208,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
           view.showProgress(true);
           compositeDisposable.add(
               repository
-                  .getImageQuality(uploadItem)
+                  .getImageQuality(uploadItem, location)
                   .observeOn(mainThreadScheduler)
                   .subscribe(imageResult -> {
                           view.showProgress(false);

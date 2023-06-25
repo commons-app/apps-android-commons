@@ -199,8 +199,8 @@ public class UploadRepository {
      * @param uploadItem
      * @return
      */
-    public Single<Integer> getImageQuality(UploadItem uploadItem) {
-        return uploadModel.getImageQuality(uploadItem);
+    public Single<Integer> getImageQuality(UploadItem uploadItem, LatLng location) {
+        return uploadModel.getImageQuality(uploadItem, location);
     }
 
     /**

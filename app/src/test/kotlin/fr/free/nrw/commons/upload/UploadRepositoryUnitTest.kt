@@ -186,8 +186,8 @@ class UploadRepositoryUnitTest {
     @Test
     fun testGetImageQuality() {
         assertEquals(
-            repository.getImageQuality(uploadItem),
-            uploadModel.getImageQuality(uploadItem)
+            repository.getImageQuality(uploadItem, location),
+            uploadModel.getImageQuality(uploadItem, location)
         )
     }
 
