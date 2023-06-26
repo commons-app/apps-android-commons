@@ -90,14 +90,17 @@
   <string name="welcome_copyright_text">Сиздин сүрөттөр дүйнө жүзүндөгү адамдардын билим алышына өбөлгө түзүүдө.</string>
   <string name="welcome_copyright_subtext">Интернетте жарыяланган автордук укукка ээ сүрөттөрдөн, ошондой эле плакаттардан жана китептердин мукабасынан ж.б. четтеңиз.</string>
   <string name="welcome_final_text">Сизге бул түшүнүктүүбү?</string>
-  <string name="welcome_final_button_text">Ооба!</string>
+  <string name="welcome_final_button_text">Ооба !</string>
   <string name="detail_panel_cats_label">Түрмөктөр</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">Жүктөлүүдө…</string>
+  <string name="detail_panel_cats_loading">Жүктөлүүдө…</string>
   <string name="detail_panel_cats_none">Тандалган жок</string>
   <string name="menu_refresh">Жаңылоо</string>
+  <string name="yes">Ооба</string>
+  <string name="no">Жок</string>
   <string name="cancel">Жокко чыгаруу</string>
   <string name="nearby_wikidata">Викимаалымат</string>
   <string name="nearby_wikipedia">Википедия</string>
+  <string name="about_translate">Которуу</string>
   <string name="about_translate_cancel">Жокко чыгаруу</string>
   <string name="back_button_warning">Жүктөөнү жокко чыгаруу</string>
   <string name="back_button_warning_desc">Артка баскычын колдонуу менен бул жүктөө жокко чыгарылат жана сиз ийгиликти жоготосуз</string>

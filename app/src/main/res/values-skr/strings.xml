@@ -182,8 +182,12 @@
   <string name="provider_bookmarks">کتاب نشان</string>
   <string name="provider_bookmarks_location">کتاب نشان</string>
   <string name="back_button_warning">اپ لوڈ منسوخ کرو</string>
+  <string name="back_button_continue">اپ لوڈ کرݨ جاری رکھو</string>
+  <string name="search_this_area">ایں علاقے وچ ڳولو</string>
+  <string name="nearby_card_permission_title">اجازت دی ارداس</string>
   <string name="nominate_for_deletion_done">تھی ڳیا</string>
   <string name="review_thanks_yes_button_text">اڳلی تصویر</string>
+  <string name="review_thanks_no_button_text">جیا، کیوں نہ</string>
   <string name="please_wait">سوپݨا، انتظار کرو۔۔۔</string>
   <string name="copied_successfully">نقل تھی ڳئے</string>
   <string name="skip_image">ایہ تصویر چھوڑو</string>

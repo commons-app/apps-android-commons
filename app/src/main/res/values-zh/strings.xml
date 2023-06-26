@@ -29,6 +29,7 @@
 * Stang
 * StarrySky
 * Tranve
+* U.T.
 * Vikarna
 * VulpesVulpes825
 * Willy1018
@@ -539,6 +540,7 @@
   <string name="delete_helper_ask_reason_copyright_press_photo">按压图片</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">来自网络的随机图片</string>
   <string name="delete_helper_ask_reason_copyright_logo">标志</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">侵犯全景自由</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">由于他是</string>
   <string name="category_edit_helper_make_edit_toast">正在尝试更新分类。</string>
   <string name="category_edit_helper_show_edit_title">分类更新</string>
@@ -587,7 +589,7 @@
   <string name="title_for_child_classes">子类别</string>
   <string name="title_for_parent_classes">父类别</string>
   <string name="upload_nearby_place_found_title">找到附近地点</string>
-  <string name="upload_nearby_place_found_description" fuzzy="true">这是地点%1$s的照片吗？</string>
+  <string name="upload_nearby_place_found_description">这是%1$s的照片吗？</string>
   <string name="title_app_shortcut_bookmark">书签</string>
   <string name="title_app_shortcut_setting">设置</string>
   <string name="remove_bookmark">已从书签中移除</string>
