@@ -10,6 +10,7 @@
   <string name="commons_github">کۆدی سەرچاوەی کۆمنز لە گیتھەب</string>
   <string name="commons_logo">لۆگۆی کۆمنز</string>
   <string name="commons_website">وێبگەی کۆمنز</string>
+  <string name="show_captions">لێدوانەکان</string>
   <string name="share_license_summary" fuzzy="true">ئەم پەڕەیە مۆڵەتنامەی %1 پێ دەدرێت</string>
   <string name="navigation_item_explore">بگەڕێ</string>
   <string name="preference_category_appearance">ڕواڵەت</string>

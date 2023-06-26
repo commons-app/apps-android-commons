@@ -212,6 +212,7 @@
   <string name="location_permission_title">Locatietoestemming aanvragen</string>
   <string name="ok">OK</string>
   <string name="warning">Waarschuwing</string>
+  <string name="duplicate_file_name">Dubbele bestandsnaam gevonden</string>
   <string name="upload">Uploaden</string>
   <string name="yes">Ja</string>
   <string name="no">Nee</string>
@@ -495,6 +496,8 @@
   <string name="exif_tag_name_lensModel">Lensmodel</string>
   <string name="exif_tag_name_serialNumbers">Serienummers</string>
   <string name="exif_tag_name_software">Software</string>
+  <string name="media_location_permission_denied">Toegang tot medialocatie geweigerd</string>
+  <string name="add_location_manually">Het is mogelijk dat we niet automatisch locatiegegevens kunnen verkrijgen van foto\'s die u uploadt. Voeg de locatie bij elke foto toe voordat u die upload</string>
   <string name="share_text">Upload foto\'s rechtstreeks vanaf uw telefoon naar Wikimedia Commons. Download de Commons-app nu: %1$s</string>
   <string name="share_via">App delen via...</string>
   <string name="image_info">Afbeeldingsinfo</string>
@@ -565,7 +568,7 @@
   <string name="title_for_child_classes">SUBKLASSEN</string>
   <string name="title_for_parent_classes">HOOFDKLASSEN</string>
   <string name="upload_nearby_place_found_title">Plaats in de buurt gevonden</string>
-  <string name="upload_nearby_place_found_description">Is dit een foto van plaats %1$s?</string>
+  <string name="upload_nearby_place_found_description">Is dit een foto van %1$s?</string>
   <string name="title_app_shortcut_bookmark">Bladwijzers</string>
   <string name="title_app_shortcut_setting">Instellingen</string>
   <string name="remove_bookmark">Bladwijzer verwijderd</string>

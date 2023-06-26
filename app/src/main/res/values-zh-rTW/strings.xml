@@ -197,7 +197,7 @@
   <string name="welcome_copyright_subtext">避免使用受版權保護的材料，例如從網際網路找來的圖片、海報、書籍封面等</string>
   <string name="welcome_final_text">以上您明白了嗎？</string>
   <string name="welcome_final_button_text">了解！</string>
-  <string name="welcome_help_button_text">更多信息</string>
+  <string name="welcome_help_button_text">更多資訊</string>
   <string name="detail_panel_cats_label">分類</string>
   <string name="detail_panel_cats_loading">載入中…</string>
   <string name="detail_panel_cats_none">未選擇</string>
@@ -435,6 +435,9 @@
   <string name="ends_on">結束於：</string>
   <string name="display_campaigns">顯示活動</string>
   <string name="display_campaigns_explanation">檢視發生中的活動</string>
+  <string name="get_content_photo_picker_title">使用 GET_CONTENT 照片點選器</string>
+  <string name="get_content_photo_picker_explanation">如果您上傳缺少位置資訊的圖片，請停用</string>
+  <string name="location_loss_warning">請確認這個新的 Android 點選器不會從您的圖片裡刪除位置資訊。</string>
   <string name="nearby_campaign_dismiss_message">您不會再看到活動。然而，若您有意的話您可以在設定裡重新啟動此通知。</string>
   <string name="this_function_needs_network_connection">此功能需要連接到網路，請檢查您的連線設定。</string>
   <string name="error_processing_image">處理圖片時出現錯誤。請重試！</string>
@@ -568,7 +571,7 @@
   <string name="title_for_child_classes">子類別</string>
   <string name="title_for_parent_classes">父類別</string>
   <string name="upload_nearby_place_found_title">找到附近地點</string>
-  <string name="upload_nearby_place_found_description">這是地點%1$s的照片嗎？</string>
+  <string name="upload_nearby_place_found_description">這是%1$s的照片嗎？</string>
   <string name="title_app_shortcut_bookmark">書籤</string>
   <string name="title_app_shortcut_setting">設定</string>
   <string name="remove_bookmark">已從書籤刪除</string>

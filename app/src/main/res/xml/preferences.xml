@@ -70,6 +70,12 @@
           app:singleLineTitle="false"
           android:summary="@string/display_campaigns_explanation"
           android:title="@string/display_campaigns" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="getContentPhotoPickerPref"
+            android:summary="@string/get_content_photo_picker_explanation"
+            android:title="@string/get_content_photo_picker_title"/>
     </PreferenceCategory>
 
     <PreferenceCategory

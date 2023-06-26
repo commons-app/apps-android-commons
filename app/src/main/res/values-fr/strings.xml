@@ -448,6 +448,9 @@
   <string name="ends_on">Se termine le :</string>
   <string name="display_campaigns">Campagnes d’affichage</string>
   <string name="display_campaigns_explanation">Voir les campagnes en cours</string>
+  <string name="get_content_photo_picker_title">Utiliser le sélecteur de photos GET_CONTENT</string>
+  <string name="get_content_photo_picker_explanation">Désactiver si vos photos sont téléversées sans emplacement</string>
+  <string name="location_loss_warning">Assurez-vous que ce nouveau sélecteur Android n’élimine pas l’emplacement de vos photos.</string>
   <string name="nearby_campaign_dismiss_message">Vous ne verrez plus les campagnes. Néanmoins, vous pouvez réactiver cette notification dans vos paramètres de configuration, si vous le souhaitez.</string>
   <string name="this_function_needs_network_connection">Cette fonction nécessite une connexion réseau, veuillez consulter vos paramètres de connexion.</string>
   <string name="error_processing_image">Une erreur est survenue durant le traitement de l’image. Veuillez recommencer !</string>
@@ -471,7 +474,7 @@
   <string name="review_spam">Est-ce dans le champ du projet ?</string>
   <string name="review_thanks">Désirez-vous remercier le contributeur ou la contributrice ?</string>
   <string name="review_spam_explanation">Cliquer sur NON pour proposer cette image à la suppression si elle n’est pas du tout utile.</string>
-  <string name="review_copyright_explanation">Les logos, copies d’écran, posters de film sont souvent des violations de droits d’auteur.\nCliquer sur NON pour proposer la suppression de cette image.</string>
+  <string name="review_copyright_explanation">Les logos, copies d’écran, affiches de film sont souvent des violations de droits d’auteur.\nCliquer sur NON pour proposer la suppression de cette image.</string>
   <string name="review_thanks_explanation">%1$s sera encouragé par votre appréciation</string>
   <string name="review_no_category">Oh, ceci n’est même pas catégorisé !</string>
   <string name="review_category_explanation">Cette image est classée dans %1$s catégories.</string>
@@ -581,7 +584,7 @@
   <string name="title_for_child_classes">CLASSES ENFANTS</string>
   <string name="title_for_parent_classes">CLASSES PARENTES</string>
   <string name="upload_nearby_place_found_title">Lieu à proximité trouvé</string>
-  <string name="upload_nearby_place_found_description">Est-ce une photo du lieu « %1$s » ?</string>
+  <string name="upload_nearby_place_found_description">Est-ce une photo de « %1$s » ?</string>
   <string name="title_app_shortcut_bookmark">Signets</string>
   <string name="title_app_shortcut_setting">Paramètres</string>
   <string name="remove_bookmark">Retiré des favoris</string>

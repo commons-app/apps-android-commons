@@ -505,7 +505,7 @@
   <string name="title_for_child_classes">자식 클래스</string>
   <string name="title_for_parent_classes">부모 클래스</string>
   <string name="upload_nearby_place_found_title">주변 장소 발견</string>
-  <string name="upload_nearby_place_found_description">장소 %1$s의 사진입니까?</string>
+  <string name="upload_nearby_place_found_description">%1$s의 사진이 맞습니까?</string>
   <string name="title_app_shortcut_bookmark">북마크</string>
   <string name="title_app_shortcut_setting">설정</string>
   <string name="remove_bookmark">북마크에서 제거됨</string>

@@ -95,6 +95,10 @@
   <string name="detail_panel_cats_loading" fuzzy="true">Жүктөлүүдө…</string>
   <string name="detail_panel_cats_none">Тандалган жок</string>
   <string name="menu_refresh">Жаңылоо</string>
+  <string name="cancel">Жокко чыгаруу</string>
+  <string name="nearby_wikidata">Викимаалымат</string>
+  <string name="nearby_wikipedia">Википедия</string>
+  <string name="about_translate_cancel">Жокко чыгаруу</string>
   <string name="back_button_warning">Жүктөөнү жокко чыгаруу</string>
   <string name="back_button_warning_desc">Артка баскычын колдонуу менен бул жүктөө жокко чыгарылат жана сиз ийгиликти жоготосуз</string>
   <string name="back_button_continue">Жүктөөнү улантуу</string>

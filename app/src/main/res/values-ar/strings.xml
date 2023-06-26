@@ -463,6 +463,9 @@
   <string name="ends_on">ينتهي في:</string>
   <string name="display_campaigns">عرض الحملات</string>
   <string name="display_campaigns_explanation">انظر الحملات الجارية</string>
+  <string name="get_content_photo_picker_title">استخدم منتقي الصور GET_CONTENT</string>
+  <string name="get_content_photo_picker_explanation">تعطيل إذا تم تحميل صورك بدون موقع</string>
+  <string name="location_loss_warning">يرجى التأكد من أن منتقي أندرويد الجديد هذا لا يزيل الموقع من صورك.</string>
   <string name="nearby_campaign_dismiss_message">لن ترى الحملات بعد الآن، ومع ذلك، يمكنك إعادة تمكين هذا الإشعار في الإعدادات إذا كنت ترغب.</string>
   <string name="this_function_needs_network_connection">تتطلب هذه الوظيفة الاتصال بالشبكة; يُرجَى التحقق من إعدادات اتصالك.</string>
   <string name="error_processing_image">حدث خطأ أثناء معالجة الصورة. رجاءً حاول مرة أخرى!</string>
@@ -601,7 +604,7 @@
   <string name="title_for_child_classes">تصنيف الأطفال</string>
   <string name="title_for_parent_classes">تصنيف أولياء الأمور</string>
   <string name="upload_nearby_place_found_title">تم العثور على مكان قريب</string>
-  <string name="upload_nearby_place_found_description">هل هذه صورة للمكان %1$؟</string>
+  <string name="upload_nearby_place_found_description" fuzzy="true">هل هذه صورة للمكان %1$؟</string>
   <string name="title_app_shortcut_bookmark">العلامات</string>
   <string name="title_app_shortcut_setting">الإعدادات</string>
   <string name="remove_bookmark">أزل من العلامات</string>

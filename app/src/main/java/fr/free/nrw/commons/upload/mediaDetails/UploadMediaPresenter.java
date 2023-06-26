@@ -3,12 +3,7 @@ package fr.free.nrw.commons.upload.mediaDetails;
 import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
 import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_CAPTION;
-import static fr.free.nrw.commons.utils.ImageUtils.FILE_FBMD;
 import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
-import static fr.free.nrw.commons.utils.ImageUtils.FILE_NO_EXIF;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_BLURRY;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_DARK;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_GEOLOCATION_DIFFERENT;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
@@ -331,11 +326,8 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
             view.showDuplicatePicturePopup(uploadItem);
         }
 
-        // If image has some problems check if the bits are set in errorCode and
-        // show popup accordingly
-        if (((errorCode & FILE_NO_EXIF) != 0) || ((errorCode & IMAGE_DARK) != 0) ||
-            ((errorCode & FILE_FBMD) != 0) || ((errorCode & IMAGE_GEOLOCATION_DIFFERENT) != 0) ||
-            ((errorCode & IMAGE_BLURRY) != 0)) {
+        // If image has some other problems, show popup accordingly
+        if (errorCode != EMPTY_CAPTION && errorCode != FILE_NAME_EXISTS) {
             view.showBadImagePopup(errorCode, uploadItem);
         }
 

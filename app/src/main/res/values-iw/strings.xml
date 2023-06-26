@@ -446,6 +446,9 @@
   <string name="ends_on">מסתיים ב־:</string>
   <string name="display_campaigns">הצגת מסעי פרסום</string>
   <string name="display_campaigns_explanation">ר\' את מסעי פרסום שמתרחשים כרגע</string>
+  <string name="get_content_photo_picker_title">להשתמש בבורר התמונות GET_CONTENT</string>
+  <string name="get_content_photo_picker_explanation">כדאי לכבות את זה אם התמונות שלך נשלחות ללא מיקום</string>
+  <string name="location_loss_warning">נא לוודא שהבורר החדש הזה ב־Android לא מסיר את המיקום מהתמונות שלך.</string>
   <string name="nearby_campaign_dismiss_message">מסעי הפרסום לא יופיעו עוד. עם זאת, ניתן להפעיל את ההתראות האלה מחדש בהגדרות בהתאם לרצונך.</string>
   <string name="this_function_needs_network_connection">תכונה זו דורשת חיבור לרשת, נא לבדוק את הגדרות החיבור שלך.</string>
   <string name="error_processing_image">אירעה שגיאה בעת עיבוד התמונה. נא לנסות שוב!</string>
@@ -583,7 +586,7 @@
   <string name="title_for_child_classes">מחלקות יורשות</string>
   <string name="title_for_parent_classes">מחלקות מורישות</string>
   <string name="upload_nearby_place_found_title">נמצא בקרבת מקום</string>
-  <string name="upload_nearby_place_found_description">האם זאת תמונה של המקום %1$s?</string>
+  <string name="upload_nearby_place_found_description">האם זאת תמונה של %1$s?</string>
   <string name="title_app_shortcut_bookmark">סימניות</string>
   <string name="title_app_shortcut_setting">הגדרות</string>
   <string name="remove_bookmark">הוסר מסימניות</string>

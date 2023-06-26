@@ -161,7 +161,7 @@
   <string name="welcome_wikipedia_text">Kontributez kun vua imaji. Helpez artikli de Wikipedia esar vivanta!</string>
   <string name="welcome_wikipedia_subtext">Imaji che Wikipedio venas de Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Vua imaji helpas edukar personi en tota mondo.</string>
-  <string name="welcome_copyright_subtext">Ne uzes arkivi protektita per autoroyuro (\'\'copyright\'\') trovita da vu che Interreto, o imaji pri afishi, kovrili di libri, edc.</string>
+  <string name="welcome_copyright_subtext">Ne uzez arkivi protektita per autoroyuro (\'\'copyright\'\') trovita da vu che Interreto, o imaji pri afishi, kovrili di libri, edc.</string>
   <string name="welcome_final_text">Ka vu komprenis?</string>
   <string name="welcome_final_button_text">Yes!</string>
   <string name="welcome_help_button_text">Plusa informo</string>
@@ -202,7 +202,7 @@
   <string name="welcome_image_rainbow_bridge">Pluv-arko ponto</string>
   <string name="welcome_image_tulip">Tulipo</string>
   <string name="welcome_image_welcome_wikipedia">Bonveno a Wikipedio</string>
-  <string name="welcome_image_welcome_copyright">Autoroyuro</string>
+  <string name="welcome_image_welcome_copyright">Autoroyuro dil \'Bonveno\'-mesajo</string>
   <string name="welcome_image_sydney_opera_house">Opero-domo di Sydney</string>
   <string name="cancel">Nuligar</string>
   <string name="navigation_drawer_open">Apertar</string>

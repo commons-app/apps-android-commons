@@ -90,7 +90,7 @@
   <string name="updating_caption_message">Prosimo, počakajte ...</string>
   <string name="login_success">Uspešno ste se prijavili!</string>
   <string name="login_failed">Prijava ni uspela!</string>
-  <string name="upload_failed">Datoteke ni bilo mogoče najti. Prosimo, poskusite z drugo datoteko.</string>
+  <string name="upload_failed">Datoteka ni bila najdena. Prosimo, poskusite z drugo datoteko.</string>
   <string name="authentication_failed">Avtentikacija ni uspela; prosimo, prijavite se znova</string>
   <string name="uploading_started">Nalaganje se je začelo!</string>
   <string name="uploading_queued">Nalaganje na čakanju (vklopljen je način omejene povezanosti)</string>
@@ -158,7 +158,7 @@
   <string name="no_uploads_yet">Naložili niste še nobene fotografije.</string>
   <string name="menu_retry_upload">Poskusi znova</string>
   <string name="menu_cancel_upload">Prekliči</string>
-  <string name="media_upload_policy">Ob objavi te slike izjavljam, da je slika moje lastno delo, da ne vsebuje avtorsko zavarovanega gradiva ali sebka in da je tudi drugače skladna s pravili projekta &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons&lt;/a&gt;.</string>
+  <string name="media_upload_policy">Ob objavi te slike izjavljam, da je slika moje lastno delo, da ne vsebuje avtorsko varovanega gradiva ali sebka in da je tudi drugače skladna s pravili projekta &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Prenesi</string>
   <string name="preference_license">Privzeta licenca</string>
   <string name="use_previous">Uporabi prejšnji naslov in opis</string>
@@ -189,7 +189,7 @@
   <string name="welcome_wikipedia_text">Prispevajte svoje slike. Pomagajte člankom Wikipedije, da oživijo!</string>
   <string name="welcome_wikipedia_subtext">Slike v Wikipediji izvirajo iz Wikimedijine zbirke.</string>
   <string name="welcome_copyright_text">Vaše slike pomagajo pri izobraževanju ljudi po vsem svetu.</string>
-  <string name="welcome_copyright_subtext">Izogibajte se avtorsko zavarovanemu gradivu s spleta in slikam plakatov, knjižnih platnic idr.</string>
+  <string name="welcome_copyright_subtext">Izogibajte se avtorsko varovanemu gradivu s spleta in slikam plakatov, knjižnih platnic idr.</string>
   <string name="welcome_final_text">Ste razumeli?</string>
   <string name="welcome_final_button_text">Da!</string>
   <string name="welcome_help_button_text">Več informacij</string>
@@ -337,7 +337,7 @@
   <string name="quiz_back_button">Če boste še naprej nalagali slike, ki jih je treba izbrisati, bo vaš račun verjetno blokiran. Ali res želite končati kviz?</string>
   <string name="quiz_alert_message">Izbrisanih je bilo več kot %1$s slik, ki ste jih naložili. Če boste še naprej nalagali slike, ki jih je treba izbrisati, bo vaš račun verjetno izbrisan.\n\nAli bi si želeli znova ogledati vadnico in nato opraviti kviz, da se boste lahko naučili, katere vrste slik smete in ne smete nalagati?</string>
   <string name="selfie_answer">Sebki nimajo posebne enciklopedične vrednosti. Prosimo, ne nalagajte slik sebe, razen če je v Wikipediji že ustvarjen članek o vas.</string>
-  <string name="taj_mahal_answer">Slike spomenikov in pokrajine so sprejemljive v večini držav. Upoštevajte, da so začasne umetniške instalacije pogosto avtorsko zavarovane in njihovih upodobitev ni dovoljeno nalagati. V Sloveniji je v gospodarski namen dovoljeno fotografirati samo tista javno razstavljena dela, katerih avtor je umrl leta {{#expr:{{CURRENTYEAR}}-71}}&lt;/&gt; ali prej. Za več o tem glejte [[Commons:Copyright rules by territory/Slovenia#Freedom of panorama]].</string>
+  <string name="taj_mahal_answer">Slike spomenikov in pokrajine so sprejemljive v večini držav. Upoštevajte, da so začasne umetniške instalacije pogosto avtorsko varovane in njihovih upodobitev ni dovoljeno nalagati. V Sloveniji je v gospodarski namen dovoljeno fotografirati samo tista javno razstavljena dela, katerih avtor je umrl leta {{#expr:{{CURRENTYEAR}}-71}}&lt;/&gt; ali prej. Za več o tem glejte [[Commons:Copyright rules by territory/Slovenia#Freedom of panorama]].</string>
   <string name="screenshot_answer">Zaslonski posnetki spletnih mest se štejejo kot izpeljana dela in zanje veljajo avtorske pravice izvornega spletnega mesta. Uporabljajo se lahko le z dovoljenjem izvornega avtorja. Brez takega dovoljenja se vsakršno izpeljano delo šteje za kršitev avtorskih pravic.</string>
   <string name="blurry_image_answer">Eden od ciljev Wikimedijine zbirke je zbiranje kakovostnih slik. Zamegljenih slik zato ne nalagajte. Vedno poskušajte posneti dobro sliko ob primerni svetlobi.</string>
   <string name="construction_event_answer">V Wikimedijini zbirki so zelo dobrodošle slike, ki prikazujejo tehniko ali kulturo.</string>
@@ -430,6 +430,9 @@
   <string name="ends_on">Konec:</string>
   <string name="display_campaigns">Prikaži akcije</string>
   <string name="display_campaigns_explanation">Nastavi tekoče kampanje</string>
+  <string name="get_content_photo_picker_title">Uporaba izbirnika fotografij GET_CONTENT</string>
+  <string name="get_content_photo_picker_explanation">Onemogočite, če se vaše slike naložijo brez lokacije</string>
+  <string name="location_loss_warning">Zagotovite, da ta novi izbirnik za Android ne odstranjuje lokacije iz vaših slik.</string>
   <string name="nearby_campaign_dismiss_message">Kampanj ne boste več videli. Če želite, lahko tovrstno obveščanje znova vklopite v nastavitvah.</string>
   <string name="this_function_needs_network_connection">Ta možnost zahteva omrežno povezavo. Prosimo, preverite vaše nastavitve povezave.</string>
   <string name="error_processing_image">Pri obdelavi slike je prišlo do napake. Prosimo, poskusite znova!</string>
@@ -597,7 +600,7 @@
   <string name="wikipedia_instructions_step_3">3. V članku poiščite ustrezen razdelek za svojo sliko.</string>
   <string name="wikipedia_instructions_step_4">4. Kliknite ikono Uredi (svinčnik) tega razdelka.</string>
   <string name="wikipedia_instructions_step_5">5. Prilepite vikibesedilo na ustrezno mesto.</string>
-  <string name="wikipedia_instructions_step_6">6. Po potrebi vikibesedilo uredite, da popravite položaj slike. Za več informacij glejte &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;here&lt;/a&gt;.</string>
+  <string name="wikipedia_instructions_step_6">6. Po potrebi vikibesedilo uredite, da popravite položaj slike. Za več informacij glejte &lt;a href=\"https://sl.wikipedia.org/wiki/Wikipedija:Raz%C5%A1irjena_skladnja_za_slike\"&gt;tukaj&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Objavite članek.</string>
   <string name="copy_wikicode_to_clipboard">Kopiraj vikibesedilo v odložišče</string>
   <string name="pause">premor</string>
@@ -696,7 +699,7 @@
   <string name="explore_map_details">Podrobnosti</string>
   <string name="achievements_unavailable_beta">Dosežki so na voljo samo v stabilni različici (preverite dokumentacijo razvijalcev).</string>
   <string name="leaderboard_unavailable_beta">Lestvica uvrstitev je na voljo samo v stabilni različici (glejte dokumentacijo razvijalcev).</string>
-  <string name="copyright_popup">Prosimo, nalagajte samo slike, ki ste jih ustvarili sami. Nalagatelje avtorsko zavarovanega gradiva bomo blokirali. To velja tudi za betarazličico. Hvala za preizkušanje aplikacije!</string>
+  <string name="copyright_popup">Prosimo, nalagajte samo slike, ki ste jih ustvarili sami. Naložnike avtorsko varovanega gradiva bomo blokirali. To velja tudi za betarazličico. Hvala za preizkušanje aplikacije!</string>
   <string name="select_feedback_data_choice">Prosimo, odizberite vse podatke, ki jih ne želite deliti javno.</string>
   <string name="api_level">Raven API</string>
   <string name="android_version">Različica Androida</string>
@@ -717,7 +720,7 @@
   <string name="can_not_select_this_image_for_upload">Te slike ni mogoče izbrati za naložitev</string>
   <string name="image_selected">Slika izbrana</string>
   <string name="image_marked_as_not_for_upload">Slika je označena kot ni za nalaganje</string>
-  <string name="menu_view_report">Poročilo</string>
+  <string name="menu_view_report">Prijava</string>
   <string name="report_violation">Prijavi kršitev</string>
   <string name="report_user">Prijavi uporabnika</string>
   <string name="report_content">Prijavi to vsebino</string>

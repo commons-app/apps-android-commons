@@ -15,6 +15,7 @@
 * Mariagarbin
 * Maxan
 * Mello25
+* Re demz
 * TheEduGobi
 * TheGabrielZaum
 * Tks4Fish
@@ -210,6 +211,7 @@
   <string name="location_permission_title">Autorização para identificar localização</string>
   <string name="ok">OK</string>
   <string name="warning">Alerta</string>
+  <string name="duplicate_file_name">Nome de Arquivo Duplicado encontrado</string>
   <string name="upload">Enviar</string>
   <string name="yes">Sim</string>
   <string name="no">Não</string>
@@ -493,6 +495,8 @@
   <string name="exif_tag_name_lensModel">Modelo de lente</string>
   <string name="exif_tag_name_serialNumbers">Números de série</string>
   <string name="exif_tag_name_software">Software</string>
+  <string name="media_location_permission_denied">Acesso à localização da mídia negado</string>
+  <string name="add_location_manually">É possível que não possamos obter automaticamente os dados de localização das imagens que você carregar. Por favor adicione a localização adequada para cada imagem antes de envia-las</string>
   <string name="share_text">Carregue fotos na wiki Wikimedia Commons, diretamente do seu celular. Baixe o aolicativo Commons agora: %1$s</string>
   <string name="share_via">Compartilhar aplicativo via...</string>
   <string name="image_info">Informação da imagem</string>
@@ -514,6 +518,7 @@
   <string name="delete_helper_ask_reason_copyright_press_photo">Divulgação</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Foto aleatória da internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logótipo</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">Violação da Liberdade de Panorama</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Porque é</string>
   <string name="category_edit_helper_make_edit_toast">Tentando atualizar categorias.</string>
   <string name="category_edit_helper_show_edit_title">Atualização de categoria</string>
@@ -562,7 +567,7 @@
   <string name="title_for_child_classes">CLASSES INFANTIS</string>
   <string name="title_for_parent_classes">CLASSES PAIS</string>
   <string name="upload_nearby_place_found_title">Local próximo encontrado</string>
-  <string name="upload_nearby_place_found_description">Esta é uma foto desse lugar %1$s?</string>
+  <string name="upload_nearby_place_found_description">Esta é uma foto de %1$s?</string>
   <string name="title_app_shortcut_bookmark">Favoritos</string>
   <string name="title_app_shortcut_setting">Configurações</string>
   <string name="remove_bookmark">Removido dos favoritos</string>
@@ -720,4 +725,6 @@
   <string name="welcome_to_full_screen_mode_text">Bem-vindo(a) ao Modo de Seleção de Tela Cheia</string>
   <string name="full_screen_mode_zoom_info">Use dois dedos para aumentar e diminuir a ampliação.</string>
   <string name="full_screen_mode_features_info">Passe o dedo com um gesto rápido e longo para executar estas operações: \n- Esquerda/direita: Ir para o anterior/seguinte\n- Cima: Selecionar\n- Baixo: Marcar como não sendo para carregamento.</string>
+  <string name="set_up_avatar_toast_string">Para definir seu avatar da tabela de classificação, clique em \"Definir como avatar\" no menu de três pontos da sua imagem.</string>
+  <string name="similar_coordinate_description_auto_set">As coordenadas não são exatas, mas a pessoa que carregou essa imagem crê que sejam próximas o suficiente.</string>
 </resources>

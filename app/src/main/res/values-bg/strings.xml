@@ -14,7 +14,7 @@
 <resources>
   <string name="commons_facebook">Facebook страница на Общомедия</string>
   <string name="commons_logo">Лого на Общомедия</string>
-  <string name="commons_website">Общомедия</string>
+  <string name="commons_website">Сайт на Общомедия</string>
   <string name="submit">Изпращане</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Обработване на %d качване</item>

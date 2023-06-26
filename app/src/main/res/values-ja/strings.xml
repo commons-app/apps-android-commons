@@ -134,7 +134,7 @@
   <string name="categories_skip_explanation">ウィキメディア・コモンズで見つけやすくするためにカテゴリを追加してください。\nカテゴリ名を入力してください。</string>
   <string name="categories_activity_title">カテゴリ</string>
   <string name="title_activity_settings">設定</string>
-  <string name="title_activity_signup">アカウント作成</string>
+  <string name="title_activity_signup">利用者登録</string>
   <string name="title_activity_featured_images">秀逸な画像</string>
   <string name="title_activity_category_details">カテゴリ</string>
   <string name="title_activity_review">査読</string>
@@ -283,7 +283,7 @@
   <string name="nearby_commons">コモンズ</string>
   <string name="about_rate_us">評価する</string>
   <string name="about_faq">よくある質問</string>
-  <string name="user_guide">ユーザーガイド</string>
+  <string name="user_guide">利用者ガイド</string>
   <string name="welcome_skip_button">チュートリアルをスキップ</string>
   <string name="no_internet">インターネットに接続していません</string>
   <string name="error_notifications">通知の取得に失敗しました</string>
@@ -369,7 +369,7 @@
   <string name="error_occurred">エラーが発生しました</string>
   <string name="notifications_channel_name_all">コモンズの通知</string>
   <string name="preference_author_name_toggle">コモンズ専用の投稿者名を使う</string>
-  <string name="preference_author_name_toggle_summary">画像の投稿にはユーザー名ではなく専用の投稿者名を使う</string>
+  <string name="preference_author_name_toggle_summary">画像の投稿には利用者名ではなく専用の投稿者名を使用</string>
   <string name="preference_author_name">投稿専用の名前</string>
   <string name="contributions_fragment">投稿記録</string>
   <string name="nearby_fragment">付近</string>
@@ -465,7 +465,7 @@
   <string name="please_wait">お待ちください…</string>
   <string name="images_featured_explanation">秀逸な画像とは、技術力の高い写真家や作画家による作品で、ウィキメディアコモンズのコミュニティから最高の品質を誇るものとして選出されています。</string>
   <string name="images_via_nearby_explanation">「近くの場所でアップロードした画像」とは、地図上で検索した結果に基づいてアップロードした画像のことです。</string>
-  <string name="thanks_received_explanation">この機能を使うと有効な編集をしたユーザーに感謝を伝えることができます – 変更履歴もしくは差分のページに表示される小さな感謝リンクを押します。</string>
+  <string name="thanks_received_explanation">この機能は、変更履歴や差分のページに表示される小さな感謝リンクで、有用な編集を行った利用者に感謝を伝えられるようにします。</string>
   <string name="welcome_do_upload_content_description">コモンズへの投稿画像の良い例</string>
   <string name="welcome_dont_upload_content_description">投稿に適さない画像のサンプル</string>
   <string name="skip_image">この画像をスキップ</string>
@@ -525,7 +525,7 @@
   <string name="title_for_child_classes">子分類</string>
   <string name="title_for_parent_classes">親クラス</string>
   <string name="upload_nearby_place_found_title">付近の場所が見つかりました</string>
-  <string name="upload_nearby_place_found_description">これは場所%1$sの写真ですか？</string>
+  <string name="upload_nearby_place_found_description">これは%1$sの写真ですか?</string>
   <string name="title_app_shortcut_bookmark">ブックマーク</string>
   <string name="title_app_shortcut_setting">設定</string>
   <string name="remove_bookmark">ブックマークから除去</string>

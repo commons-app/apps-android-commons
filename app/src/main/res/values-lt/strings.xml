@@ -124,7 +124,7 @@
   <string name="title_activity_category_details">Kategorija</string>
   <string name="menu_about">Apie</string>
   <string name="about_license">Vikitekos programėlė yra atviro kodo programėlė, kurią sukūrė ir prižiūri Vikitekos bendruomenės dotacijų gavėjai ir savanoriai. „Wikimedia Foundation“ nedalyvauja kuriant, plėtojant ar prižiūrint programėlę.</string>
-  <string name="about_improve">Sukurkite naują &lt;a href=\"&lt;span class=\"notranslate\" translate=\"no\"&gt;%1$s \"&gt;GitHub pranešimą&lt;/a&gt;, siekiant pranešti apie klaidas ir pateikti siūlymus.</string>
+  <string name="about_improve" fuzzy="true">Sukurkite naują &lt;a href=\"%1$s\"&gt;GitHub pranešimą&lt;/a&gt;, siekiant pranešti apie klaidas ir pateikti siūlymus.</string>
   <string name="about_privacy_policy">Privatumo politika</string>
   <string name="about_credits">Kūrėjai</string>
   <string name="title_activity_about">Apie</string>
@@ -517,7 +517,7 @@
   <string name="you_must_reset_your_passsword">Kažkas nepavyko prisijungiant, turite iš naujo nustatyti slaptažodį !!</string>
   <string name="title_for_media">MEDIJA</string>
   <string name="upload_nearby_place_found_title">Netoliese rasta vieta</string>
-  <string name="upload_nearby_place_found_description">Ar tai vietos %1$s nuotrauka?</string>
+  <string name="upload_nearby_place_found_description" fuzzy="true">Ar tai vietos %1$s nuotrauka?</string>
   <string name="title_app_shortcut_bookmark">Žymės</string>
   <string name="title_app_shortcut_setting">Nustatymai</string>
   <string name="remove_bookmark">Pašalinta iš žymių</string>
