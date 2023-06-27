@@ -12,17 +12,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v3
 
+  - run: ./gradlew build --no-daemon
       - name: Set up JDK
-        uses: actions/setup-java@v2.5.0
-        with:
-          distribution: "temurin"
-          java-version: 17
+      - uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
 
       - name: Cache packages
         id: cache-packages
-        uses: actions/cache@v2.1.7
+        uses: actions/cache@v3
         with:
           path: |
             ~/.gradle/caches
@@ -37,7 +38,7 @@ jobs:
 
       - name: AVD cache
         if: github.event_name != 'pull_request'
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: avd-cache
         with:
           path: |
