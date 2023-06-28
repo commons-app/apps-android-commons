@@ -457,26 +457,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
            Use location of last UploadItem if none of them is available */
         if (uploadItem.getGpsCoords() != null && uploadItem.getGpsCoords()
             .getDecLatitude() != 0.0 && uploadItem.getGpsCoords().getDecLongitude() != 0.0) {
-            Timber.d("Image coordinates taken from the EXIF metadata");
             defaultLatitude = uploadItem.getGpsCoords()
                 .getDecLatitude();
             defaultLongitude = uploadItem.getGpsCoords().getDecLongitude();
             defaultZoom = uploadItem.getGpsCoords().getZoomLevel();
-            startActivityForResult(new LocationPicker.IntentBuilder()
-                .defaultLocation(new CameraPosition.Builder()
-                    .target(
-                        new com.mapbox.mapboxsdk.geometry.LatLng(defaultLatitude, defaultLongitude))
-                    .zoom(defaultZoom).build())
-                .activityKey("UploadActivity")
-                .build(getActivity()), REQUEST_CODE);
-        } else if (location != null && location.getLatitude() != 0.0 && location.getLongitude() != 0.0) {
-            Timber.d("Image coordinates recorded while using the in-app camera");
-            defaultLatitude = location.getLatitude();
-            defaultLongitude = location.getLongitude();
-
-            if(defaultKvStore.getString(LAST_ZOOM) != null){
-                defaultZoom = Double.parseDouble(defaultKvStore.getString(LAST_ZOOM));
-            }
             startActivityForResult(new LocationPicker.IntentBuilder()
                 .defaultLocation(new CameraPosition.Builder()
                     .target(

@@ -44,6 +44,7 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.mwapi.UserClient;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
 import fr.free.nrw.commons.upload.depicts.DepictsFragment;
@@ -61,6 +62,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
@@ -383,13 +385,13 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                 currLocation = locationManager.getLastLocation();
                 if (currLocation != null) {
                     float locationDifference = getLocationDifference(currLocation, prevLocation);
-                    /* Remove location if app has access to it and is recording it but user
-                       has tapped on "No, do not attach location".
+                    boolean isLocationTagUnchecked = isLocationTagUncheckedInTheSettings();
+                    /* Remove location if the user has unchecked the Location EXIF tag in the
+                       Manage EXIF Tags setting.
                        Also, location information is discarded if the difference between
                        current location and location recorded just before capturing the image
                        is greater than 100 meters */
-                    if (!defaultKvStore.getBoolean("locationInfoPref")
-                        || locationDifference > 100) {
+                    if (isLocationTagUnchecked || locationDifference > 100) {
                         currLocation = null;
                     }
                 }
@@ -450,6 +452,20 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             uploadImagesAdapter.setFragments(fragments);
             vpUpload.setOffscreenPageLimit(fragments.size());
         }
+    }
+
+    /**
+     * Users may uncheck Location tag from the Manage EXIF tags setting any time.
+     * So, their location must not be shared in this case.
+     *
+     * @return
+     */
+    private boolean isLocationTagUncheckedInTheSettings() {
+        Set<String> prefExifTags = defaultKvStore.getStringSet(Prefs.MANAGED_EXIF_TAGS);
+        if (prefExifTags.contains(getString(R.string.exif_tag_location))) {
+            return false;
+        }
+        return true;
     }
 
     /**

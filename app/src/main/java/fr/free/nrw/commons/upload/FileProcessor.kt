@@ -84,12 +84,13 @@ class FileProcessor @Inject constructor(
             defaultKvStore.getStringSet(Prefs.MANAGED_EXIF_TAGS) ?: emptySet()
         val redactTags: Set<String> =
             context.resources.getStringArray(R.array.pref_exifTag_values).toSet()
+        // This will be useful when implementing https://github.com/commons-app/apps-android-commons/issues/5247
         /* Remove EXIF location if user has chosen
            "No, do not attach location" while using in-app camera */
-        if (!defaultKvStore.getBoolean("locationInfoPref")) {
+        /*if (!defaultKvStore.getBoolean("locationInfoPref")) {
             val locationTag: String = context.getString(R.string.exif_tag_location)
             return redactTags - prefManageEXIFTags.minus(locationTag)
-        }
+        }*/
         return redactTags - prefManageEXIFTags
     }
 

@@ -443,10 +443,9 @@ Upload your first media by tapping on the add button.</string>
   <string name="get_content_photo_picker_title">Use GET_CONTENT photo picker</string>
   <string name="get_content_photo_picker_explanation">Disable if your pictures get uploaded without location</string>
   <string name="location_loss_warning">Please make sure that this new Android picker does not strip location from your pictures.</string>
-  <string name="attach_location_info_dialog_title">Attach location with the image</string>
-  <string name="attach_location_info_explanation">Location data helps Wiki editors find your picture, making it much more useful. We suggest you let the app attach location information to the pictures taken via this button. Thank you for your contributions!</string>
-  <string name="option_yes_great">Yes, great!</string>
-  <string name="option_do_not_attach_location">No, do not attach location</string>
+  <string name="in_app_camera_location_access_explanation">Allow the app to fetch location in case the camera does not record it. Some device cameras do not record location. In such cases, letting the app fetch and attach location to it makes your contribution more useful.</string>
+  <string name="option_allow">Allow</string>
+  <string name="option_dismiss">Dismiss</string>
   <string name="in_app_camera_needs_location">Please turn on location access from the Settings and try again.</string>
   <string name="in_app_camera_location_permission_rationale">In-app camera needs location permission to attach it to your images in case location is not available in EXIF</string>
 

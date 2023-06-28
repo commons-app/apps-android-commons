@@ -35,7 +35,6 @@ public class ContributionController {
     public static final String ACTION_INTERNAL_UPLOADS = "internalImageUploads";
     private final JsonKvStore defaultKvStore;
     private LatLng locationBeforeImageCapture;
-    private Boolean isLocationInfoPreferred;
 
     @Inject
     LocationServiceManager locationManager;
@@ -56,7 +55,14 @@ public class ContributionController {
 
         PermissionUtils.checkPermissionsAndPerformAction(activity,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                () -> askUserToAttachLocation(activity),
+                () -> {
+                    if (!(PermissionUtils.hasPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION)
+                         && isLocationAccessToAppsTurnedOn())) {
+                        askUserToAllowLocationAccess(activity);
+                    } else {
+                        initiateCameraUpload(activity);
+                    }
+                },
                 R.string.storage_permission_title,
                 R.string.write_storage_permission_rationale);
     }
@@ -68,26 +74,19 @@ public class ContributionController {
      * Location is taken from the EXIF if the default camera application
      * does not redact location tags.
      *
-     * Otherwise, if the EXIF metadata does not have location information, then location captured by the app is used
-     *
-     * If the user selects "No", then the location tag in EXIF is also removed.
+     * Otherwise, if the EXIF metadata does not have location information,
+     * then location captured by the app is used
      *
      * @param activity
      */
-    private void askUserToAttachLocation(Activity activity) {
+    private void askUserToAllowLocationAccess(Activity activity) {
         DialogUtil.showAlertDialog(activity,
-            activity.getString(R.string.attach_location_info_dialog_title),
-            activity.getString(R.string.attach_location_info_explanation),
-            activity.getString(R.string.option_yes_great),
-            activity.getString(R.string.option_do_not_attach_location),
-            ()-> {
-                isLocationInfoPreferred = true;
-                requestForLocationAccess(activity);
-            },
-            () -> {
-                isLocationInfoPreferred = false;
-                initiateCameraUpload(activity);
-            },
+            activity.getString(R.string.location_permission_title),
+            activity.getString(R.string.in_app_camera_location_access_explanation),
+            activity.getString(R.string.option_allow),
+            activity.getString(R.string.option_dismiss),
+            ()-> requestForLocationAccess(activity),
+            () -> initiateCameraUpload(activity),
             null,
             true);
     }
@@ -102,11 +101,8 @@ public class ContributionController {
     private void requestForLocationAccess(Activity activity) {
         PermissionUtils.checkPermissionsAndPerformAction(activity,
             permission.ACCESS_FINE_LOCATION,
-            () -> {
-                isLocationInfoPreferred = true;
-                onLocationPermissionGranted(activity);
-            },
-            () -> isLocationInfoPreferred = false,
+            () -> onLocationPermissionGranted(activity),
+            () -> {},
             R.string.ask_to_turn_location_on,
             R.string.in_app_camera_location_permission_rationale);
     }
@@ -114,10 +110,20 @@ public class ContributionController {
     /**
      * Check if apps have access to location even after having individual access
      *
+     * @return
+     */
+    private boolean isLocationAccessToAppsTurnedOn() {
+        return (locationManager.isNetworkProviderEnabled() || locationManager.isGPSProviderEnabled());
+    }
+
+    /**
+     * Initiate in-app camera if apps have access to location.
+     * Otherwise, show location-off dialog.
+     *
      * @param activity
      */
     private void onLocationPermissionGranted(Activity activity) {
-        if (!(locationManager.isNetworkProviderEnabled() || locationManager.isGPSProviderEnabled())) {
+        if (!isLocationAccessToAppsTurnedOn()) {
             showLocationOffDialog(activity);
         } else {
             initiateCameraUpload(activity);
@@ -203,12 +209,7 @@ public class ContributionController {
      */
     private void initiateCameraUpload(Activity activity) {
         setPickerConfiguration(activity, false);
-        defaultKvStore.putBoolean("locationInfoPref", isLocationInfoPreferred);
-        if (isLocationInfoPreferred) {
-            locationBeforeImageCapture = locationManager.getLastLocation();
-        } else {
-            locationBeforeImageCapture = null;
-        }
+        locationBeforeImageCapture = locationManager.getLastLocation();
         FilePicker.openCameraForImage(activity, 0);
     }
 
