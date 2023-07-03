@@ -170,6 +170,7 @@
   <string name="Profile">پروفائل</string>
   <string name="statistics">شماريات</string>
   <string name="level">درجہ</string>
+  <string name="images_used_by_wiki">ورتیل تصویراں</string>
   <string name="error_occurred">خرابی تھی ڳئی ہے!</string>
   <string name="contributions_fragment">ونگاراں</string>
   <string name="nearby_fragment">نیڑے</string>
@@ -206,6 +207,7 @@
   <string name="category_edit_helper_show_edit_title_success">کامیابی</string>
   <string name="category_edit_button_text">ونکیاں اپ ڈیٹ کرو</string>
   <string name="coordinates_edit_helper_show_edit_title_success">کامیابی</string>
+  <string name="place_state_exists">موجود ہے</string>
   <string name="title_for_media">میڈیا</string>
   <string name="title_app_shortcut_bookmark">نشانیاں</string>
   <string name="title_app_shortcut_setting">ترتیباں</string>
@@ -233,6 +235,7 @@
   <string name="leaderboard_nearby">نیڑے</string>
   <string name="leaderboard_used">ورتے ہوئے</string>
   <string name="leaderboard_my_rank_button_text">میݙا رینک</string>
+  <string name="cancel_upload">اپ لوڈ منسوخ کرو</string>
   <string name="license_step_title">میڈیا لائسنس</string>
   <string name="media_detail_step_title">میڈیا تفصیلاں</string>
   <string name="menu_view_category_page">ونکی ورقہ ݙیکھو</string>
@@ -248,6 +251,7 @@
   <string name="welcome_custom_selector_ok">کمال ہے!</string>
   <string name="learn_more">ٻیا سکھو</string>
   <string name="need_permission">اجازت دی لوڑ ہے</string>
+  <string name="menu_view_user_page">ورتݨ آلے دا ورقہ ݙیکھو</string>
   <string name="edit_categories">ونکیاں وچ تبدیلی کرو</string>
   <string name="advanced_options">اعلیٰ اختیارات</string>
   <string name="apply">لاڳو کرو</string>
@@ -259,5 +263,7 @@
   <string name="device_name">ڈیوائس ناں</string>
   <string name="network_type">نیٹ ورک قسم</string>
   <string name="your_feedback">تہاݙی فیڈ بیک</string>
+  <string name="no_more_images_found">ٻیاں تصویراں کائنی لبھیاں</string>
+  <string name="image_selected">تصویر چݨیج ڳئی</string>
   <string name="menu_view_report">رپورٹ</string>
 </resources>
