@@ -37,6 +37,7 @@
   <string name="add_contribution_from_contributions_gallery">পূর্ববর্তী অবদান গ্যালারি থেকে অবদান যোগ করুন</string>
   <string name="show_captions">ক্যাপশন</string>
   <string name="row_item_language_description">ভাষার বর্ণনা</string>
+  <string name="row_item_caption">ক্যাপশন</string>
   <string name="show_captions_description">বিবরণ</string>
   <string name="nearby_row_image">চিত্র</string>
   <string name="nearby_all">সব</string>
@@ -329,6 +330,8 @@
   <string name="error_fetching_nearby_places">কাছাকাছি স্থানগুলি আনতে ত্রুটি।</string>
   <string name="no_nearby_places_around">আশেপাশে কোনো এলাকা পাওয়া যায়নি</string>
   <string name="error_fetching_nearby_monuments">আশেপাশের স্মৃতিস্তম্ভগুলি আনায়নে ত্রুটি৷</string>
+  <string name="no_recent_searches">কোনও সাম্প্রতিক অনুসন্ধান নেই</string>
+  <string name="delete_recent_searches_dialog">আপনি কি নিশ্চিত যে আপনি আপনার অনুসন্ধান ইতিহাস মুছে ফেলতে চান?</string>
   <string name="nominate_delete">অপসারণের জন্য মনোনীত করুন</string>
   <string name="delete">অপসারণ</string>
   <string name="Achievements">কৃতিত্বগুলি</string>

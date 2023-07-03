@@ -1,6 +1,6 @@
 name: Android CI
 
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
 
 concurrency:
   group: build-${{ github.event.pull_request.number || github.ref }}
@@ -18,7 +18,7 @@ jobs:
         uses: actions/setup-java@v2.5.0
         with:
           distribution: "temurin"
-          java-version: 11
+          java-version: 17
 
       - name: Cache packages
         id: cache-packages

@@ -259,7 +259,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     /**
      * Saves response of list of places for the first time
      */
-    private List<Place> places;
+    private List<Place> places = new ArrayList<>();
 
     @NonNull
     public static NearbyParentFragment newInstance() {

@@ -192,6 +192,7 @@
   <string name="location_permission_title">Biður um aðgang að staðsetningu</string>
   <string name="ok">Í lagi</string>
   <string name="warning">Aðvörun</string>
+  <string name="duplicate_file_name">Tvítekið skráarheiti fannst</string>
   <string name="upload">Senda inn</string>
   <string name="yes">Já</string>
   <string name="no">Nei</string>
@@ -475,6 +476,7 @@
   <string name="exif_tag_name_lensModel">Tegund linsu</string>
   <string name="exif_tag_name_serialNumbers">Raðnúmer</string>
   <string name="exif_tag_name_software">Hugbúnaður</string>
+  <string name="media_location_permission_denied">Aðgangi að staðsetningu gagnamiðla hafnað</string>
   <string name="share_text">Sendu myndir inn á Wikimedia Commons beint úr símanum þínum. Sæktu Commons-appið núna: %1$s</string>
   <string name="share_via">Deila forriti með...</string>
   <string name="image_info">Upplýsingar í mynd</string>
@@ -544,7 +546,7 @@
   <string name="title_for_child_classes">AFLEIDDIR FLOKKAR</string>
   <string name="title_for_parent_classes">YFIRFLOKKAR</string>
   <string name="upload_nearby_place_found_title">Staður í nágrenninu fannst</string>
-  <string name="upload_nearby_place_found_description" fuzzy="true">Er þetta mynd af staðnum %1$s?</string>
+  <string name="upload_nearby_place_found_description">Er þetta mynd af staðnum %1$s?</string>
   <string name="title_app_shortcut_bookmark">Bókamerki</string>
   <string name="title_app_shortcut_setting">Stillingar</string>
   <string name="remove_bookmark">Fjarlægt úr bókamerkjum</string>
@@ -702,4 +704,5 @@
   <string name="welcome_to_full_screen_mode_text">Velkomin í val á fullum skjá</string>
   <string name="full_screen_mode_zoom_info">Notaðu tvo fingur til að renna að og frá.</string>
   <string name="full_screen_mode_features_info">Strjúktu hratt og lengi til að framkvæma þessar aðgerðir: \n- Vinstri/Hægri: Fara í fyrri/næsta \n- Upp: Velja\n- Niður: Merkja sem ekki til innsendingar.</string>
+  <string name="similar_coordinate_description_auto_set">Þessi hnit eru ekki nákvæm, en sá sem sendi inn þessa mynd telur að þau séu nógu nálægt lagi.</string>
 </resources>

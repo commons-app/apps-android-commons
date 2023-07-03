@@ -17,7 +17,19 @@
   <string name="commons_github">Commons\' kildekode på GitHub</string>
   <string name="commons_logo">Commons-logo</string>
   <string name="commons_website">Commons-nettsted</string>
+  <string name="exit_location_picker">Gå ut av stedsvelgeren</string>
   <string name="submit">Send</string>
+  <string name="add_another_description">Legg til en annen beskrivelse</string>
+  <string name="add_new_contribution">Legg til et nytt bidrag</string>
+  <string name="add_contribution_from_camera">Legg til bidrag fra kamera</string>
+  <string name="add_contribution_from_photos">Legg til bidrag fra Bilder</string>
+  <string name="add_contribution_from_contributions_gallery">Legg til bidrag fra et tidligere bidragsgalleri</string>
+  <string name="show_captions">Bildetekster</string>
+  <string name="row_item_language_description">Språkbeskrivelse</string>
+  <string name="row_item_caption">Bildetekst</string>
+  <string name="show_captions_description">Beskrivelse</string>
+  <string name="nearby_row_image">Bilde</string>
+  <string name="nearby_all">Alle</string>
   <string name="appwidget_img">Dagens bilde</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d fil lastes opp</item>
@@ -262,19 +274,22 @@
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us" fuzzy="true">&lt;u&gt;Vurder oss&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;Ofte stilte spørsmål&lt;/u&gt;</string>
+  <string name="about_faq">Ofte stilte spørsmål</string>
   <string name="welcome_skip_button">Hopp over innledning</string>
   <string name="no_internet">Internett er utilgjengelig</string>
   <string name="error_notifications">Feil under henting av varsler</string>
   <string name="error_review">Feil under henting av bilde for gjennomgang. Trykk oppdater for å prøve igjen.</string>
   <string name="no_notifications">Ingen varsler funnet</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;Oversett&lt;/u&gt;</string>
+  <string name="about_translate">Oversett</string>
   <string name="about_translate_title">Språk</string>
   <string name="about_translate_message">Velg språket du ønsker å sende inn oversettelser for</string>
   <string name="about_translate_proceed">Fortsett</string>
   <string name="about_translate_cancel">Avbryt</string>
   <string name="retry">Prøv igjen</string>
   <string name="showcase_view_whole_nearby_activity">Dette er stedene i nærheten av deg som trenger bilder for å illustrere sine Wikipedia-artikler.\n\nNår du klikker «SØK I DETTE OMRÅDET» blir kartet låst og et søk starter i nærheten av det stedet.</string>
+  <string name="showcase_view_needs_photo">Dette stedet trenger et bilde.</string>
+  <string name="showcase_view_has_photo">Dette stedet har allerede et bilde.</string>
+  <string name="showcase_view_no_longer_exists">Dette stedet finnes ikke lenger.</string>
   <string name="no_images_found">Ingen bilder funnet!</string>
   <string name="error_loading_images">Feil oppsto under lasting av bilder.</string>
   <string name="image_uploaded_by">Lastet opp av: %1$s</string>
@@ -286,11 +301,15 @@
   <string name="title_activity_search">Søk</string>
   <string name="search_recent_header">Nylige søk:</string>
   <string name="provider_searches">Nylige søkeord</string>
+  <string name="provider_recent_languages">Nylige språkspørringer</string>
   <string name="error_loading_categories">Feil oppsto under lasting av kategorier.</string>
+  <string name="error_loading_depictions">En feil oppsto under lasting av beskrivelser.</string>
   <string name="search_tab_title_media">Media</string>
   <string name="search_tab_title_categories">Kategorier</string>
+  <string name="search_tab_title_depictions">Elementer</string>
   <string name="explore_tab_title_featured">Fremhevet</string>
   <string name="explore_tab_title_mobile">Lastet opp med mobil</string>
+  <string name="explore_tab_title_map">Kart</string>
   <string name="successful_wikidata_edit">Bildet ble lagt til på %1$s på Wikidata!</string>
   <string name="wikidata_edit_failure">Kunne ikke oppdatere tilsvarende Wikidata-element!</string>
   <string name="menu_set_wallpaper">Angi som bakgrunnsbilde</string>
@@ -316,6 +335,8 @@
   <string name="quiz_screenshot_question">Kan dette skjermbildet lastes opp?</string>
   <string name="share_app_title">Del appen</string>
   <string name="error_fetching_nearby_places">Feil under henting av steder i nærheten.</string>
+  <string name="no_nearby_places_around">Ingen steder funnet i nærheten</string>
+  <string name="error_fetching_nearby_monuments">Feil under henting av kulturminner i nærheten.</string>
   <string name="no_recent_searches">Ingen nylige søk</string>
   <string name="delete_recent_searches_dialog">Er du sikker på at du vil tømme søkehistorikken din?</string>
   <string name="cancel_upload_dialog">Er du sikker på at du vil avbryte denne opplastingen?</string>
@@ -324,6 +345,7 @@
   <string name="nominate_delete">Nominer for sletting</string>
   <string name="delete">Slett</string>
   <string name="Achievements">Prestasjoner</string>
+  <string name="Profile">Profil</string>
   <string name="statistics">Statistikk</string>
   <string name="statistics_thanks">Takk mottatt</string>
   <string name="statistics_featured">Utvalgte bilder</string>
@@ -346,17 +368,17 @@
   <string name="contributions_fragment">Bidrag</string>
   <string name="nearby_fragment">I nærheten</string>
   <string name="notifications">Varsler</string>
-  <string name="read_notifications" fuzzy="true">Varsler (arkivert)</string>
+  <string name="read_notifications">Varsler (lest)</string>
   <string name="display_nearby_notification">Vis varsel for steder i nærheten</string>
   <string name="display_nearby_notification_summary" fuzzy="true">Trykk her for å se det nærmeste stedet som trenger bilder</string>
   <string name="list_sheet">Liste</string>
   <string name="storage_permission">Lagringstillatelse</string>
   <string name="write_storage_permission_rationale_for_image_share">Vi trenger din tillatelse for å få tilgang til enhetens eksterne lagring for å kunne laste opp bilder.</string>
   <string name="nearby_notification_dismiss_message">Du vil ikke se det nærmeste stedet som trenger bilder lenger. Du kan imidlertid slå på dette varselet igjen i innstillingene om du ønsker.</string>
-  <string name="step_count" fuzzy="true">Steg %1$d av %2$d</string>
+  <string name="step_count">Steg %1$d av %2$d: %3$s</string>
   <string name="next">Neste</string>
   <string name="previous">Forrige</string>
-  <string name="upload_title_duplicate" fuzzy="true">En fil med navnet %1$s finnes fra før. Er du sikker på at du vil fortsette?</string>
+  <string name="upload_title_duplicate">En fil med navnet %1$s finnes fra før. Er du sikker på at du vil fortsette?\n\nMerk: En passende filendelse blir lagt til filnavnet automatisk.</string>
   <string name="map_application_missing">Ingen kompatibel kartapplikasjon funnet på enheten din. Installer en kartapplikasjon for å bruke denne funksjonen.</string>
   <string name="title_page_bookmarks_pictures">Bilder</string>
   <string name="title_page_bookmarks_locations">Steder</string>
@@ -373,14 +395,16 @@
   <string name="uploaded_by_myself">Lastet opp av meg selv %1$s, brukt i %2$d artikkel/artikler.</string>
   <string name="no_uploads">Velkommen til Commons!\n\nLast opp din første mediefil ved å trykke på legg til-knappen.</string>
   <string name="no_categories_selected">Ingen kategorier valgt</string>
-  <string name="no_categories_selected_warning_desc" fuzzy="true">Bilder uten kategorier er sjelden nyttige. Er du sikker på at du vil sende inn uten å velge kategorier?</string>
-  <string name="upload_flow_all_images_in_set" fuzzy="true">(For alle bilder i settet)</string>
+  <string name="no_categories_selected_warning_desc">Bilder uten kategorier er sjelden nyttige. Er du sikker på at du vil fortsette uten å velge kategorier?</string>
+  <string name="back_button_warning">Avbryt opplasting</string>
+  <string name="back_button_continue">Fortsett opplasting</string>
+  <string name="upload_flow_all_images_in_set">(For alle bilder i settet)</string>
   <string name="search_this_area">Søk i dette området</string>
   <string name="nearby_card_permission_title">Forespørsel om tillatelse</string>
   <string name="nearby_card_permission_explanation">Ønsker du å bruke din nåværende plassering for å vise det nærmeste stedet som trenger bilder?</string>
   <string name="unable_to_display_nearest_place">Kan ikke vise steder som trenger bilder i nærheten uten stedstillatelse</string>
   <string name="never_ask_again">Ikke spør meg igjen</string>
-  <string name="display_location_permission_title" fuzzy="true">Vis stedstillatelse</string>
+  <string name="display_location_permission_title">Be om plasseringstillatelse</string>
   <string name="display_location_permission_explanation">Ber om plasseringstillatelse som trengs når man bruker funksjonen for steder i nærheten.</string>
   <string name="achievements_fetch_failed">Noe gikk galt. Vi kunne ikke hente prestasjonene dine.</string>
   <string name="ends_on">Slutter:</string>
@@ -466,13 +490,61 @@
   <string name="delete_helper_ask_reason_copyright_internet_photo">Tilfeldig bilde fra internett</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Fordi det er</string>
+  <string name="category_edit_helper_edit_message_else">Kunne ikke legge til kategorier.</string>
+  <string name="category_edit_button_text">Oppdater kategorier</string>
+  <string name="coordinates_edit_helper_show_edit_title">Koordinatoppdatering</string>
+  <string name="description_edit_helper_show_edit_title">Beskrivelsesoppdatering</string>
+  <string name="caption_edit_helper_show_edit_title">Bildetekstoppdatering</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">Suksess</string>
+  <string name="coordinates_edit_helper_show_edit_message">Koordinatene %1$s er lagt til.</string>
+  <string name="description_edit_helper_show_edit_message">Beskrivelser er lagt til.</string>
+  <string name="caption_edit_helper_show_edit_message">Bildetekst er lagt til.</string>
+  <string name="coordinates_edit_helper_edit_message_else">Kunne ikke legge til koordinater.</string>
+  <string name="description_edit_helper_edit_message_else">Kunne ikke legge til beskrivelser.</string>
+  <string name="caption_edit_helper_edit_message_else">Kunne ikke legge til bildetekst.</string>
+  <string name="coordinates_picking_unsuccessful">Kunne ikke hente koordinater.</string>
+  <string name="descriptions_picking_unsuccessful">Kunne ikke hente beskrivelser.</string>
+  <string name="description_activity_title">Rediger beskrivelser og bildetekster</string>
   <string name="share_image_via">Del bilde via</string>
-  <string name="no_achievements_yet" fuzzy="true">Du har ikke gjort noen bidrag ennå</string>
+  <string name="you_have_no_achievements_yet">Du har ikke gjort noen bidrag ennå</string>
+  <string name="no_achievements_yet">%s har ikke gjort noen bidrag ennå</string>
   <string name="account_created">Konto opprettet!</string>
   <string name="text_copy">Tekst kopiert til utklippstavlen</string>
   <string name="notification_mark_read">Varsel merket som lest</string>
   <string name="some_error">En feil oppsto!</string>
+  <string name="place_state_exists">Eksisterer</string>
+  <string name="place_state_needs_photo">Trenger bilde</string>
+  <string name="place_type">Stedstype:</string>
+  <string name="nearby_search_hint">Bro, museum, hotell, etc.</string>
   <string name="you_must_reset_your_passsword">Noe gikk galt under innloggingen, du må tilbakestille passordet ditt!</string>
+  <string name="title_for_media">MEDIA</string>
+  <string name="title_for_child_classes">UNDERKLASSER</string>
+  <string name="title_for_parent_classes">OVERKLASSER</string>
+  <string name="upload_nearby_place_found_title">Sted i nærheten funnet</string>
+  <string name="upload_nearby_place_found_description">Er dette et bilde av %1$s?</string>
+  <string name="title_app_shortcut_bookmark">Bokmerker</string>
+  <string name="title_app_shortcut_setting">Innstillinger</string>
+  <string name="remove_bookmark">Fjernet fra bokmerker</string>
+  <string name="add_bookmark">Lagt til i bokmerker</string>
+  <string name="wallpaper_set_unsuccessfully">Noe gikk galt. Kunne ikke sette bakgrunnsbilde</string>
+  <string name="setting_wallpaper_dialog_title">Sett som bakgrunnsbilde</string>
+  <string name="setting_wallpaper_dialog_message">Setter bakgrunnsbilde. Vent litt.</string>
+  <string name="theme_default_name">Bruk systeminnstillingene</string>
+  <string name="theme_dark_name">Mørkt</string>
+  <string name="theme_light_name">Lyst</string>
+  <string name="confirm">Bekreft</string>
+  <string name="instructions_title">Instruksjoner</string>
   <string name="cancelling_upload">Avbryter opplasting.</string>
   <string name="cancel_upload">Avbryt opplasting</string>
+  <string name="explore_map_details">Detaljer</string>
+  <string name="api_level">API-nivå</string>
+  <string name="android_version">Android-versjon</string>
+  <string name="device_manufacturer">Enhetsprodusent</string>
+  <string name="device_model">Enhetsmodell</string>
+  <string name="device_name">Enhetsnavn</string>
+  <string name="network_type">Nettverkstype</string>
+  <string name="thanks_feedback">Takk for tilbakemeldingen</string>
+  <string name="error_feedback">Feil under sending av tilbakemelding</string>
+  <string name="enter_description">Hva er tilbakemeldingen din?</string>
+  <string name="your_feedback">Tilbakemeldingen din</string>
 </resources>
