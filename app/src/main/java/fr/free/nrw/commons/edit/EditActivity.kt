@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.edit
 
 import android.animation.Animator
+import android.animation.Animator.AnimatorListener
 import android.animation.ValueAnimator
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
@@ -11,16 +12,19 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.rotationMatrix
 import androidx.core.graphics.scaleMatrix
+import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
 import fr.free.nrw.commons.R
-import kotlinx.android.synthetic.main.activity_edit.*
+import kotlinx.android.synthetic.main.activity_edit.btn_save
+import kotlinx.android.synthetic.main.activity_edit.iv
+import kotlinx.android.synthetic.main.activity_edit.rotate_btn
 import timber.log.Timber
+import java.io.File
 
-
-var imageUri = ""
-lateinit var vm:EditViewModel
 
 class EditActivity : AppCompatActivity() {
+    var imageUri = ""
+    lateinit var vm: EditViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
@@ -28,7 +32,7 @@ class EditActivity : AppCompatActivity() {
 
         val intent = intent
         imageUri = intent.getStringExtra("image") ?: ""
-         vm = ViewModelProvider(this).get(EditViewModel::class.java)
+        vm = ViewModelProvider(this).get(EditViewModel::class.java)
 
         init()
 
@@ -49,16 +53,18 @@ class EditActivity : AppCompatActivity() {
                 iv.imageMatrix = scaleMatrix(scale, scale)
             }
         })
-        crop_btn.setOnClickListener {
+        rotate_btn.setOnClickListener {
             animateImageHeight()
+        }
+        btn_save.setOnClickListener {
+            getRotatedImage()
+
         }
     }
 
     var imageRotation = 0
 
     private fun animateImageHeight() {
-        vm.transformImage
-
         val drawableWidth: Float = iv.getDrawable().getIntrinsicWidth().toFloat()
         val drawableHeight: Float = iv.getDrawable().getIntrinsicHeight().toFloat()
         val viewWidth: Float = iv.getMeasuredWidth().toFloat()
@@ -93,18 +99,23 @@ class EditActivity : AppCompatActivity() {
 
         animator.interpolator = AccelerateDecelerateInterpolator()
 
-        animator.addListener(object : Animator.AnimatorListener {
-            override fun onAnimationStart(animator: Animator?) {
-                // btnRotate.setEnabled(false)
+        animator.addListener(object : AnimatorListener {
+            override fun onAnimationStart(animation: Animator) {
+                rotate_btn.setEnabled(false)
+
             }
 
-            override fun onAnimationEnd(animator: Animator?) {
+            override fun onAnimationEnd(animation: Animator) {
                 imageRotation = newRotation % 360
-                //     btnRotate.setEnabled(true)
+                rotate_btn.setEnabled(true)
             }
 
-            override fun onAnimationCancel(animator: Animator?) {}
-            override fun onAnimationRepeat(animator: Animator?) {}
+            override fun onAnimationCancel(animation: Animator) {
+            }
+
+            override fun onAnimationRepeat(animation: Animator) {
+            }
+
         })
 
         animator.addUpdateListener { animation ->
@@ -135,6 +146,14 @@ class EditActivity : AppCompatActivity() {
         }
 
         animator.start()
+
+    }
+
+    fun getRotatedImage() {
+
+        val filePath = imageUri.toUri().path
+        val file = filePath?.let { File(it) }
+        val rotatedImage = file?.let { vm.rotateImage(imageRotation, it) }
 
     }
 

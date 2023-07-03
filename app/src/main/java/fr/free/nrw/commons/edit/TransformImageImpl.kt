@@ -9,9 +9,9 @@ import java.io.File
 import java.io.FileOutputStream
 
 class TransformImageImpl() : TransformImage {
-    override fun rotateImage(imageFile: File): File {
+    override fun rotateImage(imageFile: File, degree : Int): File {
 
-        Timber.tag("Trying to rotate image with LLJTran").d("Starting")
+        Timber.tag("Trying to rotate image").d("Starting")
 
         val path = Environment.getExternalStoragePublicDirectory(
             Environment.DIRECTORY_DOWNLOADS
@@ -29,7 +29,14 @@ class TransformImageImpl() : TransformImage {
                 false
             ) // This could throw an LLJTranException. I am not catching it for now... Let's see.
             lljTran.transform(
-                LLJTran.ROT_180,
+                when(degree){
+                         90 -> LLJTran.ROT_90
+                         180 -> LLJTran.ROT_180
+                         270 -> LLJTran.ROT_270
+                    else -> {
+                      LLJTran.ROT_90
+                    }
+                },
                 LLJTran.OPT_DEFAULTS or LLJTran.OPT_XFORM_ORIENTATION
             )
             BufferedOutputStream(FileOutputStream(output)).use { writer ->

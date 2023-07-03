@@ -27,13 +27,14 @@
     <androidx.appcompat.widget.AppCompatButton
       android:drawablePadding="4dp"
       android:drawableStart="@drawable/baseline_rotate_right"
-      android:id="@+id/crop_btn"
+      android:id="@+id/rotate_btn"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:textColor="@android:color/white"
       android:text="@string/rotate"/>
 
     <androidx.appcompat.widget.AppCompatButton
+      android:onClick="getRotatedImage"
       android:drawablePadding="4dp"
       android:drawableStart="@drawable/baseline_save_24"
       android:id="@+id/btn_save"
