@@ -119,7 +119,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     private Place nearbyPlace;
     private UploadItem uploadItem;
-    private LatLng location;
+    /**
+     * inAppPictureLocation: use location recorded while using the in-app camera if
+     * device camera does not record it in the EXIF
+     */
+    private LatLng inAppPictureLocation;
     /**
      * editableUploadItem : Storing the upload item before going to update the coordinates
      */
@@ -136,10 +140,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         super.onCreate(savedInstanceState);
     }
 
-    public void setImageTobeUploaded(UploadableFile uploadableFile, Place place, LatLng location) {
+    public void setImageTobeUploaded(UploadableFile uploadableFile, Place place, LatLng inAppPictureLocation) {
         this.uploadableFile = uploadableFile;
         this.place = place;
-        this.location = location;
+        this.inAppPictureLocation = inAppPictureLocation;
     }
 
     @Nullable
@@ -164,7 +168,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         tooltip.setOnClickListener(
             v -> showInfoAlert(R.string.media_detail_step_title, R.string.media_details_tooltip));
         initPresenter();
-        presenter.receiveImage(uploadableFile, place, location);
+        presenter.receiveImage(uploadableFile, place, inAppPictureLocation);
         initRecyclerView();
 
         if (callback.getIndexInViewFlipper(this) == 0) {
@@ -226,7 +230,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @OnClick(R.id.btn_next)
     public void onNextButtonClicked() {
-        presenter.verifyImageQuality(callback.getIndexInViewFlipper(this), location);
+        presenter.verifyImageQuality(callback.getIndexInViewFlipper(this), inAppPictureLocation);
     }
 
     @OnClick(R.id.btn_previous)

@@ -88,9 +88,9 @@ public class UploadModel {
     public Observable<UploadItem> preProcessImage(final UploadableFile uploadableFile,
         final Place place,
         final SimilarImageInterface similarImageInterface,
-        LatLng location) {
+        LatLng inAppPictureLocation) {
         return Observable.just(
-            createAndAddUploadItem(uploadableFile, place, similarImageInterface, location));
+            createAndAddUploadItem(uploadableFile, place, similarImageInterface, inAppPictureLocation));
     }
 
     public Single<Integer> getImageQuality(final UploadItem uploadItem, LatLng location) {
@@ -100,7 +100,7 @@ public class UploadModel {
     private UploadItem createAndAddUploadItem(final UploadableFile uploadableFile,
         final Place place,
         final SimilarImageInterface similarImageInterface,
-        LatLng location) {
+        LatLng inAppPictureLocation) {
         final UploadableFile.DateTimeWithSource dateTimeWithSource = uploadableFile
                 .getFileCreatedDate(context);
         long fileCreatedDate = -1;
@@ -113,7 +113,8 @@ public class UploadModel {
         }
         Timber.d("File created date is %d", fileCreatedDate);
         final ImageCoordinates imageCoordinates = fileProcessor
-                .processFileCoordinates(similarImageInterface, uploadableFile.getFilePath(), location);
+                .processFileCoordinates(similarImageInterface, uploadableFile.getFilePath(),
+                    inAppPictureLocation);
         final UploadItem uploadItem = new UploadItem(
             Uri.parse(uploadableFile.getFilePath()),
                 uploadableFile.getMimeType(context), imageCoordinates, place, fileCreatedDate,

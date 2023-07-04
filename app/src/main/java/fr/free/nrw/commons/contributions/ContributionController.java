@@ -56,8 +56,8 @@ public class ContributionController {
         PermissionUtils.checkPermissionsAndPerformAction(activity,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 () -> {
-                    if (!(PermissionUtils.hasPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION)
-                         && isLocationAccessToAppsTurnedOn())) {
+                    if (defaultKvStore.getBoolean("inAppCameraFirstRun")) {
+                        defaultKvStore.putBoolean("inAppCameraFirstRun", false);
                         askUserToAllowLocationAccess(activity);
                     } else {
                         initiateCameraUpload(activity);
@@ -81,12 +81,18 @@ public class ContributionController {
      */
     private void askUserToAllowLocationAccess(Activity activity) {
         DialogUtil.showAlertDialog(activity,
-            activity.getString(R.string.location_permission_title),
+            activity.getString(R.string.in_app_camera_location_permission_title),
             activity.getString(R.string.in_app_camera_location_access_explanation),
             activity.getString(R.string.option_allow),
             activity.getString(R.string.option_dismiss),
-            ()-> requestForLocationAccess(activity),
-            () -> initiateCameraUpload(activity),
+            ()-> {
+                defaultKvStore.putBoolean("inAppCameraLocationPref", true);
+                requestForLocationAccess(activity);
+            },
+            () -> {
+                defaultKvStore.putBoolean("inAppCameraLocationPref", false);
+                initiateCameraUpload(activity);
+            },
             null,
             true);
     }
@@ -209,7 +215,9 @@ public class ContributionController {
      */
     private void initiateCameraUpload(Activity activity) {
         setPickerConfiguration(activity, false);
-        locationBeforeImageCapture = locationManager.getLastLocation();
+        if (defaultKvStore.getBoolean("inAppCameraLocationPref", false)) {
+            locationBeforeImageCapture = locationManager.getLastLocation();
+        }
         FilePicker.openCameraForImage(activity, 0);
     }
 

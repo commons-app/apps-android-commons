@@ -87,11 +87,12 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * @param place
      */
     @Override
-    public void receiveImage(final UploadableFile uploadableFile, final Place place, LatLng imageLocation) {
+    public void receiveImage(final UploadableFile uploadableFile, final Place place,
+                            LatLng inAppPictureLocation) {
         view.showProgress(true);
         compositeDisposable.add(
             repository
-                .preProcessImage(uploadableFile, place, this, imageLocation)
+                .preProcessImage(uploadableFile, place, this, inAppPictureLocation)
                 .map(uploadItem -> {
                     if(place!=null && place.isMonument()){
                         if (place.location != null) {

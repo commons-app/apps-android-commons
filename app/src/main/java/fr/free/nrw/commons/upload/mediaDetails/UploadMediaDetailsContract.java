@@ -44,7 +44,7 @@ public interface UploadMediaDetailsContract {
 
     interface UserActionListener extends BasePresenter<View> {
 
-        void receiveImage(UploadableFile uploadableFile, Place place, LatLng location);
+        void receiveImage(UploadableFile uploadableFile, Place place, LatLng inAppPictureLocation);
 
         void verifyImageQuality(int uploadItemIndex, LatLng location);
 

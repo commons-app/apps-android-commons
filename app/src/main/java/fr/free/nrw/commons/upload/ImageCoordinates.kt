@@ -12,7 +12,7 @@ import java.io.InputStream
  * Otherwise, if current user location is available while using the in-app camera,
  * use it to set image coordinates
  */
-class ImageCoordinates internal constructor(exif: ExifInterface?, location: LatLng?) {
+class ImageCoordinates internal constructor(exif: ExifInterface?, inAppPictureLocation: LatLng?) {
     var decLatitude = 0.0
     var decLongitude = 0.0
     var imageCoordsExists = false
@@ -63,9 +63,9 @@ class ImageCoordinates internal constructor(exif: ExifInterface?, location: LatL
                 //If image has EXIF data, extract image coords
                 imageCoordsExists = true
                 Timber.d("EXIF data has location info")
-            } else if (location != null) {
-                decLatitude = location.latitude
-                decLongitude = location.longitude
+            } else if (inAppPictureLocation != null) {
+                decLatitude = inAppPictureLocation.latitude
+                decLongitude = inAppPictureLocation.longitude
                 if (!(decLatitude == 0.0 && decLongitude == 0.0)) {
                     decimalCoords = "$decLatitude|$decLongitude"
                     imageCoordsExists = true

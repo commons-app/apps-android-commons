@@ -50,7 +50,7 @@ class FileProcessor @Inject constructor(
      * Processes filePath coordinates, either from EXIF data or user location
      */
     fun processFileCoordinates(similarImageInterface: SimilarImageInterface,
-                               filePath: String?, location: LatLng?)
+                               filePath: String?, inAppPictureLocation: LatLng?)
             : ImageCoordinates {
         val exifInterface: ExifInterface? = try {
             ExifInterface(filePath!!)
@@ -61,7 +61,7 @@ class FileProcessor @Inject constructor(
         // Redact EXIF data as indicated in preferences.
         redactExifTags(exifInterface, getExifTagsToRedact())
         Timber.d("Calling GPSExtractor")
-        val originalImageCoordinates = ImageCoordinates(exifInterface, location)
+        val originalImageCoordinates = ImageCoordinates(exifInterface, inAppPictureLocation)
         if (originalImageCoordinates.decimalCoords == null) {
             //Find other photos taken around the same time which has gps coordinates
             findOtherImages(

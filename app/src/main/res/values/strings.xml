@@ -190,6 +190,8 @@
   <string name="read_storage_permission_rationale">Required permission: Read external storage. App cannot access your gallery without this.</string>
   <string name="write_storage_permission_rationale">Required permission: Write external storage. App cannot access your camera/gallery without this.</string>
   <string name="location_permission_title">Requesting Location Permission</string>
+  <string name="in_app_camera_location_permission_title">Record location for in-app shots</string>
+  <string name="in_app_camera_location_switch_pref_summary">Enable this to record location while using in-app camera</string>
   <string name="ok">OK</string>
   <string name="warning">Warning</string>
   <string name="duplicate_file_name">Duplicate File Name found</string>
@@ -443,7 +445,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="get_content_photo_picker_title">Use GET_CONTENT photo picker</string>
   <string name="get_content_photo_picker_explanation">Disable if your pictures get uploaded without location</string>
   <string name="location_loss_warning">Please make sure that this new Android picker does not strip location from your pictures.</string>
-  <string name="in_app_camera_location_access_explanation">Allow the app to fetch location in case the camera does not record it. Some device cameras do not record location. In such cases, letting the app fetch and attach location to it makes your contribution more useful.</string>
+  <string name="in_app_camera_location_access_explanation">Allow the app to fetch location in case the camera does not record it. Some device cameras do not record location. In such cases, letting the app fetch and attach location to it makes your contribution more useful. You may change this any time from the Settings</string>
   <string name="option_allow">Allow</string>
   <string name="option_dismiss">Dismiss</string>
   <string name="in_app_camera_needs_location">Please turn on location access from the Settings and try again.</string>

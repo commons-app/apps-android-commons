@@ -387,11 +387,12 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                     float locationDifference = getLocationDifference(currLocation, prevLocation);
                     boolean isLocationTagUnchecked = isLocationTagUncheckedInTheSettings();
                     /* Remove location if the user has unchecked the Location EXIF tag in the
-                       Manage EXIF Tags setting.
+                       Manage EXIF Tags setting or turned "Record location for in-app shots" off.
                        Also, location information is discarded if the difference between
                        current location and location recorded just before capturing the image
                        is greater than 100 meters */
-                    if (isLocationTagUnchecked || locationDifference > 100) {
+                    if (isLocationTagUnchecked || locationDifference > 100
+                        || !defaultKvStore.getBoolean("inAppCameraLocationPref")) {
                         currLocation = null;
                     }
                 }
