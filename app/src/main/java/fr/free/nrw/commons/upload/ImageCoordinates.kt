@@ -28,13 +28,13 @@ class ImageCoordinates internal constructor(exif: ExifInterface?, inAppPictureLo
     /**
      * Construct from a stream.
      */
-    internal constructor(stream: InputStream, location: LatLng?) : this(ExifInterface(stream), location)
+    internal constructor(stream: InputStream, inAppPictureLocation: LatLng?) : this(ExifInterface(stream), inAppPictureLocation)
     /**
      * Construct from the file path of the image.
      * @param path file path of the image
      */
     @Throws(IOException::class)
-    internal constructor(path: String, location: LatLng?) : this(ExifInterface(path), location)
+    internal constructor(path: String, inAppPictureLocation: LatLng?) : this(ExifInterface(path), inAppPictureLocation)
 
     init {
         //If image has no EXIF data and user has enabled GPS setting, get user's location

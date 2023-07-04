@@ -93,8 +93,8 @@ public class UploadModel {
             createAndAddUploadItem(uploadableFile, place, similarImageInterface, inAppPictureLocation));
     }
 
-    public Single<Integer> getImageQuality(final UploadItem uploadItem, LatLng location) {
-        return imageProcessingService.validateImage(uploadItem, location);
+    public Single<Integer> getImageQuality(final UploadItem uploadItem, LatLng inAppPictureLocation) {
+        return imageProcessingService.validateImage(uploadItem, inAppPictureLocation);
     }
 
     private UploadItem createAndAddUploadItem(final UploadableFile uploadableFile,

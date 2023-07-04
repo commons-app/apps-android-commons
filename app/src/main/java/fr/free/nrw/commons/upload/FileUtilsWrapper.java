@@ -38,8 +38,8 @@ public class FileUtilsWrapper {
         return FileUtils.getFileInputStream(filePath);
     }
 
-    public String getGeolocationOfFile(String filePath, LatLng location) {
-        return FileUtils.getGeolocationOfFile(filePath, location);
+    public String getGeolocationOfFile(String filePath, LatLng inAppPictureLocation) {
+        return FileUtils.getGeolocationOfFile(filePath, inAppPictureLocation);
     }
 
 

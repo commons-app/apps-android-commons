@@ -65,11 +65,11 @@ public class FileUtils {
     /**
      * Get Geolocation of filePath from input filePath path
      */
-    static String getGeolocationOfFile(String filePath, LatLng location) {
+    static String getGeolocationOfFile(String filePath, LatLng inAppPictureLocation) {
 
         try {
             ExifInterface exifInterface = new ExifInterface(filePath);
-            ImageCoordinates imageObj = new ImageCoordinates(exifInterface, location);
+            ImageCoordinates imageObj = new ImageCoordinates(exifInterface, inAppPictureLocation);
             if (imageObj.getDecimalCoords() != null) { // If image has geolocation information in its EXIF
                 return imageObj.getDecimalCoords();
             } else {

@@ -178,15 +178,15 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * @param uploadItemIndex
      */
     @Override
-    public void verifyImageQuality(int uploadItemIndex, LatLng location) {
+    public void verifyImageQuality(int uploadItemIndex, LatLng inAppPictureLocation) {
       final UploadItem uploadItem = repository.getUploads().get(uploadItemIndex);
 
-      if (uploadItem.getGpsCoords().getDecimalCoords() == null && location == null) {
+      if (uploadItem.getGpsCoords().getDecimalCoords() == null && inAppPictureLocation == null) {
           final Runnable onSkipClicked = () -> {
               view.showProgress(true);
               compositeDisposable.add(
                   repository
-                      .getImageQuality(uploadItem, location)
+                      .getImageQuality(uploadItem, inAppPictureLocation)
                       .observeOn(mainThreadScheduler)
                       .subscribe(imageResult -> {
                               view.showProgress(false);
@@ -209,7 +209,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
           view.showProgress(true);
           compositeDisposable.add(
               repository
-                  .getImageQuality(uploadItem, location)
+                  .getImageQuality(uploadItem, inAppPictureLocation)
                   .observeOn(mainThreadScheduler)
                   .subscribe(imageResult -> {
                           view.showProgress(false);

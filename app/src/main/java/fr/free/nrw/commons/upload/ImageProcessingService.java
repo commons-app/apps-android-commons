@@ -47,7 +47,7 @@ public class ImageProcessingService {
      * Check image quality before upload - checks duplicate image - checks dark image - checks
      * geolocation for image - check for valid title
      */
-    Single<Integer> validateImage(UploadItem uploadItem, LatLng location) {
+    Single<Integer> validateImage(UploadItem uploadItem, LatLng inAppPictureLocation) {
         int currentImageQuality = uploadItem.getImageQuality();
         Timber.d("Current image quality is %d", currentImageQuality);
         if (currentImageQuality == ImageUtils.IMAGE_KEEP) {
@@ -58,7 +58,7 @@ public class ImageProcessingService {
 
         return Single.zip(
             checkDuplicateImage(filePath),
-            checkImageGeoLocation(uploadItem.getPlace(), filePath, location),
+            checkImageGeoLocation(uploadItem.getPlace(), filePath, inAppPictureLocation),
             checkDarkImage(filePath),
             validateItemTitle(uploadItem),
             checkFBMD(filePath),
@@ -149,13 +149,13 @@ public class ImageProcessingService {
      * @param filePath file to be checked
      * @return IMAGE_GEOLOCATION_DIFFERENT or IMAGE_OK
      */
-    private Single<Integer> checkImageGeoLocation(Place place, String filePath, LatLng location) {
+    private Single<Integer> checkImageGeoLocation(Place place, String filePath, LatLng inAppPictureLocation) {
         Timber.d("Checking for image geolocation %s", filePath);
         if (place == null || StringUtils.isBlank(place.getWikiDataEntityId())) {
             return Single.just(ImageUtils.IMAGE_OK);
         }
         return Single.fromCallable(() -> filePath)
-            .flatMap(path -> Single.just(fileUtilsWrapper.getGeolocationOfFile(path, location)))
+            .flatMap(path -> Single.just(fileUtilsWrapper.getGeolocationOfFile(path, inAppPictureLocation)))
             .flatMap(geoLocation -> {
                 if (StringUtils.isBlank(geoLocation)) {
                     return Single.just(ImageUtils.IMAGE_OK);
