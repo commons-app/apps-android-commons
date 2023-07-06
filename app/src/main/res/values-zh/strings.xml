@@ -47,6 +47,7 @@
 * 神樂坂秀吉
 * 铁桶
 * 阿pp
+* 410063005
 -->
 <resources>
   <string name="commons_facebook">共享资源Facebook页面</string>
@@ -236,6 +237,7 @@
   <string name="location_permission_title">请求位置权限</string>
   <string name="ok">确定</string>
   <string name="warning">警告</string>
+  <string name="duplicate_file_name">发现重复的文件名</string>
   <string name="upload">上传</string>
   <string name="yes">是</string>
   <string name="no">否</string>
@@ -458,6 +460,9 @@
   <string name="ends_on">结束于：</string>
   <string name="display_campaigns">显示活动</string>
   <string name="display_campaigns_explanation">显示正在进行的活动</string>
+  <string name="get_content_photo_picker_title">使用 GET_CONTENT 照片选择器</string>
+  <string name="get_content_photo_picker_explanation">如果你上传的图片没有位置数据，请禁用</string>
+  <string name="location_loss_warning">请确保这个新的 Android 选择器不会从你的照片中删除位置数据。</string>
   <string name="nearby_campaign_dismiss_message">你不会再看到这个活动。如果需要可以在设置里重新启用此通知。</string>
   <string name="this_function_needs_network_connection">这个功能需要网络连接，请检查你的网络设置。</string>
   <string name="error_processing_image">处理图像时出错。请再试一次！</string>
@@ -519,6 +524,8 @@
   <string name="exif_tag_name_lensModel">镜头型号</string>
   <string name="exif_tag_name_serialNumbers">序列号</string>
   <string name="exif_tag_name_software">软件</string>
+  <string name="media_location_permission_denied">已拒绝访问媒体位置</string>
+  <string name="add_location_manually">我们可能无法自动从你上传的图片中获取位置数据。提交前请为每张图片添加适当的位置</string>
   <string name="share_text">直接在您手机上的维基共享资源应用中上传照片。立即下载共享资源应用：%1</string>
   <string name="share_via">分享到...</string>
   <string name="image_info">图像信息</string>
@@ -746,4 +753,6 @@
   <string name="welcome_to_full_screen_mode_text">欢迎使用全屏选择模式</string>
   <string name="full_screen_mode_zoom_info">用两根手指放大和缩小。</string>
   <string name="full_screen_mode_features_info">快速长距离滑动来执行以下操作：\n- 向左/右：前往上一个/下一个\n- 向上：选择\n- 向下：标记为不上传</string>
+  <string name="set_up_avatar_toast_string">要设置你的排行榜头像，请点击任意图片上三点式菜单中的\"设置为头像\"</string>
+  <string name="similar_coordinate_description_auto_set">图片坐标并不是准确的坐标，但上传这张图片的人认为它们足够接近。</string>
 </resources>
