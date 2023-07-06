@@ -6,6 +6,7 @@ import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.CoroutineWorker
@@ -540,7 +541,11 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
         val intent = Intent(appContext,toClass)
         return TaskStackBuilder.create(appContext).run {
              addNextIntentWithParentStack(intent)
-             getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                 getPendingIntent(0, PendingIntent.FLAG_IMMUTABLE)
+             } else {
+                 getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+             }
          };
     }
 
