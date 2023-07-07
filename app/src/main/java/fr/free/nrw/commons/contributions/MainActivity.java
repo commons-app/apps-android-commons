@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.contributions;
 
 import android.Manifest.permission;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -47,6 +48,8 @@ import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.upload.worker.UploadWorker;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
+import io.reactivex.schedulers.Schedulers;
+import java.util.Collections;
 import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
@@ -58,6 +61,8 @@ public class MainActivity  extends BaseActivity
     SessionManager sessionManager;
     @Inject
     ContributionController controller;
+    @Inject
+    ContributionDao contributionDao;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.pager)
@@ -360,6 +365,21 @@ public class MainActivity  extends BaseActivity
         }
     }
 
+    /**
+     * Retry all failed uploads as soon as the user returns to the app
+     */
+    @SuppressLint("CheckResult")
+    private void retryAllFailedUploads() {
+        contributionDao.
+            getContribution(Collections.singletonList(Contribution.STATE_FAILED))
+            .subscribeOn(Schedulers.io())
+            .subscribe(failedUploads -> {
+                for (Contribution contribution: failedUploads) {
+                    contributionsFragment.retryUpload(contribution);
+                }
+            });
+    }
+
     public void toggleLimitedConnectionMode() {
         defaultKvStore.putBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED,
             !defaultKvStore
@@ -405,6 +425,8 @@ public class MainActivity  extends BaseActivity
             (!applicationKvStore.getBoolean("login_skipped"))) {
             WelcomeActivity.startYourself(this);
         }
+
+        retryAllFailedUploads();
     }
 
     @Override
