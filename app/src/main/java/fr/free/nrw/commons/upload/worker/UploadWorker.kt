@@ -541,8 +541,9 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
         val intent = Intent(appContext,toClass)
         return TaskStackBuilder.create(appContext).run {
              addNextIntentWithParentStack(intent)
-             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                 getPendingIntent(0, PendingIntent.FLAG_IMMUTABLE)
+             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                 getPendingIntent(0,
+                     PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
              } else {
                  getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
              }
