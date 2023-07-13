@@ -35,7 +35,7 @@
   <string name="login_failed">Системага кирүүдө катачылык бар!</string>
   <string name="authentication_failed" fuzzy="true">Таану катачылыгы!</string>
   <string name="uploading_started">Жүктөө башталды!</string>
-  <string name="upload_completed_notification_title">%1$s жүктөлүүдө</string>
+  <string name="upload_completed_notification_title">%1$s жүктөлдү !</string>
   <string name="upload_completed_notification_text">Жүктөлгөн файлды көрүү үчүн басыңыз</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">Жүктөө %1$s башталды</string>
   <string name="upload_progress_notification_title_in_progress">%1$s жүктөлүүдө</string>
@@ -46,10 +46,10 @@
   <string name="contribution_state_queued">Кезек</string>
   <string name="contribution_state_failed">Жүктөө каталары</string>
   <string name="contribution_state_in_progress">%1$d%%  соңуна чыкты</string>
-  <string name="contribution_state_starting">Жүктөө</string>
+  <string name="contribution_state_starting">Жүктөлүүдө</string>
   <string name="menu_from_gallery">Галереядан алынган</string>
   <string name="menu_from_camera">Сүрөткө тартуу</string>
-  <string name="provider_contributions">Менин жүктөөлөрүм</string>
+  <string name="provider_contributions">Жүктөөлөрүм</string>
   <string name="menu_share">Бөлүшүү</string>
   <string name="share_title_hint" fuzzy="true">Аталышы</string>
   <string name="share_description_hint">Баяндамасы</string>
