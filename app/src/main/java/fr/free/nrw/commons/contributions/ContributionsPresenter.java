@@ -2,6 +2,7 @@ package fr.free.nrw.commons.contributions;
 
 import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
+import androidx.work.OutOfQuotaPolicy;
 import androidx.work.WorkManager;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.contributions.ContributionsContract.UserActionListener;
@@ -77,10 +78,14 @@ public class ContributionsPresenter implements UserActionListener {
             .save(contribution)
             .subscribeOn(ioThreadScheduler)
             .subscribe(() -> {
+                OneTimeWorkRequest updatedUploadRequest = new OneTimeWorkRequest
+                    .Builder(UploadWorker.class)
+                    .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+                    .build();
                 WorkManager.getInstance(view.getContext().getApplicationContext())
                     .enqueueUniqueWork(
                         UploadWorker.class.getSimpleName(),
-                        ExistingWorkPolicy.KEEP, OneTimeWorkRequest.from(UploadWorker.class));
+                        ExistingWorkPolicy.KEEP, updatedUploadRequest);
             }));
     }
 }

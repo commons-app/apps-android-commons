@@ -13,6 +13,7 @@ import androidx.work.CoroutineWorker
 import androidx.work.Data
 import androidx.work.WorkerParameters
 import androidx.multidex.BuildConfig
+import androidx.work.ForegroundInfo
 import dagger.android.ContributesAndroidInjector
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.Media
@@ -226,6 +227,14 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
         }
         //TODO make this smart, think of handling retries in the future
         return Result.success()
+    }
+
+    override suspend fun getForegroundInfo(): ForegroundInfo {
+        // TODO: handle notifications for older Android versions
+        return ForegroundInfo(
+            1,
+            curentNotification.build()
+        )
     }
 
     /**

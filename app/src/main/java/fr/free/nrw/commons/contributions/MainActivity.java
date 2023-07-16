@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
+import androidx.work.OutOfQuotaPolicy;
 import androidx.work.WorkManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -389,9 +390,13 @@ public class MainActivity  extends BaseActivity
             viewUtilWrapper
                 .showShortToast(getBaseContext(), getString(R.string.limited_connection_enabled));
         } else {
+            OneTimeWorkRequest restartUploadsRequest = new OneTimeWorkRequest
+                                .Builder(UploadWorker.class)
+                                .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+                                .build();
             WorkManager.getInstance(getApplicationContext()).enqueueUniqueWork(
                 UploadWorker.class.getSimpleName(),
-                ExistingWorkPolicy.APPEND_OR_REPLACE, OneTimeWorkRequest.from(UploadWorker.class));
+                ExistingWorkPolicy.APPEND_OR_REPLACE, restartUploadsRequest);
 
             viewUtilWrapper
                 .showShortToast(getBaseContext(), getString(R.string.limited_connection_disabled));

@@ -26,6 +26,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
+import androidx.work.OutOfQuotaPolicy;
 import androidx.work.WorkManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -317,9 +318,13 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
     @Override
     public void makeUploadRequest() {
+        OneTimeWorkRequest uploadRequest = new OneTimeWorkRequest
+            .Builder(UploadWorker.class)
+            .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+            .build();
         WorkManager.getInstance(getApplicationContext()).enqueueUniqueWork(
             UploadWorker.class.getSimpleName(),
-            ExistingWorkPolicy.APPEND_OR_REPLACE, OneTimeWorkRequest.from(UploadWorker.class));
+            ExistingWorkPolicy.APPEND_OR_REPLACE, uploadRequest);
     }
 
     @Override
