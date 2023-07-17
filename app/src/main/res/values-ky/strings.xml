@@ -94,10 +94,12 @@
   <string name="detail_panel_cats_label">Түрмөктөр</string>
   <string name="detail_panel_cats_loading">Жүктөлүүдө…</string>
   <string name="detail_panel_cats_none">Тандалган жок</string>
+  <string name="detail_description_empty">Сыпаттама жок</string>
   <string name="menu_refresh">Жаңылоо</string>
   <string name="yes">Ооба</string>
   <string name="no">Жок</string>
   <string name="cancel">Жокко чыгаруу</string>
+  <string name="navigation_item_upload">Жүктөө</string>
   <string name="nearby_wikidata">Викимаалымат</string>
   <string name="nearby_wikipedia">Википедия</string>
   <string name="about_translate">Которуу</string>
