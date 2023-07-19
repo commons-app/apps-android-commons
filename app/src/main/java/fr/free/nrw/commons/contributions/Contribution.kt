@@ -111,7 +111,6 @@ data class Contribution constructor(
          */
         fun formatDescriptions(descriptions: List<UploadMediaDetail>) =
             descriptions.filter { it.descriptionText.isNotEmpty() }
-                .joinToString { "{{${it.languageCode}|1=${it.descriptionText}}}" }
-                .replace("}}, ", "}}")
+                .joinToString(separator = "") { "{{${it.languageCode}|1=${it.descriptionText}}}" }
     }
 }
