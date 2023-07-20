@@ -29,6 +29,7 @@
   <string name="username">Колдонуучунун аты</string>
   <string name="password">Сырсөз</string>
   <string name="login">Кирүү</string>
+  <string name="signup">Катталуу</string>
   <string name="logging_in_title">Системага кирүү</string>
   <string name="logging_in_message">Сураныч, күтө туруңуз…</string>
   <string name="login_success">Сиз ийгиликтүү кирдиңиз</string>
@@ -67,6 +68,7 @@
   <string name="categories_skip_explanation" fuzzy="true">Уикиказынада Сиздин сүрөттөрдү жеңил табуу үчүн түрмөктөрдү кошуңуз.\n\nТүрмөктөрдү жазууну баштаңыз.\nБул кадамды аттап өтүү үчүн, бул билдирүүнү (же кийинкини) басыңыз.</string>
   <string name="categories_activity_title">Түрмөктөр</string>
   <string name="title_activity_settings">Ырастоолор</string>
+  <string name="title_activity_signup">Катталуу</string>
   <string name="menu_about">Тиркеме жөнүндө</string>
   <string name="about_license" fuzzy="true">баштапкы коду ачык тиркемелер, &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; лицензиясынын негизинде чыгарылган</string>
   <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt; шилтемесине баштапкы код. &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; шилтемесиндеги катачылык.</string>
