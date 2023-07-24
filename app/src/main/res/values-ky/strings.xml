@@ -30,7 +30,7 @@
   <string name="password">Сырсөз</string>
   <string name="login">Кирүү</string>
   <string name="signup">Катталуу</string>
-  <string name="logging_in_title">Системага кирүү</string>
+  <string name="logging_in_title">Кирүү</string>
   <string name="logging_in_message">Сураныч, күтө туруңуз…</string>
   <string name="login_success">Сиз ийгиликтүү кирдиңиз</string>
   <string name="login_failed">Системага кирүүдө катачылык бар!</string>
@@ -101,9 +101,11 @@
   <string name="yes">Ооба</string>
   <string name="no">Жок</string>
   <string name="cancel">Жокко чыгаруу</string>
+  <string name="navigation_drawer_close">Жабуу</string>
   <string name="navigation_item_upload">Жүктөө</string>
   <string name="nearby_wikidata">Викимаалымат</string>
   <string name="nearby_wikipedia">Википедия</string>
+  <string name="about_faq">КБС</string>
   <string name="about_translate">Которуу</string>
   <string name="about_translate_cancel">Жокко чыгаруу</string>
   <string name="back_button_warning">Жүктөөнү жокко чыгаруу</string>
