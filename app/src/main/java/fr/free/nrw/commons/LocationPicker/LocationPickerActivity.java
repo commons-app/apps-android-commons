@@ -58,6 +58,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -315,6 +316,24 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      * Handles onclick event of removeLocationButton
      */
     private void onClickRemoveLocation() {
+        showRemovedLocationPopup();
+    }
+
+    /**
+     * Show the popup to confirm location removal
+     */
+    public void showRemovedLocationPopup() {
+        DialogUtil.showAlertDialog(this,
+            getString(R.string.no_location_selected),
+            getString(R.string.no_location_selected_warning_desc),
+            getString(R.string.continue_message),
+            getString(R.string.cancel), () -> removeLocationFromPicture(), null);
+    }
+
+    /**
+     * Method to remove the location from the picture
+     */
+    private void removeLocationFromPicture() {
     }
 
     /**
