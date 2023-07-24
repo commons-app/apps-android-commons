@@ -96,7 +96,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      */
     private AppCompatTextView tvAttribution;
     /**
-     * activity : activity key![](../../../../../../../../../../../Downloads/image (1).png)
+     * activity : activity key
      */
     private String activity;
     /**
@@ -334,6 +334,14 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      * Method to remove the location from the picture
      */
     private void removeLocationFromPicture() {
+        // Set the camera position to (0, 0)
+        cameraPosition = new CameraPosition.Builder()
+            .target(new LatLng(0, 0))
+            .zoom(16)
+            .build();
+
+        // Set location to camera position (0, 0) and exit the location picker activity
+        placeSelected();
     }
 
     /**
