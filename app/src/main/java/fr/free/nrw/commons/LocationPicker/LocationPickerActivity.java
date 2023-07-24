@@ -95,7 +95,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      */
     private AppCompatTextView tvAttribution;
     /**
-     * activity : activity key
+     * activity : activity key![](../../../../../../../../../../../Downloads/image (1).png)
      */
     private String activity;
     /**
@@ -106,6 +106,10 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      * modifyLocationButton : button for start editing location
      */
     Button modifyLocationButton;
+    /**
+     * removeLocationButton : button for removing location metadata
+     */
+    Button removeLocationButton;
     /**
      * showInMapButton : button for showing in map
      */
@@ -182,6 +186,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
         if ("UploadActivity".equals(activity)) {
             placeSelectedButton.setVisibility(View.GONE);
             modifyLocationButton.setVisibility(View.VISIBLE);
+            removeLocationButton.setVisibility(View.VISIBLE);
             showInMapButton.setVisibility(View.VISIBLE);
             largeToolbarText.setText(getResources().getString(R.string.image_location));
             smallToolbarText.setText(getResources().
@@ -217,6 +222,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
         markerImage = findViewById(R.id.location_picker_image_view_marker);
         tvAttribution = findViewById(R.id.tv_attribution);
         modifyLocationButton = findViewById(R.id.modify_location);
+        removeLocationButton = findViewById(R.id.remove_location);
         showInMapButton = findViewById(R.id.show_in_map);
         showInMapButton.setText(getResources().getString(R.string.show_in_map_app).toUpperCase());
         shadow = findViewById(R.id.location_picker_image_view_shadow);
@@ -284,6 +290,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
         }
 
         modifyLocationButton.setOnClickListener(v -> onClickModifyLocation());
+        removeLocationButton.setOnClickListener(v -> onClickRemoveLocation());
         showInMapButton.setOnClickListener(v -> showInMap());
     }
 
@@ -293,6 +300,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
     private void onClickModifyLocation() {
         placeSelectedButton.setVisibility(View.VISIBLE);
         modifyLocationButton.setVisibility(View.GONE);
+        removeLocationButton.setVisibility(View.GONE);
         showInMapButton.setVisibility(View.GONE);
         droppedMarkerLayer.setProperties(visibility(NONE));
         markerImage.setVisibility(View.VISIBLE);
@@ -301,6 +309,12 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
         smallToolbarText.setText(getResources().getString(R.string.pan_and_zoom_to_adjust));
         bindListeners();
         fabCenterOnLocation.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * Handles onclick event of removeLocationButton
+     */
+    private void onClickRemoveLocation() {
     }
 
     /**
