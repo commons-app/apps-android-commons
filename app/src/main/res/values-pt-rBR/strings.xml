@@ -16,6 +16,7 @@
 * Maxan
 * Mello25
 * Re demz
+* Stephanyb76
 * TheEduGobi
 * TheGabrielZaum
 * Tks4Fish
@@ -34,7 +35,7 @@
   <string name="add_contribution_from_camera">Adicionar contribuição da câmera</string>
   <string name="add_contribution_from_photos">Adicionar contribuição de Fotos</string>
   <string name="add_contribution_from_contributions_gallery">Adicionar contribuição da galeria de contribuições anteriores</string>
-  <string name="show_captions">Legenda</string>
+  <string name="show_captions">Legendas</string>
   <string name="row_item_language_description">Descrição do idioma</string>
   <string name="row_item_caption">Legenda</string>
   <string name="show_captions_description">Descrição</string>
@@ -89,7 +90,7 @@
   <string name="forgot_password">Esqueceu a senha?</string>
   <string name="signup">Cadastre-se</string>
   <string name="logging_in_title">Efetuar login</string>
-  <string name="logging_in_message">Aguarde…</string>
+  <string name="logging_in_message">Por favor, aguarde...</string>
   <string name="updating_caption_title">Atualizando legendas e descrições</string>
   <string name="updating_caption_message">Por favor, aguarde...</string>
   <string name="login_success">Login bem sucedido</string>
@@ -118,7 +119,7 @@
   <string name="provider_contributions">Meus envios</string>
   <string name="menu_share">Compartilhar</string>
   <string name="menu_view_file_page">Ver página do arquivo</string>
-  <string name="share_title_hint">Legenda (obrigatório)</string>
+  <string name="share_title_hint">Legenda (Obrigatório)</string>
   <string name="add_caption_toast">Forneça uma legenda para este arquivo</string>
   <string name="share_description_hint">Descrição</string>
   <string name="share_caption_hint">Legenda</string>
@@ -295,7 +296,7 @@
   <string name="about_rate_us">Avalie-nos</string>
   <string name="about_faq">Perguntas frequentes</string>
   <string name="user_guide">Guia de usuario</string>
-  <string name="welcome_skip_button">Pular tutoril</string>
+  <string name="welcome_skip_button">Pular Tutorial</string>
   <string name="no_internet">A Internet não está disponível</string>
   <string name="error_notifications">Erro ao tentar obter as notificações</string>
   <string name="error_review">Erro ao buscar a imagem para revisão. Pressione atualizar para tentar novamente.</string>
@@ -332,8 +333,8 @@
   <string name="explore_tab_title_map">Mapa</string>
   <string name="successful_wikidata_edit">Imagem adicionada a %1$s na Wikidata!</string>
   <string name="wikidata_edit_failure">Falha ao atualizar a entidade Wikidata correspondente!</string>
-  <string name="menu_set_wallpaper">Definir como imagem de fundo</string>
-  <string name="wallpaper_set_successfully">Imagem de fundo definida!</string>
+  <string name="menu_set_wallpaper">Definir como papel de parede</string>
+  <string name="wallpaper_set_successfully">Papel de parede definido!</string>
   <string name="quiz">Questionário</string>
   <string name="quiz_question_string">Esta fotografia pode ser carregada?</string>
   <string name="question">Pergunta</string>
