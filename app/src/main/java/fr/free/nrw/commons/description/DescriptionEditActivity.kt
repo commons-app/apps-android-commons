@@ -151,7 +151,7 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
                     buffer.append(uploadDetails.languageCode)
                     buffer.append("|1=")
                     buffer.append(uploadDetails.descriptionText)
-                    buffer.append("}}, ")
+                    buffer.append("}}")
                 }
             }
             buffer.replace(", $".toRegex(), "")

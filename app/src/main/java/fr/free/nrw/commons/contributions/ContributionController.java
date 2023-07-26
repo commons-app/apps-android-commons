@@ -161,8 +161,8 @@ public class ContributionController {
      */
     private void initiateGalleryUpload(final Activity activity, final boolean allowMultipleUploads) {
         setPickerConfiguration(activity, allowMultipleUploads);
-        boolean isGetContentPickerPreferred = defaultKvStore.getBoolean("getContentPhotoPickerPref");
-        FilePicker.openGallery(activity, 0, isGetContentPickerPreferred);
+        boolean openDocumentIntentPreferred = defaultKvStore.getBoolean("openDocumentPhotoPickerPref");
+        FilePicker.openGallery(activity, 0, openDocumentIntentPreferred);
     }
 
     /**
