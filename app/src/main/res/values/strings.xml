@@ -191,7 +191,7 @@
   <string name="write_storage_permission_rationale">Required permission: Write external storage. App cannot access your camera/gallery without this.</string>
   <string name="location_permission_title">Requesting Location Permission</string>
   <string name="in_app_camera_location_permission_title">Record location for in-app shots</string>
-  <string name="in_app_camera_location_switch_pref_summary">Enable this to record location while using in-app camera</string>
+  <string name="in_app_camera_location_switch_pref_summary">Enable this to record location with in-app shots in case the device camera does not record it</string>
   <string name="ok">OK</string>
   <string name="warning">Warning</string>
   <string name="duplicate_file_name">Duplicate File Name found</string>
@@ -449,7 +449,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="option_allow">Allow</string>
   <string name="option_dismiss">Dismiss</string>
   <string name="in_app_camera_needs_location">Please turn on location access from the Settings and try again.</string>
-  <string name="in_app_camera_location_permission_rationale">In-app camera needs location permission to attach it to your images in case location is not available in EXIF</string>
+  <string name="in_app_camera_location_permission_rationale">In-app camera needs location permission to attach it to your images in case location is not available in EXIF. Please allow the app to access your location and try again.</string>
 
   <string name="nearby_campaign_dismiss_message">You won\'t see the campaigns anymore. However, you can re-enable this notification in Settings if you wish.</string>
   <string name="this_function_needs_network_connection">This function requires network connection, please check your connection settings.</string>

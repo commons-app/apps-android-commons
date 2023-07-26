@@ -3,12 +3,9 @@ package fr.free.nrw.commons.contributions;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 import android.Manifest;
-import android.Manifest.permission;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.provider.Settings;
 import androidx.annotation.NonNull;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.DefaultCallback;
@@ -17,6 +14,8 @@ import fr.free.nrw.commons.filepicker.FilePicker.ImageSource;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.location.LocationPermissionsHelper;
+import fr.free.nrw.commons.location.LocationPermissionsHelper.Dialog;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.UploadActivity;
@@ -59,12 +58,40 @@ public class ContributionController {
                     if (defaultKvStore.getBoolean("inAppCameraFirstRun")) {
                         defaultKvStore.putBoolean("inAppCameraFirstRun", false);
                         askUserToAllowLocationAccess(activity);
+                    } else if(!(PermissionUtils.hasPermission(activity,
+                        Manifest.permission.ACCESS_FINE_LOCATION)
+                        && isLocationAccessToAppsTurnedOn())
+                        && defaultKvStore.getBoolean("inAppCameraLocationPref")) {
+                        createDialogsAndHandleLocationPermissions(activity);
                     } else {
                         initiateCameraUpload(activity);
                     }
                 },
                 R.string.storage_permission_title,
                 R.string.write_storage_permission_rationale);
+    }
+
+    /**
+     * Asks users to provide location access
+     *
+     * @param activity
+     */
+    private void createDialogsAndHandleLocationPermissions(Activity activity) {
+        LocationPermissionsHelper.Dialog locationAccessDialog = new Dialog(
+            R.string.location_permission_title,
+            R.string.in_app_camera_location_permission_rationale
+        );
+
+        LocationPermissionsHelper.Dialog locationOffDialog = new Dialog(
+            R.string.ask_to_turn_location_on,
+            R.string.in_app_camera_needs_location
+        );
+
+        LocationPermissionsHelper locationPermissionsHelper = new LocationPermissionsHelper(activity, locationManager);
+        locationPermissionsHelper.handleLocationPermissions(
+            locationAccessDialog,
+            locationOffDialog
+        );
     }
 
     /**
@@ -87,7 +114,7 @@ public class ContributionController {
             activity.getString(R.string.option_dismiss),
             ()-> {
                 defaultKvStore.putBoolean("inAppCameraLocationPref", true);
-                requestForLocationAccess(activity);
+                createDialogsAndHandleLocationPermissions(activity);
             },
             () -> {
                 defaultKvStore.putBoolean("inAppCameraLocationPref", false);
@@ -98,73 +125,12 @@ public class ContributionController {
     }
 
     /**
-     * Ask for location permission if the user agrees on attaching location with pictures
-     * and the app does not have the access to location
-     *
-     * @param activity
-     */
-
-    private void requestForLocationAccess(Activity activity) {
-        PermissionUtils.checkPermissionsAndPerformAction(activity,
-            permission.ACCESS_FINE_LOCATION,
-            () -> onLocationPermissionGranted(activity),
-            () -> {},
-            R.string.ask_to_turn_location_on,
-            R.string.in_app_camera_location_permission_rationale);
-    }
-
-    /**
      * Check if apps have access to location even after having individual access
      *
      * @return
      */
     private boolean isLocationAccessToAppsTurnedOn() {
         return (locationManager.isNetworkProviderEnabled() || locationManager.isGPSProviderEnabled());
-    }
-
-    /**
-     * Initiate in-app camera if apps have access to location.
-     * Otherwise, show location-off dialog.
-     *
-     * @param activity
-     */
-    private void onLocationPermissionGranted(Activity activity) {
-        if (!isLocationAccessToAppsTurnedOn()) {
-            showLocationOffDialog(activity);
-        } else {
-            initiateCameraUpload(activity);
-        }
-    }
-
-    /**
-     * Ask user to grant location access to apps
-     *
-     * @param activity
-     */
-
-    private void showLocationOffDialog(Activity activity) {
-        DialogUtil
-            .showAlertDialog(activity,
-                activity.getString(R.string.location_permission_title),
-                activity.getString(R.string.in_app_camera_needs_location),
-                activity.getString(R.string.title_app_shortcut_setting),
-                () -> openLocationSettings(activity),
-                true);
-    }
-
-    /**
-     * Open location source settings so that apps with location access can access it
-     *
-     * @param activity
-     */
-
-    private void openLocationSettings(Activity activity) {
-        final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-        final PackageManager packageManager = activity.getPackageManager();
-
-        if (intent.resolveActivity(packageManager)!= null) {
-            activity.startActivity(intent);
-        }
     }
 
     /**

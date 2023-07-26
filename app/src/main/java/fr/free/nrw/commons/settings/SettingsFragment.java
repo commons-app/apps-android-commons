@@ -3,16 +3,13 @@ package fr.free.nrw.commons.settings;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.Manifest;
-import android.Manifest.permission;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -33,13 +30,13 @@ import androidx.recyclerview.widget.RecyclerView.Adapter;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.single.BasePermissionListener;
-import com.mapbox.mapboxsdk.Mapbox;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.campaigns.CampaignView;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LocationPermissionsHelper;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.recentlanguages.Language;
@@ -110,7 +107,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             (preference, newValue) -> {
                 boolean isInAppCameraLocationTurnedOn = (boolean) newValue;
                 if (isInAppCameraLocationTurnedOn) {
-                    requestForLocationAccess();
+                    createDialogsAndHandleLocationPermissions(getActivity());
                 }
                 return true;
             }
@@ -195,68 +192,26 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     /**
-     * Ask for location permission if the user agrees on attaching location with pictures
-     * and the app does not have the access to location
+     * Asks users to provide location access
      *
+     * @param activity
      */
-    private void requestForLocationAccess() {
-        PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
-            permission.ACCESS_FINE_LOCATION,
-            () -> onLocationPermissionGranted(getActivity()),
-            () -> {},
+    private void createDialogsAndHandleLocationPermissions(Activity activity) {
+        LocationPermissionsHelper.Dialog locationAccessDialog = new LocationPermissionsHelper.Dialog(
+            R.string.location_permission_title,
+            R.string.in_app_camera_location_permission_rationale
+        );
+
+        LocationPermissionsHelper.Dialog locationOffDialog = new LocationPermissionsHelper.Dialog(
             R.string.ask_to_turn_location_on,
-            R.string.in_app_camera_location_permission_rationale);
-    }
+            R.string.in_app_camera_needs_location
+        );
 
-    /**
-     * Check if apps have access to location even after having individual access
-     *
-     * @return
-     */
-    private boolean isLocationAccessToAppsTurnedOn() {
-        return (locationManager.isNetworkProviderEnabled() || locationManager.isGPSProviderEnabled());
-    }
-
-    /**
-     * Initiate in-app camera if apps have access to location.
-     * Otherwise, show location-off dialog.
-     *
-     * @param activity
-     */
-    private void onLocationPermissionGranted(Activity activity) {
-        if (!isLocationAccessToAppsTurnedOn()) {
-            showLocationOffDialog(activity);
-        }
-    }
-
-    /**
-     * Ask user to grant location access to apps
-     *
-     * @param activity
-     */
-    private void showLocationOffDialog(Activity activity) {
-        DialogUtil
-            .showAlertDialog(activity,
-                activity.getString(R.string.location_permission_title),
-                activity.getString(R.string.in_app_camera_needs_location),
-                activity.getString(R.string.title_app_shortcut_setting),
-                () -> openLocationSettings(activity),
-                true);
-    }
-
-    /**
-     * Open location source settings so that apps with location access can access it
-     *
-     * @param activity
-     */
-
-    private void openLocationSettings(Activity activity) {
-        final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-        final PackageManager packageManager = activity.getPackageManager();
-
-        if (intent.resolveActivity(packageManager)!= null) {
-            activity.startActivity(intent);
-        }
+        LocationPermissionsHelper locationPermissionsHelper = new LocationPermissionsHelper(activity, locationManager);
+        locationPermissionsHelper.handleLocationPermissions(
+            locationAccessDialog,
+            locationOffDialog
+        );
     }
 
     /**
