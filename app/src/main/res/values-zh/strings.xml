@@ -460,9 +460,7 @@
   <string name="ends_on">结束于：</string>
   <string name="display_campaigns">显示活动</string>
   <string name="display_campaigns_explanation">显示正在进行的活动</string>
-  <string name="get_content_photo_picker_title">使用 GET_CONTENT 照片选择器</string>
-  <string name="get_content_photo_picker_explanation">如果你上传的图片没有位置数据，请禁用</string>
-  <string name="location_loss_warning">请确保这个新的 Android 选择器不会从你的照片中删除位置数据。</string>
+  <string name="location_loss_warning">将此关闭可能会触发新的 Android 照片选择器。这可能会有丢失位置信息的风险。\n\n点击“阅读更多”以获取更多信息。</string>
   <string name="nearby_campaign_dismiss_message">你不会再看到这个活动。如果需要可以在设置里重新启用此通知。</string>
   <string name="this_function_needs_network_connection">这个功能需要网络连接，请检查你的网络设置。</string>
   <string name="error_processing_image">处理图像时出错。请再试一次！</string>

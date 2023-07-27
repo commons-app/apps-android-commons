@@ -152,7 +152,7 @@
   <string name="title_activity_category_details">分類</string>
   <string name="title_activity_review">同行評審</string>
   <string name="menu_about">關於</string>
-  <string name="about_license">維基共享資源應用程序是一款開源應用程序，由維基媒體社區的受助者和志願者創建和維護。維基媒體基金會不參與該應用程序的創建、開發或維護。</string>
+  <string name="about_license">維基共享資源應用程式是一款開放原始碼應用程式，由維基媒體社群的受助者和志工創建和維護。維基媒體基金會不參與該應用程式的創建、開發或維護。</string>
   <string name="about_improve">建立新的&lt;a href=\"%1$s\"&gt; GitHub 問題&lt;/a&gt;來回報程式錯誤和提出建議。</string>
   <string name="about_privacy_policy">隱私權政策</string>
   <string name="about_credits">製作群</string>
@@ -259,7 +259,7 @@
   <string name="nearby_info_menu_wikidata_article">維基數據項目</string>
   <string name="nearby_info_menu_wikipedia_article">維基百科條目</string>
   <string name="description_info">請盡可能描述媒體內容：拍攝於何處？是顯示什麼事物？有什麼脈絡？請描述對象或人物。透露出一些較不易猜測的訊息，例如是風景的話，可以是一天裡的時間。如果媒體顯示出一些不尋常的事物，請說明不尋常原因。</string>
-  <string name="caption_info">請寫入圖片的簡要描述。首個說明會作為圖片的標題。不能超過 225 個字符。</string>
+  <string name="caption_info">請寫入圖片的簡要描述。首個說明會作為圖片的標題。長度不能超過 255 個字元。</string>
   <string name="upload_problem_exist">此圖片有以下潛在問題：</string>
   <string name="upload_problem_image_dark">圖片太暗。</string>
   <string name="upload_problem_image_blurry">圖片模糊。</string>
@@ -268,7 +268,7 @@
   <string name="upload_problem_fbmd">請僅上傳您自己拍攝的圖片。不要上傳您從別人臉書帳號裡所找到的圖片。</string>
   <string name="upload_problem_do_you_continue">您仍要上傳此圖片嗎？</string>
   <string name="upload_connection_error_alert_title">連接錯誤</string>
-  <string name="upload_connection_error_alert_detail">上傳過程需要有效的互聯網訪問。請檢查您的網絡連接。</string>
+  <string name="upload_connection_error_alert_detail">上傳過程需要有效的網際網路存取。請檢查您的網路連線。</string>
   <string name="upload_problem_image">在圖片中發現的問題</string>
   <string name="internet_downloaded">請僅上傳您自己拍攝的圖片。不要上傳您從網路下載來的圖片。</string>
   <string name="use_external_storage">儲存應用程式所提供的截圖</string>
@@ -380,7 +380,7 @@
   <string name="achievements_info_message">在您符合這些需求時，您的等級會增加。在「統計內容」裡的項目，則不會計算到您的等級。</string>
   <string name="achievements_revert_limit_message">最低要求：</string>
   <string name="images_uploaded_explanation">您透過任一上傳軟體將圖片上傳至維基共享資源的數目</string>
-  <string name="images_reverted_explanation">您上傳到 Commons 的圖像中未被刪除的百分比</string>
+  <string name="images_reverted_explanation">您上傳到維基共享資源的圖像中未被刪除的百分比</string>
   <string name="images_used_explanation">您所上傳至維基共享資源且被使用在維基百科條目中的圖片數目</string>
   <string name="error_occurred">發生錯誤！</string>
   <string name="notifications_channel_name_all">共享資源通知</string>
@@ -436,9 +436,9 @@
   <string name="ends_on">結束於：</string>
   <string name="display_campaigns">顯示活動</string>
   <string name="display_campaigns_explanation">檢視發生中的活動</string>
-  <string name="get_content_photo_picker_title">使用 GET_CONTENT 照片點選器</string>
-  <string name="get_content_photo_picker_explanation">如果上傳的圖片沒有位置，請禁用</string>
-  <string name="location_loss_warning">請確認這個新的 Android 點選器不會從您的圖片裡刪除位置資訊。</string>
+  <string name="open_document_photo_picker_title">使用基於照片點選器的文件</string>
+  <string name="open_document_photo_picker_explanation">新的 Android 照片點選器有遺失位置資訊的風險。若您正在使用該點選器，請啟用它。</string>
+  <string name="location_loss_warning">關閉這個可能會觸發新的 Android 照片點選器。該點選器有遺失位置資訊的風險。\n\n請輕觸「閱讀更多」來獲得更多相關資訊。</string>
   <string name="nearby_campaign_dismiss_message">您不會再看到活動。然而，若您有意的話您可以在設定裡重新啟動此通知。</string>
   <string name="this_function_needs_network_connection">此功能需要連接到網路，請檢查您的連線設定。</string>
   <string name="error_processing_image">處理圖片時出現錯誤。請重試！</string>
@@ -487,7 +487,7 @@
   <string name="thanks_received_explanation">此功能允許編輯者通過使用歷史頁面或差異頁面上的小感謝鏈接向進行有用編輯的用戶發送感謝通知。</string>
   <string name="copy_image_caption_description">複製到後續媒體</string>
   <string name="copied_successfully">已複製</string>
-  <string name="welcome_do_upload_content_description">上傳到 Commons 的好圖片示例</string>
+  <string name="welcome_do_upload_content_description">上傳到共享資源的好圖片示例</string>
   <string name="welcome_dont_upload_content_description">未上傳的範例圖片</string>
   <string name="skip_image">略過此圖片</string>
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">下載失敗！因為缺少外部儲存裝置權限緣故，我們無法下載檔案。</string>

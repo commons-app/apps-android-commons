@@ -446,9 +446,7 @@
   <string name="ends_on">Завершується:</string>
   <string name="display_campaigns">Показати кампанії</string>
   <string name="display_campaigns_explanation">Чинні кампанії</string>
-  <string name="get_content_photo_picker_title">Використати засіб вибору фотографій GET_CONTENT</string>
-  <string name="get_content_photo_picker_explanation">Вимкнути, якщо ваші зображення завантажуються без даних місцезнаходження</string>
-  <string name="location_loss_warning">Переконайтеся, що цей новий засіб вибору Android не видаляє геоданы з ваших зображень.</string>
+  <string name="location_loss_warning" fuzzy="true">Переконайтеся, що цей новий засіб вибору Android не видаляє геоданы з ваших зображень.</string>
   <string name="nearby_campaign_dismiss_message">Ви більше не бачитимете кампаній. Однак Ви можете увімкнути це сповіщення повторно в своїх налаштуваннях, якщо забажаєте.</string>
   <string name="this_function_needs_network_connection">Ця функція вимагає доступу до інтернету. Будь ласка, перевірте своє з\'єднання.</string>
   <string name="error_processing_image">Сталася помилка при обробці зображення. Будь ласка, спробуйте ще раз!</string>

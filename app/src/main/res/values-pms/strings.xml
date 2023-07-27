@@ -414,9 +414,9 @@
   <string name="ends_on">A finiss ai:</string>
   <string name="display_campaigns">Campagne ëd visualisassion</string>
   <string name="display_campaigns_explanation">Vëdde le campagne an cors</string>
-  <string name="get_content_photo_picker_title">Dovré ël selessionator ëd fòto GET_CONTENT</string>
-  <string name="get_content_photo_picker_explanation">Disativé si soe fòto a son carià sensa locassion</string>
-  <string name="location_loss_warning">Ch\'a contròla che ës neuv seletor Android a elìmina pa la locassion ëd soe fòto.</string>
+  <string name="open_document_photo_picker_title">Dovré ël seletor ëd fòto basà an s\'un document</string>
+  <string name="open_document_photo_picker_explanation">Ël neuv seletor ëd fòti d\'Android a arziga ëd perde dj\'anformassion ëd localisassion. Ch\'a lo abìlita s\'a smija ch\'a lo deuvra.</string>
+  <string name="location_loss_warning">Dëstisselo a podrìa fé parte ël neuv seletor ëd fòto d\'Android. A arziga ëd perde dj\'anformassion ëd localisassion.\n\nSgnaché su \'Lese ëd pi\' për pi d\'anformassion.</string>
   <string name="nearby_campaign_dismiss_message">A vëdrà pi nen le campagna. Comsëssìa, a peul torna abilité costa notìfica ant ij paràmeter, s\'a veul.</string>
   <string name="this_function_needs_network_connection">Sa fonsion a l\'ha damanca ëd na conession ëd rej, për piasì ch\'a contròla ij sò paràmtere ëd conession.</string>
   <string name="error_processing_image">A-i è staje n\'eror durant ël tratament ëd la plancia. Ch\'a ancamin-a torna, për piasì!</string>
