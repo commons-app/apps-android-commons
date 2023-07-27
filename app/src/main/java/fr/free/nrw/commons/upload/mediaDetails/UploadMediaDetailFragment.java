@@ -512,6 +512,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                     isMissingLocationDialog = false;
                     onNextButtonClicked();
                 }
+            } else {
+                // Location removed by user.
+                removeLocation();
             }
         }
     }
@@ -530,6 +533,14 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         editableUploadItem.getGpsCoords().setZoomLevel(zoom);
         Toast.makeText(getContext(), "Location Updated", Toast.LENGTH_LONG).show();
 
+    }
+
+    /**
+     * Update the old coordinates with new one
+     */
+    public void removeLocation(){
+        editableUploadItem.getGpsCoords().setDecimalCoords(null);
+        Toast.makeText(getContext(), "Location Removed", Toast.LENGTH_LONG).show();
     }
 
     @Override
