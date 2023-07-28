@@ -449,9 +449,7 @@
   <string name="ends_on">Kończy się na:</string>
   <string name="display_campaigns">Wyświetl kampanie</string>
   <string name="display_campaigns_explanation">Zobacz trwające kampanie</string>
-  <string name="get_content_photo_picker_title">Użyj selektora zdjęć GET_CONTENT</string>
-  <string name="get_content_photo_picker_explanation">Wyłącz, jeśli Twoje zdjęcia są przesyłane bez lokalizacji</string>
-  <string name="location_loss_warning">Upewnij się, że ten nowy selektor Androida nie usuwa lokalizacji ze zdjęć.</string>
+  <string name="location_loss_warning" fuzzy="true">Upewnij się, że ten nowy selektor Androida nie usuwa lokalizacji ze zdjęć.</string>
   <string name="nearby_campaign_dismiss_message">Kampanie już nie będą widoczne. Jednak w razie potrzeby możesz ponownie włączyć to powiadomienie w ustawieniach.</string>
   <string name="this_function_needs_network_connection">Ta funkcja wymaga połączenia sieciowego, sprawdź ustawienia połączenia.</string>
   <string name="error_processing_image">Wystąpił błąd podczas przetwarzania obrazu. Spróbuj ponownie!</string>

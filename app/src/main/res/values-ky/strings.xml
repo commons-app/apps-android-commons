@@ -6,6 +6,12 @@
 * NR Deblocked
 -->
 <resources>
+  <string name="commons_facebook">Викиказынанын Facebook баракчасы</string>
+  <string name="commons_logo">Викиказынанын логотиби</string>
+  <string name="commons_website">Викиказынанын сайты</string>
+  <string name="show_captions_description">Сыпаттама</string>
+  <string name="nearby_row_image">Сүрөт</string>
+  <string name="nearby_all">Баары</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 файл жүктөлүүдө</item>
     <item quantity="other">%1$d файл жүктөлүүдө</item>
@@ -24,6 +30,7 @@
     <item quantity="other">%1$d жүктөө</item>
   </plurals>
   <string name="share_license_summary" fuzzy="true">Бул сүрөт %1$s лицензияланат</string>
+  <string name="preference_category_privacy">Купуялык</string>
   <string name="app_name">Викиказына</string>
   <string name="menu_settings">Ырастоолор</string>
   <string name="username">Колдонуучунун аты</string>
@@ -32,6 +39,7 @@
   <string name="signup">Катталуу</string>
   <string name="logging_in_title">Кирүү</string>
   <string name="logging_in_message">Сураныч, күтө туруңуз…</string>
+  <string name="updating_caption_message">Күтө туруңуз…</string>
   <string name="login_success">Сиз ийгиликтүү кирдиңиз</string>
   <string name="login_failed">Системага кирүүдө катачылык бар!</string>
   <string name="authentication_failed" fuzzy="true">Таану катачылыгы!</string>
@@ -100,6 +108,7 @@
   <string name="menu_refresh">Жаңылоо</string>
   <string name="yes">Ооба</string>
   <string name="no">Жок</string>
+  <string name="media_detail_title">Аталыш</string>
   <string name="cancel">Жокко чыгаруу</string>
   <string name="navigation_drawer_close">Жабуу</string>
   <string name="navigation_item_upload">Жүктөө</string>

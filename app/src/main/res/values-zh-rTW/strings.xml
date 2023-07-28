@@ -436,9 +436,9 @@
   <string name="ends_on">結束於：</string>
   <string name="display_campaigns">顯示活動</string>
   <string name="display_campaigns_explanation">檢視發生中的活動</string>
-  <string name="get_content_photo_picker_title">使用 GET_CONTENT 照片點選器</string>
-  <string name="get_content_photo_picker_explanation">如果上傳的圖片沒有位置，請禁用</string>
-  <string name="location_loss_warning">請確認這個新的 Android 點選器不會從您的圖片裡刪除位置資訊。</string>
+  <string name="open_document_photo_picker_title">使用基於照片點選器的文件</string>
+  <string name="open_document_photo_picker_explanation">新的 Android 照片點選器有遺失位置資訊的風險。若您正在使用該點選器，請啟用它。</string>
+  <string name="location_loss_warning">關閉這個可能會觸發新的 Android 照片點選器。該點選器有遺失位置資訊的風險。\n\n請輕觸「閱讀更多」來獲得更多相關資訊。</string>
   <string name="nearby_campaign_dismiss_message">您不會再看到活動。然而，若您有意的話您可以在設定裡重新啟動此通知。</string>
   <string name="this_function_needs_network_connection">此功能需要連接到網路，請檢查您的連線設定。</string>
   <string name="error_processing_image">處理圖片時出現錯誤。請重試！</string>

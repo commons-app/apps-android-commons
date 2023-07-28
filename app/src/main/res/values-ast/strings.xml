@@ -417,9 +417,7 @@
   <string name="ends_on">Remata el:</string>
   <string name="display_campaigns">Amosar campañes</string>
   <string name="display_campaigns_explanation">Ver les campañes en cursu</string>
-  <string name="get_content_photo_picker_title">Usa GET_CONTENT selector de semeyes</string>
-  <string name="get_content_photo_picker_explanation">Desactivar si les tos semeyes son xubíes ensín allugamientu.</string>
-  <string name="location_loss_warning">Por favor asegúrate de qu\'esti selector d\'Android nuevu nun esancia l\'allugamientu de les tos semeyes.</string>
+  <string name="location_loss_warning" fuzzy="true">Por favor asegúrate de qu\'esti selector d\'Android nuevu nun esancia l\'allugamientu de les tos semeyes.</string>
   <string name="nearby_campaign_dismiss_message">Yá nun verás más les campañes. Sicasí, si quies puedes reactivar esti avisu na configuración.</string>
   <string name="this_function_needs_network_connection">Esta función rique conexón de rede, comprueba la configuración de conexón.</string>
   <string name="error_processing_image">Asocedió un error al procesar la imaxe. Téntalo nuevamente.</string>

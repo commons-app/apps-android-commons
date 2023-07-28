@@ -4,6 +4,7 @@
 * Gurulenin
 * Kaartic
 * Sank
+* Sriveenkat
 * Yuvipanda
 -->
 <resources>
@@ -11,6 +12,8 @@
   <string name="commons_github">காமென்ஸ் கிட்கப் மூலம்</string>
   <string name="commons_logo">பொதுவகம் இலச்சினை</string>
   <string name="commons_website">காமென்ஸ் இணையதளம்</string>
+  <string name="nearby_row_image">படம்</string>
+  <string name="nearby_all">அனைத்தும்</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d கோப்பு தரவேற்றப்படுகிறது</item>
     <item quantity="other">%1$d கோப்புகள்  தரவேற்றப்படுகின்றன</item>
@@ -44,7 +47,7 @@
   <string name="upload_progress_notification_title_start">கோப்பை பதிவேற்றுகிறது: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s தரவேற்றப்படுகிறது</string>
   <string name="upload_progress_notification_title_finishing">%1$s தரவேற்றம் முடிக்கப்படுகிறது</string>
-  <string name="upload_failed_notification_title" fuzzy="true">%1$s பதிவேற்றுவது தோல்வியுற்றது</string>
+  <string name="upload_failed_notification_title">%1$s பதிவேற்றமானது தோல்வியுற்றது</string>
   <string name="upload_paused_notification_title">%1$s பதிவேற்றுவது இடைநிறுத்தப்பட்டுள்ளது</string>
   <string name="upload_failed_notification_subtitle">காண்பதற்கு தட்டுக</string>
   <string name="upload_paused_notification_subtitle">காண்பதற்கு தட்டுக</string>
@@ -219,4 +222,6 @@
   <string name="about_translate_proceed">தொடர்</string>
   <string name="about_translate_cancel">ரத்து செய்</string>
   <string name="retry">மறு முயற்சி செய்</string>
+  <string name="title_activity_search">தேடல்</string>
+  <string name="search_recent_header">அண்மைய தேடல்கள்:</string>
 </resources>

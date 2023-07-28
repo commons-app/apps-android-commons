@@ -46,7 +46,7 @@
     <item quantity="other">%1$d тейәүҙәре</item>
   </plurals>
   <string name="share_license_summary" fuzzy="true">Был рәсем %1$s аҫтында лицензия аласаҡ</string>
-  <string name="navigation_item_explore">Өйрәнеү</string>
+  <string name="navigation_item_explore">Тикшереү</string>
   <string name="preference_category_appearance">Тышҡы күренеш</string>
   <string name="preference_category_general">Ғәҙәти</string>
   <string name="preference_category_feedback">Яуап алыу</string>
@@ -63,7 +63,7 @@
   <string name="signup">Теркәл</string>
   <string name="logging_in_title">Системаға ин</string>
   <string name="logging_in_message">Зинһар, көтөгөҙ...</string>
-  <string name="updating_caption_title">Яҙыуҙар һәм тасуирламалар яңыртыла</string>
+  <string name="updating_caption_title">Аңлатмалар һәм тасуирламалар яңыртыла</string>
   <string name="updating_caption_message">Зинһар, көтөгөҙ...</string>
   <string name="login_success">Танышыу уңышлы үтте</string>
   <string name="login_failed">Танылыу хатаһы</string>

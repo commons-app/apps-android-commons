@@ -446,9 +446,9 @@
   <string name="ends_on">מסתיים ב־:</string>
   <string name="display_campaigns">הצגת מסעי פרסום</string>
   <string name="display_campaigns_explanation">ר\' את מסעי פרסום שמתרחשים כרגע</string>
-  <string name="get_content_photo_picker_title">להשתמש בבורר התמונות GET_CONTENT</string>
-  <string name="get_content_photo_picker_explanation">כדאי לכבות את זה אם התמונות שלך נשלחות ללא מיקום</string>
-  <string name="location_loss_warning">נא לוודא שהבורר החדש הזה ב־Android לא מסיר את המיקום מהתמונות שלך.</string>
+  <string name="open_document_photo_picker_title">להשתמש בבורר תמונות מבוסס מסמכים</string>
+  <string name="open_document_photo_picker_explanation">בורר התמונות החדש של אנדרואיד עלול לאבד מידע על מיקום. יש להפעיל אותו רק אם נראה שהוא באמת בשימוש שלך.</string>
+  <string name="location_loss_warning">כיבוי של זה עשוי להפעיל את בורר התמונות החדש של אנדרואיד. זה עלול לאבד מידע על מיקום.\n\nיש להקיש על \"מידע נוסף\" כדי לקרוא על זה עוד.</string>
   <string name="nearby_campaign_dismiss_message">מסעי הפרסום לא יופיעו עוד. עם זאת, ניתן להפעיל את ההתראות האלה מחדש בהגדרות בהתאם לרצונך.</string>
   <string name="this_function_needs_network_connection">תכונה זו דורשת חיבור לרשת, נא לבדוק את הגדרות החיבור שלך.</string>
   <string name="error_processing_image">אירעה שגיאה בעת עיבוד התמונה. נא לנסות שוב!</string>
