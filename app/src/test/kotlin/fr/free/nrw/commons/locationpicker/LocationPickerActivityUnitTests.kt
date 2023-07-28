@@ -63,6 +63,9 @@ class LocationPickerActivityUnitTests {
     private lateinit var modifyLocationButton: Button
 
     @Mock
+    private lateinit var removeLocationButton: Button
+
+    @Mock
     private lateinit var placeSelectedButton: FloatingActionButton
 
     @Mock
@@ -195,6 +198,7 @@ class LocationPickerActivityUnitTests {
     @Throws(Exception::class)
     fun testOnStyleLoaded() {
         whenever(modifyLocationButton.visibility).thenReturn(View.INVISIBLE)
+        whenever(removeLocationButton.visibility).thenReturn(View.INVISIBLE)
         whenever(mapboxMap.uiSettings).thenReturn(mock(UiSettings::class.java))
         val method: Method = LocationPickerActivity::class.java.getDeclaredMethod(
             "onStyleLoaded",
@@ -203,6 +207,7 @@ class LocationPickerActivityUnitTests {
         method.isAccessible = true
         method.invoke(activity, style)
         verify(modifyLocationButton, times(1)).visibility
+        verify(removeLocationButton, times(1)).visibility
         verify(mapboxMap, times(1))
             .moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
         verify(mapboxMap, times(1)).uiSettings
@@ -220,6 +225,7 @@ class LocationPickerActivityUnitTests {
         method.invoke(activity)
         verify(placeSelectedButton, times(1)).visibility = View.VISIBLE
         verify(modifyLocationButton, times(1)).visibility = View.GONE
+        verify(removeLocationButton, times(1)).visibility = View.GONE
         verify(showInMapButton, times(1)).visibility = View.GONE
         verify(markerImage, times(1)).visibility = View.VISIBLE
         verify(shadow, times(1)).visibility = View.VISIBLE
