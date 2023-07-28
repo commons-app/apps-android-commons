@@ -334,12 +334,9 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      * Method to remove the location from the picture and exit the location picker activity
      */
     private void removeLocationFromPicture() {
-        // Set the camera position to null
-        cameraPosition = null;
-
-        // Exit the location picker activity with cameraPosition = null
+        // Exit the location picker activity without a camera position
         final Intent returningIntent = new Intent();
-        returningIntent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION, cameraPosition);
+        returningIntent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION, "");
         setResult(AppCompatActivity.RESULT_OK, returningIntent);
         finish();
     }
