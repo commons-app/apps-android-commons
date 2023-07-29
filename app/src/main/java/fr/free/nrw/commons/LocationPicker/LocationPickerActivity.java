@@ -112,6 +112,10 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      */
     Button removeLocationButton;
     /**
+     * isRemovedByUser : used to flag when a location is intentionally removed by the user
+     */
+    private boolean isRemovedByUser = false;
+    /**
      * showInMapButton : button for showing in map
      */
     TextView showInMapButton;
@@ -334,11 +338,9 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      * Method to remove the location from the picture and exit the location picker activity
      */
     private void removeLocationFromPicture() {
-        // Exit the location picker activity without a camera position
-        final Intent returningIntent = new Intent();
-        returningIntent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION, "");
-        setResult(AppCompatActivity.RESULT_OK, returningIntent);
-        finish();
+        // Flag location as removed by user and call placeSelected
+        isRemovedByUser = true;
+        placeSelected();
     }
 
     /**
@@ -478,8 +480,12 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
             applicationKvStore.putString(LAST_ZOOM, mapboxMap.getCameraPosition().zoom + "");
         }
         final Intent returningIntent = new Intent();
-        returningIntent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION,
-            mapboxMap.getCameraPosition());
+        if (isRemovedByUser) {
+            returningIntent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION, "");
+        } else {
+            returningIntent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION,
+                mapboxMap.getCameraPosition());
+        }
         setResult(AppCompatActivity.RESULT_OK, returningIntent);
         finish();
     }
