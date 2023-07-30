@@ -34,6 +34,7 @@ public class ContributionController {
     public static final String ACTION_INTERNAL_UPLOADS = "internalImageUploads";
     private final JsonKvStore defaultKvStore;
     private LatLng locationBeforeImageCapture;
+    private Boolean isInAppCameraUpload;
 
     @Inject
     LocationServiceManager locationManager;
@@ -137,6 +138,7 @@ public class ContributionController {
      * Initiate gallery picker
      */
     public void initiateGalleryPick(final Activity activity, final boolean allowMultipleUploads) {
+        isInAppCameraUpload = false;
         initiateGalleryUpload(activity, allowMultipleUploads);
     }
 
@@ -149,6 +151,7 @@ public class ContributionController {
         PermissionUtils.checkPermissionsAndPerformAction(activity,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             () -> {
+                isInAppCameraUpload = false;
                 FilePicker.openCustomSelector(activity, 0);
             },
             R.string.storage_permission_title,
@@ -184,6 +187,7 @@ public class ContributionController {
         if (defaultKvStore.getBoolean("inAppCameraLocationPref", false)) {
             locationBeforeImageCapture = locationManager.getLastLocation();
         }
+        isInAppCameraUpload = true;
         FilePicker.openCameraForImage(activity, 0);
     }
 
@@ -239,6 +243,11 @@ public class ContributionController {
                 UploadActivity.LOCATION_BEFORE_IMAGE_CAPTURE,
                 locationBeforeImageCapture);
         }
+
+        shareIntent.putExtra(
+            UploadActivity.IN_APP_CAMERA_UPLOAD,
+            isInAppCameraUpload
+        );
 
         return shareIntent;
     }

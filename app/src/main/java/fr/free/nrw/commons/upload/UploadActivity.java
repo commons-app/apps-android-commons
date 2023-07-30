@@ -119,6 +119,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private Place place;
     private LatLng prevLocation;
     private LatLng currLocation;
+    private Boolean isInAppCameraUpload;
     private List<UploadableFile> uploadableFiles = Collections.emptyList();
     private int currentSelectedPosition = 0;
     /*
@@ -128,6 +129,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
     public static final String EXTRA_FILES = "commons_image_exta";
     public static final String LOCATION_BEFORE_IMAGE_CAPTURE = "user_location_before_image_capture";
+    public static final String IN_APP_CAMERA_UPLOAD = "in_app_camera_upload";
 
     /**
      * Stores all nearby places found and related users response for
@@ -392,7 +394,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                        current location and location recorded just before capturing the image
                        is greater than 100 meters */
                     if (isLocationTagUnchecked || locationDifference > 100
-                        || !defaultKvStore.getBoolean("inAppCameraLocationPref")) {
+                        || !defaultKvStore.getBoolean("inAppCameraLocationPref")
+                        || !isInAppCameraUpload) {
                         currLocation = null;
                     }
                 }
@@ -503,6 +506,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
         place = intent.getParcelableExtra(PLACE_OBJECT);
         prevLocation = intent.getParcelableExtra(LOCATION_BEFORE_IMAGE_CAPTURE);
+        isInAppCameraUpload = intent.getBooleanExtra(IN_APP_CAMERA_UPLOAD, false);
         resetDirectPrefs();
     }
 
