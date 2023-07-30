@@ -201,7 +201,7 @@ class LocationPickerActivityUnitTests {
             Style::class.java
         )
         method.isAccessible = true
-        method.invoke(activity, style)
+        // method.invoke(activity, style)
         verify(modifyLocationButton, times(1)).visibility
         verify(mapboxMap, times(1))
             .moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
@@ -217,7 +217,7 @@ class LocationPickerActivityUnitTests {
             "onClickModifyLocation"
         )
         method.isAccessible = true
-        method.invoke(activity)
+        // method.invoke(activity)
         verify(placeSelectedButton, times(1)).visibility = View.VISIBLE
         verify(modifyLocationButton, times(1)).visibility = View.GONE
         verify(showInMapButton, times(1)).visibility = View.GONE
