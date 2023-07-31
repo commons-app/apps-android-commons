@@ -270,7 +270,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      *
      * @param style style
      */
-    private void onStyleLoaded(final Style style) {
+    private void onStyleLoaded(@Nullable final Style style) {
         if (modifyLocationButton.getVisibility() == View.VISIBLE) {
             initDroppedMarker(style);
             adjustCameraBasedOnOptions();
@@ -331,9 +331,8 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      * Method to remove the location from the picture and exit the location picker activity
      */
     private void removeLocationFromPicture() {
-        // Return intent without a camera position
+        // Exit with intent lacking position data
         final Intent returningIntent = new Intent();
-        returningIntent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION, "");
         setResult(AppCompatActivity.RESULT_OK, returningIntent);
         finish();
     }
