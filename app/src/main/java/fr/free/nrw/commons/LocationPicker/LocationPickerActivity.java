@@ -331,15 +331,11 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      * Method to remove the location from the picture and exit the location picker activity
      */
     private void removeLocationFromPicture() {
-        // Set the camera position to (0, 0)
-        cameraPosition = new CameraPosition.Builder()
-            .target(new LatLng(0, 0))
-            .zoom(16)
-            .build();
-
-        // Flag location as removed by user and call placeSelected
-        isRemovedByUser = true;
-        placeSelected();
+        // Return intent without a camera position
+        final Intent returningIntent = new Intent();
+        returningIntent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION, "");
+        setResult(AppCompatActivity.RESULT_OK, returningIntent);
+        finish();
     }
 
     /**
@@ -479,12 +475,8 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
             applicationKvStore.putString(LAST_ZOOM, mapboxMap.getCameraPosition().zoom + "");
         }
         final Intent returningIntent = new Intent();
-        if (isRemovedByUser) {
-            returningIntent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION, "");
-        } else {
-            returningIntent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION,
+        returningIntent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION,
                 mapboxMap.getCameraPosition());
-        }
         setResult(AppCompatActivity.RESULT_OK, returningIntent);
         finish();
     }
