@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.contributions;
 
+import androidx.work.Constraints;
 import androidx.work.ExistingWorkPolicy;
+import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.OutOfQuotaPolicy;
 import androidx.work.WorkManager;
@@ -10,10 +12,6 @@ import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.upload.worker.UploadWorker;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
-import java.util.Collections;
-import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -78,9 +76,13 @@ public class ContributionsPresenter implements UserActionListener {
             .save(contribution)
             .subscribeOn(ioThreadScheduler)
             .subscribe(() -> {
+                Constraints constraints = new Constraints.Builder()
+                    .setRequiredNetworkType(NetworkType.CONNECTED)
+                    .build();
                 OneTimeWorkRequest updatedUploadRequest = new OneTimeWorkRequest
                     .Builder(UploadWorker.class)
                     .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+                    .setConstraints(constraints)
                     .build();
                 WorkManager.getInstance(view.getContext().getApplicationContext())
                     .enqueueUniqueWork(

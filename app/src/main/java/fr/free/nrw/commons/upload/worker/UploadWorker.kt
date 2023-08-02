@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload.worker
 
 import android.annotation.SuppressLint
+import android.app.Notification
 import android.app.PendingIntent
 import android.app.TaskStackBuilder
 import android.content.Context
@@ -230,13 +231,19 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
     }
 
     override suspend fun getForegroundInfo(): ForegroundInfo {
-        // TODO: handle notifications for older Android versions
+        // TODO: improve notifications for older Android versions
         return ForegroundInfo(
             1,
-            curentNotification.build()
+            createNotificationForForegroundService()
         )
     }
 
+    private fun createNotificationForForegroundService(): Notification {
+        return getNotificationBuilder(
+            CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL)!!
+            .setContentTitle(appContext.getString(R.string.upload_in_progress))
+            .build()
+    }
     /**
      * Returns true is the limited connection mode is enabled
      */
