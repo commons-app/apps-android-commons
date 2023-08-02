@@ -447,6 +447,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="option_dismiss">Dismiss</string>
   <string name="in_app_camera_needs_location">Please turn on location access from the Settings and try again. \n\nNote: The first upload may not have location due to limitations of device GPS.</string>
   <string name="in_app_camera_location_permission_rationale">In-app camera needs location permission to attach it to your images in case location is not available in EXIF. Please allow the app to access your location and try again.\n\nNote: The first upload may not have location due to limitations of device GPS.</string>
+  <string name="in_app_camera_location_permission_denied">The app would not record location along with in-shots due to lack of location permission</string>
   <string name="open_document_photo_picker_title">Use document based photo picker</string>
   <string name="open_document_photo_picker_explanation">The new Android photo picker risks losing location information. Enable if you seem to be using it.</string>
   <string name="location_loss_warning">Turning this off could trigger the new Android photo picker. It risks losing location information.\n\nTap on \'Read more\' for more information.</string>

@@ -18,6 +18,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
 import androidx.preference.Preference;
@@ -37,6 +38,7 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationPermissionsHelper;
+import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.recentlanguages.Language;
@@ -207,7 +209,17 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             R.string.in_app_camera_needs_location
         );
 
-        LocationPermissionsHelper locationPermissionsHelper = new LocationPermissionsHelper(activity, locationManager);
+        LocationPermissionsHelper locationPermissionsHelper = new LocationPermissionsHelper(
+            activity, locationManager, new LocationPermissionCallback() {
+            @Override
+            public void onLocationPermissionDenied() {
+                Toast.makeText(
+                    activity.getBaseContext(),
+                    R.string.in_app_camera_location_permission_denied,
+                    Toast.LENGTH_LONG
+                ).show();
+            }
+        });
         locationPermissionsHelper.handleLocationPermissions(
             locationAccessDialog,
             locationOffDialog

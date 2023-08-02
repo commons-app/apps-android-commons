@@ -6,6 +6,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.DefaultCallback;
@@ -34,7 +35,7 @@ public class ContributionController {
     public static final String ACTION_INTERNAL_UPLOADS = "internalImageUploads";
     private final JsonKvStore defaultKvStore;
     private LatLng locationBeforeImageCapture;
-    private Boolean isInAppCameraUpload;
+    private boolean isInAppCameraUpload;
 
     @Inject
     LocationServiceManager locationManager;
@@ -59,11 +60,18 @@ public class ContributionController {
                     if (defaultKvStore.getBoolean("inAppCameraFirstRun")) {
                         defaultKvStore.putBoolean("inAppCameraFirstRun", false);
                         askUserToAllowLocationAccess(activity);
-                    } else if(!(PermissionUtils.hasPermission(activity,
+                    } else if(!PermissionUtils.hasPermission(activity,
                         Manifest.permission.ACCESS_FINE_LOCATION)
-                        && isLocationAccessToAppsTurnedOn())
                         && defaultKvStore.getBoolean("inAppCameraLocationPref")) {
                         createDialogsAndHandleLocationPermissions(activity);
+                    } else if (!isLocationAccessToAppsTurnedOn()
+                               && defaultKvStore.getBoolean("inAppCameraLocationPref")) {
+                        Toast.makeText(
+                            activity,
+                            R.string.in_app_camera_location_permission_denied,
+                            Toast.LENGTH_LONG
+                        ).show();
+                        initiateCameraUpload(activity);
                     } else {
                         initiateCameraUpload(activity);
                     }
@@ -87,8 +95,17 @@ public class ContributionController {
             R.string.ask_to_turn_location_on,
             R.string.in_app_camera_needs_location
         );
-
-        LocationPermissionsHelper locationPermissionsHelper = new LocationPermissionsHelper(activity, locationManager);
+        LocationPermissionsHelper locationPermissionsHelper = new LocationPermissionsHelper(
+            activity, locationManager,
+            () -> {
+                Toast.makeText(
+                    activity,
+                    R.string.in_app_camera_location_permission_denied,
+                    Toast.LENGTH_LONG
+                ).show();
+                initiateCameraUpload(activity);
+            }
+        );
         locationPermissionsHelper.handleLocationPermissions(
             locationAccessDialog,
             locationOffDialog
@@ -138,7 +155,6 @@ public class ContributionController {
      * Initiate gallery picker
      */
     public void initiateGalleryPick(final Activity activity, final boolean allowMultipleUploads) {
-        isInAppCameraUpload = false;
         initiateGalleryUpload(activity, allowMultipleUploads);
     }
 
@@ -150,10 +166,7 @@ public class ContributionController {
 
         PermissionUtils.checkPermissionsAndPerformAction(activity,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            () -> {
-                isInAppCameraUpload = false;
-                FilePicker.openCustomSelector(activity, 0);
-            },
+            () -> FilePicker.openCustomSelector(activity, 0),
             R.string.storage_permission_title,
             R.string.write_storage_permission_rationale);
     }
@@ -248,7 +261,7 @@ public class ContributionController {
             UploadActivity.IN_APP_CAMERA_UPLOAD,
             isInAppCameraUpload
         );
-
+        isInAppCameraUpload = false;    // reset the flag for next use
         return shareIntent;
     }
 

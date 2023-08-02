@@ -15,9 +15,12 @@ import fr.free.nrw.commons.utils.PermissionUtils;
 public class LocationPermissionsHelper {
     Activity activity;
     LocationServiceManager locationManager;
-    public LocationPermissionsHelper(Activity activity, LocationServiceManager locationManager) {
+    LocationPermissionCallback callback;
+    public LocationPermissionsHelper(Activity activity, LocationServiceManager locationManager,
+        LocationPermissionCallback callback) {
         this.activity = activity;
         this.locationManager = locationManager;
+        this.callback = callback;
     }
     public static class Dialog {
         int dialogTitleResource;
@@ -29,6 +32,12 @@ public class LocationPermissionsHelper {
         }
     }
 
+    /**
+     * Handles the entire location permissions flow
+     *
+     * @param locationAccessDialog
+     * @param locationOffDialog
+     */
     public void handleLocationPermissions(Dialog locationAccessDialog,
                                           Dialog locationOffDialog) {
         requestForLocationAccess(locationAccessDialog, locationOffDialog);
@@ -52,7 +61,7 @@ public class LocationPermissionsHelper {
                     showLocationOffDialog(locationOffDialog);
                 }
             },
-            () -> {},
+            callback::onLocationPermissionDenied,
             locationAccessDialog.dialogTitleResource,
             locationAccessDialog.dialogTextResource);
     }
@@ -94,5 +103,12 @@ public class LocationPermissionsHelper {
         if (intent.resolveActivity(packageManager)!= null) {
             activity.startActivity(intent);
         }
+    }
+
+    /**
+     * Handle onPermissionDenied within individual classes based on the requirements
+     */
+    public interface LocationPermissionCallback {
+        void onLocationPermissionDenied();
     }
 }

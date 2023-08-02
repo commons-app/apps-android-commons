@@ -119,7 +119,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private Place place;
     private LatLng prevLocation;
     private LatLng currLocation;
-    private Boolean isInAppCameraUpload;
+    private boolean isInAppCameraUpload;
     private List<UploadableFile> uploadableFiles = Collections.emptyList();
     private int currentSelectedPosition = 0;
     /*
