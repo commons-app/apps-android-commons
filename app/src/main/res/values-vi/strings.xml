@@ -24,10 +24,6 @@
   <string name="commons_github">Mã nguồn Commons tại GitHub</string>
   <string name="commons_logo">Biểu trưng Commons</string>
   <string name="commons_website">Trang Web Commons</string>
-  <string name="exit_location_picker">Thoát bộ chọn vị trí</string>
-  <string name="submit">Gửi</string>
-  <string name="add_another_description">Thêm một mô tả khác</string>
-  <string name="row_item_language_description">Mô tả ngôn ngữ</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d tập tin đang được tải lên</item>
     <item quantity="other">%1$d tập tin đang được tải lên</item>
