@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
+import androidx.work.BackoffPolicy;
 import androidx.work.Constraints;
 import androidx.work.ExistingWorkPolicy;
 import androidx.work.NetworkType;
@@ -12,6 +13,7 @@ import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.upload.worker.UploadWorker;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
+import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -83,6 +85,7 @@ public class ContributionsPresenter implements UserActionListener {
                     .Builder(UploadWorker.class)
                     .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
                     .setConstraints(constraints)
+                    .setBackoffCriteria(BackoffPolicy.LINEAR, 10, TimeUnit.SECONDS)
                     .build();
                 WorkManager.getInstance(view.getContext().getApplicationContext())
                     .enqueueUniqueWork(
