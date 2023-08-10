@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Chaduvari
+* Nskjnv
 * Ravichandra
 * Veeven
 -->
@@ -11,6 +12,8 @@
   <string name="commons_website">కామన్స్ వెబ్‌సైటు</string>
   <string name="exit_location_picker">స్థానం ఎంపిక నుండి నిష్క్రమించు</string>
   <string name="submit">పంపించు</string>
+  <string name="add_another_description">మరొక వివరణను జోడించండి</string>
+  <string name="add_new_contribution">కొత్త సహకారాన్ని జోడించండి</string>
   <string name="appwidget_img">నేటి బొమ్మ</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d ఫైలు అప్‌లోడవుతోంది</item>
