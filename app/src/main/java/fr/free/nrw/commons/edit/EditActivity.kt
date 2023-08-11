@@ -3,6 +3,7 @@ package fr.free.nrw.commons.edit
 import android.animation.Animator
 import android.animation.Animator.AnimatorListener
 import android.animation.ValueAnimator
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.graphics.drawable.BitmapDrawable
@@ -154,6 +155,10 @@ class EditActivity : AppCompatActivity() {
         val filePath = imageUri.toUri().path
         val file = filePath?.let { File(it) }
         val rotatedImage = file?.let { vm.rotateImage(imageRotation, it) }
+        val resultIntent = Intent()
+        resultIntent.putExtra("editedImageFilePath",rotatedImage ?: "Error" );
+        setResult(RESULT_OK, resultIntent);
+        finish();
 
     }
 

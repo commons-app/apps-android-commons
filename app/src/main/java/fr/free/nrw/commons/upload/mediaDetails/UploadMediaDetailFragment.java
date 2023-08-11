@@ -6,6 +6,7 @@ import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,7 @@ import fr.free.nrw.commons.upload.UploadMediaDetailAdapter;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+import java.io.File;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -56,6 +58,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     UploadMediaDetailsContract.View, UploadMediaDetailAdapter.EventListener {
 
     private static final int REQUEST_CODE = 1211;
+    private static final int REQUEST_CODE_FOR_EDIT_ACTIVITY = 1212;
+
+
     /**
      * A key for applicationKvStore.
      * By this key we can retrieve the location of last UploadItem ex. 12.3433,54.78897
@@ -242,9 +247,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @OnClick(R.id.edit_image)
     public void onEditButtonClicked() {
+
         Intent intent = new Intent(getContext(), EditActivity.class);
         intent.putExtra("image",uploadableFile.getFilePath().toString());
-        startActivity(intent);
+        startActivityForResult(intent, REQUEST_CODE_FOR_EDIT_ACTIVITY);
     }
 
     @Override
@@ -523,6 +529,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 }
             }
         }
+        if (requestCode == REQUEST_CODE_FOR_EDIT_ACTIVITY && resultCode == RESULT_OK) {
+            String result = data.getStringExtra("editedImageFilePath");
+            String uriOfEditedImage = Uri.fromFile(new File(result)).toString();
+
+
+        }
+
     }
 
     /**
