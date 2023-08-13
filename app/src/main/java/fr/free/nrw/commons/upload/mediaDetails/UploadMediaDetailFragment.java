@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -532,6 +533,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         if (requestCode == REQUEST_CODE_FOR_EDIT_ACTIVITY && resultCode == RESULT_OK) {
             String result = data.getStringExtra("editedImageFilePath");
             String uriOfEditedImage = Uri.fromFile(new File(result)).toString();
+            Log.e("URI", uriOfEditedImage);
 
 
         }

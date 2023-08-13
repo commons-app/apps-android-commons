@@ -156,7 +156,7 @@ class EditActivity : AppCompatActivity() {
         val file = filePath?.let { File(it) }
         val rotatedImage = file?.let { vm.rotateImage(imageRotation, it) }
         val resultIntent = Intent()
-        resultIntent.putExtra("editedImageFilePath",rotatedImage ?: "Error" );
+        resultIntent.putExtra("editedImageFilePath",rotatedImage?.toUri()?.path ?: "Error" );
         setResult(RESULT_OK, resultIntent);
         finish();
 
