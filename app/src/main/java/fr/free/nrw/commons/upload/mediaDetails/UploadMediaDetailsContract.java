@@ -36,6 +36,8 @@ public interface UploadMediaDetailsContract {
 
         void showExternalMap(UploadItem uploadItem);
 
+        void showEditActivity(UploadItem uploadItem);
+
         void updateMediaDetails(List<UploadMediaDetail> uploadMediaDetails);
 
         void displayAddLocationDialog(Runnable runnable);
@@ -54,6 +56,9 @@ public interface UploadMediaDetailsContract {
         void useSimilarPictureCoordinates(ImageCoordinates imageCoordinates, int uploadItemIndex);
 
         void onMapIconClicked(int indexInViewFlipper);
+
+        void onEditButtonClicked(int indexInViewFlipper);
+
 
         void onUserConfirmedUploadIsOfPlace(Place place, int uploadItemPosition);
     }

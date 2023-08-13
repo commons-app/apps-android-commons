@@ -31,7 +31,7 @@ public class UploadItem {
      * Uri of uploadItem
      * Uri points to image location or name, eg content://media/external/images/camera/10495 (Android 10)
      */
-    private final Uri contentUri;
+    private  Uri contentUri;
 
 
     @SuppressLint("CheckResult")
@@ -160,4 +160,9 @@ public class UploadItem {
     public String getCountryCode() {
         return countryCode;
     }
+    public void setContentUri(Uri uri) {
+        contentUri = uri;
+    }
+
+
 }

@@ -5,9 +5,12 @@ import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
 import android.annotation.SuppressLint;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,9 +66,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
 
     /**
-     * A key for applicationKvStore.
-     * By this key we can retrieve the location of last UploadItem ex. 12.3433,54.78897
-     * from applicationKvStore.
+     * A key for applicationKvStore. By this key we can retrieve the location of last UploadItem ex.
+     * 12.3433,54.78897 from applicationKvStore.
      */
     public static final String LAST_LOCATION = "last_location_while_uploading";
     public static final String LAST_ZOOM = "last_zoom_level_while_uploading";
@@ -109,14 +111,14 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private boolean isExpanded = true;
 
     /**
-     * True if location is added via the "missing location" popup dialog (which appears after tapping
-     * "Next" if the picture has no geographical coordinates).
+     * True if location is added via the "missing location" popup dialog (which appears after
+     * tapping "Next" if the picture has no geographical coordinates).
      */
     private boolean isMissingLocationDialog;
 
     /**
-     * showNearbyFound will be true, if any nearby location found that needs pictures and the nearby popup is yet to be shown
-     * Used to show and check if the nearby found popup is already shown
+     * showNearbyFound will be true, if any nearby location found that needs pictures and the nearby
+     * popup is yet to be shown Used to show and check if the nearby found popup is already shown
      */
     private boolean showNearbyFound;
 
@@ -180,7 +182,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         }
 
         //If this is the last media, we have nothing to copy, lets not show the button
-        if (callback.getIndexInViewFlipper(this) == callback.getTotalNumberOfSteps()-4) {
+        if (callback.getIndexInViewFlipper(this) == callback.getTotalNumberOfSteps() - 4) {
             btnCopyToSubsequentMedia.setVisibility(View.GONE);
         } else {
             btnCopyToSubsequentMedia.setVisibility(View.VISIBLE);
@@ -212,7 +214,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * init the description recycler veiw and caption recyclerview
      */
     private void initRecyclerView() {
-        uploadMediaDetailAdapter = new UploadMediaDetailAdapter(defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, ""), recentLanguagesDao);
+        uploadMediaDetailAdapter = new UploadMediaDetailAdapter(
+            defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, ""), recentLanguagesDao);
         uploadMediaDetailAdapter.setCallback(this::showInfoAlert);
         uploadMediaDetailAdapter.setEventListener(this);
         rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -221,11 +224,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     /**
      * show dialog with info
+     *
      * @param titleStringID
      * @param messageStringId
      */
     private void showInfoAlert(int titleStringID, int messageStringId) {
-        DialogUtil.showAlertDialog(getActivity(), getString(titleStringID), getString(messageStringId), getString(android.R.string.ok), null, true);
+        DialogUtil.showAlertDialog(getActivity(), getString(titleStringID),
+            getString(messageStringId), getString(android.R.string.ok), null, true);
     }
 
     @OnClick(R.id.btn_next)
@@ -243,16 +248,15 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         UploadMediaDetail uploadMediaDetail = new UploadMediaDetail();
         uploadMediaDetail.setManuallyAdded(true);//This was manually added by the user
         uploadMediaDetailAdapter.addDescription(uploadMediaDetail);
-        rvDescriptions.smoothScrollToPosition(uploadMediaDetailAdapter.getItemCount()-1);
+        rvDescriptions.smoothScrollToPosition(uploadMediaDetailAdapter.getItemCount() - 1);
     }
 
     @OnClick(R.id.edit_image)
     public void onEditButtonClicked() {
+        presenter.onEditButtonClicked(callback.getIndexInViewFlipper(this));
 
-        Intent intent = new Intent(getContext(), EditActivity.class);
-        intent.putExtra("image",uploadableFile.getFilePath().toString());
-        startActivityForResult(intent, REQUEST_CODE_FOR_EDIT_ACTIVITY);
     }
+
 
     @Override
     public void showSimilarImageFragment(String originalFilePath, String possibleFilePath,
@@ -262,7 +266,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             @Override
             public void onPositiveResponse() {
                 Timber.d("positive response from similar image fragment");
-                presenter.useSimilarPictureCoordinates(similarImageCoordinates, callback.getIndexInViewFlipper(UploadMediaDetailFragment.this));
+                presenter.useSimilarPictureCoordinates(similarImageCoordinates,
+                    callback.getIndexInViewFlipper(UploadMediaDetailFragment.this));
 
                 // set the description text when user selects to use coordinate from the other image
                 // which was taken within 20s
@@ -290,7 +295,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     /**
-     * Sets variables to Show popup if any nearby location needing pictures matches uploadable picture's GPS location
+     * Sets variables to Show popup if any nearby location needing pictures matches uploadable
+     * picture's GPS location
+     *
      * @param uploadItem
      * @param place
      */
@@ -299,7 +306,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         nearbyPlace = place;
         this.uploadItem = uploadItem;
         showNearbyFound = true;
-        if(callback.getIndexInViewFlipper(this) == 0) {
+        if (callback.getIndexInViewFlipper(this) == 0) {
             if (UploadActivity.nearbyPopupAnswers.containsKey(nearbyPlace)) {
                 final boolean response = UploadActivity.nearbyPopupAnswers.get(nearbyPlace);
                 if (response) {
@@ -315,9 +322,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     /**
      * Shows nearby place found popup
+     *
      * @param place
      */
-    @SuppressLint("StringFormatInvalid") // To avoid the unwanted lint warning that string 'upload_nearby_place_found_description' is not of a valid format
+    @SuppressLint("StringFormatInvalid")
+    // To avoid the unwanted lint warning that string 'upload_nearby_place_found_description' is not of a valid format
     private void showNearbyPlaceFound(Place place) {
         final View customLayout = getLayoutInflater().inflate(R.layout.custom_nearby_found, null);
         ImageView nearbyFoundImage = customLayout.findViewById(R.id.nearbyItemImage);
@@ -329,7 +338,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 place.getName()),
             () -> {
                 UploadActivity.nearbyPopupAnswers.put(place, true);
-                presenter.onUserConfirmedUploadIsOfPlace(place, callback.getIndexInViewFlipper(this));
+                presenter.onUserConfirmedUploadIsOfPlace(place,
+                    callback.getIndexInViewFlipper(this));
             },
             () -> {
                 UploadActivity.nearbyPopupAnswers.put(place, false);
@@ -354,7 +364,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     protected void onBecameVisible() {
         super.onBecameVisible();
         presenter.fetchTitleAndDescription(callback.getIndexInViewFlipper(this));
-        if(showNearbyFound) {
+        if (showNearbyFound) {
             if (UploadActivity.nearbyPopupAnswers.containsKey(nearbyPlace)) {
                 final boolean response = UploadActivity.nearbyPopupAnswers.get(nearbyPlace);
                 if (response) {
@@ -444,7 +454,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         DialogUtil.showAlertDialog(getActivity(),
             getString(R.string.upload_connection_error_alert_title),
             getString(R.string.upload_connection_error_alert_detail), getString(R.string.ok),
-            () -> {}, true);
+            () -> {
+            }, true);
     }
 
     @Override
@@ -452,9 +463,23 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         goToLocationPickerActivity(uploadItem);
     }
 
+    @Override
+    public void showEditActivity(UploadItem uploadItem) {
+        Log.e("Upload Item", uploadItem.getContentUri().toString());
+        Log.e("Upload Item", uploadItem.getMediaUri().toString());
+
+        editableUploadItem = uploadItem;
+        Intent intent = new Intent(getContext(), EditActivity.class);
+        intent.putExtra("image", uploadableFile.getFilePath().toString());
+        startActivityForResult(intent, REQUEST_CODE_FOR_EDIT_ACTIVITY);
+
+
+    }
+
     /**
      * Start Location picker activity. Show the location first then user can modify it by clicking
      * modify location button.
+     *
      * @param uploadItem current upload item
      */
     private void goToLocationPickerActivity(final UploadItem uploadItem) {
@@ -484,7 +509,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 defaultLatitude = Double.parseDouble(locationLatLng[0]);
                 defaultLongitude = Double.parseDouble(locationLatLng[1]);
             }
-            if(defaultKvStore.getString(LAST_ZOOM) != null){
+            if (defaultKvStore.getString(LAST_ZOOM) != null) {
                 defaultZoom = Double.parseDouble(defaultKvStore.getString(LAST_ZOOM));
             }
             startActivityForResult(new LocationPicker.IntentBuilder()
@@ -499,9 +524,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     /**
      * Get the coordinates and update the existing coordinates.
+     *
      * @param requestCode code of request
-     * @param resultCode code of result
-     * @param data intent
+     * @param resultCode  code of result
+     * @param data        intent
      */
     @Override
     public void onActivityResult(final int requestCode, final int resultCode,
@@ -519,12 +545,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 final String longitude = String.valueOf(cameraPosition.target.getLongitude());
                 final double zoom = cameraPosition.zoom;
 
-                editLocation(latitude, longitude,zoom);
+                editLocation(latitude, longitude, zoom);
                 /*
                        If isMissingLocationDialog is true, it means that the user has already tapped the
                        "Next" button, so go directly to the next step.
                  */
-                if(isMissingLocationDialog){
+                if (isMissingLocationDialog) {
                     isMissingLocationDialog = false;
                     onNextButtonClicked();
                 }
@@ -532,8 +558,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         }
         if (requestCode == REQUEST_CODE_FOR_EDIT_ACTIVITY && resultCode == RESULT_OK) {
             String result = data.getStringExtra("editedImageFilePath");
-            String uriOfEditedImage = Uri.fromFile(new File(result)).toString();
-            Log.e("URI", uriOfEditedImage);
+            try {
+                editableUploadItem.setContentUri(
+                    convertFileToContentUri(requireContext(), new File(result)));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
 
         }
@@ -541,15 +571,31 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     /**
+     * Converts a file to a content uri, by inserting it into the media store. Requires this
+     * permission: <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+     */
+    private static Uri convertFileToContentUri(Context context, File file) throws Exception {
+
+        ContentResolver cr = context.getContentResolver();
+        String imagePath = file.getAbsolutePath();
+        String imageName = null;
+        String imageDescription = null;
+        String uriString = MediaStore.Images.Media.insertImage(cr, imagePath, imageName,
+            imageDescription);
+        return Uri.parse(uriString);
+    }
+
+    /**
      * Update the old coordinates with new one
-     * @param latitude new latitude
+     *
+     * @param latitude  new latitude
      * @param longitude new longitude
      */
-    public void editLocation(final String latitude, final String longitude, final double zoom){
+    public void editLocation(final String latitude, final String longitude, final double zoom) {
 
         editableUploadItem.getGpsCoords().setDecLatitude(Double.parseDouble(latitude));
         editableUploadItem.getGpsCoords().setDecLongitude(Double.parseDouble(longitude));
-        editableUploadItem.getGpsCoords().setDecimalCoords(latitude+"|"+longitude);
+        editableUploadItem.getGpsCoords().setDecimalCoords(latitude + "|" + longitude);
         editableUploadItem.getGpsCoords().setImageCoordsExists(true);
         editableUploadItem.getGpsCoords().setZoomLevel(zoom);
         Toast.makeText(getContext(), "Location Updated", Toast.LENGTH_LONG).show();
@@ -595,15 +641,17 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     /**
      * show hide media detail based on
+     *
      * @param shouldExpand
      */
-    private void expandCollapseLlMediaDetail(boolean shouldExpand){
+    private void expandCollapseLlMediaDetail(boolean shouldExpand) {
         llContainerMediaDetail.setVisibility(shouldExpand ? View.VISIBLE : View.GONE);
         isExpanded = !isExpanded;
         ibExpandCollapse.setRotation(ibExpandCollapse.getRotation() + 180);
     }
 
-    @OnClick(R.id.ib_map) public void onIbMapClicked() {
+    @OnClick(R.id.ib_map)
+    public void onIbMapClicked() {
         presenter.onMapIconClicked(callback.getIndexInViewFlipper(this));
     }
 
@@ -611,10 +659,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public void onPrimaryCaptionTextChange(boolean isNotEmpty) {
         btnCopyToSubsequentMedia.setEnabled(isNotEmpty);
         btnCopyToSubsequentMedia.setClickable(isNotEmpty);
-        btnCopyToSubsequentMedia.setAlpha(isNotEmpty ? 1.0f: 0.5f);
+        btnCopyToSubsequentMedia.setAlpha(isNotEmpty ? 1.0f : 0.5f);
         btnNext.setEnabled(isNotEmpty);
         btnNext.setClickable(isNotEmpty);
-        btnNext.setAlpha(isNotEmpty ? 1.0f: 0.5f);
+        btnNext.setAlpha(isNotEmpty ? 1.0f : 0.5f);
     }
 
     public interface UploadMediaDetailFragmentCallback extends Callback {
@@ -624,9 +672,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
 
     @OnClick(R.id.btn_copy_subsequent_media)
-    public void onButtonCopyTitleDescToSubsequentMedia(){
+    public void onButtonCopyTitleDescToSubsequentMedia() {
         presenter.copyTitleAndDescriptionToSubsequentMedia(callback.getIndexInViewFlipper(this));
-        Toast.makeText(getContext(), getResources().getString(R.string.copied_successfully), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), getResources().getString(R.string.copied_successfully),
+            Toast.LENGTH_SHORT).show();
     }
 
 }
