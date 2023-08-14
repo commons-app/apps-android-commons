@@ -370,21 +370,6 @@ public class MainActivity  extends BaseActivity
         }
     }
 
-    /**
-     * Retry all failed uploads as soon as the user returns to the app
-     */
-    @SuppressLint("CheckResult")
-    private void retryAllFailedUploads() {
-        contributionDao.
-            getContribution(Collections.singletonList(Contribution.STATE_FAILED))
-            .subscribeOn(Schedulers.io())
-            .subscribe(failedUploads -> {
-                for (Contribution contribution: failedUploads) {
-                    contributionsFragment.retryUpload(contribution);
-                }
-            });
-    }
-
     public void toggleLimitedConnectionMode() {
         defaultKvStore.putBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED,
             !defaultKvStore
@@ -440,7 +425,6 @@ public class MainActivity  extends BaseActivity
             WelcomeActivity.startYourself(this);
         }
 
-        retryAllFailedUploads();
     }
 
     @Override
