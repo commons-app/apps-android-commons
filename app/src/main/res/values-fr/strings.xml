@@ -327,7 +327,7 @@
   <string name="no_images_found">Aucune image trouvée !</string>
   <string name="error_loading_images">Une erreur s’est produite durant le chargement des images.</string>
   <string name="image_uploaded_by">Téléversé par : %1$s</string>
-  <string name="block_notification_title">Bloqué{{GENDER:||e}}</string>
+  <string name="block_notification_title">{{GENDER:|Bloqué|Bloquée}}</string>
   <string name="block_notification">Vous avez été bloqué et ne pouvez plus modifier sur  Commons</string>
   <string name="app_widget_heading">Image du jour</string>
   <string name="menu_search_button">Chercher</string>

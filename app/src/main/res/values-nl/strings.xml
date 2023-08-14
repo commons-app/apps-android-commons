@@ -435,6 +435,9 @@
   <string name="ends_on">Eindigt op:</string>
   <string name="display_campaigns">Campagnes weergeven</string>
   <string name="display_campaigns_explanation">Bekijk de lopende campagnes</string>
+  <string name="open_document_photo_picker_title">Gebruik een op documenten gebaseerde fotokiezer</string>
+  <string name="open_document_photo_picker_explanation">Met de nieuwe Android-fotokiezer riskeert u het verlies van locatiegegevens. Schakel dit in als u deze lijkt te gebruiken.</string>
+  <string name="location_loss_warning">Als u dit uitschakelt, kan de nieuwe Android-fotokiezer worden geactiveerd. Daarbij bestaat het risico dat locatie-informatie verloren gaat.\n\nTik op \'Lees meer\' voor meer informatie.</string>
   <string name="nearby_campaign_dismiss_message">U ziet de campagnes niet meer. U kunt deze melding desgewenst echter opnieuw inschakelen in de Instellingen.</string>
   <string name="this_function_needs_network_connection">Voor deze functie is een netwerkverbinding vereist, controleer uw verbindingsinstellingen.</string>
   <string name="error_processing_image">Er is een fout opgetreden tijdens het verwerken van de afbeelding. Probeer het opnieuw!</string>
