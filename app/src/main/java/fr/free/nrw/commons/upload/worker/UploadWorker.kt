@@ -105,7 +105,6 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
 
         statesToProcess.add(Contribution.STATE_QUEUED)
         statesToProcess.add(Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE)
-        statesToProcess.add(Contribution.STATE_FAILED)
     }
 
     @dagger.Module
@@ -165,77 +164,75 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
     }
 
     override suspend fun doWork(): Result {
-        var countUpload = 0
-        notificationManager = NotificationManagerCompat.from(appContext)
-        val processingUploads = getNotificationBuilder(
-            CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL
-        )!!
-        withContext(Dispatchers.IO) {
-            val queuedContributions = contributionDao.getContribution(statesToProcess)
-                .blockingGet()
-            //Showing initial notification for the number of uploads being processed
+        try {
+            var countUpload = 0
+            notificationManager = NotificationManagerCompat.from(appContext)
+            val processingUploads = getNotificationBuilder(
+                CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL
+            )!!
+            withContext(Dispatchers.IO) {
+                val queuedContributions = contributionDao.getContribution(statesToProcess)
+                    .blockingGet()
+                //Showing initial notification for the number of uploads being processed
 
-            Timber.e("Queued Contributions: " + queuedContributions.size)
+                Timber.e("Queued Contributions: " + queuedContributions.size)
 
-            processingUploads.setContentTitle(appContext.getString(R.string.starting_uploads))
-            processingUploads.setContentText(
-                appContext.resources.getQuantityString(
-                    R.plurals.starting_multiple_uploads,
-                    queuedContributions.size,
-                    queuedContributions.size
+                processingUploads.setContentTitle(appContext.getString(R.string.starting_uploads))
+                processingUploads.setContentText(
+                    appContext.resources.getQuantityString(
+                        R.plurals.starting_multiple_uploads,
+                        queuedContributions.size,
+                        queuedContributions.size
+                    )
                 )
-            )
-            notificationManager?.notify(
-                PROCESSING_UPLOADS_NOTIFICATION_TAG,
-                PROCESSING_UPLOADS_NOTIFICATION_ID,
-                processingUploads.build()
-            )
+                notificationManager?.notify(
+                    PROCESSING_UPLOADS_NOTIFICATION_TAG,
+                    PROCESSING_UPLOADS_NOTIFICATION_ID,
+                    processingUploads.build()
+                )
 
-            /**
-             * To avoid race condition when multiple of these workers are working, assign this state
-            so that the next one does not process these contribution again
-             */
-            queuedContributions.forEach {
-                it.state = Contribution.STATE_IN_PROGRESS
-                contributionDao.saveSynchronous(it)
-            }
-
-            queuedContributions.asFlow().map { contribution ->
                 /**
-                 * If the limited connection mode is on, lets iterate through the queued
-                 * contributions
-                 * and set the state as STATE_QUEUED_LIMITED_CONNECTION_MODE ,
-                 * otherwise proceed with the upload
+                 * To avoid race condition when multiple of these workers are working, assign this state
+                so that the next one does not process these contribution again
                  */
-                if (isLimitedConnectionModeEnabled()) {
-                    if (contribution.state == Contribution.STATE_QUEUED) {
-                        contribution.state = Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE
-                        contributionDao.saveSynchronous(contribution)
-                    }
-                } else {
-                    contribution.transferred = 0
-                    contribution.state = Contribution.STATE_IN_PROGRESS
-                    contributionDao.saveSynchronous(contribution)
-                    setProgressAsync(Data.Builder().putInt("progress", countUpload).build())
-                    countUpload++
-                    uploadContribution(contribution = contribution)
+                queuedContributions.forEach {
+                    it.state = Contribution.STATE_IN_PROGRESS
+                    contributionDao.saveSynchronous(it)
                 }
-            }.collect()
 
-            //Dismiss the global notification
-            notificationManager?.cancel(
-                PROCESSING_UPLOADS_NOTIFICATION_TAG,
-                PROCESSING_UPLOADS_NOTIFICATION_ID
-            )
-        }
+                queuedContributions.asFlow().map { contribution ->
+                    /**
+                     * If the limited connection mode is on, lets iterate through the queued
+                     * contributions
+                     * and set the state as STATE_QUEUED_LIMITED_CONNECTION_MODE ,
+                     * otherwise proceed with the upload
+                     */
+                    if (isLimitedConnectionModeEnabled()) {
+                        if (contribution.state == Contribution.STATE_QUEUED) {
+                            contribution.state = Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE
+                            contributionDao.saveSynchronous(contribution)
+                        }
+                    } else {
+                        contribution.transferred = 0
+                        contribution.state = Contribution.STATE_IN_PROGRESS
+                        contributionDao.saveSynchronous(contribution)
+                        setProgressAsync(Data.Builder().putInt("progress", countUpload).build())
+                        countUpload++
+                        uploadContribution(contribution = contribution)
+                    }
+                }.collect()
 
-        // Retry if any new contribution is added to the queue
-        val updatedContributionsQueue = contributionDao.getContribution(statesToProcess).blockingGet()
-        if (updatedContributionsQueue.isNotEmpty()) {
+                //Dismiss the global notification
+                notificationManager?.cancel(
+                    PROCESSING_UPLOADS_NOTIFICATION_TAG,
+                    PROCESSING_UPLOADS_NOTIFICATION_ID
+                )
+            }
+            //TODO make this smart, think of handling retries in the future
+            return Result.success()
+        } catch (e: Exception) {
             return Result.retry()
         }
-
-        return Result.success()
     }
 
     override suspend fun getForegroundInfo(): ForegroundInfo {
