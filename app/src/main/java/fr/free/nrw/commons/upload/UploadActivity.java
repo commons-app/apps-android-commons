@@ -41,6 +41,7 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.location.LocationPermissionsHelper;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.mwapi.UserClient;
 import fr.free.nrw.commons.nearby.Place;
@@ -384,7 +385,13 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             fragments = new ArrayList<>();
             for (UploadableFile uploadableFile : uploadableFiles) {
                 UploadMediaDetailFragment uploadMediaDetailFragment = new UploadMediaDetailFragment();
-                currLocation = locationManager.getLastLocation();
+
+                LocationPermissionsHelper locationPermissionsHelper = new LocationPermissionsHelper(
+                                                                    this, locationManager, null);
+                if (locationPermissionsHelper.isLocationAccessToAppsTurnedOn()) {
+                    currLocation = locationManager.getLastLocation();
+                }
+
                 if (currLocation != null) {
                     float locationDifference = getLocationDifference(currLocation, prevLocation);
                     boolean isLocationTagUnchecked = isLocationTagUncheckedInTheSettings();

@@ -17,6 +17,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationPermissionsHelper;
 import fr.free.nrw.commons.location.LocationPermissionsHelper.Dialog;
+import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.UploadActivity;
@@ -60,18 +61,8 @@ public class ContributionController {
                     if (defaultKvStore.getBoolean("inAppCameraFirstRun")) {
                         defaultKvStore.putBoolean("inAppCameraFirstRun", false);
                         askUserToAllowLocationAccess(activity);
-                    } else if(!PermissionUtils.hasPermission(activity,
-                        Manifest.permission.ACCESS_FINE_LOCATION)
-                        && defaultKvStore.getBoolean("inAppCameraLocationPref")) {
+                    } else if(defaultKvStore.getBoolean("inAppCameraLocationPref")) {
                         createDialogsAndHandleLocationPermissions(activity);
-                    } else if (!isLocationAccessToAppsTurnedOn()
-                               && defaultKvStore.getBoolean("inAppCameraLocationPref")) {
-                        Toast.makeText(
-                            activity,
-                            R.string.in_app_camera_location_permission_denied,
-                            Toast.LENGTH_LONG
-                        ).show();
-                        initiateCameraUpload(activity);
                     } else {
                         initiateCameraUpload(activity);
                     }
@@ -97,13 +88,21 @@ public class ContributionController {
         );
         LocationPermissionsHelper locationPermissionsHelper = new LocationPermissionsHelper(
             activity, locationManager,
-            () -> {
-                Toast.makeText(
-                    activity,
-                    R.string.in_app_camera_location_permission_denied,
-                    Toast.LENGTH_LONG
-                ).show();
-                initiateCameraUpload(activity);
+            new LocationPermissionCallback() {
+                @Override
+                public void onLocationPermissionDenied(int message) {
+                    Toast.makeText(
+                        activity,
+                        message,
+                        Toast.LENGTH_LONG
+                    ).show();
+                    initiateCameraUpload(activity);
+                }
+
+                @Override
+                public void onLocationPermissionGranted() {
+                    initiateCameraUpload(activity);
+                }
             }
         );
         locationPermissionsHelper.handleLocationPermissions(

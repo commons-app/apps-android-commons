@@ -8,6 +8,7 @@ import android.provider.Settings;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
+import timber.log.Timber;
 
 /**
  * Helper class to handle location permissions
@@ -54,14 +55,24 @@ public class LocationPermissionsHelper {
         Dialog locationAccessDialog,
         Dialog locationOffDialog
     ) {
+        Timber.d("Inside requestForLocationAccess()");
         PermissionUtils.checkPermissionsAndPerformAction(activity,
             permission.ACCESS_FINE_LOCATION,
             () -> {
                 if(!isLocationAccessToAppsTurnedOn()) {
                     showLocationOffDialog(locationOffDialog);
+                } else {
+                    if (callback != null) {
+                        callback.onLocationPermissionGranted();
+                    }
                 }
             },
-            callback::onLocationPermissionDenied,
+            () -> {
+                Timber.d("Inside onPermissionDenied");
+                if (callback != null) {
+                    callback.onLocationPermissionDenied(R.string.in_app_camera_location_permission_denied);
+                }
+            },
             locationAccessDialog.dialogTitleResource,
             locationAccessDialog.dialogTextResource);
     }
@@ -71,7 +82,7 @@ public class LocationPermissionsHelper {
      *
      * @return
      */
-    private boolean isLocationAccessToAppsTurnedOn() {
+    public boolean isLocationAccessToAppsTurnedOn() {
         return (locationManager.isNetworkProviderEnabled() || locationManager.isGPSProviderEnabled());
     }
 
@@ -86,8 +97,9 @@ public class LocationPermissionsHelper {
                 activity.getString(locationOffDialog.dialogTitleResource),
                 activity.getString(locationOffDialog.dialogTextResource),
                 activity.getString(R.string.title_app_shortcut_setting),
+                activity.getString(R.string.cancel),
                 () -> openLocationSettings(),
-                true);
+                () -> callback.onLocationPermissionDenied(R.string.in_app_camera_location_unavailable));
     }
 
     /**
@@ -109,6 +121,7 @@ public class LocationPermissionsHelper {
      * Handle onPermissionDenied within individual classes based on the requirements
      */
     public interface LocationPermissionCallback {
-        void onLocationPermissionDenied();
+        void onLocationPermissionDenied(int message);
+        void onLocationPermissionGranted();
     }
 }
