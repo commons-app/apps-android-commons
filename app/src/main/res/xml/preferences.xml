@@ -65,6 +65,17 @@
           android:title="@string/use_external_storage" />
 
         <SwitchPreference
+          android:key="inAppCameraLocationPref"
+          android:title="@string/in_app_camera_location_permission_title"
+          android:summary="@string/in_app_camera_location_switch_pref_summary"/>
+
+        <SwitchPreference
+          android:defaultValue="true"
+          android:key="openDocumentPhotoPickerPref"
+          android:summary="@string/open_document_photo_picker_explanation"
+          android:title="@string/open_document_photo_picker_title"/>
+
+        <SwitchPreference
           android:key="useAuthorName"
           app:singleLineTitle="false"
           android:summary="@string/preference_author_name_toggle_summary"
@@ -76,17 +87,6 @@
           app:dependency="useAuthorName"
           app:useSimpleSummaryProvider="true"
           android:title="@string/preference_author_name" />
-
-        <SwitchPreference
-            android:defaultValue="true"
-            android:key="openDocumentPhotoPickerPref"
-            android:summary="@string/open_document_photo_picker_explanation"
-            android:title="@string/open_document_photo_picker_title"/>
-
-        <SwitchPreference
-          android:key="inAppCameraLocationPref"
-          android:title="@string/in_app_camera_location_permission_title"
-          android:summary="@string/in_app_camera_location_switch_pref_summary"/>
 
     </PreferenceCategory>
 

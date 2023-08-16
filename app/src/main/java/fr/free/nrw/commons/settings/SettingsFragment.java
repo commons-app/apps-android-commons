@@ -190,6 +190,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             findPreference("displayLocationPermissionForCardView").setEnabled(false);
             findPreference(CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE).setEnabled(false);
             findPreference("managed_exif_tags").setEnabled(false);
+            findPreference("openDocumentPhotoPickerPref").setEnabled(false);
+            findPreference("inAppCameraLocationPref").setEnabled(false);
         }
     }
 
