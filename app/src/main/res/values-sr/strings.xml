@@ -407,6 +407,8 @@
   <string name="review_thanks">Да ли желите да се захвалите доприносиоцу?</string>
   <string name="review_no_category">Ох, ово чак није категоризовано!</string>
   <string name="review_category_explanation">Ова слика је под %1$s категорије.</string>
+  <string name="review_spam_report_question">Ван делокруга пројекта зато што</string>
+  <string name="review_c_violation_report_question">Крши ауторска права зато што</string>
   <string name="review_thanks_yes_button_text">Следећа слика</string>
   <string name="review_thanks_no_button_text">Да, зашто не</string>
   <string name="no_image">Нема коришћених датотека</string>
@@ -484,10 +486,13 @@
   <string name="theme_default_name">Као на уређају</string>
   <string name="theme_dark_name">Тамна</string>
   <string name="theme_light_name">Светла</string>
+  <string name="ask_to_turn_location_on">Укључи локацију?</string>
   <string name="load_more">Учитај још</string>
   <string name="add_picture_to_wikipedia_article_title">Додај слику на Википедији</string>
   <string name="confirm">Потврди</string>
   <string name="instructions_title">Упутства</string>
+  <string name="pause">паузирај</string>
+  <string name="resume">настави</string>
   <string name="paused">Паузирано</string>
   <string name="more">Више</string>
   <string name="bookmarks">Обележивачи</string>
@@ -530,6 +535,7 @@
   <string name="custom_selector_empty_text">Нема слика</string>
   <string name="done">Готово</string>
   <string name="back">Назад</string>
+  <string name="welcome_custom_selector_ok">Одлично</string>
   <string name="custom_selector_already_uploaded_image_text">Ова слика је већ отпремљена на Оставу.</string>
   <string name="wlm_campaign_title">Вики воли споменике</string>
   <string name="need_permission">Потребна је дозвола</string>
@@ -551,4 +557,8 @@
   <string name="no_more_images_found">Није пронађено више слика</string>
   <string name="this_image_is_already_uploaded">Ова слика је већ отпремљена</string>
   <string name="image_selected">Одабрана слика</string>
+  <string name="menu_view_report">Пријави</string>
+  <string name="report_user">Пријави овог корисника</string>
+  <string name="report_content">Пријави овај садржај</string>
+  <string name="request_user_block">Захтевај блокаду овог корисника</string>
 </resources>

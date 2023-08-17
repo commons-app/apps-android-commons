@@ -134,7 +134,7 @@
   <string name="provider_modifications">修改</string>
   <string name="menu_upload_single">上傳</string>
   <string name="categories_search_text_hint">搜尋分類</string>
-  <string name="depicts_search_text_hint">搜索您的媒體描繪的項目（山、泰姬陵等）</string>
+  <string name="depicts_search_text_hint">搜尋您的媒體描繪項目（山、泰姬瑪哈陵等）</string>
   <string name="menu_save_categories">儲存</string>
   <string name="refresh_button">重新整理</string>
   <string name="display_list_button">清單</string>
@@ -308,7 +308,7 @@
   <string name="about_translate_proceed">繼續</string>
   <string name="about_translate_cancel">取消</string>
   <string name="retry">重試</string>
-  <string name="showcase_view_whole_nearby_activity">這些是您附近的地方，需要圖片來說明其維基百科文章。\n\n單擊“搜索此區域”會鎖定地圖並啟動該位置周圍的附近搜索。</string>
+  <string name="showcase_view_whole_nearby_activity">這些是您附近的地方，需要圖片來說明其維基百科條目。\n\n點擊「搜尋此區域」會鎖定地圖，並啟動對該位置周圍附近的搜尋。</string>
   <string name="showcase_view_needs_photo">此地點需要照片。</string>
   <string name="showcase_view_has_photo">此地點已有照片。</string>
   <string name="showcase_view_no_longer_exists">此地點已不存在。</string>
@@ -414,7 +414,7 @@
   <string name="deletion_reason_bad_for_my_privacy">我認為這會干擾到我的隱私</string>
   <string name="deletion_reason_no_longer_want_public">我改變我的主意，我不想要公開可見</string>
   <string name="deletion_reason_not_interesting">真抱歉，此圖片對於百科全書沒有意義</string>
-  <string name="uploaded_by_myself">我自己在%1$s上上傳，在%2$d篇文章中使用。</string>
+  <string name="uploaded_by_myself">我自己在%1$s上上傳，在%2$d篇條目中使用。</string>
   <string name="no_uploads">歡迎來到維基共享資源！\n\n透過觸碰添加按鈕來上傳您的首個多媒體內容。</string>
   <string name="no_categories_selected">未選擇分類</string>
   <string name="no_categories_selected_warning_desc">不帶分類的圖片很難有機會被利用到，您確定您要不選擇分類來繼續嗎？</string>
@@ -594,7 +594,7 @@
   <string name="missing_category">- 添加分類到此圖片以增加可用性。</string>
   <string name="missing_article">- 添加此圖片到相關但尚未有圖片的維基百科條目。</string>
   <string name="add_picture_to_wikipedia_article_title">添加圖片到維基百科</string>
-  <string name="add_picture_to_wikipedia_article_desc">您想將此圖片添加到%1$s語言維基百科文章中嗎？</string>
+  <string name="add_picture_to_wikipedia_article_desc">您想將此圖片添加到%1$s語言維基百科條目中嗎？</string>
   <string name="confirm">確認</string>
   <string name="instructions_title">說明</string>
   <string name="wikipedia_instructions_step_1">1. 使用以下wikitext：</string>
