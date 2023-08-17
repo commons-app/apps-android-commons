@@ -76,6 +76,7 @@
   <string name="login_success">Login success!</string>
   <string name="login_failed">Login failed!</string>
   <string name="upload_failed">File not found. Please try another file.</string>
+  <string name="retry_limit_reached">Maximum retry limit reached! Please cancel the upload and try again</string>
   <string name="authentication_failed">Authentication failed, please login again</string>
   <string name="uploading_started">Upload started!</string>
   <string name="uploading_queued">Upload queued (limited connection mode enabled)</string>

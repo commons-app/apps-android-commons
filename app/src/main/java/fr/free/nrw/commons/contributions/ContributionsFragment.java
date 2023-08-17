@@ -92,6 +92,7 @@ public class ContributionsFragment
     private static final String CONTRIBUTION_LIST_FRAGMENT_TAG = "ContributionListFragmentTag";
     private MediaDetailPagerFragment mediaDetailPagerFragment;
     static final String MEDIA_DETAIL_PAGER_FRAGMENT_TAG = "MediaDetailFragmentTag";
+    private static final int MAX_RETRIES = 10;
 
     @BindView(R.id.card_view_nearby) public NearbyNotificationCardView nearbyNotificationCardView;
     @BindView(R.id.campaigns_view) CampaignView campaignView;
@@ -594,6 +595,15 @@ public class ContributionsFragment
     }
 
     /**
+     * Restarts the upload process for a contribution
+     * @param contribution
+     */
+    public void restartUpload(Contribution contribution) {
+        contribution.setState(Contribution.STATE_QUEUED);
+        contributionsPresenter.saveContribution(contribution);
+        Timber.d("Restarting for %s", contribution.toString());
+    }
+    /**
      * Retry upload when it is failed
      *
      * @param contribution contribution to be retried
@@ -601,10 +611,22 @@ public class ContributionsFragment
     @Override
     public void retryUpload(Contribution contribution) {
         if (NetworkUtils.isInternetConnectionEstablished(getContext())) {
-            if (contribution.getState() == STATE_FAILED || contribution.getState() == STATE_PAUSED || contribution.getState()==Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE) {
-                contribution.setState(Contribution.STATE_QUEUED);
-                contributionsPresenter.saveContribution(contribution);
-                Timber.d("Restarting for %s", contribution.toString());
+            if (contribution.getState() == STATE_PAUSED || contribution.getState()==Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE) {
+                restartUpload(contribution);
+            } else if (contribution.getState() == STATE_FAILED) {
+                int retries = contribution.getRetries();
+                /* Limit the number of retries for a failed upload
+                   to handle cases like invalid filename as such uploads
+                   will never be successful */
+                if(retries < MAX_RETRIES) {
+                    contribution.setRetries(retries + 1);
+                    Timber.d("Retried %d times", retries + 1);
+                    restartUpload(contribution);
+                } else {
+                    // TODO: Show the exact reason for failure
+                    Toast.makeText(getContext(),
+                        R.string.retry_limit_reached, Toast.LENGTH_SHORT).show();
+                }
             } else {
                 Timber.d("Skipping re-upload for non-failed %s", contribution.toString());
             }
