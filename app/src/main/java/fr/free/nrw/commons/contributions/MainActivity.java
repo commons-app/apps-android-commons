@@ -148,6 +148,9 @@ public class MainActivity  extends BaseActivity
             setTitle(getString(R.string.navigation_item_explore));
             setUpLoggedOutPager();
         } else {
+            if (applicationKvStore.getBoolean("firstrun", true)) {
+                applicationKvStore.putBoolean("firstBigUploadSet", true);
+            }
             if(savedInstanceState == null){
                 //starting a fresh fragment.
                 // Open Last opened screen if it is Contributions or Nearby, otherwise Contributions

@@ -378,6 +378,19 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                     .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
 
             fragments = new ArrayList<>();
+            // Suggest users to switch to Unrestricted battery usage mode
+            if (uploadableFiles.size() > 3
+                && defaultKvStore.getBoolean("firstBigUploadSet")) {
+                DialogUtil.showAlertDialog(
+                    this,
+                    getString(R.string.unrestricted_battery_mode),
+                    getString(R.string.suggest_unrestricted_mode),
+                    getString(R.string.ok),
+                    () -> {},
+                    true
+                );
+                defaultKvStore.putBoolean("firstBigUploadSet", false);
+            }
             for (UploadableFile uploadableFile : uploadableFiles) {
                 UploadMediaDetailFragment uploadMediaDetailFragment = new UploadMediaDetailFragment();
                 uploadMediaDetailFragment.setImageTobeUploaded(uploadableFile, place);
