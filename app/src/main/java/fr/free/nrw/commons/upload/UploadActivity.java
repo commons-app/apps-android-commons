@@ -34,6 +34,7 @@ import androidx.work.WorkManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.waseemsabir.betterypermissionhelper.BatteryPermissionHelper;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.LoginActivity;
@@ -385,9 +386,17 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                     this,
                     getString(R.string.unrestricted_battery_mode),
                     getString(R.string.suggest_unrestricted_mode),
-                    getString(R.string.ok),
-                    () -> {},
-                    true
+                    getString(R.string.title_activity_settings),
+                    getString(R.string.cancel),
+                    () -> {
+                        BatteryPermissionHelper batteryPermissionHelper = BatteryPermissionHelper
+                                                                            .Companion.getInstance();
+                        boolean isBatteryPermissionAvailable = batteryPermissionHelper.
+                            isBatterySaverPermissionAvailable(this, true);
+                        Timber.d("BatteryPermissionAvailable = " + isBatteryPermissionAvailable);
+                        batteryPermissionHelper.getPermission(this, true, true);
+                    },
+                    () -> {}
                 );
                 defaultKvStore.putBoolean("firstBigUploadSet", false);
             }
