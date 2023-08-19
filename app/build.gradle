@@ -154,8 +154,6 @@ dependencies {
 
     implementation("io.github.coordinates2country:coordinates2country-android:1.3") {  exclude group: 'com.google.android', module: 'android' }
 
-    // Battery Permission Helper
-    implementation 'com.waseemsabir:betterypermissionhelper:1.0.0'
 }
 
 task disableAnimations(type: Exec) {

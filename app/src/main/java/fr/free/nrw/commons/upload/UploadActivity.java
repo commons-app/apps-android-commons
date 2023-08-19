@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.upload;
 
 import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
-import static fr.free.nrw.commons.upload.UploadPresenter.COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 import android.Manifest;
@@ -9,13 +8,13 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -34,13 +33,11 @@ import androidx.work.WorkManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.waseemsabir.betterypermissionhelper.BatteryPermissionHelper;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionController;
-import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.UserClient;
@@ -389,12 +386,9 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                     getString(R.string.title_activity_settings),
                     getString(R.string.cancel),
                     () -> {
-                        BatteryPermissionHelper batteryPermissionHelper = BatteryPermissionHelper
-                                                                            .Companion.getInstance();
-                        boolean isBatteryPermissionAvailable = batteryPermissionHelper.
-                            isBatterySaverPermissionAvailable(this, true);
-                        Timber.d("BatteryPermissionAvailable = " + isBatteryPermissionAvailable);
-                        batteryPermissionHelper.getPermission(this, true, true);
+                        Intent batteryOptimisationSettingsIntent = new Intent(
+                            Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+                        startActivity(batteryOptimisationSettingsIntent);
                     },
                     () -> {}
                 );
