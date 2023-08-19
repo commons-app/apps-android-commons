@@ -78,7 +78,7 @@
   <string name="upload_failed">File not found. Please try another file.</string>
   <string name="retry_limit_reached">Maximum retry limit reached! Please cancel the upload and try again</string>
   <string name="unrestricted_battery_mode">Turn battery optimisations off</string>
-  <string name="suggest_unrestricted_mode">Uploading more than 3 images works more reliably when the battery optimisations are turned off. Please turn battery optimisations off for the Commons app from the settings for a smooth upload experience.</string>
+  <string name="suggest_unrestricted_mode">Uploading more than 3 images works more reliably when the battery optimisations are turned off. Please turn battery optimisations off for the Commons app or fr.free.nrw.commons from the settings for a smooth upload experience. \n\nPossible steps to turn battery optimisation off:\n\nStep 1: Tap on the \'Settings\' button below.\n\nStep 2: Switch from \'Not optimised\' to \'All apps\'.\n\nStep 3: Scroll to find the Commons app or fr.free.nrw.commons.\n\nStep 4: Tap it and select \'Don\'t optimise\'.\n\nStep 5: Press \'Done\'.</string>
   <string name="authentication_failed">Authentication failed, please login again</string>
   <string name="uploading_started">Upload started!</string>
   <string name="uploading_queued">Upload queued (limited connection mode enabled)</string>
