@@ -285,7 +285,7 @@
   <string name="use_external_storage_summary">שמירת תמונות שצולמו באמצעות מצלמה בתוך היישום לאחסון של המכשיר שלך</string>
   <string name="login_to_your_account">כניסה לחשבון שלך</string>
   <string name="send_log_file">שליחת קובץ יומן</string>
-  <string name="send_log_file_description">שליחת קובץ יומן למפתחים בדואר אלקטרוני כדי לחפש בעיות עם היישום. לתשומת לבך: יומנים יכולים להכיל מידע מזהה</string>
+  <string name="send_log_file_description">שליחת קובץ יומן למפתחים בדואר אלקטרוני כדי לחפש בעיות עם היישום. לתשומת ליבך: יומנים יכולים להכיל מידע מזהה</string>
   <string name="no_web_browser">לא נמצא דפדפן כדי לפתוח את כתובת ה־URL</string>
   <string name="null_url">שגיאה! כתובת ה־URL לא נמצאה</string>
   <string name="nominate_deletion">העמדה למחיקה</string>
@@ -410,7 +410,7 @@
   <string name="step_count">שלב %1$d מתוך %2$d:‏ %3$s</string>
   <string name="next">הבא</string>
   <string name="previous">הקודם</string>
-  <string name="upload_title_duplicate">כבר קיים קובץ בשם %1$s. להמשיך?\n\nלתשומת לבך: לשם הקובץ תווסף סיומת מתאימה אוטומטית.</string>
+  <string name="upload_title_duplicate">כבר קיים קובץ בשם %1$s. להמשיך?\n\nלתשומת ליבך: לשם הקובץ תווסף סיומת מתאימה אוטומטית.</string>
   <string name="map_application_missing">לא נמצא יישום מפה תואם במכשיר שלך. נא להתקין יישום מפה כדי להשתמש בתכונה זו.</string>
   <string name="title_page_bookmarks_pictures">תמונות</string>
   <string name="title_page_bookmarks_locations">מיקומים</string>
