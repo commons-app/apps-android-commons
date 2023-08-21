@@ -376,9 +376,12 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                     .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
 
             fragments = new ArrayList<>();
-            // Suggest users to switch to Unrestricted battery usage mode
+            /* Suggest users to turn battery optimisation off when uploading more than a few files.
+               That's because we have noticed that many-files uploads have
+               a much higher probability of failing than uploads with less files.
+             */
             if (uploadableFiles.size() > 3
-                && defaultKvStore.getBoolean("firstBigUploadSet")) {
+                && !defaultKvStore.getBoolean("hasAlreadyLaunchedBigMultiupload")) {
                 DialogUtil.showAlertDialog(
                     this,
                     getString(R.string.unrestricted_battery_mode),
@@ -386,13 +389,23 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                     getString(R.string.title_activity_settings),
                     getString(R.string.cancel),
                     () -> {
+                        /* Since opening the right settings page might be device dependent, using
+                           https://github.com/WaseemSabir/BatteryPermissionHelper
+                           directly appeared like a promising idea.
+                           However, this simply closed the popup and did not make
+                           the settings page appear on a Pixel as well as a Xiaomi device.
+
+                           Used the standard intent instead of using this library as
+                           it shows a list of all the apps on the device and allows users to
+                           turn battery optimisation off.
+                         */
                         Intent batteryOptimisationSettingsIntent = new Intent(
                             Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
                         startActivity(batteryOptimisationSettingsIntent);
                     },
                     () -> {}
                 );
-                defaultKvStore.putBoolean("firstBigUploadSet", false);
+                defaultKvStore.putBoolean("hasAlreadyLaunchedBigMultiupload", true);
             }
             for (UploadableFile uploadableFile : uploadableFiles) {
                 UploadMediaDetailFragment uploadMediaDetailFragment = new UploadMediaDetailFragment();

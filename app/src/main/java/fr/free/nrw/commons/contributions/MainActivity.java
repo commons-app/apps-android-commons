@@ -149,7 +149,7 @@ public class MainActivity  extends BaseActivity
             setUpLoggedOutPager();
         } else {
             if (applicationKvStore.getBoolean("firstrun", true)) {
-                applicationKvStore.putBoolean("firstBigUploadSet", true);
+                applicationKvStore.putBoolean("hasAlreadyLaunchedBigMultiupload", false);
             }
             if(savedInstanceState == null){
                 //starting a fresh fragment.
