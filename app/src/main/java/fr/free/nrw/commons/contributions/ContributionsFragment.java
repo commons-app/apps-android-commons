@@ -620,7 +620,7 @@ public class ContributionsFragment
                    will never be successful */
                 if(retries < MAX_RETRIES) {
                     contribution.setRetries(retries + 1);
-                    Timber.d("Retried %d times", retries + 1);
+                    Timber.d("Retried uploading %s %d times", contribution.getMedia().getFilename(), retries + 1);
                     restartUpload(contribution);
                 } else {
                     // TODO: Show the exact reason for failure
