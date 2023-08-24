@@ -166,6 +166,8 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
     override suspend fun doWork(): Result {
         try {
             var countUpload = 0
+            // Start a foreground service
+            setForeground(createForegroundInfo())
             notificationManager = NotificationManagerCompat.from(appContext)
             val processingUploads = getNotificationBuilder(
                 CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL
@@ -235,15 +237,21 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
         }
     }
 
-    override suspend fun getForegroundInfo(): ForegroundInfo {
-        // TODO: improve notifications for older Android versions
+    /**
+     * Create new notification for foreground service
+     */
+    private fun createForegroundInfo(): ForegroundInfo {
         return ForegroundInfo(
             1,
             createNotificationForForegroundService()
         )
     }
 
+    override suspend fun getForegroundInfo(): ForegroundInfo {
+        return createForegroundInfo()
+    }
     private fun createNotificationForForegroundService(): Notification {
+        // TODO: Improve notification for foreground service
         return getNotificationBuilder(
             CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL)!!
             .setContentTitle(appContext.getString(R.string.upload_in_progress))

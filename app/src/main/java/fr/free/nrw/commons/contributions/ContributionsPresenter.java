@@ -83,7 +83,6 @@ public class ContributionsPresenter implements UserActionListener {
                     .build();
                 OneTimeWorkRequest updatedUploadRequest = new OneTimeWorkRequest
                     .Builder(UploadWorker.class)
-                    .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
                     .setConstraints(constraints)
                     .setBackoffCriteria(BackoffPolicy.LINEAR, 10, TimeUnit.SECONDS)
                     .build();

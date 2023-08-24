@@ -402,7 +402,6 @@ public class MainActivity  extends BaseActivity
                 .build();
             OneTimeWorkRequest restartUploadsRequest = new OneTimeWorkRequest
                                 .Builder(UploadWorker.class)
-                                .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
                                 .setConstraints(constraints)
                                 .setBackoffCriteria(BackoffPolicy.LINEAR, 10, TimeUnit.SECONDS)
                                 .build();

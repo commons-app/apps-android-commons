@@ -326,7 +326,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             .build();
         OneTimeWorkRequest uploadRequest = new OneTimeWorkRequest
             .Builder(UploadWorker.class)
-            .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
             .setConstraints(constraints)
             .setBackoffCriteria(BackoffPolicy.LINEAR, 10, TimeUnit.SECONDS)
             .build();
