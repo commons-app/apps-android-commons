@@ -465,6 +465,7 @@
   <string name="description_edit_helper_edit_message_else">Није могуће додавање описа.</string>
   <string name="caption_edit_helper_edit_message_else">Није могуће додавање натписа.</string>
   <string name="share_image_via">Подели слику преко</string>
+  <string name="you_have_no_achievements_yet">Немате још увек доприноса</string>
   <string name="no_achievements_yet">%s још није доприносио/ла</string>
   <string name="account_created">Налог је отворен.</string>
   <string name="text_copy">Текст је копиран у оставу</string>
