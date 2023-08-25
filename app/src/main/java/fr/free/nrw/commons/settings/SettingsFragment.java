@@ -214,12 +214,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         LocationPermissionsHelper locationPermissionsHelper = new LocationPermissionsHelper(
             activity, locationManager, new LocationPermissionCallback() {
             @Override
-            public void onLocationPermissionDenied(int message) {
-                Toast.makeText(
-                    activity.getBaseContext(),
-                    message,
-                    Toast.LENGTH_LONG
-                ).show();
+            public void onLocationPermissionDenied() {
+                // dismiss the dialog
             }
 
             @Override

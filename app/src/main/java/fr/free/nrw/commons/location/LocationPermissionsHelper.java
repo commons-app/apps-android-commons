@@ -5,10 +5,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
+import android.widget.Toast;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
-import timber.log.Timber;
 
 /**
  * Helper class to handle location permissions
@@ -55,7 +55,6 @@ public class LocationPermissionsHelper {
         Dialog locationAccessDialog,
         Dialog locationOffDialog
     ) {
-        Timber.d("Inside requestForLocationAccess()");
         PermissionUtils.checkPermissionsAndPerformAction(activity,
             permission.ACCESS_FINE_LOCATION,
             () -> {
@@ -68,9 +67,13 @@ public class LocationPermissionsHelper {
                 }
             },
             () -> {
-                Timber.d("Inside onPermissionDenied");
                 if (callback != null) {
-                    callback.onLocationPermissionDenied(R.string.in_app_camera_location_permission_denied);
+                    Toast.makeText(
+                        activity,
+                        R.string.in_app_camera_location_permission_denied,
+                        Toast.LENGTH_LONG
+                    ).show();
+                    callback.onLocationPermissionDenied();
                 }
             },
             locationAccessDialog.dialogTitleResource,
@@ -99,7 +102,14 @@ public class LocationPermissionsHelper {
                 activity.getString(R.string.title_app_shortcut_setting),
                 activity.getString(R.string.cancel),
                 () -> openLocationSettings(),
-                () -> callback.onLocationPermissionDenied(R.string.in_app_camera_location_unavailable));
+                () -> {
+                    Toast.makeText(
+                        activity,
+                        R.string.in_app_camera_location_unavailable,
+                        Toast.LENGTH_LONG
+                    ).show();
+                    callback.onLocationPermissionDenied();
+                });
     }
 
     /**
@@ -121,7 +131,7 @@ public class LocationPermissionsHelper {
      * Handle onPermissionDenied within individual classes based on the requirements
      */
     public interface LocationPermissionCallback {
-        void onLocationPermissionDenied(int message);
+        void onLocationPermissionDenied();
         void onLocationPermissionGranted();
     }
 }
