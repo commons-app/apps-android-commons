@@ -223,6 +223,13 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                 PROCESSING_UPLOADS_NOTIFICATION_ID
             )
         }
+        // Trigger WorkManager to process any new contributions that may have been added to the queue
+        val updatedContributionQueue = withContext(Dispatchers.IO) {
+            contributionDao.getContribution(statesToProcess).blockingGet()
+        }
+        if (updatedContributionQueue.isNotEmpty()) {
+            return Result.retry()
+        }
         //TODO make this smart, think of handling retries in the future
         return Result.success()
     }

@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
+import androidx.work.BackoffPolicy;
 import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
@@ -13,6 +14,7 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -77,10 +79,14 @@ public class ContributionsPresenter implements UserActionListener {
             .save(contribution)
             .subscribeOn(ioThreadScheduler)
             .subscribe(() -> {
+                OneTimeWorkRequest updatedUploadRequest = new OneTimeWorkRequest
+                    .Builder(UploadWorker.class)
+                    .setBackoffCriteria(BackoffPolicy.LINEAR, 10, TimeUnit.SECONDS)
+                    .build();
                 WorkManager.getInstance(view.getContext().getApplicationContext())
                     .enqueueUniqueWork(
                         UploadWorker.class.getSimpleName(),
-                        ExistingWorkPolicy.KEEP, OneTimeWorkRequest.from(UploadWorker.class));
+                        ExistingWorkPolicy.KEEP, updatedUploadRequest);
             }));
     }
 }
