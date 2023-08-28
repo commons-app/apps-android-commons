@@ -132,7 +132,7 @@
   <string name="menu_retry_upload">Ҡабатларға</string>
   <string name="menu_cancel_upload">Кире алыу</string>
   <string name="media_upload_policy">Был рәсемде ебәргәндә шуны раҫлайым: был минең шәхси эшем, автор хоҡуҡтарын һаҡлаған материал йәки селфи түгел, шулай уҡ Викимилектең &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/ru\"&gt;ҡағиҙәләренә тап килә&lt;/a&gt;.</string>
-  <string name="menu_download">Йөкләргә</string>
+  <string name="menu_download">Ташып алырға</string>
   <string name="preference_license">Программа көйләгән лицензия</string>
   <string name="use_previous">Элекке атаманы һәм тасуирламаны ҡулланыу</string>
   <string name="preference_theme">Биҙәү темаһы</string>
