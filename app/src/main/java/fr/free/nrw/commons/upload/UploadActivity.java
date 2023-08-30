@@ -319,9 +319,20 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
     @Override
     public void makeUploadRequest() {
+        /* Set backoff criteria for the upload work request
+           The default backoff policy is EXPONENTIAL, but while testing we found that it
+           too long for the uploads to finish. So, set the backoff policy as LINEAR with the
+           minimum backoff delay value of 10 seconds.
+
+           More details on when exactly it is retried:
+           https://developer.android.com/guide/background/persistent/getting-started/define-work#retries_backoff
+         */
         OneTimeWorkRequest uploadRequest = new OneTimeWorkRequest
             .Builder(UploadWorker.class)
-            .setBackoffCriteria(BackoffPolicy.LINEAR, 10, TimeUnit.SECONDS)
+            .setBackoffCriteria(
+                BackoffPolicy.LINEAR,
+                OneTimeWorkRequest.MIN_BACKOFF_MILLIS,
+                TimeUnit.MILLISECONDS)
             .build();
         WorkManager.getInstance(getApplicationContext()).enqueueUniqueWork(
             UploadWorker.class.getSimpleName(),
