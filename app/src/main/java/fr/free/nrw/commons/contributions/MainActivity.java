@@ -17,10 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.work.BackoffPolicy;
 import androidx.work.ExistingWorkPolicy;
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
@@ -45,10 +42,9 @@ import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.quiz.QuizChecker;
 import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
-import fr.free.nrw.commons.upload.worker.UploadWorker;
+import fr.free.nrw.commons.upload.worker.WorkRequestHelper;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
-import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
@@ -371,25 +367,7 @@ public class MainActivity  extends BaseActivity
             viewUtilWrapper
                 .showShortToast(getBaseContext(), getString(R.string.limited_connection_enabled));
         } else {
-            /* Set backoff criteria for the restart upload request
-               The default backoff policy is EXPONENTIAL, but while testing we found that it
-               too long for the uploads to finish. So, set the backoff policy as LINEAR with the
-               minimum backoff delay value of 10 seconds.
-
-               More details on when exactly it is retried:
-               https://developer.android.com/guide/background/persistent/getting-started/define-work#retries_backoff
-            */
-            OneTimeWorkRequest restartUploadsRequest = new OneTimeWorkRequest
-                .Builder(UploadWorker.class)
-                .setBackoffCriteria(
-                    BackoffPolicy.LINEAR,
-                    OneTimeWorkRequest.MIN_BACKOFF_MILLIS,
-                    TimeUnit.MILLISECONDS)
-                .build();
-            WorkManager.getInstance(getApplicationContext()).enqueueUniqueWork(
-                UploadWorker.class.getSimpleName(),
-                ExistingWorkPolicy.APPEND_OR_REPLACE, restartUploadsRequest);
-
+            WorkRequestHelper.Companion.makeOneTimeWorkRequest(ExistingWorkPolicy.APPEND_OR_REPLACE);
             viewUtilWrapper
                 .showShortToast(getBaseContext(), getString(R.string.limited_connection_disabled));
         }

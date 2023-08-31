@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.upload;
 
 import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
-import static fr.free.nrw.commons.upload.UploadPresenter.COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 import android.Manifest;
@@ -15,7 +14,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -24,10 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import androidx.work.BackoffPolicy;
 import androidx.work.ExistingWorkPolicy;
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -36,7 +31,6 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionController;
-import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.mwapi.UserClient;
@@ -47,7 +41,7 @@ import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback;
-import fr.free.nrw.commons.upload.worker.UploadWorker;
+import fr.free.nrw.commons.upload.worker.WorkRequestHelper;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -58,7 +52,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
@@ -319,24 +312,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
     @Override
     public void makeUploadRequest() {
-        /* Set backoff criteria for the upload work request
-           The default backoff policy is EXPONENTIAL, but while testing we found that it
-           too long for the uploads to finish. So, set the backoff policy as LINEAR with the
-           minimum backoff delay value of 10 seconds.
-
-           More details on when exactly it is retried:
-           https://developer.android.com/guide/background/persistent/getting-started/define-work#retries_backoff
-         */
-        OneTimeWorkRequest uploadRequest = new OneTimeWorkRequest
-            .Builder(UploadWorker.class)
-            .setBackoffCriteria(
-                BackoffPolicy.LINEAR,
-                OneTimeWorkRequest.MIN_BACKOFF_MILLIS,
-                TimeUnit.MILLISECONDS)
-            .build();
-        WorkManager.getInstance(getApplicationContext()).enqueueUniqueWork(
-            UploadWorker.class.getSimpleName(),
-            ExistingWorkPolicy.APPEND_OR_REPLACE, uploadRequest);
+        WorkRequestHelper.Companion.makeOneTimeWorkRequest(ExistingWorkPolicy.APPEND_OR_REPLACE);
     }
 
     @Override
