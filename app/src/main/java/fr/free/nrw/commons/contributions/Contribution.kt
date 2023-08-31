@@ -47,7 +47,8 @@ data class Contribution constructor(
     /**
      * Number of times a contribution has been retried after a failure
      */
-    var retries: Int = 0
+    var retries: Int = 0,
+    var wikidataUpdateWasSuccessful: Boolean = false
 ) : Parcelable {
 
     fun completeWith(media: Media): Contribution {

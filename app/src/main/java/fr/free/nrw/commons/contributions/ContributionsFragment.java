@@ -29,10 +29,13 @@ import androidx.fragment.app.FragmentTransaction;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.notification.models.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.upload.FileUtilsWrapper;
+import java.io.FileNotFoundException;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
@@ -85,6 +88,10 @@ public class ContributionsFragment
     @Inject CampaignsPresenter presenter;
     @Inject LocationServiceManager locationManager;
     @Inject NotificationController notificationController;
+    @Inject
+    MediaClient mediaClient;
+    @Inject
+    FileUtilsWrapper fileUtilsWrapper;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -598,11 +605,50 @@ public class ContributionsFragment
      * Restarts the upload process for a contribution
      * @param contribution
      */
-    public void restartUpload(Contribution contribution) {
+    private void restartUpload(Contribution contribution) {
         contribution.setState(Contribution.STATE_QUEUED);
         contributionsPresenter.saveContribution(contribution);
         Timber.d("Restarting for %s", contribution.toString());
     }
+
+    /**
+     * Retry for a failed contribution only if it does not exist on the server
+     * @param contribution
+     * @param retries
+     */
+    private void retryFailedUpload(Contribution contribution, int retries) {
+        String filePath = contribution.getLocalUri().getPath();
+        String fileSHA;
+       try {
+           fileSHA = fileUtilsWrapper.getSHA1(fileUtilsWrapper.getFileInputStream(filePath));
+       } catch (FileNotFoundException e) {
+           fileSHA = null;
+       }
+        boolean fileExists = mediaClient
+            .checkFileExistsUsingSha(fileSHA)
+            .subscribeOn(Schedulers.io()).blockingGet();
+        if (fileExists && !contribution.getWikidataUpdateWasSuccessful()) {
+            Timber.d("%s exists on the server already but lacks caption",
+                contribution.getMedia().getFilename());
+            // Show a popup to the user to edit the caption
+            DialogUtil.showAlertDialog(
+                getActivity(),
+                getString(R.string.wikidata_edit_failed_title),
+                getString(R.string.wikidata_edit_failed_explanation, contribution.getMedia().getFilename()),
+                getString(R.string.ok),
+                () -> {},
+                true
+            );
+            contribution.setState(Contribution.STATE_COMPLETED);
+            contributionsPresenter.saveContribution(contribution);
+        } else {
+            contribution.setRetries(retries + 1);
+            Timber.d("Retried uploading %s %d times",
+                contribution.getMedia().getFilename(), retries + 1);
+            restartUpload(contribution);
+        }
+    }
+
     /**
      * Retry upload when it is failed
      *
@@ -619,9 +665,7 @@ public class ContributionsFragment
                    to handle cases like invalid filename as such uploads
                    will never be successful */
                 if(retries < MAX_RETRIES) {
-                    contribution.setRetries(retries + 1);
-                    Timber.d("Retried uploading %s %d times", contribution.getMedia().getFilename(), retries + 1);
-                    restartUpload(contribution);
+                    retryFailedUpload(contribution, retries);
                 } else {
                     // TODO: Show the exact reason for failure
                     Toast.makeText(getContext(),
