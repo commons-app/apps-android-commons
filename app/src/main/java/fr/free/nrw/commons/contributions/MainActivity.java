@@ -367,7 +367,8 @@ public class MainActivity  extends BaseActivity
             viewUtilWrapper
                 .showShortToast(getBaseContext(), getString(R.string.limited_connection_enabled));
         } else {
-            WorkRequestHelper.Companion.makeOneTimeWorkRequest(ExistingWorkPolicy.APPEND_OR_REPLACE);
+            WorkRequestHelper.Companion.makeOneTimeWorkRequest(getApplicationContext(),
+                ExistingWorkPolicy.APPEND_OR_REPLACE);
             viewUtilWrapper
                 .showShortToast(getBaseContext(), getString(R.string.limited_connection_disabled));
         }

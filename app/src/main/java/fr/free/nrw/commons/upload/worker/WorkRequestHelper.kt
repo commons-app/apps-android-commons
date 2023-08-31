@@ -1,11 +1,11 @@
 package fr.free.nrw.commons.upload.worker
 
+import android.content.Context
 import androidx.work.BackoffPolicy
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import androidx.work.WorkRequest.Companion.MIN_BACKOFF_MILLIS
-import com.mapbox.mapboxsdk.Mapbox.getApplicationContext
 import java.util.concurrent.TimeUnit
 
 /**
@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
 class WorkRequestHelper {
 
     companion object {
-        fun makeOneTimeWorkRequest(existingWorkPolicy: ExistingWorkPolicy) {
+        fun makeOneTimeWorkRequest(context: Context, existingWorkPolicy: ExistingWorkPolicy) {
             /* Set backoff criteria for the work request
            The default backoff policy is EXPONENTIAL, but while testing we found that it
            too long for the uploads to finish. So, set the backoff policy as LINEAR with the
@@ -31,7 +31,7 @@ class WorkRequestHelper {
                         TimeUnit.MILLISECONDS
                     )
                     .build()
-            WorkManager.getInstance(getApplicationContext()).enqueueUniqueWork(
+            WorkManager.getInstance(context).enqueueUniqueWork(
                 UploadWorker::class.java.simpleName, existingWorkPolicy, uploadRequest
             )
         }

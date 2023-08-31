@@ -312,7 +312,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
     @Override
     public void makeUploadRequest() {
-        WorkRequestHelper.Companion.makeOneTimeWorkRequest(ExistingWorkPolicy.APPEND_OR_REPLACE);
+        WorkRequestHelper.Companion.makeOneTimeWorkRequest(getApplicationContext(),
+            ExistingWorkPolicy.APPEND_OR_REPLACE);
     }
 
     @Override

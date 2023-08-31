@@ -70,6 +70,7 @@ public class ContributionsPresenter implements UserActionListener {
         compositeDisposable.add(repository
             .save(contribution)
             .subscribeOn(ioThreadScheduler)
-            .subscribe(() -> WorkRequestHelper.Companion.makeOneTimeWorkRequest(ExistingWorkPolicy.KEEP)));
+            .subscribe(() -> WorkRequestHelper.Companion.makeOneTimeWorkRequest(
+                view.getContext().getApplicationContext(), ExistingWorkPolicy.KEEP)));
     }
 }
