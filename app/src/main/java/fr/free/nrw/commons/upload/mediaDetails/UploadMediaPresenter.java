@@ -87,11 +87,12 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * @param place
      */
     @Override
-    public void receiveImage(final UploadableFile uploadableFile, final Place place) {
+    public void receiveImage(final UploadableFile uploadableFile, final Place place,
+                            LatLng inAppPictureLocation) {
         view.showProgress(true);
         compositeDisposable.add(
             repository
-                .preProcessImage(uploadableFile, place, this)
+                .preProcessImage(uploadableFile, place, this, inAppPictureLocation)
                 .map(uploadItem -> {
                     if(place!=null && place.isMonument()){
                         if (place.location != null) {
@@ -177,15 +178,15 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * @param uploadItemIndex
      */
     @Override
-    public void verifyImageQuality(int uploadItemIndex) {
+    public void verifyImageQuality(int uploadItemIndex, LatLng inAppPictureLocation) {
       final UploadItem uploadItem = repository.getUploads().get(uploadItemIndex);
 
-      if (uploadItem.getGpsCoords().getDecimalCoords() == null) {
+      if (uploadItem.getGpsCoords().getDecimalCoords() == null && inAppPictureLocation == null) {
           final Runnable onSkipClicked = () -> {
               view.showProgress(true);
               compositeDisposable.add(
                   repository
-                      .getImageQuality(uploadItem)
+                      .getImageQuality(uploadItem, inAppPictureLocation)
                       .observeOn(mainThreadScheduler)
                       .subscribe(imageResult -> {
                               view.showProgress(false);
@@ -208,7 +209,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
           view.showProgress(true);
           compositeDisposable.add(
               repository
-                  .getImageQuality(uploadItem)
+                  .getImageQuality(uploadItem, inAppPictureLocation)
                   .observeOn(mainThreadScheduler)
                   .subscribe(imageResult -> {
                           view.showProgress(false);

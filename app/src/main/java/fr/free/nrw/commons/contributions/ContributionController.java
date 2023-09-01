@@ -6,6 +6,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.DefaultCallback;
@@ -13,8 +14,14 @@ import fr.free.nrw.commons.filepicker.FilePicker;
 import fr.free.nrw.commons.filepicker.FilePicker.ImageSource;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.location.LocationPermissionsHelper;
+import fr.free.nrw.commons.location.LocationPermissionsHelper.Dialog;
+import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
+import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.UploadActivity;
+import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import java.util.ArrayList;
@@ -28,7 +35,11 @@ public class ContributionController {
 
     public static final String ACTION_INTERNAL_UPLOADS = "internalImageUploads";
     private final JsonKvStore defaultKvStore;
+    private LatLng locationBeforeImageCapture;
+    private boolean isInAppCameraUpload;
 
+    @Inject
+    LocationServiceManager locationManager;
     @Inject
     public ContributionController(@Named("default_preferences") JsonKvStore defaultKvStore) {
         this.defaultKvStore = defaultKvStore;
@@ -46,9 +57,92 @@ public class ContributionController {
 
         PermissionUtils.checkPermissionsAndPerformAction(activity,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                () -> initiateCameraUpload(activity),
+                () -> {
+                    if (defaultKvStore.getBoolean("inAppCameraFirstRun")) {
+                        defaultKvStore.putBoolean("inAppCameraFirstRun", false);
+                        askUserToAllowLocationAccess(activity);
+                    } else if(defaultKvStore.getBoolean("inAppCameraLocationPref")) {
+                        createDialogsAndHandleLocationPermissions(activity);
+                    } else {
+                        initiateCameraUpload(activity);
+                    }
+                },
                 R.string.storage_permission_title,
                 R.string.write_storage_permission_rationale);
+    }
+
+    /**
+     * Asks users to provide location access
+     *
+     * @param activity
+     */
+    private void createDialogsAndHandleLocationPermissions(Activity activity) {
+        LocationPermissionsHelper.Dialog locationAccessDialog = new Dialog(
+            R.string.location_permission_title,
+            R.string.in_app_camera_location_permission_rationale
+        );
+
+        LocationPermissionsHelper.Dialog locationOffDialog = new Dialog(
+            R.string.ask_to_turn_location_on,
+            R.string.in_app_camera_needs_location
+        );
+        LocationPermissionsHelper locationPermissionsHelper = new LocationPermissionsHelper(
+            activity, locationManager,
+            new LocationPermissionCallback() {
+                @Override
+                public void onLocationPermissionDenied() {
+                    initiateCameraUpload(activity);
+                }
+
+                @Override
+                public void onLocationPermissionGranted() {
+                    initiateCameraUpload(activity);
+                }
+            }
+        );
+        locationPermissionsHelper.handleLocationPermissions(
+            locationAccessDialog,
+            locationOffDialog
+        );
+    }
+
+    /**
+     * Suggest user to attach location information with pictures.
+     * If the user selects "Yes", then:
+     *
+     * Location is taken from the EXIF if the default camera application
+     * does not redact location tags.
+     *
+     * Otherwise, if the EXIF metadata does not have location information,
+     * then location captured by the app is used
+     *
+     * @param activity
+     */
+    private void askUserToAllowLocationAccess(Activity activity) {
+        DialogUtil.showAlertDialog(activity,
+            activity.getString(R.string.in_app_camera_location_permission_title),
+            activity.getString(R.string.in_app_camera_location_access_explanation),
+            activity.getString(R.string.option_allow),
+            activity.getString(R.string.option_dismiss),
+            ()-> {
+                defaultKvStore.putBoolean("inAppCameraLocationPref", true);
+                createDialogsAndHandleLocationPermissions(activity);
+            },
+            () -> {
+                defaultKvStore.putBoolean("inAppCameraLocationPref", false);
+                initiateCameraUpload(activity);
+            },
+            null,
+            true);
+    }
+
+    /**
+     * Check if apps have access to location even after having individual access
+     *
+     * @return
+     */
+    private boolean isLocationAccessToAppsTurnedOn() {
+        return (locationManager.isNetworkProviderEnabled() || locationManager.isGPSProviderEnabled());
     }
 
     /**
@@ -66,9 +160,7 @@ public class ContributionController {
 
         PermissionUtils.checkPermissionsAndPerformAction(activity,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            () -> {
-                FilePicker.openCustomSelector(activity, 0);
-            },
+            () -> FilePicker.openCustomSelector(activity, 0),
             R.string.storage_permission_title,
             R.string.write_storage_permission_rationale);
     }
@@ -99,6 +191,10 @@ public class ContributionController {
      */
     private void initiateCameraUpload(Activity activity) {
         setPickerConfiguration(activity, false);
+        if (defaultKvStore.getBoolean("inAppCameraLocationPref", false)) {
+            locationBeforeImageCapture = locationManager.getLastLocation();
+        }
+        isInAppCameraUpload = true;
         FilePicker.openCameraForImage(activity, 0);
     }
 
@@ -134,7 +230,8 @@ public class ContributionController {
 
     /**
      * Returns intent to be passed to upload activity
-     * Attaches place object for nearby uploads
+     * Attaches place object for nearby uploads and
+     * location before image capture if in-app camera is used
      */
     private Intent handleImagesPicked(Context context,
         List<UploadableFile> imagesFiles) {
@@ -148,6 +245,17 @@ public class ContributionController {
             shareIntent.putExtra(PLACE_OBJECT, place);
         }
 
+        if (locationBeforeImageCapture != null) {
+            shareIntent.putExtra(
+                UploadActivity.LOCATION_BEFORE_IMAGE_CAPTURE,
+                locationBeforeImageCapture);
+        }
+
+        shareIntent.putExtra(
+            UploadActivity.IN_APP_CAMERA_UPLOAD,
+            isInAppCameraUpload
+        );
+        isInAppCameraUpload = false;    // reset the flag for next use
         return shareIntent;
     }
 

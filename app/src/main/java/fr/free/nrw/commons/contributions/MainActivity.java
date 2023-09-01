@@ -399,6 +399,7 @@ public class MainActivity  extends BaseActivity
 
         if ((applicationKvStore.getBoolean("firstrun", true)) &&
             (!applicationKvStore.getBoolean("login_skipped"))) {
+            defaultKvStore.putBoolean("inAppCameraFirstRun", true);
             WelcomeActivity.startYourself(this);
         }
     }
