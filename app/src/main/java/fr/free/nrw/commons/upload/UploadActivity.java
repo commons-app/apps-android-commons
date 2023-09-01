@@ -8,6 +8,8 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -38,8 +40,12 @@ import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.location.LocationPermissionsHelper;
+import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.mwapi.UserClient;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
 import fr.free.nrw.commons.upload.depicts.DepictsFragment;
@@ -57,6 +63,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
@@ -74,6 +81,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     SessionManager sessionManager;
     @Inject
     UserClient userClient;
+    @Inject
+    LocationServiceManager locationManager;
 
 
     @BindView(R.id.cv_container_top_card)
@@ -109,6 +118,9 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private ThumbnailsAdapter thumbnailsAdapter;
 
     private Place place;
+    private LatLng prevLocation;
+    private LatLng currLocation;
+    private boolean isInAppCameraUpload;
     private List<UploadableFile> uploadableFiles = Collections.emptyList();
     private int currentSelectedPosition = 0;
     /*
@@ -117,6 +129,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private boolean isMultipleFilesSelected = false;
 
     public static final String EXTRA_FILES = "commons_image_exta";
+    public static final String LOCATION_BEFORE_IMAGE_CAPTURE = "user_location_before_image_capture";
+    public static final String IN_APP_CAMERA_UPLOAD = "in_app_camera_upload";
 
     /**
      * Stores all nearby places found and related users response for
@@ -148,6 +162,11 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         if (dpi<=321) {
             onRlContainerTitleClicked();
         }
+        if (PermissionUtils.hasPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+            locationManager.registerLocationManager();
+        }
+        locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
+        locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
     }
 
     private void init() {
@@ -366,7 +385,29 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             fragments = new ArrayList<>();
             for (UploadableFile uploadableFile : uploadableFiles) {
                 UploadMediaDetailFragment uploadMediaDetailFragment = new UploadMediaDetailFragment();
-                uploadMediaDetailFragment.setImageTobeUploaded(uploadableFile, place);
+
+                LocationPermissionsHelper locationPermissionsHelper = new LocationPermissionsHelper(
+                                                                    this, locationManager, null);
+                if (locationPermissionsHelper.isLocationAccessToAppsTurnedOn()) {
+                    currLocation = locationManager.getLastLocation();
+                }
+
+                if (currLocation != null) {
+                    float locationDifference = getLocationDifference(currLocation, prevLocation);
+                    boolean isLocationTagUnchecked = isLocationTagUncheckedInTheSettings();
+                    /* Remove location if the user has unchecked the Location EXIF tag in the
+                       Manage EXIF Tags setting or turned "Record location for in-app shots" off.
+                       Also, location information is discarded if the difference between
+                       current location and location recorded just before capturing the image
+                       is greater than 100 meters */
+                    if (isLocationTagUnchecked || locationDifference > 100
+                        || !defaultKvStore.getBoolean("inAppCameraLocationPref")
+                        || !isInAppCameraUpload) {
+                        currLocation = null;
+                    }
+                }
+                uploadMediaDetailFragment.setImageTobeUploaded(uploadableFile, place, currLocation);
+                locationManager.unregisterLocationManager();
                 uploadMediaDetailFragment.setCallback(new UploadMediaDetailFragmentCallback() {
                     @Override
                     public void deletePictureAtIndex(int index) {
@@ -424,6 +465,39 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         }
     }
 
+    /**
+     * Users may uncheck Location tag from the Manage EXIF tags setting any time.
+     * So, their location must not be shared in this case.
+     *
+     * @return
+     */
+    private boolean isLocationTagUncheckedInTheSettings() {
+        Set<String> prefExifTags = defaultKvStore.getStringSet(Prefs.MANAGED_EXIF_TAGS);
+        if (prefExifTags.contains(getString(R.string.exif_tag_location))) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Calculate the difference between current location and
+     * location recorded before capturing the image
+     *
+     * @param currLocation
+     * @param prevLocation
+     * @return
+     */
+    private float getLocationDifference(LatLng currLocation, LatLng prevLocation) {
+        if (prevLocation == null) {
+            return 0.0f;
+        }
+        float[] distance = new float[2];
+        Location.distanceBetween(
+                currLocation.getLatitude(), currLocation.getLongitude(),
+                prevLocation.getLatitude(), prevLocation.getLongitude(), distance);
+        return distance[0];
+    }
+
     private void receiveExternalSharedItems() {
         uploadableFiles = contributionController.handleExternalImagesPicked(this, getIntent());
     }
@@ -438,6 +512,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         Timber.i("Received multiple upload %s", uploadableFiles.size());
 
         place = intent.getParcelableExtra(PLACE_OBJECT);
+        prevLocation = intent.getParcelableExtra(LOCATION_BEFORE_IMAGE_CAPTURE);
+        isInAppCameraUpload = intent.getBooleanExtra(IN_APP_CAMERA_UPLOAD, false);
         resetDirectPrefs();
     }
 

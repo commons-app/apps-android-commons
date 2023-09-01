@@ -18,6 +18,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
 import androidx.preference.Preference;
@@ -30,13 +31,15 @@ import androidx.recyclerview.widget.RecyclerView.Adapter;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.single.BasePermissionListener;
-import com.mapbox.mapboxsdk.Mapbox;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.campaigns.CampaignView;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LocationPermissionsHelper;
+import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
+import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.recentlanguages.Language;
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter;
@@ -64,6 +67,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     @Inject
     RecentLanguagesDao recentLanguagesDao;
+
+    @Inject
+    LocationServiceManager locationManager;
 
     private ListPreference themeListPreference;
     private Preference descriptionLanguageListPreference;
@@ -96,6 +102,18 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 return true;
             });
         }
+
+        Preference inAppCameraLocationPref = findPreference("inAppCameraLocationPref");
+
+        inAppCameraLocationPref.setOnPreferenceChangeListener(
+            (preference, newValue) -> {
+                boolean isInAppCameraLocationTurnedOn = (boolean) newValue;
+                if (isInAppCameraLocationTurnedOn) {
+                    createDialogsAndHandleLocationPermissions(getActivity());
+                }
+                return true;
+            }
+        );
 
         // Gets current language code from shared preferences
         String languageCode;
@@ -172,7 +190,43 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             findPreference("displayLocationPermissionForCardView").setEnabled(false);
             findPreference(CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE).setEnabled(false);
             findPreference("managed_exif_tags").setEnabled(false);
+            findPreference("openDocumentPhotoPickerPref").setEnabled(false);
+            findPreference("inAppCameraLocationPref").setEnabled(false);
         }
+    }
+
+    /**
+     * Asks users to provide location access
+     *
+     * @param activity
+     */
+    private void createDialogsAndHandleLocationPermissions(Activity activity) {
+        LocationPermissionsHelper.Dialog locationAccessDialog = new LocationPermissionsHelper.Dialog(
+            R.string.location_permission_title,
+            R.string.in_app_camera_location_permission_rationale
+        );
+
+        LocationPermissionsHelper.Dialog locationOffDialog = new LocationPermissionsHelper.Dialog(
+            R.string.ask_to_turn_location_on,
+            R.string.in_app_camera_needs_location
+        );
+
+        LocationPermissionsHelper locationPermissionsHelper = new LocationPermissionsHelper(
+            activity, locationManager, new LocationPermissionCallback() {
+            @Override
+            public void onLocationPermissionDenied() {
+                // dismiss the dialog
+            }
+
+            @Override
+            public void onLocationPermissionGranted() {
+                // dismiss the dialog
+            }
+        });
+        locationPermissionsHelper.handleLocationPermissions(
+            locationAccessDialog,
+            locationOffDialog
+        );
     }
 
     /**

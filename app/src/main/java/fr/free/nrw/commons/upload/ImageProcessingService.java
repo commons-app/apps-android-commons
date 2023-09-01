@@ -5,6 +5,7 @@ import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
 import android.content.Context;
+import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.utils.ImageUtils;
@@ -46,7 +47,7 @@ public class ImageProcessingService {
      * Check image quality before upload - checks duplicate image - checks dark image - checks
      * geolocation for image - check for valid title
      */
-    Single<Integer> validateImage(UploadItem uploadItem) {
+    Single<Integer> validateImage(UploadItem uploadItem, LatLng inAppPictureLocation) {
         int currentImageQuality = uploadItem.getImageQuality();
         Timber.d("Current image quality is %d", currentImageQuality);
         if (currentImageQuality == ImageUtils.IMAGE_KEEP) {
@@ -57,7 +58,7 @@ public class ImageProcessingService {
 
         return Single.zip(
             checkDuplicateImage(filePath),
-            checkImageGeoLocation(uploadItem.getPlace(), filePath),
+            checkImageGeoLocation(uploadItem.getPlace(), filePath, inAppPictureLocation),
             checkDarkImage(filePath),
             validateItemTitle(uploadItem),
             checkFBMD(filePath),
@@ -148,13 +149,13 @@ public class ImageProcessingService {
      * @param filePath file to be checked
      * @return IMAGE_GEOLOCATION_DIFFERENT or IMAGE_OK
      */
-    private Single<Integer> checkImageGeoLocation(Place place, String filePath) {
+    private Single<Integer> checkImageGeoLocation(Place place, String filePath, LatLng inAppPictureLocation) {
         Timber.d("Checking for image geolocation %s", filePath);
         if (place == null || StringUtils.isBlank(place.getWikiDataEntityId())) {
             return Single.just(ImageUtils.IMAGE_OK);
         }
         return Single.fromCallable(() -> filePath)
-            .map(fileUtilsWrapper::getGeolocationOfFile)
+            .flatMap(path -> Single.just(fileUtilsWrapper.getGeolocationOfFile(path, inAppPictureLocation)))
             .flatMap(geoLocation -> {
                 if (StringUtils.isBlank(geoLocation)) {
                     return Single.just(ImageUtils.IMAGE_OK);
