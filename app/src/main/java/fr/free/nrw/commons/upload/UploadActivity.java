@@ -9,7 +9,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageButton;
@@ -377,6 +379,42 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                     .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
 
             fragments = new ArrayList<>();
+            /* Suggest users to turn battery optimisation off when uploading more than a few files.
+               That's because we have noticed that many-files uploads have
+               a much higher probability of failing than uploads with less files.
+
+               Show the dialog for Android 6 and above as
+               the ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS intent was added in API level 23
+             */
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (uploadableFiles.size() > 3
+                    && !defaultKvStore.getBoolean("hasAlreadyLaunchedBigMultiupload")) {
+                    DialogUtil.showAlertDialog(
+                        this,
+                        getString(R.string.unrestricted_battery_mode),
+                        getString(R.string.suggest_unrestricted_mode),
+                        getString(R.string.title_activity_settings),
+                        getString(R.string.cancel),
+                        () -> {
+                        /* Since opening the right settings page might be device dependent, using
+                           https://github.com/WaseemSabir/BatteryPermissionHelper
+                           directly appeared like a promising idea.
+                           However, this simply closed the popup and did not make
+                           the settings page appear on a Pixel as well as a Xiaomi device.
+
+                           Used the standard intent instead of using this library as
+                           it shows a list of all the apps on the device and allows users to
+                           turn battery optimisation off.
+                         */
+                            Intent batteryOptimisationSettingsIntent = new Intent(
+                                Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+                            startActivity(batteryOptimisationSettingsIntent);
+                        },
+                        () -> {}
+                    );
+                    defaultKvStore.putBoolean("hasAlreadyLaunchedBigMultiupload", true);
+                }
+            }
             for (UploadableFile uploadableFile : uploadableFiles) {
                 UploadMediaDetailFragment uploadMediaDetailFragment = new UploadMediaDetailFragment();
 

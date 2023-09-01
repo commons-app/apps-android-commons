@@ -1,10 +1,7 @@
 package fr.free.nrw.commons.upload.worker
 
 import android.content.Context
-import androidx.work.BackoffPolicy
-import androidx.work.ExistingWorkPolicy
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
+import androidx.work.*
 import androidx.work.WorkRequest.Companion.MIN_BACKOFF_MILLIS
 import java.util.concurrent.TimeUnit
 
@@ -23,6 +20,9 @@ class WorkRequestHelper {
            More details on when exactly it is retried:
            https://developer.android.com/guide/background/persistent/getting-started/define-work#retries_backoff
          */
+            val constraints: Constraints = Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build()
             val uploadRequest: OneTimeWorkRequest =
                 OneTimeWorkRequest.Builder(UploadWorker::class.java)
                     .setBackoffCriteria(
@@ -30,6 +30,7 @@ class WorkRequestHelper {
                         MIN_BACKOFF_MILLIS,
                         TimeUnit.MILLISECONDS
                     )
+                    .setConstraints(constraints)
                     .build()
             WorkManager.getInstance(context).enqueueUniqueWork(
                 UploadWorker::class.java.simpleName, existingWorkPolicy, uploadRequest
