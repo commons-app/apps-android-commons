@@ -207,6 +207,13 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                         contribution.state = Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE
                         contributionDao.saveSynchronous(contribution)
                     }
+                }else if(CommonsApplication.pauseUploads[contribution.pageId] != null
+                    && CommonsApplication.pauseUploads[contribution.pageId] == true){
+                        /**
+                         * If the upload is already paused then do not upload the picture
+                         * */
+                        contribution.state = Contribution.STATE_PAUSED
+                        contributionDao.saveSynchronous(contribution)
                 } else {
                     contribution.transferred = 0
                     contribution.state = Contribution.STATE_IN_PROGRESS
