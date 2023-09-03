@@ -457,7 +457,9 @@ Upload your first media by tapping on the add button.</string>
   <string name="in_app_camera_location_unavailable">The app would not record location along with in-shots as the GPS is turned off</string>
   <string name="open_document_photo_picker_title">Use document based photo picker</string>
   <string name="open_document_photo_picker_explanation">The new Android photo picker risks losing location information. Enable if you seem to be using it.</string>
-  <string name="location_loss_warning">Turning this off could trigger the new Android photo picker. It risks losing location information.\n\nTap on \'Read more\' for more information.</string>
+  <string name="get_content_photo_picker_title">Use GET_CONTENT photo picker</string>
+  <string name="get_content_photo_picker_explanation">Disable if your pictures get uploaded without location</string>
+  <string name="location_loss_warning">Please make sure that this new Android picker does not strip location from your pictures.</string>
 
   <string name="nearby_campaign_dismiss_message">You won\'t see the campaigns anymore. However, you can re-enable this notification in Settings if you wish.</string>
   <string name="this_function_needs_network_connection">This function requires network connection, please check your connection settings.</string>
