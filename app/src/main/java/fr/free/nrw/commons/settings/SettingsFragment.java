@@ -171,10 +171,10 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             return true;
         });
 
-        Preference documentBasedPickerPreference = findPreference("openDocumentPhotoPickerPref");
-        documentBasedPickerPreference.setOnPreferenceChangeListener(
+        Preference getContentPickerPreference = findPreference("getContentPhotoPickerPref");
+        getContentPickerPreference.setOnPreferenceChangeListener(
             (preference, newValue) -> {
-                boolean isGetContentPickerTurnedOn = !(boolean) newValue;
+                boolean isGetContentPickerTurnedOn = (boolean) newValue;
                 if (isGetContentPickerTurnedOn) {
                     showLocationLossWarning();
                 }
