@@ -661,6 +661,7 @@ public class ContributionsFragment
                 restartUpload(contribution);
             } else if (contribution.getState() == STATE_FAILED) {
                 int retries = contribution.getRetries();
+                // TODO: Improve UX. Additional details: https://github.com/commons-app/apps-android-commons/pull/5257#discussion_r1304662562
                 /* Limit the number of retries for a failed upload
                    to handle cases like invalid filename as such uploads
                    will never be successful */
