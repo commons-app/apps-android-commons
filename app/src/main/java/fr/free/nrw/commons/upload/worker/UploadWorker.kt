@@ -412,7 +412,6 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                         contribution.media.captions
                     )
                     if (null != revisionID) {
-                        contribution.wikidataUpdateWasSuccessful = true
                         showSuccessNotification(contribution)
                     }
                 }catch (exception: Exception){
