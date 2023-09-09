@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.upload;
 
 import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
-import static fr.free.nrw.commons.upload.UploadPresenter.COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 import android.Manifest;
@@ -10,14 +9,15 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -27,8 +27,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.work.ExistingWorkPolicy;
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -37,7 +35,6 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionController;
-import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
@@ -52,7 +49,7 @@ import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback;
-import fr.free.nrw.commons.upload.worker.UploadWorker;
+import fr.free.nrw.commons.upload.worker.WorkRequestHelper;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
@@ -336,9 +333,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
     @Override
     public void makeUploadRequest() {
-        WorkManager.getInstance(getApplicationContext()).enqueueUniqueWork(
-            UploadWorker.class.getSimpleName(),
-            ExistingWorkPolicy.APPEND_OR_REPLACE, OneTimeWorkRequest.from(UploadWorker.class));
+        WorkRequestHelper.Companion.makeOneTimeWorkRequest(getApplicationContext(),
+            ExistingWorkPolicy.APPEND_OR_REPLACE);
     }
 
     @Override
@@ -383,6 +379,42 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                     .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
 
             fragments = new ArrayList<>();
+            /* Suggest users to turn battery optimisation off when uploading more than a few files.
+               That's because we have noticed that many-files uploads have
+               a much higher probability of failing than uploads with less files.
+
+               Show the dialog for Android 6 and above as
+               the ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS intent was added in API level 23
+             */
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (uploadableFiles.size() > 3
+                    && !defaultKvStore.getBoolean("hasAlreadyLaunchedBigMultiupload")) {
+                    DialogUtil.showAlertDialog(
+                        this,
+                        getString(R.string.unrestricted_battery_mode),
+                        getString(R.string.suggest_unrestricted_mode),
+                        getString(R.string.title_activity_settings),
+                        getString(R.string.cancel),
+                        () -> {
+                        /* Since opening the right settings page might be device dependent, using
+                           https://github.com/WaseemSabir/BatteryPermissionHelper
+                           directly appeared like a promising idea.
+                           However, this simply closed the popup and did not make
+                           the settings page appear on a Pixel as well as a Xiaomi device.
+
+                           Used the standard intent instead of using this library as
+                           it shows a list of all the apps on the device and allows users to
+                           turn battery optimisation off.
+                         */
+                            Intent batteryOptimisationSettingsIntent = new Intent(
+                                Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+                            startActivity(batteryOptimisationSettingsIntent);
+                        },
+                        () -> {}
+                    );
+                    defaultKvStore.putBoolean("hasAlreadyLaunchedBigMultiupload", true);
+                }
+            }
             for (UploadableFile uploadableFile : uploadableFiles) {
                 UploadMediaDetailFragment uploadMediaDetailFragment = new UploadMediaDetailFragment();
 
