@@ -115,7 +115,7 @@ public class CategoryDetailsActivity extends BaseActivity
         mediaContainer.setVisibility(View.VISIBLE);
         if (mediaDetails == null || !mediaDetails.isVisible()) {
             // set isFeaturedImage true for featured images, to include author field on media detail
-            mediaDetails = new MediaDetailPagerFragment(false, true);
+            mediaDetails = MediaDetailPagerFragment.newInstance(false, true);
             FragmentManager supportFragmentManager = getSupportFragmentManager();
             supportFragmentManager
                     .beginTransaction()

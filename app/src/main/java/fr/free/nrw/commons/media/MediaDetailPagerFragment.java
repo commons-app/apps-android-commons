@@ -60,7 +60,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     private static CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @BindView(R.id.mediaDetailsPager) ViewPager pager;
-    private Boolean editable;
+    private boolean editable;
     private boolean isFeaturedImage;
     private boolean isWikipediaButtonDisplayed;
     MediaDetailAdapter adapter;
@@ -78,21 +78,30 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         return removedItems;
     }
 
-    private MediaDetailPagerFragment() {}; // Constructor calls made to be explicit
-    @SuppressLint("ValidFragment")
-    public MediaDetailPagerFragment(Boolean editable, boolean isFeaturedImage) {
-        this.editable = editable;
-        this.isFeaturedImage = isFeaturedImage;
-        isFromFeaturedRootFragment = false;
+
+    public static MediaDetailPagerFragment newInstance(boolean editable, boolean isFeaturedImage) {
+        MediaDetailPagerFragment mediaDetailPagerFragment = new MediaDetailPagerFragment();
+        Bundle args = new Bundle();
+        args.putBoolean("is_editable", editable);
+        args.putBoolean("is_featured_image", isFeaturedImage);
+        mediaDetailPagerFragment.setArguments(args);
+        return mediaDetailPagerFragment;
     }
 
-    @SuppressLint("ValidFragment")
-    public MediaDetailPagerFragment(Boolean editable, boolean isFeaturedImage, int position) {
-        this.editable = editable;
-        this.isFeaturedImage = isFeaturedImage;
-        isFromFeaturedRootFragment = true;
-        this.position = position;
+    public static MediaDetailPagerFragment newInstance(boolean editable, boolean isFeaturedImage,
+        int position) {
+        MediaDetailPagerFragment mediaDetailPagerFragment = new MediaDetailPagerFragment();
+        Bundle args = new Bundle();
+        args.putBoolean("editable", editable);
+        args.putBoolean("isFeaturedImage", isFeaturedImage);
+        args.putInt("current-page", position);
+        mediaDetailPagerFragment.setArguments(args);
+        return mediaDetailPagerFragment;
     }
+
+    private MediaDetailPagerFragment() {}; // Constructor calls made to be explicit
+
+   
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -147,8 +156,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
-            editable = savedInstanceState.getBoolean("editable");
-            isFeaturedImage = savedInstanceState.getBoolean("isFeaturedImage");
+            editable = savedInstanceState.getBoolean("editable", false);
+            isFeaturedImage = savedInstanceState.getBoolean("isFeaturedImage", false);
+            pager.setCurrentItem(savedInstanceState.getInt("current-page"), false);
         }
         setHasOptionsMenu(true);
         initProvider();
