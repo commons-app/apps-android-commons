@@ -69,7 +69,6 @@ class MediaDetailPagerFragmentUnitTests {
 
         fragment = MediaDetailPagerFragment.newInstance(false, true);
         fragment = MediaDetailPagerFragment.newInstance(false, false);
-        fragment = MediaDetailPagerFragment.newInstance(false, false, 0);
         fragmentManager = activity.supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(fragment, null)

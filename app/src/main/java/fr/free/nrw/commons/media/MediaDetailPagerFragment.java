@@ -79,22 +79,18 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     }
 
 
+    /**
+     * This method will create a new instance of MediaDetailPagerFragment and the arguments will be
+     * saved to a bundle which will be later available in the {@link #onCreate(Bundle)}
+     * @param editable
+     * @param isFeaturedImage
+     * @return
+     */
     public static MediaDetailPagerFragment newInstance(boolean editable, boolean isFeaturedImage) {
         MediaDetailPagerFragment mediaDetailPagerFragment = new MediaDetailPagerFragment();
         Bundle args = new Bundle();
         args.putBoolean("is_editable", editable);
         args.putBoolean("is_featured_image", isFeaturedImage);
-        mediaDetailPagerFragment.setArguments(args);
-        return mediaDetailPagerFragment;
-    }
-
-    public static MediaDetailPagerFragment newInstance(boolean editable, boolean isFeaturedImage,
-        int position) {
-        MediaDetailPagerFragment mediaDetailPagerFragment = new MediaDetailPagerFragment();
-        Bundle args = new Bundle();
-        args.putBoolean("editable", editable);
-        args.putBoolean("isFeaturedImage", isFeaturedImage);
-        args.putInt("current-page", position);
         mediaDetailPagerFragment.setArguments(args);
         return mediaDetailPagerFragment;
     }
@@ -158,7 +154,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable", false);
             isFeaturedImage = savedInstanceState.getBoolean("isFeaturedImage", false);
-            pager.setCurrentItem(savedInstanceState.getInt("current-page"), false);
+            if(null != pager) {
+                pager.setCurrentItem(savedInstanceState.getInt("current-page", 0), false);
+            }
         }
         setHasOptionsMenu(true);
         initProvider();
