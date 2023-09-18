@@ -80,6 +80,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
 
     /**
+     * Use this factory method to create a new instance of this fragment using the provided
+     * parameters.
+     * 
      * This method will create a new instance of MediaDetailPagerFragment and the arguments will be
      * saved to a bundle which will be later available in the {@link #onCreate(Bundle)}
      * @param editable
@@ -95,8 +98,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         return mediaDetailPagerFragment;
     }
 
-    private MediaDetailPagerFragment() {}; // Constructor calls made to be explicit
-
+    public MediaDetailPagerFragment() {
+        // Required empty public constructor
+    };
    
 
     @Override
