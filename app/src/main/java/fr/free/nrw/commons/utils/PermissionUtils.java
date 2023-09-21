@@ -25,14 +25,11 @@ import java.util.List;
 public class PermissionUtils {
 
     public static String[] PERMISSIONS_STORAGE = isSDKVersionScopedStorageCompatible() ?
-        isSDKVersionTiramisu() ? new String[]{Manifest.permission.READ_MEDIA_AUDIO,
-            Manifest.permission.READ_MEDIA_IMAGES,
-            Manifest.permission.READ_MEDIA_VIDEO} :
+        isSDKVersionTiramisu() ? new String[]{
+            Manifest.permission.READ_MEDIA_IMAGES} :
             new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}
         : isSDKVersionTiramisu() ? new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_MEDIA_AUDIO,
-            Manifest.permission.READ_MEDIA_IMAGES,
-            Manifest.permission.READ_MEDIA_VIDEO}
+            Manifest.permission.READ_MEDIA_IMAGES}
             : new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE};
 
