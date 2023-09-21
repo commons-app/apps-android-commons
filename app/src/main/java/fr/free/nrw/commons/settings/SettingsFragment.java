@@ -29,7 +29,11 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.single.BasePermissionListener;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -371,7 +375,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 Locale defLocale = new Locale(languageCode);
                 if(keyListPreference.equals("appUiDefaultLanguagePref")) {
                     appUiLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
-                    setLocale(Objects.requireNonNull(getActivity()), languageCode);
+                    setLocale(requireActivity(), languageCode);
                     getActivity().recreate();
                     final Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
@@ -410,8 +414,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             separator.setVisibility(View.VISIBLE);
             final RecentLanguagesAdapter recentLanguagesAdapter
                 = new RecentLanguagesAdapter(
-                    getActivity(),
-                    recentLanguagesDao.getRecentLanguages(),
+                getActivity(),
+                recentLanguagesDao.getRecentLanguages(),
                 selectedLanguages);
             languageHistoryListView.setAdapter(recentLanguagesAdapter);
         }
@@ -436,7 +440,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         final Locale defLocale = new Locale(recentLanguageCode);
         if (keyListPreference.equals("appUiDefaultLanguagePref")) {
             appUiLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
-            setLocale(Objects.requireNonNull(getActivity()), recentLanguageCode);
+            setLocale(requireActivity(), recentLanguageCode);
             getActivity().recreate();
             final Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
@@ -506,7 +510,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
      * First checks for external storage permissions and then sends logs via email
      */
     private void checkPermissionsAndSendLogs() {
-        if (PermissionUtils.hasPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+        if (PermissionUtils.hasPermission(getActivity(), PermissionUtils.PERMISSIONS_STORAGE)) {
             commonsLogSender.send(getActivity(), null);
         } else {
             requestExternalStoragePermissions();
@@ -514,16 +518,26 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     /**
-     * Requests external storage permissions and shows a toast stating that log collection has started
+     * Requests external storage permissions and shows a toast stating that log collection has
+     * started
      */
     private void requestExternalStoragePermissions() {
         Dexter.withActivity(getActivity())
-                .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .withListener(new BasePermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse response) {
-                        ViewUtil.showLongToast(getActivity(), getResources().getString(R.string.log_collection_started));
-                    }
-                }).check();
+            .withPermissions(PermissionUtils.PERMISSIONS_STORAGE)
+            .withListener(new MultiplePermissionsListener() {
+                @Override
+                public void onPermissionsChecked(MultiplePermissionsReport report) {
+                    ViewUtil.showLongToast(getActivity(),
+                        getResources().getString(R.string.log_collection_started));
+                }
+
+                @Override
+                public void onPermissionRationaleShouldBeShown(
+                    List<PermissionRequest> permissions, PermissionToken token) {
+
+                }
+            })
+            .onSameThread()
+            .check();
     }
 }

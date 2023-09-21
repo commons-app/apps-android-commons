@@ -439,7 +439,7 @@ public class ContributionsFragment
     }
 
     private void checkPermissionsAndShowNearbyCardView() {
-        if (PermissionUtils.hasPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)) {
+        if (PermissionUtils.hasPermission(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION})) {
             onLocationPermissionGranted();
         } else if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
                 && store.getBoolean("displayLocationPermissionForCardView", true)
@@ -452,7 +452,7 @@ public class ContributionsFragment
 
     private void requestLocationPermission() {
         PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION,
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                 this::onLocationPermissionGranted,
                 this::displayYouWontSeeNearbyMessage,
                 -1,

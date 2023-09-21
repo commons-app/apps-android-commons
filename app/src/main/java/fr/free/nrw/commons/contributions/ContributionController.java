@@ -56,7 +56,7 @@ public class ContributionController {
         }
 
         PermissionUtils.checkPermissionsAndPerformAction(activity,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                PermissionUtils.PERMISSIONS_STORAGE,
                 () -> {
                     if (defaultKvStore.getBoolean("inAppCameraFirstRun")) {
                         defaultKvStore.putBoolean("inAppCameraFirstRun", false);
@@ -159,7 +159,7 @@ public class ContributionController {
         setPickerConfiguration(activity,true);
 
         PermissionUtils.checkPermissionsAndPerformAction(activity,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            PermissionUtils.PERMISSIONS_STORAGE,
             () -> FilePicker.openCustomSelector(activity, 0),
             R.string.storage_permission_title,
             R.string.write_storage_permission_rationale);
