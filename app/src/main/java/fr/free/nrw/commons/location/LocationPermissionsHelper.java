@@ -56,7 +56,7 @@ public class LocationPermissionsHelper {
         Dialog locationOffDialog
     ) {
         PermissionUtils.checkPermissionsAndPerformAction(activity,
-            permission.ACCESS_FINE_LOCATION,
+            new String[]{permission.ACCESS_FINE_LOCATION},
             () -> {
                 if(!isLocationAccessToAppsTurnedOn()) {
                     showLocationOffDialog(locationOffDialog);

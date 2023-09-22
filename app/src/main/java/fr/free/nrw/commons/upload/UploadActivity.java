@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
+import static fr.free.nrw.commons.utils.PermissionUtils.PERMISSIONS_STORAGE;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 import android.Manifest;
@@ -56,6 +57,7 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java.security.Permission;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -146,12 +148,11 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         compositeDisposable = new CompositeDisposable();
         init();
         nearbyPopupAnswers = new HashMap<>();
-
         PermissionUtils.checkPermissionsAndPerformAction(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                this::receiveSharedItems,
-                R.string.storage_permission_title,
-                R.string.write_storage_permission_rationale_for_image_share);
+            PERMISSIONS_STORAGE,
+            this::receiveSharedItems,
+            R.string.storage_permission_title,
+            R.string.write_storage_permission_rationale_for_image_share);
         //getting the current dpi of the device and if it is less than 320dp i.e. overlapping
         //threshold, thumbnails automatically minimizes
         DisplayMetrics metrics = getResources().getDisplayMetrics();
@@ -159,7 +160,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         if (dpi<=321) {
             onRlContainerTitleClicked();
         }
-        if (PermissionUtils.hasPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+        if (PermissionUtils.hasPermission(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION})) {
             locationManager.registerLocationManager();
         }
         locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
@@ -181,7 +182,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
     private void initThumbnailsRecyclerView() {
         rvThumbnails.setLayoutManager(new LinearLayoutManager(this,
-                LinearLayoutManager.HORIZONTAL, false));
+            LinearLayoutManager.HORIZONTAL, false));
         thumbnailsAdapter = new ThumbnailsAdapter(() -> currentSelectedPosition);
         rvThumbnails.setAdapter(thumbnailsAdapter);
 
@@ -193,7 +194,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         vpUpload.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset,
-                                       int positionOffsetPixels) {
+                int positionOffsetPixels) {
 
             }
 
@@ -238,28 +239,30 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
      */
     protected void checkBlockStatus() {
         compositeDisposable.add(userClient.isUserBlockedFromCommons()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .filter(result -> result)
-                .subscribe(result -> DialogUtil.showAlertDialog(
-                    this,
-                    getString(R.string.block_notification_title),
-                    getString(R.string.block_notification),
-                    getString(R.string.ok),
-                    this::finish,
-                    true)));
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .filter(result -> result)
+            .subscribe(result -> DialogUtil.showAlertDialog(
+                this,
+                getString(R.string.block_notification_title),
+                getString(R.string.block_notification),
+                getString(R.string.ok),
+                this::finish,
+                true)));
     }
 
     private void checkStoragePermissions() {
-        PermissionUtils.checkPermissionsAndPerformAction(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        final boolean hasAllPermissions = PermissionUtils.hasPermission(this, PERMISSIONS_STORAGE);
+        if (!hasAllPermissions) {
+            PermissionUtils.checkPermissionsAndPerformAction(this,
+                PERMISSIONS_STORAGE,
                 () -> {
                     //TODO handle this
                 },
                 R.string.storage_permission_title,
                 R.string.write_storage_permission_rationale_for_image_share);
+        }
     }
-
 
     @Override
     protected void onStop() {
@@ -328,7 +331,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     @Override
     public void updateTopCardTitle() {
         tvTopCardTitle.setText(getResources()
-                .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
+            .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
     }
 
     @Override
@@ -370,13 +373,13 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         } else {
             //Show thumbnails
             if (uploadableFiles.size()
-                    > 1) {//If there is only file, no need to show the image thumbnails
+                > 1) {//If there is only file, no need to show the image thumbnails
                 thumbnailsAdapter.setUploadableFiles(uploadableFiles);
             } else {
                 llContainerTopCard.setVisibility(View.GONE);
             }
             tvTopCardTitle.setText(getResources()
-                    .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
+                .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
 
             fragments = new ArrayList<>();
             /* Suggest users to turn battery optimisation off when uploading more than a few files.
@@ -419,7 +422,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                 UploadMediaDetailFragment uploadMediaDetailFragment = new UploadMediaDetailFragment();
 
                 LocationPermissionsHelper locationPermissionsHelper = new LocationPermissionsHelper(
-                                                                    this, locationManager, null);
+                    this, locationManager, null);
                 if (locationPermissionsHelper.isLocationAccessToAppsTurnedOn()) {
                     currLocation = locationManager.getLastLocation();
                 }
@@ -525,8 +528,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         }
         float[] distance = new float[2];
         Location.distanceBetween(
-                currLocation.getLatitude(), currLocation.getLongitude(),
-                prevLocation.getLatitude(), prevLocation.getLongitude(), distance);
+            currLocation.getLatitude(), currLocation.getLongitude(),
+            prevLocation.getLatitude(), prevLocation.getLongitude(), distance);
         return distance[0];
     }
 
@@ -670,5 +673,4 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             this::finish
         );
     }
-
 }
