@@ -68,12 +68,8 @@ public class LocationPermissionsHelper {
             },
             () -> {
                 if (callback != null) {
-                    Toast.makeText(
-                        activity,
-                        R.string.in_app_camera_location_permission_denied,
-                        Toast.LENGTH_LONG
-                    ).show();
-                    callback.onLocationPermissionDenied();
+                    callback.onLocationPermissionDenied(activity.getString(
+                        R.string.in_app_camera_location_permission_denied));
                 }
             },
             locationAccessDialog.dialogTitleResource,
@@ -102,14 +98,8 @@ public class LocationPermissionsHelper {
                 activity.getString(R.string.title_app_shortcut_setting),
                 activity.getString(R.string.cancel),
                 () -> openLocationSettings(),
-                () -> {
-                    Toast.makeText(
-                        activity,
-                        R.string.in_app_camera_location_unavailable,
-                        Toast.LENGTH_LONG
-                    ).show();
-                    callback.onLocationPermissionDenied();
-                });
+                () -> callback.onLocationPermissionDenied(activity.getString(
+                    R.string.in_app_camera_location_unavailable)));
     }
 
     /**
@@ -131,7 +121,7 @@ public class LocationPermissionsHelper {
      * Handle onPermissionDenied within individual classes based on the requirements
      */
     public interface LocationPermissionCallback {
-        void onLocationPermissionDenied();
+        void onLocationPermissionDenied(String toastMessage);
         void onLocationPermissionGranted();
     }
 }

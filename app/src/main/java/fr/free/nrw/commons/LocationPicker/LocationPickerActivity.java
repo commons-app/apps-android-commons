@@ -10,12 +10,9 @@ import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.
 import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
@@ -60,9 +57,11 @@ import fr.free.nrw.commons.MapStyle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LocationPermissionsHelper;
+import fr.free.nrw.commons.location.LocationPermissionsHelper.Dialog;
+import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.theme.BaseActivity;
-import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -465,46 +464,35 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      * Center the map at user's current location
      */
     private void getCenter() {
-        fr.free.nrw.commons.location.LatLng currLocation = locationManager.getLastLocation();
-        if (currLocation != null) {
-            mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                    new LatLng(currLocation.getLatitude(), currLocation.getLongitude()), 15.0));
-        } else if (locationManager.isGPSProviderEnabled() ||
-            locationManager.isNetworkProviderEnabled()) {
-            locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
-            locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
-        } else {
-            showLocationOffDialog();
-        }
-    }
-    
-    /**
-     * Inform the user that the access to location is turned off
-     * And ask for location access
-     */
-    private void showLocationOffDialog() {
-        DialogUtil
-            .showAlertDialog(this, getString(R.string.ask_to_turn_location_on),
-                getString(R.string.upload_map_location_access),
-                getString(R.string.yes), getString(R.string.no),
-                this::openLocationSettings,
-                () -> Toast.makeText(this, getString(R.string.upload_location_access_denied),
-                    Toast.LENGTH_LONG).show());
-    }
+        LocationPermissionsHelper.Dialog locationAccessDialog = new Dialog(
+            R.string.location_permission_title,
+            R.string.upload_map_location_access
+        );
 
-    /**
-     * Open settings for the user to enable location access
-     */
-    private void openLocationSettings() {
-        final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-        final PackageManager packageManager = getPackageManager();
+        LocationPermissionsHelper.Dialog locationOffDialog = new Dialog(
+            R.string.ask_to_turn_location_on,
+            R.string.upload_map_location_access
+        );
+        LocationPermissionsHelper locationPermissionsHelper = new LocationPermissionsHelper(
+            this, locationManager, new LocationPermissionCallback() {
+            @Override
+            public void onLocationPermissionDenied(String toastMessage) {
+                // Do nothing
+            }
 
-        if (intent.resolveActivity(packageManager) != null) {
-            startActivity(intent);
-            Toast.makeText(this, R.string.recommend_high_accuracy_mode, Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, R.string.cannot_open_location_settings, Toast.LENGTH_LONG).show();
-        }
+            @Override
+            public void onLocationPermissionGranted() {
+                fr.free.nrw.commons.location.LatLng currLocation = locationManager.getLastLocation();
+                final CameraPosition position;
+                position = new CameraPosition.Builder()
+                    .target(new com.mapbox.mapboxsdk.geometry.LatLng(currLocation.getLatitude(), currLocation.getLongitude(), 0)) // Sets the new camera position
+                    .zoom(mapboxMap.getCameraPosition().zoom) // Same zoom level
+                    .build();
+
+                mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
+            }
+        });
+        locationPermissionsHelper.handleLocationPermissions(locationAccessDialog, locationOffDialog);
     }
 
     @Override
