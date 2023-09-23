@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload.mediaDetails;
 
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.filepicker.UploadableFile;
+import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
@@ -43,9 +44,9 @@ public interface UploadMediaDetailsContract {
 
     interface UserActionListener extends BasePresenter<View> {
 
-        void receiveImage(UploadableFile uploadableFile, Place place);
+        void receiveImage(UploadableFile uploadableFile, Place place, LatLng inAppPictureLocation);
 
-        void verifyImageQuality(int uploadItemIndex);
+        void verifyImageQuality(int uploadItemIndex, LatLng inAppPictureLocation);
 
         void copyTitleAndDescriptionToSubsequentMedia(int indexInViewFlipper);
 

@@ -242,6 +242,7 @@
   <string name="location_permission_title">Запрос на определение местоположения</string>
   <string name="ok">OK</string>
   <string name="warning">Внимание</string>
+  <string name="duplicate_file_name">Обнаружено повторяющееся имя файла</string>
   <string name="upload">Загрузить</string>
   <string name="yes">Да</string>
   <string name="no">Нет</string>
@@ -464,6 +465,9 @@
   <string name="ends_on">Заканчивается:</string>
   <string name="display_campaigns">Показ кампаний</string>
   <string name="display_campaigns_explanation">Просмотр текущих кампаний</string>
+  <string name="open_document_photo_picker_title">Использовать средство выбора фотографий на основе документа</string>
+  <string name="open_document_photo_picker_explanation">Новый инструмент выбора фотографий Android рискует потерять информацию о местоположении. Включите, если вы собираетесь его использовать</string>
+  <string name="location_loss_warning">Отключение может привести к запуску нового средства выбора фотографий Android. Из-за этого может потеряться информация о местоположении.\n\nНажмите «Подробнее» для получения дополнительной информации.</string>
   <string name="nearby_campaign_dismiss_message">Вы больше не увидите кампаний. Однако, если захочете, вы сможете включить нотификации о кампаниях в настройках.</string>
   <string name="this_function_needs_network_connection">Для этой функции требуется доступ к интернет. Пожалуйста, проверьте своё подключение.</string>
   <string name="error_processing_image">Произошла ошибка при загрузке файла. Пожалуйста, попробуйте позднее!</string>
@@ -525,6 +529,8 @@
   <string name="exif_tag_name_lensModel">Модель объектива</string>
   <string name="exif_tag_name_serialNumbers">Серийный номер</string>
   <string name="exif_tag_name_software">Программное обеспечение</string>
+  <string name="media_location_permission_denied">Отказано в доступе к местоположению файла</string>
+  <string name="add_location_manually">Возможно, мы не сможем автоматически получать данные о местоположении из загруженных вами изображений. Пожалуйста, добавьте подходящее место для каждого изображения перед отправкой</string>
   <string name="share_text">Загружайте фото на Викисклад прямо с телефона. Скачайте приложение Wikimedia Commons прямо сейчас: %1$s</string>
   <string name="share_via">Поделиться приложением с помощью...</string>
   <string name="image_info">Информация об изображении</string>
@@ -599,7 +605,7 @@
   <string name="title_for_child_classes">ДЕТСКИЕ КЛАССЫ</string>
   <string name="title_for_parent_classes">РОДИТЕЛЬСКИЕ КЛАССЫ</string>
   <string name="upload_nearby_place_found_title">Место поблизости найдено</string>
-  <string name="upload_nearby_place_found_description">Является ли это фото местом %1$s?</string>
+  <string name="upload_nearby_place_found_description">На этом фото %1$s?</string>
   <string name="title_app_shortcut_bookmark">Закладки</string>
   <string name="title_app_shortcut_setting">Настройки</string>
   <string name="remove_bookmark">Удалено из закладок</string>

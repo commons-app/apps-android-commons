@@ -3,6 +3,7 @@
 * Alex Khimich
 * Alexander Yukal
 * Andriykopanytsia
+* Anntinomy
 * Base
 * DDPAT
 * Fifty Pro
@@ -222,6 +223,7 @@
   <string name="location_permission_title">Запит на визначення розташування</string>
   <string name="ok">Гаразд</string>
   <string name="warning">Попередження</string>
+  <string name="duplicate_file_name">Знайдено повторюване ім\'я файлу</string>
   <string name="upload">Завантажити</string>
   <string name="yes">Так</string>
   <string name="no">Ні</string>
@@ -444,6 +446,7 @@
   <string name="ends_on">Завершується:</string>
   <string name="display_campaigns">Показати кампанії</string>
   <string name="display_campaigns_explanation">Чинні кампанії</string>
+  <string name="location_loss_warning" fuzzy="true">Переконайтеся, що цей новий засіб вибору Android не видаляє геоданы з ваших зображень.</string>
   <string name="nearby_campaign_dismiss_message">Ви більше не бачитимете кампаній. Однак Ви можете увімкнути це сповіщення повторно в своїх налаштуваннях, якщо забажаєте.</string>
   <string name="this_function_needs_network_connection">Ця функція вимагає доступу до інтернету. Будь ласка, перевірте своє з\'єднання.</string>
   <string name="error_processing_image">Сталася помилка при обробці зображення. Будь ласка, спробуйте ще раз!</string>
@@ -505,6 +508,8 @@
   <string name="exif_tag_name_lensModel">Модель об\'єктиву</string>
   <string name="exif_tag_name_serialNumbers">Серійний номер</string>
   <string name="exif_tag_name_software">Програмне забезпечення</string>
+  <string name="media_location_permission_denied">Доступ до місцезнаходження медіа заборонено</string>
+  <string name="add_location_manually">Можливо, ми не зможемо автоматично отримати дані про місцезнаходження із зображень, які ви завантажуєте. Будь ласка, додайте відповідне місце для кожного зображення перед надсиланням</string>
   <string name="share_text">Вивантажуйте фото у Вікісховище безпосередньо зі свого телефона. Завантажте застосунок: %1$s</string>
   <string name="share_via">Поділитися програмкою через…</string>
   <string name="image_info">Інформація про зображення</string>
@@ -526,6 +531,7 @@
   <string name="delete_helper_ask_reason_copyright_press_photo">Фото з новин</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Випадкове фото з інтернет</string>
   <string name="delete_helper_ask_reason_copyright_logo">Логотип</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">Порушення свободи панорами</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Оскільки</string>
   <string name="category_edit_helper_make_edit_toast">У процесі спроби оновлення категорій.</string>
   <string name="category_edit_helper_show_edit_title">Оновлення категорій</string>
@@ -578,7 +584,7 @@
   <string name="title_for_child_classes">ДОЧІРНІ КЛАСИ</string>
   <string name="title_for_parent_classes">БАТЬКІВСЬКІ КЛАСИ</string>
   <string name="upload_nearby_place_found_title">Знайдено місце поблизу</string>
-  <string name="upload_nearby_place_found_description">Чи це — фото місця %1$s?</string>
+  <string name="upload_nearby_place_found_description">На цьому фото %1$s?</string>
   <string name="title_app_shortcut_bookmark">Закладки</string>
   <string name="title_app_shortcut_setting">Налаштування</string>
   <string name="remove_bookmark">Вилучено з закладок</string>
@@ -736,4 +742,6 @@
   <string name="welcome_to_full_screen_mode_text">Ласкаво просимо до Повноекранного Режиму Вибору</string>
   <string name="full_screen_mode_zoom_info">Використовуйте два пальці для збільшення та зменшення масштабу.</string>
   <string name="full_screen_mode_features_info">Швидко та довго гортайте, щоб виконати ці дії: \n- Left/Right: Перейти до попер/наст\n- Up: Вибрати\n- Down: Позначити як не для завантаження.</string>
+  <string name="set_up_avatar_toast_string">Щоб налаштувати свій аватар у таблиці лідерів, натисніть «Установити як аватар» у меню з трьома крапками будь-якого зображення.</string>
+  <string name="similar_coordinate_description_auto_set">Координати не є точними, але людина, яка завантажила це фото, вважає, що вони досить близькі.</string>
 </resources>

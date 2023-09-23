@@ -3,12 +3,7 @@ package fr.free.nrw.commons.upload.mediaDetails;
 import static fr.free.nrw.commons.di.CommonsApplicationModule.IO_THREAD;
 import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_CAPTION;
-import static fr.free.nrw.commons.utils.ImageUtils.FILE_FBMD;
 import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
-import static fr.free.nrw.commons.utils.ImageUtils.FILE_NO_EXIF;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_BLURRY;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_DARK;
-import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_GEOLOCATION_DIFFERENT;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
@@ -92,11 +87,12 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * @param place
      */
     @Override
-    public void receiveImage(final UploadableFile uploadableFile, final Place place) {
+    public void receiveImage(final UploadableFile uploadableFile, final Place place,
+                            LatLng inAppPictureLocation) {
         view.showProgress(true);
         compositeDisposable.add(
             repository
-                .preProcessImage(uploadableFile, place, this)
+                .preProcessImage(uploadableFile, place, this, inAppPictureLocation)
                 .map(uploadItem -> {
                     if(place!=null && place.isMonument()){
                         if (place.location != null) {
@@ -182,15 +178,15 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * @param uploadItemIndex
      */
     @Override
-    public void verifyImageQuality(int uploadItemIndex) {
+    public void verifyImageQuality(int uploadItemIndex, LatLng inAppPictureLocation) {
       final UploadItem uploadItem = repository.getUploads().get(uploadItemIndex);
 
-      if (uploadItem.getGpsCoords().getDecimalCoords() == null) {
+      if (uploadItem.getGpsCoords().getDecimalCoords() == null && inAppPictureLocation == null) {
           final Runnable onSkipClicked = () -> {
               view.showProgress(true);
               compositeDisposable.add(
                   repository
-                      .getImageQuality(uploadItem)
+                      .getImageQuality(uploadItem, inAppPictureLocation)
                       .observeOn(mainThreadScheduler)
                       .subscribe(imageResult -> {
                               view.showProgress(false);
@@ -213,7 +209,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
           view.showProgress(true);
           compositeDisposable.add(
               repository
-                  .getImageQuality(uploadItem)
+                  .getImageQuality(uploadItem, inAppPictureLocation)
                   .observeOn(mainThreadScheduler)
                   .subscribe(imageResult -> {
                           view.showProgress(false);
@@ -331,11 +327,8 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
             view.showDuplicatePicturePopup(uploadItem);
         }
 
-        // If image has some problems check if the bits are set in errorCode and
-        // show popup accordingly
-        if (((errorCode & FILE_NO_EXIF) != 0) || ((errorCode & IMAGE_DARK) != 0) ||
-            ((errorCode & FILE_FBMD) != 0) || ((errorCode & IMAGE_GEOLOCATION_DIFFERENT) != 0) ||
-            ((errorCode & IMAGE_BLURRY) != 0)) {
+        // If image has some other problems, show popup accordingly
+        if (errorCode != EMPTY_CAPTION && errorCode != FILE_NAME_EXISTS) {
             view.showBadImagePopup(errorCode, uploadItem);
         }
 

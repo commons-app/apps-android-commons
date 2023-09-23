@@ -38,7 +38,10 @@ public class LatLng implements Parcelable {
         this.latitude = Math.max(-90.0D, Math.min(90.0D, latitude));
         this.accuracy = accuracy;
     }
-
+    /**
+     * An alternate constructor for this class.
+     * @param in A parcelable which contains the latitude, longitude, and accuracy
+     */
     public LatLng(Parcel in) {
         latitude = in.readDouble();
         longitude = in.readDouble();
@@ -165,7 +168,7 @@ public class LatLng implements Parcelable {
     }
 
     public Uri getGmmIntentUri() {
-        return Uri.parse("geo:0,0?q=" + latitude + "," + longitude);
+        return Uri.parse("geo:" + latitude + "," + longitude + "?z=16");
     }
 
     @Override

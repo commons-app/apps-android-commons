@@ -15,6 +15,8 @@
 * Mariagarbin
 * Maxan
 * Mello25
+* Re demz
+* Stephanyb76
 * TheEduGobi
 * TheGabrielZaum
 * Tks4Fish
@@ -33,7 +35,7 @@
   <string name="add_contribution_from_camera">Adicionar contribuição da câmera</string>
   <string name="add_contribution_from_photos">Adicionar contribuição de Fotos</string>
   <string name="add_contribution_from_contributions_gallery">Adicionar contribuição da galeria de contribuições anteriores</string>
-  <string name="show_captions">Legenda</string>
+  <string name="show_captions">Legendas</string>
   <string name="row_item_language_description">Descrição do idioma</string>
   <string name="row_item_caption">Legenda</string>
   <string name="show_captions_description">Descrição</string>
@@ -88,7 +90,7 @@
   <string name="forgot_password">Esqueceu a senha?</string>
   <string name="signup">Cadastre-se</string>
   <string name="logging_in_title">Efetuar login</string>
-  <string name="logging_in_message">Aguarde…</string>
+  <string name="logging_in_message">Por favor, aguarde...</string>
   <string name="updating_caption_title">Atualizando legendas e descrições</string>
   <string name="updating_caption_message">Por favor, aguarde...</string>
   <string name="login_success">Login bem sucedido</string>
@@ -117,7 +119,7 @@
   <string name="provider_contributions">Meus envios</string>
   <string name="menu_share">Compartilhar</string>
   <string name="menu_view_file_page">Ver página do arquivo</string>
-  <string name="share_title_hint">Legenda (obrigatório)</string>
+  <string name="share_title_hint">Legenda (Obrigatório)</string>
   <string name="add_caption_toast">Forneça uma legenda para este arquivo</string>
   <string name="share_description_hint">Descrição</string>
   <string name="share_caption_hint">Legenda</string>
@@ -210,6 +212,7 @@
   <string name="location_permission_title">Autorização para identificar localização</string>
   <string name="ok">OK</string>
   <string name="warning">Alerta</string>
+  <string name="duplicate_file_name">Nome de Arquivo Duplicado encontrado</string>
   <string name="upload">Enviar</string>
   <string name="yes">Sim</string>
   <string name="no">Não</string>
@@ -293,7 +296,7 @@
   <string name="about_rate_us">Avalie-nos</string>
   <string name="about_faq">Perguntas frequentes</string>
   <string name="user_guide">Guia de usuario</string>
-  <string name="welcome_skip_button">Pular tutoril</string>
+  <string name="welcome_skip_button">Pular Tutorial</string>
   <string name="no_internet">A Internet não está disponível</string>
   <string name="error_notifications">Erro ao tentar obter as notificações</string>
   <string name="error_review">Erro ao buscar a imagem para revisão. Pressione atualizar para tentar novamente.</string>
@@ -330,8 +333,8 @@
   <string name="explore_tab_title_map">Mapa</string>
   <string name="successful_wikidata_edit">Imagem adicionada a %1$s na Wikidata!</string>
   <string name="wikidata_edit_failure">Falha ao atualizar a entidade Wikidata correspondente!</string>
-  <string name="menu_set_wallpaper">Definir como imagem de fundo</string>
-  <string name="wallpaper_set_successfully">Imagem de fundo definida!</string>
+  <string name="menu_set_wallpaper">Definir como papel de parede</string>
+  <string name="wallpaper_set_successfully">Papel de parede definido!</string>
   <string name="quiz">Questionário</string>
   <string name="quiz_question_string">Esta fotografia pode ser carregada?</string>
   <string name="question">Pergunta</string>
@@ -493,6 +496,8 @@
   <string name="exif_tag_name_lensModel">Modelo de lente</string>
   <string name="exif_tag_name_serialNumbers">Números de série</string>
   <string name="exif_tag_name_software">Software</string>
+  <string name="media_location_permission_denied">Acesso à localização da mídia negado</string>
+  <string name="add_location_manually">É possível que não possamos obter automaticamente os dados de localização das imagens que você carregar. Por favor adicione a localização adequada para cada imagem antes de envia-las</string>
   <string name="share_text">Carregue fotos na wiki Wikimedia Commons, diretamente do seu celular. Baixe o aolicativo Commons agora: %1$s</string>
   <string name="share_via">Compartilhar aplicativo via...</string>
   <string name="image_info">Informação da imagem</string>
@@ -514,6 +519,7 @@
   <string name="delete_helper_ask_reason_copyright_press_photo">Divulgação</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Foto aleatória da internet</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logótipo</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">Violação da Liberdade de Panorama</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Porque é</string>
   <string name="category_edit_helper_make_edit_toast">Tentando atualizar categorias.</string>
   <string name="category_edit_helper_show_edit_title">Atualização de categoria</string>
@@ -562,7 +568,7 @@
   <string name="title_for_child_classes">CLASSES INFANTIS</string>
   <string name="title_for_parent_classes">CLASSES PAIS</string>
   <string name="upload_nearby_place_found_title">Local próximo encontrado</string>
-  <string name="upload_nearby_place_found_description">Esta é uma foto desse lugar %1$s?</string>
+  <string name="upload_nearby_place_found_description">Esta é uma foto de %1$s?</string>
   <string name="title_app_shortcut_bookmark">Favoritos</string>
   <string name="title_app_shortcut_setting">Configurações</string>
   <string name="remove_bookmark">Removido dos favoritos</string>
@@ -720,4 +726,6 @@
   <string name="welcome_to_full_screen_mode_text">Bem-vindo(a) ao Modo de Seleção de Tela Cheia</string>
   <string name="full_screen_mode_zoom_info">Use dois dedos para aumentar e diminuir a ampliação.</string>
   <string name="full_screen_mode_features_info">Passe o dedo com um gesto rápido e longo para executar estas operações: \n- Esquerda/direita: Ir para o anterior/seguinte\n- Cima: Selecionar\n- Baixo: Marcar como não sendo para carregamento.</string>
+  <string name="set_up_avatar_toast_string">Para definir seu avatar da tabela de classificação, clique em \"Definir como avatar\" no menu de três pontos da sua imagem.</string>
+  <string name="similar_coordinate_description_auto_set">As coordenadas não são exatas, mas a pessoa que carregou essa imagem crê que sejam próximas o suficiente.</string>
 </resources>

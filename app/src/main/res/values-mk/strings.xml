@@ -416,6 +416,9 @@
   <string name="ends_on">Завршува:</string>
   <string name="display_campaigns">Прикажи походи</string>
   <string name="display_campaigns_explanation">Погледајте ги тековните походи</string>
+  <string name="open_document_photo_picker_title">Користи избирач на слики од документи</string>
+  <string name="open_document_photo_picker_explanation">Новиот избирач на слики на Андроид ризикува да ги изгуби информациите за местоположба. Овозможете ги ако го користите.</string>
+  <string name="location_loss_warning">Со исклучување на ова ќе го повикате избирачот на слики на Андроид. Ризикува загуба на информации за местоположба.\n\nДопрете на „Прочитајте повеќе“ за повеќе информации.</string>
   <string name="nearby_campaign_dismiss_message">Повеќе нема да ви се прикажуваат походите. Доколку се премислите, таа поставка ќе ја најдете во Нагодувањата.</string>
   <string name="this_function_needs_network_connection">Оваа можност бара да бидете поврзани со мрежата. Проверете ги поставките за поврзување.</string>
   <string name="error_processing_image">Се појави грешка при обработката на сликата. Обидете се повторно!</string>
@@ -549,7 +552,7 @@
   <string name="title_for_child_classes">ЗАВИСНИ КЛАСИ</string>
   <string name="title_for_parent_classes">МАТИЧНИ КЛАСИ</string>
   <string name="upload_nearby_place_found_title">Пронајдено околно место</string>
-  <string name="upload_nearby_place_found_description">Дали ова е слика од местото %1$s?</string>
+  <string name="upload_nearby_place_found_description">Дали ова е слика од %1$s?</string>
   <string name="title_app_shortcut_bookmark">Обележани</string>
   <string name="title_app_shortcut_setting">Нагодувања</string>
   <string name="remove_bookmark">Отстрането од обележани</string>

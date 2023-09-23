@@ -1,5 +1,23 @@
 # Wikimedia Commons for Android
 
+## v4.1.0
+- Location of pictures uploaded via custom picture selector are now recognized
+- Improvements to the custom picture selector
+- Ensure the WLM pictures are associated with the correct templates for each year
+- Only show pictures uploaded via app in peer review
+- Improve the variety of images show in peer review
+- Allow going to current location in location edit dialog while uploading a picture
+- Switch to using MapLibre instead of Mapbox and thereby disable telemetry sent to Mapbox
+- Fixed various bugs
+
+## v4.0.5
+- Bumped min SDK to 29 to try and solve Google policy issue
+- Reverted dialog
+- Note: This encompasses versions 1031, 1032, and 1033, due to the Play Store's requirements to overwrite all the tracks with a post-fix version (otherwise no single track can be published)
+
+## v4.0.4
+- Added dialog for Google's location policy
+
 ## v4.0.3
 - Added "Report" button for Google UGC policy
 

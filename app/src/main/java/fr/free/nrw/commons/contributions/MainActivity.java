@@ -1,11 +1,11 @@
 package fr.free.nrw.commons.contributions;
 
 import android.Manifest.permission;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -19,8 +19,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.work.ExistingWorkPolicy;
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
@@ -45,9 +43,11 @@ import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.quiz.QuizChecker;
 import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
-import fr.free.nrw.commons.upload.worker.UploadWorker;
+import fr.free.nrw.commons.upload.worker.WorkRequestHelper;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
+import io.reactivex.schedulers.Schedulers;
+import java.util.Collections;
 import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
@@ -59,6 +59,8 @@ public class MainActivity  extends BaseActivity
     SessionManager sessionManager;
     @Inject
     ContributionController controller;
+    @Inject
+    ContributionDao contributionDao;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.pager)
@@ -139,6 +141,9 @@ public class MainActivity  extends BaseActivity
             setTitle(getString(R.string.navigation_item_explore));
             setUpLoggedOutPager();
         } else {
+            if (applicationKvStore.getBoolean("firstrun", true)) {
+                applicationKvStore.putBoolean("hasAlreadyLaunchedBigMultiupload", false);
+            }
             if(savedInstanceState == null){
                 //starting a fresh fragment.
                 // Open Last opened screen if it is Contributions or Nearby, otherwise Contributions
@@ -152,6 +157,20 @@ public class MainActivity  extends BaseActivity
                 }
             }
             setUpPager();
+            /**
+             * Ask the user for media location access just after login
+             * so that location in the EXIF metadata of the images shared by the user
+             * is retained on devices running Android 10 or above
+             */
+            if (VERSION.SDK_INT >= VERSION_CODES.Q) {
+                PermissionUtils.checkPermissionsAndPerformAction(
+                    this,
+                    new String[]{permission.ACCESS_MEDIA_LOCATION},
+                    () -> {},
+                    R.string.media_location_permission_denied,
+                    R.string.add_location_manually
+                );
+            }
         }
     }
 
@@ -347,6 +366,21 @@ public class MainActivity  extends BaseActivity
         }
     }
 
+    /**
+     * Retry all failed uploads as soon as the user returns to the app
+     */
+    @SuppressLint("CheckResult")
+    private void retryAllFailedUploads() {
+        contributionDao.
+            getContribution(Collections.singletonList(Contribution.STATE_FAILED))
+            .subscribeOn(Schedulers.io())
+            .subscribe(failedUploads -> {
+                for (Contribution contribution: failedUploads) {
+                    contributionsFragment.retryUpload(contribution);
+                }
+            });
+    }
+
     public void toggleLimitedConnectionMode() {
         defaultKvStore.putBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED,
             !defaultKvStore
@@ -356,10 +390,8 @@ public class MainActivity  extends BaseActivity
             viewUtilWrapper
                 .showShortToast(getBaseContext(), getString(R.string.limited_connection_enabled));
         } else {
-            WorkManager.getInstance(getApplicationContext()).enqueueUniqueWork(
-                UploadWorker.class.getSimpleName(),
-                ExistingWorkPolicy.APPEND_OR_REPLACE, OneTimeWorkRequest.from(UploadWorker.class));
-
+            WorkRequestHelper.Companion.makeOneTimeWorkRequest(getApplicationContext(),
+                ExistingWorkPolicy.APPEND_OR_REPLACE);
             viewUtilWrapper
                 .showShortToast(getBaseContext(), getString(R.string.limited_connection_disabled));
         }
@@ -390,8 +422,11 @@ public class MainActivity  extends BaseActivity
 
         if ((applicationKvStore.getBoolean("firstrun", true)) &&
             (!applicationKvStore.getBoolean("login_skipped"))) {
+            defaultKvStore.putBoolean("inAppCameraFirstRun", true);
             WelcomeActivity.startYourself(this);
         }
+
+        retryAllFailedUploads();
     }
 
     @Override

@@ -9,6 +9,20 @@
   <string name="commons_website">Sit an sl\'aragnà ëd Comun</string>
   <string name="exit_location_picker">Seurte dal selessionador ëd locassion</string>
   <string name="submit">Mandé</string>
+  <string name="add_another_description">Gionté n\'àutra descrission</string>
+  <string name="add_new_contribution">Gionté na neuva contribussion</string>
+  <string name="add_contribution_from_camera">Gionté na contribussion da la telecàmera</string>
+  <string name="add_contribution_from_photos">Gionté na contribussion da le fòto</string>
+  <string name="add_contribution_from_contributions_gallery">Gionté na contribussion da la galarìa dle contribussion precedente</string>
+  <string name="show_captions">Legende</string>
+  <string name="row_item_language_description">Descrission ëd lenga</string>
+  <string name="row_item_caption">Legenda</string>
+  <string name="show_captions_description">Descrission</string>
+  <string name="nearby_row_image">Plancia</string>
+  <string name="nearby_all">Tuti</string>
+  <string name="nearby_filter_toggle">Sauté vers l\'àut</string>
+  <string name="nearby_filter_search">Vista d\'arserca</string>
+  <string name="nearby_filter_state">Stat dël leu</string>
   <string name="appwidget_img">Plancia dël di</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d archivi an camin ch\'as caria</item>
@@ -177,6 +191,7 @@
   <string name="location_permission_title">Arcesta dël përmess ëd localisassion</string>
   <string name="ok">Va bin</string>
   <string name="warning">Avertensa</string>
+  <string name="duplicate_file_name">Nòm d\'archivi dobi trovà</string>
   <string name="upload">Carié</string>
   <string name="yes">Bò</string>
   <string name="no">Nò</string>
@@ -399,6 +414,9 @@
   <string name="ends_on">A finiss ai:</string>
   <string name="display_campaigns">Campagne ëd visualisassion</string>
   <string name="display_campaigns_explanation">Vëdde le campagne an cors</string>
+  <string name="open_document_photo_picker_title">Dovré ël seletor ëd fòto basà an s\'un document</string>
+  <string name="open_document_photo_picker_explanation">Ël neuv seletor ëd fòti d\'Android a arziga ëd perde dj\'anformassion ëd localisassion. Ch\'a lo abìlita s\'a smija ch\'a lo deuvra.</string>
+  <string name="location_loss_warning">Dëstisselo a podrìa fé parte ël neuv seletor ëd fòto d\'Android. A arziga ëd perde dj\'anformassion ëd localisassion.\n\nSgnaché su \'Lese ëd pi\' për pi d\'anformassion.</string>
   <string name="nearby_campaign_dismiss_message">A vëdrà pi nen le campagna. Comsëssìa, a peul torna abilité costa notìfica ant ij paràmeter, s\'a veul.</string>
   <string name="this_function_needs_network_connection">Sa fonsion a l\'ha damanca ëd na conession ëd rej, për piasì ch\'a contròla ij sò paràmtere ëd conession.</string>
   <string name="error_processing_image">A-i è staje n\'eror durant ël tratament ëd la plancia. Ch\'a ancamin-a torna, për piasì!</string>
@@ -460,6 +478,8 @@
   <string name="exif_tag_name_lensModel">Model ëd lent</string>
   <string name="exif_tag_name_serialNumbers">Nùmer ëd serie</string>
   <string name="exif_tag_name_software">Programa</string>
+  <string name="media_location_permission_denied">Acess a la locassion dël mojen arfudà</string>
+  <string name="add_location_manually">I podoma pa oten-e an automàtich ij dàit ëd localisassion dle plance che chiel a caria. Për piasì, ch\'a giontà la posission apropià për tute le plance prima ëd mandeje</string>
   <string name="share_text">Ch\'a caria dle fòto su Wikimedia Commons diretaman da sò teléfon. Ch\'a dëscaria l\'aplicassion Commons adess: %1$s</string>
   <string name="share_via">Partagé l\'aplicassion via...</string>
   <string name="image_info">Anformassion an sla plancia</string>
@@ -475,12 +495,13 @@
   <string name="delete_helper_show_deletion_message_if">%1$s nominà për la dëscancelassion.</string>
   <string name="delete_helper_show_deletion_title_failed">Falì</string>
   <string name="delete_helper_show_deletion_message_else">Impossìbil ëd ciamé la dëscancelassion.</string>
-  <string name="delete_helper_ask_spam_selfie" fuzzy="true">N\'autoscat</string>
-  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Tërbol</string>
-  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Gnun sust</string>
+  <string name="delete_helper_ask_spam_selfie">n\'autoscat ch\'a l\'é dovrà an gnun artìcol</string>
+  <string name="delete_helper_ask_spam_blurry">tërbol d\'autut</string>
+  <string name="delete_helper_ask_spam_nonsense">gnun sust, as peul pròpe nen dovresse an qualsëssìa artìcol</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Fòto dë stampa</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Fòto a l\'ancàpit da \'n sl\'aragnà</string>
   <string name="delete_helper_ask_reason_copyright_logo">Marca</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">Atentà a la libertà ëd panorama</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Përchè a l\'é</string>
   <string name="category_edit_helper_make_edit_toast">Tentativ d\'agiornament ëd le categorìe.</string>
   <string name="category_edit_helper_show_edit_title">Agiornament ëd la categorìa</string>
@@ -529,7 +550,7 @@
   <string name="title_for_child_classes">CLASSE MASNÀ</string>
   <string name="title_for_parent_classes">CLASSE CE</string>
   <string name="upload_nearby_place_found_title">Trovà un pòst davzin</string>
-  <string name="upload_nearby_place_found_description">É-lo na fòto dël pòst %1$s?</string>
+  <string name="upload_nearby_place_found_description">É-lo na fòto ëd %1$s?</string>
   <string name="title_app_shortcut_bookmark">Marcapàgine</string>
   <string name="title_app_shortcut_setting">Paràmeter</string>
   <string name="remove_bookmark">Gavà dai marca-pàgina</string>
@@ -628,7 +649,7 @@
   <string name="done">Fàit</string>
   <string name="back">André</string>
   <string name="welcome_custom_picture_selector_text">Bin-ëvnù ant ël seletor ëd plance përsonalisà</string>
-  <string name="custom_selector_info_text1" fuzzy="true">Ës seletor a smon ëd fasson diferenta dle plance ch\'a son già an Comun</string>
+  <string name="custom_selector_info_text1">Ës seletor a jë smon dle plance che chiel a l\'ha già carià su Comun.</string>
   <string name="custom_selector_info_text2">A diferensa da la plancia a snistra, la plancia a drita a la marca Comun ch\'a mostra ch\'a l\'é già stàita carià.\n Toché e ten-e për avèj na previsualisassion ëd la plancia.</string>
   <string name="welcome_custom_selector_ok">Fiamengh</string>
   <string name="custom_selector_already_uploaded_image_text">La plancia a l\'é già stàita carià su Comun.</string>
@@ -668,4 +689,23 @@
   <string name="error_feedback">Eror durant la spedission ëd l\'opinion</string>
   <string name="enter_description">Cola ch\'a l\'é soa opinion?</string>
   <string name="your_feedback">Soa opinion</string>
+  <string name="mark_as_not_for_upload">Marché coma da nen carié</string>
+  <string name="unmark_as_not_for_upload">Desselessioné coma da nen carié</string>
+  <string name="show_already_actioned_pictures">Smon-e le plance già assionà</string>
+  <string name="hiding_already_actioned_pictures">Stërmé le plance già assionà</string>
+  <string name="no_more_images_found">Pi gnun-e plance trovà</string>
+  <string name="this_image_is_already_uploaded">Costa plancia a l\'é già carià</string>
+  <string name="can_not_select_this_image_for_upload">Impossìbil selessioné costa plancia për ël cariament</string>
+  <string name="image_selected">Plancia selessionà</string>
+  <string name="image_marked_as_not_for_upload">Plancia marcà coma da nen carié</string>
+  <string name="menu_view_report">Signalé</string>
+  <string name="report_violation">Signalé na violassion</string>
+  <string name="report_user">Signalé cost utent-sì</string>
+  <string name="report_content">Signalé ës contù</string>
+  <string name="request_user_block">Arcesta ëd bloché cost utent</string>
+  <string name="welcome_to_full_screen_mode_text">Bin-ëvnù ant ël meud ëd selession a scren antregh</string>
+  <string name="full_screen_mode_zoom_info">Ch\'a deuvra doi dij për agrandì o strenze.</string>
+  <string name="full_screen_mode_features_info">Fé score an pressa e assè leugn për fé coste assion-sì: \n- vers ësnistra/vers drita: andé a col prima/col apress\n- an su: selessioné\n- an giù: marché coma da nen carié.</string>
+  <string name="set_up_avatar_toast_string">Për configuré soa plancia virtual ëd classìfica, ch\'a sgnaca su «Definì tanme plancia virtual» ant lë mnu a tre pontin ëd na plancia qualsëssìa.</string>
+  <string name="similar_coordinate_description_auto_set">Le coordinà a son nen le coordinà precise, ma la përson-a che a l\'ha carià costa plancia a pensa che a son davzin-e a basta.</string>
 </resources>

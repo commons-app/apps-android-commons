@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.exifinterface.media.ExifInterface
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.mwapi.CategoryApi
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.settings.Prefs
@@ -48,7 +49,8 @@ class FileProcessor @Inject constructor(
     /**
      * Processes filePath coordinates, either from EXIF data or user location
      */
-    fun processFileCoordinates(similarImageInterface: SimilarImageInterface, filePath: String?)
+    fun processFileCoordinates(similarImageInterface: SimilarImageInterface,
+                               filePath: String?, inAppPictureLocation: LatLng?)
             : ImageCoordinates {
         val exifInterface: ExifInterface? = try {
             ExifInterface(filePath!!)
@@ -59,7 +61,7 @@ class FileProcessor @Inject constructor(
         // Redact EXIF data as indicated in preferences.
         redactExifTags(exifInterface, getExifTagsToRedact())
         Timber.d("Calling GPSExtractor")
-        val originalImageCoordinates = ImageCoordinates(exifInterface)
+        val originalImageCoordinates = ImageCoordinates(exifInterface, inAppPictureLocation)
         if (originalImageCoordinates.decimalCoords == null) {
             //Find other photos taken around the same time which has gps coordinates
             findOtherImages(
@@ -156,11 +158,13 @@ class FileProcessor @Inject constructor(
 
     private fun readImageCoordinates(file: File) =
         try {
-            ImageCoordinates(contentResolver.openInputStream(Uri.fromFile(file))!!)
+            /* Used null location as location for similar images captured before is not available
+               in case it is not present in the EXIF. */
+            ImageCoordinates(contentResolver.openInputStream(Uri.fromFile(file))!!, null)
         } catch (e: IOException) {
             Timber.e(e)
             try {
-                ImageCoordinates(file.absolutePath)
+                ImageCoordinates(file.absolutePath, null)
             } catch (ex: IOException) {
                 Timber.e(ex)
                 null

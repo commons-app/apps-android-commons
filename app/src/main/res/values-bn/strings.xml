@@ -16,6 +16,7 @@
 * Sibabrata Banerjee
 * Tahmid
 * Tahmid02016
+* Tanbiruzzaman
 * Tauhid16
 * Titodutta
 * WikiAbuHuraira
@@ -37,6 +38,7 @@
   <string name="add_contribution_from_contributions_gallery">পূর্ববর্তী অবদান গ্যালারি থেকে অবদান যোগ করুন</string>
   <string name="show_captions">ক্যাপশন</string>
   <string name="row_item_language_description">ভাষার বর্ণনা</string>
+  <string name="row_item_caption">ক্যাপশন</string>
   <string name="show_captions_description">বিবরণ</string>
   <string name="nearby_row_image">চিত্র</string>
   <string name="nearby_all">সব</string>
@@ -131,6 +133,7 @@
   <string name="display_list_button">তালিকা</string>
   <string name="contributions_subtitle_zero">(আপলোড করেন নি)</string>
   <string name="categories_not_found">%1$s-এর সাথে মিলে এমন কোন বিষয়শ্রেণী পাওয়া যায়নি</string>
+  <string name="depictions_not_found">%1$s-এর সাথে মেলে এমন উইকিউপাত্ত আইটেম পাওয়া যায়নি</string>
   <string name="categories_skip_explanation">উইকিমিডিয়া কমন্স থেকে আপনার মিডিয়া ফাইলটি সহজে খুঁজে পেতে বিষয়শ্রেণী যুক্ত করুন।\n\nবিষয়শ্রেণী যোগ করার জন্য টাইপিং শুরু করুন।</string>
   <string name="categories_activity_title">বিষয়শ্রেণী</string>
   <string name="title_activity_settings">সেটিং</string>
@@ -201,11 +204,13 @@
   <string name="location_permission_title">অবস্থানের অনুমতির অনুরোধ</string>
   <string name="ok">ঠিক আছে</string>
   <string name="warning">সতর্কীকরণ</string>
+  <string name="duplicate_file_name">সদৃশ ফাইলের নাম পাওয়া গেছে</string>
   <string name="upload">আপলোড</string>
   <string name="yes">হ্যাঁ</string>
   <string name="no">না</string>
   <string name="media_detail_caption">চিত্রবর্ণনা</string>
   <string name="media_detail_title">শিরোনাম</string>
+  <string name="media_detail_depiction">বর্ণনা</string>
   <string name="media_detail_description">বিবরণ</string>
   <string name="media_detail_discussion">আলোচনা</string>
   <string name="media_detail_author">স্রষ্টা</string>
@@ -219,6 +224,7 @@
   <string name="logout_verification">আপনি কি সত্যিই প্রস্থান করতে চান?</string>
   <string name="mediaimage_failed">মিডিয়া চিত্র ব্যর্থ হয়েছে</string>
   <string name="no_subcategory_found">কোন উপবিষয়শ্রেনী পাওয়া যায় নি।</string>
+  <string name="no_parentcategory_found">কোনও মূল বিষয়শ্রেণী পাওয়া যায়নি</string>
   <string name="welcome_image_mount_zao">জাও পর্বত</string>
   <string name="welcome_image_llamas">লামা</string>
   <string name="welcome_image_rainbow_bridge">রংধনুর সেতু</string>
@@ -291,6 +297,7 @@
   <string name="about_translate_cancel">বাতিল</string>
   <string name="retry">পুনঃচেষ্টা করুন</string>
   <string name="showcase_view_needs_photo">এই স্থানটির একটি চিত্র দরকার।</string>
+  <string name="showcase_view_has_photo">এই স্থানের ছবি ইতিমধ্যে বিদ্যমান।</string>
   <string name="showcase_view_no_longer_exists">এই জায়গাটি আর নেই।</string>
   <string name="no_images_found">কোন চিত্র পাওয়া যায়নি!</string>
   <string name="error_loading_images">ছবি লোড করার সময় ত্রুটি ঘটেছে৷</string>
@@ -318,13 +325,17 @@
   <string name="question">প্রশ্ন</string>
   <string name="result">ফলাফল</string>
   <string name="warning_for_no_answer">প্রশ্নের উত্তর দিতে দুটি বিকল্পের মধ্যে একটি চয়ন করুন</string>
+  <string name="quiz_result_share_message">বন্ধুদের সাথে আপনার কুইজ শেয়ার করুন!</string>
   <string name="continue_message">অগ্রসর হোন</string>
   <string name="correct">সঠিক উত্তর</string>
   <string name="wrong">ভুল উত্তর</string>
   <string name="quiz_screenshot_question">এই স্ক্রিনশটটি কি আপলোড করা ঠিক হয়েছে?</string>
   <string name="share_app_title">অ্যাপ শেয়ার করুন</string>
   <string name="error_fetching_nearby_places">কাছাকাছি স্থানগুলি আনতে ত্রুটি।</string>
+  <string name="no_nearby_places_around">আশেপাশে কোনো এলাকা পাওয়া যায়নি</string>
   <string name="error_fetching_nearby_monuments">আশেপাশের স্মৃতিস্তম্ভগুলি আনায়নে ত্রুটি৷</string>
+  <string name="no_recent_searches">কোনও সাম্প্রতিক অনুসন্ধান নেই</string>
+  <string name="delete_recent_searches_dialog">আপনি কি নিশ্চিত যে আপনি আপনার অনুসন্ধান ইতিহাস মুছে ফেলতে চান?</string>
   <string name="nominate_delete">অপসারণের জন্য মনোনীত করুন</string>
   <string name="delete">অপসারণ</string>
   <string name="Achievements">কৃতিত্বগুলি</string>
@@ -334,6 +345,9 @@
   <string name="statistics_featured">নির্বাচিত ছবি</string>
   <string name="level">স্তর</string>
   <string name="images_uploaded">আপলোডকৃত চিত্র</string>
+  <string name="image_reverts">ছবিগুলো প্রত্যাবর্তন করা হয়নি</string>
+  <string name="images_used_by_wiki">ব্যবহৃত ছবি</string>
+  <string name="achievements_share_message">আপনার বন্ধুদের সাথে আপনার অর্জন শেয়ার করুন!</string>
   <string name="achievements_revert_limit_message">নূন্যতম আবশ্যকতা:</string>
   <string name="error_occurred">ত্রুটি ঘটেছে!</string>
   <string name="notifications_channel_name_all">কমন্স বিজ্ঞপ্তি</string>
@@ -359,6 +373,10 @@
   <string name="provider_bookmarks_location">বুকমার্ক</string>
   <string name="deletion_reason_uploaded_by_mistake">আমি ভুল করে আপলোড করেছি</string>
   <string name="back_button_warning">আপলোড বাতিল করুন</string>
+  <string name="back_button_continue">আপলোড চালিয়ে যান</string>
+  <string name="search_this_area">এই এলাকায় অনুসন্ধান করুন</string>
+  <string name="nearby_card_permission_title">অনুমতির অনুরোধ</string>
+  <string name="never_ask_again">আবার কখনো দেখাবেন না</string>
   <string name="achievements_fetch_failed_ultimate_achievement">আপনি এত অবদান রেখেছেন যে আমাদের গণনা ব্যবস্থা তা গণনা করতে পারছে না। অভিনন্দন, এটাই চূড়ান্ত অর্জন।</string>
   <string name="nominate_for_deletion_done">সম্পন্ন</string>
   <string name="review_copyright">এই চিত্রটি কি কপিরাইটের নিয়ম অনুসরণ করে?</string>
@@ -386,9 +404,9 @@
   <string name="default_description_language">বিবরণের পূর্বনির্ধারিত ভাষা</string>
   <string name="delete_helper_show_deletion_title_success">সফল</string>
   <string name="delete_helper_show_deletion_title_failed">ব্যর্থ হয়েছে</string>
-  <string name="delete_helper_ask_spam_selfie" fuzzy="true">একটি সেলফি</string>
-  <string name="delete_helper_ask_spam_blurry" fuzzy="true">ঝাপসা</string>
-  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">আজেবাজে</string>
+  <string name="delete_helper_ask_spam_selfie">একটি সেলফি যা কোনও নিবন্ধে ব্যবহৃত হয়নি</string>
+  <string name="delete_helper_ask_spam_blurry">একদম ঝাপসা</string>
+  <string name="delete_helper_ask_spam_nonsense">আজেবাজে, কোনও নিবন্ধেই একেবারে ব্যবহারের যোগ্য নয়</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">সংবাদপত্রের চিত্র</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">ইন্টারনেট থেকে নেওয়া অজানা চিত্র</string>
   <string name="delete_helper_ask_reason_copyright_logo">লোগো</string>
@@ -409,7 +427,7 @@
   <string name="nearby_search_hint">সেতু, জাদুঘর, হোটেল ইত্যাদি।</string>
   <string name="title_for_media">মিডিয়া</string>
   <string name="upload_nearby_place_found_title">কাছাকাছি স্থান পাওয়া গেছে</string>
-  <string name="upload_nearby_place_found_description">এটি কি %1$s স্থানের একটি চিত্র?</string>
+  <string name="upload_nearby_place_found_description">এটি কি %1$s-এর একটি চিত্র?</string>
   <string name="title_app_shortcut_bookmark">বুকমার্ক</string>
   <string name="title_app_shortcut_setting">সেটিং</string>
   <string name="remove_bookmark">বুকমার্ক থেকে সরানো হয়েছে</string>

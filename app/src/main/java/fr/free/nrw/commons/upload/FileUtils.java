@@ -7,6 +7,7 @@ import android.webkit.MimeTypeMap;
 
 import androidx.exifinterface.media.ExifInterface;
 
+import fr.free.nrw.commons.location.LatLng;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -64,11 +65,11 @@ public class FileUtils {
     /**
      * Get Geolocation of filePath from input filePath path
      */
-    static String getGeolocationOfFile(String filePath) {
+    static String getGeolocationOfFile(String filePath, LatLng inAppPictureLocation) {
 
         try {
             ExifInterface exifInterface = new ExifInterface(filePath);
-            ImageCoordinates imageObj = new ImageCoordinates(exifInterface);
+            ImageCoordinates imageObj = new ImageCoordinates(exifInterface, inAppPictureLocation);
             if (imageObj.getDecimalCoords() != null) { // If image has geolocation information in its EXIF
                 return imageObj.getDecimalCoords();
             } else {

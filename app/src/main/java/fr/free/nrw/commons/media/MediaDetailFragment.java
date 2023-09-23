@@ -57,6 +57,7 @@ import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.LocationPicker.LocationPicker;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
@@ -361,15 +362,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     @OnClick(R.id.mediaDetailImageViewSpacer)
     public void launchZoomActivity(final View view) {
-        final boolean permission = PermissionUtils.
-            hasPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE);
-
-        if (permission) {
+        final boolean hasPermission = PermissionUtils.hasPermission(getActivity(), PermissionUtils.PERMISSIONS_STORAGE);
+        if (hasPermission) {
             launchZoomActivityAfterPermissionCheck(view);
-        }
-        else {
+        } else {
             PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
-                Manifest.permission.READ_EXTERNAL_STORAGE,
+                PermissionUtils.PERMISSIONS_STORAGE,
                 () -> {
                     launchZoomActivityAfterPermissionCheck(view);
                 },
@@ -1075,7 +1073,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
         } else if (requestCode == REQUEST_CODE && resultCode == RESULT_CANCELED) {
             viewUtil.showShortToast(getContext(),
-                Objects.requireNonNull(getContext())
+                requireContext()
                     .getString(R.string.coordinates_picking_unsuccessful));
 
         } else if (requestCode == REQUEST_CODE_EDIT_DESCRIPTION && resultCode == RESULT_CANCELED) {
@@ -1230,6 +1228,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     @OnClick(R.id.mediaDetailAuthor)
     public void onAuthorViewClicked() {
         if (media == null || media.getUser() == null) {
+            return;
+        }
+        if (sessionManager.getUserName() == null) {
+            String userProfileLink = BuildConfig.COMMONS_URL + "/wiki/User:" + media.getUser();
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(userProfileLink));
+            startActivity(browserIntent);
             return;
         }
         ProfileActivity.startYourself(getActivity(), media.getUser(), !Objects

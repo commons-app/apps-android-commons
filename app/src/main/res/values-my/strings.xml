@@ -10,6 +10,7 @@
   <string name="commons_website">ကွန်မွန်းစ် ဝဘ်ဆိုဒ်</string>
   <string name="submit">ထည့်သွင်းရန်</string>
   <string name="add_another_description">အခြားဖော်ပြချက်ကို ထည့်ပါ</string>
+  <string name="show_captions">ပုံစာများ</string>
   <string name="row_item_language_description">ဘာသာစကား ဖော်ပြချက်</string>
   <string name="row_item_caption">ပုံစာ</string>
   <string name="show_captions_description">ဖော်ပြချက်</string>
@@ -350,6 +351,7 @@
   <string name="notification_mark_read">အသိပေးချက်ကို ဖတ်ပြီးကြောင်းမှတ်သားပြီးပြီ</string>
   <string name="some_error">အမှားအယွင်းအချို့ရှိခဲ့သည်</string>
   <string name="upload_nearby_place_found_title">အနီးအနားနေရာ တွေ့ရှိသည်</string>
+  <string name="title_app_shortcut_bookmark">ဖတ်ရန်မှတ်ထားမှုများ</string>
   <string name="title_app_shortcut_setting">အပြင်အဆင်များ</string>
   <string name="theme_dark_name">အမှောင်</string>
   <string name="theme_light_name">အလင်း</string>
@@ -362,6 +364,7 @@
   <string name="resume">ခေတ္တရပ်နားရာမှ ပြန်လုပ်ရန်</string>
   <string name="paused">ခေတ္တရပ်ပြီး</string>
   <string name="more">ပို၍</string>
+  <string name="bookmarks">ဖတ်ရန်မှတ်ထားမှုများ</string>
   <string name="achievements_tab_title">အောင်မြင်မှုပန်းတိုင်များ</string>
   <string name="leaderboard_tab_title">အကြီးအကဲခုံရုံး</string>
   <string name="rank_prefix">အဆင့်-</string>
@@ -397,8 +400,21 @@
   <string name="achievements_of_user">အသုံးပြုသူ၏ အောင်မြင်မှုများ- %s</string>
   <string name="menu_view_user_page">အသုံးပြုသူ၏ စာမျက်နှာကို ကြည့်ရန်</string>
   <string name="edit_categories">ကဏ္ဍများ တည်းဖြတ်ရန်</string>
+  <string name="advanced_options">အဆင့်မြင့်ရွေးချယ်ရန်များ</string>
+  <string name="no_location_found_title">တည်နေရာမတွေ့ပါ</string>
+  <string name="explore_map_details">အသေးစိတ်များ</string>
+  <string name="android_version">အန်းဒရိုက် ဗားရှင်း</string>
+  <string name="device_manufacturer">စက်ပစ္စည်း ထုတ်လုပ်သူ</string>
+  <string name="device_model">စက်ပစ္စည်း မော်ဒယ်</string>
+  <string name="device_name">စက်ပစ္စည်းအမည်</string>
+  <string name="network_type">ကွန်ရက်အမျိုးအစား</string>
+  <string name="thanks_feedback">အကြံပြုချက်ပေးသည့်အတွက် ကျေးဇူးတင်ပါသည်</string>
+  <string name="error_feedback">အကြံပြုချက်ပေးပို့ရာတွင် အမှားအယွင်းရှိသည်</string>
+  <string name="enter_description">သင်၏အကြံပြုချက်မှာ အဘယ်နည်း?</string>
+  <string name="your_feedback">သင်၏ အကြံပြုချက်</string>
   <string name="menu_view_report">အစီရင်ခံရန်</string>
   <string name="report_violation">ချိုးဖောက်မှုကို တိုင်ကြားရန်</string>
   <string name="report_user">ဤအသုံးပြုသူကို တိုင်ကြားရန်</string>
   <string name="report_content">ဤအကြောင်းအရာကို တိုင်ကြားရန်</string>
+  <string name="similar_coordinate_description_auto_set">သြဒိနိတ်များသည် အတိအကျ သြဒိနိတ်များမဟုတ်သော်လည်း ဤပုံကို အပ်လုဒ်လုပ်သူသည် နီးစပ်သည်ဟု ယူဆသည်။</string>
 </resources>

@@ -27,6 +27,9 @@
   <string name="commons_logo">कॉमन्स का प्रतीक चिन्ह</string>
   <string name="commons_website">कॉमन्स जालस्थान</string>
   <string name="submit">जमा करें</string>
+  <string name="show_captions_description">विवरण</string>
+  <string name="nearby_row_image">चित्र</string>
+  <string name="nearby_all">सभी</string>
   <string name="appwidget_img">आज का चित्र</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d फ़ाइल अपलोड हो रही</item>
@@ -53,6 +56,7 @@
   <string name="preference_category_appearance">स्वरूप</string>
   <string name="preference_category_general">सामान्य</string>
   <string name="preference_category_feedback">आपके सुझाव</string>
+  <string name="preference_category_privacy">गोपनीयता</string>
   <string name="app_name">कॉमन्स</string>
   <string name="bullet">•</string>
   <string name="menu_settings">सेटिंग्स</string>
@@ -168,6 +172,7 @@
   <string name="write_storage_permission_rationale" fuzzy="true">अनिवार्य अनुमति:बाहरी कंप्यूटर स्टोरेज लिखना|इसके बिना एप कार्य नहीं करेगा।</string>
   <string name="ok">ठीक है</string>
   <string name="warning">चेतावनी</string>
+  <string name="upload">अपलोड करें</string>
   <string name="yes">हाँ</string>
   <string name="no">नहीं</string>
   <string name="media_detail_title">शीर्षक</string>
@@ -203,6 +208,7 @@
   <string name="navigation_item_logout">प्रस्थान करें</string>
   <string name="navigation_item_info">अनुशिक्षण</string>
   <string name="navigation_item_notification">सूचनायें</string>
+  <string name="navigation_item_review">पुनरीक्षण</string>
   <string name="no_description_found">कोई विवरण नहीं मिला</string>
   <string name="nearby_info_menu_commons_article">कॉमन्स फाइल पृष्ठ</string>
   <string name="nearby_info_menu_wikidata_article">विकिडेटा आयटम</string>

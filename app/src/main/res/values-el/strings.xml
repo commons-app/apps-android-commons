@@ -11,6 +11,7 @@
 * KATRINE1992
 * KATRINE1993
 * ManosHacker
+* MnLsVt
 * NikosLikomitros
 * Nikosgranturismogt
 * Nikosguard
@@ -380,6 +381,7 @@
   <string name="never_ask_again">Μην το ρωτήσετε ξανά αυτό</string>
   <string name="display_location_permission_title">Ζητήστε άδεια τοποθεσίας</string>
   <string name="ends_on">Τελειώνει σε:</string>
+  <string name="location_loss_warning" fuzzy="true">Παρακαλώ σιγουρευτείτε ότι αύτος ο κανούριος επιλογέας Android δεν αφαιρεί την τοποθεσία από τις εικόνες.</string>
   <string name="review_thanks_yes_button_text" fuzzy="true">Ναι, γιατί όχι</string>
   <string name="review_thanks_no_button_text" fuzzy="true">Επόμενη εικόνα</string>
   <string name="no_image">Δεν χρησιμοποιούνται εικόνες</string>

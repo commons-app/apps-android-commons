@@ -320,7 +320,7 @@
   <string name="provider_recent_languages">Ricerche linguistiche recenti</string>
   <string name="error_loading_categories">Si è verificato un errore durante il caricamento delle categorie.</string>
   <string name="error_loading_depictions">Si è verificato un errore durante il caricamento degli elementi raffigurati.</string>
-  <string name="search_tab_title_media">Media</string>
+  <string name="search_tab_title_media">File multimediale</string>
   <string name="search_tab_title_categories">Categorie</string>
   <string name="search_tab_title_depictions">Elementi</string>
   <string name="explore_tab_title_featured">In vetrina</string>
@@ -556,7 +556,7 @@
   <string name="title_for_child_classes">CLASSI FIGLIE</string>
   <string name="title_for_parent_classes">CLASSI SUPERIORI</string>
   <string name="upload_nearby_place_found_title">Rinvenuto luogo nei pressi</string>
-  <string name="upload_nearby_place_found_description">Questa è una foto del luogo %1$s?</string>
+  <string name="upload_nearby_place_found_description">Questa è una foto di %1$s?</string>
   <string name="title_app_shortcut_bookmark">Segnalibri</string>
   <string name="title_app_shortcut_setting">Impostazioni</string>
   <string name="remove_bookmark">Rimuovi dai preferiti</string>

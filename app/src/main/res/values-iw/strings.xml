@@ -285,7 +285,7 @@
   <string name="use_external_storage_summary">שמירת תמונות שצולמו באמצעות מצלמה בתוך היישום לאחסון של המכשיר שלך</string>
   <string name="login_to_your_account">כניסה לחשבון שלך</string>
   <string name="send_log_file">שליחת קובץ יומן</string>
-  <string name="send_log_file_description">שליחת קובץ יומן למפתחים בדואר אלקטרוני כדי לחפש בעיות עם היישום. לתשומת לבך: יומנים יכולים להכיל מידע מזהה</string>
+  <string name="send_log_file_description">שליחת קובץ יומן למפתחים בדואר אלקטרוני כדי לחפש בעיות עם היישום. לתשומת ליבך: יומנים יכולים להכיל מידע מזהה</string>
   <string name="no_web_browser">לא נמצא דפדפן כדי לפתוח את כתובת ה־URL</string>
   <string name="null_url">שגיאה! כתובת ה־URL לא נמצאה</string>
   <string name="nominate_deletion">העמדה למחיקה</string>
@@ -410,7 +410,7 @@
   <string name="step_count">שלב %1$d מתוך %2$d:‏ %3$s</string>
   <string name="next">הבא</string>
   <string name="previous">הקודם</string>
-  <string name="upload_title_duplicate">כבר קיים קובץ בשם %1$s. להמשיך?\n\nלתשומת לבך: לשם הקובץ תווסף סיומת מתאימה אוטומטית.</string>
+  <string name="upload_title_duplicate">כבר קיים קובץ בשם %1$s. להמשיך?\n\nלתשומת ליבך: לשם הקובץ תווסף סיומת מתאימה אוטומטית.</string>
   <string name="map_application_missing">לא נמצא יישום מפה תואם במכשיר שלך. נא להתקין יישום מפה כדי להשתמש בתכונה זו.</string>
   <string name="title_page_bookmarks_pictures">תמונות</string>
   <string name="title_page_bookmarks_locations">מיקומים</string>
@@ -446,6 +446,9 @@
   <string name="ends_on">מסתיים ב־:</string>
   <string name="display_campaigns">הצגת מסעי פרסום</string>
   <string name="display_campaigns_explanation">ר\' את מסעי פרסום שמתרחשים כרגע</string>
+  <string name="open_document_photo_picker_title">להשתמש בבורר תמונות מבוסס מסמכים</string>
+  <string name="open_document_photo_picker_explanation">בורר התמונות החדש של אנדרואיד עלול לאבד מידע על מיקום. יש להפעיל אותו רק אם נראה שהוא באמת בשימוש שלך.</string>
+  <string name="location_loss_warning">כיבוי של זה עשוי להפעיל את בורר התמונות החדש של אנדרואיד. זה עלול לאבד מידע על מיקום.\n\nיש להקיש על \"מידע נוסף\" כדי לקרוא על זה עוד.</string>
   <string name="nearby_campaign_dismiss_message">מסעי הפרסום לא יופיעו עוד. עם זאת, ניתן להפעיל את ההתראות האלה מחדש בהגדרות בהתאם לרצונך.</string>
   <string name="this_function_needs_network_connection">תכונה זו דורשת חיבור לרשת, נא לבדוק את הגדרות החיבור שלך.</string>
   <string name="error_processing_image">אירעה שגיאה בעת עיבוד התמונה. נא לנסות שוב!</string>
@@ -583,7 +586,7 @@
   <string name="title_for_child_classes">מחלקות יורשות</string>
   <string name="title_for_parent_classes">מחלקות מורישות</string>
   <string name="upload_nearby_place_found_title">נמצא בקרבת מקום</string>
-  <string name="upload_nearby_place_found_description">האם זאת תמונה של המקום %1$s?</string>
+  <string name="upload_nearby_place_found_description">האם זאת תמונה של %1$s?</string>
   <string name="title_app_shortcut_bookmark">סימניות</string>
   <string name="title_app_shortcut_setting">הגדרות</string>
   <string name="remove_bookmark">הוסר מסימניות</string>

@@ -15,7 +15,7 @@ import io.github.coordinates2country.Coordinates2Country
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
-import junit.framework.TestCase.assertEquals
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -46,6 +46,9 @@ class UploadMediaPresenterTest {
 
     @Mock
     private lateinit var place: Place
+
+    @Mock
+    private var location: LatLng? = null
 
     @Mock
     private lateinit var uploadItem: UploadItem
@@ -88,10 +91,11 @@ class UploadMediaPresenterTest {
             repository.preProcessImage(
                 ArgumentMatchers.any(UploadableFile::class.java),
                 ArgumentMatchers.any(Place::class.java),
-                ArgumentMatchers.any(UploadMediaPresenter::class.java)
+                ArgumentMatchers.any(UploadMediaPresenter::class.java),
+                ArgumentMatchers.any(LatLng::class.java)
             )
         ).thenReturn(testObservableUploadItem)
-        uploadMediaPresenter.receiveImage(uploadableFile, place)
+        uploadMediaPresenter.receiveImage(uploadableFile, place, location)
         verify(view).showProgress(true)
         testScheduler.triggerActions()
         verify(view).onImageProcessed(
@@ -107,14 +111,14 @@ class UploadMediaPresenterTest {
     @Test
     fun verifyImageQualityTest() {
         whenever(repository.uploads).thenReturn(listOf(uploadItem))
-        whenever(repository.getImageQuality(uploadItem))
+        whenever(repository.getImageQuality(uploadItem, location))
             .thenReturn(testSingleImageResult)
         whenever(uploadItem.imageQuality).thenReturn(0)
         whenever(uploadItem.gpsCoords)
             .thenReturn(imageCoordinates)
         whenever(uploadItem.gpsCoords.decimalCoords)
             .thenReturn("imageCoordinates")
-        uploadMediaPresenter.verifyImageQuality(0)
+        uploadMediaPresenter.verifyImageQuality(0, location)
         verify(view).showProgress(true)
         testScheduler.triggerActions()
         verify(view).showProgress(false)
@@ -126,14 +130,14 @@ class UploadMediaPresenterTest {
     @Test
     fun `verify ImageQuality Test while coordinates equals to null`() {
         whenever(repository.uploads).thenReturn(listOf(uploadItem))
-        whenever(repository.getImageQuality(uploadItem))
+        whenever(repository.getImageQuality(uploadItem, location))
             .thenReturn(testSingleImageResult)
         whenever(uploadItem.imageQuality).thenReturn(0)
         whenever(uploadItem.gpsCoords)
             .thenReturn(imageCoordinates)
         whenever(uploadItem.gpsCoords.decimalCoords)
             .thenReturn(null)
-        uploadMediaPresenter.verifyImageQuality(0)
+        uploadMediaPresenter.verifyImageQuality(0, location)
         testScheduler.triggerActions()
     }
 
@@ -154,10 +158,9 @@ class UploadMediaPresenterTest {
         uploadMediaPresenter.handleImageResult(EMPTY_CAPTION, uploadItem)
         verify(view).showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
 
-        //Bad Picture test
-        //Empty Caption test
+        // Bad Picture Test
         uploadMediaPresenter.handleImageResult(-7, uploadItem)
-        // TODO https://github.com/commons-app/apps-android-commons/issues/5204 verify(view)?.showBadImagePopup(ArgumentMatchers.anyInt(), ArgumentMatchers.eq(uploadItem))
+        verify(view)?.showBadImagePopup(ArgumentMatchers.anyInt(), ArgumentMatchers.eq(uploadItem))
     }
 
     @Test
@@ -168,7 +171,7 @@ class UploadMediaPresenterTest {
         val uploadMediaDetailList: ArrayList<UploadMediaDetail> = ArrayList()
         uploadMediaDetailList.add(uploadMediaDetail)
         uploadItem.setMediaDetails(uploadMediaDetailList)
-        Mockito.`when`(repository.getImageQuality(uploadItem)).then {
+        Mockito.`when`(repository.getImageQuality(uploadItem, location)).then {
             verify(view).showProgress(true)
             testScheduler.triggerActions()
             verify(view).showProgress(true)
@@ -184,7 +187,7 @@ class UploadMediaPresenterTest {
         uploadMediaDetail.captionText = "added caption"
         uploadMediaDetail.languageCode = "eo"
         uploadItem.setMediaDetails(Collections.singletonList(uploadMediaDetail))
-        Mockito.`when`(repository.getImageQuality(uploadItem)).then {
+        Mockito.`when`(repository.getImageQuality(uploadItem, location)).then {
             verify(view).showProgress(true)
             testScheduler.triggerActions()
             verify(view).showProgress(true)
@@ -229,7 +232,7 @@ class UploadMediaPresenterTest {
      */
     @Test
     fun handleBadImageBaseTestFileNameExists() {
-        uploadMediaPresenter.handleBadImage(-4, uploadItem)
+        uploadMediaPresenter.handleBadImage(64, uploadItem)
         verify(view).showDuplicatePicturePopup(uploadItem)
     }
 
@@ -265,11 +268,12 @@ class UploadMediaPresenterTest {
             repository.preProcessImage(
                 ArgumentMatchers.any(UploadableFile::class.java),
                 ArgumentMatchers.any(Place::class.java),
-                ArgumentMatchers.any(UploadMediaPresenter::class.java)
+                ArgumentMatchers.any(UploadMediaPresenter::class.java),
+                ArgumentMatchers.any(LatLng::class.java)
             )
         ).thenReturn(item)
 
-        uploadMediaPresenter.receiveImage(uploadableFile, germanyAsPlace)
+        uploadMediaPresenter.receiveImage(uploadableFile, germanyAsPlace, location)
         verify(view).showProgress(true)
         testScheduler.triggerActions()
 
