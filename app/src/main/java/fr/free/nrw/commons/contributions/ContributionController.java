@@ -90,7 +90,12 @@ public class ContributionController {
             activity, locationManager,
             new LocationPermissionCallback() {
                 @Override
-                public void onLocationPermissionDenied() {
+                public void onLocationPermissionDenied(String toastMessage) {
+                    Toast.makeText(
+                        activity,
+                        toastMessage,
+                        Toast.LENGTH_LONG
+                    ).show();
                     initiateCameraUpload(activity);
                 }
 
