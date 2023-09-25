@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.auth;
 
+import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -60,5 +62,14 @@ public class SignupActivity extends BaseActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public void applyOverrideConfiguration(final Configuration overrideConfiguration) {
+        if (Build.VERSION.SDK_INT == 21 || Build.VERSION.SDK_INT == 25 && (
+            getResources().getConfiguration().uiMode == getApplicationContext().getResources().getConfiguration().uiMode)) {
+            return;
+        }
+        super.applyOverrideConfiguration(overrideConfiguration);
     }
 }
