@@ -41,7 +41,7 @@ public class UploadableFile implements Parcelable {
 
     public UploadableFile(File file) {
         this.file = file;
-        this.contentUri = Uri.parse(file.getAbsolutePath());
+        this.contentUri = Uri.fromFile(new File(file.getPath()));
     }
 
     public UploadableFile(Parcel in) {
