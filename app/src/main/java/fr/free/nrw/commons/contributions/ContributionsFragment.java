@@ -668,7 +668,7 @@ public class ContributionsFragment
     @Override
     public void showDetail(int position, boolean isWikipediaButtonDisplayed) {
         if (mediaDetailPagerFragment == null || !mediaDetailPagerFragment.isVisible()) {
-            mediaDetailPagerFragment = new MediaDetailPagerFragment(false, true);
+            mediaDetailPagerFragment = MediaDetailPagerFragment.newInstance(false, true);
             if(isUserProfile) {
                 ((ProfileActivity)getActivity()).setScroll(false);
             }
@@ -749,7 +749,7 @@ public class ContributionsFragment
     public void refreshNominatedMedia(int index) {
         if(mediaDetailPagerFragment != null && !contributionsListFragment.isVisible()) {
             removeFragment(mediaDetailPagerFragment);
-            mediaDetailPagerFragment = new MediaDetailPagerFragment(false, true);
+            mediaDetailPagerFragment = MediaDetailPagerFragment.newInstance(false, true);
             mediaDetailPagerFragment.showImage(index);
             showMediaDetailPagerFragment();
         }
