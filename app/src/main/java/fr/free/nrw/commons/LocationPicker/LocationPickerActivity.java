@@ -483,13 +483,16 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
             @Override
             public void onLocationPermissionGranted() {
                 fr.free.nrw.commons.location.LatLng currLocation = locationManager.getLastLocation();
-                final CameraPosition position;
-                position = new CameraPosition.Builder()
-                    .target(new com.mapbox.mapboxsdk.geometry.LatLng(currLocation.getLatitude(), currLocation.getLongitude(), 0)) // Sets the new camera position
-                    .zoom(mapboxMap.getCameraPosition().zoom) // Same zoom level
-                    .build();
+                if (currLocation != null) {
+                    final CameraPosition position;
+                    position = new CameraPosition.Builder()
+                        .target(new com.mapbox.mapboxsdk.geometry.LatLng(currLocation.getLatitude(),
+                            currLocation.getLongitude(), 0)) // Sets the new camera position
+                        .zoom(mapboxMap.getCameraPosition().zoom) // Same zoom level
+                        .build();
 
-                mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
+                    mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
+                }
             }
         });
         locationPermissionsHelper.handleLocationPermissions(locationAccessDialog, locationOffDialog);
