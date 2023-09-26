@@ -135,6 +135,7 @@ public class PermissionUtils {
                 public void onPermissionsChecked(MultiplePermissionsReport report) {
                     if (report.areAllPermissionsGranted()) {
                         onPermissionGranted.run();
+                        return;
                     }
                     if (report.isAnyPermissionPermanentlyDenied()) {
                         // permission is denied permanently, we will show user a dialog message.
