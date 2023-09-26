@@ -64,10 +64,17 @@ public class SignupActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Known bug in androidx.appcompat library version 1.1.0 being tracked here
+     * https://issuetracker.google.com/issues/141132133
+     * App tries to put light/dark theme to webview and crashes in the process
+     * This code tries to prevent applying the theme when sdk is between api 21 to 25
+     * @param overrideConfiguration
+     */
     @Override
     public void applyOverrideConfiguration(final Configuration overrideConfiguration) {
-        if (Build.VERSION.SDK_INT == 21 || Build.VERSION.SDK_INT == 25 && (
-            getResources().getConfiguration().uiMode == getApplicationContext().getResources().getConfiguration().uiMode)) {
+        if (Build.VERSION.SDK_INT <= 25 &&
+            (getResources().getConfiguration().uiMode == getApplicationContext().getResources().getConfiguration().uiMode)) {
             return;
         }
         super.applyOverrideConfiguration(overrideConfiguration);
