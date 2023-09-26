@@ -430,9 +430,9 @@
   <string name="ends_on">Konec:</string>
   <string name="display_campaigns">Prikaži akcije</string>
   <string name="display_campaigns_explanation">Nastavi tekoče kampanje</string>
-  <string name="get_content_photo_picker_title">Uporaba izbirnika fotografij GET_CONTENT</string>
-  <string name="get_content_photo_picker_explanation">Onemogočite, če se vaše slike naložijo brez lokacije</string>
-  <string name="location_loss_warning">Zagotovite, da ta novi izbirnik za Android ne odstranjuje lokacije iz vaših slik.</string>
+  <string name="open_document_photo_picker_title">Uporaba izbirnika fotografij na podlagi dokumenta</string>
+  <string name="open_document_photo_picker_explanation">Novi izbirnik fotografij Android lahko izgubi podatke o lokaciji. Omogočite ga, če ga želite uporabljati.</string>
+  <string name="location_loss_warning">Izklop te možnosti lahko aktivira novi izbirnik fotografij za Android. S tem tvegate izgubo podatkov o informacijah.\n\nZa več informacij kliknite »Preberi več«.</string>
   <string name="nearby_campaign_dismiss_message">Kampanj ne boste več videli. Če želite, lahko tovrstno obveščanje znova vklopite v nastavitvah.</string>
   <string name="this_function_needs_network_connection">Ta možnost zahteva omrežno povezavo. Prosimo, preverite vaše nastavitve povezave.</string>
   <string name="error_processing_image">Pri obdelavi slike je prišlo do napake. Prosimo, poskusite znova!</string>

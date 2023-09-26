@@ -43,7 +43,11 @@ data class Contribution constructor(
     var hasInvalidLocation : Int =  0,
     var contentUri: Uri? = null,
     var countryCode : String? = null,
-    var imageSHA1 : String? = null
+    var imageSHA1 : String? = null,
+    /**
+     * Number of times a contribution has been retried after a failure
+     */
+    var retries: Int = 0
 ) : Parcelable {
 
     fun completeWith(media: Media): Contribution {
@@ -111,6 +115,6 @@ data class Contribution constructor(
          */
         fun formatDescriptions(descriptions: List<UploadMediaDetail>) =
             descriptions.filter { it.descriptionText.isNotEmpty() }
-                .joinToString { "{{${it.languageCode}|1=${it.descriptionText}}}" }
+                .joinToString(separator = "") { "{{${it.languageCode}|1=${it.descriptionText}}}" }
     }
 }

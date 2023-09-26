@@ -421,6 +421,7 @@
   <string name="ends_on">Slutar den:</string>
   <string name="display_campaigns">Visa kampanjer</string>
   <string name="display_campaigns_explanation">Se pågående kampanjer</string>
+  <string name="location_loss_warning" fuzzy="true">Se till att denna nya Android-bläddraren inte tar bort platspositionen från dina bilder.</string>
   <string name="nearby_campaign_dismiss_message">Du kommer inte längre se kampanjerna. Om du vill kan du återaktivera denna avisering i inställningarna.</string>
   <string name="this_function_needs_network_connection">Denna funktion kräver nätverksuppkoppling. Kontrollera dina anslutningsinställningar.</string>
   <string name="error_processing_image">Fel uppstod när bilden behandlades. Försök igen!</string>

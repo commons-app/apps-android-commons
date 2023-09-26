@@ -214,7 +214,7 @@
   <string name="media_detail_license">ライセンス</string>
   <string name="media_detail_coordinates">緯度経度</string>
   <string name="media_detail_coordinates_empty">情報なし</string>
-  <string name="become_a_tester_title">ベータ版を使ってみましょう！</string>
+  <string name="become_a_tester_title">ベータ版テスターになる</string>
   <string name="become_a_tester_description">Google Playのベータ版チャンネルにオプトインして、新機能やバグ修正プログラムに早期にアクセス</string>
   <string name="_2fa_code">2段階認証コード</string>
   <string name="logout_verification">ログアウトしてもよろしいですか？</string>
@@ -407,7 +407,7 @@
   <string name="back_button_warning">アップロードをキャンセル</string>
   <string name="back_button_warning_desc">バックボタンを使うとこのアップロードはキャンセルされ、これまでの進行は消失します</string>
   <string name="back_button_continue">アップロードを続ける</string>
-  <string name="upload_flow_all_images_in_set" fuzzy="true">（画像全点を組み写真にする場合）</string>
+  <string name="upload_flow_all_images_in_set">（画像全点を組み写真にする場合）</string>
   <string name="search_this_area">この地域を検索</string>
   <string name="nearby_card_permission_title">許可を申請</string>
   <string name="nearby_card_permission_explanation">画像を募集している近くの場所を表示するため、あなたの現在の位置情報を提供してもよいですか？</string>
@@ -509,6 +509,12 @@
   </plurals>
   <string name="category_edit_helper_edit_message_else">カテゴリを付与できませんでした。</string>
   <string name="category_edit_button_text">カテゴリを更新</string>
+  <string name="depictions_edit_helper_make_edit_toast">題材を更新しようとしています。</string>
+  <string name="depictions_edit_helper_show_edit_title">題材を編集する</string>
+  <plurals name="depictions_edit_helper_show_edit_message_if">
+    <item quantity="other">題材 %1$s が追加されました。</item>
+  </plurals>
+  <string name="depictions_edit_helper_edit_message_else">題材を追加できませんでした。</string>
   <string name="share_image_via">画像をシェア</string>
   <string name="no_achievements_yet">%sはまだ投稿をしたことがありません</string>
   <string name="account_created">アカウントを作成しました</string>
@@ -613,6 +619,7 @@
   <string name="title_page_bookmarks_items">項目</string>
   <string name="done">完了</string>
   <string name="back">戻る</string>
+  <string name="edit_depictions">題材を編集する</string>
   <string name="edit_categories">カテゴリを編集</string>
   <string name="apply">適用</string>
   <string name="reset">リセット</string>
