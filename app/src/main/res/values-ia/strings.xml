@@ -3,9 +3,34 @@
 * McDutchie
 -->
 <resources>
+  <string name="commons_facebook">Pagina Facebook de Commons</string>
+  <string name="commons_github">Codice fonte de Commons sur GitHub</string>
+  <string name="commons_logo">Logo de Commons</string>
+  <string name="commons_website">Sito web de Commons</string>
+  <string name="exit_location_picker">Exir del selector de loco</string>
+  <string name="submit">Submitter</string>
+  <string name="add_another_description">Adder un altere description</string>
+  <string name="add_new_contribution">Adder un nove contribution</string>
+  <string name="add_contribution_from_camera">Adder un contribution del camera</string>
+  <string name="add_contribution_from_photos">Adder un contribution de Photos</string>
+  <string name="add_contribution_from_contributions_gallery">Adder un contribution del galeria de contributiones precedente</string>
+  <string name="show_captions">Legendas</string>
+  <string name="row_item_language_description">Description de lingua</string>
+  <string name="row_item_caption">Legenda</string>
+  <string name="show_captions_description">Description</string>
+  <string name="nearby_row_image">Imagine</string>
+  <string name="nearby_all">Totes</string>
+  <string name="nearby_filter_toggle">Commutar in alto</string>
+  <string name="nearby_filter_search">Vista de recerca</string>
+  <string name="nearby_filter_state">Stato del loco</string>
+  <string name="appwidget_img">Imagine del die</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d file in incargamento</item>
     <item quantity="other">%1$d files in incargamento</item>
+  </plurals>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Configuration</string>

@@ -285,6 +285,8 @@
   <string name="statistics">Ystadegau</string>
   <string name="contributions_fragment">Cyfraniadau</string>
   <string name="notifications">Hysbysiadau</string>
+  <string name="option_allow">Caniatáu</string>
+  <string name="option_dismiss">Cau</string>
   <string name="exif_tag_name_author">Awdur</string>
   <string name="exif_tag_name_copyright">Hawlfraint</string>
   <string name="exif_tag_name_location">Lleoliad</string>

@@ -189,6 +189,8 @@
   <string name="read_storage_permission_rationale">Autorisassion necessaria: Lese n\'anmagasinament estern. L\'aplicassion a peul pa acede a soa galarìa sensa \'d lòn.</string>
   <string name="write_storage_permission_rationale">Autorisassion necessaria: Scrive an sn\'anmagasinament estern. L\'aplicassion a peul pa acede a soa màchina fòto o galarìa sensa \'d lòn.</string>
   <string name="location_permission_title">Arcesta dël përmess ëd localisassion</string>
+  <string name="in_app_camera_location_permission_title">Argistré la posission për lë scat da andrinta l\'aplicassion</string>
+  <string name="in_app_camera_location_switch_pref_summary">Ativelo për argistré la posission con jë scat d\'andrinta l\'aplicassion, si la màchina-fòto a lo fà pa.</string>
   <string name="ok">Va bin</string>
   <string name="warning">Avertensa</string>
   <string name="duplicate_file_name">Nòm d\'archivi dobi trovà</string>
@@ -414,6 +416,13 @@
   <string name="ends_on">A finiss ai:</string>
   <string name="display_campaigns">Campagne ëd visualisassion</string>
   <string name="display_campaigns_explanation">Vëdde le campagne an cors</string>
+  <string name="in_app_camera_location_access_explanation">Përmëtte a l\'aplicassion d\'arcuperé la posission si la màchina-fòto a l\'argistra pa. Chèiche màchine a argistro pa la posission. An costi cas, lassé l\'aplicassion arcuperé a taché la posission a rend soa contribussion pi ùtil. A peul modifiché sòn an qualsëssìa moment ant ij sò Gust.</string>
+  <string name="option_allow">Përmëtte</string>
+  <string name="option_dismiss">Arfudé</string>
+  <string name="in_app_camera_needs_location">Për piasì, ch\'a ativa l\'acess a la localisassion dai sò Gust e ch\'a preuva torna. \n\nNòta: ël cariament a peul avèj nen ëd posission si l\'aplicassion a l\'é pa bon-a a arcuperé la posission da la màchina an pòch ëd temp.</string>
+  <string name="in_app_camera_location_permission_rationale">La telecàmera andrinta a l\'aplicassion a l\'ha damanca dël përmess ëd posission për taché soe plance ant ël cas che la posission a sia nen disponìbil an EXIF. Për piasì, ch\'a përmëtta a l\'aplicassion d\'acede a soa posission e ch\'a preuva torna.\n\nNòta: ël cariament a peul avèj nen ëd posission si l\'aplicassion a l\'é pa bon-a a arcuperé la posission da la màchina an pòch ëd temp.</string>
+  <string name="in_app_camera_location_permission_denied">L\'aplicassion a argistrërà nen la posission ansem ai sò scat për manch ëd përmess ëd posission</string>
+  <string name="in_app_camera_location_unavailable">L\'aplicassion a argistrërà nen la posission ansem ai sò scat, përché ël GPS a l\'é dëstiss</string>
   <string name="open_document_photo_picker_title">Dovré ël seletor ëd fòto basà an s\'un document</string>
   <string name="open_document_photo_picker_explanation">Ël neuv seletor ëd fòti d\'Android a arziga ëd perde dj\'anformassion ëd localisassion. Ch\'a lo abìlita s\'a smija ch\'a lo deuvra.</string>
   <string name="location_loss_warning">Dëstisselo a podrìa fé parte ël neuv seletor ëd fòto d\'Android. A arziga ëd perde dj\'anformassion ëd localisassion.\n\nSgnaché su \'Lese ëd pi\' për pi d\'anformassion.</string>

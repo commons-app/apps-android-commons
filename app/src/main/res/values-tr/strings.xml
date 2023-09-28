@@ -5,9 +5,11 @@
 * Chansey
 * Dual
 * Emperyan
+* Ft.Rath
 * Grkn gll
 * Hedda
 * Incelemeelemani
+* JackUKElliott
 * Joseph
 * McAang
 * Mirzali
@@ -87,6 +89,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Ayarlar</string>
   <string name="intent_share_upload_label">Commons\'a yükle</string>
+  <string name="upload_in_progress">Yükleme devam etmekte</string>
   <string name="username">Kullanıcı adı</string>
   <string name="password">Parola</string>
   <string name="login_credential">Commons Beta hesabınıza giriş yapın</string>
@@ -100,6 +103,9 @@
   <string name="login_success">Oturum açma başarılı!</string>
   <string name="login_failed">Oturum açma başarısız oldu!</string>
   <string name="upload_failed">Dosya bulunamadı. Lütfen başka bir dosya deneyin.</string>
+  <string name="retry_limit_reached">Tekrar deneme sınırına ulaşıldı! Lütfen yüklemeyi iptal edin ve tekrar deneyin.</string>
+  <string name="unrestricted_battery_mode">Pil optimizasyonu kapatılsın mı ?</string>
+  <string name="suggest_unrestricted_mode">Batarya optimizasyonu kapatıldığında 3\'den fazla görüntü yüklemek daha güvenilir bir yoldur. Lütfen sorunsuz bir yükleme deneyimi için Commons uygulamasının ayarlar kısmından batarya optimizasyonunu kapatın.\n\nBatarya Optimizasyonunu kapatmak için yapılabilecek adımlar:\n\nAdım 1: Aşağı kısımdan\"Ayarlar\" butonuna basın\n\nAdım 2: \"Optimizasyon yapılmamış\" seçeneğini \"Tüm uygulamalar\" olarak değiştirin\"\n\nAdım 3: \"Commons\" veya \"fr.free.nrw.commons\" olacak şekilde arama yapın\n\nAdım 4: Tıklayın ve \"Optimize Etme\" seçeneğini seçin.\n\nAdım 5: \"Yapıldı\" seçeneğine basın.</string>
   <string name="authentication_failed">Kimlik doğrulama başarısız oldu, lütfen tekrar giriş yapın</string>
   <string name="uploading_started">Yükleme başladı!</string>
   <string name="uploading_queued">Yükleme kuyruğunda (sınırlı bağlantı modu etkin)</string>
@@ -214,6 +220,8 @@
   <string name="read_storage_permission_rationale">Gerekli izin: Harici depolama birimini okuma. Uygulama, bu olmadan galerinize erişemez.</string>
   <string name="write_storage_permission_rationale">Gerekli izin: Harici depolama alanına yazma. Uygulama, bu olmadan kameranıza/galerinize erişemez.</string>
   <string name="location_permission_title">Konum İzni İsteği</string>
+  <string name="in_app_camera_location_permission_title">Uygulama içi çekimlerin kaydedilen yeri</string>
+  <string name="in_app_camera_location_switch_pref_summary">Cihaz kamerasının kaydetmemesi durumunda konumu uygulama içi çekimlerle kaydetmek için bunu etkinleştirin</string>
   <string name="ok">Tamam</string>
   <string name="warning">Uyarı</string>
   <string name="duplicate_file_name">Yinelenen Dosya Adı bulundu</string>
@@ -439,6 +447,13 @@
   <string name="ends_on">Bitiş:</string>
   <string name="display_campaigns">Kampanyaları göster</string>
   <string name="display_campaigns_explanation">Devam eden çalışmaları görün</string>
+  <string name="in_app_camera_location_access_explanation">Kameranın kaydetmemesi durumunda uygulamanın konumu almasına izin verin. Bazı cihaz kameraları konum kaydetmez. Bu gibi durumlarda uygulamanın konum alıp eklemesine izin vermeniz katkınızı daha faydalı hale getirir. Bunu istediğiniz zaman Ayarlar\'dan değiştirebilirsiniz.</string>
+  <string name="option_allow">İzin ver</string>
+  <string name="option_dismiss">Kapat</string>
+  <string name="in_app_camera_needs_location">Lütfen Ayarlar\'dan konum erişimini açın ve tekrar deneyin. \n\nNot: Uygulama, kısa bir süre içinde cihazdan konum alamazsa yüklemede konum bilgisi olmayabilir.</string>
+  <string name="in_app_camera_location_permission_rationale">EXIF\'de konumun mevcut olmaması durumunda, uygulama içi kameranın konumunuzu görsellerinize ekleyebilmesi için konum iznine ihtiyacı vardır. Lütfen uygulamanın konumunuza erişmesine izin verin ve tekrar deneyin.\n\nNot: Uygulama, kısa bir süre içinde cihazdan konum alamazsa yüklemede konum bilgisi olmayabilir.</string>
+  <string name="in_app_camera_location_permission_denied">Uygulama, konum izninin olmaması nedeniyle, çekimlerin yanı sıra konumu da kaydetmiyor</string>
+  <string name="in_app_camera_location_unavailable">GPS kapalı olduğundan uygulama, çekimlerin yanı sıra konumu da kaydetmiyor</string>
   <string name="nearby_campaign_dismiss_message">Artık çalışmaları görmeyeceksiniz. Ancak isterseniz bu bildirimi Ayarlar\'dan yeniden etkinleştirebilirsiniz.</string>
   <string name="this_function_needs_network_connection">Bu işlev ağ bağlantısı gerektirir, lütfen bağlantı ayarlarınızı kontrol edin.</string>
   <string name="error_processing_image">Görüntü işlenirken hata oluştu. Lütfen tekrar deneyin!</string>

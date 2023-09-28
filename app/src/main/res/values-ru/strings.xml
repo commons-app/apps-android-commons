@@ -113,6 +113,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Настройки</string>
   <string name="intent_share_upload_label">Загрузить на Викисклад</string>
+  <string name="upload_in_progress">Идёт загрузка…</string>
   <string name="username">Имя пользователя</string>
   <string name="password">Пароль</string>
   <string name="login_credential">Войдите в свою учётную запись Commons Beta</string>
@@ -126,6 +127,7 @@
   <string name="login_success">Вход выполнен успешно!</string>
   <string name="login_failed">Ошибка входа в систему!</string>
   <string name="upload_failed">Файл не найден. Попробуйте другой файл.</string>
+  <string name="unrestricted_battery_mode">Выключить оптимизацию батареи?</string>
   <string name="authentication_failed">Ошибка аутентификации. Пожалуйста, авторизуйтесь ещё раз.</string>
   <string name="uploading_started">Загрузка началась!</string>
   <string name="uploading_queued">Загрузка в очереди (включен режим ограниченного подключения)</string>
@@ -465,6 +467,8 @@
   <string name="ends_on">Заканчивается:</string>
   <string name="display_campaigns">Показ кампаний</string>
   <string name="display_campaigns_explanation">Просмотр текущих кампаний</string>
+  <string name="option_allow">Разрешить</string>
+  <string name="option_dismiss">Отменить</string>
   <string name="open_document_photo_picker_title">Использовать средство выбора фотографий на основе документа</string>
   <string name="open_document_photo_picker_explanation">Новый инструмент выбора фотографий Android рискует потерять информацию о местоположении. Включите, если вы собираетесь его использовать</string>
   <string name="location_loss_warning">Отключение может привести к запуску нового средства выбора фотографий Android. Из-за этого может потеряться информация о местоположении.\n\nНажмите «Подробнее» для получения дополнительной информации.</string>

@@ -84,6 +84,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">設定</string>
   <string name="intent_share_upload_label">上傳至維基共享資源</string>
+  <string name="upload_in_progress">正在上傳</string>
   <string name="username">使用者名稱</string>
   <string name="password">密碼</string>
   <string name="login_credential">登入您的維基共享資源測試版帳號</string>
@@ -97,6 +98,9 @@
   <string name="login_success">登入成功！</string>
   <string name="login_failed">登入失敗！</string>
   <string name="upload_failed">找不到檔案。請試試看其它檔案。</string>
+  <string name="retry_limit_reached">已達到重試限制上限！請取消上傳並重試</string>
+  <string name="unrestricted_battery_mode">關閉電池最佳化？</string>
+  <string name="suggest_unrestricted_mode">在關閉電池最佳化後，可讓上傳超過 3 張以上圖片的過程更穩定。請從設定中關閉維基共享資源應用程式的電池最佳化，來獲得較流暢的上傳體驗。 \n\n關閉電池最佳化的可能步驟：\n\n步驟 1：點擊下方的「設定」按鈕。\n\n步驟 2：從「未最佳化」切換為「全部應用程式」。\n\n步驟 3：搜尋「Commons」或「fr.free.nrw.commons」。\n\n步驟 4：點擊它並選擇「不最佳化」。\n\n步驟 5：按「確定」。</string>
   <string name="authentication_failed">身份驗證失敗，請重新登入</string>
   <string name="uploading_started">開始上傳！</string>
   <string name="uploading_queued">上傳已排定（限制連線模式已啟用）</string>
@@ -211,6 +215,8 @@
   <string name="read_storage_permission_rationale">必要權限：讀取外部儲存裝置。否則應用程式無法存取您的圖庫。</string>
   <string name="write_storage_permission_rationale">必要權限：寫入外部存儲裝置。否則應用程式無法訪問您的相機/圖庫。</string>
   <string name="location_permission_title">請求位置權限</string>
+  <string name="in_app_camera_location_permission_title">記錄內建拍攝截圖的位置</string>
+  <string name="in_app_camera_location_switch_pref_summary">啟用此功能來記錄內建拍攝截圖位置，以防止設備相機未記錄到位置</string>
   <string name="ok">好</string>
   <string name="warning">警告</string>
   <string name="duplicate_file_name">找到重複的檔案名稱</string>
@@ -271,8 +277,8 @@
   <string name="upload_connection_error_alert_detail">上傳過程需要有效的網際網路存取。請檢查您的網路連線。</string>
   <string name="upload_problem_image">在圖片中發現的問題</string>
   <string name="internet_downloaded">請僅上傳您自己拍攝的圖片。不要上傳您從網路下載來的圖片。</string>
-  <string name="use_external_storage">儲存應用程式所提供的截圖</string>
-  <string name="use_external_storage_summary">將使用應用內相機拍攝的照片保存到您的設備存儲中</string>
+  <string name="use_external_storage">儲存內建拍攝截圖</string>
+  <string name="use_external_storage_summary">將使用內建相機拍攝的照片保存到您的設備存儲中</string>
   <string name="login_to_your_account">登入您的帳號</string>
   <string name="send_log_file">發送日誌檔案</string>
   <string name="send_log_file_description">透過電子郵件寄送日誌檔案給開發人員，來協助除錯應用程式上的問題。注意：日誌可能會包含識別方面的資訊</string>
@@ -392,7 +398,7 @@
   <string name="notifications">通知</string>
   <string name="read_notifications">通知（已讀）</string>
   <string name="display_nearby_notification">顯示附近地點通知</string>
-  <string name="display_nearby_notification_summary">顯示最近需要圖片的地點的應用內通知</string>
+  <string name="display_nearby_notification_summary">顯示需要圖片的最近地點的內建通知</string>
   <string name="list_sheet">清單</string>
   <string name="storage_permission">儲存裝置權限</string>
   <string name="write_storage_permission_rationale_for_image_share">為了上傳圖像我們需要您的許可以訪問您設備的外部存儲。</string>
@@ -436,6 +442,13 @@
   <string name="ends_on">結束於：</string>
   <string name="display_campaigns">顯示活動</string>
   <string name="display_campaigns_explanation">檢視發生中的活動</string>
+  <string name="in_app_camera_location_access_explanation">允許讓應用程式索取位置，以防相機未記錄到位置。某些設備的相機不會記錄位置，在這種情況下，讓應用程式索取位置，並將其附加到圖片裡，能讓您的貢獻更有用。您可以隨時從「設定」中更改</string>
+  <string name="option_allow">允許</string>
+  <string name="option_dismiss">關閉</string>
+  <string name="in_app_camera_needs_location">請從「設定」中開啟存取位置的權限，然後再試一次。\n\n請注意：如果應用程式無法在短時間內從設備檢索位置，上傳內容可能會沒有位置資訊。</string>
+  <string name="in_app_camera_location_permission_rationale">內建相機需要位置權限，才能將其附加到您的圖片，以防止 EXIF 裡位置資訊不可用。請允許應用程式存取您的位置，然後再試一次。\n\n請注意：如果應用程式無法在短時間內從設備檢索位置，上傳內容可能會沒有位置資訊。</string>
+  <string name="in_app_camera_location_permission_denied">由於缺乏位置權限，應用程式不會記錄鏡頭位置</string>
+  <string name="in_app_camera_location_unavailable">當 GPS 關閉時，應用程式不會記錄鏡頭位置</string>
   <string name="open_document_photo_picker_title">使用基於照片點選器的文件</string>
   <string name="open_document_photo_picker_explanation">新的 Android 照片點選器有遺失位置資訊的風險。若您正在使用該點選器，請啟用它。</string>
   <string name="location_loss_warning">關閉這個可能會觸發新的 Android 照片點選器。該點選器有遺失位置資訊的風險。\n\n請輕觸「閱讀更多」來獲得更多相關資訊。</string>

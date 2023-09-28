@@ -2,6 +2,7 @@
 <!-- Authors:
 * Amaia
 * An13sa
+* Atzerritik
 * EukeneFL
 * Fitoschido
 * Iñaki LL
@@ -14,9 +15,15 @@
 -->
 <resources>
   <string name="commons_facebook">Commons-en Facebook orria</string>
+  <string name="commons_github">Commons Github Iturburu-kodea</string>
   <string name="commons_logo">Commonsen logoa</string>
   <string name="commons_website">Commons webgunea</string>
+  <string name="exit_location_picker">Kokalekuaren biltzailetik irten</string>
   <string name="submit">Bidali</string>
+  <string name="add_another_description">Gehitu beste deskribapen bat</string>
+  <string name="add_new_contribution">Ekarpen berria gehitu</string>
+  <string name="add_contribution_from_camera">Gehitu ekarpena kamaratik</string>
+  <string name="add_contribution_from_photos">Gehitu ekarpena argazkietatik</string>
   <string name="appwidget_img">Eguneko argazkia</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Fitxategi %1$d kargatzen</item>
@@ -70,11 +77,11 @@
   <string name="upload_progress_notification_title_start">%1$s fitxategia igotzen</string>
   <string name="upload_progress_notification_title_in_progress">%1$s igotzen</string>
   <string name="upload_progress_notification_title_finishing">%1$s igotzen bukatzen</string>
-  <string name="upload_failed_notification_title" fuzzy="true">%1$s igotzean akatsa</string>
+  <string name="upload_failed_notification_title">%1$s igotzean akatsa</string>
   <string name="upload_failed_notification_subtitle">Ukitu ikusteko</string>
   <string name="title_activity_contributions">Nire azken igoerak</string>
   <string name="contribution_state_queued">Itxoite-zerrendan</string>
-  <string name="contribution_state_failed">Hutsegitea</string>
+  <string name="contribution_state_failed">Hutseginda</string>
   <string name="contribution_state_in_progress">%% %1$d egina</string>
   <string name="contribution_state_starting">Igotzen</string>
   <string name="menu_from_gallery">Galeriatik</string>
@@ -179,7 +186,7 @@
   <string name="media_detail_coordinates_empty">Ez da eskeini</string>
   <string name="become_a_tester_title">Beta testatzaile bihurtu</string>
   <string name="_2fa_code">2FA Kodea</string>
-  <string name="logout_verification">Benetan itxi nahi duzu saioa?</string>
+  <string name="logout_verification">Benetan saioa itxi nahi duzu ?</string>
   <string name="mediaimage_failed">Media irudiak kale egin du</string>
   <string name="no_subcategory_found">Ez da azpikategoriarik aurkitu</string>
   <string name="no_parentcategory_found">Ez da guraso kategoriarik aurkitu</string>
@@ -187,9 +194,9 @@
   <string name="welcome_image_llamas">Llamak</string>
   <string name="welcome_image_rainbow_bridge">Ortzadar zubia</string>
   <string name="welcome_image_tulip">Tulipa</string>
-  <string name="welcome_image_welcome_wikipedia">Ongi etorri Wikipedia</string>
+  <string name="welcome_image_welcome_wikipedia">Ongi etorri Wikipediara</string>
   <string name="welcome_image_welcome_copyright">Ongi etorri copyright-a</string>
-  <string name="welcome_image_sydney_opera_house">Sidneiko Opera Etxea</string>
+  <string name="welcome_image_sydney_opera_house">Sidney-ko Opera Etxea</string>
   <string name="cancel">Utzi</string>
   <string name="navigation_drawer_open">Ireki</string>
   <string name="navigation_drawer_close">Itxi</string>
@@ -198,7 +205,7 @@
   <string name="navigation_item_nearby">Gertukoak</string>
   <string name="navigation_item_about">Honi buruz</string>
   <string name="navigation_item_settings">Ezarpenak</string>
-  <string name="navigation_item_feedback">Atzeraelikadura</string>
+  <string name="navigation_item_feedback">Feedback</string>
   <string name="navigation_item_logout">Saioa itxi</string>
   <string name="navigation_item_info">Tutoriala</string>
   <string name="navigation_item_notification">Jakinarazpenak</string>
@@ -207,12 +214,12 @@
   <string name="nearby_info_menu_commons_article">Artxibo orrialde komuna</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata itema</string>
   <string name="nearby_info_menu_wikipedia_article">Wikipediako artikulua</string>
-  <string name="description_info">Mesedez, deskribatu multimedia elementua ahal duzun gehien: non hartu zen? zer erakusten du? zein da bere testuingurua? Mesedez, objektuak eta pertsonak deskribatu. Eman asmatzeko erraza ez den informazioa, adibidez, paisaia bat izatekotan, eguneko zein orudtan hartu den. Multimediak zerbait berezia erakusten badu, mesedez azaldu zerk egiten duen berezia.</string>
+  <string name="description_info">Mesedez, deskribatu multimedia elementua ahal duzun gehien: non hartu zen? zer erakusten du? zein da bere testuingurua? Mesedez, objektuak eta pertsonak deskribatu. Eman asmatzeko erraza ez den informazioa, adibidez, paisaia bat izatekotan, eguneko zein ordutan hartu den. Multimediak zerbait berezia erakusten badu, mesedez azaldu zerk egiten duen berezia.</string>
   <string name="upload_problem_image_dark">Irudia ilunegia da.</string>
-  <string name="upload_problem_image_duplicate">Irudian Commonsen badago.</string>
+  <string name="upload_problem_image_duplicate">Irudia Commonsen badago.</string>
   <string name="upload_problem_different_geolocation">Irudi hau beste leku batean hartu da.</string>
   <string name="upload_connection_error_alert_title">Konektatzeko Errorea</string>
-  <string name="upload_problem_image">arazoak aurkitu dira irudian</string>
+  <string name="upload_problem_image">Arazoak aurkitu dira irudian</string>
   <string name="use_external_storage">Irudiak aplikazioan gorde</string>
   <string name="use_external_storage_summary">Aplikazioaren kamerarekin ateratako argazkiak zure gailuan gorde</string>
   <string name="login_to_your_account">Zure kontuan saioa hasi</string>
@@ -248,7 +255,7 @@
   <string name="showcase_view_whole_nearby_activity">Zugandik hurbil dauden leku hauek irudiak behar dituzte beren Wikipedia artikuluak hornitzeko.\n\nSakatu \'EREMU HONETAN BILATU\' mapa zentratzeko eta kokapen horren inguruan bilaketa hasteko.</string>
   <string name="showcase_view_needs_photo">Leku honek argazkia behar du.</string>
   <string name="showcase_view_has_photo">Leku honek badu argazkia.</string>
-  <string name="showcase_view_no_longer_exists">Lekua hau ia ez da existitzen.</string>
+  <string name="showcase_view_no_longer_exists">Lekua hau ez da existitzen.</string>
   <string name="no_images_found">Ez da irudirik aurkitu!</string>
   <string name="error_loading_images">Arazo bat egon da irudiak kargatzerakoan.</string>
   <string name="image_uploaded_by">Nork igota: %1$s</string>
@@ -333,7 +340,7 @@
   <string name="exif_tag_name_software">Softwarea</string>
   <string name="delete_helper_show_deletion_title_success">Arrakasta</string>
   <string name="delete_helper_show_deletion_title_failed">Hutsegitea</string>
-  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Selfiea</string>
+  <string name="delete_helper_ask_spam_selfie">artikulu bakar batean ere erabiltzen ez den selfiea</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Prentsarako argazkia</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="category_edit_helper_show_edit_title_success">Arrakasta</string>

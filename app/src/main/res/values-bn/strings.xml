@@ -77,6 +77,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">সেটিং</string>
   <string name="intent_share_upload_label">কমন্সে আপলোড করুন</string>
+  <string name="upload_in_progress">আপলোড করা হচ্ছে</string>
   <string name="username">ব্যবহারকারী নাম</string>
   <string name="password">পাসওয়ার্ড</string>
   <string name="login_credential">আপনার কমন্স বিটা অ্যাকাউন্টে প্রবেশ করুন</string>

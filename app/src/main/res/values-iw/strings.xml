@@ -94,6 +94,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">הגדרות</string>
   <string name="intent_share_upload_label">להעלות לוויקישיתוף</string>
+  <string name="upload_in_progress">מתבצעת העלאה</string>
   <string name="username">שם משתמש</string>
   <string name="password">סיסמה</string>
   <string name="login_credential">כניסה לחשבון Commons Beta שלך</string>
@@ -107,6 +108,9 @@
   <string name="login_success">הכניסה הצליחה!</string>
   <string name="login_failed">הכניסה נכשלה!</string>
   <string name="upload_failed">הקובץ לא נמצא. נא לנסות קובץ אחר.</string>
+  <string name="retry_limit_reached">הגעת למגבלת ניסיונות חוזרים! נא לבטל את ההעלאה ולנסות שוב</string>
+  <string name="unrestricted_battery_mode">לכבות את מיטוב השימוש בסוללה?</string>
+  <string name="suggest_unrestricted_mode">העלאה של יותר מ־3 תמונות אמינה יותר כשמיטוב הסוללה כבוי. נא לכבות את מיטוב הסוללה ליישום Commons מההגדרות לחוויית העלאה חלקה יותר.\n\nצעדים שעשויים לכבות את מיטוב הסוללה:\n\nשלב 1: להקיש על כפתור ‚הגדרות’ שלהלן.\n\nשלב 2: לעבור מ‚ללא ממוטבים’ ל‚כל היישומים’.\n\nשלב 3: לחפש את „Commons” או את „fr.free.nrw.commons”.\n\nשלב 4: להקיש עליו ולבחור ב‚לא למטב’.\n\nשלב 5: ללחוץ על ‚סיום’.</string>
   <string name="authentication_failed">אימות הפרטים נכשל, נא להיכנס מחדש</string>
   <string name="uploading_started">ההעלאה התחילה!</string>
   <string name="uploading_queued">ההעלאות בתור (מופעל מצב חיבור מוגבל)</string>
@@ -221,6 +225,8 @@
   <string name="read_storage_permission_rationale">נדרשת הרשאה: קריאת אחסון חיצוני. היישום לא יכול לגשת לגלריה שלך בלי זה.</string>
   <string name="write_storage_permission_rationale">נדרשת הרשאה: כתיבה לאחסון חיצוני. היישום לא יכול לגשת למצלמה או לגלריה שלך בלי זה.</string>
   <string name="location_permission_title">בקשת הרשאה למיקום</string>
+  <string name="in_app_camera_location_permission_title">לרשום מיקום לצילומים מתוך היישום</string>
+  <string name="in_app_camera_location_switch_pref_summary">יש להפעיל את זה כדי לרשום מיקום של צילומים מתוך היישומון אם מצלמת המכשיר לא רושמת אותו</string>
   <string name="ok">אישור</string>
   <string name="warning">אזהרה</string>
   <string name="duplicate_file_name">נמצא שם קובץ כפול</string>
@@ -299,6 +305,7 @@
   <string name="copy_wikicode">העתקת קוד ויקי ללוח</string>
   <string name="wikicode_copied">קוד הוויקי הועתק ללוח</string>
   <string name="nearby_location_not_available">ייתכן ש\"בסביבה\" לא יפעל כראוי, משום שהמיקום אינו זמין.</string>
+  <string name="upload_location_access_denied">הגישה למיקום נדחתה. נא להגדיר את המקום שלך ידנית כדי להשתמש ביכולת הזאת.</string>
   <string name="location_permission_rationale_nearby">נדרשת הרשאה כדי להציג רשימה של מקומות בסביבה</string>
   <string name="nearby_directions">כיוונים</string>
   <string name="nearby_wikidata">ויקינתונים</string>
@@ -446,6 +453,13 @@
   <string name="ends_on">מסתיים ב־:</string>
   <string name="display_campaigns">הצגת מסעי פרסום</string>
   <string name="display_campaigns_explanation">ר\' את מסעי פרסום שמתרחשים כרגע</string>
+  <string name="in_app_camera_location_access_explanation">נא לאפשר ליישום לאחזר את המיקום אם המצלמה לא מתעדת אותו. חלק ממצלמות המכשירים לא רושמות את המיקום. במקרים כאלה, מתן אפשרות ליישום למשוך את המיקום ולשייך אותו לתמונה משפר את השימושיות של התרומה שלך. אפשר לשנות זאת בכל עת דרך ההגדרות</string>
+  <string name="option_allow">לאפשר</string>
+  <string name="option_dismiss">לסרב</string>
+  <string name="in_app_camera_needs_location">נא להפעיל גישה למיקום מההגדרות ולנסות שוב.\n\nלתשומת ליבך: יכול להיות שלחומר שנשלח לא ישויך מיקום אם היישום לא הצליח למשוך את המיקום מהמכשיר תוך זמן קצר.</string>
+  <string name="in_app_camera_location_permission_rationale">המצלמה שבתוך היישום זקוקה להרשאות מיקום כדי לשייך אותו לתמונות שלך אם המיקום לא זמין ב־EXIF. נא לאפשר ליישום לגשת למיקום שלך ולנסות שוב.\n\nלתשומת ליבך: יכול להיות שלחומר שנשלח לא ישויך מיקום אם היישום לא הצליח למשוך את המיקום מהמכשיר תוך זמן קצר.</string>
+  <string name="in_app_camera_location_permission_denied">היישום לא ירשום מיקום יחד עם הצילומים מתוכו כי לא ניתנה לו הרשאת מיקום</string>
+  <string name="in_app_camera_location_unavailable">היישום לא ירשום את המיקום יחד עם צילומים מתוכו כיוון שה־GPS כבוי</string>
   <string name="open_document_photo_picker_title">להשתמש בבורר תמונות מבוסס מסמכים</string>
   <string name="open_document_photo_picker_explanation">בורר התמונות החדש של אנדרואיד עלול לאבד מידע על מיקום. יש להפעיל אותו רק אם נראה שהוא באמת בשימוש שלך.</string>
   <string name="location_loss_warning">כיבוי של זה עשוי להפעיל את בורר התמונות החדש של אנדרואיד. זה עלול לאבד מידע על מיקום.\n\nיש להקיש על \"מידע נוסף\" כדי לקרוא על זה עוד.</string>
@@ -601,6 +615,7 @@
   <string name="recommend_high_accuracy_mode">לתוצאות המיטביות יש להשתמש במצב דיוק גבוה.</string>
   <string name="ask_to_turn_location_on">להפעיל מיקום?</string>
   <string name="nearby_needs_location">פעולת \"בסביבה\" זקוקה לשירותי מיקומי פועלים כדי לעבוד כמו שצריך</string>
+  <string name="upload_map_location_access">יש להעניק גישה למיקום הנוכחי שלך כדי להגדיר את המקום אוטומטית.</string>
   <string name="use_location_from_similar_image">האם צילמת את שתי התמונות באותו המקום? האם ברצונך להשתמש בקו הרוחב וקו האורך של התמונה משמאל?</string>
   <string name="load_more">לטעון עוד</string>
   <string name="nearby_no_results">לא נמצאו מקומות, נא לנסות לשנות את החיפוש.</string>

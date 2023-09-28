@@ -78,6 +78,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Nastavitve</string>
   <string name="intent_share_upload_label">Naloži v Zbirko</string>
+  <string name="upload_in_progress">Nalaganje poteka</string>
   <string name="username">Uporabniško ime</string>
   <string name="password">Geslo</string>
   <string name="login_credential">Prijavite se v svoj betaračun v Zbirki</string>
@@ -91,6 +92,9 @@
   <string name="login_success">Uspešno ste se prijavili!</string>
   <string name="login_failed">Prijava ni uspela!</string>
   <string name="upload_failed">Datoteka ni bila najdena. Prosimo, poskusite z drugo datoteko.</string>
+  <string name="retry_limit_reached">Dosežena je največja omejitev ponovnih poskusov! Prekličite nalaganje in poskusite znova.</string>
+  <string name="unrestricted_battery_mode">Ali želite izklopiti optimizacijo baterije?</string>
+  <string name="suggest_unrestricted_mode">Nalaganje več kot 3 slik deluje bolj zanesljivo, ko je optimizacija baterije izklopljena. Za nemoteno nalaganje v nastavitvah izklopite optimizacijo baterije za aplikacijo Commons. \n\nMožni koraki za izklop optimizacije baterije:\n\n1. korak: Dotaknite se spodnjega gumba »Nastavitve«.\n\n 2. korak: Preklopite z »Ni optimizirano« na »Vse aplikacije«.\n\n3. korak: Poiščite »Commons« ali »fr.free.nrw.commons«.\n\n 4. korak: tapnite ga in izberite »Ne optimiziraj«.\n\n\n5. korak: Pritisnite »Končano«.</string>
   <string name="authentication_failed">Avtentikacija ni uspela; prosimo, prijavite se znova</string>
   <string name="uploading_started">Nalaganje se je začelo!</string>
   <string name="uploading_queued">Nalaganje na čakanju (vklopljen je način omejene povezanosti)</string>
@@ -205,6 +209,8 @@
   <string name="read_storage_permission_rationale">Potrebno dovoljenje: branje zunanjega pomnilnika. Aplikacija brez tega dovoljenja ne more dostopati do vaše galerije.</string>
   <string name="write_storage_permission_rationale">Potrebno dovoljenje: zapisovanje v zunanji pomnilnik. Aplikacija brez tega dovoljenja ne more dostopati do vašega fotoaparata/galerije.</string>
   <string name="location_permission_title">Zahtevam dovoljenje za lokacijo</string>
+  <string name="in_app_camera_location_permission_title">Beleženje lokacije posnetkov v aplikaciji</string>
+  <string name="in_app_camera_location_switch_pref_summary">Omogočite to za beleženje lokacije ob posnetkih v aplikaciji, če je ne zabeleži fotoaparat naprave</string>
   <string name="ok">V redu</string>
   <string name="warning">Opozorilo</string>
   <string name="duplicate_file_name">Najdeno podvojeno ime datoteke</string>
@@ -430,6 +436,13 @@
   <string name="ends_on">Konec:</string>
   <string name="display_campaigns">Prikaži akcije</string>
   <string name="display_campaigns_explanation">Nastavi tekoče kampanje</string>
+  <string name="in_app_camera_location_access_explanation">Dovolite aplikaciji, da pridobi lokacijo, če je kamera ne posname. Kamere nekaterih naprav ne beležijo lokacije. V takih primerih bo vaš prispevek bolj uporaben, če dovolite aplikaciji, da pridobi lokacijo in ji pripne lokacijo. To lahko kadar koli spremenite v nastavitvah</string>
+  <string name="option_allow">Dovoli</string>
+  <string name="option_dismiss">Opusti</string>
+  <string name="in_app_camera_needs_location">V nastavitvah vklopite dostop do lokacije in poskusite znova. \n\nOpomba: Če aplikacija ne more pridobiti lokacije iz naprave v kratkem intervalu, nalaganje morda ne vsebuje lokacije.</string>
+  <string name="in_app_camera_location_permission_rationale">Fotoaparat v aplikaciji potrebuje dovoljenje za lokacijo, da jo pripne vašim slikam, če lokacija ni na voljo v EXIF-u. Prosimo, dovolite aplikaciji dostop do vaše lokacije in poskusite znova.\n\nOpomba: Če aplikacija ne more pridobiti lokacije iz naprave v kratkem intervalu, nalaganje morda ne vsebuje lokacije.</string>
+  <string name="in_app_camera_location_permission_denied">Aplikacija ob posnetkih ne bi beležila lokacije zaradi odsotnosti dovoljenja za lokacijo</string>
+  <string name="in_app_camera_location_unavailable">Aplikacija ne bi beležila lokacije skupaj z notranjimi posnetki, ker je GPS izklopljen</string>
   <string name="open_document_photo_picker_title">Uporaba izbirnika fotografij na podlagi dokumenta</string>
   <string name="open_document_photo_picker_explanation">Novi izbirnik fotografij Android lahko izgubi podatke o lokaciji. Omogočite ga, če ga želite uporabljati.</string>
   <string name="location_loss_warning">Izklop te možnosti lahko aktivira novi izbirnik fotografij za Android. S tem tvegate izgubo podatkov o informacijah.\n\nZa več informacij kliknite »Preberi več«.</string>

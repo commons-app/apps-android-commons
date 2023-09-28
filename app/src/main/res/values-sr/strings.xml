@@ -62,6 +62,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Подешавања</string>
   <string name="intent_share_upload_label">Отпреми на Оставу</string>
+  <string name="upload_in_progress">Отпремање у току</string>
   <string name="username">Корисничко име</string>
   <string name="password">Лозинка</string>
   <string name="login_credential">Пријавите се на свој Commons Beta налог</string>
@@ -74,6 +75,7 @@
   <string name="login_success">Успешно сте пријављени.</string>
   <string name="login_failed">Пријављивање није успело.</string>
   <string name="upload_failed">Датотека није пронађена. Покушајте са другом датотеком.</string>
+  <string name="unrestricted_battery_mode">Искључи оптимизацију батерије?</string>
   <string name="authentication_failed">Потврда идентитета није успела. Пријавите се поново.</string>
   <string name="uploading_started">Отпремање је започето.</string>
   <string name="upload_completed_notification_title">Датотека „%1$s” је отпремљена.</string>
@@ -389,6 +391,8 @@
   <string name="ends_on">Завршава:</string>
   <string name="display_campaigns">Прикажи кампање</string>
   <string name="display_campaigns_explanation">Погледајте текуће кампање</string>
+  <string name="option_allow">Дозволи</string>
+  <string name="option_dismiss">Одбаци</string>
   <string name="this_function_needs_network_connection">Ова функција захтева мрежну везу. Проверите подешавања везе.</string>
   <string name="error_processing_image">Дошло је до грешке током обраде слике. Молим вас, покушајте поново!</string>
   <string name="getting_edit_token">Добијање токена за уређивање</string>
