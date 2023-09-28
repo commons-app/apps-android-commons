@@ -7,6 +7,7 @@ import static fr.free.nrw.commons.profile.ProfileActivity.KEY_USERNAME;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 import android.Manifest;
+import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
@@ -21,6 +22,9 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -35,6 +39,7 @@ import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.theme.BaseActivity;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 import androidx.work.WorkManager;
@@ -117,6 +122,29 @@ public class ContributionsFragment
 
     String userName;
     private boolean isUserProfile;
+    private ActivityResultLauncher<String[]> nearbyLocationPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
+        @Override
+        public void onActivityResult(Map<String, Boolean> result) {
+            boolean areAllGranted = true;
+            for (final boolean b : result.values()) {
+                areAllGranted = areAllGranted && b;
+            }
+
+            if (areAllGranted) {
+                onLocationPermissionGranted();
+            } else {
+                if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
+                    && store.getBoolean("displayLocationPermissionForCardView", true)
+                    && !store.getBoolean("doNotAskForLocationPermission", false)
+                    && (((MainActivity) getActivity()).activeFragment == ActiveFragment.CONTRIBUTIONS)) {
+                    nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
+                    showNearbyCardPermissionRationale();
+                } else {
+                    displayYouWontSeeNearbyMessage();
+                }
+            }
+        }
+    });
 
     @NonNull
     public static ContributionsFragment newInstance() {
@@ -451,12 +479,7 @@ public class ContributionsFragment
     }
 
     private void requestLocationPermission() {
-        PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
-                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                this::onLocationPermissionGranted,
-                this::displayYouWontSeeNearbyMessage,
-                -1,
-                -1);
+        nearbyLocationPermissionLauncher.launch(new String[]{permission.ACCESS_FINE_LOCATION});
     }
 
     private void onLocationPermissionGranted() {

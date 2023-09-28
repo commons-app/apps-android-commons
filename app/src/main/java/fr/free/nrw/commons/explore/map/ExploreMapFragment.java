@@ -7,6 +7,7 @@ import static fr.free.nrw.commons.utils.MapUtils.CAMERA_TARGET_SHIFT_FACTOR_PORT
 import static fr.free.nrw.commons.utils.MapUtils.ZOOM_LEVEL;
 
 import android.Manifest;
+import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -29,6 +30,9 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -84,6 +88,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
@@ -143,6 +148,38 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     @BindView(R.id.description) TextView description;
     @BindView(R.id.title) TextView title;
     @BindView(R.id.category) TextView distance;
+
+    private ActivityResultLauncher<String[]> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
+        @Override
+        public void onActivityResult(Map<String, Boolean> result) {
+            boolean areAllGranted = true;
+            for(final boolean b : result.values()) {
+                areAllGranted = areAllGranted && b;
+            }
+
+            if (areAllGranted) {
+                locationPermissionGranted();
+            } else {
+                if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
+                    DialogUtil.showAlertDialog(getActivity(), getActivity().getString(R.string.location_permission_title),
+                        getActivity().getString(R.string.location_permission_rationale_nearby),
+                        getActivity().getString(android.R.string.ok),
+                        getActivity().getString(android.R.string.cancel),
+                        () -> {
+                            if (!(locationManager.isNetworkProviderEnabled() || locationManager.isGPSProviderEnabled())) {
+                                showLocationOffDialog();
+                            }
+                        },
+                        () -> isPermissionDenied = true,
+                        null,
+                        false);
+                } else {
+                    isPermissionDenied = true;
+                }
+
+            }
+        }
+    });
 
 
     @NonNull
@@ -403,12 +440,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     @Override
     public void checkPermissionsAndPerformAction() {
         Timber.d("Checking permission and perfoming action");
-        PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
-            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-            this::locationPermissionGranted,
-            () -> isPermissionDenied = true,
-            R.string.location_permission_title,
-            R.string.location_permission_rationale_nearby);
+        activityResultLauncher.launch(new String[]{permission.ACCESS_FINE_LOCATION});
     }
 
     private void locationPermissionGranted() {

@@ -165,11 +165,10 @@ public class MainActivity  extends BaseActivity
             if (VERSION.SDK_INT >= VERSION_CODES.Q) {
                 PermissionUtils.checkPermissionsAndPerformAction(
                     this,
-                    new String[]{permission.ACCESS_MEDIA_LOCATION},
                     () -> {},
                     R.string.media_location_permission_denied,
-                    R.string.add_location_manually
-                );
+                    R.string.add_location_manually,
+                    permission.ACCESS_MEDIA_LOCATION);
             }
         }
     }

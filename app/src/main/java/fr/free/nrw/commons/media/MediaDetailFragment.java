@@ -367,13 +367,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             launchZoomActivityAfterPermissionCheck(view);
         } else {
             PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
-                PermissionUtils.PERMISSIONS_STORAGE,
                 () -> {
                     launchZoomActivityAfterPermissionCheck(view);
                 },
                 R.string.storage_permission_title,
-                R.string.read_storage_permission_rationale
-            );
+                R.string.read_storage_permission_rationale,
+                PermissionUtils.PERMISSIONS_STORAGE
+                );
         }
     }
 
