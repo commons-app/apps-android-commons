@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.bookmarks.locations;
 
+import android.Manifest.permission;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +25,7 @@ import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.fragments.CommonPlaceClickActions;
 import fr.free.nrw.commons.nearby.fragments.PlaceAdapter;
 import java.util.List;
+import java.util.Map;
 import javax.inject.Inject;
 import kotlin.Unit;
 
@@ -36,6 +41,25 @@ public class BookmarkLocationsFragment extends DaggerFragment {
     @Inject BookmarkLocationsDao bookmarkLocationDao;
     @Inject CommonPlaceClickActions commonPlaceClickActions;
     private PlaceAdapter adapter;
+    private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
+        @Override
+        public void onActivityResult(Map<String, Boolean> result) {
+            boolean areAllGranted = true;
+            for(final boolean b : result.values()) {
+                areAllGranted = areAllGranted && b;
+            }
+
+            if (areAllGranted) {
+                contributionController.locationPermissionCallback.onLocationPermissionGranted();
+            } else {
+                if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
+                    contributionController.handleShowRationaleFlowCameraLocation(getActivity());
+                } else {
+                    contributionController.locationPermissionCallback.onLocationPermissionDenied(getActivity().getString(R.string.in_app_camera_location_permission_denied));
+                }
+            }
+        }
+    });
 
     /**
      * Create an instance of the fragment with the right bundle parameters
@@ -67,7 +91,8 @@ public class BookmarkLocationsFragment extends DaggerFragment {
                 adapter.remove(place);
                 return Unit.INSTANCE;
             },
-            commonPlaceClickActions
+            commonPlaceClickActions,
+            inAppCameraLocationPermissionLauncher
         );
         recyclerView.setAdapter(adapter);
     }

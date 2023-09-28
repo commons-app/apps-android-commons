@@ -149,10 +149,10 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         init();
         nearbyPopupAnswers = new HashMap<>();
         PermissionUtils.checkPermissionsAndPerformAction(this,
-            PERMISSIONS_STORAGE,
             this::receiveSharedItems,
             R.string.storage_permission_title,
-            R.string.write_storage_permission_rationale_for_image_share);
+            R.string.write_storage_permission_rationale_for_image_share,
+            PERMISSIONS_STORAGE);
         //getting the current dpi of the device and if it is less than 320dp i.e. overlapping
         //threshold, thumbnails automatically minimizes
         DisplayMetrics metrics = getResources().getDisplayMetrics();
@@ -255,12 +255,12 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         final boolean hasAllPermissions = PermissionUtils.hasPermission(this, PERMISSIONS_STORAGE);
         if (!hasAllPermissions) {
             PermissionUtils.checkPermissionsAndPerformAction(this,
-                PERMISSIONS_STORAGE,
                 () -> {
                     //TODO handle this
                 },
                 R.string.storage_permission_title,
-                R.string.write_storage_permission_rationale_for_image_share);
+                R.string.write_storage_permission_rationale_for_image_share,
+                PERMISSIONS_STORAGE);
         }
     }
 

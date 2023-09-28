@@ -2,7 +2,7 @@ package fr.free.nrw.commons.settings;
 
 import static android.content.Context.MODE_PRIVATE;
 
-import android.Manifest;
+import android.Manifest.permission;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -18,7 +18,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
 import androidx.preference.Preference;
@@ -31,18 +33,15 @@ import androidx.recyclerview.widget.RecyclerView.Adapter;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-import com.karumi.dexter.listener.single.BasePermissionListener;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.campaigns.CampaignView;
+import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
-import fr.free.nrw.commons.location.LocationPermissionsHelper;
-import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.recentlanguages.Language;
@@ -56,7 +55,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
+import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -73,6 +72,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     RecentLanguagesDao recentLanguagesDao;
 
     @Inject
+    ContributionController contributionController;
+
+    @Inject
     LocationServiceManager locationManager;
 
     private ListPreference themeListPreference;
@@ -83,6 +85,18 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     private View separator;
     private ListView languageHistoryListView;
     private static final String GET_CONTENT_PICKER_HELP_URL = "https://commons-app.github.io/docs.html#get-content";
+    private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
+        @Override
+        public void onActivityResult(Map<String, Boolean> result) {
+            boolean areAllGranted = true;
+            for (final boolean b : result.values()) {
+                areAllGranted = areAllGranted && b;
+            }
+            if (!areAllGranted && shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
+                contributionController.handleShowRationaleFlowCameraLocation(getActivity());
+            }
+        }
+    });
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -205,32 +219,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
      * @param activity
      */
     private void createDialogsAndHandleLocationPermissions(Activity activity) {
-        LocationPermissionsHelper.Dialog locationAccessDialog = new LocationPermissionsHelper.Dialog(
-            R.string.location_permission_title,
-            R.string.in_app_camera_location_permission_rationale
-        );
-
-        LocationPermissionsHelper.Dialog locationOffDialog = new LocationPermissionsHelper.Dialog(
-            R.string.ask_to_turn_location_on,
-            R.string.in_app_camera_needs_location
-        );
-
-        LocationPermissionsHelper locationPermissionsHelper = new LocationPermissionsHelper(
-            activity, locationManager, new LocationPermissionCallback() {
-            @Override
-            public void onLocationPermissionDenied(String toastMessage) {
-                // dismiss the dialog
-            }
-
-            @Override
-            public void onLocationPermissionGranted() {
-                // dismiss the dialog
-            }
-        });
-        locationPermissionsHelper.handleLocationPermissions(
-            locationAccessDialog,
-            locationOffDialog
-        );
+        inAppCameraLocationPermissionLauncher.launch(new String[]{permission.ACCESS_FINE_LOCATION});
     }
 
     /**
