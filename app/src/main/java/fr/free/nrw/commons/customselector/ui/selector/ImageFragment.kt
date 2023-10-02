@@ -238,7 +238,11 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassData
      */
     private fun handleResult(result:Result){
         if(result.status is CallbackStatus.SUCCESS){
-            val images = result.images
+            // Sort images by name, rather than the default ID number which is almost random (see issue #5263).
+            var images = ArrayList<Image>(
+                result.images.sortedWith(compareBy({ it.name }))
+            )
+
             if(images.isNotEmpty()) {
                 filteredImages = ImageHelper.filterImages(images, bucketId)
                 allImages = ArrayList(filteredImages)
