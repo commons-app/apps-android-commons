@@ -289,6 +289,7 @@
   <string name="copy_wikicode">Kopiraj vikibesedilo v odložišče</string>
   <string name="wikicode_copied">Vikibesedilo je skopirano v odložišče</string>
   <string name="nearby_location_not_available">Bližnje mogoče ne bo pravilno delovalo. Kraj ni na voljo.</string>
+  <string name="upload_location_access_denied">Dostop do lokacije je bil zavrnjen. Za uporabo te možnosti ročno nastavite svojo lokacijo.</string>
   <string name="location_permission_rationale_nearby">Za prikaz seznama bložnjih krajev je potrebno dovoljenje</string>
   <string name="nearby_directions">Smeri</string>
   <string name="nearby_wikidata">Wikipodatki</string>
@@ -598,6 +599,7 @@
   <string name="recommend_high_accuracy_mode">Za najboljše zadetke izberite način Visoka natančnost.</string>
   <string name="ask_to_turn_location_on">Vklopim kraj?</string>
   <string name="nearby_needs_location">Za Bližnje je trebs vklopiti kraj</string>
+  <string name="upload_map_location_access">Za samodejno nastavitev lokacije morate omogočiti dostop do vaše trenutne lokacije.</string>
   <string name="use_location_from_similar_image">Ali ste sliki posneli na istem kraju? Ali želite uporabiti geografsko širino/dolžino desne slike?</string>
   <string name="load_more">Naloži več</string>
   <string name="nearby_no_results">Najden ni noben kraj. Poskusite spremeniti iskalne parametre.</string>
