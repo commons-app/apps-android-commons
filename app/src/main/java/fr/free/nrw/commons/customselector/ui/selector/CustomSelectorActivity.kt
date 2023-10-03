@@ -95,6 +95,8 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
      */
     var imageFragment: ImageFragment? = null
 
+    private var progressDialogText:String=""
+
     /**
      * onCreate Activity, sets theme, initialises the view model, setup view.
      */
@@ -221,6 +223,10 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
      */
     private fun insertIntoNotForUpload(images: ArrayList<Image>) {
         scope.launch {
+            imageFragment!!.showMarkUnmarkProgressDialog(
+                text= progressDialogText
+            )
+
             var allImagesAlreadyNotForUpload = true
             images.forEach {
                 val imageSHA1 = CustomSelectorUtils.getImageSHA1(
@@ -269,6 +275,8 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
             }
 
             imageFragment!!.refresh()
+            imageFragment!!.dismissMarkUnmarkProgressDialog()
+
             val bottomLayout: ConstraintLayout = findViewById(R.id.bottom_layout)
             bottomLayout.visibility = View.GONE
         }
@@ -334,8 +342,14 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
 
         bottomSheetBinding.notForUpload.text =
             when (selectedImages.size == selectedNotForUploadImages) {
-                true -> getString(R.string.unmark_as_not_for_upload)
-                else -> getString(R.string.mark_as_not_for_upload)
+                true -> {
+                    progressDialogText=getString(R.string.unmarking_as_not_for_upload)
+                    getString(R.string.unmark_as_not_for_upload)
+                }
+                else -> {
+                    progressDialogText=getString(R.string.marking_as_not_for_upload)
+                    getString(R.string.mark_as_not_for_upload)
+                }
             }
 
         val bottomLayout: ConstraintLayout = findViewById(R.id.bottom_layout)
