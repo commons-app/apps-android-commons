@@ -173,8 +173,8 @@ android {
     defaultConfig {
         //applicationId 'fr.free.nrw.commons'
 
-        versionCode 1034
-        versionName '4.1.0'
+        versionCode 1035
+        versionName '4.2.0'
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
 
         minSdkVersion 21
@@ -223,6 +223,7 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             testProguardFile 'test-proguard-rules.txt'
+            signingConfig signingConfigs.debug
             if (isRunningOnTravisAndIsNotPRBuild) {
                 signingConfig signingConfigs.release
             }
