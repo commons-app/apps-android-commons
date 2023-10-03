@@ -463,9 +463,7 @@
   <string name="ends_on">ينتهي في:</string>
   <string name="display_campaigns">عرض الحملات</string>
   <string name="display_campaigns_explanation">انظر الحملات الجارية</string>
-  <string name="get_content_photo_picker_title">استخدم منتقي الصور GET_CONTENT</string>
-  <string name="get_content_photo_picker_explanation">تعطيل إذا تم تحميل صورك بدون موقع</string>
-  <string name="location_loss_warning">يرجى التأكد من أن منتقي أندرويد الجديد هذا لا يزيل الموقع من صورك.</string>
+  <string name="location_loss_warning" fuzzy="true">يرجى التأكد من أن منتقي أندرويد الجديد هذا لا يزيل الموقع من صورك.</string>
   <string name="nearby_campaign_dismiss_message">لن ترى الحملات بعد الآن، ومع ذلك، يمكنك إعادة تمكين هذا الإشعار في الإعدادات إذا كنت ترغب.</string>
   <string name="this_function_needs_network_connection">تتطلب هذه الوظيفة الاتصال بالشبكة; يُرجَى التحقق من إعدادات اتصالك.</string>
   <string name="error_processing_image">حدث خطأ أثناء معالجة الصورة. رجاءً حاول مرة أخرى!</string>

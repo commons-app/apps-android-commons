@@ -30,6 +30,20 @@
   <string name="commons_website">Strona internetowa Commons</string>
   <string name="exit_location_picker">Wyjdź z selektora lokalizacji</string>
   <string name="submit">Prześlij</string>
+  <string name="add_another_description">Dodaj kolejny opis</string>
+  <string name="add_new_contribution">Dodaj nowy wkład</string>
+  <string name="add_contribution_from_camera">Dodaj wkład z kamery</string>
+  <string name="add_contribution_from_photos">Dodaj wkład ze zdjęć</string>
+  <string name="add_contribution_from_contributions_gallery">Dodaj wkład z galerii poprzednich wkładów</string>
+  <string name="show_captions">Podpisy</string>
+  <string name="row_item_language_description">Opis języka</string>
+  <string name="row_item_caption">Podpis</string>
+  <string name="show_captions_description">Opis</string>
+  <string name="nearby_row_image">Obraz</string>
+  <string name="nearby_all">Wszystkie</string>
+  <string name="nearby_filter_toggle">Przełącz w górę</string>
+  <string name="nearby_filter_search">Widok wyszukiwania</string>
+  <string name="nearby_filter_state">Stan miejsca</string>
   <string name="appwidget_img">Zdjęcie dnia</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Przesyłanie %1$d pliku</item>
@@ -435,6 +449,7 @@
   <string name="ends_on">Kończy się na:</string>
   <string name="display_campaigns">Wyświetl kampanie</string>
   <string name="display_campaigns_explanation">Zobacz trwające kampanie</string>
+  <string name="location_loss_warning" fuzzy="true">Upewnij się, że ten nowy selektor Androida nie usuwa lokalizacji ze zdjęć.</string>
   <string name="nearby_campaign_dismiss_message">Kampanie już nie będą widoczne. Jednak w razie potrzeby możesz ponownie włączyć to powiadomienie w ustawieniach.</string>
   <string name="this_function_needs_network_connection">Ta funkcja wymaga połączenia sieciowego, sprawdź ustawienia połączenia.</string>
   <string name="error_processing_image">Wystąpił błąd podczas przetwarzania obrazu. Spróbuj ponownie!</string>
@@ -513,9 +528,9 @@
   <string name="delete_helper_show_deletion_message_if">Nominowane %1$s do usunięcia.</string>
   <string name="delete_helper_show_deletion_title_failed">Nie powiodło się</string>
   <string name="delete_helper_show_deletion_message_else">Nie można zażądać usunięcia.</string>
-  <string name="delete_helper_ask_spam_selfie" fuzzy="true">Selfie</string>
-  <string name="delete_helper_ask_spam_blurry" fuzzy="true">Niewyraźne</string>
-  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Nonsens</string>
+  <string name="delete_helper_ask_spam_selfie">selfie, które nie jest używane w żadnym artykule</string>
+  <string name="delete_helper_ask_spam_blurry">całkowicie niewyraźne</string>
+  <string name="delete_helper_ask_spam_nonsense">nonsens, absolutnie nieprzydatny w żadnym artykule</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Zdjęcie prasowe</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Losowe zdjęcie z internetu</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
@@ -571,7 +586,7 @@
   <string name="title_for_child_classes">KLASY POTOMNE</string>
   <string name="title_for_parent_classes">KLASY NADRZĘDNE</string>
   <string name="upload_nearby_place_found_title">Znaleziono miejsce w pobliżu</string>
-  <string name="upload_nearby_place_found_description" fuzzy="true">Czy jest to zdjęcie miejsca %1$s?</string>
+  <string name="upload_nearby_place_found_description">Czy to zdjęcie %1$s?</string>
   <string name="title_app_shortcut_bookmark">Zakładki</string>
   <string name="title_app_shortcut_setting">Ustawienia</string>
   <string name="remove_bookmark">Usunięto z zakładek</string>
@@ -670,7 +685,7 @@
   <string name="done">Gotowe</string>
   <string name="back">Cofnij</string>
   <string name="welcome_custom_picture_selector_text">Witamy w niestandardowym selektorze zdjęć</string>
-  <string name="custom_selector_info_text1" fuzzy="true">Ten selektor pokazuje inaczej zdjęcia, które są już na Commons.</string>
+  <string name="custom_selector_info_text1">Ten selektor pokazuje, które zdjęcia zostały już przesłane do Commons.</string>
   <string name="custom_selector_info_text2">W przeciwieństwie do zdjęcia po lewej, zdjęcie po prawej ma logo Commons wskazujące, że zostało już przesłane.\n  Dotknij i przytrzymaj, aby wyświetlić podgląd obrazu.</string>
   <string name="welcome_custom_selector_ok">Niesamowite</string>
   <string name="custom_selector_already_uploaded_image_text">Tez plik został już przesłany do Commons.</string>
@@ -710,4 +725,23 @@
   <string name="error_feedback">Błąd podczas wysyłania opinii</string>
   <string name="enter_description">Jaka jest Twoja opinia?</string>
   <string name="your_feedback">Twoja opinia</string>
+  <string name="mark_as_not_for_upload">Oznacz jako nieprzeznaczone do przesłania</string>
+  <string name="unmark_as_not_for_upload">Odznacz jako nie do przesłania</string>
+  <string name="show_already_actioned_pictures">Pokaż już wykonane zdjęcia</string>
+  <string name="hiding_already_actioned_pictures">Ukrywanie już wykonanych zdjęć</string>
+  <string name="no_more_images_found">Nie znaleziono więcej obrazów</string>
+  <string name="this_image_is_already_uploaded">To zdjęcie zostało już przesłane</string>
+  <string name="can_not_select_this_image_for_upload">Nie można wybrać tego obrazu do przesłania</string>
+  <string name="image_selected">Wybrano obraz</string>
+  <string name="image_marked_as_not_for_upload">Obraz oznaczony jako nieprzeznaczony do przesłania</string>
+  <string name="menu_view_report">Raport</string>
+  <string name="report_violation">Zgłoś naruszenie</string>
+  <string name="report_user">Zgłoś tego użytkownika</string>
+  <string name="report_content">Zgłoś ten komentarz</string>
+  <string name="request_user_block">Prośba o zablokowanie tego użytkownika</string>
+  <string name="welcome_to_full_screen_mode_text">Witamy w trybie wyboru na pełnym ekranie</string>
+  <string name="full_screen_mode_zoom_info">Użyj dwóch palców, aby powiększyć lub pomniejszyć.</string>
+  <string name="full_screen_mode_features_info">Przesuń szybko i długo, aby wykonać następujące czynności: \n- Lewo/Prawo: Przejdź do poprzedniego/następnego \n- Góra: Wybierz\n- Dół: Oznacz jako nieprzeznaczone do przesłania.</string>
+  <string name="set_up_avatar_toast_string">Aby skonfigurować swojego awatara rankingu, dotknij \'Ustaw jako awatar\' w menu z trzema kropkami dowolnego obrazu.</string>
+  <string name="similar_coordinate_description_auto_set">Współrzędne nie są dokładnymi współrzędnymi, ale osoba, która przesłała to zdjęcie, uważa, że są wystarczająco blisko.</string>
 </resources>

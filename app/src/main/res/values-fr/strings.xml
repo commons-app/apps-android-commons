@@ -448,9 +448,9 @@
   <string name="ends_on">Se termine le :</string>
   <string name="display_campaigns">Campagnes d’affichage</string>
   <string name="display_campaigns_explanation">Voir les campagnes en cours</string>
-  <string name="get_content_photo_picker_title">Utiliser le sélecteur de photos GET_CONTENT</string>
-  <string name="get_content_photo_picker_explanation">Désactiver si vos photos sont téléversées sans emplacement</string>
-  <string name="location_loss_warning">Assurez-vous que ce nouveau sélecteur Android n’élimine pas l’emplacement de vos photos.</string>
+  <string name="open_document_photo_picker_title">Utiliser le sélecteur de photos basé sur un document</string>
+  <string name="open_document_photo_picker_explanation">Le nouveau sélecteur de photos de Android risque de perdre des informations de localisation. Activez-le si vous semblez l’utiliser.</string>
+  <string name="location_loss_warning">Le désactiver pourrait déclencher le nouveau sélecteur de photos de Android. Il risque de perdre des informations de localisation.\n\nTaper sur \'En savoir plus\' pour plus d’informations.</string>
   <string name="nearby_campaign_dismiss_message">Vous ne verrez plus les campagnes. Néanmoins, vous pouvez réactiver cette notification dans vos paramètres de configuration, si vous le souhaitez.</string>
   <string name="this_function_needs_network_connection">Cette fonction nécessite une connexion réseau, veuillez consulter vos paramètres de connexion.</string>
   <string name="error_processing_image">Une erreur est survenue durant le traitement de l’image. Veuillez recommencer !</string>

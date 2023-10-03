@@ -9,9 +9,15 @@
   <string name="commons_facebook">Tudalen Adborth Comin</string>
   <string name="commons_logo">Logo Comin</string>
   <string name="commons_website">Gwefan Comin</string>
+  <string name="submit">Cyflwyno</string>
   <string name="add_another_description">Ychwanegu disgrifiad arall</string>
+  <string name="add_new_contribution">Ychwanegu cyfraniad newydd</string>
+  <string name="show_captions">Penawdau</string>
+  <string name="row_item_language_description">Disgrifiad Iaith</string>
+  <string name="row_item_caption">Pennawd</string>
   <string name="show_captions_description">Disgrifiad</string>
   <string name="nearby_row_image">Delwedd</string>
+  <string name="nearby_all">Popeth</string>
   <string name="appwidget_img">Llun y Dydd</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">%1$d ffeil yn uwchlwytho</item>
@@ -60,10 +66,10 @@
   <string name="uploading_started">Dechreuodd yr uwchlwytho!</string>
   <string name="upload_completed_notification_title">Uwchlwythwyd %1$s!</string>
   <string name="upload_completed_notification_text">Tapiwch i weld eich uwchlwythiad</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">Yn dechrau uwchlwytho %1$s</string>
+  <string name="upload_progress_notification_title_start">Wrthi\'n uwchlwytho ffeil: %s</string>
   <string name="upload_progress_notification_title_in_progress">Wrthi\'n uwchlwytho %1$s</string>
   <string name="upload_progress_notification_title_finishing">Yn gorffen uwchlwytho %1$s</string>
-  <string name="upload_failed_notification_title" fuzzy="true">Methwyd uwchlwytho %1$s</string>
+  <string name="upload_failed_notification_title">Wedi methu uwchlwytho %1$s</string>
   <string name="upload_failed_notification_subtitle">Tapiwch i weld</string>
   <string name="upload_paused_notification_subtitle">Tapiwch i weld</string>
   <string name="title_activity_contributions">Fy Uwchlwythiadau Diweddaraf</string>
@@ -76,8 +82,9 @@
   <string name="menu_nearby">Gerllaw</string>
   <string name="provider_contributions">Fy uwchlwythiadau</string>
   <string name="menu_share">Rhannu</string>
-  <string name="share_title_hint" fuzzy="true">Teitl (angenrheidiol)</string>
+  <string name="share_title_hint">Pennawd (Gofynnol)</string>
   <string name="share_description_hint">Disgrifiad</string>
+  <string name="share_caption_hint">Pennawd</string>
   <string name="login_failed_network">Yn methu mewngofnodi - methodd y rhwydwaith</string>
   <string name="login_failed_throttled">Cafwyd gormod o ymgeision aflwyddiannus. Oedwch ennyd cyn ceisio eto.</string>
   <string name="login_failed_blocked">Ymddiheurwn. Mae\'r defnyddiwr hwn wedi ei flocio ar Gomin Wikimedia</string>
@@ -91,7 +98,7 @@
   <string name="menu_save_categories">Cadw</string>
   <string name="refresh_button">Ailgyrchu</string>
   <string name="display_list_button">Rhestr</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">Heb uwchlwytho eto</string>
+  <string name="contributions_subtitle_zero">(Dim uwchlwythiadau eto)</string>
   <string name="categories_not_found">Dim categori\'n cyfateb i %1$s ar gael</string>
   <string name="categories_skip_explanation">Ychwanegwch gategori/au er mwyn i bobl fedru canfod eich ffeiliau ar Gomin Wicimedia.\n\nCychwynwch deipio i ychwanegu categori/au.</string>
   <string name="categories_activity_title">Categorïau</string>
@@ -103,8 +110,8 @@
   <string name="menu_about">Amdanom</string>
   <string name="about_license">Ap Cynnwys Agored a grewyd ac a gefnogir gan wirfoddolwyr cymuned Wicimedia yw ap Comin Wicimedia. Does a wnelo Sefydliad Wicimedia ddim byd ag e (ei greu, ei gynnal na\'i ddatblygu).</string>
   <string name="about_improve">\n\nCrewch &lt;a href=\"%1$s\"&gt;ymholiad GitHub&lt;/a&gt; os oes gennych fyg, broblem neu awgrym.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Polisi preifatrwydd&lt;/u&gt;</string>
-  <string name="about_credits" fuzzy="true">Clod a bri</string>
+  <string name="about_privacy_policy">Polisi preifatrwydd</string>
+  <string name="about_credits">Cydnabyddiaeth</string>
   <string name="title_activity_about">Amdanom</string>
   <string name="menu_feedback">Danfonwch Adborth (drwy Ebost)</string>
   <string name="no_email_client">Dim ebost client wedi\'i ganfod</string>
@@ -117,7 +124,7 @@
   <string name="menu_download">Lawrlwytho</string>
   <string name="preference_license">Trwydded Ddiofyn (\'default\')</string>
   <string name="use_previous" fuzzy="true">Defnydiwch y teitl/disgrifiad blaenorol</string>
-  <string name="preference_theme" fuzzy="true">Modd fin nos</string>
+  <string name="preference_theme">Thema</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa">CC Attribution-ShareAlike 3.0</string>
@@ -147,7 +154,7 @@
   <string name="welcome_copyright_subtext">Cadwch yn glir o ddeunydd a hawlfraint arno a ganfyddwch ar y we, ac hefyd lluniau o bosteri, cloriau llyfrau, ayb.</string>
   <string name="welcome_final_text">Ydych chi wedi deall?</string>
   <string name="welcome_final_button_text">Do!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Rhagor o wybodaeth&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">Mwy o wybodaeth</string>
   <string name="detail_panel_cats_label">Categorïau</string>
   <string name="detail_panel_cats_loading">Wrthi\'n llwytho…</string>
   <string name="detail_panel_cats_none">Dim categorïau wedi eu dewis</string>
@@ -210,7 +217,7 @@
   <string name="upload_problem_different_geolocation">Cymerwyd y llun mewn lleoliad gwahanol.</string>
   <string name="upload_problem_do_you_continue">Wyt ti\'n dal yn awyddus i uwchlwytho\'r ddelwedd?</string>
   <string name="upload_problem_image">Gwallau yn y ddelwedd</string>
-  <string name="use_external_storage" fuzzy="true">Defnyddia storfa allanol</string>
+  <string name="use_external_storage">Cadw delweddau Mewn-ap</string>
   <string name="login_to_your_account">Mewngofnodwch i\'ch cyfri</string>
   <string name="send_log_file">Danfonwch y ffeil log</string>
   <string name="null_url">Gwall! Ni chafwyd hyd i\'r URL</string>
@@ -292,6 +299,15 @@
   <string name="description">Disgrifiad</string>
   <string name="title_page_bookmarks_items">Eitemau</string>
   <string name="learn_more">DYSGU MWY</string>
+  <string name="reset">Ailosod</string>
   <string name="explore_map_details">Manylion</string>
+  <string name="api_level">Lefel API</string>
+  <string name="android_version">Fersiwn Android</string>
+  <string name="device_name">Enw dyfais</string>
   <string name="your_feedback">Eich adborth</string>
+  <string name="menu_view_report">Adrodd</string>
+  <string name="report_violation">Adrodd toriad</string>
+  <string name="report_user">Adrodd y defnyddiwr hwn</string>
+  <string name="report_content">Adrodd y cynnwys hwn</string>
+  <string name="request_user_block">Cais i flocio\'r defnyddiwr hwn</string>
 </resources>

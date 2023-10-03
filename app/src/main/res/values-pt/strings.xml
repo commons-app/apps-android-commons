@@ -429,6 +429,7 @@
   <string name="ends_on">Termina em:</string>
   <string name="display_campaigns">Apresentar campanhas</string>
   <string name="display_campaigns_explanation">Ver as campanhas em andamento</string>
+  <string name="location_loss_warning" fuzzy="true">Assegure-se de que este novo seletor Android não remove a localização das suas fotografias.</string>
   <string name="nearby_campaign_dismiss_message">Deixará de ver as campanhas. No entanto, pode reativar esta notificação nas configurações, se desejar.</string>
   <string name="this_function_needs_network_connection">Esta função requer uma ligação de rede. Verifique as suas configurações de ligação, por favor.</string>
   <string name="error_processing_image">Ocorreu um erro ao processar a imagem. Tente novamente, por favor!</string>

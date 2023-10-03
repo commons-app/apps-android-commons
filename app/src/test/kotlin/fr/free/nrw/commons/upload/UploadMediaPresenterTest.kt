@@ -15,7 +15,7 @@ import io.github.coordinates2country.Coordinates2Country
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
-import junit.framework.TestCase.assertEquals
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

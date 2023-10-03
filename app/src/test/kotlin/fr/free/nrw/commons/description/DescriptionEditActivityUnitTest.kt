@@ -19,8 +19,8 @@ import fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.UploadMediaDetail
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
-import junit.framework.Assert.assertEquals
 import org.junit.Assert
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
