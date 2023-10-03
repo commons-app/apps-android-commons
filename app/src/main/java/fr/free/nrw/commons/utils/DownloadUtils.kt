@@ -38,7 +38,7 @@ object DownloadUtils {
         }
         PermissionUtils.checkPermissionsAndPerformAction(
             activity,
-            permission.WRITE_EXTERNAL_STORAGE,
+            PermissionUtils.PERMISSIONS_STORAGE,
             { enqueueRequest(activity, req) },
             {
                 Toast.makeText(

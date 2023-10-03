@@ -57,6 +57,10 @@ import fr.free.nrw.commons.MapStyle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LocationPermissionsHelper;
+import fr.free.nrw.commons.location.LocationPermissionsHelper.Dialog;
+import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
+import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
 import javax.inject.Inject;
@@ -147,6 +151,9 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
     @Inject
     SystemThemeUtils systemThemeUtils;
     private boolean isDarkTheme;
+
+    @Inject
+    LocationServiceManager locationManager;
 
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
@@ -452,11 +459,43 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
         fabCenterOnLocation = findViewById(R.id.center_on_gps);
         fabCenterOnLocation.setOnClickListener(view -> getCenter());
     }
+
     /**
-     * Animate map to move to desired Latitude and Longitude
+     * Center the map at user's current location
      */
-    void getCenter() {
-        mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()),15.0));
+    private void getCenter() {
+        LocationPermissionsHelper.Dialog locationAccessDialog = new Dialog(
+            R.string.location_permission_title,
+            R.string.upload_map_location_access
+        );
+
+        LocationPermissionsHelper.Dialog locationOffDialog = new Dialog(
+            R.string.ask_to_turn_location_on,
+            R.string.upload_map_location_access
+        );
+        LocationPermissionsHelper locationPermissionsHelper = new LocationPermissionsHelper(
+            this, locationManager, new LocationPermissionCallback() {
+            @Override
+            public void onLocationPermissionDenied(String toastMessage) {
+                // Do nothing
+            }
+
+            @Override
+            public void onLocationPermissionGranted() {
+                fr.free.nrw.commons.location.LatLng currLocation = locationManager.getLastLocation();
+                if (currLocation != null) {
+                    final CameraPosition position;
+                    position = new CameraPosition.Builder()
+                        .target(new com.mapbox.mapboxsdk.geometry.LatLng(currLocation.getLatitude(),
+                            currLocation.getLongitude(), 0)) // Sets the new camera position
+                        .zoom(mapboxMap.getCameraPosition().zoom) // Same zoom level
+                        .build();
+
+                    mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
+                }
+            }
+        });
+        locationPermissionsHelper.handleLocationPermissions(locationAccessDialog, locationOffDialog);
     }
 
     @Override

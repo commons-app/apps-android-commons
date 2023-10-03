@@ -62,6 +62,7 @@
   <string name="bullet">&#8226;</string>
   <string name="menu_settings">Settings</string>
   <string name="intent_share_upload_label">Upload to Commons</string>
+  <string name="upload_in_progress">Upload in progress</string>
   <string name="username">Username</string>
   <string name="password">Password</string>
   <string name="login_credential">Log in to your Commons Beta account</string>
@@ -75,6 +76,9 @@
   <string name="login_success">Login success!</string>
   <string name="login_failed">Login failed!</string>
   <string name="upload_failed">File not found. Please try another file.</string>
+  <string name="retry_limit_reached">Maximum retry limit reached! Please cancel the upload and try again</string>
+  <string name="unrestricted_battery_mode">Turn battery optimization off?</string>
+  <string name="suggest_unrestricted_mode">Uploading more than 3 images works more reliably when the battery optimization is turned off. Please turn battery optimization off for the Commons app from the settings for a smooth upload experience. \n\nPossible steps to turn battery optimization off:\n\nStep 1: Tap on the \'Settings\' button below.\n\nStep 2: Switch from \'Not optimized\' to \'All apps\'.\n\nStep 3: Search for \"Commons\" or \"fr.free.nrw.commons\".\n\nStep 4: Tap it and select \'Don\'t optimize\'.\n\nStep 5: Press \'Done\'.</string>
   <string name="authentication_failed">Authentication failed, please login again</string>
   <string name="uploading_started">Upload started!</string>
   <string name="uploading_queued">Upload queued (limited connection mode enabled)</string>
@@ -190,6 +194,8 @@
   <string name="read_storage_permission_rationale">Required permission: Read external storage. App cannot access your gallery without this.</string>
   <string name="write_storage_permission_rationale">Required permission: Write external storage. App cannot access your camera/gallery without this.</string>
   <string name="location_permission_title">Requesting Location Permission</string>
+  <string name="in_app_camera_location_permission_title">Record location for in-app shots</string>
+  <string name="in_app_camera_location_switch_pref_summary">Enable this to record location with in-app shots in case the device camera does not record it</string>
   <string name="ok">OK</string>
   <string name="warning">Warning</string>
   <string name="duplicate_file_name">Duplicate File Name found</string>
@@ -274,6 +280,7 @@
   <string name="copy_wikicode">Copy the wikitext to the clipboard</string>
   <string name="wikicode_copied">The wikitext was copied to the clipboard</string>
   <string name="nearby_location_not_available">Nearby might not work properly, Location not available.</string>
+  <string name="upload_location_access_denied">Location access denied. Please set your location manually to use this feature.</string>
   <string name="location_permission_rationale_nearby">Permission required to display a list of nearby places</string>
 
   <string name="nearby_directions">Directions</string>
@@ -441,6 +448,13 @@ Upload your first media by tapping on the add button.</string>
   <string name="ends_on">Ends on:</string>
   <string name="display_campaigns">Display campaigns</string>
   <string name="display_campaigns_explanation">See the ongoing campaigns</string>
+  <string name="in_app_camera_location_access_explanation">Allow the app to fetch location in case the camera does not record it. Some device cameras do not record location. In such cases, letting the app fetch and attach location to it makes your contribution more useful. You may change this any time from the Settings</string>
+  <string name="option_allow">Allow</string>
+  <string name="option_dismiss">Dismiss</string>
+  <string name="in_app_camera_needs_location">Please turn on location access from the Settings and try again. \n\nNote: The upload may not have location if app is unable to retrieve location from device within a short interval.</string>
+  <string name="in_app_camera_location_permission_rationale">In-app camera needs location permission to attach it to your images in case location is not available in EXIF. Please allow the app to access your location and try again.\n\nNote: The upload may not have location if app is unable to retrieve location from device within a short interval.</string>
+  <string name="in_app_camera_location_permission_denied">The app would not record location along with in-shots due to lack of location permission</string>
+  <string name="in_app_camera_location_unavailable">The app would not record location along with in-shots as the GPS is turned off</string>
   <string name="open_document_photo_picker_title">Use document based photo picker</string>
   <string name="open_document_photo_picker_explanation">The new Android photo picker risks losing location information. Enable if you seem to be using it.</string>
   <string name="location_loss_warning">Turning this off could trigger the new Android photo picker. It risks losing location information.\n\nTap on \'Read more\' for more information.</string>
@@ -609,6 +623,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="recommend_high_accuracy_mode">For best results, choose the High Accuracy mode.</string>
   <string name="ask_to_turn_location_on">Turn on location?</string>
   <string name="nearby_needs_location">Nearby needs location enabled to work properly</string>
+  <string name="upload_map_location_access">You need to give access to your current location to set location automatically.</string>
   <string name="use_location_from_similar_image">Did you shoot these two pictures at the same place? Do you want to use the latitude/longitude of the picture on the right?</string>
   <string name="load_more">Load More</string>
   <string name="nearby_no_results">No places found, try changing your search criteria.</string>

@@ -465,7 +465,9 @@
   <string name="ends_on">Заканчивается:</string>
   <string name="display_campaigns">Показ кампаний</string>
   <string name="display_campaigns_explanation">Просмотр текущих кампаний</string>
-  <string name="location_loss_warning" fuzzy="true">Убедитесь, что этот новый инструмент выбора в Android не удаляет местоположение с ваших фотографий.</string>
+  <string name="open_document_photo_picker_title">Использовать средство выбора фотографий на основе документа</string>
+  <string name="open_document_photo_picker_explanation">Новый инструмент выбора фотографий Android рискует потерять информацию о местоположении. Включите, если вы собираетесь его использовать</string>
+  <string name="location_loss_warning">Отключение может привести к запуску нового средства выбора фотографий Android. Из-за этого может потеряться информация о местоположении.\n\nНажмите «Подробнее» для получения дополнительной информации.</string>
   <string name="nearby_campaign_dismiss_message">Вы больше не увидите кампаний. Однако, если захочете, вы сможете включить нотификации о кампаниях в настройках.</string>
   <string name="this_function_needs_network_connection">Для этой функции требуется доступ к интернет. Пожалуйста, проверьте своё подключение.</string>
   <string name="error_processing_image">Произошла ошибка при загрузке файла. Пожалуйста, попробуйте позднее!</string>

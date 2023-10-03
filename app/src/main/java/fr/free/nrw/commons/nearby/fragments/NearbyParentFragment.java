@@ -441,7 +441,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private void performMapReadyActions() {
         if (((MainActivity)getActivity()).activeFragment == ActiveFragment.NEARBY && isMapBoxReady) {
             if(!applicationKvStore.getBoolean("doNotAskForLocationPermission", false) ||
-                PermissionUtils.hasPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)){
+                PermissionUtils.hasPermission(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION})){
                 checkPermissionsAndPerformAction();
             }else{
                 isPermissionDenied = true;
@@ -1215,8 +1215,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void checkPermissionsAndPerformAction() {
         Timber.d("Checking permission and perfoming action");
         PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                () -> locationPermissionGranted(),
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                this::locationPermissionGranted,
                 () -> isPermissionDenied = true,
                 R.string.location_permission_title,
                 R.string.location_permission_rationale_nearby);

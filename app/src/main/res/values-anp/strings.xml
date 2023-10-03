@@ -45,7 +45,7 @@
   <string name="share_upload_button">अपलोड</string>
   <string name="menu_upload_single">अपलोड</string>
   <string name="menu_save_categories">सहेजौ</string>
-  <string name="refresh_button">रिफ़्रेश करौ</string>
+  <string name="refresh_button">टटका करौ</string>
   <string name="display_list_button">सूची</string>
   <string name="categories_activity_title">श्रेणी सिनी</string>
   <string name="title_activity_settings">सेटिंग्स</string>
@@ -74,7 +74,7 @@
   <string name="detail_description_empty">कोय विवरण नाय</string>
   <string name="detail_discussion_empty">कोय चर्चा नाय</string>
   <string name="detail_license_empty">अज्ञात लाइसेन्स</string>
-  <string name="menu_refresh">रिफ़्रेश करौ</string>
+  <string name="menu_refresh">टटका करौ</string>
   <string name="ok">ठीक छै</string>
   <string name="warning">चेतावनी</string>
   <string name="upload">अपलोड करौ</string>

@@ -118,7 +118,7 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
     public void onMediaClicked(int position) {
         container.setVisibility(View.VISIBLE);
         ((ExploreFragment) getParentFragment()).tabLayout.setVisibility(View.GONE);
-        mediaDetails = new MediaDetailPagerFragment(false, true);
+        mediaDetails = MediaDetailPagerFragment.newInstance(false, true);
         ((ExploreFragment) getParentFragment()).setScroll(false);
         setFragment(mediaDetails, mapFragment);
         mediaDetails.showImage(position);

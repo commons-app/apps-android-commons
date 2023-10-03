@@ -184,7 +184,7 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
     public void refreshNominatedMedia(int index) {
         if (mediaDetails != null && !listFragment.isVisible()) {
             removeFragment(mediaDetails);
-            mediaDetails = new MediaDetailPagerFragment(false, true);
+            mediaDetails = MediaDetailPagerFragment.newInstance(false, true);
             ((BookmarkFragment) getParentFragment()).setScroll(false);
             setFragment(mediaDetails, listFragment);
             mediaDetails.showImage(index);
@@ -243,7 +243,7 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
         Log.d("deneme8", "on media clicked");
         container.setVisibility(View.VISIBLE);
         ((BookmarkFragment) getParentFragment()).tabLayout.setVisibility(View.GONE);
-        mediaDetails = new MediaDetailPagerFragment(false, true);
+        mediaDetails = MediaDetailPagerFragment.newInstance(false, true);
         ((BookmarkFragment) getParentFragment()).setScroll(false);
         setFragment(mediaDetails, listFragment);
         mediaDetails.showImage(position);

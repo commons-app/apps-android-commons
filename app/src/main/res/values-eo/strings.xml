@@ -3,6 +3,7 @@
 * Jakub Fabijan
 * Javiero
 * KuboF
+* Martelkapo
 * Metraduk
 * Mirin
 * Robin van der Vliet
@@ -15,6 +16,20 @@
   <string name="commons_logo">Emblemo de Komunejo</string>
   <string name="commons_website">Retejo de Komunejo</string>
   <string name="submit">Sendi</string>
+  <string name="add_another_description">Aldoni alian priskribon</string>
+  <string name="add_new_contribution">Aldoni novan kontribuaĵon</string>
+  <string name="add_contribution_from_camera">Aldoni kontribuaĵon de fotilo</string>
+  <string name="add_contribution_from_photos">Aldoni kontribuaĵon de Fotoj</string>
+  <string name="add_contribution_from_contributions_gallery">Aldoni kontribuaĵon de antaŭa kontribuaĵa galerio</string>
+  <string name="show_captions">Subteksto</string>
+  <string name="row_item_language_description">Lingva Priskribo</string>
+  <string name="row_item_caption">Subteksto</string>
+  <string name="show_captions_description">Priskribo</string>
+  <string name="nearby_row_image">Bildo</string>
+  <string name="nearby_all">Ĉiuj</string>
+  <string name="nearby_filter_toggle">Baskuli Supren</string>
+  <string name="nearby_filter_search">Serĉa Vido</string>
+  <string name="nearby_filter_state">Lokstato</string>
   <string name="appwidget_img">Bildo de la Tago</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d dosiero alŝutata</item>
@@ -25,9 +40,10 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Komencante %1$d alŝuton</item>
-    <item quantity="other">Komencante %1$d alŝutojn</item>
+  <string name="starting_uploads">Komencanta Alŝutojn</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Komencanta %d alŝuton</item>
+    <item quantity="other">Komencanta %d alŝutojn</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%d alŝuto</item>
@@ -62,6 +78,8 @@
   <string name="signup">Registriĝi</string>
   <string name="logging_in_title">Ensalutado</string>
   <string name="logging_in_message">Bonvolu atendi...</string>
+  <string name="updating_caption_title">Ĝisdatiganta subtekstojn kaj priskribojn</string>
+  <string name="updating_caption_message">Bonvolu atendi…</string>
   <string name="login_success">Ensalutado sukcesis</string>
   <string name="login_failed">Ensalutado malsukcesis</string>
   <string name="upload_failed">Dosiero ne trovita. Bonvolu provi alian dosieron.</string>
@@ -72,8 +90,10 @@
   <string name="upload_progress_notification_title_start">Alŝutas dosieron: %s</string>
   <string name="upload_progress_notification_title_in_progress">Alŝutante %1$s</string>
   <string name="upload_progress_notification_title_finishing">Finiĝis la alŝutado de %1$s</string>
-  <string name="upload_failed_notification_title" fuzzy="true">La alŝutado de %1$s malsukcesis</string>
+  <string name="upload_failed_notification_title">La alŝutado de %1$s malsukcesis</string>
+  <string name="upload_paused_notification_title">Alŝutado de %1$s paŭzita</string>
   <string name="upload_failed_notification_subtitle">Tuŝetu por vidi</string>
+  <string name="upload_paused_notification_subtitle">Frapeti por rigardi</string>
   <string name="title_activity_contributions">Miaj lastaj alŝutoj</string>
   <string name="contribution_state_queued">Envicigita</string>
   <string name="contribution_state_failed">Malsukcesis</string>
@@ -84,8 +104,11 @@
   <string name="menu_nearby">Apuda</string>
   <string name="provider_contributions">Miaj alŝutoj</string>
   <string name="menu_share">Konigi</string>
-  <string name="share_title_hint" fuzzy="true">Titolo (deviga)</string>
+  <string name="menu_view_file_page">Rigardi dosierpaĝon</string>
+  <string name="share_title_hint">Subteksto (devigita)</string>
+  <string name="add_caption_toast">Bonvolu provizi subtekston por ĉi tiu dosiero</string>
   <string name="share_description_hint">Priskribo</string>
+  <string name="share_caption_hint">Subteksto</string>
   <string name="login_failed_network">Ne eblas ensaluti. Estas problemo pri la loka reto.</string>
   <string name="login_failed_throttled">Tro da,nesukcesaj provoj. Bonvolu provi denove post kelkaj minutoj.</string>
   <string name="login_failed_blocked">Pardonon, ĉi tiu uzanto estas barita de la Vikimedia Komunejo</string>
@@ -96,23 +119,28 @@
   <string name="provider_modifications">Ŝanĝoj</string>
   <string name="menu_upload_single">Alŝuti</string>
   <string name="categories_search_text_hint">Serĉi tra kategorioj</string>
+  <string name="depicts_search_text_hint">Serĉi erojn, kiujn prezentas via enhavo (ekz. monton, Taĝ-Mahalon, ktp.)</string>
   <string name="menu_save_categories">Konservi</string>
   <string name="refresh_button">Aktualigi</string>
   <string name="display_list_button">Listo</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">Neniuj alŝutaĵoj ĝis nun!</string>
+  <string name="contributions_subtitle_zero">(Ankoraŭ neniuj alŝutoj)</string>
   <string name="categories_not_found">Troviĝis neniu kategorio kongrua kun serĉoteksto %1$s</string>
+  <string name="depictions_not_found">Neniu Wikidatumoj-eroj kongruantaj al %1$s trovitaj</string>
+  <string name="no_child_classes">%1$s havas neniujn infanajn klasojn</string>
+  <string name="no_parent_classes">%1$s havas neniujn gepatrajn klasojn</string>
   <string name="categories_skip_explanation">Aldonu kategoriojn por plitrovebligi viajn bildojn ĉe Vikimeda Komunejo.\nEktajpu por aldoni kategoriojn.</string>
   <string name="categories_activity_title">Kategorioj</string>
   <string name="title_activity_settings">Agordoj</string>
   <string name="title_activity_signup">Registriĝi</string>
   <string name="title_activity_featured_images">Elstarigitaj bildoj</string>
+  <string name="title_activity_custom_selector">Laŭmenda Elektilo</string>
   <string name="title_activity_category_details">Kategorio</string>
   <string name="title_activity_review">Reviziado de kolegoj</string>
   <string name="menu_about">Pri</string>
   <string name="about_license">La aplikaĵo de Vikimedia Komunejo estas malfermitkoda aplijaĵo kreita kaj subtenata de la gratifikitoj kaj voluntuloj de la Vikimedia komunumo. La Vikimedia Fondaĵo ne partoprenas en la kreado, evoluigado, aŭ subtenado de la aplikaĵo.</string>
   <string name="about_improve">Krei novan &lt;a href=\"%1$s\"&gt;problemon ĉe GitHub&lt;/a&gt; por raportoj pri cimoj kaj sugestoj.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;u&gt;Privateca politiko&lt;/u&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;Agnoskoj&lt;/u&gt;</string>
+  <string name="about_privacy_policy">&lt;u&gt;Privateca politiko&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Agnoskoj&lt;/u&gt;</string>
   <string name="title_activity_about">Pri</string>
   <string name="menu_feedback">Sendi viajn komentojn (per retpoŝto)</string>
   <string name="no_email_client">Neniu retpoŝtilo instalita</string>
@@ -124,8 +152,8 @@
   <string name="media_upload_policy">Per submetado de ĉi tiu bildo, mi certigas ke ĝi estas mia propra verko, ke ĝi ne enhavas ion protektatan de aŭtorrajtoj, ke ĝi ne estas memfoto, kaj ke ĝi alimaniere observas la &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/eo\"&gt;regularojn de Vikipedia Komunejo&lt;/a&gt;.</string>
   <string name="menu_download">Elŝuti</string>
   <string name="preference_license">Defaŭlta permesilo</string>
-  <string name="use_previous" fuzzy="true">Uzi la antaŭan titolon/priskribon</string>
-  <string name="preference_theme" fuzzy="true">Nokta reĝimo</string>
+  <string name="use_previous">Uzi la antaŭajn titolon kaj priskribon</string>
+  <string name="preference_theme">Etoso</string>
   <string name="license_name_cc_by_sa_four">Atribuite-Samkondiĉe 4.0</string>
   <string name="license_name_cc_by_four">Atribuite 4.0</string>
   <string name="license_name_cc_by_sa">Atribuite-Samkondiĉe 3.0</string>
@@ -155,10 +183,11 @@
   <string name="welcome_copyright_subtext">Evitu aĵojn kun aŭtorrajtoj, trovitajn ĉe la Interreto, kaj ankaŭ bildojn de afiŝoj, kovrilojn de libroj, ktp.</string>
   <string name="welcome_final_text">Ĉu vi komprenis?</string>
   <string name="welcome_final_button_text">Jes!</string>
-  <string name="welcome_help_button_text" fuzzy="true">&lt;u&gt;Ekscii pli&lt;/u&gt;</string>
+  <string name="welcome_help_button_text">&lt;u&gt;Ekscii pli&lt;/u&gt;</string>
   <string name="detail_panel_cats_label">Kategorioj</string>
   <string name="detail_panel_cats_loading">Ŝargado...</string>
   <string name="detail_panel_cats_none">Neniu elektita</string>
+  <string name="detail_caption_empty">Neniu substeksto</string>
   <string name="detail_description_empty">Sen priskribo</string>
   <string name="detail_discussion_empty">Neniu diskuto</string>
   <string name="detail_license_empty">Nekonata permesilo</string>
@@ -169,9 +198,12 @@
   <string name="location_permission_title">Petante Permeson por Lokado</string>
   <string name="ok">Bone</string>
   <string name="warning">Averto</string>
+  <string name="upload">Alŝuti</string>
   <string name="yes">Jes</string>
   <string name="no">Ne</string>
+  <string name="media_detail_caption">Subteksto</string>
   <string name="media_detail_title">Titolo</string>
+  <string name="media_detail_depiction">Figuraĵoj</string>
   <string name="media_detail_description">Priskribo</string>
   <string name="media_detail_discussion">Diskuto</string>
   <string name="media_detail_author">Kreinto</string>
@@ -211,6 +243,7 @@
   <string name="nearby_info_menu_wikidata_article">Vikidatumero</string>
   <string name="nearby_info_menu_wikipedia_article">Vikipedia artikolo</string>
   <string name="description_info">Bonvolu priskribi la aŭdvidaĵon plej detale laŭeble: Kie ĝi estis fotita? Kio estas la kunteksto? Bonvolu priskribi la prezentatajn objektojn aŭ homojn. Rivelu informon ne facile konjekteblan, ekz. la horo de la tago por pejzaĝo. Se la aŭdvidaĵo prezentas ion malordinaran, bonvolu klarigi kiel ĝi estas malordinara.</string>
+  <string name="caption_info">Bonvolu skribi mallongan priskribon pri la bildo. La unua subteksto estus uzita kiel la Titilo por la bildo. La limo estas 255 signoj.</string>
   <string name="upload_problem_exist">Eblaj problemoj pri ĉi tiu bildo:</string>
   <string name="upload_problem_image_dark">Bildo estas tro malluma.</string>
   <string name="upload_problem_image_blurry">Bildo estas malklara.</string>
@@ -218,9 +251,12 @@
   <string name="upload_problem_different_geolocation">Ĉi tiu bildo estis fotita ĉe alia loko.</string>
   <string name="upload_problem_fbmd">Bonvolu nur alŝuti bildojn faritajn de vi mem. Ne alŝutu bildojn kiujn vi trovis ĉe Facebook-kontoj de aliuloj.</string>
   <string name="upload_problem_do_you_continue">Ĉu vi ankoraŭ volas alŝuti ĉi tiun bildon?</string>
+  <string name="upload_connection_error_alert_title">Konekta Eraro</string>
+  <string name="upload_connection_error_alert_detail">La alŝuta procezo postulas aktivan interretan aliron. Bonvolu kontroli vian retan konekton.</string>
+  <string name="upload_problem_image">Problemoj trovitaj en la bildo</string>
   <string name="internet_downloaded">Bonvolu nur alŝuti bildojn faritajn de vi mem. Ne alŝutu bildojn kiujn vi elŝutis el la Interreto.</string>
-  <string name="use_external_storage" fuzzy="true">Uzi eksteran konservejon</string>
-  <string name="use_external_storage_summary" fuzzy="true">Konservi bildojn fotitajn per la en-aplikaĵa fotilo sur via aparato</string>
+  <string name="use_external_storage">Konservi en-aplikaĵajn fotojn</string>
+  <string name="use_external_storage_summary">Konservi bildojn fotitajn per la en-aplikaĵa fotilo en vian aparaton</string>
   <string name="login_to_your_account">Ensaluti en vian konton</string>
   <string name="send_log_file">Sendi la protokolan dosieron</string>
   <string name="send_log_file_description">Sendi protokolan dosieron al evoluigantoj per retpoŝto por helpi riparadon de problemoj pri la aplikaĵo. Notu: protokoloj eble enhavas identigan informon</string>
@@ -228,7 +264,7 @@
   <string name="null_url">Eraro! URL ne trovita</string>
   <string name="nominate_deletion">Proponi forigon</string>
   <string name="nominated_for_deletion">Oni proponis ke ĉi tiu bildo estu forigota.</string>
-  <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Vidu la retpaĝon por pliaj detaloj&lt;/u&gt;</string>
+  <string name="nominated_see_more">&lt;u&gt;Rigardu la retpaĝon por pliaj detaloj&lt;/u&gt;</string>
   <string name="skip_login">Preterpasi</string>
   <string name="navigation_item_login">Ensaluti</string>
   <string name="skip_login_title">Ĉu vere vi volas transpasi la ensalutadon?</string>
@@ -242,23 +278,28 @@
   <string name="nearby_wikidata">Vikidatumoj</string>
   <string name="nearby_wikipedia">Vikipedio</string>
   <string name="nearby_commons">Komunejo</string>
-  <string name="about_rate_us" fuzzy="true">&lt;u&gt;Aprezi nin&lt;/u&gt;</string>
-  <string name="about_faq" fuzzy="true">&lt;u&gt;Oftaj demandoj&lt;/u&gt;</string>
+  <string name="about_rate_us">&lt;u&gt;Aprezi nin&lt;/u&gt;</string>
+  <string name="about_faq">&lt;u&gt;Oftaj demandoj&lt;/u&gt;</string>
+  <string name="user_guide">Uzanta Gvidilo</string>
   <string name="welcome_skip_button">Preterpasi Lernilon</string>
   <string name="no_internet">Interreto ne disponas</string>
   <string name="error_notifications">Eraro pri akirado de sciigoj</string>
   <string name="error_review">Eraro dum akirado de bildo por revizio. Alklaku \'Aktualigi\' por reprovi.</string>
   <string name="no_notifications">Neniu sciigo troviĝis</string>
-  <string name="about_translate" fuzzy="true">&lt;u&gt;Traduki&lt;/u&gt;</string>
+  <string name="about_translate">&lt;u&gt;Traduki&lt;/u&gt;</string>
   <string name="about_translate_title">Lingvoj</string>
   <string name="about_translate_message">Elekti la lingvon, por kiu vi volas submeti tradukojn</string>
   <string name="about_translate_proceed">Daŭrigi</string>
   <string name="about_translate_cancel">Nuligi</string>
   <string name="retry">Reprovi</string>
   <string name="showcase_view_whole_nearby_activity">Jen lokoj apud vi bezonantajn bildojn por ilustri siajn Vikipediaj artikolojn.\n\nAlklakado de \'Serĉi ĉi tiun areon\' ŝlosas la mapon kaj komencas apudan serĉon ĉirkaŭ tiu loko.</string>
+  <string name="showcase_view_needs_photo">Ĉi tiu loko bezonas foton.</string>
+  <string name="showcase_view_has_photo">Ĉi tiu loko jam havas foton.</string>
+  <string name="showcase_view_no_longer_exists">Ĉi tiu loko ne plu ekzistas.</string>
   <string name="no_images_found">Neniuj bildoj trovitaj!</string>
   <string name="error_loading_images">Okazis eraro ŝargante la bildojn.</string>
   <string name="image_uploaded_by">Alŝutita de: %1$s</string>
+  <string name="block_notification_title">Forbarita</string>
   <string name="block_notification">Vi estas forbarata el redaktado de Komunejo</string>
   <string name="app_widget_heading">Bildo de la Tago</string>
   <string name="menu_search_button">Serĉi</string>
@@ -266,12 +307,16 @@
   <string name="title_activity_search">Serĉi</string>
   <string name="search_recent_header">Lastaj serĉoj:</string>
   <string name="provider_searches">Ĵusaj serĉoj</string>
+  <string name="provider_recent_languages">Lastatempaj lingvaj demandoj</string>
   <string name="error_loading_categories">Eraro okazis dum ŝargado de kategorioj.</string>
+  <string name="error_loading_depictions">Okazis eraro dum ŝargado de kategorioj.</string>
   <string name="search_tab_title_media">Aŭdvidaĵo</string>
   <string name="search_tab_title_categories">Kategorioj</string>
+  <string name="search_tab_title_depictions">Eroj</string>
   <string name="explore_tab_title_featured">Elstaraj</string>
   <string name="explore_tab_title_mobile">Alŝutita per poŝaparato</string>
-  <string name="successful_wikidata_edit" fuzzy="true">Bildo sukcese aldoniĝis al %1$s ĉe Vikidatumoj!</string>
+  <string name="explore_tab_title_map">Mapo</string>
+  <string name="successful_wikidata_edit">Bildo sukcese aldonita al %1$s ĉe Vikidatumoj!</string>
   <string name="wikidata_edit_failure">Malsukcesis aktualigo de la respondanta Vikidatuma ero!</string>
   <string name="menu_set_wallpaper">Ekranfonigi</string>
   <string name="wallpaper_set_successfully">Sukcese ŝanĝis ekranfonon!</string>
@@ -296,13 +341,16 @@
   <string name="quiz_screenshot_question">Ĉu ĉi tiu ekrankopio estas alŝutebla?</string>
   <string name="share_app_title">Diskonigi Aplikaĵon</string>
   <string name="error_fetching_nearby_places">Eraro dum akirado de apudaj lokoj.</string>
+  <string name="no_nearby_places_around">Neniuj apudaj lokoj ĉirkaŭ</string>
   <string name="no_recent_searches">Neniu ĵusa serĉo</string>
   <string name="delete_recent_searches_dialog">Ĉu vi certas ke vi volas malplenigi vian serĉ-historion?</string>
+  <string name="cancel_upload_dialog">Ĉu vi certas, ke vi volas nuligi ĉi tiun alŝuton?</string>
   <string name="delete_search_dialog">Ĉu vi volas forigi ĉi tiun serĉon?</string>
   <string name="search_history_deleted">Forviŝis serĉadan historion</string>
   <string name="nominate_delete">Proponi Forigon</string>
   <string name="delete">Forigi</string>
   <string name="Achievements">Atingoj</string>
+  <string name="Profile">Profilo</string>
   <string name="statistics">Statistiko</string>
   <string name="statistics_thanks">Ricevitaj dankoj</string>
   <string name="statistics_featured">Elstaraj Bildoj</string>
@@ -325,7 +373,7 @@
   <string name="contributions_fragment">Kontribuoj</string>
   <string name="nearby_fragment">Apude</string>
   <string name="notifications">Sciigoj</string>
-  <string name="read_notifications" fuzzy="true">Sciigoj (enarkivigitaj)</string>
+  <string name="read_notifications">Sciigoj (legita)</string>
   <string name="display_nearby_notification">Montri sciigojn pri apudaĵoj</string>
   <string name="display_nearby_notification_summary" fuzzy="true">Tuŝetu ĉi tie por vidi apudan lokon kiu bezonas bildojn</string>
   <string name="list_sheet">Listo</string>
@@ -335,7 +383,7 @@
   <string name="step_count" fuzzy="true">Paŝo %1$d el %2$d</string>
   <string name="next">Sekva</string>
   <string name="previous">Antaŭa</string>
-  <string name="upload_title_duplicate" fuzzy="true">Ekzistas dosiero kun la nomo %1$s. Ĉu vi certas ke vi volas daŭrigi?</string>
+  <string name="upload_title_duplicate">Ekzistas dosiero kun la nomo %1$s. Ĉu vi certas, ke vi volas daŭrigi?\n\nNotu: taŭga sufikso estos aŭtomate aldonita al la dosiernomo.</string>
   <string name="map_application_missing">Neniu kongrua aplikaĵo troveblas en via aparato. Bonvolu instali tian por uzo kun ĉi tiu funkcio.</string>
   <string name="title_page_bookmarks_pictures">Bildoj</string>
   <string name="title_page_bookmarks_locations">Lokoj</string>
@@ -352,7 +400,7 @@
   <string name="uploaded_by_myself">Alŝutita de mi je %1$s, uzata en %2$d artikolo(j).</string>
   <string name="no_uploads">Bonvenon al Komunejo!\n\nAlŝutu vian unuan aŭdvidaĵon per frapeto de la butono \'Aldoni\'.</string>
   <string name="no_categories_selected">Neniu Elektita Kategorio</string>
-  <string name="no_categories_selected_warning_desc" fuzzy="true">Bildo sen kategorioj estas malofte uzebla. Ĉu vi nepre volas aldoni sen elekti kategoriojn?</string>
+  <string name="no_categories_selected_warning_desc">Bildoj sen kategorioj estas malofte uzebla. Ĉu vi certas, ke vi volas daŭrigi sen elekti kategoriojn?</string>
   <string name="upload_flow_all_images_in_set" fuzzy="true">(Je ĉiuj bildoj en aro)</string>
   <string name="search_this_area">Serĉi ĉi tiun areon</string>
   <string name="nearby_card_permission_title">Peto por Permeso</string>
@@ -440,10 +488,19 @@
   <string name="delete_helper_show_deletion_message_else">Ne povis proponi forigon.</string>
   <string name="delete_helper_ask_spam_selfie" fuzzy="true">Memfoto</string>
   <string name="delete_helper_ask_spam_blurry" fuzzy="true">Malklara</string>
-  <string name="delete_helper_ask_spam_nonsense" fuzzy="true">Sensencaĵo</string>
+  <string name="delete_helper_ask_spam_nonsense">volapukaĵo, absolute neuzebla en iu ajn artikolo</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">Gazetara showImageWithItem</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Hazarda foto el Interreto</string>
   <string name="delete_helper_ask_reason_copyright_logo">Emblemo</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">Breĉo de Libereco de Panoramo</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Ĉar ĝi estas</string>
+  <string name="category_edit_helper_make_edit_toast">Provanta ĝisdatigi kategoriojn.</string>
+  <string name="category_edit_helper_show_edit_title">Kategoria ĝisdatigo</string>
+  <string name="category_edit_helper_show_edit_title_success">Sukcese</string>
+  <string name="category_edit_helper_edit_message_else">Ne povis aldoni kategoriojn.</string>
+  <string name="category_edit_button_text">Ĝisdatigi kategoriojn</string>
+  <string name="depictions_edit_helper_make_edit_toast">Provanta ĝisdatigi prezentadojn.</string>
+  <string name="depictions_edit_helper_show_edit_title">Redakti prezentadojn</string>
+  <string name="depictions_edit_helper_edit_message_else">Ne povis aldoni prezentadojn.</string>
   <string name="description">Priskribo</string>
 </resources>

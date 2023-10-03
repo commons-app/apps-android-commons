@@ -188,9 +188,9 @@ public class UploadRepository {
      * @return
      */
     public Observable<UploadItem> preProcessImage(UploadableFile uploadableFile, Place place,
-        SimilarImageInterface similarImageInterface) {
+        SimilarImageInterface similarImageInterface, LatLng inAppPictureLocation) {
         return uploadModel.preProcessImage(uploadableFile, place,
-            similarImageInterface);
+            similarImageInterface, inAppPictureLocation);
     }
 
     /**
@@ -199,8 +199,8 @@ public class UploadRepository {
      * @param uploadItem
      * @return
      */
-    public Single<Integer> getImageQuality(UploadItem uploadItem) {
-        return uploadModel.getImageQuality(uploadItem);
+    public Single<Integer> getImageQuality(UploadItem uploadItem, LatLng location) {
+        return uploadModel.getImageQuality(uploadItem, location);
     }
 
     /**

@@ -16,6 +16,7 @@
 * Sibabrata Banerjee
 * Tahmid
 * Tahmid02016
+* Tanbiruzzaman
 * Tauhid16
 * Titodutta
 * WikiAbuHuraira
@@ -203,11 +204,13 @@
   <string name="location_permission_title">অবস্থানের অনুমতির অনুরোধ</string>
   <string name="ok">ঠিক আছে</string>
   <string name="warning">সতর্কীকরণ</string>
+  <string name="duplicate_file_name">সদৃশ ফাইলের নাম পাওয়া গেছে</string>
   <string name="upload">আপলোড</string>
   <string name="yes">হ্যাঁ</string>
   <string name="no">না</string>
   <string name="media_detail_caption">চিত্রবর্ণনা</string>
   <string name="media_detail_title">শিরোনাম</string>
+  <string name="media_detail_depiction">বর্ণনা</string>
   <string name="media_detail_description">বিবরণ</string>
   <string name="media_detail_discussion">আলোচনা</string>
   <string name="media_detail_author">স্রষ্টা</string>
@@ -221,6 +224,7 @@
   <string name="logout_verification">আপনি কি সত্যিই প্রস্থান করতে চান?</string>
   <string name="mediaimage_failed">মিডিয়া চিত্র ব্যর্থ হয়েছে</string>
   <string name="no_subcategory_found">কোন উপবিষয়শ্রেনী পাওয়া যায় নি।</string>
+  <string name="no_parentcategory_found">কোনও মূল বিষয়শ্রেণী পাওয়া যায়নি</string>
   <string name="welcome_image_mount_zao">জাও পর্বত</string>
   <string name="welcome_image_llamas">লামা</string>
   <string name="welcome_image_rainbow_bridge">রংধনুর সেতু</string>
@@ -341,6 +345,9 @@
   <string name="statistics_featured">নির্বাচিত ছবি</string>
   <string name="level">স্তর</string>
   <string name="images_uploaded">আপলোডকৃত চিত্র</string>
+  <string name="image_reverts">ছবিগুলো প্রত্যাবর্তন করা হয়নি</string>
+  <string name="images_used_by_wiki">ব্যবহৃত ছবি</string>
+  <string name="achievements_share_message">আপনার বন্ধুদের সাথে আপনার অর্জন শেয়ার করুন!</string>
   <string name="achievements_revert_limit_message">নূন্যতম আবশ্যকতা:</string>
   <string name="error_occurred">ত্রুটি ঘটেছে!</string>
   <string name="notifications_channel_name_all">কমন্স বিজ্ঞপ্তি</string>
@@ -366,6 +373,10 @@
   <string name="provider_bookmarks_location">বুকমার্ক</string>
   <string name="deletion_reason_uploaded_by_mistake">আমি ভুল করে আপলোড করেছি</string>
   <string name="back_button_warning">আপলোড বাতিল করুন</string>
+  <string name="back_button_continue">আপলোড চালিয়ে যান</string>
+  <string name="search_this_area">এই এলাকায় অনুসন্ধান করুন</string>
+  <string name="nearby_card_permission_title">অনুমতির অনুরোধ</string>
+  <string name="never_ask_again">আবার কখনো দেখাবেন না</string>
   <string name="achievements_fetch_failed_ultimate_achievement">আপনি এত অবদান রেখেছেন যে আমাদের গণনা ব্যবস্থা তা গণনা করতে পারছে না। অভিনন্দন, এটাই চূড়ান্ত অর্জন।</string>
   <string name="nominate_for_deletion_done">সম্পন্ন</string>
   <string name="review_copyright">এই চিত্রটি কি কপিরাইটের নিয়ম অনুসরণ করে?</string>

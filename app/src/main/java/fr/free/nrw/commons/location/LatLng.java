@@ -168,7 +168,7 @@ public class LatLng implements Parcelable {
     }
 
     public Uri getGmmIntentUri() {
-        return Uri.parse("geo:0,0?q=" + latitude + "," + longitude);
+        return Uri.parse("geo:" + latitude + "," + longitude + "?z=16");
     }
 
     @Override

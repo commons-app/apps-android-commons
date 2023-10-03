@@ -1,21 +1,24 @@
 package fr.free.nrw.commons.upload;
 
 import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
-import static fr.free.nrw.commons.upload.UploadPresenter.COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES;
+import static fr.free.nrw.commons.utils.PermissionUtils.PERMISSIONS_STORAGE;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -25,8 +28,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.work.ExistingWorkPolicy;
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -35,28 +36,33 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionController;
-import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.location.LocationPermissionsHelper;
+import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.mwapi.UserClient;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
 import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback;
-import fr.free.nrw.commons.upload.worker.UploadWorker;
+import fr.free.nrw.commons.upload.worker.WorkRequestHelper;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java.security.Permission;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
@@ -74,6 +80,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     SessionManager sessionManager;
     @Inject
     UserClient userClient;
+    @Inject
+    LocationServiceManager locationManager;
 
 
     @BindView(R.id.cv_container_top_card)
@@ -109,6 +117,9 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private ThumbnailsAdapter thumbnailsAdapter;
 
     private Place place;
+    private LatLng prevLocation;
+    private LatLng currLocation;
+    private boolean isInAppCameraUpload;
     private List<UploadableFile> uploadableFiles = Collections.emptyList();
     private int currentSelectedPosition = 0;
     /*
@@ -117,6 +128,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private boolean isMultipleFilesSelected = false;
 
     public static final String EXTRA_FILES = "commons_image_exta";
+    public static final String LOCATION_BEFORE_IMAGE_CAPTURE = "user_location_before_image_capture";
+    public static final String IN_APP_CAMERA_UPLOAD = "in_app_camera_upload";
 
     /**
      * Stores all nearby places found and related users response for
@@ -135,12 +148,11 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         compositeDisposable = new CompositeDisposable();
         init();
         nearbyPopupAnswers = new HashMap<>();
-
         PermissionUtils.checkPermissionsAndPerformAction(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                this::receiveSharedItems,
-                R.string.storage_permission_title,
-                R.string.write_storage_permission_rationale_for_image_share);
+            PERMISSIONS_STORAGE,
+            this::receiveSharedItems,
+            R.string.storage_permission_title,
+            R.string.write_storage_permission_rationale_for_image_share);
         //getting the current dpi of the device and if it is less than 320dp i.e. overlapping
         //threshold, thumbnails automatically minimizes
         DisplayMetrics metrics = getResources().getDisplayMetrics();
@@ -148,6 +160,11 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         if (dpi<=321) {
             onRlContainerTitleClicked();
         }
+        if (PermissionUtils.hasPermission(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION})) {
+            locationManager.registerLocationManager();
+        }
+        locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
+        locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
     }
 
     private void init() {
@@ -165,7 +182,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
     private void initThumbnailsRecyclerView() {
         rvThumbnails.setLayoutManager(new LinearLayoutManager(this,
-                LinearLayoutManager.HORIZONTAL, false));
+            LinearLayoutManager.HORIZONTAL, false));
         thumbnailsAdapter = new ThumbnailsAdapter(() -> currentSelectedPosition);
         rvThumbnails.setAdapter(thumbnailsAdapter);
 
@@ -177,7 +194,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         vpUpload.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset,
-                                       int positionOffsetPixels) {
+                int positionOffsetPixels) {
 
             }
 
@@ -222,28 +239,30 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
      */
     protected void checkBlockStatus() {
         compositeDisposable.add(userClient.isUserBlockedFromCommons()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .filter(result -> result)
-                .subscribe(result -> DialogUtil.showAlertDialog(
-                    this,
-                    getString(R.string.block_notification_title),
-                    getString(R.string.block_notification),
-                    getString(R.string.ok),
-                    this::finish,
-                    true)));
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .filter(result -> result)
+            .subscribe(result -> DialogUtil.showAlertDialog(
+                this,
+                getString(R.string.block_notification_title),
+                getString(R.string.block_notification),
+                getString(R.string.ok),
+                this::finish,
+                true)));
     }
 
     private void checkStoragePermissions() {
-        PermissionUtils.checkPermissionsAndPerformAction(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        final boolean hasAllPermissions = PermissionUtils.hasPermission(this, PERMISSIONS_STORAGE);
+        if (!hasAllPermissions) {
+            PermissionUtils.checkPermissionsAndPerformAction(this,
+                PERMISSIONS_STORAGE,
                 () -> {
                     //TODO handle this
                 },
                 R.string.storage_permission_title,
                 R.string.write_storage_permission_rationale_for_image_share);
+        }
     }
-
 
     @Override
     protected void onStop() {
@@ -312,14 +331,13 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     @Override
     public void updateTopCardTitle() {
         tvTopCardTitle.setText(getResources()
-                .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
+            .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
     }
 
     @Override
     public void makeUploadRequest() {
-        WorkManager.getInstance(getApplicationContext()).enqueueUniqueWork(
-            UploadWorker.class.getSimpleName(),
-            ExistingWorkPolicy.APPEND_OR_REPLACE, OneTimeWorkRequest.from(UploadWorker.class));
+        WorkRequestHelper.Companion.makeOneTimeWorkRequest(getApplicationContext(),
+            ExistingWorkPolicy.APPEND_OR_REPLACE);
     }
 
     @Override
@@ -355,18 +373,76 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         } else {
             //Show thumbnails
             if (uploadableFiles.size()
-                    > 1) {//If there is only file, no need to show the image thumbnails
+                > 1) {//If there is only file, no need to show the image thumbnails
                 thumbnailsAdapter.setUploadableFiles(uploadableFiles);
             } else {
                 llContainerTopCard.setVisibility(View.GONE);
             }
             tvTopCardTitle.setText(getResources()
-                    .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
+                .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
 
             fragments = new ArrayList<>();
+            /* Suggest users to turn battery optimisation off when uploading more than a few files.
+               That's because we have noticed that many-files uploads have
+               a much higher probability of failing than uploads with less files.
+
+               Show the dialog for Android 6 and above as
+               the ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS intent was added in API level 23
+             */
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (uploadableFiles.size() > 3
+                    && !defaultKvStore.getBoolean("hasAlreadyLaunchedBigMultiupload")) {
+                    DialogUtil.showAlertDialog(
+                        this,
+                        getString(R.string.unrestricted_battery_mode),
+                        getString(R.string.suggest_unrestricted_mode),
+                        getString(R.string.title_activity_settings),
+                        getString(R.string.cancel),
+                        () -> {
+                        /* Since opening the right settings page might be device dependent, using
+                           https://github.com/WaseemSabir/BatteryPermissionHelper
+                           directly appeared like a promising idea.
+                           However, this simply closed the popup and did not make
+                           the settings page appear on a Pixel as well as a Xiaomi device.
+
+                           Used the standard intent instead of using this library as
+                           it shows a list of all the apps on the device and allows users to
+                           turn battery optimisation off.
+                         */
+                            Intent batteryOptimisationSettingsIntent = new Intent(
+                                Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+                            startActivity(batteryOptimisationSettingsIntent);
+                        },
+                        () -> {}
+                    );
+                    defaultKvStore.putBoolean("hasAlreadyLaunchedBigMultiupload", true);
+                }
+            }
             for (UploadableFile uploadableFile : uploadableFiles) {
                 UploadMediaDetailFragment uploadMediaDetailFragment = new UploadMediaDetailFragment();
-                uploadMediaDetailFragment.setImageTobeUploaded(uploadableFile, place);
+
+                LocationPermissionsHelper locationPermissionsHelper = new LocationPermissionsHelper(
+                    this, locationManager, null);
+                if (locationPermissionsHelper.isLocationAccessToAppsTurnedOn()) {
+                    currLocation = locationManager.getLastLocation();
+                }
+
+                if (currLocation != null) {
+                    float locationDifference = getLocationDifference(currLocation, prevLocation);
+                    boolean isLocationTagUnchecked = isLocationTagUncheckedInTheSettings();
+                    /* Remove location if the user has unchecked the Location EXIF tag in the
+                       Manage EXIF Tags setting or turned "Record location for in-app shots" off.
+                       Also, location information is discarded if the difference between
+                       current location and location recorded just before capturing the image
+                       is greater than 100 meters */
+                    if (isLocationTagUnchecked || locationDifference > 100
+                        || !defaultKvStore.getBoolean("inAppCameraLocationPref")
+                        || !isInAppCameraUpload) {
+                        currLocation = null;
+                    }
+                }
+                uploadMediaDetailFragment.setImageTobeUploaded(uploadableFile, place, currLocation);
+                locationManager.unregisterLocationManager();
                 uploadMediaDetailFragment.setCallback(new UploadMediaDetailFragmentCallback() {
                     @Override
                     public void deletePictureAtIndex(int index) {
@@ -424,6 +500,39 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         }
     }
 
+    /**
+     * Users may uncheck Location tag from the Manage EXIF tags setting any time.
+     * So, their location must not be shared in this case.
+     *
+     * @return
+     */
+    private boolean isLocationTagUncheckedInTheSettings() {
+        Set<String> prefExifTags = defaultKvStore.getStringSet(Prefs.MANAGED_EXIF_TAGS);
+        if (prefExifTags.contains(getString(R.string.exif_tag_location))) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Calculate the difference between current location and
+     * location recorded before capturing the image
+     *
+     * @param currLocation
+     * @param prevLocation
+     * @return
+     */
+    private float getLocationDifference(LatLng currLocation, LatLng prevLocation) {
+        if (prevLocation == null) {
+            return 0.0f;
+        }
+        float[] distance = new float[2];
+        Location.distanceBetween(
+            currLocation.getLatitude(), currLocation.getLongitude(),
+            prevLocation.getLatitude(), prevLocation.getLongitude(), distance);
+        return distance[0];
+    }
+
     private void receiveExternalSharedItems() {
         uploadableFiles = contributionController.handleExternalImagesPicked(this, getIntent());
     }
@@ -438,6 +547,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         Timber.i("Received multiple upload %s", uploadableFiles.size());
 
         place = intent.getParcelableExtra(PLACE_OBJECT);
+        prevLocation = intent.getParcelableExtra(LOCATION_BEFORE_IMAGE_CAPTURE);
+        isInAppCameraUpload = intent.getBooleanExtra(IN_APP_CAMERA_UPLOAD, false);
         resetDirectPrefs();
     }
 
@@ -562,5 +673,4 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             this::finish
         );
     }
-
 }
