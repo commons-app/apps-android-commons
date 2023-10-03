@@ -61,7 +61,7 @@
   <string name="provider_contributions">Жүктөөлөрүм</string>
   <string name="menu_share">Бөлүшүү</string>
   <string name="share_title_hint" fuzzy="true">Аталышы</string>
-  <string name="share_description_hint">Баяндамасы</string>
+  <string name="share_description_hint">Сыпаттама</string>
   <string name="login_failed_network">Кирүүгө болбой жатат - тармакта үзгүлтүк бар</string>
   <string name="login_failed_throttled" fuzzy="true">Өтө көп натыйжасыз иш аракет. Суранабыз, бир нече мүнөттөн кийин кайталаңыз</string>
   <string name="login_failed_blocked">Кечириңиз, бул кодонуучу Уикиказынада блокко алынган.</string>
@@ -111,6 +111,7 @@
   <string name="yes">Ооба</string>
   <string name="no">Жок</string>
   <string name="media_detail_title">Аталыш</string>
+  <string name="media_detail_description">Сыпаттама</string>
   <string name="media_detail_author">Автор</string>
   <string name="cancel">Жокко чыгаруу</string>
   <string name="navigation_drawer_close">Жабуу</string>
@@ -123,8 +124,11 @@
   <string name="about_translate">Которуу</string>
   <string name="about_translate_title">Тилдер</string>
   <string name="about_translate_cancel">Жокко чыгаруу</string>
+  <string name="explore_tab_title_map">Карта</string>
   <string name="back_button_warning">Жүктөөнү жокко чыгаруу</string>
   <string name="back_button_warning_desc">Артка баскычын колдонуу менен бул жүктөө жокко чыгарылат жана сиз ийгиликти жоготосуз</string>
   <string name="back_button_continue">Жүктөөнү улантуу</string>
+  <string name="label">Аталыш</string>
+  <string name="description">Сыпаттама</string>
   <string name="title_page_bookmarks_items">Элементтер</string>
 </resources>

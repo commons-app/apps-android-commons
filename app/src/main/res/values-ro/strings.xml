@@ -66,6 +66,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Setări</string>
   <string name="intent_share_upload_label">Încarcă la Commons</string>
+  <string name="upload_in_progress">Încărcare în curs</string>
   <string name="username">Nume de utilizator</string>
   <string name="password">Parolă</string>
   <string name="login_credential">Intrați în contul dumneavoastră Commons Beta</string>
@@ -78,6 +79,9 @@
   <string name="login_success">Autentificare reușită!</string>
   <string name="login_failed">Autentificare nereușită!</string>
   <string name="upload_failed">Fișierul nu a fost găsit. Încercați cu un alt fișier.</string>
+  <string name="retry_limit_reached">Limita maximă de reîncercări a fost atinsă! Vă rugăm să renunțați la încărcare și să încercați din nou</string>
+  <string name="unrestricted_battery_mode">Opriți optimizarea bateriei?</string>
+  <string name="suggest_unrestricted_mode">Încărcarea mai mult de 3 imagini funcționează mai fiabil atunci când optimizarea bateriei este oprită. Vă rugăm să dezactivați optimizarea bateriei pentru aplicația Commons din setările pentru o experiență de încărcare fluidă. \n\nPași posibili pentru a dezactiva optimizarea bateriei: \n\nPasul 1: Aplicaţi butonul \'Setări\' de mai jos. \n\nPasul 2: Treci de la \'Neoptimizat\' la \'Toate aplicațiile\'. \n\nPasul 3: Căutați \"Commons\" sau \"fr.free.nrw.commons\". \n\nPasul 4: Atingeți-l și selectați \'Nu optimiza\'. \n\nPasul 5: Apăsați pe \'Gata\'.</string>
   <string name="authentication_failed">Autentificare nereușită, vă rugăm să încercați din nou</string>
   <string name="uploading_started">Încărcarea a început!</string>
   <string name="uploading_queued">Încărcare în coadă (modul de conexiune limitat activat)</string>

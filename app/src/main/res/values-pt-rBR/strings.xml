@@ -5,6 +5,7 @@
 * Duke of Wikipädia
 * Eduardo Addad de Oliveira
 * Eduardoaddad
+* Felipe L. Ewald
 * Fitoschido
 * Fúlvio
 * Gusta
@@ -83,6 +84,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Configurações</string>
   <string name="intent_share_upload_label">Carregar no Commons</string>
+  <string name="upload_in_progress">Upload em progresso</string>
   <string name="username">Nome de usuário</string>
   <string name="password">Senha</string>
   <string name="login_credential">Entre com a sua conta do Commons Beta</string>
@@ -96,6 +98,9 @@
   <string name="login_success">Login bem sucedido</string>
   <string name="login_failed">Falha na identificação</string>
   <string name="upload_failed">Arquivo não encontrado. Tente outro arquivo.</string>
+  <string name="retry_limit_reached">O limite máximo de tentativas foi atingido! Por favor, cancele o upload e tente novamente</string>
+  <string name="unrestricted_battery_mode">Desativar a otimização da bateria?</string>
+  <string name="suggest_unrestricted_mode">O upload de mais de três imagens funciona de forma mais confiável quando a otimização da bateria está desativada. Desative a otimização da bateria do aplicativo Commons nas configurações para obter uma experiência de upload tranquila. \n\nPossíveis etapas para desativar a otimização da bateria:\n\nEtapa 1: Toque no botão \"Settings\" (Configurações) abaixo.\n\nEtapa 2: Alterne de \"Não otimizado\" para \"Todos os aplicativos\".\n\nEtapa 3: procure por \"Commons\" ou \"fr.free.nrw.commons\".\n\nEtapa 4: Toque nele e selecione \"Don\'t optimize\" (Não otimizar).\n\nEtapa 5: Pressione \"Concluído\".</string>
   <string name="authentication_failed">A autenticação falhou, inicie uma nova sessão, por favor</string>
   <string name="uploading_started">Upload iniciado!</string>
   <string name="uploading_queued">Fila de carregamento (modo de conexão limitada ativado)</string>
@@ -210,6 +215,8 @@
   <string name="read_storage_permission_rationale">Permissão necessária: leia o armazenamento externo. App não pode acessar sua galeria sem isso.</string>
   <string name="write_storage_permission_rationale">Permissão necessária: escreva o armazenamento externo. App não pode acessar sua câmera/galeria sem isso.</string>
   <string name="location_permission_title">Autorização para identificar localização</string>
+  <string name="in_app_camera_location_permission_title">Registrar local para fotos no aplicativo</string>
+  <string name="in_app_camera_location_switch_pref_summary">Ative essa opção para registrar a localização com fotos no aplicativo, caso a câmera do dispositivo não a registre</string>
   <string name="ok">OK</string>
   <string name="warning">Alerta</string>
   <string name="duplicate_file_name">Nome de Arquivo Duplicado encontrado</string>
@@ -288,6 +295,7 @@
   <string name="copy_wikicode">Copie o wikitexto para a área de transferência</string>
   <string name="wikicode_copied">O wikitexto foi copiado para a área de transferência</string>
   <string name="nearby_location_not_available">As proximidades podem não funcionar corretamente, o local não está disponível.</string>
+  <string name="upload_location_access_denied">Acesso à localização negado. Defina sua localização manualmente para usar esse recurso.</string>
   <string name="location_permission_rationale_nearby">Permissão necessária para exibir uma lista de locais próximos</string>
   <string name="nearby_directions">Direções</string>
   <string name="nearby_wikidata">Wikidata</string>
@@ -435,6 +443,16 @@
   <string name="ends_on">Termina em:</string>
   <string name="display_campaigns">Exibir campanhas</string>
   <string name="display_campaigns_explanation">Ver as campanhas em andamento</string>
+  <string name="in_app_camera_location_access_explanation">Permita que o aplicativo busque a localização caso a câmera não a registre. Algumas câmeras de dispositivos não registram a localização. Nesses casos, permitir que o aplicativo busque e anexe a localização torna sua contribuição mais útil. Você pode alterar isso a qualquer momento nas Configurações</string>
+  <string name="option_allow">Permitir</string>
+  <string name="option_dismiss">Ignorar</string>
+  <string name="in_app_camera_needs_location">Por favor, ative o acesso à localização nas Configurações e tente novamente. \n\nObservação: O upload pode não ter localização se o aplicativo não conseguir recuperar a localização do dispositivo em um curto intervalo.</string>
+  <string name="in_app_camera_location_permission_rationale">A câmera no aplicativo precisa de permissão de localização para anexá-la às suas imagens, caso a localização não esteja disponível no EXIF. Permita que o aplicativo acesse sua localização e tente novamente.\n\nObservação: O upload pode não ter a localização se o aplicativo não conseguir recuperar a localização do dispositivo em um curto intervalo de tempo.</string>
+  <string name="in_app_camera_location_permission_denied">O aplicativo não registrará a localização junto com as fotos internas devido à falta de permissão de localização</string>
+  <string name="in_app_camera_location_unavailable">O aplicativo não registrará a localização junto com as fotos, pois o GPS está desativado</string>
+  <string name="open_document_photo_picker_title">Usar o seletor de fotos baseado em documentos</string>
+  <string name="open_document_photo_picker_explanation">O novo seletor de fotos do Android corre o risco de perder informações de localização. Habilite-o se você estiver usando-o.</string>
+  <string name="location_loss_warning">A desativação desse recurso pode acionar o novo seletor de fotos do Android. Há risco de perda de informações de localização.\n\nToque em \"Leia mais\" para obter mais informações.</string>
   <string name="nearby_campaign_dismiss_message">Você não verá mais as campanhas. No entanto, você pode reativar essa notificação em Configurações, se desejar.</string>
   <string name="this_function_needs_network_connection">Esta função requer conexão de rede, por favor, verifique suas configurações de conexão.</string>
   <string name="error_processing_image">Ocorreu um erro ao processar a imagem. Tente novamente, por favor!</string>
@@ -583,6 +601,7 @@
   <string name="recommend_high_accuracy_mode">Para obter melhores resultados, escolha o modo de alta precisão.</string>
   <string name="ask_to_turn_location_on">Ativar a localização?</string>
   <string name="nearby_needs_location">Proximidade precisa de localização ativado para funcionar corretamente</string>
+  <string name="upload_map_location_access">Você precisa dar acesso à sua localização atual para definir a localização automaticamente.</string>
   <string name="use_location_from_similar_image">Você tirou essas duas fotos no mesmo lugar? Deseja usar a latitude/longitude da imagem à direita?</string>
   <string name="load_more">Carregar mais</string>
   <string name="nearby_no_results">Nenhum local encontrado, tente alterar seus critérios de pesquisa.</string>

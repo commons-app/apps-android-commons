@@ -32,6 +32,7 @@
 * U.T.
 * Vikarna
 * VulpesVulpes825
+* Whym
 * Willy1018
 * Wxyveronica
 * XiaoGuoQuQ233
@@ -471,11 +472,11 @@
   <string name="check_category_success_title">已请求类别检查</string>
   <string name="check_category_failure_title">类别检查请求不起作用</string>
   <string name="check_category_success_message">已请求对%1$s进行类别检查</string>
-  <string name="check_category_failure_message">%1$不能请求类别检查</string>
-  <string name="check_category_toast">正在请求对%1$进行类别检查</string>
+  <string name="check_category_failure_message">%1$s不能请求类别检查</string>
+  <string name="check_category_toast">正在请求对%1$s进行类别检查</string>
   <string name="nominate_for_deletion_done">完成</string>
   <string name="send_thank_success_title">发送感谢成功</string>
-  <string name="send_thank_success_message">成功的给%1$发送感谢</string>
+  <string name="send_thank_success_message">成功的给%1$s发送感谢</string>
   <string name="send_thank_failure_message">给%1$发送感谢失败</string>
   <string name="send_thank_failure_title">发送感谢失败</string>
   <string name="send_thank_toast">向%1$s发送感谢</string>
@@ -485,9 +486,9 @@
   <string name="review_thanks">您是否要感谢贡献者？</string>
   <string name="review_spam_explanation">如果该图片无用，点击否来提议删除该文件。</string>
   <string name="review_copyright_explanation">标志、屏幕截图和电影海报通常侵犯版权。\n提名删除候选请点击“否”。</string>
-  <string name="review_thanks_explanation">你的感谢会鼓励%1</string>
+  <string name="review_thanks_explanation">你的感谢会鼓励%1$s</string>
   <string name="review_no_category">该文件未被分类！</string>
-  <string name="review_category_explanation">该图片是在%1类别下</string>
+  <string name="review_category_explanation">该图片是在%1$s类别下</string>
   <string name="review_spam_report_question">该文件不在收录范围内，原因是</string>
   <string name="review_c_violation_report_question">该文件侵犯版权，原因是</string>
   <string name="review_thanks_yes_button_text">下一张图片</string>
@@ -524,7 +525,7 @@
   <string name="exif_tag_name_software">软件</string>
   <string name="media_location_permission_denied">已拒绝访问媒体位置</string>
   <string name="add_location_manually">我们可能无法自动从你上传的图片中获取位置数据。提交前请为每张图片添加适当的位置</string>
-  <string name="share_text">直接在您手机上的维基共享资源应用中上传照片。立即下载共享资源应用：%1</string>
+  <string name="share_text">直接在您手机上的维基共享资源应用中上传照片。立即下载共享资源应用：%1$s</string>
   <string name="share_via">分享到...</string>
   <string name="image_info">图像信息</string>
   <string name="no_categories_found">找不到分类</string>
@@ -532,7 +533,7 @@
   <string name="upload_cancelled">取消上传</string>
   <string name="previous_image_title_description_not_found">没有之前图片的标题或描述对应的数据</string>
   <string name="dialog_box_text_nomination">%1$s为何应被删除？</string>
-  <string name="review_is_uploaded_by">%1通过%2上传</string>
+  <string name="review_is_uploaded_by">%1$s通过%2$s上传</string>
   <string name="default_description_language">默认描述语言</string>
   <string name="delete_helper_show_deletion_title">正在提出删除准备</string>
   <string name="delete_helper_show_deletion_title_success">成功</string>
@@ -616,7 +617,7 @@
   <string name="missing_category">- 为此图像添加分类以提升可用性。</string>
   <string name="missing_article">- 将此图像添加至相关的无图像的维基百科条目中。</string>
   <string name="add_picture_to_wikipedia_article_title">将图片添加到维基百科</string>
-  <string name="add_picture_to_wikipedia_article_desc">您想将此图像添加至$1s维基百科条目中吗？</string>
+  <string name="add_picture_to_wikipedia_article_desc">您想将此图像添加至%1$s维基百科条目中吗？</string>
   <string name="confirm">确认</string>
   <string name="instructions_title">说明</string>
   <string name="wikipedia_instructions_step_1">1. 使用下列wikitext：</string>

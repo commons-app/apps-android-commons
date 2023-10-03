@@ -69,6 +69,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Inställningar</string>
   <string name="intent_share_upload_label">Ladda upp till Commons</string>
+  <string name="upload_in_progress">Uppladdning pågår</string>
   <string name="username">Användarnamn</string>
   <string name="password">Lösenord</string>
   <string name="login_credential">Logga in på ditt betakonto för Commons</string>
@@ -82,6 +83,9 @@
   <string name="login_success">Inloggningen lyckades!</string>
   <string name="login_failed">Det gick inte att logga in!</string>
   <string name="upload_failed">Filen hittades inte. Försök med en annan fil.</string>
+  <string name="retry_limit_reached">Maxgränsen för återförsök har uppnåtts! Avbryt uppladdningen och försök igen</string>
+  <string name="unrestricted_battery_mode">Inaktivera batterioptimeringen?</string>
+  <string name="suggest_unrestricted_mode">Att ladda upp fler än 3 bilder är mer tillförlitligt när batterioptimering har inaktiverats. Inaktivera batterioptimering för Commons-appen i inställningarna för en smidigare uppladdningsupplevelse.\n\nMöjliga steg för att inaktivera batterioptimeringen:\n\nSteg 1: Tryck på knappen \"Inställningar\" nedan.\n\nSteg 2: Ändra \"Appar inte optimerade\" till \"Allt\".\n\nSteg 3: Sök efter \"Commons\" eller \"fr.free.nrw.commons\".\n\nSteg 4: Tryck på den och välj \"Optimera inte\".\n\nSteg 5: Tryck på \"Klar\".</string>
   <string name="authentication_failed">Autentisering misslyckades, var god logga in igen</string>
   <string name="uploading_started">Överföring påbörjad!</string>
   <string name="uploading_queued">Kölagd uppladdning (begränsat anslutningsläge har aktiverats)</string>
@@ -196,6 +200,8 @@
   <string name="read_storage_permission_rationale">Nödvändig behörighet: Läs extern lagring. Appen kan inte komma åt ditt galleri utan detta.</string>
   <string name="write_storage_permission_rationale">Nödvändig behörighet: Skriv till extern lagring. Appen kan inte komma åt din kamera/galleri utan detta.</string>
   <string name="location_permission_title">Begär platsbehörighet</string>
+  <string name="in_app_camera_location_permission_title">Registrera platsen för bilder som tas i appen</string>
+  <string name="in_app_camera_location_switch_pref_summary">Aktivera detta för att registrera platsen med bilder som tas i appen ifall enhetens kamera inte gör det</string>
   <string name="ok">OK</string>
   <string name="warning">Varning</string>
   <string name="duplicate_file_name">Dubblettfilnamn hittades</string>
@@ -274,6 +280,7 @@
   <string name="copy_wikicode">Kopiera wikitexten till urklipp</string>
   <string name="wikicode_copied">Wikitexten kopierades till urklipp</string>
   <string name="nearby_location_not_available">\"I närheten\" kanske inte fungerar ordentligt. Platsen är inte tillgänglig.</string>
+  <string name="upload_location_access_denied">Platsåtkomst nekad. Ange din plats manuellt för att använda den här funktionen.</string>
   <string name="location_permission_rationale_nearby">Behörighet krävs för att visa en lista över platser i närheten</string>
   <string name="nearby_directions">Vägbeskrivning</string>
   <string name="nearby_wikidata">Wikidata</string>
@@ -421,7 +428,16 @@
   <string name="ends_on">Slutar den:</string>
   <string name="display_campaigns">Visa kampanjer</string>
   <string name="display_campaigns_explanation">Se pågående kampanjer</string>
-  <string name="location_loss_warning" fuzzy="true">Se till att denna nya Android-bläddraren inte tar bort platspositionen från dina bilder.</string>
+  <string name="in_app_camera_location_access_explanation">Tillåt appen att hämta platsen om kameran inte registrerar den. Vissa enhetskameror registrerar inte platsen. I sådana fall blir ditt bidrag mer användbart om du låter appen hämta och bifoga platsen. Du kan ändra detta när som helst i inställningarna</string>
+  <string name="option_allow">Tillåt</string>
+  <string name="option_dismiss">Stäng</string>
+  <string name="in_app_camera_needs_location">Aktivera platsåtkomst i inställningarna och försök igen.\n\nOBS: Uppladdningen kanske inte har någon plats om appen inte kan hämta platsen från enheten inom ett kort intervall.</string>
+  <string name="in_app_camera_location_permission_rationale">Kameran inuti appen behöver platsbehörighet för att bifoga den på dina bilder om platsen inte är tillgänglig i EXIF. Tillåt appen att komma åt din plats och försök igen.\n\nOBS: Uppladdningen kanske inte har någon plats om appen inte kan hämta platsen från enheten inom ett kort intervall.</string>
+  <string name="in_app_camera_location_permission_denied">Appen skulle inte registrera platsen tillsammans med tagna bilder på grund av bristande platsbehörighet</string>
+  <string name="in_app_camera_location_unavailable">Appen kunde inte registrera platsen tillsammans med tagna bilder eftersom GPS:en är inaktiverad</string>
+  <string name="open_document_photo_picker_title">Använd dokumentbaserad fotoväljare</string>
+  <string name="open_document_photo_picker_explanation">Androids nya fotoväljare riskerar att förlora platsinformation. Aktivera om du verkar använda den.</string>
+  <string name="location_loss_warning">När detta inaktiveras kan Androids nya fotoväljare utlösas. Den riskerar att förlora platsinformation.\n\nTryck på \"Läs mer\" för mer information.</string>
   <string name="nearby_campaign_dismiss_message">Du kommer inte längre se kampanjerna. Om du vill kan du återaktivera denna avisering i inställningarna.</string>
   <string name="this_function_needs_network_connection">Denna funktion kräver nätverksuppkoppling. Kontrollera dina anslutningsinställningar.</string>
   <string name="error_processing_image">Fel uppstod när bilden behandlades. Försök igen!</string>
@@ -570,6 +586,7 @@
   <string name="recommend_high_accuracy_mode">För bästa resultat väljer du alternativet \"Öka precisionen\".</string>
   <string name="ask_to_turn_location_on">Aktivera plats?</string>
   <string name="nearby_needs_location">\"I närheten\" behöver ha plats aktiverat för att fungera ordentligt</string>
+  <string name="upload_map_location_access">Du måste ge åtkomst till din nuvarande plats för att ange platsen automatiskt.</string>
   <string name="use_location_from_similar_image">Tog du dessa två bilder på samma plats? Vill du använda den högra bildens latitud/longitud?</string>
   <string name="load_more">Läs in fler</string>
   <string name="nearby_no_results">Inga platser hittades, försök ändra dina sökkriterier.</string>

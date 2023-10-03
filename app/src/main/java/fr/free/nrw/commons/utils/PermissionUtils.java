@@ -97,11 +97,11 @@ public class PermissionUtils {
      * @param rationaleMessage    rationale message to be displayed when permission was denied. It
      *                            can be an invalid @StringRes
      */
-    public static void checkPermissionsAndPerformAction(Activity activity, String[] permissions,
+    public static void checkPermissionsAndPerformAction(Activity activity,
         Runnable onPermissionGranted, @StringRes int rationaleTitle,
-        @StringRes int rationaleMessage) {
-        checkPermissionsAndPerformAction(activity, permissions, onPermissionGranted, null,
-            rationaleTitle, rationaleMessage);
+        @StringRes int rationaleMessage, String... permissions) {
+        checkPermissionsAndPerformAction(activity, onPermissionGranted, null,
+            rationaleTitle, rationaleMessage, permissions);
     }
 
     /**
@@ -122,9 +122,9 @@ public class PermissionUtils {
      * @param rationaleTitle      rationale title to be displayed when permission was denied
      * @param rationaleMessage    rationale message to be displayed when permission was denied
      */
-    public static void checkPermissionsAndPerformAction(Activity activity, String[] permissions,
+    public static void checkPermissionsAndPerformAction(Activity activity,
         Runnable onPermissionGranted, Runnable onPermissionDenied, @StringRes int rationaleTitle,
-        @StringRes int rationaleMessage) {
+        @StringRes int rationaleMessage, String... permissions) {
         Dexter.withActivity(activity)
             .withPermissions(permissions)
             .withListener(new MultiplePermissionsListener() {
@@ -132,6 +132,7 @@ public class PermissionUtils {
                 public void onPermissionsChecked(MultiplePermissionsReport report) {
                     if (report.areAllPermissionsGranted()) {
                         onPermissionGranted.run();
+                        return;
                     }
                     if (report.isAnyPermissionPermanentlyDenied()) {
                         // permission is denied permanently, we will show user a dialog message.

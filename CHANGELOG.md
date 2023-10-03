@@ -1,5 +1,19 @@
 # Wikimedia Commons for Android
 
+## v4.2.0
+- Dark mode colour improvements
+- Enhancements done to address location metadata loss including the metadata loss that occurs in
+  latest Android versions
+- Enhancements done to address the issue where uploads get stuck in queued state
+- Fix the inability to upload via the in-app camera option
+- Provide the ability to optionally include location metadata for in-app camera uploads in case the
+  device camera app does not provide location metadata
+- Use geo location URL that works consistently across all map applications
+- Fix crash when clicking on location target icon while trying to edit the location of an upload
+- Fix crash that occurs randomly while returning to the app after leaving it in the background
+- Fix crash in Sign up activity on Android version 5.0 and 5.1
+- Android 13 compatibility changes
+
 ## v4.1.0
 - Location of pictures uploaded via custom picture selector are now recognized
 - Improvements to the custom picture selector

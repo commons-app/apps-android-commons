@@ -4,6 +4,7 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static fr.free.nrw.commons.di.NetworkingModule.NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE;
 
+import android.Manifest.permission;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -18,6 +19,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -43,6 +47,7 @@ import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -115,6 +120,27 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
     private int contributionsSize;
     String userName;
+    private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
+        @Override
+        public void onActivityResult(Map<String, Boolean> result) {
+            boolean areAllGranted = true;
+            for (final boolean b : result.values()) {
+                areAllGranted = areAllGranted && b;
+            }
+
+            if (areAllGranted) {
+                controller.locationPermissionCallback.onLocationPermissionGranted();
+            } else {
+                if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
+                    controller.handleShowRationaleFlowCameraLocation(getActivity());
+                } else {
+                    controller.locationPermissionCallback.onLocationPermissionDenied(
+                        getActivity().getString(R.string.in_app_camera_location_permission_denied));
+                }
+            }
+        }
+    });
+
 
     @Override
     public void onCreate(
@@ -299,7 +325,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     private void setListeners() {
         fabPlus.setOnClickListener(view -> animateFAB(isFabOpen));
         fabCamera.setOnClickListener(view -> {
-            controller.initiateCameraPick(getActivity());
+            controller.initiateCameraPick(getActivity(), inAppCameraLocationPermissionLauncher);
             animateFAB(isFabOpen);
         });
         fabGallery.setOnClickListener(view -> {
@@ -395,10 +421,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     @Override
     public void deleteUpload(final Contribution contribution) {
         DialogUtil.showAlertDialog(getActivity(),
-            String.format(getString(R.string.cancelling_upload),
-                Locale.getDefault().getDisplayLanguage()),
-            String.format(getString(R.string.cancel_upload_dialog),
-                Locale.getDefault().getDisplayLanguage()),
+            String.format(Locale.getDefault().getDisplayLanguage(),
+                getString(R.string.cancelling_upload)),
+            String.format(Locale.getDefault().getDisplayLanguage(),
+                getString(R.string.cancel_upload_dialog)),
             "YES", "NO",
             () -> {
                 ViewUtil.showShortToast(getContext(), R.string.cancelling_upload);
@@ -424,8 +450,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     public void addImageToWikipedia(Contribution contribution) {
         DialogUtil.showAlertDialog(getActivity(),
             getString(R.string.add_picture_to_wikipedia_article_title),
-            String.format(getString(R.string.add_picture_to_wikipedia_article_desc),
-                Locale.getDefault().getDisplayLanguage()),
+            getString(R.string.add_picture_to_wikipedia_article_desc),
             () -> {
                 showAddImageToWikipediaInstructions(contribution);
             }, () -> {

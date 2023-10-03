@@ -170,7 +170,7 @@
   <string name="media_detail_coordinates">Koordináhtat</string>
   <string name="media_detail_coordinates_empty">Ii addon bajás</string>
   <string name="become_a_tester_title">Šatta Beta geahččaleaddji</string>
-  <string name="logout_verification">Leat go sihkar, ahte háliidat olggos čálihit?</string>
+  <string name="logout_verification">Áiggutgo don duođaid čálihit olggos?</string>
   <string name="mediaimage_failed">Mediagovva ii lihkostuvvan</string>
   <string name="cancel">Gaskkalduhte</string>
   <string name="navigation_drawer_open">Raba</string>
@@ -185,7 +185,7 @@
   <string name="nearby_info_menu_commons_article">Commons-fiilasiidu</string>
   <string name="nearby_info_menu_wikipedia_article">Wikipedia-artihkal</string>
   <string name="navigation_item_login">Čálit sisa</string>
-  <string name="skip_login_title">Leat go sihkar, ahte háliidat joatkit čálitkeahttá sisa?</string>
+  <string name="skip_login_title">Áiggutgo don duođaid joatkit čálitkeahttá sisa?</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
@@ -200,8 +200,9 @@
   <string name="explore_tab_title_map">Kárta</string>
   <string name="result">Boađus</string>
   <string name="continue_message">Joatkke</string>
-  <string name="cancel_upload_dialog">Leat go sihkar, ahte háliidat gaskkalduhttit dán fiilla vurkema?</string>
-  <string name="delete_search_dialog">Leat go sihkar, ahte háliidat sihkkut dán ohcama?</string>
+  <string name="delete_recent_searches_dialog">Áiggutgo don duođaid iežat ohcanhistorjjá gurret?</string>
+  <string name="cancel_upload_dialog">Áiggutgo don duođaid gaskkalduhttit dán fiilla vurkema?</string>
+  <string name="delete_search_dialog">Áiggutgo don duođaid dán ohcama sihkkut?</string>
   <string name="delete">Sihko</string>
   <string name="statistics">Statistihkka</string>
   <string name="level">Dássi</string>

@@ -221,6 +221,8 @@
   <string name="read_storage_permission_rationale">Обов\'язковий дозвіл: читання зовнішньої пам\'яті. Без цього дозволу програма не зможе отримати доступ до вашої галереї.</string>
   <string name="write_storage_permission_rationale">Обов\'язковий дозвіл: записування на зовнішнє сховище. Програма не зможе отримати доступ до камери/галереї без цього дозволу.</string>
   <string name="location_permission_title">Запит на визначення розташування</string>
+  <string name="in_app_camera_location_permission_title">Записувати місцезнаходження для знімків у програмі</string>
+  <string name="in_app_camera_location_switch_pref_summary">Увімкніть це, щоб записувати місцезнаходження за допомогою знімків із програми, якщо камера пристрою не записує його</string>
   <string name="ok">Гаразд</string>
   <string name="warning">Попередження</string>
   <string name="duplicate_file_name">Знайдено повторюване ім\'я файлу</string>
@@ -446,6 +448,13 @@
   <string name="ends_on">Завершується:</string>
   <string name="display_campaigns">Показати кампанії</string>
   <string name="display_campaigns_explanation">Чинні кампанії</string>
+  <string name="in_app_camera_location_access_explanation">Дозволити програмі отримувати місцезнаходження, якщо камера його не записує. Камери деяких пристроїв не записують місцезнаходження. У таких випадках дозвольте програмці отримувати та приєднувати до файлу місцезнаходження, що робить ваш внесок кориснішим. Ви можете будь-коли змінити це в налаштуваннях</string>
+  <string name="option_allow">Дозволити</string>
+  <string name="option_dismiss">Відхилити</string>
+  <string name="in_app_camera_needs_location">Увімкніть доступ до місцезнаходження в налаштуваннях і повторіть спробу. \n\nПримітка. У завантаженому файлі може бути відсутнім місцезнаходження, якщо програмка не може отримати місцезнаходження з пристрою протягом короткого проміжку часу.</string>
+  <string name="in_app_camera_location_permission_rationale">Камера в застосунку потребує дозволу на доступ до місцезнаходження, щоб приєднувати його до ваших зображень, якщо місцезнаходження недоступне в EXIF. Дозвольте програмці отримати доступ до вашого місцезнаходження та повторіть спробу.\n\nПримітка: у завантаженому файлі може не бути місцезнаходження, якщо програма не може отримати місцезнаходження з пристрою протягом короткого проміжку часу.</string>
+  <string name="in_app_camera_location_permission_denied">Застосунок не записував місцезнаходження разом із кадрами через відсутність дозволу на місцезнаходження</string>
+  <string name="in_app_camera_location_unavailable">Програмка не буде записувати місцезнаходження разом із кадрами, оскільки GPS вимкнено</string>
   <string name="location_loss_warning" fuzzy="true">Переконайтеся, що цей новий засіб вибору Android не видаляє геоданы з ваших зображень.</string>
   <string name="nearby_campaign_dismiss_message">Ви більше не бачитимете кампаній. Однак Ви можете увімкнути це сповіщення повторно в своїх налаштуваннях, якщо забажаєте.</string>
   <string name="this_function_needs_network_connection">Ця функція вимагає доступу до інтернету. Будь ласка, перевірте своє з\'єднання.</string>

@@ -46,6 +46,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Astellungen</string>
   <string name="intent_share_upload_label">Op Commons eroplueden</string>
+  <string name="upload_in_progress">Eroplueden amgaang</string>
   <string name="username">Benotzernumm</string>
   <string name="password">Passwuert</string>
   <string name="login_credential">Loggt Iech an Äre Commons-Beta-Benotzerkont an</string>
@@ -306,6 +307,8 @@
   <string name="back_button_continue">Eropluede weiderféieren</string>
   <string name="never_ask_again">Dëst ni méi froen</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Dir hutt esou vill Kontributioune gemaach datt eise Berechnungssystem iwwerfuerdert ass. Dëst ass déi bescht Leeschtung.</string>
+  <string name="option_allow">Erlaben</string>
+  <string name="option_dismiss">Verwerfen</string>
   <string name="nominate_for_deletion_done">Fäerdeg</string>
   <string name="review_copyright">Entsprécht dat de Copyright-Reegelen?</string>
   <string name="review_category">Ass dëst richteg kategoriséiert?</string>

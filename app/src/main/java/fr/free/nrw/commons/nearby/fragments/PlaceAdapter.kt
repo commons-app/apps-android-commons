@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby.fragments
 
+import androidx.activity.result.ActivityResultLauncher
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.placeAdapterDelegate
@@ -9,7 +10,8 @@ class PlaceAdapter(
     bookmarkLocationsDao: BookmarkLocationsDao,
     onPlaceClicked: ((Place) -> Unit)? = null,
     onBookmarkClicked: (Place, Boolean) -> Unit,
-    commonPlaceClickActions: CommonPlaceClickActions
+    commonPlaceClickActions: CommonPlaceClickActions,
+    inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>
 ) :
     BaseDelegateAdapter<Place>(
         placeAdapterDelegate(
@@ -19,7 +21,8 @@ class PlaceAdapter(
             commonPlaceClickActions.onGalleryClicked(),
             onBookmarkClicked,
             commonPlaceClickActions.onOverflowClicked(),
-            commonPlaceClickActions.onDirectionsClicked()
+            commonPlaceClickActions.onDirectionsClicked(),
+            inAppCameraLocationPermissionLauncher
         ),
         areItemsTheSame = {oldItem, newItem -> oldItem.wikiDataEntityId == newItem.wikiDataEntityId }
     )
