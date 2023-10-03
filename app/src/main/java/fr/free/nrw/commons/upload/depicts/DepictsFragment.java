@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.upload.depicts;
 
+import static fr.free.nrw.commons.wikidata.WikidataConstants.SELECTED_NEARBY_PLACE;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -29,6 +31,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.media.MediaDetailFragment;
+import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText;
 import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
@@ -83,6 +86,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      * Determines each encounter of edit depicts
      */
     private int count;
+    private Place nearbyPlace;
 
     @Nullable
     @Override
@@ -99,6 +103,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         Bundle bundle = getArguments();
         if (bundle != null) {
             media = bundle.getParcelable("Existing_Depicts");
+            nearbyPlace = bundle.getParcelable(SELECTED_NEARBY_PLACE);
         }
 
         init();
@@ -111,8 +116,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     private void init() {
 
         if (media == null) {
-            depictsTitle
-                .setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
+            depictsTitle.setText(String.format(getString(R.string.step_count), callback.getIndexInViewFlipper(this) + 1,
                     callback.getTotalNumberOfSteps(), getString(R.string.depicts_step_title)));
         } else {
             depictsTitle.setText(R.string.edit_depictions);
@@ -156,12 +160,12 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
             adapter = new UploadDepictsAdapter(categoryItem -> {
                 presenter.onDepictItemClicked(categoryItem);
                 return Unit.INSTANCE;
-            });
+            }, nearbyPlace);
         } else {
             adapter = new UploadDepictsAdapter(item -> {
                 presenter.onDepictItemClicked(item);
                 return Unit.INSTANCE;
-            });
+            }, nearbyPlace);
         }
         depictsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         depictsRecyclerView.setAdapter(adapter);

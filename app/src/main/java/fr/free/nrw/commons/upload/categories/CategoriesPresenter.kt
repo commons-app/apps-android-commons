@@ -1,6 +1,9 @@
 package fr.free.nrw.commons.upload.categories
 
+import android.content.Context
 import android.text.TextUtils
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.category.CategoryEditHelper
@@ -8,6 +11,7 @@ import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.proxy
+import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -36,6 +40,7 @@ class CategoriesPresenter @Inject constructor(
     var view = DUMMY
     private val compositeDisposable = CompositeDisposable()
     private val searchTerms = PublishSubject.create<String>()
+    private val categoryList: MutableLiveData<List<CategoryItem>> = MutableLiveData()
     /**
      * Current media
      */
@@ -55,7 +60,7 @@ class CategoriesPresenter @Inject constructor(
                 .doOnNext {
                     view.showProgress(true)
                     view.showError(null)
-                    view.setCategories(null)
+                    categoryList.value = null
                 }
                 .switchMap(::searchResults)
                 .map { repository.selectedCategories + it }
@@ -63,7 +68,7 @@ class CategoriesPresenter @Inject constructor(
                 .observeOn(mainThreadScheduler)
                 .subscribe(
                     {
-                        view.setCategories(it)
+                        categoryList.value = it
                         view.showProgress(false)
                         if (it.isEmpty()) {
                             view.showError(R.string.no_categories_found)
@@ -91,11 +96,10 @@ class CategoriesPresenter @Inject constructor(
                         CategoryItem(it.name, it.description, it.thumbnail, true)
                     }
                     },
-                repository.searchAll(term, getImageTitleList(), repository.selectedDepictions),
-                { it1, it2 ->
-                    it1 + it2
-                }
-            )
+                repository.searchAll(term, getImageTitleList(), repository.selectedDepictions)
+            ) { it1, it2 ->
+                it1 + it2
+            }
                 .subscribeOn(ioScheduler)
                 .map { it.filterNot { categoryItem -> repository.containsYear(categoryItem.name) } }
                 .map { it.filterNot { categoryItem -> categoryItem.thumbnail == "hidden" } }
@@ -160,7 +164,7 @@ class CategoriesPresenter @Inject constructor(
                 .doOnNext {
                     view.showProgress(true)
                     view.showError(null)
-                    view.setCategories(null)
+                    categoryList.value = null
                 }
                 .switchMap(::searchResults)
                 .map { repository.selectedCategories + it }
@@ -168,7 +172,7 @@ class CategoriesPresenter @Inject constructor(
                 .observeOn(mainThreadScheduler)
                 .subscribe(
                     {
-                        view.setCategories(it)
+                        categoryList.value = it
                         view.showProgress(false)
                         if (it.isEmpty()) {
                             view.showError(R.string.no_categories_found)
@@ -227,5 +231,35 @@ class CategoriesPresenter @Inject constructor(
             repository.cleanup()
             view.showNoCategorySelected()
         }
+    }
+
+    /**
+     * Selects each [CategoryItem] in a given list as if they were clicked by the user by calling
+     * [onCategoryItemClicked] for each category and adding the category to [categoryList]
+     */
+    private fun selectNewCategories(toSelect: List<CategoryItem>) {
+        toSelect.forEach {
+            it.isSelected = true
+            repository.onCategoryClicked(it, media)
+        }
+
+        // Add the new selections to the list of depicted items so that the selections appear
+        // immediately (i.e. without any search term queries)
+        categoryList.value?.toMutableList()
+            ?.let { toSelect + it }
+            ?.distinctBy(CategoryItem::name)
+            ?.let { categoryList.value = it }
+    }
+
+    override fun getCategories(): LiveData<List<CategoryItem>> {
+        return categoryList
+    }
+
+    override fun selectCategoryDepictions() {
+        compositeDisposable.add(repository.categoryDepictions
+            .subscribeOn(ioScheduler)
+            .observeOn(mainThreadScheduler)
+            .subscribe(::selectNewCategories)
+        )
     }
 }
