@@ -83,7 +83,8 @@ class CategoriesPresenter @Inject constructor(
         if (media == null) {
             return repository.searchAll(term, getImageTitleList(), repository.selectedDepictions)
                 .subscribeOn(ioScheduler)
-                .map { it.filterNot { categoryItem -> repository.containsYear(categoryItem.name) } }
+                .map { it.filter { categoryItem -> !repository.containsYear(categoryItem.name)
+                        || categoryItem.name==term } }
         } else {
             return Observable.zip(
                 repository.getCategories(repository.selectedExistingCategories)
@@ -97,7 +98,8 @@ class CategoriesPresenter @Inject constructor(
                 }
             )
                 .subscribeOn(ioScheduler)
-                .map { it.filterNot { categoryItem -> repository.containsYear(categoryItem.name) } }
+                .map { it.filter { categoryItem -> !repository.containsYear(categoryItem.name)
+                        || categoryItem.name==term } }
                 .map { it.filterNot { categoryItem -> categoryItem.thumbnail == "hidden" } }
         }
     }
