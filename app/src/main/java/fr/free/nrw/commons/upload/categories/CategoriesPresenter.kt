@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload.categories
 
-import android.content.Context
 import android.text.TextUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +10,6 @@ import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.depicts.proxy
-import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -238,25 +236,32 @@ class CategoriesPresenter @Inject constructor(
      * [onCategoryItemClicked] for each category and adding the category to [categoryList]
      */
     private fun selectNewCategories(toSelect: List<CategoryItem>) {
-        toSelect.forEach {
-            it.isSelected = true
-            repository.onCategoryClicked(it, media)
-        }
+        toSelect.filterNot { it.thumbnail == "hidden" }
+            .forEach{
+                it.isSelected = true
+                repository.onCategoryClicked(it, media)
+            }
 
         // Add the new selections to the list of depicted items so that the selections appear
         // immediately (i.e. without any search term queries)
         categoryList.value?.toMutableList()
+            ?.filterNot { it.thumbnail == "hidden" }
             ?.let { toSelect + it }
             ?.distinctBy(CategoryItem::name)
             ?.let { categoryList.value = it }
     }
 
+    /**
+     * Livedata being used to observe category list inside
+     * @see UploadCategoriesFragment
+     * Any changes to category list reflect immediately to the adapter list
+     */
     override fun getCategories(): LiveData<List<CategoryItem>> {
         return categoryList
     }
 
-    override fun selectCategoryDepictions() {
-        compositeDisposable.add(repository.categoryDepictions
+    override fun selectCategories() {
+        compositeDisposable.add(repository.placeCategories
             .subscribeOn(ioScheduler)
             .observeOn(mainThreadScheduler)
             .subscribe(::selectNewCategories)

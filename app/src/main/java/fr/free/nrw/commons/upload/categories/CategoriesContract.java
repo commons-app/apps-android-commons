@@ -83,7 +83,7 @@ public interface CategoriesContract {
 
         LiveData<List<CategoryItem>> getCategories();
 
-        void selectCategoryDepictions();
+        void selectCategories();
 
     }
 

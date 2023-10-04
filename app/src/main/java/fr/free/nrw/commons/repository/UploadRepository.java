@@ -299,7 +299,7 @@ public class UploadRepository {
      *
      * @return a single that provides the categories
      */
-    public Single<List<CategoryItem>> getCategoryDepictions() {
+    public Single<List<CategoryItem>> getPlaceCategories() {
         final Set<String> qids = new HashSet<>();
         for (final UploadItem item : getUploads()) {
             final Place place = item.getPlace();

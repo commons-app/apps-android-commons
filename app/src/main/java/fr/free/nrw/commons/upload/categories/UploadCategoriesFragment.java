@@ -193,10 +193,9 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
 
     @Override
     public void setCategories(List<CategoryItem> categories) {
-        if(categories == null) {
+        if (categories == null) {
             adapter.clear();
-        }
-        else{
+        } else {
             adapter.setItems(categories);
         }
     }
@@ -303,7 +302,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     @Override
     protected void onBecameVisible() {
         super.onBecameVisible();
-        presenter.selectCategoryDepictions();
+        presenter.selectCategories();
         final Editable text = etSearch.getText();
         if (text != null) {
             presenter.searchForCategories(text.toString());
