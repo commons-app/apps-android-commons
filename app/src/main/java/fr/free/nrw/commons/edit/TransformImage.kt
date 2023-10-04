@@ -4,5 +4,5 @@ import java.io.File
 
 interface TransformImage {
 
-    fun rotateImage(imageFile: File, degree : Int ):File
+    fun rotateImage(imageFile: File, degree : Int ):File?
 }

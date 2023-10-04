@@ -9,7 +9,7 @@ import java.io.File
 import java.io.FileOutputStream
 
 class TransformImageImpl() : TransformImage {
-    override fun rotateImage(imageFile: File, degree : Int): File {
+    override fun rotateImage(imageFile: File, degree : Int): File? {
 
         Timber.tag("Trying to rotate image").d("Starting")
 
@@ -46,6 +46,7 @@ class TransformImageImpl() : TransformImage {
             true
         } catch (e: LLJTranException) {
             Timber.tag("Error").d(e)
+            return null
             false
         }
 

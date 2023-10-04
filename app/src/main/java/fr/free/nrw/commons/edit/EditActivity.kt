@@ -10,6 +10,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.rotationMatrix
 import androidx.core.graphics.scaleMatrix
@@ -155,6 +156,9 @@ class EditActivity : AppCompatActivity() {
         val filePath = imageUri.toUri().path
         val file = filePath?.let { File(it) }
         val rotatedImage = file?.let { vm.rotateImage(imageRotation, it) }
+        if (rotatedImage == null){
+            Toast.makeText(this, "Transformation Failed", Toast.LENGTH_LONG).show()
+        }
         val resultIntent = Intent()
         resultIntent.putExtra("editedImageFilePath",rotatedImage?.toUri()?.path ?: "Error" );
         setResult(RESULT_OK, resultIntent);

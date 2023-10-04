@@ -569,12 +569,17 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         }
         if (requestCode == REQUEST_CODE_FOR_EDIT_ACTIVITY && resultCode == RESULT_OK) {
             String result = data.getStringExtra("editedImageFilePath");
-            try {
-                photoViewBackgroundImage.setImageURI(Uri.fromFile(new File(result)));
-                editableUploadItem.setContentUri( Uri.fromFile(new File(result)));
-            } catch (Exception e) {
-                e.printStackTrace();
+
+            if (!Objects.equals(result, "Error")){
+                try {
+                    photoViewBackgroundImage.setImageURI(Uri.fromFile(new File(result)));
+                    editableUploadItem.setContentUri( Uri.fromFile(new File(result)));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+
+
 
 
         }
