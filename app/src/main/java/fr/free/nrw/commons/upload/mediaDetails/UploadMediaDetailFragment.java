@@ -570,8 +570,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         if (requestCode == REQUEST_CODE_FOR_EDIT_ACTIVITY && resultCode == RESULT_OK) {
             String result = data.getStringExtra("editedImageFilePath");
             try {
-                editableUploadItem.setContentUri(
-                    convertFileToContentUri(requireContext(), new File(result)));
+                photoViewBackgroundImage.setImageURI(Uri.fromFile(new File(result)));
+                editableUploadItem.setContentUri( Uri.fromFile(new File(result)));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -581,20 +581,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     }
 
-    /**
-     * Converts a file to a content uri, by inserting it into the media store. Requires this
-     * permission: <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-     */
-    private static Uri convertFileToContentUri(Context context, File file) throws Exception {
-
-        ContentResolver cr = context.getContentResolver();
-        String imagePath = file.getAbsolutePath();
-        String imageName = null;
-        String imageDescription = null;
-        String uriString = MediaStore.Images.Media.insertImage(cr, imagePath, imageName,
-            imageDescription);
-        return Uri.parse(uriString);
-    }
 
     /**
      * Update the old coordinates with new one

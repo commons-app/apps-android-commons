@@ -14,7 +14,7 @@ import java.util.List;
 
 public class UploadItem {
 
-    private final Uri mediaUri;
+    private Uri mediaUri;
     private final String mimeType;
     private ImageCoordinates gpsCoords;
     private List<UploadMediaDetail> uploadMediaDetails;
@@ -162,6 +162,7 @@ public class UploadItem {
     }
     public void setContentUri(Uri uri) {
         contentUri = uri;
+        mediaUri = uri;
     }
 
 
