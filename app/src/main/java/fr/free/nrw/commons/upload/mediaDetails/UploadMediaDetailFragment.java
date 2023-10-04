@@ -7,6 +7,7 @@ import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -546,6 +547,29 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     public void updateMediaDetails(List<UploadMediaDetail> uploadMediaDetails) {
         uploadMediaDetailAdapter.setItems(uploadMediaDetails);
+        showNearbyFound =
+            showNearbyFound && (
+            uploadMediaDetails == null || uploadMediaDetails.isEmpty() || listContainsEmptyDetails(
+                uploadMediaDetails));
+    }
+
+    /**
+     * if the media details that come in here are empty
+     * (empty caption AND empty description, with caption being the decider here)
+     * this method allows usage of nearby place caption and description if any
+     * else it takes the media details saved in prior for this picture
+     * @param uploadMediaDetails saved media details,
+     *                           ex: in case when "copy to subsequent media" button is clicked
+     *                           for a previous image
+     * @return boolean whether the details are empty or not
+     */
+    private boolean listContainsEmptyDetails(List<UploadMediaDetail> uploadMediaDetails) {
+        for (UploadMediaDetail uploadDetail: uploadMediaDetails) {
+            if (!TextUtils.isEmpty(uploadDetail.getCaptionText()) && !TextUtils.isEmpty(uploadDetail.getDescriptionText())) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
