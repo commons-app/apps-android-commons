@@ -41,8 +41,9 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.media.MediaClient;
+import fr.free.nrw.commons.profile.ProfileActivity;
+import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import java.util.Locale;
@@ -52,7 +53,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.dataclient.WikiSite;
-import fr.free.nrw.commons.profile.ProfileActivity;
 
 
 /**
@@ -112,7 +112,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
     private ContributionsListAdapter adapter;
 
-    @Nullable private Callback callback;
+    @Nullable
+    private Callback callback;
 
     private final int SPAN_COUNT_LANDSCAPE = 3;
     private final int SPAN_COUNT_PORTRAIT = 1;
@@ -142,7 +143,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
 
     @Override
-    public void onCreate(@Nullable @org.jetbrains.annotations.Nullable final Bundle savedInstanceState) {
+    public void onCreate(
+        @Nullable @org.jetbrains.annotations.Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Now that we are allowing this fragment to be started for
         // any userName- we expect it to be passed as an argument
@@ -336,7 +338,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
      * Launch Custom Selector.
      */
     @OnClick(R.id.fab_custom_gallery)
-    void launchCustomSelector(){
+    void launchCustomSelector() {
         controller.initiateCustomGalleryPickWithPermission(getActivity());
         animateFAB(isFabOpen);
     }
@@ -348,24 +350,24 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     private void animateFAB(final boolean isFabOpen) {
         this.isFabOpen = !isFabOpen;
         if (fabPlus.isShown()) {
-        if (isFabOpen) {
-            fabPlus.startAnimation(rotate_backward);
-            fabCamera.startAnimation(fab_close);
-            fabGallery.startAnimation(fab_close);
-            fabCustomGallery.startAnimation(fab_close);
-            fabCamera.hide();
-            fabGallery.hide();
-            fabCustomGallery.hide();
-        } else {
-            fabPlus.startAnimation(rotate_forward);
-            fabCamera.startAnimation(fab_open);
-            fabGallery.startAnimation(fab_open);
-            fabCustomGallery.startAnimation(fab_open);
-            fabCamera.show();
-            fabGallery.show();
-            fabCustomGallery.show();
-        }
-        this.isFabOpen = !isFabOpen;
+            if (isFabOpen) {
+                fabPlus.startAnimation(rotate_backward);
+                fabCamera.startAnimation(fab_close);
+                fabGallery.startAnimation(fab_close);
+                fabCustomGallery.startAnimation(fab_close);
+                fabCamera.hide();
+                fabGallery.hide();
+                fabCustomGallery.hide();
+            } else {
+                fabPlus.startAnimation(rotate_forward);
+                fabCamera.startAnimation(fab_open);
+                fabGallery.startAnimation(fab_open);
+                fabCustomGallery.startAnimation(fab_open);
+                fabCamera.show();
+                fabGallery.show();
+                fabCustomGallery.show();
+            }
+            this.isFabOpen = !isFabOpen;
         }
     }
 
