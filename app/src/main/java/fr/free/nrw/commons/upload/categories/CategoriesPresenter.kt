@@ -242,7 +242,7 @@ class CategoriesPresenter @Inject constructor(
                 repository.onCategoryClicked(it, media)
             }
 
-        // Add the new selections to the list of depicted items so that the selections appear
+        // Add the new selections to the list of category items so that the selections appear
         // immediately (i.e. without any search term queries)
         categoryList.value?.toMutableList()
             ?.filterNot { it.thumbnail == "hidden" }
