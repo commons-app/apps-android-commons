@@ -57,6 +57,7 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java.io.File;
 import java.security.Permission;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -447,6 +448,13 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                     @Override
                     public void deletePictureAtIndex(int index) {
                         presenter.deletePictureAtIndex(index);
+                    }
+
+                    @Override
+                    public void changeThumbnail(int index, String filepath) {
+                        uploadableFiles.remove(index);
+                        uploadableFiles.add(index, new UploadableFile(new File(filepath)));
+                        rvThumbnails.getAdapter().notifyDataSetChanged();
                     }
 
                     @Override

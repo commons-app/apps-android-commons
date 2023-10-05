@@ -93,12 +93,14 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     AppCompatButton editImage;
     @BindView(R.id.tooltip)
     ImageView tooltip;
+
     private UploadMediaDetailAdapter uploadMediaDetailAdapter;
     @BindView(R.id.btn_copy_subsequent_media)
     AppCompatButton btnCopyToSubsequentMedia;
 
     @Inject
     UploadMediaDetailsContract.UserActionListener presenter;
+
 
     @Inject
     @Named("default_preferences")
@@ -130,8 +132,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private Place nearbyPlace;
     private UploadItem uploadItem;
     /**
-     * inAppPictureLocation: use location recorded while using the in-app camera if
-     * device camera does not record it in the EXIF
+     * inAppPictureLocation: use location recorded while using the in-app camera if device camera
+     * does not record it in the EXIF
      */
     private LatLng inAppPictureLocation;
     /**
@@ -150,7 +152,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         super.onCreate(savedInstanceState);
     }
 
-    public void setImageTobeUploaded(UploadableFile uploadableFile, Place place, LatLng inAppPictureLocation) {
+    public void setImageTobeUploaded(UploadableFile uploadableFile, Place place,
+        LatLng inAppPictureLocation) {
         this.uploadableFile = uploadableFile;
         this.place = place;
         this.inAppPictureLocation = inAppPictureLocation;
@@ -570,16 +573,16 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         if (requestCode == REQUEST_CODE_FOR_EDIT_ACTIVITY && resultCode == RESULT_OK) {
             String result = data.getStringExtra("editedImageFilePath");
 
-            if (!Objects.equals(result, "Error")){
+            if (!Objects.equals(result, "Error")) {
                 try {
                     photoViewBackgroundImage.setImageURI(Uri.fromFile(new File(result)));
-                    editableUploadItem.setContentUri( Uri.fromFile(new File(result)));
+                    editableUploadItem.setContentUri(Uri.fromFile(new File(result)));
+                    callback.changeThumbnail(callback.getIndexInViewFlipper(this),
+                        result);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-
-
 
 
         }
@@ -670,6 +673,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public interface UploadMediaDetailFragmentCallback extends Callback {
 
         void deletePictureAtIndex(int index);
+
+        void changeThumbnail(int index, String uri);
     }
 
 
