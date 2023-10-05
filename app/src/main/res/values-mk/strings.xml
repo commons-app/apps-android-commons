@@ -710,6 +710,8 @@
   <string name="your_feedback">Ваше мислење</string>
   <string name="mark_as_not_for_upload">Означи дека не е за подигање</string>
   <string name="unmark_as_not_for_upload">Отстрани ознака дека не е за подигање</string>
+  <string name="marking_as_not_for_upload">Означи дека не е за подигање</string>
+  <string name="unmarking_as_not_for_upload">Отстрани ознака дека не е за подигање</string>
   <string name="show_already_actioned_pictures">Прикажи веќе сработени слики</string>
   <string name="hiding_already_actioned_pictures">Скривање на веќе сработени слики</string>
   <string name="no_more_images_found">Не најдов повеќе слики</string>

@@ -728,6 +728,8 @@
   <string name="your_feedback">Vaš odziv</string>
   <string name="mark_as_not_for_upload">Označi kot ni za nalaganje</string>
   <string name="unmark_as_not_for_upload">Odznači kot ni za nalaganje</string>
+  <string name="marking_as_not_for_upload">Označevanje kot ni za naložitev</string>
+  <string name="unmarking_as_not_for_upload">Odznačevanje kot ni za naložitev</string>
   <string name="show_already_actioned_pictures">Prikaži že obdelane slike</string>
   <string name="hiding_already_actioned_pictures">Skrivanje že obdelanih slik</string>
   <string name="no_more_images_found">Ni drugih najdenih slik</string>

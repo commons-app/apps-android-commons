@@ -742,6 +742,8 @@
   <string name="your_feedback">Votre avis</string>
   <string name="mark_as_not_for_upload">Marquer comme à ne pas téléverser</string>
   <string name="unmark_as_not_for_upload">Démarquer comme à ne pas téléverser</string>
+  <string name="marking_as_not_for_upload">Marquer comme non destiné au téléchargement</string>
+  <string name="unmarking_as_not_for_upload">Ne plus marquer comme non destiné au téléchargement</string>
   <string name="show_already_actioned_pictures">Afficher les images déjà actionnées</string>
   <string name="hiding_already_actioned_pictures">Masquer les images déjà actionnées</string>
   <string name="no_more_images_found">Aucune autre image trouvée</string>

@@ -744,6 +744,8 @@
   <string name="your_feedback">המשוב שלך</string>
   <string name="mark_as_not_for_upload">לסמן בתור \"לא להעלאה\"</string>
   <string name="unmark_as_not_for_upload">לבטל את הסימון בתור \"לא להעלאה\"</string>
+  <string name="marking_as_not_for_upload">מתבצע סימון בתור \"לא להעלאה\"</string>
+  <string name="unmarking_as_not_for_upload">מתבצע ביטול סימון בתור \"לא להעלאה\"</string>
   <string name="show_already_actioned_pictures">להציג תמונות שכבר בוצעו בהן פעולות</string>
   <string name="hiding_already_actioned_pictures">הסתרת תמונות שכבר בוצעו בהן פעולות</string>
   <string name="no_more_images_found">לא נמצאו עוד תמונות</string>
