@@ -26,7 +26,7 @@ class TransformImageImpl() : TransformImage {
             val lljTran = LLJTran(imageFile)
             lljTran.read(
                 LLJTran.READ_ALL,
-                false
+                true
             ) // This could throw an LLJTranException. I am not catching it for now... Let's see.
             lljTran.transform(
                 when(degree){
@@ -40,7 +40,7 @@ class TransformImageImpl() : TransformImage {
                 LLJTran.OPT_DEFAULTS or LLJTran.OPT_XFORM_ORIENTATION
             )
             BufferedOutputStream(FileOutputStream(output)).use { writer ->
-                lljTran.save(writer, LLJTran.OPT_WRITE_ALL)
+                lljTran.save(writer, LLJTran.OPT_WRITE_ALL and LLJTran.OPT_WRITE_APPXS)
             }
             lljTran.freeMemory()
             true

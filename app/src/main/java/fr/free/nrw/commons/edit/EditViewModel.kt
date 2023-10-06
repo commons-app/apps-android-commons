@@ -6,7 +6,7 @@ import java.io.File
 class EditViewModel() : ViewModel() {
 
 
-    var transformImage: TransformImage = TransformImageImpl()
+    private val transformImage: TransformImage = TransformImageImpl()
 
 
     fun rotateImage(degree: Int, imageFile: File): File? {

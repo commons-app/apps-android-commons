@@ -156,11 +156,11 @@ class EditActivity : AppCompatActivity() {
         val filePath = imageUri.toUri().path
         val file = filePath?.let { File(it) }
         val rotatedImage = file?.let { vm.rotateImage(imageRotation, it) }
-        if (rotatedImage == null){
-            Toast.makeText(this, "Transformation Failed", Toast.LENGTH_LONG).show()
+        if (rotatedImage == null) {
+            Toast.makeText(this, "Failed to rotate to image", Toast.LENGTH_LONG).show()
         }
         val resultIntent = Intent()
-        resultIntent.putExtra("editedImageFilePath",rotatedImage?.toUri()?.path ?: "Error" );
+        resultIntent.putExtra("editedImageFilePath", rotatedImage?.toUri()?.path ?: "Error");
         setResult(RESULT_OK, resultIntent);
         finish();
 
