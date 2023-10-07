@@ -314,7 +314,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
     /**
      * Show the location in map app
      */
-    public void showInMap(){
+    public void showInMap() {
         Utils.handleGeoCoordinates(this,
             new fr.free.nrw.commons.location.LatLng(cameraPosition.target.getLatitude(),
                 cameraPosition.target.getLongitude(), 0.0f));
@@ -387,6 +387,8 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
                 });
 
 
+        } else {
+            requestLocationPermissions();
         }
     }
 
@@ -458,13 +460,13 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      */
     private void addCenterOnGPSButton(){
         fabCenterOnLocation = findViewById(R.id.center_on_gps);
-        fabCenterOnLocation.setOnClickListener(view -> getCenter());
+        fabCenterOnLocation.setOnClickListener(view -> requestLocationPermissions());
     }
 
     /**
      * Center the map at user's current location
      */
-    private void getCenter() {
+    private void requestLocationPermissions() {
         LocationPermissionsHelper.Dialog locationAccessDialog = new Dialog(
             R.string.location_permission_title,
             R.string.upload_map_location_access
@@ -539,6 +541,9 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
 
     @Override
     public void onLocationPermissionGranted() {
+        if (mapboxMap.getStyle() != null) {
+            enableLocationComponent(mapboxMap.getStyle());
+        }
         fr.free.nrw.commons.location.LatLng currLocation = locationManager.getLastLocation();
         if (currLocation != null) {
             final CameraPosition position;
