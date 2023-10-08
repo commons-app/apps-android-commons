@@ -7,7 +7,9 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.graphics.drawable.BitmapDrawable
+import android.media.ExifInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import android.widget.Toast
@@ -27,14 +29,51 @@ import java.io.File
 class EditActivity : AppCompatActivity() {
     var imageUri = ""
     lateinit var vm: EditViewModel
+    val sourceExifAttributeList = mutableListOf<Pair<String, String?>>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
-        supportActionBar?.title = "Your Activity Title"; // for set actionbar title
-
+        supportActionBar?.title = ""
         val intent = intent
         imageUri = intent.getStringExtra("image") ?: ""
         vm = ViewModelProvider(this).get(EditViewModel::class.java)
+        val sourceExif = imageUri.toUri().path?.let { ExifInterface(it) }
+        val exifTags = arrayOf(
+            ExifInterface.TAG_APERTURE,
+            ExifInterface.TAG_DATETIME,
+            ExifInterface.TAG_EXPOSURE_TIME,
+            ExifInterface.TAG_FLASH,
+            ExifInterface.TAG_FOCAL_LENGTH,
+            ExifInterface.TAG_GPS_ALTITUDE,
+            ExifInterface.TAG_GPS_ALTITUDE_REF,
+            ExifInterface.TAG_GPS_DATESTAMP,
+            ExifInterface.TAG_GPS_LATITUDE,
+            ExifInterface.TAG_GPS_LATITUDE_REF,
+            ExifInterface.TAG_GPS_LONGITUDE,
+            ExifInterface.TAG_GPS_LONGITUDE_REF,
+            ExifInterface.TAG_GPS_PROCESSING_METHOD,
+            ExifInterface.TAG_GPS_TIMESTAMP,
+            ExifInterface.TAG_IMAGE_LENGTH,
+            ExifInterface.TAG_IMAGE_WIDTH,
+            ExifInterface.TAG_ISO,
+            ExifInterface.TAG_MAKE,
+            ExifInterface.TAG_MODEL,
+            ExifInterface.TAG_ORIENTATION,
+            ExifInterface.TAG_WHITE_BALANCE,
+            ExifInterface.WHITEBALANCE_AUTO,
+            ExifInterface.WHITEBALANCE_MANUAL
+        )
+        for (tag in exifTags) {
+            val attribute = sourceExif?.getAttribute(tag.toString())
+            sourceExifAttributeList.add(Pair(tag.toString(), attribute))
+        }
+
+
+
+
+
+
+
 
         init()
 
@@ -155,9 +194,18 @@ class EditActivity : AppCompatActivity() {
 
         val filePath = imageUri.toUri().path
         val file = filePath?.let { File(it) }
+
+
         val rotatedImage = file?.let { vm.rotateImage(imageRotation, it) }
         if (rotatedImage == null) {
             Toast.makeText(this, "Failed to rotate to image", Toast.LENGTH_LONG).show()
+        }
+        val editedImageExif = rotatedImage?.path?.let { ExifInterface(it) }
+        for (attr in sourceExifAttributeList) {
+            Log.d("Tag is  ${attr.first}", "Value is ${attr.second}")
+            editedImageExif?.setAttribute(attr.first, attr.second)
+            Log.d("Tag is ${attr.first}", "Value is ${attr.second}")
+
         }
         val resultIntent = Intent()
         resultIntent.putExtra("editedImageFilePath", rotatedImage?.toUri()?.path ?: "Error");
