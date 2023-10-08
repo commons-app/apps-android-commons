@@ -38,7 +38,7 @@ class CategoriesPresenter @Inject constructor(
     var view = DUMMY
     private val compositeDisposable = CompositeDisposable()
     private val searchTerms = PublishSubject.create<String>()
-    private val categoryList: MutableLiveData<List<CategoryItem>> = MutableLiveData()
+    private var categoryList: MutableLiveData<List<CategoryItem>> = MutableLiveData()
     /**
      * Current media
      */
@@ -57,8 +57,6 @@ class CategoriesPresenter @Inject constructor(
                 .observeOn(mainThreadScheduler)
                 .doOnNext {
                     view.showProgress(true)
-                    view.showError(null)
-                    categoryList.value = null
                 }
                 .switchMap(::searchResults)
                 .map { repository.selectedCategories + it }
@@ -66,13 +64,17 @@ class CategoriesPresenter @Inject constructor(
                 .observeOn(mainThreadScheduler)
                 .subscribe(
                     {
-                        categoryList.value = it
+                        setCategoryListValue(it)
                         view.showProgress(false)
                         if (it.isEmpty()) {
                             view.showError(R.string.no_categories_found)
                         }
                     },
-                    Timber::e
+                    { t: Throwable? ->
+                        view.showProgress(false)
+                        view.showError(R.string.no_categories_found)
+                        Timber.e(t)
+                    }
                 )
         )
     }
@@ -161,8 +163,6 @@ class CategoriesPresenter @Inject constructor(
                 .observeOn(mainThreadScheduler)
                 .doOnNext {
                     view.showProgress(true)
-                    view.showError(null)
-                    categoryList.value = null
                 }
                 .switchMap(::searchResults)
                 .map { repository.selectedCategories + it }
@@ -170,13 +170,17 @@ class CategoriesPresenter @Inject constructor(
                 .observeOn(mainThreadScheduler)
                 .subscribe(
                     {
-                        categoryList.value = it
+                        setCategoryListValue(it)
                         view.showProgress(false)
                         if (it.isEmpty()) {
                             view.showError(R.string.no_categories_found)
                         }
                     },
-                    Timber::e
+                    { t: Throwable? ->
+                        view.showProgress(false)
+                        view.showError(R.string.no_categories_found)
+                        Timber.e(t)
+                    }
                 )
         )
     }
@@ -236,8 +240,7 @@ class CategoriesPresenter @Inject constructor(
      * [onCategoryItemClicked] for each category and adding the category to [categoryList]
      */
     private fun selectNewCategories(toSelect: List<CategoryItem>) {
-        toSelect.filterNot { it.thumbnail == "hidden" }
-            .forEach{
+        toSelect.forEach{
                 it.isSelected = true
                 repository.onCategoryClicked(it, media)
             }
@@ -245,10 +248,9 @@ class CategoriesPresenter @Inject constructor(
         // Add the new selections to the list of category items so that the selections appear
         // immediately (i.e. without any search term queries)
         categoryList.value?.toMutableList()
-            ?.filterNot { it.thumbnail == "hidden" }
             ?.let { toSelect + it }
             ?.distinctBy(CategoryItem::name)
-            ?.let { categoryList.value = it }
+            ?.let { setCategoryListValue(it) }
     }
 
     /**
@@ -258,6 +260,20 @@ class CategoriesPresenter @Inject constructor(
      */
     override fun getCategories(): LiveData<List<CategoryItem>> {
         return categoryList
+    }
+
+    /**
+     * needed for tests
+     */
+    fun setCategoryList(categoryList: MutableLiveData<List<CategoryItem>>) {
+        this.categoryList = categoryList
+    }
+
+    /**
+     * needed for tests
+     */
+    fun setCategoryListValue(categoryItems: List<CategoryItem>) {
+        categoryList.postValue(categoryItems)
     }
 
     override fun selectCategories() {
