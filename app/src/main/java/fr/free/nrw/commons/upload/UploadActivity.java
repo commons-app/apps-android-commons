@@ -3,6 +3,8 @@ package fr.free.nrw.commons.upload;
 import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
 import static fr.free.nrw.commons.utils.PermissionUtils.PERMISSIONS_STORAGE;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.SELECTED_NEARBY_PLACE;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.SELECTED_NEARBY_PLACE_CATEGORY;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -483,9 +485,17 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             }
 
             uploadCategoriesFragment = new UploadCategoriesFragment();
+            if (place != null) {
+                Bundle categoryBundle = new Bundle();
+                categoryBundle.putString(SELECTED_NEARBY_PLACE_CATEGORY, place.getCategory());
+                uploadCategoriesFragment.setArguments(categoryBundle);
+            }
             uploadCategoriesFragment.setCallback(this);
 
             depictsFragment = new DepictsFragment();
+            Bundle placeBundle = new Bundle();
+            placeBundle.putParcelable(SELECTED_NEARBY_PLACE, place);
+            depictsFragment.setArguments(placeBundle);
             depictsFragment.setCallback(this);
 
             mediaLicenseFragment = new MediaLicenseFragment();

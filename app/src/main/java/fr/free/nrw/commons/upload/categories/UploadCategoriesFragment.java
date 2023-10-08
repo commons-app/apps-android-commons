@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.upload.categories;
 
+import static fr.free.nrw.commons.wikidata.WikidataConstants.SELECTED_NEARBY_PLACE_CATEGORY;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -81,6 +83,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
      * WikiText from the server
      */
     private String wikiText;
+    private String nearbyPlaceCategory;
 
     @Nullable
     @Override
@@ -97,9 +100,10 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         if (bundle != null) {
             media = bundle.getParcelable("Existing_Categories");
             wikiText = bundle.getString("WikiText");
+            nearbyPlaceCategory = bundle.getString(SELECTED_NEARBY_PLACE_CATEGORY);
         }
-
         init();
+        presenter.getCategories().observe(getViewLifecycleOwner(), this::setCategories);
     }
 
     private void init() {
@@ -160,7 +164,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         adapter = new UploadCategoryAdapter(categoryItem -> {
             presenter.onCategoryItemClicked(categoryItem);
             return Unit.INSTANCE;
-        });
+        }, nearbyPlaceCategory);
         rvCategories.setLayoutManager(new LinearLayoutManager(getContext()));
         rvCategories.setAdapter(adapter);
     }
@@ -189,10 +193,9 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
 
     @Override
     public void setCategories(List<CategoryItem> categories) {
-        if(categories==null) {
+        if (categories == null) {
             adapter.clear();
-        }
-        else{
+        } else {
             adapter.setItems(categories);
         }
     }
@@ -299,6 +302,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     @Override
     protected void onBecameVisible() {
         super.onBecameVisible();
+        presenter.selectCategories();
         final Editable text = etSearch.getText();
         if (text != null) {
             presenter.searchForCategories(text.toString());
