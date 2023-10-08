@@ -203,10 +203,12 @@ class EditActivity : AppCompatActivity() {
         val editedImageExif = rotatedImage?.path?.let { ExifInterface(it) }
         for (attr in sourceExifAttributeList) {
             Log.d("Tag is  ${attr.first}", "Value is ${attr.second}")
-            editedImageExif?.setAttribute(attr.first, attr.second)
+           val gg =  editedImageExif!!.setAttribute(attr.first, attr.second)
             Log.d("Tag is ${attr.first}", "Value is ${attr.second}")
 
         }
+
+        editedImageExif!!.saveAttributes()
         val resultIntent = Intent()
         resultIntent.putExtra("editedImageFilePath", rotatedImage?.toUri()?.path ?: "Error");
         setResult(RESULT_OK, resultIntent);
