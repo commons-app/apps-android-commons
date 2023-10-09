@@ -295,6 +295,7 @@
   <string name="copy_wikicode">複製 wikitext 到剪貼簿</string>
   <string name="wikicode_copied">Wikitext 已複製到剪貼簿</string>
   <string name="nearby_location_not_available">位置無效，應用程式在此地附近可能無法正常運作。</string>
+  <string name="upload_location_access_denied">位置存取遭拒。請手動設定您的位置才能使用此功能。</string>
   <string name="location_permission_rationale_nearby">需權限來顯示附近地點清單</string>
   <string name="nearby_directions">方向</string>
   <string name="nearby_wikidata">維基數據</string>
@@ -600,6 +601,7 @@
   <string name="recommend_high_accuracy_mode">為了獲得最佳結果，請選擇高精準度模式。</string>
   <string name="ask_to_turn_location_on">打開位置？</string>
   <string name="nearby_needs_location">附近功能需要啟用位置才能運作正常</string>
+  <string name="upload_map_location_access">您需要授予對目前位置的存取權限才能自動設定位置。</string>
   <string name="use_location_from_similar_image">您是否在同一地點拍攝了這兩張圖片？您要使用圖片右側的緯度/經度嗎？</string>
   <string name="load_more">載入更多</string>
   <string name="nearby_no_results">查無地點，請嘗試更改您的搜尋條件。</string>
@@ -728,6 +730,8 @@
   <string name="your_feedback">您的意見回饋</string>
   <string name="mark_as_not_for_upload">標記為不上傳</string>
   <string name="unmark_as_not_for_upload">取消標記為不上傳</string>
+  <string name="marking_as_not_for_upload">標記為不可上傳</string>
+  <string name="unmarking_as_not_for_upload">取消標記為不可上傳</string>
   <string name="show_already_actioned_pictures">顯示已操作的圖片</string>
   <string name="hiding_already_actioned_pictures">隱藏已操作的圖片</string>
   <string name="no_more_images_found">找不到更多圖片</string>

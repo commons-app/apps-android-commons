@@ -294,6 +294,7 @@
   <string name="copy_wikicode">Kopieer de wikitekst naar het klembord</string>
   <string name="wikicode_copied">De wikitekst is gekopieerd naar het klembord</string>
   <string name="nearby_location_not_available">In de buurt werkt mogelijk niet naar behoren. Locatie niet beschikbaar.</string>
+  <string name="upload_location_access_denied">Locatietoegang geweigerd. Stel uw locatie handmatig in om deze functie te gebruiken.</string>
   <string name="location_permission_rationale_nearby">Toestemming vereist om een lijst van nabije plaatsen weer te geven</string>
   <string name="nearby_directions">VERWIJZINGEN</string>
   <string name="nearby_wikidata">Wikidata</string>
@@ -599,6 +600,7 @@
   <string name="recommend_high_accuracy_mode">Kies voor de beste resultaten de modus van hoge nauwkeurigheid.</string>
   <string name="ask_to_turn_location_on">Locatie inschakelen?</string>
   <string name="nearby_needs_location">In de buurt heeft locatie nodig om correct te werken</string>
+  <string name="upload_map_location_access">U moet toegang geven tot uw huidige locatie om de locatie automatisch in te stellen.</string>
   <string name="use_location_from_similar_image">Heeft u deze twee foto\'s op dezelfde plek gemaakt? Wilt u de breedtegraad/lengtegraad van de afbeelding rechts gebruiken?</string>
   <string name="load_more">Laad meer</string>
   <string name="nearby_no_results">Geen plaatsen gevonden, probeer uw zoekcriteria te wijzigen.</string>
@@ -727,6 +729,8 @@
   <string name="your_feedback">Uw feedback</string>
   <string name="mark_as_not_for_upload">Markeren als niet voor uploaden</string>
   <string name="unmark_as_not_for_upload">Markeren als niet voor uploaden</string>
+  <string name="marking_as_not_for_upload">Markeren als niet voor uploaden</string>
+  <string name="unmarking_as_not_for_upload">Niet meer markeren als niet voor uploaden</string>
   <string name="show_already_actioned_pictures">Reeds behandelde afbeeldingen tonen</string>
   <string name="hiding_already_actioned_pictures">Reeds behandelde afbeeldingen verbergen</string>
   <string name="no_more_images_found">Geen afbeeldingen meer gevonden</string>
