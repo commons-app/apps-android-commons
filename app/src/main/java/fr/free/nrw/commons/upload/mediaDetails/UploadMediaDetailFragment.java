@@ -476,9 +476,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @Override
     public void showEditActivity(UploadItem uploadItem) {
-        Log.e("Upload Item", uploadItem.getContentUri().toString());
-        Log.e("Upload Item", uploadItem.getMediaUri().toString());
-
         editableUploadItem = uploadItem;
         Intent intent = new Intent(getContext(), EditActivity.class);
         intent.putExtra("image", uploadableFile.getFilePath().toString());

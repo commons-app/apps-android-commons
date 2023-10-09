@@ -27,9 +27,9 @@ import java.io.File
 
 
 class EditActivity : AppCompatActivity() {
-    var imageUri = ""
-    lateinit var vm: EditViewModel
-    val sourceExifAttributeList = mutableListOf<Pair<String, String?>>()
+    private var imageUri = ""
+    private lateinit var vm: EditViewModel
+    private val sourceExifAttributeList = mutableListOf<Pair<String, String?>>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
@@ -80,6 +80,13 @@ class EditActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Initializes the ImageView and associated UI elements.
+     *
+     * This function sets up the ImageView for displaying an image, adjusts its view bounds,
+     * and scales the initial image to fit within the ImageView. It also sets click listeners
+     * for the "Rotate" and "Save" buttons.
+     */
     private fun init() {
         iv.adjustViewBounds = true
         iv.scaleType = ImageView.ScaleType.MATRIX
@@ -105,6 +112,15 @@ class EditActivity : AppCompatActivity() {
 
     var imageRotation = 0
 
+    /**
+     * Animates the height, rotation, and scale of an ImageView to provide a smooth
+     * transition effect when rotating an image by 90 degrees.
+     *
+     * This function calculates the new height, rotation, and scale for the ImageView
+     * based on the current image rotation angle and animates the changes using a
+     * ValueAnimator. It also disables a rotate button during the animation to prevent
+     * further rotation actions.
+     */
     private fun animateImageHeight() {
         val drawableWidth: Float = iv.getDrawable().getIntrinsicWidth().toFloat()
         val drawableHeight: Float = iv.getDrawable().getIntrinsicHeight().toFloat()
@@ -190,6 +206,16 @@ class EditActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Rotates and edits the current image, copies EXIF data, and returns the edited image path.
+     *
+     * This function retrieves the path of the current image specified by `imageUri`,
+     * rotates it based on the `imageRotation` angle using the `rotateImage` method
+     * from the `vm`, and updates the EXIF attributes of the
+     * rotated image based on the `sourceExifAttributeList`. It then copies the EXIF data
+     * using the `copyExifData` method, creates an Intent to return the edited image's file path
+     * as a result, and finishes the current activity.
+     */
     fun getRotatedImage() {
 
         val filePath = imageUri.toUri().path
@@ -201,19 +227,32 @@ class EditActivity : AppCompatActivity() {
             Toast.makeText(this, "Failed to rotate to image", Toast.LENGTH_LONG).show()
         }
         val editedImageExif = rotatedImage?.path?.let { ExifInterface(it) }
-        for (attr in sourceExifAttributeList) {
-            Log.d("Tag is  ${attr.first}", "Value is ${attr.second}")
-           val gg =  editedImageExif!!.setAttribute(attr.first, attr.second)
-            Log.d("Tag is ${attr.first}", "Value is ${attr.second}")
-
-        }
-
-        editedImageExif!!.saveAttributes()
+        copyExifData(editedImageExif)
         val resultIntent = Intent()
         resultIntent.putExtra("editedImageFilePath", rotatedImage?.toUri()?.path ?: "Error");
         setResult(RESULT_OK, resultIntent);
         finish();
 
+    }
+
+    /**
+     * Copies EXIF data from sourceExifAttributeList to the provided ExifInterface object.
+     *
+     * This function iterates over the `sourceExifAttributeList` and sets the EXIF attributes
+     * on the provided `editedImageExif` object.
+     *
+     * @param editedImageExif The ExifInterface object for the edited image.
+     */
+    private fun copyExifData(editedImageExif: ExifInterface?) {
+
+        for (attr in sourceExifAttributeList) {
+            Log.d("Tag is  ${attr.first}", "Value is ${attr.second}")
+            val gg = editedImageExif!!.setAttribute(attr.first, attr.second)
+            Log.d("Tag is ${attr.first}", "Value is ${attr.second}")
+
+        }
+
+        editedImageExif?.saveAttributes()
     }
 
 }
