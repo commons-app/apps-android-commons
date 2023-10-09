@@ -247,7 +247,7 @@ class EditActivity : AppCompatActivity() {
 
         for (attr in sourceExifAttributeList) {
             Log.d("Tag is  ${attr.first}", "Value is ${attr.second}")
-            val gg = editedImageExif!!.setAttribute(attr.first, attr.second)
+            editedImageExif!!.setAttribute(attr.first, attr.second)
             Log.d("Tag is ${attr.first}", "Value is ${attr.second}")
 
         }
