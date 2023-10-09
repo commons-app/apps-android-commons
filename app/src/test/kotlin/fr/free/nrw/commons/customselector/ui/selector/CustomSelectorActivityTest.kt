@@ -73,9 +73,10 @@ class CustomSelectorActivityTest {
     @Test
     @Throws(Exception::class)
     fun testChangeTitle() {
-        val func = activity.javaClass.getDeclaredMethod("changeTitle", String::class.java)
+        activity.onFolderClick(1, "test", 0)
+        val func = activity.javaClass.getDeclaredMethod("changeTitle", String::class.java, Int::class.java)
         func.isAccessible = true
-        func.invoke(activity, "test")
+        func.invoke(activity, "test", 0)
     }
 
     /**
@@ -141,6 +142,7 @@ class CustomSelectorActivityTest {
     @Test
     @Throws(Exception::class)
     fun testOnSelectedImagesChanged() {
+        activity.onFolderClick(1, "test", 0)
         activity.onSelectedImagesChanged(ArrayList(), 0)
     }
 
@@ -151,6 +153,7 @@ class CustomSelectorActivityTest {
     @Throws(Exception::class)
     fun testOnDone() {
         activity.onDone()
+        activity.onFolderClick(1, "test", 0)
         activity.onSelectedImagesChanged(
             ArrayList(arrayListOf(Image(1, "test", Uri.parse("test"), "test", 1))),
             1
@@ -164,6 +167,7 @@ class CustomSelectorActivityTest {
     @Test
     @Throws(Exception::class)
     fun testOnClickNotForUpload() {
+        activity.onFolderClick(1, "test", 0)
         val method: Method = CustomSelectorActivity::class.java.getDeclaredMethod(
             "onClickNotForUpload"
         )
