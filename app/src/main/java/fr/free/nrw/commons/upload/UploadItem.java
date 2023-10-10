@@ -160,6 +160,14 @@ public class UploadItem {
     public String getCountryCode() {
         return countryCode;
     }
+
+    /**
+     * Sets both the contentUri and mediaUri to the specified Uri.
+     * This method allows you to assign the same Uri to both the contentUri and mediaUri
+     * properties.
+     *
+     * @param uri The Uri to be set as both the contentUri and mediaUri.
+     */
     public void setContentUri(Uri uri) {
         contentUri = uri;
         mediaUri = uri;

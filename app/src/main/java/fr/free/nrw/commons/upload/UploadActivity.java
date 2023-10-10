@@ -450,6 +450,16 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                         presenter.deletePictureAtIndex(index);
                     }
 
+                    /**
+                     * Changes the thumbnail of an UploadableFile at the specified index.
+                     * This method updates the list of uploadableFiles by replacing the UploadableFile
+                     * at the given index with a new UploadableFile created from the provided file path.
+                     * After updating the list, it notifies the RecyclerView's adapter to refresh its data,
+                     * ensuring that the thumbnail change is reflected in the UI.
+                     *
+                     * @param index The index of the UploadableFile to be updated.
+                     * @param filepath The file path of the new thumbnail image.
+                     */
                     @Override
                     public void changeThumbnail(int index, String filepath) {
                         uploadableFiles.remove(index);

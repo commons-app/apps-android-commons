@@ -8,7 +8,22 @@ import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
 
+/**
+ * Implementation of the TransformImage interface for image rotation operations.
+ *
+ * This class provides an implementation for the TransformImage interface, right now it exposes a
+ * function for rotating images by a specified degree using the LLJTran library. Right now it reads
+ * the input image file, performs the rotation, and saves the rotated image to a new file.
+ */
 class TransformImageImpl() : TransformImage {
+
+    /**
+     * Rotates the specified image file by the given degree.
+     *
+     * @param imageFile The File representing the image to be rotated.
+     * @param degree The degree by which to rotate the image.
+     * @return The rotated image File, or null if the rotation operation fails.
+     */
     override fun rotateImage(imageFile: File, degree : Int): File? {
 
         Timber.tag("Trying to rotate image").d("Starting")

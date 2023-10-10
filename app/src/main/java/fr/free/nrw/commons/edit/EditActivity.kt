@@ -25,7 +25,14 @@ import kotlinx.android.synthetic.main.activity_edit.rotate_btn
 import timber.log.Timber
 import java.io.File
 
-
+/**
+ * An activity class for editing and rotating images using LLJTran with EXIF attribute preservation.
+ *
+ * This activity allows loads an image, allows users to rotate it by 90-degree increments, and
+ * save the edited image while preserving its EXIF attributes. The class includes methods
+ * for initializing the UI, animating image rotations, copying EXIF data, and handling
+ * the image-saving process.
+ */
 class EditActivity : AppCompatActivity() {
     private var imageUri = ""
     private lateinit var vm: EditViewModel
