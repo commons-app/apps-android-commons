@@ -294,6 +294,23 @@ public class UploadRepository {
     }
 
     /**
+     * Gets the category for each unique {@link Place} associated with an {@link UploadItem}
+     * from {@link #getUploads()}
+     *
+     * @return a single that provides the categories
+     */
+    public Single<List<CategoryItem>> getPlaceCategories() {
+        final Set<String> qids = new HashSet<>();
+        for (final UploadItem item : getUploads()) {
+            final Place place = item.getPlace();
+            if (place != null) {
+                qids.add(place.getCategory());
+            }
+        }
+        return Single.fromObservable(categoriesModel.getCategoriesByName(new ArrayList<>(qids)));
+    }
+
+    /**
      * Takes depict IDs as a parameter, converts into a slash separated String and Gets DepictItem
      * from the server
      *

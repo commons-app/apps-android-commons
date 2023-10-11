@@ -151,7 +151,7 @@ class ImageAdapter(
 
             val isSelected = selectedIndex != -1
             if (isSelected) {
-                holder.itemSelected(selectedImages.size)
+                holder.itemSelected()
             } else {
                 holder.itemUnselected()
             }
@@ -407,7 +407,6 @@ class ImageAdapter(
      */
     class ImageViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.image_thumbnail)
-        private val selectedNumber: TextView = itemView.findViewById(R.id.selected_count)
         private val uploadedGroup: Group = itemView.findViewById(R.id.uploaded_group)
         private val notForUploadGroup: Group = itemView.findViewById(R.id.not_for_upload_group)
         private val selectedGroup: Group = itemView.findViewById(R.id.selected_group)
@@ -415,9 +414,8 @@ class ImageAdapter(
         /**
          * Item selected view.
          */
-        fun itemSelected(index: Int) {
+        fun itemSelected() {
             selectedGroup.visibility = View.VISIBLE
-            selectedNumber.text = index.toString()
         }
 
         /**

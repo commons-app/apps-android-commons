@@ -145,9 +145,34 @@ class UploadCategoriesFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testOnViewCreated() {
+    fun testInitMethod() {
+        val method: Method = UploadCategoriesFragment::class.java.getDeclaredMethod(
+            "init"
+        )
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.onViewCreated(view, null)
+        method.isAccessible = true
+        method.invoke(fragment)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Test init when media is non null`() {
+        Whitebox.setInternalState(fragment, "media", media)
+        val method: Method = UploadCategoriesFragment::class.java.getDeclaredMethod(
+            "init"
+        )
+        method.isAccessible = true
+        method.invoke(fragment)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testFragmentOnBecameVisible() {
+        val method: Method = UploadCategoriesFragment::class.java.getDeclaredMethod(
+            "onBecameVisible"
+        )
+        method.isAccessible = true
+        method.invoke(fragment)
     }
 
     @Test

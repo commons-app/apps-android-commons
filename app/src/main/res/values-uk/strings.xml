@@ -455,7 +455,7 @@
   <string name="in_app_camera_location_permission_rationale">Камера в застосунку потребує дозволу на доступ до місцезнаходження, щоб приєднувати його до ваших зображень, якщо місцезнаходження недоступне в EXIF. Дозвольте програмці отримати доступ до вашого місцезнаходження та повторіть спробу.\n\nПримітка: у завантаженому файлі може не бути місцезнаходження, якщо програма не може отримати місцезнаходження з пристрою протягом короткого проміжку часу.</string>
   <string name="in_app_camera_location_permission_denied">Застосунок не записував місцезнаходження разом із кадрами через відсутність дозволу на місцезнаходження</string>
   <string name="in_app_camera_location_unavailable">Програмка не буде записувати місцезнаходження разом із кадрами, оскільки GPS вимкнено</string>
-  <string name="location_loss_warning" fuzzy="true">Переконайтеся, що цей новий засіб вибору Android не видаляє геоданы з ваших зображень.</string>
+  <string name="location_loss_warning">Якщо вимкнути, то може бути викликаний новий вибір фотографій. Що може призвести до втрати інформації про місцезнаходження.\n\nТоркніться «Докладніше», щоб дізнатись більше.</string>
   <string name="nearby_campaign_dismiss_message">Ви більше не бачитимете кампаній. Однак Ви можете увімкнути це сповіщення повторно в своїх налаштуваннях, якщо забажаєте.</string>
   <string name="this_function_needs_network_connection">Ця функція вимагає доступу до інтернету. Будь ласка, перевірте своє з\'єднання.</string>
   <string name="error_processing_image">Сталася помилка при обробці зображення. Будь ласка, спробуйте ще раз!</string>
@@ -673,13 +673,13 @@
   <string name="menu_view_item_page">Переглянути сторінку елемента</string>
   <string name="app_ui_language">Мова інтерфейсу</string>
   <string name="remove">Вилучає опис і підпис</string>
-  <string name="read_help_link">Читати більше</string>
+  <string name="read_help_link">Докладніше</string>
   <string name="media_detail_in_all_languages">Усіма мовами</string>
   <string name="choose_a_location">Вибрати розташування</string>
   <string name="pan_and_zoom_to_adjust">Панорамуйте і збільшуйте, щоб підлаштувати</string>
   <string name="select_location_location_picker">Вибрати розташування</string>
   <string name="show_in_map_app">Показати в додатку на мапі</string>
-  <string name="modify_location">Редагувати підпис</string>
+  <string name="modify_location">Редагувати розташування</string>
   <string name="location_picker_image_view">Вигляд вибору розташування як зображення</string>
   <string name="location_picker_image_view_shadow">Вигляд вибору розташування як тіні зображення</string>
   <string name="image_location">Підпис зображення</string>

@@ -36,6 +36,7 @@
 * Willy1018
 * Wxyveronica
 * XiaoGuoQuQ233
+* Xyb
 * Yfdyh000
 * Zhang8569
 * ZhaoGang
@@ -55,7 +56,7 @@
   <string name="commons_github">共享资源Github源代码</string>
   <string name="commons_logo">共享资源标志</string>
   <string name="commons_website">共享资源网站</string>
-  <string name="exit_location_picker">退出位置拾取器</string>
+  <string name="exit_location_picker">退出位置选择器</string>
   <string name="submit">提交</string>
   <string name="add_another_description">添加其他说明</string>
   <string name="add_new_contribution">新增贡献</string>
@@ -71,7 +72,7 @@
   <string name="nearby_filter_toggle">向上切换</string>
   <string name="nearby_filter_search">搜索视图</string>
   <string name="nearby_filter_state">地点状态</string>
-  <string name="appwidget_img">每日图片</string>
+  <string name="appwidget_img">今日图片</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d个文件正在上传</item>
     <item quantity="other">%1$d个文件正在上传</item>
@@ -109,6 +110,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">设置</string>
   <string name="intent_share_upload_label">上传到共享资源</string>
+  <string name="upload_in_progress">上传中</string>
   <string name="username">用户名</string>
   <string name="password">密码</string>
   <string name="login_credential">登录您的共享资源测试版账号</string>
@@ -122,6 +124,7 @@
   <string name="login_success">登录成功！</string>
   <string name="login_failed">登录失败！</string>
   <string name="upload_failed">找不到文件。请尝试其他文件。</string>
+  <string name="unrestricted_battery_mode">关闭电池优化？</string>
   <string name="authentication_failed">身份验证失败，请重新登录</string>
   <string name="uploading_started">上传开始！</string>
   <string name="uploading_queued">上传排队中（已启用连接受限模式）</string>
@@ -236,6 +239,7 @@
   <string name="read_storage_permission_rationale">需要权限：读取外部存储。应用不能在没有它的情况下访问您的图册。</string>
   <string name="write_storage_permission_rationale">需要权限：写入外部存储。应用不能在没有它的情况下访问您的相机/图册。</string>
   <string name="location_permission_title">请求位置权限</string>
+  <string name="in_app_camera_location_permission_title">记录应用内拍摄的位置</string>
   <string name="ok">确定</string>
   <string name="warning">警告</string>
   <string name="duplicate_file_name">发现重复的文件名</string>
@@ -461,6 +465,8 @@
   <string name="ends_on">结束于：</string>
   <string name="display_campaigns">显示活动</string>
   <string name="display_campaigns_explanation">显示正在进行的活动</string>
+  <string name="option_allow">允许</string>
+  <string name="option_dismiss">拒绝</string>
   <string name="location_loss_warning">将此关闭可能会触发新的 Android 照片选择器。这可能会有丢失位置信息的风险。\n\n点击“阅读更多”以获取更多信息。</string>
   <string name="nearby_campaign_dismiss_message">你不会再看到这个活动。如果需要可以在设置里重新启用此通知。</string>
   <string name="this_function_needs_network_connection">这个功能需要网络连接，请检查你的网络设置。</string>
@@ -737,6 +743,8 @@
   <string name="your_feedback">您的反馈</string>
   <string name="mark_as_not_for_upload">标记为不上传</string>
   <string name="unmark_as_not_for_upload">取消标记为不上传</string>
+  <string name="marking_as_not_for_upload">标记为不可上传</string>
+  <string name="unmarking_as_not_for_upload">取消标记为不可上传</string>
   <string name="show_already_actioned_pictures">显示已操作过的图片</string>
   <string name="hiding_already_actioned_pictures">隐藏已操作过的图片</string>
   <string name="no_more_images_found">未找到更多图像</string>

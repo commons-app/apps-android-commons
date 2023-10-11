@@ -369,6 +369,8 @@
   <string name="ends_on">ߘߌ߫ ߓߊ߲߫:</string>
   <string name="display_campaigns">ߦߌ߬ߘߊ߬ߟߌ ߓߙߊߡߊߖߊ߲ߓߊ߲</string>
   <string name="display_campaigns_explanation">ߓߙߊߡߊߖߊ߲ߓߊ߲ ߡߍ߲ ߠߎ߬ ߦߴߌ ߘߐ߫߸ ߏ߬ ߟߎ߫ ߦߌ߬ߘߊ߬</string>
+  <string name="option_allow">ߊ߬ ߟߊߘߌ߬ߢߍ߬</string>
+  <string name="option_dismiss">ߓߙߐߕߐ߫</string>
   <string name="error_processing_image">ߝߎ߬ߕߎ߲߬ߕߌ ߘߏ߫ ߓߘߊ߫ ߓߌ߬ߟߵߊ߬ ߘߐ߫ ߞߵߌ ߕߏ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߊߦߍ߬ߟߍ ߞߊ߲߬߸ ߊ߬ ߡߊߝߍߣߍ߲߫ ߌߞߐ߫ ߖߊ߰ߣߌ߲߬߹</string>
   <string name="getting_edit_token">ߖߐߟߐ߲ߞߐ ߘߏ߫ ߟߊߛߐ߬ߘߐ߲߬ ߡߊ߬ߦߟߍ߬ߡߊ߲߬ߠߌ߲߬ ߞߊ߲ߡߊ߬</string>
   <string name="check_category_adding_template">ߞߙߊߞߏ ߟߊߘߏ߲߬ߠߌ߲ ߦߌߟߡߊ ߝߛߍ߬ߝߛߍ߬ ߞߊ߲ߡߊ߬.</string>

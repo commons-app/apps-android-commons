@@ -101,11 +101,10 @@ class DepictsPresenter @Inject constructor(
                         it.commonsCategories, true, it.id)
                 }
             },
-                repository.searchAllEntities(querystring),
-                { it1, it2 ->
-                    it1 + it2
-                }
-            )
+                repository.searchAllEntities(querystring)
+            ) { it1, it2 ->
+                it1 + it2
+            }
                 .subscribeOn(ioScheduler)
                 .map { repository.selectedDepictions + it + recentDepictedItemList + controller.loadFavoritesItems() }
                 .map { it.filterNot { item -> WikidataDisambiguationItems.isDisambiguationItem(item.instanceOfs) } }

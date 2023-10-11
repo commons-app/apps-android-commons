@@ -28,6 +28,7 @@ import fr.free.nrw.commons.media.ZoomableActivity
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
+import kotlinx.android.synthetic.main.activity_login.view.title
 import kotlinx.coroutines.*
 import java.io.File
 import javax.inject.Inject
@@ -142,7 +143,7 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
                 data!!
                     .getParcelableArrayListExtra(CustomSelectorConstants.NEW_SELECTED_IMAGES)!!
             val shouldRefresh = data.getBooleanExtra(SHOULD_REFRESH, false)
-            imageFragment!!.passSelectedImages(selectedImages, shouldRefresh)
+            imageFragment?.passSelectedImages(selectedImages, shouldRefresh)
         }
     }
 
@@ -280,6 +281,7 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
             val bottomLayout: ConstraintLayout = findViewById(R.id.bottom_layout)
             bottomLayout.visibility = View.GONE
         }
+        changeTitle(bucketName, 0)
     }
 
     /**
@@ -292,10 +294,17 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
     /**
      * Change the title of the toolbar.
      */
-    private fun changeTitle(title: String) {
-        val titleText = findViewById<TextView>(R.id.title)
-        if (titleText != null) {
-            titleText.text = title
+    private fun changeTitle(title: String, selectedImageCount:Int) {
+        if (title.isNotEmpty()){
+            val titleText = findViewById<TextView>(R.id.title)
+            var titleWithAppendedImageCount = title
+            if (selectedImageCount > 0) {
+                titleWithAppendedImageCount += " (${resources.getQuantityString(R.plurals.custom_picker_images_selected_title_appendix, 
+                    selectedImageCount, selectedImageCount)})"
+            }
+            if (titleText != null) {
+                titleText.text = titleWithAppendedImageCount
+            }
         }
     }
 
@@ -316,7 +325,7 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
             .addToBackStack(null)
             .commit()
 
-        changeTitle(folderName)
+        changeTitle(folderName, 0)
 
         bucketId = folderId
         bucketName = folderName
@@ -331,6 +340,7 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
         selectedNotForUploadImages: Int
     ) {
         viewModel.selectedImages.value = selectedImages
+        changeTitle(bucketName, selectedImages.size)
 
         if (selectedNotForUploadImages > 0) {
             bottomSheetBinding.upload.isEnabled = false
@@ -418,7 +428,7 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
         val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (fragment != null && fragment is FolderFragment) {
             isImageFragmentOpen = false
-            changeTitle(getString(R.string.custom_selector_title))
+            changeTitle(getString(R.string.custom_selector_title), 0)
         }
     }
 

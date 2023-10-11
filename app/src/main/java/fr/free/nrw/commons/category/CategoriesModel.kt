@@ -136,7 +136,11 @@ class CategoriesModel @Inject constructor(
         return Observable.fromIterable(categoryNames)
             .map { categoryName ->
                 buildCategories(categoryName)
-            }.toList().toObservable()
+            }
+            .filter { categoryItem ->
+                categoryItem.name != "Hidden"
+            }
+            .toList().toObservable()
     }
 
     /**

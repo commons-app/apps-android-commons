@@ -518,6 +518,7 @@
   <string name="error_feedback">প্রতিক্রিয়া পাঠানোর সময় ত্রুটি ঘটেছে</string>
   <string name="enter_description">আপনার প্রতিক্রিয়া কী?</string>
   <string name="your_feedback">আপনার প্রতিক্রিয়া</string>
+  <string name="marking_as_not_for_upload">আপলোডের জন্য নয় হিসেবে চিহ্নিত করা হচ্ছে</string>
   <string name="menu_view_report">প্রতিবেদন করুন</string>
   <string name="report_violation">লঙ্ঘনের প্রতিবেদন করুন</string>
   <string name="report_user">এই ব্যবহারকারীকে প্রতিবেদন করুন</string>

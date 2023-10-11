@@ -421,11 +421,11 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     @Override
     public void deleteUpload(final Contribution contribution) {
         DialogUtil.showAlertDialog(getActivity(),
-            String.format(Locale.getDefault().getDisplayLanguage(),
+            String.format(Locale.getDefault(),
                 getString(R.string.cancelling_upload)),
-            String.format(Locale.getDefault().getDisplayLanguage(),
+            String.format(Locale.getDefault(),
                 getString(R.string.cancel_upload_dialog)),
-            "YES", "NO",
+            String.format(Locale.getDefault(), getString(R.string.yes)), String.format(Locale.getDefault(), getString(R.string.no)),
             () -> {
                 ViewUtil.showShortToast(getContext(), R.string.cancelling_upload);
                 contributionsListPresenter.deleteUpload(contribution);
