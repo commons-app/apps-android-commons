@@ -729,4 +729,8 @@
   <string name="full_screen_mode_features_info">Поминувајте бргу и долго со простот за да ги извршите следниве дејства: \n- Лево/десно: Претходна/следна\n- Нагоре: Избирање\n- Надолу: Означување дека не е за подигање.</string>
   <string name="set_up_avatar_toast_string">За да го поставите вашиот аватар во табелата на предводници, допрете на „Задај како аватар“ во менито со три точки на било која слика.</string>
   <string name="similar_coordinate_description_auto_set">Наведените координати не се прецизни, но лицето што ја подигнало сликава смета дека се доволно блиску.</string>
+  <plurals name="custom_picker_images_selected_title_appendix">
+    <item quantity="one">Избрана е %d слика</item>
+    <item quantity="other">Избрани се %d слики</item>
+  </plurals>
 </resources>
