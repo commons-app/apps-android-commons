@@ -430,6 +430,9 @@ Upload your first media by tapping on the add button.</string>
   <string name="no_depictions_selected">No Depictions Selected</string>
   <string name="no_depictions_selected_warning_desc">Images with depictions are more easily found and more likely to be used. Are you sure you want to continue without selecting depictions?</string>
 
+  <string name="no_location_selected">Removing Location</string>
+  <string name="no_location_selected_warning_desc">Location makes pictures more useful and findable. Do you really wish to remove location from this picture?</string>
+
   <string name="back_button_warning">Cancel Upload</string>
   <string name="back_button_warning_desc">Using the back button will cancel this upload and you will lose your progress</string>
   <string name="back_button_continue">Continue Upload</string>
@@ -698,6 +701,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="select_location_location_picker">Select location</string>
   <string name="show_in_map_app">Show in map app</string>
   <string name="modify_location">Edit location</string>
+  <string name="remove_location">Remove location</string>
   <string name="location_picker_image_view">The image view of the location picker</string>
   <string name="location_picker_image_view_shadow">
     The shadow of the image view of the location picker</string>
