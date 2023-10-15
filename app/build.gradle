@@ -87,7 +87,7 @@ dependencies {
 
     // Unit testing
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.robolectric:robolectric:4.6.1'
+    testImplementation 'org.robolectric:robolectric:4.10.3'
     testImplementation 'androidx.test:core:1.4.0'
     testImplementation "com.squareup.okhttp3:mockwebserver:$OKHTTP_VERSION"
     testImplementation "com.jraska.livedata:testing-ktx:1.1.2"
