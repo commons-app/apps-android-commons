@@ -75,15 +75,7 @@ class EditActivity : AppCompatActivity() {
             sourceExifAttributeList.add(Pair(tag.toString(), attribute))
         }
 
-
-
-
-
-
-
-
         init()
-
 
     }
 
@@ -113,7 +105,6 @@ class EditActivity : AppCompatActivity() {
         }
         btn_save.setOnClickListener {
             getRotatedImage()
-
         }
     }
 
@@ -156,17 +147,13 @@ class EditActivity : AppCompatActivity() {
             throw UnsupportedOperationException("rotation can 0, 90, 180 or 270. \${rotation} is unsupported")
         }
 
-
         val animator = ValueAnimator.ofFloat(0f, 1f).setDuration(1000L)
-
-
 
         animator.interpolator = AccelerateDecelerateInterpolator()
 
         animator.addListener(object : AnimatorListener {
             override fun onAnimationStart(animation: Animator) {
                 rotate_btn.setEnabled(false)
-
             }
 
             override fun onAnimationEnd(animation: Animator) {
@@ -256,7 +243,6 @@ class EditActivity : AppCompatActivity() {
             Log.d("Tag is  ${attr.first}", "Value is ${attr.second}")
             editedImageExif!!.setAttribute(attr.first, attr.second)
             Log.d("Tag is ${attr.first}", "Value is ${attr.second}")
-
         }
 
         editedImageExif?.saveAttributes()
