@@ -31,7 +31,7 @@ class LanguagesAdapter constructor(
          * Represents the default index for the language list. By default, this index corresponds to the
          * English language. This serves as a fallback when the user's system language is not present in
          * the language_list.xml. Though this default can be changed by the user, it does not affect other
-         * functionalities of the application. Fixs bug issue 5338
+         * functionalities of the application. Fixes bug issue 5338
          */
         const val DEFAULT_INDEX = 0
     }
