@@ -101,11 +101,18 @@ class LanguagesAdapter constructor(
      * This function checks the user's system language and finds its index within the application's
      * list of supported languages. If the system language is not supported, or any error occurs,
      * it falls back to the default language index, typically representing English.
-     * Fix bug issue 5338
+     *
      *
      * @param context The context used to get the user's system locale.
      * @return The index of the user's default language in the supported language list,
      *         or the default index if the language is not found.
+     * Note: This function was implemented to address a bug where unsupported system languages
+     * resulted in an incorrect language selection. Directly returning the result of `indexOf`
+     * without checking its validity could result in returning an index of -1, leading to ArrayIndex
+     * OutOfBoundsException.
+     * [See bug  issue 5338]
+     * It's essential to ensure that the returned index is valid or fall back to a default index.
+     * Future contributors are advised not to simplify this function without addressing this concern.
      */
     fun getIndexOfUserDefaultLocale(context: Context): Int {
 
