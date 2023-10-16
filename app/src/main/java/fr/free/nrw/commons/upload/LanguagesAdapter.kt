@@ -25,9 +25,7 @@ class LanguagesAdapter constructor(
     context: Context,
     private val selectedLanguages: HashMap<*, String>
 ) : ArrayAdapter<String?>(context, R.layout.row_item_languages_spinner) {
-    companion object {
-        const val DEFAULT_INDEX = 0
-    }
+
 
     private var languageNamesList: List<String>
     private var languageCodesList: List<String>
@@ -89,11 +87,8 @@ class LanguagesAdapter constructor(
     }
 
     fun getIndexOfUserDefaultLocale(context: Context): Int {
-
-        val userLanguageCode = context.locale?.language ?: return DEFAULT_INDEX
-        return language.codes.indexOf(userLanguageCode).takeIf { it >= 0 } ?: DEFAULT_INDEX
+        return language.codes.indexOf(context.locale!!.language)
     }
-
     fun getIndexOfLanguageCode(languageCode: String): Int {
         return languageCodesList.indexOf(languageCode)
     }
