@@ -180,6 +180,17 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             btnPrevious.setAlpha(1.0f);
         }
 
+        // If the image EXIF data contains the location, show the map icon with a red question mark
+        if (inAppPictureLocation != null) {
+            Drawable mapTick = getResources().getDrawable(R.drawable.ic_map_tick_white_24dp);
+            ibMap.setImageDrawable(mapTick);
+        } else {
+            // Otherwise, show the map icon with a green tick
+            Drawable mapQuestionMark =
+                getResources().getDrawable(R.drawable.ic_map_question_mark_white_24dp);
+            ibMap.setImageDrawable(mapQuestionMark);
+        }
+
         //If this is the last media, we have nothing to copy, lets not show the button
         if (callback.getIndexInViewFlipper(this) == callback.getTotalNumberOfSteps()-4) {
             btnCopyToSubsequentMedia.setVisibility(View.GONE);
@@ -188,7 +199,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         }
 
         attachImageViewScaleChangeListener();
-
     }
 
     /**
