@@ -25,7 +25,14 @@ class LanguagesAdapter constructor(
     context: Context,
     private val selectedLanguages: HashMap<*, String>
 ) : ArrayAdapter<String?>(context, R.layout.row_item_languages_spinner) {
+
     companion object {
+        /**
+         * Represents the default index for the language list. By default, this index corresponds to the
+         * English language. This serves as a fallback when the user's system language is not present in
+         * the language_list.xml. Though this default can be changed by the user, it does not affect other
+         * functionalities of the application. Fix bug issue 5338
+         */
         const val DEFAULT_INDEX = 0
     }
 
@@ -88,6 +95,18 @@ class LanguagesAdapter constructor(
         return languageNamesList[position]
     }
 
+    /**
+     * Retrieves the index of the user's default locale from the list of available languages.
+     *
+     * This function checks the user's system language and finds its index within the application's
+     * list of supported languages. If the system language is not supported, or any error occurs,
+     * it falls back to the default language index, typically representing English.
+     * Fix bug issue 5338
+     *
+     * @param context The context used to get the user's system locale.
+     * @return The index of the user's default language in the supported language list,
+     *         or the default index if the language is not found.
+     */
     fun getIndexOfUserDefaultLocale(context: Context): Int {
 
         val userLanguageCode = context.locale?.language ?: return DEFAULT_INDEX
@@ -95,6 +114,7 @@ class LanguagesAdapter constructor(
     }
 
     fun getIndexOfLanguageCode(languageCode: String): Int {
+
         return languageCodesList.indexOf(languageCode)
     }
 
