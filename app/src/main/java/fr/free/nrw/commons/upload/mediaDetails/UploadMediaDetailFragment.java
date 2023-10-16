@@ -550,6 +550,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         editableUploadItem.getGpsCoords().setDecimalCoords(latitude+"|"+longitude);
         editableUploadItem.getGpsCoords().setImageCoordsExists(true);
         editableUploadItem.getGpsCoords().setZoomLevel(zoom);
+
+        // Replace the map icon using the one with a green tick
+        Drawable mapTick = getResources().getDrawable(R.drawable.ic_map_tick_white_24dp);
+        ibMap.setImageDrawable(mapTick);
+
         Toast.makeText(getContext(), "Location Updated", Toast.LENGTH_LONG).show();
 
     }
