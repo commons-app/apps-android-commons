@@ -235,6 +235,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     /**
      * show dialog with info
+     *
      * @param titleStringID
      * @param messageStringId
      */
@@ -305,7 +306,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     /**
-     * Sets variables to Show popup if any nearby location needing pictures matches uploadable picture's GPS location
+     * Sets variables to Show popup if any nearby location needing pictures matches uploadable
+     * picture's GPS location
+     *
      * @param uploadItem
      * @param place
      */
@@ -330,6 +333,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     /**
      * Shows nearby place found popup
+     *
      * @param place
      */
     @SuppressLint("StringFormatInvalid")
@@ -483,6 +487,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     /**
      * Start Location picker activity. Show the location first then user can modify it by clicking
      * modify location button.
+     *
      * @param uploadItem current upload item
      */
     private void goToLocationPickerActivity(final UploadItem uploadItem) {
@@ -530,9 +535,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     /**
      * Get the coordinates and update the existing coordinates.
+     *
      * @param requestCode code of request
-     * @param resultCode code of result
-     * @param data intent
+     * @param resultCode  code of result
+     * @param data        intent
      */
     @Override
     public void onActivityResult(final int requestCode, final int resultCode,
@@ -564,15 +570,17 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         if (requestCode == REQUEST_CODE_FOR_EDIT_ACTIVITY && resultCode == RESULT_OK) {
             String result = data.getStringExtra("editedImageFilePath");
 
-            if (!Objects.equals(result, "Error")) {
-                try {
-                    photoViewBackgroundImage.setImageURI(Uri.fromFile(new File(result)));
-                    editableUploadItem.setContentUri(Uri.fromFile(new File(result)));
-                    callback.changeThumbnail(callback.getIndexInViewFlipper(this),
-                        result);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            if (Objects.equals(result, "Error")) {
+                Timber.e("Error in rotating image");
+                return;
+            }
+            try {
+                photoViewBackgroundImage.setImageURI(Uri.fromFile(new File(result)));
+                editableUploadItem.setContentUri(Uri.fromFile(new File(result)));
+                callback.changeThumbnail(callback.getIndexInViewFlipper(this),
+                    result);
+            } catch (Exception e) {
+                Timber.e(e);
             }
 
 
@@ -583,7 +591,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     /**
      * Update the old coordinates with new one
-     * @param latitude new latitude
+     *
+     * @param latitude  new latitude
      * @param longitude new longitude
      */
     public void editLocation(final String latitude, final String longitude, final double zoom) {
@@ -602,23 +611,24 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         uploadMediaDetailAdapter.setItems(uploadMediaDetails);
         showNearbyFound =
             showNearbyFound && (
-            uploadMediaDetails == null || uploadMediaDetails.isEmpty() || listContainsEmptyDetails(
-                uploadMediaDetails));
+                uploadMediaDetails == null || uploadMediaDetails.isEmpty()
+                    || listContainsEmptyDetails(
+                    uploadMediaDetails));
     }
 
     /**
-     * if the media details that come in here are empty
-     * (empty caption AND empty description, with caption being the decider here)
-     * this method allows usage of nearby place caption and description if any
-     * else it takes the media details saved in prior for this picture
-     * @param uploadMediaDetails saved media details,
-     *                           ex: in case when "copy to subsequent media" button is clicked
-     *                           for a previous image
+     * if the media details that come in here are empty (empty caption AND empty description, with
+     * caption being the decider here) this method allows usage of nearby place caption and
+     * description if any else it takes the media details saved in prior for this picture
+     *
+     * @param uploadMediaDetails saved media details, ex: in case when "copy to subsequent media"
+     *                           button is clicked for a previous image
      * @return boolean whether the details are empty or not
      */
     private boolean listContainsEmptyDetails(List<UploadMediaDetail> uploadMediaDetails) {
-        for (UploadMediaDetail uploadDetail: uploadMediaDetails) {
-            if (!TextUtils.isEmpty(uploadDetail.getCaptionText()) && !TextUtils.isEmpty(uploadDetail.getDescriptionText())) {
+        for (UploadMediaDetail uploadDetail : uploadMediaDetails) {
+            if (!TextUtils.isEmpty(uploadDetail.getCaptionText()) && !TextUtils.isEmpty(
+                uploadDetail.getDescriptionText())) {
                 return false;
             }
         }
@@ -659,6 +669,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     /**
      * show hide media detail based on
+     *
      * @param shouldExpand
      */
     private void expandCollapseLlMediaDetail(boolean shouldExpand) {
