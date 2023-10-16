@@ -89,6 +89,7 @@ class LanguagesAdapter constructor(
     }
 
     fun getIndexOfUserDefaultLocale(context: Context): Int {
+
         val userLanguageCode = context.locale?.language ?: return DEFAULT_INDEX
         return language.codes.indexOf(userLanguageCode).takeIf { it >= 0 } ?: DEFAULT_INDEX
     }
