@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.graphics.drawable.Drawable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
@@ -47,6 +48,7 @@ import fr.free.nrw.commons.upload.UploadMediaDetailAdapter;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.R.drawable.*;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -187,7 +189,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         } else {
             // Otherwise, show the map icon with a green tick
             Drawable mapQuestionMark =
-                getResources().getDrawable(R.drawable.ic_map_question_mark_white_24dp);
+                getResources().getDrawable(R.drawable.ic_map_question_white_24dp);
             ibMap.setImageDrawable(mapQuestionMark);
         }
 
