@@ -10,9 +10,12 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
@@ -21,6 +24,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -38,6 +42,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.filepicker.Constants.RequestCodes;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
@@ -59,7 +64,6 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import java.security.Permission;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -150,13 +154,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         compositeDisposable = new CompositeDisposable();
         init();
         nearbyPopupAnswers = new HashMap<>();
-        PermissionUtils.checkPermissionsAndPerformAction(this,
-            this::receiveSharedItems,
-            R.string.storage_permission_title,
-            R.string.write_storage_permission_rationale_for_image_share,
-            PERMISSIONS_STORAGE);
-        //getting the current dpi of the device and if it is less than 320dp i.e. overlapping
-        //threshold, thumbnails automatically minimizes
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         float dpi = (metrics.widthPixels)/(metrics.density);
         if (dpi<=321) {
@@ -167,6 +164,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         }
         locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
         locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
+        checkStoragePermissions();
     }
 
     private void init() {
@@ -232,7 +230,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             askUserToLogIn();
         }
         checkBlockStatus();
-        checkStoragePermissions();
     }
 
     /**
@@ -255,14 +252,10 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
     private void checkStoragePermissions() {
         final boolean hasAllPermissions = PermissionUtils.hasPermission(this, PERMISSIONS_STORAGE);
-        if (!hasAllPermissions) {
-            PermissionUtils.checkPermissionsAndPerformAction(this,
-                () -> {
-                    //TODO handle this
-                },
-                R.string.storage_permission_title,
-                R.string.write_storage_permission_rationale_for_image_share,
-                PERMISSIONS_STORAGE);
+        if (hasAllPermissions) {
+            receiveSharedItems();
+        } else if (VERSION.SDK_INT >= VERSION_CODES.M) {
+            requestPermissions(PERMISSIONS_STORAGE, RequestCodes.STORAGE);
         }
     }
 
@@ -350,7 +343,44 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         startActivity(loginIntent);
     }
 
+    @Override
+    public void onRequestPermissionsResult(final int requestCode,
+        @NonNull final String[] permissions,
+        @NonNull final int[] grantResults) {
+        boolean areAllGranted = false;
+        if (requestCode == RequestCodes.STORAGE) {
+            if (VERSION.SDK_INT >= VERSION_CODES.M) {
+                for (int i = 0; i < grantResults.length; i++) {
+                    String permission = permissions[i];
+                    areAllGranted = grantResults[i] == PackageManager.PERMISSION_GRANTED;
+                    if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+                        boolean showRationale = shouldShowRequestPermissionRationale(permission);
+                        if (!showRationale) {
+                            DialogUtil.showAlertDialog(this,
+                                getString(R.string.storage_permissions_denied),
+                                getString(R.string.unable_to_share_upload_item),
+                                getString(android.R.string.ok),
+                                this::finish,
+                                false);
+                        } else {
+                            DialogUtil.showAlertDialog(this,
+                                getString(R.string.storage_permission_title),
+                                getString(
+                                    R.string.write_storage_permission_rationale_for_image_share),
+                                getString(android.R.string.ok),
+                                this::checkStoragePermissions,
+                                false);
+                        }
+                    }
+                }
 
+                if (areAllGranted) {
+                    receiveSharedItems();
+                }
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
