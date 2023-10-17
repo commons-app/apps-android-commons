@@ -10,6 +10,7 @@ import android.os.Parcelable;
 import androidx.annotation.Nullable;
 import androidx.exifinterface.media.ExifInterface;
 
+import fr.free.nrw.commons.location.LatLng;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -116,6 +117,27 @@ public class UploadableFile implements Parcelable {
         } catch (Exception e) {
             return null;////Could not fetch last_modified
         }
+    }
+
+    /**
+     * Indicate whether the EXIF contains the location (both latitude and longitude).
+     *
+     * @return whether the location exists for the file's EXIF
+     */
+    public boolean hasLocation() {
+        try {
+            ExifInterface exif = new ExifInterface(file.getAbsolutePath());
+            final String latitude = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
+            final String longitude = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
+            return latitude != null && longitude != null;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     /**

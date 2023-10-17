@@ -183,7 +183,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         }
 
         // If the image EXIF data contains the location, show the map icon with a red question mark
-        if (inAppPictureLocation != null) {
+        if (inAppPictureLocation != null || uploadableFile.hasLocation()) {
             Drawable mapTick = getResources().getDrawable(R.drawable.ic_map_tick_white_24dp);
             ibMap.setImageDrawable(mapTick);
         } else {
