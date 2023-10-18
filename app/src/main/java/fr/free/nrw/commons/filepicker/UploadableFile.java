@@ -10,17 +10,11 @@ import android.os.Parcelable;
 import androidx.annotation.Nullable;
 import androidx.exifinterface.media.ExifInterface;
 
-import com.mapbox.mapboxsdk.style.expressions.Expression.NumberFormatOption;
-import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.upload.FileUtils;
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import fr.free.nrw.commons.upload.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import timber.log.Timber;
 
 public class UploadableFile implements Parcelable {
     public static final Creator<UploadableFile> CREATOR = new Creator<UploadableFile>() {
@@ -78,8 +72,6 @@ public class UploadableFile implements Parcelable {
         return 0;
     }
 
-    private static final Logger logger = LoggerFactory.getLogger(UploadableFile.class);
-
     /**
      * First try to get the file creation date from EXIF else fall back to CP
      * @param context
@@ -134,12 +126,9 @@ public class UploadableFile implements Parcelable {
             final String latitude = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
             final String longitude = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
             return latitude != null && longitude != null;
-        } catch (IOException e) {
-            logger.error("hasLocation IOException: ", e);
-        } catch (NumberFormatException e) {
-            logger.error("hasLocation NumberFormatException: ", e);
-        } catch (IndexOutOfBoundsException e) {
-            logger.error("hasLocation IndexOutOfBoundsException: ", e);
+        } catch (IOException | NumberFormatException | IndexOutOfBoundsException e) {
+            Timber.tag("UploadableFile");
+            Timber.d(e);
         }
         return false;
     }
@@ -169,12 +158,9 @@ public class UploadableFile implements Parcelable {
                     }
                 }
             }
-        } catch (IOException e) {
-            logger.error("hasLocation IOException: ", e);
-        } catch (NumberFormatException e) {
-            logger.error("hasLocation NumberFormatException: ", e);
-        } catch (IndexOutOfBoundsException e) {
-            logger.error("hasLocation IndexOutOfBoundsException: ", e);
+        } catch (IOException | NumberFormatException | IndexOutOfBoundsException e) {
+            Timber.tag("UploadableFile");
+            Timber.d(e);
         }
         return null;
     }
