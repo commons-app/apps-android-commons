@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.graphics.drawable.Drawable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
@@ -47,6 +48,7 @@ import fr.free.nrw.commons.upload.UploadMediaDetailAdapter;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.R.drawable.*;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -180,6 +182,18 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             btnPrevious.setAlpha(1.0f);
         }
 
+        // If the image EXIF data contains the location, show the map icon with a green tick
+        if (inAppPictureLocation != null ||
+                (uploadableFile != null && uploadableFile.hasLocation())) {
+            Drawable mapTick = getResources().getDrawable(R.drawable.ic_map_tick_white_24dp);
+            ibMap.setImageDrawable(mapTick);
+        } else {
+            // Otherwise, show the map icon with a red question mark
+            Drawable mapQuestionMark =
+                getResources().getDrawable(R.drawable.ic_map_question_white_24dp);
+            ibMap.setImageDrawable(mapQuestionMark);
+        }
+
         //If this is the last media, we have nothing to copy, lets not show the button
         if (callback.getIndexInViewFlipper(this) == callback.getTotalNumberOfSteps()-4) {
             btnCopyToSubsequentMedia.setVisibility(View.GONE);
@@ -188,7 +202,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         }
 
         attachImageViewScaleChangeListener();
-
     }
 
     /**
@@ -540,6 +553,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         editableUploadItem.getGpsCoords().setDecimalCoords(latitude+"|"+longitude);
         editableUploadItem.getGpsCoords().setImageCoordsExists(true);
         editableUploadItem.getGpsCoords().setZoomLevel(zoom);
+
+        // Replace the map icon using the one with a green tick
+        Drawable mapTick = getResources().getDrawable(R.drawable.ic_map_tick_white_24dp);
+        ibMap.setImageDrawable(mapTick);
+
         Toast.makeText(getContext(), "Location Updated", Toast.LENGTH_LONG).show();
 
     }
