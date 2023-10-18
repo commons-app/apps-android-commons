@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.exifinterface.media.ExifInterface;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -44,6 +45,7 @@ import fr.free.nrw.commons.upload.UploadMediaDetailAdapter;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -540,7 +542,27 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     public void removeLocation(){
         editableUploadItem.getGpsCoords().setDecimalCoords(null);
-        Toast.makeText(getContext(), "Location Removed", Toast.LENGTH_LONG).show();
+        try {
+            ExifInterface sourceExif = new ExifInterface(uploadableFile.getFilePath());
+            String[] exifTags = {
+                ExifInterface.TAG_GPS_LATITUDE,
+                ExifInterface.TAG_GPS_LATITUDE_REF,
+                ExifInterface.TAG_GPS_LONGITUDE,
+                ExifInterface.TAG_GPS_LONGITUDE_REF,
+            };
+
+            for (String tag : exifTags) {
+                sourceExif.setAttribute(tag, null);
+            }
+            Toast.makeText(getContext(), "Location Removed", Toast.LENGTH_LONG).show();
+
+        } catch (IOException e) {
+           Timber.d(e);
+            Toast.makeText(getContext(), "Location Could Not be Removed", Toast.LENGTH_LONG).show();
+
+
+        }
+
     }
 
     @Override
