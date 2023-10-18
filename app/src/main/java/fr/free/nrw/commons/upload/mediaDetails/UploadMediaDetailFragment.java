@@ -596,6 +596,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             for (String tag : exifTags) {
                 sourceExif.setAttribute(tag, null);
             }
+            sourceExif.saveAttributes();
             Toast.makeText(getContext(), "Location Removed", Toast.LENGTH_LONG).show();
 
         } catch (IOException e) {
