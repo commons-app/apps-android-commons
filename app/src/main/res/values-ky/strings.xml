@@ -25,15 +25,15 @@
     <item quantity="one">1 жүктөө башталды</item>
     <item quantity="other">%1$d жүктөө башталды</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">1 жүктөө</item>
-    <item quantity="other">%1$d жүктөө</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d жүктөө</item>
+    <item quantity="other">%d жүктөө</item>
   </plurals>
   <string name="share_license_summary" fuzzy="true">Бул сүрөт %1$s лицензияланат</string>
   <string name="preference_category_privacy">Купуялык</string>
   <string name="app_name">Викиказына</string>
   <string name="menu_settings">Ырастоолор</string>
-  <string name="username">Колдонуучунун аты</string>
+  <string name="username">Колдонуучунун ысымы</string>
   <string name="password">Сырсөз</string>
   <string name="login">Кирүү</string>
   <string name="signup">Катталуу</string>
@@ -61,7 +61,7 @@
   <string name="provider_contributions">Жүктөөлөрүм</string>
   <string name="menu_share">Бөлүшүү</string>
   <string name="share_title_hint" fuzzy="true">Аталышы</string>
-  <string name="share_description_hint">Баяндамасы</string>
+  <string name="share_description_hint">Сыпаттама</string>
   <string name="login_failed_network">Кирүүгө болбой жатат - тармакта үзгүлтүк бар</string>
   <string name="login_failed_throttled" fuzzy="true">Өтө көп натыйжасыз иш аракет. Суранабыз, бир нече мүнөттөн кийин кайталаңыз</string>
   <string name="login_failed_blocked">Кечириңиз, бул кодонуучу Уикиказынада блокко алынган.</string>
@@ -72,15 +72,16 @@
   <string name="menu_upload_single">Жүктөө</string>
   <string name="categories_search_text_hint">Түрмөктөрдү издөө</string>
   <string name="menu_save_categories">Сактоо</string>
+  <string name="refresh_button">Жаңылоо</string>
   <string name="categories_not_found">%1$s түрмөктөрү табылган жок</string>
   <string name="categories_skip_explanation" fuzzy="true">Уикиказынада Сиздин сүрөттөрдү жеңил табуу үчүн түрмөктөрдү кошуңуз.\n\nТүрмөктөрдү жазууну баштаңыз.\nБул кадамды аттап өтүү үчүн, бул билдирүүнү (же кийинкини) басыңыз.</string>
-  <string name="categories_activity_title">Түрмөктөр</string>
+  <string name="categories_activity_title">Категориялар</string>
   <string name="title_activity_settings">Ырастоолор</string>
   <string name="title_activity_signup">Катталуу</string>
   <string name="menu_about">Тиркеме жөнүндө</string>
   <string name="about_license" fuzzy="true">баштапкы коду ачык тиркемелер, &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; лицензиясынын негизинде чыгарылган</string>
   <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt; шилтемесине баштапкы код. &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; шилтемесиндеги катачылык.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Конфиденциалдуулук_саясаты\"&gt;Конфиденциалдуулук саясаты&lt;/a&gt;</string>
+  <string name="about_privacy_policy">Купуялык саясаты</string>
   <string name="title_activity_about">Тиркеме жөнүндө</string>
   <string name="menu_feedback">Шарттуу жооп жөнөтүү (Email)</string>
   <string name="provider_categories">Жакында колдонулган түрмөктөр</string>
@@ -101,23 +102,33 @@
   <string name="welcome_copyright_subtext">Интернетте жарыяланган автордук укукка ээ сүрөттөрдөн, ошондой эле плакаттардан жана китептердин мукабасынан ж.б. четтеңиз.</string>
   <string name="welcome_final_text">Сизге бул түшүнүктүүбү?</string>
   <string name="welcome_final_button_text">Ооба !</string>
-  <string name="detail_panel_cats_label">Түрмөктөр</string>
+  <string name="detail_panel_cats_label">Категориялар</string>
   <string name="detail_panel_cats_loading">Жүктөлүүдө…</string>
   <string name="detail_panel_cats_none">Тандалган жок</string>
   <string name="detail_description_empty">Сыпаттама жок</string>
   <string name="menu_refresh">Жаңылоо</string>
+  <string name="ok">Макул</string>
   <string name="yes">Ооба</string>
   <string name="no">Жок</string>
   <string name="media_detail_title">Аталыш</string>
+  <string name="media_detail_description">Сыпаттама</string>
+  <string name="media_detail_author">Автор</string>
   <string name="cancel">Жокко чыгаруу</string>
   <string name="navigation_drawer_close">Жабуу</string>
   <string name="navigation_item_upload">Жүктөө</string>
+  <string name="navigation_item_about">Тууралуу</string>
+  <string name="navigation_item_notification">Кабарламалар</string>
   <string name="nearby_wikidata">Викимаалымат</string>
   <string name="nearby_wikipedia">Википедия</string>
   <string name="about_faq">КБС</string>
   <string name="about_translate">Которуу</string>
+  <string name="about_translate_title">Тилдер</string>
   <string name="about_translate_cancel">Жокко чыгаруу</string>
+  <string name="explore_tab_title_map">Карта</string>
   <string name="back_button_warning">Жүктөөнү жокко чыгаруу</string>
   <string name="back_button_warning_desc">Артка баскычын колдонуу менен бул жүктөө жокко чыгарылат жана сиз ийгиликти жоготосуз</string>
   <string name="back_button_continue">Жүктөөнү улантуу</string>
+  <string name="label">Аталыш</string>
+  <string name="description">Сыпаттама</string>
+  <string name="title_page_bookmarks_items">Элементтер</string>
 </resources>

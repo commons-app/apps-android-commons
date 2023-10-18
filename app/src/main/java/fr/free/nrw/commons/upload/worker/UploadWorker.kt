@@ -1,17 +1,20 @@
 package fr.free.nrw.commons.upload.worker
 
 import android.annotation.SuppressLint
+import android.app.Notification
 import android.app.PendingIntent
 import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.CoroutineWorker
 import androidx.work.Data
 import androidx.work.WorkerParameters
 import androidx.multidex.BuildConfig
+import androidx.work.ForegroundInfo
 import dagger.android.ContributesAndroidInjector
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.Media
@@ -40,6 +43,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import java.net.SocketTimeoutException
 import java.util.*
 import java.util.regex.Pattern
 import javax.inject.Inject
@@ -161,6 +165,8 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
 
     override suspend fun doWork(): Result {
         var countUpload = 0
+        // Start a foreground service
+        setForeground(createForegroundInfo())
         notificationManager = NotificationManagerCompat.from(appContext)
         val processingUploads = getNotificationBuilder(
             CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL
@@ -170,15 +176,15 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                 .blockingGet()
             //Showing initial notification for the number of uploads being processed
 
-            Timber.e("Queued Contributions: "+ queuedContributions.size)
+            Timber.e("Queued Contributions: " + queuedContributions.size)
 
             processingUploads.setContentTitle(appContext.getString(R.string.starting_uploads))
             processingUploads.setContentText(
                 appContext.resources.getQuantityString(
-                    R.plurals.starting_multiple_uploads,
-                    queuedContributions.size,
-                    queuedContributions.size
-                )
+                        R.plurals.starting_multiple_uploads,
+                        queuedContributions.size,
+                        queuedContributions.size
+                    )
             )
             notificationManager?.notify(
                 PROCESSING_UPLOADS_NOTIFICATION_TAG,
@@ -191,7 +197,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             so that the next one does not process these contribution again
              */
             queuedContributions.forEach {
-                it.state=Contribution.STATE_IN_PROGRESS
+                it.state = Contribution.STATE_IN_PROGRESS
                 contributionDao.saveSynchronous(it)
             }
 
@@ -223,10 +229,37 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                 PROCESSING_UPLOADS_NOTIFICATION_ID
             )
         }
-        //TODO make this smart, think of handling retries in the future
+        // Trigger WorkManager to process any new contributions that may have been added to the queue
+        val updatedContributionQueue = withContext(Dispatchers.IO) {
+            contributionDao.getContribution(statesToProcess).blockingGet()
+        }
+        if (updatedContributionQueue.isNotEmpty()) {
+            return Result.retry()
+        }
+
         return Result.success()
     }
 
+    /**
+     * Create new notification for foreground service
+     */
+    private fun createForegroundInfo(): ForegroundInfo {
+        return ForegroundInfo(
+            1,
+            createNotificationForForegroundService()
+        )
+    }
+
+    override suspend fun getForegroundInfo(): ForegroundInfo {
+        return createForegroundInfo()
+    }
+    private fun createNotificationForForegroundService(): Notification {
+        // TODO: Improve notification for foreground service
+        return getNotificationBuilder(
+            CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL)!!
+            .setContentTitle(appContext.getString(R.string.upload_in_progress))
+            .build()
+    }
     /**
      * Returns true is the limited connection mode is enabled
      */
@@ -540,7 +573,12 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
         val intent = Intent(appContext,toClass)
         return TaskStackBuilder.create(appContext).run {
              addNextIntentWithParentStack(intent)
-             getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                 getPendingIntent(0,
+                     PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+             } else {
+                 getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+             }
          };
     }
 

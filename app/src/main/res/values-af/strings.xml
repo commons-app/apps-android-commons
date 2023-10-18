@@ -3,6 +3,7 @@
 * Fwolff
 * Joris Darlington Quarshie
 * Naudefj
+* Whym
 -->
 <resources>
   <string name="commons_facebook">Commons Facebook bladsy</string>
@@ -257,7 +258,7 @@
   <string name="search_tab_title_categories">Kategorieë</string>
   <string name="explore_tab_title_featured">Gewilde</string>
   <string name="explore_tab_title_mobile">Opgelaai via selfoon</string>
-  <string name="successful_wikidata_edit">Beeld is bygevoeg tot% 1 $ s op Wikidata!</string>
+  <string name="successful_wikidata_edit">Beeld is bygevoeg tot %1$s op Wikidata!</string>
   <string name="wikidata_edit_failure">Kon nie die ooreenstemmende Wikidata-entiteit opdateer nie!</string>
   <string name="menu_set_wallpaper">Stel as agtergrond</string>
   <string name="wallpaper_set_successfully">Agtergrond suksesvol gestel!</string>
@@ -266,7 +267,7 @@
   <string name="question">Vraag</string>
   <string name="result">Gevolg</string>
   <string name="quiz_back_button">As u prente oplaai wat verwyder moet word, sal u rekening waarskynlik verbied word. Is u seker dat u die vasvra wil beëindig?</string>
-  <string name="quiz_alert_message">Meer as% 1 $ s van die prente wat u opgelaai het, is uitgevee. As u prente oplaai wat verwyder moet word, sal u rekening waarskynlik verbied word.\n\nWil u die tutoriaal weer sien en dan \'n vasvra neem om u te help om watter soort beelde u moet oplaai of nie moet oplaai nie?</string>
+  <string name="quiz_alert_message">Meer as %1$s van die prente wat u opgelaai het, is uitgevee. As u prente oplaai wat verwyder moet word, sal u rekening waarskynlik verbied word.\n\nWil u die tutoriaal weer sien en dan \'n vasvra neem om u te help om watter soort beelde u moet oplaai of nie moet oplaai nie?</string>
   <string name="selfie_answer">Selfies het nie veel ensiklopediese waarde nie. Moenie \'n foto van u self oplaai nie, tensy u reeds \'n Wikipedia-artikel oor u het.</string>
   <string name="taj_mahal_answer">In die meeste lande kan foto\'s van monumente en natuurskoon buite opgevoer word. Let daarop dat tydelike kunsinstallasies buite outeursregtelik beskerm word en nie goed is om op te laai nie.</string>
   <string name="screenshot_answer">Skermfoto\'s van webwerwe word as afgeleide werke beskou en is onderhewig aan enige outeursreg op die webwerf self. Dit kan gebruik word na toestemming van die outeur. Sonder sodanige toestemming word enige kuns wat u maak op grond van hul werk wettiglik beskou as \'n ongelisensieerde eksemplaar wat deur die oorspronklike outeur besit word.</string>

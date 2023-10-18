@@ -64,6 +64,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Поставки</string>
   <string name="intent_share_upload_label">Подигни на Ризницата</string>
+  <string name="upload_in_progress">Подигањето е во тек</string>
   <string name="username">Корисничко име</string>
   <string name="password">Лозинка</string>
   <string name="login_credential">Најавете се на бета-сметката</string>
@@ -77,6 +78,9 @@
   <string name="login_success">Најавата е успешна!</string>
   <string name="login_failed">Најавата не успеа!</string>
   <string name="upload_failed">Не ја пронајдов податотеката. Пробајте со друга.</string>
+  <string name="retry_limit_reached">Го надминавте дозволениот број на обиди! Откажете го подигањето или пробајте повторно</string>
+  <string name="unrestricted_battery_mode">Да ја исклучам оптимизацијата на батеријата?</string>
+  <string name="suggest_unrestricted_mode">Подигањето на повеќе од 3 слики работи посигурно ако е исклучена оптимизацијата на батеријата. Исклучете ја од нагодувањата во прилогот Ризница за непречено искуство. \n\nМожни чекори за исклучување:\n\nЧекор 1: Допрете на копчето „Нагодувања“ подолу.\n\nЧекор 2: Префрлете од „Неоптимизирано“ на „Сите прилози“.\n\nЧекор 3: Пребарајте го „Ризница“ или \"fr.free.nrw.commons\".\n\nЧекор 4: Допрете го и изберете „Не оптимизирај“.\n\nЧекор 5: Допрете на „Готово“.</string>
   <string name="authentication_failed">Заверката не успеа. Најавете се повторно.</string>
   <string name="uploading_started">Подигањето започна</string>
   <string name="uploading_queued">Подигањето е во редица (овозможен режимот на ограничена врска)</string>
@@ -191,6 +195,8 @@
   <string name="read_storage_permission_rationale">Потребна дозвола: Треба да се прочита од надворешен склад. Прилогот без ова нема пристап до вашата галерија.</string>
   <string name="write_storage_permission_rationale">Потребна дозвола: Треба да се запише на надворешен склад. Прилогот без ова нема пристап до вашата камера/галерија.</string>
   <string name="location_permission_title">Се бара дозвола за утврдување на местоположбата</string>
+  <string name="in_app_camera_location_permission_title">Заведувај местоположба за слики направени од прилогот</string>
+  <string name="in_app_camera_location_switch_pref_summary">Овозможете го ова за да се заведува местоположбата на сликите што ги правите од самиот прилог во случај камерата на уредот да не ја заведува</string>
   <string name="ok">ОК</string>
   <string name="warning">Предупредување</string>
   <string name="duplicate_file_name">Пронајдено дуплирано име на податоека</string>
@@ -269,6 +275,7 @@
   <string name="copy_wikicode">Прекопирај го викитекстот во меѓускладот</string>
   <string name="wikicode_copied">Викитекстот е прекопиран во меѓускладот</string>
   <string name="nearby_location_not_available">„Во близина“ може да не работи како што треба. Местоположбата е недостапна.</string>
+  <string name="upload_location_access_denied">Пристапот до местоположбата е одбиен. Задајте ја местоположбата рачно за да ја користите оваа функција.</string>
   <string name="location_permission_rationale_nearby">Се бара дозвола за приказ на список на околни места</string>
   <string name="nearby_directions">Насоки</string>
   <string name="nearby_wikidata">Википодатоци</string>
@@ -416,6 +423,13 @@
   <string name="ends_on">Завршува:</string>
   <string name="display_campaigns">Прикажи походи</string>
   <string name="display_campaigns_explanation">Погледајте ги тековните походи</string>
+  <string name="in_app_camera_location_access_explanation">Дозволете му на прилогот да презема местоположба во случај камерата да не го заведува овој податок. Камерите на некои уреди не заведуваат местоположба. Во такви случаи, овозможете му на прилогот да најде и запише местоположба за вашиот придонес да биде покорисен. Ова можете да го смените во секое време во Нагодувањата</string>
+  <string name="option_allow">Дозволи</string>
+  <string name="option_dismiss">Тргни</string>
+  <string name="in_app_camera_needs_location">Вклучете го пристапот до местоположбата во Нагодувања и обидете се пак. \n\nНапомена: Подигањето може да нема местоположба ако прилогот не може да ја добие од уредот во текот на краток интервал.</string>
+  <string name="in_app_camera_location_permission_rationale">Камерата во прилогот бара дозвола за местоположба која ќе ја става во сликите во случај истите да ги нема во EXIF. Дајте му дозвола на прилогот да пристапува до местоположбата и обидете се пак.\n\nНапомена: Подигањето може да нема местоположба ако прилогот не може да ја добие од уредот во текот на краток интервал.</string>
+  <string name="in_app_camera_location_permission_denied">Прилогот нема да заведува местоположба заедно со сликите направени од него поради немање на дозвола за тоа</string>
+  <string name="in_app_camera_location_unavailable">Прилогот нема да заведува местоположба заедно со сликите направени од него бидејќи ГПС е исклучен</string>
   <string name="open_document_photo_picker_title">Користи избирач на слики од документи</string>
   <string name="open_document_photo_picker_explanation">Новиот избирач на слики на Андроид ризикува да ги изгуби информациите за местоположба. Овозможете ги ако го користите.</string>
   <string name="location_loss_warning">Со исклучување на ова ќе го повикате избирачот на слики на Андроид. Ризикува загуба на информации за местоположба.\n\nДопрете на „Прочитајте повеќе“ за повеќе информации.</string>
@@ -567,6 +581,7 @@
   <string name="recommend_high_accuracy_mode">За да добиете најдобар исход, изберете го режимот на висока уточнетост.</string>
   <string name="ask_to_turn_location_on">Да ја вклучам местоположбата?</string>
   <string name="nearby_needs_location">„Во близина“ бара местоположба за да работи</string>
+  <string name="upload_map_location_access">Ќе треба да дозволите пристап до вашата моментална местоположба за таа да може да се зададе автоматски.</string>
   <string name="use_location_from_similar_image">Дали ги направивте ови две слики на истото место? Дали сакате да ја искористите географската ширина/должина од десната слика?</string>
   <string name="load_more">Вчитај уште</string>
   <string name="nearby_no_results">Не пронајдов места. Изменете ги критериумите во барањето.</string>
@@ -695,6 +710,8 @@
   <string name="your_feedback">Ваше мислење</string>
   <string name="mark_as_not_for_upload">Означи дека не е за подигање</string>
   <string name="unmark_as_not_for_upload">Отстрани ознака дека не е за подигање</string>
+  <string name="marking_as_not_for_upload">Означи дека не е за подигање</string>
+  <string name="unmarking_as_not_for_upload">Отстрани ознака дека не е за подигање</string>
   <string name="show_already_actioned_pictures">Прикажи веќе сработени слики</string>
   <string name="hiding_already_actioned_pictures">Скривање на веќе сработени слики</string>
   <string name="no_more_images_found">Не најдов повеќе слики</string>
@@ -712,4 +729,8 @@
   <string name="full_screen_mode_features_info">Поминувајте бргу и долго со простот за да ги извршите следниве дејства: \n- Лево/десно: Претходна/следна\n- Нагоре: Избирање\n- Надолу: Означување дека не е за подигање.</string>
   <string name="set_up_avatar_toast_string">За да го поставите вашиот аватар во табелата на предводници, допрете на „Задај како аватар“ во менито со три точки на било која слика.</string>
   <string name="similar_coordinate_description_auto_set">Наведените координати не се прецизни, но лицето што ја подигнало сликава смета дека се доволно блиску.</string>
+  <plurals name="custom_picker_images_selected_title_appendix">
+    <item quantity="one">Избрана е %d слика</item>
+    <item quantity="other">Избрани се %d слики</item>
+  </plurals>
 </resources>

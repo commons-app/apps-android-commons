@@ -69,7 +69,7 @@
     <item quantity="other">A receber conteúdo partilhado. O processamento das imagens pode demorar algum tempo, dependendo do tamanho das mesmas e do seu dispositivo</item>
   </plurals>
   <string name="navigation_item_explore">Explorar</string>
-  <string name="preference_category_appearance">Aparência</string>
+  <string name="preference_category_appearance">Aspeto</string>
   <string name="preference_category_general">Geral</string>
   <string name="preference_category_feedback">Comentários</string>
   <string name="preference_category_privacy">Privacidade</string>

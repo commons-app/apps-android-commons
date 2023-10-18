@@ -33,18 +33,14 @@
         android:background="@color/divider_grey"
         />
 
-      <TextView
-        android:id="@+id/selected_count"
+      <ImageView
+        android:id="@+id/selected_image"
         android:layout_width="@dimen/dimen_20"
         android:layout_height="@dimen/dimen_20"
         app:layout_constraintDimensionRatio="H,1:1"
-        android:textSize="11sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
+        android:src="@drawable/ic_done_black"
         android:layout_margin="@dimen/dimen_6"
         android:gravity="center|center_vertical"
-        style="@style/TextAppearance.AppCompat.Small"
-        android:text="12"
         android:background="@drawable/circle_shape"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -55,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="selected_overlay,selected_count"/>
+        app:constraint_referenced_ids="selected_overlay,selected_image"/>
 
 
       <View

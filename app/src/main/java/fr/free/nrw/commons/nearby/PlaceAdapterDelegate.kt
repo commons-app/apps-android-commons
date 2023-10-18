@@ -2,6 +2,7 @@ package fr.free.nrw.commons.nearby
 
 import android.view.View
 import android.view.View.*
+import androidx.activity.result.ActivityResultLauncher
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionManager
@@ -15,11 +16,12 @@ import fr.free.nrw.commons.databinding.ItemPlaceBinding
 fun placeAdapterDelegate(
     bookmarkLocationDao: BookmarkLocationsDao,
     onItemClick: ((Place) -> Unit)? = null,
-    onCameraClicked: (Place) -> Unit,
+    onCameraClicked: (Place, ActivityResultLauncher<Array<String>>) -> Unit,
     onGalleryClicked: (Place) -> Unit,
     onBookmarkClicked: (Place, Boolean) -> Unit,
     onOverflowIconClicked: (Place, View) -> Unit,
-    onDirectionsClicked: (Place) -> Unit
+    onDirectionsClicked: (Place) -> Unit,
+    inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>
 ) = adapterDelegateViewBinding<Place, Place, ItemPlaceBinding>({ layoutInflater, parent ->
     ItemPlaceBinding.inflate(layoutInflater, parent, false)
 }) {
@@ -36,7 +38,7 @@ fun placeAdapterDelegate(
                 onItemClick?.invoke(item)
             }
         }
-        nearbyButtonLayout.cameraButton.setOnClickListener { onCameraClicked(item) }
+        nearbyButtonLayout.cameraButton.setOnClickListener { onCameraClicked(item, inAppCameraLocationPermissionLauncher) }
         nearbyButtonLayout.galleryButton.setOnClickListener { onGalleryClicked(item) }
         bookmarkButtonImage.setOnClickListener {
             val isBookmarked = bookmarkLocationDao.updateBookmarkLocation(item)

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
 import fr.free.nrw.commons.R
@@ -26,13 +27,13 @@ class CommonPlaceClickActions @Inject constructor(
     private val contributionController: ContributionController
 ) {
 
-    fun onCameraClicked(): (Place) -> Unit = {
+    fun onCameraClicked(): (Place, ActivityResultLauncher<Array<String>>) -> Unit = { place, launcher ->
         if (applicationKvStore.getBoolean("login_skipped", false)) {
             showLoginDialog()
         } else {
-            Timber.d("Camera button tapped. Image title: ${it.getName()}Image desc: ${it.longDescription}")
-            storeSharedPrefs(it)
-            contributionController.initiateCameraPick(activity)
+            Timber.d("Camera button tapped. Image title: ${place.getName()}Image desc: ${place.longDescription}")
+            storeSharedPrefs(place)
+            contributionController.initiateCameraPick(activity, launcher)
         }
     }
 

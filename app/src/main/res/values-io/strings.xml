@@ -8,6 +8,7 @@
   <string name="commons_github">Fonto-kodexo di Commons che Github</string>
   <string name="commons_logo">Logotipo* di Commons</string>
   <string name="commons_website">ret-situo di Commons</string>
+  <string name="exit_location_picker">Ekirar la lokizo-selektero</string>
   <string name="submit">Sendar</string>
   <string name="add_another_description">Adjuntar nova deskripto</string>
   <string name="add_new_contribution">Adjuntar nova kontributado</string>
@@ -21,6 +22,7 @@
   <string name="nearby_row_image">Imajo</string>
   <string name="nearby_all">Omna</string>
   <string name="nearby_filter_search">Serchar vidado</string>
+  <string name="nearby_filter_state">Loko-stando</string>
   <string name="appwidget_img">Diala imajo</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d sendanta arkivo</item>
@@ -31,6 +33,10 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Komencar sendaji</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Karganta %d arkivo</item>
+    <item quantity="other">Karganta %d arkivi</item>
+  </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%d arkivo sendita</item>
     <item quantity="other">%d arkivi sendita</item>
@@ -55,6 +61,7 @@
   <string name="app_name">Commons</string>
   <string name="menu_settings">Parametri</string>
   <string name="intent_share_upload_label">Sendar a Commons</string>
+  <string name="upload_in_progress">Sendo progresanta</string>
   <string name="username">Nomo dil uzero</string>
   <string name="password">Pasovorto</string>
   <string name="login_credential">Enirar en la konto \'\'Commons Beta\'\'</string>

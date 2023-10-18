@@ -79,6 +79,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Impostazioni</string>
   <string name="intent_share_upload_label">Carica su Commons</string>
+  <string name="upload_in_progress">Caricamento in corso</string>
   <string name="username">Nome utente</string>
   <string name="password">Password</string>
   <string name="login_credential">Accedi alla tua utenza in Commons Beta</string>
@@ -92,6 +93,7 @@
   <string name="login_success">Accesso effettuato!</string>
   <string name="login_failed">Accesso non riuscito!</string>
   <string name="upload_failed">File non trovato. Prova con un altro file.</string>
+  <string name="unrestricted_battery_mode">Disattiva l\'ottimizzazione della batteria?</string>
   <string name="authentication_failed">Autenticazione non riuscita, si prega di riprovare</string>
   <string name="uploading_started">Caricamento iniziato!</string>
   <string name="uploading_queued">Caricamento in coda (attivata modalità di connessione limitata)</string>
@@ -430,6 +432,8 @@
   <string name="ends_on">Termina il:</string>
   <string name="display_campaigns">Visualizza campagne</string>
   <string name="display_campaigns_explanation">Vedi le campagne in corso</string>
+  <string name="option_allow">Consenti</string>
+  <string name="option_dismiss">Nascondi</string>
   <string name="nearby_campaign_dismiss_message">Non vedrai più le campagne. Tuttavia, puoi riattivare questa notifica in Impostazioni, se lo desideri.</string>
   <string name="this_function_needs_network_connection">Questa funzione richiede una connessione di rete, controlla le impostazioni di connessione.</string>
   <string name="error_processing_image">Si è verificato un errore durante l\'elaborazione dell\'immagine. Per favore riprova!</string>

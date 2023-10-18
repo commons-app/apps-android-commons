@@ -369,6 +369,8 @@
   <string name="ends_on">ߘߌ߫ ߓߊ߲߫:</string>
   <string name="display_campaigns">ߦߌ߬ߘߊ߬ߟߌ ߓߙߊߡߊߖߊ߲ߓߊ߲</string>
   <string name="display_campaigns_explanation">ߓߙߊߡߊߖߊ߲ߓߊ߲ ߡߍ߲ ߠߎ߬ ߦߴߌ ߘߐ߫߸ ߏ߬ ߟߎ߫ ߦߌ߬ߘߊ߬</string>
+  <string name="option_allow">ߊ߬ ߟߊߘߌ߬ߢߍ߬</string>
+  <string name="option_dismiss">ߓߙߐߕߐ߫</string>
   <string name="error_processing_image">ߝߎ߬ߕߎ߲߬ߕߌ ߘߏ߫ ߓߘߊ߫ ߓߌ߬ߟߵߊ߬ ߘߐ߫ ߞߵߌ ߕߏ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߊߦߍ߬ߟߍ ߞߊ߲߬߸ ߊ߬ ߡߊߝߍߣߍ߲߫ ߌߞߐ߫ ߖߊ߰ߣߌ߲߬߹</string>
   <string name="getting_edit_token">ߖߐߟߐ߲ߞߐ ߘߏ߫ ߟߊߛߐ߬ߘߐ߲߬ ߡߊ߬ߦߟߍ߬ߡߊ߲߬ߠߌ߲߬ ߞߊ߲ߡߊ߬</string>
   <string name="check_category_adding_template">ߞߙߊߞߏ ߟߊߘߏ߲߬ߠߌ߲ ߦߌߟߡߊ ߝߛߍ߬ߝߛߍ߬ ߞߊ߲ߡߊ߬.</string>
@@ -555,6 +557,9 @@
   <string name="custom_selector_empty_text">ߖߌ߬ߦߊ߬ߓߍ߫ ߕߴߦߋ߲߬</string>
   <string name="done">ߊ߬ ߞߍ߫</string>
   <string name="back">ߌ ߞߐߛߊ߬ߦߌ߬</string>
+  <string name="welcome_custom_picture_selector_text">ߌ ߣߌ߫ ߛߣߍ߫ ߘߎ߲߬ߘߎ߬ߡߊ߬ ߖߌߦߊߓߍ ߟߎ߬ ߛߎߥߊ߲ߘߌߟߊ߲ ߞߊ߲߬</string>
+  <string name="custom_selector_info_text1">ߛߎߥߊ߲ߘߌߟߊ߲ ߣߌ߲߬ ߦߴߌ ߟߊ߫ ߖߌ߬ߦߊ߬ߓߍ߬ ߟߊߦߟߍ߬ߣߍ߲ ߠߎ߬ ߟߋ߬ ߦߌ߬ߘߊ߬ ߟߴߌ ߟߊ߫ ߞߐߡߐ߲ߛ ߞߊ߲߬.</string>
+  <string name="custom_selector_info_text2">ߣߎߡߊ߲߫ ߝߍ߫ ߖߌߦߊߓߍ ߟߎ߬ ߞߏ߫ ߘߍ߫ ߘߋ߬߸ ߞߐߡߐ߲ߛ ߕߐ߰ߛߙߋ ߦߋ߫ ߞߌߣߌ߲ߝߍߕߊ ߡߍ߲ ߠߎ߬ ߟߊ߫ ߣߌ߲߬، ߏ߬ ߟߎ߬ ߦߴߊ߬ ߦߌ߬ߘߊ߬ ߟߊ߫ ߟߋ߬ ߞߴߌ ߓߘߊ߫ ߓߊ߲߫ ߏ߬ ߟߎ߬ ߟߊߦߟߍ߬ ߟߊ߫.\nߌ ߡߊ߰ ߏ߬ ߟߊ߫ ߞߵߊ߬ ߘߐߡߌ߬ߣߊ߬ ߖߌ߬ߦߊ߬ߓߍ ߡߊߝߟߍߞߏ ߘߐ߫ ߡߎߣߎ߲߬.</string>
   <string name="welcome_custom_selector_ok">ߡߊ߲߬ߕߊ߬ߣߌ߲߬ߡߊ߬ߞߏ</string>
   <string name="custom_selector_already_uploaded_image_text">ߖߌ߬ߦߊ߬ߓߍ ߣߌ߲߬ ߓߘߊ߫ ߓߊ߲߫ ߠߊߦߟߍ߬ ߟߊ߫ ߞߐߡߐ߲ߛ ߞߣߐ߫ ߞߘߐ߬ߡߊ߲߫</string>
   <string name="wlm_upload_info">ߖߌ߬ߦߊߓߍ ߣߌ߲߬ ߓߍߣߊ߬ ߟߊߕߘߍ߬ ߥߞߌ ߝߙߎߕߎ ߞߊ߬ߣߌ߲߬ߓߊ߮ ߂߀߂߁ ߜߊ߬ߛߊ ߘߐ߫</string>
@@ -575,6 +580,7 @@
   <string name="no_location_found_message">ߡߎ߲߬ ߟߐ߬ ߕߐ߫ ߦߋ߫ ߖߌ߬ߦߊ߬ߓߍ ߕߊ߬ ߦߙߐ ߝߙߊ߬ߟߌ ߟߊ߫ ߞߏ ߡߊ߬؟ \nߘߌ߲߬ߞߌߙߊ ߓߟߏߡߟߊ ߟߋ߬ ߦߋ߫ ߓߟߏߡߊߜߍ߲ߠߊ ߟߎ߬ ߘߍ߬ߡߍ߲߬ ߠߊ߫ ߞߵߌ ߟߊ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߎ߬ ߢߌߣߌ߲߫߸ ߡߍ߲ ߞߍ߫ ߕߐ߫ ߦߴߊ߬ ߞߍ߫ ߣߝߊ߬ߡߊ ߘߌ߫. \nߌ ߣߌ߫ ߗߋ߫߹</string>
   <string name="add_location">ߘߌ߲߬ߞߌߙߊ ߝߊ߬ߙߊ߫</string>
   <string name="explore_map_details">ߝߊߙߊ߲ߝߊ߯ߛߌ ߟߎ߬</string>
+  <string name="api_level">API ߞߊߓߋ</string>
   <string name="android_version">ߊ߲ߘߙߏߦߌߘ ߦߌߟߡߊ</string>
   <string name="device_manufacturer">ߞߍߟߊ߲ ߝߊ߲ߓߏ߲</string>
   <string name="device_model">ߞߍߟߊ߲ ߛߎ߯ߦߊ</string>

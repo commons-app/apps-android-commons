@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload.categories;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.category.CategoryItem;
@@ -80,6 +81,9 @@ public interface CategoriesContract {
          */
         void updateCategories(Media media, String wikiText);
 
+        LiveData<List<CategoryItem>> getCategories();
+
+        void selectCategories();
 
     }
 

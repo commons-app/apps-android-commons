@@ -8,6 +8,7 @@ import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 import android.Manifest;
+import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -22,7 +23,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -42,6 +42,9 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -76,7 +79,6 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
-import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.maps.UiSettings;
 import com.mapbox.pluginscalebar.ScaleBarOptions;
 import com.mapbox.pluginscalebar.ScaleBarPlugin;
@@ -126,6 +128,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -242,6 +245,56 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private PlaceAdapter adapter;
     private NearbyParentFragmentInstanceReadyCallback nearbyParentFragmentInstanceReadyCallback;
     private boolean isAdvancedQueryFragmentVisible = false;
+    private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
+        @Override
+        public void onActivityResult(Map<String, Boolean> result) {
+            boolean areAllGranted = true;
+            for (final boolean b : result.values()) {
+                areAllGranted = areAllGranted && b;
+            }
+
+            if (areAllGranted) {
+                controller.locationPermissionCallback.onLocationPermissionGranted();
+            } else {
+                if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
+                    controller.handleShowRationaleFlowCameraLocation(getActivity());
+                } else {
+                    controller.locationPermissionCallback.onLocationPermissionDenied(getActivity().getString(R.string.in_app_camera_location_permission_denied));
+                }
+            }
+        }
+    });
+
+    private ActivityResultLauncher<String[]> locationPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
+        @Override
+        public void onActivityResult(Map<String, Boolean> result) {
+            boolean areAllGranted = true;
+            for (final boolean b : result.values()) {
+                areAllGranted = areAllGranted && b;
+            }
+
+            if (areAllGranted) {
+                locationPermissionGranted();
+            } else {
+                if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
+                    DialogUtil.showAlertDialog(getActivity(), getActivity().getString(R.string.location_permission_title),
+                        getActivity().getString(R.string.location_permission_rationale_nearby),
+                        getActivity().getString(android.R.string.ok),
+                        getActivity().getString(android.R.string.cancel),
+                        () -> {
+                            if (!(locationManager.isNetworkProviderEnabled() || locationManager.isGPSProviderEnabled())) {
+                                showLocationOffDialog();
+                            }
+                        },
+                        () -> isPermissionDenied = true,
+                        null,
+                        false);
+                } else {
+                    isPermissionDenied = true;
+                }
+            }
+        }
+    });
 
     /**
      * Holds filtered markers that are to be shown
@@ -429,7 +482,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 updateMarker(isBookmarked, place, null);
                 return Unit.INSTANCE;
             },
-            commonPlaceClickActions
+            commonPlaceClickActions,
+            inAppCameraLocationPermissionLauncher
         );
         rvNearbyList.setAdapter(adapter);
     }
@@ -441,7 +495,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private void performMapReadyActions() {
         if (((MainActivity)getActivity()).activeFragment == ActiveFragment.NEARBY && isMapBoxReady) {
             if(!applicationKvStore.getBoolean("doNotAskForLocationPermission", false) ||
-                PermissionUtils.hasPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)){
+                PermissionUtils.hasPermission(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION})){
                 checkPermissionsAndPerformAction();
             }else{
                 isPermissionDenied = true;
@@ -1214,12 +1268,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void checkPermissionsAndPerformAction() {
         Timber.d("Checking permission and perfoming action");
-        PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                () -> locationPermissionGranted(),
-                () -> isPermissionDenied = true,
-                R.string.location_permission_title,
-                R.string.location_permission_rationale_nearby);
+        locationPermissionLauncher.launch(new String[]{permission.ACCESS_FINE_LOCATION});
     }
 
     /**
@@ -1815,7 +1864,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if (fabCamera.isShown()) {
                 Timber.d("Camera button tapped. Place: %s", selectedPlace.toString());
                 storeSharedPrefs(selectedPlace);
-                controller.initiateCameraPick(getActivity());
+                controller.initiateCameraPick(getActivity(), inAppCameraLocationPermissionLauncher);
             }
         });
 

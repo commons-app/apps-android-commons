@@ -7,6 +7,8 @@ public interface Constants {
      * Provides the request codes utilised by the FilePicker
      */
     interface RequestCodes {
+        int LOCATION = 1;
+        int STORAGE = 2;
         int FILE_PICKER_IMAGE_IDENTIFICATOR = 0b1101101100; //876
         int SOURCE_CHOOSER = 1 << 15;
 

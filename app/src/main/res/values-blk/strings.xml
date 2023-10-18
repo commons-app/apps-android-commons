@@ -2,9 +2,17 @@
 <!-- Authors:
 * Khun Kt
 * Ninjastrikers
+* ခွန်ဖန်ဒွဲ့
 * 咽頭べさ
 -->
 <resources>
+  <string name="commons_facebook">Commons(လိုꩻအာသုင်ꩻ) Facebook လိတ်မဲ့ငါ</string>
+  <string name="commons_github">Commons(လိုꩻအာသုင်ꩻ) Github ရွီးခိုႏကိုဒ်</string>
+  <string name="commons_logo">Commons(လိုꩻအာသုင်ꩻ) လိုင်ကို</string>
+  <string name="commons_website">Commons(လိုꩻအာသုင်ꩻ) ဝဲက်သုဲက်</string>
+  <string name="exit_location_picker">အဝ်ႏအုံထွောင်းထာꩻလွိုက်ကို ထန်ႏသွော့ꩻ</string>
+  <string name="submit">ဒင်ႏနယ်သွော့ꩻ</string>
+  <string name="nearby_all">ကားကအဝ်ႏ</string>
   <string name="appwidget_img">ဟန်ႏနီꩻ ဓာတ်ပုင်ႏတဲးဝါး</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">အဝ်ႏထူႏဒင်ႏဖုဲင် %1$d ဗာႏကျာꩻ</item>

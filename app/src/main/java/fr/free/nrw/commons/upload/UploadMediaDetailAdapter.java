@@ -88,6 +88,21 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                 .inflate(R.layout.row_item_description, parent, false));
     }
 
+    /**
+     * This is a workaround for a known bug by android here https://issuetracker.google.com/issues/37095917
+     * makes the edit text on second and subsequent fragments inside an adapter receptive to long click
+     * for copy/paste options
+     * @param holder the view holder
+     */
+    @Override
+    public void onViewAttachedToWindow(@NonNull final ViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
+        holder.captionItemEditText.setEnabled(false);
+        holder.captionItemEditText.setEnabled(true);
+        holder.descItemEditText.setEnabled(false);
+        holder.descItemEditText.setEnabled(true);
+    }
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(position);

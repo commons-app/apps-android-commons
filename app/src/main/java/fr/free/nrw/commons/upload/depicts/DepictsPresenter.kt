@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload.depicts
 import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import fr.free.nrw.commons.bookmarks.items.BookmarkItemsController
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.repository.UploadRepository
@@ -42,6 +43,13 @@ class DepictsPresenter @Inject constructor(
     private var media: Media? = null
     @Inject
     lateinit var depictsDao: DepictsDao
+
+    /**
+     * Helps to get all bookmarked items
+     */
+    @Inject
+    lateinit var controller: BookmarkItemsController
+
     @Inject
     lateinit var depictsHelper: DepictEditHelper
 
@@ -82,7 +90,7 @@ class DepictsPresenter @Inject constructor(
         if (media == null) {
             return repository.searchAllEntities(querystring)
                 .subscribeOn(ioScheduler)
-                .map { repository.selectedDepictions + it + recentDepictedItemList }
+                .map { repository.selectedDepictions + it + recentDepictedItemList + controller.loadFavoritesItems() }
                 .map { it.filterNot { item -> WikidataDisambiguationItems.isDisambiguationItem(item.instanceOfs) } }
                 .map { it.distinctBy(DepictedItem::id) }
 
@@ -93,13 +101,12 @@ class DepictsPresenter @Inject constructor(
                         it.commonsCategories, true, it.id)
                 }
             },
-                repository.searchAllEntities(querystring),
-                { it1, it2 ->
-                    it1 + it2
-                }
-            )
+                repository.searchAllEntities(querystring)
+            ) { it1, it2 ->
+                it1 + it2
+            }
                 .subscribeOn(ioScheduler)
-                .map { repository.selectedDepictions + it + recentDepictedItemList }
+                .map { repository.selectedDepictions + it + recentDepictedItemList + controller.loadFavoritesItems() }
                 .map { it.filterNot { item -> WikidataDisambiguationItems.isDisambiguationItem(item.instanceOfs) } }
                 .map { it.distinctBy(DepictedItem::id) }
 

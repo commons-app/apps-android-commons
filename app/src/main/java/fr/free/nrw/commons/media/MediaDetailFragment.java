@@ -362,21 +362,18 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     @OnClick(R.id.mediaDetailImageViewSpacer)
     public void launchZoomActivity(final View view) {
-        final boolean permission = PermissionUtils.
-            hasPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE);
-
-        if (permission) {
+        final boolean hasPermission = PermissionUtils.hasPermission(getActivity(), PermissionUtils.PERMISSIONS_STORAGE);
+        if (hasPermission) {
             launchZoomActivityAfterPermissionCheck(view);
-        }
-        else {
+        } else {
             PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
-                Manifest.permission.READ_EXTERNAL_STORAGE,
                 () -> {
                     launchZoomActivityAfterPermissionCheck(view);
                 },
                 R.string.storage_permission_title,
-                R.string.read_storage_permission_rationale
-            );
+                R.string.read_storage_permission_rationale,
+                PermissionUtils.PERMISSIONS_STORAGE
+                );
         }
     }
 
@@ -607,11 +604,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         image.getHierarchy().setFailureImage(R.drawable.image_placeholder);
 
         DraweeController controller = Fresco.newDraweeControllerBuilder()
-                .setLowResImageRequest(ImageRequest.fromUri(media != null ? media.getThumbUrl() : null))
-                .setImageRequest(ImageRequest.fromUri(media != null ? media.getImageUrl() : null))
-                .setControllerListener(aspectRatioListener)
-                .setOldController(image.getController())
-                .build();
+            .setLowResImageRequest(ImageRequest.fromUri(media != null ? media.getThumbUrl() : null))
+            .setRetainImageOnFailure(true)
+            .setImageRequest(ImageRequest.fromUri(media != null ? media.getImageUrl() : null))
+            .setControllerListener(aspectRatioListener)
+            .setOldController(image.getController())
+            .build();
         image.setController(controller);
     }
 
@@ -1076,7 +1074,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
         } else if (requestCode == REQUEST_CODE && resultCode == RESULT_CANCELED) {
             viewUtil.showShortToast(getContext(),
-                Objects.requireNonNull(getContext())
+                requireContext()
                     .getString(R.string.coordinates_picking_unsuccessful));
 
         } else if (requestCode == REQUEST_CODE_EDIT_DESCRIPTION && resultCode == RESULT_CANCELED) {

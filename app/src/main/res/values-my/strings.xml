@@ -3,6 +3,7 @@
 * Dr Lotus Black
 * Ninjastrikers
 * Teitei Para
+* Whym
 -->
 <resources>
   <string name="commons_facebook">ကွန်မွန်းစ် ဖေ့ဘုတ်စာမျက်နှာ</string>
@@ -243,7 +244,7 @@
   <string name="question">မေးခွန်း</string>
   <string name="result">ရလဒ်</string>
   <string name="construction_event_answer">နည်းပညာ သို့မဟုတ် ယဉ်ကျေးမှုကိုပြသသော ရုပ်ပုံများသည် ကွန်မွန်းစ်ပေါ်တွင် အလွန်ကြိုဆိုပါသည်။</string>
-  <string name="congratulatory_message_quiz">အဖြေများ၏ %$s ကို မှန်ကန်စွာဖြေခဲ့သည်။ ဂုဏ်ယူပါ၏။</string>
+  <string name="congratulatory_message_quiz">အဖြေများ၏ %1$s ကို မှန်ကန်စွာဖြေခဲ့သည်။ ဂုဏ်ယူပါ၏။</string>
   <string name="warning_for_no_answer">မေးခွန်းကိုဖြေဆိုရန် ရွေးစရာနှစ်ခုထဲမှ တစ်ခုကို ရွေးချယ်ပါ</string>
   <string name="user_not_logged_in">လော့ဂ်အင်ကာလ သက်တမ်းကုန်သွားသည်၊ ထပ်မံလော့ဂ်အင်ပြန်ဝင်ပေးပါ။</string>
   <string name="quiz_result_share_message">သင်၏ဉာဏ်စမ်းများကို မိတ်ဆွေများနှင့် မျှဝေပါ။</string>
@@ -304,7 +305,7 @@
   <string name="nominate_for_deletion_done">ပြီးပြီ</string>
   <string name="send_thank_success_title">ကျေးဇူးတင်စကားပို့ခြင်း- အောင်မြင်သည်</string>
   <string name="send_thank_failure_title">ကျေးဇူးတင်စကားပို့ခြင်း- မအောင်မြင်ပါ</string>
-  <string name="send_thank_toast">%1$ အတွက် ကျေးဇူးတင်မှု ပို့နေသည်</string>
+  <string name="send_thank_toast">%1$s အတွက် ကျေးဇူးတင်မှု ပို့နေသည်</string>
   <string name="review_category">မှန်ကန်စွာ ကဏ္ဍခွဲထားပါသလား</string>
   <string name="review_thanks">ပံ့ပိုးသူအား ကျေးဇူးတင်လိုပါသလား</string>
   <string name="review_category_explanation">ဤရုပ်ပုံသည် %1$s ကဏ္ဍများအောက်တွင်ရှိသည်။</string>
@@ -328,7 +329,7 @@
   <string name="exif_tag_name_software">ဆော့ဝဲလ်</string>
   <string name="image_info">ရုပ်ပုံ အချက်အလက်</string>
   <string name="no_categories_found">ကဏ္ဍများ မတွေ့ရှိပါ</string>
-  <string name="dialog_box_text_nomination">%1$ ဟာ ဘာကြောင့် ဖျက်သင့်သလဲ?</string>
+  <string name="dialog_box_text_nomination">%1$s ဟာ ဘာကြောင့် ဖျက်သင့်သလဲ?</string>
   <string name="default_description_language">နဂို ဖော်ပြချက်ဘာသာစကား</string>
   <string name="delete_helper_show_deletion_title">ဖျက်ပစ်ရန် အဆိုပြုထားခြင်း</string>
   <string name="delete_helper_show_deletion_title_success">အောင်မြင်</string>
