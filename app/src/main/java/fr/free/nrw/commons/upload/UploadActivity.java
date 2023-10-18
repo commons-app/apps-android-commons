@@ -154,6 +154,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         compositeDisposable = new CompositeDisposable();
         init();
         nearbyPopupAnswers = new HashMap<>();
+        //getting the current dpi of the device and if it is less than 320dp i.e. overlapping
+        //threshold, thumbnails automatically minimizes
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         float dpi = (metrics.widthPixels)/(metrics.density);
         if (dpi<=321) {
