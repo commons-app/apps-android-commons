@@ -28,8 +28,10 @@
 * Redredsonia
 * Rubin16
 * StarryFairy
+* Stjn
 * Tanzun
 * Thothsum
+* Ukhant Erdemt
 * Vlad5250
 * VoxelJ
 * Wikisaurus
@@ -113,6 +115,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Настройки</string>
   <string name="intent_share_upload_label">Загрузить на Викисклад</string>
+  <string name="upload_in_progress">Идёт загрузка…</string>
   <string name="username">Имя пользователя</string>
   <string name="password">Пароль</string>
   <string name="login_credential">Войдите в свою учётную запись Commons Beta</string>
@@ -126,6 +129,8 @@
   <string name="login_success">Вход выполнен успешно!</string>
   <string name="login_failed">Ошибка входа в систему!</string>
   <string name="upload_failed">Файл не найден. Попробуйте другой файл.</string>
+  <string name="retry_limit_reached">Достигнут максимальный лимит повторов! Пожалуйста, отмените загрузку и повторите попытку.</string>
+  <string name="unrestricted_battery_mode">Выключить оптимизацию батареи?</string>
   <string name="authentication_failed">Ошибка аутентификации. Пожалуйста, авторизуйтесь ещё раз.</string>
   <string name="uploading_started">Загрузка началась!</string>
   <string name="uploading_queued">Загрузка в очереди (включен режим ограниченного подключения)</string>
@@ -240,6 +245,8 @@
   <string name="read_storage_permission_rationale">Требуемые разрешения: чтение с внешнего носителя. Приложение не сможет получить доступ к вашей галерее без этого разрешения.</string>
   <string name="write_storage_permission_rationale">Требуемые разрешения: запись на внешнее хранилище. Приложение не сможет получить доступ к галерее/камере без этого разрешения.</string>
   <string name="location_permission_title">Запрос на определение местоположения</string>
+  <string name="in_app_camera_location_permission_title">Записывать местоположение для снимков в приложении</string>
+  <string name="in_app_camera_location_switch_pref_summary">Включите эту опцию, чтобы записывать местоположение вместе со снимками в приложении, если камера устройства не записывает его.</string>
   <string name="ok">OK</string>
   <string name="warning">Внимание</string>
   <string name="duplicate_file_name">Обнаружено повторяющееся имя файла</string>
@@ -318,6 +325,7 @@
   <string name="copy_wikicode">Копирование викикода в буфер обмена</string>
   <string name="wikicode_copied">Викикод скопирован в буфер обмена</string>
   <string name="nearby_location_not_available">Функция «Поблизости» может работать некорректно, определение местоположения недоступно.</string>
+  <string name="upload_location_access_denied">Доступ к местоположению запрещён. Чтобы использовать эту функцию, укажите своё местоположение вручную.</string>
   <string name="location_permission_rationale_nearby">Необходимо разрешение для отображения списка мест поблизости</string>
   <string name="nearby_directions">Направления</string>
   <string name="nearby_wikidata">Викиданные</string>
@@ -465,7 +473,14 @@
   <string name="ends_on">Заканчивается:</string>
   <string name="display_campaigns">Показ кампаний</string>
   <string name="display_campaigns_explanation">Просмотр текущих кампаний</string>
-  <string name="location_loss_warning" fuzzy="true">Убедитесь, что этот новый инструмент выбора в Android не удаляет местоположение с ваших фотографий.</string>
+  <string name="option_allow">Разрешить</string>
+  <string name="option_dismiss">Отменить</string>
+  <string name="in_app_camera_needs_location">Пожалуйста, включите доступ к местоположению в настройках и повторите попытку. \n\nПримечание. При загрузке может отсутствовать местоположение, если в течение короткого интервала времени приложению не удаётся получить местоположение с устройства.</string>
+  <string name="in_app_camera_location_permission_denied">Приложение не будет записывать местоположение вместе со снимками из-за отсутствия разрешения на доступ к местоположению</string>
+  <string name="in_app_camera_location_unavailable">Приложение не записывает местоположение вместе со снимками, поскольку GPS отключён</string>
+  <string name="open_document_photo_picker_title">Использовать средство выбора фотографий на основе документа</string>
+  <string name="open_document_photo_picker_explanation">Новый инструмент выбора фотографий Android рискует потерять информацию о местоположении. Включите, если вы собираетесь его использовать</string>
+  <string name="location_loss_warning">Отключение может привести к запуску нового средства выбора фотографий Android. Из-за этого может потеряться информация о местоположении.\n\nНажмите «Подробнее» для получения дополнительной информации.</string>
   <string name="nearby_campaign_dismiss_message">Вы больше не увидите кампаний. Однако, если захочете, вы сможете включить нотификации о кампаниях в настройках.</string>
   <string name="this_function_needs_network_connection">Для этой функции требуется доступ к интернет. Пожалуйста, проверьте своё подключение.</string>
   <string name="error_processing_image">Произошла ошибка при загрузке файла. Пожалуйста, попробуйте позднее!</string>
@@ -618,6 +633,7 @@
   <string name="recommend_high_accuracy_mode">Для достижения наилучших результатов выберите режим высокой точности.</string>
   <string name="ask_to_turn_location_on">Включить местоположение?</string>
   <string name="nearby_needs_location">Рядом необходимо, чтобы местоположение было включено для правильной работы.</string>
+  <string name="upload_map_location_access">Вам необходимо предоставить доступ к вашему текущему местоположению, чтобы установить местоположение автоматически.</string>
   <string name="use_location_from_similar_image">Вы снимали эти две фотографии в одном месте? Хотите использовать широту/долготу изображения справа?</string>
   <string name="load_more">Загрузить ещё</string>
   <string name="nearby_no_results">Мест не найдено, попытайтесь изменить критерии поиска.</string>
@@ -744,6 +760,8 @@
   <string name="your_feedback">Обратная связь от вас</string>
   <string name="mark_as_not_for_upload">Отметить как не подлежащее загрузке</string>
   <string name="unmark_as_not_for_upload">Снять пометку как не подлежащее загрузке</string>
+  <string name="marking_as_not_for_upload">Помечено как не предназначенное для загрузки</string>
+  <string name="unmarking_as_not_for_upload">Снять пометку «не для загрузки»</string>
   <string name="show_already_actioned_pictures">Показать уже обработанные изображения</string>
   <string name="hiding_already_actioned_pictures">Скрытие уже обработанных изображений</string>
   <string name="no_more_images_found">Больше изображений не найдено</string>
@@ -761,4 +779,10 @@
   <string name="full_screen_mode_features_info">Проведите быстро и широко, чтобы выполнить следующие действия: \n- Влево/вправо: переход к предыдущему/следующему \n- Вверх: выбрать\n- Вниз: пометить как не для загрузки.</string>
   <string name="set_up_avatar_toast_string">Чтобы установить свой аватар в таблице лидеров, на любом изображении в меню с тремя точками нажмите «Установить как аватар».</string>
   <string name="similar_coordinate_description_auto_set">Координаты не являются точными, но человек, загрузивший эту фотографию, считает, что они достаточно близки.</string>
+  <plurals name="custom_picker_images_selected_title_appendix">
+    <item quantity="one">выбрано %d изображение</item>
+    <item quantity="few">выбрано %d изображения</item>
+    <item quantity="many">выбрано %d изображений</item>
+    <item quantity="other"/>
+  </plurals>
 </resources>

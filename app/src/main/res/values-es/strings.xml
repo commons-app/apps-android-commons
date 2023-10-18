@@ -36,6 +36,7 @@
 * MarionaDSR
 * Miguel2706
 * Mirzali
+* No se
 * Pompilos
 * Raos10
 * Rodney Araujo
@@ -456,6 +457,8 @@
   <string name="ends_on">Finaliza el:</string>
   <string name="display_campaigns">Mostrar campañas</string>
   <string name="display_campaigns_explanation">Ver las campañas en curso</string>
+  <string name="option_allow">Permitir</string>
+  <string name="option_dismiss">Descartar</string>
   <string name="nearby_campaign_dismiss_message">Ya no verás las campañas. Sin embargo, puedes volver a habilitar esta notificación en configuración.</string>
   <string name="this_function_needs_network_connection">Esta función requiere conexión de red, verifica tus ajustes de conexión.</string>
   <string name="error_processing_image">Se produjo un error al procesar la imagen. Inténtalo de nuevo.</string>

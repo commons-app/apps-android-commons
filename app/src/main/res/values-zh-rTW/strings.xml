@@ -84,6 +84,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">設定</string>
   <string name="intent_share_upload_label">上傳至維基共享資源</string>
+  <string name="upload_in_progress">正在上傳</string>
   <string name="username">使用者名稱</string>
   <string name="password">密碼</string>
   <string name="login_credential">登入您的維基共享資源測試版帳號</string>
@@ -97,6 +98,9 @@
   <string name="login_success">登入成功！</string>
   <string name="login_failed">登入失敗！</string>
   <string name="upload_failed">找不到檔案。請試試看其它檔案。</string>
+  <string name="retry_limit_reached">已達到重試限制上限！請取消上傳並重試</string>
+  <string name="unrestricted_battery_mode">關閉電池最佳化？</string>
+  <string name="suggest_unrestricted_mode">在關閉電池最佳化後，可讓上傳超過 3 張以上圖片的過程更穩定。請從設定中關閉維基共享資源應用程式的電池最佳化，來獲得較流暢的上傳體驗。 \n\n關閉電池最佳化的可能步驟：\n\n步驟 1：點擊下方的「設定」按鈕。\n\n步驟 2：從「未最佳化」切換為「全部應用程式」。\n\n步驟 3：搜尋「Commons」或「fr.free.nrw.commons」。\n\n步驟 4：點擊它並選擇「不最佳化」。\n\n步驟 5：按「確定」。</string>
   <string name="authentication_failed">身份驗證失敗，請重新登入</string>
   <string name="uploading_started">開始上傳！</string>
   <string name="uploading_queued">上傳已排定（限制連線模式已啟用）</string>
@@ -134,7 +138,7 @@
   <string name="provider_modifications">修改</string>
   <string name="menu_upload_single">上傳</string>
   <string name="categories_search_text_hint">搜尋分類</string>
-  <string name="depicts_search_text_hint">搜索您的媒體描繪的項目（山、泰姬陵等）</string>
+  <string name="depicts_search_text_hint">搜尋您的媒體描繪項目（山、泰姬瑪哈陵等）</string>
   <string name="menu_save_categories">儲存</string>
   <string name="refresh_button">重新整理</string>
   <string name="display_list_button">清單</string>
@@ -211,6 +215,8 @@
   <string name="read_storage_permission_rationale">必要權限：讀取外部儲存裝置。否則應用程式無法存取您的圖庫。</string>
   <string name="write_storage_permission_rationale">必要權限：寫入外部存儲裝置。否則應用程式無法訪問您的相機/圖庫。</string>
   <string name="location_permission_title">請求位置權限</string>
+  <string name="in_app_camera_location_permission_title">記錄內建拍攝截圖的位置</string>
+  <string name="in_app_camera_location_switch_pref_summary">啟用此功能來記錄內建拍攝截圖位置，以防止設備相機未記錄到位置</string>
   <string name="ok">好</string>
   <string name="warning">警告</string>
   <string name="duplicate_file_name">找到重複的檔案名稱</string>
@@ -271,8 +277,8 @@
   <string name="upload_connection_error_alert_detail">上傳過程需要有效的網際網路存取。請檢查您的網路連線。</string>
   <string name="upload_problem_image">在圖片中發現的問題</string>
   <string name="internet_downloaded">請僅上傳您自己拍攝的圖片。不要上傳您從網路下載來的圖片。</string>
-  <string name="use_external_storage">儲存應用程式所提供的截圖</string>
-  <string name="use_external_storage_summary">將使用應用內相機拍攝的照片保存到您的設備存儲中</string>
+  <string name="use_external_storage">儲存內建拍攝截圖</string>
+  <string name="use_external_storage_summary">將使用內建相機拍攝的照片保存到您的設備存儲中</string>
   <string name="login_to_your_account">登入您的帳號</string>
   <string name="send_log_file">發送日誌檔案</string>
   <string name="send_log_file_description">透過電子郵件寄送日誌檔案給開發人員，來協助除錯應用程式上的問題。注意：日誌可能會包含識別方面的資訊</string>
@@ -289,6 +295,7 @@
   <string name="copy_wikicode">複製 wikitext 到剪貼簿</string>
   <string name="wikicode_copied">Wikitext 已複製到剪貼簿</string>
   <string name="nearby_location_not_available">位置無效，應用程式在此地附近可能無法正常運作。</string>
+  <string name="upload_location_access_denied">位置存取遭拒。請手動設定您的位置才能使用此功能。</string>
   <string name="location_permission_rationale_nearby">需權限來顯示附近地點清單</string>
   <string name="nearby_directions">方向</string>
   <string name="nearby_wikidata">維基數據</string>
@@ -308,7 +315,7 @@
   <string name="about_translate_proceed">繼續</string>
   <string name="about_translate_cancel">取消</string>
   <string name="retry">重試</string>
-  <string name="showcase_view_whole_nearby_activity">這些是您附近的地方，需要圖片來說明其維基百科文章。\n\n單擊“搜索此區域”會鎖定地圖並啟動該位置周圍的附近搜索。</string>
+  <string name="showcase_view_whole_nearby_activity">這些是您附近的地方，需要圖片來說明其維基百科條目。\n\n點擊「搜尋此區域」會鎖定地圖，並啟動對該位置周圍附近的搜尋。</string>
   <string name="showcase_view_needs_photo">此地點需要照片。</string>
   <string name="showcase_view_has_photo">此地點已有照片。</string>
   <string name="showcase_view_no_longer_exists">此地點已不存在。</string>
@@ -392,7 +399,7 @@
   <string name="notifications">通知</string>
   <string name="read_notifications">通知（已讀）</string>
   <string name="display_nearby_notification">顯示附近地點通知</string>
-  <string name="display_nearby_notification_summary">顯示最近需要圖片的地點的應用內通知</string>
+  <string name="display_nearby_notification_summary">顯示需要圖片的最近地點的內建通知</string>
   <string name="list_sheet">清單</string>
   <string name="storage_permission">儲存裝置權限</string>
   <string name="write_storage_permission_rationale_for_image_share">為了上傳圖像我們需要您的許可以訪問您設備的外部存儲。</string>
@@ -414,7 +421,7 @@
   <string name="deletion_reason_bad_for_my_privacy">我認為這會干擾到我的隱私</string>
   <string name="deletion_reason_no_longer_want_public">我改變我的主意，我不想要公開可見</string>
   <string name="deletion_reason_not_interesting">真抱歉，此圖片對於百科全書沒有意義</string>
-  <string name="uploaded_by_myself">我自己在%1$s上上傳，在%2$d篇文章中使用。</string>
+  <string name="uploaded_by_myself">我自己在%1$s上上傳，在%2$d篇條目中使用。</string>
   <string name="no_uploads">歡迎來到維基共享資源！\n\n透過觸碰添加按鈕來上傳您的首個多媒體內容。</string>
   <string name="no_categories_selected">未選擇分類</string>
   <string name="no_categories_selected_warning_desc">不帶分類的圖片很難有機會被利用到，您確定您要不選擇分類來繼續嗎？</string>
@@ -436,6 +443,13 @@
   <string name="ends_on">結束於：</string>
   <string name="display_campaigns">顯示活動</string>
   <string name="display_campaigns_explanation">檢視發生中的活動</string>
+  <string name="in_app_camera_location_access_explanation">允許讓應用程式索取位置，以防相機未記錄到位置。某些設備的相機不會記錄位置，在這種情況下，讓應用程式索取位置，並將其附加到圖片裡，能讓您的貢獻更有用。您可以隨時從「設定」中更改</string>
+  <string name="option_allow">允許</string>
+  <string name="option_dismiss">關閉</string>
+  <string name="in_app_camera_needs_location">請從「設定」中開啟存取位置的權限，然後再試一次。\n\n請注意：如果應用程式無法在短時間內從設備檢索位置，上傳內容可能會沒有位置資訊。</string>
+  <string name="in_app_camera_location_permission_rationale">內建相機需要位置權限，才能將其附加到您的圖片，以防止 EXIF 裡位置資訊不可用。請允許應用程式存取您的位置，然後再試一次。\n\n請注意：如果應用程式無法在短時間內從設備檢索位置，上傳內容可能會沒有位置資訊。</string>
+  <string name="in_app_camera_location_permission_denied">由於缺乏位置權限，應用程式不會記錄鏡頭位置</string>
+  <string name="in_app_camera_location_unavailable">當 GPS 關閉時，應用程式不會記錄鏡頭位置</string>
   <string name="open_document_photo_picker_title">使用基於照片點選器的文件</string>
   <string name="open_document_photo_picker_explanation">新的 Android 照片點選器有遺失位置資訊的風險。若您正在使用該點選器，請啟用它。</string>
   <string name="location_loss_warning">關閉這個可能會觸發新的 Android 照片點選器。該點選器有遺失位置資訊的風險。\n\n請輕觸「閱讀更多」來獲得更多相關資訊。</string>
@@ -587,6 +601,7 @@
   <string name="recommend_high_accuracy_mode">為了獲得最佳結果，請選擇高精準度模式。</string>
   <string name="ask_to_turn_location_on">打開位置？</string>
   <string name="nearby_needs_location">附近功能需要啟用位置才能運作正常</string>
+  <string name="upload_map_location_access">您需要授予對目前位置的存取權限才能自動設定位置。</string>
   <string name="use_location_from_similar_image">您是否在同一地點拍攝了這兩張圖片？您要使用圖片右側的緯度/經度嗎？</string>
   <string name="load_more">載入更多</string>
   <string name="nearby_no_results">查無地點，請嘗試更改您的搜尋條件。</string>
@@ -594,7 +609,7 @@
   <string name="missing_category">- 添加分類到此圖片以增加可用性。</string>
   <string name="missing_article">- 添加此圖片到相關但尚未有圖片的維基百科條目。</string>
   <string name="add_picture_to_wikipedia_article_title">添加圖片到維基百科</string>
-  <string name="add_picture_to_wikipedia_article_desc">您想將此圖片添加到%1$s語言維基百科文章中嗎？</string>
+  <string name="add_picture_to_wikipedia_article_desc">您想將此圖片添加到%1$s語言維基百科條目中嗎？</string>
   <string name="confirm">確認</string>
   <string name="instructions_title">說明</string>
   <string name="wikipedia_instructions_step_1">1. 使用以下wikitext：</string>
@@ -715,6 +730,8 @@
   <string name="your_feedback">您的意見回饋</string>
   <string name="mark_as_not_for_upload">標記為不上傳</string>
   <string name="unmark_as_not_for_upload">取消標記為不上傳</string>
+  <string name="marking_as_not_for_upload">標記為不可上傳</string>
+  <string name="unmarking_as_not_for_upload">取消標記為不可上傳</string>
   <string name="show_already_actioned_pictures">顯示已操作的圖片</string>
   <string name="hiding_already_actioned_pictures">隱藏已操作的圖片</string>
   <string name="no_more_images_found">找不到更多圖片</string>

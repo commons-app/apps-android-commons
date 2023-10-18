@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.Context;
+import fr.free.nrw.commons.location.LatLng;
 import io.reactivex.Observable;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -37,8 +38,8 @@ public class FileUtilsWrapper {
         return FileUtils.getFileInputStream(filePath);
     }
 
-    public String getGeolocationOfFile(String filePath) {
-        return FileUtils.getGeolocationOfFile(filePath);
+    public String getGeolocationOfFile(String filePath, LatLng inAppPictureLocation) {
+        return FileUtils.getGeolocationOfFile(filePath, inAppPictureLocation);
     }
 
 

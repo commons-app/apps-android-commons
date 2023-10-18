@@ -153,7 +153,7 @@ public class WikidataItemDetailsActivity extends BaseActivity implements MediaDe
         mediaContainer.setVisibility(View.VISIBLE);
         if (mediaDetailPagerFragment == null || !mediaDetailPagerFragment.isVisible()) {
             // set isFeaturedImage true for featured images, to include author field on media detail
-            mediaDetailPagerFragment = new MediaDetailPagerFragment(false, true);
+            mediaDetailPagerFragment = MediaDetailPagerFragment.newInstance(false, true);
             FragmentManager supportFragmentManager = getSupportFragmentManager();
             supportFragmentManager
                     .beginTransaction()

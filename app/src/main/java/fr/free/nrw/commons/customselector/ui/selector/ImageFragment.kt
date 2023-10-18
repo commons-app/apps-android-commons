@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Switch
+import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,16 +18,17 @@ import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.customselector.helper.ImageHelper
-import fr.free.nrw.commons.customselector.listeners.PassDataListener
 import fr.free.nrw.commons.customselector.helper.ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY
 import fr.free.nrw.commons.customselector.helper.ImageHelper.SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
+import fr.free.nrw.commons.customselector.listeners.PassDataListener
 import fr.free.nrw.commons.customselector.listeners.RefreshUIListener
 import fr.free.nrw.commons.customselector.model.CallbackStatus
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter
 import fr.free.nrw.commons.databinding.FragmentCustomSelectorBinding
+import fr.free.nrw.commons.databinding.ProgressDialogBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.theme.BaseActivity
@@ -34,12 +36,11 @@ import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 /**
  * Custom Selector Image Fragment.
  */
-class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassDataListener {
+class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDataListener {
 
     private var _binding: FragmentCustomSelectorBinding? = null
     private val binding get() = _binding
@@ -57,7 +58,7 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassData
     /**
      * View model for images.
      */
-    private var  viewModel: CustomSelectorViewModel? = null
+    private var viewModel: CustomSelectorViewModel? = null
 
     /**
      * View Elements.
@@ -98,6 +99,10 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassData
      * For showing progress
      */
     private var progressLayout: ConstraintLayout? = null
+
+    private lateinit var progressDialog: AlertDialog
+    private lateinit var progressDialogLayout: ProgressDialogBinding
+
 
     /**
      * NotForUploadStatus Dao class for database operations
@@ -163,7 +168,9 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassData
         super.onCreate(savedInstanceState)
         bucketId = arguments?.getLong(BUCKET_ID)
         lastItemId = arguments?.getLong(LAST_ITEM_ID, 0)
-        viewModel = ViewModelProvider(requireActivity(),customSelectorViewModelFactory).get(CustomSelectorViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity(), customSelectorViewModelFactory).get(
+            CustomSelectorViewModel::class.java
+        )
     }
 
     /**
@@ -171,17 +178,22 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassData
      * Init imageAdapter, gridLayoutManger.
      * SetUp recycler view.
      */
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         _binding = FragmentCustomSelectorBinding.inflate(inflater, container, false)
-        imageAdapter = ImageAdapter(requireActivity(), activity as ImageSelectListener, imageLoader!!)
-        gridLayoutManager = GridLayoutManager(context,getSpanCount())
-        with(binding?.selectorRv){
+        imageAdapter =
+            ImageAdapter(requireActivity(), activity as ImageSelectListener, imageLoader!!)
+        gridLayoutManager = GridLayoutManager(context, getSpanCount())
+        with(binding?.selectorRv) {
             this?.layoutManager = gridLayoutManager
             this?.setHasFixedSize(true)
             this?.adapter = imageAdapter
         }
 
-        viewModel?.result?.observe(viewLifecycleOwner, Observer{
+        viewModel?.result?.observe(viewLifecycleOwner, Observer {
             handleResult(it)
         })
 
@@ -194,8 +206,15 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassData
 
         val sharedPreferences: SharedPreferences =
             requireContext().getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, MODE_PRIVATE)
-        showAlreadyActionedImages = sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
+        showAlreadyActionedImages =
+            sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
         switch?.isChecked = showAlreadyActionedImages
+
+        val builder = AlertDialog.Builder(requireActivity())
+        builder.setCancelable(false)
+        progressDialogLayout = ProgressDialogBinding.inflate(layoutInflater, container, false)
+        builder.setView(progressDialogLayout.root)
+        progressDialog = builder.create()
 
         return binding?.root
     }
@@ -236,10 +255,10 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassData
     /**
      * Handle view model result.
      */
-    private fun handleResult(result:Result){
-        if(result.status is CallbackStatus.SUCCESS){
+    private fun handleResult(result: Result) {
+        if (result.status is CallbackStatus.SUCCESS) {
             val images = result.images
-            if(images.isNotEmpty()) {
+            if (images.isNotEmpty()) {
                 filteredImages = ImageHelper.filterImages(images, bucketId)
                 allImages = ArrayList(filteredImages)
                 imageAdapter.init(filteredImages, allImages, TreeMap())
@@ -250,18 +269,18 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassData
                             .scrollToPosition(ImageHelper.getIndexFromId(filteredImages, pos))
                     }
                 }
-            }
-            else{
+            } else {
                 binding?.emptyText?.let {
                     it.visibility = View.VISIBLE
                 }
-                selectorRV?.let{
+                selectorRV?.let {
                     it.visibility = View.GONE
                 }
             }
         }
         loader?.let {
-            it.visibility = if (result.status is CallbackStatus.FETCHING) View.VISIBLE else View.GONE
+            it.visibility =
+                if (result.status is CallbackStatus.FETCHING) View.VISIBLE else View.GONE
         }
     }
 
@@ -324,7 +343,7 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassData
      * Passes selected images and other information from Activity to Fragment and connects it with
      * the adapter
      */
-    override fun passSelectedImages(selectedImages: ArrayList<Image>, shouldRefresh: Boolean){
+    override fun passSelectedImages(selectedImages: ArrayList<Image>, shouldRefresh: Boolean) {
         imageAdapter.setSelectedImages(selectedImages)
 
         if (!showAlreadyActionedImages && shouldRefresh) {
@@ -332,4 +351,24 @@ class ImageFragment: CommonsDaggerSupportFragment(), RefreshUIListener, PassData
             imageAdapter.setSelectedImages(selectedImages)
         }
     }
+
+    /**
+     * Shows mark/unmark progress dialog
+     */
+    fun showMarkUnmarkProgressDialog(text: String) {
+        if (!progressDialog.isShowing) {
+            progressDialogLayout.progressDialogText.text = text
+            progressDialog.show()
+        }
+    }
+
+    /**
+     * Dismisses mark/unmark progress dialog
+     */
+    fun dismissMarkUnmarkProgressDialog() {
+        if (progressDialog.isShowing) {
+            progressDialog.dismiss()
+        }
+    }
+
 }

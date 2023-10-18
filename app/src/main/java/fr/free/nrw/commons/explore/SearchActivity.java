@@ -221,7 +221,7 @@ public class SearchActivity extends BaseActivity
         searchView.setVisibility(View.GONE);// to remove searchview when mediaDetails fragment open
         if (mediaDetails == null || !mediaDetails.isVisible()) {
             // set isFeaturedImage true for featured images, to include author field on media detail
-            mediaDetails = new MediaDetailPagerFragment(false, true);
+            mediaDetails = MediaDetailPagerFragment.newInstance(false, true);
             supportFragmentManager
                     .beginTransaction()
                     .hide(supportFragmentManager.getFragments().get(supportFragmentManager.getBackStackEntryCount()))

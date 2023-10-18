@@ -8,6 +8,7 @@
 -->
 <resources>
   <string name="commons_facebook">Laman Facebook Commons</string>
+  <string name="commons_github">Kod Sumber Github Commons</string>
   <string name="commons_logo">Logo Commons</string>
   <string name="commons_website">Tapak Sesawang Commons</string>
   <string name="uploads_pending_notification_indicator" fuzzy="true">%d fail sedang dimuat naik</string>
@@ -36,9 +37,11 @@
   <string name="forgot_password">Lupa Kata Laluan?</string>
   <string name="logging_in_title">Sedang log masuk</string>
   <string name="logging_in_message">Sila tunggu…</string>
+  <string name="updating_caption_message">Sila tunggu…</string>
   <string name="login_success">Berjaya log masuk!</string>
   <string name="login_failed">Gagal log masuk!</string>
-  <string name="authentication_failed" fuzzy="true">Penentusahan gagal!</string>
+  <string name="upload_failed">Fail tidak dijumpai. Sila cuba fail lain.</string>
+  <string name="authentication_failed">Pendaftaran gagal, sila log masuk lagi</string>
   <string name="uploading_started">Pemuatnaikan telah bermula!</string>
   <string name="upload_completed_notification_title">%1$s telah dimuat naik!</string>
   <string name="upload_completed_notification_text">Ketik untuk melihat muatan naik anda</string>
@@ -162,6 +165,7 @@
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>
+  <string name="no_notifications">Tiada pemberitahuan ditemui</string>
   <string name="about_translate">Terjemah</string>
   <string name="about_translate_title">Bahasa</string>
   <string name="about_translate_cancel">Batalkan</string>

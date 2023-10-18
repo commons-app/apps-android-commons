@@ -7,6 +7,7 @@ import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.graphics.drawable.Drawable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
@@ -32,6 +34,8 @@ import fr.free.nrw.commons.LocationPicker.LocationPicker;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao;
 import fr.free.nrw.commons.settings.Prefs;
@@ -46,6 +50,7 @@ import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import java.io.IOException;
+import fr.free.nrw.commons.R.drawable.*;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -119,6 +124,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private Place nearbyPlace;
     private UploadItem uploadItem;
     /**
+     * inAppPictureLocation: use location recorded while using the in-app camera if
+     * device camera does not record it in the EXIF
+     */
+    private LatLng inAppPictureLocation;
+    /**
      * editableUploadItem : Storing the upload item before going to update the coordinates
      */
     private UploadItem editableUploadItem;
@@ -134,9 +144,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         super.onCreate(savedInstanceState);
     }
 
-    public void setImageTobeUploaded(UploadableFile uploadableFile, Place place) {
+    public void setImageTobeUploaded(UploadableFile uploadableFile, Place place, LatLng inAppPictureLocation) {
         this.uploadableFile = uploadableFile;
         this.place = place;
+        this.inAppPictureLocation = inAppPictureLocation;
     }
 
     @Nullable
@@ -161,7 +172,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         tooltip.setOnClickListener(
             v -> showInfoAlert(R.string.media_detail_step_title, R.string.media_details_tooltip));
         initPresenter();
-        presenter.receiveImage(uploadableFile, place);
+        presenter.receiveImage(uploadableFile, place, inAppPictureLocation);
         initRecyclerView();
 
         if (callback.getIndexInViewFlipper(this) == 0) {
@@ -172,6 +183,18 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             btnPrevious.setAlpha(1.0f);
         }
 
+        // If the image EXIF data contains the location, show the map icon with a green tick
+        if (inAppPictureLocation != null ||
+                (uploadableFile != null && uploadableFile.hasLocation())) {
+            Drawable mapTick = getResources().getDrawable(R.drawable.ic_map_tick_white_24dp);
+            ibMap.setImageDrawable(mapTick);
+        } else {
+            // Otherwise, show the map icon with a red question mark
+            Drawable mapQuestionMark =
+                getResources().getDrawable(R.drawable.ic_map_question_white_24dp);
+            ibMap.setImageDrawable(mapQuestionMark);
+        }
+
         //If this is the last media, we have nothing to copy, lets not show the button
         if (callback.getIndexInViewFlipper(this) == callback.getTotalNumberOfSteps() - 4) {
             btnCopyToSubsequentMedia.setVisibility(View.GONE);
@@ -180,7 +203,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         }
 
         attachImageViewScaleChangeListener();
-
     }
 
     /**
@@ -226,7 +248,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @OnClick(R.id.btn_next)
     public void onNextButtonClicked() {
-        presenter.verifyImageQuality(callback.getIndexInViewFlipper(this));
+        presenter.verifyImageQuality(callback.getIndexInViewFlipper(this), inAppPictureLocation);
     }
 
     @OnClick(R.id.btn_previous)
@@ -460,6 +482,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         double defaultLongitude = -122.431297;
         double defaultZoom = 16.0;
 
+        /* Retrieve image location from EXIF if present or
+           check if user has provided location while using the in-app camera.
+           Use location of last UploadItem if none of them is available */
         if (uploadItem.getGpsCoords() != null && uploadItem.getGpsCoords()
             .getDecLatitude() != 0.0 && uploadItem.getGpsCoords().getDecLongitude() != 0.0) {
             defaultLatitude = uploadItem.getGpsCoords()
@@ -545,6 +570,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         editableUploadItem.getGpsCoords().setDecimalCoords(latitude + "|" + longitude);
         editableUploadItem.getGpsCoords().setImageCoordsExists(true);
         editableUploadItem.getGpsCoords().setZoomLevel(zoom);
+
+        // Replace the map icon using the one with a green tick
+        Drawable mapTick = getResources().getDrawable(R.drawable.ic_map_tick_white_24dp);
+        ibMap.setImageDrawable(mapTick);
+
         Toast.makeText(getContext(), "Location Updated", Toast.LENGTH_LONG).show();
 
     }
@@ -577,6 +607,29 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     public void updateMediaDetails(List<UploadMediaDetail> uploadMediaDetails) {
         uploadMediaDetailAdapter.setItems(uploadMediaDetails);
+        showNearbyFound =
+            showNearbyFound && (
+            uploadMediaDetails == null || uploadMediaDetails.isEmpty() || listContainsEmptyDetails(
+                uploadMediaDetails));
+    }
+
+    /**
+     * if the media details that come in here are empty
+     * (empty caption AND empty description, with caption being the decider here)
+     * this method allows usage of nearby place caption and description if any
+     * else it takes the media details saved in prior for this picture
+     * @param uploadMediaDetails saved media details,
+     *                           ex: in case when "copy to subsequent media" button is clicked
+     *                           for a previous image
+     * @return boolean whether the details are empty or not
+     */
+    private boolean listContainsEmptyDetails(List<UploadMediaDetail> uploadMediaDetails) {
+        for (UploadMediaDetail uploadDetail: uploadMediaDetails) {
+            if (!TextUtils.isEmpty(uploadDetail.getCaptionText()) && !TextUtils.isEmpty(uploadDetail.getDescriptionText())) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

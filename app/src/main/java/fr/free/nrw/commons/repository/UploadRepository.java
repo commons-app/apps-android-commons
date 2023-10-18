@@ -188,9 +188,9 @@ public class UploadRepository {
      * @return
      */
     public Observable<UploadItem> preProcessImage(UploadableFile uploadableFile, Place place,
-        SimilarImageInterface similarImageInterface) {
+        SimilarImageInterface similarImageInterface, LatLng inAppPictureLocation) {
         return uploadModel.preProcessImage(uploadableFile, place,
-            similarImageInterface);
+            similarImageInterface, inAppPictureLocation);
     }
 
     /**
@@ -199,8 +199,8 @@ public class UploadRepository {
      * @param uploadItem
      * @return
      */
-    public Single<Integer> getImageQuality(UploadItem uploadItem) {
-        return uploadModel.getImageQuality(uploadItem);
+    public Single<Integer> getImageQuality(UploadItem uploadItem, LatLng location) {
+        return uploadModel.getImageQuality(uploadItem, location);
     }
 
     /**
@@ -291,6 +291,23 @@ public class UploadRepository {
             }
         }
         return depictModel.getPlaceDepictions(new ArrayList<>(qids));
+    }
+
+    /**
+     * Gets the category for each unique {@link Place} associated with an {@link UploadItem}
+     * from {@link #getUploads()}
+     *
+     * @return a single that provides the categories
+     */
+    public Single<List<CategoryItem>> getPlaceCategories() {
+        final Set<String> qids = new HashSet<>();
+        for (final UploadItem item : getUploads()) {
+            final Place place = item.getPlace();
+            if (place != null) {
+                qids.add(place.getCategory());
+            }
+        }
+        return Single.fromObservable(categoriesModel.getCategoriesByName(new ArrayList<>(qids)));
     }
 
     /**

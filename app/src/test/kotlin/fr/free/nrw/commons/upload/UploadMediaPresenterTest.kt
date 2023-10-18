@@ -48,6 +48,9 @@ class UploadMediaPresenterTest {
     private lateinit var place: Place
 
     @Mock
+    private var location: LatLng? = null
+
+    @Mock
     private lateinit var uploadItem: UploadItem
 
     @Mock
@@ -88,10 +91,11 @@ class UploadMediaPresenterTest {
             repository.preProcessImage(
                 ArgumentMatchers.any(UploadableFile::class.java),
                 ArgumentMatchers.any(Place::class.java),
-                ArgumentMatchers.any(UploadMediaPresenter::class.java)
+                ArgumentMatchers.any(UploadMediaPresenter::class.java),
+                ArgumentMatchers.any(LatLng::class.java)
             )
         ).thenReturn(testObservableUploadItem)
-        uploadMediaPresenter.receiveImage(uploadableFile, place)
+        uploadMediaPresenter.receiveImage(uploadableFile, place, location)
         verify(view).showProgress(true)
         testScheduler.triggerActions()
         verify(view).onImageProcessed(
@@ -107,14 +111,14 @@ class UploadMediaPresenterTest {
     @Test
     fun verifyImageQualityTest() {
         whenever(repository.uploads).thenReturn(listOf(uploadItem))
-        whenever(repository.getImageQuality(uploadItem))
+        whenever(repository.getImageQuality(uploadItem, location))
             .thenReturn(testSingleImageResult)
         whenever(uploadItem.imageQuality).thenReturn(0)
         whenever(uploadItem.gpsCoords)
             .thenReturn(imageCoordinates)
         whenever(uploadItem.gpsCoords.decimalCoords)
             .thenReturn("imageCoordinates")
-        uploadMediaPresenter.verifyImageQuality(0)
+        uploadMediaPresenter.verifyImageQuality(0, location)
         verify(view).showProgress(true)
         testScheduler.triggerActions()
         verify(view).showProgress(false)
@@ -126,14 +130,14 @@ class UploadMediaPresenterTest {
     @Test
     fun `verify ImageQuality Test while coordinates equals to null`() {
         whenever(repository.uploads).thenReturn(listOf(uploadItem))
-        whenever(repository.getImageQuality(uploadItem))
+        whenever(repository.getImageQuality(uploadItem, location))
             .thenReturn(testSingleImageResult)
         whenever(uploadItem.imageQuality).thenReturn(0)
         whenever(uploadItem.gpsCoords)
             .thenReturn(imageCoordinates)
         whenever(uploadItem.gpsCoords.decimalCoords)
             .thenReturn(null)
-        uploadMediaPresenter.verifyImageQuality(0)
+        uploadMediaPresenter.verifyImageQuality(0, location)
         testScheduler.triggerActions()
     }
 
@@ -167,7 +171,7 @@ class UploadMediaPresenterTest {
         val uploadMediaDetailList: ArrayList<UploadMediaDetail> = ArrayList()
         uploadMediaDetailList.add(uploadMediaDetail)
         uploadItem.setMediaDetails(uploadMediaDetailList)
-        Mockito.`when`(repository.getImageQuality(uploadItem)).then {
+        Mockito.`when`(repository.getImageQuality(uploadItem, location)).then {
             verify(view).showProgress(true)
             testScheduler.triggerActions()
             verify(view).showProgress(true)
@@ -183,7 +187,7 @@ class UploadMediaPresenterTest {
         uploadMediaDetail.captionText = "added caption"
         uploadMediaDetail.languageCode = "eo"
         uploadItem.setMediaDetails(Collections.singletonList(uploadMediaDetail))
-        Mockito.`when`(repository.getImageQuality(uploadItem)).then {
+        Mockito.`when`(repository.getImageQuality(uploadItem, location)).then {
             verify(view).showProgress(true)
             testScheduler.triggerActions()
             verify(view).showProgress(true)
@@ -264,11 +268,12 @@ class UploadMediaPresenterTest {
             repository.preProcessImage(
                 ArgumentMatchers.any(UploadableFile::class.java),
                 ArgumentMatchers.any(Place::class.java),
-                ArgumentMatchers.any(UploadMediaPresenter::class.java)
+                ArgumentMatchers.any(UploadMediaPresenter::class.java),
+                ArgumentMatchers.any(LatLng::class.java)
             )
         ).thenReturn(item)
 
-        uploadMediaPresenter.receiveImage(uploadableFile, germanyAsPlace)
+        uploadMediaPresenter.receiveImage(uploadableFile, germanyAsPlace, location)
         verify(view).showProgress(true)
         testScheduler.triggerActions()
 
