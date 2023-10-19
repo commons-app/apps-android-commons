@@ -31,6 +31,8 @@
 -keepattributes Signature
 # Retain declared checked exceptions for use by a Proxy instance.
 -keepattributes Exceptions
+# Classes used by retrofit to fetch API repsonse
+-keepclasseswithmembers class org.wikipedia.** { *; }
 # --- /Retrofit ---
 
 # --- OkHttp + Okio ---
