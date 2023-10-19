@@ -220,13 +220,13 @@ class DepictsPresenter @Inject constructor(
                             view.updateDepicts()
                             view.goBackToPreviousScreen()
                         })
-                        {
-                            Timber.e(
+                        {t: Throwable? ->
+                            Timber.e(t,
                                 "Failed to update depictions"
                             )
+
                         }
                 )
-
             }
         } else {
             repository.cleanup()

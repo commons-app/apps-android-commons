@@ -505,6 +505,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 .subscribe(this::onDepictionsLoaded, Timber::e)
         );
         // compositeDisposable.add(disposable);
+
     }
 
     private void onDiscussionLoaded(String discussion) {
