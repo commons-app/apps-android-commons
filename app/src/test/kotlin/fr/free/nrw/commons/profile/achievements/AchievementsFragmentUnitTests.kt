@@ -105,7 +105,7 @@ class AchievementsFragmentUnitTests {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         context = ApplicationProvider.getApplicationContext()
         menuItem = RoboMenuItem(context)
         AppAdapter.set(TestAppAdapter())

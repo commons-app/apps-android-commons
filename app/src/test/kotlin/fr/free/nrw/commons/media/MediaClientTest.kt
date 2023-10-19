@@ -41,7 +41,7 @@ class MediaClientTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         mediaClient =
             MediaClient(mediaInterface, pageMediaInterface, mediaDetailInterface, mediaConverter)
     }

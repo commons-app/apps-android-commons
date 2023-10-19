@@ -42,7 +42,7 @@ class ReviewHelperTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
 
         val mwQueryPage = mock(MwQueryPage::class.java)
         val mockRevision = mock(MwQueryPage.Revision::class.java)

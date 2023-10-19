@@ -20,7 +20,7 @@ class BookmarksPagerAdapterTests {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         bookmarksPagerAdapter = BookmarksPagerAdapter(fragmentManager, context, false)
     }
 

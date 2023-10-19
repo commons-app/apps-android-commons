@@ -37,7 +37,7 @@ class RecentLanguagesAdapterUnitTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
 
         context = RuntimeEnvironment.getApplication().applicationContext
 

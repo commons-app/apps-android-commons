@@ -16,6 +16,7 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mockito.verifyNoInteractions
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import java.util.*
@@ -65,7 +66,7 @@ class RecentSearchesDaoTest {
     fun migrateTableVersionFrom_v1_to_v2() {
         onUpdate(database, 1, 2)
         // Table didnt exist before v7
-        verifyZeroInteractions(database)
+        verifyNoInteractions(database)
     }
 
     /**
@@ -75,7 +76,7 @@ class RecentSearchesDaoTest {
     fun migrateTableVersionFrom_v2_to_v3() {
         onUpdate(database, 2, 3)
         // Table didnt exist before v7
-        verifyZeroInteractions(database)
+        verifyNoInteractions(database)
     }
 
     /**
@@ -85,7 +86,7 @@ class RecentSearchesDaoTest {
     fun migrateTableVersionFrom_v3_to_v4() {
         onUpdate(database, 3, 4)
         // Table didnt exist before v7
-        verifyZeroInteractions(database)
+        verifyNoInteractions(database)
     }
 
     /**
@@ -95,7 +96,7 @@ class RecentSearchesDaoTest {
     fun migrateTableVersionFrom_v4_to_v5() {
         onUpdate(database, 4, 5)
         // Table didnt exist before v7
-        verifyZeroInteractions(database)
+        verifyNoInteractions(database)
     }
 
     /**
@@ -105,7 +106,7 @@ class RecentSearchesDaoTest {
     fun migrateTableVersionFrom_v5_to_v6() {
         onUpdate(database, 5, 6)
         // Table didnt exist before v7
-        verifyZeroInteractions(database)
+        verifyNoInteractions(database)
     }
 
     /**
@@ -124,7 +125,7 @@ class RecentSearchesDaoTest {
     fun migrateTableVersionFrom_v7_to_v8() {
         onUpdate(database, 7, 8)
         // Table didnt change in version 8
-        verifyZeroInteractions(database)
+        verifyNoInteractions(database)
     }
 
     /**

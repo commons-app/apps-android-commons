@@ -33,7 +33,7 @@ class RadioGroupHelperUnitTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         radioGroupHelper = RadioGroupHelper()
     }
 

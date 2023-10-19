@@ -20,7 +20,7 @@ class QuizControllerTest {
 
     @Before
     fun setup() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         `when`(context.getString(any(Int::class.java)))
             .thenReturn("")
         quizController = QuizController()

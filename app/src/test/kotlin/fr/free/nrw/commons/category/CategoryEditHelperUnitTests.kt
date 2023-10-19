@@ -44,7 +44,7 @@ class CategoryEditHelperUnitTests {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         context = ApplicationProvider.getApplicationContext()
         helper = CategoryEditHelper(notificationHelper, pageEditClient, viewUtilWrapper,
             "")

@@ -35,7 +35,7 @@ class ThanksClientTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         PowerMockito.mockStatic(CommonsApplication::class.java)
         PowerMockito.`when`(CommonsApplication.getInstance()).thenReturn(commonsApplication)
         thanksClient = ThanksClient(csrfTokenClient, service)
