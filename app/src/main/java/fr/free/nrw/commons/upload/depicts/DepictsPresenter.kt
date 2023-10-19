@@ -226,7 +226,6 @@ class DepictsPresenter @Inject constructor(
                             )
                         }
                 )
-
             }
         } else {
             repository.cleanup()
