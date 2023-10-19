@@ -224,7 +224,6 @@ class DepictsPresenter @Inject constructor(
                             Timber.e(
                                 "Failed to update depictions"
                             )
-
                         }
                 )
             }
