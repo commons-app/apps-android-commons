@@ -583,7 +583,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 Timber.e(e);
             }
 
-
         }
 
     }
