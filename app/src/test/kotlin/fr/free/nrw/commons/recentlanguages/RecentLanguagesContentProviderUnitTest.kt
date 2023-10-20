@@ -24,7 +24,7 @@ class RecentLanguagesContentProviderUnitTest {
 
     @Before
     fun setUp(){
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         contentProvider = RecentLanguagesContentProvider()
         Whitebox.setInternalState(contentProvider, "dbOpenHelper", dbOpenHelper)
     }

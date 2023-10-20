@@ -14,6 +14,7 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
 import java.util.*
 
@@ -45,7 +46,7 @@ class NearbyParentFragmentPresenterTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         nearbyPresenter = NearbyParentFragmentPresenter(bookmarkLocationsDao)
         nearbyPresenter.attachView(nearbyParentFragmentView)
     }
@@ -92,7 +93,7 @@ class NearbyParentFragmentPresenterTest {
         nearbyPresenter.lockUnlockNearby(true)
         nearbyPresenter.updateMapAndList(null)
         verify(nearbyParentFragmentView).disableFABRecenter()
-        verifyZeroInteractions(nearbyParentFragmentView)
+        verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 
     /**
@@ -238,7 +239,7 @@ class NearbyParentFragmentPresenterTest {
     fun testFilterByMarkerTypeMultiSelectUNKNOWN() {
         val state = CheckBoxTriStates.UNKNOWN
         nearbyPresenter.filterByMarkerType(selectedLabels,state,false,true)
-        verifyZeroInteractions(nearbyParentFragmentView)
+        verifyNoInteractions(nearbyParentFragmentView)
     }
 
     /**
@@ -499,7 +500,7 @@ class NearbyParentFragmentPresenterTest {
         nearbyPresenter.onCameraMove(Mockito.mock(com.mapbox.mapboxsdk.geometry.LatLng::class.java))
         verify(nearbyParentFragmentView).setProjectorLatLngBounds()
         verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
-        verifyZeroInteractions(nearbyParentFragmentView)
+        verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 
     @Test
@@ -509,7 +510,7 @@ class NearbyParentFragmentPresenterTest {
         nearbyPresenter.onCameraMove(Mockito.mock(com.mapbox.mapboxsdk.geometry.LatLng::class.java))
         verify(nearbyParentFragmentView).setProjectorLatLngBounds()
         verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
-        verifyZeroInteractions(nearbyParentFragmentView)
+        verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 
     @Test

@@ -15,22 +15,23 @@ import io.github.coordinates2country.Coordinates2Country
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.*
+import org.mockito.Mockito.mockStatic
 import org.mockito.Mockito.verify
-import org.powermock.api.mockito.PowerMockito
 import org.powermock.core.classloader.annotations.PrepareForTest
-import org.powermock.modules.junit4.PowerMockRunner
+import org.robolectric.RobolectricTestRunner
 import java.util.*
 
 
 /**
  * The class contains unit test cases for UploadMediaPresenter
  */
-@RunWith(PowerMockRunner::class)
+@RunWith(RobolectricTestRunner::class)
 @PrepareForTest(Coordinates2Country::class)
 class UploadMediaPresenterTest {
     @Mock
@@ -63,6 +64,7 @@ class UploadMediaPresenterTest {
     private lateinit var testSingleImageResult: Single<Int>
 
     private lateinit var testScheduler: TestScheduler
+    private lateinit var mockedCountry: MockedStatic<Coordinates2Country>
 
     @Mock
     private lateinit var jsonKvStore: JsonKvStore
@@ -73,14 +75,21 @@ class UploadMediaPresenterTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         testObservableUploadItem = Observable.just(uploadItem)
         testSingleImageResult = Single.just(1)
         testScheduler = TestScheduler()
         uploadMediaPresenter = UploadMediaPresenter(repository,
             jsonKvStore,testScheduler, testScheduler)
         uploadMediaPresenter.onAttachView(view)
+        mockedCountry = mockStatic(Coordinates2Country::class.java)
     }
+
+    @After
+    fun tearDown() {
+        mockedCountry.close()
+    }
+
 
     /**
      * unit test for method UploadMediaPresenter.receiveImage
@@ -252,8 +261,6 @@ class UploadMediaPresenterTest {
 
         val germanyAsPlace = Place(null,null, null, null, LatLng(50.1, 10.2, 1.0f), null, null, null, true)
         germanyAsPlace.isMonument = true
-
-        PowerMockito.mockStatic(Coordinates2Country::class.java)
 
         whenever(
             Coordinates2Country.country(

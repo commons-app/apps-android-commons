@@ -57,7 +57,7 @@ class DeleteHelperTest {
      */
     @Before
     fun setup() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         deleteHelper = DeleteHelper(mock(), pageEditClient, mock(), "")
     }
 

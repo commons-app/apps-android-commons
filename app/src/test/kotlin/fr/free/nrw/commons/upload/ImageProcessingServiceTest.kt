@@ -17,7 +17,7 @@ import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import java.io.FileInputStream
 
-class u {
+class ImageProcessingServiceTest {
     @Mock
     internal var fileUtilsWrapper: FileUtilsWrapper? = null
     @Mock
@@ -40,7 +40,7 @@ class u {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         val mediaUri = mock(Uri::class.java)
         val mockPlace = mock(Place::class.java)
         val mockTitle = mock(List::class.java)

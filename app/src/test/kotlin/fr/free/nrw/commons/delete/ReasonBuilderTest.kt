@@ -39,7 +39,7 @@ class ReasonBuilderTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         val resources = mock(Resources::class.java)
         `when`(resources!!.getString(anyInt())).thenReturn("test")
         `when`(context!!.resources).thenReturn(resources)

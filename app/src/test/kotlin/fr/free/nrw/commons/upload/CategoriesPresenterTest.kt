@@ -12,6 +12,7 @@ import media
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
+import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import java.lang.reflect.Method
@@ -36,7 +37,7 @@ class CategoriesPresenterTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         testScheduler = TestScheduler()
         categoriesPresenter = CategoriesPresenter(repository, testScheduler, testScheduler)
         categoriesPresenter.onAttachView(view)

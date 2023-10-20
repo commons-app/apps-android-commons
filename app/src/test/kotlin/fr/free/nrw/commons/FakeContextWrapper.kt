@@ -25,7 +25,7 @@ class FakeContextWrapper(base: Context?) : ContextWrapper(base) {
     }
 
     init {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         Mockito.`when`(mMockAccountManager.accounts).thenReturn(ACCOUNTS)
         Mockito.`when`(mMockAccountManager.getAccountsByType(BuildConfig.ACCOUNT_TYPE))
             .thenReturn(ACCOUNTS)

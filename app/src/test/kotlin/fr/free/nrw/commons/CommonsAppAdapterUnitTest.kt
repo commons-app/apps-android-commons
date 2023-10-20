@@ -31,7 +31,7 @@ class CommonsAppAdapterUnitTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         adapter = CommonsAppAdapter(sessionManager, preferences)
     }
 
