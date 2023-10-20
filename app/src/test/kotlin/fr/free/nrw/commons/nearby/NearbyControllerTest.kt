@@ -48,7 +48,7 @@ class NearbyControllerTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         nearbyController = NearbyController(nearbyPlaces)
         context = ApplicationProvider.getApplicationContext()
     }

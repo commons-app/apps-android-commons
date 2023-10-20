@@ -24,7 +24,7 @@ class NearbyBaseMarkerUnitTests {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         marker = NearbyBaseMarker()
         Whitebox.setInternalState(marker, "icon", icon)
     }

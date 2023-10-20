@@ -43,7 +43,7 @@ class SessionManagerUnitTests {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         accountManager = AccountManager.get(ApplicationProvider.getApplicationContext())
         shadowOf(accountManager).addAccount(account)
         sessionManager =

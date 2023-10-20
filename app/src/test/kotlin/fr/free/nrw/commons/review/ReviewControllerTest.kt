@@ -56,7 +56,7 @@ class ReviewControllerTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         context = ApplicationProvider.getApplicationContext()
         AppAdapter.set(TestAppAdapter())
         SoLoader.setInTestMode()

@@ -39,7 +39,7 @@ class CommonPlaceClickActionsUnitTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         val activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         commonPlaceClickActions = CommonPlaceClickActions(store, activity, contributionController)
     }

@@ -6,6 +6,6 @@
 <resources>
   <string name="crash_dialog_title">Ostava je otkazala</string>
   <string name="crash_dialog_text">Ups! Nešto nije u redu.</string>
-  <string name="crash_dialog_comment_prompt">Recite nam šta ste radili pa to saznanje podelite sa nama, putem imejla. Time ćete nam pomoći da rešimo problem.</string>
+  <string name="crash_dialog_comment_prompt">Recite nam šta ste radili, pa to saznanje podelite sa nama putem e-pošte. Time ćete nam pomoći da rešimo problem.</string>
   <string name="crash_dialog_ok_toast">Hvala vam!</string>
 </resources>

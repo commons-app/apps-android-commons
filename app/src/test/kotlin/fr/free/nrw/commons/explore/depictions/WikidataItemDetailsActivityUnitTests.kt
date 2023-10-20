@@ -64,7 +64,7 @@ class WikidataItemDetailsActivityUnitTests {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         AppAdapter.set(TestAppAdapter())
         val intent = Intent(
             ApplicationProvider.getApplicationContext(),
