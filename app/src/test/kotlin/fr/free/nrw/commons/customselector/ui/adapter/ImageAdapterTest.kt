@@ -109,9 +109,6 @@ class ImageAdapterTest {
 
         whenever(context.contentResolver).thenReturn(mockContentResolver)
         whenever(mockContentResolver.getType(uri)).thenReturn("jpg")
-        setFinalStatic(
-                ImageAdapter::class.java.getDeclaredField("context"),
-                context)
         // Parameters.
         images.add(image)
         imageAdapter.init(images, images, TreeMap())

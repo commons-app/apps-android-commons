@@ -79,10 +79,6 @@ class FolderAdapterTest {
 
         whenever(context.contentResolver).thenReturn(mockContentResolver)
         whenever(mockContentResolver.getType(any())).thenReturn("jpg")
-        setFinalStatic(
-                FolderAdapter::class.java.getDeclaredField("context"),
-                context
-            )
         folderAdapter.init(folderList)
         folderAdapter.onBindViewHolder(FolderAdapter.FolderViewHolder(listItemView), 0)
     }

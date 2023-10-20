@@ -93,7 +93,7 @@ class NearbyParentFragmentPresenterTest {
         nearbyPresenter.lockUnlockNearby(true)
         nearbyPresenter.updateMapAndList(null)
         verify(nearbyParentFragmentView).disableFABRecenter()
-        verifyNoInteractions(nearbyParentFragmentView)
+        verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 
     /**
@@ -107,7 +107,7 @@ class NearbyParentFragmentPresenterTest {
         nearbyPresenter.updateMapAndList(null)
         verify(nearbyParentFragmentView).enableFABRecenter()
         verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
-        verifyNoInteractions(nearbyParentFragmentView)
+        verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 
     /**
@@ -122,7 +122,7 @@ class NearbyParentFragmentPresenterTest {
         verify(nearbyParentFragmentView).enableFABRecenter()
         verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
         verify(nearbyParentFragmentView).getLastLocation()
-        verifyNoInteractions(nearbyParentFragmentView)
+        verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 
     /**
@@ -192,7 +192,7 @@ class NearbyParentFragmentPresenterTest {
         verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
         verify(nearbyParentFragmentView).getLastLocation()
         verify(nearbyParentFragmentView).isCurrentLocationMarkerVisible()
-        verifyNoInteractions(nearbyParentFragmentView)
+        verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 
     /**
@@ -255,7 +255,7 @@ class NearbyParentFragmentPresenterTest {
         nearbyPresenter.filterByMarkerType(selectedLabels,state,false,true)
         verify(nearbyParentFragmentView).filterOutAllMarkers()
         verify(nearbyParentFragmentView).setRecyclerViewAdapterItemsGreyedOut()
-        verifyNoInteractions(nearbyParentFragmentView)
+        verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 
     /**
@@ -278,7 +278,7 @@ class NearbyParentFragmentPresenterTest {
             ArgumentMatchers.anyBoolean()
         );
         verify(nearbyParentFragmentView).setRecyclerViewAdapterAllSelected()
-        verifyNoInteractions(nearbyParentFragmentView)
+        verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 
     /**
@@ -295,7 +295,7 @@ class NearbyParentFragmentPresenterTest {
             any(),
             any()
         );
-        verifyNoInteractions(nearbyParentFragmentView)
+        verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 
     /**
@@ -500,7 +500,7 @@ class NearbyParentFragmentPresenterTest {
         nearbyPresenter.onCameraMove(Mockito.mock(com.mapbox.mapboxsdk.geometry.LatLng::class.java))
         verify(nearbyParentFragmentView).setProjectorLatLngBounds()
         verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
-        verifyNoInteractions(nearbyParentFragmentView)
+        verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 
     @Test
@@ -510,7 +510,7 @@ class NearbyParentFragmentPresenterTest {
         nearbyPresenter.onCameraMove(Mockito.mock(com.mapbox.mapboxsdk.geometry.LatLng::class.java))
         verify(nearbyParentFragmentView).setProjectorLatLngBounds()
         verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
-        verifyNoInteractions(nearbyParentFragmentView)
+        verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 
     @Test
