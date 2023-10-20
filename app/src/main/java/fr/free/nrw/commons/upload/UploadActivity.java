@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload;
 
 import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
 import static fr.free.nrw.commons.utils.PermissionUtils.PERMISSIONS_STORAGE;
+import static fr.free.nrw.commons.utils.PermissionUtils.checkPermissionsAndPerformAction;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.SELECTED_NEARBY_PLACE;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.SELECTED_NEARBY_PLACE_CATEGORY;
@@ -19,11 +20,13 @@ import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -143,6 +146,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
      */
     public static HashMap<Place,Boolean> nearbyPopupAnswers;
 
+    public boolean hasAllPermissions = true;
     @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,7 +170,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         }
         locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
         locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
-        checkStoragePermissions();
     }
 
     private void init() {
@@ -225,6 +228,11 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        checkStoragePermissions();
+    }
+    @Override
     protected void onResume() {
         super.onResume();
         presenter.onAttachView(this);
@@ -232,6 +240,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             askUserToLogIn();
         }
         checkBlockStatus();
+        checkStoragePermissions();
     }
 
     /**
@@ -252,13 +261,28 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                 true)));
     }
 
-    private void checkStoragePermissions() {
+    public void checkStoragePermissions() {
         final boolean hasAllPermissions = PermissionUtils.hasPermission(this, PERMISSIONS_STORAGE);
         if (hasAllPermissions) {
             receiveSharedItems();
-        } else if (VERSION.SDK_INT >= VERSION_CODES.M) {
-            requestPermissions(PERMISSIONS_STORAGE, RequestCodes.STORAGE);
+            cvContainerTopCard.setVisibility(View.VISIBLE);
+        } else{
+            cvContainerTopCard.setVisibility(View.INVISIBLE);
+            if(this.hasAllPermissions){
+                checkPermissionsAndPerformAction(this,
+                    () -> {
+                        cvContainerTopCard.setVisibility(View.VISIBLE);
+                        this.receiveSharedItems();
+                    },() -> {
+                        this.hasAllPermissions = true;
+                        this.checkStoragePermissions();
+                        },
+                    R.string.storage_permission_title,
+                    R.string.write_storage_permission_rationale_for_image_share,
+                    PERMISSIONS_STORAGE);
+            }
         }
+        this.hasAllPermissions = hasAllPermissions ;
     }
 
     @Override
