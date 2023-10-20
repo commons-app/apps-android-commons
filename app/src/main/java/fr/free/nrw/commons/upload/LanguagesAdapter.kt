@@ -26,6 +26,16 @@ class LanguagesAdapter constructor(
     private val selectedLanguages: HashMap<*, String>
 ) : ArrayAdapter<String?>(context, R.layout.row_item_languages_spinner) {
 
+    companion object {
+        /**
+         * Represents the default index for the language list. By default, this index corresponds to the
+         * English language. This serves as a fallback when the user's system language is not present in
+         * the language_list.xml. Though this default can be changed by the user, it does not affect other
+         * functionalities of the application. Fixes bug issue 5338
+         */
+        const val DEFAULT_INDEX = 0
+    }
+
     private var languageNamesList: List<String>
     private var languageCodesList: List<String>
 
@@ -85,11 +95,33 @@ class LanguagesAdapter constructor(
         return languageNamesList[position]
     }
 
+    /**
+     * Retrieves the index of the user's default locale from the list of available languages.
+     *
+     * This function checks the user's system language and finds its index within the application's
+     * list of supported languages. If the system language is not supported, or any error occurs,
+     * it falls back to the default language index, typically representing English.
+     *
+     *
+     * @param context The context used to get the user's system locale.
+     * @return The index of the user's default language in the supported language list,
+     *         or the default index if the language is not found.
+     * Note: This function was implemented to address a bug where unsupported system languages
+     * resulted in an incorrect language selection. Directly returning the result of `indexOf`
+     * without checking its validity could result in returning an index of -1, leading to ArrayIndex
+     * OutOfBoundsException.
+     * [See bug  issue 5338]
+     * It's essential to ensure that the returned index is valid or fall back to a default index.
+     * Future contributors are advised not to simplify this function without addressing this concern.
+     */
     fun getIndexOfUserDefaultLocale(context: Context): Int {
-        return language.codes.indexOf(context.locale!!.language)
+
+        val userLanguageCode = context.locale?.language ?: return DEFAULT_INDEX
+        return language.codes.indexOf(userLanguageCode).takeIf { it >= 0 } ?: DEFAULT_INDEX
     }
 
     fun getIndexOfLanguageCode(languageCode: String): Int {
+
         return languageCodesList.indexOf(languageCode)
     }
 

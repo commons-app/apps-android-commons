@@ -10,13 +10,11 @@ import android.os.Parcelable;
 import androidx.annotation.Nullable;
 import androidx.exifinterface.media.ExifInterface;
 
+import fr.free.nrw.commons.upload.FileUtils;
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import fr.free.nrw.commons.upload.FileUtils;
+import timber.log.Timber;
 
 public class UploadableFile implements Parcelable {
     public static final Creator<UploadableFile> CREATOR = new Creator<UploadableFile>() {
@@ -74,7 +72,6 @@ public class UploadableFile implements Parcelable {
         return 0;
     }
 
-
     /**
      * First try to get the file creation date from EXIF else fall back to CP
      * @param context
@@ -119,6 +116,24 @@ public class UploadableFile implements Parcelable {
     }
 
     /**
+     * Indicate whether the EXIF contains the location (both latitude and longitude).
+     *
+     * @return whether the location exists for the file's EXIF
+     */
+    public boolean hasLocation() {
+        try {
+            ExifInterface exif = new ExifInterface(file.getAbsolutePath());
+            final String latitude = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
+            final String longitude = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
+            return latitude != null && longitude != null;
+        } catch (IOException | NumberFormatException | IndexOutOfBoundsException e) {
+            Timber.tag("UploadableFile");
+            Timber.d(e);
+        }
+        return false;
+    }
+
+    /**
      * Get filePath creation date from uri from EXIF
      *
      * @return
@@ -143,13 +158,9 @@ public class UploadableFile implements Parcelable {
                     }
                 }
             }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        } catch (IndexOutOfBoundsException e) {
-            e.printStackTrace();
+        } catch (IOException | NumberFormatException | IndexOutOfBoundsException e) {
+            Timber.tag("UploadableFile");
+            Timber.d(e);
         }
         return null;
     }

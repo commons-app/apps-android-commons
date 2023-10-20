@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
+import android.os.Build;
 import androidx.core.app.NotificationCompat;
 
 import javax.inject.Inject;
@@ -49,21 +50,29 @@ public class NotificationHelper {
      * @param intent the intent to be fired when the notification is clicked
      */
     public void showNotification(Context context,
-                                 String notificationTitle,
-                                 String notificationMessage,
-                                 int notificationId,
-                                 Intent intent) {
+        String notificationTitle,
+        String notificationMessage,
+        int notificationId,
+        Intent intent) {
 
         notificationBuilder.setDefaults(DEFAULT_ALL)
-                .setContentTitle(notificationTitle)
-                .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText(notificationMessage))
-                .setSmallIcon(R.drawable.ic_launcher)
-                .setProgress(0, 0, false)
-                .setOngoing(false)
-                .setPriority(PRIORITY_HIGH);
+            .setContentTitle(notificationTitle)
+            .setStyle(new NotificationCompat.BigTextStyle()
+                .bigText(notificationMessage))
+            .setSmallIcon(R.drawable.ic_launcher)
+            .setProgress(0, 0, false)
+            .setOngoing(false)
+            .setPriority(PRIORITY_HIGH);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        int flags = PendingIntent.FLAG_UPDATE_CURRENT;
+
+        // Check if the API level is 31 or higher to modify the flag
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            // For API level 31 or above, PendingIntent requires either FLAG_IMMUTABLE or FLAG_MUTABLE to be set
+            flags |= PendingIntent.FLAG_IMMUTABLE;
+        }
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, intent, flags);
         notificationBuilder.setContentIntent(pendingIntent);
         notificationManager.notify(notificationId, notificationBuilder.build());
     }

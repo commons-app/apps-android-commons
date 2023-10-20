@@ -32,7 +32,7 @@ class WikidataClientTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         val mwQueryResponse = mock(MwQueryResponse::class.java)
         val mwQueryResult = mock(MwQueryResult::class.java)
         `when`(mwQueryResult!!.csrfToken()).thenReturn("test_token")

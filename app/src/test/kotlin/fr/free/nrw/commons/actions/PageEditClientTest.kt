@@ -33,7 +33,7 @@ class PageEditClientTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         pageEditClient = PageEditClient(csrfTokenClient, pageEditInterface)
     }
 

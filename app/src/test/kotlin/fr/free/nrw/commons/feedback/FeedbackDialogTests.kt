@@ -7,11 +7,13 @@ import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.doReturn
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.TestUtility.setFinalStatic
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.databinding.DialogFeedbackBinding
 import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText
 import org.junit.Assert
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
@@ -40,7 +42,7 @@ class FeedbackDialogTests {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
 
         context = ApplicationProvider.getApplicationContext()
         AppAdapter.set(TestAppAdapter())
@@ -64,9 +66,11 @@ class FeedbackDialogTests {
     fun testSubmitFeedbackError() {
         val editable = mock(Editable::class.java)
         val ed = mock(PasteSensitiveTextInputEditText::class.java)
-        Whitebox.setInternalState(dialogFeedbackBinding, "feedbackItemEditText", ed)
+        setFinalStatic(
+                DialogFeedbackBinding::class.java.getDeclaredField("feedbackItemEditText"),
+                ed)
         `when`(ed?.text).thenReturn(editable)
-        doReturn(editable).`when`(dialogFeedbackBinding.feedbackItemEditText)?.text
+        doReturn(editable).`when`(ed)?.text
         doReturn("").`when`(editable).toString()
         dialog.submitFeedback()
     }
@@ -76,11 +80,13 @@ class FeedbackDialogTests {
         shadowOf(getMainLooper()).idle()
         val editable: Editable = mock(Editable::class.java)
         val ed = mock(PasteSensitiveTextInputEditText::class.java)
-        Whitebox.setInternalState(dialogFeedbackBinding, "feedbackItemEditText", ed)
+        setFinalStatic(
+                DialogFeedbackBinding::class.java.getDeclaredField("feedbackItemEditText"),
+                ed)
         `when`(ed?.text).thenReturn(editable)
         `when`(editable.toString()).thenReturn("1234")
 
-        Assert.assertEquals(dialogFeedbackBinding.feedbackItemEditText?.text.toString(), "1234")
+        Assert.assertEquals(ed.text.toString(), "1234")
         dialog.submitFeedback()
     }
 

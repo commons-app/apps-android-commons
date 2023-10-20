@@ -47,7 +47,7 @@ class OkHttpJsonApiClientTests {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         okHttpJsonApiClient = OkHttpJsonApiClient(
             okhttpClient,
             depictsClient,

@@ -8,18 +8,23 @@ import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.TestUtility.setFinalStatic
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import org.powermock.core.classloader.annotations.PrepareForTest
 import org.powermock.reflect.Whitebox
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.wikipedia.AppAdapter
+import java.lang.reflect.Field
+import java.lang.reflect.Modifier
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
+@PrepareForTest(OnSwipeTouchListener::class)
 internal class OnSwipeTouchListenerTest {
 
     private lateinit var context: Context
@@ -42,13 +47,14 @@ internal class OnSwipeTouchListenerTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         AppAdapter.set(TestAppAdapter())
+//        motionEvent1 = MotionEvent.obtain(200, 300, MotionEvent.ACTION_MOVE, 15.0f, 10.0f, 0);
 
         context = ApplicationProvider.getApplicationContext()
         onSwipeTouchListener = OnSwipeTouchListener(context)
         gesListener = OnSwipeTouchListener(context).GestureListener()
-
-        Whitebox.setInternalState(onSwipeTouchListener, "gestureDetector", gestureDetector)
-
+        setFinalStatic(
+                OnSwipeTouchListener::class.java.getDeclaredField("gestureDetector"),
+                gestureDetector)
     }
 
     /**
@@ -56,9 +62,10 @@ internal class OnSwipeTouchListenerTest {
      */
     @Test
     fun onTouch() {
+        val motionEvent = MotionEvent.obtain(200, 300, MotionEvent.ACTION_MOVE, 15.0f, 10.0f, 0);
         val func = onSwipeTouchListener.javaClass.getDeclaredMethod("onTouch", View::class.java, MotionEvent::class.java)
         func.isAccessible = true
-        func.invoke(onSwipeTouchListener, view, motionEvent1)
+        func.invoke(onSwipeTouchListener, view, motionEvent)
     }
 
 

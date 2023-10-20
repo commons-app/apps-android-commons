@@ -22,3 +22,8 @@ allprojects {
         maven { url "https://maven.google.com" }
     }
 }
+subprojects{
+    tasks.withType(Test).configureEach{
+        jvmArgs = jvmArgs + ['--add-opens=java.base/java.lang=ALL-UNNAMED']
+    }
+}

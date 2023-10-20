@@ -124,7 +124,9 @@
   <string name="login_success">登录成功！</string>
   <string name="login_failed">登录失败！</string>
   <string name="upload_failed">找不到文件。请尝试其他文件。</string>
+  <string name="retry_limit_reached">已达到最大重试限制！请取消上传并重试</string>
   <string name="unrestricted_battery_mode">关闭电池优化？</string>
+  <string name="suggest_unrestricted_mode">关闭电池优化后，上传3张以上图像会更可靠。请从设置中关闭共享资源应用的电池优化，以获得流畅的上传体验。 \n\n电池优化可按以下步骤关闭：\n\n第1步：点按下面的“设置”按钮。\n\n第2步：从“未优化”切换为“全部应用”。\n\n第3步：寻找“Commons”或“fr.free.nrw.commons”。\n\n第4步：点按并选择“不优化”。\n\n第5步：按“完成”。</string>
   <string name="authentication_failed">身份验证失败，请重新登录</string>
   <string name="uploading_started">上传开始！</string>
   <string name="uploading_queued">上传排队中（已启用连接受限模式）</string>
@@ -240,6 +242,7 @@
   <string name="write_storage_permission_rationale">需要权限：写入外部存储。应用不能在没有它的情况下访问您的相机/图册。</string>
   <string name="location_permission_title">请求位置权限</string>
   <string name="in_app_camera_location_permission_title">记录应用内拍摄的位置</string>
+  <string name="in_app_camera_location_switch_pref_summary">启用此功能可通过应用内拍摄记录位置，以防设备相机未记录位置</string>
   <string name="ok">确定</string>
   <string name="warning">警告</string>
   <string name="duplicate_file_name">发现重复的文件名</string>
@@ -318,6 +321,7 @@
   <string name="copy_wikicode">复制wikitext到剪贴板</string>
   <string name="wikicode_copied">wikitext已经复制到剪贴板</string>
   <string name="nearby_location_not_available">附近可能无法正常工作，位置不可用。</string>
+  <string name="upload_location_access_denied">位置权限被拒绝。请手动设置您的位置以使用此功能。</string>
   <string name="location_permission_rationale_nearby">需要权限以显示附近地点列表</string>
   <string name="nearby_directions">方向</string>
   <string name="nearby_wikidata">维基数据</string>
@@ -465,8 +469,12 @@
   <string name="ends_on">结束于：</string>
   <string name="display_campaigns">显示活动</string>
   <string name="display_campaigns_explanation">显示正在进行的活动</string>
+  <string name="in_app_camera_location_access_explanation">允许应用获取位置，以防相机未记录位置。某些设备的相机不记录位置。在这种情况下，让应用获取位置并将其附加到照片可以让您的贡献更有用。您可以随时从“设置”中更改此设置</string>
   <string name="option_allow">允许</string>
   <string name="option_dismiss">拒绝</string>
+  <string name="in_app_camera_needs_location">请从“设置”中打开位置权限，然后重试。 \n\n注意：如果应用程序无法在短时间内从设备检索位置，则上传可能没有位置。</string>
+  <string name="open_document_photo_picker_title">使用基于“文件”应用的照片选择器</string>
+  <string name="open_document_photo_picker_explanation">新版Android照片选择器可能会丢失位置信息。如果您正在使用它，请启用该设置。</string>
   <string name="location_loss_warning">将此关闭可能会触发新的 Android 照片选择器。这可能会有丢失位置信息的风险。\n\n点击“阅读更多”以获取更多信息。</string>
   <string name="nearby_campaign_dismiss_message">你不会再看到这个活动。如果需要可以在设置里重新启用此通知。</string>
   <string name="this_function_needs_network_connection">这个功能需要网络连接，请检查你的网络设置。</string>
@@ -762,4 +770,8 @@
   <string name="full_screen_mode_features_info">快速长距离滑动来执行以下操作：\n- 向左/右：前往上一个/下一个\n- 向上：选择\n- 向下：标记为不上传</string>
   <string name="set_up_avatar_toast_string">要设置你的排行榜头像，请点击任意图片上三点式菜单中的\"设置为头像\"</string>
   <string name="similar_coordinate_description_auto_set">图片坐标并不是准确的坐标，但上传这张图片的人认为它们足够接近。</string>
+  <plurals name="custom_picker_images_selected_title_appendix">
+    <item quantity="one">已选择%d个图像</item>
+    <item quantity="other">已选择%d个图像</item>
+  </plurals>
 </resources>

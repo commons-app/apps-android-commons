@@ -129,6 +129,7 @@
   <string name="login_success">Вход выполнен успешно!</string>
   <string name="login_failed">Ошибка входа в систему!</string>
   <string name="upload_failed">Файл не найден. Попробуйте другой файл.</string>
+  <string name="retry_limit_reached">Достигнут максимальный лимит повторов! Пожалуйста, отмените загрузку и повторите попытку.</string>
   <string name="unrestricted_battery_mode">Выключить оптимизацию батареи?</string>
   <string name="authentication_failed">Ошибка аутентификации. Пожалуйста, авторизуйтесь ещё раз.</string>
   <string name="uploading_started">Загрузка началась!</string>
@@ -778,4 +779,10 @@
   <string name="full_screen_mode_features_info">Проведите быстро и широко, чтобы выполнить следующие действия: \n- Влево/вправо: переход к предыдущему/следующему \n- Вверх: выбрать\n- Вниз: пометить как не для загрузки.</string>
   <string name="set_up_avatar_toast_string">Чтобы установить свой аватар в таблице лидеров, на любом изображении в меню с тремя точками нажмите «Установить как аватар».</string>
   <string name="similar_coordinate_description_auto_set">Координаты не являются точными, но человек, загрузивший эту фотографию, считает, что они достаточно близки.</string>
+  <plurals name="custom_picker_images_selected_title_appendix">
+    <item quantity="one">выбрано %d изображение</item>
+    <item quantity="few">выбрано %d изображения</item>
+    <item quantity="many">выбрано %d изображений</item>
+    <item quantity="other"/>
+  </plurals>
 </resources>
