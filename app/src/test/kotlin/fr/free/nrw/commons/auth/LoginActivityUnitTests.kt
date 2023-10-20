@@ -74,7 +74,7 @@ class LoginActivityUnitTests {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         AppAdapter.set(TestAppAdapter())
         activity = Robolectric.buildActivity(LoginActivity::class.java).create().get()
         context = ApplicationProvider.getApplicationContext()

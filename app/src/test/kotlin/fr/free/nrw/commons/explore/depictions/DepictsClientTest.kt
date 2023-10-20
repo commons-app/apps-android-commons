@@ -26,7 +26,7 @@ class DepictsClientTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         depictsClient = DepictsClient(depictsInterface)
     }
 

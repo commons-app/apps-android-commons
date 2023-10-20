@@ -63,7 +63,7 @@ class FilePickerTest {
         `when`(sharedPref.edit().putInt("type", 0)).thenReturn(sharedPreferencesEditor)
         FilePicker.openGallery(activity, 0, nextBoolean())
         verify(activity).startActivityForResult(
-            ArgumentMatchers.anyObject(),
+            ArgumentMatchers.any(),
             requestCodeCaptor?.capture()?.toInt()!!
         )
         assertEquals(requestCodeCaptor?.value, RequestCodes.PICK_PICTURE_FROM_GALLERY)
@@ -78,7 +78,7 @@ class FilePickerTest {
         `when`(activity.applicationContext).thenReturn(mockApplication)
         FilePicker.openCameraForImage(activity, 0)
         verify(activity).startActivityForResult(
-            ArgumentMatchers.anyObject(),
+            ArgumentMatchers.any(),
             requestCodeCaptor?.capture()?.toInt()!!
         )
         assertEquals(requestCodeCaptor?.value, RequestCodes.TAKE_PICTURE)
@@ -227,7 +227,7 @@ class FilePickerTest {
         `when`(sharedPref.edit()).thenReturn(sharedPreferencesEditor)
         `when`(sharedPref.edit().putInt("type", 0)).thenReturn(sharedPreferencesEditor)
         FilePicker.openCustomSelector(activity, 0)
-        verify(activity).startActivityForResult(ArgumentMatchers.anyObject(), requestCodeCaptor?.capture()?.toInt()!!)
+        verify(activity).startActivityForResult(ArgumentMatchers.any(), requestCodeCaptor?.capture()?.toInt()!!)
         assertEquals(requestCodeCaptor?.value, RequestCodes.PICK_PICTURE_FROM_CUSTOM_SELECTOR)
     }
 }

@@ -39,7 +39,7 @@ class ProfileActivityTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         mockContext = ApplicationProvider.getApplicationContext()
     }

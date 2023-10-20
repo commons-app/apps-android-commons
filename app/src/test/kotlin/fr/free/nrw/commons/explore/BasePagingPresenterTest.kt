@@ -42,7 +42,7 @@ class BasePagingPresenterTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         whenever(pageableBaseDataSource.pagingResults).thenReturn(searchResults)
         whenever(pageableBaseDataSource.loadingStates).thenReturn(loadingStates)
         whenever(pageableBaseDataSource.noItemsLoadedQueries)

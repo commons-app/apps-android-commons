@@ -26,7 +26,7 @@ class SignupActivityTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         activity = Robolectric.buildActivity(SignupActivity::class.java).create().get()
     }
 

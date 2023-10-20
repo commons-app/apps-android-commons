@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.filepicker;
 
+import static fr.free.nrw.commons.filepicker.PickedFiles.singleFileList;
+
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Context;
@@ -8,13 +10,11 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import androidx.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
+import androidx.preference.PreferenceManager;
 import fr.free.nrw.commons.customselector.model.Image;
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity;
 import java.io.File;
@@ -22,8 +22,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static fr.free.nrw.commons.filepicker.PickedFiles.singleFileList;
 
 public class FilePicker implements Constants {
 

@@ -25,7 +25,7 @@ class MultiPointerGestureDetectorUnitTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         detector = MultiPointerGestureDetector()
         detector = MultiPointerGestureDetector.newInstance()
         detector.setListener(listener)
