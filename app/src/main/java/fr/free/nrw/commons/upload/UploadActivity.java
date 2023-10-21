@@ -749,7 +749,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     /**
      * Get the value of the showPermissionDialog variable.
      *
-     * @return {@code true} if the object has all the required permissions, {@code false} otherwise.
+     * @return {@code true} if Permission Dialog should be shown, {@code false} otherwise.
      */
     public boolean isShowPermissionsDialog() {
         return showPermissionsDialog;
@@ -757,7 +757,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     /**
      * Set the value of the showPermissionDialog variable.
      *
-     * @param showPermissionsDialog {@code true} to indicate that the object has all the required permissions, {@code false} otherwise.
+     * @param showPermissionsDialog {@code true} to indicate to show
+     * Permissions Dialog if permissions are missing, {@code false} otherwise.
      */
     public void setShowPermissionsDialog(final boolean showPermissionsDialog) {
         this.showPermissionsDialog = showPermissionsDialog;
