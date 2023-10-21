@@ -146,7 +146,7 @@ public class PermissionUtils {
                             () -> {
                                 askUserToManuallyEnablePermissionFromSettings(activity);
                                 if (activity instanceof UploadActivity) {
-                                    ((UploadActivity) activity).hasAllPermissions = true;
+                                    ((UploadActivity) activity).setShowPermissionsDialog(true);
                                 }
                             }, null, null,
                             !(activity instanceof UploadActivity));
@@ -169,9 +169,8 @@ public class PermissionUtils {
                         activity.getString(android.R.string.ok),
                         activity.getString(android.R.string.cancel),
                         () -> {
-
                             if (activity instanceof UploadActivity) {
-                                ((UploadActivity) activity).hasAllPermissions = true;
+                                ((UploadActivity) activity).setShowPermissionsDialog(true);
                             }
                             token.continuePermissionRequest();
                         }

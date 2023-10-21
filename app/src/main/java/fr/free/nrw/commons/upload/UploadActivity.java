@@ -20,13 +20,11 @@ import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -146,7 +144,23 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
      */
     public static HashMap<Place,Boolean> nearbyPopupAnswers;
 
-    public boolean hasAllPermissions = true;
+    /**
+     * A private boolean variable to control whether a permissions dialog should be shown
+     * when necessary. Initially, it is set to `true`, indicating that the permissions dialog
+     * should be displayed if permissions are missing and it is first time calling
+     * `checkStoragePermissions` method.
+     *
+     * This variable is used in the `checkStoragePermissions` method to determine whether to
+     * show a permissions dialog to the user if the required permissions are not granted.
+     *
+     * If `showPermissionsDialog` is set to `true` and the necessary permissions are missing,
+     * a permissions dialog will be displayed to request the required permissions. If set
+     * to `false`, the dialog won't be shown.
+     *
+     * @see UploadActivity#checkStoragePermissions()
+     */
+    private boolean showPermissionsDialog = true;
+
     @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -262,19 +276,22 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
     public void checkStoragePermissions() {
+        // Check if all required permissions are granted
         final boolean hasAllPermissions = PermissionUtils.hasPermission(this, PERMISSIONS_STORAGE);
         if (hasAllPermissions) {
+            // All required permissions are granted, so enable UI elements and perform actions
             receiveSharedItems();
             cvContainerTopCard.setVisibility(View.VISIBLE);
         } else{
+            // Permissions are missing
             cvContainerTopCard.setVisibility(View.INVISIBLE);
-            if(this.hasAllPermissions){
+            if(showPermissionsDialog){
                 checkPermissionsAndPerformAction(this,
                     () -> {
                         cvContainerTopCard.setVisibility(View.VISIBLE);
                         this.receiveSharedItems();
                     },() -> {
-                        this.hasAllPermissions = true;
+                        this.showPermissionsDialog = true;
                         this.checkStoragePermissions();
                         },
                     R.string.storage_permission_title,
@@ -282,7 +299,12 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                     PERMISSIONS_STORAGE);
             }
         }
-        this.hasAllPermissions = hasAllPermissions ;
+        /* If all permissions are not granted and a dialog is already showing on screen
+         showPermissionsDialog will set to false making it not show dialog again onResume,
+         but if user Denies any permission showPermissionsDialog will be to true
+         and permissions dialog will be shown again.
+         */
+        this.showPermissionsDialog = hasAllPermissions ;
     }
 
     @Override
@@ -723,6 +745,22 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         if (uploadCategoriesFragment != null) {
             uploadCategoriesFragment.setCallback(null);
         }
+    }
+    /**
+     * Get the value of the showPermissionDialog variable.
+     *
+     * @return {@code true} if the object has all the required permissions, {@code false} otherwise.
+     */
+    public boolean isShowPermissionsDialog() {
+        return showPermissionsDialog;
+    }
+    /**
+     * Set the value of the showPermissionDialog variable.
+     *
+     * @param showPermissionsDialog {@code true} to indicate that the object has all the required permissions, {@code false} otherwise.
+     */
+    public void setShowPermissionsDialog(final boolean showPermissionsDialog) {
+        this.showPermissionsDialog = showPermissionsDialog;
     }
 
     /**
