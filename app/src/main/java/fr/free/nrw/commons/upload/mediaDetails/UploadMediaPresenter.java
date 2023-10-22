@@ -182,7 +182,8 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
       final List<UploadItem> uploadItems = repository.getUploads();
       if (uploadItems.size()==0) {
           view.showProgress(false);
-          view.showMessage("An out-of-sync of the number of Upload Media Detail Fragment and upload items happens.",R.color.color_error);
+          // No internationalization required for this error message because it's an internal error.
+          view.showMessage("Internal error: Zero upload items received by the Upload Media Detail Fragment. Sorry, please upload again.",R.color.color_error);
           return false;
       }
       UploadItem uploadItem = uploadItems.get(uploadItemIndex);
