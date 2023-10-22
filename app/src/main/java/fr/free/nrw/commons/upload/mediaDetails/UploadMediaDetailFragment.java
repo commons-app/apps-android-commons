@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
 import static android.app.Activity.RESULT_OK;
+import static fr.free.nrw.commons.utils.ActivityUtils.startActivityWithFlags;
 import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
@@ -31,6 +32,7 @@ import com.github.chrisbanes.photoview.PhotoView;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import fr.free.nrw.commons.LocationPicker.LocationPicker;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
@@ -244,7 +246,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @OnClick(R.id.btn_next)
     public void onNextButtonClicked() {
-        presenter.verifyImageQuality(callback.getIndexInViewFlipper(this), inAppPictureLocation);
+        boolean isValidUploads = presenter.verifyImageQuality(callback.getIndexInViewFlipper(this), inAppPictureLocation);
+        if (!isValidUploads) {
+            startActivityWithFlags(
+                getActivity(), MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        }
     }
 
     @OnClick(R.id.btn_previous)

@@ -178,8 +178,14 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      * @param uploadItemIndex
      */
     @Override
-    public void verifyImageQuality(int uploadItemIndex, LatLng inAppPictureLocation) {
-      final UploadItem uploadItem = repository.getUploads().get(uploadItemIndex);
+    public boolean verifyImageQuality(int uploadItemIndex, LatLng inAppPictureLocation) {
+      final List<UploadItem> uploadItems = repository.getUploads();
+      if (uploadItems.size()==0) {
+          view.showProgress(false);
+          view.showMessage("Upload Failed",R.color.color_error);
+          return false;
+      }
+      UploadItem uploadItem = uploadItems.get(uploadItemIndex);
 
       if (uploadItem.getGpsCoords().getDecimalCoords() == null && inAppPictureLocation == null) {
           final Runnable onSkipClicked = () -> {
@@ -227,6 +233,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                       })
           );
       }
+      return true;
     }
 
 
@@ -347,4 +354,5 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
             similarImageCoordinates
         );
     }
+
 }
