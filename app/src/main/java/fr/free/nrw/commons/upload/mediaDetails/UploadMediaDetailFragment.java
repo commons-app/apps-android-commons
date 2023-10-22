@@ -176,6 +176,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
         if (callback.getIndexInViewFlipper(this) == 0) {
             btnPrevious.setEnabled(false);
+
             btnPrevious.setAlpha(0.5f);
         } else {
             btnPrevious.setEnabled(true);
@@ -195,12 +196,21 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         }
 
         //If this is the last media, we have nothing to copy, lets not show the button
-        if (callback.getIndexInViewFlipper(this) == callback.getTotalNumberOfSteps()-4) {
-            btnCopyToSubsequentMedia.setVisibility(View.GONE);
-        } else {
+
+        if (callback.getIndexInViewFlipper(this) != callback.getTotalNumberOfSteps()-4){
             btnCopyToSubsequentMedia.setVisibility(View.VISIBLE);
+
+
+        } else{
+            btnCopyToSubsequentMedia.setVisibility(View.GONE);
+
         }
 
+
+
+
+
+        // test
         attachImageViewScaleChangeListener();
     }
 
