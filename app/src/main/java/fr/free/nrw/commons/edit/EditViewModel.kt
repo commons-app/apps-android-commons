@@ -23,6 +23,5 @@ class EditViewModel() : ViewModel() {
      */
     fun rotateImage(degree: Int, imageFile: File): File? {
         return transformImage.rotateImage(imageFile, degree)
-
     }
 }

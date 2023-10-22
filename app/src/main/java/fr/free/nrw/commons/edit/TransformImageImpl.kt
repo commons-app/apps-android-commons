@@ -71,5 +71,4 @@ class TransformImageImpl() : TransformImage {
         }
         return output
     }
-
 }

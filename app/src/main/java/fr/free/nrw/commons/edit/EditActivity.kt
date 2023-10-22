@@ -37,6 +37,7 @@ class EditActivity : AppCompatActivity() {
     private var imageUri = ""
     private lateinit var vm: EditViewModel
     private val sourceExifAttributeList = mutableListOf<Pair<String, String?>>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
@@ -76,7 +77,6 @@ class EditActivity : AppCompatActivity() {
         }
 
         init()
-
     }
 
     /**
@@ -197,7 +197,6 @@ class EditActivity : AppCompatActivity() {
         }
 
         animator.start()
-
     }
 
     /**
@@ -226,7 +225,6 @@ class EditActivity : AppCompatActivity() {
         resultIntent.putExtra("editedImageFilePath", rotatedImage?.toUri()?.path ?: "Error");
         setResult(RESULT_OK, resultIntent);
         finish();
-
     }
 
     /**

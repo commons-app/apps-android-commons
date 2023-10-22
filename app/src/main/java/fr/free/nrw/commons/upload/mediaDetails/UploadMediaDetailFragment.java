@@ -68,7 +68,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private static final int REQUEST_CODE = 1211;
     private static final int REQUEST_CODE_FOR_EDIT_ACTIVITY = 1212;
 
-
     /**
      * A key for applicationKvStore. By this key we can retrieve the location of last UploadItem ex.
      * 12.3433,54.78897 from applicationKvStore.
@@ -276,10 +275,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @OnClick(R.id.edit_image)
     public void onEditButtonClicked() {
         presenter.onEditButtonClicked(callback.getIndexInViewFlipper(this));
-
     }
-
-
     @Override
     public void showSimilarImageFragment(String originalFilePath, String possibleFilePath,
         ImageCoordinates similarImageCoordinates) {
@@ -478,15 +474,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public void showExternalMap(final UploadItem uploadItem) {
         goToLocationPickerActivity(uploadItem);
     }
-
     @Override
     public void showEditActivity(UploadItem uploadItem) {
         editableUploadItem = uploadItem;
         Intent intent = new Intent(getContext(), EditActivity.class);
         intent.putExtra("image", uploadableFile.getFilePath().toString());
         startActivityForResult(intent, REQUEST_CODE_FOR_EDIT_ACTIVITY);
-
-
     }
 
     /**
@@ -587,7 +580,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             }
 
         }
-
     }
 
     /**

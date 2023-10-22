@@ -43,6 +43,4 @@
       android:text="@string/menu_save_categories"
       android:textColor="@android:color/white" />
   </LinearLayout>
-
-
 </FrameLayout>

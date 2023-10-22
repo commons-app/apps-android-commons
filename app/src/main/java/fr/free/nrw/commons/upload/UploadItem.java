@@ -172,6 +172,4 @@ public class UploadItem {
         contentUri = uri;
         mediaUri = uri;
     }
-
-
 }
