@@ -354,5 +354,4 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
             similarImageCoordinates
         );
     }
-
 }
