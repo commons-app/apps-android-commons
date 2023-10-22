@@ -182,7 +182,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
       final List<UploadItem> uploadItems = repository.getUploads();
       if (uploadItems.size()==0) {
           view.showProgress(false);
-          view.showMessage("Upload Failed",R.color.color_error);
+          view.showMessage("An out-of-sync of the number of Upload Media Detail Fragment and upload items happens.",R.color.color_error);
           return false;
       }
       UploadItem uploadItem = uploadItems.get(uploadItemIndex);
