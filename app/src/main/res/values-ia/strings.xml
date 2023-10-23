@@ -32,8 +32,36 @@
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
+  <string name="starting_uploads"> Initia incargamentos</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Processa %d incargamento</item>
+    <item quantity="other">Processa %d incargamentos</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d incargamento</item>
+    <item quantity="other">%d incargamentos</item>
+  </plurals>
+  <plurals name="share_license_summary">
+    <item quantity="one">Iste imagine essera licentiate sub %1$s</item>
+    <item quantity="other">Iste imagines essera licentiate sub %1$s</item>
+  </plurals>
+  <plurals name="upload_count_title">
+    <item quantity="one">%1$d incargamento</item>
+    <item quantity="other">%1$d incargamentos</item>
+  </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">Recipe contento condividite. Le processamento del imagine pote prender tempore dependente del grandor del imagine e de tu apparato</item>
+    <item quantity="other">Recipe contento condividite. Le processamento del imagines pote prender tempore dependente del grandor del imagines e de tu apparato</item>
+  </plurals>
+  <string name="navigation_item_explore">Explorar</string>
+  <string name="preference_category_appearance">Apparentia</string>
+  <string name="preference_category_general">General</string>
+  <string name="preference_category_feedback">Commentario</string>
+  <string name="preference_category_privacy">Confidentialitate</string>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Configuration</string>
+  <string name="intent_share_upload_label">Incargar a Commons</string>
+  <string name="upload_in_progress">Incargamento in curso</string>
   <string name="username">Nomine de usator</string>
   <string name="password">Contrasigno</string>
   <string name="login">Aperir session</string>
