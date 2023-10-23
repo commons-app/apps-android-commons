@@ -474,6 +474,17 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public void showExternalMap(final UploadItem uploadItem) {
         goToLocationPickerActivity(uploadItem);
     }
+
+    /**
+     * Launches the image editing activity to edit the specified UploadItem.
+     *
+     * @param uploadItem The UploadItem to be edited.
+     *
+     * This method is called to start the image editing activity for a specific UploadItem.
+     * It sets the UploadItem as the currently editable item, creates an intent to launch the
+     * EditActivity, and passes the image file path as an extra in the intent. The activity
+     * is started with a request code, allowing the result to be handled in onActivityResult.
+     */
     @Override
     public void showEditActivity(UploadItem uploadItem) {
         editableUploadItem = uploadItem;
@@ -578,7 +589,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             } catch (Exception e) {
                 Timber.e(e);
             }
-
         }
     }
 
