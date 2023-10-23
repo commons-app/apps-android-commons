@@ -6,6 +6,7 @@
 * Jsmakaayb
 * Luckas
 * Overlaet
+* Peterleth
 * Saederup92
 -->
 <resources>
@@ -13,26 +14,40 @@
   <string name="commons_github">Commons Github-kildekode</string>
   <string name="commons_logo">Commons-logo</string>
   <string name="commons_website">Commons-hjemmeside</string>
+  <string name="exit_location_picker">Afslut stedvælger</string>
   <string name="submit">Indsend</string>
+  <string name="add_another_description">Tilføj endnu en beskrivelse</string>
+  <string name="add_new_contribution">Tilføj nyt bidrag</string>
+  <string name="add_contribution_from_camera">Tilføj bidrag fra kamera</string>
+  <string name="add_contribution_from_photos">Tilføj bidrag fra Fotos</string>
+  <string name="show_captions">Billedtekst</string>
+  <string name="row_item_language_description">Sprogbeskrivelse</string>
+  <string name="row_item_caption">Billedtekst</string>
+  <string name="show_captions_description">Beskrivelse</string>
+  <string name="nearby_row_image">Billede</string>
+  <string name="nearby_all">Alle</string>
   <string name="appwidget_img">Dagens billede</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d fil overføres</item>
     <item quantity="other">%1$d filer overføres</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d overførsel</item>
-    <item quantity="other">%1$d overførsler</item>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">(%1$d)</item>
+    <item quantity="other">(%1$d)</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Starter %1$d overførsel</item>
-    <item quantity="other">Starter %1$d overførsler</item>
+  <string name="starting_uploads">Starter upload</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Behandler %d upload</item>
+    <item quantity="other">Behandler %d uploads</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">%1$d overførsel</item>
-    <item quantity="other">%1$d overførsler</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d upload</item>
+    <item quantity="other">%d uploads</item>
   </plurals>
-  <string name="share_license_summary" fuzzy="true">Billedet vil blive licenseret under %1$s</string>
+  <plurals name="share_license_summary">
+    <item quantity="one">Dette billede vil blive licenseret under %1$s</item>
+    <item quantity="other">Disse billeder vil blive licenseret under %1$s</item>
+  </plurals>
   <string name="navigation_item_explore">Udforsk</string>
   <string name="preference_category_appearance">Udseende</string>
   <string name="preference_category_general">Generelt</string>
@@ -50,6 +65,7 @@
   <string name="signup">Opret en konto</string>
   <string name="logging_in_title">Logger på</string>
   <string name="logging_in_message">Vent…</string>
+  <string name="updating_caption_message">Vent venligst…</string>
   <string name="login_success">Du er nu logget på!</string>
   <string name="login_failed">Det mislykkedes at logge på!</string>
   <string name="upload_failed">Filen blev ikke fundet. Forsøg med en anden fil.</string>
@@ -57,10 +73,10 @@
   <string name="uploading_started">Overførsel begyndt!</string>
   <string name="upload_completed_notification_title">%1$s overført!</string>
   <string name="upload_completed_notification_text">Tryk for at få vist din upload</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">Starter med at uploade %1$s</string>
+  <string name="upload_progress_notification_title_start">Uploader fil: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s overføres</string>
   <string name="upload_progress_notification_title_finishing">Afslutter uploadning af %1$s</string>
-  <string name="upload_failed_notification_title" fuzzy="true">Overførsel af %1$s mislykkedes</string>
+  <string name="upload_failed_notification_title">Upload af %1$s mislykkedes</string>
   <string name="upload_failed_notification_subtitle">Klik for at se</string>
   <string name="title_activity_contributions">Mine seneste overførsler</string>
   <string name="contribution_state_queued">I kø</string>
@@ -87,7 +103,7 @@
   <string name="menu_save_categories">Gem</string>
   <string name="refresh_button">Opdater</string>
   <string name="display_list_button">Liste</string>
-  <string name="contributions_subtitle_zero" fuzzy="true">Ingen overførelser endnu</string>
+  <string name="contributions_subtitle_zero">(Ingen uploads endnu)</string>
   <string name="categories_not_found">Ingen kategorier matchende %1$s er fundet</string>
   <string name="categories_skip_explanation">Tilføj kategorier for at gøre billederne mere synlig på Wikimedia Commons. Tast for at tilføje kategorier.</string>
   <string name="categories_activity_title">Kategorier</string>

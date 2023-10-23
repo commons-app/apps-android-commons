@@ -747,4 +747,6 @@
   <string name="full_screen_mode_features_info">Hitro in dolgo podrsajte, da izvedete naslednja dejanja:\n– levo/desno: pojdi na prejšnje/naslednje\n– gor: izberi\n– dol: označi, da ni za nalaganje</string>
   <string name="set_up_avatar_toast_string">Za nastavitev svojega avatarja na lestvici vodilnih tapnite »Nastavi kot avatar« v meniju s tremi pikami katere koli slike.</string>
   <string name="similar_coordinate_description_auto_set">Koordinate niso točne koordinate, vendar oseba, ki je naložila to sliko, meni, da so ustrezen približek.</string>
+  <string name="storage_permissions_denied">Dovoljenje za shranjevanje zavrnjeno</string>
+  <string name="unable_to_share_upload_item">Tega predmeta ni mogoče deliti</string>
 </resources>
