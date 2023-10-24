@@ -158,6 +158,9 @@
     <style name="LightFlatNearbyPermissionButton" parent="LightAppTheme">
         <item name="colorControlHighlight">@color/primaryColor</item>
     </style>
+    <style name="EditActivityTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/primaryColor</item>
+    </style>
 
     <style name="ProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal" />
 

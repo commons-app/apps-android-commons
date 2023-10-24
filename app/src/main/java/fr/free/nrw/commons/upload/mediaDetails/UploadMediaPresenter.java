@@ -282,6 +282,11 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
   }
 
   @Override
+  public void onEditButtonClicked(int indexInViewFlipper){
+      view.showEditActivity(repository.getUploads().get(indexInViewFlipper));
+  }
+
+  @Override
   public void onUserConfirmedUploadIsOfPlace(Place place, int uploadItemPosition) {
     final List<UploadMediaDetail> uploadMediaDetails = repository.getUploads()
         .get(uploadItemPosition)
