@@ -45,7 +45,7 @@ class LanguagesAdapterTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         context = ApplicationProvider.getApplicationContext()
         language = AppLanguageLookUpTable(context)
         convertView = LayoutInflater.from(context)

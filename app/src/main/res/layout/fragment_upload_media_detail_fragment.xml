@@ -142,6 +142,16 @@
                       android:layout_marginRight="@dimen/standard_gap"
                       android:layout_toLeftOf="@+id/btn_next"
                       android:text="@string/previous" />
+                    <Button
+                      android:id="@+id/edit_image"
+                      style="@style/Widget.AppCompat.Button.Borderless"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginEnd="@dimen/standard_gap"
+                      android:layout_marginBottom="24dp"
+                      android:layout_toStartOf="@id/btn_previous"
+                      android:contentDescription="Edit Image"
+                      android:text="Edit Image" />
 
                 </RelativeLayout>
 

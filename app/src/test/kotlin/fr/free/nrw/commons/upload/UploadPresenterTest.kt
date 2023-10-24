@@ -57,7 +57,7 @@ class UploadPresenterTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         uploadPresenter.onAttachView(view)
         `when`(repository.buildContributions()).thenReturn(Observable.just(contribution))
         uploadableFiles.add(uploadableFile)

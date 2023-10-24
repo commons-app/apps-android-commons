@@ -82,7 +82,7 @@ class UploadRepositoryUnitTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         repository = UploadRepository(
             uploadModel,
             uploadController,

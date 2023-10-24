@@ -53,7 +53,7 @@ class ExploreFragmentUnitTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         context = ApplicationProvider.getApplicationContext()
 
         AppAdapter.set(TestAppAdapter())

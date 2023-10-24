@@ -8,6 +8,7 @@ import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.same
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.TestUtility.setFinalStatic
 import fr.free.nrw.commons.customselector.listeners.ImageLoaderListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +24,8 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.fakes.RoboCursor
 import java.io.File
+import java.lang.reflect.Field
+import java.lang.reflect.Modifier
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -67,8 +70,9 @@ class ImageFileLoaderTest {
             MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
             MediaStore.Images.Media.DATE_ADDED
         )
-
-        Whitebox.setInternalState(imageFileLoader, "coroutineContext", coroutineContext)
+        setFinalStatic(
+                ImageFileLoader::class.java.getDeclaredField("coroutineContext"),
+                coroutineContext)
     }
 
     /**

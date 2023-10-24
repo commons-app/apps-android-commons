@@ -32,7 +32,7 @@ class CategoriesModelTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         categoriesModel = CategoriesModel(categoryClient, categoryDao, gpsCategoryModel)
     }
 

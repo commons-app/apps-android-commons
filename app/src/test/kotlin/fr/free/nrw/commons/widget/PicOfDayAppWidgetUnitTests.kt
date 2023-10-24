@@ -50,7 +50,7 @@ class PicOfDayAppWidgetUnitTests {
         context = ApplicationProvider.getApplicationContext()
         SoLoader.setInTestMode()
         ImagePipelineFactory.initialize(context)
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         widget = PicOfDayAppWidget()
         Whitebox.setInternalState(widget, "compositeDisposable", compositeDisposable)
         Whitebox.setInternalState(widget, "mediaClient", mediaClient)

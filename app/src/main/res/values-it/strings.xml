@@ -685,4 +685,5 @@
   <string name="welcome_to_full_screen_mode_text">Benvenuto nella modalità di selezione a schermo intero</string>
   <string name="full_screen_mode_zoom_info">Usa due dita per ingrandire e rimpicciolire.</string>
   <string name="full_screen_mode_features_info">Scorri velocemente e a lungo per eseguire queste azioni: \n- Sinistra/destra: vai al precedente/successivo \n- Su: seleziona\n- Giù: contrassegna come da non caricare.</string>
+  <string name="unable_to_share_upload_item">Impossibile condividere questo elemento</string>
 </resources>

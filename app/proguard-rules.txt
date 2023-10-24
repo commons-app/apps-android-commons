@@ -31,6 +31,15 @@
 -keepattributes Signature
 # Retain declared checked exceptions for use by a Proxy instance.
 -keepattributes Exceptions
+
+# Application classes that will be serialized/deserialized over Gson
+-keepclasseswithmembers class org.wikipedia.** { *; }
+# Note: The model package right now seems to include some other classes that
+# are not used for serialization / deserialization over Gson. Hopefully
+# that's not a problem since it only prevents R8 from avoiding trimming
+# of few more classes.
+-keepclasseswithmembers class fr.free.nrw.commons.*.model.** { *; }
+
 # --- /Retrofit ---
 
 # --- OkHttp + Okio ---

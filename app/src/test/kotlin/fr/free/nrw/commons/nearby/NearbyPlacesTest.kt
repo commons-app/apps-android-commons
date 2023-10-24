@@ -22,7 +22,7 @@ class NearbyPlacesTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         nearbyPlaces = NearbyPlaces(okHttpJsonApiClient)
     }
 
