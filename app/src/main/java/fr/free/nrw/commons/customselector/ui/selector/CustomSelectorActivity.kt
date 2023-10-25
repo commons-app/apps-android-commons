@@ -28,6 +28,7 @@ import fr.free.nrw.commons.media.ZoomableActivity
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
+import fr.free.nrw.commons.utils.ViewUtil
 import kotlinx.android.synthetic.main.activity_login.view.title
 import kotlinx.coroutines.*
 import java.io.File
@@ -66,6 +67,27 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
      * Pref for saving selector state.
      */
     private lateinit var prefs: SharedPreferences
+
+    /**
+     * Maximum number of images that can be selected.
+     * Currently set 3 for testing purposes
+     */
+    private val imageUploadLimit: Int = 3
+
+    /**
+     * Flag that is true when the size of the selected images is greater than the limit.
+     */
+    private var overUploadLimit: Boolean = false
+
+    /**
+     * Image button displayed when upload limit exceeded
+     */
+    private lateinit var limitError: ImageButton
+
+    /**
+     * Tracks the amount by which the upload limit has been exceeded.
+     */
+    private var uploadLimitExceededBy: Int = 0
 
     /**
      * View Model Factory.
@@ -314,6 +336,14 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
     private fun setUpToolbar() {
         val back: ImageButton = findViewById(R.id.back)
         back.setOnClickListener { onBackPressed() }
+
+        limitError = findViewById(R.id.image_limit_error)
+        limitError.visibility = View.GONE
+        limitError.setOnClickListener {
+            ViewUtil.showLongToast(this, resources.getString(
+                R.string.custom_selector_over_limit_warning,
+                imageUploadLimit, uploadLimitExceededBy))
+        }
     }
 
     /**
@@ -341,6 +371,16 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
     ) {
         viewModel.selectedImages.value = selectedImages
         changeTitle(bucketName, selectedImages.size)
+
+        overUploadLimit = selectedImages.size > imageUploadLimit
+
+        if (overUploadLimit) {
+            limitError.visibility = View.VISIBLE
+            uploadLimitExceededBy = selectedImages.size - imageUploadLimit
+        } else {
+            limitError.visibility = View.GONE
+            uploadLimitExceededBy = 0
+        }
 
         if (selectedNotForUploadImages > 0) {
             bottomSheetBinding.upload.isEnabled = false
