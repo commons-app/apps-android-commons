@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.view.inputmethod.InputMethodManager;
 import androidx.collection.LruCache;
+import androidx.preference.PreferenceManager;
 import androidx.room.Room;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
@@ -17,6 +20,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionDao;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao;
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao;
 import fr.free.nrw.commons.customselector.ui.selector.ImageFileLoader;
@@ -37,6 +41,7 @@ import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import javax.inject.Named;
@@ -94,11 +99,21 @@ public class CommonsApplicationModule {
     @Named("licenses")
     public List<String> provideLicenses(Context context) {
         List<String> licenseItems = new ArrayList<>();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(
+            MainActivity.contextOfApplication);
+        String language =  sharedPreferences.getString(Prefs.APP_UI_LANGUAGE, "en");
+        Locale locale = new Locale (language);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        MainActivity.contextOfApplication.getResources().updateConfiguration(config, null);
+        System.out.println("provideLicense CommonsApplicationModule: " + Locale.getDefault().getLanguage());
         licenseItems.add(context.getString(R.string.license_name_cc0));
         licenseItems.add(context.getString(R.string.license_name_cc_by));
         licenseItems.add(context.getString(R.string.license_name_cc_by_sa));
         licenseItems.add(context.getString(R.string.license_name_cc_by_four));
         licenseItems.add(context.getString(R.string.license_name_cc_by_sa_four));
+        System.out.println("provideLicenses: " + licenseItems);
         return licenseItems;
     }
 

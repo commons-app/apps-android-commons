@@ -59,6 +59,8 @@ android {
 
 dependencies {
 
+    testImplementation project(path: ':wikimedia-data-client')
+    testImplementation project(path: ':wikimedia-data-client')
     String retrofitVersion = '2.4.0'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])

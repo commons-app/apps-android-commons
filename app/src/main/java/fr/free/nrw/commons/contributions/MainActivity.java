@@ -55,6 +55,7 @@ import timber.log.Timber;
 public class MainActivity  extends BaseActivity
     implements FragmentManager.OnBackStackChangedListener {
 
+    public static Context contextOfApplication;
     @Inject
     SessionManager sessionManager;
     @Inject
@@ -120,6 +121,7 @@ public class MainActivity  extends BaseActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        contextOfApplication = getApplicationContext();
         loadLocale();
         setContentView(R.layout.main);
         ButterKnife.bind(this);

@@ -373,7 +373,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 R.string.storage_permission_title,
                 R.string.read_storage_permission_rationale,
                 PermissionUtils.PERMISSIONS_STORAGE
-                );
+            );
         }
     }
 
@@ -479,7 +479,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onMediaRefreshed, Timber::e),
             mediaDataExtractor.getCurrentWikiText(
-                Objects.requireNonNull(media.getFilename()))
+                    Objects.requireNonNull(media.getFilename()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::updateCategoryList, Timber::e),
@@ -725,11 +725,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         depictionContainer.removeAllViews();
         String locale = Locale.getDefault().getLanguage();
         for (IdAndCaptions idAndCaption : idAndCaptions) {
-                depictionContainer.addView(buildDepictLabel(
-                    getDepictionCaption(idAndCaption, locale),
-                    idAndCaption.getId(),
-                    depictionContainer
-                ));
+            depictionContainer.addView(buildDepictLabel(
+                getDepictionCaption(idAndCaption, locale),
+                idAndCaption.getId(),
+                depictionContainer
+            ));
         }
     }
 
@@ -782,7 +782,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
      */
     private void getWikiText() {
         compositeDisposable.add(mediaDataExtractor.getCurrentWikiText(
-            Objects.requireNonNull(media.getFilename()))
+                Objects.requireNonNull(media.getFilename()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(this::gotoCategoryEditor, Timber::e));
@@ -856,7 +856,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
      */
     private void getDescriptionList() {
         compositeDisposable.add(mediaDataExtractor.getCurrentWikiText(
-            Objects.requireNonNull(media.getFilename()))
+                Objects.requireNonNull(media.getFilename()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(this::extractCaptionDescription, Timber::e));
@@ -1047,7 +1047,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         } else if (requestCode == REQUEST_CODE_EDIT_DESCRIPTION && resultCode == RESULT_OK) {
             final String updatedWikiText = data.getStringExtra(UPDATED_WIKITEXT);
             compositeDisposable.add(descriptionEditHelper.addDescription(getContext(), media,
-                updatedWikiText)
+                    updatedWikiText)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
@@ -1059,9 +1059,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
             LinkedHashMap<String, String> updatedCaptions = new LinkedHashMap<>();
             for (UploadMediaDetail mediaDetail:
-            uploadMediaDetails) {
+                uploadMediaDetails) {
                 compositeDisposable.add(descriptionEditHelper.addCaption(getContext(), media,
-                    mediaDetail.getLanguageCode(), mediaDetail.getCaptionText())
+                        mediaDetail.getLanguageCode(), mediaDetail.getCaptionText())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(s -> {
@@ -1103,7 +1103,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     public void updateCoordinates(final String Latitude, final String Longitude,
         final String Accuracy) {
         compositeDisposable.add(coordinateEditHelper.makeCoordinatesEdit(getContext(), media,
-            Latitude, Longitude, Accuracy)
+                Latitude, Longitude, Accuracy)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(s -> {
@@ -1115,73 +1115,73 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     @SuppressLint("StringFormatInvalid")
     @OnClick(R.id.nominateDeletion)
     public void onDeleteButtonClicked(){
-            if (AccountUtil.getUserName(getContext()) != null && AccountUtil.getUserName(getContext()).equals(media.getAuthor())) {
-                final ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(getActivity(),
-                    R.layout.simple_spinner_dropdown_list, reasonList);
-                final Spinner spinner = new Spinner(getActivity());
-                spinner.setLayoutParams(
-                    new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT));
-                spinner.setAdapter(languageAdapter);
-                spinner.setGravity(17);
+        if (AccountUtil.getUserName(getContext()) != null && AccountUtil.getUserName(getContext()).equals(media.getAuthor())) {
+            final ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(getActivity(),
+                R.layout.simple_spinner_dropdown_list, reasonList);
+            final Spinner spinner = new Spinner(getActivity());
+            spinner.setLayoutParams(
+                new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT));
+            spinner.setAdapter(languageAdapter);
+            spinner.setGravity(17);
 
-                AlertDialog dialog = DialogUtil.showAlertDialog(getActivity(),
-                    getString(R.string.nominate_delete),
-                    null,
-                    getString(R.string.about_translate_proceed),
-                    getString(R.string.about_translate_cancel),
-                    () -> onDeleteClicked(spinner),
-                    () -> {},
-                    spinner,
-                    true);
-                if (isDeleted) {
-                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-                }
-            }
-            //Reviewer correct me if i have misunderstood something over here
-            //But how does this  if (delete.getVisibility() == View.VISIBLE) {
-            //            enableDeleteButton(true);   makes sense ?
-            else {
-                final EditText input = new EditText(getActivity());
-                input.requestFocus();
-                AlertDialog d = DialogUtil.showAlertDialog(getActivity(),
-                    null,
-                    getString(R.string.dialog_box_text_nomination, media.getDisplayTitle()),
-                    getString(R.string.ok),
-                    getString(R.string.cancel),
-                    () -> {
-                        String reason = input.getText().toString();
-                        onDeleteClickeddialogtext(reason);
-                    },
-                    () -> {},
-                    input,
-                    true);
-                input.addTextChangedListener(new TextWatcher() {
-                    private void handleText() {
-                        final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
-                        if (input.getText().length() == 0 || isDeleted) {
-                            okButton.setEnabled(false);
-                        } else {
-                            okButton.setEnabled(true);
-                        }
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable arg0) {
-                        handleText();
-                    }
-
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    }
-                });
-                d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+            AlertDialog dialog = DialogUtil.showAlertDialog(getActivity(),
+                getString(R.string.nominate_delete),
+                null,
+                getString(R.string.about_translate_proceed),
+                getString(R.string.about_translate_cancel),
+                () -> onDeleteClicked(spinner),
+                () -> {},
+                spinner,
+                true);
+            if (isDeleted) {
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
             }
         }
+        //Reviewer correct me if i have misunderstood something over here
+        //But how does this  if (delete.getVisibility() == View.VISIBLE) {
+        //            enableDeleteButton(true);   makes sense ?
+        else {
+            final EditText input = new EditText(getActivity());
+            input.requestFocus();
+            AlertDialog d = DialogUtil.showAlertDialog(getActivity(),
+                null,
+                getString(R.string.dialog_box_text_nomination, media.getDisplayTitle()),
+                getString(R.string.ok),
+                getString(R.string.cancel),
+                () -> {
+                    String reason = input.getText().toString();
+                    onDeleteClickeddialogtext(reason);
+                },
+                () -> {},
+                input,
+                true);
+            input.addTextChangedListener(new TextWatcher() {
+                private void handleText() {
+                    final Button okButton = d.getButton(AlertDialog.BUTTON_POSITIVE);
+                    if (input.getText().length() == 0 || isDeleted) {
+                        okButton.setEnabled(false);
+                    } else {
+                        okButton.setEnabled(true);
+                    }
+                }
+
+                @Override
+                public void afterTextChanged(Editable arg0) {
+                    handleText();
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                }
+            });
+            d.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+        }
+    }
 
     @SuppressLint("CheckResult")
     private void onDeleteClicked(Spinner spinner) {
@@ -1190,7 +1190,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         String reason = reasonListEnglishMappings.get(spinner.getSelectedItemPosition());
         String finalReason = reason;
         Single<Boolean> resultSingle = reasonBuilder.getReason(media, reason)
-                .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, finalReason));
+            .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, finalReason));
         resultSingle
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -1207,7 +1207,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         applicationKvStore.putBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), true);
         enableProgressBar();
         Single<Boolean> resultSingletext = reasonBuilder.getReason(media, reason)
-                .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
+            .flatMap(reasonString -> deleteHelper.makeDeletion(getContext(), media, reason));
         resultSingletext
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -1302,7 +1302,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     /**
-    * Returns captions for media details
+     * Returns captions for media details
      *
      * @param media object of class media
      * @return caption as string

@@ -1,8 +1,13 @@
 package fr.free.nrw.commons.explore.depictions
 
 import android.annotation.SuppressLint
+import android.content.Context
+import androidx.preference.PreferenceManager
+import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.mwapi.Binding
 import fr.free.nrw.commons.mwapi.SparqlResponse
+import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.depicts.DepictsInterface
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.upload.structure.depictions.get
@@ -49,11 +54,11 @@ class DepictsClient @Inject constructor(private val depictsInterface: DepictsInt
     @SuppressLint("CheckResult")
     private fun Single<String>.mapToDepictions() =
         flatMap(::getEntities)
-        .map { entities ->
-            entities.entities().values.map { entity ->
-                mapToDepictItem(entity)
+            .map { entities ->
+                entities.entities().values.map { entity ->
+                    mapToDepictItem(entity)
+                }
             }
-        }
 
     /**
      * Convert different entities into DepictedItem
@@ -79,6 +84,8 @@ class DepictsClient @Inject constructor(private val depictsInterface: DepictsInt
                 )
             }
         } else {
+            print("entity.description: " + entity.descriptions().byLanguageOrFirstOrEmpty())
+            print("Entity labels: " + entity.labels())
             DepictedItem(
                 entity,
                 entity.labels().byLanguageOrFirstOrEmpty(),
@@ -87,6 +94,12 @@ class DepictsClient @Inject constructor(private val depictsInterface: DepictsInt
         }
     }
 
+    fun getSavedLanguage(context: Context): String? {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        return sharedPreferences.getString(Prefs.APP_UI_LANGUAGE, "en")
+    }
+
+
     /**
      * Tries to get Entities.Label by default language from the map.
      * If that returns null, Tries to retrieve first element from the map.
@@ -94,7 +107,9 @@ class DepictsClient @Inject constructor(private val depictsInterface: DepictsInt
      */
     private fun Map<String, Entities.Label>.byLanguageOrFirstOrEmpty() =
         let {
-            it[Locale.getDefault().language] ?: it.values.firstOrNull() }?.value() ?: ""
+            val language = getSavedLanguage(MainActivity.contextOfApplication)
+            print("byLanguageOr: $language")
+            it[language] ?: it.values.firstOrNull() }?.value() ?: ""
 
     /**
      * returns list of id ex. "Q2323" from Statement_partial

@@ -2,9 +2,14 @@ package fr.free.nrw.commons.upload
 
 import android.content.ContentResolver
 import android.content.Context
+import android.content.SharedPreferences
 import android.net.Uri
 import androidx.exifinterface.media.ExifInterface
+import androidx.preference.Preference
+import androidx.preference.PreferenceManager
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.mwapi.CategoryApi
@@ -21,6 +26,7 @@ import java.io.IOException
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Named
+
 
 /**
  * Processing of the image filePath that is about to be uploaded via ShareActivity is done here
@@ -201,12 +207,14 @@ class FileProcessor @Inject constructor(
         (DEFAULT_SUGGESTION_RADIUS_IN_METRES..MAX_SUGGESTION_RADIUS_IN_METRES step RADIUS_STEP_SIZE_IN_METRES)
 
     private fun suggestNearbyDepictions(imageCoordinates: ImageCoordinates): Disposable {
+        val language = depictsModel.getSavedLanguage(MainActivity.contextOfApplication)
+        print("nearby depictions language: $language\n")
         return Observable.fromIterable(radiiProgressionInMetres.map { it / 1000.0 })
             .concatMap {
                 Observable.fromCallable {
                     okHttpJsonApiClient.getNearbyPlaces(
                         imageCoordinates.latLng,
-                        Locale.getDefault().language,
+                        language,
                         it,
                         false
                     )

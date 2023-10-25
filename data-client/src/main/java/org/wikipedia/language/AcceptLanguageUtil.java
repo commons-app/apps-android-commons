@@ -5,10 +5,10 @@ import androidx.annotation.NonNull;
 import java.util.Locale;
 
 public final class AcceptLanguageUtil {
-    private static final float APP_LANGUAGE_QUALITY = .9f;
-    private static final float SYSTEM_LANGUAGE_QUALITY = .8f;
+    private static final float APP_LANGUAGE_QUALITY = .9f; // English
+    private static final float SYSTEM_LANGUAGE_QUALITY = .8f; // French
 
-    /**
+    /** f
      * @return The value that should go in the Accept-Language header.
      */
     @NonNull
@@ -24,6 +24,7 @@ public final class AcceptLanguageUtil {
     @NonNull
     private static String appendToAcceptLanguage(@NonNull String acceptLanguage,
                                                  @NonNull String languageCode, float quality) {
+
         // If accept-language already contains the language, just return accept-language.
         if (acceptLanguage.contains(languageCode)) {
             return acceptLanguage;
