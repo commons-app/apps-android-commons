@@ -30,24 +30,23 @@
         style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
         android:layout_width="264dp"
         android:layout_height="30dp"
-        android:layout_marginEnd="@dimen/dimen_20"
         android:ellipsize="end"
         android:singleLine="true"
         android:text="@string/custom_selector_title"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/image_limit_error"
         app:layout_constraintStart_toEndOf="@id/back"
         app:layout_constraintTop_toTopOf="parent" />
 
       <ImageButton
         android:id="@+id/image_limit_error"
-        android:layout_width="0dp"
-        android:layout_height="46dp"
+        android:layout_width="43dp"
+        android:layout_height="50dp"
         android:background="#00FFFFFF"
+        android:contentDescription="@string/custom_selector_limit_error_desc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/title"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_error_red_24dp" />
 

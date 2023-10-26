@@ -430,22 +430,28 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
      * Get the selected images. Remove any non existent file, forward the data to finish selector.
      */
     fun onDone() {
-        val selectedImages = viewModel.selectedImages.value
-        if (selectedImages.isNullOrEmpty()) {
-            finishPickImages(arrayListOf())
-            return
-        }
-        var i = 0
-        while (i < selectedImages.size) {
-            val path = selectedImages[i].path
-            val file = File(path)
-            if (!file.exists()) {
-                selectedImages.removeAt(i)
-                i--
+        if (!overUploadLimit) {
+            val selectedImages = viewModel.selectedImages.value
+            if (selectedImages.isNullOrEmpty()) {
+                finishPickImages(arrayListOf())
+                return
             }
-            i++
+            var i = 0
+            while (i < selectedImages.size) {
+                val path = selectedImages[i].path
+                val file = File(path)
+                if (!file.exists()) {
+                    selectedImages.removeAt(i)
+                    i--
+                }
+                i++
+            }
+            finishPickImages(selectedImages)
+        } else {
+            ViewUtil.showLongToast(this, resources.getString(
+                R.string.custom_selector_over_limit_warning,
+                imageUploadLimit, uploadLimitExceededBy))
         }
-        finishPickImages(selectedImages)
     }
 
     /**
