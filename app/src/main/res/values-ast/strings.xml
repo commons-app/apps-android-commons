@@ -4,6 +4,7 @@
 * Fueyas
 * Tokvo
 * Xuacu
+* YoaR
 -->
 <resources>
   <string name="commons_facebook">Páxina de Facebook de Commons</string>
@@ -144,7 +145,7 @@
   <string name="waiting_first_sync">Esperando pola primera sincronización…</string>
   <string name="no_uploads_yet">Inda nun xubió denguna foto.</string>
   <string name="menu_retry_upload">Reintentar</string>
-  <string name="menu_cancel_upload">Encaboxar</string>
+  <string name="menu_cancel_upload">Zarrar</string>
   <string name="media_upload_policy">El presentar esta imaxe, declaro que ye una obra propia, que nun contien material con derechu d\'autor o «selfies», y que s\'atien a les &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;polítiques de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descargar</string>
   <string name="preference_license">Llicencia predeterminada</string>
@@ -222,7 +223,7 @@
   <string name="welcome_image_welcome_wikipedia">Bienvenida a Wikipedia</string>
   <string name="welcome_image_welcome_copyright">Bienvenida a Derechos d\'autor</string>
   <string name="welcome_image_sydney_opera_house">Ópera de Sidney</string>
-  <string name="cancel">Encaboxar</string>
+  <string name="cancel">Zarrar</string>
   <string name="navigation_drawer_open">Abrir</string>
   <string name="navigation_drawer_close">Zarrar</string>
   <string name="navigation_item_home">Entamu</string>
@@ -287,7 +288,7 @@
   <string name="about_translate_title">Llingües</string>
   <string name="about_translate_message">Escueye l\'idioma pal que quies unviar traducciones</string>
   <string name="about_translate_proceed">Siguir</string>
-  <string name="about_translate_cancel">Encaboxar</string>
+  <string name="about_translate_cancel">Zarrar</string>
   <string name="retry">Retentar</string>
   <string name="showcase_view_whole_nearby_activity">Estos son sitios cercanos que precisen imaxes para ilustrar los sos artículos de Wikipedia.\n\nAl pulsiar en \'BUSCAR NESTA ÁREA\' bloquiase\'l mapa y llánzase una busca cercana alredor d\'esi llugar.</string>
   <string name="showcase_view_needs_photo">Esti llugar precisa una semeya.</string>
@@ -324,7 +325,7 @@
   <string name="quiz_back_button">Si sigues xubiendo imáxenes que riquen desaniciase, la to cuenta probablemente va bloquiase. ¿Seguro que desees acabar el cuestionariu?</string>
   <string name="quiz_alert_message">Más d\'un %1$s de les imáxenes que xubisti desaniciáronse. Si sigues xubiendo imáxenes que riquen desaniciase, la to cuenta probablemente va bloquiase.\n\n¿Desees volver a ver el tutorial y llueu contestar un cuestionariu p\'ayudate a saber qué triba d\'imáxenes puedes o nun puedes xubir?</string>
   <string name="selfie_answer">Los selfies nun tienen munchu valor enciclopédicu. Por favor, nun xubas una semeya de ti mesmu sacante que yá esista un artículu de Wikipedia que trate de ti.</string>
-  <string name="taj_mahal_answer">Les semeyes de monumentos y escenes en esteriores pueden xubise pa la mayor parte de paises. Ten presente que les instalaciones artístiques temporales en esteriores de vezu tienen derechos d\'autor y nun pueden xubise.</string>
+  <string name="taj_mahal_answer">Les semeyes de monumentos y escenes en esteriores pueden xubise pa la mayor parte de países. Ten presente que les instalaciones artístiques temporales en esteriores de vezu tienen derechos d\'autor y nun pueden xubise.</string>
   <string name="screenshot_answer">Los pantallazos de sitios web considérense obres derivaes, y tán suxetes a los derechos d\'autor del propiu sitiu web. Los mesmos pueden usase en teniendo permisu del autor. Ensin esi permisu, cualquier obra artística que crees basada nel so trabayu tien la consideración llegal de copia ensin llicencia que pertenez al autor orixinal.</string>
   <string name="blurry_image_answer">Unu de los oxetivos de Commons ye collechar imáxenes de calidá. Por eso, les imáxenes borroses nun tendríen de xubise. Tenta siempre sacar semeyes guapes con bona lluz.</string>
   <string name="construction_event_answer">Les semeyes qu\'amuesen la teunoloxía o la cultura son enforma bienveníes en Commons.</string>

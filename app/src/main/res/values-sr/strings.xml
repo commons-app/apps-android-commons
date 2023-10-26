@@ -345,6 +345,7 @@
   <string name="wrong">Погрешан одговор</string>
   <string name="quiz_screenshot_question">Желите ли да отпремите овај снимак екрана?</string>
   <string name="share_app_title">Дели апликацију</string>
+  <string name="rotate">Ротирај</string>
   <string name="error_fetching_nearby_places">Грешка при добављању места у близини.</string>
   <string name="no_nearby_places_around">Не постоје најближа места у близини</string>
   <string name="error_fetching_nearby_monuments">Грешка при добављању споменика у близини.</string>
