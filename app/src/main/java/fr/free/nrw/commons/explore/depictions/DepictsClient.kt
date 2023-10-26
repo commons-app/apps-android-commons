@@ -94,6 +94,10 @@ class DepictsClient @Inject constructor(private val depictsInterface: DepictsInt
         }
     }
 
+
+    /**
+     * Get App Ui language from sharedPreferences
+     */
     fun getSavedLanguage(context: Context): String? {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         return sharedPreferences.getString(Prefs.APP_UI_LANGUAGE, "en")
