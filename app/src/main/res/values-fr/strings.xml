@@ -4,6 +4,7 @@
 * Ajeje Brazorf
 * Alno
 * BaRaN6161 TURK
+* BlueCamille
 * Cigaryno
 * Cyclicus
 * DavidL
@@ -375,6 +376,7 @@
   <string name="wrong">Mauvaise réponse</string>
   <string name="quiz_screenshot_question">Cette copie d’écran est-elle correcte pour être téléversée ?</string>
   <string name="share_app_title">Partager l’application</string>
+  <string name="rotate">Pivoter</string>
   <string name="error_fetching_nearby_places">Erreur durant la recherche d’endroits proches.</string>
   <string name="no_nearby_places_around">Aucun lieu à proximité</string>
   <string name="error_fetching_nearby_monuments">Erreur de récupération des monuments à proximité.</string>

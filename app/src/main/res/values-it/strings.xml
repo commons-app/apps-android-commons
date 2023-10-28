@@ -352,6 +352,7 @@
   <string name="wrong">Risposta sbagliata</string>
   <string name="quiz_screenshot_question">Questo screenshot è OK per essere caricato?</string>
   <string name="share_app_title">Condividi applicazione</string>
+  <string name="rotate">Ruota</string>
   <string name="error_fetching_nearby_places">Errore durante il recupero dei luoghi nelle vicinanze.</string>
   <string name="no_nearby_places_around">Nessun luogo trovato nelle vicinanze</string>
   <string name="error_fetching_nearby_monuments">Errore durante la ricerca di monumenti nei pressi.</string>
