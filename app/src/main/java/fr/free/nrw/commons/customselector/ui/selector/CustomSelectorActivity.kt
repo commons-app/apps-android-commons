@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.view.Window
@@ -30,12 +29,9 @@ import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
 import fr.free.nrw.commons.utils.ViewUtil
-import kotlinx.android.synthetic.main.activity_login.view.title
-import kotlinx.android.synthetic.main.custom_selector_bottom_layout.upload
-import kotlinx.android.synthetic.main.custom_selector_toolbar.view.back
 import kotlinx.coroutines.*
-import timber.log.Timber
 import java.io.File
+import java.lang.Integer.max
 import javax.inject.Inject
 
 
@@ -73,13 +69,13 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
     private lateinit var prefs: SharedPreferences
 
     /**
-     * Maximum number of images that can be selected.
-     * Currently set 3 for testing purposes
+     * Maximum number of images that can be selected. <br>
      */
-    private val imageUploadLimit: Int = 3
+    private val imageUploadLimit: Int = 20
 
     /**
-     * Flag that is true when the size of the selected images is greater than the limit.
+     * Flag that is marked true when the amount
+     * of selected images is greater than the upload limit.
      */
     private var overUploadLimit: Boolean = false
 
@@ -368,24 +364,21 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
         changeTitle(bucketName, selectedImages.size)
 
         overUploadLimit = selectedImages.size > imageUploadLimit
+        uploadLimitExceededBy = max(selectedImages.size - imageUploadLimit,0)
 
         if (overUploadLimit && selectedNotForUploadImages == 0) {
             toolbarBinding.imageLimitError.visibility = View.VISIBLE
-            uploadLimitExceededBy = selectedImages.size - imageUploadLimit
             bottomSheetBinding.upload.text = resources.getString(
                 R.string.custom_selector_button_limit_text, imageUploadLimit)
-            bottomSheetBinding.upload.isEnabled = false
-            bottomSheetBinding.upload.alpha = 0.5f
-        } else if (selectedNotForUploadImages > 0) {
+        } else {
             toolbarBinding.imageLimitError.visibility = View.INVISIBLE
-            uploadLimitExceededBy = 0
             bottomSheetBinding.upload.text = resources.getString(R.string.upload)
+        }
+
+        if (overUploadLimit || selectedNotForUploadImages > 0) {
             bottomSheetBinding.upload.isEnabled = false
             bottomSheetBinding.upload.alpha = 0.5f
         } else {
-            toolbarBinding.imageLimitError.visibility = View.INVISIBLE
-            uploadLimitExceededBy = 0
-            bottomSheetBinding.upload.text = resources.getString(R.string.upload)
             bottomSheetBinding.upload.isEnabled = true
             bottomSheetBinding.upload.alpha = 1f
         }
