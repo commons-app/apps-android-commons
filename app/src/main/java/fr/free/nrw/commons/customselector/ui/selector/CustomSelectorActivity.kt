@@ -369,24 +369,23 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
 
         overUploadLimit = selectedImages.size > imageUploadLimit
 
-        val limitError: ImageButton = findViewById(R.id.image_limit_error)
-        val done: Button = findViewById(R.id.upload)
-
-        if (overUploadLimit) {
-            limitError.visibility = View.VISIBLE
+        if (overUploadLimit && selectedNotForUploadImages == 0) {
+            toolbarBinding.imageLimitError.visibility = View.VISIBLE
             uploadLimitExceededBy = selectedImages.size - imageUploadLimit
-            done.text = resources.getString(R.string.custom_selector_button_limit_text,
-                imageUploadLimit)
-        } else {
-            limitError.visibility = View.INVISIBLE
+            bottomSheetBinding.upload.text = resources.getString(
+                R.string.custom_selector_button_limit_text, imageUploadLimit)
+            bottomSheetBinding.upload.isEnabled = false
+            bottomSheetBinding.upload.alpha = 0.5f
+        } else if (selectedNotForUploadImages > 0) {
+            toolbarBinding.imageLimitError.visibility = View.INVISIBLE
             uploadLimitExceededBy = 0
-            done.text = resources.getString(R.string.upload)
-        }
-
-        if (selectedNotForUploadImages > 0) {
+            bottomSheetBinding.upload.text = resources.getString(R.string.upload)
             bottomSheetBinding.upload.isEnabled = false
             bottomSheetBinding.upload.alpha = 0.5f
         } else {
+            toolbarBinding.imageLimitError.visibility = View.INVISIBLE
+            uploadLimitExceededBy = 0
+            bottomSheetBinding.upload.text = resources.getString(R.string.upload)
             bottomSheetBinding.upload.isEnabled = true
             bottomSheetBinding.upload.alpha = 1f
         }
@@ -431,7 +430,6 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
      * Get the selected images. Remove any non existent file, forward the data to finish selector.
      */
     fun onDone() {
-        if (!overUploadLimit) {
             val selectedImages = viewModel.selectedImages.value
             if (selectedImages.isNullOrEmpty()) {
                 finishPickImages(arrayListOf())
@@ -448,9 +446,6 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
                 i++
             }
             finishPickImages(selectedImages)
-        } else {
-            displayUploadLimitToast()
-        }
     }
 
     /**
