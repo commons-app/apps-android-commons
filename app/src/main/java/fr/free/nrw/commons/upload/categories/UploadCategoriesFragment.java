@@ -203,6 +203,12 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
             @Override
             public void run() {
                 rvCategories.smoothScrollToPosition(0);
+                rvCategories.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        rvCategories.smoothScrollToPosition(0);
+                    }
+                });
             }
         });
     }
