@@ -373,6 +373,7 @@
   <string name="wrong">תשובה שגויה</string>
   <string name="quiz_screenshot_question">האם בסדר להעלות את צילום המסך הזה?</string>
   <string name="share_app_title">שיתוף היישום</string>
+  <string name="rotate">סיבוב</string>
   <string name="error_fetching_nearby_places">שגיאה באחזור המקומות בסביבתך.</string>
   <string name="no_nearby_places_around">אין מקומות בסביבה</string>
   <string name="error_fetching_nearby_monuments">שגיאה באחזור אתרים בסביבתך.</string>
