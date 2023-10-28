@@ -265,10 +265,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
     });
 
+    /**
+     * This function is used to display an Android requesting block
+     * and response to the user's decision.
+     */
     private ActivityResultLauncher<String[]> locationPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
         @Override
         public void onActivityResult(Map<String, Boolean> result) {
-
             if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
                 if (!(locationManager.isNetworkProviderEnabled() || locationManager.isGPSProviderEnabled())) {
                     showLocationOffDialog();
@@ -1248,6 +1251,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         // TODO
     }
 
+    /**
+     *This funcion should show the developers' defined dialog block first
+     * If the user click the ok button of this block, an Android
+     * requesting block will be displayed.
+     */
     @Override
     public void checkPermissionsAndPerformAction() {
         Timber.d("Checking permission and perfoming action");
