@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.view.Window
@@ -30,7 +31,10 @@ import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
 import fr.free.nrw.commons.utils.ViewUtil
 import kotlinx.android.synthetic.main.activity_login.view.title
+import kotlinx.android.synthetic.main.custom_selector_bottom_layout.upload
+import kotlinx.android.synthetic.main.custom_selector_toolbar.view.back
 import kotlinx.coroutines.*
+import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
 
@@ -78,11 +82,6 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
      * Flag that is true when the size of the selected images is greater than the limit.
      */
     private var overUploadLimit: Boolean = false
-
-    /**
-     * Image button displayed when upload limit exceeded
-     */
-    private lateinit var limitError: ImageButton
 
     /**
      * Tracks the amount by which the upload limit has been exceeded.
@@ -337,13 +336,9 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
         val back: ImageButton = findViewById(R.id.back)
         back.setOnClickListener { onBackPressed() }
 
-        limitError = findViewById(R.id.image_limit_error)
-        limitError.visibility = View.GONE
-        limitError.setOnClickListener {
-            ViewUtil.showLongToast(this, resources.getString(
-                R.string.custom_selector_over_limit_warning,
-                imageUploadLimit, uploadLimitExceededBy))
-        }
+        val limitError: ImageButton = findViewById(R.id.image_limit_error)
+        limitError.visibility = View.INVISIBLE
+        limitError.setOnClickListener { displayUploadLimitToast() }
     }
 
     /**
@@ -374,12 +369,18 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
 
         overUploadLimit = selectedImages.size > imageUploadLimit
 
+        val limitError: ImageButton = findViewById(R.id.image_limit_error)
+        val done: Button = findViewById(R.id.upload)
+
         if (overUploadLimit) {
             limitError.visibility = View.VISIBLE
             uploadLimitExceededBy = selectedImages.size - imageUploadLimit
+            done.text = resources.getString(R.string.custom_selector_button_limit_text,
+                imageUploadLimit)
         } else {
-            limitError.visibility = View.GONE
+            limitError.visibility = View.INVISIBLE
             uploadLimitExceededBy = 0
+            done.text = resources.getString(R.string.upload)
         }
 
         if (selectedNotForUploadImages > 0) {
@@ -448,9 +449,7 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
             }
             finishPickImages(selectedImages)
         } else {
-            ViewUtil.showLongToast(this, resources.getString(
-                R.string.custom_selector_over_limit_warning,
-                imageUploadLimit, uploadLimitExceededBy))
+            displayUploadLimitToast()
         }
     }
 
@@ -476,6 +475,16 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
             isImageFragmentOpen = false
             changeTitle(getString(R.string.custom_selector_title), 0)
         }
+    }
+
+    /**
+     * Displays a toast explaining the upload limit warning.
+     */
+    private fun displayUploadLimitToast() {
+        ViewUtil.showLongToast(
+            this, resources.getString(R.string.custom_selector_over_limit_warning,
+                imageUploadLimit, uploadLimitExceededBy)
+        )
     }
 
     /**
