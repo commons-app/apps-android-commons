@@ -198,6 +198,13 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         } else {
             adapter.setItems(categories);
         }
+        adapter.notifyDataSetChanged();
+        rvCategories.post(new Runnable() {
+            @Override
+            public void run() {
+                rvCategories.smoothScrollToPosition(0);
+            }
+        });
     }
 
     @Override

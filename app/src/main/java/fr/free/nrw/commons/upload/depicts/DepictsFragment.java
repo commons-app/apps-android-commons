@@ -246,7 +246,13 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
                 adapter.setItems(depictedItemList);
             }
         }
-        depictsRecyclerView.smoothScrollToPosition(0);
+        adapter.notifyDataSetChanged();
+        depictsRecyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                depictsRecyclerView.smoothScrollToPosition(0);
+            }
+        });
     }
 
     /**
