@@ -9,9 +9,11 @@ import static org.acra.ReportField.STACK_TRACE;
 import static org.acra.ReportField.USER_COMMENT;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Build;
@@ -41,6 +43,7 @@ import fr.free.nrw.commons.logging.LogUtils;
 import fr.free.nrw.commons.media.CustomOkHttpNetworkFetcher;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.FileUtils;
+import fr.free.nrw.commons.upload.UploadStatusManager;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -192,6 +195,7 @@ public class CommonsApplication extends MultiDexApplication {
 
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
+        checkForUnfinishedUploads();
     }
 
     /**
@@ -330,6 +334,33 @@ public class CommonsApplication extends MultiDexApplication {
     }
 
 
+    /**
+     * Checks for unfinished uploads and notifies the user if any are found.
+     */
+    private void checkForUnfinishedUploads() {
+        String uploadStatus = UploadStatusManager.getUploadStatus(this);
+        if ("yes".equals(uploadStatus)) {
+            notifyUser();
+            //set the upload status to no
+            UploadStatusManager.setUploadStatus(this, "no");
+        }
+    }
+
+    /**
+     * Notifies the user about unfinished uploads.
+     */
+    private void notifyUser() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Unfinished Uploads");
+        alertDialogBuilder.setMessage("Your uploads were interrupted."
+            + "Please retry uploading them from Contributions page.");
+        alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //TODO: restart the upload
+            }
+        });
+    }
     /**
      * Interface used to get log-out events
      */

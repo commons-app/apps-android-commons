@@ -67,6 +67,8 @@ public class UploadClient {
     public Observable<StashUploadResult> uploadFileToStash(
         final Context context, final String filename, final Contribution contribution,
         final NotificationUpdateProgressListener notificationUpdater) throws IOException {
+        // Set the upload status to "yes" at the start of an upload
+        UploadStatusManager.setUploadStatus(context, "yes");
         if (contribution.getChunkInfo() != null
             && contribution.getChunkInfo().getTotalChunks() == contribution.getChunkInfo()
             .getIndexOfNextChunkToUpload()) {
@@ -145,12 +147,15 @@ public class UploadClient {
             return Observable.just(new StashUploadResult(StashUploadState.FAILED, null));
         } else if (chunkInfo.get() != null) {
             Timber.d("Upload stash success %s", contribution.getPageId());
+            // Set the upload status to "no" at the end of an upload
+            UploadStatusManager.setUploadStatus(context, "no");
             return Observable.just(new StashUploadResult(StashUploadState.SUCCESS,
                 chunkInfo.get().getUploadResult().getFilekey()));
         } else {
             Timber.d("Upload stash failed %s", contribution.getPageId());
             return Observable.just(new StashUploadResult(StashUploadState.FAILED, null));
         }
+
     }
 
     /**
