@@ -114,7 +114,7 @@ public class CommonsApplicationModule {
         licenseItems.add(context.getString(R.string.license_name_cc_by_sa));
         licenseItems.add(context.getString(R.string.license_name_cc_by_four));
         licenseItems.add(context.getString(R.string.license_name_cc_by_sa_four));
-        System.out.println("provideLicenses: " + licenseItems);
+        Timber.d("provideLicenses: %s", licenseItems);
         return licenseItems;
     }
 
