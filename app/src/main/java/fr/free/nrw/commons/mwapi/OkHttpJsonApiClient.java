@@ -284,8 +284,8 @@ public class OkHttpJsonApiClient {
     public List<Place> getNearbyPlaces(final LatLng cur, final String language, final double radius,
         final boolean shouldQueryForMonuments, final String customQuery)
         throws Exception {
-        System.out.println("OkHttpJsonApiClient: "+ language);
 
+        Timber.d("OkHttpJsonApiClient: %s", language);
         Timber.d("Fetching nearby items at radius %s", radius);
         Timber.d("CUSTOM_SPARQL%s", String.valueOf(customQuery != null));
         final String wikidataQuery;
@@ -346,7 +346,7 @@ public class OkHttpJsonApiClient {
     public List<Place> getNearbyPlaces(final LatLng cur, final String language, final double radius,
         final boolean shouldQueryForMonuments)
         throws Exception {
-        System.out.println("getNearbyPlaces: " + language);
+        Timber.d("getNearbyPlaces: %s", language);
         return getNearbyPlaces(cur, language, radius, shouldQueryForMonuments, null);
     }
 

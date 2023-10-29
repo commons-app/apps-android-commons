@@ -111,8 +111,6 @@ dependencies {
     androidTestImplementation "androidx.test.uiautomator:uiautomator:2.2.0"
     androidTestUtil 'androidx.test:orchestrator:1.4.1'
 
-
-
     // Debugging
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$LEAK_CANARY_VERSION"
 

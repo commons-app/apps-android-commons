@@ -47,6 +47,7 @@ import java.util.Objects;
 import javax.inject.Named;
 import javax.inject.Singleton;
 import org.wikipedia.AppAdapter;
+import timber.log.Timber;
 
 /**
  * The Dependency Provider class for Commons Android.
@@ -107,7 +108,7 @@ public class CommonsApplicationModule {
         Configuration config = new Configuration();
         config.locale = locale;
         MainActivity.contextOfApplication.getResources().updateConfiguration(config, null);
-        System.out.println("provideLicense CommonsApplicationModule: " + Locale.getDefault().getLanguage());
+        Timber.d("provideLicense CommonsApplicationModule: %s", Locale.getDefault().getLanguage());
         licenseItems.add(context.getString(R.string.license_name_cc0));
         licenseItems.add(context.getString(R.string.license_name_cc_by));
         licenseItems.add(context.getString(R.string.license_name_cc_by_sa));

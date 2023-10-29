@@ -8,7 +8,7 @@ public final class AcceptLanguageUtil {
     private static final float APP_LANGUAGE_QUALITY = .9f; // English
     private static final float SYSTEM_LANGUAGE_QUALITY = .8f; // French
 
-    /** f
+    /**
      * @return The value that should go in the Accept-Language header.
      */
     @NonNull

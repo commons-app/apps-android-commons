@@ -26,6 +26,7 @@ class DepictModel @Inject constructor(private val depictsClient: DepictsClient) 
     companion object {
         private const val SEARCH_DEPICTS_LIMIT = 25
     }
+
     /**
      * Search for depictions
      */
@@ -44,10 +45,9 @@ class DepictModel @Inject constructor(private val depictsClient: DepictsClient) 
                 }
                 getPlaceDepictions(ArrayList(qids)).toFlowable()
             }
-        } else{
+        } else {
             networkItems(query)
         }
-
     }
 
     /**

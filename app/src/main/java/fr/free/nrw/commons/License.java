@@ -64,7 +64,6 @@ public class License {
         }
     }
 
-
     /**
      * Gets the license URL
      *

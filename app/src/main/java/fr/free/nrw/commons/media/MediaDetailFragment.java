@@ -1138,9 +1138,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
             }
         }
-        //Reviewer correct me if i have misunderstood something over here
-        //But how does this  if (delete.getVisibility() == View.VISIBLE) {
-        //            enableDeleteButton(true);   makes sense ?
+
         else {
             final EditText input = new EditText(getActivity());
             input.requestFocus();

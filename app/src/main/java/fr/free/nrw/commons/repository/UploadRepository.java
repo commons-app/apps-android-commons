@@ -281,7 +281,6 @@ public class UploadRepository {
      */
 
     public Flowable<List<DepictedItem>> searchAllEntities(String query) {
-
         return depictModel.searchAllEntities(query, this);
     }
 
@@ -363,7 +362,7 @@ public class UploadRepository {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(
             MainActivity.contextOfApplication);
         final String language = sharedPreferences.getString(Prefs.APP_UI_LANGUAGE, "en");
-        System.out.println("checkNearbyPlaces language: " + language);
+        Timber.d("checkNearbyPlaces language: %s", language);
         try {
             final List<Place> fromWikidataQuery = nearbyPlaces.getFromWikidataQuery(new LatLng(
                     decLatitude, decLongitude, 0.0f),

@@ -33,6 +33,7 @@ class DepictsClient @Inject constructor(private val depictsInterface: DepictsInt
      */
     fun searchForDepictions(query: String?, limit: Int, offset: Int): Single<List<DepictedItem>> {
         val language = Locale.getDefault().language
+
         return depictsInterface.searchForDepicts(query, "$limit", language, language, "$offset")
             .map { it.search.joinToString("|", transform = DepictSearchItem::id) }
             .mapToDepictions()
@@ -84,8 +85,6 @@ class DepictsClient @Inject constructor(private val depictsInterface: DepictsInt
                 )
             }
         } else {
-            print("entity.description: " + entity.descriptions().byLanguageOrFirstOrEmpty())
-            print("Entity labels: " + entity.labels())
             DepictedItem(
                 entity,
                 entity.labels().byLanguageOrFirstOrEmpty(),
@@ -112,7 +111,6 @@ class DepictsClient @Inject constructor(private val depictsInterface: DepictsInt
     private fun Map<String, Entities.Label>.byLanguageOrFirstOrEmpty() =
         let {
             val language = getSavedLanguage(MainActivity.contextOfApplication)
-            print("byLanguageOr: $language")
             it[language] ?: it.values.firstOrNull() }?.value() ?: ""
 
     /**
