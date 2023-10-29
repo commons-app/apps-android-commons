@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_CSRF;
+import static fr.free.nrw.commons.upload.UploadStatusManager.writeUnfinishedUploads;
 
 import android.content.Context;
 import android.net.Uri;
@@ -68,7 +69,9 @@ public class UploadClient {
         final Context context, final String filename, final Contribution contribution,
         final NotificationUpdateProgressListener notificationUpdater) throws IOException {
         // Set the upload status to "yes" at the start of an upload
-        UploadStatusManager.setUploadStatus(context, "yes");
+        CommonsApplication.unfinishedUploads.put(contribution.getPageId(), false);
+        // Write the upload status to file
+        writeUnfinishedUploads(context, CommonsApplication.unfinishedUploads);
         if (contribution.getChunkInfo() != null
             && contribution.getChunkInfo().getTotalChunks() == contribution.getChunkInfo()
             .getIndexOfNextChunkToUpload()) {
@@ -147,8 +150,10 @@ public class UploadClient {
             return Observable.just(new StashUploadResult(StashUploadState.FAILED, null));
         } else if (chunkInfo.get() != null) {
             Timber.d("Upload stash success %s", contribution.getPageId());
-            // Set the upload status to "no" at the end of an upload
-            UploadStatusManager.setUploadStatus(context, "no");
+            //remove current upload status from unfinished uploads
+            CommonsApplication.unfinishedUploads.remove(contribution.getPageId());
+            //write the changes to file
+            UploadStatusManager.writeUnfinishedUploads(context, CommonsApplication.unfinishedUploads);
             return Observable.just(new StashUploadResult(StashUploadState.SUCCESS,
                 chunkInfo.get().getUploadResult().getFilekey()));
         } else {

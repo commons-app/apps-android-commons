@@ -1,6 +1,7 @@
 package fr.free.nrw.commons;
 
 import static fr.free.nrw.commons.data.DBOpenHelper.CONTRIBUTIONS_TABLE;
+import static fr.free.nrw.commons.upload.UploadStatusManager.readUnfinishedUploads;
 import static org.acra.ReportField.ANDROID_VERSION;
 import static org.acra.ReportField.APP_VERSION_CODE;
 import static org.acra.ReportField.APP_VERSION_NAME;
@@ -145,6 +146,10 @@ public class CommonsApplication extends MultiDexApplication {
     public static Map<String, Boolean> pauseUploads = new HashMap<>();
 
     /**
+     *  In-memory list of contributions whose uploads have not been properly fnished
+     */
+    public static Map<String, Boolean> unfinishedUploads = new HashMap<>();
+    /**
      * Used to declare and initialize various components and dependencies
      */
     @Override
@@ -195,6 +200,10 @@ public class CommonsApplication extends MultiDexApplication {
 
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
+        /**
+         * Loads the map of unfinished uploads from disk when the app starts.
+         */
+        CommonsApplication.unfinishedUploads = UploadStatusManager.readUnfinishedUploads(this);
         checkForUnfinishedUploads();
     }
 
@@ -338,11 +347,9 @@ public class CommonsApplication extends MultiDexApplication {
      * Checks for unfinished uploads and notifies the user if any are found.
      */
     private void checkForUnfinishedUploads() {
-        String uploadStatus = UploadStatusManager.getUploadStatus(this);
-        if ("yes".equals(uploadStatus)) {
+        if (!CommonsApplication.unfinishedUploads.isEmpty()) {
+            // Notify the user about the unfinished uploads
             notifyUser();
-            //set the upload status to no
-            UploadStatusManager.setUploadStatus(this, "no");
         }
     }
 

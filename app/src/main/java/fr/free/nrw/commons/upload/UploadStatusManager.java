@@ -6,52 +6,53 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.HashMap;
+import java.util.Map;
+import timber.log.Timber;
 
 public class UploadStatusManager {
-    private static final String UPLOAD_STATUS_FILE = "upload_status.txt";
+    private static final String FILE_NAME = "upload_status.txt";
 
     /**
-     * Sets the upload status to the specified value.
+     * Writes the hashmap of unfinished uploads to a file.
      *
-     * This method writes the provided status to a file named 'upload_status.txt'.
-     * If the file doesn't exist, it will be created.
-     *
-     * @param context The application context, used to access the file system.
-     * @param status  The status to write to the file, should be "yes" or "no".
+     * @param context The application context.
+     * @param uploads The map of unfinished uploads.
      */
-    public static void setUploadStatus(Context context, String status) {
-        File file = new File(context.getFilesDir(), "upload_status.txt");
-        try (FileOutputStream fos = new FileOutputStream(file)) {
-            fos.write(status.getBytes());
+    public static void writeUnfinishedUploads(Context context, Map<String, Boolean> uploads) {
+        try {
+            FileOutputStream fos = context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(uploads);
+            oos.close();
+            fos.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            Timber.e(e, "Failed to write unfinished uploads to file");
         }
     }
+
     /**
-     * Retrieves the current upload status from the file.
+     * Reads the hashmap of unfinished uploads from a file.
      *
-     * This method reads the status from a file named 'upload_status.txt'.
-     * If the file doesn't exist or an error occurs, "no" is returned as a default value.
-     *
-     * @param context The application context, used to access the file system.
-     * @return The current upload status, "yes" or "no".
+     * @param context The application context.
+     * @return The map of unfinished uploads, or an empty map if reading fails.
      */
-    public static String getUploadStatus(Context context) {
-        File file = new File(context.getFilesDir(), "upload_status.txt");
-        if (!file.exists()) {
-            return "no";
-        }
-        try (FileInputStream fis = new FileInputStream(file);
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr)) {
-            return br.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "no";  // default value in case of an error
+    public static Map<String, Boolean> readUnfinishedUploads(Context context) {
+        try {
+            FileInputStream fis = context.openFileInput(FILE_NAME);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            Map<String, Boolean> uploads = (Map<String, Boolean>) ois.readObject();
+            ois.close();
+            fis.close();
+            return uploads;
+        } catch (IOException | ClassNotFoundException e) {
+            Timber.e(e, "Failed to read unfinished uploads from file");
+            return new HashMap<>();  // Return an empty map if reading fails
         }
     }
 }
-
 
