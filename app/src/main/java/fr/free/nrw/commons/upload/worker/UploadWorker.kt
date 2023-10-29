@@ -172,6 +172,16 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL
         )!!
         withContext(Dispatchers.IO) {
+            /*
+                queuedContributions receives the results from a one-shot query.
+                This means that once the list has been fetched from the database,
+                it does not get updated even if some changes (insertions, deletions, etc.)
+                are made to the contribution table afterwards.
+
+                Related issues (fixed):
+                https://github.com/commons-app/apps-android-commons/issues/5136
+                https://github.com/commons-app/apps-android-commons/issues/5346
+             */
             val queuedContributions = contributionDao.getContribution(statesToProcess)
                 .blockingGet()
             //Showing initial notification for the number of uploads being processed
@@ -202,24 +212,32 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             }
 
             queuedContributions.asFlow().map { contribution ->
-                /**
-                 * If the limited connection mode is on, lets iterate through the queued
-                 * contributions
-                 * and set the state as STATE_QUEUED_LIMITED_CONNECTION_MODE ,
-                 * otherwise proceed with the upload
-                 */
-                if (isLimitedConnectionModeEnabled()) {
-                    if (contribution.state == Contribution.STATE_QUEUED) {
-                        contribution.state = Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE
+                // Upload the contribution if it has not been cancelled by the user
+                if (!CommonsApplication.cancelledUploads.contains(contribution.pageId)) {
+                    /**
+                     * If the limited connection mode is on, lets iterate through the queued
+                     * contributions
+                     * and set the state as STATE_QUEUED_LIMITED_CONNECTION_MODE ,
+                     * otherwise proceed with the upload
+                     */
+                    if (isLimitedConnectionModeEnabled()) {
+                        if (contribution.state == Contribution.STATE_QUEUED) {
+                            contribution.state = Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE
+                            contributionDao.saveSynchronous(contribution)
+                        }
+                    } else {
+                        contribution.transferred = 0
+                        contribution.state = Contribution.STATE_IN_PROGRESS
                         contributionDao.saveSynchronous(contribution)
+                        setProgressAsync(Data.Builder().putInt("progress", countUpload).build())
+                        countUpload++
+                        uploadContribution(contribution = contribution)
                     }
                 } else {
-                    contribution.transferred = 0
-                    contribution.state = Contribution.STATE_IN_PROGRESS
-                    contributionDao.saveSynchronous(contribution)
-                    setProgressAsync(Data.Builder().putInt("progress", countUpload).build())
-                    countUpload++
-                    uploadContribution(contribution = contribution)
+                    /* We can remove the cancelled upload from the hashset
+                       as this contribution will not be processed again
+                     */
+                    removeUploadFromInMemoryHashSet(contribution)
                 }
             }.collect()
 
@@ -238,6 +256,13 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
         }
 
         return Result.success()
+    }
+
+    /**
+     * Removes the processed contribution from the cancelledUploads in-memory hashset
+     */
+    private fun removeUploadFromInMemoryHashSet(contribution: Contribution) {
+        CommonsApplication.cancelledUploads.remove(contribution.pageId)
     }
 
     /**
