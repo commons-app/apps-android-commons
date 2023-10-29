@@ -239,17 +239,35 @@ class CustomSelectorActivityTest {
         val exceededBy: Field =
             CustomSelectorActivity::class.java.getDeclaredField("uploadLimitExceededBy")
         exceededBy.isAccessible = true
-        for (i in 1..21) {
+        val limit: Field =
+            CustomSelectorActivity::class.java.getDeclaredField("imageUploadLimit")
+        limit.isAccessible = true
+
+        // all tests check integration with not for upload marking
+
+        // test with list size limit
+        for (i in 1..limit.getInt(activity)) {
             images.add(Image(i.toLong(), i.toString(), uri,
                 "abc/abc", 1, "bucket1"))
         }
         activity.onFolderClick(1, "test", 0)
         activity.onSelectedImagesChanged(images,0)
-        assertEquals(true, overLimit.getBoolean(activity))
-        assertEquals(1, exceededBy.getInt(activity))
+        assertEquals(false, overLimit.getBoolean(activity))
+        assertEquals(0, exceededBy.getInt(activity))
         activity.onSelectedImagesChanged(images, 1)
+        assertEquals(false, overLimit.getBoolean(activity))
+        assertEquals(0, exceededBy.getInt(activity))
+
+        // test with list size limit+1
+        images.add(image)
+        activity.onSelectedImagesChanged(images,0)
         assertEquals(true, overLimit.getBoolean(activity))
         assertEquals(1, exceededBy.getInt(activity))
+        activity.onSelectedImagesChanged(images,1)
+        assertEquals(true, overLimit.getBoolean(activity))
+        assertEquals(1, exceededBy.getInt(activity))
+
+        //test with list size 1
         images.clear()
         images.add(image)
         activity.onSelectedImagesChanged(images,0)
