@@ -197,7 +197,7 @@
   <string name="read_storage_permission_rationale">Потребна дозвола: Читање спољашње меморије. Апликација не може да приступи Ваших галерији без овога.</string>
   <string name="write_storage_permission_rationale">Потребна дозвола: Писање у спољашњој меморији. Апликација не може да приступи Вашој камери/галерији без ове дозволе.</string>
   <string name="location_permission_title">Захтевање дозволе за локацију</string>
-  <string name="in_app_camera_location_permission_title">Сними локацију за снимке у апликацији</string>
+  <string name="in_app_camera_location_permission_title">Забележи локацију за снимке у апликацији</string>
   <string name="in_app_camera_location_switch_pref_summary">Омогућите ово да би сте снимили локацију за снимке у апликацији, у случају да је камера уређаја не сними</string>
   <string name="ok">У реду</string>
   <string name="warning">Упозорење</string>

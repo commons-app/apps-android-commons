@@ -12,6 +12,7 @@
 * Luckas
 * Malafaya
 * Mansil alfalb
+* McDutchie
 * Mirzali
 * Sarilho1
 * Unamane
@@ -393,7 +394,7 @@
   <string name="step_count">Passo %1$d de %2$d: %3$s</string>
   <string name="next">Seguinte</string>
   <string name="previous">Anterior</string>
-  <string name="upload_title_duplicate">Já existe um ficheiro com o nome %1$s. Tem a certeza de que deseja continuar?\n\n\nNota: será adicionado automaticamente ao nome do ficheiro um sufixo apropriado.</string>
+  <string name="upload_title_duplicate">Já existe um ficheiro com o nome %1$s. Tem a certeza de que deseja continuar?\n\nNota: será adicionado automaticamente ao nome do ficheiro um sufixo apropriado.</string>
   <string name="map_application_missing">Não foi encontrada no seu dispositivo nenhuma aplicação de mapas compatível. Para usar esta funcionalidade instale uma aplicação de mapas, por favor.</string>
   <string name="title_page_bookmarks_pictures">Fotografias</string>
   <string name="title_page_bookmarks_locations">Locais</string>

@@ -289,7 +289,7 @@
   <string name="skip_login">Overslaan</string>
   <string name="navigation_item_login">Aanmelden</string>
   <string name="skip_login_title">Weet je zeker dat je het aanmelden wilt overslaan?</string>
-  <string name="skip_login_message">U moet inloggen om later afbeeldingen te kunnen uploaden.</string>
+  <string name="skip_login_message">U moet zich dan later wel aanmelden om afbeeldingen te kunnen uploaden.</string>
   <string name="login_alert_message">Meld je aan om deze functie te gebruiken</string>
   <string name="copy_wikicode">Kopieer de wikitekst naar het klembord</string>
   <string name="wikicode_copied">De wikitekst is gekopieerd naar het klembord</string>
@@ -343,7 +343,7 @@
   <string name="menu_set_wallpaper">Stel in als achtergrond</string>
   <string name="wallpaper_set_successfully">Achtergrond succesvol ingesteld!</string>
   <string name="quiz">Vragenspel</string>
-  <string name="quiz_question_string">Kan je afbeelding worden geplaatst?</string>
+  <string name="quiz_question_string">Is deze afbeelding geschikt om te uploaden?</string>
   <string name="question">Vraag</string>
   <string name="result">Uitslag</string>
   <string name="quiz_back_button">Als u doorgaat met het uploaden van afbeeldingen die moeten worden verwijderd, wordt uw account waarschijnlijk geblokkeerd. Weet u zeker dat u de quiz wilt beëindigen?</string>
@@ -362,6 +362,7 @@
   <string name="wrong">Fout antwoord</string>
   <string name="quiz_screenshot_question">Is deze screenshot OK om te uploaden?</string>
   <string name="share_app_title">Toepassing delen</string>
+  <string name="rotate">Draaien</string>
   <string name="error_fetching_nearby_places">Fout bij het ophalen van plaatsen in de buurt.</string>
   <string name="no_nearby_places_around">Geen plaatsen in de buurt</string>
   <string name="error_fetching_nearby_monuments">Fout bij het ophalen van monumenten.</string>
@@ -406,7 +407,7 @@
   <string name="step_count">Stap %1$d van %2$d: %3$s</string>
   <string name="next">Volgende</string>
   <string name="previous">Vorige</string>
-  <string name="upload_title_duplicate">Er bestaat een bestand met de bestandsnaam %1$s . Weet u zeker dat u door wilt gaan?\n\nOpmerking: Er wordt automatisch een geschikt achtervoegsel aan de bestandsnaam toegevoegd.</string>
+  <string name="upload_title_duplicate">Er is al een bestand met de bestandsnaam %1$s. Weet u zeker dat u door wilt gaan?\n\nOpmerking: Er wordt automatisch een geschikt achtervoegsel aan de bestandsnaam toegevoegd.</string>
   <string name="map_application_missing">Er is geen compatibele kaarttoepassing gevonden op uw apparaat. Installeer een kaarttoepassing om deze functie te gebruiken.</string>
   <string name="title_page_bookmarks_pictures">Afbeeldingen</string>
   <string name="title_page_bookmarks_locations">Locaties</string>
@@ -472,15 +473,15 @@
   <string name="send_thank_toast">Verstuur een bedankje voor %1$s</string>
   <string name="review_copyright">Voldoet dit aan de regels van het auteursrecht?</string>
   <string name="review_category">Is dit correct gecategoriseerd?</string>
-  <string name="review_spam">Valt dit binnen de scope?</string>
+  <string name="review_spam">Past dit bij de doelstelling van het project?</string>
   <string name="review_thanks">Wilt u de bijdrager bedanken?</string>
   <string name="review_spam_explanation">Klik op NEE om deze afbeelding te nomineren voor verwijdering als deze helemaal niet nuttig is.</string>
   <string name="review_copyright_explanation">Logo\'s, screenshots, filmposters zijn vaak auteursrechtschendingen.\nKlik NEE om deze afbeelding te nomineren voor verwijdering</string>
   <string name="review_thanks_explanation">%1$s zal worden aangemoedigd door uw waardering</string>
   <string name="review_no_category">Oh, dit is niet eens gecategoriseerd!</string>
   <string name="review_category_explanation">Deze afbeelding valt onder %1$s categorieën.</string>
-  <string name="review_spam_report_question">Het valt buiten de scope want het is</string>
-  <string name="review_c_violation_report_question">Het is schending van het auteursrecht omdat het</string>
+  <string name="review_spam_report_question">Het past niet bij de doelstelling van het project, want het is</string>
+  <string name="review_c_violation_report_question">Het is een schending van het auteursrecht, want het is</string>
   <string name="review_thanks_yes_button_text">Volgende afbeelding</string>
   <string name="review_thanks_no_button_text">Ja, waarom niet</string>
   <string name="skip_image_explanation">Als u op deze knop klikt, krijgt u nog een recent geüploade afbeelding van Wikimedia Commons</string>
@@ -748,4 +749,10 @@
   <string name="full_screen_mode_features_info">Veeg snel en lang om deze handelingen te verrichten: \n- Links/Rechts: Naar vorige/volgende gaan\n- Omhoog: Selecteren\n- Omlaag: Als niet voor uploaden markeren</string>
   <string name="set_up_avatar_toast_string">Om uw leaderboard-avatar te kiezen tikt u op \"Als avatar instellen\" in het driestippenmenu van een afbeelding.</string>
   <string name="similar_coordinate_description_auto_set">De coördinaten zijn niet precies, maar degene die deze foto heeft geüpload vindt dat ze redelijk in de buurt komen.</string>
+  <string name="storage_permissions_denied">Opslagtoestemming geweigerd</string>
+  <string name="unable_to_share_upload_item">Kan dit item niet delen</string>
+  <plurals name="custom_picker_images_selected_title_appendix">
+    <item quantity="one">%d afbeelding geselecteerd</item>
+    <item quantity="other">%d afbeeldingen geselecteerd</item>
+  </plurals>
 </resources>
