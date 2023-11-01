@@ -142,6 +142,11 @@ public class CommonsApplication extends MultiDexApplication {
     public static Map<String, Boolean> pauseUploads = new HashMap<>();
 
     /**
+     *  In-memory list of uploads that have been cancelled by the user
+     */
+    public static HashSet<String> cancelledUploads = new HashSet<>();
+
+    /**
      * Used to declare and initialize various components and dependencies
      */
     @Override

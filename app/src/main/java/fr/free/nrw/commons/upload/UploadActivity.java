@@ -43,6 +43,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.filepicker.Constants.RequestCodes;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -65,6 +66,8 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import java.io.File;
+import java.security.Permission;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -527,6 +530,23 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                     @Override
                     public void deletePictureAtIndex(int index) {
                         presenter.deletePictureAtIndex(index);
+                    }
+
+                    /**
+                     * Changes the thumbnail of an UploadableFile at the specified index.
+                     * This method updates the list of uploadableFiles by replacing the UploadableFile
+                     * at the given index with a new UploadableFile created from the provided file path.
+                     * After updating the list, it notifies the RecyclerView's adapter to refresh its data,
+                     * ensuring that the thumbnail change is reflected in the UI.
+                     *
+                     * @param index The index of the UploadableFile to be updated.
+                     * @param filepath The file path of the new thumbnail image.
+                     */
+                    @Override
+                    public void changeThumbnail(int index, String filepath) {
+                        uploadableFiles.remove(index);
+                        uploadableFiles.add(index, new UploadableFile(new File(filepath)));
+                        rvThumbnails.getAdapter().notifyDataSetChanged();
                     }
 
                     @Override

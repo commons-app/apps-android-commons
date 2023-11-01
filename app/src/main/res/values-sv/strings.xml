@@ -348,6 +348,7 @@
   <string name="wrong">Fel svar</string>
   <string name="quiz_screenshot_question">Är det okej att ladda upp denna skärmdump?</string>
   <string name="share_app_title">Dela app</string>
+  <string name="rotate">Rotera</string>
   <string name="error_fetching_nearby_places">Fel uppstod när platser i närheten hämtades.</string>
   <string name="no_nearby_places_around">Inga platser i närheten</string>
   <string name="error_fetching_nearby_monuments">Fel uppstod när monument i närheten hämtades.</string>
@@ -732,6 +733,8 @@
   <string name="full_screen_mode_features_info">Svep snabbt och länge för att utföra dessa åtgärder: \n- Vänster/Höger: Gå till föregående/nästa \n- Upp: Markera\n- Ned: Markera som inte för uppladdning.</string>
   <string name="set_up_avatar_toast_string">För att ange din avatar för topplistan trycker du på \"Använd som avatar\" i menyn med de tre punkter på valfri bild.</string>
   <string name="similar_coordinate_description_auto_set">Koordinaterna är inte de exakta koordinaterna, men personen som laddade upp denna bild tycker att de är tillräckligt nära.</string>
+  <string name="storage_permissions_denied">Lagringsbehörigheter nekades</string>
+  <string name="unable_to_share_upload_item">Kunde inte dela detta objekt</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d markerad bild</item>
     <item quantity="other">%d markerade bilder</item>

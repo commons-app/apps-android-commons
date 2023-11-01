@@ -14,7 +14,7 @@ import java.util.List;
 
 public class UploadItem {
 
-    private final Uri mediaUri;
+    private Uri mediaUri;
     private final String mimeType;
     private ImageCoordinates gpsCoords;
     private List<UploadMediaDetail> uploadMediaDetails;
@@ -31,7 +31,7 @@ public class UploadItem {
      * Uri of uploadItem
      * Uri points to image location or name, eg content://media/external/images/camera/10495 (Android 10)
      */
-    private final Uri contentUri;
+    private  Uri contentUri;
 
 
     @SuppressLint("CheckResult")
@@ -159,5 +159,17 @@ public class UploadItem {
     @Nullable
     public String getCountryCode() {
         return countryCode;
+    }
+
+    /**
+     * Sets both the contentUri and mediaUri to the specified Uri.
+     * This method allows you to assign the same Uri to both the contentUri and mediaUri
+     * properties.
+     *
+     * @param uri The Uri to be set as both the contentUri and mediaUri.
+     */
+    public void setContentUri(Uri uri) {
+        contentUri = uri;
+        mediaUri = uri;
     }
 }

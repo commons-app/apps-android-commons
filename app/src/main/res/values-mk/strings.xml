@@ -343,6 +343,7 @@
   <string name="wrong">Погрешен одговор</string>
   <string name="quiz_screenshot_question">Дали оваа екранска снимка е во ред за подигање?</string>
   <string name="share_app_title">Сподели прилог</string>
+  <string name="rotate">Сврти</string>
   <string name="error_fetching_nearby_places">Грешка при добивањето на околните места.</string>
   <string name="no_nearby_places_around">Не најдов околни места</string>
   <string name="error_fetching_nearby_monuments">Грешка при добивањето на околните споменици.</string>
@@ -729,6 +730,8 @@
   <string name="full_screen_mode_features_info">Поминувајте бргу и долго со простот за да ги извршите следниве дејства: \n- Лево/десно: Претходна/следна\n- Нагоре: Избирање\n- Надолу: Означување дека не е за подигање.</string>
   <string name="set_up_avatar_toast_string">За да го поставите вашиот аватар во табелата на предводници, допрете на „Задај како аватар“ во менито со три точки на било која слика.</string>
   <string name="similar_coordinate_description_auto_set">Наведените координати не се прецизни, но лицето што ја подигнало сликава смета дека се доволно блиску.</string>
+  <string name="storage_permissions_denied">Дозволата за складирање е одбиена</string>
+  <string name="unable_to_share_upload_item">Не може да се сподели оваа ставка</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">Избрана е %d слика</item>
     <item quantity="other">Избрани се %d слики</item>

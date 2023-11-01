@@ -94,7 +94,7 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:2.2.0"
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.10.0"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.10.0"
-    testImplementation 'com.facebook.soloader:soloader:0.10.1'
+    testImplementation 'com.facebook.soloader:soloader:0.10.5'
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3"
 
     // Android testing
@@ -140,6 +140,8 @@ dependencies {
     implementation "androidx.preference:preference:$PREFERENCE_VERSION"
     // Kotlin
     implementation "androidx.preference:preference-ktx:$PREFERENCE_VERSION"
+    //Android Media
+    implementation 'com.github.juanitobananas:AndroidMediaUtil:v1.0-1'
 
     implementation "androidx.multidex:multidex:$MULTIDEX_VERSION"
 
@@ -176,8 +178,8 @@ android {
     defaultConfig {
         //applicationId 'fr.free.nrw.commons'
 
-        versionCode 1035
-        versionName '4.2.0'
+        versionCode 1036
+        versionName '4.2.1'
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
 
         minSdkVersion 21
@@ -236,8 +238,8 @@ android {
             }
         }
         debug {
-            minifyEnabled false
             testCoverageEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             testProguardFile 'test-proguard-rules.txt'
             versionNameSuffix "-debug-" + getBranchName()

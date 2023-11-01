@@ -4,6 +4,7 @@
 * Ajeje Brazorf
 * Alno
 * BaRaN6161 TURK
+* BlueCamille
 * Cigaryno
 * Cyclicus
 * DavidL
@@ -17,6 +18,7 @@
 * Jean-Frédéric
 * JenyxGym
 * KATRINE1992
+* McDutchie
 * Melissadeba95
 * Metroitendo
 * Mirzali
@@ -226,7 +228,7 @@
   <string name="storage_permission_title">Demande d’autorisation d’accès au stockage</string>
   <string name="read_storage_permission_rationale">Permission nécessaire : lecture sur stockage externe. Sans cela, l’application ne peut pas accéder à votre galerie.</string>
   <string name="write_storage_permission_rationale">Permission obligatoire : écriture sur stockage externe. Sans cela, l’application ne peut pas accéder à votre appareil photo ou votre galerie.</string>
-  <string name="location_permission_title">Demande d’autorisation d’accès au stockage</string>
+  <string name="location_permission_title">Demande d’autorisation d’accès au localisation</string>
   <string name="in_app_camera_location_permission_title">Enregistrer l’emplacement pour les prises de vue dans l’application</string>
   <string name="in_app_camera_location_switch_pref_summary">L’activer pour enregistrer l’emplacement avec les prises de vue dans l’application, si l’appareil photo ne le fait pas</string>
   <string name="ok">OK</string>
@@ -375,6 +377,7 @@
   <string name="wrong">Mauvaise réponse</string>
   <string name="quiz_screenshot_question">Cette copie d’écran est-elle correcte pour être téléversée ?</string>
   <string name="share_app_title">Partager l’application</string>
+  <string name="rotate">Pivoter</string>
   <string name="error_fetching_nearby_places">Erreur durant la recherche d’endroits proches.</string>
   <string name="no_nearby_places_around">Aucun lieu à proximité</string>
   <string name="error_fetching_nearby_monuments">Erreur de récupération des monuments à proximité.</string>

@@ -270,6 +270,7 @@
   <string name="preference_author_name_toggle">Използване на персонализирано авторско име</string>
   <string name="preference_author_name_toggle_summary">При качването използвайте персонализирано авторско име вместо потребителското си име</string>
   <string name="preference_author_name">Персонализирано авторско име</string>
+  <string name="nearby_fragment">Наблизо</string>
   <string name="read_notifications">Известия (прочетени)</string>
   <string name="list_sheet">Списък</string>
   <string name="next">Следваща</string>
@@ -305,4 +306,5 @@
   <string name="error_occurred_in_picking_images">Възникна грешка при избирането на изображенията</string>
   <string name="please_wait">Моля, изчакайте...</string>
   <string name="delete_helper_ask_spam_blurry">напълно размазано</string>
+  <string name="leaderboard_nearby">Наблизо</string>
 </resources>

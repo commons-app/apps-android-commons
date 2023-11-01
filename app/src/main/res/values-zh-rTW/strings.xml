@@ -363,6 +363,7 @@
   <string name="wrong">錯誤答案</string>
   <string name="quiz_screenshot_question">這張截圖可以上傳嗎？</string>
   <string name="share_app_title">分享應用程式</string>
+  <string name="rotate">旋轉</string>
   <string name="error_fetching_nearby_places">獲取附近地點時出錯。</string>
   <string name="no_nearby_places_around">找不到附近地點</string>
   <string name="error_fetching_nearby_monuments">索取附近古蹟景點時出錯。</string>
@@ -749,4 +750,10 @@
   <string name="full_screen_mode_features_info">快速長滑來執行以下操作：\n- 左/右：跳到上一張/下一張\n- 上：選擇\n- 下：標記為不上傳。</string>
   <string name="set_up_avatar_toast_string">要設定您的排行榜頭像，請在任何圖片裡輕觸三點樣式選單中的「設定成頭像」。</string>
   <string name="similar_coordinate_description_auto_set">座標雖不準確，但上傳這張圖片的人認為已經足夠接近了。</string>
+  <string name="storage_permissions_denied">儲存裝置權限被拒絕</string>
+  <string name="unable_to_share_upload_item">無法分享此項目</string>
+  <plurals name="custom_picker_images_selected_title_appendix">
+    <item quantity="one">已選 %d 張圖片</item>
+    <item quantity="other">已選 %d 張圖片</item>
+  </plurals>
 </resources>
