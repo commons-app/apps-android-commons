@@ -199,6 +199,9 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
             adapter.setItems(categories);
         }
         adapter.notifyDataSetChanged();
+
+        // Nested waiting for search result data to load into the category
+        // list and smoothly scroll to the top of the search result list.
         rvCategories.post(new Runnable() {
             @Override
             public void run() {

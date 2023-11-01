@@ -246,6 +246,9 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
                 adapter.setItems(depictedItemList);
             }
         }
+
+        // Nested waiting for search result data to load into the depicted item
+        // list and smoothly scroll to the top of the search result list.
         depictsRecyclerView.post(new Runnable() {
             @Override
             public void run() {
