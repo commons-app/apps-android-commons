@@ -249,6 +249,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         super.onStart();
         checkStoragePermissions();
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -285,7 +286,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             // All required permissions are granted, so enable UI elements and perform actions
             receiveSharedItems();
             cvContainerTopCard.setVisibility(View.VISIBLE);
-        } else{
+        } else {
             // Permissions are missing
             cvContainerTopCard.setVisibility(View.INVISIBLE);
             if(showPermissionsDialog){
@@ -766,6 +767,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             uploadCategoriesFragment.setCallback(null);
         }
     }
+
     /**
      * Get the value of the showPermissionDialog variable.
      *
@@ -774,6 +776,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     public boolean isShowPermissionsDialog() {
         return showPermissionsDialog;
     }
+
     /**
      * Set the value of the showPermissionDialog variable.
      *
