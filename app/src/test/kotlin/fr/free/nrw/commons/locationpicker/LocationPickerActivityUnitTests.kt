@@ -92,6 +92,9 @@ class LocationPickerActivityUnitTests {
     @Mock
     private lateinit var style: Style
 
+    @Mock
+    private lateinit var removeLocationButton: Button
+
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
@@ -111,6 +114,7 @@ class LocationPickerActivityUnitTests {
         Whitebox.setInternalState(activity, "smallToolbarText", smallToolbarText)
         Whitebox.setInternalState(activity, "fabCenterOnLocation", fabCenterOnLocation)
         Whitebox.setInternalState(activity, "tvAttribution", tvAttribution)
+        Whitebox.setInternalState(activity, "removeLocationButton", removeLocationButton)
     }
 
     @Test
