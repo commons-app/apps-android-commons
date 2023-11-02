@@ -580,7 +580,7 @@
   <string name="confirm">Потврди</string>
   <string name="instructions_title">Упутства</string>
   <string name="wikipedia_instructions_step_1">1. Користите следећи викитекст:</string>
-  <string name="wikipedia_instructions_step_2">2. Додиривањем \"Потвдрди\", биће отворен чланак на Википедији</string>
+  <string name="wikipedia_instructions_step_2">2. Кликом на потврди, биће отворен чланак на Википедији</string>
   <string name="wikipedia_instructions_step_3">3. Пронађите одговарајући одељак у чланку за вашу слику</string>
   <string name="wikipedia_instructions_step_4">4. Тапните на иконицу Уреди (који личи на оловку) за тај одељак.</string>
   <string name="wikipedia_instructions_step_5">5. Налепите викитекст на одговарајуће место.</string>

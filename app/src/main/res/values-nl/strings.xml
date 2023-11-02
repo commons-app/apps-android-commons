@@ -543,8 +543,8 @@
   <string name="category_edit_helper_show_edit_title">Categorie-update</string>
   <string name="category_edit_helper_show_edit_title_success">Afgerond</string>
   <plurals name="category_edit_helper_show_edit_message_if">
-    <item quantity="one">Categorie %1$s is toegevoegd.</item>
-    <item quantity="other">Categorieën %1$s zijn toegevoegd.</item>
+    <item quantity="one">Categorie %1$s wordt toegevoegd.</item>
+    <item quantity="other">Categorieën %1$s worden toegevoegd.</item>
   </plurals>
   <string name="category_edit_helper_edit_message_else">Kan geen categorieën toevoegen.</string>
   <string name="category_edit_button_text">Categorieën bijwerken</string>
@@ -560,9 +560,9 @@
   <string name="description_edit_helper_show_edit_title">Bijwerking beschrijving</string>
   <string name="caption_edit_helper_show_edit_title">Bijwerking bijschrift</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Afgerond</string>
-  <string name="coordinates_edit_helper_show_edit_message">Coördinaten %1$s zijn toegevoegd.</string>
-  <string name="description_edit_helper_show_edit_message">Beschrijvingen zijn toegevoegd.</string>
-  <string name="caption_edit_helper_show_edit_message">Bijschrift is toegevoegd.</string>
+  <string name="coordinates_edit_helper_show_edit_message">Coördinaten %1$s worden toegevoegd.</string>
+  <string name="description_edit_helper_show_edit_message">Beschrijvingen worden toegevoegd.</string>
+  <string name="caption_edit_helper_show_edit_message">Bijschrift wordt toegevoegd.</string>
   <string name="coordinates_edit_helper_edit_message_else">Kan geen coördinaten toevoegen.</string>
   <string name="description_edit_helper_edit_message_else">Kon beschrijvingen niet toevoegen.</string>
   <string name="caption_edit_helper_edit_message_else">Kon bijschrift niet toevoegen.</string>
@@ -594,7 +594,7 @@
   <string name="wallpaper_set_unsuccessfully">Er is iets fout gegaan. Kan de achtergrond niet instellen</string>
   <string name="setting_wallpaper_dialog_title">Instellen als achtergrond</string>
   <string name="setting_wallpaper_dialog_message">Wordt ingesteld als achtergrond. Een ogenblik geduld...</string>
-  <string name="theme_default_name">Volgsysteem</string>
+  <string name="theme_default_name">Systeem volgen</string>
   <string name="theme_dark_name">Donker</string>
   <string name="theme_light_name">Licht</string>
   <string name="cannot_open_location_settings">Kan locatie-instellingen niet openen. Schakel locatie handmatig in</string>

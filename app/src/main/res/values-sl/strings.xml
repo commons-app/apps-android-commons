@@ -2,6 +2,7 @@
 <!-- Authors:
 * Eleassar
 * HairyFotr
+* McDutchie
 * Upwinxp
 -->
 <resources>
@@ -689,7 +690,7 @@
   <string name="welcome_custom_selector_ok">Odlično</string>
   <string name="custom_selector_already_uploaded_image_text">Ta slika je že naložena v Zbirko.</string>
   <string name="place_state_wlm">WLM</string>
-  <string name="wlm_upload_info">Ta slika bo vključena v natečaj Viki obožuje spomenike 2021</string>
+  <string name="wlm_upload_info" fuzzy="true">Ta slika bo vključena v natečaj Viki obožuje spomenike</string>
   <string name="display_monuments">Prikaži spomenike</string>
   <string name="wlm_month_message">Odprt je natečaj Viki obožuje spomenike!</string>
   <string name="learn_more">VEČ O TEM</string>

@@ -706,7 +706,7 @@
   <string name="welcome_custom_selector_ok">Génial</string>
   <string name="custom_selector_already_uploaded_image_text">Cette image a déjà été téléversée sur Commons.</string>
   <string name="place_state_wlm">WLM</string>
-  <string name="wlm_upload_info">Cette image sera entrée dans le concours « Wiki aime les monuments » de 2021</string>
+  <string name="wlm_upload_info">Cette image sera entrée dans le concours « Wiki aime les monuments »</string>
   <string name="display_monuments">Afficher les monuments</string>
   <string name="wlm_month_message">C’est le mois de « Wiki  aime les monuments » !</string>
   <string name="learn_more">EN SAVOIR PLUS</string>
@@ -764,6 +764,9 @@
   <string name="full_screen_mode_features_info">Balayez rapidement et assez loin pour effectuer les actions suivantes :\n– vers la gauche / droite : aller au précédent / suivant ;\n– vers le haut : sélectionner ;\n– vers le bas : marquer comme à ne pas téléverser.</string>
   <string name="set_up_avatar_toast_string">Pour configurer votre avatar de classement, appuyez sur « Définir comme avatar » dans le menu à trois points de n’importe quelle image.</string>
   <string name="similar_coordinate_description_auto_set">Les coordonnées ne sont pas les coordonnées exactes, mais la personne qui a téléversé cette image pense qu’elles sont suffisamment proches.</string>
+  <string name="storage_permissions_denied">Droits de stockage refusés</string>
+  <string name="unable_to_share_upload_item">Impossible de partager cet élément</string>
+  <string name="permissions_are_required_for_functionality">Des autorisations sont nécessaires pour la fonctionnalité</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d image sélectionnée</item>
     <item quantity="other">%d images sélectionnées</item>

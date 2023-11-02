@@ -17,6 +17,7 @@
 * Kaganer
 * Kareyac
 * MaxBioHazard
+* McDutchie
 * Megakott
 * Monirec
 * Movses
@@ -723,7 +724,7 @@
   <string name="custom_selector_info_text2">В отличие от изображения слева, изображение справа имеет логотип Commons, указывающий, что оно уже загружено.\n Нажмите и удерживайте для предварительного просмотра изображения.</string>
   <string name="welcome_custom_selector_ok">Потрясающе</string>
   <string name="custom_selector_already_uploaded_image_text">Это изображение уже было загружено на Викисклад.</string>
-  <string name="wlm_upload_info">Это изображение будет участвовать в конкурсе «Вики любит памятники — 2021».</string>
+  <string name="wlm_upload_info" fuzzy="true">Это изображение будет участвовать в конкурсе «Вики любит памятники».</string>
   <string name="display_monuments">Показать памятники</string>
   <string name="wlm_month_message">Это месяц «Вики любит памятники»!</string>
   <string name="learn_more">УЗНАТЬ ПОДРОБНЕЕ</string>
