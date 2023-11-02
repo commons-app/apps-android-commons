@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
+import android.widget.Toast;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 import com.karumi.dexter.Dexter;
@@ -16,6 +17,7 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.upload.UploadActivity;
 import java.util.List;
 
 
@@ -80,14 +82,14 @@ public class PermissionUtils {
      * <p>
      * Sample usage:
      * <p>
-     * PermissionUtils.checkPermissionsAndPerformAction(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE,
-     * () -> initiateCameraUpload(activity), R.string.storage_permission_title,
-     * R.string.write_storage_permission_rationale);
+     * PermissionUtils.checkPermissionsAndPerformAction(activity,
+     * Manifest.permission.WRITE_EXTERNAL_STORAGE, () -> initiateCameraUpload(activity),
+     * R.string.storage_permission_title, R.string.write_storage_permission_rationale);
      * <p>
      * If you don't want the permission rationale to be shown then use:
      * <p>
-     * PermissionUtils.checkPermissionsAndPerformAction(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE,
-     * () -> initiateCameraUpload(activity), - 1, -1);
+     * PermissionUtils.checkPermissionsAndPerformAction(activity,
+     * Manifest.permission.WRITE_EXTERNAL_STORAGE, () -> initiateCameraUpload(activity), - 1, -1);
      *
      * @param activity            activity requesting permissions
      * @param permissions         the permissions array being requests
@@ -110,8 +112,9 @@ public class PermissionUtils {
      * <p>
      * Sample usage:
      * <p>
-     * PermissionUtils.checkPermissionsAndPerformAction(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE,
-     * () -> initiateCameraUpload(activity), () -> showMessage(), R.string.storage_permission_title,
+     * PermissionUtils.checkPermissionsAndPerformAction(activity,
+     * Manifest.permission.WRITE_EXTERNAL_STORAGE, () -> initiateCameraUpload(activity), () ->
+     * showMessage(), R.string.storage_permission_title,
      * R.string.write_storage_permission_rationale);
      *
      * @param activity            activity requesting permissions
@@ -138,8 +141,15 @@ public class PermissionUtils {
                         // permission is denied permanently, we will show user a dialog message.
                         DialogUtil.showAlertDialog(activity, activity.getString(rationaleTitle),
                             activity.getString(rationaleMessage),
-                            activity.getString(R.string.navigation_item_settings), null,
-                            () -> askUserToManuallyEnablePermissionFromSettings(activity), null);
+                            activity.getString(R.string.navigation_item_settings),
+                            null,
+                            () -> {
+                                askUserToManuallyEnablePermissionFromSettings(activity);
+                                if (activity instanceof UploadActivity) {
+                                    ((UploadActivity) activity).setShowPermissionsDialog(true);
+                                }
+                            }, null, null,
+                            !(activity instanceof UploadActivity));
                     } else {
                         if (null != onPermissionDenied) {
                             onPermissionDenied.run();
@@ -158,8 +168,24 @@ public class PermissionUtils {
                         activity.getString(rationaleMessage),
                         activity.getString(android.R.string.ok),
                         activity.getString(android.R.string.cancel),
-                        token::continuePermissionRequest,
-                        token::cancelPermissionRequest,
+                        () -> {
+                            if (activity instanceof UploadActivity) {
+                                ((UploadActivity) activity).setShowPermissionsDialog(true);
+                            }
+                            token.continuePermissionRequest();
+                        }
+                        ,
+                        () -> {
+                            Toast.makeText(activity.getApplicationContext(),
+                                    R.string.permissions_are_required_for_functionality,
+                                    Toast.LENGTH_LONG)
+                                .show();
+                            token.cancelPermissionRequest();
+                            if (activity instanceof UploadActivity) {
+                                activity.finish();
+                            }
+                        }
+                        ,
                         null,
                         false);
                 }

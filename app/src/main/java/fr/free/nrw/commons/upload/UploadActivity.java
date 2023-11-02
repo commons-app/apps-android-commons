@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload;
 
 import static fr.free.nrw.commons.contributions.ContributionController.ACTION_INTERNAL_UPLOADS;
 import static fr.free.nrw.commons.utils.PermissionUtils.PERMISSIONS_STORAGE;
+import static fr.free.nrw.commons.utils.PermissionUtils.checkPermissionsAndPerformAction;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.SELECTED_NEARBY_PLACE;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.SELECTED_NEARBY_PLACE_CATEGORY;
@@ -146,6 +147,23 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
      */
     public static HashMap<Place,Boolean> nearbyPopupAnswers;
 
+    /**
+     * A private boolean variable to control whether a permissions dialog should be shown
+     * when necessary. Initially, it is set to `true`, indicating that the permissions dialog
+     * should be displayed if permissions are missing and it is first time calling
+     * `checkStoragePermissions` method.
+     *
+     * This variable is used in the `checkStoragePermissions` method to determine whether to
+     * show a permissions dialog to the user if the required permissions are not granted.
+     *
+     * If `showPermissionsDialog` is set to `true` and the necessary permissions are missing,
+     * a permissions dialog will be displayed to request the required permissions. If set
+     * to `false`, the dialog won't be shown.
+     *
+     * @see UploadActivity#checkStoragePermissions()
+     */
+    private boolean showPermissionsDialog = true;
+
     @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,7 +187,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         }
         locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
         locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
-        checkStoragePermissions();
     }
 
     private void init() {
@@ -228,6 +245,12 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        checkStoragePermissions();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         presenter.onAttachView(this);
@@ -235,6 +258,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             askUserToLogIn();
         }
         checkBlockStatus();
+        checkStoragePermissions();
     }
 
     /**
@@ -255,13 +279,36 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                 true)));
     }
 
-    private void checkStoragePermissions() {
+    public void checkStoragePermissions() {
+        // Check if all required permissions are granted
         final boolean hasAllPermissions = PermissionUtils.hasPermission(this, PERMISSIONS_STORAGE);
         if (hasAllPermissions) {
+            // All required permissions are granted, so enable UI elements and perform actions
             receiveSharedItems();
-        } else if (VERSION.SDK_INT >= VERSION_CODES.M) {
-            requestPermissions(PERMISSIONS_STORAGE, RequestCodes.STORAGE);
+            cvContainerTopCard.setVisibility(View.VISIBLE);
+        } else {
+            // Permissions are missing
+            cvContainerTopCard.setVisibility(View.INVISIBLE);
+            if(showPermissionsDialog){
+                checkPermissionsAndPerformAction(this,
+                    () -> {
+                        cvContainerTopCard.setVisibility(View.VISIBLE);
+                        this.receiveSharedItems();
+                    },() -> {
+                        this.showPermissionsDialog = true;
+                        this.checkStoragePermissions();
+                        },
+                    R.string.storage_permission_title,
+                    R.string.write_storage_permission_rationale_for_image_share,
+                    PERMISSIONS_STORAGE);
+            }
         }
+        /* If all permissions are not granted and a dialog is already showing on screen
+         showPermissionsDialog will set to false making it not show dialog again onResume,
+         but if user Denies any permission showPermissionsDialog will be to true
+         and permissions dialog will be shown again.
+         */
+        this.showPermissionsDialog = hasAllPermissions ;
     }
 
     @Override
@@ -719,6 +766,25 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         if (uploadCategoriesFragment != null) {
             uploadCategoriesFragment.setCallback(null);
         }
+    }
+
+    /**
+     * Get the value of the showPermissionDialog variable.
+     *
+     * @return {@code true} if Permission Dialog should be shown, {@code false} otherwise.
+     */
+    public boolean isShowPermissionsDialog() {
+        return showPermissionsDialog;
+    }
+
+    /**
+     * Set the value of the showPermissionDialog variable.
+     *
+     * @param showPermissionsDialog {@code true} to indicate to show
+     * Permissions Dialog if permissions are missing, {@code false} otherwise.
+     */
+    public void setShowPermissionsDialog(final boolean showPermissionsDialog) {
+        this.showPermissionsDialog = showPermissionsDialog;
     }
 
     /**
