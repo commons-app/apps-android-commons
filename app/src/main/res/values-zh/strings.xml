@@ -18,6 +18,7 @@
 * LittlePaw365
 * Liuxinyu970226
 * Looong
+* McDutchie
 * NACHOgao3
 * Qiyue2001
 * Shizhao
@@ -712,7 +713,7 @@
   <string name="custom_selector_info_text2">右边的图片与左边的不同，它具有已上传至维基共享资源的标志。\n点击并长按来预览图像。</string>
   <string name="welcome_custom_selector_ok">棒极了</string>
   <string name="custom_selector_already_uploaded_image_text">此图像已上传至维基共享资源。</string>
-  <string name="wlm_upload_info">此图像将会进入2021年维基爱古迹竞赛</string>
+  <string name="wlm_upload_info" fuzzy="true">此图像将会进入年维基爱古迹竞赛</string>
   <string name="display_monuments">显示古迹</string>
   <string name="wlm_month_message">维基爱古迹的月份！</string>
   <string name="learn_more">了解更多</string>

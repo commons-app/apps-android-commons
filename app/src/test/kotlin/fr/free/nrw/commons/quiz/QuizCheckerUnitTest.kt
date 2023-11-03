@@ -45,7 +45,7 @@ class QuizCheckerUnitTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         SoLoader.setInTestMode()
         Fresco.initialize(ApplicationProvider.getApplicationContext())
         activity = Robolectric.buildActivity(QuizActivity::class.java).create().get()

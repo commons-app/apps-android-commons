@@ -1,5 +1,17 @@
 # Wikimedia Commons for Android
 
+## v4.2.1
+
+- Provide the ability to edit an image to losslessly rotate it while uploading
+- Fix a bug in v4.2.0 where the nearby places were not loading
+- Fix a bug where editing depictions was showing a progress bar indefinitely
+- In the upload screen, use different map icons to indicate if image is being uploaded with location
+  metadata
+- For nearby uploads, it is no longer possible to deselect the item's category and depiction
+- The Mapbox account key used by the app has been changed
+- Category search now shows exact matches without any discrepancies
+- Various bug and crash fixes
+
 ## v4.2.0
 - Dark mode colour improvements
 - Enhancements done to address location metadata loss including the metadata loss that occurs in

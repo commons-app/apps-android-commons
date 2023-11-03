@@ -66,7 +66,7 @@ class UploadMediaDetailAdapterUnitTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         uploadMediaDetails = mutableListOf(uploadMediaDetail, uploadMediaDetail)
         activity = Robolectric.buildActivity(UploadActivity::class.java).get()
         adapter = UploadMediaDetailAdapter("", recentLanguagesDao)

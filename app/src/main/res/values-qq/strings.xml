@@ -108,7 +108,7 @@
   <string name="welcome_copyright_subtext">Message explaining what kind of images not to submit, without a received permission from the copyright holder.</string>
   <string name="welcome_final_text">Message asking user if they understand what kinds of images to upload.</string>
   <string name="welcome_final_button_text">Button text for confirming the user understands what kinds of images to upload.\n{{Identical|Yes}}</string>
-  <string name="welcome_help_button_text">NEEDS DOCUMENTATION</string>
+  <string name="welcome_help_button_text"/>
   <string name="detail_panel_cats_label">Label for categories list in media detail panel.\n{{Identical|Category}}</string>
   <string name="detail_panel_cats_loading">Placeholder for categories list in media detail panel, while loading from network.\n{{Identical|Loading}}</string>
   <string name="detail_panel_cats_none">Placeholder for categories list in media detail panel, if no categories found.\n{{Identical|None selected}}</string>
@@ -130,8 +130,8 @@
   <string name="welcome_image_llamas">An animal. See [[:d:Q42569|Wikidata item Q42569]] for a list of possible translations.</string>
   <string name="welcome_image_rainbow_bridge">A bridge in Japan. See [[:d:Q1046736|Wikidata item Q1046736]] for a list of possible translations.</string>
   <string name="welcome_image_tulip">A flower. See [[:d:Q93201|Wikidata item Q93201]] for a list of possible translations.</string>
-  <string name="welcome_image_welcome_wikipedia">Description of [https://github.com/commons-app/apps-android-commons/blob/master/app/src/main/res/drawable-hdpi/welcome_wikipedia.png the image] displayed on the welcome screen to illustrate {{msg-wm|Commons-android-strings-welcome wikipedia text}} and {{msg-wm|Commons-android-strings-welcome wikipedia subtext}}.</string>
-  <string name="welcome_image_welcome_copyright">Description of [https://github.com/commons-app/apps-android-commons/blob/master/app/src/main/res/drawable-hdpi/welcome_copyright.png the image] displayed on the welcome screen to illustrate {{msg-wm|Commons-android-strings-welcome copyright text}} and {{msg-wm|Commons-android-strings-welcome copyright subtext}}.</string>
+  <string name="welcome_image_welcome_wikipedia">Description of [https://github.com/commons-app/apps-android-commons/blob/main/app/src/main/res/drawable-hdpi/welcome_wikipedia.webp the image] displayed on the welcome screen to illustrate {{msg-wm|Commons-android-strings-welcome wikipedia text}} and {{msg-wm|Commons-android-strings-welcome wikipedia subtext}}.</string>
+  <string name="welcome_image_welcome_copyright">Description of [https://github.com/commons-app/apps-android-commons/blob/main/app/src/main/res/drawable-hdpi/welcome_copyright.webp the image] displayed on the welcome screen to illustrate {{msg-wm|Commons-android-strings-welcome copyright text}} and {{msg-wm|Commons-android-strings-welcome copyright subtext}}.</string>
   <string name="welcome_image_sydney_opera_house">A building in the city of Sydney. See [[:d:Q45178|Wikidata item Q45178]] for a list of possible translations.</string>
   <string name="cancel">{{Identical|Cancel}}</string>
   <string name="navigation_drawer_open">{{Identical|Open}}</string>
@@ -176,6 +176,7 @@
   <string name="exif_tag_name_author">{{Identical|Author}}</string>
   <string name="exif_tag_name_location">{{Identical|Location}}</string>
   <string name="title_app_shortcut_bookmark">{{identical|Bookmark}}</string>
+  <string name="theme_default_name">Option to make the app\'s theme follow the global system setting.</string>
   <string name="more">{{Identical|More}}</string>
   <string name="map_attribution">&lt;code&gt;&amp;amp;#169;&lt;/code&gt;  is the copyright symbol (©).</string>
   <string name="location_picker_image_view_shadow">A description of a visual element, location picker image shadow. Used for accesibility usually.</string>

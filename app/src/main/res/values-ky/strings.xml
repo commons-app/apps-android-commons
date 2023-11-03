@@ -33,7 +33,7 @@
   <string name="preference_category_privacy">Купуялык</string>
   <string name="app_name">Викиказына</string>
   <string name="menu_settings">Ырастоолор</string>
-  <string name="username">Колдонуучунун ысымы</string>
+  <string name="username">Колдонуучунун аты</string>
   <string name="password">Сырсөз</string>
   <string name="login">Кирүү</string>
   <string name="signup">Катталуу</string>

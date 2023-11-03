@@ -62,7 +62,7 @@ class SettingsFragmentUnitTests {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         val activity = Robolectric.buildActivity(SettingsActivity::class.java).create().get()
         context = ApplicationProvider.getApplicationContext()
 

@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.net.Uri
 import com.nhaarman.mockitokotlin2.*
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.TestUtility.setFinalStatic
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
@@ -24,22 +25,28 @@ import kotlinx.coroutines.test.*
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.BeforeAll
 import org.junit.runner.RunWith
 import org.mockito.*
+import org.mockito.Mockito.mockStatic
 import org.powermock.api.mockito.PowerMockito
 import org.powermock.core.classloader.annotations.PrepareForTest
 import org.powermock.modules.junit4.PowerMockRunner
 import org.powermock.reflect.Whitebox
+import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import java.io.File
 import java.io.FileInputStream
+import java.lang.reflect.Field
+import java.lang.reflect.Modifier
 import java.util.*
 import kotlin.collections.HashMap
 
 /**
  * Image Loader Test.
  */
-@RunWith(PowerMockRunner::class)
+@RunWith(RobolectricTestRunner::class)
 @PrepareForTest(PickedFiles::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @ExperimentalCoroutinesApi
@@ -89,13 +96,15 @@ class ImageLoaderTest {
     private var mapHolderImage : HashMap<ImageAdapter.ImageViewHolder, Image> = HashMap()
     private var mapResult: HashMap<String, ImageLoader.Result> = HashMap()
     private var mapModifiedImageSHA1: HashMap<Image, String> = HashMap()
-    private lateinit var image: Image;
-    private lateinit var uploadedStatus: UploadedStatus;
+    private lateinit var image: Image
+    private lateinit var uploadedStatus: UploadedStatus
+    private lateinit var mockedPickedFiles: MockedStatic<PickedFiles>
 
     /**
      * Setup before test.
      */
     @Before
+    @BeforeAll
     @ExperimentalCoroutinesApi
     fun setup() {
         Dispatchers.setMain(testDispacher)
@@ -117,11 +126,13 @@ class ImageLoaderTest {
         Whitebox.setInternalState(imageLoader, "mapHolderImage", mapHolderImage);
         Whitebox.setInternalState(imageLoader, "mapModifiedImageSHA1", mapModifiedImageSHA1);
         Whitebox.setInternalState(imageLoader, "mapResult", mapResult);
-        Whitebox.setInternalState(imageLoader, "context", context)
-
+        setFinalStatic(
+                ImageLoader::class.java.getDeclaredField("context"),
+                context)
         whenever(contentResolver.openInputStream(uri)).thenReturn(inputStream)
         whenever(context.contentResolver).thenReturn(contentResolver)
         whenever(fileUtilsWrapper.getSHA1(inputStream)).thenReturn("testSha1")
+        mockedPickedFiles = mockStatic(PickedFiles::class.java)
     }
 
     /**
@@ -132,6 +143,7 @@ class ImageLoaderTest {
     fun tearDown() {
         Dispatchers.resetMain()
         testDispacher.cleanupTestCoroutines()
+        mockedPickedFiles.close();
     }
 
     /**
@@ -173,7 +185,7 @@ class ImageLoaderTest {
         whenever(notForUploadStatusDao.find(any())).thenReturn(0)
         whenever(uploadedStatusDao.findByImageSHA1(any(), any())).thenReturn(0)
         whenever(uploadedStatusDao.findByModifiedImageSHA1(any(), any())).thenReturn(0)
-        PowerMockito.mockStatic(PickedFiles::class.java)
+//        mockStatic(PickedFiles::class.java)
         BDDMockito.given(PickedFiles.pickedExistingPicture(context, image.uri))
             .willReturn(UploadableFile(uri, File("ABC")))
         whenever(fileUtilsWrapper.getFileInputStream("ABC")).thenReturn(inputStream)
@@ -200,7 +212,6 @@ class ImageLoaderTest {
     @ExperimentalCoroutinesApi
     fun testGetSha1() = testDispacher.runBlockingTest {
 
-        PowerMockito.mockStatic(PickedFiles::class.java)
         BDDMockito.given(PickedFiles.pickedExistingPicture(context, image.uri))
             .willReturn(UploadableFile(uri, File("ABC")))
 

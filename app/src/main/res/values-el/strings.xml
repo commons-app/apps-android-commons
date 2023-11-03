@@ -11,6 +11,7 @@
 * KATRINE1992
 * KATRINE1993
 * ManosHacker
+* McDutchie
 * MnLsVt
 * NikosLikomitros
 * Nikosgranturismogt
@@ -23,7 +24,7 @@
 <resources>
   <string name="commons_facebook">Σελίδα των Κοινών στο Facebook</string>
   <string name="commons_github">Κώδικας πηγής των Κοινών στο GitHub</string>
-  <string name="commons_logo">Κοινό Λογότυπο</string>
+  <string name="commons_logo" fuzzy="true">Κοινό Λογότυπο</string>
   <string name="commons_website">Ιστοσελίδα των Κοινών</string>
   <string name="submit">Υποβολή</string>
   <string name="show_captions">Λεζάντες</string>
@@ -95,7 +96,7 @@
   <string name="upload_failed_notification_title">Απέτυχε η μεταφόρτωση του %1$s</string>
   <string name="upload_paused_notification_title">Η μεταφόρτωση %1$s τέθηκε σε παύση</string>
   <string name="upload_failed_notification_subtitle">Πατήστε για να δείτε</string>
-  <string name="title_activity_contributions">Οι Πρόσφατες Φορτώσεις Μου</string>
+  <string name="title_activity_contributions" fuzzy="true">Οι Πρόσφατες Φορτώσεις Μου</string>
   <string name="contribution_state_queued">Στην ουρά</string>
   <string name="contribution_state_failed">Απέτυχε</string>
   <string name="contribution_state_in_progress">%1$d%% ολοκληρώθηκε</string>
@@ -113,7 +114,7 @@
   <string name="login_failed_network">Δεν είναι δυνατή η σύνδεση - αποτυχία του δικτύου</string>
   <string name="login_failed_throttled">Πάρα πολλές ανεπιτυχείς προσπάθειες. Παρακαλώ δοκιμάστε ξανά σε λίγα λεπτά.</string>
   <string name="login_failed_blocked">Συγνώμη, αυτός ο χρήστης έχει αποκλειστεί από τα Commons</string>
-  <string name="login_failed_2fa_needed">Πρέπει να δώσετε τον κωδικό πιστοποίησης με δύο παράγοντες</string>
+  <string name="login_failed_2fa_needed" fuzzy="true">Πρέπει να δώσετε τον κωδικό πιστοποίησης με δύο παράγοντες</string>
   <string name="login_failed_generic">Η είσοδος απέτυχε</string>
   <string name="share_upload_button">Ανέβασμα</string>
   <string name="multiple_share_base_title">Ονομάστε το σύνολο</string>
@@ -132,7 +133,7 @@
   <string name="title_activity_featured_images">Προβεβλημμένες εικόνες</string>
   <string name="title_activity_category_details">Κατηγορία</string>
   <string name="menu_about">Σχετικά</string>
-  <string name="about_license">Λογισμικό ανοικτού κωδικού που κυκλοφορεί υπό την &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Άδεια Apache v2&lt;/a&gt;. Το Wikimedia Commons και το λογότυπο είναι εμπορικά σήματα του Ιδρύματος Wikimedia και χρησιμοποιούνται με άδεια από το Ίδρυμα Wikimedia. Δεν συμμετέχουμε  στην δημιουργία, ανάπτυξη ή συντήρηση  του Ιδρύματος  Wikimedia.</string>
+  <string name="about_license" fuzzy="true">Λογισμικό ανοικτού κωδικού που κυκλοφορεί υπό την &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Άδεια Apache v2&lt;/a&gt;. Το Wikimedia Commons και το λογότυπο είναι εμπορικά σήματα του Ιδρύματος Wikimedia και χρησιμοποιούνται με άδεια από το Ίδρυμα Wikimedia. Δεν συμμετέχουμε  στην δημιουργία, ανάπτυξη ή συντήρηση  του Ιδρύματος  Wikimedia.</string>
   <string name="about_improve">Δημιουργήστε ένα νέο &lt;a href=\"%1$s\"&gt;GitHub θέμα&lt;/a&gt; για αναφορές σφαλμάτων και προτάσεις.</string>
   <string name="about_privacy_policy">Πολιτική ιδιωτικότητας</string>
   <string name="about_credits" fuzzy="true">&lt;u&gt;Συντελεστές&lt;/u&gt;</string>
@@ -144,7 +145,7 @@
   <string name="no_uploads_yet">Ακόμα δεν έχετε ανεβάσει φωτογραφίες.</string>
   <string name="menu_retry_upload">Ξαναπροσπαθήστε</string>
   <string name="menu_cancel_upload">Ακύρωση</string>
-  <string name="media_upload_policy">Αποστέλλοντας αυτήν την εικόνα, δηλώνω πως αυτή η εργασία είναι δική μου, και δεν περιέχει υλικό άλλου συγγραφέα, και εκτός αυτού πρόσκειται στο , thathref=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Κοινές πολιτικές της Wikipedia&lt;/a&gt;.</string>
+  <string name="media_upload_policy" fuzzy="true">Αποστέλλοντας αυτήν την εικόνα, δηλώνω πως αυτή η εργασία είναι δική μου, και δεν περιέχει υλικό άλλου συγγραφέα, και εκτός αυτού πρόσκειται στο , thathref=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Κοινές πολιτικές της Wikipedia&lt;/a&gt;.</string>
   <string name="menu_download">Λήψη</string>
   <string name="preference_license">Προεπιλεγμένη άδεια</string>
   <string name="use_previous" fuzzy="true">Χρήση προηγούμενου τίτλου/περιγραφής</string>
@@ -202,41 +203,41 @@
   <string name="media_detail_description">Περιγραφή</string>
   <string name="media_detail_discussion">Συζήτηση</string>
   <string name="media_detail_author">Συγγραφέας</string>
-  <string name="media_detail_uploaded_date">Ημερομηνία φόρτωσης</string>
-  <string name="media_detail_license">Άδεια</string>
-  <string name="media_detail_coordinates">Συντεταγμένες</string>
-  <string name="media_detail_coordinates_empty">Δεν δόθηκε τίποτα</string>
+  <string name="media_detail_uploaded_date" fuzzy="true">Ημερομηνία φόρτωσης</string>
+  <string name="media_detail_license" fuzzy="true">Άδεια</string>
+  <string name="media_detail_coordinates" fuzzy="true">Συντεταγμένες</string>
+  <string name="media_detail_coordinates_empty" fuzzy="true">Δεν δόθηκε τίποτα</string>
   <string name="become_a_tester_title">Γίνετε Δοκιμαστής Beta</string>
   <string name="become_a_tester_description">Συμμετέχετε στο κανάλι beta μας στο Google Play και αποκτήστε πρώιμη πρόσβαση σε νέες λειτουργίες και διορθώσεις σφαλμάτων</string>
-  <string name="_2fa_code">Κωδικός 2FA</string>
-  <string name="logout_verification">Θέλετε πράγματι να αποσυνδεθείτε;</string>
-  <string name="mediaimage_failed">Η Εικόνα των Μέσων Απέτυχε (δεν μπορεί να φορτωθεί)</string>
+  <string name="_2fa_code" fuzzy="true">Κωδικός 2FA</string>
+  <string name="logout_verification" fuzzy="true">Θέλετε πράγματι να αποσυνδεθείτε;</string>
+  <string name="mediaimage_failed" fuzzy="true">Η Εικόνα των Μέσων Απέτυχε (δεν μπορεί να φορτωθεί)</string>
   <string name="no_subcategory_found">Δεν βρέθηκαν υποκατηγορίες</string>
   <string name="no_parentcategory_found">Δεν βρέθηκαν γονικές κατηγορίες</string>
-  <string name="welcome_image_mount_zao">Mount Zao</string>
-  <string name="welcome_image_llamas">Llamas</string>
-  <string name="welcome_image_rainbow_bridge">Γέφυρα Ουρανίου Τόξου</string>
-  <string name="welcome_image_tulip">Τουλίπα</string>
-  <string name="welcome_image_welcome_wikipedia"> Καλωσόρισες Βικιπαίδεια</string>
-  <string name="welcome_image_welcome_copyright">Καλωσορίστε το Δικαίωμα Αντιγραφής</string>
-  <string name="welcome_image_sydney_opera_house">Κτίρια Όπερας Sidney</string>
-  <string name="cancel">Ακυρώστε</string>
-  <string name="navigation_drawer_open">Ανοίξετε</string>
-  <string name="navigation_drawer_close">Κλείσετε</string>
-  <string name="navigation_item_home">Αρχική Σελίδα</string>
-  <string name="navigation_item_upload">Φορτώστε</string>
-  <string name="navigation_item_nearby">Εδώ Κοντά</string>
+  <string name="welcome_image_mount_zao" fuzzy="true">Mount Zao</string>
+  <string name="welcome_image_llamas" fuzzy="true">Llamas</string>
+  <string name="welcome_image_rainbow_bridge" fuzzy="true">Γέφυρα Ουρανίου Τόξου</string>
+  <string name="welcome_image_tulip" fuzzy="true">Τουλίπα</string>
+  <string name="welcome_image_welcome_wikipedia" fuzzy="true"> Καλωσόρισες Βικιπαίδεια</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Καλωσορίστε το Δικαίωμα Αντιγραφής</string>
+  <string name="welcome_image_sydney_opera_house" fuzzy="true">Κτίρια Όπερας Sidney</string>
+  <string name="cancel" fuzzy="true">Ακυρώστε</string>
+  <string name="navigation_drawer_open" fuzzy="true">Ανοίξετε</string>
+  <string name="navigation_drawer_close" fuzzy="true">Κλείσετε</string>
+  <string name="navigation_item_home" fuzzy="true">Αρχική Σελίδα</string>
+  <string name="navigation_item_upload" fuzzy="true">Φορτώστε</string>
+  <string name="navigation_item_nearby" fuzzy="true">Εδώ Κοντά</string>
   <string name="navigation_item_about">Σχετικά</string>
-  <string name="navigation_item_settings">Ρυθμίσεις</string>
-  <string name="navigation_item_feedback">Σχόλια</string>
-  <string name="navigation_item_logout">Αποσύνδεση</string>
-  <string name="navigation_item_info">Σεμινάριο</string>
+  <string name="navigation_item_settings" fuzzy="true">Ρυθμίσεις</string>
+  <string name="navigation_item_feedback" fuzzy="true">Σχόλια</string>
+  <string name="navigation_item_logout" fuzzy="true">Αποσύνδεση</string>
+  <string name="navigation_item_info" fuzzy="true">Σεμινάριο</string>
   <string name="navigation_item_notification">Ενημερώσεις</string>
-  <string name="no_description_found">δεν βρέθηκε περιγραφή</string>
-  <string name="nearby_info_menu_commons_article">Σελίδα φακέλλου κοινής χρήσης</string>
-  <string name="nearby_info_menu_wikidata_article">Τεμάχιο Wikidata</string>
+  <string name="no_description_found" fuzzy="true">δεν βρέθηκε περιγραφή</string>
+  <string name="nearby_info_menu_commons_article" fuzzy="true">Σελίδα φακέλλου κοινής χρήσης</string>
+  <string name="nearby_info_menu_wikidata_article" fuzzy="true">Τεμάχιο Wikidata</string>
   <string name="nearby_info_menu_wikipedia_article">Λήμμα Βικιπαίδειας</string>
-  <string name="description_info">\nΠαρακαλώ περιγράψετε τα μέσα το δυνατό περισσότερο : Πού οδηγήθηκε αυτό; Τι δείχνει; Ποιο είναι το περιεχόμενο του; Παρακαλώ περιγράψετε τα αντικείμενα ή τα πρόσωπα. Αποκαλύψετε πληροφορίες που δεν μπορούν εύκολο να μαντέψει κανείς, για παράδειγμα την ώρα εντός της ημέρας αν πρόκειται για τοπίο. Αν τα μέσα δείξουν κάτι ασύνηθες, παρακαλώ εξηγήστε τι το καθιστά μη συνηθισμένα.</string>
+  <string name="description_info" fuzzy="true">Παρακαλώ περιγράψετε τα μέσα το δυνατό περισσότερο : Πού οδηγήθηκε αυτό; Τι δείχνει; Ποιο είναι το περιεχόμενο του; Παρακαλώ περιγράψετε τα αντικείμενα ή τα πρόσωπα. Αποκαλύψετε πληροφορίες που δεν μπορούν εύκολο να μαντέψει κανείς, για παράδειγμα την ώρα εντός της ημέρας αν πρόκειται για τοπίο. Αν τα μέσα δείξουν κάτι ασύνηθες, παρακαλώ εξηγήστε τι το καθιστά μη συνηθισμένα.</string>
   <string name="upload_problem_exist">Πιθανά προβλήματα με αυτήν την εικόνα:</string>
   <string name="upload_problem_image_dark">Η εικόνα είναι πολύ σκοτεινή.</string>
   <string name="upload_problem_image_blurry">Η εικόνα είναι θολή.</string>
@@ -248,7 +249,7 @@
   <string name="use_external_storage">Αποθηκεύστε φωτογραφίες εντός εφαρμογής</string>
   <string name="use_external_storage_summary">Αποθηκεύστε φωτογραφίες που τραβήξατε με την κάμερα εντός εφαρμογής στο χώρο αποθήκευσης της συσκευής σας</string>
   <string name="login_to_your_account">Συνδεθείτε στο λογαριασμό σας.</string>
-  <string name="send_log_file">Αποστείλατε τον φάκελλο σύνδεσης</string>
+  <string name="send_log_file" fuzzy="true">Αποστείλατε τον φάκελλο σύνδεσης</string>
   <string name="send_log_file_description">Στείλτε το αρχείο καταγραφής στους προγραμματιστές μέσω email για να βοηθήσετε τη διόρθωση σφαλμάτων της εφαρμογής. Σημείωση: οι καταγραφές ενδέχεται να περιλαμβάνουν αναγνωριστικές πληροφορίες</string>
   <string name="no_web_browser">Δεν βρέθηκε φυλλομετρητής για το άνοιγμα της διευθύνσεως URL</string>
   <string name="null_url">Σφάλμα! Η διεύθυνση URL δεν βρέθηκε</string>

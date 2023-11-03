@@ -16,7 +16,7 @@ class UploadModelUnitTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         uploadModel = UploadModel(
             listOf(),
             mock(JsonKvStore::class.java),

@@ -215,7 +215,7 @@
   <string name="become_a_tester_title">Become a Beta Tester</string>
   <string name="become_a_tester_description">Opt-in to our beta channel on Google Play and get early access to new features and bug fixes</string>
   <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
-  <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
+  <string name="mapbox_commons_app_token">pk.eyJ1Ijoibmljb2xhcy1yYW91bCIsImEiOiJjbG53d3k0cnAwY2p4MnRteGs1dnNuZnY2In0.sg6FsrlIFZfvHc4Uyf3b4w</string>
   <string name="_2fa_code">2FA Code</string>
   <string name="logout_verification">Do you really want to logout?</string>
   <string name="mediaimage_failed">Media Image Failed</string>
@@ -353,6 +353,7 @@
   <string name="wrong">Wrong Answer</string>
   <string name="quiz_screenshot_question">Is this screenshot OK to upload?</string>
   <string name="share_app_title">Share App</string>
+  <string name="rotate">Rotate</string>
 
   <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
   <string name="no_nearby_places_around">No nearby places around</string>
@@ -781,6 +782,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="similar_coordinate_description_auto_set">The coordinates are not the exact coordinates, but the person who uploaded this picture thinks they are close enough.</string>
   <string name="storage_permissions_denied">Storage Permissions Denied</string>
   <string name="unable_to_share_upload_item">Unable to share this item</string>
+  <string name="permissions_are_required_for_functionality">Permissions are required for functionality</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d image selected</item>
     <item quantity="other">%d images selected</item>

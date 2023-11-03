@@ -46,7 +46,7 @@ class DepictEditHelperUnitTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         context = ApplicationProvider.getApplicationContext()
         helper = DepictEditHelper(notificationHelper, wikidataEditService, viewUtilWrapper)
         Whitebox.setInternalState(helper, "viewUtilWrapper", viewUtilWrapper)

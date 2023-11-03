@@ -1,7 +1,7 @@
 apply plugin: 'jacoco'
 
 jacoco {
-    toolVersion = "0.8.7"
+    toolVersion = "0.8.10"
 }
 
 tasks.withType(Test) {
@@ -93,8 +93,12 @@ project.afterEvaluate {
                     description = "Generate Jacoco unified coverage reports for the ${variantName.capitalize()} build"
 
                     reports {
-                        html.enabled = true
-                        xml.enabled = true
+                        html {
+                            enabled true
+                        }
+                        xml {
+                            enabled true
+                        }
                     }
 
                     def javaClasses = fileTree(dir: variant.javaCompileProvider.get().destinationDir,
@@ -127,8 +131,12 @@ project.afterEvaluate {
                     description = "Generate Jacoco coverage reports for the ${variantName.capitalize()} build"
 
                     reports {
-                        html.enabled = true
-                        xml.enabled = true
+                        html {
+                            enabled true
+                        }
+                        xml {
+                            enabled true
+                        }
                     }
 
                     def javaClasses = fileTree(dir: variant.javaCompileProvider.get().destinationDir,

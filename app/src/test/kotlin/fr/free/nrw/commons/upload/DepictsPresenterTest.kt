@@ -50,7 +50,7 @@ class DepictsPresenterTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         testScheduler = TestScheduler()
         depictsPresenter = DepictsPresenter(repository, testScheduler, testScheduler)
         depictsPresenter.onAttachView(view)

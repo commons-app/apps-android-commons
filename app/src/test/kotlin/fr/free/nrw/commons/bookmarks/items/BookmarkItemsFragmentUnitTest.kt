@@ -76,7 +76,7 @@ class BookmarkItemsFragmentUnitTest {
      */
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         context = ApplicationProvider.getApplicationContext()
         AppAdapter.set(TestAppAdapter())
         val activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()

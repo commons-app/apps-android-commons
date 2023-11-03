@@ -1,11 +1,15 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
 import static android.app.Activity.RESULT_OK;
+import static fr.free.nrw.commons.utils.ActivityUtils.startActivityWithFlags;
 import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
 import android.annotation.SuppressLint;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -32,6 +36,8 @@ import com.github.chrisbanes.photoview.PhotoView;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import fr.free.nrw.commons.LocationPicker.LocationPicker;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.edit.EditActivity;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
@@ -51,6 +57,7 @@ import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import java.io.IOException;
 import fr.free.nrw.commons.R.drawable.*;
+import java.io.File;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -63,6 +70,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     UploadMediaDetailsContract.View, UploadMediaDetailAdapter.EventListener {
 
     private static final int REQUEST_CODE = 1211;
+    private static final int REQUEST_CODE_FOR_EDIT_ACTIVITY = 1212;
+
     /**
      * A key for applicationKvStore. By this key we can retrieve the location of last UploadItem ex.
      * 12.3433,54.78897 from applicationKvStore.
@@ -85,8 +94,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     AppCompatButton btnNext;
     @BindView(R.id.btn_previous)
     AppCompatButton btnPrevious;
+    @BindView(R.id.edit_image)
+    AppCompatButton editImage;
     @BindView(R.id.tooltip)
     ImageView tooltip;
+
     private UploadMediaDetailAdapter uploadMediaDetailAdapter;
     @BindView(R.id.btn_copy_subsequent_media)
     AppCompatButton btnCopyToSubsequentMedia;
@@ -124,8 +136,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private Place nearbyPlace;
     private UploadItem uploadItem;
     /**
-     * inAppPictureLocation: use location recorded while using the in-app camera if
-     * device camera does not record it in the EXIF
+     * inAppPictureLocation: use location recorded while using the in-app camera if device camera
+     * does not record it in the EXIF
      */
     private LatLng inAppPictureLocation;
     /**
@@ -144,7 +156,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         super.onCreate(savedInstanceState);
     }
 
-    public void setImageTobeUploaded(UploadableFile uploadableFile, Place place, LatLng inAppPictureLocation) {
+    public void setImageTobeUploaded(UploadableFile uploadableFile, Place place,
+        LatLng inAppPictureLocation) {
         this.uploadableFile = uploadableFile;
         this.place = place;
         this.inAppPictureLocation = inAppPictureLocation;
@@ -248,7 +261,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @OnClick(R.id.btn_next)
     public void onNextButtonClicked() {
-        presenter.verifyImageQuality(callback.getIndexInViewFlipper(this), inAppPictureLocation);
+        boolean isValidUploads = presenter.verifyImageQuality(callback.getIndexInViewFlipper(this), inAppPictureLocation);
+        if (!isValidUploads) {
+            startActivityWithFlags(
+                getActivity(), MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        }
     }
 
     @OnClick(R.id.btn_previous)
@@ -264,6 +282,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         rvDescriptions.smoothScrollToPosition(uploadMediaDetailAdapter.getItemCount() - 1);
     }
 
+    @OnClick(R.id.edit_image)
+    public void onEditButtonClicked() {
+        presenter.onEditButtonClicked(callback.getIndexInViewFlipper(this));
+    }
     @Override
     public void showSimilarImageFragment(String originalFilePath, String possibleFilePath,
         ImageCoordinates similarImageCoordinates) {
@@ -470,6 +492,24 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     /**
+     * Launches the image editing activity to edit the specified UploadItem.
+     *
+     * @param uploadItem The UploadItem to be edited.
+     *
+     * This method is called to start the image editing activity for a specific UploadItem.
+     * It sets the UploadItem as the currently editable item, creates an intent to launch the
+     * EditActivity, and passes the image file path as an extra in the intent. The activity
+     * is started with a request code, allowing the result to be handled in onActivityResult.
+     */
+    @Override
+    public void showEditActivity(UploadItem uploadItem) {
+        editableUploadItem = uploadItem;
+        Intent intent = new Intent(getContext(), EditActivity.class);
+        intent.putExtra("image", uploadableFile.getFilePath().toString());
+        startActivityForResult(intent, REQUEST_CODE_FOR_EDIT_ACTIVITY);
+    }
+
+    /**
      * Start Location picker activity. Show the location first then user can modify it by clicking
      * modify location button.
      *
@@ -555,6 +595,22 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 removeLocation();
             }
         }
+        if (requestCode == REQUEST_CODE_FOR_EDIT_ACTIVITY && resultCode == RESULT_OK) {
+            String result = data.getStringExtra("editedImageFilePath");
+
+            if (Objects.equals(result, "Error")) {
+                Timber.e("Error in rotating image");
+                return;
+            }
+            try {
+                photoViewBackgroundImage.setImageURI(Uri.fromFile(new File(result)));
+                editableUploadItem.setContentUri(Uri.fromFile(new File(result)));
+                callback.changeThumbnail(callback.getIndexInViewFlipper(this),
+                    result);
+            } catch (Exception e) {
+                Timber.e(e);
+            }
+        }
     }
 
     /**
@@ -610,8 +666,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         uploadMediaDetailAdapter.setItems(uploadMediaDetails);
         showNearbyFound =
             showNearbyFound && (
-            uploadMediaDetails == null || uploadMediaDetails.isEmpty() || listContainsEmptyDetails(
-                uploadMediaDetails));
+                uploadMediaDetails == null || uploadMediaDetails.isEmpty()
+                    || listContainsEmptyDetails(
+                    uploadMediaDetails));
     }
 
     /**
@@ -694,6 +751,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public interface UploadMediaDetailFragmentCallback extends Callback {
 
         void deletePictureAtIndex(int index);
+
+        void changeThumbnail(int index, String uri);
     }
 
 

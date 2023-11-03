@@ -60,15 +60,11 @@ class MediaDetailFragmentUnitTests {
 
     private val REQUEST_CODE = 1001
     private val LAST_LOCATION = "last_location_while_uploading"
-    private val REQUEST_CODE_EDIT_DESCRIPTION = 1002
     private lateinit var fragment: MediaDetailFragment
     private lateinit var fragmentManager: FragmentManager
     private lateinit var layoutInflater: LayoutInflater
     private lateinit var view: View
     private lateinit var context: Context
-
-    private val NOMINATING_FOR_DELETION_MEDIA = "Nominating for deletion %s"
-
 
     @Mock
     private lateinit var deleteHelper: DeleteHelper
@@ -147,7 +143,7 @@ class MediaDetailFragmentUnitTests {
     @Before
     fun setUp() {
 
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
 
         context = ApplicationProvider.getApplicationContext()
 

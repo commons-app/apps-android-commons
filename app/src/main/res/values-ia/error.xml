@@ -3,7 +3,7 @@
 * McDutchie
 -->
 <resources>
-  <string name="crash_dialog_title">Commons: crash</string>
+  <string name="crash_dialog_title">Commons ha collabite</string>
   <string name="crash_dialog_text">Ups. Qualcosa ha facite fiasco!</string>
   <string name="crash_dialog_comment_prompt">Dice nos lo que tu faceva, e invia nos lo per e-mail. Isto nos adjutara a corriger le problema!</string>
   <string name="crash_dialog_ok_toast">Gratias!</string>
