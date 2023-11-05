@@ -17,6 +17,7 @@
 * Kaganer
 * Kareyac
 * MaxBioHazard
+* McDutchie
 * Megakott
 * Monirec
 * Movses
@@ -393,6 +394,7 @@
   <string name="wrong">Неверный ответ</string>
   <string name="quiz_screenshot_question">Этот скриншот подходит для загрузки на Викисклад?</string>
   <string name="share_app_title">Поделиться приложением</string>
+  <string name="rotate">Повернуть</string>
   <string name="error_fetching_nearby_places">Ошибка получения мест поблизости</string>
   <string name="no_nearby_places_around">Нет мест поблизости</string>
   <string name="error_fetching_nearby_monuments">Ошибка получения мест поблизости.</string>
@@ -722,7 +724,7 @@
   <string name="custom_selector_info_text2">В отличие от изображения слева, изображение справа имеет логотип Commons, указывающий, что оно уже загружено.\n Нажмите и удерживайте для предварительного просмотра изображения.</string>
   <string name="welcome_custom_selector_ok">Потрясающе</string>
   <string name="custom_selector_already_uploaded_image_text">Это изображение уже было загружено на Викисклад.</string>
-  <string name="wlm_upload_info">Это изображение будет участвовать в конкурсе «Вики любит памятники — 2021».</string>
+  <string name="wlm_upload_info" fuzzy="true">Это изображение будет участвовать в конкурсе «Вики любит памятники».</string>
   <string name="display_monuments">Показать памятники</string>
   <string name="wlm_month_message">Это месяц «Вики любит памятники»!</string>
   <string name="learn_more">УЗНАТЬ ПОДРОБНЕЕ</string>
@@ -779,6 +781,8 @@
   <string name="full_screen_mode_features_info">Проведите быстро и широко, чтобы выполнить следующие действия: \n- Влево/вправо: переход к предыдущему/следующему \n- Вверх: выбрать\n- Вниз: пометить как не для загрузки.</string>
   <string name="set_up_avatar_toast_string">Чтобы установить свой аватар в таблице лидеров, на любом изображении в меню с тремя точками нажмите «Установить как аватар».</string>
   <string name="similar_coordinate_description_auto_set">Координаты не являются точными, но человек, загрузивший эту фотографию, считает, что они достаточно близки.</string>
+  <string name="storage_permissions_denied">Доступ к хранилищу запрещён</string>
+  <string name="unable_to_share_upload_item">Невозможно поделиться этим объектом</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">выбрано %d изображение</item>
     <item quantity="few">выбрано %d изображения</item>

@@ -197,7 +197,7 @@
   <string name="read_storage_permission_rationale">Потребна дозвола: Читање спољашње меморије. Апликација не може да приступи Ваших галерији без овога.</string>
   <string name="write_storage_permission_rationale">Потребна дозвола: Писање у спољашњој меморији. Апликација не може да приступи Вашој камери/галерији без ове дозволе.</string>
   <string name="location_permission_title">Захтевање дозволе за локацију</string>
-  <string name="in_app_camera_location_permission_title">Сними локацију за снимке у апликацији</string>
+  <string name="in_app_camera_location_permission_title">Забележи локацију за снимке у апликацији</string>
   <string name="in_app_camera_location_switch_pref_summary">Омогућите ово да би сте снимили локацију за снимке у апликацији, у случају да је камера уређаја не сними</string>
   <string name="ok">У реду</string>
   <string name="warning">Упозорење</string>
@@ -580,7 +580,7 @@
   <string name="confirm">Потврди</string>
   <string name="instructions_title">Упутства</string>
   <string name="wikipedia_instructions_step_1">1. Користите следећи викитекст:</string>
-  <string name="wikipedia_instructions_step_2">2. Додиривањем \"Потвдрди\", биће отворен чланак на Википедији</string>
+  <string name="wikipedia_instructions_step_2">2. Кликом на потврди, биће отворен чланак на Википедији</string>
   <string name="wikipedia_instructions_step_3">3. Пронађите одговарајући одељак у чланку за вашу слику</string>
   <string name="wikipedia_instructions_step_4">4. Тапните на иконицу Уреди (који личи на оловку) за тај одељак.</string>
   <string name="wikipedia_instructions_step_5">5. Налепите викитекст на одговарајуће место.</string>

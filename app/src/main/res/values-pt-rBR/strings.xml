@@ -15,6 +15,7 @@
 * Luckas
 * Mariagarbin
 * Maxan
+* McDutchie
 * Mello25
 * Re demz
 * Stephanyb76
@@ -363,6 +364,7 @@
   <string name="wrong">Resposta incorreta</string>
   <string name="quiz_screenshot_question">Esta captura de tela pode ser carregada?</string>
   <string name="share_app_title">Compartilhar o aplicativo</string>
+  <string name="rotate">Girar</string>
   <string name="error_fetching_nearby_places">Erro ao buscar lugares próximos.</string>
   <string name="no_nearby_places_around">Não há lugares próximos</string>
   <string name="error_fetching_nearby_monuments">Erro ao buscar monumentos próximos.</string>
@@ -407,7 +409,7 @@
   <string name="step_count">Passo %1$d de %2$d: %3$s</string>
   <string name="next">Próximo</string>
   <string name="previous">Anterior</string>
-  <string name="upload_title_duplicate">Um arquivo com o nome do arquivo% 1 $ s existe. Tem certeza de que deseja continuar?\n\nNota: Um sufixo adequado será adicionado ao nome do arquivo automaticamente.</string>
+  <string name="upload_title_duplicate">Um arquivo com o nome do arquivo %1$s existe. Tem certeza de que deseja continuar?\n\nNota: Um sufixo adequado será adicionado ao nome do arquivo automaticamente.</string>
   <string name="map_application_missing">Nenhum aplicativo de mapa compatível pode ser encontrado no seu dispositivo. Por favor, instale um aplicativo de mapa para usar este recurso.</string>
   <string name="title_page_bookmarks_pictures">Fotografias</string>
   <string name="title_page_bookmarks_locations">Locais</string>
@@ -730,6 +732,8 @@
   <string name="your_feedback">A sua opinião</string>
   <string name="mark_as_not_for_upload">Marcar como não sendo para carregamento</string>
   <string name="unmark_as_not_for_upload">Remover marcação de como não sendo para carregamento</string>
+  <string name="marking_as_not_for_upload">Marcado para não ser carregado</string>
+  <string name="unmarking_as_not_for_upload">Remover marcação para não ser carregado</string>
   <string name="show_already_actioned_pictures">Mostrar imagens já processadas</string>
   <string name="hiding_already_actioned_pictures">Ocultando as imagens já processadas</string>
   <string name="no_more_images_found">Não foram encontradas mais imagens</string>
@@ -747,4 +751,10 @@
   <string name="full_screen_mode_features_info">Passe o dedo com um gesto rápido e longo para executar estas operações: \n- Esquerda/direita: Ir para o anterior/seguinte\n- Cima: Selecionar\n- Baixo: Marcar como não sendo para carregamento.</string>
   <string name="set_up_avatar_toast_string">Para definir seu avatar da tabela de classificação, clique em \"Definir como avatar\" no menu de três pontos da sua imagem.</string>
   <string name="similar_coordinate_description_auto_set">As coordenadas não são exatas, mas a pessoa que carregou essa imagem crê que sejam próximas o suficiente.</string>
+  <string name="storage_permissions_denied">Permissão de armazenamento negada</string>
+  <string name="unable_to_share_upload_item">Incapaz de compartilhar esse item</string>
+  <plurals name="custom_picker_images_selected_title_appendix">
+    <item quantity="one">%d imagem selecinada</item>
+    <item quantity="other">%d imagens selecionadas</item>
+  </plurals>
 </resources>

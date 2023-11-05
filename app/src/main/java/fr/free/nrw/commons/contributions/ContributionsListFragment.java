@@ -36,6 +36,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -429,6 +430,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
             () -> {
                 ViewUtil.showShortToast(getContext(), R.string.cancelling_upload);
                 contributionsListPresenter.deleteUpload(contribution);
+                CommonsApplication.cancelledUploads.add(contribution.getPageId());
             }, () -> {
                 // Do nothing
             });

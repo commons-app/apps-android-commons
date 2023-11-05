@@ -11,6 +11,7 @@
 * Ilham151096
 * Iwan Novirion
 * Joseagush
+* McDutchie
 * NFarras
 * Naufal06
 * Pebaryan
@@ -651,7 +652,7 @@
   <string name="welcome_custom_selector_ok">Bagus</string>
   <string name="custom_selector_already_uploaded_image_text">Gambar ini sudah diunggah di Commons.</string>
   <string name="place_state_wlm">WLM</string>
-  <string name="wlm_upload_info">Gambar ini akan dimasukkan ke dalam kontes Wiki Loves Monuents 2021</string>
+  <string name="wlm_upload_info" fuzzy="true">Gambar ini akan dimasukkan ke dalam kontes Wiki Loves Monuments</string>
   <string name="display_monuments">Tampilkan monumen</string>
   <string name="wlm_month_message">Ini adalah bulan Wiki Loves Monuments!</string>
   <string name="learn_more">PELAJARI LEBIH LANJUT</string>

@@ -418,6 +418,8 @@
   <string name="ends_on">Remata el:</string>
   <string name="display_campaigns">Amosar campañes</string>
   <string name="display_campaigns_explanation">Ver les campañes en cursu</string>
+  <string name="option_allow">Permitir</string>
+  <string name="option_dismiss">Descartar</string>
   <string name="location_loss_warning" fuzzy="true">Por favor asegúrate de qu\'esti selector d\'Android nuevu nun esancia l\'allugamientu de les tos semeyes.</string>
   <string name="nearby_campaign_dismiss_message">Yá nun verás más les campañes. Sicasí, si quies puedes reactivar esti avisu na configuración.</string>
   <string name="this_function_needs_network_connection">Esta función rique conexón de rede, comprueba la configuración de conexón.</string>
@@ -501,7 +503,7 @@
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Porque ye</string>
   <string name="share_image_via">Compartir imaxe per</string>
-  <string name="no_achievements_yet" fuzzy="true">Inda nun ficisti nenguna contribución</string>
+  <string name="no_achievements_yet">%s nun fizó entá nenguna contribución</string>
   <string name="account_created">¡Cuenta creada!</string>
   <string name="text_copy">Testu copiáu al cartafueyu</string>
   <string name="notification_mark_read">Notificación marcada como lleida</string>
@@ -534,4 +536,6 @@
   <string name="use_location_from_similar_image">¿Sacasti estes dos semeyes nel mesmu llugar? ¿Quies usar la llatitú/llonxitú da la semeya de la derecha?</string>
   <string name="load_more">Cargar más</string>
   <string name="nearby_no_results">Nun s\'alcontraron llugares, tenta cambiar los criterios de gueta.</string>
+  <string name="confirm">Confirmar</string>
+  <string name="instructions_title">Instrucciones</string>
 </resources>

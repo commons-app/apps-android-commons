@@ -10,6 +10,7 @@
 * LNDDYL
 * Liuxinyu970226
 * Madhurgupta10
+* McDutchie
 * Reke
 * S099001
 * Simon Shek
@@ -692,7 +693,7 @@
   <string name="welcome_custom_selector_ok">棒極了</string>
   <string name="custom_selector_already_uploaded_image_text">此圖片已上傳到維基共享資源。</string>
   <string name="place_state_wlm">維基愛古蹟</string>
-  <string name="wlm_upload_info">此圖片會進入2021年維基愛古蹟競賽</string>
+  <string name="wlm_upload_info" fuzzy="true">此圖片會進入年維基愛古蹟競賽</string>
   <string name="display_monuments">顯示古蹟景點</string>
   <string name="wlm_month_message">本月有「維基愛古蹟」活動！</string>
   <string name="learn_more">了解更多</string>
