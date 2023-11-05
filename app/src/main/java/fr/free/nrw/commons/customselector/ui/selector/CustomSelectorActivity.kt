@@ -29,6 +29,9 @@ import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
 import fr.free.nrw.commons.utils.ViewUtil
+import kotlinx.android.synthetic.main.activity_description_edit.toolbar_text_view
+import kotlinx.android.synthetic.main.custom_selector_bottom_layout.bottom_layout
+import kotlinx.android.synthetic.main.fragment_explore_map.bottom_sheet_details
 import kotlinx.coroutines.*
 import java.io.File
 import java.lang.Integer.max
@@ -69,7 +72,7 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
     private lateinit var prefs: SharedPreferences
 
     /**
-     * Maximum number of images that can be selected. <br>
+     * Maximum number of images that can be selected.
      */
     private val imageUploadLimit: Int = 20
 
@@ -466,12 +469,16 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
     }
 
     /**
-     * Displays a toast explaining the upload limit warning.
+     * Displays a pair of toasts explaining the upload limit warning.
      */
     private fun displayUploadLimitToast() {
         ViewUtil.showLongToast(
-            this, resources.getString(R.string.custom_selector_over_limit_warning,
-                imageUploadLimit, uploadLimitExceededBy)
+            this, resources.getString(R.string.custom_selector_over_limit_warning_1,
+                imageUploadLimit)
+        )
+        ViewUtil.showShortToast(
+            this, resources.getString(R.string.custom_selector_over_limit_warning_2,
+                imageUploadLimit,uploadLimitExceededBy)
         )
     }
 

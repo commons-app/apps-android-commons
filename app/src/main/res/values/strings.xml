@@ -716,7 +716,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="custom_selector_info_text2">Unlike the picture on the left, the picture on the right has the Commons logo indicating it is already uploaded. \n Touch and hold for image preview.</string>
   <string name="welcome_custom_selector_ok">Awesome</string>
   <string name="custom_selector_already_uploaded_image_text">This image has already been uploaded to Commons.</string>
-  <string name="custom_selector_over_limit_warning">The upload limit of %1$d has been exceeded by %2$d. </string>
+  <string name="custom_selector_over_limit_warning_1">The app can\'t reliably upload more than %1$d pictures at once for technical reasons.</string>
+  <string name="custom_selector_over_limit_warning_2">The upload limit of %1$d has been exceeded by %2$d. </string>
   <string name="custom_selector_button_limit_text">Max: %1$d</string>
   <string name="place_state_wlm">WLM</string>
   <string name="wlm_upload_info">This image will be entered into the Wiki Loves Monuments contest</string>
