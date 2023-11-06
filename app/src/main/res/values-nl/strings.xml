@@ -415,7 +415,7 @@
   <string name="provider_bookmarks">Bladwijzers</string>
   <string name="bookmark_empty">U hebt geen bladwijzers toegevoegd</string>
   <string name="provider_bookmarks_location">Bladwijzers</string>
-  <string name="log_collection_started">Logboekverzameling is gestart. Start de app opnieuw op, voer de actie uit die u wilt loggen en tik vervolgens nogmaals op \'Logboekbestand verzenden\'</string>
+  <string name="log_collection_started">Logboekverzameling is gestart. Start de app opnieuw op, verricht de handeling die u wilt loggen en tik dan nogmaals op ‘Logboekbestand verzenden’</string>
   <string name="deletion_reason_uploaded_by_mistake">Ik heb het per ongeluk geüpload</string>
   <string name="deletion_reason_publicly_visible">Ik wist niet dat het publiekelijk zichtbaar zou zijn</string>
   <string name="deletion_reason_bad_for_my_privacy">Ik realiseerde me dat het slecht is voor mijn privacy.</string>
@@ -751,6 +751,7 @@
   <string name="similar_coordinate_description_auto_set">De coördinaten zijn niet precies, maar degene die deze foto heeft geüpload vindt dat ze redelijk in de buurt komen.</string>
   <string name="storage_permissions_denied">Opslagtoestemming geweigerd</string>
   <string name="unable_to_share_upload_item">Kan dit item niet delen</string>
+  <string name="permissions_are_required_for_functionality">Voor functionaliteit zijn toestemmingen vereist</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d afbeelding geselecteerd</item>
     <item quantity="other">%d afbeeldingen geselecteerd</item>

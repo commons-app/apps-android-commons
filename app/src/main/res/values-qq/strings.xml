@@ -2,6 +2,7 @@
 <!-- Authors:
 * Ajeje Brazorf
 * Amire80
+* Googology
 * LeGuyanaisPure
 * Liuxinyu970226
 * Madhurgupta10
@@ -184,6 +185,7 @@
   <string name="description">{{Identical|Description}}</string>
   <string name="title_page_bookmarks_items">{{Identical|Item}}</string>
   <string name="done">{{identical|Done}}</string>
+  <string name="wlm_upload_info">该图片将参加 Wiki Loves Monuments 竞赛</string>
   <string name="advanced_options">{{Identical|Advanced options}}</string>
   <string name="explore_map_details">{{Identical|Detail}}</string>
   <string name="set_up_avatar_toast_string">\"Set as avatar\" should be translated the same as {{msg-wm|Commons-android-strings-menu set avatar}}.</string>

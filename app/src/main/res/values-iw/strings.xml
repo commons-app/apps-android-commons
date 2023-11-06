@@ -698,7 +698,7 @@
   <string name="title_page_bookmarks_items">פריטים</string>
   <string name="custom_selector_title">בורר מותאם אישית</string>
   <string name="custom_selector_empty_text">אין תמונות</string>
-  <string name="done">בוצע</string>
+  <string name="done">סיום</string>
   <string name="back">חזרה</string>
   <string name="welcome_custom_picture_selector_text">ברוך בואך לבוחר התמונות המותאמות</string>
   <string name="custom_selector_info_text1">הבורר מציג לך אילו תמונות כבר העלית לוויקישיתוף.</string>
