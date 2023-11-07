@@ -29,9 +29,6 @@ import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
 import fr.free.nrw.commons.utils.ViewUtil
-import kotlinx.android.synthetic.main.activity_description_edit.toolbar_text_view
-import kotlinx.android.synthetic.main.custom_selector_bottom_layout.bottom_layout
-import kotlinx.android.synthetic.main.fragment_explore_map.bottom_sheet_details
 import kotlinx.coroutines.*
 import java.io.File
 import java.lang.Integer.max
@@ -74,13 +71,13 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
     /**
      * Maximum number of images that can be selected.
      */
-    private val imageUploadLimit: Int = 20
+    private val uploadLimit: Int = 20
 
     /**
      * Flag that is marked true when the amount
      * of selected images is greater than the upload limit.
      */
-    private var overUploadLimit: Boolean = false
+    private var uploadLimitExceeded: Boolean = false
 
     /**
      * Tracks the amount by which the upload limit has been exceeded.
@@ -366,19 +363,19 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
         viewModel.selectedImages.value = selectedImages
         changeTitle(bucketName, selectedImages.size)
 
-        overUploadLimit = selectedImages.size > imageUploadLimit
-        uploadLimitExceededBy = max(selectedImages.size - imageUploadLimit,0)
+        uploadLimitExceeded = selectedImages.size > uploadLimit
+        uploadLimitExceededBy = max(selectedImages.size - uploadLimit,0)
 
-        if (overUploadLimit && selectedNotForUploadImages == 0) {
+        if (uploadLimitExceeded && selectedNotForUploadImages == 0) {
             toolbarBinding.imageLimitError.visibility = View.VISIBLE
             bottomSheetBinding.upload.text = resources.getString(
-                R.string.custom_selector_button_limit_text, imageUploadLimit)
+                R.string.custom_selector_button_limit_text, uploadLimit)
         } else {
             toolbarBinding.imageLimitError.visibility = View.INVISIBLE
             bottomSheetBinding.upload.text = resources.getString(R.string.upload)
         }
 
-        if (overUploadLimit || selectedNotForUploadImages > 0) {
+        if (uploadLimitExceeded || selectedNotForUploadImages > 0) {
             bottomSheetBinding.upload.isEnabled = false
             bottomSheetBinding.upload.alpha = 0.5f
         } else {
@@ -474,11 +471,11 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
     private fun displayUploadLimitToast() {
         ViewUtil.showLongToast(
             this, resources.getString(R.string.custom_selector_over_limit_warning_1,
-                imageUploadLimit)
+                uploadLimit)
         )
         ViewUtil.showShortToast(
             this, resources.getString(R.string.custom_selector_over_limit_warning_2,
-                imageUploadLimit,uploadLimitExceededBy)
+                uploadLimit,uploadLimitExceededBy)
         )
     }
 

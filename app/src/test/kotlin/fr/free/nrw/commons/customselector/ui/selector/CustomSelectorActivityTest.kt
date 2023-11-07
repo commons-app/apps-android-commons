@@ -234,13 +234,13 @@ class CustomSelectorActivityTest {
     @Throws(Exception::class)
     fun testUploadLimit() {
         val overLimit: Field =
-            CustomSelectorActivity::class.java.getDeclaredField("overUploadLimit")
+            CustomSelectorActivity::class.java.getDeclaredField("uploadLimitExceeded")
         overLimit.isAccessible = true
         val exceededBy: Field =
             CustomSelectorActivity::class.java.getDeclaredField("uploadLimitExceededBy")
         exceededBy.isAccessible = true
         val limit: Field =
-            CustomSelectorActivity::class.java.getDeclaredField("imageUploadLimit")
+            CustomSelectorActivity::class.java.getDeclaredField("uploadLimit")
         limit.isAccessible = true
 
         // all tests check integration with not for upload marking
