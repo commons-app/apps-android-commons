@@ -28,7 +28,6 @@ import fr.free.nrw.commons.media.ZoomableActivity
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
-import fr.free.nrw.commons.utils.ViewUtil
 import kotlinx.coroutines.*
 import java.io.File
 import java.lang.Integer.max
@@ -334,7 +333,7 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
 
         val limitError: ImageButton = findViewById(R.id.image_limit_error)
         limitError.visibility = View.INVISIBLE
-        limitError.setOnClickListener { displayUploadLimitToast() }
+        limitError.setOnClickListener { displayUploadLimitWarning() }
     }
 
     /**
@@ -466,17 +465,17 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
     }
 
     /**
-     * Displays a pair of toasts explaining the upload limit warning.
+     * Displays a dialog explaining the upload limit warning.
      */
-    private fun displayUploadLimitToast() {
-        ViewUtil.showLongToast(
-            this, resources.getString(R.string.custom_selector_over_limit_warning_1,
-                uploadLimit)
-        )
-        ViewUtil.showShortToast(
-            this, resources.getString(R.string.custom_selector_over_limit_warning_2,
-                uploadLimit,uploadLimitExceededBy)
-        )
+    private fun displayUploadLimitWarning() {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.custom_selector_limit_dialog)
+        (dialog.findViewById(R.id.btn_dismiss_limit_warning) as Button).setOnClickListener()
+        { dialog.dismiss() }
+        (dialog.findViewById(R.id.upload_limit_warning) as TextView).text = resources.getString(
+            R.string.custom_selector_over_limit_warning, uploadLimit, uploadLimitExceededBy)
+        dialog.show()
     }
 
     /**

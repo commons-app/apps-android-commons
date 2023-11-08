@@ -215,13 +215,13 @@ class CustomSelectorActivityTest {
     }
 
     /**
-     * Test displayUploadLimitToast Function.
+     * Test displayUploadLimitWarning Function.
      */
     @Test
     @Throws(Exception::class)
-    fun testDisplayUploadLimitToast() {
+    fun testDisplayUploadLimitWarning() {
         val method: Method = CustomSelectorActivity::class.java.getDeclaredMethod(
-            "displayUploadLimitToast"
+            "displayUploadLimitWarning"
         )
         method.isAccessible = true
         method.invoke(activity)
