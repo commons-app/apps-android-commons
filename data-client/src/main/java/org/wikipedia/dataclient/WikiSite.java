@@ -9,9 +9,8 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.language.AppLanguageLookUpTable;
-import org.wikipedia.page.PageTitle;
-import org.wikipedia.util.UriUtil;
 
 /**
  * The base URL and Wikipedia language code for a MediaWiki site. Examples:
@@ -38,8 +37,10 @@ import org.wikipedia.util.UriUtil;
  * </ul>
  */
 public class WikiSite implements Parcelable {
+    private static String WIKIPEDIA_URL = "https://wikipedia.org/";
+
     public static final String DEFAULT_SCHEME = "https";
-    private static String DEFAULT_BASE_URL = Service.WIKIPEDIA_URL;
+    private static String DEFAULT_BASE_URL = WIKIPEDIA_URL;
 
     public static final Parcelable.Creator<WikiSite> CREATOR = new Parcelable.Creator<WikiSite>() {
         @Override
@@ -57,14 +58,6 @@ public class WikiSite implements Parcelable {
     @SerializedName("domain") @NonNull private final Uri uri;
     @NonNull private String languageCode;
 
-    public static boolean supportedAuthority(@NonNull String authority) {
-        return authority.endsWith(Uri.parse(DEFAULT_BASE_URL).getAuthority());
-    }
-
-    public static void setDefaultBaseUrl(@NonNull String url) {
-        DEFAULT_BASE_URL = TextUtils.isEmpty(url) ? Service.WIKIPEDIA_URL : url;
-    }
-
     public static WikiSite forLanguageCode(@NonNull String languageCode) {
         Uri uri = ensureScheme(Uri.parse(DEFAULT_BASE_URL));
         return new WikiSite((languageCode.isEmpty()
@@ -80,7 +73,7 @@ public class WikiSite implements Parcelable {
             // Special case for Wikipedia only: assume English subdomain when none given.
             authority = "en.wikipedia.org";
         }
-        String langVariant = UriUtil.getLanguageVariantFromUri(tempUri);
+        String langVariant = getLanguageVariantFromUri(tempUri);
         if (!TextUtils.isEmpty(langVariant)) {
             languageCode = langVariant;
         } else {
@@ -90,6 +83,16 @@ public class WikiSite implements Parcelable {
                 .scheme(tempUri.getScheme())
                 .encodedAuthority(authority)
                 .build();
+    }
+
+    /** Get language variant code from a Uri, e.g. "zh-*", otherwise returns empty string. */
+    @NonNull
+    private String getLanguageVariantFromUri(@NonNull Uri uri) {
+        if (TextUtils.isEmpty(uri.getPath())) {
+            return "";
+        }
+        String[] parts = StringUtils.split(StringUtils.defaultString(uri.getPath()), '/');
+        return parts.length > 1 && !parts[0].equals("wiki") ? parts[0] : "";
     }
 
     public WikiSite(@NonNull String url) {
@@ -147,15 +150,6 @@ public class WikiSite implements Parcelable {
         return String.format("%1$s://%2$s", scheme(), mobileAuthority());
     }
 
-    /**
-     * @return The canonical "desktop" form of the authority. For example, if the authority
-     * is in a "mobile" form, e.g. en.m.wikipedia.org, this will become en.wikipedia.org.
-     */
-    @NonNull
-    public String desktopAuthority() {
-        return authority().replace(".m.", ".");
-    }
-
     @NonNull
     public String subdomain() {
         return languageCodeToSubdomain(languageCode);
@@ -197,37 +191,6 @@ public class WikiSite implements Parcelable {
     @NonNull
     public String languageCode() {
         return languageCode;
-    }
-
-    // TODO: this method doesn't have much to do with WikiSite. Move to PageTitle?
-    /**
-     * Create a PageTitle object from an internal link string.
-     *
-     * @param internalLink Internal link target text (eg. /wiki/Target).
-     *                     Should be URL decoded before passing in
-     * @return A {@link PageTitle} object representing the internalLink passed in.
-     */
-    public PageTitle titleForInternalLink(String internalLink) {
-        // Strip the /wiki/ from the href
-        return new PageTitle(UriUtil.removeInternalLinkPrefix(internalLink), this);
-    }
-
-    // TODO: this method doesn't have much to do with WikiSite. Move to PageTitle?
-    /**
-     * Create a PageTitle object from a Uri, taking into account any fragment (section title) in the link.
-     * @param uri Uri object to be turned into a PageTitle.
-     * @return {@link PageTitle} object that corresponds to the given Uri.
-     */
-    public PageTitle titleForUri(Uri uri) {
-        String path = uri.getPath();
-        if (!TextUtils.isEmpty(uri.getFragment())) {
-            path += "#" + uri.getFragment();
-        }
-        return titleForInternalLink(path);
-    }
-
-    @NonNull public String dbName() {
-        return subdomain().replaceAll("-", "_") + "wiki";
     }
 
     // Auto-generated

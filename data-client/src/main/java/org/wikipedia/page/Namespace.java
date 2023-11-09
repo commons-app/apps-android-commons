@@ -1,18 +1,9 @@
 package org.wikipedia.page;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import org.apache.commons.lang3.StringUtils;
-import org.wikipedia.dataclient.WikiSite;
-import org.wikipedia.language.AppLanguageLookUpTable;
-import org.wikipedia.model.CodeEnum;
 import org.wikipedia.model.EnumCode;
 import org.wikipedia.model.EnumCodeMap;
-import org.wikipedia.staticdata.FileAliasData;
-import org.wikipedia.staticdata.SpecialAliasData;
-
-import java.util.Locale;
 
 /** An enumeration describing the different possible namespace codes. Do not attempt to use this
  *  class to preserve URL path information such as Talk: or User: or localization.
@@ -146,47 +137,10 @@ public enum Namespace implements EnumCode {
     GADGET_DEFINITION_TALK(2303),
     TOPIC(2600);
 
-    public static final CodeEnum<Namespace> CODE_ENUM = Namespace::of;
-
     private static final int TALK_MASK = 0x1;
     private static final EnumCodeMap<Namespace> MAP = new EnumCodeMap<>(Namespace.class);
 
     private final int code;
-
-    /** Warning: this method returns an English translation for the current namespace. */
-    @Deprecated
-    @Nullable
-    public String toLegacyString() {
-        String string = this == MAIN ? null : this.name();
-        if (string != null) {
-            string = StringUtils.capitalize(string.toLowerCase(Locale.ENGLISH));
-        }
-        return string;
-    }
-
-    /** Warning: this method is localized only for File and Special pages. */
-    @Deprecated @NonNull public static Namespace fromLegacyString(@NonNull WikiSite wiki,
-                                                                  @Nullable String name) {
-        if (FileAliasData.valueFor(wiki.languageCode()).equals(name)
-                || FileAliasData.valueFor(AppLanguageLookUpTable.FALLBACK_LANGUAGE_CODE).equals(name)) {
-            return Namespace.FILE;
-        }
-
-        if (SpecialAliasData.valueFor(wiki.languageCode()).equals(name)
-                || SpecialAliasData.valueFor(AppLanguageLookUpTable.FALLBACK_LANGUAGE_CODE).equals(name)) {
-            return Namespace.SPECIAL;
-        }
-
-        // This works for the links provided by the app itself since they always have the English
-        // version of the namespace.
-        // TODO: It would be nice to add a mapping table, as is done for File and Special,
-        // so we can also handle links passed to the app.
-        if (name != null && name.contains("Talk")) {
-            return Namespace.TALK;
-        }
-
-        return Namespace.MAIN;
-    }
 
     @NonNull
     public static Namespace of(int code) {

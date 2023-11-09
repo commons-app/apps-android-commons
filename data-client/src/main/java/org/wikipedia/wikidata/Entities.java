@@ -11,8 +11,8 @@ import org.jetbrains.annotations.NotNull;
 import org.wikipedia.dataclient.mwapi.MwResponse;
 import org.wikipedia.json.PostProcessingTypeAdapter;
 
-@SuppressWarnings("unused")
-public class Entities extends MwResponse implements PostProcessingTypeAdapter.PostProcessable {
+
+public class Entities extends MwResponse {
     @Nullable private Map<String, Entity> entities;
     private int success;
 

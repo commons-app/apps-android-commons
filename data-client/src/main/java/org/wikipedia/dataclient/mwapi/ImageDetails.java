@@ -4,8 +4,8 @@ import androidx.annotation.NonNull;
 
 public class ImageDetails {
 
-    @SuppressWarnings("unused") private String name;
-    @SuppressWarnings("unused") private String title;
+     private String name;
+     private String title;
 
     @NonNull public String getName() {
         return name;

@@ -1,23 +1,17 @@
 package org.wikipedia.dataclient.mwapi;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import java.util.List;
 
 public class MwException extends RuntimeException {
-    @SuppressWarnings("unused") @Nullable private final MwServiceError error;
+     @Nullable private final MwServiceError error;
 
-    @SuppressWarnings("unused") @Nullable private final List<MwServiceError> errors;
+     @Nullable private final List<MwServiceError> errors;
 
     public MwException(@Nullable MwServiceError error,
         @Nullable final List<MwServiceError> errors) {
         this.error = error;
         this.errors = errors;
-    }
-
-    @NonNull
-    public List<MwServiceError> getErrors() {
-        return errors;
     }
 
     public String getErrorCode() {

@@ -6,22 +6,17 @@ import androidx.annotation.Nullable;
 import com.google.gson.annotations.SerializedName;
 
 import org.apache.commons.lang3.StringUtils;
-import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.gallery.ImageInfo;
-import org.wikipedia.gallery.VideoInfo;
 import org.wikipedia.json.PostProcessingTypeAdapter;
 import org.wikipedia.model.BaseModel;
 import org.wikipedia.notifications.Notification;
-import org.wikipedia.page.PageTitle;
-import org.wikipedia.settings.SiteInfo;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@SuppressWarnings("unused")
+
 public class MwQueryResult extends BaseModel implements PostProcessingTypeAdapter.PostProcessable {
     @SerializedName("pages") @Nullable private List<MwQueryPage> pages;
     @Nullable private List<Redirect> redirects;
@@ -29,17 +24,8 @@ public class MwQueryResult extends BaseModel implements PostProcessingTypeAdapte
     @SerializedName("userinfo") private UserInfo userInfo;
     @Nullable private List<ListUserResponse> users;
     @Nullable private Tokens tokens;
-    @SerializedName("authmanagerinfo") @Nullable private MwAuthManagerInfo amInfo;
-    @Nullable private MarkReadResponse echomarkread;
-    @Nullable private MarkReadResponse echomarkseen;
     @Nullable private NotificationList notifications;
-    @Nullable private Map<String, Notification.UnreadNotificationWikiItem> unreadnotificationpages;
-    @SerializedName("general") @Nullable private SiteInfo generalSiteInfo;
-    @SerializedName("wikimediaeditortaskscounts") @Nullable private EditorTaskCounts editorTaskCounts;
     @SerializedName("allimages") @Nullable private List<ImageDetails> allImages;
-    @SerializedName("geosearch") @Nullable private List<GeoSearchItem> geoSearch;
-    @Nullable private List<MwQueryLogEvent> logevents;
-
 
     @Nullable public List<MwQueryPage> pages() {
         return pages;
@@ -57,11 +43,6 @@ public class MwQueryResult extends BaseModel implements PostProcessingTypeAdapte
         return allImages == null ? Collections.emptyList() : allImages;
     }
 
-    @NonNull
-    public List<GeoSearchItem> geoSearch() {
-        return geoSearch == null ? Collections.emptyList() : geoSearch;
-    }
-
     @Nullable public UserInfo userInfo() {
         return userInfo;
     }
@@ -70,36 +51,12 @@ public class MwQueryResult extends BaseModel implements PostProcessingTypeAdapte
         return tokens != null ? tokens.csrf() : null;
     }
 
-    @Nullable public String createAccountToken() {
-        return tokens != null ? tokens.createAccount() : null;
-    }
-
     @Nullable public String loginToken() {
         return tokens != null ? tokens.login() : null;
     }
 
     @Nullable public NotificationList notifications() {
         return notifications;
-    }
-
-    @Nullable public Map<String, Notification.UnreadNotificationWikiItem> unreadNotificationWikis() {
-        return unreadnotificationpages;
-    }
-
-    @Nullable public MarkReadResponse getEchoMarkSeen() {
-        return echomarkseen;
-    }
-
-    @Nullable public String captchaId() {
-        String captchaId = null;
-        if (amInfo != null) {
-            for (MwAuthManagerInfo.Request request : amInfo.requests()) {
-                if ("CaptchaAuthenticationRequest".equals(request.id())) {
-                    captchaId = request.fields().get("captchaId").value();
-                }
-            }
-        }
-        return captchaId;
     }
 
     @Nullable public ListUserResponse getUserResponse(@NonNull String userName) {
@@ -124,52 +81,6 @@ public class MwQueryResult extends BaseModel implements PostProcessingTypeAdapte
             }
         }
         return result;
-    }
-
-    @NonNull public Map<String, VideoInfo> videos() {
-        Map<String, VideoInfo> result = new HashMap<>();
-        if (pages != null) {
-            for (MwQueryPage page : pages) {
-                if (page.videoInfo() != null) {
-                    result.put(page.title(), page.videoInfo());
-                }
-            }
-        }
-        return result;
-    }
-
-    @NonNull public List<PageTitle> langLinks() {
-        List<PageTitle> result = new ArrayList<>();
-        if (pages == null || pages.isEmpty() || pages.get(0).langLinks() == null) {
-            return result;
-        }
-        // noinspection ConstantConditions
-        for (MwQueryPage.LangLink link : pages.get(0).langLinks()) {
-            PageTitle title = new PageTitle(link.title(), WikiSite.forLanguageCode(link.lang()));
-            result.add(title);
-        }
-        return result;
-    }
-
-    @NonNull public List<NearbyPage> nearbyPages(@NonNull WikiSite wiki) {
-        List<NearbyPage> result = new ArrayList<>();
-        if (pages != null) {
-            for (MwQueryPage page : pages) {
-                NearbyPage nearbyPage = new NearbyPage(page, wiki);
-                if (nearbyPage.getLocation() != null) {
-                    result.add(nearbyPage);
-                }
-            }
-        }
-        return result;
-    }
-
-    @Nullable public SiteInfo siteInfo() {
-        return generalSiteInfo;
-    }
-
-    @Nullable public EditorTaskCounts editorTaskCounts() {
-        return editorTaskCounts;
     }
 
     @Override
@@ -212,16 +123,11 @@ public class MwQueryResult extends BaseModel implements PostProcessingTypeAdapte
         }
     }
 
-    @Nullable
-    public List<MwQueryLogEvent> logevents() {
-        return logevents;
-    }
-
     private static class Redirect {
-        @SuppressWarnings("unused") private int index;
-        @SuppressWarnings("unused") @Nullable private String from;
-        @SuppressWarnings("unused") @Nullable private String to;
-        @SuppressWarnings("unused") @SerializedName("tofragment") @Nullable private String toFragment;
+         private int index;
+         @Nullable private String from;
+         @Nullable private String to;
+         @SerializedName("tofragment") @Nullable private String toFragment;
 
         @Nullable public String to() {
             return to;
@@ -237,8 +143,8 @@ public class MwQueryResult extends BaseModel implements PostProcessingTypeAdapte
     }
 
     public static class ConvertedTitle {
-        @SuppressWarnings("unused") @Nullable private String from;
-        @SuppressWarnings("unused") @Nullable private String to;
+         @Nullable private String from;
+         @Nullable private String to;
 
         @Nullable public String to() {
             return to;
@@ -270,40 +176,12 @@ public class MwQueryResult extends BaseModel implements PostProcessingTypeAdapte
         }
     }
 
-    public static class MarkReadResponse {
-        @SuppressWarnings("unused") @Nullable private String result;
-        @SuppressWarnings("unused,NullableProblems") @Nullable private String timestamp;
-
-        @Nullable public String getResult() {
-            return result;
-        }
-
-        @Nullable public String getTimestamp() {
-            return timestamp;
-        }
-    }
-
     public static class NotificationList {
-        @SuppressWarnings("unused") private int count;
-        @SuppressWarnings("unused") private int rawcount;
-        @SuppressWarnings("unused") @Nullable private Notification.SeenTime seenTime;
-        @SuppressWarnings("unused") @Nullable private List<Notification> list;
-        @SuppressWarnings("unused") @SerializedName("continue") @Nullable private String continueStr;
-
-        @Nullable public List<Notification> list() {
+        @Nullable
+        private List<Notification> list;
+        @Nullable
+        public List<Notification> list() {
             return list;
-        }
-
-        @Nullable public String getContinue() {
-            return continueStr;
-        }
-
-        public int getCount() {
-            return count;
-        }
-
-        @Nullable public Notification.SeenTime getSeenTime() {
-            return seenTime;
         }
     }
 }

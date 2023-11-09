@@ -4,19 +4,13 @@ import android.location.Location;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import org.wikipedia.AppAdapter;
-import org.wikipedia.dataclient.page.PageLeadProperties;
-
-import java.text.ParseException;
 import java.util.Date;
 
 import static org.apache.commons.lang3.StringUtils.defaultString;
-import static org.wikipedia.util.DateUtil.iso8601DateParse;
 
 /**
  * Immutable class that contains metadata associated with a PageTitle.
@@ -45,106 +39,8 @@ public class PageProperties implements Parcelable {
      */
     private final boolean canEdit;
 
-    /**
-     * Side note: Should later be moved out of this class but I like the similarities with
-     * PageProperties(JSONObject).
-     */
-    public PageProperties(PageLeadProperties core) {
-        pageId = core.getId();
-        namespace = core.getNamespace();
-        revisionId = core.getRevision();
-        displayTitleText = defaultString(core.getDisplayTitle());
-        titlePronunciationUrl = core.getTitlePronunciationUrl();
-        geo = core.getGeo();
-        editProtectionStatus = core.getFirstAllowedEditorRole();
-        languageCount = core.getLanguageCount();
-
-        // todo: don't hardcode this here
-        leadImageUrl = core.getLeadImageUrl(AppAdapter.get().getDesiredLeadImageDp());
-
-        leadImageName = core.getLeadImageFileName();
-        lastModified = new Date();
-        String lastModifiedText = core.getLastModified();
-        if (lastModifiedText != null) {
-            try {
-                lastModified.setTime(iso8601DateParse(lastModifiedText).getTime());
-            } catch (ParseException e) {
-                Log.d("PageProperties", "Failed to parse date: " + lastModifiedText);
-            }
-        }
-        // assume formatversion=2 is used so we get real booleans from the API
-        canEdit = core.isEditable();
-
-        isMainPage = core.isMainPage();
-        isDisambiguationPage = core.isDisambiguation();
-        wikiBaseItem = core.getWikiBaseItem();
-        descriptionSource = core.getDescriptionSource();
-    }
-
-    /**
-     * Constructor to be used when building a Page from a compilation. Initializes the title and
-     * namespace fields, and explicitly disables editing. All other fields initialized to defaults.
-     * @param title Title to which these properties apply.
-     */
-    public PageProperties(@NonNull PageTitle title, boolean isMainPage) {
-        pageId = 0;
-        namespace = title.namespace();
-        revisionId = 0;
-        displayTitleText = title.getDisplayText();
-        titlePronunciationUrl = null;
-        geo = null;
-        editProtectionStatus = "";
-        languageCount = 1;
-        leadImageUrl = null;
-        leadImageName = "";
-        lastModified = new Date();
-        canEdit = false;
-        this.isMainPage = isMainPage;
-        isDisambiguationPage = false;
-        wikiBaseItem = null;
-        descriptionSource = null;
-    }
-
     public int getPageId() {
         return pageId;
-    }
-
-    @NonNull public Namespace getNamespace() {
-        return namespace;
-    }
-
-    public long getRevisionId() {
-        return revisionId;
-    }
-
-    public Date getLastModified() {
-        return lastModified;
-    }
-
-    public String getDisplayTitle() {
-        return displayTitleText;
-    }
-
-    @Nullable
-    public String getTitlePronunciationUrl() {
-        return titlePronunciationUrl;
-    }
-
-    @Nullable
-    public Location getGeo() {
-        return geo;
-    }
-
-    public String getEditProtectionStatus() {
-        return editProtectionStatus;
-    }
-
-    public int getLanguageCount() {
-        return languageCount;
-    }
-
-    public boolean canEdit() {
-        return canEdit;
     }
 
     public boolean isMainPage() {
@@ -153,30 +49,6 @@ public class PageProperties implements Parcelable {
 
     public boolean isDisambiguationPage() {
         return isDisambiguationPage;
-    }
-
-    /**
-     * @return Nullable URL with no scheme. For example, foo.bar.com/ instead of
-     *         http://foo.bar.com/.
-     */
-    @Nullable
-    public String getLeadImageUrl() {
-        return leadImageUrl;
-    }
-
-    @Nullable
-    public String getLeadImageName() {
-        return leadImageName;
-    }
-
-    @Nullable
-    public String getWikiBaseItem() {
-        return wikiBaseItem;
-    }
-
-    @Nullable
-    public String getDescriptionSource() {
-        return descriptionSource;
     }
 
     @Override

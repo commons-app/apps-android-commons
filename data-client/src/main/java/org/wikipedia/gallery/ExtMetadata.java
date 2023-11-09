@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 
 import org.apache.commons.lang3.StringUtils;
 
-@SuppressWarnings("unused")
+
 public class ExtMetadata {
     @SerializedName("DateTime") @Nullable private Values dateTime;
     @SerializedName("ObjectName") @Nullable private Values objectName;

@@ -4,7 +4,6 @@ import android.net.Uri;
 import androidx.annotation.VisibleForTesting;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.wikipedia.dataclient.SharedPreferenceCookieManager;
 import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.page.Namespace;
 import org.wikipedia.wikidata.DataValue;
@@ -18,7 +17,6 @@ public final class GsonUtil {
             .registerTypeHierarchyAdapter(Uri.class, new UriTypeAdapter().nullSafe())
             .registerTypeHierarchyAdapter(Namespace.class, new NamespaceTypeAdapter().nullSafe())
             .registerTypeAdapter(WikiSite.class, new WikiSiteTypeAdapter().nullSafe())
-            .registerTypeAdapter(SharedPreferenceCookieManager.class, new CookieManagerTypeAdapter().nullSafe())
             .registerTypeAdapterFactory(new RequiredFieldsCheckOnReadTypeAdapterFactory())
             .registerTypeAdapterFactory(new PostProcessingTypeAdapter());
 
@@ -26,11 +24,6 @@ public final class GsonUtil {
 
     public static Gson getDefaultGson() {
         return DEFAULT_GSON;
-    }
-
-    @VisibleForTesting
-    public static GsonBuilder getDefaultGsonBuilder() {
-        return DEFAULT_GSON_BUILDER;
     }
 
     private GsonUtil() { }

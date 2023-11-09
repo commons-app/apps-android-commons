@@ -12,7 +12,7 @@ import java.io.Serializable;
 /**
  * Gson POJO for a standard image info object as returned by the API ImageInfo module
  */
-@SuppressWarnings("unused")
+
 public class ImageInfo implements Serializable {
     private int size;
     private int width;

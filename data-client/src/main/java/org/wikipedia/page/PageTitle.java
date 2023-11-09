@@ -9,15 +9,15 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.net.URLDecoder;
+import java.text.Normalizer;
 import org.wikipedia.dataclient.WikiSite;
-import org.wikipedia.util.StringUtil;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Locale;
-
-import static org.wikipedia.util.UriUtil.decodeURL;
+import timber.log.Timber;
 
 /**
  * Represents certain vital information about a page, including the title, namespace,
@@ -157,18 +157,23 @@ public class PageTitle implements Parcelable {
         this.properties = properties;
     }
 
-    @Nullable
-    public String getNamespace() {
-        return namespace;
-    }
-
-    @NonNull public Namespace namespace() {
-        if (properties != null) {
-            return properties.getNamespace();
+    /**
+     * Decodes a URL-encoded string into its UTF-8 equivalent. If the string cannot be decoded, the
+     * original string is returned.
+     * @param url The URL-encoded string that you wish to decode.
+     * @return The decoded string, or the input string if the decoding failed.
+     */
+    @NonNull private String decodeURL(@NonNull String url) {
+        try {
+            return URLDecoder.decode(url, "UTF-8");
+        } catch (IllegalArgumentException e) {
+            // Swallow IllegalArgumentException (can happen with malformed encoding), and just
+            // return the original string.
+            Timber.d("URL decoding failed. String was: %s", url);
+            return url;
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
         }
-
-        // Properties has the accurate namespace but it doesn't exist. Guess based on title.
-        return Namespace.fromLegacyString(wiki, namespace);
     }
 
     @NonNull public WikiSite getWikiSite() {
@@ -257,34 +262,11 @@ public class PageTitle implements Parcelable {
     public String getPrefixedText() {
 
         // TODO: find a better way to check if the namespace is a ISO Alpha2 Code (two digits country code)
-        return namespace == null ? getText() : StringUtil.addUnderscores(namespace) + ":" + getText();
+        return namespace == null ? getText() : addUnderscores(namespace) + ":" + getText();
     }
 
-    /**
-     * Check if the Title represents a File:
-     *
-     * @return true if it is a File page, false if not
-     */
-    public boolean isFilePage() {
-        return namespace().file();
-    }
-
-    /**
-     * Check if the Title represents a special page
-     *
-     * @return true if it is a special page, false if not
-     */
-    public boolean isSpecial() {
-        return namespace().special();
-    }
-
-    /**
-     * Check if the Title represents a talk page
-     *
-     * @return true if it is a talk page, false if not
-     */
-    public boolean isTalkPage() {
-        return namespace().talk();
+    private String addUnderscores(@NonNull String text) {
+        return text.replace(" ", "_");
     }
 
     @Override public void writeToParcel(Parcel parcel, int flags) {
@@ -305,7 +287,19 @@ public class PageTitle implements Parcelable {
 
         PageTitle other = (PageTitle)o;
         // Not using namespace directly since that can be null
-        return StringUtil.normalizedEquals(other.getPrefixedText(), getPrefixedText()) && other.wiki.equals(wiki);
+        return normalizedEquals(other.getPrefixedText(), getPrefixedText()) && other.wiki.equals(wiki);
+    }
+
+    // Compare two strings based on their normalized form, using the Unicode Normalization Form C.
+    // This should be used when comparing or verifying strings that will be exchanged between
+    // different platforms (iOS, desktop, etc) that may encode strings using inconsistent
+    // composition, especially for accents, diacritics, etc.
+    private boolean normalizedEquals(@Nullable String str1, @Nullable String str2) {
+        if (str1 == null || str2 == null) {
+            return (str1 == null && str2 == null);
+        }
+        return Normalizer.normalize(str1, Normalizer.Form.NFC)
+            .equals(Normalizer.normalize(str2, Normalizer.Form.NFC));
     }
 
     @Override public int hashCode() {
