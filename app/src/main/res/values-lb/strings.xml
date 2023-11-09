@@ -269,6 +269,7 @@
   <string name="continue_message">Virufueren</string>
   <string name="correct">Richteg Äntwert</string>
   <string name="wrong">Falsch Äntwert</string>
+  <string name="rotate">Dréinen</string>
   <string name="nominate_delete">Nominéiere fir ze Läschen</string>
   <string name="delete">Läschen</string>
   <string name="Achievements">Realisatiounen</string>
@@ -279,6 +280,7 @@
   <string name="level">Niveau</string>
   <string name="images_uploaded">Eropgeluede Biller</string>
   <string name="image_reverts">Biller net zréckgesat</string>
+  <string name="images_used_by_wiki">Benotzte Biller</string>
   <string name="error_occurred">Feeler opgetrueden!</string>
   <string name="notifications_channel_name_all">Notifikatioun vu Commons</string>
   <string name="contributions_fragment">Kontributiounen</string>
@@ -310,6 +312,9 @@
   <string name="option_allow">Erlaben</string>
   <string name="option_dismiss">Verwerfen</string>
   <string name="nominate_for_deletion_done">Fäerdeg</string>
+  <string name="send_thank_success_title">Merci schécken: Erfollegräich</string>
+  <string name="send_thank_failure_title">Merci schécken: Feeler</string>
+  <string name="send_thank_toast">Merci fir %1$s schécken</string>
   <string name="review_copyright">Entsprécht dat de Copyright-Reegelen?</string>
   <string name="review_category">Ass dëst richteg kategoriséiert?</string>
   <string name="review_spam_explanation">Klickt op NEEN fir dëst Bild fir d\'Läsche virzeschloen, falls et guer net nëtzlech ass.</string>
@@ -334,6 +339,7 @@
   <string name="exif_tag_name_author">Auteur</string>
   <string name="exif_tag_name_copyright">Copyright</string>
   <string name="exif_tag_name_location">Plaz</string>
+  <string name="exif_tag_name_cameraModel">Kamera-Modell</string>
   <string name="exif_tag_name_serialNumbers">Seriennummeren</string>
   <string name="exif_tag_name_software">Software</string>
   <string name="share_text">Luet Fotoen direkt vun Ärem Handy op Wikimedia Commons erop. Luet d\'Commons-App elo erof: %1$s</string>
@@ -455,4 +461,9 @@
   <string name="error_feedback">Feeler beim Schécke vum Feedback</string>
   <string name="enter_description">Wéi ass Äre Feedback?</string>
   <string name="your_feedback">Äre Feedback</string>
+  <string name="menu_view_report">Mellen</string>
+  <string name="report_violation">Verstouss mellen</string>
+  <string name="report_user">Dëse Benotzer mellen</string>
+  <string name="report_content">Dësen Inhalt mellen</string>
+  <string name="request_user_block">Ufroe fir dëse Benotzer ze spären</string>
 </resources>
