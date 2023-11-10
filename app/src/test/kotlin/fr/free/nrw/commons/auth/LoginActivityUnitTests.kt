@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
+import android.widget.TextView
 import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
@@ -55,7 +56,7 @@ class LoginActivityUnitTests {
     private lateinit var keyEvent: KeyEvent
 
     @Mock
-    private lateinit var loginButton: Button
+    private lateinit var textView: TextView
 
     @Mock
     private lateinit var bundle: Bundle
@@ -95,11 +96,12 @@ class LoginActivityUnitTests {
     fun testOnEditorActionCaseDefault() {
         val method: Method = LoginActivity::class.java.getDeclaredMethod(
             "onEditorAction",
+            TextView::class.java,
             Int::class.java,
             KeyEvent::class.java
         )
         method.isAccessible = true
-        method.invoke(activity, 0, keyEvent)
+        method.invoke(activity, textView, 0, keyEvent)
     }
 
     @Test

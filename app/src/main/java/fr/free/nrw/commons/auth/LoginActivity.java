@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
+import android.widget.TextView;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,7 +40,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import butterknife.ButterKnife;
-import butterknife.OnEditorAction;
 import butterknife.OnFocusChange;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
@@ -119,6 +119,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         binding.signUpButton.setOnClickListener(view -> signUp());
         binding.loginButton.setOnClickListener(view -> performLogin());
 
+        binding.loginPassword.setOnEditorActionListener(this::onEditorAction);
+
         if (ConfigUtils.isBetaFlavour()) {
             binding.loginCredentials.setText(getString(R.string.login_credential));
         } else {
@@ -137,8 +139,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         }
     }
 
-    @OnEditorAction(R.id.login_password)
-    boolean onEditorAction(int actionId, KeyEvent keyEvent) {
+    boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
         if (binding.loginButton.isEnabled()) {
             if (actionId == IME_ACTION_DONE) {
                 performLogin();
