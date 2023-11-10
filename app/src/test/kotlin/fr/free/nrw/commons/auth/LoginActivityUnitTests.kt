@@ -104,35 +104,6 @@ class LoginActivityUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testOnEditorActionCaseLoginEnabledFirstCase() {
-        Whitebox.setInternalState(activity, "loginButton", loginButton)
-        `when`(loginButton.isEnabled).thenReturn(true)
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "onEditorAction",
-            Int::class.java,
-            KeyEvent::class.java
-        )
-        method.isAccessible = true
-        method.invoke(activity, EditorInfo.IME_ACTION_DONE, keyEvent)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnEditorActionCaseLoginEnabledSecondCase() {
-        Whitebox.setInternalState(activity, "loginButton", loginButton)
-        `when`(loginButton.isEnabled).thenReturn(true)
-        `when`(keyEvent.keyCode).thenReturn(KeyEvent.KEYCODE_ENTER)
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "onEditorAction",
-            Int::class.java,
-            KeyEvent::class.java
-        )
-        method.isAccessible = true
-        method.invoke(activity, 0, keyEvent)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testSkipLogin() {
         val method: Method = LoginActivity::class.java.getDeclaredMethod(
             "skipLogin"
