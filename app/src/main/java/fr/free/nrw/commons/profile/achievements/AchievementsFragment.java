@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -27,6 +28,7 @@ import com.dinuscxj.progressbar.CircleProgressBar;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.databinding.FragmentAchievementsBinding;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.utils.ConfigUtils;
@@ -62,85 +64,18 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
     private LevelController.LevelInfo levelInfo;
 
-    @BindView(R.id.achievement_badge_image)
-    ImageView imageView;
-
-    @BindView(R.id.achievement_badge_text)
-    TextView badgeText;
-
-    @BindView(R.id.achievement_level)
-    TextView levelNumber;
-
-    @BindView(R.id.thanks_received)
-    TextView thanksReceived;
-
-    @BindView(R.id.images_uploaded_progressbar)
-    CircleProgressBar imagesUploadedProgressbar;
-
-    @BindView(R.id.tv_uploaded_images)
-    AppCompatTextView uploadedImagesTextview;
-
-    @BindView(R.id.images_used_by_wiki_progress_bar)
-    CircleProgressBar imagesUsedByWikiProgressBar;
-
-    @BindView(R.id.tv_wiki_pb)
-    AppCompatTextView imagesUsedByWikiTextview;
-
-    @BindView(R.id.image_reverts_progressbar)
-    CircleProgressBar imageRevertsProgressbar;
-
-    @BindView(R.id.image_featured)
-    TextView imagesFeatured;
-
-    @BindView(R.id.quality_images)
-    TextView tvQualityImages;
-
-    @BindView(R.id.images_revert_limit_text)
-    TextView imagesRevertLimitText;
-
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
-
-    @BindView(R.id.layout_image_uploaded)
-    RelativeLayout layoutImageUploaded;
-
-    @BindView(R.id.layout_image_reverts)
-    RelativeLayout layoutImageReverts;
-
-    @BindView(R.id.layout_image_used_by_wiki)
-    RelativeLayout layoutImageUsedByWiki;
-
-    @BindView(R.id.layout_statistics)
-    LinearLayout layoutStatistics;
-
-    @BindView(R.id.images_used_by_wiki_text)
-    TextView imageByWikiText;
-
-    @BindView(R.id.images_reverted_text)
-    TextView imageRevertedText;
-
-    @BindView(R.id.images_upload_text_param)
-    TextView imageUploadedText;
-
-    @BindView(R.id.wikidata_edits)
-    TextView wikidataEditsText;
-
-    @BindView(R.id.tv_achievements_of_user)
-    AppCompatTextView tvAchievementsOfUser;
-
     @Inject
     SessionManager sessionManager;
 
     @Inject
     OkHttpJsonApiClient okHttpJsonApiClient;
 
+    private FragmentAchievementsBinding binding;
+
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     // To keep track of the number of wiki edits made by a user
     private int numberOfEdits = 0;
-
-    // menu item for action bar
-    private MenuItem item;
 
     private String userName;
 
@@ -160,7 +95,9 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_achievements, container, false);
+        binding = FragmentAchievementsBinding.inflate(inflater, container, false);
+
+        View rootView = binding.getRoot();
         ButterKnife.bind(this, rootView);
 
         // DisplayMetrics used to fetch the size of the screen
@@ -171,39 +108,45 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
         // Used for the setting the size of imageView at runtime
         ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)
-                imageView.getLayoutParams();
+                binding.achievementBadgeImage.getLayoutParams();
         params.height = (int) (height * BADGE_IMAGE_HEIGHT_RATIO);
         params.width = (int) (width * BADGE_IMAGE_WIDTH_RATIO);
-        imageView.requestLayout();
-        progressBar.setVisibility(View.VISIBLE);
+        binding.achievementBadgeImage.requestLayout();
+        binding.progressBar.setVisibility(View.VISIBLE);
 
         setHasOptionsMenu(true);
 
         // Set the initial value of WikiData edits to 0
-        wikidataEditsText.setText("0");
-        if(sessionManager.getUserName().equals(userName)){
-            tvAchievementsOfUser.setVisibility(View.GONE);
+        binding.wikidataEdits.setText("0");
+        if(sessionManager.getUserName() == null || sessionManager.getUserName().equals(userName)){
+            binding.tvAchievementsOfUser.setVisibility(View.GONE);
         }else{
-            tvAchievementsOfUser.setVisibility(View.VISIBLE);
-            tvAchievementsOfUser.setText(getString(R.string.achievements_of_user,userName));
+            binding.tvAchievementsOfUser.setVisibility(View.VISIBLE);
+            binding.tvAchievementsOfUser.setText(getString(R.string.achievements_of_user,userName));
         }
 
         // Achievements currently unimplemented in Beta flavor. Skip all API calls.
         if(ConfigUtils.isBetaFlavour()) {
-            progressBar.setVisibility(View.GONE);
-            imageByWikiText.setText(R.string.no_image);
-            imageRevertedText.setText(R.string.no_image_reverted);
-            imageUploadedText.setText(R.string.no_image_uploaded);
-            wikidataEditsText.setText("0");
-            imagesFeatured.setText("0");
-            tvQualityImages.setText("0");
-            thanksReceived.setText("0");
+            binding.progressBar.setVisibility(View.GONE);
+            binding.imagesUsedByWikiText.setText(R.string.no_image);
+            binding.imagesRevertedText.setText(R.string.no_image_reverted);
+            binding.imagesUploadTextParam.setText(R.string.no_image_uploaded);
+            binding.wikidataEdits.setText("0");
+            binding.imageFeatured.setText("0");
+            binding.qualityImages.setText("0");
+            binding.achievementLevel.setText("0");
             setMenuVisibility(true);
             return rootView;
         }
         setWikidataEditCount();
         setAchievements();
         return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        binding = null;
+        super.onDestroyView();
     }
 
     @Override
@@ -242,7 +185,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
      * which then calls parseJson when results are fetched
      */
     private void setAchievements() {
-        progressBar.setVisibility(View.VISIBLE);
+        binding.progressBar.setVisibility(View.VISIBLE);
         if (checkAccount()) {
             try{
 
@@ -256,8 +199,8 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
                                         setUploadCount(Achievements.from(response));
                                     } else {
                                         Timber.d("success");
-                                        layoutImageReverts.setVisibility(View.INVISIBLE);
-                                        imageView.setVisibility(View.INVISIBLE);
+                                        binding.layoutImageReverts.setVisibility(View.INVISIBLE);
+                                        binding.achievementBadgeImage.setVisibility(View.INVISIBLE);
                                         // If the number of edits made by the user are more than 150,000
                                         // in some cases such high number of wiki edit counts cause the
                                         // achievements calculator to fail in some cases, for more details
@@ -299,7 +242,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(edits -> {
                     numberOfEdits = edits;
-                    wikidataEditsText.setText(String.valueOf(edits));
+                    binding.wikidataEdits.setText(String.valueOf(edits));
                 }, e -> {
                     Timber.e("Error:" + e);
                 }));
@@ -314,11 +257,11 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
      */
     private void showSnackBarWithRetry(boolean tooManyAchievements) {
         if (tooManyAchievements) {
-            progressBar.setVisibility(View.GONE);
+            binding.progressBar.setVisibility(View.GONE);
             ViewUtil.showDismissibleSnackBar(getActivity().findViewById(android.R.id.content),
                     R.string.achievements_fetch_failed_ultimate_achievement, R.string.retry, view -> setAchievements());
         } else {
-            progressBar.setVisibility(View.GONE);
+            binding.progressBar.setVisibility(View.GONE);
             ViewUtil.showDismissibleSnackBar(getActivity().findViewById(android.R.id.content),
                     R.string.achievements_fetch_failed, R.string.retry, view -> setAchievements());
         }
@@ -329,7 +272,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
      */
     private void onError() {
         ViewUtil.showLongToast(getActivity(), getResources().getString(R.string.error_occurred));
-        progressBar.setVisibility(View.GONE);
+        binding.progressBar.setVisibility(View.GONE);
     }
 
     /**
@@ -368,10 +311,10 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         if (uploadCount==0){
             setZeroAchievements();
         }else {
-            imagesUploadedProgressbar.setVisibility(View.VISIBLE);
-            imagesUploadedProgressbar.setProgress
+            binding.imagesUploadedProgressbar.setVisibility(View.VISIBLE);
+            binding.imagesUploadedProgressbar.setProgress
                     (100*uploadCount/levelInfo.getMaxUploadCount());
-            uploadedImagesTextview.setText
+            binding.tvUploadedImages.setText
                 (uploadCount + "/" + levelInfo.getMaxUploadCount());
         }
 
@@ -387,14 +330,14 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
             getString(R.string.ok),
             () -> {},
             true);
-        imagesUploadedProgressbar.setVisibility(View.INVISIBLE);
-        imageRevertsProgressbar.setVisibility(View.INVISIBLE);
-        imagesUsedByWikiProgressBar.setVisibility(View.INVISIBLE);
-        imageView.setVisibility(View.INVISIBLE);
-        imageByWikiText.setText(R.string.no_image);
-        imageRevertedText.setText(R.string.no_image_reverted);
-        imageUploadedText.setText(R.string.no_image_uploaded);
-        imageView.setVisibility(View.INVISIBLE);
+        binding.imagesUploadedProgressbar.setVisibility(View.INVISIBLE);
+        binding.imageRevertsProgressbar.setVisibility(View.INVISIBLE);
+        binding.imagesUsedByWikiProgressBar.setVisibility(View.INVISIBLE);
+        binding.achievementBadgeImage.setVisibility(View.INVISIBLE);
+        binding.imagesUsedByWikiText.setText(R.string.no_image);
+        binding.imagesRevertedText.setText(R.string.no_image_reverted);
+        binding.imagesUploadTextParam.setText(R.string.no_image_uploaded);
+        binding.achievementBadgeImage.setVisibility(View.INVISIBLE);
     }
 
     /**
@@ -402,11 +345,11 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
      * @param notRevertPercentage
      */
     private void setImageRevertPercentage(int notRevertPercentage){
-        imageRevertsProgressbar.setVisibility(View.VISIBLE);
-        imageRevertsProgressbar.setProgress(notRevertPercentage);
+        binding.imageRevertsProgressbar.setVisibility(View.VISIBLE);
+        binding.imageRevertsProgressbar.setProgress(notRevertPercentage);
         String revertPercentage = Integer.toString(notRevertPercentage);
-        imageRevertsProgressbar.setProgressTextFormatPattern(revertPercentage + "%%");
-        imagesRevertLimitText.setText(getResources().getString(R.string.achievements_revert_limit_message)+ levelInfo.getMinNonRevertPercentage() + "%");
+        binding.imageRevertsProgressbar.setProgressTextFormatPattern(revertPercentage + "%%");
+        binding.imagesRevertLimitText.setText(getResources().getString(R.string.achievements_revert_limit_message)+ levelInfo.getMinNonRevertPercentage() + "%");
     }
 
     /**
@@ -415,37 +358,36 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
      * @param achievements
      */
     private void inflateAchievements(Achievements achievements) {
-        imagesUsedByWikiProgressBar.setVisibility(View.VISIBLE);
-        thanksReceived.setText(String.valueOf(achievements.getThanksReceived()));
-        imagesUsedByWikiProgressBar.setProgress
+        binding.imagesUsedByWikiProgressBar.setVisibility(View.VISIBLE);
+        binding.achievementLevel.setText(String.valueOf(achievements.getThanksReceived()));
+        binding.imagesUsedByWikiProgressBar.setProgress
                 (100 * achievements.getUniqueUsedImages() / levelInfo.getMaxUniqueImages());
-        if(imagesUsedByWikiTextview != null) {
-            imagesUsedByWikiTextview.setText
+        if(binding.tvWikiPb != null) {
+            binding.tvWikiPb.setText
                 (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
         }
-        imagesFeatured.setText(String.valueOf(achievements.getFeaturedImages()));
-        tvQualityImages.setText(String.valueOf(achievements.getQualityImages()));
+        binding.imageFeatured.setText(String.valueOf(achievements.getFeaturedImages()));
+        binding.qualityImages.setText(String.valueOf(achievements.getQualityImages()));
         String levelUpInfoString = getString(R.string.level).toUpperCase();
         levelUpInfoString += " " + levelInfo.getLevelNumber();
-        levelNumber.setText(levelUpInfoString);
-        imageView.setImageDrawable(VectorDrawableCompat.create(getResources(), R.drawable.badge,
+        binding.achievementLevel.setText(levelUpInfoString);
+        binding.achievementBadgeImage.setImageDrawable(VectorDrawableCompat.create(getResources(), R.drawable.badge,
                 new ContextThemeWrapper(getActivity(), levelInfo.getLevelStyle()).getTheme()));
-        badgeText.setText(Integer.toString(levelInfo.getLevelNumber()));
+        binding.achievementBadgeText.setText(Integer.toString(levelInfo.getLevelNumber()));
     }
 
     /**
      * to hide progressbar
      */
     private void hideProgressBar(Achievements achievements) {
-        if (progressBar != null) {
+        if (binding.progressBar != null) {
             levelInfo = LevelController.LevelInfo.from(achievements.getImagesUploaded(),
                     achievements.getUniqueUsedImages(),
                     achievements.getNotRevertPercentage());
             inflateAchievements(achievements);
             setUploadProgress(achievements.getImagesUploaded());
             setImageRevertPercentage(achievements.getNotRevertPercentage());
-            progressBar.setVisibility(View.GONE);
-            item.setVisible(true);
+            binding.progressBar.setVisibility(View.GONE);
         }
     }
 
