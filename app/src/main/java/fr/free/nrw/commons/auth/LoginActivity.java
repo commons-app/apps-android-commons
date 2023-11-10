@@ -39,7 +39,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.OnEditorAction;
 import butterknife.OnFocusChange;
 import fr.free.nrw.commons.BuildConfig;
@@ -114,6 +113,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         binding.loginPassword.addTextChangedListener(textWatcher);
         binding.loginTwoFactor.addTextChangedListener(textWatcher);
 
+        binding.skipLogin.setOnClickListener(view -> skipLogin());
+        binding.forgotPassword.setOnClickListener(view -> forgotPassword());
+        binding.aboutPrivacyPolicy.setOnClickListener(view -> onPrivacyPolicyClicked());
+        binding.signUpButton.setOnClickListener(view -> signUp());
+        binding.loginButton.setOnClickListener(view -> performLogin());
+
         if (ConfigUtils.isBetaFlavour()) {
             binding.loginCredentials.setText(getString(R.string.login_credential));
         } else {
@@ -147,8 +152,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
 
-    @OnClick(R.id.skip_login)
-    void skipLogin() {
+    protected void skipLogin() {
         new AlertDialog.Builder(this).setTitle(R.string.skip_login_title)
                 .setMessage(R.string.skip_login_message)
                 .setCancelable(false)
@@ -160,18 +164,15 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 .show();
     }
 
-    @OnClick(R.id.forgot_password)
-    void forgotPassword() {
+    protected void forgotPassword() {
         Utils.handleWebUrl(this, Uri.parse(BuildConfig.FORGOT_PASSWORD_URL));
     }
 
-    @OnClick(R.id.about_privacy_policy)
-    void onPrivacyPolicyClicked() {
+    protected void onPrivacyPolicyClicked() {
         Utils.handleWebUrl(this, Uri.parse(BuildConfig.PRIVACY_POLICY_URL));
     }
 
-    @OnClick(R.id.sign_up_button)
-    void signUp() {
+    protected void signUp() {
         Intent intent = new Intent(this, SignupActivity.class);
         startActivity(intent);
     }
@@ -220,7 +221,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         super.onDestroy();
     }
 
-    @OnClick(R.id.login_button)
     public void performLogin() {
         Timber.d("Login to start!");
         final String username = binding.loginUsername.getText().toString();
