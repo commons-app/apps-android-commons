@@ -39,8 +39,6 @@ import org.wikipedia.login.LoginResult;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import butterknife.ButterKnife;
-import butterknife.OnFocusChange;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -107,8 +105,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        ButterKnife.bind(this);
-
         binding.loginUsername.addTextChangedListener(textWatcher);
         binding.loginPassword.addTextChangedListener(textWatcher);
         binding.loginTwoFactor.addTextChangedListener(textWatcher);
@@ -120,6 +116,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         binding.loginButton.setOnClickListener(view -> performLogin());
 
         binding.loginPassword.setOnEditorActionListener(this::onEditorAction);
+        binding.loginPassword.setOnFocusChangeListener(this::onPasswordFocusChanged);
 
         if (ConfigUtils.isBetaFlavour()) {
             binding.loginCredentials.setText(getString(R.string.login_credential));
@@ -132,7 +129,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
      * @param view The keyboard
      * @param hasFocus Set to true if the keyboard has focus
      */
-    @OnFocusChange(R.id.login_password)
     void onPasswordFocusChanged(View view, boolean hasFocus) {
         if (!hasFocus) {
             ViewUtil.hideKeyboard(view);
