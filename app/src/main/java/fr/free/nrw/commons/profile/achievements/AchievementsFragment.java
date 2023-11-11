@@ -21,9 +21,6 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import com.dinuscxj.progressbar.CircleProgressBar;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -96,9 +93,16 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentAchievementsBinding.inflate(inflater, container, false);
-
         View rootView = binding.getRoot();
-        ButterKnife.bind(this, rootView);
+
+        binding.achievementInfo.setOnClickListener(view -> showInfoDialog());
+        binding.imagesUploadInfo.setOnClickListener(view -> showUploadInfo());
+        binding.imagesRevertedInfo.setOnClickListener(view -> showRevertedInfo());
+        binding.imagesUsedByWikiInfo.setOnClickListener(view -> showUsedByWikiInfo());
+        binding.imagesNearbyInfo.setOnClickListener(view -> showImagesViaNearbyInfo());
+        binding.imagesFeaturedInfo.setOnClickListener(view -> showFeaturedImagesInfo());
+        binding.thanksReceivedInfo.setOnClickListener(view -> showThanksReceivedInfo());
+        binding.qualityImagesInfo.setOnClickListener(view -> showQualityImagesInfo());
 
         // DisplayMetrics used to fetch the size of the screen
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -173,8 +177,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     /**
      * To invoke the AlertDialog on clicking info button
      */
-    @OnClick(R.id.achievement_info)
-    public void showInfoDialog(){
+    protected void showInfoDialog(){
         launchAlert(
             getResources().getString(R.string.Achievements),
             getResources().getString(R.string.achievements_info_message));
@@ -391,56 +394,48 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         }
     }
 
-
-    @OnClick(R.id.images_upload_info)
-    public void showUploadInfo(){
+    protected void showUploadInfo(){
         launchAlertWithHelpLink(
             getResources().getString(R.string.images_uploaded),
             getResources().getString(R.string.images_uploaded_explanation),
             IMAGES_UPLOADED_URL);
     }
 
-    @OnClick(R.id.images_reverted_info)
-    public void showRevertedInfo(){
+    protected void showRevertedInfo(){
         launchAlertWithHelpLink(
             getResources().getString(R.string.image_reverts),
             getResources().getString(R.string.images_reverted_explanation),
             IMAGES_REVERT_URL);
     }
 
-    @OnClick(R.id.images_used_by_wiki_info)
-    public void showUsedByWikiInfo(){
+    protected void showUsedByWikiInfo(){
         launchAlertWithHelpLink(
             getResources().getString(R.string.images_used_by_wiki),
             getResources().getString(R.string.images_used_explanation),
             IMAGES_USED_URL);
     }
 
-    @OnClick(R.id.images_nearby_info)
-    public void showImagesViaNearbyInfo(){
+    protected void showImagesViaNearbyInfo(){
         launchAlertWithHelpLink(
             getResources().getString(R.string.statistics_wikidata_edits),
             getResources().getString(R.string.images_via_nearby_explanation),
             IMAGES_NEARBY_PLACES_URL);
     }
 
-    @OnClick(R.id.images_featured_info)
-    public void showFeaturedImagesInfo(){
+    protected void showFeaturedImagesInfo(){
         launchAlertWithHelpLink(
             getResources().getString(R.string.statistics_featured),
             getResources().getString(R.string.images_featured_explanation),
             IMAGES_FEATURED_URL);
     }
 
-    @OnClick(R.id.thanks_received_info)
-    public void showThanksReceivedInfo(){
+    protected void showThanksReceivedInfo(){
         launchAlertWithHelpLink(
             getResources().getString(R.string.statistics_thanks),
             getResources().getString(R.string.thanks_received_explanation),
             THANKS_URL);
     }
 
-    @OnClick(R.id.quality_images_info)
     public void showQualityImagesInfo() {
         launchAlertWithHelpLink(
             getResources().getString(R.string.statistics_quality),
