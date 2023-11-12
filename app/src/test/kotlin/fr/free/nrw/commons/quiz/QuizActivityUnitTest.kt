@@ -53,8 +53,6 @@ class QuizActivityUnitTest {
         quizController.initialize(context)
         positiveAnswer = view.findViewById(R.id.quiz_positive_answer)
         negativeAnswer = view.findViewById(R.id.quiz_negative_answer)
-        activity.positiveAnswer = positiveAnswer
-        activity.negativeAnswer = negativeAnswer
     }
 
     @Test
