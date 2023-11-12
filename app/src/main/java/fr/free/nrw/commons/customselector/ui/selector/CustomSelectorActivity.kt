@@ -217,6 +217,7 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
             i++
         }
         markAsNotForUpload(selectedImages)
+        toolbarBinding.imageLimitError.visibility = View.INVISIBLE
     }
 
     /**
