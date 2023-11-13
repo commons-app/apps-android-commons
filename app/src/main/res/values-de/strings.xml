@@ -20,6 +20,7 @@
 * Ngschaider
 * Pyscowicz
 * Sebastian Wallroth
+* SpaceEnergy
 * Sujan
 * Sushi
 * Tacsipacsi
@@ -454,7 +455,7 @@
   <string name="display_campaigns_explanation">Die laufenden Kampagnen ansehen</string>
   <string name="in_app_camera_location_access_explanation">Erlauben Sie der App, den Standort abzurufen, falls die Kamera ihn nicht aufzeichnet. Einige Gerätekameras zeichnen den Standort nicht auf. In solchen Fällen wird Ihr Beitrag nützlicher, wenn Sie die App den Standort abrufen und anhängen lassen. Sie können dies jederzeit in den Einstellungen ändern</string>
   <string name="option_allow">Erlauben</string>
-  <string name="option_dismiss">Schließen</string>
+  <string name="option_dismiss">Ablehnen</string>
   <string name="in_app_camera_needs_location">Bitte aktivieren Sie den Standortzugriff in den Einstellungen und versuchen Sie es erneut. \n\nHinweis: Der Upload enthält möglicherweise keinen Standort, wenn die App den Standort nicht innerhalb eines kurzen Zeitraums vom Gerät abrufen kann.</string>
   <string name="in_app_camera_location_permission_rationale">Die In-App-Kamera benötigt eine Standortberechtigung, um sie an Ihre Bilder anzuhängen, falls der Standort nicht in EXIF verfügbar ist. Bitte erlauben Sie der App, auf Ihren Standort zuzugreifen, und versuchen Sie es erneut.\n\nHinweis: Der Upload enthält möglicherweise keinen Standort, wenn die App den Standort nicht innerhalb eines kurzen Zeitraums vom Gerät abrufen kann.</string>
   <string name="in_app_camera_location_permission_denied">Aufgrund fehlender Standortberechtigung konnte die App den Standort nicht zusammen mit In-Shots aufzeichnen</string>

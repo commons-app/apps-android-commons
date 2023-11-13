@@ -2,6 +2,7 @@
 <!-- Authors:
 * A67-A67
 * Bouman4
+* Ciell
 * Dutchy45
 * Elroy
 * Festina90
@@ -32,12 +33,12 @@
   <string name="submit">Verzenden</string>
   <string name="add_another_description">Nog een beschrijving toevoegen</string>
   <string name="add_new_contribution">Nieuwe bijdrage toevoegen</string>
-  <string name="add_contribution_from_camera">Bijdrage van de camera toevoegen</string>
-  <string name="add_contribution_from_photos">Bijdrage uit Foto\'s toevoegen</string>
-  <string name="add_contribution_from_contributions_gallery">Bijdrage uit galerij met eerdere bijdragen toevoegen</string>
+  <string name="add_contribution_from_camera">Bestand vanaf camera delen</string>
+  <string name="add_contribution_from_photos">Bestand uit foto\'s delen</string>
+  <string name="add_contribution_from_contributions_gallery">Bestand uit galerij met eerdere bijdragen toevoegen</string>
   <string name="show_captions">Bijschriften</string>
   <string name="row_item_language_description">Taalbeschrijving</string>
-  <string name="row_item_caption">Bijschrift</string>
+  <string name="row_item_caption">Titel</string>
   <string name="show_captions_description">Beschrijving</string>
   <string name="nearby_row_image">Afbeelding</string>
   <string name="nearby_all">Alle</string>
@@ -86,7 +87,7 @@
   <string name="upload_in_progress">Aan het uploaden</string>
   <string name="username">Gebruikersnaam</string>
   <string name="password">Wachtwoord</string>
-  <string name="login_credential">Aanmelden bij uw Commons Beta-account</string>
+  <string name="login_credential">Aanmelden met uw Commons Beta-account</string>
   <string name="login">Aanmelden</string>
   <string name="forgot_password">Wachtwoord vergeten?</string>
   <string name="signup">Inschrijven</string>
