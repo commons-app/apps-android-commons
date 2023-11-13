@@ -215,7 +215,7 @@
   <string name="become_a_tester_title">Become a Beta Tester</string>
   <string name="become_a_tester_description">Opt-in to our beta channel on Google Play and get early access to new features and bug fixes</string>
   <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
-  <string name="mapbox_commons_app_token">pk.eyJ1Ijoibmljb2xhcy1yYW91bCIsImEiOiJjbG9ucGRhZnEzNWJ0MmtwOWw3ZGVscnU0In0.GnqaSsDctQovVlD7oSCgng</string>
+  <string name="mapbox_commons_app_token">pk.eyJ1Ijoibmljb2xhcy1yYW91bCIsImEiOiJjbG93YnU5ZTEwM3pqMmttbzIxNGVvOGgxIn0.T1o536AcyVpl5Q7eypJEAg</string>
   <string name="_2fa_code">2FA Code</string>
   <string name="logout_verification">Do you really want to logout?</string>
   <string name="mediaimage_failed">Media Image Failed</string>
