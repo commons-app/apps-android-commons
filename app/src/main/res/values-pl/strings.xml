@@ -7,6 +7,7 @@
 * InternerowyGołąb
 * Kareyac
 * Krottyianock
+* Matlin
 * Matma Rex
 * Mazab IZW
 * Olaf
@@ -97,6 +98,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Ustawienia</string>
   <string name="intent_share_upload_label">Prześlij do Commons</string>
+  <string name="upload_in_progress">Przesyłanie w toku</string>
   <string name="username">Nazwa użytkownika</string>
   <string name="password">Hasło</string>
   <string name="login_credential">Zaloguj się na konto Commons Beta</string>
@@ -110,6 +112,8 @@
   <string name="login_success">Zalogowano pomyślnie!</string>
   <string name="login_failed">Logowanie nie powiodło się!</string>
   <string name="upload_failed">Nie znaleziono pliku. Spróbuj znaleźć inny.</string>
+  <string name="retry_limit_reached">Osiągnięto maksymalny limit ponownych prób! Anuluj przesyłanie i spróbuj ponownie</string>
+  <string name="unrestricted_battery_mode">Wyłączyć optymalizację baterii?</string>
   <string name="authentication_failed">Uwierzytelnianie nie powiodło się, zaloguj się ponownie</string>
   <string name="uploading_started">Wysyłanie rozpoczęte!</string>
   <string name="uploading_queued">Prześlij w kolejce (włączony tryb ograniczonego połączenia)</string>
@@ -224,6 +228,8 @@
   <string name="read_storage_permission_rationale">Wymagane uprawnienia: odczyt z dysku zewnętrznego. Bez tego aplikacja nie będzie w stanie uzyskać dostępu do twojej galerii.</string>
   <string name="write_storage_permission_rationale">Wymagane uprawnienia: odczyt z dysku zewnętrznego. Bez tego aplikacja nie będzie w stanie uzyskać dostępu do aparatu/galerii.</string>
   <string name="location_permission_title">Prośba o dostęp do lokalizacji</string>
+  <string name="in_app_camera_location_permission_title">Zapisz lokalizację zdjęć w aplikacji</string>
+  <string name="in_app_camera_location_switch_pref_summary">Włącz tę opcję, aby rejestrować lokalizację za pomocą zdjęć w aplikacji, na wypadek gdyby kamera urządzenia jej nie zarejestrowała</string>
   <string name="ok">OK</string>
   <string name="warning">Ostrzeżenie</string>
   <string name="duplicate_file_name">Znaleziono zduplikowaną nazwę pliku</string>
@@ -302,6 +308,7 @@
   <string name="copy_wikicode">Skopiuj wikitext do schowka</string>
   <string name="wikicode_copied">Wikitext został skopiowany do schowka</string>
   <string name="nearby_location_not_available">W pobliżu może nie działać poprawnie, Lokalizacja jest niedostępna.</string>
+  <string name="upload_location_access_denied">Odmowa dostępu do lokalizacji. Aby skorzystać z tej funkcji, ustaw swoją lokalizację ręcznie.</string>
   <string name="location_permission_rationale_nearby">Uprawnienie wymagane do wyświetlania listy pobliskich miejsc</string>
   <string name="nearby_directions">Wskazówki</string>
   <string name="nearby_wikidata">Wikidane</string>
@@ -369,6 +376,7 @@
   <string name="wrong">Zła odpowiedź</string>
   <string name="quiz_screenshot_question">Czy ten zrzut ekranu nadaje się do przesłania?</string>
   <string name="share_app_title">Udostępnij aplikację</string>
+  <string name="rotate">Obrót</string>
   <string name="error_fetching_nearby_places">Błąd podczas pobierania pobliskich miejsc.</string>
   <string name="no_nearby_places_around">Brak miejsc w pobliżu</string>
   <string name="error_fetching_nearby_monuments">Błąd pobierania pobliskich zabytków.</string>
@@ -449,6 +457,8 @@
   <string name="ends_on">Kończy się na:</string>
   <string name="display_campaigns">Wyświetl kampanie</string>
   <string name="display_campaigns_explanation">Zobacz trwające kampanie</string>
+  <string name="option_allow">Zezwól</string>
+  <string name="option_dismiss">Odrzuć</string>
   <string name="location_loss_warning" fuzzy="true">Upewnij się, że ten nowy selektor Androida nie usuwa lokalizacji ze zdjęć.</string>
   <string name="nearby_campaign_dismiss_message">Kampanie już nie będą widoczne. Jednak w razie potrzeby możesz ponownie włączyć to powiadomienie w ustawieniach.</string>
   <string name="this_function_needs_network_connection">Ta funkcja wymaga połączenia sieciowego, sprawdź ustawienia połączenia.</string>
@@ -534,6 +544,7 @@
   <string name="delete_helper_ask_reason_copyright_press_photo">Zdjęcie prasowe</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">Losowe zdjęcie z internetu</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">Naruszenie wolności panoramy</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Ponieważ jest to</string>
   <string name="category_edit_helper_make_edit_toast">Próba aktualizacji kategorii.</string>
   <string name="category_edit_helper_show_edit_title">Aktualizacja kategorii</string>
@@ -601,6 +612,7 @@
   <string name="recommend_high_accuracy_mode">Aby uzyskać najlepsze wyniki, wybierz tryb wysokiej dokładności.</string>
   <string name="ask_to_turn_location_on">Włączyć lokalizację?</string>
   <string name="nearby_needs_location">Lokalizacja W pobliżu wymaga włączonej lokalizacji, aby działać poprawnie</string>
+  <string name="upload_map_location_access">Aby ustawić lokalizację automatycznie, musisz przyznać dostęp do swojej bieżącej lokalizacji.</string>
   <string name="use_location_from_similar_image">Czy zrobiłeś te dwa zdjęcia w tym samym miejscu? Czy chcesz użyć szerokości/długości geograficznej obrazu po prawej stronie?</string>
   <string name="load_more">Wczytaj więcej</string>
   <string name="nearby_no_results">Nie znaleziono miejsc, spróbuj zmienić kryteria wyszukiwania.</string>
@@ -727,6 +739,8 @@
   <string name="your_feedback">Twoja opinia</string>
   <string name="mark_as_not_for_upload">Oznacz jako nieprzeznaczone do przesłania</string>
   <string name="unmark_as_not_for_upload">Odznacz jako nie do przesłania</string>
+  <string name="marking_as_not_for_upload">Oznacz jako nieprzeznaczone do przesłania</string>
+  <string name="unmarking_as_not_for_upload">Oznacz jako nieprzeznaczone do przesłania</string>
   <string name="show_already_actioned_pictures">Pokaż już wykonane zdjęcia</string>
   <string name="hiding_already_actioned_pictures">Ukrywanie już wykonanych zdjęć</string>
   <string name="no_more_images_found">Nie znaleziono więcej obrazów</string>
@@ -744,4 +758,5 @@
   <string name="full_screen_mode_features_info">Przesuń szybko i długo, aby wykonać następujące czynności: \n- Lewo/Prawo: Przejdź do poprzedniego/następnego \n- Góra: Wybierz\n- Dół: Oznacz jako nieprzeznaczone do przesłania.</string>
   <string name="set_up_avatar_toast_string">Aby skonfigurować swojego awatara rankingu, dotknij \'Ustaw jako awatar\' w menu z trzema kropkami dowolnego obrazu.</string>
   <string name="similar_coordinate_description_auto_set">Współrzędne nie są dokładnymi współrzędnymi, ale osoba, która przesłała to zdjęcie, uważa, że są wystarczająco blisko.</string>
+  <string name="unable_to_share_upload_item">Nie można udostępnić tego elementu</string>
 </resources>
