@@ -668,7 +668,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="leaderboard_nearby">Nearby</string>
   <string name="leaderboard_used">Used</string>
   <string name="leaderboard_my_rank_button_text">My Rank</string>
-  <string name="map_attribution" translatable="false"><![CDATA[&#169; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> &#169; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> <a href="https://www.mapbox.com/map-feedback/">Improve this map</a>]]></string>
+  <string name="map_attribution" translatable="false"><![CDATA[&#169; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>]]></string>
   <string name="limited_connection_enabled">Limited connection mode enabled!</string>
   <string name="limited_connection_disabled">Limited connection mode disabled. Pending uploads will resume now.</string>
   <string name="limited_connection_mode">Limited Connection Mode</string>

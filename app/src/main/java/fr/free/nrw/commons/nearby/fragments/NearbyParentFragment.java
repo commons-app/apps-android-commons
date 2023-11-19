@@ -4,7 +4,6 @@ import static fr.free.nrw.commons.location.LocationServiceManager.LocationChange
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
-import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
 import android.Manifest;
@@ -17,9 +16,13 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -53,6 +56,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -67,12 +71,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding3.appcompat.RxSearchView;
-import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.annotations.Polygon;
-import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -105,6 +106,7 @@ import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter;
 import fr.free.nrw.commons.nearby.NearbyFilterState;
 import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.nearby.RotationGestureOverlay;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.fragments.AdvanceQueryFragment.Callback;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
@@ -134,6 +136,19 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import kotlin.Unit;
 import org.jetbrains.annotations.NotNull;
+import org.osmdroid.tileprovider.MapTileProviderBasic;
+import org.osmdroid.tileprovider.tilesource.ITileSource;
+import org.osmdroid.tileprovider.tilesource.XYTileSource;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.util.constants.GeoConstants;
+import org.osmdroid.views.CustomZoomButtonsController;
+import org.osmdroid.views.overlay.ItemizedIconOverlay.OnItemGestureListener;
+import org.osmdroid.views.overlay.ItemizedOverlayWithFocus;
+import org.osmdroid.views.overlay.Overlay;
+import org.osmdroid.views.overlay.OverlayItem;
+import org.osmdroid.views.overlay.ScaleBarOverlay;
+import org.osmdroid.views.overlay.ScaleDiskOverlay;
+import org.osmdroid.views.overlay.TilesOverlay;
 import timber.log.Timber;
 
 
@@ -174,6 +189,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @BindView(R.id.checkbox_tri_states) CheckBoxTriStates checkBoxTriStates;
     @BindView(R.id.map_view)
     MapView mapView;
+    @BindView(R.id.map)
+    org.osmdroid.views.MapView mMapView;
+    @BindView(R.id.compassBg)
+    LinearLayout compassBg;
+    @BindView(R.id.compassArrow)
+    ImageView compassArrow;
     @BindView(R.id.rv_nearby_list)
     RecyclerView rvNearbyList;
     @BindView(R.id.no_results_message) TextView noResultsView;
@@ -357,6 +378,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             rlContainerWLMMonthMessage.setVisibility(View.GONE);
         }
 
+        compassBg.setOnClickListener(v -> {
+            mMapView.getController().animateTo(null,null,600L,0f);
+            compassBg.setVisibility(View.INVISIBLE);
+            compassArrow.setRotation(0);
+        });
+
         cameraMoveListener= () -> presenter.onCameraMove(mapBox.getCameraPosition().target);
         addCheckBoxCallback();
         presenter.attachView(this);
@@ -364,6 +391,56 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         recenterToUserLocation = false;
         initRvNearbyList();
         initThemePreferences();
+
+        org.osmdroid.config.Configuration.getInstance().load(this.getContext(),PreferenceManager.getDefaultSharedPreferences(this.getContext()));
+        mMapView.setTilesScaledToDpi(true);
+        final GeoPoint intialGeoPoint;
+        if(applicationKvStore.getString("LastLocation")!=null) { // Checking for last searched location
+            String[] locationLatLng = applicationKvStore.getString("LastLocation").split(",");
+            intialGeoPoint = new GeoPoint(Double.valueOf(locationLatLng[0]),Double.valueOf(locationLatLng[1]));
+        }else {
+            intialGeoPoint = new GeoPoint(51.50550,-0.07520);
+        }
+        ScaleBarOverlay scaleBarOverlay = new ScaleBarOverlay(mMapView);
+        scaleBarOverlay.setScaleBarOffset(15,25);
+        Paint barPaint = new Paint();
+        barPaint.setARGB(200,255,250,250);
+        scaleBarOverlay.setBackgroundPaint(barPaint);
+        scaleBarOverlay.enableScaleBar();
+        mMapView.getOverlays().add(scaleBarOverlay);
+        mMapView.getController().setCenter(intialGeoPoint);
+        mMapView.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.NEVER);
+        mMapView.getController().setZoom(ZOOM_LEVEL);
+        MapTileProviderBasic tileProvider = new MapTileProviderBasic(this.getContext());
+        ITileSource tileSource = new XYTileSource(
+            "FietsRegionaal",
+            3,
+            18,
+            256,
+            ".png",
+            new String[]{"http://overlay.openstreetmap.nl/openfietskaart-rcn/"}
+        );
+        tileProvider.setTileSource(tileSource);
+        tileProvider.getTileRequestCompleteHandlers().add(mMapView.getTileRequestCompleteHandler());
+        TilesOverlay tilesOverlay = new TilesOverlay(tileProvider, this.getContext());
+        tilesOverlay.setLoadingBackgroundColor(Color.TRANSPARENT);
+        mMapView.getOverlays().add(tilesOverlay);
+
+        RotationGestureOverlay rotationGestureOverlay = new RotationGestureOverlay(mMapView,compassArrow,compassBg);
+        rotationGestureOverlay.setEnabled(true);
+        mMapView.setMultiTouchControls(true);
+        mMapView.getOverlays().add(rotationGestureOverlay);
+        initViews();
+        presenter.setActionListeners(applicationKvStore);
+        initNearbyFilter();
+        if(nearbyParentFragmentInstanceReadyCallback!=null){
+            nearbyParentFragmentInstanceReadyCallback.onReady();
+        }
+        performMapReadyActions();
+        recenterMarkerToPosition(intialGeoPoint);
+        onResume();
+
+        //TODO Remove MapBox Code
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(mapBoxMap -> {
             mapBox =mapBoxMap;
@@ -414,8 +491,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             });
         });
 
-        tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution)));
-        tvAttribution.setMovementMethod(LinkMovementMethod.getInstance());
+       tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution)));
+       tvAttribution.setMovementMethod(LinkMovementMethod.getInstance());
 
         btnAdvancedOptions.setOnClickListener(v -> {
             searchView.clearFocus();
@@ -493,20 +570,20 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void performMapReadyActions() {
-        if (((MainActivity)getActivity()).activeFragment == ActiveFragment.NEARBY && isMapBoxReady) {
+        if (((MainActivity)getActivity()).activeFragment == ActiveFragment.NEARBY) {
             if(!applicationKvStore.getBoolean("doNotAskForLocationPermission", false) ||
                 PermissionUtils.hasPermission(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION})){
                 checkPermissionsAndPerformAction();
             }else{
                 isPermissionDenied = true;
-                addOnCameraMoveListener();
+                //TODO
+               // addOnCameraMoveListener();
             }
         }
     }
 
     private void locationPermissionGranted() {
         isPermissionDenied = false;
-
         applicationKvStore.putBoolean("doNotAskForLocationPermission", false);
         lastKnownLocation = locationManager.getLastLocation();
         fr.free.nrw.commons.location.LatLng target=lastFocusLocation;
@@ -518,7 +595,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 .target(LocationUtils.commonsLatLngToMapBoxLatLng(target)) // Sets the new camera position
                 .zoom(ZOOM_LEVEL) // Same zoom level
                 .build();
-            mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
+            //TODO
+            if(target != null){
+            GeoPoint targetP = new GeoPoint(target.getLatitude(),target.getLongitude());
+            recenterMarkerToPosition(targetP);}
+           // mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
         }
         else if(locationManager.isGPSProviderEnabled()||locationManager.isNetworkProviderEnabled()){
             locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
@@ -530,13 +611,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
         presenter.onMapReady();
         registerUnregisterLocationListener(false);
-        addOnCameraMoveListener();
+        //addOnCameraMoveListener();
     }
 
     @Override
     public void onResume() {
         super.onResume();
         mapView.onResume();
+        mMapView.onResume();
         presenter.attachView(this);
         registerNetworkReceiver();
         if (isResumed() && ((MainActivity)getActivity()).activeFragment == ActiveFragment.NEARBY) {
@@ -606,6 +688,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void onPause() {
         super.onPause();
         mapView.onPause();
+        mMapView.onPause();
         compositeDisposable.clear();
         presenter.detachView();
         registerUnregisterLocationListener(true);
@@ -1034,15 +1117,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void centerMapToPosition(fr.free.nrw.commons.location.LatLng searchLatLng) {
-        final CameraPosition cameraPosition = mapBox.getCameraPosition();
-        if (null != searchLatLng && !(
-            cameraPosition.target.getLatitude() == searchLatLng.getLatitude()
-                && cameraPosition.target.getLongitude() == searchLatLng.getLongitude())) {
-            final CameraPosition position = new CameraPosition.Builder()
-                .target(LocationUtils.commonsLatLngToMapBoxLatLng(searchLatLng))
-                .zoom(ZOOM_LEVEL) // Same zoom level
-                .build();
-            mapBox.setCameraPosition(position);
+        if (null != searchLatLng && !(mMapView.getMapCenter().getLatitude() == searchLatLng.getLatitude() && mMapView.getMapCenter().getLongitude() == searchLatLng.getLongitude())){
+            recenterMarkerToPosition(new GeoPoint(searchLatLng.getLatitude(),searchLatLng.getLongitude()));
         }
     }
 
@@ -1440,30 +1516,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void addCurrentLocationMarker(final fr.free.nrw.commons.location.LatLng curLatLng) {
         if (null != curLatLng && !isPermissionDenied && locationManager.isGPSProviderEnabled()) {
             ExecutorUtils.get().submit(() -> {
-                mapView.post(() -> removeCurrentLocationMarker());
                 Timber.d("Adds current location marker");
-
-                final Icon icon = IconFactory.getInstance(getContext())
-                        .fromResource(R.drawable.current_location_marker);
-
-                final MarkerOptions currentLocationMarkerOptions = new MarkerOptions()
-                        .position(new LatLng(curLatLng.getLatitude(),
-                                curLatLng.getLongitude()));
-                currentLocationMarkerOptions.setIcon(icon); // Set custom icon
-                mapView.post(
-                    () -> currentLocationMarker = mapBox.addMarker(currentLocationMarkerOptions));
-
-                final List<LatLng> circle = UiUtils
-                        .createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
-                                curLatLng.getAccuracy() * 2, 100);
-
-                final PolygonOptions currentLocationPolygonOptions = new PolygonOptions()
-                        .addAll(circle)
-                        .strokeColor(getResources().getColor(R.color.current_marker_stroke))
-                        .fillColor(getResources().getColor(R.color.current_marker_fill));
-                mapView.post(
-                    () -> currentLocationPolygon = mapBox
-                        .addPolygon(currentLocationPolygonOptions));
+                recenterMarkerToPosition(new GeoPoint(curLatLng.getLatitude(),curLatLng.getLongitude()));
             });
         } else {
             Timber.d("not adding current location marker..current location is null");
@@ -1505,12 +1559,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void updateMapMarkers(final List<NearbyBaseMarker> nearbyBaseMarkers, final Marker selectedMarker) {
-        if(mapBox!=null && isMapBoxReady){
-            mapBox.clear();
-            addNearbyMarkersToMapBoxMap(nearbyBaseMarkers, selectedMarker);
-            presenter.updateMapMarkersToController(nearbyBaseMarkers);
-            // Re-enable mapbox gestures on custom location markers load
-            mapBox.getUiSettings().setAllGesturesEnabled(true);
+        if (mMapView != null){
+            addNearbyMarkersToMapBoxMap(nearbyBaseMarkers,selectedMarker);
         }
     }
 
@@ -1611,39 +1661,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * @param curLatLng current location
      */
     public void updateMarker(final boolean isBookmarked, final Place place, @Nullable final fr.free.nrw.commons.location.LatLng curLatLng) {
-        VectorDrawableCompat vectorDrawable = VectorDrawableCompat.create(
-            getContext().getResources(), getIconFor(place, isBookmarked), getContext().getTheme());
-
-        if(curLatLng != null) {
-            for (NearbyBaseMarker nearbyMarker : allMarkers) {
-                if (nearbyMarker.getMarker().getTitle() != null && nearbyMarker.getMarker().getTitle().equals(place.getName())) {
-
-                    final Bitmap icon = UiUtils.getBitmap(vectorDrawable);
-
-                    final String distance = formatDistanceBetween(curLatLng, place.location);
-                    place.setDistance(distance);
-
-                    final NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
-                    nearbyBaseMarker.title(place.name);
-                    nearbyBaseMarker.position(
-                        new com.mapbox.mapboxsdk.geometry.LatLng(
-                            place.location.getLatitude(),
-                            place.location.getLongitude()));
-                    nearbyBaseMarker.place(place);
-                    nearbyBaseMarker.icon(IconFactory.getInstance(getContext())
-                        .fromBitmap(icon));
-                    nearbyMarker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
-                    filteredMarkers.add(nearbyBaseMarker);
-                }
-            }
-        } else {
-            for (Marker marker : mapBox.getMarkers()) {
-                if (marker.getTitle() != null && marker.getTitle().equals(place.getName())) {
-
-                    final Bitmap icon = UiUtils.getBitmap(vectorDrawable);
-                    marker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
-                }
-            }
+        if(curLatLng != null){
+        addMarkerToMap(place,isBookmarked);
         }
     }
 
@@ -1667,6 +1686,75 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
+     * Adds a marker representing a place to the map with optional bookmark icon.
+     *
+     * @param place        The Place object containing information about the location.
+     * @param isBookMarked A Boolean flag indicating whether the place is bookmarked or not.
+     */
+    private void addMarkerToMap(Place place,Boolean isBookMarked){
+        ArrayList<OverlayItem> items = new ArrayList<>();
+        Drawable icon = ContextCompat.getDrawable(getContext(),getIconFor(place,isBookMarked));
+        GeoPoint point = new GeoPoint(place.location.getLatitude(),place.location.getLongitude());
+        OverlayItem item = new OverlayItem(place.name,null,point);
+        item.setMarker(icon);
+        items.add(item);
+        ItemizedOverlayWithFocus overlay =  new ItemizedOverlayWithFocus(items,
+            new OnItemGestureListener<OverlayItem>() {
+                @Override
+                public boolean onItemSingleTapUp(int index, OverlayItem item) {
+                    passInfoToSheet(place);
+                    hideBottomSheet();
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    return true;
+                }
+
+                @Override
+                public boolean onItemLongPress(int index, OverlayItem item) {
+                    return false;
+                }
+            },getContext());
+
+        overlay.setFocusItemsOnTap(true);
+        mMapView.getOverlays().add(overlay); // Add the overlay to the map
+    }
+
+    /**
+     * Adds multiple markers representing places to the map and handles item gestures.
+     *
+     * @param places The list of Place objects containing information about the locations.
+     */
+    private void addMarkersToMap(ArrayList<Place> places){
+        Boolean isBookMarked = false;
+        ArrayList<OverlayItem> items = new ArrayList<>();
+        clearAllMarkers();
+        for (int i = 0;i<places.size();i++){
+            Drawable icon = ContextCompat.getDrawable(getContext(),getIconFor(places.get(i),isBookMarked));
+            GeoPoint point = new GeoPoint(places.get(i).location.getLatitude(),places.get(i).location.getLongitude());
+            OverlayItem item = new OverlayItem(places.get(i).name,null,point);
+            item.setMarker(icon);
+            items.add(item);
+        }
+        ItemizedOverlayWithFocus overlay =  new ItemizedOverlayWithFocus(items,
+            new OnItemGestureListener<OverlayItem>() {
+                @Override
+                public boolean onItemSingleTapUp(int index, OverlayItem item) {
+                    final Place place = places.get(index);
+                    passInfoToSheet(place);
+                    hideBottomSheet();
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    return true;
+                }
+                @Override
+                public boolean onItemLongPress(int index, OverlayItem item) {
+                    return false;
+                }
+            },getContext());
+
+        overlay.setFocusItemsOnTap(true);
+        mMapView.getOverlays().add(overlay);
+    }
+
+    /**
      * Removes all markers except current location marker, an icon has been used
      * but it is transparent more than grey(as the name of the icon might suggest)
      * since grey icon may lead the users to believe that it is disabled or prohibited contribution
@@ -1685,28 +1773,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void addNearbyMarkersToMapBoxMap(final List<NearbyBaseMarker> nearbyBaseMarkers, final Marker selectedMarker) {
-        if (isMapBoxReady && mapBox != null) {
+        if (mMapView != null){
             allMarkers = new ArrayList<>(nearbyBaseMarkers);
-            mapBox.addMarkers(nearbyBaseMarkers);
-            setMapMarkerActions(selectedMarker);
-            presenter.updateMapMarkersToController(nearbyBaseMarkers);
-        }
-    }
-
-    private void setMapMarkerActions(final Marker selectedMarker) {
-        if (mapBox != null) {
-            mapBox.setOnInfoWindowCloseListener(marker -> {
-                if (marker == selectedMarker) {
-                    presenter.markerUnselected();
-                }
-            });
-
-            mapBox.setOnMarkerClickListener(marker -> {
-                if (marker instanceof NearbyMarker) {
-                    presenter.markerSelected(marker);
-                }
-                return false;
-            });
+            ArrayList<Place> places1 = new ArrayList<>();
+            //TODO Work on bookmarks
+            for (int i =0;i<allMarkers.size();i++){
+                places1.add(allMarkers.get(i).getPlace());
+            }
+            addMarkersToMap(places1);
         }
     }
 
@@ -1721,31 +1795,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             return;
         }
         addCurrentLocationMarker(curLatLng);
-        final CameraPosition position;
-
-        if (ViewUtil.isPortrait(getActivity())) {
-            position = new CameraPosition.Builder()
-                    .target(isListBottomSheetExpanded() ?
-                            new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
-                                    curLatLng.getLongitude())
-                            : new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
-                    .zoom(isListBottomSheetExpanded() ?
-                            ZOOM_LEVEL
-                            : mapBox.getCameraPosition().zoom) // Same zoom level
-                    .build();
-        } else {
-            position = new CameraPosition.Builder()
-                    .target(isListBottomSheetExpanded() ?
-                            new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
-                                    curLatLng.getLongitude())
-                            : new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
-                    .zoom(isListBottomSheetExpanded() ?
-                            ZOOM_LEVEL
-                            : mapBox.getCameraPosition().zoom) // Same zoom level
-                    .build();
-        }
-
-        mapBox.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
+        mMapView.getController().animateTo(new GeoPoint(curLatLng.getLatitude(),curLatLng.getLongitude()));
     }
 
     @Override
@@ -1956,6 +2006,73 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private void startTheMap() {
         mapView.onStart();
         performMapReadyActions();
+    }
+
+    /**
+     * Clears all markers from the map and resets certain map overlays and gestures.
+     * After clearing markers, it re-adds a scale bar overlay and rotation gesture overlay to the map.
+     */
+    private void clearAllMarkers(){
+        mMapView.getOverlayManager().clear() ;
+        mMapView.invalidate();
+
+        ScaleBarOverlay scaleBarOverlay = new ScaleBarOverlay(mMapView);
+        scaleBarOverlay.setScaleBarOffset(15,25);
+        Paint barPaint = new Paint();
+        barPaint.setARGB(200,255,250,250);
+        scaleBarOverlay.setBackgroundPaint(barPaint);
+        scaleBarOverlay.enableScaleBar();
+        mMapView.getOverlays().add(scaleBarOverlay);
+        RotationGestureOverlay rotationGestureOverlay = new RotationGestureOverlay(mMapView,compassArrow,compassBg);
+        rotationGestureOverlay.setEnabled(true);
+        mMapView.setMultiTouchControls(true);
+        mMapView.getOverlays().add(rotationGestureOverlay);
+    }
+
+    /**
+     * Recenters the map to the Center and adds a scale disk overlay and a marker at the position.
+     *
+     * @param geoPoint The GeoPoint representing the new center position of the map.
+     */
+    private void recenterMarkerToPosition(GeoPoint geoPoint){
+        if(geoPoint != null) {
+            mMapView.getController().setCenter(geoPoint);
+            List<Overlay> overlays = mMapView.getOverlays();
+            for (int i = 0; i < overlays.size(); i++) {
+                if (overlays.get(i) instanceof org.osmdroid.views.overlay.Marker) {
+                    mMapView.getOverlays().remove(i);
+                }
+                else if (overlays.get(i) instanceof ScaleDiskOverlay) {
+                    mMapView.getOverlays().remove(i);
+                }
+            }
+            ScaleDiskOverlay diskOverlay =
+                new ScaleDiskOverlay(this.getContext(),
+                    geoPoint, 2000, GeoConstants.UnitOfMeasure.foot);
+            Paint circlePaint = new Paint();
+            circlePaint.setColor(Color.rgb(128, 128, 128));
+            circlePaint.setStyle(Paint.Style.STROKE);
+            circlePaint.setStrokeWidth(2f);
+            diskOverlay.setCirclePaint2(circlePaint);
+            Paint diskPaint = new Paint();
+            diskPaint.setColor(Color.argb(40, 128, 128, 128));
+            diskPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+            diskOverlay.setCirclePaint1(diskPaint);
+            diskOverlay.setDisplaySizeMin(900);
+            diskOverlay.setDisplaySizeMax(1700);
+            mMapView.getOverlays().add(diskOverlay);
+
+            org.osmdroid.views.overlay.Marker startMarker = new org.osmdroid.views.overlay.Marker(
+                mMapView);
+            startMarker.setPosition(geoPoint);
+            startMarker.setAnchor(org.osmdroid.views.overlay.Marker.ANCHOR_CENTER,
+                org.osmdroid.views.overlay.Marker.ANCHOR_BOTTOM);
+            startMarker.setIcon(
+                ContextCompat.getDrawable(this.getContext(), R.drawable.current_location_marker));
+            startMarker.setTitle("Your Location");
+            startMarker.setTextLabelFontSize(24);
+            mMapView.getOverlays().add(startMarker);
+        }
     }
 
     public interface  NearbyParentFragmentInstanceReadyCallback{

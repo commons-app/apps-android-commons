@@ -24,6 +24,7 @@ import fr.free.nrw.commons.nearby.NearbyFilterState;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
+import org.osmdroid.util.GeoPoint;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.CUSTOM_QUERY;
@@ -243,6 +244,7 @@ public class NearbyParentFragmentPresenter
             nearbyParentFragmentView.setProgressBarVisibility(false);
             nearbyParentFragmentView.updateListFragment(nearbyPlacesInfo.placeList);
             handleCenteringTaskIfAny();
+           //TODO
             nearbyParentFragmentView.centerMapToPosition(nearbyPlacesInfo.searchLatLng);
         }
     }
