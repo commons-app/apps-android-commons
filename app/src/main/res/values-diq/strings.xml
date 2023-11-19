@@ -289,6 +289,9 @@
   <string name="provider_bookmarks">Nişan</string>
   <string name="provider_bookmarks_location">Nişani</string>
   <string name="no_categories_selected">Kategoriyê ke nêweçiniyê</string>
+  <string name="back_button_warning">Barkerdışi bıtexelne</string>
+  <string name="option_allow">Mısade bıde</string>
+  <string name="option_dismiss">Red ke</string>
   <string name="nominate_for_deletion_done">Temam</string>
   <string name="review_thanks_yes_button_text" fuzzy="true">Eya, çıra mebo</string>
   <string name="review_thanks_no_button_text" fuzzy="true">Resımo bahdoyên</string>

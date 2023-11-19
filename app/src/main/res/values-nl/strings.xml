@@ -2,6 +2,7 @@
 <!-- Authors:
 * A67-A67
 * Bouman4
+* Ciell
 * Dutchy45
 * Elroy
 * Festina90
@@ -32,12 +33,12 @@
   <string name="submit">Verzenden</string>
   <string name="add_another_description">Nog een beschrijving toevoegen</string>
   <string name="add_new_contribution">Nieuwe bijdrage toevoegen</string>
-  <string name="add_contribution_from_camera">Bijdrage van de camera toevoegen</string>
-  <string name="add_contribution_from_photos">Bijdrage uit Foto\'s toevoegen</string>
-  <string name="add_contribution_from_contributions_gallery">Bijdrage uit galerij met eerdere bijdragen toevoegen</string>
+  <string name="add_contribution_from_camera">Bestand vanaf camera delen</string>
+  <string name="add_contribution_from_photos">Bestand uit foto\'s delen</string>
+  <string name="add_contribution_from_contributions_gallery">Bestand uit galerij met eerdere bijdragen toevoegen</string>
   <string name="show_captions">Bijschriften</string>
   <string name="row_item_language_description">Taalbeschrijving</string>
-  <string name="row_item_caption">Bijschrift</string>
+  <string name="row_item_caption">Titel</string>
   <string name="show_captions_description">Beschrijving</string>
   <string name="nearby_row_image">Afbeelding</string>
   <string name="nearby_all">Alle</string>
@@ -86,7 +87,7 @@
   <string name="upload_in_progress">Aan het uploaden</string>
   <string name="username">Gebruikersnaam</string>
   <string name="password">Wachtwoord</string>
-  <string name="login_credential">Aanmelden bij uw Commons Beta-account</string>
+  <string name="login_credential">Aanmelden met uw Commons Beta-account</string>
   <string name="login">Aanmelden</string>
   <string name="forgot_password">Wachtwoord vergeten?</string>
   <string name="signup">Inschrijven</string>
@@ -415,7 +416,7 @@
   <string name="provider_bookmarks">Bladwijzers</string>
   <string name="bookmark_empty">U hebt geen bladwijzers toegevoegd</string>
   <string name="provider_bookmarks_location">Bladwijzers</string>
-  <string name="log_collection_started">Logboekverzameling is gestart. Start de app opnieuw op, voer de actie uit die u wilt loggen en tik vervolgens nogmaals op \'Logboekbestand verzenden\'</string>
+  <string name="log_collection_started">Logboekverzameling is gestart. Start de app opnieuw op, verricht de handeling die u wilt loggen en tik dan nogmaals op ‘Logboekbestand verzenden’</string>
   <string name="deletion_reason_uploaded_by_mistake">Ik heb het per ongeluk geüpload</string>
   <string name="deletion_reason_publicly_visible">Ik wist niet dat het publiekelijk zichtbaar zou zijn</string>
   <string name="deletion_reason_bad_for_my_privacy">Ik realiseerde me dat het slecht is voor mijn privacy.</string>
@@ -543,8 +544,8 @@
   <string name="category_edit_helper_show_edit_title">Categorie-update</string>
   <string name="category_edit_helper_show_edit_title_success">Afgerond</string>
   <plurals name="category_edit_helper_show_edit_message_if">
-    <item quantity="one">Categorie %1$s is toegevoegd.</item>
-    <item quantity="other">Categorieën %1$s zijn toegevoegd.</item>
+    <item quantity="one">Categorie %1$s wordt toegevoegd.</item>
+    <item quantity="other">Categorieën %1$s worden toegevoegd.</item>
   </plurals>
   <string name="category_edit_helper_edit_message_else">Kan geen categorieën toevoegen.</string>
   <string name="category_edit_button_text">Categorieën bijwerken</string>
@@ -560,9 +561,9 @@
   <string name="description_edit_helper_show_edit_title">Bijwerking beschrijving</string>
   <string name="caption_edit_helper_show_edit_title">Bijwerking bijschrift</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Afgerond</string>
-  <string name="coordinates_edit_helper_show_edit_message">Coördinaten %1$s zijn toegevoegd.</string>
-  <string name="description_edit_helper_show_edit_message">Beschrijvingen zijn toegevoegd.</string>
-  <string name="caption_edit_helper_show_edit_message">Bijschrift is toegevoegd.</string>
+  <string name="coordinates_edit_helper_show_edit_message">Coördinaten %1$s worden toegevoegd.</string>
+  <string name="description_edit_helper_show_edit_message">Beschrijvingen worden toegevoegd.</string>
+  <string name="caption_edit_helper_show_edit_message">Bijschrift wordt toegevoegd.</string>
   <string name="coordinates_edit_helper_edit_message_else">Kan geen coördinaten toevoegen.</string>
   <string name="description_edit_helper_edit_message_else">Kon beschrijvingen niet toevoegen.</string>
   <string name="caption_edit_helper_edit_message_else">Kon bijschrift niet toevoegen.</string>
@@ -594,7 +595,7 @@
   <string name="wallpaper_set_unsuccessfully">Er is iets fout gegaan. Kan de achtergrond niet instellen</string>
   <string name="setting_wallpaper_dialog_title">Instellen als achtergrond</string>
   <string name="setting_wallpaper_dialog_message">Wordt ingesteld als achtergrond. Een ogenblik geduld...</string>
-  <string name="theme_default_name">Volgsysteem</string>
+  <string name="theme_default_name">Systeem volgen</string>
   <string name="theme_dark_name">Donker</string>
   <string name="theme_light_name">Licht</string>
   <string name="cannot_open_location_settings">Kan locatie-instellingen niet openen. Schakel locatie handmatig in</string>
@@ -751,6 +752,7 @@
   <string name="similar_coordinate_description_auto_set">De coördinaten zijn niet precies, maar degene die deze foto heeft geüpload vindt dat ze redelijk in de buurt komen.</string>
   <string name="storage_permissions_denied">Opslagtoestemming geweigerd</string>
   <string name="unable_to_share_upload_item">Kan dit item niet delen</string>
+  <string name="permissions_are_required_for_functionality">Voor functionaliteit zijn toestemmingen vereist</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d afbeelding geselecteerd</item>
     <item quantity="other">%d afbeeldingen geselecteerd</item>

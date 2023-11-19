@@ -34,6 +34,7 @@
 * Madamebiblio
 * MarcoAurelio
 * MarionaDSR
+* McDutchie
 * Miguel2706
 * Mirzali
 * No se
@@ -528,7 +529,7 @@
   <string name="no_categories_found">No se encontró ninguna categoría</string>
   <string name="no_depiction_found">No se encontraron representaciones</string>
   <string name="upload_cancelled">Se canceló la carga</string>
-  <string name="previous_image_title_description_not_found">No hay datos sobre el título o la descripción anteriores de la imagen</string>
+  <string name="previous_image_title_description_not_found">No hay datos sobre el título o la descripción de la imagen anterior</string>
   <string name="dialog_box_text_nomination">¿Por qué debe borrarse %1$s?</string>
   <string name="review_is_uploaded_by">%1$s fue subida por: %2$s</string>
   <string name="default_description_language">Idioma por defecto de la descripción</string>
@@ -614,7 +615,7 @@
   <string name="missing_category">- Añadir las categorias a esta imagen para mejorar su usabilidad.</string>
   <string name="missing_article">- Añadir esta imagen al artículo relacionado de Wikipedia que no tiene imagen.</string>
   <string name="add_picture_to_wikipedia_article_title">Añadir la imagen a Wikipedia</string>
-  <string name="add_picture_to_wikipedia_article_desc">¿Quieres añadir esta imagen al artículo de %1$s de Wikipedia?</string>
+  <string name="add_picture_to_wikipedia_article_desc">¿Quieres añadir esta imagen al artículo de Wikipedia en %1$s?</string>
   <string name="confirm">Confirmar</string>
   <string name="instructions_title">Instrucciones</string>
   <string name="wikipedia_instructions_step_1">1. Usa el siguiente wikitexto:</string>

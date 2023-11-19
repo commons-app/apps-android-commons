@@ -515,6 +515,9 @@
     <item quantity="other">題材 %1$s が追加されました。</item>
   </plurals>
   <string name="depictions_edit_helper_edit_message_else">題材を追加できませんでした。</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">成功</string>
+  <string name="coordinates_edit_helper_show_edit_message">座標%1$sは追加されました。</string>
+  <string name="description_edit_helper_show_edit_message">説明が追加されました。</string>
   <string name="share_image_via">画像をシェア</string>
   <string name="no_achievements_yet">%sはまだ投稿をしたことがありません</string>
   <string name="account_created">アカウントを作成しました</string>
@@ -628,6 +631,7 @@
   <string name="api_level">APIレベル</string>
   <string name="android_version">アンドロイドのバージョン</string>
   <string name="device_manufacturer">デバイスの製造元</string>
+  <string name="device_model">デバイスモデル</string>
   <string name="device_name">デバイス名</string>
   <string name="network_type">ネットワークの種類</string>
   <string name="thanks_feedback">フィードバックをありがとうございました</string>
@@ -644,4 +648,8 @@
   <string name="report_user">この利用者を報告</string>
   <string name="report_content">このコンテンツを報告する</string>
   <string name="set_up_avatar_toast_string">リーダーボードのアバターを設定するには、任意の画像の 3 つのドット メニューで [アバターとして設定] をタップします。</string>
+  <string name="permissions_are_required_for_functionality">この機能には権限が必要です</string>
+  <plurals name="custom_picker_images_selected_title_appendix">
+    <item quantity="other">%d件の画像が選択されました</item>
+  </plurals>
 </resources>

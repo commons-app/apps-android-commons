@@ -10,6 +10,7 @@
 * LNDDYL
 * Liuxinyu970226
 * Madhurgupta10
+* McDutchie
 * Reke
 * S099001
 * Simon Shek
@@ -692,7 +693,7 @@
   <string name="welcome_custom_selector_ok">棒極了</string>
   <string name="custom_selector_already_uploaded_image_text">此圖片已上傳到維基共享資源。</string>
   <string name="place_state_wlm">維基愛古蹟</string>
-  <string name="wlm_upload_info">此圖片會進入2021年維基愛古蹟競賽</string>
+  <string name="wlm_upload_info">此圖片會加入到維基愛古蹟競賽</string>
   <string name="display_monuments">顯示古蹟景點</string>
   <string name="wlm_month_message">本月有「維基愛古蹟」活動！</string>
   <string name="learn_more">了解更多</string>
@@ -752,6 +753,7 @@
   <string name="similar_coordinate_description_auto_set">座標雖不準確，但上傳這張圖片的人認為已經足夠接近了。</string>
   <string name="storage_permissions_denied">儲存裝置權限被拒絕</string>
   <string name="unable_to_share_upload_item">無法分享此項目</string>
+  <string name="permissions_are_required_for_functionality">功能需要權限</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">已選 %d 張圖片</item>
     <item quantity="other">已選 %d 張圖片</item>

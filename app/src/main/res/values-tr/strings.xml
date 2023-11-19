@@ -12,6 +12,7 @@
 * JackUKElliott
 * Joseph
 * McAang
+* McDutchie
 * Mirzali
 * MrSchipunov
 * MuratTheTurkish
@@ -690,7 +691,7 @@
   <string name="custom_selector_info_text2">Soldaki resimden farklı olarak, sağdaki resimde zaten yüklendiğini belirten Commons logosu var.\n Resim ön izlemesi için dokunup basılı tutun.</string>
   <string name="welcome_custom_selector_ok">Harika</string>
   <string name="custom_selector_already_uploaded_image_text">Bu resim zaten Commons\'a yüklendi.</string>
-  <string name="wlm_upload_info">Bu resim Viki, Anıtları Seviyor 2021 yarışmasına katılacaktır</string>
+  <string name="wlm_upload_info" fuzzy="true">Bu resim Viki, Anıtları Seviyor yarışmasına katılacaktır</string>
   <string name="display_monuments">Anıtları göster</string>
   <string name="wlm_month_message">Viki, Anıtları Seviyor ayı!</string>
   <string name="learn_more">DAHA FAZLA BİLGİ EDİN</string>

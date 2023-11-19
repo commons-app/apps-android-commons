@@ -230,6 +230,7 @@
   <string name="about_rate_us">Оценете ни!</string>
   <string name="about_faq">ЧЗВ</string>
   <string name="no_internet">Няма връзка с интернет</string>
+  <string name="about_translate">Превеждане</string>
   <string name="about_translate_title">Езици</string>
   <string name="about_translate_cancel">Отказ</string>
   <string name="showcase_view_needs_photo">Това място има нужда от снимка.</string>

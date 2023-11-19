@@ -698,7 +698,7 @@
   <string name="title_page_bookmarks_items">פריטים</string>
   <string name="custom_selector_title">בורר מותאם אישית</string>
   <string name="custom_selector_empty_text">אין תמונות</string>
-  <string name="done">בוצע</string>
+  <string name="done">סיום</string>
   <string name="back">חזרה</string>
   <string name="welcome_custom_picture_selector_text">ברוך בואך לבוחר התמונות המותאמות</string>
   <string name="custom_selector_info_text1">הבורר מציג לך אילו תמונות כבר העלית לוויקישיתוף.</string>
@@ -706,7 +706,7 @@
   <string name="welcome_custom_selector_ok">מגניב</string>
   <string name="custom_selector_already_uploaded_image_text">התמונה הזאת כבר הועלתה לוויקישיתוף.</string>
   <string name="place_state_wlm">ויקיפדיה אוהבת אתרי מורשת</string>
-  <string name="wlm_upload_info">התמונה הזאת תוכנס לתחרות ויקי אוהבת אתרי מורשת 2021</string>
+  <string name="wlm_upload_info">התמונה הזאת תוכנס לתחרות ויקי אוהבת אתרי מורשת</string>
   <string name="display_monuments">הצגת אתרי מורשת</string>
   <string name="wlm_month_message">זהו חודש ויקי אוהבת אתרי מורשת!</string>
   <string name="learn_more">מידע נוסף</string>
@@ -766,6 +766,7 @@
   <string name="similar_coordinate_description_auto_set">נקודות הציון אינן מדויקות, אבל האדם שהעלה את התמונה הזאת חושב שהן קרובות מספיק.</string>
   <string name="storage_permissions_denied">הרשאת האחסון נדחתה</string>
   <string name="unable_to_share_upload_item">לא ניתן לשתף את הפריט הזה</string>
+  <string name="permissions_are_required_for_functionality">צריך הרשאות כדי להשתמש בזה</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">נבחרה תמונה אחת</item>
     <item quantity="two">נבחרו שתי תמונות</item>
