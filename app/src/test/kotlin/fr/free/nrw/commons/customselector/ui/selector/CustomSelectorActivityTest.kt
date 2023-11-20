@@ -7,8 +7,10 @@ import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter
+import kotlinx.android.synthetic.main.bottom_sheet_nearby.bottom_sheet
 import org.junit.Before
 import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.runner.RunWith
 import org.mockito.Mockito
@@ -18,6 +20,7 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.wikipedia.AppAdapter
+import java.lang.reflect.Field
 import java.lang.reflect.Method
 
 /**
@@ -209,5 +212,69 @@ class CustomSelectorActivityTest {
         )
         method.isAccessible = true
         method.invoke(activity)
+    }
+
+    /**
+     * Test displayUploadLimitWarning Function.
+     */
+    @Test
+    @Throws(Exception::class)
+    fun testDisplayUploadLimitWarning() {
+        val method: Method = CustomSelectorActivity::class.java.getDeclaredMethod(
+            "displayUploadLimitWarning"
+        )
+        method.isAccessible = true
+        method.invoke(activity)
+    }
+
+    /**
+     * Logic tests for the upload limit functionality.
+     */
+    @Test
+    @Throws(Exception::class)
+    fun testUploadLimit() {
+        val overLimit: Field =
+            CustomSelectorActivity::class.java.getDeclaredField("uploadLimitExceeded")
+        overLimit.isAccessible = true
+        val exceededBy: Field =
+            CustomSelectorActivity::class.java.getDeclaredField("uploadLimitExceededBy")
+        exceededBy.isAccessible = true
+        val limit: Field =
+            CustomSelectorActivity::class.java.getDeclaredField("uploadLimit")
+        limit.isAccessible = true
+
+        // all tests check integration with not for upload marking
+
+        // test with list size limit
+        for (i in 1..limit.getInt(activity)) {
+            images.add(Image(i.toLong(), i.toString(), uri,
+                "abc/abc", 1, "bucket1"))
+        }
+        activity.onFolderClick(1, "test", 0)
+        activity.onSelectedImagesChanged(images,0)
+        assertEquals(false, overLimit.getBoolean(activity))
+        assertEquals(0, exceededBy.getInt(activity))
+        activity.onSelectedImagesChanged(images, 1)
+        assertEquals(false, overLimit.getBoolean(activity))
+        assertEquals(0, exceededBy.getInt(activity))
+
+        // test with list size limit+1
+        images.add(image)
+        activity.onSelectedImagesChanged(images,0)
+        assertEquals(true, overLimit.getBoolean(activity))
+        assertEquals(1, exceededBy.getInt(activity))
+        activity.onSelectedImagesChanged(images,1)
+        assertEquals(true, overLimit.getBoolean(activity))
+        assertEquals(1, exceededBy.getInt(activity))
+
+        //test with list size 1
+        images.clear()
+        images.add(image)
+        activity.onSelectedImagesChanged(images,0)
+        assertEquals(false, overLimit.getBoolean(activity))
+        assertEquals(0, exceededBy.getInt(activity))
+        activity.onSelectedImagesChanged(images,1)
+        assertEquals(false, overLimit.getBoolean(activity))
+        assertEquals(0, exceededBy.getInt(activity))
     }
 }
