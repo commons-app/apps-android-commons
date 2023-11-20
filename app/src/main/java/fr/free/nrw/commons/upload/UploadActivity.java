@@ -187,6 +187,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         }
         locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
         locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
+        checkStoragePermissions();
     }
 
     private void init() {
@@ -245,12 +246,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        checkStoragePermissions();
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
         presenter.onAttachView(this);
@@ -258,7 +253,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             askUserToLogIn();
         }
         checkBlockStatus();
-        checkStoragePermissions();
     }
 
     /**
