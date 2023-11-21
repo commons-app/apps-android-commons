@@ -24,10 +24,9 @@ import fr.free.nrw.commons.explore.SearchActivity
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
-import org.junit.AfterClass
+import org.junit.After
 import org.junit.Assert
 import org.junit.Before
-import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
@@ -69,24 +68,11 @@ class MediaDetailPagerFragmentUnitTests {
     @Mock
     private lateinit var bitmap: Bitmap
 
-    companion object {
-        @BeforeClass
-        @JvmStatic
-        fun setUpClass() {
-            RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
-            RxJavaPlugins.setNewThreadSchedulerHandler { Schedulers.trampoline() }
-        }
-
-        @AfterClass
-        @JvmStatic
-        fun tearDownClass() {
-            RxAndroidPlugins.reset()
-            RxJavaPlugins.reset()
-        }
-    }
-
     @Before
     fun setUp() {
+        RxAndroidPlugins.setMainThreadSchedulerHandler { Schedulers.trampoline() }
+        RxJavaPlugins.setNewThreadSchedulerHandler { Schedulers.trampoline() }
+        
         MockitoAnnotations.openMocks(this)
 
         context = ApplicationProvider.getApplicationContext()
@@ -99,8 +85,8 @@ class MediaDetailPagerFragmentUnitTests {
 
         val activity = Robolectric.buildActivity(SearchActivity::class.java).create().get()
 
-        fragment = MediaDetailPagerFragment.newInstance(false, true);
-        fragment = MediaDetailPagerFragment.newInstance(false, false);
+        fragment = MediaDetailPagerFragment.newInstance(false, true)
+        fragment = MediaDetailPagerFragment.newInstance(false, false)
         fragmentManager = activity.supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(fragment, null)
@@ -114,6 +100,12 @@ class MediaDetailPagerFragmentUnitTests {
         doReturn(menuItem).`when`(menu).findItem(any())
         doReturn(menuItem).`when`(menuItem).isEnabled = any()
         doReturn(menuItem).`when`(menuItem).isVisible = any()
+    }
+    
+    @After
+    fun tearDown() {
+        RxAndroidPlugins.reset()
+        RxJavaPlugins.reset()
     }
 
     @Test
