@@ -5,6 +5,8 @@ import static fr.free.nrw.commons.Utils.handleWebUrl;
 import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -41,9 +43,16 @@ import fr.free.nrw.commons.utils.DownloadUtils;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.concurrent.Callable;
 import javax.inject.Inject;
 import timber.log.Timber;
 
@@ -372,6 +381,17 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     if (m.getUser() != null) {
                         menu.findItem(R.id.menu_view_user_page).setEnabled(true).setVisible(true);
                     }
+
+                    try {
+                        URL mediaUrl = new URL(m.getImageUrl());
+                        this.handleBackgroundColorMenuItems(
+                            () -> BitmapFactory.decodeStream(mediaUrl.openConnection().getInputStream()),
+                            menu
+                        );
+                    } catch (Exception e) {
+                        Timber.e("Cant detect media transparency");
+                    }
+                    
                     // Initialize bookmark object
                     bookmark = new Bookmark(
                             m.getFilename(),
@@ -420,6 +440,19 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
             }
         }
+    }
+
+    private void handleBackgroundColorMenuItems(Callable<Bitmap> getBitmap, Menu menu) {
+        Observable.fromCallable(
+                getBitmap
+            ).subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(image -> {
+                if (image.hasAlpha()) {
+                    menu.findItem(R.id.menu_view_set_white_background).setVisible(true).setEnabled(true);
+                    menu.findItem(R.id.menu_view_set_black_background).setVisible(true).setEnabled(true);
+                }
+            });
     }
 
     private void updateBookmarkState(MenuItem item) {
