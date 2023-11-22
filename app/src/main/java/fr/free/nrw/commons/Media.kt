@@ -85,10 +85,6 @@ class Media constructor(
      * Example: "Mountains" => false, "CC-BY-SA-2.0" => true
      */
     var categoriesHiddenStatus: Map<String, Boolean> = emptyMap(),
-    /**
-     * Custom background color, useful for images with transparency
-     */
-    var backgroundColor: Int? = null,
 ) : Parcelable {
 
     constructor(
