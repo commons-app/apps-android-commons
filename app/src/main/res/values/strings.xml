@@ -767,6 +767,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="image_selected">Image selected</string>
   <string name="image_marked_as_not_for_upload">Image marked as not for upload</string>
   <string name="menu_view_report">Report</string>
+  <string name="menu_view_set_white_background">Set white background</string>
+  <string name="menu_view_set_black_background">Set black background</string>
   <string name="report_violation">Report violation</string>
   <string name="report_user">Report this user</string>
   <string name="report_content">Report this content</string>

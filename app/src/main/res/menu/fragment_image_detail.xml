@@ -44,7 +44,7 @@ we only want to show it in a very specific case
 -->
     <item
       android:id="@+id/menu_view_set_white_background"
-      android:title="Set White Background"
+      android:title="@string/menu_view_set_white_background"
       android:visible="false"
       android:enabled="false"
       app:showAsAction="never" />
@@ -54,7 +54,7 @@ we only want to show it in a very specific case
 -->
     <item
       android:id="@+id/menu_view_set_black_background"
-      android:title="Set Black Background"
+      android:title="@string/menu_view_set_black_background"
       android:visible="false"
       android:enabled="false"
       app:showAsAction="never" />
