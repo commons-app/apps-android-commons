@@ -19,8 +19,8 @@ import fr.free.nrw.commons.upload.depicts.DepictsDao
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun contributionDao(): ContributionDao
-    abstract fun DepictsDao(): DepictsDao
-    abstract fun UploadedStatusDao(): UploadedStatusDao
+    abstract fun DepictsDao(): DepictsDao;
+    abstract fun UploadedStatusDao(): UploadedStatusDao;
     abstract fun NotForUploadStatusDao(): NotForUploadStatusDao
     abstract fun ReviewDao(): ReviewDao
 }

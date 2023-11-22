@@ -84,7 +84,7 @@ class Media constructor(
      * Stores the mapping of category title to hidden attribute
      * Example: "Mountains" => false, "CC-BY-SA-2.0" => true
      */
-    var categoriesHiddenStatus: Map<String, Boolean> = emptyMap(),
+    var categoriesHiddenStatus: Map<String, Boolean> = emptyMap()
 ) : Parcelable {
 
     constructor(
