@@ -20,6 +20,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -199,6 +200,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         }
 
         Media m = provider.getMediaAtPosition(pager.getCurrentItem());
+        MediaDetailFragment mediaDetailFragment = this.adapter.getCurrentMediaDetailFragment();
         switch (item.getItemId()) {
             case R.id.menu_bookmark_current_image:
                 boolean bookmarkExists = bookmarkDao.updateBookmark(bookmark);
@@ -252,6 +254,16 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 return true;
             case R.id.menu_view_report:
                 showReportDialog(m);
+            case R.id.menu_view_set_white_background:
+                if (mediaDetailFragment != null) {
+                    mediaDetailFragment.onImageBackgroundChanged(ContextCompat.getColor(getContext(), R.color.white));
+                }
+                return true;
+            case R.id.menu_view_set_black_background:
+                if (mediaDetailFragment != null) {
+                    mediaDetailFragment.onImageBackgroundChanged(ContextCompat.getColor(getContext(), R.color.black));
+                }
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -442,6 +454,12 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         }
     }
 
+    /**
+     * Decide wether or not we should display the background color menu items
+     * We display them if the image is transparent
+     * @param getBitmap
+     * @param menu
+     */
     private void handleBackgroundColorMenuItems(Callable<Bitmap> getBitmap, Menu menu) {
         Observable.fromCallable(
                 getBitmap
@@ -598,6 +616,18 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
          */
         public Fragment getCurrentFragment() {
             return mCurrentFragment;
+        }
+
+        /**
+         * If current fragment is of type MediaDetailFragment, return it, otherwise return null.
+         * @return MediaDetailFragment
+         */
+        public MediaDetailFragment getCurrentMediaDetailFragment() {
+            if (mCurrentFragment instanceof MediaDetailFragment) {
+                return (MediaDetailFragment) mCurrentFragment;
+            }
+
+            return null;
         }
 
         /**

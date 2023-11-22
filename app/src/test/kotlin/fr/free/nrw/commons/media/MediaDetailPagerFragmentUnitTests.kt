@@ -237,7 +237,6 @@ class MediaDetailPagerFragmentUnitTests {
     }
 
     @Test
-    @Throws(Exception::class)
     fun testShouldDisplayBackgroundColorMenuWithTransparentMedia() {
         doReturn(true).`when`(bitmap).hasAlpha()
 
@@ -252,7 +251,6 @@ class MediaDetailPagerFragmentUnitTests {
     }
 
     @Test
-    @Throws(Exception::class)
     fun testShouldNotDisplayBackgroundColorMenuWithOpaqueMedia() {
         doReturn(false).`when`(bitmap).hasAlpha()
 
