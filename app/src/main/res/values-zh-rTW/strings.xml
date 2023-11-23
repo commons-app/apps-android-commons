@@ -692,6 +692,10 @@
   <string name="custom_selector_info_text2">右邊的圖片與與左邊圖片不同，它有代表已經上傳到維基共享資源的標誌。\n請輕壓圖片來預覽。</string>
   <string name="welcome_custom_selector_ok">棒極了</string>
   <string name="custom_selector_already_uploaded_image_text">此圖片已上傳到維基共享資源。</string>
+  <string name="custom_selector_over_limit_warning">出於技術原因，應用程式無法可靠地一次上傳超過 %1$d 張圖片。%2$d 張已超出 %1$d 張的上傳限制。</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">去除</string>
+  <string name="custom_selector_button_limit_text">最大：%1$d</string>
+  <string name="custom_selector_limit_error_desc">錯誤：超出上傳限制</string>
   <string name="place_state_wlm">維基愛古蹟</string>
   <string name="wlm_upload_info">此圖片會加入到維基愛古蹟競賽</string>
   <string name="display_monuments">顯示古蹟景點</string>

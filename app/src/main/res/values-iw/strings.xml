@@ -705,6 +705,10 @@
   <string name="custom_selector_info_text2">בניגוד לתמונה מימין, על התמונה שמשמאל יש את הלוגו של ויקישיתוף שמעיד שהיא כבר הועלתה. יש לגעת ולהחזיר לקבלת תצוגה מקדימה של התמונה.</string>
   <string name="welcome_custom_selector_ok">מגניב</string>
   <string name="custom_selector_already_uploaded_image_text">התמונה הזאת כבר הועלתה לוויקישיתוף.</string>
+  <string name="custom_selector_over_limit_warning">מסיבות טכניות, היישום לא יכול להעלות יותר מ־%1$d תמונות בבת אחת בצורה מהימנה. חרגת ממגבלת ההעלאה על סך %1$d ב־%2$d.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">סגירה</string>
+  <string name="custom_selector_button_limit_text">מרבי: %1$d</string>
+  <string name="custom_selector_limit_error_desc">שגיאה: הגעת לגבול העליון של ההעלאות</string>
   <string name="place_state_wlm">ויקיפדיה אוהבת אתרי מורשת</string>
   <string name="wlm_upload_info">התמונה הזאת תוכנס לתחרות ויקי אוהבת אתרי מורשת</string>
   <string name="display_monuments">הצגת אתרי מורשת</string>

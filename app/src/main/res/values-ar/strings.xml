@@ -10,6 +10,7 @@
 * Dr. Mohammed
 * FiberAhmed
 * Kassem7899
+* LaMagiaaa
 * Meno25
 * Mido
 * Monrokhoury
@@ -722,9 +723,9 @@
   <string name="advanced_query_info_text">يمكنك تخصيص استعلام قريب. إذا حصلت على أخطاء ، قم بإعادة التعيين والتطبيق.</string>
   <string name="apply">تطبيق</string>
   <string name="reset">إعادة ضبط</string>
-  <string name="location_message">تساعد بيانات الموقع محرري Wiki في العثور على صورتك ، مما يجعلها أكثر فائدة.! N! لا يوجد موقع لعمليات التحميل الأخيرة.! N! نقترح عليك تشغيل الموقع في إعدادات تطبيق الكاميرا.</string>
+  <string name="location_message" fuzzy="true">تساعد بيانات الموقع محرري Wiki في العثور على صورتك ، مما يجعلها أكثر فائدة.! N! لا يوجد موقع لعمليات التحميل الأخيرة.! N! نقترح عليك تشغيل الموقع في إعدادات تطبيق الكاميرا.</string>
   <string name="no_location_found_title">لم يتم العثور على موقع</string>
-  <string name="no_location_found_message">ماذا عن إضافة المكان الذي تم التقاط هذه الصورة فيه؟! N! تساعد بيانات الموقع محرري Wiki في العثور على صورتك ، مما يجعلها أكثر فائدة.! N! شكرًا لك!</string>
+  <string name="no_location_found_message" fuzzy="true">ماذا عن إضافة المكان الذي تم التقاط هذه الصورة فيه؟! N! تساعد بيانات الموقع محرري Wiki في العثور على صورتك ، مما يجعلها أكثر فائدة.! N! شكرًا لك!</string>
   <string name="add_location">أضف الموقع</string>
   <string name="feedback_sharing_data_alert">يُرجى إزالة أي معلومات لا تشعر بالارتياح عند مشاركتها علنًا من هذا البريد الإلكتروني. أيضًا ، يرجى العلم أن عنوان بريدك الإلكتروني الذي تنشر به ، والاسم المرتبط وصورة الملف الشخصي ، سيكونان مرئيين للجمهور.</string>
   <string name="explore_map_details">التفاصيل</string>
@@ -758,5 +759,5 @@
   <string name="request_user_block">طلب منع هذا المستخدم</string>
   <string name="welcome_to_full_screen_mode_text">مرحبًا بك في وضع التحديد بملء الشاشة</string>
   <string name="full_screen_mode_zoom_info">استخدم إصبعين للتكبير والتصغير.</string>
-  <string name="full_screen_mode_features_info">مرر سريعًا وطويلًا لتنفيذ هذه الإجراءات:! N! - يسار / يمين: انتقل إلى السابق / التالي! N! - لأعلى: حدد! N! - أسفل: وضع علامة على أنه ليس للتحميل.</string>
+  <string name="full_screen_mode_features_info" fuzzy="true">مرر سريعًا وطويلًا لتنفيذ هذه الإجراءات:! N! - يسار / يمين: انتقل إلى السابق / التالي! N! - لأعلى: حدد! N! - أسفل: وضع علامة على أنه ليس للتحميل.</string>
 </resources>

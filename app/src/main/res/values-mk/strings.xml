@@ -671,6 +671,10 @@
   <string name="custom_selector_info_text2">За разлика од сликата лево, таа десно има лого на Ризницата, што значи дека веќе е подигната. \n Допрете и држете за да ја погледате сликата.</string>
   <string name="welcome_custom_selector_ok">Одлично</string>
   <string name="custom_selector_already_uploaded_image_text">Оваа слика е веќе подигната на Ризницата.</string>
+  <string name="custom_selector_over_limit_warning">Од технички причини прилогот не може поуздано да вчита повеќе од %1$d слики наеднап. Имате %2$d повеќе од дозволените %1$d подигања.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">Тргни</string>
+  <string name="custom_selector_button_limit_text">Највеќе: %1$d</string>
+  <string name="custom_selector_limit_error_desc">Грешка: Надминато е ограничувањето на подигања</string>
   <string name="place_state_wlm">WLM</string>
   <string name="wlm_upload_info">Оваа слика ќе учествува во натпреварот „Вики ги сака спомениците“</string>
   <string name="display_monuments">Прикажи споменици</string>

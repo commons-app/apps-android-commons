@@ -652,6 +652,8 @@
   <string name="custom_selector_info_text2">За разлику од слика са леве стране, слике на десној страни имају лого Оставе, што означава да су већ отпремљене. Додирните и држите за преглед слике.</string>
   <string name="welcome_custom_selector_ok">Одлично</string>
   <string name="custom_selector_already_uploaded_image_text">Ова слика је већ отпремљена на Оставу.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">Одбаци</string>
+  <string name="custom_selector_button_limit_text">Највише: %1$d</string>
   <string name="wlm_upload_info">Ова слика ће бити уврштена у такмичење Вики воли споменике</string>
   <string name="display_monuments">Прикажи споменике</string>
   <string name="wlm_month_message">Вики воли споменике — месец!</string>
