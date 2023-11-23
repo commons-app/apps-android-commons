@@ -115,10 +115,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     private static final int REQUEST_CODE = 1001;
     private static final int REQUEST_CODE_EDIT_DESCRIPTION = 1002;
-    
     private static final String IMAGE_BACKGROUND_COLOR = "image_background_color";
-    
     static final int DEFAULT_IMAGE_BACKGROUND_COLOR = 0;
+    
     private boolean editable;
     private boolean isCategoryImage;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
