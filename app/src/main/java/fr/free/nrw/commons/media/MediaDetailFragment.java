@@ -79,6 +79,7 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.media.ZoomableActivity.ZoomableActivityConstants;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
@@ -117,7 +118,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     
     private static final String IMAGE_BACKGROUND_COLOR = "image_background_color";
     
-    private static final int DEFAULT_IMAGE_BACKGROUND_COLOR = -1;
+    static final int DEFAULT_IMAGE_BACKGROUND_COLOR = 0;
     private boolean editable;
     private boolean isCategoryImage;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
@@ -393,6 +394,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             zoomableIntent.setData(Uri.parse(media.getImageUrl()));
             zoomableIntent.putExtra(
                 ZoomableActivity.ZoomableActivityConstants.ORIGIN, "MediaDetails");
+            
+            int backgroundColor = getImageBackgroundColor();
+            if (backgroundColor != DEFAULT_IMAGE_BACKGROUND_COLOR) {
+                zoomableIntent.putExtra(
+                    ZoomableActivity.ZoomableActivityConstants.PHOTO_BACKGROUND_COLOR,
+                    backgroundColor
+                );
+            }
+            
             ctx.startActivity(
                 zoomableIntent
             );
