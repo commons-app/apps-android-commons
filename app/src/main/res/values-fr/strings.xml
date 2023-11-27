@@ -705,6 +705,10 @@
   <string name="custom_selector_info_text2">À l’inverse de l’image sur la gauche, l’image de droite comporte un logo Commons qui indique qu’elle a déjà été téléversée.\nToucher et maintenir pour avoir un aperçu de l’image.</string>
   <string name="welcome_custom_selector_ok">Génial</string>
   <string name="custom_selector_already_uploaded_image_text">Cette image a déjà été téléversée sur Commons.</string>
+  <string name="custom_selector_over_limit_warning">Pour des raisons techniques, l’application ne peut pas charger de façon fiable plus de %1$d images à la fois. La limite de téléchargement de %1$d a été dépassée de %2$d.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">Ignorer</string>
+  <string name="custom_selector_button_limit_text">Max : %1$d</string>
+  <string name="custom_selector_limit_error_desc">Erreur : Limite de téléchargement dépassée</string>
   <string name="place_state_wlm">WLM</string>
   <string name="wlm_upload_info">Cette image sera entrée dans le concours « Wiki aime les monuments »</string>
   <string name="display_monuments">Afficher les monuments</string>

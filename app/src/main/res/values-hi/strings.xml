@@ -17,15 +17,16 @@
 * Shypoetess
 * Siddhartha Ghai
 * Smtchahal
+* Suyash.dwivedi
 * Swapnil.Karambelkar
 * चक्रपाणी
 * संजीव कुमार
 -->
 <resources>
   <string name="commons_facebook">कॉमन्स फेसबुक पृष्ठ</string>
-  <string name="commons_github">कॉमन्स गिटहब स्त्रोत कूटशब्द</string>
+  <string name="commons_github">कॉमन्स गिटहब सोर्स कोड</string>
   <string name="commons_logo">कॉमन्स का प्रतीक चिन्ह</string>
-  <string name="commons_website">कॉमन्स जालस्थान</string>
+  <string name="commons_website">कॉमन्स का जालस्थान</string>
   <string name="submit">जमा करें</string>
   <string name="show_captions_description">विवरण</string>
   <string name="nearby_row_image">चित्र</string>
@@ -67,10 +68,10 @@
   <string name="login">प्रवेश</string>
   <string name="forgot_password">पासवर्ड भूल गये?</string>
   <string name="signup">खाता बनायें</string>
-  <string name="logging_in_title">प्रवेश हो रहा</string>
-  <string name="logging_in_message">प्रतीक्षा करें…</string>
-  <string name="login_success">प्रवेश में सफल हुआ!</string>
-  <string name="login_failed">प्रवेश विफल हुआ!</string>
+  <string name="logging_in_title">लॉग इन हो रहा है</string>
+  <string name="logging_in_message">कृपया प्रतीक्षा करें...</string>
+  <string name="login_success">लॉग इन सफल!</string>
+  <string name="login_failed">लॉग इन विफल!</string>
   <string name="upload_failed">फ़ाइल नहीं मिली, कृपया अन्य फ़ाइल से प्रयास करें।</string>
   <string name="authentication_failed">प्रमाणीकरण विफल, पुनः लॉगिन करें</string>
   <string name="uploading_started">अपलोड आरंभ!</string>
@@ -78,13 +79,13 @@
   <string name="upload_completed_notification_text">अपना अपलोड देखने के लिए टैप करें</string>
   <string name="upload_progress_notification_title_start" fuzzy="true">%1$s का अपलोड शुरू हुआ</string>
   <string name="upload_progress_notification_title_in_progress">%1$s अपलोड हो रहा</string>
-  <string name="upload_progress_notification_title_finishing">%1$s का अपलोड पूरा हुआ</string>
+  <string name="upload_progress_notification_title_finishing">%1$s का अपलोड पूर्ण हुआ</string>
   <string name="upload_failed_notification_title" fuzzy="true">%1$s का अपलोड विफल हुआ</string>
   <string name="upload_failed_notification_subtitle">देखने हेतु टैप करें</string>
   <string name="title_activity_contributions">मेरे ताज़ा अपलोड</string>
   <string name="contribution_state_queued">प्रतीक्षा में</string>
   <string name="contribution_state_failed">विफल</string>
-  <string name="contribution_state_in_progress">%1$d%% पूरा हुआ</string>
+  <string name="contribution_state_in_progress">%1$d%% पूर्ण हुआ</string>
   <string name="contribution_state_starting">अपलोड हो रहा</string>
   <string name="menu_from_gallery">गैलरी से</string>
   <string name="menu_from_camera">फ़ोटो लें</string>
