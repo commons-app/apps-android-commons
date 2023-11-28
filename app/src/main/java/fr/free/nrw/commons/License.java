@@ -1,6 +1,7 @@
 package fr.free.nrw.commons;
 
 import androidx.annotation.Nullable;
+import org.wikipedia.json.GsonUtil;
 
 /**
  * represents Licence object

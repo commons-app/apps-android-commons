@@ -1,15 +1,23 @@
 package fr.free.nrw.commons.repository;
 
+import static android.app.PendingIntent.getActivity;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceManager;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.category.CategoriesModel;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionDao;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadController;
@@ -351,10 +359,14 @@ public class UploadRepository {
      */
     @Nullable
     public Place checkNearbyPlaces(final double decLatitude, final double decLongitude) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(
+            MainActivity.contextOfApplication);
+        final String language = sharedPreferences.getString(Prefs.APP_UI_LANGUAGE, "en");
+        Timber.d("checkNearbyPlaces language: %s", language);
         try {
             final List<Place> fromWikidataQuery = nearbyPlaces.getFromWikidataQuery(new LatLng(
                     decLatitude, decLongitude, 0.0f),
-                    Locale.getDefault().getLanguage(),
+                    language,
                     NEARBY_RADIUS_IN_KILO_METERS, false, null);
             return (fromWikidataQuery != null && fromWikidataQuery.size() > 0) ? fromWikidataQuery
                 .get(0) : null;

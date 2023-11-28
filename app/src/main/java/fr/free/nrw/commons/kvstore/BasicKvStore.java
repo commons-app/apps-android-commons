@@ -43,8 +43,8 @@ public class BasicKvStore implements KeyValueStore {
 
         if (version < oldVersion) {
             throw new IllegalArgumentException(
-                    "kvstore downgrade not allowed, old version:" + oldVersion + ", new version: " +
-                            version);
+                "kvstore downgrade not allowed, old version:" + oldVersion + ", new version: " +
+                    version);
         }
         //Keep this statement at the end so that clearing of store does not cause version also to get removed.
         putIntInternal(KEY_VERSION, version);
@@ -127,7 +127,7 @@ public class BasicKvStore implements KeyValueStore {
     }
 
     private void putString(SharedPreferences.Editor editor, String key, String value,
-                           boolean commit) {
+        boolean commit) {
         assertKeyNotReserved(key);
         editor.putString(key, value);
         if(commit) {

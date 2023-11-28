@@ -44,6 +44,19 @@ class DepictsClientTest {
             .assertValue(emptyList())
     }
 
+    @Test
+    fun searchForDepictions1(){
+        val depictSearchResponse = mock<DepictSearchResponse>()
+        whenever(depictsInterface.searchForDepicts("query", "1", "fr", "fr", "0")).thenReturn(Single.just(depictSearchResponse))
+        whenever(depictSearchResponse.search).thenReturn(listOf(depictSearchItem("1"), depictSearchItem("2")))
+        val entities = mock<Entities>()
+        whenever(depictsInterface.getEntities("1|2")).thenReturn(Single.just(entities))
+        whenever(entities.entities()).thenReturn(emptyMap())
+        depictsClient.searchForDepictions("query", 1, 0)
+            .test()
+            .assertValue(emptyList())
+    }
+
 
     @Test
     fun getEntities() {

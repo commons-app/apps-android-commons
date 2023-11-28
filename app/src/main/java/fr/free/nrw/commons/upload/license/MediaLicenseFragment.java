@@ -129,6 +129,7 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
             public void onItemSelected(AdapterView<?> adapterView, View view, int position,
                 long l) {
                 String licenseName = adapterView.getItemAtPosition(position).toString();
+                Timber.d("onItemSelected: %s", licenseName);
                 presenter.selectLicense(licenseName);
             }
 

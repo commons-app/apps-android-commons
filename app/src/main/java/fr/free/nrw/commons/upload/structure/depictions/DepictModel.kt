@@ -1,8 +1,11 @@
 package fr.free.nrw.commons.upload.structure.depictions
 
+import android.content.Context
+import androidx.preference.PreferenceManager
 import fr.free.nrw.commons.explore.depictions.DepictsClient
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.repository.UploadRepository
+import fr.free.nrw.commons.settings.Prefs
 import io.github.coordinates2country.Coordinates2Country
 import io.reactivex.Flowable
 import io.reactivex.Observable
@@ -42,8 +45,9 @@ class DepictModel @Inject constructor(private val depictsClient: DepictsClient) 
                 }
                 getPlaceDepictions(ArrayList(qids)).toFlowable()
             }
-        } else
+        } else {
             networkItems(query)
+        }
     }
 
     /**
@@ -75,6 +79,10 @@ class DepictModel @Inject constructor(private val depictsClient: DepictsClient) 
         else Single.just(emptyList())
 
 
+    fun getSavedLanguage(context: Context): String? {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        return sharedPreferences.getString(Prefs.APP_UI_LANGUAGE, "en")
+    }
     private fun networkItems(query: String): Flowable<List<DepictedItem>> {
         return depictsClient.searchForDepictions(query, SEARCH_DEPICTS_LIMIT, 0)
             .onErrorResumeWithEmptyList()

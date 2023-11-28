@@ -4,6 +4,8 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.text.SpannableString;
@@ -17,6 +19,8 @@ import androidx.browser.customtabs.CustomTabColorSchemeParams;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
 
+import androidx.preference.PreferenceManager;
+import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import java.util.Calendar;
 import java.util.Date;
@@ -46,6 +50,7 @@ public class Utils {
      * @return Name of license
      */
     public static int licenseNameFor(String license) {
+
         switch (license) {
             case Prefs.Licenses.CC_BY_3:
                 return R.string.license_name_cc_by;
