@@ -113,6 +113,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">الإعدادات</string>
   <string name="intent_share_upload_label">رفع إلى المشاعات</string>
+  <string name="upload_in_progress">جار الرفع</string>
   <string name="username">اسم المستخدم</string>
   <string name="password">كلمة السر</string>
   <string name="login_credential">سجل الدخول إلى حسابك في كومنز بيتا</string>

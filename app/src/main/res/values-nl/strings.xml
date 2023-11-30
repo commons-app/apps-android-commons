@@ -745,6 +745,8 @@
   <string name="image_selected">Afbeelding geselecteerd</string>
   <string name="image_marked_as_not_for_upload">Afbeelding gemarkeerd als niet voor uploaden</string>
   <string name="menu_view_report">Rapporteren</string>
+  <string name="menu_view_set_white_background">Witte achtergrond instellen</string>
+  <string name="menu_view_set_black_background">Zwarte achtergrond instellen</string>
   <string name="report_violation">Rapporteer overtredingen</string>
   <string name="report_user">Rapporteer deze Gebruiker</string>
   <string name="report_content">Rapporteer deze inhoud</string>

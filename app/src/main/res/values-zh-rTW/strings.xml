@@ -746,6 +746,8 @@
   <string name="image_selected">已選圖片</string>
   <string name="image_marked_as_not_for_upload">圖片標記為不上傳</string>
   <string name="menu_view_report">報告</string>
+  <string name="menu_view_set_white_background">設定白色背景</string>
+  <string name="menu_view_set_black_background">設定黑色背景</string>
   <string name="report_violation">舉報違規行為</string>
   <string name="report_user">檢舉此使用者</string>
   <string name="report_content">舉報此內容</string>

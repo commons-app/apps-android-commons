@@ -725,6 +725,8 @@
   <string name="image_selected">Избрана слика</string>
   <string name="image_marked_as_not_for_upload">Сликата е означена дека не за подигање</string>
   <string name="menu_view_report">Пријави</string>
+  <string name="menu_view_set_white_background">Постави бела позадина</string>
+  <string name="menu_view_set_black_background">Постави црна позадина</string>
   <string name="report_violation">Пријави прекршок</string>
   <string name="report_user">Пријави го корисников</string>
   <string name="report_content">Пријави ја содржинава</string>

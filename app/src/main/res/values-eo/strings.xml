@@ -9,12 +9,14 @@
 * Robin van der Vliet
 * Surfo
 * YvesNevelsteen
+* Ziko
 -->
 <resources>
   <string name="commons_facebook">Facebook-Paĝo de Komunejo</string>
   <string name="commons_github">Fontokodo de Komunejo ĉe Github</string>
   <string name="commons_logo">Emblemo de Komunejo</string>
   <string name="commons_website">Retejo de Komunejo</string>
+  <string name="exit_location_picker">Eliri lok-elektilon</string>
   <string name="submit">Sendi</string>
   <string name="add_another_description">Aldoni alian priskribon</string>
   <string name="add_new_contribution">Aldoni novan kontribuaĵon</string>
@@ -35,8 +37,7 @@
     <item quantity="one">%1$d dosiero alŝutata</item>
     <item quantity="other">%1$d dosieroj alŝutataj</item>
   </plurals>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+  <plurals name="contributions_subtitle">
     <item quantity="one">(%1$d)</item>
     <item quantity="other">(%1$d)</item>
   </plurals>
@@ -70,6 +71,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Agordoj</string>
   <string name="intent_share_upload_label">Alŝuti al la Komunejo</string>
+  <string name="upload_in_progress">Alŝutante</string>
   <string name="username">Uzantnomo</string>
   <string name="password">Pasvorto</string>
   <string name="login_credential">Ensaluti en via Komunejo beta-konto</string>
@@ -83,8 +85,12 @@
   <string name="login_success">Ensalutado sukcesis</string>
   <string name="login_failed">Ensalutado malsukcesis</string>
   <string name="upload_failed">Dosiero ne trovita. Bonvolu provi alian dosieron.</string>
+  <string name="retry_limit_reached">Maksimuma limo por denovaj provoj atingita! Bonvolu ĉesigi la alŝuton kaj provi denove</string>
+  <string name="unrestricted_battery_mode">Ĉu malŝalti baterian optimumigon?</string>
+  <string name="suggest_unrestricted_mode">Alŝuto de pli ol 3 bildoj funkcias pli fidinde kiam la bateria optimumigo estas malŝaltita. Bonvolu malŝalti baterian optimumigon por la aplikaĵo \"Commons\" de la agordoj por glata alŝutado. \n\nEblaj paŝoj por malŝalti baterian optimumigon:\n\nPaŝo 1: Premmu la butonon \'Agordoj\' sube.\n\nPaŝo 2: Ŝanĝu de \'Ne optimumigita\' al \'Ĉiuj aplikaĵoj\'.\n\nPaŝo 3: Serĉu \"Commons\" aŭ \"fr.free.nrw.commons\".\n\nPaŝo 4: Premu ĝin kaj elektu \'Ne optimumigu\'.!N !\nPaŝo 5: Premu \'Farita\'.</string>
   <string name="authentication_failed">Aŭtentigo malsukcesis, bonvolu denove ensaluti</string>
   <string name="uploading_started">La alŝutado komenciĝis!</string>
+  <string name="uploading_queued">Alŝuto atendas en vico (limigita konekta modo estas ebligita)</string>
   <string name="upload_completed_notification_title">%1$s alŝutita!</string>
   <string name="upload_completed_notification_text">Tuŝetu por vidi vian alŝutadon</string>
   <string name="upload_progress_notification_title_start">Alŝutas dosieron: %s</string>
@@ -196,8 +202,11 @@
   <string name="read_storage_permission_rationale">Postulata permeso: Legi eksteran konservejon. La aplikaĵo ne povas atingi vian galerion sen tio.</string>
   <string name="write_storage_permission_rationale">Postulata permeso: Skribi al ekstera konservejo. La aplikaĵo ne povas atingi viajn fotilon/galerion sen tio.</string>
   <string name="location_permission_title">Petante Permeson por Lokado</string>
+  <string name="in_app_camera_location_permission_title">Konservi lokon por fotoj el la aplikaĵo</string>
+  <string name="in_app_camera_location_switch_pref_summary">Aktivigu ĉi tiun por konservi lokon kun en-aplikaĵaj fotoj por la kazo ke la kamerao de la aparato ne konservas ĝin</string>
   <string name="ok">Bone</string>
   <string name="warning">Averto</string>
+  <string name="duplicate_file_name">Duobla dosier-nomo trovita</string>
   <string name="upload">Alŝuti</string>
   <string name="yes">Jes</string>
   <string name="no">Ne</string>
@@ -272,7 +281,8 @@
   <string name="login_alert_message">Bonvolu ensaluti por uzi ĉi tiun eblon</string>
   <string name="copy_wikicode">Kopii la vikitekston en la tondujon</string>
   <string name="wikicode_copied">La vikiteksto kopiiĝis en la tondujon</string>
-  <string name="nearby_location_not_available" fuzzy="true">Pozicio ne havebla.</string>
+  <string name="nearby_location_not_available">Proksime eble ne funkcias ĝuste, Loko ne havebla.</string>
+  <string name="upload_location_access_denied">Loka aliro malakceptita. Bonvolu agordi vian lokon permane por uzi ĉi tiun funkcion.</string>
   <string name="location_permission_rationale_nearby">Permeso estas postulata por montri liston de apudaj lokoj</string>
   <string name="nearby_directions">Instrukcio</string>
   <string name="nearby_wikidata">Vikidatumoj</string>
@@ -340,8 +350,10 @@
   <string name="wrong">Malĝusta Respondo</string>
   <string name="quiz_screenshot_question">Ĉu ĉi tiu ekrankopio estas alŝutebla?</string>
   <string name="share_app_title">Diskonigi Aplikaĵon</string>
+  <string name="rotate">Turni</string>
   <string name="error_fetching_nearby_places">Eraro dum akirado de apudaj lokoj.</string>
   <string name="no_nearby_places_around">Neniuj apudaj lokoj ĉirkaŭ</string>
+  <string name="error_fetching_nearby_monuments">Eraro dum akirado de apudaj monumentoj.</string>
   <string name="no_recent_searches">Neniu ĵusa serĉo</string>
   <string name="delete_recent_searches_dialog">Ĉu vi certas ke vi volas malplenigi vian serĉ-historion?</string>
   <string name="cancel_upload_dialog">Ĉu vi certas, ke vi volas nuligi ĉi tiun alŝuton?</string>
@@ -375,12 +387,12 @@
   <string name="notifications">Sciigoj</string>
   <string name="read_notifications">Sciigoj (legita)</string>
   <string name="display_nearby_notification">Montri sciigojn pri apudaĵoj</string>
-  <string name="display_nearby_notification_summary" fuzzy="true">Tuŝetu ĉi tie por vidi apudan lokon kiu bezonas bildojn</string>
+  <string name="display_nearby_notification_summary">Montru en-aplikaĵan sciigon pri la plej proksima loko, kiu bezonas bildojn</string>
   <string name="list_sheet">Listo</string>
   <string name="storage_permission">Permeso por Konservado</string>
   <string name="write_storage_permission_rationale_for_image_share">Ni bezonas vian permeson aliri eksteran konservejon de via aparato por alŝuti bildojn.</string>
   <string name="nearby_notification_dismiss_message">Vi ne plu vidos la plej proksiman lokon bezonantan bildojn. Tamen, vi povas reŝalti tiun sciigon en Agordoj se vi volas.</string>
-  <string name="step_count" fuzzy="true">Paŝo %1$d el %2$d</string>
+  <string name="step_count">Paŝo %1$d de %2$d: %3$s</string>
   <string name="next">Sekva</string>
   <string name="previous">Antaŭa</string>
   <string name="upload_title_duplicate">Ekzistas dosiero kun la nomo %1$s. Ĉu vi certas, ke vi volas daŭrigi?\n\nNotu: taŭga sufikso estos aŭtomate aldonita al la dosiernomo.</string>
@@ -401,18 +413,34 @@
   <string name="no_uploads">Bonvenon al Komunejo!\n\nAlŝutu vian unuan aŭdvidaĵon per frapeto de la butono \'Aldoni\'.</string>
   <string name="no_categories_selected">Neniu Elektita Kategorio</string>
   <string name="no_categories_selected_warning_desc">Bildoj sen kategorioj estas malofte uzebla. Ĉu vi certas, ke vi volas daŭrigi sen elekti kategoriojn?</string>
-  <string name="upload_flow_all_images_in_set" fuzzy="true">(Je ĉiuj bildoj en aro)</string>
+  <string name="no_depictions_selected">Neniuj priskriboj elektitaj</string>
+  <string name="no_depictions_selected_warning_desc">Bildoj kun priskriboj estas pli facile troveblaj kaj pli probable uzataj. Ĉu vi certas, ke vi volas daŭrigi sen elekti bildojn?</string>
+  <string name="back_button_warning">Ĉesigi alŝutadon</string>
+  <string name="back_button_warning_desc">Uzo de la malantaŭa butono nuligos ĉi tiun alŝuton kaj vi perdos vian progreson</string>
+  <string name="back_button_continue">Daŭrigu alŝuton</string>
+  <string name="upload_flow_all_images_in_set">(Por ĉiuj bildoj en aro)</string>
   <string name="search_this_area">Serĉi ĉi tiun areon</string>
   <string name="nearby_card_permission_title">Peto por Permeso</string>
   <string name="nearby_card_permission_explanation">Ĉu vi volas ke ni uzu vian aktualan lokon por montri la plej proksima loko bezonanta bildojn?</string>
   <string name="unable_to_display_nearest_place">Ne povas montri apudajn lokojn bezonantajn bildojn, pro manko de permeso de lokado.</string>
   <string name="never_ask_again">Ne plu repeti</string>
-  <string name="display_location_permission_title" fuzzy="true">Montri permeson pri loko</string>
+  <string name="display_location_permission_title">Montri permeson pri loko</string>
   <string name="display_location_permission_explanation">Peti por permeso de lokado, kiam ĝi estas postulata por la funkciado de la karta vido de de apudaj sciigoj.</string>
   <string name="achievements_fetch_failed">Io misfunkciis; ni ne povis akiri viajn atingojn</string>
+  <string name="achievements_fetch_failed_ultimate_achievement">Vi faris tiom da kontribuoj, ke nia atingo-kalkula sistemo ne povas elteni ion. Tio estas la plej granda atingo.</string>
   <string name="ends_on">Finiĝas je:</string>
   <string name="display_campaigns">Montri kampanjojn</string>
   <string name="display_campaigns_explanation">Vidi estantajn kampanjojn</string>
+  <string name="in_app_camera_location_access_explanation">Permesu al la programo preni lokon se la fotilo ne registras ĝin. Iuj aparataj fotiloj ne registras lokon. En tiaj kazoj, lasi la aplikaĵon preni kaj aligi lokon al ĝi faras vian kontribuon pli utila. Vi povas ŝanĝi ĉi tion iam ajn de la Agordoj</string>
+  <string name="option_allow">Permesi</string>
+  <string name="option_dismiss">Forĵeti</string>
+  <string name="in_app_camera_needs_location">Bonvolu aktivigi aliron al loko en la instalo kaj provu denove.\nNoto: La alŝuto eble ne havas lokon se la programo ne povas retrovi lokon de la aparato ene de mallonga intervalo.</string>
+  <string name="in_app_camera_location_permission_rationale">En-aplikaĵa fotilo bezonas lokpermeson por alkroĉi ĝin al viaj bildoj, se loko ne estas havebla en EXIF. Bonvolu permesi al la programo aliri vian lokon kaj provi denove.\n\nNoto: La alŝuto eble ne havas lokon se la aplikaĵo ne povas preni lokon de la aparato ene de mallonga intervalo.</string>
+  <string name="in_app_camera_location_permission_denied">La aplikaĵo ne registrus lokon kune kun enaj fotoj pro manko de lokpermeso</string>
+  <string name="in_app_camera_location_unavailable">La aplikaĵo ne registrus lokon kune kun enaj fotoj ĉar la GPS estas malŝaltita</string>
+  <string name="open_document_photo_picker_title">Uzu dokument-bazitan foto-elektilon</string>
+  <string name="open_document_photo_picker_explanation">La nova Android-foto-elektilo riskas perdi informojn pri loko. Ebligu se vi eble uzos ĝin.</string>
+  <string name="location_loss_warning">Malŝalti ĉi tion povus ekigi la novan Android-foto-elektilon. Ĝi riskas perdi lokiformojn.\n\nAlklaku \'Legu pli\' por pliaj informoj.</string>
   <string name="nearby_campaign_dismiss_message">Vi ne plu vidos la kampanjojn. Tamen, vi povas reŝalti tiun sciigon en Agordoj se vi volas.</string>
   <string name="this_function_needs_network_connection">Ĉi tiu funkcio postulas konekton al reto; bonvolu kontroli viajn agordojn pri konektado.</string>
   <string name="error_processing_image">Eraro okazis dum traktado de la bildo. Bonvolu reprovi!</string>
@@ -422,7 +450,7 @@
   <string name="check_category_edit_summary">Petante kontrolon de kategorio</string>
   <string name="check_category_success_title">Petis kontrolon de kategorio</string>
   <string name="check_category_failure_title">Misfunkciis kontrolo de kategorio pri %1$s</string>
-  <string name="check_category_success_message" fuzzy="true">Sukcese petis kontrolon de kategorio pri %1$s</string>
+  <string name="check_category_success_message">Petita kategorikontrolo por %1$s</string>
   <string name="check_category_failure_message">Ne povis peti kontrolon de kategorio pri %1$s</string>
   <string name="check_category_toast">Petante kontrolon de kategorio pri %1$s</string>
   <string name="nominate_for_deletion_done">Farite</string>
@@ -442,8 +470,8 @@
   <string name="review_category_explanation">Ĉi tiu kategorio estas en %1$s kategorioj.</string>
   <string name="review_spam_report_question">Ĝi estas netaŭga ĉar ĝi estas</string>
   <string name="review_c_violation_report_question">Ĝi malobservas aŭtorrajtojn ĉar ĝi estas</string>
-  <string name="review_thanks_yes_button_text" fuzzy="true">Jes, kial ne</string>
-  <string name="review_thanks_no_button_text" fuzzy="true">Sekva bildo</string>
+  <string name="review_thanks_yes_button_text">Sekva bildo</string>
+  <string name="review_thanks_no_button_text">Jes, kial ne</string>
   <string name="skip_image_explanation">Alklakado de ĉi tiu butono donos vin alia ĵus alŝutita bildo en Vikimedia Komunejo</string>
   <string name="review_image_explanation" fuzzy="true">Vi povas revizii bildojn kaj plibonigi la kvaliton de Vikimedia Komunejo.\n Jen la kvar reviziaj parametroj: \n - Ĉu la bildo estas taŭga? \n - Ĉu la bildo observas la regulojn pri aŭtorrajtoj? \n - Ĉu la bildo estis ĝuste enkategoriigita? \n - Se ĉio estas bona, vi povas danki la kontribuinton.</string>
   <string name="no_image">Neniu uzita bildo</string>

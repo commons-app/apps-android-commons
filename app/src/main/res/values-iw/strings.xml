@@ -759,6 +759,8 @@
   <string name="image_selected">נבחרה תמונה</string>
   <string name="image_marked_as_not_for_upload">התמונה סומנה בתור \"לא להעלאה\"</string>
   <string name="menu_view_report">דיווח</string>
+  <string name="menu_view_set_white_background">הגדרת רקע לבן</string>
+  <string name="menu_view_set_black_background">הגדרת רקע שחור</string>
   <string name="report_violation">דיווח על הפרה</string>
   <string name="report_user">דיווח על המשתמש הזה</string>
   <string name="report_content">דיווח על התוכן הזה</string>
