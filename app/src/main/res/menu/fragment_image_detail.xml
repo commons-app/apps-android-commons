@@ -38,5 +38,25 @@
       android:id="@+id/menu_view_report"
       android:title="@string/menu_view_report"
       app:showAsAction="never" />
+<!-- 
+Setting visible and enabled to false as default because 
+we only want to show it in a very specific case 
+-->
+    <item
+      android:id="@+id/menu_view_set_white_background"
+      android:title="@string/menu_view_set_white_background"
+      android:visible="false"
+      android:enabled="false"
+      app:showAsAction="never" />
+<!-- 
+Setting visible and enabled to false as default because 
+we only want to show it in a very specific case 
+-->
+    <item
+      android:id="@+id/menu_view_set_black_background"
+      android:title="@string/menu_view_set_black_background"
+      android:visible="false"
+      android:enabled="false"
+      app:showAsAction="never" />
 
 </menu>

@@ -17,6 +17,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
@@ -78,6 +79,7 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.media.ZoomableActivity.ZoomableActivityConstants;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
@@ -111,8 +113,11 @@ import timber.log.Timber;
 public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     CategoryEditHelper.Callback {
 
-    private static final int REQUEST_CODE = 1001 ;
-    private static final int REQUEST_CODE_EDIT_DESCRIPTION = 1002 ;
+    private static final int REQUEST_CODE = 1001;
+    private static final int REQUEST_CODE_EDIT_DESCRIPTION = 1002;
+    private static final String IMAGE_BACKGROUND_COLOR = "image_background_color";
+    static final int DEFAULT_IMAGE_BACKGROUND_COLOR = 0;
+    
     private boolean editable;
     private boolean isCategoryImage;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
@@ -388,6 +393,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             zoomableIntent.setData(Uri.parse(media.getImageUrl()));
             zoomableIntent.putExtra(
                 ZoomableActivity.ZoomableActivityConstants.ORIGIN, "MediaDetails");
+            
+            int backgroundColor = getImageBackgroundColor();
+            if (backgroundColor != DEFAULT_IMAGE_BACKGROUND_COLOR) {
+                zoomableIntent.putExtra(
+                    ZoomableActivity.ZoomableActivityConstants.PHOTO_BACKGROUND_COLOR,
+                    backgroundColor
+                );
+            }
+            
             ctx.startActivity(
                 zoomableIntent
             );
@@ -599,6 +613,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
      * - when the high resolution image is available, it replaces the low resolution image
      */
     private void setupImageView() {
+        int imageBackgroundColor = getImageBackgroundColor();
+        if (imageBackgroundColor != DEFAULT_IMAGE_BACKGROUND_COLOR) {
+            image.setBackgroundColor(imageBackgroundColor);
+        }
 
         image.getHierarchy().setPlaceholderImage(R.drawable.image_placeholder);
         image.getHierarchy().setFailureImage(R.drawable.image_placeholder);
@@ -1471,5 +1489,29 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     public interface Callback {
         void nominatingForDeletion(int index);
+    }
+    
+    /**
+     * Called when the image background color is changed.
+     * You should pass a useable color, not a resource id.
+     * @param color
+     */
+    public void onImageBackgroundChanged(int color) {
+        int currentColor = getImageBackgroundColor();
+        if (currentColor == color) {
+            return;
+        }
+
+        image.setBackgroundColor(color);
+        getImageBackgroundColorPref().edit().putInt(IMAGE_BACKGROUND_COLOR, color).apply();
+    }
+
+    private SharedPreferences getImageBackgroundColorPref() {
+        return getContext().getSharedPreferences(IMAGE_BACKGROUND_COLOR + media.getPageId(), Context.MODE_PRIVATE);
+    }
+
+    private int getImageBackgroundColor() {
+        SharedPreferences imageBackgroundColorPref = this.getImageBackgroundColorPref();
+        return imageBackgroundColorPref.getInt(IMAGE_BACKGROUND_COLOR, DEFAULT_IMAGE_BACKGROUND_COLOR);
     }
 }

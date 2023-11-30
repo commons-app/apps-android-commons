@@ -5,6 +5,8 @@ import static fr.free.nrw.commons.Utils.handleWebUrl;
 import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -41,9 +44,16 @@ import fr.free.nrw.commons.utils.DownloadUtils;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.concurrent.Callable;
 import javax.inject.Inject;
 import timber.log.Timber;
 
@@ -190,6 +200,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         }
 
         Media m = provider.getMediaAtPosition(pager.getCurrentItem());
+        MediaDetailFragment mediaDetailFragment = this.adapter.getCurrentMediaDetailFragment();
         switch (item.getItemId()) {
             case R.id.menu_bookmark_current_image:
                 boolean bookmarkExists = bookmarkDao.updateBookmark(bookmark);
@@ -243,6 +254,16 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 return true;
             case R.id.menu_view_report:
                 showReportDialog(m);
+            case R.id.menu_view_set_white_background:
+                if (mediaDetailFragment != null) {
+                    mediaDetailFragment.onImageBackgroundChanged(ContextCompat.getColor(getContext(), R.color.white));
+                }
+                return true;
+            case R.id.menu_view_set_black_background:
+                if (mediaDetailFragment != null) {
+                    mediaDetailFragment.onImageBackgroundChanged(ContextCompat.getColor(getContext(), R.color.black));
+                }
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -372,6 +393,17 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     if (m.getUser() != null) {
                         menu.findItem(R.id.menu_view_user_page).setEnabled(true).setVisible(true);
                     }
+
+                    try {
+                        URL mediaUrl = new URL(m.getImageUrl());
+                        this.handleBackgroundColorMenuItems(
+                            () -> BitmapFactory.decodeStream(mediaUrl.openConnection().getInputStream()),
+                            menu
+                        );
+                    } catch (Exception e) {
+                        Timber.e("Cant detect media transparency");
+                    }
+                    
                     // Initialize bookmark object
                     bookmark = new Bookmark(
                             m.getFilename(),
@@ -420,6 +452,25 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
             }
         }
+    }
+
+    /**
+     * Decide wether or not we should display the background color menu items
+     * We display them if the image is transparent
+     * @param getBitmap
+     * @param menu
+     */
+    private void handleBackgroundColorMenuItems(Callable<Bitmap> getBitmap, Menu menu) {
+        Observable.fromCallable(
+                getBitmap
+            ).subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(image -> {
+                if (image.hasAlpha()) {
+                    menu.findItem(R.id.menu_view_set_white_background).setVisible(true).setEnabled(true);
+                    menu.findItem(R.id.menu_view_set_black_background).setVisible(true).setEnabled(true);
+                }
+            });
     }
 
     private void updateBookmarkState(MenuItem item) {
@@ -565,6 +616,18 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
          */
         public Fragment getCurrentFragment() {
             return mCurrentFragment;
+        }
+
+        /**
+         * If current fragment is of type MediaDetailFragment, return it, otherwise return null.
+         * @return MediaDetailFragment
+         */
+        public MediaDetailFragment getCurrentMediaDetailFragment() {
+            if (mCurrentFragment instanceof MediaDetailFragment) {
+                return (MediaDetailFragment) mCurrentFragment;
+            }
+
+            return null;
         }
 
         /**
