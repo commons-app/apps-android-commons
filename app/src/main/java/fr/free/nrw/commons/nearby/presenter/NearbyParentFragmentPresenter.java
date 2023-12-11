@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby.presenter;
 
+import android.location.Location;
 import android.view.View;
 
 import androidx.annotation.MainThread;
@@ -24,7 +25,6 @@ import fr.free.nrw.commons.nearby.NearbyFilterState;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
-import org.osmdroid.util.GeoPoint;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.CUSTOM_QUERY;
@@ -181,8 +181,13 @@ public class NearbyParentFragmentPresenter
             return;
         }
 
-        LatLng lastLocation = nearbyParentFragmentView.getLastLocation();
-        curLatLng = lastLocation;
+        LatLng lastLocation = nearbyParentFragmentView.getLastMapFocus();
+        if (nearbyParentFragmentView.getMapCenter() != null){
+            curLatLng = nearbyParentFragmentView.getMapCenter();
+        }else {
+            curLatLng = lastLocation;
+        }
+        Timber.tag("PRINT").e(curLatLng.getLatitude()+"  "+nearbyParentFragmentView.getMapCenter().getLongitude());
 
         if (curLatLng == null) {
             Timber.d("Skipping update of nearby places as location is unavailable");
@@ -205,16 +210,14 @@ public class NearbyParentFragmentPresenter
         }
         else if (locationChangeType.equals(LOCATION_SIGNIFICANTLY_CHANGED)
                 || locationChangeType.equals(MAP_UPDATED)) {
-            Timber.d("LOCATION_SIGNIFICANTLY_CHANGED");
             lockUnlockNearby(true);
             nearbyParentFragmentView.setProgressBarVisibility(true);
-            nearbyParentFragmentView.populatePlaces(lastLocation);
-
+            nearbyParentFragmentView.populatePlaces(nearbyParentFragmentView.getMapCenter());
         } else if (locationChangeType.equals(SEARCH_CUSTOM_AREA)) {
             Timber.d("SEARCH_CUSTOM_AREA");
             lockUnlockNearby(true);
             nearbyParentFragmentView.setProgressBarVisibility(true);
-            nearbyParentFragmentView.populatePlaces(nearbyParentFragmentView.getCameraTarget());
+            nearbyParentFragmentView.populatePlaces(nearbyParentFragmentView.getMapFocus());
         } else { // Means location changed slightly, ie user is walking or driving.
             Timber.d("Means location changed slightly");
             if (nearbyParentFragmentView.isCurrentLocationMarkerVisible()){ // Means user wants to see their live location
@@ -230,22 +233,24 @@ public class NearbyParentFragmentPresenter
      */
     public void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo, Marker selectedMarker, boolean shouldTrackPosition) {
         if(null!=nearbyParentFragmentView) {
+            Timber.tag("PRINT").d("UPDATING...");
+            nearbyParentFragmentView.clearAllMarkers();
             List<NearbyBaseMarker> nearbyBaseMarkers = NearbyController
                     .loadAttractionsFromLocationToBaseMarkerOptions(nearbyPlacesInfo.curLatLng, // Curlatlang will be used to calculate distances
                             nearbyPlacesInfo.placeList,
                             nearbyParentFragmentView.getContext(),
                             bookmarkLocationDao.getAllBookmarksLocations());
             nearbyParentFragmentView.updateMapMarkers(nearbyBaseMarkers, selectedMarker);
-            nearbyParentFragmentView.addCurrentLocationMarker(nearbyPlacesInfo.curLatLng);
-            if(shouldTrackPosition){
-                nearbyParentFragmentView.updateMapToTrackPosition(nearbyPlacesInfo.curLatLng);
-            }
+
+//            nearbyParentFragmentView.addCurrentLocationMarker(nearbyPlacesInfo.curLatLng);
             lockUnlockNearby(false); // So that new location updates wont come
             nearbyParentFragmentView.setProgressBarVisibility(false);
             nearbyParentFragmentView.updateListFragment(nearbyPlacesInfo.placeList);
             handleCenteringTaskIfAny();
-           //TODO
-            nearbyParentFragmentView.centerMapToPosition(nearbyPlacesInfo.searchLatLng);
+
+//            if (!shouldTrackPosition) {
+//                nearbyParentFragmentView.centerMapToPosition(nearbyPlacesInfo.searchLatLng);
+//            }
         }
     }
 
@@ -370,8 +375,8 @@ public class NearbyParentFragmentPresenter
     public View.OnClickListener onSearchThisAreaClicked() {
         return v -> {
             // Lock map operations during search this area operation
+//            nearbyParentFragmentView.setMapCenter();
             nearbyParentFragmentView.setSearchThisAreaButtonVisibility(false);
-
             if (searchCloseToCurrentLocation()){
                 updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
             } else {
@@ -386,12 +391,19 @@ public class NearbyParentFragmentPresenter
      * @return Returns true if search this area button is used around our current location
      */
     public boolean searchCloseToCurrentLocation() {
-        if (null == nearbyParentFragmentView.getLastFocusLocation()) {
+        if (null == nearbyParentFragmentView.getLastMapFocus()) {
             return true;
         }
-        double distance = LocationUtils.commonsLatLngToMapBoxLatLng(nearbyParentFragmentView.getCameraTarget())
-                .distanceTo(nearbyParentFragmentView.getLastFocusLocation());
-        if (distance > NearbyController.currentLocationSearchRadius * 3 / 4) {
+        //TODO
+        Location mylocation = new Location("");
+        Location dest_location = new Location("");
+        dest_location.setLatitude(nearbyParentFragmentView.getMapFocus().getLatitude());
+        dest_location.setLongitude(nearbyParentFragmentView.getMapFocus().getLongitude());
+        mylocation.setLatitude(nearbyParentFragmentView.getLastMapFocus().getLatitude());
+        mylocation.setLongitude(nearbyParentFragmentView.getLastMapFocus().getLongitude());
+        Float distance =  mylocation.distanceTo(dest_location);
+
+        if (distance > 2000.0* 3 / 4) {
             return false;
         } else {
             return true;

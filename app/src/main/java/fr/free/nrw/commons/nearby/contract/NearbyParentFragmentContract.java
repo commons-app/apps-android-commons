@@ -51,7 +51,7 @@ public interface NearbyParentFragmentContract {
         void addCurrentLocationMarker(LatLng curLatLng);
 
         void updateMapToTrackPosition(LatLng curLatLng);
-
+        void clearAllMarkers();
         Context getContext();
 
         void updateMapMarkers(List<NearbyBaseMarker> nearbyBaseMarkers, Marker selectedMarker);
@@ -69,6 +69,14 @@ public interface NearbyParentFragmentContract {
         void updateListFragment(List<Place> placeList);
 
         LatLng getLastLocation();
+
+        LatLng getLastMapFocus();
+
+        void setLastMapFocus();
+
+        LatLng getMapCenter();
+
+        LatLng getMapFocus();
 
         com.mapbox.mapboxsdk.geometry.LatLng getLastFocusLocation();
 
