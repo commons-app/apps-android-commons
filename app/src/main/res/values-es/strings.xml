@@ -41,6 +41,7 @@
 * Pompilos
 * Raos10
 * Rodney Araujo
+* Samthony
 * Superzerocool
 * Tiberius1701
 * Vivaelcelta
@@ -106,6 +107,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Configuración</string>
   <string name="intent_share_upload_label">Subir a Commons</string>
+  <string name="upload_in_progress">Carga en curso</string>
   <string name="username">Nombre de usuario</string>
   <string name="password">Contraseña</string>
   <string name="login_credential">Accede a tu cuenta de Commons Beta</string>
@@ -119,6 +121,9 @@
   <string name="login_success">Inicio de sesión exitoso</string>
   <string name="login_failed">Falló el inicio de sesión</string>
   <string name="upload_failed">No se encontró el archivo. Por favor prueba con otro.</string>
+  <string name="retry_limit_reached">¡Se alcanzó el límite máximo de reintentos! Cancela la subida e inténtalo de nuevo</string>
+  <string name="unrestricted_battery_mode">¿Desactivar la optimización de la batería?</string>
+  <string name="suggest_unrestricted_mode">Subir más de 3 imágenes funciona mejor cuando la optimización de la batería está desactivada. Desactiva la optimización de la batería para la aplicación Commons desde la configuración para una experiencia de subida más fluida. \n\nPosibles pasos para desactivar la optimización de la batería:\n\nPaso 1: Pulsa en el botón de \'Configuración\' mostrado a continuación.\n\nPaso 2: Navega desde \'No optimizado\' a \'Todas las apps\'.\n\nPaso 3: Busca \"Commons\" o \"fr.free.nrw.commons\".\n\nPaso 4: Púlsalo y selecciona \'No optimizar\'\n\nPaso 5: Pulsa en \'Aceptar\'.</string>
   <string name="authentication_failed">La autenticación ha fallado, por favor prueba a acceder otra vez</string>
   <string name="uploading_started">¡Subiendo!</string>
   <string name="uploading_queued">Carga en cola (modo de conexión limitada activado)</string>
@@ -233,6 +238,8 @@
   <string name="read_storage_permission_rationale">Permiso necesario: lectura de almacenamiento externo. La aplicación no puede acceder a la galería sin él.</string>
   <string name="write_storage_permission_rationale">Permiso necesario: escritura en almacenamiento externo. La aplicación no puede acceder a la cámara o la galería sin este.</string>
   <string name="location_permission_title">Pidiendo Permiso de Ubicación</string>
+  <string name="in_app_camera_location_permission_title">Registra la ubicación de las fotos tomadas desde la aplicación</string>
+  <string name="in_app_camera_location_switch_pref_summary">Habilita esto para registrar la ubicación de fotografías tomadas desde la aplicación en caso de que la cámara del dispositivo no la registre automáticamente</string>
   <string name="ok">Aceptar</string>
   <string name="warning">Atención</string>
   <string name="duplicate_file_name">Nombre de archivo duplicado encontrado</string>
@@ -311,6 +318,7 @@
   <string name="copy_wikicode">Copia el wikitexto al portapapeles</string>
   <string name="wikicode_copied">El wikitexto fue copiado al portapapeles</string>
   <string name="nearby_location_not_available">Cercanos no puede funcionar correctamente. La ubicación no está disponible.</string>
+  <string name="upload_location_access_denied">Acceso a la ubicación denegado. Configura tu ubicación manualmente para utilizar esta función.</string>
   <string name="location_permission_rationale_nearby">Se necesita permiso para mostrar una lista de lugares cercanos</string>
   <string name="nearby_directions">Cómo llegar</string>
   <string name="nearby_wikidata">Wikidata</string>
@@ -378,6 +386,7 @@
   <string name="wrong">Respuesta incorrecta</string>
   <string name="quiz_screenshot_question">¿Esta captura de pantalla esta bien para ser subida?</string>
   <string name="share_app_title">Compartir aplicación</string>
+  <string name="rotate">Rotar</string>
   <string name="error_fetching_nearby_places">Error al recuperar los lugares cercanos.</string>
   <string name="no_nearby_places_around">No hay lugares cercanos alrededor</string>
   <string name="error_fetching_nearby_monuments">Error al encontrar monumentos cercanos.</string>
@@ -593,7 +602,7 @@
   <string name="title_for_child_classes">CLASES HIJAS</string>
   <string name="title_for_parent_classes">CLASES PADRES</string>
   <string name="upload_nearby_place_found_title">Lugar cercano encontrado</string>
-  <string name="upload_nearby_place_found_description" fuzzy="true">¿Esta es una foto del lugar %1$s?</string>
+  <string name="upload_nearby_place_found_description">¿Esta foto es de %1$s?</string>
   <string name="title_app_shortcut_bookmark">Marcadores</string>
   <string name="title_app_shortcut_setting">Configuración</string>
   <string name="remove_bookmark">removido de marcadores</string>

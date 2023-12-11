@@ -715,6 +715,8 @@
   <string name="image_selected">Imagine seligite</string>
   <string name="image_marked_as_not_for_upload">Imagine marcate como non a incargar</string>
   <string name="menu_view_report">Reportar</string>
+  <string name="menu_view_set_white_background">Poner fundo blanc</string>
+  <string name="menu_view_set_black_background">Poner fundo nigre</string>
   <string name="report_violation">Reportar violation</string>
   <string name="report_user">Reportar iste usator</string>
   <string name="report_content">Reportar iste contento</string>

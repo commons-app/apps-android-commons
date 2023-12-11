@@ -699,6 +699,8 @@
   <string name="image_selected">Одабрана слика</string>
   <string name="image_marked_as_not_for_upload">Слика означена као „није за отпремање”</string>
   <string name="menu_view_report">Пријави</string>
+  <string name="menu_view_set_white_background">Постави белу позадину</string>
+  <string name="menu_view_set_black_background">Постави црну позадину</string>
   <string name="report_violation">Пријави злоупотребу</string>
   <string name="report_user">Пријави овог корисника</string>
   <string name="report_content">Пријави овај садржај</string>

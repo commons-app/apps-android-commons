@@ -338,7 +338,7 @@
   <string name="menu_search_button">חיפוש</string>
   <string name="search_commons">חיפוש בוויקישיתוף</string>
   <string name="title_activity_search">חיפוש</string>
-  <string name="search_recent_header">חיפוש אחרונים:</string>
+  <string name="search_recent_header">חיפושים אחרונים:</string>
   <string name="provider_searches">דברים שחיפשת לאחרונה</string>
   <string name="provider_recent_languages">שאילתות שפה אחרונות</string>
   <string name="error_loading_categories">אירעה שגיאה בעת טעינת קטגוריות.</string>
