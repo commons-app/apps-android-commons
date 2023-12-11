@@ -19,6 +19,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,7 +27,6 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -80,12 +80,8 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
-import com.mapbox.mapboxsdk.maps.UiSettings;
-import com.mapbox.pluginscalebar.ScaleBarOptions;
-import com.mapbox.pluginscalebar.ScaleBarPlugin;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.MapController.NearbyPlacesInfo;
-import fr.free.nrw.commons.MapStyle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.LoginActivity;
@@ -136,6 +132,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import kotlin.Unit;
 import org.jetbrains.annotations.NotNull;
+import org.osmdroid.events.MapListener;
+import org.osmdroid.events.ScrollEvent;
+import org.osmdroid.events.ZoomEvent;
 import org.osmdroid.tileprovider.MapTileProviderBasic;
 import org.osmdroid.tileprovider.tilesource.ITileSource;
 import org.osmdroid.tileprovider.tilesource.XYTileSource;
@@ -254,6 +253,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private boolean isPermissionDenied;
     private boolean recenterToUserLocation;
     private MapboxMap mapBox;
+    private GeoPoint mapCenter;
     IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
     private Marker currentLocationMarker;
     private Polygon currentLocationPolygon;
@@ -264,6 +264,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private fr.free.nrw.commons.location.LatLng lastFocusLocation;
     private LatLngBounds latLngBounds;
     private PlaceAdapter adapter;
+    private GeoPoint lastMapFocus;
     private NearbyParentFragmentInstanceReadyCallback nearbyParentFragmentInstanceReadyCallback;
     private boolean isAdvancedQueryFragmentVisible = false;
     private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
@@ -384,23 +385,29 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             compassArrow.setRotation(0);
         });
 
-        cameraMoveListener= () -> presenter.onCameraMove(mapBox.getCameraPosition().target);
+        //cameraMoveListener= () -> presenter.onCameraMove(mapBox.getCameraPosition().target);
+        //TODO
         addCheckBoxCallback();
         presenter.attachView(this);
         isPermissionDenied = false;
         recenterToUserLocation = false;
-        initRvNearbyList();
+
+        //initRvNearbyList();
         initThemePreferences();
+        initViews();
+        presenter.setActionListeners(applicationKvStore);
+        initNearbyFilter();
 
         org.osmdroid.config.Configuration.getInstance().load(this.getContext(),PreferenceManager.getDefaultSharedPreferences(this.getContext()));
         mMapView.setTilesScaledToDpi(true);
-        final GeoPoint intialGeoPoint;
+
         if(applicationKvStore.getString("LastLocation")!=null) { // Checking for last searched location
             String[] locationLatLng = applicationKvStore.getString("LastLocation").split(",");
-            intialGeoPoint = new GeoPoint(Double.valueOf(locationLatLng[0]),Double.valueOf(locationLatLng[1]));
+            lastMapFocus = new GeoPoint(Double.valueOf(locationLatLng[0]),Double.valueOf(locationLatLng[1]));
         }else {
-            intialGeoPoint = new GeoPoint(51.50550,-0.07520);
+            lastMapFocus = new GeoPoint(51.50550,-0.07520);
         }
+
         ScaleBarOverlay scaleBarOverlay = new ScaleBarOverlay(mMapView);
         scaleBarOverlay.setScaleBarOffset(15,25);
         Paint barPaint = new Paint();
@@ -408,7 +415,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         scaleBarOverlay.setBackgroundPaint(barPaint);
         scaleBarOverlay.enableScaleBar();
         mMapView.getOverlays().add(scaleBarOverlay);
-        mMapView.getController().setCenter(intialGeoPoint);
         mMapView.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.NEVER);
         mMapView.getController().setZoom(ZOOM_LEVEL);
         MapTileProviderBasic tileProvider = new MapTileProviderBasic(this.getContext());
@@ -430,70 +436,91 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         rotationGestureOverlay.setEnabled(true);
         mMapView.setMultiTouchControls(true);
         mMapView.getOverlays().add(rotationGestureOverlay);
-        initViews();
-        presenter.setActionListeners(applicationKvStore);
-        initNearbyFilter();
+        setSearchThisAreaButtonVisibility(false);
+        mMapView.addMapListener(new MapListener() {
+            @Override
+            public boolean onScroll(ScrollEvent event) {
+                if (lastMapFocus != null ) {
+                    Location mylocation = new Location("");
+                    Location dest_location = new Location("");
+                    dest_location.setLatitude(mMapView.getMapCenter().getLatitude());
+                    dest_location.setLongitude(mMapView.getMapCenter().getLongitude());
+                    mylocation.setLatitude(lastMapFocus.getLatitude());
+                    mylocation.setLongitude(lastMapFocus.getLongitude());
+                    Float distance =  mylocation.distanceTo(dest_location);//in meters
+                    if (lastMapFocus != null) {
+                        if (isNetworkConnectionEstablished()) {
+                            if (distance > 2000.0) {
+                                setSearchThisAreaButtonVisibility(true);
+                            } else {
+                                setSearchThisAreaButtonVisibility(false);
+                            }
+                        }
+                    } else {
+                        setSearchThisAreaButtonVisibility(false);
+                    }
+                }
+
+                return true;
+            }
+
+            @Override
+            public boolean onZoom(ZoomEvent event) {
+                return false;
+            }
+
+        });
+
+
+
         if(nearbyParentFragmentInstanceReadyCallback!=null){
             nearbyParentFragmentInstanceReadyCallback.onReady();
         }
         performMapReadyActions();
-        recenterMarkerToPosition(intialGeoPoint);
-        onResume();
-
+        moveCameraToPosition(lastMapFocus);
+        setSearchThisAreaButtonVisibility(false);
+        initRvNearbyList();
         //TODO Remove MapBox Code
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(mapBoxMap -> {
-            mapBox =mapBoxMap;
-            initViews();
-            presenter.setActionListeners(applicationKvStore);
-            initNearbyFilter();
-            mapBoxMap.setStyle(isDarkTheme? MapStyle.DARK :
-                MapStyle.OUTDOORS, style -> {
-                final UiSettings uiSettings = mapBoxMap.getUiSettings();
-                uiSettings.setCompassGravity(Gravity.BOTTOM | Gravity.LEFT);
-                uiSettings.setCompassMargins(12, 0, 0, 24);
-                uiSettings.setLogoEnabled(false);
-                uiSettings.setAttributionEnabled(false);
-                uiSettings.setRotateGesturesEnabled(false);
-                isMapBoxReady =true;
-                if(nearbyParentFragmentInstanceReadyCallback!=null){
-                    nearbyParentFragmentInstanceReadyCallback.onReady();
-                }
-                performMapReadyActions();
-                final CameraPosition cameraPosition;
-                if(applicationKvStore.getString("LastLocation")!=null) { // Checking for last searched location
-                    String[] locationLatLng = applicationKvStore.getString("LastLocation").split(",");
-                    cameraPosition = new CameraPosition.Builder()
-                        .target(new LatLng(Double.valueOf(locationLatLng[0]),
-                            Double.valueOf(locationLatLng[1])))
-                        .zoom(ZOOM_LEVEL)
-                        .build();
-                }else {
-                    cameraPosition = new CameraPosition.Builder()
-                        .target(new LatLng(51.50550, -0.07520))
-                        .zoom(ZOOM_OUT)
-                        .build();
-                }
-                mapBoxMap.setCameraPosition(cameraPosition);
-
-                final ScaleBarPlugin scaleBarPlugin = new ScaleBarPlugin(mapView, mapBoxMap);
-                final int color = isDarkTheme ? R.color.bottom_bar_light : R.color.bottom_bar_dark;
-                final ScaleBarOptions scaleBarOptions = new ScaleBarOptions(getContext())
-                    .setTextColor(color)
-                    .setTextSize(R.dimen.description_text_size)
-                    .setBarHeight(R.dimen.tiny_gap)
-                    .setBorderWidth(R.dimen.miniscule_margin)
-                    .setMarginTop(R.dimen.tiny_padding)
-                    .setMarginLeft(R.dimen.tiny_padding)
-                    .setTextBarMargin(R.dimen.tiny_padding);
-                scaleBarPlugin.create(scaleBarOptions);
-                onResume();
-            });
-        });
+//        mapView.onCreate(savedInstanceState);
+//        mapView.getMapAsync(mapBoxMap -> {
+//            mapBox =mapBoxMap;
+//            initViews();
+//            presenter.setActionListeners(applicationKvStore);
+//            initNearbyFilter();
+//            mapBoxMap.setStyle(isDarkTheme? MapStyle.DARK :
+//                MapStyle.OUTDOORS, style -> {
+//                final UiSettings uiSettings = mapBoxMap.getUiSettings();
+//                uiSettings.setCompassGravity(Gravity.BOTTOM | Gravity.LEFT);
+//                uiSettings.setCompassMargins(12, 0, 0, 24);
+//                uiSettings.setLogoEnabled(false);
+//                uiSettings.setAttributionEnabled(false);
+//                uiSettings.setRotateGesturesEnabled(false);
+//                isMapBoxReady =true;
+//                if(nearbyParentFragmentInstanceReadyCallback!=null){
+//                    nearbyParentFragmentInstanceReadyCallback.onReady();
+//                }
+//                performMapReadyActions();
+//                final CameraPosition cameraPosition;
+//                if(applicationKvStore.getString("LastLocation")!=null) { // Checking for last searched location
+//                    String[] locationLatLng = applicationKvStore.getString("LastLocation").split(",");
+//                    cameraPosition = new CameraPosition.Builder()
+//                        .target(new LatLng(Double.valueOf(locationLatLng[0]),
+//                            Double.valueOf(locationLatLng[1])))
+//                        .zoom(ZOOM_LEVEL)
+//                        .build();
+//                }else {
+//                    cameraPosition = new CameraPosition.Builder()
+//                        .target(new LatLng(51.50550, -0.07520))
+//                        .zoom(ZOOM_OUT)
+//                        .build();
+//                }
+//                mapBoxMap.setCameraPosition(cameraPosition);
+//                onResume();
+//            });
+//        });
 
        tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution)));
        tvAttribution.setMovementMethod(LinkMovementMethod.getInstance());
-
         btnAdvancedOptions.setOnClickListener(v -> {
             searchView.clearFocus();
             showHideAdvancedQueryFragment(true);
@@ -540,6 +567,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             checkBoxTriStates.setTextColor(getContext().getResources().getColor(android.R.color.white));
             checkBoxTriStates.setTextColor(getContext().getResources().getColor(android.R.color.white));
             nearbyFilterList.setBackgroundColor(getContext().getResources().getColor(R.color.contributionListDarkBackground));
+            mMapView.getOverlayManager().getTilesOverlay().setColorFilter(TilesOverlay.INVERT_COLORS);
         }else{
             rvNearbyList.setBackgroundColor(getContext().getResources().getColor(android.R.color.white));
             checkBoxTriStates.setTextColor(getContext().getResources().getColor(R.color.contributionListDarkBackground));
@@ -591,15 +619,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             target=lastKnownLocation;
         }
         if (lastKnownLocation != null) {
-            final CameraPosition position = new CameraPosition.Builder()
-                .target(LocationUtils.commonsLatLngToMapBoxLatLng(target)) // Sets the new camera position
-                .zoom(ZOOM_LEVEL) // Same zoom level
-                .build();
-            //TODO
-            if(target != null){
-            GeoPoint targetP = new GeoPoint(target.getLatitude(),target.getLongitude());
-            recenterMarkerToPosition(targetP);}
-           // mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
+            GeoPoint targetP = new GeoPoint(target.getLatitude(), target.getLongitude());
+            mapCenter = targetP;
+            mMapView.getController().setCenter(targetP);
+            recenterMarkerToPosition(targetP);
+            moveCameraToPosition(targetP);
         }
         else if(locationManager.isGPSProviderEnabled()||locationManager.isNetworkProviderEnabled()){
             locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
@@ -617,7 +641,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void onResume() {
         super.onResume();
-        mapView.onResume();
         mMapView.onResume();
         presenter.attachView(this);
         registerNetworkReceiver();
@@ -1083,6 +1106,30 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
+    public fr.free.nrw.commons.location.LatLng getLastMapFocus(){
+        fr.free.nrw.commons.location.LatLng latLng = new fr.free.nrw.commons.location.LatLng(
+            lastMapFocus.getLatitude(), lastMapFocus.getLongitude(),100);
+        return latLng;
+    }
+
+    @Override
+    public fr.free.nrw.commons.location.LatLng getMapCenter(){
+        fr.free.nrw.commons.location.LatLng latLnge = new fr.free.nrw.commons.location.LatLng(mapCenter.getLatitude(),mapCenter.getLongitude(),100);
+        return latLnge;
+    }
+
+    @Override
+    public fr.free.nrw.commons.location.LatLng getMapFocus(){
+        fr.free.nrw.commons.location.LatLng latLnge = new fr.free.nrw.commons.location.LatLng(mMapView.getMapCenter().getLatitude(),mMapView.getMapCenter().getLongitude(),100);
+        return latLnge;
+    }
+
+    @Override
+    public void setLastMapFocus(){
+        lastMapFocus = (GeoPoint) mMapView.getMapCenter();
+    }
+
+    @Override
     public LatLng getLastFocusLocation() {
         return lastFocusLocation==null?null:LocationUtils.commonsLatLngToMapBoxLatLng(lastFocusLocation);
     }
@@ -1175,11 +1222,17 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void populatePlaces(final fr.free.nrw.commons.location.LatLng curlatLng) {
-        if (curlatLng.equals(lastFocusLocation) || lastFocusLocation == null || recenterToUserLocation) { // Means we are checking around current location
-            populatePlacesForCurrentLocation(lastKnownLocation, curlatLng, null);
+        if (curlatLng.equals(getLastMapFocus())) { // Means we are checking around current location
+            populatePlacesForCurrentLocation(getLastMapFocus(), curlatLng, null);
         } else {
-            populatePlacesForAnotherLocation(lastKnownLocation, curlatLng, null);
+            populatePlacesForAnotherLocation(getLastMapFocus(), curlatLng, null);
         }
+        //        if (curlatLng.equals(lastFocusLocation) || lastFocusLocation == null || recenterToUserLocation) { // Means we are checking around current location
+//            populatePlacesForCurrentLocation(lastKnownLocation, curlatLng, null);
+//        } else {
+//            populatePlacesForAnotherLocation(lastKnownLocation, curlatLng, null);
+//        }
+        //TODO
         if(recenterToUserLocation) {
             recenterToUserLocation = false;
         }
@@ -1207,7 +1260,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private void populatePlacesForCurrentLocation(
         final fr.free.nrw.commons.location.LatLng curlatLng,
         final fr.free.nrw.commons.location.LatLng searchLatLng, @Nullable final String customQuery){
-
+        Timber.tag("PRINT").d("CURRENT");
         final Observable<NearbyController.NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> nearbyController
                 .loadAttractionsFromLocation(curlatLng, searchLatLng,
@@ -1222,6 +1275,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     } else {
                         updateMapMarkers(nearbyPlacesInfo, true);
                         lastFocusLocation = searchLatLng;
+                        lastMapFocus = new GeoPoint(searchLatLng.getLatitude(),searchLatLng.getLongitude());
                     }
                 },
                 throwable -> {
@@ -1249,9 +1303,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         showErrorMessage(getString(R.string.no_nearby_places_around));
                     } else {
                         // Updating last searched location
+                        Timber.tag("PRINT").e(nearbyPlacesInfo.placeList.get(0).name);
                         applicationKvStore.putString("LastLocation", searchLatLng.getLatitude() + "," + searchLatLng.getLongitude());
                         updateMapMarkers(nearbyPlacesInfo, false);
-                        lastFocusLocation = searchLatLng;
+                        lastMapFocus = new GeoPoint(searchLatLng.getLatitude(),searchLatLng.getLongitude()) ;
+                        //lastFocusLocation = searchLatLng;
                     }
                 },
                 throwable -> {
@@ -1270,7 +1326,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     private void updateMapMarkers(final NearbyController.NearbyPlacesInfo nearbyPlacesInfo, final boolean shouldUpdateSelectedMarker) {
         presenter.updateMapMarkers(nearbyPlacesInfo, selectedMarker,shouldUpdateSelectedMarker);
-        setFilterState();
+        //TODO
+        //setFilterState();
     }
 
 
@@ -1560,7 +1617,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void updateMapMarkers(final List<NearbyBaseMarker> nearbyBaseMarkers, final Marker selectedMarker) {
         if (mMapView != null){
-            addNearbyMarkersToMapBoxMap(nearbyBaseMarkers,selectedMarker);
+            //addMarkersToMap(nearbyBaseMarkers,selectedMarker);
+            presenter.updateMapMarkersToController(nearbyBaseMarkers);
         }
     }
 
@@ -1597,6 +1655,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         // Remove the previous markers before updating them
         hideAllMarkers();
+        //TODO
+       // clearAllMarkers();
 
         filteredMarkers = new ArrayList<>();
 
@@ -1644,9 +1704,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 updateMarker(markerPlaceGroup.getIsBookmarked(), place, NearbyController.currentLocation);
             }
         }
-
-        mapBox.clear();
-        mapBox.addMarkers(filteredMarkers);
+//        TODO
+//        mapBox.clear();
+//        mapBox.addMarkers(filteredMarkers);
+//        addNearbyMarkersToMapBoxMap(filteredMarkers,null);
+        addMarkersToMap(filteredMarkers,null);
     }
 
     @Override
@@ -1721,16 +1783,17 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     /**
      * Adds multiple markers representing places to the map and handles item gestures.
      *
-     * @param places The list of Place objects containing information about the locations.
+     * @param nearbyBaseMarkers The list of Place objects containing information about the locations.
      */
-    private void addMarkersToMap(ArrayList<Place> places){
-        Boolean isBookMarked = false;
+    private void addMarkersToMap(List<NearbyBaseMarker> nearbyBaseMarkers,final Marker selectedMarker){
+        //TODO Work on bookmarks
+        //clearAllMarkers();
+
         ArrayList<OverlayItem> items = new ArrayList<>();
-        clearAllMarkers();
-        for (int i = 0;i<places.size();i++){
-            Drawable icon = ContextCompat.getDrawable(getContext(),getIconFor(places.get(i),isBookMarked));
-            GeoPoint point = new GeoPoint(places.get(i).location.getLatitude(),places.get(i).location.getLongitude());
-            OverlayItem item = new OverlayItem(places.get(i).name,null,point);
+        for (int i = 0;i<nearbyBaseMarkers.size();i++){
+            Drawable icon = ContextCompat.getDrawable(getContext(),getIconFor(nearbyBaseMarkers.get(i).getPlace(),false));
+            GeoPoint point = new GeoPoint(nearbyBaseMarkers.get(i).getPlace().location.getLatitude(),nearbyBaseMarkers.get(i).getPlace().location.getLongitude());
+            OverlayItem item = new OverlayItem(nearbyBaseMarkers.get(i).getPlace().name,null,point);
             item.setMarker(icon);
             items.add(item);
         }
@@ -1738,7 +1801,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             new OnItemGestureListener<OverlayItem>() {
                 @Override
                 public boolean onItemSingleTapUp(int index, OverlayItem item) {
-                    final Place place = places.get(index);
+                    final Place place = nearbyBaseMarkers.get(index).getPlace();
                     passInfoToSheet(place);
                     hideBottomSheet();
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
@@ -1760,32 +1823,31 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * since grey icon may lead the users to believe that it is disabled or prohibited contribution
      */
     private void hideAllMarkers() {
-        final VectorDrawableCompat vectorDrawable;
-        vectorDrawable = VectorDrawableCompat.create(
-                getContext().getResources(), R.drawable.ic_custom_greyed_out_marker, getContext().getTheme());
-        final Bitmap icon = UiUtils.getBitmap(vectorDrawable);
-        for (final Marker marker : mapBox.getMarkers()) {
-            if (!marker.equals(currentLocationMarker)) {
-                marker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
-            }
-        }
-        addCurrentLocationMarker(NearbyController.currentLocation);
+        // TODO
+//        final VectorDrawableCompat vectorDrawable;
+//        vectorDrawable = VectorDrawableCompat.create(
+//                getContext().getResources(), R.drawable.ic_custom_greyed_out_marker, getContext().getTheme());
+//        final Bitmap icon = UiUtils.getBitmap(vectorDrawable);
+//        for (final Marker marker : mapBox.getMarkers()) {
+//            if (!marker.equals(currentLocationMarker)) {
+//                marker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
+//            }
+//        }
+        //addCurrentLocationMarker(NearbyController.currentLocation);
+        //recenterMap(NearbyController.currentLocation);
     }
 
     private void addNearbyMarkersToMapBoxMap(final List<NearbyBaseMarker> nearbyBaseMarkers, final Marker selectedMarker) {
         if (mMapView != null){
             allMarkers = new ArrayList<>(nearbyBaseMarkers);
-            ArrayList<Place> places1 = new ArrayList<>();
-            //TODO Work on bookmarks
-            for (int i =0;i<allMarkers.size();i++){
-                places1.add(allMarkers.get(i).getPlace());
-            }
-            addMarkersToMap(places1);
+            mapBox.addMarkers(nearbyBaseMarkers);
+            addMarkersToMap(allMarkers,selectedMarker);
         }
     }
 
     @Override
     public void recenterMap(fr.free.nrw.commons.location.LatLng curLatLng) {
+       //TODO
         if (isPermissionDenied || curLatLng == null) {
             recenterToUserLocation = true;
             checkPermissionsAndPerformAction();
@@ -2012,9 +2074,41 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * Clears all markers from the map and resets certain map overlays and gestures.
      * After clearing markers, it re-adds a scale bar overlay and rotation gesture overlay to the map.
      */
-    private void clearAllMarkers(){
+    @Override
+    public void clearAllMarkers(){
         mMapView.getOverlayManager().clear() ;
         mMapView.invalidate();
+        GeoPoint geoPoint = mapCenter ;
+        if(geoPoint != null) {
+            List<Overlay> overlays = mMapView.getOverlays();
+
+            ScaleDiskOverlay diskOverlay =
+                new ScaleDiskOverlay(this.getContext(),
+                    geoPoint, 2000, GeoConstants.UnitOfMeasure.foot);
+            Paint circlePaint = new Paint();
+            circlePaint.setColor(Color.rgb(128, 128, 128));
+            circlePaint.setStyle(Paint.Style.STROKE);
+            circlePaint.setStrokeWidth(2f);
+            diskOverlay.setCirclePaint2(circlePaint);
+            Paint diskPaint = new Paint();
+            diskPaint.setColor(Color.argb(40, 128, 128, 128));
+            diskPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+            diskOverlay.setCirclePaint1(diskPaint);
+            diskOverlay.setDisplaySizeMin(900);
+            diskOverlay.setDisplaySizeMax(1700);
+            mMapView.getOverlays().add(diskOverlay);
+
+            org.osmdroid.views.overlay.Marker startMarker = new org.osmdroid.views.overlay.Marker(
+                mMapView);
+            startMarker.setPosition(geoPoint);
+            startMarker.setAnchor(org.osmdroid.views.overlay.Marker.ANCHOR_CENTER,
+                org.osmdroid.views.overlay.Marker.ANCHOR_BOTTOM);
+            startMarker.setIcon(
+                ContextCompat.getDrawable(this.getContext(), R.drawable.current_location_marker));
+            startMarker.setTitle("Your Location");
+            startMarker.setTextLabelFontSize(24);
+            mMapView.getOverlays().add(startMarker);
+        }
 
         ScaleBarOverlay scaleBarOverlay = new ScaleBarOverlay(mMapView);
         scaleBarOverlay.setScaleBarOffset(15,25);
@@ -2023,10 +2117,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         scaleBarOverlay.setBackgroundPaint(barPaint);
         scaleBarOverlay.enableScaleBar();
         mMapView.getOverlays().add(scaleBarOverlay);
-        RotationGestureOverlay rotationGestureOverlay = new RotationGestureOverlay(mMapView,compassArrow,compassBg);
-        rotationGestureOverlay.setEnabled(true);
-        mMapView.setMultiTouchControls(true);
-        mMapView.getOverlays().add(rotationGestureOverlay);
     }
 
     /**
@@ -2073,6 +2163,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             startMarker.setTextLabelFontSize(24);
             mMapView.getOverlays().add(startMarker);
         }
+    }
+
+    private void moveCameraToPosition(GeoPoint geoPoint){
+        mMapView.getController().animateTo(geoPoint);
     }
 
     public interface  NearbyParentFragmentInstanceReadyCallback{
