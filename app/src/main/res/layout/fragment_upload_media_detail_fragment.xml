@@ -147,7 +147,7 @@
                       style="@style/Widget.AppCompat.Button.Borderless"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:layout_marginEnd="@dimen/standard_gap"
+                      android:layout_marginEnd="@dimen/tiny_gap"
                       android:layout_marginBottom="24dp"
                       android:layout_toStartOf="@id/btn_previous"
                       android:contentDescription="Edit Image"
