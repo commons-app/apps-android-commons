@@ -296,7 +296,7 @@ public class NearbyParentFragmentPresenter
                         (LocationUtils.commonsLatLngToMapBoxLatLng(NearbyController.latestSearchLocation));
                 if (nearbyParentFragmentView.isNetworkConnectionEstablished()) {
                     if (distance > NearbyController.latestSearchRadius) {
-                        nearbyParentFragmentView.setSearchThisAreaButtonVisibility(true);
+                        //nearbyParentFragmentView.setSearchThisAreaButtonVisibility(true);
                     } else {
                         nearbyParentFragmentView.setSearchThisAreaButtonVisibility(false);
                     }
@@ -308,12 +308,13 @@ public class NearbyParentFragmentPresenter
 
     @Override
     public void filterByMarkerType(List<Label> selectedLabels, int state, boolean filterForPlaceState, boolean filterForAllNoneType) {
-        if (filterForAllNoneType) { // Means we will set labels based on states
+        if (filterForAllNoneType) {// Means we will set labels based on states
             switch (state) {
                 case UNKNOWN:
                     // Do nothing
                     break;
                 case UNCHECKED:
+                    //TODO
                     nearbyParentFragmentView.filterOutAllMarkers();
                     nearbyParentFragmentView.setRecyclerViewAdapterItemsGreyedOut();
                     break;
