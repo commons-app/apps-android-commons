@@ -40,7 +40,6 @@ public interface NearbyParentFragmentContract {
         void setTabItemContributions();
         boolean isDetailsBottomSheetVisible();
         void setBottomSheetDetailsSmaller();
-        boolean isSearchThisAreaButtonVisible();
         void setRecyclerViewAdapterAllSelected();
         void setRecyclerViewAdapterItemsGreyedOut();
         void setCheckBoxAction();
