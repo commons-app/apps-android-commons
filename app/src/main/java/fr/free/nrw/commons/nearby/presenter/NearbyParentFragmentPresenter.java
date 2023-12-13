@@ -308,6 +308,7 @@ public class NearbyParentFragmentPresenter
 
     @Override
     public void filterByMarkerType(List<Label> selectedLabels, int state, boolean filterForPlaceState, boolean filterForAllNoneType) {
+        Timber.tag("PRINT").d("State "+state);
         if (filterForAllNoneType) {// Means we will set labels based on states
             switch (state) {
                 case UNKNOWN:

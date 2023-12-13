@@ -33,7 +33,6 @@ public interface NearbyParentFragmentContract {
         void hideBottomSheet();
         void hideBottomDetailsSheet();
         void displayBottomSheetWithInfo(Marker marker);
-        void addOnCameraMoveListener();
         void addSearchThisAreaButtonAction();
         void setSearchThisAreaButtonVisibility(boolean isVisible);
         void setProgressBarVisibility(boolean isVisible);
