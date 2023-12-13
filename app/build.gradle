@@ -294,7 +294,7 @@ android {
             buildConfigField "String", "TEST_USERNAME", "\"" + getTestUserName() + "\""
             buildConfigField "String", "TEST_PASSWORD", "\"" + getTestPassword() + "\""
             buildConfigField "String", "DEPICTS_PROPERTY", "\"P180\""
-
+            buildConfigField "String", "MapboxAccessToken", "\"$MAPBOX_ACCESS_TOKEN\""
             dimension 'tier'
         }
 
@@ -330,7 +330,7 @@ android {
             buildConfigField "String", "TEST_USERNAME", "\"" + getTestUserName() + "\""
             buildConfigField "String", "TEST_PASSWORD", "\"" + getTestPassword() + "\""
             buildConfigField "String", "DEPICTS_PROPERTY", "\"P245962\""
-
+            buildConfigField "String", "MapboxAccessToken", "\"$MAPBOX_ACCESS_TOKEN\""
             dimension 'tier'
         }
     }

@@ -235,8 +235,8 @@
   <string name="about_faq" fuzzy="true">&lt;u&gt;FAQ&lt;/u&gt;</string>
   <string name="welcome_skip_button">ಟ್ಯುಟೋರಿಯಲ್‌ನ್ ಬುಡ್ಲೆ</string>
   <string name="no_internet">ಇಂಟರ್ನೆಟ್ ಇಜ್ಜಿ</string>
-  <string name="error_notifications">ಅಧಿಸೂಚನೆಟ್ ದೋಷೊ ಉಂಡು</string>
-  <string name="no_notifications">ಅಧಿಸೂಚನೆ ಇಜ್ಜಿ.</string>
+  <string name="error_notifications">ಸೂಚನೆಲೆಡ್ ದೋಷೊ ಉಂಡು</string>
+  <string name="no_notifications">ವೊವ್ವೆ ಸೂಚನೆಲು ಇಜ್ಜಿ</string>
   <string name="about_translate">ಅನುವಾದೊ</string>
   <string name="about_translate_title">ಬಾಸೆಲು</string>
   <string name="about_translate_message">ಇರ್ ಅನುವಾದೊನ್ ಕೊರಿಯರ ಒಪ್ಪಗೆ ಉಂಡಾ, ಭಾಷೆನ್ ಆಯ್ಕೆ ಮಾಲ್ಲುಲೆ.</string>
@@ -304,15 +304,15 @@
   <string name="images_reverted_explanation">ಈರ್ ಕಾಮನ್ಸ್\'ಗು ಮಿತೇರಾಯಿನ ಆಕೃತಿಲೆಡ್ ಮಾಜಾವಂದಿನ ಶೇಕಡ.</string>
   <string name="images_used_explanation">ಈರ್ ಕಾಮನ್ಸ್\'ಗು ಮಿತೇರಾಯಿನ ಆಕೃತಿಲೆಡ್ ವಿಕಿಮೀಡಿಯಾ ಲೇಖನೊಲೆಡ್ ಬಳಕೆಯಾಯಿನ ಸಂಖ್ಯೆ.</string>
   <string name="error_occurred">ದೋಸೊ ಆತ್ಂಡ್!</string>
-  <string name="notifications_channel_name_all">ಕಾಮನ್ಸ್ ಅಧಿಸೂಚನೆ</string>
+  <string name="notifications_channel_name_all">ಕಾಮನ್ಸ್ ಸೂಚನೆ</string>
   <string name="preference_author_name_toggle">ನಿಷ್ಟ ಲೇಖಕ ಪುದರ್ ಬಳಸುಲೆ.</string>
   <string name="preference_author_name_toggle_summary">ಚಿತ್ರೊಲೆನ್ ಮಿತೇರಾನಗ ಇರೆನ ಬಳಕೆಪುದರುದ ಬದಲ್ ಒಂಜಿ ನಿಷ್ಟ ಲೇಖಕ ಪುದರ್ ಬಳಸುಲೆ.</string>
   <string name="preference_author_name">ನಿಷ್ಟ ಲೇಖಕ ಪುದರ್</string>
   <string name="contributions_fragment">ಕಾನಿಕೆಲು</string>
   <string name="nearby_fragment">ಕೈತಲ್‍ದ</string>
-  <string name="notifications">ಅಧಿಸೂಚನೆಲು</string>
+  <string name="notifications">ಸೂಚನೆಲು</string>
   <string name="read_notifications">ಅಧಿಸೂಚನೆಲು(ಓದಿನ)</string>
-  <string name="display_nearby_notification">ಕೈತಲ್ದ ಅಧಿಸೂಚನೆ ತೋಜಾಲೆ</string>
+  <string name="display_nearby_notification">ಕೈತಲ್ದ ಸೂಚನೆ ತೋಜಾಲೆ</string>
   <string name="display_nearby_notification_summary" fuzzy="true">ಚಿತ್ರ ಬೋಡಾಯಿನ ಕೈತಲ್ದ ಜಾಗ ತೂವರೆ ಮುಲ್ಪ ತಟ್ಟ್\'ಲೆ</string>
   <string name="list_sheet">ಪಟ್ಟಿ</string>
   <string name="storage_permission">ಶೇಖರಣ ಅನುಮತಿ</string>

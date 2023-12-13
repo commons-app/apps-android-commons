@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Agurwin Isaac
+-->
+<resources>
+  <string name="crash_dialog_title">Commons paam daʋŋ</string>
+  <string name="crash_dialog_text">Oops. Daʋŋ si\'a kidig!</string>
+  <string name="crash_dialog_ok_toast">M pʋ\'ʋsya!</string>
+</resources>

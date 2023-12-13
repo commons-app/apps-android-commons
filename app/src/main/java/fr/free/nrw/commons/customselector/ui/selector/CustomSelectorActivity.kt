@@ -28,9 +28,9 @@ import fr.free.nrw.commons.media.ZoomableActivity
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
-import kotlinx.android.synthetic.main.activity_login.view.title
 import kotlinx.coroutines.*
 import java.io.File
+import java.lang.Integer.max
 import javax.inject.Inject
 
 
@@ -66,6 +66,22 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
      * Pref for saving selector state.
      */
     private lateinit var prefs: SharedPreferences
+
+    /**
+     * Maximum number of images that can be selected.
+     */
+    private val uploadLimit: Int = 20
+
+    /**
+     * Flag that is marked true when the amount
+     * of selected images is greater than the upload limit.
+     */
+    private var uploadLimitExceeded: Boolean = false
+
+    /**
+     * Tracks the amount by which the upload limit has been exceeded.
+     */
+    private var uploadLimitExceededBy: Int = 0
 
     /**
      * View Model Factory.
@@ -201,6 +217,7 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
             i++
         }
         markAsNotForUpload(selectedImages)
+        toolbarBinding.imageLimitError.visibility = View.INVISIBLE
     }
 
     /**
@@ -314,6 +331,10 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
     private fun setUpToolbar() {
         val back: ImageButton = findViewById(R.id.back)
         back.setOnClickListener { onBackPressed() }
+
+        val limitError: ImageButton = findViewById(R.id.image_limit_error)
+        limitError.visibility = View.INVISIBLE
+        limitError.setOnClickListener { displayUploadLimitWarning() }
     }
 
     /**
@@ -342,7 +363,19 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
         viewModel.selectedImages.value = selectedImages
         changeTitle(bucketName, selectedImages.size)
 
-        if (selectedNotForUploadImages > 0) {
+        uploadLimitExceeded = selectedImages.size > uploadLimit
+        uploadLimitExceededBy = max(selectedImages.size - uploadLimit,0)
+
+        if (uploadLimitExceeded && selectedNotForUploadImages == 0) {
+            toolbarBinding.imageLimitError.visibility = View.VISIBLE
+            bottomSheetBinding.upload.text = resources.getString(
+                R.string.custom_selector_button_limit_text, uploadLimit)
+        } else {
+            toolbarBinding.imageLimitError.visibility = View.INVISIBLE
+            bottomSheetBinding.upload.text = resources.getString(R.string.upload)
+        }
+
+        if (uploadLimitExceeded || selectedNotForUploadImages > 0) {
             bottomSheetBinding.upload.isEnabled = false
             bottomSheetBinding.upload.alpha = 0.5f
         } else {
@@ -390,22 +423,22 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
      * Get the selected images. Remove any non existent file, forward the data to finish selector.
      */
     fun onDone() {
-        val selectedImages = viewModel.selectedImages.value
-        if (selectedImages.isNullOrEmpty()) {
-            finishPickImages(arrayListOf())
-            return
-        }
-        var i = 0
-        while (i < selectedImages.size) {
-            val path = selectedImages[i].path
-            val file = File(path)
-            if (!file.exists()) {
-                selectedImages.removeAt(i)
-                i--
+            val selectedImages = viewModel.selectedImages.value
+            if (selectedImages.isNullOrEmpty()) {
+                finishPickImages(arrayListOf())
+                return
             }
-            i++
-        }
-        finishPickImages(selectedImages)
+            var i = 0
+            while (i < selectedImages.size) {
+                val path = selectedImages[i].path
+                val file = File(path)
+                if (!file.exists()) {
+                    selectedImages.removeAt(i)
+                    i--
+                }
+                i++
+            }
+            finishPickImages(selectedImages)
     }
 
     /**
@@ -430,6 +463,20 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
             isImageFragmentOpen = false
             changeTitle(getString(R.string.custom_selector_title), 0)
         }
+    }
+
+    /**
+     * Displays a dialog explaining the upload limit warning.
+     */
+    private fun displayUploadLimitWarning() {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.custom_selector_limit_dialog)
+        (dialog.findViewById(R.id.btn_dismiss_limit_warning) as Button).setOnClickListener()
+        { dialog.dismiss() }
+        (dialog.findViewById(R.id.upload_limit_warning) as TextView).text = resources.getString(
+            R.string.custom_selector_over_limit_warning, uploadLimit, uploadLimitExceededBy)
+        dialog.show()
     }
 
     /**

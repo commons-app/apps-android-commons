@@ -2,6 +2,7 @@
 <!-- Authors:
 * Ajeje Brazorf
 * Amire80
+* Googology
 * LeGuyanaisPure
 * Liuxinyu970226
 * Madhurgupta10
@@ -179,9 +180,10 @@
   <string name="theme_default_name">Option to make the app\'s theme follow the global system setting.</string>
   <string name="more">{{Identical|More}}</string>
   <string name="map_attribution">&lt;code&gt;&amp;amp;#169;&lt;/code&gt;  is the copyright symbol (©).</string>
+  <string name="pan_and_zoom_to_adjust">Panning means moving the map left/right/up/down, typically by touching the screen with one finger and moving it.\n\nZooming means making the map\'s scale bigger or smaller, typically by pinching with two fingers.\n\nExample in other app:\nhttps://igss.schneider-electric.com/features/pan-and-zoom-in-definition/</string>
   <string name="location_picker_image_view_shadow">A description of a visual element, location picker image shadow. Used for accesibility usually.</string>
   <string name="label">{{Identical|Label}}</string>
-  <string name="description">{{Identical|Description}}</string>
+  <string name="description">{{Identical|Description}}\n\nDescription of the picture. It ends up on Wikimedia Commons as the \"Description\" field.</string>
   <string name="title_page_bookmarks_items">{{Identical|Item}}</string>
   <string name="done">{{identical|Done}}</string>
   <string name="advanced_options">{{Identical|Advanced options}}</string>

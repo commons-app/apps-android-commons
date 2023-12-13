@@ -46,8 +46,10 @@ import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.upload.worker.WorkRequestHelper;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
+import io.reactivex.Completable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.Collections;
+import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
@@ -170,6 +172,7 @@ public class MainActivity  extends BaseActivity
                     R.string.add_location_manually,
                     permission.ACCESS_MEDIA_LOCATION);
             }
+            checkAndResumeStuckUploads();
         }
     }
 
@@ -274,6 +277,34 @@ public class MainActivity  extends BaseActivity
                 getResources()
                 .getQuantityString(R.plurals.contributions_subtitle,
                     uploadCount, uploadCount):getString(R.string.contributions_subtitle_zero)));
+        }
+    }
+
+    /**
+     * Resume the uploads that got stuck because of the app being killed
+     * or the device being rebooted.
+     *
+     * When the app is terminated or the device is restarted, contributions remain in the
+     * 'STATE_IN_PROGRESS' state. This status persists and doesn't change during these events.
+     * So, retrieving contributions labeled as 'STATE_IN_PROGRESS'
+     * from the database will provide the list of uploads that appear as stuck on opening the app again
+     */
+    @SuppressLint("CheckResult")
+    private void checkAndResumeStuckUploads() {
+        List<Contribution> stuckUploads = contributionDao.getContribution(
+                Collections.singletonList(Contribution.STATE_IN_PROGRESS))
+            .subscribeOn(Schedulers.io())
+            .blockingGet();
+        Timber.d("Resuming " + stuckUploads.size() + " uploads...");
+        if(!stuckUploads.isEmpty()) {
+            for(Contribution contribution: stuckUploads) {
+                contribution.setState(Contribution.STATE_QUEUED);
+                Completable.fromAction(() -> contributionDao.saveSynchronous(contribution))
+                    .subscribeOn(Schedulers.io())
+                    .subscribe();
+            }
+            WorkRequestHelper.Companion.makeOneTimeWorkRequest(
+                this, ExistingWorkPolicy.APPEND_OR_REPLACE);
         }
     }
 

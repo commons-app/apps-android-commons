@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.profile.achievements
 
+import android.accounts.Account
 import android.content.Context
 import android.os.Looper
 import android.view.LayoutInflater
@@ -56,108 +57,36 @@ class AchievementsFragmentUnitTests {
     private lateinit var layoutInflater: LayoutInflater
 
     @Mock
-    private lateinit var imageView: ImageView
-
-    @Mock
-    private lateinit var badgeText: TextView
-
-    @Mock
-    private lateinit var levelNumber: TextView
-
-    @Mock
-    private lateinit var thanksReceived: TextView
-
-    @Mock
-    private lateinit var imagesUploadedProgressbar: CircleProgressBar
-
-    @Mock
-    private lateinit var imagesUsedByWikiProgressBar: CircleProgressBar
-
-    @Mock
-    private lateinit var imageRevertsProgressbar: CircleProgressBar
-
-    @Mock
-    private lateinit var imagesFeatured: TextView
-
-    @Mock
-    private lateinit var tvQualityImages: TextView
-
-    @Mock
-    private lateinit var imagesRevertLimitText: TextView
-
-    @Mock
-    private lateinit var imageByWikiText: TextView
-
-    @Mock
-    private lateinit var imageRevertedText: TextView
-
-    @Mock
-    private lateinit var imageUploadedText: TextView
-
-    @Mock
-    private lateinit var progressBar: ProgressBar
-
-    @Mock
     private lateinit var sessionManager: SessionManager
 
     @Mock
     private lateinit var parentView: ViewGroup
 
+    @Mock
+    private lateinit var account: Account
+
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
+
+        fragment = AchievementsFragment()
+        Whitebox.setInternalState(fragment, "sessionManager", sessionManager)
+        Mockito.`when`(sessionManager.userName).thenReturn("Test")
+        Mockito.`when`(sessionManager.currentAccount).thenReturn(account)
+
         context = ApplicationProvider.getApplicationContext()
         menuItem = RoboMenuItem(context)
         AppAdapter.set(TestAppAdapter())
         val activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
-        fragment = AchievementsFragment()
         val fragmentManager: FragmentManager = activity.supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(fragment, null)
         fragmentTransaction.commitNowAllowingStateLoss()
 
         layoutInflater = LayoutInflater.from(activity)
-        view = LayoutInflater.from(activity)
-            .inflate(R.layout.fragment_achievements, null) as View
+        view = fragment.onCreateView(layoutInflater, activity.findViewById(R.id.container), null)!!
 
         achievements = Achievements(0, 0, 0, 0, 0, 0, 0)
-
-        Whitebox.setInternalState(fragment, "thanksReceived", thanksReceived)
-        Whitebox.setInternalState(
-            fragment,
-            "imagesUsedByWikiProgressBar",
-            imagesUsedByWikiProgressBar
-        )
-        Whitebox.setInternalState(
-            fragment,
-            "imagesUsedByWikiProgressBar",
-            imagesUsedByWikiProgressBar
-        )
-        Whitebox.setInternalState(fragment, "imagesFeatured", imagesFeatured)
-        Whitebox.setInternalState(fragment, "tvQualityImages", tvQualityImages)
-        Whitebox.setInternalState(fragment, "levelNumber", levelNumber)
-        Whitebox.setInternalState(fragment, "imageView", imageView)
-        Whitebox.setInternalState(fragment, "badgeText", badgeText)
-        Whitebox.setInternalState(fragment, "imagesUploadedProgressbar", imagesUploadedProgressbar)
-        Whitebox.setInternalState(fragment, "imageRevertsProgressbar", imageRevertsProgressbar)
-        Whitebox.setInternalState(
-            fragment,
-            "imagesUsedByWikiProgressBar",
-            imagesUsedByWikiProgressBar
-        )
-        Whitebox.setInternalState(fragment, "imageView", imageView)
-        Whitebox.setInternalState(fragment, "imageByWikiText", imageByWikiText)
-        Whitebox.setInternalState(fragment, "imageRevertedText", imageRevertedText)
-        Whitebox.setInternalState(fragment, "imageUploadedText", imageUploadedText)
-        Whitebox.setInternalState(fragment, "imageView", imageView)
-        Whitebox.setInternalState(fragment, "progressBar", progressBar)
-        Whitebox.setInternalState(fragment, "imagesRevertLimitText", imagesRevertLimitText)
-        Whitebox.setInternalState(fragment, "item", menuItem)
-        Whitebox.setInternalState(fragment, "sessionManager", sessionManager)
-        Whitebox.setInternalState(fragment, "mView", parentView)
-
-        Mockito.`when`(sessionManager.userName).thenReturn("Test")
-
     }
 
     @Test
@@ -354,18 +283,20 @@ class AchievementsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testMenuVisibilityOverrideNotVisible() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
             "setMenuVisibility",
             Boolean::class.java
         )
         method.isAccessible = true
         method.invoke(fragment, false)
-        Assert.assertNull(ShadowToast.getLatestToast())
+        assertToast()
     }
 
     @Test
     @Throws(Exception::class)
     fun testMenuVisibilityOverrideVisibleWithContext() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         Mockito.`when`(parentView.context).thenReturn(context)
         val method: Method = AchievementsFragment::class.java.getDeclaredMethod(
             "setMenuVisibility",
@@ -373,14 +304,19 @@ class AchievementsFragmentUnitTests {
         )
         method.isAccessible = true
         method.invoke(fragment, true)
-        if(ConfigUtils.isBetaFlavour) {
+        assertToast()
+    }
+
+    private fun assertToast() {
+        if (ConfigUtils.isBetaFlavour) {
             Assert.assertEquals(
                 ShadowToast.getTextOfLatestToast().toString(),
                 context.getString(R.string.achievements_unavailable_beta)
             )
         } else {
-            Assert.assertNull(
-                ShadowToast.getTextOfLatestToast()
+            Assert.assertEquals(
+                context.getString(R.string.user_not_logged_in),
+                ShadowToast.getTextOfLatestToast().toString()
             )
         }
     }

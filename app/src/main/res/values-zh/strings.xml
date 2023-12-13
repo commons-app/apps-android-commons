@@ -390,6 +390,7 @@
   <string name="wrong">错误答案</string>
   <string name="quiz_screenshot_question">这个屏幕截图可以上传吗？</string>
   <string name="share_app_title">分享应用</string>
+  <string name="rotate">旋转</string>
   <string name="error_fetching_nearby_places">检索附近地点时出错。</string>
   <string name="no_nearby_places_around">找不到附近地点</string>
   <string name="error_fetching_nearby_monuments">检索附近古迹时出错。</string>
@@ -474,6 +475,9 @@
   <string name="option_allow">允许</string>
   <string name="option_dismiss">拒绝</string>
   <string name="in_app_camera_needs_location">请从“设置”中打开位置权限，然后重试。 \n\n注意：如果应用程序无法在短时间内从设备检索位置，则上传可能没有位置。</string>
+  <string name="in_app_camera_location_permission_rationale">应用内相机需要位置权限才能将其附加到您的图像，以防EXIF中位置信息不可用。请允许应用程序访问您的位置，然后重试。\n\n请注意：如果应用程序无法在短时间内从设备检索位置，上传内容可能会没有位置信息。</string>
+  <string name="in_app_camera_location_permission_denied">由于缺少位置权限，应用程序不会随镜头记录位置</string>
+  <string name="in_app_camera_location_unavailable">当GPS关闭时，应用程序不会随镜头记录位置</string>
   <string name="open_document_photo_picker_title">使用基于“文件”应用的照片选择器</string>
   <string name="open_document_photo_picker_explanation">新版Android照片选择器可能会丢失位置信息。如果您正在使用它，请启用该设置。</string>
   <string name="location_loss_warning">将此关闭可能会触发新的 Android 照片选择器。这可能会有丢失位置信息的风险。\n\n点击“阅读更多”以获取更多信息。</string>
@@ -625,6 +629,7 @@
   <string name="recommend_high_accuracy_mode">选择高精确度模式以获得最佳结果。</string>
   <string name="ask_to_turn_location_on">打开位置？</string>
   <string name="nearby_needs_location">附近需要启用位置才能正常工作</string>
+  <string name="upload_map_location_access">您需要授予对当前位置的访问权限才能自动设置位置。</string>
   <string name="use_location_from_similar_image">您是在同一地点拍摄这两张图片的吗？您想要使用右侧图片的纬度/经度吗？</string>
   <string name="load_more">加载更多</string>
   <string name="nearby_no_results">未找到位置，请尝试更改您的搜索条件。</string>
@@ -713,7 +718,7 @@
   <string name="custom_selector_info_text2">右边的图片与左边的不同，它具有已上传至维基共享资源的标志。\n点击并长按来预览图像。</string>
   <string name="welcome_custom_selector_ok">棒极了</string>
   <string name="custom_selector_already_uploaded_image_text">此图像已上传至维基共享资源。</string>
-  <string name="wlm_upload_info" fuzzy="true">此图像将会进入年维基爱古迹竞赛</string>
+  <string name="wlm_upload_info">此图像将会进入维基爱古迹竞赛</string>
   <string name="display_monuments">显示古迹</string>
   <string name="wlm_month_message">维基爱古迹的月份！</string>
   <string name="learn_more">了解更多</string>
@@ -771,6 +776,9 @@
   <string name="full_screen_mode_features_info">快速长距离滑动来执行以下操作：\n- 向左/右：前往上一个/下一个\n- 向上：选择\n- 向下：标记为不上传</string>
   <string name="set_up_avatar_toast_string">要设置你的排行榜头像，请点击任意图片上三点式菜单中的\"设置为头像\"</string>
   <string name="similar_coordinate_description_auto_set">图片坐标并不是准确的坐标，但上传这张图片的人认为它们足够接近。</string>
+  <string name="storage_permissions_denied">存储权限被拒绝</string>
+  <string name="unable_to_share_upload_item">无法分享此项目</string>
+  <string name="permissions_are_required_for_functionality">功能需要权限</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">已选择%d个图像</item>
     <item quantity="other">已选择%d个图像</item>

@@ -132,6 +132,7 @@
   <string name="upload_failed">Файл не найден. Попробуйте другой файл.</string>
   <string name="retry_limit_reached">Достигнут максимальный лимит повторов! Пожалуйста, отмените загрузку и повторите попытку.</string>
   <string name="unrestricted_battery_mode">Выключить оптимизацию батареи?</string>
+  <string name="suggest_unrestricted_mode">Загрузка более 3 изображений работает более надежно, если оптимизация заряда батареи отключена. Пожалуйста, отключите оптимизацию заряда батареи для приложения Викисклада в настройках, чтобы обеспечить плавную загрузку. \n\nВозможные действия по отключению оптимизации заряда батареи:\n\nШаг 1: Нажмите кнопку \'Настройки\' ниже.\n\nШаг 2: Переключитесь с \'Не оптимизировано\' на \'Все приложения\'.\n\nШаг 3. Найдите «Викисклад» или «fr.free.nrw.commons».\n\nШаг 4. Нажмите на него и выберите \'Не оптимизировать\'.\n\nШаг 5: Нажмите \'Готово\'.</string>
   <string name="authentication_failed">Ошибка аутентификации. Пожалуйста, авторизуйтесь ещё раз.</string>
   <string name="uploading_started">Загрузка началась!</string>
   <string name="uploading_queued">Загрузка в очереди (включен режим ограниченного подключения)</string>
@@ -724,7 +725,9 @@
   <string name="custom_selector_info_text2">В отличие от изображения слева, изображение справа имеет логотип Commons, указывающий, что оно уже загружено.\n Нажмите и удерживайте для предварительного просмотра изображения.</string>
   <string name="welcome_custom_selector_ok">Потрясающе</string>
   <string name="custom_selector_already_uploaded_image_text">Это изображение уже было загружено на Викисклад.</string>
-  <string name="wlm_upload_info" fuzzy="true">Это изображение будет участвовать в конкурсе «Вики любит памятники».</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">Отменить</string>
+  <string name="custom_selector_button_limit_text">Максимально: %1$d</string>
+  <string name="wlm_upload_info">Это изображение будет участвовать в конкурсе «Вики любит памятники».</string>
   <string name="display_monuments">Показать памятники</string>
   <string name="wlm_month_message">Это месяц «Вики любит памятники»!</string>
   <string name="learn_more">УЗНАТЬ ПОДРОБНЕЕ</string>
@@ -772,6 +775,8 @@
   <string name="image_selected">Изображение выбрано</string>
   <string name="image_marked_as_not_for_upload">Изображение помечено как не подлежащее загрузке</string>
   <string name="menu_view_report">Отчёт</string>
+  <string name="menu_view_set_white_background">Установить белый фон</string>
+  <string name="menu_view_set_black_background">Установить черный фон</string>
   <string name="report_violation">Сообщить о нарушении</string>
   <string name="report_user">Пожаловаться на участника_цу</string>
   <string name="report_content">Пожаловаться на это содержимое</string>
@@ -783,6 +788,7 @@
   <string name="similar_coordinate_description_auto_set">Координаты не являются точными, но человек, загрузивший эту фотографию, считает, что они достаточно близки.</string>
   <string name="storage_permissions_denied">Доступ к хранилищу запрещён</string>
   <string name="unable_to_share_upload_item">Невозможно поделиться этим объектом</string>
+  <string name="permissions_are_required_for_functionality">Для функционирования требуются разрешения</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">выбрано %d изображение</item>
     <item quantity="few">выбрано %d изображения</item>

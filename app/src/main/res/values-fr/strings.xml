@@ -336,8 +336,8 @@
   <string name="no_images_found">Aucune image trouvée !</string>
   <string name="error_loading_images">Une erreur s’est produite durant le chargement des images.</string>
   <string name="image_uploaded_by">Téléversé par : %1$s</string>
-  <string name="block_notification_title">{{GENDER:|Bloqué|Bloquée}}</string>
-  <string name="block_notification">Vous avez été bloqué et ne pouvez plus modifier sur  Commons</string>
+  <string name="block_notification_title">Bloqué(e)</string>
+  <string name="block_notification">Vous avez été bloqué(e) et ne pouvez plus modifier Commons</string>
   <string name="app_widget_heading">Image du jour</string>
   <string name="menu_search_button">Chercher</string>
   <string name="search_commons">Rechercher dans Commons</string>
@@ -705,6 +705,10 @@
   <string name="custom_selector_info_text2">À l’inverse de l’image sur la gauche, l’image de droite comporte un logo Commons qui indique qu’elle a déjà été téléversée.\nToucher et maintenir pour avoir un aperçu de l’image.</string>
   <string name="welcome_custom_selector_ok">Génial</string>
   <string name="custom_selector_already_uploaded_image_text">Cette image a déjà été téléversée sur Commons.</string>
+  <string name="custom_selector_over_limit_warning">Pour des raisons techniques, l’application ne peut pas charger de façon fiable plus de %1$d images à la fois. La limite de téléchargement de %1$d a été dépassée de %2$d.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">Ignorer</string>
+  <string name="custom_selector_button_limit_text">Max : %1$d</string>
+  <string name="custom_selector_limit_error_desc">Erreur : Limite de téléchargement dépassée</string>
   <string name="place_state_wlm">WLM</string>
   <string name="wlm_upload_info">Cette image sera entrée dans le concours « Wiki aime les monuments »</string>
   <string name="display_monuments">Afficher les monuments</string>
@@ -755,6 +759,8 @@
   <string name="image_selected">Image sélectionnée</string>
   <string name="image_marked_as_not_for_upload">Image marquée comme à ne pas téléverser</string>
   <string name="menu_view_report">Signaler</string>
+  <string name="menu_view_set_white_background">Définir un fond blanc</string>
+  <string name="menu_view_set_black_background">Définir un fond noir</string>
   <string name="report_violation">Signaler une infraction</string>
   <string name="report_user">Signaler cet utilisateur</string>
   <string name="report_content">Signaler ce contenu</string>

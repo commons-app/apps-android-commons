@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Athena in Wonderland
+* Caiofernandes
 * CaiusSPQR
 * Fitoschido
 * Fúlvio
@@ -667,6 +668,10 @@
   <string name="custom_selector_info_text2">Ao contrário da imagem à esquerda, a imagem à direita tem o logótipo da wiki Commons que indica que ela já foi carregada.\n Tocar e manter para uma antevisão da imagem.</string>
   <string name="welcome_custom_selector_ok">Excecional</string>
   <string name="custom_selector_already_uploaded_image_text">Esta imagem já foi carregada na wiki Commons.</string>
+  <string name="custom_selector_over_limit_warning">Por motivos técnicos, o aplicativo não pode fazer upload confiável de mais de %1$d fotos de uma só vez. O limite de upload de %1$d foi excedido por %2$d .</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">Descartar</string>
+  <string name="custom_selector_button_limit_text">Máx.: %1$d</string>
+  <string name="custom_selector_limit_error_desc">Erro: limite de upload excedido</string>
   <string name="wlm_upload_info">Esta imagem será submetida ao concurso Wiki Loves Monuments</string>
   <string name="display_monuments">Mostrar monumentos</string>
   <string name="wlm_month_message">É o mês da Wiki Loves Monuments!</string>

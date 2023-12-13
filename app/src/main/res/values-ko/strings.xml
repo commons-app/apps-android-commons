@@ -342,6 +342,7 @@
   <string name="wrong">오답</string>
   <string name="quiz_screenshot_question">이 스크린샷을 올리시겠습니까?</string>
   <string name="share_app_title">앱 공유</string>
+  <string name="rotate">회전</string>
   <string name="error_fetching_nearby_places">주변 장소를 가져오는데 오류가 있습니다.</string>
   <string name="no_nearby_places_around">근처에 장소가 없습니다</string>
   <string name="no_recent_searches">최근 검색 없음</string>

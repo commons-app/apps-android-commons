@@ -475,19 +475,19 @@
   <string name="send_thank_toast">向%1$s發送感謝</string>
   <string name="review_copyright">這是否遵守版權規範？</string>
   <string name="review_category">這是正確分類的嗎？</string>
-  <string name="review_spam">這在範圍內嗎？</string>
+  <string name="review_spam">這在收錄範圍內嗎？</string>
   <string name="review_thanks">您想要向貢獻者感謝嗎？</string>
   <string name="review_spam_explanation">若此圖片無用，點擊「否」來提名刪除。</string>
   <string name="review_copyright_explanation">商標、螢幕截圖、電影海報通常都會違反版權。\n點擊「否」來提名刪除此圖片。</string>
   <string name="review_thanks_explanation">%1$s會被您的肯定給鼓舞</string>
   <string name="review_no_category">喔，這甚至沒有分類！</string>
   <string name="review_category_explanation">此圖片屬於%1$s分類。</string>
-  <string name="review_spam_report_question">這超出範圍是因為</string>
+  <string name="review_spam_report_question">這不在收錄範圍的原因是</string>
   <string name="review_c_violation_report_question">該文件侵犯版權，原因是</string>
   <string name="review_thanks_yes_button_text">下一張圖片</string>
   <string name="review_thanks_no_button_text">是的，為何不呢</string>
   <string name="skip_image_explanation">點擊此按鈕會提供給您其它近期從維基共享資源上傳的圖片</string>
-  <string name="review_image_explanation">您可以檢閱來改善維基共享資源的品質。\n檢閱的三個指標有：\n- 此圖片是否符合範圍？\n當您輕觸「否」（代表不在符合範圍），您會對此圖片添加刪除提名模板。\n\n- 此圖片是否遵守版權規範？\n當您輕觸「否」（代表未遵守版權規範），您會對此圖片添加刪除提名模板。\n\n- 此圖片是否有分類正確？\n當您輕觸「否」（代表分類不正確），您會對此圖片添加分類請求模板。\n\n如果一切都沒問題，就不會對圖片添加模板，您另外可以對貢獻者表達感謝。</string>
+  <string name="review_image_explanation">您可以檢閱來改善維基共享資源的品質。\n檢閱的三個指標有：\n- 此圖片是否在收錄範圍？\n當您輕觸「否」（代表不在收錄範圍），您會對此圖片添加刪除提名模板。\n\n- 此圖片是否遵守版權規範？\n當您輕觸「否」（代表未遵守版權規範），您會對此圖片添加刪除提名模板。\n\n- 此圖片是否有分類正確？\n當您輕觸「否」（代表分類不正確），您會對此圖片添加分類請求模板。\n\n如果一切都沒問題，就不會對圖片添加模板，您另外可以對貢獻者表達感謝。</string>
   <string name="no_image">沒有圖片被使用到</string>
   <string name="no_image_reverted">沒有圖片被還原回復</string>
   <string name="no_image_uploaded">未上傳圖片</string>
@@ -692,8 +692,12 @@
   <string name="custom_selector_info_text2">右邊的圖片與與左邊圖片不同，它有代表已經上傳到維基共享資源的標誌。\n請輕壓圖片來預覽。</string>
   <string name="welcome_custom_selector_ok">棒極了</string>
   <string name="custom_selector_already_uploaded_image_text">此圖片已上傳到維基共享資源。</string>
+  <string name="custom_selector_over_limit_warning">出於技術原因，應用程式無法可靠地一次上傳超過 %1$d 張圖片。%2$d 張已超出 %1$d 張的上傳限制。</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">去除</string>
+  <string name="custom_selector_button_limit_text">最大：%1$d</string>
+  <string name="custom_selector_limit_error_desc">錯誤：超出上傳限制</string>
   <string name="place_state_wlm">維基愛古蹟</string>
-  <string name="wlm_upload_info" fuzzy="true">此圖片會進入年維基愛古蹟競賽</string>
+  <string name="wlm_upload_info">此圖片會加入到維基愛古蹟競賽</string>
   <string name="display_monuments">顯示古蹟景點</string>
   <string name="wlm_month_message">本月有「維基愛古蹟」活動！</string>
   <string name="learn_more">了解更多</string>
@@ -742,6 +746,8 @@
   <string name="image_selected">已選圖片</string>
   <string name="image_marked_as_not_for_upload">圖片標記為不上傳</string>
   <string name="menu_view_report">報告</string>
+  <string name="menu_view_set_white_background">設定白色背景</string>
+  <string name="menu_view_set_black_background">設定黑色背景</string>
   <string name="report_violation">舉報違規行為</string>
   <string name="report_user">檢舉此使用者</string>
   <string name="report_content">舉報此內容</string>
@@ -753,6 +759,7 @@
   <string name="similar_coordinate_description_auto_set">座標雖不準確，但上傳這張圖片的人認為已經足夠接近了。</string>
   <string name="storage_permissions_denied">儲存裝置權限被拒絕</string>
   <string name="unable_to_share_upload_item">無法分享此項目</string>
+  <string name="permissions_are_required_for_functionality">功能需要權限</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">已選 %d 張圖片</item>
     <item quantity="other">已選 %d 張圖片</item>

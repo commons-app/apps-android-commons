@@ -10,6 +10,7 @@
 * Gianfranco
 * Lorelai87
 * Lorem Ipsum
+* Luca.favorido
 * Nemo bis
 * Noretta93
 * S4b1nuz E.656
@@ -679,6 +680,8 @@
   <string name="image_selected">Immagine selezionata</string>
   <string name="image_marked_as_not_for_upload">Immagine contrassegnata come da non caricare</string>
   <string name="menu_view_report">Segnalazioni</string>
+  <string name="menu_view_set_white_background">Imposta lo sfondo bianco</string>
+  <string name="menu_view_set_black_background">Imposta lo sfondo nero</string>
   <string name="report_violation">Segnala violazione</string>
   <string name="report_user">Segnala questo utente</string>
   <string name="report_content">Segnala questo contenuto</string>

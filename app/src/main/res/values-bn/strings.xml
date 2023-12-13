@@ -2,6 +2,7 @@
 <!-- Authors:
 * Aftabuzzaman
 * Bellayet
+* Borhan
 * Elias Ahmmad
 * Leemon2010
 * Md. Golam Mukit Khan
@@ -525,4 +526,5 @@
   <string name="report_user">এই ব্যবহারকারীকে প্রতিবেদন করুন</string>
   <string name="report_content">এই বিষয়বস্তু সম্পর্কে অভিযোগ জানান</string>
   <string name="request_user_block">এই ব্যবহারকারীকে বাধাদনের অনুরোধ করুন</string>
+  <string name="permissions_are_required_for_functionality">কার্যকারিতার জন্য অনুমতি প্রয়োজন</string>
 </resources>
