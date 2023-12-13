@@ -77,7 +77,6 @@ import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
-import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.MapController.NearbyPlacesInfo;
@@ -114,7 +113,6 @@ import fr.free.nrw.commons.utils.NearbyFABUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
-import fr.free.nrw.commons.utils.UiUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
@@ -187,8 +185,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @BindView(R.id.search_list_view) RecyclerView recyclerView;
     @BindView(R.id.nearby_filter_list) View nearbyFilterList;
     @BindView(R.id.checkbox_tri_states) CheckBoxTriStates checkBoxTriStates;
-    @BindView(R.id.map_view)
-    MapView mapView;
     @BindView(R.id.map)
     org.osmdroid.views.MapView mMapView;
     @BindView(R.id.compassBg)
@@ -636,7 +632,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * @param condition : for which condition the map should start
      */
     private void startMapWithCondition(final String condition) {
-        mapView.onStart();
         if (condition.equals("Without Permission")) {
             applicationKvStore.putBoolean("doNotAskForLocationPermission", true);
         }
@@ -685,27 +680,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-        mapView.onStop();
-    }
-
-    @Override
-    public void onSaveInstanceState(final Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
-
-    @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mapView.onDestroy();
         presenter.removeNearbyPreferences(applicationKvStore);
     }
 
@@ -736,27 +712,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         bottomSheetDetails.setVisibility(View.VISIBLE);
         bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-
-        mapView.setOnTouchListener((v, event) -> {
-
-            // Motion event is triggered two times on a touch event, one as ACTION_UP
-            // and other as ACTION_DOWN, we only want one trigger per touch event.
-
-            if(event.getAction() == MotionEvent.ACTION_DOWN) {
-                if (isFABsExpanded) {
-                    collapseFABs(true);
-                } else if (bottomSheetDetailsBehavior.getState()
-                    == BottomSheetBehavior.STATE_EXPANDED) {
-                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                } else if (bottomSheetDetailsBehavior.getState()
-                    == BottomSheetBehavior.STATE_COLLAPSED) {
-                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                } else if (isListBottomSheetExpanded()) {
-                    bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                }
-            }
-            return false;
-        });
     }
 
     public void initNearbyFilter() {
@@ -1433,7 +1388,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void onLocationChangedSignificantly(final fr.free.nrw.commons.location.LatLng latLng) {
         Timber.d("Location significantly changed");
-        if (latLng != null &&!isUserBrowsing()) {
+        if (latLng != null) {
             handleLocationUpdate(latLng,LOCATION_SIGNIFICANTLY_CHANGED);
         }
     }
@@ -1441,7 +1396,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void onLocationChangedSlightly(final fr.free.nrw.commons.location.LatLng latLng) {
         Timber.d("Location slightly changed");
-        if (latLng != null &&!isUserBrowsing()) {//If the map has never ever shown the current location, lets do it know
+        if (latLng != null) {//If the map has never ever shown the current location, lets do it know
             handleLocationUpdate(latLng,LOCATION_SLIGHTLY_CHANGED);
         }
     }
@@ -1449,7 +1404,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void onLocationChangedMedium(final fr.free.nrw.commons.location.LatLng latLng) {
         Timber.d("Location changed medium");
-        if (latLng != null && !isUserBrowsing()) {//If the map has never ever shown the current location, lets do it know
+        if (latLng != null) {//If the map has never ever shown the current location, lets do it know
             handleLocationUpdate(latLng, LOCATION_SIGNIFICANTLY_CHANGED);
         }
     }
@@ -1972,7 +1927,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void startTheMap() {
-        mapView.onStart();
         performMapReadyActions();
     }
 
