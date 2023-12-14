@@ -10,6 +10,7 @@
 * D41D8CD98F
 * Deathkon
 * Diskdance
+* Dream Star.cn
 * GuoPC
 * Hydra
 * Ken418
@@ -767,6 +768,8 @@
   <string name="image_selected">选择的图像</string>
   <string name="image_marked_as_not_for_upload">标记为不上传的图像</string>
   <string name="menu_view_report">举报</string>
+  <string name="menu_view_set_white_background">设置白色背景</string>
+  <string name="menu_view_set_black_background">设置黑色背景</string>
   <string name="report_violation">举报违规行为</string>
   <string name="report_user">举报此用户</string>
   <string name="report_content">举报此内容</string>

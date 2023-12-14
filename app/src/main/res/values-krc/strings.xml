@@ -7,7 +7,7 @@
 <resources>
   <string name="app_name" fuzzy="true">Викигёзен</string>
   <string name="menu_settings">Джарашдырыула</string>
-  <string name="username">Къошулуучуну аты</string>
+  <string name="username">Хайырланыучуну аты</string>
   <string name="password">Пароль</string>
   <string name="login">Кир</string>
   <string name="logging_in_title">Системагъа кириу</string>

@@ -326,7 +326,7 @@
   <string name="explore_tab_title_map">Karta</string>
   <string name="successful_wikidata_edit">Bilden lades till i %1$s på Wikidata!</string>
   <string name="wikidata_edit_failure">Misslyckades att uppdatera motsvarande Wikidataentitet!</string>
-  <string name="menu_set_wallpaper">Ange som bakgrundsbild</string>
+  <string name="menu_set_wallpaper">Använd som bakgrundsbild</string>
   <string name="wallpaper_set_successfully">Bakgrundsbilden ändrades!</string>
   <string name="quiz">Frågesport</string>
   <string name="quiz_question_string">Är det okej att ladda upp denna bild?</string>
@@ -728,6 +728,8 @@
   <string name="image_selected">Bild markerad</string>
   <string name="image_marked_as_not_for_upload">Bild markerad som inte för uppladdning</string>
   <string name="menu_view_report">Rapportera</string>
+  <string name="menu_view_set_white_background">Ändra till vit bakgrund</string>
+  <string name="menu_view_set_black_background">Ändra till svart bakgrund</string>
   <string name="report_violation">Rapportera överträdelse</string>
   <string name="report_user">Rapportera denna användare</string>
   <string name="report_content">Rapportera detta innehåll</string>
