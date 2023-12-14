@@ -18,7 +18,6 @@ import android.os.Build;
 import android.os.Process;
 import android.util.Log;
 import androidx.annotation.NonNull;
-import androidx.multidex.BuildConfig;
 import androidx.multidex.MultiDexApplication;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipeline;
@@ -155,7 +154,7 @@ public class CommonsApplication extends MultiDexApplication {
 
         INSTANCE = this;
         ACRA.init(this);
-        Mapbox.getInstance(this, getString(R.string.mapbox_commons_app_token), WellKnownTileServer.Mapbox);
+        Mapbox.getInstance(this, BuildConfig.MapboxAccessToken, WellKnownTileServer.Mapbox);
 
         ApplicationlessInjection
             .getInstance(this)

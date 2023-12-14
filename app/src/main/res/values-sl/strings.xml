@@ -316,7 +316,7 @@
   <string name="showcase_view_no_longer_exists">Ta kraj ne obstaja več.</string>
   <string name="no_images_found">Ni najdenih slik!</string>
   <string name="error_loading_images">Pri nalaganju slik je prišlo do napake.</string>
-  <string name="image_uploaded_by">Naložil_a: %1$s</string>
+  <string name="image_uploaded_by">Naložil/a: %1$s</string>
   <string name="block_notification_title">Blokiran_a</string>
   <string name="block_notification">Urejanje Zbirke vam je preprečeno</string>
   <string name="app_widget_heading">Slika dneva</string>
@@ -358,6 +358,7 @@
   <string name="wrong">Napačen odgovor</string>
   <string name="quiz_screenshot_question">Ali je ta zaslonski posnetek primeren za naložitev?</string>
   <string name="share_app_title">Delite aplikacijo</string>
+  <string name="rotate">Zasukaj</string>
   <string name="error_fetching_nearby_places">Napaka pri pridobivanju bližnjih krajev.</string>
   <string name="no_nearby_places_around">Tu okoli ni bližnjih krajev</string>
   <string name="error_fetching_nearby_monuments">Napaka pri pridobivanju bližnjih spomenikov.</string>
@@ -462,8 +463,8 @@
   <string name="check_category_toast">Zahtevam preverjanje kategorij za »%1$s«</string>
   <string name="nominate_for_deletion_done">Opravljeno</string>
   <string name="send_thank_success_title">Pošiljanje zahvale: uspešno</string>
-  <string name="send_thank_success_message">Zahvala uporabniku_ci %1$s je bila uspešno poslana</string>
-  <string name="send_thank_failure_message">Pošiljanje zahvale uporabniku_ci %1$s ni uspelo</string>
+  <string name="send_thank_success_message">Zahvala uporabniku/ci %1$s je bila uspešno poslana</string>
+  <string name="send_thank_failure_message">Pošiljanje zahvale uporabniku/ci %1$s ni uspelo</string>
   <string name="send_thank_failure_title">Pošiljanje zahvale: neuspešno</string>
   <string name="send_thank_toast">Pošiljam zahvalo uporabniku/ici %1$s</string>
   <string name="review_copyright">Ali so tu upoštevane avtorske pravice?</string>
@@ -689,8 +690,12 @@
   <string name="custom_selector_info_text2">V nasprotju s sliko na levi je slika na desni označena z logotipom Zbirke, kar pomeni, da je v projekt že naložena.\n Za predogled slike se je dotaknite in jo pridržite.</string>
   <string name="welcome_custom_selector_ok">Odlično</string>
   <string name="custom_selector_already_uploaded_image_text">Ta slika je že naložena v Zbirko.</string>
+  <string name="custom_selector_over_limit_warning">Zaradi tehničnih razlogov aplikacija ne more zanesljivo naložiti več kot %1$d slik hkrati. Omejitev nalaganja %1$d je bila presežena za %2$d.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">Opusti</string>
+  <string name="custom_selector_button_limit_text">Največ: %1$d</string>
+  <string name="custom_selector_limit_error_desc">Napaka: presežena omejitev nalaganja</string>
   <string name="place_state_wlm">WLM</string>
-  <string name="wlm_upload_info" fuzzy="true">Ta slika bo vključena v natečaj Viki obožuje spomenike</string>
+  <string name="wlm_upload_info">Ta slika bo vključena v natečaj Viki obožuje spomenike</string>
   <string name="display_monuments">Prikaži spomenike</string>
   <string name="wlm_month_message">Odprt je natečaj Viki obožuje spomenike!</string>
   <string name="learn_more">VEČ O TEM</string>
@@ -739,6 +744,8 @@
   <string name="image_selected">Slika izbrana</string>
   <string name="image_marked_as_not_for_upload">Slika je označena kot ni za nalaganje</string>
   <string name="menu_view_report">Prijava</string>
+  <string name="menu_view_set_white_background">Nastavitev belega ozadja</string>
+  <string name="menu_view_set_black_background">Nastavitev črnega ozadja</string>
   <string name="report_violation">Prijavi kršitev</string>
   <string name="report_user">Prijavi uporabnika</string>
   <string name="report_content">Prijavi to vsebino</string>
@@ -750,4 +757,11 @@
   <string name="similar_coordinate_description_auto_set">Koordinate niso točne koordinate, vendar oseba, ki je naložila to sliko, meni, da so ustrezen približek.</string>
   <string name="storage_permissions_denied">Dovoljenje za shranjevanje zavrnjeno</string>
   <string name="unable_to_share_upload_item">Tega predmeta ni mogoče deliti</string>
+  <string name="permissions_are_required_for_functionality">Za delovanje so potrebna dovoljenja</string>
+  <plurals name="custom_picker_images_selected_title_appendix">
+    <item quantity="one">%d izbrana slika</item>
+    <item quantity="two">%d izbrani sliki</item>
+    <item quantity="few">%d izbranih slik</item>
+    <item quantity="other">%d izbranih slik</item>
+  </plurals>
 </resources>

@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import butterknife.BindView
 import butterknife.ButterKnife
@@ -69,6 +70,8 @@ class ZoomableActivity : BaseActivity() {
     @JvmField
     @BindView(R.id.zoomable)
     var photo: ZoomableDraweeView? = null
+    
+    var photoBackgroundColor: Int? = null
 
     @JvmField
     @BindView(R.id.zoom_progress_bar)
@@ -180,6 +183,13 @@ class ZoomableActivity : BaseActivity() {
                 ).apply()
             }
         }
+        
+        val backgroundColor = intent.getIntExtra(ZoomableActivityConstants.PHOTO_BACKGROUND_COLOR,
+                MediaDetailFragment.DEFAULT_IMAGE_BACKGROUND_COLOR);
+
+        if (backgroundColor != MediaDetailFragment.DEFAULT_IMAGE_BACKGROUND_COLOR) {
+            photoBackgroundColor = backgroundColor
+        }
     }
 
     /**
@@ -196,7 +206,7 @@ class ZoomableActivity : BaseActivity() {
     /**
      * Handle view model result.
      */
-    private fun handleResult(result: Result){
+    private fun handleResult(result: Result) {
         if(result.status is CallbackStatus.SUCCESS){
             val images = result.images
             if(images.isNotEmpty()) {
@@ -608,6 +618,10 @@ class ZoomableActivity : BaseActivity() {
                 .setControllerListener(loadingListener)
                 .build()
             photo!!.controller = controller
+            
+            if (photoBackgroundColor != null) {
+                photo!!.setBackgroundColor(photoBackgroundColor!!)
+            }
 
             if (!images.isNullOrEmpty()) {
                 val selectedIndex = getImagePosition(selectedImages, images!![position])
@@ -667,5 +681,7 @@ class ZoomableActivity : BaseActivity() {
          * the custom picker.
          */
         const val ORIGIN = "Origin";
+        
+        const val PHOTO_BACKGROUND_COLOR = "photo_background_color"
     }
 }

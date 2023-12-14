@@ -215,7 +215,6 @@
   <string name="become_a_tester_title">Become a Beta Tester</string>
   <string name="become_a_tester_description">Opt-in to our beta channel on Google Play and get early access to new features and bug fixes</string>
   <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
-  <string name="mapbox_commons_app_token">pk.eyJ1Ijoibmljb2xhcy1yYW91bCIsImEiOiJjbG93YnU5ZTEwM3pqMmttbzIxNGVvOGgxIn0.T1o536AcyVpl5Q7eypJEAg</string>
   <string name="_2fa_code">2FA Code</string>
   <string name="logout_verification">Do you really want to logout?</string>
   <string name="mediaimage_failed">Media Image Failed</string>
@@ -716,6 +715,10 @@ Upload your first media by tapping on the add button.</string>
   <string name="custom_selector_info_text2">Unlike the picture on the left, the picture on the right has the Commons logo indicating it is already uploaded. \n Touch and hold for image preview.</string>
   <string name="welcome_custom_selector_ok">Awesome</string>
   <string name="custom_selector_already_uploaded_image_text">This image has already been uploaded to Commons.</string>
+  <string name="custom_selector_over_limit_warning">For technical reasons, the app can\'t reliably upload more than %1$d pictures at once. The upload limit of %1$d has been exceeded by %2$d.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">Dismiss</string>
+  <string name="custom_selector_button_limit_text">Max: %1$d</string>
+  <string name="custom_selector_limit_error_desc">Error: Upload Limit Exceeded</string>
   <string name="place_state_wlm">WLM</string>
   <string name="wlm_upload_info">This image will be entered into the Wiki Loves Monuments contest</string>
   <string name="display_monuments">Display monuments</string>
@@ -767,6 +770,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="image_selected">Image selected</string>
   <string name="image_marked_as_not_for_upload">Image marked as not for upload</string>
   <string name="menu_view_report">Report</string>
+  <string name="menu_view_set_white_background">Set white background</string>
+  <string name="menu_view_set_black_background">Set black background</string>
   <string name="report_violation">Report violation</string>
   <string name="report_user">Report this user</string>
   <string name="report_content">Report this content</string>

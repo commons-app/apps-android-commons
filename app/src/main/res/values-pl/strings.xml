@@ -701,6 +701,8 @@
   <string name="custom_selector_info_text2">W przeciwieństwie do zdjęcia po lewej, zdjęcie po prawej ma logo Commons wskazujące, że zostało już przesłane.\n  Dotknij i przytrzymaj, aby wyświetlić podgląd obrazu.</string>
   <string name="welcome_custom_selector_ok">Niesamowite</string>
   <string name="custom_selector_already_uploaded_image_text">Tez plik został już przesłany do Commons.</string>
+  <string name="custom_selector_button_limit_text">Maks.: %1$d</string>
+  <string name="custom_selector_limit_error_desc">Błąd: przekroczono limit przesyłania</string>
   <string name="wlm_upload_info">Ten obraz zostanie zgłoszony do konkursu Wiki Loves Monuments</string>
   <string name="display_monuments">Pokaż zabytki</string>
   <string name="wlm_month_message">To jest miesiąc Wiki Lovers Monuments!</string>
@@ -749,6 +751,8 @@
   <string name="image_selected">Wybrano obraz</string>
   <string name="image_marked_as_not_for_upload">Obraz oznaczony jako nieprzeznaczony do przesłania</string>
   <string name="menu_view_report">Raport</string>
+  <string name="menu_view_set_white_background">Ustaw białe tło</string>
+  <string name="menu_view_set_black_background">Ustaw czarne tło</string>
   <string name="report_violation">Zgłoś naruszenie</string>
   <string name="report_user">Zgłoś tego użytkownika</string>
   <string name="report_content">Zgłoś ten komentarz</string>

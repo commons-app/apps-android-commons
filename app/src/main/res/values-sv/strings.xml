@@ -326,7 +326,7 @@
   <string name="explore_tab_title_map">Karta</string>
   <string name="successful_wikidata_edit">Bilden lades till i %1$s på Wikidata!</string>
   <string name="wikidata_edit_failure">Misslyckades att uppdatera motsvarande Wikidataentitet!</string>
-  <string name="menu_set_wallpaper">Ange som bakgrundsbild</string>
+  <string name="menu_set_wallpaper">Använd som bakgrundsbild</string>
   <string name="wallpaper_set_successfully">Bakgrundsbilden ändrades!</string>
   <string name="quiz">Frågesport</string>
   <string name="quiz_question_string">Är det okej att ladda upp denna bild?</string>
@@ -676,6 +676,10 @@
   <string name="custom_selector_info_text2">Till skillnad från bilden till vänster har bilden till höger Commons-logotypen, vilket innebär att den redan är uppladdad.\n Tryck och håll ned för att förhandsgranska bilden.</string>
   <string name="welcome_custom_selector_ok">Häftigt</string>
   <string name="custom_selector_already_uploaded_image_text">Denna bild har redan laddats upp till Commons.</string>
+  <string name="custom_selector_over_limit_warning">Av tekniska skäl kan appen inte ladda upp fler än %1$d bilder samtidigt. Uppladdningsgränsen för %1$d har överskridits med %2$d.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">Stäng</string>
+  <string name="custom_selector_button_limit_text">Max: %1$d</string>
+  <string name="custom_selector_limit_error_desc">Fel: Uppladdningsgränsen har överskridits</string>
   <string name="wlm_upload_info">Denna bild kommer att skickas in till tävlingen Wiki Loves Monuments</string>
   <string name="display_monuments">Visa monument</string>
   <string name="wlm_month_message">Det är Wiki Loves Monuments-månaden!</string>
@@ -724,6 +728,8 @@
   <string name="image_selected">Bild markerad</string>
   <string name="image_marked_as_not_for_upload">Bild markerad som inte för uppladdning</string>
   <string name="menu_view_report">Rapportera</string>
+  <string name="menu_view_set_white_background">Ändra till vit bakgrund</string>
+  <string name="menu_view_set_black_background">Ändra till svart bakgrund</string>
   <string name="report_violation">Rapportera överträdelse</string>
   <string name="report_user">Rapportera denna användare</string>
   <string name="report_content">Rapportera detta innehåll</string>

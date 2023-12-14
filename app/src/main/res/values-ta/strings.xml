@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * ElangoRamanujam
+* Fahimrazick
 * Gurulenin
 * Kaartic
 * Sank
@@ -23,7 +24,7 @@
   <string name="preference_category_appearance">தோற்றம்</string>
   <string name="preference_category_general">பொது</string>
   <string name="preference_category_feedback">பின்னூட்டம்</string>
-  <string name="preference_category_privacy">தகவல் பாதுகாப்பு</string>
+  <string name="preference_category_privacy">அந்தரங்கம்</string>
   <string name="app_name">காமன்சு</string>
   <string name="bullet">•</string>
   <string name="menu_settings">அமைப்புகள்</string>

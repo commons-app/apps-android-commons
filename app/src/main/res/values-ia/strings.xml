@@ -663,6 +663,10 @@
   <string name="custom_selector_info_text2">A differentia del imagine al sinistra, le imagine al dextra ha le logo de Commons que indica que illo ha ja essite incargate.\n Tocca e mantene pro un previsualisation del imagine.</string>
   <string name="welcome_custom_selector_ok">Genial</string>
   <string name="custom_selector_already_uploaded_image_text">Iste imagine ha ja essite incargate a Commons.</string>
+  <string name="custom_selector_over_limit_warning">Pro rationes technic, le application non pote de maniera digne de fide incargar plus de %1$d imagines al vice. Le limite de incargamento de %1$d ha essite excedite per %2$d.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">Clauder</string>
+  <string name="custom_selector_button_limit_text">Max: %1$d</string>
+  <string name="custom_selector_limit_error_desc">Error: limite de incargamento excedite</string>
   <string name="wlm_upload_info">Iste imagine entrara in le concurso Wiki Loves Monuments.</string>
   <string name="display_monuments">Monstrar monumentos</string>
   <string name="wlm_month_message">Es le mense de Wiki Loves Monuments!</string>
@@ -711,6 +715,8 @@
   <string name="image_selected">Imagine seligite</string>
   <string name="image_marked_as_not_for_upload">Imagine marcate como non a incargar</string>
   <string name="menu_view_report">Reportar</string>
+  <string name="menu_view_set_white_background">Poner fundo blanc</string>
+  <string name="menu_view_set_black_background">Poner fundo nigre</string>
   <string name="report_violation">Reportar violation</string>
   <string name="report_user">Reportar iste usator</string>
   <string name="report_content">Reportar iste contento</string>

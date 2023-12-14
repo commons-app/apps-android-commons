@@ -338,7 +338,7 @@
   <string name="menu_search_button">חיפוש</string>
   <string name="search_commons">חיפוש בוויקישיתוף</string>
   <string name="title_activity_search">חיפוש</string>
-  <string name="search_recent_header">חיפוש אחרונים:</string>
+  <string name="search_recent_header">חיפושים אחרונים:</string>
   <string name="provider_searches">דברים שחיפשת לאחרונה</string>
   <string name="provider_recent_languages">שאילתות שפה אחרונות</string>
   <string name="error_loading_categories">אירעה שגיאה בעת טעינת קטגוריות.</string>
@@ -705,6 +705,10 @@
   <string name="custom_selector_info_text2">בניגוד לתמונה מימין, על התמונה שמשמאל יש את הלוגו של ויקישיתוף שמעיד שהיא כבר הועלתה. יש לגעת ולהחזיר לקבלת תצוגה מקדימה של התמונה.</string>
   <string name="welcome_custom_selector_ok">מגניב</string>
   <string name="custom_selector_already_uploaded_image_text">התמונה הזאת כבר הועלתה לוויקישיתוף.</string>
+  <string name="custom_selector_over_limit_warning">מסיבות טכניות, היישום לא יכול להעלות יותר מ־%1$d תמונות בבת אחת בצורה מהימנה. חרגת ממגבלת ההעלאה על סך %1$d ב־%2$d.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">סגירה</string>
+  <string name="custom_selector_button_limit_text">מרבי: %1$d</string>
+  <string name="custom_selector_limit_error_desc">שגיאה: הגעת לגבול העליון של ההעלאות</string>
   <string name="place_state_wlm">ויקיפדיה אוהבת אתרי מורשת</string>
   <string name="wlm_upload_info">התמונה הזאת תוכנס לתחרות ויקי אוהבת אתרי מורשת</string>
   <string name="display_monuments">הצגת אתרי מורשת</string>
@@ -755,6 +759,8 @@
   <string name="image_selected">נבחרה תמונה</string>
   <string name="image_marked_as_not_for_upload">התמונה סומנה בתור \"לא להעלאה\"</string>
   <string name="menu_view_report">דיווח</string>
+  <string name="menu_view_set_white_background">הגדרת רקע לבן</string>
+  <string name="menu_view_set_black_background">הגדרת רקע שחור</string>
   <string name="report_violation">דיווח על הפרה</string>
   <string name="report_user">דיווח על המשתמש הזה</string>
   <string name="report_content">דיווח על התוכן הזה</string>
