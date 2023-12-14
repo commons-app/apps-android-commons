@@ -289,7 +289,6 @@ public class NearbyParentFragmentPresenter
 
     @Override
     public void onCameraMove(com.mapbox.mapboxsdk.geometry.LatLng latLng) {
-        nearbyParentFragmentView.setProjectorLatLngBounds();
             // If our nearby markers are calculated at least once
             if (NearbyController.latestSearchLocation != null) {
                double distance =latLng.distanceTo

@@ -489,7 +489,6 @@ class NearbyParentFragmentPresenterTest {
     fun testOnCameraMoveWhenSearchLocationNull() {
         NearbyController.latestSearchLocation = null
         nearbyPresenter.onCameraMove(Mockito.mock(com.mapbox.mapboxsdk.geometry.LatLng::class.java))
-        verify(nearbyParentFragmentView).setProjectorLatLngBounds()
         verify(nearbyParentFragmentView).setSearchThisAreaButtonVisibility(false)
     }
 
@@ -498,7 +497,6 @@ class NearbyParentFragmentPresenterTest {
         NearbyController.latestSearchLocation = latestLocation
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(false)
         nearbyPresenter.onCameraMove(Mockito.mock(com.mapbox.mapboxsdk.geometry.LatLng::class.java))
-        verify(nearbyParentFragmentView).setProjectorLatLngBounds()
         verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
         verifyNoMoreInteractions(nearbyParentFragmentView)
     }
@@ -508,7 +506,6 @@ class NearbyParentFragmentPresenterTest {
         NearbyController.latestSearchLocation = latestLocation
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(false)
         nearbyPresenter.onCameraMove(Mockito.mock(com.mapbox.mapboxsdk.geometry.LatLng::class.java))
-        verify(nearbyParentFragmentView).setProjectorLatLngBounds()
         verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
         verifyNoMoreInteractions(nearbyParentFragmentView)
     }

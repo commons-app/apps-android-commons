@@ -70,8 +70,6 @@ public interface NearbyParentFragmentContract {
 
         LatLng getLastMapFocus();
 
-        void setLastMapFocus();
-
         LatLng getMapCenter();
 
         LatLng getMapFocus();
@@ -79,7 +77,6 @@ public interface NearbyParentFragmentContract {
         com.mapbox.mapboxsdk.geometry.LatLng getLastFocusLocation();
 
         boolean isCurrentLocationMarkerVisible();
-        void setProjectorLatLngBounds();
 
         boolean isAdvancedQueryFragmentVisible();
 
