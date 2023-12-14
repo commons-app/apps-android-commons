@@ -580,12 +580,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         rvNearbyList.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new PlaceAdapter(bookmarkLocationDao,
             place -> {
-                recenterMap(place.getLocation());
-                centerMapToPlace(place);
+                moveCameraToPosition(new GeoPoint(place.location.getLatitude(),place.location.getLongitude()));
                 return Unit.INSTANCE;
             },
             (place, isBookmarked) -> {
                 updateMarker(isBookmarked, place, null);
+                mMapView.invalidate();
                 return Unit.INSTANCE;
             },
             commonPlaceClickActions,
@@ -1638,9 +1638,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     public void updateMarker(final boolean isBookmarked, final Place place,
         @Nullable final fr.free.nrw.commons.location.LatLng curLatLng) {
-        if (curLatLng != null) {
             addMarkerToMap(place, isBookmarked);
-        }
     }
 
     private @DrawableRes int getIconFor(Place place, Boolean isBookmarked) {
@@ -1855,6 +1853,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             final boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(selectedPlace);
             updateBookmarkButtonImage(selectedPlace);
             updateMarker(isBookmarked, selectedPlace, locationManager.getLastLocation());
+            mMapView.invalidate();
         });
 
         wikipediaButton.setVisibility(place.hasWikipediaLink() ? View.VISIBLE : View.GONE);
