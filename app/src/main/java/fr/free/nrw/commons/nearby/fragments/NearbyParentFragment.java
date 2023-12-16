@@ -93,7 +93,6 @@ import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter;
 import fr.free.nrw.commons.nearby.NearbyFilterState;
 import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.nearby.RotationGestureOverlay;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.fragments.AdvanceQueryFragment.Callback;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
@@ -126,9 +125,6 @@ import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.events.MapListener;
 import org.osmdroid.events.ScrollEvent;
 import org.osmdroid.events.ZoomEvent;
-import org.osmdroid.tileprovider.MapTileProviderBasic;
-import org.osmdroid.tileprovider.tilesource.ITileSource;
-import org.osmdroid.tileprovider.tilesource.XYTileSource;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.util.constants.GeoConstants;
 import org.osmdroid.views.CustomZoomButtonsController;
@@ -210,11 +206,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @BindView(R.id.checkbox_tri_states)
     CheckBoxTriStates checkBoxTriStates;
     @BindView(R.id.map)
-    org.osmdroid.views.MapView mMapView;
-    @BindView(R.id.compassBg)
-    LinearLayout compassBg;
-    @BindView(R.id.compassArrow)
-    ImageView compassArrow;
+    org.osmdroid.views.MapView mapView;
     @BindView(R.id.rv_nearby_list)
     RecyclerView rvNearbyList;
     @BindView(R.id.no_results_message)
@@ -396,12 +388,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             rlContainerWLMMonthMessage.setVisibility(View.GONE);
         }
 
-        compassBg.setOnClickListener(v -> {
-            mMapView.getController().animateTo(null, null, 600L, 0f);
-            compassBg.setVisibility(View.INVISIBLE);
-            compassArrow.setRotation(0);
-        });
-
         presenter.attachView(this);
         isPermissionDenied = false;
         recenterToUserLocation = false;
@@ -410,7 +396,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         presenter.setActionListeners(applicationKvStore);
         org.osmdroid.config.Configuration.getInstance().load(this.getContext(),
             PreferenceManager.getDefaultSharedPreferences(this.getContext()));
-        mMapView.setTilesScaledToDpi(true);
+        mapView.setTilesScaledToDpi(true);
         if (applicationKvStore.getString("LastLocation")
             != null) { // Checking for last searched location
             String[] locationLatLng = applicationKvStore.getString("LastLocation").split(",");
@@ -419,30 +405,16 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         } else {
             lastMapFocus = new GeoPoint(51.50550, -0.07520);
         }
-        ScaleBarOverlay scaleBarOverlay = new ScaleBarOverlay(mMapView);
+        ScaleBarOverlay scaleBarOverlay = new ScaleBarOverlay(mapView);
         scaleBarOverlay.setScaleBarOffset(15, 25);
         Paint barPaint = new Paint();
         barPaint.setARGB(200, 255, 250, 250);
         scaleBarOverlay.setBackgroundPaint(barPaint);
         scaleBarOverlay.enableScaleBar();
-        mMapView.getOverlays().add(scaleBarOverlay);
-        mMapView.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.NEVER);
-        mMapView.getController().setZoom(ZOOM_LEVEL);
-        MapTileProviderBasic tileProvider = new MapTileProviderBasic(this.getContext());
-        ITileSource tileSource = new XYTileSource(
-            "FietsRegionaal",
-            3,
-            18,
-            256,
-            ".png",
-            new String[]{"http://overlay.openstreetmap.nl/openfietskaart-rcn/"}
-        );
-        tileProvider.setTileSource(tileSource);
-        tileProvider.getTileRequestCompleteHandlers().add(mMapView.getTileRequestCompleteHandler());
-        TilesOverlay tilesOverlay = new TilesOverlay(tileProvider, this.getContext());
-        tilesOverlay.setLoadingBackgroundColor(Color.TRANSPARENT);
-        mMapView.getOverlays().add(tilesOverlay);
-        mMapView.getOverlays().add(new MapEventsOverlay(new MapEventsReceiver() {
+        mapView.getOverlays().add(scaleBarOverlay);
+        mapView.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.NEVER);
+        mapView.getController().setZoom(ZOOM_LEVEL);
+        mapView.getOverlays().add(new MapEventsOverlay(new MapEventsReceiver() {
             @Override
             public boolean singleTapConfirmedHelper(GeoPoint p) {
                 if (isListBottomSheetExpanded()) {
@@ -460,14 +432,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             }
         }));
 
-        mMapView.addMapListener(new MapListener() {
+        mapView.addMapListener(new MapListener() {
             @Override
             public boolean onScroll(ScrollEvent event) {
                 if (lastMapFocus != null) {
                     Location mylocation = new Location("");
                     Location dest_location = new Location("");
-                    dest_location.setLatitude(mMapView.getMapCenter().getLatitude());
-                    dest_location.setLongitude(mMapView.getMapCenter().getLongitude());
+                    dest_location.setLatitude(mapView.getMapCenter().getLatitude());
+                    dest_location.setLongitude(mapView.getMapCenter().getLongitude());
                     mylocation.setLatitude(lastMapFocus.getLatitude());
                     mylocation.setLongitude(lastMapFocus.getLongitude());
                     Float distance = mylocation.distanceTo(dest_location);//in meters
@@ -495,11 +467,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         });
 
-        RotationGestureOverlay rotationGestureOverlay = new RotationGestureOverlay(mMapView,
-            compassArrow, compassBg);
-        rotationGestureOverlay.setEnabled(true);
-        mMapView.setMultiTouchControls(true);
-        mMapView.getOverlays().add(rotationGestureOverlay);
+        mapView.setMultiTouchControls(true);
         if (nearbyParentFragmentInstanceReadyCallback != null) {
             nearbyParentFragmentInstanceReadyCallback.onReady();
         }
@@ -562,7 +530,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 getContext().getResources().getColor(android.R.color.white));
             nearbyFilterList.setBackgroundColor(
                 getContext().getResources().getColor(R.color.contributionListDarkBackground));
-            mMapView.getOverlayManager().getTilesOverlay()
+            mapView.getOverlayManager().getTilesOverlay()
                 .setColorFilter(TilesOverlay.INVERT_COLORS);
         } else {
             rvNearbyList.setBackgroundColor(
@@ -585,7 +553,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             },
             (place, isBookmarked) -> {
                 updateMarker(isBookmarked, place, null);
-                mMapView.invalidate();
+                mapView.invalidate();
                 return Unit.INSTANCE;
             },
             commonPlaceClickActions,
@@ -615,14 +583,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         isPermissionDenied = false;
         applicationKvStore.putBoolean("doNotAskForLocationPermission", false);
         lastKnownLocation = locationManager.getLastLocation();
-        fr.free.nrw.commons.location.LatLng target = lastFocusLocation;
-        if (null == lastFocusLocation) {
-            target = lastKnownLocation;
-        }
+        fr.free.nrw.commons.location.LatLng target = lastKnownLocation;
         if (lastKnownLocation != null) {
             GeoPoint targetP = new GeoPoint(target.getLatitude(), target.getLongitude());
             mapCenter = targetP;
-            mMapView.getController().setCenter(targetP);
+            mapView.getController().setCenter(targetP);
             recenterMarkerToPosition(targetP);
             moveCameraToPosition(targetP);
         } else if (locationManager.isGPSProviderEnabled()
@@ -641,7 +606,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void onResume() {
         super.onResume();
-        mMapView.onResume();
+        mapView.onResume();
         presenter.attachView(this);
         registerNetworkReceiver();
         if (isResumed() && ((MainActivity) getActivity()).activeFragment == ActiveFragment.NEARBY) {
@@ -679,7 +644,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             lastKnownLocation = new fr.free.nrw.commons.location.LatLng(51.50550,
                 -0.07520, 1f);
         }
-        if (mMapView != null) {
+        if (mapView != null) {
             recenterMap(lastKnownLocation);
         }
     }
@@ -693,7 +658,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void onPause() {
         super.onPause();
-        mMapView.onPause();
+        mapView.onPause();
         compositeDisposable.clear();
         presenter.detachView();
         registerUnregisterLocationListener(true);
@@ -1060,7 +1025,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public fr.free.nrw.commons.location.LatLng getMapFocus() {
         fr.free.nrw.commons.location.LatLng mapFocusedLatLng = new fr.free.nrw.commons.location.LatLng(
-            mMapView.getMapCenter().getLatitude(), mMapView.getMapCenter().getLongitude(), 100);
+            mapView.getMapCenter().getLatitude(), mapView.getMapCenter().getLongitude(), 100);
         return mapFocusedLatLng;
     }
 
@@ -1095,8 +1060,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void centerMapToPosition(fr.free.nrw.commons.location.LatLng searchLatLng) {
         if (null != searchLatLng && !(
-            mMapView.getMapCenter().getLatitude() == searchLatLng.getLatitude()
-                && mMapView.getMapCenter().getLongitude() == searchLatLng.getLongitude())) {
+            mapView.getMapCenter().getLatitude() == searchLatLng.getLatitude()
+                && mapView.getMapCenter().getLongitude() == searchLatLng.getLongitude())) {
             recenterMarkerToPosition(
                 new GeoPoint(searchLatLng.getLatitude(), searchLatLng.getLongitude()));
         }
@@ -1522,7 +1487,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void updateMapToTrackPosition(final fr.free.nrw.commons.location.LatLng curLatLng) {
         Timber.d("Updates map camera to track user position");
-        if (null != mMapView) {
+        if (null != mapView) {
             recenterMap(curLatLng);
         }
     }
@@ -1530,7 +1495,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void updateMapMarkers(final List<NearbyBaseMarker> nearbyBaseMarkers,
         final Marker selectedMarker) {
-        if (mMapView != null) {
+        if (mapView != null) {
             presenter.updateMapMarkersToController(nearbyBaseMarkers);
         }
     }
@@ -1626,7 +1591,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public fr.free.nrw.commons.location.LatLng getCameraTarget() {
-        return mMapView == null ? null : getMapFocus();
+        return mapView == null ? null : getMapFocus();
     }
 
     /**
@@ -1689,7 +1654,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             }, getContext());
 
         overlay.setFocusItemsOnTap(true);
-        mMapView.getOverlays().add(overlay); // Add the overlay to the map
+        mapView.getOverlays().add(overlay); // Add the overlay to the map
     }
 
     /**
@@ -1730,7 +1695,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             }, getContext());
 
         overlay.setFocusItemsOnTap(true);
-        mMapView.getOverlays().add(overlay);
+        mapView.getOverlays().add(overlay);
     }
 
     @Override
@@ -1745,13 +1710,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             return;
         }
         addCurrentLocationMarker(curLatLng);
-        mMapView.getController()
+        mapView.getController()
             .animateTo(new GeoPoint(curLatLng.getLatitude(), curLatLng.getLongitude()));
         if (lastMapFocus != null) {
             Location mylocation = new Location("");
             Location dest_location = new Location("");
-            dest_location.setLatitude(mMapView.getMapCenter().getLatitude());
-            dest_location.setLongitude(mMapView.getMapCenter().getLongitude());
+            dest_location.setLatitude(mapView.getMapCenter().getLatitude());
+            dest_location.setLongitude(mapView.getMapCenter().getLongitude());
             mylocation.setLatitude(lastMapFocus.getLatitude());
             mylocation.setLongitude(lastMapFocus.getLongitude());
             Float distance = mylocation.distanceTo(dest_location);//in meters
@@ -1853,7 +1818,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             final boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(selectedPlace);
             updateBookmarkButtonImage(selectedPlace);
             updateMarker(isBookmarked, selectedPlace, locationManager.getLastLocation());
-            mMapView.invalidate();
+            mapView.invalidate();
         });
 
         wikipediaButton.setVisibility(place.hasWikipediaLink() ? View.VISIBLE : View.GONE);
@@ -1986,11 +1951,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     @Override
     public void clearAllMarkers() {
-        mMapView.getOverlayManager().clear();
-        mMapView.invalidate();
+        mapView.getOverlayManager().clear();
+        mapView.invalidate();
         GeoPoint geoPoint = mapCenter;
         if (geoPoint != null) {
-            List<Overlay> overlays = mMapView.getOverlays();
+            List<Overlay> overlays = mapView.getOverlays();
             ScaleDiskOverlay diskOverlay =
                 new ScaleDiskOverlay(this.getContext(),
                     geoPoint, 2000, GeoConstants.UnitOfMeasure.foot);
@@ -2005,9 +1970,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             diskOverlay.setCirclePaint1(diskPaint);
             diskOverlay.setDisplaySizeMin(900);
             diskOverlay.setDisplaySizeMax(1700);
-            mMapView.getOverlays().add(diskOverlay);
+            mapView.getOverlays().add(diskOverlay);
             org.osmdroid.views.overlay.Marker startMarker = new org.osmdroid.views.overlay.Marker(
-                mMapView);
+                mapView);
             startMarker.setPosition(geoPoint);
             startMarker.setAnchor(org.osmdroid.views.overlay.Marker.ANCHOR_CENTER,
                 org.osmdroid.views.overlay.Marker.ANCHOR_BOTTOM);
@@ -2015,16 +1980,16 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 ContextCompat.getDrawable(this.getContext(), R.drawable.current_location_marker));
             startMarker.setTitle("Your Location");
             startMarker.setTextLabelFontSize(24);
-            mMapView.getOverlays().add(startMarker);
+            mapView.getOverlays().add(startMarker);
         }
-        ScaleBarOverlay scaleBarOverlay = new ScaleBarOverlay(mMapView);
+        ScaleBarOverlay scaleBarOverlay = new ScaleBarOverlay(mapView);
         scaleBarOverlay.setScaleBarOffset(15, 25);
         Paint barPaint = new Paint();
         barPaint.setARGB(200, 255, 250, 250);
         scaleBarOverlay.setBackgroundPaint(barPaint);
         scaleBarOverlay.enableScaleBar();
-        mMapView.getOverlays().add(scaleBarOverlay);
-        mMapView.getOverlays().add(new MapEventsOverlay(new MapEventsReceiver() {
+        mapView.getOverlays().add(scaleBarOverlay);
+        mapView.getOverlays().add(new MapEventsOverlay(new MapEventsReceiver() {
             @Override
             public boolean singleTapConfirmedHelper(GeoPoint p) {
                 if (isListBottomSheetExpanded()) {
@@ -2041,11 +2006,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 return false;
             }
         }));
-        RotationGestureOverlay rotationGestureOverlay = new RotationGestureOverlay(mMapView,
-            compassArrow, compassBg);
-        rotationGestureOverlay.setEnabled(true);
-        mMapView.setMultiTouchControls(true);
-        mMapView.getOverlays().add(rotationGestureOverlay);
+        mapView.setMultiTouchControls(true);
     }
 
     /**
@@ -2055,13 +2016,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     private void recenterMarkerToPosition(GeoPoint geoPoint) {
         if (geoPoint != null) {
-            mMapView.getController().setCenter(geoPoint);
-            List<Overlay> overlays = mMapView.getOverlays();
+            mapView.getController().setCenter(geoPoint);
+            List<Overlay> overlays = mapView.getOverlays();
             for (int i = 0; i < overlays.size(); i++) {
                 if (overlays.get(i) instanceof org.osmdroid.views.overlay.Marker) {
-                    mMapView.getOverlays().remove(i);
+                    mapView.getOverlays().remove(i);
                 } else if (overlays.get(i) instanceof ScaleDiskOverlay) {
-                    mMapView.getOverlays().remove(i);
+                    mapView.getOverlays().remove(i);
                 }
             }
             ScaleDiskOverlay diskOverlay =
@@ -2078,9 +2039,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             diskOverlay.setCirclePaint1(diskPaint);
             diskOverlay.setDisplaySizeMin(900);
             diskOverlay.setDisplaySizeMax(1700);
-            mMapView.getOverlays().add(diskOverlay);
+            mapView.getOverlays().add(diskOverlay);
             org.osmdroid.views.overlay.Marker startMarker = new org.osmdroid.views.overlay.Marker(
-                mMapView);
+                mapView);
             startMarker.setPosition(geoPoint);
             startMarker.setAnchor(org.osmdroid.views.overlay.Marker.ANCHOR_CENTER,
                 org.osmdroid.views.overlay.Marker.ANCHOR_BOTTOM);
@@ -2088,12 +2049,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 ContextCompat.getDrawable(this.getContext(), R.drawable.current_location_marker));
             startMarker.setTitle("Your Location");
             startMarker.setTextLabelFontSize(24);
-            mMapView.getOverlays().add(startMarker);
+            mapView.getOverlays().add(startMarker);
         }
     }
 
     private void moveCameraToPosition(GeoPoint geoPoint) {
-        mMapView.getController().animateTo(geoPoint);
+        mapView.getController().animateTo(geoPoint);
     }
 
     public interface NearbyParentFragmentInstanceReadyCallback {

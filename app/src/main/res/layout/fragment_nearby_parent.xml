@@ -78,29 +78,6 @@
           android:layout_height="match_parent"
           android:background="@android:color/transparent" />
 
-        <LinearLayout
-          android:id="@+id/compassBg"
-          android:layout_width="50dp"
-          android:layout_height="50dp"
-          android:layout_alignParentLeft="true"
-          android:layout_alignParentBottom="true"
-          android:layout_marginStart="2dp"
-          android:layout_marginBottom="8dp"
-          android:background="@drawable/compass_bg"
-          android:orientation="horizontal"
-          android:padding="12.5dp"
-          android:visibility="invisible"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintStart_toStartOf="parent">
-
-          <ImageView
-            android:id="@+id/compassArrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/compass_arrow" />
-        </LinearLayout>
-
         <androidx.appcompat.widget.AppCompatTextView
           android:id="@+id/tv_attribution"
           android:layout_width="wrap_content"
