@@ -316,7 +316,7 @@
   <string name="showcase_view_no_longer_exists">Ta kraj ne obstaja več.</string>
   <string name="no_images_found">Ni najdenih slik!</string>
   <string name="error_loading_images">Pri nalaganju slik je prišlo do napake.</string>
-  <string name="image_uploaded_by">Naložil/a: %1$s</string>
+  <string name="image_uploaded_by">Naložil_a: %1$s</string>
   <string name="block_notification_title">Blokiran_a</string>
   <string name="block_notification">Urejanje Zbirke vam je preprečeno</string>
   <string name="app_widget_heading">Slika dneva</string>

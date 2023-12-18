@@ -105,7 +105,7 @@
   <string name="menu_about">Iwwer</string>
   <string name="about_license">D\'App Wikimedia Commons ass eng \'Open-Source-App\' déi vu Fräiwëllege vun der Wikimedia Foundation entwéckelt gouf an och vun hinnen ënnerhal gëtt. D\'Wikimedia Foundation ass net an d\'Entwécklung oder den Ënnerhalt vun der App implizéiert.</string>
   <string name="about_improve">Leet wgl. e &lt;a href=\"%1$s\"&gt;GitHub-Antrag&lt;/a&gt; u fir Feeler ze mellen a Proposen ze maachen.</string>
-  <string name="about_privacy_policy">Dateschutz</string>
+  <string name="about_privacy_policy">Dateschutzrichtlinnen</string>
   <string name="about_credits">Merci</string>
   <string name="title_activity_about">Iwwer</string>
   <string name="menu_feedback">Feedback schécken (per E-Mail)</string>
@@ -118,7 +118,7 @@
   <string name="menu_download">Eroflueden</string>
   <string name="preference_license">Standardlizenz</string>
   <string name="use_previous">Viregen Titel a Beschreiwung benotzen</string>
-  <string name="preference_theme">Thema</string>
+  <string name="preference_theme">Faarfschema</string>
   <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four">Attribution 4.0</string>
   <string name="license_name_cc_by_sa">CC Attribution-ShareAlike 3.0</string>
