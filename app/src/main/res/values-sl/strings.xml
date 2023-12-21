@@ -463,8 +463,8 @@
   <string name="check_category_toast">Zahtevam preverjanje kategorij za »%1$s«</string>
   <string name="nominate_for_deletion_done">Opravljeno</string>
   <string name="send_thank_success_title">Pošiljanje zahvale: uspešno</string>
-  <string name="send_thank_success_message">Zahvala uporabniku/ci %1$s je bila uspešno poslana</string>
-  <string name="send_thank_failure_message">Pošiljanje zahvale uporabniku/ci %1$s ni uspelo</string>
+  <string name="send_thank_success_message">Zahvala uporabniku_ci %1$s je bila uspešno poslana</string>
+  <string name="send_thank_failure_message">Pošiljanje zahvale uporabniku_ci %1$s ni uspelo</string>
   <string name="send_thank_failure_title">Pošiljanje zahvale: neuspešno</string>
   <string name="send_thank_toast">Pošiljam zahvalo uporabniku/ici %1$s</string>
   <string name="review_copyright">Ali so tu upoštevane avtorske pravice?</string>

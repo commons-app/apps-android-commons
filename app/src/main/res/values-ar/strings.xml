@@ -762,4 +762,7 @@
   <string name="welcome_to_full_screen_mode_text">مرحبًا بك في وضع التحديد بملء الشاشة</string>
   <string name="full_screen_mode_zoom_info">استخدم إصبعين للتكبير والتصغير.</string>
   <string name="full_screen_mode_features_info" fuzzy="true">مرر سريعًا وطويلًا لتنفيذ هذه الإجراءات:! N! - يسار / يمين: انتقل إلى السابق / التالي! N! - لأعلى: حدد! N! - أسفل: وضع علامة على أنه ليس للتحميل.</string>
+  <string name="storage_permissions_denied">رُفض إذن التخزين</string>
+  <string name="unable_to_share_upload_item">تعذر مشاركة هذا العنصر</string>
+  <string name="permissions_are_required_for_functionality">الإذن مطلوب لهذه الوظيفة</string>
 </resources>
