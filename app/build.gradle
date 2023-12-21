@@ -75,7 +75,6 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
     annotationProcessor "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$KOTLIN_VERSION"
 
     //Mocking
@@ -102,7 +101,6 @@ dependencies {
     debugImplementation("androidx.fragment:fragment-testing:1.6.2")
 
     // Android testing
-    androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0-alpha04'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.4.0'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.5.0-alpha04'
@@ -162,6 +160,15 @@ dependencies {
     kaptAndroidTest "androidx.databinding:databinding-compiler:8.0.2"
 
     implementation("io.github.coordinates2country:coordinates2country-android:1.3") {  exclude group: 'com.google.android', module: 'android' }
+
+    constraints {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {
+            because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
+        }
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0") {
+            because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
+        }
+    }
 }
 
 task disableAnimations(type: Exec) {
