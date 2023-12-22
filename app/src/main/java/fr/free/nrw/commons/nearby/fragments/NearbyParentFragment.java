@@ -265,33 +265,19 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
     });
 
+    /**
+     * This function is used to display an Android requesting block
+     * and response to the user's decision.
+     */
     private ActivityResultLauncher<String[]> locationPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
         @Override
         public void onActivityResult(Map<String, Boolean> result) {
-            boolean areAllGranted = true;
-            for (final boolean b : result.values()) {
-                areAllGranted = areAllGranted && b;
-            }
-
-            if (areAllGranted) {
-                locationPermissionGranted();
-            } else {
-                if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
-                    DialogUtil.showAlertDialog(getActivity(), getActivity().getString(R.string.location_permission_title),
-                        getActivity().getString(R.string.location_permission_rationale_nearby),
-                        getActivity().getString(android.R.string.ok),
-                        getActivity().getString(android.R.string.cancel),
-                        () -> {
-                            if (!(locationManager.isNetworkProviderEnabled() || locationManager.isGPSProviderEnabled())) {
-                                showLocationOffDialog();
-                            }
-                        },
-                        () -> isPermissionDenied = true,
-                        null,
-                        false);
-                } else {
-                    isPermissionDenied = true;
+            if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
+                if (!(locationManager.isNetworkProviderEnabled() || locationManager.isGPSProviderEnabled())) {
+                    showLocationOffDialog();
                 }
+            } else {
+                isPermissionDenied = true;
             }
         }
     });
@@ -1265,10 +1251,24 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         // TODO
     }
 
+    /**
+     *This funcion should show the developers' defined dialog block first
+     * If the user click the ok button of this block, an Android
+     * requesting block will be displayed.
+     */
     @Override
     public void checkPermissionsAndPerformAction() {
         Timber.d("Checking permission and perfoming action");
-        locationPermissionLauncher.launch(new String[]{permission.ACCESS_FINE_LOCATION});
+        DialogUtil.showAlertDialog(getActivity(), getActivity().getString(R.string.location_permission_title),
+            getActivity().getString(R.string.location_permission_rationale_nearby),
+            getActivity().getString(android.R.string.ok),
+            getActivity().getString(android.R.string.cancel),
+            () -> {
+                locationPermissionLauncher.launch(new String[]{permission.ACCESS_FINE_LOCATION});
+            },
+            () -> isPermissionDenied = true,
+            null,
+            false);
     }
 
     /**
