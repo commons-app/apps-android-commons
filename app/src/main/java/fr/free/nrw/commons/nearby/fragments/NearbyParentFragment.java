@@ -260,6 +260,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private boolean isFABsExpanded;
     private Marker selectedMarker;
     private Place selectedPlace;
+    private Place clickedMarkerPlace;
+    private boolean isClickedMarkerBookmarked;
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.005;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.004;
     private boolean isPermissionDenied;
@@ -417,13 +419,19 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         mapView.getOverlays().add(new MapEventsOverlay(new MapEventsReceiver() {
             @Override
             public boolean singleTapConfirmedHelper(GeoPoint p) {
+                if (clickedMarkerPlace != null){
+                    removeMarker(clickedMarkerPlace);
+                    addMarkerToMap(clickedMarkerPlace,isClickedMarkerBookmarked);
+                }else {
+                    Timber.e("CLICKED MARKER IS NULL");
+                }
                 if (isListBottomSheetExpanded()) {
                     // Back should first hide the bottom sheet if it is expanded
                     hideBottomSheet();
                 } else if (isDetailsBottomSheetVisible()) {
                     hideBottomDetailsSheet();
                 }
-                return false;
+                return true;
             }
 
             @Override
@@ -1643,6 +1651,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 public boolean onItemSingleTapUp(int index, OverlayItem item) {
                     passInfoToSheet(place);
                     hideBottomSheet();
+                    if (clickedMarkerPlace != null) {
+                        removeMarker(clickedMarkerPlace);
+                        addMarkerToMap(clickedMarkerPlace,isClickedMarkerBookmarked);
+                    }
+                    clickedMarkerPlace = place;
+                    isClickedMarkerBookmarked = isBookMarked ;
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     return true;
                 }
@@ -1684,6 +1698,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     final Place place = nearbyBaseMarkers.get(index).getPlace();
                     passInfoToSheet(place);
                     hideBottomSheet();
+                    if (clickedMarkerPlace != null) {
+                        removeMarker(clickedMarkerPlace);
+                        addMarkerToMap(clickedMarkerPlace,isClickedMarkerBookmarked);
+                    }
+                    clickedMarkerPlace = place ;
+                    isClickedMarkerBookmarked = false ;
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     return true;
                 }
@@ -1693,9 +1713,25 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     return false;
                 }
             }, getContext());
-
         overlay.setFocusItemsOnTap(true);
         mapView.getOverlays().add(overlay);
+    }
+
+    private void removeMarker(Place place){
+        Timber.tag("PRINT").d("Remove "+ place.toString());
+        List<Overlay> overlays = mapView.getOverlays();
+        for (int i = 0; i < overlays.size();i++){
+            if (overlays.get(i) instanceof ItemizedOverlayWithFocus){
+                ItemizedOverlayWithFocus item = (ItemizedOverlayWithFocus)overlays.get(i);
+                OverlayItem overlayItem = item.getItem(0);
+                fr.free.nrw.commons.location.LatLng diffLatLang = new fr.free.nrw.commons.location.LatLng(overlayItem.getPoint().getLatitude(),overlayItem.getPoint().getLongitude(),100);
+                if (place.location.getLatitude() == overlayItem.getPoint().getLatitude() && place.location.getLongitude() == overlayItem.getPoint().getLongitude()){
+                    mapView.getOverlays().remove(i);
+                    mapView.invalidate();
+                    break;
+                }
+           }
+        }
     }
 
     @Override
@@ -1992,6 +2028,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         mapView.getOverlays().add(new MapEventsOverlay(new MapEventsReceiver() {
             @Override
             public boolean singleTapConfirmedHelper(GeoPoint p) {
+                if (clickedMarkerPlace != null){
+                    removeMarker(clickedMarkerPlace);
+                    addMarkerToMap(clickedMarkerPlace,isClickedMarkerBookmarked);
+                }else {
+                    Timber.e("CLICKED MARKER IS NULL");
+                }
                 if (isListBottomSheetExpanded()) {
                     // Back should first hide the bottom sheet if it is expanded
                     hideBottomSheet();
