@@ -1,18 +1,11 @@
 package fr.free.nrw.commons.contributions
 
-import android.content.Context
 import android.content.res.Configuration
-import android.os.Bundle
 import android.os.Looper
-import android.view.LayoutInflater
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.TextView
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.test.core.app.ApplicationProvider
+import androidx.fragment.app.testing.FragmentScenario
+import androidx.fragment.app.testing.launchFragmentInContainer
+import androidx.lifecycle.Lifecycle
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.TestAppAdapter
@@ -23,113 +16,48 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyInt
-import org.mockito.Mock
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
-import org.mockito.MockitoAnnotations
-import org.powermock.reflect.Whitebox
-import org.robolectric.Robolectric
-import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
+import fr.free.nrw.commons.R
+import org.mockito.Mockito.mock
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(AndroidJUnit4::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class ContributionsListFragmentUnitTests {
 
-    private lateinit var activity: MainActivity
+    private lateinit var scenario: FragmentScenario<ContributionsListFragment>
     private lateinit var fragment: ContributionsListFragment
-    private lateinit var context: Context
-    private lateinit var layoutInflater: LayoutInflater
 
-    @Mock
-    private lateinit var savedInstanceState: Bundle
-
-    @Mock
-    private lateinit var rvContributionsList: RecyclerView
-
-    @Mock
-    private lateinit var adapter: ContributionsListAdapter
-
-    @Mock
-    private lateinit var contribution: Contribution
-
-    @Mock
-    private lateinit var media: Media
-
-    @Mock
-    private lateinit var wikidataPlace: WikidataPlace
-
-    @Mock
-    private lateinit var callback: ContributionsListFragment.Callback
-
-    @Mock
-    private lateinit var layoutManager: RecyclerView.LayoutManager
-
-    @Mock
-    private lateinit var gridLayoutManager: GridLayoutManager
-
-    @Mock
-    private lateinit var noContributionsYet: TextView
-
-    @Mock
-    private lateinit var progressBar: ProgressBar
-
-    @Mock
-    private lateinit var fabPlus: FloatingActionButton
-
-    @Mock
-    private lateinit var fabCamera: FloatingActionButton
-
-    @Mock
-    private lateinit var fabGallery: FloatingActionButton
-
-    @Mock
-    private lateinit var fabCustomGallery: FloatingActionButton
-
-    @Mock
-    private lateinit var newConfig: Configuration
-
-    @Mock
-    private lateinit var fabLayout: LinearLayout
-
-    @Mock
-    private lateinit var contributionsListPresenter: ContributionsListPresenter
+    private val adapter: ContributionsListAdapter = mock()
+    private val contribution: Contribution = mock()
+    private val media: Media = mock()
+    private val wikidataPlace: WikidataPlace = mock()
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
         AppAdapter.set(TestAppAdapter())
 
-        context = ApplicationProvider.getApplicationContext()
-        activity = Robolectric.buildActivity(MainActivity::class.java).create().get()
-        layoutInflater = LayoutInflater.from(activity)
+        scenario = launchFragmentInContainer(
+            initialState = Lifecycle.State.RESUMED,
+            themeResId = R.style.LightAppTheme
+        ) {
+            ContributionsListFragment().apply {
+                contributionsListPresenter = mock()
+                callback = mock()
+            }.also {
+                fragment = it
+            }
+        }
 
-        fragment = ContributionsListFragment()
-        val fragmentManager: FragmentManager = activity.supportFragmentManager
-        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.add(fragment, null)
-        fragmentTransaction.commit()
-
-        Whitebox.setInternalState(fragment, "rvContributionsList", rvContributionsList)
-        Whitebox.setInternalState(fragment, "adapter", adapter)
-        Whitebox.setInternalState(fragment, "callback", callback)
-        Whitebox.setInternalState(fragment, "noContributionsYet", noContributionsYet)
-        Whitebox.setInternalState(fragment, "progressBar", progressBar)
-        Whitebox.setInternalState(fragment, "fabPlus", fabPlus)
-        Whitebox.setInternalState(fragment, "fabCamera", fabCamera)
-        Whitebox.setInternalState(fragment, "fabGallery", fabGallery)
-        Whitebox.setInternalState(fragment, "fabCustomGallery", fabCustomGallery)
-        Whitebox.setInternalState(fragment, "fab_layout", fabLayout)
-        Whitebox.setInternalState(
-            fragment,
-            "contributionsListPresenter",
-            contributionsListPresenter
-        )
+        scenario.onFragment {
+            it.adapter = adapter
+        }
     }
 
     @Test
@@ -137,13 +65,6 @@ class ContributionsListFragmentUnitTests {
     fun checkFragmentNotNull() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         Assert.assertNotNull(fragment)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnCreateView() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.onCreateView(layoutInflater, null, savedInstanceState)
     }
 
     @Test
@@ -165,8 +86,9 @@ class ContributionsListFragmentUnitTests {
     @Throws(Exception::class)
     fun testOnScrollToTop() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
+        fragment.rvContributionsList = mock()
         fragment.scrollToTop()
-        verify(rvContributionsList).smoothScrollToPosition(0)
+        verify(fragment.rvContributionsList).smoothScrollToPosition(0)
     }
 
     @Test
@@ -261,16 +183,14 @@ class ContributionsListFragmentUnitTests {
     @Throws(Exception::class)
     fun testOnViewStateRestored() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        `when`(rvContributionsList.layoutManager).thenReturn(layoutManager)
-        fragment.onViewStateRestored(savedInstanceState)
+        fragment.onViewStateRestored(mock())
     }
 
     @Test
     @Throws(Exception::class)
     fun testOnSaveInstanceState() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        `when`(rvContributionsList.layoutManager).thenReturn(gridLayoutManager)
-        fragment.onSaveInstanceState(savedInstanceState)
+        fragment.onSaveInstanceState(mock())
     }
 
     @Test
@@ -298,7 +218,9 @@ class ContributionsListFragmentUnitTests {
     @Throws(Exception::class)
     fun testAnimateFAB() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        `when`(fabPlus.isShown).thenReturn(false)
+        scenario.onFragment {
+            it.requireView().findViewById<FloatingActionButton>(R.id.fab_plus).hide()
+        }
         val method: Method = ContributionsListFragment::class.java.getDeclaredMethod(
             "animateFAB",
             Boolean::class.java
@@ -311,7 +233,9 @@ class ContributionsListFragmentUnitTests {
     @Throws(Exception::class)
     fun testAnimateFABCaseShownAndOpen() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        `when`(fabPlus.isShown).thenReturn(true)
+        scenario.onFragment {
+            it.requireView().findViewById<FloatingActionButton>(R.id.fab_plus).show()
+        }
         val method: Method = ContributionsListFragment::class.java.getDeclaredMethod(
             "animateFAB",
             Boolean::class.java
@@ -324,7 +248,9 @@ class ContributionsListFragmentUnitTests {
     @Throws(Exception::class)
     fun testAnimateFABCaseShownAndClose() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        `when`(fabPlus.isShown).thenReturn(true)
+        scenario.onFragment {
+            it.requireView().findViewById<FloatingActionButton>(R.id.fab_plus).show()
+        }
         val method: Method = ContributionsListFragment::class.java.getDeclaredMethod(
             "animateFAB",
             Boolean::class.java
@@ -359,8 +285,8 @@ class ContributionsListFragmentUnitTests {
     @Throws(Exception::class)
     fun testOnConfigurationChanged() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
+        val newConfig: Configuration = mock()
         newConfig.orientation = Configuration.ORIENTATION_LANDSCAPE
         fragment.onConfigurationChanged(newConfig)
     }
-
 }

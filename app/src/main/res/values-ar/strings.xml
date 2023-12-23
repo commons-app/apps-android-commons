@@ -22,6 +22,7 @@
 * أَحمد
 * ترجمان05
 * ديفيد
+* علاء
 * محمد أحمد عبد الفتاح
 * مشعل الحربي
 -->
@@ -371,7 +372,7 @@
   <string name="result">النتيجة</string>
   <string name="quiz_back_button">إذا استمر رفع الصور التي تتطلب الحذف، فمن المحتمل أن يتم من حسابك، هل أنت متأكد من أنك تريد إنهاء الاختبار؟</string>
   <string name="quiz_alert_message">تم حذف أكثر من %1$s من الصور التي رفعتها، إذا استمر تحميل الصور التي تتطلب الحذف، فمن المحتمل أن يتم منع حسابك. \n\nهل ترغب في مشاهدة البرنامج التعليمي مرة أخرى ومن ثم إجراء اختبار لمساعدتك في معرفة نوع الصور التي ينبغي أو لا ينبغي رفعا؟</string>
-  <string name="selfie_answer">الصور الشخصية ليست لها قيمة موسوعية كبيرة; يُرجَى عدم رفع صورة لنفسك ما لم تكن لديك بالفعل مقالة ويكيبيديا عنك.</string>
+  <string name="selfie_answer">الصور الشخصية ليس لها قيمة موسوعية كبيرة; يُرجَى عدم رفع صورة لنفسك ما لم تكن لديك بالفعل مقالة ويكيبيديا عنك.</string>
   <string name="taj_mahal_answer">من الأفضل رفع صور المعالم الأثرية والمناظر الخارجية في معظم البلدان، تُرجَى ملاحظة أن المنشآت الفنية المؤقتة بالخارج تكون محمية بحقوق الطبع والنشر في الغالب وليس مسموحا برفعها.</string>
   <string name="screenshot_answer">تُعتبَر لقطات شاشة المواقع الإلكترونية أعمالا مشتقة وتخضع لأي حقوق نشر على الموقع نفسه، ويمكن استخدامها بعد الحصول على إذن من المؤلف، بدون هذا الإذن، يُعتبَر أي فن تقوم بإنشائه بناءً على عملهم نسخة غير مرخصة من قبل المؤلف الأصلي.</string>
   <string name="blurry_image_answer">أحد أهداف كومنز جمع صور عالية الجودة، لذلك; لا يجب رفع صور باهتة; حاول دائما التقاط صور جميلة بإضاءة جيدة.</string>
@@ -502,8 +503,8 @@
   <string name="no_image">لا صور مستخدمة</string>
   <string name="no_image_reverted">لم يتم إرجاع أية صور</string>
   <string name="no_image_uploaded">لا توجد صور مرفوعة</string>
-  <string name="no_notification">ليست لديك إشعارات غير مقروءة</string>
-  <string name="no_read_notification">ليست لديك إشعارات مقروءة</string>
+  <string name="no_notification">ليس لديك أي إشعارات غير مقروءة</string>
+  <string name="no_read_notification">ليس لديك أي إشعاراتٍ غير مقروءة</string>
   <string name="share_logs_using">مشاركة السجلات باستخدام</string>
   <string name="menu_option_read">عرض المقروءة</string>
   <string name="menu_option_unread">عرض غير المقروءة</string>
@@ -761,4 +762,7 @@
   <string name="welcome_to_full_screen_mode_text">مرحبًا بك في وضع التحديد بملء الشاشة</string>
   <string name="full_screen_mode_zoom_info">استخدم إصبعين للتكبير والتصغير.</string>
   <string name="full_screen_mode_features_info" fuzzy="true">مرر سريعًا وطويلًا لتنفيذ هذه الإجراءات:! N! - يسار / يمين: انتقل إلى السابق / التالي! N! - لأعلى: حدد! N! - أسفل: وضع علامة على أنه ليس للتحميل.</string>
+  <string name="storage_permissions_denied">رُفض إذن التخزين</string>
+  <string name="unable_to_share_upload_item">تعذر مشاركة هذا العنصر</string>
+  <string name="permissions_are_required_for_functionality">الإذن مطلوب لهذه الوظيفة</string>
 </resources>
