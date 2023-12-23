@@ -1718,7 +1718,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void removeMarker(Place place){
-        Timber.tag("PRINT").d("Remove "+ place.toString());
         List<Overlay> overlays = mapView.getOverlays();
         for (int i = 0; i < overlays.size();i++){
             if (overlays.get(i) instanceof ItemizedOverlayWithFocus){

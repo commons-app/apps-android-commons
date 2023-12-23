@@ -184,10 +184,6 @@ public class NearbyParentFragmentPresenter
         } else {
             curLatLng = lastLocation;
         }
-        Timber.tag("PRINT")
-            .e(curLatLng.getLatitude() + "  " + nearbyParentFragmentView.getMapCenter()
-                .getLongitude());
-
         if (curLatLng == null) {
             Timber.d("Skipping update of nearby places as location is unavailable");
             return;
@@ -234,7 +230,6 @@ public class NearbyParentFragmentPresenter
     public void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo,
         Marker selectedMarker, boolean shouldTrackPosition) {
         if (null != nearbyParentFragmentView) {
-            Timber.tag("PRINT").d("UPDATING...");
             nearbyParentFragmentView.clearAllMarkers();
             List<NearbyBaseMarker> nearbyBaseMarkers = NearbyController
                 .loadAttractionsFromLocationToBaseMarkerOptions(nearbyPlacesInfo.curLatLng,
@@ -243,16 +238,9 @@ public class NearbyParentFragmentPresenter
                     nearbyParentFragmentView.getContext(),
                     bookmarkLocationDao.getAllBookmarksLocations());
             nearbyParentFragmentView.updateMapMarkers(nearbyBaseMarkers, selectedMarker);
-
-//            nearbyParentFragmentView.addCurrentLocationMarker(nearbyPlacesInfo.curLatLng);
             lockUnlockNearby(false); // So that new location updates wont come
             nearbyParentFragmentView.setProgressBarVisibility(false);
             nearbyParentFragmentView.updateListFragment(nearbyPlacesInfo.placeList);
-            handleCenteringTaskIfAny();
-
-//            if (!shouldTrackPosition) {
-//                nearbyParentFragmentView.centerMapToPosition(nearbyPlacesInfo.searchLatLng);
-//            }
         }
     }
 
@@ -310,7 +298,6 @@ public class NearbyParentFragmentPresenter
     @Override
     public void filterByMarkerType(List<Label> selectedLabels, int state,
         boolean filterForPlaceState, boolean filterForAllNoneType) {
-        Timber.tag("PRINT").d("State " + state);
         if (filterForAllNoneType) {// Means we will set labels based on states
             switch (state) {
                 case UNKNOWN:
