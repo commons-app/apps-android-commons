@@ -43,3 +43,7 @@ app/src/main/jniLibs
 #https://docs.opencv.org/3.3.0/
 /libraries/opencv/javadoc/
 captures/*
+
+# Test and other output
+app/jacoco.exec
+app/CommonsContributions
