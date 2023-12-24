@@ -161,6 +161,8 @@ dependencies {
 
     implementation("io.github.coordinates2country:coordinates2country-android:1.3") {  exclude group: 'com.google.android', module: 'android' }
 
+    //OSMDroid
+    implementation ("org.osmdroid:osmdroid-android:$OSMDROID_VERSION")
     constraints {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {
             because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
