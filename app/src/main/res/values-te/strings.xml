@@ -573,7 +573,6 @@
   <string name="leaderboard_nearby">సమీపంలో</string>
   <string name="leaderboard_used">వాడినవి</string>
   <string name="leaderboard_my_rank_button_text">నా ర్యాంకు</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;ఈ మ్యాపును మెరుగుపరచండి&lt;/a&gt;</string>
   <string name="limited_connection_enabled">పరిమిత కనెక్షను మోడ్ చేతనంగా ఉంది!</string>
   <string name="limited_connection_disabled">పరిమిత కనెక్షను మోడ్‌ను అచేతనం చేసాం. పెండింగులో ఉన్న ఎక్కింపులు తిరిగి మొదలౌతాయి.</string>
   <string name="limited_connection_mode">పరిమిత కనెక్షను మోడ్</string>

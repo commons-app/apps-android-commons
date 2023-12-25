@@ -659,7 +659,6 @@
   <string name="leaderboard_nearby">À proximité</string>
   <string name="leaderboard_used">Utilisé</string>
   <string name="leaderboard_my_rank_button_text">Mon rang</string>
-  <string name="map_attribution">© &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; · © &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; · &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Améliorer cette carte&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Mode de connexion limitée activé !</string>
   <string name="limited_connection_disabled">Mode de connexion limitée désactivé. Les téléversements en attente seront maintenant repris.</string>
   <string name="limited_connection_mode">Mode de connexion limitée</string>

@@ -673,7 +673,6 @@
   <string name="leaderboard_nearby">附近</string>
   <string name="leaderboard_used">已使用</string>
   <string name="leaderboard_my_rank_button_text">我的排名</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;改进此地图&lt;/a&gt;</string>
   <string name="limited_connection_enabled">限制连接模式已启用！</string>
   <string name="limited_connection_disabled">限制连接模式已禁用。挂起的上传将会立即恢复。</string>
   <string name="limited_connection_mode">限制连接模式</string>

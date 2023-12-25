@@ -19,6 +19,7 @@
 * Nekky-chan
 * Ngschaider
 * Pyscowicz
+* Reedy
 * Sebastian Wallroth
 * SpaceEnergy
 * Sujan
@@ -436,7 +437,7 @@
   <string name="no_categories_selected">Keine Kategorien ausgewählt</string>
   <string name="no_categories_selected_warning_desc">Bilder ohne Kategorien sind selten nutzbar. Bist du sicher, dass du ohne die Auswahl von Kategorien hochladen möchtest?</string>
   <string name="no_depictions_selected">Keine Motive ausgewählt</string>
-  <string name="no_depictions_selected_warning_desc">Bilder mit Motive sind leichter zu finden und werden eher verwendet. Bist dusicher, dass du ohne Auswahl von Motiven fortfahren möchtest?</string>
+  <string name="no_depictions_selected_warning_desc">Bilder mit Motive sind leichter zu finden und werden eher verwendet. Bist du sicher, dass du ohne Auswahl von Motiven fortfahren möchtest?</string>
   <string name="back_button_warning">Hochladen abbrechen</string>
   <string name="back_button_warning_desc">Wenn du den Zurück-Button verwendest, wird das Hochladen abgebrochen und du verlierst deine bisherigen Schritte</string>
   <string name="back_button_continue">Hochladen fortsetzen</string>
@@ -651,7 +652,6 @@
   <string name="leaderboard_nearby">In der Nähe</string>
   <string name="leaderboard_used">Verwendet</string>
   <string name="leaderboard_my_rank_button_text">Mein Rang</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Verbessere diese Karte&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Begrenzter Verbindungsmodus aktiviert!</string>
   <string name="limited_connection_disabled">Eingeschränkter Verbindungsmodus deaktiviert. Ausstehende Uploads werden jetzt fortgesetzt.</string>
   <string name="limited_connection_mode">Eingeschränkter Verbindungsmodus</string>

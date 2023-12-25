@@ -11,10 +11,10 @@
   <string name="commons_logo">Commons-Logo</string>
   <string name="commons_website">Internetsite vu Commons</string>
   <string name="submit">Späicheren</string>
-  <string name="add_another_description">Nach eng Beschreiwung derbäisetzen</string>
-  <string name="add_new_contribution">En neie Bäitrag derbäiasetzen</string>
-  <string name="add_contribution_from_camera">E Bäitrag vun der Kamera derbäisetzen</string>
-  <string name="add_contribution_from_photos">E Bäitrag aus de Fotoen derbäisetzen</string>
+  <string name="add_another_description">Eng aner Beschreiwung derbäisetzen</string>
+  <string name="add_new_contribution">Neie Bäitrag derbäiasetzen</string>
+  <string name="add_contribution_from_camera">Bäitrag vun der Kamera derbäisetzen</string>
+  <string name="add_contribution_from_photos">Bäitrag vun de Fotoen derbäisetzen</string>
   <string name="row_item_language_description">Sprooch-Beschreiwung</string>
   <string name="show_captions_description">Beschreiwung</string>
   <string name="nearby_row_image">Bild</string>

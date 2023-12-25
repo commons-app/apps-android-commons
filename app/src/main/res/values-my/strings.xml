@@ -379,7 +379,6 @@
   <string name="leaderboard_upload">တင်ရန်</string>
   <string name="leaderboard_nearby">အနီးအနား</string>
   <string name="leaderboard_used">အသုံးပြု</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;ဤမြေပုံအား ပိုမိုကောင်းမွန်အောင်ပြုလုပ်ရန်&lt;/a&gt;</string>
   <string name="license_step_title">မီဒီယာလိုင်စင်</string>
   <string name="media_detail_step_title">မီဒီယာ အသေးစိတ်များ</string>
   <string name="menu_view_category_page">ကဏ္ဍစာမျက်နှာကို ကြည့်ရန်</string>
