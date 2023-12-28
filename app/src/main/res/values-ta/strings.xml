@@ -196,7 +196,7 @@
   <string name="null_url">பிழை! URL கிடைக்கவில்லை</string>
   <string name="nominate_deletion">நீக்குவதற்கு பரிந்துரை</string>
   <string name="nominated_for_deletion">இந்த படம் நீக்கப்படுவதற்கு பரிந்துரைக்கப்பட்டுள்ளது.</string>
-  <string name="nominated_see_more">விவரங்களுக்கு வலைப்பக்கத்தைப் பார்க்கவும்</string>
+  <string name="nominated_see_more">விபரங்களுக்காக வலைப்பக்கத்தைப் பார்</string>
   <string name="skip_login">தவிர்</string>
   <string name="navigation_item_login">புகுபதிகை</string>
   <string name="skip_login_title">தாங்கள் மெய்யாகவே மூடுவதற்கு விரும்புகிறீர்களா?</string>
