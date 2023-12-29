@@ -113,6 +113,7 @@
           app:backgroundTint="@color/status_bar_blue"
           app:elevation="@dimen/tiny_margin"
           app:srcCompat="@drawable/ic_add_white_24dp"
+          android:tint="?attr/floatingActionButtonStyle"
           app:useCompatPadding="true" />
 
     </LinearLayout>
