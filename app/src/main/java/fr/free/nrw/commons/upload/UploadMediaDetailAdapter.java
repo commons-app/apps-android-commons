@@ -1,6 +1,9 @@
 package fr.free.nrw.commons.upload;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
+import android.speech.RecognizerIntent;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
@@ -13,10 +16,12 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,11 +35,13 @@ import fr.free.nrw.commons.utils.AbstractTextWatcher;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Pattern;
 import timber.log.Timber;
 
-public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDetailAdapter.ViewHolder> {
+public class UploadMediaDetailAdapter extends
+    RecyclerView.Adapter<UploadMediaDetailAdapter.ViewHolder> {
 
     RecentLanguagesDao recentLanguagesDao;
 
@@ -47,20 +54,28 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
     private TextView recentLanguagesTextView;
     private View separator;
     private ListView languageHistoryListView;
+    private int currentPosition;
+    private Fragment fragment;
+    private Activity activity;
+    private SelectedVoiceIcon selectedVoiceIcon;
+    private static final int REQUEST_CODE_FOR_VOICE_INPUT = 1213;
 
-    public UploadMediaDetailAdapter(String savedLanguageValue, RecentLanguagesDao recentLanguagesDao) {
+    public UploadMediaDetailAdapter(Fragment fragment, String savedLanguageValue,
+        RecentLanguagesDao recentLanguagesDao) {
         uploadMediaDetails = new ArrayList<>();
         selectedLanguages = new HashMap<>();
         this.savedLanguageValue = savedLanguageValue;
         this.recentLanguagesDao = recentLanguagesDao;
+        this.fragment = fragment;
     }
 
-    public UploadMediaDetailAdapter(final String savedLanguageValue,
+    public UploadMediaDetailAdapter(Activity activity, final String savedLanguageValue,
         List<UploadMediaDetail> uploadMediaDetails, RecentLanguagesDao recentLanguagesDao) {
         this.uploadMediaDetails = uploadMediaDetails;
         selectedLanguages = new HashMap<>();
         this.savedLanguageValue = savedLanguageValue;
         this.recentLanguagesDao = recentLanguagesDao;
+        this.activity = activity;
     }
 
     public void setCallback(Callback callback) {
@@ -77,7 +92,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         notifyDataSetChanged();
     }
 
-    public List<UploadMediaDetail> getItems(){
+    public List<UploadMediaDetail> getItems() {
         return uploadMediaDetails;
     }
 
@@ -85,13 +100,14 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_item_description, parent, false));
+            .inflate(R.layout.row_item_description, parent, false));
     }
 
     /**
-     * This is a workaround for a known bug by android here https://issuetracker.google.com/issues/37095917
-     * makes the edit text on second and subsequent fragments inside an adapter receptive to long click
-     * for copy/paste options
+     * This is a workaround for a known bug by android here
+     * https://issuetracker.google.com/issues/37095917 makes the edit text on second and subsequent
+     * fragments inside an adapter receptive to long click for copy/paste options
+     *
      * @param holder the view holder
      */
     @Override
@@ -119,9 +135,43 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         notifyItemInserted(uploadMediaDetails.size());
     }
 
+    private void startSpeechInput(String locale) {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(
+            RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+        );
+        intent.putExtra(
+            RecognizerIntent.EXTRA_LANGUAGE,
+            locale
+        );
+        try {
+            if (activity == null){
+                fragment.startActivityForResult(intent, REQUEST_CODE_FOR_VOICE_INPUT);
+            }else {
+                activity.startActivityForResult(intent, REQUEST_CODE_FOR_VOICE_INPUT);
+            }
+        } catch (Exception e) {
+            Timber.e(e.getMessage());
+        }
+    }
+
+    public void handleSpeechResult(String spokenText) {
+        if (currentPosition < uploadMediaDetails.size()) {
+            UploadMediaDetail uploadMediaDetail = uploadMediaDetails.get(currentPosition);
+            if (selectedVoiceIcon == SelectedVoiceIcon.CAPTION){
+                uploadMediaDetail.setCaptionText(spokenText);
+            }else {
+                uploadMediaDetail.setDescriptionText(spokenText);
+            }
+            notifyItemChanged(currentPosition);
+        }
+    }
+
     /**
      * Remove description based on position from the list and notifies the RecyclerView Adapter that
      * data in adapter has been removed at that particular position.
+     *
      * @param uploadMediaDetail
      * @param position
      */
@@ -160,6 +210,12 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         @BindView(R.id.btn_remove)
         ImageView removeButton;
 
+        @BindView(R.id.ll_write_better_caption)
+        LinearLayout betterCaptionLinearLayout;
+
+        @BindView(R.id.ll_write_better_description)
+        LinearLayout betterDescriptionLinearLayout;
+
         AbstractTextWatcher captionListener;
 
         AbstractTextWatcher descriptionListener;
@@ -185,34 +241,48 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
             descItemEditText.removeTextChangedListener(descriptionListener);
             captionItemEditText.setText(uploadMediaDetail.getCaptionText());
             descItemEditText.setText(uploadMediaDetail.getDescriptionText());
+            captionInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
+            captionInputLayout.setEndIconDrawable(R.drawable.baseline_keyboard_voice);
+            captionInputLayout.setEndIconOnClickListener(v -> {
+                currentPosition = position;
+                selectedVoiceIcon = SelectedVoiceIcon.CAPTION;
+                startSpeechInput(descriptionLanguages.getText().toString());
+            });
+            descInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
+            descInputLayout.setEndIconDrawable(R.drawable.baseline_keyboard_voice);
+            descInputLayout.setEndIconOnClickListener(v -> {
+                currentPosition = position;
+                selectedVoiceIcon = SelectedVoiceIcon.DESCRIPTION;
+                startSpeechInput(descriptionLanguages.getText().toString());
+            });
 
             if (position == 0) {
                 removeButton.setVisibility(View.GONE);
-                captionInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
-                captionInputLayout.setEndIconDrawable(R.drawable.maplibre_info_icon_default);
-                captionInputLayout.setEndIconOnClickListener(v ->
-                    callback.showAlert(R.string.media_detail_caption, R.string.caption_info));
-                Objects.requireNonNull(captionInputLayout.getEditText()).setFilters(new InputFilter[] {
-                    new UploadMediaDetailInputFilter()
-                });
-
-                descInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM);
-                descInputLayout.setEndIconDrawable(R.drawable.maplibre_info_icon_default);
-                descInputLayout.setEndIconOnClickListener(v ->
-                    callback.showAlert(R.string.media_detail_description, R.string.description_info));
-
+                betterCaptionLinearLayout.setVisibility(View.VISIBLE);
+                betterCaptionLinearLayout.setOnClickListener(
+                    v -> callback.showAlert(R.string.media_detail_caption, R.string.caption_info));
+                betterDescriptionLinearLayout.setVisibility(View.VISIBLE);
+                betterDescriptionLinearLayout.setOnClickListener(
+                    v -> callback.showAlert(R.string.media_detail_description,
+                        R.string.description_info));
+                Objects.requireNonNull(captionInputLayout.getEditText())
+                    .setFilters(new InputFilter[]{
+                        new UploadMediaDetailInputFilter()
+                    });
             } else {
                 removeButton.setVisibility(View.VISIBLE);
-                captionInputLayout.setEndIconDrawable(null);
-                descInputLayout.setEndIconDrawable(null);
+                betterCaptionLinearLayout.setVisibility(View.GONE);
+                betterDescriptionLinearLayout.setVisibility(View.GONE);
             }
 
             removeButton.setOnClickListener(v -> removeDescription(uploadMediaDetail, position));
             captionListener = new AbstractTextWatcher(
-                captionText -> uploadMediaDetails.get(position).setCaptionText(convertIdeographicSpaceToLatinSpace(
-                    removeLeadingAndTrailingWhitespace(captionText))));
+                captionText -> uploadMediaDetails.get(position)
+                    .setCaptionText(convertIdeographicSpaceToLatinSpace(
+                        removeLeadingAndTrailingWhitespace(captionText))));
             descriptionListener = new AbstractTextWatcher(
-                descriptionText -> uploadMediaDetails.get(position).setDescriptionText(descriptionText));
+                descriptionText -> uploadMediaDetails.get(position)
+                    .setDescriptionText(descriptionText));
             captionItemEditText.addTextChangedListener(captionListener);
             initLanguage(position, uploadMediaDetail);
 
@@ -228,23 +298,26 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
         }
 
 
-    private void initLanguage(int position, UploadMediaDetail description) {
+        private void initLanguage(int position, UploadMediaDetail description) {
 
-        final List<Language> recentLanguages = recentLanguagesDao.getRecentLanguages();
+            final List<Language> recentLanguages = recentLanguagesDao.getRecentLanguages();
 
-        LanguagesAdapter languagesAdapter = new LanguagesAdapter(
+            LanguagesAdapter languagesAdapter = new LanguagesAdapter(
                 descriptionLanguages.getContext(),
                 selectedLanguages
             );
 
-        descriptionLanguages.setOnClickListener(new OnClickListener() {
+            descriptionLanguages.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Dialog dialog = new Dialog(view.getContext());
                     dialog.setContentView(R.layout.dialog_select_language);
                     dialog.setCanceledOnTouchOutside(true);
-                    dialog.getWindow().setLayout((int)(view.getContext().getResources().getDisplayMetrics().widthPixels*0.90),
-                        (int)(view.getContext().getResources().getDisplayMetrics().heightPixels*0.90));
+                    dialog.getWindow().setLayout(
+                        (int) (view.getContext().getResources().getDisplayMetrics().widthPixels
+                            * 0.90),
+                        (int) (view.getContext().getResources().getDisplayMetrics().heightPixels
+                            * 0.90));
                     dialog.show();
 
                     EditText editText = dialog.findViewById(R.id.search_language);
@@ -275,9 +348,10 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                         }
                     });
 
-                    languageHistoryListView.setOnItemClickListener((adapterView, view1, position, id) -> {
-                        onRecentLanguageClicked(dialog, adapterView, position, description);
-                    });
+                    languageHistoryListView.setOnItemClickListener(
+                        (adapterView, view1, position, id) -> {
+                            onRecentLanguageClicked(dialog, adapterView, position, description);
+                        });
 
                     listView.setOnItemClickListener(new OnItemClickListener() {
                         @Override
@@ -317,7 +391,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                 if (!TextUtils.isEmpty(savedLanguageValue)) {
                     // If user has chosen a default language from settings activity
                     // savedLanguageValue is not null
-                    if(!TextUtils.isEmpty(description.getLanguageCode())) {
+                    if (!TextUtils.isEmpty(description.getLanguageCode())) {
                         descriptionLanguages.setText(description.getLanguageCode());
                         selectedLanguages.remove(position);
                         selectedLanguages.put(position, description.getLanguageCode());
@@ -349,9 +423,11 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                                     .getContext());
                             descriptionLanguages
                                 .setText(languagesAdapter.getLanguageCode(defaultLocaleIndex));
-                            description.setLanguageCode(languagesAdapter.getLanguageCode(defaultLocaleIndex));
+                            description.setLanguageCode(
+                                languagesAdapter.getLanguageCode(defaultLocaleIndex));
                             selectedLanguages.remove(position);
-                            selectedLanguages.put(position, languagesAdapter.getLanguageCode(defaultLocaleIndex));
+                            selectedLanguages.put(position,
+                                languagesAdapter.getLanguageCode(defaultLocaleIndex));
                         } else {
                             description.setLanguageCode(languagesAdapter.getLanguageCode(0));
                             descriptionLanguages.setText(languagesAdapter.getLanguageCode(0));
@@ -415,7 +491,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                 separator.setVisibility(View.GONE);
             } else {
                 if (recentLanguages.size() > 5) {
-                    for (int i = recentLanguages.size()-1; i >=5; i--) {
+                    for (int i = recentLanguages.size() - 1; i >= 5; i--) {
                         recentLanguagesDao.deleteRecentLanguage(recentLanguages.get(i)
                             .getLanguageCode());
                     }
@@ -425,15 +501,16 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
                 separator.setVisibility(View.VISIBLE);
                 final RecentLanguagesAdapter recentLanguagesAdapter
                     = new RecentLanguagesAdapter(
-                        descriptionLanguages.getContext(),
-                        recentLanguagesDao.getRecentLanguages(),
-                        selectedLanguages);
+                    descriptionLanguages.getContext(),
+                    recentLanguagesDao.getRecentLanguages(),
+                    selectedLanguages);
                 languageHistoryListView.setAdapter(recentLanguagesAdapter);
             }
         }
 
         /**
          * Removes any leading and trailing whitespace from the source text.
+         *
          * @param source input string
          * @return a string without leading and trailing whitespace
          */
@@ -466,6 +543,7 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
 
         /**
          * Convert Ideographic space to Latin space
+         *
          * @param source the source text
          * @return a string with Latin spaces instead of Ideographic spaces
          */
@@ -483,5 +561,8 @@ public class UploadMediaDetailAdapter extends RecyclerView.Adapter<UploadMediaDe
     public interface EventListener {
         void onPrimaryCaptionTextChange(boolean isNotEmpty);
     }
-
+    enum SelectedVoiceIcon {
+        CAPTION,
+        DESCRIPTION
+    }
 }
