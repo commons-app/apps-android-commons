@@ -80,6 +80,7 @@
                   android:clickable="false"
                   android:focusable="false"
                   android:padding="@dimen/medium_height"
+                  android:rotation="180"
                   app:srcCompat="@drawable/ic_expand_less_black_24dp" />
             </RelativeLayout>
 
