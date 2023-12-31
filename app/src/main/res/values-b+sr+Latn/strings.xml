@@ -602,7 +602,6 @@
   <string name="leaderboard_nearby">U blizini</string>
   <string name="leaderboard_used">Upotrebe</string>
   <string name="leaderboard_my_rank_button_text">Moj rank</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Unapredite ovu mapu&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Režim za ograničenu vezu je omogućen!</string>
   <string name="limited_connection_disabled">Režim za ograničenu vezu je onemogućen. Otpremanja na čekanju će se sada nastaviti.</string>
   <string name="limited_connection_mode">Režim za ograničenu vezu</string>

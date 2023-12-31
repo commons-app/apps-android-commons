@@ -184,6 +184,7 @@
   <string name="navigation_item_review">Árvvoštala</string>
   <string name="nearby_info_menu_commons_article">Commons-fiilasiidu</string>
   <string name="nearby_info_menu_wikipedia_article">Wikipedia-artihkal</string>
+  <string name="login_to_your_account">Čálit sisa du dovddaldahkii</string>
   <string name="navigation_item_login">Čálit sisa</string>
   <string name="skip_login_title">Áiggutgo don duođaid joatkit čálitkeahttá sisa?</string>
   <string name="nearby_wikidata">Wikidata</string>

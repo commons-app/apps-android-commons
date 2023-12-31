@@ -644,7 +644,6 @@
   <string name="leaderboard_nearby">Bližnje</string>
   <string name="leaderboard_used">Uporabljeno</string>
   <string name="leaderboard_my_rank_button_text">Moje mesto</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Izboljšajte zemljevid&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Vklopljen je način omejene povezanosti!</string>
   <string name="limited_connection_disabled">Način omejene povezanosti izklopljen. Nalaganje se bo zdaj nadaljevalo.</string>
   <string name="limited_connection_mode">Način omejene povezanosti</string>

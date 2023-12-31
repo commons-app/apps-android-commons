@@ -479,7 +479,6 @@
   <string name="theme_default_name">Rendszerbeállítás követése</string>
   <string name="theme_dark_name">Sötét</string>
   <string name="theme_light_name">Világos</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Térkép fejlesztése&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Korlátozott kapcsolat-mód bekapcsolva!</string>
   <string name="limited_connection_disabled">Korlátozott kapcsolat-mód kikapcsolva. Függőben lévő feltöltések folytatása.</string>
   <string name="limited_connection_mode">Korlátozott kapcsolat mód</string>

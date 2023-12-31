@@ -625,7 +625,6 @@
   <string name="leaderboard_nearby">Во близина</string>
   <string name="leaderboard_used">Користено</string>
   <string name="leaderboard_my_rank_button_text">Мој ранг</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Подобрете ја картава&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Овозможен режимот на ограничена врска.</string>
   <string name="limited_connection_disabled">Режимот на ограничена врска е оневозоможен. Сега ќе продолжат преземањата во исчекување.</string>
   <string name="limited_connection_mode">Режим на ограничена врска</string>

@@ -11,10 +11,10 @@
   <string name="commons_logo">Commons-Logo</string>
   <string name="commons_website">Internetsite vu Commons</string>
   <string name="submit">Späicheren</string>
-  <string name="add_another_description">Nach eng Beschreiwung derbäisetzen</string>
-  <string name="add_new_contribution">En neie Bäitrag derbäiasetzen</string>
-  <string name="add_contribution_from_camera">E Bäitrag vun der Kamera derbäisetzen</string>
-  <string name="add_contribution_from_photos">E Bäitrag aus de Fotoen derbäisetzen</string>
+  <string name="add_another_description">Eng aner Beschreiwung derbäisetzen</string>
+  <string name="add_new_contribution">Neie Bäitrag derbäiasetzen</string>
+  <string name="add_contribution_from_camera">Bäitrag vun der Kamera derbäisetzen</string>
+  <string name="add_contribution_from_photos">Bäitrag vun de Fotoen derbäisetzen</string>
   <string name="row_item_language_description">Sprooch-Beschreiwung</string>
   <string name="show_captions_description">Beschreiwung</string>
   <string name="nearby_row_image">Bild</string>
@@ -269,10 +269,13 @@
   <string name="quiz">Quiz</string>
   <string name="question">Fro</string>
   <string name="result">Resultat</string>
+  <string name="congratulatory_message_quiz">Dir hutt %1$s richteg Äntwert. Gléckwonsch!</string>
   <string name="warning_for_no_answer">Wielt eng vun den zwou Méiglechkeete fir d\'Fro ze beäntwerten</string>
+  <string name="quiz_result_share_message">Deelt Äre Quiz mat Äre Frënn!</string>
   <string name="continue_message">Virufueren</string>
   <string name="correct">Richteg Äntwert</string>
   <string name="wrong">Falsch Äntwert</string>
+  <string name="share_app_title">App deelen</string>
   <string name="rotate">Dréinen</string>
   <string name="nominate_delete">Nominéiere fir ze Läschen</string>
   <string name="delete">Läschen</string>
@@ -347,6 +350,7 @@
   <string name="exif_tag_name_serialNumbers">Seriennummeren</string>
   <string name="exif_tag_name_software">Software</string>
   <string name="share_text">Luet Fotoen direkt vun Ärem Handy op Wikimedia Commons erop. Luet d\'Commons-App elo erof: %1$s</string>
+  <string name="share_via">App deelen iwwer...</string>
   <string name="image_info">Bildinformatiounen</string>
   <string name="no_categories_found">Keng Kategorie fonnt.</string>
   <string name="upload_cancelled">Eroplueden ofgebrach</string>
@@ -362,11 +366,16 @@
   <string name="category_edit_helper_make_edit_toast">Probéiere Kategorien z\'aktualiséieren</string>
   <string name="category_edit_helper_show_edit_title">Aktualiséierung vun der Kategorie</string>
   <string name="category_edit_helper_show_edit_title_success">Succès</string>
+  <plurals name="category_edit_helper_show_edit_message_if">
+    <item quantity="one">D\'Kategorie %1$s gouf derbäigesat.</item>
+    <item quantity="other">D\'Kategorien %1$s goufen derbäigesat.</item>
+  </plurals>
   <string name="category_edit_helper_edit_message_else">Kategorie konnten net derbäigesat ginn.</string>
   <string name="category_edit_button_text">Kategorien aktualiséieren</string>
   <string name="coordinates_edit_helper_show_edit_title">Aktualiséierung vun de Koordinaten</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Succès</string>
   <string name="coordinates_edit_helper_show_edit_message">Koordinaten %1$s ginn derbäigesat.</string>
+  <string name="share_image_via">Bild deelen iwwer</string>
   <string name="you_have_no_achievements_yet">Dir hutt nach keng Kontributioune gemaach</string>
   <string name="no_achievements_yet">%s huet nach keng Kontributioune gemaach</string>
   <string name="account_created">Benotzerkont ugeluecht!</string>
@@ -431,6 +440,7 @@
   <string name="quality_images_info">Qualitéitsbiller sinn Diagrammen oder Fotoen, déi gewësse Qualitéitscritèren erfëllen (déi haaptsächlech vun technescher Natur sinn) a wäertvoll fir Wikimedia-Projete sinn.</string>
   <string name="cancelling_upload">Eropluede gëtt ofgebrach....</string>
   <string name="cancel_upload">Eroplueden ofbriechen</string>
+  <string name="menu_view_category_page">Kategoriesäit weisen</string>
   <string name="app_ui_language">Sprooch vum Interface vum Benotzer vun der App</string>
   <string name="read_help_link">Liest méi</string>
   <string name="media_detail_in_all_languages">An alle Sproochen</string>
@@ -470,4 +480,8 @@
   <string name="report_user">Dëse Benotzer mellen</string>
   <string name="report_content">Dësen Inhalt mellen</string>
   <string name="request_user_block">Ufroe fir dëse Benotzer ze spären</string>
+  <plurals name="custom_picker_images_selected_title_appendix">
+    <item quantity="one">%d Bild ausgewielt</item>
+    <item quantity="other">%d Biller ausgewielt</item>
+  </plurals>
 </resources>
