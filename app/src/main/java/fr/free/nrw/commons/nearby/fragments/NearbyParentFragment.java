@@ -125,6 +125,7 @@ import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.events.MapListener;
 import org.osmdroid.events.ScrollEvent;
 import org.osmdroid.events.ZoomEvent;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.util.constants.GeoConstants;
 import org.osmdroid.views.CustomZoomButtonsController;
@@ -398,7 +399,18 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         presenter.setActionListeners(applicationKvStore);
         org.osmdroid.config.Configuration.getInstance().load(this.getContext(),
             PreferenceManager.getDefaultSharedPreferences(this.getContext()));
+
+        // Use the Wikimedia tile server, rather than OpenStreetMap (Mapnik) which has various
+        // restrictions that we do not satisfy.
+        mapView.setTileSource(TileSourceFactory.WIKIMEDIA);
         mapView.setTilesScaledToDpi(true);
+
+        // Add referer HTTP header because the Wikimedia tile server requires it.
+        // This was suggested by Dmitry Brant within an email thread between us and WMF.
+        org.osmdroid.config.Configuration.getInstance().getAdditionalHttpRequestProperties().put(
+            "Referer", "http://maps.wikimedia.org/"
+        );
+
         if (applicationKvStore.getString("LastLocation")
             != null) { // Checking for last searched location
             String[] locationLatLng = applicationKvStore.getString("LastLocation").split(",");
