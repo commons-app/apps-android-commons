@@ -125,6 +125,7 @@ import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.events.MapListener;
 import org.osmdroid.events.ScrollEvent;
 import org.osmdroid.events.ZoomEvent;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.util.constants.GeoConstants;
 import org.osmdroid.views.CustomZoomButtonsController;
@@ -398,7 +399,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         presenter.setActionListeners(applicationKvStore);
         org.osmdroid.config.Configuration.getInstance().load(this.getContext(),
             PreferenceManager.getDefaultSharedPreferences(this.getContext()));
+
+        mapView.setTileSource(TileSourceFactory.WIKIMEDIA); // Added tileSource - WIKIMEDIA
         mapView.setTilesScaledToDpi(true);
+
+        org.osmdroid.config.Configuration.getInstance().getAdditionalHttpRequestProperties().put(
+            "Referer", "http://maps.wikimedia.org/"
+        ); // Added referer in the header
+
         if (applicationKvStore.getString("LastLocation")
             != null) { // Checking for last searched location
             String[] locationLatLng = applicationKvStore.getString("LastLocation").split(",");
