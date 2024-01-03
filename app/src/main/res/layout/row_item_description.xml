@@ -67,7 +67,7 @@
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/learn_how_to_write_better_caption"
+        android:text="@string/learn_how_to_write_a_useful_caption"
         android:textSize="12sp" />
 
       <ImageView
@@ -111,7 +111,7 @@
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/learn_how_to_write_better_description"
+        android:text="@string/learn_how_to_write_a_useful_description"
         android:textSize="12sp" />
 
       <ImageView
