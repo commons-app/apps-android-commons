@@ -400,12 +400,16 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         org.osmdroid.config.Configuration.getInstance().load(this.getContext(),
             PreferenceManager.getDefaultSharedPreferences(this.getContext()));
 
-        mapView.setTileSource(TileSourceFactory.WIKIMEDIA); // Added tileSource - WIKIMEDIA
+        // Use the Wikimedia tile server, rather than OpenStreetMap (Mapnik) which has various
+        // restrictions that we do not satisfy.
+        mapView.setTileSource(TileSourceFactory.WIKIMEDIA);
         mapView.setTilesScaledToDpi(true);
 
+        // Add referer HTTP header because the Wikimedia tile server requires it.
+        // This was suggested by Dmitry Brant within an email thread between us and WMF.
         org.osmdroid.config.Configuration.getInstance().getAdditionalHttpRequestProperties().put(
             "Referer", "http://maps.wikimedia.org/"
-        ); // Added referer in the header
+        );
 
         if (applicationKvStore.getString("LastLocation")
             != null) { // Checking for last searched location
