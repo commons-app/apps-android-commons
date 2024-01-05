@@ -62,6 +62,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Paràmeter</string>
   <string name="intent_share_upload_label">Carié su Commons</string>
+  <string name="upload_in_progress">Cariament an cors</string>
   <string name="username">Stranòm</string>
   <string name="password">Ciav</string>
   <string name="login_credential">Ch\'a intra an sò cont Comun beta</string>
@@ -75,6 +76,8 @@
   <string name="login_success">A l\'é intrà ant ël sistema!</string>
   <string name="login_failed">Falì a rintré ant ël sistema!</string>
   <string name="upload_failed">Archivi nen trovà. Për piasì, ch\'a preuva con n\'àutr.</string>
+  <string name="retry_limit_reached">Lìmit màssim ëd tentativ argionzù! Për piasì, ch\'a anula ël cariament e ch\'a preuva torna</string>
+  <string name="unrestricted_battery_mode">Disativé l\'otimisassion ëd la batarìa?</string>
   <string name="authentication_failed">Autentificassion falìa, për piasì ch\'as colega torna</string>
   <string name="uploading_started">Cariament ancaminà!</string>
   <string name="uploading_queued">Carié an coa (manera ëd conession limità abilità)</string>
