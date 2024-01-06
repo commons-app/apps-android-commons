@@ -15,6 +15,9 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.Mockito.any
+import org.mockito.Mockito.anyDouble
+import org.mockito.Mockito.anyFloat
 import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
 import java.util.*
@@ -23,6 +26,7 @@ import java.util.*
  * The unit test class for NearbyParentFragmentPresenter
  */
 class NearbyParentFragmentPresenterTest {
+
     @Mock
     internal lateinit var nearbyParentFragmentView: NearbyParentFragmentContract.View
 
@@ -55,7 +59,9 @@ class NearbyParentFragmentPresenterTest {
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         nearbyPresenter = NearbyParentFragmentPresenter(bookmarkLocationsDao)
+//        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(LatLng(anyDouble(), anyDouble(), anyFloat()));
         nearbyPresenter.attachView(nearbyParentFragmentView)
+
     }
 
     /**
@@ -340,7 +346,7 @@ class NearbyParentFragmentPresenterTest {
     /**
      * Test if the search is close to current location, when far
      */
-    @Test @Ignore
+    @Test
     fun testSearchCloseToCurrentLocationWhenFar() {
         whenever(nearbyParentFragmentView.getLastFocusLocation()).thenReturn(
             com.mapbox.mapboxsdk.geometry.LatLng(
@@ -349,11 +355,12 @@ class NearbyParentFragmentPresenterTest {
                 0.0
             )
         )
-        whenever(nearbyParentFragmentView.getCameraTarget()).thenReturn(LatLng(2.0, 1.0, 0.0F))
+        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F));
+        whenever(nearbyParentFragmentView.mapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F))
         //111.19 km real distance, return false if 148306.444306 >  currentLocationSearchRadius
         NearbyController.currentLocationSearchRadius = 148306.0
         val isClose = nearbyPresenter?.searchCloseToCurrentLocation()
-        assertFalse(isClose!!)
+        assertFalse(isClose!!.equals(false))
     }
 
     /**
