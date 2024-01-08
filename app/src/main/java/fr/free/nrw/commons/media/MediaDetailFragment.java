@@ -12,7 +12,6 @@ import static fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT;
 import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION;
 import static fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -23,6 +22,7 @@ import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -64,6 +64,7 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.actions.ThanksClient;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategoryClient;
@@ -75,12 +76,15 @@ import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
 import fr.free.nrw.commons.description.DescriptionEditActivity;
 import fr.free.nrw.commons.description.DescriptionEditHelper;
+import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.media.ZoomableActivity.ZoomableActivityConstants;
 import fr.free.nrw.commons.profile.ProfileActivity;
+import fr.free.nrw.commons.review.ReviewController;
+import fr.free.nrw.commons.review.ReviewHelper;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
@@ -88,9 +92,13 @@ import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
+import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -101,11 +109,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.Callable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
+import org.wikipedia.dataclient.mwapi.MwQueryPage;
 import org.wikipedia.language.AppLanguageLookUpTable;
 import org.wikipedia.util.DateUtil;
 import timber.log.Timber;
@@ -154,6 +164,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     @Inject
     DeleteHelper deleteHelper;
     @Inject
+    ReviewHelper reviewHelper;
+    @Inject
     CategoryEditHelper categoryEditHelper;
     @Inject
     CoordinateEditHelper coordinateEditHelper;
@@ -163,6 +175,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     ViewUtilWrapper viewUtil;
     @Inject
     CategoryClient categoryClient;
+    @Inject
+    ThanksClient thanksClient;
     @Inject
     @Named("default_preferences")
     JsonKvStore applicationKvStore;
@@ -241,6 +255,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     ProgressBar progressBarEditCategory;
     @BindView(R.id.description_edit)
     Button editDescription;
+    @BindView(R.id.sendThanks)
+    Button sendThanksButton;
 
     private ArrayList<String> categoryNames = new ArrayList<>();
     private String categorySearchQuery;
@@ -429,6 +445,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
         if(media != null && applicationKvStore.getBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), false)) {
             enableProgressBar();
+        }
+
+        if (AccountUtil.getUserName(getContext()) != null && media != null && AccountUtil.getUserName(getContext()).equals(media.getAuthor())) {
+            sendThanksButton.setVisibility(GONE);
+        } else {
+            sendThanksButton.setVisibility(VISIBLE);
         }
 
         scrollView.getViewTreeObserver().addOnGlobalLayoutListener(
@@ -780,12 +802,63 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     @OnClick(R.id.copyWikicode)
-    public void onCopyWikicodeClicked(){
-        String data = "[[" + media.getFilename() + "|thumb|" + media.getFallbackDescription() + "]]";
-        Utils.copy("wikiCode",data,getContext());
+    public void onCopyWikicodeClicked() {
+        String data =
+            "[[" + media.getFilename() + "|thumb|" + media.getFallbackDescription() + "]]";
+        Utils.copy("wikiCode", data, getContext());
         Timber.d("Generated wikidata copy code: %s", data);
 
-        Toast.makeText(getContext(), getString(R.string.wikicode_copied), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), getString(R.string.wikicode_copied), Toast.LENGTH_SHORT)
+            .show();
+    }
+
+    @OnClick(R.id.sendThanks)
+    public void sendThanksToAuthor() {
+        String fileName = media.getFilename();
+        if (TextUtils.isEmpty(fileName)) {
+            Toast.makeText(getContext(), getString(R.string.error_sending_thanks),
+                Toast.LENGTH_SHORT).show();
+            return;
+        }
+        compositeDisposable.add(reviewHelper.getFirstRevisionOfFile(fileName)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(revision -> sendThanks(getContext(), revision)));
+    }
+
+    @SuppressLint({"CheckResult", "StringFormatInvalid"})
+    void sendThanks(Context context, MwQueryPage.Revision firstRevision) {
+        ViewUtil.showShortToast(context,
+            context.getString(R.string.send_thank_toast, media.getDisplayTitle()));
+
+        if (firstRevision == null) {
+            return;
+        }
+
+        Observable.defer((Callable<ObservableSource<Boolean>>) () -> thanksClient.thank(
+                firstRevision.getRevisionId()))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe((result) -> {
+                displayThanksToast(context, result);
+            }, Timber::e);
+    }
+
+    @SuppressLint("StringFormatInvalid")
+    private void displayThanksToast(final Context context, final boolean result) {
+        final String message;
+        final String title;
+        if (result) {
+            title = context.getString(R.string.send_thank_success_title);
+            message = context.getString(R.string.send_thank_success_message,
+                media.getDisplayTitle());
+        } else {
+            title = context.getString(R.string.send_thank_failure_title);
+            message = context.getString(R.string.send_thank_failure_message,
+                media.getDisplayTitle());
+        }
+
+        ViewUtil.showShortToast(context, message);
     }
 
     @OnClick(R.id.categoryEditButton)
