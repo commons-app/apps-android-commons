@@ -79,6 +79,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Configurações</string>
   <string name="intent_share_upload_label">Carregar na wiki Commons</string>
+  <string name="upload_in_progress">Carregamento em progresso</string>
   <string name="username">Nome de utilizador</string>
   <string name="password">Palavra-passe</string>
   <string name="login_credential">Entrar na sua conta da wiki Commons Beta</string>
@@ -92,6 +93,9 @@
   <string name="login_success">Sessão iniciada!</string>
   <string name="login_failed">O início de sessão falhou!</string>
   <string name="upload_failed">O ficheiro não foi encontrado. Tente outro, por favor.</string>
+  <string name="retry_limit_reached">Limite máximo de novas tentativas atingido! Cancele o carregamento e tente novamente, por favor</string>
+  <string name="unrestricted_battery_mode">Desligar a otimização da bateria?</string>
+  <string name="suggest_unrestricted_mode">O carregamento de mais de três imagens funciona de maneira mais fiável quando a otimização da bateria está desligada. Desligue a otimização da bateria para a aplicação Commons nas configurações, de forma a ter uma experiência de carregamento mais fluida. \n\nPossíveis passos para desativar a otimização da bateria:\n\nEtapa 1: premir o botão \'Configurações\' abaixo.\n\nEtapa 2: mudar de \'Não otimizado\' para \'Todas as aplicações\'.\n\nEtapa 3: pesquisar \"Commons\" ou \"fr.free.nrw.commons\".\n\nEtapa 4: premir esta e selecionar \'Não otimizar\'.\n\nEtapa 5: pressionar \'Concluído\'.</string>
   <string name="authentication_failed">A autenticação falhou; inicie novamente a sessão, por favor</string>
   <string name="uploading_started">Carregamento iniciado!</string>
   <string name="uploading_queued">Fila de carregamento (modo de ligação limitada ativado)</string>
@@ -206,6 +210,8 @@
   <string name="read_storage_permission_rationale">Permissão necessária: ler o armazenamento externo. A aplicação não pode aceder à sua galeria sem isto.</string>
   <string name="write_storage_permission_rationale">Permissão necessária: escrever no armazenamento externo. A aplicação não pode aceder à sua câmara/galeria sem isto.</string>
   <string name="location_permission_title">Autorização para identificar localização</string>
+  <string name="in_app_camera_location_permission_title">Gravar a localização das fotografias tiradas na aplicação</string>
+  <string name="in_app_camera_location_switch_pref_summary">Ativar esta opção para gravar a localização das fotografias tiradas na aplicação, caso a câmara do dispositivo não a grave</string>
   <string name="ok">OK</string>
   <string name="warning">Aviso</string>
   <string name="duplicate_file_name">Encontrado nome de ficheiro duplicado</string>
@@ -284,6 +290,7 @@
   <string name="copy_wikicode">Copiar o texto wiki para a área de transferência</string>
   <string name="wikicode_copied">O texto wiki foi copiado para a área de transferência</string>
   <string name="nearby_location_not_available">A identificação de locais próximos pode não funcionar devidamente; o serviço de localização não está disponível.</string>
+  <string name="upload_location_access_denied">Acesso à localização negado. Para usar esta funcionalidade defina a sua localização manualmente, por favor.</string>
   <string name="location_permission_rationale_nearby">É necessária permissão para mostrar uma lista dos locais próximos</string>
   <string name="nearby_directions">Indicações</string>
   <string name="nearby_wikidata">Wikidata</string>
@@ -351,6 +358,7 @@
   <string name="wrong">Resposta incorreta</string>
   <string name="quiz_screenshot_question">Esta captura de ecrã pode ser carregada?</string>
   <string name="share_app_title">Partilhar aplicação</string>
+  <string name="rotate">Rodar</string>
   <string name="error_fetching_nearby_places">Erro ao procurar locais próximos.</string>
   <string name="no_nearby_places_around">Não existem locais próximos</string>
   <string name="error_fetching_nearby_monuments">Erro ao procurar monumentos próximos.</string>
@@ -431,6 +439,9 @@
   <string name="ends_on">Termina em:</string>
   <string name="display_campaigns">Apresentar campanhas</string>
   <string name="display_campaigns_explanation">Ver as campanhas em andamento</string>
+  <string name="in_app_camera_location_access_explanation">Permitir que a aplicação móvel obtenha a localização, caso a câmara não a grave. Algumas câmaras de dispositivos não gravam a localização. Nesses casos, permitir que a aplicação obtenha e registe a localização torna a sua contribuição mais útil. Pode alterar esta opção a qualquer momento nas Configurações</string>
+  <string name="option_allow">Permitir</string>
+  <string name="option_dismiss">Descartar</string>
   <string name="location_loss_warning" fuzzy="true">Assegure-se de que este novo seletor Android não remove a localização das suas fotografias.</string>
   <string name="nearby_campaign_dismiss_message">Deixará de ver as campanhas. No entanto, pode reativar esta notificação nas configurações, se desejar.</string>
   <string name="this_function_needs_network_connection">Esta função requer uma ligação de rede. Verifique as suas configurações de ligação, por favor.</string>
