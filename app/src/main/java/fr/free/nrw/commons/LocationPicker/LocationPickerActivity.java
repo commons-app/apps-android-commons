@@ -63,6 +63,7 @@ import fr.free.nrw.commons.location.LocationPermissionsHelper.Dialog;
 import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -111,6 +112,14 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      * modifyLocationButton : button for start editing location
      */
     Button modifyLocationButton;
+    /**
+     * removeLocationButton : button for removing location metadata
+     */
+    Button removeLocationButton;
+    /**
+     * isRemovedByUser : used to flag when a location is intentionally removed by the user
+     */
+    private boolean isRemovedByUser = false;
     /**
      * showInMapButton : button for showing in map
      */
@@ -190,6 +199,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
         if ("UploadActivity".equals(activity)) {
             placeSelectedButton.setVisibility(View.GONE);
             modifyLocationButton.setVisibility(View.VISIBLE);
+            removeLocationButton.setVisibility(View.VISIBLE);
             showInMapButton.setVisibility(View.VISIBLE);
             largeToolbarText.setText(getResources().getString(R.string.image_location));
             smallToolbarText.setText(getResources().
@@ -225,6 +235,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
         markerImage = findViewById(R.id.location_picker_image_view_marker);
         tvAttribution = findViewById(R.id.tv_attribution);
         modifyLocationButton = findViewById(R.id.modify_location);
+        removeLocationButton = findViewById(R.id.remove_location);
         showInMapButton = findViewById(R.id.show_in_map);
         showInMapButton.setText(getResources().getString(R.string.show_in_map_app).toUpperCase());
         shadow = findViewById(R.id.location_picker_image_view_shadow);
@@ -267,7 +278,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      *
      * @param style style
      */
-    private void onStyleLoaded(final Style style) {
+    private void onStyleLoaded(@Nullable final Style style) {
         if (modifyLocationButton.getVisibility() == View.VISIBLE) {
             initDroppedMarker(style);
             adjustCameraBasedOnOptions();
@@ -292,6 +303,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
         }
 
         modifyLocationButton.setOnClickListener(v -> onClickModifyLocation());
+        removeLocationButton.setOnClickListener(v -> onClickRemoveLocation());
         showInMapButton.setOnClickListener(v -> showInMap());
     }
 
@@ -301,6 +313,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
     private void onClickModifyLocation() {
         placeSelectedButton.setVisibility(View.VISIBLE);
         modifyLocationButton.setVisibility(View.GONE);
+        removeLocationButton.setVisibility(View.GONE);
         showInMapButton.setVisibility(View.GONE);
         droppedMarkerLayer.setProperties(visibility(NONE));
         markerImage.setVisibility(View.VISIBLE);
@@ -309,6 +322,27 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
         smallToolbarText.setText(getResources().getString(R.string.pan_and_zoom_to_adjust));
         bindListeners();
         fabCenterOnLocation.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * Handles onclick event of removeLocationButton
+     */
+    private void onClickRemoveLocation(){
+        DialogUtil.showAlertDialog(this,
+            getString(R.string.no_location_selected),
+            getString(R.string.no_location_selected_warning_desc),
+            getString(R.string.continue_message),
+            getString(R.string.cancel), () -> removeLocationFromPicture(), null);
+    }
+
+    /**
+     * Method to remove the location from the picture and exit the location picker activity
+     */
+    private void removeLocationFromPicture() {
+        // Exit with intent lacking position data
+        final Intent returningIntent = new Intent();
+        setResult(AppCompatActivity.RESULT_OK, returningIntent);
+        finish();
     }
 
     /**
@@ -451,7 +485,7 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
         }
         final Intent returningIntent = new Intent();
         returningIntent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION,
-            mapboxMap.getCameraPosition());
+                mapboxMap.getCameraPosition());
         setResult(AppCompatActivity.RESULT_OK, returningIntent);
         finish();
     }
