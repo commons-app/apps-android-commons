@@ -26,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.exifinterface.media.ExifInterface;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -54,6 +55,7 @@ import fr.free.nrw.commons.upload.UploadMediaDetailAdapter;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+import java.io.IOException;
 import fr.free.nrw.commons.R.drawable.*;
 import java.io.File;
 import java.util.List;
@@ -248,6 +250,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     /**
      * show dialog with info
+     *
      * @param titleStringID
      * @param messageStringId
      */
@@ -276,7 +279,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         UploadMediaDetail uploadMediaDetail = new UploadMediaDetail();
         uploadMediaDetail.setManuallyAdded(true);//This was manually added by the user
         uploadMediaDetailAdapter.addDescription(uploadMediaDetail);
-        rvDescriptions.smoothScrollToPosition(uploadMediaDetailAdapter.getItemCount()-1);
+        rvDescriptions.smoothScrollToPosition(uploadMediaDetailAdapter.getItemCount() - 1);
     }
 
     @OnClick(R.id.edit_image)
@@ -291,7 +294,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             @Override
             public void onPositiveResponse() {
                 Timber.d("positive response from similar image fragment");
-                presenter.useSimilarPictureCoordinates(similarImageCoordinates, callback.getIndexInViewFlipper(UploadMediaDetailFragment.this));
+                presenter.useSimilarPictureCoordinates(similarImageCoordinates,
+                    callback.getIndexInViewFlipper(UploadMediaDetailFragment.this));
 
                 // set the description text when user selects to use coordinate from the other image
                 // which was taken within 20s
@@ -319,7 +323,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     /**
-     * Sets variables to Show popup if any nearby location needing pictures matches uploadable picture's GPS location
+     * Sets variables to Show popup if any nearby location needing pictures matches uploadable
+     * picture's GPS location
+     *
      * @param uploadItem
      * @param place
      */
@@ -344,6 +350,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     /**
      * Shows nearby place found popup
+     *
      * @param place
      */
     @SuppressLint("StringFormatInvalid")
@@ -359,7 +366,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 place.getName()),
             () -> {
                 UploadActivity.nearbyPopupAnswers.put(place, true);
-                presenter.onUserConfirmedUploadIsOfPlace(place, callback.getIndexInViewFlipper(this));
+                presenter.onUserConfirmedUploadIsOfPlace(place,
+                    callback.getIndexInViewFlipper(this));
             },
             () -> {
                 UploadActivity.nearbyPopupAnswers.put(place, false);
@@ -474,7 +482,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         DialogUtil.showAlertDialog(getActivity(),
             getString(R.string.upload_connection_error_alert_title),
             getString(R.string.upload_connection_error_alert_detail), getString(R.string.ok),
-            () -> {}, true);
+            () -> {
+            }, true);
     }
 
     @Override
@@ -503,6 +512,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     /**
      * Start Location picker activity. Show the location first then user can modify it by clicking
      * modify location button.
+     *
      * @param uploadItem current upload item
      */
     private void goToLocationPickerActivity(final UploadItem uploadItem) {
@@ -550,9 +560,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     /**
      * Get the coordinates and update the existing coordinates.
+     *
      * @param requestCode code of request
-     * @param resultCode code of result
-     * @param data intent
+     * @param resultCode  code of result
+     * @param data        intent
      */
     @Override
     public void onActivityResult(final int requestCode, final int resultCode,
@@ -579,6 +590,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                     isMissingLocationDialog = false;
                     onNextButtonClicked();
                 }
+            } else {
+                // Location removed by user.
+                removeLocation();
             }
         }
         if (requestCode == REQUEST_CODE_FOR_EDIT_ACTIVITY && resultCode == RESULT_OK) {
@@ -601,7 +615,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     /**
      * Update the old coordinates with new one
-     * @param latitude new latitude
+     *
+     * @param latitude  new latitude
      * @param longitude new longitude
      */
     public void editLocation(final String latitude, final String longitude, final double zoom) {
@@ -618,6 +633,32 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
         Toast.makeText(getContext(), "Location Updated", Toast.LENGTH_LONG).show();
 
+    }
+
+    /**
+     * Update the old coordinates with new one
+     */
+    public void removeLocation() {
+        editableUploadItem.getGpsCoords().setDecimalCoords(null);
+        try {
+            ExifInterface sourceExif = new ExifInterface(uploadableFile.getFilePath());
+            String[] exifTags = {
+                ExifInterface.TAG_GPS_LATITUDE,
+                ExifInterface.TAG_GPS_LATITUDE_REF,
+                ExifInterface.TAG_GPS_LONGITUDE,
+                ExifInterface.TAG_GPS_LONGITUDE_REF,
+            };
+
+            for (String tag : exifTags) {
+                sourceExif.setAttribute(tag, null);
+            }
+            sourceExif.saveAttributes();
+            Toast.makeText(getContext(), "Location Removed", Toast.LENGTH_LONG).show();
+
+        } catch (IOException e) {
+            Timber.d(e);
+            Toast.makeText(getContext(), "Location Could Not be Removed", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -683,15 +724,17 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     /**
      * show hide media detail based on
+     *
      * @param shouldExpand
      */
-    private void expandCollapseLlMediaDetail(boolean shouldExpand){
+    private void expandCollapseLlMediaDetail(boolean shouldExpand) {
         llContainerMediaDetail.setVisibility(shouldExpand ? View.VISIBLE : View.GONE);
         isExpanded = !isExpanded;
         ibExpandCollapse.setRotation(ibExpandCollapse.getRotation() + 180);
     }
 
-    @OnClick(R.id.ib_map) public void onIbMapClicked() {
+    @OnClick(R.id.ib_map)
+    public void onIbMapClicked() {
         presenter.onMapIconClicked(callback.getIndexInViewFlipper(this));
     }
 
@@ -714,9 +757,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
 
     @OnClick(R.id.btn_copy_subsequent_media)
-    public void onButtonCopyTitleDescToSubsequentMedia(){
+    public void onButtonCopyTitleDescToSubsequentMedia() {
         presenter.copyTitleAndDescriptionToSubsequentMedia(callback.getIndexInViewFlipper(this));
-        Toast.makeText(getContext(), getResources().getString(R.string.copied_successfully), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), getResources().getString(R.string.copied_successfully),
+            Toast.LENGTH_SHORT).show();
     }
 
 }
