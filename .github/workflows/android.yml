@@ -54,8 +54,6 @@ jobs:
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: echo "Generated AVD snapshot for caching."
-      - name: Install Build Tools 30.0.3
-        run: yes | sdkmanager "build-tools;30.0.3"
 
       - name: Run Instrumentation tests
         if: github.event_name != 'pull_request'
