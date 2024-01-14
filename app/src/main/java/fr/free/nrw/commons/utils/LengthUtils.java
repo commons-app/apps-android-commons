@@ -123,4 +123,24 @@ public class LengthUtils {
         double sinHalf = Math.sin(x * 0.5D);
         return sinHalf * sinHalf;
     }
+
+    /**
+     * Computes bearing between the two given points
+     *
+     * @see <a href="https://www.movable-type.co.uk/scripts/latlong.html">Bearing</a>
+     * @param point1 Coordinates of first point
+     * @param point2 Coordinates of second point
+     * @return Bearing between the two end points in degrees
+     * @throws NullPointerException if one or both the points are null
+     */
+    
+    public static double computeBearing(@NonNull LatLng point1, @NonNull LatLng point2) {
+        double diffLongitute = Math.toRadians(point2.getLongitude() - point1.getLongitude());
+        double lat1 = Math.toRadians(point1.getLatitude());
+        double lat2 = Math.toRadians(point2.getLatitude());
+        double y = Math.sin(diffLongitute) * Math.cos(lat2);
+        double x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(diffLongitute);
+        double bearing = Math.atan2(y, x);
+        return (Math.toDegrees(bearing) + 360) % 360;
+    }
 }
