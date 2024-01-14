@@ -55,18 +55,6 @@ jobs:
           disable-animations: true
           script: echo "Generated AVD snapshot for caching."
 
-      - name: Print environment
-        run: |
-          echo "System Environment:"
-          printenv
-      
-          echo "Gradle Properties:"
-          ./gradlew properties
-          
-      - name: Print dependencies
-        run: ./gradlew dependencies
-
-
       - name: Run Instrumentation tests
         if: github.event_name != 'pull_request'
         uses: reactivecircus/android-emulator-runner@v2
@@ -81,15 +69,14 @@ jobs:
             adb shell content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0
             adb emu geo fix 37.422131 -122.084801
             ./gradlew connectedBetaDebugAndroidTest --stacktrace
-            cat app/build/reports/androidTests/connected/flavors/BetaDebug/index.html
 
       - name: Run Unit tests with unified coverage
         if: github.event_name != 'pull_request'
-        run: ./gradlew -Pcoverage testBetaDebugUnitTestUnifiedCoverage --stacktrace --info
+        run: ./gradlew -Pcoverage testBetaDebugUnitTestUnifiedCoverage --stacktrace
 
       - name: Run Unit tests without unified coverage
         if: github.event_name == 'pull_request'
-        run: ./gradlew -Pcoverage testBetaDebugUnitTestCoverage --stacktrace --info
+        run: ./gradlew -Pcoverage testBetaDebugUnitTestCoverage --stacktrace
 
       - name: Upload Test Report to Codecov
         if: github.event_name != 'pull_request'
