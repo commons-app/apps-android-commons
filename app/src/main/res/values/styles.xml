@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <style name="DarkAppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="contributionsListBackground">@color/contributionListDarkBackground</item>
