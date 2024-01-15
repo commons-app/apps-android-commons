@@ -20,6 +20,7 @@
     android:layout_height="match_parent"
     android:scrollbarSize="6dp"
     android:scrollbars="vertical"
+    android:fadeScrollbars="false"
     android:scrollbarThumbVertical="@color/primaryColor"/>
 
   <ProgressBar
