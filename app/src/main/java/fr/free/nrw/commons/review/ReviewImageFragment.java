@@ -21,6 +21,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
@@ -91,6 +92,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
         ButterKnife.bind(this, layoutView);
 
         String question, explanation=null, yesButtonText, noButtonText;
+
         switch (position) {
             case SPAM:
                 question = getString(R.string.review_spam);
