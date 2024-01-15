@@ -33,6 +33,6 @@
     android:padding="12dp"
     android:scaleType="centerCrop"
     android:tint="@color/white"
-    app:srcCompat="@drawable/ic_expand_less_black_24dp" />
+    app:srcCompat="@drawable/arrow_up" />
 
 </RelativeLayout>
