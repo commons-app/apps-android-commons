@@ -133,7 +133,6 @@ public class LengthUtils {
      * @return Bearing between the two end points in degrees
      * @throws NullPointerException if one or both the points are null
      */
-    
     public static double computeBearing(@NonNull LatLng point1, @NonNull LatLng point2) {
         double diffLongitute = Math.toRadians(point2.getLongitude() - point1.getLongitude());
         double lat1 = Math.toRadians(point1.getLatitude());
