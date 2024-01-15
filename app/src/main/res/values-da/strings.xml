@@ -167,7 +167,7 @@
   <string name="detail_license_empty">Ukendt licens</string>
   <string name="menu_refresh">Opdater</string>
   <string name="read_storage_permission_rationale">Krævet tilladelse: Læs eksternt lager. Programmet kan ikke tilgå dit galleri uden denne tilladelse.</string>
-  <string name="write_storage_permission_rationale" fuzzy="true">Krævet tilladelse: Skriv til eksternt lager. Program kan ikke tilgå dit kamera uden denne funktion.</string>
+  <string name="write_storage_permission_rationale">Krævet tilladelse: Skriv til eksternt lager. Appen kan ikke tilgå dit kamera/galleri uden denne tilladelse.</string>
   <string name="ok">O.k.</string>
   <string name="warning">Advarsel</string>
   <string name="yes">Ja</string>
@@ -217,8 +217,8 @@
   <string name="upload_problem_image_duplicate">Billedet er allerede på Commons.</string>
   <string name="upload_problem_different_geolocation">Billedet blev taget et andet sted.</string>
   <string name="upload_problem_do_you_continue">Ønsker du stadig at overføre dette billede?</string>
-  <string name="use_external_storage" fuzzy="true">Brug eksternt lager</string>
-  <string name="use_external_storage_summary" fuzzy="true">Gem billeder taget med din enheds program på kameraet</string>
+  <string name="use_external_storage">Gem billeder i appen</string>
+  <string name="use_external_storage_summary">Gem billeder, taget med kameraet i appen, på din enhed</string>
   <string name="login_to_your_account">Log ind på din konto</string>
   <string name="send_log_file">Send logfil</string>
   <string name="send_log_file_description" fuzzy="true">Send logfil til udviklerne via e-post</string>

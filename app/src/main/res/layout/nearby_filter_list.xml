@@ -26,6 +26,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/dimen_10"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="false"
+        android:scrollbarThumbVertical="@color/primaryColor"
+        android:scrollbarSize="@dimen/dimen_6"
         android:paddingBottom="48dp"
         />
 
