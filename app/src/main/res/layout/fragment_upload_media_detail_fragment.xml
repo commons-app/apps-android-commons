@@ -80,7 +80,8 @@
                   android:clickable="false"
                   android:focusable="false"
                   android:padding="@dimen/medium_height"
-                  app:srcCompat="@drawable/ic_expand_less_black_24dp" />
+                  android:rotation="180"
+                  app:srcCompat="@drawable/arrow_up" />
             </RelativeLayout>
 
             <LinearLayout
