@@ -123,7 +123,7 @@
                 android:layout_toRightOf="@+id/images_upload_text_param"
                 android:layout_toEndOf="@+id/images_upload_text_param"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryDarkColor"
+                android:tint="@color/primaryLightColor"
                 android:layout_marginLeft="@dimen/activity_margin_horizontal"
                 android:layout_marginStart="@dimen/activity_margin_horizontal"/>
 
@@ -210,7 +210,7 @@
                 android:layout_toRightOf="@+id/images_reverted_text"
                 android:layout_toEndOf="@+id/images_reverted_text"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryDarkColor"
+                android:tint="@color/primaryLightColor"
                 android:layout_marginLeft="@dimen/activity_margin_horizontal"
                 android:layout_marginStart="@dimen/activity_margin_horizontal"/>
 
@@ -285,7 +285,7 @@
                 android:layout_toRightOf="@+id/images_used_by_wiki_text"
                 android:layout_toEndOf="@+id/images_used_by_wiki_text"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryDarkColor"
+                android:tint="@color/primaryLightColor"
                 android:layout_marginLeft="@dimen/activity_margin_horizontal"
                 android:layout_marginStart="@dimen/activity_margin_horizontal"/>
 
@@ -414,7 +414,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryDarkColor" />
+                android:tint="@color/primaryLightColor" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -493,7 +493,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_gravity="top"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryDarkColor" />
+                android:tint="@color/primaryLightColor" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -571,7 +571,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_gravity="top"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryDarkColor" />
+                android:tint="@color/primaryLightColor" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -650,7 +650,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_gravity="top"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryDarkColor" />
+                android:tint="@color/primaryLightColor" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
