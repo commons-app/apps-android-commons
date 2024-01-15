@@ -7,68 +7,118 @@
   android:layout_marginVertical="8dp"
   app:elevation="6dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginVertical="20dp">
+
+    <ImageView
+      android:id="@+id/btn_remove"
+      android:layout_width="24dp"
+      android:layout_height="wrap_content"
+      android:contentDescription="@string/remove"
+      android:visibility="visible"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/ic_remove" />
+
+    <TextView
+      android:id="@+id/description_languages"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:clickable="true"
+      android:drawableRight="@drawable/ic_baseline_arrow_drop_down_24"
+      android:padding="@dimen/dimen_2"
+      android:textSize="18sp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/caption_item_edit_text_input_layout"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_marginHorizontal="20dp"
-      android:layout_marginVertical="20dp">
+      android:layout_height="wrap_content"
+      android:layout_marginTop="4dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/description_languages">
 
-        <ImageView
-          android:id="@+id/btn_remove"
-          android:layout_width="24dp"
-          android:layout_height="wrap_content"
-          android:contentDescription="@string/remove"
-          android:visibility="visible"
-          app:layout_constraintBottom_toTopOf="@+id/caption_item_edit_text_input_layout"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:srcCompat="@drawable/ic_remove" />
+      <fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText
+        android:id="@+id/caption_item_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="@string/share_caption_hint"
+        android:imeOptions="actionNext|flagNoExtractUi"
+        android:inputType="text"
+        app:allowFormatting="false" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-          android:id="@+id/description_languages"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:clickable="true"
-          android:drawableRight="@drawable/ic_baseline_arrow_drop_down_24"
-          android:padding="@dimen/dimen_2"
-          android:textSize="18sp"
-          app:layout_constraintBottom_toTopOf="@+id/caption_item_edit_text_input_layout"
-          app:layout_constraintStart_toStartOf="parent" />
+    <LinearLayout
+      android:id="@+id/ll_write_better_caption"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="2dp"
+      android:background="@drawable/clicked_linearlayout_background"
+      android:clickable="true"
+      android:gravity="center_vertical"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/caption_item_edit_text_input_layout">
 
-        <com.google.android.material.textfield.TextInputLayout
-          android:id="@+id/caption_item_edit_text_input_layout"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          app:layout_constraintBottom_toTopOf="@id/description_item_edit_text_input_layout"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent">
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/learn_how_to_write_a_useful_caption"
+        android:textSize="12sp" />
 
-            <fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText
-              android:id="@+id/caption_item_edit_text"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:hint="@string/share_caption_hint"
-              android:imeOptions="actionNext|flagNoExtractUi"
-              android:inputType="text"
-              app:allowFormatting="false" />
-        </com.google.android.material.textfield.TextInputLayout>
+      <ImageView
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginStart="6dp"
+        app:srcCompat="@drawable/ic_open" />
 
-        <com.google.android.material.textfield.TextInputLayout
-          android:id="@+id/description_item_edit_text_input_layout"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent">
+    </LinearLayout>
 
-            <fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText
-              android:id="@+id/description_item_edit_text"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:hint="@string/share_description_hint"
-              android:imeOptions="actionNext|flagNoExtractUi"
-              android:inputType="textMultiLine"
-              app:allowFormatting="false" />
-        </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/description_item_edit_text_input_layout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="4dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/ll_write_better_caption">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+      <fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText
+        android:id="@+id/description_item_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="@string/share_description_hint"
+        android:imeOptions="actionNext|flagNoExtractUi"
+        android:inputType="textMultiLine"
+        app:allowFormatting="false" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+      android:id="@+id/ll_write_better_description"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="2dp"
+      android:background="@drawable/clicked_linearlayout_background"
+      android:clickable="true"
+      android:gravity="center_vertical"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/description_item_edit_text_input_layout">
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/learn_how_to_write_a_useful_description"
+        android:textSize="12sp" />
+
+      <ImageView
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginStart="6dp"
+        app:srcCompat="@drawable/ic_open" />
+    </LinearLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
