@@ -809,6 +809,9 @@ public class ContributionsFragment
       }
   };
 
+    /**
+     * When the device rotates, rotate the Nearby banner's compass arrow in tandem.
+     */
     @Override
     public void onSensorChanged(SensorEvent event) {
         float rotateDegree = Math.round(event.values[0]);
@@ -817,9 +820,6 @@ public class ContributionsFragment
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
+        // Nothing to do.
     }
-
-
 }
-
