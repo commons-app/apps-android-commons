@@ -1,21 +1,19 @@
 package fr.free.nrw.commons.LocationPicker;
 
-import static com.mapbox.mapboxsdk.style.layers.Property.NONE;
-import static com.mapbox.mapboxsdk.style.layers.Property.VISIBLE;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.visibility;
 import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION;
 import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM;
+import static fr.free.nrw.commons.utils.MapUtils.ZOOM_LEVEL;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.BitmapFactory;
-import android.location.Location;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.OvershootInterpolator;
@@ -28,32 +26,10 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.core.content.ContextCompat;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
-import com.mapbox.mapboxsdk.camera.CameraPosition.Builder;
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.location.LocationComponent;
-import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions;
-import com.mapbox.mapboxsdk.location.engine.LocationEngineCallback;
-import com.mapbox.mapboxsdk.location.engine.LocationEngineResult;
-import com.mapbox.mapboxsdk.location.modes.CameraMode;
-import com.mapbox.mapboxsdk.location.modes.RenderMode;
-import com.mapbox.mapboxsdk.location.permissions.PermissionsManager;
-import com.mapbox.mapboxsdk.maps.MapView;
-import com.mapbox.mapboxsdk.maps.MapboxMap;
-import com.mapbox.mapboxsdk.maps.MapboxMap.OnCameraIdleListener;
-import com.mapbox.mapboxsdk.maps.MapboxMap.OnCameraMoveStartedListener;
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.maps.Style;
-import com.mapbox.mapboxsdk.maps.UiSettings;
-import com.mapbox.mapboxsdk.style.layers.Layer;
-import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
-import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
-import fr.free.nrw.commons.MapStyle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.filepicker.Constants;
@@ -66,19 +42,19 @@ import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.jetbrains.annotations.NotNull;
-import timber.log.Timber;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.util.constants.GeoConstants;
+import org.osmdroid.views.CustomZoomButtonsController;
+import org.osmdroid.views.overlay.ScaleDiskOverlay;
+import org.osmdroid.views.overlay.TilesOverlay;
 
 /**
  * Helps to pick location and return the result with an intent
  */
-public class LocationPickerActivity extends BaseActivity implements OnMapReadyCallback,
-    OnCameraMoveStartedListener, OnCameraIdleListener, Observer<CameraPosition>, LocationPermissionCallback {
+public class LocationPickerActivity extends BaseActivity implements
+     LocationPermissionCallback {
 
-    /**
-     * DROPPED_MARKER_LAYER_ID : id for layer
-     */
-    private static final String DROPPED_MARKER_LAYER_ID = "DROPPED_MARKER_LAYER_ID";
     /**
      * cameraPosition : position of picker
      */
@@ -88,13 +64,9 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      */
     private ImageView markerImage;
     /**
-     * mapboxMap : map
+     * mapView : OSM Map
      */
-    private MapboxMap mapboxMap;
-    /**
-     * mapView : view of the map
-     */
-    private MapView mapView;
+    private org.osmdroid.views.MapView mapView;
     /**
      * tvAttribution : credit
      */
@@ -103,10 +75,6 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      * activity : activity key
      */
     private String activity;
-    /**
-     * location : location
-     */
-    private Location location;
     /**
      * modifyLocationButton : button for start editing location
      */
@@ -123,10 +91,6 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      * fabCenterOnLocation: button for center on location;
      */
     FloatingActionButton fabCenterOnLocation;
-    /**
-     * droppedMarkerLayer : Layer for static screen
-     */
-    private Layer droppedMarkerLayer;
     /**
      * shadow : imageview of shadow
      */
@@ -152,16 +116,19 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
     @Inject
     SystemThemeUtils systemThemeUtils;
     private boolean isDarkTheme;
+    private boolean moveToCurrentLocation;
 
     @Inject
     LocationServiceManager locationManager;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         super.onCreate(savedInstanceState);
 
         isDarkTheme = systemThemeUtils.isDeviceInNightMode();
+        moveToCurrentLocation = false;
 
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         final ActionBar actionBar = getSupportActionBar();
@@ -175,10 +142,6 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
                 .getParcelableExtra(LocationPickerConstants.MAP_CAMERA_POSITION);
             activity = getIntent().getStringExtra(LocationPickerConstants.ACTIVITY_KEY);
         }
-
-        final LocationPickerViewModel viewModel = new ViewModelProvider(this)
-            .get(LocationPickerViewModel.class);
-        viewModel.getResult().observe(this, this);
 
         bindViews();
         addBackButtonListener();
@@ -196,9 +159,31 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
                 getString(R.string.check_whether_location_is_correct));
             fabCenterOnLocation.setVisibility(View.GONE);
         }
+        org.osmdroid.config.Configuration.getInstance().load(getApplicationContext(),
+            PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
 
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(this);
+        mapView.setTileSource(TileSourceFactory.WIKIMEDIA);
+        mapView.setTilesScaledToDpi(true);
+        mapView.setMultiTouchControls(true);
+
+        org.osmdroid.config.Configuration.getInstance().getAdditionalHttpRequestProperties().put(
+            "Referer", "http://maps.wikimedia.org/"
+        );
+        mapView.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.NEVER);
+        mapView.getController().setZoom(ZOOM_LEVEL);
+        mapView.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_MOVE){
+                if (markerImage.getTranslationY() == 0) {
+                    markerImage.animate().translationY(-75)
+                        .setInterpolator(new OvershootInterpolator()).setDuration(250).start();
+                }
+            }else if(event.getAction() == MotionEvent.ACTION_UP){
+                                  markerImage.animate().translationY(0)
+                        .setInterpolator(new OvershootInterpolator()).setDuration(250).start();
+            }
+            return false;
+        });
+        setupMapView();
     }
 
     /**
@@ -207,6 +192,17 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
     private void addCredits() {
         tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution)));
         tvAttribution.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+
+    /**
+     * For setting up Dark Theme
+     */
+    private void darkThemeSetup(){
+        if (isDarkTheme){
+            shadow.setColorFilter(Color.argb(255, 255, 255, 255));
+            mapView.getOverlayManager().getTilesOverlay()
+                .setColorFilter(TilesOverlay.INVERT_COLORS);
+        }
     }
 
     /**
@@ -231,16 +227,6 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
     }
 
     /**
-     * Binds the listeners
-     */
-    private void bindListeners() {
-        mapboxMap.addOnCameraMoveStartedListener(
-            this);
-        mapboxMap.addOnCameraIdleListener(
-            this);
-    }
-
-    /**
      * Gets toolbar color
      */
     private void getToolbarUI() {
@@ -250,49 +236,12 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
         toolbar.setBackgroundColor(getResources().getColor(R.color.primaryColor));
     }
 
-    /**
-     * Takes action when map is ready to show
-     * @param mapboxMap map
-     */
-    @Override
-    public void onMapReady(final MapboxMap mapboxMap) {
-        this.mapboxMap = mapboxMap;
-        mapboxMap.setStyle(isDarkTheme ? MapStyle.DARK : MapStyle.STREETS, this::onStyleLoaded);
-    }
-
-    /**
-     * Initializes dropped marker and layer
-     * Handles camera position based on options
-     * Enables location components
-     *
-     * @param style style
-     */
-    private void onStyleLoaded(final Style style) {
-        if (modifyLocationButton.getVisibility() == View.VISIBLE) {
-            initDroppedMarker(style);
-            adjustCameraBasedOnOptions();
-            enableLocationComponent(style);
-            if (style.getLayer(DROPPED_MARKER_LAYER_ID) != null) {
-                final GeoJsonSource source = style.getSourceAs("dropped-marker-source-id");
-                if (source != null) {
-                    source.setGeoJson(Point.fromLngLat(cameraPosition.target.getLongitude(),
-                        cameraPosition.target.getLatitude()));
-                }
-                droppedMarkerLayer = style.getLayer(DROPPED_MARKER_LAYER_ID);
-                if (droppedMarkerLayer != null) {
-                    droppedMarkerLayer.setProperties(visibility(VISIBLE));
-                    markerImage.setVisibility(View.GONE);
-                    shadow.setVisibility(View.GONE);
-                }
-            }
-        } else {
-            adjustCameraBasedOnOptions();
-            enableLocationComponent(style);
-            bindListeners();
-        }
-
+    private void setupMapView(){
+        adjustCameraBasedOnOptions();
         modifyLocationButton.setOnClickListener(v -> onClickModifyLocation());
         showInMapButton.setOnClickListener(v -> showInMap());
+        darkThemeSetup();
+        requestLocationPermissions();
     }
 
     /**
@@ -302,12 +251,10 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
         placeSelectedButton.setVisibility(View.VISIBLE);
         modifyLocationButton.setVisibility(View.GONE);
         showInMapButton.setVisibility(View.GONE);
-        droppedMarkerLayer.setProperties(visibility(NONE));
         markerImage.setVisibility(View.VISIBLE);
         shadow.setVisibility(View.VISIBLE);
         largeToolbarText.setText(getResources().getString(R.string.choose_a_location));
         smallToolbarText.setText(getResources().getString(R.string.pan_and_zoom_to_adjust));
-        bindListeners();
         fabCenterOnLocation.setVisibility(View.VISIBLE);
     }
 
@@ -316,118 +263,15 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
      */
     public void showInMap() {
         Utils.handleGeoCoordinates(this,
-            new fr.free.nrw.commons.location.LatLng(cameraPosition.target.getLatitude(),
-                cameraPosition.target.getLongitude(), 0.0f));
-    }
-
-    /**
-     * Initialize Dropped Marker and layer without showing
-     * @param loadedMapStyle style
-     */
-    private void initDroppedMarker(@NonNull final Style loadedMapStyle) {
-        // Add the marker image to map
-        loadedMapStyle.addImage("dropped-icon-image", BitmapFactory.decodeResource(
-            getResources(), R.drawable.map_default_map_marker));
-        loadedMapStyle.addSource(new GeoJsonSource("dropped-marker-source-id"));
-        loadedMapStyle.addLayer(new SymbolLayer(DROPPED_MARKER_LAYER_ID,
-            "dropped-marker-source-id").withProperties(
-            iconImage("dropped-icon-image"),
-            visibility(NONE),
-            iconAllowOverlap(true),
-            iconIgnorePlacement(true)
-        ));
+            new fr.free.nrw.commons.location.LatLng(mapView.getMapCenter().getLatitude(),
+                mapView.getMapCenter().getLongitude(), 0.0f));
     }
 
     /**
      * move the location to the current media coordinates
      */
     private void adjustCameraBasedOnOptions() {
-        mapboxMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-    }
-
-    /**
-     * Enables location components
-     * @param loadedMapStyle Style
-     */
-    @SuppressWarnings( {"MissingPermission"})
-    private void enableLocationComponent(@NonNull final Style loadedMapStyle) {
-        final UiSettings uiSettings = mapboxMap.getUiSettings();
-        uiSettings.setAttributionEnabled(false);
-
-        // Check if permissions are enabled and if not request
-        if (PermissionsManager.areLocationPermissionsGranted(this)) {
-
-            // Get an instance of the component
-            final LocationComponent locationComponent = mapboxMap.getLocationComponent();
-
-            // Activate with options
-            locationComponent.activateLocationComponent(
-                LocationComponentActivationOptions.builder(this, loadedMapStyle).build());
-
-            // Enable to make component visible
-            locationComponent.setLocationComponentEnabled(true);
-
-            // Set the component's camera mode
-            locationComponent.setCameraMode(CameraMode.NONE);
-
-            // Set the component's render mode
-            locationComponent.setRenderMode(RenderMode.NORMAL);
-
-            // Get the component's location engine to receive user's last location
-            locationComponent.getLocationEngine().getLastLocation(
-                new LocationEngineCallback<LocationEngineResult>() {
-                    @Override
-                    public void onSuccess(LocationEngineResult result) {
-                        location = result.getLastLocation();
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                    }
-                });
-
-
-        } else {
-            requestLocationPermissions();
-        }
-    }
-
-    /**
-     * Acts on camera moving
-     * @param reason int
-     */
-    @Override
-    public void onCameraMoveStarted(final int reason) {
-        Timber.v("Map camera has begun moving.");
-        if (markerImage.getTranslationY() == 0) {
-            markerImage.animate().translationY(-75)
-                .setInterpolator(new OvershootInterpolator()).setDuration(250).start();
-        }
-    }
-
-    /**
-     * Acts on camera idle
-     */
-    @Override
-    public void onCameraIdle() {
-        Timber.v("Map camera is now idling.");
-        markerImage.animate().translationY(0)
-            .setInterpolator(new OvershootInterpolator()).setDuration(250).start();
-    }
-
-    /**
-     * Takes action on camera position
-     * @param position position of picker
-     */
-    @Override
-    public void onChanged(@Nullable CameraPosition position) {
-        if (position == null) {
-            position = new Builder()
-                .target(new LatLng(mapboxMap.getCameraPosition().target.getLatitude(),
-                    mapboxMap.getCameraPosition().target.getLongitude()))
-                .zoom(16).build();
-        }
-        cameraPosition = position;
+        mapView.getController().setCenter(new GeoPoint(cameraPosition.target.getLatitude(),cameraPosition.target.getLongitude()));
     }
 
     /**
@@ -444,23 +288,28 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
     void placeSelected() {
         if (activity.equals("NoLocationUploadActivity")) {
             applicationKvStore.putString(LAST_LOCATION,
-                mapboxMap.getCameraPosition().target.getLatitude()
+                mapView.getMapCenter().getLatitude()
                     + ","
-                    + mapboxMap.getCameraPosition().target.getLongitude());
-            applicationKvStore.putString(LAST_ZOOM, mapboxMap.getCameraPosition().zoom + "");
+                    + mapView.getMapCenter().getLongitude());
+            applicationKvStore.putString(LAST_ZOOM, mapView.getZoomLevel() + "");
         }
         final Intent returningIntent = new Intent();
         returningIntent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION,
-            mapboxMap.getCameraPosition());
+            new CameraPosition(new LatLng(mapView.getMapCenter().getLatitude(),
+                mapView.getMapCenter().getLongitude()),14f,0,0));
         setResult(AppCompatActivity.RESULT_OK, returningIntent);
         finish();
     }
+
     /**
      * Center the camera on the last saved location
      */
     private void addCenterOnGPSButton(){
         fabCenterOnLocation = findViewById(R.id.center_on_gps);
-        fabCenterOnLocation.setOnClickListener(view -> requestLocationPermissions());
+        fabCenterOnLocation.setOnClickListener(view -> {
+            moveToCurrentLocation = true;
+            requestLocationPermissions();
+        });
     }
 
     /**
@@ -493,12 +342,6 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        mapView.onStart();
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
         mapView.onResume();
@@ -511,49 +354,52 @@ public class LocationPickerActivity extends BaseActivity implements OnMapReadyCa
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        mapView.onStop();
-    }
-
-    @Override
-    protected void onSaveInstanceState(final @NotNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
-
-    @Override
     public void onLocationPermissionDenied(String toastMessage) {
         //do nothing
     }
 
     @Override
     public void onLocationPermissionGranted() {
-        if (mapboxMap.getStyle() != null) {
-            enableLocationComponent(mapboxMap.getStyle());
-        }
         fr.free.nrw.commons.location.LatLng currLocation = locationManager.getLastLocation();
         if (currLocation != null) {
-            final CameraPosition position;
-            position = new CameraPosition.Builder()
-                .target(new com.mapbox.mapboxsdk.geometry.LatLng(currLocation.getLatitude(),
-                    currLocation.getLongitude(), 0)) // Sets the new camera position
-                .zoom(mapboxMap.getCameraPosition().zoom) // Same zoom level
-                .build();
-
-            mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
+            GeoPoint currLocationGeopoint = new GeoPoint(currLocation.getLatitude(),currLocation.getLongitude());
+            addLocationMarker(currLocationGeopoint);
+            if (moveToCurrentLocation) {
+                mapView.getController().setCenter(currLocationGeopoint);
+                mapView.getController().animateTo(currLocationGeopoint);
+                moveToCurrentLocation = false;
+            }
+            markerImage.setTranslationY(0);
         }
     }
+
+    private void addLocationMarker(GeoPoint geoPoint){
+        mapView.getOverlays().clear();
+        ScaleDiskOverlay diskOverlay =
+            new ScaleDiskOverlay(this,
+                geoPoint, 2000, GeoConstants.UnitOfMeasure.foot);
+        Paint circlePaint = new Paint();
+        circlePaint.setColor(Color.rgb(128, 128, 128));
+        circlePaint.setStyle(Paint.Style.STROKE);
+        circlePaint.setStrokeWidth(2f);
+        diskOverlay.setCirclePaint2(circlePaint);
+        Paint diskPaint = new Paint();
+        diskPaint.setColor(Color.argb(40, 128, 128, 128));
+        diskPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        diskOverlay.setCirclePaint1(diskPaint);
+        diskOverlay.setDisplaySizeMin(900);
+        diskOverlay.setDisplaySizeMax(1700);
+        mapView.getOverlays().add(diskOverlay);
+        org.osmdroid.views.overlay.Marker startMarker = new org.osmdroid.views.overlay.Marker(
+            mapView);
+        startMarker.setPosition(geoPoint);
+        startMarker.setAnchor(org.osmdroid.views.overlay.Marker.ANCHOR_CENTER,
+            org.osmdroid.views.overlay.Marker.ANCHOR_BOTTOM);
+        startMarker.setIcon(
+            ContextCompat.getDrawable(this, R.drawable.ic_location_marker));
+        startMarker.setTitle("Your Location");
+        startMarker.setTextLabelFontSize(24);
+        mapView.getOverlays().add(startMarker);
+    }
+
 }
