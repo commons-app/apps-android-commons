@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Html;
@@ -40,12 +41,15 @@ import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermission
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
+import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.util.constants.GeoConstants;
 import org.osmdroid.views.CustomZoomButtonsController;
+import org.osmdroid.views.overlay.Marker;
+import org.osmdroid.views.overlay.Overlay;
 import org.osmdroid.views.overlay.ScaleDiskOverlay;
 import org.osmdroid.views.overlay.TilesOverlay;
 
@@ -53,7 +57,7 @@ import org.osmdroid.views.overlay.TilesOverlay;
  * Helps to pick location and return the result with an intent
  */
 public class LocationPickerActivity extends BaseActivity implements
-     LocationPermissionCallback {
+    LocationPermissionCallback {
 
     /**
      * cameraPosition : position of picker
@@ -150,15 +154,6 @@ public class LocationPickerActivity extends BaseActivity implements
         getToolbarUI();
         addCenterOnGPSButton();
 
-        if ("UploadActivity".equals(activity)) {
-            placeSelectedButton.setVisibility(View.GONE);
-            modifyLocationButton.setVisibility(View.VISIBLE);
-            showInMapButton.setVisibility(View.VISIBLE);
-            largeToolbarText.setText(getResources().getString(R.string.image_location));
-            smallToolbarText.setText(getResources().
-                getString(R.string.check_whether_location_is_correct));
-            fabCenterOnLocation.setVisibility(View.GONE);
-        }
         org.osmdroid.config.Configuration.getInstance().load(getApplicationContext(),
             PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
 
@@ -172,17 +167,32 @@ public class LocationPickerActivity extends BaseActivity implements
         mapView.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.NEVER);
         mapView.getController().setZoom(ZOOM_LEVEL);
         mapView.setOnTouchListener((v, event) -> {
-            if (event.getAction() == MotionEvent.ACTION_MOVE){
+            if (event.getAction() == MotionEvent.ACTION_MOVE) {
                 if (markerImage.getTranslationY() == 0) {
                     markerImage.animate().translationY(-75)
                         .setInterpolator(new OvershootInterpolator()).setDuration(250).start();
                 }
-            }else if(event.getAction() == MotionEvent.ACTION_UP){
-                                  markerImage.animate().translationY(0)
-                        .setInterpolator(new OvershootInterpolator()).setDuration(250).start();
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                markerImage.animate().translationY(0)
+                    .setInterpolator(new OvershootInterpolator()).setDuration(250).start();
             }
             return false;
         });
+
+        if ("UploadActivity".equals(activity)) {
+            placeSelectedButton.setVisibility(View.GONE);
+            modifyLocationButton.setVisibility(View.VISIBLE);
+            showInMapButton.setVisibility(View.VISIBLE);
+            largeToolbarText.setText(getResources().getString(R.string.image_location));
+            smallToolbarText.setText(getResources().
+                getString(R.string.check_whether_location_is_correct));
+            fabCenterOnLocation.setVisibility(View.GONE);
+            markerImage.setVisibility(View.GONE);
+            shadow.setVisibility(View.GONE);
+            assert cameraPosition.target != null;
+            showSelectedLocationMarker(new GeoPoint(cameraPosition.target.getLatitude(),
+                cameraPosition.target.getLongitude()));
+        }
         setupMapView();
     }
 
@@ -197,8 +207,8 @@ public class LocationPickerActivity extends BaseActivity implements
     /**
      * For setting up Dark Theme
      */
-    private void darkThemeSetup(){
-        if (isDarkTheme){
+    private void darkThemeSetup() {
+        if (isDarkTheme) {
             shadow.setColorFilter(Color.argb(255, 255, 255, 255));
             mapView.getOverlayManager().getTilesOverlay()
                 .setColorFilter(TilesOverlay.INVERT_COLORS);
@@ -236,7 +246,7 @@ public class LocationPickerActivity extends BaseActivity implements
         toolbar.setBackgroundColor(getResources().getColor(R.color.primaryColor));
     }
 
-    private void setupMapView(){
+    private void setupMapView() {
         adjustCameraBasedOnOptions();
         modifyLocationButton.setOnClickListener(v -> onClickModifyLocation());
         showInMapButton.setOnClickListener(v -> showInMap());
@@ -256,6 +266,11 @@ public class LocationPickerActivity extends BaseActivity implements
         largeToolbarText.setText(getResources().getString(R.string.choose_a_location));
         smallToolbarText.setText(getResources().getString(R.string.pan_and_zoom_to_adjust));
         fabCenterOnLocation.setVisibility(View.VISIBLE);
+        removeSelectedLocationMarker();
+        if (cameraPosition.target != null) {
+            mapView.getController().animateTo(new GeoPoint(cameraPosition.target.getLatitude(),
+                cameraPosition.target.getLongitude()));
+        }
     }
 
     /**
@@ -271,7 +286,10 @@ public class LocationPickerActivity extends BaseActivity implements
      * move the location to the current media coordinates
      */
     private void adjustCameraBasedOnOptions() {
-        mapView.getController().setCenter(new GeoPoint(cameraPosition.target.getLatitude(),cameraPosition.target.getLongitude()));
+        if (cameraPosition.target != null) {
+            mapView.getController().setCenter(new GeoPoint(cameraPosition.target.getLatitude(),
+                cameraPosition.target.getLongitude()));
+        }
     }
 
     /**
@@ -296,7 +314,7 @@ public class LocationPickerActivity extends BaseActivity implements
         final Intent returningIntent = new Intent();
         returningIntent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION,
             new CameraPosition(new LatLng(mapView.getMapCenter().getLatitude(),
-                mapView.getMapCenter().getLongitude()),14f,0,0));
+                mapView.getMapCenter().getLongitude()), 14f, 0, 0));
         setResult(AppCompatActivity.RESULT_OK, returningIntent);
         finish();
     }
@@ -304,12 +322,44 @@ public class LocationPickerActivity extends BaseActivity implements
     /**
      * Center the camera on the last saved location
      */
-    private void addCenterOnGPSButton(){
+    private void addCenterOnGPSButton() {
         fabCenterOnLocation = findViewById(R.id.center_on_gps);
         fabCenterOnLocation.setOnClickListener(view -> {
             moveToCurrentLocation = true;
             requestLocationPermissions();
         });
+    }
+
+    /**
+     * Adds selected location marker on the map
+     */
+    private void showSelectedLocationMarker(GeoPoint point) {
+        Drawable icon = ContextCompat.getDrawable(this, R.drawable.map_default_map_marker);
+        Marker marker = new Marker(mapView);
+        marker.setPosition(point);
+        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        marker.setIcon(icon);
+        marker.setInfoWindow(null);
+        mapView.getOverlays().add(marker);
+        mapView.invalidate();
+    }
+
+    /**
+     * Removes selected location marker from the map
+     */
+    private void removeSelectedLocationMarker() {
+        List<Overlay> overlays = mapView.getOverlays();
+        for (int i = 0; i < overlays.size(); i++) {
+            if (overlays.get(i) instanceof Marker) {
+                Marker item = (Marker) overlays.get(i);
+                if (cameraPosition.target.getLatitude() == item.getPosition().getLatitude()
+                    && cameraPosition.target.getLongitude() == item.getPosition().getLongitude()) {
+                    mapView.getOverlays().remove(i);
+                    mapView.invalidate();
+                    break;
+                }
+            }
+        }
     }
 
     /**
@@ -327,13 +377,16 @@ public class LocationPickerActivity extends BaseActivity implements
         );
         LocationPermissionsHelper locationPermissionsHelper = new LocationPermissionsHelper(
             this, locationManager, this);
-        locationPermissionsHelper.handleLocationPermissions(locationAccessDialog, locationOffDialog);
+        locationPermissionsHelper.handleLocationPermissions(locationAccessDialog,
+            locationOffDialog);
     }
 
     @Override
-    public void onRequestPermissionsResult(final int requestCode, @NonNull final String[] permissions,
+    public void onRequestPermissionsResult(final int requestCode,
+        @NonNull final String[] permissions,
         @NonNull final int[] grantResults) {
-        if (requestCode == Constants.RequestCodes.LOCATION && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (requestCode == Constants.RequestCodes.LOCATION
+            && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             onLocationPermissionGranted();
         } else {
             onLocationPermissionDenied("");
@@ -362,7 +415,8 @@ public class LocationPickerActivity extends BaseActivity implements
     public void onLocationPermissionGranted() {
         fr.free.nrw.commons.location.LatLng currLocation = locationManager.getLastLocation();
         if (currLocation != null) {
-            GeoPoint currLocationGeopoint = new GeoPoint(currLocation.getLatitude(),currLocation.getLongitude());
+            GeoPoint currLocationGeopoint = new GeoPoint(currLocation.getLatitude(),
+                currLocation.getLongitude());
             addLocationMarker(currLocationGeopoint);
             if (moveToCurrentLocation) {
                 mapView.getController().setCenter(currLocationGeopoint);
@@ -373,8 +427,10 @@ public class LocationPickerActivity extends BaseActivity implements
         }
     }
 
-    private void addLocationMarker(GeoPoint geoPoint){
-        mapView.getOverlays().clear();
+    private void addLocationMarker(GeoPoint geoPoint) {
+        if (moveToCurrentLocation) {
+            mapView.getOverlays().clear();
+        }
         ScaleDiskOverlay diskOverlay =
             new ScaleDiskOverlay(this,
                 geoPoint, 2000, GeoConstants.UnitOfMeasure.foot);
@@ -396,7 +452,7 @@ public class LocationPickerActivity extends BaseActivity implements
         startMarker.setAnchor(org.osmdroid.views.overlay.Marker.ANCHOR_CENTER,
             org.osmdroid.views.overlay.Marker.ANCHOR_BOTTOM);
         startMarker.setIcon(
-            ContextCompat.getDrawable(this, R.drawable.ic_location_marker));
+            ContextCompat.getDrawable(this, R.drawable.current_location_marker));
         startMarker.setTitle("Your Location");
         startMarker.setTextLabelFontSize(24);
         mapView.getOverlays().add(startMarker);

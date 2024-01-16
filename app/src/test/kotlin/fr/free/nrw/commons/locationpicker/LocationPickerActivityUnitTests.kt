@@ -94,7 +94,7 @@ class LocationPickerActivityUnitTests {
         context = RuntimeEnvironment.getApplication().applicationContext
         activity = Robolectric.buildActivity(LocationPickerActivity::class.java).get()
 
-        Whitebox.setInternalState(activity,"mapView",mapView)
+        Whitebox.setInternalState(activity, "mapView", mapView)
         Whitebox.setInternalState(activity, "applicationKvStore", applicationKvStore)
         Whitebox.setInternalState(activity, "cameraPosition", cameraPosition)
         Whitebox.setInternalState(activity, "modifyLocationButton", modifyLocationButton)
