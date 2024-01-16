@@ -379,7 +379,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
                 new ContextThemeWrapper(getActivity(), levelInfo.getLevelStyle()).getTheme()));
         binding.achievementBadgeText.setText(Integer.toString(levelInfo.getLevelNumber()));
         BasicKvStore store = new BasicKvStore(this.getContext(), userName);
-        store.putString("userLevel", Integer.toString(levelInfo.getLevelNumber()));
+        store.putString("userAchievementsLevel", Integer.toString(levelInfo.getLevelNumber()));
     }
 
     /**
