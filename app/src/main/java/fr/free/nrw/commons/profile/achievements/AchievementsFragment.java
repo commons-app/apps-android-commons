@@ -358,7 +358,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
     /**
      * Used the inflate the fetched statistics of the images uploaded by user
-     * and assign badge and level. Also stores the level of user in BasicKvStore to display in menu
+     * and assign badge and level. Also stores the achivements level of the user in BasicKvStore to display in menu
      * @param achievements
      */
     private void inflateAchievements(Achievements achievements) {
