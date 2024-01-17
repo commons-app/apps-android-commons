@@ -28,6 +28,7 @@ import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.feedback.FeedbackContentCreator;
 import fr.free.nrw.commons.feedback.model.Feedback;
 import fr.free.nrw.commons.feedback.FeedbackDialog;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.profile.ProfileActivity;
@@ -91,17 +92,23 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
     }
 
     /**
-     * Set the username in navigationHeader.
+     * Set the username and user achievements level (if available) in navigationHeader.
      */
     private void setUserName() {
-        moreProfile.setText(getUserName());
+        BasicKvStore store = new BasicKvStore(this.getContext(), getUserName());
+        String level = store.getString("userAchievementsLevel","0");
+        if (level.equals("0")) {
+            moreProfile.setText(getUserName() + " (" + getString(R.string.see_your_achievements) + ")");
+        }
+        else {
+            moreProfile.setText(getUserName() + " (" + getString(R.string.level) + " " + level + ")");
+        }
     }
 
     private String getUserName(){
         final AccountManager accountManager = AccountManager.get(getActivity());
         final Account[] allAccounts = accountManager.getAccountsByType(BuildConfig.ACCOUNT_TYPE);
         if (allAccounts.length != 0) {
-            moreProfile.setText(allAccounts[0].name);
             return allAccounts[0].name;
         }
         return "";

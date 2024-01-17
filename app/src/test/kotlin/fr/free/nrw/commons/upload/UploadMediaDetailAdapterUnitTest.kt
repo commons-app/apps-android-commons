@@ -17,12 +17,14 @@ import fr.free.nrw.commons.recentlanguages.Language
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
 import fr.free.nrw.commons.settings.SettingsFragment
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
@@ -56,6 +58,9 @@ class UploadMediaDetailAdapterUnitTest {
     private lateinit var textView: TextView
 
     @Mock
+    private lateinit var fragment : UploadMediaDetailFragment
+
+    @Mock
     private lateinit var view: View
 
     @Mock
@@ -69,7 +74,8 @@ class UploadMediaDetailAdapterUnitTest {
         MockitoAnnotations.openMocks(this)
         uploadMediaDetails = mutableListOf(uploadMediaDetail, uploadMediaDetail)
         activity = Robolectric.buildActivity(UploadActivity::class.java).get()
-        adapter = UploadMediaDetailAdapter("", recentLanguagesDao)
+        fragment = mock(UploadMediaDetailFragment::class.java)
+        adapter = UploadMediaDetailAdapter(fragment,"", recentLanguagesDao)
         context = ApplicationProvider.getApplicationContext()
         Whitebox.setInternalState(adapter, "uploadMediaDetails", uploadMediaDetails)
         Whitebox.setInternalState(adapter, "eventListener", eventListener)
