@@ -92,7 +92,7 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
     }
 
     /**
-     * Set the username and user level (if available) in navigationHeader.
+     * Set the username and user achievements level (if available) in navigationHeader.
      */
     private void setUserName() {
         BasicKvStore store = new BasicKvStore(this.getContext(), getUserName());
