@@ -35,7 +35,6 @@ import fr.free.nrw.commons.utils.AbstractTextWatcher;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Pattern;
 import timber.log.Timber;
@@ -146,9 +145,9 @@ public class UploadMediaDetailAdapter extends
             locale
         );
         try {
-            if (activity == null){
+            if (activity == null) {
                 fragment.startActivityForResult(intent, REQUEST_CODE_FOR_VOICE_INPUT);
-            }else {
+            } else {
                 activity.startActivityForResult(intent, REQUEST_CODE_FOR_VOICE_INPUT);
             }
         } catch (Exception e) {
@@ -157,14 +156,18 @@ public class UploadMediaDetailAdapter extends
     }
 
     public void handleSpeechResult(String spokenText) {
-        if (currentPosition < uploadMediaDetails.size()) {
-            UploadMediaDetail uploadMediaDetail = uploadMediaDetails.get(currentPosition);
-            if (selectedVoiceIcon == SelectedVoiceIcon.CAPTION){
-                uploadMediaDetail.setCaptionText(spokenText);
-            }else {
-                uploadMediaDetail.setDescriptionText(spokenText);
+        if (!spokenText.isEmpty()) {
+            String spokenTextCapitalized =
+                spokenText.substring(0, 1).toUpperCase() + spokenText.substring(1);
+            if (currentPosition < uploadMediaDetails.size()) {
+                UploadMediaDetail uploadMediaDetail = uploadMediaDetails.get(currentPosition);
+                if (selectedVoiceIcon == SelectedVoiceIcon.CAPTION) {
+                    uploadMediaDetail.setCaptionText(spokenTextCapitalized);
+                } else {
+                    uploadMediaDetail.setDescriptionText(spokenTextCapitalized);
+                }
+                notifyItemChanged(currentPosition);
             }
-            notifyItemChanged(currentPosition);
         }
     }
 
@@ -555,12 +558,15 @@ public class UploadMediaDetailAdapter extends
     }
 
     public interface Callback {
+
         void showAlert(int mediaDetailDescription, int descriptionInfo);
     }
 
     public interface EventListener {
+
         void onPrimaryCaptionTextChange(boolean isNotEmpty);
     }
+
     enum SelectedVoiceIcon {
         CAPTION,
         DESCRIPTION
