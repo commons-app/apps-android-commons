@@ -61,7 +61,7 @@ class UploadMediaDetailInputFilterTest {
         builder.filters = arrayOf(UploadMediaDetailInputFilter())
 
         //Sample of control characters
-        val tests = intArrayOf(0x00, 0x08, 0x10, 0x18, 0x1F, 0x7F)
+        val tests = intArrayOf(0x00, 0x08, 0x10, 0x18, 0x1F, 0x7F, 0x3A)
         for (test: Int in tests) {
             builder.insert(0, String(Character.toChars(test)))
             Assert.assertEquals(builder.toString(), "")
