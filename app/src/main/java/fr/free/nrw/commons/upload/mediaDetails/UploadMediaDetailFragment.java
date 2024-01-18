@@ -76,6 +76,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     public static final String LAST_LOCATION = "last_location_while_uploading";
     public static final String LAST_ZOOM = "last_zoom_level_while_uploading";
+
+    public static final String MEDIA_CALLBACK = "media_callback";
+
+    public static final String UPLOADABLE_FILE = "uploadable_file";
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.ib_map)
@@ -152,6 +156,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(savedInstanceState!=null && callback==null) {
+            callback = savedInstanceState.getParcelable(MEDIA_CALLBACK);
+        }
+        if(savedInstanceState!=null && uploadableFile==null) {
+            uploadableFile = savedInstanceState.getParcelable(UPLOADABLE_FILE);
+        }
     }
 
     public void setImageTobeUploaded(UploadableFile uploadableFile, Place place,
@@ -717,6 +728,19 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public void onButtonCopyTitleDescToSubsequentMedia(){
         presenter.copyTitleAndDescriptionToSubsequentMedia(callback.getIndexInViewFlipper(this));
         Toast.makeText(getContext(), getResources().getString(R.string.copied_successfully), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSaveInstanceState(final Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        if(callback!=null){
+            outState.putParcelable(MEDIA_CALLBACK,callback);
+        }
+
+        if(uploadableFile!=null){
+            outState.putParcelable(UPLOADABLE_FILE,uploadableFile);
+        }
     }
 
 }

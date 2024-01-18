@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload;
 
 import android.os.Bundle;
 
+import android.os.Parcelable;
 import androidx.annotation.Nullable;
 
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
@@ -12,10 +13,14 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 public class UploadBaseFragment extends CommonsDaggerSupportFragment {
 
     public Callback callback;
+    public static final String CALLBACK = "callback";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(savedInstanceState!=null) {
+            callback = savedInstanceState.getParcelable(CALLBACK);
+        }
     }
 
     public void setCallback(Callback callback) {
@@ -25,7 +30,16 @@ public class UploadBaseFragment extends CommonsDaggerSupportFragment {
     protected void onBecameVisible() {
     }
 
-    public interface Callback {
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+
+        super.onSaveInstanceState(outState);
+        if(callback!=null){
+            outState.putParcelable(CALLBACK,callback);
+        }
+
+    }
+    public interface Callback extends Parcelable {
 
         void onNextButtonClicked(int index);
 
