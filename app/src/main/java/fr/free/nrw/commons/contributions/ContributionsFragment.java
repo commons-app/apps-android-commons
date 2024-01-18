@@ -464,7 +464,11 @@ public class ContributionsFragment
             if (store.getBoolean("displayNearbyCardView", true)) {
                 checkPermissionsAndShowNearbyCardView();
                 // Calling nearby card to keep showing it even when user clicks on it and comes back
+                try {
                 updateClosestNearbyCardViewInfo();
+                } catch (Exception e) {
+                    Timber.e(e);
+                }
                 if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
                     nearbyNotificationCardView.setVisibility(View.VISIBLE);
                 }
