@@ -795,6 +795,9 @@
   <string name="storage_permissions_denied">Доступ к хранилищу запрещён</string>
   <string name="unable_to_share_upload_item">Невозможно поделиться этим объектом</string>
   <string name="permissions_are_required_for_functionality">Для функционирования требуются разрешения</string>
+  <string name="learn_how_to_write_a_useful_description">Узнайте, как написать полезное описание</string>
+  <string name="learn_how_to_write_a_useful_caption">Узнайте, как написать полезную подпись</string>
+  <string name="see_your_achievements">Посмотрите свои достижения</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">выбрано %d изображение</item>
     <item quantity="few">выбрано %d изображения</item>
