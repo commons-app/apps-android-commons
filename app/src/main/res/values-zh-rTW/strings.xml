@@ -440,7 +440,7 @@
   <string name="never_ask_again">永遠不再詢問</string>
   <string name="display_location_permission_title">要求位置權限</string>
   <string name="display_location_permission_explanation">當需要附近地點通知卡片的檢視功能時，要求位置權限。</string>
-  <string name="achievements_fetch_failed">出了點問題，我們無法獲取您的成就</string>
+  <string name="achievements_fetch_failed">出了點問題，我們無法取得您的成果</string>
   <string name="achievements_fetch_failed_ultimate_achievement">您做出的貢獻多到讓我們的成就計算系統無法因應，此為終極成果。</string>
   <string name="ends_on">結束於：</string>
   <string name="display_campaigns">顯示活動</string>
@@ -759,6 +759,9 @@
   <string name="storage_permissions_denied">儲存裝置權限被拒絕</string>
   <string name="unable_to_share_upload_item">無法分享此項目</string>
   <string name="permissions_are_required_for_functionality">功能需要權限</string>
+  <string name="learn_how_to_write_a_useful_description">了解如何寫出有用的描述</string>
+  <string name="learn_how_to_write_a_useful_caption">了解如何寫出有用的說明</string>
+  <string name="see_your_achievements">查看您的成果</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">已選 %d 張圖片</item>
     <item quantity="other">已選 %d 張圖片</item>
