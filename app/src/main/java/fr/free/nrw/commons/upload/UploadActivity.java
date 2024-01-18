@@ -18,6 +18,8 @@ import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -523,6 +525,16 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                 locationManager.unregisterLocationManager();
                 uploadMediaDetailFragment.setCallback(new UploadMediaDetailFragmentCallback() {
                     @Override
+                    public int describeContents() {
+                        return 0;
+                    }
+
+                    @Override
+                    public void writeToParcel(@NonNull Parcel dest, int flags) {
+
+                    }
+
+                    @Override
                     public void deletePictureAtIndex(int index) {
                         presenter.deletePictureAtIndex(index);
                     }
@@ -707,6 +719,30 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                 .scrollToPositionWithOffset((index > 3) ? index-2 : 0, 0);
         }
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+
+    }
+    //Crator for callback
+
+    public static final Parcelable.Creator<UploadActivity> CREATOR
+        = new Parcelable.Creator<UploadActivity>() {
+        @Override
+        public UploadActivity createFromParcel(Parcel in) {
+            return new UploadActivity();
+        }
+
+        @Override
+        public UploadActivity[] newArray(int size) {
+            return new UploadActivity[size];
+        }
+    };
 
     /**
      * The adapter used to show image upload intermediate fragments
