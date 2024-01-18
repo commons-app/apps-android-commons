@@ -279,6 +279,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private GeoPoint lastMapFocus;
     private NearbyParentFragmentInstanceReadyCallback nearbyParentFragmentInstanceReadyCallback;
     private boolean isAdvancedQueryFragmentVisible = false;
+    private Place nearestPlace;
     private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(
         new ActivityResultContracts.RequestMultiplePermissions(),
         new ActivityResultCallback<Map<String, Boolean>>() {
@@ -990,7 +991,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Centers the map in nearby fragment to a given place
+     * Centers the map in nearby fragment to a given place and updates nearestPlace
      *
      * @param place is new center of the map
      */
@@ -1000,6 +1001,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         final double cameraShift;
         if (null != place) {
             lastPlaceToCenter = place;
+            nearestPlace = place;
         }
 
         if (null != lastPlaceToCenter) {
@@ -1626,7 +1628,33 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             addMarkerToMap(place, isBookmarked);
     }
 
+    /**
+     * Highlights nearest place when user clicks on home nearby banner
+     *
+     * @param nearestPlace nearest place, which has to be highlighted
+     */
+    private void highlightNearestPlace(Place nearestPlace) {
+            passInfoToSheet(nearestPlace);
+            hideBottomSheet();
+            bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+    }
+
+    /**
+     * Returns drawable of marker icon for given place
+     *
+     * @param place where marker is to be added
+     * @param isBookmarked true if place is bookmarked
+     * @return returns the drawable of marker according to the place information
+     */
     private @DrawableRes int getIconFor(Place place, Boolean isBookmarked) {
+        if(nearestPlace!=null) {
+            if(place.name.equals(nearestPlace.name)) {
+                // Highlight nearest place only when user clicks on the home nearby banner
+                highlightNearestPlace(place);
+                return (isBookmarked?R.drawable.ic_custom_map_marker_purple_bookmarked:
+                    R.drawable.ic_custom_map_marker_purple);
+            }
+        }
         if (place.isMonument()) {
             return R.drawable.ic_custom_map_marker_monuments;
         } else if (!place.pic.trim().isEmpty()) {
