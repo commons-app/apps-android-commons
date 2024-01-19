@@ -1634,9 +1634,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * @param nearestPlace nearest place, which has to be highlighted
      */
     private void highlightNearestPlace(Place nearestPlace) {
-            passInfoToSheet(nearestPlace);
-            hideBottomSheet();
-            bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        passInfoToSheet(nearestPlace);
+        hideBottomSheet();
+        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
     /**
@@ -1651,8 +1651,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if(place.name.equals(nearestPlace.name)) {
                 // Highlight nearest place only when user clicks on the home nearby banner
                 highlightNearestPlace(place);
-                return (isBookmarked?R.drawable.ic_custom_map_marker_purple_bookmarked:
-                    R.drawable.ic_custom_map_marker_purple);
+                return (isBookmarked?
+                        R.drawable.ic_custom_map_marker_purple_bookmarked:
+                        R.drawable.ic_custom_map_marker_purple);
             }
         }
         if (place.isMonument()) {
