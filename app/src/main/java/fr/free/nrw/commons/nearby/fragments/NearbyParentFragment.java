@@ -305,12 +305,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         });
 
     private ActivityResultLauncher<String> locationPermissionLauncher = registerForActivityResult(
-        new ActivityResultContracts.RequestPermission(), isGranted ->{
-            if(isGranted)
-            {
+        new ActivityResultContracts.RequestPermission(), isGranted -> {
+            if (isGranted) {
                 locationPermissionGranted();
-            }
-            else {
+            } else {
                 if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
                     DialogUtil.showAlertDialog(getActivity(),
                         getActivity().getString(R.string.location_permission_title),
@@ -1030,6 +1028,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         return latLng;
     }
 
+    /**
+     * Computes location where map should be centered
+     *
+     * @return returns the last location, if available, else returns default location
+     */
     @Override
     public fr.free.nrw.commons.location.LatLng getMapCenter() {
         if (applicationKvStore.getString("LastLocation") != null) {
@@ -1043,8 +1046,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 -0.07520, 1f);
         }
         fr.free.nrw.commons.location.LatLng latLnge = lastKnownLocation;
-        if(mapCenter!=null)
-        {
+        if (mapCenter != null) {
             latLnge = new fr.free.nrw.commons.location.LatLng(
                 mapCenter.getLatitude(), mapCenter.getLongitude(), 100);
         }
