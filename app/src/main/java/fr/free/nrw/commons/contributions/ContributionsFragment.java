@@ -118,7 +118,6 @@ public class ContributionsFragment
 
     private LatLng curLatLng;
 
-    private boolean firstLocationUpdate = true;
     private boolean isFragmentAttachedBefore = false;
     private View checkBoxView;
     private CheckBox checkBox;
@@ -453,7 +452,6 @@ public class ContributionsFragment
     public void onResume() {
         super.onResume();
         contributionsPresenter.onAttachView(this);
-        firstLocationUpdate = true;
         locationManager.addLocationListener(this);
         nearbyNotificationCardView.permissionRequestButton.setOnClickListener(v -> {
             showNearbyCardPermissionRationale();
@@ -572,22 +570,17 @@ public class ContributionsFragment
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
         // Will be called if location changed more than 1000 meter
-        // Do nothing on slight changes for using network efficiently
-        firstLocationUpdate = false;
         updateClosestNearbyCardViewInfo();
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
         /* Update closest nearby notification card onLocationChangedSlightly
-        If first time to update location after onResume, then no need to wait for significant
-        location change. Any closest location is better than no location
         */
-        if (firstLocationUpdate) {
+        try {
             updateClosestNearbyCardViewInfo();
-            // Turn it to false, since it is not first location update anymore. To change closest location
-            // notification, we need to wait for a significant location change.
-            firstLocationUpdate = false;
+        } catch (Exception e) {
+            Timber.e(e);
         }
     }
 
