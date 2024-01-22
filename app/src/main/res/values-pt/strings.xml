@@ -753,6 +753,7 @@
   <string name="permissions_are_required_for_functionality">São necessárias permissões para a funcionalidade</string>
   <string name="learn_how_to_write_a_useful_description">Aprenda a escrever uma descrição útil</string>
   <string name="learn_how_to_write_a_useful_caption">Aprenda a escrever uma legenda útil</string>
+  <string name="see_your_achievements">Ver as suas realizações</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d imagem selecionada</item>
     <item quantity="other">%d imagens selecionadas</item>

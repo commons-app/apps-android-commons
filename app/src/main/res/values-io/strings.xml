@@ -314,6 +314,7 @@
   <string name="deletion_reason_uploaded_by_mistake">Me erore sendis ol</string>
   <string name="deletion_reason_publicly_visible">Me ne savis ke ol divenus publike videbla</string>
   <string name="deletion_reason_bad_for_my_privacy">Me konstatis ke ol esas mala por mea privateso</string>
+  <string name="review_image_explanation">Vu povas revizar imaji, por plubonigar la qualeso di Wikimedia Commons.\nLa tri revizo-parametri esas:\n\n- Kad ica imajo havas havas irga relato kun la kuntexto?\nKande tu kliktas NO, vu adjuntos indiko (shablono) por ke ol efacesos.\n\n- Kad ica imajo violacas autoroyuro?\nSe tu klitos YES, vu adjuntos indiko por ke ol efacesos.\n\n- Kad la kategorii di ica imajo esas korekta?\nSe tu kliktos NO, vu adjuntos demando pri adjuntar korekta kategorio ad ol.\n\nSe omno esas korekta, nula shablono adjuntesos al imajo, e vu povos dankar la persono qua sendis ol.</string>
   <string name="no_notification" fuzzy="true">Vu lektis omna avizi</string>
   <string name="menu_option_unread">Vidar ne-lektata</string>
   <string name="please_wait">Vartez...</string>
