@@ -25,7 +25,7 @@ class ThanksClientTest {
     @Mock
     private lateinit var csrfTokenClient: CsrfTokenClient
     @Mock
-    private lateinit var service: Service
+    private lateinit var service: ThanksInterface
 
     @Mock
     private lateinit var commonsApplication: CommonsApplication
