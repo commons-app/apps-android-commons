@@ -12,34 +12,37 @@ import javax.inject.Singleton;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import org.wikipedia.dataclient.mwapi.MwQueryResponse;
 
 import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_CSRF;
 
 @Singleton
 public class NotificationClient {
 
-    private final Service service;
+    private final NotificationInterface service;
     private final CsrfTokenClient csrfTokenClient;
 
     @Inject
-    public NotificationClient(@Named("commons-service") Service service, @Named(NAMED_COMMONS_CSRF) CsrfTokenClient csrfTokenClient) {
+    public NotificationClient(
+        final NotificationInterface service,
+        @Named(NAMED_COMMONS_CSRF) final CsrfTokenClient csrfTokenClient) {
         this.service = service;
         this.csrfTokenClient = csrfTokenClient;
     }
 
-    public Single<List<Notification>> getNotifications(boolean archived) {
+    public Single<List<Notification>> getNotifications(final boolean archived) {
         return service.getAllNotifications("wikidatawiki|commonswiki|enwiki", archived ? "read" : "!read", null)
                 .map(mwQueryResponse -> mwQueryResponse.query().notifications().list())
                 .flatMap(Observable::fromIterable)
-                .map(notification -> Notification.from(notification))
+                .map(Notification::from)
                 .toList();
     }
 
-    public Observable<Boolean> markNotificationAsRead(String notificationId) {
+    public Observable<Boolean> markNotificationAsRead(final String notificationId) {
         try {
             return service.markRead(csrfTokenClient.getTokenBlocking(), notificationId, "")
-                    .map(mwQueryResponse -> mwQueryResponse.success());
-        } catch (Throwable throwable) {
+                    .map(MwQueryResponse::success);
+        } catch (final Throwable throwable) {
             return Observable.just(false);
         }
     }

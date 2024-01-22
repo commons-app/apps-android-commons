@@ -18,7 +18,7 @@ import org.wikipedia.notifications.Notification
 class NotificationClientTest {
 
     @Mock
-    private lateinit var service: Service
+    private lateinit var service: NotificationInterface
     @Mock
     private lateinit var csrfTokenClient: CsrfTokenClient
 
@@ -39,7 +39,7 @@ class NotificationClientTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         notificationClient = NotificationClient(service, csrfTokenClient)
     }
 
