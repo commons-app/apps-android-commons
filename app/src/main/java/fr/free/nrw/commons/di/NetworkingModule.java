@@ -9,6 +9,7 @@ import fr.free.nrw.commons.BetaConstants;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.actions.PageEditInterface;
+import fr.free.nrw.commons.actions.ThanksInterface;
 import fr.free.nrw.commons.category.CategoryInterface;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -254,6 +255,14 @@ public class NetworkingModule {
         @Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
         return ServiceFactory
                .get(commonsWikiSite, BuildConfig.COMMONS_URL, CategoryInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    public ThanksInterface provideThanksInterface(
+        @Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
+        return ServiceFactory
+               .get(commonsWikiSite, BuildConfig.COMMONS_URL, ThanksInterface.class);
     }
 
     @Provides
