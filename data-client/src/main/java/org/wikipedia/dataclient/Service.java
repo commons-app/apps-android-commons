@@ -11,7 +11,6 @@ import org.wikipedia.dataclient.mwapi.SiteMatrix;
 import org.wikipedia.dataclient.mwapi.page.MwMobileViewPageLead;
 import org.wikipedia.dataclient.mwapi.page.MwMobileViewPageRemaining;
 import org.wikipedia.dataclient.mwapi.page.MwQueryPageSummary;
-import org.wikipedia.dataclient.mwapi.page.MwThankPostResponse;
 import org.wikipedia.edit.Edit;
 import org.wikipedia.edit.preview.EditPreview;
 import org.wikipedia.login.LoginClient;
@@ -190,14 +189,6 @@ public interface Service {
     @GET(MW_API_PREFIX + "action=query&list=categorymembers&cmlimit=500")
     @NonNull Observable<MwQueryResponse> getCategoryMembers(@NonNull @Query("cmtitle") String title,
                                                             @Nullable @Query("cmcontinue") String continueStr);
-
-    @FormUrlEncoded
-    @POST(MW_API_PREFIX + "action=thank")
-    @NonNull Observable<MwThankPostResponse> thank(@Nullable @Field("rev") String rev,
-                                              @Nullable @Field("log") String log,
-                                              @NonNull @Field("token") String token,
-                                              @Nullable @Field("source") String source);
-
 
     // ------- CSRF, Login, and Create Account -------
 
