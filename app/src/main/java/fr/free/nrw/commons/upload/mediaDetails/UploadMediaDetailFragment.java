@@ -6,15 +6,13 @@ import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
 import android.annotation.SuppressLint;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -40,7 +38,6 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao;
 import fr.free.nrw.commons.settings.Prefs;
@@ -56,6 +53,7 @@ import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.R.drawable.*;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -77,9 +75,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public static final String LAST_LOCATION = "last_location_while_uploading";
     public static final String LAST_ZOOM = "last_zoom_level_while_uploading";
 
-    public static final String MEDIA_CALLBACK = "media_callback";
 
     public static final String UPLOADABLE_FILE = "uploadable_file";
+
+    public static final String UPLOAD_MEDIA_DETAILS = "upload_media_detail_adapter";
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.ib_map)
@@ -157,13 +156,14 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(savedInstanceState!=null && callback==null) {
-            callback = savedInstanceState.getParcelable(MEDIA_CALLBACK);
-        }
+
         if(savedInstanceState!=null && uploadableFile==null) {
             uploadableFile = savedInstanceState.getParcelable(UPLOADABLE_FILE);
         }
+
     }
+
+
 
     public void setImageTobeUploaded(UploadableFile uploadableFile, Place place,
         LatLng inAppPictureLocation) {
@@ -177,15 +177,25 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
         @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_upload_media_detail_fragment, container, false);
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+
         if (callback != null) {
             init();
         }
+
+        if(savedInstanceState!=null){
+                if(uploadMediaDetailAdapter.getItems().size()==0){
+                    uploadMediaDetailAdapter.setItems(savedInstanceState.getParcelableArrayList(UPLOAD_MEDIA_DETAILS));
+                    presenter.setUploadMediaDetails(uploadMediaDetailAdapter.getItems(), callback.getIndexInViewFlipper(this));
+                }
+        }
+
     }
 
     private void init() {
@@ -734,13 +744,14 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        if(callback!=null){
-            outState.putParcelable(MEDIA_CALLBACK,callback);
-        }
-
         if(uploadableFile!=null){
             outState.putParcelable(UPLOADABLE_FILE,uploadableFile);
         }
+        if(uploadMediaDetailAdapter!=null){
+            outState.putParcelableArrayList(UPLOAD_MEDIA_DETAILS,
+                (ArrayList<? extends Parcelable>) uploadMediaDetailAdapter.getItems());
+        }
     }
+
 
 }

@@ -74,12 +74,18 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-        init();
+
+        if(callback!=null){
+            init();
+        }
+
     }
 
     private void init() {
-        tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
-            callback.getTotalNumberOfSteps(), getString(R.string.license_step_title)));
+
+            tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
+                callback.getTotalNumberOfSteps(), getString(R.string.license_step_title)));
+
         setTvSubTitle();
         tooltip.setOnClickListener(new OnClickListener() {
             @Override
