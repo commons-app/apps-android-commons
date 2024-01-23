@@ -25,6 +25,8 @@ dependencies {
         //  Ref: https://docs.gradle.org/7.5/userguide/upgrading_version_5.html#forced_dependencies
         //force = true //API 19 support
     }
+    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
+    implementation "com.squareup.retrofit2:converter-gson:2.8.1"
     implementation 'com.squareup.okio:okio:2.2.2'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.3'
@@ -99,6 +101,7 @@ dependencies {
     testImplementation 'com.facebook.soloader:soloader:0.10.5'
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3"
     debugImplementation("androidx.fragment:fragment-testing:1.6.2")
+    testImplementation "commons-io:commons-io:2.6"
 
     // Android testing
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0-alpha04'
@@ -134,7 +137,6 @@ dependencies {
     implementation "androidx.room:room-rxjava2:$ROOM_VERSION"
     kapt "androidx.room:room-compiler:$ROOM_VERSION"
     // For Kotlin use kapt instead of annotationProcessor
-    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
     testImplementation "androidx.arch.core:core-testing:2.1.0"
 
     // Pref
