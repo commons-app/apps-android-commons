@@ -17,6 +17,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -538,7 +539,13 @@ public class ContributionsFragment
 
     private void updateNearbyNotification(@Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
         if (nearbyPlacesInfo != null && nearbyPlacesInfo.placeList != null && nearbyPlacesInfo.placeList.size() > 0) {
-            Place closestNearbyPlace = nearbyPlacesInfo.placeList.get(0);
+            Place closestNearbyPlace =null;
+            for (Place place : nearbyPlacesInfo.placeList) {
+                if (place.pic.equals("")) {
+                    closestNearbyPlace = place;
+                    break;
+                }
+            }
             String distance = formatDistanceBetween(curLatLng, closestNearbyPlace.location);
             closestNearbyPlace.setDistance(distance);
             direction = (float) computeBearing(curLatLng, closestNearbyPlace.location);
