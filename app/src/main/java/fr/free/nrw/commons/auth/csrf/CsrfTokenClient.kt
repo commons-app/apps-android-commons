@@ -2,7 +2,6 @@ package fr.free.nrw.commons.auth.csrf
 
 import androidx.annotation.VisibleForTesting
 import org.wikipedia.AppAdapter
-import org.wikipedia.dataclient.Service
 import org.wikipedia.dataclient.ServiceFactory
 import org.wikipedia.dataclient.SharedPreferenceCookieManager
 import org.wikipedia.dataclient.WikiSite
@@ -20,13 +19,13 @@ import java.util.concurrent.Executors.newSingleThreadExecutor
 
 class CsrfTokenClient(private val csrfWikiSite: WikiSite) {
     private var retries = 0
-    private var csrfTokenCall: Call<MwQueryResponse>? = null
+    private var csrfTokenCall: Call<MwQueryResponse?>? = null
     private val loginClient = LoginClient()
 
     @Throws(Throwable::class)
     fun getTokenBlocking(): String {
         var token = ""
-        val service = ServiceFactory.get(csrfWikiSite)
+        val service = ServiceFactory.get(csrfWikiSite, CsrfTokenInterface::class.java)
         val userName = AppAdapter.get().getUserName()
         val password = AppAdapter.get().getPassword()
 
@@ -63,7 +62,7 @@ class CsrfTokenClient(private val csrfWikiSite: WikiSite) {
     }
 
     @VisibleForTesting
-    fun request(service: Service, cb: Callback): Call<MwQueryResponse> =
+    fun request(service: CsrfTokenInterface, cb: Callback): Call<MwQueryResponse?> =
         requestToken(service, object : Callback {
             override fun success(token: String?) {
                 if (AppAdapter.get().isLoggedIn() && token == ANON_TOKEN) {
@@ -81,17 +80,17 @@ class CsrfTokenClient(private val csrfWikiSite: WikiSite) {
         })
 
     @VisibleForTesting
-    fun requestToken(service: Service, cb: Callback): Call<MwQueryResponse> {
+    fun requestToken(service: CsrfTokenInterface, cb: Callback): Call<MwQueryResponse?> {
         val call = service.getCsrfTokenCall()
-        call.enqueue(object : retrofit2.Callback<MwQueryResponse> {
-            override fun onResponse(call: Call<MwQueryResponse>, response: Response<MwQueryResponse>) {
+        call.enqueue(object : retrofit2.Callback<MwQueryResponse?> {
+            override fun onResponse(call: Call<MwQueryResponse?>, response: Response<MwQueryResponse?>) {
                 if (call.isCanceled) {
                     return
                 }
                 cb.success(response.body()!!.query()!!.csrfToken())
             }
 
-            override fun onFailure(call: Call<MwQueryResponse>, t: Throwable) {
+            override fun onFailure(call: Call<MwQueryResponse?>, t: Throwable) {
                 if (call.isCanceled) {
                     return
                 }
@@ -110,7 +109,7 @@ class CsrfTokenClient(private val csrfWikiSite: WikiSite) {
             login(userName, password, callback) {
                 Timber.i("retrying...")
                 cancel()
-                csrfTokenCall = request(ServiceFactory.get(csrfWikiSite), callback)
+                csrfTokenCall = request(ServiceFactory.get(csrfWikiSite, CsrfTokenInterface::class.java), callback)
             }
         } else {
             callback.failure(caught())

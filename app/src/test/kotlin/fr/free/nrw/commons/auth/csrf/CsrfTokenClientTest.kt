@@ -65,7 +65,7 @@ class CsrfTokenClientTest : MockWebServerTest() {
     }
 
     private fun performRequest() {
-        subject.request(service(Service::class.java), cb)
+        subject.request(service(CsrfTokenInterface::class.java), cb)
         server().takeRequest()
     }
 }
