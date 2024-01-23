@@ -75,9 +75,8 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        if(callback!=null){
-            init();
-        }
+        init();
+
 
     }
 
