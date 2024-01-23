@@ -34,7 +34,7 @@ class NotificationClient @Inject constructor(
     fun markNotificationAsRead(notificationId: String?): Observable<Boolean> {
         return try {
             service.markRead(
-                token = csrfTokenClient.tokenBlocking,
+                token = csrfTokenClient.getTokenBlocking(),
                 readList = notificationId,
                 unreadList = ""
             ).map(MwQueryResponse::success)
