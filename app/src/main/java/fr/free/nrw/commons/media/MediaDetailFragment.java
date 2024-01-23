@@ -447,7 +447,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             enableProgressBar();
         }
 
-        if (AccountUtil.getUserName(getContext()) != null && media != null && AccountUtil.getUserName(getContext()).equals(media.getAuthor())) {
+        if (AccountUtil.getUserName(getContext()) != null && media != null
+            && AccountUtil.getUserName(getContext()).equals(media.getAuthor())) {
             sendThanksButton.setVisibility(GONE);
         } else {
             sendThanksButton.setVisibility(VISIBLE);
@@ -812,6 +813,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             .show();
     }
 
+    /**
+     * Sends thanks to author if the author is not the user
+     */
     @OnClick(R.id.sendThanks)
     public void sendThanksToAuthor() {
         String fileName = media.getFilename();
@@ -826,6 +830,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             .subscribe(revision -> sendThanks(getContext(), revision)));
     }
 
+    /**
+     * Api call for sending thanks to the author when the author is not the user
+     * and display toast depending on the result
+     * @param context context
+     * @param firstRevision the revision id of the image
+     */
     @SuppressLint({"CheckResult", "StringFormatInvalid"})
     void sendThanks(Context context, MwQueryPage.Revision firstRevision) {
         ViewUtil.showShortToast(context,
@@ -844,6 +854,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             }, Timber::e);
     }
 
+    /**
+     * Method to display toast when api call to thank the author is completed
+     * @param context context
+     * @param result true if success, false otherwise
+     */
     @SuppressLint("StringFormatInvalid")
     private void displayThanksToast(final Context context, final boolean result) {
         final String message;
