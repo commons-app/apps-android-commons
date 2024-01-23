@@ -316,6 +316,9 @@ class MediaDetailFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnResume() {
+        Whitebox.setInternalState(fragment, "applicationKvStore", applicationKvStore)
+        `when`(applicationKvStore.getBoolean("login_skipped")).thenReturn(true)
+        fragment.onCreateView(layoutInflater, null, savedInstanceState)
         fragment.onResume()
     }
 

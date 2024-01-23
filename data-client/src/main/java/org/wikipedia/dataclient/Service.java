@@ -245,17 +245,6 @@ public interface Service {
     // ------- Notifications -------
 
     @Headers("Cache-Control: no-cache")
-    @GET(MW_API_PREFIX + "action=query&meta=notifications&notformat=model&notlimit=max")
-    @NonNull Observable<MwQueryResponse> getAllNotifications(@Query("notwikis") @Nullable String wikiList,
-                                              @Query("notfilter") @Nullable String filter,
-                                              @Query("notcontinue") @Nullable String continueStr);
-
-    @FormUrlEncoded
-    @Headers("Cache-Control: no-cache")
-    @POST(MW_API_PREFIX + "action=echomarkread")
-    @NonNull Observable<MwQueryResponse> markRead(@Field("token") @NonNull String token, @Field("list") @Nullable String readList, @Field("unreadlist") @Nullable String unreadList);
-
-    @Headers("Cache-Control: no-cache")
     @GET(MW_API_PREFIX + "action=query&meta=notifications&notprop=list&notfilter=!read&notlimit=1")
     @NonNull Observable<MwQueryResponse> getLastUnreadNotification();
 
