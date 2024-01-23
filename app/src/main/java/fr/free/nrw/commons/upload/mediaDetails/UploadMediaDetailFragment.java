@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +51,6 @@ import fr.free.nrw.commons.upload.UploadMediaDetailAdapter;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import fr.free.nrw.commons.R.drawable.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +67,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     private static final int REQUEST_CODE = 1211;
     private static final int REQUEST_CODE_FOR_EDIT_ACTIVITY = 1212;
+    private static final int REQUEST_CODE_FOR_VOICE_INPUT = 1213;
 
     /**
      * A key for applicationKvStore. By this key we can retrieve the location of last UploadItem ex.
@@ -259,7 +260,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * init the description recycler veiw and caption recyclerview
      */
     private void initRecyclerView() {
-        uploadMediaDetailAdapter = new UploadMediaDetailAdapter(
+        uploadMediaDetailAdapter = new UploadMediaDetailAdapter(this,
             defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, ""), recentLanguagesDao);
         uploadMediaDetailAdapter.setCallback(this::showInfoAlert);
         uploadMediaDetailAdapter.setEventListener(this);
@@ -579,7 +580,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public void onActivityResult(final int requestCode, final int resultCode,
         @Nullable final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
 
             assert data != null;
@@ -616,6 +616,15 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                     result);
             } catch (Exception e) {
                 Timber.e(e);
+            }
+        }
+        else if (requestCode == REQUEST_CODE_FOR_VOICE_INPUT) {
+            if (resultCode == RESULT_OK && data != null) {
+                ArrayList<String> result = data.getStringArrayListExtra(
+                    RecognizerIntent.EXTRA_RESULTS);
+                uploadMediaDetailAdapter.handleSpeechResult(result.get(0));
+            }else {
+                Timber.e("Error %s", resultCode);
             }
         }
     }

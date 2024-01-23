@@ -184,6 +184,7 @@
   <string name="navigation_item_review">Árvvoštala</string>
   <string name="nearby_info_menu_commons_article">Commons-fiilasiidu</string>
   <string name="nearby_info_menu_wikipedia_article">Wikipedia-artihkal</string>
+  <string name="login_to_your_account">Čálit sisa du dovddaldahkii</string>
   <string name="navigation_item_login">Čálit sisa</string>
   <string name="skip_login_title">Áiggutgo don duođaid joatkit čálitkeahttá sisa?</string>
   <string name="nearby_wikidata">Wikidata</string>
@@ -236,6 +237,7 @@
   <string name="learn_more">LASSEDIEĐUT</string>
   <string name="menu_view_user_page">Čájet geavaheaddjisiiddu</string>
   <string name="edit_categories">Rievdat kategoriijaid</string>
+  <string name="advanced_options">Lasseásahusat</string>
   <string name="apply">Geavat</string>
   <string name="explore_map_details">Lassedieđut</string>
   <string name="android_version">Android-veršuvdna</string>

@@ -27,6 +27,7 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.databinding.FragmentAchievementsBinding;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DialogUtil;
@@ -357,7 +358,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
     /**
      * Used the inflate the fetched statistics of the images uploaded by user
-     * and assign badge and level
+     * and assign badge and level. Also stores the achievements level of the user in BasicKvStore to display in menu
      * @param achievements
      */
     private void inflateAchievements(Achievements achievements) {
@@ -377,6 +378,8 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         binding.achievementBadgeImage.setImageDrawable(VectorDrawableCompat.create(getResources(), R.drawable.badge,
                 new ContextThemeWrapper(getActivity(), levelInfo.getLevelStyle()).getTheme()));
         binding.achievementBadgeText.setText(Integer.toString(levelInfo.getLevelNumber()));
+        BasicKvStore store = new BasicKvStore(this.getContext(), userName);
+        store.putString("userAchievementsLevel", Integer.toString(levelInfo.getLevelNumber()));
     }
 
     /**

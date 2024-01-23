@@ -295,7 +295,7 @@
   <string name="description_info">请尽可能详细地描述媒体：拍摄在何地？显示什么？例文是什么？请描述对象或个人。透露一些不易猜想到的信息，例如这幅风景画的具体日期时间。如果媒体显示了一些不寻常的事物，请说明为什么它显得不寻常。</string>
   <string name="caption_info">请编写图像的简要说明。第一个标题将作为图片的题目。不能超过255个字符。</string>
   <string name="upload_problem_exist">这个图片可能的问题：</string>
-  <string name="upload_problem_image_dark">图片太暗。</string>
+  <string name="upload_problem_image_dark">图像过暗。</string>
   <string name="upload_problem_image_blurry">图片模糊。</string>
   <string name="upload_problem_image_duplicate">图像已在共享资源上存在。</string>
   <string name="upload_problem_different_geolocation">这张图片是在不同的地点拍摄的。</string>
@@ -624,8 +624,8 @@
   <string name="setting_wallpaper_dialog_title">设为壁纸</string>
   <string name="setting_wallpaper_dialog_message">正在设置壁纸。请稍等…</string>
   <string name="theme_default_name">跟随系统</string>
-  <string name="theme_dark_name">暗黑</string>
-  <string name="theme_light_name">明亮</string>
+  <string name="theme_dark_name">深色</string>
+  <string name="theme_light_name">浅色</string>
   <string name="cannot_open_location_settings">无法打开位置设置。请手动打开位置</string>
   <string name="recommend_high_accuracy_mode">选择高精确度模式以获得最佳结果。</string>
   <string name="ask_to_turn_location_on">打开位置？</string>
@@ -673,7 +673,6 @@
   <string name="leaderboard_nearby">附近</string>
   <string name="leaderboard_used">已使用</string>
   <string name="leaderboard_my_rank_button_text">我的排名</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;改进此地图&lt;/a&gt;</string>
   <string name="limited_connection_enabled">限制连接模式已启用！</string>
   <string name="limited_connection_disabled">限制连接模式已禁用。挂起的上传将会立即恢复。</string>
   <string name="limited_connection_mode">限制连接模式</string>

@@ -15,6 +15,7 @@
 * Gomoko
 * GrandEscogriffe
 * Happy13241
+* Iketsi
 * Jean-Frédéric
 * JenyxGym
 * KATRINE1992
@@ -659,7 +660,6 @@
   <string name="leaderboard_nearby">À proximité</string>
   <string name="leaderboard_used">Utilisé</string>
   <string name="leaderboard_my_rank_button_text">Mon rang</string>
-  <string name="map_attribution">© &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; · © &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; · &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Améliorer cette carte&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Mode de connexion limitée activé !</string>
   <string name="limited_connection_disabled">Mode de connexion limitée désactivé. Les téléversements en attente seront maintenant repris.</string>
   <string name="limited_connection_mode">Mode de connexion limitée</string>
@@ -773,6 +773,9 @@
   <string name="storage_permissions_denied">Droits de stockage refusés</string>
   <string name="unable_to_share_upload_item">Impossible de partager cet élément</string>
   <string name="permissions_are_required_for_functionality">Des autorisations sont nécessaires pour la fonctionnalité</string>
+  <string name="learn_how_to_write_a_useful_description">Apprendre à écrire une description utile</string>
+  <string name="learn_how_to_write_a_useful_caption">Apprendre à écrire une légende utile</string>
+  <string name="see_your_achievements">Voir vos réalisations</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d image sélectionnée</item>
     <item quantity="other">%d images sélectionnées</item>

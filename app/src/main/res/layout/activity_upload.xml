@@ -61,7 +61,7 @@
             android:layout_marginStart="@dimen/small_gap"
             android:clickable="false"
             android:focusable="false"
-            app:srcCompat="@drawable/ic_expand_less_black_24dp"
+            app:srcCompat="@drawable/arrow_up"
             style="@style/Widget.AppCompat.Button.Borderless"
             />
 

@@ -80,7 +80,8 @@
                   android:clickable="false"
                   android:focusable="false"
                   android:padding="@dimen/medium_height"
-                  app:srcCompat="@drawable/ic_expand_less_black_24dp" />
+                  android:rotation="180"
+                  app:srcCompat="@drawable/arrow_up" />
             </RelativeLayout>
 
             <LinearLayout
@@ -96,6 +97,10 @@
                   android:layout_height="wrap_content"
                   android:layout_marginTop="@dimen/activity_margin_horizontal"
                   android:layout_marginBottom="@dimen/activity_margin_horizontal"
+                  android:scrollbars="vertical"
+                  android:fadeScrollbars="false"
+                  android:scrollbarThumbVertical="@color/primaryColor"
+                  android:scrollbarSize="@dimen/dimen_6"
                   tools:visibility="visible" />
 
 

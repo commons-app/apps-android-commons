@@ -27,6 +27,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.viewpagerindicator.CirclePageIndicator;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.media.MediaDetailFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
@@ -214,6 +215,12 @@ public class ReviewActivity extends BaseActivity {
         String fileName = media.getFilename();
         if (fileName.length() == 0) {
             ViewUtil.showShortSnackbar(drawerLayout, R.string.error_review);
+            return;
+        }
+
+        //If The Media User and Current Session Username is same then Skip the Image
+        if (media.getUser() != null && media.getUser().equals(AccountUtil.getUserName(getApplicationContext()))) {
+            runRandomizer();
             return;
         }
 

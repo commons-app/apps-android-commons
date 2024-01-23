@@ -603,7 +603,6 @@
   <string name="leaderboard_nearby">Í nágrenninu</string>
   <string name="leaderboard_used">Notað</string>
   <string name="leaderboard_my_rank_button_text">Tign mín</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Bæta þetta landakort&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Hamur fyrir takmarkaðar tengingar er virkur!</string>
   <string name="limited_connection_disabled">Hamur fyrir takmarkaðar tengingar er óvirkur. Innsendingar í bið munu halda áfram núna.</string>
   <string name="limited_connection_mode">Hamur fyrir takmarkaðar tengingar</string>

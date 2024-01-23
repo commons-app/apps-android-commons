@@ -22,6 +22,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import fr.free.nrw.commons.databinding.FragmentMediaLicenseBinding;
 import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.utils.DialogUtil;
 import java.util.List;
@@ -39,67 +40,50 @@ import timber.log.Timber;
 
 public class MediaLicenseFragment extends UploadBaseFragment implements MediaLicenseContract.View {
 
-    @BindView(R.id.tv_title)
-    TextView tvTitle;
-    @BindView(R.id.tv_subtitle)
-    TextView tvSubTitle;
-    @BindView(R.id.spinner_license_list)
-    Spinner spinnerLicenseList;
-    @BindView(R.id.tv_share_license_summary)
-    TextView tvShareLicenseSummary;
-    @BindView(R.id.tooltip)
-    ImageView tooltip;
-    @BindView(R.id.ll_info_monument_upload)
-    LinearLayout llInfoMonumentUpload;
-
     @Inject
     MediaLicenseContract.UserActionListener presenter;
 
+    private FragmentMediaLicenseBinding binding;
     private ArrayAdapter<String> adapter;
     private List<String> licenses;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_media_license, container, false);
+        binding = FragmentMediaLicenseBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
 
-        init();
-
-
-    }
-
-    private void init() {
-
-            tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
-                callback.getTotalNumberOfSteps(), getString(R.string.license_step_title)));
-
+        binding.tvTitle.setText(getString(R.string.step_count,
+            callback.getIndexInViewFlipper(this) + 1,
+            callback.getTotalNumberOfSteps(),
+            getString(R.string.license_step_title))
+        );
         setTvSubTitle();
-        tooltip.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogUtil.showAlertDialog(getActivity(), getString(R.string.license_step_title), getString(R.string.license_tooltip), getString(android.R.string.ok), null, true);
-            }
-        });
+        binding.btnPrevious.setOnClickListener(v ->
+            callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this))
+        );
+
+        binding.btnSubmit.setOnClickListener(v ->
+            callback.onNextButtonClicked(callback.getIndexInViewFlipper(this))
+        );
+
+        binding.tooltip.setOnClickListener(v ->
+            DialogUtil.showAlertDialog(requireActivity(),
+                getString(R.string.license_step_title),
+                getString(R.string.license_tooltip),
+                getString(android.R.string.ok),
+                null, true)
+        );
+
         initPresenter();
         initLicenseSpinner();
         presenter.getLicenses();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 
     /**
@@ -111,7 +95,7 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
         if (activity instanceof  UploadActivity) {
             final boolean isMultipleFileSelected = ((UploadActivity) activity).getIsMultipleFilesSelected();
             if (!isMultipleFileSelected) {
-                tvSubTitle.setVisibility(View.GONE);
+                binding.tvSubtitle.setVisibility(View.GONE);
             }
         }
     }
@@ -128,8 +112,8 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
             return;
         }
         adapter = new ArrayAdapter<>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_dropdown_item);
-        spinnerLicenseList.setAdapter(adapter);
-        spinnerLicenseList.setOnItemSelectedListener(new OnItemSelectedListener() {
+        binding.spinnerLicenseList.setAdapter(adapter);
+        binding.spinnerLicenseList.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position,
                 long l) {
@@ -162,7 +146,7 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
         } else {
             Timber.d("Position: %d %s", position, getString(Utils.licenseNameFor(license)));
         }
-        spinnerLicenseList.setSelection(position);
+        binding.spinnerLicenseList.setSelection(position);
     }
 
     @Override
@@ -170,7 +154,7 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
         String licenseHyperLink = "<a href='" + Utils.licenseUrlFor(licenseSummary) + "'>" +
                 getString(Utils.licenseNameFor(licenseSummary)) + "</a><br>";
 
-        setTextViewHTML(tvShareLicenseSummary, getResources()
+        setTextViewHTML(binding.tvShareLicenseSummary, getResources()
                 .getQuantityString(R.plurals.share_license_summary, numberOfItems,
                         licenseHyperLink));
     }
@@ -211,22 +195,8 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
         presenter.onDetachView();
         //Free the adapter to avoid memory leaks
         adapter = null;
+        binding = null;
         super.onDestroyView();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @OnClick(R.id.btn_previous)
-    public void onPreviousButtonClicked() {
-        callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
-    }
-
-    @OnClick(R.id.btn_submit)
-    public void onSubmitButtonClicked() {
-        callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
     }
 
     @Override
@@ -236,9 +206,9 @@ public class MediaLicenseFragment extends UploadBaseFragment implements MediaLic
          * Show the wlm info message if the upload is a WLM upload
          */
         if(callback.isWLMUpload() && presenter.isWLMSupportedForThisPlace()){
-            llInfoMonumentUpload.setVisibility(View.VISIBLE);
+            binding.llInfoMonumentUpload.setVisibility(View.VISIBLE);
         }else{
-            llInfoMonumentUpload.setVisibility(View.GONE);
+            binding.llInfoMonumentUpload.setVisibility(View.GONE);
         }
     }
 }
