@@ -467,7 +467,7 @@
   <string name="leaderboard_nearby">কাছাকাছি</string>
   <string name="leaderboard_used">ব্যবহৃত</string>
   <string name="leaderboard_my_rank_button_text">আমার স্থান</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;ম্যাপবক্স&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;ওপেনস্ট্রিটম্যাপ&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;এই মানচিত্রের উন্নয়ন করুন&lt;/a&gt;</string>
+  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;ওপেনস্ট্রিটম্যাপ&lt;/a&gt;</string>
   <string name="limited_connection_enabled">সীমিত সংযোগ মোড সক্রিয় করা হয়েছে!</string>
   <string name="limited_connection_mode">সীমিত সংযোগ মোড</string>
   <string name="statistics_quality">মানসম্মত ছবি</string>

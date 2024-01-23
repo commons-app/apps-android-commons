@@ -27,6 +27,7 @@ public class NearbyNotificationCardView extends SwipableCardView {
     private TextView notificationTitle;
     private TextView notificationDistance;
     private ImageView notificationIcon;
+    private ImageView notificationCompass;
     private ProgressBar progressBar;
 
     public CardViewVisibilityState cardViewVisibilityState;
@@ -64,6 +65,7 @@ public class NearbyNotificationCardView extends SwipableCardView {
         notificationDistance = rootView.findViewById(R.id.nearby_distance);
 
         notificationIcon = rootView.findViewById(R.id.nearby_icon);
+        notificationCompass = rootView.findViewById(R.id.nearby_compass);
 
         progressBar = rootView.findViewById(R.id.progressBar);
 
@@ -111,10 +113,11 @@ public class NearbyNotificationCardView extends SwipableCardView {
     }
 
     /**
-     * Pass place information to views.
+     * Pass place information to views and set compass arrow direction
      * @param place Closes place where we will get information from
+     * @param direction Direction in which compass arrow needs to be set
      */
-    public void updateContent(Place place) {
+    public void updateContent(Place place, float direction) {
         Timber.d("Update nearby card notification content");
         this.setVisibility(VISIBLE);
         cardViewVisibilityState = CardViewVisibilityState.READY;
@@ -129,7 +132,7 @@ public class NearbyNotificationCardView extends SwipableCardView {
         notificationIcon.setVisibility(VISIBLE);
         notificationTitle.setText(place.name);
         notificationDistance.setText(place.distance);
-
+        notificationCompass.setRotation(direction);
     }
 
     @Override
@@ -151,6 +154,7 @@ public class NearbyNotificationCardView extends SwipableCardView {
                     notificationTitle.setVisibility(VISIBLE);
                     notificationDistance.setVisibility(VISIBLE);
                     notificationIcon.setVisibility(VISIBLE);
+                    notificationCompass.setVisibility(VISIBLE);
                     break;
                 case LOADING:
                     permissionRequestButton.setVisibility(GONE);
@@ -160,6 +164,7 @@ public class NearbyNotificationCardView extends SwipableCardView {
                     notificationTitle.setVisibility(GONE);
                     notificationDistance.setVisibility(GONE);
                     notificationIcon.setVisibility(GONE);
+                    notificationCompass.setVisibility(GONE);
                     permissionRequestButton.setVisibility(GONE);
                     break;
                 case ASK_PERMISSION:
@@ -191,5 +196,15 @@ public class NearbyNotificationCardView extends SwipableCardView {
         ENABLE_GPS,
         ENABLE_LOCATION_PERMISSION, // For only after Marshmallow
         NO_PERMISSION_NEEDED
+    }
+
+    /**
+     * Rotates the compass arrow in tandem with the rotation of device
+     *
+     * @param rotateDegree Degree by which device was rotated
+     * @param direction Direction in which arrow has to point
+     */
+    public void rotateCompass(float rotateDegree, float direction){
+        notificationCompass.setRotation(-(rotateDegree-direction));
     }
 }

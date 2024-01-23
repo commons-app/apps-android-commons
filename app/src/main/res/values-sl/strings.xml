@@ -316,7 +316,7 @@
   <string name="showcase_view_no_longer_exists">Ta kraj ne obstaja več.</string>
   <string name="no_images_found">Ni najdenih slik!</string>
   <string name="error_loading_images">Pri nalaganju slik je prišlo do napake.</string>
-  <string name="image_uploaded_by">Naložil/a: %1$s</string>
+  <string name="image_uploaded_by">Naložil_a: %1$s</string>
   <string name="block_notification_title">Blokiran_a</string>
   <string name="block_notification">Urejanje Zbirke vam je preprečeno</string>
   <string name="app_widget_heading">Slika dneva</string>
@@ -463,8 +463,8 @@
   <string name="check_category_toast">Zahtevam preverjanje kategorij za »%1$s«</string>
   <string name="nominate_for_deletion_done">Opravljeno</string>
   <string name="send_thank_success_title">Pošiljanje zahvale: uspešno</string>
-  <string name="send_thank_success_message">Zahvala uporabniku/ci %1$s je bila uspešno poslana</string>
-  <string name="send_thank_failure_message">Pošiljanje zahvale uporabniku/ci %1$s ni uspelo</string>
+  <string name="send_thank_success_message">Zahvala uporabniku_ci %1$s je bila uspešno poslana</string>
+  <string name="send_thank_failure_message">Pošiljanje zahvale uporabniku_ci %1$s ni uspelo</string>
   <string name="send_thank_failure_title">Pošiljanje zahvale: neuspešno</string>
   <string name="send_thank_toast">Pošiljam zahvalo uporabniku/ici %1$s</string>
   <string name="review_copyright">Ali so tu upoštevane avtorske pravice?</string>
@@ -644,7 +644,6 @@
   <string name="leaderboard_nearby">Bližnje</string>
   <string name="leaderboard_used">Uporabljeno</string>
   <string name="leaderboard_my_rank_button_text">Moje mesto</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Izboljšajte zemljevid&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Vklopljen je način omejene povezanosti!</string>
   <string name="limited_connection_disabled">Način omejene povezanosti izklopljen. Nalaganje se bo zdaj nadaljevalo.</string>
   <string name="limited_connection_mode">Način omejene povezanosti</string>
@@ -758,6 +757,9 @@
   <string name="storage_permissions_denied">Dovoljenje za shranjevanje zavrnjeno</string>
   <string name="unable_to_share_upload_item">Tega predmeta ni mogoče deliti</string>
   <string name="permissions_are_required_for_functionality">Za delovanje so potrebna dovoljenja</string>
+  <string name="learn_how_to_write_a_useful_description">Naučite se napisati koristen opis</string>
+  <string name="learn_how_to_write_a_useful_caption">Naučite se napisati koristen napis</string>
+  <string name="see_your_achievements">Oglejte si svoje dosežke</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d izbrana slika</item>
     <item quantity="two">%d izbrani sliki</item>

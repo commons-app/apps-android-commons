@@ -90,13 +90,33 @@ class EditActivity : AppCompatActivity() {
         iv.adjustViewBounds = true
         iv.scaleType = ImageView.ScaleType.MATRIX
         iv.post(Runnable {
-            val bitmap = BitmapFactory.decodeFile(imageUri)
-            iv.setImageBitmap(bitmap)
-            if (bitmap.width > 0) {
-                val scale =
-                    iv.measuredWidth.toFloat() / (iv.drawable as BitmapDrawable).bitmap.width.toFloat()
-                iv.layoutParams.height =
-                    (scale * (iv.drawable as BitmapDrawable).bitmap.height).toInt()
+            val options = BitmapFactory.Options()
+            options.inJustDecodeBounds = true
+            BitmapFactory.decodeFile(imageUri, options)
+
+            val bitmapWidth = options.outWidth
+            val bitmapHeight = options.outHeight
+
+            // Check if the bitmap dimensions exceed a certain threshold
+            val maxBitmapSize = 2000 // Set your maximum size here
+            if (bitmapWidth > maxBitmapSize || bitmapHeight > maxBitmapSize) {
+                val scaleFactor = calculateScaleFactor(bitmapWidth, bitmapHeight, maxBitmapSize)
+                options.inSampleSize = scaleFactor
+                options.inJustDecodeBounds = false
+                val scaledBitmap = BitmapFactory.decodeFile(imageUri, options)
+                iv.setImageBitmap(scaledBitmap)
+                // Update the ImageView with the scaled bitmap
+                val scale = iv.measuredWidth.toFloat() / scaledBitmap.width.toFloat()
+                iv.layoutParams.height = (scale * scaledBitmap.height).toInt()
+                iv.imageMatrix = scaleMatrix(scale, scale)
+            } else {
+
+                options.inJustDecodeBounds = false
+                val bitmap = BitmapFactory.decodeFile(imageUri, options)
+                iv.setImageBitmap(bitmap)
+
+                val scale = iv.measuredWidth.toFloat() / bitmapWidth.toFloat()
+                iv.layoutParams.height = (scale * bitmapHeight).toInt()
                 iv.imageMatrix = scaleMatrix(scale, scale)
             }
         })
@@ -245,5 +265,36 @@ class EditActivity : AppCompatActivity() {
 
         editedImageExif?.saveAttributes()
     }
+
+    /**
+     * Calculates the scale factor to be used for scaling down a bitmap based on its original
+     *  dimensions and the maximum allowed size.
+     * @param originalWidth  The original width of the bitmap.
+     * @param originalHeight The original height of the bitmap.
+     * @param maxSize        The maximum allowed size for either width or height.
+     * @return The scale factor to be used for scaling down the bitmap.
+     *         If the bitmap is smaller than or equal to the maximum size in both dimensions,
+     *         the scale factor is 1.
+     *         If the bitmap is larger than the maximum size in either dimension,
+     *         the scale factor is calculated as the largest power of 2 that is less than or equal
+     *         to the ratio of the original dimension to the maximum size.
+     *         The scale factor ensures that the scaled bitmap will fit within the maximum size
+     *         while maintaining aspect ratio.
+     */
+    private fun calculateScaleFactor(originalWidth: Int, originalHeight: Int, maxSize: Int): Int {
+        var scaleFactor = 1
+
+        if (originalWidth > maxSize || originalHeight > maxSize) {
+            // Calculate the largest power of 2 that is less than or equal to the desired width and height
+            val widthRatio = Math.ceil((originalWidth.toDouble() / maxSize.toDouble())).toInt()
+            val heightRatio = Math.ceil((originalHeight.toDouble() / maxSize.toDouble())).toInt()
+
+            scaleFactor = if (widthRatio > heightRatio) widthRatio else heightRatio
+        }
+
+        return scaleFactor
+    }
+
+
 
 }

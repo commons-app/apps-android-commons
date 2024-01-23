@@ -88,15 +88,15 @@
   <string name="username">Gebruikersnaam</string>
   <string name="password">Wachtwoord</string>
   <string name="login_credential">Aanmelden met uw Commons Beta-account</string>
-  <string name="login">Inloggen</string>
+  <string name="login">Aanmelden</string>
   <string name="forgot_password">Wachtwoord vergeten?</string>
   <string name="signup">Registreren</string>
-  <string name="logging_in_title">Bezig met inloggen</string>
+  <string name="logging_in_title">Bezig met aanmelden</string>
   <string name="logging_in_message">Een ogenblik geduld…</string>
   <string name="updating_caption_title">Bijschriften en beschrijvingen aan het bijwerken</string>
   <string name="updating_caption_message">Een ogenblik geduld…</string>
-  <string name="login_success">Inloggen geslaagd!</string>
-  <string name="login_failed">Inloggen mislukt!</string>
+  <string name="login_success">Aanmelden geslaagd</string>
+  <string name="login_failed">Aanmelden mislukt</string>
   <string name="upload_failed">Bestand niet gevonden. Probeer een ander bestand.</string>
   <string name="retry_limit_reached">Grens voor opnieuw proberen bereikt! Annuleer de upload en probeer het opnieuw</string>
   <string name="unrestricted_battery_mode">Batterijoptimalisatie uitschakelen?</string>
@@ -128,11 +128,11 @@
   <string name="add_caption_toast">Geef een bijschrift op voor dit bestand</string>
   <string name="share_description_hint">Beschrijving</string>
   <string name="share_caption_hint">Titel</string>
-  <string name="login_failed_network">Inloggen niet mogelijk. Er is een probleem met het netwerk</string>
+  <string name="login_failed_network">Aanmelden niet mogelijk. Er is een probleem met het netwerk</string>
   <string name="login_failed_throttled">Te veel mislukte pogingen. Probeer het over een paar minuten opnieuw.</string>
   <string name="login_failed_blocked">Deze gebruiker is helaas geblokkeerd op Wikimedia Commons</string>
   <string name="login_failed_2fa_needed">U moet uw code voor tweefactor-authenticatie opgeven.</string>
-  <string name="login_failed_generic">Inloggen mislukt</string>
+  <string name="login_failed_generic">Aanmelden mislukt</string>
   <string name="share_upload_button">Uploaden</string>
   <string name="multiple_share_base_title">Geef deze verzameling een naam</string>
   <string name="provider_modifications">Wijzigingen</string>
@@ -236,7 +236,7 @@
   <string name="become_a_tester_title">Word bètatester</string>
   <string name="become_a_tester_description">Meld u aan voor ons bètakanaal op Google Play en krijg vroegtijdig toegang tot nieuwe functies en bugfixes</string>
   <string name="_2fa_code">2FA-code</string>
-  <string name="logout_verification">Wilt u echt uitloggen?</string>
+  <string name="logout_verification">Wilt u zich echt afmelden?</string>
   <string name="mediaimage_failed">Media-afbeelding is mislukt</string>
   <string name="no_subcategory_found">Geen subcategorieën gevonden</string>
   <string name="no_parentcategory_found">Geen bovenliggende categorieën gevonden</string>
@@ -279,7 +279,7 @@
   <string name="internet_downloaded">Upload alleen foto\'s die je zelf hebt genomen. Upload geen foto\'s die je van internet hebt gedownload.</string>
   <string name="use_external_storage">In-app opnamen opslaan</string>
   <string name="use_external_storage_summary">Foto\'s die met de in-app-camera zijn gemaakt, opslaan in de opslag van uw apparaat</string>
-  <string name="login_to_your_account">Log in met je account</string>
+  <string name="login_to_your_account">Aanmelden bij uw account</string>
   <string name="send_log_file">Logboekbestand verzenden</string>
   <string name="send_log_file_description">Stuur een logbestand via e-mail naar ontwikkelaars om problemen met de app op te lossen. Opmerking: logboeken kunnen mogelijk identificerende informatie bevatten</string>
   <string name="no_web_browser">Geen webbrowser gevonden om URL te openen</string>
@@ -288,10 +288,10 @@
   <string name="nominated_for_deletion">Deze afbeelding is genomineerd voor verwijdering.</string>
   <string name="nominated_see_more">Zie webpagina voor details</string>
   <string name="skip_login">Overslaan</string>
-  <string name="navigation_item_login">Inloggen</string>
-  <string name="skip_login_title">Weet je zeker dat je het inloggen wilt overslaan?</string>
-  <string name="skip_login_message">U moet zich dan later wel inloggen om afbeeldingen te kunnen uploaden.</string>
-  <string name="login_alert_message">Log in om deze functie te gebruiken</string>
+  <string name="navigation_item_login">Aanmelden</string>
+  <string name="skip_login_title">Weet u zeker dat u het aanmelden wilt overslaan?</string>
+  <string name="skip_login_message">U moet zich dan later wel aanmelden om afbeeldingen te kunnen uploaden.</string>
+  <string name="login_alert_message">Meld u aan om deze functie te gebruiken</string>
   <string name="copy_wikicode">Kopieer de wikitekst naar het klembord</string>
   <string name="wikicode_copied">De wikitekst is gekopieerd naar het klembord</string>
   <string name="nearby_location_not_available">In de buurt werkt mogelijk niet naar behoren. Locatie niet beschikbaar.</string>
@@ -356,7 +356,7 @@
   <string name="construction_event_answer">Foto\'s met technologie of cultuur zijn van harte welkom op Commons.</string>
   <string name="congratulatory_message_quiz">U heeft %1$s van de antwoorden goed. Gefeliciteerd!</string>
   <string name="warning_for_no_answer">Selecteer een van de twee opties om de vraag te beantwoorden</string>
-  <string name="user_not_logged_in">Inlogsessie verlopen, log opnieuw in.</string>
+  <string name="user_not_logged_in">De sessie is verlopen. Meld u opnieuw aan.</string>
   <string name="quiz_result_share_message">Deel de quiz met uw vrienden!</string>
   <string name="continue_message">Doorgaan</string>
   <string name="correct">Correct antwoord</string>
@@ -582,7 +582,7 @@
   <string name="place_state_needs_photo">Heeft foto nodig</string>
   <string name="place_type">Plaatstype:</string>
   <string name="nearby_search_hint">Brug, museum, hotel, enz.</string>
-  <string name="you_must_reset_your_passsword">Er is iets misgegaan met inloggen, u moet uw wachtwoord opnieuw instellen !!</string>
+  <string name="you_must_reset_your_passsword">Er is iets misgegaan bij het aanmelden. U moet uw wachtwoord opnieuw instellen.</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">SUBKLASSEN</string>
   <string name="title_for_parent_classes">HOOFDKLASSEN</string>
@@ -645,7 +645,6 @@
   <string name="leaderboard_nearby">In de Buurt</string>
   <string name="leaderboard_used">Gebruikt</string>
   <string name="leaderboard_my_rank_button_text">Mijn ranking</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Verbeter deze kaart&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Beperkte verbindingsmodus ingeschakeld!</string>
   <string name="limited_connection_disabled">Beperkte verbindingsmodus uitgeschakeld. Uploads die in behandeling zijn, worden nu hervat.</string>
   <string name="limited_connection_mode">Beperkte verbindingsmodus</string>

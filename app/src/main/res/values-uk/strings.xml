@@ -94,6 +94,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Налаштування</string>
   <string name="intent_share_upload_label">Завантажити до Вікісховища</string>
+  <string name="upload_in_progress">Триває вивантаження</string>
   <string name="username">Ім\'я користувача</string>
   <string name="password">Пароль</string>
   <string name="login_credential">Увійдіть до вашого облікового запису Commons Beta</string>
@@ -107,6 +108,9 @@
   <string name="login_success">Ви успішно увійшли!</string>
   <string name="login_failed">Не вдалося увійти</string>
   <string name="upload_failed">Файл не знайдено. Будь ласка, спробуйте інший файл.</string>
+  <string name="retry_limit_reached">Досягнуто максимальної кількості повторних спроб! Будь ласка, скасуйте завантаження і спробуйте ще раз</string>
+  <string name="unrestricted_battery_mode">Вимкнути оптимізацію батареї?</string>
+  <string name="suggest_unrestricted_mode">Вивантаження більше ніж 3 зображень працює надійніше, коли оптимізацію батареї вимкнено. Будь ласка, вимкніть оптимізацію батареї для програмки Commons у налаштуваннях для плавної роботи. \n\nМожливі кроки, щоб вимкнути оптимізацію акумулятора:\n\nКрок 1: Натисніть кнопку «Налаштування» нижче.\n\nКрок 2: Переключіться з «Не оптимізовано» на «Усі програми».\n\nКрок 3: Знайдіть «Commons» або «fr.free.nrw.commons».\n\nКрок 4: Натисніть на нього і виберіть «Не оптимізувати».\n\nКрок 5: Натисніть «Готово».</string>
   <string name="authentication_failed">Помилка автентифікації. Будь ласка, увійдіть у свій обліковий запис знову</string>
   <string name="uploading_started">Завантаження розпочато!</string>
   <string name="uploading_queued">Завантаження додано до черги (увімкнений режим обмеженого з\'єднання)</string>
@@ -301,6 +305,7 @@
   <string name="copy_wikicode">Скопіювати вікі-текст у буфер обміну</string>
   <string name="wikicode_copied">Вікі-текст скопійовано у буфер обміну</string>
   <string name="nearby_location_not_available">Функція «Поблизу» може працювати некоректно, «Розташування» недоступне.</string>
+  <string name="upload_location_access_denied">Доступ до місцезнаходження заборонено. Щоб скористатися цією функцією, будь ласка, вкажіть  своє місцезнаходження вручну.</string>
   <string name="location_permission_rationale_nearby">Потрібний дозвіл для показу списку місць поблизу</string>
   <string name="nearby_directions">Напрямки</string>
   <string name="nearby_wikidata">Вікідані</string>
@@ -368,6 +373,7 @@
   <string name="wrong">Хибна відповідь</string>
   <string name="quiz_screenshot_question">Чи можна завантажувати цей знімок?</string>
   <string name="share_app_title">Поширити програму</string>
+  <string name="rotate">Повернути</string>
   <string name="error_fetching_nearby_places">Помилка отримання місць поблизу.</string>
   <string name="no_nearby_places_around">Не знайдено місць поблизу</string>
   <string name="error_fetching_nearby_monuments">Помилка отримання пам\'ятників поблизу.</string>
@@ -455,6 +461,8 @@
   <string name="in_app_camera_location_permission_rationale">Камера в застосунку потребує дозволу на доступ до місцезнаходження, щоб приєднувати його до ваших зображень, якщо місцезнаходження недоступне в EXIF. Дозвольте програмці отримати доступ до вашого місцезнаходження та повторіть спробу.\n\nПримітка: у завантаженому файлі може не бути місцезнаходження, якщо програма не може отримати місцезнаходження з пристрою протягом короткого проміжку часу.</string>
   <string name="in_app_camera_location_permission_denied">Застосунок не записував місцезнаходження разом із кадрами через відсутність дозволу на місцезнаходження</string>
   <string name="in_app_camera_location_unavailable">Програмка не буде записувати місцезнаходження разом із кадрами, оскільки GPS вимкнено</string>
+  <string name="open_document_photo_picker_title">Використовуйте засіб вибору фотографій на основі документів</string>
+  <string name="open_document_photo_picker_explanation">Новий засіб вибору фотографій Android ризикує втратити інформацію про місцезнаходження. Увімкніть, якщо ви використовуєте його.</string>
   <string name="location_loss_warning">Якщо вимкнути, то може бути викликаний новий вибір фотографій. Що може призвести до втрати інформації про місцезнаходження.\n\nТоркніться «Докладніше», щоб дізнатись більше.</string>
   <string name="nearby_campaign_dismiss_message">Ви більше не бачитимете кампаній. Однак Ви можете увімкнути це сповіщення повторно в своїх налаштуваннях, якщо забажаєте.</string>
   <string name="this_function_needs_network_connection">Ця функція вимагає доступу до інтернету. Будь ласка, перевірте своє з\'єднання.</string>
@@ -608,6 +616,7 @@
   <string name="recommend_high_accuracy_mode">Щоб отримати кращі результати, виберіть режим високої точності.</string>
   <string name="ask_to_turn_location_on">Увімкнути визначення місця розташування?</string>
   <string name="nearby_needs_location">«Поблизу» потребує увімкненого визначення місця розташування, щоб працювати належним чином</string>
+  <string name="upload_map_location_access">Вам потрібно надати доступ до вашого поточного місцезнаходження, щоб місцезнаходження встановлювалось автоматично.</string>
   <string name="use_location_from_similar_image">Ви зробили ці два знімки в одному й тому ж місці? Хочете використати широту/довготу зображення справа?</string>
   <string name="load_more">Завантажити більше</string>
   <string name="nearby_no_results">Місць не знайдено, спробуйте змінити критерії пошуку.</string>
@@ -650,7 +659,6 @@
   <string name="leaderboard_nearby">Поблизу</string>
   <string name="leaderboard_used">Використання</string>
   <string name="leaderboard_my_rank_button_text">Мій ранг</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Покращити цю мапу&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Увімкнено режим обмеженого з\'єднання!</string>
   <string name="limited_connection_disabled">Вимкнено режим обмеженого з\'єднання. Завантаження в процесі очікування тепер відновляться.</string>
   <string name="limited_connection_mode">Режим обмеженого з\'єднання</string>
@@ -696,6 +704,10 @@
   <string name="custom_selector_info_text2">На відміну від зображення зліва, зображення праворуч має логотип Commons, яке вказує, що воно вже завантажене.\n  Натисніть і утримуйте для попереднього перегляду зображення.</string>
   <string name="welcome_custom_selector_ok">Чудово</string>
   <string name="custom_selector_already_uploaded_image_text">Це зображення вже завантажено на Спільний ресурс.</string>
+  <string name="custom_selector_over_limit_warning">З технічних причин програма не може надійно вивантажувати більше ніж %1$d зображення/ь одночасно. Обмеження завантаження %1$d перевищено на %2$d.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">Відхилити</string>
+  <string name="custom_selector_button_limit_text">Максимум: %1$d</string>
+  <string name="custom_selector_limit_error_desc">Помилка: перевищено ліміт завантаження</string>
   <string name="place_state_wlm">ВЛП</string>
   <string name="wlm_upload_info">Це зображення буде брати участь у конкурсі Wiki Loves Monuments</string>
   <string name="display_monuments">Показати пам’ятники</string>
@@ -736,6 +748,8 @@
   <string name="your_feedback">Ваш відгук</string>
   <string name="mark_as_not_for_upload">Позначити як не для завантаження</string>
   <string name="unmark_as_not_for_upload">Зняти позначку «Не для завантаження».</string>
+  <string name="marking_as_not_for_upload">Позначення як не для завантаження</string>
+  <string name="unmarking_as_not_for_upload">Зняття позначки «Не для завантаження»</string>
   <string name="show_already_actioned_pictures">Показати вже виконані картинки</string>
   <string name="hiding_already_actioned_pictures">Приховування вже активованих картинок</string>
   <string name="no_more_images_found">Більше зображень не знайдено</string>
@@ -744,6 +758,8 @@
   <string name="image_selected">Зображення вибрано</string>
   <string name="image_marked_as_not_for_upload">Зображення позначено як не для завантаження</string>
   <string name="menu_view_report">Повідомити</string>
+  <string name="menu_view_set_white_background">Встановити біле тло</string>
+  <string name="menu_view_set_black_background">Встановити чорне тло</string>
   <string name="report_violation">Повідомити про порушення</string>
   <string name="report_user">Поскаржитись на користувача</string>
   <string name="report_content">Поскаржитись на вміст</string>
@@ -753,4 +769,16 @@
   <string name="full_screen_mode_features_info">Швидко та довго гортайте, щоб виконати ці дії: \n- Left/Right: Перейти до попер/наст\n- Up: Вибрати\n- Down: Позначити як не для завантаження.</string>
   <string name="set_up_avatar_toast_string">Щоб налаштувати свій аватар у таблиці лідерів, натисніть «Установити як аватар» у меню з трьома крапками будь-якого зображення.</string>
   <string name="similar_coordinate_description_auto_set">Координати не є точними, але людина, яка завантажила це фото, вважає, що вони досить близькі.</string>
+  <string name="storage_permissions_denied">Доступ до сховища заборонений</string>
+  <string name="unable_to_share_upload_item">Не вдалося поділитися цим елементом</string>
+  <string name="permissions_are_required_for_functionality">Для роботи потрібні дозволи</string>
+  <string name="learn_how_to_write_a_useful_description">Дізнайтеся, як написати корисний опис</string>
+  <string name="learn_how_to_write_a_useful_caption">Дізнайтеся, як написати корисний підпис</string>
+  <string name="see_your_achievements">Перегляньте свої досягнення</string>
+  <plurals name="custom_picker_images_selected_title_appendix">
+    <item quantity="one">Вибрано %d зображення</item>
+    <item quantity="few">Вибрано %d зображення</item>
+    <item quantity="many">Вибрано %d зображень</item>
+    <item quantity="other">Вибрано %d зображень</item>
+  </plurals>
 </resources>
