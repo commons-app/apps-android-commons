@@ -784,6 +784,9 @@ Upload your first media by tapping on the add button.</string>
   <string name="storage_permissions_denied">Storage Permissions Denied</string>
   <string name="unable_to_share_upload_item">Unable to share this item</string>
   <string name="permissions_are_required_for_functionality">Permissions are required for functionality</string>
+  <string name="learn_how_to_write_a_useful_description">Learn how to write a useful description</string>
+  <string name="learn_how_to_write_a_useful_caption">Learn how to write a useful caption</string>
+  <string name="see_your_achievements">See your achievements</string>
   <string name="send_thanks_to_author">Thank the author</string>
   <string name="error_sending_thanks">Error sending thanks to author.</string>
   <plurals name="custom_picker_images_selected_title_appendix">

@@ -1,15 +1,21 @@
 package fr.free.nrw.commons.contributions;
 
+import static android.content.Context.SENSOR_SERVICE;
 import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
 import static fr.free.nrw.commons.contributions.Contribution.STATE_PAUSED;
 import static fr.free.nrw.commons.nearby.fragments.NearbyParentFragment.WLM_URL;
 import static fr.free.nrw.commons.profile.ProfileActivity.KEY_USERNAME;
+import static fr.free.nrw.commons.utils.LengthUtils.computeBearing;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 import android.Manifest;
 import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -83,6 +89,7 @@ public class ContributionsFragment
         OnBackStackChangedListener,
         LocationUpdateListener,
     MediaDetailProvider,
+    SensorEventListener,
     ICampaignsView, ContributionsContract.View, Callback{
     @Inject @Named("default_preferences") JsonKvStore store;
     @Inject NearbyController nearbyController;
@@ -111,7 +118,6 @@ public class ContributionsFragment
 
     private LatLng curLatLng;
 
-    private boolean firstLocationUpdate = true;
     private boolean isFragmentAttachedBefore = false;
     private View checkBoxView;
     private CheckBox checkBox;
@@ -122,6 +128,10 @@ public class ContributionsFragment
 
     String userName;
     private boolean isUserProfile;
+
+    private SensorManager mSensorManager;
+    private Sensor mLight;
+    private float direction;
     private ActivityResultLauncher<String[]> nearbyLocationPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
         @Override
         public void onActivityResult(Map<String, Boolean> result) {
@@ -162,6 +172,8 @@ public class ContributionsFragment
             userName = getArguments().getString(KEY_USERNAME);
             isUserProfile = true;
         }
+        mSensorManager = (SensorManager) getActivity().getSystemService(SENSOR_SERVICE);
+        mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
     }
 
     @Nullable
@@ -428,6 +440,7 @@ public class ContributionsFragment
         super.onPause();
         locationManager.removeLocationListener(this);
         locationManager.unregisterLocationManager();
+        mSensorManager.unregisterListener(this);
     }
 
     @Override
@@ -439,7 +452,6 @@ public class ContributionsFragment
     public void onResume() {
         super.onResume();
         contributionsPresenter.onAttachView(this);
-        firstLocationUpdate = true;
         locationManager.addLocationListener(this);
         nearbyNotificationCardView.permissionRequestButton.setOnClickListener(v -> {
             showNearbyCardPermissionRationale();
@@ -449,6 +461,13 @@ public class ContributionsFragment
         if (mediaDetailPagerFragment == null && !isUserProfile) {
             if (store.getBoolean("displayNearbyCardView", true)) {
                 checkPermissionsAndShowNearbyCardView();
+                
+                // Calling nearby card to keep showing it even when user clicks on it and comes back
+                try {
+                    updateClosestNearbyCardViewInfo();
+                } catch (Exception e) {
+                    Timber.e(e);
+                }
                 if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
                     nearbyNotificationCardView.setVisibility(View.VISIBLE);
                 }
@@ -464,6 +483,7 @@ public class ContributionsFragment
                 fetchCampaigns();
             }
         }
+        mSensorManager.registerListener(this, mLight, SensorManager.SENSOR_DELAY_UI);
     }
 
     private void checkPermissionsAndShowNearbyCardView() {
@@ -521,7 +541,8 @@ public class ContributionsFragment
             Place closestNearbyPlace = nearbyPlacesInfo.placeList.get(0);
             String distance = formatDistanceBetween(curLatLng, closestNearbyPlace.location);
             closestNearbyPlace.setDistance(distance);
-            nearbyNotificationCardView.updateContent(closestNearbyPlace);
+            direction = (float) computeBearing(curLatLng, closestNearbyPlace.location);
+            nearbyNotificationCardView.updateContent(closestNearbyPlace, direction);
         } else {
             // Means that no close nearby place is found
             nearbyNotificationCardView.setVisibility(View.GONE);
@@ -549,22 +570,17 @@ public class ContributionsFragment
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
         // Will be called if location changed more than 1000 meter
-        // Do nothing on slight changes for using network efficiently
-        firstLocationUpdate = false;
         updateClosestNearbyCardViewInfo();
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
         /* Update closest nearby notification card onLocationChangedSlightly
-        If first time to update location after onResume, then no need to wait for significant
-        location change. Any closest location is better than no location
         */
-        if (firstLocationUpdate) {
+        try {
             updateClosestNearbyCardViewInfo();
-            // Turn it to false, since it is not first location update anymore. To change closest location
-            // notification, we need to wait for a significant location change.
-            firstLocationUpdate = false;
+        } catch (Exception e) {
+            Timber.e(e);
         }
     }
 
@@ -793,6 +809,17 @@ public class ContributionsFragment
       }
   };
 
+    /**
+     * When the device rotates, rotate the Nearby banner's compass arrow in tandem.
+     */
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        float rotateDegree = Math.round(event.values[0]);
+        nearbyNotificationCardView.rotateCompass(rotateDegree, direction);
+    }
 
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        // Nothing to do.
+    }
 }
-

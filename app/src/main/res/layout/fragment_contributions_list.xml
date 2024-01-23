@@ -47,7 +47,11 @@
           android:id="@+id/contributionsList"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          android:layout_below="@id/tv_contributions_of_user" />
+          android:layout_below="@id/tv_contributions_of_user"
+          android:scrollbars="vertical"
+          android:fadeScrollbars="true"
+          android:scrollbarThumbVertical="@color/primaryColor"
+          android:scrollbarSize="@dimen/dimen_6"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -113,6 +117,7 @@
           app:backgroundTint="@color/status_bar_blue"
           app:elevation="@dimen/tiny_margin"
           app:srcCompat="@drawable/ic_add_white_24dp"
+          android:tint="?attr/floatingActionButtonStyle"
           app:useCompatPadding="true" />
 
     </LinearLayout>

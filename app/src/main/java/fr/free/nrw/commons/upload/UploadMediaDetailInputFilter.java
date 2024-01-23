@@ -20,6 +20,7 @@ public class UploadMediaDetailInputFilter implements InputFilter {
             Pattern.compile("[\\x{00A0}\\x{1680}\\x{180E}\\x{2000}-\\x{200B}\\x{2028}\\x{2029}\\x{202F}\\x{205F}]"),
             Pattern.compile("[\\x{202A}-\\x{202E}]"),
             Pattern.compile("\\p{Cc}"),
+            Pattern.compile("\\x{3A}"), // Added for colon(:)
             Pattern.compile("\\x{FEFF}"),
             Pattern.compile("\\x{00AD}"),
             Pattern.compile("[\\x{E000}-\\x{F8FF}\\x{FFF0}-\\x{FFFF}]"),

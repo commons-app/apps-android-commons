@@ -341,6 +341,7 @@
   <string name="wrong">Rispòsta sbalià</string>
   <string name="quiz_screenshot_question">Costa schermà a va bin da carié?</string>
   <string name="share_app_title">Partagé j\'aplicassion</string>
+  <string name="rotate">Deje na gira</string>
   <string name="error_fetching_nearby_places">Eror durant l\'esplorassion dj\'anviron.</string>
   <string name="no_nearby_places_around">Gnun pòst sì-davzin</string>
   <string name="error_fetching_nearby_monuments">Eror d\'arcuperassion dij monument davzin.</string>
@@ -579,6 +580,7 @@
   <string name="recommend_high_accuracy_mode">Për dij mej arzultà, ch\'a serna ël meud Àuta precision.</string>
   <string name="ask_to_turn_location_on">Anvisché la localisassion?</string>
   <string name="nearby_needs_location">Nearby a l\'ha damanca dla localisassion abilità për marcé \'me ch\'as dev</string>
+  <string name="upload_map_location_access">A dev përmëtte l\'acess a soa posission atual për definì an automàtich la localisassion.</string>
   <string name="use_location_from_similar_image">A la fàit se doe fòto ant l\'istess pòst? A veul dovré la latitùdin e la longitùdin ëd la fòto an sla drita?</string>
   <string name="load_more">Carié \'d pi</string>
   <string name="nearby_no_results">Gnun pòst trovà, ch\'a preuva a modifiché ij sò criteri d\'arserca.</string>
@@ -666,6 +668,10 @@
   <string name="custom_selector_info_text2">A diferensa da la plancia a snistra, la plancia a drita a la marca Comun ch\'a mostra ch\'a l\'é già stàita carià.\n Toché e ten-e për avèj na previsualisassion ëd la plancia.</string>
   <string name="welcome_custom_selector_ok">Fiamengh</string>
   <string name="custom_selector_already_uploaded_image_text">La plancia a l\'é già stàita carià su Comun.</string>
+  <string name="custom_selector_over_limit_warning">Për dle rason técniche, l\'aplicassion a peul nen carié an manera afidàbil pi che %1$d plance a la vira. Ël lìmit ëd cariament ëd %1$d a l\'é stàit passà ëd %2$d.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">Ignoré</string>
+  <string name="custom_selector_button_limit_text">Max: %1$d</string>
+  <string name="custom_selector_limit_error_desc">Eror: Lìmit ëd cariament passà</string>
   <string name="wlm_upload_info">Costa plancia a sarà giontà al concors Wiki a-j veul bin ai monument.</string>
   <string name="display_monuments">Smon-e ij monument</string>
   <string name="wlm_month_message">A l\'é ël mèis ëd Wiki a-j veul bin ai monument!</string>
@@ -704,6 +710,8 @@
   <string name="your_feedback">Soa opinion</string>
   <string name="mark_as_not_for_upload">Marché coma da nen carié</string>
   <string name="unmark_as_not_for_upload">Desselessioné coma da nen carié</string>
+  <string name="marking_as_not_for_upload">Marché coma da nen carié</string>
+  <string name="unmarking_as_not_for_upload">Desselessioné coma da nen carié</string>
   <string name="show_already_actioned_pictures">Smon-e le plance già assionà</string>
   <string name="hiding_already_actioned_pictures">Stërmé le plance già assionà</string>
   <string name="no_more_images_found">Pi gnun-e plance trovà</string>
@@ -712,6 +720,8 @@
   <string name="image_selected">Plancia selessionà</string>
   <string name="image_marked_as_not_for_upload">Plancia marcà coma da nen carié</string>
   <string name="menu_view_report">Signalé</string>
+  <string name="menu_view_set_white_background">Definì në sfond bianch</string>
+  <string name="menu_view_set_black_background">Definì në sfond nèir</string>
   <string name="report_violation">Signalé na violassion</string>
   <string name="report_user">Signalé cost utent-sì</string>
   <string name="report_content">Signalé ës contù</string>
@@ -721,4 +731,5 @@
   <string name="full_screen_mode_features_info">Fé score an pressa e assè leugn për fé coste assion-sì: \n- vers ësnistra/vers drita: andé a col prima/col apress\n- an su: selessioné\n- an giù: marché coma da nen carié.</string>
   <string name="set_up_avatar_toast_string">Për configuré soa plancia virtual ëd classìfica, ch\'a sgnaca su «Definì tanme plancia virtual» ant lë mnu a tre pontin ëd na plancia qualsëssìa.</string>
   <string name="similar_coordinate_description_auto_set">Le coordinà a son nen le coordinà precise, ma la përson-a che a l\'ha carià costa plancia a pensa che a son davzin-e a basta.</string>
+  <string name="unable_to_share_upload_item">Impossìbil partagé cost element</string>
 </resources>

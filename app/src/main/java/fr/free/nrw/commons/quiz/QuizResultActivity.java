@@ -18,12 +18,10 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.dinuscxj.progressbar.CircleProgressBar;
 
+import fr.free.nrw.commons.databinding.ActivityQuizResultBinding;
 import java.io.File;
 import java.io.FileOutputStream;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
 
@@ -33,20 +31,19 @@ import fr.free.nrw.commons.contributions.MainActivity;
  */
 public class QuizResultActivity extends AppCompatActivity {
 
-    @BindView(R.id.result_progress_bar) CircleProgressBar resultProgressBar;
-    @BindView(R.id.toolbar) Toolbar toolbar;
-    @BindView(R.id.congratulatory_message) TextView congratulatoryMessageText;
-
+    private ActivityQuizResultBinding binding;
     private final int NUMBER_OF_QUESTIONS = 5;
     private final int MULTIPLIER_TO_GET_PERCENTAGE = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quiz_result);
+        binding = ActivityQuizResultBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(binding.toolbar.toolbar);
+
+        binding.quizResultNext.setOnClickListener(view -> launchContributionActivity());
 
         if ( getIntent() != null) {
             Bundle extras = getIntent().getExtras();
@@ -60,22 +57,27 @@ public class QuizResultActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        binding = null;
+        super.onDestroy();
+    }
+
     /**
      * to calculate and display percentage and score
      * @param score
      */
     public void setScore(int score) {
         int per = score * MULTIPLIER_TO_GET_PERCENTAGE;
-        resultProgressBar.setProgress(per);
-        resultProgressBar.setProgressTextFormatPattern(score +" / " + NUMBER_OF_QUESTIONS);
+        binding.resultProgressBar.setProgress(per);
+        binding.resultProgressBar.setProgressTextFormatPattern(score +" / " + NUMBER_OF_QUESTIONS);
         String message = getResources().getString(R.string.congratulatory_message_quiz,per + "%");
-        congratulatoryMessageText.setText(message);
+        binding.congratulatoryMessage.setText(message);
     }
 
     /**
      * to go to Contibutions Activity
      */
-    @OnClick(R.id.quiz_result_next)
     public void launchContributionActivity(){
         startActivityWithFlags(
                 this, MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
