@@ -28,15 +28,13 @@ public class CsrfTokenClient {
     private static final int MAX_RETRIES = 1;
     private static final int MAX_RETRIES_OF_LOGIN_BLOCKING = 2;
     @NonNull private final WikiSite csrfWikiSite;
-    @NonNull private final WikiSite loginWikiSite;
     private int retries = 0;
 
     @Nullable private Call<MwQueryResponse> csrfTokenCall;
     @NonNull private LoginClient loginClient = new LoginClient();
 
-    public CsrfTokenClient(@NonNull WikiSite csrfWikiSite, @NonNull WikiSite loginWikiSite) {
+    public CsrfTokenClient(@NonNull WikiSite csrfWikiSite) {
         this.csrfWikiSite = csrfWikiSite;
-        this.loginWikiSite = loginWikiSite;
     }
 
     public void request(@NonNull final Callback callback) {
@@ -103,7 +101,7 @@ public class CsrfTokenClient {
     private void login(@NonNull final String username, @NonNull final String password,
                        @NonNull final RetryCallback retryCallback,
                        @NonNull final Callback callback) {
-        new LoginClient().request(loginWikiSite, username, password,
+        new LoginClient().request(csrfWikiSite, username, password,
                 new LoginClient.LoginCallback() {
                     @Override
                     public void success(@NonNull LoginResult loginResult) {
@@ -140,7 +138,7 @@ public class CsrfTokenClient {
             try {
                 if (retry > 0) {
                     // Log in explicitly
-                    new LoginClient().loginBlocking(loginWikiSite, AppAdapter.get().getUserName(),
+                    new LoginClient().loginBlocking(csrfWikiSite, AppAdapter.get().getUserName(),
                             AppAdapter.get().getPassword(), "");
                 }
 

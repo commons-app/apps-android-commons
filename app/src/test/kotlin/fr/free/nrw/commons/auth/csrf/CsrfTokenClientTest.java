@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.auth.csrf;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
@@ -19,7 +20,7 @@ import retrofit2.Call;
 
 public class CsrfTokenClientTest extends MockWebServerTest {
     private static final WikiSite TEST_WIKI = new WikiSite("test.wikipedia.org");
-    @NonNull private final CsrfTokenClient subject = new CsrfTokenClient(TEST_WIKI, TEST_WIKI);
+    @NonNull private final CsrfTokenClient subject = new CsrfTokenClient(TEST_WIKI);
 
     @Test public void testRequestSuccess() throws Throwable {
         String expected = "b6f7bd58c013ab30735cb19ecc0aa08258122cba+\\";
@@ -66,13 +67,13 @@ public class CsrfTokenClientTest extends MockWebServerTest {
                                        @NonNull String expected) {
         verify(cb).success(ArgumentMatchers.eq(expected));
         //noinspection unchecked
-        verify(cb, never()).failure(ArgumentMatchers.any(Throwable.class));
+        verify(cb, never()).failure(any(Throwable.class));
     }
 
     private void assertCallbackFailure(@NonNull Callback cb,
                                        @NonNull Class<? extends Throwable> throwable) {
         //noinspection unchecked
-        verify(cb, never()).success(ArgumentMatchers.any(String.class));
+        verify(cb, never()).success(any(String.class));
         verify(cb).failure(ArgumentMatchers.isA(throwable));
     }
 
