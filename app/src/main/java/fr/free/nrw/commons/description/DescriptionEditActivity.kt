@@ -110,6 +110,10 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
     }
 
     override fun onPrimaryCaptionTextChange(isNotEmpty: Boolean) {}
+
+    /**
+     * Adds new language item to RecyclerView
+     */
     override fun addLanguage() {
         val uploadMediaDetail = UploadMediaDetail()
         uploadMediaDetail.isManuallyAdded = true //This was manually added by the user

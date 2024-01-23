@@ -577,6 +577,10 @@ public class UploadMediaDetailAdapter extends
 
     }
 
+    /**
+     * Hides the visibility of the "Add" button for all items in the RecyclerView except
+     * the last item in RecyclerView
+     */
     private void updateAddButtonVisibility() {
         int lastItemPosition = getItemCount() - 1;
         // Hide Add Button for all items

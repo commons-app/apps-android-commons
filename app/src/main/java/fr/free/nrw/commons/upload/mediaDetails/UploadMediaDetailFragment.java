@@ -710,6 +710,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         btnNext.setAlpha(isNotEmpty ? 1.0f : 0.5f);
     }
 
+    /**
+     * Adds new language item to RecyclerView
+     */
     @Override
     public void addLanguage() {
         UploadMediaDetail uploadMediaDetail = new UploadMediaDetail();
