@@ -76,8 +76,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public static final String LAST_ZOOM = "last_zoom_level_while_uploading";
     @BindView(R.id.tv_title)
     TextView tvTitle;
-    @BindView(R.id.ib_map)
-    AppCompatImageButton ibMap;
+    @BindView(R.id.location_image_view)
+    ImageView locationImageView;
+    @BindView(R.id.location_text_view)
+    TextView locationTextView;
+    @BindView(R.id.ll_location_status)
+    LinearLayout llLocationStatus;
     @BindView(R.id.ib_expand_collapse)
     AppCompatImageButton ibExpandCollapse;
     @BindView(R.id.ll_container_media_detail)
@@ -90,8 +94,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     AppCompatButton btnNext;
     @BindView(R.id.btn_previous)
     AppCompatButton btnPrevious;
-    @BindView(R.id.edit_image)
-    AppCompatButton editImage;
+    @BindView(R.id.ll_edit_image)
+    LinearLayout llEditImage;
     @BindView(R.id.tooltip)
     ImageView tooltip;
 
@@ -195,13 +199,15 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         // If the image EXIF data contains the location, show the map icon with a green tick
         if (inAppPictureLocation != null ||
                 (uploadableFile != null && uploadableFile.hasLocation())) {
-            Drawable mapTick = getResources().getDrawable(R.drawable.ic_map_tick_white_24dp);
-            ibMap.setImageDrawable(mapTick);
+            Drawable mapTick = getResources().getDrawable(R.drawable.ic_map_available_20dp);
+            locationImageView.setImageDrawable(mapTick);
+            locationTextView.setText(R.string.edit_location);
         } else {
             // Otherwise, show the map icon with a red question mark
             Drawable mapQuestionMark =
-                getResources().getDrawable(R.drawable.ic_map_question_white_24dp);
-            ibMap.setImageDrawable(mapQuestionMark);
+                getResources().getDrawable(R.drawable.ic_map_not_available_20dp);
+            locationImageView.setImageDrawable(mapQuestionMark);
+            locationTextView.setText(R.string.add_location);
         }
 
         //If this is the last media, we have nothing to copy, lets not show the button
@@ -269,15 +275,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
     }
 
-    @OnClick(R.id.btn_add_description)
-    public void onButtonAddDescriptionClicked() {
-        UploadMediaDetail uploadMediaDetail = new UploadMediaDetail();
-        uploadMediaDetail.setManuallyAdded(true);//This was manually added by the user
-        uploadMediaDetailAdapter.addDescription(uploadMediaDetail);
-        rvDescriptions.smoothScrollToPosition(uploadMediaDetailAdapter.getItemCount()-1);
-    }
-
-    @OnClick(R.id.edit_image)
+    @OnClick(R.id.ll_edit_image)
     public void onEditButtonClicked() {
         presenter.onEditButtonClicked(callback.getIndexInViewFlipper(this));
     }
@@ -619,8 +617,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         editableUploadItem.getGpsCoords().setZoomLevel(zoom);
 
         // Replace the map icon using the one with a green tick
-        Drawable mapTick = getResources().getDrawable(R.drawable.ic_map_tick_white_24dp);
-        ibMap.setImageDrawable(mapTick);
+        Drawable mapTick = getResources().getDrawable(R.drawable.ic_map_available_20dp);
+        locationImageView.setImageDrawable(mapTick);
+        locationTextView.setText(R.string.edit_location);
 
         Toast.makeText(getContext(), "Location Updated", Toast.LENGTH_LONG).show();
 
@@ -682,8 +681,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         presenter.onDetachView();
     }
 
-    @OnClick(R.id.rl_container_title)
-    public void onRlContainerTitleClicked() {
+    @OnClick(R.id.ll_container_title)
+    public void onLlContainerTitleClicked() {
         expandCollapseLlMediaDetail(!isExpanded);
     }
 
@@ -697,7 +696,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         ibExpandCollapse.setRotation(ibExpandCollapse.getRotation() + 180);
     }
 
-    @OnClick(R.id.ib_map) public void onIbMapClicked() {
+    @OnClick(R.id.ll_location_status) public void onIbMapClicked() {
         presenter.onMapIconClicked(callback.getIndexInViewFlipper(this));
     }
 
@@ -709,6 +708,17 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         btnNext.setEnabled(isNotEmpty);
         btnNext.setClickable(isNotEmpty);
         btnNext.setAlpha(isNotEmpty ? 1.0f : 0.5f);
+    }
+
+    /**
+     * Adds new language item to RecyclerView
+     */
+    @Override
+    public void addLanguage() {
+        UploadMediaDetail uploadMediaDetail = new UploadMediaDetail();
+        uploadMediaDetail.setManuallyAdded(true);//This was manually added by the user
+        uploadMediaDetailAdapter.addDescription(uploadMediaDetail);
+        rvDescriptions.smoothScrollToPosition(uploadMediaDetailAdapter.getItemCount()-1);
     }
 
     public interface UploadMediaDetailFragmentCallback extends Callback {
