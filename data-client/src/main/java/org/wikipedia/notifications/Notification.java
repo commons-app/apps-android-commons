@@ -48,6 +48,10 @@ public class Notification {
         return id;
     }
 
+    public void setId(final long id) {
+        this.id = id;
+    }
+
     public long key() {
         return id + wiki().hashCode();
     }
@@ -72,8 +76,16 @@ public class Notification {
         return contents;
     }
 
+    public void setContents(@Nullable final Contents contents) {
+        this.contents = contents;
+    }
+
     @NonNull public Date getTimestamp() {
         return timestamp != null ? timestamp.date() : new Date();
+    }
+
+    public void setTimestamp(@Nullable final Timestamp timestamp) {
+        this.timestamp = timestamp;
     }
 
     @NonNull String getUtcIso8601() {
@@ -127,6 +139,10 @@ public class Notification {
     public static class Timestamp {
         @SuppressWarnings("unused,NullableProblems") @Nullable private String utciso8601;
 
+        public void setUtciso8601(@Nullable final String utciso8601) {
+            this.utciso8601 = utciso8601;
+        }
+
         public Date date() {
             try {
                 return DateUtil.iso8601DateParse(utciso8601);
@@ -148,6 +164,10 @@ public class Notification {
             return StringUtils.defaultString(url);
         }
 
+        public void setUrl(@Nullable final String url) {
+            this.url = url;
+        }
+
         @NonNull public String getTooltip() {
             return StringUtils.defaultString(tooltip);
         }
@@ -165,6 +185,10 @@ public class Notification {
         @SuppressWarnings("unused,NullableProblems") @Nullable private JsonElement primary;
         @SuppressWarnings("unused,NullableProblems") @Nullable private List<Link> secondary;
         private Link primaryLink;
+
+        public void setPrimary(@Nullable final JsonElement primary) {
+            this.primary = primary;
+        }
 
         @Nullable public Link getPrimary() {
             if (primary == null) {
@@ -215,6 +239,10 @@ public class Notification {
             return StringUtils.defaultString(compactHeader);
         }
 
+        public void setCompactHeader(@Nullable final String compactHeader) {
+            this.compactHeader = compactHeader;
+        }
+
         @NonNull public String getBody() {
             return StringUtils.defaultString(body);
         }
@@ -225,6 +253,10 @@ public class Notification {
 
         @Nullable public Links getLinks() {
             return links;
+        }
+
+        public void setLinks(@Nullable final Links links) {
+            this.links = links;
         }
     }
 
