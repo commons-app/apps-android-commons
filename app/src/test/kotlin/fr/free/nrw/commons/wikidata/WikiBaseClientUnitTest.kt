@@ -20,7 +20,7 @@ class WikiBaseClientUnitTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        Mockito.`when`(csrfTokenClient!!.tokenBlocking)
+        Mockito.`when`(csrfTokenClient!!.getTokenBlocking())
             .thenReturn("test")
     }
 

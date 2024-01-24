@@ -27,7 +27,7 @@ class ThanksClient @Inject constructor(
             service.thank(
                 revisionId.toString(),                      // Rev
                 null,                                       // Log
-                csrfTokenClient.tokenBlocking,              // Token
+                csrfTokenClient.getTokenBlocking(),              // Token
                 CommonsApplication.getInstance().userAgent  // Source
             ).map {
                 mwThankPostResponse -> mwThankPostResponse.result?.success == 1

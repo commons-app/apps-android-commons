@@ -47,7 +47,7 @@ class ThanksClientTest {
      */
     @Test
     fun testThanks() {
-        `when`(csrfTokenClient.tokenBlocking).thenReturn("test")
+        `when`(csrfTokenClient.getTokenBlocking()).thenReturn("test")
         `when`(commonsApplication.userAgent).thenReturn("test")
         thanksClient.thank(1L)
         verify(service).thank(ArgumentMatchers.anyString(), ArgumentMatchers.any(), eq("test"), eq("test"))

@@ -106,7 +106,7 @@ public class NetworkingModule {
     @Provides
     @Singleton
     public CsrfTokenClient provideCommonsCsrfTokenClient(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
-        return new CsrfTokenClient(commonsWikiSite, commonsWikiSite);
+        return new CsrfTokenClient(commonsWikiSite);
     }
 
     @Provides

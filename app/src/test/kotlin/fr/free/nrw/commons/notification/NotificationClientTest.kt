@@ -102,7 +102,7 @@ class NotificationClientTest {
      */
     @Test
     fun markNotificationAsReadTest() {
-        Mockito.`when`(csrfTokenClient.tokenBlocking).thenReturn("test")
+        Mockito.`when`(csrfTokenClient.getTokenBlocking()).thenReturn("test")
         Mockito.`when`(service.markRead(anyString(), anyString(), anyString()))
             .thenReturn(Observable.just(mQueryResponse))
         Mockito.`when`(mQueryResponse.success()).thenReturn(true)
