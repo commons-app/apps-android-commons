@@ -1,4 +1,4 @@
-package org.wikipedia.csrf;
+package fr.free.nrw.commons.auth.csrf;
 
 import android.text.TextUtils;
 

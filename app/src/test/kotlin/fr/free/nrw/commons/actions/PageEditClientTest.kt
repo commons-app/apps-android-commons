@@ -9,8 +9,7 @@ import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
-import org.wikipedia.csrf.CsrfTokenClient
-import org.wikipedia.dataclient.Service
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import org.wikipedia.edit.Edit
 
 class PageEditClientTest {

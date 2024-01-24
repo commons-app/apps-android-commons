@@ -3,7 +3,7 @@ package fr.free.nrw.commons.actions
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_CSRF
 import io.reactivex.Observable
-import org.wikipedia.csrf.CsrfTokenClient
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
