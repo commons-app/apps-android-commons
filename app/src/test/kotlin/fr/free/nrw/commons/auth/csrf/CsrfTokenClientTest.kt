@@ -2,6 +2,7 @@ package fr.free.nrw.commons.auth.csrf
 
 import com.google.gson.stream.MalformedJsonException
 import fr.free.nrw.commons.MockWebServerTest
+import fr.free.nrw.commons.auth.SessionManager
 import org.junit.Test
 import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.eq
@@ -16,8 +17,9 @@ import org.wikipedia.dataclient.okhttp.HttpStatusException
 
 class CsrfTokenClientTest : MockWebServerTest() {
     private val wikiSite = WikiSite("test.wikipedia.org")
-    private val subject = CsrfTokenClient(wikiSite)
     private val cb = mock(CsrfTokenClient.Callback::class.java)
+    private val sessionManager = mock(SessionManager::class.java)
+    private val subject = CsrfTokenClient(wikiSite, sessionManager)
 
     @Test
     @Throws(Throwable::class)
