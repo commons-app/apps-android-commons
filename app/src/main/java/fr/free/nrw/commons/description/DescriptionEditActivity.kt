@@ -73,7 +73,6 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
         savedLanguageValue = bundle.getString(Prefs.DESCRIPTION_LANGUAGE)!!
         initRecyclerView(descriptionAndCaptions)
 
-        binding.btnAddDescription.setOnClickListener(::onButtonAddDescriptionClicked)
         binding.btnEditSubmit.setOnClickListener(::onSubmitButtonClicked)
         binding.toolbarBackButton.setOnClickListener(::onBackButtonClicked)
     }
@@ -112,15 +111,18 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
 
     override fun onPrimaryCaptionTextChange(isNotEmpty: Boolean) {}
 
-    private fun onBackButtonClicked(view: View) {
-        onBackPressed()
-    }
-
-    private fun onButtonAddDescriptionClicked(view: View) {
+    /**
+     * Adds new language item to RecyclerView
+     */
+    override fun addLanguage() {
         val uploadMediaDetail = UploadMediaDetail()
         uploadMediaDetail.isManuallyAdded = true //This was manually added by the user
         uploadMediaDetailAdapter.addDescription(uploadMediaDetail)
         rvDescriptions!!.smoothScrollToPosition(uploadMediaDetailAdapter.itemCount - 1)
+    }
+
+    private fun onBackButtonClicked(view: View) {
+        onBackPressed()
     }
 
     private fun onSubmitButtonClicked(view: View) {

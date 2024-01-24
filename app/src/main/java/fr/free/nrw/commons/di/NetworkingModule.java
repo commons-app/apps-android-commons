@@ -19,6 +19,7 @@ import fr.free.nrw.commons.media.PageMediaInterface;
 import fr.free.nrw.commons.media.WikidataMediaInterface;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.mwapi.UserInterface;
+import fr.free.nrw.commons.notification.NotificationInterface;
 import fr.free.nrw.commons.review.ReviewInterface;
 import fr.free.nrw.commons.upload.UploadInterface;
 import fr.free.nrw.commons.upload.WikiBaseInterface;
@@ -34,7 +35,7 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
-import org.wikipedia.csrf.CsrfTokenClient;
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient;
 import org.wikipedia.dataclient.Service;
 import org.wikipedia.dataclient.ServiceFactory;
 import org.wikipedia.dataclient.WikiSite;
@@ -105,7 +106,7 @@ public class NetworkingModule {
     @Provides
     @Singleton
     public CsrfTokenClient provideCommonsCsrfTokenClient(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
-        return new CsrfTokenClient(commonsWikiSite, commonsWikiSite);
+        return new CsrfTokenClient(commonsWikiSite);
     }
 
     @Provides
@@ -263,6 +264,14 @@ public class NetworkingModule {
         @Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
         return ServiceFactory
                .get(commonsWikiSite, BuildConfig.COMMONS_URL, ThanksInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    public NotificationInterface provideNotificationInterface(
+        @Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
+        return ServiceFactory
+               .get(commonsWikiSite, BuildConfig.COMMONS_URL, NotificationInterface.class);
     }
 
     @Provides

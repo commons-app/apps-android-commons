@@ -6,7 +6,7 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
-import org.wikipedia.csrf.CsrfTokenClient
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 
 class WikiBaseClientUnitTest {
 
@@ -20,7 +20,7 @@ class WikiBaseClientUnitTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        Mockito.`when`(csrfTokenClient!!.tokenBlocking)
+        Mockito.`when`(csrfTokenClient!!.getTokenBlocking())
             .thenReturn("test")
     }
 

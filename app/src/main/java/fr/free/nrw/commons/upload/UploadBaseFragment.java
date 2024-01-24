@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload;
 
 import android.os.Bundle;
 
+import android.os.Parcelable;
 import androidx.annotation.Nullable;
 
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
@@ -9,9 +10,10 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 /**
  * The base fragment of the fragments in upload
  */
-public class UploadBaseFragment extends CommonsDaggerSupportFragment {
+public class UploadBaseFragment extends CommonsDaggerSupportFragment  {
 
     public Callback callback;
+    public static final String CALLBACK = "callback";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

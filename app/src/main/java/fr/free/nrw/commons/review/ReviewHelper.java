@@ -109,7 +109,7 @@ public class ReviewHelper {
      * @param filename
      * @return
      */
-    Observable<MwQueryPage.Revision> getFirstRevisionOfFile(String filename) {
+    public Observable<MwQueryPage.Revision> getFirstRevisionOfFile(String filename) {
         return reviewInterface.getFirstRevisionOfFile(filename)
                 .map(response -> response.query().firstPage().revisions().get(0));
     }

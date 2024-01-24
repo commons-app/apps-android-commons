@@ -9,7 +9,7 @@ import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
-import org.wikipedia.csrf.CsrfTokenClient;
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient;
 import org.wikipedia.dataclient.mwapi.MwPostResponse;
 import timber.log.Timber;
 
