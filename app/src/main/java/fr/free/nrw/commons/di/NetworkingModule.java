@@ -35,7 +35,7 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
-import org.wikipedia.csrf.CsrfTokenClient;
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient;
 import org.wikipedia.dataclient.Service;
 import org.wikipedia.dataclient.ServiceFactory;
 import org.wikipedia.dataclient.WikiSite;
@@ -106,7 +106,7 @@ public class NetworkingModule {
     @Provides
     @Singleton
     public CsrfTokenClient provideCommonsCsrfTokenClient(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
-        return new CsrfTokenClient(commonsWikiSite, commonsWikiSite);
+        return new CsrfTokenClient(commonsWikiSite);
     }
 
     @Provides

@@ -18,6 +18,8 @@ import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -54,6 +56,7 @@ import fr.free.nrw.commons.mwapi.UserClient;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.upload.UploadBaseFragment.Callback;
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
 import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
@@ -170,6 +173,19 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_upload);
+
+        /*
+         If Configuration of device is changed then get the new fragments
+         created by the system and populate the fragments ArrayList
+         */
+        if (savedInstanceState != null) {
+            List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
+            fragments = new ArrayList<>();
+            for (Fragment fragment : fragmentList) {
+                fragments.add((UploadBaseFragment) fragment);
+            }
+        }
+
 
         ButterKnife.bind(this);
         compositeDisposable = new CompositeDisposable();
@@ -459,7 +475,12 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             tvTopCardTitle.setText(getResources()
                 .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
 
-            fragments = new ArrayList<>();
+
+            if(fragments==null){
+                fragments = new ArrayList<>();
+            }
+
+
             /* Suggest users to turn battery optimisation off when uploading more than a few files.
                That's because we have noticed that many-files uploads have
                a much higher probability of failing than uploads with less files.
@@ -521,7 +542,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                 }
                 uploadMediaDetailFragment.setImageTobeUploaded(uploadableFile, place, currLocation);
                 locationManager.unregisterLocationManager();
-                uploadMediaDetailFragment.setCallback(new UploadMediaDetailFragmentCallback() {
+
+                UploadMediaDetailFragmentCallback uploadMediaDetailFragmentCallback = new UploadMediaDetailFragmentCallback() {
                     @Override
                     public void deletePictureAtIndex(int index) {
                         presenter.deletePictureAtIndex(index);
@@ -573,33 +595,99 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                     public boolean isWLMUpload() {
                         return place!=null && place.isMonument();
                     }
-                });
-                fragments.add(uploadMediaDetailFragment);
+                };
+
+                if(fragments.size()==0){
+                    uploadMediaDetailFragment.setCallback(uploadMediaDetailFragmentCallback);
+                    fragments.add(uploadMediaDetailFragment);
+                }else{
+                    UploadMediaDetailFragment fragment = (UploadMediaDetailFragment) fragments.get(0);
+                     fragment.setCallback(uploadMediaDetailFragmentCallback);
+                }
+
             }
 
-            uploadCategoriesFragment = new UploadCategoriesFragment();
-            if (place != null) {
-                Bundle categoryBundle = new Bundle();
-                categoryBundle.putString(SELECTED_NEARBY_PLACE_CATEGORY, place.getCategory());
-                uploadCategoriesFragment.setArguments(categoryBundle);
+            //If fragments are not created, create them and add them to the fragments ArrayList
+            if(!(fragments.size()>1)){
+                uploadCategoriesFragment = new UploadCategoriesFragment();
+                if (place != null) {
+                    Bundle categoryBundle = new Bundle();
+                    categoryBundle.putString(SELECTED_NEARBY_PLACE_CATEGORY, place.getCategory());
+                    uploadCategoriesFragment.setArguments(categoryBundle);
+                }
+
+                uploadCategoriesFragment.setCallback(this);
+
+                depictsFragment = new DepictsFragment();
+                Bundle placeBundle = new Bundle();
+                placeBundle.putParcelable(SELECTED_NEARBY_PLACE, place);
+                depictsFragment.setArguments(placeBundle);
+                depictsFragment.setCallback(this);
+
+                mediaLicenseFragment = new MediaLicenseFragment();
+                mediaLicenseFragment.setCallback(this);
+
+                fragments.add(depictsFragment);
+                fragments.add(uploadCategoriesFragment);
+                fragments.add(mediaLicenseFragment);
+
+            }else{
+                for(int i=1;i<fragments.size();i++){
+                    fragments.get(i).setCallback(new Callback() {
+                        @Override
+                        public void onNextButtonClicked(int index) {
+                            if (index < fragments.size() - 1) {
+                                vpUpload.setCurrentItem(index + 1, false);
+                                fragments.get(index + 1).onBecameVisible();
+                                ((LinearLayoutManager) rvThumbnails.getLayoutManager())
+                                    .scrollToPositionWithOffset((index > 0) ? index-1 : 0, 0);
+                            } else {
+                                presenter.handleSubmit();
+                            }
+
+                        }
+                        @Override
+                        public void onPreviousButtonClicked(int index) {
+                            if (index != 0) {
+                                vpUpload.setCurrentItem(index - 1, true);
+                                fragments.get(index - 1).onBecameVisible();
+                                ((LinearLayoutManager) rvThumbnails.getLayoutManager())
+                                    .scrollToPositionWithOffset((index > 3) ? index-2 : 0, 0);
+                            }
+                        }
+                        @Override
+                        public void showProgress(boolean shouldShow) {
+                            if (shouldShow) {
+                                if (!progressDialog.isShowing()) {
+                                    progressDialog.show();
+                                }
+                            } else {
+                                if (progressDialog != null && !isFinishing()) {
+                                    progressDialog.dismiss();
+                                }
+                            }
+                        }
+                        @Override
+                        public int getIndexInViewFlipper(UploadBaseFragment fragment) {
+                            return fragments.indexOf(fragment);
+                        }
+
+                        @Override
+                        public int getTotalNumberOfSteps() {
+                            return fragments.size();
+                        }
+
+                        @Override
+                        public boolean isWLMUpload() {
+                            return place!=null && place.isMonument();
+                        }
+                    });
+                }
             }
-            uploadCategoriesFragment.setCallback(this);
-
-            depictsFragment = new DepictsFragment();
-            Bundle placeBundle = new Bundle();
-            placeBundle.putParcelable(SELECTED_NEARBY_PLACE, place);
-            depictsFragment.setArguments(placeBundle);
-            depictsFragment.setCallback(this);
-
-            mediaLicenseFragment = new MediaLicenseFragment();
-            mediaLicenseFragment.setCallback(this);
-
-            fragments.add(depictsFragment);
-            fragments.add(uploadCategoriesFragment);
-            fragments.add(mediaLicenseFragment);
 
             uploadImagesAdapter.setFragments(fragments);
             vpUpload.setOffscreenPageLimit(fragments.size());
+
         }
     }
 
@@ -712,6 +800,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
      * The adapter used to show image upload intermediate fragments
      */
 
+
     private class UploadImageAdapter extends FragmentStatePagerAdapter {
         List<UploadBaseFragment> fragments;
 
@@ -754,12 +843,15 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         super.onDestroy();
         presenter.onDetachView();
         compositeDisposable.clear();
+        fragments = null;
+        uploadImagesAdapter = null;
         if (mediaLicenseFragment != null) {
             mediaLicenseFragment.setCallback(null);
         }
         if (uploadCategoriesFragment != null) {
             uploadCategoriesFragment.setCallback(null);
         }
+
     }
 
     /**

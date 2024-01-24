@@ -5,7 +5,7 @@ import fr.free.nrw.commons.notification.models.Notification
 import fr.free.nrw.commons.notification.models.NotificationType
 import io.reactivex.Observable
 import io.reactivex.Single
-import org.wikipedia.csrf.CsrfTokenClient
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import org.wikipedia.util.DateUtil
 import javax.inject.Inject
@@ -34,7 +34,7 @@ class NotificationClient @Inject constructor(
     fun markNotificationAsRead(notificationId: String?): Observable<Boolean> {
         return try {
             service.markRead(
-                token = csrfTokenClient.tokenBlocking,
+                token = csrfTokenClient.getTokenBlocking(),
                 readList = notificationId,
                 unreadList = ""
             ).map(MwQueryResponse::success)

@@ -60,6 +60,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
 import timber.log.Timber;
+import android.os.Parcelable;
 
 public class UploadMediaDetailFragment extends UploadBaseFragment implements
     UploadMediaDetailsContract.View, UploadMediaDetailAdapter.EventListener {
@@ -74,6 +75,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     public static final String LAST_LOCATION = "last_location_while_uploading";
     public static final String LAST_ZOOM = "last_zoom_level_while_uploading";
+
+
+    public static final String UPLOADABLE_FILE = "uploadable_file";
+
+    public static final String UPLOAD_MEDIA_DETAILS = "upload_media_detail_adapter";
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.location_image_view)
@@ -154,7 +160,15 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        if(savedInstanceState!=null && uploadableFile==null) {
+            uploadableFile = savedInstanceState.getParcelable(UPLOADABLE_FILE);
+        }
+
     }
+
+
 
     public void setImageTobeUploaded(UploadableFile uploadableFile, Place place,
         LatLng inAppPictureLocation) {
@@ -168,15 +182,25 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
         @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_upload_media_detail_fragment, container, false);
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+
         if (callback != null) {
             init();
         }
+
+        if(savedInstanceState!=null){
+                if(uploadMediaDetailAdapter.getItems().size()==0){
+                    uploadMediaDetailAdapter.setItems(savedInstanceState.getParcelableArrayList(UPLOAD_MEDIA_DETAILS));
+                    presenter.setUploadMediaDetails(uploadMediaDetailAdapter.getItems(), callback.getIndexInViewFlipper(this));
+                }
+        }
+
     }
 
     private void init() {
@@ -734,5 +758,19 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         presenter.copyTitleAndDescriptionToSubsequentMedia(callback.getIndexInViewFlipper(this));
         Toast.makeText(getContext(), getResources().getString(R.string.copied_successfully), Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onSaveInstanceState(final Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        if(uploadableFile!=null){
+            outState.putParcelable(UPLOADABLE_FILE,uploadableFile);
+        }
+        if(uploadMediaDetailAdapter!=null){
+            outState.putParcelableArrayList(UPLOAD_MEDIA_DETAILS,
+                (ArrayList<? extends Parcelable>) uploadMediaDetailAdapter.getItems());
+        }
+    }
+
 
 }

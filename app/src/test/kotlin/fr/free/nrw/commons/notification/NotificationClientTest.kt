@@ -17,7 +17,7 @@ import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import org.wikipedia.csrf.CsrfTokenClient
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import org.wikipedia.dataclient.mwapi.MwQueryResult
 import org.wikipedia.json.GsonUtil
@@ -102,7 +102,7 @@ class NotificationClientTest {
      */
     @Test
     fun markNotificationAsReadTest() {
-        Mockito.`when`(csrfTokenClient.tokenBlocking).thenReturn("test")
+        Mockito.`when`(csrfTokenClient.getTokenBlocking()).thenReturn("test")
         Mockito.`when`(service.markRead(anyString(), anyString(), anyString()))
             .thenReturn(Observable.just(mQueryResponse))
         Mockito.`when`(mQueryResponse.success()).thenReturn(true)

@@ -194,10 +194,6 @@ public interface Service {
 
     @Headers("Cache-Control: no-cache")
     @GET(MW_API_PREFIX + "action=query&meta=tokens&type=csrf")
-    @NonNull Call<MwQueryResponse> getCsrfTokenCall();
-
-    @Headers("Cache-Control: no-cache")
-    @GET(MW_API_PREFIX + "action=query&meta=tokens&type=csrf")
     @NonNull Observable<MwQueryResponse> getCsrfToken();
 
     @SuppressWarnings("checkstyle:parameternumber")
