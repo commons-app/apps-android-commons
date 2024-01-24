@@ -82,6 +82,17 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     }
 
     /**
+     * Sets the Upload Media Details for the corresponding upload item
+     *
+     * @param uploadMediaDetails
+     * @param uploadItemIndex
+     */
+    @Override
+    public void setUploadMediaDetails(List<UploadMediaDetail> uploadMediaDetails, int uploadItemIndex) {
+        repository.getUploads().get(uploadItemIndex).setMediaDetails(uploadMediaDetails);
+    }
+
+    /**
      * Receives the corresponding uploadable file, processes it and return the view with and uplaod item
      *  @param uploadableFile
      * @param place
