@@ -6,20 +6,15 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.gson.annotations.SerializedName;
-
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.dataclient.Service;
 import org.wikipedia.dataclient.ServiceFactory;
 import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.dataclient.mwapi.ListUserResponse;
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
-import org.wikipedia.dataclient.mwapi.MwServiceError;
 import org.wikipedia.util.log.L;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -40,13 +35,6 @@ public class LoginClient {
      * The value will be fetched when the user clicks Login Button in the LoginActivity
      */
     @NonNull private String userLanguage;
-    
-    public interface LoginCallback {
-        void success(@NonNull LoginResult result);
-        void twoFactorPrompt(@NonNull Throwable caught, @Nullable String token);
-        void passwordResetPrompt(@Nullable String token);
-        void error(@NonNull Throwable caught);
-    }
 
     public void request(@NonNull final WikiSite wiki, @NonNull final String userName,
                         @NonNull final String password, @NonNull final LoginCallback cb) {
@@ -188,72 +176,5 @@ public class LoginClient {
         }
         loginCall.cancel();
         loginCall = null;
-    }
-
-    public static final class LoginResponse {
-        @SuppressWarnings("unused") @SerializedName("error") @Nullable
-        private MwServiceError error;
-
-        @SuppressWarnings("unused") @SerializedName("clientlogin") @Nullable
-        private ClientLogin clientLogin;
-
-        @Nullable public MwServiceError getError() {
-            return error;
-        }
-
-        @Nullable LoginResult toLoginResult(@NonNull WikiSite site, @NonNull String password) {
-            return clientLogin != null ? clientLogin.toLoginResult(site, password) : null;
-        }
-
-        private static class ClientLogin {
-            @SuppressWarnings("unused,NullableProblems") @NonNull private String status;
-            @SuppressWarnings("unused") @Nullable private List<Request> requests;
-            @SuppressWarnings("unused") @Nullable private String message;
-            @SuppressWarnings("unused") @SerializedName("username") @Nullable private String userName;
-
-            LoginResult toLoginResult(@NonNull WikiSite site, @NonNull String password) {
-                String userMessage = message;
-                if ("UI".equals(status)) {
-                    if (requests != null) {
-                        for (Request req : requests) {
-                            if ("MediaWiki\\Extension\\OATHAuth\\Auth\\TOTPAuthenticationRequest".equals(req.id())) {
-                                return new LoginOAuthResult(site, status, userName, password, message);
-                            } else if ("MediaWiki\\Auth\\PasswordAuthenticationRequest".equals(req.id())) {
-                                return new LoginResetPasswordResult(site, status, userName, password, message);
-                            }
-                        }
-                    }
-                } else if (!"PASS".equals(status) && !"FAIL".equals(status)) {
-                    //TODO: String resource -- Looks like needed for others in this class too
-                    userMessage = "An unknown error occurred.";
-                }
-                return new LoginResult(site, status, userName, password, userMessage);
-            }
-        }
-
-        private static class Request {
-            @SuppressWarnings("unused") @Nullable private String id;
-            //@SuppressWarnings("unused") @Nullable private JsonObject metadata;
-            @SuppressWarnings("unused") @Nullable private String required;
-            @SuppressWarnings("unused") @Nullable private String provider;
-            @SuppressWarnings("unused") @Nullable private String account;
-            @SuppressWarnings("unused") @Nullable private Map<String, RequestField> fields;
-
-            @Nullable String id() {
-                return id;
-            }
-        }
-
-        private static class RequestField {
-            @SuppressWarnings("unused") @Nullable private String type;
-            @SuppressWarnings("unused") @Nullable private String label;
-            @SuppressWarnings("unused") @Nullable private String help;
-        }
-    }
-
-    public static class LoginFailedException extends Throwable {
-        public LoginFailedException(String message) {
-            super(message);
-        }
     }
 }

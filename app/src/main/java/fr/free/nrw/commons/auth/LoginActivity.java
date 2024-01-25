@@ -31,11 +31,10 @@ import fr.free.nrw.commons.auth.login.LoginResult;
 import fr.free.nrw.commons.databinding.ActivityLoginBinding;
 import fr.free.nrw.commons.utils.ActivityUtils;
 import java.util.Locale;
-import org.wikipedia.AppAdapter;
 import org.wikipedia.dataclient.ServiceFactory;
 import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
-import fr.free.nrw.commons.auth.login.LoginClient.LoginCallback;
+import fr.free.nrw.commons.auth.login.LoginCallback;
 
 import javax.inject.Inject;
 import javax.inject.Named;
