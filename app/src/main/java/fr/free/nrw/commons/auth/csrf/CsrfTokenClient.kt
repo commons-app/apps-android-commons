@@ -129,7 +129,7 @@ class CsrfTokenClient(
     ) = LoginClient()
         .request(csrfWikiSite, username, password, object : LoginCallback {
         override fun success(loginResult: LoginResult) {
-            if (loginResult.pass()) {
+            if (loginResult.pass) {
                 sessionManager.updateAccount(loginResult)
                 retryCallback()
             } else {

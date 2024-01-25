@@ -1,6 +1,9 @@
 package fr.free.nrw.commons.auth.login
 
 import com.google.gson.annotations.SerializedName
+import fr.free.nrw.commons.auth.login.LoginResult.OAuthResult
+import fr.free.nrw.commons.auth.login.LoginResult.ResetPasswordResult
+import fr.free.nrw.commons.auth.login.LoginResult.Result
 import org.wikipedia.dataclient.WikiSite
 import org.wikipedia.dataclient.mwapi.MwServiceError
 
@@ -29,17 +32,10 @@ internal class ClientLogin {
         if ("UI" == status) {
             if (requests != null) {
                 for (req in requests) {
-                    if ("MediaWiki\\Extension\\OATHAuth\\Auth\\TOTPAuthenticationRequest" ==
-                        req.id()
-                    ) {
-                        return LoginOAuthResult(site, status, userName, password, message)
-                    } else if ("MediaWiki\\Auth\\PasswordAuthenticationRequest" ==
-                        req.id()
-                    ) {
-                        return LoginResetPasswordResult(
-                            site, status, userName, password,
-                            message
-                        )
+                    if ("MediaWiki\\Extension\\OATHAuth\\Auth\\TOTPAuthenticationRequest" == req.id()) {
+                        return OAuthResult(site, status, userName, password, message)
+                    } else if ("MediaWiki\\Auth\\PasswordAuthenticationRequest" == req.id()) {
+                        return ResetPasswordResult(site, status, userName, password, message)
                     }
                 }
             }
@@ -47,7 +43,7 @@ internal class ClientLogin {
             //TODO: String resource -- Looks like needed for others in this class too
             userMessage = "An unknown error occurred."
         }
-        return LoginResult(site, status ?: "", userName, password, userMessage)
+        return Result(site, status ?: "", userName, password, userMessage)
     }
 }
 

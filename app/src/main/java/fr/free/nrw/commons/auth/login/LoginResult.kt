@@ -2,7 +2,7 @@ package fr.free.nrw.commons.auth.login
 
 import org.wikipedia.dataclient.WikiSite
 
-open class LoginResult(
+sealed class LoginResult(
     val site: WikiSite,
     val status: String,
     val userName: String?,
@@ -11,8 +11,29 @@ open class LoginResult(
 ) {
     var userId = 0
     var groups = emptySet<String>()
+    val pass: Boolean get() = "PASS" == status
 
-    fun pass(): Boolean = "PASS" == status
+    class Result(
+        site: WikiSite,
+        status: String,
+        userName: String?,
+        password: String?,
+        message: String?
+    ): LoginResult(site, status, userName, password, message)
 
-    fun fail(): Boolean = "FAIL" == status
+    class OAuthResult(
+        site: WikiSite,
+        status: String,
+        userName: String?,
+        password: String?,
+        message: String?
+    ) : LoginResult(site, status, userName, password, message)
+
+    class ResetPasswordResult(
+        site: WikiSite,
+        status: String,
+        userName: String?,
+        password: String?,
+        message: String?
+    ) : LoginResult(site, status, userName, password, message)
 }
