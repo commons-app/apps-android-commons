@@ -12,7 +12,6 @@ import org.wikipedia.dataclient.ServiceFactory;
 import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.dataclient.mwapi.ListUserResponse;
 import org.wikipedia.dataclient.mwapi.MwQueryResponse;
-import org.wikipedia.util.log.L;
 
 import java.io.IOException;
 
@@ -21,6 +20,7 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import timber.log.Timber;
 
 /**
  * Responsible for making login related requests to the server.
@@ -34,7 +34,7 @@ public class LoginClient {
      * For example, if user's device language is English it will hold En
      * The value will be fetched when the user clicks Login Button in the LoginActivity
      */
-    @NonNull private String userLanguage;
+    @NonNull private String userLanguage = "En";
 
     public void request(@NonNull final WikiSite wiki, @NonNull final String userName,
                         @NonNull final String password, @NonNull final LoginCallback cb) {
@@ -42,14 +42,14 @@ public class LoginClient {
 
         tokenCall = ServiceFactory.get(wiki, LoginInterface.class).getLoginToken();
         tokenCall.enqueue(new Callback<MwQueryResponse>() {
-            @Override public void onResponse(@NonNull Call<MwQueryResponse> call,
-                                             @NonNull Response<MwQueryResponse> response) {
+            @Override public void onResponse(@NonNull final Call<MwQueryResponse> call,
+                                             @NonNull final Response<MwQueryResponse> response) {
                 login(wiki, userName, password, null, null, response.body().query().loginToken(),
                     userLanguage, cb);
             }
 
             @Override
-            public void onFailure(@NonNull Call<MwQueryResponse> call, @NonNull Throwable caught) {
+            public void onFailure(@NonNull final Call<MwQueryResponse> call, @NonNull final Throwable caught) {
                 if (call.isCanceled()) {
                     return;
                 }
@@ -68,14 +68,14 @@ public class LoginClient {
                     userLanguage, true);
         loginCall.enqueue(new Callback<LoginResponse>() {
             @Override
-            public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
-                LoginResponse loginResponse = response.body();
-                LoginResult loginResult = loginResponse.toLoginResult(wiki, password);
+            public void onResponse(@NonNull final Call<LoginResponse> call, @NonNull final Response<LoginResponse> response) {
+                final LoginResponse loginResponse = response.body();
+                final LoginResult loginResult = loginResponse.toLoginResult(wiki, password);
                 if (loginResult != null) {
                     if (loginResult.pass() && !TextUtils.isEmpty(loginResult.getUserName())) {
                         // The server could do some transformations on user names, e.g. on some
                         // wikis is uppercases the first letter.
-                        String actualUserName = loginResult.getUserName();
+                        final String actualUserName = loginResult.getUserName();
                         getExtendedInfo(wiki, actualUserName, loginResult, cb);
                     } else if ("UI".equals(loginResult.getStatus())) {
                         if (loginResult instanceof LoginOAuthResult) {
@@ -94,7 +94,7 @@ public class LoginClient {
             }
 
             @Override
-            public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull final Call<LoginResponse> call, @NonNull final Throwable t) {
                 if (call.isCanceled()) {
                     return;
                 }
@@ -105,22 +105,22 @@ public class LoginClient {
 
     public void loginBlocking(@NonNull final WikiSite wiki, @NonNull final String userName,
                               @NonNull final String password, @Nullable final String twoFactorCode) throws Throwable {
-        Response<MwQueryResponse> tokenResponse = ServiceFactory.get(wiki, LoginInterface.class).getLoginToken().execute();
+        final Response<MwQueryResponse> tokenResponse = ServiceFactory.get(wiki, LoginInterface.class).getLoginToken().execute();
         if (tokenResponse.body() == null || TextUtils.isEmpty(tokenResponse.body().query().loginToken())) {
             throw new IOException("Unexpected response when getting login token.");
         }
-        String loginToken = tokenResponse.body().query().loginToken();
+        final String loginToken = tokenResponse.body().query().loginToken();
 
-        Call<LoginResponse> tempLoginCall = StringUtils.defaultIfEmpty(twoFactorCode, "").isEmpty()
+        final Call<LoginResponse> tempLoginCall = StringUtils.defaultIfEmpty(twoFactorCode, "").isEmpty()
                 ? ServiceFactory.get(wiki, LoginInterface.class).postLogIn(userName, password, loginToken, userLanguage, Service.WIKIPEDIA_URL)
                 : ServiceFactory.get(wiki, LoginInterface.class).postLogIn(userName, password, null, twoFactorCode, loginToken,
                     userLanguage, true);
-        Response<LoginResponse> response = tempLoginCall.execute();
-        LoginResponse loginResponse = response.body();
+        final Response<LoginResponse> response = tempLoginCall.execute();
+        final LoginResponse loginResponse = response.body();
         if (loginResponse == null) {
             throw new IOException("Unexpected response when logging in.");
         }
-        LoginResult loginResult = loginResponse.toLoginResult(wiki, password);
+        final LoginResult loginResult = loginResponse.toLoginResult(wiki, password);
         if (loginResult == null) {
             throw new IOException("Unexpected response when logging in.");
         }
@@ -130,29 +130,29 @@ public class LoginClient {
                 // TODO: Find a better way to boil up the warning about 2FA
                 throw new LoginFailedException(loginResult.getMessage());
 
-            } else {
-                throw new LoginFailedException(loginResult.getMessage());
             }
-        } else if (!loginResult.pass() || TextUtils.isEmpty(loginResult.getUserName())) {
+            throw new LoginFailedException(loginResult.getMessage());
+        }
+        if (!loginResult.pass() || TextUtils.isEmpty(loginResult.getUserName())) {
             throw new LoginFailedException(loginResult.getMessage());
         }
     }
 
     @SuppressLint("CheckResult")
-    private void getExtendedInfo(@NonNull final WikiSite wiki, @NonNull String userName,
+    private void getExtendedInfo(@NonNull final WikiSite wiki, @NonNull final String userName,
                                  @NonNull final LoginResult loginResult, @NonNull final LoginCallback cb) {
         ServiceFactory.get(wiki, LoginInterface.class).getUserInfo(userName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
-                    ListUserResponse user = response.query().getUserResponse(userName);
-                    int id = response.query().userInfo().id();
+                    final ListUserResponse user = response.query().getUserResponse(userName);
+                    final int id = response.query().userInfo().id();
                     loginResult.setUserId(id);
                     loginResult.setGroups(user.getGroups());
                     cb.success(loginResult);
-                    L.v("Found user ID " + id + " for " + wiki.subdomain());
+                    Timber.v("Found user ID " + id + " for " + wiki.subdomain());
                 }, caught -> {
-                    L.e("Login succeeded but getting group information failed. " + caught);
+                    Timber.e(caught, "Login succeeded but getting group information failed. ");
                     cb.error(caught);
                 });
     }
