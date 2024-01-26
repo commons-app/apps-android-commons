@@ -167,6 +167,9 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
      */
     private boolean showPermissionsDialog = true;
 
+    /**
+     * Whether framgments have been saved.
+     */
     private boolean isFragmentsSaved = false;
 
     @SuppressLint("CheckResult")
