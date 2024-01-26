@@ -98,7 +98,7 @@ public class LocationPermissionsHelper {
                 activity.getString(R.string.cancel),
                 () -> openLocationSettings(activity),
                 () -> callback.onLocationPermissionDenied(activity.getString(
-                    R.string.in_app_camera_location_unavailable)));
+                    R.string.ask_to_turn_location_on)));
     }
 
     /**

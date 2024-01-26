@@ -491,7 +491,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             setProgressBarVisibility(true);
         }
         else {
-            locationPermissionsHelper.showLocationOffDialog(getActivity(), R.string.explore_map_needs_location);
+            locationPermissionsHelper.showLocationOffDialog(getActivity(), R.string.ask_to_turn_location_on_text);
         }
         presenter.onMapReady(exploreMapController);
         registerUnregisterLocationListener(false);

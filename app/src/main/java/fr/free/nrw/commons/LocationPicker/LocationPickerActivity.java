@@ -4,12 +4,14 @@ import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.
 import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM;
 import static fr.free.nrw.commons.utils.MapUtils.ZOOM_LEVEL;
 
+import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Html;
@@ -28,6 +30,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
@@ -125,6 +128,7 @@ public class LocationPickerActivity extends BaseActivity implements
 
     @Inject
     LocationServiceManager locationManager;
+    LocationPermissionsHelper locationPermissionsHelper;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -376,7 +380,7 @@ public class LocationPickerActivity extends BaseActivity implements
             R.string.ask_to_turn_location_on,
             R.string.upload_map_location_access
         );
-        LocationPermissionsHelper locationPermissionsHelper = new LocationPermissionsHelper(
+        locationPermissionsHelper = new LocationPermissionsHelper(
             this, locationManager, this);
         locationPermissionsHelper.handleLocationPermissions(locationAccessDialog,
             locationOffDialog);
@@ -409,22 +413,39 @@ public class LocationPickerActivity extends BaseActivity implements
 
     @Override
     public void onLocationPermissionDenied(String toastMessage) {
-        //do nothing
         Toast.makeText(getBaseContext(),toastMessage,Toast.LENGTH_LONG).show();
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(this, permission.ACCESS_FINE_LOCATION)) {
+            if(!locationPermissionsHelper.checkLocationPermission(this)) {
+            // means user has denied location permission twice or checked the "Don't show again"
+            locationPermissionsHelper.showAppSettingsDialog(this);
+            }
+        }
     }
 
     @Override
     public void onLocationPermissionGranted() {
+        if (locationPermissionsHelper.isLocationAccessToAppsTurnedOn()) {
+            locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
+            locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
+            getLocation();
+        } else {
+            getLocation();
+            locationPermissionsHelper.showLocationOffDialog(this,
+                R.string.ask_to_turn_location_on_text);
+        }
+    }
+
+    /**
+     * Gets new location if locations services are on, else gets last location
+     */
+    private void getLocation() {
         fr.free.nrw.commons.location.LatLng currLocation = locationManager.getLastLocation();
         if (currLocation != null) {
             GeoPoint currLocationGeopoint = new GeoPoint(currLocation.getLatitude(),
                 currLocation.getLongitude());
             addLocationMarker(currLocationGeopoint);
-            if (moveToCurrentLocation) {
-                mapView.getController().setCenter(currLocationGeopoint);
-                mapView.getController().animateTo(currLocationGeopoint);
-                moveToCurrentLocation = false;
-            }
+            mapView.getController().setCenter(currLocationGeopoint);
+            mapView.getController().animateTo(currLocationGeopoint);
             markerImage.setTranslationY(0);
         }
     }
