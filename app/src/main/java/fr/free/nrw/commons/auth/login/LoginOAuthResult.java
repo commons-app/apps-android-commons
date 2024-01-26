@@ -1,4 +1,4 @@
-package org.wikipedia.login;
+package fr.free.nrw.commons.auth.login;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

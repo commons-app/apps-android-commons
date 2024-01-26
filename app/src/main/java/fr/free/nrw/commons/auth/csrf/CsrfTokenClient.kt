@@ -1,15 +1,16 @@
 package fr.free.nrw.commons.auth.csrf
 
 import androidx.annotation.VisibleForTesting
+import fr.free.nrw.commons.auth.SessionManager
 import org.wikipedia.AppAdapter
 import org.wikipedia.dataclient.ServiceFactory
 import org.wikipedia.dataclient.SharedPreferenceCookieManager
 import org.wikipedia.dataclient.WikiSite
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
-import org.wikipedia.login.LoginClient
-import org.wikipedia.login.LoginClient.LoginCallback
-import org.wikipedia.login.LoginClient.LoginFailedException
-import org.wikipedia.login.LoginResult
+import fr.free.nrw.commons.auth.login.LoginClient
+import fr.free.nrw.commons.auth.login.LoginClient.LoginCallback
+import fr.free.nrw.commons.auth.login.LoginClient.LoginFailedException
+import fr.free.nrw.commons.auth.login.LoginResult
 import retrofit2.Call
 import retrofit2.Response
 import timber.log.Timber
@@ -17,7 +18,10 @@ import java.io.IOException
 import java.util.concurrent.Callable
 import java.util.concurrent.Executors.newSingleThreadExecutor
 
-class CsrfTokenClient(private val csrfWikiSite: WikiSite) {
+class CsrfTokenClient(
+    private val csrfWikiSite: WikiSite,
+    private val sessionManager: SessionManager
+) {
     private var retries = 0
     private var csrfTokenCall: Call<MwQueryResponse?>? = null
     private val loginClient = LoginClient()
@@ -33,7 +37,8 @@ class CsrfTokenClient(private val csrfWikiSite: WikiSite) {
             try {
                 if (retry > 0) {
                     // Log in explicitly
-                    LoginClient().loginBlocking(csrfWikiSite, userName, password, "")
+                    LoginClient()
+                        .loginBlocking(csrfWikiSite, userName, password, "")
                 }
 
                 // Get CSRFToken response off the main thread.
@@ -121,10 +126,11 @@ class CsrfTokenClient(private val csrfWikiSite: WikiSite) {
         password: String,
         callback: Callback,
         retryCallback: () -> Unit
-    ) = LoginClient().request(csrfWikiSite, username, password, object : LoginCallback {
+    ) = LoginClient()
+        .request(csrfWikiSite, username, password, object : LoginCallback {
         override fun success(loginResult: LoginResult) {
             if (loginResult.pass()) {
-                AppAdapter.get().updateAccount(loginResult)
+                sessionManager.updateAccount(loginResult)
                 retryCallback()
             } else {
                 callback.failure(LoginFailedException(loginResult.message))

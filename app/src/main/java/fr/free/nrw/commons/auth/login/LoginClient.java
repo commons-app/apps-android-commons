@@ -1,4 +1,4 @@
-package org.wikipedia.login;
+package fr.free.nrw.commons.auth.login;
 
 import android.annotation.SuppressLint;
 import android.text.TextUtils;
@@ -52,7 +52,7 @@ public class LoginClient {
                         @NonNull final String password, @NonNull final LoginCallback cb) {
         cancel();
 
-        tokenCall = ServiceFactory.get(wiki).getLoginToken();
+        tokenCall = ServiceFactory.get(wiki, LoginInterface.class).getLoginToken();
         tokenCall.enqueue(new Callback<MwQueryResponse>() {
             @Override public void onResponse(@NonNull Call<MwQueryResponse> call,
                                              @NonNull Response<MwQueryResponse> response) {
@@ -75,8 +75,8 @@ public class LoginClient {
                @Nullable final String loginToken, @NonNull final String userLanguage, @NonNull final LoginCallback cb) {
         this.userLanguage = userLanguage;
         loginCall = TextUtils.isEmpty(twoFactorCode) && TextUtils.isEmpty(retypedPassword)
-                ? ServiceFactory.get(wiki).postLogIn(userName, password, loginToken, userLanguage, Service.WIKIPEDIA_URL)
-                : ServiceFactory.get(wiki).postLogIn(userName, password, retypedPassword, twoFactorCode, loginToken,
+                ? ServiceFactory.get(wiki, LoginInterface.class).postLogIn(userName, password, loginToken, userLanguage, Service.WIKIPEDIA_URL)
+                : ServiceFactory.get(wiki, LoginInterface.class).postLogIn(userName, password, retypedPassword, twoFactorCode, loginToken,
                     userLanguage, true);
         loginCall.enqueue(new Callback<LoginResponse>() {
             @Override
@@ -117,15 +117,15 @@ public class LoginClient {
 
     public void loginBlocking(@NonNull final WikiSite wiki, @NonNull final String userName,
                               @NonNull final String password, @Nullable final String twoFactorCode) throws Throwable {
-        Response<MwQueryResponse> tokenResponse = ServiceFactory.get(wiki).getLoginToken().execute();
+        Response<MwQueryResponse> tokenResponse = ServiceFactory.get(wiki, LoginInterface.class).getLoginToken().execute();
         if (tokenResponse.body() == null || TextUtils.isEmpty(tokenResponse.body().query().loginToken())) {
             throw new IOException("Unexpected response when getting login token.");
         }
         String loginToken = tokenResponse.body().query().loginToken();
 
         Call<LoginResponse> tempLoginCall = StringUtils.defaultIfEmpty(twoFactorCode, "").isEmpty()
-                ? ServiceFactory.get(wiki).postLogIn(userName, password, loginToken, userLanguage, Service.WIKIPEDIA_URL)
-                : ServiceFactory.get(wiki).postLogIn(userName, password, null, twoFactorCode, loginToken,
+                ? ServiceFactory.get(wiki, LoginInterface.class).postLogIn(userName, password, loginToken, userLanguage, Service.WIKIPEDIA_URL)
+                : ServiceFactory.get(wiki, LoginInterface.class).postLogIn(userName, password, null, twoFactorCode, loginToken,
                     userLanguage, true);
         Response<LoginResponse> response = tempLoginCall.execute();
         LoginResponse loginResponse = response.body();
@@ -153,7 +153,7 @@ public class LoginClient {
     @SuppressLint("CheckResult")
     private void getExtendedInfo(@NonNull final WikiSite wiki, @NonNull String userName,
                                  @NonNull final LoginResult loginResult, @NonNull final LoginCallback cb) {
-        ServiceFactory.get(wiki).getUserInfo(userName)
+        ServiceFactory.get(wiki, LoginInterface.class).getUserInfo(userName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {

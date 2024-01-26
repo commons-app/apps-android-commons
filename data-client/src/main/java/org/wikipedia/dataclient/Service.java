@@ -13,7 +13,6 @@ import org.wikipedia.dataclient.mwapi.page.MwMobileViewPageRemaining;
 import org.wikipedia.dataclient.mwapi.page.MwQueryPageSummary;
 import org.wikipedia.edit.Edit;
 import org.wikipedia.edit.preview.EditPreview;
-import org.wikipedia.login.LoginClient;
 import org.wikipedia.search.PrefixSearchResponse;
 import org.wikipedia.wikidata.Entities;
 
@@ -189,54 +188,6 @@ public interface Service {
     @GET(MW_API_PREFIX + "action=query&list=categorymembers&cmlimit=500")
     @NonNull Observable<MwQueryResponse> getCategoryMembers(@NonNull @Query("cmtitle") String title,
                                                             @Nullable @Query("cmcontinue") String continueStr);
-
-    // ------- CSRF, Login, and Create Account -------
-
-    @Headers("Cache-Control: no-cache")
-    @GET(MW_API_PREFIX + "action=query&meta=tokens&type=csrf")
-    @NonNull Observable<MwQueryResponse> getCsrfToken();
-
-    @SuppressWarnings("checkstyle:parameternumber")
-    @FormUrlEncoded
-    @POST(MW_API_PREFIX + "action=createaccount&createmessageformat=html")
-    @NonNull Observable<CreateAccountResponse> postCreateAccount(@NonNull @Field("username") String user,
-                                                           @NonNull @Field("password") String pass,
-                                                           @NonNull @Field("retype") String retype,
-                                                           @NonNull @Field("createtoken") String token,
-                                                           @NonNull @Field("createreturnurl") String returnurl,
-                                                           @Nullable @Field("email") String email,
-                                                           @Nullable @Field("captchaId") String captchaId,
-                                                           @Nullable @Field("captchaWord") String captchaWord);
-
-    @Headers("Cache-Control: no-cache")
-    @GET(MW_API_PREFIX + "action=query&meta=tokens&type=login")
-    @NonNull Call<MwQueryResponse> getLoginToken();
-
-    @Headers("Cache-Control: no-cache")
-    @FormUrlEncoded
-    @POST(MW_API_PREFIX + "action=clientlogin&rememberMe=")
-    @NonNull Call<LoginClient.LoginResponse> postLogIn(@Field("username") String user, @Field("password") String pass,
-                                                       @Field("logintoken") String token, @Field("uselang") String userLanguage, @Field("loginreturnurl") String url);
-
-    @Headers("Cache-Control: no-cache")
-    @FormUrlEncoded
-    @POST(MW_API_PREFIX + "action=clientlogin&rememberMe=")
-    @NonNull Call<LoginClient.LoginResponse> postLogIn(@Field("username") String user, @Field("password") String pass,
-                                                       @Field("retype") String retypedPass, @Field("OATHToken") String twoFactorCode,
-                                                       @Field("logintoken") String token, @Field("uselang") String userLanguage,
-                                                       @Field("logincontinue") boolean loginContinue);
-
-    @Headers("Cache-Control: no-cache")
-    @FormUrlEncoded
-    @POST(MW_API_PREFIX + "action=logout")
-    @NonNull Observable<MwPostResponse> postLogout(@NonNull @Field("token") String token);
-
-    @GET(MW_API_PREFIX + "action=query&meta=authmanagerinfo|tokens&amirequestsfor=create&type=createaccount")
-    @NonNull Observable<MwQueryResponse> getAuthManagerInfo();
-
-    @GET(MW_API_PREFIX + "action=query&meta=userinfo&list=users&usprop=groups|cancreate")
-    @NonNull Observable<MwQueryResponse> getUserInfo(@Query("ususers") @NonNull String userName);
-
 
     // ------- Notifications -------
 
