@@ -11,7 +11,7 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.wikipedia.dataclient.SharedPreferenceCookieManager
 import org.wikipedia.json.GsonMarshaller
-import org.wikipedia.login.LoginResult
+import fr.free.nrw.commons.auth.login.LoginResult
 
 class CommonsAppAdapterUnitTest {
 
@@ -78,13 +78,6 @@ class CommonsAppAdapterUnitTest {
     fun testGetPassword() {
         whenever(sessionManager.password).thenReturn("test")
         Assert.assertEquals(adapter.password, "test")
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testUpdateAccount() {
-        adapter.updateAccount(result)
-        verify(sessionManager).updateAccount(result)
     }
 
     @Test

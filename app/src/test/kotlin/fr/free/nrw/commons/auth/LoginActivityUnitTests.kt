@@ -8,13 +8,12 @@ import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
-import android.widget.Button
 import android.widget.TextView
 import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.auth.login.LoginResult
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import org.junit.Assert
 import org.junit.Before
@@ -29,7 +28,6 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenuItem
 import org.wikipedia.AppAdapter
-import org.wikipedia.login.LoginResult
 import java.lang.reflect.Method
 
 

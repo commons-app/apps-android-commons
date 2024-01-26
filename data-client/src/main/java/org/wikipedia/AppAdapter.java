@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 
 import org.wikipedia.dataclient.SharedPreferenceCookieManager;
 import org.wikipedia.dataclient.WikiSite;
-import org.wikipedia.login.LoginResult;
 
 import okhttp3.OkHttpClient;
 
@@ -18,7 +17,6 @@ public abstract class AppAdapter {
     public abstract boolean isLoggedIn();
     public abstract String getUserName();
     public abstract String getPassword();
-    public abstract void updateAccount(@NonNull LoginResult result);
 
     public abstract SharedPreferenceCookieManager getCookies();
     public abstract void setCookies(@NonNull SharedPreferenceCookieManager cookies);

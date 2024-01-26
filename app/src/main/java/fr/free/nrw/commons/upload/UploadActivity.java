@@ -167,6 +167,11 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
      */
     private boolean showPermissionsDialog = true;
 
+    /**
+     * Whether fragments have been saved.
+     */
+    private boolean isFragmentsSaved = false;
+
     @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,6 +184,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
          created by the system and populate the fragments ArrayList
          */
         if (savedInstanceState != null) {
+            isFragmentsSaved = true;
             List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
             fragments = new ArrayList<>();
             for (Fragment fragment : fragmentList) {
@@ -597,18 +603,18 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                     }
                 };
 
-                if(fragments.size()==0){
+                if(isFragmentsSaved){
+                    UploadMediaDetailFragment fragment = (UploadMediaDetailFragment) fragments.get(0);
+                    fragment.setCallback(uploadMediaDetailFragmentCallback);
+                }else{
                     uploadMediaDetailFragment.setCallback(uploadMediaDetailFragmentCallback);
                     fragments.add(uploadMediaDetailFragment);
-                }else{
-                    UploadMediaDetailFragment fragment = (UploadMediaDetailFragment) fragments.get(0);
-                     fragment.setCallback(uploadMediaDetailFragmentCallback);
                 }
 
             }
 
             //If fragments are not created, create them and add them to the fragments ArrayList
-            if(!(fragments.size()>1)){
+            if(!isFragmentsSaved){
                 uploadCategoriesFragment = new UploadCategoriesFragment();
                 if (place != null) {
                     Bundle categoryBundle = new Bundle();

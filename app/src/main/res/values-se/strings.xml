@@ -2,6 +2,7 @@
 <!-- Authors:
 * Ante75
 * Kimberli Mäkäräinen (WMNO)
+* Lea-Christine Sara
 * Olve Utne
 * Yupik
 -->
@@ -241,4 +242,7 @@
   <string name="apply">Geavat</string>
   <string name="explore_map_details">Lassedieđut</string>
   <string name="android_version">Android-veršuvdna</string>
+  <string name="see_your_achievements">Geahča iežat olahusaid</string>
+  <string name="edit_image">Rievdat gova</string>
+  <string name="send_thanks_to_author">Giite almmuheaddji</string>
 </resources>

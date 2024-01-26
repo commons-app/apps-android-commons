@@ -10,6 +10,7 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.actions.PageEditInterface;
 import fr.free.nrw.commons.actions.ThanksInterface;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategoryInterface;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -40,7 +41,7 @@ import org.wikipedia.dataclient.Service;
 import org.wikipedia.dataclient.ServiceFactory;
 import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.json.GsonUtil;
-import org.wikipedia.login.LoginClient;
+import fr.free.nrw.commons.auth.login.LoginClient;
 import timber.log.Timber;
 
 @Module
@@ -105,8 +106,9 @@ public class NetworkingModule {
     @Named(NAMED_COMMONS_CSRF)
     @Provides
     @Singleton
-    public CsrfTokenClient provideCommonsCsrfTokenClient(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
-        return new CsrfTokenClient(commonsWikiSite);
+    public CsrfTokenClient provideCommonsCsrfTokenClient(
+        @Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite, SessionManager sessionManager) {
+        return new CsrfTokenClient(commonsWikiSite, sessionManager);
     }
 
     @Provides
