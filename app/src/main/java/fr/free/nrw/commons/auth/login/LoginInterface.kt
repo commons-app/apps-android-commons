@@ -25,7 +25,7 @@ interface LoginInterface {
         @Field("logintoken") token: String?,
         @Field("uselang") userLanguage: String?,
         @Field("loginreturnurl") url: String?
-    ): Call<LoginClient.LoginResponse?>
+    ): Call<LoginResponse?>
 
     @Headers("Cache-Control: no-cache")
     @FormUrlEncoded
@@ -38,7 +38,7 @@ interface LoginInterface {
         @Field("logintoken") token: String?,
         @Field("uselang") userLanguage: String?,
         @Field("logincontinue") loginContinue: Boolean
-    ): Call<LoginClient.LoginResponse?>
+    ): Call<LoginResponse?>
 
     @GET(Service.MW_API_PREFIX + "action=query&meta=userinfo&list=users&usprop=groups|cancreate")
     fun getUserInfo(@Query("ususers") userName: String): Observable<MwQueryResponse?>

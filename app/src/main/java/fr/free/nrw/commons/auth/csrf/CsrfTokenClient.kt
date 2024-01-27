@@ -8,8 +8,8 @@ import org.wikipedia.dataclient.SharedPreferenceCookieManager
 import org.wikipedia.dataclient.WikiSite
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import fr.free.nrw.commons.auth.login.LoginClient
-import fr.free.nrw.commons.auth.login.LoginClient.LoginCallback
-import fr.free.nrw.commons.auth.login.LoginClient.LoginFailedException
+import fr.free.nrw.commons.auth.login.LoginCallback
+import fr.free.nrw.commons.auth.login.LoginFailedException
 import fr.free.nrw.commons.auth.login.LoginResult
 import retrofit2.Call
 import retrofit2.Response
@@ -129,7 +129,7 @@ class CsrfTokenClient(
     ) = LoginClient()
         .request(csrfWikiSite, username, password, object : LoginCallback {
         override fun success(loginResult: LoginResult) {
-            if (loginResult.pass()) {
+            if (loginResult.pass) {
                 sessionManager.updateAccount(loginResult)
                 retryCallback()
             } else {
