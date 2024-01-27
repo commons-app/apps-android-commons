@@ -19,6 +19,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
@@ -170,12 +171,11 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                         () -> {
                             askForLocationPermission();
                         },
-                        () -> {
-                            isPermissionDenied = true;
-                        },
+                        null,
                         null,
                         false);
                 } else {
+                    Timber.d("The user checked 'Don't ask again' or denied the permission twice");
                     isPermissionDenied = true;
                 }
             }
@@ -519,13 +519,17 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void recenterMap(LatLng curLatLng) {
-        if (isPermissionDenied || curLatLng == null) {
+        if (!isPermissionDenied || curLatLng == null) {
             recenterToUserLocation = true;
             if (!checkLocationPermission()) {
                 askForLocationPermission();
             } else {
                 locationPermissionGranted();
             }
+            return;
+        }
+        if (isPermissionDenied) {
+            showAppSettingsDialog();
             return;
         }
         recenterMarkerToPosition(new GeoPoint(curLatLng.getLatitude(), curLatLng.getLongitude()));
@@ -553,6 +557,33 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         }
     }
 
+    /**
+     * Shows a dialog box to take user to the app's settings page
+     */
+    @Override
+    public void showAppSettingsDialog() {
+        DialogUtil
+            .showAlertDialog(getActivity(), getString(R.string.location_permission_title),
+                getString(R.string.explore_map_needs_location),
+                getString(R.string.ok), getString(R.string.cancel), this::openAppSettings,
+                () -> {
+                    Toast.makeText(getContext(), getString(R.string.explore_map_needs_location),
+                        Toast.LENGTH_LONG).show();
+                }
+            );
+    }
+
+    /**
+     * Opens detailed settings page of the app for the user to turn on location services
+     */
+    @Override
+    public void openAppSettings() {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", getContext().getPackageName(), null);
+        intent.setData(uri);
+        startActivity(intent);
+    }
+
     @Override
     public void showLocationOffDialog() {
         // This creates a dialog box that prompts the user to enable location
@@ -561,7 +592,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                 getString(R.string.explore_map_needs_location),
                 getString(R.string.yes), getString(R.string.no), this::openLocationSettings,
                 () -> {
-                    Toast.makeText(getContext(), getString(R.string.explore_map_needs_location),
+                    Toast.makeText(getContext(), getString(R.string.nearby_needs_location),
                         Toast.LENGTH_LONG).show();
                 }
             );

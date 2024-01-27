@@ -19,6 +19,8 @@ public class ExploreMapContract {
         void recenterMap(LatLng curLatLng);
         void showLocationOffDialog();
         void openLocationSettings();
+        void showAppSettingsDialog();
+        void openAppSettings();
         void hideBottomDetailsSheet();
         void displayBottomSheetWithInfo(Marker marker);
         LatLng getMapCenter();
