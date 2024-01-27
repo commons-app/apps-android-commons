@@ -3,9 +3,9 @@ package fr.free.nrw.commons.auth.login
 import android.text.TextUtils
 import fr.free.nrw.commons.auth.login.LoginResult.OAuthResult
 import fr.free.nrw.commons.auth.login.LoginResult.ResetPasswordResult
+import fr.free.nrw.commons.wikidata.WikidataConstants.WIKIPEDIA_URL
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import org.wikipedia.dataclient.Service
 import org.wikipedia.dataclient.ServiceFactory
 import org.wikipedia.dataclient.WikiSite
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
@@ -57,7 +57,7 @@ class LoginClient {
 
         loginCall = if (twoFactorCode.isNullOrEmpty() && retypedPassword.isNullOrEmpty()) {
             ServiceFactory.get(wiki, LoginInterface::class.java)
-                .postLogIn(userName, password, loginToken, userLanguage, Service.WIKIPEDIA_URL)
+                .postLogIn(userName, password, loginToken, userLanguage, WIKIPEDIA_URL)
         } else {
             ServiceFactory.get(wiki, LoginInterface::class.java).postLogIn(
                 userName, password, retypedPassword, twoFactorCode, loginToken, userLanguage, true
@@ -115,8 +115,7 @@ class LoginClient {
         val loginToken = tokenResponse.body()?.query()?.loginToken()
         val tempLoginCall = if (twoFactorCode.isNullOrEmpty()) {
             ServiceFactory.get(wiki, LoginInterface::class.java).postLogIn(
-                userName, password, loginToken, userLanguage, Service.WIKIPEDIA_URL
-            )
+                userName, password, loginToken, userLanguage, WIKIPEDIA_URL)
         } else {
             ServiceFactory.get(wiki, LoginInterface::class.java).postLogIn(
                 userName, password, null, twoFactorCode, loginToken, userLanguage, true
