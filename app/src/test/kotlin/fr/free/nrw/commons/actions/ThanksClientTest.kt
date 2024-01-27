@@ -12,12 +12,9 @@ import org.mockito.MockedStatic
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
-import org.powermock.api.mockito.PowerMockito
 import org.powermock.core.classloader.annotations.PrepareForTest
-import org.powermock.modules.junit4.PowerMockRunner
 import org.robolectric.RobolectricTestRunner
-import org.wikipedia.csrf.CsrfTokenClient
-import org.wikipedia.dataclient.Service
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 
 @RunWith(RobolectricTestRunner::class)
 @PrepareForTest(CommonsApplication::class)
@@ -25,7 +22,7 @@ class ThanksClientTest {
     @Mock
     private lateinit var csrfTokenClient: CsrfTokenClient
     @Mock
-    private lateinit var service: Service
+    private lateinit var service: ThanksInterface
 
     @Mock
     private lateinit var commonsApplication: CommonsApplication
@@ -50,7 +47,7 @@ class ThanksClientTest {
      */
     @Test
     fun testThanks() {
-        `when`(csrfTokenClient.tokenBlocking).thenReturn("test")
+        `when`(csrfTokenClient.getTokenBlocking()).thenReturn("test")
         `when`(commonsApplication.userAgent).thenReturn("test")
         thanksClient.thank(1L)
         verify(service).thank(ArgumentMatchers.anyString(), ArgumentMatchers.any(), eq("test"), eq("test"))

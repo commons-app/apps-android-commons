@@ -72,7 +72,9 @@ class UploadMediaDetailFragmentUnitTest {
     private lateinit var btnNext: AppCompatButton
     private lateinit var btnCopyToSubsequentMedia: AppCompatButton
     private lateinit var photoViewBackgroundImage: PhotoView
-    private lateinit var ibMap: AppCompatImageButton
+    private lateinit var locationStatusLl: LinearLayout
+    private lateinit var locationImageView : ImageView
+    private lateinit var locationTextView : TextView
     private lateinit var llContainerMediaDetail: LinearLayout
     private lateinit var ibExpandCollapse: AppCompatImageButton
 
@@ -134,7 +136,9 @@ class UploadMediaDetailFragmentUnitTest {
         btnNext = view.findViewById(R.id.btn_next)
         btnCopyToSubsequentMedia = view.findViewById(R.id.btn_copy_subsequent_media)
         photoViewBackgroundImage = view.findViewById(R.id.backgroundImage)
-        ibMap = view.findViewById(R.id.ib_map)
+        locationStatusLl = view.findViewById(R.id.ll_location_status)
+        locationImageView = view.findViewById(R.id.location_image_view)
+        locationTextView = view.findViewById(R.id.location_text_view)
         llContainerMediaDetail = view.findViewById(R.id.ll_container_media_detail)
         ibExpandCollapse = view.findViewById(R.id.ib_expand_collapse)
 
@@ -147,7 +151,9 @@ class UploadMediaDetailFragmentUnitTest {
         Whitebox.setInternalState(fragment, "btnCopyToSubsequentMedia", btnCopyToSubsequentMedia)
         Whitebox.setInternalState(fragment, "photoViewBackgroundImage", photoViewBackgroundImage)
         Whitebox.setInternalState(fragment, "uploadMediaDetailAdapter", uploadMediaDetailAdapter)
-        Whitebox.setInternalState(fragment, "ibMap", ibMap)
+        Whitebox.setInternalState(fragment, "llLocationStatus", locationStatusLl)
+        Whitebox.setInternalState(fragment, "locationImageView", locationImageView)
+        Whitebox.setInternalState(fragment, "locationTextView", locationTextView)
         Whitebox.setInternalState(fragment, "llContainerMediaDetail", llContainerMediaDetail)
         Whitebox.setInternalState(fragment, "ibExpandCollapse", ibExpandCollapse)
     }
@@ -243,13 +249,6 @@ class UploadMediaDetailFragmentUnitTest {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         Whitebox.setInternalState(fragment, "presenter", presenter)
         fragment.onPreviousButtonClicked()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnButtonAddDescriptionClicked() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.onButtonAddDescriptionClicked()
     }
 
     @Test
@@ -429,9 +428,9 @@ class UploadMediaDetailFragmentUnitTest {
 
     @Test
     @Throws(Exception::class)
-    fun testOnRlContainerTitleClicked() {
+    fun testOnLlContainerTitleClicked() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.onRlContainerTitleClicked()
+        fragment.onLlContainerTitleClicked()
     }
 
     @Test

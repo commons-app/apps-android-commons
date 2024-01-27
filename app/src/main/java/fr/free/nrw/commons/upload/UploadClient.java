@@ -26,7 +26,7 @@ import javax.inject.Singleton;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import org.wikipedia.csrf.CsrfTokenClient;
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient;
 import org.wikipedia.dataclient.mwapi.MwException;
 import timber.log.Timber;
 

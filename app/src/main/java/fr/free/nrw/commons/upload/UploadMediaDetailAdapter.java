@@ -15,12 +15,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -190,6 +192,7 @@ public class UploadMediaDetailAdapter extends
         }
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, uploadMediaDetails.size() - position);
+        updateAddButtonVisibility();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -212,6 +215,12 @@ public class UploadMediaDetailAdapter extends
 
         @BindView(R.id.btn_remove)
         ImageView removeButton;
+
+        @BindView(R.id.btn_add)
+        ImageView addButton;
+
+        @BindView(R.id.cl_parent)
+        ConstraintLayout clParent;
 
         @BindView(R.id.ll_write_better_caption)
         LinearLayout betterCaptionLinearLayout;
@@ -291,6 +300,17 @@ public class UploadMediaDetailAdapter extends
 
             descItemEditText.addTextChangedListener(descriptionListener);
             initLanguage(position, uploadMediaDetail);
+
+            if (fragment != null) {
+                FrameLayout.LayoutParams newLayoutParams = (FrameLayout.LayoutParams) clParent.getLayoutParams();
+                newLayoutParams.topMargin = 0;
+                newLayoutParams.leftMargin = 0;
+                newLayoutParams.rightMargin = 0;
+                newLayoutParams.bottomMargin = 0;
+                clParent.setLayoutParams(newLayoutParams);
+            }
+            updateAddButtonVisibility();
+            addButton.setOnClickListener(v -> eventListener.addLanguage());
 
             //If the description was manually added by the user, it deserves focus, if not, let the user decide
             if (uploadMediaDetail.isManuallyAdded()) {
@@ -557,6 +577,55 @@ public class UploadMediaDetailAdapter extends
 
     }
 
+    /**
+     * Hides the visibility of the "Add" button for all items in the RecyclerView except
+     * the last item in RecyclerView
+     */
+    private void updateAddButtonVisibility() {
+        int lastItemPosition = getItemCount() - 1;
+        // Hide Add Button for all items
+        for (int i = 0; i < getItemCount(); i++) {
+            if (fragment != null) {
+                if (fragment.getView() != null) {
+                    ViewHolder holder = (ViewHolder) ((RecyclerView) fragment.getView()
+                        .findViewById(R.id.rv_descriptions)).findViewHolderForAdapterPosition(i);
+                    if (holder != null) {
+                        holder.addButton.setVisibility(View.GONE);
+                    }
+                }
+            } else {
+                if (this.activity != null) {
+                    ViewHolder holder = (ViewHolder) ((RecyclerView) activity.findViewById(
+                        R.id.rv_descriptions_captions)).findViewHolderForAdapterPosition(i);
+                    if (holder != null) {
+                        holder.addButton.setVisibility(View.GONE);
+                    }
+                }
+            }
+        }
+
+        // Show Add Button for the last item
+        if (fragment != null) {
+            if (fragment.getView() != null) {
+                ViewHolder lastItemHolder = (ViewHolder) ((RecyclerView) fragment.getView()
+                    .findViewById(R.id.rv_descriptions)).findViewHolderForAdapterPosition(
+                    lastItemPosition);
+                if (lastItemHolder != null) {
+                    lastItemHolder.addButton.setVisibility(View.VISIBLE);
+                }
+            }
+        } else {
+            if (this.activity != null) {
+                ViewHolder lastItemHolder = (ViewHolder) ((RecyclerView) activity
+                    .findViewById(R.id.rv_descriptions_captions)).findViewHolderForAdapterPosition(
+                    lastItemPosition);
+                if (lastItemHolder != null) {
+                    lastItemHolder.addButton.setVisibility(View.VISIBLE);
+                }
+            }
+        }
+    }
+
     public interface Callback {
 
         void showAlert(int mediaDetailDescription, int descriptionInfo);
@@ -565,6 +634,8 @@ public class UploadMediaDetailAdapter extends
     public interface EventListener {
 
         void onPrimaryCaptionTextChange(boolean isNotEmpty);
+
+        void addLanguage();
     }
 
     enum SelectedVoiceIcon {

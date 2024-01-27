@@ -21,8 +21,8 @@ import timber.log.Timber;
 public class LocationServiceManager implements LocationListener {
 
     // Maybe these values can be improved for efficiency
-    private static final long MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS = 2 * 60 * 100;
-    private static final long MIN_LOCATION_UPDATE_REQUEST_DISTANCE_IN_METERS = 10;
+    private static final long MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS = 10 * 100;
+    private static final long MIN_LOCATION_UPDATE_REQUEST_DISTANCE_IN_METERS = 1;
 
     private LocationManager locationManager;
     private Location lastLocation;

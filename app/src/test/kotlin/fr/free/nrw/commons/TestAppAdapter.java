@@ -8,7 +8,6 @@ import org.wikipedia.dataclient.SharedPreferenceCookieManager;
 import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.dataclient.okhttp.TestStubInterceptor;
 import org.wikipedia.dataclient.okhttp.UnsuccessfulResponseInterceptor;
-import org.wikipedia.login.LoginResult;
 
 public class TestAppAdapter extends AppAdapter {
 
@@ -48,10 +47,6 @@ public class TestAppAdapter extends AppAdapter {
     @Override
     public String getPassword() {
         return null;
-    }
-
-    @Override
-    public void updateAccount(@NonNull LoginResult result) {
     }
 
     @Override

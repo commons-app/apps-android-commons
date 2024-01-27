@@ -741,6 +741,10 @@
   <string name="learn_how_to_write_a_useful_description">Дознајте како да напишете корисен опис</string>
   <string name="learn_how_to_write_a_useful_caption">Дознајте како да напишете корисно толкување</string>
   <string name="see_your_achievements">Видете ги вашите достигнувања</string>
+  <string name="edit_image">Уреди слика</string>
+  <string name="edit_location">Уреди местоположба</string>
+  <string name="send_thanks_to_author">Благодари му на авторот</string>
+  <string name="error_sending_thanks">Грешка при испраќањето благодарност до авторот.</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">Избрана е %d слика</item>
     <item quantity="other">Избрани се %d слики</item>
