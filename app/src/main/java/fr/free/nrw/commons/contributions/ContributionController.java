@@ -18,7 +18,6 @@ import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationPermissionsHelper;
-import fr.free.nrw.commons.location.LocationPermissionsHelper.Dialog;
 import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.Place;
@@ -85,15 +84,6 @@ public class ContributionController {
      */
     private void createDialogsAndHandleLocationPermissions(Activity activity,
         ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher) {
-        LocationPermissionsHelper.Dialog locationAccessDialog = new Dialog(
-            R.string.location_permission_title,
-            R.string.in_app_camera_location_permission_rationale
-        );
-
-        LocationPermissionsHelper.Dialog locationOffDialog = new Dialog(
-            R.string.ask_to_turn_location_on,
-            R.string.in_app_camera_needs_location
-        );
         locationPermissionCallback = new LocationPermissionCallback() {
             @Override
             public void onLocationPermissionDenied(String toastMessage) {
@@ -117,8 +107,8 @@ public class ContributionController {
             inAppCameraLocationPermissionLauncher.launch(
                 new String[]{permission.ACCESS_FINE_LOCATION});
         } else {
-            locationPermissionsHelper.handleLocationPermissions(locationAccessDialog,
-                locationOffDialog);
+            locationPermissionsHelper.requestForLocationAccess(R.string.location_permission_title,
+                R.string.in_app_camera_location_permission_rationale);
         }
 
     }

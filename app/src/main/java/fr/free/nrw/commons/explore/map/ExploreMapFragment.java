@@ -519,7 +519,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                 isPermissionDenied = false;
                 recenterMap(curLatLng);
             } else {
-                locationPermissionsHelper.showAppSettingsDialog(getActivity());
+                locationPermissionsHelper.showAppSettingsDialog(getActivity(), R.string.explore_map_needs_location);
             }
             return;
         }

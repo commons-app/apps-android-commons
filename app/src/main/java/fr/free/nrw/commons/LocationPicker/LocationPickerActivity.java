@@ -40,7 +40,6 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.filepicker.Constants;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationPermissionsHelper;
-import fr.free.nrw.commons.location.LocationPermissionsHelper.Dialog;
 import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.theme.BaseActivity;
@@ -371,19 +370,10 @@ public class LocationPickerActivity extends BaseActivity implements
      * Center the map at user's current location
      */
     private void requestLocationPermissions() {
-        LocationPermissionsHelper.Dialog locationAccessDialog = new Dialog(
-            R.string.location_permission_title,
-            R.string.upload_map_location_access
-        );
-
-        LocationPermissionsHelper.Dialog locationOffDialog = new Dialog(
-            R.string.ask_to_turn_location_on,
-            R.string.upload_map_location_access
-        );
         locationPermissionsHelper = new LocationPermissionsHelper(
             this, locationManager, this);
-        locationPermissionsHelper.handleLocationPermissions(locationAccessDialog,
-            locationOffDialog);
+        locationPermissionsHelper.requestForLocationAccess(R.string.location_permission_title,
+            R.string.upload_map_location_access);
     }
 
     @Override
@@ -413,12 +403,13 @@ public class LocationPickerActivity extends BaseActivity implements
 
     @Override
     public void onLocationPermissionDenied(String toastMessage) {
-        Toast.makeText(getBaseContext(),toastMessage,Toast.LENGTH_LONG).show();
         if (!ActivityCompat.shouldShowRequestPermissionRationale(this, permission.ACCESS_FINE_LOCATION)) {
             if(!locationPermissionsHelper.checkLocationPermission(this)) {
             // means user has denied location permission twice or checked the "Don't show again"
-            locationPermissionsHelper.showAppSettingsDialog(this);
+            locationPermissionsHelper.showAppSettingsDialog(this, R.string.upload_map_location_access);
             }
+        } else {
+        Toast.makeText(getBaseContext(),toastMessage,Toast.LENGTH_LONG).show();
         }
     }
 

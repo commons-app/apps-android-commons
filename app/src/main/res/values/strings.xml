@@ -584,7 +584,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="coordinates_edit_helper_edit_message_else">Could not add coordinates.</string>
   <string name="description_edit_helper_edit_message_else">Could not add descriptions.</string>
   <string name="caption_edit_helper_edit_message_else">Could not add caption.</string>
-  <string name="coordinates_picking_unsuccessful">Unable to get coordinates.</string>
+  <string name="coordinates_picking_unsuccessful">Image\'s coordinates not updated</string>
   <string name="descriptions_picking_unsuccessful">Unable to get descriptions.</string>
   <string name="description_activity_title">Edit descriptions and captions</string>
 
@@ -624,7 +624,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="ask_to_turn_location_on_text">Kindly turn on location services for the app show your current location</string>
   <string name="nearby_needs_location">Nearby needs location enabled to work properly</string>
   <string name="explore_map_needs_location">Explore map needs location permission to display nearby images</string>
-  <string name="upload_map_location_access">You need to give access to your current location to set location automatically.</string>
+  <string name="upload_map_location_access">You need to give location permission to set location automatically.</string>
   <string name="use_location_from_similar_image">Did you shoot these two pictures at the same place? Do you want to use the latitude/longitude of the picture on the right?</string>
   <string name="load_more">Load More</string>
   <string name="nearby_no_results">No places found, try changing your search criteria.</string>
