@@ -354,7 +354,7 @@
   <string name="share_app_title">Share App</string>
   <string name="rotate">Rotate</string>
 
-  <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
+  <string name="error_fetching_nearby_places">No nearby places found due to lack of location permission</string>
   <string name="no_nearby_places_around">No nearby places around</string>
   <string name="error_fetching_nearby_monuments">Error fetching nearby monuments.</string>
   <string name="no_recent_searches">No recent searches</string>
@@ -622,6 +622,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="recommend_high_accuracy_mode">For best results, choose the High Accuracy mode.</string>
   <string name="ask_to_turn_location_on">Turn on location?</string>
   <string name="nearby_needs_location">Nearby needs location enabled to work properly</string>
+  <string name="explore_map_needs_location">Explore map needs location permission to display nearby images</string>
   <string name="upload_map_location_access">You need to give access to your current location to set location automatically.</string>
   <string name="use_location_from_similar_image">Did you shoot these two pictures at the same place? Do you want to use the latitude/longitude of the picture on the right?</string>
   <string name="load_more">Load More</string>
