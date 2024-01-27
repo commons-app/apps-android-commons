@@ -130,7 +130,7 @@ public class ContributionController {
             activity.getString(android.R.string.cancel),
             () -> {
                 if (!locationPermissionsHelper.isLocationAccessToAppsTurnedOn()) {
-                    locationPermissionsHelper.showLocationOffDialog(activity);
+                    locationPermissionsHelper.showLocationOffDialog(activity, R.string.in_app_camera_needs_location);
                 }
             },
             () -> locationPermissionCallback.onLocationPermissionDenied(

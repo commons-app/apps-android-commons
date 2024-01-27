@@ -19,7 +19,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
@@ -32,8 +31,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -54,8 +51,11 @@ import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.ExploreMapRootFragment;
 import fr.free.nrw.commons.explore.paging.LiveDataConverter;
+import fr.free.nrw.commons.filepicker.Constants;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.location.LocationPermissionsHelper;
+import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.media.MediaClient;
@@ -73,7 +73,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.osmdroid.events.MapEventsReceiver;
@@ -95,7 +94,7 @@ import org.osmdroid.views.overlay.TilesOverlay;
 import timber.log.Timber;
 
 public class ExploreMapFragment extends CommonsDaggerSupportFragment
-    implements ExploreMapContract.View, LocationUpdateListener {
+    implements ExploreMapContract.View, LocationUpdateListener, LocationPermissionCallback {
 
     private BottomSheetBehavior bottomSheetDetailsBehavior;
     private BroadcastReceiver broadcastReceiver;
@@ -128,6 +127,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     BookmarkLocationsDao bookmarkLocationDao; // May be needed in future if we want to integrate bookmarking explore places
     @Inject
     SystemThemeUtils systemThemeUtils;
+    LocationPermissionsHelper locationPermissionsHelper;
 
     private ExploreMapPresenter presenter;
 
@@ -179,9 +179,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                     isPermissionDenied = true;
                 }
             }
-
         });
-
 
     @NonNull
     public static ExploreMapFragment newInstance() {
@@ -212,7 +210,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         setSearchThisAreaButtonVisibility(false);
         tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution)));
         initNetworkBroadCastReceiver();
-
+        locationPermissionsHelper = new LocationPermissionsHelper(getActivity(),locationManager,this);
         if (presenter == null) {
             presenter = new ExploreMapPresenter(bookmarkLocationDao);
         }
@@ -344,12 +342,12 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             mapView.getOverlayManager().getTilesOverlay()
                 .setColorFilter(TilesOverlay.INVERT_COLORS);
         }
-        if (!applicationKvStore.getBoolean("doNotAskForLocationPermission", false) ||
-            PermissionUtils.hasPermission(getActivity(),
-                new String[]{Manifest.permission.ACCESS_FINE_LOCATION})) {
-            if (checkLocationPermission()) {
-                locationPermissionGranted();
-            }
+            if (!applicationKvStore.getBoolean("doNotAskForLocationPermission", false) ||
+                PermissionUtils.hasPermission(getActivity(),
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION})) {
+                if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
+                    locationPermissionGranted();
+                }
             } else {
                 isPermissionDenied = true;
             }
@@ -424,7 +422,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     public void populatePlaces(LatLng curLatLng) {
         final Observable<MapController.ExplorePlacesInfo> nearbyPlacesInfoObservable;
         if (curLatLng == null) {
-            if (checkLocationPermission()) {
+            if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
                 locationPermissionGranted();
             }
             return;
@@ -475,20 +473,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         activityResultLauncher.launch(permission.ACCESS_FINE_LOCATION);
     }
 
-    /**
-     * Checks if location permission is already granted or not
-     *
-     * @return true or false depending on whether location permission is granted or not
-     */
-    private boolean checkLocationPermission() {
-        if (PermissionUtils.hasPermission(getActivity(),
-            new String[]{Manifest.permission.ACCESS_FINE_LOCATION})) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     private void locationPermissionGranted() {
         isPermissionDenied = false;
         applicationKvStore.putBoolean("doNotAskForLocationPermission", false);
@@ -507,7 +491,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             setProgressBarVisibility(true);
         }
         else {
-            showLocationOffDialog();
+            locationPermissionsHelper.showLocationOffDialog(getActivity(), R.string.explore_map_needs_location);
         }
         presenter.onMapReady(exploreMapController);
         registerUnregisterLocationListener(false);
@@ -521,15 +505,22 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     public void recenterMap(LatLng curLatLng) {
         if (!isPermissionDenied || curLatLng == null) {
             recenterToUserLocation = true;
-            if (!checkLocationPermission()) {
+            if (!locationPermissionsHelper.checkLocationPermission(getActivity())) {
                 askForLocationPermission();
             } else {
                 locationPermissionGranted();
             }
             return;
         }
+        // if user has denied permission twice, then show dialog
         if (isPermissionDenied) {
-            showAppSettingsDialog();
+            if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
+                // this will run when user has given permission by opening app's settings
+                isPermissionDenied = false;
+                recenterMap(curLatLng);
+            } else {
+                locationPermissionsHelper.showAppSettingsDialog(getActivity());
+            }
             return;
         }
         recenterMarkerToPosition(new GeoPoint(curLatLng.getLatitude(), curLatLng.getLongitude()));
@@ -554,61 +545,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             } else {
                 setSearchThisAreaButtonVisibility(false);
             }
-        }
-    }
-
-    /**
-     * Shows a dialog box to take user to the app's settings page
-     */
-    @Override
-    public void showAppSettingsDialog() {
-        DialogUtil
-            .showAlertDialog(getActivity(), getString(R.string.location_permission_title),
-                getString(R.string.explore_map_needs_location),
-                getString(R.string.ok), getString(R.string.cancel), this::openAppSettings,
-                () -> {
-                    Toast.makeText(getContext(), getString(R.string.explore_map_needs_location),
-                        Toast.LENGTH_LONG).show();
-                }
-            );
-    }
-
-    /**
-     * Opens detailed settings page of the app for the user to turn on location services
-     */
-    @Override
-    public void openAppSettings() {
-        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        Uri uri = Uri.fromParts("package", getContext().getPackageName(), null);
-        intent.setData(uri);
-        startActivity(intent);
-    }
-
-    @Override
-    public void showLocationOffDialog() {
-        // This creates a dialog box that prompts the user to enable location
-        DialogUtil
-            .showAlertDialog(getActivity(), getString(R.string.ask_to_turn_location_on),
-                getString(R.string.explore_map_needs_location),
-                getString(R.string.yes), getString(R.string.no), this::openLocationSettings,
-                () -> {
-                    Toast.makeText(getContext(), getString(R.string.nearby_needs_location),
-                        Toast.LENGTH_LONG).show();
-                }
-            );
-    }
-
-    @Override
-    public void openLocationSettings() {
-        // This method opens the location settings of the device along with a followup toast.
-        final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-        final PackageManager packageManager = getActivity().getPackageManager();
-
-        if (intent.resolveActivity(packageManager) != null) {
-            startActivity(intent);
-        } else {
-            Toast.makeText(getContext(), R.string.cannot_open_location_settings, Toast.LENGTH_LONG)
-                .show();
         }
     }
 
@@ -1000,8 +936,14 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     @Override
     public void onStart() {
         super.onStart();
-        if(!checkLocationPermission()) {
+        if(!locationPermissionsHelper.checkLocationPermission(getActivity())) {
             askForLocationPermission();
         }
     }
+
+    @Override
+    public void onLocationPermissionDenied(String toastMessage) {}
+
+    @Override
+    public void onLocationPermissionGranted() {}
 }

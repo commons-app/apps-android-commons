@@ -1,13 +1,15 @@
 package fr.free.nrw.commons.location;
 
+import android.Manifest;
 import android.Manifest.permission;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.provider.Settings;
+import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.filepicker.Constants;
 import fr.free.nrw.commons.filepicker.Constants.RequestCodes;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
@@ -57,7 +59,7 @@ public class LocationPermissionsHelper {
         Dialog locationAccessDialog,
         Dialog locationOffDialog
     ) {
-        if (PermissionUtils.hasPermission(activity, new String[]{permission.ACCESS_FINE_LOCATION})) {
+        if (checkLocationPermission(activity)) {
             callback.onLocationPermissionGranted();
         } else {
             if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission.ACCESS_FINE_LOCATION)) {
@@ -67,12 +69,8 @@ public class LocationPermissionsHelper {
                         activity.getString(android.R.string.ok),
                         activity.getString(android.R.string.cancel),
                         () -> {
-                            if (!isLocationAccessToAppsTurnedOn()) {
-                                showLocationOffDialog(activity);
-                            } else {
                                 ActivityCompat.requestPermissions(activity,
                                     new String[]{permission.ACCESS_FINE_LOCATION}, 1);
-                            }
                         },
                         () -> callback.onLocationPermissionDenied(activity.getString(R.string.in_app_camera_location_permission_denied)),
                         null,
@@ -85,11 +83,17 @@ public class LocationPermissionsHelper {
         }
     }
 
-    public void showLocationOffDialog(Activity activity) {
+    /**
+     * Shows a dialog for user to open the settings page and turn on location services
+     *
+     * @param activity Activity object
+     * @param dialogTextResource int id of the required string resource
+     */
+    public void showLocationOffDialog(Activity activity, int dialogTextResource) {
         DialogUtil
             .showAlertDialog(activity,
                 activity.getString(R.string.ask_to_turn_location_on),
-                activity.getString(R.string.in_app_camera_needs_location),
+                activity.getString(dialogTextResource),
                 activity.getString(R.string.title_app_shortcut_setting),
                 activity.getString(R.string.cancel),
                 () -> openLocationSettings(activity),
@@ -98,28 +102,72 @@ public class LocationPermissionsHelper {
     }
 
     /**
-     * Open location source settings so that apps with location access can access it
+     * Opens the location access page in settings, for user to turn on location services
      *
-     * TODO: modify it to fix https://github.com/commons-app/apps-android-commons/issues/5255
+     * @param activity Activtiy object
      */
-
     public void openLocationSettings(Activity activity) {
         final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         final PackageManager packageManager = activity.getPackageManager();
 
         if (intent.resolveActivity(packageManager)!= null) {
             activity.startActivity(intent);
+        } else {
+            Toast.makeText(activity, R.string.cannot_open_location_settings, Toast.LENGTH_LONG).show();
         }
+    }
+
+    /**
+     * Shows a dialog for user to open the app's settings page and give location permission
+     *
+     * @param activity Activity object
+     */
+    public void showAppSettingsDialog(Activity activity) {
+        DialogUtil
+            .showAlertDialog(activity, activity.getString(R.string.location_permission_title),
+                activity.getString(R.string.explore_map_needs_location),
+                activity.getString(R.string.ok), activity.getString(R.string.cancel), () -> {
+                    openAppSettings(activity);
+                },
+                () -> {
+                    Toast.makeText(activity,
+                        activity.getString(R.string.explore_map_needs_location),
+                        Toast.LENGTH_LONG).show();
+                }
+            );
+    }
+
+    /**
+     * Opens detailed settings page of the app for the user to turn on location services
+     *
+     * @param activity Activity object
+     */
+    public void openAppSettings(Activity activity) {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
+        intent.setData(uri);
+        activity.startActivity(intent);
     }
 
 
     /**
      * Check if apps have access to location even after having individual access
      *
-     * @return
+     * @return Returns true ir false depending on if location services are on or not
      */
     public boolean isLocationAccessToAppsTurnedOn() {
         return (locationManager.isNetworkProviderEnabled() || locationManager.isGPSProviderEnabled());
+    }
+
+    /**
+     * Checks if location permission is already granted or not
+     *
+     * @param activity Activity object
+     * @return Returns true or false depending on whether location permission is granted or not
+     */
+    public boolean checkLocationPermission(Activity activity) {
+        return PermissionUtils.hasPermission(activity,
+            new String[]{Manifest.permission.ACCESS_FINE_LOCATION});
     }
 
     /**

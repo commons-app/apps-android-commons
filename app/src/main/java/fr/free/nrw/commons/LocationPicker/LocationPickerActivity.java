@@ -21,6 +21,7 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -389,7 +390,7 @@ public class LocationPickerActivity extends BaseActivity implements
             && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             onLocationPermissionGranted();
         } else {
-            onLocationPermissionDenied("");
+            onLocationPermissionDenied(getString(R.string.upload_map_location_access));
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
@@ -409,6 +410,7 @@ public class LocationPickerActivity extends BaseActivity implements
     @Override
     public void onLocationPermissionDenied(String toastMessage) {
         //do nothing
+        Toast.makeText(getBaseContext(),toastMessage,Toast.LENGTH_LONG).show();
     }
 
     @Override
