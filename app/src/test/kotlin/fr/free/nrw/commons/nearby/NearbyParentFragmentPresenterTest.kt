@@ -144,20 +144,21 @@ class NearbyParentFragmentPresenterTest {
      * Test updateMapAndList method updates parent fragment view with latest location of user
      * at significant location change
      */
-    @Test @Ignore
+     @Test
     fun testPlacesPopulatedForLatestLocationWhenLocationSignificantlyChanged() {
         expectMapAndListUpdate()
+        whenever(nearbyParentFragmentView.mapCenter).thenReturn(LatLng(2.0, 1.0, 0.0F));
         nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
         updateMapSignificantly()
     }
-
     /**
      * Test updateMapAndList method updates parent fragment view with latest location of user
      * at map is updated location change type
      */
-    @Test @Ignore
+    @Test
     fun testPlacesPopulatedForLatestLocationWhenLocationMapUpdated() {
         expectMapAndListUpdate()
+        whenever(nearbyParentFragmentView.mapCenter).thenReturn(LatLng(2.0, 1.0, 0.0F));
         nearbyPresenter.updateMapAndList(LocationChangeType.MAP_UPDATED)
         updateMapSignificantly()
     }
@@ -440,19 +441,21 @@ class NearbyParentFragmentPresenterTest {
         verify(nearbyParentFragmentView).displayBottomSheetWithInfo(marker)
     }
 
-    @Test @Ignore
+    @Test
     fun testOnWikidataEditSuccessful() {
         nearbyPresenter.onWikidataEditSuccessful()
         expectMapAndListUpdate()
+        whenever(nearbyParentFragmentView.mapCenter).thenReturn(LatLng(2.0, 1.0, 0.0F));
         nearbyPresenter.updateMapAndList(LocationChangeType.MAP_UPDATED)
         updateMapSignificantly()
     }
 
-    @Test @Ignore
+    @Test
     fun testOnLocationChangedSignificantly() {
-        nearbyPresenter.onLocationChangedSignificantly(latestLocation)
         expectMapAndListUpdate()
-        nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
+        whenever(nearbyParentFragmentView.mapCenter).thenReturn(LatLng(2.0, 1.0, 0.0F));
+        nearbyPresenter.onLocationChangedSignificantly(latestLocation)
+//        nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
         updateMapSignificantly()
     }
 
