@@ -168,20 +168,6 @@ public class NetworkingModule {
 
     @Provides
     @Singleton
-    @Named("commons-service")
-    public Service provideCommonsService(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
-        return ServiceFactory.get(commonsWikiSite);
-    }
-
-    @Provides
-    @Singleton
-    @Named("wikidata-service")
-    public Service provideWikidataService(@Named(NAMED_WIKI_DATA_WIKI_SITE) WikiSite wikidataWikiSite) {
-        return ServiceFactory.get(wikidataWikiSite, BuildConfig.WIKIDATA_URL, Service.class);
-    }
-
-    @Provides
-    @Singleton
     public ReviewInterface provideReviewInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
         return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, ReviewInterface.class);
     }
