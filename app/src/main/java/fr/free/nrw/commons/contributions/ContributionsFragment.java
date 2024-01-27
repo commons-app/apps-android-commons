@@ -539,7 +539,7 @@ public class ContributionsFragment
 
     private void updateNearbyNotification(@Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
         if (nearbyPlacesInfo != null && nearbyPlacesInfo.placeList != null && nearbyPlacesInfo.placeList.size() > 0) {
-            Place closestNearbyPlace = null;
+            Place closestNearbyPlace = nearbyPlacesInfo.placeList.get(0);;
             for (Place place : nearbyPlacesInfo.placeList) {
                 if (place.pic.equals("")) {
                     closestNearbyPlace = place;
