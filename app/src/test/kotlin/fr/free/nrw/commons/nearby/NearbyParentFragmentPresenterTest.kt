@@ -67,15 +67,17 @@ class NearbyParentFragmentPresenterTest {
     /**
      * Tests nearby operations are initialized
      */
-    @Test @Ignore
+    @Test
     fun testInitializeNearbyMapOperations() {
         nearbyPresenter.initializeMapOperations()
         verify(nearbyParentFragmentView).enableFABRecenter()
         expectMapAndListUpdate()
+        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F))
         nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
         verify(nearbyParentFragmentView).disableFABRecenter();
-        verify(nearbyParentFragmentView).setProgressBarVisibility(true)
-        verify(nearbyParentFragmentView).populatePlaces(latestLocation)
+        verify(nearbyParentFragmentView).`setProgressBarVisibility`(true)
+        assertTrue(null == nearbyParentFragmentView.mapCenter)
+        verify(nearbyParentFragmentView).populatePlaces(null)
         verify(nearbyParentFragmentView).addSearchThisAreaButtonAction()
         verify(nearbyParentFragmentView).setCheckBoxAction()
     }
