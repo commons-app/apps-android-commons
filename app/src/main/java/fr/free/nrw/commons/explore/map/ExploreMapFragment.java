@@ -370,9 +370,9 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * a) Creates bottom sheet behaviours from bottom sheet, sets initial states and visibility b)
-     * Gets the touch event on the map to perform following actions: if bottom sheet details are
-     * expanded or collapsed hide the bottom sheet details.
+     * a) Creates bottom sheet behaviours from bottom sheet, sets initial states and visibility
+     * b) Gets the touch event on the map to perform following actions:
+     *      if bottom sheet details are expanded or collapsed hide the bottom sheet details.
      */
     @SuppressLint("ClickableViewAccessibility")
     private void initBottomSheets() {
