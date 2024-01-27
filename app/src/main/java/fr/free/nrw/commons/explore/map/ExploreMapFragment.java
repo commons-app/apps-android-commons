@@ -156,41 +156,30 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     @BindView(R.id.category)
     TextView distance;
 
-    private ActivityResultLauncher<String[]> activityResultLauncher = registerForActivityResult(
-        new ActivityResultContracts.RequestMultiplePermissions(),
-        new ActivityResultCallback<Map<String, Boolean>>() {
-            @Override
-            public void onActivityResult(Map<String, Boolean> result) {
-                boolean areAllGranted = true;
-                for (final boolean b : result.values()) {
-                    areAllGranted = areAllGranted && b;
-                }
-
-                if (areAllGranted) {
-                    locationPermissionGranted();
+    private ActivityResultLauncher<String> activityResultLauncher = registerForActivityResult(
+        new ActivityResultContracts.RequestPermission(), isGranted -> {
+            if (isGranted) {
+                locationPermissionGranted();
+            } else {
+                if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
+                    DialogUtil.showAlertDialog(getActivity(), getActivity().getString(R.string.location_permission_title),
+                        getActivity().getString(R.string.location_permission_rationale_nearby),
+                        getActivity().getString(android.R.string.ok),
+                        getActivity().getString(android.R.string.cancel),
+                        () -> {
+                            checkPermissionsAndPerformAction();
+                        },
+                        () -> {
+                            isPermissionDenied = true;
+                        },
+                        null,
+                        false);
                 } else {
-                    if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
-                        DialogUtil.showAlertDialog(getActivity(),
-                            getActivity().getString(R.string.location_permission_title),
-                            getActivity().getString(R.string.location_permission_rationale_nearby),
-                            getActivity().getString(android.R.string.ok),
-                            getActivity().getString(android.R.string.cancel),
-                            () -> {
-                                if (!(locationManager.isNetworkProviderEnabled()
-                                    || locationManager.isGPSProviderEnabled())) {
-                                    showLocationOffDialog();
-                                }
-                            },
-                            () -> isPermissionDenied = true,
-                            null,
-                            false);
-                    } else {
-                        isPermissionDenied = true;
-                    }
-
+                    isPermissionDenied = true;
                 }
             }
-        });
+
+});
 
 
     @NonNull
@@ -452,8 +441,8 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                 },
                 throwable -> {
                     Timber.d(throwable);
-                    showErrorMessage(getString(R.string.error_fetching_nearby_places)
-                        + throwable.getLocalizedMessage());
+                    // Not showing the user, throwable localizedErrorMessage
+                    showErrorMessage(getString(R.string.error_fetching_nearby_places));
                     setProgressBarVisibility(false);
                     presenter.lockUnlockNearby(false);
                 }));
@@ -478,7 +467,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     @Override
     public void checkPermissionsAndPerformAction() {
         Timber.d("Checking permission and perfoming action");
-        activityResultLauncher.launch(new String[]{permission.ACCESS_FINE_LOCATION});
+            activityResultLauncher.launch(permission.ACCESS_FINE_LOCATION);
     }
 
     private void locationPermissionGranted() {
