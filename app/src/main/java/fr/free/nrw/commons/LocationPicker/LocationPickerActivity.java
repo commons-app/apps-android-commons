@@ -38,6 +38,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.filepicker.Constants;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationPermissionsHelper;
 import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
@@ -117,6 +118,7 @@ public class LocationPickerActivity extends BaseActivity implements
     @Named("default_preferences")
     public
     JsonKvStore applicationKvStore;
+    BasicKvStore store;
     /**
      * isDarkTheme: for keeping a track of the device theme and modifying the map theme accordingly
      */
@@ -137,6 +139,7 @@ public class LocationPickerActivity extends BaseActivity implements
 
         isDarkTheme = systemThemeUtils.isDeviceInNightMode();
         moveToCurrentLocation = false;
+        store = new BasicKvStore(this, "LocationPermissions");
 
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         final ActionBar actionBar = getSupportActionBar();
@@ -403,13 +406,20 @@ public class LocationPickerActivity extends BaseActivity implements
 
     @Override
     public void onLocationPermissionDenied(String toastMessage) {
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(this, permission.ACCESS_FINE_LOCATION)) {
-            if(!locationPermissionsHelper.checkLocationPermission(this)) {
-            // means user has denied location permission twice or checked the "Don't show again"
-            locationPermissionsHelper.showAppSettingsDialog(this, R.string.upload_map_location_access);
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
+            permission.ACCESS_FINE_LOCATION)) {
+            if (!locationPermissionsHelper.checkLocationPermission(this)) {
+                if (store.getBoolean("isPermissionDenied", false)) {
+                    // means user has denied location permission twice or checked the "Don't show again"
+                    locationPermissionsHelper.showAppSettingsDialog(this,
+                        R.string.upload_map_location_access);
+                } else {
+                    Toast.makeText(getBaseContext(), toastMessage, Toast.LENGTH_LONG).show();
+                }
+                store.putBoolean("isPermissionDenied", true);
             }
         } else {
-        Toast.makeText(getBaseContext(),toastMessage,Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), toastMessage, Toast.LENGTH_LONG).show();
         }
     }
 
