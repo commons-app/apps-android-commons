@@ -304,7 +304,9 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             }
 
         });
-
+        if (!locationPermissionsHelper.checkLocationPermission(getActivity())) {
+            askForLocationPermission();
+        }
     }
 
     @Override
@@ -314,8 +316,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         presenter.attachView(this);
         registerNetworkReceiver();
         if (isResumed()) {
-            if (!isPermissionDenied && !applicationKvStore
-                .getBoolean("doNotAskForLocationPermission", false)) {
+            if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
                 performMapReadyActions();
             } else {
                 startMapWithoutPermission();
@@ -323,8 +324,14 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         }
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        // unregistering the broadcastReceiver, as it was causing an exception and a potential crash
+        getActivity().unregisterReceiver(broadcastReceiver);
+    }
+
     private void startMapWithoutPermission() {
-        applicationKvStore.putBoolean("doNotAskForLocationPermission", true);
         lastKnownLocation = MapUtils.defaultLatLng;
         moveCameraToPosition(
             new GeoPoint(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()));
@@ -342,15 +349,14 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             mapView.getOverlayManager().getTilesOverlay()
                 .setColorFilter(TilesOverlay.INVERT_COLORS);
         }
-            if (!applicationKvStore.getBoolean("doNotAskForLocationPermission", false) ||
-                PermissionUtils.hasPermission(getActivity(),
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION})) {
-                if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
-                    locationPermissionGranted();
-                }
-            } else {
-                isPermissionDenied = true;
-            }
+        if (applicationKvStore.getBoolean("doNotAskForLocationPermission", false) &&
+            !locationPermissionsHelper.checkLocationPermission(getActivity())) {
+            isPermissionDenied = true;
+        }
+        lastKnownLocation = MapUtils.defaultLatLng;
+        moveCameraToPosition(
+            new GeoPoint(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()));
+        presenter.onMapReady(exploreMapController);
     }
 
     private void initViews() {
@@ -422,9 +428,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     public void populatePlaces(LatLng curLatLng) {
         final Observable<MapController.ExplorePlacesInfo> nearbyPlacesInfoObservable;
         if (curLatLng == null) {
-            if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
-                locationPermissionGranted();
-            }
             return;
         }
         if (curLatLng.equals(getLastMapFocus())) { // Means we are checking around current location
@@ -503,14 +506,10 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void recenterMap(LatLng curLatLng) {
-        if (!isPermissionDenied || curLatLng == null) {
-            recenterToUserLocation = true;
-            if (!locationPermissionsHelper.checkLocationPermission(getActivity())) {
-                askForLocationPermission();
-            } else {
-                locationPermissionGranted();
-            }
-            return;
+        if (!locationPermissionsHelper.checkLocationPermission(getActivity())) {
+            askForLocationPermission();
+        } else {
+            locationPermissionGranted();
         }
         // if user has denied permission twice, then show dialog
         if (isPermissionDenied) {
@@ -519,8 +518,12 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                 isPermissionDenied = false;
                 recenterMap(curLatLng);
             } else {
-                locationPermissionsHelper.showAppSettingsDialog(getActivity(), R.string.explore_map_needs_location);
+                locationPermissionsHelper.showAppSettingsDialog(getActivity(),
+                    R.string.explore_map_needs_location);
             }
+        }
+        if (curLatLng == null) {
+            recenterToUserLocation = true;
             return;
         }
         recenterMarkerToPosition(new GeoPoint(curLatLng.getLatitude(), curLatLng.getLongitude()));
@@ -873,7 +876,20 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         if (mapCenter != null) {
             latLnge = new fr.free.nrw.commons.location.LatLng(
                 mapCenter.getLatitude(), mapCenter.getLongitude(), 100);
+        } else {
+            if (applicationKvStore.getString("LastLocation") != null) {
+                final String[] locationLatLng
+                    = applicationKvStore.getString("LastLocation").split(",");
+                lastKnownLocation
+                    = new fr.free.nrw.commons.location.LatLng(Double.parseDouble(locationLatLng[0]),
+                    Double.parseDouble(locationLatLng[1]), 1f);
+                latLnge = lastKnownLocation;
+            } else {
+                latLnge = new fr.free.nrw.commons.location.LatLng(51.506255446947776,
+                    -0.07483536015053005, 1f);
+            }
         }
+        moveCameraToPosition(new GeoPoint(latLnge.getLatitude(),latLnge.getLongitude()));
         return latLnge;
     }
 
@@ -931,14 +947,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                 }
             }
         };
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        if(!locationPermissionsHelper.checkLocationPermission(getActivity())) {
-            askForLocationPermission();
-        }
     }
 
     @Override
