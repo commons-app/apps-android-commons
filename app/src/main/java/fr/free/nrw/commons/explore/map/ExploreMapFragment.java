@@ -452,8 +452,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                 },
                 throwable -> {
                     Timber.d(throwable);
-                    showErrorMessage(getString(R.string.error_fetching_nearby_places)
-                        + throwable.getLocalizedMessage());
+                    showErrorMessage(getString(R.string.no_pictures_in_this_area));
                     setProgressBarVisibility(false);
                     presenter.lockUnlockNearby(false);
                 }));
