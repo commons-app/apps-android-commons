@@ -539,17 +539,22 @@ public class ContributionsFragment
 
     private void updateNearbyNotification(@Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
         if (nearbyPlacesInfo != null && nearbyPlacesInfo.placeList != null && nearbyPlacesInfo.placeList.size() > 0) {
-            Place closestNearbyPlace = nearbyPlacesInfo.placeList.get(0);
+            Place closestNearbyPlace = null;
             for (Place place : nearbyPlacesInfo.placeList) {
                 if (place.pic.equals("")) {
                     closestNearbyPlace = place;
                     break;
                 }
             }
-            String distance = formatDistanceBetween(curLatLng, closestNearbyPlace.location);
-            closestNearbyPlace.setDistance(distance);
-            direction = (float) computeBearing(curLatLng, closestNearbyPlace.location);
-            nearbyNotificationCardView.updateContent(closestNearbyPlace, direction);
+
+            if(closestNearbyPlace == null) {
+                nearbyNotificationCardView.setVisibility(View.GONE);
+            }else{
+                String distance = formatDistanceBetween(curLatLng, closestNearbyPlace.location);
+                closestNearbyPlace.setDistance(distance);
+                direction = (float) computeBearing(curLatLng, closestNearbyPlace.location);
+                nearbyNotificationCardView.updateContent(closestNearbyPlace, direction);
+            }
         } else {
             // Means that no close nearby place is found
             nearbyNotificationCardView.setVisibility(View.GONE);
