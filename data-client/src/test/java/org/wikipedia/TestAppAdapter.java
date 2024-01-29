@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 
 import org.wikipedia.dataclient.Service;
 import org.wikipedia.dataclient.SharedPreferenceCookieManager;
-import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.dataclient.okhttp.TestStubInterceptor;
 import org.wikipedia.dataclient.okhttp.UnsuccessfulResponseInterceptor;
 import org.wikipedia.login.LoginResult;
@@ -24,7 +23,7 @@ public class TestAppAdapter extends AppAdapter {
     }
 
     @Override
-    public OkHttpClient getOkHttpClient(@NonNull WikiSite wikiSite) {
+    public OkHttpClient getOkHttpClient() {
         return new OkHttpClient.Builder()
                 .addInterceptor(new UnsuccessfulResponseInterceptor())
                 .addInterceptor(new TestStubInterceptor())

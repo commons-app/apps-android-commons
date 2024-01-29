@@ -8,8 +8,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.wikipedia.AppAdapter;
 import org.wikipedia.TestAppAdapter;
-import org.wikipedia.dataclient.Service;
-import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.json.GsonUtil;
 
 import okhttp3.Dispatcher;
@@ -25,7 +23,7 @@ public abstract class MockWebServerTest {
 
     @Before public void setUp() throws Throwable {
         AppAdapter.set(new TestAppAdapter());
-        OkHttpClient.Builder builder = AppAdapter.get().getOkHttpClient(new WikiSite(Service.WIKIPEDIA_URL)).newBuilder();
+        OkHttpClient.Builder builder = AppAdapter.get().getOkHttpClient().newBuilder();
         okHttpClient = builder.dispatcher(new Dispatcher(new ImmediateExecutorService())).build();
         server.setUp();
     }
