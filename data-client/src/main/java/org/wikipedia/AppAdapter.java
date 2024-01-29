@@ -8,7 +8,6 @@ import okhttp3.OkHttpClient;
 
 public abstract class AppAdapter {
 
-    public abstract String getMediaWikiBaseUrl();
     public abstract String getRestbaseUriFormat();
     public abstract OkHttpClient getOkHttpClient();
     public abstract int getDesiredLeadImageDp();

@@ -1,7 +1,6 @@
 package fr.free.nrw.commons;
 
 import androidx.annotation.NonNull;
-import fr.free.nrw.commons.wikidata.WikidataConstants;
 import okhttp3.OkHttpClient;
 import org.wikipedia.AppAdapter;
 import org.wikipedia.dataclient.SharedPreferenceCookieManager;
@@ -9,11 +8,6 @@ import org.wikipedia.dataclient.okhttp.TestStubInterceptor;
 import org.wikipedia.dataclient.okhttp.UnsuccessfulResponseInterceptor;
 
 public class TestAppAdapter extends AppAdapter {
-
-    @Override
-    public String getMediaWikiBaseUrl() {
-        return WikidataConstants.WIKIPEDIA_URL;
-    }
 
     @Override
     public String getRestbaseUriFormat() {

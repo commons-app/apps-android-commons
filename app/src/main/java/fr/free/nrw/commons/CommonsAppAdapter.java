@@ -22,11 +22,6 @@ public class CommonsAppAdapter extends AppAdapter {
     }
 
     @Override
-    public String getMediaWikiBaseUrl() {
-        return BuildConfig.COMMONS_URL;
-    }
-
-    @Override
     public String getRestbaseUriFormat() {
         return BuildConfig.COMMONS_URL;
     }
