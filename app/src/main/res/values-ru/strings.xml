@@ -3,6 +3,7 @@
 * Alexander Yukal
 * Alexandr Efremov
 * Av6
+* Butko
 * DDPAT
 * Deltaspace
 * Eleferen
@@ -798,6 +799,10 @@
   <string name="learn_how_to_write_a_useful_description">Узнайте, как написать полезное описание</string>
   <string name="learn_how_to_write_a_useful_caption">Узнайте, как написать полезную подпись</string>
   <string name="see_your_achievements">Посмотрите свои достижения</string>
+  <string name="edit_image">Редактировать изображение</string>
+  <string name="edit_location">Изменить местоположение</string>
+  <string name="send_thanks_to_author">Поблагодарить автора</string>
+  <string name="error_sending_thanks">Ошибка при отправке благодарности автору.</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">выбрано %d изображение</item>
     <item quantity="few">выбрано %d изображения</item>

@@ -121,7 +121,7 @@
   <string name="display_list_button">Listar</string>
   <string name="contributions_subtitle_zero">(Nihil incargate ancora)</string>
   <string name="categories_not_found">Necun categoria correspondente a %1$s trovate</string>
-  <string name="depictions_not_found">Necun elemento Wikidata correspondente a %1$s trovate</string>
+  <string name="depictions_not_found">Necun entrata Wikidata correspondente a %1$s trovate</string>
   <string name="no_child_classes">%1$s non ha alcun classe filio</string>
   <string name="no_parent_classes">%1$s non ha alcun classe genitor</string>
   <string name="categories_skip_explanation">Adde categorias pro render tu imagines plus discoperibile sur Wikimedia Commons.\nComencia a scriber pro adder categorias.</string>
