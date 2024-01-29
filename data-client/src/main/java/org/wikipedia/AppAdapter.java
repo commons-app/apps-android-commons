@@ -20,8 +20,6 @@ public abstract class AppAdapter {
     public abstract SharedPreferenceCookieManager getCookies();
     public abstract void setCookies(@NonNull SharedPreferenceCookieManager cookies);
 
-    public abstract boolean logErrorsInsteadOfCrashing();
-
     private static AppAdapter INSTANCE;
     public static void set(AppAdapter instance) {
         INSTANCE = instance;

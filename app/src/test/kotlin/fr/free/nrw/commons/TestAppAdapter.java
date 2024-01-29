@@ -57,9 +57,5 @@ public class TestAppAdapter extends AppAdapter {
     public void setCookies(@NonNull SharedPreferenceCookieManager cookies) {
     }
 
-    @Override
-    public boolean logErrorsInsteadOfCrashing() {
-        return false;
-    }
 }
 

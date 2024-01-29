@@ -107,11 +107,12 @@ public final class L {
     }
 
     public static void logRemoteErrorIfProd(@NonNull Throwable t) {
-        if (AppAdapter.get().logErrorsInsteadOfCrashing()) {
-            logRemoteError(t);
-        } else {
+        // Since "logErrorsInsteadOfCrashing()" only ever returns false...
+        // if (AppAdapter.get().logErrorsInsteadOfCrashing()) {
+        //     logRemoteError(t);
+        // } else {
             throw new RuntimeException(t);
-        }
+        // }
     }
 
     public static void setRemoteLogger(@Nullable RemoteExceptionLogger logger) {

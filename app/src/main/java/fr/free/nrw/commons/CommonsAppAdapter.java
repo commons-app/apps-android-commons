@@ -70,8 +70,4 @@ public class CommonsAppAdapter extends AppAdapter {
         preferences.putString(COOKIE_STORE_NAME, GsonMarshaller.marshal(cookies));
     }
 
-    @Override
-    public boolean logErrorsInsteadOfCrashing() {
-        return false;
-    }
 }
