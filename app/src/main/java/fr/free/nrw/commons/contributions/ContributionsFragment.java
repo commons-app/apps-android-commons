@@ -539,8 +539,9 @@ public class ContributionsFragment
     private void updateNearbyNotification(@Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
         if (nearbyPlacesInfo != null && nearbyPlacesInfo.placeList != null && nearbyPlacesInfo.placeList.size() > 0) {
             Place closestNearbyPlace = null;
+            // Find the first nearby place that has no image and exists
             for (Place place : nearbyPlacesInfo.placeList) {
-                if (place.pic.equals("")) {
+                if (place.pic.equals("") && place.exists) {
                     closestNearbyPlace = place;
                     break;
                 }
