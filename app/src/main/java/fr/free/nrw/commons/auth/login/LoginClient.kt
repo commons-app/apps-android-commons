@@ -6,8 +6,6 @@ import fr.free.nrw.commons.auth.login.LoginResult.ResetPasswordResult
 import fr.free.nrw.commons.wikidata.WikidataConstants.WIKIPEDIA_URL
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import org.wikipedia.dataclient.ServiceFactory
-import org.wikipedia.dataclient.WikiSite
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -18,7 +16,7 @@ import java.io.IOException
 /**
  * Responsible for making login related requests to the server.
  */
-class LoginClient {
+class LoginClient(private val loginInterface: LoginInterface) {
     private var tokenCall: Call<MwQueryResponse?>? = null
     private var loginCall: Call<LoginResponse?>? = null
 
@@ -30,14 +28,18 @@ class LoginClient {
      */
     private var userLanguage = ""
 
-    fun request(wiki: WikiSite, userName: String, password: String, cb: LoginCallback) {
+    fun getLoginToken() = loginInterface.getLoginToken()
+
+    fun request(userName: String, password: String, cb: LoginCallback) {
         cancel()
 
-        tokenCall = ServiceFactory.get(wiki, LoginInterface::class.java).getLoginToken()
+        tokenCall = getLoginToken()
         tokenCall!!.enqueue(object : Callback<MwQueryResponse?> {
             override fun onResponse(call: Call<MwQueryResponse?>, response: Response<MwQueryResponse?>) {
-                login(wiki, userName, password, null, null,
-                    response.body()!!.query()!!.loginToken(), userLanguage, cb)
+                login(
+                    userName, password, null, null, response.body()!!.query()!!.loginToken(),
+                    userLanguage, cb
+                )
             }
 
             override fun onFailure(call: Call<MwQueryResponse?>, caught: Throwable) {
@@ -50,16 +52,15 @@ class LoginClient {
     }
 
     fun login(
-        wiki: WikiSite, userName: String, password: String, retypedPassword: String?,
-        twoFactorCode: String?, loginToken: String?, userLanguage: String, cb: LoginCallback
+        userName: String, password: String, retypedPassword: String?, twoFactorCode: String?,
+        loginToken: String?, userLanguage: String, cb: LoginCallback
     ) {
         this.userLanguage = userLanguage
 
         loginCall = if (twoFactorCode.isNullOrEmpty() && retypedPassword.isNullOrEmpty()) {
-            ServiceFactory.get(wiki, LoginInterface::class.java)
-                .postLogIn(userName, password, loginToken, userLanguage, WIKIPEDIA_URL)
+            loginInterface.postLogIn(userName, password, loginToken, userLanguage, WIKIPEDIA_URL)
         } else {
-            ServiceFactory.get(wiki, LoginInterface::class.java).postLogIn(
+            loginInterface.postLogIn(
                 userName, password, retypedPassword, twoFactorCode, loginToken, userLanguage, true
             )
         }
@@ -69,12 +70,12 @@ class LoginClient {
                 call: Call<LoginResponse?>,
                 response: Response<LoginResponse?>
             ) {
-                val loginResult = response.body()?.toLoginResult(wiki, password)
+                val loginResult = response.body()?.toLoginResult(password)
                 if (loginResult != null) {
                     if (loginResult.pass && !loginResult.userName.isNullOrEmpty()) {
                         // The server could do some transformations on user names, e.g. on some
                         // wikis is uppercases the first letter.
-                        getExtendedInfo(wiki, loginResult.userName, loginResult, cb)
+                        getExtendedInfo(loginResult.userName, loginResult, cb)
                     } else if ("UI" == loginResult.status) {
                         when (loginResult) {
                             is OAuthResult -> cb.twoFactorPrompt(
@@ -106,25 +107,24 @@ class LoginClient {
     }
 
     @Throws(Throwable::class)
-    fun loginBlocking(wiki: WikiSite, userName: String, password: String, twoFactorCode: String?) {
-        val tokenResponse = ServiceFactory.get(wiki, LoginInterface::class.java).getLoginToken().execute()
+    fun loginBlocking(userName: String, password: String, twoFactorCode: String?) {
+        val tokenResponse = getLoginToken().execute()
         if (tokenResponse.body()?.query()?.loginToken().isNullOrEmpty()) {
             throw IOException("Unexpected response when getting login token.")
         }
 
         val loginToken = tokenResponse.body()?.query()?.loginToken()
         val tempLoginCall = if (twoFactorCode.isNullOrEmpty()) {
-            ServiceFactory.get(wiki, LoginInterface::class.java).postLogIn(
-                userName, password, loginToken, userLanguage, WIKIPEDIA_URL)
+            loginInterface.postLogIn(userName, password, loginToken, userLanguage, WIKIPEDIA_URL)
         } else {
-            ServiceFactory.get(wiki, LoginInterface::class.java).postLogIn(
+            loginInterface.postLogIn(
                 userName, password, null, twoFactorCode, loginToken, userLanguage, true
             )
         }
 
         val response = tempLoginCall.execute()
         val loginResponse = response.body() ?: throw IOException("Unexpected response when logging in.")
-        val loginResult = loginResponse.toLoginResult(wiki, password) ?: throw IOException("Unexpected response when logging in.")
+        val loginResult = loginResponse.toLoginResult(password) ?: throw IOException("Unexpected response when logging in.")
 
         if ("UI" == loginResult.status) {
             if (loginResult is OAuthResult) {
@@ -139,23 +139,18 @@ class LoginClient {
         }
     }
 
-    private fun getExtendedInfo(
-        wiki: WikiSite, userName: String, loginResult: LoginResult, cb: LoginCallback
-    ) = ServiceFactory.get(wiki, LoginInterface::class.java).getUserInfo(userName)
-        .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-        .subscribe({ response: MwQueryResponse? ->
-            loginResult.userId = response?.query()?.userInfo()?.id() ?: 0
-            loginResult.groups = response?.query()?.getUserResponse(userName)?.groups ?: emptySet()
-            cb.success(loginResult)
-            Timber.v(
-                "Found user ID %s for %s",
-                response?.query()?.userInfo()?.id(),
-                wiki.subdomain()
-            )
-        }, { caught: Throwable ->
-            Timber.e(caught, "Login succeeded but getting group information failed. ")
-            cb.error(caught)
-        })
+    private fun getExtendedInfo(userName: String, loginResult: LoginResult, cb: LoginCallback) =
+        loginInterface.getUserInfo(userName)
+            .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ response: MwQueryResponse? ->
+                loginResult.userId = response?.query()?.userInfo()?.id() ?: 0
+                loginResult.groups =
+                    response?.query()?.getUserResponse(userName)?.groups ?: emptySet()
+                cb.success(loginResult)
+            }, { caught: Throwable ->
+                Timber.e(caught, "Login succeeded but getting group information failed. ")
+                cb.error(caught)
+            })
 
     fun cancel() {
         tokenCall?.let {

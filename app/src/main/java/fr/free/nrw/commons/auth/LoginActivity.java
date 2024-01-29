@@ -65,10 +65,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     SessionManager sessionManager;
 
     @Inject
-    @Named(NAMED_COMMONS_WIKI_SITE)
-    WikiSite commonsWikiSite;
-
-    @Inject
     @Named("default_preferences")
     JsonKvStore applicationKvStore;
 
@@ -231,13 +227,13 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     private void doLogin(String username, String password, String twoFactorCode) {
         progressDialog.show();
-        loginToken = ServiceFactory.get(commonsWikiSite, LoginInterface.class).getLoginToken();
+        loginToken = loginClient.getLoginToken();
         loginToken.enqueue(
                 new Callback<MwQueryResponse>() {
                     @Override
                     public void onResponse(Call<MwQueryResponse> call,
                                            Response<MwQueryResponse> response) {
-                        loginClient.login(commonsWikiSite, username, password, null, twoFactorCode,
+                        loginClient.login(username, password, null, twoFactorCode,
                                 response.body().query().loginToken(), Locale.getDefault().getLanguage(), new LoginCallback() {
                                     @Override
                                     public void success(@NonNull LoginResult result) {
