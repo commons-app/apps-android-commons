@@ -6,7 +6,6 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import okhttp3.OkHttpClient;
 import org.wikipedia.AppAdapter;
 import org.wikipedia.dataclient.SharedPreferenceCookieManager;
-import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.json.GsonMarshaller;
 import org.wikipedia.json.GsonUnmarshaller;
 
@@ -33,7 +32,7 @@ public class CommonsAppAdapter extends AppAdapter {
     }
 
     @Override
-    public OkHttpClient getOkHttpClient(@NonNull WikiSite wikiSite) {
+    public OkHttpClient getOkHttpClient() {
         return OkHttpConnectionFactory.getClient();
     }
 
