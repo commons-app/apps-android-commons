@@ -3,9 +3,7 @@ package fr.free.nrw.commons.auth.csrf
 import androidx.annotation.VisibleForTesting
 import fr.free.nrw.commons.auth.SessionManager
 import org.wikipedia.AppAdapter
-import org.wikipedia.dataclient.ServiceFactory
 import org.wikipedia.dataclient.SharedPreferenceCookieManager
-import org.wikipedia.dataclient.WikiSite
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import fr.free.nrw.commons.auth.login.LoginClient
 import fr.free.nrw.commons.auth.login.LoginCallback
@@ -19,17 +17,16 @@ import java.util.concurrent.Callable
 import java.util.concurrent.Executors.newSingleThreadExecutor
 
 class CsrfTokenClient(
-    private val csrfWikiSite: WikiSite,
-    private val sessionManager: SessionManager
+    private val sessionManager: SessionManager,
+    private val csrfTokenInterface: CsrfTokenInterface,
+    private val loginClient: LoginClient
 ) {
     private var retries = 0
     private var csrfTokenCall: Call<MwQueryResponse?>? = null
-    private val loginClient = LoginClient()
 
     @Throws(Throwable::class)
     fun getTokenBlocking(): String {
         var token = ""
-        val service = ServiceFactory.get(csrfWikiSite, CsrfTokenInterface::class.java)
         val userName = AppAdapter.get().getUserName()
         val password = AppAdapter.get().getPassword()
 
@@ -37,13 +34,12 @@ class CsrfTokenClient(
             try {
                 if (retry > 0) {
                     // Log in explicitly
-                    LoginClient()
-                        .loginBlocking(csrfWikiSite, userName, password, "")
+                    loginClient.loginBlocking(userName, password, "")
                 }
 
                 // Get CSRFToken response off the main thread.
                 val response = newSingleThreadExecutor().submit(Callable {
-                    service.getCsrfTokenCall().execute()
+                    csrfTokenInterface.getCsrfTokenCall().execute()
                 }).get()
 
                 if (response.body()?.query()?.csrfToken().isNullOrEmpty()) {
@@ -114,7 +110,7 @@ class CsrfTokenClient(
             login(userName, password, callback) {
                 Timber.i("retrying...")
                 cancel()
-                csrfTokenCall = request(ServiceFactory.get(csrfWikiSite, CsrfTokenInterface::class.java), callback)
+                csrfTokenCall = request(csrfTokenInterface, callback)
             }
         } else {
             callback.failure(caught())
@@ -126,8 +122,7 @@ class CsrfTokenClient(
         password: String,
         callback: Callback,
         retryCallback: () -> Unit
-    ) = LoginClient()
-        .request(csrfWikiSite, username, password, object : LoginCallback {
+    ) = loginClient.request(username, password, object : LoginCallback {
         override fun success(loginResult: LoginResult) {
             if (loginResult.pass) {
                 sessionManager.updateAccount(loginResult)
