@@ -1,7 +1,8 @@
 package fr.free.nrw.commons.upload;
 
-import androidx.annotation.NonNull;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.MW_API_PREFIX;
 
+import androidx.annotation.NonNull;
 import com.google.gson.JsonObject;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
@@ -12,8 +13,6 @@ import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-
-import static org.wikipedia.dataclient.Service.MW_API_PREFIX;
 
 public interface UploadInterface {
 

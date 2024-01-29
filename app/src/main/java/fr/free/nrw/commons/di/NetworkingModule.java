@@ -11,6 +11,8 @@ import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.actions.PageEditInterface;
 import fr.free.nrw.commons.actions.ThanksInterface;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.auth.csrf.CsrfTokenInterface;
+import fr.free.nrw.commons.auth.login.LoginInterface;
 import fr.free.nrw.commons.category.CategoryInterface;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -37,7 +39,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient;
-import org.wikipedia.dataclient.Service;
 import org.wikipedia.dataclient.ServiceFactory;
 import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.json.GsonUtil;
@@ -106,15 +107,27 @@ public class NetworkingModule {
     @Named(NAMED_COMMONS_CSRF)
     @Provides
     @Singleton
-    public CsrfTokenClient provideCommonsCsrfTokenClient(
-        @Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite, SessionManager sessionManager) {
-        return new CsrfTokenClient(commonsWikiSite, sessionManager);
+    public CsrfTokenClient provideCommonsCsrfTokenClient(SessionManager sessionManager,
+        CsrfTokenInterface tokenInterface, LoginClient loginClient) {
+        return new CsrfTokenClient(sessionManager, tokenInterface, loginClient);
     }
 
     @Provides
     @Singleton
-    public LoginClient provideLoginClient() {
-        return new LoginClient();
+    public CsrfTokenInterface provideCsrfTokenInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
+        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, CsrfTokenInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    public LoginInterface provideLoginInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
+        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, LoginInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    public LoginClient provideLoginClient(LoginInterface loginInterface) {
+        return new LoginClient(loginInterface);
     }
 
     @Provides
@@ -164,20 +177,6 @@ public class NetworkingModule {
     @Singleton
     public Gson provideGson() {
         return GsonUtil.getDefaultGson();
-    }
-
-    @Provides
-    @Singleton
-    @Named("commons-service")
-    public Service provideCommonsService(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
-        return ServiceFactory.get(commonsWikiSite);
-    }
-
-    @Provides
-    @Singleton
-    @Named("wikidata-service")
-    public Service provideWikidataService(@Named(NAMED_WIKI_DATA_WIKI_SITE) WikiSite wikidataWikiSite) {
-        return ServiceFactory.get(wikidataWikiSite, BuildConfig.WIKIDATA_URL, Service.class);
     }
 
     @Provides

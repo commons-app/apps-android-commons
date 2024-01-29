@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName
 import fr.free.nrw.commons.auth.login.LoginResult.OAuthResult
 import fr.free.nrw.commons.auth.login.LoginResult.ResetPasswordResult
 import fr.free.nrw.commons.auth.login.LoginResult.Result
-import org.wikipedia.dataclient.WikiSite
 import org.wikipedia.dataclient.mwapi.MwServiceError
 
 class LoginResponse {
@@ -14,8 +13,8 @@ class LoginResponse {
     @SerializedName("clientlogin")
     private val clientLogin: ClientLogin? = null
 
-    fun toLoginResult(site: WikiSite, password: String): LoginResult? {
-        return clientLogin?.toLoginResult(site, password)
+    fun toLoginResult(password: String): LoginResult? {
+        return clientLogin?.toLoginResult(password)
     }
 }
 
@@ -27,15 +26,15 @@ internal class ClientLogin {
     @SerializedName("username")
     private val userName: String? = null
 
-    fun toLoginResult(site: WikiSite, password: String): LoginResult {
+    fun toLoginResult(password: String): LoginResult {
         var userMessage = message
         if ("UI" == status) {
             if (requests != null) {
                 for (req in requests) {
                     if ("MediaWiki\\Extension\\OATHAuth\\Auth\\TOTPAuthenticationRequest" == req.id()) {
-                        return OAuthResult(site, status, userName, password, message)
+                        return OAuthResult(status, userName, password, message)
                     } else if ("MediaWiki\\Auth\\PasswordAuthenticationRequest" == req.id()) {
-                        return ResetPasswordResult(site, status, userName, password, message)
+                        return ResetPasswordResult(status, userName, password, message)
                     }
                 }
             }
@@ -43,7 +42,7 @@ internal class ClientLogin {
             //TODO: String resource -- Looks like needed for others in this class too
             userMessage = "An unknown error occurred."
         }
-        return Result(site, status ?: "", userName, password, userMessage)
+        return Result(status ?: "", userName, password, userMessage)
     }
 }
 
