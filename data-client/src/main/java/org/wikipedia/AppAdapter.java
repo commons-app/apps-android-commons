@@ -7,10 +7,15 @@ import org.wikipedia.dataclient.SharedPreferenceCookieManager;
 import okhttp3.OkHttpClient;
 
 public abstract class AppAdapter {
+    private final int DEFAULT_THUMB_SIZE = 640;
 
     public abstract String getRestbaseUriFormat();
     public abstract OkHttpClient getOkHttpClient();
-    public abstract int getDesiredLeadImageDp();
+
+    // Unused from commons app, implement here as a temporary step during refactoring
+    public int getDesiredLeadImageDp() {
+        return DEFAULT_THUMB_SIZE;
+    }
 
     public abstract boolean isLoggedIn();
     public abstract String getUserName();

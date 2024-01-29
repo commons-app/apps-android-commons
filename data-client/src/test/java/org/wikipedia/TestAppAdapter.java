@@ -25,11 +25,6 @@ public class TestAppAdapter extends AppAdapter {
     }
 
     @Override
-    public int getDesiredLeadImageDp() {
-        return 0;
-    }
-
-    @Override
     public boolean isLoggedIn() {
         return false;
     }

@@ -32,11 +32,6 @@ public class CommonsAppAdapter extends AppAdapter {
     }
 
     @Override
-    public int getDesiredLeadImageDp() {
-        return DEFAULT_THUMB_SIZE;
-    }
-
-    @Override
     public boolean isLoggedIn() {
         return sessionManager.isUserLoggedIn();
     }
