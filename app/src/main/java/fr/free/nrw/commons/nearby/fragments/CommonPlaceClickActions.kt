@@ -38,6 +38,9 @@ class CommonPlaceClickActions @Inject constructor(
         }
     }
 
+    /**
+    * Shows the Label for the Icon when it's long pressed
+     **/
     fun onCameraLongPressed(): () -> Boolean = {
         Toast.makeText(activity, R.string.menu_from_camera, Toast.LENGTH_SHORT).show()
         true
