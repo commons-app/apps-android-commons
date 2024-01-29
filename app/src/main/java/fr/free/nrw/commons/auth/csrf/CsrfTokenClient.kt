@@ -27,8 +27,8 @@ class CsrfTokenClient(
     @Throws(Throwable::class)
     fun getTokenBlocking(): String {
         var token = ""
-        val userName = AppAdapter.get().getUserName()
-        val password = AppAdapter.get().getPassword()
+        val userName = sessionManager.userName ?: ""
+        val password = sessionManager.password ?: ""
 
         for (retry in 0 until MAX_RETRIES_OF_LOGIN_BLOCKING) {
             try {
@@ -102,8 +102,8 @@ class CsrfTokenClient(
     }
 
     private fun retryWithLogin(callback: Callback, caught: () -> Throwable?) {
-        val userName = AppAdapter.get().getUserName()
-        val password = AppAdapter.get().getPassword()
+        val userName = sessionManager.userName
+        val password = sessionManager.password
         if (retries < MAX_RETRIES && !userName.isNullOrEmpty() && !password.isNullOrEmpty()) {
             retries++
             SharedPreferenceCookieManager.getInstance().clearAllCookies()

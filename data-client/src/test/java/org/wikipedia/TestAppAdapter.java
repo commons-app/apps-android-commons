@@ -25,16 +25,6 @@ public class TestAppAdapter extends AppAdapter {
     }
 
     @Override
-    public String getUserName() {
-        return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return null;
-    }
-
-    @Override
     public void updateAccount(@NonNull LoginResult result) {
     }
 

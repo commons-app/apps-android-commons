@@ -1,7 +1,6 @@
 package fr.free.nrw.commons;
 
 import androidx.annotation.NonNull;
-import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import okhttp3.OkHttpClient;
 import org.wikipedia.AppAdapter;
@@ -12,11 +11,9 @@ import org.wikipedia.json.GsonUnmarshaller;
 public class CommonsAppAdapter extends AppAdapter {
     private final String COOKIE_STORE_NAME = "cookie_store";
 
-    private final SessionManager sessionManager;
     private final JsonKvStore preferences;
 
-    CommonsAppAdapter(@NonNull SessionManager sessionManager, @NonNull JsonKvStore preferences) {
-        this.sessionManager = sessionManager;
+    CommonsAppAdapter(@NonNull JsonKvStore preferences) {
         this.preferences = preferences;
     }
 
@@ -28,16 +25,6 @@ public class CommonsAppAdapter extends AppAdapter {
     @Override
     public OkHttpClient getOkHttpClient() {
         return OkHttpConnectionFactory.getClient();
-    }
-
-    @Override
-    public String getUserName() {
-        return sessionManager.getUserName();
-    }
-
-    @Override
-    public String getPassword() {
-        return sessionManager.getPassword();
     }
 
     @Override

@@ -23,16 +23,6 @@ public class TestAppAdapter extends AppAdapter {
     }
 
     @Override
-    public String getUserName() {
-        return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return null;
-    }
-
-    @Override
     public SharedPreferenceCookieManager getCookies() {
         return null;
     }

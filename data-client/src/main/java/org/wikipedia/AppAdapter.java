@@ -17,9 +17,6 @@ public abstract class AppAdapter {
         return DEFAULT_THUMB_SIZE;
     }
 
-    public abstract String getUserName();
-    public abstract String getPassword();
-
     public abstract SharedPreferenceCookieManager getCookies();
     public abstract void setCookies(@NonNull SharedPreferenceCookieManager cookies);
 

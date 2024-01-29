@@ -161,7 +161,7 @@ public class CommonsApplication extends MultiDexApplication {
             .getCommonsApplicationComponent()
             .inject(this);
 
-        AppAdapter.set(new CommonsAppAdapter(sessionManager, defaultPrefs));
+        AppAdapter.set(new CommonsAppAdapter(defaultPrefs));
 
         initTimber();
 
