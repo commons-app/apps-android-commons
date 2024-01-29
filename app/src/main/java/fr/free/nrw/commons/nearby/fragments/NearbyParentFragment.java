@@ -1905,21 +1905,41 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             updateMarker(isBookmarked, selectedPlace, locationManager.getLastLocation());
             mapView.invalidate();
         });
+        bookmarkButton.setOnLongClickListener(view -> {
+            Toast.makeText(getContext(), R.string.menu_bookmark, Toast.LENGTH_SHORT).show();
+            return true;
+        });
 
         wikipediaButton.setVisibility(place.hasWikipediaLink() ? View.VISIBLE : View.GONE);
         wikipediaButton.setOnClickListener(
             view -> Utils.handleWebUrl(getContext(), selectedPlace.siteLinks.getWikipediaLink()));
+        wikipediaButton.setOnLongClickListener(view -> {
+            Toast.makeText(getContext(), R.string.nearby_wikipedia, Toast.LENGTH_SHORT).show();
+            return true;
+        });
 
         wikidataButton.setVisibility(place.hasWikidataLink() ? View.VISIBLE : View.GONE);
         wikidataButton.setOnClickListener(
             view -> Utils.handleWebUrl(getContext(), selectedPlace.siteLinks.getWikidataLink()));
+        wikidataButton.setOnLongClickListener(view -> {
+            Toast.makeText(getContext(), R.string.nearby_wikidata, Toast.LENGTH_SHORT).show();
+            return true;
+        });
 
         directionsButton.setOnClickListener(view -> Utils.handleGeoCoordinates(getActivity(),
             selectedPlace.getLocation()));
+        directionsButton.setOnLongClickListener(view -> {
+            Toast.makeText(getContext(), R.string.nearby_directions, Toast.LENGTH_SHORT).show();
+            return true;
+        });
 
         commonsButton.setVisibility(selectedPlace.hasCommonsLink() ? View.VISIBLE : View.GONE);
         commonsButton.setOnClickListener(
             view -> Utils.handleWebUrl(getContext(), selectedPlace.siteLinks.getCommonsLink()));
+        commonsButton.setOnLongClickListener(view -> {
+            Toast.makeText(getContext(), R.string.nearby_commons, Toast.LENGTH_SHORT).show();
+            return true;
+        });
 
         icon.setImageResource(selectedPlace.getLabel().getIcon());
 
