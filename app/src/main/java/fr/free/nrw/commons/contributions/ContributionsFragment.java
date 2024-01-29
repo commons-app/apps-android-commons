@@ -552,7 +552,7 @@ public class ContributionsFragment
                 String distance = formatDistanceBetween(curLatLng, closestNearbyPlace.location);
                 closestNearbyPlace.setDistance(distance);
                 direction = (float) computeBearing(curLatLng, closestNearbyPlace.location);
-                nearbyNotificationCardView.updateContent(closestNearbyPlace, direction);
+                nearbyNotificationCardView.updateContent(closestNearbyPlace);
             }
         } else {
             // Means that no close nearby place is found
