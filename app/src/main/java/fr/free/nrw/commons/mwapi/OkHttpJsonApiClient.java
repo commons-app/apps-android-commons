@@ -47,7 +47,6 @@ public class OkHttpJsonApiClient {
     private final OkHttpClient okHttpClient;
     private final DepictsClient depictsClient;
     private final HttpUrl wikiMediaToolforgeUrl;
-    private final HttpUrl wikiMediaTestToolforgeUrl;
     private final String sparqlQueryUrl;
     private final String campaignsUrl;
     private final Gson gson;
@@ -57,14 +56,12 @@ public class OkHttpJsonApiClient {
     public OkHttpJsonApiClient(OkHttpClient okHttpClient,
         DepictsClient depictsClient,
         HttpUrl wikiMediaToolforgeUrl,
-        HttpUrl wikiMediaTestToolforgeUrl,
         String sparqlQueryUrl,
         String campaignsUrl,
         Gson gson) {
         this.okHttpClient = okHttpClient;
         this.depictsClient = depictsClient;
         this.wikiMediaToolforgeUrl = wikiMediaToolforgeUrl;
-        this.wikiMediaTestToolforgeUrl = wikiMediaTestToolforgeUrl;
         this.sparqlQueryUrl = sparqlQueryUrl;
         this.campaignsUrl = campaignsUrl;
         this.gson = gson;
@@ -83,7 +80,7 @@ public class OkHttpJsonApiClient {
     @NonNull
     public Observable<LeaderboardResponse> getLeaderboard(String userName, String duration,
         String category, String limit, String offset) {
-        final String fetchLeaderboardUrlTemplate = wikiMediaTestToolforgeUrl
+        final String fetchLeaderboardUrlTemplate = wikiMediaToolforgeUrl
             + LEADERBOARD_END_POINT;
         String url = String.format(Locale.ENGLISH,
             fetchLeaderboardUrlTemplate,
@@ -129,7 +126,7 @@ public class OkHttpJsonApiClient {
      */
     @NonNull
     public Single<UpdateAvatarResponse> setAvatar(String username, String avatar) {
-        final String urlTemplate = wikiMediaTestToolforgeUrl
+        final String urlTemplate = wikiMediaToolforgeUrl
             + UPDATE_AVATAR_END_POINT;
         return Single.fromCallable(() -> {
             String url = String.format(Locale.ENGLISH,
