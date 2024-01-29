@@ -10,7 +10,6 @@ import org.wikipedia.json.GsonMarshaller;
 import org.wikipedia.json.GsonUnmarshaller;
 
 public class CommonsAppAdapter extends AppAdapter {
-    private final int DEFAULT_THUMB_SIZE = 640;
     private final String COOKIE_STORE_NAME = "cookie_store";
 
     private final SessionManager sessionManager;
@@ -29,11 +28,6 @@ public class CommonsAppAdapter extends AppAdapter {
     @Override
     public OkHttpClient getOkHttpClient() {
         return OkHttpConnectionFactory.getClient();
-    }
-
-    @Override
-    public boolean isLoggedIn() {
-        return sessionManager.isUserLoggedIn();
     }
 
     @Override

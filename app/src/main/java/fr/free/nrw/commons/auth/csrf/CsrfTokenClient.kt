@@ -47,7 +47,7 @@ class CsrfTokenClient(
                 }
 
                 token = response.body()!!.query()!!.csrfToken()!!
-                if (AppAdapter.get().isLoggedIn() && token == ANON_TOKEN) {
+                if (sessionManager.isUserLoggedIn && token == ANON_TOKEN) {
                     throw RuntimeException("App believes we're logged in, but got anonymous token.")
                 }
                 break
@@ -66,7 +66,7 @@ class CsrfTokenClient(
     fun request(service: CsrfTokenInterface, cb: Callback): Call<MwQueryResponse?> =
         requestToken(service, object : Callback {
             override fun success(token: String?) {
-                if (AppAdapter.get().isLoggedIn() && token == ANON_TOKEN) {
+                if (sessionManager.isUserLoggedIn && token == ANON_TOKEN) {
                     retryWithLogin(cb) {
                         RuntimeException("App believes we're logged in, but got anonymous token.")
                     }

@@ -17,7 +17,6 @@ public abstract class AppAdapter {
         return DEFAULT_THUMB_SIZE;
     }
 
-    public abstract boolean isLoggedIn();
     public abstract String getUserName();
     public abstract String getPassword();
 

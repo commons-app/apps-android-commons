@@ -23,11 +23,6 @@ public class TestAppAdapter extends AppAdapter {
     }
 
     @Override
-    public boolean isLoggedIn() {
-        return false;
-    }
-
-    @Override
     public String getUserName() {
         return null;
     }
