@@ -17,10 +17,15 @@ fun placeAdapterDelegate(
     bookmarkLocationDao: BookmarkLocationsDao,
     onItemClick: ((Place) -> Unit)? = null,
     onCameraClicked: (Place, ActivityResultLauncher<Array<String>>) -> Unit,
+    onCameraLongPressed: () -> Boolean,
     onGalleryClicked: (Place) -> Unit,
+    onGalleryLongPressed: () -> Boolean,
     onBookmarkClicked: (Place, Boolean) -> Unit,
+    onBookmarkLongPressed: () -> Boolean,
     onOverflowIconClicked: (Place, View) -> Unit,
+    onOverFlowLongPressed: () -> Boolean,
     onDirectionsClicked: (Place) -> Unit,
+    onDirectionsLongPressed: () -> Boolean,
     inAppCameraLocationPermissionLauncher: ActivityResultLauncher<Array<String>>
 ) = adapterDelegateViewBinding<Place, Place, ItemPlaceBinding>({ layoutInflater, parent ->
     ItemPlaceBinding.inflate(layoutInflater, parent, false)
@@ -39,7 +44,10 @@ fun placeAdapterDelegate(
             }
         }
         nearbyButtonLayout.cameraButton.setOnClickListener { onCameraClicked(item, inAppCameraLocationPermissionLauncher) }
+        nearbyButtonLayout.cameraButton.setOnLongClickListener { onCameraLongPressed() }
+
         nearbyButtonLayout.galleryButton.setOnClickListener { onGalleryClicked(item) }
+        nearbyButtonLayout.galleryButton.setOnLongClickListener{onGalleryLongPressed()}
         bookmarkButtonImage.setOnClickListener {
             val isBookmarked = bookmarkLocationDao.updateBookmarkLocation(item)
             bookmarkButtonImage.setImageResource(
@@ -47,7 +55,9 @@ fun placeAdapterDelegate(
             )
             onBookmarkClicked(item, isBookmarked)
         }
+        bookmarkButtonImage.setOnLongClickListener{onBookmarkLongPressed()}
         nearbyButtonLayout.iconOverflow.setOnClickListener { onOverflowIconClicked(item, it) }
+        nearbyButtonLayout.iconOverflow.setOnLongClickListener{onOverFlowLongPressed()}
         nearbyButtonLayout.directionsButton.setOnClickListener { onDirectionsClicked(item) }
         bind {
             tvName.text = item.name
@@ -74,6 +84,7 @@ fun placeAdapterDelegate(
                     R.drawable.ic_round_star_border_24px
             )
         }
+        nearbyButtonLayout.directionsButton.setOnLongClickListener{onDirectionsLongPressed()}
     }
 }
 

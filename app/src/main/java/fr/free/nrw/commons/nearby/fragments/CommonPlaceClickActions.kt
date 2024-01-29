@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
@@ -35,6 +36,30 @@ class CommonPlaceClickActions @Inject constructor(
             storeSharedPrefs(place)
             contributionController.initiateCameraPick(activity, launcher)
         }
+    }
+
+    /**
+    * Shows the Label for the Icon when it's long pressed
+     **/
+    fun onCameraLongPressed(): () -> Boolean = {
+        Toast.makeText(activity, R.string.menu_from_camera, Toast.LENGTH_SHORT).show()
+        true
+    }
+    fun onGalleryLongPressed(): () -> Boolean = {
+        Toast.makeText(activity, R.string.menu_from_gallery, Toast.LENGTH_SHORT).show()
+        true
+    }
+    fun onBookmarkLongPressed(): () -> Boolean = {
+        Toast.makeText(activity, R.string.menu_bookmark, Toast.LENGTH_SHORT).show()
+        true
+    }
+    fun onDirectionsLongPressed(): () -> Boolean = {
+        Toast.makeText(activity, R.string.nearby_directions, Toast.LENGTH_SHORT).show()
+        true
+    }
+    fun onOverflowLongPressed(): () -> Boolean = {
+        Toast.makeText(activity, R.string.more, Toast.LENGTH_SHORT).show()
+        true
     }
 
     fun onGalleryClicked(): (Place) -> Unit = {
