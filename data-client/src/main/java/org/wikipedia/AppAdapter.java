@@ -9,8 +9,12 @@ import okhttp3.OkHttpClient;
 public abstract class AppAdapter {
     private final int DEFAULT_THUMB_SIZE = 640;
 
-    public abstract String getRestbaseUriFormat();
     public abstract OkHttpClient getOkHttpClient();
+
+    // Unused from commons app, implement here as a temporary step during refactoring
+    public String getRestbaseUriFormat() {
+        return "";
+    }
 
     // Unused from commons app, implement here as a temporary step during refactoring
     public int getDesiredLeadImageDp() {

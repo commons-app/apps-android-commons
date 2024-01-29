@@ -18,11 +18,6 @@ public class CommonsAppAdapter extends AppAdapter {
     }
 
     @Override
-    public String getRestbaseUriFormat() {
-        return BuildConfig.COMMONS_URL;
-    }
-
-    @Override
     public OkHttpClient getOkHttpClient() {
         return OkHttpConnectionFactory.getClient();
     }

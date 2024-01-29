@@ -10,11 +10,6 @@ import org.wikipedia.dataclient.okhttp.UnsuccessfulResponseInterceptor;
 public class TestAppAdapter extends AppAdapter {
 
     @Override
-    public String getRestbaseUriFormat() {
-        return "%1$s://%2$s/api/rest_v1/";
-    }
-
-    @Override
     public OkHttpClient getOkHttpClient() {
         return new OkHttpClient.Builder()
             .addInterceptor(new UnsuccessfulResponseInterceptor())
