@@ -102,6 +102,7 @@ import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ExecutorUtils;
 import fr.free.nrw.commons.utils.LayoutUtils;
 import fr.free.nrw.commons.utils.LocationUtils;
+import fr.free.nrw.commons.utils.MapUtils;
 import fr.free.nrw.commons.utils.NearbyFABUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
@@ -318,12 +319,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         getActivity().getString(android.R.string.ok),
                         getActivity().getString(android.R.string.cancel),
                         () -> {
-                            if (!(locationManager.isNetworkProviderEnabled()
-                                || locationManager.isGPSProviderEnabled())) {
-                                showLocationOffDialog();
-                            }
+                            askForLocationPermission();
                         },
-                        () -> isPermissionDenied = true,
+                        null,
                         null,
                         false);
                 } else {
@@ -587,15 +585,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private void performMapReadyActions() {
         if (((MainActivity) getActivity()).activeFragment == ActiveFragment.NEARBY) {
-            if (!applicationKvStore.getBoolean("doNotAskForLocationPermission", false) ||
-                locationPermissionsHelper.checkLocationPermission(getActivity())) {
-                checkPermissionsAndPerformAction();
-            } else {
+            if (applicationKvStore.getBoolean("doNotAskForLocationPermission", false) &&
+                !locationPermissionsHelper.checkLocationPermission(getActivity())) {
                 isPermissionDenied = true;
             }
         }
+        presenter.onMapReady();
     }
 
+    @Override
     public void askForLocationPermission() {
         Timber.d("Asking for location permission");
         locationPermissionLauncher.launch(permission.ACCESS_FINE_LOCATION);
@@ -631,17 +629,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         presenter.attachView(this);
         registerNetworkReceiver();
         if (isResumed() && ((MainActivity) getActivity()).activeFragment == ActiveFragment.NEARBY) {
-            if (!isPermissionDenied && !applicationKvStore.getBoolean(
-                "doNotAskForLocationPermission", false)) {
-                if (!locationManager.isGPSProviderEnabled()) {
-                    startMapWithCondition("Without GPS");
-                    Timber.d("Inside if");
-                } else {
-                    performMapReadyActions();
-                }
+            if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
+                performMapReadyActions();
             } else {
-                startMapWithCondition("Without Permission");
-                Timber.d("Inside else");
+                startMapWithoutPermission();
             }
         }
     }
@@ -651,14 +642,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * coordinates, other than that it points to the last known location which can be get by the key
      * "LastLocation" from applicationKvStore
      *
-     * @param condition : for which condition the map should start
      */
-    private void startMapWithCondition(final String condition) {
-        presenter.onMapReady();
-        Timber.d("Inside startMapWithCondition");
-        if (condition.equals("Without Permission")) {
-            applicationKvStore.putBoolean("doNotAskForLocationPermission", true);
-        }
+    private void startMapWithoutPermission() {
+        Timber.d("Inside startMapWithoutPerm");
         if (applicationKvStore.getString("LastLocation") != null) {
             final String[] locationLatLng
                 = applicationKvStore.getString("LastLocation").split(",");
@@ -666,12 +652,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 = new fr.free.nrw.commons.location.LatLng(Double.parseDouble(locationLatLng[0]),
                 Double.parseDouble(locationLatLng[1]), 1f);
         } else {
-            lastKnownLocation = new fr.free.nrw.commons.location.LatLng(51.50550,
-                -0.07520, 1f);
+            lastKnownLocation = MapUtils.defaultLatLng;
         }
         if (mapView != null) {
-            recenterMap(lastKnownLocation);
+            moveCameraToPosition(
+                new GeoPoint(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()));
         }
+        presenter.onMapReady();
     }
 
     private void registerNetworkReceiver() {
@@ -1339,12 +1326,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         // TODO
     }
 
-    @Override
-    public void checkPermissionsAndPerformAction() {
-        Timber.d("Checking permission and perfoming action");
-        locationPermissionLauncher.launch(permission.ACCESS_FINE_LOCATION);
-    }
-
     /**
      * Starts animation of fab plus (turning on opening) and other FABs
      */
@@ -1806,11 +1787,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void recenterMap(fr.free.nrw.commons.location.LatLng curLatLng) {
-        if (!locationPermissionsHelper.checkLocationPermission(getActivity())) {
-            askForLocationPermission();
-        } else {
-            locationPermissionGranted();
-        }
         // if user has denied permission twice, then show dialog
         if (isPermissionDenied) {
             if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
@@ -1820,6 +1796,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             } else {
                 locationPermissionsHelper.showAppSettingsDialog(getActivity(),
                     R.string.nearby_needs_location);
+            }
+        } else {
+            if (!locationPermissionsHelper.checkLocationPermission(getActivity())) {
+                askForLocationPermission();
+            } else {
+                locationPermissionGranted();
             }
         }
         if (curLatLng == null) {

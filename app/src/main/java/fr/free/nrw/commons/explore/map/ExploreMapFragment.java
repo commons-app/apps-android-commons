@@ -506,11 +506,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void recenterMap(LatLng curLatLng) {
-        if (!locationPermissionsHelper.checkLocationPermission(getActivity())) {
-            askForLocationPermission();
-        } else {
-            locationPermissionGranted();
-        }
         // if user has denied permission twice, then show dialog
         if (isPermissionDenied) {
             if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
@@ -520,6 +515,12 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             } else {
                 locationPermissionsHelper.showAppSettingsDialog(getActivity(),
                     R.string.explore_map_needs_location);
+            }
+        } else {
+            if (!locationPermissionsHelper.checkLocationPermission(getActivity())) {
+                askForLocationPermission();
+            } else {
+                locationPermissionGranted();
             }
         }
         if (curLatLng == null) {
