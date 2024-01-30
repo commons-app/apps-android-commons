@@ -59,7 +59,6 @@ import org.acra.annotation.AcraCore;
 import org.acra.annotation.AcraDialog;
 import org.acra.annotation.AcraMailSender;
 import org.acra.data.StringFormat;
-import org.wikipedia.AppAdapter;
 import org.wikipedia.language.AppLanguageLookUpTable;
 import timber.log.Timber;
 
@@ -164,8 +163,6 @@ public class CommonsApplication extends MultiDexApplication {
             .getInstance(this)
             .getCommonsApplicationComponent()
             .inject(this);
-
-        AppAdapter.set(new CommonsAppAdapter(cookieJar));
 
         initTimber();
 

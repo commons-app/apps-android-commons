@@ -9,12 +9,13 @@ import com.facebook.soloader.SoLoader
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.delete.DeleteHelper
-import org.junit.Assert.assertEquals
 import media
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
@@ -29,7 +30,6 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowNotificationManager
 import org.robolectric.shadows.ShadowToast
-import org.wikipedia.AppAdapter
 import org.wikipedia.dataclient.mwapi.MwQueryPage
 import java.lang.reflect.Method
 import java.util.*
@@ -58,7 +58,7 @@ class ReviewControllerTest {
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         context = ApplicationProvider.getApplicationContext()
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
         SoLoader.setInTestMode()
         Fresco.initialize(context)
         activity = Robolectric.buildActivity(ReviewActivity::class.java).create().get()

@@ -21,10 +21,8 @@ import timber.log.Timber;
 public final class OkHttpConnectionFactory {
     private static final String CACHE_DIR_NAME = "okhttp-cache";
     private static final long NET_CACHE_SIZE = 64 * 1024 * 1024;
-    @NonNull private static final Cache NET_CACHE = new Cache(new File(CommonsApplication.getInstance().getCacheDir(),
-            CACHE_DIR_NAME), NET_CACHE_SIZE);
 
-    private static OkHttpClient CLIENT;
+    public static OkHttpClient CLIENT;
 
     @NonNull public static OkHttpClient getClient(final CommonsCookieJar cookieJar) {
         if (CLIENT == null) {
@@ -37,7 +35,7 @@ public final class OkHttpConnectionFactory {
     private static OkHttpClient createClient(final CommonsCookieJar cookieJar) {
         return new OkHttpClient.Builder()
                 .cookieJar(cookieJar)
-                .cache(NET_CACHE)
+                .cache(new Cache(new File(CommonsApplication.getInstance().getCacheDir(), CACHE_DIR_NAME), NET_CACHE_SIZE))
                 .connectTimeout(120, TimeUnit.SECONDS)
                 .writeTimeout(120, TimeUnit.SECONDS)
                 .readTimeout(120, TimeUnit.SECONDS)

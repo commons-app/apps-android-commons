@@ -9,14 +9,13 @@ class CommonsCookieJar(private val cookieStorage: CommonsCookieStorage) : Cookie
         val cookieList = mutableListOf<Cookie>()
         val domain: String = url.toUri().getAuthority()
 
-        for (domainSpec in cookieStorage.domains) {
-            val cookiesForDomainSpec = cookieStorage[domainSpec]
+        cookieStorage.domains.forEach { domainSpec ->
             if (domain.endsWith(domainSpec, true)) {
-                buildCookieList(cookieList, cookiesForDomainSpec, null)
+                buildCookieList(cookieList, cookieStorage[domainSpec], null)
             } else if (domainSpec.endsWith("commons.wikimedia.org")) {
                 // For sites outside the wikipedia.org domain, transfer the centralauth cookies
                 // from commons.wikimedia.org unconditionally.
-                buildCookieList(cookieList, cookiesForDomainSpec, "centralauth_")
+                buildCookieList(cookieList, cookieStorage[domainSpec], "centralauth_")
             }
         }
         return cookieList
@@ -28,7 +27,7 @@ class CommonsCookieJar(private val cookieStorage: CommonsCookieStorage) : Cookie
         }
 
         var cookieJarModified = false
-        for (cookie in cookies) {
+        cookies.forEach { cookie ->
             // Default to the URI's domain if cookie's domain is not explicitly set
             val domainSpec = cookie.domainSpec(url)
             if (!cookieStorage.contains(domainSpec)) {
@@ -60,6 +59,7 @@ class CommonsCookieJar(private val cookieStorage: CommonsCookieStorage) : Cookie
             }
             cookieStorage[domainSpec] = cookieList
         }
+
         if (cookieJarModified) {
             cookieStorage.save()
         }
@@ -68,9 +68,9 @@ class CommonsCookieJar(private val cookieStorage: CommonsCookieStorage) : Cookie
     private fun buildCookieList(
         outList: MutableList<Cookie>, inList: MutableList<Cookie>, prefix: String?
     ) {
-        val i = inList.iterator()
         var cookieJarModified = false
 
+        val i = inList.iterator()
         while (i.hasNext()) {
             val cookie = i.next()
             if (prefix != null && !cookie.name.startsWith(prefix)) {
