@@ -41,6 +41,7 @@ import fr.free.nrw.commons.media.CustomOkHttpNetworkFetcher;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.utils.ConfigUtils;
+import fr.free.nrw.commons.wikidata.cookies.CommonsCookieJar;
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.internal.functions.Functions;
@@ -93,6 +94,9 @@ public class CommonsApplication extends MultiDexApplication {
     @Inject
     @Named("default_preferences")
     JsonKvStore defaultPrefs;
+
+    @Inject
+    CommonsCookieJar cookieJar;
 
     @Inject
     CustomOkHttpNetworkFetcher customOkHttpNetworkFetcher;
@@ -161,7 +165,7 @@ public class CommonsApplication extends MultiDexApplication {
             .getCommonsApplicationComponent()
             .inject(this);
 
-        AppAdapter.set(new CommonsAppAdapter(defaultPrefs));
+        AppAdapter.set(new CommonsAppAdapter(cookieJar));
 
         initTimber();
 

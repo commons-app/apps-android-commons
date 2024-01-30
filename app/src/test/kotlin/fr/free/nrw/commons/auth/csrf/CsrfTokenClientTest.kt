@@ -19,7 +19,8 @@ class CsrfTokenClientTest : MockWebServerTest() {
     private val sessionManager = mock(SessionManager::class.java)
     private val tokenInterface = mock(CsrfTokenInterface::class.java)
     private val loginClient = mock(LoginClient::class.java)
-    private val subject = CsrfTokenClient(sessionManager, tokenInterface, loginClient)
+    private val logoutClient = mock(LogoutClient::class.java)
+    private val subject = CsrfTokenClient(sessionManager, tokenInterface, loginClient, logoutClient)
 
     @Test
     @Throws(Throwable::class)

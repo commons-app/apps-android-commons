@@ -21,9 +21,6 @@ public abstract class AppAdapter {
         return DEFAULT_THUMB_SIZE;
     }
 
-    public abstract SharedPreferenceCookieManager getCookies();
-    public abstract void setCookies(@NonNull SharedPreferenceCookieManager cookies);
-
     private static AppAdapter INSTANCE;
     public static void set(AppAdapter instance) {
         INSTANCE = instance;

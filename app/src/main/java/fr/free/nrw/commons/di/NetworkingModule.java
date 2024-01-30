@@ -7,12 +7,12 @@ import dagger.Module;
 import dagger.Provides;
 import fr.free.nrw.commons.BetaConstants;
 import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.OkHttpConnectionFactory;
 import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.actions.PageEditInterface;
 import fr.free.nrw.commons.actions.ThanksInterface;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.auth.csrf.CsrfTokenInterface;
+import fr.free.nrw.commons.auth.csrf.LogoutClient;
 import fr.free.nrw.commons.auth.login.LoginInterface;
 import fr.free.nrw.commons.category.CategoryInterface;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
@@ -28,6 +28,8 @@ import fr.free.nrw.commons.review.ReviewInterface;
 import fr.free.nrw.commons.upload.UploadInterface;
 import fr.free.nrw.commons.upload.WikiBaseInterface;
 import fr.free.nrw.commons.upload.depicts.DepictsInterface;
+import fr.free.nrw.commons.wikidata.cookies.CommonsCookieJar;
+import fr.free.nrw.commons.wikidata.cookies.CommonsCookieStorage;
 import fr.free.nrw.commons.wikidata.CommonsServiceFactory;
 import fr.free.nrw.commons.wikidata.WikidataInterface;
 import java.io.File;
@@ -107,12 +109,29 @@ public class NetworkingModule {
             gson);
     }
 
+    @Provides
+    @Singleton
+    public CommonsCookieStorage provideCookieStorage(
+        @Named("default_preferences") JsonKvStore preferences) {
+        CommonsCookieStorage cookieStorage = new CommonsCookieStorage(preferences);
+        cookieStorage.load();
+        return cookieStorage;
+    }
+
+    @Provides
+    @Singleton
+    public CommonsCookieJar provideCookieJar(CommonsCookieStorage storage) {
+        return new CommonsCookieJar(storage);
+    }
+
     @Named(NAMED_COMMONS_CSRF)
     @Provides
     @Singleton
     public CsrfTokenClient provideCommonsCsrfTokenClient(SessionManager sessionManager,
-        CsrfTokenInterface tokenInterface, LoginClient loginClient) {
-        return new CsrfTokenClient(sessionManager, tokenInterface, loginClient);
+        CsrfTokenInterface tokenInterface, LoginClient loginClient, LogoutClient logoutClient) {
+        CsrfTokenClient client = new CsrfTokenClient(sessionManager, tokenInterface,
+            loginClient, logoutClient);
+        return client;
     }
 
     @Provides

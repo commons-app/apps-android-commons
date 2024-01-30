@@ -1,9 +1,9 @@
 package fr.free.nrw.commons;
 
 import androidx.annotation.NonNull;
+import fr.free.nrw.commons.wikidata.cookies.CommonsCookieJar;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -15,7 +15,6 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
-import org.wikipedia.dataclient.SharedPreferenceCookieManager;
 import org.wikipedia.dataclient.okhttp.HttpStatusException;
 import timber.log.Timber;
 
@@ -25,17 +24,19 @@ public final class OkHttpConnectionFactory {
     @NonNull private static final Cache NET_CACHE = new Cache(new File(CommonsApplication.getInstance().getCacheDir(),
             CACHE_DIR_NAME), NET_CACHE_SIZE);
 
-    @NonNull
-    private static final OkHttpClient CLIENT = createClient();
+    private static OkHttpClient CLIENT;
 
-    @NonNull public static OkHttpClient getClient() {
+    @NonNull public static OkHttpClient getClient(final CommonsCookieJar cookieJar) {
+        if (CLIENT == null) {
+            CLIENT = createClient(cookieJar);
+        }
         return CLIENT;
     }
 
     @NonNull
-    private static OkHttpClient createClient() {
+    private static OkHttpClient createClient(final CommonsCookieJar cookieJar) {
         return new OkHttpClient.Builder()
-                .cookieJar(SharedPreferenceCookieManager.getInstance())
+                .cookieJar(cookieJar)
                 .cache(NET_CACHE)
                 .connectTimeout(120, TimeUnit.SECONDS)
                 .writeTimeout(120, TimeUnit.SECONDS)
