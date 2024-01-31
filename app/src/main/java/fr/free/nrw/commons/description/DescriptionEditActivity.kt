@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.description
 
-import android.app.Activity.RESULT_OK
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
@@ -9,10 +8,10 @@ import android.speech.RecognizerIntent
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.ActivityDescriptionEditBinding
 import fr.free.nrw.commons.description.EditDescriptionConstants.LIST_OF_DESCRIPTION_AND_CAPTION
-import fr.free.nrw.commons.description.EditDescriptionConstants.UPDATED_WIKITEXT
 import fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
 import fr.free.nrw.commons.settings.Prefs
@@ -20,6 +19,9 @@ import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.UploadMediaDetail
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Consumer
+import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -44,6 +46,11 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
     var wikiText: String? = null
 
     /**
+     * Media object
+     */
+    var media: Media? = null
+
+    /**
      * Saved language
      */
     private lateinit var savedLanguageValue: String
@@ -60,6 +67,10 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
 
     private val REQUEST_CODE_FOR_VOICE_INPUT = 1213
 
+    private var descriptionAndCaptions: ArrayList<UploadMediaDetail>? = null
+
+    @Inject lateinit var descriptionEditHelper: DescriptionEditHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -67,10 +78,19 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
         setContentView(binding.root)
 
         val bundle = intent.extras
-        val descriptionAndCaptions: ArrayList<UploadMediaDetail> =
-            bundle!!.getParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION)!!
-        wikiText = bundle.getString(WIKITEXT)
-        savedLanguageValue = bundle.getString(Prefs.DESCRIPTION_LANGUAGE)!!
+
+        if(savedInstanceState!=null){
+            descriptionAndCaptions = savedInstanceState.getParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION)
+            wikiText = savedInstanceState.getString(WIKITEXT)
+            savedLanguageValue = savedInstanceState.getString(Prefs.DESCRIPTION_LANGUAGE)!!
+            media = savedInstanceState.getParcelable("media")
+        }else{
+            descriptionAndCaptions =
+                bundle!!.getParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION)!!
+            wikiText = bundle.getString(WIKITEXT)
+            savedLanguageValue = bundle.getString(Prefs.DESCRIPTION_LANGUAGE)!!
+            media = bundle.getParcelable("media")
+        }
         initRecyclerView(descriptionAndCaptions)
 
         binding.btnEditSubmit.setOnClickListener(::onSubmitButtonClicked)
@@ -122,7 +142,7 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
     }
 
     private fun onBackButtonClicked(view: View) {
-        onBackPressed()
+       onBackPressedDispatcher.onBackPressed()
     }
 
     private fun onSubmitButtonClicked(view: View) {
@@ -164,14 +184,45 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
             buffer.replace(", $".toRegex(), "")
             buffer.append(descriptionEnd)
         }
-        val returningIntent = Intent()
-        returningIntent.putExtra(UPDATED_WIKITEXT, buffer.toString())
-        returningIntent.putParcelableArrayListExtra(
-            LIST_OF_DESCRIPTION_AND_CAPTION,
-            uploadMediaDetails as ArrayList<out Parcelable?>
-        )
-        setResult(RESULT_OK, returningIntent)
+        editDescription(media!!, buffer.toString(), uploadMediaDetails as ArrayList<UploadMediaDetail>)
+
         finish()
+    }
+
+    /**
+     * Edits description and caption
+     * @param media media object
+     * @param updatedWikiText updated wiki text
+     * @param uploadMediaDetails descriptions and captions
+     */
+    private fun editDescription(media : Media, updatedWikiText : String, uploadMediaDetails : ArrayList<UploadMediaDetail>){
+        descriptionEditHelper?.addDescription(
+            applicationContext, media,
+            updatedWikiText
+        )
+            ?.subscribeOn(Schedulers.io())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(Consumer<Boolean> { s: Boolean? -> Timber.d("Descriptions are added.") })?.let {
+                compositeDisposable.add(
+                    it
+            )
+            }
+
+        val updatedCaptions = LinkedHashMap<String, String>()
+        for (mediaDetail in uploadMediaDetails) {
+            compositeDisposable.add(
+                descriptionEditHelper!!.addCaption(
+                    applicationContext, media,
+                    mediaDetail.languageCode, mediaDetail.captionText
+                )
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe { s: Boolean? ->
+                        updatedCaptions[mediaDetail.languageCode!!] = mediaDetail.captionText
+                        media.captions = updatedCaptions
+                        Timber.d("Caption is added.")
+                    })
+        }
     }
 
     private fun showLoggingProgressBar() {
@@ -192,5 +243,14 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
                 uploadMediaDetailAdapter.handleSpeechResult(result!![0]) }
             else { Timber.e("Error %s", resultCode) }
         }
+    }
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.putParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION, uploadMediaDetailAdapter.items as ArrayList<out Parcelable?>)
+        outState.putString(WIKITEXT, wikiText)
+        outState.putString(Prefs.DESCRIPTION_LANGUAGE, savedLanguageValue)
+        //save Media
+        outState.putParcelable("media", media)
     }
 }
