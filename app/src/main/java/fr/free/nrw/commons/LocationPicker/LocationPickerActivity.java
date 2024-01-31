@@ -64,11 +64,6 @@ import timber.log.Timber;
  */
 public class LocationPickerActivity extends BaseActivity implements
     LocationPermissionCallback {
-
-
-    @Inject
-    ViewUtilWrapper viewUtil;
-
     /**
      * coordinateEditHelper: helps to edit coordinates
      */
@@ -251,8 +246,6 @@ public class LocationPickerActivity extends BaseActivity implements
     private void addBackButtonListener() {
         final ImageView backButton = findViewById(R.id.maplibre_place_picker_toolbar_back_button);
         backButton.setOnClickListener(v -> {
-            viewUtil.showShortToast(getApplicationContext(),
-                getString(R.string.coordinates_picking_unsuccessful));
             finish();
         });
 
