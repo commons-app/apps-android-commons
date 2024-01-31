@@ -58,13 +58,7 @@ class LocationPickerActivityUnitTests {
     private lateinit var context: Context
 
     @Mock
-    private lateinit var media: Media
-
-    @Mock
     private lateinit var applicationKvStore: JsonKvStore
-
-    @Mock
-    private lateinit var coordinateEditHelper: CoordinateEditHelper
 
     @Mock
     private lateinit var mapView: org.osmdroid.views.MapView
