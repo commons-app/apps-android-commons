@@ -53,8 +53,9 @@ class LocationPickerActivityUnitTests {
 
     private lateinit var activity: LocationPickerActivity
     private lateinit var context: Context
-    private lateinit var media: Media
 
+    @Mock
+    private lateinit var media: Media
 
     @Mock
     private lateinit var applicationKvStore: JsonKvStore
