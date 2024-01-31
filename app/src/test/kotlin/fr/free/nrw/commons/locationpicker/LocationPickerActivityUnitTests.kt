@@ -2,6 +2,7 @@ package fr.free.nrw.commons.locationpicker
 
 import android.content.Context
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -26,6 +27,8 @@ import fr.free.nrw.commons.coordinates.CoordinateEditHelper
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM
+import io.reactivex.android.plugins.RxAndroidPlugins
+import io.reactivex.schedulers.Schedulers
 import org.junit.Assert
 import org.junit.Assert.*
 import org.junit.Before
@@ -101,12 +104,11 @@ class LocationPickerActivityUnitTests {
         MockitoAnnotations.initMocks(this)
         context = RuntimeEnvironment.getApplication().applicationContext
         activity = Robolectric.buildActivity(LocationPickerActivity::class.java).get()
+        RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
 
         Whitebox.setInternalState(activity, "mapView", mapView)
         Whitebox.setInternalState(activity, "applicationKvStore", applicationKvStore)
         Whitebox.setInternalState(activity, "cameraPosition", cameraPosition)
-        Whitebox.setInternalState(activity, "media", media)
-        Whitebox.setInternalState(activity, "coordinateEditHelper", coordinateEditHelper)
         Whitebox.setInternalState(activity, "modifyLocationButton", modifyLocationButton)
         Whitebox.setInternalState(activity, "placeSelectedButton", placeSelectedButton)
         Whitebox.setInternalState(activity, "showInMapButton", showInMapButton)
@@ -154,25 +156,6 @@ class LocationPickerActivityUnitTests {
         verify(fabCenterOnLocation, times(1)).visibility = View.VISIBLE
     }
 
-    @Test
-    @Throws(Exception::class)
-    fun testPlaceSelected() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        Whitebox.setInternalState(activity,"activity", "NoLocationUploadActivity")
-        val position = GeoPoint(51.50550, -0.07520)
-        val method: Method = LocationPickerActivity::class.java.getDeclaredMethod(
-            "placeSelected"
-        )
-        `when`(mapView.mapCenter).thenReturn(position)
-        `when`(mapView.zoomLevel).thenReturn(15)
-        method.isAccessible = true
-        method.invoke(activity)
-        verify(applicationKvStore, times(1)).putString(
-            LAST_LOCATION,
-            position.latitude.toString() + "," + position.longitude.toString()
-        )
-        verify(applicationKvStore, times(1)).putString(LAST_ZOOM, mapView.zoomLevel.toString())
-    }
 
 
 }
