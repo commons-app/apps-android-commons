@@ -132,10 +132,12 @@ class NearbyParentFragmentPresenterTest {
     fun testUpdateMapAndListWhenLastLocationIsNull() {
         nearbyPresenter.lockUnlockNearby(false)
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
-        whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(null)
+        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(null)
+        whenever(nearbyParentFragmentView.mapCenter).thenReturn(LatLng(2.0, 1.0, 0.0F));
         nearbyPresenter.updateMapAndList(null)
         verify(nearbyParentFragmentView).enableFABRecenter()
         verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
+        verify(nearbyParentFragmentView).getMapCenter()
         verify(nearbyParentFragmentView).getLastLocation()
         verifyNoMoreInteractions(nearbyParentFragmentView)
     }
@@ -173,14 +175,16 @@ class NearbyParentFragmentPresenterTest {
      * Test updateMapAndList method updates parent fragment view with camera target location
      * at search custom area mode
      */
-    @Test @Ignore
+    @Test
     fun testPlacesPopulatedForCameraTargetLocationWhenSearchCustomArea() {
         expectMapAndListUpdate()
-        whenever(nearbyParentFragmentView.getCameraTarget()).thenReturn(cameraTarget)
+        whenever(nearbyParentFragmentView.getCameraTarget()).thenReturn(LatLng(2.0, 1.0, 0.0F))
+        whenever(nearbyParentFragmentView.mapCenter).thenReturn(LatLng(2.0, 1.0, 0.0F));
+        whenever(nearbyParentFragmentView.mapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F))
         nearbyPresenter.updateMapAndList(LocationChangeType.SEARCH_CUSTOM_AREA)
         verify(nearbyParentFragmentView).disableFABRecenter()
         verify(nearbyParentFragmentView).setProgressBarVisibility(true)
-        verify(nearbyParentFragmentView).populatePlaces(cameraTarget)
+        verify(nearbyParentFragmentView).populatePlaces(nearbyParentFragmentView.mapFocus)
     }
 
     /**
