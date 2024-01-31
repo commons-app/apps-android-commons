@@ -257,8 +257,8 @@ public class CommonsApplicationModule {
 
     @Named("username")
     @Provides
-    public String provideLoggedInUsername() {
-        return Objects.toString(AppAdapter.get().getUserName(), "");
+    public String provideLoggedInUsername(SessionManager sessionManager) {
+        return Objects.toString(sessionManager.getUserName(), "");
     }
 
     @Provides

@@ -2,8 +2,6 @@ package fr.free.nrw.commons.auth.csrf
 
 import androidx.annotation.VisibleForTesting
 import fr.free.nrw.commons.auth.SessionManager
-import org.wikipedia.AppAdapter
-import org.wikipedia.dataclient.SharedPreferenceCookieManager
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import fr.free.nrw.commons.auth.login.LoginClient
 import fr.free.nrw.commons.auth.login.LoginCallback
@@ -19,7 +17,8 @@ import java.util.concurrent.Executors.newSingleThreadExecutor
 class CsrfTokenClient(
     private val sessionManager: SessionManager,
     private val csrfTokenInterface: CsrfTokenInterface,
-    private val loginClient: LoginClient
+    private val loginClient: LoginClient,
+    private val logoutClient: LogoutClient
 ) {
     private var retries = 0
     private var csrfTokenCall: Call<MwQueryResponse?>? = null
@@ -27,8 +26,8 @@ class CsrfTokenClient(
     @Throws(Throwable::class)
     fun getTokenBlocking(): String {
         var token = ""
-        val userName = AppAdapter.get().getUserName()
-        val password = AppAdapter.get().getPassword()
+        val userName = sessionManager.userName ?: ""
+        val password = sessionManager.password ?: ""
 
         for (retry in 0 until MAX_RETRIES_OF_LOGIN_BLOCKING) {
             try {
@@ -47,7 +46,7 @@ class CsrfTokenClient(
                 }
 
                 token = response.body()!!.query()!!.csrfToken()!!
-                if (AppAdapter.get().isLoggedIn() && token == ANON_TOKEN) {
+                if (sessionManager.isUserLoggedIn && token == ANON_TOKEN) {
                     throw RuntimeException("App believes we're logged in, but got anonymous token.")
                 }
                 break
@@ -66,7 +65,7 @@ class CsrfTokenClient(
     fun request(service: CsrfTokenInterface, cb: Callback): Call<MwQueryResponse?> =
         requestToken(service, object : Callback {
             override fun success(token: String?) {
-                if (AppAdapter.get().isLoggedIn() && token == ANON_TOKEN) {
+                if (sessionManager.isUserLoggedIn && token == ANON_TOKEN) {
                     retryWithLogin(cb) {
                         RuntimeException("App believes we're logged in, but got anonymous token.")
                     }
@@ -102,11 +101,11 @@ class CsrfTokenClient(
     }
 
     private fun retryWithLogin(callback: Callback, caught: () -> Throwable?) {
-        val userName = AppAdapter.get().getUserName()
-        val password = AppAdapter.get().getPassword()
+        val userName = sessionManager.userName
+        val password = sessionManager.password
         if (retries < MAX_RETRIES && !userName.isNullOrEmpty() && !password.isNullOrEmpty()) {
             retries++
-            SharedPreferenceCookieManager.getInstance().clearAllCookies()
+            logoutClient.logout()
             login(userName, password, callback) {
                 Timber.i("retrying...")
                 cancel()

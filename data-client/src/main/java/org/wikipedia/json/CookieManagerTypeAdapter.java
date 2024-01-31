@@ -30,24 +30,24 @@ public class CookieManagerTypeAdapter extends TypeAdapter<SharedPreferenceCookie
         out.endObject();
     }
 
-    @Override public SharedPreferenceCookieManager read(JsonReader in) throws IOException {
+    @Override public SharedPreferenceCookieManager read(JsonReader input) throws IOException {
         Map<String, List<Cookie>> map = new HashMap<>();
-        in.beginObject();
-        while (in.hasNext()) {
-            String key = in.nextName();
+        input.beginObject();
+        while (input.hasNext()) {
+            String key = input.nextName();
             List<Cookie> list = new ArrayList<>();
             map.put(key, list);
-            in.beginArray();
+            input.beginArray();
             HttpUrl url = HttpUrl.parse(WikiSite.DEFAULT_SCHEME + "://" + key);
-            while (in.hasNext()) {
-                String str = in.nextString();
+            while (input.hasNext()) {
+                String str = input.nextString();
                 if (url != null) {
                     list.add(Cookie.parse(url, str));
                 }
             }
-            in.endArray();
+            input.endArray();
         }
-        in.endObject();
+        input.endObject();
         return new SharedPreferenceCookieManager(map);
     }
 }
