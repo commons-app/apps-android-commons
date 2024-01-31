@@ -20,7 +20,9 @@ import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
+import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.coordinates.CoordinateEditHelper
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM
@@ -51,9 +53,14 @@ class LocationPickerActivityUnitTests {
 
     private lateinit var activity: LocationPickerActivity
     private lateinit var context: Context
+    private lateinit var media: Media
+
 
     @Mock
     private lateinit var applicationKvStore: JsonKvStore
+
+    @Mock
+    private lateinit var coordinateEditHelper: CoordinateEditHelper
 
     @Mock
     private lateinit var mapView: org.osmdroid.views.MapView
@@ -97,6 +104,8 @@ class LocationPickerActivityUnitTests {
         Whitebox.setInternalState(activity, "mapView", mapView)
         Whitebox.setInternalState(activity, "applicationKvStore", applicationKvStore)
         Whitebox.setInternalState(activity, "cameraPosition", cameraPosition)
+        Whitebox.setInternalState(activity, "media", media)
+        Whitebox.setInternalState(activity, "coordinateEditHelper", coordinateEditHelper)
         Whitebox.setInternalState(activity, "modifyLocationButton", modifyLocationButton)
         Whitebox.setInternalState(activity, "placeSelectedButton", placeSelectedButton)
         Whitebox.setInternalState(activity, "showInMapButton", showInMapButton)
