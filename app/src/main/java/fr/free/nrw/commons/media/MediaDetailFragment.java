@@ -942,12 +942,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             }
         }
 
-        startActivityForResult(new LocationPicker.IntentBuilder()
+
+        startActivity(new LocationPicker.IntentBuilder()
             .defaultLocation(new CameraPosition.Builder()
                 .target(new LatLng(defaultLatitude, defaultLongitude))
                 .zoom(16).build())
             .activityKey("MediaActivity")
-            .build(getActivity()), REQUEST_CODE);
+            .media(media)
+            .build(getActivity()));
     }
 
     @OnClick(R.id.description_edit)
@@ -1125,32 +1127,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         @Nullable final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
-
-            assert data != null;
-            final CameraPosition cameraPosition = LocationPicker.getCameraPosition(data);
-
-            if (cameraPosition != null) {
-
-                final String latitude = String.valueOf(cameraPosition.target.getLatitude());
-                final String longitude = String.valueOf(cameraPosition.target.getLongitude());
-                final String accuracy = String.valueOf(cameraPosition.target.getAltitude());
-                String currentLatitude = null;
-                String currentLongitude = null;
-
-                if (media.getCoordinates() != null) {
-                    currentLatitude = String.valueOf(media.getCoordinates().getLatitude());
-                    currentLongitude = String.valueOf(media.getCoordinates().getLongitude());
-                }
-
-                if (!latitude.equals(currentLatitude) || !longitude.equals(currentLongitude)) {
-                    updateCoordinates(latitude, longitude, accuracy);
-                } else if (media.getCoordinates() == null) {
-                    updateCoordinates(latitude, longitude, accuracy);
-                }
-            }
-
-        } else if (requestCode == REQUEST_CODE_EDIT_DESCRIPTION && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_CODE_EDIT_DESCRIPTION && resultCode == RESULT_OK) {
             final String updatedWikiText = data.getStringExtra(UPDATED_WIKITEXT);
             compositeDisposable.add(descriptionEditHelper.addDescription(getContext(), media,
                 updatedWikiText)
@@ -1177,11 +1154,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             }
             progressBarEditDescription.setVisibility(GONE);
             editDescription.setVisibility(VISIBLE);
-
-        } else if (requestCode == REQUEST_CODE && resultCode == RESULT_CANCELED) {
-            viewUtil.showShortToast(getContext(),
-                requireContext()
-                    .getString(R.string.coordinates_picking_unsuccessful));
 
         } else if (requestCode == REQUEST_CODE_EDIT_DESCRIPTION && resultCode == RESULT_CANCELED) {
             progressBarEditDescription.setVisibility(GONE);
@@ -1602,4 +1574,38 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         SharedPreferences imageBackgroundColorPref = this.getImageBackgroundColorPref();
         return imageBackgroundColorPref.getInt(IMAGE_BACKGROUND_COLOR, DEFAULT_IMAGE_BACKGROUND_COLOR);
     }
+
+
+//    private void initResultLauncher(){
+//        mStartForResult = registerForActivityResult(new StartActivityForResult(),
+//            result -> {
+//                Log.d("IssueS", "onActivityResult: " + result.getResultCode() + " " + result.getData());
+//                if (result.getResultCode() == RESULT_OK) {
+//                    Intent data = result.getData();
+//                    final CameraPosition cameraPosition = LocationPicker.getCameraPosition(data);
+//                    if (cameraPosition != null) {
+//                        final String latitude = String.valueOf(cameraPosition.target.getLatitude());
+//                        final String longitude = String.valueOf(cameraPosition.target.getLongitude());
+//                        final String accuracy = String.valueOf(cameraPosition.target.getAltitude());
+//                        String currentLatitude = null;
+//                        String currentLongitude = null;
+//
+//                        if (media.getCoordinates() != null) {
+//                            currentLatitude = String.valueOf(media.getCoordinates().getLatitude());
+//                            currentLongitude = String.valueOf(media.getCoordinates().getLongitude());
+//                        }
+//
+//                        if (!latitude.equals(currentLatitude) || !longitude.equals(currentLongitude)) {
+//                            updateCoordinates(latitude, longitude, accuracy);
+//                        } else if (media.getCoordinates() == null) {
+//                            updateCoordinates(latitude, longitude, accuracy);
+//                        }
+//                    }
+//                } else if (result.getResultCode() == RESULT_CANCELED) {
+//                    viewUtil.showShortToast(getContext(),
+//                        requireContext()
+//                            .getString(R.string.coordinates_picking_unsuccessful));
+//                }
+//            });
+//    }
 }
