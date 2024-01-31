@@ -1172,24 +1172,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         media.setCaptions(updatedCaptions);
     }
 
-    /**
-     * Fetched coordinates are replaced with existing coordinates by a POST API call.
-     * @param Latitude to be added
-     * @param Longitude to be added
-     * @param Accuracy to be added
-     */
-    public void updateCoordinates(final String Latitude, final String Longitude,
-        final String Accuracy) {
-        compositeDisposable.add(coordinateEditHelper.makeCoordinatesEdit(getContext(), media,
-            Latitude, Longitude, Accuracy)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(s -> {
-                Timber.d("Coordinates are added.");
-                coordinates.setText(prettyCoordinates(media));
-            }));
-    }
-
     @SuppressLint("StringFormatInvalid")
     @OnClick(R.id.nominateDeletion)
     public void onDeleteButtonClicked(){
@@ -1575,37 +1557,4 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         return imageBackgroundColorPref.getInt(IMAGE_BACKGROUND_COLOR, DEFAULT_IMAGE_BACKGROUND_COLOR);
     }
 
-
-//    private void initResultLauncher(){
-//        mStartForResult = registerForActivityResult(new StartActivityForResult(),
-//            result -> {
-//                Log.d("IssueS", "onActivityResult: " + result.getResultCode() + " " + result.getData());
-//                if (result.getResultCode() == RESULT_OK) {
-//                    Intent data = result.getData();
-//                    final CameraPosition cameraPosition = LocationPicker.getCameraPosition(data);
-//                    if (cameraPosition != null) {
-//                        final String latitude = String.valueOf(cameraPosition.target.getLatitude());
-//                        final String longitude = String.valueOf(cameraPosition.target.getLongitude());
-//                        final String accuracy = String.valueOf(cameraPosition.target.getAltitude());
-//                        String currentLatitude = null;
-//                        String currentLongitude = null;
-//
-//                        if (media.getCoordinates() != null) {
-//                            currentLatitude = String.valueOf(media.getCoordinates().getLatitude());
-//                            currentLongitude = String.valueOf(media.getCoordinates().getLongitude());
-//                        }
-//
-//                        if (!latitude.equals(currentLatitude) || !longitude.equals(currentLongitude)) {
-//                            updateCoordinates(latitude, longitude, accuracy);
-//                        } else if (media.getCoordinates() == null) {
-//                            updateCoordinates(latitude, longitude, accuracy);
-//                        }
-//                    }
-//                } else if (result.getResultCode() == RESULT_CANCELED) {
-//                    viewUtil.showShortToast(getContext(),
-//                        requireContext()
-//                            .getString(R.string.coordinates_picking_unsuccessful));
-//                }
-//            });
-//    }
 }

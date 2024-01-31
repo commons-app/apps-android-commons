@@ -356,6 +356,12 @@ public class LocationPickerActivity extends BaseActivity implements
         finish();
     }
 
+    /**
+     * Fetched coordinates are replaced with existing coordinates by a POST API call.
+     * @param Latitude to be added
+     * @param Longitude to be added
+     * @param Accuracy to be added
+     */
     public void updateCoordinates(final String Latitude, final String Longitude,
         final String Accuracy) {
         compositeDisposable.add(coordinateEditHelper.makeCoordinatesEdit(getApplicationContext(),media,
