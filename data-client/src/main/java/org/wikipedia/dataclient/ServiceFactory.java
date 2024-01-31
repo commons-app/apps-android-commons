@@ -57,7 +57,7 @@ public final class ServiceFactory {
 
     private static Retrofit createRetrofit(@NonNull WikiSite wiki, @NonNull String baseUrl) {
         return new Retrofit.Builder()
-                .client(AppAdapter.get().getOkHttpClient(wiki))
+                .client(AppAdapter.get().getOkHttpClient())
                 .baseUrl(baseUrl)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(GsonUtil.getDefaultGson()))

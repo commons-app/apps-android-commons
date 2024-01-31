@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.actions
 
+import fr.free.nrw.commons.wikidata.WikidataConstants.MW_API_PREFIX
 import io.reactivex.Observable
 import io.reactivex.Single
-import org.wikipedia.dataclient.Service
 import org.wikipedia.dataclient.mwapi.MwQueryResponse
 import org.wikipedia.edit.Edit
 import org.wikipedia.wikidata.Entities
@@ -27,7 +27,7 @@ interface PageEditInterface {
      */
     @FormUrlEncoded
     @Headers("Cache-Control: no-cache")
-    @POST(Service.MW_API_PREFIX + "action=edit")
+    @POST(MW_API_PREFIX + "action=edit")
     fun postEdit(
         @Field("title") title: String,
         @Field("summary") summary: String,
@@ -47,7 +47,7 @@ interface PageEditInterface {
      */
     @FormUrlEncoded
     @Headers("Cache-Control: no-cache")
-    @POST(Service.MW_API_PREFIX + "action=edit")
+    @POST(MW_API_PREFIX + "action=edit")
     fun postAppendEdit(
         @Field("title") title: String,
         @Field("summary") summary: String,
@@ -66,7 +66,7 @@ interface PageEditInterface {
      */
     @FormUrlEncoded
     @Headers("Cache-Control: no-cache")
-    @POST(Service.MW_API_PREFIX + "action=edit")
+    @POST(MW_API_PREFIX + "action=edit")
     fun postPrependEdit(
         @Field("title") title: String,
         @Field("summary") summary: String,
@@ -77,7 +77,7 @@ interface PageEditInterface {
 
     @FormUrlEncoded
     @Headers("Cache-Control: no-cache")
-    @POST(Service.MW_API_PREFIX + "action=wbsetlabel&format=json&site=commonswiki&formatversion=2")
+    @POST(MW_API_PREFIX + "action=wbsetlabel&format=json&site=commonswiki&formatversion=2")
     fun postCaptions(
         @Field("summary") summary: String,
         @Field("title") title: String,
@@ -91,10 +91,7 @@ interface PageEditInterface {
      * @param titles : Name of the file
      * @return Single<MwQueryResult>
      */
-    @GET(
-        Service.MW_API_PREFIX +
-                "action=query&prop=revisions&rvprop=content|timestamp&rvlimit=1&converttitles="
-    )
+    @GET(MW_API_PREFIX + "action=query&prop=revisions&rvprop=content|timestamp&rvlimit=1&converttitles=")
     fun getWikiText(
         @Query("titles") title: String
     ): Single<MwQueryResponse?>

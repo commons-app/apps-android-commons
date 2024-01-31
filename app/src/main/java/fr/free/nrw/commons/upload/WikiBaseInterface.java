@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.upload;
 
-import static org.wikipedia.dataclient.Service.MW_API_PREFIX;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.MW_API_PREFIX;
 
 import androidx.annotation.NonNull;
 import io.reactivex.Observable;

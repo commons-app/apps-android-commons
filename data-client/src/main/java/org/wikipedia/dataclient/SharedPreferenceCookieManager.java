@@ -28,13 +28,13 @@ public final class SharedPreferenceCookieManager implements CookieJar {
 
     @NonNull
     public static SharedPreferenceCookieManager getInstance() {
-        if (INSTANCE == null) {
-            try {
-                INSTANCE = AppAdapter.get().getCookies();
-            } catch (Exception e) {
-                L.logRemoteErrorIfProd(e);
-            }
-        }
+//        if (INSTANCE == null) {
+//            try {
+//                INSTANCE = AppAdapter.get().getCookies();
+//            } catch (Exception e) {
+//                L.logRemoteErrorIfProd(e);
+//            }
+//        }
         if (INSTANCE == null) {
             INSTANCE = new SharedPreferenceCookieManager();
         }
@@ -54,7 +54,7 @@ public final class SharedPreferenceCookieManager implements CookieJar {
     }
 
     private void persistCookies() {
-        AppAdapter.get().setCookies(this);
+//        AppAdapter.get().setCookies(this);
     }
 
     public synchronized void clearAllCookies() {

@@ -1,5 +1,7 @@
 package fr.free.nrw.commons;
 
+import static fr.free.nrw.commons.TestConnectionFactoryKt.createTestClient;
+
 import androidx.annotation.NonNull;
 import java.util.List;
 import java.util.concurrent.AbstractExecutorService;
@@ -12,9 +14,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.wikipedia.AppAdapter;
-import org.wikipedia.dataclient.Service;
-import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.json.GsonUtil;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -25,9 +24,9 @@ public abstract class MockWebServerTest {
     private final TestWebServer server = new TestWebServer();
 
     @Before public void setUp() throws Throwable {
-        AppAdapter.set(new TestAppAdapter());
-        OkHttpClient.Builder builder = AppAdapter.get().getOkHttpClient(new WikiSite(Service.WIKIPEDIA_URL)).newBuilder();
-        okHttpClient = builder.dispatcher(new Dispatcher(new ImmediateExecutorService())).build();
+        OkHttpConnectionFactory.CLIENT = createTestClient();
+        okHttpClient = OkHttpConnectionFactory.CLIENT.newBuilder()
+            .dispatcher(new Dispatcher(new ImmediateExecutorService())).build();
         server.setUp();
     }
 
