@@ -339,10 +339,6 @@ public class LocationPickerActivity extends BaseActivity implements
                     + mapView.getMapCenter().getLongitude());
             applicationKvStore.putString(LAST_ZOOM, mapView.getZoomLevel() + "");
         }
-        final Intent returningIntent = new Intent();
-        returningIntent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION,
-            new CameraPosition(new LatLng(mapView.getMapCenter().getLatitude(),
-                mapView.getMapCenter().getLongitude()), 14f, 0, 0));
         updateCoordinates(String.valueOf(mapView.getMapCenter().getLatitude()),
             String.valueOf(mapView.getMapCenter().getLongitude()),
             String.valueOf(0.0f));
