@@ -1322,7 +1322,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void setTabItemContributions() {
-        ((MainActivity) getActivity()).viewPager.setCurrentItem(0);
+        ((MainActivity) getActivity()).binding.pager.setCurrentItem(0);
         // TODO
     }
 
