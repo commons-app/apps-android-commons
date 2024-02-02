@@ -9,7 +9,7 @@ import javax.inject.Singleton;
 import fr.free.nrw.commons.wikidata.model.AddEditTagResponse;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
-import org.wikipedia.wikidata.Statement_partial;
+import fr.free.nrw.commons.wikidata.model.Statement_partial;
 
 @Singleton
 public class WikidataClient {

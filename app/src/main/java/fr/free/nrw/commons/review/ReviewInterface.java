@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.review;
 
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

@@ -3,7 +3,7 @@ package fr.free.nrw.commons
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
-import org.wikipedia.dataclient.okhttp.HttpStatusException
+import fr.free.nrw.commons.OkHttpConnectionFactory.HttpStatusException
 import java.io.IOException
 
 fun createTestClient(): OkHttpClient = OkHttpClient.Builder()

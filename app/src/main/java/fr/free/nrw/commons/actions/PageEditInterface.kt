@@ -1,11 +1,11 @@
 package fr.free.nrw.commons.actions
 
 import fr.free.nrw.commons.wikidata.WikidataConstants.MW_API_PREFIX
+import fr.free.nrw.commons.wikidata.model.Entities
+import fr.free.nrw.commons.wikidata.model.edit.Edit
 import io.reactivex.Observable
 import io.reactivex.Single
-import org.wikipedia.dataclient.mwapi.MwQueryResponse
-import org.wikipedia.edit.Edit
-import org.wikipedia.wikidata.Entities
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import retrofit2.http.*
 
 /**

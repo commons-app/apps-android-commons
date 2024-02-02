@@ -15,7 +15,6 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
-import org.wikipedia.dataclient.okhttp.HttpStatusException;
 import timber.log.Timber;
 
 public final class OkHttpConnectionFactory {
@@ -109,5 +108,31 @@ public final class OkHttpConnectionFactory {
     }
 
     private OkHttpConnectionFactory() {
+    }
+
+    public static class HttpStatusException extends IOException {
+        private final int code;
+        private final String url;
+        public HttpStatusException(@NonNull Response rsp) {
+            this.code = rsp.code();
+            this.url = rsp.request().url().uri().toString();
+            try {
+                if (rsp.body() != null && rsp.body().contentType() != null
+                        && rsp.body().contentType().toString().contains("json")) {
+                }
+            } catch (Exception e) {
+                // Log?
+            }
+        }
+
+        public int code() {
+            return code;
+        }
+
+        @Override
+        public String getMessage() {
+            String str = "Code: " + code + ", URL: " + url;
+            return str;
+        }
     }
 }

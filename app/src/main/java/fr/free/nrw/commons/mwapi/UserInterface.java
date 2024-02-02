@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.mwapi;
 
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse;
 
 import java.util.Map;
 

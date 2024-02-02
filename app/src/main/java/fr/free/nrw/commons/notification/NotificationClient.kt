@@ -6,12 +6,12 @@ import fr.free.nrw.commons.notification.models.NotificationType
 import io.reactivex.Observable
 import io.reactivex.Single
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
-import org.wikipedia.dataclient.mwapi.MwQueryResponse
-import org.wikipedia.util.DateUtil
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
+import fr.free.nrw.commons.utils.DateUtil
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
-import org.wikipedia.notifications.Notification as WikimediaNotification
+import fr.free.nrw.commons.wikidata.model.notifications.Notification as WikimediaNotification
 
 @Singleton
 class NotificationClient @Inject constructor(

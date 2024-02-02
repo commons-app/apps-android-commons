@@ -20,8 +20,8 @@ import androidx.core.content.ContextCompat;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import java.util.Calendar;
 import java.util.Date;
-import org.wikipedia.dataclient.WikiSite;
-import org.wikipedia.page.PageTitle;
+import fr.free.nrw.commons.wikidata.model.WikiSite;
+import fr.free.nrw.commons.wikidata.model.page.PageTitle;
 
 import java.util.Locale;
 import java.util.regex.Pattern;
