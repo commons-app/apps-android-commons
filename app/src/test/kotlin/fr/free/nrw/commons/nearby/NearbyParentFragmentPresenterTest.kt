@@ -59,7 +59,6 @@ class NearbyParentFragmentPresenterTest {
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         nearbyPresenter = NearbyParentFragmentPresenter(bookmarkLocationsDao)
-//        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(LatLng(anyDouble(), anyDouble(), anyFloat()));
         nearbyPresenter.attachView(nearbyParentFragmentView)
 
     }
@@ -131,6 +130,7 @@ class NearbyParentFragmentPresenterTest {
     @Test @Ignore
     fun testUpdateMapAndListWhenLastLocationIsNull() {
         nearbyPresenter.lockUnlockNearby(false)
+        verify(nearbyParentFragmentView).enableFABRecenter();
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
         whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(null)
         whenever(nearbyParentFragmentView.mapCenter).thenReturn(LatLng(2.0, 1.0, 0.0F));
@@ -191,46 +191,52 @@ class NearbyParentFragmentPresenterTest {
      * Test testUpdateMapAndList tracks users location if current location marker is visible and
      * location is slightly changed
      */
-    @Test @Ignore
+    @Test
     fun testUserTrackedWhenCurrentLocationMarkerVisible() {
         expectMapAndListUpdate()
         whenever(nearbyParentFragmentView.isCurrentLocationMarkerVisible()).thenReturn(true)
+        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F))
+        whenever(nearbyParentFragmentView.mapCenter).thenReturn(null);
         nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)
-        verify(nearbyParentFragmentView).recenterMap(latestLocation)
+        verify(nearbyParentFragmentView).getLastMapFocus()
+        verify(nearbyParentFragmentView).recenterMap(nearbyParentFragmentView.lastMapFocus)
     }
 
     /**
      * Test testUpdateMapAndList doesn't track users location if current location marker is
      * invisible and location is slightly changed
      */
-    @Test @Ignore
+    @Test
     fun testUserNotTrackedWhenCurrentLocationMarkerInvisible() {
         expectMapAndListUpdate()
-        whenever(nearbyParentFragmentView.isCurrentLocationMarkerVisible()).thenReturn(false)
-        nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)
         verify(nearbyParentFragmentView).enableFABRecenter()
+        whenever(nearbyParentFragmentView.isCurrentLocationMarkerVisible()).thenReturn(false)
+        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F))
+        whenever(nearbyParentFragmentView.mapCenter).thenReturn(null);
+        nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)
         verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
-        verify(nearbyParentFragmentView).getLastLocation()
+        verify(nearbyParentFragmentView).getLastMapFocus()
+        verify(nearbyParentFragmentView).getMapCenter()
         verify(nearbyParentFragmentView).isCurrentLocationMarkerVisible()
         verifyNoMoreInteractions(nearbyParentFragmentView)
     }
-
+    // Removed this test function because of change in functionalities due to  Mapbox to osmdroid transition.
     /**
-     * Test search this area button became visible after user moved the camera target to far
+         * Test search this area button became visible after user moved the camera target to far
      * away from current target. Distance between these two point is 111.19 km, so our camera target
      * is at outside of previously searched region if we set latestSearchRadius below 111.19. Thus,
      * setSearchThisAreaButtonVisibility(true) should be verified.
      */
-    @Test @Ignore
-    fun testSearchThisAreaButtonVisibleWhenMoveToFarPosition() {
-        NearbyController.latestSearchLocation = Mockito.spy(LatLng(2.0, 1.0, 0.0F))
-        mapboxCameraTarget = Mockito.spy(com.mapbox.mapboxsdk.geometry.LatLng(1.0, 1.0, 0.0))
-        // Distance between these two point is 111.19 km
-        NearbyController.latestSearchRadius = 111.0 * 1000 // To meter
-        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
-        nearbyPresenter.onCameraMove(mapboxCameraTarget)
-        verify(nearbyParentFragmentView).setSearchThisAreaButtonVisibility(true)
-    }
+//    @Test
+//    fun testSearchThisAreaButtonVisibleWhenMoveToFarPosition() {
+//        NearbyController.latestSearchLocation = Mockito.spy(LatLng(2.0, 1.0, 0.0F))
+//        mapboxCameraTarget = Mockito.spy(com.mapbox.mapboxsdk.geometry.LatLng(1.0, 1.0, 0.0))
+//        // Distance between these two point is 111.19 km
+//        NearbyController.latestSearchRadius = 111.19 * 1000 // To meter
+//        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
+//        nearbyPresenter.onCameraMove(mapboxCameraTarget)
+//        verify(nearbyParentFragmentView).setSearchThisAreaButtonVisibility(true)
+//    }
 
     /**
      * Test search this area button became visible after user moved the camera target to far
@@ -463,22 +469,29 @@ class NearbyParentFragmentPresenterTest {
         updateMapSignificantly()
     }
 
-    @Test @Ignore
+    @Test
     fun testOnLocationChangedSlightly() {
         nearbyPresenter.onLocationChangedSlightly(latestLocation)
         expectMapAndListUpdate()
+        verify(nearbyParentFragmentView).enableFABRecenter()
         whenever(nearbyParentFragmentView.isCurrentLocationMarkerVisible()).thenReturn(true)
+        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F))
+        whenever(nearbyParentFragmentView.mapCenter).thenReturn(null)
         nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)
-        verify(nearbyParentFragmentView).recenterMap(latestLocation)
+        verify(nearbyParentFragmentView).getLastMapFocus()
+        verify(nearbyParentFragmentView).isCurrentLocationMarkerVisible()
+        verify(nearbyParentFragmentView).recenterMap(nearbyParentFragmentView.lastMapFocus)
     }
 
-    @Test @Ignore
+    @Test
     fun testOnLocationChangeTypeCustomQuery() {
         nearbyPresenter.setAdvancedQuery("Point(17.865 82.343)\"")
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
         whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(latestLocation)
+        whenever(nearbyParentFragmentView.lastMapFocus).thenReturn(LatLng(2.0, 1.0, 0.0F))
+        whenever(nearbyParentFragmentView.mapCenter).thenReturn(null)
         nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
-        expectMapAndListUpdate()
+        verify(nearbyParentFragmentView).getLastMapFocus()
         verify(nearbyParentFragmentView).setProgressBarVisibility(true)
         verify(nearbyParentFragmentView).populatePlaces(any(), any())
     }
@@ -548,6 +561,10 @@ class NearbyParentFragmentPresenterTest {
 
     @Test @Ignore
     fun testUpdateMapMarkers() {
+        //LatLng(2.0, 1.0, 0.0F)
+        whenever(latestLocation.latitude).thenReturn(2.0)
+        whenever(latestLocation.longitude).thenReturn(1.0)
+        whenever(latestLocation.accuracy).thenReturn(0.0F)
         var nearbyPlacesInfo = NearbyController(nearbyPlaces).NearbyPlacesInfo()
         nearbyPlacesInfo.boundaryCoordinates = arrayOf()
         nearbyPlacesInfo.curLatLng = latestLocation
