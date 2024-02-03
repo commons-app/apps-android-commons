@@ -4,8 +4,9 @@ import android.content.Context
 import android.view.Menu
 import android.view.MenuItem
 import androidx.test.core.app.ApplicationProvider
-import fr.free.nrw.commons.TestAppAdapter
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment
 import org.junit.Assert
 import org.junit.Before
@@ -18,7 +19,6 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Field
 
 @RunWith(RobolectricTestRunner::class)
@@ -41,7 +41,7 @@ class CategoryDetailsActivityUnitTests {
 
         MockitoAnnotations.openMocks(this)
 
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
 
         context = ApplicationProvider.getApplicationContext()
 

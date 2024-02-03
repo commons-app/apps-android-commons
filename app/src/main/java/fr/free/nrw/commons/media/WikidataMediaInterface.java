@@ -3,7 +3,7 @@ package fr.free.nrw.commons.media;
 import static fr.free.nrw.commons.media.MediaInterface.MEDIA_PARAMS;
 
 import io.reactivex.Single;
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 

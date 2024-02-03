@@ -23,9 +23,10 @@ import com.mapbox.mapboxsdk.geometry.LatLng
 import com.nhaarman.mockitokotlin2.mock
 import fr.free.nrw.commons.LocationPicker.LocationPicker
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.upload.ImageCoordinates
@@ -50,7 +51,6 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowIntent
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -115,7 +115,7 @@ class UploadMediaDetailFragmentUnitTest {
         MockitoAnnotations.openMocks(this)
 
         context = ApplicationProvider.getApplicationContext()
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
 
         activity = Robolectric.buildActivity(UploadActivity::class.java).create().get()
         layoutInflater = LayoutInflater.from(activity)

@@ -27,7 +27,7 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient;
-import org.wikipedia.dataclient.mwapi.MwException;
+import fr.free.nrw.commons.wikidata.mwapi.MwException;
 import timber.log.Timber;
 
 @Singleton

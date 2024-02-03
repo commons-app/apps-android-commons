@@ -1,11 +1,11 @@
 package fr.free.nrw.commons.upload;
 
-import static org.wikipedia.dataclient.Service.MW_API_PREFIX;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.MW_API_PREFIX;
 
 import androidx.annotation.NonNull;
 import io.reactivex.Observable;
-import org.wikipedia.dataclient.mwapi.MwPostResponse;
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
+import fr.free.nrw.commons.wikidata.mwapi.MwPostResponse;
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;

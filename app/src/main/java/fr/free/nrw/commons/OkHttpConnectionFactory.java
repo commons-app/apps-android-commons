@@ -1,9 +1,9 @@
 package fr.free.nrw.commons;
 
 import androidx.annotation.NonNull;
+import fr.free.nrw.commons.wikidata.cookies.CommonsCookieJar;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -15,28 +15,26 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
-import org.wikipedia.dataclient.SharedPreferenceCookieManager;
-import org.wikipedia.dataclient.okhttp.HttpStatusException;
 import timber.log.Timber;
 
 public final class OkHttpConnectionFactory {
     private static final String CACHE_DIR_NAME = "okhttp-cache";
     private static final long NET_CACHE_SIZE = 64 * 1024 * 1024;
-    @NonNull private static final Cache NET_CACHE = new Cache(new File(CommonsApplication.getInstance().getCacheDir(),
-            CACHE_DIR_NAME), NET_CACHE_SIZE);
 
-    @NonNull
-    private static final OkHttpClient CLIENT = createClient();
+    public static OkHttpClient CLIENT;
 
-    @NonNull public static OkHttpClient getClient() {
+    @NonNull public static OkHttpClient getClient(final CommonsCookieJar cookieJar) {
+        if (CLIENT == null) {
+            CLIENT = createClient(cookieJar);
+        }
         return CLIENT;
     }
 
     @NonNull
-    private static OkHttpClient createClient() {
+    private static OkHttpClient createClient(final CommonsCookieJar cookieJar) {
         return new OkHttpClient.Builder()
-                .cookieJar(SharedPreferenceCookieManager.getInstance())
-                .cache(NET_CACHE)
+                .cookieJar(cookieJar)
+                .cache(new Cache(new File(CommonsApplication.getInstance().getCacheDir(), CACHE_DIR_NAME), NET_CACHE_SIZE))
                 .connectTimeout(120, TimeUnit.SECONDS)
                 .writeTimeout(120, TimeUnit.SECONDS)
                 .readTimeout(120, TimeUnit.SECONDS)
@@ -110,5 +108,31 @@ public final class OkHttpConnectionFactory {
     }
 
     private OkHttpConnectionFactory() {
+    }
+
+    public static class HttpStatusException extends IOException {
+        private final int code;
+        private final String url;
+        public HttpStatusException(@NonNull Response rsp) {
+            this.code = rsp.code();
+            this.url = rsp.request().url().uri().toString();
+            try {
+                if (rsp.body() != null && rsp.body().contentType() != null
+                        && rsp.body().contentType().toString().contains("json")) {
+                }
+            } catch (Exception e) {
+                // Log?
+            }
+        }
+
+        public int code() {
+            return code;
+        }
+
+        @Override
+        public String getMessage() {
+            String str = "Code: " + code + ", URL: " + url;
+            return str;
+        }
     }
 }

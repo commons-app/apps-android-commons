@@ -7,13 +7,13 @@ import fr.free.nrw.commons.MockWebServerTest
 import io.reactivex.observers.TestObserver
 import org.junit.Before
 import org.junit.Test
-import org.wikipedia.dataclient.WikiSite
-import org.wikipedia.dataclient.mwapi.MwQueryResponse
-import org.wikipedia.json.NamespaceTypeAdapter
-import org.wikipedia.json.PostProcessingTypeAdapter
-import org.wikipedia.json.UriTypeAdapter
-import org.wikipedia.json.WikiSiteTypeAdapter
-import org.wikipedia.page.Namespace
+import fr.free.nrw.commons.wikidata.model.WikiSite
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
+import fr.free.nrw.commons.wikidata.json.NamespaceTypeAdapter
+import fr.free.nrw.commons.wikidata.json.PostProcessingTypeAdapter
+import fr.free.nrw.commons.wikidata.json.UriTypeAdapter
+import fr.free.nrw.commons.wikidata.json.WikiSiteTypeAdapter
+import fr.free.nrw.commons.wikidata.model.page.Namespace
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -22,9 +22,14 @@ class UserExtendedInfoClientTest : MockWebServerTest() {
     private var apiService: LoginInterface? = null
     private val observer = TestObserver<MwQueryResponse>()
     private val gson = GsonBuilder()
-        .registerTypeHierarchyAdapter(Uri::class.java, UriTypeAdapter().nullSafe())
-        .registerTypeHierarchyAdapter(Namespace::class.java, NamespaceTypeAdapter().nullSafe())
-        .registerTypeAdapter(WikiSite::class.java, WikiSiteTypeAdapter().nullSafe())
+        .registerTypeHierarchyAdapter(Uri::class.java, UriTypeAdapter()
+            .nullSafe())
+        .registerTypeHierarchyAdapter(
+            Namespace::class.java, NamespaceTypeAdapter()
+            .nullSafe())
+        .registerTypeAdapter(
+            WikiSite::class.java, WikiSiteTypeAdapter()
+            .nullSafe())
         .registerTypeAdapterFactory(PostProcessingTypeAdapter())
         .create()
 

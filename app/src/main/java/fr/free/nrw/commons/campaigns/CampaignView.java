@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 
 import fr.free.nrw.commons.campaigns.models.Campaign;
 import fr.free.nrw.commons.theme.BaseActivity;
-import org.wikipedia.util.DateUtil;
+import fr.free.nrw.commons.utils.DateUtil;
 
 import java.text.ParseException;
 import java.util.Date;

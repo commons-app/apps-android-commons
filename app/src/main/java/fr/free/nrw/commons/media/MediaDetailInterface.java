@@ -1,11 +1,11 @@
 package fr.free.nrw.commons.media;
 
+import static fr.free.nrw.commons.wikidata.WikidataConstants.MW_API_PREFIX;
+
+import fr.free.nrw.commons.wikidata.model.Entities;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import org.wikipedia.dataclient.Service;
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
-import org.wikipedia.wikidata.Entities;
-import retrofit2.Call;
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -43,10 +43,7 @@ public interface MediaDetailInterface {
      * @param title file name
      * @return Single<MwQueryResponse>
      */
-    @GET(
-        Service.MW_API_PREFIX +
-            "action=query&prop=revisions&rvprop=content|timestamp&rvlimit=1&converttitles="
-    )
+    @GET(MW_API_PREFIX + "action=query&prop=revisions&rvprop=content|timestamp&rvlimit=1&converttitles=")
     Single<MwQueryResponse> getWikiText(
         @Query("titles") String title
     );

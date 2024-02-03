@@ -52,7 +52,7 @@ import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
-import org.wikipedia.dataclient.WikiSite;
+import fr.free.nrw.commons.wikidata.model.WikiSite;
 
 
 /**

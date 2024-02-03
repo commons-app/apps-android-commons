@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.mwapi;
 
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse;
 
 import java.util.Map;
 
@@ -9,7 +9,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
-import static org.wikipedia.dataclient.Service.MW_API_PREFIX;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.MW_API_PREFIX;
 
 public interface UserInterface {
 
@@ -20,7 +20,7 @@ public interface UserInterface {
      * @return query response
      */
 
-    @GET(MW_API_PREFIX+"action=query&list=logevents&letype=upload&leprop=title|timestamp|ids&lelimit=500")
+    @GET(MW_API_PREFIX + "action=query&list=logevents&letype=upload&leprop=title|timestamp|ids&lelimit=500")
     Observable<MwQueryResponse> getUserLogEvents(@Query("leuser") String user, @QueryMap Map<String, String> continuation);
 
     /**
