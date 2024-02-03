@@ -13,7 +13,7 @@ import java.util.Collections;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.apache.commons.lang3.StringUtils;
-import org.wikipedia.dataclient.mwapi.MwQueryPage;
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage;
 import timber.log.Timber;
 
 @Singleton

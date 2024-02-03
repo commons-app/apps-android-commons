@@ -30,7 +30,7 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowNotificationManager
 import org.robolectric.shadows.ShadowToast
-import org.wikipedia.dataclient.mwapi.MwQueryPage
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
 import java.lang.reflect.Method
 import java.util.*
 

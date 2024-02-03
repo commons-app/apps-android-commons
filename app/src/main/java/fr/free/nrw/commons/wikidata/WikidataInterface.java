@@ -2,7 +2,7 @@ package fr.free.nrw.commons.wikidata;
 
 import androidx.annotation.NonNull;
 
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse;
 
 import fr.free.nrw.commons.wikidata.model.WbCreateClaimResponse;
 import io.reactivex.Observable;

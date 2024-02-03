@@ -2,10 +2,10 @@ package fr.free.nrw.commons.media;
 
 import static fr.free.nrw.commons.wikidata.WikidataConstants.MW_API_PREFIX;
 
+import fr.free.nrw.commons.wikidata.model.Entities;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
-import org.wikipedia.wikidata.Entities;
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 

@@ -7,11 +7,11 @@ import fr.free.nrw.commons.upload.depicts.DepictsInterface
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.upload.structure.depictions.get
 import fr.free.nrw.commons.wikidata.WikidataProperties
+import fr.free.nrw.commons.wikidata.model.DataValue
 import fr.free.nrw.commons.wikidata.model.DepictSearchItem
+import fr.free.nrw.commons.wikidata.model.Entities
+import fr.free.nrw.commons.wikidata.model.Statement_partial
 import io.reactivex.Single
-import org.wikipedia.wikidata.DataValue
-import org.wikipedia.wikidata.Entities
-import org.wikipedia.wikidata.Statement_partial
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton

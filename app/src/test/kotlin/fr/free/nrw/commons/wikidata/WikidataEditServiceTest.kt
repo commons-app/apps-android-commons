@@ -17,7 +17,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
-import org.wikipedia.wikidata.EditClaim
+import fr.free.nrw.commons.wikidata.model.EditClaim
 
 class WikidataEditServiceTest {
     @Mock
