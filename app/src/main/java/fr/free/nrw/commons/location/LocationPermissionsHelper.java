@@ -55,7 +55,7 @@ public class LocationPermissionsHelper {
                             new String[]{permission.ACCESS_FINE_LOCATION}, 1);
                     },
                     () -> callback.onLocationPermissionDenied(
-                        activity.getString(R.string.in_app_camera_location_permission_denied)),
+                        activity.getString(R.string.upload_map_location_access)),
                     null,
                     false);
             } else {

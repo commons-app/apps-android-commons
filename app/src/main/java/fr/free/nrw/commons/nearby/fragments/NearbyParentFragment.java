@@ -325,6 +325,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         null,
                         false);
                 } else {
+                    if (isPermissionDenied) {
+                        locationPermissionsHelper.showAppSettingsDialog(getActivity(),
+                            R.string.nearby_needs_location);
+                    }
+                    Timber.d("The user checked 'Don't ask again' or denied the permission twice");
                     isPermissionDenied = true;
                 }
             }
@@ -644,7 +649,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      *
      */
     private void startMapWithoutPermission() {
-        Timber.d("Inside startMapWithoutPerm");
         if (applicationKvStore.getString("LastLocation") != null) {
             final String[] locationLatLng
                 = applicationKvStore.getString("LastLocation").split(",");
@@ -1794,8 +1798,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 isPermissionDenied = false;
                 recenterMap(curLatLng);
             } else {
-                locationPermissionsHelper.showAppSettingsDialog(getActivity(),
-                    R.string.nearby_needs_location);
+                askForLocationPermission();
             }
         } else {
             if (!locationPermissionsHelper.checkLocationPermission(getActivity())) {

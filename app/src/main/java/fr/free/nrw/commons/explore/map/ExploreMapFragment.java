@@ -175,6 +175,10 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                         null,
                         false);
                 } else {
+                    if (isPermissionDenied) {
+                        locationPermissionsHelper.showAppSettingsDialog(getActivity(),
+                            R.string.nearby_needs_location);
+                    }
                     Timber.d("The user checked 'Don't ask again' or denied the permission twice");
                     isPermissionDenied = true;
                 }
@@ -513,8 +517,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                 isPermissionDenied = false;
                 recenterMap(curLatLng);
             } else {
-                locationPermissionsHelper.showAppSettingsDialog(getActivity(),
-                    R.string.explore_map_needs_location);
+                askForLocationPermission();
             }
         } else {
             if (!locationPermissionsHelper.checkLocationPermission(getActivity())) {

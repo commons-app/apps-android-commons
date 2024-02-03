@@ -153,6 +153,7 @@ public class ContributionController {
                     inAppCameraLocationPermissionLauncher);
             },
             () -> {
+                ViewUtil.showLongToast(activity, R.string.in_app_camera_location_permission_denied);
                 defaultKvStore.putBoolean("inAppCameraLocationPref", false);
                 initiateCameraUpload(activity);
             },
