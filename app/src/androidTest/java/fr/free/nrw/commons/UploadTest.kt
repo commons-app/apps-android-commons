@@ -234,9 +234,6 @@ class UploadTest {
                         .actionOnItemAtPosition<UploadMediaDetailAdapter.ViewHolder>(0,
                                 MyViewAction.typeTextInChildViewWithId(R.id.description_item_edit_text, "Test description")))
 
-        onView(withId(R.id.btn_add_description))
-                .perform(click())
-
         onView(withId(R.id.rv_descriptions)).perform(
                 RecyclerViewActions
                         .actionOnItemAtPosition<UploadMediaDetailAdapter.ViewHolder>(1,
