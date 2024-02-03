@@ -134,8 +134,8 @@ class UploadCancelledTest {
         )
         linearLayout3.perform(click())
 
-        // Dismiss the one-time "Record location for in-app shots" dialog
-        onView(withText(R.string.option_dismiss)).check { view, _ ->
+        // Tap "Allow" on the one-time "Record location for in-app shots" dialog
+        onView(withText(R.string.option_allow)).check { view, _ ->
             view?.performClick()
         }
 
@@ -198,5 +198,9 @@ class UploadCancelledTest {
         )
         UITestHelper.sleep(2000)
         floatingActionButton3.perform(click())
+
+        // Cancel Upload
+        UITestHelper.sleep(2000)
+        onView(withText(R.string.cancel)).perform(click())
     }
 }
