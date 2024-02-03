@@ -11,7 +11,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.RowItemLanguagesSpinnerBinding
 import fr.free.nrw.commons.utils.LangCodeUtils
 import org.apache.commons.lang3.StringUtils
-import org.wikipedia.language.AppLanguageLookUpTable
+import fr.free.nrw.commons.language.AppLanguageLookUpTable
 import java.util.*
 
 /**
@@ -39,7 +39,8 @@ class LanguagesAdapter constructor(
     private var languageNamesList: List<String>
     private var languageCodesList: List<String>
 
-    var language: AppLanguageLookUpTable = AppLanguageLookUpTable(context)
+    var language: AppLanguageLookUpTable =
+        AppLanguageLookUpTable(context)
     init {
         languageNamesList = language.localizedNames
         languageCodesList = language.codes

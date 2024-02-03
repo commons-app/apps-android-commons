@@ -59,7 +59,7 @@ import org.acra.annotation.AcraCore;
 import org.acra.annotation.AcraDialog;
 import org.acra.annotation.AcraMailSender;
 import org.acra.data.StringFormat;
-import org.wikipedia.language.AppLanguageLookUpTable;
+import fr.free.nrw.commons.language.AppLanguageLookUpTable;
 import timber.log.Timber;
 
 @AcraCore(

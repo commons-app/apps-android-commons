@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 
 import androidx.appcompat.widget.AppCompatTextView;
 
-import org.wikipedia.util.StringUtil;
+import fr.free.nrw.commons.utils.StringUtil;
 
 /**
  * An {@link AppCompatTextView} which formats the text to HTML displayable text and makes any

@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
-import org.wikipedia.dataclient.mwapi.MwQueryPage;
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage;
 
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
