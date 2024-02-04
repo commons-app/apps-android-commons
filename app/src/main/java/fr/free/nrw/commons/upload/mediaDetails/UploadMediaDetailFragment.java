@@ -251,7 +251,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         photoViewBackgroundImage.setOnScaleChangeListener(
             (scaleFactor, focusX, focusY) -> {
                 //Whenever the uses plays with the image, lets collapse the media detail container
-                expandCollapseLlMediaDetail(false);
+                //only if it is not already collapsed, which resolves flickering of arrow
+                if (isExpanded) {
+                    expandCollapseLlMediaDetail(false);
+                }
             });
     }
 
