@@ -148,7 +148,6 @@ public class ContributionsFragment
                     && !store.getBoolean("doNotAskForLocationPermission", false)
                     && (((MainActivity) getActivity()).activeFragment == ActiveFragment.CONTRIBUTIONS)) {
                     nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
-                    showNearbyCardPermissionRationale();
                 } else {
                     displayYouWontSeeNearbyMessage();
                 }
@@ -494,7 +493,6 @@ public class ContributionsFragment
                 && !store.getBoolean("doNotAskForLocationPermission", false)
                 && (((MainActivity) getActivity()).activeFragment == ActiveFragment.CONTRIBUTIONS)) {
             nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
-            showNearbyCardPermissionRationale();
         }
     }
 
