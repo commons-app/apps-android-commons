@@ -102,10 +102,8 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
             wikiText = bundle.getString("WikiText");
             nearbyPlaceCategory = bundle.getString(SELECTED_NEARBY_PLACE_CATEGORY);
         }
-        if(callback!=null) {
-            init();
-            presenter.getCategories().observe(getViewLifecycleOwner(), this::setCategories);
-        }
+        init();
+        presenter.getCategories().observe(getViewLifecycleOwner(), this::setCategories);
 
     }
 
