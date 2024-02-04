@@ -485,7 +485,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
         initNearbyFilter();
         addCheckBoxCallback();
-        performMapReadyActions();
         moveCameraToPosition(lastMapFocus);
         initRvNearbyList();
         onResume();
