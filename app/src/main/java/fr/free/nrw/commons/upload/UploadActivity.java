@@ -711,6 +711,14 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         return true;
     }
 
+    @Override
+    public void highlightNextImageOnCancelledImage(int index, int maxSize) {
+        if (vpUpload != null && index < (maxSize)) {
+            vpUpload.setCurrentItem(index + 1, false);
+            vpUpload.setCurrentItem(index, false);
+        }
+    }
+
     /**
      * Calculate the difference between current location and
      * location recorded before capturing the image

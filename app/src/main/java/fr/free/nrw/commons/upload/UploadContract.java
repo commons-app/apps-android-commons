@@ -20,6 +20,14 @@ public interface UploadContract {
 
         void askUserToLogIn();
 
+        /**
+         * Changes current image when one image upload is cancelled, to highlight next image
+         *
+         * @param index Index of image to be removed
+         * @param maxSize Max size of the {@code uploadableFiles}
+         */
+        void highlightNextImageOnCancelledImage(int index, int maxSize);
+
         void showProgress(boolean shouldShow);
 
         void showMessage(int messageResourceId);

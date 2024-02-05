@@ -458,7 +458,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 false);
         } else {
             uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
-            onNextButtonClicked();
+            onImageValidationSuccess();
         }
     }
 
@@ -481,9 +481,15 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
                     // validate image only when same file name error does not occur
                     // show the same file name error if exists.
-                    if ((errorCode & FILE_NAME_EXISTS) == 0) {
-                        uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
-                        onImageValidationSuccess();
+                    // If image with same file name exists check the bit in errorCode is set or not
+                    if ((errorCode & FILE_NAME_EXISTS) != 0) {
+                        Timber.d("Trying to show duplicate picture popup");
+                        showDuplicatePicturePopup(uploadItem);
+                    } else {
+                        if ((errorCode & FILE_NAME_EXISTS) == 0) {
+                            uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
+                            onImageValidationSuccess();
+                        }
                     }
                 },
                 () -> deleteThisPicture()

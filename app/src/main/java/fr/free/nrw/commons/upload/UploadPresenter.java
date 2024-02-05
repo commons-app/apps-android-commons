@@ -155,6 +155,7 @@ public class UploadPresenter implements UploadContract.UserActionListener {
 
         //In case lets update the number of uploadable media
         view.updateTopCardTitle();
+        view.highlightNextImageOnCancelledImage(index, uploadableFiles.size());
 
     }
 
