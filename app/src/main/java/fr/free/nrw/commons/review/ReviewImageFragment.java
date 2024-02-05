@@ -193,6 +193,11 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
             public void onFailure() {
                 //do nothing
             }
+
+            @Override
+            public void disableButtons() {
+                ReviewImageFragment.this.disableButtons();
+            }
         };
     }
 
