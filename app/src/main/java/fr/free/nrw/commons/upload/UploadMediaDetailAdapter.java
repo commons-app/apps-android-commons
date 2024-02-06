@@ -184,12 +184,6 @@ public class UploadMediaDetailAdapter extends
     public void removeDescription(final UploadMediaDetail uploadMediaDetail, final int position) {
         selectedLanguages.remove(position);
         final int ListPosition;
-//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-//            ListPosition = (int) selectedLanguages.keySet().stream().filter(e -> e < position).count();
-//        }else{
-//
-//
-//        }
         List<Integer> keysList = new ArrayList<>(selectedLanguages.keySet());
         int count = 0;
         for (Integer key : keysList) {
