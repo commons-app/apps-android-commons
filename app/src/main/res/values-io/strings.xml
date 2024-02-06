@@ -323,9 +323,12 @@
   <string name="exif_tag_name_software">Software</string>
   <string name="no_categories_found">Nula kategorio trovesis</string>
   <string name="default_description_language">implicita deskripto-linguo</string>
+  <string name="coordinates_edit_helper_show_edit_title">Aktualigo di koordinati</string>
+  <string name="coordinates_edit_helper_show_edit_message">Adjuntesis %1$s koordinati.</string>
   <string name="you_have_no_achievements_yet">Vu ankore ne facis kontributaji</string>
   <string name="modify_location">Aktualigar lokizo</string>
   <string name="image_location">Lokizo dil imajo</string>
   <string name="check_whether_location_is_correct">Verifikez se la lokizo esas korekta</string>
   <string name="menu_view_user_page">Vidar uzeropagino</string>
+  <string name="similar_coordinate_description_auto_set">Koordinati ne esas l\'exakta, tamen l\'individuo qua sendis ca imajo kredas ke la koordinati quin lu informis esas suficante proxima.</string>
 </resources>
