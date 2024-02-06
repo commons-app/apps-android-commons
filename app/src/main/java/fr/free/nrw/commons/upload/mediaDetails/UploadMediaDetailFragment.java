@@ -36,6 +36,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.edit.EditActivity;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.filepicker.UploadableFile;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
@@ -309,31 +310,35 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     public void showSimilarImageFragment(String originalFilePath, String possibleFilePath,
         ImageCoordinates similarImageCoordinates) {
-        SimilarImageDialogFragment newFragment = new SimilarImageDialogFragment();
-        newFragment.setCallback(new SimilarImageDialogFragment.Callback() {
-            @Override
-            public void onPositiveResponse() {
-                Timber.d("positive response from similar image fragment");
-                presenter.useSimilarPictureCoordinates(similarImageCoordinates, callback.getIndexInViewFlipper(UploadMediaDetailFragment.this));
+        BasicKvStore basicKvStore = new BasicKvStore(getActivity(), "IsAnyImageCancelled");
+        if (!basicKvStore.getBoolean("IsAnyImageCancelled", false)) {
+            SimilarImageDialogFragment newFragment = new SimilarImageDialogFragment();
+            newFragment.setCallback(new SimilarImageDialogFragment.Callback() {
+                @Override
+                public void onPositiveResponse() {
+                    Timber.d("positive response from similar image fragment");
+                    presenter.useSimilarPictureCoordinates(similarImageCoordinates,
+                        callback.getIndexInViewFlipper(UploadMediaDetailFragment.this));
 
-                // set the description text when user selects to use coordinate from the other image
-                // which was taken within 20s
-                // fixing: https://github.com/commons-app/apps-android-commons/issues/4700
-                uploadMediaDetailAdapter.getItems().get(0).setDescriptionText(
-                    getString(R.string.similar_coordinate_description_auto_set));
-                updateMediaDetails(uploadMediaDetailAdapter.getItems());
-            }
+                    // set the description text when user selects to use coordinate from the other image
+                    // which was taken within 120s
+                    // fixing: https://github.com/commons-app/apps-android-commons/issues/4700
+                    uploadMediaDetailAdapter.getItems().get(0).setDescriptionText(
+                        getString(R.string.similar_coordinate_description_auto_set));
+                    updateMediaDetails(uploadMediaDetailAdapter.getItems());
+                }
 
-            @Override
-            public void onNegativeResponse() {
-                Timber.d("negative response from similar image fragment");
-            }
-        });
-        Bundle args = new Bundle();
-        args.putString("originalImagePath", originalFilePath);
-        args.putString("possibleImagePath", possibleFilePath);
-        newFragment.setArguments(args);
-        newFragment.show(getChildFragmentManager(), "dialog");
+                @Override
+                public void onNegativeResponse() {
+                    Timber.d("negative response from similar image fragment");
+                }
+            });
+            Bundle args = new Bundle();
+            args.putString("originalImagePath", originalFilePath);
+            args.putString("possibleImagePath", possibleFilePath);
+            newFragment.setArguments(args);
+            newFragment.show(getChildFragmentManager(), "dialog");
+        }
     }
 
     @Override

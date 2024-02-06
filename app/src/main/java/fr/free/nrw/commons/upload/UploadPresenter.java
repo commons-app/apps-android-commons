@@ -141,6 +141,7 @@ public class UploadPresenter implements UploadContract.UserActionListener {
         if (index == uploadableFiles.size() - 1) {//If the next fragment to be shown is not one of the MediaDetailsFragment, lets hide the top card
             view.showHideTopCard(false);
         }
+        view.setImageCancelled(true);
         repository.deletePicture(uploadableFiles.get(index).getFilePath());
         if (uploadableFiles.size() == 1) {
             view.showMessage(R.string.upload_cancelled);

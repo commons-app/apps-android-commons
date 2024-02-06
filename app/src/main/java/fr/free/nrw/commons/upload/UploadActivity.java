@@ -48,6 +48,7 @@ import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.filepicker.Constants.RequestCodes;
 import fr.free.nrw.commons.filepicker.UploadableFile;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationPermissionsHelper;
@@ -329,6 +330,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
     @Override
     protected void onStop() {
+        // Resetting setImageCancelled to false
+        setImageCancelled(false);
         super.onStop();
     }
 
@@ -717,6 +720,12 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             vpUpload.setCurrentItem(index + 1, false);
             vpUpload.setCurrentItem(index, false);
         }
+    }
+
+    @Override
+    public void setImageCancelled(boolean isCancelled) {
+        BasicKvStore basicKvStore = new BasicKvStore(this,"IsAnyImageCancelled");
+        basicKvStore.putBoolean("IsAnyImageCancelled", isCancelled);
     }
 
     /**
