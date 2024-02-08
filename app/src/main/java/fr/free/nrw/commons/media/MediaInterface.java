@@ -1,9 +1,12 @@
 package fr.free.nrw.commons.media;
 
+import static fr.free.nrw.commons.OkHttpConnectionFactory.UnsuccessfulResponseInterceptor.SUPPRESS_ERROR_LOG_HEADER;
+
 import io.reactivex.Single;
 import java.util.Map;
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
@@ -104,6 +107,17 @@ public interface MediaInterface {
     Single<MwQueryResponse> getMedia(@Query("titles") String title);
 
     /**
+     * Fetches Media object from the imageInfo API but suppress (known) errors
+     *
+     * @param title       the tiles to be searched for. Can be filename or template name
+     * @return
+     */
+    @GET("w/api.php?action=query&format=json&formatversion=2" +
+        MEDIA_PARAMS_WITH_CATEGORY_DETAILS)
+    @Headers(SUPPRESS_ERROR_LOG_HEADER)
+    Single<MwQueryResponse> getMediaSuppressingErrors(@Query("titles") String title);
+
+    /**
      * Fetches Media object from the imageInfo API
      *
      * @param pageIds       the ids to be searched for
@@ -111,6 +125,7 @@ public interface MediaInterface {
      */
     @GET("w/api.php?action=query&format=json&formatversion=2" +
             MEDIA_PARAMS)
+    @Headers(SUPPRESS_ERROR_LOG_HEADER)
     Single<MwQueryResponse> getMediaById(@Query("pageids") String pageIds);
 
     /**
@@ -125,6 +140,7 @@ public interface MediaInterface {
     Single<MwQueryResponse> getMediaWithGenerator(@Query("titles") String title);
 
     @GET("w/api.php?format=json&action=parse&prop=text")
+    @Headers(SUPPRESS_ERROR_LOG_HEADER)
     Single<MwParseResponse> getPageHtml(@Query("page") String title);
 
     /**
