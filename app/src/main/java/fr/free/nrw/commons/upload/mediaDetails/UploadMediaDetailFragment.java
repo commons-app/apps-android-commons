@@ -463,6 +463,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 false);
         } else {
             uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
+            // Calling below, instead of onNextButtonClicked() to not show locationDialog twice
             onImageValidationSuccess();
         }
     }
@@ -491,10 +492,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                         Timber.d("Trying to show duplicate picture popup");
                         showDuplicatePicturePopup(uploadItem);
                     } else {
-                        if ((errorCode & FILE_NAME_EXISTS) == 0) {
-                            uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
-                            onImageValidationSuccess();
-                        }
+                        uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
+                        onImageValidationSuccess();
                     }
                 },
                 () -> deleteThisPicture()
