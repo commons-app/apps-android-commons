@@ -131,6 +131,17 @@ class MediaClient @Inject constructor(
     }
 
     /**
+     * Fetches Media object from the imageInfo API but suppress (known) errors
+     *
+     * @param titles the tiles to be searched for. Can be filename or template name
+     * @return
+     */
+    fun getMediaSuppressingErrors(titles: String?): Single<Media> {
+        return responseMapper(mediaInterface.getMediaSuppressingErrors(titles))
+            .map { it.first() }
+    }
+
+    /**
      * The method returns the picture of the day
      *
      * @return Media object corresponding to the picture of the day
