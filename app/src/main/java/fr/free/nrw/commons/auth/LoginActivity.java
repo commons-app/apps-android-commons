@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -96,6 +97,13 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        //Get Extra message string from the intent and show Toast
+        String message = getIntent().getStringExtra("loginMessage");
+        if(message!=null) {
+            Toast.makeText(this, " "+message, Toast.LENGTH_SHORT).show();
+        }
+
 
         binding.loginUsername.addTextChangedListener(textWatcher);
         binding.loginPassword.addTextChangedListener(textWatcher);

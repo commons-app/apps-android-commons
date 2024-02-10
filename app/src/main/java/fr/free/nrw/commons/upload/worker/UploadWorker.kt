@@ -10,15 +10,16 @@ import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.multidex.BuildConfig
 import androidx.work.CoroutineWorker
 import androidx.work.Data
-import androidx.work.WorkerParameters
-import androidx.multidex.BuildConfig
 import androidx.work.ForegroundInfo
+import androidx.work.WorkerParameters
 import dagger.android.ContributesAndroidInjector
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.ChunkInfo
 import fr.free.nrw.commons.contributions.Contribution
@@ -29,12 +30,15 @@ import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.theme.BaseActivity
-import fr.free.nrw.commons.upload.StashUploadResult
 import fr.free.nrw.commons.upload.FileUtilsWrapper
+import fr.free.nrw.commons.upload.StashUploadResult
 import fr.free.nrw.commons.upload.StashUploadState
 import fr.free.nrw.commons.upload.UploadClient
 import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.wikidata.WikidataEditService
+import io.reactivex.Completable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.asFlow
@@ -43,11 +47,10 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-import java.net.SocketTimeoutException
 import java.util.*
 import java.util.regex.Pattern
 import javax.inject.Inject
-import kotlin.collections.ArrayList
+
 
 class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
     CoroutineWorker(appContext, workerParams) {
@@ -296,7 +299,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
      * Upload the contribution
      * @param contribution
      */
-    @SuppressLint("StringFormatInvalid")
+    @SuppressLint("StringFormatInvalid", "CheckResult")
     private suspend fun uploadContribution(contribution: Contribution) {
         if (contribution.localUri == null || contribution.localUri.path == null) {
             Timber.e("""upload: ${contribution.media.filename} failed, file path is null""")
@@ -339,7 +342,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             val stashUploadResult = uploadClient.uploadFileToStash(
                 appContext, filename, contribution, notificationProgressUpdater
             ).onErrorReturn{
-                return@onErrorReturn StashUploadResult(StashUploadState.FAILED,fileKey = null)
+                return@onErrorReturn StashUploadResult(StashUploadState.FAILED,fileKey = null,message = it.message)
             }.blockingSingle()
 
             when (stashUploadResult.state) {
@@ -407,6 +410,25 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                     contribution.state = Contribution.STATE_FAILED
                     contribution.chunkInfo = null
                     contributionDao.saveSynchronous(contribution)
+
+                    //If the Current Login is Invalid then ask the User to Login Again
+                    if(stashUploadResult.message.equals("Invalid token, or login failure.")){
+                        Timber.e("Invalid Login, logging out")
+                        sessionManager.logout()
+                            .andThen(Completable.fromAction {
+                                Timber.d("All accounts have been removed")
+                            })
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(
+                                {
+                                    //Send Extra Login Message to LoginActivity
+                                    val intent = Intent(appContext, LoginActivity::class.java)
+                                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                    intent.putExtra("loginMessage", "Your Login has expired, Please Login Again.")
+                                    appContext.startActivity(intent) }
+                            ) { t: Throwable? -> Timber.e(t) }
+                    }
                 }
             }
         }catch (exception: Exception){
