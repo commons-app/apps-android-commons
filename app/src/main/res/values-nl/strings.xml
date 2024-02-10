@@ -13,6 +13,7 @@
 * Mainframe98
 * Mar(c)
 * McDutchie
+* Mitsjol
 * Nickthijssen1994
 * Optilete
 * Patio
@@ -758,6 +759,7 @@
   <string name="storage_permissions_denied">Opslagtoestemming geweigerd</string>
   <string name="unable_to_share_upload_item">Kan dit item niet delen</string>
   <string name="permissions_are_required_for_functionality">Voor deze functionaliteit zijn toestemmingen vereist</string>
+  <string name="edit_image">Afbeelding Bewerken</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d afbeelding geselecteerd</item>
     <item quantity="other">%d afbeeldingen geselecteerd</item>
