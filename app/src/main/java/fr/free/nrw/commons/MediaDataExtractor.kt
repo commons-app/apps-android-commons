@@ -43,7 +43,7 @@ class MediaDataExtractor @Inject constructor(private val mediaClient: MediaClien
         return Single.ambArray(
             mediaClient.getMediaById(PAGE_ID_PREFIX + media.pageId)
                 .onErrorResumeNext { Single.never() },
-            mediaClient.getMedia(media.filename)
+            mediaClient.getMediaSuppressingErrors(media.filename)
                 .onErrorResumeNext { Single.never() }
         )
 
