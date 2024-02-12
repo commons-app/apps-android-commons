@@ -53,7 +53,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
 import org.wikipedia.dataclient.WikiSite;
-import timber.log.Timber;
 
 
 /**
