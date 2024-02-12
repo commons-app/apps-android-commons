@@ -426,6 +426,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                                     val intent = Intent(appContext, LoginActivity::class.java)
                                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                     intent.putExtra("loginMessage", "Your Login has expired, Please Login Again.")
+                                    intent.putExtra("username", sessionManager.userName)
                                     appContext.startActivity(intent) }
                             ) { t: Throwable? -> Timber.e(t) }
                     }

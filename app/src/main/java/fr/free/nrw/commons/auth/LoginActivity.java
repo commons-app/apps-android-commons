@@ -98,10 +98,15 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         //Get Extra message string from the intent and show Toast
         String message = getIntent().getStringExtra("loginMessage");
+        String username = getIntent().getStringExtra("username");
         if(message!=null) {
-            Toast.makeText(this, " "+message, Toast.LENGTH_SHORT).show();
+            showMessage(message, R.color.secondaryDarkColor);
+        }
+        if(username!=null) {
+            binding.loginUsername.setText(username);
         }
 
 
