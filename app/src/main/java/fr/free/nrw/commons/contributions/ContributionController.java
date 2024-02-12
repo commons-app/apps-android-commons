@@ -65,11 +65,9 @@ public class ContributionController {
                 if (defaultKvStore.getBoolean("inAppCameraFirstRun")) {
                     defaultKvStore.putBoolean("inAppCameraFirstRun", false);
                     askUserToAllowLocationAccess(activity, inAppCameraLocationPermissionLauncher);
-                } else if (defaultKvStore.getBoolean("inAppCameraLocationPref")) {
+                } else {
                     createDialogsAndHandleLocationPermissions(activity,
                         inAppCameraLocationPermissionLauncher);
-                } else {
-                    initiateCameraUpload(activity);
                 }
             },
             R.string.storage_permission_title,
@@ -97,7 +95,12 @@ public class ContributionController {
 
             @Override
             public void onLocationPermissionGranted() {
-                initiateCameraUpload(activity);
+                if (!locationPermissionsHelper.isLocationAccessToAppsTurnedOn()) {
+                    showLocationOffDialog(activity, R.string.in_app_camera_needs_location,
+                        R.string.in_app_camera_location_unavailable);
+                } else {
+                    initiateCameraUpload(activity);
+                }
             }
         };
 
@@ -106,22 +109,36 @@ public class ContributionController {
         if (inAppCameraLocationPermissionLauncher != null) {
             inAppCameraLocationPermissionLauncher.launch(
                 new String[]{permission.ACCESS_FINE_LOCATION});
-        } else {
-            locationPermissionsHelper.requestForLocationAccess(R.string.location_permission_title,
-                R.string.in_app_camera_location_permission_rationale);
         }
 
     }
 
-    public void handleShowRationaleFlowCameraLocation(Activity activity) {
+    private void showLocationOffDialog(Activity activity, int dialogTextResource,
+        int toastTextResource) {
+        DialogUtil
+            .showAlertDialog(activity,
+                activity.getString(R.string.ask_to_turn_location_on),
+                activity.getString(dialogTextResource),
+                activity.getString(R.string.title_app_shortcut_setting),
+                activity.getString(R.string.cancel),
+                () -> locationPermissionsHelper.openLocationSettings(activity),
+                () -> {
+                    Toast.makeText(activity, activity.getString(toastTextResource),
+                        Toast.LENGTH_LONG).show();
+                    initiateCameraUpload(activity);
+                }
+            );
+    }
+
+    public void handleShowRationaleFlowCameraLocation(Activity activity,
+        ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher) {
         DialogUtil.showAlertDialog(activity, activity.getString(R.string.location_permission_title),
             activity.getString(R.string.in_app_camera_location_permission_rationale),
             activity.getString(android.R.string.ok),
             activity.getString(android.R.string.cancel),
             () -> {
-                if (!locationPermissionsHelper.isLocationAccessToAppsTurnedOn()) {
-                    locationPermissionsHelper.showLocationOffDialog(activity, R.string.in_app_camera_needs_location);
-                }
+                createDialogsAndHandleLocationPermissions(activity,
+                    inAppCameraLocationPermissionLauncher);
             },
             () -> locationPermissionCallback.onLocationPermissionDenied(
                 activity.getString(R.string.in_app_camera_location_permission_denied)),

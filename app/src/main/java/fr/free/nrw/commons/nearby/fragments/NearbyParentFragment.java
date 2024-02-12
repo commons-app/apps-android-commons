@@ -297,7 +297,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     controller.locationPermissionCallback.onLocationPermissionGranted();
                 } else {
                     if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
-                        controller.handleShowRationaleFlowCameraLocation(getActivity());
+                        controller.handleShowRationaleFlowCameraLocation(getActivity(), inAppCameraLocationPermissionLauncher);
                     } else {
                         controller.locationPermissionCallback.onLocationPermissionDenied(
                             getActivity().getString(
