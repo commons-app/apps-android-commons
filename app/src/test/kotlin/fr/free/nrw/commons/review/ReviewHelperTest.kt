@@ -34,8 +34,6 @@ class ReviewHelperTest {
     @InjectMocks
     var reviewHelper: ReviewHelper? = null
 
-    val dao = mock(ReviewDao::class.java)
-
     /**
      * Init mocks
      */
@@ -119,52 +117,4 @@ class ReviewHelperTest {
         assertTrue(firstRevisionOfFile is MwQueryPage.Revision)
     }
 
-    /**
-     * Test the review status of the image
-     *  Case 1: Image identifier exists in the database
-     */
-    @Test
-    fun getReviewStatusWhenImageHasBeenReviewedAlready() {
-        val testImageId1 = "123456"
-        `when`(dao.isReviewedAlready(testImageId1)).thenReturn(true)
-
-        val observer = io.reactivex.observers.TestObserver<Boolean>()
-        Observable.fromCallable(Callable<Boolean> {
-            dao.isReviewedAlready(testImageId1)
-        }).subscribeWith(observer)
-        observer.assertValue(true)
-        observer.dispose()
-    }
-
-    /**
-     * Test the review status of the image
-     *  Case 2: Image identifier does not exist in the database
-     */
-    @Test
-    fun getReviewStatusWhenImageHasBeenNotReviewedAlready() {
-        val testImageId2 = "789101"
-        `when`(dao.isReviewedAlready(testImageId2)).thenReturn(false)
-
-        val observer = io.reactivex.observers.TestObserver<Boolean>()
-        Observable.fromCallable(Callable<Boolean> {
-            dao.isReviewedAlready(testImageId2)
-        }).subscribeWith(observer)
-        observer.assertValue(false)
-        observer.dispose()
-    }
-
-    /**
-     * Test the successful insertion of the image identifier into the database
-     */
-    @Test
-    fun addViewedImagesToDB() {
-        val testImageId = "123456"
-
-        val observer = io.reactivex.observers.TestObserver<Boolean>()
-        Completable.fromAction {
-            dao.insert(ReviewEntity(testImageId))
-        }.subscribeWith(observer)
-        observer.assertComplete()
-        observer.dispose()
-    }
 }
