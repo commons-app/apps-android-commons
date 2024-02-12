@@ -90,24 +90,32 @@ class ImageFileLoader(val context: Context) : CoroutineScope{
                     }
 
                 if (file != null && file.exists() && name != null && path != null && bucketName != null) {
-                    val uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
 
-                    val calendar = Calendar.getInstance()
-                    calendar.timeInMillis = date * 1000L
-                    val date: Date = calendar.time
-                    val dateFormat = DateFormat.getMediumDateFormat(context)
-                    val formattedDate = dateFormat.format(date)
+                    val extension = path.substringAfterLast(".", "")
+                    // Check if the extension is one of the allowed types
+                    if (extension.lowercase(Locale.ROOT) in arrayOf("jpg", "jpeg", "png", "svg")) {
+                        val uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
 
-                    val image = Image(
-                        id,
-                        name,
-                        uri,
-                        path,
-                        bucketId,
-                        bucketName,
-                        date = (formattedDate)
-                    )
-                    images.add(image)
+                        val calendar = Calendar.getInstance()
+                        calendar.timeInMillis = date * 1000L
+                        val date: Date = calendar.time
+                        val dateFormat = DateFormat.getMediumDateFormat(context)
+                        val formattedDate = dateFormat.format(date)
+
+                        val image = Image(
+                            id,
+                            name,
+                            uri,
+                            path,
+                            bucketId,
+                            bucketName,
+                            date = (formattedDate)
+                        )
+                        images.add(image)
+                    } else {
+                        continue
+                    }
+
                 }
 
             } while (cursor.moveToNext())
