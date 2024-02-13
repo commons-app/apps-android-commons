@@ -48,8 +48,8 @@ public class FilePicker implements Constants {
                                               boolean openDocumentIntentPreferred) {
         // storing picked image type to shared preferences
         storeType(context, type);
-        //Supported types are SVG, PNG and JPEG
-        final String[] mimeTypes =  { "image/jpg","image/png","image/jpeg","image/svg"};
+        //Supported types are SVG, PNG and JPEG,GIF, TIFF, WebP, XCF
+        final String[] mimeTypes =  { "image/jpg","image/png","image/jpeg", "image/gif", "image/tiff", "image/webp", "image/xcf", "image/svg+xml", "image/webp"};
         return plainGalleryPickerIntent(openDocumentIntentPreferred)
                 .putExtra(Intent.EXTRA_ALLOW_MULTIPLE, configuration(context).allowsMultiplePickingInGallery())
             .putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
