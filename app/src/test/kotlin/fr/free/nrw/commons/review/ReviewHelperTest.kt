@@ -51,7 +51,7 @@ class ReviewHelperTest {
         val ignored = setupMedia("ignored.txt")
         whenever(mwQueryResult.pages()).thenReturn(listOf(page1, page2, page3, ignored))
 
-        val random = reviewHelper.randomMedia.test()
+        val random = reviewHelper.getRandomMedia().test()
 
         random.assertNoErrors()
         assertEquals(1, random.valueCount())
@@ -68,7 +68,7 @@ class ReviewHelperTest {
         val page1 = setupMedia("one.jpg")
         whenever(mwQueryResult.pages()).thenReturn(listOf(page1))
 
-        val media = reviewHelper.randomMedia.blockingGet()
+        val media = reviewHelper.getRandomMedia().blockingGet()
         assertNull(media)
         verify(reviewInterface, times(1))!!.getRecentChanges()
     }
@@ -83,7 +83,7 @@ class ReviewHelperTest {
         val page1 = setupMedia("one.jpg")
         whenever(mwQueryResult.pages()).thenReturn(listOf(page1))
 
-        val random = reviewHelper.randomMedia.test()
+        val random = reviewHelper.getRandomMedia().test()
 
         assertEquals("one.jpg is deleted", random.errors().first().message)
     }
