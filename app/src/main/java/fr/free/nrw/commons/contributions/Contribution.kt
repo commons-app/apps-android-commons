@@ -12,7 +12,7 @@ import fr.free.nrw.commons.upload.UploadMediaDetail
 import fr.free.nrw.commons.upload.WikidataPlace
 import fr.free.nrw.commons.upload.WikidataPlace.Companion.from
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import java.util.*
 
 @Entity(tableName = "contribution")
