@@ -81,6 +81,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     final String saveErrorMessage ="errorMessage";
     final String saveUsername="username";
     final  String savePassword="password";
+    final String loginUsername = "loginUsername";
+    final String loginMessage = "loginMessage";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -98,8 +100,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        String message = getIntent().getStringExtra(getString(R.string.login_message));
-        String username = getIntent().getStringExtra(getString(R.string.login_username));
+        String message = getIntent().getStringExtra(loginMessage);
+        String username = getIntent().getStringExtra(loginUsername);
 
         binding.loginUsername.addTextChangedListener(textWatcher);
         binding.loginPassword.addTextChangedListener(textWatcher);

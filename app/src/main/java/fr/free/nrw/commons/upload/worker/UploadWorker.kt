@@ -101,6 +101,9 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
 
     private val statesToProcess= ArrayList<Int>()
 
+    private val loginUsername = "loginUsername"
+    private val loginMessage = "loginMessage"
+
     private val STASH_ERROR_CODES = Arrays
         .asList(
             "uploadstash-file-not-found",
@@ -436,8 +439,8 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                                 {
                                     val intent = Intent(appContext, LoginActivity::class.java)
                                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                    intent.putExtra(appContext.getString(R.string.login_message), appContext.getString(R.string.invalid_login_message))
-                                    intent.putExtra(appContext.getString(R.string.login_username),username)
+                                    intent.putExtra(loginMessage, appContext.getString(R.string.invalid_login_message))
+                                    intent.putExtra(loginUsername,username)
                                     appContext.startActivity(intent)
                                 }
                             ) { t: Throwable? -> Timber.e(t) }
