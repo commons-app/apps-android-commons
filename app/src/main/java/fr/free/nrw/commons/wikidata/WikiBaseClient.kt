@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.wikidata
 
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
+import fr.free.nrw.commons.di.NetworkingModule
 import fr.free.nrw.commons.media.PAGE_ID_PREFIX
 import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.upload.WikiBaseInterface
@@ -9,6 +10,7 @@ import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import io.reactivex.Observable
 import timber.log.Timber
 import javax.inject.Inject
+import javax.inject.Named
 import javax.inject.Singleton
 
 /**
@@ -17,7 +19,7 @@ import javax.inject.Singleton
 @Singleton
 class WikiBaseClient @Inject constructor(
     private val wikiBaseInterface: WikiBaseInterface,
-    private val csrfTokenClient: CsrfTokenClient
+    @param:Named(NetworkingModule.NAMED_COMMONS_CSRF) private val csrfTokenClient: CsrfTokenClient
 ) {
     fun postEditEntity(fileEntityId: String?, data: String?): Observable<Boolean> {
         return csrfToken().switchMap { editToken ->
