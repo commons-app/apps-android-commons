@@ -71,7 +71,7 @@ public class UploadClient {
             && contribution.getChunkInfo().getTotalChunks() == contribution.getChunkInfo()
             .getIndexOfNextChunkToUpload()) {
             return Observable.just(new StashUploadResult(StashUploadState.SUCCESS,
-                contribution.getChunkInfo().getUploadResult().getFilekey(),"success"));
+                contribution.getChunkInfo().getUploadResult().getFilekey(),null));
         }
 
         CommonsApplication.pauseUploads.put(contribution.getPageId(), false);
@@ -141,7 +141,7 @@ public class UploadClient {
 
         if (CommonsApplication.pauseUploads.get(contribution.getPageId())) {
             Timber.d("Upload stash paused %s", contribution.getPageId());
-            return Observable.just(new StashUploadResult(StashUploadState.PAUSED, null,"success"));
+            return Observable.just(new StashUploadResult(StashUploadState.PAUSED, null,null));
         } else if (failures.get()) {
             Timber.d("Upload stash contains failures %s", contribution.getPageId());
             return Observable.just(new StashUploadResult(StashUploadState.FAILED, null,errorMessage.get()));
@@ -151,7 +151,7 @@ public class UploadClient {
                 chunkInfo.get().getUploadResult().getFilekey(),"success"));
         } else {
             Timber.d("Upload stash failed %s", contribution.getPageId());
-            return Observable.just(new StashUploadResult(StashUploadState.FAILED, null,"failed"));
+            return Observable.just(new StashUploadResult(StashUploadState.FAILED, null,null));
         }
     }
 

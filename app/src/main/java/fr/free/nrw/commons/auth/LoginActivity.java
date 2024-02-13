@@ -98,17 +98,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
-        //Get Extra message string from the intent and show Toast
-        String message = getIntent().getStringExtra("loginMessage");
-        String username = getIntent().getStringExtra("username");
-        if(message!=null) {
-            showMessage(message, R.color.secondaryDarkColor);
-        }
-        if(username!=null) {
-            binding.loginUsername.setText(username);
-        }
-
+        String message = getIntent().getStringExtra(getString(R.string.login_message));
+        String username = getIntent().getStringExtra(getString(R.string.login_username));
 
         binding.loginUsername.addTextChangedListener(textWatcher);
         binding.loginPassword.addTextChangedListener(textWatcher);
@@ -127,6 +118,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             binding.loginCredentials.setText(getString(R.string.login_credential));
         } else {
             binding.loginCredentials.setVisibility(View.GONE);
+        }
+        if (message != null) {
+            showMessage(message, R.color.secondaryDarkColor);
+        }
+        if (username != null) {
+            binding.loginUsername.setText(username);
         }
     }
     /** 
