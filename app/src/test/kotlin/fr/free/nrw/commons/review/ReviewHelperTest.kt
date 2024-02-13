@@ -1,38 +1,32 @@
 package fr.free.nrw.commons.review
 
-import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.media.MediaClient
-import io.reactivex.Completable
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResult
 import io.reactivex.Observable
 import io.reactivex.Single
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import org.mockito.ArgumentMatchers
-import org.mockito.InjectMocks
-import org.mockito.Mock
 import org.mockito.Mockito.*
-import org.mockito.MockitoAnnotations
-import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
-import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
-import fr.free.nrw.commons.wikidata.mwapi.MwQueryResult
-import java.util.concurrent.Callable
 
 /**
  * Test class for ReviewHelper
  */
 class ReviewHelperTest {
 
-    @Mock
-    internal var reviewInterface: ReviewInterface? = null
-    @Mock
-    internal var mediaClient: MediaClient? = null
+    private val reviewInterface = mock<ReviewInterface>()
+    private val mediaClient = mock<MediaClient>()
+    private val reviewHelper = ReviewHelper(mediaClient, reviewInterface)
 
-    @InjectMocks
-    var reviewHelper: ReviewHelper? = null
+
+    private val mwQueryResult = mock<MwQueryResult>()
+    private val mockResponse = mock<MwQueryResponse>()
 
     /**
      * Init mocks
@@ -40,28 +34,8 @@ class ReviewHelperTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.openMocks(this)
-
-        val mwQueryPage = mock(MwQueryPage::class.java)
-        val mockRevision = mock(MwQueryPage.Revision::class.java)
-        `when`(mockRevision.user).thenReturn("TestUser")
-        `when`(mwQueryPage.revisions()).thenReturn(listOf(mockRevision))
-
-        val mwQueryResult = mock(MwQueryResult::class.java)
-        `when`(mwQueryResult.firstPage()).thenReturn(mwQueryPage)
-        `when`(mwQueryResult.pages()).thenReturn(listOf(mwQueryPage))
-        val mockResponse = mock(MwQueryResponse::class.java)
-        `when`(mockResponse.query()).thenReturn(mwQueryResult)
-        `when`(reviewInterface?.getRecentChanges())
-                .thenReturn(Observable.just(mockResponse))
-
-        `when`(reviewInterface?.getFirstRevisionOfFile(ArgumentMatchers.anyString()))
-                .thenReturn(Observable.just(mockResponse))
-
-        val media = mock(Media::class.java)
-        whenever(media.filename).thenReturn("Test file.jpg")
-        `when`(mediaClient?.getMedia(ArgumentMatchers.anyString()))
-                .thenReturn(Single.just(media))
+        whenever(mockResponse.query()).thenReturn(mwQueryResult)
+        whenever(reviewInterface.getRecentChanges()).thenReturn(Observable.just(mockResponse))
     }
 
     /**
@@ -69,14 +43,19 @@ class ReviewHelperTest {
      */
     @Test
     fun getRandomMedia() {
-        `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
-                .thenReturn(Single.just(false))
+        whenever(mediaClient.checkPageExistsUsingTitle(any())).thenReturn(Single.just(false))
 
-        `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
-                .thenReturn(Single.just(false))
+        val page1 = setupMedia("one.jpg")
+        val page2 = setupMedia("two.jpeg")
+        val page3 = setupMedia("three.png")
+        val ignored = setupMedia("ignored.txt")
+        whenever(mwQueryResult.pages()).thenReturn(listOf(page1, page2, page3, ignored))
 
-        reviewHelper?.randomMedia
-        verify(reviewInterface, times(1))!!.getRecentChanges()
+        val random = reviewHelper.randomMedia.test()
+
+        random.assertNoErrors()
+        assertEquals(1, random.valueCount())
+        assertTrue(setOf("one.jpg", "two.jpeg", "three.png").contains(random.values().first().filename))
     }
 
     /**
@@ -84,9 +63,12 @@ class ReviewHelperTest {
      */
     @Test(expected = RuntimeException::class)
     fun getRandomMediaWithWithAllMediaNominatedForDeletion() {
-        `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
-                .thenReturn(Single.just(true))
-        val media = reviewHelper?.randomMedia?.blockingGet()
+        whenever(mediaClient.checkPageExistsUsingTitle(any())).thenReturn(Single.just(true))
+
+        val page1 = setupMedia("one.jpg")
+        whenever(mwQueryResult.pages()).thenReturn(listOf(page1))
+
+        val media = reviewHelper.randomMedia.blockingGet()
         assertNull(media)
         verify(reviewInterface, times(1))!!.getRecentChanges()
     }
@@ -96,15 +78,14 @@ class ReviewHelperTest {
      */
     @Test
     fun getRandomMediaWithWithOneMediaNominatedForDeletion() {
-        `when`(mediaClient?.checkPageExistsUsingTitle("Commons:Deletion_requests/File:Test1.jpeg"))
-                .thenReturn(Single.just(true))
-        `when`(mediaClient?.checkPageExistsUsingTitle("Commons:Deletion_requests/File:Test2.png"))
-                .thenReturn(Single.just(false))
-        `when`(mediaClient?.checkPageExistsUsingTitle("Commons:Deletion_requests/File:Test3.jpg"))
-                .thenReturn(Single.just(true))
+        whenever(mediaClient.checkPageExistsUsingTitle("Commons:Deletion_requests/one.jpg")).thenReturn(Single.just(true))
 
-        reviewHelper?.randomMedia
-        verify(reviewInterface, times(1))!!.getRecentChanges()
+        val page1 = setupMedia("one.jpg")
+        whenever(mwQueryResult.pages()).thenReturn(listOf(page1))
+
+        val random = reviewHelper.randomMedia.test()
+
+        assertEquals("one.jpg is deleted", random.errors().first().message)
     }
 
     /**
@@ -112,9 +93,55 @@ class ReviewHelperTest {
      */
     @Test
     fun getFirstRevisionOfFile() {
-        val firstRevisionOfFile = reviewHelper?.getFirstRevisionOfFile("Test.jpg")?.blockingFirst()
+        val rev1 = mock<MwQueryPage.Revision>()
+        whenever(rev1.user).thenReturn("TestUser")
+        whenever(rev1.revisionId).thenReturn(1L)
+        val rev2 = mock<MwQueryPage.Revision>()
+        whenever(rev2.user).thenReturn("TestUser")
+        whenever(rev2.revisionId).thenReturn(2L)
 
-        assertTrue(firstRevisionOfFile is MwQueryPage.Revision)
+        val page = setupMedia("Test.jpg", rev1, rev2)
+        whenever(mwQueryResult.firstPage()).thenReturn(page)
+        whenever(reviewInterface.getFirstRevisionOfFile(any())).thenReturn(Observable.just(mockResponse))
+
+        val firstRevisionOfFile = reviewHelper.getFirstRevisionOfFile("Test.jpg").blockingFirst()
+
+        assertEquals(1, firstRevisionOfFile.revisionId)
     }
 
+    @Test
+    fun checkFileUsage() {
+        whenever(reviewInterface.getGlobalUsageInfo(any())).thenReturn(Observable.just(mockResponse))
+        val page = setupMedia("Test.jpg")
+        whenever(mwQueryResult.firstPage()).thenReturn(page)
+        whenever(page.checkWhetherFileIsUsedInWikis()).thenReturn(true)
+
+        val result = reviewHelper.checkFileUsage("Test.jpg").test()
+
+        assertTrue(result.values().first())
+    }
+
+    @Test
+    fun testReviewStatus() {
+        val reviewDao = mock<ReviewDao>()
+        whenever(reviewDao.isReviewedAlready("Test.jpg")).thenReturn(true)
+
+        reviewHelper.dao = reviewDao
+        val result = reviewHelper.getReviewStatus("Test.jpg")
+
+        assertTrue(result)
+    }
+
+    private fun setupMedia(file: String, vararg revision: MwQueryPage.Revision): MwQueryPage = mock<MwQueryPage>().apply {
+        whenever(title()).thenReturn(file)
+        if (revision.isNotEmpty()) {
+            whenever(revisions()).thenReturn(*revision.toMutableList())
+        }
+
+        val media = mock<Media>().apply {
+            whenever(filename).thenReturn(file)
+            whenever(pageId).thenReturn(file.split(".").first())
+        }
+        whenever(mediaClient.getMedia(file)).thenReturn(Single.just(media))
+    }
 }

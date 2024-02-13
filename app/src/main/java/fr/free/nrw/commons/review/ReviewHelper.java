@@ -1,9 +1,9 @@
 package fr.free.nrw.commons.review;
 
-
 import androidx.annotation.VisibleForTesting;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.media.MediaClient;
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -13,7 +13,6 @@ import java.util.Collections;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.apache.commons.lang3.StringUtils;
-import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage;
 import timber.log.Timber;
 
 @Singleton
@@ -95,12 +94,11 @@ public class ReviewHelper {
      */
     @VisibleForTesting
     Boolean getReviewStatus(String image){
-        if(dao == null){
+        if (dao == null) {
             return false;
         }
-        return Observable.fromCallable(()-> dao.isReviewedAlready(image))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).blockingSingle();
+
+        return dao.isReviewedAlready(image);
     }
 
     /**
