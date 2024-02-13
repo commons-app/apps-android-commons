@@ -463,7 +463,6 @@ class NearbyParentFragmentPresenterTest {
         expectMapAndListUpdate()
         whenever(nearbyParentFragmentView.mapCenter).thenReturn(LatLng(2.0, 1.0, 0.0F));
         nearbyPresenter.onLocationChangedSignificantly(latestLocation)
-//        nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
         updateMapSignificantly()
     }
 
