@@ -183,16 +183,14 @@ public class UploadMediaDetailAdapter extends
      */
     public void removeDescription(final UploadMediaDetail uploadMediaDetail, final int position) {
         selectedLanguages.remove(position);
-        final int ListPosition;
+        int listPosition = 0;
         List<Integer> keysList = new ArrayList<>(selectedLanguages.keySet());
-        int count = 0;
         for (Integer key : keysList) {
             if (key < position) {
-                count++;
+                listPosition++;
             }
         }
-        ListPosition = count;
-        this.uploadMediaDetails.remove(uploadMediaDetails.get(ListPosition));
+        this.uploadMediaDetails.remove(uploadMediaDetails.get(listPosition));
         int i = position + 1;
         while (selectedLanguages.containsKey(i)) {
             selectedLanguages.remove(i);
