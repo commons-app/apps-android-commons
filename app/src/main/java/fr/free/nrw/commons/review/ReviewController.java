@@ -193,5 +193,7 @@ public class ReviewController {
         void onFailure();
 
         void disableButtons();
+
+        void enableButtons();
     }
 }

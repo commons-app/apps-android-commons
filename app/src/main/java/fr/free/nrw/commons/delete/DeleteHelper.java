@@ -231,6 +231,7 @@ public class DeleteHelper {
                     } else {
                         reviewCallback.onFailure();
                     }
+                    reviewCallback.enableButtons();
                 });
 
         });
