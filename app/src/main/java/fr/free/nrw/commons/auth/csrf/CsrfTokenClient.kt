@@ -160,6 +160,6 @@ class CsrfTokenClient(
         private const val ANON_TOKEN = "+\\"
         private const val MAX_RETRIES = 1
         private const val MAX_RETRIES_OF_LOGIN_BLOCKING = 2
-        val INVALID_TOKEN_ERROR_MESSAGE = "Invalid token, or login failure."
+        const val INVALID_TOKEN_ERROR_MESSAGE = "Invalid token, or login failure."
     }
 }
