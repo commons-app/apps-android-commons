@@ -69,7 +69,7 @@ public class CampaignView extends SwipableCardView {
     @Override public boolean onSwipe(final View view) {
         view.setVisibility(View.GONE);
         ((BaseActivity) getContext()).defaultKvStore
-            .putBoolean(CAMPAIGNS_DEFAULT_PREFERENCE, false); // Issue 5288: Replaced campaignPreference with CAMPAIGNS_DEFAULT_PREFERENCE
+            .putBoolean(CAMPAIGNS_DEFAULT_PREFERENCE, false);
         ViewUtil.showLongToast(getContext(),
             getResources().getString(R.string.nearby_campaign_dismiss_message));
         return true;
