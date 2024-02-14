@@ -25,6 +25,7 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao
@@ -93,7 +94,6 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
 
     private val PROCESSING_UPLOADS_NOTIFICATION_ID = 101
 
-    private val INVALID_TOKEN_ERROR_MESSAGE = "Invalid token, or login failure."
 
 
     //Attributes of the current-upload notification
@@ -426,7 +426,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                     contribution.state = Contribution.STATE_FAILED
                     contribution.chunkInfo = null
                     contributionDao.saveSynchronous(contribution)
-                    if (stashUploadResult.errorMessage.equals(INVALID_TOKEN_ERROR_MESSAGE)) {
+                    if (stashUploadResult.errorMessage.equals(CsrfTokenClient.INVALID_TOKEN_ERROR_MESSAGE)) {
                         Timber.e("Invalid Login, logging out")
                         val username = sessionManager.userName
                         sessionManager.logout()
