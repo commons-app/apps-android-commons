@@ -109,8 +109,10 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
 
     private void init() {
         if (media == null) {
-            tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
-                callback.getTotalNumberOfSteps(), getString(R.string.categories_activity_title)));
+            if (callback != null) {
+                tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
+                    callback.getTotalNumberOfSteps(), getString(R.string.categories_activity_title)));
+            }
         } else {
             tvTitle.setText(R.string.edit_categories);
             tvSubTitle.setVisibility(View.GONE);
