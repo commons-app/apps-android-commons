@@ -714,6 +714,13 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         return true;
     }
 
+    /**
+     * Changes current image when one image upload is cancelled, to highlight next image in the top thumbnail.
+     * Fixes: <a href="https://github.com/commons-app/apps-android-commons/issues/5511">Issue</a>
+     *
+     * @param index Index of image to be removed
+     * @param maxSize Max size of the {@code uploadableFiles}
+     */
     @Override
     public void highlightNextImageOnCancelledImage(int index, int maxSize) {
         if (vpUpload != null && index < (maxSize)) {
@@ -722,6 +729,13 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         }
     }
 
+    /**
+     * Used to check if user has cancelled upload of any image in current upload
+     * so that location compare doesn't show up again in same upload.
+     * Fixes: <a href="https://github.com/commons-app/apps-android-commons/issues/5511">Issue</a>
+     *
+     * @param isCancelled Is true when user has cancelled upload of any image in current upload
+     */
     @Override
     public void setImageCancelled(boolean isCancelled) {
         BasicKvStore basicKvStore = new BasicKvStore(this,"IsAnyImageCancelled");
