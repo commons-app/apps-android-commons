@@ -93,6 +93,8 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
 
     private val PROCESSING_UPLOADS_NOTIFICATION_ID = 101
 
+    private val INVALID_TOKEN_ERROR_MESSAGE = "Invalid token, or login failure."
+
 
     //Attributes of the current-upload notification
     private var currentNotificationID: Int = -1// lateinit is not allowed with primitives
@@ -424,7 +426,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                     contribution.state = Contribution.STATE_FAILED
                     contribution.chunkInfo = null
                     contributionDao.saveSynchronous(contribution)
-                    if (stashUploadResult.errorMessage.equals(appContext.getString(R.string.error_invalid_token))) {
+                    if (stashUploadResult.errorMessage.equals(INVALID_TOKEN_ERROR_MESSAGE)) {
                         Timber.e("Invalid Login, logging out")
                         val username = sessionManager.userName
                         sessionManager.logout()

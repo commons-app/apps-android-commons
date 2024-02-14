@@ -792,7 +792,6 @@ Upload your first media by tapping on the add button.</string>
   <string name="send_thanks_to_author">Thank the author</string>
   <string name="error_sending_thanks">Error sending thanks to author.</string>
   <string name="invalid_login_message">Your login has expired, Please login again.</string>
-  <string name="error_invalid_token">Invalid token, or login failure.</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d image selected</item>
     <item quantity="other">%d images selected</item>
