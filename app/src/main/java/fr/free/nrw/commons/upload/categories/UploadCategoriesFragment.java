@@ -221,7 +221,9 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
 
     @Override
     public void goToNextScreen() {
-        callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
+        if (callback != null){
+            callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
+        }
     }
 
     @Override
@@ -314,7 +316,9 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
             mediaDetailFragment.onResume();
             goBackToPreviousScreen();
         } else {
-            callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
+            if (callback != null) {
+                callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
+            }
         }
     }
 

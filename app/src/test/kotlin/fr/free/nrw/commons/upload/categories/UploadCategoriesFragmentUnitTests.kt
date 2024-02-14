@@ -218,7 +218,6 @@ class UploadCategoriesFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testGoToNextScreen() {
-        Whitebox.setInternalState(fragment, "callback", callback)
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.goToNextScreen()
     }
@@ -294,7 +293,6 @@ class UploadCategoriesFragmentUnitTests {
     @Throws(Exception::class)
     fun testOnPreviousButtonClicked() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        Whitebox.setInternalState(fragment, "callback", callback)
         fragment.onPreviousButtonClicked()
     }
 
