@@ -48,6 +48,7 @@ import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.filepicker.Constants.RequestCodes;
 import fr.free.nrw.commons.filepicker.UploadableFile;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationPermissionsHelper;
@@ -329,6 +330,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
     @Override
     protected void onStop() {
+        // Resetting setImageCancelled to false
+        setImageCancelled(false);
         super.onStop();
     }
 
@@ -709,6 +712,34 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             return false;
         }
         return true;
+    }
+
+    /**
+     * Changes current image when one image upload is cancelled, to highlight next image in the top thumbnail.
+     * Fixes: <a href="https://github.com/commons-app/apps-android-commons/issues/5511">Issue</a>
+     *
+     * @param index Index of image to be removed
+     * @param maxSize Max size of the {@code uploadableFiles}
+     */
+    @Override
+    public void highlightNextImageOnCancelledImage(int index, int maxSize) {
+        if (vpUpload != null && index < (maxSize)) {
+            vpUpload.setCurrentItem(index + 1, false);
+            vpUpload.setCurrentItem(index, false);
+        }
+    }
+
+    /**
+     * Used to check if user has cancelled upload of any image in current upload
+     * so that location compare doesn't show up again in same upload.
+     * Fixes: <a href="https://github.com/commons-app/apps-android-commons/issues/5511">Issue</a>
+     *
+     * @param isCancelled Is true when user has cancelled upload of any image in current upload
+     */
+    @Override
+    public void setImageCancelled(boolean isCancelled) {
+        BasicKvStore basicKvStore = new BasicKvStore(this,"IsAnyImageCancelled");
+        basicKvStore.putBoolean("IsAnyImageCancelled", isCancelled);
     }
 
     /**
