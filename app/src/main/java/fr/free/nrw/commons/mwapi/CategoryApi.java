@@ -17,8 +17,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-import org.wikipedia.dataclient.mwapi.MwQueryPage;
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage;
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse;
 import timber.log.Timber;
 
 /**

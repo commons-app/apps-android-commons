@@ -27,8 +27,6 @@ class OkHttpJsonApiClientTests {
     @Mock
     lateinit var wikiMediaToolforgeUrl: HttpUrl
 
-    @Mock
-    lateinit var wikiMediaTestToolforgeUrl: HttpUrl
     var sparqlQueryUrl: String = "https://www.testqparql.com"
     var campaignsUrl: String = "https://www.testcampaignsurl.com"
 
@@ -52,7 +50,6 @@ class OkHttpJsonApiClientTests {
             okhttpClient,
             depictsClient,
             wikiMediaToolforgeUrl,
-            wikiMediaTestToolforgeUrl,
             sparqlQueryUrl,
             campaignsUrl,
             gson

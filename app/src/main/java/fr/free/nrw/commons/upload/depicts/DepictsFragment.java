@@ -106,7 +106,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
             nearbyPlace = bundle.getParcelable(SELECTED_NEARBY_PLACE);
         }
 
-        if(callback!=null){
+        if(callback!=null || media!=null){
             init();
             presenter.getDepictedItems().observe(getViewLifecycleOwner(), this::setDepictsList);
         }

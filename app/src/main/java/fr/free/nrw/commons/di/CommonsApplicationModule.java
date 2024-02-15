@@ -41,7 +41,6 @@ import java.util.Map;
 import java.util.Objects;
 import javax.inject.Named;
 import javax.inject.Singleton;
-import org.wikipedia.AppAdapter;
 
 /**
  * The Dependency Provider class for Commons Android.
@@ -257,8 +256,8 @@ public class CommonsApplicationModule {
 
     @Named("username")
     @Provides
-    public String provideLoggedInUsername() {
-        return Objects.toString(AppAdapter.get().getUserName(), "");
+    public String provideLoggedInUsername(SessionManager sessionManager) {
+        return Objects.toString(sessionManager.getUserName(), "");
     }
 
     @Provides

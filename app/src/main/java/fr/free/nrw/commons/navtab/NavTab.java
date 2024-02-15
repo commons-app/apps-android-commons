@@ -9,8 +9,8 @@ import fr.free.nrw.commons.bookmarks.BookmarkFragment;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.explore.ExploreFragment;
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment;
-import org.wikipedia.model.EnumCode;
-import org.wikipedia.model.EnumCodeMap;
+import fr.free.nrw.commons.wikidata.model.EnumCode;
+import fr.free.nrw.commons.wikidata.model.EnumCodeMap;
 
 import fr.free.nrw.commons.R;
 

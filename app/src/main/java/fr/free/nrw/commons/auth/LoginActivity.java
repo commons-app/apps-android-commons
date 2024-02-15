@@ -25,16 +25,13 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.NavUtils;
 import androidx.core.content.ContextCompat;
 
+import fr.free.nrw.commons.auth.login.LoginClient;
+import fr.free.nrw.commons.auth.login.LoginResult;
 import fr.free.nrw.commons.databinding.ActivityLoginBinding;
 import fr.free.nrw.commons.utils.ActivityUtils;
 import java.util.Locale;
-import org.wikipedia.AppAdapter;
-import org.wikipedia.dataclient.ServiceFactory;
-import org.wikipedia.dataclient.WikiSite;
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
-import org.wikipedia.login.LoginClient;
-import org.wikipedia.login.LoginClient.LoginCallback;
-import org.wikipedia.login.LoginResult;
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse;
+import fr.free.nrw.commons.auth.login.LoginCallback;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -57,16 +54,11 @@ import timber.log.Timber;
 import static android.view.KeyEvent.KEYCODE_ENTER;
 import static android.view.View.VISIBLE;
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
-import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_WIKI_SITE;
 
 public class LoginActivity extends AccountAuthenticatorActivity {
 
     @Inject
     SessionManager sessionManager;
-
-    @Inject
-    @Named(NAMED_COMMONS_WIKI_SITE)
-    WikiSite commonsWikiSite;
 
     @Inject
     @Named("default_preferences")
@@ -231,13 +223,13 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     private void doLogin(String username, String password, String twoFactorCode) {
         progressDialog.show();
-        loginToken = ServiceFactory.get(commonsWikiSite).getLoginToken();
+        loginToken = loginClient.getLoginToken();
         loginToken.enqueue(
                 new Callback<MwQueryResponse>() {
                     @Override
                     public void onResponse(Call<MwQueryResponse> call,
                                            Response<MwQueryResponse> response) {
-                        loginClient.login(commonsWikiSite, username, password, null, twoFactorCode,
+                        loginClient.login(username, password, null, twoFactorCode,
                                 response.body().query().loginToken(), Locale.getDefault().getLanguage(), new LoginCallback() {
                                     @Override
                                     public void success(@NonNull LoginResult result) {
@@ -313,7 +305,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         }
         compositeDisposable.clear();
         sessionManager.setUserLoggedIn(true);
-        AppAdapter.get().updateAccount(loginResult);
+        sessionManager.updateAccount(loginResult);
         progressDialog.dismiss();
         showSuccessAndDismissDialog();
         startMainActivity();
