@@ -95,4 +95,23 @@ public class NearbyPlaces {
         return okHttpJsonApiClient
             .getNearbyPlaces(cur, lang, radius, shouldQueryForMonuments, customQuery);
     }
+
+    /**
+     * Retrieves a list of places from a Wikidata query based on screen coordinates and optional parameters.
+     *
+     * @param screenTopRight       The top right corner of the screen (latitude, longitude).
+     * @param screenBottomLeft     The bottom left corner of the screen (latitude, longitude).
+     * @param lang                 The language for the query.
+     * @param shouldQueryForMonuments  Flag indicating whether to include monuments in the query.
+     * @param customQuery          Optional custom SPARQL query to use instead of default queries.
+     * @return                     A list of places obtained from the Wikidata query.
+     * @throws Exception           If an error occurs during the retrieval process.
+     */
+    public List<Place> getFromWikidataQuery(
+        final fr.free.nrw.commons.location.LatLng screenTopRight,
+        final fr.free.nrw.commons.location.LatLng screenBottomLeft,final String lang,final boolean shouldQueryForMonuments,
+        @Nullable final String customQuery) throws Exception {
+        return okHttpJsonApiClient
+            .getNearbyPlaces(screenTopRight,screenBottomLeft,lang,shouldQueryForMonuments, customQuery);
+    }
 }

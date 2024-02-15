@@ -121,6 +121,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import kotlin.Unit;
 import org.jetbrains.annotations.NotNull;
+import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.events.MapListener;
 import org.osmdroid.events.ScrollEvent;
@@ -1153,10 +1154,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void populatePlaces(final fr.free.nrw.commons.location.LatLng curlatLng) {
+        IGeoPoint screenTopRight = mapView.getProjection().fromPixels(mapView.getWidth(), 0);
+        IGeoPoint screenBottomLeft = mapView.getProjection().fromPixels(0, mapView.getHeight());
+        fr.free.nrw.commons.location.LatLng screenTopRightLatLng = new fr.free.nrw.commons.location.LatLng(screenBottomLeft.getLatitude(),screenBottomLeft.getLongitude(),0);
+        fr.free.nrw.commons.location.LatLng screenBottomLeftLatLng = new fr.free.nrw.commons.location.LatLng(screenTopRight.getLatitude(),screenTopRight.getLongitude(),0);
         if (curlatLng.equals(getLastMapFocus())) { // Means we are checking around current location
-            populatePlacesForCurrentLocation(getLastMapFocus(), curlatLng, null);
+            populatePlacesForCurrentLocation(getLastMapFocus(),screenTopRightLatLng,screenBottomLeftLatLng, curlatLng, null);
         } else {
-            populatePlacesForAnotherLocation(getLastMapFocus(), curlatLng, null);
+            populatePlacesForAnotherLocation(getLastMapFocus(),screenTopRightLatLng,screenBottomLeftLatLng, curlatLng, null);
         }
         if (recenterToUserLocation) {
             recenterToUserLocation = false;
@@ -1170,12 +1175,16 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             populatePlaces(curlatLng);
             return;
         }
+        IGeoPoint screenTopRight = mapView.getProjection().fromPixels(mapView.getWidth(), 0);
+        IGeoPoint screenBottomLeft = mapView.getProjection().fromPixels(0, mapView.getHeight());
+        fr.free.nrw.commons.location.LatLng screenTopRightLatLng = new fr.free.nrw.commons.location.LatLng(screenBottomLeft.getLatitude(),screenBottomLeft.getLongitude(),0);
+        fr.free.nrw.commons.location.LatLng screenBottomLeftLatLng = new fr.free.nrw.commons.location.LatLng(screenTopRight.getLatitude(),screenTopRight.getLongitude(),0);
 
         if (curlatLng.equals(lastFocusLocation) || lastFocusLocation == null
             || recenterToUserLocation) { // Means we are checking around current location
-            populatePlacesForCurrentLocation(lastKnownLocation, curlatLng, customQuery);
+            populatePlacesForCurrentLocation(lastKnownLocation,screenTopRightLatLng,screenBottomLeftLatLng,curlatLng, customQuery);
         } else {
-            populatePlacesForAnotherLocation(lastKnownLocation, curlatLng, customQuery);
+            populatePlacesForAnotherLocation(lastKnownLocation,screenTopRightLatLng,screenBottomLeftLatLng, curlatLng, customQuery);
         }
         if (recenterToUserLocation) {
             recenterToUserLocation = false;
@@ -1184,11 +1193,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private void populatePlacesForCurrentLocation(
         final fr.free.nrw.commons.location.LatLng curlatLng,
+        final fr.free.nrw.commons.location.LatLng screenTopRight,
+        final fr.free.nrw.commons.location.LatLng screenBottomLeft,
         final fr.free.nrw.commons.location.LatLng searchLatLng,
         @Nullable final String customQuery) {
         final Observable<NearbyController.NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(curlatLng, searchLatLng,
+                .loadAttractionsFromLocation(curlatLng,screenTopRight,screenBottomLeft, searchLatLng,
                     false, true, Utils.isMonumentsEnabled(new Date()), customQuery));
 
         compositeDisposable.add(nearbyPlacesInfoObservable
@@ -1216,11 +1227,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private void populatePlacesForAnotherLocation(
         final fr.free.nrw.commons.location.LatLng curlatLng,
+        final fr.free.nrw.commons.location.LatLng screenTopRight,
+        final fr.free.nrw.commons.location.LatLng screenBottomLeft,
         final fr.free.nrw.commons.location.LatLng searchLatLng,
         @Nullable final String customQuery) {
         final Observable<NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(curlatLng, searchLatLng,
+                .loadAttractionsFromLocation(curlatLng,screenTopRight,screenBottomLeft, searchLatLng,
                     false, true, Utils.isMonumentsEnabled(new Date()), customQuery));
 
         compositeDisposable.add(nearbyPlacesInfoObservable

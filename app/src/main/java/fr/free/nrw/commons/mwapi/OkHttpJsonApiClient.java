@@ -36,6 +36,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import org.jetbrains.annotations.NotNull;
+import org.osmdroid.util.GeoPoint;
 import timber.log.Timber;
 
 /**
@@ -298,6 +299,76 @@ public class OkHttpJsonApiClient {
             .replace("${LONG}", String.format(Locale.ROOT, "%.4f", cur.getLongitude()))
             .replace("${LANG}", language);
 
+        final HttpUrl.Builder urlBuilder = HttpUrl
+            .parse(sparqlQueryUrl)
+            .newBuilder()
+            .addQueryParameter("query", query)
+            .addQueryParameter("format", "json");
+
+        final Request request = new Request.Builder()
+            .url(urlBuilder.build())
+            .build();
+
+        final Response response = okHttpClient.newCall(request).execute();
+        if (response.body() != null && response.isSuccessful()) {
+            final String json = response.body().string();
+            final NearbyResponse nearbyResponse = gson.fromJson(json, NearbyResponse.class);
+            final List<NearbyResultItem> bindings = nearbyResponse.getResults().getBindings();
+            final List<Place> places = new ArrayList<>();
+            for (final NearbyResultItem item : bindings) {
+                final Place placeFromNearbyItem = Place.from(item);
+                if (shouldQueryForMonuments && item.getMonument() != null) {
+                    placeFromNearbyItem.setMonument(true);
+                } else {
+                    placeFromNearbyItem.setMonument(false);
+                }
+                places.add(placeFromNearbyItem);
+            }
+            return places;
+        }
+        throw new Exception(response.message());
+    }
+
+    /**
+     * Retrieves nearby places based on screen coordinates and optional query parameters.
+     *
+     * @param screenTopRight       The top right corner of the screen (latitude, longitude).
+     * @param screenBottomLeft     The bottom left corner of the screen (latitude, longitude).
+     * @param language             The language for the query.
+     * @param shouldQueryForMonuments  Flag indicating whether to include monuments in the query.
+     * @param customQuery          Optional custom SPARQL query to use instead of default queries.
+     * @return                     A list of nearby places.
+     * @throws Exception           If an error occurs during the retrieval process.
+     */
+    @Nullable
+    public List<Place> getNearbyPlaces(
+        final fr.free.nrw.commons.location.LatLng screenTopRight,
+        final fr.free.nrw.commons.location.LatLng screenBottomLeft,final String language,
+        final boolean shouldQueryForMonuments, final String customQuery)
+        throws Exception {
+
+        Timber.d("CUSTOM_SPARQL%s", String.valueOf(customQuery != null));
+
+        final String wikidataQuery;
+        if (customQuery != null) {
+            wikidataQuery = customQuery;
+        } else if (!shouldQueryForMonuments) {
+            wikidataQuery = FileUtils.readFromResource("/queries/nearby_query.rq");
+        } else {
+            wikidataQuery = FileUtils.readFromResource("/queries/nearby_query_monuments.rq");
+        }
+
+        final double westCornerLat = screenTopRight.getLatitude();
+        final double westCornerLong = screenTopRight.getLongitude();
+        final double eastCornerLat = screenBottomLeft.getLatitude();
+        final double eastCornerLong = screenBottomLeft.getLongitude();
+
+        final String query = wikidataQuery
+            .replace("${LAT_WEST}", String.format(Locale.ROOT, "%.4f", westCornerLat))
+            .replace("${LONG_WEST}", String.format(Locale.ROOT, "%.4f", westCornerLong))
+            .replace("${LAT_EAST}", String.format(Locale.ROOT, "%.4f", eastCornerLat))
+            .replace("${LONG_EAST}", String.format(Locale.ROOT, "%.4f", eastCornerLong))
+            .replace("${LANG}", language);
         final HttpUrl.Builder urlBuilder = HttpUrl
             .parse(sparqlQueryUrl)
             .newBuilder()

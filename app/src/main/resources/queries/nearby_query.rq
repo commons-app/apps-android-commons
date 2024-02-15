@@ -13,10 +13,10 @@ SELECT
   (SAMPLE(?commonsCategory) AS ?commonsCategory)
 WHERE {
   # Around given location
-  SERVICE wikibase:around {
+  SERVICE wikibase:box {
     ?item wdt:P625 ?location.
-    bd:serviceParam wikibase:center "Point(${LONG} ${LAT})"^^geo:wktLiteral. # Longitude latitude
-    bd:serviceParam wikibase:radius "${RAD}". # Radius in kilometers.
+     bd:serviceParam wikibase:cornerWest "Point(${LONG_WEST} ${LAT_WEST})"^^geo:wktLiteral.
+     bd:serviceParam wikibase:cornerEast "Point(${LONG_EAST} ${LAT_EAST})"^^geo:wktLiteral.
   }
 
   OPTIONAL {

@@ -58,13 +58,12 @@ public class NearbyController extends MapController {
      * @return NearbyPlacesInfo a variable holds Place list without distance information
      * and boundary coordinates of current Place List
      */
-    public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng curLatLng, final LatLng searchLatLng,
+    public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng curLatLng,final LatLng searchLatLng,
         final boolean returnClosestResult, final boolean checkingAroundCurrentLocation,
         final boolean shouldQueryForMonuments, @Nullable final String customQuery) throws Exception {
 
         Timber.d("Loading attractions near %s", searchLatLng);
         NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();
-
         if (searchLatLng == null) {
             Timber.d("Loading attractions nearby, but curLatLng is null");
             return null;
@@ -126,6 +125,90 @@ public class NearbyController extends MapController {
             }
 
 
+        }
+        return nearbyPlacesInfo;
+    }
+
+    /**
+     * Prepares Place list to make their distance information update later.
+     *
+     * @param curLatLng                     The current latitude and longitude.
+     * @param screenTopRight                The top right corner of the screen (latitude, longitude).
+     * @param screenBottomLeft              The bottom left corner of the screen (latitude, longitude).
+     * @param searchLatLng                  The latitude and longitude of the search location.
+     * @param returnClosestResult           Flag indicating whether to return the closest result.
+     * @param checkingAroundCurrentLocation Flag indicating whether to check around the current location.
+     * @param shouldQueryForMonuments       Flag indicating whether to include monuments in the query.
+     * @param customQuery                   Optional custom SPARQL query to use instead of default queries.
+     * @return                              An object containing information about nearby places.
+     * @throws Exception                    If an error occurs during the retrieval process.
+     */
+    public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng curLatLng,
+        final fr.free.nrw.commons.location.LatLng screenTopRight,
+        final fr.free.nrw.commons.location.LatLng screenBottomLeft, final LatLng searchLatLng,
+        final boolean returnClosestResult, final boolean checkingAroundCurrentLocation,
+        final boolean shouldQueryForMonuments, @Nullable final String customQuery) throws Exception {
+
+        Timber.d("Loading attractions near %s", searchLatLng);
+        NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();
+
+        if (searchLatLng == null) {
+            Timber.d("Loading attractions nearby, but curLatLng is null");
+            return null;
+        }
+
+        List<Place> places = nearbyPlaces.getFromWikidataQuery(screenTopRight,screenBottomLeft,Locale.getDefault().getLanguage(),shouldQueryForMonuments, customQuery);
+
+        if (null != places && places.size() > 0) {
+            LatLng[] boundaryCoordinates = {places.get(0).location,   // south
+                places.get(0).location, // north
+                places.get(0).location, // west
+                places.get(0).location};// east, init with a random location
+
+            if (curLatLng != null) {
+                Timber.d("Sorting places by distance...");
+                final Map<Place, Double> distances = new HashMap<>();
+                for (Place place : places) {
+                    distances.put(place, computeDistanceBetween(place.location, curLatLng));
+                    // Find boundaries with basic find max approach
+                    if (place.location.getLatitude() < boundaryCoordinates[0].getLatitude()) {
+                        boundaryCoordinates[0] = place.location;
+                    }
+                    if (place.location.getLatitude() > boundaryCoordinates[1].getLatitude()) {
+                        boundaryCoordinates[1] = place.location;
+                    }
+                    if (place.location.getLongitude() < boundaryCoordinates[2].getLongitude()) {
+                        boundaryCoordinates[2] = place.location;
+                    }
+                    if (place.location.getLongitude() > boundaryCoordinates[3].getLongitude()) {
+                        boundaryCoordinates[3] = place.location;
+                    }
+                }
+                Collections.sort(places,
+                    (lhs, rhs) -> {
+                        double lhsDistance = distances.get(lhs);
+                        double rhsDistance = distances.get(rhs);
+                        return (int) (lhsDistance - rhsDistance);
+                    }
+                );
+            }
+            nearbyPlacesInfo.curLatLng = curLatLng;
+            nearbyPlacesInfo.searchLatLng = searchLatLng;
+            nearbyPlacesInfo.placeList = places;
+            nearbyPlacesInfo.boundaryCoordinates = boundaryCoordinates;
+
+            // Returning closes result means we use the controller for nearby card. So no need to set search this area flags
+            if (!returnClosestResult) {
+                // To remember latest search either around user or any point on map
+                latestSearchLocation = searchLatLng;
+                latestSearchRadius = nearbyPlaces.radius * 1000; // to meter
+
+                // Our radius searched around us, will be used to understand when user search their own location, we will follow them
+                if (checkingAroundCurrentLocation) {
+                    currentLocationSearchRadius = nearbyPlaces.radius * 1000; // to meter
+                    currentLocation = curLatLng;
+                }
+            }
         }
         return nearbyPlacesInfo;
     }
