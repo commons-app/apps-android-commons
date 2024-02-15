@@ -1,7 +1,10 @@
 package fr.free.nrw.commons.upload;
 
+import com.google.gson.Gson;
 import dagger.Binds;
 import dagger.Module;
+import dagger.Provides;
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient;
 import fr.free.nrw.commons.upload.categories.CategoriesContract;
 import fr.free.nrw.commons.upload.categories.CategoriesPresenter;
 import fr.free.nrw.commons.upload.depicts.DepictsContract;
@@ -40,4 +43,12 @@ public abstract class UploadModule {
             DepictsPresenter
             presenter
     );
+
+    @Provides
+    public static UploadClient provideUploadClient(final UploadInterface uploadInterface,
+        final CsrfTokenClient csrfTokenClient, final PageContentsCreator pageContentsCreator,
+        final FileUtilsWrapper fileUtilsWrapper, final Gson gson) {
+        return new UploadClient(uploadInterface, csrfTokenClient, pageContentsCreator,
+            fileUtilsWrapper, gson, System::currentTimeMillis);
+    }
 }

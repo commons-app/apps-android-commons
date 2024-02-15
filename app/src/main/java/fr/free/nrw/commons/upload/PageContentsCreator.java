@@ -17,7 +17,7 @@ import javax.inject.Inject;
 import org.apache.commons.lang3.StringUtils;
 import timber.log.Timber;
 
-class PageContentsCreator {
+public class PageContentsCreator {
 
     //{{According to Exif data|2009-01-09}}
     private static final String TEMPLATE_DATE_ACC_TO_EXIF = "{{According to Exif data|%s}}";

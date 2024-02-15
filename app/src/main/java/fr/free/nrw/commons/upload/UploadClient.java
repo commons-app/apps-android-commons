@@ -44,6 +44,7 @@ public class UploadClient {
     private final PageContentsCreator pageContentsCreator;
     private final FileUtilsWrapper fileUtilsWrapper;
     private final Gson gson;
+    private final TimeProvider timeProvider;
 
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -51,12 +52,14 @@ public class UploadClient {
     public UploadClient(final UploadInterface uploadInterface,
         @Named(NAMED_COMMONS_CSRF) final CsrfTokenClient csrfTokenClient,
         final PageContentsCreator pageContentsCreator,
-        final FileUtilsWrapper fileUtilsWrapper, final Gson gson) {
+        final FileUtilsWrapper fileUtilsWrapper,
+        final Gson gson, final TimeProvider timeProvider) {
         this.uploadInterface = uploadInterface;
         this.csrfTokenClient = csrfTokenClient;
         this.pageContentsCreator = pageContentsCreator;
         this.fileUtilsWrapper = fileUtilsWrapper;
         this.gson = gson;
+        this.timeProvider = timeProvider;
     }
 
     /**
@@ -65,24 +68,19 @@ public class UploadClient {
      * uploads
      */
     public Observable<StashUploadResult> uploadFileToStash(
-        final Context context, final String filename, final Contribution contribution,
+        final String filename, final Contribution contribution,
         final NotificationUpdateProgressListener notificationUpdater) throws IOException {
-        if (contribution.getChunkInfo() != null
-            && contribution.getChunkInfo().getTotalChunks() == contribution.getChunkInfo()
-            .getIndexOfNextChunkToUpload()) {
-            return Observable.just(new StashUploadResult(StashUploadState.SUCCESS,
-                contribution.getChunkInfo().getUploadResult().getFilekey()));
+        if (contribution.isCompleted()) {
+            return Observable.just(
+                new StashUploadResult(StashUploadState.SUCCESS, contribution.getFileKey())
+            );
         }
 
-        CommonsApplication.pauseUploads.put(contribution.getPageId(), false);
+        contribution.unpause();
 
-        final File file = new File(contribution.getLocalUri().getPath());
-        final List<File> fileChunks = fileUtilsWrapper.getFileChunks(context, file, CHUNK_SIZE);
-
-        final int totalChunks = fileChunks.size();
-
-        final MediaType mediaType = MediaType
-            .parse(FileUtils.getMimeType(context, Uri.parse(file.getPath())));
+        final File file = contribution.getGetLocalUriPath();
+        final List<File> fileChunks = fileUtilsWrapper.getFileChunks(file, CHUNK_SIZE);
+        final MediaType mediaType = MediaType.parse(fileUtilsWrapper.getMimeType(file));
 
         final AtomicReference<ChunkInfo> chunkInfo = new AtomicReference<>();
         if (isStashValid(contribution)) {
@@ -96,48 +94,18 @@ public class UploadClient {
         final AtomicInteger index = new AtomicInteger();
         final AtomicBoolean failures = new AtomicBoolean();
 
-        compositeDisposable.add(Observable.fromIterable(fileChunks).forEach(chunkFile -> {
-            if (CommonsApplication.pauseUploads.get(contribution.getPageId()) || failures.get()) {
-                return;
-            }
+        compositeDisposable.add(
+            Observable.fromIterable(fileChunks).forEach(chunkFile -> {
+                if (canProcess(contribution, failures)) {
+                    processChunk(
+                        filename, contribution, notificationUpdater, chunkFile,
+                        failures, chunkInfo, index, mediaType, file, fileChunks.size()
+                    );
+                }
+            })
+        );
 
-            if (chunkInfo.get() != null && index.get() < chunkInfo.get()
-                .getIndexOfNextChunkToUpload()) {
-                index.incrementAndGet();
-                Timber.d("Chunk: Increment and return: %s", index.get());
-                return;
-            }
-            index.getAndIncrement();
-            final int offset =
-                chunkInfo.get() != null ? chunkInfo.get().getUploadResult().getOffset() : 0;
-
-            Timber.d("Chunk: Sending Chunk number: %s, offset: %s", index.get(), offset);
-            final String filekey =
-                chunkInfo.get() != null ? chunkInfo.get().getUploadResult().getFilekey() : null;
-
-            final RequestBody requestBody = RequestBody
-                .create(mediaType, chunkFile);
-            final CountingRequestBody countingRequestBody = new CountingRequestBody(requestBody,
-                notificationUpdater::onProgress, offset,
-                file.length());
-
-            compositeDisposable.add(uploadChunkToStash(filename,
-                file.length(),
-                offset,
-                filekey,
-                countingRequestBody).subscribe(uploadResult -> {
-                Timber.d("Chunk: Received Chunk number: %s, offset: %s", index.get(),
-                    uploadResult.getOffset());
-                chunkInfo.set(
-                    new ChunkInfo(uploadResult, index.get(), totalChunks));
-                notificationUpdater.onChunkUploaded(contribution, chunkInfo.get());
-            }, throwable -> {
-                Timber.e(throwable, "Received error in chunk upload");
-                failures.set(true);
-            }));
-        }));
-
-        if (CommonsApplication.pauseUploads.get(contribution.getPageId())) {
+        if (contribution.isPaused()) {
             Timber.d("Upload stash paused %s", contribution.getPageId());
             return Observable.just(new StashUploadResult(StashUploadState.PAUSED, null));
         } else if (failures.get()) {
@@ -153,6 +121,54 @@ public class UploadClient {
         }
     }
 
+    private static boolean canProcess(final Contribution contribution, final AtomicBoolean failures) {
+        // As long as the contribution hasn't been paused and there are no errors,
+        // we can process the current chunk.
+        return !(contribution.isPaused() || failures.get());
+    }
+
+    private void processChunk(final String filename, final Contribution contribution,
+        final NotificationUpdateProgressListener notificationUpdater, final File chunkFile,
+        final AtomicBoolean failures, final AtomicReference<ChunkInfo> chunkInfo, final AtomicInteger index,
+        final MediaType mediaType, final File file, final int totalChunks) {
+
+        if (shouldSkip(chunkInfo, index)) {
+            index.incrementAndGet();
+            Timber.d("Chunk: Increment and return: %s", index.get());
+            return;
+        }
+
+        index.getAndIncrement();
+
+        final int offset = chunkInfo.get() != null ? chunkInfo.get().getUploadResult().getOffset() : 0;
+
+        Timber.d("Chunk: Sending Chunk number: %s, offset: %s", index.get(), offset);
+        final String filekey = chunkInfo.get() != null ? chunkInfo.get().getUploadResult().getFilekey() : null;
+
+        final RequestBody requestBody = RequestBody.create(chunkFile, mediaType);
+        final CountingRequestBody countingRequestBody = new CountingRequestBody(requestBody,
+            notificationUpdater::onProgress, offset, file.length());
+
+        compositeDisposable.add(
+            uploadChunkToStash(filename, file.length(), offset, filekey, countingRequestBody).subscribe(
+                uploadResult -> {
+                    Timber.d("Chunk: Received Chunk number: %s, offset: %s", index.get(),
+                        uploadResult.getOffset());
+                    chunkInfo.set(new ChunkInfo(uploadResult, index.get(), totalChunks));
+                    notificationUpdater.onChunkUploaded(contribution, chunkInfo.get());
+                },
+                throwable -> {
+                    Timber.e(throwable, "Received error in chunk upload");
+                    failures.set(true);
+                })
+        );
+    }
+
+    private static boolean shouldSkip(final AtomicReference<ChunkInfo> chunkInfo, final AtomicInteger index) {
+        return chunkInfo.get() != null && index.get() < chunkInfo.get()
+            .getIndexOfNextChunkToUpload();
+    }
+
     /**
      * Stash is valid for 6 hours. This function checks the validity of stash
      *
@@ -162,7 +178,7 @@ public class UploadClient {
     private boolean isStashValid(Contribution contribution) {
         return contribution.getChunkInfo() != null &&
             contribution.getDateModified()
-                .after(new Date(System.currentTimeMillis() - MAX_CHUNK_AGE));
+                .after(new Date(timeProvider.currentTimeMillis() - MAX_CHUNK_AGE));
     }
 
     /**
@@ -232,5 +248,10 @@ public class UploadClient {
             Timber.e(throwable, "Exception occurred in uploading file from stash");
             return Observable.error(throwable);
         }
+    }
+
+    @FunctionalInterface
+    public interface TimeProvider {
+        Long currentTimeMillis();
     }
 }
