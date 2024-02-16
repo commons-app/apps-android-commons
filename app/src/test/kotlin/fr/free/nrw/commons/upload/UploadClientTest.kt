@@ -44,6 +44,7 @@ class UploadClientTest {
     private val timeProvider = mock<TimeProvider>()
     private val uploadClient = UploadClient(uploadInterface, csrfTokenClient, pageContentsCreator, fileUtilsWrapper, gson, timeProvider)
 
+    private val expectedChunkSize = 512 * 1024
     private val testToken = "test-token"
     private val createdContent = "content"
     private val filename = "test.jpg"
@@ -160,7 +161,7 @@ class UploadClientTest {
         whenever(contribution.isCompleted()).thenReturn(false)
         whenever(contribution.fileKey).thenReturn(filekey)
         whenever(fileUtilsWrapper.getMimeType(anyOrNull<File>())).thenReturn("image/png")
-        whenever(fileUtilsWrapper.getFileChunks(anyOrNull<File>(), eq(512 * 1024))).thenReturn(emptyList())
+        whenever(fileUtilsWrapper.getFileChunks(anyOrNull<File>(), eq(expectedChunkSize))).thenReturn(emptyList())
 
         val result = uploadClient.uploadFileToStash(filename, contribution, mock()).test()
 
@@ -173,7 +174,7 @@ class UploadClientTest {
         whenever(contribution.isCompleted()).thenReturn(false)
         whenever(contribution.fileKey).thenReturn(filekey)
         whenever(fileUtilsWrapper.getMimeType(anyOrNull<File>())).thenReturn("image/png")
-        whenever(fileUtilsWrapper.getFileChunks(anyOrNull<File>(), eq(512 * 1024))).thenReturn(emptyList())
+        whenever(fileUtilsWrapper.getFileChunks(anyOrNull<File>(), eq(expectedChunkSize))).thenReturn(emptyList())
 
         val result = uploadClient.uploadFileToStash(filename, contribution, mock()).test()
 
@@ -185,14 +186,12 @@ class UploadClientTest {
     fun uploadFileToStash_returnsFailureIfAnyChunkFails() {
         val mockFile = mock<File>()
         whenever(mockFile.length()).thenReturn(1)
-        whenever(contribution.getLocalUriPath).thenReturn(mockFile)
+        whenever(contribution.localUriPath).thenReturn(mockFile)
         whenever(contribution.isCompleted()).thenReturn(false)
         whenever(contribution.fileKey).thenReturn(filekey)
         whenever(fileUtilsWrapper.getMimeType(anyOrNull<File>())).thenReturn("image/png")
-        whenever(fileUtilsWrapper.getFileChunks(anyOrNull<File>(), eq(512 * 1024))).thenReturn(
-            listOf(mockFile))
-        whenever(uploadInterface.uploadFileToStash(any(), any(), any(), any(), any(), any()))
-            .thenReturn(Observable.just(uploadResponse))
+        whenever(fileUtilsWrapper.getFileChunks(anyOrNull<File>(), eq(expectedChunkSize))).thenReturn(listOf(mockFile))
+        whenever(uploadInterface.uploadFileToStash(any(), any(), any(), any(), any(), any())).thenReturn(Observable.just(uploadResponse))
 
         val result = uploadClient.uploadFileToStash(filename, contribution, mock()).test()
 
@@ -201,22 +200,25 @@ class UploadClientTest {
     }
 
     @Test
-    fun uploadFileToStash_success() {
+    fun uploadFileToStash_successWithOneChunk() {
         val mockFile = mock<File>()
         val chunkInfo = mock<ChunkInfo>()
+        whenever(mockFile.length()).thenReturn(10)
         whenever(chunkInfo.uploadResult).thenReturn(uploadResult)
+
         whenever(uploadResult.offset).thenReturn(1)
         whenever(uploadResult.filekey).thenReturn(filekey)
-        whenever(mockFile.length()).thenReturn(1)
-        whenever(contribution.getLocalUriPath).thenReturn(mockFile)
+
+        whenever(contribution.localUriPath).thenReturn(mockFile)
         whenever(contribution.chunkInfo).thenReturn(chunkInfo)
         whenever(contribution.isCompleted()).thenReturn(false)
         whenever(contribution.dateModified).thenReturn(Date(100))
         whenever(timeProvider.currentTimeMillis()).thenReturn(200)
         whenever(contribution.fileKey).thenReturn(filekey)
+
         whenever(fileUtilsWrapper.getMimeType(anyOrNull<File>())).thenReturn("image/png")
-        whenever(fileUtilsWrapper.getFileChunks(anyOrNull<File>(), eq(512 * 1024))).thenReturn(
-            listOf(mockFile))
+        whenever(fileUtilsWrapper.getFileChunks(anyOrNull<File>(), eq(expectedChunkSize))).thenReturn(listOf(mockFile))
+
         whenever(uploadInterface.uploadFileToStash(anyOrNull(), anyOrNull(), anyOrNull(),
             anyOrNull(), anyOrNull(), anyOrNull())).thenReturn(Observable.just(uploadResponse))
 

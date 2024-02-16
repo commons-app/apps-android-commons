@@ -336,7 +336,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
         try {
             //Upload the file to stash
             val stashUploadResult = uploadClient.uploadFileToStash(
-                filename, contribution, notificationProgressUpdater
+                filename!!, contribution, notificationProgressUpdater
             ).onErrorReturn{
                 return@onErrorReturn StashUploadResult(StashUploadState.FAILED,fileKey = null)
             }.blockingSingle()

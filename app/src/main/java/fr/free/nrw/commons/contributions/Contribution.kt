@@ -121,7 +121,7 @@ data class Contribution constructor(
     }
 
     val fileKey : String? get() = chunkInfo?.uploadResult?.filekey
-    val getLocalUriPath: File? get() = localUri?.path?.let { File(it) }
+    val localUriPath: File? get() = localUri?.path?.let { File(it) }
 
     fun isCompleted(): Boolean {
         return chunkInfo != null && chunkInfo!!.totalChunks == chunkInfo!!.indexOfNextChunkToUpload
