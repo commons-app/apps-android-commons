@@ -73,7 +73,8 @@ public class NearbyController extends MapController {
                 shouldQueryForMonuments, customQuery);
 
         if (null != places && places.size() > 0) {
-            LatLng[] boundaryCoordinates = {places.get(0).location,   // south
+            LatLng[] boundaryCoordinates = {
+                    places.get(0).location, // south
                     places.get(0).location, // north
                     places.get(0).location, // west
                     places.get(0).location};// east, init with a random location
@@ -160,7 +161,8 @@ public class NearbyController extends MapController {
         List<Place> places = nearbyPlaces.getFromWikidataQuery(screenTopRight,screenBottomLeft,Locale.getDefault().getLanguage(),shouldQueryForMonuments, customQuery);
 
         if (null != places && places.size() > 0) {
-            LatLng[] boundaryCoordinates = {places.get(0).location,   // south
+            LatLng[] boundaryCoordinates = {
+                places.get(0).location, // south
                 places.get(0).location, // north
                 places.get(0).location, // west
                 places.get(0).location};// east, init with a random location

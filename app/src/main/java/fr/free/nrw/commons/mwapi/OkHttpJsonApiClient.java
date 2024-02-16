@@ -343,7 +343,7 @@ public class OkHttpJsonApiClient {
     @Nullable
     public List<Place> getNearbyPlaces(
         final fr.free.nrw.commons.location.LatLng screenTopRight,
-        final fr.free.nrw.commons.location.LatLng screenBottomLeft,final String language,
+        final fr.free.nrw.commons.location.LatLng screenBottomLeft, final String language,
         final boolean shouldQueryForMonuments, final String customQuery)
         throws Exception {
 
