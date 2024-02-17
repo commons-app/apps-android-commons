@@ -58,7 +58,7 @@ public class NearbyController extends MapController {
      * @return NearbyPlacesInfo a variable holds Place list without distance information
      * and boundary coordinates of current Place List
      */
-    public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng curLatLng,final LatLng searchLatLng,
+    public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng curLatLng, final LatLng searchLatLng,
         final boolean returnClosestResult, final boolean checkingAroundCurrentLocation,
         final boolean shouldQueryForMonuments, @Nullable final String customQuery) throws Exception {
 
@@ -148,7 +148,8 @@ public class NearbyController extends MapController {
         final fr.free.nrw.commons.location.LatLng screenTopRight,
         final fr.free.nrw.commons.location.LatLng screenBottomLeft, final LatLng searchLatLng,
         final boolean returnClosestResult, final boolean checkingAroundCurrentLocation,
-        final boolean shouldQueryForMonuments, @Nullable final String customQuery) throws Exception {
+        final boolean shouldQueryForMonuments, @Nullable final String customQuery)
+        throws Exception {
 
         Timber.d("Loading attractions near %s", searchLatLng);
         NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();
@@ -158,7 +159,8 @@ public class NearbyController extends MapController {
             return null;
         }
 
-        List<Place> places = nearbyPlaces.getFromWikidataQuery(screenTopRight,screenBottomLeft,Locale.getDefault().getLanguage(),shouldQueryForMonuments, customQuery);
+        List<Place> places = nearbyPlaces.getFromWikidataQuery(screenTopRight, screenBottomLeft,
+            Locale.getDefault().getLanguage(), shouldQueryForMonuments, customQuery);
 
         if (null != places && places.size() > 0) {
             LatLng[] boundaryCoordinates = {

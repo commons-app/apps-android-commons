@@ -109,9 +109,11 @@ public class NearbyPlaces {
      */
     public List<Place> getFromWikidataQuery(
         final fr.free.nrw.commons.location.LatLng screenTopRight,
-        final fr.free.nrw.commons.location.LatLng screenBottomLeft,final String lang,final boolean shouldQueryForMonuments,
+        final fr.free.nrw.commons.location.LatLng screenBottomLeft, final String lang,
+        final boolean shouldQueryForMonuments,
         @Nullable final String customQuery) throws Exception {
         return okHttpJsonApiClient
-            .getNearbyPlaces(screenTopRight,screenBottomLeft,lang,shouldQueryForMonuments, customQuery);
+            .getNearbyPlaces(screenTopRight, screenBottomLeft, lang, shouldQueryForMonuments,
+                customQuery);
     }
 }
