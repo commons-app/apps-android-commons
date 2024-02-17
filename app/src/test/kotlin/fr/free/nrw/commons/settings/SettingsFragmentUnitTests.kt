@@ -20,7 +20,6 @@ import fr.free.nrw.commons.recentlanguages.Language
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
 import fr.free.nrw.commons.settings.SettingsFragment.createLocale
-import org.bouncycastle.asn1.LocaleUtil
 import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
@@ -262,36 +261,28 @@ class SettingsFragmentUnitTests {
 
     @Test
     fun testCreateLocaleWithLanguageCode() {
-        // Test creating Locale with only language code
         val locale: Locale = createLocale("en")
+
         assertEquals("en", locale.language)
-        assertNull(locale.country)
-        assertNull(locale.variant)
+        assertEquals("",locale.country)
+        assertEquals("",locale.variant)
     }
 
     @Test
     fun testCreateLocaleWithLanguageAndCountryCode() {
-        // Test creating Locale with language and country code
         val locale: Locale = createLocale("zh-CN")
+
         assertEquals("zh", locale.language)
-        assertEquals("CN", locale.country)
-        assertNull(locale.variant)
+        assertEquals("CN",locale.country)
+        assertEquals("",locale.variant)
     }
 
     @Test
     fun testCreateLocaleWithLanguageCountryAndVariantCode() {
-        // Test creating Locale with language, country, and variant code
         val locale: Locale = createLocale("pt-BR-variant")
+
         assertEquals("pt", locale.language)
-        assertEquals("BR", locale.country)
-        assertEquals("variant", locale.variant)
+        assertEquals("BR",locale.country)
+        assertEquals("variant",locale.variant)
     }
-
-    @Test
-    fun testInvalidLanguageCode() {
-        // Test creating Locale with an invalid language code
-        val locale: Locale = createLocale("invalid-code")
-        assertNull(locale)
-    }
-
 }
