@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.gson.Gson;
-import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.location.LatLng;
@@ -36,7 +35,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import org.jetbrains.annotations.NotNull;
-import org.osmdroid.util.GeoPoint;
 import timber.log.Timber;
 
 /**
@@ -289,7 +287,7 @@ public class OkHttpJsonApiClient {
         if (customQuery != null) {
             wikidataQuery = customQuery;
         } else if (!shouldQueryForMonuments) {
-            wikidataQuery = FileUtils.readFromResource("/queries/nearby_query.rq");
+            wikidataQuery = FileUtils.readFromResource("/queries/radius_query_for_upload_wizard.rq");
         } else {
             wikidataQuery = FileUtils.readFromResource("/queries/nearby_query_monuments.rq");
         }
@@ -353,7 +351,7 @@ public class OkHttpJsonApiClient {
         if (customQuery != null) {
             wikidataQuery = customQuery;
         } else if (!shouldQueryForMonuments) {
-            wikidataQuery = FileUtils.readFromResource("/queries/nearby_query.rq");
+            wikidataQuery = FileUtils.readFromResource("/queries/rectangle_query_for_nearby.rq");
         } else {
             wikidataQuery = FileUtils.readFromResource("/queries/nearby_query_monuments.rq");
         }
