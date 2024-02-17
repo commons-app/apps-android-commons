@@ -447,6 +447,9 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(explorePlacesInfo -> {
                     mediaList = explorePlacesInfo.mediaList;
+                    if(mediaList == null) {
+                        showErrorMessage(getString(R.string.no_pictures_in_this_area));
+                    }
                     updateMapMarkers(explorePlacesInfo);
                     lastMapFocus = new GeoPoint(curLatLng.getLatitude(), curLatLng.getLongitude());
                 },
@@ -471,7 +474,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     }
 
     private void showErrorMessage(final String message) {
-        ViewUtil.showLongToast(getActivity(), message);
+        ViewUtil.showLongSnackbar(getView(), message);
     }
 
     @Override

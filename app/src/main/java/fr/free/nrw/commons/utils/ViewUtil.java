@@ -52,6 +52,7 @@ public class ViewUtil {
 
                 snack_view.setBackgroundColor(Color.LTGRAY);
                 snack_text.setTextColor(ContextCompat.getColor(view.getContext(), R.color.primaryColor));
+                snackbar.setActionTextColor(Color.RED);
 
                 snackbar.setAction("Dismiss", new View.OnClickListener() {
                     @Override
