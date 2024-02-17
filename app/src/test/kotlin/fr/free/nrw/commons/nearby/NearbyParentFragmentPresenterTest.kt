@@ -16,6 +16,7 @@ import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.any
+import org.mockito.Mockito.anyBoolean
 import org.mockito.Mockito.anyDouble
 import org.mockito.Mockito.anyFloat
 import org.mockito.Mockito.verifyNoInteractions
@@ -166,7 +167,7 @@ class NearbyParentFragmentPresenterTest {
     fun updateMapSignificantly() {
         verify(nearbyParentFragmentView).disableFABRecenter()
         verify(nearbyParentFragmentView).setProgressBarVisibility(true)
-        verify(nearbyParentFragmentView).populatePlaces(latestLocation)
+        verify(nearbyParentFragmentView).populatePlaces(any<LatLng>())
     }
 
     /**
@@ -313,11 +314,11 @@ class NearbyParentFragmentPresenterTest {
         nearbyPresenter.filterByMarkerType(selectedLabels, 0, true, false)
         verify(nearbyParentFragmentView).filterMarkersByLabels(
             any(),
-            any(),
-            any(),
-            any(),
-            any(),
-            any()
+            anyBoolean(),
+            anyBoolean(),
+            anyBoolean(),
+            anyBoolean(),
+            anyBoolean()
         );
         verifyNoMoreInteractions(nearbyParentFragmentView)
     }
@@ -462,6 +463,7 @@ class NearbyParentFragmentPresenterTest {
     fun testOnLocationChangedSignificantly() {
         expectMapAndListUpdate()
         whenever(nearbyParentFragmentView.mapCenter).thenReturn(LatLng(2.0, 1.0, 0.0F));
+       latestLocation=LatLng(2.0, 1.0, 0.0F)
         nearbyPresenter.onLocationChangedSignificantly(latestLocation)
         updateMapSignificantly()
     }

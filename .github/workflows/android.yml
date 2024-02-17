@@ -55,20 +55,20 @@ jobs:
           disable-animations: true
           script: echo "Generated AVD snapshot for caching."
 
- #     - name: Run Instrumentation tests
-   #     if: github.event_name != 'pull_request'
-   #     uses: reactivecircus/android-emulator-runner@v2
-   #     with:
-      #    api-level: 24
-   #       force-avd-creation: false
-    #      emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-   #       disable-animations: true
-     #     profile: Nexus 10
-      #    script: |
-      #      adb shell content insert --uri content://settings/system --bind name:s:accelerometer_rotation --bind value:i:0
-       #     adb shell content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0
-        #    adb emu geo fix 37.422131 -122.084801
-        #    ./gradlew connectedBetaDebugAndroidTest --stacktrace
+      - name: Run Instrumentation tests
+        if: github.event_name != 'pull_request'
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 24
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          profile: Nexus 10
+          script: |
+            adb shell content insert --uri content://settings/system --bind name:s:accelerometer_rotation --bind value:i:0
+            adb shell content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0
+            adb emu geo fix 37.422131 -122.084801
+            ./gradlew connectedBetaDebugAndroidTest --stacktrace
 
       - name: Run Unit tests with unified coverage
         if: github.event_name != 'pull_request'
