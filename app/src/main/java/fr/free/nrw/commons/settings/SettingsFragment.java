@@ -146,7 +146,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             appUiLanguageListPreference.setSummary(Locale.getDefault().getDisplayLanguage());
         } else {
             // If any language is selected by user previously, use it
-            Locale defLocale = new Locale(languageCode);
+            Locale defLocale = createLocale(languageCode);
             appUiLanguageListPreference.setSummary((defLocale).getDisplayLanguage(defLocale));
         }
         appUiLanguageListPreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -167,7 +167,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             descriptionLanguageListPreference.setSummary(Locale.getDefault().getDisplayLanguage());
         } else {
             // If any language is selected by user previously, use it
-            Locale defLocale = new Locale(languageCode);
+            Locale defLocale = createLocale(languageCode);
             descriptionLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
         }
         descriptionLanguageListPreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -361,7 +361,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 }
                 recentLanguagesDao.addRecentLanguage(new Language(languageName, languageCode));
                 saveLanguageValue(languageCode, keyListPreference);
-                Locale defLocale = new Locale(languageCode);
+                Locale defLocale = createLocale(languageCode);
                 if(keyListPreference.equals("appUiDefaultLanguagePref")) {
                     appUiLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
                     setLocale(requireActivity(), languageCode);
@@ -426,7 +426,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         recentLanguagesDao.addRecentLanguage(
             new Language(recentLanguageName, recentLanguageCode));
         saveLanguageValue(recentLanguageCode, keyListPreference);
-        final Locale defLocale = new Locale(recentLanguageCode);
+        final Locale defLocale = createLocale(recentLanguageCode);
         if (keyListPreference.equals("appUiDefaultLanguagePref")) {
             appUiLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
             setLocale(requireActivity(), recentLanguageCode);
@@ -455,7 +455,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         if (userSelectedValue.equals("")) {
             userSelectedValue = Locale.getDefault().getLanguage();
         }
-        final Locale locale = new Locale(userSelectedValue);
+        final Locale locale = createLocale(userSelectedValue);
         Locale.setDefault(locale);
         final Configuration configuration = new Configuration();
         configuration.locale = locale;
@@ -465,6 +465,25 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         final SharedPreferences.Editor editor = activity.getSharedPreferences("Settings", MODE_PRIVATE).edit();
         editor.putString("language", userSelectedValue);
         editor.apply();
+    }
+
+    /**
+     * Create Locale based on different types of language codes
+     * @param languageCode
+     * @return Locale and throws error for invalid language codes
+     */
+    public static Locale createLocale(String languageCode) {
+        String[] parts = languageCode.split("-");
+        switch (parts.length) {
+            case 1:
+                return new Locale(parts[0]);
+            case 2:
+                return new Locale(parts[0], parts[1]);
+            case 3:
+                return new Locale(parts[0], parts[1], parts[2]);
+            default:
+                throw new IllegalArgumentException("Invalid language code: " + languageCode);
+        }
     }
 
     /**

@@ -19,8 +19,11 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.recentlanguages.Language
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
-import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
+import fr.free.nrw.commons.settings.SettingsFragment.createLocale
+import org.bouncycastle.asn1.LocaleUtil
 import org.junit.Assert
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -34,6 +37,8 @@ import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.lang.reflect.Method
+import java.util.Locale
+
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -253,6 +258,40 @@ class SettingsFragmentUnitTests {
         verify(languageHistoryListView, times(1)).visibility = View.VISIBLE
         verify(separator, times(1)).visibility = View.VISIBLE
         verify(recentLanguagesTextView, times(1)).visibility = View.VISIBLE
+    }
+
+    @Test
+    fun testCreateLocaleWithLanguageCode() {
+        // Test creating Locale with only language code
+        val locale: Locale = createLocale("en")
+        assertEquals("en", locale.language)
+        assertNull(locale.country)
+        assertNull(locale.variant)
+    }
+
+    @Test
+    fun testCreateLocaleWithLanguageAndCountryCode() {
+        // Test creating Locale with language and country code
+        val locale: Locale = createLocale("zh-CN")
+        assertEquals("zh", locale.language)
+        assertEquals("CN", locale.country)
+        assertNull(locale.variant)
+    }
+
+    @Test
+    fun testCreateLocaleWithLanguageCountryAndVariantCode() {
+        // Test creating Locale with language, country, and variant code
+        val locale: Locale = createLocale("pt-BR-variant")
+        assertEquals("pt", locale.language)
+        assertEquals("BR", locale.country)
+        assertEquals("variant", locale.variant)
+    }
+
+    @Test
+    fun testInvalidLanguageCode() {
+        // Test creating Locale with an invalid language code
+        val locale: Locale = createLocale("invalid-code")
+        assertNull(locale)
     }
 
 }
