@@ -6,7 +6,6 @@ import static fr.free.nrw.commons.location.LocationServiceManager.LocationChange
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
-import android.Manifest;
 import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
@@ -82,6 +81,8 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LocationPermissionsHelper;
+import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.CheckBoxTriStates;
@@ -101,9 +102,9 @@ import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ExecutorUtils;
 import fr.free.nrw.commons.utils.LayoutUtils;
 import fr.free.nrw.commons.utils.LocationUtils;
+import fr.free.nrw.commons.utils.MapUtils;
 import fr.free.nrw.commons.utils.NearbyFABUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
-import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
@@ -142,7 +143,8 @@ import timber.log.Timber;
 
 public class NearbyParentFragment extends CommonsDaggerSupportFragment
     implements NearbyParentFragmentContract.View,
-    WikidataEditListener.WikidataP18EditListener, LocationUpdateListener {
+    WikidataEditListener.WikidataP18EditListener, LocationUpdateListener,
+    LocationPermissionCallback {
 
     @BindView(R.id.bottom_sheet)
     RelativeLayout rlBottomSheet;
@@ -243,6 +245,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     SystemThemeUtils systemThemeUtils;
     @Inject
     CommonPlaceClickActions commonPlaceClickActions;
+    private LocationPermissionsHelper locationPermissionsHelper;
     private NearbyFilterSearchRecyclerViewAdapter nearbyFilterSearchRecyclerViewAdapter;
     private BottomSheetBehavior bottomSheetListBehavior;
     private BottomSheetBehavior bottomSheetDetailsBehavior;
@@ -316,12 +319,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         getActivity().getString(android.R.string.ok),
                         getActivity().getString(android.R.string.cancel),
                         () -> {
-                            if (!(locationManager.isNetworkProviderEnabled()
-                                || locationManager.isGPSProviderEnabled())) {
-                                showLocationOffDialog();
-                            }
+                            askForLocationPermission();
                         },
-                        () -> isPermissionDenied = true,
+                        null,
                         null,
                         false);
                 } else {
@@ -382,7 +382,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         } else {
             rlContainerWLMMonthMessage.setVisibility(View.GONE);
         }
-
+        locationPermissionsHelper = new LocationPermissionsHelper(getActivity(), locationManager,
+            this);
         presenter.attachView(this);
         isPermissionDenied = false;
         recenterToUserLocation = false;
@@ -526,6 +527,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 .replace(R.id.fl_container_nearby_children, fragment)
                 .commit();
         });
+        if (!locationPermissionsHelper.checkLocationPermission(getActivity())) {
+            askForLocationPermission();
+        }
     }
 
     /**
@@ -581,14 +585,18 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private void performMapReadyActions() {
         if (((MainActivity) getActivity()).activeFragment == ActiveFragment.NEARBY) {
-            if (!applicationKvStore.getBoolean("doNotAskForLocationPermission", false) ||
-                PermissionUtils.hasPermission(getActivity(),
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION})) {
-                checkPermissionsAndPerformAction();
-            } else {
+            if (applicationKvStore.getBoolean("doNotAskForLocationPermission", false) &&
+                !locationPermissionsHelper.checkLocationPermission(getActivity())) {
                 isPermissionDenied = true;
             }
         }
+        presenter.onMapReady();
+    }
+
+    @Override
+    public void askForLocationPermission() {
+        Timber.d("Asking for location permission");
+        locationPermissionLauncher.launch(permission.ACCESS_FINE_LOCATION);
     }
 
     private void locationPermissionGranted() {
@@ -608,8 +616,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
             setProgressBarVisibility(true);
         } else {
-            Toast.makeText(getContext(), getString(R.string.nearby_location_not_available),
-                Toast.LENGTH_LONG).show();
+            locationPermissionsHelper.showLocationOffDialog(getActivity(), R.string.ask_to_turn_location_on_text);
         }
         presenter.onMapReady();
         registerUnregisterLocationListener(false);
@@ -622,15 +629,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         presenter.attachView(this);
         registerNetworkReceiver();
         if (isResumed() && ((MainActivity) getActivity()).activeFragment == ActiveFragment.NEARBY) {
-            if (!isPermissionDenied && !applicationKvStore.getBoolean(
-                "doNotAskForLocationPermission", false)) {
-                if (!locationManager.isGPSProviderEnabled()) {
-                    startMapWithCondition("Without GPS");
-                } else {
-                    startTheMap();
-                }
+            if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
+                performMapReadyActions();
             } else {
-                startMapWithCondition("Without Permission");
+                startMapWithoutPermission();
             }
         }
     }
@@ -640,12 +642,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * coordinates, other than that it points to the last known location which can be get by the key
      * "LastLocation" from applicationKvStore
      *
-     * @param condition : for which condition the map should start
      */
-    private void startMapWithCondition(final String condition) {
-        if (condition.equals("Without Permission")) {
-            applicationKvStore.putBoolean("doNotAskForLocationPermission", true);
-        }
+    private void startMapWithoutPermission() {
+        Timber.d("Inside startMapWithoutPerm");
         if (applicationKvStore.getString("LastLocation") != null) {
             final String[] locationLatLng
                 = applicationKvStore.getString("LastLocation").split(",");
@@ -653,12 +652,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 = new fr.free.nrw.commons.location.LatLng(Double.parseDouble(locationLatLng[0]),
                 Double.parseDouble(locationLatLng[1]), 1f);
         } else {
-            lastKnownLocation = new fr.free.nrw.commons.location.LatLng(51.50550,
-                -0.07520, 1f);
+            lastKnownLocation = MapUtils.defaultLatLng;
         }
         if (mapView != null) {
-            recenterMap(lastKnownLocation);
+            moveCameraToPosition(
+                new GeoPoint(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()));
         }
+        presenter.onMapReady();
     }
 
     private void registerNetworkReceiver() {
@@ -1326,12 +1326,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         // TODO
     }
 
-    @Override
-    public void checkPermissionsAndPerformAction() {
-        Timber.d("Checking permission and perfoming action");
-        locationPermissionLauncher.launch(permission.ACCESS_FINE_LOCATION);
-    }
-
     /**
      * Starts animation of fab plus (turning on opening) and other FABs
      */
@@ -1449,6 +1443,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     public boolean backButtonClicked() {
         return presenter.backButtonClicked();
+    }
+
+    @Override
+    public void onLocationPermissionDenied(String toastMessage) {
+    }
+
+    @Override
+    public void onLocationPermissionGranted() {
     }
 
     /**
@@ -1785,13 +1787,25 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void recenterMap(fr.free.nrw.commons.location.LatLng curLatLng) {
-        if (isPermissionDenied || curLatLng == null) {
-            recenterToUserLocation = true;
-            checkPermissionsAndPerformAction();
-            if (!isPermissionDenied && !(locationManager.isNetworkProviderEnabled()
-                || locationManager.isGPSProviderEnabled())) {
-                showLocationOffDialog();
+        // if user has denied permission twice, then show dialog
+        if (isPermissionDenied) {
+            if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
+                // this will run when user has given permission by opening app's settings
+                isPermissionDenied = false;
+                recenterMap(curLatLng);
+            } else {
+                locationPermissionsHelper.showAppSettingsDialog(getActivity(),
+                    R.string.nearby_needs_location);
             }
+        } else {
+            if (!locationPermissionsHelper.checkLocationPermission(getActivity())) {
+                askForLocationPermission();
+            } else {
+                locationPermissionGranted();
+            }
+        }
+        if (curLatLng == null) {
+            recenterToUserLocation = true;
             return;
         }
         addCurrentLocationMarker(curLatLng);
@@ -2034,7 +2048,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         super.setUserVisibleHint(isVisibleToUser);
         this.isVisibleToUser = isVisibleToUser;
         if (isResumed() && isVisibleToUser) {
-            startTheMap();
+            performMapReadyActions();
         } else {
             if (null != bottomSheetListBehavior) {
                 bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
@@ -2044,10 +2058,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             }
         }
-    }
-
-    private void startTheMap() {
-        performMapReadyActions();
     }
 
     /**
