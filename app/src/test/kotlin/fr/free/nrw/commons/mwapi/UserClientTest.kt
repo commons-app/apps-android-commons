@@ -33,7 +33,7 @@ class UserClientTest{
         Mockito.`when`(mwQueryResult.userInfo()).thenReturn(userInfo)
         val mockResponse = Mockito.mock(MwQueryResponse::class.java)
         Mockito.`when`(mockResponse.query()).thenReturn(mwQueryResult)
-        Mockito.`when`(userInterface!!.userBlockInfo)
+        Mockito.`when`(userInterface!!.getUserBlockInfo())
                 .thenReturn(Observable.just(mockResponse))
 
         val isBanned = userClient!!.isUserBlockedFromCommons.blockingGet()
@@ -51,7 +51,7 @@ class UserClientTest{
         Mockito.`when`(mwQueryResult.userInfo()).thenReturn(userInfo)
         val mockResponse = Mockito.mock(MwQueryResponse::class.java)
         Mockito.`when`(mockResponse.query()).thenReturn(mwQueryResult)
-        Mockito.`when`(userInterface!!.userBlockInfo)
+        Mockito.`when`(userInterface!!.getUserBlockInfo())
                 .thenReturn(Observable.just(mockResponse))
 
         val isBanned = userClient!!.isUserBlockedFromCommons.blockingGet()
@@ -66,7 +66,7 @@ class UserClientTest{
         Mockito.`when`(mwQueryResult.userInfo()).thenReturn(userInfo)
         val mockResponse = Mockito.mock(MwQueryResponse::class.java)
         Mockito.`when`(mockResponse.query()).thenReturn(mwQueryResult)
-        Mockito.`when`(userInterface!!.userBlockInfo)
+        Mockito.`when`(userInterface!!.getUserBlockInfo())
                 .thenReturn(Observable.just(mockResponse))
 
         val isBanned = userClient!!.isUserBlockedFromCommons.blockingGet()

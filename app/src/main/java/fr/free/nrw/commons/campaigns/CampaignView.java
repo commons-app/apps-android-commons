@@ -69,7 +69,7 @@ public class CampaignView extends SwipableCardView {
     @Override public boolean onSwipe(final View view) {
         view.setVisibility(View.GONE);
         ((BaseActivity) getContext()).defaultKvStore
-            .putBoolean(campaignPreference, false);
+            .putBoolean(CAMPAIGNS_DEFAULT_PREFERENCE, false);
         ViewUtil.showLongToast(getContext(),
             getResources().getString(R.string.nearby_campaign_dismiss_message));
         return true;
