@@ -146,6 +146,7 @@ public class UploadMediaDetailAdapter extends
             RecognizerIntent.EXTRA_LANGUAGE,
             locale
         );
+
         try {
             if (activity == null) {
                 fragment.startActivityForResult(intent, REQUEST_CODE_FOR_VOICE_INPUT);
@@ -182,9 +183,14 @@ public class UploadMediaDetailAdapter extends
      */
     public void removeDescription(final UploadMediaDetail uploadMediaDetail, final int position) {
         selectedLanguages.remove(position);
-        final int ListPosition =
-            (int) selectedLanguages.keySet().stream().filter(e -> e < position).count();
-        this.uploadMediaDetails.remove(uploadMediaDetails.get(ListPosition));
+        int listPosition = 0;
+        List<Integer> keysList = new ArrayList<>(selectedLanguages.keySet());
+        for (Integer key : keysList) {
+            if (key < position) {
+                listPosition++;
+            }
+        }
+        this.uploadMediaDetails.remove(uploadMediaDetails.get(listPosition));
         int i = position + 1;
         while (selectedLanguages.containsKey(i)) {
             selectedLanguages.remove(i);

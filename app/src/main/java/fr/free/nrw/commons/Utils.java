@@ -10,7 +10,6 @@ import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.browser.customtabs.CustomTabColorSchemeParams;
@@ -137,12 +136,6 @@ public class Utils {
      */
     public static void handleWebUrl(Context context, Uri url) {
         Timber.d("Launching web url %s", url.toString());
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, url);
-        if (browserIntent.resolveActivity(context.getPackageManager()) == null) {
-            Toast toast = Toast.makeText(context, context.getString(R.string.no_web_browser), LENGTH_SHORT);
-            toast.show();
-            return;
-        }
 
         final CustomTabColorSchemeParams color = new CustomTabColorSchemeParams.Builder()
             .setToolbarColor(ContextCompat.getColor(context, R.color.primaryColor))
