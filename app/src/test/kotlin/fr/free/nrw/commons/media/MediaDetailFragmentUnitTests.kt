@@ -383,7 +383,7 @@ class MediaDetailFragmentUnitTests {
                 "|other versions=\n" +
                 "}}\n" +
                 "{{Location|27.043186|88.267003}}\n" +
-                "{{Assessments|featured=1}}"
+                "{{Assessments|featured=1}}\n"
         val map = linkedMapOf("en" to "Antique cash register in a cafe, Darjeeling")
         Assert.assertEquals(map, method.invoke(fragment, s))
     }
@@ -429,7 +429,7 @@ class MediaDetailFragmentUnitTests {
                 "|Other fields = {{Credit line |Author = © [[User:Colin]] | Other = Wikimedia Commons |License = CC-BY-SA-4.0}}\n" +
                 "}}\n" +
                 "{{Location|51.519003|-0.138353}}\n" +
-                "{{Assessments|featured=1}}"
+                "{{Assessments|featured=1}}\n"
         val map = linkedMapOf("en" to "[[:en:Fitzrovia Chapel|Fitzrovia Chapel]] ceiling<br/>\n")
         Assert.assertEquals(map, method.invoke(fragment, s))
     }
@@ -487,7 +487,7 @@ class MediaDetailFragmentUnitTests {
                 "|Date          =2015-02-17\n" +
                 "|Permission    ={{Diliff/Licensing}}\n" +
                 "|other_versions=\n" +
-                "}}"
+                "}}\n"
         val map = linkedMapOf("en" to "The interior of Sacred Heart RC Church, Wimbledon, London.")
         Assert.assertEquals(map, method.invoke(fragment, s))
     }

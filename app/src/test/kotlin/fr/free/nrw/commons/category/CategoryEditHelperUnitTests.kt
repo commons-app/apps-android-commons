@@ -87,12 +87,12 @@ class CategoryEditHelperUnitTests {
         helper.makeCategoryEdit(context, media, listOf("Test"), "== {{int:filedesc}} ==\n" +
                 "{{Information\n" +
                 "|description=\n" +
-                "\n" +
                 "|source={{own}}\n" +
                 "|author=[[User:UserForthBeta|UserForthBeta]]\n" +
                 "|date={{According to Exif data|2022-03-06}}\n" +
                 "}}\n" +
                 "{{Location|22.538830555555556|114.08847222222222}}\n" +
+                "\n" +
                 "== {{int:license-header}} ==\n" +
                 "{{self|cc-zero}}\n" +
                 "\n" +
