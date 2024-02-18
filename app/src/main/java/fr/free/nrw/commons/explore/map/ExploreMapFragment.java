@@ -448,14 +448,15 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             .subscribe(explorePlacesInfo -> {
                     mediaList = explorePlacesInfo.mediaList;
                     if(mediaList == null) {
-                        showErrorMessage(getString(R.string.no_pictures_in_this_area));
+                        showResponseMessage(getString(R.string.no_pictures_in_this_area));
                     }
                     updateMapMarkers(explorePlacesInfo);
                     lastMapFocus = new GeoPoint(curLatLng.getLatitude(), curLatLng.getLongitude());
                 },
                 throwable -> {
                     Timber.d(throwable);
-                    showErrorMessage(getString(R.string.no_pictures_in_this_area));
+                    showErrorMessage(getString(R.string.error_fetching_nearby_places)
+                    + throwable.getLocalizedMessage());
                     setProgressBarVisibility(false);
                     presenter.lockUnlockNearby(false);
                 }));
@@ -474,6 +475,10 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     }
 
     private void showErrorMessage(final String message) {
+        ViewUtil.showLongToast(getActivity(), message);
+    }
+
+    private void showResponseMessage(final String message) {
         ViewUtil.showLongSnackbar(getView(), message);
     }
 
