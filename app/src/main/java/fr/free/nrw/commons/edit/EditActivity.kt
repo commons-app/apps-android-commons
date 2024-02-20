@@ -3,11 +3,16 @@ package fr.free.nrw.commons.edit
 import android.animation.Animator
 import android.animation.Animator.AnimatorListener
 import android.animation.ValueAnimator
+import android.content.ContentResolver
+import android.content.ContentValues
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.media.ExifInterface
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
@@ -18,8 +23,12 @@ import androidx.core.graphics.scaleMatrix
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
 import fr.free.nrw.commons.databinding.ActivityEditBinding
+import fr.free.nrw.commons.filepicker.FilePickerConfiguration
 import timber.log.Timber
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Calendar
+
 
 /**
  * An activity class for editing and rotating images using LLJTran with EXIF attribute preservation.
@@ -30,10 +39,11 @@ import java.io.File
  * the image-saving process.
  */
 class EditActivity : AppCompatActivity() {
-    private var imageUri = ""
+    private var imagePath = ""
     private lateinit var vm: EditViewModel
     private val sourceExifAttributeList = mutableListOf<Pair<String, String?>>()
     private lateinit var binding: ActivityEditBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,9 +51,9 @@ class EditActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.title = ""
         val intent = intent
-        imageUri = intent.getStringExtra("image") ?: ""
+        imagePath = intent.getStringExtra("image") ?: ""
         vm = ViewModelProvider(this).get(EditViewModel::class.java)
-        val sourceExif = imageUri.toUri().path?.let { ExifInterface(it) }
+        val sourceExif = imagePath.toUri().path?.let { ExifInterface(it) }
         val exifTags = arrayOf(
             ExifInterface.TAG_APERTURE,
             ExifInterface.TAG_DATETIME,
@@ -90,7 +100,7 @@ class EditActivity : AppCompatActivity() {
         binding.iv.post(Runnable {
             val options = BitmapFactory.Options()
             options.inJustDecodeBounds = true
-            BitmapFactory.decodeFile(imageUri, options)
+            BitmapFactory.decodeFile(imagePath, options)
 
             val bitmapWidth = options.outWidth
             val bitmapHeight = options.outHeight
@@ -101,7 +111,7 @@ class EditActivity : AppCompatActivity() {
                 val scaleFactor = calculateScaleFactor(bitmapWidth, bitmapHeight, maxBitmapSize)
                 options.inSampleSize = scaleFactor
                 options.inJustDecodeBounds = false
-                val scaledBitmap = BitmapFactory.decodeFile(imageUri, options)
+                val scaledBitmap = BitmapFactory.decodeFile(imagePath, options)
                 binding.iv.setImageBitmap(scaledBitmap)
                 // Update the ImageView with the scaled bitmap
                 val scale = binding.iv.measuredWidth.toFloat() / scaledBitmap.width.toFloat()
@@ -110,7 +120,7 @@ class EditActivity : AppCompatActivity() {
             } else {
 
                 options.inJustDecodeBounds = false
-                val bitmap = BitmapFactory.decodeFile(imageUri, options)
+                val bitmap = BitmapFactory.decodeFile(imagePath, options)
                 binding.iv.setImageBitmap(bitmap)
 
                 val scale = binding.iv.measuredWidth.toFloat() / bitmapWidth.toFloat()
@@ -229,20 +239,44 @@ class EditActivity : AppCompatActivity() {
      */
     fun getRotatedImage() {
 
-        val filePath = imageUri.toUri().path
-        val file = filePath?.let { File(it) }
+        try {
+            val imageFile = File(imagePath)
+
+            val rotatedImageFile = vm.rotateImage(imageRotation, imageFile)
+
+            val rotatedImageOutputFile = getRotatedImageOutputFile(imageFile.extension)
+
+            rotatedImageFile?.copyTo(rotatedImageOutputFile)  //copy rotated image to output file
+            addImageToGallery(
+                this.contentResolver,
+                rotatedImageOutputFile.extension,
+                rotatedImageOutputFile
+            )
 
 
-        val rotatedImage = file?.let { vm.rotateImage(imageRotation, it) }
-        if (rotatedImage == null) {
+            val editedImageExif = ExifInterface(rotatedImageOutputFile.path)
+            copyExifData(editedImageExif)
+            val resultIntent = Intent()
+            resultIntent.putExtra(
+                "editedImageFilePath",
+                rotatedImageOutputFile.toUri().path
+            );
+            setResult(RESULT_OK, resultIntent);
+            finish();
+
+        } catch (e: Exception) {
             Toast.makeText(this, "Failed to rotate to image", Toast.LENGTH_LONG).show()
+            e.printStackTrace()
+            val resultIntent = Intent()
+            resultIntent.putExtra(
+                "editedImageFilePath",
+                "Error"
+            );
+            setResult(RESULT_CANCELED, resultIntent)
+            finish()
+
         }
-        val editedImageExif = rotatedImage?.path?.let { ExifInterface(it) }
-        copyExifData(editedImageExif)
-        val resultIntent = Intent()
-        resultIntent.putExtra("editedImageFilePath", rotatedImage?.toUri()?.path ?: "Error");
-        setResult(RESULT_OK, resultIntent);
-        finish();
+
     }
 
     /**
@@ -293,6 +327,66 @@ class EditActivity : AppCompatActivity() {
         return scaleFactor
     }
 
+    /*
+        get path to where app image is saved on device,
+        capture and rotated image will be saved there
+     */
 
+    private fun getRotatedImageOutputFile(inputImageExtension: String): File {
+
+        val rotatedImageName = String.format(
+            "IMG_%s.%s", SimpleDateFormat("yyyyMMdd_HHmmss").format(
+                Calendar.getInstance().time
+            ), inputImageExtension
+        )
+
+
+        val rotatedImageFolderName = FilePickerConfiguration(this).folderName
+        val rotatedImageFolderFile = File(
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+            rotatedImageFolderName
+        )
+        if (!rotatedImageFolderFile.exists()) {
+            rotatedImageFolderFile.mkdirs()
+        }
+
+        val rotateImageFile = File(rotatedImageFolderFile, rotatedImageName)
+        return rotateImageFile
+    }
+
+    /*
+        To enable Custom Picker to show the  rotated image
+        it must be add to the media store
+     */
+    private fun addImageToGallery(
+        contentResolver: ContentResolver,
+        imageExtension: String,
+        imageFile: File
+    ) {
+        val values = ContentValues()
+        values.put(MediaStore.Images.Media.TITLE, imageFile.name)
+        values.put(MediaStore.Images.Media.DISPLAY_NAME, imageFile.name)
+        values.put(MediaStore.Images.Media.DESCRIPTION, "")
+        values.put(MediaStore.Images.Media.MIME_TYPE, "image/$imageExtension")
+        values.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis())
+        values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
+        values.put(MediaStore.Images.Media.DATA, imageFile.toString())
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            values.put(
+                MediaStore.MediaColumns.RELATIVE_PATH, imageFile.parent
+            )
+            values.put(MediaStore.MediaColumns.IS_PENDING, 1)
+            val uri =
+                contentResolver.insert(
+                    MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL),
+                    values
+                )
+            values.clear()
+            values.put(MediaStore.Images.Media.IS_PENDING, 0)
+            contentResolver.update(uri!!, values, null, null)
+        } else {
+            contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+        }
+    }
 
 }
