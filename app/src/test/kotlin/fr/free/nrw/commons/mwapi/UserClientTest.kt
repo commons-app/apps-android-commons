@@ -36,7 +36,7 @@ class UserClientTest{
         Mockito.`when`(userInterface!!.getUserBlockInfo())
                 .thenReturn(Observable.just(mockResponse))
 
-        val isBanned = userClient!!.isUserBlockedFromCommons.blockingGet()
+        val isBanned = userClient!!.isUserBlockedFromCommons().blockingGet()
         assertTrue(isBanned)
     }
 
@@ -54,7 +54,7 @@ class UserClientTest{
         Mockito.`when`(userInterface!!.getUserBlockInfo())
                 .thenReturn(Observable.just(mockResponse))
 
-        val isBanned = userClient!!.isUserBlockedFromCommons.blockingGet()
+        val isBanned = userClient!!.isUserBlockedFromCommons().blockingGet()
         assertTrue(isBanned)
     }
 
@@ -69,7 +69,7 @@ class UserClientTest{
         Mockito.`when`(userInterface!!.getUserBlockInfo())
                 .thenReturn(Observable.just(mockResponse))
 
-        val isBanned = userClient!!.isUserBlockedFromCommons.blockingGet()
+        val isBanned = userClient!!.isUserBlockedFromCommons().blockingGet()
         assertFalse(isBanned)
     }
 
