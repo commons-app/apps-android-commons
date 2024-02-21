@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.Context;
+import android.net.Uri;
 import fr.free.nrw.commons.location.LatLng;
 import io.reactivex.Observable;
 import java.io.BufferedInputStream;
@@ -21,9 +22,11 @@ import timber.log.Timber;
 @Singleton
 public class FileUtilsWrapper {
 
-    @Inject
-    public FileUtilsWrapper() {
+    private final Context context;
 
+    @Inject
+    public FileUtilsWrapper(final Context context) {
+        this.context = context;
     }
 
     public String getFileExt(String fileName) {
@@ -42,11 +45,18 @@ public class FileUtilsWrapper {
         return FileUtils.getGeolocationOfFile(filePath, inAppPictureLocation);
     }
 
+    public String getMimeType(File file) {
+        return getMimeType(Uri.parse(file.getPath()));
+    }
+
+    public String getMimeType(Uri uri) {
+        return FileUtils.getMimeType(context, uri);
+    }
 
     /**
      * Takes a file as input and returns an Observable of files with the specified chunk size
      */
-    public List<File> getFileChunks(Context context, File file, final int chunkSize)
+    public List<File> getFileChunks(File file, final int chunkSize)
         throws IOException {
         final byte[] buffer = new byte[chunkSize];
 
@@ -56,7 +66,7 @@ public class FileUtilsWrapper {
             final List<File> buffers = new ArrayList<>();
             int size;
             while ((size = bis.read(buffer)) > 0) {
-                buffers.add(writeToFile(context, Arrays.copyOf(buffer, size), file.getName(),
+                buffers.add(writeToFile(Arrays.copyOf(buffer, size), file.getName(),
                     getFileExt(file.getName())));
             }
             return buffers;
@@ -66,7 +76,7 @@ public class FileUtilsWrapper {
     /**
      * Create a temp file containing the passed byte data.
      */
-    private File writeToFile(Context context, final byte[] data, final String fileName,
+    private File writeToFile(final byte[] data, final String fileName,
         String fileExtension)
         throws IOException {
         final File file = File.createTempFile(fileName, fileExtension, context.getCacheDir());

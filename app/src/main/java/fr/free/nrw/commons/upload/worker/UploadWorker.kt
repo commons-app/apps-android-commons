@@ -43,7 +43,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-import java.net.SocketTimeoutException
 import java.util.*
 import java.util.regex.Pattern
 import javax.inject.Inject
@@ -337,7 +336,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
         try {
             //Upload the file to stash
             val stashUploadResult = uploadClient.uploadFileToStash(
-                appContext, filename, contribution, notificationProgressUpdater
+                filename!!, contribution, notificationProgressUpdater
             ).onErrorReturn{
                 return@onErrorReturn StashUploadResult(StashUploadState.FAILED,fileKey = null)
             }.blockingSingle()
