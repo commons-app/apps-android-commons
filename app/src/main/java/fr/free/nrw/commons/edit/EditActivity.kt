@@ -9,6 +9,7 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.media.ExifInterface
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -372,18 +373,20 @@ class EditActivity : AppCompatActivity() {
         values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
         values.put(MediaStore.Images.Media.DATA, imageFile.toString())
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val folder=FilePickerConfiguration(this).folderName
             values.put(
-                MediaStore.MediaColumns.RELATIVE_PATH, imageFile.parent
+                MediaStore.MediaColumns.RELATIVE_PATH,
+                Environment.DIRECTORY_PICTURES + "/$folder"
             )
             values.put(MediaStore.MediaColumns.IS_PENDING, 1)
-            val uri =
-                contentResolver.insert(
-                    MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL),
-                    values
-                )
+            val uri=
+                contentResolver.insert(MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL), values)
             values.clear()
             values.put(MediaStore.Images.Media.IS_PENDING, 0)
-            contentResolver.update(uri!!, values, null, null)
+            if (uri != null) {
+                contentResolver.update(uri, values, null, null)
+            }
+
         } else {
             contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
         }
