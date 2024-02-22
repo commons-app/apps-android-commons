@@ -682,7 +682,6 @@
   <string name="leaderboard_nearby">Поблизости</string>
   <string name="leaderboard_used">Использовано</string>
   <string name="leaderboard_my_rank_button_text">Мой ранг</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Включен режим ограниченного подключения!</string>
   <string name="limited_connection_disabled">Отключен режим ограниченного подключения. Незавершенные загрузки будут возобновлены сейчас.</string>
   <string name="limited_connection_mode">Режим ограниченного подключения</string>
