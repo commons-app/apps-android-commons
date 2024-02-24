@@ -52,7 +52,7 @@ import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
-import org.wikipedia.dataclient.WikiSite;
+import fr.free.nrw.commons.wikidata.model.WikiSite;
 
 
 /**
@@ -154,6 +154,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
         contributionsListPresenter.onAttachView(this);
         binding.fabCustomGallery.setOnClickListener(v -> launchCustomSelector());
+        binding.fabCustomGallery.setOnLongClickListener(view -> {
+            ViewUtil.showShortToast(getContext(),R.string.custom_selector_title);
+            return true;
+        });
 
         if (Objects.equals(sessionManager.getUserName(), userName)) {
             binding.tvContributionsOfUser.setVisibility(GONE);
@@ -325,9 +329,17 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
             controller.initiateCameraPick(getActivity(), inAppCameraLocationPermissionLauncher);
             animateFAB(isFabOpen);
         });
+        binding.fabCamera.setOnLongClickListener(view -> {
+            ViewUtil.showShortToast(getContext(),R.string.add_contribution_from_camera);
+            return true;
+        });
         binding.fabGallery.setOnClickListener(view -> {
             controller.initiateGalleryPick(getActivity(), true);
             animateFAB(isFabOpen);
+        });
+        binding.fabGallery.setOnLongClickListener(view -> {
+            ViewUtil.showShortToast(getContext(),R.string.menu_from_gallery);
+            return true;
         });
     }
 

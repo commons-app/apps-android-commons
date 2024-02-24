@@ -10,7 +10,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
-import org.wikipedia.edit.Edit
+import fr.free.nrw.commons.wikidata.model.edit.Edit
 
 class PageEditClientTest {
     @Mock

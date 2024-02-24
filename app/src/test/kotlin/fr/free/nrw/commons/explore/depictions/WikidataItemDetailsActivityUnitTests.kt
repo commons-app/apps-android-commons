@@ -8,9 +8,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.explore.depictions.media.DepictedImagesFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
@@ -28,7 +29,6 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
-import org.wikipedia.AppAdapter
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -65,7 +65,7 @@ class WikidataItemDetailsActivityUnitTests {
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
         val intent = Intent(
             ApplicationProvider.getApplicationContext(),
             WikidataItemDetailsActivity::class.java

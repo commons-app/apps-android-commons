@@ -11,7 +11,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -90,6 +92,12 @@ class ImageFileLoader(val context: Context) : CoroutineScope{
                     }
 
                 if (file != null && file.exists() && name != null && path != null && bucketName != null) {
+                    val extension = path.substringAfterLast(".", "")
+                    // Check if the extension is one of the allowed types
+                    if (extension.lowercase(Locale.ROOT) !in arrayOf("jpg", "jpeg", "png", "svg", "gif", "tiff", "webp", "xcf")) {
+                        continue
+                    }
+
                     val uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
 
                     val calendar = Calendar.getInstance()

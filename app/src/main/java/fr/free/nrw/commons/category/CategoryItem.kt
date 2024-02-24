@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.category
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class CategoryItem(val name: String, val description: String?,

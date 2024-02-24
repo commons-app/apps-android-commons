@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.bookmarks.BookmarkFragment;
 import fr.free.nrw.commons.explore.ExploreFragment;
-import org.wikipedia.model.EnumCode;
-import org.wikipedia.model.EnumCodeMap;
+import fr.free.nrw.commons.wikidata.model.EnumCode;
+import fr.free.nrw.commons.wikidata.model.EnumCodeMap;
 
 
 public enum NavTabLoggedOut implements EnumCode {

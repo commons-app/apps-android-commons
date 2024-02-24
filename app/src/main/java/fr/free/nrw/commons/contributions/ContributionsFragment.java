@@ -536,11 +536,23 @@ public class ContributionsFragment
 
     private void updateNearbyNotification(@Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
         if (nearbyPlacesInfo != null && nearbyPlacesInfo.placeList != null && nearbyPlacesInfo.placeList.size() > 0) {
-            Place closestNearbyPlace = nearbyPlacesInfo.placeList.get(0);
-            String distance = formatDistanceBetween(curLatLng, closestNearbyPlace.location);
-            closestNearbyPlace.setDistance(distance);
-            direction = (float) computeBearing(curLatLng, closestNearbyPlace.location);
-            nearbyNotificationCardView.updateContent(closestNearbyPlace, direction);
+            Place closestNearbyPlace = null;
+            // Find the first nearby place that has no image and exists
+            for (Place place : nearbyPlacesInfo.placeList) {
+                if (place.pic.equals("") && place.exists) {
+                    closestNearbyPlace = place;
+                    break;
+                }
+            }
+
+            if(closestNearbyPlace == null) {
+                nearbyNotificationCardView.setVisibility(View.GONE);
+            }else{
+                String distance = formatDistanceBetween(curLatLng, closestNearbyPlace.location);
+                closestNearbyPlace.setDistance(distance);
+                direction = (float) computeBearing(curLatLng, closestNearbyPlace.location);
+                nearbyNotificationCardView.updateContent(closestNearbyPlace);
+            }
         } else {
             // Means that no close nearby place is found
             nearbyNotificationCardView.setVisibility(View.GONE);

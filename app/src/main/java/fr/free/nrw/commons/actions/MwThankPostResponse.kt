@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.actions
 
-import org.wikipedia.dataclient.mwapi.MwResponse
+import fr.free.nrw.commons.wikidata.mwapi.MwResponse
 
 /**
  * Response of the Thanks API.

@@ -5,7 +5,7 @@ apply from: '../gitutils.gradle'
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
 apply from: "$rootDir/jacoco.gradle"
 
 def isRunningOnTravisAndIsNotPRBuild = System.getenv("CI") == "true" && file('../play.p12').exists()
@@ -16,7 +16,6 @@ if (isRunningOnTravisAndIsNotPRBuild) {
 
 dependencies {
 
-    implementation project(':wikimedia-data-client')
     // Utils
     implementation 'in.yuvi:http.fluent:1.3'
     implementation 'com.google.code.gson:gson:2.8.5'
@@ -312,7 +311,6 @@ android {
             buildConfigField "String", "TEST_USERNAME", "\"" + getTestUserName() + "\""
             buildConfigField "String", "TEST_PASSWORD", "\"" + getTestPassword() + "\""
             buildConfigField "String", "DEPICTS_PROPERTY", "\"P180\""
-            buildConfigField "String", "MapboxAccessToken", "\"$MAPBOX_ACCESS_TOKEN\""
             dimension 'tier'
         }
 
@@ -348,7 +346,6 @@ android {
             buildConfigField "String", "TEST_USERNAME", "\"" + getTestUserName() + "\""
             buildConfigField "String", "TEST_PASSWORD", "\"" + getTestPassword() + "\""
             buildConfigField "String", "DEPICTS_PROPERTY", "\"P245962\""
-            buildConfigField "String", "MapboxAccessToken", "\"$MAPBOX_ACCESS_TOKEN\""
             dimension 'tier'
         }
     }
@@ -357,6 +354,9 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 
     buildToolsVersion buildToolsVersion
@@ -397,8 +397,4 @@ if (isRunningOnTravisAndIsNotPRBuild) {
             versionNameOverride = "$versionNameOverride.$versionCode"
         }
     }
-}
-
-androidExtensions {
-    experimental = true
 }

@@ -5,10 +5,10 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.category.ContinuationClient
 import fr.free.nrw.commons.explore.media.MediaConverter
 import fr.free.nrw.commons.utils.CommonsDateUtil
+import fr.free.nrw.commons.wikidata.model.Entities
 import io.reactivex.Single
-import org.wikipedia.dataclient.mwapi.MwQueryPage
-import org.wikipedia.dataclient.mwapi.MwQueryResponse
-import org.wikipedia.wikidata.Entities
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -127,6 +127,17 @@ class MediaClient @Inject constructor(
      */
     fun getMedia(titles: String?): Single<Media> {
         return responseMapper(mediaInterface.getMedia(titles))
+            .map { it.first() }
+    }
+
+    /**
+     * Fetches Media object from the imageInfo API but suppress (known) errors
+     *
+     * @param titles the tiles to be searched for. Can be filename or template name
+     * @return
+     */
+    fun getMediaSuppressingErrors(titles: String?): Single<Media> {
+        return responseMapper(mediaInterface.getMediaSuppressingErrors(titles))
             .map { it.first() }
     }
 
