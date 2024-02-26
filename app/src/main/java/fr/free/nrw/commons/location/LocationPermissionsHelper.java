@@ -34,8 +34,8 @@ public class LocationPermissionsHelper {
      * Ask for location permission if the user agrees on attaching location with pictures and the
      * app does not have the access to location
      *
-     * @param dialogTitleResource
-     * @param dialogTextResource
+     * @param dialogTitleResource Resource id of the title of the dialog 
+     * @param dialogTextResource Resource id of the text of the dialog 
      */
     public void requestForLocationAccess(
         int dialogTitleResource,
