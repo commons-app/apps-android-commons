@@ -2,6 +2,7 @@ package fr.free.nrw.commons.wikidata
 
 import android.content.Context
 import com.google.gson.Gson
+import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.kvstore.JsonKvStore
@@ -61,7 +62,7 @@ class WikidataEditServiceTest {
     fun createImageClaim() {
         whenever(directKvStore.getBoolean("Picture_Has_Correct_Location", true))
             .thenReturn(true)
-        whenever(wikibaseClient.getFileEntityId(any())).thenReturn(Observable.just(1L))
+        whenever(wikibaseClient.getFileEntityId(anyOrNull())).thenReturn(Observable.just(1L))
         whenever(wikidataClient.setClaim(any(), anyString()))
             .thenReturn(Observable.just(1L))
         val wikidataPlace: WikidataPlace = mock()

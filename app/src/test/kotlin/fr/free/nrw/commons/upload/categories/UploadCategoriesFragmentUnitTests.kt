@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.os.Looper
 import android.text.Editable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -116,7 +117,6 @@ class UploadCategoriesFragmentUnitTests {
         Whitebox.setInternalState(fragment, "pbCategories", pbCategories)
         Whitebox.setInternalState(fragment, "tilContainerEtSearch", tilContainerEtSearch)
         Whitebox.setInternalState(fragment, "adapter", adapter)
-        Whitebox.setInternalState(fragment, "callback", callback)
         Whitebox.setInternalState(fragment, "presenter", presenter)
         Whitebox.setInternalState(fragment, "etSearch", etSearch)
         Whitebox.setInternalState(fragment, "rvCategories", rvCategories)
@@ -358,6 +358,17 @@ class UploadCategoriesFragmentUnitTests {
     fun `Test init when media is not null`() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         Whitebox.setInternalState(fragment, "media", media)
+        val method: Method = UploadCategoriesFragment::class.java.getDeclaredMethod(
+            "init"
+        )
+        method.isAccessible = true
+        method.invoke(fragment)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Test init when callback is null`() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
         val method: Method = UploadCategoriesFragment::class.java.getDeclaredMethod(
             "init"
         )
