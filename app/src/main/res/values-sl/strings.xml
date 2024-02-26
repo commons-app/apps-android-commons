@@ -269,7 +269,7 @@
   <string name="upload_problem_fbmd">Nalagajte samo slike, ki ste jih ustvarili sami. Ne nalagajte slik, ki ste jih našli na Facebook računih drugih ljudi.</string>
   <string name="upload_problem_do_you_continue">Ali še vedno želite naložiti to sliko?</string>
   <string name="upload_connection_error_alert_title">Napaka povezave</string>
-  <string name="upload_connection_error_alert_detail">Za postopek nalaganja je potrebna aktivna internetna povezava. Prosimo, preverite omrežno povezavo.</string>
+  <string name="upload_connection_error_alert_detail">Za postopek nalaganja je potreben aktiven internetni dostop. Prosimo, preverite omrežno povezavo.</string>
   <string name="upload_problem_image">Najdene težave s sliko</string>
   <string name="internet_downloaded">Nalagajte samo slike, ki ste jih ustvarili sami. Ne nalagajte slik, ki ste jih prenesli s spleta.</string>
   <string name="use_external_storage">Shrani posnetke v aplikaciji</string>
