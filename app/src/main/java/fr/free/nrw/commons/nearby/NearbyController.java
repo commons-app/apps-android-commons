@@ -51,16 +51,17 @@ public class NearbyController extends MapController {
     /**
      * Prepares Place list to make their distance information update later.
      *
-     * @param curLatLng current location for user
-     * @param searchLatLng the location user wants to search around
+     * @param curLatLng           current location for user
+     * @param searchLatLng        the location user wants to search around
      * @param returnClosestResult if this search is done to find closest result or all results
-     * @param customQuery if this search is done via an advanced query
-     * @return NearbyPlacesInfo a variable holds Place list without distance information
-     * and boundary coordinates of current Place List
+     * @param customQuery         if this search is done via an advanced query
+     * @return NearbyPlacesInfo a variable holds Place list without distance information and
+     * boundary coordinates of current Place List
      */
-    public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng curLatLng, final LatLng searchLatLng,
+    public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng curLatLng,
+        final LatLng searchLatLng,
         final boolean returnClosestResult, final boolean checkingAroundCurrentLocation,
-        final boolean shouldQueryForMonuments, @Nullable final String customQuery) throws Exception {
+        @Nullable final String customQuery) throws Exception {
 
         Timber.d("Loading attractions near %s", searchLatLng);
         NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();
@@ -70,15 +71,14 @@ public class NearbyController extends MapController {
         }
         List<Place> places = nearbyPlaces
             .radiusExpander(searchLatLng, Locale.getDefault().getLanguage(), returnClosestResult,
-                shouldQueryForMonuments, customQuery);
+                customQuery);
 
         if (null != places && places.size() > 0) {
             LatLng[] boundaryCoordinates = {
-                    places.get(0).location, // south
-                    places.get(0).location, // north
-                    places.get(0).location, // west
-                    places.get(0).location};// east, init with a random location
-
+                places.get(0).location, // south
+                places.get(0).location, // north
+                places.get(0).location, // west
+                places.get(0).location};// east, init with a random location
 
             if (curLatLng != null) {
                 Timber.d("Sorting places by distance...");
@@ -100,11 +100,11 @@ public class NearbyController extends MapController {
                     }
                 }
                 Collections.sort(places,
-                        (lhs, rhs) -> {
-                            double lhsDistance = distances.get(lhs);
-                            double rhsDistance = distances.get(rhs);
-                            return (int) (lhsDistance - rhsDistance);
-                        }
+                    (lhs, rhs) -> {
+                        double lhsDistance = distances.get(lhs);
+                        double rhsDistance = distances.get(rhs);
+                        return (int) (lhsDistance - rhsDistance);
+                    }
                 );
             }
             nearbyPlacesInfo.curLatLng = curLatLng;
@@ -116,11 +116,11 @@ public class NearbyController extends MapController {
             if (!returnClosestResult) {
                 // To remember latest search either around user or any point on map
                 latestSearchLocation = searchLatLng;
-                latestSearchRadius = nearbyPlaces.radius*1000; // to meter
+                latestSearchRadius = nearbyPlaces.radius * 1000; // to meter
 
                 // Our radius searched around us, will be used to understand when user search their own location, we will follow them
                 if (checkingAroundCurrentLocation) {
-                    currentLocationSearchRadius = nearbyPlaces.radius*1000; // to meter
+                    currentLocationSearchRadius = nearbyPlaces.radius * 1000; // to meter
                     currentLocation = curLatLng;
                 }
             }
@@ -134,15 +134,20 @@ public class NearbyController extends MapController {
      * Prepares Place list to make their distance information update later.
      *
      * @param curLatLng                     The current latitude and longitude.
-     * @param screenTopRight                The top right corner of the screen (latitude, longitude).
-     * @param screenBottomLeft              The bottom left corner of the screen (latitude, longitude).
+     * @param screenTopRight                The top right corner of the screen (latitude,
+     *                                      longitude).
+     * @param screenBottomLeft              The bottom left corner of the screen (latitude,
+     *                                      longitude).
      * @param searchLatLng                  The latitude and longitude of the search location.
      * @param returnClosestResult           Flag indicating whether to return the closest result.
-     * @param checkingAroundCurrentLocation Flag indicating whether to check around the current location.
-     * @param shouldQueryForMonuments       Flag indicating whether to include monuments in the query.
-     * @param customQuery                   Optional custom SPARQL query to use instead of default queries.
-     * @return                              An object containing information about nearby places.
-     * @throws Exception                    If an error occurs during the retrieval process.
+     * @param checkingAroundCurrentLocation Flag indicating whether to check around the current
+     *                                      location.
+     * @param shouldQueryForMonuments       Flag indicating whether to include monuments in the
+     *                                      query.
+     * @param customQuery                   Optional custom SPARQL query to use instead of default
+     *                                      queries.
+     * @return An object containing information about nearby places.
+     * @throws Exception If an error occurs during the retrieval process.
      */
     public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng curLatLng,
         final fr.free.nrw.commons.location.LatLng screenTopRight,
@@ -228,10 +233,10 @@ public class NearbyController extends MapController {
      */
     public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng curLatLng,
         final LatLng searchLatLng,
-        final boolean returnClosestResult, final boolean checkingAroundCurrentLocation,
-        final boolean shouldQueryForMonuments) throws Exception {
+        final boolean returnClosestResult, final boolean checkingAroundCurrentLocation)
+        throws Exception {
         return loadAttractionsFromLocation(curLatLng, searchLatLng, returnClosestResult,
-            checkingAroundCurrentLocation, shouldQueryForMonuments, null);
+            checkingAroundCurrentLocation, null);
     }
 
     /**
@@ -242,10 +247,10 @@ public class NearbyController extends MapController {
      * @return BaseMarkerOptions list that holds nearby places
      */
     public static List<NearbyBaseMarker> loadAttractionsFromLocationToBaseMarkerOptions(
-            LatLng curLatLng,
-            List<Place> placeList,
-            Context context,
-            List<Place> bookmarkplacelist) {
+        LatLng curLatLng,
+        List<Place> placeList,
+        Context context,
+        List<Place> bookmarkplacelist) {
         List<NearbyBaseMarker> baseMarkerOptions = new ArrayList<>();
 
         if (placeList == null) {
@@ -261,11 +266,11 @@ public class NearbyController extends MapController {
         vectorDrawable = null;
         try {
             vectorDrawable = VectorDrawableCompat.create(
-                    context.getResources(), R.drawable.ic_custom_map_marker, context.getTheme());
+                context.getResources(), R.drawable.ic_custom_map_marker, context.getTheme());
             vectorDrawableGreen = VectorDrawableCompat.create(
-                    context.getResources(), R.drawable.ic_custom_map_marker_green, context.getTheme());
+                context.getResources(), R.drawable.ic_custom_map_marker_green, context.getTheme());
             vectorDrawableGrey = VectorDrawableCompat.create(
-                    context.getResources(), R.drawable.ic_custom_map_marker_grey, context.getTheme());
+                context.getResources(), R.drawable.ic_custom_map_marker_grey, context.getTheme());
             vectorDrawableMonuments = VectorDrawableCompat
                 .create(context.getResources(), R.drawable.ic_custom_map_marker_monuments,
                     context.getTheme());
@@ -294,8 +299,7 @@ public class NearbyController extends MapController {
                 if (place.isMonument()) {
                     nearbyBaseMarker.icon(IconFactory.getInstance(context)
                         .fromBitmap(iconMonuments));
-                }
-                else if (!place.pic.trim().isEmpty()) {
+                } else if (!place.pic.trim().isEmpty()) {
                     if (iconGreen != null) {
                         nearbyBaseMarker.icon(IconFactory.getInstance(context)
                             .fromBitmap(iconGreen));
@@ -318,14 +322,17 @@ public class NearbyController extends MapController {
 
     /**
      * Updates makerLabelList item isBookmarked value
-     * @param place place which is bookmarked
+     *
+     * @param place        place which is bookmarked
      * @param isBookmarked true is bookmarked, false if bookmark removed
      */
     @MainThread
     public static void updateMarkerLabelListBookmark(Place place, boolean isBookmarked) {
-        for (ListIterator<MarkerPlaceGroup> iter = markerLabelList.listIterator(); iter.hasNext();) {
+        for (ListIterator<MarkerPlaceGroup> iter = markerLabelList.listIterator();
+            iter.hasNext(); ) {
             MarkerPlaceGroup markerPlaceGroup = iter.next();
-            if (markerPlaceGroup.getPlace().getWikiDataEntityId().equals(place.getWikiDataEntityId())) {
+            if (markerPlaceGroup.getPlace().getWikiDataEntityId()
+                .equals(place.getWikiDataEntityId())) {
                 iter.set(new MarkerPlaceGroup(markerPlaceGroup.getMarker(), isBookmarked, place));
             }
         }

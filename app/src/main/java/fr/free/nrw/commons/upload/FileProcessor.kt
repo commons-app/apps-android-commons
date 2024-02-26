@@ -49,8 +49,10 @@ class FileProcessor @Inject constructor(
     /**
      * Processes filePath coordinates, either from EXIF data or user location
      */
-    fun processFileCoordinates(similarImageInterface: SimilarImageInterface,
-                               filePath: String?, inAppPictureLocation: LatLng?)
+    fun processFileCoordinates(
+        similarImageInterface: SimilarImageInterface,
+        filePath: String?, inAppPictureLocation: LatLng?
+    )
             : ImageCoordinates {
         val exifInterface: ExifInterface? = try {
             ExifInterface(filePath!!)
@@ -207,8 +209,7 @@ class FileProcessor @Inject constructor(
                     okHttpJsonApiClient.getNearbyPlaces(
                         imageCoordinates.latLng,
                         Locale.getDefault().language,
-                        it,
-                        false
+                        it
                     )
                 }
             }

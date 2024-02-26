@@ -269,16 +269,15 @@ public class OkHttpJsonApiClient {
     /**
      * Make API Call to get Nearby Places
      *
-     * @param cur                     Search lat long
-     * @param language                Language
-     * @param radius                  Search Radius
-     * @param shouldQueryForMonuments : Should we query for monuments
+     * @param cur      Search lat long
+     * @param language Language
+     * @param radius   Search Radius
      * @return
      * @throws Exception
      */
     @Nullable
     public List<Place> getNearbyPlaces(final LatLng cur, final String language, final double radius,
-        final boolean shouldQueryForMonuments, final String customQuery)
+        final String customQuery)
         throws Exception {
 
         Timber.d("Fetching nearby items at radius %s", radius);
@@ -286,10 +285,9 @@ public class OkHttpJsonApiClient {
         final String wikidataQuery;
         if (customQuery != null) {
             wikidataQuery = customQuery;
-        } else if (!shouldQueryForMonuments) {
-            wikidataQuery = FileUtils.readFromResource("/queries/radius_query_for_upload_wizard.rq");
         } else {
-            wikidataQuery = FileUtils.readFromResource("/queries/nearby_query_monuments.rq");
+            wikidataQuery = FileUtils.readFromResource(
+                "/queries/radius_query_for_upload_wizard.rq");
         }
         final String query = wikidataQuery
             .replace("${RAD}", String.format(Locale.ROOT, "%.2f", radius))
@@ -315,11 +313,7 @@ public class OkHttpJsonApiClient {
             final List<Place> places = new ArrayList<>();
             for (final NearbyResultItem item : bindings) {
                 final Place placeFromNearbyItem = Place.from(item);
-                if (shouldQueryForMonuments && item.getMonument() != null) {
-                    placeFromNearbyItem.setMonument(true);
-                } else {
-                    placeFromNearbyItem.setMonument(false);
-                }
+                placeFromNearbyItem.setMonument(false);
                 places.add(placeFromNearbyItem);
             }
             return places;
@@ -330,13 +324,14 @@ public class OkHttpJsonApiClient {
     /**
      * Retrieves nearby places based on screen coordinates and optional query parameters.
      *
-     * @param screenTopRight       The top right corner of the screen (latitude, longitude).
-     * @param screenBottomLeft     The bottom left corner of the screen (latitude, longitude).
-     * @param language             The language for the query.
-     * @param shouldQueryForMonuments  Flag indicating whether to include monuments in the query.
-     * @param customQuery          Optional custom SPARQL query to use instead of default queries.
-     * @return                     A list of nearby places.
-     * @throws Exception           If an error occurs during the retrieval process.
+     * @param screenTopRight          The top right corner of the screen (latitude, longitude).
+     * @param screenBottomLeft        The bottom left corner of the screen (latitude, longitude).
+     * @param language                The language for the query.
+     * @param shouldQueryForMonuments Flag indicating whether to include monuments in the query.
+     * @param customQuery             Optional custom SPARQL query to use instead of default
+     *                                queries.
+     * @return A list of nearby places.
+     * @throws Exception If an error occurs during the retrieval process.
      */
     @Nullable
     public List<Place> getNearbyPlaces(
@@ -353,7 +348,8 @@ public class OkHttpJsonApiClient {
         } else if (!shouldQueryForMonuments) {
             wikidataQuery = FileUtils.readFromResource("/queries/rectangle_query_for_nearby.rq");
         } else {
-            wikidataQuery = FileUtils.readFromResource("/queries/nearby_query_monuments.rq");
+            wikidataQuery = FileUtils.readFromResource(
+                "/queries/rectangle_query_for_nearby_monuments.rq");
         }
 
         final double westCornerLat = screenTopRight.getLatitude();
@@ -400,18 +396,16 @@ public class OkHttpJsonApiClient {
     /**
      * Make API Call to get Nearby Places Implementation does not expects a custom query
      *
-     * @param cur                     Search lat long
-     * @param language                Language
-     * @param radius                  Search Radius
-     * @param shouldQueryForMonuments : Should we query for monuments
+     * @param cur      Search lat long
+     * @param language Language
+     * @param radius   Search Radius
      * @return
      * @throws Exception
      */
     @Nullable
-    public List<Place> getNearbyPlaces(final LatLng cur, final String language, final double radius,
-        final boolean shouldQueryForMonuments)
+    public List<Place> getNearbyPlaces(final LatLng cur, final String language, final double radius)
         throws Exception {
-        return getNearbyPlaces(cur, language, radius, shouldQueryForMonuments, null);
+        return getNearbyPlaces(cur, language, radius, null);
     }
 
     /**
