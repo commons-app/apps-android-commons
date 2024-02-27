@@ -24,7 +24,6 @@ import fr.free.nrw.commons.notification.models.Notification
 import fr.free.nrw.commons.notification.models.NotificationType
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -39,6 +38,9 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -141,7 +143,7 @@ class ContributionsFragmentUnitTests {
     @Throws(Exception::class)
     fun checkFragmentNotNull() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        Assert.assertNotNull(fragment)
+        assertThat(fragment, notNullValue())
     }
 
     @Test
@@ -149,7 +151,7 @@ class ContributionsFragmentUnitTests {
     fun testGetMediaDetailPagerFragment() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         Whitebox.setInternalState(fragment, "mediaDetailPagerFragment", mediaDetailPagerFragment)
-        Assert.assertEquals(fragment.mediaDetailPagerFragment, mediaDetailPagerFragment)
+        assertThat(fragment.mediaDetailPagerFragment, equalTo( mediaDetailPagerFragment))
     }
 
     @Test

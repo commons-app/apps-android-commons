@@ -19,7 +19,6 @@ import fr.free.nrw.commons.TestUtility.setFinalStatic
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.profile.ProfileActivity
 import io.reactivex.disposables.CompositeDisposable
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -36,6 +35,9 @@ import org.robolectric.annotation.LooperMode
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
+import org.hamcrest.CoreMatchers.nullValue
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -129,7 +131,7 @@ class ContributionViewHolderUnitTests {
     @Test
     @Throws(Exception::class)
     fun checkNotNull() {
-        Assert.assertNotNull(contributionViewHolder)
+        assertThat(contributionViewHolder, notNullValue())
     }
 
     @Test
@@ -332,7 +334,7 @@ class ContributionViewHolderUnitTests {
         `when`(contribution.media.thumbUrl).thenReturn("https://demo/sample.png")
         `when`(contribution.localUri).thenReturn(null)
         contributionViewHolder.init(0, contribution)
-        Assert.assertNotNull(contributionViewHolder.imageRequest)
+        assertThat(contributionViewHolder.imageRequest, notNullValue())
     }
 
     @Test
@@ -343,7 +345,7 @@ class ContributionViewHolderUnitTests {
         `when`(contribution.media.thumbUrl).thenReturn(null)
         `when`(contribution.localUri).thenReturn(null)
         contributionViewHolder.init(0, contribution)
-        Assert.assertNull(contributionViewHolder.imageRequest)
+        assertThat(contributionViewHolder.imageRequest, nullValue())
     }
 
     @Test
@@ -354,6 +356,6 @@ class ContributionViewHolderUnitTests {
         `when`(contribution.media.thumbUrl).thenReturn(null)
         `when`(contribution.localUri).thenReturn(Uri.parse("/data/android/demo.png"))
         contributionViewHolder.init(0, contribution)
-        Assert.assertNotNull(contributionViewHolder.imageRequest)
+        assertThat(contributionViewHolder.imageRequest, notNullValue())
     }
 }

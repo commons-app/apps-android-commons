@@ -21,7 +21,6 @@ import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.navtab.NavTabLayout
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -37,6 +36,8 @@ import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.fakes.RoboMenuItem
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 
@@ -116,7 +117,7 @@ class MainActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun checkActivityNotNull() {
-        Assert.assertNotNull(activity)
+        assertThat(activity, notNullValue())
     }
 
     @Test
