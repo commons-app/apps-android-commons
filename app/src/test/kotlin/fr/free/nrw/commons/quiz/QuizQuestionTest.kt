@@ -2,7 +2,6 @@ package fr.free.nrw.commons.quiz
 
 import android.net.Uri
 import fr.free.nrw.commons.TestCommonsApplication
-import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -10,6 +9,8 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -39,13 +40,13 @@ class QuizQuestionTest {
 
     @Test
     fun testGetUrl() {
-        assertEquals(quizQuestion.getUrl(), Uri.parse(QUESTION_URL_SAMPLE_VALUE_ONE))
+        assertThat(quizQuestion.getUrl(), equalTo( Uri.parse(QUESTION_URL_SAMPLE_VALUE_ONE)))
     }
 
     @Test
     fun testSetUrl() {
         quizQuestion.setUrl(QUESTION_URL_SAMPLE_VALUE_TWO)
-        assertEquals(quizQuestion.getUrl(), Uri.parse(QUESTION_URL_SAMPLE_VALUE_TWO))
+        assertThat(quizQuestion.getUrl(), equalTo( Uri.parse(QUESTION_URL_SAMPLE_VALUE_TWO)))
     }
 
 }

@@ -1,13 +1,14 @@
 package fr.free.nrw.commons.quiz
 
 import android.content.Context
-import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.any
 import org.mockito.MockitoAnnotations
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
 
 
 class QuizControllerTest {
@@ -33,7 +34,7 @@ class QuizControllerTest {
 
     @Test
     fun testGetQuiz() {
-        assertNotNull(quizController.getQuiz())
+        assertThat(quizController.getQuiz(), notNullValue())
     }
 
 }

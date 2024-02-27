@@ -4,13 +4,14 @@ import android.app.Activity
 import android.view.View
 import android.widget.CompoundButton
 import android.widget.RadioButton
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.anyInt
 import org.mockito.MockitoAnnotations
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
 
 class RadioGroupHelperUnitTest {
 
@@ -40,7 +41,7 @@ class RadioGroupHelperUnitTest {
     @Test
     @Throws(Exception::class)
     fun checkNotNull() {
-        Assert.assertNotNull(radioGroupHelper)
+        assertThat(radioGroupHelper, notNullValue())
     }
 
     @Test

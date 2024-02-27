@@ -9,7 +9,6 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -21,6 +20,8 @@ import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -58,9 +59,9 @@ class QuizActivityUnitTest {
     @Test
     @Throws(Exception::class)
     fun checkActivityNotNull() {
-        Assert.assertNotNull(activity)
-        Assert.assertNotNull(positiveAnswer)
-        Assert.assertNotNull(negativeAnswer)
+        assertThat(activity, notNullValue())
+        assertThat(positiveAnswer, notNullValue())
+        assertThat(negativeAnswer, notNullValue())
     }
 
     @Test
