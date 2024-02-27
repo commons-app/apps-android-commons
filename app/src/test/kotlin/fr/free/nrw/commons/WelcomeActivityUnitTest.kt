@@ -3,8 +3,6 @@ package fr.free.nrw.commons
 import android.content.Intent
 import android.widget.TextView
 import fr.free.nrw.commons.quiz.QuizActivity
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -14,6 +12,9 @@ import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowIntent
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 
 /**
  * Tests Welcome Activity Methods
@@ -44,7 +45,7 @@ class WelcomeActivityUnitTest {
     @Test
     @Throws(Exception::class)
     fun checkActivityNotNull() {
-        assertNotNull(activity)
+        assertThat(activity, notNullValue())
     }
 
     /**
@@ -57,7 +58,7 @@ class WelcomeActivityUnitTest {
         val shadowActivity: ShadowActivity = shadowOf(activity)
         val startedIntent = shadowActivity.nextStartedActivity
         val shadowIntent: ShadowIntent = shadowOf(startedIntent)
-        assertEquals(shadowIntent.intentClass, QuizActivity::class.java)
+        assertThat(shadowIntent.intentClass, equalTo( QuizActivity::class.java))
     }
 
     /**
