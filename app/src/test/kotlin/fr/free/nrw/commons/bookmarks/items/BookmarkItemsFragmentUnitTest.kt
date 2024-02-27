@@ -19,7 +19,6 @@ import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -31,6 +30,8 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.lang.reflect.Method
 import java.util.*
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -130,6 +131,6 @@ class BookmarkItemsFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun checkFragmentNotNull() {
-        Assert.assertNotNull(fragment)
+        assertThat(fragment, notNullValue())
     }
 }

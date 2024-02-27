@@ -22,6 +22,9 @@ import org.junit.runner.RunWith
 import org.mockito.Mockito.verifyNoInteractions
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.`is`
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -88,18 +91,18 @@ class BookMarkLocationDaoTest {
         createCursor(1).let { cursor ->
             cursor.moveToFirst()
             testObject.fromCursor(cursor).let {
-                assertEquals("en", it.language)
-                assertEquals("placeName", it.name)
-                assertEquals(Label.FOREST, it.label)
-                assertEquals("placeDescription", it.longDescription)
+                assertThat("en", equalTo(it.language))
+                assertThat("placeName", equalTo(it.name))
+                assertThat(Label.FOREST, equalTo(it.label))
+                assertThat("placeDescription", equalTo(it.longDescription))
                 assertEquals(40.0, it.location.latitude, 0.001)
                 assertEquals(51.4, it.location.longitude, 0.001)
-                assertEquals("placeCategory", it.category)
-                assertEquals(builder.build().wikipediaLink, it.siteLinks.wikipediaLink)
-                assertEquals(builder.build().wikidataLink, it.siteLinks.wikidataLink)
-                assertEquals(builder.build().commonsLink, it.siteLinks.commonsLink)
-                assertEquals("picName",it.pic)
-                assertEquals(false, it.exists)
+                assertThat("placeCategory", equalTo(it.category))
+                assertThat(builder.build().wikipediaLink, equalTo(it.siteLinks.wikipediaLink))
+                assertThat(builder.build().wikidataLink, equalTo(it.siteLinks.wikidataLink))
+                assertThat(builder.build().commonsLink, equalTo(it.siteLinks.commonsLink))
+                assertThat("picName",equalTo(it.pic))
+                assertThat(false, equalTo(it.exists))
             }
         }
     }
@@ -110,7 +113,7 @@ class BookMarkLocationDaoTest {
 
         var result = testObject.allBookmarksLocations
 
-        assertEquals(14,(result.size))
+        assertThat(14, equalTo(result.size))
 
     }
 
@@ -123,13 +126,13 @@ class BookMarkLocationDaoTest {
     @Test
     fun getAllLocationBookmarksReturnsEmptyList_emptyCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(createCursor(0))
-        assertTrue(testObject.allBookmarksLocations.isEmpty())
+        assertThat(testObject.allBookmarksLocations.isEmpty(), `is`(true))
     }
 
     @Test
     fun getAllLocationBookmarksReturnsEmptyList_nullCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(null)
-        assertTrue(testObject.allBookmarksLocations.isEmpty())
+        assertThat(testObject.allBookmarksLocations.isEmpty(), `is`(true))
     }
 
     @Test
@@ -149,22 +152,22 @@ class BookMarkLocationDaoTest {
         whenever(client.insert(any(), any())).thenReturn(Uri.EMPTY)
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(null)
 
-        assertTrue(testObject.updateBookmarkLocation(examplePlaceBookmark))
+        assertThat(testObject.updateBookmarkLocation(examplePlaceBookmark), `is`(true))
         verify(client).insert(eq(BASE_URI), captor.capture())
         captor.firstValue.let { cv ->
-            assertEquals(13, cv.size())
-            assertEquals(examplePlaceBookmark.name, cv.getAsString(COLUMN_NAME))
-            assertEquals(examplePlaceBookmark.language, cv.getAsString(COLUMN_LANGUAGE))
-            assertEquals(examplePlaceBookmark.longDescription, cv.getAsString(COLUMN_DESCRIPTION))
-            assertEquals(examplePlaceBookmark.label.text, cv.getAsString(COLUMN_LABEL_TEXT))
-            assertEquals(examplePlaceBookmark.category, cv.getAsString(COLUMN_CATEGORY))
+            assertThat(13, equalTo(cv.size()))
+            assertThat(examplePlaceBookmark.name, equalTo(cv.getAsString(COLUMN_NAME)))
+            assertThat(examplePlaceBookmark.language, equalTo(cv.getAsString(COLUMN_LANGUAGE)))
+            assertThat(examplePlaceBookmark.longDescription, equalTo(cv.getAsString(COLUMN_DESCRIPTION)))
+            assertThat(examplePlaceBookmark.label.text, equalTo(cv.getAsString(COLUMN_LABEL_TEXT)))
+            assertThat(examplePlaceBookmark.category, equalTo(cv.getAsString(COLUMN_CATEGORY)))
             assertEquals(examplePlaceBookmark.location.latitude, cv.getAsDouble(COLUMN_LAT), 0.001)
             assertEquals(examplePlaceBookmark.location.longitude, cv.getAsDouble(COLUMN_LONG), 0.001)
-            assertEquals(examplePlaceBookmark.siteLinks.wikipediaLink.toString(), cv.getAsString(COLUMN_WIKIPEDIA_LINK))
-            assertEquals(examplePlaceBookmark.siteLinks.wikidataLink.toString(), cv.getAsString(COLUMN_WIKIDATA_LINK))
-            assertEquals(examplePlaceBookmark.siteLinks.commonsLink.toString(), cv.getAsString(COLUMN_COMMONS_LINK))
-            assertEquals(examplePlaceBookmark.pic.toString(), cv.getAsString(COLUMN_PIC))
-            assertEquals(examplePlaceBookmark.exists.toString(), cv.getAsString(COLUMN_EXISTS))
+            assertThat(examplePlaceBookmark.siteLinks.wikipediaLink.toString(), equalTo(cv.getAsString(COLUMN_WIKIPEDIA_LINK)))
+            assertThat(examplePlaceBookmark.siteLinks.wikidataLink.toString(), equalTo(cv.getAsString(COLUMN_WIKIDATA_LINK)))
+            assertThat(examplePlaceBookmark.siteLinks.commonsLink.toString(), equalTo(cv.getAsString(COLUMN_COMMONS_LINK)))
+            assertThat(examplePlaceBookmark.pic.toString(), equalTo(cv.getAsString(COLUMN_PIC)))
+            assertThat(examplePlaceBookmark.exists.toString(), equalTo(cv.getAsString(COLUMN_EXISTS)))
         }
     }
 
@@ -173,14 +176,14 @@ class BookMarkLocationDaoTest {
         whenever(client.delete(isA(), isNull(), isNull())).thenReturn(1)
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(1))
 
-        assertFalse(testObject.updateBookmarkLocation(examplePlaceBookmark))
+        assertThat(testObject.updateBookmarkLocation(examplePlaceBookmark), `is`(false))
         verify(client).delete(eq(BookmarkLocationsContentProvider.uriForName(examplePlaceBookmark.name)), isNull(), isNull())
     }
 
     @Test
     fun findExistingLocationBookmark() {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(1))
-        assertTrue(testObject.findBookmarkLocation(examplePlaceBookmark))
+        assertThat(testObject.findBookmarkLocation(examplePlaceBookmark), `is`(true))
     }
 
     @Test(expected = RuntimeException::class)
@@ -192,13 +195,13 @@ class BookMarkLocationDaoTest {
     @Test
     fun findNotExistingLocationBookmarkReturnsNull_emptyCursor() {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(0))
-        assertFalse(testObject.findBookmarkLocation(examplePlaceBookmark))
+        assertThat(testObject.findBookmarkLocation(examplePlaceBookmark), `is`(false))
     }
 
     @Test
     fun findNotExistingLocationBookmarkReturnsNull_nullCursor() {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(null)
-        assertFalse(testObject.findBookmarkLocation(examplePlaceBookmark))
+        assertThat(testObject.findBookmarkLocation(examplePlaceBookmark), `is`(false))
     }
 
     @Test

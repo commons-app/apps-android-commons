@@ -12,13 +12,15 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table.*
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.verifyNoInteractions
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.`is`
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -75,15 +77,15 @@ class BookmarkItemsDaoTest {
         createCursor(1).let { cursor ->
             cursor.moveToFirst()
             testObject.fromCursor(cursor).let {
-                Assert.assertEquals("itemName", it.name)
-                Assert.assertEquals("itemDescription", it.description)
-                Assert.assertEquals("itemImageUrl", it.imageUrl)
-                Assert.assertEquals(listOf("instance"), it.instanceOfs)
-                Assert.assertEquals(listOf(CategoryItem("category name",
+                assertThat("itemName", equalTo( it.name))
+                assertThat("itemDescription", equalTo( it.description))
+                assertThat("itemImageUrl", equalTo( it.imageUrl))
+                assertThat(listOf("instance"), equalTo( it.instanceOfs))
+                assertThat(listOf(CategoryItem("category name",
                     "category description",
-                    "category thumbnail", false)), it.commonsCategories)
-                Assert.assertEquals(false, it.isSelected)
-                Assert.assertEquals("itemID", it.id)
+                    "category thumbnail", false)), equalTo(it.commonsCategories))
+                assertThat(false, equalTo( it.isSelected))
+                assertThat("itemID", equalTo( it.id))
             }
         }
     }
@@ -95,7 +97,7 @@ class BookmarkItemsDaoTest {
 
         val result = testObject.allBookmarksItems
 
-        Assert.assertEquals(14, (result.size))
+        assertThat(14, equalTo( (result.size)))
 
     }
 
@@ -111,13 +113,13 @@ class BookmarkItemsDaoTest {
     fun getAllItemsBookmarksReturnsEmptyList_emptyCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull()))
             .thenReturn(createCursor(0))
-        Assert.assertTrue(testObject.allBookmarksItems.isEmpty())
+        assertThat(testObject.allBookmarksItems.isEmpty(), `is`(true))
     }
 
     @Test
     fun getAllItemsBookmarksReturnsEmptyList_nullCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(null)
-        Assert.assertTrue(testObject.allBookmarksItems.isEmpty())
+        assertThat(testObject.allBookmarksItems.isEmpty(), `is`(true))
     }
 
     @Test
@@ -137,45 +139,45 @@ class BookmarkItemsDaoTest {
         whenever(client.insert(any(), any())).thenReturn(Uri.EMPTY)
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(null)
 
-        Assert.assertTrue(testObject.updateBookmarkItem(exampleItemBookmark))
+        assertThat(testObject.updateBookmarkItem(exampleItemBookmark), `is`(true))
         verify(client).insert(eq(BookmarkItemsContentProvider.BASE_URI), captor.capture())
         captor.firstValue.let { cv ->
-            Assert.assertEquals(9, cv.size())
-            Assert.assertEquals(
+            assertThat(9, equalTo( cv.size()))
+            assertThat(
                 exampleItemBookmark.name,
-                cv.getAsString(COLUMN_NAME)
+                equalTo(cv.getAsString(COLUMN_NAME))
             )
-            Assert.assertEquals(
+            assertThat(
                 exampleItemBookmark.description,
-                cv.getAsString(COLUMN_DESCRIPTION)
+                equalTo(cv.getAsString(COLUMN_DESCRIPTION))
             )
-            Assert.assertEquals(
+            assertThat(
                 exampleItemBookmark.imageUrl,
-                cv.getAsString(COLUMN_IMAGE)
+                equalTo(cv.getAsString(COLUMN_IMAGE))
             )
-            Assert.assertEquals(
+            assertThat(
                 exampleItemBookmark.instanceOfs[0],
-                cv.getAsString(COLUMN_INSTANCE_LIST)
+                equalTo(cv.getAsString(COLUMN_INSTANCE_LIST))
             )
-            Assert.assertEquals(
+            assertThat(
                 exampleItemBookmark.commonsCategories[0].name,
-                cv.getAsString(COLUMN_CATEGORIES_NAME_LIST)
+                equalTo(cv.getAsString(COLUMN_CATEGORIES_NAME_LIST))
             )
-            Assert.assertEquals(
+            assertThat(
                 exampleItemBookmark.commonsCategories[0].description,
-                cv.getAsString(COLUMN_CATEGORIES_DESCRIPTION_LIST)
+                equalTo(cv.getAsString(COLUMN_CATEGORIES_DESCRIPTION_LIST))
             )
-            Assert.assertEquals(
+            assertThat(
                 exampleItemBookmark.commonsCategories[0].thumbnail,
-                cv.getAsString(COLUMN_CATEGORIES_THUMBNAIL_LIST)
+                equalTo(cv.getAsString(COLUMN_CATEGORIES_THUMBNAIL_LIST))
             )
-            Assert.assertEquals(
+            assertThat(
                 exampleItemBookmark.isSelected,
-                cv.getAsBoolean(COLUMN_IS_SELECTED)
+                equalTo(cv.getAsBoolean(COLUMN_IS_SELECTED))
             )
-            Assert.assertEquals(
+            assertThat(
                 exampleItemBookmark.id,
-                cv.getAsString(COLUMN_ID)
+                equalTo(cv.getAsString(COLUMN_ID))
             )
         }
     }
@@ -185,7 +187,7 @@ class BookmarkItemsDaoTest {
         whenever(client.delete(isA(), isNull(), isNull())).thenReturn(1)
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(1))
 
-        Assert.assertFalse(testObject.updateBookmarkItem(exampleItemBookmark))
+        assertThat(testObject.updateBookmarkItem(exampleItemBookmark), `is`(false))
         verify(client).delete(eq(BookmarkItemsContentProvider.uriForName(exampleItemBookmark.id)),
             isNull(), isNull())
     }
@@ -193,7 +195,7 @@ class BookmarkItemsDaoTest {
     @Test
     fun findExistingItemBookmark() {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(1))
-        Assert.assertTrue(testObject.findBookmarkItem(exampleItemBookmark.id))
+        assertThat(testObject.findBookmarkItem(exampleItemBookmark.id), `is`(true))
     }
 
     @Test(expected = RuntimeException::class)
@@ -207,13 +209,13 @@ class BookmarkItemsDaoTest {
     @Test
     fun findNotExistingItemBookmarkReturnsNull_emptyCursor() {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(0))
-        Assert.assertFalse(testObject.findBookmarkItem(exampleItemBookmark.id))
+        assertThat(testObject.findBookmarkItem(exampleItemBookmark.id), `is`(false))
     }
 
     @Test
     fun findNotExistingItemBookmarkReturnsNull_nullCursor() {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(null)
-        Assert.assertFalse(testObject.findBookmarkItem(exampleItemBookmark.id))
+        assertThat(testObject.findBookmarkItem(exampleItemBookmark.id), `is`(false))
     }
 
     @Test

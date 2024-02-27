@@ -2,11 +2,13 @@ package fr.free.nrw.commons.bookmarks
 
 import android.content.Context
 import androidx.fragment.app.FragmentManager
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
+import org.hamcrest.CoreMatchers.equalTo
 
 class BookmarksPagerAdapterTests {
     @Mock
@@ -26,7 +28,7 @@ class BookmarksPagerAdapterTests {
 
     @Test
     fun checkNotNull() {
-        Assert.assertNotNull(bookmarksPagerAdapter)
+        assertThat(bookmarksPagerAdapter, notNullValue())
     }
 
     @Test
@@ -37,7 +39,7 @@ class BookmarksPagerAdapterTests {
 
     @Test
     fun testGetCount() {
-        Assert.assertEquals(bookmarksPagerAdapter.count, 3)
+        assertThat(bookmarksPagerAdapter.count, equalTo( 3))
     }
 
     @Test
