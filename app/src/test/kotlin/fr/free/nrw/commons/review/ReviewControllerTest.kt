@@ -16,7 +16,6 @@ import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.delete.DeleteHelper
 import media
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -31,6 +30,9 @@ import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowNotificationManager
 import org.robolectric.shadows.ShadowToast
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Method
 import java.util.*
 
@@ -70,7 +72,7 @@ class ReviewControllerTest {
     @Test
     fun testGetMedia() {
         controller.onImageRefreshed(media)
-        assertEquals(controller.media, media)
+        assertThat(controller.media, equalTo( media))
     }
 
     @Test
@@ -117,7 +119,7 @@ class ReviewControllerTest {
         )
         method.isAccessible = true
         method.invoke(controller, context, 1)
-        assertNotNull(ShadowNotificationManager().allNotifications)
+        assertThat(ShadowNotificationManager().allNotifications, notNullValue())
     }
 
 
@@ -129,7 +131,7 @@ class ReviewControllerTest {
         )
         method.isAccessible = true
         method.invoke(controller, "", "")
-        assertNotNull(ShadowNotificationManager().allNotifications)
+        assertThat(ShadowNotificationManager().allNotifications, notNullValue())
     }
 
     @Test
