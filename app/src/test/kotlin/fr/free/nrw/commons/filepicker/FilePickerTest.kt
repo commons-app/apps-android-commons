@@ -11,7 +11,6 @@ import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.filepicker.Constants.RequestCodes
-import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,6 +22,8 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.lang.reflect.Method
 import kotlin.random.Random.Default.nextBoolean
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 
 @RunWith(RobolectricTestRunner::class)
 @Config(
@@ -66,7 +67,7 @@ class FilePickerTest {
             ArgumentMatchers.any(),
             requestCodeCaptor?.capture()?.toInt()!!
         )
-        assertEquals(requestCodeCaptor?.value, RequestCodes.PICK_PICTURE_FROM_GALLERY)
+        assertThat(requestCodeCaptor?.value, equalTo( RequestCodes.PICK_PICTURE_FROM_GALLERY))
     }
 
     @Test
@@ -81,7 +82,7 @@ class FilePickerTest {
             ArgumentMatchers.any(),
             requestCodeCaptor?.capture()?.toInt()!!
         )
-        assertEquals(requestCodeCaptor?.value, RequestCodes.TAKE_PICTURE)
+        assertThat(requestCodeCaptor?.value, equalTo( RequestCodes.TAKE_PICTURE))
     }
 
     @Test
@@ -228,6 +229,6 @@ class FilePickerTest {
         `when`(sharedPref.edit().putInt("type", 0)).thenReturn(sharedPreferencesEditor)
         FilePicker.openCustomSelector(activity, 0)
         verify(activity).startActivityForResult(ArgumentMatchers.any(), requestCodeCaptor?.capture()?.toInt()!!)
-        assertEquals(requestCodeCaptor?.value, RequestCodes.PICK_PICTURE_FROM_CUSTOM_SELECTOR)
+        assertThat(requestCodeCaptor?.value, equalTo( RequestCodes.PICK_PICTURE_FROM_CUSTOM_SELECTOR))
     }
 }
