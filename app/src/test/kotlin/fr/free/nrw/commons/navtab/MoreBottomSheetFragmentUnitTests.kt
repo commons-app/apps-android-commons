@@ -22,7 +22,6 @@ import fr.free.nrw.commons.feedback.model.Feedback
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.profile.ProfileActivity
 import io.reactivex.Observable
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -38,6 +37,9 @@ import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowAlertDialog
 import org.robolectric.shadows.ShadowDialog
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Method
 
 
@@ -85,7 +87,7 @@ class MoreBottomSheetFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun checkFragmentNotNull() {
-        Assert.assertNotNull(fragment)
+        assertThat(fragment, notNullValue())
     }
 
     @Test
@@ -101,7 +103,7 @@ class MoreBottomSheetFragmentUnitTests {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onLogoutClicked()
         val dialog: AlertDialog = ShadowAlertDialog.getLatestDialog() as AlertDialog
-        Assert.assertEquals(dialog.isShowing, true)
+        assertThat(dialog.isShowing, equalTo( true))
     }
 
     @Test
@@ -132,7 +134,7 @@ class MoreBottomSheetFragmentUnitTests {
         val intentForResult: ShadowActivity.IntentForResult =
             shadowActivity.nextStartedActivityForResult
         val nextActivity: ComponentName? = intentForResult.intent.component
-        Assert.assertEquals(nextActivity?.className?.contains(".AboutActivity"), true)
+        assertThat(nextActivity?.className?.contains(".AboutActivity"), equalTo( true))
     }
 
     @Test
@@ -144,7 +146,7 @@ class MoreBottomSheetFragmentUnitTests {
         val intentForResult: ShadowActivity.IntentForResult =
             shadowActivity.nextStartedActivityForResult
         val nextActivity: ComponentName? = intentForResult.intent.component
-        Assert.assertEquals(nextActivity?.className?.contains(".WelcomeActivity"), true)
+        assertThat(nextActivity?.className?.contains(".WelcomeActivity"), equalTo( true))
     }
 
     @Test
@@ -156,7 +158,7 @@ class MoreBottomSheetFragmentUnitTests {
         val intentForResult: ShadowActivity.IntentForResult =
             shadowActivity.nextStartedActivityForResult
         val nextActivity: ComponentName? = intentForResult.intent.component
-        Assert.assertEquals(nextActivity?.className?.contains(".SettingsActivity"), true)
+        assertThat(nextActivity?.className?.contains(".SettingsActivity"), equalTo( true))
     }
 
     @Test
@@ -168,7 +170,7 @@ class MoreBottomSheetFragmentUnitTests {
         val intentForResult: ShadowActivity.IntentForResult =
             shadowActivity.nextStartedActivityForResult
         val nextActivity: ComponentName? = intentForResult.intent.component
-        Assert.assertEquals(nextActivity?.className?.contains(".ProfileActivity"), true)
+        assertThat(nextActivity?.className?.contains(".ProfileActivity"), equalTo( true))
     }
 
     @Test
@@ -180,7 +182,7 @@ class MoreBottomSheetFragmentUnitTests {
         val intentForResult: ShadowActivity.IntentForResult =
             shadowActivity.nextStartedActivityForResult
         val nextActivity: ComponentName? = intentForResult.intent.component
-        Assert.assertEquals(nextActivity?.className?.contains(".ReviewActivity"), true)
+        assertThat(nextActivity?.className?.contains(".ReviewActivity"), equalTo( true))
     }
 
     @Test
@@ -192,12 +194,12 @@ class MoreBottomSheetFragmentUnitTests {
         method.invoke(fragment)
         val shadowActivity: ShadowActivity = Shadows.shadowOf(activity)
         val startedIntent = shadowActivity.nextStartedActivity
-        Assert.assertEquals(startedIntent.action, Intent.ACTION_SENDTO)
-        Assert.assertEquals(startedIntent.type, null)
-        Assert.assertEquals(startedIntent.`data`, Uri.parse("mailto:"))
-        Assert.assertEquals(
+        assertThat(startedIntent.action, equalTo( Intent.ACTION_SENDTO))
+        assertThat(startedIntent.type, equalTo( null))
+        assertThat(startedIntent.`data`, equalTo( Uri.parse("mailto:")))
+        assertThat(
             startedIntent.extras?.get(Intent.EXTRA_SUBJECT),
-            CommonsApplication.FEEDBACK_EMAIL_SUBJECT
+            equalTo(CommonsApplication.FEEDBACK_EMAIL_SUBJECT)
         )
     }
 
