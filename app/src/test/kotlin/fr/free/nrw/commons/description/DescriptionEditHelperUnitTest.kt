@@ -7,12 +7,13 @@ import fr.free.nrw.commons.notification.NotificationHelper
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import java.lang.reflect.Method
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 
 class DescriptionEditHelperUnitTest {
 
@@ -77,7 +78,7 @@ class DescriptionEditHelperUnitTest {
             Int::class.java
         )
         method.isAccessible = true
-        assertEquals(method.invoke(helper, context, media, 0), false)
+        assertThat(method.invoke(helper, context, media, 0), equalTo( false))
     }
 
     @Test
@@ -87,7 +88,7 @@ class DescriptionEditHelperUnitTest {
             Int::class.java
         )
         method.isAccessible = true
-        assertEquals(method.invoke(helper, context, media, 1), true)
+        assertThat(method.invoke(helper, context, media, 1), equalTo( true))
     }
 
     @Test
@@ -97,7 +98,7 @@ class DescriptionEditHelperUnitTest {
             Boolean::class.java
         )
         method.isAccessible = true
-        assertEquals(method.invoke(helper, context, media, false), false)
+        assertThat(method.invoke(helper, context, media, false), equalTo( false))
     }
 
     @Test
@@ -107,7 +108,7 @@ class DescriptionEditHelperUnitTest {
             Boolean::class.java
         )
         method.isAccessible = true
-        assertEquals(method.invoke(helper, context, media, true), true)
+        assertThat(method.invoke(helper, context, media, true), equalTo( true))
     }
 
 }
