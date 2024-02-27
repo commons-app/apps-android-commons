@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import fr.free.nrw.commons.TestCommonsApplication
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,6 +17,9 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Field
 
 @RunWith(RobolectricTestRunner::class)
@@ -54,7 +56,7 @@ class RecentLanguagesAdapterUnitTest {
     @Test
     @Throws(Exception::class)
     fun checkAdapterNotNull() {
-        Assert.assertNotNull(adapter)
+        assertThat(adapter, notNullValue())
     }
 
     @Test
@@ -65,7 +67,7 @@ class RecentLanguagesAdapterUnitTest {
             RecentLanguagesAdapter::class.java.getDeclaredField("recentLanguages")
         recentLanguagesAdapter.isAccessible = true
         recentLanguagesAdapter.set(adapter, list)
-        Assert.assertEquals(adapter.isEnabled(0), false)
+        assertThat(adapter.isEnabled(0), equalTo( false))
     }
 
     @Test
@@ -76,7 +78,7 @@ class RecentLanguagesAdapterUnitTest {
             RecentLanguagesAdapter::class.java.getDeclaredField("recentLanguages")
         recentLanguagesAdapter.isAccessible = true
         recentLanguagesAdapter.set(adapter, list)
-        Assert.assertEquals(adapter.count, list.size)
+        assertThat(adapter.count, equalTo( list.size))
     }
 
     @Test
@@ -88,13 +90,13 @@ class RecentLanguagesAdapterUnitTest {
         recentLanguagesAdapter.isAccessible = true
         recentLanguagesAdapter.set(adapter, list)
         val languageName = list[0].languageName
-        Assert.assertEquals(adapter.getLanguageName(0), languageName)
+        assertThat(adapter.getLanguageName(0), equalTo( languageName))
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetView() {
-        Assert.assertEquals(adapter.getView(0, convertView, parent), convertView)
+        assertThat(adapter.getView(0, convertView, parent), equalTo( convertView))
     }
 
     @Test
@@ -106,6 +108,6 @@ class RecentLanguagesAdapterUnitTest {
         recentLanguagesAdapter.isAccessible = true
         recentLanguagesAdapter.set(adapter, list)
         val languageCode = list[0].languageCode
-        Assert.assertEquals(adapter.getLanguageCode(0), languageCode)
+        assertThat(adapter.getLanguageCode(0), equalTo( languageCode))
     }
 }

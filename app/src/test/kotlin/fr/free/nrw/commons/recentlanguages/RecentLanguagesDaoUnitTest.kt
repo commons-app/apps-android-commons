@@ -9,7 +9,6 @@ import android.os.RemoteException
 import com.nhaarman.mockitokotlin2.*
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao.Table.*
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -20,6 +19,9 @@ import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.Mockito.verifyNoInteractions
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.`is`
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -65,8 +67,8 @@ class RecentLanguagesDaoUnitTest {
         createCursor(1).let { cursor ->
             cursor.moveToFirst()
             testObject.fromCursor(cursor).let {
-                Assert.assertEquals("languageName", it.languageName)
-                Assert.assertEquals("languageCode", it.languageCode)
+                assertThat("languageName", equalTo( it.languageName))
+                assertThat("languageCode", equalTo( it.languageCode))
             }
         }
     }
@@ -78,7 +80,7 @@ class RecentLanguagesDaoUnitTest {
 
         val result = testObject.recentLanguages
 
-        Assert.assertEquals(14, (result.size))
+        assertThat(14, equalTo( (result.size)))
 
     }
 
@@ -94,13 +96,13 @@ class RecentLanguagesDaoUnitTest {
     fun getGetRecentLanguagesReturnsEmptyList_emptyCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull()))
             .thenReturn(createCursor(0))
-        Assert.assertTrue(testObject.recentLanguages.isEmpty())
+        assertThat(testObject.recentLanguages.isEmpty(), `is`(true))
     }
 
     @Test
     fun getGetRecentLanguagesReturnsEmptyList_nullCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(null)
-        Assert.assertTrue(testObject.recentLanguages.isEmpty())
+        assertThat(testObject.recentLanguages.isEmpty(), `is`(true))
     }
 
     @Test
@@ -117,7 +119,7 @@ class RecentLanguagesDaoUnitTest {
     @Test
     fun findExistingLanguage() {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(1))
-        Assert.assertTrue(testObject.findRecentLanguage(exampleLanguage.languageCode))
+        assertThat(testObject.findRecentLanguage(exampleLanguage.languageCode), `is`(true))
     }
 
     @Test(expected = RuntimeException::class)
@@ -131,13 +133,13 @@ class RecentLanguagesDaoUnitTest {
     @Test
     fun findNotExistingLanguageReturnsNull_emptyCursor() {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(0))
-        Assert.assertFalse(testObject.findRecentLanguage(exampleLanguage.languageCode))
+        assertThat(testObject.findRecentLanguage(exampleLanguage.languageCode), `is`(false))
     }
 
     @Test
     fun findNotExistingLanguageReturnsNull_nullCursor() {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(null)
-        Assert.assertFalse(testObject.findRecentLanguage(exampleLanguage.languageCode))
+        assertThat(testObject.findRecentLanguage(exampleLanguage.languageCode), `is`(false))
     }
 
     @Test
@@ -288,14 +290,14 @@ class RecentLanguagesDaoUnitTest {
 
         verify(client).insert(eq(RecentLanguagesContentProvider.BASE_URI), captor.capture())
         captor.firstValue.let { cv ->
-            Assert.assertEquals(2, cv.size())
-            Assert.assertEquals(
+            assertThat(2, equalTo( cv.size()))
+            assertThat(
                 exampleLanguage.languageName,
-                cv.getAsString(COLUMN_NAME)
+                equalTo(cv.getAsString(COLUMN_NAME))
             )
-            Assert.assertEquals(
+            assertThat(
                 exampleLanguage.languageCode,
-                cv.getAsString(COLUMN_CODE)
+                equalTo(cv.getAsString(COLUMN_CODE))
             )
         }
     }
