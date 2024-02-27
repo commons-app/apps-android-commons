@@ -4,12 +4,14 @@ import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.FakeContextWrapper
 import fr.free.nrw.commons.FakeContextWrapperWithException
 import fr.free.nrw.commons.TestCommonsApplication
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
+import org.hamcrest.CoreMatchers.equalTo
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -28,13 +30,13 @@ class AccountUtilUnitTest {
     @Test
     @Throws(Exception::class)
     fun checkNotNull() {
-        Assert.assertNotNull(accountUtil)
+        assertThat(accountUtil, notNullValue())
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetUserName() {
-        Assert.assertEquals(AccountUtil.getUserName(context), "test@example.com")
+        assertThat(AccountUtil.getUserName(context), equalTo( "test@example.com"))
     }
 
     @Test
@@ -42,13 +44,13 @@ class AccountUtilUnitTest {
     fun testGetUserNameWithException() {
         val context =
             FakeContextWrapperWithException(ApplicationProvider.getApplicationContext())
-        Assert.assertEquals(AccountUtil.getUserName(context), null)
+        assertThat(AccountUtil.getUserName(context), equalTo( null))
     }
 
     @Test
     @Throws(Exception::class)
     fun testAccount() {
-        Assert.assertEquals(AccountUtil.account(context)?.name, "test@example.com")
+        assertThat(AccountUtil.account(context)?.name, equalTo( "test@example.com"))
     }
 
     @Test
@@ -56,6 +58,6 @@ class AccountUtilUnitTest {
     fun testAccountWithException() {
         val context =
             FakeContextWrapperWithException(ApplicationProvider.getApplicationContext())
-        Assert.assertEquals(AccountUtil.account(context), null)
+        assertThat(AccountUtil.account(context), equalTo( null))
     }
 }

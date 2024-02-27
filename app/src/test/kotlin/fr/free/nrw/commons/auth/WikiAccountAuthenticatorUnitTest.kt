@@ -9,7 +9,6 @@ import android.os.Bundle
 import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.BuildConfig
 import fr.free.nrw.commons.TestCommonsApplication
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,6 +17,9 @@ import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
+import org.hamcrest.CoreMatchers.equalTo
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -42,19 +44,19 @@ class WikiAccountAuthenticatorUnitTest {
 
     @Test
     fun checkNotNull() {
-        Assert.assertNotNull(authenticator)
+        assertThat(authenticator, notNullValue())
     }
 
     @Test
     fun testEditProperties() {
         val bundle: Bundle = authenticator.editProperties(response, "test")
-        Assert.assertEquals(bundle.getString("test"), "editProperties")
+        assertThat(bundle.getString("test"), equalTo( "editProperties"))
     }
 
     @Test
     fun testAddAccountCaseNotSupportedType() {
         val bundle: Bundle = authenticator.addAccount(response, "test", null, null, null)
-        Assert.assertEquals(bundle.getString("test"), "addAccount")
+        assertThat(bundle.getString("test"), equalTo( "addAccount"))
     }
 
     @Test
@@ -62,53 +64,53 @@ class WikiAccountAuthenticatorUnitTest {
         val bundle: Bundle =
             authenticator.addAccount(response, BuildConfig.ACCOUNT_TYPE, null, null, null)
         val intent: Intent? = bundle.getParcelable(AccountManager.KEY_INTENT)
-        Assert.assertEquals(
+        assertThat(
             intent?.extras!![AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE],
-            response
+            equalTo(response)
         )
     }
 
     @Test
     fun testConfirmCredentials() {
         val bundle: Bundle = authenticator.confirmCredentials(response, account, null)
-        Assert.assertEquals(bundle.getString("test"), "confirmCredentials")
+        assertThat(bundle.getString("test"), equalTo( "confirmCredentials"))
     }
 
     @Test
     fun testGetAuthToken() {
         val bundle: Bundle = authenticator.getAuthToken(response, account, "", null)
-        Assert.assertEquals(bundle.getString("test"), "getAuthToken")
+        assertThat(bundle.getString("test"), equalTo( "getAuthToken"))
     }
 
     @Test
     fun testGetAuthTokenLabelCaseNull() {
-        Assert.assertEquals(authenticator.getAuthTokenLabel(""), null)
+        assertThat(authenticator.getAuthTokenLabel(""), equalTo( null))
     }
 
     @Test
     fun testGetAuthTokenLabelCaseNonNull() {
-        Assert.assertEquals(
+        assertThat(
             authenticator.getAuthTokenLabel(BuildConfig.ACCOUNT_TYPE),
-            AccountUtil.AUTH_TOKEN_TYPE
+            equalTo(AccountUtil.AUTH_TOKEN_TYPE)
         )
     }
 
     @Test
     fun testUpdateCredentials() {
         val bundle: Bundle? = authenticator.updateCredentials(response, account, null, null)
-        Assert.assertEquals(bundle?.getString("test"), "updateCredentials")
+        assertThat(bundle?.getString("test"), equalTo( "updateCredentials"))
     }
 
     @Test
     fun testHasFeatures() {
         val bundle: Bundle? = authenticator.hasFeatures(response, account, arrayOf(""))
-        Assert.assertEquals(bundle?.getBoolean(AccountManager.KEY_BOOLEAN_RESULT), false)
+        assertThat(bundle?.getBoolean(AccountManager.KEY_BOOLEAN_RESULT), equalTo( false))
     }
 
     @Test
     fun testGetAccountRemovalAllowed() {
         val bundle: Bundle? = authenticator.getAccountRemovalAllowed(response, account)
-        Assert.assertEquals(bundle?.getBoolean(AccountManager.KEY_BOOLEAN_RESULT), true)
+        assertThat(bundle?.getBoolean(AccountManager.KEY_BOOLEAN_RESULT), equalTo( true))
     }
 
 }

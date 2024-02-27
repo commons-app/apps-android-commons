@@ -1,9 +1,11 @@
 package fr.free.nrw.commons.auth
 
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.MockitoAnnotations
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
+import org.hamcrest.CoreMatchers.equalTo
 import java.lang.reflect.Field
 
 class WikiAccountAuthenticatorServiceUnitTest {
@@ -19,7 +21,7 @@ class WikiAccountAuthenticatorServiceUnitTest {
 
     @Test
     fun checkNotNull() {
-        Assert.assertNotNull(service)
+        assertThat(service, notNullValue())
     }
 
     @Test
@@ -28,7 +30,7 @@ class WikiAccountAuthenticatorServiceUnitTest {
             WikiAccountAuthenticatorService::class.java.getDeclaredField("authenticator")
         field.isAccessible = true
         field.set(service, null)
-        Assert.assertEquals(service.onBind(null), null)
+        assertThat(service.onBind(null), equalTo( null))
     }
 
 }

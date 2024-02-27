@@ -7,7 +7,6 @@ import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.auth.login.LoginResult
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,6 +18,9 @@ import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.lang.reflect.Method
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
+import org.hamcrest.CoreMatchers.equalTo
 
 
 @RunWith(RobolectricTestRunner::class)
@@ -53,7 +55,7 @@ class SessionManagerUnitTests {
     @Test
     @Throws(Exception::class)
     fun checkNotNull() {
-        Assert.assertNotNull(sessionManager)
+        assertThat(sessionManager, notNullValue())
     }
 
     @Test
@@ -94,13 +96,13 @@ class SessionManagerUnitTests {
     @Test
     @Throws(Exception::class)
     fun testIsUserLoggedIn() {
-        Assert.assertEquals(sessionManager.isUserLoggedIn, false)
+        assertThat(sessionManager.isUserLoggedIn, equalTo( false))
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetPreference() {
-        Assert.assertEquals(sessionManager.getPreference("key"), false)
+        assertThat(sessionManager.getPreference("key"), equalTo( false))
     }
 
     @Test
@@ -124,7 +126,7 @@ class SessionManagerUnitTests {
             String::class.java
         )
         method.isAccessible = true
-        Assert.assertEquals(method.invoke(sessionManager, "username", "password"), true)
+        assertThat(method.invoke(sessionManager, "username", "password"), equalTo( true))
     }
 
     @Test
@@ -145,7 +147,7 @@ class SessionManagerUnitTests {
             "getUserName"
         )
         method.isAccessible = true
-        Assert.assertEquals(method.invoke(sessionManager), null)
+        assertThat(method.invoke(sessionManager), equalTo( null))
     }
 
     @Test
@@ -155,7 +157,7 @@ class SessionManagerUnitTests {
             "getPassword"
         )
         method.isAccessible = true
-        Assert.assertEquals(method.invoke(sessionManager), null)
+        assertThat(method.invoke(sessionManager), equalTo( null))
     }
 
 }
