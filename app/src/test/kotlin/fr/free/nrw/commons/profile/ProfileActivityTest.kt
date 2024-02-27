@@ -9,7 +9,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -21,6 +20,9 @@ import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Method
 
 
@@ -47,7 +49,7 @@ class ProfileActivityTest {
     @Test
     @Throws(Exception::class)
     fun checkActivityNotNull() {
-        Assert.assertNotNull(activity)
+        assertThat(activity, notNullValue())
     }
 
     @Test
@@ -110,14 +112,14 @@ class ProfileActivityTest {
     @Test
     fun testToolbarNotNull() {
         val toolbar = activity.findViewById<Toolbar>(R.id.toolbar)
-        Assert.assertNotNull(toolbar)
+        assertThat(toolbar, notNullValue())
     }
 
     @Test
     fun testOptionsMenu() {
         val menu: Menu = RoboMenu(mockContext)
         activity.onCreateOptionsMenu(menu)
-        Assert.assertEquals(1, menu.size())
+        assertThat(1, equalTo( menu.size()))
     }
 
 }

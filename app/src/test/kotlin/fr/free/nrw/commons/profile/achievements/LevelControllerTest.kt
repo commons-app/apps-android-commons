@@ -1,11 +1,12 @@
 package fr.free.nrw.commons.profile.achievements
 
 import fr.free.nrw.commons.R
-import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 
 /**
  * Test for the Level Controller Class for Achievements
@@ -42,7 +43,7 @@ class LevelControllerTest {
      */
     @Test
     fun testLevelNumber() {
-        assertEquals(levelInfo.levelNumber, 1)
+        assertThat(levelInfo.levelNumber, equalTo( 1))
     }
 
     /**
@@ -50,7 +51,7 @@ class LevelControllerTest {
      */
     @Test
     fun testLevelStyle() {
-        assertEquals(levelInfo.levelStyle, R.style.LevelOne)
+        assertThat(levelInfo.levelStyle, equalTo( R.style.LevelOne))
     }
 
     /**
@@ -59,7 +60,7 @@ class LevelControllerTest {
      */
     @Test
     fun testMaxUniqueImages() {
-        assertEquals(levelInfo.maxUniqueImages, 5)
+        assertThat(levelInfo.maxUniqueImages, equalTo( 5))
     }
 
     /**
@@ -68,7 +69,7 @@ class LevelControllerTest {
      */
     @Test
     fun testMaxUploadCount() {
-        assertEquals(levelInfo.maxUploadCount, 20)
+        assertThat(levelInfo.maxUploadCount, equalTo( 20))
     }
 
     /**
@@ -77,6 +78,6 @@ class LevelControllerTest {
      */
     @Test
     fun testMinNonRevertPercentage() {
-        assertEquals(levelInfo.minNonRevertPercentage, 85)
+        assertThat(levelInfo.minNonRevertPercentage, equalTo( 85))
     }
 }
