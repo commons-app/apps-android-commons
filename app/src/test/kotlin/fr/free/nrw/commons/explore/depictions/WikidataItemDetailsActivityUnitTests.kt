@@ -15,7 +15,6 @@ import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.explore.depictions.media.DepictedImagesFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -29,6 +28,9 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -103,7 +105,7 @@ class WikidataItemDetailsActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun checkActivityNotNull() {
-        Assert.assertNotNull(activity)
+        assertThat(activity, notNullValue())
     }
 
     @Test
@@ -141,7 +143,7 @@ class WikidataItemDetailsActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testGetContributionStateAt() {
-        Assert.assertEquals(activity.getContributionStateAt(0), null)
+        assertThat(activity.getContributionStateAt(0), equalTo( null))
     }
 
     @Test
@@ -153,28 +155,28 @@ class WikidataItemDetailsActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnCreateOptionsMenu() {
-        Assert.assertEquals(activity.onCreateOptionsMenu(RoboMenu()), true)
+        assertThat(activity.onCreateOptionsMenu(RoboMenu()), equalTo( true))
     }
 
     @Test
     @Throws(Exception::class)
     fun testOnOptionsItemSelectedCaseOne() {
-        Assert.assertEquals(
+        assertThat(
             activity.onOptionsItemSelected(RoboMenuItem(R.id.browser_actions_menu_items)),
-            true
+            equalTo(true)
         )
     }
 
     @Test
     @Throws(Exception::class)
     fun testOnOptionsItemSelectedCaseTwo() {
-        Assert.assertEquals(activity.onOptionsItemSelected(RoboMenuItem(android.R.id.home)), true)
+        assertThat(activity.onOptionsItemSelected(RoboMenuItem(android.R.id.home)), equalTo( true))
     }
 
     @Test
     @Throws(Exception::class)
     fun testOnOptionsItemSelected() {
-        Assert.assertEquals(activity.onOptionsItemSelected(RoboMenuItem()), false)
+        assertThat(activity.onOptionsItemSelected(RoboMenuItem()), equalTo( false))
     }
 
     @Test

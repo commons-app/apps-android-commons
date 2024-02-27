@@ -19,11 +19,8 @@ import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import io.reactivex.disposables.CompositeDisposable
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
@@ -34,6 +31,10 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
+import org.hamcrest.CoreMatchers.nullValue
 import java.lang.reflect.Method
 
 
@@ -91,7 +92,7 @@ class SearchActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun checkActivityNotNull() {
-        Assert.assertNotNull(activity)
+        assertThat(activity, notNullValue())
     }
 
     @Test
@@ -130,7 +131,7 @@ class SearchActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun testGetContributionStateAt() {
-        assertNull(activity.getContributionStateAt(0))
+        assertThat(activity.getContributionStateAt(0), nullValue())
     }
 
     @Test
@@ -175,7 +176,7 @@ class SearchActivityUnitTests {
         val media = mock(Media::class.java)
         Whitebox.setInternalState(activity, "searchMediaFragment", searchMediaFragment)
         `when`(searchMediaFragment.getMediaAtPosition(pos)).thenReturn(media)
-        assertEquals(activity.getMediaAtPosition(pos), media)
+        assertThat(activity.getMediaAtPosition(pos), equalTo( media))
     }
 
     @Test
@@ -184,7 +185,7 @@ class SearchActivityUnitTests {
         val num = 1
         Whitebox.setInternalState(activity, "searchMediaFragment", searchMediaFragment)
         `when`(searchMediaFragment.totalMediaCount).thenReturn(num)
-        assertEquals(activity.totalMediaCount, num)
+        assertThat(activity.totalMediaCount, equalTo( num))
     }
 
     @Test

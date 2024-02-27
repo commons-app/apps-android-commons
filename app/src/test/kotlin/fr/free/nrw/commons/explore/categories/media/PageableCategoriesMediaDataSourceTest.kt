@@ -6,11 +6,12 @@ import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.explore.paging.LiveDataConverter
 import fr.free.nrw.commons.media.MediaClient
 import io.reactivex.Single
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 
 class PageableCategoriesMediaDataSourceTest {
     @Mock
@@ -31,7 +32,7 @@ class PageableCategoriesMediaDataSourceTest {
         dataSource.onQueryUpdated("test")
         whenever(mediaClient.getMediaListFromCategory("test"))
             .thenReturn(Single.just(emptyList()))
-        Assert.assertEquals(dataSource.loadFunction(-1, 0), emptyList<String>())
+        assertThat(dataSource.loadFunction(-1, 0), equalTo( emptyList<String>()))
         verify(mediaClient).resetCategoryContinuation("test")
     }
 
@@ -42,7 +43,7 @@ class PageableCategoriesMediaDataSourceTest {
         dataSource.onQueryUpdated("test")
         whenever(mediaClient.getMediaListFromCategory("test"))
             .thenReturn(Single.just(emptyList()))
-        Assert.assertEquals(dataSource.loadFunction(-1, 1), emptyList<String>())
+        assertThat(dataSource.loadFunction(-1, 1), equalTo( emptyList<String>()))
         verify(mediaClient, never()).resetCategoryContinuation("test")
     }
 }
