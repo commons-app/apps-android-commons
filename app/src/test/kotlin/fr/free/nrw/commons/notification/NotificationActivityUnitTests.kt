@@ -13,7 +13,6 @@ import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.notification.models.Notification
 import fr.free.nrw.commons.notification.models.NotificationType
 import fr.free.nrw.commons.utils.NetworkUtils
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -26,6 +25,8 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 
@@ -83,7 +84,7 @@ class NotificationActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun checkActivityNotNull() {
-        Assert.assertNotNull(activity)
+        assertThat(activity, notNullValue())
     }
 
     @Test

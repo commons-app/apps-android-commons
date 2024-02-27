@@ -4,7 +4,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.notification.models.NotificationType
 import io.reactivex.Observable
-import junit.framework.TestCase.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -22,6 +21,8 @@ import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResult
 import fr.free.nrw.commons.wikidata.GsonUtil
 import fr.free.nrw.commons.wikidata.model.notifications.Notification
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -85,15 +86,15 @@ class NotificationClientTest {
         )
 
         val notificationList = result.first()
-        assertEquals(1, notificationList.size)
+        assertThat(1, equalTo( notificationList.size))
 
         with(notificationList.first()) {
-            assertEquals(NotificationType.UNKNOWN, notificationType)
-            assertEquals("header", notificationText)
-            assertEquals("January 22", date)
-            assertEquals("foo", link)
-            assertEquals("", iconUrl)
-            assertEquals("1234", notificationId)
+            assertThat(NotificationType.UNKNOWN, equalTo( notificationType))
+            assertThat("header", equalTo( notificationText))
+            assertThat("January 22", equalTo( date))
+            assertThat("foo", equalTo( link))
+            assertThat("", equalTo( iconUrl))
+            assertThat("1234", equalTo( notificationId))
         }
     }
 
