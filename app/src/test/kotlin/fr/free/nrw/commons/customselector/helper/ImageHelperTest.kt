@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.Test
 import org.mockito.Mockito.mock
 
+
 /**
  * Custom Selector Image Helper Test
  */

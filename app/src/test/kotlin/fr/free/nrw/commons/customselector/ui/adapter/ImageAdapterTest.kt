@@ -33,6 +33,8 @@ import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 import java.lang.reflect.Field
 import java.lang.reflect.Modifier
 import java.util.*
@@ -197,7 +199,7 @@ class ImageAdapterTest {
      */
     @Test
     fun getItemCount() {
-        Assertions.assertEquals(0, imageAdapter.itemCount)
+        assertThat(0, equalTo( imageAdapter.itemCount))
     }
 
     /**
@@ -224,7 +226,7 @@ class ImageAdapterTest {
     fun getSectionName() {
         images.add(image)
         Whitebox.setInternalState(imageAdapter, "images", images)
-        Assertions.assertEquals("", imageAdapter.getSectionName(0))
+        assertThat("", equalTo( imageAdapter.getSectionName(0)))
     }
 
     /**

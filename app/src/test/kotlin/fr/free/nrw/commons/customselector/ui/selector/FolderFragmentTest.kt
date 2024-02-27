@@ -21,7 +21,6 @@ import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.ui.adapter.FolderAdapter
 import org.junit.Before
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
@@ -31,6 +30,8 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 import java.lang.reflect.Field
 
 /**
@@ -115,7 +116,7 @@ class FolderFragmentTest {
     fun testColumnCount() {
         val func = fragment.javaClass.getDeclaredMethod("columnCount")
         func.isAccessible = true
-        assertEquals(2, func.invoke(fragment))
+        assertThat(2, equalTo( func.invoke(fragment)))
     }
 
     /**

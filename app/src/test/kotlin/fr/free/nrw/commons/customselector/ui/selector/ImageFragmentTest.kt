@@ -25,7 +25,6 @@ import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter
 import org.junit.Before
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
@@ -36,6 +35,8 @@ import org.robolectric.Shadows
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 import java.lang.reflect.Field
 
 /**
@@ -138,7 +139,7 @@ class ImageFragmentTest {
     fun testGetSpanCount() {
         val func = fragment.javaClass.getDeclaredMethod("getSpanCount")
         func.isAccessible = true
-        assertEquals(3, func.invoke(fragment))
+        assertThat(3, equalTo( func.invoke(fragment)))
     }
 
     /**
