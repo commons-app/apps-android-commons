@@ -23,7 +23,6 @@ import fr.free.nrw.commons.profile.leaderboard.LeaderboardFragment
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardListAdapter
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardListViewModel
 import fr.free.nrw.commons.utils.ConfigUtils.isBetaFlavour
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -37,6 +36,10 @@ import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowToast
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
+import org.hamcrest.CoreMatchers.nullValue
+import org.hamcrest.CoreMatchers.equalTo
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -107,7 +110,7 @@ class LeaderboardFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun checkFragmentNotNull() {
-        Assert.assertNotNull(fragment)
+        assertThat(fragment, notNullValue())
     }
 
     @Test
@@ -218,7 +221,7 @@ class LeaderboardFragmentUnitTests {
         )
         method.isAccessible = true
         method.invoke(fragment, false)
-        Assert.assertNull(ShadowToast.getLatestToast())
+        assertThat(ShadowToast.getLatestToast(), nullValue())
     }
 
     @Test
@@ -233,13 +236,13 @@ class LeaderboardFragmentUnitTests {
         method.isAccessible = true
         method.invoke(fragment, true)
         if(isBetaFlavour) {
-            Assert.assertEquals(
+            assertThat(
                 ShadowToast.getTextOfLatestToast().toString(),
-                context.getString(R.string.leaderboard_unavailable_beta)
+                equalTo(context.getString(R.string.leaderboard_unavailable_beta))
             )
         } else {
-            Assert.assertNull(
-                ShadowToast.getTextOfLatestToast()
+            assertThat(
+                ShadowToast.getTextOfLatestToast(), nullValue()
             )
         }
 
