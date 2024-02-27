@@ -2,12 +2,13 @@ package fr.free.nrw.commons.upload
 
 import android.text.SpannableStringBuilder
 import fr.free.nrw.commons.TestCommonsApplication
-import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -24,7 +25,7 @@ class UploadMediaDetailInputFilterTest {
         val test: CharSequence = "test"
         val expected = "test"
         destination.insert(0, test)
-        Assert.assertEquals(destination.toString(), expected)
+        assertThat(destination.toString(), equalTo( expected))
     }
 
     @Test
@@ -36,7 +37,7 @@ class UploadMediaDetailInputFilterTest {
         val tests = intArrayOf(0x00A0, 0x1680, 0x180E, 0x2000, 0x2005, 0x200B, 0x2028, 0x2029, 0x202F, 0x205F)
         for (test: Int in tests) {
             builder.insert(0, String(Character.toChars(test)))
-            Assert.assertEquals(builder.toString(), "")
+            assertThat(builder.toString(), equalTo( ""))
             builder.clear()
         }
     }
@@ -50,7 +51,7 @@ class UploadMediaDetailInputFilterTest {
         val tests = intArrayOf(0x202A, 0x202B, 0x202C, 0x202D, 0x202E)
         for (test: Int in tests) {
             builder.insert(0, String(Character.toChars(test)))
-            Assert.assertEquals(builder.toString(), "")
+            assertThat(builder.toString(), equalTo( ""))
             builder.clear()
         }
     }
@@ -64,7 +65,7 @@ class UploadMediaDetailInputFilterTest {
         val tests = intArrayOf(0x00, 0x08, 0x10, 0x18, 0x1F, 0x7F, 0x3A)
         for (test: Int in tests) {
             builder.insert(0, String(Character.toChars(test)))
-            Assert.assertEquals(builder.toString(), "")
+            assertThat(builder.toString(), equalTo( ""))
             builder.clear()
         }
     }
@@ -75,7 +76,7 @@ class UploadMediaDetailInputFilterTest {
         builder.filters = arrayOf(UploadMediaDetailInputFilter())
 
         builder.insert(0, String(Character.toChars(0xFEFF)))
-        Assert.assertEquals(builder.toString(), "")
+        assertThat(builder.toString(), equalTo( ""))
         builder.clear()
     }
 
@@ -85,7 +86,7 @@ class UploadMediaDetailInputFilterTest {
         builder.filters = arrayOf(UploadMediaDetailInputFilter())
 
         builder.insert(0, String(Character.toChars(0x00AD)))
-        Assert.assertEquals(builder.toString(), "")
+        assertThat(builder.toString(), equalTo( ""))
         builder.clear()
     }
 
@@ -98,7 +99,7 @@ class UploadMediaDetailInputFilterTest {
         val tests = intArrayOf(0xE000, 0xE63F, 0xEC7E, 0xF2BD, 0xF8FF, 0xFFF0, 0xFFF4, 0xFFFC, 0xFFFF)
         for (test: Int in tests) {
             builder.insert(0, String(Character.toChars(test)))
-            Assert.assertEquals(builder.toString(), "")
+            assertThat(builder.toString(), equalTo( ""))
             builder.clear()
         }
     }
@@ -112,7 +113,7 @@ class UploadMediaDetailInputFilterTest {
         val testsExclude = intArrayOf(0x1FFFF, 0x44444, 0xFFFFF)
         for (test: Int in testsExclude) {
             builder.insert(0, String(Character.toChars(test)))
-            Assert.assertEquals(builder.toString(), "")
+            assertThat(builder.toString(), equalTo( ""))
             builder.clear()
         }
 
@@ -123,6 +124,6 @@ class UploadMediaDetailInputFilterTest {
             builder.insert(0, String(Character.toChars(test)))
             expected.insert(0, String(Character.toChars(test)))
         }
-        Assert.assertEquals(builder.toString(), expected.toString())
+        assertThat(builder.toString(), equalTo( expected.toString()))
     }
 }

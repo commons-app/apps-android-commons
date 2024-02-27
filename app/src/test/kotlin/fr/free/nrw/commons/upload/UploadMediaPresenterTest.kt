@@ -16,7 +16,6 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
 import org.junit.After
-import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -25,6 +24,8 @@ import org.mockito.Mockito.mockStatic
 import org.mockito.Mockito.verify
 import org.powermock.core.classloader.annotations.PrepareForTest
 import org.robolectric.RobolectricTestRunner
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 import java.util.*
 
 
@@ -290,7 +291,7 @@ class UploadMediaPresenterTest {
             ArgumentMatchers.any(Place::class.java)
         )
 
-        assertEquals("Exptected contry code", "de", captor.value.countryCode);
+        assertThat("Exptected contry code", "de", equalTo( captor.value.countryCode));
 
         verify(view).showProgress(false)
     }

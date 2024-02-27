@@ -19,7 +19,6 @@ import fr.free.nrw.commons.upload.UploadClient.TimeProvider
 import fr.free.nrw.commons.wikidata.mwapi.MwException
 import fr.free.nrw.commons.wikidata.mwapi.MwServiceError
 import io.reactivex.Observable
-import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertSame
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -28,6 +27,8 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okio.Buffer
 import org.junit.Before
 import org.junit.Test
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 import java.io.File
 import java.util.Date
 
@@ -85,7 +86,7 @@ class UploadClientTest {
         val result = uploadClient.uploadFileFromStash(contribution, filename, filekey).test()
 
         result.assertNoValues()
-        assertEquals(errorCode, result.errors()[0].message)
+        assertThat(errorCode, equalTo( result.errors()[0].message))
     }
 
     @Test
@@ -97,7 +98,7 @@ class UploadClientTest {
         val result = uploadClient.uploadFileFromStash(contribution, filename, filekey).test()
 
         result.assertNoValues()
-        assertEquals(exception, result.errors()[0])
+        assertThat(exception, equalTo( result.errors()[0]))
     }
 
     @Test
@@ -123,12 +124,12 @@ class UploadClientTest {
         result.assertNoErrors()
         assertSame(uploadResult, result.values()[0])
 
-        assertEquals(filename, filenameCaptor.asString())
-        assertEquals("100", totalFileSizeCaptor.asString())
-        assertEquals("10", offsetCaptor.asString())
-        assertEquals(filekey, fileKeyCaptor.asString())
-        assertEquals(testToken, tokenCaptor.asString())
-        assertEquals(fileContent, fileCaptor.firstValue.body.asString())
+        assertThat(filename, equalTo( filenameCaptor.asString()))
+        assertThat("100", equalTo( totalFileSizeCaptor.asString()))
+        assertThat("10", equalTo( offsetCaptor.asString()))
+        assertThat(filekey, equalTo( fileKeyCaptor.asString()))
+        assertThat(testToken, equalTo( tokenCaptor.asString()))
+        assertThat(fileContent, equalTo( fileCaptor.firstValue.body.asString()))
     }
 
     @Test
@@ -152,8 +153,8 @@ class UploadClientTest {
 
         result.assertNoErrors()
         val stashResult = result.values()[0]
-        assertEquals(filekey, stashResult.fileKey)
-        assertEquals(StashUploadState.SUCCESS, stashResult.state)
+        assertThat(filekey, equalTo( stashResult.fileKey))
+        assertThat(StashUploadState.SUCCESS, equalTo( stashResult.state))
     }
 
     @Test
@@ -179,7 +180,7 @@ class UploadClientTest {
         val result = uploadClient.uploadFileToStash(filename, contribution, mock()).test()
 
         result.assertNoErrors()
-        assertEquals(StashUploadState.FAILED, result.values()[0].state)
+        assertThat(StashUploadState.FAILED, equalTo( result.values()[0].state))
     }
 
     @Test
@@ -196,7 +197,7 @@ class UploadClientTest {
         val result = uploadClient.uploadFileToStash(filename, contribution, mock()).test()
 
         result.assertNoErrors()
-        assertEquals(StashUploadState.FAILED, result.values()[0].state)
+        assertThat(StashUploadState.FAILED, equalTo( result.values()[0].state))
     }
 
     @Test
@@ -225,8 +226,8 @@ class UploadClientTest {
         val result = uploadClient.uploadFileToStash(filename, contribution, mock()).test()
 
         result.assertNoErrors()
-        assertEquals(StashUploadState.SUCCESS, result.values()[0].state)
-        assertEquals(filekey, result.values()[0].fileKey)
+        assertThat(StashUploadState.SUCCESS, equalTo( result.values()[0].state))
+        assertThat(filekey, equalTo( result.values()[0].fileKey))
     }
 
 

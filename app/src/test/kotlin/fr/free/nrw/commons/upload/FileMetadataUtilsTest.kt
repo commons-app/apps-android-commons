@@ -1,9 +1,10 @@
 package fr.free.nrw.commons.upload
 
 import androidx.exifinterface.media.ExifInterface.*
-import org.junit.Assert.assertTrue
 import org.junit.Test
 import java.util.*
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.`is`
 
 /**
  * Test cases for FileMetadataUtils
@@ -18,7 +19,7 @@ class FileMetadataUtilsTest {
         val author = FileMetadataUtils.getTagsFromPref("Author")
         val authorRef = arrayOf(TAG_ARTIST, TAG_CAMERA_OWNER_NAME);
 
-        assertTrue(Arrays.deepEquals(author, authorRef))
+        assertThat(Arrays.deepEquals(author, authorRef), `is`(true))
     }
 
     /**
@@ -31,7 +32,7 @@ class FileMetadataUtilsTest {
                 TAG_GPS_LONGITUDE, TAG_GPS_LONGITUDE_REF,
                 TAG_GPS_ALTITUDE, TAG_GPS_ALTITUDE_REF)
 
-        assertTrue(Arrays.deepEquals(author, authorRef))
+        assertThat(Arrays.deepEquals(author, authorRef), `is`(true))
     }
 
     /**
@@ -42,7 +43,7 @@ class FileMetadataUtilsTest {
         val author = FileMetadataUtils.getTagsFromPref("Copyright")
         val authorRef = arrayOf(TAG_COPYRIGHT)
 
-        assertTrue(Arrays.deepEquals(author, authorRef))
+        assertThat(Arrays.deepEquals(author, authorRef), `is`(true))
     }
 
     /**
@@ -53,7 +54,7 @@ class FileMetadataUtilsTest {
         val author = FileMetadataUtils.getTagsFromPref("Camera Model")
         val authorRef = arrayOf(TAG_MAKE, TAG_MODEL)
 
-        assertTrue(Arrays.deepEquals(author, authorRef))
+        assertThat(Arrays.deepEquals(author, authorRef), `is`(true))
     }
 
     /**
@@ -64,7 +65,7 @@ class FileMetadataUtilsTest {
         val author = FileMetadataUtils.getTagsFromPref("Lens Model")
         val authorRef = arrayOf(TAG_LENS_MAKE, TAG_LENS_MODEL, TAG_LENS_SPECIFICATION)
 
-        assertTrue(Arrays.deepEquals(author, authorRef))
+        assertThat(Arrays.deepEquals(author, authorRef), `is`(true))
     }
 
     /**
@@ -75,7 +76,7 @@ class FileMetadataUtilsTest {
         val author = FileMetadataUtils.getTagsFromPref("Serial Numbers")
         val authorRef = arrayOf(TAG_BODY_SERIAL_NUMBER, TAG_LENS_SERIAL_NUMBER)
 
-        assertTrue(Arrays.deepEquals(author, authorRef))
+        assertThat(Arrays.deepEquals(author, authorRef), `is`(true))
     }
 
     /**
@@ -86,6 +87,6 @@ class FileMetadataUtilsTest {
         val author = FileMetadataUtils.getTagsFromPref("Software")
         val authorRef = arrayOf(TAG_SOFTWARE)
 
-        assertTrue(Arrays.deepEquals(author, authorRef))
+        assertThat(Arrays.deepEquals(author, authorRef), `is`(true))
     }
 }

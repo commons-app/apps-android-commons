@@ -18,7 +18,6 @@ import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
 import fr.free.nrw.commons.settings.SettingsFragment
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -31,6 +30,9 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 
@@ -88,7 +90,7 @@ class UploadMediaDetailAdapterUnitTest {
     @Test
     @Throws(Exception::class)
     fun checkAdapterNotNull() {
-        Assert.assertNotNull(adapter)
+        assertThat(adapter, notNullValue())
     }
 
     @Test
@@ -102,9 +104,9 @@ class UploadMediaDetailAdapterUnitTest {
             UploadMediaDetailAdapter::class.java.getDeclaredField("selectedLanguages")
         selectedLanguages.isAccessible = true
         adapter.items = list
-        Assert.assertEquals(uploadMediaDetails.get(adapter), list)
+        assertThat(uploadMediaDetails.get(adapter), equalTo( list))
         val map: HashMap<Int, String> = selectedLanguages.get(adapter) as HashMap<Int, String>
-        Assert.assertEquals(map.size, 0)
+        assertThat(map.size, equalTo( 0))
     }
 
     @Test
@@ -115,7 +117,7 @@ class UploadMediaDetailAdapterUnitTest {
             UploadMediaDetailAdapter::class.java.getDeclaredField("uploadMediaDetails")
         uploadMediaDetails.isAccessible = true
         uploadMediaDetails.set(adapter, list)
-        Assert.assertEquals(adapter.items, list)
+        assertThat(adapter.items, equalTo( list))
     }
 
     @Test
@@ -126,7 +128,7 @@ class UploadMediaDetailAdapterUnitTest {
             UploadMediaDetailAdapter::class.java.getDeclaredField("uploadMediaDetails")
         uploadMediaDetails.isAccessible = true
         uploadMediaDetails.set(adapter, list)
-        Assert.assertEquals(adapter.itemCount, list.size)
+        assertThat(adapter.itemCount, equalTo( list.size))
     }
 
     @Test
@@ -143,7 +145,7 @@ class UploadMediaDetailAdapterUnitTest {
         selectedLanguages.set(adapter, hashMapOf<Int, String>())
         adapter.addDescription(uploadMediaDetail)
         val map: HashMap<Int, String> = selectedLanguages.get(adapter) as HashMap<Int, String>
-        Assert.assertEquals(map[list.size], null)
+        assertThat(map[list.size], equalTo( null))
     }
 
     @Test
@@ -160,7 +162,7 @@ class UploadMediaDetailAdapterUnitTest {
         selectedLanguages.set(adapter, hashMapOf<Int, String>())
         adapter.removeDescription(uploadMediaDetail, list.size)
         val map: HashMap<Int, String> = selectedLanguages.get(adapter) as HashMap<Int, String>
-        Assert.assertEquals(map[list.size], null)
+        assertThat(map[list.size], equalTo( null))
     }
 
     @Test
@@ -258,45 +260,45 @@ class UploadMediaDetailAdapterUnitTest {
         // empty space
         val test1 = "  test  "
         val expected1 = "test"
-        Assert.assertEquals(expected1, viewHolder.removeLeadingAndTrailingWhitespace(test1))
+        assertThat(expected1, equalTo( viewHolder.removeLeadingAndTrailingWhitespace(test1)))
 
         val test2 = "  test test "
         val expected2 = "test test"
-        Assert.assertEquals(expected2, viewHolder.removeLeadingAndTrailingWhitespace(test2))
+        assertThat(expected2, equalTo( viewHolder.removeLeadingAndTrailingWhitespace(test2)))
 
         // No whitespace
         val test3 = "No trailing space";
         val expected3 = "No trailing space";
-        Assert.assertEquals(expected3, viewHolder.removeLeadingAndTrailingWhitespace(test3))
+        assertThat(expected3, equalTo( viewHolder.removeLeadingAndTrailingWhitespace(test3)))
 
         // blank string
         val test4 = " \r \t  "
         val expected4 = "";
-        Assert.assertEquals(expected4, viewHolder.removeLeadingAndTrailingWhitespace(test4))
+        assertThat(expected4, equalTo( viewHolder.removeLeadingAndTrailingWhitespace(test4)))
     }
 
     @Test
     fun testRemoveLeadingAndTrailingInstanceTab() {
         val test = "\ttest\t"
         val expected = "test"
-        Assert.assertEquals(expected, viewHolder.removeLeadingAndTrailingWhitespace(test))
+        assertThat(expected, equalTo( viewHolder.removeLeadingAndTrailingWhitespace(test)))
     }
 
     @Test
     fun testRemoveLeadingAndTrailingCarriageReturn() {
         val test = "\rtest\r"
         val expected = "test"
-        Assert.assertEquals(expected, viewHolder.removeLeadingAndTrailingWhitespace(test))
+        assertThat(expected, equalTo( viewHolder.removeLeadingAndTrailingWhitespace(test)))
     }
 
     @Test
     fun testCaptionJapaneseCharacters() {
         val test1 = "テスト　テスト"
         val expected1 = "テスト テスト"
-        Assert.assertEquals(expected1, viewHolder.convertIdeographicSpaceToLatinSpace(test1));
+        assertThat(expected1, equalTo( viewHolder.convertIdeographicSpaceToLatinSpace(test1)));
 
         val test2 = "　\r　\t　テスト　\r　\t　"
         val expected2 = "テスト"
-        Assert.assertEquals(expected2, viewHolder.removeLeadingAndTrailingWhitespace(test2))
+        assertThat(expected2, equalTo( viewHolder.removeLeadingAndTrailingWhitespace(test2)))
     }
 }
