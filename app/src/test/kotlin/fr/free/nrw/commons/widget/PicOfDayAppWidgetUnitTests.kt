@@ -13,7 +13,6 @@ import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.media.MediaClient
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,6 +22,8 @@ import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -59,7 +60,7 @@ class PicOfDayAppWidgetUnitTests {
     @Test
     @Throws(Exception::class)
     fun testWidgetNotNull() {
-        Assert.assertNotNull(widget)
+        assertThat(widget, notNullValue())
     }
 
     @Test

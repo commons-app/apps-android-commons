@@ -2,7 +2,6 @@ package fr.free.nrw.commons.widget
 
 import android.app.Activity
 import fr.free.nrw.commons.TestCommonsApplication
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -10,6 +9,8 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.android.controller.ActivityController
 import org.robolectric.annotation.Config
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -34,7 +35,7 @@ class HeightLimitedRecyclerViewUnitTests {
     @Test
     @Throws(Exception::class)
     fun checkNotNull() {
-        Assert.assertNotNull(recyclerView)
+        assertThat(recyclerView, notNullValue())
     }
 
     @Test
