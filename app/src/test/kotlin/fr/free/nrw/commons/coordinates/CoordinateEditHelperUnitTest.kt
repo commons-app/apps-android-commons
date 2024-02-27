@@ -10,7 +10,6 @@ import fr.free.nrw.commons.notification.NotificationHelper
 import fr.free.nrw.commons.utils.ViewUtilWrapper
 import io.reactivex.Observable
 import io.reactivex.Single
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -23,6 +22,9 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.lang.reflect.Method
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -63,7 +65,7 @@ class CoordinateEditHelperUnitTest {
     @Test
     @Throws(Exception::class)
     fun checkNotNull() {
-        Assert.assertNotNull(helper)
+        assertThat(helper, notNullValue())
     }
 
     @Test
@@ -170,7 +172,7 @@ class CoordinateEditHelperUnitTest {
             String::class.java, String::class.java, String::class.java, Boolean::class.java
         )
         method.isAccessible = true
-        assertEquals(method.invoke(helper, context, media, "0.0", "0.0", "0.0F", true), true)
+        assertThat(method.invoke(helper, context, media, "0.0", "0.0", "0.0F", true), equalTo( true))
     }
 
     @Test
@@ -181,7 +183,7 @@ class CoordinateEditHelperUnitTest {
             String::class.java, String::class.java, String::class.java, Boolean::class.java
         )
         method.isAccessible = true
-        assertEquals(method.invoke(helper, context, media, "0.0", "0.0", "0.0F", false), false)
+        assertThat(method.invoke(helper, context, media, "0.0", "0.0", "0.0F", false), equalTo( false))
     }
 
 }
