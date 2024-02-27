@@ -13,13 +13,15 @@ import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import okhttp3.*
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Method
 import java.util.concurrent.Executor
 
@@ -82,7 +84,7 @@ class CustomOkHttpNetworkFetcherUnitTest {
     @Test
     @Throws(Exception::class)
     fun checkNotNull() {
-        Assert.assertNotNull(fetcher)
+        assertThat(fetcher, notNullValue())
     }
 
     @Test
@@ -131,7 +133,7 @@ class CustomOkHttpNetworkFetcherUnitTest {
     @Throws(Exception::class)
     fun testGetExtraMap() {
         val map = fetcher.getExtraMap(state, 40)
-        Assertions.assertEquals(map!!["image_size"], 40.toString())
+        assertThat(map!!["image_size"], equalTo( 40.toString()))
     }
 
     @Test

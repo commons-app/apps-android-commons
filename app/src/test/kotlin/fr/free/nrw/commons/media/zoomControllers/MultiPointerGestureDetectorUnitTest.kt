@@ -5,12 +5,14 @@ import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.media.zoomControllers.gestures.MultiPointerGestureDetector
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Method
 
 class MultiPointerGestureDetectorUnitTest {
@@ -36,7 +38,7 @@ class MultiPointerGestureDetectorUnitTest {
     @Test
     @Throws(Exception::class)
     fun checkDetectorNotNull() {
-        Assert.assertNotNull(detector)
+        assertThat(detector, notNullValue())
     }
 
     @Test
@@ -46,7 +48,7 @@ class MultiPointerGestureDetectorUnitTest {
             "shouldStartGesture"
         )
         method.isAccessible = true
-        Assert.assertEquals(method.invoke(detector), true)
+        assertThat(method.invoke(detector), equalTo( true))
     }
 
     @Test
@@ -103,49 +105,49 @@ class MultiPointerGestureDetectorUnitTest {
     @Test
     @Throws(Exception::class)
     fun testIsGestureInProgress() {
-        Assert.assertEquals(detector.isGestureInProgress, false)
+        assertThat(detector.isGestureInProgress, equalTo( false))
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetNewPointerCount() {
-        Assert.assertEquals(detector.newPointerCount, 0)
+        assertThat(detector.newPointerCount, equalTo( 0))
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetPointerCount() {
-        Assert.assertEquals(detector.pointerCount, 0)
+        assertThat(detector.pointerCount, equalTo( 0))
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetStartX() {
-        Assert.assertEquals(detector.startX[0], 0.0f)
+        assertThat(detector.startX[0], equalTo( 0.0f))
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetStartY() {
-        Assert.assertEquals(detector.startY[0], 0.0f)
+        assertThat(detector.startY[0], equalTo( 0.0f))
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetCurrentX() {
-        Assert.assertEquals(detector.currentX[0], 0.0f)
+        assertThat(detector.currentX[0], equalTo( 0.0f))
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetCurrentY() {
-        Assert.assertEquals(detector.currentY[0], 0.0f)
+        assertThat(detector.currentY[0], equalTo( 0.0f))
     }
 
     @Test
     @Throws(Exception::class)
     fun testOnTouchEvent() {
-        Assert.assertEquals(detector.onTouchEvent(event), true)
+        assertThat(detector.onTouchEvent(event), equalTo( true))
     }
 
     @Test
@@ -153,7 +155,7 @@ class MultiPointerGestureDetectorUnitTest {
     fun `testOnTouchEventCase ACTION_MOVE`() {
         Whitebox.setInternalState(detector, "mPointerCount", 1)
         whenever(event.actionMasked).thenReturn(MotionEvent.ACTION_MOVE)
-        Assert.assertEquals(detector.onTouchEvent(event), true)
+        assertThat(detector.onTouchEvent(event), equalTo( true))
     }
 
     @Test
@@ -163,14 +165,14 @@ class MultiPointerGestureDetectorUnitTest {
         Whitebox.setInternalState(detector, "mPointerCount", 1)
         whenever(event.actionMasked).thenReturn(MotionEvent.ACTION_UP)
         whenever(event.pointerCount).thenReturn(-2)
-        Assert.assertEquals(detector.onTouchEvent(event), true)
+        assertThat(detector.onTouchEvent(event), equalTo( true))
     }
 
     @Test
     @Throws(Exception::class)
     fun `testOnTouchEventCase ACTION_CANCEL`() {
         whenever(event.actionMasked).thenReturn(MotionEvent.ACTION_CANCEL)
-        Assert.assertEquals(detector.onTouchEvent(event), true)
+        assertThat(detector.onTouchEvent(event), equalTo( true))
     }
 
 }
