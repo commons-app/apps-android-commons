@@ -36,7 +36,6 @@ import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
 import fr.free.nrw.commons.nearby.fragments.NearbyParentFragment
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter
 import fr.free.nrw.commons.wikidata.WikidataEditListener
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
@@ -53,6 +52,8 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowAlertDialog
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -289,7 +290,7 @@ class NearbyParentFragmentUnitTest {
         fragment.onLearnMoreClicked()
         val shadowActivity: ShadowActivity = Shadows.shadowOf(activity)
         val startedIntent = shadowActivity.nextStartedActivity
-        Assert.assertEquals(startedIntent.`data`, Uri.parse(NearbyParentFragment.WLM_URL))
+        assertThat(startedIntent.`data`, equalTo( Uri.parse(NearbyParentFragment.WLM_URL)))
     }
 
     @Test @Ignore
@@ -307,9 +308,9 @@ class NearbyParentFragmentUnitTest {
         fragment.setNearbyParentFragmentInstanceReadyCallback(
             nearbyParentFragmentInstanceReadyCallback
         )
-        Assert.assertEquals(
+        assertThat(
             nearbyParentFragmentInstanceReadyCallback,
-            nearbyParentFragmentInstanceReadyCallback
+            equalTo(nearbyParentFragmentInstanceReadyCallback)
         )
     }
 
@@ -409,7 +410,7 @@ class NearbyParentFragmentUnitTest {
     fun testOpenLocationSettingsCaseNull() {
         fragment.openLocationSettings()
         val shadowActivity: ShadowActivity = Shadows.shadowOf(activity)
-        Assert.assertEquals(shadowActivity.nextStartedActivityForResult, null)
+        assertThat(shadowActivity.nextStartedActivityForResult, equalTo( null))
     }
 
     @Test @Ignore
@@ -417,7 +418,7 @@ class NearbyParentFragmentUnitTest {
     fun testShowLocationOffDialog() {
         fragment.showLocationOffDialog()
         val dialog: AlertDialog = ShadowAlertDialog.getLatestDialog() as AlertDialog
-        Assert.assertEquals(dialog.isShowing, true)
+        assertThat(dialog.isShowing, equalTo( true))
     }
 
 }

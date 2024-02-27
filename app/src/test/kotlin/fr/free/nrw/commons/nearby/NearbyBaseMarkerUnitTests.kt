@@ -2,12 +2,14 @@ package fr.free.nrw.commons.nearby
 
 import android.os.Parcel
 import com.mapbox.mapboxsdk.annotations.Icon
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
+import org.hamcrest.CoreMatchers.`is`
 
 class NearbyBaseMarkerUnitTests {
 
@@ -32,7 +34,7 @@ class NearbyBaseMarkerUnitTests {
     @Test
     @Throws(Exception::class)
     fun checkNotNull() {
-        Assert.assertNotNull(marker)
+        assertThat(marker, notNullValue())
     }
 
     @Test
@@ -80,7 +82,7 @@ class NearbyBaseMarkerUnitTests {
     @Test
     @Throws(Exception::class)
     fun testEqualsCaseNull() {
-        Assert.assertFalse(marker.equals(this))
+        assertThat(marker.equals(this), `is`(false))
     }
 
     @Test

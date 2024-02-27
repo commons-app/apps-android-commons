@@ -6,7 +6,6 @@ import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.nearby.fragments.CommonPlaceClickActions
 import fr.free.nrw.commons.profile.ProfileActivity
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -16,6 +15,9 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -46,20 +48,20 @@ class CommonPlaceClickActionsUnitTest {
 
     @Test
     fun testNonNull() {
-        Assert.assertNotNull(commonPlaceClickActions)
+        assertThat(commonPlaceClickActions, notNullValue())
     }
 
     @Test
     fun testFunctionDeclaration() {
-        Assert.assertNotNull(commonPlaceClickActions.onCameraClicked())
-        Assert.assertNotNull(commonPlaceClickActions.onGalleryClicked())
-        Assert.assertNotNull(commonPlaceClickActions.onOverflowClicked())
-        Assert.assertNotNull(commonPlaceClickActions.onDirectionsClicked())
-        Assert.assertNotNull(commonPlaceClickActions.onCameraLongPressed())
-        Assert.assertNotNull(commonPlaceClickActions.onGalleryLongPressed())
-        Assert.assertNotNull(commonPlaceClickActions.onBookmarkLongPressed())
-        Assert.assertNotNull(commonPlaceClickActions.onDirectionsLongPressed())
-        Assert.assertNotNull(commonPlaceClickActions.onOverflowLongPressed())
+        assertThat(commonPlaceClickActions.onCameraClicked(), notNullValue())
+        assertThat(commonPlaceClickActions.onGalleryClicked(), notNullValue())
+        assertThat(commonPlaceClickActions.onOverflowClicked(), notNullValue())
+        assertThat(commonPlaceClickActions.onDirectionsClicked(), notNullValue())
+        assertThat(commonPlaceClickActions.onCameraLongPressed(), notNullValue())
+        assertThat(commonPlaceClickActions.onGalleryLongPressed(), notNullValue())
+        assertThat(commonPlaceClickActions.onBookmarkLongPressed(), notNullValue())
+        assertThat(commonPlaceClickActions.onDirectionsLongPressed(), notNullValue())
+        assertThat(commonPlaceClickActions.onOverflowLongPressed(), notNullValue())
     }
 
     @Test
@@ -81,7 +83,7 @@ class CommonPlaceClickActionsUnitTest {
             Uri::class.java
         )
         method.isAccessible = true
-        Assert.assertEquals(method.invoke(commonPlaceClickActions, uri), true)
+        assertThat(method.invoke(commonPlaceClickActions, uri), equalTo( true))
     }
 
     @Test
