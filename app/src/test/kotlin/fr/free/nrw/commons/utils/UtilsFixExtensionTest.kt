@@ -1,78 +1,79 @@
 package fr.free.nrw.commons.utils
 
 import fr.free.nrw.commons.Utils.fixExtension
-import org.junit.Assert.assertEquals
 import org.junit.Test
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 
 class UtilsFixExtensionTest {
 
     @Test
     fun jpegResultsInJpg() {
-        assertEquals("SampleFile.jpg", fixExtension("SampleFile.jpeg", "jpeg"))
+        assertThat("SampleFile.jpg", equalTo(fixExtension("SampleFile.jpeg", "jpeg")))
     }
 
     @Test
     fun capitalJpegWithNoHintResultsInJpg() {
-        assertEquals("SampleFile.jpg", fixExtension("SampleFile.JPEG", null))
+        assertThat("SampleFile.jpg", equalTo(fixExtension("SampleFile.JPEG", null)))
     }
 
     @Test
     fun jpegWithBogusHintResultsInJpg() {
-        assertEquals("SampleFile.jpg", fixExtension("SampleFile.jpeg", null))
+        assertThat("SampleFile.jpg", equalTo(fixExtension("SampleFile.jpeg", null)))
     }
 
     @Test
     fun jpegToCapitalJpegResultsInJpg() {
-        assertEquals("SampleFile.jpg", fixExtension("SampleFile.jpeg", "JPEG"))
+        assertThat("SampleFile.jpg", equalTo(fixExtension("SampleFile.jpeg", "JPEG")))
     }
 
     @Test
     fun jpgToJpegResultsInJpg() {
-        assertEquals("SampleFile.jpg", fixExtension("SampleFile.jpg", "jpeg"))
+        assertThat("SampleFile.jpg", equalTo(fixExtension("SampleFile.jpg", "jpeg")))
     }
 
     @Test
     fun jpegToJpgResultsInJpg() {
-        assertEquals("SampleFile.jpg", fixExtension("SampleFile.jpeg", "jpg"))
+        assertThat("SampleFile.jpg", equalTo(fixExtension("SampleFile.jpeg", "jpg")))
     }
 
     @Test
     fun jpgRemainsJpg() {
-        assertEquals("SampleFile.jpg", fixExtension("SampleFile.jpg", "jpg"))
+        assertThat("SampleFile.jpg", equalTo(fixExtension("SampleFile.jpg", "jpg")))
     }
 
     @Test
     fun pngRemainsPng() {
-        assertEquals("SampleFile.png", fixExtension("SampleFile.png", "png"))
+        assertThat("SampleFile.png", equalTo(fixExtension("SampleFile.png", "png")))
     }
 
     @Test
     fun jpgHintResultsInJpg() {
-        assertEquals("SampleFile.jpg", fixExtension("SampleFile", "jpg"))
+        assertThat("SampleFile.jpg", equalTo(fixExtension("SampleFile", "jpg")))
     }
 
     @Test
     fun jpegHintResultsInJpg() {
-        assertEquals("SampleFile.jpg", fixExtension("SampleFile", "jpeg"))
+        assertThat("SampleFile.jpg", equalTo(fixExtension("SampleFile", "jpeg")))
     }
 
     @Test
     fun dotLessJpgToJpgResultsInJpg() {
-        assertEquals("SAMPLEjpg.jpg", fixExtension("SAMPLEjpg", "jpg"))
+        assertThat("SAMPLEjpg.jpg", equalTo(fixExtension("SAMPLEjpg", "jpg")))
     }
 
     @Test
     fun inWordJpegToJpgResultsInJpg() {
-        assertEquals("X.jpeg.SAMPLE.jpg", fixExtension("X.jpeg.SAMPLE", "jpg"))
+        assertThat("X.jpeg.SAMPLE.jpg", equalTo(fixExtension("X.jpeg.SAMPLE", "jpg")))
     }
 
     @Test
     fun noExtensionShouldResultInJpg() {
-        assertEquals("Sample.jpg", fixExtension("Sample", null))
+        assertThat("Sample.jpg", equalTo(fixExtension("Sample", null)))
     }
 
     @Test
     fun extensionAlreadyInTitleShouldRemain() {
-        assertEquals("Sample.jpg", fixExtension("Sample.jpg", null))
+        assertThat("Sample.jpg", equalTo(fixExtension("Sample.jpg", null)))
     }
 }

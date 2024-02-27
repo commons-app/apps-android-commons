@@ -2,8 +2,9 @@ package fr.free.nrw.commons.utils
 
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.utils.StringSortingUtils.sortBySimilarity
-import org.junit.Assert.assertEquals
 import org.junit.Test
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 import java.util.Collections.sort
 
 class StringSortingUtilsTest {
@@ -25,7 +26,7 @@ class StringSortingUtilsTest {
 
         sort(actualList, sortBySimilarity("1234"))
 
-        assertEquals(expectedList, actualList)
+        assertThat(expectedList, equalTo( actualList))
     }
 
     @Test
@@ -51,7 +52,7 @@ class StringSortingUtilsTest {
 
         sort(actualList, sortBySimilarity("The"))
 
-        assertEquals(expectedList, actualList)
+        assertThat(expectedList, equalTo( actualList))
     }
 
     @Test
@@ -73,7 +74,7 @@ class StringSortingUtilsTest {
 
         sort(actualList, sortBySimilarity("**$"))
 
-        assertEquals(expectedList, actualList)
+        assertThat(expectedList, equalTo( actualList))
     }
 
     @Test
@@ -103,7 +104,7 @@ class StringSortingUtilsTest {
 
         sort(actualList, sortBySimilarity("S9"))
 
-        assertEquals(expectedList, actualList)
+        assertThat(expectedList, equalTo( actualList))
     }
 
     @Test
@@ -133,6 +134,6 @@ class StringSortingUtilsTest {
 
         sort(actualList, sortBySimilarity("the fox"))
 
-        assertEquals(expectedList, actualList)
+        assertThat(expectedList, equalTo( actualList))
     }
 }

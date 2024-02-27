@@ -2,7 +2,8 @@ package fr.free.nrw.commons.utils
 
 import fr.free.nrw.commons.location.LatLng
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 
 /**
  * Test class for location utils
@@ -15,9 +16,9 @@ class LocationUtilsTest {
     @Test
     fun testMapBoxLatLngToCommonsLatLng() {
         val commonsLatLngTest = LocationUtils.mapBoxLatLngToCommonsLatLng(com.mapbox.mapboxsdk.geometry.LatLng(0.0, 0.0))
-        assertEquals(0.0, commonsLatLngTest.latitude)
-        assertEquals(0.0, commonsLatLngTest.longitude)
-        assertEquals(0f, commonsLatLngTest.accuracy)
+        assertThat(0.0, equalTo( commonsLatLngTest.latitude))
+        assertThat(0.0, equalTo( commonsLatLngTest.longitude))
+        assertThat(0f, equalTo( commonsLatLngTest.accuracy))
     }
 
     /**
@@ -26,9 +27,9 @@ class LocationUtilsTest {
     @Test
     fun testCommonsLatLngToMapBoxLatLng() {
         val geoLatLngTest = LocationUtils.commonsLatLngToMapBoxLatLng(LatLng(0.0, 0.0, 0f))
-        assertEquals(0.0, geoLatLngTest.latitude)
-        assertEquals(0.0, geoLatLngTest.longitude)
-        assertEquals(0.0, geoLatLngTest.altitude)
+        assertThat(0.0, equalTo( geoLatLngTest.latitude))
+        assertThat(0.0, equalTo( geoLatLngTest.longitude))
+        assertThat(0.0, equalTo( geoLatLngTest.altitude))
     }
 
 }
