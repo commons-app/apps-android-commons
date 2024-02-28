@@ -301,6 +301,8 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             Timber.e("""upload: ${contribution.media.filename} failed, file path is null""")
         }
         // FP: this is an obvious genuine failure point
+            // But the actual return point is not here
+            // So I guess we can just add a var here which basically says what the string above say
 
         val media = contribution.media
         val displayTitle = contribution.media.displayTitle
@@ -379,6 +381,11 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
 
                         } else {
                             // FP: Here is a much more ambiguous failure point
+                                // Either uploadResult is null in which case we have a big problem
+                                // or we'll have some form of message in uploadResult.result
+                                // Either way we can probably not confidently say that it is a
+                                // genuine failure, and if we want a more extensive description then
+                                // we have those as well
                             Timber.e("Stash Upload failed")
                             showFailedNotification(contribution)
                             contribution.state = Contribution.STATE_FAILED
@@ -389,7 +396,9 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                     }catch (exception : Exception){
                         // FP: Exception in upload from stash.
                             // Ambiguous in the sense that it is hard to determine from code, but we
-                            // at least have an exception to work with
+                            // at least have an exception to work with. And as we have already
+                            // passed one upload step we can be pretty certain this is not a
+                            // genuine failure.
                         Timber.e(exception)
                         Timber.e("Upload from stash failed for contribution : $filename")
                         showFailedNotification(contribution)
@@ -407,7 +416,9 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                 }
                 else -> {
                     // FP: Error in upload to stash.
-                        // have a stashUploadResult to work with
+                        // This only gives us a failure, nothing more to work with, so can't say it
+                        // is a genuine failure. This is probably where invalid or missing filename
+                        // will fail
                     Timber.e("""upload file to stash failed with status: ${stashUploadResult.state}""")
                     showFailedNotification(contribution)
                     contribution.state = Contribution.STATE_FAILED
@@ -418,7 +429,8 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
         }catch (exception: Exception){
             // FP: Exception in upload to stash.
                 // Ambiguous in the sense that it is hard to determine from code, but we
-                // at least have an exception to work with
+                // at least have an exception to work with. Might also be here invalid filename
+                // fails
             Timber.e(exception)
             Timber.e("Stash upload failed for contribution: $filename")
             showFailedNotification(contribution)
