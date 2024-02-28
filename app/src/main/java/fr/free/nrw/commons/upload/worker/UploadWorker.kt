@@ -300,6 +300,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
         if (contribution.localUri == null || contribution.localUri.path == null) {
             Timber.e("""upload: ${contribution.media.filename} failed, file path is null""")
         }
+        // FP: this is an obvious genuine failure point
 
         val media = contribution.media
         val displayTitle = contribution.media.displayTitle
@@ -377,6 +378,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                             showSuccessNotification(contribution)
 
                         } else {
+                            // FP: Here is a much more ambiguous failure point
                             Timber.e("Stash Upload failed")
                             showFailedNotification(contribution)
                             contribution.state = Contribution.STATE_FAILED
@@ -385,6 +387,9 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
 
                         }
                     }catch (exception : Exception){
+                        // FP: Exception in upload from stash.
+                            // Ambiguous in the sense that it is hard to determine from code, but we
+                            // at least have an exception to work with
                         Timber.e(exception)
                         Timber.e("Upload from stash failed for contribution : $filename")
                         showFailedNotification(contribution)
@@ -401,6 +406,8 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                     contributionDao.saveSynchronous(contribution)
                 }
                 else -> {
+                    // FP: Error in upload to stash.
+                        // have a stashUploadResult to work with
                     Timber.e("""upload file to stash failed with status: ${stashUploadResult.state}""")
                     showFailedNotification(contribution)
                     contribution.state = Contribution.STATE_FAILED
@@ -409,6 +416,9 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                 }
             }
         }catch (exception: Exception){
+            // FP: Exception in upload to stash.
+                // Ambiguous in the sense that it is hard to determine from code, but we
+                // at least have an exception to work with
             Timber.e(exception)
             Timber.e("Stash upload failed for contribution: $filename")
             showFailedNotification(contribution)
