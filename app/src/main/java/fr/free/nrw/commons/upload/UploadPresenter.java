@@ -154,7 +154,7 @@ public class UploadPresenter implements UploadContract.UserActionListener {
     public void deletePictureAtIndex(int index) {
         List<UploadableFile> uploadableFiles = view.getUploadableFiles();
         if (index == uploadableFiles.size() - 1) {
-            // If the next fragment to be shown is not one of the MediaDetailsFragment/
+            // If the next fragment to be shown is not one of the MediaDetailsFragment
             // lets hide the top card so that it doesn't appear on the other fragments
             view.showHideTopCard(false);
         }
@@ -165,7 +165,9 @@ public class UploadPresenter implements UploadContract.UserActionListener {
             view.finish();
             return;
         } else {
-            presenter.updateImageQualitiesJSON(uploadableFiles.size(), index);
+            if (presenter != null) {
+                presenter.updateImageQualitiesJSON(uploadableFiles.size(), index);
+            }
             view.onUploadMediaDeleted(index);
             if (!(index == uploadableFiles.size()) && index != 0) {
                 // if the deleted image was not the last item to be uploaded, check quality of next

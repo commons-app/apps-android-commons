@@ -32,8 +32,6 @@ public interface UploadMediaDetailsContract {
 
         void showDuplicatePicturePopup(UploadItem uploadItem);
 
-        void showBadImagePopup(Integer errorCode, UploadItem uploadItem);
-
         void showConnectionErrorPopup();
 
         void showExternalMap(UploadItem uploadItem);

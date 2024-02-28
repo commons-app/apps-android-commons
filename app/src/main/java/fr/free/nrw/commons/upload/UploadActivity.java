@@ -496,6 +496,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                             Intent batteryOptimisationSettingsIntent = new Intent(
                                 Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
                             startActivity(batteryOptimisationSettingsIntent);
+                            // calling checkImageQuality after battery dialog is interacted with
+                            // so that 2 dialogs do not pop up simultaneously
                             presenter.checkImageQuality(0);
                             UploadMediaPresenter.isBatteryDialogShowing = false;
                         },
@@ -818,7 +820,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             ((LinearLayoutManager) binding.rvThumbnails.getLayoutManager())
                 .scrollToPositionWithOffset((index > 3) ? index-2 : 0, 0);
             if ((index - 1) < uploadableFiles.size()) {
-                // Shows the top card if it was hidden because if the last image being deleted and
+                // Shows the top card if it was hidden because of the last image being deleted and
                 // now the user has hit previous button to go back to the media details
                 showHideTopCard(true);
             }
