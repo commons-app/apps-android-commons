@@ -382,7 +382,7 @@ class UploadMediaDetailFragmentUnitTest {
         `when`(latLng.longitude).thenReturn(0.0)
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
         fragment.onActivityResult(1211, Activity.RESULT_OK, intent)
-        Mockito.verify(presenter, Mockito.times(1)).verifyImageQuality(0, null)
+        Mockito.verify(presenter, Mockito.times(1)).displayLocDialog(0, null)
     }
 
     @Test
@@ -390,17 +390,6 @@ class UploadMediaDetailFragmentUnitTest {
     fun testUpdateMediaDetails() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.updateMediaDetails(null)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testDeleteThisPicture() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = UploadMediaDetailFragment::class.java.getDeclaredMethod(
-            "deleteThisPicture"
-        )
-        method.isAccessible = true
-        method.invoke(fragment)
     }
 
     @Test

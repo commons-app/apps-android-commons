@@ -22,6 +22,7 @@ import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
 import fr.free.nrw.commons.upload.UploadItem;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract.UserActionListener;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract.View;
 import fr.free.nrw.commons.utils.DialogUtil;
@@ -61,6 +62,8 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     private final JsonKvStore defaultKVStore;
     private Scheduler ioScheduler;
     private Scheduler mainThreadScheduler;
+
+    public static UploadMediaDetailFragmentCallback presenterCallback ;
 
     private final List<String> WLM_SUPPORTED_COUNTRIES= Arrays.asList("am","at","az","br","hr","sv","fi","fr","de","gh","in","ie","il","mk","my","mt","pk","pe","pl","ru","rw","si","es","se","tw","ug","ua","us");
     private Map<String, String> countryNamesAndCodes = null;
@@ -530,7 +533,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                 activity.getString(R.string.cancel),
                 () -> uploadItem.setImageQuality(IMAGE_OK),
                 () -> {
-                    UploadMediaDetailFragment.callback.deletePictureAtIndex(index);
+                    presenterCallback.deletePictureAtIndex(index);
                 }
             ).setCancelable(false);
         } else {

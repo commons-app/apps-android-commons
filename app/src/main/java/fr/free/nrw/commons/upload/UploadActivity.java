@@ -819,7 +819,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             fragments.get(index - 1).onBecameVisible();
             ((LinearLayoutManager) binding.rvThumbnails.getLayoutManager())
                 .scrollToPositionWithOffset((index > 3) ? index-2 : 0, 0);
-            if ((index - 1) < uploadableFiles.size()) {
+            if ((index != 1) && ((index - 1) < uploadableFiles.size())) {
                 // Shows the top card if it was hidden because of the last image being deleted and
                 // now the user has hit previous button to go back to the media details
                 showHideTopCard(true);

@@ -123,12 +123,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     private UploadItem editableUploadItem;
 
-    public static UploadMediaDetailFragmentCallback callback;
+    private UploadMediaDetailFragmentCallback callback;
 
     private FragmentUploadMediaDetailFragmentBinding binding;
 
     public void setCallback(UploadMediaDetailFragmentCallback callback) {
         this.callback = callback;
+        UploadMediaPresenter.presenterCallback = callback;
     }
 
     @Override
