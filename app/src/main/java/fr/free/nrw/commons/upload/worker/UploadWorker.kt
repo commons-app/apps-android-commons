@@ -407,7 +407,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                         if (contribution.errorMessage == null) {
                             contribution.errorMessage = "upload from stash failed with exception"
                         }
-                        contribution.exceptionMessage = exception
+                        contribution.exceptionMessage = exception.toString()
                         Timber.e(exception)
                         Timber.e("Upload from stash failed for contribution : $filename")
                         showFailedNotification(contribution)
@@ -446,7 +446,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             if (contribution.errorMessage == null) {
                 contribution.errorMessage = "upload to stash failed with exception"
             }
-            contribution.exceptionMessage = exception
+            contribution.exceptionMessage = exception.toString()
             Timber.e(exception)
             Timber.e("Stash upload failed for contribution: $filename")
             showFailedNotification(contribution)
