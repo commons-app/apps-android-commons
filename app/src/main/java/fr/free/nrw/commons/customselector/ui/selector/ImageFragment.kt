@@ -345,8 +345,6 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
 
     fun clearSelectedImages() {
         imageAdapter.clearSelectedImages()
-        selectorRV?.smoothScrollToPosition(imageAdapter.getItemCount()-1);
-        selectorRV?.smoothScrollToPosition(0);
     }
     /**
      * Passes selected images and other information from Activity to Fragment and connects it with

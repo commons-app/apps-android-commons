@@ -119,6 +119,7 @@ class ImageAdapter(
      * Bind View holder, load image, selected view, click listeners.
      */
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
+
         var image=images[position]
         holder.image.setImageDrawable (null)
         if (context.contentResolver.getType(image.uri) == null) {
@@ -393,9 +394,11 @@ class ImageAdapter(
             while (iterator.hasNext()) {
                 val entry = iterator.next()
                 if (entry.value == image) {
+                    imagePositionAsPerIncreasingOrder -= 2
                     iterator.remove()
+                    alreadyAddedPositions.removeAt(alreadyAddedPositions.size - 1)
                     notifyItemRemoved(index)
-                    notifyItemRangeChanged(index, itemCount - 1)
+                    notifyItemRangeChanged(index, itemCount )
                     break
                 }
                 index++
