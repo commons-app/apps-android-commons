@@ -2,6 +2,7 @@ package fr.free.nrw.commons.customselector.ui.adapter
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -174,9 +175,13 @@ class ImageAdapter(
                     // inside map, so it will fetch the image from the map and load in the holder
                     } else {
                         val actionableImages: List<Image> = ArrayList(actionableImagesMap.values)
-                        image = actionableImages[position]
-                        Glide.with(holder.image).load(image.uri)
-                            .thumbnail(0.3f).into(holder.image)
+                        if(actionableImages.size > position) {
+                            image = actionableImages[position]
+                            Glide.with(holder.image).load(image.uri)
+                                .thumbnail(0.3f).into(holder.image)
+                        }else{
+                            Log.d("myfix", "lund mera position: "+position)
+                        }
                     }
 
                 // If switch is turned off, it just fetches the image from all images without any
@@ -206,6 +211,8 @@ class ImageAdapter(
         holder: ImageViewHolder,
         position: Int
     ) {
+
+        Log.d("myfix", "processThumbnailForActionedImage: "+position)
         val next = imageLoader.nextActionableImage(
             allImages, ioDispatcher, defaultDispatcher,
             nextImagePosition
@@ -302,6 +309,7 @@ class ImageAdapter(
             if (holder.isItemUploaded()) {
                 Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
             } else {
+                Log.d("myfix", "selectOrRemoveImage: "+position)
                 if (holder.isItemNotForUpload()) {
                     numberOfSelectedImagesMarkedAsNotForUpload++
                 }
@@ -363,6 +371,45 @@ class ImageAdapter(
         init(newImages, fixedImages, TreeMap())
         notifyDataSetChanged()
     }
+
+    fun clearSelectedImages(){
+        numberOfSelectedImagesMarkedAsNotForUpload = 0
+        selectedImages.clear()
+        selectedImages = arrayListOf()
+    }
+
+
+    fun removeImageFromActionableImageMap(image: Image) {
+        val sharedPreferences: SharedPreferences =
+            context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
+        val showAlreadyActionedImages =
+            sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
+
+        if(showAlreadyActionedImages) {
+            val index = ImageHelper.getIndex(images, image)
+            if(index != -1) {
+                images.removeAt(index)
+                notifyItemRemoved(index)
+                notifyItemRangeChanged(index, itemCount - 1)
+            }
+        } else {
+            val iterator = actionableImagesMap.entries.iterator()
+            var index = 0
+
+            while (iterator.hasNext()) {
+                val entry = iterator.next()
+                if (entry.value == image) {
+                    iterator.remove()
+                    notifyItemRemoved(index)
+                    notifyItemRangeChanged(index, itemCount - 1)
+                    break
+                }
+                index++
+            }
+        }
+
+    }
+
 
     /**
      * Returns the total number of items in the data set held by the adapter.

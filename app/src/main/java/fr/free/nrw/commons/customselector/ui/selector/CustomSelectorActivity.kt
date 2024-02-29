@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.Button
@@ -276,8 +277,10 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
                             imageSHA1
                         )
                     )
-                }
+                    imageFragment!!.removeAct(it)
 
+                }
+                imageFragment!!.clearSelectedImages()
                 // if all images is already marked as not for upload, delete all images from
                 // not for upload table
             } else {
@@ -290,9 +293,9 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
                     )
                     notForUploadStatusDao.deleteNotForUploadWithImageSHA1(imageSHA1)
                 }
+                imageFragment!!.refresh()
             }
 
-            imageFragment!!.refresh()
             imageFragment!!.dismissMarkUnmarkProgressDialog()
 
             val bottomLayout: ConstraintLayout = findViewById(R.id.bottom_layout)

@@ -339,6 +339,13 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
         imageAdapter.refresh(filteredImages, allImages)
     }
 
+    fun removeAct(image : Image){
+        imageAdapter.removeImageFromActionableImageMap(image)
+    }
+
+    fun clearSelectedImages() {
+        imageAdapter.clearSelectedImages()
+    }
     /**
      * Passes selected images and other information from Activity to Fragment and connects it with
      * the adapter
