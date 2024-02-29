@@ -43,6 +43,7 @@ import fr.free.nrw.commons.notification.models.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.theme.BaseActivity;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -115,6 +116,19 @@ public class ContributionsFragment
 
     @Inject
     SessionManager sessionManager;
+
+
+    private final List<String> STASH_ERROR_CODES = Arrays.asList(
+        "file path is null",
+        "upload to stash failed"
+    );
+
+    private final List<String> STASH_EXCEPTIONS = Arrays.asList(
+        "StashUploadException",
+        "IOException"
+    );
+
+
 
     private LatLng curLatLng;
 
@@ -670,12 +684,17 @@ public class ContributionsFragment
                 /* Limit the number of retries for a failed upload
                    to handle cases like invalid filename as such uploads
                    will never be successful */
-                if(retries < MAX_RETRIES) {
+                if (contribution.getErrorMessage() != null && isGenuineError(contribution)) {
+                    // we have a genuine error here therefore no retry
+                    // TODO: notify user of error
+
+                } else if(retries < MAX_RETRIES) {
                     contribution.setRetries(retries + 1);
                     Timber.d("Retried uploading %s %d times", contribution.getMedia().getFilename(), retries + 1);
                     restartUpload(contribution);
                 } else {
                     // TODO: Show the exact reason for failure
+                    // TODO: notify user of error
                     Toast.makeText(getContext(),
                         R.string.retry_limit_reached, Toast.LENGTH_SHORT).show();
                 }
@@ -685,6 +704,27 @@ public class ContributionsFragment
         } else {
             ViewUtil.showLongToast(getContext(), R.string.this_function_needs_network_connection);
         }
+
+    }
+    /**
+     * Check if the error that occurs is a genuine error
+     * @param contribution contribution to be retried
+     */
+    public boolean isGenuineError(Contribution contribution) {
+
+        //check against array for genuine errors
+        for (String error : STASH_ERROR_CODES) {
+            if (contribution.getErrorMessage().contains(error)) {
+                return true;
+            }
+        }
+
+        for (String error : STASH_EXCEPTIONS) {
+            if (contribution.getErrorMessage().contains(error)) {
+                return true;
+            }
+        }
+        return false;
 
     }
 
