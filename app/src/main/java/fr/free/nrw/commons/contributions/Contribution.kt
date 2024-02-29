@@ -28,6 +28,8 @@ data class Contribution constructor(
     var dateCreatedSource: String? = null,
     var wikidataPlace: WikidataPlace? = null,
     var chunkInfo: ChunkInfo? = null,
+    // add error message to keep track of error message for failed upload
+    var errorMessage: String? = null,
     /**
      * @return array list of entityids for the depictions
      */
