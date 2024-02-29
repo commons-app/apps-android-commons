@@ -299,7 +299,6 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
     private suspend fun uploadContribution(contribution: Contribution) {
         if (contribution.localUri == null || contribution.localUri.path == null) {
             Timber.e("""upload: ${contribution.media.filename} failed, file path is null""")
-            contribution.errorMessage = "genuine failure: file path is null"
         }
         // FP: this is an obvious genuine failure point
             // But the actual return point is not here
@@ -402,6 +401,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                             // passed one upload step we can be pretty certain this is not a
                             // genuine failure.
                         contribution.errorMessage = "failure: upload to stash failed"
+                        contribution.exceptionMessage = exception
                         Timber.e(exception)
                         Timber.e("Upload from stash failed for contribution : $filename")
                         showFailedNotification(contribution)
@@ -436,6 +436,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                 // at least have an exception to work with. Might also be here invalid filename
                 // fails
             contribution.errorMessage = "failure: upload failed for contribution"
+            contribution.exceptionMessage = exception
             Timber.e(exception)
             Timber.e("Stash upload failed for contribution: $filename")
             showFailedNotification(contribution)
