@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class fr.free.nrw.commons.explore.search.SearchActivityUnitTests</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class fr.free.nrw.commons.explore.search.SearchActivityUnitTests</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/fr.free.nrw.commons.explore.search.html">fr.free.nrw.commons.explore.search</a> &gt; SearchActivityUnitTests</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">13</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.724s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard error</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">checkActivityNotNull</td>
+<td class="success">0.393s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testGetContributionStateAt</td>
+<td class="success">0.019s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testGetMediaAtPosition</td>
+<td class="success">0.021s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testGetTotalMediaCount</td>
+<td class="success">0.026s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testHandleSearchCaseEmpty</td>
+<td class="success">0.022s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testHandleSearchCaseNotEmpty</td>
+<td class="success">0.029s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testOnBackPressed</td>
+<td class="success">0.024s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testOnDestroy</td>
+<td class="success">0.023s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testSaveRecentSearchCaseNonNull</td>
+<td class="success">0.067s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testSaveRecentSearchCaseNull</td>
+<td class="success">0.021s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testSetTabs</td>
+<td class="success">0.020s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testUpdateText</td>
+<td class="success">0.036s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testViewPagerNotifyDataSetChanged</td>
+<td class="success">0.023s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard error</h2>
+<span class="code">
+<pre>java.lang.instrument.IllegalClassFormatException: Error while instrumenting fr/free/nrw/commons/explore/SearchActivity with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:94)
+	at java.instrument/java.lang.instrument.ClassFileTransformer.transform(Unknown Source)
+	at java.instrument/sun.instrument.TransformerManager.transform(Unknown Source)
+	at java.instrument/sun.instrument.InstrumentationImpl.transform(Unknown Source)
+	at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+	at java.base/java.lang.ClassLoader.defineClass(Unknown Source)
+	at java.base/java.security.SecureClassLoader.defineClass(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.defineClass(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.findClassOnClassPathOrNull(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClassOrNull(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(Unknown Source)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(Unknown Source)
+	at java.base/java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.base/java.lang.Class.getDeclaredFields0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredFields(Unknown Source)
+	at java.base/java.lang.Class.getDeclaredFields(Unknown Source)
+	at org.junit.runners.model.TestClass.getSortedDeclaredFields(TestClass.java:77)
+	at org.junit.runners.model.TestClass.scanAnnotatedMembers(TestClass.java:70)
+	at org.junit.runners.model.TestClass.&lt;init&gt;(TestClass.java:57)
+	at org.junit.runners.ParentRunner.createTestClass(ParentRunner.java:111)
+	at org.junit.runners.ParentRunner.&lt;init&gt;(ParentRunner.java:91)
+	at org.junit.runners.BlockJUnit4ClassRunner.&lt;init&gt;(BlockJUnit4ClassRunner.java:74)
+	at org.robolectric.internal.SandboxTestRunner.&lt;init&gt;(SandboxTestRunner.java:75)
+	at org.robolectric.RobolectricTestRunner.&lt;init&gt;(RobolectricTestRunner.java:109)
+	at org.robolectric.RobolectricTestRunner.&lt;init&gt;(RobolectricTestRunner.java:104)
+	at jdk.internal.reflect.GeneratedConstructorAccessor159.newInstance(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Unknown Source)
+	at java.base/java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at org.junit.internal.builders.AnnotatedBuilder.buildRunner(AnnotatedBuilder.java:104)
+	at org.junit.internal.builders.AnnotatedBuilder.runnerForClass(AnnotatedBuilder.java:86)
+	at org.junit.runners.model.RunnerBuilder.safeRunnerForClass(RunnerBuilder.java:70)
+	at org.junit.internal.builders.AllDefaultPossibilitiesBuilder.runnerForClass(AllDefaultPossibilitiesBuilder.java:37)
+	at org.junit.runners.model.RunnerBuilder.safeRunnerForClass(RunnerBuilder.java:70)
+	at org.junit.internal.requests.ClassRequest.createRunner(ClassRequest.java:28)
+	at org.junit.internal.requests.MemoizingRequest.getRunner(MemoizingRequest.java:19)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:77)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:58)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:40)
+	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:60)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:52)
+	at jdk.internal.reflect.GeneratedMethodAccessor147.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
+	at jdk.proxy2/jdk.proxy2.$Proxy5.processTestClass(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$2.run(TestWorker.java:176)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:113)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+Caused by: java.io.IOException: Error while instrumenting fr/free/nrw/commons/explore/SearchActivity with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrumentError(Instrumenter.java:161)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:111)
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:92)
+	... 57 more
+Caused by: java.lang.IllegalStateException: Cannot process instrumented class fr/free/nrw/commons/explore/SearchActivity. Please supply original non-instrumented classes.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.InstrSupport.assertNotInstrumented(InstrSupport.java:238)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.ClassInstrumenter.visitField(ClassInstrumenter.java:56)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassVisitor.visitField(ClassVisitor.java:356)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.readField(ClassReader.java:1137)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:739)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:424)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:91)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:109)
+	... 58 more
+java.lang.instrument.IllegalClassFormatException: Error while instrumenting fr/free/nrw/commons/ViewPagerAdapter with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:94)
+	at java.instrument/java.lang.instrument.ClassFileTransformer.transform(Unknown Source)
+	at java.instrument/sun.instrument.TransformerManager.transform(Unknown Source)
+	at java.instrument/sun.instrument.InstrumentationImpl.transform(Unknown Source)
+	at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+	at java.base/java.lang.ClassLoader.defineClass(Unknown Source)
+	at java.base/java.security.SecureClassLoader.defineClass(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.defineClass(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.findClassOnClassPathOrNull(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClassOrNull(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(Unknown Source)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(Unknown Source)
+	at java.base/java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.base/java.lang.Class.getDeclaredFields0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredFields(Unknown Source)
+	at java.base/java.lang.Class.getDeclaredFields(Unknown Source)
+	at org.junit.runners.model.TestClass.getSortedDeclaredFields(TestClass.java:77)
+	at org.junit.runners.model.TestClass.scanAnnotatedMembers(TestClass.java:70)
+	at org.junit.runners.model.TestClass.&lt;init&gt;(TestClass.java:57)
+	at org.junit.runners.ParentRunner.createTestClass(ParentRunner.java:111)
+	at org.junit.runners.ParentRunner.&lt;init&gt;(ParentRunner.java:91)
+	at org.junit.runners.BlockJUnit4ClassRunner.&lt;init&gt;(BlockJUnit4ClassRunner.java:74)
+	at org.robolectric.internal.SandboxTestRunner.&lt;init&gt;(SandboxTestRunner.java:75)
+	at org.robolectric.RobolectricTestRunner.&lt;init&gt;(RobolectricTestRunner.java:109)
+	at org.robolectric.RobolectricTestRunner.&lt;init&gt;(RobolectricTestRunner.java:104)
+	at jdk.internal.reflect.GeneratedConstructorAccessor159.newInstance(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Unknown Source)
+	at java.base/java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at org.junit.internal.builders.AnnotatedBuilder.buildRunner(AnnotatedBuilder.java:104)
+	at org.junit.internal.builders.AnnotatedBuilder.runnerForClass(AnnotatedBuilder.java:86)
+	at org.junit.runners.model.RunnerBuilder.safeRunnerForClass(RunnerBuilder.java:70)
+	at org.junit.internal.builders.AllDefaultPossibilitiesBuilder.runnerForClass(AllDefaultPossibilitiesBuilder.java:37)
+	at org.junit.runners.model.RunnerBuilder.safeRunnerForClass(RunnerBuilder.java:70)
+	at org.junit.internal.requests.ClassRequest.createRunner(ClassRequest.java:28)
+	at org.junit.internal.requests.MemoizingRequest.getRunner(MemoizingRequest.java:19)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:77)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:58)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:40)
+	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:60)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:52)
+	at jdk.internal.reflect.GeneratedMethodAccessor147.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
+	at jdk.proxy2/jdk.proxy2.$Proxy5.processTestClass(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$2.run(TestWorker.java:176)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:113)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+Caused by: java.io.IOException: Error while instrumenting fr/free/nrw/commons/ViewPagerAdapter with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrumentError(Instrumenter.java:161)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:111)
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:92)
+	... 57 more
+Caused by: java.lang.IllegalStateException: Cannot process instrumented class fr/free/nrw/commons/ViewPagerAdapter. Please supply original non-instrumented classes.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.InstrSupport.assertNotInstrumented(InstrSupport.java:238)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.ClassInstrumenter.visitField(ClassInstrumenter.java:56)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassVisitor.visitField(ClassVisitor.java:356)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.readField(ClassReader.java:1137)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:739)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:424)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:91)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:109)
+	... 58 more
+java.lang.instrument.IllegalClassFormatException: Error while instrumenting fr/free/nrw/commons/explore/media/SearchMediaFragment with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:94)
+	at java.instrument/java.lang.instrument.ClassFileTransformer.transform(Unknown Source)
+	at java.instrument/sun.instrument.TransformerManager.transform(Unknown Source)
+	at java.instrument/sun.instrument.InstrumentationImpl.transform(Unknown Source)
+	at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+	at java.base/java.lang.ClassLoader.defineClass(Unknown Source)
+	at java.base/java.security.SecureClassLoader.defineClass(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.defineClass(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.findClassOnClassPathOrNull(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClassOrNull(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(Unknown Source)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(Unknown Source)
+	at java.base/java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.base/java.lang.Class.getDeclaredFields0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredFields(Unknown Source)
+	at java.base/java.lang.Class.getDeclaredFields(Unknown Source)
+	at org.junit.runners.model.TestClass.getSortedDeclaredFields(TestClass.java:77)
+	at org.junit.runners.model.TestClass.scanAnnotatedMembers(TestClass.java:70)
+	at org.junit.runners.model.TestClass.&lt;init&gt;(TestClass.java:57)
+	at org.junit.runners.ParentRunner.createTestClass(ParentRunner.java:111)
+	at org.junit.runners.ParentRunner.&lt;init&gt;(ParentRunner.java:91)
+	at org.junit.runners.BlockJUnit4ClassRunner.&lt;init&gt;(BlockJUnit4ClassRunner.java:74)
+	at org.robolectric.internal.SandboxTestRunner.&lt;init&gt;(SandboxTestRunner.java:75)
+	at org.robolectric.RobolectricTestRunner.&lt;init&gt;(RobolectricTestRunner.java:109)
+	at org.robolectric.RobolectricTestRunner.&lt;init&gt;(RobolectricTestRunner.java:104)
+	at jdk.internal.reflect.GeneratedConstructorAccessor159.newInstance(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Unknown Source)
+	at java.base/java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at org.junit.internal.builders.AnnotatedBuilder.buildRunner(AnnotatedBuilder.java:104)
+	at org.junit.internal.builders.AnnotatedBuilder.runnerForClass(AnnotatedBuilder.java:86)
+	at org.junit.runners.model.RunnerBuilder.safeRunnerForClass(RunnerBuilder.java:70)
+	at org.junit.internal.builders.AllDefaultPossibilitiesBuilder.runnerForClass(AllDefaultPossibilitiesBuilder.java:37)
+	at org.junit.runners.model.RunnerBuilder.safeRunnerForClass(RunnerBuilder.java:70)
+	at org.junit.internal.requests.ClassRequest.createRunner(ClassRequest.java:28)
+	at org.junit.internal.requests.MemoizingRequest.getRunner(MemoizingRequest.java:19)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:77)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:58)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:40)
+	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:60)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:52)
+	at jdk.internal.reflect.GeneratedMethodAccessor147.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
+	at jdk.proxy2/jdk.proxy2.$Proxy5.processTestClass(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$2.run(TestWorker.java:176)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:113)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+Caused by: java.io.IOException: Error while instrumenting fr/free/nrw/commons/explore/media/SearchMediaFragment with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrumentError(Instrumenter.java:161)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:111)
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:92)
+	... 57 more
+Caused by: java.lang.IllegalStateException: Cannot process instrumented class fr/free/nrw/commons/explore/media/SearchMediaFragment. Please supply original non-instrumented classes.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.InstrSupport.assertNotInstrumented(InstrSupport.java:238)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.ClassInstrumenter.visitField(ClassInstrumenter.java:56)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassVisitor.visitField(ClassVisitor.java:356)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.readField(ClassReader.java:1137)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:739)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:424)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:91)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:109)
+	... 58 more
+java.lang.instrument.IllegalClassFormatException: Error while instrumenting fr/free/nrw/commons/explore/depictions/search/SearchDepictionsFragment with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:94)
+	at java.instrument/java.lang.instrument.ClassFileTransformer.transform(Unknown Source)
+	at java.instrument/sun.instrument.TransformerManager.transform(Unknown Source)
+	at java.instrument/sun.instrument.InstrumentationImpl.transform(Unknown Source)
+	at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+	at java.base/java.lang.ClassLoader.defineClass(Unknown Source)
+	at java.base/java.security.SecureClassLoader.defineClass(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.defineClass(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.findClassOnClassPathOrNull(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClassOrNull(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(Unknown Source)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(Unknown Source)
+	at java.base/java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.base/java.lang.Class.getDeclaredFields0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredFields(Unknown Source)
+	at java.base/java.lang.Class.getDeclaredFields(Unknown Source)
+	at org.junit.runners.model.TestClass.getSortedDeclaredFields(TestClass.java:77)
+	at org.junit.runners.model.TestClass.scanAnnotatedMembers(TestClass.java:70)
+	at org.junit.runners.model.TestClass.&lt;init&gt;(TestClass.java:57)
+	at org.junit.runners.ParentRunner.createTestClass(ParentRunner.java:111)
+	at org.junit.runners.ParentRunner.&lt;init&gt;(ParentRunner.java:91)
+	at org.junit.runners.BlockJUnit4ClassRunner.&lt;init&gt;(BlockJUnit4ClassRunner.java:74)
+	at org.robolectric.internal.SandboxTestRunner.&lt;init&gt;(SandboxTestRunner.java:75)
+	at org.robolectric.RobolectricTestRunner.&lt;init&gt;(RobolectricTestRunner.java:109)
+	at org.robolectric.RobolectricTestRunner.&lt;init&gt;(RobolectricTestRunner.java:104)
+	at jdk.internal.reflect.GeneratedConstructorAccessor159.newInstance(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Unknown Source)
+	at java.base/java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at org.junit.internal.builders.AnnotatedBuilder.buildRunner(AnnotatedBuilder.java:104)
+	at org.junit.internal.builders.AnnotatedBuilder.runnerForClass(AnnotatedBuilder.java:86)
+	at org.junit.runners.model.RunnerBuilder.safeRunnerForClass(RunnerBuilder.java:70)
+	at org.junit.internal.builders.AllDefaultPossibilitiesBuilder.runnerForClass(AllDefaultPossibilitiesBuilder.java:37)
+	at org.junit.runners.model.RunnerBuilder.safeRunnerForClass(RunnerBuilder.java:70)
+	at org.junit.internal.requests.ClassRequest.createRunner(ClassRequest.java:28)
+	at org.junit.internal.requests.MemoizingRequest.getRunner(MemoizingRequest.java:19)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:77)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:58)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:40)
+	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:60)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:52)
+	at jdk.internal.reflect.GeneratedMethodAccessor147.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
+	at jdk.proxy2/jdk.proxy2.$Proxy5.processTestClass(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$2.run(TestWorker.java:176)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:113)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+Caused by: java.io.IOException: Error while instrumenting fr/free/nrw/commons/explore/depictions/search/SearchDepictionsFragment with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrumentError(Instrumenter.java:161)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:111)
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:92)
+	... 57 more
+Caused by: java.lang.IllegalStateException: Cannot process instrumented class fr/free/nrw/commons/explore/depictions/search/SearchDepictionsFragment. Please supply original non-instrumented classes.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.InstrSupport.assertNotInstrumented(InstrSupport.java:238)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.ClassInstrumenter.visitField(ClassInstrumenter.java:56)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassVisitor.visitField(ClassVisitor.java:356)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.readField(ClassReader.java:1137)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:739)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:424)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:91)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:109)
+	... 58 more
+java.lang.instrument.IllegalClassFormatException: Error while instrumenting fr/free/nrw/commons/explore/depictions/PageableDepictionsFragment with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:94)
+	at java.instrument/java.lang.instrument.ClassFileTransformer.transform(Unknown Source)
+	at java.instrument/sun.instrument.TransformerManager.transform(Unknown Source)
+	at java.instrument/sun.instrument.InstrumentationImpl.transform(Unknown Source)
+	at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+	at java.base/java.lang.ClassLoader.defineClass(Unknown Source)
+	at java.base/java.security.SecureClassLoader.defineClass(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.defineClass(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.findClassOnClassPathOrNull(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClassOrNull(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(Unknown Source)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(Unknown Source)
+	at java.base/java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+	at java.base/java.lang.ClassLoader.defineClass(Unknown Source)
+	at java.base/java.security.SecureClassLoader.defineClass(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.defineClass(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.findClassOnClassPathOrNull(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClassOrNull(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(Unknown Source)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(Unknown Source)
+	at java.base/java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.base/java.lang.Class.getDeclaredFields0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredFields(Unknown Source)
+	at java.base/java.lang.Class.getDeclaredFields(Unknown Source)
+	at org.junit.runners.model.TestClass.getSortedDeclaredFields(TestClass.java:77)
+	at org.junit.runners.model.TestClass.scanAnnotatedMembers(TestClass.java:70)
+	at org.junit.runners.model.TestClass.&lt;init&gt;(TestClass.java:57)
+	at org.junit.runners.ParentRunner.createTestClass(ParentRunner.java:111)
+	at org.junit.runners.ParentRunner.&lt;init&gt;(ParentRunner.java:91)
+	at org.junit.runners.BlockJUnit4ClassRunner.&lt;init&gt;(BlockJUnit4ClassRunner.java:74)
+	at org.robolectric.internal.SandboxTestRunner.&lt;init&gt;(SandboxTestRunner.java:75)
+	at org.robolectric.RobolectricTestRunner.&lt;init&gt;(RobolectricTestRunner.java:109)
+	at org.robolectric.RobolectricTestRunner.&lt;init&gt;(RobolectricTestRunner.java:104)
+	at jdk.internal.reflect.GeneratedConstructorAccessor159.newInstance(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Unknown Source)
+	at java.base/java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at org.junit.internal.builders.AnnotatedBuilder.buildRunner(AnnotatedBuilder.java:104)
+	at org.junit.internal.builders.AnnotatedBuilder.runnerForClass(AnnotatedBuilder.java:86)
+	at org.junit.runners.model.RunnerBuilder.safeRunnerForClass(RunnerBuilder.java:70)
+	at org.junit.internal.builders.AllDefaultPossibilitiesBuilder.runnerForClass(AllDefaultPossibilitiesBuilder.java:37)
+	at org.junit.runners.model.RunnerBuilder.safeRunnerForClass(RunnerBuilder.java:70)
+	at org.junit.internal.requests.ClassRequest.createRunner(ClassRequest.java:28)
+	at org.junit.internal.requests.MemoizingRequest.getRunner(MemoizingRequest.java:19)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:77)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:58)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:40)
+	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:60)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:52)
+	at jdk.internal.reflect.GeneratedMethodAccessor147.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
+	at jdk.proxy2/jdk.proxy2.$Proxy5.processTestClass(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$2.run(TestWorker.java:176)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:113)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+Caused by: java.io.IOException: Error while instrumenting fr/free/nrw/commons/explore/depictions/PageableDepictionsFragment with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrumentError(Instrumenter.java:161)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:111)
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:92)
+	... 66 more
+Caused by: java.lang.IllegalStateException: Cannot process instrumented class fr/free/nrw/commons/explore/depictions/PageableDepictionsFragment. Please supply original non-instrumented classes.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.InstrSupport.assertNotInstrumented(InstrSupport.java:238)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.ClassInstrumenter.visitField(ClassInstrumenter.java:56)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassVisitor.visitField(ClassVisitor.java:356)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.readField(ClassReader.java:1137)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:739)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:424)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:91)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:109)
+	... 67 more
+java.lang.instrument.IllegalClassFormatException: Error while instrumenting fr/free/nrw/commons/explore/categories/search/SearchCategoryFragment with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:94)
+	at java.instrument/java.lang.instrument.ClassFileTransformer.transform(Unknown Source)
+	at java.instrument/sun.instrument.TransformerManager.transform(Unknown Source)
+	at java.instrument/sun.instrument.InstrumentationImpl.transform(Unknown Source)
+	at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+	at java.base/java.lang.ClassLoader.defineClass(Unknown Source)
+	at java.base/java.security.SecureClassLoader.defineClass(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.defineClass(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.findClassOnClassPathOrNull(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClassOrNull(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(Unknown Source)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(Unknown Source)
+	at java.base/java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.base/java.lang.Class.getDeclaredFields0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredFields(Unknown Source)
+	at java.base/java.lang.Class.getDeclaredFields(Unknown Source)
+	at org.junit.runners.model.TestClass.getSortedDeclaredFields(TestClass.java:77)
+	at org.junit.runners.model.TestClass.scanAnnotatedMembers(TestClass.java:70)
+	at org.junit.runners.model.TestClass.&lt;init&gt;(TestClass.java:57)
+	at org.junit.runners.ParentRunner.createTestClass(ParentRunner.java:111)
+	at org.junit.runners.ParentRunner.&lt;init&gt;(ParentRunner.java:91)
+	at org.junit.runners.BlockJUnit4ClassRunner.&lt;init&gt;(BlockJUnit4ClassRunner.java:74)
+	at org.robolectric.internal.SandboxTestRunner.&lt;init&gt;(SandboxTestRunner.java:75)
+	at org.robolectric.RobolectricTestRunner.&lt;init&gt;(RobolectricTestRunner.java:109)
+	at org.robolectric.RobolectricTestRunner.&lt;init&gt;(RobolectricTestRunner.java:104)
+	at jdk.internal.reflect.GeneratedConstructorAccessor159.newInstance(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Unknown Source)
+	at java.base/java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at org.junit.internal.builders.AnnotatedBuilder.buildRunner(AnnotatedBuilder.java:104)
+	at org.junit.internal.builders.AnnotatedBuilder.runnerForClass(AnnotatedBuilder.java:86)
+	at org.junit.runners.model.RunnerBuilder.safeRunnerForClass(RunnerBuilder.java:70)
+	at org.junit.internal.builders.AllDefaultPossibilitiesBuilder.runnerForClass(AllDefaultPossibilitiesBuilder.java:37)
+	at org.junit.runners.model.RunnerBuilder.safeRunnerForClass(RunnerBuilder.java:70)
+	at org.junit.internal.requests.ClassRequest.createRunner(ClassRequest.java:28)
+	at org.junit.internal.requests.MemoizingRequest.getRunner(MemoizingRequest.java:19)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:77)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:58)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:40)
+	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:60)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:52)
+	at jdk.internal.reflect.GeneratedMethodAccessor147.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
+	at jdk.proxy2/jdk.proxy2.$Proxy5.processTestClass(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$2.run(TestWorker.java:176)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:113)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+Caused by: java.io.IOException: Error while instrumenting fr/free/nrw/commons/explore/categories/search/SearchCategoryFragment with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrumentError(Instrumenter.java:161)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:111)
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:92)
+	... 57 more
+Caused by: java.lang.IllegalStateException: Cannot process instrumented class fr/free/nrw/commons/explore/categories/search/SearchCategoryFragment. Please supply original non-instrumented classes.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.InstrSupport.assertNotInstrumented(InstrSupport.java:238)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.ClassInstrumenter.visitField(ClassInstrumenter.java:56)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassVisitor.visitField(ClassVisitor.java:356)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.readField(ClassReader.java:1137)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:739)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:424)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:91)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:109)
+	... 58 more
+java.lang.instrument.IllegalClassFormatException: Error while instrumenting fr/free/nrw/commons/explore/categories/PageableCategoryFragment with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:94)
+	at java.instrument/java.lang.instrument.ClassFileTransformer.transform(Unknown Source)
+	at java.instrument/sun.instrument.TransformerManager.transform(Unknown Source)
+	at java.instrument/sun.instrument.InstrumentationImpl.transform(Unknown Source)
+	at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+	at java.base/java.lang.ClassLoader.defineClass(Unknown Source)
+	at java.base/java.security.SecureClassLoader.defineClass(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.defineClass(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.findClassOnClassPathOrNull(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClassOrNull(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(Unknown Source)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(Unknown Source)
+	at java.base/java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+	at java.base/java.lang.ClassLoader.defineClass(Unknown Source)
+	at java.base/java.security.SecureClassLoader.defineClass(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.defineClass(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.findClassOnClassPathOrNull(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClassOrNull(Unknown Source)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(Unknown Source)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(Unknown Source)
+	at java.base/java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.base/java.lang.Class.getDeclaredFields0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredFields(Unknown Source)
+	at java.base/java.lang.Class.getDeclaredFields(Unknown Source)
+	at org.junit.runners.model.TestClass.getSortedDeclaredFields(TestClass.java:77)
+	at org.junit.runners.model.TestClass.scanAnnotatedMembers(TestClass.java:70)
+	at org.junit.runners.model.TestClass.&lt;init&gt;(TestClass.java:57)
+	at org.junit.runners.ParentRunner.createTestClass(ParentRunner.java:111)
+	at org.junit.runners.ParentRunner.&lt;init&gt;(ParentRunner.java:91)
+	at org.junit.runners.BlockJUnit4ClassRunner.&lt;init&gt;(BlockJUnit4ClassRunner.java:74)
+	at org.robolectric.internal.SandboxTestRunner.&lt;init&gt;(SandboxTestRunner.java:75)
+	at org.robolectric.RobolectricTestRunner.&lt;init&gt;(RobolectricTestRunner.java:109)
+	at org.robolectric.RobolectricTestRunner.&lt;init&gt;(RobolectricTestRunner.java:104)
+	at jdk.internal.reflect.GeneratedConstructorAccessor159.newInstance(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Unknown Source)
+	at java.base/java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at org.junit.internal.builders.AnnotatedBuilder.buildRunner(AnnotatedBuilder.java:104)
+	at org.junit.internal.builders.AnnotatedBuilder.runnerForClass(AnnotatedBuilder.java:86)
+	at org.junit.runners.model.RunnerBuilder.safeRunnerForClass(RunnerBuilder.java:70)
+	at org.junit.internal.builders.AllDefaultPossibilitiesBuilder.runnerForClass(AllDefaultPossibilitiesBuilder.java:37)
+	at org.junit.runners.model.RunnerBuilder.safeRunnerForClass(RunnerBuilder.java:70)
+	at org.junit.internal.requests.ClassRequest.createRunner(ClassRequest.java:28)
+	at org.junit.internal.requests.MemoizingRequest.getRunner(MemoizingRequest.java:19)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:77)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:58)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:40)
+	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:60)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:52)
+	at jdk.internal.reflect.GeneratedMethodAccessor147.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
+	at jdk.proxy2/jdk.proxy2.$Proxy5.processTestClass(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$2.run(TestWorker.java:176)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:113)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+Caused by: java.io.IOException: Error while instrumenting fr/free/nrw/commons/explore/categories/PageableCategoryFragment with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrumentError(Instrumenter.java:161)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:111)
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:92)
+	... 66 more
+Caused by: java.lang.IllegalStateException: Cannot process instrumented class fr/free/nrw/commons/explore/categories/PageableCategoryFragment. Please supply original non-instrumented classes.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.InstrSupport.assertNotInstrumented(InstrSupport.java:238)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.ClassInstrumenter.visitField(ClassInstrumenter.java:56)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassVisitor.visitField(ClassVisitor.java:356)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.readField(ClassReader.java:1137)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:739)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:424)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:91)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:109)
+	... 67 more
+java.lang.instrument.IllegalClassFormatException: Error while instrumenting fr/free/nrw/commons/explore/depictions/DepictionAdapter with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:94)
+	at java.instrument/java.lang.instrument.ClassFileTransformer.transform(Unknown Source)
+	at java.instrument/sun.instrument.TransformerManager.transform(Unknown Source)
+	at java.instrument/sun.instrument.InstrumentationImpl.transform(Unknown Source)
+	at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+	at java.base/java.lang.ClassLoader.defineClass(Unknown Source)
+	at java.base/java.lang.ClassLoader.defineClass(Unknown Source)
+	at org.robolectric.internal.bytecode.SandboxClassLoader.maybeInstrumentClass(SandboxClassLoader.java:162)
+	at org.robolectric.internal.bytecode.SandboxClassLoader.lambda$loadClass$0(SandboxClassLoader.java:136)
+	at org.robolectric.util.PerfStatsCollector.measure(PerfStatsCollector.java:53)
+	at org.robolectric.internal.bytecode.SandboxClassLoader.loadClass(SandboxClassLoader.java:136)
+	at java.base/java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Unknown Source)
+	at java.base/java.lang.Class.getDeclaredMethods(Unknown Source)
+	at net.bytebuddy.description.method.MethodList$ForLoadedMethods.&lt;init&gt;(MethodList.java:152)
+	at net.bytebuddy.description.type.TypeDescription$ForLoadedType.getDeclaredMethods(TypeDescription.java:8940)
+	at net.bytebuddy.dynamic.scaffold.InstrumentedType$Factory$Default$1.represent(InstrumentedType.java:438)
+	at net.bytebuddy.ByteBuddy.redefine(ByteBuddy.java:886)
+	at net.bytebuddy.ByteBuddy.redefine(ByteBuddy.java:861)
+	at org.mockito.internal.creation.bytebuddy.InlineBytecodeGenerator.transform(InlineBytecodeGenerator.java:390)
+	at java.instrument/java.lang.instrument.ClassFileTransformer.transform(Unknown Source)
+	at java.instrument/sun.instrument.TransformerManager.transform(Unknown Source)
+	at java.instrument/sun.instrument.InstrumentationImpl.transform(Unknown Source)
+	at java.instrument/sun.instrument.InstrumentationImpl.retransformClasses0(Native Method)
+	at java.instrument/sun.instrument.InstrumentationImpl.retransformClasses(Unknown Source)
+	at org.mockito.internal.creation.bytebuddy.InlineBytecodeGenerator.triggerRetransformation(InlineBytecodeGenerator.java:281)
+	at org.mockito.internal.creation.bytebuddy.InlineBytecodeGenerator.mockClass(InlineBytecodeGenerator.java:218)
+	at org.mockito.internal.creation.bytebuddy.TypeCachingBytecodeGenerator.lambda$mockClass$0(TypeCachingBytecodeGenerator.java:78)
+	at net.bytebuddy.TypeCache.findOrInsert(TypeCache.java:168)
+	at net.bytebuddy.TypeCache$WithInlineExpunction.findOrInsert(TypeCache.java:399)
+	at net.bytebuddy.TypeCache.findOrInsert(TypeCache.java:190)
+	at net.bytebuddy.TypeCache$WithInlineExpunction.findOrInsert(TypeCache.java:410)
+	at org.mockito.internal.creation.bytebuddy.TypeCachingBytecodeGenerator.mockClass(TypeCachingBytecodeGenerator.java:75)
+	at org.mockito.internal.creation.bytebuddy.InlineDelegateByteBuddyMockMaker.createMockType(InlineDelegateByteBuddyMockMaker.java:396)
+	at org.mockito.internal.creation.bytebuddy.InlineDelegateByteBuddyMockMaker.doCreateMock(InlineDelegateByteBuddyMockMaker.java:355)
+	at org.mockito.internal.creation.bytebuddy.InlineDelegateByteBuddyMockMaker.createMock(InlineDelegateByteBuddyMockMaker.java:334)
+	at org.mockito.internal.creation.bytebuddy.InlineByteBuddyMockMaker.createMock(InlineByteBuddyMockMaker.java:56)
+	at org.mockito.internal.util.MockUtil.createMock(MockUtil.java:99)
+	at org.mockito.internal.MockitoCore.mock(MockitoCore.java:88)
+	at org.mockito.Mockito.mock(Mockito.java:2101)
+	at org.mockito.internal.configuration.MockAnnotationProcessor.processAnnotationForMock(MockAnnotationProcessor.java:79)
+	at org.mockito.internal.configuration.MockAnnotationProcessor.process(MockAnnotationProcessor.java:28)
+	at org.mockito.internal.configuration.MockAnnotationProcessor.process(MockAnnotationProcessor.java:25)
+	at org.mockito.internal.configuration.IndependentAnnotationEngine.createMockFor(IndependentAnnotationEngine.java:44)
+	at org.mockito.internal.configuration.IndependentAnnotationEngine.process(IndependentAnnotationEngine.java:72)
+	at org.mockito.internal.configuration.InjectingAnnotationEngine.processIndependentAnnotations(InjectingAnnotationEngine.java:62)
+	at org.mockito.internal.configuration.InjectingAnnotationEngine.process(InjectingAnnotationEngine.java:47)
+	at org.mockito.MockitoAnnotations.openMocks(MockitoAnnotations.java:81)
+	at fr.free.nrw.commons.explore.search.SearchActivityUnitTests.setUp(SearchActivityUnitTests.kt:87)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.robolectric.RobolectricTestRunner$HelperTestRunner$1.evaluate(RobolectricTestRunner.java:588)
+	at org.robolectric.internal.SandboxTestRunner$2.lambda$evaluate$2(SandboxTestRunner.java:290)
+	at org.robolectric.internal.bytecode.Sandbox.lambda$runOnMainThread$0(Sandbox.java:101)
+	at java.base/java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+Caused by: java.io.IOException: Error while instrumenting fr/free/nrw/commons/explore/depictions/DepictionAdapter with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrumentError(Instrumenter.java:161)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:111)
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:92)
+	... 66 more
+Caused by: java.lang.IllegalStateException: Cannot process instrumented class fr/free/nrw/commons/explore/depictions/DepictionAdapter. Please supply original non-instrumented classes.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.InstrSupport.assertNotInstrumented(InstrSupport.java:238)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.ClassInstrumenter.visitField(ClassInstrumenter.java:56)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassVisitor.visitField(ClassVisitor.java:356)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.readField(ClassReader.java:1137)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:739)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:424)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:91)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:109)
+	... 67 more
+java.lang.instrument.IllegalClassFormatException: Error while instrumenting fr/free/nrw/commons/explore/categories/PagedSearchCategoriesAdapter with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:94)
+	at java.instrument/java.lang.instrument.ClassFileTransformer.transform(Unknown Source)
+	at java.instrument/sun.instrument.TransformerManager.transform(Unknown Source)
+	at java.instrument/sun.instrument.InstrumentationImpl.transform(Unknown Source)
+	at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+	at java.base/java.lang.ClassLoader.defineClass(Unknown Source)
+	at java.base/java.lang.ClassLoader.defineClass(Unknown Source)
+	at org.robolectric.internal.bytecode.SandboxClassLoader.maybeInstrumentClass(SandboxClassLoader.java:162)
+	at org.robolectric.internal.bytecode.SandboxClassLoader.lambda$loadClass$0(SandboxClassLoader.java:136)
+	at org.robolectric.util.PerfStatsCollector.measure(PerfStatsCollector.java:53)
+	at org.robolectric.internal.bytecode.SandboxClassLoader.loadClass(SandboxClassLoader.java:136)
+	at java.base/java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.base/java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.base/java.lang.Class.privateGetDeclaredMethods(Unknown Source)
+	at java.base/java.lang.Class.getDeclaredMethods(Unknown Source)
+	at net.bytebuddy.description.method.MethodList$ForLoadedMethods.&lt;init&gt;(MethodList.java:152)
+	at net.bytebuddy.description.type.TypeDescription$ForLoadedType.getDeclaredMethods(TypeDescription.java:8940)
+	at net.bytebuddy.dynamic.scaffold.InstrumentedType$Factory$Default$1.represent(InstrumentedType.java:438)
+	at net.bytebuddy.ByteBuddy.redefine(ByteBuddy.java:886)
+	at net.bytebuddy.ByteBuddy.redefine(ByteBuddy.java:861)
+	at org.mockito.internal.creation.bytebuddy.InlineBytecodeGenerator.transform(InlineBytecodeGenerator.java:390)
+	at java.instrument/java.lang.instrument.ClassFileTransformer.transform(Unknown Source)
+	at java.instrument/sun.instrument.TransformerManager.transform(Unknown Source)
+	at java.instrument/sun.instrument.InstrumentationImpl.transform(Unknown Source)
+	at java.instrument/sun.instrument.InstrumentationImpl.retransformClasses0(Native Method)
+	at java.instrument/sun.instrument.InstrumentationImpl.retransformClasses(Unknown Source)
+	at org.mockito.internal.creation.bytebuddy.InlineBytecodeGenerator.triggerRetransformation(InlineBytecodeGenerator.java:281)
+	at org.mockito.internal.creation.bytebuddy.InlineBytecodeGenerator.mockClass(InlineBytecodeGenerator.java:218)
+	at org.mockito.internal.creation.bytebuddy.TypeCachingBytecodeGenerator.lambda$mockClass$0(TypeCachingBytecodeGenerator.java:78)
+	at net.bytebuddy.TypeCache.findOrInsert(TypeCache.java:168)
+	at net.bytebuddy.TypeCache$WithInlineExpunction.findOrInsert(TypeCache.java:399)
+	at net.bytebuddy.TypeCache.findOrInsert(TypeCache.java:190)
+	at net.bytebuddy.TypeCache$WithInlineExpunction.findOrInsert(TypeCache.java:410)
+	at org.mockito.internal.creation.bytebuddy.TypeCachingBytecodeGenerator.mockClass(TypeCachingBytecodeGenerator.java:75)
+	at org.mockito.internal.creation.bytebuddy.InlineDelegateByteBuddyMockMaker.createMockType(InlineDelegateByteBuddyMockMaker.java:396)
+	at org.mockito.internal.creation.bytebuddy.InlineDelegateByteBuddyMockMaker.doCreateMock(InlineDelegateByteBuddyMockMaker.java:355)
+	at org.mockito.internal.creation.bytebuddy.InlineDelegateByteBuddyMockMaker.createMock(InlineDelegateByteBuddyMockMaker.java:334)
+	at org.mockito.internal.creation.bytebuddy.InlineByteBuddyMockMaker.createMock(InlineByteBuddyMockMaker.java:56)
+	at org.mockito.internal.util.MockUtil.createMock(MockUtil.java:99)
+	at org.mockito.internal.MockitoCore.mock(MockitoCore.java:88)
+	at org.mockito.Mockito.mock(Mockito.java:2101)
+	at org.mockito.internal.configuration.MockAnnotationProcessor.processAnnotationForMock(MockAnnotationProcessor.java:79)
+	at org.mockito.internal.configuration.MockAnnotationProcessor.process(MockAnnotationProcessor.java:28)
+	at org.mockito.internal.configuration.MockAnnotationProcessor.process(MockAnnotationProcessor.java:25)
+	at org.mockito.internal.configuration.IndependentAnnotationEngine.createMockFor(IndependentAnnotationEngine.java:44)
+	at org.mockito.internal.configuration.IndependentAnnotationEngine.process(IndependentAnnotationEngine.java:72)
+	at org.mockito.internal.configuration.InjectingAnnotationEngine.processIndependentAnnotations(InjectingAnnotationEngine.java:62)
+	at org.mockito.internal.configuration.InjectingAnnotationEngine.process(InjectingAnnotationEngine.java:47)
+	at org.mockito.MockitoAnnotations.openMocks(MockitoAnnotations.java:81)
+	at fr.free.nrw.commons.explore.search.SearchActivityUnitTests.setUp(SearchActivityUnitTests.kt:87)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.robolectric.RobolectricTestRunner$HelperTestRunner$1.evaluate(RobolectricTestRunner.java:588)
+	at org.robolectric.internal.SandboxTestRunner$2.lambda$evaluate$2(SandboxTestRunner.java:290)
+	at org.robolectric.internal.bytecode.Sandbox.lambda$runOnMainThread$0(Sandbox.java:101)
+	at java.base/java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+Caused by: java.io.IOException: Error while instrumenting fr/free/nrw/commons/explore/categories/PagedSearchCategoriesAdapter with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrumentError(Instrumenter.java:161)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:111)
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:92)
+	... 66 more
+Caused by: java.lang.IllegalStateException: Cannot process instrumented class fr/free/nrw/commons/explore/categories/PagedSearchCategoriesAdapter. Please supply original non-instrumented classes.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.InstrSupport.assertNotInstrumented(InstrSupport.java:238)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.ClassInstrumenter.visitField(ClassInstrumenter.java:56)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassVisitor.visitField(ClassVisitor.java:356)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.readField(ClassReader.java:1137)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:739)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:424)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:91)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:109)
+	... 67 more
+java.lang.instrument.IllegalClassFormatException: Error while instrumenting fr/free/nrw/commons/di/DaggerCommonsApplicationComponent$SearchActivitySubcomponentFactory with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:94)
+	at java.instrument/java.lang.instrument.ClassFileTransformer.transform(Unknown Source)
+	at java.instrument/sun.instrument.TransformerManager.transform(Unknown Source)
+	at java.instrument/sun.instrument.InstrumentationImpl.transform(Unknown Source)
+	at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+	at java.base/java.lang.ClassLoader.defineClass(Unknown Source)
+	at java.base/java.lang.ClassLoader.defineClass(Unknown Source)
+	at org.robolectric.internal.bytecode.SandboxClassLoader.maybeInstrumentClass(SandboxClassLoader.java:162)
+	at org.robolectric.internal.bytecode.SandboxClassLoader.lambda$loadClass$0(SandboxClassLoader.java:136)
+	at org.robolectric.util.PerfStatsCollector.measure(PerfStatsCollector.java:53)
+	at org.robolectric.internal.bytecode.SandboxClassLoader.loadClass(SandboxClassLoader.java:136)
+	at java.base/java.lang.ClassLoader.loadClass(Unknown Source)
+	at fr.free.nrw.commons.di.DaggerCommonsApplicationComponent$11.get(DaggerCommonsApplicationComponent.java:946)
+	at fr.free.nrw.commons.di.DaggerCommonsApplicationComponent$11.get(DaggerCommonsApplicationComponent.java:943)
+	at dagger.android.DispatchingAndroidInjector.maybeInject(DispatchingAndroidInjector.java:107)
+	at dagger.android.DispatchingAndroidInjector.inject(DispatchingAndroidInjector.java:134)
+	at fr.free.nrw.commons.di.CommonsDaggerAppCompatActivity.inject(CommonsDaggerAppCompatActivity.java:45)
+	at fr.free.nrw.commons.di.CommonsDaggerAppCompatActivity.onCreate(CommonsDaggerAppCompatActivity.java:23)
+	at fr.free.nrw.commons.theme.BaseActivity.onCreate(BaseActivity.java:28)
+	at fr.free.nrw.commons.explore.SearchActivity.onCreate(SearchActivity.java:68)
+	at android.app.Activity.$$robo$$android_app_Activity$performCreate(Activity.java:5933)
+	at android.app.Activity.performCreate(Activity.java)
+	at android.app.Instrumentation.$$robo$$android_app_Instrumentation$callActivityOnCreate(Instrumentation.java:1105)
+	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java)
+	at org.robolectric.android.internal.RoboMonitoringInstrumentation.callActivityOnCreate(RoboMonitoringInstrumentation.java:377)
+	at org.robolectric.android.controller.ActivityController.lambda$create$0(ActivityController.java:138)
+	at org.robolectric.shadows.ShadowPausedLooper.runPaused(ShadowPausedLooper.java:227)
+	at org.robolectric.android.controller.ActivityController.create(ActivityController.java:136)
+	at org.robolectric.android.controller.ActivityController.create(ActivityController.java:146)
+	at fr.free.nrw.commons.explore.search.SearchActivityUnitTests.setUp(SearchActivityUnitTests.kt:88)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.robolectric.RobolectricTestRunner$HelperTestRunner$1.evaluate(RobolectricTestRunner.java:588)
+	at org.robolectric.internal.SandboxTestRunner$2.lambda$evaluate$2(SandboxTestRunner.java:290)
+	at org.robolectric.internal.bytecode.Sandbox.lambda$runOnMainThread$0(Sandbox.java:101)
+	at java.base/java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+Caused by: java.io.IOException: Error while instrumenting fr/free/nrw/commons/di/DaggerCommonsApplicationComponent$SearchActivitySubcomponentFactory with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrumentError(Instrumenter.java:161)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:111)
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:92)
+	... 46 more
+Caused by: java.lang.IllegalStateException: Cannot process instrumented class fr/free/nrw/commons/di/DaggerCommonsApplicationComponent$SearchActivitySubcomponentFactory. Please supply original non-instrumented classes.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.InstrSupport.assertNotInstrumented(InstrSupport.java:238)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.ClassInstrumenter.visitField(ClassInstrumenter.java:56)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassVisitor.visitField(ClassVisitor.java:356)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.readField(ClassReader.java:1137)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:739)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:424)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:91)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:109)
+	... 47 more
+java.lang.instrument.IllegalClassFormatException: Error while instrumenting fr/free/nrw/commons/di/DaggerCommonsApplicationComponent$SearchActivitySubcomponentImpl with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:94)
+	at java.instrument/java.lang.instrument.ClassFileTransformer.transform(Unknown Source)
+	at java.instrument/sun.instrument.TransformerManager.transform(Unknown Source)
+	at java.instrument/sun.instrument.InstrumentationImpl.transform(Unknown Source)
+	at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+	at java.base/java.lang.ClassLoader.defineClass(Unknown Source)
+	at java.base/java.lang.ClassLoader.defineClass(Unknown Source)
+	at org.robolectric.internal.bytecode.SandboxClassLoader.maybeInstrumentClass(SandboxClassLoader.java:162)
+	at org.robolectric.internal.bytecode.SandboxClassLoader.lambda$loadClass$0(SandboxClassLoader.java:136)
+	at org.robolectric.util.PerfStatsCollector.measure(PerfStatsCollector.java:53)
+	at org.robolectric.internal.bytecode.SandboxClassLoader.loadClass(SandboxClassLoader.java:136)
+	at java.base/java.lang.ClassLoader.loadClass(Unknown Source)
+	at fr.free.nrw.commons.di.DaggerCommonsApplicationComponent$SearchActivitySubcomponentFactory.create(DaggerCommonsApplicationComponent.java:1805)
+	at fr.free.nrw.commons.di.DaggerCommonsApplicationComponent$SearchActivitySubcomponentFactory.create(DaggerCommonsApplicationComponent.java:1800)
+	at dagger.android.DispatchingAndroidInjector.maybeInject(DispatchingAndroidInjector.java:111)
+	at dagger.android.DispatchingAndroidInjector.inject(DispatchingAndroidInjector.java:134)
+	at fr.free.nrw.commons.di.CommonsDaggerAppCompatActivity.inject(CommonsDaggerAppCompatActivity.java:45)
+	at fr.free.nrw.commons.di.CommonsDaggerAppCompatActivity.onCreate(CommonsDaggerAppCompatActivity.java:23)
+	at fr.free.nrw.commons.theme.BaseActivity.onCreate(BaseActivity.java:28)
+	at fr.free.nrw.commons.explore.SearchActivity.onCreate(SearchActivity.java:68)
+	at android.app.Activity.$$robo$$android_app_Activity$performCreate(Activity.java:5933)
+	at android.app.Activity.performCreate(Activity.java)
+	at android.app.Instrumentation.$$robo$$android_app_Instrumentation$callActivityOnCreate(Instrumentation.java:1105)
+	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java)
+	at org.robolectric.android.internal.RoboMonitoringInstrumentation.callActivityOnCreate(RoboMonitoringInstrumentation.java:377)
+	at org.robolectric.android.controller.ActivityController.lambda$create$0(ActivityController.java:138)
+	at org.robolectric.shadows.ShadowPausedLooper.runPaused(ShadowPausedLooper.java:227)
+	at org.robolectric.android.controller.ActivityController.create(ActivityController.java:136)
+	at org.robolectric.android.controller.ActivityController.create(ActivityController.java:146)
+	at fr.free.nrw.commons.explore.search.SearchActivityUnitTests.setUp(SearchActivityUnitTests.kt:88)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.robolectric.RobolectricTestRunner$HelperTestRunner$1.evaluate(RobolectricTestRunner.java:588)
+	at org.robolectric.internal.SandboxTestRunner$2.lambda$evaluate$2(SandboxTestRunner.java:290)
+	at org.robolectric.internal.bytecode.Sandbox.lambda$runOnMainThread$0(Sandbox.java:101)
+	at java.base/java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+Caused by: java.io.IOException: Error while instrumenting fr/free/nrw/commons/di/DaggerCommonsApplicationComponent$SearchActivitySubcomponentImpl with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrumentError(Instrumenter.java:161)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:111)
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:92)
+	... 46 more
+Caused by: java.lang.IllegalStateException: Cannot process instrumented class fr/free/nrw/commons/di/DaggerCommonsApplicationComponent$SearchActivitySubcomponentImpl. Please supply original non-instrumented classes.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.InstrSupport.assertNotInstrumented(InstrSupport.java:238)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.ClassInstrumenter.visitField(ClassInstrumenter.java:56)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassVisitor.visitField(ClassVisitor.java:356)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.readField(ClassReader.java:1137)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:739)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:424)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:91)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:109)
+	... 47 more
+java.lang.instrument.IllegalClassFormatException: Error while instrumenting fr/free/nrw/commons/explore/SearchActivity_MembersInjector with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:94)
+	at java.instrument/java.lang.instrument.ClassFileTransformer.transform(Unknown Source)
+	at java.instrument/sun.instrument.TransformerManager.transform(Unknown Source)
+	at java.instrument/sun.instrument.InstrumentationImpl.transform(Unknown Source)
+	at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+	at java.base/java.lang.ClassLoader.defineClass(Unknown Source)
+	at java.base/java.lang.ClassLoader.defineClass(Unknown Source)
+	at org.robolectric.internal.bytecode.SandboxClassLoader.maybeInstrumentClass(SandboxClassLoader.java:162)
+	at org.robolectric.internal.bytecode.SandboxClassLoader.lambda$loadClass$0(SandboxClassLoader.java:136)
+	at org.robolectric.util.PerfStatsCollector.measure(PerfStatsCollector.java:53)
+	at org.robolectric.internal.bytecode.SandboxClassLoader.loadClass(SandboxClassLoader.java:136)
+	at java.base/java.lang.ClassLoader.loadClass(Unknown Source)
+	at fr.free.nrw.commons.di.DaggerCommonsApplicationComponent$SearchActivitySubcomponentImpl.injectSearchActivity(DaggerCommonsApplicationComponent.java:1827)
+	at fr.free.nrw.commons.di.DaggerCommonsApplicationComponent$SearchActivitySubcomponentImpl.inject(DaggerCommonsApplicationComponent.java:1820)
+	at fr.free.nrw.commons.di.DaggerCommonsApplicationComponent$SearchActivitySubcomponentImpl.inject(DaggerCommonsApplicationComponent.java:1809)
+	at dagger.android.DispatchingAndroidInjector.maybeInject(DispatchingAndroidInjector.java:113)
+	at dagger.android.DispatchingAndroidInjector.inject(DispatchingAndroidInjector.java:134)
+	at fr.free.nrw.commons.di.CommonsDaggerAppCompatActivity.inject(CommonsDaggerAppCompatActivity.java:45)
+	at fr.free.nrw.commons.di.CommonsDaggerAppCompatActivity.onCreate(CommonsDaggerAppCompatActivity.java:23)
+	at fr.free.nrw.commons.theme.BaseActivity.onCreate(BaseActivity.java:28)
+	at fr.free.nrw.commons.explore.SearchActivity.onCreate(SearchActivity.java:68)
+	at android.app.Activity.$$robo$$android_app_Activity$performCreate(Activity.java:5933)
+	at android.app.Activity.performCreate(Activity.java)
+	at android.app.Instrumentation.$$robo$$android_app_Instrumentation$callActivityOnCreate(Instrumentation.java:1105)
+	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java)
+	at org.robolectric.android.internal.RoboMonitoringInstrumentation.callActivityOnCreate(RoboMonitoringInstrumentation.java:377)
+	at org.robolectric.android.controller.ActivityController.lambda$create$0(ActivityController.java:138)
+	at org.robolectric.shadows.ShadowPausedLooper.runPaused(ShadowPausedLooper.java:227)
+	at org.robolectric.android.controller.ActivityController.create(ActivityController.java:136)
+	at org.robolectric.android.controller.ActivityController.create(ActivityController.java:146)
+	at fr.free.nrw.commons.explore.search.SearchActivityUnitTests.setUp(SearchActivityUnitTests.kt:88)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.robolectric.RobolectricTestRunner$HelperTestRunner$1.evaluate(RobolectricTestRunner.java:588)
+	at org.robolectric.internal.SandboxTestRunner$2.lambda$evaluate$2(SandboxTestRunner.java:290)
+	at org.robolectric.internal.bytecode.Sandbox.lambda$runOnMainThread$0(Sandbox.java:101)
+	at java.base/java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+Caused by: java.io.IOException: Error while instrumenting fr/free/nrw/commons/explore/SearchActivity_MembersInjector with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrumentError(Instrumenter.java:161)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:111)
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:92)
+	... 47 more
+Caused by: java.lang.IllegalStateException: Cannot process instrumented class fr/free/nrw/commons/explore/SearchActivity_MembersInjector. Please supply original non-instrumented classes.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.InstrSupport.assertNotInstrumented(InstrSupport.java:238)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.ClassInstrumenter.visitField(ClassInstrumenter.java:56)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassVisitor.visitField(ClassVisitor.java:356)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.readField(ClassReader.java:1137)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:739)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:424)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:91)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:109)
+	... 48 more
+java.lang.instrument.IllegalClassFormatException: Error while instrumenting fr/free/nrw/commons/explore/SearchActivity_ViewBinding with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:94)
+	at java.instrument/java.lang.instrument.ClassFileTransformer.transform(Unknown Source)
+	at java.instrument/sun.instrument.TransformerManager.transform(Unknown Source)
+	at java.instrument/sun.instrument.InstrumentationImpl.transform(Unknown Source)
+	at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+	at java.base/java.lang.ClassLoader.defineClass(Unknown Source)
+	at java.base/java.lang.ClassLoader.defineClass(Unknown Source)
+	at org.robolectric.internal.bytecode.SandboxClassLoader.maybeInstrumentClass(SandboxClassLoader.java:162)
+	at org.robolectric.internal.bytecode.SandboxClassLoader.lambda$loadClass$0(SandboxClassLoader.java:136)
+	at org.robolectric.util.PerfStatsCollector.measure(PerfStatsCollector.java:53)
+	at org.robolectric.internal.bytecode.SandboxClassLoader.loadClass(SandboxClassLoader.java:136)
+	at java.base/java.lang.ClassLoader.loadClass(Unknown Source)
+	at butterknife.ButterKnife.findBindingConstructorForClass(ButterKnife.java:201)
+	at butterknife.ButterKnife.bind(ButterKnife.java:162)
+	at butterknife.ButterKnife.bind(ButterKnife.java:99)
+	at fr.free.nrw.commons.explore.SearchActivity.onCreate(SearchActivity.java:70)
+	at android.app.Activity.$$robo$$android_app_Activity$performCreate(Activity.java:5933)
+	at android.app.Activity.performCreate(Activity.java)
+	at android.app.Instrumentation.$$robo$$android_app_Instrumentation$callActivityOnCreate(Instrumentation.java:1105)
+	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java)
+	at org.robolectric.android.internal.RoboMonitoringInstrumentation.callActivityOnCreate(RoboMonitoringInstrumentation.java:377)
+	at org.robolectric.android.controller.ActivityController.lambda$create$0(ActivityController.java:138)
+	at org.robolectric.shadows.ShadowPausedLooper.runPaused(ShadowPausedLooper.java:227)
+	at org.robolectric.android.controller.ActivityController.create(ActivityController.java:136)
+	at org.robolectric.android.controller.ActivityController.create(ActivityController.java:146)
+	at fr.free.nrw.commons.explore.search.SearchActivityUnitTests.setUp(SearchActivityUnitTests.kt:88)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.RunBefores.invokeMethod(RunBefores.java:33)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.robolectric.RobolectricTestRunner$HelperTestRunner$1.evaluate(RobolectricTestRunner.java:588)
+	at org.robolectric.internal.SandboxTestRunner$2.lambda$evaluate$2(SandboxTestRunner.java:290)
+	at org.robolectric.internal.bytecode.Sandbox.lambda$runOnMainThread$0(Sandbox.java:101)
+	at java.base/java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+Caused by: java.io.IOException: Error while instrumenting fr/free/nrw/commons/explore/SearchActivity_ViewBinding with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrumentError(Instrumenter.java:161)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:111)
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:92)
+	... 42 more
+Caused by: java.lang.IllegalStateException: Cannot process instrumented class fr/free/nrw/commons/explore/SearchActivity_ViewBinding. Please supply original non-instrumented classes.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.InstrSupport.assertNotInstrumented(InstrSupport.java:238)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.ClassInstrumenter.visitField(ClassInstrumenter.java:56)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassVisitor.visitField(ClassVisitor.java:356)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.readField(ClassReader.java:1137)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:739)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:424)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:91)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:109)
+	... 43 more
+java.lang.instrument.IllegalClassFormatException: Error while instrumenting fr/free/nrw/commons/utils/FragmentUtils with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:94)
+	at java.instrument/java.lang.instrument.ClassFileTransformer.transform(Unknown Source)
+	at java.instrument/sun.instrument.TransformerManager.transform(Unknown Source)
+	at java.instrument/sun.instrument.InstrumentationImpl.transform(Unknown Source)
+	at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+	at java.base/java.lang.ClassLoader.defineClass(Unknown Source)
+	at java.base/java.lang.ClassLoader.defineClass(Unknown Source)
+	at org.robolectric.internal.bytecode.SandboxClassLoader.maybeInstrumentClass(SandboxClassLoader.java:162)
+	at org.robolectric.internal.bytecode.SandboxClassLoader.lambda$loadClass$0(SandboxClassLoader.java:136)
+	at org.robolectric.util.PerfStatsCollector.measure(PerfStatsCollector.java:53)
+	at org.robolectric.internal.bytecode.SandboxClassLoader.loadClass(SandboxClassLoader.java:136)
+	at java.base/java.lang.ClassLoader.loadClass(Unknown Source)
+	at fr.free.nrw.commons.explore.SearchActivity.handleSearch(SearchActivity.java:131)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at fr.free.nrw.commons.explore.search.SearchActivityUnitTests.testHandleSearchCaseNotEmpty(SearchActivityUnitTests.kt:235)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.robolectric.RobolectricTestRunner$HelperTestRunner$1.evaluate(RobolectricTestRunner.java:588)
+	at org.robolectric.internal.SandboxTestRunner$2.lambda$evaluate$2(SandboxTestRunner.java:290)
+	at org.robolectric.internal.bytecode.Sandbox.lambda$runOnMainThread$0(Sandbox.java:101)
+	at java.base/java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+Caused by: java.io.IOException: Error while instrumenting fr/free/nrw/commons/utils/FragmentUtils with JaCoCo 0.8.10.202304240956/8ea9668.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrumentError(Instrumenter.java:161)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:111)
+	at org.jacoco.agent.rt.internal_4a7f17c.CoverageTransformer.transform(CoverageTransformer.java:92)
+	... 34 more
+Caused by: java.lang.IllegalStateException: Cannot process instrumented class fr/free/nrw/commons/utils/FragmentUtils. Please supply original non-instrumented classes.
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.InstrSupport.assertNotInstrumented(InstrSupport.java:238)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.internal.instr.ClassInstrumenter.visitField(ClassInstrumenter.java:56)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassVisitor.visitField(ClassVisitor.java:356)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.readField(ClassReader.java:1137)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:739)
+	at org.jacoco.agent.rt.internal_4a7f17c.asm.ClassReader.accept(ClassReader.java:424)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:91)
+	at org.jacoco.agent.rt.internal_4a7f17c.core.instr.Instrumenter.instrument(Instrumenter.java:109)
+	... 35 more
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 8.1.1</a> at 29 feb. 2024 11:09:52</p>
+</div>
+</div>
+</body>
+</html>
