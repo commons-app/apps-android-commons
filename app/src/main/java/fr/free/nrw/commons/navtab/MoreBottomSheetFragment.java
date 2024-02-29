@@ -77,9 +77,18 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
         binding.moreSettings.setOnClickListener(v -> onSettingsClicked());
         binding.moreProfile.setOnClickListener(v -> onProfileClicked());
         binding.morePeerReview.setOnClickListener(v -> onPeerReviewClicked());
+        binding.moreFeedbackGithub.setOnClickListener(v -> onFeedbackGithubClicked());
 
         setUserName();
         return binding.getRoot();
+    }
+
+    private void onFeedbackGithubClicked() {
+        final String url = "https://github.com/commons-app/apps-android-commons/issues";
+        final Intent intent;
+        intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+        startActivity(intent);
     }
 
     @Override
