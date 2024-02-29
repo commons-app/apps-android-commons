@@ -30,6 +30,7 @@ data class Contribution constructor(
     var chunkInfo: ChunkInfo? = null,
     // add error message to keep track of error message for failed upload
     var errorMessage: String? = null,
+    var exceptionMessage: Exception? = null,
     /**
      * @return array list of entityids for the depictions
      */
