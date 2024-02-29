@@ -339,7 +339,7 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
         imageAdapter.refresh(filteredImages, allImages)
     }
 
-    fun removeAct(image : Image){
+    fun removeImage(image : Image){
         imageAdapter.removeImageFromActionableImageMap(image)
     }
 

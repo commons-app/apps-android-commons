@@ -2,7 +2,6 @@ package fr.free.nrw.commons.customselector.ui.adapter
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -179,8 +178,6 @@ class ImageAdapter(
                             image = actionableImages[position]
                             Glide.with(holder.image).load(image.uri)
                                 .thumbnail(0.3f).into(holder.image)
-                        }else{
-                            Log.d("myfix", "lund mera position: "+position)
                         }
                     }
 
@@ -211,8 +208,6 @@ class ImageAdapter(
         holder: ImageViewHolder,
         position: Int
     ) {
-
-        Log.d("myfix", "processThumbnailForActionedImage: "+position)
         val next = imageLoader.nextActionableImage(
             allImages, ioDispatcher, defaultDispatcher,
             nextImagePosition
@@ -309,7 +304,6 @@ class ImageAdapter(
             if (holder.isItemUploaded()) {
                 Toast.makeText(context, R.string.custom_selector_already_uploaded_image_text, Toast.LENGTH_SHORT).show()
             } else {
-                Log.d("myfix", "selectOrRemoveImage: "+position)
                 if (holder.isItemNotForUpload()) {
                     numberOfSelectedImagesMarkedAsNotForUpload++
                 }
