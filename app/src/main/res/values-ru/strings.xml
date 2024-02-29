@@ -398,6 +398,7 @@
   <string name="share_app_title">Поделиться приложением</string>
   <string name="rotate">Повернуть</string>
   <string name="error_fetching_nearby_places">Ошибка получения мест поблизости</string>
+  <string name="no_pictures_in_this_area">Здесь нет никаких фотографий</string>
   <string name="no_nearby_places_around">Нет мест поблизости</string>
   <string name="error_fetching_nearby_monuments">Ошибка получения мест поблизости.</string>
   <string name="no_recent_searches">История поиска пуста</string>
