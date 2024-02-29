@@ -6,6 +6,8 @@ import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.feedback.model.Feedback;
 import fr.free.nrw.commons.utils.LangCodeUtils;
 import java.util.Locale;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Creates a wikimedia recognizable format
@@ -27,6 +29,10 @@ public class FeedbackContentCreator {
      */
     public void init() {
         // Localization is not needed here, because this ends up on a page where developers read the feedback, so English is the most convenient.
+
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = currentDateTime.format(formatter);
 
         stringBuilder = new StringBuilder();
         stringBuilder.append("== ");
@@ -89,6 +95,10 @@ public class FeedbackContentCreator {
         }
         stringBuilder.append("~~~~");
         stringBuilder.append("\n");
+        // adds Current Date & Time when a Feedback is created
+        stringBuilder.append("Generated on: " + formattedDateTime);
+        stringBuilder.append("\n");
+
     }
 
     @Override
