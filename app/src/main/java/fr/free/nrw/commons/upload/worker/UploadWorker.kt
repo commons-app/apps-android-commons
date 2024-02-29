@@ -387,7 +387,9 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                                 // genuine failure, and if we want a more extensive description then
                                 // we have those as well
                             Timber.e("Stash Upload failed")
-                            contribution.errorMessage = "ambiguous failure: Stash Upload failed"
+                            if (uploadResult != null) {
+                                contribution.errorMessage = uploadResult.result
+                            }
                             showFailedNotification(contribution)
                             contribution.state = Contribution.STATE_FAILED
                             contribution.chunkInfo = null
