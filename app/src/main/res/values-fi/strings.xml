@@ -281,6 +281,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Arvostele meidät</string>
   <string name="about_faq">UKK</string>
+  <string name="user_guide">Käyttäjän opas</string>
   <string name="welcome_skip_button">Ohita opetus</string>
   <string name="no_internet">Internet ei saatavissa</string>
   <string name="error_notifications">Virhe ilmoitusten haussa</string>
@@ -339,6 +340,7 @@
   <string name="wrong">Väärä vastaus</string>
   <string name="quiz_screenshot_question">Onko tämä kuvakaappaus OK tallennettavaksi?</string>
   <string name="share_app_title">Jaa sovellus</string>
+  <string name="rotate">Kierrä</string>
   <string name="error_fetching_nearby_places">Virhe paikkoja haettaessa.</string>
   <string name="error_fetching_nearby_monuments">Virhe läheisiä monumentteja haettaessa.</string>
   <string name="no_recent_searches">Ei viimeaikaisia hakuja</string>
@@ -418,6 +420,8 @@
   <string name="ends_on">Päättyy:</string>
   <string name="display_campaigns">Näytä kilpailut</string>
   <string name="display_campaigns_explanation">Näe meneillään olevat kilpailut</string>
+  <string name="option_allow">Salli</string>
+  <string name="option_dismiss">Hylkää</string>
   <string name="nearby_campaign_dismiss_message">Et enää näe kampanjoita. Voit kuitenkin halutessasi ottaa tämän ilmoituksen uudelleen käyttöön asetuksissa.</string>
   <string name="this_function_needs_network_connection">Tämä toiminto tarvitsee verkkoyhteyden. Tarkista yhteysasetuksesi.</string>
   <string name="error_processing_image">Kuvan käsittelyssä tapahtui virhe. Yritä uudelleen.</string>
@@ -652,4 +656,7 @@
   <string name="welcome_to_full_screen_mode_text">Tervetuloa koko näytön valintatilaan</string>
   <string name="full_screen_mode_zoom_info">Käytä kahta sormea lähentääksesi ja loitontaaksesi.</string>
   <string name="full_screen_mode_features_info">Pyyhkäise nopeasti ja pitkään suorittaaksesi nämä toiminnot: \n- Vasen/Oikea: Siirry edelliseen/seuraavaan \n- Ylös: Valitse\n- Alas: Merkitse ei-tallennettavaksi.</string>
+  <string name="edit_image">Muokkaa kuvaa</string>
+  <string name="edit_location">Muokkaa sijaintia</string>
+  <string name="send_thanks_to_author">Kiitä tekijää</string>
 </resources>
