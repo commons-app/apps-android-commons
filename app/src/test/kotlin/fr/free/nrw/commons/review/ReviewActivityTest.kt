@@ -111,10 +111,10 @@ class ReviewActivityTest {
         val media = mock(Media::class.java)
 
         doReturn(mapOf<String, Boolean>("test" to false)).`when`(media).categoriesHiddenStatus
-        doReturn(Single.just(media)).`when`(reviewHelper)?.randomMedia
-        Assert.assertNotNull(reviewHelper?.randomMedia)
+        doReturn(Single.just(media)).`when`(reviewHelper)?.getRandomMedia()
+        Assert.assertNotNull(reviewHelper?.getRandomMedia())
         reviewHelper
-            ?.randomMedia
+            ?.getRandomMedia()
             ?.test()
             ?.assertValue(media);
         activity.swipeToNext()

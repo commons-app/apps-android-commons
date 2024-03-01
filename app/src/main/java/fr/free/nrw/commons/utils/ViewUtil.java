@@ -1,16 +1,22 @@
 package fr.free.nrw.commons.utils;
 
+import static java.security.AccessController.getContext;
+
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.Display;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.StringRes;
 
+import androidx.core.content.ContextCompat;
 import com.google.android.material.snackbar.Snackbar;
 
+import fr.free.nrw.commons.R;
 import timber.log.Timber;
 
 public class ViewUtil {
@@ -28,6 +34,37 @@ public class ViewUtil {
             try {
                 Snackbar.make(view, messageResourceId, Snackbar.LENGTH_SHORT).show();
             }catch (IllegalStateException e){
+                Timber.e(e.getMessage());
+            }
+        });
+    }
+    public static void showLongSnackbar(View view, String text) {
+        if(view.getContext() == null) {
+            return;
+        }
+
+        ExecutorUtils.uiExecutor().execute(()-> {
+            try {
+                Snackbar snackbar = Snackbar.make(view, text, Snackbar.LENGTH_SHORT);
+
+                View snack_view = snackbar.getView();
+                TextView snack_text = snack_view.findViewById(R.id.snackbar_text);
+
+                snack_view.setBackgroundColor(Color.LTGRAY);
+                snack_text.setTextColor(ContextCompat.getColor(view.getContext(), R.color.primaryColor));
+                snackbar.setActionTextColor(Color.RED);
+
+                snackbar.setAction("Dismiss", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Handle the action click
+                        snackbar.dismiss();
+                    }
+                });
+
+                snackbar.show();
+
+            }catch (IllegalStateException e) {
                 Timber.e(e.getMessage());
             }
         });

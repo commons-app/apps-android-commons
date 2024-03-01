@@ -366,6 +366,7 @@
   <string name="share_app_title">分享應用程式</string>
   <string name="rotate">旋轉</string>
   <string name="error_fetching_nearby_places">獲取附近地點時出錯。</string>
+  <string name="no_pictures_in_this_area">此區域沒有圖片</string>
   <string name="no_nearby_places_around">找不到附近地點</string>
   <string name="error_fetching_nearby_monuments">索取附近古蹟景點時出錯。</string>
   <string name="no_recent_searches">無近期搜尋</string>

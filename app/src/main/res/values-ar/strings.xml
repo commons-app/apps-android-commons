@@ -128,6 +128,8 @@
   <string name="login_success">تم الدخول بشكل صحيح!</string>
   <string name="login_failed">فشل تسجيل الدخول</string>
   <string name="upload_failed">الملف غير موجود. فضلا اختر ملفا آخر.</string>
+  <string name="retry_limit_reached">تم الوصول إلى الحد الأقصى لإعادة المحاولة! يرجى إلغاء التحميل والمحاولة مرة أخرى</string>
+  <string name="unrestricted_battery_mode">هل تريد إيقاف تشغيل تحسين البطارية؟</string>
   <string name="authentication_failed">فشلت المصادقة; الرجاء تسجيل الدخول مرة أخرى</string>
   <string name="uploading_started">بدأ الرفع!</string>
   <string name="uploading_queued">تحميل في قائمة الانتظار (وضع الاتصال المحدود ممكّن)</string>
