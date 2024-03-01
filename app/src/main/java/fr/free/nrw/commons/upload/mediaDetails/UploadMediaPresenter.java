@@ -115,6 +115,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     @Override
     public void receiveImage(final UploadableFile uploadableFile, final Place place,
                             LatLng inAppPictureLocation) {
+        view.showProgress(true);
         compositeDisposable.add(
             repository
                 .preProcessImage(uploadableFile, place, this, inAppPictureLocation)
@@ -139,7 +140,8 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                         view.updateMediaDetails(uploadItem.getUploadMediaDetails());
                         final ImageCoordinates gpsCoords = uploadItem.getGpsCoords();
                         final boolean hasImageCoordinates =
-                          gpsCoords != null && gpsCoords.getImageCoordsExists();
+                            gpsCoords != null && gpsCoords.getImageCoordsExists();
+                        view.showProgress(false);
                         if (hasImageCoordinates && place == null) {
                             checkNearbyPlaces(uploadItem);
                         }
@@ -497,8 +499,9 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     /**
      * Handles bad pictures, like too dark, already on wikimedia, downloaded from internet
      *
-     * @param errorCode Error code of the bad image
+     * @param errorCode Error code of the bad image quality
      * @param uploadItem UploadItem whose quality is bad
+     * @param index Index of item whose quality is bad
      */
     public void handleBadImage(Integer errorCode,
         UploadItem uploadItem, int index) {

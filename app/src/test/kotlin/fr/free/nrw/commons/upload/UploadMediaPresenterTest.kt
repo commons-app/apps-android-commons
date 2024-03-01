@@ -18,7 +18,6 @@ import io.reactivex.schedulers.TestScheduler
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.*
@@ -83,8 +82,9 @@ class UploadMediaPresenterTest {
         testObservableUploadItem = Observable.just(uploadItem)
         testSingleImageResult = Single.just(1)
         testScheduler = TestScheduler()
-        uploadMediaPresenter = UploadMediaPresenter(repository,
-            jsonKvStore,testScheduler, testScheduler)
+        uploadMediaPresenter = UploadMediaPresenter(
+            repository, jsonKvStore, testScheduler, testScheduler
+        )
         uploadMediaPresenter.onAttachView(view)
         mockedCountry = mockStatic(Coordinates2Country::class.java)
     }
@@ -155,28 +155,30 @@ class UploadMediaPresenterTest {
     }
 
     /**
-     * unit test for method UploadMediaPresenter.handleImageResult
+     * Test for empty file name when the user presses the NEXT button
      */
-    // have to change these as now we don't use handleImageResult,
-    // rather we use checkImageQuality, which uses stored sharedPrefs image quality to call methods
-    @Ignore
     @Test
-    fun handleImageResult() {
-        //Positive case test
-        uploadMediaPresenter.handleImageResult(IMAGE_KEEP, uploadItem)
-        verify(view).onImageValidationSuccess()
-
-        //Duplicate file name
-        uploadMediaPresenter.handleImageResult(FILE_NAME_EXISTS, uploadItem)
-        verify(view).showDuplicatePicturePopup(uploadItem)
-
-        //Empty Caption test
-        uploadMediaPresenter.handleImageResult(EMPTY_CAPTION, uploadItem)
+    fun emptyFileNameTest() {
+        uploadMediaPresenter.handleCaptionResult(EMPTY_CAPTION, uploadItem);
         verify(view).showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
+    }
 
-        // Bad Picture Test
-        uploadMediaPresenter.checkImageQuality(uploadItem, -7)
-        verify(uploadMediaPresenter).showBadImagePopup(ArgumentMatchers.anyInt(), 0, mockActivity, ArgumentMatchers.eq(uploadItem))
+    /**
+     * Test for duplicate file name when the user presses the NEXT button
+     */
+    @Test
+    fun duplicateFileNameTest() {
+        uploadMediaPresenter.handleCaptionResult(FILE_NAME_EXISTS, uploadItem)
+        verify(view).showDuplicatePicturePopup(uploadItem)
+    }
+
+    /**
+     * Test for correct file name when the user presses the NEXT button
+     */
+    @Test
+    fun correctFileNameTest() {
+        uploadMediaPresenter.handleCaptionResult(IMAGE_OK, uploadItem)
+        verify(view).onImageValidationSuccess()
     }
 
     @Test
@@ -226,36 +228,6 @@ class UploadMediaPresenterTest {
     }
 
     /**
-     * Test bad image invalid location
-     */
-    @Test
-    fun handleBadImageBaseTestInvalidLocation() {
-        uploadMediaPresenter.handleBadImage(8, uploadItem, 0)
-        verify(uploadMediaPresenter).showBadImagePopup(8, 0, mockActivity,uploadItem)
-    }
-
-    /**
-     * Test bad image empty title
-     */
-    @Ignore // have to change this as now, title of image is not checked in handleBadImage
-    @Test
-    fun handleBadImageBaseTestEmptyTitle() {
-        uploadMediaPresenter.handleBadImage(-3, uploadItem, 0)
-        verify(view).showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
-    }
-
-    /**
-     * Test to show that filename already exists
-     */
-    @Ignore // have to change this, because now filename is not checked in handleBadImage
-    @Test
-    fun handleBadImageBaseTestFileNameExists() {
-        uploadMediaPresenter.handleBadImage(64, uploadItem, 0)
-        verify(view).showDuplicatePicturePopup(uploadItem)
-    }
-
-
-    /**
      * Test show SimilarImageFragment
      */
     @Test
@@ -268,7 +240,8 @@ class UploadMediaPresenterTest {
     @Test
     fun setCorrectCountryCodeForReceivedImage() {
 
-        val germanyAsPlace = Place(null,null, null, null, LatLng(50.1, 10.2, 1.0f), null, null, null, true)
+        val germanyAsPlace =
+            Place(null, null, null, null, LatLng(50.1, 10.2, 1.0f), null, null, null, true)
         germanyAsPlace.isMonument = true
 
         whenever(
@@ -278,7 +251,8 @@ class UploadMediaPresenterTest {
             )
         ).thenReturn("Germany")
 
-        val item: Observable<UploadItem> = Observable.just(UploadItem(Uri.EMPTY, null, null, germanyAsPlace, 0, null, null, null))
+        val item: Observable<UploadItem> =
+            Observable.just(UploadItem(Uri.EMPTY, null, null, germanyAsPlace, 0, null, null, null))
 
         whenever(
             repository.preProcessImage(
