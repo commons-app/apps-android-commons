@@ -300,9 +300,6 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
         contribution.errorMessage = null
         if (contribution.localUri == null || contribution.localUri.path == null) {
             Timber.e("""upload: ${contribution.media.filename} failed, file path is null""")
-            // FP: this is an obvious genuine failure point
-            // But the actual return point is not here
-            // So I guess we can just add a var here which basically says what the string above say
             contribution.errorMessage = "file path is null"
         }
 
@@ -382,12 +379,6 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                             showSuccessNotification(contribution)
 
                         } else {
-                            // FP: Here is a much more ambiguous failure point
-                                // Either uploadResult is null in which case we have a big problem
-                                // or we'll have some form of message in uploadResult.result
-                                // Either way we can probably not confidently say that it is a
-                                // genuine failure, and if we want a more extensive description then
-                                // we have those as well
                             Timber.e("Stash Upload failed")
                             if (uploadResult != null && contribution.errorMessage == null) {
                                 contribution.errorMessage = uploadResult.result
@@ -399,11 +390,6 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
 
                         }
                     }catch (exception : Exception){
-                        // FP: Exception in upload from stash.
-                            // Ambiguous in the sense that it is hard to determine from code, but we
-                            // at least have an exception to work with. And as we have already
-                            // passed one upload step we can be pretty certain this is not a
-                            // genuine failure.
                         if (contribution.errorMessage == null) {
                             contribution.errorMessage = "upload from stash failed with exception"
                         }
@@ -424,10 +410,6 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                     contributionDao.saveSynchronous(contribution)
                 }
                 else -> {
-                    // FP: Error in upload to stash.
-                        // This only gives us a failure, nothing more to work with, so can't say it
-                        // is a genuine failure. This is probably where invalid or missing filename
-                        // will fail
                     if (contribution.errorMessage == null) {
                         contribution.errorMessage = "upload to stash failed"
                     }
@@ -439,10 +421,6 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                 }
             }
         }catch (exception: Exception){
-            // FP: Exception in upload to stash.
-                // Ambiguous in the sense that it is hard to determine from code, but we
-                // at least have an exception to work with. Might also be here invalid filename
-                // fails
             if (contribution.errorMessage == null) {
                 contribution.errorMessage = "upload to stash failed with exception"
             }

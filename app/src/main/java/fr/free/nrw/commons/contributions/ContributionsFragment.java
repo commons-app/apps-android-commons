@@ -693,7 +693,6 @@ public class ContributionsFragment
                     Timber.d("Retried uploading %s %d times", contribution.getMedia().getFilename(), retries + 1);
                     restartUpload(contribution);
                 } else {
-                    // TODO: Show the exact reason for failure
                     // TODO: notify user of error
                     Toast.makeText(getContext(),
                         R.string.retry_limit_reached, Toast.LENGTH_SHORT).show();
@@ -720,7 +719,7 @@ public class ContributionsFragment
         }
 
         for (String error : STASH_EXCEPTIONS) {
-            if (contribution.getErrorMessage().contains(error)) {
+            if (contribution.getExceptionMessage().contains(error)) {
                 return true;
             }
         }
