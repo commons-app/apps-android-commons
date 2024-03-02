@@ -16,13 +16,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.bookmarks.BookmarkListRootFragment;
 import fr.free.nrw.commons.category.GridViewAdapter;
+import fr.free.nrw.commons.databinding.FragmentBookmarksPicturesBinding;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -37,11 +36,12 @@ public class BookmarkPicturesFragment extends DaggerFragment {
     private GridViewAdapter gridAdapter;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    @BindView(R.id.statusMessage) TextView statusTextView;
-    @BindView(R.id.loadingImagesProgressBar) ProgressBar progressBar;
-    @BindView(R.id.bookmarkedPicturesList) GridView gridView;
-    @BindView(R.id.parentLayout) RelativeLayout parentLayout;
+    TextView statusTextView;
+    ProgressBar progressBar;
+    GridView gridView;
+    RelativeLayout parentLayout;
 
+    private FragmentBookmarksPicturesBinding binding;
     @Inject
     BookmarkPicturesController controller;
 
@@ -59,8 +59,12 @@ public class BookmarkPicturesFragment extends DaggerFragment {
             ViewGroup container,
             Bundle savedInstanceState
     ) {
-        View v = inflater.inflate(R.layout.fragment_bookmarks_pictures, container, false);
-        ButterKnife.bind(this, v);
+        binding = FragmentBookmarksPicturesBinding.inflate(inflater, container, false);
+        View v = binding.getRoot();
+        gridView = binding.bookmarkedPicturesList;
+        statusTextView = binding.statusMessage;
+        progressBar = binding.loadingImagesProgressBar;
+        parentLayout = binding.parentLayout;
         return v;
     }
 

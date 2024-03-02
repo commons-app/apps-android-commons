@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.databinding.FragmentBookmarksLocationsBinding;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.fragments.CommonPlaceClickActions;
 import fr.free.nrw.commons.nearby.fragments.PlaceAdapter;
@@ -31,10 +32,12 @@ import kotlin.Unit;
 
 public class BookmarkLocationsFragment extends DaggerFragment {
 
-    @BindView(R.id.statusMessage) TextView statusTextView;
-    @BindView(R.id.loadingImagesProgressBar) ProgressBar progressBar;
-    @BindView(R.id.listView) RecyclerView recyclerView;
-    @BindView(R.id.parentLayout) RelativeLayout parentLayout;
+    TextView statusTextView;
+    ProgressBar progressBar;
+    RecyclerView recyclerView;
+    RelativeLayout parentLayout;
+
+    private FragmentBookmarksLocationsBinding binding;
 
     @Inject BookmarkLocationsController controller;
     @Inject ContributionController contributionController;
@@ -75,8 +78,12 @@ public class BookmarkLocationsFragment extends DaggerFragment {
             ViewGroup container,
             Bundle savedInstanceState
     ) {
-        View v = inflater.inflate(R.layout.fragment_bookmarks_locations, container, false);
-        ButterKnife.bind(this, v);
+        binding = FragmentBookmarksLocationsBinding.inflate(inflater, container, false);
+        statusTextView = binding.statusMessage;
+        progressBar = binding.loadingImagesProgressBar;
+        recyclerView = binding.listView;
+        parentLayout = binding.parentLayout;
+        View v = binding.getRoot();
         return v;
     }
 

@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.tabs.TabLayout;
 
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.databinding.FragmentBookmarksBinding;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.ParentViewPager;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -29,12 +30,10 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment {
 
     private FragmentManager supportFragmentManager;
     private BookmarksPagerAdapter adapter;
-    @BindView(R.id.viewPagerBookmarks)
-    ParentViewPager viewPager;
-    @BindView(R.id.tab_layout)
+
     TabLayout tabLayout;
-    @BindView(R.id.fragmentContainer)
-    FrameLayout fragmentContainer;
+
+    private FragmentBookmarksBinding binding;
 
     @Inject
     ContributionController controller;
@@ -54,7 +53,7 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment {
     }
 
     public void setScroll(boolean canScroll) {
-        viewPager.setCanScroll(canScroll);
+        binding.viewPagerBookmarks.setCanScroll(canScroll);
     }
 
     @Override
@@ -68,8 +67,10 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment {
         @Nullable final ViewGroup container,
         @Nullable final Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_bookmarks, container, false);
-        ButterKnife.bind(this, view);
+        binding = FragmentBookmarksBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+
+        tabLayout = binding.tabLayout;
 
         // Activity can call methods in the fragment by acquiring a
         // reference to the Fragment from FragmentManager, using findFragmentById()
@@ -77,8 +78,8 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment {
 
         adapter = new BookmarksPagerAdapter(supportFragmentManager, getContext(),
             applicationKvStore.getBoolean("login_skipped"));
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
+        binding.viewPagerBookmarks.setAdapter(adapter);
+        tabLayout.setupWithViewPager(binding.viewPagerBookmarks);
 
         ((MainActivity) getActivity()).showTabs();
         ((BaseActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);

@@ -12,8 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsFragment;
@@ -22,6 +20,7 @@ import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.category.GridViewAdapter;
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.databinding.FragmentFeaturedRootBinding;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.navtab.NavTab;
@@ -39,8 +38,7 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
     public Fragment listFragment;
     private BookmarksPagerAdapter bookmarksPagerAdapter;
 
-    @BindView(R.id.explore_container)
-    FrameLayout container;
+    private FragmentFeaturedRootBinding binding;
 
     public BookmarkListRootFragment() {
         //empty constructor necessary otherwise crashes on recreate
@@ -70,8 +68,8 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
         @Nullable final ViewGroup container,
         @Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_featured_root, container, false);
-        ButterKnife.bind(this, view);
+        binding = FragmentFeaturedRootBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
         return view;
     }
 
@@ -241,7 +239,7 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Log.d("deneme8", "on media clicked");
-        container.setVisibility(View.VISIBLE);
+        binding.exploreContainer.setVisibility(View.VISIBLE);
         ((BookmarkFragment) getParentFragment()).tabLayout.setVisibility(View.GONE);
         mediaDetails = MediaDetailPagerFragment.newInstance(false, true);
         ((BookmarkFragment) getParentFragment()).setScroll(false);
