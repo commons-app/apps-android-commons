@@ -11,7 +11,9 @@
         android:id="@+id/toolbarLayout"
         android:layout_width="wrap_content"
         android:layout_height="?attr/actionBarSize">
-        <include layout="@layout/toolbar" />
+        <include
+          android:id="@+id/toolbarBinding"
+          layout="@layout/toolbar" />
     </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"

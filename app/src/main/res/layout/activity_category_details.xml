@@ -15,7 +15,9 @@
             android:layout_height="wrap_content"
             android:background="?attr/mainBackground">
 
-            <include layout="@layout/toolbar"/>
+            <include
+              android:id="@+id/toolbarBinding"
+              layout="@layout/toolbar"/>
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout"

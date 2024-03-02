@@ -3,12 +3,12 @@ package fr.free.nrw.commons.settings;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import android.view.View;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import androidx.appcompat.widget.Toolbar;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.databinding.ActivitySettingsBinding;
 import fr.free.nrw.commons.theme.BaseActivity;
 
 /**
@@ -16,8 +16,8 @@ import fr.free.nrw.commons.theme.BaseActivity;
  */
 public class SettingsActivity extends BaseActivity {
     private AppCompatDelegate settingsDelegate;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+
+    private ActivitySettingsBinding binding;
     /**
      * to be called when the activity starts
      * @param savedInstanceState the previously saved state
@@ -25,10 +25,13 @@ public class SettingsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
 
-        ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
+        binding = ActivitySettingsBinding.inflate(getLayoutInflater());
+        final View view = binding.getRoot();
+        setContentView(view);
+
+        setSupportActionBar(binding.toolbarBinding.toolbar);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
