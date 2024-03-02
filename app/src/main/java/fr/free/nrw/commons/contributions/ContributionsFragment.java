@@ -39,6 +39,7 @@ import androidx.fragment.app.FragmentTransaction;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.databinding.FragmentContributionsBinding;
 import fr.free.nrw.commons.notification.models.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.profile.ProfileActivity;
@@ -49,8 +50,6 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 import androidx.work.WorkManager;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.campaigns.models.Campaign;
@@ -106,10 +105,9 @@ public class ContributionsFragment
     static final String MEDIA_DETAIL_PAGER_FRAGMENT_TAG = "MediaDetailFragmentTag";
     private static final int MAX_RETRIES = 10;
 
-    @BindView(R.id.card_view_nearby) public NearbyNotificationCardView nearbyNotificationCardView;
-    @BindView(R.id.campaigns_view) CampaignView campaignView;
-    @BindView(R.id.limited_connection_enabled_layout) LinearLayout limitedConnectionEnabledLayout;
-    @BindView(R.id.limited_connection_description_text_view) TextView limitedConnectionDescriptionTextView;
+    public NearbyNotificationCardView nearbyNotificationCardView;
+
+    private FragmentContributionsBinding binding;
 
     @Inject ContributionsPresenter contributionsPresenter;
 
@@ -179,12 +177,14 @@ public class ContributionsFragment
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_contributions, container, false);
-        ButterKnife.bind(this, view);
+
+        binding = FragmentContributionsBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+        nearbyNotificationCardView = binding.cardViewNearby;
         initWLMCampaign();
         presenter.onAttachView(this);
         contributionsPresenter.onAttachView(this);
-        campaignView.setVisibility(View.GONE);
+        binding.campaignsView.setVisibility(View.GONE);
         checkBoxView = View.inflate(getActivity(), R.layout.nearby_permission_dialog, null);
         checkBox = (CheckBox) checkBoxView.findViewById(R.id.never_ask_again);
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -204,7 +204,7 @@ public class ContributionsFragment
 
         initFragments();
         if(isUserProfile) {
-            limitedConnectionEnabledLayout.setVisibility(View.GONE);
+            binding.limitedConnectionEnabledLayout.setVisibility(View.GONE);
         }else {
             upDateUploadCount();
         }
@@ -221,7 +221,7 @@ public class ContributionsFragment
             && sessionManager.getCurrentAccount() != null && !isUserProfile) {
             setUploadCount();
         }
-        limitedConnectionEnabledLayout.setOnClickListener(toggleDescriptionListener);
+        binding.limitedConnectionEnabledLayout.setOnClickListener(toggleDescriptionListener);
         setHasOptionsMenu(true);
         return view;
     }
@@ -284,9 +284,9 @@ public class ContributionsFragment
 
         checkable.setChecked(isEnabled);
         if (isEnabled) {
-            limitedConnectionEnabledLayout.setVisibility(View.VISIBLE);
+            binding.limitedConnectionEnabledLayout.setVisibility(View.VISIBLE);
         } else {
-            limitedConnectionEnabledLayout.setVisibility(View.GONE);
+            binding.limitedConnectionEnabledLayout.setVisibility(View.GONE);
         }
         checkable.setIcon((isEnabled) ? R.drawable.ic_baseline_cloud_off_24:R.drawable.ic_baseline_cloud_queue_24);
         checkable.setOnMenuItemClickListener(new OnMenuItemClickListener() {
@@ -295,9 +295,9 @@ public class ContributionsFragment
                 ((MainActivity) getActivity()).toggleLimitedConnectionMode();
                 boolean isEnabled = store.getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
                 if (isEnabled) {
-                    limitedConnectionEnabledLayout.setVisibility(View.VISIBLE);
+                    binding.limitedConnectionEnabledLayout.setVisibility(View.VISIBLE);
                 } else {
-                    limitedConnectionEnabledLayout.setVisibility(View.GONE);
+                    binding.limitedConnectionEnabledLayout.setVisibility(View.GONE);
                 }
                 checkable.setIcon((isEnabled) ? R.drawable.ic_baseline_cloud_off_24:R.drawable.ic_baseline_cloud_queue_24);
                 return false;
@@ -346,7 +346,7 @@ public class ContributionsFragment
     }
 
     private void setupViewForMediaDetails() {
-        campaignView.setVisibility(View.GONE);
+        binding.campaignsView.setVisibility(View.GONE);
         nearbyNotificationCardView.setVisibility(View.GONE);
     }
 
@@ -614,12 +614,12 @@ public class ContributionsFragment
      */
     private void fetchCampaigns() {
         if (Utils.isMonumentsEnabled(new Date())) {
-            campaignView.setCampaign(wlmCampaign);
-            campaignView.setVisibility(View.VISIBLE);
+            binding.campaignsView.setCampaign(wlmCampaign);
+            binding.campaignsView.setVisibility(View.VISIBLE);
         } else if (store.getBoolean(CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE, true)) {
             presenter.getCampaigns();
         } else {
-            campaignView.setVisibility(View.GONE);
+            binding.campaignsView.setVisibility(View.GONE);
         }
     }
 
@@ -629,7 +629,7 @@ public class ContributionsFragment
 
     @Override public void showCampaigns(Campaign campaign) {
         if (campaign != null && !isUserProfile) {
-            campaignView.setCampaign(campaign);
+            binding.campaignsView.setCampaign(campaign);
         }
     }
 
@@ -812,7 +812,7 @@ public class ContributionsFragment
 
       @Override
       public void onClick(View view) {
-          View view2 = limitedConnectionDescriptionTextView;
+          View view2 = binding.limitedConnectionDescriptionTextView;
           if (view2.getVisibility() == View.GONE) {
               view2.setVisibility(View.VISIBLE);
           } else {
