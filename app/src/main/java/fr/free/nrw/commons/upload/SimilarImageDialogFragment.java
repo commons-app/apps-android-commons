@@ -65,8 +65,8 @@ public class SimilarImageDialogFragment extends DialogFragment {
         binding.orginalImage.setImageURI(Uri.fromFile(new File(getArguments().getString("originalImagePath"))));
         binding.possibleImage.setImageURI(Uri.fromFile(new File(getArguments().getString("possibleImagePath"))));
 
-        binding.postiveButton.setOnClickListener(this::onPositiveButtonClicked);
-        binding.negativeButton.setOnClickListener(this::onNegativeButtonClicked);
+        binding.postiveButton.setOnClickListener(v -> onPositiveButtonClicked());
+        binding.negativeButton.setOnClickListener(v -> onNegativeButtonClicked());
 
         return view;
     }
@@ -92,13 +92,13 @@ public class SimilarImageDialogFragment extends DialogFragment {
         super.onDismiss(dialog);
     }
 
-    public void onNegativeButtonClicked(View view) {
+    public void onNegativeButtonClicked() {
         callback.onNegativeResponse();
         gotResponse = true;
         dismiss();
     }
 
-    public void onPositiveButtonClicked(View view) {
+    public void onPositiveButtonClicked() {
         callback.onPositiveResponse();
         gotResponse = true;
         dismiss();

@@ -23,8 +23,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import com.google.android.material.textfield.TextInputLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -32,6 +30,7 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
+import fr.free.nrw.commons.databinding.UploadCategoriesFragmentBinding;
 import fr.free.nrw.commons.media.MediaDetailFragment;
 import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText;
 import fr.free.nrw.commons.upload.UploadActivity;
@@ -47,25 +46,6 @@ import kotlin.Unit;
 import timber.log.Timber;
 
 public class UploadCategoriesFragment extends UploadBaseFragment implements CategoriesContract.View {
-
-    @BindView(R.id.tv_title)
-    TextView tvTitle;
-    @BindView(R.id.tv_subtitle)
-    TextView tvSubTitle;
-    @BindView(R.id.til_container_search)
-    TextInputLayout tilContainerEtSearch;
-    @BindView(R.id.et_search)
-    PasteSensitiveTextInputEditText etSearch;
-    @BindView(R.id.pb_categories)
-    ProgressBar pbCategories;
-    @BindView(R.id.rv_categories)
-    RecyclerView rvCategories;
-    @BindView(R.id.tooltip)
-    ImageView tooltip;
-    @BindView(R.id.btn_next)
-    Button btnNext;
-    @BindView(R.id.btn_previous)
-    Button btnPrevious;
 
     @Inject
     CategoriesContract.UserActionListener presenter;
@@ -85,17 +65,19 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     private String wikiText;
     private String nearbyPlaceCategory;
 
+    private UploadCategoriesFragmentBinding binding;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.upload_categories_fragment, container, false);
+        binding = UploadCategoriesFragmentBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
         final Bundle bundle = getArguments();
         if (bundle != null) {
             media = bundle.getParcelable("Existing_Categories");
@@ -110,18 +92,18 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     private void init() {
         if (media == null) {
             if (callback != null) {
-                tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
+                binding.tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
                     callback.getTotalNumberOfSteps(), getString(R.string.categories_activity_title)));
             }
         } else {
-            tvTitle.setText(R.string.edit_categories);
-            tvSubTitle.setVisibility(View.GONE);
-            btnNext.setText(R.string.menu_save_categories);
-            btnPrevious.setText(R.string.menu_cancel_upload);
+            binding.tvTitle.setText(R.string.edit_categories);
+            binding.tvSubtitle.setVisibility(View.GONE);
+            binding.btnNext.setText(R.string.menu_save_categories);
+            binding.btnPrevious.setText(R.string.menu_cancel_upload);
         }
 
         setTvSubTitle();
-        tooltip.setOnClickListener(new OnClickListener() {
+        binding.tooltip.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 DialogUtil.showAlertDialog(getActivity(), getString(R.string.categories_activity_title), getString(R.string.categories_tooltip), getString(android.R.string.ok), null, true);
@@ -132,14 +114,17 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         } else {
             presenter.onAttachViewWithMedia(this, media);
         }
+        binding.btnNext.setOnClickListener(this::onNextButtonClicked);
+        binding.btnPrevious.setOnClickListener(this::onPreviousButtonClicked);
+
         initRecyclerView();
         addTextChangeListenerToEtSearch();
     }
 
     private void addTextChangeListenerToEtSearch() {
-        subscribe = RxTextView.textChanges(etSearch)
-                .doOnEach(v -> tilContainerEtSearch.setError(null))
-                .takeUntil(RxView.detaches(etSearch))
+        subscribe = RxTextView.textChanges(binding.etSearch)
+                .doOnEach(v -> binding.tilContainerSearch.setError(null))
+                .takeUntil(RxView.detaches(binding.etSearch))
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(filter -> searchForCategory(filter.toString()), Timber::e);
@@ -154,7 +139,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         if (activity instanceof UploadActivity) {
             final boolean isMultipleFileSelected = ((UploadActivity) activity).getIsMultipleFilesSelected();
             if (!isMultipleFileSelected) {
-                tvSubTitle.setVisibility(View.GONE);
+                binding.tvSubtitle.setVisibility(View.GONE);
             }
         }
     }
@@ -168,8 +153,8 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
             presenter.onCategoryItemClicked(categoryItem);
             return Unit.INSTANCE;
         }, nearbyPlaceCategory);
-        rvCategories.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvCategories.setAdapter(adapter);
+        binding.rvCategories.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rvCategories.setAdapter(adapter);
     }
 
     @Override
@@ -181,17 +166,17 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
 
     @Override
     public void showProgress(boolean shouldShow) {
-        pbCategories.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
+        binding.pbCategories.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
     }
 
     @Override
     public void showError(String error) {
-        tilContainerEtSearch.setError(error);
+        binding.tilContainerSearch.setError(error);
     }
 
     @Override
     public void showError(int stringResourceId) {
-        tilContainerEtSearch.setError(getString(stringResourceId));
+        binding.tilContainerSearch.setError(getString(stringResourceId));
     }
 
     @Override
@@ -205,14 +190,14 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
 
         // Nested waiting for search result data to load into the category
         // list and smoothly scroll to the top of the search result list.
-        rvCategories.post(new Runnable() {
+        binding.rvCategories.post(new Runnable() {
             @Override
             public void run() {
-                rvCategories.smoothScrollToPosition(0);
-                rvCategories.post(new Runnable() {
+                binding.rvCategories.smoothScrollToPosition(0);
+                binding.rvCategories.post(new Runnable() {
                     @Override
                     public void run() {
-                        rvCategories.smoothScrollToPosition(0);
+                        binding.rvCategories.smoothScrollToPosition(0);
                     }
                 });
             }
@@ -297,8 +282,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         mediaDetailFragment.updateCategories();
     }
 
-    @OnClick(R.id.btn_next)
-    public void onNextButtonClicked() {
+    public void onNextButtonClicked(View v) {
         if (media != null) {
             presenter.updateCategories(media, wikiText);
         } else {
@@ -306,8 +290,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         }
     }
 
-    @OnClick(R.id.btn_previous)
-    public void onPreviousButtonClicked() {
+    public void onPreviousButtonClicked(View v) {
         if (media != null) {
             presenter.clearPreviousSelection();
             adapter.setItems(null);
@@ -326,7 +309,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     protected void onBecameVisible() {
         super.onBecameVisible();
         presenter.selectCategories();
-        final Editable text = etSearch.getText();
+        final Editable text = binding.etSearch.getText();
         if (text != null) {
             presenter.searchForCategories(text.toString());
         }
@@ -340,9 +323,9 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         super.onResume();
 
         if (media != null) {
-            etSearch.setOnKeyListener((v, keyCode, event) -> {
+            binding.etSearch.setOnKeyListener((v, keyCode, event) -> {
                 if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    etSearch.clearFocus();
+                    binding.etSearch.clearFocus();
                     presenter.clearPreviousSelection();
                     final MediaDetailFragment mediaDetailFragment = (MediaDetailFragment) getParentFragment();
                     assert mediaDetailFragment != null;
