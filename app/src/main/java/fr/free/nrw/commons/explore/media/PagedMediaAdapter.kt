@@ -6,9 +6,9 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.databinding.LayoutCategoryImagesBinding
 import fr.free.nrw.commons.explore.paging.BaseViewHolder
 import fr.free.nrw.commons.explore.paging.inflate
-import kotlinx.android.synthetic.main.layout_category_images.*
 
 class PagedMediaAdapter(private val onImageClicked: (Int) -> Unit) :
     PagedListAdapter<Media, SearchImagesViewHolder>(object : DiffUtil.ItemCallback<Media>() {
@@ -32,17 +32,19 @@ class PagedMediaAdapter(private val onImageClicked: (Int) -> Unit) :
 
 class SearchImagesViewHolder(containerView: View, val onImageClicked: (Int) -> Unit) :
     BaseViewHolder<Pair<Media, Int>>(containerView) {
+    val binding = LayoutCategoryImagesBinding.bind(itemView)
+
     override fun bind(item: Pair<Media, Int>) {
         val media = item.first
-        categoryImageView.setOnClickListener { onImageClicked(item.second) }
-        categoryImageTitle.text = media.mostRelevantCaption
-        categoryImageView.setImageURI(media.thumbUrl)
+        binding.categoryImageView.setOnClickListener { onImageClicked(item.second) }
+        binding.categoryImageTitle.text = media.mostRelevantCaption
+        binding.categoryImageView.setImageURI(media.thumbUrl)
         if (media.author?.isNotEmpty() == true) {
-            categoryImageAuthor.visibility = View.VISIBLE
-            categoryImageAuthor.text =
+            binding.categoryImageAuthor.visibility = View.VISIBLE
+            binding.categoryImageAuthor.text =
                 containerView.context.getString(R.string.image_uploaded_by, media.user)
         } else {
-            categoryImageAuthor.visibility = View.GONE
+            binding.categoryImageAuthor.visibility = View.GONE
         }
     }
 
