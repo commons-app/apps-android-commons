@@ -67,7 +67,7 @@
     app:elevation="@dimen/dimen_6" />
 
   <include
-    android:id="@+id/bottom_sheet_details"
+    android:id="@+id/bottom_sheet_details_binding"
     layout="@layout/bottom_sheet_details_explore" />
 
   <ProgressBar

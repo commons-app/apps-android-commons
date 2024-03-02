@@ -9,12 +9,11 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.databinding.FragmentFeaturedRootBinding;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
@@ -26,8 +25,7 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
     private MediaDetailPagerFragment mediaDetails;
     private CategoriesMediaFragment listFragment;
 
-    @BindView(R.id.explore_container)
-    FrameLayout container;
+    private FragmentFeaturedRootBinding binding;
 
     public ExploreListRootFragment() {
         //empty constructor necessary otherwise crashes on recreate
@@ -47,8 +45,9 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
         @Nullable final ViewGroup container,
         @Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_featured_root, container, false);
-        ButterKnife.bind(this, view);
+
+        binding = FragmentFeaturedRootBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
         return view;
     }
 
@@ -109,7 +108,7 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
 
     @Override
     public void onMediaClicked(int position) {
-        container.setVisibility(View.VISIBLE);
+        binding.exploreContainer.setVisibility(View.VISIBLE);
         ((ExploreFragment) getParentFragment()).tabLayout.setVisibility(View.GONE);
         mediaDetails = MediaDetailPagerFragment.newInstance(false, true);
         ((ExploreFragment) getParentFragment()).setScroll(false);

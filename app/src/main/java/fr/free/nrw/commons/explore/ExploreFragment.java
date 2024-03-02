@@ -11,12 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.ViewPagerAdapter;
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.databinding.FragmentExploreBinding;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.theme.BaseActivity;
@@ -33,10 +32,8 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     private static final String EXPLORE_MAP = "Map";
     private static final String MEDIA_DETAILS_FRAGMENT_TAG = "MediaDetailsFragment";
 
-    @BindView(R.id.tab_layout)
     TabLayout tabLayout;
-    @BindView(R.id.viewPager)
-    ParentViewPager viewPager;
+    private FragmentExploreBinding binding;
     ViewPagerAdapter viewPagerAdapter;
     private ExploreListRootFragment featuredRootFragment;
     private ExploreListRootFragment mobileRootFragment;
@@ -46,7 +43,7 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     public JsonKvStore applicationKvStore;
 
     public void setScroll(boolean canScroll){
-        viewPager.setCanScroll(canScroll);
+        binding.viewPager.setCanScroll(canScroll);
     }
 
     @NonNull
@@ -65,13 +62,14 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
         @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_explore, container, false);
-        ButterKnife.bind(this, view);
+        binding = FragmentExploreBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+        tabLayout = binding.tabLayout;
         viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
-        viewPager.setAdapter(viewPagerAdapter);
-        viewPager.setId(R.id.viewPager);
-        tabLayout.setupWithViewPager(viewPager);
-        viewPager.addOnPageChangeListener(new OnPageChangeListener() {
+        binding.viewPager.setAdapter(viewPagerAdapter);
+        binding.viewPager.setId(R.id.viewPager);
+        binding.tabLayout.setupWithViewPager(binding.viewPager);
+        binding.viewPager.addOnPageChangeListener(new OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset,
                 int positionOffsetPixels) {
@@ -81,9 +79,9 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
             @Override
             public void onPageSelected(int position) {
                 if (position == 2) {
-                    viewPager.setCanScroll(false);
+                    binding.viewPager.setCanScroll(false);
                 } else {
-                    viewPager.setCanScroll(true);
+                    binding.viewPager.setCanScroll(true);
                 }
             }
 
@@ -133,13 +131,13 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     }
 
     public boolean onBackPressed() {
-        if (tabLayout.getSelectedTabPosition() == 0) {
+        if (binding.tabLayout.getSelectedTabPosition() == 0) {
             if (featuredRootFragment.backPressed()) {
                 ((BaseActivity) getActivity()).getSupportActionBar()
                     .setDisplayHomeAsUpEnabled(false);
                 return true;
             }
-        } else if (tabLayout.getSelectedTabPosition() == 1) { //Mobile root fragment
+        } else if (binding.tabLayout.getSelectedTabPosition() == 1) { //Mobile root fragment
             if (mobileRootFragment.backPressed()) {
                 ((BaseActivity) getActivity()).getSupportActionBar()
                     .setDisplayHomeAsUpEnabled(false);
