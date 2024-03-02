@@ -7,7 +7,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
-import android.widget.Toast;
+import android.view.View;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 import com.karumi.dexter.Dexter;
@@ -176,10 +176,10 @@ public class PermissionUtils {
                         }
                         ,
                         () -> {
-                            Toast.makeText(activity.getApplicationContext(),
-                                    R.string.permissions_are_required_for_functionality,
-                                    Toast.LENGTH_LONG)
-                                .show();
+                            final View view = activity.findViewById(android.R.id.content);
+                            if (view != null){
+                                ViewUtil.showLongSnackbar(view,activity.getString(R.string.permissions_are_required_for_functionality));
+                            }
                             token.cancelPermissionRequest();
                             if (activity instanceof UploadActivity) {
                                 activity.finish();
