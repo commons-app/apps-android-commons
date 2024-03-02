@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -34,6 +33,7 @@ import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.review.ReviewActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
+import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Single;
 import io.reactivex.SingleSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -155,11 +155,9 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(aBoolean -> {
                 if (aBoolean) {
-                    Toast.makeText(getContext(), getString(R.string.thanks_feedback), Toast.LENGTH_SHORT)
-                        .show();
+                    ViewUtil.showLongSnackbar(requireView(),getString(R.string.thanks_feedback));
                 } else {
-                    Toast.makeText(getContext(), getString(R.string.error_feedback),
-                        Toast.LENGTH_SHORT).show();
+                    ViewUtil.showLongSnackbar(requireView(),getString(R.string.error_feedback));
                 }
             });
     }
@@ -194,7 +192,7 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
         try {
             startActivity(feedbackIntent);
         } catch (final ActivityNotFoundException e) {
-            Toast.makeText(getActivity(), R.string.no_email_client, Toast.LENGTH_SHORT).show();
+            ViewUtil.showLongSnackbar(requireView(),getString(R.string.no_email_client));
         }
     }
 
