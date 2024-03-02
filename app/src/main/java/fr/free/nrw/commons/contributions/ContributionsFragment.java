@@ -518,7 +518,7 @@ public class ContributionsFragment
     }
 
     private void displayYouWontSeeNearbyMessage() {
-        ViewUtil.showLongToast(getActivity(), getResources().getString(R.string.unable_to_display_nearest_place));
+        ViewUtil.showLongSnackbar(requireView(),getString(R.string.unable_to_display_nearest_place));
         store.putBoolean("doNotAskForLocationPermission", true);
     }
 
