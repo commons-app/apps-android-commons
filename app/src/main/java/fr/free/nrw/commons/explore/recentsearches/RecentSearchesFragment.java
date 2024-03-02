@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import butterknife.BindView;
@@ -18,6 +17,7 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.SearchActivity;
+import fr.free.nrw.commons.utils.ViewUtil;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -82,8 +82,7 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
         recentSearchesDao.deleteAll();
         recent_searches_delete_button.setVisibility(View.GONE);
         recent_searches_text_view.setText(R.string.no_recent_searches);
-        Toast.makeText(getContext(), getString(R.string.search_history_deleted),
-            Toast.LENGTH_SHORT).show();
+        ViewUtil.showLongSnackbar(requireView(),getString(R.string.search_history_deleted));
         recentSearches = recentSearchesDao.recentSearches(10);
         adapter = new ArrayAdapter<>(context, R.layout.item_recent_searches,
             recentSearches);
