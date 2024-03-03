@@ -99,6 +99,10 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
      */
     private void init() {
 
+        if (binding == null) {
+            return;
+        }
+
         if (media == null) {
             binding.depictsTitle.setText(String.format(getString(R.string.step_count), callback.getIndexInViewFlipper(this) + 1,
                     callback.getTotalNumberOfSteps(), getString(R.string.depicts_step_title)));
@@ -154,6 +158,9 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
                 return Unit.INSTANCE;
             }, nearbyPlace);
         }
+        if (binding == null) {
+            return;
+        }
         binding.depictsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.depictsRecyclerView.setAdapter(adapter);
     }
@@ -206,11 +213,17 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
 
     @Override
     public void showProgress(boolean shouldShow) {
+        if (binding == null) {
+            return;
+        }
         binding.depictsSearchInProgress.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
     }
 
     @Override
     public void showError(Boolean value) {
+        if (binding == null) {
+            return;
+        }
         if (value) {
             binding.depictsSearchContainer.setError(getString(R.string.no_depiction_found));
         } else {
@@ -234,6 +247,9 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
             }
         }
 
+        if (binding == null) {
+            return;
+        }
         // Nested waiting for search result data to load into the depicted item
         // list and smoothly scroll to the top of the search result list.
         binding.depictsRecyclerView.post(new Runnable() {

@@ -44,7 +44,6 @@ public class SimilarImageDialogFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentSimilarImageDialogBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
 
 
         binding.orginalImage.setHierarchy(GenericDraweeHierarchyBuilder
@@ -68,7 +67,7 @@ public class SimilarImageDialogFragment extends DialogFragment {
         binding.postiveButton.setOnClickListener(v -> onPositiveButtonClicked());
         binding.negativeButton.setOnClickListener(v -> onNegativeButtonClicked());
 
-        return view;
+        return binding.getRoot();
     }
 
     @Override
@@ -102,5 +101,11 @@ public class SimilarImageDialogFragment extends DialogFragment {
         callback.onPositiveResponse();
         gotResponse = true;
         dismiss();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }

@@ -205,7 +205,6 @@ public class UploadMediaDetailAdapter extends
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Nullable
         TextView descriptionLanguages ;
 
         PasteSensitiveTextInputEditText descItemEditText;
@@ -500,7 +499,9 @@ public class UploadMediaDetailAdapter extends
             ((RecentLanguagesAdapter) adapterView
                 .getAdapter()).setSelectedLangCode(languageCode);
             Timber.d("Description language code is: %s", languageCode);
-            descriptionLanguages.setText(languageCode);
+            if (descriptionLanguages!=null) {
+                descriptionLanguages.setText(languageCode);
+            }
             dialog.dismiss();
         }
 
@@ -533,12 +534,15 @@ public class UploadMediaDetailAdapter extends
                 languageHistoryListView.setVisibility(View.VISIBLE);
                 recentLanguagesTextView.setVisibility(View.VISIBLE);
                 separator.setVisibility(View.VISIBLE);
-                final RecentLanguagesAdapter recentLanguagesAdapter
-                    = new RecentLanguagesAdapter(
-                    descriptionLanguages.getContext(),
-                    recentLanguagesDao.getRecentLanguages(),
-                    selectedLanguages);
-                languageHistoryListView.setAdapter(recentLanguagesAdapter);
+
+                if (descriptionLanguages!=null) {
+                    final RecentLanguagesAdapter recentLanguagesAdapter
+                        = new RecentLanguagesAdapter(
+                        descriptionLanguages.getContext(),
+                        recentLanguagesDao.getRecentLanguages(),
+                        selectedLanguages);
+                    languageHistoryListView.setAdapter(recentLanguagesAdapter);
+                }
             }
         }
 

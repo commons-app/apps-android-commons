@@ -201,8 +201,9 @@ class CategoriesPresenter @Inject constructor(
      * @param wikiText current WikiText from server
      */
     override fun updateCategories(media: Media, wikiText: String) {
+        //check if view.existingCategories is null
         if (repository.selectedCategories.isNotEmpty()
-            || repository.selectedExistingCategories.size != view.existingCategories.size
+            || (view.existingCategories != null && repository.selectedExistingCategories.size != view.existingCategories.size)
         ) {
             val selectedCategories: MutableList<String> =
                 (repository.selectedCategories.map { it.name }.toMutableList()

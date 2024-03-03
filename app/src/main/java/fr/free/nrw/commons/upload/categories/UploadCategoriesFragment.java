@@ -90,6 +90,9 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     }
 
     private void init() {
+        if (binding == null) {
+            return;
+        }
         if (media == null) {
             if (callback != null) {
                 binding.tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
@@ -114,14 +117,17 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         } else {
             presenter.onAttachViewWithMedia(this, media);
         }
-        binding.btnNext.setOnClickListener(this::onNextButtonClicked);
-        binding.btnPrevious.setOnClickListener(this::onPreviousButtonClicked);
+        binding.btnNext.setOnClickListener(v -> onNextButtonClicked());
+        binding.btnPrevious.setOnClickListener(v -> onPreviousButtonClicked());
 
         initRecyclerView();
         addTextChangeListenerToEtSearch();
     }
 
     private void addTextChangeListenerToEtSearch() {
+        if (binding == null) {
+            return;
+        }
         subscribe = RxTextView.textChanges(binding.etSearch)
                 .doOnEach(v -> binding.tilContainerSearch.setError(null))
                 .takeUntil(RxView.detaches(binding.etSearch))
@@ -153,8 +159,11 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
             presenter.onCategoryItemClicked(categoryItem);
             return Unit.INSTANCE;
         }, nearbyPlaceCategory);
-        binding.rvCategories.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.rvCategories.setAdapter(adapter);
+
+        if (binding!=null) {
+            binding.rvCategories.setLayoutManager(new LinearLayoutManager(getContext()));
+            binding.rvCategories.setAdapter(adapter);
+        }
     }
 
     @Override
@@ -166,17 +175,23 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
 
     @Override
     public void showProgress(boolean shouldShow) {
-        binding.pbCategories.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
+        if (binding != null) {
+            binding.pbCategories.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
+        }
     }
 
     @Override
     public void showError(String error) {
-        binding.tilContainerSearch.setError(error);
+        if (binding != null) {
+            binding.tilContainerSearch.setError(error);
+        }
     }
 
     @Override
     public void showError(int stringResourceId) {
-        binding.tilContainerSearch.setError(getString(stringResourceId));
+        if (binding != null) {
+            binding.tilContainerSearch.setError(getString(stringResourceId));
+        }
     }
 
     @Override
@@ -188,6 +203,10 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         }
         adapter.notifyDataSetChanged();
 
+
+        if (binding == null) {
+            return;
+        }
         // Nested waiting for search result data to load into the category
         // list and smoothly scroll to the top of the search result list.
         binding.rvCategories.post(new Runnable() {
@@ -269,7 +288,9 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
      */
     @Override
     public void dismissProgressDialog() {
-        progressDialog.dismiss();
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
     }
 
     /**
@@ -282,7 +303,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         mediaDetailFragment.updateCategories();
     }
 
-    public void onNextButtonClicked(View v) {
+    public void onNextButtonClicked() {
         if (media != null) {
             presenter.updateCategories(media, wikiText);
         } else {
@@ -290,7 +311,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         }
     }
 
-    public void onPreviousButtonClicked(View v) {
+    public void onPreviousButtonClicked() {
         if (media != null) {
             presenter.clearPreviousSelection();
             adapter.setItems(null);
@@ -308,6 +329,9 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
     @Override
     protected void onBecameVisible() {
         super.onBecameVisible();
+        if (binding == null) {
+           return;
+        }
         presenter.selectCategories();
         final Editable text = binding.etSearch.getText();
         if (text != null) {

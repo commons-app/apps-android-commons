@@ -171,7 +171,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         }
 
         if(savedInstanceState!=null){
-                if(uploadMediaDetailAdapter.getItems().size()==0){
+                if(uploadMediaDetailAdapter.getItems().size()==0 && callback != null){
                     uploadMediaDetailAdapter.setItems(savedInstanceState.getParcelableArrayList(UPLOAD_MEDIA_DETAILS));
                     presenter.setUploadMediaDetails(uploadMediaDetailAdapter.getItems(), callback.getIndexInViewFlipper(this));
                 }
@@ -180,6 +180,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     private void init() {
+        if (binding == null) {
+            return;
+        }
         binding.tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
             callback.getTotalNumberOfSteps(), getString(R.string.media_detail_step_title)));
         binding.tooltip.setOnClickListener(
@@ -273,6 +276,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
 
     public void onNextButtonClicked() {
+        if (callback == null) {
+            return;
+        }
         boolean isValidUploads = presenter.verifyImageQuality(callback.getIndexInViewFlipper(this), inAppPictureLocation);
         if (!isValidUploads) {
             startActivityWithFlags(
@@ -282,6 +288,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     public void onPreviousButtonClicked() {
+        if (callback == null) {
+            return;
+        }
         callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
     }
 
@@ -324,6 +333,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @Override
     public void onImageProcessed(UploadItem uploadItem, Place place) {
+        if (binding == null) {
+            return;
+        }
         binding.backgroundImage.setImageURI(uploadItem.getMediaUri());
     }
 
@@ -337,12 +349,17 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         nearbyPlace = place;
         this.uploadItem = uploadItem;
         showNearbyFound = true;
+        if (callback == null) {
+            return;
+        }
         if (callback.getIndexInViewFlipper(this) == 0) {
             if (UploadActivity.nearbyPopupAnswers.containsKey(nearbyPlace)) {
                 final boolean response = UploadActivity.nearbyPopupAnswers.get(nearbyPlace);
                 if (response) {
-                    presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace,
-                        callback.getIndexInViewFlipper(this));
+                    if (callback != null) {
+                        presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace,
+                            callback.getIndexInViewFlipper(this));
+                    }
                 }
             } else {
                 showNearbyPlaceFound(nearbyPlace);
@@ -378,11 +395,17 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @Override
     public void showProgress(boolean shouldShow) {
+        if (callback == null) {
+            return;
+        }
         callback.showProgress(shouldShow);
     }
 
     @Override
     public void onImageValidationSuccess() {
+        if (callback == null) {
+            return;
+        }
         callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
     }
 
@@ -392,13 +415,18 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     protected void onBecameVisible() {
         super.onBecameVisible();
+        if (callback == null) {
+            return;
+        }
         presenter.fetchTitleAndDescription(callback.getIndexInViewFlipper(this));
         if (showNearbyFound) {
             if (UploadActivity.nearbyPopupAnswers.containsKey(nearbyPlace)) {
                 final boolean response = UploadActivity.nearbyPopupAnswers.get(nearbyPlace);
                 if (response) {
-                    presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace,
-                        callback.getIndexInViewFlipper(this));
+                    if (callback != null) {
+                        presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace,
+                            callback.getIndexInViewFlipper(this));
+                    }
                 }
             } else {
                 showNearbyPlaceFound(nearbyPlace);
@@ -602,10 +630,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 return;
             }
             try {
-                binding.backgroundImage.setImageURI(Uri.fromFile(new File(result)));
+                if (binding != null){
+                    binding.backgroundImage.setImageURI(Uri.fromFile(new File(result)));
+                }
                 editableUploadItem.setContentUri(Uri.fromFile(new File(result)));
-                callback.changeThumbnail(callback.getIndexInViewFlipper(this),
-                    result);
+                if (callback != null) {
+                    callback.changeThumbnail(callback.getIndexInViewFlipper(this), result);
+                }
             } catch (Exception e) {
                 Timber.e(e);
             }
@@ -636,8 +667,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
         // Replace the map icon using the one with a green tick
         Drawable mapTick = getResources().getDrawable(R.drawable.ic_map_available_20dp);
-        binding.locationImageView.setImageDrawable(mapTick);
-        binding.locationTextView.setText(R.string.edit_location);
+
+        if (binding != null) {
+            binding.locationImageView.setImageDrawable(mapTick);
+            binding.locationTextView.setText(R.string.edit_location);
+        }
 
         Toast.makeText(getContext(), "Location Updated", Toast.LENGTH_LONG).show();
 
@@ -690,6 +724,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     private void deleteThisPicture() {
+        if (callback == null) {
+            return;
+        }
         callback.deletePictureAtIndex(callback.getIndexInViewFlipper(this));
     }
 
@@ -708,17 +745,26 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * @param shouldExpand
      */
     private void expandCollapseLlMediaDetail(boolean shouldExpand){
+        if (binding == null) {
+            return;
+        }
         binding.llContainerMediaDetail.setVisibility(shouldExpand ? View.VISIBLE : View.GONE);
         isExpanded = !isExpanded;
         binding.ibExpandCollapse.setRotation(binding.ibExpandCollapse.getRotation() + 180);
     }
 
     public void onIbMapClicked() {
+        if (callback == null) {
+            return;
+        }
         presenter.onMapIconClicked(callback.getIndexInViewFlipper(this));
     }
 
     @Override
     public void onPrimaryCaptionTextChange(boolean isNotEmpty) {
+        if (binding == null) {
+            return;
+        }
         binding.btnCopySubsequentMedia.setEnabled(isNotEmpty);
         binding.btnCopySubsequentMedia.setClickable(isNotEmpty);
         binding.btnCopySubsequentMedia.setAlpha(isNotEmpty ? 1.0f : 0.5f);
@@ -747,6 +793,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
 
     public void onButtonCopyTitleDescToSubsequentMedia(){
+        if (callback == null) {
+            return;
+        }
         presenter.copyTitleAndDescriptionToSubsequentMedia(callback.getIndexInViewFlipper(this));
         Toast.makeText(getContext(), getResources().getString(R.string.copied_successfully), Toast.LENGTH_SHORT).show();
     }

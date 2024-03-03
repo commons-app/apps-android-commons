@@ -142,20 +142,7 @@ class UploadMediaDetailFragmentUnitTest {
         llContainerMediaDetail = view.findViewById(R.id.ll_container_media_detail)
         ibExpandCollapse = view.findViewById(R.id.ib_expand_collapse)
 
-        Whitebox.setInternalState(fragment, "tvTitle", tvTitle)
-        Whitebox.setInternalState(fragment, "tooltip", tooltip)
-        Whitebox.setInternalState(fragment, "callback", callback)
-        Whitebox.setInternalState(fragment, "rvDescriptions", rvDescriptions)
-        Whitebox.setInternalState(fragment, "btnPrevious", btnPrevious)
-        Whitebox.setInternalState(fragment, "btnNext", btnNext)
-        Whitebox.setInternalState(fragment, "btnCopyToSubsequentMedia", btnCopyToSubsequentMedia)
-        Whitebox.setInternalState(fragment, "photoViewBackgroundImage", photoViewBackgroundImage)
         Whitebox.setInternalState(fragment, "uploadMediaDetailAdapter", uploadMediaDetailAdapter)
-        Whitebox.setInternalState(fragment, "llLocationStatus", locationStatusLl)
-        Whitebox.setInternalState(fragment, "locationImageView", locationImageView)
-        Whitebox.setInternalState(fragment, "locationTextView", locationTextView)
-        Whitebox.setInternalState(fragment, "llContainerMediaDetail", llContainerMediaDetail)
-        Whitebox.setInternalState(fragment, "ibExpandCollapse", ibExpandCollapse)
     }
 
     @Test
@@ -388,6 +375,7 @@ class UploadMediaDetailFragmentUnitTest {
         val cameraPosition = Mockito.mock(CameraPosition::class.java)
         val latLng = Mockito.mock(LatLng::class.java)
 
+        Whitebox.setInternalState(fragment, "callback", callback)
         Whitebox.setInternalState(cameraPosition, "target", latLng)
         Whitebox.setInternalState(fragment, "editableUploadItem", uploadItem)
         Whitebox.setInternalState(fragment,"isMissingLocationDialog",true)
