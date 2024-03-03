@@ -12,6 +12,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import timber.log.Timber
 import java.io.IOException
+import java.util.Locale
 
 /**
  * Responsible for making login related requests to the server.
@@ -106,6 +107,35 @@ class LoginClient(private val loginInterface: LoginInterface) {
         })
     }
 
+    fun doLogin(
+        username: String,
+        password: String,
+        twoFactorCode: String? = null,
+        userLanguage: String = Locale.getDefault().language,
+        loginCallback: LoginCallback
+    ) {
+        getLoginToken().enqueue(object :Callback<MwQueryResponse?>{
+            override fun onResponse(
+                call: Call<MwQueryResponse?>,
+                response: Response<MwQueryResponse?>
+            ) {
+                if (response.isSuccessful){
+                    val loginToken = response.body()?.query()?.loginToken()
+                    loginToken?.let {
+                        login(username, password, null, twoFactorCode, it, userLanguage, loginCallback)
+                    } ?: run {
+                        loginCallback.error(IOException("Failed to retrieve login token"))
+                    }
+                } else {
+                        loginCallback.error(IOException("Failed to retrieve login token"))
+                }
+            }
+
+            override fun onFailure(call: Call<MwQueryResponse?>, t: Throwable) {
+                loginCallback.error(t)
+            }
+        })
+    }
     @Throws(Throwable::class)
     fun loginBlocking(userName: String, password: String, twoFactorCode: String?) {
         val tokenResponse = getLoginToken().execute()
