@@ -467,10 +467,6 @@ public class ContributionsFragment
         super.onResume();
         contributionsPresenter.onAttachView(this);
         locationManager.addLocationListener(this);
-
-        if (nearbyNotificationCardView==null) {
-            return;
-        }
         nearbyNotificationCardView.permissionRequestButton.setOnClickListener(v -> {
             showNearbyCardPermissionRationale();
         });
@@ -632,12 +628,17 @@ public class ContributionsFragment
      */
     private void fetchCampaigns() {
         if (Utils.isMonumentsEnabled(new Date())) {
-            binding.campaignsView.setCampaign(wlmCampaign);
-            binding.campaignsView.setVisibility(View.VISIBLE);
+
+            if (binding!=null) {
+                binding.campaignsView.setCampaign(wlmCampaign);
+                binding.campaignsView.setVisibility(View.VISIBLE);
+            }
         } else if (store.getBoolean(CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE, true)) {
             presenter.getCampaigns();
         } else {
-            binding.campaignsView.setVisibility(View.GONE);
+            if (binding!=null) {
+                binding.campaignsView.setVisibility(View.GONE);
+            }
         }
     }
 
