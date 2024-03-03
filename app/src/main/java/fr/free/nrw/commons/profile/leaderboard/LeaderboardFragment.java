@@ -104,7 +104,6 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentLeaderboardBinding.inflate(inflater, container, false);
-        View rootView = binding.getRoot();
 
         hideLayouts();
 
@@ -112,7 +111,7 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
         if(ConfigUtils.isBetaFlavour()) {
             binding.progressBar.setVisibility(View.GONE);
             binding.scroll.setVisibility(View.GONE);
-            return rootView;
+            return binding.getRoot();
         }
 
         binding.progressBar.setVisibility(View.VISIBLE);
@@ -164,7 +163,7 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
             binding.scroll.setOnClickListener(view -> scrollToUserRank());
 
 
-        return rootView;
+        return binding.getRoot();
     }
 
     @Override
@@ -209,6 +208,9 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
         if(userRank==0){
             Toast.makeText(getContext(),R.string.no_achievements_yet,Toast.LENGTH_SHORT).show();
         }else {
+            if (binding == null) {
+                return;
+            }
             if (Objects.requireNonNull(binding.leaderboardList.getAdapter()).getItemCount()
                 > userRank + 1) {
                 binding.leaderboardList.smoothScrollToPosition(userRank + 1);
@@ -299,7 +301,7 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
      * to hide progressbar
      */
     private void hideProgressBar() {
-        if (binding.progressBar != null) {
+        if (binding != null) {
             binding.progressBar.setVisibility(View.GONE);
             binding.categorySpinner.setVisibility(View.VISIBLE);
             binding.durationSpinner.setVisibility(View.VISIBLE);
@@ -312,10 +314,10 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
      * to show progressbar
      */
     private void showProgressBar() {
-        if (binding.progressBar != null) {
+        if (binding != null) {
             binding.progressBar.setVisibility(View.VISIBLE);
+            binding.scroll.setVisibility(View.INVISIBLE);
         }
-        binding.scroll.setVisibility(View.INVISIBLE);
     }
 
     /**
@@ -347,7 +349,15 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
      */
     private void onError() {
         ViewUtil.showLongToast(getActivity(), getResources().getString(R.string.error_occurred));
-        binding.progressBar.setVisibility(View.GONE);
+        if (binding!=null) {
+            binding.progressBar.setVisibility(View.GONE);
+        }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        compositeDisposable.clear();
+        binding = null;
+    }
 }
