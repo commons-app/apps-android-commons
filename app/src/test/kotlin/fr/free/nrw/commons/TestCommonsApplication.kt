@@ -17,6 +17,7 @@ import fr.free.nrw.commons.location.LocationServiceManager
 class TestCommonsApplication : Application() {
     private var mockApplicationComponent: CommonsApplicationComponent? = null
 
+
     override fun onCreate() {
         if (mockApplicationComponent == null) {
             mockApplicationComponent = DaggerCommonsApplicationComponent.builder()

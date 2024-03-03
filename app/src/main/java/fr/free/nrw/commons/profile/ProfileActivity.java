@@ -42,8 +42,7 @@ public class ProfileActivity extends BaseActivity {
 
     private FragmentManager supportFragmentManager;
 
-    public TabLayout tabLayout;
-    private ActivityProfileBinding binding;
+    public ActivityProfileBinding binding;
 
     @Inject
     SessionManager sessionManager;
@@ -81,7 +80,6 @@ public class ProfileActivity extends BaseActivity {
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbarBinding.toolbar);
 
-        tabLayout = binding.tabLayout;
 
         binding.toolbarBinding.toolbar.setNavigationOnClickListener(view -> {
             onSupportNavigateUp();
