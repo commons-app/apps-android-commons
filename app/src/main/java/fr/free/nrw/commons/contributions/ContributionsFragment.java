@@ -109,6 +109,8 @@ public class ContributionsFragment
 
     LinearLayout limitedConnectionEnabledLayout;
 
+    TextView limitedConnectionDescriptionTextView;
+
     CampaignView campaignView;
 
     FragmentContributionsBinding binding;
@@ -187,6 +189,7 @@ public class ContributionsFragment
         nearbyNotificationCardView = binding.cardViewNearby;
         limitedConnectionEnabledLayout = binding.limitedConnectionEnabledLayout;
         campaignView = binding.campaignsView;
+        limitedConnectionDescriptionTextView = binding.limitedConnectionDescriptionTextView;
         initWLMCampaign();
         presenter.onAttachView(this);
         contributionsPresenter.onAttachView(this);
