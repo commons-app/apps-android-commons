@@ -404,7 +404,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
             if (getParentFragment().getParentFragment().getParentFragment()
                 instanceof ContributionsFragment) {
                 ((ContributionsFragment) (getParentFragment()
-                    .getParentFragment().getParentFragment())).nearbyNotificationCardView
+                    .getParentFragment().getParentFragment())).binding.cardViewNearby
                     .setVisibility(View.GONE);
             }
         }

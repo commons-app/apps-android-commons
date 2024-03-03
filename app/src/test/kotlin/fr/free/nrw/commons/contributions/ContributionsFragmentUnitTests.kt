@@ -15,6 +15,7 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.campaigns.CampaignView
 import fr.free.nrw.commons.campaigns.models.Campaign
+import fr.free.nrw.commons.databinding.FragmentContributionsBinding
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
@@ -53,9 +54,6 @@ class ContributionsFragmentUnitTests {
     private lateinit var contributionsListFragment: ContributionsListFragment
 
     @Mock
-    private lateinit var layoutInflater: LayoutInflater
-
-    @Mock
     private lateinit var menuInflater: MenuInflater
 
     @Mock
@@ -74,9 +72,6 @@ class ContributionsFragmentUnitTests {
     private lateinit var notificationController: NotificationController
 
     @Mock
-    private lateinit var limitedConnectionEnabledLayout: LinearLayout
-
-    @Mock
     private lateinit var notificationCount: TextView
 
     @Mock
@@ -90,10 +85,11 @@ class ContributionsFragmentUnitTests {
 
     private lateinit var fragment: ContributionsFragment
     private lateinit var context: Context
-    private lateinit var view: View
     private lateinit var activity: MainActivity
     private lateinit var nearbyNotificationCardView: NearbyNotificationCardView
     private lateinit var campaignView: CampaignView
+
+    private lateinit var binding: FragmentContributionsBinding
 
     @Before
     fun setUp() {
@@ -105,36 +101,24 @@ class ContributionsFragmentUnitTests {
         activity = Robolectric.buildActivity(MainActivity::class.java).create().get()
 
 
+
+        binding = FragmentContributionsBinding.inflate(LayoutInflater.from(context))
         fragment = ContributionsFragment.newInstance()
         val fragmentManager: FragmentManager = activity.supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(fragment, null)
         fragmentTransaction.commit()
 
-        layoutInflater = LayoutInflater.from(activity)
-        view = LayoutInflater.from(activity)
-            .inflate(R.layout.fragment_contributions, null) as View
 
-        nearbyNotificationCardView = view.findViewById(R.id.card_view_nearby)
-        campaignView = view.findViewById(R.id.campaigns_view)
+        nearbyNotificationCardView = binding.cardViewNearby
+        campaignView = binding.campaignsView
 
         Whitebox.setInternalState(fragment, "contributionsListFragment", contributionsListFragment)
         Whitebox.setInternalState(fragment, "store", store)
-        Whitebox.setInternalState(
-            fragment,
-            "limitedConnectionEnabledLayout",
-            limitedConnectionEnabledLayout
-        )
         Whitebox.setInternalState(fragment, "notificationCount", notificationCount)
         Whitebox.setInternalState(fragment, "notificationController", notificationController)
         Whitebox.setInternalState(fragment, "compositeDisposable", compositeDisposable)
         Whitebox.setInternalState(fragment, "okHttpJsonApiClient", okHttpJsonApiClient)
-        Whitebox.setInternalState(
-            fragment,
-            "nearbyNotificationCardView",
-            nearbyNotificationCardView
-        )
-        Whitebox.setInternalState(fragment, "campaignView", campaignView)
     }
 
     @Test

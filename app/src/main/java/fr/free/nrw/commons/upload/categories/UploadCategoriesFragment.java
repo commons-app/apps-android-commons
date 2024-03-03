@@ -374,7 +374,7 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
             if (getParentFragment().getParentFragment().getParentFragment()
                 instanceof ContributionsFragment) {
                 ((ContributionsFragment) (getParentFragment()
-                    .getParentFragment().getParentFragment())).nearbyNotificationCardView
+                    .getParentFragment().getParentFragment())).binding.cardViewNearby
                     .setVisibility(View.GONE);
             }
         }
