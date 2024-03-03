@@ -85,9 +85,10 @@ public class MainActivity  extends BaseActivity
 
     public Menu menu;
 
-    private MainBinding binding;
+    public MainBinding binding;
 
-    public UnswipableViewPager viewPager;
+    NavTabLayout tabLayout;
+
 
     /**
      * Consumers should be simply using this method to use this activity.
@@ -116,17 +117,15 @@ public class MainActivity  extends BaseActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadLocale();
-
         binding = MainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbarBinding.toolbar);
+        tabLayout = binding.fragmentMainNavTabLayout;
+        loadLocale();
 
         binding.toolbarBinding.toolbar.setNavigationOnClickListener(view -> {
             onSupportNavigateUp();
         });
-
-        viewPager = binding.pager;
         /*
         "first_edit_depict" is a key for getting information about opening the depiction editor
         screen for the first time after opening the app.
