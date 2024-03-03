@@ -187,20 +187,22 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
      */
     public boolean backPressed() {
         if (null != mediaDetails && mediaDetails.isVisible()) {
-            if (((ExploreFragment) getParentFragment()).binding==null) {
-                return true;
+            if (((ExploreFragment) getParentFragment()).binding != null) {
+                ((ExploreFragment) getParentFragment()).binding.tabLayout.setVisibility(View.VISIBLE);
             }
-            ((ExploreFragment) getParentFragment()).binding.tabLayout.setVisibility(View.VISIBLE);
-            ((ExploreFragment) getParentFragment()).binding.tabLayout.setVisibility(View.VISIBLE);
             removeFragment(mediaDetails);
             ((ExploreFragment) getParentFragment()).setScroll(true);
             setFragment(listFragment, mediaDetails);
             ((MainActivity) getActivity()).showTabs();
             return true;
         } else {
-            ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
+            if (((MainActivity) getActivity()) != null) {
+                ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
+            }
         }
-        ((MainActivity) getActivity()).showTabs();
+        if (((MainActivity) getActivity()) != null) {
+            ((MainActivity) getActivity()).showTabs();
+        }
         return false;
     }
 
