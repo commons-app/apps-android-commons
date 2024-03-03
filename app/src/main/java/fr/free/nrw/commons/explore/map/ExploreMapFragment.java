@@ -125,7 +125,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
     private ExploreMapPresenter presenter;
 
-    private FragmentExploreMapBinding binding;
+    public FragmentExploreMapBinding binding;
 
     private ActivityResultLauncher<String[]> activityResultLauncher = registerForActivityResult(
         new ActivityResultContracts.RequestMultiplePermissions(),
@@ -183,8 +183,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         ViewGroup container,
         Bundle savedInstanceState
     ) {
-        View v = binding.getRoot();
-        return v;
+        return binding.getRoot();
     }
 
     @Override

@@ -32,8 +32,8 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     private static final String EXPLORE_MAP = "Map";
     private static final String MEDIA_DETAILS_FRAGMENT_TAG = "MediaDetailsFragment";
 
-    TabLayout tabLayout;
-    private FragmentExploreBinding binding;
+
+    public FragmentExploreBinding binding;
     ViewPagerAdapter viewPagerAdapter;
     private ExploreListRootFragment featuredRootFragment;
     private ExploreListRootFragment mobileRootFragment;
@@ -43,7 +43,10 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     public JsonKvStore applicationKvStore;
 
     public void setScroll(boolean canScroll){
-        binding.viewPager.setCanScroll(canScroll);
+        if (binding != null)
+        {
+            binding.viewPager.setCanScroll(canScroll);
+        }
     }
 
     @NonNull
@@ -63,8 +66,7 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
         @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = FragmentExploreBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
-        tabLayout = binding.tabLayout;
+
         viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
         binding.viewPager.setAdapter(viewPagerAdapter);
         binding.viewPager.setId(R.id.viewPager);
@@ -92,7 +94,7 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
         });
         setTabs();
         setHasOptionsMenu(true);
-        return view;
+        return binding.getRoot();
     }
 
     /**
@@ -177,6 +179,12 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }
 

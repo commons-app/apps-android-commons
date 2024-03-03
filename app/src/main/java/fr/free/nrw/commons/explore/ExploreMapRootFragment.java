@@ -54,8 +54,8 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
         super.onCreate(savedInstanceState);
 
         binding = FragmentFeaturedRootBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
-        return view;
+
+        return binding.getRoot();
     }
 
     @Override
@@ -116,7 +116,7 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
     @Override
     public void onMediaClicked(int position) {
         binding.exploreContainer.setVisibility(View.VISIBLE);
-        ((ExploreFragment) getParentFragment()).tabLayout.setVisibility(View.GONE);
+        ((ExploreFragment) getParentFragment()).binding.tabLayout.setVisibility(View.GONE);
         mediaDetails = MediaDetailPagerFragment.newInstance(false, true);
         ((ExploreFragment) getParentFragment()).setScroll(false);
         setFragment(mediaDetails, mapFragment);
@@ -191,7 +191,7 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
      */
     public boolean backPressed() {
         if (null != mediaDetails && mediaDetails.isVisible()) {
-            ((ExploreFragment) getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
+            ((ExploreFragment) getParentFragment()).binding.tabLayout.setVisibility(View.VISIBLE);
             removeFragment(mediaDetails);
             ((ExploreFragment) getParentFragment()).setScroll(true);
             setFragment(mapFragment, mediaDetails);
@@ -211,5 +211,12 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
         }
         ((MainActivity) getActivity()).showTabs();
         return false;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        binding = null;
     }
 }

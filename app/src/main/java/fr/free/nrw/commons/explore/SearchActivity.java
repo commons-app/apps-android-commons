@@ -284,5 +284,6 @@ public class SearchActivity extends BaseActivity
         super.onDestroy();
         //Dispose the disposables when the activity is destroyed
         compositeDisposable.dispose();
+        binding = null;
     }
 }

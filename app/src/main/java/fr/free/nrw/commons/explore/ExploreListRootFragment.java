@@ -47,8 +47,7 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
         super.onCreate(savedInstanceState);
 
         binding = FragmentFeaturedRootBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
-        return view;
+        return binding.getRoot();
     }
 
     @Override
@@ -108,8 +107,12 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
 
     @Override
     public void onMediaClicked(int position) {
-        binding.exploreContainer.setVisibility(View.VISIBLE);
-        ((ExploreFragment) getParentFragment()).tabLayout.setVisibility(View.GONE);
+        if (binding!=null) {
+            binding.exploreContainer.setVisibility(View.VISIBLE);
+        }
+        if (((ExploreFragment) getParentFragment()).binding!=null) {
+            ((ExploreFragment) getParentFragment()).binding.tabLayout.setVisibility(View.GONE);
+        }
         mediaDetails = MediaDetailPagerFragment.newInstance(false, true);
         ((ExploreFragment) getParentFragment()).setScroll(false);
         setFragment(mediaDetails, listFragment);
@@ -184,7 +187,11 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
      */
     public boolean backPressed() {
         if (null != mediaDetails && mediaDetails.isVisible()) {
-            ((ExploreFragment) getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
+            if (((ExploreFragment) getParentFragment()).binding==null) {
+                return true;
+            }
+            ((ExploreFragment) getParentFragment()).binding.tabLayout.setVisibility(View.VISIBLE);
+            ((ExploreFragment) getParentFragment()).binding.tabLayout.setVisibility(View.VISIBLE);
             removeFragment(mediaDetails);
             ((ExploreFragment) getParentFragment()).setScroll(true);
             setFragment(listFragment, mediaDetails);
@@ -195,5 +202,12 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
         }
         ((MainActivity) getActivity()).showTabs();
         return false;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        binding = null;
     }
 }

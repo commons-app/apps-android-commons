@@ -34,7 +34,7 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
         binding = FragmentSearchHistoryBinding.inflate(inflater, container, false);
-        View rootView = binding.getRoot();
+
         recentSearches = recentSearchesDao.recentSearches(10);
 
         if (recentSearches.isEmpty()) {
@@ -56,7 +56,8 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
             return true;
         });
         updateRecentSearches();
-        return rootView;
+
+        return binding.getRoot();
     }
 
     private void showDeleteRecentAlertDialog(@NonNull final Context context) {
@@ -72,15 +73,17 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
     private void setDeleteRecentPositiveButton(@NonNull final Context context,
         final DialogInterface dialog) {
         recentSearchesDao.deleteAll();
-        binding.recentSearchesDeleteButton.setVisibility(View.GONE);
-        binding.recentSearchesTextView.setText(R.string.no_recent_searches);
-        Toast.makeText(getContext(), getString(R.string.search_history_deleted),
-            Toast.LENGTH_SHORT).show();
-        recentSearches = recentSearchesDao.recentSearches(10);
-        adapter = new ArrayAdapter<>(context, R.layout.item_recent_searches,
-            recentSearches);
-        binding.recentSearchesList.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        if (binding != null) {
+            binding.recentSearchesDeleteButton.setVisibility(View.GONE);
+            binding.recentSearchesTextView.setText(R.string.no_recent_searches);
+            Toast.makeText(getContext(), getString(R.string.search_history_deleted),
+                Toast.LENGTH_SHORT).show();
+            recentSearches = recentSearchesDao.recentSearches(10);
+            adapter = new ArrayAdapter<>(context, R.layout.item_recent_searches,
+                recentSearches);
+            binding.recentSearchesList.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
         dialog.dismiss();
     }
 
@@ -100,8 +103,10 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
         recentSearches = recentSearchesDao.recentSearches(10);
         adapter = new ArrayAdapter<>(context, R.layout.item_recent_searches,
             recentSearches);
-        binding.recentSearchesList.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        if (binding != null){
+            binding.recentSearchesList.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
         dialog.dismiss();
     }
 
@@ -123,8 +128,19 @@ public class RecentSearchesFragment extends CommonsDaggerSupportFragment {
         adapter.notifyDataSetChanged();
 
         if (!recentSearches.isEmpty()) {
-            binding.recentSearchesDeleteButton.setVisibility(View.VISIBLE);
-            binding.recentSearchesTextView.setText(R.string.search_recent_header);
+            if (binding!= null) {
+                binding.recentSearchesDeleteButton.setVisibility(View.VISIBLE);
+                binding.recentSearchesTextView.setText(R.string.search_recent_header);
+            }
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if (binding != null) {
+            binding = null;
         }
     }
 }

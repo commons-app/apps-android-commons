@@ -2,12 +2,9 @@ package fr.free.nrw.commons.explore
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
-import android.widget.FrameLayout
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
-import com.google.android.material.tabs.TabLayout
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.times
 import fr.free.nrw.commons.Media
@@ -16,6 +13,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.databinding.FragmentFeaturedRootBinding
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import org.junit.Assert
@@ -42,10 +40,10 @@ class ExploreListRootFragmentUnitTest {
     private lateinit var fragment: ExploreListRootFragment
     private lateinit var fragmentManager: FragmentManager
     private lateinit var context: Context
-    private lateinit var view: View
-    private lateinit var layoutInflater: LayoutInflater
     private lateinit var activity: MainActivity
     private lateinit var exploreFragment: ExploreFragment
+
+    private lateinit var binding: FragmentFeaturedRootBinding
 
     @Mock
     private lateinit var mediaDetails: MediaDetailPagerFragment
@@ -58,15 +56,6 @@ class ExploreListRootFragmentUnitTest {
 
     @Mock
     private lateinit var childFragmentTransaction: FragmentTransaction
-
-    @Mock
-    private lateinit var container: FrameLayout
-
-    @Mock
-    private lateinit var tabLayout: TabLayout
-
-    @Mock
-    private lateinit var viewPager: ParentViewPager
 
     @Mock
     private lateinit var media: Media
@@ -87,16 +76,13 @@ class ExploreListRootFragmentUnitTest {
 
         exploreFragment = ExploreFragment()
 
-        layoutInflater = LayoutInflater.from(activity)
-        view = fragment.onCreateView(layoutInflater, null, null) as View
+        binding = FragmentFeaturedRootBinding.inflate(LayoutInflater.from(activity))
 
         Whitebox.setInternalState(fragment, "mChildFragmentManager", childFragmentManager)
         Whitebox.setInternalState(fragment, "mParentFragment", exploreFragment)
         Whitebox.setInternalState(fragment, "mediaDetails", mediaDetails)
         Whitebox.setInternalState(fragment, "listFragment", listFragment)
-        Whitebox.setInternalState(fragment, "container", container)
-        Whitebox.setInternalState(exploreFragment, "tabLayout", tabLayout)
-        Whitebox.setInternalState(exploreFragment, "viewPager", viewPager)
+
 
         `when`(childFragmentManager.beginTransaction()).thenReturn(childFragmentTransaction)
         `when`(childFragmentTransaction.hide(any())).thenReturn(childFragmentTransaction)
@@ -116,7 +102,7 @@ class ExploreListRootFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun testOnViewCreated() {
-        fragment.onViewCreated(view, null)
+        fragment.onViewCreated(binding.root, null)
         verify(childFragmentManager).beginTransaction()
         verify(childFragmentTransaction).hide(mediaDetails)
         verify(childFragmentTransaction).add(R.id.explore_container, listFragment)
@@ -179,8 +165,6 @@ class ExploreListRootFragmentUnitTest {
     @Throws(Exception::class)
     fun testOnMediaClicked() {
         fragment.onMediaClicked(0)
-        verify(container).visibility = View.VISIBLE
-        verify(tabLayout).visibility = View.GONE
         verify(childFragmentManager).beginTransaction()
         verify(childFragmentTransaction).hide(listFragment)
         verify(childFragmentTransaction).addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
@@ -235,8 +219,6 @@ class ExploreListRootFragmentUnitTest {
         verify(childFragmentTransaction).remove(mediaDetails)
         verify(childFragmentTransaction, times(2)).commit()
         verify(childFragmentManager, times(2)).executePendingTransactions()
-        verify(container).visibility = View.VISIBLE
-        verify(tabLayout).visibility = View.GONE
         verify(childFragmentTransaction).hide(listFragment)
         verify(childFragmentTransaction).addToBackStack("CONTRIBUTION_LIST_FRAGMENT_TAG")
     }

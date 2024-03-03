@@ -12,6 +12,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.databinding.FragmentExploreBinding
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -37,13 +38,9 @@ class ExploreFragmentUnitTest {
     private lateinit var fragment: ExploreFragment
     private lateinit var fragmentManager: FragmentManager
     private lateinit var context: Context
-    private lateinit var view: View
-    private lateinit var layoutInflater: LayoutInflater
-    private lateinit var viewPager: ParentViewPager
     private lateinit var activity: MainActivity
+    private lateinit var binding : FragmentExploreBinding
 
-    @Mock
-    private lateinit var tabLayout: TabLayout
 
     @Mock
     private lateinit var exploreRootFragment: ExploreListRootFragment
@@ -65,12 +62,8 @@ class ExploreFragmentUnitTest {
         fragmentTransaction.add(fragment, null)
         fragmentTransaction.commitNowAllowingStateLoss()
 
-        layoutInflater = LayoutInflater.from(activity)
-        view = fragment.onCreateView(layoutInflater, null, null) as View
-        viewPager = view.findViewById(R.id.viewPager)
+        binding = FragmentExploreBinding.inflate(LayoutInflater.from(context))
 
-        Whitebox.setInternalState(fragment, "viewPager", viewPager)
-        Whitebox.setInternalState(fragment, "tabLayout", tabLayout)
     }
 
     @Test
@@ -83,21 +76,21 @@ class ExploreFragmentUnitTest {
     @Throws(Exception::class)
     fun testSetScrollCaseTrue() {
         fragment.setScroll(true)
-        Assert.assertEquals(viewPager.isCanScroll, true)
+        Assert.assertEquals(binding.viewPager.isCanScroll, true)
     }
 
     @Test
     @Throws(Exception::class)
     fun testSetScrollCaseFalse() {
         fragment.setScroll(false)
-        Assert.assertEquals(viewPager.isCanScroll, false)
+        Assert.assertEquals(binding.viewPager.isCanScroll, false)
     }
 
     @Test
     @Throws(Exception::class)
     fun testOnBackPressedCaseTrueSelectedTabZero() {
         Whitebox.setInternalState(fragment, "featuredRootFragment", exploreRootFragment)
-        `when`(tabLayout.selectedTabPosition).thenReturn(0)
+        `when`(binding.tabLayout.selectedTabPosition).thenReturn(0)
         `when`(exploreRootFragment.backPressed()).thenReturn(true)
         Assert.assertEquals(fragment.onBackPressed(), true)
     }
@@ -106,7 +99,7 @@ class ExploreFragmentUnitTest {
     @Throws(Exception::class)
     fun testOnBackPressedCaseTrueSelectedTabNonZero() {
         Whitebox.setInternalState(fragment, "mobileRootFragment", exploreRootFragment)
-        `when`(tabLayout.selectedTabPosition).thenReturn(1)
+        `when`(binding.tabLayout.selectedTabPosition).thenReturn(1)
         `when`(exploreRootFragment.backPressed()).thenReturn(true)
         Assert.assertEquals(fragment.onBackPressed(), true)
     }
@@ -115,7 +108,7 @@ class ExploreFragmentUnitTest {
     @Throws(Exception::class)
     fun testOnBackPressedCaseFalseSelectedTabZero() {
         Whitebox.setInternalState(fragment, "featuredRootFragment", exploreRootFragment)
-        `when`(tabLayout.selectedTabPosition).thenReturn(0)
+        `when`(binding.tabLayout.selectedTabPosition).thenReturn(0)
         `when`(exploreRootFragment.backPressed()).thenReturn(false)
         Assert.assertEquals(fragment.onBackPressed(), false)
     }
@@ -124,7 +117,7 @@ class ExploreFragmentUnitTest {
     @Throws(Exception::class)
     fun testOnBackPressedCaseFalseSelectedTabNonZero() {
         Whitebox.setInternalState(fragment, "mobileRootFragment", exploreRootFragment)
-        `when`(tabLayout.selectedTabPosition).thenReturn(1)
+        `when`(binding.tabLayout.selectedTabPosition).thenReturn(1)
         `when`(exploreRootFragment.backPressed()).thenReturn(false)
         Assert.assertEquals(fragment.onBackPressed(), false)
     }
