@@ -38,7 +38,7 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
     public Fragment listFragment;
     private BookmarksPagerAdapter bookmarksPagerAdapter;
 
-    private FragmentFeaturedRootBinding binding;
+    FragmentFeaturedRootBinding binding;
 
     public BookmarkListRootFragment() {
         //empty constructor necessary otherwise crashes on recreate

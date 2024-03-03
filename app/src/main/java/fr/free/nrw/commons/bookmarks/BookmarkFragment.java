@@ -33,7 +33,9 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment {
 
     TabLayout tabLayout;
 
-    private FragmentBookmarksBinding binding;
+    ParentViewPager viewPager;
+
+    FragmentBookmarksBinding binding;
 
     @Inject
     ContributionController controller;
@@ -53,7 +55,9 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment {
     }
 
     public void setScroll(boolean canScroll) {
-        binding.viewPagerBookmarks.setCanScroll(canScroll);
+        if (binding!=null) {
+            binding.viewPagerBookmarks.setCanScroll(canScroll);
+        }
     }
 
     @Override
@@ -71,6 +75,7 @@ public class BookmarkFragment extends CommonsDaggerSupportFragment {
         View view = binding.getRoot();
 
         tabLayout = binding.tabLayout;
+        viewPager = binding.viewPagerBookmarks;
 
         // Activity can call methods in the fragment by acquiring a
         // reference to the Fragment from FragmentManager, using findFragmentById()
