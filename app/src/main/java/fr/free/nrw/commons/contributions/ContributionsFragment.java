@@ -467,6 +467,10 @@ public class ContributionsFragment
         super.onResume();
         contributionsPresenter.onAttachView(this);
         locationManager.addLocationListener(this);
+
+        if (nearbyNotificationCardView==null) {
+            return;
+        }
         nearbyNotificationCardView.permissionRequestButton.setOnClickListener(v -> {
             showNearbyCardPermissionRationale();
         });
