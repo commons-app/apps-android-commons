@@ -54,6 +54,9 @@ class ContributionsFragmentUnitTests {
     private lateinit var contributionsListFragment: ContributionsListFragment
 
     @Mock
+    private lateinit var layoutInflater: LayoutInflater
+
+    @Mock
     private lateinit var menuInflater: MenuInflater
 
     @Mock
@@ -72,6 +75,9 @@ class ContributionsFragmentUnitTests {
     private lateinit var notificationController: NotificationController
 
     @Mock
+    private lateinit var limitedConnectionEnabledLayout: LinearLayout
+
+    @Mock
     private lateinit var notificationCount: TextView
 
     @Mock
@@ -85,6 +91,7 @@ class ContributionsFragmentUnitTests {
 
     private lateinit var fragment: ContributionsFragment
     private lateinit var context: Context
+    private lateinit var view: View
     private lateinit var activity: MainActivity
     private lateinit var nearbyNotificationCardView: NearbyNotificationCardView
     private lateinit var campaignView: CampaignView
@@ -101,17 +108,18 @@ class ContributionsFragmentUnitTests {
         activity = Robolectric.buildActivity(MainActivity::class.java).create().get()
 
 
-
-        binding = FragmentContributionsBinding.inflate(LayoutInflater.from(context))
         fragment = ContributionsFragment.newInstance()
         val fragmentManager: FragmentManager = activity.supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(fragment, null)
         fragmentTransaction.commit()
 
+        layoutInflater = LayoutInflater.from(activity)
+        view = LayoutInflater.from(activity)
+            .inflate(R.layout.fragment_contributions, null) as View
 
-        nearbyNotificationCardView = binding.cardViewNearby
-        campaignView = binding.campaignsView
+        nearbyNotificationCardView = view.findViewById(R.id.card_view_nearby)
+        campaignView = view.findViewById(R.id.campaigns_view)
 
         Whitebox.setInternalState(fragment, "contributionsListFragment", contributionsListFragment)
         Whitebox.setInternalState(fragment, "store", store)
