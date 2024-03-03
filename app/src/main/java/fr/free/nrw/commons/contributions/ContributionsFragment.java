@@ -107,7 +107,11 @@ public class ContributionsFragment
 
     public NearbyNotificationCardView nearbyNotificationCardView;
 
-    private FragmentContributionsBinding binding;
+    LinearLayout limitedConnectionEnabledLayout;
+
+    CampaignView campaignView;
+
+    FragmentContributionsBinding binding;
 
     @Inject ContributionsPresenter contributionsPresenter;
 
@@ -181,6 +185,8 @@ public class ContributionsFragment
         binding = FragmentContributionsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         nearbyNotificationCardView = binding.cardViewNearby;
+        limitedConnectionEnabledLayout = binding.limitedConnectionEnabledLayout;
+        campaignView = binding.campaignsView;
         initWLMCampaign();
         presenter.onAttachView(this);
         contributionsPresenter.onAttachView(this);
@@ -283,11 +289,14 @@ public class ContributionsFragment
             .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
 
         checkable.setChecked(isEnabled);
-        if (isEnabled) {
-            binding.limitedConnectionEnabledLayout.setVisibility(View.VISIBLE);
-        } else {
-            binding.limitedConnectionEnabledLayout.setVisibility(View.GONE);
+        if (binding!=null) {
+            if (isEnabled) {
+                binding.limitedConnectionEnabledLayout.setVisibility(View.VISIBLE);
+            } else {
+                binding.limitedConnectionEnabledLayout.setVisibility(View.GONE);
+            }
         }
+
         checkable.setIcon((isEnabled) ? R.drawable.ic_baseline_cloud_off_24:R.drawable.ic_baseline_cloud_queue_24);
         checkable.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             @Override
@@ -346,7 +355,9 @@ public class ContributionsFragment
     }
 
     private void setupViewForMediaDetails() {
-        binding.campaignsView.setVisibility(View.GONE);
+        if (binding!=null) {
+            binding.campaignsView.setVisibility(View.GONE);
+        }
         nearbyNotificationCardView.setVisibility(View.GONE);
     }
 
@@ -629,7 +640,9 @@ public class ContributionsFragment
 
     @Override public void showCampaigns(Campaign campaign) {
         if (campaign != null && !isUserProfile) {
-            binding.campaignsView.setCampaign(campaign);
+            if (binding!=null) {
+                binding.campaignsView.setCampaign(campaign);
+            }
         }
     }
 

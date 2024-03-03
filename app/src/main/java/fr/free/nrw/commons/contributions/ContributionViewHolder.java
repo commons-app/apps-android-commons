@@ -43,11 +43,11 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
         binding = LayoutContributionBinding.bind(parent);
 
-        binding.retryButton.setOnClickListener(this::retryUpload);
-        binding.cancelButton.setOnClickListener(this::deleteUpload);
-        binding.contributionImage.setOnClickListener(this::imageClicked);
-        binding.wikipediaButton.setOnClickListener(this::wikipediaButtonClicked);
-        binding.pauseResumeButton.setOnClickListener(this::onPauseResumeButtonClicked);
+        binding.retryButton.setOnClickListener(v -> retryUpload());
+        binding.cancelButton.setOnClickListener(v -> deleteUpload());
+        binding.contributionImage.setOnClickListener(v -> imageClicked());
+        binding.wikipediaButton.setOnClickListener(v -> wikipediaButtonClicked());
+        binding.pauseResumeButton.setOnClickListener(v -> onPauseResumeButtonClicked());
 
         /* Set a dialog indicating that the upload is being paused. This is needed because pausing
         an upload might take a dozen seconds. */
@@ -211,29 +211,29 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     /**
      * Retry upload when it is failed
      */
-    public void retryUpload(View view) {
+    public void retryUpload() {
         callback.retryUpload(contribution);
     }
 
     /**
      * Delete a failed upload attempt
      */
-    public void deleteUpload(View view) {
+    public void deleteUpload() {
         callback.deleteUpload(contribution);
     }
 
-    public void imageClicked(View view) {
+    public void imageClicked() {
         callback.openMediaDetail(position, isWikipediaButtonDisplayed);
     }
 
-    public void wikipediaButtonClicked(View view) {
+    public void wikipediaButtonClicked() {
         callback.addImageToWikipedia(contribution);
     }
 
     /**
      * Triggers a callback for pause/resume
      */
-    public void onPauseResumeButtonClicked(View view) {
+    public void onPauseResumeButtonClicked() {
         if (binding.pauseResumeButton.getTag().toString().equals("pause")) {
             pause();
         } else {
