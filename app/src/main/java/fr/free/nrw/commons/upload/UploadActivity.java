@@ -140,6 +140,9 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
      * Whether fragments have been saved.
      */
     private boolean isFragmentsSaved = false;
+    
+    public static final String keyForCurrentUploadImagesSize = "CurrentUploadImagesSize";
+    public static final String storeNameForCurrentUploadImagesSize = "CurrentUploadImageQualities";
 
     private ActivityUploadBinding binding;
 
@@ -180,7 +183,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         }
         locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
         locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
-        store = new BasicKvStore(this, "CurrentUploadImageQualities");
+        store = new BasicKvStore(this, storeNameForCurrentUploadImagesSize);
         store.clearAll();
         checkStoragePermissions();
 
@@ -538,6 +541,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                 UploadMediaDetailFragmentCallback uploadMediaDetailFragmentCallback = new UploadMediaDetailFragmentCallback() {
                     @Override
                     public void deletePictureAtIndex(int index) {
+                        store.putInt(keyForCurrentUploadImagesSize,
+                            (store.getInt(keyForCurrentUploadImagesSize) - 1));
                         presenter.deletePictureAtIndex(index);
                     }
 
@@ -682,7 +687,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
         }
         // Saving size of uploadableFiles
-        store.putInt("UploadedImagesSize", uploadableFiles.size());
+        store.putInt(keyForCurrentUploadImagesSize, uploadableFiles.size());
     }
 
     /**

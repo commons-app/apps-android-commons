@@ -115,14 +115,13 @@ class UploadMediaPresenterTest {
             ArgumentMatchers.any(UploadItem::class.java),
             ArgumentMatchers.any(Place::class.java)
         )
-        verify(view).showProgress(false)
     }
 
     /**
-     * unit test for method UploadMediaPresenter.verifyImageQuality (For else case)
+     * unit test for method UploadMediaPresenter.getImageQuality (For else case)
      */
     @Test
-    fun verifyImageQualityTest() {
+    fun getImageQualityTest() {
         whenever(repository.uploads).thenReturn(listOf(uploadItem))
         whenever(repository.getImageQuality(uploadItem, location))
             .thenReturn(testSingleImageResult)
@@ -131,17 +130,16 @@ class UploadMediaPresenterTest {
             .thenReturn(imageCoordinates)
         whenever(uploadItem.gpsCoords.decimalCoords)
             .thenReturn("imageCoordinates")
-        uploadMediaPresenter.verifyImageQuality(0, location)
+        uploadMediaPresenter.getImageQuality(0, location, mockActivity)
         verify(view).showProgress(true)
         testScheduler.triggerActions()
-        verify(view).showProgress(false)
     }
 
     /**
-     * unit test for method UploadMediaPresenter.verifyImageQuality (For if case)
+     * unit test for method UploadMediaPresenter.getImageQuality (For if case)
      */
     @Test
-    fun `verify ImageQuality Test while coordinates equals to null`() {
+    fun `get ImageQuality Test while coordinates equals to null`() {
         whenever(repository.uploads).thenReturn(listOf(uploadItem))
         whenever(repository.getImageQuality(uploadItem, location))
             .thenReturn(testSingleImageResult)
@@ -150,7 +148,7 @@ class UploadMediaPresenterTest {
             .thenReturn(imageCoordinates)
         whenever(uploadItem.gpsCoords.decimalCoords)
             .thenReturn(null)
-        uploadMediaPresenter.verifyImageQuality(0, location)
+        uploadMediaPresenter.getImageQuality(0, location, mockActivity)
         testScheduler.triggerActions()
     }
 
@@ -274,7 +272,5 @@ class UploadMediaPresenterTest {
         )
 
         assertEquals("Exptected contry code", "de", captor.value.countryCode);
-
-        verify(view).showProgress(false)
     }
 }

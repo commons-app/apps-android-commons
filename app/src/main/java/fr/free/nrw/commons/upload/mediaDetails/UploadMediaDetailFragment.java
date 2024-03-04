@@ -2,7 +2,6 @@ package fr.free.nrw.commons.upload.mediaDetails;
 
 import static android.app.Activity.RESULT_OK;
 import static fr.free.nrw.commons.utils.ActivityUtils.startActivityWithFlags;
-import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -44,6 +43,7 @@ import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
+import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import java.io.File;
 import java.util.ArrayList;
@@ -52,7 +52,6 @@ import java.util.Locale;
 import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.apache.commons.lang3.StringUtils;
 import timber.log.Timber;
 
 public class UploadMediaDetailFragment extends UploadBaseFragment implements
@@ -123,6 +122,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     private UploadItem editableUploadItem;
 
+    private BasicKvStore basicKvStore;
+    
+    private final String keyForShowingAlertDialog = "isNoNetworkAlertDialogShowing";
+
     private UploadMediaDetailFragmentCallback callback;
 
     private FragmentUploadMediaDetailFragmentBinding binding;
@@ -169,6 +172,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 //         also see about using activity of this fragment in presenter, instead of passing everytime
         activity = getActivity();
         indexOfFragment = callback.getIndexInViewFlipper(this);
+        basicKvStore = new BasicKvStore(activity, "CurrentUploadImageQualities");
 
         if (callback != null) {
             init();
@@ -483,12 +487,67 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         }
     }
 
+    /**
+     * Shows a dialog alerting the user that internet connection is required for upload process
+     * Does nothing if there is network connectivity and then the user presses okay
+     */
     @Override
-    public void showConnectionErrorPopup() {
+    public void showConnectionErrorPopupForCaptionCheck() {
         DialogUtil.showAlertDialog(getActivity(),
             getString(R.string.upload_connection_error_alert_title),
-            getString(R.string.upload_connection_error_alert_detail), getString(R.string.ok),
-            () -> {}, true);
+            getString(R.string.upload_connection_error_alert_detail),
+            getString(R.string.ok),
+            getString(R.string.cancel_upload),
+            () -> {
+                if (!NetworkUtils.isInternetConnectionEstablished(activity)) {
+                    showConnectionErrorPopupForCaptionCheck();
+                }
+            },
+            () -> {
+                activity.finish();
+            });
+    }
+
+    /**
+     * Shows a dialog alerting the user that internet connection is required for upload process
+     * Recalls UploadMediaPresenter.getImageQuality for all the next upload items,
+     * if there is network connectivity and then the user presses okay
+     */
+    @Override
+    public void showConnectionErrorPopup() {
+//        TODO: have to write unit tests for this method
+        try {
+            boolean FLAG_ALERT_DIALOG_SHOWING = basicKvStore.getBoolean(
+                keyForShowingAlertDialog, false);
+            if (!FLAG_ALERT_DIALOG_SHOWING) {
+                basicKvStore.putBoolean(keyForShowingAlertDialog, true);
+                DialogUtil.showAlertDialog(getActivity(),
+                    getString(R.string.upload_connection_error_alert_title),
+                    getString(R.string.upload_connection_error_alert_detail),
+                    getString(R.string.ok),
+                    getString(R.string.cancel_upload),
+                    () -> {
+                        basicKvStore.putBoolean(keyForShowingAlertDialog, false);
+                        if (NetworkUtils.isInternetConnectionEstablished(activity)) {
+                            int sizeOfUploads = basicKvStore.getInt(
+                                UploadActivity.keyForCurrentUploadImagesSize);
+                            for (int i = indexOfFragment; i < sizeOfUploads; i++) {
+                                presenter.getImageQuality(i, inAppPictureLocation, activity);
+                            }
+                        } else {
+                            showConnectionErrorPopup();
+                        }
+                    },
+                    () -> {
+                        basicKvStore.putBoolean(keyForShowingAlertDialog, false);
+                        activity.finish();
+                    },
+                    null,
+                    false
+                );
+            }
+        } catch (Exception e) {
+        }
     }
 
     @Override

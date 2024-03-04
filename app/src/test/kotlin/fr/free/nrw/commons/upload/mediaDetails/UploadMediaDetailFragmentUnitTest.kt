@@ -324,9 +324,9 @@ class UploadMediaDetailFragmentUnitTest {
 
     @Test
     @Throws(Exception::class)
-    fun testShowConnectionErrorPopup() {
+    fun testShowConnectionErrorPopupForCaptionCheck() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.showConnectionErrorPopup()
+        fragment.showConnectionErrorPopupForCaptionCheck()
     }
 
     @Test
@@ -358,7 +358,7 @@ class UploadMediaDetailFragmentUnitTest {
         `when`(latLng.longitude).thenReturn(0.0)
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
         fragment.onActivityResult(1211, Activity.RESULT_OK, intent)
-        Mockito.verify(presenter, Mockito.times(0)).verifyImageQuality(0, location)
+        Mockito.verify(presenter, Mockito.times(0)).getImageQuality(0, location, activity)
     }
 
     @Test

@@ -20,6 +20,7 @@ import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.repository.UploadRepository;
 import fr.free.nrw.commons.upload.ImageCoordinates;
 import fr.free.nrw.commons.upload.SimilarImageInterface;
+import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.upload.UploadItem;
 import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback;
@@ -67,6 +68,8 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
 
     private final List<String> WLM_SUPPORTED_COUNTRIES= Arrays.asList("am","at","az","br","hr","sv","fi","fr","de","gh","in","ie","il","mk","my","mt","pk","pe","pl","ru","rw","si","es","se","tw","ug","ua","us");
     private Map<String, String> countryNamesAndCodes = null;
+
+    private final String keyForCurrentUploadImageQualities = "UploadedImagesQualities";
 
     /**
      * Variable used to determine if the battery-optimisation dialog is being shown or not
@@ -141,7 +144,6 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                         final ImageCoordinates gpsCoords = uploadItem.getGpsCoords();
                         final boolean hasImageCoordinates =
                             gpsCoords != null && gpsCoords.getImageCoordsExists();
-                        view.showProgress(false);
                         if (hasImageCoordinates && place == null) {
                             checkNearbyPlaces(uploadItem);
                         }
@@ -199,43 +201,12 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     }
 
     /**
-     * asks the repository to verify image quality
+     * Checks if the image has a location or not. Displays a dialog alerting user that no
+     * location has been to added to the image and asking them to add one
      *
-     * @param uploadItemIndex
+     * @param uploadItemIndex Index of the uploadItem which has no location
+     * @param inAppPictureLocation In app picture location (if any)
      */
-    @Override
-    public boolean verifyImageQuality(int uploadItemIndex, LatLng inAppPictureLocation) {
-      final List<UploadItem> uploadItems = repository.getUploads();
-      if (uploadItems.size()==0) {
-          view.showProgress(false);
-          // No internationalization required for this error message because it's an internal error.
-          view.showMessage("Internal error: Zero upload items received by the Upload Media Detail Fragment. Sorry, please upload again.",R.color.color_error);
-          return false;
-      }
-        UploadItem uploadItem = uploadItems.get(uploadItemIndex);
-        view.showProgress(true);
-        compositeDisposable.add(
-            repository
-                .getImageQuality(uploadItem, inAppPictureLocation)
-                .observeOn(mainThreadScheduler)
-                .subscribe(imageResult -> {
-                        view.showProgress(false);
-                        handleImageResult(imageResult, uploadItem);
-                    },
-                    throwable -> {
-                        view.showProgress(false);
-                        if (throwable instanceof UnknownHostException) {
-                            view.showConnectionErrorPopup();
-                        } else {
-                            view.showMessage("" + throwable.getLocalizedMessage(),
-                                R.color.color_error);
-                        }
-                        Timber.e(throwable, "Error occurred while handling image");
-                    })
-        );
-      return true;
-    }
-
     @Override
     public void displayLocDialog(int uploadItemIndex, LatLng inAppPictureLocation) {
         final List<UploadItem> uploadItems = repository.getUploads();
@@ -251,7 +222,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     }
 
     /**
-     * Verifies the image's caption and handles the result
+     * Verifies the image's caption and calls function to handle the result
      *
      * @param uploadItem UploadItem whose caption is checked
      */
@@ -268,7 +239,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                     throwable -> {
                         view.showProgress(false);
                         if (throwable instanceof UnknownHostException) {
-                            view.showConnectionErrorPopup();
+                            view.showConnectionErrorPopupForCaptionCheck();
                         } else {
                             view.showMessage("" + throwable.getLocalizedMessage(),
                                 R.color.color_error);
@@ -396,6 +367,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                     },
                     throwable -> {
                         if (throwable instanceof UnknownHostException) {
+                            view.showProgress(false);
                             view.showConnectionErrorPopup();
                         } else {
                             view.showMessage("" + throwable.getLocalizedMessage(),
@@ -417,8 +389,9 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      */
     private void storeImageQuality(Integer imageResult, int uploadItemIndex, Activity activity,
         UploadItem uploadItem) {
-        BasicKvStore store = new BasicKvStore(activity, "CurrentUploadImageQualities");
-        String value = store.getString("UploadedImagesQualities", null);
+        BasicKvStore store = new BasicKvStore(activity,
+            UploadActivity.storeNameForCurrentUploadImagesSize);
+        String value = store.getString(keyForCurrentUploadImageQualities, null);
         JSONObject jsonObject;
         try {
             if (value != null) {
@@ -427,14 +400,17 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                 jsonObject = new JSONObject();
             }
             jsonObject.put("UploadItem" + uploadItemIndex, imageResult);
-            store.putString("UploadedImagesQualities", jsonObject.toString());
+            store.putString(keyForCurrentUploadImageQualities, jsonObject.toString());
         } catch (Exception e) {
         }
-        if (uploadItemIndex == 0 && !isBatteryDialogShowing) {
-            // if battery-optimisation dialog is not being shown, call checkImageQuality
-            checkImageQuality(uploadItem, uploadItemIndex);
-        } else {
-            view.showProgress(false);
+
+        if (uploadItemIndex == 0) {
+            if (!isBatteryDialogShowing) {
+                // if battery-optimisation dialog is not being shown, call checkImageQuality
+                checkImageQuality(uploadItem, uploadItemIndex);
+            } else {
+                view.showProgress(false);
+            }
         }
     }
 
@@ -446,11 +422,11 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      */
     @Override
     public void checkImageQuality(UploadItem uploadItem, int index) {
-        view.showProgress(false);
         if ((uploadItem.getImageQuality() != IMAGE_OK) && (uploadItem.getImageQuality()
             != IMAGE_KEEP)) {
-            BasicKvStore store = new BasicKvStore(activity, "CurrentUploadImageQualities");
-            String value = store.getString("UploadedImagesQualities", null);
+            BasicKvStore store = new BasicKvStore(activity,
+                UploadActivity.storeNameForCurrentUploadImagesSize);
+            String value = store.getString(keyForCurrentUploadImageQualities, null);
             JSONObject jsonObject;
             try {
                 if (value != null) {
@@ -459,6 +435,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                     jsonObject = new JSONObject();
                 }
                 Integer imageQuality = (int) jsonObject.get("UploadItem" + index);
+                view.showProgress(false);
                 if (imageQuality == IMAGE_OK) {
                     uploadItem.setHasInvalidLocation(false);
                     uploadItem.setImageQuality(imageQuality);
@@ -478,8 +455,9 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      */
     @Override
     public void updateImageQualitiesJSON(int size, int index) {
-        BasicKvStore store = new BasicKvStore(activity, "CurrentUploadImageQualities");
-        String value = store.getString("UploadedImagesQualities", null);
+        BasicKvStore store = new BasicKvStore(activity,
+            UploadActivity.storeNameForCurrentUploadImagesSize);
+        String value = store.getString(keyForCurrentUploadImageQualities, null);
         JSONObject jsonObject;
         try {
             if (value != null) {
@@ -491,7 +469,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                 jsonObject.put("UploadItem" + i, jsonObject.get("UploadItem" + (i + 1)));
             }
             jsonObject.remove("UploadItem" + (size - 1));
-            store.putString("UploadedImagesQualities", jsonObject.toString());
+            store.putString(keyForCurrentUploadImageQualities, jsonObject.toString());
         } catch (Exception e) {
         }
     }
@@ -534,7 +512,10 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                 errorMessageForResult,
                 activity.getString(R.string.upload),
                 activity.getString(R.string.cancel),
-                () -> uploadItem.setImageQuality(IMAGE_OK),
+                () -> {
+                    view.showProgress(false);
+                    uploadItem.setImageQuality(IMAGE_OK);
+                },
                 () -> {
                     presenterCallback.deletePictureAtIndex(index);
                 }
@@ -542,16 +523,6 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
         } else {
         }
         //If the error message is null, we will probably not show anything
-    }
-
-    /**
-     * TODO: this was an earlier method, now replaced with checkImageQuality,
-     * see how removing this will affect unit tests
-     *
-     * @param imageResult
-     * @param uploadItem
-     */
-    public void handleImageResult(Integer imageResult,  UploadItem uploadItem) {
     }
 
     /**
