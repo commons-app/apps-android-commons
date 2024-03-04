@@ -69,8 +69,7 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
         @Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = FragmentFeaturedRootBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
-        return view;
+        return binding.getRoot();
     }
 
     @Override
@@ -240,7 +239,7 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Log.d("deneme8", "on media clicked");
         binding.exploreContainer.setVisibility(View.VISIBLE);
-        ((BookmarkFragment) getParentFragment()).tabLayout.setVisibility(View.GONE);
+        ((BookmarkFragment) getParentFragment()).binding.tabLayout.setVisibility(View.GONE);
         mediaDetails = MediaDetailPagerFragment.newInstance(false, true);
         ((BookmarkFragment) getParentFragment()).setScroll(false);
         setFragment(mediaDetails, listFragment);
@@ -250,5 +249,11 @@ public class BookmarkListRootFragment extends CommonsDaggerSupportFragment imple
     @Override
     public void onBackStackChanged() {
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }

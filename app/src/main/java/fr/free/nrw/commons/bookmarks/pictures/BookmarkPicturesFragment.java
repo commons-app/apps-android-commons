@@ -9,11 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.ListAdapter;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import dagger.android.support.DaggerFragment;
@@ -36,11 +32,6 @@ public class BookmarkPicturesFragment extends DaggerFragment {
     private GridViewAdapter gridAdapter;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    TextView statusTextView;
-    ProgressBar progressBar;
-    GridView gridView;
-    RelativeLayout parentLayout;
-
     private FragmentBookmarksPicturesBinding binding;
     @Inject
     BookmarkPicturesController controller;
@@ -60,18 +51,13 @@ public class BookmarkPicturesFragment extends DaggerFragment {
             Bundle savedInstanceState
     ) {
         binding = FragmentBookmarksPicturesBinding.inflate(inflater, container, false);
-        View v = binding.getRoot();
-        gridView = binding.bookmarkedPicturesList;
-        statusTextView = binding.statusMessage;
-        progressBar = binding.loadingImagesProgressBar;
-        parentLayout = binding.parentLayout;
-        return v;
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        gridView.setOnItemClickListener((AdapterView.OnItemClickListener) getParentFragment());
+        binding.bookmarkedPicturesList.setOnItemClickListener((AdapterView.OnItemClickListener) getParentFragment());
         initList();
     }
 
@@ -85,13 +71,14 @@ public class BookmarkPicturesFragment extends DaggerFragment {
     public void onDestroy() {
         super.onDestroy();
         compositeDisposable.clear();
+        binding = null;
     }
 
     @Override
     public void onResume() {
         super.onResume();
         if (controller.needRefreshBookmarkedPictures()) {
-            gridView.setVisibility(GONE);
+            binding.bookmarkedPicturesList.setVisibility(GONE);
             if (gridAdapter != null) {
                 gridAdapter.clear();
                 ((BookmarkListRootFragment)getParentFragment()).viewPagerNotifyDataSetChanged();
@@ -111,8 +98,8 @@ public class BookmarkPicturesFragment extends DaggerFragment {
             return;
         }
 
-        progressBar.setVisibility(VISIBLE);
-        statusTextView.setVisibility(GONE);
+        binding.loadingImagesProgressBar.setVisibility(VISIBLE);
+        binding.statusMessage.setVisibility(GONE);
 
         compositeDisposable.add(controller.loadBookmarkedPictures()
                 .subscribeOn(Schedulers.io())
@@ -124,12 +111,12 @@ public class BookmarkPicturesFragment extends DaggerFragment {
      * Handles the UI updates for no internet scenario
      */
     private void handleNoInternet() {
-        progressBar.setVisibility(GONE);
+        binding.loadingImagesProgressBar.setVisibility(GONE);
         if (gridAdapter == null || gridAdapter.isEmpty()) {
-            statusTextView.setVisibility(VISIBLE);
-            statusTextView.setText(getString(R.string.no_internet));
+            binding.statusMessage.setVisibility(VISIBLE);
+            binding.statusMessage.setText(getString(R.string.no_internet));
         } else {
-            ViewUtil.showShortSnackbar(parentLayout, R.string.no_internet);
+            ViewUtil.showShortSnackbar(binding.parentLayout, R.string.no_internet);
         }
     }
 
@@ -140,7 +127,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
     private void handleError(Throwable throwable) {
         Timber.e(throwable, "Error occurred while loading images inside a category");
         try{
-            ViewUtil.showShortSnackbar(parentLayout, R.string.error_loading_images);
+            ViewUtil.showShortSnackbar(binding.getRoot(), R.string.error_loading_images);
             initErrorView();
         }catch (Exception e){
             e.printStackTrace();
@@ -151,12 +138,12 @@ public class BookmarkPicturesFragment extends DaggerFragment {
      * Handles the UI updates for a error scenario
      */
     private void initErrorView() {
-        progressBar.setVisibility(GONE);
+        binding.loadingImagesProgressBar.setVisibility(GONE);
         if (gridAdapter == null || gridAdapter.isEmpty()) {
-            statusTextView.setVisibility(VISIBLE);
-            statusTextView.setText(getString(R.string.no_images_found));
+            binding.statusMessage.setVisibility(VISIBLE);
+            binding.statusMessage.setText(getString(R.string.no_images_found));
         } else {
-            statusTextView.setVisibility(GONE);
+            binding.statusMessage.setVisibility(GONE);
         }
     }
 
@@ -164,12 +151,12 @@ public class BookmarkPicturesFragment extends DaggerFragment {
      * Handles the UI updates when there is no bookmarks
      */
     private void initEmptyBookmarkListView() {
-        progressBar.setVisibility(GONE);
+        binding.loadingImagesProgressBar.setVisibility(GONE);
         if (gridAdapter == null || gridAdapter.isEmpty()) {
-            statusTextView.setVisibility(VISIBLE);
-            statusTextView.setText(getString(R.string.bookmark_empty));
+            binding.statusMessage.setVisibility(VISIBLE);
+            binding.statusMessage.setText(getString(R.string.bookmark_empty));
         } else {
-            statusTextView.setVisibility(GONE);
+            binding.statusMessage.setVisibility(GONE);
         }
     }
 
@@ -192,18 +179,18 @@ public class BookmarkPicturesFragment extends DaggerFragment {
             setAdapter(collection);
         } else {
             if (gridAdapter.containsAll(collection)) {
-                progressBar.setVisibility(GONE);
-                statusTextView.setVisibility(GONE);
-                gridView.setVisibility(VISIBLE);
-                gridView.setAdapter(gridAdapter);
+                binding.loadingImagesProgressBar.setVisibility(GONE);
+                binding.statusMessage.setVisibility(GONE);
+                binding.bookmarkedPicturesList.setVisibility(VISIBLE);
+                binding.bookmarkedPicturesList.setAdapter(gridAdapter);
                 return;
             }
             gridAdapter.addItems(collection);
             ((BookmarkListRootFragment) getParentFragment()).viewPagerNotifyDataSetChanged();
         }
-        progressBar.setVisibility(GONE);
-        statusTextView.setVisibility(GONE);
-        gridView.setVisibility(VISIBLE);
+        binding.loadingImagesProgressBar.setVisibility(GONE);
+        binding.statusMessage.setVisibility(GONE);
+        binding.bookmarkedPicturesList.setVisibility(VISIBLE);
     }
 
     /**
@@ -216,7 +203,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
                 R.layout.layout_category_images,
                 mediaList
         );
-        gridView.setAdapter(gridAdapter);
+        binding.bookmarkedPicturesList.setAdapter(gridAdapter);
     }
 
     /**
@@ -225,6 +212,7 @@ public class BookmarkPicturesFragment extends DaggerFragment {
      * @return  GridView Adapter
      */
     public ListAdapter getAdapter() {
-        return gridView.getAdapter();
+        return binding.bookmarkedPicturesList.getAdapter();
     }
+
 }

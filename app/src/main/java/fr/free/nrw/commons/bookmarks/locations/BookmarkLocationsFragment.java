@@ -32,12 +32,7 @@ import kotlin.Unit;
 
 public class BookmarkLocationsFragment extends DaggerFragment {
 
-    TextView statusTextView;
-    ProgressBar progressBar;
-    RecyclerView recyclerView;
-    RelativeLayout parentLayout;
-
-    private FragmentBookmarksLocationsBinding binding;
+    public FragmentBookmarksLocationsBinding binding;
 
     @Inject BookmarkLocationsController controller;
     @Inject ContributionController contributionController;
@@ -79,19 +74,14 @@ public class BookmarkLocationsFragment extends DaggerFragment {
             Bundle savedInstanceState
     ) {
         binding = FragmentBookmarksLocationsBinding.inflate(inflater, container, false);
-        statusTextView = binding.statusMessage;
-        progressBar = binding.loadingImagesProgressBar;
-        recyclerView = binding.listView;
-        parentLayout = binding.parentLayout;
-        View v = binding.getRoot();
-        return v;
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        progressBar.setVisibility(View.VISIBLE);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.loadingImagesProgressBar.setVisibility(View.VISIBLE);
+        binding.listView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new PlaceAdapter(bookmarkLocationDao,
             place -> Unit.INSTANCE,
             (place, isBookmarked) -> {
@@ -101,7 +91,7 @@ public class BookmarkLocationsFragment extends DaggerFragment {
             commonPlaceClickActions,
             inAppCameraLocationPermissionLauncher
         );
-        recyclerView.setAdapter(adapter);
+        binding.listView.setAdapter(adapter);
     }
 
     @Override
@@ -116,17 +106,23 @@ public class BookmarkLocationsFragment extends DaggerFragment {
     private void initList() {
         List<Place> places = controller.loadFavoritesLocations();
         adapter.setItems(places);
-        progressBar.setVisibility(View.GONE);
+        binding.loadingImagesProgressBar.setVisibility(View.GONE);
         if (places.size() <= 0) {
-            statusTextView.setText(R.string.bookmark_empty);
-            statusTextView.setVisibility(View.VISIBLE);
+            binding.statusMessage.setText(R.string.bookmark_empty);
+            binding.statusMessage.setVisibility(View.VISIBLE);
         } else {
-            statusTextView.setVisibility(View.GONE);
+            binding.statusMessage.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         contributionController.handleActivityResult(getActivity(), requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }
