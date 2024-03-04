@@ -141,6 +141,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                     {
                         view.onImageProcessed(uploadItem, place);
                         view.updateMediaDetails(uploadItem.getUploadMediaDetails());
+                        view.showProgress(false);
                         final ImageCoordinates gpsCoords = uploadItem.getGpsCoords();
                         final boolean hasImageCoordinates =
                             gpsCoords != null && gpsCoords.getImageCoordsExists();

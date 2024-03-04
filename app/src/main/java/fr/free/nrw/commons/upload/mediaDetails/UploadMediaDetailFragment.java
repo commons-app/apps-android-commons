@@ -515,7 +515,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     @Override
     public void showConnectionErrorPopup() {
-//        TODO: have to write unit tests for this method
         try {
             boolean FLAG_ALERT_DIALOG_SHOWING = basicKvStore.getBoolean(
                 keyForShowingAlertDialog, false);
