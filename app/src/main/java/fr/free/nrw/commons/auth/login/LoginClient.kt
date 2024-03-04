@@ -29,7 +29,7 @@ class LoginClient(private val loginInterface: LoginInterface) {
      */
     private var userLanguage = ""
 
-    fun getLoginToken() = loginInterface.getLoginToken()
+    private fun getLoginToken() = loginInterface.getLoginToken()
 
     fun request(userName: String, password: String, cb: LoginCallback) {
         cancel()
