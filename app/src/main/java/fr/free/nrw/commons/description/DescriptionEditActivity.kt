@@ -79,12 +79,12 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
 
         val bundle = intent.extras
 
-        if(savedInstanceState!=null){
+        if (savedInstanceState != null) {
             descriptionAndCaptions = savedInstanceState.getParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION)
             wikiText = savedInstanceState.getString(WIKITEXT)
             savedLanguageValue = savedInstanceState.getString(Prefs.DESCRIPTION_LANGUAGE)!!
             media = savedInstanceState.getParcelable("media")
-        }else{
+        } else {
             descriptionAndCaptions =
                 bundle!!.getParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION)!!
             wikiText = bundle.getString(WIKITEXT)
