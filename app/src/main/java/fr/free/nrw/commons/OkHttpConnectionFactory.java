@@ -15,7 +15,6 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
-import org.wikipedia.dataclient.okhttp.HttpStatusException;
 import timber.log.Timber;
 
 public final class OkHttpConnectionFactory {
@@ -68,6 +67,8 @@ public final class OkHttpConnectionFactory {
     }
 
     public static class UnsuccessfulResponseInterceptor implements Interceptor {
+        private static final String SUPPRESS_ERROR_LOG = "x-commons-suppress-error-log";
+        public static final String SUPPRESS_ERROR_LOG_HEADER = SUPPRESS_ERROR_LOG+": true";
         private static final List<String> DO_NOT_INTERCEPT = Collections.singletonList(
             "api.php?format=json&formatversion=2&errorformat=plaintext&action=upload&ignorewarnings=1");
 
@@ -76,7 +77,16 @@ public final class OkHttpConnectionFactory {
         @Override
         @NonNull
         public Response intercept(@NonNull final Chain chain) throws IOException {
-            final Response rsp = chain.proceed(chain.request());
+            final Request rq = chain.request();
+
+            // If the request contains our special "suppress errors" header, make note of it
+            // but don't pass that on to the server.
+            final boolean suppressErrors = rq.headers().names().contains(SUPPRESS_ERROR_LOG);
+            final Request request = rq.newBuilder()
+                .removeHeader(SUPPRESS_ERROR_LOG)
+                .build();
+
+            final Response rsp = chain.proceed(request);
 
             // Do not intercept certain requests and let the caller handle the errors
             if(isExcludedUrl(chain.request())) {
@@ -90,7 +100,12 @@ public final class OkHttpConnectionFactory {
                         }
                     }
                 } catch (final IOException e) {
-                    Timber.e(e);
+                    // Log the error as debug (and therefore, "expected") or at error level
+                    if (suppressErrors) {
+                        Timber.d(e, "Suppressed (known / expected) error");
+                    } else {
+                        Timber.e(e);
+                    }
                 }
                 return rsp;
             }
@@ -109,5 +124,31 @@ public final class OkHttpConnectionFactory {
     }
 
     private OkHttpConnectionFactory() {
+    }
+
+    public static class HttpStatusException extends IOException {
+        private final int code;
+        private final String url;
+        public HttpStatusException(@NonNull Response rsp) {
+            this.code = rsp.code();
+            this.url = rsp.request().url().uri().toString();
+            try {
+                if (rsp.body() != null && rsp.body().contentType() != null
+                        && rsp.body().contentType().toString().contains("json")) {
+                }
+            } catch (Exception e) {
+                // Log?
+            }
+        }
+
+        public int code() {
+            return code;
+        }
+
+        @Override
+        public String getMessage() {
+            String str = "Code: " + code + ", URL: " + url;
+            return str;
+        }
     }
 }

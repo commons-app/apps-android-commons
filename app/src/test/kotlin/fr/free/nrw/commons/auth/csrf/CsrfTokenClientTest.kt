@@ -11,8 +11,8 @@ import org.mockito.ArgumentMatchers.isA
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.never
 import org.mockito.Mockito.verify
-import org.wikipedia.dataclient.mwapi.MwException
-import org.wikipedia.dataclient.okhttp.HttpStatusException
+import fr.free.nrw.commons.wikidata.mwapi.MwException
+import fr.free.nrw.commons.OkHttpConnectionFactory.HttpStatusException
 
 class CsrfTokenClientTest : MockWebServerTest() {
     private val cb = mock(CsrfTokenClient.Callback::class.java)

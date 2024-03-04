@@ -2,7 +2,6 @@ package fr.free.nrw.commons.upload
 
 import android.os.Parcel
 import android.os.Parcelable
-import org.wikipedia.gallery.ImageInfo
 
 private const val RESULT_SUCCESS = "Success"
 

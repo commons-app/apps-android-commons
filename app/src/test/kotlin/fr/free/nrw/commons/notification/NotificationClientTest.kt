@@ -18,10 +18,10 @@ import org.mockito.MockitoAnnotations
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
-import org.wikipedia.dataclient.mwapi.MwQueryResponse
-import org.wikipedia.dataclient.mwapi.MwQueryResult
-import org.wikipedia.json.GsonUtil
-import org.wikipedia.notifications.Notification
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResult
+import fr.free.nrw.commons.wikidata.GsonUtil
+import fr.free.nrw.commons.wikidata.model.notifications.Notification
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)

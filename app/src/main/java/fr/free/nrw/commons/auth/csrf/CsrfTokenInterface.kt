@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.auth.csrf
 
 import fr.free.nrw.commons.wikidata.WikidataConstants.MW_API_PREFIX
-import org.wikipedia.dataclient.mwapi.MwQueryResponse
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers

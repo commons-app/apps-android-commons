@@ -36,7 +36,7 @@ public class CommonsDateUtil {
      * @return timestamp
      */
         public static SimpleDateFormat getIso8601DateFormatTimestamp() {
-            final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX",
+            final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'",
                 Locale.ROOT);
             simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
             return simpleDateFormat;

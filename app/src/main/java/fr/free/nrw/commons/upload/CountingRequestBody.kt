@@ -52,7 +52,7 @@ class CountingRequestBody(
         }
     }
 
-    interface Listener {
+    fun interface Listener {
         /**
          * Will be triggered when write progresses
          * @param bytesWritten
