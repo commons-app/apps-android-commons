@@ -36,6 +36,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.edit.EditActivity;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.filepicker.UploadableFile;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
@@ -251,7 +252,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         photoViewBackgroundImage.setOnScaleChangeListener(
             (scaleFactor, focusX, focusY) -> {
                 //Whenever the uses plays with the image, lets collapse the media detail container
-                expandCollapseLlMediaDetail(false);
+                //only if it is not already collapsed, which resolves flickering of arrow
+                if (isExpanded) {
+                    expandCollapseLlMediaDetail(false);
+                }
             });
     }
 
@@ -306,31 +310,35 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     public void showSimilarImageFragment(String originalFilePath, String possibleFilePath,
         ImageCoordinates similarImageCoordinates) {
-        SimilarImageDialogFragment newFragment = new SimilarImageDialogFragment();
-        newFragment.setCallback(new SimilarImageDialogFragment.Callback() {
-            @Override
-            public void onPositiveResponse() {
-                Timber.d("positive response from similar image fragment");
-                presenter.useSimilarPictureCoordinates(similarImageCoordinates, callback.getIndexInViewFlipper(UploadMediaDetailFragment.this));
+        BasicKvStore basicKvStore = new BasicKvStore(getActivity(), "IsAnyImageCancelled");
+        if (!basicKvStore.getBoolean("IsAnyImageCancelled", false)) {
+            SimilarImageDialogFragment newFragment = new SimilarImageDialogFragment();
+            newFragment.setCallback(new SimilarImageDialogFragment.Callback() {
+                @Override
+                public void onPositiveResponse() {
+                    Timber.d("positive response from similar image fragment");
+                    presenter.useSimilarPictureCoordinates(similarImageCoordinates,
+                        callback.getIndexInViewFlipper(UploadMediaDetailFragment.this));
 
-                // set the description text when user selects to use coordinate from the other image
-                // which was taken within 20s
-                // fixing: https://github.com/commons-app/apps-android-commons/issues/4700
-                uploadMediaDetailAdapter.getItems().get(0).setDescriptionText(
-                    getString(R.string.similar_coordinate_description_auto_set));
-                updateMediaDetails(uploadMediaDetailAdapter.getItems());
-            }
+                    // set the description text when user selects to use coordinate from the other image
+                    // which was taken within 120s
+                    // fixing: https://github.com/commons-app/apps-android-commons/issues/4700
+                    uploadMediaDetailAdapter.getItems().get(0).setDescriptionText(
+                        getString(R.string.similar_coordinate_description_auto_set));
+                    updateMediaDetails(uploadMediaDetailAdapter.getItems());
+                }
 
-            @Override
-            public void onNegativeResponse() {
-                Timber.d("negative response from similar image fragment");
-            }
-        });
-        Bundle args = new Bundle();
-        args.putString("originalImagePath", originalFilePath);
-        args.putString("possibleImagePath", possibleFilePath);
-        newFragment.setArguments(args);
-        newFragment.show(getChildFragmentManager(), "dialog");
+                @Override
+                public void onNegativeResponse() {
+                    Timber.d("negative response from similar image fragment");
+                }
+            });
+            Bundle args = new Bundle();
+            args.putString("originalImagePath", originalFilePath);
+            args.putString("possibleImagePath", possibleFilePath);
+            newFragment.setArguments(args);
+            newFragment.show(getChildFragmentManager(), "dialog");
+        }
     }
 
     @Override
@@ -455,7 +463,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 false);
         } else {
             uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
-            onNextButtonClicked();
+            // Calling below, instead of onNextButtonClicked() to not show locationDialog twice
+            onImageValidationSuccess();
         }
     }
 
@@ -478,7 +487,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
                     // validate image only when same file name error does not occur
                     // show the same file name error if exists.
-                    if ((errorCode & FILE_NAME_EXISTS) == 0) {
+                    // If image with same file name exists check the bit in errorCode is set or not
+                    if ((errorCode & FILE_NAME_EXISTS) != 0) {
+                        Timber.d("Trying to show duplicate picture popup");
+                        showDuplicatePicturePopup(uploadItem);
+                    } else {
                         uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
                         onImageValidationSuccess();
                     }

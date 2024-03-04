@@ -20,6 +20,24 @@ public interface UploadContract {
 
         void askUserToLogIn();
 
+        /**
+         * Changes current image when one image upload is cancelled, to highlight next image in the top thumbnail.
+         * Fixes: <a href="https://github.com/commons-app/apps-android-commons/issues/5511">Issue</a>
+         *
+         * @param index Index of image to be removed
+         * @param maxSize Max size of the {@code uploadableFiles}
+         */
+        void highlightNextImageOnCancelledImage(int index, int maxSize);
+
+        /**
+         * Used to check if user has cancelled upload of any image in current upload
+         * so that location compare doesn't show up again in same upload.
+         * Fixes: <a href="https://github.com/commons-app/apps-android-commons/issues/5511">Issue</a>
+         *
+         * @param isCancelled Is true when user has cancelled upload of any image in current upload
+         */
+        void setImageCancelled(boolean isCancelled);
+
         void showProgress(boolean shouldShow);
 
         void showMessage(int messageResourceId);

@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import fr.free.nrw.commons.auth.login.LoginResult.OAuthResult
 import fr.free.nrw.commons.auth.login.LoginResult.ResetPasswordResult
 import fr.free.nrw.commons.auth.login.LoginResult.Result
-import org.wikipedia.dataclient.mwapi.MwServiceError
+import fr.free.nrw.commons.wikidata.mwapi.MwServiceError
 
 class LoginResponse {
     @SerializedName("error")

@@ -17,7 +17,7 @@ import javax.inject.Inject;
 import org.apache.commons.lang3.StringUtils;
 import timber.log.Timber;
 
-class PageContentsCreator {
+public class PageContentsCreator {
 
     //{{According to Exif data|2009-01-09}}
     private static final String TEMPLATE_DATE_ACC_TO_EXIF = "{{According to Exif data|%s}}";
@@ -44,7 +44,6 @@ class PageContentsCreator {
                 .append("}}");
         }
         buffer
-            .append("\n")
             .append("|source=").append("{{own}}\n")
             .append("|author=[[User:").append(media.getAuthor()).append("|")
             .append(media.getAuthor()).append("]]\n");
@@ -68,7 +67,9 @@ class PageContentsCreator {
                 Utils.getWikiLovesMonumentsYear(Calendar.getInstance()), contribution.getCountryCode()));
         }
 
-        buffer.append("== {{int:license-header}} ==\n")
+        buffer
+            .append("\n")
+            .append("== {{int:license-header}} ==\n")
             .append(licenseTemplateFor(media.getLicense())).append("\n\n")
             .append("{{Uploaded from Mobile|platform=Android|version=")
             .append(ConfigUtils.getVersionNameWithSha(context)).append("}}\n");

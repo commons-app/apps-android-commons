@@ -3,7 +3,7 @@ package fr.free.nrw.commons.media;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
-import org.wikipedia.dataclient.mwapi.MwResponse;
+import fr.free.nrw.commons.wikidata.mwapi.MwResponse;
 
 public class MwParseResponse extends MwResponse {
     @Nullable

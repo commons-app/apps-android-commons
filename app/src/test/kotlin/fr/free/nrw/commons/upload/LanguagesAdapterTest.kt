@@ -19,7 +19,7 @@ import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import org.wikipedia.language.AppLanguageLookUpTable
+import fr.free.nrw.commons.language.AppLanguageLookUpTable
 import java.util.*
 
 @RunWith(RobolectricTestRunner::class)

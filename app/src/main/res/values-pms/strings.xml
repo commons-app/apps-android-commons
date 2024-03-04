@@ -343,6 +343,7 @@
   <string name="share_app_title">Partagé j\'aplicassion</string>
   <string name="rotate">Deje na gira</string>
   <string name="error_fetching_nearby_places">Eror durant l\'esplorassion dj\'anviron.</string>
+  <string name="no_pictures_in_this_area">Gnun-e plance an cost\'àrea</string>
   <string name="no_nearby_places_around">Gnun pòst sì-davzin</string>
   <string name="error_fetching_nearby_monuments">Eror d\'arcuperassion dij monument davzin.</string>
   <string name="no_recent_searches">Gnun-e arserche recente</string>
@@ -731,7 +732,18 @@
   <string name="full_screen_mode_features_info">Fé score an pressa e assè leugn për fé coste assion-sì: \n- vers ësnistra/vers drita: andé a col prima/col apress\n- an su: selessioné\n- an giù: marché coma da nen carié.</string>
   <string name="set_up_avatar_toast_string">Për configuré soa plancia virtual ëd classìfica, ch\'a sgnaca su «Definì tanme plancia virtual» ant lë mnu a tre pontin ëd na plancia qualsëssìa.</string>
   <string name="similar_coordinate_description_auto_set">Le coordinà a son nen le coordinà precise, ma la përson-a che a l\'ha carià costa plancia a pensa che a son davzin-e a basta.</string>
+  <string name="storage_permissions_denied">Drit d\'anmagasinament arfudà</string>
   <string name="unable_to_share_upload_item">Impossìbil partagé cost element</string>
   <string name="permissions_are_required_for_functionality">Dij përmess a son necessari për la fonsionalità</string>
   <string name="learn_how_to_write_a_useful_description">Amprende a scrive na descrission ùtil</string>
+  <string name="learn_how_to_write_a_useful_caption">Amprende a scrive na legenda ùtil</string>
+  <string name="see_your_achievements">Vëdde soe realisassion</string>
+  <string name="edit_image">Modifiché la plancia</string>
+  <string name="edit_location">Modifiché ël pòst</string>
+  <string name="send_thanks_to_author">Aringrassié l\'autor</string>
+  <string name="error_sending_thanks">Eror an mandand n\'aringrassiament a l\'autor.</string>
+  <plurals name="custom_picker_images_selected_title_appendix">
+    <item quantity="one">%d plancia selessionà</item>
+    <item quantity="other">%d plance selessionà</item>
+  </plurals>
 </resources>

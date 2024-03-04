@@ -2,7 +2,7 @@ package fr.free.nrw.commons.auth.csrf
 
 import androidx.annotation.VisibleForTesting
 import fr.free.nrw.commons.auth.SessionManager
-import org.wikipedia.dataclient.mwapi.MwQueryResponse
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import fr.free.nrw.commons.auth.login.LoginClient
 import fr.free.nrw.commons.auth.login.LoginCallback
 import fr.free.nrw.commons.auth.login.LoginFailedException

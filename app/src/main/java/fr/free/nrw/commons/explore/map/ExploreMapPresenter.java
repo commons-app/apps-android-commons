@@ -167,7 +167,6 @@ public class ExploreMapPresenter
         if (explorePlacesInfo.mediaList != null) {
             prepareNearbyBaseMarkers(explorePlacesInfo, selectedMarker);
         } else {
-            //TODO: SHOW SNACKBAR
             lockUnlockNearby(false); // So that new location updates wont come
             exploreMapFragmentView.setProgressBarVisibility(false);
         }

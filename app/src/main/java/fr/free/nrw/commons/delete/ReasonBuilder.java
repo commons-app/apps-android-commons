@@ -2,7 +2,7 @@ package fr.free.nrw.commons.delete;
 
 import android.content.Context;
 
-import org.wikipedia.util.DateUtil;
+import fr.free.nrw.commons.utils.DateUtil;
 
 import java.util.Date;
 import java.util.Locale;

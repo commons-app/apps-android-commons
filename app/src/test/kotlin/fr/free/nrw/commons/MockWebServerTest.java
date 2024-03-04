@@ -14,7 +14,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.wikipedia.json.GsonUtil;
+import fr.free.nrw.commons.wikidata.GsonUtil;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

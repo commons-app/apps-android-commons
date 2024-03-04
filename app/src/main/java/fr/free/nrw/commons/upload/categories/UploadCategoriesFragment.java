@@ -102,17 +102,17 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
             wikiText = bundle.getString("WikiText");
             nearbyPlaceCategory = bundle.getString(SELECTED_NEARBY_PLACE_CATEGORY);
         }
-        if(callback!=null) {
-            init();
-            presenter.getCategories().observe(getViewLifecycleOwner(), this::setCategories);
-        }
+        init();
+        presenter.getCategories().observe(getViewLifecycleOwner(), this::setCategories);
 
     }
 
     private void init() {
         if (media == null) {
-            tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
-                callback.getTotalNumberOfSteps(), getString(R.string.categories_activity_title)));
+            if (callback != null) {
+                tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
+                    callback.getTotalNumberOfSteps(), getString(R.string.categories_activity_title)));
+            }
         } else {
             tvTitle.setText(R.string.edit_categories);
             tvSubTitle.setVisibility(View.GONE);
@@ -221,7 +221,9 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
 
     @Override
     public void goToNextScreen() {
-        callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
+        if (callback != null){
+            callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
+        }
     }
 
     @Override
@@ -314,7 +316,9 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
             mediaDetailFragment.onResume();
             goBackToPreviousScreen();
         } else {
-            callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
+            if (callback != null) {
+                callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
+            }
         }
     }
 

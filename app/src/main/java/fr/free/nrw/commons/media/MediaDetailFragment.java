@@ -115,9 +115,9 @@ import java.util.regex.Pattern;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
-import org.wikipedia.dataclient.mwapi.MwQueryPage;
-import org.wikipedia.language.AppLanguageLookUpTable;
-import org.wikipedia.util.DateUtil;
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage;
+import fr.free.nrw.commons.language.AppLanguageLookUpTable;
+import fr.free.nrw.commons.utils.DateUtil;
 import timber.log.Timber;
 
 public class MediaDetailFragment extends CommonsDaggerSupportFragment implements

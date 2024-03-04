@@ -8,7 +8,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore
 import okhttp3.Cookie
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
-import org.wikipedia.dataclient.WikiSite
+import fr.free.nrw.commons.wikidata.model.WikiSite
 
 private const val COOKIE_STORE = "cookie_store"
 

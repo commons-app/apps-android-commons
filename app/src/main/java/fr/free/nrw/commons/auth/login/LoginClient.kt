@@ -6,7 +6,7 @@ import fr.free.nrw.commons.auth.login.LoginResult.ResetPasswordResult
 import fr.free.nrw.commons.wikidata.WikidataConstants.WIKIPEDIA_URL
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import org.wikipedia.dataclient.mwapi.MwQueryResponse
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
