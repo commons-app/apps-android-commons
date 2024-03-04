@@ -367,6 +367,9 @@ class ImageAdapter(
         notifyDataSetChanged()
     }
 
+    /**
+     * Clear selected images and empty the list.
+     */
     fun clearSelectedImages(){
         numberOfSelectedImagesMarkedAsNotForUpload = 0
         selectedImages.clear()
@@ -374,6 +377,9 @@ class ImageAdapter(
     }
 
 
+    /**
+     * Remove image from actionable images map.
+     */
     fun removeImageFromActionableImageMap(image: Image) {
         val sharedPreferences: SharedPreferences =
             context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)

@@ -339,10 +339,16 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
         imageAdapter.refresh(filteredImages, allImages)
     }
 
+    /**
+     * Removes the image from the actionable image map
+     */
     fun removeImage(image : Image){
         imageAdapter.removeImageFromActionableImageMap(image)
     }
 
+    /**
+     * Clears the selected images
+     */
     fun clearSelectedImages() {
         imageAdapter.clearSelectedImages()
     }
