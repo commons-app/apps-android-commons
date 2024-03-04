@@ -250,6 +250,7 @@
   <string name="internet_downloaded">Atencez pri nur sendar imaji quin vu propra facis. Ne sendez imaji quin vu descharjis de Interreto.</string>
   <string name="send_log_file">Sendez arkivo \'\'log\'\'</string>
   <string name="nominate_deletion">Propozar efaco</string>
+  <string name="nominated_for_deletion">Ca imajo indikesis por efaco.</string>
   <string name="nominated_see_more">Videz retpagino por detali</string>
   <string name="skip_login">Saltar</string>
   <string name="copy_wikicode">Kopiez Wiki-texto a \'clipboard\'</string>

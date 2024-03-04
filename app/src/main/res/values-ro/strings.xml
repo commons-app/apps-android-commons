@@ -7,6 +7,7 @@
 * MSClaudiu
 * Minisarm
 * Popetedenis
+* Rapiteanu
 * Strainu
 * WebSourceContentRO
 -->
@@ -313,6 +314,7 @@
   <string name="search_tab_title_depictions">Elemente</string>
   <string name="explore_tab_title_featured">Recomandate</string>
   <string name="explore_tab_title_mobile">Încărcat de pe telefon</string>
+  <string name="explore_tab_title_map">Hartă</string>
   <string name="successful_wikidata_edit">Imaginea adăugată la %1$s pe Wikidata!</string>
   <string name="wikidata_edit_failure">Nu s-a actualizat entitatea corespunzătoare Wikidata!</string>
   <string name="menu_set_wallpaper">Setează ca Imagine de fundal</string>
@@ -583,4 +585,6 @@
   <string name="leaderboard_nearby">În apropiere</string>
   <string name="leaderboard_used">Utilizat</string>
   <string name="leaderboard_my_rank_button_text">Rank-ul meu</string>
+  <string name="read_help_link">Citiți mai multe</string>
+  <string name="modify_location">Modifică locația</string>
 </resources>
