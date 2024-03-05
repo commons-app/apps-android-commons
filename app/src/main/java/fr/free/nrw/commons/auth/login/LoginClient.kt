@@ -12,7 +12,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import timber.log.Timber
 import java.io.IOException
-import java.util.Locale
 
 /**
  * Responsible for making login related requests to the server.
@@ -110,8 +109,8 @@ class LoginClient(private val loginInterface: LoginInterface) {
     fun doLogin(
         username: String,
         password: String,
-        twoFactorCode: String? = null,
-        userLanguage: String = Locale.getDefault().language,
+        twoFactorCode: String,
+        userLanguage: String,
         loginCallback: LoginCallback
     ) {
         getLoginToken().enqueue(object :Callback<MwQueryResponse?>{
