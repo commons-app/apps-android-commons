@@ -387,12 +387,7 @@ class ImageAdapter(
             sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
 
         if(showAlreadyActionedImages) {
-            val index = ImageHelper.getIndex(images, image)
-            if(index != -1) {
-                images.removeAt(index)
-                notifyItemRemoved(index)
-                notifyItemRangeChanged(index, itemCount - 1)
-            }
+            refresh(allImages, allImages)
         } else {
             val iterator = actionableImagesMap.entries.iterator()
             var index = 0
