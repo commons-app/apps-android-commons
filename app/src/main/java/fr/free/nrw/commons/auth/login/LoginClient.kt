@@ -117,17 +117,15 @@ class LoginClient(private val loginInterface: LoginInterface) {
             override fun onResponse(
                 call: Call<MwQueryResponse?>,
                 response: Response<MwQueryResponse?>
-            ) {
-                if (response.isSuccessful){
-                    val loginToken = response.body()?.query()?.loginToken()
-                    loginToken?.let {
-                        login(username, password, null, twoFactorCode, it, userLanguage, loginCallback)
-                    } ?: run {
-                        loginCallback.error(IOException("Failed to retrieve login token"))
-                    }
-                } else {
-                        loginCallback.error(IOException("Failed to retrieve login token"))
+            ) = if (response.isSuccessful){
+                val loginToken = response.body()?.query()?.loginToken()
+                loginToken?.let {
+                    login(username, password, null, twoFactorCode, it, userLanguage, loginCallback)
+                } ?: run {
+                    loginCallback.error(IOException("Failed to retrieve login token"))
                 }
+            } else {
+                loginCallback.error(IOException("Failed to retrieve login token"))
             }
 
             override fun onFailure(call: Call<MwQueryResponse?>, t: Throwable) {
