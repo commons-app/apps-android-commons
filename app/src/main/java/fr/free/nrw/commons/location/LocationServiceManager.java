@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.location;
 
-import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
-
 import android.Manifest.permission;
 import android.app.Activity;
 import android.content.Context;
@@ -30,6 +28,7 @@ public class LocationServiceManager implements LocationListener {
     private final List<LocationUpdateListener> locationListeners = new CopyOnWriteArrayList<>();
     private boolean isLocationManagerRegistered = false;
     private Set<Activity> locationExplanationDisplayed = new HashSet<>();
+    private Context context;
 
     /**
      * Constructs a new instance of LocationServiceManager.
@@ -37,6 +36,7 @@ public class LocationServiceManager implements LocationListener {
      * @param context the context
      */
     public LocationServiceManager(Context context) {
+        this.context = context;
         this.locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
     }
 
@@ -58,9 +58,9 @@ public class LocationServiceManager implements LocationListener {
         Location bestLocation = null;
         for (String provider : providers) {
             Location l=null;
-            if (ActivityCompat.checkSelfPermission(getApplicationContext(), permission.ACCESS_FINE_LOCATION)
+            if (ActivityCompat.checkSelfPermission(context, permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(getApplicationContext(), permission.ACCESS_COARSE_LOCATION)
+                && ActivityCompat.checkSelfPermission(context, permission.ACCESS_COARSE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
                 l = locationManager.getLastKnownLocation(provider);
             }

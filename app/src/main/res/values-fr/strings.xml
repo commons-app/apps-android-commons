@@ -380,6 +380,7 @@
   <string name="share_app_title">Partager l’application</string>
   <string name="rotate">Pivoter</string>
   <string name="error_fetching_nearby_places">Erreur durant la recherche d’endroits proches.</string>
+  <string name="no_pictures_in_this_area">Aucune image dans cette zone</string>
   <string name="no_nearby_places_around">Aucun lieu à proximité</string>
   <string name="error_fetching_nearby_monuments">Erreur de récupération des monuments à proximité.</string>
   <string name="no_recent_searches">Aucune recherche récente</string>

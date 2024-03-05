@@ -355,6 +355,7 @@
   <string name="rotate">Rotate</string>
 
   <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
+  <string name="no_pictures_in_this_area">No pictures in this area</string>
   <string name="no_nearby_places_around">No nearby places around</string>
   <string name="error_fetching_nearby_monuments">Error fetching nearby monuments.</string>
   <string name="no_recent_searches">No recent searches</string>
