@@ -30,9 +30,9 @@ import fr.free.nrw.commons.auth.login.LoginResult;
 import fr.free.nrw.commons.databinding.ActivityLoginBinding;
 import fr.free.nrw.commons.utils.ActivityUtils;
 import java.util.Locale;
-import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse;
 import fr.free.nrw.commons.auth.login.LoginCallback;
 
+import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -46,9 +46,6 @@ import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.disposables.CompositeDisposable;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import timber.log.Timber;
 
 import static android.view.KeyEvent.KEYCODE_ENTER;
@@ -75,7 +72,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     private AppCompatDelegate delegate;
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private Call<MwQueryResponse> loginToken;
     final  String saveProgressDailog="ProgressDailog_state";
     final String saveErrorMessage ="errorMessage";
     final String saveUsername="username";
@@ -116,7 +112,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             binding.loginCredentials.setVisibility(View.GONE);
         }
     }
-    /** 
+    /**
      * Hides the keyboard if the user's focus is not on the password (hasFocus is false).
      * @param view The keyboard
      * @param hasFocus Set to true if the keyboard has focus
@@ -212,63 +208,52 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     public void performLogin() {
         Timber.d("Login to start!");
-        final String username = binding.loginUsername.getText().toString();
-        final String rawUsername = binding.loginUsername.getText().toString().trim();
-        final String password = binding.loginPassword.getText().toString();
-        String twoFactorCode = binding.loginTwoFactor.getText().toString();
+        final String username = Objects.requireNonNull(binding.loginUsername.getText()).toString();
+        final String password = Objects.requireNonNull(binding.loginPassword.getText()).toString();
+        final String twoFactorCode = Objects.requireNonNull(binding.loginTwoFactor.getText()).toString();
 
         showLoggingProgressBar();
-        doLogin(username, password, twoFactorCode);
+        loginClient.doLogin(username, password, twoFactorCode, Locale.getDefault().getLanguage(),
+            new LoginCallback() {
+                @Override
+                public void success(@NonNull LoginResult loginResult) {
+                    runOnUiThread(()->{
+                        Timber.d("Login Success");
+                        hideProgress();
+                        onLoginSuccess(loginResult);
+                    });
+                }
+
+                @Override
+                public void twoFactorPrompt(@NonNull Throwable caught, @Nullable String token) {
+                    runOnUiThread(()->{
+                        Timber.d("Requesting 2FA prompt");
+                        hideProgress();
+                        askUserForTwoFactorAuth();
+                    });
+                }
+
+                @Override
+                public void passwordResetPrompt(@Nullable String token) {
+                    runOnUiThread(()->{
+                        Timber.d("Showing password reset prompt");
+                        hideProgress();
+                        showPasswordResetPrompt();
+                    });
+                }
+
+                @Override
+                public void error(@NonNull Throwable caught) {
+                    runOnUiThread(()->{
+                        Timber.e(caught);
+                        hideProgress();
+                        showMessageAndCancelDialog(caught.getLocalizedMessage());
+                    });
+                }
+            });
     }
 
-    private void doLogin(String username, String password, String twoFactorCode) {
-        progressDialog.show();
-        loginToken = loginClient.getLoginToken();
-        loginToken.enqueue(
-                new Callback<MwQueryResponse>() {
-                    @Override
-                    public void onResponse(Call<MwQueryResponse> call,
-                                           Response<MwQueryResponse> response) {
-                        loginClient.login(username, password, null, twoFactorCode,
-                                response.body().query().loginToken(), Locale.getDefault().getLanguage(), new LoginCallback() {
-                                    @Override
-                                    public void success(@NonNull LoginResult result) {
-                                        Timber.d("Login Success");
-                                        onLoginSuccess(result);
-                                    }
 
-                                    @Override
-                                    public void twoFactorPrompt(@NonNull Throwable caught,
-                                                                @Nullable String token) {
-                                        Timber.d("Requesting 2FA prompt");
-                                        hideProgress();
-                                        askUserForTwoFactorAuth();
-                                    }
-
-                                    @Override
-                                    public void passwordResetPrompt(@Nullable String token) {
-                                        Timber.d("Showing password reset prompt");
-                                        hideProgress();
-                                        showPasswordResetPrompt();
-                                    }
-
-                                    @Override
-                                    public void error(@NonNull Throwable caught) {
-                                        Timber.e(caught);
-                                        hideProgress();
-                                        showMessageAndCancelDialog(caught.getLocalizedMessage());
-                                    }
-                                });
-                    }
-
-                    @Override
-                    public void onFailure(Call<MwQueryResponse> call, Throwable t) {
-                        Timber.e(t);
-                        showMessageAndCancelDialog(t.getLocalizedMessage());
-                    }
-                });
-
-    }
 
     private void hideProgress() {
         progressDialog.dismiss();
@@ -299,10 +284,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     private void onLoginSuccess(LoginResult loginResult) {
-        if (!progressDialog.isShowing()) {
-            // no longer attached to activity!
-            return;
-        }
         compositeDisposable.clear();
         sessionManager.setUserLoggedIn(true);
         sessionManager.updateAccount(loginResult);
