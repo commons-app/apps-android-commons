@@ -65,9 +65,11 @@ public class ContributionController {
                 if (defaultKvStore.getBoolean("inAppCameraFirstRun")) {
                     defaultKvStore.putBoolean("inAppCameraFirstRun", false);
                     askUserToAllowLocationAccess(activity, inAppCameraLocationPermissionLauncher);
-                } else {
+                } else if (defaultKvStore.getBoolean("inAppCameraLocationPref")) {
                     createDialogsAndHandleLocationPermissions(activity,
                         inAppCameraLocationPermissionLauncher);
+                } else {
+                    initiateCameraUpload(activity);
                 }
             },
             R.string.storage_permission_title,
