@@ -115,6 +115,16 @@ public class ContributionController {
 
     }
 
+    /**
+     * Shows a dialog alerting the user about location services being off
+     * and asking them to turn it on
+     * TODO: Add a seperate callback in LocationPermissionsHelper for this.
+     *      Ref: https://github.com/commons-app/apps-android-commons/pull/5494/files#r1510553114
+     *
+     * @param activity Activity reference
+     * @param dialogTextResource Resource id of text to be shown in dialog
+     * @param toastTextResource Resource id of text to be shown in toast
+     */
     private void showLocationOffDialog(Activity activity, int dialogTextResource,
         int toastTextResource) {
         DialogUtil
