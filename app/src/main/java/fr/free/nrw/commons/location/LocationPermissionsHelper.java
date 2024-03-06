@@ -136,7 +136,7 @@ public class LocationPermissionsHelper {
     /**
      * Check if apps have access to location even after having individual access
      *
-     * @return Returns true ir false depending on if location services are on or not
+     * @return Returns true if location services are on and false otherwise
      */
     public boolean isLocationAccessToAppsTurnedOn() {
         return (locationManager.isNetworkProviderEnabled()
@@ -147,7 +147,7 @@ public class LocationPermissionsHelper {
      * Checks if location permission is already granted or not
      *
      * @param activity Activity object
-     * @return Returns true or false depending on whether location permission is granted or not
+     * @return Returns true if location permission is granted and false otherwise
      */
     public boolean checkLocationPermission(Activity activity) {
         return PermissionUtils.hasPermission(activity,
