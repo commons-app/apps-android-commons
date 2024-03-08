@@ -4,13 +4,14 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.notNull
 import fr.free.nrw.commons.Media
-import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
 import fr.free.nrw.commons.wikidata.model.gallery.ExtMetadata
 import fr.free.nrw.commons.wikidata.model.gallery.ImageInfo
@@ -50,7 +51,7 @@ class MediaConverterTest {
         Mockito.`when`(imageInfo.metadata?.licenseUrl()).thenReturn("licenseUrl")
         Mockito.`when`(imageInfo.metadata?.dateTime()).thenReturn("yyyy-MM-dd HH:mm:ss")
         media = mediaConverter.convert(page, entity, imageInfo)
-        assertEquals(media.thumbUrl, media.imageUrl, "originalUrl")
+        assertThat(media.thumbUrl, media.imageUrl, equalTo( "originalUrl"))
     }
 
     @Test
@@ -61,6 +62,6 @@ class MediaConverterTest {
         Mockito.`when`(imageInfo.metadata?.licenseUrl()).thenReturn("licenseUrl")
         Mockito.`when`(imageInfo.metadata?.dateTime()).thenReturn("yyyy-MM-dd HH:mm:ss")
         media = mediaConverter.convert(page, entity, imageInfo)
-        assertEquals(media.thumbUrl, "thumbUrl")
+        assertThat(media.thumbUrl, equalTo( "thumbUrl"))
     }
 }

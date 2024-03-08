@@ -1,8 +1,6 @@
 package fr.free.nrw.commons.mwapi
 
 import io.reactivex.Observable
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.mockito.*
@@ -10,6 +8,8 @@ import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResult
 import fr.free.nrw.commons.wikidata.mwapi.UserInfo
 import fr.free.nrw.commons.utils.DateUtil
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.`is`
 import java.util.*
 
 class UserClientTest{
@@ -37,7 +37,7 @@ class UserClientTest{
                 .thenReturn(Observable.just(mockResponse))
 
         val isBanned = userClient!!.isUserBlockedFromCommons().blockingGet()
-        assertTrue(isBanned)
+        assertThat(isBanned, `is`(true))
     }
 
     @Test
@@ -55,7 +55,7 @@ class UserClientTest{
                 .thenReturn(Observable.just(mockResponse))
 
         val isBanned = userClient!!.isUserBlockedFromCommons().blockingGet()
-        assertTrue(isBanned)
+        assertThat(isBanned, `is`(true))
     }
 
     @Test
@@ -70,7 +70,7 @@ class UserClientTest{
                 .thenReturn(Observable.just(mockResponse))
 
         val isBanned = userClient!!.isUserBlockedFromCommons().blockingGet()
-        assertFalse(isBanned)
+        assertThat(isBanned, `is`(false))
     }
 
 }

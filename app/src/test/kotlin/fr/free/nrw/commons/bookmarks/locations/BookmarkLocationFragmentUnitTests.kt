@@ -22,7 +22,6 @@ import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.fragments.CommonPlaceClickActions
 import fr.free.nrw.commons.nearby.fragments.PlaceAdapter
 import fr.free.nrw.commons.profile.ProfileActivity
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -33,6 +32,8 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -153,7 +154,7 @@ class BookmarkLocationFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun checkFragmentNotNull() {
-        Assert.assertNotNull(fragment)
+        assertThat(fragment, notNullValue())
     }
 
     /**

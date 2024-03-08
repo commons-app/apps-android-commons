@@ -34,7 +34,6 @@ import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadItem
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -51,6 +50,9 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowIntent
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -161,7 +163,7 @@ class UploadMediaDetailFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun checkFragmentNotNull() {
-        Assert.assertNotNull(fragment)
+        assertThat(fragment, notNullValue())
     }
 
     @Test
@@ -477,7 +479,7 @@ class UploadMediaDetailFragmentUnitTest {
         val shadowActivity: ShadowActivity = shadowOf(activity)
         val startedIntent = shadowActivity.nextStartedActivity
         val shadowIntent: ShadowIntent = shadowOf(startedIntent)
-        Assert.assertEquals(shadowIntent.intentClass, LocationPickerActivity::class.java)
+        assertThat(shadowIntent.intentClass, equalTo( LocationPickerActivity::class.java))
     }
 
     @Test
@@ -494,7 +496,7 @@ class UploadMediaDetailFragmentUnitTest {
         val shadowActivity: ShadowActivity = shadowOf(activity)
         val startedIntent = shadowActivity.nextStartedActivity
         val shadowIntent: ShadowIntent = shadowOf(startedIntent)
-        Assert.assertEquals(shadowIntent.intentClass, LocationPickerActivity::class.java)
+        assertThat(shadowIntent.intentClass, equalTo( LocationPickerActivity::class.java))
     }
 
 }

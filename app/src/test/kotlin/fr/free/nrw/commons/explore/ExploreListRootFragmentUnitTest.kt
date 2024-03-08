@@ -18,7 +18,6 @@ import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -33,6 +32,9 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.lang.reflect.Field
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -110,7 +112,7 @@ class ExploreListRootFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun checkFragmentNotNull() {
-        Assert.assertNotNull(fragment)
+        assertThat(fragment, notNullValue())
     }
 
     @Test
@@ -192,7 +194,7 @@ class ExploreListRootFragmentUnitTest {
     @Throws(Exception::class)
     fun testGetMediaAtPosition() {
         `when`(listFragment.getMediaAtPosition(0)).thenReturn(media)
-        Assert.assertEquals(fragment.getMediaAtPosition(0), media)
+        assertThat(fragment.getMediaAtPosition(0), equalTo( media))
     }
 
     @Test
@@ -201,14 +203,14 @@ class ExploreListRootFragmentUnitTest {
         val field: Field = ExploreListRootFragment::class.java.getDeclaredField("listFragment")
         field.isAccessible = true
         field.set(fragment, null)
-        Assert.assertEquals(fragment.getMediaAtPosition(0), null)
+        assertThat(fragment.getMediaAtPosition(0), equalTo( null))
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetTotalMediaCount() {
         `when`(listFragment.totalMediaCount).thenReturn(1)
-        Assert.assertEquals(fragment.totalMediaCount, 1)
+        assertThat(fragment.totalMediaCount, equalTo( 1))
     }
 
     @Test
@@ -217,13 +219,13 @@ class ExploreListRootFragmentUnitTest {
         val field: Field = ExploreListRootFragment::class.java.getDeclaredField("listFragment")
         field.isAccessible = true
         field.set(fragment, null)
-        Assert.assertEquals(fragment.totalMediaCount, 0)
+        assertThat(fragment.totalMediaCount, equalTo( 0))
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetContributionStateAt() {
-        Assert.assertEquals(fragment.getContributionStateAt(0), null)
+        assertThat(fragment.getContributionStateAt(0), equalTo( null))
     }
 
     @Test
@@ -252,20 +254,20 @@ class ExploreListRootFragmentUnitTest {
     @Throws(Exception::class)
     fun `testBackPressed_Case null != mediaDetails && mediaDetails_isVisible_backButtonClicked`() {
         `when`(mediaDetails.isVisible).thenReturn(true)
-        Assert.assertEquals(fragment.backPressed(), true)
+        assertThat(fragment.backPressed(), equalTo( true))
     }
 
     @Test
     @Throws(Exception::class)
     fun `testBackPressed_Case null != mediaDetails && mediaDetails_isVisible_backButtonNotClicked`() {
         `when`(mediaDetails.isVisible).thenReturn(true)
-        Assert.assertEquals(fragment.backPressed(), true)
+        assertThat(fragment.backPressed(), equalTo( true))
     }
 
     @Test
     @Throws(Exception::class)
     fun `testBackPressed_Case null != mediaDetails && mediaDetails_isNotVisible`() {
-        Assert.assertEquals(fragment.backPressed(), false)
+        assertThat(fragment.backPressed(), equalTo( false))
     }
 
 }

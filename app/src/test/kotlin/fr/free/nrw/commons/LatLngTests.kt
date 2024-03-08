@@ -1,8 +1,9 @@
 package fr.free.nrw.commons
 
 import fr.free.nrw.commons.location.LatLng
-import org.junit.Assert.assertEquals
 import org.junit.Test
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 
 class LatLngTests {
     @Test
@@ -60,5 +61,5 @@ class LatLngTests {
     }
 
     private fun assertPrettyCoordinateString(expected: String, place: LatLng) =
-            assertEquals(expected, place.prettyCoordinateString)
+            assertThat(expected, equalTo( place.prettyCoordinateString))
 }

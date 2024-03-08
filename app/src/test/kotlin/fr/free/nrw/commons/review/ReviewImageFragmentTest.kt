@@ -18,10 +18,8 @@ import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.mock
@@ -32,6 +30,9 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -94,10 +95,10 @@ class ReviewImageFragmentTest {
     @Throws(Exception::class)
     fun testOnDisableButton() {
         fragment.disableButtons()
-        assertEquals(yesButton.isEnabled, false)
-        assertEquals(yesButton.alpha, 0.5f)
-        assertEquals(noButton.isEnabled, false)
-        assertEquals(noButton.alpha, 0.5f)
+        assertThat(yesButton.isEnabled, equalTo( false))
+        assertThat(yesButton.alpha, equalTo( 0.5f))
+        assertThat(noButton.isEnabled, equalTo( false))
+        assertThat(noButton.alpha, equalTo( 0.5f))
     }
 
 
@@ -105,10 +106,10 @@ class ReviewImageFragmentTest {
     @Throws(Exception::class)
     fun testOnEnableButton() {
         fragment.enableButtons()
-        assertEquals(yesButton.isEnabled, true)
-        assertEquals(yesButton.alpha, 1f)
-        assertEquals(noButton.isEnabled, true)
-        assertEquals(noButton.alpha, 1f)
+        assertThat(yesButton.isEnabled, equalTo( true))
+        assertThat(yesButton.alpha, equalTo( 1f))
+        assertThat(noButton.isEnabled, equalTo( true))
+        assertThat(noButton.alpha, equalTo( 1f))
     }
 
 
@@ -118,11 +119,11 @@ class ReviewImageFragmentTest {
         shadowOf(Looper.getMainLooper()).idle()
         val media = mock(Media::class.java)
         Whitebox.setInternalState(activity, "media", media)
-        Assert.assertNotNull(media)
+        assertThat(media, notNullValue())
         val categories = mapOf<String, Boolean>("Category:" to false)
         doReturn(categories).`when`(media).categoriesHiddenStatus
-        Assert.assertNotNull(media.categoriesHiddenStatus)
-        Assert.assertNotNull(fragment.isAdded)
+        assertThat(media.categoriesHiddenStatus, notNullValue())
+        assertThat(fragment.isAdded, notNullValue())
         val method: Method =
             ReviewImageFragment::class.java.getDeclaredMethod("updateCategoriesQuestion")
         method.isAccessible = true
@@ -157,6 +158,6 @@ class ReviewImageFragmentTest {
             ReviewImageFragment::class.java.getDeclaredMethod("getReviewActivity")
         method.isAccessible = true
         shadowOf(Looper.getMainLooper()).idle()
-        Assert.assertNotNull(method.invoke(fragment))
+        assertThat(method.invoke(fragment), notNullValue())
     }
 }

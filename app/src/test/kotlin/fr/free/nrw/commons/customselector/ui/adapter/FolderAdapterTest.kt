@@ -17,7 +17,6 @@ import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity
 import org.junit.Before
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
@@ -26,8 +25,11 @@ import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 import java.lang.reflect.Field
 import java.lang.reflect.Modifier
+
 
 /**
  * Custom Selector Folder Adapter Test.
@@ -96,6 +98,6 @@ class FolderAdapterTest {
      */
     @Test
     fun getItemCount() {
-        assertEquals(0, folderAdapter.itemCount)
+        assertThat(0, equalTo( folderAdapter.itemCount))
     }
 }

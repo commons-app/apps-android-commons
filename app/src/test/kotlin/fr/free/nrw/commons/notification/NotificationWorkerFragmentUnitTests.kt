@@ -1,8 +1,9 @@
 package fr.free.nrw.commons.notification
 
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
 
 class NotificationWorkerFragmentUnitTests {
 
@@ -16,7 +17,7 @@ class NotificationWorkerFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun checkFragmentNotNull() {
-        Assert.assertNotNull(fragment)
+        assertThat(fragment, notNullValue())
     }
 
     @Test

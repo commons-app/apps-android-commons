@@ -13,7 +13,6 @@ import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
 import io.reactivex.Single
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -29,6 +28,8 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -86,7 +87,7 @@ class ReviewActivityTest {
     @Test
     @Throws(Exception::class)
     fun checkActivityNotNull() {
-        Assert.assertNotNull(activity)
+        assertThat(activity, notNullValue())
     }
 
     @Test
@@ -112,7 +113,7 @@ class ReviewActivityTest {
 
         doReturn(mapOf<String, Boolean>("test" to false)).`when`(media).categoriesHiddenStatus
         doReturn(Single.just(media)).`when`(reviewHelper)?.getRandomMedia()
-        Assert.assertNotNull(reviewHelper?.getRandomMedia())
+        assertThat(reviewHelper?.getRandomMedia(), notNullValue())
         reviewHelper
             ?.getRandomMedia()
             ?.test()

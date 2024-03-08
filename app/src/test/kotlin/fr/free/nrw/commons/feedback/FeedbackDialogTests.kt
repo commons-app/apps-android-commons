@@ -12,7 +12,6 @@ import fr.free.nrw.commons.TestUtility.setFinalStatic
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.databinding.DialogFeedbackBinding
 import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -26,6 +25,8 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -85,7 +86,7 @@ class FeedbackDialogTests {
         `when`(ed?.text).thenReturn(editable)
         `when`(editable.toString()).thenReturn("1234")
 
-        Assert.assertEquals(ed.text.toString(), "1234")
+        assertThat(ed.text.toString(), equalTo( "1234"))
         dialog.submitFeedback()
     }
 

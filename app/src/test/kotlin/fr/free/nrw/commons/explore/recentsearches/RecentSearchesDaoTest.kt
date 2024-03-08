@@ -12,13 +12,17 @@ import fr.free.nrw.commons.explore.models.RecentSearch
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.BASE_URI
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesContentProvider.uriForId
 import fr.free.nrw.commons.explore.recentsearches.RecentSearchesDao.Table.*
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.verifyNoInteractions
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
+import org.hamcrest.CoreMatchers.nullValue
+import org.junit.Assert.assertEquals
 import java.util.*
 
 @RunWith(RobolectricTestRunner::class)
@@ -155,9 +159,9 @@ class RecentSearchesDaoTest {
 
             verify(client).update(eq(recentSearch.contentUri!!), captor.capture(), isNull(), isNull())
             captor.firstValue.let { cv ->
-                assertEquals(2, cv.size())
-                assertEquals(recentSearch.query, cv.getAsString(COLUMN_NAME))
-                assertEquals(recentSearch.lastSearched.time, cv.getAsLong(COLUMN_LAST_USED))
+                assertThat(2, equalTo( cv.size()))
+                assertThat(recentSearch.query, equalTo( cv.getAsString(COLUMN_NAME)))
+                assertThat(recentSearch.lastSearched.time, equalTo( cv.getAsLong(COLUMN_LAST_USED)))
             }
         }
     }
@@ -175,10 +179,10 @@ class RecentSearchesDaoTest {
 
         verify(client).insert(eq(BASE_URI), captor.capture())
         captor.firstValue.let { cv ->
-            assertEquals(2, cv.size())
-            assertEquals(recentSearch.query, cv.getAsString(COLUMN_NAME))
-            assertEquals(recentSearch.lastSearched.time, cv.getAsLong(COLUMN_LAST_USED))
-            assertEquals(contentUri, recentSearch.contentUri)
+            assertThat(2, equalTo( cv.size()))
+            assertThat(recentSearch.query, equalTo( cv.getAsString(COLUMN_NAME)))
+            assertThat(recentSearch.lastSearched.time, equalTo( cv.getAsLong(COLUMN_LAST_USED)))
+            assertThat(contentUri, equalTo( recentSearch.contentUri))
         }
     }
 
@@ -197,7 +201,7 @@ class RecentSearchesDaoTest {
     @Test
     fun whenTheresNoDataFindReturnsNull_nullCursor() {
         whenever(client.query(any(), any(), any(), any(), any())).thenReturn(null)
-        assertNull(testObject.find("butterfly"))
+        assertThat(testObject.find("butterfly"), nullValue())
     }
 
     /**
@@ -206,7 +210,7 @@ class RecentSearchesDaoTest {
     @Test
     fun whenTheresNoDataFindReturnsNull_emptyCursor() {
         whenever(client.query(any(), any(), any(), any(), any())).thenReturn(createCursor(0))
-        assertNull(testObject.find("butterfly"))
+        assertThat(testObject.find("butterfly"), nullValue())
     }
 
     /**
@@ -231,11 +235,11 @@ class RecentSearchesDaoTest {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(1))
 
         val recentSearch = testObject.find("butterfly")
-        assertNotNull(recentSearch)
+        assertThat(recentSearch, notNullValue())
 
-        assertEquals(uriForId(1), recentSearch?.contentUri)
-        assertEquals("butterfly", recentSearch?.query)
-        assertEquals(123L, recentSearch?.lastSearched?.time)
+        assertThat(uriForId(1), equalTo( recentSearch?.contentUri))
+        assertThat("butterfly", equalTo( recentSearch?.query))
+        assertThat(123L, equalTo( recentSearch?.lastSearched?.time))
 
         verify(client).query(
                 eq(BASE_URI),
@@ -244,7 +248,7 @@ class RecentSearchesDaoTest {
                 queryCaptor.capture(),
                 isNull()
         )
-        assertEquals("butterfly", queryCaptor.firstValue[0])
+        assertThat("butterfly", equalTo( queryCaptor.firstValue[0]))
     }
 
     /**
@@ -270,8 +274,8 @@ class RecentSearchesDaoTest {
 
         val result = testObject.recentSearches(10)
 
-        assertEquals(1, result.size)
-        assertEquals("butterfly", result[0])
+        assertThat(1, equalTo( result.size))
+        assertThat("butterfly", equalTo( result[0]))
 
         verify(client).query(
                 eq(BASE_URI),
@@ -280,7 +284,7 @@ class RecentSearchesDaoTest {
                 queryCaptor.capture(),
                 eq("$COLUMN_LAST_USED DESC")
         )
-        assertEquals(0, queryCaptor.firstValue.size)
+        assertThat(0, equalTo( queryCaptor.firstValue.size))
     }
 
     /**
@@ -292,7 +296,7 @@ class RecentSearchesDaoTest {
 
         val result = testObject.recentSearches(5)
 
-        assertEquals(5, result.size)
+        assertThat(5, equalTo( result.size))
     }
 
     /**

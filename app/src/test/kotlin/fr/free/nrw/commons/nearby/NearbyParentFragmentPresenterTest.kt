@@ -7,8 +7,6 @@ import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
@@ -21,6 +19,8 @@ import org.mockito.Mockito.anyDouble
 import org.mockito.Mockito.anyFloat
 import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.`is`
 import java.util.*
 
 /**
@@ -76,7 +76,7 @@ class NearbyParentFragmentPresenterTest {
         nearbyPresenter.updateMapAndList(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)
         verify(nearbyParentFragmentView).disableFABRecenter();
         verify(nearbyParentFragmentView).`setProgressBarVisibility`(true)
-        assertTrue(null == nearbyParentFragmentView.mapCenter)
+        assertThat(null == nearbyParentFragmentView.mapCenter, `is`(true))
         verify(nearbyParentFragmentView).populatePlaces(null)
         verify(nearbyParentFragmentView).addSearchThisAreaButtonAction()
         verify(nearbyParentFragmentView).setCheckBoxAction()
@@ -352,7 +352,7 @@ class NearbyParentFragmentPresenterTest {
     fun testSearchCloseToCurrentLocationNullLastLocation() {
         whenever(nearbyParentFragmentView.getLastFocusLocation()).thenReturn(null)
         val isClose = nearbyPresenter?.searchCloseToCurrentLocation()
-        assertTrue(isClose!!)
+        assertThat(isClose!!, `is`(true))
     }
 
     /**
@@ -372,7 +372,7 @@ class NearbyParentFragmentPresenterTest {
         //111.19 km real distance, return false if 148306.444306 >  currentLocationSearchRadius
         NearbyController.currentLocationSearchRadius = 148306.0
         val isClose = nearbyPresenter?.searchCloseToCurrentLocation()
-        assertFalse(isClose!!.equals(false))
+        assertThat(isClose!!.equals(false), `is`(false))
     }
 
     /**
@@ -391,7 +391,7 @@ class NearbyParentFragmentPresenterTest {
         //111.19 km real distance, return false if 148253.333 >  currentLocationSearchRadius
         NearbyController.currentLocationSearchRadius = 148307.0
         val isClose = nearbyPresenter?.searchCloseToCurrentLocation()
-        assertTrue(isClose!!)
+        assertThat(isClose!!, `is`(true))
     }
 
     fun expectMapAndListUpdate() {
@@ -427,7 +427,7 @@ class NearbyParentFragmentPresenterTest {
         whenever(nearbyParentFragmentView.isListBottomSheetExpanded()).thenReturn(false)
         whenever(nearbyParentFragmentView.isDetailsBottomSheetVisible()).thenReturn(false)
         val hasNearbyHandledBackPress = nearbyPresenter.backButtonClicked()
-        assertFalse(hasNearbyHandledBackPress)
+        assertThat(hasNearbyHandledBackPress, `is`(false))
     }
 
     @Test
@@ -435,7 +435,7 @@ class NearbyParentFragmentPresenterTest {
         whenever(nearbyParentFragmentView.isAdvancedQueryFragmentVisible()).thenReturn(true)
         val hasNearbyHandledBackPress = nearbyPresenter.backButtonClicked()
         verify(nearbyParentFragmentView).showHideAdvancedQueryFragment(false)
-        assertTrue(hasNearbyHandledBackPress)
+        assertThat(hasNearbyHandledBackPress, `is`(true))
     }
 
     @Test

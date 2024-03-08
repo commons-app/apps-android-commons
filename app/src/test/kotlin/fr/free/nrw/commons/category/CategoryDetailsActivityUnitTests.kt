@@ -20,6 +20,9 @@ import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
 import java.lang.reflect.Field
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
+
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -60,7 +63,7 @@ class CategoryDetailsActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun checkActivityNotNull() {
-        Assert.assertNotNull(activity)
+        assertThat(activity, notNullValue())
     }
 
     @Test

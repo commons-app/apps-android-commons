@@ -36,7 +36,6 @@ import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.location.LocationServiceManager
 import fr.free.nrw.commons.ui.widget.HtmlTextView
 import io.reactivex.Single
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -51,6 +50,9 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowIntent
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 import java.util.*
@@ -228,7 +230,7 @@ class MediaDetailFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun checkFragmentNotNull() {
-        Assert.assertNotNull(fragment)
+        assertThat(fragment, notNullValue())
     }
 
     @Test
@@ -282,7 +284,7 @@ class MediaDetailFragmentUnitTests {
         val shadowActivity: ShadowActivity = shadowOf(activity)
         val startedIntent = shadowActivity.nextStartedActivity
         val shadowIntent: ShadowIntent = shadowOf(startedIntent)
-        Assert.assertEquals(shadowIntent.intentClass, LocationPickerActivity::class.java)
+        assertThat(shadowIntent.intentClass, equalTo( LocationPickerActivity::class.java))
     }
 
     @Test
@@ -295,7 +297,7 @@ class MediaDetailFragmentUnitTests {
         val shadowActivity: ShadowActivity = shadowOf(activity)
         val startedIntent = shadowActivity.nextStartedActivity
         val shadowIntent: ShadowIntent = shadowOf(startedIntent)
-        Assert.assertEquals(shadowIntent.intentClass, LocationPickerActivity::class.java)
+        assertThat(shadowIntent.intentClass, equalTo( LocationPickerActivity::class.java))
     }
 
     @Test
@@ -310,7 +312,7 @@ class MediaDetailFragmentUnitTests {
         val shadowActivity: ShadowActivity = shadowOf(activity)
         val startedIntent = shadowActivity.nextStartedActivity
         val shadowIntent: ShadowIntent = shadowOf(startedIntent)
-        Assert.assertEquals(shadowIntent.intentClass, LocationPickerActivity::class.java)
+        assertThat(shadowIntent.intentClass, equalTo( LocationPickerActivity::class.java))
     }
 
     @Test
@@ -385,7 +387,7 @@ class MediaDetailFragmentUnitTests {
                 "{{Location|27.043186|88.267003}}\n" +
                 "{{Assessments|featured=1}}\n"
         val map = linkedMapOf("en" to "Antique cash register in a cafe, Darjeeling")
-        Assert.assertEquals(map, method.invoke(fragment, s))
+        assertThat(map, equalTo(method.invoke(fragment, s)))
     }
 
     @Test
@@ -408,7 +410,7 @@ class MediaDetailFragmentUnitTests {
                 "{{Location|51.519003|-0.138353}}\n" +
                 "{{Assessments|featured=1}}"
         val map = linkedMapOf("en" to "[[:en:Fitzrovia Chapel|Fitzrovia Chapel]] ceiling<br/>\n{{On Wikidata|Q17549757}}")
-        Assert.assertEquals(map, method.invoke(fragment, s))
+        assertThat(map, equalTo(method.invoke(fragment, s)))
     }
 
     @Test
@@ -431,7 +433,7 @@ class MediaDetailFragmentUnitTests {
                 "{{Location|51.519003|-0.138353}}\n" +
                 "{{Assessments|featured=1}}\n"
         val map = linkedMapOf("en" to "[[:en:Fitzrovia Chapel|Fitzrovia Chapel]] ceiling<br/>\n")
-        Assert.assertEquals(map, method.invoke(fragment, s))
+        assertThat(map, equalTo(method.invoke(fragment, s)))
     }
 
     @Test
@@ -470,7 +472,7 @@ class MediaDetailFragmentUnitTests {
                 "}}"
         val map = linkedMapOf("en" to "''Ricchi giardini nel Palazzo di Monforte a Palermo'', set design for ''I Vespri siciliani'' act 5 (undated).",
         "it" to "''Ricchi giardini nel Palazzo di Monforte a Palermo'', bozzetto per ''I Vespri siciliani'' atto 5 (s.d.).")
-        Assert.assertEquals(map, method.invoke(fragment, s))
+        assertThat(map, equalTo(method.invoke(fragment, s)))
     }
 
     @Test
@@ -489,7 +491,7 @@ class MediaDetailFragmentUnitTests {
                 "|other_versions=\n" +
                 "}}\n"
         val map = linkedMapOf("en" to "The interior of Sacred Heart RC Church, Wimbledon, London.")
-        Assert.assertEquals(map, method.invoke(fragment, s))
+        assertThat(map, equalTo(method.invoke(fragment, s)))
     }
 
     @Test
@@ -543,13 +545,13 @@ class MediaDetailFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testUpdateCategoryDisplayCaseNull() {
-        Assert.assertEquals(fragment.updateCategoryDisplay(null), false)
+        assertThat(fragment.updateCategoryDisplay(null), equalTo( false))
     }
 
     @Test
     @Throws(Exception::class)
     fun testUpdateCategoryDisplayCaseNonNull() {
-        Assert.assertEquals(fragment.updateCategoryDisplay(listOf()), true)
+        assertThat(fragment.updateCategoryDisplay(listOf()), equalTo( true))
     }
 
     @Test

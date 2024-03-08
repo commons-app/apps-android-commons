@@ -3,7 +3,6 @@ package fr.free.nrw.commons.quiz
 import android.content.Intent
 import android.graphics.Bitmap
 import fr.free.nrw.commons.TestCommonsApplication
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,6 +14,8 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenu
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -38,7 +39,7 @@ class QuizResultActivityUnitTest {
     @Test
     @Throws(Exception::class)
     fun checkActivityNotNull() {
-        Assert.assertNotNull(activity)
+        assertThat(activity, notNullValue())
     }
 
     @Test

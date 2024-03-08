@@ -14,8 +14,6 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.nearby.fragments.AdvanceQueryFragment
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -29,6 +27,9 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -90,19 +91,19 @@ class AdvanceQueryFragmentUnitTests {
 
     @Test
     fun `check none of the views are null`() {
-        assertNotNull(activity)
-        assertNotNull(fragment)
-        assertNotNull(bundle)
-        assertNotNull("EditText could not be found", etQuery)
-        assertNotNull("Button could not be found", btnReset)
-        assertNotNull("Button could not be found", btnApply)
+        assertThat(activity, notNullValue())
+        assertThat(fragment, notNullValue())
+        assertThat(bundle, notNullValue())
+        assertThat("EditText could not be found", etQuery, notNullValue())
+        assertThat("Button could not be found", btnReset, notNullValue())
+        assertThat("Button could not be found", btnApply, notNullValue())
     }
 
     @Test
     fun `when query passed in fragment argument, it is visible in text field`() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onViewCreated(view, bundle)
-        assertEquals(defaultQuery, etQuery.text.toString())
+        assertThat(defaultQuery, equalTo( etQuery.text.toString()))
     }
 
 
@@ -111,7 +112,7 @@ class AdvanceQueryFragmentUnitTests {
         `when`(bundle.getString("query")).thenReturn("")
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onViewCreated(view, bundle)
-        assertEquals("", etQuery.text.toString())
+        assertThat("", equalTo( etQuery.text.toString()))
     }
 
     @Test
@@ -119,7 +120,7 @@ class AdvanceQueryFragmentUnitTests {
         // Checking initial query is showing on text view
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onViewCreated(view, bundle)
-        assertEquals(defaultQuery, etQuery.text.toString())
+        assertThat(defaultQuery, equalTo( etQuery.text.toString()))
 
         // Setting new query to text view
         val newQuery = "$defaultQuery 2"
@@ -138,7 +139,7 @@ class AdvanceQueryFragmentUnitTests {
         // Checking initial query is showing on text view
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onViewCreated(view, bundle)
-        assertEquals(defaultQuery, etQuery.text.toString())
+        assertThat(defaultQuery, equalTo( etQuery.text.toString()))
 
         // Setting new query to text view
         val newQuery = "$defaultQuery 2"
@@ -148,7 +149,7 @@ class AdvanceQueryFragmentUnitTests {
         btnReset.performClick()
 
         // Verifying if text view is showing initial query and callback is notified
-        assertEquals(defaultQuery, etQuery.text.toString())
+        assertThat(defaultQuery, equalTo( etQuery.text.toString()))
         verify(callback).reset()
     }
 
@@ -157,7 +158,7 @@ class AdvanceQueryFragmentUnitTests {
         // Checking initial query is showing on text view
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onViewCreated(view, bundle)
-        assertEquals(defaultQuery, etQuery.text.toString())
+        assertThat(defaultQuery, equalTo( etQuery.text.toString()))
 
         // Clicking apply button
         btnApply.performClick()

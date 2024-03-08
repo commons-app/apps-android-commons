@@ -5,7 +5,6 @@ import android.net.Uri
 import android.view.Menu
 import android.view.MenuItem
 import androidx.test.core.app.ApplicationProvider
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,6 +16,9 @@ import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
 import org.robolectric.shadows.ShadowActivity
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 
 
 @RunWith(RobolectricTestRunner::class)
@@ -39,7 +41,7 @@ class AboutActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun checkActivityNotNull() {
-        Assert.assertNotNull(activity)
+        assertThat(activity, notNullValue())
     }
 
     @Test
@@ -48,9 +50,9 @@ class AboutActivityUnitTests {
         activity.launchFacebook(null)
         val shadowActivity: ShadowActivity = Shadows.shadowOf(activity)
         val startedIntent = shadowActivity.nextStartedActivity
-        Assert.assertEquals(startedIntent.action, "android.intent.action.VIEW")
-        Assert.assertEquals(startedIntent.`package`, "com.facebook.katana")
-        Assert.assertEquals(startedIntent.`data`, Uri.parse("fb://page/1921335171459985"))
+        assertThat(startedIntent.action, equalTo( "android.intent.action.VIEW"))
+        assertThat(startedIntent.`package`, equalTo( "com.facebook.katana"))
+        assertThat(startedIntent.`data`, equalTo( Uri.parse("fb://page/1921335171459985")))
     }
 
     @Test

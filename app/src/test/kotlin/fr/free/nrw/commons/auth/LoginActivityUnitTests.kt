@@ -16,7 +16,6 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.auth.login.LoginResult
 import fr.free.nrw.commons.kvstore.JsonKvStore
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -29,7 +28,8 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.fakes.RoboMenuItem
 import java.lang.reflect.Method
-
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -86,7 +86,7 @@ class LoginActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun checkActivityNotNull() {
-        Assert.assertNotNull(activity)
+        assertThat(activity, notNullValue())
     }
 
     @Test

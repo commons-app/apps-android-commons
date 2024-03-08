@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.TestCommonsApplication
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -16,6 +15,9 @@ import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 import java.util.*
 
 @RunWith(RobolectricTestRunner::class)
@@ -57,7 +59,7 @@ class NearbyFilterSearchRecyclerViewAdapterUnitTests {
     @Test
     @Throws(Exception::class)
     fun checkAdapterNotNull() {
-        Assert.assertNotNull(adapter)
+        assertThat(adapter, notNullValue())
     }
 
     @Test
@@ -81,7 +83,7 @@ class NearbyFilterSearchRecyclerViewAdapterUnitTests {
     @Test
     @Throws(Exception::class)
     fun testGetItemCount() {
-        Assert.assertEquals(adapter.itemCount, 26)
+        assertThat(adapter.itemCount, equalTo( 26))
     }
 
     @Test

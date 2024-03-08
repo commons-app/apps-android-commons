@@ -19,8 +19,6 @@ import fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT
 import fr.free.nrw.commons.settings.Prefs
 import fr.free.nrw.commons.upload.UploadMediaDetail
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
-import org.junit.Assert
-import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -36,6 +34,9 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowAlertDialog
 import org.robolectric.shadows.ShadowProgressDialog
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Method
 import java.util.*
 
@@ -84,7 +85,7 @@ class DescriptionEditActivityUnitTest {
     @Test
     @Throws(Exception::class)
     fun checkActivityNotNull() {
-        Assert.assertNotNull(activity)
+        assertThat(activity, notNullValue())
     }
 
     @Test
@@ -97,7 +98,7 @@ class DescriptionEditActivityUnitTest {
         method.isAccessible = true
         method.invoke(activity)
         val dialog: ProgressDialog = ShadowProgressDialog.getLatestDialog() as ProgressDialog
-        assertEquals(dialog.isShowing, true)
+        assertThat(dialog.isShowing, equalTo( true))
     }
 
     @Test
@@ -109,7 +110,7 @@ class DescriptionEditActivityUnitTest {
         )
         method.isAccessible = true
         method.invoke(activity, mutableListOf(UploadMediaDetail("en", "desc")))
-        assertEquals(activity.isFinishing, true)
+        assertThat(activity.isFinishing, equalTo( true))
     }
 
     @Test
@@ -121,7 +122,7 @@ class DescriptionEditActivityUnitTest {
         )
         method.isAccessible = true
         method.invoke(activity, null)
-        assertEquals(activity.isFinishing, true)
+        assertThat(activity.isFinishing, equalTo( true))
     }
 
     @Test
@@ -133,7 +134,7 @@ class DescriptionEditActivityUnitTest {
         )
         method.isAccessible = true
         method.invoke(activity, null)
-        assertEquals(activity.isFinishing, true)
+        assertThat(activity.isFinishing, equalTo( true))
     }
 
     @Test
@@ -161,7 +162,7 @@ class DescriptionEditActivityUnitTest {
             android.R.string.ok
         )
         val dialog: AlertDialog = ShadowAlertDialog.getLatestDialog() as AlertDialog
-        assertEquals(dialog.isShowing, true)
+        assertThat(dialog.isShowing, equalTo( true))
     }
 
 }

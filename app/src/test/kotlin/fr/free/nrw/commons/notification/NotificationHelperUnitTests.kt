@@ -7,7 +7,6 @@ import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.notification.models.Notification
 import fr.free.nrw.commons.notification.models.NotificationType
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -16,6 +15,8 @@ import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import java.lang.reflect.Field
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -45,7 +46,7 @@ class NotificationHelperUnitTests {
     @Test
     @Throws(Exception::class)
     fun checkNotNull() {
-        Assert.assertNotNull(notificationHelper)
+        assertThat(notificationHelper, notNullValue())
     }
 
     @Test

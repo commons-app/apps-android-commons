@@ -12,7 +12,6 @@ import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.customselector.model.CallbackStatus
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.model.Result
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,6 +22,8 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Field
 
 @RunWith(RobolectricTestRunner::class)
@@ -63,7 +64,7 @@ class ZoomableActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun checkActivityNotNull() {
-        Assert.assertNotNull(activity)
+        assertThat(activity, notNullValue())
     }
 
     /**

@@ -8,7 +8,6 @@ import androidx.core.os.ConfigurationCompat
 import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.jupiter.api.Assertions
@@ -20,6 +19,8 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import fr.free.nrw.commons.language.AppLanguageLookUpTable
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 import java.util.*
 
 @RunWith(RobolectricTestRunner::class)
@@ -62,18 +63,18 @@ class LanguagesAdapterTest {
     fun testOnGetView() {
         languagesAdapter = LanguagesAdapter(context, selectedLanguages)
         `when`(selectedLanguages.values).thenReturn(Collections.emptyList())
-        Assert.assertEquals(languagesAdapter.getView(0, convertView, parent), convertView)
+        assertThat(languagesAdapter.getView(0, convertView, parent), equalTo( convertView))
     }
 
     @Test
     fun testGetCount() {
-        Assertions.assertEquals(languageCodesList.size, languagesAdapter.count)
+        assertThat(languageCodesList.size, equalTo( languagesAdapter.count))
     }
 
     @Test
     fun testGetLanguageCode() {
         languagesAdapter = LanguagesAdapter(context, selectedLanguages)
-        Assertions.assertEquals(languagesAdapter.getLanguageCode(0), languageCodesList[0])
+        assertThat(languagesAdapter.getLanguageCode(0), equalTo( languageCodesList[0]))
     }
 
     @Test
@@ -91,15 +92,15 @@ class LanguagesAdapterTest {
         selectLanguages[Integer(1)] = "de"
         languagesAdapter = LanguagesAdapter(context, selectLanguages)
 
-        Assertions.assertEquals(false, languagesAdapter.isEnabled(languagesAdapter.getIndexOfLanguageCode("es")))
-        Assertions.assertEquals(false, languagesAdapter.isEnabled(languagesAdapter.getIndexOfLanguageCode("de")))
+        assertThat(false, equalTo( languagesAdapter.isEnabled(languagesAdapter.getIndexOfLanguageCode("es"))))
+        assertThat(false, equalTo( languagesAdapter.isEnabled(languagesAdapter.getIndexOfLanguageCode("de"))))
     }
 
     @Test
     fun testFilterEmpty() {
         languagesAdapter = LanguagesAdapter(context, selectedLanguages)
         languagesAdapter.filter.filter("")
-        Assertions.assertEquals(languageCodesList.size, languagesAdapter.count)
+        assertThat(languageCodesList.size, equalTo( languagesAdapter.count))
     }
 
     @Test
@@ -122,7 +123,7 @@ class LanguagesAdapterTest {
                 s++
             i++
         }
-        Assertions.assertEquals(s, languagesAdapter.count)
+        assertThat(s, equalTo( languagesAdapter.count))
     }
 
 }

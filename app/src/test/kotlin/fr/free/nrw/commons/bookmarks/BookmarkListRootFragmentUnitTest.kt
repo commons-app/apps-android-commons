@@ -23,7 +23,6 @@ import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.explore.ParentViewPager
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -36,6 +35,9 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
+import org.hamcrest.CoreMatchers.equalTo
 import java.lang.reflect.Field
 
 @RunWith(RobolectricTestRunner::class)
@@ -123,7 +125,7 @@ class BookmarkListRootFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun checkFragmentNotNull() {
-        Assert.assertNotNull(fragment)
+        assertThat(fragment, notNullValue())
     }
 
     @Test
@@ -213,7 +215,7 @@ class BookmarkListRootFragmentUnitTest {
     @Throws(Exception::class)
     fun testGetMediaAtPositionCaseNull() {
         whenever(bookmarksPagerAdapter.mediaAdapter).thenReturn(null)
-        Assert.assertEquals(fragment.getMediaAtPosition(0), null)
+        assertThat(fragment.getMediaAtPosition(0), equalTo( null))
     }
 
     @Test
@@ -222,14 +224,14 @@ class BookmarkListRootFragmentUnitTest {
         val listAdapter = mock(ListAdapter::class.java)
         whenever(bookmarksPagerAdapter.mediaAdapter).thenReturn(listAdapter)
         whenever(listAdapter.getItem(0)).thenReturn(media)
-        Assert.assertEquals(fragment.getMediaAtPosition(0), media)
+        assertThat(fragment.getMediaAtPosition(0), equalTo( media))
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetTotalMediaCountCaseNull() {
         whenever(bookmarksPagerAdapter.mediaAdapter).thenReturn(null)
-        Assert.assertEquals(fragment.totalMediaCount, 0)
+        assertThat(fragment.totalMediaCount, equalTo( 0))
     }
 
     @Test
@@ -238,13 +240,13 @@ class BookmarkListRootFragmentUnitTest {
         val listAdapter = mock(ListAdapter::class.java)
         whenever(bookmarksPagerAdapter.mediaAdapter).thenReturn(listAdapter)
         whenever(listAdapter.count).thenReturn(1)
-        Assert.assertEquals(fragment.totalMediaCount, 1)
+        assertThat(fragment.totalMediaCount, equalTo( 1))
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetContributionStateAt() {
-        Assert.assertEquals(fragment.getContributionStateAt(0), null)
+        assertThat(fragment.getContributionStateAt(0), equalTo( null))
     }
 
     @Test
@@ -294,7 +296,7 @@ class BookmarkListRootFragmentUnitTest {
     @Throws(Exception::class)
     fun `testBackPressed Case NonNull isVisible and backButton clicked`() {
         whenever(mediaDetails.isVisible).thenReturn(true)
-        Assert.assertEquals(fragment.backPressed(), false)
+        assertThat(fragment.backPressed(), equalTo( false))
     }
 
     @Test
@@ -303,14 +305,14 @@ class BookmarkListRootFragmentUnitTest {
         Whitebox.setInternalState(fragment, "listFragment", mock(BookmarkPicturesFragment::class.java))
         whenever(mediaDetails.isVisible).thenReturn(true)
         whenever(mediaDetails.removedItems).thenReturn(ArrayList(0))
-        Assert.assertEquals(fragment.backPressed(), false)
+        assertThat(fragment.backPressed(), equalTo( false))
     }
 
     @Test
     @Throws(Exception::class)
     fun `testBackPressed Case NonNull isNotVisible and backButton clicked`() {
         whenever(mediaDetails.isVisible).thenReturn(false)
-        Assert.assertEquals(fragment.backPressed(), false)
+        assertThat(fragment.backPressed(), equalTo( false))
     }
 
     @Test
@@ -319,7 +321,7 @@ class BookmarkListRootFragmentUnitTest {
         val field: Field = BookmarkListRootFragment::class.java.getDeclaredField("mediaDetails")
         field.isAccessible = true
         field.set(fragment, null)
-        Assert.assertEquals(fragment.backPressed(), false)
+        assertThat(fragment.backPressed(), equalTo( false))
     }
 
 }

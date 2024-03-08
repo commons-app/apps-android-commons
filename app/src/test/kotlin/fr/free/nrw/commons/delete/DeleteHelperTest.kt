@@ -14,9 +14,6 @@ import fr.free.nrw.commons.contributions.ContributionsListFragment
 import fr.free.nrw.commons.review.ReviewController
 import io.reactivex.Observable
 import io.reactivex.Single
-import org.junit.Assert.assertNotNull
-import org.junit.Assert.assertTrue
-import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -29,6 +26,12 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
+import org.hamcrest.CoreMatchers.`is`
+
 
 /**
  * Tests for delete helper
@@ -79,8 +82,8 @@ class DeleteHelperTest {
         whenever(media.author).thenReturn("$creatorName")
         whenever(media.filename).thenReturn("Test file.jpg")
         val makeDeletion = deleteHelper.makeDeletion(context, media, "Test reason")?.blockingGet()
-        assertNotNull(makeDeletion)
-        assertTrue(makeDeletion!!)
+        assertThat(makeDeletion, notNullValue())
+        assertThat(makeDeletion!!, `is`(true))
         verify(pageEditClient).appendEdit(eq("User_Talk:$creatorName"), ArgumentMatchers.anyString(), ArgumentMatchers.anyString())
     }
 
@@ -148,7 +151,7 @@ class DeleteHelperTest {
     fun alertDialogPositiveButtonDisableTest() {
         val mContext = RuntimeEnvironment.getApplication().applicationContext
         deleteHelper.askReasonAndExecute(media, mContext, "My Question", ReviewController.DeleteReason.COPYRIGHT_VIOLATION, callback);
-        assertEquals(false, deleteHelper.dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled)
+        assertThat(false, equalTo( deleteHelper.dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled))
     }
 
         @Test
@@ -156,7 +159,7 @@ class DeleteHelperTest {
         val mContext = RuntimeEnvironment.getApplication().applicationContext
         deleteHelper.askReasonAndExecute(media, mContext, "My Question", ReviewController.DeleteReason.COPYRIGHT_VIOLATION, callback);
         deleteHelper.listener.onClick(deleteHelper.dialog,1,true);
-        assertEquals(true, deleteHelper.dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled)
+        assertThat(true, equalTo( deleteHelper.dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled))
     }
 
     @Test(expected = RuntimeException::class)

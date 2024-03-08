@@ -7,7 +7,6 @@ import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.utils.ImageUtils
 import fr.free.nrw.commons.utils.ImageUtilsWrapper
 import io.reactivex.Single
-import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers
@@ -15,6 +14,8 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 import java.io.FileInputStream
 
 class ImageProcessingServiceTest {
@@ -91,7 +92,7 @@ class ImageProcessingServiceTest {
     fun validateImageForKeepImage() {
         `when`(uploadItem.imageQuality).thenReturn(ImageUtils.IMAGE_KEEP)
         val validateImage = imageProcessingService!!.validateImage(uploadItem, location)
-        assertEquals(ImageUtils.IMAGE_OK, validateImage.blockingGet())
+        assertThat(ImageUtils.IMAGE_OK, equalTo( validateImage.blockingGet()))
     }
 
     @Test
@@ -99,13 +100,13 @@ class ImageProcessingServiceTest {
         `when`(mediaClient!!.checkFileExistsUsingSha(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(true))
         val validateImage = imageProcessingService!!.validateImage(uploadItem, location)
-        assertEquals(ImageUtils.IMAGE_DUPLICATE, validateImage.blockingGet())
+        assertThat(ImageUtils.IMAGE_DUPLICATE, equalTo( validateImage.blockingGet()))
     }
 
     @Test
     fun validateImageForOkImage() {
         val validateImage = imageProcessingService!!.validateImage(uploadItem, location)
-        assertEquals(ImageUtils.IMAGE_OK, validateImage.blockingGet())
+        assertThat(ImageUtils.IMAGE_OK, equalTo( validateImage.blockingGet()))
     }
 
     @Test
@@ -113,7 +114,7 @@ class ImageProcessingServiceTest {
         `when`(imageUtilsWrapper?.checkIfImageIsTooDark(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(ImageUtils.IMAGE_DARK))
         val validateImage = imageProcessingService!!.validateImage(uploadItem, location)
-        assertEquals(ImageUtils.IMAGE_DARK, validateImage.blockingGet())
+        assertThat(ImageUtils.IMAGE_DARK, equalTo( validateImage.blockingGet()))
     }
 
     @Test
@@ -121,7 +122,7 @@ class ImageProcessingServiceTest {
         `when`(imageUtilsWrapper!!.checkImageGeolocationIsDifferent(ArgumentMatchers.anyString(), any(LatLng::class.java)))
                 .thenReturn(Single.just(ImageUtils.IMAGE_GEOLOCATION_DIFFERENT))
         val validateImage = imageProcessingService!!.validateImage(uploadItem, location)
-        assertEquals(ImageUtils.IMAGE_GEOLOCATION_DIFFERENT, validateImage.blockingGet())
+        assertThat(ImageUtils.IMAGE_GEOLOCATION_DIFFERENT, equalTo( validateImage.blockingGet()))
     }
 
     @Test
@@ -129,6 +130,6 @@ class ImageProcessingServiceTest {
         `when`(mediaClient?.checkPageExistsUsingTitle(ArgumentMatchers.anyString()))
                 .thenReturn(Single.just(true))
         val validateImage = imageProcessingService!!.validateImage(uploadItem, location)
-        assertEquals(ImageUtils.FILE_NAME_EXISTS, validateImage.blockingGet())
+        assertThat(ImageUtils.FILE_NAME_EXISTS, equalTo( validateImage.blockingGet()))
     }
 }

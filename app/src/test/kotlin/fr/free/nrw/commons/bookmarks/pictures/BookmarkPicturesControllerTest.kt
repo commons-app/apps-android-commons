@@ -14,6 +14,8 @@ import org.mockito.ArgumentMatchers
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.`is`
 import java.util.*
 
 /**
@@ -92,7 +94,7 @@ class BookmarkPicturesControllerTest {
     fun needRefreshBookmarkedPictures() {
         val needRefreshBookmarkedPictures =
             bookmarkPicturesController!!.needRefreshBookmarkedPictures()
-        Assert.assertTrue(needRefreshBookmarkedPictures)
+        assertThat(needRefreshBookmarkedPictures, `is`(true))
     }
 
     /**
@@ -105,6 +107,6 @@ class BookmarkPicturesControllerTest {
         Assert.assertEquals(2, bookmarkedPictures.size.toLong())
         val needRefreshBookmarkedPictures =
             bookmarkPicturesController!!.needRefreshBookmarkedPictures()
-        Assert.assertFalse(needRefreshBookmarkedPictures)
+        assertThat(needRefreshBookmarkedPictures, `is`(false))
     }
 }

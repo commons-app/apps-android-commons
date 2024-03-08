@@ -11,7 +11,6 @@ import com.facebook.soloader.SoLoader
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -22,6 +21,8 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import java.lang.reflect.Method
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -72,45 +73,45 @@ class GridViewAdapterUnitTest {
 
     @Test
     fun testContainsAllImageNull() {
-        Assert.assertEquals(gridViewAdapter.containsAll(null), false)
+        assertThat(gridViewAdapter.containsAll(null), equalTo( false))
     }
 
     @Test
     fun testContainsAllDataNull() {
         gridViewAdapter = GridViewAdapter(context, 0, null)
-        Assert.assertEquals(gridViewAdapter.containsAll(images), false)
+        assertThat(gridViewAdapter.containsAll(images), equalTo( false))
     }
 
     @Test
     fun testContainsAllDataEmpty() {
         gridViewAdapter = GridViewAdapter(context, 0, listOf())
-        Assert.assertEquals(gridViewAdapter.containsAll(images), false)
+        assertThat(gridViewAdapter.containsAll(images), equalTo( false))
     }
 
     @Test
     fun testContainsAll() {
         gridViewAdapter = GridViewAdapter(context, 0, listOf(media1))
         `when`(media1.filename).thenReturn("")
-        Assert.assertEquals(gridViewAdapter.containsAll(listOf(media1)), true)
+        assertThat(gridViewAdapter.containsAll(listOf(media1)), equalTo( true))
     }
 
     @Test
     fun testGetItem() {
         gridViewAdapter = GridViewAdapter(context, 0, listOf(media1))
-        Assert.assertEquals(gridViewAdapter.getItem(0), media1)
+        assertThat(gridViewAdapter.getItem(0), equalTo( media1))
     }
 
     @Test
     fun testIsEmpty() {
         gridViewAdapter = GridViewAdapter(context, 0, null)
-        Assert.assertEquals(gridViewAdapter.isEmpty, true)
+        assertThat(gridViewAdapter.isEmpty, equalTo( true))
     }
 
     @Test
     fun testGetView() {
         gridViewAdapter = GridViewAdapter(context, 0, listOf(media1))
         `when`(media1.mostRelevantCaption).thenReturn("")
-        Assert.assertEquals(gridViewAdapter.getView(0, convertView, parent), convertView)
+        assertThat(gridViewAdapter.getView(0, convertView, parent), equalTo( convertView))
     }
 
     @Test

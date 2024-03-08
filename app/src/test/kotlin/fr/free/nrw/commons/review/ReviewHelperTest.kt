@@ -9,11 +9,13 @@ import fr.free.nrw.commons.wikidata.mwapi.MwQueryResult
 import io.reactivex.Observable
 import io.reactivex.Single
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNull
-import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.*
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.nullValue
+import org.hamcrest.CoreMatchers.`is`
 
 /**
  * Test class for ReviewHelper
@@ -54,8 +56,8 @@ class ReviewHelperTest {
         val random = reviewHelper.getRandomMedia().test()
 
         random.assertNoErrors()
-        assertEquals(1, random.valueCount())
-        assertTrue(setOf("one.jpg", "two.jpeg", "three.png").contains(random.values().first().filename))
+        assertThat(1, equalTo( random.valueCount()))
+        assertThat(setOf("one.jpg", "two.jpeg", "three.png").contains(random.values().first().filename), `is`(true))
     }
 
     /**
@@ -69,7 +71,7 @@ class ReviewHelperTest {
         whenever(mwQueryResult.pages()).thenReturn(listOf(page1))
 
         val media = reviewHelper.getRandomMedia().blockingGet()
-        assertNull(media)
+        assertThat(media, nullValue())
         verify(reviewInterface, times(1))!!.getRecentChanges()
     }
 
@@ -85,7 +87,7 @@ class ReviewHelperTest {
 
         val random = reviewHelper.getRandomMedia().test()
 
-        assertEquals("one.jpg is deleted", random.errors().first().message)
+        assertThat("one.jpg is deleted", equalTo( random.errors().first().message))
     }
 
     /**
@@ -118,7 +120,7 @@ class ReviewHelperTest {
 
         val result = reviewHelper.checkFileUsage("Test.jpg").test()
 
-        assertTrue(result.values().first())
+        assertThat(result.values().first(), `is`(true))
     }
 
     @Test
@@ -129,7 +131,7 @@ class ReviewHelperTest {
         reviewHelper.dao = reviewDao
         val result = reviewHelper.getReviewStatus("Test.jpg")
 
-        assertTrue(result)
+        assertThat(result, `is`(true))
     }
 
     private fun setupMedia(file: String, vararg revision: MwQueryPage.Revision): MwQueryPage = mock<MwQueryPage>().apply {

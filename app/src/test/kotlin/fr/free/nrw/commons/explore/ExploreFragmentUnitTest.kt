@@ -12,7 +12,6 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.contributions.MainActivity
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -28,6 +27,9 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -76,21 +78,21 @@ class ExploreFragmentUnitTest {
     @Test
     @Throws(Exception::class)
     fun checkFragmentNotNull() {
-        Assert.assertNotNull(fragment)
+        assertThat(fragment, notNullValue())
     }
 
     @Test
     @Throws(Exception::class)
     fun testSetScrollCaseTrue() {
         fragment.setScroll(true)
-        Assert.assertEquals(viewPager.isCanScroll, true)
+        assertThat(viewPager.isCanScroll, equalTo( true))
     }
 
     @Test
     @Throws(Exception::class)
     fun testSetScrollCaseFalse() {
         fragment.setScroll(false)
-        Assert.assertEquals(viewPager.isCanScroll, false)
+        assertThat(viewPager.isCanScroll, equalTo( false))
     }
 
     @Test
@@ -99,7 +101,7 @@ class ExploreFragmentUnitTest {
         Whitebox.setInternalState(fragment, "featuredRootFragment", exploreRootFragment)
         `when`(tabLayout.selectedTabPosition).thenReturn(0)
         `when`(exploreRootFragment.backPressed()).thenReturn(true)
-        Assert.assertEquals(fragment.onBackPressed(), true)
+        assertThat(fragment.onBackPressed(), equalTo( true))
     }
 
     @Test
@@ -108,7 +110,7 @@ class ExploreFragmentUnitTest {
         Whitebox.setInternalState(fragment, "mobileRootFragment", exploreRootFragment)
         `when`(tabLayout.selectedTabPosition).thenReturn(1)
         `when`(exploreRootFragment.backPressed()).thenReturn(true)
-        Assert.assertEquals(fragment.onBackPressed(), true)
+        assertThat(fragment.onBackPressed(), equalTo( true))
     }
 
     @Test
@@ -117,7 +119,7 @@ class ExploreFragmentUnitTest {
         Whitebox.setInternalState(fragment, "featuredRootFragment", exploreRootFragment)
         `when`(tabLayout.selectedTabPosition).thenReturn(0)
         `when`(exploreRootFragment.backPressed()).thenReturn(false)
-        Assert.assertEquals(fragment.onBackPressed(), false)
+        assertThat(fragment.onBackPressed(), equalTo( false))
     }
 
     @Test
@@ -126,21 +128,21 @@ class ExploreFragmentUnitTest {
         Whitebox.setInternalState(fragment, "mobileRootFragment", exploreRootFragment)
         `when`(tabLayout.selectedTabPosition).thenReturn(1)
         `when`(exploreRootFragment.backPressed()).thenReturn(false)
-        Assert.assertEquals(fragment.onBackPressed(), false)
+        assertThat(fragment.onBackPressed(), equalTo( false))
     }
 
     @Test
     @Throws(Exception::class)
     fun testOnOptionsItemSelectedCaseTrue() {
         val menuItem: MenuItem = RoboMenuItem(R.id.action_search)
-        Assert.assertEquals(fragment.onOptionsItemSelected(menuItem), true)
+        assertThat(fragment.onOptionsItemSelected(menuItem), equalTo( true))
     }
 
     @Test
     @Throws(Exception::class)
     fun testOnOptionsItemSelectedCaseDefault() {
         val menuItem: MenuItem = RoboMenuItem(android.R.id.home)
-        Assert.assertEquals(fragment.onOptionsItemSelected(menuItem), false)
+        assertThat(fragment.onOptionsItemSelected(menuItem), equalTo( false))
     }
 
     @Test

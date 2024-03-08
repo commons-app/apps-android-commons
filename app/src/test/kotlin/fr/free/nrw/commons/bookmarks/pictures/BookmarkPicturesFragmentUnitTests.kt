@@ -27,7 +27,6 @@ import fr.free.nrw.commons.category.GridViewAdapter
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.profile.ProfileActivity
 import media
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -39,6 +38,8 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Method
 
 
@@ -121,7 +122,7 @@ class BookmarkPicturesFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun checkFragmentNotNull() {
-        Assert.assertNotNull(fragment)
+        assertThat(fragment, notNullValue())
     }
 
     @Test

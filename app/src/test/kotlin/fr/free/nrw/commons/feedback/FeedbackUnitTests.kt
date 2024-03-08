@@ -1,9 +1,10 @@
 package fr.free.nrw.commons.feedback
 
 import fr.free.nrw.commons.feedback.model.Feedback
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 
 class FeedbackUnitTests {
     private lateinit var feedback: Feedback
@@ -16,50 +17,50 @@ class FeedbackUnitTests {
     @Test
     fun testVersion() {
         feedback.version = "456"
-        Assert.assertEquals(feedback.version, "456")
+        assertThat(feedback.version, equalTo( "456"))
     }
 
     @Test
     fun testApiLevel() {
-        Assert.assertEquals(feedback.apiLevel, "apiLevel")
+        assertThat(feedback.apiLevel, equalTo( "apiLevel"))
         feedback.apiLevel = "29"
-        Assert.assertEquals(feedback.apiLevel, "29")
+        assertThat(feedback.apiLevel, equalTo( "29"))
     }
 
     @Test
     fun testTitle() {
         feedback.title = "myTitle"
-        Assert.assertEquals(feedback.title, "myTitle")
+        assertThat(feedback.title, equalTo( "myTitle"))
     }
 
     @Test
     fun testAndroidVersion() {
         feedback.androidVersion = "PIE"
-        Assert.assertEquals(feedback.androidVersion, "PIE")
+        assertThat(feedback.androidVersion, equalTo( "PIE"))
     }
 
     @Test
     fun testDeviceModel() {
         feedback.deviceModel = "My Device"
-        Assert.assertEquals(feedback.deviceModel, "My Device")
+        assertThat(feedback.deviceModel, equalTo( "My Device"))
     }
 
     @Test
     fun testDeviceMfg() {
         feedback.deviceManufacturer = "MYCOMPANY"
-        Assert.assertEquals(feedback.deviceManufacturer, "MYCOMPANY")
+        assertThat(feedback.deviceManufacturer, equalTo( "MYCOMPANY"))
     }
 
     @Test
     fun testDeviceName() {
         feedback.device = "my_name"
-        Assert.assertEquals(feedback.device, "my_name")
+        assertThat(feedback.device, equalTo( "my_name"))
     }
 
     @Test
     fun testNetworkType() {
         feedback.networkType = "network"
-        Assert.assertEquals(feedback.networkType, "network")
+        assertThat(feedback.networkType, equalTo( "network"))
     }
 
 }

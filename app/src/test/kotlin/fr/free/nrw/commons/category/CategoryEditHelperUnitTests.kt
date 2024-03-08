@@ -10,7 +10,6 @@ import fr.free.nrw.commons.notification.NotificationHelper
 import fr.free.nrw.commons.utils.ViewUtilWrapper
 import io.reactivex.Observable
 import io.reactivex.Single
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -21,6 +20,8 @@ import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -63,7 +64,7 @@ class CategoryEditHelperUnitTests {
     @Test
     @Throws(Exception::class)
     fun checkNotNull() {
-        Assert.assertNotNull(helper)
+        assertThat(helper, notNullValue())
     }
 
     @Test

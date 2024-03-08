@@ -11,7 +11,6 @@ import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import fr.free.nrw.commons.profile.achievements.FeedbackResponse
 import io.reactivex.Single
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -22,6 +21,8 @@ import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -59,7 +60,7 @@ class QuizCheckerUnitTest {
     @Test
     @Throws(Exception::class)
     fun checkNotNull() {
-        Assert.assertNotNull(quizChecker)
+        assertThat(quizChecker, notNullValue())
     }
 
     @Test

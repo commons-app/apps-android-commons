@@ -11,7 +11,6 @@ import fr.free.nrw.commons.nearby.NearbyController.loadAttractionsFromLocationTo
 import fr.free.nrw.commons.nearby.NearbyController.updateMarkerLabelListBookmark
 import org.junit.Before
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
@@ -21,6 +20,8 @@ import org.powermock.reflect.Whitebox
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 import java.util.*
 
 @RunWith(RobolectricTestRunner::class)
@@ -96,7 +97,7 @@ class NearbyControllerTest {
 
     @Test
     fun testLoadAttractionsFromLocationCaseNull() {
-        assertEquals(
+        assertThat(
             nearbyController.loadAttractionsFromLocation(
                 currentLatLng,
                 null,
@@ -104,7 +105,7 @@ class NearbyControllerTest {
                 false,
                 false,
                 customQuery
-            ), null
+            ), equalTo(null)
         )
     }
 
@@ -146,8 +147,8 @@ class NearbyControllerTest {
             false,
             customQuery
         )
-        assertEquals(result.curLatLng, currentLatLng)
-        assertEquals(result.searchLatLng, searchLatLong)
+        assertThat(result.curLatLng, equalTo( currentLatLng))
+        assertThat(result.searchLatLng, equalTo( searchLatLong))
     }
 
     @Test
@@ -188,8 +189,8 @@ class NearbyControllerTest {
             false,
             customQuery
         )
-        assertEquals(result.curLatLng, currentLatLng)
-        assertEquals(result.searchLatLng, searchLatLong)
+        assertThat(result.curLatLng, equalTo( currentLatLng))
+        assertThat(result.searchLatLng, equalTo( searchLatLong))
     }
 
     @Test
@@ -230,19 +231,19 @@ class NearbyControllerTest {
             false,
             customQuery
         )
-        assertEquals(result.curLatLng, currentLatLng)
-        assertEquals(result.searchLatLng, searchLatLong)
+        assertThat(result.curLatLng, equalTo( currentLatLng))
+        assertThat(result.searchLatLng, equalTo( searchLatLong))
     }
 
     @Test
     fun testLoadAttractionsFromLocationToBaseMarkerOptionsCaseNull() {
-        assertEquals(
+        assertThat(
             loadAttractionsFromLocationToBaseMarkerOptions(
                 currentLatLng,
                 null,
                 context,
                 mutableListOf(place)
-            ), listOf<NearbyBaseMarker>()
+            ), equalTo(listOf<NearbyBaseMarker>())
         )
     }
 
@@ -262,13 +263,13 @@ class NearbyControllerTest {
         place.isMonument = true
         `when`(currentLatLng.latitude).thenReturn(0.0)
         `when`(currentLatLng.longitude).thenReturn(0.0)
-        assertEquals(
+        assertThat(
             loadAttractionsFromLocationToBaseMarkerOptions(
                 currentLatLng,
                 listOf(place),
                 context,
                 mutableListOf(place)
-            )[0].place, place
+            )[0].place, equalTo(place)
         )
     }
 
@@ -288,13 +289,13 @@ class NearbyControllerTest {
         place.isMonument = false
         `when`(currentLatLng.latitude).thenReturn(0.0)
         `when`(currentLatLng.longitude).thenReturn(0.0)
-        assertEquals(
+        assertThat(
             loadAttractionsFromLocationToBaseMarkerOptions(
                 currentLatLng,
                 listOf(place),
                 context,
                 mutableListOf(place)
-            )[0].place, place
+            )[0].place, equalTo(place)
         )
     }
 
@@ -314,13 +315,13 @@ class NearbyControllerTest {
         place.isMonument = false
         `when`(currentLatLng.latitude).thenReturn(0.0)
         `when`(currentLatLng.longitude).thenReturn(0.0)
-        assertEquals(
+        assertThat(
             loadAttractionsFromLocationToBaseMarkerOptions(
                 currentLatLng,
                 listOf(place),
                 context,
                 mutableListOf(place)
-            )[0].place, place
+            )[0].place, equalTo(place)
         )
     }
 
@@ -340,13 +341,13 @@ class NearbyControllerTest {
         place.isMonument = false
         `when`(currentLatLng.latitude).thenReturn(0.0)
         `when`(currentLatLng.longitude).thenReturn(0.0)
-        assertEquals(
+        assertThat(
             loadAttractionsFromLocationToBaseMarkerOptions(
                 currentLatLng,
                 listOf(place),
                 context,
                 mutableListOf(place)
-            )[0].place, place
+            )[0].place, equalTo(place)
         )
     }
 
@@ -361,9 +362,9 @@ class NearbyControllerTest {
             list
         )
         updateMarkerLabelListBookmark(place, false)
-        assertEquals(list[0].isBookmarked, false)
-        assertEquals(list[0].place, place)
-        assertEquals(list[0].marker, null)
+        assertThat(list[0].isBookmarked, equalTo( false))
+        assertThat(list[0].place, equalTo( place))
+        assertThat(list[0].marker, equalTo( null))
     }
 
     @Test
@@ -377,9 +378,9 @@ class NearbyControllerTest {
             list
         )
         updateMarkerLabelListBookmark(place, true)
-        assertEquals(list[0].isBookmarked, true)
-        assertEquals(list[0].place, place)
-        assertEquals(list[0].marker, null)
+        assertThat(list[0].isBookmarked, equalTo( true))
+        assertThat(list[0].place, equalTo( place))
+        assertThat(list[0].marker, equalTo( null))
     }
 
     fun <T> any(type: Class<T>): T = Mockito.any(type)

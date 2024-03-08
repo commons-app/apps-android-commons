@@ -6,7 +6,6 @@ import android.os.Looper
 import android.view.MenuItem
 import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.TestCommonsApplication
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,6 +17,8 @@ import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.fakes.RoboMenuItem
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -43,7 +44,7 @@ class SettingsActivityUnitTests {
     @Test
     @Throws(Exception::class)
     fun checkActivityNotNull() {
-        Assert.assertNotNull(activity)
+        assertThat(activity, notNullValue())
     }
 
     @Test

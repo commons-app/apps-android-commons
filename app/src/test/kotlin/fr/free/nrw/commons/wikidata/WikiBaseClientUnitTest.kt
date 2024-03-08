@@ -9,12 +9,13 @@ import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResult
 import io.reactivex.Observable
-import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertSame
-import junit.framework.TestCase.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.mock
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.`is`
 
 class WikiBaseClientUnitTest {
 
@@ -37,7 +38,7 @@ class WikiBaseClientUnitTest {
 
         val result = wikiBaseClient.postEditEntity("the-id", "the-data").blockingFirst()
 
-        assertTrue(result)
+        assertThat(result, `is`(true))
     }
 
     @Test
@@ -49,7 +50,7 @@ class WikiBaseClientUnitTest {
 
         val result = wikiBaseClient.postEditEntityByFilename("File:Example.jpg", "the-data").blockingFirst()
 
-        assertTrue(result)
+        assertThat(result, `is`(true))
     }
 
     @Test
@@ -67,7 +68,7 @@ class WikiBaseClientUnitTest {
 
         val result = wikiBaseClient.getFileEntityId(upload).blockingFirst()
 
-        assertEquals(123L, result)
+        assertThat(123L, equalTo( result))
     }
 
     @Test

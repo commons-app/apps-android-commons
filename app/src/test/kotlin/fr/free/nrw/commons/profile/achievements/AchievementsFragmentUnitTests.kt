@@ -17,7 +17,6 @@ import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.utils.ConfigUtils
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -32,6 +31,9 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.fakes.RoboMenuItem
 import org.robolectric.shadows.ShadowToast
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
+import org.hamcrest.CoreMatchers.equalTo
 import java.lang.reflect.Method
 
 
@@ -95,7 +97,7 @@ class AchievementsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun checkFragmentNotNull() {
-        Assert.assertNotNull(fragment)
+        assertThat(fragment, notNullValue())
     }
 
     @Test
@@ -306,14 +308,14 @@ class AchievementsFragmentUnitTests {
 
     private fun assertToast() {
         if (ConfigUtils.isBetaFlavour) {
-            Assert.assertEquals(
+            assertThat(
                 ShadowToast.getTextOfLatestToast().toString(),
-                context.getString(R.string.achievements_unavailable_beta)
+                equalTo(context.getString(R.string.achievements_unavailable_beta))
             )
         } else {
-            Assert.assertEquals(
+            assertThat(
                 context.getString(R.string.user_not_logged_in),
-                ShadowToast.getTextOfLatestToast().toString()
+                equalTo(ShadowToast.getTextOfLatestToast().toString())
             )
         }
     }

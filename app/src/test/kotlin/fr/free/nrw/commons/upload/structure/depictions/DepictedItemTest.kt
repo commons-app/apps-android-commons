@@ -5,13 +5,15 @@ import depictedItem
 import entity
 import entityId
 import fr.free.nrw.commons.wikidata.WikidataProperties
-import org.junit.Assert
 import org.junit.Test
 import place
 import snak
 import statement
 import valueString
 import wikiBaseEntityValue
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.not
 
 class DepictedItemTest {
 
@@ -19,37 +21,37 @@ class DepictedItemTest {
     fun `name and description get user language label`() {
         val depictedItem =
             DepictedItem(entity(mapOf("en" to "label"), mapOf("en" to "description")))
-        Assert.assertEquals(depictedItem.name, "label")
-        Assert.assertEquals(depictedItem.description, "description")
+        assertThat(depictedItem.name, equalTo( "label"))
+        assertThat(depictedItem.description, equalTo( "description"))
     }
 
     @Test
     fun `name and descriptions get first language label if user language not present`() {
         val depictedItem = DepictedItem(entity(mapOf("" to "label"), mapOf("" to "description")))
-        Assert.assertEquals(depictedItem.name, "label")
-        Assert.assertEquals(depictedItem.description, "description")
+        assertThat(depictedItem.name, equalTo( "label"))
+        assertThat(depictedItem.description, equalTo( "description"))
     }
 
     @Test
     fun `name and descriptions get empty if nothing present`() {
         val depictedItem = DepictedItem(entity())
-        Assert.assertEquals(depictedItem.name, "")
-        Assert.assertEquals(depictedItem.description, "")
+        assertThat(depictedItem.name, equalTo( ""))
+        assertThat(depictedItem.description, equalTo( ""))
     }
 
     @Test
     fun `image is empty with null statements`() {
-        Assert.assertEquals(DepictedItem(entity(statements = null)).imageUrl, null)
+        assertThat(DepictedItem(entity(statements = null)).imageUrl, equalTo( null))
     }
 
     @Test
     fun `image is empty with no image statement`() {
-        Assert.assertEquals(DepictedItem(entity()).imageUrl, null)
+        assertThat(DepictedItem(entity()).imageUrl, equalTo( null))
     }
 
     @Test
     fun `image is empty with dataValue not of ValueString type`() {
-        Assert.assertEquals(
+        assertThat(
             DepictedItem(
                 entity(
                     statements = mapOf(
@@ -57,13 +59,13 @@ class DepictedItemTest {
                     )
                 )
             ).imageUrl,
-            null
+            equalTo(null)
         )
     }
 
     @Test
     fun `image is not empty with dataValue of ValueString type`() {
-        Assert.assertEquals(
+        assertThat(
             DepictedItem(
                 entity(
                     statements = mapOf(
@@ -73,12 +75,12 @@ class DepictedItemTest {
                     )
                 )
             ).imageUrl,
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/_example_/70px-_example_")
+            equalTo("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/_example_/70px-_example_"))
     }
 
     @Test
     fun `instancesOf maps EntityIds to ids`() {
-        Assert.assertEquals(
+        assertThat(
             DepictedItem(
                 entity(
                     statements = mapOf(
@@ -90,17 +92,17 @@ class DepictedItemTest {
                     )
                 )
             ).instanceOfs,
-            listOf("1", "2"))
+            equalTo(listOf("1", "2")))
     }
 
     @Test
     fun `instancesOf is empty with no values`() {
-        Assert.assertEquals(DepictedItem(entity()).instanceOfs, emptyList<String>())
+        assertThat(DepictedItem(entity()).instanceOfs, equalTo( emptyList<String>()))
     }
 
     @Test
     fun `commonsCategory maps ValueString to strings`() {
-        Assert.assertEquals(
+        assertThat(
             DepictedItem(
                 entity(
                     statements = mapOf(
@@ -111,64 +113,64 @@ class DepictedItemTest {
                     )
                 )
             ).commonsCategories.map { it.name },
-            listOf("1", "2"))
+            equalTo(listOf("1", "2")))
     }
 
     @Test
     fun `commonsCategory is empty with no values`() {
-        Assert.assertEquals(DepictedItem(entity()).commonsCategories, emptyList<String>())
+        assertThat(DepictedItem(entity()).commonsCategories, equalTo( emptyList<String>()))
     }
 
     @Test
     fun `isSelected is false at creation`() {
-        Assert.assertEquals(DepictedItem(entity()).isSelected, false)
+        assertThat(DepictedItem(entity()).isSelected, equalTo( false))
     }
 
     @Test
     fun `id is entityId`() {
-        Assert.assertEquals(DepictedItem(entity(id = "1")).id, "1")
+        assertThat(DepictedItem(entity(id = "1")).id, equalTo( "1"))
     }
 
     @Test
     fun `place constructor uses place name and longDescription`() {
         val depictedItem = DepictedItem(entity(), place(name = "1", longDescription = "2"))
-        Assert.assertEquals(depictedItem.name, "1")
-        Assert.assertEquals(depictedItem.description, "2")
+        assertThat(depictedItem.name, equalTo( "1"))
+        assertThat(depictedItem.description, equalTo( "2"))
     }
 
 
     @Test
     fun `same object is Equal`() {
         val depictedItem = depictedItem()
-        Assert.assertEquals(depictedItem == depictedItem, true)
+        assertThat(depictedItem == depictedItem, equalTo( true))
     }
 
     @Test
     fun `different type is not Equal`() {
-        Assert.assertEquals(depictedItem().equals(Unit), false)
+        assertThat(depictedItem().equals(Unit), equalTo( false))
     }
 
     @Test
     fun `if names are equal is Equal`() {
-        Assert.assertEquals(
+        assertThat(
             depictedItem(name="a", id = "0") == depictedItem(name="a", id = "1"),
-            true)
+            equalTo(true))
     }
 
     @Test
     fun `if names are not equal is not Equal`() {
-        Assert.assertEquals(
+        assertThat(
             depictedItem(name="a") == depictedItem(name="b"),
-            false)
+            equalTo(false))
     }
 
     @Test
     fun `hashCode returns same values for objects with same name`() {
-        Assert.assertEquals(depictedItem(name="a").hashCode(), depictedItem(name="a").hashCode())
+        assertThat(depictedItem(name="a").hashCode(), equalTo( depictedItem(name="a").hashCode()))
     }
     
     @Test
     fun `hashCode returns different values for objects with different name`() {
-        Assert.assertNotEquals(depictedItem(name="a").hashCode(), depictedItem(name="b").hashCode())
+        assertThat(depictedItem(name="a").hashCode(), not(equalTo(depictedItem(name="b").hashCode())))
     }
 }

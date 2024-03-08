@@ -2,11 +2,13 @@ package fr.free.nrw.commons.bookmarks
 
 import android.content.Context
 import androidx.fragment.app.FragmentManager
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
+import org.hamcrest.CoreMatchers.equalTo
 
 /**
  * BookmarksPagerAdapter when user is not loggedIn.
@@ -35,7 +37,7 @@ class LoggedOutBookmarksPagerAdapterTests {
      */
     @Test
     fun checkNotNull() {
-        Assert.assertNotNull(bookmarksPagerAdapter)
+        assertThat(bookmarksPagerAdapter, notNullValue())
     }
 
     /**
@@ -53,7 +55,7 @@ class LoggedOutBookmarksPagerAdapterTests {
      */
     @Test
     fun testGetCount() {
-        Assert.assertEquals(bookmarksPagerAdapter.count, 1)
+        assertThat(bookmarksPagerAdapter.count, equalTo( 1))
     }
 
     /**

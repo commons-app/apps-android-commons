@@ -15,10 +15,12 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao.Table.*
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.verifyNoInteractions
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.`is`
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -58,8 +60,8 @@ class BookmarkPictureDaoTest {
         createCursor(1).let { cursor ->
             cursor.moveToFirst()
             testObject.fromCursor(cursor).let {
-                assertEquals("mediaName", it.mediaName)
-                assertEquals("creatorName", it.mediaCreator)
+                assertThat("mediaName", equalTo(it.mediaName))
+                assertThat("creatorName", equalTo(it.mediaCreator))
             }
         }
     }
@@ -70,7 +72,7 @@ class BookmarkPictureDaoTest {
 
         var result = testObject.allBookmarks
 
-        assertEquals(14,(result.size))
+        assertThat(14, equalTo(result.size))
 
     }
 
@@ -83,13 +85,13 @@ class BookmarkPictureDaoTest {
     @Test
     fun getAllBookmarksReturnsEmptyList_emptyCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(createCursor(0))
-        assertTrue(testObject.allBookmarks.isEmpty())
+        assertThat(testObject.allBookmarks.isEmpty(), `is`(true))
     }
 
     @Test
     fun getAllBookmarksReturnsEmptyList_nullCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(null)
-        assertTrue(testObject.allBookmarks.isEmpty())
+        assertThat(testObject.allBookmarks.isEmpty(), `is`(true))
     }
 
     @Test
@@ -109,12 +111,12 @@ class BookmarkPictureDaoTest {
         whenever(client.insert(any(), any())).thenReturn(exampleBookmark.contentUri)
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(null)
 
-        assertTrue(testObject.updateBookmark(exampleBookmark))
+        assertThat(testObject.updateBookmark(exampleBookmark), `is`(true))
         verify(client).insert(eq(BASE_URI), captor.capture())
         captor.firstValue.let { cv ->
-            assertEquals(2, cv.size())
-            assertEquals(exampleBookmark.mediaName, cv.getAsString(COLUMN_MEDIA_NAME))
-            assertEquals(exampleBookmark.mediaCreator, cv.getAsString(COLUMN_CREATOR))
+            assertThat(2, equalTo(cv.size()))
+            assertThat(exampleBookmark.mediaName, equalTo(cv.getAsString(COLUMN_MEDIA_NAME)))
+            assertThat(exampleBookmark.mediaCreator, equalTo(cv.getAsString(COLUMN_CREATOR)))
         }
     }
 
@@ -123,14 +125,14 @@ class BookmarkPictureDaoTest {
         whenever(client.delete(isA(), isNull(), isNull())).thenReturn(1)
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(1))
 
-        assertFalse(testObject.updateBookmark(exampleBookmark))
+        assertThat(testObject.updateBookmark(exampleBookmark), `is`(false))
         verify(client).delete(eq(exampleBookmark.contentUri!!), isNull(), isNull())
     }
 
     @Test
     fun findExistingBookmark() {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(1))
-        assertTrue(testObject.findBookmark(exampleBookmark))
+        assertThat(testObject.findBookmark(exampleBookmark), `is`(true))
     }
 
     @Test(expected = RuntimeException::class)
@@ -142,13 +144,13 @@ class BookmarkPictureDaoTest {
     @Test
     fun findNotExistingBookmarkReturnsNull_emptyCursor() {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(0))
-        assertFalse(testObject.findBookmark(exampleBookmark))
+        assertThat(testObject.findBookmark(exampleBookmark), `is`(false))
     }
 
     @Test
     fun findNotExistingBookmarkReturnsNull_nullCursor() {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(null)
-        assertFalse(testObject.findBookmark(exampleBookmark))
+        assertThat(testObject.findBookmark(exampleBookmark), `is`(false))
     }
 
     @Test

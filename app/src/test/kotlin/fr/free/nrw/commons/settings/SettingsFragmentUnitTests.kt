@@ -20,7 +20,6 @@ import fr.free.nrw.commons.recentlanguages.Language
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -33,6 +32,8 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -85,7 +86,7 @@ class SettingsFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun checkFragmentNotNull() {
-        Assert.assertNotNull(fragment)
+        assertThat(fragment, notNullValue())
     }
 
     @Test

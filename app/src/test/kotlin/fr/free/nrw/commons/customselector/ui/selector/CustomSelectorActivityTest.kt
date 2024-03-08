@@ -10,8 +10,6 @@ import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter
 import org.junit.Before
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.runner.RunWith
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
@@ -21,6 +19,9 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import java.lang.reflect.Field
 import java.lang.reflect.Method
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 
 /**
  * Custom Selector Activity Test
@@ -66,7 +67,7 @@ class CustomSelectorActivityTest {
     @Test
     @Throws(Exception::class)
     fun testActivityNotNull() {
-        assertNotNull(activity)
+        assertThat(activity, notNullValue())
     }
 
     /**
@@ -251,29 +252,29 @@ class CustomSelectorActivityTest {
         }
         activity.onFolderClick(1, "test", 0)
         activity.onSelectedImagesChanged(images,0)
-        assertEquals(false, overLimit.getBoolean(activity))
-        assertEquals(0, exceededBy.getInt(activity))
+        assertThat(false, equalTo( overLimit.getBoolean(activity)))
+        assertThat(0, equalTo( exceededBy.getInt(activity)))
         activity.onSelectedImagesChanged(images, 1)
-        assertEquals(false, overLimit.getBoolean(activity))
-        assertEquals(0, exceededBy.getInt(activity))
+        assertThat(false, equalTo( overLimit.getBoolean(activity)))
+        assertThat(0, equalTo( exceededBy.getInt(activity)))
 
         // test with list size limit+1
         images.add(image)
         activity.onSelectedImagesChanged(images,0)
-        assertEquals(true, overLimit.getBoolean(activity))
-        assertEquals(1, exceededBy.getInt(activity))
+        assertThat(true, equalTo( overLimit.getBoolean(activity)))
+        assertThat(1, equalTo( exceededBy.getInt(activity)))
         activity.onSelectedImagesChanged(images,1)
-        assertEquals(true, overLimit.getBoolean(activity))
-        assertEquals(1, exceededBy.getInt(activity))
+        assertThat(true, equalTo( overLimit.getBoolean(activity)))
+        assertThat(1, equalTo( exceededBy.getInt(activity)))
 
         //test with list size 1
         images.clear()
         images.add(image)
         activity.onSelectedImagesChanged(images,0)
-        assertEquals(false, overLimit.getBoolean(activity))
-        assertEquals(0, exceededBy.getInt(activity))
+        assertThat(false, equalTo( overLimit.getBoolean(activity)))
+        assertThat(0, equalTo( exceededBy.getInt(activity)))
         activity.onSelectedImagesChanged(images,1)
-        assertEquals(false, overLimit.getBoolean(activity))
-        assertEquals(0, exceededBy.getInt(activity))
+        assertThat(false, equalTo( overLimit.getBoolean(activity)))
+        assertThat(0, equalTo( exceededBy.getInt(activity)))
     }
 }

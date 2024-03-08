@@ -13,7 +13,6 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.upload.WikidataPlace
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -24,6 +23,8 @@ import org.mockito.Mockito.`when`
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Method
 
 @RunWith(AndroidJUnit4::class)
@@ -64,7 +65,7 @@ class ContributionsListFragmentUnitTests {
     @Throws(Exception::class)
     fun checkFragmentNotNull() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        Assert.assertNotNull(fragment)
+        assertThat(fragment, notNullValue())
     }
 
     @Test

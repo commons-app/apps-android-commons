@@ -5,12 +5,14 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.media.zoomControllers.gestures.MultiPointerGestureDetector
 import fr.free.nrw.commons.media.zoomControllers.gestures.TransformGestureDetector
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 import java.lang.reflect.Method
 
 class TransformGestureDetectorUnitTest {
@@ -37,7 +39,7 @@ class TransformGestureDetectorUnitTest {
     @Test
     @Throws(Exception::class)
     fun checkDetectorNotNull() {
-        Assert.assertNotNull(detector)
+        assertThat(detector, notNullValue())
     }
 
     @Test
@@ -52,7 +54,7 @@ class TransformGestureDetectorUnitTest {
     @Throws(Exception::class)
     fun testOnTouchEvent() {
         whenever(mDetector.onTouchEvent(event)).thenReturn(true)
-        Assert.assertEquals(detector.onTouchEvent(event), true)
+        assertThat(detector.onTouchEvent(event), equalTo( true))
     }
 
     @Test
@@ -85,43 +87,43 @@ class TransformGestureDetectorUnitTest {
     @Test
     @Throws(Exception::class)
     fun testIsGestureInProgress() {
-        Assert.assertEquals(detector.isGestureInProgress, false)
+        assertThat(detector.isGestureInProgress, equalTo( false))
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetNewPointerCount() {
-        Assert.assertEquals(detector.newPointerCount, 0)
+        assertThat(detector.newPointerCount, equalTo( 0))
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetPointerCount() {
-        Assert.assertEquals(detector.pointerCount, 0)
+        assertThat(detector.pointerCount, equalTo( 0))
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetPivotX() {
-        Assert.assertEquals(detector.pivotX, 0.0f)
+        assertThat(detector.pivotX, equalTo( 0.0f))
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetPivotY() {
-        Assert.assertEquals(detector.pivotY, 0.0f)
+        assertThat(detector.pivotY, equalTo( 0.0f))
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetTranslationX() {
-        Assert.assertEquals(detector.translationX, 0.0f)
+        assertThat(detector.translationX, equalTo( 0.0f))
     }
 
     @Test
     @Throws(Exception::class)
     fun testGetTranslationY() {
-        Assert.assertEquals(detector.translationY, 0.0f)
+        assertThat(detector.translationY, equalTo( 0.0f))
     }
 
     @Test
@@ -129,7 +131,7 @@ class TransformGestureDetectorUnitTest {
     fun testGetScaleCaseLessThan2() {
         Whitebox.setInternalState(detector, "mDetector", mDetector)
         whenever(mDetector.pointerCount).thenReturn(1)
-        Assert.assertEquals(detector.scale, 1f)
+        assertThat(detector.scale, equalTo( 1f))
     }
 
     @Test
@@ -144,7 +146,7 @@ class TransformGestureDetectorUnitTest {
         whenever(mDetector.startY).thenReturn(array)
         whenever(mDetector.currentX).thenReturn(array)
         whenever(mDetector.currentY).thenReturn(array)
-        Assert.assertEquals(detector.scale, 1f)
+        assertThat(detector.scale, equalTo( 1f))
     }
 
     @Test
@@ -152,7 +154,7 @@ class TransformGestureDetectorUnitTest {
     fun testGetRotationCaseLessThan2() {
         Whitebox.setInternalState(detector, "mDetector", mDetector)
         whenever(mDetector.pointerCount).thenReturn(1)
-        Assert.assertEquals(detector.rotation, 0f)
+        assertThat(detector.rotation, equalTo( 0f))
     }
 
 
@@ -168,7 +170,7 @@ class TransformGestureDetectorUnitTest {
         whenever(mDetector.startY).thenReturn(array)
         whenever(mDetector.currentX).thenReturn(array)
         whenever(mDetector.currentY).thenReturn(array)
-        Assert.assertEquals(detector.rotation, 0f)
+        assertThat(detector.rotation, equalTo( 0f))
     }
 
     @Test
@@ -181,7 +183,7 @@ class TransformGestureDetectorUnitTest {
             "calcAverage", FloatArray::class.java, Int::class.java
         )
         method.isAccessible = true
-        Assert.assertEquals(method.invoke(detector, array, 2), 0.5f)
+        assertThat(method.invoke(detector, array, 2), equalTo( 0.5f))
     }
 
 }

@@ -40,6 +40,8 @@ import java.io.File
 import java.io.FileInputStream
 import java.lang.reflect.Field
 import java.lang.reflect.Modifier
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -240,13 +242,13 @@ class ImageLoaderTest {
 
         // test Result.INVALID
         uploadedStatus.lastUpdated = Date(0);
-        Assert.assertEquals(ImageLoader.Result.INVALID,
-            imageLoader.getResultFromUploadedStatus(uploadedStatus))
+        assertThat(ImageLoader.Result.INVALID,
+            equalTo(imageLoader.getResultFromUploadedStatus(uploadedStatus)))
 
         // test Result.TRUE
         uploadedStatus.imageResult = true;
-        Assert.assertEquals(ImageLoader.Result.TRUE,
-            imageLoader.getResultFromUploadedStatus(uploadedStatus))
+        assertThat(ImageLoader.Result.TRUE,
+            equalTo(imageLoader.getResultFromUploadedStatus(uploadedStatus)))
     }
 
 }

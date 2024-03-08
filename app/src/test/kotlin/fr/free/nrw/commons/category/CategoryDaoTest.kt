@@ -19,6 +19,11 @@ import org.junit.runner.RunWith
 import org.mockito.Mockito.verifyNoInteractions
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
+import org.hamcrest.CoreMatchers.nullValue
+import org.hamcrest.CoreMatchers.`is`
 import java.util.*
 
 @RunWith(RobolectricTestRunner::class)
@@ -124,12 +129,12 @@ class CategoryDaoTest {
 
             verify(client).update(eq(category.contentUri), captor.capture(), isNull(), isNull())
             captor.firstValue.let { cv ->
-                assertEquals(5, cv.size())
-                assertEquals(category.name, cv.getAsString(COLUMN_NAME))
-                assertEquals(category.description, cv.getAsString(COLUMN_DESCRIPTION))
-                assertEquals(category.thumbnail, cv.getAsString(COLUMN_THUMBNAIL))
-                assertEquals(category.lastUsed.time, cv.getAsLong(COLUMN_LAST_USED))
-                assertEquals(category.timesUsed, cv.getAsInteger(COLUMN_TIMES_USED))
+                assertThat(5, equalTo( cv.size()))
+                assertThat(category.name, equalTo( cv.getAsString(COLUMN_NAME)))
+                assertThat(category.description, equalTo( cv.getAsString(COLUMN_DESCRIPTION)))
+                assertThat(category.thumbnail, equalTo( cv.getAsString(COLUMN_THUMBNAIL)))
+                assertThat(category.lastUsed.time, equalTo( cv.getAsLong(COLUMN_LAST_USED)))
+                assertThat(category.timesUsed, equalTo( cv.getAsInteger(COLUMN_TIMES_USED)))
             }
         }
     }
@@ -145,13 +150,13 @@ class CategoryDaoTest {
 
         verify(client).insert(eq(BASE_URI), captor.capture())
         captor.firstValue.let { cv ->
-            assertEquals(5, cv.size())
-            assertEquals(category.name, cv.getAsString(COLUMN_NAME))
-            assertEquals(category.description, cv.getAsString(COLUMN_DESCRIPTION))
-            assertEquals(category.thumbnail, cv.getAsString(COLUMN_THUMBNAIL))
-            assertEquals(category.lastUsed.time, cv.getAsLong(COLUMN_LAST_USED))
-            assertEquals(category.timesUsed, cv.getAsInteger(COLUMN_TIMES_USED))
-            assertEquals(contentUri, category.contentUri)
+            assertThat(5, equalTo( cv.size()))
+            assertThat(category.name, equalTo( cv.getAsString(COLUMN_NAME)))
+            assertThat(category.description, equalTo( cv.getAsString(COLUMN_DESCRIPTION)))
+            assertThat(category.thumbnail, equalTo( cv.getAsString(COLUMN_THUMBNAIL)))
+            assertThat(category.lastUsed.time, equalTo( cv.getAsLong(COLUMN_LAST_USED)))
+            assertThat(category.timesUsed, equalTo( cv.getAsInteger(COLUMN_TIMES_USED)))
+            assertThat(contentUri, equalTo( category.contentUri))
         }
     }
 
@@ -164,13 +169,13 @@ class CategoryDaoTest {
     @Test
     fun whenTheresNoDataFindReturnsNull_nullCursor() {
         whenever(client.query(any(), any(), any(), any(), any())).thenReturn(null)
-        assertNull(testObject.find("showImageWithItem"))
+        assertThat(testObject.find("showImageWithItem"), nullValue())
     }
 
     @Test
     fun whenTheresNoDataFindReturnsNull_emptyCursor() {
         whenever(client.query(any(), any(), any(), any(), any())).thenReturn(createCursor(0))
-        assertNull(testObject.find("showImageWithItem"))
+        assertThat(testObject.find("showImageWithItem"), nullValue())
     }
 
     @Test
@@ -189,14 +194,14 @@ class CategoryDaoTest {
         whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(createCursor(1))
 
         val category = testObject.find("showImageWithItem")
-        assertNotNull(category)
+        assertThat(category, notNullValue())
 
-        assertEquals(uriForId(1), category?.contentUri)
-        assertEquals("showImageWithItem", category?.name)
-        assertEquals("description", category?.description)
-        assertEquals("image", category?.thumbnail)
-        assertEquals(123L, category?.lastUsed?.time)
-        assertEquals(2, category?.timesUsed)
+        assertThat(uriForId(1), equalTo( category?.contentUri))
+        assertThat("showImageWithItem", equalTo( category?.name))
+        assertThat("description", equalTo( category?.description))
+        assertThat("image", equalTo( category?.thumbnail))
+        assertThat(123L, equalTo( category?.lastUsed?.time))
+        assertThat(2, equalTo( category?.timesUsed))
 
         verify(client).query(
                 eq(BASE_URI),
@@ -205,7 +210,7 @@ class CategoryDaoTest {
                 queryCaptor.capture(),
                 isNull()
         )
-        assertEquals("showImageWithItem", queryCaptor.firstValue[0])
+        assertThat("showImageWithItem", equalTo( queryCaptor.firstValue[0]))
     }
 
     @Test(expected = RuntimeException::class)
@@ -223,13 +228,13 @@ class CategoryDaoTest {
     @Test
     fun recentCategoriesReturnsEmptyList_nullCursor() {
         whenever(client.query(any(), any(), anyOrNull(), any(), any())).thenReturn(null)
-        assertTrue(testObject.recentCategories(1).isEmpty())
+        assertThat(testObject.recentCategories(1).isEmpty(), `is`(true))
     }
 
     @Test
     fun recentCategoriesReturnsEmptyList_emptyCursor() {
         whenever(client.query(any(), any(), any(), any(), any())).thenReturn(createCursor(0))
-        assertTrue(testObject.recentCategories(1).isEmpty())
+        assertThat(testObject.recentCategories(1).isEmpty(), `is`(true))
     }
 
     @Test
@@ -249,8 +254,8 @@ class CategoryDaoTest {
 
         val result = testObject.recentCategories(10)
 
-        assertEquals(1, result.size)
-        assertEquals("showImageWithItem", result[0].name)
+        assertThat(1, equalTo( result.size))
+        assertThat("showImageWithItem", equalTo( result[0].name))
 
         verify(client).query(
                 eq(BASE_URI),
@@ -259,7 +264,7 @@ class CategoryDaoTest {
                 queryCaptor.capture(),
                 eq("$COLUMN_LAST_USED DESC")
         )
-        assertEquals(0, queryCaptor.firstValue.size)
+        assertThat(0, equalTo( queryCaptor.firstValue.size))
     }
 
     @Test
@@ -268,7 +273,7 @@ class CategoryDaoTest {
 
         val result = testObject.recentCategories(5)
 
-        assertEquals(5, result.size)
+        assertThat(5, equalTo( result.size))
     }
 
     private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
