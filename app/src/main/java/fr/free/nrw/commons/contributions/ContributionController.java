@@ -2,7 +2,6 @@ package fr.free.nrw.commons.contributions;
 
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
-import android.Manifest;
 import android.Manifest.permission;
 import android.app.Activity;
 import android.content.Context;

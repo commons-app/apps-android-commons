@@ -3,7 +3,6 @@ package fr.free.nrw.commons.upload;
 import android.content.Context;
 import android.net.Uri;
 import fr.free.nrw.commons.location.LatLng;
-import io.reactivex.Observable;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
