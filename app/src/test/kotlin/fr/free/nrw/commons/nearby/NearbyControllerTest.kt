@@ -81,7 +81,7 @@ class NearbyControllerTest {
             customQuery
         )
         Mockito.verify(nearbyPlaces).radiusExpander(
-            eq(currentLatLng),
+            eq(searchLatLong),
             any(String::class.java),
             eq(false),
             eq(customQuery)
@@ -99,11 +99,8 @@ class NearbyControllerTest {
             true,
             null
         )
-        nearbyController.loadAttractionsFromLocation(
-            currentLatLng, screenTopRight, screenBottomLeft, searchLatLong, false, true, false, null
-        )
         Mockito.verify(nearbyPlaces).radiusExpander(
-            eq(currentLatLng),
+            eq(searchLatLong),
             any(String::class.java),
             eq(false),
             eq(null)
