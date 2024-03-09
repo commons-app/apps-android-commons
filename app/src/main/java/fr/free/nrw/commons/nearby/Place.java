@@ -4,7 +4,6 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import android.text.TextUtils;
 import androidx.annotation.Nullable;
 
 import org.apache.commons.lang3.StringUtils;
