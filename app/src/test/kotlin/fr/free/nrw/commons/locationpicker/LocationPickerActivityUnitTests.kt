@@ -150,6 +150,26 @@ class LocationPickerActivityUnitTests {
         verify(fabCenterOnLocation, times(1)).visibility = View.VISIBLE
     }
 
+    @Test
+    @Throws(Exception::class)
+    fun testPlaceSelected() {
+        Shadows.shadowOf(Looper.getMainLooper()).idle()
+        Whitebox.setInternalState(activity,"activity", "NoLocationUploadActivity")
+        val position = GeoPoint(51.50550, -0.07520)
+        val method: Method = LocationPickerActivity::class.java.getDeclaredMethod(
+            "placeSelected"
+        )
+        `when`(mapView.mapCenter).thenReturn(position)
+        `when`(mapView.zoomLevel).thenReturn(15)
+        method.isAccessible = true
+        method.invoke(activity)
+        verify(applicationKvStore, times(1)).putString(
+            LAST_LOCATION,
+            position.latitude.toString() + "," + position.longitude.toString()
+        )
+        verify(applicationKvStore, times(1)).putString(LAST_ZOOM, mapView.zoomLevel.toString())
+    }
+
 
 
 }

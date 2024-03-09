@@ -339,9 +339,19 @@ public class LocationPickerActivity extends BaseActivity implements
                     + mapView.getMapCenter().getLongitude());
             applicationKvStore.putString(LAST_ZOOM, mapView.getZoomLevel() + "");
         }
-        updateCoordinates(String.valueOf(mapView.getMapCenter().getLatitude()),
-            String.valueOf(mapView.getMapCenter().getLongitude()),
-            String.valueOf(0.0f));
+
+        if (media == null) {
+            final Intent returningIntent = new Intent();
+            returningIntent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION,
+                new CameraPosition(new LatLng(mapView.getMapCenter().getLatitude(),
+                    mapView.getMapCenter().getLongitude()), 14f, 0, 0));
+            setResult(AppCompatActivity.RESULT_OK, returningIntent);
+        } else {
+            updateCoordinates(String.valueOf(mapView.getMapCenter().getLatitude()),
+                String.valueOf(mapView.getMapCenter().getLongitude()),
+                String.valueOf(0.0f));
+        }
+
         finish();
     }
 
@@ -353,6 +363,9 @@ public class LocationPickerActivity extends BaseActivity implements
      */
     public void updateCoordinates(final String Latitude, final String Longitude,
         final String Accuracy) {
+        if (media == null) {
+            return;
+        }
         compositeDisposable.add(coordinateEditHelper.makeCoordinatesEdit(getApplicationContext(),media,
                 Latitude, Longitude, Accuracy)
             .subscribeOn(Schedulers.io())
