@@ -10,19 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.facebook.drawee.view.SimpleDraweeView;
-
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.databinding.ItemUploadThumbnailBinding;
+import fr.free.nrw.commons.filepicker.UploadableFile;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.filepicker.UploadableFile;
 
 /**
  * The adapter class for image thumbnails to be shown while uploading.

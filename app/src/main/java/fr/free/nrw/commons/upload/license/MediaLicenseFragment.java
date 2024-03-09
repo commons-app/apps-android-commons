@@ -17,16 +17,14 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import fr.free.nrw.commons.databinding.FragmentMediaLicenseBinding;
-import fr.free.nrw.commons.upload.UploadActivity;
-import fr.free.nrw.commons.utils.DialogUtil;
-import java.util.List;
-
-import javax.inject.Inject;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.databinding.FragmentMediaLicenseBinding;
+import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
+import fr.free.nrw.commons.utils.DialogUtil;
+import java.util.List;
+import javax.inject.Inject;
 import timber.log.Timber;
 
 public class MediaLicenseFragment extends UploadBaseFragment implements MediaLicenseContract.View {
