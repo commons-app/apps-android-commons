@@ -16,7 +16,6 @@ import androidx.browser.customtabs.CustomTabColorSchemeParams;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
 
-import fr.free.nrw.commons.kvstore.JsonKvStore;
 import java.util.Calendar;
 import java.util.Date;
 import fr.free.nrw.commons.wikidata.model.WikiSite;
@@ -29,9 +28,6 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
-
-import static android.widget.Toast.LENGTH_SHORT;
-import static fr.free.nrw.commons.campaigns.CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE;
 
 public class Utils {
 
