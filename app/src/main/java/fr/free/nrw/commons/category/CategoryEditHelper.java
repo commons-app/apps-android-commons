@@ -5,7 +5,6 @@ import static fr.free.nrw.commons.notification.NotificationHelper.NOTIFICATION_E
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;

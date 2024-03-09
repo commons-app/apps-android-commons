@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.utils;
 
-import static java.security.AccessController.getContext;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;

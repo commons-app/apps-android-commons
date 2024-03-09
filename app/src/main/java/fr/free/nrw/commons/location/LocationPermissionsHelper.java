@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.provider.Settings;
 import androidx.core.app.ActivityCompat;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.filepicker.Constants;
 import fr.free.nrw.commons.filepicker.Constants.RequestCodes;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
