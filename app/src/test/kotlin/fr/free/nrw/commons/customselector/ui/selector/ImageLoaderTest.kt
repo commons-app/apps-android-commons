@@ -159,10 +159,10 @@ class ImageLoaderTest {
             .thenReturn(Mockito.mock(SharedPreferences::class.java))
 
         mapResult["testSha1"] = ImageLoader.Result.TRUE
-        imageLoader.queryAndSetView(holder, image, testDispacher, testDispacher)
+        imageLoader.queryAndSetView(holder, image, testDispacher, testDispacher, ArrayList())
 
         mapResult["testSha1"] = ImageLoader.Result.FALSE
-        imageLoader.queryAndSetView(holder, image, testDispacher, testDispacher)
+        imageLoader.queryAndSetView(holder, image, testDispacher, testDispacher, ArrayList())
     }
 
     /**
@@ -174,7 +174,7 @@ class ImageLoaderTest {
         whenever(notForUploadStatusDao.find(any())).thenReturn(0)
         whenever(context.getSharedPreferences("custom_selector", 0))
             .thenReturn(Mockito.mock(SharedPreferences::class.java))
-        imageLoader.queryAndSetView(holder, image, testDispacher, testDispacher)
+        imageLoader.queryAndSetView(holder, image, testDispacher, testDispacher, ArrayList())
     }
 
     /**
