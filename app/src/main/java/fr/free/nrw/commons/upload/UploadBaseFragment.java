@@ -2,7 +2,6 @@ package fr.free.nrw.commons.upload;
 
 import android.os.Bundle;
 
-import android.os.Parcelable;
 import androidx.annotation.Nullable;
 
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;

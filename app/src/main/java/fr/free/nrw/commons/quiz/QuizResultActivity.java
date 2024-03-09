@@ -14,9 +14,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import com.dinuscxj.progressbar.CircleProgressBar;
 
 import fr.free.nrw.commons.databinding.ActivityQuizResultBinding;
 import java.io.File;
