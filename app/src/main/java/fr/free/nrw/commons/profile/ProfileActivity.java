@@ -254,4 +254,12 @@ public class ProfileActivity extends BaseActivity {
             super.onBackPressed();
         }
     }
+
+    /**
+     * To set the visibility of tab layout
+     * @param isVisible boolean
+     */
+    public void setTabLayoutVisibility(boolean isVisible) {
+        binding.tabLayout.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+    }
 }
