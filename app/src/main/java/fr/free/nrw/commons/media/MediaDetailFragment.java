@@ -1421,7 +1421,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     private String prettyDescription(Media media) {
-        final String description = chooseDescription(media);
+        String description = chooseDescription(media);
+        if (!description.isEmpty()) {
+            description = description.replaceAll("[<](/)?img[^>]*[>]", "");
+        }
         return description.isEmpty() ? getString(R.string.detail_description_empty)
             : description;
     }
