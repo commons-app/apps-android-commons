@@ -173,6 +173,8 @@
   <string name="become_a_tester_title">Šatta betageahččaleaddji</string>
   <string name="logout_verification">Áiggutgo don duođaid čálihit olggos?</string>
   <string name="mediaimage_failed">Mediagovva ii lihkostuvvan</string>
+  <string name="no_subcategory_found">Ii oktage vuollekategoriija gávdnon</string>
+  <string name="no_parentcategory_found">Ii oktage badjekategoriija gávdnon</string>
   <string name="cancel">Gaskkalduhte</string>
   <string name="navigation_drawer_open">Raba</string>
   <string name="navigation_drawer_close">Gidde</string>
@@ -183,6 +185,7 @@
   <string name="navigation_item_logout">Čálit olggos</string>
   <string name="navigation_item_notification">Almmuhusat</string>
   <string name="navigation_item_review">Árvvoštala</string>
+  <string name="no_description_found">govvádus ii gávdnon</string>
   <string name="nearby_info_menu_commons_article">Commons-fiilasiidu</string>
   <string name="nearby_info_menu_wikipedia_article">Wikipedia-artihkal</string>
   <string name="login_to_your_account">Čálit sisa du dovddaldahkii</string>
@@ -195,6 +198,7 @@
   <string name="about_translate">Jorgal</string>
   <string name="about_translate_title">Gielat</string>
   <string name="about_translate_cancel">Gaskkalduhte</string>
+  <string name="no_images_found">Ii oktage govva gávdnon!</string>
   <string name="app_widget_heading">Beaivvi govva</string>
   <string name="menu_search_button">Oza</string>
   <string name="title_activity_search">Ohcan</string>
@@ -218,6 +222,7 @@
   <string name="exif_tag_name_author">Vuoigŋadahkki</string>
   <string name="exif_tag_name_location">Sadji</string>
   <string name="image_info">Govvadieđut</string>
+  <string name="no_categories_found">Ii oktage kategoriija gávdnon</string>
   <string name="upload_cancelled">Fiilla vurkema gaskkalduhtton</string>
   <string name="delete_helper_show_deletion_title_failed">Ii lihkostuvvan</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
