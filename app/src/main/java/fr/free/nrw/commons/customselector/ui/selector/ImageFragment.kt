@@ -264,10 +264,16 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
     private fun handleResult(result: Result) {
         if (result.status is CallbackStatus.SUCCESS) {
             val images = result.images
+
+            val uploadingContributions: List<Contribution>
             if (images.isNotEmpty()) {
-                val uploadingContributions = contributionDao.getContribution(listOf(Contribution.STATE_IN_PROGRESS))
-                    .subscribeOn(Schedulers.io())
-                    .blockingGet()
+                if (contributionDao.getContribution(listOf(Contribution.STATE_IN_PROGRESS)) != null) {
+                    uploadingContributions =
+                        contributionDao.getContribution(listOf(Contribution.STATE_IN_PROGRESS)).blockingGet()
+                } else {
+                    uploadingContributions = ArrayList()
+                }
+
 
                 filteredImages = ImageHelper.filterImages(images, bucketId)
                 allImages = ArrayList(filteredImages)
