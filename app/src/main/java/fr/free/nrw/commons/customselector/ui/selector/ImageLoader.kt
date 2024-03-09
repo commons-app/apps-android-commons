@@ -3,6 +3,7 @@ package fr.free.nrw.commons.customselector.ui.selector
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
+import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
@@ -75,7 +76,8 @@ class ImageLoader @Inject constructor(
         holder: ImageViewHolder,
         image: Image,
         ioDispatcher: CoroutineDispatcher,
-        defaultDispatcher: CoroutineDispatcher
+        defaultDispatcher: CoroutineDispatcher,
+        uploadedContributionsList : List<Contribution>
     ) {
 
         /**
@@ -213,6 +215,16 @@ class ImageLoader @Inject constructor(
                 if ((existsInNotForUploadTable > 0) && showAlreadyActionedImages) {
                     holder.itemNotForUpload()
                 } else holder.itemForUpload()
+            }
+
+            if (uploadedContributionsList.isNotEmpty()) {
+                for (contribution in uploadedContributionsList) {
+                    if (contribution.contentUri == image.uri) {
+                        holder.itemUploading()
+                    } else {
+                        holder.itemNotUploading()
+                    }
+                }
             }
         }
     }

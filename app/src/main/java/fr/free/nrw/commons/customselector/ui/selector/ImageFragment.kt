@@ -15,6 +15,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import fr.free.nrw.commons.contributions.Contribution
+import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.customselector.helper.ImageHelper
@@ -34,6 +36,7 @@ import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.theme.BaseActivity
 import fr.free.nrw.commons.upload.FileProcessor
 import fr.free.nrw.commons.upload.FileUtilsWrapper
+import io.reactivex.schedulers.Schedulers
 import java.util.*
 import javax.inject.Inject
 
@@ -133,6 +136,9 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
      */
     @Inject
     lateinit var mediaClient: MediaClient
+
+    @Inject
+    lateinit var contributionDao: ContributionDao
 
     companion object {
 
@@ -259,9 +265,13 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
         if (result.status is CallbackStatus.SUCCESS) {
             val images = result.images
             if (images.isNotEmpty()) {
+                val uploadingContributions = contributionDao.getContribution(listOf(Contribution.STATE_IN_PROGRESS))
+                    .subscribeOn(Schedulers.io())
+                    .blockingGet()
+
                 filteredImages = ImageHelper.filterImages(images, bucketId)
                 allImages = ArrayList(filteredImages)
-                imageAdapter.init(filteredImages, allImages, TreeMap())
+                imageAdapter.init(filteredImages, allImages, TreeMap(), uploadingContributions)
                 selectorRV?.let {
                     it.visibility = View.VISIBLE
                     lastItemId?.let { pos ->

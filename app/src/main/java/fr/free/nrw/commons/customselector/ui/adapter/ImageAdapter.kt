@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.helper.ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY
 import fr.free.nrw.commons.customselector.helper.ImageHelper.SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY
@@ -84,6 +85,8 @@ class ImageAdapter(
      * Map to store actionable images
      */
     private var actionableImagesMap: TreeMap<Int, Image> = TreeMap()
+
+    private var uploadingContributionList: List<Contribution> = ArrayList()
 
     /**
      * Stores already added positions of actionable images
@@ -157,7 +160,7 @@ class ImageAdapter(
             }
 
             imageLoader.queryAndSetView(
-                holder, image, ioDispatcher, defaultDispatcher
+                holder, image, ioDispatcher, defaultDispatcher ,uploadingContributionList
             )
             scope.launch {
                 val sharedPreferences: SharedPreferences =
@@ -328,12 +331,13 @@ class ImageAdapter(
     /**
      * Initialize the data set.
      */
-    fun init(newImages: List<Image>, fixedImages: List<Image>, emptyMap: TreeMap<Int, Image>) {
+    fun init(newImages: List<Image>, fixedImages: List<Image>, emptyMap: TreeMap<Int, Image>, uploadedImagges: List<Contribution> = ArrayList()) {
         allImages = fixedImages
         val oldImageList:ArrayList<Image> = images
         val newImageList:ArrayList<Image> = ArrayList(newImages)
         actionableImagesMap = emptyMap
         alreadyAddedPositions = ArrayList()
+        uploadingContributionList = uploadedImagges
         nextImagePosition = 0
         reachedEndOfFolder = false
         selectedImages = ArrayList()
@@ -408,6 +412,7 @@ class ImageAdapter(
     class ImageViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.image_thumbnail)
         private val uploadedGroup: Group = itemView.findViewById(R.id.uploaded_group)
+        private val uploadingGroup: Group = itemView.findViewById(R.id.uploading_group)
         private val notForUploadGroup: Group = itemView.findViewById(R.id.not_for_upload_group)
         private val selectedGroup: Group = itemView.findViewById(R.id.selected_group)
 
@@ -433,6 +438,13 @@ class ImageAdapter(
         }
 
         /**
+         * Item is uploading
+         */
+        fun itemUploading() {
+            uploadingGroup.visibility = View.VISIBLE
+        }
+
+        /**
          * Item is not for upload view
          */
         fun itemNotForUpload() {
@@ -448,6 +460,13 @@ class ImageAdapter(
          */
         fun isItemNotForUpload():Boolean {
             return notForUploadGroup.visibility == View.VISIBLE
+        }
+
+        /**
+         * Item is not uploading
+         */
+        fun itemNotUploading() {
+            uploadingGroup.visibility = View.GONE
         }
 
         /**
