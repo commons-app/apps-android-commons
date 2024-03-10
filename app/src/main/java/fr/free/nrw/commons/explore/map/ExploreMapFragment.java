@@ -177,7 +177,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                 } else {
                     if (isPermissionDenied) {
                         locationPermissionsHelper.showAppSettingsDialog(getActivity(),
-                            R.string.nearby_needs_location);
+                            R.string.explore_map_needs_location);
                     }
                     Timber.d("The user checked 'Don't ask again' or denied the permission twice");
                     isPermissionDenied = true;
@@ -332,7 +332,17 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     public void onPause() {
         super.onPause();
         // unregistering the broadcastReceiver, as it was causing an exception and a potential crash
-        getActivity().unregisterReceiver(broadcastReceiver);
+        unregisterNetworkReceiver();
+    }
+
+    
+    /**
+     * Unregisters the networkReceiver
+     */
+    private void unregisterNetworkReceiver() {
+        if (getActivity() != null) {
+            getActivity().unregisterReceiver(broadcastReceiver);
+        }
     }
 
     private void startMapWithoutPermission() {
