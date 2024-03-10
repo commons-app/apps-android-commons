@@ -109,7 +109,7 @@ class ProfileActivityTest {
     }
     @Test
     fun testToolbarNotNull() {
-        val toolbar = activity.findViewById<Toolbar>(R.id.toolbar)
+        val toolbar = activity.binding.toolbarBinding.toolbar
         Assert.assertNotNull(toolbar)
     }
 
