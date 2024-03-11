@@ -53,8 +53,6 @@ class WikidataItemDetailsActivityUnitTests {
     @Mock
     private lateinit var wikidataItem: DepictedItem
 
-    private lateinit var binding: ActivityWikidataItemDetailsBinding
-
 
     @Before
     fun setUp() {
@@ -76,8 +74,6 @@ class WikidataItemDetailsActivityUnitTests {
             depictionImagesListFragment
         )
         Whitebox.setInternalState(activity, "supportFragmentManager", supportFragmentManager)
-
-        binding = ActivityWikidataItemDetailsBinding.inflate(LayoutInflater.from(activity))
 
 
         Whitebox.setInternalState(activity, "wikidataItem", wikidataItem)

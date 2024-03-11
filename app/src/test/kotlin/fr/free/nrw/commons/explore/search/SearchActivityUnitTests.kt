@@ -47,9 +47,6 @@ class SearchActivityUnitTests {
     private lateinit var activity: SearchActivity
 
     @Mock
-    private lateinit var context: Context
-
-    @Mock
     private lateinit var compositeDisposable: CompositeDisposable
 
     @Mock
@@ -76,14 +73,13 @@ class SearchActivityUnitTests {
     @Mock
     private lateinit var searchCategoryFragment: SearchCategoryFragment
 
-    private lateinit var binding : ActivitySearchBinding
+    private lateinit var context: Context
 
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         activity = Robolectric.buildActivity(SearchActivity::class.java).create().get()
         context = ApplicationProvider.getApplicationContext()
-        binding = ActivitySearchBinding.inflate(activity.layoutInflater)
     }
 
     @Test

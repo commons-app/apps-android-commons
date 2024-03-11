@@ -57,11 +57,6 @@ public class ExploreFragment extends CommonsDaggerSupportFragment {
     }
 
     @Override
-    public void onCreate(@Nullable final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
         @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

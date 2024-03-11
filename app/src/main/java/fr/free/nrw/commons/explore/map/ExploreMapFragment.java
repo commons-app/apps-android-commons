@@ -172,17 +172,12 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void onCreate(@Nullable final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = FragmentExploreMapBinding.inflate(getLayoutInflater());
-    }
-
-    @Override
     public View onCreateView(
         @NonNull LayoutInflater inflater,
         ViewGroup container,
         Bundle savedInstanceState
     ) {
+        binding = FragmentExploreMapBinding.inflate(getLayoutInflater());
         return binding.getRoot();
     }
 
@@ -603,20 +598,12 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void setSearchThisAreaButtonVisibility(boolean isVisible) {
-        if (isVisible) {
-            binding.searchThisAreaButton.setVisibility(View.VISIBLE);
-        } else {
-            binding.searchThisAreaButton.setVisibility(View.GONE);
-        }
+        binding.searchThisAreaButton.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
 
     @Override
     public void setProgressBarVisibility(boolean isVisible) {
-        if (isVisible) {
-            binding.mapProgressBar.setVisibility(View.VISIBLE);
-        } else {
-            binding.mapProgressBar.setVisibility(View.GONE);
-        }
+        binding.mapProgressBar.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -630,11 +617,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
 
     @Override
     public boolean isSearchThisAreaButtonVisible() {
-        if (binding.searchThisAreaButton.getVisibility() == View.VISIBLE) {
-            return true;
-        } else {
-            return false;
-        }
+        return binding.bottomSheetDetailsBinding.getRoot().getVisibility() == View.VISIBLE;
     }
 
     @Override
