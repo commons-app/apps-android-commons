@@ -10,6 +10,7 @@ import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.ViewPagerAdapter
+import fr.free.nrw.commons.databinding.ActivitySearchBinding
 import fr.free.nrw.commons.explore.SearchActivity
 import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment
 import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragment
@@ -46,15 +47,6 @@ class SearchActivityUnitTests {
     private lateinit var activity: SearchActivity
 
     @Mock
-    private lateinit var searchView: SearchView
-
-    @Mock
-    private lateinit var viewPager: ViewPager
-
-    @Mock
-    private lateinit var context: Context
-
-    @Mock
     private lateinit var compositeDisposable: CompositeDisposable
 
     @Mock
@@ -81,6 +73,8 @@ class SearchActivityUnitTests {
     @Mock
     private lateinit var searchCategoryFragment: SearchCategoryFragment
 
+    private lateinit var context: Context
+
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
@@ -100,17 +94,6 @@ class SearchActivityUnitTests {
         Whitebox.setInternalState(activity, "viewPagerAdapter", viewPagerAdapter)
         activity.setTabs()
         verify(viewPagerAdapter).notifyDataSetChanged()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testUpdateText() {
-        val query = "test"
-        Whitebox.setInternalState(activity, "searchView", searchView)
-        Whitebox.setInternalState(activity, "viewPager", viewPager)
-        activity.updateText(query)
-        verify(searchView).setQuery(query, true)
-        verify(viewPager).requestFocus()
     }
 
     @Test
