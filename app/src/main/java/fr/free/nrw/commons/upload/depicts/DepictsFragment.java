@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,6 +36,7 @@ import fr.free.nrw.commons.upload.UploadActivity;
 import fr.free.nrw.commons.upload.UploadBaseFragment;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import fr.free.nrw.commons.utils.DialogUtil;
+import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import java.util.List;
@@ -203,8 +203,7 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
                 null
             );
         } else {
-            Toast.makeText(requireContext(), getString(R.string.no_depictions_selected),
-                Toast.LENGTH_SHORT).show();
+            ViewUtil.showLongSnackbar(requireView(),getString(R.string.no_depictions_selected));
             presenter.clearPreviousSelection();
             updateDepicts();
             goBackToPreviousScreen();

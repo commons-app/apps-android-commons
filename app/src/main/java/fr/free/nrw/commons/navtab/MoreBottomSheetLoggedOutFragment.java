@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -22,6 +21,7 @@ import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.settings.SettingsActivity;
+import fr.free.nrw.commons.utils.ViewUtil;
 import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
@@ -109,7 +109,7 @@ public class MoreBottomSheetLoggedOutFragment extends BottomSheetDialogFragment 
         try {
             startActivity(feedbackIntent);
         } catch (final ActivityNotFoundException e) {
-            Toast.makeText(getActivity(), R.string.no_email_client, Toast.LENGTH_SHORT).show();
+            ViewUtil.showLongSnackbar(requireView(),getString(R.string.no_email_client));
         }
     }
 
