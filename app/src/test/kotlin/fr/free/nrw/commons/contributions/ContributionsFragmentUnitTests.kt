@@ -96,8 +96,6 @@ class ContributionsFragmentUnitTests {
     private lateinit var nearbyNotificationCardView: NearbyNotificationCardView
     private lateinit var campaignView: CampaignView
 
-    private lateinit var binding: FragmentContributionsBinding
-
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)

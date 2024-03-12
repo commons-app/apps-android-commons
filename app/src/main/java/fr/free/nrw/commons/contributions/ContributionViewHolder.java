@@ -30,18 +30,6 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
     LayoutContributionBinding binding;
 
-    SimpleDraweeView imageView;
-    TextView titleView;
-    TextView authorView;
-    TextView stateView;
-    TextView seqNumView;
-    ProgressBar progressView;
-    RelativeLayout imageOptions;
-    ImageButton addToWikipediaButton;
-    ImageButton retryButton;
-    ImageButton cancelButton;
-    ImageButton pauseResumeButton;
-
     private int position;
     private Contribution contribution;
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -59,19 +47,6 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
         this.callback = callback;
 
         binding = LayoutContributionBinding.bind(parent);
-
-        imageView = binding.contributionImage;
-        titleView = binding.contributionTitle;
-        authorView = binding.authorView;
-        stateView = binding.contributionState;
-        seqNumView = binding.contributionSequenceNumber;
-        progressView = binding.contributionProgress;
-        imageOptions = binding.imageOptions;
-        addToWikipediaButton = binding.wikipediaButton;
-        cancelButton = binding.cancelButton;
-        retryButton = binding.retryButton;
-        pauseResumeButton = binding.pauseResumeButton;
-
 
         binding.retryButton.setOnClickListener(v -> retryUpload());
         binding.cancelButton.setOnClickListener(v -> deleteUpload());

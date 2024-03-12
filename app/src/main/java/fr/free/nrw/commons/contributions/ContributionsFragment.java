@@ -282,11 +282,7 @@ public class ContributionsFragment
 
         checkable.setChecked(isEnabled);
         if (binding!=null) {
-            if (isEnabled) {
-                binding.limitedConnectionEnabledLayout.setVisibility(View.VISIBLE);
-            } else {
-                binding.limitedConnectionEnabledLayout.setVisibility(View.GONE);
-            }
+            binding.limitedConnectionEnabledLayout.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
         }
 
         checkable.setIcon((isEnabled) ? R.drawable.ic_baseline_cloud_off_24:R.drawable.ic_baseline_cloud_queue_24);
@@ -295,11 +291,7 @@ public class ContributionsFragment
             public boolean onMenuItemClick(MenuItem item) {
                 ((MainActivity) getActivity()).toggleLimitedConnectionMode();
                 boolean isEnabled = store.getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
-                if (isEnabled) {
-                    binding.limitedConnectionEnabledLayout.setVisibility(View.VISIBLE);
-                } else {
-                    binding.limitedConnectionEnabledLayout.setVisibility(View.GONE);
-                }
+                binding.limitedConnectionEnabledLayout.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
                 checkable.setIcon((isEnabled) ? R.drawable.ic_baseline_cloud_off_24:R.drawable.ic_baseline_cloud_queue_24);
                 return false;
             }
