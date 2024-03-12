@@ -3,23 +3,17 @@ package fr.free.nrw.commons.explore;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.SearchView;
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import com.google.android.material.tabs.TabLayout;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.ViewPagerAdapter;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
+import fr.free.nrw.commons.databinding.ActivitySearchBinding;
 import fr.free.nrw.commons.explore.categories.search.SearchCategoryFragment;
 import fr.free.nrw.commons.explore.depictions.search.SearchDepictionsFragment;
 import fr.free.nrw.commons.explore.media.SearchMediaFragment;
@@ -45,13 +39,6 @@ import timber.log.Timber;
 public class SearchActivity extends BaseActivity
         implements MediaDetailPagerFragment.MediaDetailProvider, CategoryImagesCallback {
 
-    @BindView(R.id.toolbar_search) Toolbar toolbar;
-    @BindView(R.id.searchHistoryContainer) FrameLayout searchHistoryContainer;
-    @BindView(R.id.mediaContainer) FrameLayout mediaContainer;
-    @BindView(R.id.searchBox) SearchView searchView;
-    @BindView(R.id.tab_layout) TabLayout tabLayout;
-    @BindView(R.id.viewPager) ViewPager viewPager;
-
     @Inject
     RecentSearchesDao recentSearchesDao;
 
@@ -63,25 +50,28 @@ public class SearchActivity extends BaseActivity
     private MediaDetailPagerFragment mediaDetails;
     ViewPagerAdapter viewPagerAdapter;
 
+    private ActivitySearchBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
-        ButterKnife.bind(this);
+        binding = ActivitySearchBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         setTitle(getString(R.string.title_activity_search));
-        setSupportActionBar(toolbar);
+        setSupportActionBar(binding.toolbarSearch);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(v->onBackPressed());
+        binding.toolbarSearch.setNavigationOnClickListener(v->onBackPressed());
         supportFragmentManager = getSupportFragmentManager();
         setSearchHistoryFragment();
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(viewPagerAdapter);
-        viewPager.setOffscreenPageLimit(2); // Because we want all the fragments to be alive
-        tabLayout.setupWithViewPager(viewPager);
+        binding.viewPager.setAdapter(viewPagerAdapter);
+        binding.viewPager.setOffscreenPageLimit(2); // Because we want all the fragments to be alive
+        binding.tabLayout.setupWithViewPager(binding.viewPager);
         setTabs();
-        searchView.setQueryHint(getString(R.string.search_commons));
-        searchView.onActionViewExpanded();
-        searchView.clearFocus();
+        binding.searchBox.setQueryHint(getString(R.string.search_commons));
+        binding.searchBox.onActionViewExpanded();
+        binding.searchBox.clearFocus();
 
     }
 
@@ -113,8 +103,8 @@ public class SearchActivity extends BaseActivity
 
         viewPagerAdapter.setTabData(fragmentList, titleList);
         viewPagerAdapter.notifyDataSetChanged();
-        compositeDisposable.add(RxSearchView.queryTextChanges(searchView)
-                .takeUntil(RxView.detaches(searchView))
+        compositeDisposable.add(RxSearchView.queryTextChanges(binding.searchBox)
+                .takeUntil(RxView.detaches(binding.searchBox))
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::handleSearch, Timber::e
@@ -124,9 +114,9 @@ public class SearchActivity extends BaseActivity
     private void handleSearch(final CharSequence query) {
         if (!TextUtils.isEmpty(query)) {
             saveRecentSearch(query.toString());
-            viewPager.setVisibility(View.VISIBLE);
-            tabLayout.setVisibility(View.VISIBLE);
-            searchHistoryContainer.setVisibility(View.GONE);
+            binding.viewPager.setVisibility(View.VISIBLE);
+            binding.tabLayout.setVisibility(View.VISIBLE);
+            binding.searchHistoryContainer.setVisibility(View.GONE);
 
             if (FragmentUtils.isFragmentUIActive(searchDepictionsFragment)) {
                 searchDepictionsFragment.onQueryUpdated(query.toString());
@@ -144,10 +134,10 @@ public class SearchActivity extends BaseActivity
         else {
             //Open RecentSearchesFragment
             recentSearchesFragment.updateRecentSearches();
-            viewPager.setVisibility(View.GONE);
-            tabLayout.setVisibility(View.GONE);
+            binding.viewPager.setVisibility(View.GONE);
+            binding.tabLayout.setVisibility(View.GONE);
             setSearchHistoryFragment();
-            searchHistoryContainer.setVisibility(View.VISIBLE);
+            binding.searchHistoryContainer.setVisibility(View.VISIBLE);
         }
     }
 
@@ -215,10 +205,10 @@ public class SearchActivity extends BaseActivity
     @Override
     public void onMediaClicked(int index) {
         ViewUtil.hideKeyboard(this.findViewById(R.id.searchBox));
-        tabLayout.setVisibility(View.GONE);
-        viewPager.setVisibility(View.GONE);
-        mediaContainer.setVisibility(View.VISIBLE);
-        searchView.setVisibility(View.GONE);// to remove searchview when mediaDetails fragment open
+        binding.tabLayout.setVisibility(View.GONE);
+        binding.viewPager.setVisibility(View.GONE);
+        binding.mediaContainer.setVisibility(View.VISIBLE);
+        binding.searchBox.setVisibility(View.GONE);// to remove searchview when mediaDetails fragment open
         if (mediaDetails == null || !mediaDetails.isVisible()) {
             // set isFeaturedImage true for featured images, to include author field on media detail
             mediaDetails = MediaDetailPagerFragment.newInstance(false, true);
@@ -269,12 +259,12 @@ public class SearchActivity extends BaseActivity
         }
         if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
             // back to search so show search toolbar and hide navigation toolbar
-            searchView.setVisibility(View.VISIBLE);//set the searchview
-            tabLayout.setVisibility(View.VISIBLE);
-            viewPager.setVisibility(View.VISIBLE);
-            mediaContainer.setVisibility(View.GONE);
+            binding.searchBox.setVisibility(View.VISIBLE);//set the searchview
+            binding.tabLayout.setVisibility(View.VISIBLE);
+            binding.viewPager.setVisibility(View.VISIBLE);
+            binding.mediaContainer.setVisibility(View.GONE);
         } else {
-            toolbar.setVisibility(View.GONE);
+            binding.toolbarSearch.setVisibility(View.GONE);
         }
         super.onBackPressed();
     }
@@ -284,15 +274,16 @@ public class SearchActivity extends BaseActivity
      * @param query Recent Search Query
      */
     public void updateText(String query) {
-        searchView.setQuery(query, true);
+        binding.searchBox.setQuery(query, true);
         // Clear focus of searchView now. searchView.clearFocus(); does not seem to work Check the below link for more details.
         // https://stackoverflow.com/questions/6117967/how-to-remove-focus-without-setting-focus-to-another-control/15481511
-        viewPager.requestFocus();
+        binding.viewPager.requestFocus();
     }
 
     @Override protected void onDestroy() {
         super.onDestroy();
         //Dispose the disposables when the activity is destroyed
         compositeDisposable.dispose();
+        binding = null;
     }
 }
