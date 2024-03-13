@@ -165,7 +165,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                 if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
                     DialogUtil.showAlertDialog(getActivity(),
                         getActivity().getString(R.string.location_permission_title),
-                        getActivity().getString(R.string.location_permission_rationale_nearby),
+                        getActivity().getString(R.string.location_permission_rationale_explore),
                         getActivity().getString(android.R.string.ok),
                         getActivity().getString(android.R.string.cancel),
                         () -> {
