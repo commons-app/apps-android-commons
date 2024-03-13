@@ -428,7 +428,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             // in the case when MediaDetailPagerFragment is directly started by the CategoryImagesActivity
             if (getParentFragment() instanceof ContributionsFragment) {
                 ((ContributionsFragment) (getParentFragment()
-                    .getParentFragment())).nearbyNotificationCardView
+                    .getParentFragment())).binding.cardViewNearby
                     .setVisibility(View.GONE);
             }
         }
