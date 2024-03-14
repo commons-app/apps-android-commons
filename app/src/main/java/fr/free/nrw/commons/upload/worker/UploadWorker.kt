@@ -6,11 +6,8 @@ import android.app.PendingIntent
 import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
-import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteException
 import android.graphics.BitmapFactory
 import android.os.Build
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.multidex.BuildConfig
@@ -18,18 +15,12 @@ import androidx.work.CoroutineWorker
 import androidx.work.Data
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
-import com.facebook.drawee.backends.pipeline.Fresco
 import dagger.android.ContributesAndroidInjector
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.auth.LoginActivity
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
-import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao
-import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesDao
-import fr.free.nrw.commons.category.CategoryDao
 import fr.free.nrw.commons.contributions.ChunkInfo
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
@@ -46,9 +37,6 @@ import fr.free.nrw.commons.upload.StashUploadState
 import fr.free.nrw.commons.upload.UploadClient
 import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.wikidata.WikidataEditService
-import io.reactivex.Completable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.asFlow
@@ -102,9 +90,6 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
     private var curentNotification: NotificationCompat.Builder
 
     private val statesToProcess= ArrayList<Int>()
-
-    private val loginUsername = "loginUsername"
-    private val loginMessage = "loginMessage"
 
     private val STASH_ERROR_CODES = Arrays
         .asList(
@@ -654,31 +639,4 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
              }
          };
     }
-
-    private fun clearImageCache() {
-        val imagePipeline = Fresco.getImagePipeline()
-        imagePipeline.clearCaches()
-    }
-
-    private fun updateAllDatabases() {
-        dbOpenHelper.getReadableDatabase().close()
-        val db: SQLiteDatabase = dbOpenHelper.getWritableDatabase()
-        CategoryDao.Table.onDelete(db)
-        dbOpenHelper.deleteTable(
-            db,
-            DBOpenHelper.CONTRIBUTIONS_TABLE
-        ) //Delete the contributions table in the existing db on older versions
-        Log.d("CommonsApplication", "All tables have been deleted....updating now...")
-        try {
-            contributionDao.deleteAll()
-        } catch (e: SQLiteException) {
-            Log.d("CommonsApplication", "Error while deleting all contributions " + e.message)
-            Timber.e(e)
-        }
-        Log.d("CommonsApplication", "All contributions have been deleted")
-        BookmarkPicturesDao.Table.onDelete(db)
-        BookmarkLocationsDao.Table.onDelete(db)
-        BookmarkItemsDao.Table.onDelete(db)
-    }
-
 }

@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +24,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.NavUtils;
 import androidx.core.content.ContextCompat;
-
 import fr.free.nrw.commons.auth.login.LoginClient;
 import fr.free.nrw.commons.auth.login.LoginResult;
 import fr.free.nrw.commons.databinding.ActivityLoginBinding;
@@ -55,6 +53,8 @@ import timber.log.Timber;
 import static android.view.KeyEvent.KEYCODE_ENTER;
 import static android.view.View.VISIBLE;
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
+import static fr.free.nrw.commons.CommonsApplication.loginMessageIntentKey;
+import static fr.free.nrw.commons.CommonsApplication.loginUsernameIntentKey;
 
 public class LoginActivity extends AccountAuthenticatorActivity {
 
@@ -81,8 +81,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     final String saveErrorMessage ="errorMessage";
     final String saveUsername="username";
     final  String savePassword="password";
-    final String loginUsername = "loginUsername";
-    final String loginMessage = "loginMessage";
+//    public final String loginUsernameKey = "loginUsername";
+//    public final String loginMessageKey = "loginMessage";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -100,8 +100,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        String message = getIntent().getStringExtra(loginMessage);
-        String username = getIntent().getStringExtra(loginUsername);
+        String message = getIntent().getStringExtra(loginMessageIntentKey);
+        String username = getIntent().getStringExtra(loginUsernameIntentKey);
 
         binding.loginUsername.addTextChangedListener(textWatcher);
         binding.loginPassword.addTextChangedListener(textWatcher);

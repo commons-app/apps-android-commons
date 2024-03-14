@@ -1456,18 +1456,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * onLogoutComplete is called after shared preferences and data stored in local database are
      * cleared.
      */
-//    private class BaseLogoutListener implements CommonsApplication.LogoutListener {
-//
-//        @Override
-//        public void onLogoutComplete() {
-//            Timber.d("Logout complete callback received.");
-//            final Intent nearbyIntent = new Intent(getActivity(), LoginActivity.class);
-//            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            startActivity(nearbyIntent);
-//            getActivity().finish();
-//        }
-//    }
 
     @Override
     public void setFABPlusAction(final View.OnClickListener onClickListener) {

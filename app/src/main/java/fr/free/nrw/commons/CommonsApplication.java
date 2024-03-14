@@ -85,6 +85,9 @@ import timber.log.Timber;
 
 public class CommonsApplication extends MultiDexApplication {
 
+    public static final String loginMessageIntentKey = "loginMessage";
+    public static final String loginUsernameIntentKey = "loginUsername";
+
     public static final String IS_LIMITED_CONNECTION_MODE_ENABLED = "is_limited_connection_mode_enabled";
     @Inject
     SessionManager sessionManager;
@@ -344,9 +347,6 @@ public class CommonsApplication extends MultiDexApplication {
     }
 
     public static class BaseLogoutListener implements CommonsApplication.LogoutListener {
-
-        final String loginMessageIntentKey = "loginMessage";
-        final String loginUsernameIntentKey = "loginUsername";
         Activity activity;
         Context ctx;
         String loginMessage, userName;
