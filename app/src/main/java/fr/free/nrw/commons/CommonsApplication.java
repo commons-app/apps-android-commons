@@ -9,9 +9,11 @@ import static org.acra.ReportField.STACK_TRACE;
 import static org.acra.ReportField.USER_COMMENT;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Build;
@@ -22,6 +24,7 @@ import androidx.multidex.MultiDexApplication;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
+import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
@@ -338,5 +341,51 @@ public class CommonsApplication extends MultiDexApplication {
     public interface LogoutListener {
 
         void onLogoutComplete();
+    }
+
+    public static class BaseLogoutListener implements CommonsApplication.LogoutListener {
+
+        final String loginMessageIntentKey = "loginMessage";
+        final String loginUsernameIntentKey = "loginUsername";
+        Activity activity;
+        Context ctx;
+        String loginMessage, userName;
+
+        public BaseLogoutListener(final Context ctx) {
+            this.ctx = ctx;
+        }
+
+        public BaseLogoutListener(final Activity activity, final Context ctx) {
+            this.activity = activity;
+            this.ctx = ctx;
+        }
+
+        public BaseLogoutListener(final Activity activity, final Context ctx, final String loginMessage, final String loginUsername) {
+            this.activity = activity;
+            this.ctx = ctx;
+            this.loginMessage = loginMessage;
+            this.userName = loginUsername;
+        }
+
+        @Override
+        public void onLogoutComplete() {
+            Timber.d("Logout complete callback received.");
+            final Intent loginIntent = new Intent(ctx, LoginActivity.class);
+            loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            if (loginMessage != null) {
+                loginIntent.putExtra(loginMessageIntentKey, loginMessage);
+            }
+            if (userName != null) {
+                loginIntent.putExtra(loginUsernameIntentKey, userName);
+            }
+
+            ctx.startActivity(loginIntent);
+
+            if (activity != null) {
+                activity.finish();
+            }
+        }
     }
 }

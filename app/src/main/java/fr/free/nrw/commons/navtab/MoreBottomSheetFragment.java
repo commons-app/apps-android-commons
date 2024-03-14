@@ -19,6 +19,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.CommonsApplication.BaseLogoutListener;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.actions.PageEditClient;
@@ -122,7 +123,7 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
             .setPositiveButton(R.string.yes, (dialog, which) -> {
                 final CommonsApplication app = (CommonsApplication)
                     requireContext().getApplicationContext();
-                app.clearApplicationData(requireContext(), new BaseLogoutListener());
+                app.clearApplicationData(requireContext(), new BaseLogoutListener(requireActivity(), getContext()));
             })
             .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
             .show();
@@ -220,20 +221,6 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
 
     protected void onPeerReviewClicked() {
         ReviewActivity.startYourself(getActivity(), getString(R.string.title_activity_review));
-    }
-
-    private class BaseLogoutListener implements CommonsApplication.LogoutListener {
-
-        @Override
-        public void onLogoutComplete() {
-            Timber.d("Logout complete callback received.");
-            final Intent nearbyIntent = new Intent(
-                getContext(), LoginActivity.class);
-            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(nearbyIntent);
-            requireActivity().finish();
-        }
     }
 }
 

@@ -429,25 +429,14 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                     if (stashUploadResult.errorMessage.equals(CsrfTokenClient.INVALID_TOKEN_ERROR_MESSAGE)) {
                         Timber.e("Invalid Login, logging out")
                         val username = sessionManager.userName
-                        sessionManager.logout()
-                            .andThen(Completable.fromAction {
-                                Timber.d("All accounts have been removed")
-                                clearImageCache()
-                                updateAllDatabases()
-                            })
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(
-                                {
-                                    val intent = Intent(appContext, LoginActivity::class.java)
-                                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                    intent.putExtra(loginMessage, appContext.getString(R.string.invalid_login_message))
-                                    intent.putExtra(loginUsername,username)
-                                    appContext.startActivity(intent)
-                                }
-                            ) { t: Throwable? -> Timber.e(t) }
-                    } else {
-
+                        var logoutListener = CommonsApplication.BaseLogoutListener(
+                            null,
+                            appContext,
+                            appContext.getString(R.string.invalid_login_message),
+                            username
+                        )
+                        CommonsApplication.getInstance()
+                            .clearApplicationData(appContext, logoutListener)
                     }
                 }
             }

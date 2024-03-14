@@ -72,6 +72,7 @@ import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.CommonsApplication.BaseLogoutListener;
 import fr.free.nrw.commons.MapController.NearbyPlacesInfo;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -1408,7 +1409,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 .setMessage(R.string.login_alert_message)
                 .setPositiveButton(R.string.login, (dialog, which) -> {
                     // logout of the app
-                    BaseLogoutListener logoutListener = new BaseLogoutListener();
+                    BaseLogoutListener logoutListener = new BaseLogoutListener(getActivity(), getActivity());
                     CommonsApplication app = (CommonsApplication) getActivity().getApplication();
                     app.clearApplicationData(getContext(), logoutListener);
                 })
@@ -1455,18 +1456,18 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * onLogoutComplete is called after shared preferences and data stored in local database are
      * cleared.
      */
-    private class BaseLogoutListener implements CommonsApplication.LogoutListener {
-
-        @Override
-        public void onLogoutComplete() {
-            Timber.d("Logout complete callback received.");
-            final Intent nearbyIntent = new Intent(getActivity(), LoginActivity.class);
-            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(nearbyIntent);
-            getActivity().finish();
-        }
-    }
+//    private class BaseLogoutListener implements CommonsApplication.LogoutListener {
+//
+//        @Override
+//        public void onLogoutComplete() {
+//            Timber.d("Logout complete callback received.");
+//            final Intent nearbyIntent = new Intent(getActivity(), LoginActivity.class);
+//            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            startActivity(nearbyIntent);
+//            getActivity().finish();
+//        }
+//    }
 
     @Override
     public void setFABPlusAction(final View.OnClickListener onClickListener) {
