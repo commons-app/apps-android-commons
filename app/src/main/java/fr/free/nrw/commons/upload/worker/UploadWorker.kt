@@ -27,7 +27,6 @@ import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.contributions.MainActivity
 import fr.free.nrw.commons.customselector.database.UploadedStatus
 import fr.free.nrw.commons.customselector.database.UploadedStatusDao
-import fr.free.nrw.commons.data.DBOpenHelper
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.theme.BaseActivity
@@ -55,8 +54,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
 
     private var notificationManager: NotificationManagerCompat? = null
 
-    @Inject
-    lateinit var dbOpenHelper: DBOpenHelper
+
     @Inject
     lateinit var wikidataEditService: WikidataEditService
 
@@ -415,7 +413,6 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                         Timber.e("Invalid Login, logging out")
                         val username = sessionManager.userName
                         var logoutListener = CommonsApplication.BaseLogoutListener(
-                            null,
                             appContext,
                             appContext.getString(R.string.invalid_login_message),
                             username

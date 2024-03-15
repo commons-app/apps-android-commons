@@ -36,6 +36,7 @@ import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.language.AppLanguageLookUpTable;
 import fr.free.nrw.commons.logging.FileLoggingTree;
 import fr.free.nrw.commons.logging.LogUtils;
 import fr.free.nrw.commons.media.CustomOkHttpNetworkFetcher;
@@ -60,7 +61,6 @@ import org.acra.annotation.AcraCore;
 import org.acra.annotation.AcraDialog;
 import org.acra.annotation.AcraMailSender;
 import org.acra.data.StringFormat;
-import fr.free.nrw.commons.language.AppLanguageLookUpTable;
 import timber.log.Timber;
 
 @AcraCore(
@@ -143,12 +143,12 @@ public class CommonsApplication extends MultiDexApplication {
     ContributionDao contributionDao;
 
     /**
-     *  In-memory list of contributions whose uploads have been paused by the user
+     * In-memory list of contributions whose uploads have been paused by the user
      */
     public static Map<String, Boolean> pauseUploads = new HashMap<>();
 
     /**
-     *  In-memory list of uploads that have been cancelled by the user
+     * In-memory list of uploads that have been cancelled by the user
      */
     public static HashSet<String> cancelledUploads = new HashSet<>();
 
@@ -346,8 +346,15 @@ public class CommonsApplication extends MultiDexApplication {
         void onLogoutComplete();
     }
 
+    /**
+     * This class is used to log out the user from the application and redirect to the login page
+     *
+     * @param ctx           Application context
+     * @param loginMessage  Message to be displayed on login page
+     * @param loginUsername Username to be displayed on login page
+     */
     public static class BaseLogoutListener implements CommonsApplication.LogoutListener {
-        Activity activity;
+
         Context ctx;
         String loginMessage, userName;
 
@@ -355,13 +362,8 @@ public class CommonsApplication extends MultiDexApplication {
             this.ctx = ctx;
         }
 
-        public BaseLogoutListener(final Activity activity, final Context ctx) {
-            this.activity = activity;
-            this.ctx = ctx;
-        }
-
-        public BaseLogoutListener(final Activity activity, final Context ctx, final String loginMessage, final String loginUsername) {
-            this.activity = activity;
+        public BaseLogoutListener(final Context ctx, final String loginMessage,
+            final String loginUsername) {
             this.ctx = ctx;
             this.loginMessage = loginMessage;
             this.userName = loginUsername;
@@ -382,10 +384,37 @@ public class CommonsApplication extends MultiDexApplication {
             }
 
             ctx.startActivity(loginIntent);
+        }
+    }
 
-            if (activity != null) {
-                activity.finish();
-            }
+    /**
+     * This class is used to log out the user from the application and redirect to the login page
+     *
+     * @param activity Activity context
+     * @param ctx      Application context
+     */
+
+    public static class ActivityLogoutListener extends BaseLogoutListener {
+
+        Activity activity;
+
+
+        public ActivityLogoutListener(final Activity activity, final Context ctx) {
+            super(ctx);
+            this.activity = activity;
+        }
+
+        public ActivityLogoutListener(final Activity activity, final Context ctx,
+            final String loginMessage, final String loginUsername) {
+            super(activity, loginMessage, loginUsername);
+            this.activity = activity;
+        }
+
+        @Override
+        public void onLogoutComplete() {
+            super.onLogoutComplete();
+            activity.finish();
         }
     }
 }
+

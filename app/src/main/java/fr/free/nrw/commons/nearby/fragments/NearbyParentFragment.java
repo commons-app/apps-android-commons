@@ -76,7 +76,6 @@ import fr.free.nrw.commons.CommonsApplication.BaseLogoutListener;
 import fr.free.nrw.commons.MapController.NearbyPlacesInfo;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.contributions.MainActivity;
@@ -1409,8 +1408,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 .setMessage(R.string.login_alert_message)
                 .setPositiveButton(R.string.login, (dialog, which) -> {
                     // logout of the app
-                    BaseLogoutListener logoutListener = new BaseLogoutListener(getActivity(), getActivity());
-                    CommonsApplication app = (CommonsApplication) getActivity().getApplication();
+                    BaseLogoutListener logoutListener = new BaseLogoutListener(getActivity());                    CommonsApplication app = (CommonsApplication) getActivity().getApplication();
                     app.clearApplicationData(getContext(), logoutListener);
                 })
                 .show();

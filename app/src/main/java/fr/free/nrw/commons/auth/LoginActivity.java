@@ -81,8 +81,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     final String saveErrorMessage ="errorMessage";
     final String saveUsername="username";
     final  String savePassword="password";
-//    public final String loginUsernameKey = "loginUsername";
-//    public final String loginMessageKey = "loginMessage";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

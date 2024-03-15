@@ -19,11 +19,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.CommonsApplication.BaseLogoutListener;
+import fr.free.nrw.commons.CommonsApplication.ActivityLogoutListener;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.actions.PageEditClient;
-import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.databinding.FragmentMoreBottomSheetBinding;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.feedback.FeedbackContentCreator;
@@ -42,7 +41,6 @@ import io.reactivex.schedulers.Schedulers;
 import java.util.concurrent.Callable;
 import javax.inject.Inject;
 import javax.inject.Named;
-import timber.log.Timber;
 
 public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
 
@@ -123,7 +121,7 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
             .setPositiveButton(R.string.yes, (dialog, which) -> {
                 final CommonsApplication app = (CommonsApplication)
                     requireContext().getApplicationContext();
-                app.clearApplicationData(requireContext(), new BaseLogoutListener(requireActivity(), getContext()));
+                app.clearApplicationData(requireContext(), new ActivityLogoutListener(requireActivity(), getContext()));
             })
             .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
             .show();
