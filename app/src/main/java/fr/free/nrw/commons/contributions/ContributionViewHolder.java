@@ -12,14 +12,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsListAdapter.Callback;
+import fr.free.nrw.commons.databinding.LayoutContributionBinding;
 import fr.free.nrw.commons.media.MediaClient;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -29,29 +27,8 @@ import java.io.File;
 public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
     private final Callback callback;
-    @BindView(R.id.contributionImage)
-    SimpleDraweeView imageView;
-    @BindView(R.id.contributionTitle)
-    TextView titleView;
-    @BindView(R.id.authorView)
-    TextView authorView;
-    @BindView(R.id.contributionState)
-    TextView stateView;
-    @BindView(R.id.contributionSequenceNumber)
-    TextView seqNumView;
-    @BindView(R.id.contributionProgress)
-    ProgressBar progressView;
-    @BindView(R.id.image_options)
-    RelativeLayout imageOptions;
-    @BindView(R.id.wikipediaButton)
-    ImageButton addToWikipediaButton;
-    @BindView(R.id.retryButton)
-    ImageButton retryButton;
-    @BindView(R.id.cancelButton)
-    ImageButton cancelButton;
-    @BindView(R.id.pauseResumeButton)
-    ImageButton pauseResumeButton;
 
+    LayoutContributionBinding binding;
 
     private int position;
     private Contribution contribution;
@@ -67,8 +44,15 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
         super(parent);
         this.parent = parent;
         this.mediaClient = mediaClient;
-        ButterKnife.bind(this, parent);
         this.callback = callback;
+
+        binding = LayoutContributionBinding.bind(parent);
+
+        binding.retryButton.setOnClickListener(v -> retryUpload());
+        binding.cancelButton.setOnClickListener(v -> deleteUpload());
+        binding.contributionImage.setOnClickListener(v -> imageClicked());
+        binding.wikipediaButton.setOnClickListener(v -> wikipediaButtonClicked());
+        binding.pauseResumeButton.setOnClickListener(v -> onPauseResumeButtonClicked());
 
         /* Set a dialog indicating that the upload is being paused. This is needed because pausing
         an upload might take a dozen seconds. */
@@ -87,14 +71,17 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
 
         this.contribution = contribution;
         this.position = position;
-        titleView.setText(contribution.getMedia().getMostRelevantCaption());
-        authorView.setText(contribution.getMedia().getAuthor());
+        binding.contributionTitle.setText(contribution.getMedia().getMostRelevantCaption());
+        binding.authorView.setText(contribution.getMedia().getAuthor());
 
         //Removes flicker of loading image.
-        imageView.getHierarchy().setFadeDuration(0);
+        binding.contributionImage.getHierarchy().setFadeDuration(0);
 
-        imageView.getHierarchy().setPlaceholderImage(R.drawable.image_placeholder);
-        imageView.getHierarchy().setFailureImage(R.drawable.image_placeholder);
+        binding.contributionImage.getHierarchy().setPlaceholderImage(R.drawable.image_placeholder);
+        binding.contributionImage.getHierarchy().setFailureImage(R.drawable.image_placeholder);
+        
+        
+        
 
         final String imageSource = chooseImageSource(contribution.getMedia().getThumbUrl(),
             contribution.getLocalUri());
@@ -109,67 +96,67 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
             }
 
             if(imageRequest != null){
-                imageView.setImageRequest(imageRequest);
+                binding.contributionImage.setImageRequest(imageRequest);
             }
         }
 
-        seqNumView.setText(String.valueOf(position + 1));
-        seqNumView.setVisibility(View.VISIBLE);
+        binding.contributionSequenceNumber.setText(String.valueOf(position + 1));
+        binding.contributionSequenceNumber.setVisibility(View.VISIBLE);
 
-        addToWikipediaButton.setVisibility(View.GONE);
+        binding.wikipediaButton.setVisibility(View.GONE);
         switch (contribution.getState()) {
             case Contribution.STATE_COMPLETED:
-                stateView.setVisibility(View.GONE);
-                progressView.setVisibility(View.GONE);
-                imageOptions.setVisibility(View.GONE);
-                stateView.setText("");
+                binding.contributionState.setVisibility(View.GONE);
+                binding.contributionProgress.setVisibility(View.GONE);
+                binding.imageOptions.setVisibility(View.GONE);
+                binding.contributionState.setText("");
                 checkIfMediaExistsOnWikipediaPage(contribution);
                 break;
             case Contribution.STATE_QUEUED:
             case Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE:
-                progressView.setVisibility(View.GONE);
-                stateView.setVisibility(View.VISIBLE);
-                stateView.setText(R.string.contribution_state_queued);
-                imageOptions.setVisibility(View.GONE);
+                binding.contributionProgress.setVisibility(View.GONE);
+                binding.contributionState.setVisibility(View.VISIBLE);
+                binding.contributionState.setText(R.string.contribution_state_queued);
+                binding.imageOptions.setVisibility(View.GONE);
                 break;
             case Contribution.STATE_IN_PROGRESS:
-                stateView.setVisibility(View.GONE);
-                progressView.setVisibility(View.VISIBLE);
-                addToWikipediaButton.setVisibility(View.GONE);
-                pauseResumeButton.setVisibility(View.VISIBLE);
-                cancelButton.setVisibility(View.GONE);
-                retryButton.setVisibility(View.GONE);
-                imageOptions.setVisibility(View.VISIBLE);
+                binding.contributionState.setVisibility(View.GONE);
+                binding.contributionProgress.setVisibility(View.VISIBLE);
+                binding.wikipediaButton.setVisibility(View.GONE);
+                binding.pauseResumeButton.setVisibility(View.VISIBLE);
+                binding.cancelButton.setVisibility(View.GONE);
+                binding.retryButton.setVisibility(View.GONE);
+                binding.imageOptions.setVisibility(View.VISIBLE);
                 final long total = contribution.getDataLength();
                 final long transferred = contribution.getTransferred();
                 if (transferred == 0 || transferred >= total) {
-                    progressView.setIndeterminate(true);
+                    binding.contributionProgress.setIndeterminate(true);
                 } else {
-                    progressView.setIndeterminate(false);
-                    progressView.setProgress((int) (((double) transferred / (double) total) * 100));
+                    binding.contributionProgress.setIndeterminate(false);
+                    binding.contributionProgress.setProgress((int) (((double) transferred / (double) total) * 100));
                 }
                 break;
             case Contribution.STATE_PAUSED:
-                progressView.setVisibility(View.GONE);
-                stateView.setVisibility(View.VISIBLE);
-                stateView.setText(R.string.paused);
-                cancelButton.setVisibility(View.VISIBLE);
-                retryButton.setVisibility(View.GONE);
-                pauseResumeButton.setVisibility(View.VISIBLE);
-                imageOptions.setVisibility(View.VISIBLE);
+                binding.contributionProgress.setVisibility(View.GONE);
+                binding.contributionState.setVisibility(View.VISIBLE);
+                binding.contributionState.setText(R.string.paused);
+                binding.cancelButton.setVisibility(View.VISIBLE);
+                binding.retryButton.setVisibility(View.GONE);
+                binding.pauseResumeButton.setVisibility(View.VISIBLE);
+                binding.imageOptions.setVisibility(View.VISIBLE);
                 setResume();
                 if(pausingPopUp.isShowing()){
                     pausingPopUp.hide();
                 }
                 break;
             case Contribution.STATE_FAILED:
-                stateView.setVisibility(View.VISIBLE);
-                stateView.setText(R.string.contribution_state_failed);
-                progressView.setVisibility(View.GONE);
-                cancelButton.setVisibility(View.VISIBLE);
-                retryButton.setVisibility(View.VISIBLE);
-                pauseResumeButton.setVisibility(View.GONE);
-                imageOptions.setVisibility(View.VISIBLE);
+                binding.contributionState.setVisibility(View.VISIBLE);
+                binding.contributionState.setText(R.string.contribution_state_failed);
+                binding.contributionProgress.setVisibility(View.GONE);
+                binding.cancelButton.setVisibility(View.VISIBLE);
+                binding.retryButton.setVisibility(View.VISIBLE);
+                binding.pauseResumeButton.setVisibility(View.GONE);
+                binding.imageOptions.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -203,11 +190,11 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
      */
     private void displayWikipediaButton(Boolean mediaExists) {
         if (!mediaExists) {
-            addToWikipediaButton.setVisibility(View.VISIBLE);
+            binding.wikipediaButton.setVisibility(View.VISIBLE);
             isWikipediaButtonDisplayed = true;
-            cancelButton.setVisibility(View.GONE);
-            retryButton.setVisibility(View.GONE);
-            imageOptions.setVisibility(View.VISIBLE);
+            binding.cancelButton.setVisibility(View.GONE);
+            binding.retryButton.setVisibility(View.GONE);
+            binding.imageOptions.setVisibility(View.VISIBLE);
         }
     }
 
@@ -229,7 +216,6 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     /**
      * Retry upload when it is failed
      */
-    @OnClick(R.id.retryButton)
     public void retryUpload() {
         callback.retryUpload(contribution);
     }
@@ -237,17 +223,14 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     /**
      * Delete a failed upload attempt
      */
-    @OnClick(R.id.cancelButton)
     public void deleteUpload() {
         callback.deleteUpload(contribution);
     }
 
-    @OnClick(R.id.contributionImage)
     public void imageClicked() {
         callback.openMediaDetail(position, isWikipediaButtonDisplayed);
     }
 
-    @OnClick(R.id.wikipediaButton)
     public void wikipediaButtonClicked() {
         callback.addImageToWikipedia(contribution);
     }
@@ -255,9 +238,8 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
     /**
      * Triggers a callback for pause/resume
      */
-    @OnClick(R.id.pauseResumeButton)
     public void onPauseResumeButtonClicked() {
-        if (pauseResumeButton.getTag().toString().equals("pause")) {
+        if (binding.pauseResumeButton.getTag().toString().equals("pause")) {
             pause();
         } else {
             resume();
@@ -279,16 +261,16 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
      * Update pause/resume button to show pause state
      */
     private void setPaused() {
-        pauseResumeButton.setImageResource(R.drawable.pause_icon);
-        pauseResumeButton.setTag(parent.getContext().getString(R.string.pause));
+        binding.pauseResumeButton.setImageResource(R.drawable.pause_icon);
+        binding.pauseResumeButton.setTag(parent.getContext().getString(R.string.pause));
     }
 
     /**
      * Update pause/resume button to show resume state
      */
     private void setResume() {
-        pauseResumeButton.setImageResource(R.drawable.play_icon);
-        pauseResumeButton.setTag(parent.getContext().getString(R.string.resume));
+        binding.pauseResumeButton.setImageResource(R.drawable.play_icon);
+        binding.pauseResumeButton.setTag(parent.getContext().getString(R.string.resume));
     }
 
     public ImageRequest getImageRequest() {

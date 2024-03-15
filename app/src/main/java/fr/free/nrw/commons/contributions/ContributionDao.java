@@ -12,7 +12,6 @@ import androidx.room.Update;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @Dao

@@ -1,15 +1,12 @@
 package fr.free.nrw.commons.explore.map;
 
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.SEARCH_CUSTOM_AREA;
 
 
 import android.location.Location;
 import android.view.View;
 import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
-import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import fr.free.nrw.commons.MapController;
 import fr.free.nrw.commons.MapController.ExplorePlacesInfo;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
@@ -18,7 +15,6 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
-import fr.free.nrw.commons.utils.LocationUtils;
 import io.reactivex.Observable;
 import java.lang.reflect.Proxy;
 import java.util.List;

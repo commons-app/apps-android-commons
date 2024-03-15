@@ -2,12 +2,10 @@ package fr.free.nrw.commons.explore.map;
 
 import android.content.Context;
 import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.camera.CameraUpdate;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.NearbyBaseMarker;
-import fr.free.nrw.commons.nearby.Place;
 import java.util.List;
 
 public class ExploreMapContract {

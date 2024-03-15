@@ -19,6 +19,7 @@
 * NancyMilad
 * OsamaK
 * Tala Ali
+* أيوب
 * أَحمد
 * ترجمان05
 * ديفيد
@@ -130,6 +131,7 @@
   <string name="upload_failed">الملف غير موجود. فضلا اختر ملفا آخر.</string>
   <string name="retry_limit_reached">تم الوصول إلى الحد الأقصى لإعادة المحاولة! يرجى إلغاء التحميل والمحاولة مرة أخرى</string>
   <string name="unrestricted_battery_mode">هل تريد إيقاف تشغيل تحسين البطارية؟</string>
+  <string name="suggest_unrestricted_mode">يعمل رفع أكثر من 3 صور بشكل أكثر موثوقية عند إيقاف تشغيل تحسين البطارية. يرجى إيقاف تشغيل تحسين البطارية لتطبيق كومنز من الإعدادات للحصول على تجربة تحميل سلسة. \n\nالخطوات الممكنة لإيقاف تشغيل تحسين البطارية:\n\nالخطوة 1: اضغط على زر \'الإعدادات\' أدناه.\n\nالخطوة 2: التبديل من \'غير محسّن\" إلى \'الكل التطبيقات\'.\n\nالخطوة 3: ابحث عن \'كومنز\' أو \'fr.free.nrw.commons\'.\n\nالخطوة 4: اضغط عليها وحدد \'عدم التحسين\'.\n\nالخطوة 5: اضغط على \'تم\'.</string>
   <string name="authentication_failed">فشلت المصادقة; الرجاء تسجيل الدخول مرة أخرى</string>
   <string name="uploading_started">بدأ الرفع!</string>
   <string name="uploading_queued">تحميل في قائمة الانتظار (وضع الاتصال المحدود ممكّن)</string>
@@ -244,8 +246,11 @@
   <string name="read_storage_permission_rationale">صلاحية مطلوبة: قراءة وحدة التخزين الخارجية، لا يمكن للتطبيق الوصول إلى معرض الصور الخاص بك بدونها.</string>
   <string name="write_storage_permission_rationale">صلاحية مطلوبة: اكتب وحدة التخزين الخارجية، لا يمكن للتطبيق الوصول إلى معرض الصور/الكاميرا الخاصة بك بدونها.</string>
   <string name="location_permission_title">جارٍ طلب إذن الموقع</string>
+  <string name="in_app_camera_location_permission_title">سجل الموقع للقطات داخل التطبيق</string>
+  <string name="in_app_camera_location_switch_pref_summary">قم بتمكين هذا لتسجيل الموقع باستخدام لقطات داخل التطبيق في حالة عدم قيام كاميرا الجهاز بتسجيله</string>
   <string name="ok">موافق</string>
   <string name="warning">تحذير</string>
+  <string name="duplicate_file_name">عُثِرَ على اسم ملف مكرر</string>
   <string name="upload">رفع</string>
   <string name="yes">نعم</string>
   <string name="no">لا</string>
@@ -321,6 +326,7 @@
   <string name="copy_wikicode">انسخ نص الويكي إلى الكليب بورد</string>
   <string name="wikicode_copied">نص الويكي تم نسخه إلى الكليب بورد</string>
   <string name="nearby_location_not_available">قد لا تعمل الأجهزة المجاورة بشكل صحيح، الموقع غير متوفر.</string>
+  <string name="upload_location_access_denied">رُفض الوصول إلى الموقع. يرجى ضبط موقعك يدويًا لاستخدام هذه الميزة.</string>
   <string name="location_permission_rationale_nearby">صلاحية مطلوبة لعرض قائمة بالأماكن القريبة</string>
   <string name="nearby_directions">الاتجاهات</string>
   <string name="nearby_wikidata">ويكي بيانات</string>
@@ -388,7 +394,9 @@
   <string name="wrong">إجابة خاطئة</string>
   <string name="quiz_screenshot_question">هل هذه الصورة موافقة للرفع؟</string>
   <string name="share_app_title">شارك التطبيق</string>
+  <string name="rotate">تدوير</string>
   <string name="error_fetching_nearby_places">خطأ في جلب الأماكن المجاورة.</string>
+  <string name="no_pictures_in_this_area">لا توجد صور في هذه المنطقة</string>
   <string name="no_nearby_places_around">لا توجد أماكن قريبة بالجوار</string>
   <string name="error_fetching_nearby_monuments">خطأ في جلب المعالم القريبة.</string>
   <string name="no_recent_searches">لا توجد عمليات بحث حديثة</string>
@@ -468,7 +476,15 @@
   <string name="ends_on">ينتهي في:</string>
   <string name="display_campaigns">عرض الحملات</string>
   <string name="display_campaigns_explanation">انظر الحملات الجارية</string>
-  <string name="location_loss_warning" fuzzy="true">يرجى التأكد من أن منتقي أندرويد الجديد هذا لا يزيل الموقع من صورك.</string>
+  <string name="in_app_camera_location_access_explanation">اسمح للتطبيق بجلب الموقع في حالة عدم تسجيله بالكاميرا. بعض كاميرات الأجهزة لا تسجل الموقع. في مثل هذه الحالات، فإن السماح للتطبيق بجلب الموقع وإرفاقه به يجعل مساهمتك أكثر فائدة. يمكنك تغيير هذا في أي وقت من خلال الإعدادات</string>
+  <string name="option_allow">السماح</string>
+  <string name="option_dismiss">رفض</string>
+  <string name="in_app_camera_needs_location">يرجى تشغيل الوصول إلى الموقع من الإعدادات والمحاولة مرة أخرى. \n\nملاحظة: قد لا يكون للتحميل موقع إذا كان التطبيق غير قادر على استرداد الموقع من الجهاز خلال فترة زمنية قصيرة.</string>
+  <string name="in_app_camera_location_permission_rationale">تحتاج الكاميرا داخل التطبيق إلى إذن تحديد الموقع لإرفاقها بصورك في حالة عدم توفر الموقع في EXIF. يرجى السماح للتطبيق بالوصول إلى موقعك والمحاولة مرة أخرى.\n\nملاحظة: قد لا يكون للتحميل موقع إذا كان التطبيق غير قادر على استرداد الموقع من الجهاز خلال فترة زمنية قصيرة.</string>
+  <string name="in_app_camera_location_permission_denied">لن يسجل التطبيق الموقع مع اللقطات بسبب عدم وجود إذن بالموقع</string>
+  <string name="in_app_camera_location_unavailable">لن يسجل التطبيق الموقع مع اللقطات أثناء إيقاف تشغيل نظام تحديد المواقع (GPS).</string>
+  <string name="open_document_photo_picker_explanation">يخاطر منتقي الصور الجديد لنظام Android بفقدان معلومات الموقع. قم بالتمكين إذا بدا أنك تستخدمه.</string>
+  <string name="location_loss_warning">قد يؤدي إيقاف تشغيل هذا إلى تشغيل منتقي صور Android الجديد. ويخاطر بفقدان معلومات الموقع.\n\nاضغط على \"اقرأ المزيد\" لمزيد من المعلومات.</string>
   <string name="nearby_campaign_dismiss_message">لن ترى الحملات بعد الآن، ومع ذلك، يمكنك إعادة تمكين هذا الإشعار في الإعدادات إذا كنت ترغب.</string>
   <string name="this_function_needs_network_connection">تتطلب هذه الوظيفة الاتصال بالشبكة; يُرجَى التحقق من إعدادات اتصالك.</string>
   <string name="error_processing_image">حدث خطأ أثناء معالجة الصورة. رجاءً حاول مرة أخرى!</string>
@@ -530,6 +546,7 @@
   <string name="exif_tag_name_lensModel">طراز العدسة</string>
   <string name="exif_tag_name_serialNumbers">الأرقام التسلسلية</string>
   <string name="exif_tag_name_software">برمجية</string>
+  <string name="media_location_permission_denied">رفض الوصول إلى موقع الوسائط</string>
   <string name="share_text">ارفع الصور لويكيميديا ​​كومنز مباشرة من هاتفك. قم بتنزيل تطبيق كومنز الآن: %1$s</string>
   <string name="share_via">مشاركة التطبيق عبر...</string>
   <string name="image_info">معلومات الصورة</string>
@@ -766,4 +783,6 @@
   <string name="storage_permissions_denied">رُفض إذن التخزين</string>
   <string name="unable_to_share_upload_item">تعذر مشاركة هذا العنصر</string>
   <string name="permissions_are_required_for_functionality">الإذن مطلوب لهذه الوظيفة</string>
+  <string name="send_thanks_to_author">اشكر المؤلف</string>
+  <string name="error_sending_thanks">حدث خطأ أثناء إرسال الشكر للمؤلف.</string>
 </resources>

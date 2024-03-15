@@ -2,7 +2,6 @@ package fr.free.nrw.commons.media;
 
 import static fr.free.nrw.commons.Utils.handleWebUrl;
 
-import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -48,9 +47,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.Callable;
@@ -134,7 +131,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
 
         // If fragment is associated with ProfileActivity, then hide the tabLayout
         if (getActivity() instanceof ProfileActivity) {
-            ((ProfileActivity)getActivity()).tabLayout.setVisibility(View.GONE);
+            ((ProfileActivity)getActivity()).setTabLayoutVisibility(false);
         }
 
         // Else if fragment is associated with MainActivity then hide that tab layout

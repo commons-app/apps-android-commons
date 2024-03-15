@@ -44,7 +44,6 @@ public class PageContentsCreator {
                 .append("}}");
         }
         buffer
-            .append("\n")
             .append("|source=").append("{{own}}\n")
             .append("|author=[[User:").append(media.getAuthor()).append("|")
             .append(media.getAuthor()).append("]]\n");
@@ -68,7 +67,9 @@ public class PageContentsCreator {
                 Utils.getWikiLovesMonumentsYear(Calendar.getInstance()), contribution.getCountryCode()));
         }
 
-        buffer.append("== {{int:license-header}} ==\n")
+        buffer
+            .append("\n")
+            .append("== {{int:license-header}} ==\n")
             .append(licenseTemplateFor(media.getLicense())).append("\n\n")
             .append("{{Uploaded from Mobile|platform=Android|version=")
             .append(ConfigUtils.getVersionNameWithSha(context)).append("}}\n");

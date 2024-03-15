@@ -366,6 +366,7 @@
   <string name="share_app_title">Toepassing delen</string>
   <string name="rotate">Draaien</string>
   <string name="error_fetching_nearby_places">Fout bij het ophalen van plaatsen in de buurt.</string>
+  <string name="no_pictures_in_this_area">Geen foto\'s in dit gebied.</string>
   <string name="no_nearby_places_around">Geen plaatsen in de buurt</string>
   <string name="error_fetching_nearby_monuments">Fout bij het ophalen van monumenten.</string>
   <string name="no_recent_searches">Geen recente zoekopdrachten</string>
@@ -759,7 +760,13 @@
   <string name="storage_permissions_denied">Opslagtoestemming geweigerd</string>
   <string name="unable_to_share_upload_item">Kan dit item niet delen</string>
   <string name="permissions_are_required_for_functionality">Voor deze functionaliteit zijn toestemmingen vereist</string>
+  <string name="learn_how_to_write_a_useful_description">Leer hoe u een nuttige beschrijving schrijft</string>
+  <string name="learn_how_to_write_a_useful_caption">Leer hoe u een nuttig bijschrift schrijft</string>
+  <string name="see_your_achievements">Bekijk uw prestaties</string>
   <string name="edit_image">Afbeelding Bewerken</string>
+  <string name="edit_location">Locatie bewerken</string>
+  <string name="send_thanks_to_author">Auteur bedanken</string>
+  <string name="error_sending_thanks">Fout bij het bedanken van de auteur.</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d afbeelding geselecteerd</item>
     <item quantity="other">%d afbeeldingen geselecteerd</item>
