@@ -1,8 +1,5 @@
 package fr.free.nrw.commons.nearby;
 
-import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
-import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
