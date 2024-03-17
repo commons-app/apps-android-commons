@@ -5,10 +5,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
@@ -54,27 +50,6 @@ class DepictsFragmentUnitTests {
     private lateinit var savedInstanceState: Bundle
 
     @Mock
-    private lateinit var textView: TextView
-
-    @Mock
-    private lateinit var imageView: ImageView
-
-    @Mock
-    private lateinit var recyclerView: RecyclerView
-
-    @Mock
-    private lateinit var textInputEditText: PasteSensitiveTextInputEditText
-
-    @Mock
-    private lateinit var progressBar: ProgressBar
-
-    @Mock
-    private lateinit var button: Button
-
-    @Mock
-    private lateinit var textInputLayout: TextInputLayout
-
-    @Mock
     private lateinit var callback: UploadBaseFragment.Callback
 
     @Mock
@@ -110,16 +85,8 @@ class DepictsFragmentUnitTests {
         view = LayoutInflater.from(activity)
             .inflate(R.layout.upload_depicts_fragment, null) as View
 
-        Whitebox.setInternalState(fragment, "depictsTitle", textView)
+
         Whitebox.setInternalState(fragment, "callback", callback)
-        Whitebox.setInternalState(fragment, "tooltip", imageView)
-        Whitebox.setInternalState(fragment, "btnNext", button)
-        Whitebox.setInternalState(fragment, "btnPrevious", button)
-        Whitebox.setInternalState(fragment, "depictsSubTitle", textView)
-        Whitebox.setInternalState(fragment, "depictsRecyclerView", recyclerView)
-        Whitebox.setInternalState(fragment, "depictsSearch", textInputEditText)
-        Whitebox.setInternalState(fragment, "depictsSearchContainer", textInputLayout)
-        Whitebox.setInternalState(fragment, "depictsSearchInProgress", progressBar)
         Whitebox.setInternalState(fragment, "subscribe", disposable)
         Whitebox.setInternalState(fragment, "adapter", adapter)
     }

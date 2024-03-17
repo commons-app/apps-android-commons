@@ -18,6 +18,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.databinding.FragmentLeaderboardBinding
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardFragment
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardListAdapter
@@ -47,20 +48,11 @@ class LeaderboardFragmentUnitTests {
     private lateinit var fragment: LeaderboardFragment
     private lateinit var fragmentManager: FragmentManager
     private lateinit var context: Context
-    private lateinit var view: View
     private lateinit var layoutInflater: LayoutInflater
 
-    @Mock
-    private lateinit var progressBar: ProgressBar
-
-    @Mock
-    private lateinit var spinner: Spinner
 
     @Mock
     private lateinit var viewModel: LeaderboardListViewModel
-
-    @Mock
-    private lateinit var recyclerView: RecyclerView
 
     @Mock
     private lateinit var adapter: LeaderboardListAdapter
@@ -72,10 +64,9 @@ class LeaderboardFragmentUnitTests {
     private lateinit var account: Account
 
     @Mock
-    private lateinit var button: Button
-
-    @Mock
     private lateinit var parentView: ViewGroup
+
+    private lateinit var binding: FragmentLeaderboardBinding
 
     @Before
     fun setUp() {
@@ -92,15 +83,9 @@ class LeaderboardFragmentUnitTests {
         fragmentTransaction.commitNowAllowingStateLoss()
 
         layoutInflater = LayoutInflater.from(activity)
-        view = LayoutInflater.from(activity)
-            .inflate(R.layout.fragment_leaderboard, null) as View
+        binding = FragmentLeaderboardBinding.inflate(layoutInflater)
 
-        Whitebox.setInternalState(fragment, "progressBar", progressBar)
-        Whitebox.setInternalState(fragment, "categorySpinner", spinner)
-        Whitebox.setInternalState(fragment, "durationSpinner", spinner)
         Whitebox.setInternalState(fragment, "viewModel", viewModel)
-        Whitebox.setInternalState(fragment, "scrollButton", button)
-        Whitebox.setInternalState(fragment, "leaderboardListRecyclerView", recyclerView)
         Whitebox.setInternalState(fragment, "mView", parentView)
     }
 
@@ -140,7 +125,6 @@ class LeaderboardFragmentUnitTests {
     @Throws(Exception::class)
     fun testScrollToUserRankCaseNonZeroTrue() {
         Whitebox.setInternalState(fragment, "userRank", 1)
-        `when`(recyclerView.adapter).thenReturn(adapter)
         `when`(adapter.itemCount).thenReturn(3)
         val method: Method = LeaderboardFragment::class.java.getDeclaredMethod(
             "scrollToUserRank"
@@ -153,7 +137,6 @@ class LeaderboardFragmentUnitTests {
     @Throws(Exception::class)
     fun testScrollToUserRankCaseNonZeroFalse() {
         Whitebox.setInternalState(fragment, "userRank", 1)
-        `when`(recyclerView.adapter).thenReturn(adapter)
         `when`(adapter.itemCount).thenReturn(1)
         val method: Method = LeaderboardFragment::class.java.getDeclaredMethod(
             "scrollToUserRank"

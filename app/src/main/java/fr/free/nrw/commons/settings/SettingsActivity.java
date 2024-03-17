@@ -6,8 +6,6 @@ import android.view.MenuItem;
 import android.view.View;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import androidx.appcompat.widget.Toolbar;
-import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.databinding.ActivitySettingsBinding;
 import fr.free.nrw.commons.theme.BaseActivity;
 
@@ -15,9 +13,9 @@ import fr.free.nrw.commons.theme.BaseActivity;
  * allows the user to change the settings
  */
 public class SettingsActivity extends BaseActivity {
-    private AppCompatDelegate settingsDelegate;
 
     private ActivitySettingsBinding binding;
+    private AppCompatDelegate settingsDelegate;
     /**
      * to be called when the activity starts
      * @param savedInstanceState the previously saved state
@@ -25,13 +23,11 @@ public class SettingsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivitySettingsBinding.inflate(getLayoutInflater());
         final View view = binding.getRoot();
         setContentView(view);
 
         setSupportActionBar(binding.toolbarBinding.toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
