@@ -158,7 +158,6 @@ class ImageAdapter(
             } else {
                 holder.itemUnselected()
             }
-
             imageLoader.queryAndSetView(
                 holder, image, ioDispatcher, defaultDispatcher ,uploadingContributionList
             )
@@ -331,13 +330,13 @@ class ImageAdapter(
     /**
      * Initialize the data set.
      */
-    fun init(newImages: List<Image>, fixedImages: List<Image>, emptyMap: TreeMap<Int, Image>, uploadedImagges: List<Contribution> = ArrayList()) {
+    fun init(newImages: List<Image>, fixedImages: List<Image>, emptyMap: TreeMap<Int, Image>, uploadedImages: List<Contribution> = ArrayList()) {
         allImages = fixedImages
         val oldImageList:ArrayList<Image> = images
         val newImageList:ArrayList<Image> = ArrayList(newImages)
         actionableImagesMap = emptyMap
         alreadyAddedPositions = ArrayList()
-        uploadingContributionList = uploadedImagges
+        uploadingContributionList = uploadedImages
         nextImagePosition = 0
         reachedEndOfFolder = false
         selectedImages = ArrayList()
