@@ -86,6 +86,7 @@
   <string name="login_success">Innloggingen var vellykket!</string>
   <string name="login_failed">Innloggingen feilet!</string>
   <string name="upload_failed">Filen ble ikke funnet. Forsøk med en annen fil.</string>
+  <string name="retry_limit_reached">Maksimalt antall forsøk nådd! Avbryt opplastingen og prøv på nytt</string>
   <string name="unrestricted_battery_mode">Deaktiver batterioptimalisering?</string>
   <string name="authentication_failed">Autentiseringen feilet, vennligst logg inn igjen</string>
   <string name="uploading_started">Opplastingen startet</string>
@@ -349,6 +350,7 @@
   <string name="wrong">Galt svar</string>
   <string name="quiz_screenshot_question">Kan dette skjermbildet lastes opp?</string>
   <string name="share_app_title">Del appen</string>
+  <string name="rotate">Roter</string>
   <string name="error_fetching_nearby_places">Feil under henting av steder i nærheten.</string>
   <string name="no_nearby_places_around">Ingen steder funnet i nærheten</string>
   <string name="error_fetching_nearby_monuments">Feil under henting av kulturminner i nærheten.</string>
@@ -385,7 +387,7 @@
   <string name="notifications">Varsler</string>
   <string name="read_notifications">Varsler (lest)</string>
   <string name="display_nearby_notification">Vis varsel for steder i nærheten</string>
-  <string name="display_nearby_notification_summary" fuzzy="true">Trykk her for å se det nærmeste stedet som trenger bilder</string>
+  <string name="display_nearby_notification_summary">Vis varsel i appen for nærmeste sted som trenger bilder</string>
   <string name="list_sheet">Liste</string>
   <string name="storage_permission">Lagringstillatelse</string>
   <string name="write_storage_permission_rationale_for_image_share">Vi trenger din tillatelse for å få tilgang til enhetens eksterne lagring for å kunne laste opp bilder.</string>
@@ -411,7 +413,9 @@
   <string name="no_uploads">Velkommen til Commons!\n\nLast opp din første mediefil ved å trykke på legg til-knappen.</string>
   <string name="no_categories_selected">Ingen kategorier valgt</string>
   <string name="no_categories_selected_warning_desc">Bilder uten kategorier er sjelden nyttige. Er du sikker på at du vil fortsette uten å velge kategorier?</string>
+  <string name="no_depictions_selected">Ingen avbildninger valgt</string>
   <string name="back_button_warning">Avbryt opplasting</string>
+  <string name="back_button_warning_desc">Tilbakeknappen avbryter opplastingen, og du vil miste framgangen din.</string>
   <string name="back_button_continue">Fortsett opplasting</string>
   <string name="upload_flow_all_images_in_set">(For alle bilder i settet)</string>
   <string name="search_this_area">Søk i dette området</string>
@@ -422,11 +426,15 @@
   <string name="display_location_permission_title">Be om plasseringstillatelse</string>
   <string name="display_location_permission_explanation">Ber om plasseringstillatelse som trengs når man bruker funksjonen for steder i nærheten.</string>
   <string name="achievements_fetch_failed">Noe gikk galt. Vi kunne ikke hente prestasjonene dine.</string>
+  <string name="achievements_fetch_failed_ultimate_achievement">Du har bidratt så mye at utregningssystemet vårt ikke takler det. Dette er den ultimate prestasjonen.</string>
   <string name="ends_on">Slutter:</string>
   <string name="display_campaigns">Vis kampanjer</string>
   <string name="display_campaigns_explanation">Se aktive kampanjer</string>
+  <string name="in_app_camera_location_access_explanation">La appen hente posisjon i tilfelle kameraet ikke lagrer det. Noen enheters kameraer lagrer ikke posisjon. I slike tilfeller vil bidragene dine bli nyttigere om du lar appen hente posisjonen. Du kan endre denne innstillingen når som helst.</string>
   <string name="option_allow">Tillat</string>
   <string name="option_dismiss">Lukk</string>
+  <string name="in_app_camera_needs_location">Slå på posisjonstilgang fra innstillingene og prøv igjen.\n\nMerk: Opplastingen vil kanskje ikke ha posisjonsdata hvis appen ikke kunne hente disse fra enheten innen kort tid.</string>
+  <string name="in_app_camera_location_permission_rationale">Kameraet i appen trenger posisjonstilgang for å legge det til på bildet i tilfelle dette ikke er tilgjengelig i EXIF. La appen få tilgang til posisjonen din og prøv igjen.\n\nMerk: Opplastingen vil kanskje ikke ha posisjon dersom appen ikke kunne hente dette fra enheten i løpet av kort tid.</string>
   <string name="open_document_photo_picker_title">Bruk dokumentbasert bildevelger</string>
   <string name="nearby_campaign_dismiss_message">Du vil ikke se kampanjer lenger. Du kan slå på dette igjen i innstillingene om du ønsker.</string>
   <string name="this_function_needs_network_connection">Denne funksjonen trenger nettverksforbindelse, sjekk tilkoblingsinnstillingene dine.</string>

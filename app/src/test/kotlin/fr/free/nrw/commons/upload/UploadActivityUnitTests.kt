@@ -6,16 +6,16 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.work.Configuration
 import androidx.work.testing.WorkManagerTestInitHelper
 import fr.free.nrw.commons.CommonsApplication
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.contributions.ContributionController
 import fr.free.nrw.commons.filepicker.UploadableFile
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment
 import fr.free.nrw.commons.upload.license.MediaLicenseFragment
 import org.junit.Assert
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
@@ -26,7 +26,6 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 
 
@@ -53,7 +52,7 @@ class UploadActivityUnitTests {
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
         val intent = Intent()
         val list = ArrayList<UploadableFile>()
         list.add(uploadableFile)

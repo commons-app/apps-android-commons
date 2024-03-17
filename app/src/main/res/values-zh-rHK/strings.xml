@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Ciaranchen
 * Liuxinyu970226
 * StarrySky
 * 捍粵者
@@ -212,4 +213,6 @@
   <string name="nearby_info_menu_wikidata_article">維基數據項目</string>
   <string name="nearby_info_menu_wikipedia_article">維基百科條目</string>
   <string name="description_info">請盡可能描述媒體內容：拍攝於何處？是顯示什麼事物？有什麼脈絡？請描述對象或人物。透露出一些較不易猜測的訊息，例如是風景的話，可以是一天裡的時間。如果媒體顯示出了一些不尋常的事物，請說明不尋常原因。</string>
+  <string name="learn_how_to_write_a_useful_description">學習如何編寫有用的描述</string>
+  <string name="learn_how_to_write_a_useful_caption">學習如何編寫有用的標題</string>
 </resources>

@@ -39,6 +39,7 @@ import androidx.fragment.app.FragmentTransaction;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.databinding.FragmentContributionsBinding;
 import fr.free.nrw.commons.notification.models.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.profile.ProfileActivity;
@@ -49,8 +50,6 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 import androidx.work.WorkManager;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.campaigns.models.Campaign;
@@ -106,10 +105,8 @@ public class ContributionsFragment
     static final String MEDIA_DETAIL_PAGER_FRAGMENT_TAG = "MediaDetailFragmentTag";
     private static final int MAX_RETRIES = 10;
 
-    @BindView(R.id.card_view_nearby) public NearbyNotificationCardView nearbyNotificationCardView;
-    @BindView(R.id.campaigns_view) CampaignView campaignView;
-    @BindView(R.id.limited_connection_enabled_layout) LinearLayout limitedConnectionEnabledLayout;
-    @BindView(R.id.limited_connection_description_text_view) TextView limitedConnectionDescriptionTextView;
+
+    public FragmentContributionsBinding binding;
 
     @Inject ContributionsPresenter contributionsPresenter;
 
@@ -118,7 +115,6 @@ public class ContributionsFragment
 
     private LatLng curLatLng;
 
-    private boolean firstLocationUpdate = true;
     private boolean isFragmentAttachedBefore = false;
     private View checkBoxView;
     private CheckBox checkBox;
@@ -148,7 +144,7 @@ public class ContributionsFragment
                     && store.getBoolean("displayLocationPermissionForCardView", true)
                     && !store.getBoolean("doNotAskForLocationPermission", false)
                     && (((MainActivity) getActivity()).activeFragment == ActiveFragment.CONTRIBUTIONS)) {
-                    nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
+                    binding.cardViewNearby.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
                     showNearbyCardPermissionRationale();
                 } else {
                     displayYouWontSeeNearbyMessage();
@@ -180,12 +176,13 @@ public class ContributionsFragment
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_contributions, container, false);
-        ButterKnife.bind(this, view);
+
+        binding = FragmentContributionsBinding.inflate(inflater, container, false);
+
         initWLMCampaign();
         presenter.onAttachView(this);
         contributionsPresenter.onAttachView(this);
-        campaignView.setVisibility(View.GONE);
+        binding.campaignsView.setVisibility(View.GONE);
         checkBoxView = View.inflate(getActivity(), R.layout.nearby_permission_dialog, null);
         checkBox = (CheckBox) checkBoxView.findViewById(R.id.never_ask_again);
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -205,7 +202,7 @@ public class ContributionsFragment
 
         initFragments();
         if(isUserProfile) {
-            limitedConnectionEnabledLayout.setVisibility(View.GONE);
+            binding.limitedConnectionEnabledLayout.setVisibility(View.GONE);
         }else {
             upDateUploadCount();
         }
@@ -222,9 +219,9 @@ public class ContributionsFragment
             && sessionManager.getCurrentAccount() != null && !isUserProfile) {
             setUploadCount();
         }
-        limitedConnectionEnabledLayout.setOnClickListener(toggleDescriptionListener);
+        binding.limitedConnectionEnabledLayout.setOnClickListener(toggleDescriptionListener);
         setHasOptionsMenu(true);
-        return view;
+        return binding.getRoot();
     }
 
     /**
@@ -284,22 +281,17 @@ public class ContributionsFragment
             .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
 
         checkable.setChecked(isEnabled);
-        if (isEnabled) {
-            limitedConnectionEnabledLayout.setVisibility(View.VISIBLE);
-        } else {
-            limitedConnectionEnabledLayout.setVisibility(View.GONE);
+        if (binding!=null) {
+            binding.limitedConnectionEnabledLayout.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
         }
+
         checkable.setIcon((isEnabled) ? R.drawable.ic_baseline_cloud_off_24:R.drawable.ic_baseline_cloud_queue_24);
         checkable.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 ((MainActivity) getActivity()).toggleLimitedConnectionMode();
                 boolean isEnabled = store.getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
-                if (isEnabled) {
-                    limitedConnectionEnabledLayout.setVisibility(View.VISIBLE);
-                } else {
-                    limitedConnectionEnabledLayout.setVisibility(View.GONE);
-                }
+                binding.limitedConnectionEnabledLayout.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
                 checkable.setIcon((isEnabled) ? R.drawable.ic_baseline_cloud_off_24:R.drawable.ic_baseline_cloud_queue_24);
                 return false;
             }
@@ -327,14 +319,14 @@ public class ContributionsFragment
      */
     private void showContributionsListFragment() {
         // show nearby card view on contributions list is visible
-        if (nearbyNotificationCardView != null && !isUserProfile) {
+        if (binding.cardViewNearby != null && !isUserProfile) {
             if (store.getBoolean("displayNearbyCardView", true)) {
-                if (nearbyNotificationCardView.cardViewVisibilityState
+                if (binding.cardViewNearby.cardViewVisibilityState
                     == NearbyNotificationCardView.CardViewVisibilityState.READY) {
-                    nearbyNotificationCardView.setVisibility(View.VISIBLE);
+                    binding.cardViewNearby.setVisibility(View.VISIBLE);
                 }
             } else {
-                nearbyNotificationCardView.setVisibility(View.GONE);
+                binding.cardViewNearby.setVisibility(View.GONE);
             }
         }
         showFragment(contributionsListFragment, CONTRIBUTION_LIST_FRAGMENT_TAG, mediaDetailPagerFragment);
@@ -347,8 +339,9 @@ public class ContributionsFragment
     }
 
     private void setupViewForMediaDetails() {
-        campaignView.setVisibility(View.GONE);
-        nearbyNotificationCardView.setVisibility(View.GONE);
+        if (binding!=null) {
+            binding.campaignsView.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -453,9 +446,13 @@ public class ContributionsFragment
     public void onResume() {
         super.onResume();
         contributionsPresenter.onAttachView(this);
-        firstLocationUpdate = true;
         locationManager.addLocationListener(this);
-        nearbyNotificationCardView.permissionRequestButton.setOnClickListener(v -> {
+
+        if (binding==null) {
+            return;
+        }
+
+        binding.cardViewNearby.permissionRequestButton.setOnClickListener(v -> {
             showNearbyCardPermissionRationale();
         });
 
@@ -463,13 +460,20 @@ public class ContributionsFragment
         if (mediaDetailPagerFragment == null && !isUserProfile) {
             if (store.getBoolean("displayNearbyCardView", true)) {
                 checkPermissionsAndShowNearbyCardView();
-                if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
-                    nearbyNotificationCardView.setVisibility(View.VISIBLE);
+                
+                // Calling nearby card to keep showing it even when user clicks on it and comes back
+                try {
+                    updateClosestNearbyCardViewInfo();
+                } catch (Exception e) {
+                    Timber.e(e);
+                }
+                if (binding.cardViewNearby.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
+                    binding.cardViewNearby.setVisibility(View.VISIBLE);
                 }
 
             } else {
                 // Hide nearby notification card view if related shared preferences is false
-                nearbyNotificationCardView.setVisibility(View.GONE);
+                binding.cardViewNearby.setVisibility(View.GONE);
             }
 
             // Notification Count and Campaigns should not be set, if it is used in User Profile
@@ -488,7 +492,7 @@ public class ContributionsFragment
                 && store.getBoolean("displayLocationPermissionForCardView", true)
                 && !store.getBoolean("doNotAskForLocationPermission", false)
                 && (((MainActivity) getActivity()).activeFragment == ActiveFragment.CONTRIBUTIONS)) {
-            nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
+            binding.cardViewNearby.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
             showNearbyCardPermissionRationale();
         }
     }
@@ -498,7 +502,7 @@ public class ContributionsFragment
     }
 
     private void onLocationPermissionGranted() {
-        nearbyNotificationCardView.permissionType = NearbyNotificationCardView.PermissionType.NO_PERMISSION_NEEDED;
+        binding.cardViewNearby.permissionType = NearbyNotificationCardView.PermissionType.NO_PERMISSION_NEEDED;
         locationManager.registerLocationManager();
     }
 
@@ -533,19 +537,31 @@ public class ContributionsFragment
 
     private void updateNearbyNotification(@Nullable NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
         if (nearbyPlacesInfo != null && nearbyPlacesInfo.placeList != null && nearbyPlacesInfo.placeList.size() > 0) {
-            Place closestNearbyPlace = nearbyPlacesInfo.placeList.get(0);
-            String distance = formatDistanceBetween(curLatLng, closestNearbyPlace.location);
-            closestNearbyPlace.setDistance(distance);
-            direction = (float) computeBearing(curLatLng, closestNearbyPlace.location);
-            nearbyNotificationCardView.updateContent(closestNearbyPlace, direction);
+            Place closestNearbyPlace = null;
+            // Find the first nearby place that has no image and exists
+            for (Place place : nearbyPlacesInfo.placeList) {
+                if (place.pic.equals("") && place.exists) {
+                    closestNearbyPlace = place;
+                    break;
+                }
+            }
+
+            if(closestNearbyPlace == null) {
+                binding.cardViewNearby.setVisibility(View.GONE);
+            }else{
+                String distance = formatDistanceBetween(curLatLng, closestNearbyPlace.location);
+                closestNearbyPlace.setDistance(distance);
+                direction = (float) computeBearing(curLatLng, closestNearbyPlace.location);
+                binding.cardViewNearby.updateContent(closestNearbyPlace);
+            }
         } else {
             // Means that no close nearby place is found
-            nearbyNotificationCardView.setVisibility(View.GONE);
+            binding.cardViewNearby.setVisibility(View.GONE);
         }
 
         // Prevent Nearby banner from appearing in Media Details, fixing bug https://github.com/commons-app/apps-android-commons/issues/4731
         if (mediaDetailPagerFragment != null && !contributionsListFragment.isVisible()) {
-            nearbyNotificationCardView.setVisibility(View.GONE);
+            binding.cardViewNearby.setVisibility(View.GONE);
         }
     }
 
@@ -565,22 +581,17 @@ public class ContributionsFragment
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
         // Will be called if location changed more than 1000 meter
-        // Do nothing on slight changes for using network efficiently
-        firstLocationUpdate = false;
         updateClosestNearbyCardViewInfo();
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
         /* Update closest nearby notification card onLocationChangedSlightly
-        If first time to update location after onResume, then no need to wait for significant
-        location change. Any closest location is better than no location
         */
-        if (firstLocationUpdate) {
+        try {
             updateClosestNearbyCardViewInfo();
-            // Turn it to false, since it is not first location update anymore. To change closest location
-            // notification, we need to wait for a significant location change.
-            firstLocationUpdate = false;
+        } catch (Exception e) {
+            Timber.e(e);
         }
     }
 
@@ -602,12 +613,16 @@ public class ContributionsFragment
      */
     private void fetchCampaigns() {
         if (Utils.isMonumentsEnabled(new Date())) {
-            campaignView.setCampaign(wlmCampaign);
-            campaignView.setVisibility(View.VISIBLE);
+            if (binding!=null) {
+                binding.campaignsView.setCampaign(wlmCampaign);
+                binding.campaignsView.setVisibility(View.VISIBLE);
+            }
         } else if (store.getBoolean(CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE, true)) {
             presenter.getCampaigns();
         } else {
-            campaignView.setVisibility(View.GONE);
+            if (binding!=null) {
+                binding.campaignsView.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -617,7 +632,9 @@ public class ContributionsFragment
 
     @Override public void showCampaigns(Campaign campaign) {
         if (campaign != null && !isUserProfile) {
-            campaignView.setCampaign(campaign);
+            if (binding!=null) {
+                binding.campaignsView.setCampaign(campaign);
+            }
         }
     }
 
@@ -734,11 +751,11 @@ public class ContributionsFragment
     public boolean backButtonClicked() {
         if (mediaDetailPagerFragment != null && mediaDetailPagerFragment.isVisible()) {
             if (store.getBoolean("displayNearbyCardView", true) && !isUserProfile) {
-                if (nearbyNotificationCardView.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
-                    nearbyNotificationCardView.setVisibility(View.VISIBLE);
+                if (binding.cardViewNearby.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
+                    binding.cardViewNearby.setVisibility(View.VISIBLE);
                 }
             } else {
-                nearbyNotificationCardView.setVisibility(View.GONE);
+                binding.cardViewNearby.setVisibility(View.GONE);
             }
             removeFragment(mediaDetailPagerFragment);
             showFragment(contributionsListFragment, CONTRIBUTION_LIST_FRAGMENT_TAG, mediaDetailPagerFragment);
@@ -800,7 +817,7 @@ public class ContributionsFragment
 
       @Override
       public void onClick(View view) {
-          View view2 = limitedConnectionDescriptionTextView;
+          View view2 = binding.limitedConnectionDescriptionTextView;
           if (view2.getVisibility() == View.GONE) {
               view2.setVisibility(View.VISIBLE);
           } else {
@@ -815,7 +832,7 @@ public class ContributionsFragment
     @Override
     public void onSensorChanged(SensorEvent event) {
         float rotateDegree = Math.round(event.values[0]);
-        nearbyNotificationCardView.rotateCompass(rotateDegree, direction);
+        binding.cardViewNearby.rotateCompass(rotateDegree, direction);
     }
 
     @Override

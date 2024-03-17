@@ -13,11 +13,11 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
-import org.wikipedia.dataclient.mwapi.MwQueryPage
-import org.wikipedia.dataclient.mwapi.MwQueryResponse
-import org.wikipedia.dataclient.mwapi.MwQueryResult
-import org.wikipedia.gallery.ImageInfo
-import org.wikipedia.wikidata.Entities
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResult
+import fr.free.nrw.commons.wikidata.model.gallery.ImageInfo
+import fr.free.nrw.commons.wikidata.model.Entities
 
 
 class MediaClientTest {

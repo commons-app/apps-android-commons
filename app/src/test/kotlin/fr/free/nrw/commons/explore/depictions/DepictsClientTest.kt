@@ -15,7 +15,7 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
-import org.wikipedia.wikidata.*
+import fr.free.nrw.commons.wikidata.model.*
 import java.lang.reflect.Method
 
 class DepictsClientTest {

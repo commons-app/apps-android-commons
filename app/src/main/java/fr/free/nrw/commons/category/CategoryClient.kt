@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.category
 
 import io.reactivex.Single
-import org.wikipedia.dataclient.mwapi.MwQueryResponse
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import javax.inject.Inject
 import javax.inject.Singleton
 

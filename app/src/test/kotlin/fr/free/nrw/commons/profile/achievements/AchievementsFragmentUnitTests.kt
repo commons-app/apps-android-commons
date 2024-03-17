@@ -7,16 +7,13 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
-import com.dinuscxj.progressbar.CircleProgressBar
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.utils.ConfigUtils
@@ -35,7 +32,6 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.fakes.RoboMenuItem
 import org.robolectric.shadows.ShadowToast
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 
 
@@ -76,7 +72,8 @@ class AchievementsFragmentUnitTests {
 
         context = ApplicationProvider.getApplicationContext()
         menuItem = RoboMenuItem(context)
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
+        
         val activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         val fragmentManager: FragmentManager = activity.supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()

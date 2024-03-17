@@ -18,10 +18,15 @@ class PlaceAdapter(
             bookmarkLocationsDao,
             onPlaceClicked,
             commonPlaceClickActions.onCameraClicked(),
+            commonPlaceClickActions.onCameraLongPressed(),
             commonPlaceClickActions.onGalleryClicked(),
+            commonPlaceClickActions.onGalleryLongPressed(),
             onBookmarkClicked,
+            commonPlaceClickActions.onBookmarkLongPressed(),
             commonPlaceClickActions.onOverflowClicked(),
+            commonPlaceClickActions.onOverflowLongPressed(),
             commonPlaceClickActions.onDirectionsClicked(),
+            commonPlaceClickActions.onDirectionsLongPressed(),
             inAppCameraLocationPermissionLauncher
         ),
         areItemsTheSame = {oldItem, newItem -> oldItem.wikiDataEntityId == newItem.wikiDataEntityId }

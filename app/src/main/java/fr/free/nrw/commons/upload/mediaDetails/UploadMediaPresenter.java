@@ -82,6 +82,17 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     }
 
     /**
+     * Sets the Upload Media Details for the corresponding upload item
+     *
+     * @param uploadMediaDetails
+     * @param uploadItemIndex
+     */
+    @Override
+    public void setUploadMediaDetails(List<UploadMediaDetail> uploadMediaDetails, int uploadItemIndex) {
+        repository.getUploads().get(uploadItemIndex).setMediaDetails(uploadMediaDetails);
+    }
+
+    /**
      * Receives the corresponding uploadable file, processes it and return the view with and uplaod item
      *  @param uploadableFile
      * @param place
@@ -334,17 +345,14 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
             view.showMessage(R.string.add_caption_toast, R.color.color_error);
         }
 
-        // If image with same file name exists check the bit in errorCode is set or not
-        if ((errorCode & FILE_NAME_EXISTS) != 0) {
+        // If image has some problems, show popup accordingly
+        if (errorCode != EMPTY_CAPTION && errorCode != FILE_NAME_EXISTS) {
+            view.showBadImagePopup(errorCode, uploadItem);
+        } else if ((errorCode & FILE_NAME_EXISTS) != 0) {
+            // When image has duplicate caption problem
             Timber.d("Trying to show duplicate picture popup");
             view.showDuplicatePicturePopup(uploadItem);
         }
-
-        // If image has some other problems, show popup accordingly
-        if (errorCode != EMPTY_CAPTION && errorCode != FILE_NAME_EXISTS) {
-            view.showBadImagePopup(errorCode, uploadItem);
-        }
-
     }
 
     /**

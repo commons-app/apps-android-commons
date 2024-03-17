@@ -14,19 +14,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.MergeAdapter;
-import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.databinding.FragmentLeaderboardBinding;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.profile.ProfileActivity;
@@ -44,20 +39,6 @@ import timber.log.Timber;
  */
 public class LeaderboardFragment extends CommonsDaggerSupportFragment {
 
-    @BindView(R.id.leaderboard_list)
-    RecyclerView leaderboardListRecyclerView;
-
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
-
-    @BindView(R.id.category_spinner)
-    Spinner categorySpinner;
-
-    @BindView(R.id.duration_spinner)
-    Spinner durationSpinner;
-
-    @BindView(R.id.scroll)
-    Button scrollButton;
 
     @Inject
     SessionManager sessionManager;
@@ -110,6 +91,8 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
 
     private String userName;
 
+    private FragmentLeaderboardBinding binding;
+
     @Override
     public void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,19 +103,18 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_leaderboard, container, false);
-        ButterKnife.bind(this, rootView);
+        binding = FragmentLeaderboardBinding.inflate(inflater, container, false);
 
         hideLayouts();
 
         // Leaderboard currently unimplemented in Beta flavor. Skip all API calls and disable menu
         if(ConfigUtils.isBetaFlavour()) {
-            progressBar.setVisibility(View.GONE);
-            scrollButton.setVisibility(View.GONE);
-            return rootView;
+            binding.progressBar.setVisibility(View.GONE);
+            binding.scroll.setVisibility(View.GONE);
+            return binding.getRoot();
         }
 
-        progressBar.setVisibility(View.VISIBLE);
+        binding.progressBar.setVisibility(View.VISIBLE);
         setSpinners();
 
         /**
@@ -152,11 +134,11 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
 
         setLeaderboard(duration, category, limit, offset);
 
-        durationSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+        binding.durationSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                duration = durationValues[durationSpinner.getSelectedItemPosition()];
+                duration = durationValues[binding.durationSpinner.getSelectedItemPosition()];
                 refreshLeaderboard();
             }
 
@@ -165,10 +147,10 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
             }
         });
 
-        categorySpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+        binding.categorySpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                category = categoryValues[categorySpinner.getSelectedItemPosition()];
+                category = categoryValues[binding.categorySpinner.getSelectedItemPosition()];
                 refreshLeaderboard();
             }
 
@@ -178,10 +160,10 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
         });
 
 
-            scrollButton.setOnClickListener(view -> scrollToUserRank());
+            binding.scroll.setOnClickListener(view -> scrollToUserRank());
 
 
-        return rootView;
+        return binding.getRoot();
     }
 
     @Override
@@ -226,9 +208,12 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
         if(userRank==0){
             Toast.makeText(getContext(),R.string.no_achievements_yet,Toast.LENGTH_SHORT).show();
         }else {
-            if (Objects.requireNonNull(leaderboardListRecyclerView.getAdapter()).getItemCount()
+            if (binding == null) {
+                return;
+            }
+            if (Objects.requireNonNull(binding.leaderboardList.getAdapter()).getItemCount()
                 > userRank + 1) {
-                leaderboardListRecyclerView.smoothScrollToPosition(userRank + 1);
+                binding.leaderboardList.smoothScrollToPosition(userRank + 1);
             } else {
                 if (viewModel != null) {
                     viewModel.refresh(duration, category, userRank + 1, 0);
@@ -247,12 +232,12 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
         ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(getContext(),
             R.array.leaderboard_categories, android.R.layout.simple_spinner_item);
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        categorySpinner.setAdapter(categoryAdapter);
+        binding.categorySpinner.setAdapter(categoryAdapter);
 
         ArrayAdapter<CharSequence> durationAdapter = ArrayAdapter.createFromResource(getContext(),
             R.array.leaderboard_durations, android.R.layout.simple_spinner_item);
         durationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        durationSpinner.setAdapter(durationAdapter);
+        binding.durationSpinner.setAdapter(durationAdapter);
     }
 
     /**
@@ -297,8 +282,8 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
         UserDetailAdapter userDetailAdapter= new UserDetailAdapter(response);
         MergeAdapter mergeAdapter = new MergeAdapter(userDetailAdapter, leaderboardListAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        leaderboardListRecyclerView.setLayoutManager(linearLayoutManager);
-        leaderboardListRecyclerView.setAdapter(mergeAdapter);
+        binding.leaderboardList.setLayoutManager(linearLayoutManager);
+        binding.leaderboardList.setAdapter(mergeAdapter);
         viewModel.getListLiveData().observe(getViewLifecycleOwner(), leaderboardListAdapter::submitList);
         viewModel.getProgressLoadStatus().observe(getViewLifecycleOwner(), status -> {
             if (Objects.requireNonNull(status).equalsIgnoreCase(LOADING)) {
@@ -306,7 +291,7 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
             } else if (status.equalsIgnoreCase(LOADED)) {
                 hideProgressBar();
                 if (scrollToRank) {
-                    leaderboardListRecyclerView.smoothScrollToPosition(userRank + 1);
+                    binding.leaderboardList.smoothScrollToPosition(userRank + 1);
                 }
             }
         });
@@ -316,12 +301,12 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
      * to hide progressbar
      */
     private void hideProgressBar() {
-        if (progressBar != null) {
-            progressBar.setVisibility(View.GONE);
-            categorySpinner.setVisibility(View.VISIBLE);
-            durationSpinner.setVisibility(View.VISIBLE);
-            scrollButton.setVisibility(View.VISIBLE);
-            leaderboardListRecyclerView.setVisibility(View.VISIBLE);
+        if (binding != null) {
+            binding.progressBar.setVisibility(View.GONE);
+            binding.categorySpinner.setVisibility(View.VISIBLE);
+            binding.durationSpinner.setVisibility(View.VISIBLE);
+            binding.scroll.setVisibility(View.VISIBLE);
+            binding.leaderboardList.setVisibility(View.VISIBLE);
         }
     }
 
@@ -329,19 +314,19 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
      * to show progressbar
      */
     private void showProgressBar() {
-        if (progressBar != null) {
-            progressBar.setVisibility(View.VISIBLE);
+        if (binding != null) {
+            binding.progressBar.setVisibility(View.VISIBLE);
+            binding.scroll.setVisibility(View.INVISIBLE);
         }
-        scrollButton.setVisibility(View.INVISIBLE);
     }
 
     /**
      * used to hide the layouts while fetching results from api
      */
     private void hideLayouts(){
-        categorySpinner.setVisibility(View.INVISIBLE);
-        durationSpinner.setVisibility(View.INVISIBLE);
-        leaderboardListRecyclerView.setVisibility(View.INVISIBLE);
+        binding.categorySpinner.setVisibility(View.INVISIBLE);
+        binding.durationSpinner.setVisibility(View.INVISIBLE);
+        binding.leaderboardList.setVisibility(View.INVISIBLE);
     }
 
     /**
@@ -364,7 +349,15 @@ public class LeaderboardFragment extends CommonsDaggerSupportFragment {
      */
     private void onError() {
         ViewUtil.showLongToast(getActivity(), getResources().getString(R.string.error_occurred));
-        progressBar.setVisibility(View.GONE);
+        if (binding!=null) {
+            binding.progressBar.setVisibility(View.GONE);
+        }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        compositeDisposable.clear();
+        binding = null;
+    }
 }

@@ -20,13 +20,14 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.generic.GenericDraweeHierarchy
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.soloader.SoLoader
-import com.nhaarman.mockitokotlin2.whenever
 import com.nhaarman.mockitokotlin2.doReturn
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.delete.DeleteHelper
 import fr.free.nrw.commons.delete.ReasonBuilder
 import fr.free.nrw.commons.explore.SearchActivity
@@ -50,7 +51,6 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowIntent
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 import java.util.*
@@ -154,7 +154,7 @@ class MediaDetailFragmentUnitTests {
         MockitoAnnotations.openMocks(this)
 
         context = ApplicationProvider.getApplicationContext()
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
 
         SoLoader.setInTestMode()
 
@@ -316,6 +316,9 @@ class MediaDetailFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnResume() {
+        Whitebox.setInternalState(fragment, "applicationKvStore", applicationKvStore)
+        `when`(applicationKvStore.getBoolean("login_skipped")).thenReturn(true)
+        fragment.onCreateView(layoutInflater, null, savedInstanceState)
         fragment.onResume()
     }
 
@@ -380,7 +383,7 @@ class MediaDetailFragmentUnitTests {
                 "|other versions=\n" +
                 "}}\n" +
                 "{{Location|27.043186|88.267003}}\n" +
-                "{{Assessments|featured=1}}"
+                "{{Assessments|featured=1}}\n"
         val map = linkedMapOf("en" to "Antique cash register in a cafe, Darjeeling")
         Assert.assertEquals(map, method.invoke(fragment, s))
     }
@@ -426,7 +429,7 @@ class MediaDetailFragmentUnitTests {
                 "|Other fields = {{Credit line |Author = © [[User:Colin]] | Other = Wikimedia Commons |License = CC-BY-SA-4.0}}\n" +
                 "}}\n" +
                 "{{Location|51.519003|-0.138353}}\n" +
-                "{{Assessments|featured=1}}"
+                "{{Assessments|featured=1}}\n"
         val map = linkedMapOf("en" to "[[:en:Fitzrovia Chapel|Fitzrovia Chapel]] ceiling<br/>\n")
         Assert.assertEquals(map, method.invoke(fragment, s))
     }
@@ -484,7 +487,7 @@ class MediaDetailFragmentUnitTests {
                 "|Date          =2015-02-17\n" +
                 "|Permission    ={{Diliff/Licensing}}\n" +
                 "|other_versions=\n" +
-                "}}"
+                "}}\n"
         val map = linkedMapOf("en" to "The interior of Sacred Heart RC Church, Wimbledon, London.")
         Assert.assertEquals(map, method.invoke(fragment, s))
     }

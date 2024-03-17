@@ -23,9 +23,10 @@ import com.mapbox.mapboxsdk.geometry.LatLng
 import com.nhaarman.mockitokotlin2.mock
 import fr.free.nrw.commons.LocationPicker.LocationPicker
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.upload.ImageCoordinates
@@ -50,7 +51,6 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowIntent
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -72,7 +72,9 @@ class UploadMediaDetailFragmentUnitTest {
     private lateinit var btnNext: AppCompatButton
     private lateinit var btnCopyToSubsequentMedia: AppCompatButton
     private lateinit var photoViewBackgroundImage: PhotoView
-    private lateinit var ibMap: AppCompatImageButton
+    private lateinit var locationStatusLl: LinearLayout
+    private lateinit var locationImageView : ImageView
+    private lateinit var locationTextView : TextView
     private lateinit var llContainerMediaDetail: LinearLayout
     private lateinit var ibExpandCollapse: AppCompatImageButton
 
@@ -113,7 +115,7 @@ class UploadMediaDetailFragmentUnitTest {
         MockitoAnnotations.openMocks(this)
 
         context = ApplicationProvider.getApplicationContext()
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
 
         activity = Robolectric.buildActivity(UploadActivity::class.java).create().get()
         layoutInflater = LayoutInflater.from(activity)
@@ -134,22 +136,13 @@ class UploadMediaDetailFragmentUnitTest {
         btnNext = view.findViewById(R.id.btn_next)
         btnCopyToSubsequentMedia = view.findViewById(R.id.btn_copy_subsequent_media)
         photoViewBackgroundImage = view.findViewById(R.id.backgroundImage)
-        ibMap = view.findViewById(R.id.ib_map)
+        locationStatusLl = view.findViewById(R.id.ll_location_status)
+        locationImageView = view.findViewById(R.id.location_image_view)
+        locationTextView = view.findViewById(R.id.location_text_view)
         llContainerMediaDetail = view.findViewById(R.id.ll_container_media_detail)
         ibExpandCollapse = view.findViewById(R.id.ib_expand_collapse)
 
-        Whitebox.setInternalState(fragment, "tvTitle", tvTitle)
-        Whitebox.setInternalState(fragment, "tooltip", tooltip)
-        Whitebox.setInternalState(fragment, "callback", callback)
-        Whitebox.setInternalState(fragment, "rvDescriptions", rvDescriptions)
-        Whitebox.setInternalState(fragment, "btnPrevious", btnPrevious)
-        Whitebox.setInternalState(fragment, "btnNext", btnNext)
-        Whitebox.setInternalState(fragment, "btnCopyToSubsequentMedia", btnCopyToSubsequentMedia)
-        Whitebox.setInternalState(fragment, "photoViewBackgroundImage", photoViewBackgroundImage)
         Whitebox.setInternalState(fragment, "uploadMediaDetailAdapter", uploadMediaDetailAdapter)
-        Whitebox.setInternalState(fragment, "ibMap", ibMap)
-        Whitebox.setInternalState(fragment, "llContainerMediaDetail", llContainerMediaDetail)
-        Whitebox.setInternalState(fragment, "ibExpandCollapse", ibExpandCollapse)
     }
 
     @Test
@@ -243,13 +236,6 @@ class UploadMediaDetailFragmentUnitTest {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         Whitebox.setInternalState(fragment, "presenter", presenter)
         fragment.onPreviousButtonClicked()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnButtonAddDescriptionClicked() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.onButtonAddDescriptionClicked()
     }
 
     @Test
@@ -389,6 +375,7 @@ class UploadMediaDetailFragmentUnitTest {
         val cameraPosition = Mockito.mock(CameraPosition::class.java)
         val latLng = Mockito.mock(LatLng::class.java)
 
+        Whitebox.setInternalState(fragment, "callback", callback)
         Whitebox.setInternalState(cameraPosition, "target", latLng)
         Whitebox.setInternalState(fragment, "editableUploadItem", uploadItem)
         Whitebox.setInternalState(fragment,"isMissingLocationDialog",true)
@@ -429,9 +416,9 @@ class UploadMediaDetailFragmentUnitTest {
 
     @Test
     @Throws(Exception::class)
-    fun testOnRlContainerTitleClicked() {
+    fun testOnLlContainerTitleClicked() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.onRlContainerTitleClicked()
+        fragment.onLlContainerTitleClicked()
     }
 
     @Test

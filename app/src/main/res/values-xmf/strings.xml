@@ -9,6 +9,19 @@
   <string name="commons_logo">ვიკიოწკარუეშ ლოგო</string>
   <string name="commons_website">ვიკიოწკარუეშ ვებ-ხასჷლა</string>
   <string name="submit">ჯღონუა</string>
+  <string name="add_another_description">შხვა ეჭარუაშ გეძინა</string>
+  <string name="add_new_contribution">ახალი თიაშ გეძინა</string>
+  <string name="add_contribution_from_camera">თიაშ გეძინა კამერაშე</string>
+  <string name="add_contribution_from_photos">თიაშ გეძინა სურათეფშე</string>
+  <string name="add_contribution_from_contributions_gallery">თიაშ გეძინა კინოხიან თიეფიშ გალარეაშე</string>
+  <string name="row_item_language_description">ნინაშ ეჭარუა</string>
+  <string name="row_item_caption">მუკნაჭარა</string>
+  <string name="show_captions_description">ეჭარუა</string>
+  <string name="nearby_row_image">სურათი</string>
+  <string name="nearby_all">არძა</string>
+  <string name="nearby_filter_toggle">გინოღალა</string>
+  <string name="nearby_filter_search">გორუაშ მიოჯინი</string>
+  <string name="nearby_filter_state">აბანიშ დგომარობა</string>
   <string name="appwidget_img">დღაშ სურათი</string>
   <string name="uploads_pending_notification_indicator">%1$d {{PLURAL:%1$d|one=ფაილი იხარგუ|few=ფაილი იხარგუ}}</string>
   <plurals name="contributions_subtitle">

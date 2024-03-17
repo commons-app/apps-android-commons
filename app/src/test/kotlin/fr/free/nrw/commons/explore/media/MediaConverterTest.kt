@@ -11,10 +11,10 @@ import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
-import org.wikipedia.dataclient.mwapi.MwQueryPage
-import org.wikipedia.gallery.ExtMetadata
-import org.wikipedia.gallery.ImageInfo
-import org.wikipedia.wikidata.Entities
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
+import fr.free.nrw.commons.wikidata.model.gallery.ExtMetadata
+import fr.free.nrw.commons.wikidata.model.gallery.ImageInfo
+import fr.free.nrw.commons.wikidata.model.Entities
 import java.lang.IllegalArgumentException
 
 class MediaConverterTest {

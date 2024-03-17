@@ -48,6 +48,8 @@ public interface UploadMediaDetailsContract {
 
         void receiveImage(UploadableFile uploadableFile, Place place, LatLng inAppPictureLocation);
 
+        void setUploadMediaDetails(List<UploadMediaDetail> uploadMediaDetails, int uploadItemIndex);
+
         boolean verifyImageQuality(int uploadItemIndex, LatLng inAppPictureLocation);
 
         void copyTitleAndDescriptionToSubsequentMedia(int indexInViewFlipper);

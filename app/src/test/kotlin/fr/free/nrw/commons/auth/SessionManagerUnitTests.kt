@@ -5,6 +5,7 @@ import android.accounts.AccountManager
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.auth.login.LoginResult
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import org.junit.Assert
 import org.junit.Before
@@ -17,7 +18,6 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import org.wikipedia.login.LoginResult
 import java.lang.reflect.Method
 
 

@@ -6,8 +6,9 @@ import android.net.Uri
 import androidx.test.core.app.ApplicationProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
-import fr.free.nrw.commons.TestAppAdapter
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.customselector.model.CallbackStatus
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.model.Result
@@ -22,7 +23,6 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Field
 
 @RunWith(RobolectricTestRunner::class)
@@ -44,7 +44,7 @@ class ZoomableActivityUnitTests {
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
         context = ApplicationProvider.getApplicationContext()
         SoLoader.setInTestMode()
         Fresco.initialize(context)
