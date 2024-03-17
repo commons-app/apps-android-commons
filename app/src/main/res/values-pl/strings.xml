@@ -700,6 +700,7 @@
   <string name="custom_selector_info_text2">W przeciwieństwie do zdjęcia po lewej, zdjęcie po prawej ma logo Commons wskazujące, że zostało już przesłane.\n  Dotknij i przytrzymaj, aby wyświetlić podgląd obrazu.</string>
   <string name="welcome_custom_selector_ok">Niesamowite</string>
   <string name="custom_selector_already_uploaded_image_text">Tez plik został już przesłany do Commons.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">Odrzuć</string>
   <string name="custom_selector_button_limit_text">Maks.: %1$d</string>
   <string name="custom_selector_limit_error_desc">Błąd: przekroczono limit przesyłania</string>
   <string name="wlm_upload_info">Ten obraz zostanie zgłoszony do konkursu Wiki Loves Monuments</string>
@@ -762,4 +763,8 @@
   <string name="set_up_avatar_toast_string">Aby skonfigurować swojego awatara rankingu, dotknij \'Ustaw jako awatar\' w menu z trzema kropkami dowolnego obrazu.</string>
   <string name="similar_coordinate_description_auto_set">Współrzędne nie są dokładnymi współrzędnymi, ale osoba, która przesłała to zdjęcie, uważa, że są wystarczająco blisko.</string>
   <string name="unable_to_share_upload_item">Nie można udostępnić tego elementu</string>
+  <string name="edit_image">Edytuj obraz</string>
+  <string name="edit_location">Edytuj lokalizację</string>
+  <string name="send_thanks_to_author">Dziękuję autorowi</string>
+  <string name="error_sending_thanks">Błąd wysyłania podziękowań do autora.</string>
 </resources>

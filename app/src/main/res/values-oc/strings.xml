@@ -2,6 +2,7 @@
 <!-- Authors:
 * Cedric31
 * Guilhelma
+* Lhanars
 * Quentí
 * Unuaiga
 -->
@@ -134,8 +135,10 @@
   <string name="error_loading_categories">I aguèt una error pendent lo cargament de las categorias.</string>
   <string name="delete_recent_searches_dialog">Sètz segur de voler vuejar vòstre istoric de recèrca ?</string>
   <string name="search_history_deleted">Istoric de recèrca suprimit</string>
+  <string name="statistics_thanks">Mercejaments recebuts</string>
   <string name="title_app_shortcut_setting">Paramètres</string>
   <string name="theme_default_name" fuzzy="true">Per defaut</string>
   <string name="theme_dark_name">Fosc</string>
   <string name="theme_light_name">Clar</string>
+  <string name="send_thanks_to_author">Mercejar l\'utilizator</string>
 </resources>

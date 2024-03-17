@@ -33,6 +33,7 @@ import javax.inject.Inject;
 import timber.log.Timber;
 
 public class ExploreMapController extends MapController {
+
     private final ExploreMapCalls exploreMapCalls;
     public LatLng latestSearchLocation; // Can be current and camera target on search this area button is used
     public LatLng currentLocation; // current location of user
@@ -46,13 +47,18 @@ public class ExploreMapController extends MapController {
     }
 
     /**
-     * Takes location as parameter and returns ExplorePlaces info that holds curLatLng, mediaList, explorePlaceList and boundaryCoordinates
-     * @param curLatLng is current geolocation
-     * @param searchLatLng is the location that we want to search around
-     * @param checkingAroundCurrentLocation is a boolean flag. True if we want to check around current location, false if another location
-     * @return explorePlacesInfo info that holds curLatLng, mediaList, explorePlaceList and boundaryCoordinates
+     * Takes location as parameter and returns ExplorePlaces info that holds curLatLng, mediaList,
+     * explorePlaceList and boundaryCoordinates
+     *
+     * @param curLatLng                     is current geolocation
+     * @param searchLatLng                  is the location that we want to search around
+     * @param checkingAroundCurrentLocation is a boolean flag. True if we want to check around
+     *                                      current location, false if another location
+     * @return explorePlacesInfo info that holds curLatLng, mediaList, explorePlaceList and
+     * boundaryCoordinates
      */
-    public ExplorePlacesInfo loadAttractionsFromLocation(LatLng curLatLng, LatLng searchLatLng, boolean checkingAroundCurrentLocation) {
+    public ExplorePlacesInfo loadAttractionsFromLocation(LatLng curLatLng, LatLng searchLatLng,
+        boolean checkingAroundCurrentLocation) {
 
         if (searchLatLng == null) {
             Timber.d("Loading attractions explore map, but search is null");
@@ -74,18 +80,23 @@ public class ExploreMapController extends MapController {
                 Timber.d("Sorting places by distance...");
                 final Map<Media, Double> distances = new HashMap<>();
                 for (Media media : mediaList) {
-                    distances.put(media, computeDistanceBetween(media.getCoordinates(), searchLatLng));
+                    distances.put(media,
+                        computeDistanceBetween(media.getCoordinates(), searchLatLng));
                     // Find boundaries with basic find max approach
-                    if (media.getCoordinates().getLatitude() < boundaryCoordinates[0].getLatitude()) {
+                    if (media.getCoordinates().getLatitude()
+                        < boundaryCoordinates[0].getLatitude()) {
                         boundaryCoordinates[0] = media.getCoordinates();
                     }
-                    if (media.getCoordinates().getLatitude() > boundaryCoordinates[1].getLatitude()) {
+                    if (media.getCoordinates().getLatitude()
+                        > boundaryCoordinates[1].getLatitude()) {
                         boundaryCoordinates[1] = media.getCoordinates();
                     }
-                    if (media.getCoordinates().getLongitude() < boundaryCoordinates[2].getLongitude()) {
+                    if (media.getCoordinates().getLongitude()
+                        < boundaryCoordinates[2].getLongitude()) {
                         boundaryCoordinates[2] = media.getCoordinates();
                     }
-                    if (media.getCoordinates().getLongitude() > boundaryCoordinates[3].getLongitude()) {
+                    if (media.getCoordinates().getLongitude()
+                        > boundaryCoordinates[3].getLongitude()) {
                         boundaryCoordinates[3] = media.getCoordinates();
                     }
                 }
@@ -96,7 +107,8 @@ public class ExploreMapController extends MapController {
 
             // Sets latestSearchRadius to maximum distance among boundaries and search location
             for (LatLng bound : boundaryCoordinates) {
-                double distance = LocationUtils.commonsLatLngToMapBoxLatLng(bound).distanceTo(LocationUtils.commonsLatLngToMapBoxLatLng(latestSearchLocation));
+                double distance = LocationUtils.commonsLatLngToMapBoxLatLng(bound)
+                    .distanceTo(LocationUtils.commonsLatLngToMapBoxLatLng(latestSearchLocation));
                 if (distance > latestSearchRadius) {
                     latestSearchRadius = distance;
                 }
@@ -115,6 +127,7 @@ public class ExploreMapController extends MapController {
 
     /**
      * Loads attractions from location for map view, we need to return places in Place data type
+     *
      * @return baseMarkerOptions list that holds nearby places with their icons
      */
     public static List<NearbyBaseMarker> loadAttractionsFromLocationToBaseMarkerOptions(
@@ -123,7 +136,6 @@ public class ExploreMapController extends MapController {
         Context context,
         NearbyBaseMarkerThumbCallback callback,
         Marker selectedMarker,
-        boolean shouldTrackPosition,
         ExplorePlacesInfo explorePlacesInfo) {
         List<NearbyBaseMarker> baseMarkerOptions = new ArrayList<>();
 
@@ -145,7 +157,8 @@ public class ExploreMapController extends MapController {
                 String distance = formatDistanceBetween(curLatLng, explorePlace.location);
                 explorePlace.setDistance(distance);
 
-                nearbyBaseMarker.title(explorePlace.name.substring(5, explorePlace.name.lastIndexOf(".")));
+                nearbyBaseMarker.title(
+                    explorePlace.name.substring(5, explorePlace.name.lastIndexOf(".")));
                 nearbyBaseMarker.position(
                     new com.mapbox.mapboxsdk.geometry.LatLng(
                         explorePlace.location.getLatitude(),
@@ -160,12 +173,15 @@ public class ExploreMapController extends MapController {
                     .into(new CustomTarget<Bitmap>() {
                         // We add icons to markers when bitmaps are ready
                         @Override
-                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        public void onResourceReady(@NonNull Bitmap resource,
+                            @Nullable Transition<? super Bitmap> transition) {
                             nearbyBaseMarker.setIcon(IconFactory.getInstance(context).fromBitmap(
                                 ImageUtils.addRedBorder(resource, 6, context)));
                             baseMarkerOptions.add(nearbyBaseMarker);
-                            if (baseMarkerOptions.size() == placeList.size()) { // if true, we added all markers to list and can trigger thumbs ready callback
-                                callback.onNearbyBaseMarkerThumbsReady(baseMarkerOptions, explorePlacesInfo, selectedMarker, shouldTrackPosition);
+                            if (baseMarkerOptions.size()
+                                == placeList.size()) { // if true, we added all markers to list and can trigger thumbs ready callback
+                                callback.onNearbyBaseMarkerThumbsReady(baseMarkerOptions,
+                                    explorePlacesInfo, selectedMarker);
                             }
                         }
 
@@ -177,10 +193,13 @@ public class ExploreMapController extends MapController {
                         @Override
                         public void onLoadFailed(@Nullable final Drawable errorDrawable) {
                             super.onLoadFailed(errorDrawable);
-                            nearbyBaseMarker.setIcon(IconFactory.getInstance(context).fromResource(R.drawable.image_placeholder_96));
+                            nearbyBaseMarker.setIcon(IconFactory.getInstance(context)
+                                .fromResource(R.drawable.image_placeholder_96));
                             baseMarkerOptions.add(nearbyBaseMarker);
-                            if (baseMarkerOptions.size() == placeList.size()) { // if true, we added all markers to list and can trigger thumbs ready callback
-                                callback.onNearbyBaseMarkerThumbsReady(baseMarkerOptions, explorePlacesInfo, selectedMarker, shouldTrackPosition);
+                            if (baseMarkerOptions.size()
+                                == placeList.size()) { // if true, we added all markers to list and can trigger thumbs ready callback
+                                callback.onNearbyBaseMarkerThumbsReady(baseMarkerOptions,
+                                    explorePlacesInfo, selectedMarker);
                             }
                         }
                     });
@@ -190,7 +209,9 @@ public class ExploreMapController extends MapController {
     }
 
     interface NearbyBaseMarkerThumbCallback {
+
         // Callback to notify thumbnails of explore markers are added as icons and ready
-        void onNearbyBaseMarkerThumbsReady(List<NearbyBaseMarker> baseMarkers, ExplorePlacesInfo explorePlacesInfo, Marker selectedMarker, boolean shouldTrackPosition);
+        void onNearbyBaseMarkerThumbsReady(List<NearbyBaseMarker> baseMarkers,
+            ExplorePlacesInfo explorePlacesInfo, Marker selectedMarker);
     }
 }

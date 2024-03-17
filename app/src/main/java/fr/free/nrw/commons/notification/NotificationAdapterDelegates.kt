@@ -3,7 +3,7 @@ package fr.free.nrw.commons.notification
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 import fr.free.nrw.commons.notification.models.Notification
 import fr.free.nrw.commons.databinding.ItemNotificationBinding
-import org.wikipedia.util.StringUtil
+import fr.free.nrw.commons.utils.StringUtil
 
 
 fun notificationDelegate(onNotificationClicked: (Notification) -> Unit) =

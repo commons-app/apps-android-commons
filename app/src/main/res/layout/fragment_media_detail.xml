@@ -464,6 +464,16 @@
                   android:text="@string/copy_wikicode"
                   android:textColor="@color/primaryTextColor" />
 
+                <Button
+                  android:id="@+id/sendThanks"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginStart="@dimen/standard_gap"
+                  android:layout_marginEnd="@dimen/standard_gap"
+                  android:background="@drawable/bg_copy_wikitext_button"
+                  android:text="@string/send_thanks_to_author"
+                  android:textColor="@color/primaryTextColor" />
+
                 <FrameLayout
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"

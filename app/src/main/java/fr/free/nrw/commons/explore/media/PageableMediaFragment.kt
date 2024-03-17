@@ -18,7 +18,7 @@ abstract class PageableMediaFragment : BasePagingFragment<Media>(), MediaDetailP
      * ViewBinding
      */
     private var _binding: FragmentSearchPaginatedBinding? = null
-    private val binding get() = _binding
+    private val binding get() = _binding!!
 
     override val pagedListAdapter by lazy {
         PagedMediaAdapter(categoryImagesCallback::onMediaClicked)
@@ -43,9 +43,9 @@ abstract class PageableMediaFragment : BasePagingFragment<Media>(), MediaDetailP
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSearchPaginatedBinding.inflate(inflater, container, false)
-        return binding?.root
+        return binding.root
     }
 
     private val simpleDataObserver =
@@ -66,7 +66,7 @@ abstract class PageableMediaFragment : BasePagingFragment<Media>(), MediaDetailP
         pagedListAdapter.currentList?.get(position)?.takeIf { it.filename != null }
             .also {
                 pagedListAdapter.currentList?.loadAround(position)
-                binding?.paginatedSearchResultsList?.scrollToPosition(position)
+                binding.paginatedSearchResultsList.scrollToPosition(position)
             }
 
     override fun getTotalMediaCount(): Int = pagedListAdapter.itemCount

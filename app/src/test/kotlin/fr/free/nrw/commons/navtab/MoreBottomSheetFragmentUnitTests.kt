@@ -8,15 +8,15 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.CommonsApplication
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.actions.PageEditClient
 import fr.free.nrw.commons.feedback.model.Feedback
 import fr.free.nrw.commons.kvstore.JsonKvStore
@@ -38,7 +38,6 @@ import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowAlertDialog
 import org.robolectric.shadows.ShadowDialog
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 
 
@@ -63,7 +62,7 @@ class MoreBottomSheetFragmentUnitTests {
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         context = ApplicationProvider.getApplicationContext()
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
 
         activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         fragment = MoreBottomSheetFragment()

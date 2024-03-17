@@ -2,10 +2,8 @@ package fr.free.nrw.commons.ui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Build;
 import android.os.Build.VERSION;
 import android.util.AttributeSet;
-import android.util.Log;
 import com.google.android.material.textfield.TextInputEditText;
 import fr.free.nrw.commons.R;
 

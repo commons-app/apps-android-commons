@@ -8,9 +8,11 @@ import androidx.fragment.app.FragmentManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
+import fr.free.nrw.commons.databinding.ActivityWikidataItemDetailsBinding
 import fr.free.nrw.commons.explore.depictions.media.DepictedImagesFragment
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
@@ -28,7 +30,6 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
-import org.wikipedia.AppAdapter
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -36,7 +37,6 @@ import org.wikipedia.AppAdapter
 class WikidataItemDetailsActivityUnitTests {
 
     private lateinit var activity: WikidataItemDetailsActivity
-    private lateinit var parent: View
 
     @Mock
     private lateinit var mediaDetailPagerFragment: MediaDetailPagerFragment
@@ -53,19 +53,11 @@ class WikidataItemDetailsActivityUnitTests {
     @Mock
     private lateinit var wikidataItem: DepictedItem
 
-    @Mock
-    private lateinit var mediaContainer: FrameLayout
-
-    @Mock
-    private lateinit var tabLayout: TabLayout
-
-    @Mock
-    private lateinit var viewPager: ViewPager
 
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
         val intent = Intent(
             ApplicationProvider.getApplicationContext(),
             WikidataItemDetailsActivity::class.java
@@ -83,17 +75,6 @@ class WikidataItemDetailsActivityUnitTests {
         )
         Whitebox.setInternalState(activity, "supportFragmentManager", supportFragmentManager)
 
-        parent =
-            LayoutInflater.from(activity).inflate(R.layout.activity_wikidata_item_details, null)
-
-        mediaContainer = parent.findViewById(R.id.mediaContainer)
-        Whitebox.setInternalState(activity, "mediaContainer", mediaContainer)
-
-        tabLayout = parent.findViewById(R.id.tab_layout)
-        Whitebox.setInternalState(activity, "tabLayout", tabLayout)
-
-        viewPager = parent.findViewById(R.id.viewPager)
-        Whitebox.setInternalState(activity, "viewPager", viewPager)
 
         Whitebox.setInternalState(activity, "wikidataItem", wikidataItem)
 

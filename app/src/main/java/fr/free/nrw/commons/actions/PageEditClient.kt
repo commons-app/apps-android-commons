@@ -2,7 +2,7 @@ package fr.free.nrw.commons.actions
 
 import io.reactivex.Observable
 import io.reactivex.Single
-import org.wikipedia.csrf.CsrfTokenClient
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 
 /**
  * This class acts as a Client to facilitate wiki page editing
@@ -25,7 +25,7 @@ class PageEditClient(
      */
     fun edit(pageTitle: String, text: String, summary: String): Observable<Boolean> {
         return try {
-            pageEditInterface.postEdit(pageTitle, summary, text, csrfTokenClient.tokenBlocking)
+            pageEditInterface.postEdit(pageTitle, summary, text, csrfTokenClient.getTokenBlocking())
                 .map { editResponse -> editResponse.edit()!!.editSucceeded() }
         } catch (throwable: Throwable) {
             Observable.just(false)
@@ -41,7 +41,7 @@ class PageEditClient(
      */
     fun appendEdit(pageTitle: String, appendText: String, summary: String): Observable<Boolean> {
         return try {
-            pageEditInterface.postAppendEdit(pageTitle, summary, appendText, csrfTokenClient.tokenBlocking)
+            pageEditInterface.postAppendEdit(pageTitle, summary, appendText, csrfTokenClient.getTokenBlocking())
                 .map { editResponse -> editResponse.edit()!!.editSucceeded() }
         } catch (throwable: Throwable) {
             Observable.just(false)
@@ -57,7 +57,7 @@ class PageEditClient(
      */
     fun prependEdit(pageTitle: String, prependText: String, summary: String): Observable<Boolean> {
         return try {
-            pageEditInterface.postPrependEdit(pageTitle, summary, prependText, csrfTokenClient.tokenBlocking)
+            pageEditInterface.postPrependEdit(pageTitle, summary, prependText, csrfTokenClient.getTokenBlocking())
                 .map { editResponse -> editResponse.edit()!!.editSucceeded() }
         } catch (throwable: Throwable) {
             Observable.just(false)
@@ -76,7 +76,8 @@ class PageEditClient(
                     language: String, value: String) : Observable<Int>{
         return try {
             pageEditInterface.postCaptions(summary, title, language,
-                value, csrfTokenClient.tokenBlocking).map { it.success }
+                value, csrfTokenClient.getTokenBlocking()
+            ).map { it.success }
         } catch (throwable: Throwable) {
             Observable.just(0)
         }

@@ -9,8 +9,7 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import org.wikipedia.login.LoginResult;
-
+import fr.free.nrw.commons.auth.login.LoginResult;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;

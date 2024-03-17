@@ -28,6 +28,7 @@
 * Jelou
 * Johnny243
 * Juanman
+* Keneth Urrutia
 * Ktranz
 * Luisangelrg
 * Macofe
@@ -388,6 +389,7 @@
   <string name="share_app_title">Compartir aplicación</string>
   <string name="rotate">Rotar</string>
   <string name="error_fetching_nearby_places">Error al recuperar los lugares cercanos.</string>
+  <string name="no_pictures_in_this_area">No hay fotos en esta área.</string>
   <string name="no_nearby_places_around">No hay lugares cercanos alrededor</string>
   <string name="error_fetching_nearby_monuments">Error al encontrar monumentos cercanos.</string>
   <string name="no_recent_searches">No hay búsquedas recientes</string>

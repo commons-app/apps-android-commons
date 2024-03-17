@@ -126,18 +126,6 @@ class DescriptionEditActivityUnitTest {
 
     @Test
     @Throws(Exception::class)
-    fun testOnButtonAddDescriptionClicked() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = DescriptionEditActivity::class.java.getDeclaredMethod(
-            "onButtonAddDescriptionClicked", View::class.java
-        )
-        method.isAccessible = true
-        method.invoke(activity, null)
-        verify(uploadMediaDetailAdapter).addDescription(UploadMediaDetail())
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testOnBackButtonClicked() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         val method: Method = DescriptionEditActivity::class.java.getDeclaredMethod(

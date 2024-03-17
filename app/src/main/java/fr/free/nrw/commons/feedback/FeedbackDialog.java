@@ -4,8 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Toast;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.databinding.DialogFeedbackBinding;
 import fr.free.nrw.commons.feedback.model.Feedback;

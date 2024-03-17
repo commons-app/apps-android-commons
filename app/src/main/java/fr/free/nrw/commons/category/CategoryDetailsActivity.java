@@ -29,7 +29,7 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
-import org.wikipedia.page.PageTitle;
+import fr.free.nrw.commons.wikidata.model.page.PageTitle;
 
 /**
  * This activity displays details of a particular category

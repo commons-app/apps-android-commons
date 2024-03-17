@@ -15,6 +15,12 @@ import fr.free.nrw.commons.upload.WikidataItem;
 import fr.free.nrw.commons.upload.WikidataPlace;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
+import fr.free.nrw.commons.wikidata.model.DataValue;
+import fr.free.nrw.commons.wikidata.model.DataValue.ValueString;
+import fr.free.nrw.commons.wikidata.model.EditClaim;
+import fr.free.nrw.commons.wikidata.model.Snak_partial;
+import fr.free.nrw.commons.wikidata.model.Statement_partial;
+import fr.free.nrw.commons.wikidata.model.WikiBaseMonolingualTextValue;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
@@ -27,13 +33,7 @@ import java.util.UUID;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
-import org.wikipedia.dataclient.mwapi.MwPostResponse;
-import org.wikipedia.wikidata.DataValue;
-import org.wikipedia.wikidata.DataValue.ValueString;
-import org.wikipedia.wikidata.EditClaim;
-import org.wikipedia.wikidata.Snak_partial;
-import org.wikipedia.wikidata.Statement_partial;
-import org.wikipedia.wikidata.WikiBaseMonolingualTextValue;
+import fr.free.nrw.commons.wikidata.mwapi.MwPostResponse;
 import timber.log.Timber;
 
 /**

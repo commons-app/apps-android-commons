@@ -10,20 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.facebook.drawee.view.SimpleDraweeView;
-
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.databinding.ItemUploadThumbnailBinding;
+import fr.free.nrw.commons.filepicker.UploadableFile;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.filepicker.UploadableFile;
 
 /**
  * The adapter class for image thumbnails to be shown while uploading.
@@ -32,6 +27,8 @@ class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.ViewHolde
     public  static  Context context;
     List<UploadableFile> uploadableFiles;
     private Callback callback;
+
+    private ItemUploadThumbnailBinding binding;
 
     public ThumbnailsAdapter(Callback callback) {
         this.uploadableFiles = new ArrayList<>();
@@ -51,8 +48,8 @@ class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.ViewHolde
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ViewHolder(LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.item_upload_thumbnail, viewGroup, false));
+        binding = ItemUploadThumbnailBinding.inflate(LayoutInflater.from(viewGroup.getContext()), viewGroup, false);
+        return new ViewHolder(binding.getRoot());
     }
 
     @Override
@@ -67,16 +64,16 @@ class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.ViewHolde
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.rl_container)
+
         RelativeLayout rlContainer;
-        @BindView(R.id.iv_thumbnail)
         SimpleDraweeView background;
-        @BindView(R.id.iv_error)
         ImageView ivError;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            rlContainer = binding.rlContainer;
+            background = binding.ivThumbnail;
+            ivError = binding.ivError;
         }
 
         /**

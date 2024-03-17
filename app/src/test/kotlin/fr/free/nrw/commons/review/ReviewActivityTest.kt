@@ -4,19 +4,15 @@ import android.content.Context
 import android.os.Looper.getMainLooper
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
 import androidx.test.core.app.ApplicationProvider
-import butterknife.BindView
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
 import com.nhaarman.mockitokotlin2.doNothing
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.TestAppAdapter
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
-import io.reactivex.Scheduler
+import fr.free.nrw.commons.createTestClient
 import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -25,7 +21,6 @@ import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
-import org.mockito.Spy
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
@@ -34,7 +29,6 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.fakes.RoboMenu
 import org.robolectric.fakes.RoboMenuItem
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -70,7 +64,7 @@ class ReviewActivityTest {
 
         context = ApplicationProvider.getApplicationContext()
 
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
 
         SoLoader.setInTestMode()
 
@@ -117,10 +111,10 @@ class ReviewActivityTest {
         val media = mock(Media::class.java)
 
         doReturn(mapOf<String, Boolean>("test" to false)).`when`(media).categoriesHiddenStatus
-        doReturn(Single.just(media)).`when`(reviewHelper)?.randomMedia
-        Assert.assertNotNull(reviewHelper?.randomMedia)
+        doReturn(Single.just(media)).`when`(reviewHelper)?.getRandomMedia()
+        Assert.assertNotNull(reviewHelper?.getRandomMedia())
         reviewHelper
-            ?.randomMedia
+            ?.getRandomMedia()
             ?.test()
             ?.assertValue(media);
         activity.swipeToNext()

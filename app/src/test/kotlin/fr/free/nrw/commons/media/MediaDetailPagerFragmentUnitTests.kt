@@ -17,8 +17,9 @@ import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.TestAppAdapter
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.explore.SearchActivity
 import io.reactivex.android.plugins.RxAndroidPlugins
@@ -37,7 +38,6 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 import java.util.concurrent.Callable
@@ -77,7 +77,7 @@ class MediaDetailPagerFragmentUnitTests {
 
         context = ApplicationProvider.getApplicationContext()
 
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
 
         SoLoader.setInTestMode()
 

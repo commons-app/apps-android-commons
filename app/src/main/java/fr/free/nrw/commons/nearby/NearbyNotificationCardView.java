@@ -113,11 +113,11 @@ public class NearbyNotificationCardView extends SwipableCardView {
     }
 
     /**
-     * Pass place information to views and set compass arrow direction
+     * Pass place information to views
+     *
      * @param place Closes place where we will get information from
-     * @param direction Direction in which compass arrow needs to be set
      */
-    public void updateContent(Place place, float direction) {
+    public void updateContent(Place place) {
         Timber.d("Update nearby card notification content");
         this.setVisibility(VISIBLE);
         cardViewVisibilityState = CardViewVisibilityState.READY;
@@ -132,7 +132,6 @@ public class NearbyNotificationCardView extends SwipableCardView {
         notificationIcon.setVisibility(VISIBLE);
         notificationTitle.setText(place.name);
         notificationDistance.setText(place.distance);
-        notificationCompass.setRotation(direction);
     }
 
     @Override

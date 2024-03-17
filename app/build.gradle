@@ -5,7 +5,7 @@ apply from: '../gitutils.gradle'
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
 apply from: "$rootDir/jacoco.gradle"
 
 def isRunningOnTravisAndIsNotPRBuild = System.getenv("CI") == "true" && file('../play.p12').exists()
@@ -16,7 +16,6 @@ if (isRunningOnTravisAndIsNotPRBuild) {
 
 dependencies {
 
-    implementation project(':wikimedia-data-client')
     // Utils
     implementation 'in.yuvi:http.fluent:1.3'
     implementation 'com.google.code.gson:gson:2.8.5'
@@ -25,6 +24,9 @@ dependencies {
         //  Ref: https://docs.gradle.org/7.5/userguide/upgrading_version_5.html#forced_dependencies
         //force = true //API 19 support
     }
+    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
+    implementation "com.squareup.retrofit2:converter-gson:2.8.1"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.8.1"
     implementation 'com.squareup.okio:okio:2.2.2'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.3'
@@ -99,6 +101,7 @@ dependencies {
     testImplementation 'com.facebook.soloader:soloader:0.10.5'
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3"
     debugImplementation("androidx.fragment:fragment-testing:1.6.2")
+    testImplementation "commons-io:commons-io:2.6"
 
     // Android testing
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0-alpha04'
@@ -134,7 +137,6 @@ dependencies {
     implementation "androidx.room:room-rxjava2:$ROOM_VERSION"
     kapt "androidx.room:room-compiler:$ROOM_VERSION"
     // For Kotlin use kapt instead of annotationProcessor
-    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
     testImplementation "androidx.arch.core:core-testing:2.1.0"
 
     // Pref
@@ -309,7 +311,6 @@ android {
             buildConfigField "String", "TEST_USERNAME", "\"" + getTestUserName() + "\""
             buildConfigField "String", "TEST_PASSWORD", "\"" + getTestPassword() + "\""
             buildConfigField "String", "DEPICTS_PROPERTY", "\"P180\""
-            buildConfigField "String", "MapboxAccessToken", "\"$MAPBOX_ACCESS_TOKEN\""
             dimension 'tier'
         }
 
@@ -345,7 +346,6 @@ android {
             buildConfigField "String", "TEST_USERNAME", "\"" + getTestUserName() + "\""
             buildConfigField "String", "TEST_PASSWORD", "\"" + getTestPassword() + "\""
             buildConfigField "String", "DEPICTS_PROPERTY", "\"P245962\""
-            buildConfigField "String", "MapboxAccessToken", "\"$MAPBOX_ACCESS_TOKEN\""
             dimension 'tier'
         }
     }
@@ -354,6 +354,9 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 
     buildToolsVersion buildToolsVersion
@@ -394,8 +397,4 @@ if (isRunningOnTravisAndIsNotPRBuild) {
             versionNameOverride = "$versionNameOverride.$versionCode"
         }
     }
-}
-
-androidExtensions {
-    experimental = true
 }

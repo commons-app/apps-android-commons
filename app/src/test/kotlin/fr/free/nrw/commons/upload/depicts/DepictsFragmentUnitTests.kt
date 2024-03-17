@@ -5,10 +5,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
@@ -17,9 +13,10 @@ import com.google.android.material.textfield.TextInputLayout
 import com.nhaarman.mockitokotlin2.whenever
 import depictedItem
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText
 import fr.free.nrw.commons.upload.UploadActivity
@@ -36,7 +33,6 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -52,27 +48,6 @@ class DepictsFragmentUnitTests {
 
     @Mock
     private lateinit var savedInstanceState: Bundle
-
-    @Mock
-    private lateinit var textView: TextView
-
-    @Mock
-    private lateinit var imageView: ImageView
-
-    @Mock
-    private lateinit var recyclerView: RecyclerView
-
-    @Mock
-    private lateinit var textInputEditText: PasteSensitiveTextInputEditText
-
-    @Mock
-    private lateinit var progressBar: ProgressBar
-
-    @Mock
-    private lateinit var button: Button
-
-    @Mock
-    private lateinit var textInputLayout: TextInputLayout
 
     @Mock
     private lateinit var callback: UploadBaseFragment.Callback
@@ -96,7 +71,7 @@ class DepictsFragmentUnitTests {
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         context = ApplicationProvider.getApplicationContext()
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
 
         val activity = Robolectric.buildActivity(UploadActivity::class.java).create().get()
         fragment = DepictsFragment()
@@ -110,16 +85,8 @@ class DepictsFragmentUnitTests {
         view = LayoutInflater.from(activity)
             .inflate(R.layout.upload_depicts_fragment, null) as View
 
-        Whitebox.setInternalState(fragment, "depictsTitle", textView)
+
         Whitebox.setInternalState(fragment, "callback", callback)
-        Whitebox.setInternalState(fragment, "tooltip", imageView)
-        Whitebox.setInternalState(fragment, "btnNext", button)
-        Whitebox.setInternalState(fragment, "btnPrevious", button)
-        Whitebox.setInternalState(fragment, "depictsSubTitle", textView)
-        Whitebox.setInternalState(fragment, "depictsRecyclerView", recyclerView)
-        Whitebox.setInternalState(fragment, "depictsSearch", textInputEditText)
-        Whitebox.setInternalState(fragment, "depictsSearchContainer", textInputLayout)
-        Whitebox.setInternalState(fragment, "depictsSearchInProgress", progressBar)
         Whitebox.setInternalState(fragment, "subscribe", disposable)
         Whitebox.setInternalState(fragment, "adapter", adapter)
     }

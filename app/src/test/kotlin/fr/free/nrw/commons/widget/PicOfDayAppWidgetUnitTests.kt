@@ -7,8 +7,9 @@ import androidx.test.core.app.ApplicationProvider
 import com.facebook.imagepipeline.core.ImagePipelineFactory
 import com.facebook.soloader.SoLoader
 import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.TestAppAdapter
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.media.MediaClient
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
@@ -22,7 +23,6 @@ import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -46,7 +46,7 @@ class PicOfDayAppWidgetUnitTests {
 
     @Before
     fun setUp() {
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
         context = ApplicationProvider.getApplicationContext()
         SoLoader.setInTestMode()
         ImagePipelineFactory.initialize(context)
