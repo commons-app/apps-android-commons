@@ -270,7 +270,8 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
                 if (contributionDao.getContribution(listOf(Contribution.STATE_IN_PROGRESS, Contribution.STATE_FAILED,
                         Contribution.STATE_PAUSED, Contribution.STATE_QUEUED)) != null) {
                     uploadingContributions =
-                        contributionDao.getContribution(listOf(Contribution.STATE_IN_PROGRESS)).subscribeOn(Schedulers.io()).blockingGet()
+                        contributionDao.getContribution(listOf(Contribution.STATE_IN_PROGRESS, Contribution.STATE_FAILED,
+                            Contribution.STATE_PAUSED, Contribution.STATE_QUEUED)).subscribeOn(Schedulers.io()).blockingGet()
                 } else {
                     uploadingContributions = ArrayList()
                 }
