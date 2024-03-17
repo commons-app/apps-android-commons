@@ -119,6 +119,7 @@ class ImageAdapter(
      * Bind View holder, load image, selected view, click listeners.
      */
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
+
         var image=images[position]
         holder.image.setImageDrawable (null)
         if (context.contentResolver.getType(image.uri) == null) {
@@ -174,9 +175,11 @@ class ImageAdapter(
                     // inside map, so it will fetch the image from the map and load in the holder
                     } else {
                         val actionableImages: List<Image> = ArrayList(actionableImagesMap.values)
-                        image = actionableImages[position]
-                        Glide.with(holder.image).load(image.uri)
-                            .thumbnail(0.3f).into(holder.image)
+                        if(actionableImages.size > position) {
+                            image = actionableImages[position]
+                            Glide.with(holder.image).load(image.uri)
+                                .thumbnail(0.3f).into(holder.image)
+                        }
                     }
 
                 // If switch is turned off, it just fetches the image from all images without any
@@ -363,6 +366,48 @@ class ImageAdapter(
         init(newImages, fixedImages, TreeMap())
         notifyDataSetChanged()
     }
+
+    /**
+     * Clear selected images and empty the list.
+     */
+    fun clearSelectedImages(){
+        numberOfSelectedImagesMarkedAsNotForUpload = 0
+        selectedImages.clear()
+        selectedImages = arrayListOf()
+    }
+
+
+    /**
+     * Remove image from actionable images map.
+     */
+    fun removeImageFromActionableImageMap(image: Image) {
+        val sharedPreferences: SharedPreferences =
+            context.getSharedPreferences(CUSTOM_SELECTOR_PREFERENCE_KEY, 0)
+        val showAlreadyActionedImages =
+            sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
+
+        if(showAlreadyActionedImages) {
+            refresh(allImages, allImages)
+        } else {
+            val iterator = actionableImagesMap.entries.iterator()
+            var index = 0
+
+            while (iterator.hasNext()) {
+                val entry = iterator.next()
+                if (entry.value == image) {
+                    imagePositionAsPerIncreasingOrder -= 2
+                    iterator.remove()
+                    alreadyAddedPositions.removeAt(alreadyAddedPositions.size - 1)
+                    notifyItemRemoved(index)
+                    notifyItemRangeChanged(index, itemCount )
+                    break
+                }
+                index++
+            }
+        }
+
+    }
+
 
     /**
      * Returns the total number of items in the data set held by the adapter.

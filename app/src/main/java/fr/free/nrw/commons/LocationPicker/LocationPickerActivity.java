@@ -31,8 +31,10 @@ import androidx.core.content.ContextCompat;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.coordinates.CoordinateEditHelper;
 import fr.free.nrw.commons.filepicker.Constants;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationPermissionsHelper;
@@ -41,6 +43,9 @@ import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermission
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
+import fr.free.nrw.commons.utils.ViewUtilWrapper;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -52,13 +57,22 @@ import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Overlay;
 import org.osmdroid.views.overlay.ScaleDiskOverlay;
 import org.osmdroid.views.overlay.TilesOverlay;
+import timber.log.Timber;
 
 /**
  * Helps to pick location and return the result with an intent
  */
 public class LocationPickerActivity extends BaseActivity implements
     LocationPermissionCallback {
-
+    /**
+     * coordinateEditHelper: helps to edit coordinates
+     */
+    @Inject
+    CoordinateEditHelper coordinateEditHelper;
+    /**
+     * media : Media object
+     */
+    private Media media;
     /**
      * cameraPosition : position of picker
      */
@@ -125,6 +139,13 @@ public class LocationPickerActivity extends BaseActivity implements
     @Inject
     LocationServiceManager locationManager;
 
+    /**
+     * Constants
+     */
+    private static final String CAMERA_POS = "cameraPosition";
+    private static final String ACTIVITY = "activity";
+
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
@@ -145,8 +166,12 @@ public class LocationPickerActivity extends BaseActivity implements
             cameraPosition = getIntent()
                 .getParcelableExtra(LocationPickerConstants.MAP_CAMERA_POSITION);
             activity = getIntent().getStringExtra(LocationPickerConstants.ACTIVITY_KEY);
+            media = getIntent().getParcelableExtra(LocationPickerConstants.MEDIA);
+        }else{
+            cameraPosition = savedInstanceState.getParcelable(CAMERA_POS);
+            activity = savedInstanceState.getString(ACTIVITY);
+            media = savedInstanceState.getParcelable("sMedia");
         }
-
         bindViews();
         addBackButtonListener();
         addPlaceSelectedButton();
@@ -220,7 +245,10 @@ public class LocationPickerActivity extends BaseActivity implements
      */
     private void addBackButtonListener() {
         final ImageView backButton = findViewById(R.id.maplibre_place_picker_toolbar_back_button);
-        backButton.setOnClickListener(view -> finish());
+        backButton.setOnClickListener(v -> {
+            finish();
+        });
+
     }
 
     /**
@@ -311,12 +339,40 @@ public class LocationPickerActivity extends BaseActivity implements
                     + mapView.getMapCenter().getLongitude());
             applicationKvStore.putString(LAST_ZOOM, mapView.getZoomLevel() + "");
         }
-        final Intent returningIntent = new Intent();
-        returningIntent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION,
-            new CameraPosition(new LatLng(mapView.getMapCenter().getLatitude(),
-                mapView.getMapCenter().getLongitude()), 14f, 0, 0));
-        setResult(AppCompatActivity.RESULT_OK, returningIntent);
+
+        if (media == null) {
+            final Intent returningIntent = new Intent();
+            returningIntent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION,
+                new CameraPosition(new LatLng(mapView.getMapCenter().getLatitude(),
+                    mapView.getMapCenter().getLongitude()), 14f, 0, 0));
+            setResult(AppCompatActivity.RESULT_OK, returningIntent);
+        } else {
+            updateCoordinates(String.valueOf(mapView.getMapCenter().getLatitude()),
+                String.valueOf(mapView.getMapCenter().getLongitude()),
+                String.valueOf(0.0f));
+        }
+
         finish();
+    }
+
+    /**
+     * Fetched coordinates are replaced with existing coordinates by a POST API call.
+     * @param Latitude to be added
+     * @param Longitude to be added
+     * @param Accuracy to be added
+     */
+    public void updateCoordinates(final String Latitude, final String Longitude,
+        final String Accuracy) {
+        if (media == null) {
+            return;
+        }
+        compositeDisposable.add(coordinateEditHelper.makeCoordinatesEdit(getApplicationContext(),media,
+                Latitude, Longitude, Accuracy)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(s -> {
+                Timber.d("Coordinates are added.");
+            }));
     }
 
     /**
@@ -458,4 +514,22 @@ public class LocationPickerActivity extends BaseActivity implements
         mapView.getOverlays().add(startMarker);
     }
 
+    /**
+     * Saves the state of the activity
+     * @param outState Bundle
+     */
+    @Override
+    public void onSaveInstanceState(@NonNull final Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if(cameraPosition!=null){
+            outState.putParcelable(CAMERA_POS, cameraPosition);
+        }
+        if(activity!=null){
+            outState.putString(ACTIVITY, activity);
+        }
+
+        if(media!=null){
+            outState.putParcelable("sMedia", media);
+        }
+    }
 }

@@ -10,8 +10,6 @@ import androidx.annotation.Nullable;
 
 import java.util.Date;
 
-import static org.apache.commons.lang3.StringUtils.defaultString;
-
 /**
  * Immutable class that contains metadata associated with a PageTitle.
  */

@@ -3,6 +3,7 @@ package fr.free.nrw.commons.LocationPicker;
 import android.app.Activity;
 import android.content.Intent;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
+import fr.free.nrw.commons.Media;
 
 /**
  * Helper class for starting the activity
@@ -51,6 +52,17 @@ public final class LocationPicker {
           intent.putExtra(LocationPickerConstants.ACTIVITY_KEY, activity);
           return this;
         }
+
+        /**
+         * Gets and puts media in intent
+         * @param media Media
+         * @return LocationPicker.IntentBuilder
+         */
+        public LocationPicker.IntentBuilder media(
+                final Media media) {
+              intent.putExtra(LocationPickerConstants.MEDIA, media);
+              return this;
+            }
 
         /**
          * Gets and sets the activity

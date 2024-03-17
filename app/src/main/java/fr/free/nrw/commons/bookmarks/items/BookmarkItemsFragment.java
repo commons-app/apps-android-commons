@@ -12,10 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.databinding.FragmentBookmarksItemsBinding;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import java.util.List;
 import javax.inject.Inject;
@@ -26,17 +25,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class BookmarkItemsFragment extends DaggerFragment {
 
-    @BindView(R.id.status_message)
-    TextView statusTextView;
-
-    @BindView(R.id.loading_images_progress_bar)
-    ProgressBar progressBar;
-
-    @BindView(R.id.list_view)
-    RecyclerView recyclerView;
-
-    @BindView(R.id.parent_layout)
-    RelativeLayout parentLayout;
+    private FragmentBookmarksItemsBinding binding;
 
     @Inject
     BookmarkItemsController controller;
@@ -51,16 +40,13 @@ public class BookmarkItemsFragment extends DaggerFragment {
         final ViewGroup container,
         final Bundle savedInstanceState
     ) {
-        final View v = inflater.inflate(R.layout.fragment_bookmarks_items, container, false);
-        ButterKnife.bind(this, v);
-        return v;
+        binding = FragmentBookmarksItemsBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(final @NotNull View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        progressBar.setVisibility(View.VISIBLE);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         initList(requireContext());
     }
 
@@ -77,13 +63,19 @@ public class BookmarkItemsFragment extends DaggerFragment {
     private void initList(final Context context) {
         final List<DepictedItem> depictItems = controller.loadFavoritesItems();
         final BookmarkItemsAdapter adapter = new BookmarkItemsAdapter(depictItems, context);
-        recyclerView.setAdapter(adapter);
-        progressBar.setVisibility(View.GONE);
+        binding.listView.setAdapter(adapter);
+        binding.loadingImagesProgressBar.setVisibility(View.GONE);
         if (depictItems.isEmpty()) {
-            statusTextView.setText(R.string.bookmark_empty);
-            statusTextView.setVisibility(View.VISIBLE);
+            binding.statusMessage.setText(R.string.bookmark_empty);
+            binding.statusMessage.setVisibility(View.VISIBLE);
         } else {
-            statusTextView.setVisibility(View.GONE);
+            binding.statusMessage.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }
