@@ -160,7 +160,13 @@ public class UploadPresenter implements UploadContract.UserActionListener {
             view.finish();
             return;
         } else {
+            presenter.updateImageQualitiesJSON(uploadableFiles.size(), index);
             view.onUploadMediaDeleted(index);
+            if (!(index == uploadableFiles.size()) && index != 0) {
+                // if the deleted image was not the last item to be uploaded, check quality of next
+                UploadItem uploadItem = repository.getUploadItem(index);
+                presenter.checkImageQuality(uploadItem, index);
+            }
         }
         if (uploadableFiles.size() < 2) {
             view.showHideTopCard(false);

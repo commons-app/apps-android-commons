@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
 import static android.app.Activity.RESULT_OK;
+import static fr.free.nrw.commons.utils.ActivityUtils.startActivityWithFlags;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
 import android.annotation.SuppressLint;
@@ -112,7 +113,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     private Place nearbyPlace;
     private UploadItem uploadItem;
-    private int uploadSize;
     /**
      * inAppPictureLocation: use location recorded while using the in-app camera if device camera
      * does not record it in the EXIF
@@ -176,16 +176,17 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         if(savedInstanceState!=null){
                 if(uploadMediaDetailAdapter.getItems().size()==0 && callback != null){
                     uploadMediaDetailAdapter.setItems(savedInstanceState.getParcelableArrayList(UPLOAD_MEDIA_DETAILS));
-                    presenter.setUploadMediaDetails(uploadMediaDetailAdapter.getItems(), callback.getIndexInViewFlipper(this));
+                    presenter.setUploadMediaDetails(uploadMediaDetailAdapter.getItems(),
+                        indexOfFragment);
                 }
         }
 
-//        TODO: after everything, change this block to only calling the getImageQuality, not logging it
         try {
-            Timber.d(
-                "Inside i:" + indexOfFragment + " onCreateView UMF " + presenter.getImageQuality(
-                    indexOfFragment,
-                    inAppPictureLocation, getActivity()) + " isVisible: " + this.isVisible());
+            if(!presenter.getImageQuality(indexOfFragment, inAppPictureLocation, getActivity())) {
+                startActivityWithFlags(
+                getActivity(), MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            }
         } catch (Exception e) {
         }
 
@@ -195,7 +196,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         if (binding == null) {
             return;
         }
-        binding.tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
+        binding.tvTitle.setText(getString(R.string.step_count, (indexOfFragment + 1),
             callback.getTotalNumberOfSteps(), getString(R.string.media_detail_step_title)));
         binding.tooltip.setOnClickListener(
             v -> showInfoAlert(R.string.media_detail_step_title, R.string.media_details_tooltip));
@@ -203,7 +204,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         presenter.receiveImage(uploadableFile, place, inAppPictureLocation);
         initRecyclerView();
 
-        if (callback.getIndexInViewFlipper(this) == 0) {
+        if (indexOfFragment == 0) {
             binding.btnPrevious.setEnabled(false);
             binding.btnPrevious.setAlpha(0.5f);
         } else {
@@ -226,8 +227,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         }
 
         //If this is the last media, we have nothing to copy, lets not show the button
-        if (callback.getIndexInViewFlipper(this) == callback.getTotalNumberOfSteps() - 4) {
-            binding.btnCopySubsequentMedia.setVisibility(View.GONE);
+        if (indexOfFragment == callback.getTotalNumberOfSteps() - 4) {
+            binding.btnCopyToSubsequentMedia.setVisibility(View.GONE);
         } else {
             binding.btnCopySubsequentMedia.setVisibility(View.VISIBLE);
         }
@@ -291,24 +292,18 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         if (callback == null) {
             return;
         }
-//        boolean isValidUploads = presenter.verifyImageQuality(callback.getIndexInViewFlipper(this), inAppPictureLocation);
-        presenter.displayLocDialog(callback.getIndexInViewFlipper(this), inAppPictureLocation);
-//        if (!isValidUploads) {
-//            startActivityWithFlags(
-//                getActivity(), MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
-//                Intent.FLAG_ACTIVITY_SINGLE_TOP);
-//        }
+        presenter.displayLocDialog(indexOfFragment, inAppPictureLocation);
     }
 
     public void onPreviousButtonClicked() {
         if (callback == null) {
             return;
         }
-        callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
+        callback.onPreviousButtonClicked(indexOfFragment);
     }
 
     public void onEditButtonClicked() {
-        presenter.onEditButtonClicked(callback.getIndexInViewFlipper(this));
+        presenter.onEditButtonClicked(indexOfFragment);
     }
     @Override
     public void showSimilarImageFragment(String originalFilePath, String possibleFilePath,
@@ -321,7 +316,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 public void onPositiveResponse() {
                     Timber.d("positive response from similar image fragment");
                     presenter.useSimilarPictureCoordinates(similarImageCoordinates,
-                        callback.getIndexInViewFlipper(UploadMediaDetailFragment.this));
+                        indexOfFragment);
 
                     // set the description text when user selects to use coordinate from the other image
                     // which was taken within 120s
@@ -365,13 +360,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         if (callback == null) {
             return;
         }
-        if (callback.getIndexInViewFlipper(this) == 0) {
+        if (indexOfFragment == 0) {
             if (UploadActivity.nearbyPopupAnswers.containsKey(nearbyPlace)) {
                 final boolean response = UploadActivity.nearbyPopupAnswers.get(nearbyPlace);
                 if (response) {
                     if (callback != null) {
                         presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace,
-                            callback.getIndexInViewFlipper(this));
+                            indexOfFragment);
                     }
                 }
             } else {
@@ -398,7 +393,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 place.getName()),
             () -> {
                 UploadActivity.nearbyPopupAnswers.put(place, true);
-                presenter.onUserConfirmedUploadIsOfPlace(place, callback.getIndexInViewFlipper(this));
+                presenter.onUserConfirmedUploadIsOfPlace(place, indexOfFragment);
             },
             () -> {
                 UploadActivity.nearbyPopupAnswers.put(place, false);
@@ -419,7 +414,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         if (callback == null) {
             return;
         }
-        callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
+        callback.onNextButtonClicked(indexOfFragment);
     }
 
     /**
@@ -431,15 +426,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         if (callback == null) {
             return;
         }
-        presenter.fetchTitleAndDescription(callback.getIndexInViewFlipper(this));
+        presenter.fetchTitleAndDescription(indexOfFragment);
         if (showNearbyFound) {
             if (UploadActivity.nearbyPopupAnswers.containsKey(nearbyPlace)) {
                 final boolean response = UploadActivity.nearbyPopupAnswers.get(nearbyPlace);
                 if (response) {
-                    if (callback != null) {
-                        presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace,
-                            callback.getIndexInViewFlipper(this));
-                    }
+                    presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace,
+                        indexOfFragment);
                 }
             } else {
                 showNearbyPlaceFound(nearbyPlace);
@@ -624,9 +617,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                     binding.backgroundImage.setImageURI(Uri.fromFile(new File(result)));
                 }
                 editableUploadItem.setContentUri(Uri.fromFile(new File(result)));
-                if (callback != null) {
-                    callback.changeThumbnail(callback.getIndexInViewFlipper(this), result);
-                }
+                callback.changeThumbnail(indexOfFragment,
+                    result);
             } catch (Exception e) {
                 Timber.e(e);
             }
@@ -718,7 +710,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             return;
         }
         // TODO: this method is now in presenter, has to be removed from here, see how tests are affected
-        callback.deletePictureAtIndex(callback.getIndexInViewFlipper(this));
+        callback.deletePictureAtIndex(indexOfFragment);
     }
 
     @Override
@@ -748,7 +740,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         if (callback == null) {
             return;
         }
-        presenter.onMapIconClicked(callback.getIndexInViewFlipper(this));
+        presenter.onMapIconClicked(indexOfFragment);
     }
 
     @Override
@@ -784,10 +776,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
 
     public void onButtonCopyTitleDescToSubsequentMedia(){
-        if (callback == null) {
-            return;
-        }
-        presenter.copyTitleAndDescriptionToSubsequentMedia(callback.getIndexInViewFlipper(this));
+        presenter.copyTitleAndDescriptionToSubsequentMedia(indexOfFragment);
         Toast.makeText(getContext(), getResources().getString(R.string.copied_successfully), Toast.LENGTH_SHORT).show();
     }
 

@@ -54,24 +54,33 @@ public interface UploadMediaDetailsContract {
         boolean verifyImageQuality(int uploadItemIndex, LatLng inAppPictureLocation);
 
         /**
-         * TODO: add javadoc
+         * Calculates the image quality
          *
-         * @param uploadItemIndex
-         * @param inAppPictureLocation
-         * @param activity
-         * @return
+         * @param uploadItemIndex Index of the UploadItem whose quality is to be checked
+         * @param inAppPictureLocation In app picture location (if any)
+         * @param activity Context reference
+         * @return true if no internal error occurs, else returns false
          */
-        Integer getImageQuality(int uploadItemIndex, LatLng inAppPictureLocation, Activity activity);
+        boolean getImageQuality(int uploadItemIndex, LatLng inAppPictureLocation, Activity activity);
 
         void displayLocDialog(int uploadItemIndex, LatLng inAppPictureLocation);
 
         /**
          * Used to check image quality from stored qualities and display dialogs
          *
-         * @param uploadItem
-         * @param index
+         * @param uploadItem UploadItem whose quality is to be checked
+         * @param index Index of the UploadItem whose quality is to be checked
          */
         void checkImageQuality(UploadItem uploadItem, int index);
+
+        /**
+         * Updates the image qualities stored in JSON, whenever an image is deleted
+         *
+         * @param size Size of uploadableFiles
+         * @param index Index of the UploadItem which was deleted
+         */
+        void updateImageQualitiesJSON(int size, int index);
+
 
         void copyTitleAndDescriptionToSubsequentMedia(int indexInViewFlipper);
 

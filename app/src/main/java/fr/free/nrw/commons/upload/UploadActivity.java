@@ -53,6 +53,7 @@ import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback;
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaPresenter;
 import fr.free.nrw.commons.upload.worker.WorkRequestHelper;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
@@ -473,6 +474,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (uploadableFiles.size() > 3
                     && !defaultKvStore.getBoolean("hasAlreadyLaunchedBigMultiupload")) {
+                    // When battery-optimisation dialog is shown don't show the image quality dialog
+                    UploadMediaPresenter.isBatteryDialogShowing = true;
                     DialogUtil.showAlertDialog(
                         this,
                         getString(R.string.unrestricted_battery_mode),
@@ -493,8 +496,13 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                             Intent batteryOptimisationSettingsIntent = new Intent(
                                 Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
                             startActivity(batteryOptimisationSettingsIntent);
+                            presenter.checkImageQuality(0);
+                            UploadMediaPresenter.isBatteryDialogShowing = false;
                         },
-                        () -> {}
+                        () -> {
+                            presenter.checkImageQuality(0);
+                            UploadMediaPresenter.isBatteryDialogShowing = false;
+                        }
                     );
                     defaultKvStore.putBoolean("hasAlreadyLaunchedBigMultiupload", true);
                 }

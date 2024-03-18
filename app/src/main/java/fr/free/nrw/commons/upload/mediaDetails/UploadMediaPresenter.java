@@ -5,6 +5,7 @@ import static fr.free.nrw.commons.di.CommonsApplicationModule.MAIN_THREAD;
 import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.activity;
 import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_CAPTION;
 import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
@@ -63,6 +64,11 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
 
     private final List<String> WLM_SUPPORTED_COUNTRIES= Arrays.asList("am","at","az","br","hr","sv","fi","fr","de","gh","in","ie","il","mk","my","mt","pk","pe","pl","ru","rw","si","es","se","tw","ug","ua","us");
     private Map<String, String> countryNamesAndCodes = null;
+
+    /**
+     * Variable used to determine if the battery-optimisation dialog is being shown or not
+     */
+    public static boolean isBatteryDialogShowing;
 
     @Inject
     public UploadMediaPresenter(UploadRepository uploadRepository,
@@ -202,17 +208,17 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
           return false;
       }
         UploadItem uploadItem = uploadItems.get(uploadItemIndex);
-//        view.showProgress(true);
+        view.showProgress(true);
         compositeDisposable.add(
             repository
                 .getImageQuality(uploadItem, inAppPictureLocation)
                 .observeOn(mainThreadScheduler)
                 .subscribe(imageResult -> {
-//                        view.showProgress(false);
+                        view.showProgress(false);
                         handleImageResult(imageResult, uploadItem);
                     },
                     throwable -> {
-//                        view.showProgress(false);
+                        view.showProgress(false);
                         if (throwable instanceof UnknownHostException) {
                             view.showConnectionErrorPopup();
                         } else {
@@ -240,9 +246,9 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     }
 
     /**
-     * Verifies image's caption and handles the result
+     * Verifies the image's caption and handles the result
      *
-     * @param uploadItem
+     * @param uploadItem UploadItem whose caption is checked
      */
     private void verifyCaptionQuality(UploadItem uploadItem) {
         view.showProgress(true);
@@ -270,8 +276,8 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     /**
      * Handles image's caption results and shows dialog if necessary
      *
-     * @param errorCode
-     * @param uploadItem
+     * @param errorCode Error code of the UploadItem
+     * @param uploadItem UploadItem whose caption is checked
      */
     public void handleCaptionResult(Integer errorCode, UploadItem uploadItem) {
         // If errorCode is empty caption show message
@@ -355,15 +361,15 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
   }
 
     /**
-     * TODO: add javadoc, copy from UploadMediaDetailsContract. Change return type to void after all changes
+     * Calculates the image quality
      *
-     * @param uploadItemIndex
-     * @param inAppPictureLocation
-     * @param activity
-     * @return
+     * @param uploadItemIndex      Index of the UploadItem whose quality is to be checked
+     * @param inAppPictureLocation In app picture location (if any)
+     * @param activity             Context reference
+     * @return true if no internal error occurs, else returns false
      */
     @Override
-    public Integer getImageQuality(int uploadItemIndex, LatLng inAppPictureLocation,
+    public boolean getImageQuality(int uploadItemIndex, LatLng inAppPictureLocation,
         Activity activity) {
         final List<UploadItem> uploadItems = repository.getUploads();
         view.showProgress(true);
@@ -373,7 +379,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
             view.showMessage(
                 "Internal error: Zero upload items received by the Upload Media Detail Fragment. Sorry, please upload again.",
                 R.color.color_error);
-            return -999;
+            return false;
         }
         UploadItem uploadItem = uploadItems.get(uploadItemIndex);
         compositeDisposable.add(
@@ -393,21 +399,19 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                         Timber.e(throwable, "Error occurred while handling image");
                     })
         );
-        return 333;
+        return true;
     }
 
     /**
-     * TODO: add javadoc
+     * Stores the image quality in JSON format in SharedPrefs
      *
-     * @param imageResult
-     * @param uploadItemIndex
-     * @param activity
-     * @param uploadItem
+     * @param imageResult     Image quality
+     * @param uploadItemIndex Index of the UploadItem whose quality is calculated
+     * @param activity        Context reference
+     * @param uploadItem      UploadItem whose quality is to be checked
      */
     private void storeImageQuality(Integer imageResult, int uploadItemIndex, Activity activity,
         UploadItem uploadItem) {
-        Timber.d(
-            "Inside handleImgQuality imageRes: " + imageResult + " of Index: " + uploadItemIndex);
         BasicKvStore store = new BasicKvStore(activity, "CurrentUploadImageQualities");
         String value = store.getString("UploadedImagesQualities", null);
         JSONObject jsonObject;
@@ -418,25 +422,28 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                 jsonObject = new JSONObject();
             }
             jsonObject.put("UploadItem" + uploadItemIndex, imageResult);
-            Timber.d("Inside handleImgQuality JSON: " + jsonObject);
             store.putString("UploadedImagesQualities", jsonObject.toString());
         } catch (Exception e) {
         }
-        if (uploadItemIndex == 0) {
+        if (uploadItemIndex == 0 && !isBatteryDialogShowing) {
+            // if battery-optimisation dialog is not being shown, call checkImageQuality
             checkImageQuality(uploadItem, uploadItemIndex);
+        } else {
+            view.showProgress(false);
         }
     }
 
     /**
-     * TODO: add javadoc
+     * Used to check image quality from stored qualities and display dialogs
      *
-     * @param uploadItem
-     * @param index
+     * @param uploadItem UploadItem whose quality is to be checked
+     * @param index      Index of the UploadItem whose quality is to be checked
      */
     @Override
     public void checkImageQuality(UploadItem uploadItem, int index) {
         view.showProgress(false);
-        if (!(uploadItem.getImageQuality() == IMAGE_OK)) {
+        if ((uploadItem.getImageQuality() != IMAGE_OK) && (uploadItem.getImageQuality()
+            != IMAGE_KEEP)) {
             BasicKvStore store = new BasicKvStore(activity, "CurrentUploadImageQualities");
             String value = store.getString("UploadedImagesQualities", null);
             JSONObject jsonObject;
@@ -448,7 +455,6 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                 }
                 Integer imageQuality = (int) jsonObject.get("UploadItem" + index);
                 if (imageQuality == IMAGE_OK) {
-                    view.onImageValidationSuccess();
                     uploadItem.setHasInvalidLocation(false);
                     uploadItem.setImageQuality(imageQuality);
                 } else {
@@ -456,6 +462,26 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
                 }
             } catch (Exception e) {
             }
+        }
+    }
+
+    @Override
+    public void updateImageQualitiesJSON(int size, int index) {
+        BasicKvStore store = new BasicKvStore(activity, "CurrentUploadImageQualities");
+        String value = store.getString("UploadedImagesQualities", null);
+        JSONObject jsonObject;
+        try {
+            if (value != null) {
+                jsonObject = new JSONObject(value);
+            } else {
+                jsonObject = new JSONObject();
+            }
+            for (int i = index; i < (size - 1); i++) {
+                jsonObject.put("UploadItem" + i, jsonObject.get("UploadItem" + (i + 1)));
+            }
+            jsonObject.remove("UploadItem" + (size - 1));
+            store.putString("UploadedImagesQualities", jsonObject.toString());
+        } catch (Exception e) {
         }
     }
 
@@ -480,44 +506,40 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     }
 
     /**
-     * TODO: add javadoc, copied this method from view
+     * Shows a dialog describing the potential problems in the current image
      *
-     * @param errorCode
-     * @param index
-     * @param activity
-     * @param uploadItem
+     * @param errorCode  Has the potential problems in the current image
+     * @param index      Index of the UploadItem which has problems
+     * @param activity   Context reference
+     * @param uploadItem UploadItem which has problems
      */
     public void showBadImagePopup(Integer errorCode,
         int index, Activity activity, UploadItem uploadItem) {
         String errorMessageForResult = getErrorMessageForResult(activity, errorCode);
         if (!StringUtils.isBlank(errorMessageForResult)) {
-            Timber.d("Inside showBadImgPopUp if");
             DialogUtil.showAlertDialog(activity,
                 activity.getString(R.string.upload_problem_image),
                 errorMessageForResult,
                 activity.getString(R.string.upload),
                 activity.getString(R.string.cancel),
-//                TODO: Think about what to do of IMAGEKEEP? Maybe have tght, can come back if some error
                 () -> uploadItem.setImageQuality(IMAGE_OK),
                 () -> {
                     UploadMediaDetailFragment.callback.deletePictureAtIndex(index);
                 }
             ).setCancelable(false);
         } else {
-            Timber.d("Inside showBadImgPopUp else");
         }
         //If the error message is null, we will probably not show anything
     }
 
     /**
-     * TODO: this was an earlier method, see how removing this will affect unit tests
+     * TODO: this was an earlier method, now replaced with checkImageQuality,
+     * see how removing this will affect unit tests
      *
      * @param imageResult
      * @param uploadItem
      */
     public void handleImageResult(Integer imageResult,  UploadItem uploadItem) {
-//            TODO: Add the imageResult to a List. Execute the below code when fragment is visible
-//        TODO: This is earlier method, now replaced with checkImageQuality
     }
 
     /**
