@@ -96,6 +96,10 @@ public class UploadModel {
         return imageProcessingService.validateImage(uploadItem, inAppPictureLocation);
     }
 
+    public Single<Integer> getCaptionQuality(final UploadItem uploadItem) {
+        return imageProcessingService.validateCaption(uploadItem);
+    }
+
     private UploadItem createAndAddUploadItem(final UploadableFile uploadableFile,
         final Place place,
         final SimilarImageInterface similarImageInterface,

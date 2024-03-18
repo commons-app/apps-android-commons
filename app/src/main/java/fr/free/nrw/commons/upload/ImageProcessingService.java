@@ -60,16 +60,26 @@ public class ImageProcessingService {
             checkDuplicateImage(filePath),
             checkImageGeoLocation(uploadItem.getPlace(), filePath, inAppPictureLocation),
             checkDarkImage(filePath),
-            validateItemTitle(uploadItem),
             checkFBMD(filePath),
             checkEXIF(filePath),
-            (duplicateImage, wrongGeoLocation, darkImage, itemTitle, fbmd, exif) -> {
-                Timber.d("duplicate: %d, geo: %d, dark: %d, title: %d" + "fbmd:" + fbmd + "exif:"
+            (duplicateImage, wrongGeoLocation, darkImage, fbmd, exif) -> {
+                Timber.d("duplicate: %d, geo: %d, dark: %d" + "fbmd:" + fbmd + "exif:"
                         + exif,
-                    duplicateImage, wrongGeoLocation, darkImage, itemTitle);
-                return duplicateImage | wrongGeoLocation | darkImage | itemTitle | fbmd | exif;
+                    duplicateImage, wrongGeoLocation, darkImage);
+                return duplicateImage | wrongGeoLocation | darkImage |  fbmd | exif;
             }
         );
+    }
+
+    Single<Integer> validateCaption(UploadItem uploadItem) {
+        int currentImageQuality = uploadItem.getImageQuality();
+        Timber.d("Current image quality is %d", currentImageQuality);
+        if (currentImageQuality == ImageUtils.IMAGE_KEEP) {
+            return Single.just(ImageUtils.IMAGE_OK);
+        }
+        Timber.d("Checking the validity of caption");
+
+        return validateItemTitle(uploadItem);
     }
 
     /**

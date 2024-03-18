@@ -204,6 +204,16 @@ public class UploadRepository {
     }
 
     /**
+     * query the RemoteDataSource for image quality
+     *
+     * @param uploadItem
+     * @return
+     */
+    public Single<Integer> getCaptionQuality(UploadItem uploadItem) {
+        return uploadModel.getCaptionQuality(uploadItem);
+    }
+
+    /**
      * asks the LocalDataSource to delete the file with the given file path
      *
      * @param filePath

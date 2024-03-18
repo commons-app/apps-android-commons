@@ -197,55 +197,64 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
           view.showMessage("Internal error: Zero upload items received by the Upload Media Detail Fragment. Sorry, please upload again.",R.color.color_error);
           return false;
       }
-      UploadItem uploadItem = uploadItems.get(uploadItemIndex);
-
-      if (uploadItem.getGpsCoords().getDecimalCoords() == null && inAppPictureLocation == null) {
-          final Runnable onSkipClicked = () -> {
-              view.showProgress(true);
-              compositeDisposable.add(
-                  repository
-                      .getImageQuality(uploadItem, inAppPictureLocation)
-                      .observeOn(mainThreadScheduler)
-                      .subscribe(imageResult -> {
-                              view.showProgress(false);
-                              handleImageResult(imageResult, uploadItem);
-                          },
-                          throwable -> {
-                              view.showProgress(false);
-                              if (throwable instanceof UnknownHostException) {
-                                  view.showConnectionErrorPopup();
-                              } else {
-                                  view.showMessage("" + throwable.getLocalizedMessage(),
-                                      R.color.color_error);
-                              }
-                              Timber.e(throwable, "Error occurred while handling image");
-                          })
-              );
-          };
-          view.displayAddLocationDialog(onSkipClicked);
-      } else {
-          view.showProgress(true);
-          compositeDisposable.add(
-              repository
-                  .getImageQuality(uploadItem, inAppPictureLocation)
-                  .observeOn(mainThreadScheduler)
-                  .subscribe(imageResult -> {
-                          view.showProgress(false);
-                          handleImageResult(imageResult, uploadItem);
-                      },
-                      throwable -> {
-                          view.showProgress(false);
-                          if (throwable instanceof UnknownHostException) {
-                              view.showConnectionErrorPopup();
-                          } else {
-                              view.showMessage("" + throwable.getLocalizedMessage(),
-                                  R.color.color_error);
-                          }
-                          Timber.e(throwable, "Error occurred while handling image");
-                      })
-          );
-      }
+        UploadItem uploadItem = uploadItems.get(uploadItemIndex);
+//        view.showProgress(true);
+        compositeDisposable.add(
+            repository
+                .getImageQuality(uploadItem, inAppPictureLocation)
+                .observeOn(mainThreadScheduler)
+                .subscribe(imageResult -> {
+//                        view.showProgress(false);
+                        handleImageResult(imageResult, uploadItem);
+                    },
+                    throwable -> {
+//                        view.showProgress(false);
+                        if (throwable instanceof UnknownHostException) {
+                            view.showConnectionErrorPopup();
+                        } else {
+                            view.showMessage("" + throwable.getLocalizedMessage(),
+                                R.color.color_error);
+                        }
+                        Timber.e(throwable, "Error occurred while handling image");
+                    })
+        );
       return true;
+    }
+
+    @Override
+    public void displayLocDialog(int uploadItemIndex, LatLng inAppPictureLocation) {
+        final List<UploadItem> uploadItems = repository.getUploads();
+        UploadItem uploadItem = uploadItems.get(uploadItemIndex);
+        if (uploadItem.getGpsCoords().getDecimalCoords() == null && inAppPictureLocation == null) {
+            final Runnable onSkipClicked = () -> {
+                verifyCaptionQuality(uploadItem);
+            };
+            view.displayAddLocationDialog(onSkipClicked);
+        } else {
+            verifyCaptionQuality(uploadItem);
+        }
+    }
+
+    private void verifyCaptionQuality(UploadItem uploadItem) {
+        view.showProgress(true);
+        compositeDisposable.add(
+            repository
+                .getCaptionQuality(uploadItem)
+                .observeOn(mainThreadScheduler)
+                .subscribe(capResult -> {
+                        handleCaptionResult(capResult, uploadItem);
+                    },
+                    throwable -> {
+                        view.showProgress(false);
+                        if (throwable instanceof UnknownHostException) {
+                            view.showConnectionErrorPopup();
+                        } else {
+                            view.showMessage("" + throwable.getLocalizedMessage(),
+                                R.color.color_error);
+                        }
+                        Timber.e(throwable, "Error occurred while handling image");
+                    })
+        );
     }
 
 
@@ -317,12 +326,39 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
    */
     public void handleImageResult(Integer imageResult,
         UploadItem uploadItem) {
+//            TODO: Add the imageResult to a List. Execute the below code when fragment is visible
+
+    }
+
+//    TODO: Will be called by a new method, checkImgQualityAndDisplayIssues
+    public void showImageResult(UploadItem uploadItem, int index) {
+//        TODO: set imageResult to the corresponding List item, which is keeping the result
+        Integer imageResult = 0 ;
         if (imageResult == IMAGE_KEEP || imageResult == IMAGE_OK) {
-            view.onImageValidationSuccess();
             uploadItem.setHasInvalidLocation(false);
         } else {
             handleBadImage(imageResult, uploadItem);
         }
+    }
+
+    public void handleCaptionResult(Integer errorCode, UploadItem uploadItem) {
+        // If errorCode is empty caption show message
+        if (errorCode == EMPTY_CAPTION) {
+            Timber.d("Captions are empty. Showing toast");
+            view.showMessage(R.string.add_caption_toast, R.color.color_error);
+        }
+
+        // If image with same file name exists check the bit in errorCode is set or not
+        if ((errorCode & FILE_NAME_EXISTS) != 0) {
+            Timber.d("Trying to show duplicate picture popup");
+            view.showDuplicatePicturePopup(uploadItem);
+        }
+    }
+
+    @Override
+    public void checkImageQualityAndDisplayIssues(UploadItem uploadItem, int index) {
+//        TODO: get quality from List and call showImageResult based on condition
+        showImageResult(uploadItem, index);
     }
 
     /**
@@ -339,20 +375,11 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
             uploadItem.setHasInvalidLocation(true);
         }
 
-        // If errorCode is empty caption show message
-        if (errorCode == EMPTY_CAPTION) {
-            Timber.d("Captions are empty. Showing toast");
-            view.showMessage(R.string.add_caption_toast, R.color.color_error);
-        }
-
-        // If image has some problems, show popup accordingly
+        // If image has some other problems, show popup accordingly
         if (errorCode != EMPTY_CAPTION && errorCode != FILE_NAME_EXISTS) {
             view.showBadImagePopup(errorCode, uploadItem);
-        } else if ((errorCode & FILE_NAME_EXISTS) != 0) {
-            // When image has duplicate caption problem
-            Timber.d("Trying to show duplicate picture popup");
-            view.showDuplicatePicturePopup(uploadItem);
         }
+
     }
 
     /**

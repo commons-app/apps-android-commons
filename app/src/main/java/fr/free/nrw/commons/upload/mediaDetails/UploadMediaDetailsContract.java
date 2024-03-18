@@ -52,6 +52,10 @@ public interface UploadMediaDetailsContract {
 
         boolean verifyImageQuality(int uploadItemIndex, LatLng inAppPictureLocation);
 
+        void displayLocDialog(int uploadItemIndex, LatLng inAppPictureLocation);
+
+        void checkImageQualityAndDisplayIssues(UploadItem uploadItem, int index);
+
         void copyTitleAndDescriptionToSubsequentMedia(int indexInViewFlipper);
 
         void fetchTitleAndDescription(int indexInViewFlipper);

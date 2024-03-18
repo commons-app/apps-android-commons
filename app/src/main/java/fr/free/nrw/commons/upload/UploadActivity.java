@@ -180,6 +180,11 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
         locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
         checkStoragePermissions();
+        getAllImagesQuality();
+    }
+
+    private void getAllImagesQuality() {
+//        TODO: get all upload items and run an async loop to get all img quality and put in list
     }
 
     private void init() {

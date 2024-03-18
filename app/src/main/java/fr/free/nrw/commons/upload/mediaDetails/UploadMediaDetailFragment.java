@@ -170,6 +170,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                     presenter.setUploadMediaDetails(uploadMediaDetailAdapter.getItems(), callback.getIndexInViewFlipper(this));
                 }
         }
+//        TODO: check uploadItem value and get index of item
+        presenter.checkImageQualityAndDisplayIssues(uploadItem, 1);
 
     }
 
@@ -273,12 +275,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         if (callback == null) {
             return;
         }
-        boolean isValidUploads = presenter.verifyImageQuality(callback.getIndexInViewFlipper(this), inAppPictureLocation);
-        if (!isValidUploads) {
-            startActivityWithFlags(
-                getActivity(), MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
-                Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        }
+//        boolean isValidUploads = presenter.verifyImageQuality(callback.getIndexInViewFlipper(this), inAppPictureLocation);
+        presenter.displayLocDialog(callback.getIndexInViewFlipper(this), inAppPictureLocation);
+//        if (!isValidUploads) {
+//            startActivityWithFlags(
+//                getActivity(), MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+//                Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//        }
     }
 
     public void onPreviousButtonClicked() {
@@ -466,7 +469,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 false);
         } else {
             uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
-            // Calling below, instead of onNextButtonClicked() to not show locationDialog twice
             onImageValidationSuccess();
         }
     }
@@ -481,24 +483,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 errorMessageForResult,
                 getString(R.string.upload),
                 getString(R.string.cancel),
-                () -> {
-                    /*
-                        User skipped the warning of low quality image, so we call
-                        onImageValidationSuccess rather than onNextButtonClicked to avoid showing
-                        other warning popups again.
-                    */
-
-                    // validate image only when same file name error does not occur
-                    // show the same file name error if exists.
-                    // If image with same file name exists check the bit in errorCode is set or not
-                    if ((errorCode & FILE_NAME_EXISTS) != 0) {
-                        Timber.d("Trying to show duplicate picture popup");
-                        showDuplicatePicturePopup(uploadItem);
-                    } else {
-                        uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
-                        onImageValidationSuccess();
-                    }
-                },
+//                TODO: Think about what to do of IMAGEKEEP? Maybe have tght, can come back if some error
+                null,
                 () -> deleteThisPicture()
             );
         }
