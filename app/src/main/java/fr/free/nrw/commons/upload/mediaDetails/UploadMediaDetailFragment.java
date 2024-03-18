@@ -168,13 +168,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        TODO: change callback.getIndexInViewFlipper(this) to indexOfFragment,
-//         also see about using activity of this fragment in presenter, instead of passing everytime
         activity = getActivity();
-        indexOfFragment = callback.getIndexInViewFlipper(this);
         basicKvStore = new BasicKvStore(activity, "CurrentUploadImageQualities");
 
         if (callback != null) {
+            indexOfFragment = callback.getIndexInViewFlipper(this);
             init();
         }
 
