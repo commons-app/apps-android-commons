@@ -347,21 +347,30 @@ public class CommonsApplication extends MultiDexApplication {
     }
 
     /**
-     * This class is used to log out the user from the application and redirect to the login page
-     *
-     * @param ctx           Application context
-     * @param loginMessage  Message to be displayed on login page
-     * @param loginUsername Username to be displayed on login page
+     * This listener is responsible for handling post-logout actions, specifically invoking the LoginActivity
+     * with relevant intent parameters. It does not perform the actual logout operation.
      */
     public static class BaseLogoutListener implements CommonsApplication.LogoutListener {
 
         Context ctx;
         String loginMessage, userName;
 
+        /**
+         * Constructor for BaseLogoutListener.
+         *
+         * @param ctx Application context
+         */
         public BaseLogoutListener(final Context ctx) {
             this.ctx = ctx;
         }
 
+        /**
+         * Constructor for BaseLogoutListener
+         *
+         * @param ctx           Application context
+         * @param loginMessage  Message to be displayed on the login page
+         * @param loginUsername Username to be pre-filled on the login page
+         */
         public BaseLogoutListener(final Context ctx, final String loginMessage,
             final String loginUsername) {
             this.ctx = ctx;
@@ -388,17 +397,20 @@ public class CommonsApplication extends MultiDexApplication {
     }
 
     /**
-     * This class is used to log out the user from the application and redirect to the login page
-     *
-     * @param activity Activity context
-     * @param ctx      Application context
+     * This class handles the process of logging out the user from the application and redirecting them to the login page.
+     * It is responsible for clearing any user-specific data and ensuring the user is navigated back to the login screen.
      */
-
     public static class ActivityLogoutListener extends BaseLogoutListener {
 
         Activity activity;
 
 
+        /**
+         * Constructor for LogoutHandler.
+         *
+         * @param activity The activity context from which the logout is initiated.
+         * @param ctx      The application context, used for broader application-level operations.
+         */
         public ActivityLogoutListener(final Activity activity, final Context ctx) {
             super(ctx);
             this.activity = activity;
