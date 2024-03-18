@@ -321,12 +321,6 @@ class UploadMediaDetailFragmentUnitTest {
         fragment.showDuplicatePicturePopup(uploadItem)
     }
 
-    @Test
-    @Throws(Exception::class)
-    fun testShowBadImagePopup() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.showBadImagePopup(8, uploadItem)
-    }
 
     @Test
     @Throws(Exception::class)

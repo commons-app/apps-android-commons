@@ -465,6 +465,12 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
         }
     }
 
+    /**
+     * Updates the image qualities stored in JSON, whenever an image is deleted
+     *
+     * @param size Size of uploadableFiles
+     * @param index Index of the UploadItem which was deleted
+     */
     @Override
     public void updateImageQualitiesJSON(int size, int index) {
         BasicKvStore store = new BasicKvStore(activity, "CurrentUploadImageQualities");
@@ -486,10 +492,10 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     }
 
     /**
-     * Handle  images, say empty caption, duplicate file name, bad picture(in all other cases)
+     * Handles bad pictures, like too dark, already on wikimedia, downloaded from internet
      *
-     * @param errorCode
-     * @param uploadItem
+     * @param errorCode Error code of the bad image
+     * @param uploadItem UploadItem whose quality is bad
      */
     public void handleBadImage(Integer errorCode,
         UploadItem uploadItem, int index) {

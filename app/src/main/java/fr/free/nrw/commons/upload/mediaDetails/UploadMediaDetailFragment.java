@@ -483,24 +483,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     @Override
-    public void showBadImagePopup(Integer errorCode,
-        UploadItem uploadItem) {
-        // TODO: this method is now in presenter, has to be removed from here, see how tests are affected
-        String errorMessageForResult = getErrorMessageForResult(getContext(), errorCode);
-        if (!StringUtils.isBlank(errorMessageForResult)) {
-            DialogUtil.showAlertDialog(getActivity(),
-                getString(R.string.upload_problem_image),
-                errorMessageForResult,
-                getString(R.string.upload),
-                getString(R.string.cancel),
-                null,
-                () -> deleteThisPicture()
-            );
-        }
-        //If the error message is null, we will probably not show anything
-    }
-
-    @Override
     public void showConnectionErrorPopup() {
         DialogUtil.showAlertDialog(getActivity(),
             getString(R.string.upload_connection_error_alert_title),
@@ -703,14 +685,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             getString(R.string.skip_login),
             this::onIbMapClicked,
             onSkipClicked);
-    }
-
-    private void deleteThisPicture() {
-        if (callback == null) {
-            return;
-        }
-        // TODO: this method is now in presenter, has to be removed from here, see how tests are affected
-        callback.deletePictureAtIndex(indexOfFragment);
     }
 
     @Override
