@@ -96,7 +96,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private DepictsFragment depictsFragment;
     private MediaLicenseFragment mediaLicenseFragment;
     private ThumbnailsAdapter thumbnailsAdapter;
-
+    BasicKvStore store;
     private Place place;
     private LatLng prevLocation;
     private LatLng currLocation;
@@ -179,12 +179,10 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         }
         locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
         locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
+        store = new BasicKvStore(this, "CurrentUploadImageQualities");
+        store.clearAll();
         checkStoragePermissions();
-        getAllImagesQuality();
-    }
 
-    private void getAllImagesQuality() {
-//        TODO: get all upload items and run an async loop to get all img quality and put in list
     }
 
     private void init() {
@@ -673,6 +671,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             binding.vpUpload.setOffscreenPageLimit(fragments.size());
 
         }
+        // Saving size of uploadableFiles
+        store.putInt("UploadedImagesSize", uploadableFiles.size());
     }
 
     /**
@@ -792,7 +792,11 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             binding.vpUpload.setCurrentItem(index + 1, false);
             fragments.get(index + 1).onBecameVisible();
             ((LinearLayoutManager) binding.rvThumbnails.getLayoutManager())
-                .scrollToPositionWithOffset((index > 0) ? index-1 : 0, 0);
+                .scrollToPositionWithOffset((index > 0) ? index - 1 : 0, 0);
+            if (index < fragments.size() - 4) {
+                // check image quality if next image exists
+                presenter.checkImageQuality(index + 1);
+            }
         } else {
             presenter.handleSubmit();
         }
@@ -859,6 +863,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        // Resetting all values in store by clearing them
+        store.clearAll();
         presenter.onDetachView();
         compositeDisposable.clear();
         fragments = null;

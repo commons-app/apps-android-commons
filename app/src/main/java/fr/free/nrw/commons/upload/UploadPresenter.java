@@ -7,6 +7,7 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.repository.UploadRepository;
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailsContract;
 import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -30,6 +31,8 @@ public class UploadPresenter implements UploadContract.UserActionListener {
     private final UploadRepository repository;
     private final JsonKvStore defaultKvStore;
     private UploadContract.View view = DUMMY;
+    @Inject
+    UploadMediaDetailsContract.UserActionListener presenter;
 
     private CompositeDisposable compositeDisposable;
     public static final String COUNTER_OF_CONSECUTIVE_UPLOADS_WITHOUT_COORDINATES
@@ -134,6 +137,18 @@ public class UploadPresenter implements UploadContract.UserActionListener {
             view.askUserToLogIn();
         }
     }
+
+    /**
+     * Calls checkImageQuality of UploadMediaPresenter to check image quality of next image
+     *
+     * @param uploadItemIndex Index of next image, whose quality is to be checked
+     */
+    @Override
+    public void checkImageQuality(int uploadItemIndex) {
+        UploadItem uploadItem = repository.getUploadItem(uploadItemIndex);
+        presenter.checkImageQuality(uploadItem, uploadItemIndex);
+    }
+
 
     @Override
     public void deletePictureAtIndex(int index) {

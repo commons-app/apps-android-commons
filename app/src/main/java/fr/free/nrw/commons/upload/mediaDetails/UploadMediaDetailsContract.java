@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
+import android.app.Activity;
 import fr.free.nrw.commons.BasePresenter;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.location.LatLng;
@@ -52,9 +53,25 @@ public interface UploadMediaDetailsContract {
 
         boolean verifyImageQuality(int uploadItemIndex, LatLng inAppPictureLocation);
 
+        /**
+         * TODO: add javadoc
+         *
+         * @param uploadItemIndex
+         * @param inAppPictureLocation
+         * @param activity
+         * @return
+         */
+        Integer getImageQuality(int uploadItemIndex, LatLng inAppPictureLocation, Activity activity);
+
         void displayLocDialog(int uploadItemIndex, LatLng inAppPictureLocation);
 
-        void checkImageQualityAndDisplayIssues(UploadItem uploadItem, int index);
+        /**
+         * Used to check image quality from stored qualities and display dialogs
+         *
+         * @param uploadItem
+         * @param index
+         */
+        void checkImageQuality(UploadItem uploadItem, int index);
 
         void copyTitleAndDescriptionToSubsequentMedia(int indexInViewFlipper);
 

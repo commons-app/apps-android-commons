@@ -1,11 +1,10 @@
 package fr.free.nrw.commons.upload.mediaDetails;
 
 import static android.app.Activity.RESULT_OK;
-import static fr.free.nrw.commons.utils.ActivityUtils.startActivityWithFlags;
-import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
 import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -62,6 +61,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private static final int REQUEST_CODE_FOR_EDIT_ACTIVITY = 1212;
     private static final int REQUEST_CODE_FOR_VOICE_INPUT = 1213;
 
+    public static Activity activity ;
+
+    private int indexOfFragment;
+
     /**
      * A key for applicationKvStore. By this key we can retrieve the location of last UploadItem ex.
      * 12.3433,54.78897 from applicationKvStore.
@@ -109,6 +112,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     private Place nearbyPlace;
     private UploadItem uploadItem;
+    private int uploadSize;
     /**
      * inAppPictureLocation: use location recorded while using the in-app camera if device camera
      * does not record it in the EXIF
@@ -119,7 +123,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     private UploadItem editableUploadItem;
 
-    private UploadMediaDetailFragmentCallback callback;
+    public static UploadMediaDetailFragmentCallback callback;
 
     private FragmentUploadMediaDetailFragmentBinding binding;
 
@@ -160,6 +164,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+//        TODO: change callback.getIndexInViewFlipper(this) to indexOfFragment,
+//         also see about using activity of this fragment in presenter, instead of passing everytime
+        activity = getActivity();
+        indexOfFragment = callback.getIndexInViewFlipper(this);
+
         if (callback != null) {
             init();
         }
@@ -170,8 +179,15 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                     presenter.setUploadMediaDetails(uploadMediaDetailAdapter.getItems(), callback.getIndexInViewFlipper(this));
                 }
         }
-//        TODO: check uploadItem value and get index of item
-        presenter.checkImageQualityAndDisplayIssues(uploadItem, 1);
+
+//        TODO: after everything, change this block to only calling the getImageQuality, not logging it
+        try {
+            Timber.d(
+                "Inside i:" + indexOfFragment + " onCreateView UMF " + presenter.getImageQuality(
+                    indexOfFragment,
+                    inAppPictureLocation, getActivity()) + " isVisible: " + this.isVisible());
+        } catch (Exception e) {
+        }
 
     }
 
@@ -476,6 +492,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     public void showBadImagePopup(Integer errorCode,
         UploadItem uploadItem) {
+        // TODO: this method is now in presenter, has to be removed from here, see how tests are affected
         String errorMessageForResult = getErrorMessageForResult(getContext(), errorCode);
         if (!StringUtils.isBlank(errorMessageForResult)) {
             DialogUtil.showAlertDialog(getActivity(),
@@ -483,7 +500,6 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 errorMessageForResult,
                 getString(R.string.upload),
                 getString(R.string.cancel),
-//                TODO: Think about what to do of IMAGEKEEP? Maybe have tght, can come back if some error
                 null,
                 () -> deleteThisPicture()
             );
@@ -701,6 +717,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         if (callback == null) {
             return;
         }
+        // TODO: this method is now in presenter, has to be removed from here, see how tests are affected
         callback.deletePictureAtIndex(callback.getIndexInViewFlipper(this));
     }
 
