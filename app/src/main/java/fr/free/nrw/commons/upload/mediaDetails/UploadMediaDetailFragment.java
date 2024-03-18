@@ -233,7 +233,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
         //If this is the last media, we have nothing to copy, lets not show the button
         if (indexOfFragment == callback.getTotalNumberOfSteps() - 4) {
-            binding.btnCopyToSubsequentMedia.setVisibility(View.GONE);
+            binding.btnCopySubsequentMedia.setVisibility(View.GONE);
         } else {
             binding.btnCopySubsequentMedia.setVisibility(View.VISIBLE);
         }
