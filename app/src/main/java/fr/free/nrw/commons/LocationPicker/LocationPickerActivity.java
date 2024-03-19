@@ -293,9 +293,11 @@ public class LocationPickerActivity extends BaseActivity implements
         smallToolbarText.setText(getResources().getString(R.string.pan_and_zoom_to_adjust));
         fabCenterOnLocation.setVisibility(View.VISIBLE);
         removeSelectedLocationMarker();
-        if (cameraPosition != null) {
-            mapView.getController().animateTo(new GeoPoint(cameraPosition.getLatitude(),
-                cameraPosition.getLongitude()));
+        if (cameraPosition != null && mapView != null) {
+            if (mapView.getController() != null) {
+                mapView.getController().animateTo(new GeoPoint(cameraPosition.getLatitude(),
+                    cameraPosition.getLongitude()));
+            }
         }
     }
 

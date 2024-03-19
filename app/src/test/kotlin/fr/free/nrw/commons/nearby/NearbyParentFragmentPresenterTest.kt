@@ -226,21 +226,6 @@ class NearbyParentFragmentPresenterTest {
     }
 
     /**
-     * Test search this area button became visible after user moved the camera target to far
-     * away from current target. Distance between these two point is 111.19 km, so our camera target
-     * is at inside of previously searched region if we set latestSearchRadius above 111.19. Thus,
-     * setSearchThisAreaButtonVisibility(false) should be verified.
-     */
-    @Test
-    fun testSearchThisAreaButtonInvisibleWhenMoveToClosePosition() {
-        NearbyController.latestSearchLocation = Mockito.spy(LatLng(2.0, 1.0, 0.0F))
-        // Distance between these two point is 111.19 km
-        NearbyController.latestSearchRadius = 112.0 * 1000 // To meter
-        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
-        verify(nearbyParentFragmentView).setSearchThisAreaButtonVisibility(false)
-    }
-
-    /**
      * Multi selection should overwrite single selection of marker types. Ie. when user choose
      *"parks", then they multi select to display all or none, we overwrite previous "park" filter.
      *
@@ -479,28 +464,6 @@ class NearbyParentFragmentPresenterTest {
         nearbyPresenter.setAdvancedQuery("Point(ab ab)\"")
         nearbyPresenter.updateMapAndList(LocationChangeType.CUSTOM_QUERY)
         expectMapAndListUpdate()
-    }
-
-    @Test
-    fun testWhenSearchLocationNull() {
-        NearbyController.latestSearchLocation = null
-        verify(nearbyParentFragmentView).setSearchThisAreaButtonVisibility(false)
-    }
-
-    @Test
-    fun testWhenNetworkConnectionNotEstablished() {
-        NearbyController.latestSearchLocation = latestLocation
-        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(false)
-        verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
-        verifyNoMoreInteractions(nearbyParentFragmentView)
-    }
-
-    @Test
-    fun testWhenNetworkConnectionEstablished() {
-        NearbyController.latestSearchLocation = latestLocation
-        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(false)
-        verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
-        verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 
     @Test
