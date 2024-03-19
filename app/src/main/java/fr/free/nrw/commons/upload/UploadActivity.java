@@ -21,28 +21,21 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.work.ExistingWorkPolicy;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.databinding.ActivityUploadBinding;
 import fr.free.nrw.commons.filepicker.Constants.RequestCodes;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
@@ -92,28 +85,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     UserClient userClient;
     @Inject
     LocationServiceManager locationManager;
-
-
-    @BindView(R.id.cv_container_top_card)
-    CardView cvContainerTopCard;
-
-    @BindView(R.id.ll_container_top_card)
-    LinearLayout llContainerTopCard;
-
-    @BindView(R.id.rl_container_title)
-    RelativeLayout rlContainerTitle;
-
-    @BindView(R.id.tv_top_card_title)
-    TextView tvTopCardTitle;
-
-    @BindView(R.id.ib_toggle_top_card)
-    ImageButton ibToggleTopCard;
-
-    @BindView(R.id.rv_thumbnails)
-    RecyclerView rvThumbnails;
-
-    @BindView(R.id.vp_upload)
-    ViewPager vpUpload;
 
     private boolean isTitleExpanded = true;
 
@@ -169,12 +140,15 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
      */
     private boolean isFragmentsSaved = false;
 
+    private ActivityUploadBinding binding;
+
     @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_upload);
+        binding = ActivityUploadBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         /*
          If Configuration of device is changed then get the new fragments
@@ -190,7 +164,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         }
 
 
-        ButterKnife.bind(this);
         compositeDisposable = new CompositeDisposable();
         init();
         nearbyPopupAnswers = new HashMap<>();
@@ -223,17 +196,17 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
     private void initThumbnailsRecyclerView() {
-        rvThumbnails.setLayoutManager(new LinearLayoutManager(this,
+        binding.rvThumbnails.setLayoutManager(new LinearLayoutManager(this,
             LinearLayoutManager.HORIZONTAL, false));
         thumbnailsAdapter = new ThumbnailsAdapter(() -> currentSelectedPosition);
-        rvThumbnails.setAdapter(thumbnailsAdapter);
+        binding.rvThumbnails.setAdapter(thumbnailsAdapter);
 
     }
 
     private void initViewPager() {
         uploadImagesAdapter = new UploadImageAdapter(getSupportFragmentManager());
-        vpUpload.setAdapter(uploadImagesAdapter);
-        vpUpload.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        binding.vpUpload.setAdapter(uploadImagesAdapter);
+        binding.vpUpload.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset,
                 int positionOffsetPixels) {
@@ -244,10 +217,10 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             public void onPageSelected(int position) {
                 currentSelectedPosition = position;
                 if (position >= uploadableFiles.size()) {
-                    cvContainerTopCard.setVisibility(View.GONE);
+                    binding.cvContainerTopCard.setVisibility(View.GONE);
                 } else {
                     thumbnailsAdapter.notifyDataSetChanged();
-                    cvContainerTopCard.setVisibility(View.VISIBLE);
+                    binding.cvContainerTopCard.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -298,14 +271,14 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         if (hasAllPermissions) {
             // All required permissions are granted, so enable UI elements and perform actions
             receiveSharedItems();
-            cvContainerTopCard.setVisibility(View.VISIBLE);
+            binding.cvContainerTopCard.setVisibility(View.VISIBLE);
         } else {
             // Permissions are missing
-            cvContainerTopCard.setVisibility(View.INVISIBLE);
+            binding.cvContainerTopCard.setVisibility(View.INVISIBLE);
             if(showPermissionsDialog){
                 checkPermissionsAndPerformAction(this,
                     () -> {
-                        cvContainerTopCard.setVisibility(View.VISIBLE);
+                        binding.cvContainerTopCard.setVisibility(View.VISIBLE);
                         this.receiveSharedItems();
                     },() -> {
                         this.showPermissionsDialog = true;
@@ -379,7 +352,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
     @Override
     public void showHideTopCard(boolean shouldShow) {
-        llContainerTopCard.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
+        binding.llContainerTopCard.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -392,7 +365,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
     @Override
     public void updateTopCardTitle() {
-        tvTopCardTitle.setText(getResources()
+        binding.tvTopCardTitle.setText(getResources()
             .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
     }
 
@@ -475,9 +448,9 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                 > 1) {//If there is only file, no need to show the image thumbnails
                 thumbnailsAdapter.setUploadableFiles(uploadableFiles);
             } else {
-                llContainerTopCard.setVisibility(View.GONE);
+                binding.llContainerTopCard.setVisibility(View.GONE);
             }
-            tvTopCardTitle.setText(getResources()
+            binding.tvTopCardTitle.setText(getResources()
                 .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
 
 
@@ -568,7 +541,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                     public void changeThumbnail(int index, String filepath) {
                         uploadableFiles.remove(index);
                         uploadableFiles.add(index, new UploadableFile(new File(filepath)));
-                        rvThumbnails.getAdapter().notifyDataSetChanged();
+                        binding.rvThumbnails.getAdapter().notifyDataSetChanged();
                     }
 
                     @Override
@@ -642,9 +615,9 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                         @Override
                         public void onNextButtonClicked(int index) {
                             if (index < fragments.size() - 1) {
-                                vpUpload.setCurrentItem(index + 1, false);
+                                binding.vpUpload.setCurrentItem(index + 1, false);
                                 fragments.get(index + 1).onBecameVisible();
-                                ((LinearLayoutManager) rvThumbnails.getLayoutManager())
+                                ((LinearLayoutManager) binding.rvThumbnails.getLayoutManager())
                                     .scrollToPositionWithOffset((index > 0) ? index-1 : 0, 0);
                             } else {
                                 presenter.handleSubmit();
@@ -654,9 +627,9 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                         @Override
                         public void onPreviousButtonClicked(int index) {
                             if (index != 0) {
-                                vpUpload.setCurrentItem(index - 1, true);
+                                binding.vpUpload.setCurrentItem(index - 1, true);
                                 fragments.get(index - 1).onBecameVisible();
-                                ((LinearLayoutManager) rvThumbnails.getLayoutManager())
+                                ((LinearLayoutManager) binding.rvThumbnails.getLayoutManager())
                                     .scrollToPositionWithOffset((index > 3) ? index-2 : 0, 0);
                             }
                         }
@@ -691,7 +664,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             }
 
             uploadImagesAdapter.setFragments(fragments);
-            vpUpload.setOffscreenPageLimit(fragments.size());
+            binding.vpUpload.setOffscreenPageLimit(fragments.size());
 
         }
     }
@@ -719,9 +692,9 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
      */
     @Override
     public void highlightNextImageOnCancelledImage(int index, int maxSize) {
-        if (vpUpload != null && index < (maxSize)) {
-            vpUpload.setCurrentItem(index + 1, false);
-            vpUpload.setCurrentItem(index, false);
+        if (binding.vpUpload != null && index < (maxSize)) {
+            binding.vpUpload.setCurrentItem(index + 1, false);
+            binding.vpUpload.setCurrentItem(index, false);
         }
     }
 
@@ -810,9 +783,9 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     @Override
     public void onNextButtonClicked(int index) {
         if (index < fragments.size() - 1) {
-            vpUpload.setCurrentItem(index + 1, false);
+            binding.vpUpload.setCurrentItem(index + 1, false);
             fragments.get(index + 1).onBecameVisible();
-            ((LinearLayoutManager) rvThumbnails.getLayoutManager())
+            ((LinearLayoutManager) binding.rvThumbnails.getLayoutManager())
                 .scrollToPositionWithOffset((index > 0) ? index-1 : 0, 0);
         } else {
             presenter.handleSubmit();
@@ -822,9 +795,9 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     @Override
     public void onPreviousButtonClicked(int index) {
         if (index != 0) {
-            vpUpload.setCurrentItem(index - 1, true);
+            binding.vpUpload.setCurrentItem(index - 1, true);
             fragments.get(index - 1).onBecameVisible();
-            ((LinearLayoutManager) rvThumbnails.getLayoutManager())
+            ((LinearLayoutManager) binding.rvThumbnails.getLayoutManager())
                 .scrollToPositionWithOffset((index > 3) ? index-2 : 0, 0);
         }
     }
@@ -866,9 +839,9 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
     @OnClick(R.id.rl_container_title)
     public void onRlContainerTitleClicked() {
-        rvThumbnails.setVisibility(isTitleExpanded ? View.GONE : View.VISIBLE);
+        binding.rvThumbnails.setVisibility(isTitleExpanded ? View.GONE : View.VISIBLE);
         isTitleExpanded = !isTitleExpanded;
-        ibToggleTopCard.setRotation(ibToggleTopCard.getRotation() + 180);
+        binding.ibToggleTopCard.setRotation(binding.ibToggleTopCard.getRotation() + 180);
     }
 
     @Override
