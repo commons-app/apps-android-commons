@@ -445,12 +445,6 @@ class NearbyParentFragmentPresenterTest {
     }
 
     @Test
-    fun testMarkerSelected() {
-        nearbyPresenter.markerSelected(marker)
-        verify(nearbyParentFragmentView).displayBottomSheetWithInfo(marker)
-    }
-
-    @Test
     fun testOnWikidataEditSuccessful() {
         nearbyPresenter.onWikidataEditSuccessful()
         expectMapAndListUpdate()

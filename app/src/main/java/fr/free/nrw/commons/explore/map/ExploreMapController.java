@@ -14,13 +14,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.mapbox.mapboxsdk.annotations.IconFactory;
-import com.mapbox.mapboxsdk.annotations.Marker;
+import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.MapController;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.LocationUtils;
@@ -107,8 +105,8 @@ public class ExploreMapController extends MapController {
 
             // Sets latestSearchRadius to maximum distance among boundaries and search location
             for (LatLng bound : boundaryCoordinates) {
-                double distance = LocationUtils.commonsLatLngToMapBoxLatLng(bound)
-                    .distanceTo(LocationUtils.commonsLatLngToMapBoxLatLng(latestSearchLocation));
+                double distance = LocationUtils.calculateDistance(bound.getLatitude(),
+                    bound.getLongitude(), searchLatLng.getLatitude(), searchLatLng.getLongitude());
                 if (distance > latestSearchRadius) {
                     latestSearchRadius = distance;
                 }
@@ -130,17 +128,16 @@ public class ExploreMapController extends MapController {
      *
      * @return baseMarkerOptions list that holds nearby places with their icons
      */
-    public static List<NearbyBaseMarker> loadAttractionsFromLocationToBaseMarkerOptions(
+    public static List<BaseMarker> loadAttractionsFromLocationToBaseMarkerOptions(
         LatLng curLatLng,
         final List<Place> placeList,
         Context context,
         NearbyBaseMarkerThumbCallback callback,
-        Marker selectedMarker,
         ExplorePlacesInfo explorePlacesInfo) {
-        List<NearbyBaseMarker> baseMarkerOptions = new ArrayList<>();
+        List<BaseMarker> baseMarkerList = new ArrayList<>();
 
         if (placeList == null) {
-            return baseMarkerOptions;
+            return baseMarkerList;
         }
 
         VectorDrawableCompat vectorDrawable = null;
@@ -153,17 +150,17 @@ public class ExploreMapController extends MapController {
         }
         if (vectorDrawable != null) {
             for (Place explorePlace : placeList) {
-                final NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
+                final BaseMarker baseMarker = new BaseMarker();
                 String distance = formatDistanceBetween(curLatLng, explorePlace.location);
                 explorePlace.setDistance(distance);
 
-                nearbyBaseMarker.title(
+                baseMarker.setTitle(
                     explorePlace.name.substring(5, explorePlace.name.lastIndexOf(".")));
-                nearbyBaseMarker.position(
-                    new com.mapbox.mapboxsdk.geometry.LatLng(
+                baseMarker.setPosition(
+                    new fr.free.nrw.commons.location.LatLng(
                         explorePlace.location.getLatitude(),
-                        explorePlace.location.getLongitude()));
-                nearbyBaseMarker.place(explorePlace);
+                        explorePlace.location.getLongitude(), 0));
+                baseMarker.setPlace(explorePlace);
 
                 Glide.with(context)
                     .asBitmap()
@@ -175,13 +172,13 @@ public class ExploreMapController extends MapController {
                         @Override
                         public void onResourceReady(@NonNull Bitmap resource,
                             @Nullable Transition<? super Bitmap> transition) {
-                            nearbyBaseMarker.setIcon(IconFactory.getInstance(context).fromBitmap(
-                                ImageUtils.addRedBorder(resource, 6, context)));
-                            baseMarkerOptions.add(nearbyBaseMarker);
-                            if (baseMarkerOptions.size()
+                            baseMarker.setIcon(
+                                ImageUtils.addRedBorder(resource, 6, context));
+                            baseMarkerList.add(baseMarker);
+                            if (baseMarkerList.size()
                                 == placeList.size()) { // if true, we added all markers to list and can trigger thumbs ready callback
-                                callback.onNearbyBaseMarkerThumbsReady(baseMarkerOptions,
-                                    explorePlacesInfo, selectedMarker);
+                                callback.onNearbyBaseMarkerThumbsReady(baseMarkerList,
+                                    explorePlacesInfo);
                             }
                         }
 
@@ -193,25 +190,24 @@ public class ExploreMapController extends MapController {
                         @Override
                         public void onLoadFailed(@Nullable final Drawable errorDrawable) {
                             super.onLoadFailed(errorDrawable);
-                            nearbyBaseMarker.setIcon(IconFactory.getInstance(context)
-                                .fromResource(R.drawable.image_placeholder_96));
-                            baseMarkerOptions.add(nearbyBaseMarker);
-                            if (baseMarkerOptions.size()
+                            baseMarker.fromResource(context, R.drawable.image_placeholder_96);
+                            baseMarkerList.add(baseMarker);
+                            if (baseMarkerList.size()
                                 == placeList.size()) { // if true, we added all markers to list and can trigger thumbs ready callback
-                                callback.onNearbyBaseMarkerThumbsReady(baseMarkerOptions,
-                                    explorePlacesInfo, selectedMarker);
+                                callback.onNearbyBaseMarkerThumbsReady(baseMarkerList,
+                                    explorePlacesInfo);
                             }
                         }
                     });
             }
         }
-        return baseMarkerOptions;
+        return baseMarkerList;
     }
 
     interface NearbyBaseMarkerThumbCallback {
 
         // Callback to notify thumbnails of explore markers are added as icons and ready
-        void onNearbyBaseMarkerThumbsReady(List<NearbyBaseMarker> baseMarkers,
-            ExplorePlacesInfo explorePlacesInfo, Marker selectedMarker);
+        void onNearbyBaseMarkerThumbsReady(List<BaseMarker> baseMarkers,
+            ExplorePlacesInfo explorePlacesInfo);
     }
 }

@@ -4,13 +4,7 @@ import fr.free.nrw.commons.location.LatLng;
 import timber.log.Timber;
 
 public class LocationUtils {
-    public static LatLng mapBoxLatLngToCommonsLatLng(com.mapbox.mapboxsdk.geometry.LatLng mapBoxLatLng) {
-        return new LatLng(mapBoxLatLng.getLatitude(), mapBoxLatLng.getLongitude(), 0);
-    }
-
-    public static com.mapbox.mapboxsdk.geometry.LatLng commonsLatLngToMapBoxLatLng(LatLng commonsLatLng) {
-        return new com.mapbox.mapboxsdk.geometry.LatLng(commonsLatLng.getLatitude(), commonsLatLng.getLongitude());
-    }
+    public static final double RADIUS_OF_EARTH_KM = 6371.0; // Earth's radius in kilometers
 
     public static LatLng deriveUpdatedLocationFromSearchQuery(String customQuery) {
         LatLng latLng = null;
@@ -42,5 +36,23 @@ public class LocationUtils {
         }
 
         return latLng;
+    }
+
+
+    public static double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+        double lat1Rad = Math.toRadians(lat1);
+        double lon1Rad = Math.toRadians(lon1);
+        double lat2Rad = Math.toRadians(lat2);
+        double lon2Rad = Math.toRadians(lon2);
+
+        // Haversine formula
+        double dlon = lon2Rad - lon1Rad;
+        double dlat = lat2Rad - lat1Rad;
+        double a = Math.pow(Math.sin(dlat / 2), 2) + Math.cos(lat1Rad) * Math.cos(lat2Rad) * Math.pow(Math.sin(dlon / 2), 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        double distance = RADIUS_OF_EARTH_KM * c;
+
+        return distance;
     }
 }

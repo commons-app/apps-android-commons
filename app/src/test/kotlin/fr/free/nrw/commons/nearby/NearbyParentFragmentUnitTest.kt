@@ -400,7 +400,6 @@ class NearbyParentFragmentUnitTest {
         whenever(nearbyBaseMarker.place).thenReturn(place)
         whenever(place.label).thenReturn(label)
         whenever(place.longDescription).thenReturn("")
-        fragment.displayBottomSheetWithInfo(marker)
         verify(bottomSheetBehavior).state = BottomSheetBehavior.STATE_COLLAPSED
     }
 
