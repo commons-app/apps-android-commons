@@ -1286,6 +1286,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
+    public void setTabItemContributions() {
+        ((MainActivity) getActivity()).binding.pager.setCurrentItem(0);
+        // TODO
+    }
+
+    @Override
     public void checkPermissionsAndPerformAction() {
         Timber.d("Checking permission and perfoming action");
         locationPermissionLauncher.launch(permission.ACCESS_FINE_LOCATION);
