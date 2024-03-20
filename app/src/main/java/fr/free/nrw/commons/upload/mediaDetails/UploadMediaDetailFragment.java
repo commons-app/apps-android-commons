@@ -171,7 +171,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         if(savedInstanceState!=null){
             if(uploadMediaDetailAdapter.getItems().size()==0){
                 uploadMediaDetailAdapter.setItems(savedInstanceState.getParcelableArrayList(UPLOAD_MEDIA_DETAILS));
-                presenter.setUploadMediaDetails(uploadMediaDetailAdapter.getItems(), callback.getIndexInViewFlipper(this));
+                if (callback != null){
+                    presenter.setUploadMediaDetails(uploadMediaDetailAdapter.getItems(), callback.getIndexInViewFlipper(this));
+                }
             }
         }
 
