@@ -12,15 +12,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
 import androidx.work.ExistingWorkPolicy;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import fr.free.nrw.commons.databinding.MainBinding;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
@@ -63,14 +61,6 @@ public class MainActivity  extends BaseActivity
     ContributionController controller;
     @Inject
     ContributionDao contributionDao;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.pager)
-    public UnswipableViewPager viewPager;
-    @BindView(R.id.fragmentContainer)
-    public FrameLayout fragmentContainer;
-    @BindView(R.id.fragment_main_nav_tab_layout)
-    NavTabLayout tabLayout;
 
     private ContributionsFragment contributionsFragment;
     private NearbyParentFragment nearbyParentFragment;
@@ -94,6 +84,11 @@ public class MainActivity  extends BaseActivity
     ViewUtilWrapper viewUtilWrapper;
 
     public Menu menu;
+
+    public MainBinding binding;
+
+    NavTabLayout tabLayout;
+
 
     /**
      * Consumers should be simply using this method to use this activity.
@@ -122,11 +117,13 @@ public class MainActivity  extends BaseActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = MainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbarBinding.toolbar);
+        tabLayout = binding.fragmentMainNavTabLayout;
         loadLocale();
-        setContentView(R.layout.main);
-        ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(view -> {
+
+        binding.toolbarBinding.toolbar.setNavigationOnClickListener(view -> {
             onSupportNavigateUp();
         });
         /*
@@ -177,11 +174,11 @@ public class MainActivity  extends BaseActivity
     }
 
     public void setSelectedItemId(int id) {
-        tabLayout.setSelectedItemId(id);
+        binding.fragmentMainNavTabLayout.setSelectedItemId(id);
     }
 
     private void setUpPager() {
-        tabLayout.setOnNavigationItemSelectedListener(navListener = (item) -> {
+        binding.fragmentMainNavTabLayout.setOnNavigationItemSelectedListener(navListener = (item) -> {
             if (!item.getTitle().equals(getString(R.string.more))) {
                 // do not change title for more fragment
                 setTitle(item.getTitle());
@@ -196,7 +193,7 @@ public class MainActivity  extends BaseActivity
 
     private void setUpLoggedOutPager() {
         loadFragment(ExploreFragment.newInstance(),false);
-        tabLayout.setOnNavigationItemSelectedListener(item -> {
+        binding.fragmentMainNavTabLayout.setOnNavigationItemSelectedListener(item -> {
             if (!item.getTitle().equals(getString(R.string.more))) {
                 // do not change title for more fragment
                 setTitle(item.getTitle());
@@ -258,11 +255,11 @@ public class MainActivity  extends BaseActivity
     }
 
     public void hideTabs() {
-        tabLayout.setVisibility(View.GONE);
+        binding.fragmentMainNavTabLayout.setVisibility(View.GONE);
     }
 
     public void showTabs() {
-        tabLayout.setVisibility(View.VISIBLE);
+        binding.fragmentMainNavTabLayout.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -317,7 +314,7 @@ public class MainActivity  extends BaseActivity
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt("viewPagerCurrentItem", viewPager.getCurrentItem());
+        outState.putInt("viewPagerCurrentItem", binding.pager.getCurrentItem());
         outState.putString("activeFragment", activeFragment.name());
     }
 
@@ -472,7 +469,7 @@ public class MainActivity  extends BaseActivity
      * Public method to show nearby from the reference of this.
      */
     public void showNearby() {
-        tabLayout.setSelectedItemId(NavTab.NEARBY.code());
+        binding.fragmentMainNavTabLayout.setSelectedItemId(NavTab.NEARBY.code());
     }
 
     public enum ActiveFragment {
