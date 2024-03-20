@@ -66,7 +66,6 @@ class MediaDetailFragmentUnitTests {
     private lateinit var fragment: MediaDetailFragment
     private lateinit var fragmentManager: FragmentManager
     private lateinit var layoutInflater: LayoutInflater
-    private lateinit var view: View
     private lateinit var context: Context
 
     @Mock
@@ -173,16 +172,12 @@ class MediaDetailFragmentUnitTests {
 
         layoutInflater = LayoutInflater.from(activity)
 
-        view = LayoutInflater.from(activity)
-            .inflate(R.layout.fragment_media_detail, null) as View
-
         binding = FragmentMediaDetailBinding.inflate(layoutInflater)
 
-        scrollView = view.findViewById(R.id.mediaDetailScrollView)
-//        Whitebox.setInternalState(fragment, "scrollView", scrollView)
+        scrollView = binding.mediaDetailScrollView
 
-        progressBarDeletion = view.findViewById(R.id.progressBarDeletion)
-        delete = view.findViewById(R.id.nominateDeletion)
+        progressBarDeletion = binding.progressBarDeletion
+        delete = binding.nominateDeletion
 
         Whitebox.setInternalState(fragment, "media", media)
         Whitebox.setInternalState(fragment, "isDeleted", isDeleted)
@@ -251,7 +246,7 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testLaunchZoomActivity() {
         `when`(media.imageUrl).thenReturn("")
-        fragment.launchZoomActivity(view)
+        fragment.launchZoomActivity(binding.root)
     }
 
     @Test

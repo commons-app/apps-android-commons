@@ -598,10 +598,12 @@ class ZoomableActivity : BaseActivity() {
                 .setProgressBarImage(ProgressBarDrawable())
                 .setProgressBarImageScaleType(ScalingUtils.ScaleType.FIT_CENTER)
                 .build()
-            binding.zoomable!!.hierarchy = hierarchy
-            binding.zoomable!!.setAllowTouchInterceptionWhileZoomed(true)
-            binding.zoomable!!.setIsLongpressEnabled(false)
-            binding.zoomable!!.setTapListener(DoubleTapGestureListener(binding.zoomable))
+            with(binding.zoomable!!) {
+                setHierarchy(hierarchy)
+                setAllowTouchInterceptionWhileZoomed(true)
+                setIsLongpressEnabled(false)
+                setTapListener(DoubleTapGestureListener(this))
+            }
             val controller: DraweeController = Fresco.newDraweeControllerBuilder()
                 .setUri(imageUri)
                 .setControllerListener(loadingListener)

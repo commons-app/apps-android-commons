@@ -90,7 +90,6 @@ class MediaDetailPagerFragmentUnitTests {
         val activity = Robolectric.buildActivity(SearchActivity::class.java).create().get()
         binding = FragmentMediaDetailPagerBinding.inflate(activity.layoutInflater)
 
-        fragment = MediaDetailPagerFragment.newInstance(false, true)
         fragment = MediaDetailPagerFragment.newInstance(false, false)
         fragmentManager = activity.supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
