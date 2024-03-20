@@ -397,8 +397,9 @@ public class CommonsApplication extends MultiDexApplication {
     }
 
     /**
-     * This class handles the process of logging out the user from the application and redirecting them to the login page.
-     * It is responsible for clearing any user-specific data and ensuring the user is navigated back to the login screen.
+     * This class is an extension of BaseLogoutListener, providing additional functionality or customization
+     * for the logout process. It includes specific actions to be taken during logout, such as clearing user-specific data
+     * or handling redirection to the login screen.
      */
     public static class ActivityLogoutListener extends BaseLogoutListener {
 
@@ -406,16 +407,24 @@ public class CommonsApplication extends MultiDexApplication {
 
 
         /**
-         * Constructor for LogoutHandler.
+         * Constructor for ActivityLogoutListener.
          *
-         * @param activity The activity context from which the logout is initiated.
-         * @param ctx      The application context, used for broader application-level operations.
+         * @param activity The activity context from which the logout is initiated. Used to perform actions such as finishing the activity.
+         * @param ctx           The application context, used for invoking the LoginActivity and passing relevant intent parameters as part of the post-logout process.
          */
         public ActivityLogoutListener(final Activity activity, final Context ctx) {
             super(ctx);
             this.activity = activity;
         }
 
+        /**
+         * Constructor for ActivityLogoutListener with additional parameters for the login screen.
+         *
+         * @param activity      The activity context from which the logout is initiated. Used to perform actions such as finishing the activity.
+         * @param ctx           The application context, used for invoking the LoginActivity and passing relevant intent parameters as part of the post-logout process.
+         * @param loginMessage  Message to be displayed on the login page after logout.
+         * @param loginUsername Username to be pre-filled on the login page after logout.
+         */
         public ActivityLogoutListener(final Activity activity, final Context ctx,
             final String loginMessage, final String loginUsername) {
             super(activity, loginMessage, loginUsername);
