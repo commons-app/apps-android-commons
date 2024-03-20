@@ -9,12 +9,11 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.databinding.FragmentFeaturedRootBinding;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.map.ExploreMapFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
@@ -26,8 +25,7 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
     private MediaDetailPagerFragment mediaDetails;
     private ExploreMapFragment mapFragment;
 
-    @BindView(R.id.explore_container)
-    FrameLayout container;
+    private FragmentFeaturedRootBinding binding;
 
     public ExploreMapRootFragment() {
         //empty constructor necessary otherwise crashes on recreate
@@ -54,9 +52,10 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
         @Nullable final ViewGroup container,
         @Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_featured_root, container, false);
-        ButterKnife.bind(this, view);
-        return view;
+
+        binding = FragmentFeaturedRootBinding.inflate(inflater, container, false);
+
+        return binding.getRoot();
     }
 
     @Override
@@ -116,8 +115,8 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
 
     @Override
     public void onMediaClicked(int position) {
-        container.setVisibility(View.VISIBLE);
-        ((ExploreFragment) getParentFragment()).tabLayout.setVisibility(View.GONE);
+        binding.exploreContainer.setVisibility(View.VISIBLE);
+        ((ExploreFragment) getParentFragment()).binding.tabLayout.setVisibility(View.GONE);
         mediaDetails = MediaDetailPagerFragment.newInstance(false, true);
         ((ExploreFragment) getParentFragment()).setScroll(false);
         setFragment(mediaDetails, mapFragment);
@@ -192,7 +191,7 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
      */
     public boolean backPressed() {
         if (null != mediaDetails && mediaDetails.isVisible()) {
-            ((ExploreFragment) getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
+            ((ExploreFragment) getParentFragment()).binding.tabLayout.setVisibility(View.VISIBLE);
             removeFragment(mediaDetails);
             ((ExploreFragment) getParentFragment()).setScroll(true);
             setFragment(mapFragment, mediaDetails);
@@ -212,5 +211,12 @@ public class ExploreMapRootFragment extends CommonsDaggerSupportFragment impleme
         }
         ((MainActivity) getActivity()).showTabs();
         return false;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        binding = null;
     }
 }
