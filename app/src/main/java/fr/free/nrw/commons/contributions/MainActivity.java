@@ -427,8 +427,6 @@ public class MainActivity  extends BaseActivity
     public void centerMapToPlace(Place place) {
         setSelectedItemId(NavTab.NEARBY.code());
         nearbyParentFragment.setNearbyParentFragmentInstanceReadyCallback(new NearbyParentFragmentInstanceReadyCallback() {
-            // if mapBox initialize in nearbyParentFragment then MapReady() function called
-            // so that nearbyParentFragemt.centerMaptoPlace(place) not throw any null pointer exception
             @Override
             public void onReady() {
                 nearbyParentFragment.centerMapToPlace(place);

@@ -47,9 +47,8 @@ import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
-import com.mapbox.mapboxsdk.camera.CameraPosition;
-import com.mapbox.mapboxsdk.geometry.LatLng;
 import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.CameraPosition;
 import fr.free.nrw.commons.LocationPicker.LocationPicker;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
@@ -872,9 +871,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
 
         startActivity(new LocationPicker.IntentBuilder()
-            .defaultLocation(new CameraPosition.Builder()
-                .target(new LatLng(defaultLatitude, defaultLongitude))
-                .zoom(16).build())
+            .defaultLocation(new CameraPosition(defaultLatitude,defaultLongitude,16.0))
             .activityKey("MediaActivity")
             .media(media)
             .build(getActivity()));

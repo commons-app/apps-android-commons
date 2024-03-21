@@ -1,18 +1,11 @@
 package fr.free.nrw.commons.nearby;
 
-import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
 import androidx.annotation.MainThread;
 import androidx.annotation.Nullable;
-import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
-import com.mapbox.mapboxsdk.annotations.IconFactory;
-import com.mapbox.mapboxsdk.annotations.Marker;
 
+import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.MapController;
-import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.utils.UiUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -36,8 +29,6 @@ public class NearbyController extends MapController {
     public static double latestSearchRadius = 10.0; // Any last search radius except closest result search
 
     public static List<MarkerPlaceGroup> markerLabelList = new ArrayList<>();
-    public static Map<Boolean, Marker> markerExistsMap;
-    public static Map<Boolean, Marker> markerNeedPicMap;
 
     @Inject
     public NearbyController(NearbyPlaces nearbyPlaces) {
@@ -151,80 +142,32 @@ public class NearbyController extends MapController {
      * @param placeList list of nearby places in Place data type
      * @return BaseMarkerOptions list that holds nearby places
      */
-    public static List<NearbyBaseMarker> loadAttractionsFromLocationToBaseMarkerOptions(
+    public static List<BaseMarker> loadAttractionsFromLocationToBaseMarkerOptions(
             LatLng curLatLng,
-            List<Place> placeList,
-            Context context,
-            List<Place> bookmarkplacelist) {
-        List<NearbyBaseMarker> baseMarkerOptions = new ArrayList<>();
+            List<Place> placeList) {
+        List<BaseMarker> baseMarkersList = new ArrayList<>();
 
         if (placeList == null) {
-            return baseMarkerOptions;
+            return baseMarkersList;
         }
-
         placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
-
-        VectorDrawableCompat vectorDrawable = null;
-        VectorDrawableCompat vectorDrawableGreen = null;
-        VectorDrawableCompat vectorDrawableGrey = null;
-        VectorDrawableCompat vectorDrawableMonuments = null;
-        vectorDrawable = null;
-        try {
-            vectorDrawable = VectorDrawableCompat.create(
-                    context.getResources(), R.drawable.ic_custom_map_marker, context.getTheme());
-            vectorDrawableGreen = VectorDrawableCompat.create(
-                    context.getResources(), R.drawable.ic_custom_map_marker_green, context.getTheme());
-            vectorDrawableGrey = VectorDrawableCompat.create(
-                    context.getResources(), R.drawable.ic_custom_map_marker_grey, context.getTheme());
-            vectorDrawableMonuments = VectorDrawableCompat
-                .create(context.getResources(), R.drawable.ic_custom_map_marker_monuments,
-                    context.getTheme());
-        } catch (Resources.NotFoundException e) {
-            // ignore when running tests.
+        for (Place place : placeList) {
+            BaseMarker baseMarker = new BaseMarker();
+            String distance = formatDistanceBetween(curLatLng, place.location);
+            place.setDistance(distance);
+            baseMarker.setTitle(place.name);
+            baseMarker.setPosition(
+                new fr.free.nrw.commons.location.LatLng(
+                    place.location.getLatitude(),
+                    place.location.getLongitude(),0));
+            baseMarker.setPlace(place);
+            baseMarkersList.add(baseMarker);
         }
-        if (vectorDrawable != null) {
-            Bitmap icon = UiUtils.getBitmap(vectorDrawable);
-            Bitmap iconGreen = UiUtils.getBitmap(vectorDrawableGreen);
-            Bitmap iconGrey = UiUtils.getBitmap(vectorDrawableGrey);
-            Bitmap iconMonuments = UiUtils.getBitmap(vectorDrawableMonuments);
-
-            for (Place place : placeList) {
-                NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
-                String distance = formatDistanceBetween(curLatLng, place.location);
-                place.setDistance(distance);
-
-                nearbyBaseMarker.title(place.name);
-                nearbyBaseMarker.position(
-                    new com.mapbox.mapboxsdk.geometry.LatLng(
-                        place.location.getLatitude(),
-                        place.location.getLongitude()));
-                nearbyBaseMarker.place(place);
-                // Check if string is only spaces or empty, if so place doesn't have any picture
-
-                if (place.isMonument()) {
-                    nearbyBaseMarker.icon(IconFactory.getInstance(context)
-                        .fromBitmap(iconMonuments));
-                }
-                else if (!place.pic.trim().isEmpty()) {
-                    if (iconGreen != null) {
-                        nearbyBaseMarker.icon(IconFactory.getInstance(context)
-                            .fromBitmap(iconGreen));
-                    }
-                } else if (!place.exists) { // Means that the topic of the Wikidata item does not exist in the real world anymore, for instance it is a past event, or a place that was destroyed
-                    if (iconGrey != null) {
-                        nearbyBaseMarker.icon(IconFactory.getInstance(context)
-                            .fromBitmap(iconGrey));
-                    }
-                } else {
-                    nearbyBaseMarker.icon(IconFactory.getInstance(context)
-                        .fromBitmap(icon));
-                }
-                baseMarkerOptions.add(nearbyBaseMarker);
-            }
-        }
-
-        return baseMarkerOptions;
+        return baseMarkersList;
     }
+
+
+
 
     /**
      * Updates makerLabelList item isBookmarked value
@@ -236,7 +179,7 @@ public class NearbyController extends MapController {
         for (ListIterator<MarkerPlaceGroup> iter = markerLabelList.listIterator(); iter.hasNext();) {
             MarkerPlaceGroup markerPlaceGroup = iter.next();
             if (markerPlaceGroup.getPlace().getWikiDataEntityId().equals(place.getWikiDataEntityId())) {
-                iter.set(new MarkerPlaceGroup(markerPlaceGroup.getMarker(), isBookmarked, place));
+                iter.set(new MarkerPlaceGroup(isBookmarked, place));
             }
         }
     }
