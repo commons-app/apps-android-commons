@@ -360,7 +360,6 @@ class ImageAdapter(
      */
     fun refresh(newImages: List<Image>, fixedImages: List<Image>) {
         numberOfSelectedImagesMarkedAsNotForUpload = 0
-        selectedImages.clear()
         images.clear()
         selectedImages = arrayListOf()
         init(newImages, fixedImages, TreeMap())
