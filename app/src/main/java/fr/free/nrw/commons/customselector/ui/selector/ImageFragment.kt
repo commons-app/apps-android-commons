@@ -267,11 +267,9 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
 
             val uploadingContributions: List<Contribution>
             if (images.isNotEmpty()) {
-                if (contributionDao.getContribution(listOf(Contribution.STATE_IN_PROGRESS, Contribution.STATE_FAILED,
-                        Contribution.STATE_PAUSED, Contribution.STATE_QUEUED)) != null) {
+                if (contributionDao.getContribution(listOf(Contribution.STATE_IN_PROGRESS, Contribution.STATE_FAILED, Contribution.STATE_QUEUED, Contribution.STATE_PAUSED)) != null) {
                     uploadingContributions =
-                        contributionDao.getContribution(listOf(Contribution.STATE_IN_PROGRESS, Contribution.STATE_FAILED,
-                            Contribution.STATE_PAUSED, Contribution.STATE_QUEUED)).subscribeOn(Schedulers.io()).blockingGet()
+                        contributionDao.getContribution(listOf(Contribution.STATE_IN_PROGRESS, Contribution.STATE_FAILED, Contribution.STATE_QUEUED, Contribution.STATE_PAUSED)).subscribeOn(Schedulers.io()).blockingGet()
                 } else {
                     uploadingContributions = ArrayList()
                 }

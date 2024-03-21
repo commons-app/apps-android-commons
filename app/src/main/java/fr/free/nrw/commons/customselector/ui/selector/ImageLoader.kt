@@ -217,11 +217,15 @@ class ImageLoader @Inject constructor(
                     holder.itemNotForUpload()
                 } else holder.itemForUpload()
             }
+            Log.d("ImageLoader", "Image: size ${uploadedContributionsList.size}")
 
             if (uploadedContributionsList.isNotEmpty()) {
-                for (contribution in uploadedContributionsList) {
+                for (contribution in uploadedContributionsList ) {
                     if (contribution.contentUri == image.uri) {
                         holder.itemUploading()
+                        break
+                    } else {
+                        holder.itemNotUploading()
                     }
                 }
             }
