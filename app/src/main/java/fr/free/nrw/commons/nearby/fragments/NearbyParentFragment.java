@@ -70,10 +70,10 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding3.appcompat.RxSearchView;
 import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.CommonsApplication.BaseLogoutListener;
 import fr.free.nrw.commons.MapController.NearbyPlacesInfo;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.contributions.MainActivity;
@@ -1372,8 +1372,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 .setMessage(R.string.login_alert_message)
                 .setPositiveButton(R.string.login, (dialog, which) -> {
                     // logout of the app
-                    BaseLogoutListener logoutListener = new BaseLogoutListener();
-                    CommonsApplication app = (CommonsApplication) getActivity().getApplication();
+                    BaseLogoutListener logoutListener = new BaseLogoutListener(getActivity());                    CommonsApplication app = (CommonsApplication) getActivity().getApplication();
                     app.clearApplicationData(getContext(), logoutListener);
                 })
                 .show();
@@ -1419,18 +1418,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * onLogoutComplete is called after shared preferences and data stored in local database are
      * cleared.
      */
-    private class BaseLogoutListener implements CommonsApplication.LogoutListener {
-
-        @Override
-        public void onLogoutComplete() {
-            Timber.d("Logout complete callback received.");
-            final Intent nearbyIntent = new Intent(getActivity(), LoginActivity.class);
-            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(nearbyIntent);
-            getActivity().finish();
-        }
-    }
 
     @Override
     public void setFABPlusAction(final View.OnClickListener onClickListener) {

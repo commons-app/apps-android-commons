@@ -19,10 +19,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.CommonsApplication.ActivityLogoutListener;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.actions.PageEditClient;
-import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.databinding.FragmentMoreBottomSheetBinding;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.feedback.FeedbackContentCreator;
@@ -41,7 +41,6 @@ import io.reactivex.schedulers.Schedulers;
 import java.util.concurrent.Callable;
 import javax.inject.Inject;
 import javax.inject.Named;
-import timber.log.Timber;
 
 public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
 
@@ -122,7 +121,7 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
             .setPositiveButton(R.string.yes, (dialog, which) -> {
                 final CommonsApplication app = (CommonsApplication)
                     requireContext().getApplicationContext();
-                app.clearApplicationData(requireContext(), new BaseLogoutListener());
+                app.clearApplicationData(requireContext(), new ActivityLogoutListener(requireActivity(), getContext()));
             })
             .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
             .show();
@@ -220,20 +219,6 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
 
     protected void onPeerReviewClicked() {
         ReviewActivity.startYourself(getActivity(), getString(R.string.title_activity_review));
-    }
-
-    private class BaseLogoutListener implements CommonsApplication.LogoutListener {
-
-        @Override
-        public void onLogoutComplete() {
-            Timber.d("Logout complete callback received.");
-            final Intent nearbyIntent = new Intent(
-                getContext(), LoginActivity.class);
-            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(nearbyIntent);
-            requireActivity().finish();
-        }
     }
 }
 
