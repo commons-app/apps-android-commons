@@ -70,7 +70,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
 
-public class UploadActivity extends BaseActivity implements UploadContract.View, UploadBaseFragment.Callback {
+public class UploadActivity extends BaseActivity implements UploadContract.View, UploadBaseFragment.Callback, ThumbnailsAdapter.OnThumbnailDeletedListener {
 
     @Inject
     ContributionController contributionController;
@@ -199,6 +199,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         binding.rvThumbnails.setLayoutManager(new LinearLayoutManager(this,
             LinearLayoutManager.HORIZONTAL, false));
         thumbnailsAdapter = new ThumbnailsAdapter(() -> currentSelectedPosition);
+        thumbnailsAdapter.setOnThumbnailDeletedListener(this);
         binding.rvThumbnails.setAdapter(thumbnailsAdapter);
 
     }
@@ -454,7 +455,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                 .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
 
 
-            if(fragments==null){
+            if(fragments == null){
                 fragments = new ArrayList<>();
             }
 
@@ -800,6 +801,11 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             ((LinearLayoutManager) binding.rvThumbnails.getLayoutManager())
                 .scrollToPositionWithOffset((index > 3) ? index-2 : 0, 0);
         }
+    }
+
+    @Override
+    public void onThumbnailDeleted(int position) {
+        presenter.deletePictureAtIndex(position);
     }
 
     /**
