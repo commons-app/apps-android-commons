@@ -367,7 +367,7 @@ public class CommonsApplication extends MultiDexApplication {
         /**
          * Constructor for BaseLogoutListener
          *
-         * @param ctx           Application context
+         * @param ctx           The application context, used for invoking the LoginActivity and passing relevant intent parameters as part of the post-logout process.
          * @param loginMessage  Message to be displayed on the login page
          * @param loginUsername Username to be pre-filled on the login page
          */
@@ -398,8 +398,7 @@ public class CommonsApplication extends MultiDexApplication {
 
     /**
      * This class is an extension of BaseLogoutListener, providing additional functionality or customization
-     * for the logout process. It includes specific actions to be taken during logout, such as clearing user-specific data
-     * or handling redirection to the login screen.
+     * for the logout process. It includes specific actions to be taken during logout, such as handling redirection to the login screen.
      */
     public static class ActivityLogoutListener extends BaseLogoutListener {
 
