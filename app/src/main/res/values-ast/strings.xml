@@ -13,11 +13,11 @@
   <string name="commons_website">Sitiu web de Commons</string>
   <string name="exit_location_picker">Salir del selector d\'allugamientu</string>
   <string name="submit">Unviar</string>
-  <string name="add_another_description">Añedir otra descripción</string>
-  <string name="add_new_contribution">Añedir nueva contribución</string>
-  <string name="add_contribution_from_camera">Añedir contribución dende la cámara</string>
-  <string name="add_contribution_from_photos">Añedir contribución dende Fotos</string>
-  <string name="add_contribution_from_contributions_gallery">Añedir contribución dende la galería de contribuciones previes</string>
+  <string name="add_another_description">Añader otra descripción</string>
+  <string name="add_new_contribution">Añader nueva contribución</string>
+  <string name="add_contribution_from_camera">Añader contribución dende la cámara</string>
+  <string name="add_contribution_from_photos">Añader contribución dende Fotos</string>
+  <string name="add_contribution_from_contributions_gallery">Añader contribución dende la galería de contribuciones previes</string>
   <string name="show_captions">Pies</string>
   <string name="row_item_language_description">Descripción de llingua</string>
   <string name="row_item_caption">Pie</string>
@@ -382,7 +382,7 @@
   <string name="step_count">Pasu %1$d de %2$d: %3$s</string>
   <string name="next">Siguiente</string>
   <string name="previous">Anterior</string>
-  <string name="upload_title_duplicate">Yá esiste un archivu col nome %1$s. ¿Tas seguru de que desees continuar?\n\nNota: añediráse un sufixu apropiáu al nome del archivu automáticamente.</string>
+  <string name="upload_title_duplicate">Yá esiste un archivu col nome %1$s. ¿Tas seguru de que desees continuar?\n\nNota: añadiráse un sufixu apropiáu al nome del archivu automáticamente.</string>
   <string name="map_application_missing">Nun s\'atopó una aplicación de mapes compatible nel to preséu. Instala una pa usar esta carauterística.</string>
   <string name="title_page_bookmarks_pictures">Imaxes</string>
   <string name="title_page_bookmarks_locations">Llugares</string>
