@@ -193,16 +193,16 @@ class ImageLoaderTest {
         whenever(PickedFiles.pickedExistingPicture(context, Uri.parse("test"))).thenReturn(
             uploadableFile
         )
-        imageLoader.nextActionableImage(listOf(image), testDispacher, testDispacher, 0)
+        imageLoader.nextActionableImage(listOf(image), testDispacher, testDispacher, 0, emptyList())
 
         whenever(notForUploadStatusDao.find(any())).thenReturn(1)
-        imageLoader.nextActionableImage(listOf(image), testDispacher, testDispacher, 0)
+        imageLoader.nextActionableImage(listOf(image), testDispacher, testDispacher, 0, emptyList())
 
         whenever(uploadedStatusDao.findByImageSHA1(any(), any())).thenReturn(2)
-        imageLoader.nextActionableImage(listOf(image), testDispacher, testDispacher, 0)
+        imageLoader.nextActionableImage(listOf(image), testDispacher, testDispacher, 0, emptyList())
 
         whenever(uploadedStatusDao.findByModifiedImageSHA1(any(), any())).thenReturn(2)
-        imageLoader.nextActionableImage(listOf(image), testDispacher, testDispacher, 0)
+        imageLoader.nextActionableImage(listOf(image), testDispacher, testDispacher, 0, emptyList())
     }
 
     /**
