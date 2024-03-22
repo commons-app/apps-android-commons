@@ -128,8 +128,8 @@ class ImageAdapterTest {
     fun processThumbnailForActionedImage() = runBlocking {
         Whitebox.setInternalState(imageAdapter, "allImages", listOf(image))
         whenever(imageLoader.nextActionableImage(listOf(image), Dispatchers.IO, Dispatchers.Default,
-        0)).thenReturn(0)
-        imageAdapter.processThumbnailForActionedImage(holder, 0)
+        0, emptyList())).thenReturn(0)
+        imageAdapter.processThumbnailForActionedImage(holder, 0, emptyList())
     }
 
     /**
@@ -138,8 +138,8 @@ class ImageAdapterTest {
     @Test
     fun `processThumbnailForActionedImage when reached end of the folder`() = runBlocking {
         whenever(imageLoader.nextActionableImage(ArrayList(), Dispatchers.IO, Dispatchers.Default,
-            0)).thenReturn(-1)
-        imageAdapter.processThumbnailForActionedImage(holder, 0)
+            0, emptyList())).thenReturn(-1)
+        imageAdapter.processThumbnailForActionedImage(holder, 0, emptyList())
     }
 
     /**
