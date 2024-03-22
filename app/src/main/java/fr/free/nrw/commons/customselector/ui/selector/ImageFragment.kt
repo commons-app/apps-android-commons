@@ -242,7 +242,8 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
             editor.apply()
         }
 
-        imageAdapter.init(allImages, allImages, TreeMap())
+        val uploadingContributions = getUploadingContributions()
+        imageAdapter.init(allImages, allImages, TreeMap(), uploadingContributions)
         imageAdapter.notifyDataSetChanged()
     }
 
@@ -265,16 +266,8 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
         if (result.status is CallbackStatus.SUCCESS) {
             val images = result.images
 
-            val uploadingContributions: List<Contribution>
+            val uploadingContributions = getUploadingContributions()
             if (images.isNotEmpty()) {
-                if (contributionDao.getContribution(listOf(Contribution.STATE_IN_PROGRESS, Contribution.STATE_FAILED, Contribution.STATE_QUEUED, Contribution.STATE_PAUSED)) != null) {
-                    uploadingContributions =
-                        contributionDao.getContribution(listOf(Contribution.STATE_IN_PROGRESS, Contribution.STATE_FAILED, Contribution.STATE_QUEUED, Contribution.STATE_PAUSED)).subscribeOn(Schedulers.io()).blockingGet()
-                } else {
-                    uploadingContributions = ArrayList()
-                }
-
-
                 filteredImages = ImageHelper.filterImages(images, bucketId)
                 allImages = ArrayList(filteredImages)
                 imageAdapter.init(filteredImages, allImages, TreeMap(), uploadingContributions)
@@ -352,7 +345,7 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
     }
 
     override fun refresh() {
-        imageAdapter.refresh(filteredImages, allImages)
+        imageAdapter.refresh(filteredImages, allImages, getUploadingContributions())
     }
 
     /**
@@ -362,8 +355,10 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
     override fun passSelectedImages(selectedImages: ArrayList<Image>, shouldRefresh: Boolean) {
         imageAdapter.setSelectedImages(selectedImages)
 
+        val uploadingContributions = getUploadingContributions()
+
         if (!showAlreadyActionedImages && shouldRefresh) {
-            imageAdapter.init(filteredImages, allImages, TreeMap())
+            imageAdapter.init(filteredImages, allImages, TreeMap(), uploadingContributions)
             imageAdapter.setSelectedImages(selectedImages)
         }
     }
@@ -385,6 +380,13 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
         if (progressDialog.isShowing) {
             progressDialog.dismiss()
         }
+    }
+
+    private fun getUploadingContributions(): List<Contribution> {
+
+        return  contributionDao.getContribution(
+            listOf(Contribution.STATE_IN_PROGRESS, Contribution.STATE_FAILED, Contribution.STATE_QUEUED, Contribution.STATE_PAUSED)
+        )?.subscribeOn(Schedulers.io())?.blockingGet() ?: emptyList()
     }
 
 }

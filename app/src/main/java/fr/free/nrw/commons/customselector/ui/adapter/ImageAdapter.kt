@@ -170,7 +170,7 @@ class ImageAdapter(
                     // If the position is not already visited, that means the position is new then
                     // finds the next actionable image position from all images
                     if (!alreadyAddedPositions.contains(position)) {
-                        processThumbnailForActionedImage(holder, position)
+                        processThumbnailForActionedImage(holder, position, uploadingContributionList)
 
                     // If the position is already visited, that means the image is already present
                     // inside map, so it will fetch the image from the map and load in the holder
@@ -206,11 +206,12 @@ class ImageAdapter(
      */
     suspend fun processThumbnailForActionedImage(
         holder: ImageViewHolder,
-        position: Int
+        position: Int,
+        uploadingContributionList: List<Contribution>
     ) {
         val next = imageLoader.nextActionableImage(
             allImages, ioDispatcher, defaultDispatcher,
-            nextImagePosition
+            nextImagePosition, uploadingContributionList
         )
 
         // If next actionable image is found, saves it, as the the search for
@@ -358,12 +359,12 @@ class ImageAdapter(
     /**
      * Refresh the data in the adapter
      */
-    fun refresh(newImages: List<Image>, fixedImages: List<Image>) {
+    fun refresh(newImages: List<Image>, fixedImages: List<Image>, uploadingImages: List<Contribution> = ArrayList()) {
         numberOfSelectedImagesMarkedAsNotForUpload = 0
         selectedImages.clear()
         images.clear()
         selectedImages = arrayListOf()
-        init(newImages, fixedImages, TreeMap())
+        init(newImages, fixedImages, TreeMap(),uploadingImages)
         notifyDataSetChanged()
     }
 

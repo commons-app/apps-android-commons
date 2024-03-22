@@ -87,6 +87,7 @@ class ImageLoader @Inject constructor(
         mapHolderImage[holder] = image
         holder.itemNotUploaded()
         holder.itemForUpload()
+        holder.itemNotUploading()
 
         scope.launch {
             var result: Result = Result.NOTFOUND
@@ -221,7 +222,7 @@ class ImageLoader @Inject constructor(
 
             if (uploadedContributionsList.isNotEmpty()) {
                 for (contribution in uploadedContributionsList ) {
-                    if (contribution.contentUri == image.uri) {
+                    if (contribution.contentUri == image.uri && showAlreadyActionedImages) {
                         holder.itemUploading()
                         break
                     } else {
@@ -238,17 +239,22 @@ class ImageLoader @Inject constructor(
     suspend fun nextActionableImage(
         allImages: List<Image>, ioDispatcher: CoroutineDispatcher,
         defaultDispatcher: CoroutineDispatcher,
-        nextImagePosition: Int
+        nextImagePosition: Int,
+        currentlyUploadingImages: List<Contribution>
     ): Int {
         var next: Int
-
         // Traversing from given position to the end
         for (i in nextImagePosition until allImages.size){
-            val it = allImages[i]
-            val imageSHA1: String = when (mapImageSHA1[it.uri] != null) {
-                true -> mapImageSHA1[it.uri]!!
+            val currentImage = allImages[i]
+
+            if (currentlyUploadingImages.any { it.contentUri == currentImage.uri }) {
+                continue // Skip this image as it's currently being uploaded
+            }
+
+            val imageSHA1: String = when (mapImageSHA1[currentImage.uri] != null) {
+                true -> mapImageSHA1[currentImage.uri]!!
                 else -> CustomSelectorUtils.getImageSHA1(
-                    it.uri,
+                    currentImage.uri,
                     ioDispatcher,
                     fileUtilsWrapper,
                     context.contentResolver
@@ -268,7 +274,7 @@ class ImageLoader @Inject constructor(
                 // If the image is not present in the already uploaded table, checks for its
                 // modified SHA1 in already uploaded table
                 if (next <= 0) {
-                    val modifiedImageSha1 = getSHA1(it, defaultDispatcher)
+                    val modifiedImageSha1 = getSHA1(currentImage, defaultDispatcher)
                     next = uploadedStatusDao.findByModifiedImageSHA1(
                         modifiedImageSha1,
                         true
