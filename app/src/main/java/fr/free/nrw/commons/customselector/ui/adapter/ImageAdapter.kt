@@ -394,7 +394,7 @@ class ImageAdapter(
             while (iterator.hasNext()) {
                 val entry = iterator.next()
                 if (entry.value == image) {
-                    imagePositionAsPerIncreasingOrder -= 2
+                    imagePositionAsPerIncreasingOrder -= 1
                     iterator.remove()
                     alreadyAddedPositions.removeAt(alreadyAddedPositions.size - 1)
                     notifyItemRemoved(index)
