@@ -3,7 +3,6 @@ package fr.free.nrw.commons.customselector.ui.selector
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
-import android.util.Log
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.customselector.database.NotForUploadStatusDao
 import fr.free.nrw.commons.customselector.database.UploadedStatus
@@ -218,7 +217,6 @@ class ImageLoader @Inject constructor(
                     holder.itemNotForUpload()
                 } else holder.itemForUpload()
             }
-            Log.d("ImageLoader", "Image: size ${uploadedContributionsList.size}")
 
             if (uploadedContributionsList.isNotEmpty()) {
                 for (contribution in uploadedContributionsList ) {
