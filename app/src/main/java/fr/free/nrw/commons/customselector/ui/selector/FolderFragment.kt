@@ -93,7 +93,7 @@ class FolderFragment : CommonsDaggerSupportFragment() {
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentCustomSelectorBinding.inflate(inflater, container, false)
-        folderAdapter = FolderAdapter(activity!!, activity as FolderClickListener)
+        folderAdapter = FolderAdapter(requireActivity(), activity as FolderClickListener)
         gridLayoutManager = GridLayoutManager(context, columnCount())
         selectorRV = binding?.selectorRv
         loader = binding?.loader
