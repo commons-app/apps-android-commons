@@ -800,6 +800,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             fragments.get(index - 1).onBecameVisible();
             ((LinearLayoutManager) binding.rvThumbnails.getLayoutManager())
                 .scrollToPositionWithOffset((index > 3) ? index-2 : 0, 0);
+            binding.llContainerTopCard.setVisibility(View.VISIBLE);
         }
     }
 
