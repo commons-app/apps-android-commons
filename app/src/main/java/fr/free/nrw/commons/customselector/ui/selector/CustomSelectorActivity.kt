@@ -206,15 +206,15 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
             markAsNotForUpload(arrayListOf())
             return
         }
-        var i = 0
-        while (i < selectedImages.size) {
-            val path = selectedImages[i].path
+
+        val iterator = selectedImages.iterator()
+        while (iterator.hasNext()) {
+            val image = iterator.next()
+            val path = image.path
             val file = File(path)
             if (!file.exists()) {
-                selectedImages.removeAt(i)
-                i--
+                iterator.remove()
             }
-            i++
         }
         markAsNotForUpload(selectedImages)
         toolbarBinding.imageLimitError.visibility = View.INVISIBLE
