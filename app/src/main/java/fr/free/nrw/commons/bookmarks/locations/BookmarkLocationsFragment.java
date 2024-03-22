@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.databinding.FragmentBookmarksLocationsBinding;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.fragments.CommonPlaceClickActions;
 import fr.free.nrw.commons.nearby.fragments.PlaceAdapter;
@@ -31,10 +32,7 @@ import kotlin.Unit;
 
 public class BookmarkLocationsFragment extends DaggerFragment {
 
-    @BindView(R.id.statusMessage) TextView statusTextView;
-    @BindView(R.id.loadingImagesProgressBar) ProgressBar progressBar;
-    @BindView(R.id.listView) RecyclerView recyclerView;
-    @BindView(R.id.parentLayout) RelativeLayout parentLayout;
+    public FragmentBookmarksLocationsBinding binding;
 
     @Inject BookmarkLocationsController controller;
     @Inject ContributionController contributionController;
@@ -75,16 +73,15 @@ public class BookmarkLocationsFragment extends DaggerFragment {
             ViewGroup container,
             Bundle savedInstanceState
     ) {
-        View v = inflater.inflate(R.layout.fragment_bookmarks_locations, container, false);
-        ButterKnife.bind(this, v);
-        return v;
+        binding = FragmentBookmarksLocationsBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        progressBar.setVisibility(View.VISIBLE);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.loadingImagesProgressBar.setVisibility(View.VISIBLE);
+        binding.listView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new PlaceAdapter(bookmarkLocationDao,
             place -> Unit.INSTANCE,
             (place, isBookmarked) -> {
@@ -94,7 +91,7 @@ public class BookmarkLocationsFragment extends DaggerFragment {
             commonPlaceClickActions,
             inAppCameraLocationPermissionLauncher
         );
-        recyclerView.setAdapter(adapter);
+        binding.listView.setAdapter(adapter);
     }
 
     @Override
@@ -109,17 +106,23 @@ public class BookmarkLocationsFragment extends DaggerFragment {
     private void initList() {
         List<Place> places = controller.loadFavoritesLocations();
         adapter.setItems(places);
-        progressBar.setVisibility(View.GONE);
+        binding.loadingImagesProgressBar.setVisibility(View.GONE);
         if (places.size() <= 0) {
-            statusTextView.setText(R.string.bookmark_empty);
-            statusTextView.setVisibility(View.VISIBLE);
+            binding.statusMessage.setText(R.string.bookmark_empty);
+            binding.statusMessage.setVisibility(View.VISIBLE);
         } else {
-            statusTextView.setVisibility(View.GONE);
+            binding.statusMessage.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         contributionController.handleActivityResult(getActivity(), requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }

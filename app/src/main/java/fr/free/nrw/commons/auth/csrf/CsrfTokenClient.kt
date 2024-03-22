@@ -23,6 +23,7 @@ class CsrfTokenClient(
     private var retries = 0
     private var csrfTokenCall: Call<MwQueryResponse?>? = null
 
+
     @Throws(Throwable::class)
     fun getTokenBlocking(): String {
         var token = ""
@@ -56,7 +57,7 @@ class CsrfTokenClient(
         }
 
         if (token.isEmpty() || token == ANON_TOKEN) {
-            throw IOException("Invalid token, or login failure.")
+            throw IOException(INVALID_TOKEN_ERROR_MESSAGE)
         }
         return token
     }
@@ -159,5 +160,6 @@ class CsrfTokenClient(
         private const val ANON_TOKEN = "+\\"
         private const val MAX_RETRIES = 1
         private const val MAX_RETRIES_OF_LOGIN_BLOCKING = 2
+        const val INVALID_TOKEN_ERROR_MESSAGE = "Invalid token, or login failure."
     }
 }

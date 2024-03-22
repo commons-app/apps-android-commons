@@ -349,6 +349,19 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
     }
 
     /**
+     * Removes the image from the actionable image map
+     */
+    fun removeImage(image : Image){
+        imageAdapter.removeImageFromActionableImageMap(image)
+    }
+
+    /**
+     * Clears the selected images
+     */
+    fun clearSelectedImages() {
+        imageAdapter.clearSelectedImages()
+    }
+    /**
      * Passes selected images and other information from Activity to Fragment and connects it with
      * the adapter
      */
