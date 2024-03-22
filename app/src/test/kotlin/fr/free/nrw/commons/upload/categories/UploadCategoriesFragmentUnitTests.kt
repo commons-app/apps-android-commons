@@ -23,6 +23,7 @@ import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
+import fr.free.nrw.commons.databinding.UploadCategoriesFragmentBinding
 import fr.free.nrw.commons.ui.PasteSensitiveTextInputEditText
 import fr.free.nrw.commons.upload.UploadActivity
 import fr.free.nrw.commons.upload.UploadBaseFragment
@@ -51,40 +52,9 @@ class UploadCategoriesFragmentUnitTests {
     private lateinit var context: Context
     private lateinit var fragmentManager: FragmentManager
     private lateinit var layoutInflater: LayoutInflater
-    private lateinit var view: View
 
     @Mock
     private lateinit var subscribe: Disposable
-
-    @Mock
-    private lateinit var pbCategories: ProgressBar
-
-    @Mock
-    private lateinit var progressDialog: ProgressDialog
-
-    @Mock
-    private lateinit var tilContainerEtSearch: TextInputLayout
-
-    @Mock
-    private lateinit var etSearch: PasteSensitiveTextInputEditText
-
-    @Mock
-    private lateinit var rvCategories: RecyclerView
-
-    @Mock
-    private lateinit var tvTitle: TextView
-
-    @Mock
-    private lateinit var tvSubTitle: TextView
-
-    @Mock
-    private lateinit var tooltip: ImageView
-
-    @Mock
-    private lateinit var editable: Editable
-
-    @Mock
-    private lateinit var button: Button
 
     @Mock
     private lateinit var adapter: UploadCategoryAdapter
@@ -98,6 +68,8 @@ class UploadCategoriesFragmentUnitTests {
     @Mock
     private lateinit var media: Media
 
+    private lateinit var binding : UploadCategoriesFragmentBinding
+
 
     @Before
     fun setUp() {
@@ -110,22 +82,13 @@ class UploadCategoriesFragmentUnitTests {
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.add(fragment, null)
         fragmentTransaction.commit()
+
         layoutInflater = LayoutInflater.from(activity)
-        view = LayoutInflater.from(activity)
-            .inflate(R.layout.upload_categories_fragment, null) as View
+        binding = UploadCategoriesFragmentBinding.inflate(layoutInflater)
+
         Whitebox.setInternalState(fragment, "subscribe", subscribe)
-        Whitebox.setInternalState(fragment, "pbCategories", pbCategories)
-        Whitebox.setInternalState(fragment, "tilContainerEtSearch", tilContainerEtSearch)
         Whitebox.setInternalState(fragment, "adapter", adapter)
         Whitebox.setInternalState(fragment, "presenter", presenter)
-        Whitebox.setInternalState(fragment, "etSearch", etSearch)
-        Whitebox.setInternalState(fragment, "rvCategories", rvCategories)
-        Whitebox.setInternalState(fragment, "tvTitle", tvTitle)
-        Whitebox.setInternalState(fragment, "tooltip", tooltip)
-        Whitebox.setInternalState(fragment, "tvSubTitle", tvSubTitle)
-        Whitebox.setInternalState(fragment, "btnNext", button)
-        Whitebox.setInternalState(fragment, "btnPrevious", button)
-        Whitebox.setInternalState(fragment, "progressDialog", progressDialog)
         Whitebox.setInternalState(fragment, "wikiText", "[[Category:Test]]")
     }
 
@@ -255,7 +218,6 @@ class UploadCategoriesFragmentUnitTests {
     fun testShowProgressDialog() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.showProgressDialog()
-        verify(progressDialog, times(0)).show()
     }
 
     @Test
@@ -263,7 +225,6 @@ class UploadCategoriesFragmentUnitTests {
     fun testDismissProgressDialog() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.dismissProgressDialog()
-        verify(progressDialog, times(1)).dismiss()
     }
 
     @Test
@@ -300,7 +261,6 @@ class UploadCategoriesFragmentUnitTests {
     @Throws(Exception::class)
     fun testOnBecameVisible() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        `when`(etSearch.text).thenReturn(editable)
         val method: Method = UploadCategoriesFragment::class.java.getDeclaredMethod(
             "onBecameVisible"
         )

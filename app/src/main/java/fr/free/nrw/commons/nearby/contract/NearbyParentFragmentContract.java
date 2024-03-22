@@ -2,12 +2,11 @@ package fr.free.nrw.commons.nearby.contract;
 
 import android.content.Context;
 import androidx.annotation.Nullable;
-import com.mapbox.mapboxsdk.annotations.Marker;
+import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
 import fr.free.nrw.commons.nearby.Label;
-import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.Place;
 import java.util.List;
 
@@ -45,15 +44,11 @@ public interface NearbyParentFragmentContract {
 
         void hideBottomDetailsSheet();
 
-        void displayBottomSheetWithInfo(Marker marker);
-
         void addSearchThisAreaButtonAction();
 
         void setSearchThisAreaButtonVisibility(boolean isVisible);
 
         void setProgressBarVisibility(boolean isVisible);
-
-        void setTabItemContributions();
 
         boolean isDetailsBottomSheetVisible();
 
@@ -75,17 +70,13 @@ public interface NearbyParentFragmentContract {
 
         void addCurrentLocationMarker(LatLng curLatLng);
 
-        void updateMapToTrackPosition(LatLng curLatLng);
-
         void clearAllMarkers();
 
         Context getContext();
 
-        void updateMapMarkers(List<NearbyBaseMarker> nearbyBaseMarkers, Marker selectedMarker);
+        void updateMapMarkers(List<BaseMarker> BaseMarkers);
 
         void filterOutAllMarkers();
-
-        void displayAllMarkers();
 
         void filterMarkersByLabels(List<Label> selectedLabels, boolean existsSelected,
             boolean needPhotoSelected, boolean wlmSelected, boolean filterForPlaceState,
@@ -105,15 +96,9 @@ public interface NearbyParentFragmentContract {
 
         LatLng getMapFocus();
 
-        com.mapbox.mapboxsdk.geometry.LatLng getLastFocusLocation();
-
-        boolean isCurrentLocationMarkerVisible();
-
         boolean isAdvancedQueryFragmentVisible();
 
         void showHideAdvancedQueryFragment(boolean shouldShow);
-
-        void centerMapToPosition(@Nullable LatLng searchLatLng);
     }
 
     interface NearbyListView {
@@ -137,12 +122,10 @@ public interface NearbyParentFragmentContract {
 
         boolean backButtonClicked();
 
-        void onCameraMove(com.mapbox.mapboxsdk.geometry.LatLng latLng);
-
         void filterByMarkerType(List<Label> selectedLabels, int state, boolean filterForPlaceState,
             boolean filterForAllNoneType);
 
-        void updateMapMarkersToController(List<NearbyBaseMarker> nearbyBaseMarkers);
+        void updateMapMarkersToController(List<BaseMarker> baseMarkers);
 
         void searchViewGainedFocus();
 

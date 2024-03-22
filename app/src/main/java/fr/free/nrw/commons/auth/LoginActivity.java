@@ -24,7 +24,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.NavUtils;
 import androidx.core.content.ContextCompat;
-
 import fr.free.nrw.commons.auth.login.LoginClient;
 import fr.free.nrw.commons.auth.login.LoginResult;
 import fr.free.nrw.commons.databinding.ActivityLoginBinding;
@@ -51,6 +50,8 @@ import timber.log.Timber;
 import static android.view.KeyEvent.KEYCODE_ENTER;
 import static android.view.View.VISIBLE;
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
+import static fr.free.nrw.commons.CommonsApplication.loginMessageIntentKey;
+import static fr.free.nrw.commons.CommonsApplication.loginUsernameIntentKey;
 
 public class LoginActivity extends AccountAuthenticatorActivity {
 
@@ -93,6 +94,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        String message = getIntent().getStringExtra(loginMessageIntentKey);
+        String username = getIntent().getStringExtra(loginUsernameIntentKey);
+
         binding.loginUsername.addTextChangedListener(textWatcher);
         binding.loginPassword.addTextChangedListener(textWatcher);
         binding.loginTwoFactor.addTextChangedListener(textWatcher);
@@ -110,6 +114,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             binding.loginCredentials.setText(getString(R.string.login_credential));
         } else {
             binding.loginCredentials.setVisibility(View.GONE);
+        }
+        if (message != null) {
+            showMessage(message, R.color.secondaryDarkColor);
+        }
+        if (username != null) {
+            binding.loginUsername.setText(username);
         }
     }
     /**

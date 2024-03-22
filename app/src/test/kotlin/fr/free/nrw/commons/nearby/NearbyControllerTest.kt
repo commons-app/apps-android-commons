@@ -5,6 +5,7 @@ import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.eq
+import fr.free.nrw.commons.BaseMarker
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.NearbyController.loadAttractionsFromLocationToBaseMarkerOptions
@@ -239,10 +240,8 @@ class NearbyControllerTest {
         assertEquals(
             loadAttractionsFromLocationToBaseMarkerOptions(
                 currentLatLng,
-                null,
-                context,
-                mutableListOf(place)
-            ), listOf<NearbyBaseMarker>()
+                null
+            ), listOf<BaseMarker>()
         )
     }
 
@@ -265,9 +264,7 @@ class NearbyControllerTest {
         assertEquals(
             loadAttractionsFromLocationToBaseMarkerOptions(
                 currentLatLng,
-                listOf(place),
-                context,
-                mutableListOf(place)
+                listOf(place)
             )[0].place, place
         )
     }
@@ -291,9 +288,7 @@ class NearbyControllerTest {
         assertEquals(
             loadAttractionsFromLocationToBaseMarkerOptions(
                 currentLatLng,
-                listOf(place),
-                context,
-                mutableListOf(place)
+                listOf(place)
             )[0].place, place
         )
     }
@@ -317,9 +312,7 @@ class NearbyControllerTest {
         assertEquals(
             loadAttractionsFromLocationToBaseMarkerOptions(
                 currentLatLng,
-                listOf(place),
-                context,
-                mutableListOf(place)
+                listOf(place)
             )[0].place, place
         )
     }
@@ -343,16 +336,14 @@ class NearbyControllerTest {
         assertEquals(
             loadAttractionsFromLocationToBaseMarkerOptions(
                 currentLatLng,
-                listOf(place),
-                context,
-                mutableListOf(place)
+                listOf(place)
             )[0].place, place
         )
     }
 
     @Test
     fun testUpdateMarkerLabelListBookmarkCaseTrue() {
-        markerPlaceGroup = MarkerPlaceGroup(null, true, place)
+        markerPlaceGroup = MarkerPlaceGroup(true, place)
         `when`(place.wikiDataEntityId).thenReturn("someString")
         val list = mutableListOf(markerPlaceGroup)
         Whitebox.setInternalState(
@@ -363,12 +354,11 @@ class NearbyControllerTest {
         updateMarkerLabelListBookmark(place, false)
         assertEquals(list[0].isBookmarked, false)
         assertEquals(list[0].place, place)
-        assertEquals(list[0].marker, null)
     }
 
     @Test
     fun testUpdateMarkerLabelListBookmarkCaseFalse() {
-        markerPlaceGroup = MarkerPlaceGroup(null, false, place)
+        markerPlaceGroup = MarkerPlaceGroup(false, place)
         `when`(place.wikiDataEntityId).thenReturn("someString")
         val list = mutableListOf(markerPlaceGroup)
         Whitebox.setInternalState(
@@ -379,7 +369,6 @@ class NearbyControllerTest {
         updateMarkerLabelListBookmark(place, true)
         assertEquals(list[0].isBookmarked, true)
         assertEquals(list[0].place, place)
-        assertEquals(list[0].marker, null)
     }
 
     fun <T> any(type: Class<T>): T = Mockito.any(type)
