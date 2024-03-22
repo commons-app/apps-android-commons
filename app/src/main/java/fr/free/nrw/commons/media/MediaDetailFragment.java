@@ -31,34 +31,24 @@ import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
-import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
-import com.mapbox.mapboxsdk.camera.CameraPosition;
-import com.mapbox.mapboxsdk.geometry.LatLng;
 import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.CameraPosition;
 import fr.free.nrw.commons.LocationPicker.LocationPicker;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
@@ -72,6 +62,7 @@ import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.category.CategoryEditHelper;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.coordinates.CoordinateEditHelper;
+import fr.free.nrw.commons.databinding.FragmentMediaDetailBinding;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.delete.ReasonBuilder;
 import fr.free.nrw.commons.description.DescriptionEditActivity;
@@ -178,81 +169,11 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     JsonKvStore applicationKvStore;
 
     private int initialListTop = 0;
-    @BindView(R.id.description_webview)
-    WebView descriptionWebView;
-    @BindView(R.id.mediaDetailFrameLayout)
-    FrameLayout frameLayout;
-    @BindView(R.id.mediaDetailImageView)
-    SimpleDraweeView image;
-    @BindView(R.id.mediaDetailImageViewSpacer)
-    LinearLayout imageSpacer;
-    @BindView(R.id.mediaDetailTitle)
-    TextView title;
-    @BindView(R.id.caption_layout)
-    LinearLayout captionLayout;
-    @BindView(R.id.depicts_layout)
-    LinearLayout depictsLayout;
-    @BindView(R.id.depictionsEditButton)
-    Button depictEditButton;
-    @BindView(R.id.media_detail_caption)
-    TextView mediaCaption;
-    @BindView(R.id.mediaDetailDesc)
-    HtmlTextView desc;
-    @BindView(R.id.mediaDetailAuthor)
-    TextView author;
-    @BindView(R.id.mediaDetailLicense)
-    TextView license;
-    @BindView(R.id.mediaDetailCoordinates)
-    TextView coordinates;
-    @BindView(R.id.mediaDetailuploadeddate)
-    TextView uploadedDate;
-    @BindView(R.id.mediaDetailDisc)
-    TextView mediaDiscussion;
-    @BindView(R.id.seeMore)
-    TextView seeMore;
-    @BindView(R.id.nominatedDeletionBanner)
-    LinearLayout nominatedForDeletion;
-    @BindView(R.id.mediaDetailCategoryContainer)
-    LinearLayout categoryContainer;
-    @BindView(R.id.categoryEditButton)
-    Button categoryEditButton;
-    @BindView(R.id.media_detail_depiction_container)
-    LinearLayout depictionContainer;
-    @BindView(R.id.authorLinearLayout)
-    LinearLayout authorLayout;
-    @BindView(R.id.nominateDeletion)
-    Button delete;
-    @BindView(R.id.mediaDetailScrollView)
-    ScrollView scrollView;
-    @BindView(R.id.toDoLayout)
-    LinearLayout toDoLayout;
-    @BindView(R.id.toDoReason)
-    TextView toDoReason;
-    @BindView(R.id.coordinate_edit)
-    Button coordinateEditButton;
-    @BindView(R.id.dummy_caption_description_container)
-    LinearLayout showCaptionAndDescriptionContainer;
-    @BindView(R.id.show_caption_description_textview)
-    TextView showCaptionDescriptionTextView;
-    @BindView(R.id.caption_listview)
-    ListView captionsListView;
-    @BindView(R.id.caption_label)
-    TextView captionLabel;
-    @BindView(R.id.description_label)
-    TextView descriptionLabel;
-    @BindView(R.id.pb_circular)
-    ProgressBar progressBar;
+    private FragmentMediaDetailBinding binding;
     String descriptionHtmlCode;
-    @BindView(R.id.progressBarDeletion)
-    ProgressBar progressBarDeletion;
-    @BindView(R.id.progressBarEdit)
-    ProgressBar progressBarEditDescription;
-    @BindView(R.id.progressBarEditCategory)
-    ProgressBar progressBarEditCategory;
-    @BindView(R.id.description_edit)
-    Button editDescription;
-    @BindView(R.id.sendThanks)
-    Button sendThanksButton;
+
+
+
 
     private ArrayList<String> categoryNames = new ArrayList<>();
     private String categorySearchQuery;
@@ -301,7 +222,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     private void getScrollPosition() {
-        initialListTop = scrollView.getScrollY();
+        initialListTop = binding.mediaDetailScrollView.getScrollY();
     }
 
     @Override
@@ -340,27 +261,44 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         reasonListEnglishMappings.add(getLocalizedResources(getContext(), Locale.ENGLISH).getString(R.string.deletion_reason_no_longer_want_public));
         reasonListEnglishMappings.add(getLocalizedResources(getContext(), Locale.ENGLISH).getString(R.string.deletion_reason_bad_for_my_privacy));
 
-        final View view = inflater.inflate(R.layout.fragment_media_detail, container, false);
+        binding = FragmentMediaDetailBinding.inflate(inflater, container, false);
+        final View view = binding.getRoot();
 
-        ButterKnife.bind(this,view);
-        Utils.setUnderlinedText(seeMore, R.string.nominated_see_more, requireContext());
+
+        Utils.setUnderlinedText(binding.seeMore, R.string.nominated_see_more, requireContext());
 
         if (isCategoryImage){
-            authorLayout.setVisibility(VISIBLE);
+            binding.authorLinearLayout.setVisibility(VISIBLE);
         } else {
-            authorLayout.setVisibility(GONE);
+            binding.authorLinearLayout.setVisibility(GONE);
         }
 
         if (!sessionManager.isUserLoggedIn()) {
-            categoryEditButton.setVisibility(GONE);
+            binding.categoryEditButton.setVisibility(GONE);
         }
 
         if(applicationKvStore.getBoolean("login_skipped")){
-            delete.setVisibility(GONE);
-            coordinateEditButton.setVisibility(GONE);
+            binding.nominateDeletion.setVisibility(GONE);
+            binding.coordinateEdit.setVisibility(GONE);
         }
 
         handleBackEvent(view);
+
+        //set onCLick listeners
+        binding.mediaDetailLicense.setOnClickListener(v -> onMediaDetailLicenceClicked());
+        binding.mediaDetailCoordinates.setOnClickListener(v -> onMediaDetailCoordinatesClicked());
+        binding.sendThanks.setOnClickListener(v -> sendThanksToAuthor());
+        binding.dummyCaptionDescriptionContainer.setOnClickListener(v -> showCaptionAndDescription());
+        binding.mediaDetailImageView.setOnClickListener(v -> launchZoomActivity(binding.mediaDetailImageView));
+        binding.categoryEditButton.setOnClickListener(v -> onCategoryEditButtonClicked());
+        binding.depictionsEditButton.setOnClickListener(v -> onDepictionsEditButtonClicked());
+        binding.seeMore.setOnClickListener(v -> onSeeMoreClicked());
+        binding.mediaDetailAuthor.setOnClickListener(v -> onAuthorViewClicked());
+        binding.nominateDeletion.setOnClickListener(v -> onDeleteButtonClicked());
+        binding.descriptionEdit.setOnClickListener(v -> onDescriptionEditClicked());
+        binding.coordinateEdit.setOnClickListener(v -> onUpdateCoordinatesClicked());
+        binding.copyWikicode.setOnClickListener(v -> onCopyWikicodeClicked());
+
 
         /**
          * Gets the height of the frame layout as soon as the view is ready and updates aspect ratio
@@ -369,15 +307,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         view.post(new Runnable() {
             @Override
             public void run() {
-                frameLayoutHeight = frameLayout.getMeasuredHeight();
-                updateAspectRatio(scrollView.getWidth());
+                frameLayoutHeight = binding.mediaDetailFrameLayout.getMeasuredHeight();
+                updateAspectRatio(binding.mediaDetailScrollView.getWidth());
             }
         });
 
         return view;
     }
 
-    @OnClick(R.id.mediaDetailImageViewSpacer)
     public void launchZoomActivity(final View view) {
         final boolean hasPermission = PermissionUtils.hasPermission(getActivity(), PermissionUtils.PERMISSIONS_STORAGE);
         if (hasPermission) {
@@ -445,20 +382,20 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
         if (AccountUtil.getUserName(getContext()) != null && media != null
             && AccountUtil.getUserName(getContext()).equals(media.getAuthor())) {
-            sendThanksButton.setVisibility(GONE);
+            binding.sendThanks.setVisibility(GONE);
         } else {
-            sendThanksButton.setVisibility(VISIBLE);
+            binding.sendThanks.setVisibility(VISIBLE);
         }
 
-        scrollView.getViewTreeObserver().addOnGlobalLayoutListener(
+        binding.mediaDetailScrollView.getViewTreeObserver().addOnGlobalLayoutListener(
             new OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
                     if (getContext() == null) {
                         return;
                     }
-                    scrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    oldWidthOfImageView = scrollView.getWidth();
+                    binding.mediaDetailScrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    oldWidthOfImageView = binding.mediaDetailScrollView.getWidth();
                     if(media != null) {
                         displayMediaDetails();
                     }
@@ -470,26 +407,26 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        scrollView.getViewTreeObserver().addOnGlobalLayoutListener(
+        binding.mediaDetailScrollView.getViewTreeObserver().addOnGlobalLayoutListener(
             new OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
                     /**
                      * We update the height of the frame layout as the configuration changes.
                      */
-                    frameLayout.post(new Runnable() {
+                    binding.mediaDetailFrameLayout.post(new Runnable() {
                         @Override
                         public void run() {
-                            frameLayoutHeight = frameLayout.getMeasuredHeight();
-                            updateAspectRatio(scrollView.getWidth());
+                            frameLayoutHeight = binding.mediaDetailFrameLayout.getMeasuredHeight();
+                            updateAspectRatio(binding.mediaDetailScrollView.getWidth());
                         }
                     });
-                    if (scrollView.getWidth() != oldWidthOfImageView) {
+                    if (binding.mediaDetailScrollView.getWidth() != oldWidthOfImageView) {
                         if (newWidthOfImageView == 0) {
-                            newWidthOfImageView = scrollView.getWidth();
+                            newWidthOfImageView = binding.mediaDetailScrollView.getWidth();
                             updateAspectRatio(newWidthOfImageView);
                         }
-                        scrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        binding.mediaDetailScrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     }
                 }
             }
@@ -541,36 +478,36 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     private void onDiscussionLoaded(String discussion) {
-        mediaDiscussion.setText(prettyDiscussion(discussion.trim()));
+        binding.mediaDetailDisc.setText(prettyDiscussion(discussion.trim()));
     }
 
     private void onDeletionPageExists(Boolean deletionPageExists) {
         if (deletionPageExists){
             if(applicationKvStore.getBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), false)) {
                 applicationKvStore.remove(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()));
-                progressBarDeletion.setVisibility(GONE);
+                binding.progressBarDeletion.setVisibility(GONE);
             }
-            delete.setVisibility(GONE);
-            nominatedForDeletion.setVisibility(VISIBLE);
+            binding.nominateDeletion.setVisibility(GONE);
+            binding.nominatedDeletionBanner.setVisibility(VISIBLE);
         } else if (!isCategoryImage) {
-            delete.setVisibility(VISIBLE);
-            nominatedForDeletion.setVisibility(GONE);
+            binding.nominateDeletion.setVisibility(VISIBLE);
+            binding.nominatedDeletionBanner.setVisibility(GONE);
         }
     }
 
     private void onDepictionsLoaded(List<IdAndCaptions> idAndCaptions){
-        depictsLayout.setVisibility(idAndCaptions.isEmpty() ? GONE : VISIBLE);
-        depictEditButton.setVisibility(idAndCaptions.isEmpty() ? GONE : VISIBLE);
+        binding.depictsLayout.setVisibility(idAndCaptions.isEmpty() ? GONE : VISIBLE);
+        binding.depictionsEditButton.setVisibility(idAndCaptions.isEmpty() ? GONE : VISIBLE);
         buildDepictionList(idAndCaptions);
     }
 
     /**
      * By clicking on the edit depictions button, it will send user to depict fragment
      */
-    @OnClick(R.id.depictionsEditButton)
+
     public void onDepictionsEditButtonClicked() {
-        depictionContainer.removeAllViews();
-        depictEditButton.setVisibility(GONE);
+        binding.mediaDetailDepictionContainer.removeAllViews();
+        binding.depictionsEditButton.setVisibility(GONE);
         final Fragment depictsFragment = new DepictsFragment();
         final Bundle bundle = new Bundle();
         bundle.putParcelable("Existing_Depicts", media);
@@ -595,8 +532,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     private void updateAspectRatio(int scrollWidth) {
         if (imageInfoCache != null) {
             int finalHeight = (scrollWidth*imageInfoCache.getHeight()) / imageInfoCache.getWidth();
-            ViewGroup.LayoutParams params = image.getLayoutParams();
-            ViewGroup.LayoutParams spacerParams = imageSpacer.getLayoutParams();
+            ViewGroup.LayoutParams params = binding.mediaDetailImageView.getLayoutParams();
+            ViewGroup.LayoutParams spacerParams = binding.mediaDetailImageViewSpacer.getLayoutParams();
             params.width = scrollWidth;
             if(finalHeight > frameLayoutHeight - minimumHeightOfMetadata) {
 
@@ -608,8 +545,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             }
             params.height = finalHeight;
             spacerParams.height = finalHeight;
-            image.setLayoutParams(params);
-            imageSpacer.setLayoutParams(spacerParams);
+            binding.mediaDetailImageView.setLayoutParams(params);
+            binding.mediaDetailImageViewSpacer.setLayoutParams(spacerParams);
         }
     }
 
@@ -617,12 +554,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         @Override
         public void onIntermediateImageSet(String id, @Nullable ImageInfo imageInfo) {
             imageInfoCache = imageInfo;
-            updateAspectRatio(scrollView.getWidth());
+            updateAspectRatio(binding.mediaDetailScrollView.getWidth());
         }
         @Override
         public void onFinalImageSet(String id, @Nullable ImageInfo imageInfo, @Nullable Animatable animatable) {
             imageInfoCache = imageInfo;
-            updateAspectRatio(scrollView.getWidth());
+            updateAspectRatio(binding.mediaDetailScrollView.getWidth());
         }
     };
 
@@ -634,20 +571,20 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     private void setupImageView() {
         int imageBackgroundColor = getImageBackgroundColor();
         if (imageBackgroundColor != DEFAULT_IMAGE_BACKGROUND_COLOR) {
-            image.setBackgroundColor(imageBackgroundColor);
+            binding.mediaDetailImageView.setBackgroundColor(imageBackgroundColor);
         }
 
-        image.getHierarchy().setPlaceholderImage(R.drawable.image_placeholder);
-        image.getHierarchy().setFailureImage(R.drawable.image_placeholder);
+        binding.mediaDetailImageView.getHierarchy().setPlaceholderImage(R.drawable.image_placeholder);
+        binding.mediaDetailImageView.getHierarchy().setFailureImage(R.drawable.image_placeholder);
 
         DraweeController controller = Fresco.newDraweeControllerBuilder()
             .setLowResImageRequest(ImageRequest.fromUri(media != null ? media.getThumbUrl() : null))
             .setRetainImageOnFailure(true)
             .setImageRequest(ImageRequest.fromUri(media != null ? media.getImageUrl() : null))
             .setControllerListener(aspectRatioListener)
-            .setOldController(image.getController())
+            .setOldController(binding.mediaDetailImageView.getController())
             .build();
-        image.setController(controller);
+        binding.mediaDetailImageView.setController(controller);
     }
 
     private void updateToDoWarning() {
@@ -676,10 +613,10 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
         if (toDoNeeded) {
             toDoMessage = getString(R.string.todo_improve) + "\n" + toDoMessage;
-            toDoLayout.setVisibility(VISIBLE);
-            toDoReason.setText(toDoMessage);
+            binding.toDoLayout.setVisibility(VISIBLE);
+            binding.toDoReason.setText(toDoMessage);
         } else {
-            toDoLayout.setVisibility(GONE);
+            binding.toDoLayout.setVisibility(GONE);
         }
     }
 
@@ -696,24 +633,24 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
     private void setTextFields(Media media) {
         setupImageView();
-        title.setText(media.getDisplayTitle());
-        desc.setHtmlText(prettyDescription(media));
-        license.setText(prettyLicense(media));
-        coordinates.setText(prettyCoordinates(media));
-        uploadedDate.setText(prettyUploadedDate(media));
+        binding.mediaDetailTitle.setText(media.getDisplayTitle());
+        binding.mediaDetailDesc.setHtmlText(prettyDescription(media));
+        binding.mediaDetailLicense.setText(prettyLicense(media));
+        binding.mediaDetailCoordinates.setText(prettyCoordinates(media));
+        binding.mediaDetailuploadeddate.setText(prettyUploadedDate(media));
         if (prettyCaption(media).equals(getContext().getString(R.string.detail_caption_empty))) {
-            captionLayout.setVisibility(GONE);
+            binding.captionLayout.setVisibility(GONE);
         } else {
-            mediaCaption.setText(prettyCaption(media));
+            binding.mediaDetailCaption.setText(prettyCaption(media));
         }
 
         categoryNames.clear();
         categoryNames.addAll(media.getCategories());
 
         if (media.getAuthor() == null || media.getAuthor().equals("")) {
-            authorLayout.setVisibility(GONE);
+            binding.authorLinearLayout.setVisibility(GONE);
         } else {
-            author.setText(media.getAuthor());
+            binding.mediaDetailAuthor.setText(media.getAuthor());
         }
     }
 
@@ -736,7 +673,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             // Stick in a filler element.
             allCategories.add(getString(R.string.detail_panel_cats_none));
         }
-        categoryEditButton.setVisibility(VISIBLE);
+        binding.categoryEditButton.setVisibility(VISIBLE);
         rebuildCatList(allCategories);
     }
 
@@ -759,13 +696,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
      * @param idAndCaptions
      */
     private void buildDepictionList(List<IdAndCaptions> idAndCaptions) {
-        depictionContainer.removeAllViews();
+        binding.mediaDetailDepictionContainer.removeAllViews();
         String locale = Locale.getDefault().getLanguage();
         for (IdAndCaptions idAndCaption : idAndCaptions) {
-                depictionContainer.addView(buildDepictLabel(
+            binding.mediaDetailDepictionContainer.addView(buildDepictLabel(
                     getDepictionCaption(idAndCaption, locale),
                     idAndCaption.getId(),
-                    depictionContainer
+                binding.mediaDetailDepictionContainer
                 ));
         }
     }
@@ -781,7 +718,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         return idAndCaption.getCaptions().values().iterator().next();
     }
 
-    @OnClick(R.id.mediaDetailLicense)
     public void onMediaDetailLicenceClicked(){
         String url = media.getLicenseUrl();
         if (!StringUtils.isBlank(url) && getActivity() != null) {
@@ -791,14 +727,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         }
     }
 
-    @OnClick(R.id.mediaDetailCoordinates)
     public void onMediaDetailCoordinatesClicked(){
         if (media.getCoordinates() != null && getActivity() != null) {
             Utils.handleGeoCoordinates(getActivity(), media.getCoordinates());
         }
     }
 
-    @OnClick(R.id.copyWikicode)
     public void onCopyWikicodeClicked() {
         String data =
             "[[" + media.getFilename() + "|thumb|" + media.getFallbackDescription() + "]]";
@@ -812,7 +746,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     /**
      * Sends thanks to author if the author is not the user
      */
-    @OnClick(R.id.sendThanks)
     public void sendThanksToAuthor() {
         String fileName = media.getFilename();
         if (TextUtils.isEmpty(fileName)) {
@@ -872,10 +805,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         ViewUtil.showShortToast(context, message);
     }
 
-    @OnClick(R.id.categoryEditButton)
     public void onCategoryEditButtonClicked(){
-        progressBarEditCategory.setVisibility(VISIBLE);
-        categoryEditButton.setVisibility(GONE);
+        binding.progressBarEditCategory.setVisibility(VISIBLE);
+        binding.categoryEditButton.setVisibility(GONE);
         getWikiText();
     }
 
@@ -896,8 +828,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
      * @param s WikiText
      */
     private void gotoCategoryEditor(final String s) {
-        categoryEditButton.setVisibility(VISIBLE);
-        progressBarEditCategory.setVisibility(GONE);
+        binding.categoryEditButton.setVisibility(VISIBLE);
+        binding.progressBarEditCategory.setVisibility(GONE);
         final Fragment categoriesFragment = new UploadCategoriesFragment();
         final Bundle bundle = new Bundle();
         bundle.putParcelable("Existing_Categories", media);
@@ -909,7 +841,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         transaction.commit();
     }
 
-    @OnClick(R.id.coordinate_edit)
     public void onUpdateCoordinatesClicked(){
         goToLocationPickerActivity();
     }
@@ -940,18 +871,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
 
         startActivity(new LocationPicker.IntentBuilder()
-            .defaultLocation(new CameraPosition.Builder()
-                .target(new LatLng(defaultLatitude, defaultLongitude))
-                .zoom(16).build())
+            .defaultLocation(new CameraPosition(defaultLatitude,defaultLongitude,16.0))
             .activityKey("MediaActivity")
             .media(media)
             .build(getActivity()));
     }
 
-    @OnClick(R.id.description_edit)
     public void onDescriptionEditClicked() {
-        progressBarEditDescription.setVisibility(VISIBLE);
-        editDescription.setVisibility(GONE);
+        binding.progressBarEdit.setVisibility(VISIBLE);
+        binding.descriptionEdit.setVisibility(GONE);
         getDescriptionList();
     }
 
@@ -1148,12 +1076,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                         Timber.d("Caption is added.");
                     }));
             }
-            progressBarEditDescription.setVisibility(GONE);
-            editDescription.setVisibility(VISIBLE);
+            binding.progressBarEdit.setVisibility(GONE);
+            binding.descriptionEdit.setVisibility(VISIBLE);
 
         } else if (requestCode == REQUEST_CODE_EDIT_DESCRIPTION && resultCode == RESULT_CANCELED) {
-            progressBarEditDescription.setVisibility(GONE);
-            editDescription.setVisibility(VISIBLE);
+            binding.progressBarEdit.setVisibility(GONE);
+            binding.descriptionEdit.setVisibility(VISIBLE);
         }
     }
 
@@ -1169,7 +1097,6 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     @SuppressLint("StringFormatInvalid")
-    @OnClick(R.id.nominateDeletion)
     public void onDeleteButtonClicked(){
             if (AccountUtil.getUserName(getContext()) != null && AccountUtil.getUserName(getContext()).equals(media.getAuthor())) {
                 final ArrayAdapter<String> languageAdapter = new ArrayAdapter<>(getActivity(),
@@ -1275,14 +1202,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             });
     }
 
-    @OnClick(R.id.seeMore)
     public void onSeeMoreClicked(){
-        if (nominatedForDeletion.getVisibility() == VISIBLE && getActivity() != null) {
+        if (binding.nominatedDeletionBanner.getVisibility() == VISIBLE && getActivity() != null) {
             Utils.handleWebUrl(getActivity(), Uri.parse(media.getPageTitle().getMobileUri()));
         }
     }
 
-    @OnClick(R.id.mediaDetailAuthor)
     public void onAuthorViewClicked() {
         if (media == null || media.getUser() == null) {
             return;
@@ -1301,15 +1226,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
      * Enable Progress Bar and Update delete button text.
      */
     private void enableProgressBar() {
-        progressBarDeletion.setVisibility(VISIBLE);
-        delete.setText("Nominating for Deletion");
+        binding.progressBarDeletion.setVisibility(VISIBLE);
+        binding.nominateDeletion.setText("Nominating for Deletion");
         isDeleted = true;
     }
 
     private void rebuildCatList(List<String> categories) {
-        categoryContainer.removeAllViews();
+        binding.mediaDetailCategoryContainer.removeAllViews();
         for (String category : categories) {
-            categoryContainer.addView(buildCatLabel(sanitise(category), categoryContainer));
+            binding.mediaDetailCategoryContainer.addView(buildCatLabel(sanitise(category), binding.mediaDetailCategoryContainer));
         }
     }
 
@@ -1435,13 +1360,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         }
     }
 
-    @OnClick(R.id.show_caption_description_textview)
     void showCaptionAndDescription() {
-        if (showCaptionAndDescriptionContainer.getVisibility() == GONE) {
-            showCaptionAndDescriptionContainer.setVisibility(VISIBLE);
+        if (binding.dummyCaptionDescriptionContainer.getVisibility() == GONE) {
+            binding.dummyCaptionDescriptionContainer.setVisibility(VISIBLE);
             setUpCaptionAndDescriptionLayout();
         } else {
-            showCaptionAndDescriptionContainer.setVisibility(GONE);
+            binding.dummyCaptionDescriptionContainer.setVisibility(GONE);
         }
     }
 
@@ -1452,12 +1376,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         List<Caption> captions = getCaptions();
 
         if (descriptionHtmlCode == null) {
-            progressBar.setVisibility(VISIBLE);
+            binding.showCaptionsBinding.pbCircular.setVisibility(VISIBLE);
         }
 
         getDescription();
         CaptionListViewAdapter adapter = new CaptionListViewAdapter(captions);
-        captionsListView.setAdapter(adapter);
+        binding.showCaptionsBinding.captionListview.setAdapter(adapter);
     }
 
     /**
@@ -1480,7 +1404,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     private void getDescription() {
-        compositeDisposable.add(mediaDataExtractor.getHtmlOfPage(media.getFilename())
+        compositeDisposable.add(mediaDataExtractor.getHtmlOfPage(
+                Objects.requireNonNull(media.getFilename()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(this::extractDescription, Timber::e));
@@ -1498,9 +1423,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             descriptionHtmlCode = descriptionHtmlCode + s.toCharArray()[i];
         }
 
-        descriptionWebView
+        binding.showCaptionsBinding.descriptionWebview
             .loadDataWithBaseURL(null, descriptionHtmlCode, "text/html", "utf-8", null);
-        progressBar.setVisibility(GONE);
+        binding.showCaptionsBinding.pbCircular.setVisibility(GONE);
     }
 
     /**
@@ -1513,8 +1438,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             @Override
             public boolean onKey(View view, int keycode, KeyEvent keyEvent) {
                 if (keycode == KeyEvent.KEYCODE_BACK) {
-                    if (showCaptionAndDescriptionContainer.getVisibility() == VISIBLE) {
-                        showCaptionAndDescriptionContainer.setVisibility(GONE);
+                    if (binding.dummyCaptionDescriptionContainer.getVisibility() == VISIBLE) {
+                        binding.dummyCaptionDescriptionContainer.setVisibility(GONE);
                         return true;
                     }
                 }
@@ -1540,7 +1465,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             return;
         }
 
-        image.setBackgroundColor(color);
+        binding.mediaDetailImageView.setBackgroundColor(color);
         getImageBackgroundColorPref().edit().putInt(IMAGE_BACKGROUND_COLOR, color).apply();
     }
 
@@ -1552,5 +1477,4 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         SharedPreferences imageBackgroundColorPref = this.getImageBackgroundColorPref();
         return imageBackgroundColorPref.getInt(IMAGE_BACKGROUND_COLOR, DEFAULT_IMAGE_BACKGROUND_COLOR);
     }
-
 }

@@ -2,11 +2,11 @@ package fr.free.nrw.commons.locationpicker
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import fr.free.nrw.commons.CameraPosition
 import fr.free.nrw.commons.LocationPicker.LocationPickerViewModel
 import org.junit.Before
 import org.junit.Test
