@@ -29,7 +29,11 @@ class PageEditClient(
             pageEditInterface.postEdit(pageTitle, summary, text, csrfTokenClient.getTokenBlocking())
                 .map { editResponse -> editResponse.edit()!!.editSucceeded() }
         } catch (throwable: Throwable) {
-            Observable.just(false)
+            if (throwable is InvalidLoginTokenException) {
+                throw throwable
+            } else {
+                Observable.just(false)
+            }
         }
     }
 
@@ -45,7 +49,11 @@ class PageEditClient(
             pageEditInterface.postAppendEdit(pageTitle, summary, appendText, csrfTokenClient.getTokenBlocking())
                 .map { editResponse -> editResponse.edit()!!.editSucceeded() }
         } catch (throwable: Throwable) {
-            Observable.just(false)
+            if (throwable is InvalidLoginTokenException) {
+                throw throwable
+            } else {
+                Observable.just(false)
+            }
         }
     }
 
@@ -85,7 +93,11 @@ class PageEditClient(
                 value, csrfTokenClient.getTokenBlocking()
             ).map { it.success }
         } catch (throwable: Throwable) {
-            Observable.just(0)
+            if (throwable is InvalidLoginTokenException) {
+                throw throwable
+            } else {
+                Observable.just(0)
+            }
         }
     }
 

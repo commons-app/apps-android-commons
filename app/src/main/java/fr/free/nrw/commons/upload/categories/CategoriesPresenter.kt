@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.category.CategoryEditHelper
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.di.CommonsApplicationModule
@@ -223,12 +224,16 @@ class CategoriesPresenter @Inject constructor(
                             view.dismissProgressDialog()
                             view.refreshCategories()
                             view.goBackToPreviousScreen()
+                        }, { error ->
+                            if (error is InvalidLoginTokenException) {
+                                view.navigateToLoginScreen();
+                            } else {
+                                Timber.e(
+                                    "Failed to update categories"
+                                )
+                            }
                         })
-                        {
-                            Timber.e(
-                                "Failed to update categories"
-                            )
-                        }
+
                 )
 
             }
