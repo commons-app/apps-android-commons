@@ -20,11 +20,10 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.auth.csrf.AnonymousTokenException;
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import javax.inject.Inject;
 
 public class ReviewImageFragment extends CommonsDaggerSupportFragment {
@@ -207,7 +206,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
             @Override
             public void onTokenException(final Exception e) {
-                if (e instanceof AnonymousTokenException){
+                if (e instanceof InvalidLoginTokenException){
                     final String username = sessionManager.getUserName();
                     final CommonsApplication.BaseLogoutListener logoutListener = new CommonsApplication.BaseLogoutListener(
                         getActivity(),

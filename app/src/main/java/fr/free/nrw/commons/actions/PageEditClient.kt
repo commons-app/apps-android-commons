@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.actions
 
-import android.util.Log
-import fr.free.nrw.commons.auth.csrf.AnonymousTokenException
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import io.reactivex.Observable
 import io.reactivex.Single
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
@@ -59,11 +58,10 @@ class PageEditClient(
      */
     fun prependEdit(pageTitle: String, prependText: String, summary: String): Observable<Boolean> {
         return try {
-            Log.d("myerr", "prependEdit: " + pageTitle + " " + prependText + " " + summary + " " )
             pageEditInterface.postPrependEdit(pageTitle, summary, prependText, csrfTokenClient.getTokenBlocking())
                 .map { editResponse -> editResponse.edit()?.editSucceeded() ?: false }
         } catch (throwable: Throwable) {
-            if (throwable is AnonymousTokenException) {
+            if (throwable is InvalidLoginTokenException) {
                 throw throwable
             } else {
                 Observable.just(false)
