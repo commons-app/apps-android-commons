@@ -212,29 +212,31 @@ class CategoriesPresenter @Inject constructor(
 
             if (selectedCategories.isNotEmpty()) {
                 view.showProgressDialog()
-                compositeDisposable.add(
-                    categoryEditHelper.makeCategoryEdit(view.fragmentContext, media,
-                        selectedCategories, wikiText)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe({
-                            Timber.d("Categories are added.")
-                            media.addedCategories = selectedCategories
-                            repository.cleanup()
-                            view.dismissProgressDialog()
-                            view.refreshCategories()
-                            view.goBackToPreviousScreen()
-                        }, { error ->
-                            if (error is InvalidLoginTokenException) {
-                                view.navigateToLoginScreen();
-                            } else {
+
+                try {
+                    compositeDisposable.add(
+                        categoryEditHelper.makeCategoryEdit(
+                            view.fragmentContext, media,
+                            selectedCategories, wikiText
+                        )
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe({
+                                Timber.d("Categories are added.")
+                                media.addedCategories = selectedCategories
+                                repository.cleanup()
+                                view.dismissProgressDialog()
+                                view.refreshCategories()
+                                view.goBackToPreviousScreen()
+                            }, {
                                 Timber.e(
                                     "Failed to update categories"
                                 )
-                            }
-                        })
-
-                )
+                            })
+                    )
+                } catch (e: InvalidLoginTokenException) {
+                    view.navigateToLoginScreen();
+                }
 
             }
         } else {

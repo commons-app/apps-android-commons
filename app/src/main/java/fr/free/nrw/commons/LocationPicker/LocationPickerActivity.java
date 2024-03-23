@@ -35,6 +35,7 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient;
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException;
 import fr.free.nrw.commons.coordinates.CoordinateEditHelper;
 import fr.free.nrw.commons.filepicker.Constants;
@@ -371,29 +372,29 @@ public class LocationPickerActivity extends BaseActivity implements
         if (media == null) {
             return;
         }
-        compositeDisposable.add(coordinateEditHelper.makeCoordinatesEdit(getApplicationContext(),media,
-                Latitude, Longitude, Accuracy)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(s -> {
-                Timber.d("Coordinates are added.");
-            },
-                throwable -> {
-                    if (throwable instanceof InvalidLoginTokenException) {
-                        final String username = sessionManager.getUserName();
-                        final CommonsApplication.BaseLogoutListener logoutListener = new CommonsApplication.BaseLogoutListener(
-                            this,
-                            getString(R.string.invalid_login_message),
-                            username
-                        );
 
-                        CommonsApplication.getInstance().clearApplicationData(
-                            this, logoutListener);
-                    } else {
-                        Timber.e(throwable);
-                    }
-                }
-            ));
+        try {
+            compositeDisposable.add(
+                coordinateEditHelper.makeCoordinatesEdit(getApplicationContext(), media,
+                        Latitude, Longitude, Accuracy)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(s -> {
+                            Timber.d("Coordinates are added.");
+                        }));
+        } catch (Exception e) {
+            if (e.getLocalizedMessage().equals(CsrfTokenClient.ANONYMOUS_TOKEN_MESSAGE)) {
+                final String username = sessionManager.getUserName();
+                final CommonsApplication.BaseLogoutListener logoutListener = new CommonsApplication.BaseLogoutListener(
+                    this,
+                    getString(R.string.invalid_login_message),
+                    username
+                );
+
+                CommonsApplication.getInstance().clearApplicationData(
+                    this, logoutListener);
+            }
+        }
     }
 
     /**
