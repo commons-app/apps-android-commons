@@ -15,7 +15,26 @@ import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
 
 /**
- * Helper class to handle location permissions
+ * Helper class to handle location permissions.
+ *
+ * Location flow for fragments containing a map is as follows:
+ * Case 1: When location permission has never been asked for or denied before
+ * Check if permission is already granted or not.
+ * If not already granted, ask for it (if it isn't denied twice before).
+ * If now user grants permission, go to Case 3/4, else go to Case 2.
+ *
+ * Case 2: When location permission is just asked but has been denied
+ * Shows a toast to tell the user why location permission is needed.
+ * Show current location / nearby pins / nearby images according to the default location.
+ *
+ * Case 3: When location permission are already granted, but location services are off
+ * Asks the user to turn on the location service, using a dialog.
+ * If the user rejects, checks for the last known location and shows stuff using that location.
+ * Also displays a toast telling the user why location should be turned on.
+ *
+ * Case 4: When location permission has been granted and location services are also on
+ * Do whatever is required by that particular activity / fragment using current location.
+ *
  */
 public class LocationPermissionsHelper {
 
