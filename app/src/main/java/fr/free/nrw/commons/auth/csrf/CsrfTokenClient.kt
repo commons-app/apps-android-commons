@@ -60,7 +60,7 @@ class CsrfTokenClient(
         }
 
         if (token.isEmpty() || token == ANON_TOKEN) {
-            throw IOException(INVALID_TOKEN_ERROR_MESSAGE)
+            throw InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE)
         }
         return token
     }
