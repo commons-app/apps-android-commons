@@ -517,6 +517,7 @@ public class ContributionsFragment
 
     private void displayYouWontSeeNearbyMessage() {
         ViewUtil.showLongToast(getActivity(), getResources().getString(R.string.unable_to_display_nearest_place));
+        // Set to true as the user doesn't want the app to ask for location permission anymore
         store.putBoolean("doNotAskForLocationPermission", true);
     }
 
