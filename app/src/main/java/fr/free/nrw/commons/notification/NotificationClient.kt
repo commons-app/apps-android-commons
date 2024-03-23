@@ -6,6 +6,7 @@ import fr.free.nrw.commons.notification.models.NotificationType
 import io.reactivex.Observable
 import io.reactivex.Single
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import fr.free.nrw.commons.utils.DateUtil
 import javax.inject.Inject
@@ -39,7 +40,11 @@ class NotificationClient @Inject constructor(
                 unreadList = ""
             ).map(MwQueryResponse::success)
         } catch (throwable: Throwable) {
-            Observable.just(false)
+            if (throwable is InvalidLoginTokenException) {
+                Observable.error(throwable)
+            } else {
+                Observable.just(false)
+            }
         }
     }
 

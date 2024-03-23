@@ -21,8 +21,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.google.android.material.snackbar.Snackbar;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException;
 import fr.free.nrw.commons.notification.models.Notification;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -60,6 +63,9 @@ public class NotificationActivity extends BaseActivity {
 
     @Inject
     NotificationController controller;
+
+    @Inject
+    SessionManager sessionManager;
 
     private static final String TAG_NOTIFICATION_WORKER_FRAGMENT = "NotificationWorkerFragment";
     private NotificationWorkerFragment mNotificationWorkerFragment;
@@ -130,10 +136,21 @@ public class NotificationActivity extends BaseActivity {
                         Toast.makeText(NotificationActivity.this, getString(R.string.some_error), Toast.LENGTH_SHORT).show();
                     }
                 }, throwable -> {
+                    if (throwable instanceof InvalidLoginTokenException) {
+                        final String username = sessionManager.getUserName();
+                        final CommonsApplication.BaseLogoutListener logoutListener = new CommonsApplication.BaseLogoutListener(
+                            this,
+                            getString(R.string.invalid_login_message),
+                            username
+                        );
 
-                    Timber.e(throwable, "Error occurred while loading notifications");
-                    throwable.printStackTrace();
-                    ViewUtil.showShortSnackbar(relativeLayout, R.string.error_notifications);
+                        CommonsApplication.getInstance().clearApplicationData(
+                            this, logoutListener);
+                    } else {
+                        Timber.e(throwable, "Error occurred while loading notifications");
+                        throwable.printStackTrace();
+                        ViewUtil.showShortSnackbar(relativeLayout, R.string.error_notifications);
+                    }
                     progressBar.setVisibility(View.GONE);
                 });
         compositeDisposable.add(disposable);
@@ -193,7 +210,7 @@ public class NotificationActivity extends BaseActivity {
                         }
                         progressBar.setVisibility(View.GONE);
                     }, throwable -> {
-                        Timber.e(throwable, "Error occurred while loading notifications");
+                        Timber.e(throwable, "Error occurred while loading notifications ");
                         ViewUtil.showShortSnackbar(relativeLayout, R.string.error_notifications);
                         progressBar.setVisibility(View.GONE);
                     }));
