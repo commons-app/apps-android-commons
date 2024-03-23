@@ -1075,7 +1075,20 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
                     Timber.d("Descriptions are added.");
-                }));
+                },throwable -> {
+                        if (throwable instanceof InvalidLoginTokenException) {
+                            final String username = sessionManager.getUserName();
+                            final CommonsApplication.BaseLogoutListener logoutListener = new CommonsApplication.BaseLogoutListener(
+                                getActivity(),
+                                requireActivity().getString(R.string.invalid_login_message),
+                                username
+                            );
+
+                            CommonsApplication.getInstance().clearApplicationData(
+                                requireActivity(), logoutListener);
+                        }
+                    }
+                    ));
 
             final ArrayList<UploadMediaDetail> uploadMediaDetails
                 = data.getParcelableArrayListExtra(LIST_OF_DESCRIPTION_AND_CAPTION);
