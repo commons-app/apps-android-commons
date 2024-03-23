@@ -48,7 +48,7 @@ class CsrfTokenClient(
 
                 token = response.body()!!.query()!!.csrfToken()!!
                 if (sessionManager.isUserLoggedIn && token == ANON_TOKEN) {
-                    throw RuntimeException("App believes we're logged in, but got anonymous token.")
+                    throw AnonymousTokenException(ANONYMOUS_TOKEN_MESSAGE)
                 }
                 break
             } catch (t: Throwable) {
@@ -68,7 +68,7 @@ class CsrfTokenClient(
             override fun success(token: String?) {
                 if (sessionManager.isUserLoggedIn && token == ANON_TOKEN) {
                     retryWithLogin(cb) {
-                        RuntimeException("App believes we're logged in, but got anonymous token.")
+                        AnonymousTokenException(ANONYMOUS_TOKEN_MESSAGE)
                     }
                 } else {
                     cb.success(token)
@@ -161,5 +161,8 @@ class CsrfTokenClient(
         private const val MAX_RETRIES = 1
         private const val MAX_RETRIES_OF_LOGIN_BLOCKING = 2
         const val INVALID_TOKEN_ERROR_MESSAGE = "Invalid token, or login failure."
+        const val ANONYMOUS_TOKEN_MESSAGE = "App believes we're logged in, but got anonymous token."
     }
 }
+class AnonymousTokenException(message: String) : Exception(message)
+

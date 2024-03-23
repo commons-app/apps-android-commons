@@ -16,11 +16,16 @@ import androidx.annotation.NonNull;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.auth.csrf.AnonymousTokenException;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import javax.inject.Inject;
 
 public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
@@ -42,26 +47,30 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.button_no)
     Button noButton;
 
+    @Inject
+    SessionManager sessionManager;
+
+
     // Constant variable used to store user's key name for onSaveInstanceState method
     private final String SAVED_USER = "saved_user";
 
     // Variable that stores the value of user
     private String user;
 
-    public void update(int position) {
+    public void update(final int position) {
         this.position = position;
     }
 
     private String updateCategoriesQuestion() {
-        Media media = getReviewActivity().getMedia();
+        final Media media = getReviewActivity().getMedia();
         if (media != null && media.getCategoriesHiddenStatus() != null && isAdded()) {
             // Filter category name attribute from all categories
-            List<String> categories = new ArrayList<>();
-            for(String key : media.getCategoriesHiddenStatus().keySet()) {
+            final List<String> categories = new ArrayList<>();
+            for(final String key : media.getCategoriesHiddenStatus().keySet()) {
                 String value = String.valueOf(key);
                 // Each category returned has a format like "Category:<some-category-name>"
                 // so remove the prefix "Category:"
-                int index = key.indexOf("Category:");
+                final int index = key.indexOf("Category:");
                 if(index == 0) {
                     value = key.substring(9);
                 }
@@ -70,7 +79,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
             String catString = TextUtils.join(", ", categories);
             if (catString != null && !catString.equals("") && textViewQuestionContext != null) {
                 catString = "<b>" + catString + "</b>";
-                String stringToConvertHtml = String.format(getResources().getString(R.string.review_category_explanation), catString);
+                final String stringToConvertHtml = String.format(getResources().getString(R.string.review_category_explanation), catString);
                 return Html.fromHtml(stringToConvertHtml).toString();
             }
         }
@@ -78,19 +87,22 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                             final Bundle savedInstanceState) {
         position = getArguments().getInt("position");
-        View layoutView = inflater.inflate(R.layout.fragment_review_image, container,
+        final View layoutView = inflater.inflate(R.layout.fragment_review_image, container,
                 false);
         ButterKnife.bind(this, layoutView);
 
-        String question, explanation=null, yesButtonText, noButtonText;
+        final String question;
+        String explanation=null;
+        String yesButtonText;
+        final String noButtonText;
 
         switch (position) {
             case SPAM:
@@ -173,7 +185,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
      * @param outState
      */
     @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
+    public void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
 
         //Save user name when configuration changes happen
@@ -191,6 +203,22 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
             @Override
             public void onFailure() {
                 //do nothing
+            }
+
+            @Override
+            public void onTokenException(final Exception e) {
+                if (e instanceof AnonymousTokenException){
+                    final String username = sessionManager.getUserName();
+                    final CommonsApplication.BaseLogoutListener logoutListener = new CommonsApplication.BaseLogoutListener(
+                        getActivity(),
+                        requireActivity().getString(R.string.invalid_login_message),
+                        username
+                    );
+
+                    CommonsApplication.getInstance().clearApplicationData(
+                        requireActivity(), logoutListener);
+
+                }
             }
         };
     }

@@ -8,11 +8,13 @@ import static fr.free.nrw.commons.utils.LangCodeUtils.getLocalizedResources;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import androidx.appcompat.app.AlertDialog;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.actions.PageEditClient;
+import fr.free.nrw.commons.auth.csrf.AnonymousTokenException;
 import fr.free.nrw.commons.notification.NotificationHelper;
 import fr.free.nrw.commons.review.ReviewController;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
@@ -62,11 +64,19 @@ public class DeleteHelper {
      * @return
      */
     public Single<Boolean> makeDeletion(Context context, Media media, String reason) {
+        Log.d("myerr","makeDeletion is "+media + " thr "+Thread.currentThread().getName());
         viewUtil.showShortToast(context, "Trying to nominate " + media.getDisplayTitle() + " for deletion");
 
         return delete(media, reason)
                 .flatMapSingle(result -> Single.just(showDeletionNotification(context, media, result)))
-                .firstOrError();
+                .firstOrError()
+                .onErrorResumeNext(throwable -> {
+                    Log.d("myerr","delete is "+throwable + " thr "+throwable.getLocalizedMessage());
+                    if (throwable instanceof AnonymousTokenException) {
+                        return Single.error(throwable);
+                    }
+                    return Single.error(throwable);
+                });
     }
 
     /**
@@ -104,22 +114,31 @@ public class DeleteHelper {
         }
 
         return pageEditClient.prependEdit(media.getFilename(), fileDeleteString + "\n", summary)
-                .flatMap(result -> {
-                    if (result) {
-                        return pageEditClient.edit("Commons:Deletion_requests/" + media.getFilename(), subpageString + "\n", summary);
-                    }
-                    throw new RuntimeException("Failed to nominate for deletion");
-                }).flatMap(result -> {
-                    if (result) {
-                        return pageEditClient.appendEdit("Commons:Deletion_requests/" + date, logPageString + "\n", summary);
-                    }
-                    throw new RuntimeException("Failed to nominate for deletion");
-                }).flatMap(result -> {
-                    if (result) {
-                        return pageEditClient.appendEdit("User_Talk:" + creator, userPageString + "\n", summary);
-                    }
-                    throw new RuntimeException("Failed to nominate for deletion");
-                });
+            .onErrorResumeNext(throwable -> {
+                Log.d("myerr","prepend is "+throwable + " thr "+throwable.getLocalizedMessage());
+                if (throwable instanceof AnonymousTokenException) {
+                    return Observable.error(throwable);
+                }
+                return Observable.error(throwable);
+            })
+            .flatMap(result -> {
+                if (result) {
+                    return pageEditClient.edit("Commons:Deletion_requests/" + media.getFilename(), subpageString + "\n", summary);
+                }
+                return Observable.error(new RuntimeException("Failed to nominate for deletion"));
+            })
+            .flatMap(result -> {
+                if (result) {
+                    return pageEditClient.appendEdit("Commons:Deletion_requests/" + date, logPageString + "\n", summary);
+                }
+                return Observable.error(new RuntimeException("Failed to nominate for deletion"));
+            })
+            .flatMap(result -> {
+                if (result) {
+                    return pageEditClient.appendEdit("User_Talk:" + creator, userPageString + "\n", summary);
+                }
+                return Observable.error(new RuntimeException("Failed to nominate for deletion"));
+            });
     }
 
     private boolean showDeletionNotification(Context context, Media media, boolean result) {
@@ -224,13 +243,19 @@ public class DeleteHelper {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        reviewCallback.onSuccess();
+                    // Success case
+                    reviewCallback.onSuccess();
+                }, throwable -> {
+                    Log.d("err","Error is "+throwable + " thr "+throwable.getLocalizedMessage());
+                    // Error handling
+                    if (throwable instanceof AnonymousTokenException) {
+                        // Propagate the specific exception back to the activity
+                        reviewCallback.onTokenException((AnonymousTokenException) throwable);
                     } else {
+                        // Handle other kinds of errors
                         reviewCallback.onFailure();
                     }
                 });
-
         });
         alert.setNegativeButton(context.getString(R.string.cancel), (dialog, which) -> reviewCallback.onFailure());
         d = alert.create();

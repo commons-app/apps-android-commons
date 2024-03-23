@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.actions
 
+import android.util.Log
+import fr.free.nrw.commons.auth.csrf.AnonymousTokenException
 import io.reactivex.Observable
 import io.reactivex.Single
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
@@ -57,12 +59,18 @@ class PageEditClient(
      */
     fun prependEdit(pageTitle: String, prependText: String, summary: String): Observable<Boolean> {
         return try {
+            Log.d("myerr", "prependEdit: " + pageTitle + " " + prependText + " " + summary + " " )
             pageEditInterface.postPrependEdit(pageTitle, summary, prependText, csrfTokenClient.getTokenBlocking())
-                .map { editResponse -> editResponse.edit()!!.editSucceeded() }
+                .map { editResponse -> editResponse.edit()?.editSucceeded() ?: false }
         } catch (throwable: Throwable) {
-            Observable.just(false)
+            if (throwable is AnonymousTokenException) {
+                throw throwable
+            } else {
+                Observable.just(false)
+            }
         }
     }
+
 
     /**
      * Set new labels to Wikibase server of commons
