@@ -22,7 +22,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import com.mapbox.mapboxsdk.camera.CameraPosition;
+import fr.free.nrw.commons.CameraPosition;
 import fr.free.nrw.commons.LocationPicker.LocationPicker;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
@@ -558,10 +558,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             defaultLongitude = uploadItem.getGpsCoords().getDecLongitude();
             defaultZoom = uploadItem.getGpsCoords().getZoomLevel();
             startActivityForResult(new LocationPicker.IntentBuilder()
-                .defaultLocation(new CameraPosition.Builder()
-                    .target(
-                        new com.mapbox.mapboxsdk.geometry.LatLng(defaultLatitude, defaultLongitude))
-                    .zoom(defaultZoom).build())
+                .defaultLocation(new CameraPosition(defaultLatitude,defaultLongitude,defaultZoom))
                 .activityKey("UploadActivity")
                 .build(getActivity()), REQUEST_CODE);
         } else {
@@ -575,10 +572,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 defaultZoom = Double.parseDouble(defaultKvStore.getString(LAST_ZOOM));
             }
             startActivityForResult(new LocationPicker.IntentBuilder()
-                .defaultLocation(new CameraPosition.Builder()
-                    .target(
-                        new com.mapbox.mapboxsdk.geometry.LatLng(defaultLatitude, defaultLongitude))
-                    .zoom(defaultZoom).build())
+                .defaultLocation(new CameraPosition(defaultLatitude,defaultLongitude,defaultZoom))
                 .activityKey("NoLocationUploadActivity")
                 .build(getActivity()), REQUEST_CODE);
         }
@@ -601,9 +595,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
             if (cameraPosition != null) {
 
-                final String latitude = String.valueOf(cameraPosition.target.getLatitude());
-                final String longitude = String.valueOf(cameraPosition.target.getLongitude());
-                final double zoom = cameraPosition.zoom;
+                final String latitude = String.valueOf(cameraPosition.getLatitude());
+                final String longitude = String.valueOf(cameraPosition.getLongitude());
+                final double zoom = cameraPosition.getZoom();
 
                 editLocation(latitude, longitude, zoom);
                 /*

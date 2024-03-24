@@ -15,13 +15,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.ViewPagerAdapter;
+import fr.free.nrw.commons.databinding.ActivityCategoryDetailsBinding;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.explore.categories.parent.ParentCategoriesFragment;
 import fr.free.nrw.commons.explore.categories.sub.SubCategoriesFragment;
@@ -45,23 +44,23 @@ public class CategoryDetailsActivity extends BaseActivity
     private CategoriesMediaFragment categoriesMediaFragment;
     private MediaDetailPagerFragment mediaDetails;
     private String categoryName;
-    @BindView(R.id.mediaContainer) FrameLayout mediaContainer;
-    @BindView(R.id.tab_layout) TabLayout tabLayout;
-    @BindView(R.id.viewPager) ViewPager viewPager;
-    @BindView(R.id.toolbar) Toolbar toolbar;
     ViewPagerAdapter viewPagerAdapter;
+
+    private ActivityCategoryDetailsBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_category_details);
-        ButterKnife.bind(this);
+
+        binding = ActivityCategoryDetailsBinding.inflate(getLayoutInflater());
+        final View view = binding.getRoot();
+        setContentView(view);
         supportFragmentManager = getSupportFragmentManager();
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(viewPagerAdapter);
-        viewPager.setOffscreenPageLimit(2);
-        tabLayout.setupWithViewPager(viewPager);
-        setSupportActionBar(toolbar);
+        binding.viewPager.setAdapter(viewPagerAdapter);
+        binding.viewPager.setOffscreenPageLimit(2);
+        binding.tabLayout.setupWithViewPager(binding.viewPager);
+        setSupportActionBar(binding.toolbarBinding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTabs();
         setPageTitle();
@@ -110,9 +109,9 @@ public class CategoryDetailsActivity extends BaseActivity
      */
     @Override
     public void onMediaClicked(int position) {
-        tabLayout.setVisibility(View.GONE);
-        viewPager.setVisibility(View.GONE);
-        mediaContainer.setVisibility(View.VISIBLE);
+        binding.tabLayout.setVisibility(View.GONE);
+        binding.viewPager.setVisibility(View.GONE);
+        binding.mediaContainer.setVisibility(View.VISIBLE);
         if (mediaDetails == null || !mediaDetails.isVisible()) {
             // set isFeaturedImage true for featured images, to include author field on media detail
             mediaDetails = MediaDetailPagerFragment.newInstance(false, true);
@@ -216,9 +215,9 @@ public class CategoryDetailsActivity extends BaseActivity
     @Override
     public void onBackPressed() {
         if (supportFragmentManager.getBackStackEntryCount() == 1){
-            tabLayout.setVisibility(View.VISIBLE);
-            viewPager.setVisibility(View.VISIBLE);
-            mediaContainer.setVisibility(View.GONE);
+            binding.tabLayout.setVisibility(View.VISIBLE);
+            binding.viewPager.setVisibility(View.VISIBLE);
+            binding.mediaContainer.setVisibility(View.GONE);
         }
         super.onBackPressed();
     }

@@ -54,7 +54,7 @@ class UploadClient @Inject constructor(
     ): Observable<StashUploadResult> {
         if (contribution.isCompleted()) {
             return Observable.just(
-                StashUploadResult(StashUploadState.SUCCESS, contribution.fileKey)
+                StashUploadResult(StashUploadState.SUCCESS, contribution.fileKey,null)
             )
         }
 
@@ -76,12 +76,13 @@ class UploadClient @Inject constructor(
 
         val index = AtomicInteger()
         val failures = AtomicBoolean()
+        val errorMessage = AtomicReference<String>()
         compositeDisposable.add(
             Observable.fromIterable(fileChunks).forEach { chunkFile: File ->
                 if (canProcess(contribution, failures)) {
                     processChunk(
                         filename, contribution, notificationUpdater, chunkFile,
-                        failures, chunkInfo, index, mediaType!!, file!!, fileChunks.size
+                        failures, chunkInfo, index, errorMessage, mediaType!!, file!!, fileChunks.size
                     )
                 }
             }
@@ -90,24 +91,25 @@ class UploadClient @Inject constructor(
         return when {
             contribution.isPaused() -> {
                 Timber.d("Upload stash paused %s", contribution.pageId)
-                Observable.just(StashUploadResult(StashUploadState.PAUSED, null))
+                Observable.just(StashUploadResult(StashUploadState.PAUSED, null, null))
             }
             failures.get() -> {
                 Timber.d("Upload stash contains failures %s", contribution.pageId)
-                Observable.just(StashUploadResult(StashUploadState.FAILED, null))
+                Observable.just(StashUploadResult(StashUploadState.FAILED, null, errorMessage.get()))
             }
             chunkInfo.get() != null -> {
                 Timber.d("Upload stash success %s", contribution.pageId)
                 Observable.just(
                     StashUploadResult(
                         StashUploadState.SUCCESS,
-                        chunkInfo.get()!!.uploadResult!!.filekey
+                        chunkInfo.get()!!.uploadResult!!.filekey,
+                        "success"
                     )
                 )
             }
             else -> {
                 Timber.d("Upload stash failed %s", contribution.pageId)
-                Observable.just(StashUploadResult(StashUploadState.FAILED, null))
+                Observable.just(StashUploadResult(StashUploadState.FAILED, null,null))
             }
         }
     }
@@ -116,7 +118,7 @@ class UploadClient @Inject constructor(
         filename: String, contribution: Contribution,
         notificationUpdater: NotificationUpdateProgressListener, chunkFile: File,
         failures: AtomicBoolean, chunkInfo: AtomicReference<ChunkInfo?>, index: AtomicInteger,
-        mediaType: MediaType, file: File, totalChunks: Int
+        errorMessage : AtomicReference<String>, mediaType: MediaType, file: File, totalChunks: Int
     ) {
         if (shouldSkip(chunkInfo, index)) {
             index.incrementAndGet()
@@ -150,6 +152,7 @@ class UploadClient @Inject constructor(
                     notificationUpdater.onChunkUploaded(contribution, chunkInfo.get())
                 }, { throwable: Throwable? ->
                     Timber.e(throwable, "Received error in chunk upload")
+                    errorMessage.set(throwable?.message)
                     failures.set(true)
                 }
             )

@@ -1,11 +1,10 @@
 package fr.free.nrw.commons.explore.map;
 
 import android.content.Context;
-import com.mapbox.mapboxsdk.annotations.Marker;
+import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
-import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import java.util.List;
 
 public class ExploreMapContract {
@@ -18,11 +17,10 @@ public class ExploreMapContract {
         void showLocationOffDialog();
         void openLocationSettings();
         void hideBottomDetailsSheet();
-        void displayBottomSheetWithInfo(Marker marker);
         LatLng getMapCenter();
         LatLng getMapFocus();
         LatLng getLastMapFocus();
-        void addMarkersToMap(final List<NearbyBaseMarker> nearbyBaseMarkers);
+        void addMarkersToMap(final List<BaseMarker> nearbyBaseMarkers);
         void clearAllMarkers();
         void addSearchThisAreaButtonAction();
         void setSearchThisAreaButtonVisibility(boolean isVisible);
