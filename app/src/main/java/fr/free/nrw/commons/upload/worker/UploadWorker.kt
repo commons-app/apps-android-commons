@@ -300,8 +300,10 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
      */
     @SuppressLint("StringFormatInvalid", "CheckResult")
     private suspend fun uploadContribution(contribution: Contribution) {
+        contribution.errorMessage = null
         if (contribution.localUri == null || contribution.localUri.path == null) {
             Timber.e("""upload: ${contribution.media.filename} failed, file path is null""")
+            contribution.errorMessage = "file path is null"
         }
 
         val media = contribution.media
@@ -381,6 +383,9 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
 
                         } else {
                             Timber.e("Stash Upload failed")
+                            if (uploadResult != null && contribution.errorMessage == null) {
+                                contribution.errorMessage = uploadResult.result
+                            }
                             showFailedNotification(contribution)
                             contribution.state = Contribution.STATE_FAILED
                             contribution.chunkInfo = null
@@ -388,6 +393,10 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
 
                         }
                     }catch (exception : Exception){
+                        if (contribution.errorMessage == null) {
+                            contribution.errorMessage = "upload from stash failed with exception"
+                        }
+                        contribution.exceptionMessage = exception.toString()
                         Timber.e(exception)
                         Timber.e("Upload from stash failed for contribution : $filename")
                         showFailedNotification(contribution)
@@ -404,6 +413,9 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                     contributionDao.saveSynchronous(contribution)
                 }
                 else -> {
+                    if (contribution.errorMessage == null) {
+                        contribution.errorMessage = "upload to stash failed"
+                    }
                     Timber.e("""upload file to stash failed with status: ${stashUploadResult.state}""")
                     showInvalidLoginNotification(contribution)
                     contribution.state = Contribution.STATE_FAILED
@@ -423,6 +435,10 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                 }
             }
         }catch (exception: Exception){
+            if (contribution.errorMessage == null) {
+                contribution.errorMessage = "upload to stash failed with exception"
+            }
+            contribution.exceptionMessage = exception.toString()
             Timber.e(exception)
             Timber.e("Stash upload failed for contribution: $filename")
             showFailedNotification(contribution)
