@@ -6,7 +6,7 @@ import static fr.free.nrw.commons.location.LocationServiceManager.LocationChange
 
 import android.location.Location;
 import android.view.View;
-import com.mapbox.mapboxsdk.annotations.Marker;
+import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.MapController;
 import fr.free.nrw.commons.MapController.ExplorePlacesInfo;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
@@ -14,7 +14,6 @@ import fr.free.nrw.commons.explore.map.ExploreMapController.NearbyBaseMarkerThum
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
-import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import io.reactivex.Observable;
 import java.lang.reflect.Proxy;
 import java.util.List;
@@ -159,30 +158,28 @@ public class ExploreMapPresenter
      * @param explorePlacesInfo This variable has placeToCenter list information and distances.
      */
     public void updateMapMarkers(
-        MapController.ExplorePlacesInfo explorePlacesInfo, Marker selectedMarker) {
+        MapController.ExplorePlacesInfo explorePlacesInfo) {
         if (explorePlacesInfo.mediaList != null) {
-            prepareNearbyBaseMarkers(explorePlacesInfo, selectedMarker);
+            prepareNearbyBaseMarkers(explorePlacesInfo);
         } else {
             lockUnlockNearby(false); // So that new location updates wont come
             exploreMapFragmentView.setProgressBarVisibility(false);
         }
     }
 
-    void prepareNearbyBaseMarkers(MapController.ExplorePlacesInfo explorePlacesInfo,
-        Marker selectedMarker) {
+    void prepareNearbyBaseMarkers(MapController.ExplorePlacesInfo explorePlacesInfo) {
         exploreMapController
             .loadAttractionsFromLocationToBaseMarkerOptions(explorePlacesInfo.curLatLng,
                 // Curlatlang will be used to calculate distances
                 explorePlacesInfo.explorePlaceList,
                 exploreMapFragmentView.getContext(),
                 this,
-                selectedMarker,
                 explorePlacesInfo);
     }
 
     @Override
-    public void onNearbyBaseMarkerThumbsReady(List<NearbyBaseMarker> baseMarkers,
-        ExplorePlacesInfo explorePlacesInfo, Marker selectedMarker) {
+    public void onNearbyBaseMarkerThumbsReady(List<BaseMarker> baseMarkers,
+        ExplorePlacesInfo explorePlacesInfo) {
         if (null != exploreMapFragmentView) {
             exploreMapFragmentView.addMarkersToMap(baseMarkers);
             lockUnlockNearby(false); // So that new location updates wont come

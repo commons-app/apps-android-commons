@@ -18,9 +18,8 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ApplicationProvider
 import com.github.chrisbanes.photoview.PhotoView
-import com.mapbox.mapboxsdk.camera.CameraPosition
-import com.mapbox.mapboxsdk.geometry.LatLng
 import com.nhaarman.mockitokotlin2.mock
+import fr.free.nrw.commons.CameraPosition
 import fr.free.nrw.commons.LocationPicker.LocationPicker
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
 import fr.free.nrw.commons.OkHttpConnectionFactory
@@ -28,6 +27,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.upload.ImageCoordinates
 import fr.free.nrw.commons.upload.UploadActivity
@@ -355,7 +355,8 @@ class UploadMediaDetailFragmentUnitTest {
         val cameraPosition = Mockito.mock(CameraPosition::class.java)
         val latLng = Mockito.mock(LatLng::class.java)
 
-        Whitebox.setInternalState(cameraPosition, "target", latLng)
+        Whitebox.setInternalState(cameraPosition, "latitude", latLng.latitude)
+        Whitebox.setInternalState(cameraPosition, "longitude", latLng.longitude)
         Whitebox.setInternalState(fragment, "editableUploadItem", uploadItem)
 
         `when`(LocationPicker.getCameraPosition(intent)).thenReturn(cameraPosition)
@@ -376,7 +377,8 @@ class UploadMediaDetailFragmentUnitTest {
         val latLng = Mockito.mock(LatLng::class.java)
 
         Whitebox.setInternalState(fragment, "callback", callback)
-        Whitebox.setInternalState(cameraPosition, "target", latLng)
+        Whitebox.setInternalState(cameraPosition, "latitude", latLng.latitude)
+        Whitebox.setInternalState(cameraPosition, "longitude", latLng.longitude)
         Whitebox.setInternalState(fragment, "editableUploadItem", uploadItem)
         Whitebox.setInternalState(fragment,"isMissingLocationDialog",true)
         Whitebox.setInternalState(fragment, "presenter", presenter)

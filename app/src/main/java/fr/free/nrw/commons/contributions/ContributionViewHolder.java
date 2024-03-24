@@ -90,7 +90,11 @@ public class ContributionViewHolder extends RecyclerView.ViewHolder {
                 imageRequest = ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageSource))
                     .setProgressiveRenderingEnabled(true)
                     .build();
-            } else if(imageSource != null) {
+            }
+            else if (URLUtil.isFileUrl(imageSource)){
+                imageRequest=ImageRequest.fromUri(Uri.parse(imageSource));
+            }
+            else if(imageSource != null) {
                 final File file = new File(imageSource);
                 imageRequest = ImageRequest.fromFile(file);
             }

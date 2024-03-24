@@ -84,6 +84,7 @@
   <string name="login_success">Kirjautuminen onnistui!</string>
   <string name="login_failed">Kirjautuminen epäonnistui!</string>
   <string name="upload_failed">Tiedostoa ei löytynyt. Yritä toista tiedostoa.</string>
+  <string name="unrestricted_battery_mode">Poistetaanko akun optimointi käytöstä?</string>
   <string name="authentication_failed">Tunnistautuminen epäonnistui, kirjaudu uudelleen sisään</string>
   <string name="uploading_started">Tallentaminen aloitettiin!</string>
   <string name="uploading_queued">Lataus jonossa (rajoitettu yhteystila käytössä)</string>
@@ -314,7 +315,7 @@
   <string name="search_tab_title_categories">Luokat</string>
   <string name="search_tab_title_depictions">Kohteet</string>
   <string name="explore_tab_title_featured">Suositeltu</string>
-  <string name="explore_tab_title_mobile">Tallennettu mobiilin kautta</string>
+  <string name="explore_tab_title_mobile">Tallennettu mobiililaitteella</string>
   <string name="explore_tab_title_map">Kartta</string>
   <string name="successful_wikidata_edit">Kuva lisätty Wikidata-kohteeseen %1$s!</string>
   <string name="wikidata_edit_failure">Vastaavaa Wikidata-kohdetta ei voitu päivittää!</string>
@@ -651,11 +652,16 @@
   <string name="mark_as_not_for_upload">Merkitse ei-tallennettavaksi</string>
   <string name="this_image_is_already_uploaded">Tämä kuva on jo tallennettu</string>
   <string name="image_selected">Kuva valittu</string>
+  <string name="menu_view_report">Ilmoita</string>
+  <string name="menu_view_set_white_background">Aseta valkoinen tausta</string>
+  <string name="menu_view_set_black_background">Aseta musta tausta</string>
   <string name="report_user">Ilmianna käyttäjä</string>
+  <string name="report_content">Ilmianna sisältö</string>
   <string name="request_user_block">Pyydä tämän käyttäjän estämistä</string>
   <string name="welcome_to_full_screen_mode_text">Tervetuloa koko näytön valintatilaan</string>
   <string name="full_screen_mode_zoom_info">Käytä kahta sormea lähentääksesi ja loitontaaksesi.</string>
   <string name="full_screen_mode_features_info">Pyyhkäise nopeasti ja pitkään suorittaaksesi nämä toiminnot: \n- Vasen/Oikea: Siirry edelliseen/seuraavaan \n- Ylös: Valitse\n- Alas: Merkitse ei-tallennettavaksi.</string>
+  <string name="see_your_achievements">Näytä omat saavutukset</string>
   <string name="edit_image">Muokkaa kuvaa</string>
   <string name="edit_location">Muokkaa sijaintia</string>
   <string name="send_thanks_to_author">Kiitä tekijää</string>

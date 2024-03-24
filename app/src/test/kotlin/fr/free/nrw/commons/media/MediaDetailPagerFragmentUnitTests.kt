@@ -21,6 +21,7 @@ import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.databinding.FragmentMediaDetailPagerBinding
 import fr.free.nrw.commons.explore.SearchActivity
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins
@@ -33,6 +34,7 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
+import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows
@@ -49,6 +51,8 @@ class MediaDetailPagerFragmentUnitTests {
     private lateinit var fragment: MediaDetailPagerFragment
     private lateinit var context: Context
     private lateinit var fragmentManager: FragmentManager
+
+    private lateinit var binding: FragmentMediaDetailPagerBinding
 
     @Mock
     private lateinit var outState: Bundle
@@ -84,8 +88,8 @@ class MediaDetailPagerFragmentUnitTests {
         Fresco.initialize(context)
 
         val activity = Robolectric.buildActivity(SearchActivity::class.java).create().get()
+        binding = FragmentMediaDetailPagerBinding.inflate(activity.layoutInflater)
 
-        fragment = MediaDetailPagerFragment.newInstance(false, true)
         fragment = MediaDetailPagerFragment.newInstance(false, false)
         fragmentManager = activity.supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
@@ -96,6 +100,8 @@ class MediaDetailPagerFragmentUnitTests {
             SessionManager::class.java.getDeclaredField("context")
         fieldContext.isAccessible = true
         fieldContext.set(sessionManager, context)
+
+        Whitebox.setInternalState(fragment, "binding", binding)
 
         doReturn(menuItem).`when`(menu).findItem(any())
         doReturn(menuItem).`when`(menuItem).isEnabled = any()

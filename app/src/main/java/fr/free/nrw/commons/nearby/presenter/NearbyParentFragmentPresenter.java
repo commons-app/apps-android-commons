@@ -14,7 +14,7 @@ import android.location.Location;
 import android.view.View;
 import androidx.annotation.MainThread;
 import androidx.annotation.Nullable;
-import com.mapbox.mapboxsdk.annotations.Marker;
+import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
@@ -23,14 +23,12 @@ import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.CheckBoxTriStates;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.MarkerPlaceGroup;
-import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyFilterState;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import java.lang.reflect.Proxy;
-import java.util.HashMap;
 import java.util.List;
 import timber.log.Timber;
 
@@ -138,12 +136,6 @@ public class NearbyParentFragmentPresenter
         nearbyParentFragmentView.hideBottomSheet();
     }
 
-
-    public void markerSelected(Marker marker) {
-        nearbyParentFragmentView.displayBottomSheetWithInfo(marker);
-    }
-
-
     /**
      * Nearby updates takes time, since they are network operations. During update time, we don't
      * want to get any other calls from user. So locking nearby.
@@ -215,9 +207,6 @@ public class NearbyParentFragmentPresenter
             nearbyParentFragmentView.populatePlaces(nearbyParentFragmentView.getMapFocus());
         } else { // Means location changed slightly, ie user is walking or driving.
             Timber.d("Means location changed slightly");
-            if (nearbyParentFragmentView.isCurrentLocationMarkerVisible()) { // Means user wants to see their live location
-                nearbyParentFragmentView.recenterMap(curLatLng);
-            }
         }
     }
 
@@ -227,17 +216,14 @@ public class NearbyParentFragmentPresenter
      *
      * @param nearbyPlacesInfo This variable has placeToCenter list information and distances.
      */
-    public void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo,
-        Marker selectedMarker, boolean shouldTrackPosition) {
+    public void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo, boolean shouldTrackPosition) {
         if (null != nearbyParentFragmentView) {
             nearbyParentFragmentView.clearAllMarkers();
-            List<NearbyBaseMarker> nearbyBaseMarkers = NearbyController
+            List<BaseMarker> baseMarkers = NearbyController
                 .loadAttractionsFromLocationToBaseMarkerOptions(nearbyPlacesInfo.curLatLng,
                     // Curlatlang will be used to calculate distances
-                    nearbyPlacesInfo.placeList,
-                    nearbyParentFragmentView.getContext(),
-                    bookmarkLocationDao.getAllBookmarksLocations());
-            nearbyParentFragmentView.updateMapMarkers(nearbyBaseMarkers, selectedMarker);
+                    nearbyPlacesInfo.placeList);
+            nearbyParentFragmentView.updateMapMarkers(baseMarkers);
             lockUnlockNearby(false); // So that new location updates wont come
             nearbyParentFragmentView.setProgressBarVisibility(false);
             nearbyParentFragmentView.updateListFragment(nearbyPlacesInfo.placeList);
@@ -278,24 +264,6 @@ public class NearbyParentFragmentPresenter
     }
 
     @Override
-    public void onCameraMove(com.mapbox.mapboxsdk.geometry.LatLng latLng) {
-        // If our nearby markers are calculated at least once
-        if (NearbyController.latestSearchLocation != null) {
-            double distance = latLng.distanceTo
-                (LocationUtils.commonsLatLngToMapBoxLatLng(NearbyController.latestSearchLocation));
-            if (nearbyParentFragmentView.isNetworkConnectionEstablished()) {
-                if (distance > NearbyController.latestSearchRadius) {
-                    //nearbyParentFragmentView.setSearchThisAreaButtonVisibility(true);
-                } else {
-                    nearbyParentFragmentView.setSearchThisAreaButtonVisibility(false);
-                }
-            }
-        } else {
-            nearbyParentFragmentView.setSearchThisAreaButtonVisibility(false);
-        }
-    }
-
-    @Override
     public void filterByMarkerType(List<Label> selectedLabels, int state,
         boolean filterForPlaceState, boolean filterForAllNoneType) {
         if (filterForAllNoneType) {// Means we will set labels based on states
@@ -329,23 +297,14 @@ public class NearbyParentFragmentPresenter
 
     @Override
     @MainThread
-    public void updateMapMarkersToController(List<NearbyBaseMarker> nearbyBaseMarkers) {
-        NearbyController.markerExistsMap = new HashMap<>();
-        NearbyController.markerNeedPicMap = new HashMap<>();
+    public void updateMapMarkersToController(List<BaseMarker> baseMarkers) {
         NearbyController.markerLabelList.clear();
-        for (int i = 0; i < nearbyBaseMarkers.size(); i++) {
-            NearbyBaseMarker nearbyBaseMarker = nearbyBaseMarkers.get(i);
+        for (int i = 0; i < baseMarkers.size(); i++) {
+            BaseMarker nearbyBaseMarker = baseMarkers.get(i);
             NearbyController.markerLabelList.add(
-                new MarkerPlaceGroup(nearbyBaseMarker.getMarker(),
+                new MarkerPlaceGroup(
                     bookmarkLocationDao.findBookmarkLocation(nearbyBaseMarker.getPlace()),
                     nearbyBaseMarker.getPlace()));
-            //TODO: fix bookmark location
-            NearbyController.markerExistsMap.put(
-                (nearbyBaseMarkers.get(i).getPlace().hasWikidataLink()),
-                nearbyBaseMarkers.get(i).getMarker());
-            NearbyController.markerNeedPicMap.put(
-                ((nearbyBaseMarkers.get(i).getPlace().pic == null) ? true : false),
-                nearbyBaseMarkers.get(i).getMarker());
         }
     }
 
@@ -412,16 +371,6 @@ public class NearbyParentFragmentPresenter
         if (null != nearbyParentFragmentView) {
             nearbyParentFragmentView.addSearchThisAreaButtonAction();
             initializeMapOperations();
-        }
-    }
-
-    public boolean areLocationsClose(LatLng cameraTarget, LatLng lastKnownLocation) {
-        double distance = LocationUtils.commonsLatLngToMapBoxLatLng(cameraTarget)
-            .distanceTo(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation));
-        if (distance > NearbyController.currentLocationSearchRadius * 3 / 4) {
-            return false;
-        } else {
-            return true;
         }
     }
 }

@@ -75,7 +75,7 @@
   <string name="share_title_hint" fuzzy="true">Naziv (obavezno)</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">Prijava nije moguća – mrežna pogreška</string>
-  <string name="login_failed_throttled">Previše neuspješnih pokušaja, molimo probajte opet za par minuta.</string>
+  <string name="login_failed_throttled">Previše neuspješnih pokušaja. Molimo probajte opet za nekoliko minuta.</string>
   <string name="login_failed_blocked">Ispričavamo se, ovaj je suradnik blokiran na Zajedničkom poslužitelju</string>
   <string name="login_failed_2fa_needed">Morate upisati autetifikacijski kôd od dva faktora</string>
   <string name="login_failed_generic">Prijava neuspješna</string>

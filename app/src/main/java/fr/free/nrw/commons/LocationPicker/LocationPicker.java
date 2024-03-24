@@ -2,7 +2,7 @@ package fr.free.nrw.commons.LocationPicker;
 
 import android.app.Activity;
 import android.content.Intent;
-import com.mapbox.mapboxsdk.camera.CameraPosition;
+import fr.free.nrw.commons.CameraPosition;
 import fr.free.nrw.commons.Media;
 
 /**

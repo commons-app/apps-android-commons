@@ -29,8 +29,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.mapbox.mapboxsdk.camera.CameraPosition;
-import com.mapbox.mapboxsdk.geometry.LatLng;
+import fr.free.nrw.commons.CameraPosition;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -43,7 +42,6 @@ import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermission
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
-import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import java.util.List;
@@ -214,9 +212,9 @@ public class LocationPickerActivity extends BaseActivity implements
             fabCenterOnLocation.setVisibility(View.GONE);
             markerImage.setVisibility(View.GONE);
             shadow.setVisibility(View.GONE);
-            assert cameraPosition.target != null;
-            showSelectedLocationMarker(new GeoPoint(cameraPosition.target.getLatitude(),
-                cameraPosition.target.getLongitude()));
+            assert cameraPosition != null;
+            showSelectedLocationMarker(new GeoPoint(cameraPosition.getLatitude(),
+                cameraPosition.getLongitude()));
         }
         setupMapView();
     }
@@ -295,9 +293,11 @@ public class LocationPickerActivity extends BaseActivity implements
         smallToolbarText.setText(getResources().getString(R.string.pan_and_zoom_to_adjust));
         fabCenterOnLocation.setVisibility(View.VISIBLE);
         removeSelectedLocationMarker();
-        if (cameraPosition.target != null) {
-            mapView.getController().animateTo(new GeoPoint(cameraPosition.target.getLatitude(),
-                cameraPosition.target.getLongitude()));
+        if (cameraPosition != null && mapView != null) {
+            if (mapView.getController() != null) {
+                mapView.getController().animateTo(new GeoPoint(cameraPosition.getLatitude(),
+                    cameraPosition.getLongitude()));
+            }
         }
     }
 
@@ -314,9 +314,9 @@ public class LocationPickerActivity extends BaseActivity implements
      * move the location to the current media coordinates
      */
     private void adjustCameraBasedOnOptions() {
-        if (cameraPosition.target != null) {
-            mapView.getController().setCenter(new GeoPoint(cameraPosition.target.getLatitude(),
-                cameraPosition.target.getLongitude()));
+        if (cameraPosition != null) {
+            mapView.getController().setCenter(new GeoPoint(cameraPosition.getLatitude(),
+                cameraPosition.getLongitude()));
         }
     }
 
@@ -343,8 +343,8 @@ public class LocationPickerActivity extends BaseActivity implements
         if (media == null) {
             final Intent returningIntent = new Intent();
             returningIntent.putExtra(LocationPickerConstants.MAP_CAMERA_POSITION,
-                new CameraPosition(new LatLng(mapView.getMapCenter().getLatitude(),
-                    mapView.getMapCenter().getLongitude()), 14f, 0, 0));
+                new CameraPosition(mapView.getMapCenter().getLatitude(),
+                    mapView.getMapCenter().getLongitude(), 14.0));
             setResult(AppCompatActivity.RESULT_OK, returningIntent);
         } else {
             updateCoordinates(String.valueOf(mapView.getMapCenter().getLatitude()),
@@ -408,8 +408,8 @@ public class LocationPickerActivity extends BaseActivity implements
         for (int i = 0; i < overlays.size(); i++) {
             if (overlays.get(i) instanceof Marker) {
                 Marker item = (Marker) overlays.get(i);
-                if (cameraPosition.target.getLatitude() == item.getPosition().getLatitude()
-                    && cameraPosition.target.getLongitude() == item.getPosition().getLongitude()) {
+                if (cameraPosition.getLatitude() == item.getPosition().getLatitude()
+                    && cameraPosition.getLongitude() == item.getPosition().getLongitude()) {
                     mapView.getOverlays().remove(i);
                     mapView.invalidate();
                     break;
