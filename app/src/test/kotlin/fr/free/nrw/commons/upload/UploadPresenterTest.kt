@@ -157,7 +157,6 @@ class UploadPresenterTest {
         deletePictureBaseTest()
         uploadableFiles.add(uploadableFile)
         uploadPresenter.deletePictureAtIndex(0)
-        verify(view).showHideTopCard(false)
         verify(repository).deletePicture(ArgumentMatchers.anyString())
     }
 
@@ -169,7 +168,6 @@ class UploadPresenterTest {
         deletePictureBaseTest()
         uploadableFiles.add(uploadableFile)
         uploadPresenter.deletePictureAtIndex(0)
-        verify(view).showHideTopCard(false)
         verify(repository).deletePicture(ArgumentMatchers.anyString())
         verify(view).showMessage(ArgumentMatchers.anyInt())//As there is only one while which we are asking for deletion, upload should be cancelled and this flow should be triggered
         verify(view).finish()

@@ -19,8 +19,10 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.recentlanguages.Language
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao
-import fr.free.nrw.commons.upload.UploadMediaDetailAdapter
+import fr.free.nrw.commons.settings.SettingsFragment.createLocale
 import org.junit.Assert
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -34,6 +36,8 @@ import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import java.lang.reflect.Method
+import java.util.Locale
+
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
@@ -255,4 +259,30 @@ class SettingsFragmentUnitTests {
         verify(recentLanguagesTextView, times(1)).visibility = View.VISIBLE
     }
 
+    @Test
+    fun testCreateLocaleWithLanguageCode() {
+        val locale: Locale = createLocale("en")
+
+        assertEquals("en", locale.language)
+        assertEquals("",locale.country)
+        assertEquals("",locale.variant)
+    }
+
+    @Test
+    fun testCreateLocaleWithLanguageAndCountryCode() {
+        val locale: Locale = createLocale("zh-CN")
+
+        assertEquals("zh", locale.language)
+        assertEquals("CN",locale.country)
+        assertEquals("",locale.variant)
+    }
+
+    @Test
+    fun testCreateLocaleWithLanguageCountryAndVariantCode() {
+        val locale: Locale = createLocale("pt-BR-variant")
+
+        assertEquals("pt", locale.language)
+        assertEquals("BR",locale.country)
+        assertEquals("variant",locale.variant)
+    }
 }
