@@ -36,6 +36,12 @@ class NearbyControllerTest {
     private lateinit var nearbyPlaces: NearbyPlaces
 
     @Mock
+    private lateinit var screenTopRight: LatLng
+
+    @Mock
+    private lateinit var screenBottomLeft: LatLng
+
+    @Mock
     private lateinit var searchLatLong: LatLng
 
     @Mock
@@ -56,41 +62,48 @@ class NearbyControllerTest {
 
     @Test
     fun testLoadAttractionsForLocationTest() {
-        `when`(nearbyPlaces.radiusExpander(any(), any(), any(), any(), any()))
+        `when`(nearbyPlaces.radiusExpander(any(), any(), any(), any()))
             .thenReturn(Collections.emptyList())
         nearbyController.loadAttractionsFromLocation(
-            searchLatLong,
             currentLatLng,
-            false,
+            searchLatLong,
             false,
             true,
             customQuery
         )
+        nearbyController.loadAttractionsFromLocation(
+            currentLatLng,
+            screenTopRight,
+            screenBottomLeft,
+            searchLatLong,
+            false,
+            true,
+            false,
+            customQuery
+        )
         Mockito.verify(nearbyPlaces).radiusExpander(
-            eq(currentLatLng),
+            eq(searchLatLong),
             any(String::class.java),
             eq(false),
-            eq(true),
             eq(customQuery)
         )
     }
 
     @Test
     fun testLoadAttractionsForLocationTestNoQuery() {
-        `when`(nearbyPlaces.radiusExpander(any(), any(), any(), any(), anyOrNull()))
+        `when`(nearbyPlaces.radiusExpander(any(), any(), any(), anyOrNull()))
             .thenReturn(Collections.emptyList())
         nearbyController.loadAttractionsFromLocation(
-            searchLatLong,
             currentLatLng,
+            searchLatLong,
             false,
-            false,
-            true
+            true,
+            null
         )
         Mockito.verify(nearbyPlaces).radiusExpander(
-            eq(currentLatLng),
+            eq(searchLatLong),
             any(String::class.java),
             eq(false),
-            eq(true),
             eq(null)
         )
     }
@@ -102,8 +115,7 @@ class NearbyControllerTest {
                 currentLatLng,
                 null,
                 false,
-                false,
-                false,
+                true,
                 customQuery
             ), null
         )
@@ -136,11 +148,20 @@ class NearbyControllerTest {
         `when`(
             nearbyPlaces.radiusExpander(
                 searchLatLong, Locale.getDefault().language, false,
-                false, customQuery
+                customQuery
             )
         ).thenReturn(mutableListOf(place1, place2))
         val result = nearbyController.loadAttractionsFromLocation(
             currentLatLng,
+            searchLatLong,
+            false,
+            true,
+            customQuery
+        )
+        nearbyController.loadAttractionsFromLocation(
+            currentLatLng,
+            screenTopRight,
+            screenBottomLeft,
             searchLatLong,
             false,
             true,
@@ -178,7 +199,7 @@ class NearbyControllerTest {
         `when`(
             nearbyPlaces.radiusExpander(
                 searchLatLong, Locale.getDefault().language, false,
-                false, customQuery
+                customQuery
             )
         ).thenReturn(mutableListOf(place1, place2))
         val result = nearbyController.loadAttractionsFromLocation(
@@ -186,7 +207,6 @@ class NearbyControllerTest {
             searchLatLong,
             false,
             true,
-            false,
             customQuery
         )
         assertEquals(result.curLatLng, currentLatLng)
@@ -220,7 +240,7 @@ class NearbyControllerTest {
         `when`(
             nearbyPlaces.radiusExpander(
                 searchLatLong, Locale.getDefault().language, false,
-                false, customQuery
+                customQuery
             )
         ).thenReturn(mutableListOf(place1, place2))
         val result = nearbyController.loadAttractionsFromLocation(
@@ -228,7 +248,6 @@ class NearbyControllerTest {
             searchLatLong,
             false,
             true,
-            false,
             customQuery
         )
         assertEquals(result.curLatLng, currentLatLng)
