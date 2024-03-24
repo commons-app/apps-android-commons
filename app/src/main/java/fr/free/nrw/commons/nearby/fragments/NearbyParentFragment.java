@@ -116,6 +116,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import kotlin.Unit;
 import org.jetbrains.annotations.NotNull;
+import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.events.MapListener;
 import org.osmdroid.events.ScrollEvent;
@@ -489,7 +490,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             final AdvanceQueryFragment fragment = new AdvanceQueryFragment();
             final Bundle bundle = new Bundle();
             try {
-                bundle.putString("query", FileUtils.readFromResource("/queries/nearby_query.rq"));
+                bundle.putString("query", FileUtils.readFromResource("/queries/radius_query_for_upload_wizard.rq"));
             } catch (IOException e) {
                 Timber.e(e);
             }
@@ -1119,11 +1120,52 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void populatePlaces(final fr.free.nrw.commons.location.LatLng curlatLng) {
-        if (curlatLng.equals(getLastMapFocus())) { // Means we are checking around current location
-            populatePlacesForCurrentLocation(getLastMapFocus(), curlatLng, null);
+        IGeoPoint screenTopRight = mapView.getProjection().fromPixels(mapView.getWidth(), 0);
+        IGeoPoint screenBottomLeft = mapView.getProjection().fromPixels(0, mapView.getHeight());
+        fr.free.nrw.commons.location.LatLng screenTopRightLatLng = new fr.free.nrw.commons.location.LatLng(
+            screenBottomLeft.getLatitude(), screenBottomLeft.getLongitude(), 0);
+        fr.free.nrw.commons.location.LatLng screenBottomLeftLatLng = new fr.free.nrw.commons.location.LatLng(
+            screenTopRight.getLatitude(), screenTopRight.getLongitude(), 0);
+
+        // When the nearby fragment is opened immediately upon app launch, the {screenTopRightLatLng}
+        // and {screenBottomLeftLatLng} variables return {LatLng(0.0,0.0)} as output.
+        // To address this issue, A small delta value {delta = 0.02} is used to adjust the latitude
+        // and longitude values for {ZOOM_LEVEL = 14f}.
+        // This adjustment helps in calculating the east and west corner LatLng accurately.
+        // Note: This only happens when the nearby fragment is opened immediately upon app launch,
+        // otherwise {screenTopRightLatLng} and {screenBottomLeftLatLng} are used to determine
+        // the east and west corner LatLng.
+        if (screenTopRightLatLng.getLatitude() == 0.0 && screenTopRightLatLng.getLongitude() == 0.0
+            && screenBottomLeftLatLng.getLatitude() == 0.0
+            && screenBottomLeftLatLng.getLongitude() == 0.0) {
+            final double delta = 0.02;
+            final double westCornerLat = curlatLng.getLatitude() - delta;
+            final double westCornerLong = curlatLng.getLongitude() - delta;
+            final double eastCornerLat = curlatLng.getLatitude() + delta;
+            final double eastCornerLong = curlatLng.getLongitude() + delta;
+            screenTopRightLatLng = new fr.free.nrw.commons.location.LatLng(westCornerLat,
+                westCornerLong, 0);
+            screenBottomLeftLatLng = new fr.free.nrw.commons.location.LatLng(eastCornerLat,
+                eastCornerLong, 0);
+            if (curlatLng.equals(
+                getLastMapFocus())) { // Means we are checking around current location
+                populatePlacesForCurrentLocation(getLastMapFocus(), screenTopRightLatLng,
+                    screenBottomLeftLatLng, curlatLng, null);
+            } else {
+                populatePlacesForAnotherLocation(getLastMapFocus(), screenTopRightLatLng,
+                    screenBottomLeftLatLng, curlatLng, null);
+            }
         } else {
-            populatePlacesForAnotherLocation(getLastMapFocus(), curlatLng, null);
+            if (curlatLng.equals(
+                getLastMapFocus())) { // Means we are checking around current location
+                populatePlacesForCurrentLocation(getLastMapFocus(), screenTopRightLatLng,
+                    screenBottomLeftLatLng, curlatLng, null);
+            } else {
+                populatePlacesForAnotherLocation(getLastMapFocus(), screenTopRightLatLng,
+                    screenBottomLeftLatLng, curlatLng, null);
+            }
         }
+
         if (recenterToUserLocation) {
             recenterToUserLocation = false;
         }
@@ -1136,12 +1178,20 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             populatePlaces(curlatLng);
             return;
         }
+        IGeoPoint screenTopRight = mapView.getProjection().fromPixels(mapView.getWidth(), 0);
+        IGeoPoint screenBottomLeft = mapView.getProjection().fromPixels(0, mapView.getHeight());
+        fr.free.nrw.commons.location.LatLng screenTopRightLatLng = new fr.free.nrw.commons.location.LatLng(
+            screenBottomLeft.getLatitude(), screenBottomLeft.getLongitude(), 0);
+        fr.free.nrw.commons.location.LatLng screenBottomLeftLatLng = new fr.free.nrw.commons.location.LatLng(
+            screenTopRight.getLatitude(), screenTopRight.getLongitude(), 0);
 
         if (curlatLng.equals(lastFocusLocation) || lastFocusLocation == null
             || recenterToUserLocation) { // Means we are checking around current location
-            populatePlacesForCurrentLocation(lastKnownLocation, curlatLng, customQuery);
+            populatePlacesForCurrentLocation(lastKnownLocation, screenTopRightLatLng,
+                screenBottomLeftLatLng, curlatLng, customQuery);
         } else {
-            populatePlacesForAnotherLocation(lastKnownLocation, curlatLng, customQuery);
+            populatePlacesForAnotherLocation(lastKnownLocation, screenTopRightLatLng,
+                screenBottomLeftLatLng, curlatLng, customQuery);
         }
         if (recenterToUserLocation) {
             recenterToUserLocation = false;
@@ -1150,11 +1200,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private void populatePlacesForCurrentLocation(
         final fr.free.nrw.commons.location.LatLng curlatLng,
+        final fr.free.nrw.commons.location.LatLng screenTopRight,
+        final fr.free.nrw.commons.location.LatLng screenBottomLeft,
         final fr.free.nrw.commons.location.LatLng searchLatLng,
         @Nullable final String customQuery) {
         final Observable<NearbyController.NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(curlatLng, searchLatLng,
+                .loadAttractionsFromLocation(curlatLng, screenTopRight, screenBottomLeft,
+                    searchLatLng,
                     false, true, Utils.isMonumentsEnabled(new Date()), customQuery));
 
         compositeDisposable.add(nearbyPlacesInfoObservable
@@ -1182,11 +1235,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private void populatePlacesForAnotherLocation(
         final fr.free.nrw.commons.location.LatLng curlatLng,
+        final fr.free.nrw.commons.location.LatLng screenTopRight,
+        final fr.free.nrw.commons.location.LatLng screenBottomLeft,
         final fr.free.nrw.commons.location.LatLng searchLatLng,
         @Nullable final String customQuery) {
         final Observable<NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(curlatLng, searchLatLng,
+                .loadAttractionsFromLocation(curlatLng, screenTopRight, screenBottomLeft,
+                    searchLatLng,
                     false, true, Utils.isMonumentsEnabled(new Date()), customQuery));
 
         compositeDisposable.add(nearbyPlacesInfoObservable

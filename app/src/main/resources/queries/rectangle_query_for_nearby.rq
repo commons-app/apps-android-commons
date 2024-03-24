@@ -11,13 +11,12 @@ SELECT
   (SAMPLE(?wikipediaArticle) AS ?wikipediaArticle)
   (SAMPLE(?commonsArticle) AS ?commonsArticle)
   (SAMPLE(?commonsCategory) AS ?commonsCategory)
-  (SAMPLE(?monument) AS ?monument)
 WHERE {
   # Around given location
-  SERVICE wikibase:around {
+  SERVICE wikibase:box {
     ?item wdt:P625 ?location.
-    bd:serviceParam wikibase:center "Point(${LONG} ${LAT})"^^geo:wktLiteral. # Longitude latitude
-    bd:serviceParam wikibase:radius "${RAD}". # Radius in kilometers.
+     bd:serviceParam wikibase:cornerWest "Point(${LONG_WEST} ${LAT_WEST})"^^geo:wktLiteral.
+     bd:serviceParam wikibase:cornerEast "Point(${LONG_EAST} ${LAT_EAST})"^^geo:wktLiteral.
   }
 
   OPTIONAL {
@@ -45,17 +44,6 @@ WHERE {
     ?commonsArticle schema:about ?item.
     ?commonsArticle schema:isPartOf <https://commons.wikimedia.org/>.
   }
-
-  # Wiki Loves Monuments
-  OPTIONAL {?item p:P1435 ?monument}
-  OPTIONAL {?item p:P2186 ?monument}
-  OPTIONAL {?item p:P1459 ?monument}
-  OPTIONAL {?item p:P1460 ?monument}
-  OPTIONAL {?item p:P1216 ?monument}
-  OPTIONAL {?item p:P709 ?monument}
-  OPTIONAL {?item p:P718 ?monument}
-  OPTIONAL {?item p:P5694 ?monument}
-  OPTIONAL {?item p:P3426 ?monument}
 
   # Labels and descriptions
   SERVICE wikibase:label {
