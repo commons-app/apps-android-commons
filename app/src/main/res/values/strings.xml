@@ -73,13 +73,13 @@
   <string name="logging_in_message">Please wait…</string>
   <string name="updating_caption_title">Updating captions and descriptions</string>
   <string name="updating_caption_message">Please wait…</string>
-  <string name="login_success">Login success!</string>
-  <string name="login_failed">Login failed!</string>
+  <string name="login_success">Log-in success!</string>
+  <string name="login_failed">Log-in failed!</string>
   <string name="upload_failed">File not found. Please try another file.</string>
   <string name="retry_limit_reached">Maximum retry limit reached! Please cancel the upload and try again</string>
   <string name="unrestricted_battery_mode">Turn battery optimization off?</string>
   <string name="suggest_unrestricted_mode">Uploading more than 3 images works more reliably when the battery optimization is turned off. Please turn battery optimization off for the Commons app from the settings for a smooth upload experience. \n\nPossible steps to turn battery optimization off:\n\nStep 1: Tap on the \'Settings\' button below.\n\nStep 2: Switch from \'Not optimized\' to \'All apps\'.\n\nStep 3: Search for \"Commons\" or \"fr.free.nrw.commons\".\n\nStep 4: Tap it and select \'Don\'t optimize\'.\n\nStep 5: Press \'Done\'.</string>
-  <string name="authentication_failed">Authentication failed, please login again</string>
+  <string name="authentication_failed">Authentication failed. Please log in again.</string>
   <string name="uploading_started">Upload started!</string>
   <string name="uploading_queued">Upload queued (limited connection mode enabled)</string>
   <string name="upload_completed_notification_title">%1$s uploaded!</string>
@@ -106,11 +106,11 @@
   <string name="add_caption_toast">Please provide a caption for this file</string>
   <string name="share_description_hint">Description</string>
   <string name="share_caption_hint">Caption</string>
-  <string name="login_failed_network">Unable to login - network failure</string>
+  <string name="login_failed_network">Unable to log in - network failure</string>
   <string name="login_failed_throttled">Too many unsuccessful attempts. Please try again in a few minutes.</string>
   <string name="login_failed_blocked">Sorry, this user has been blocked on Commons</string>
   <string name="login_failed_2fa_needed">You must provide your two factor authentication code.</string>
-  <string name="login_failed_generic">Login failed</string>
+  <string name="login_failed_generic">Log-in failed</string>
   <string name="share_upload_button">Upload</string>
   <string name="multiple_share_base_title">Name this set</string>
   <string name="provider_modifications">Modifications</string>
@@ -272,7 +272,7 @@
   <string name="nominated_see_more">See webpage for details</string>
   <string name="skip_login">Skip</string>
   <string name="navigation_item_login">Log in</string>
-  <string name="skip_login_title">Do you really want to skip login?</string>
+  <string name="skip_login_title">Do you really want to skip log-in?</string>
   <string name="skip_login_message">You would have to log in to upload pictures in the future.</string>
   <string name="login_alert_message">Please log in to use this feature</string>
 
@@ -345,7 +345,7 @@
   <string name="construction_event_answer">Pictures showing technology or culture are very welcome on Commons.</string>
   <string name="congratulatory_message_quiz">You got %1$s of the answers correct. Congratulations!</string>
   <string name="warning_for_no_answer">Select one of the two options to answer the question</string>
-  <string name="user_not_logged_in">Login session expired, please log in again.</string>
+  <string name="user_not_logged_in">Log-in expired. Please log in again.</string>
   <string name="quiz_result_share_message">Share your quiz with your friends!</string>
   <string name="continue_message">Continue</string>
   <string name="correct">Correct Answer</string>
@@ -460,7 +460,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="location_loss_warning">Turning this off could trigger the new Android photo picker. It risks losing location information.\n\nTap on \'Read more\' for more information.</string>
 
   <string name="nearby_campaign_dismiss_message">You won\'t see the campaigns anymore. However, you can re-enable this notification in Settings if you wish.</string>
-  <string name="this_function_needs_network_connection">This function requires network connection, please check your connection settings.</string>
+  <string name="this_function_needs_network_connection">This function requires network connection. Please check your connection settings.</string>
   <string name="error_processing_image">Error occurred while processing the image. Please try again!</string>
   <string name="getting_edit_token">Getting token for editing</string>
   <string name="check_category_adding_template">Adding template for category check</string>
@@ -601,7 +601,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="place_state_needs_photo">Needs Photo</string>
   <string name="place_type">Place type:</string>
   <string name="nearby_search_hint">Bridge, museum, hotel etc.</string>
-  <string name="you_must_reset_your_passsword">Something went wrong with login, you must reset your password !!</string>
+  <string name="you_must_reset_your_passsword">Something went wrong with log-in. You must reset your password!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">CHILD CLASSES</string>
   <string name="title_for_parent_classes">PARENT CLASSES</string>
@@ -745,8 +745,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="add_location">Add location</string>
   <string name="feedback_sharing_data_alert">Please remove from this email any information that you are not comfortable sharing publicly. Also, please be aware that your email address with which you are posting, and the associated name and profile picture, will be visible publicly.</string>
   <string name="explore_map_details">Details</string>
-  <string name="achievements_unavailable_beta">Achievements are only available in the prod flavor, please check the developer documentation.</string>
-  <string name="leaderboard_unavailable_beta">The leaderboard is only available in the prod flavor, please check the developer documentation.</string>
+  <string name="achievements_unavailable_beta">Achievements are only available in the prod flavor. Please check the developer documentation.</string>
+  <string name="leaderboard_unavailable_beta">The leaderboard is only available in the prod flavor. Please check the developer documentation.</string>
   <string name="copyright_popup">Please only upload pictures you have taken by yourself. Uploaders of copyrighted images will be blocked. This applies to the beta flavor too. Thank you for testing the app!</string>
   <string name="select_feedback_data_choice">Please deselect any information that you are not comfortable sharing publicly.</string>
   <string name="api_level">API level</string>
@@ -792,6 +792,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="edit_location">Edit Location</string>
   <string name="send_thanks_to_author">Thank the author</string>
   <string name="error_sending_thanks">Error sending thanks to author.</string>
+  <string name="invalid_login_message">Your log-in has expired. Please log in again.</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d image selected</item>
     <item quantity="other">%d images selected</item>

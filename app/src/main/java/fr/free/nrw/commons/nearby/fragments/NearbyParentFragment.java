@@ -68,14 +68,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding3.appcompat.RxSearchView;
-import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.geometry.LatLngBounds;
+import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.CommonsApplication.BaseLogoutListener;
 import fr.free.nrw.commons.MapController.NearbyPlacesInfo;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.contributions.MainActivity;
@@ -87,11 +85,9 @@ import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.CheckBoxTriStates;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.MarkerPlaceGroup;
-import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter;
 import fr.free.nrw.commons.nearby.NearbyFilterState;
-import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.fragments.AdvanceQueryFragment.Callback;
@@ -100,7 +96,6 @@ import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ExecutorUtils;
 import fr.free.nrw.commons.utils.LayoutUtils;
-import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.NearbyFABUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
@@ -259,7 +254,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private NearbyParentFragmentPresenter presenter;
     private boolean isDarkTheme;
     private boolean isFABsExpanded;
-    private Marker selectedMarker;
     private Place selectedPlace;
     private Place clickedMarkerPlace;
     private boolean isClickedMarkerBookmarked;
@@ -269,12 +263,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private boolean recenterToUserLocation;
     private GeoPoint mapCenter;
     IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
-    private Marker currentLocationMarker;
     private Place lastPlaceToCenter;
     private fr.free.nrw.commons.location.LatLng lastKnownLocation;
     private boolean isVisibleToUser;
     private fr.free.nrw.commons.location.LatLng lastFocusLocation;
-    private LatLngBounds latLngBounds;
     private PlaceAdapter adapter;
     private GeoPoint lastMapFocus;
     private NearbyParentFragmentInstanceReadyCallback nearbyParentFragmentInstanceReadyCallback;
@@ -1061,22 +1053,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public LatLng getLastFocusLocation() {
-        return lastFocusLocation == null ? null
-            : LocationUtils.commonsLatLngToMapBoxLatLng(lastFocusLocation);
-    }
-
-    @Override
-    public boolean isCurrentLocationMarkerVisible() {
-        if (latLngBounds == null || currentLocationMarker == null) {
-            Timber.d("Map projection bounds are null");
-            return false;
-        } else {
-            return latLngBounds.contains(currentLocationMarker.getPosition());
-        }
-    }
-
-    @Override
     public boolean isAdvancedQueryFragmentVisible() {
         return isAdvancedQueryFragmentVisible;
     }
@@ -1086,16 +1062,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         setHasOptionsMenu(!shouldShow);
         flConainerNearbyChildren.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
         isAdvancedQueryFragmentVisible = shouldShow;
-    }
-
-    @Override
-    public void centerMapToPosition(fr.free.nrw.commons.location.LatLng searchLatLng) {
-        if (null != searchLatLng && !(
-            mapView.getMapCenter().getLatitude() == searchLatLng.getLatitude()
-                && mapView.getMapCenter().getLongitude() == searchLatLng.getLongitude())) {
-            recenterMarkerToPosition(
-                new GeoPoint(searchLatLng.getLatitude(), searchLatLng.getLongitude()));
-        }
     }
 
     @Override
@@ -1256,8 +1222,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     private void updateMapMarkers(final NearbyController.NearbyPlacesInfo nearbyPlacesInfo,
         final boolean shouldUpdateSelectedMarker) {
-        presenter.updateMapMarkers(nearbyPlacesInfo, selectedMarker, shouldUpdateSelectedMarker);
-        //TODO
+        presenter.updateMapMarkers(nearbyPlacesInfo, shouldUpdateSelectedMarker);
         setFilterState();
     }
 
@@ -1320,7 +1285,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
     }
 
-    @Override
     public void setTabItemContributions() {
         ((MainActivity) getActivity()).binding.pager.setCurrentItem(0);
         // TODO
@@ -1408,8 +1372,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 .setMessage(R.string.login_alert_message)
                 .setPositiveButton(R.string.login, (dialog, which) -> {
                     // logout of the app
-                    BaseLogoutListener logoutListener = new BaseLogoutListener();
-                    CommonsApplication app = (CommonsApplication) getActivity().getApplication();
+                    BaseLogoutListener logoutListener = new BaseLogoutListener(getActivity());                    CommonsApplication app = (CommonsApplication) getActivity().getApplication();
                     app.clearApplicationData(getContext(), logoutListener);
                 })
                 .show();
@@ -1455,18 +1418,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * onLogoutComplete is called after shared preferences and data stored in local database are
      * cleared.
      */
-    private class BaseLogoutListener implements CommonsApplication.LogoutListener {
-
-        @Override
-        public void onLogoutComplete() {
-            Timber.d("Logout complete callback received.");
-            final Intent nearbyIntent = new Intent(getActivity(), LoginActivity.class);
-            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(nearbyIntent);
-            getActivity().finish();
-        }
-    }
 
     @Override
     public void setFABPlusAction(final View.OnClickListener onClickListener) {
@@ -1492,7 +1443,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * Adds a marker for the user's current position. Adds a circle which uses the accuracy * 2, to
      * draw a circle which represents the user's position with an accuracy of 95%.
      * <p>
-     * Should be called only on creation of mapboxMap, there is other method to update markers
+     * Should be called only on creation of Map, there is other method to update markers
      * location with users move.
      *
      * @param curLatLng current location
@@ -1510,41 +1461,16 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
     }
 
-    /**
-     * Makes map camera follow users location with animation
-     *
-     * @param curLatLng current location of user
-     */
     @Override
-    public void updateMapToTrackPosition(final fr.free.nrw.commons.location.LatLng curLatLng) {
-        Timber.d("Updates map camera to track user position");
-        if (null != mapView) {
-            recenterMap(curLatLng);
-        }
-    }
-
-    @Override
-    public void updateMapMarkers(final List<NearbyBaseMarker> nearbyBaseMarkers,
-        final Marker selectedMarker) {
+    public void updateMapMarkers(final List<BaseMarker> BaseMarkers) {
         if (mapView != null) {
-            presenter.updateMapMarkersToController(nearbyBaseMarkers);
+            presenter.updateMapMarkersToController(BaseMarkers);
         }
     }
 
     @Override
     public void filterOutAllMarkers() {
         clearAllMarkers();
-    }
-
-    /**
-     * Displays all markers
-     */
-    @Override
-    public void displayAllMarkers() {
-        for (final MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
-            updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(),
-                NearbyController.currentLocation);
-        }
     }
 
     /**
@@ -1610,13 +1536,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             }
         }
         if (selectedLabels == null || selectedLabels.size() == 0) {
-            ArrayList<NearbyBaseMarker> markerArrayList = new ArrayList<>();
+            ArrayList<BaseMarker> markerArrayList = new ArrayList<>();
             for (final MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
-                NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
-                nearbyBaseMarker.place(markerPlaceGroup.getPlace());
+                BaseMarker nearbyBaseMarker = new BaseMarker();
+                nearbyBaseMarker.setPlace(markerPlaceGroup.getPlace());
                 markerArrayList.add(nearbyBaseMarker);
             }
-            addMarkersToMap(markerArrayList, null);
+            addMarkersToMap(markerArrayList);
         }
     }
 
@@ -1727,8 +1653,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * @param nearbyBaseMarkers The list of Place objects containing information about the
      *                          locations.
      */
-    private void addMarkersToMap(List<NearbyBaseMarker> nearbyBaseMarkers,
-        final Marker selectedMarker) {
+    private void addMarkersToMap(List<BaseMarker> nearbyBaseMarkers) {
         ArrayList<OverlayItem> items = new ArrayList<>();
         for (int i = 0; i < nearbyBaseMarkers.size(); i++) {
             Drawable icon = ContextCompat.getDrawable(getContext(),
@@ -1852,16 +1777,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void hideBottomDetailsSheet() {
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-    }
-
-    @Override
-    public void displayBottomSheetWithInfo(final Marker marker) {
-        selectedMarker = marker;
-        final NearbyMarker nearbyMarker = (NearbyMarker) marker;
-        final Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
-        passInfoToSheet(place);
-        hideBottomSheet();
-        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
     /**

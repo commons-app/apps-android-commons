@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.adapter.ImageAdapter
@@ -13,6 +14,7 @@ import org.junit.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.runner.RunWith
+import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
@@ -39,6 +41,9 @@ class CustomSelectorActivityTest {
 
     private lateinit var image: Image
 
+    @Mock
+    lateinit var contributionDao: ContributionDao
+
     /**
      * Set up the tests.
      */
@@ -58,6 +63,7 @@ class CustomSelectorActivityTest {
 
         Whitebox.setInternalState(activity, "imageFragment", imageFragment)
         Whitebox.setInternalState(imageFragment, "imageAdapter", Mockito.mock(ImageAdapter::class.java))
+        Whitebox.setInternalState(imageFragment,"contributionDao",contributionDao)
     }
 
     /**

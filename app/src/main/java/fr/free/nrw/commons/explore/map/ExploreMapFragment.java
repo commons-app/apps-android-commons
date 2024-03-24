@@ -38,7 +38,7 @@ import androidx.core.content.ContextCompat;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.mapbox.mapboxsdk.annotations.Marker;
+import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.MapController;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
@@ -53,8 +53,6 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.media.MediaClient;
-import fr.free.nrw.commons.nearby.NearbyBaseMarker;
-import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.MapUtils;
@@ -101,8 +99,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     private fr.free.nrw.commons.location.LatLng lastFocusLocation; // last location that map is focused
     public List<Media> mediaList;
     private boolean recenterToUserLocation; // true is recenter is needed (ie. when current location is in visible map boundaries)
-    private NearbyBaseMarker clickedMarker;
-    private Marker selectedMarker; // the marker that user selected
+    private BaseMarker clickedMarker;
     private GeoPoint mapCenter;
     private GeoPoint lastMapFocus;
     IntentFilter intentFilter = new IntentFilter(MapUtils.NETWORK_INTENT_ACTION);
@@ -436,7 +433,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
      * @param explorePlacesInfo holds several information as current location, marker list etc.
      */
     private void updateMapMarkers(final MapController.ExplorePlacesInfo explorePlacesInfo) {
-        presenter.updateMapMarkers(explorePlacesInfo, selectedMarker);
+        presenter.updateMapMarkers(explorePlacesInfo);
     }
 
     private void showErrorMessage(final String message) {
@@ -547,15 +544,6 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
 
-    @Override
-    public void displayBottomSheetWithInfo(final Marker marker) {
-        selectedMarker = marker;
-        final NearbyMarker nearbyMarker = (NearbyMarker) marker;
-        final Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
-        passInfoToSheet(place);
-        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-    }
-
     /**
      * Same bottom sheet carries information for all nearby places, so we need to pass information
      * (title, description, distance and links) to view on nearby marker click
@@ -644,7 +632,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
      * @param nearbyBaseMarkers The NearbyBaseMarker object representing the markers to be added.
      */
     @Override
-    public void addMarkersToMap(List<NearbyBaseMarker> nearbyBaseMarkers) {
+    public void addMarkersToMap(List<BaseMarker> nearbyBaseMarkers) {
         clearAllMarkers();
         for (int i = 0; i < nearbyBaseMarkers.size(); i++) {
             addMarkerToMap(nearbyBaseMarkers.get(i));
@@ -657,9 +645,9 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
      *
      * @param nearbyBaseMarker The NearbyBaseMarker object representing the marker to be added.
      */
-    private void addMarkerToMap(NearbyBaseMarker nearbyBaseMarker) {
+    private void addMarkerToMap(BaseMarker nearbyBaseMarker) {
         ArrayList<OverlayItem> items = new ArrayList<>();
-        Bitmap icon = nearbyBaseMarker.getMarker().getIcon().getBitmap();
+        Bitmap icon = nearbyBaseMarker.getIcon();
         Drawable d = new BitmapDrawable(getResources(), icon);
         GeoPoint point = new GeoPoint(
             nearbyBaseMarker.getPlace().location.getLatitude(),
@@ -699,7 +687,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
      *
      * @param nearbyBaseMarker The NearbyBaseMarker object representing the marker to be removed.
      */
-    private void removeMarker(NearbyBaseMarker nearbyBaseMarker) {
+    private void removeMarker(BaseMarker nearbyBaseMarker) {
         Place place = nearbyBaseMarker.getPlace();
         List<Overlay> overlays = binding.mapView.getOverlays();
         ItemizedOverlayWithFocus item;
