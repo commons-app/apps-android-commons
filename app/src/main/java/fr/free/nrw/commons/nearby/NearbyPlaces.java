@@ -95,4 +95,27 @@ public class NearbyPlaces {
         return okHttpJsonApiClient
             .getNearbyPlaces(cur, lang, radius, shouldQueryForMonuments, customQuery);
     }
+
+    /**
+     * Runs the Wikidata query to retrieve the KML String
+     *
+     * @param leftLatLng  coordinates of Left Most position
+     * @param rightLatLng coordinates of Right Most position
+     * @throws IOException if query fails
+     */
+    public String getPlacesAsKML(LatLng leftLatLng, LatLng rightLatLng) throws Exception {
+        return okHttpJsonApiClient.getPlacesAsKML(leftLatLng, rightLatLng);
+    }
+
+    /**
+     * Runs the Wikidata query to retrieve the GPX String
+     *
+     * @param leftLatLng  coordinates of Left Most position
+     * @param rightLatLng coordinates of Right Most position
+     * @throws IOException if query fails
+     */
+    public String getPlacesAsGPX(LatLng leftLatLng, LatLng rightLatLng) throws Exception {
+        return okHttpJsonApiClient.getPlacesAsGPX(leftLatLng, rightLatLng);
+    }
+
 }

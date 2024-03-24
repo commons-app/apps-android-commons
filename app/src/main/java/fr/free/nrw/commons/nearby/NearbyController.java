@@ -118,6 +118,14 @@ public class NearbyController extends MapController {
         return nearbyPlacesInfo;
     }
 
+    public String getPlacesAsKML(LatLng leftLatLng, LatLng rightLatLng) throws Exception {
+        return nearbyPlaces.getPlacesAsKML(leftLatLng, rightLatLng);
+    }
+
+    public String getPlacesAsGPX(LatLng leftLatLng, LatLng rightLatLng) throws Exception {
+        return nearbyPlaces.getPlacesAsGPX(leftLatLng, rightLatLng);
+    }
+
     /**
      * Prepares Place list to make their distance information update later.
      *

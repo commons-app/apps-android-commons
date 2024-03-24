@@ -22,6 +22,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.Html;
@@ -80,6 +81,7 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.CheckBoxTriStates;
@@ -105,17 +107,22 @@ import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 import kotlin.Unit;
 import org.jetbrains.annotations.NotNull;
+import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.events.MapListener;
 import org.osmdroid.events.ScrollEvent;
@@ -356,10 +363,50 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         @NonNull final MenuInflater inflater) {
         inflater.inflate(R.menu.nearby_fragment_menu, menu);
         MenuItem listMenu = menu.findItem(R.id.list_sheet);
+        MenuItem saveAsGPXButton = menu.findItem(R.id.list_item_gpx);
+        MenuItem saveAsKMLButton = menu.findItem(R.id.list_item_kml);
         listMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 listOptionMenuItemClicked();
+                return false;
+            }
+        });
+        saveAsGPXButton.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                try {
+                    IGeoPoint screenTopRight = mapView.getProjection().fromPixels(mapView.getWidth(), 0);
+                    IGeoPoint screenBottomLeft = mapView.getProjection().fromPixels(0, mapView.getHeight());
+                    fr.free.nrw.commons.location.LatLng screenTopRightLatLng = new fr.free.nrw.commons.location.LatLng(
+                        screenBottomLeft.getLatitude(), screenBottomLeft.getLongitude(), 0);
+                    fr.free.nrw.commons.location.LatLng screenBottomLeftLatLng = new fr.free.nrw.commons.location.LatLng(
+                        screenTopRight.getLatitude(), screenTopRight.getLongitude(), 0);
+                    setProgressBarVisibility(true);
+                    savePlacesAsGPX(screenTopRightLatLng,screenBottomLeftLatLng);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                return false;
+            }
+        });
+        saveAsKMLButton.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                try {
+                    IGeoPoint screenTopRight = mapView.getProjection().fromPixels(mapView.getWidth(), 0);
+                    IGeoPoint screenBottomLeft = mapView.getProjection().fromPixels(0, mapView.getHeight());
+                    fr.free.nrw.commons.location.LatLng screenTopRightLatLng = new fr.free.nrw.commons.location.LatLng(
+                        screenBottomLeft.getLatitude(), screenBottomLeft.getLongitude(), 0);
+                    fr.free.nrw.commons.location.LatLng screenBottomLeftLatLng = new fr.free.nrw.commons.location.LatLng(
+                        screenTopRight.getLatitude(), screenTopRight.getLongitude(), 0);
+                    setProgressBarVisibility(true);
+                    savePlacesAsKML(screenTopRightLatLng,screenBottomLeftLatLng);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
                 return false;
             }
         });
@@ -1146,6 +1193,102 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         if (recenterToUserLocation) {
             recenterToUserLocation = false;
         }
+    }
+
+    private void savePlacesAsKML(LatLng latLng, LatLng nextlatLng) {
+        final Observable<String> savePlacesObservable = Observable
+            .fromCallable(() -> nearbyController
+                .getPlacesAsKML(latLng, nextlatLng));
+        compositeDisposable.add(savePlacesObservable
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(kmlString -> {
+                    if (kmlString != null) {
+                        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+                            Locale.getDefault()).format(new Date());
+                        String fileName =
+                            "KML_" + timeStamp + "_" + System.currentTimeMillis() + ".kml";
+                        boolean saved = saveFile(kmlString, fileName);
+                        setProgressBarVisibility(false);
+                        if (saved) {
+                            Toast.makeText(this.getContext(),
+                                "KML file saved successfully at /Downloads/" + fileName,
+                                Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(this.getContext(), "Failed to save KML file.",
+                                Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                throwable -> {
+                    Timber.d(throwable);
+                    showErrorMessage(getString(R.string.error_fetching_nearby_places)
+                        + throwable.getLocalizedMessage());
+                    setProgressBarVisibility(false);
+                    presenter.lockUnlockNearby(false);
+                    setFilterState();
+                }));
+    }
+
+    private void savePlacesAsGPX(LatLng latLng, LatLng nextlatLng) {
+        final Observable<String> savePlacesObservable = Observable
+            .fromCallable(() -> nearbyController
+                .getPlacesAsGPX(latLng, nextlatLng));
+        compositeDisposable.add(savePlacesObservable
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(gpxString -> {
+                    if (gpxString != null) {
+                        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+                            Locale.getDefault()).format(new Date());
+                        String fileName =
+                            "GPX_" + timeStamp + "_" + System.currentTimeMillis() + ".gpx";
+                        boolean saved = saveFile(gpxString, fileName);
+                        setProgressBarVisibility(false);
+                        if (saved) {
+                            Toast.makeText(this.getContext(),
+                                "GPX file saved successfully at /Downloads/" + fileName,
+                                Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(this.getContext(), "Failed to save KML file.",
+                                Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                throwable -> {
+                    Timber.d(throwable);
+                    showErrorMessage(getString(R.string.error_fetching_nearby_places)
+                        + throwable.getLocalizedMessage());
+                    setProgressBarVisibility(false);
+                    presenter.lockUnlockNearby(false);
+                    setFilterState();
+                }));
+    }
+
+    public static boolean saveFile(String string, String fileName) {
+
+        if (!isExternalStorageWritable()) {
+            return false;
+        }
+
+        File downloadsDir = Environment.getExternalStoragePublicDirectory(
+            Environment.DIRECTORY_DOWNLOADS);
+        File kmlFile = new File(downloadsDir, fileName);
+
+        try {
+            FileOutputStream fos = new FileOutputStream(kmlFile);
+            fos.write(string.getBytes());
+            fos.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private static boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        return Environment.MEDIA_MOUNTED.equals(state);
     }
 
     private void populatePlacesForCurrentLocation(
