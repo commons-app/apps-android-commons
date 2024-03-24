@@ -391,18 +391,18 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void populatePlaces(LatLng curLatLng) {
+    public void populatePlaces(LatLng currentLatLng) {
         final Observable<MapController.ExplorePlacesInfo> nearbyPlacesInfoObservable;
-        if (curLatLng == null) {
+        if (currentLatLng == null) {
             checkPermissionsAndPerformAction();
             return;
         }
-        if (curLatLng.equals(getLastMapFocus())) { // Means we are checking around current location
-            nearbyPlacesInfoObservable = presenter.loadAttractionsFromLocation(curLatLng,
+        if (currentLatLng.equals(getLastMapFocus())) { // Means we are checking around current location
+            nearbyPlacesInfoObservable = presenter.loadAttractionsFromLocation(currentLatLng,
                 getLastMapFocus(), true);
         } else {
             nearbyPlacesInfoObservable = presenter.loadAttractionsFromLocation(getLastMapFocus(),
-                curLatLng, false);
+                currentLatLng, false);
         }
         compositeDisposable.add(nearbyPlacesInfoObservable
             .subscribeOn(Schedulers.io())
@@ -413,7 +413,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                         showResponseMessage(getString(R.string.no_pictures_in_this_area));
                     }
                     updateMapMarkers(explorePlacesInfo);
-                    lastMapFocus = new GeoPoint(curLatLng.getLatitude(), curLatLng.getLongitude());
+                    lastMapFocus = new GeoPoint(currentLatLng.getLatitude(), currentLatLng.getLongitude());
                 },
                 throwable -> {
                     Timber.d(throwable);
@@ -479,8 +479,8 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void recenterMap(LatLng curLatLng) {
-        if (isPermissionDenied || curLatLng == null) {
+    public void recenterMap(LatLng currentLatLng) {
+        if (isPermissionDenied || currentLatLng == null) {
             recenterToUserLocation = true;
             checkPermissionsAndPerformAction();
             if (!isPermissionDenied && !(locationManager.isNetworkProviderEnabled()
@@ -489,9 +489,9 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
             }
             return;
         }
-        recenterMarkerToPosition(new GeoPoint(curLatLng.getLatitude(), curLatLng.getLongitude()));
+        recenterMarkerToPosition(new GeoPoint(currentLatLng.getLatitude(), currentLatLng.getLongitude()));
         binding.mapView.getController()
-            .animateTo(new GeoPoint(curLatLng.getLatitude(), curLatLng.getLongitude()));
+            .animateTo(new GeoPoint(currentLatLng.getLatitude(), currentLatLng.getLongitude()));
         if (lastMapFocus != null) {
             Location mylocation = new Location("");
             Location dest_location = new Location("");

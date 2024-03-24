@@ -121,7 +121,7 @@ public class ContributionsFragment
     @Inject
     SessionManager sessionManager;
 
-    private LatLng curLatLng;
+    private LatLng currentLatLng;
 
     private boolean isFragmentAttachedBefore = false;
     private View checkBoxView;
@@ -542,9 +542,9 @@ public class ContributionsFragment
 
 
     private void updateClosestNearbyCardViewInfo() {
-        curLatLng = locationManager.getLastLocation();
+        currentLatLng = locationManager.getLastLocation();
         compositeDisposable.add(Observable.fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(curLatLng, curLatLng, true,
+                .loadAttractionsFromLocation(currentLatLng, currentLatLng, true,
                     false)) // thanks to boolean, it will only return closest result
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -571,9 +571,9 @@ public class ContributionsFragment
             if (closestNearbyPlace == null) {
                 binding.cardViewNearby.setVisibility(View.GONE);
             } else {
-                String distance = formatDistanceBetween(curLatLng, closestNearbyPlace.location);
+                String distance = formatDistanceBetween(currentLatLng, closestNearbyPlace.location);
                 closestNearbyPlace.setDistance(distance);
-                direction = (float) computeBearing(curLatLng, closestNearbyPlace.location);
+                direction = (float) computeBearing(currentLatLng, closestNearbyPlace.location);
                 binding.cardViewNearby.updateContent(closestNearbyPlace);
             }
         } else {
