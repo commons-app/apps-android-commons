@@ -26,4 +26,14 @@
     android:visibility="gone"
     app:srcCompat="@drawable/ic_error_red_24dp"
     tools:visibility="visible"/>
+
+  <ImageView
+    android:id="@+id/ic_cross"
+    android:layout_width="@dimen/half_standard_height"
+    android:layout_height="@dimen/half_standard_height"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentRight="true"
+    android:layout_gravity="end"
+    app:srcCompat="@drawable/ic_cancel_white"
+    tools:visibility="visible"/>
 </RelativeLayout>
