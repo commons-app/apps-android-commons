@@ -1913,13 +1913,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void recenterMap(fr.free.nrw.commons.location.LatLng curLatLng) {
+    public void recenterMap(fr.free.nrw.commons.location.LatLng currentLatLng) {
         // if user has denied permission twice, then show dialog
         if (isPermissionDenied) {
             if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
                 // this will run when user has given permission by opening app's settings
                 isPermissionDenied = false;
-                recenterMap(curLatLng);
+                recenterMap(currentLatLng);
             } else {
                 askForLocationPermission();
             }
@@ -1930,7 +1930,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 locationPermissionGranted();
             }
         }
-        if (curLatLng == null) {
+        if (currentLatLng == null) {
             recenterToUserLocation = true;
             return;
         }
