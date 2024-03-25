@@ -405,7 +405,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     @Override
     public void populatePlaces(LatLng currentLatLng) {
         final Observable<MapController.ExplorePlacesInfo> nearbyPlacesInfoObservable;
-        if (curLatLng == null) {
+        if (currentLatLng == null) {
             return;
         }
         if (currentLatLng.equals(getLastMapFocus())) { // Means we are checking around current location
