@@ -18,6 +18,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.customselector.model.CallbackStatus
 import fr.free.nrw.commons.customselector.model.Image
@@ -67,6 +68,9 @@ class ImageFragmentTest {
     @Mock
     private lateinit var savedInstanceState: Bundle
 
+    @Mock
+    lateinit var contributionDao: ContributionDao
+
     /**
      * Setup the image fragment.
      */
@@ -94,6 +98,7 @@ class ImageFragmentTest {
         Whitebox.setInternalState(fragment, "selectorRV", selectorRV )
         Whitebox.setInternalState(fragment, "loader", loader)
         Whitebox.setInternalState(fragment, "filteredImages", arrayListOf(image,image))
+        Whitebox.setInternalState(fragment, "contributionDao", contributionDao)
 
         viewModelField = fragment.javaClass.getDeclaredField("viewModel")
         viewModelField.isAccessible = true

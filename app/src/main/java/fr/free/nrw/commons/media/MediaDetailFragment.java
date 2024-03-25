@@ -1300,7 +1300,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     private String prettyDescription(Media media) {
-        final String description = chooseDescription(media);
+        String description = chooseDescription(media);
+        if (!description.isEmpty()) {
+            // Remove img tag that sometimes appears as a blue square in the app,
+            // see https://github.com/commons-app/apps-android-commons/issues/4345
+            description = description.replaceAll("[<](/)?img[^>]*[>]", "");
+        }
         return description.isEmpty() ? getString(R.string.detail_description_empty)
             : description;
     }

@@ -477,7 +477,7 @@ class NearbyParentFragmentPresenterTest {
         whenever(latestLocation.accuracy).thenReturn(0.0F)
         var nearbyPlacesInfo = NearbyController(nearbyPlaces).NearbyPlacesInfo()
         nearbyPlacesInfo.boundaryCoordinates = arrayOf()
-        nearbyPlacesInfo.curLatLng = latestLocation
+        nearbyPlacesInfo.currentLatLng = latestLocation
         nearbyPlacesInfo.searchLatLng = latestLocation
         nearbyPlacesInfo.placeList = null
 

@@ -38,7 +38,7 @@ public class NearbyParentFragmentPresenter
     LocationUpdateListener {
 
     private boolean isNearbyLocked;
-    private LatLng curLatLng;
+    private LatLng currentLatLng;
 
     private boolean placesLoadedOnce;
 
@@ -110,7 +110,7 @@ public class NearbyParentFragmentPresenter
         });
 
         nearbyParentFragmentView.setFABRecenterAction(v -> {
-            nearbyParentFragmentView.recenterMap(curLatLng);
+            nearbyParentFragmentView.recenterMap(currentLatLng);
         });
 
     }
@@ -171,11 +171,11 @@ public class NearbyParentFragmentPresenter
 
         LatLng lastLocation = nearbyParentFragmentView.getLastMapFocus();
         if (nearbyParentFragmentView.getMapCenter() != null) {
-            curLatLng = nearbyParentFragmentView.getMapCenter();
+            currentLatLng = nearbyParentFragmentView.getMapCenter();
         } else {
-            curLatLng = lastLocation;
+            currentLatLng = lastLocation;
         }
-        if (curLatLng == null) {
+        if (currentLatLng == null) {
             Timber.d("Skipping update of nearby places as location is unavailable");
             return;
         }
@@ -219,7 +219,7 @@ public class NearbyParentFragmentPresenter
         if (null != nearbyParentFragmentView) {
             nearbyParentFragmentView.clearAllMarkers();
             List<BaseMarker> baseMarkers = NearbyController
-                .loadAttractionsFromLocationToBaseMarkerOptions(nearbyPlacesInfo.curLatLng,
+                .loadAttractionsFromLocationToBaseMarkerOptions(nearbyPlacesInfo.currentLatLng,
                     // Curlatlang will be used to calculate distances
                     nearbyPlacesInfo.placeList);
             nearbyParentFragmentView.updateMapMarkers(baseMarkers);

@@ -25,7 +25,7 @@ public class ExploreMapPresenter
 
     BookmarkLocationsDao bookmarkLocationDao;
     private boolean isNearbyLocked;
-    private LatLng curLatLng;
+    private LatLng currentLatLng;
     private ExploreMapController exploreMapController;
 
     private static final ExploreMapContract.View DUMMY = (ExploreMapContract.View) Proxy
@@ -119,7 +119,7 @@ public class ExploreMapPresenter
     @Override
     public void setActionListeners(JsonKvStore applicationKvStore) {
         exploreMapFragmentView.setFABRecenterAction(v -> {
-            exploreMapFragmentView.recenterMap(curLatLng);
+            exploreMapFragmentView.recenterMap(currentLatLng);
         });
 
     }
@@ -142,11 +142,11 @@ public class ExploreMapPresenter
         updateMap(LOCATION_SIGNIFICANTLY_CHANGED);
     }
 
-    public Observable<ExplorePlacesInfo> loadAttractionsFromLocation(LatLng curLatLng,
+    public Observable<ExplorePlacesInfo> loadAttractionsFromLocation(LatLng currentLatLng,
         LatLng searchLatLng, boolean checkingAroundCurrent) {
         return Observable
             .fromCallable(() -> exploreMapController
-                .loadAttractionsFromLocation(curLatLng, searchLatLng, checkingAroundCurrent));
+                .loadAttractionsFromLocation(currentLatLng, searchLatLng, checkingAroundCurrent));
     }
 
     /**
@@ -167,7 +167,7 @@ public class ExploreMapPresenter
 
     void prepareNearbyBaseMarkers(MapController.ExplorePlacesInfo explorePlacesInfo) {
         exploreMapController
-            .loadAttractionsFromLocationToBaseMarkerOptions(explorePlacesInfo.curLatLng,
+            .loadAttractionsFromLocationToBaseMarkerOptions(explorePlacesInfo.currentLatLng,
                 // Curlatlang will be used to calculate distances
                 explorePlacesInfo.explorePlaceList,
                 exploreMapFragmentView.getContext(),

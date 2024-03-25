@@ -20,11 +20,11 @@ public class ExploreMapCalls {
     /**
      * Calls method to query Commons for uploads around a location
      *
-     * @param curLatLng coordinates of search location
+     * @param currentLatLng coordinates of search location
      * @return list of places obtained
      */
-    List<Media> callCommonsQuery(final LatLng curLatLng) {
-        String coordinates = curLatLng.getLatitude() + "|" + curLatLng.getLongitude();
+    List<Media> callCommonsQuery(final LatLng currentLatLng) {
+        String coordinates = currentLatLng.getLatitude() + "|" + currentLatLng.getLongitude();
         return mediaClient.getMediaListFromGeoSearch(coordinates).blockingGet();
     }
 

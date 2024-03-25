@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.customselector.helper.ImageHelper
 import fr.free.nrw.commons.customselector.helper.ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY
 import fr.free.nrw.commons.customselector.helper.ImageHelper.SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY
@@ -85,6 +86,8 @@ class ImageAdapter(
      */
     private var actionableImagesMap: TreeMap<Int, Image> = TreeMap()
 
+    private var uploadingContributionList: List<Contribution> = ArrayList()
+
     /**
      * Stores already added positions of actionable images
      */
@@ -156,9 +159,8 @@ class ImageAdapter(
             } else {
                 holder.itemUnselected()
             }
-
             imageLoader.queryAndSetView(
-                holder, image, ioDispatcher, defaultDispatcher
+                holder, image, ioDispatcher, defaultDispatcher ,uploadingContributionList
             )
             scope.launch {
                 val sharedPreferences: SharedPreferences =
@@ -169,7 +171,7 @@ class ImageAdapter(
                     // If the position is not already visited, that means the position is new then
                     // finds the next actionable image position from all images
                     if (!alreadyAddedPositions.contains(position)) {
-                        processThumbnailForActionedImage(holder, position)
+                        processThumbnailForActionedImage(holder, position, uploadingContributionList)
 
                     // If the position is already visited, that means the image is already present
                     // inside map, so it will fetch the image from the map and load in the holder
@@ -207,11 +209,12 @@ class ImageAdapter(
      */
     suspend fun processThumbnailForActionedImage(
         holder: ImageViewHolder,
-        position: Int
+        position: Int,
+        uploadingContributionList: List<Contribution>
     ) {
         val next = imageLoader.nextActionableImage(
             allImages, ioDispatcher, defaultDispatcher,
-            nextImagePosition
+            nextImagePosition, uploadingContributionList
         )
 
         // If next actionable image is found, saves it, as the the search for
@@ -331,12 +334,13 @@ class ImageAdapter(
     /**
      * Initialize the data set.
      */
-    fun init(newImages: List<Image>, fixedImages: List<Image>, emptyMap: TreeMap<Int, Image>) {
+    fun init(newImages: List<Image>, fixedImages: List<Image>, emptyMap: TreeMap<Int, Image>, uploadedImages: List<Contribution> = ArrayList()) {
         allImages = fixedImages
         val oldImageList:ArrayList<Image> = images
         val newImageList:ArrayList<Image> = ArrayList(newImages)
         actionableImagesMap = emptyMap
         alreadyAddedPositions = ArrayList()
+        uploadingContributionList = uploadedImages
         nextImagePosition = 0
         reachedEndOfFolder = false
         selectedImages = ArrayList()
@@ -358,11 +362,11 @@ class ImageAdapter(
     /**
      * Refresh the data in the adapter
      */
-    fun refresh(newImages: List<Image>, fixedImages: List<Image>) {
+    fun refresh(newImages: List<Image>, fixedImages: List<Image>, uploadingImages: List<Contribution> = ArrayList()) {
         numberOfSelectedImagesMarkedAsNotForUpload = 0
         images.clear()
         selectedImages = arrayListOf()
-        init(newImages, fixedImages, TreeMap())
+        init(newImages, fixedImages, TreeMap(),uploadingImages)
         notifyDataSetChanged()
     }
 
@@ -394,7 +398,7 @@ class ImageAdapter(
             while (iterator.hasNext()) {
                 val entry = iterator.next()
                 if (entry.value == image) {
-                    imagePositionAsPerIncreasingOrder -= 2
+                    imagePositionAsPerIncreasingOrder -= 1
                     iterator.remove()
                     alreadyAddedPositions.removeAt(alreadyAddedPositions.size - 1)
                     notifyItemRemoved(index)
@@ -452,6 +456,7 @@ class ImageAdapter(
     class ImageViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.image_thumbnail)
         private val uploadedGroup: Group = itemView.findViewById(R.id.uploaded_group)
+        private val uploadingGroup: Group = itemView.findViewById(R.id.uploading_group)
         private val notForUploadGroup: Group = itemView.findViewById(R.id.not_for_upload_group)
         private val selectedGroup: Group = itemView.findViewById(R.id.selected_group)
 
@@ -477,6 +482,13 @@ class ImageAdapter(
         }
 
         /**
+         * Item is uploading
+         */
+        fun itemUploading() {
+            uploadingGroup.visibility = View.VISIBLE
+        }
+
+        /**
          * Item is not for upload view
          */
         fun itemNotForUpload() {
@@ -492,6 +504,13 @@ class ImageAdapter(
          */
         fun isItemNotForUpload():Boolean {
             return notForUploadGroup.visibility == View.VISIBLE
+        }
+
+        /**
+         * Item is not uploading
+         */
+        fun itemNotUploading() {
+            uploadingGroup.visibility = View.GONE
         }
 
         /**
