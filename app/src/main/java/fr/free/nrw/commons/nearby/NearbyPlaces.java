@@ -38,13 +38,13 @@ public class NearbyPlaces {
     /**
      * Expands the radius as needed for the Wikidata query
      *
-     * @param curLatLng           coordinates of search location
+     * @param currentLatLng           coordinates of search location
      * @param lang                user's language
      * @param returnClosestResult true if only the nearest point is desired
      * @param customQuery
      * @return list of places obtained
      */
-    List<Place> radiusExpander(final LatLng curLatLng, final String lang,
+    List<Place> radiusExpander(final LatLng currentLatLng, final String lang,
         final boolean returnClosestResult, @Nullable final String customQuery) throws Exception {
 
         final int minResults;
@@ -66,7 +66,7 @@ public class NearbyPlaces {
 
         // Increase the radius gradually to find a satisfactory number of nearby places
         while (radius <= maxRadius) {
-            places = getFromWikidataQuery(curLatLng, lang, radius, customQuery);
+            places = getFromWikidataQuery(currentLatLng, lang, radius, customQuery);
             Timber.d("%d results at radius: %f", places.size(), radius);
             if (places.size() >= minResults) {
                 break;

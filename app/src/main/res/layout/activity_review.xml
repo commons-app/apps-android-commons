@@ -20,7 +20,9 @@
     android:orientation="vertical"
     android:visibility="visible">
 
-    <include layout="@layout/toolbar" />
+    <include
+      android:id="@+id/toolbarBinding"
+      layout="@layout/toolbar" />
 
 
     <androidx.appcompat.widget.AppCompatButton

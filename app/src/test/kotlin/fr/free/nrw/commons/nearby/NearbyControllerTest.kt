@@ -168,7 +168,7 @@ class NearbyControllerTest {
             false,
             customQuery
         )
-        assertEquals(result.curLatLng, currentLatLng)
+        assertEquals(result.currentLatLng, currentLatLng)
         assertEquals(result.searchLatLng, searchLatLong)
     }
 
@@ -209,7 +209,7 @@ class NearbyControllerTest {
             true,
             customQuery
         )
-        assertEquals(result.curLatLng, currentLatLng)
+        assertEquals(result.currentLatLng, currentLatLng)
         assertEquals(result.searchLatLng, searchLatLong)
     }
 
@@ -250,7 +250,7 @@ class NearbyControllerTest {
             true,
             customQuery
         )
-        assertEquals(result.curLatLng, currentLatLng)
+        assertEquals(result.currentLatLng, currentLatLng)
         assertEquals(result.searchLatLng, searchLatLong)
     }
 

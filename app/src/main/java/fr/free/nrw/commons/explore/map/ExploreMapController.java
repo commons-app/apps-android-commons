@@ -45,17 +45,17 @@ public class ExploreMapController extends MapController {
     }
 
     /**
-     * Takes location as parameter and returns ExplorePlaces info that holds curLatLng, mediaList,
+     * Takes location as parameter and returns ExplorePlaces info that holds currentLatLng, mediaList,
      * explorePlaceList and boundaryCoordinates
      *
-     * @param curLatLng                     is current geolocation
+     * @param currentLatLng                     is current geolocation
      * @param searchLatLng                  is the location that we want to search around
      * @param checkingAroundCurrentLocation is a boolean flag. True if we want to check around
      *                                      current location, false if another location
-     * @return explorePlacesInfo info that holds curLatLng, mediaList, explorePlaceList and
+     * @return explorePlacesInfo info that holds currentLatLng, mediaList, explorePlaceList and
      * boundaryCoordinates
      */
-    public ExplorePlacesInfo loadAttractionsFromLocation(LatLng curLatLng, LatLng searchLatLng,
+    public ExplorePlacesInfo loadAttractionsFromLocation(LatLng currentLatLng, LatLng searchLatLng,
         boolean checkingAroundCurrentLocation) {
 
         if (searchLatLng == null) {
@@ -65,7 +65,7 @@ public class ExploreMapController extends MapController {
 
         ExplorePlacesInfo explorePlacesInfo = new ExplorePlacesInfo();
         try {
-            explorePlacesInfo.curLatLng = curLatLng;
+            explorePlacesInfo.currentLatLng = currentLatLng;
             latestSearchLocation = searchLatLng;
 
             List<Media> mediaList = exploreMapCalls.callCommonsQuery(searchLatLng);
@@ -115,7 +115,7 @@ public class ExploreMapController extends MapController {
             // Our radius searched around us, will be used to understand when user search their own location, we will follow them
             if (checkingAroundCurrentLocation) {
                 currentLocationSearchRadius = latestSearchRadius;
-                currentLocation = curLatLng;
+                currentLocation = currentLatLng;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -129,7 +129,7 @@ public class ExploreMapController extends MapController {
      * @return baseMarkerOptions list that holds nearby places with their icons
      */
     public static List<BaseMarker> loadAttractionsFromLocationToBaseMarkerOptions(
-        LatLng curLatLng,
+        LatLng currentLatLng,
         final List<Place> placeList,
         Context context,
         NearbyBaseMarkerThumbCallback callback,
@@ -151,7 +151,7 @@ public class ExploreMapController extends MapController {
         if (vectorDrawable != null) {
             for (Place explorePlace : placeList) {
                 final BaseMarker baseMarker = new BaseMarker();
-                String distance = formatDistanceBetween(curLatLng, explorePlace.location);
+                String distance = formatDistanceBetween(currentLatLng, explorePlace.location);
                 explorePlace.setDistance(distance);
 
                 baseMarker.setTitle(
