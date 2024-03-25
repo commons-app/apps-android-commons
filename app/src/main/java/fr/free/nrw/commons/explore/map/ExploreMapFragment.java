@@ -491,13 +491,13 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void recenterMap(LatLng curLatLng) {
+    public void recenterMap(LatLng currentLatLng) {
         // if user has denied permission twice, then show dialog
         if (isPermissionDenied) {
             if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
                 // this will run when user has given permission by opening app's settings
                 isPermissionDenied = false;
-                recenterMap(curLatLng);
+                recenterMap(currentLatLng);
             } else {
                 askForLocationPermission();
             }
@@ -508,7 +508,7 @@ public class ExploreMapFragment extends CommonsDaggerSupportFragment
                 locationPermissionGranted();
             }
         }
-        if (curLatLng == null) {
+        if (currentLatLng == null) {
             recenterToUserLocation = true;
             return;
         }
