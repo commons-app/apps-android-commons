@@ -7,12 +7,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
@@ -34,9 +29,6 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
     private int position;
 
     private FragmentReviewImageBinding binding;
-
-
-
 
     @Inject
     SessionManager sessionManager;
