@@ -269,16 +269,15 @@ public class OkHttpJsonApiClient {
     /**
      * Make API Call to get Nearby Places
      *
-     * @param cur                     Search lat long
-     * @param language                Language
-     * @param radius                  Search Radius
-     * @param shouldQueryForMonuments : Should we query for monuments
+     * @param cur      Search lat long
+     * @param language Language
+     * @param radius   Search Radius
      * @return
      * @throws Exception
      */
     @Nullable
     public List<Place> getNearbyPlaces(final LatLng cur, final String language, final double radius,
-        final boolean shouldQueryForMonuments, final String customQuery)
+        final String customQuery)
         throws Exception {
 
         Timber.d("Fetching nearby items at radius %s", radius);
@@ -286,10 +285,9 @@ public class OkHttpJsonApiClient {
         final String wikidataQuery;
         if (customQuery != null) {
             wikidataQuery = customQuery;
-        } else if (!shouldQueryForMonuments) {
-            wikidataQuery = FileUtils.readFromResource("/queries/nearby_query.rq");
         } else {
-            wikidataQuery = FileUtils.readFromResource("/queries/nearby_query_monuments.rq");
+            wikidataQuery = FileUtils.readFromResource(
+                "/queries/radius_query_for_upload_wizard.rq");
         }
         final String query = wikidataQuery
             .replace("${RAD}", String.format(Locale.ROOT, "%.2f", radius))
@@ -297,6 +295,74 @@ public class OkHttpJsonApiClient {
             .replace("${LONG}", String.format(Locale.ROOT, "%.4f", cur.getLongitude()))
             .replace("${LANG}", language);
 
+        final HttpUrl.Builder urlBuilder = HttpUrl
+            .parse(sparqlQueryUrl)
+            .newBuilder()
+            .addQueryParameter("query", query)
+            .addQueryParameter("format", "json");
+
+        final Request request = new Request.Builder()
+            .url(urlBuilder.build())
+            .build();
+
+        final Response response = okHttpClient.newCall(request).execute();
+        if (response.body() != null && response.isSuccessful()) {
+            final String json = response.body().string();
+            final NearbyResponse nearbyResponse = gson.fromJson(json, NearbyResponse.class);
+            final List<NearbyResultItem> bindings = nearbyResponse.getResults().getBindings();
+            final List<Place> places = new ArrayList<>();
+            for (final NearbyResultItem item : bindings) {
+                final Place placeFromNearbyItem = Place.from(item);
+                placeFromNearbyItem.setMonument(false);
+                places.add(placeFromNearbyItem);
+            }
+            return places;
+        }
+        throw new Exception(response.message());
+    }
+
+    /**
+     * Retrieves nearby places based on screen coordinates and optional query parameters.
+     *
+     * @param screenTopRight          The top right corner of the screen (latitude, longitude).
+     * @param screenBottomLeft        The bottom left corner of the screen (latitude, longitude).
+     * @param language                The language for the query.
+     * @param shouldQueryForMonuments Flag indicating whether to include monuments in the query.
+     * @param customQuery             Optional custom SPARQL query to use instead of default
+     *                                queries.
+     * @return A list of nearby places.
+     * @throws Exception If an error occurs during the retrieval process.
+     */
+    @Nullable
+    public List<Place> getNearbyPlaces(
+        final fr.free.nrw.commons.location.LatLng screenTopRight,
+        final fr.free.nrw.commons.location.LatLng screenBottomLeft, final String language,
+        final boolean shouldQueryForMonuments, final String customQuery)
+        throws Exception {
+
+        Timber.d("CUSTOM_SPARQL%s", String.valueOf(customQuery != null));
+
+        final String wikidataQuery;
+        if (customQuery != null) {
+            wikidataQuery = customQuery;
+        } else if (!shouldQueryForMonuments) {
+            wikidataQuery = FileUtils.readFromResource("/queries/rectangle_query_for_nearby.rq");
+        } else {
+            wikidataQuery = FileUtils.readFromResource(
+                "/queries/rectangle_query_for_nearby_monuments.rq");
+        }
+
+        final double westCornerLat = screenTopRight.getLatitude();
+        final double westCornerLong = screenTopRight.getLongitude();
+        final double eastCornerLat = screenBottomLeft.getLatitude();
+        final double eastCornerLong = screenBottomLeft.getLongitude();
+
+        final String query = wikidataQuery
+            .replace("${LAT_WEST}", String.format(Locale.ROOT, "%.4f", westCornerLat))
+            .replace("${LONG_WEST}", String.format(Locale.ROOT, "%.4f", westCornerLong))
+            .replace("${LAT_EAST}", String.format(Locale.ROOT, "%.4f", eastCornerLat))
+            .replace("${LONG_EAST}", String.format(Locale.ROOT, "%.4f", eastCornerLong))
+            .replace("${LANG}", language);
         final HttpUrl.Builder urlBuilder = HttpUrl
             .parse(sparqlQueryUrl)
             .newBuilder()
@@ -330,18 +396,16 @@ public class OkHttpJsonApiClient {
     /**
      * Make API Call to get Nearby Places Implementation does not expects a custom query
      *
-     * @param cur                     Search lat long
-     * @param language                Language
-     * @param radius                  Search Radius
-     * @param shouldQueryForMonuments : Should we query for monuments
+     * @param cur      Search lat long
+     * @param language Language
+     * @param radius   Search Radius
      * @return
      * @throws Exception
      */
     @Nullable
-    public List<Place> getNearbyPlaces(final LatLng cur, final String language, final double radius,
-        final boolean shouldQueryForMonuments)
+    public List<Place> getNearbyPlaces(final LatLng cur, final String language, final double radius)
         throws Exception {
-        return getNearbyPlaces(cur, language, radius, shouldQueryForMonuments, null);
+        return getNearbyPlaces(cur, language, radius, null);
     }
 
     /**

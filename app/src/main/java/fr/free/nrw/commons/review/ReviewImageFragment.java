@@ -7,9 +7,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -21,6 +18,7 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException;
+import fr.free.nrw.commons.databinding.FragmentReviewImageBinding;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,16 +33,10 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
 
     private int position;
 
-    public ProgressBar progressBar;
+    private FragmentReviewImageBinding binding;
 
-    @BindView(R.id.tv_review_question)
-    TextView textViewQuestion;
-    @BindView(R.id.tv_review_question_context)
-    TextView textViewQuestionContext;
-    @BindView(R.id.button_yes)
-    Button yesButton;
-    @BindView(R.id.button_no)
-    Button noButton;
+
+
 
     @Inject
     SessionManager sessionManager;
@@ -76,7 +68,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 categories.add(value);
             }
             String catString = TextUtils.join(", ", categories);
-            if (catString != null && !catString.equals("") && textViewQuestionContext != null) {
+            if (catString != null && !catString.equals("") && binding.tvReviewQuestionContext != null) {
                 catString = "<b>" + catString + "</b>";
                 final String stringToConvertHtml = String.format(getResources().getString(R.string.review_category_explanation), catString);
                 return Html.fromHtml(stringToConvertHtml).toString();
@@ -94,14 +86,14 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
         position = getArguments().getInt("position");
-        final View layoutView = inflater.inflate(R.layout.fragment_review_image, container,
-                false);
-        ButterKnife.bind(this, layoutView);
+        binding = FragmentReviewImageBinding.inflate(inflater, container, false);
 
         final String question;
         String explanation=null;
         String yesButtonText;
         final String noButtonText;
+
+        binding.buttonYes.setOnClickListener(view -> onYesButtonClicked());
 
         switch (position) {
             case SPAM:
@@ -109,7 +101,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 explanation = getString(R.string.review_spam_explanation);
                 yesButtonText = getString(R.string.yes);
                 noButtonText = getString(R.string.no);
-                noButton.setOnClickListener(view -> getReviewActivity()
+                binding.buttonNo.setOnClickListener(view -> getReviewActivity()
                         .reviewController.reportSpam(requireActivity(), getReviewCallback()));
                 break;
             case COPYRIGHT:
@@ -118,7 +110,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 explanation = getString(R.string.review_copyright_explanation);
                 yesButtonText = getString(R.string.yes);
                 noButtonText = getString(R.string.no);
-                noButton.setOnClickListener(view -> getReviewActivity()
+                binding.buttonNo.setOnClickListener(view -> getReviewActivity()
                         .reviewController
                         .reportPossibleCopyRightViolation(requireActivity(), getReviewCallback()));
                 break;
@@ -128,7 +120,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 explanation = updateCategoriesQuestion();
                 yesButtonText = getString(R.string.yes);
                 noButtonText = getString(R.string.no);
-                noButton.setOnClickListener(view -> {
+                binding.buttonNo.setOnClickListener(view -> {
                     getReviewActivity()
                             .reviewController
                             .reportWrongCategory(requireActivity(), getReviewCallback());
@@ -155,9 +147,9 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 // Note that the yes and no buttons are swapped in this section
                 yesButtonText = getString(R.string.review_thanks_yes_button_text);
                 noButtonText = getString(R.string.review_thanks_no_button_text);
-                yesButton.setTextColor(Color.parseColor("#116aaa"));
-                noButton.setTextColor(Color.parseColor("#228b22"));
-                noButton.setOnClickListener(view -> {
+                binding.buttonYes.setTextColor(Color.parseColor("#116aaa"));
+                binding.buttonNo.setTextColor(Color.parseColor("#228b22"));
+                binding.buttonNo.setOnClickListener(view -> {
                     getReviewActivity().reviewController.sendThanks(getReviewActivity());
                     getReviewActivity().swipeToNext();
                 });
@@ -170,11 +162,11 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
                 noButtonText = "no";
         }
 
-        textViewQuestion.setText(question);
-        textViewQuestionContext.setText(explanation);
-        yesButton.setText(yesButtonText);
-        noButton.setText(noButtonText);
-        return layoutView;
+        binding.tvReviewQuestion.setText(question);
+        binding.tvReviewQuestionContext.setText(explanation);
+        binding.buttonYes.setText(yesButtonText);
+        binding.buttonNo.setText(noButtonText);
+        return binding.getRoot();
     }
 
 
@@ -184,7 +176,7 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
      * @param outState
      */
     @Override
-    public void onSaveInstanceState(@NonNull final Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
         //Save user name when configuration changes happen
@@ -227,10 +219,10 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
      * been loaded to enable the review buttons.
      */
     public void enableButtons() {
-        yesButton.setEnabled(true);
-        yesButton.setAlpha(1);
-        noButton.setEnabled(true);
-        noButton.setAlpha(1);
+        binding.buttonYes.setEnabled(true);
+        binding.buttonYes.setAlpha(1);
+        binding.buttonNo.setEnabled(true);
+        binding.buttonNo.setAlpha(1);
     }
 
     /**
@@ -238,18 +230,23 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
      * to disable the review buttons
      */
     public void disableButtons() {
-        yesButton.setEnabled(false);
-        yesButton.setAlpha(0.5f);
-        noButton.setEnabled(false);
-        noButton.setAlpha(0.5f);
+        binding.buttonYes.setEnabled(false);
+        binding.buttonYes.setAlpha(0.5f);
+        binding.buttonNo.setEnabled(false);
+        binding.buttonNo.setAlpha(0.5f);
     }
 
-    @OnClick(R.id.button_yes)
     void onYesButtonClicked() {
         getReviewActivity().swipeToNext();
     }
 
     private ReviewActivity getReviewActivity() {
         return (ReviewActivity) requireActivity();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }

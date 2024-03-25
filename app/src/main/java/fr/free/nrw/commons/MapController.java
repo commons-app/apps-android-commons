@@ -12,7 +12,7 @@ public abstract class MapController {
     public class NearbyPlacesInfo {
         public List<Place> placeList; // List of nearby places
         public LatLng[] boundaryCoordinates; // Corners of nearby area
-        public LatLng curLatLng; // Current location when this places are populated
+        public LatLng currentLatLng; // Current location when this places are populated
         public LatLng searchLatLng; // Search location for finding this places
         public List<Media> mediaList; // Search location for finding this places
     }
@@ -23,7 +23,7 @@ public abstract class MapController {
     public class ExplorePlacesInfo {
         public List<Place> explorePlaceList; // List of nearby places
         public LatLng[] boundaryCoordinates; // Corners of nearby area
-        public LatLng curLatLng; // Current location when this places are populated
+        public LatLng currentLatLng; // Current location when this places are populated
         public LatLng searchLatLng; // Search location for finding this places
         public List<Media> mediaList; // Search location for finding this places
     }
