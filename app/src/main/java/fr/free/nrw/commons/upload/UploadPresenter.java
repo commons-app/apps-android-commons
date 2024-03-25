@@ -153,6 +153,11 @@ public class UploadPresenter implements UploadContract.UserActionListener {
     @Override
     public void deletePictureAtIndex(int index) {
         List<UploadableFile> uploadableFiles = view.getUploadableFiles();
+        if (index == uploadableFiles.size() - 1) {
+            // If the next fragment to be shown is not one of the MediaDetailsFragment/
+            // lets hide the top card so that it doesn't appear on the other fragments
+            view.showHideTopCard(false);
+        }
         view.setImageCancelled(true);
         repository.deletePicture(uploadableFiles.get(index).getFilePath());
         if (uploadableFiles.size() == 1) {
