@@ -39,14 +39,14 @@ public class NearbyController extends MapController {
     /**
      * Prepares Place list to make their distance information update later.
      *
-     * @param curLatLng           current location for user
+     * @param currentLatLng           current location for user
      * @param searchLatLng        the location user wants to search around
      * @param returnClosestResult if this search is done to find closest result or all results
      * @param customQuery         if this search is done via an advanced query
      * @return NearbyPlacesInfo a variable holds Place list without distance information and
      * boundary coordinates of current Place List
      */
-    public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng curLatLng,
+    public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng currentLatLng,
         final LatLng searchLatLng,
         final boolean returnClosestResult, final boolean checkingAroundCurrentLocation,
         @Nullable final String customQuery) throws Exception {
@@ -54,7 +54,7 @@ public class NearbyController extends MapController {
         Timber.d("Loading attractions near %s", searchLatLng);
         NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();
         if (searchLatLng == null) {
-            Timber.d("Loading attractions nearby, but curLatLng is null");
+            Timber.d("Loading attractions nearby, but currentLatLng is null");
             return null;
         }
         List<Place> places = nearbyPlaces
@@ -68,11 +68,11 @@ public class NearbyController extends MapController {
                 places.get(0).location, // west
                 places.get(0).location};// east, init with a random location
 
-            if (curLatLng != null) {
+            if (currentLatLng != null) {
                 Timber.d("Sorting places by distance...");
                 final Map<Place, Double> distances = new HashMap<>();
                 for (Place place : places) {
-                    distances.put(place, computeDistanceBetween(place.location, curLatLng));
+                    distances.put(place, computeDistanceBetween(place.location, currentLatLng));
                     // Find boundaries with basic find max approach
                     if (place.location.getLatitude() < boundaryCoordinates[0].getLatitude()) {
                         boundaryCoordinates[0] = place.location;
@@ -95,7 +95,7 @@ public class NearbyController extends MapController {
                     }
                 );
             }
-            nearbyPlacesInfo.curLatLng = curLatLng;
+            nearbyPlacesInfo.currentLatLng = currentLatLng;
             nearbyPlacesInfo.searchLatLng = searchLatLng;
             nearbyPlacesInfo.placeList = places;
             nearbyPlacesInfo.boundaryCoordinates = boundaryCoordinates;
@@ -109,7 +109,7 @@ public class NearbyController extends MapController {
                 // Our radius searched around us, will be used to understand when user search their own location, we will follow them
                 if (checkingAroundCurrentLocation) {
                     currentLocationSearchRadius = nearbyPlaces.radius * 1000; // to meter
-                    currentLocation = curLatLng;
+                    currentLocation = currentLatLng;
                 }
             }
 
@@ -121,7 +121,7 @@ public class NearbyController extends MapController {
     /**
      * Prepares Place list to make their distance information update later.
      *
-     * @param curLatLng                     The current latitude and longitude.
+     * @param currentLatLng                     The current latitude and longitude.
      * @param screenTopRight                The top right corner of the screen (latitude,
      *                                      longitude).
      * @param screenBottomLeft              The bottom left corner of the screen (latitude,
@@ -137,7 +137,7 @@ public class NearbyController extends MapController {
      * @return An object containing information about nearby places.
      * @throws Exception If an error occurs during the retrieval process.
      */
-    public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng curLatLng,
+    public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng currentLatLng,
         final fr.free.nrw.commons.location.LatLng screenTopRight,
         final fr.free.nrw.commons.location.LatLng screenBottomLeft, final LatLng searchLatLng,
         final boolean returnClosestResult, final boolean checkingAroundCurrentLocation,
@@ -148,7 +148,7 @@ public class NearbyController extends MapController {
         NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();
 
         if (searchLatLng == null) {
-            Timber.d("Loading attractions nearby, but curLatLng is null");
+            Timber.d("Loading attractions nearby, but currentLatLng is null");
             return null;
         }
 
@@ -162,11 +162,11 @@ public class NearbyController extends MapController {
                 places.get(0).location, // west
                 places.get(0).location};// east, init with a random location
 
-            if (curLatLng != null) {
+            if (currentLatLng != null) {
                 Timber.d("Sorting places by distance...");
                 final Map<Place, Double> distances = new HashMap<>();
                 for (Place place : places) {
-                    distances.put(place, computeDistanceBetween(place.location, curLatLng));
+                    distances.put(place, computeDistanceBetween(place.location, currentLatLng));
                     // Find boundaries with basic find max approach
                     if (place.location.getLatitude() < boundaryCoordinates[0].getLatitude()) {
                         boundaryCoordinates[0] = place.location;
@@ -189,7 +189,7 @@ public class NearbyController extends MapController {
                     }
                 );
             }
-            nearbyPlacesInfo.curLatLng = curLatLng;
+            nearbyPlacesInfo.currentLatLng = currentLatLng;
             nearbyPlacesInfo.searchLatLng = searchLatLng;
             nearbyPlacesInfo.placeList = places;
             nearbyPlacesInfo.boundaryCoordinates = boundaryCoordinates;
@@ -203,7 +203,7 @@ public class NearbyController extends MapController {
                 // Our radius searched around us, will be used to understand when user search their own location, we will follow them
                 if (checkingAroundCurrentLocation) {
                     currentLocationSearchRadius = nearbyPlaces.radius * 1000; // to meter
-                    currentLocation = curLatLng;
+                    currentLocation = currentLatLng;
                 }
             }
         }
@@ -213,29 +213,29 @@ public class NearbyController extends MapController {
     /**
      * Prepares Place list to make their distance information update later.
      *
-     * @param curLatLng           current location for user
+     * @param currentLatLng           current location for user
      * @param searchLatLng        the location user wants to search around
      * @param returnClosestResult if this search is done to find closest result or all results
      * @return NearbyPlacesInfo a variable holds Place list without distance information and
      * boundary coordinates of current Place List
      */
-    public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng curLatLng,
+    public NearbyPlacesInfo loadAttractionsFromLocation(final LatLng currentLatLng,
         final LatLng searchLatLng,
         final boolean returnClosestResult, final boolean checkingAroundCurrentLocation)
         throws Exception {
-        return loadAttractionsFromLocation(curLatLng, searchLatLng, returnClosestResult,
+        return loadAttractionsFromLocation(currentLatLng, searchLatLng, returnClosestResult,
             checkingAroundCurrentLocation, null);
     }
 
     /**
      * Loads attractions from location for map view, we need to return BaseMarkerOption data type.
      *
-     * @param curLatLng users current location
+     * @param currentLatLng users current location
      * @param placeList list of nearby places in Place data type
      * @return BaseMarkerOptions list that holds nearby places
      */
     public static List<BaseMarker> loadAttractionsFromLocationToBaseMarkerOptions(
-            LatLng curLatLng,
+            LatLng currentLatLng,
             List<Place> placeList) {
         List<BaseMarker> baseMarkersList = new ArrayList<>();
 
@@ -245,7 +245,7 @@ public class NearbyController extends MapController {
         placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
         for (Place place : placeList) {
             BaseMarker baseMarker = new BaseMarker();
-            String distance = formatDistanceBetween(curLatLng, place.location);
+            String distance = formatDistanceBetween(currentLatLng, place.location);
             place.setDistance(distance);
             baseMarker.setTitle(place.name);
             baseMarker.setPosition(
