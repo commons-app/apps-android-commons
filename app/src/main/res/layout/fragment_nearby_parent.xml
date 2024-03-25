@@ -147,7 +147,9 @@
         android:layout_height="match_parent" />
     </RelativeLayout>
 
-    <include layout="@layout/bottom_sheet_nearby" />
+    <include
+      android:id="@+id/bottom_sheet_nearby"
+      layout="@layout/bottom_sheet_nearby" />
 
     <include
       android:id="@+id/bottom_sheet_details"
