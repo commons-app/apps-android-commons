@@ -25,6 +25,7 @@ import fr.free.nrw.commons.utils.PermissionUtils;
  *
  * Case 2: When location permission is just asked but has been denied
  * Shows a toast to tell the user why location permission is needed.
+ * Also shows a rationale to the user, on agreeing to which, we go back to Case 1.
  * Show current location / nearby pins / nearby images according to the default location.
  *
  * Case 3: When location permission are already granted, but location services are off
