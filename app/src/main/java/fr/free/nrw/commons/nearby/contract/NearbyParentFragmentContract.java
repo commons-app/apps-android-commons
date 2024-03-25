@@ -18,9 +18,9 @@ public interface NearbyParentFragmentContract {
 
         void listOptionMenuItemClicked();
 
-        void populatePlaces(LatLng curlatLng);
+        void populatePlaces(LatLng currentLatLng);
 
-        void populatePlaces(LatLng curlatLng, String customQuery);
+        void populatePlaces(LatLng currentLatLng, String customQuery);
 
         boolean isListBottomSheetExpanded();
 
@@ -34,7 +34,7 @@ public interface NearbyParentFragmentContract {
 
         void animateFABs();
 
-        void recenterMap(LatLng curLatLng);
+        void recenterMap(LatLng currentLatLng);
 
         void showLocationOffDialog();
 
@@ -68,7 +68,7 @@ public interface NearbyParentFragmentContract {
 
         void enableFABRecenter();
 
-        void addCurrentLocationMarker(LatLng curLatLng);
+        void addCurrentLocationMarker(LatLng currentLatLng);
 
         void clearAllMarkers();
 

@@ -27,6 +27,7 @@ public class NearbyPlaces {
     /**
      * Reads Wikidata query to check nearby wikidata items which needs picture, with a circular
      * search. As a point is center of a circle with a radius will be set later.
+     *
      * @param okHttpJsonApiClient
      */
     @Inject
@@ -36,15 +37,15 @@ public class NearbyPlaces {
 
     /**
      * Expands the radius as needed for the Wikidata query
-     * @param curLatLng coordinates of search location
-     * @param lang user's language
+     *
+     * @param currentLatLng           coordinates of search location
+     * @param lang                user's language
      * @param returnClosestResult true if only the nearest point is desired
      * @param customQuery
      * @return list of places obtained
      */
-    List<Place> radiusExpander(final LatLng curLatLng, final String lang,
-        final boolean returnClosestResult
-        , final boolean shouldQueryForMonuments, @Nullable final String customQuery) throws Exception {
+    List<Place> radiusExpander(final LatLng currentLatLng, final String lang,
+        final boolean returnClosestResult, @Nullable final String customQuery) throws Exception {
 
         final int minResults;
         final double maxRadius;
@@ -63,15 +64,15 @@ public class NearbyPlaces {
             radius = INITIAL_RADIUS;
         }
 
-            // Increase the radius gradually to find a satisfactory number of nearby places
-            while (radius <= maxRadius) {
-                places = getFromWikidataQuery(curLatLng, lang, radius, shouldQueryForMonuments, customQuery);
-                Timber.d("%d results at radius: %f", places.size(), radius);
-                if (places.size() >= minResults) {
-                    break;
-                }
-                radius *= RADIUS_MULTIPLIER;
+        // Increase the radius gradually to find a satisfactory number of nearby places
+        while (radius <= maxRadius) {
+            places = getFromWikidataQuery(currentLatLng, lang, radius, customQuery);
+            Timber.d("%d results at radius: %f", places.size(), radius);
+            if (places.size() >= minResults) {
+                break;
             }
+            radius *= RADIUS_MULTIPLIER;
+        }
         // make sure we will be able to send at least one request next time
         if (radius > maxRadius) {
             radius = maxRadius;
@@ -81,18 +82,64 @@ public class NearbyPlaces {
 
     /**
      * Runs the Wikidata query to populate the Places around search location
-     * @param cur coordinates of search location
-     * @param lang user's language
-     * @param radius radius for search, as determined by radiusExpander()
-     * @param shouldQueryForMonuments should the query include properites for monuments
+     *
+     * @param cur         coordinates of search location
+     * @param lang        user's language
+     * @param radius      radius for search, as determined by radiusExpander()
      * @param customQuery
      * @return list of places obtained
      * @throws IOException if query fails
      */
     public List<Place> getFromWikidataQuery(final LatLng cur, final String lang,
-        final double radius, final boolean shouldQueryForMonuments,
+        final double radius,
         @Nullable final String customQuery) throws Exception {
         return okHttpJsonApiClient
-            .getNearbyPlaces(cur, lang, radius, shouldQueryForMonuments, customQuery);
+            .getNearbyPlaces(cur, lang, radius, customQuery);
     }
+
+    /**
+     * Retrieves a list of places from a Wikidata query based on screen coordinates and optional
+     * parameters.
+     *
+     * @param screenTopRight          The top right corner of the screen (latitude, longitude).
+     * @param screenBottomLeft        The bottom left corner of the screen (latitude, longitude).
+     * @param lang                    The language for the query.
+     * @param shouldQueryForMonuments Flag indicating whether to include monuments in the query.
+     * @param customQuery             Optional custom SPARQL query to use instead of default
+     *                                queries.
+     * @return A list of places obtained from the Wikidata query.
+     * @throws Exception If an error occurs during the retrieval process.
+     */
+    public List<Place> getFromWikidataQuery(
+        final fr.free.nrw.commons.location.LatLng screenTopRight,
+        final fr.free.nrw.commons.location.LatLng screenBottomLeft, final String lang,
+        final boolean shouldQueryForMonuments,
+        @Nullable final String customQuery) throws Exception {
+        return okHttpJsonApiClient
+            .getNearbyPlaces(screenTopRight, screenBottomLeft, lang, shouldQueryForMonuments,
+                customQuery);
+    }
+
+    /**
+     * Runs the Wikidata query to retrieve the KML String
+     *
+     * @param leftLatLng  coordinates of Left Most position
+     * @param rightLatLng coordinates of Right Most position
+     * @throws IOException if query fails
+     */
+    public String getPlacesAsKML(LatLng leftLatLng, LatLng rightLatLng) throws Exception {
+        return okHttpJsonApiClient.getPlacesAsKML(leftLatLng, rightLatLng);
+    }
+
+    /**
+     * Runs the Wikidata query to retrieve the GPX String
+     *
+     * @param leftLatLng  coordinates of Left Most position
+     * @param rightLatLng coordinates of Right Most position
+     * @throws IOException if query fails
+     */
+    public String getPlacesAsGPX(LatLng leftLatLng, LatLng rightLatLng) throws Exception {
+        return okHttpJsonApiClient.getPlacesAsGPX(leftLatLng, rightLatLng);
+    }
+
 }

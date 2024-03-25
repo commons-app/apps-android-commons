@@ -345,6 +345,7 @@ public class UploadRepository {
 
     /**
      * Returns nearest place matching the passed latitude and longitude
+     *
      * @param decLatitude
      * @param decLongitude
      * @return
@@ -354,11 +355,11 @@ public class UploadRepository {
         try {
             final List<Place> fromWikidataQuery = nearbyPlaces.getFromWikidataQuery(new LatLng(
                     decLatitude, decLongitude, 0.0f),
-                    Locale.getDefault().getLanguage(),
-                    NEARBY_RADIUS_IN_KILO_METERS, false, null);
+                Locale.getDefault().getLanguage(),
+                NEARBY_RADIUS_IN_KILO_METERS, null);
             return (fromWikidataQuery != null && fromWikidataQuery.size() > 0) ? fromWikidataQuery
                 .get(0) : null;
-        }catch (final Exception e) {
+        } catch (final Exception e) {
             Timber.e("Error fetching nearby places: %s", e.getMessage());
             return null;
         }

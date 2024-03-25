@@ -354,7 +354,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
      */
     private void inflateAchievements(Achievements achievements) {
         binding.imagesUsedByWikiProgressBar.setVisibility(View.VISIBLE);
-        binding.achievementLevel.setText(String.valueOf(achievements.getThanksReceived()));
+        binding.thanksReceived.setText(String.valueOf(achievements.getThanksReceived()));
         binding.imagesUsedByWikiProgressBar.setProgress
                 (100 * achievements.getUniqueUsedImages() / levelInfo.getMaxUniqueImages());
         if(binding.tvWikiPb != null) {
