@@ -34,6 +34,7 @@ class EditActivity : AppCompatActivity() {
     private lateinit var vm: EditViewModel
     private val sourceExifAttributeList = mutableListOf<Pair<String, String?>>()
     private lateinit var binding: ActivityEditBinding
+    private var totalRotation = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +43,7 @@ class EditActivity : AppCompatActivity() {
         supportActionBar?.title = ""
         val intent = intent
         imageUri = intent.getStringExtra("image") ?: ""
+        imageRotation = intent.getIntExtra("rotation",0)
         vm = ViewModelProvider(this).get(EditViewModel::class.java)
         val sourceExif = imageUri.toUri().path?.let { ExifInterface(it) }
         val exifTags = arrayOf(
@@ -117,9 +119,10 @@ class EditActivity : AppCompatActivity() {
                 binding.iv.layoutParams.height = (scale * bitmapHeight).toInt()
                 binding.iv.imageMatrix = scaleMatrix(scale, scale)
             }
+            animateImageHeight(false)
         })
         binding.rotateBtn.setOnClickListener {
-            animateImageHeight()
+            animateImageHeight(true)
         }
         binding.btnSave.setOnClickListener {
             getRotatedImage()
@@ -131,19 +134,19 @@ class EditActivity : AppCompatActivity() {
     /**
      * Animates the height, rotation, and scale of an ImageView to provide a smooth
      * transition effect when rotating an image by 90 degrees.
-     *
+     * @param shouldRotate A boolean indicating whether the image should rotate by 90 degrees.
      * This function calculates the new height, rotation, and scale for the ImageView
      * based on the current image rotation angle and animates the changes using a
      * ValueAnimator. It also disables a rotate button during the animation to prevent
      * further rotation actions.
      */
-    private fun animateImageHeight() {
+    private fun animateImageHeight(shouldRotate : Boolean) {
         val drawableWidth: Float = binding.iv.getDrawable().getIntrinsicWidth().toFloat()
         val drawableHeight: Float = binding.iv.getDrawable().getIntrinsicHeight().toFloat()
         val viewWidth: Float = binding.iv.getMeasuredWidth().toFloat()
         val viewHeight: Float = binding.iv.getMeasuredHeight().toFloat()
         val rotation = imageRotation % 360
-        val newRotation = rotation + 90
+        val newRotation = if (shouldRotate) rotation + 90 else rotation
 
         val newViewHeight: Int
         val imageScale: Float
@@ -241,6 +244,7 @@ class EditActivity : AppCompatActivity() {
         copyExifData(editedImageExif)
         val resultIntent = Intent()
         resultIntent.putExtra("editedImageFilePath", rotatedImage?.toUri()?.path ?: "Error");
+        resultIntent.putExtra("editedImageRotation",imageRotation)
         setResult(RESULT_OK, resultIntent);
         finish();
     }
