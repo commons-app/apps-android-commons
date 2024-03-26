@@ -11,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.internal.DebouncingOnClickListener;
 import com.facebook.drawee.view.SimpleDraweeView;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
@@ -108,9 +107,10 @@ public class UserDetailAdapter extends RecyclerView.Adapter<UserDetailAdapter.Da
         }
         if (currentlyLoggedInUserName != null && currentlyLoggedInUserName.equals(
             leaderboardResponse.getUsername())) {
-            avatar.setOnClickListener(new DebouncingOnClickListener() {
+
+            avatar.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void doClick(View v) {
+                public void onClick(View v) {
                     Toast.makeText(v.getContext(),
                         R.string.set_up_avatar_toast_string,
                         Toast.LENGTH_LONG).show();
