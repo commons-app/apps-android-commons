@@ -1247,7 +1247,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private void savePlacesAsKML(LatLng latLng, LatLng nextlatLng) {
         final Observable<String> savePlacesObservable = Observable
             .fromCallable(() -> nearbyController
-                .getPlacesAsKML(latLng, nextlatLng));
+                .getPlacesAsKML(getMapFocus()));
         compositeDisposable.add(savePlacesObservable
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -1282,7 +1282,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private void savePlacesAsGPX(LatLng latLng, LatLng nextlatLng) {
         final Observable<String> savePlacesObservable = Observable
             .fromCallable(() -> nearbyController
-                .getPlacesAsGPX(latLng, nextlatLng));
+                .getPlacesAsGPX(getMapFocus()));
         compositeDisposable.add(savePlacesObservable
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
