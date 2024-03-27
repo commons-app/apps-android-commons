@@ -212,5 +212,9 @@ public class ReviewController {
         void onFailure();
 
         void onTokenException(Exception e);
+
+        void disableButtons();
+
+        void enableButtons();
     }
 }
