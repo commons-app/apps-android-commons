@@ -59,11 +59,6 @@ class WikiBaseClient @Inject constructor(
     }
 
     private fun csrfToken(): Observable<String> = Observable.fromCallable {
-        try {
-            csrfTokenClient.getTokenBlocking()
-        } catch (throwable: Throwable) {
-            Timber.e(throwable)
-            ""
-        }
+        csrfTokenClient.getTokenBlocking()
     }
 }

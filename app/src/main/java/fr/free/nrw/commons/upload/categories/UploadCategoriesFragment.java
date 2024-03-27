@@ -19,8 +19,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategoryItem;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.databinding.UploadCategoriesFragmentBinding;
@@ -41,6 +43,8 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
 
     @Inject
     CategoriesContract.UserActionListener presenter;
+    @Inject
+    SessionManager sessionManager;
     private UploadCategoryAdapter adapter;
     private Disposable subscribe;
     /**
@@ -293,6 +297,22 @@ public class UploadCategoriesFragment extends UploadBaseFragment implements Cate
         final MediaDetailFragment mediaDetailFragment = (MediaDetailFragment) getParentFragment();
         assert mediaDetailFragment != null;
         mediaDetailFragment.updateCategories();
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void navigateToLoginScreen() {
+        final String username = sessionManager.getUserName();
+        final CommonsApplication.BaseLogoutListener logoutListener = new CommonsApplication.BaseLogoutListener(
+            getActivity(),
+            requireActivity().getString(R.string.invalid_login_message),
+            username
+        );
+
+        CommonsApplication.getInstance().clearApplicationData(
+            requireActivity(), logoutListener);
     }
 
     public void onNextButtonClicked() {

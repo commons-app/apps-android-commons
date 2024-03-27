@@ -56,6 +56,12 @@ public interface CategoriesContract {
          * Refreshes the categories
          */
         void refreshCategories();
+
+
+        /**
+         * Navigate the user to Login Activity
+         */
+        void navigateToLoginScreen();
     }
 
     interface UserActionListener extends BasePresenter<View> {

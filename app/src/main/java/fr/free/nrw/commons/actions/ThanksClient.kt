@@ -4,6 +4,8 @@ import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_CSRF
 import io.reactivex.Observable
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
+import fr.free.nrw.commons.auth.login.LoginFailedException
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
@@ -32,8 +34,15 @@ class ThanksClient @Inject constructor(
             ).map {
                 mwThankPostResponse -> mwThankPostResponse.result?.success == 1
             }
-        } catch (throwable: Throwable) {
-            Observable.just(false)
+        }
+        catch (throwable: Throwable) {
+            if (throwable is InvalidLoginTokenException) {
+                Observable.error(throwable)
+            }
+            else {
+                Observable.just(false)
+            }
         }
     }
+
 }
