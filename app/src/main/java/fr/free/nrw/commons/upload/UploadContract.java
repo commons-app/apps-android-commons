@@ -64,5 +64,12 @@ public interface UploadContract {
         void handleSubmit();
 
         void deletePictureAtIndex(int index);
+
+        /**
+         * Calls checkImageQuality of UploadMediaPresenter to check image quality of next image
+         *
+         * @param uploadItemIndex Index of next image, whose quality is to be checked
+         */
+        void checkImageQuality(int uploadItemIndex);
     }
 }

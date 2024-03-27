@@ -196,11 +196,21 @@ public class UploadRepository {
     /**
      * query the RemoteDataSource for image quality
      *
-     * @param uploadItem
-     * @return
+     * @param uploadItem UploadItem whose caption is to be checked
+     * @return Quality of UploadItem
      */
     public Single<Integer> getImageQuality(UploadItem uploadItem, LatLng location) {
         return uploadModel.getImageQuality(uploadItem, location);
+    }
+
+    /**
+     * query the RemoteDataSource for caption quality
+     *
+     * @param uploadItem UploadItem whose caption is to be checked
+     * @return Quality of caption of the UploadItem
+     */
+    public Single<Integer> getCaptionQuality(UploadItem uploadItem) {
+        return uploadModel.getCaptionQuality(uploadItem);
     }
 
     /**
