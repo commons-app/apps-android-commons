@@ -22,6 +22,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.Html;
@@ -68,30 +69,27 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding3.appcompat.RxSearchView;
-import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.geometry.LatLngBounds;
+import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.CommonsApplication.BaseLogoutListener;
 import fr.free.nrw.commons.MapController.NearbyPlacesInfo;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.CheckBoxTriStates;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.MarkerPlaceGroup;
-import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter;
 import fr.free.nrw.commons.nearby.NearbyFilterState;
-import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.fragments.AdvanceQueryFragment.Callback;
@@ -100,7 +98,6 @@ import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ExecutorUtils;
 import fr.free.nrw.commons.utils.LayoutUtils;
-import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.NearbyFABUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.PermissionUtils;
@@ -110,17 +107,22 @@ import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 import kotlin.Unit;
 import org.jetbrains.annotations.NotNull;
+import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.events.MapListener;
 import org.osmdroid.events.ScrollEvent;
@@ -259,7 +261,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private NearbyParentFragmentPresenter presenter;
     private boolean isDarkTheme;
     private boolean isFABsExpanded;
-    private Marker selectedMarker;
     private Place selectedPlace;
     private Place clickedMarkerPlace;
     private boolean isClickedMarkerBookmarked;
@@ -269,12 +270,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private boolean recenterToUserLocation;
     private GeoPoint mapCenter;
     IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
-    private Marker currentLocationMarker;
     private Place lastPlaceToCenter;
     private fr.free.nrw.commons.location.LatLng lastKnownLocation;
     private boolean isVisibleToUser;
     private fr.free.nrw.commons.location.LatLng lastFocusLocation;
-    private LatLngBounds latLngBounds;
     private PlaceAdapter adapter;
     private GeoPoint lastMapFocus;
     private NearbyParentFragmentInstanceReadyCallback nearbyParentFragmentInstanceReadyCallback;
@@ -364,10 +363,50 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         @NonNull final MenuInflater inflater) {
         inflater.inflate(R.menu.nearby_fragment_menu, menu);
         MenuItem listMenu = menu.findItem(R.id.list_sheet);
+        MenuItem saveAsGPXButton = menu.findItem(R.id.list_item_gpx);
+        MenuItem saveAsKMLButton = menu.findItem(R.id.list_item_kml);
         listMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 listOptionMenuItemClicked();
+                return false;
+            }
+        });
+        saveAsGPXButton.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                try {
+                    IGeoPoint screenTopRight = mapView.getProjection().fromPixels(mapView.getWidth(), 0);
+                    IGeoPoint screenBottomLeft = mapView.getProjection().fromPixels(0, mapView.getHeight());
+                    fr.free.nrw.commons.location.LatLng screenTopRightLatLng = new fr.free.nrw.commons.location.LatLng(
+                        screenBottomLeft.getLatitude(), screenBottomLeft.getLongitude(), 0);
+                    fr.free.nrw.commons.location.LatLng screenBottomLeftLatLng = new fr.free.nrw.commons.location.LatLng(
+                        screenTopRight.getLatitude(), screenTopRight.getLongitude(), 0);
+                    setProgressBarVisibility(true);
+                    savePlacesAsGPX(screenTopRightLatLng,screenBottomLeftLatLng);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                return false;
+            }
+        });
+        saveAsKMLButton.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                try {
+                    IGeoPoint screenTopRight = mapView.getProjection().fromPixels(mapView.getWidth(), 0);
+                    IGeoPoint screenBottomLeft = mapView.getProjection().fromPixels(0, mapView.getHeight());
+                    fr.free.nrw.commons.location.LatLng screenTopRightLatLng = new fr.free.nrw.commons.location.LatLng(
+                        screenBottomLeft.getLatitude(), screenBottomLeft.getLongitude(), 0);
+                    fr.free.nrw.commons.location.LatLng screenBottomLeftLatLng = new fr.free.nrw.commons.location.LatLng(
+                        screenTopRight.getLatitude(), screenTopRight.getLongitude(), 0);
+                    setProgressBarVisibility(true);
+                    savePlacesAsKML(screenTopRightLatLng,screenBottomLeftLatLng);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
                 return false;
             }
         });
@@ -497,7 +536,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             final AdvanceQueryFragment fragment = new AdvanceQueryFragment();
             final Bundle bundle = new Bundle();
             try {
-                bundle.putString("query", FileUtils.readFromResource("/queries/nearby_query.rq"));
+                bundle.putString("query", FileUtils.readFromResource("/queries/radius_query_for_upload_wizard.rq"));
             } catch (IOException e) {
                 Timber.e(e);
             }
@@ -1061,22 +1100,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public LatLng getLastFocusLocation() {
-        return lastFocusLocation == null ? null
-            : LocationUtils.commonsLatLngToMapBoxLatLng(lastFocusLocation);
-    }
-
-    @Override
-    public boolean isCurrentLocationMarkerVisible() {
-        if (latLngBounds == null || currentLocationMarker == null) {
-            Timber.d("Map projection bounds are null");
-            return false;
-        } else {
-            return latLngBounds.contains(currentLocationMarker.getPosition());
-        }
-    }
-
-    @Override
     public boolean isAdvancedQueryFragmentVisible() {
         return isAdvancedQueryFragmentVisible;
     }
@@ -1086,16 +1109,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         setHasOptionsMenu(!shouldShow);
         flConainerNearbyChildren.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
         isAdvancedQueryFragmentVisible = shouldShow;
-    }
-
-    @Override
-    public void centerMapToPosition(fr.free.nrw.commons.location.LatLng searchLatLng) {
-        if (null != searchLatLng && !(
-            mapView.getMapCenter().getLatitude() == searchLatLng.getLatitude()
-                && mapView.getMapCenter().getLongitude() == searchLatLng.getLongitude())) {
-            recenterMarkerToPosition(
-                new GeoPoint(searchLatLng.getLatitude(), searchLatLng.getLongitude()));
-        }
     }
 
     @Override
@@ -1152,43 +1165,191 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void populatePlaces(final fr.free.nrw.commons.location.LatLng curlatLng) {
-        if (curlatLng.equals(getLastMapFocus())) { // Means we are checking around current location
-            populatePlacesForCurrentLocation(getLastMapFocus(), curlatLng, null);
+    public void populatePlaces(final fr.free.nrw.commons.location.LatLng currentLatLng) {
+        IGeoPoint screenTopRight = mapView.getProjection().fromPixels(mapView.getWidth(), 0);
+        IGeoPoint screenBottomLeft = mapView.getProjection().fromPixels(0, mapView.getHeight());
+        fr.free.nrw.commons.location.LatLng screenTopRightLatLng = new fr.free.nrw.commons.location.LatLng(
+            screenBottomLeft.getLatitude(), screenBottomLeft.getLongitude(), 0);
+        fr.free.nrw.commons.location.LatLng screenBottomLeftLatLng = new fr.free.nrw.commons.location.LatLng(
+            screenTopRight.getLatitude(), screenTopRight.getLongitude(), 0);
+
+        // When the nearby fragment is opened immediately upon app launch, the {screenTopRightLatLng}
+        // and {screenBottomLeftLatLng} variables return {LatLng(0.0,0.0)} as output.
+        // To address this issue, A small delta value {delta = 0.02} is used to adjust the latitude
+        // and longitude values for {ZOOM_LEVEL = 14f}.
+        // This adjustment helps in calculating the east and west corner LatLng accurately.
+        // Note: This only happens when the nearby fragment is opened immediately upon app launch,
+        // otherwise {screenTopRightLatLng} and {screenBottomLeftLatLng} are used to determine
+        // the east and west corner LatLng.
+        if (screenTopRightLatLng.getLatitude() == 0.0 && screenTopRightLatLng.getLongitude() == 0.0
+            && screenBottomLeftLatLng.getLatitude() == 0.0
+            && screenBottomLeftLatLng.getLongitude() == 0.0) {
+            final double delta = 0.02;
+            final double westCornerLat = currentLatLng.getLatitude() - delta;
+            final double westCornerLong = currentLatLng.getLongitude() - delta;
+            final double eastCornerLat = currentLatLng.getLatitude() + delta;
+            final double eastCornerLong = currentLatLng.getLongitude() + delta;
+            screenTopRightLatLng = new fr.free.nrw.commons.location.LatLng(westCornerLat,
+                westCornerLong, 0);
+            screenBottomLeftLatLng = new fr.free.nrw.commons.location.LatLng(eastCornerLat,
+                eastCornerLong, 0);
+            if (currentLatLng.equals(
+                getLastMapFocus())) { // Means we are checking around current location
+                populatePlacesForCurrentLocation(getLastMapFocus(), screenTopRightLatLng,
+                    screenBottomLeftLatLng, currentLatLng, null);
+            } else {
+                populatePlacesForAnotherLocation(getLastMapFocus(), screenTopRightLatLng,
+                    screenBottomLeftLatLng, currentLatLng, null);
+            }
         } else {
-            populatePlacesForAnotherLocation(getLastMapFocus(), curlatLng, null);
+            if (currentLatLng.equals(
+                getLastMapFocus())) { // Means we are checking around current location
+                populatePlacesForCurrentLocation(getLastMapFocus(), screenTopRightLatLng,
+                    screenBottomLeftLatLng, currentLatLng, null);
+            } else {
+                populatePlacesForAnotherLocation(getLastMapFocus(), screenTopRightLatLng,
+                    screenBottomLeftLatLng, currentLatLng, null);
+            }
         }
+
         if (recenterToUserLocation) {
             recenterToUserLocation = false;
         }
     }
 
     @Override
-    public void populatePlaces(final fr.free.nrw.commons.location.LatLng curlatLng,
+    public void populatePlaces(final fr.free.nrw.commons.location.LatLng currentLatLng,
         @Nullable final String customQuery) {
         if (customQuery == null || customQuery.isEmpty()) {
-            populatePlaces(curlatLng);
+            populatePlaces(currentLatLng);
             return;
         }
+        IGeoPoint screenTopRight = mapView.getProjection().fromPixels(mapView.getWidth(), 0);
+        IGeoPoint screenBottomLeft = mapView.getProjection().fromPixels(0, mapView.getHeight());
+        fr.free.nrw.commons.location.LatLng screenTopRightLatLng = new fr.free.nrw.commons.location.LatLng(
+            screenBottomLeft.getLatitude(), screenBottomLeft.getLongitude(), 0);
+        fr.free.nrw.commons.location.LatLng screenBottomLeftLatLng = new fr.free.nrw.commons.location.LatLng(
+            screenTopRight.getLatitude(), screenTopRight.getLongitude(), 0);
 
-        if (curlatLng.equals(lastFocusLocation) || lastFocusLocation == null
+        if (currentLatLng.equals(lastFocusLocation) || lastFocusLocation == null
             || recenterToUserLocation) { // Means we are checking around current location
-            populatePlacesForCurrentLocation(lastKnownLocation, curlatLng, customQuery);
+            populatePlacesForCurrentLocation(lastKnownLocation, screenTopRightLatLng,
+                screenBottomLeftLatLng, currentLatLng, customQuery);
         } else {
-            populatePlacesForAnotherLocation(lastKnownLocation, curlatLng, customQuery);
+            populatePlacesForAnotherLocation(lastKnownLocation, screenTopRightLatLng,
+                screenBottomLeftLatLng, currentLatLng, customQuery);
         }
         if (recenterToUserLocation) {
             recenterToUserLocation = false;
         }
     }
 
+    private void savePlacesAsKML(LatLng latLng, LatLng nextlatLng) {
+        final Observable<String> savePlacesObservable = Observable
+            .fromCallable(() -> nearbyController
+                .getPlacesAsKML(latLng, nextlatLng));
+        compositeDisposable.add(savePlacesObservable
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(kmlString -> {
+                    if (kmlString != null) {
+                        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+                            Locale.getDefault()).format(new Date());
+                        String fileName =
+                            "KML_" + timeStamp + "_" + System.currentTimeMillis() + ".kml";
+                        boolean saved = saveFile(kmlString, fileName);
+                        setProgressBarVisibility(false);
+                        if (saved) {
+                            Toast.makeText(this.getContext(),
+                                "KML file saved successfully at /Downloads/" + fileName,
+                                Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(this.getContext(), "Failed to save KML file.",
+                                Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                throwable -> {
+                    Timber.d(throwable);
+                    showErrorMessage(getString(R.string.error_fetching_nearby_places)
+                        + throwable.getLocalizedMessage());
+                    setProgressBarVisibility(false);
+                    presenter.lockUnlockNearby(false);
+                    setFilterState();
+                }));
+    }
+
+    private void savePlacesAsGPX(LatLng latLng, LatLng nextlatLng) {
+        final Observable<String> savePlacesObservable = Observable
+            .fromCallable(() -> nearbyController
+                .getPlacesAsGPX(latLng, nextlatLng));
+        compositeDisposable.add(savePlacesObservable
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(gpxString -> {
+                    if (gpxString != null) {
+                        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+                            Locale.getDefault()).format(new Date());
+                        String fileName =
+                            "GPX_" + timeStamp + "_" + System.currentTimeMillis() + ".gpx";
+                        boolean saved = saveFile(gpxString, fileName);
+                        setProgressBarVisibility(false);
+                        if (saved) {
+                            Toast.makeText(this.getContext(),
+                                "GPX file saved successfully at /Downloads/" + fileName,
+                                Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(this.getContext(), "Failed to save KML file.",
+                                Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                throwable -> {
+                    Timber.d(throwable);
+                    showErrorMessage(getString(R.string.error_fetching_nearby_places)
+                        + throwable.getLocalizedMessage());
+                    setProgressBarVisibility(false);
+                    presenter.lockUnlockNearby(false);
+                    setFilterState();
+                }));
+    }
+
+    public static boolean saveFile(String string, String fileName) {
+
+        if (!isExternalStorageWritable()) {
+            return false;
+        }
+
+        File downloadsDir = Environment.getExternalStoragePublicDirectory(
+            Environment.DIRECTORY_DOWNLOADS);
+        File kmlFile = new File(downloadsDir, fileName);
+
+        try {
+            FileOutputStream fos = new FileOutputStream(kmlFile);
+            fos.write(string.getBytes());
+            fos.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private static boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        return Environment.MEDIA_MOUNTED.equals(state);
+    }
+
     private void populatePlacesForCurrentLocation(
-        final fr.free.nrw.commons.location.LatLng curlatLng,
+        final fr.free.nrw.commons.location.LatLng currentLatLng,
+        final fr.free.nrw.commons.location.LatLng screenTopRight,
+        final fr.free.nrw.commons.location.LatLng screenBottomLeft,
         final fr.free.nrw.commons.location.LatLng searchLatLng,
         @Nullable final String customQuery) {
         final Observable<NearbyController.NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(curlatLng, searchLatLng,
+                .loadAttractionsFromLocation(currentLatLng, screenTopRight, screenBottomLeft,
+                    searchLatLng,
                     false, true, Utils.isMonumentsEnabled(new Date()), customQuery));
 
         compositeDisposable.add(nearbyPlacesInfoObservable
@@ -1215,12 +1376,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void populatePlacesForAnotherLocation(
-        final fr.free.nrw.commons.location.LatLng curlatLng,
+        final fr.free.nrw.commons.location.LatLng currentLatLng,
+        final fr.free.nrw.commons.location.LatLng screenTopRight,
+        final fr.free.nrw.commons.location.LatLng screenBottomLeft,
         final fr.free.nrw.commons.location.LatLng searchLatLng,
         @Nullable final String customQuery) {
         final Observable<NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(curlatLng, searchLatLng,
+                .loadAttractionsFromLocation(currentLatLng, screenTopRight, screenBottomLeft,
+                    searchLatLng,
                     false, true, Utils.isMonumentsEnabled(new Date()), customQuery));
 
         compositeDisposable.add(nearbyPlacesInfoObservable
@@ -1256,8 +1420,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     private void updateMapMarkers(final NearbyController.NearbyPlacesInfo nearbyPlacesInfo,
         final boolean shouldUpdateSelectedMarker) {
-        presenter.updateMapMarkers(nearbyPlacesInfo, selectedMarker, shouldUpdateSelectedMarker);
-        //TODO
+        presenter.updateMapMarkers(nearbyPlacesInfo, shouldUpdateSelectedMarker);
         setFilterState();
     }
 
@@ -1320,9 +1483,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
     }
 
-    @Override
     public void setTabItemContributions() {
-        ((MainActivity) getActivity()).viewPager.setCurrentItem(0);
+        ((MainActivity) getActivity()).binding.pager.setCurrentItem(0);
         // TODO
     }
 
@@ -1408,8 +1570,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 .setMessage(R.string.login_alert_message)
                 .setPositiveButton(R.string.login, (dialog, which) -> {
                     // logout of the app
-                    BaseLogoutListener logoutListener = new BaseLogoutListener();
-                    CommonsApplication app = (CommonsApplication) getActivity().getApplication();
+                    BaseLogoutListener logoutListener = new BaseLogoutListener(getActivity());                    CommonsApplication app = (CommonsApplication) getActivity().getApplication();
                     app.clearApplicationData(getContext(), logoutListener);
                 })
                 .show();
@@ -1455,18 +1616,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * onLogoutComplete is called after shared preferences and data stored in local database are
      * cleared.
      */
-    private class BaseLogoutListener implements CommonsApplication.LogoutListener {
-
-        @Override
-        public void onLogoutComplete() {
-            Timber.d("Logout complete callback received.");
-            final Intent nearbyIntent = new Intent(getActivity(), LoginActivity.class);
-            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(nearbyIntent);
-            getActivity().finish();
-        }
-    }
 
     @Override
     public void setFABPlusAction(final View.OnClickListener onClickListener) {
@@ -1492,59 +1641,34 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * Adds a marker for the user's current position. Adds a circle which uses the accuracy * 2, to
      * draw a circle which represents the user's position with an accuracy of 95%.
      * <p>
-     * Should be called only on creation of mapboxMap, there is other method to update markers
+     * Should be called only on creation of Map, there is other method to update markers
      * location with users move.
      *
-     * @param curLatLng current location
+     * @param currentLatLng current location
      */
     @Override
-    public void addCurrentLocationMarker(final fr.free.nrw.commons.location.LatLng curLatLng) {
-        if (null != curLatLng && !isPermissionDenied && locationManager.isGPSProviderEnabled()) {
+    public void addCurrentLocationMarker(final fr.free.nrw.commons.location.LatLng currentLatLng) {
+        if (null != currentLatLng && !isPermissionDenied && locationManager.isGPSProviderEnabled()) {
             ExecutorUtils.get().submit(() -> {
                 Timber.d("Adds current location marker");
                 recenterMarkerToPosition(
-                    new GeoPoint(curLatLng.getLatitude(), curLatLng.getLongitude()));
+                    new GeoPoint(currentLatLng.getLatitude(), currentLatLng.getLongitude()));
             });
         } else {
             Timber.d("not adding current location marker..current location is null");
         }
     }
 
-    /**
-     * Makes map camera follow users location with animation
-     *
-     * @param curLatLng current location of user
-     */
     @Override
-    public void updateMapToTrackPosition(final fr.free.nrw.commons.location.LatLng curLatLng) {
-        Timber.d("Updates map camera to track user position");
-        if (null != mapView) {
-            recenterMap(curLatLng);
-        }
-    }
-
-    @Override
-    public void updateMapMarkers(final List<NearbyBaseMarker> nearbyBaseMarkers,
-        final Marker selectedMarker) {
+    public void updateMapMarkers(final List<BaseMarker> BaseMarkers) {
         if (mapView != null) {
-            presenter.updateMapMarkersToController(nearbyBaseMarkers);
+            presenter.updateMapMarkersToController(BaseMarkers);
         }
     }
 
     @Override
     public void filterOutAllMarkers() {
         clearAllMarkers();
-    }
-
-    /**
-     * Displays all markers
-     */
-    @Override
-    public void displayAllMarkers() {
-        for (final MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
-            updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(),
-                NearbyController.currentLocation);
-        }
     }
 
     /**
@@ -1610,13 +1734,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             }
         }
         if (selectedLabels == null || selectedLabels.size() == 0) {
-            ArrayList<NearbyBaseMarker> markerArrayList = new ArrayList<>();
+            ArrayList<BaseMarker> markerArrayList = new ArrayList<>();
             for (final MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
-                NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
-                nearbyBaseMarker.place(markerPlaceGroup.getPlace());
+                BaseMarker nearbyBaseMarker = new BaseMarker();
+                nearbyBaseMarker.setPlace(markerPlaceGroup.getPlace());
                 markerArrayList.add(nearbyBaseMarker);
             }
-            addMarkersToMap(markerArrayList, null);
+            addMarkersToMap(markerArrayList);
         }
     }
 
@@ -1630,10 +1754,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      *
      * @param isBookmarked true if place is bookmarked
      * @param place
-     * @param curLatLng    current location
+     * @param currentLatLng    current location
      */
     public void updateMarker(final boolean isBookmarked, final Place place,
-        @Nullable final fr.free.nrw.commons.location.LatLng curLatLng) {
+        @Nullable final fr.free.nrw.commons.location.LatLng currentLatLng) {
         addMarkerToMap(place, isBookmarked);
     }
 
@@ -1727,8 +1851,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * @param nearbyBaseMarkers The list of Place objects containing information about the
      *                          locations.
      */
-    private void addMarkersToMap(List<NearbyBaseMarker> nearbyBaseMarkers,
-        final Marker selectedMarker) {
+    private void addMarkersToMap(List<BaseMarker> nearbyBaseMarkers) {
         ArrayList<OverlayItem> items = new ArrayList<>();
         for (int i = 0; i < nearbyBaseMarkers.size(); i++) {
             Drawable icon = ContextCompat.getDrawable(getContext(),
@@ -1784,8 +1907,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void recenterMap(fr.free.nrw.commons.location.LatLng curLatLng) {
-        if (isPermissionDenied || curLatLng == null) {
+    public void recenterMap(fr.free.nrw.commons.location.LatLng currentLatLng) {
+        if (isPermissionDenied || currentLatLng == null) {
             recenterToUserLocation = true;
             checkPermissionsAndPerformAction();
             if (!isPermissionDenied && !(locationManager.isNetworkProviderEnabled()
@@ -1794,9 +1917,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             }
             return;
         }
-        addCurrentLocationMarker(curLatLng);
+        addCurrentLocationMarker(currentLatLng);
         mapView.getController()
-            .animateTo(new GeoPoint(curLatLng.getLatitude(), curLatLng.getLongitude()));
+            .animateTo(new GeoPoint(currentLatLng.getLatitude(), currentLatLng.getLongitude()));
         if (lastMapFocus != null) {
             Location mylocation = new Location("");
             Location dest_location = new Location("");
@@ -1852,16 +1975,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void hideBottomDetailsSheet() {
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-    }
-
-    @Override
-    public void displayBottomSheetWithInfo(final Marker marker) {
-        selectedMarker = marker;
-        final NearbyMarker nearbyMarker = (NearbyMarker) marker;
-        final Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
-        passInfoToSheet(place);
-        hideBottomSheet();
-        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
     /**

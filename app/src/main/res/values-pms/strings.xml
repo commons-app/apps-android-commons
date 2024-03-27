@@ -343,6 +343,7 @@
   <string name="share_app_title">Partagé j\'aplicassion</string>
   <string name="rotate">Deje na gira</string>
   <string name="error_fetching_nearby_places">Eror durant l\'esplorassion dj\'anviron.</string>
+  <string name="no_pictures_in_this_area">Gnun-e plance an cost\'àrea</string>
   <string name="no_nearby_places_around">Gnun pòst sì-davzin</string>
   <string name="error_fetching_nearby_monuments">Eror d\'arcuperassion dij monument davzin.</string>
   <string name="no_recent_searches">Gnun-e arserche recente</string>

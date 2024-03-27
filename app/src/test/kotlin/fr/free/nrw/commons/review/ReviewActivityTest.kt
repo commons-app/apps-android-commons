@@ -12,6 +12,7 @@ import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
+import fr.free.nrw.commons.databinding.ActivityReviewBinding
 import io.reactivex.Single
 import org.junit.Assert
 import org.junit.Before
@@ -58,6 +59,8 @@ class ReviewActivityTest {
     @Mock
     private lateinit var reviewImageFragment: ReviewImageFragment
 
+    private lateinit var binding: ActivityReviewBinding
+
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
@@ -71,11 +74,12 @@ class ReviewActivityTest {
         Fresco.initialize(context)
 
         activity = Robolectric.buildActivity(ReviewActivity::class.java).create().get()
+        binding = ActivityReviewBinding.inflate(activity.layoutInflater)
 
         menuItem = RoboMenuItem(null)
 
         menu = RoboMenu(context)
-        Whitebox.setInternalState(activity, "reviewPager", reviewPager);
+        Whitebox.setInternalState(binding, "viewPagerReview", reviewPager);
         Whitebox.setInternalState(activity, "hasNonHiddenCategories", hasNonHiddenCategories);
         Whitebox.setInternalState(activity, "reviewHelper", reviewHelper);
         Whitebox.setInternalState(activity, "reviewImageFragment", reviewImageFragment);
@@ -111,10 +115,10 @@ class ReviewActivityTest {
         val media = mock(Media::class.java)
 
         doReturn(mapOf<String, Boolean>("test" to false)).`when`(media).categoriesHiddenStatus
-        doReturn(Single.just(media)).`when`(reviewHelper)?.randomMedia
-        Assert.assertNotNull(reviewHelper?.randomMedia)
+        doReturn(Single.just(media)).`when`(reviewHelper)?.getRandomMedia()
+        Assert.assertNotNull(reviewHelper?.getRandomMedia())
         reviewHelper
-            ?.randomMedia
+            ?.getRandomMedia()
             ?.test()
             ?.assertValue(media);
         activity.swipeToNext()

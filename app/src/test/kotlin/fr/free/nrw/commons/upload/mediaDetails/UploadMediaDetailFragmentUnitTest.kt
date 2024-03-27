@@ -18,9 +18,8 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ApplicationProvider
 import com.github.chrisbanes.photoview.PhotoView
-import com.mapbox.mapboxsdk.camera.CameraPosition
-import com.mapbox.mapboxsdk.geometry.LatLng
 import com.nhaarman.mockitokotlin2.mock
+import fr.free.nrw.commons.CameraPosition
 import fr.free.nrw.commons.LocationPicker.LocationPicker
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
 import fr.free.nrw.commons.OkHttpConnectionFactory
@@ -28,6 +27,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.kvstore.JsonKvStore
+import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.upload.ImageCoordinates
 import fr.free.nrw.commons.upload.UploadActivity
@@ -142,20 +142,7 @@ class UploadMediaDetailFragmentUnitTest {
         llContainerMediaDetail = view.findViewById(R.id.ll_container_media_detail)
         ibExpandCollapse = view.findViewById(R.id.ib_expand_collapse)
 
-        Whitebox.setInternalState(fragment, "tvTitle", tvTitle)
-        Whitebox.setInternalState(fragment, "tooltip", tooltip)
-        Whitebox.setInternalState(fragment, "callback", callback)
-        Whitebox.setInternalState(fragment, "rvDescriptions", rvDescriptions)
-        Whitebox.setInternalState(fragment, "btnPrevious", btnPrevious)
-        Whitebox.setInternalState(fragment, "btnNext", btnNext)
-        Whitebox.setInternalState(fragment, "btnCopyToSubsequentMedia", btnCopyToSubsequentMedia)
-        Whitebox.setInternalState(fragment, "photoViewBackgroundImage", photoViewBackgroundImage)
         Whitebox.setInternalState(fragment, "uploadMediaDetailAdapter", uploadMediaDetailAdapter)
-        Whitebox.setInternalState(fragment, "llLocationStatus", locationStatusLl)
-        Whitebox.setInternalState(fragment, "locationImageView", locationImageView)
-        Whitebox.setInternalState(fragment, "locationTextView", locationTextView)
-        Whitebox.setInternalState(fragment, "llContainerMediaDetail", llContainerMediaDetail)
-        Whitebox.setInternalState(fragment, "ibExpandCollapse", ibExpandCollapse)
     }
 
     @Test
@@ -368,7 +355,8 @@ class UploadMediaDetailFragmentUnitTest {
         val cameraPosition = Mockito.mock(CameraPosition::class.java)
         val latLng = Mockito.mock(LatLng::class.java)
 
-        Whitebox.setInternalState(cameraPosition, "target", latLng)
+        Whitebox.setInternalState(cameraPosition, "latitude", latLng.latitude)
+        Whitebox.setInternalState(cameraPosition, "longitude", latLng.longitude)
         Whitebox.setInternalState(fragment, "editableUploadItem", uploadItem)
 
         `when`(LocationPicker.getCameraPosition(intent)).thenReturn(cameraPosition)
@@ -388,7 +376,9 @@ class UploadMediaDetailFragmentUnitTest {
         val cameraPosition = Mockito.mock(CameraPosition::class.java)
         val latLng = Mockito.mock(LatLng::class.java)
 
-        Whitebox.setInternalState(cameraPosition, "target", latLng)
+        Whitebox.setInternalState(fragment, "callback", callback)
+        Whitebox.setInternalState(cameraPosition, "latitude", latLng.latitude)
+        Whitebox.setInternalState(cameraPosition, "longitude", latLng.longitude)
         Whitebox.setInternalState(fragment, "editableUploadItem", uploadItem)
         Whitebox.setInternalState(fragment,"isMissingLocationDialog",true)
         Whitebox.setInternalState(fragment, "presenter", presenter)

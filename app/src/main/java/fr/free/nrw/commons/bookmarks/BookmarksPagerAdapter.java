@@ -12,7 +12,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsFragment;
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment;
 
 public class BookmarksPagerAdapter extends FragmentPagerAdapter {

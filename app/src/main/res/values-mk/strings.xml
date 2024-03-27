@@ -345,6 +345,7 @@
   <string name="share_app_title">Сподели прилог</string>
   <string name="rotate">Сврти</string>
   <string name="error_fetching_nearby_places">Грешка при добивањето на околните места.</string>
+  <string name="no_pictures_in_this_area">Нема слики за ова подрачје</string>
   <string name="no_nearby_places_around">Не најдов околни места</string>
   <string name="error_fetching_nearby_monuments">Грешка при добивањето на околните споменици.</string>
   <string name="no_recent_searches">Нема скорешни пребарувања</string>

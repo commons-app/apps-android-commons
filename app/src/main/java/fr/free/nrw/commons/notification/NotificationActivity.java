@@ -9,20 +9,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import com.google.android.material.snackbar.Snackbar;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.databinding.ActivityNotificationBinding;
 import fr.free.nrw.commons.notification.models.Notification;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.NetworkUtils;
@@ -44,19 +36,7 @@ import timber.log.Timber;
  */
 
 public class NotificationActivity extends BaseActivity {
-    @BindView(R.id.listView)
-    RecyclerView recyclerView;
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
-    @BindView(R.id.container)
-    RelativeLayout relativeLayout;
-    @BindView(R.id.no_notification_background)
-    ConstraintLayout no_notification;
-    @BindView(R.id.no_notification_text)
-    TextView noNotificationText;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-
+    private ActivityNotificationBinding binding;
 
     @Inject
     NotificationController controller;
@@ -75,13 +55,13 @@ public class NotificationActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         isRead = getIntent().getStringExtra("title").equals("read");
-        setContentView(R.layout.activity_notification);
-        ButterKnife.bind(this);
+        binding = ActivityNotificationBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         mNotificationWorkerFragment = (NotificationWorkerFragment) getFragmentManager()
                 .findFragmentByTag(TAG_NOTIFICATION_WORKER_FRAGMENT);
         initListView();
         setPageTitle();
-        setSupportActionBar(toolbar);
+        setSupportActionBar(binding.toolbar.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -115,26 +95,23 @@ public class NotificationActivity extends BaseActivity {
                         notificationList.remove(notification);
                         setItems(notificationList);
                         adapter.notifyDataSetChanged();
-                        Snackbar snackbar = Snackbar
-                                .make(relativeLayout, getString(R.string.notification_mark_read), Snackbar.LENGTH_LONG);
-
-                        snackbar.show();
+                        ViewUtil.showLongSnackbar(binding.container,getString(R.string.notification_mark_read));
                         if (notificationList.size() == 0) {
                             setEmptyView();
-                            relativeLayout.setVisibility(View.GONE);
-                            no_notification.setVisibility(View.VISIBLE);
+                            binding.container.setVisibility(View.GONE);
+                            binding.noNotificationBackground.setVisibility(View.VISIBLE);
                         }
                     } else {
                         adapter.notifyDataSetChanged();
                         setItems(notificationList);
-                        Toast.makeText(NotificationActivity.this, getString(R.string.some_error), Toast.LENGTH_SHORT).show();
+                        ViewUtil.showLongToast(this,getString(R.string.some_error));
                     }
                 }, throwable -> {
 
                     Timber.e(throwable, "Error occurred while loading notifications");
                     throwable.printStackTrace();
-                    ViewUtil.showShortSnackbar(relativeLayout, R.string.error_notifications);
-                    progressBar.setVisibility(View.GONE);
+                    ViewUtil.showShortSnackbar(binding.container, R.string.error_notifications);
+                    binding.progressBar.setVisibility(View.GONE);
                 });
         compositeDisposable.add(disposable);
     }
@@ -142,9 +119,9 @@ public class NotificationActivity extends BaseActivity {
 
 
     private void initListView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        DividerItemDecoration itemDecor = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
-        recyclerView.addItemDecoration(itemDecor);
+        binding.listView.setLayoutManager(new LinearLayoutManager(this));
+        DividerItemDecoration itemDecor = new DividerItemDecoration(binding.listView.getContext(), DividerItemDecoration.VERTICAL);
+        binding.listView.addItemDecoration(itemDecor);
         if (isRead) {
             refresh(true);
         } else {
@@ -156,27 +133,27 @@ public class NotificationActivity extends BaseActivity {
             removeNotification(item);
             return Unit.INSTANCE;
         });
-        recyclerView.setAdapter(this.adapter);
+        binding.listView.setAdapter(adapter);
     }
 
     private void refresh(boolean archived) {
         if (!NetworkUtils.isInternetConnectionEstablished(this)) {
-            progressBar.setVisibility(View.GONE);
-            Snackbar.make(relativeLayout, R.string.no_internet, Snackbar.LENGTH_INDEFINITE)
+            binding.progressBar.setVisibility(View.GONE);
+            Snackbar.make(binding.container, R.string.no_internet, Snackbar.LENGTH_INDEFINITE)
                     .setAction(R.string.retry, view -> refresh(archived)).show();
         } else {
             addNotifications(archived);
         }
-        progressBar.setVisibility(View.VISIBLE);
-        no_notification.setVisibility(View.GONE);
-        relativeLayout.setVisibility(View.VISIBLE);
+        binding.progressBar.setVisibility(View.VISIBLE);
+        binding.noNotificationBackground.setVisibility(View.GONE);
+        binding.container.setVisibility(View.VISIBLE);
     }
 
     @SuppressLint("CheckResult")
     private void addNotifications(boolean archived) {
         Timber.d("Add notifications");
         if (mNotificationWorkerFragment == null) {
-            progressBar.setVisibility(View.VISIBLE);
+            binding.progressBar.setVisibility(View.VISIBLE);
             compositeDisposable.add(controller.getNotifications(archived)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -186,16 +163,16 @@ public class NotificationActivity extends BaseActivity {
                         this.notificationList = notificationList;
                         if (notificationList.size()==0){
                             setEmptyView();
-                            relativeLayout.setVisibility(View.GONE);
-                            no_notification.setVisibility(View.VISIBLE);
+                            binding.container.setVisibility(View.GONE);
+                            binding.noNotificationBackground.setVisibility(View.VISIBLE);
                         } else {
                             setItems(notificationList);
                         }
-                        progressBar.setVisibility(View.GONE);
+                        binding.progressBar.setVisibility(View.GONE);
                     }, throwable -> {
                         Timber.e(throwable, "Error occurred while loading notifications");
-                        ViewUtil.showShortSnackbar(relativeLayout, R.string.error_notifications);
-                        progressBar.setVisibility(View.GONE);
+                        ViewUtil.showShortSnackbar(binding.container, R.string.error_notifications);
+                        binding.progressBar.setVisibility(View.GONE);
                     }));
         } else {
             notificationList = mNotificationWorkerFragment.getNotificationList();
@@ -237,16 +214,16 @@ public class NotificationActivity extends BaseActivity {
 
     private void setItems(List<Notification> notificationList) {
         if (notificationList == null || notificationList.isEmpty()) {
-            ViewUtil.showShortSnackbar(relativeLayout, R.string.no_notifications);
+            ViewUtil.showShortSnackbar(binding.container, R.string.no_notifications);
             /*progressBar.setVisibility(View.GONE);
             recyclerView.setVisibility(View.GONE);*/
-            relativeLayout.setVisibility(View.GONE);
+            binding.container.setVisibility(View.GONE);
             setEmptyView();
-            no_notification.setVisibility(View.VISIBLE);
+            binding.noNotificationBackground.setVisibility(View.VISIBLE);
             return;
         }
-        relativeLayout.setVisibility(View.VISIBLE);
-        no_notification.setVisibility(View.GONE);
+        binding.container.setVisibility(View.VISIBLE);
+        binding.noNotificationBackground.setVisibility(View.GONE);
         adapter.setItems(notificationList);
     }
 
@@ -269,9 +246,9 @@ public class NotificationActivity extends BaseActivity {
 
     private void setEmptyView() {
         if (isRead) {
-            noNotificationText.setText(R.string.no_read_notification);
+            binding.noNotificationText.setText(R.string.no_read_notification);
         }else {
-            noNotificationText.setText(R.string.no_notification);
+            binding.noNotificationText.setText(R.string.no_notification);
         }
     }
 

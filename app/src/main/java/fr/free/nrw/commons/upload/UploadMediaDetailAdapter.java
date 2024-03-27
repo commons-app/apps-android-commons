@@ -25,10 +25,9 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import com.google.android.material.textfield.TextInputLayout;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.databinding.RowItemDescriptionBinding;
 import fr.free.nrw.commons.recentlanguages.Language;
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter;
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao;
@@ -60,6 +59,8 @@ public class UploadMediaDetailAdapter extends
     private Activity activity;
     private SelectedVoiceIcon selectedVoiceIcon;
     private static final int REQUEST_CODE_FOR_VOICE_INPUT = 1213;
+
+    private RowItemDescriptionBinding binding;
 
     public UploadMediaDetailAdapter(Fragment fragment, String savedLanguageValue,
         RecentLanguagesDao recentLanguagesDao) {
@@ -100,8 +101,9 @@ public class UploadMediaDetailAdapter extends
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext())
-            .inflate(R.layout.row_item_description, parent, false));
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        binding = RowItemDescriptionBinding.inflate(inflater, parent, false);
+        return new ViewHolder(binding.getRoot());
     }
 
     /**
@@ -203,36 +205,27 @@ public class UploadMediaDetailAdapter extends
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Nullable
-        @BindView(R.id.description_languages)
-        TextView descriptionLanguages;
+        TextView descriptionLanguages ;
 
-        @BindView(R.id.description_item_edit_text)
         PasteSensitiveTextInputEditText descItemEditText;
 
-        @BindView(R.id.description_item_edit_text_input_layout)
         TextInputLayout descInputLayout;
 
-        @BindView(R.id.caption_item_edit_text)
         PasteSensitiveTextInputEditText captionItemEditText;
 
-        @BindView(R.id.caption_item_edit_text_input_layout)
         TextInputLayout captionInputLayout;
 
-        @BindView(R.id.btn_remove)
         ImageView removeButton;
 
-        @BindView(R.id.btn_add)
         ImageView addButton;
 
-        @BindView(R.id.cl_parent)
         ConstraintLayout clParent;
 
-        @BindView(R.id.ll_write_better_caption)
         LinearLayout betterCaptionLinearLayout;
 
-        @BindView(R.id.ll_write_better_description)
         LinearLayout betterDescriptionLinearLayout;
+
+        private
 
         AbstractTextWatcher captionListener;
 
@@ -240,13 +233,24 @@ public class UploadMediaDetailAdapter extends
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
             Timber.i("descItemEditText:" + descItemEditText);
         }
 
         public void bind(int position) {
             UploadMediaDetail uploadMediaDetail = uploadMediaDetails.get(position);
             Timber.d("UploadMediaDetail is " + uploadMediaDetail);
+
+            descriptionLanguages = binding.descriptionLanguages;
+            descItemEditText = binding.descriptionItemEditText;
+            descInputLayout = binding.descriptionItemEditTextInputLayout;
+            captionItemEditText = binding.captionItemEditText;
+            captionInputLayout = binding.captionItemEditTextInputLayout;
+            removeButton = binding.btnRemove;
+            addButton = binding.btnAdd;
+            clParent = binding.clParent;
+            betterCaptionLinearLayout = binding.llWriteBetterCaption;
+            betterDescriptionLinearLayout = binding.llWriteBetterDescription;
+
 
             descriptionLanguages.setFocusable(false);
             captionItemEditText.addTextChangedListener(new AbstractTextWatcher(
@@ -495,7 +499,9 @@ public class UploadMediaDetailAdapter extends
             ((RecentLanguagesAdapter) adapterView
                 .getAdapter()).setSelectedLangCode(languageCode);
             Timber.d("Description language code is: %s", languageCode);
-            descriptionLanguages.setText(languageCode);
+            if (descriptionLanguages!=null) {
+                descriptionLanguages.setText(languageCode);
+            }
             dialog.dismiss();
         }
 
@@ -528,12 +534,15 @@ public class UploadMediaDetailAdapter extends
                 languageHistoryListView.setVisibility(View.VISIBLE);
                 recentLanguagesTextView.setVisibility(View.VISIBLE);
                 separator.setVisibility(View.VISIBLE);
-                final RecentLanguagesAdapter recentLanguagesAdapter
-                    = new RecentLanguagesAdapter(
-                    descriptionLanguages.getContext(),
-                    recentLanguagesDao.getRecentLanguages(),
-                    selectedLanguages);
-                languageHistoryListView.setAdapter(recentLanguagesAdapter);
+
+                if (descriptionLanguages!=null) {
+                    final RecentLanguagesAdapter recentLanguagesAdapter
+                        = new RecentLanguagesAdapter(
+                        descriptionLanguages.getContext(),
+                        recentLanguagesDao.getRecentLanguages(),
+                        selectedLanguages);
+                    languageHistoryListView.setAdapter(recentLanguagesAdapter);
+                }
             }
         }
 

@@ -21,6 +21,8 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment
 import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.databinding.FragmentBookmarksBinding
+import fr.free.nrw.commons.databinding.FragmentFeaturedRootBinding
 import fr.free.nrw.commons.explore.ParentViewPager
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import org.junit.Assert
@@ -81,6 +83,8 @@ class BookmarkListRootFragmentUnitTest {
     @Mock
     private lateinit var adapter: BookmarksPagerAdapter
 
+    private lateinit var binding: FragmentFeaturedRootBinding
+
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
@@ -95,14 +99,17 @@ class BookmarkListRootFragmentUnitTest {
         fragmentTransaction.commitNowAllowingStateLoss()
 
         bookmarkFragment = BookmarkFragment()
+        bookmarkFragment.binding = FragmentBookmarksBinding.inflate(LayoutInflater.from(activity))
+
+        binding = FragmentFeaturedRootBinding.inflate(LayoutInflater.from(activity))
 
         Whitebox.setInternalState(fragment, "mChildFragmentManager", childFragmentManager)
         Whitebox.setInternalState(fragment, "mParentFragment", bookmarkFragment)
         Whitebox.setInternalState(fragment, "listFragment", listFragment)
         Whitebox.setInternalState(fragment, "mediaDetails", mediaDetails)
         Whitebox.setInternalState(fragment, "bookmarksPagerAdapter", bookmarksPagerAdapter)
-        Whitebox.setInternalState(bookmarkFragment, "tabLayout", tabLayout)
-        Whitebox.setInternalState(bookmarkFragment, "viewPager", viewPager)
+        Whitebox.setInternalState(bookmarkFragment.binding, "tabLayout", tabLayout)
+        Whitebox.setInternalState(bookmarkFragment.binding, "viewPagerBookmarks", viewPager)
         Whitebox.setInternalState(bookmarkFragment, "adapter", adapter)
 
         whenever(childFragmentManager.beginTransaction()).thenReturn(childFragmentTransaction)

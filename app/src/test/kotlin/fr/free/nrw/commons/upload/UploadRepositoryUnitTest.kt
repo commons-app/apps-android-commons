@@ -217,8 +217,10 @@ class UploadRepositoryUnitTest {
 
     @Test
     fun testSetSelectedExistingDepictions() {
-        assertEquals(repository.setSelectedExistingDepictions(listOf("")),
-            uploadModel.setSelectedExistingDepictions(listOf("")))
+        assertEquals(
+            repository.setSelectedExistingDepictions(listOf("")),
+            uploadModel.setSelectedExistingDepictions(listOf(""))
+        )
     }
 
     @Test
@@ -264,7 +266,7 @@ class UploadRepositoryUnitTest {
             nearbyPlaces.getFromWikidataQuery(
                 LatLng(0.0, 0.0, 0.0f),
                 java.util.Locale.getDefault().language, 0.1,
-                false, null
+                null
             )
         ).thenReturn(listOf(place))
         assertEquals(
@@ -287,7 +289,7 @@ class UploadRepositoryUnitTest {
             nearbyPlaces.getFromWikidataQuery(
                 LatLng(0.0, 0.0, 0.0f),
                 java.util.Locale.getDefault().language, 0.1,
-                false, null
+                null
             )
         ).thenThrow(Exception())
         assertEquals(
@@ -348,19 +350,25 @@ class UploadRepositoryUnitTest {
 
     @Test
     fun testGetSelectedExistingCategories() {
-        assertEquals(repository.selectedExistingCategories,
-            categoriesModel.getSelectedExistingCategories())
+        assertEquals(
+            repository.selectedExistingCategories,
+            categoriesModel.getSelectedExistingCategories()
+        )
     }
 
     @Test
     fun testSetSelectedExistingCategories() {
-        assertEquals(repository.setSelectedExistingCategories(listOf("Test")),
-            categoriesModel.setSelectedExistingCategories(mutableListOf("Test")))
+        assertEquals(
+            repository.setSelectedExistingCategories(listOf("Test")),
+            categoriesModel.setSelectedExistingCategories(mutableListOf("Test"))
+        )
     }
 
     @Test
     fun testGetCategories() {
-        assertEquals(repository.getCategories(listOf("Test")),
-            categoriesModel.getCategoriesByName(mutableListOf("Test")))
+        assertEquals(
+            repository.getCategories(listOf("Test")),
+            categoriesModel.getCategoriesByName(mutableListOf("Test"))
+        )
     }
 }

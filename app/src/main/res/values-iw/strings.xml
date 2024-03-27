@@ -375,6 +375,7 @@
   <string name="share_app_title">שיתוף היישום</string>
   <string name="rotate">סיבוב</string>
   <string name="error_fetching_nearby_places">שגיאה באחזור המקומות בסביבתך.</string>
+  <string name="no_pictures_in_this_area">אין תמונות באזור הזה</string>
   <string name="no_nearby_places_around">אין מקומות בסביבה</string>
   <string name="error_fetching_nearby_monuments">שגיאה באחזור אתרים בסביבתך.</string>
   <string name="no_recent_searches">אין חיפושים אחרונים</string>

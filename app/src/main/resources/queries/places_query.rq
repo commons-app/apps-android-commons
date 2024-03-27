@@ -1,0 +1,22 @@
+SELECT
+  ?item
+  (SAMPLE(COALESCE(?en_label, ?fr_label, ?id_label, ?item_label)) as ?label)
+  (SAMPLE(?location) as ?location)
+  (GROUP_CONCAT(DISTINCT ?class_label ; separator=",") as ?class)
+WHERE {
+  SERVICE wikibase:box {
+    ?item wdt:P625 ?location .
+    bd:serviceParam wikibase:cornerSouthWest "Point(${LONGITUDE} ${LATITUDE})"^^geo:wktLiteral .
+    bd:serviceParam wikibase:cornerNorthEast "Point(${NEXT_LONGITUDE} ${NEXT_LATITUDE})"^^geo:wktLiteral .
+  }
+  MINUS {?item wdt:P18 ?image}
+  MINUS {?item wdt:P582 ?endtime.}
+  MINUS {?item wdt:P582 ?dissolvedOrAbolished.}
+  MINUS {?item p:P31 ?instanceStatement. ?instanceStatement pq:P582 ?endtimeQualifier.}
+  OPTIONAL {?item rdfs:label ?en_label . FILTER(LANG(?en_label) = "en")}
+  OPTIONAL {?item rdfs:label ?fr_label . FILTER(LANG(?fr_label) = "fr")}
+  OPTIONAL {?item rdfs:label ?vn_label . FILTER(LANG(?id_label) = "id")}
+  OPTIONAL {?item rdfs:label ?item_label}
+  OPTIONAL {?item wdt:P31 ?class. ?class rdfs:label ?class_label. FILTER(LANG(?class_label) = "en")}
+}
+GROUP BY ?item

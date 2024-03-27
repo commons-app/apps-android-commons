@@ -28,6 +28,7 @@ import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
+import fr.free.nrw.commons.databinding.FragmentMediaDetailBinding
 import fr.free.nrw.commons.delete.DeleteHelper
 import fr.free.nrw.commons.delete.ReasonBuilder
 import fr.free.nrw.commons.explore.SearchActivity
@@ -65,7 +66,6 @@ class MediaDetailFragmentUnitTests {
     private lateinit var fragment: MediaDetailFragment
     private lateinit var fragmentManager: FragmentManager
     private lateinit var layoutInflater: LayoutInflater
-    private lateinit var view: View
     private lateinit var context: Context
 
     @Mock
@@ -148,6 +148,8 @@ class MediaDetailFragmentUnitTests {
     @Mock
     private lateinit var mockSharedPreferencesEditor:  SharedPreferences.Editor
 
+    private lateinit var binding: FragmentMediaDetailBinding
+
     @Before
     fun setUp() {
 
@@ -170,14 +172,12 @@ class MediaDetailFragmentUnitTests {
 
         layoutInflater = LayoutInflater.from(activity)
 
-        view = LayoutInflater.from(activity)
-            .inflate(R.layout.fragment_media_detail, null) as View
+        binding = FragmentMediaDetailBinding.inflate(layoutInflater)
 
-        scrollView = view.findViewById(R.id.mediaDetailScrollView)
-        Whitebox.setInternalState(fragment, "scrollView", scrollView)
+        scrollView = binding.mediaDetailScrollView
 
-        progressBarDeletion = view.findViewById(R.id.progressBarDeletion)
-        delete = view.findViewById(R.id.nominateDeletion)
+        progressBarDeletion = binding.progressBarDeletion
+        delete = binding.nominateDeletion
 
         Whitebox.setInternalState(fragment, "media", media)
         Whitebox.setInternalState(fragment, "isDeleted", isDeleted)
@@ -185,34 +185,13 @@ class MediaDetailFragmentUnitTests {
         Whitebox.setInternalState(fragment, "reasonListEnglishMappings", reasonListEnglishMappings)
         Whitebox.setInternalState(fragment, "reasonBuilder", reasonBuilder)
         Whitebox.setInternalState(fragment, "deleteHelper", deleteHelper)
-        Whitebox.setInternalState(fragment, "progressBar", progressBar)
-        Whitebox.setInternalState(fragment, "progressBarEditDescription", progressBar)
-        Whitebox.setInternalState(fragment, "captionsListView", listView)
-        Whitebox.setInternalState(fragment, "descriptionWebView", webView)
+        Whitebox.setInternalState(fragment, "binding", binding)
         Whitebox.setInternalState(fragment, "detailProvider", detailProvider)
-        Whitebox.setInternalState(fragment, "image", simpleDraweeView)
-        Whitebox.setInternalState(fragment, "title", textView)
-        Whitebox.setInternalState(fragment, "toDoReason", textView)
-        Whitebox.setInternalState(fragment, "desc", htmlTextView)
-        Whitebox.setInternalState(fragment, "license", textView)
-        Whitebox.setInternalState(fragment, "coordinates", textView)
-        Whitebox.setInternalState(fragment, "seeMore", textView)
-        Whitebox.setInternalState(fragment, "uploadedDate", textView)
-        Whitebox.setInternalState(fragment, "mediaCaption", textView)
-        Whitebox.setInternalState(fragment, "captionLayout", linearLayout)
-        Whitebox.setInternalState(fragment, "depictsLayout", linearLayout)
-        Whitebox.setInternalState(fragment, "delete", delete)
-        Whitebox.setInternalState(fragment, "depictionContainer", linearLayout)
-        Whitebox.setInternalState(fragment, "toDoLayout", linearLayout)
-        Whitebox.setInternalState(fragment, "authorLayout", linearLayout)
-        Whitebox.setInternalState(fragment, "showCaptionAndDescriptionContainer", linearLayout)
-        Whitebox.setInternalState(fragment, "editDescription", button)
-        Whitebox.setInternalState(fragment, "depictEditButton", button)
-        Whitebox.setInternalState(fragment, "categoryEditButton", button)
-        Whitebox.setInternalState(fragment, "categoryContainer", linearLayout)
-        Whitebox.setInternalState(fragment, "progressBarDeletion", progressBarDeletion)
-        Whitebox.setInternalState(fragment, "progressBarEditCategory", progressBarDeletion)
-        Whitebox.setInternalState(fragment, "mediaDiscussion", textView)
+        Whitebox.setInternalState(binding, "mediaDetailImageView", simpleDraweeView)
+        Whitebox.setInternalState(binding, "mediaDetailTitle", textView)
+        Whitebox.setInternalState(binding, "mediaDetailDepictionContainer", linearLayout)
+        Whitebox.setInternalState(binding, "dummyCaptionDescriptionContainer", linearLayout)
+        Whitebox.setInternalState(binding, "depictionsEditButton", button)
         Whitebox.setInternalState(fragment, "locationManager", locationManager)
 
         `when`(simpleDraweeView.hierarchy).thenReturn(genericDraweeHierarchy)
@@ -267,7 +246,7 @@ class MediaDetailFragmentUnitTests {
     @Throws(Exception::class)
     fun testLaunchZoomActivity() {
         `when`(media.imageUrl).thenReturn("")
-        fragment.launchZoomActivity(view)
+        fragment.launchZoomActivity(binding.root)
     }
 
     @Test
@@ -383,7 +362,7 @@ class MediaDetailFragmentUnitTests {
                 "|other versions=\n" +
                 "}}\n" +
                 "{{Location|27.043186|88.267003}}\n" +
-                "{{Assessments|featured=1}}"
+                "{{Assessments|featured=1}}\n"
         val map = linkedMapOf("en" to "Antique cash register in a cafe, Darjeeling")
         Assert.assertEquals(map, method.invoke(fragment, s))
     }
@@ -429,7 +408,7 @@ class MediaDetailFragmentUnitTests {
                 "|Other fields = {{Credit line |Author = © [[User:Colin]] | Other = Wikimedia Commons |License = CC-BY-SA-4.0}}\n" +
                 "}}\n" +
                 "{{Location|51.519003|-0.138353}}\n" +
-                "{{Assessments|featured=1}}"
+                "{{Assessments|featured=1}}\n"
         val map = linkedMapOf("en" to "[[:en:Fitzrovia Chapel|Fitzrovia Chapel]] ceiling<br/>\n")
         Assert.assertEquals(map, method.invoke(fragment, s))
     }
@@ -487,7 +466,7 @@ class MediaDetailFragmentUnitTests {
                 "|Date          =2015-02-17\n" +
                 "|Permission    ={{Diliff/Licensing}}\n" +
                 "|other_versions=\n" +
-                "}}"
+                "}}\n"
         val map = linkedMapOf("en" to "The interior of Sacred Heart RC Church, Wimbledon, London.")
         Assert.assertEquals(map, method.invoke(fragment, s))
     }

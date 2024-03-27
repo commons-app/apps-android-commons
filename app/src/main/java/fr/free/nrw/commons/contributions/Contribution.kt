@@ -5,6 +5,7 @@ import android.os.Parcelable
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.upload.UploadItem
@@ -13,7 +14,8 @@ import fr.free.nrw.commons.upload.WikidataPlace
 import fr.free.nrw.commons.upload.WikidataPlace.Companion.from
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import kotlinx.parcelize.Parcelize
-import java.util.*
+import java.io.File
+import java.util.Date
 
 @Entity(tableName = "contribution")
 @Parcelize
@@ -116,5 +118,20 @@ data class Contribution constructor(
         fun formatDescriptions(descriptions: List<UploadMediaDetail>) =
             descriptions.filter { it.descriptionText.isNotEmpty() }
                 .joinToString(separator = "") { "{{${it.languageCode}|1=${it.descriptionText}}}" }
+    }
+
+    val fileKey : String? get() = chunkInfo?.uploadResult?.filekey
+    val localUriPath: File? get() = localUri?.path?.let { File(it) }
+
+    fun isCompleted(): Boolean {
+        return chunkInfo != null && chunkInfo!!.totalChunks == chunkInfo!!.indexOfNextChunkToUpload
+    }
+
+    fun isPaused(): Boolean {
+        return CommonsApplication.pauseUploads[pageId] ?: false
+    }
+
+    fun unpause() {
+        CommonsApplication.pauseUploads[pageId] = false
     }
 }
