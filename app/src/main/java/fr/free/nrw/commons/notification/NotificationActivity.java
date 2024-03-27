@@ -128,9 +128,9 @@ public class NotificationActivity extends BaseActivity {
                         throwable.printStackTrace();
                     ViewUtil.showShortSnackbar(binding.container, R.string.error_notifications);
                     binding.progressBar.setVisibility(View.GONE);
-                        ViewUtil.showShortSnackbar(relativeLayout, R.string.error_notifications);
+                        ViewUtil.showShortSnackbar(binding.container, R.string.error_notifications);
                     }
-                    progressBar.setVisibility(View.GONE);
+                    binding.progressBar.setVisibility(View.GONE);
                 });
         compositeDisposable.add(disposable);
     }
