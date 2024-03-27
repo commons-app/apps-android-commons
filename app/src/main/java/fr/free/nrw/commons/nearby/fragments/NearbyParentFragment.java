@@ -392,7 +392,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         screenBottomLeft.getLatitude(), screenBottomLeft.getLongitude(), 0);
                     fr.free.nrw.commons.location.LatLng screenBottomLeftLatLng = new fr.free.nrw.commons.location.LatLng(
                         screenTopRight.getLatitude(), screenTopRight.getLongitude(), 0);
-                    progressDialog.setTitle("Saving GPX File");
+                    progressDialog.setTitle(getString(R.string.saving_gpx_file));
                     progressDialog.show();
                     savePlacesAsGPX(screenTopRightLatLng, screenBottomLeftLatLng);
                 } catch (Exception e) {
@@ -414,7 +414,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         screenBottomLeft.getLatitude(), screenBottomLeft.getLongitude(), 0);
                     fr.free.nrw.commons.location.LatLng screenBottomLeftLatLng = new fr.free.nrw.commons.location.LatLng(
                         screenTopRight.getLatitude(), screenTopRight.getLongitude(), 0);
-                    progressDialog.setTitle("Saving KML File");
+                    progressDialog.setTitle(getString(R.string.saving_kml_file));
                     progressDialog.show();
                     savePlacesAsKML(screenTopRightLatLng, screenBottomLeftLatLng);
                 } catch (Exception e) {
