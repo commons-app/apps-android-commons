@@ -390,7 +390,7 @@ class ImageAdapter(
             sharedPreferences.getBoolean(SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
 
         if(showAlreadyActionedImages) {
-            refresh(allImages, allImages)
+            refresh(allImages, allImages, uploadingContributionList)
         } else {
             val iterator = actionableImagesMap.entries.iterator()
             var index = 0
