@@ -197,7 +197,7 @@ public class UploadRepository {
      * query the RemoteDataSource for image quality
      *
      * @param uploadItem UploadItem whose caption is to be checked
-     * @return Quality of UploadItemg
+     * @return Quality of UploadItem
      */
     public Single<Integer> getImageQuality(UploadItem uploadItem, LatLng location) {
         return uploadModel.getImageQuality(uploadItem, location);
