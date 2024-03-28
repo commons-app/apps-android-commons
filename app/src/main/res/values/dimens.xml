@@ -64,6 +64,7 @@
     <dimen name="dimen_5">5dp</dimen>
     <dimen name="dimen_6">6dp</dimen>
     <dimen name="dimen_10">10dp</dimen>
+    <dimen name="dimen_16">16dp</dimen>
     <dimen name="dimen_20">20dp</dimen>
     <dimen name="dimen_40">40dp</dimen>
     <dimen name="dimen_42">42dp</dimen>
