@@ -34,10 +34,10 @@
   <string name="logging_in_title">لاگ ان تھیندا پئے</string>
   <string name="logging_in_message">انتظار کرو۔۔۔</string>
   <string name="updating_caption_message">انتظار کرو۔۔۔</string>
-  <string name="login_success">لاگ ان کامیاب!</string>
-  <string name="login_failed">لاگ ان ناکام!</string>
+  <string name="login_success" fuzzy="true">لاگ ان کامیاب!</string>
+  <string name="login_failed" fuzzy="true">لاگ ان ناکام!</string>
   <string name="upload_failed">فائل کائنی لبھی،ٻئی فائل کیتے کوشش کرو۔</string>
-  <string name="authentication_failed">تصدیق ناکام، ولدا لاڳ ان تھیوو</string>
+  <string name="authentication_failed" fuzzy="true">تصدیق ناکام، ولدا لاڳ ان تھیوو</string>
   <string name="uploading_started">اپ لوڈ شروع!</string>
   <string name="upload_completed_notification_title">%1$s اپ لوڈ تھی ڳیا!</string>
   <string name="upload_completed_notification_text">آپݨی اپلوڈ ݙیکھݨ کیتے ٹیپ کرو</string>
@@ -60,7 +60,7 @@
   <string name="share_title_hint">عنوان (ضروری ہے)</string>
   <string name="share_description_hint">تفصیل</string>
   <string name="share_caption_hint">عنوان</string>
-  <string name="login_failed_generic">لاگ ان ناکام</string>
+  <string name="login_failed_generic" fuzzy="true">لاگ ان ناکام</string>
   <string name="share_upload_button">اپلوڈ</string>
   <string name="multiple_share_base_title">ایں سیٹ دا ناں ݙسو</string>
   <string name="provider_modifications">تبدیلیاں</string>

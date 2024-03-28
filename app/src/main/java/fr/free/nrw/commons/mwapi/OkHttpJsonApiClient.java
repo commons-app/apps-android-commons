@@ -409,7 +409,7 @@ public class OkHttpJsonApiClient {
     public String getPlacesAsKML(final LatLng leftLatLng, final LatLng rightLatLng)
         throws Exception {
         String kmlString = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" +
-            "<!--Created by wikidata-missing-pictures-offline -->\n" +
+            "<!--Created by Wikimedia Commons Android app -->\n" +
             "<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n" +
             "    <Document>";
 
@@ -489,7 +489,7 @@ public class OkHttpJsonApiClient {
         String gpxString = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" +
             "<gpx\n" +
             " version=\"1.0\"\n" +
-            " creator=\"ExpertGPS 1.1 - https://www.topografix.com\"\n" +
+            " creator=\"Wikimedia Commons Android app\"\n" +
             " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
             " xmlns=\"http://www.topografix.com/GPX/1/0\"\n" +
             " xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd\">"

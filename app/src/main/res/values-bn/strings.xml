@@ -89,10 +89,10 @@
   <string name="logging_in_message">অনুগ্রহ করে অপেক্ষা করুন…</string>
   <string name="updating_caption_title">ক্যাপশন ও বিবরণ হালনাগাদ করা হচ্ছে</string>
   <string name="updating_caption_message">অনুগ্রহ করে অপেক্ষা করুন…</string>
-  <string name="login_success">প্রবেশ সফল!</string>
+  <string name="login_success" fuzzy="true">প্রবেশ সফল!</string>
   <string name="login_failed">প্রবেশ ব্যর্থ!</string>
   <string name="upload_failed">ফাইল পাওয়া যায়নি। আরেকটি ফাইল চেষ্টা করুন।</string>
-  <string name="authentication_failed">প্রমাণীকরণ ব্যর্থ হয়েছে, অনুগ্রহ করে আবার প্রবেশ করুন</string>
+  <string name="authentication_failed">প্রমাণীকরণ ব্যর্থ হয়েছে। অনুগ্রহ করে আবার প্রবেশ করুন।</string>
   <string name="uploading_started">আপলোড আরম্ভ হয়েছে!</string>
   <string name="uploading_queued">আপলোড সারিবদ্ধ করা হয়েছে (সীমিত সংযোগ মোড সক্রিয় করা)</string>
   <string name="upload_completed_notification_title">%1$ আপলোড হয়েছে!</string>
@@ -119,11 +119,11 @@
   <string name="add_caption_toast">অনুগ্রহ করে এই ফাইলটির জন্য একটি ক্যাপশন দিন</string>
   <string name="share_description_hint">বিবরণ</string>
   <string name="share_caption_hint">ক্যাপশন</string>
-  <string name="login_failed_network">প্রবেশ করা যাচ্ছে না - নেটওয়ার্ক ব্যর্থতা</string>
+  <string name="login_failed_network">প্রবেশ করা যাচ্ছে না - নেটওয়ার্কে সমস্যা</string>
   <string name="login_failed_throttled">খুব বেশি অসফল প্রচেষ্টা। অনুগ্রহ করে কয়েক মিনিট পরে আবারও চেষ্টা করুন।</string>
   <string name="login_failed_blocked">দুঃখিত, এই ব্যবহারকারীকে কমন্সে বাধা দেয়া হয়েছে</string>
   <string name="login_failed_2fa_needed">আপনাকে অবশ্যই আপনার দু\'স্তরের সত্যায়নকরণ কোড দিতে হবে।</string>
-  <string name="login_failed_generic">প্রবেশ ব্যর্থ</string>
+  <string name="login_failed_generic" fuzzy="true">প্রবেশ ব্যর্থ</string>
   <string name="share_upload_button">আপলোড</string>
   <string name="multiple_share_base_title">এই সেটের নাম</string>
   <string name="provider_modifications">পরিবর্তনসমূহ</string>
@@ -275,7 +275,7 @@
   <string name="nominated_see_more">বিশদের জন্য ওয়েবপৃষ্ঠা দেখুন</string>
   <string name="skip_login">এড়ান</string>
   <string name="navigation_item_login">প্রবেশ করুন</string>
-  <string name="skip_login_title">আপনি কি সত্যিই প্রবেশকরণ এড়িয়ে যেতে চান?</string>
+  <string name="skip_login_title" fuzzy="true">আপনি কি সত্যিই প্রবেশকরণ এড়িয়ে যেতে চান?</string>
   <string name="skip_login_message">ভবিষ্যতে চিত্র আপলোড করতে চাইলে আপনাকে প্রবেশ করতে হবে।</string>
   <string name="login_alert_message">এই সুবিধাটি ব্যাবহার করতে প্রবেশ করুন</string>
   <string name="copy_wikicode">উইকিপাঠ্যটি ক্লিপবোর্ডে অনুলিপি করুন</string>

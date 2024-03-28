@@ -25,10 +25,10 @@
   <string name="signup">Qeydiyyatdan keç</string>
   <string name="logging_in_title">Giriş edilir</string>
   <string name="logging_in_message">Lütfən gözləyin…</string>
-  <string name="login_success">Daxil oldunuz!</string>
+  <string name="login_success" fuzzy="true">Daxil oldunuz!</string>
   <string name="login_failed">Giriş baş tutmadı!</string>
   <string name="upload_failed">Fayl tapılmadı. Xahiş edirik başqa bir fayl üzərində cəhd edin.</string>
-  <string name="authentication_failed">Doğrulama alınmadı, xahiş edirəm yenidən daxil olun</string>
+  <string name="authentication_failed" fuzzy="true">Doğrulama alınmadı, xahiş edirəm yenidən daxil olun</string>
   <string name="uploading_started">Yükləmə başladı!</string>
   <string name="upload_completed_notification_title">%1$s yükləndi!</string>
   <string name="upload_completed_notification_text">Yüklədiyini izlə</string>
@@ -49,11 +49,11 @@
   <string name="menu_share">Paylaş</string>
   <string name="share_title_hint">Başlıq (Zəruri)</string>
   <string name="share_description_hint">Açıqlama</string>
-  <string name="login_failed_network">Daxil olmaq olmur — şəbəkə xətası</string>
+  <string name="login_failed_network" fuzzy="true">Daxil olmaq olmur — şəbəkə xətası</string>
   <string name="login_failed_throttled">Çox sayda uğursuz daxil olma. Xahiş edirik bir neçə dəqiqə sonra yenidən cəhd edin.</string>
   <string name="login_failed_blocked">Bağışlayın, bu istifadəçi Commons-da bloklanmışdır.</string>
   <string name="login_failed_2fa_needed">İki faktorlu giriş doğrulama kodunu verməlisiniz.</string>
-  <string name="login_failed_generic">Daxil olma uğursuz oldu</string>
+  <string name="login_failed_generic" fuzzy="true">Daxil olma uğursuz oldu</string>
   <string name="share_upload_button">Yüklə</string>
   <string name="multiple_share_base_title">Bu dəsti adlandırın</string>
   <string name="provider_modifications">Bildirişlər</string>

@@ -192,6 +192,15 @@ class UploadRepositoryUnitTest {
     }
 
     @Test
+    fun testGetCaptionQuality() {
+        assertEquals(
+            repository.getCaptionQuality(uploadItem),
+            uploadModel.getCaptionQuality(uploadItem)
+        )
+    }
+
+
+    @Test
     fun testDeletePicture() {
         assertEquals(repository.deletePicture(""), uploadModel.deletePicture(""))
     }

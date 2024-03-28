@@ -32,8 +32,8 @@
   <string name="logging_in_title">Невтрҗәнә</string>
   <string name="logging_in_message">Күләхнтн...</string>
   <string name="updating_caption_message">Күләхнтн...</string>
-  <string name="login_success">Невтрлт амҗлтта болла!</string>
-  <string name="login_failed">Невтрҗ чадсн уга!</string>
+  <string name="login_success" fuzzy="true">Невтрлт амҗлтта болла!</string>
+  <string name="login_failed" fuzzy="true">Невтрҗ чадсн уга!</string>
   <string name="uploading_started">Ацаллт кеҗ экллә!</string>
   <string name="upload_completed_notification_title">%1$s ацалгдв!</string>
   <string name="upload_completed_notification_text">Ацаллтын җигсәлтиг үзх</string>
@@ -54,9 +54,9 @@
   <string name="menu_view_file_page">Файлын халхиг үзх</string>
   <string name="add_caption_toast">Эн файлын нериг заахнтн</string>
   <string name="share_description_hint">Тодрхаллт</string>
-  <string name="login_failed_network">Невтрхд эндү — сүлҗән</string>
+  <string name="login_failed_network" fuzzy="true">Невтрхд эндү — сүлҗән</string>
   <string name="login_failed_blocked">Эн кергләч Вики-аһулх һазр деер блоклгдсн бәәнә</string>
-  <string name="login_failed_generic">Невтрҗ чадсн уга!</string>
+  <string name="login_failed_generic" fuzzy="true">Невтрҗ чадсн уга!</string>
   <string name="share_upload_button">Орулх</string>
   <string name="provider_modifications">Кесн хүврлтс</string>
   <string name="menu_upload_single">Орулх</string>

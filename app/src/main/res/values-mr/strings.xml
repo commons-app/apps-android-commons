@@ -44,8 +44,8 @@
   <string name="signup">नोंदणी करा</string>
   <string name="logging_in_title">सनोंद प्रवेश करीत आहे</string>
   <string name="logging_in_message">कृपया थांबा…</string>
-  <string name="login_success">सनोंद प्रवेश यशस्वी!</string>
-  <string name="login_failed">सनोंद प्रवेश अयशस्वी!</string>
+  <string name="login_success" fuzzy="true">सनोंद प्रवेश यशस्वी!</string>
+  <string name="login_failed" fuzzy="true">सनोंद प्रवेश अयशस्वी!</string>
   <string name="upload_failed">संचिका सापडली नाही. कृपया दुसऱ्या संचिकेसाठी प्रयत्न करा.</string>
   <string name="authentication_failed" fuzzy="true">अधिप्रमाणन अयशस्वी!</string>
   <string name="uploading_started">अपभारण सुरू झाले!</string>
@@ -68,11 +68,11 @@
   <string name="menu_share">सहभाग करा</string>
   <string name="share_title_hint" fuzzy="true">शीर्षक</string>
   <string name="share_description_hint">वर्णन</string>
-  <string name="login_failed_network">सनोंद प्रवेश अशक्य - नेटवर्क नाही</string>
+  <string name="login_failed_network" fuzzy="true">सनोंद प्रवेश अशक्य - नेटवर्क नाही</string>
   <string name="login_failed_throttled">अनेक अयशस्वी प्रयत्न.काही मिनीटांनंतर पुन्हा प्रयत्न करा.</string>
   <string name="login_failed_blocked">माफ करा, कॉमन्सवर हा सदस्य प्रतिबंधित आहे</string>
   <string name="login_failed_2fa_needed">आपण आपल्या दोन कारक प्रमाणिकरण कोड प्रदान करणे आवश्यक आहे.</string>
-  <string name="login_failed_generic">सनोंद प्रवेश अयशस्वी!</string>
+  <string name="login_failed_generic" fuzzy="true">सनोंद प्रवेश अयशस्वी!</string>
   <string name="share_upload_button">अपभारण करा</string>
   <string name="multiple_share_base_title">या संचास नाव द्या</string>
   <string name="provider_modifications">बदल</string>

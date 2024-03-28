@@ -96,13 +96,13 @@
   <string name="logging_in_message">請稍候…</string>
   <string name="updating_caption_title">正在更新說明與描述</string>
   <string name="updating_caption_message">請稍候…</string>
-  <string name="login_success">登入成功！</string>
-  <string name="login_failed">登入失敗！</string>
+  <string name="login_success" fuzzy="true">登入成功！</string>
+  <string name="login_failed" fuzzy="true">登入失敗！</string>
   <string name="upload_failed">找不到檔案。請試試看其它檔案。</string>
   <string name="retry_limit_reached">已達到重試限制上限！請取消上傳並重試</string>
   <string name="unrestricted_battery_mode">關閉電池最佳化？</string>
   <string name="suggest_unrestricted_mode">在關閉電池最佳化後，可讓上傳超過 3 張以上圖片的過程更穩定。請從設定中關閉維基共享資源應用程式的電池最佳化，來獲得較流暢的上傳體驗。 \n\n關閉電池最佳化的可能步驟：\n\n步驟 1：點擊下方的「設定」按鈕。\n\n步驟 2：從「未最佳化」切換為「全部應用程式」。\n\n步驟 3：搜尋「Commons」或「fr.free.nrw.commons」。\n\n步驟 4：點擊它並選擇「不最佳化」。\n\n步驟 5：按「確定」。</string>
-  <string name="authentication_failed">身份驗證失敗，請重新登入</string>
+  <string name="authentication_failed" fuzzy="true">身份驗證失敗，請重新登入</string>
   <string name="uploading_started">開始上傳！</string>
   <string name="uploading_queued">上傳已排定（限制連線模式已啟用）</string>
   <string name="upload_completed_notification_title">已上傳%1$s！</string>
@@ -129,11 +129,11 @@
   <string name="add_caption_toast">請提供此檔案的說明</string>
   <string name="share_description_hint">描述</string>
   <string name="share_caption_hint">說明</string>
-  <string name="login_failed_network">無法登入－網路故障</string>
+  <string name="login_failed_network" fuzzy="true">無法登入－網路故障</string>
   <string name="login_failed_throttled">失敗次數過多。請於幾分鐘後重試。</string>
   <string name="login_failed_blocked">很抱歉，該使用者已被維基共享資源封禁</string>
   <string name="login_failed_2fa_needed">必須提供您的雙重驗證代碼。</string>
-  <string name="login_failed_generic">登入失敗</string>
+  <string name="login_failed_generic" fuzzy="true">登入失敗</string>
   <string name="share_upload_button">上傳</string>
   <string name="multiple_share_base_title">給這個集合命名</string>
   <string name="provider_modifications">修改</string>
@@ -290,7 +290,7 @@
   <string name="nominated_see_more">詳情請參閱網頁</string>
   <string name="skip_login">略過</string>
   <string name="navigation_item_login">登入</string>
-  <string name="skip_login_title">您確定要略過登入嗎？</string>
+  <string name="skip_login_title" fuzzy="true">您確定要略過登入嗎？</string>
   <string name="skip_login_message">之後您需要登入才能上傳圖片。</string>
   <string name="login_alert_message">請登入來使用此功能</string>
   <string name="copy_wikicode">複製 wikitext 到剪貼簿</string>
@@ -357,7 +357,7 @@
   <string name="construction_event_answer">在維基共享資源上，展現科技或文化的圖片很受到歡迎。</string>
   <string name="congratulatory_message_quiz">您答對了 %1$s 題，恭喜！</string>
   <string name="warning_for_no_answer">請在兩個選項中擇一，來回答這個問題。</string>
-  <string name="user_not_logged_in">登入時限以過，請重新登入。</string>
+  <string name="user_not_logged_in" fuzzy="true">登入時限以過，請重新登入。</string>
   <string name="quiz_result_share_message">向朋友分享您的測驗結果！</string>
   <string name="continue_message">繼續</string>
   <string name="correct">正確答案</string>
@@ -441,7 +441,7 @@
   <string name="never_ask_again">永遠不再詢問</string>
   <string name="display_location_permission_title">要求位置權限</string>
   <string name="display_location_permission_explanation">當需要附近地點通知卡片的檢視功能時，要求位置權限。</string>
-  <string name="achievements_fetch_failed">出了點問題，我們無法取得您的成果</string>
+  <string name="achievements_fetch_failed" fuzzy="true">出了點問題，我們無法取得您的成果</string>
   <string name="achievements_fetch_failed_ultimate_achievement">您做出的貢獻多到讓我們的成就計算系統無法因應，此為終極成果。</string>
   <string name="ends_on">結束於：</string>
   <string name="display_campaigns">顯示活動</string>
@@ -457,7 +457,7 @@
   <string name="open_document_photo_picker_explanation">新的 Android 照片點選器有遺失位置資訊的風險。若您正在使用該點選器，請啟用它。</string>
   <string name="location_loss_warning">關閉這個可能會觸發新的 Android 照片點選器。該點選器有遺失位置資訊的風險。\n\n請輕觸「閱讀更多」來獲得更多相關資訊。</string>
   <string name="nearby_campaign_dismiss_message">您不會再看到活動。然而，若您有意的話您可以在設定裡重新啟動此通知。</string>
-  <string name="this_function_needs_network_connection">此功能需要連接到網路，請檢查您的連線設定。</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">此功能需要連接到網路，請檢查您的連線設定。</string>
   <string name="error_processing_image">處理圖片時出現錯誤。請重試！</string>
   <string name="getting_edit_token">獲取用於編輯的令牌</string>
   <string name="check_category_adding_template">添加用於分類檢查的模板</string>
@@ -584,7 +584,7 @@
   <string name="place_state_needs_photo">需要照片</string>
   <string name="place_type">地點類型：</string>
   <string name="nearby_search_hint">橋樑、博物館、旅館等</string>
-  <string name="you_must_reset_your_passsword">登入時發生一些問題，您必須重新設定您的密碼！！</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">登入時發生一些問題，您必須重新設定您的密碼！！</string>
   <string name="title_for_media">媒體</string>
   <string name="title_for_child_classes">子類別</string>
   <string name="title_for_parent_classes">父類別</string>
@@ -720,8 +720,8 @@
   <string name="add_location">新增位置</string>
   <string name="feedback_sharing_data_alert">請移除來自此電子郵件中您無意公開分享的任何資訊。另外請注意，您用來發布訊息的電子郵件地址、關聯名稱、與個人資料圖片會公開顯示。</string>
   <string name="explore_map_details">詳細資料</string>
-  <string name="achievements_unavailable_beta">成果僅在生產版本可用，請查閱開發者文件。</string>
-  <string name="leaderboard_unavailable_beta">排行榜僅在生產版本可用，請查閱開發者文件。</string>
+  <string name="achievements_unavailable_beta" fuzzy="true">成果僅在生產版本可用，請查閱開發者文件。</string>
+  <string name="leaderboard_unavailable_beta" fuzzy="true">排行榜僅在生產版本可用，請查閱開發者文件。</string>
   <string name="copyright_popup">請僅上傳您自己拍攝的照片。受版權保護的圖像的上傳者將被阻止。這也適用於 beta 版本。感謝您測試該應用程序！</string>
   <string name="select_feedback_data_choice">請取消選擇您不要公開分享的資訊。</string>
   <string name="api_level">API 層級</string>
@@ -767,6 +767,7 @@
   <string name="edit_location">編輯位置</string>
   <string name="send_thanks_to_author">感謝作者</string>
   <string name="error_sending_thanks">發送感謝作者時出現錯誤。</string>
+  <string name="invalid_login_message" fuzzy="true">您的登入已逾時，請重新登入。</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">已選 %d 張圖片</item>
     <item quantity="other">已選 %d 張圖片</item>

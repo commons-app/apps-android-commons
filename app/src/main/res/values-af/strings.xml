@@ -53,10 +53,10 @@
   <string name="signup">Teken aan</string>
   <string name="logging_in_title">Besig met aanmelding</string>
   <string name="logging_in_message">\'n ogenblik geduld…</string>
-  <string name="login_success">Aanmelding geslaagd</string>
-  <string name="login_failed">Aanmelding gefaal</string>
+  <string name="login_success" fuzzy="true">Aanmelding geslaagd</string>
+  <string name="login_failed" fuzzy="true">Aanmelding gefaal</string>
   <string name="upload_failed">Lêer nie gevind. Probeer \'n andere lêer.</string>
-  <string name="authentication_failed">Verifiëring is mislukt. Meld jou weer aan.</string>
+  <string name="authentication_failed" fuzzy="true">Verifiëring is mislukt. Meld jou weer aan.</string>
   <string name="uploading_started">Oplaai het begin!</string>
   <string name="upload_completed_notification_title">%1$s opgelaai!</string>
   <string name="upload_completed_notification_text">Vat om u oplaaie te sien</string>
@@ -77,11 +77,11 @@
   <string name="menu_share">Deel</string>
   <string name="share_title_hint" fuzzy="true">Titel (verplig)</string>
   <string name="share_description_hint">Beskrywing</string>
-  <string name="login_failed_network">Aanmelding nie moontlik - probleem met netwerk</string>
+  <string name="login_failed_network" fuzzy="true">Aanmelding nie moontlik - probleem met netwerk</string>
   <string name="login_failed_throttled">Te veel onsuksesvolle pogings. Probeer \'n paar minute weer.</string>
   <string name="login_failed_blocked">Die gebruiker is op Commons geblokkeer</string>
   <string name="login_failed_2fa_needed">U moet u twee-faktor-verifikasiekode verskaf.</string>
-  <string name="login_failed_generic">Aanmelding het gefaal</string>
+  <string name="login_failed_generic" fuzzy="true">Aanmelding het gefaal</string>
   <string name="share_upload_button">Laai op</string>
   <string name="multiple_share_base_title">Gee hierdie versameling \'n naam</string>
   <string name="provider_modifications">Wysigings</string>
@@ -217,7 +217,7 @@
   <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Sien webbladsy vir details se&lt;/u&gt;</string>
   <string name="skip_login">Huppel</string>
   <string name="navigation_item_login">Teken aan</string>
-  <string name="skip_login_title">Wil u regtig die aanmelding oorslaan?</string>
+  <string name="skip_login_title" fuzzy="true">Wil u regtig die aanmelding oorslaan?</string>
   <string name="skip_login_message">U sal moet aanmeld om in die toekoms foto\'s op te laai.</string>
   <string name="login_alert_message">Meld u aan om hierdie funksie te gebruik</string>
   <string name="copy_wikicode">Kopieer die wikitext na die knipbord</string>
@@ -275,7 +275,7 @@
   <string name="construction_event_answer">Foto\'s wat tegnologie of kultuur toon, is baie welkom op Commons.</string>
   <string name="congratulatory_message_quiz">U het %1$s van die antwoorde korrek. Baie geluk!</string>
   <string name="warning_for_no_answer">Kies een van die twee opsies om die vraag te beantwoord</string>
-  <string name="user_not_logged_in">Aanmeldingsessie is verval, meld weer aan.</string>
+  <string name="user_not_logged_in" fuzzy="true">Aanmeldingsessie is verval, meld weer aan.</string>
   <string name="quiz_result_share_message">Deel jou vasvra met jou vriende!</string>
   <string name="continue_message">Aanhou</string>
   <string name="correct">Korrekte antwoord</string>
@@ -348,12 +348,12 @@
   <string name="never_ask_again">Moet dit nooit weer vra nie</string>
   <string name="display_location_permission_title" fuzzy="true">Wys toestemming vir ligging</string>
   <string name="display_location_permission_explanation">Vra vir liggingstoestemming indien nodig vir die nabygeleë kennisgewingkaartweergawe.</string>
-  <string name="achievements_fetch_failed">Iets het verkeerd geloop. Ons kon nie u prestasies haal nie</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Iets het verkeerd geloop. Ons kon nie u prestasies haal nie</string>
   <string name="ends_on">Eindig op:</string>
   <string name="display_campaigns">Vertoon veldtogte</string>
   <string name="display_campaigns_explanation">Kyk na die lopende veldtogte</string>
   <string name="nearby_campaign_dismiss_message">U sal nie meer die veldtogte sien nie. U kan hierdie kennisgewing egter weer instel in Instellings as u wil.</string>
-  <string name="this_function_needs_network_connection">Kontroleer u verbindinginstellings vir hierdie funksie.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Kontroleer u verbindinginstellings vir hierdie funksie.</string>
   <string name="error_processing_image">Fout het voorgekom tydens die verwerking van die prent. Probeer asseblief weer!</string>
   <string name="getting_edit_token">Kry teken vir redigering</string>
   <string name="check_category_adding_template">Voeg sjabloon by vir kategorie-kontrole</string>

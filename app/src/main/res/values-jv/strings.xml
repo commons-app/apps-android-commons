@@ -46,10 +46,10 @@
   <string name="signup">Dhaftar</string>
   <string name="logging_in_title">Lagi mlebu log</string>
   <string name="logging_in_message">Entènana sadhéla…</string>
-  <string name="login_success">Kasil mlebu log!</string>
-  <string name="login_failed">Wurung mlebu log!</string>
+  <string name="login_success" fuzzy="true">Kasil mlebu log!</string>
+  <string name="login_failed" fuzzy="true">Wurung mlebu log!</string>
   <string name="upload_failed">Berkas ora tinemu. Jajal berkas liyané.</string>
-  <string name="authentication_failed">Otèntikasi ora dadi, sumangga mlebu log manèh</string>
+  <string name="authentication_failed" fuzzy="true">Otèntikasi ora dadi, sumangga mlebu log manèh</string>
   <string name="uploading_started">Wiwit ngunggah!</string>
   <string name="upload_completed_notification_title">%1$s kaunggah!</string>
   <string name="upload_completed_notification_text">Dudul saperlu ndeleng unggahané panjenengan</string>
@@ -70,11 +70,11 @@
   <string name="menu_share">Dum</string>
   <string name="share_title_hint">Sesirah (Kudu)</string>
   <string name="share_description_hint">Wedharan</string>
-  <string name="login_failed_network">Ora bisa mlebu log - jaringané gagal</string>
+  <string name="login_failed_network" fuzzy="true">Ora bisa mlebu log - jaringané gagal</string>
   <string name="login_failed_throttled">Kakèhan upaya sing gagal. Jajalana manèh mengko.</string>
   <string name="login_failed_blocked">Ngapunten, naraguna iki wis diblokir ing Commons</string>
   <string name="login_failed_2fa_needed">Panjenengan kudu ngisi kodhe otèntifikasi rong faktoré panjenengan</string>
-  <string name="login_failed_generic">Wurung mlebu log</string>
+  <string name="login_failed_generic" fuzzy="true">Wurung mlebu log</string>
   <string name="share_upload_button">Unggah</string>
   <string name="multiple_share_base_title">Jenengi sèt iki</string>
   <string name="provider_modifications">Owahan</string>
@@ -176,7 +176,7 @@
   <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Deleng kaca wèb bab rerincèné&lt;/u&gt;</string>
   <string name="skip_login">Lumpati</string>
   <string name="navigation_item_login">Mlebu log</string>
-  <string name="skip_login_title">Apa panjenengan temen ora péngin mlebu log?</string>
+  <string name="skip_login_title" fuzzy="true">Apa panjenengan temen ora péngin mlebu log?</string>
   <string name="about_translate_proceed">Banjuraké</string>
   <string name="about_translate_cancel">Wurung</string>
   <string name="retry">Jajal manèh</string>

@@ -11,8 +11,8 @@
   <string name="login">Anmelden</string>
   <string name="logging_in_title">Bezig mit anmelden</string>
   <string name="logging_in_message">Effen wachten heur…</string>
-  <string name="login_success">Suksesvol an-emeld</string>
-  <string name="login_failed">Anmelden mislokt</string>
+  <string name="login_success" fuzzy="true">Suksesvol an-emeld</string>
+  <string name="login_failed" fuzzy="true">Anmelden mislokt</string>
   <string name="authentication_failed" fuzzy="true">Verifikasie is mislokt</string>
   <string name="uploading_started">t Oplaojen van bestaanden hef an-evöngen</string>
   <string name="upload_completed_notification_title">%1$s in-elaojen!</string>
@@ -33,10 +33,10 @@
   <string name="menu_share">Delen</string>
   <string name="share_title_hint" fuzzy="true">Titel</string>
   <string name="share_description_hint">Beschrieving</string>
-  <string name="login_failed_network">Kon niet anmelden. Der is n probleem mit t netwark</string>
+  <string name="login_failed_network" fuzzy="true">Kon niet anmelden. Der is n probleem mit t netwark</string>
   <string name="login_failed_throttled" fuzzy="true">Je hebben te vake eprobeerd um je eigen an te melden. Probeer t over n paor minuten weer</string>
   <string name="login_failed_blocked">Disse gebruker is eblokkeerd op Wikimedia Commons</string>
-  <string name="login_failed_generic">Anmelden mislokt</string>
+  <string name="login_failed_generic" fuzzy="true">Anmelden mislokt</string>
   <string name="share_upload_button">Bestaand opsturen</string>
   <string name="multiple_share_base_title">Geef disse verzameling n naam</string>
   <string name="provider_modifications">Wiezigingen</string>

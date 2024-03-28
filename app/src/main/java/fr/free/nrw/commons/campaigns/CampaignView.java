@@ -3,22 +3,20 @@ package fr.free.nrw.commons.campaigns;
 import android.content.Context;
 import android.net.Uri;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import fr.free.nrw.commons.campaigns.models.Campaign;
+import fr.free.nrw.commons.databinding.LayoutCampaginBinding;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.DateUtil;
 
 import java.text.ParseException;
 import java.util.Date;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.MainActivity;
@@ -31,6 +29,7 @@ import fr.free.nrw.commons.utils.ViewUtil;
  */
 public class CampaignView extends SwipableCardView {
     Campaign campaign;
+    private LayoutCampaginBinding binding;
     private ViewHolder viewHolder;
 
     public static final String CAMPAIGNS_DEFAULT_PREFERENCE = "displayCampaignsCardView";
@@ -76,8 +75,8 @@ public class CampaignView extends SwipableCardView {
     }
 
     private void init() {
-        final View rootView = inflate(getContext(), R.layout.layout_campagin, this);
-        viewHolder = new ViewHolder(rootView);
+        binding = LayoutCampaginBinding.inflate(LayoutInflater.from(getContext()), this, true);
+        viewHolder = new ViewHolder();
         setOnClickListener(view -> {
             if (campaign != null) {
                 if (campaign.isWLMCampaign()) {
@@ -90,27 +89,16 @@ public class CampaignView extends SwipableCardView {
     }
 
     public class ViewHolder {
-
-        @BindView(R.id.iv_campaign)
-        ImageView ivCampaign;
-        @BindView(R.id.tv_title) TextView tvTitle;
-        @BindView(R.id.tv_description) TextView tvDescription;
-        @BindView(R.id.tv_dates) TextView tvDates;
-
-        public ViewHolder(View itemView) {
-            ButterKnife.bind(this, itemView);
-        }
-
         public void init() {
             if (campaign != null) {
-                ivCampaign.setImageDrawable(
+                binding.ivCampaign.setImageDrawable(
                     getResources().getDrawable(R.drawable.ic_campaign));
 
-                tvTitle.setText(campaign.getTitle());
-                tvDescription.setText(campaign.getDescription());
+                binding.tvTitle.setText(campaign.getTitle());
+                binding.tvDescription.setText(campaign.getDescription());
                 try {
                     if (campaign.isWLMCampaign()) {
-                        tvDates.setText(
+                        binding.tvDates.setText(
                             String.format("%1s - %2s", campaign.getStartDate(),
                                 campaign.getEndDate()));
                     } else {
@@ -118,7 +106,7 @@ public class CampaignView extends SwipableCardView {
                             .parse(campaign.getStartDate());
                         final Date endDate = CommonsDateUtil.getIso8601DateFormatShort()
                             .parse(campaign.getEndDate());
-                        tvDates.setText(String.format("%1s - %2s", DateUtil.getExtraShortDateString(startDate),
+                        binding.tvDates.setText(String.format("%1s - %2s", DateUtil.getExtraShortDateString(startDate),
                             DateUtil.getExtraShortDateString(endDate)));
                     }
                 } catch (final ParseException e) {
