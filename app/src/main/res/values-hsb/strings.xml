@@ -12,8 +12,8 @@
   <string name="login">Přizjewić</string>
   <string name="logging_in_title">Přizjewjenje</string>
   <string name="logging_in_message">Prošu čakaj…</string>
-  <string name="login_success">Přizjewjenje wuspěšne!</string>
-  <string name="login_failed">Přizjewjenje je so njeporadźiło!</string>
+  <string name="login_success" fuzzy="true">Přizjewjenje wuspěšne!</string>
+  <string name="login_failed" fuzzy="true">Přizjewjenje je so njeporadźiło!</string>
   <string name="authentication_failed" fuzzy="true">Awtentifikacija je so njeporadźiła!</string>
   <string name="uploading_started">Nahraće je so započało!</string>
   <string name="upload_completed_notification_title">%1$s nahraty!</string>
@@ -34,10 +34,10 @@
   <string name="menu_share">Dźělić</string>
   <string name="share_title_hint" fuzzy="true">Titul</string>
   <string name="share_description_hint">Wopisanje</string>
-  <string name="login_failed_network">Přizjewjenje je so njeporadźiło - syćowy zmylk</string>
+  <string name="login_failed_network" fuzzy="true">Přizjewjenje je so njeporadźiło - syćowy zmylk</string>
   <string name="login_failed_throttled" fuzzy="true">Přewjele njewuspěšnych pospytow. Prošu spytaj za něšto mjeńšin hišće raz.</string>
   <string name="login_failed_blocked">Tutoho wužiwarja su bohužel na Commons zablokowali</string>
-  <string name="login_failed_generic">Přizjewjenje je so njeporadźiło</string>
+  <string name="login_failed_generic" fuzzy="true">Přizjewjenje je so njeporadźiło</string>
   <string name="share_upload_button">Nahrać</string>
   <string name="multiple_share_base_title">Pomjenuj tutu sadźbu</string>
   <string name="provider_modifications">Změny</string>

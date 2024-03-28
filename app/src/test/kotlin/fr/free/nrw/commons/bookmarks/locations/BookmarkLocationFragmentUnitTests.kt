@@ -17,6 +17,7 @@ import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.contributions.ContributionController
+import fr.free.nrw.commons.databinding.FragmentBookmarksLocationsBinding
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.fragments.CommonPlaceClickActions
@@ -53,9 +54,6 @@ class BookmarkLocationFragmentUnitTests {
     lateinit var store: JsonKvStore
 
     @Mock
-    private lateinit var parentLayout: RelativeLayout
-
-    @Mock
     private lateinit var savedInstanceState: Bundle
 
     @Mock
@@ -69,6 +67,8 @@ class BookmarkLocationFragmentUnitTests {
 
     @Mock
     private lateinit var adapter: PlaceAdapter
+
+    private lateinit var binding: FragmentBookmarksLocationsBinding
 
     /**
      * Get Mock bookmark list.
@@ -109,20 +109,18 @@ class BookmarkLocationFragmentUnitTests {
         layoutInflater = LayoutInflater.from(activity)
         view = layoutInflater
             .inflate(R.layout.fragment_bookmarks_locations, null) as View
+        binding = FragmentBookmarksLocationsBinding.bind(view)
 
         statusTextView = view.findViewById(R.id.statusMessage)
         progressBar = view.findViewById(R.id.loadingImagesProgressBar)
         recyclerView = view.findViewById(R.id.listView)
         commonPlaceClickActions = CommonPlaceClickActions(store,activity,contributionController)
 
-        fragment.statusTextView = statusTextView
-        fragment.progressBar = progressBar
-        fragment.recyclerView = recyclerView
-        fragment.parentLayout = parentLayout
         fragment.bookmarkLocationDao = bookmarkLocationDao
         fragment.controller = controller
         fragment.commonPlaceClickActions = commonPlaceClickActions
         Whitebox.setInternalState(fragment, "adapter", adapter)
+        Whitebox.setInternalState(fragment, "binding", binding)
 
     }
 

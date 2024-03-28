@@ -13,19 +13,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import com.google.android.material.tabs.TabLayout;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.ViewPagerAdapter;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
-import fr.free.nrw.commons.explore.ParentViewPager;
+import fr.free.nrw.commons.databinding.ActivityProfileBinding;
 import fr.free.nrw.commons.profile.achievements.AchievementsFragment;
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
@@ -45,14 +42,7 @@ public class ProfileActivity extends BaseActivity {
 
     private FragmentManager supportFragmentManager;
 
-    @BindView(R.id.viewPager)
-    ParentViewPager viewPager;
-
-    @BindView(R.id.tab_layout)
-    public TabLayout tabLayout;
-
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    public ActivityProfileBinding binding;
 
     @Inject
     SessionManager sessionManager;
@@ -70,7 +60,7 @@ public class ProfileActivity extends BaseActivity {
     ContributionsFragment contributionsFragment;
 
     public void setScroll(boolean canScroll){
-        viewPager.setCanScroll(canScroll);
+        binding.viewPager.setCanScroll(canScroll);
     }
     @Override
     protected void onRestoreInstanceState(final Bundle savedInstanceState) {
@@ -85,11 +75,13 @@ public class ProfileActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
-        ButterKnife.bind(this);
 
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(view -> {
+        binding = ActivityProfileBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbarBinding.toolbar);
+
+
+        binding.toolbarBinding.toolbar.setNavigationOnClickListener(view -> {
             onSupportNavigateUp();
         });
 
@@ -99,8 +91,8 @@ public class ProfileActivity extends BaseActivity {
 
         supportFragmentManager = getSupportFragmentManager();
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(viewPagerAdapter);
-        tabLayout.setupWithViewPager(viewPager);
+        binding.viewPager.setAdapter(viewPagerAdapter);
+        binding.tabLayout.setupWithViewPager(binding.viewPager);
         setTabs();
     }
 
@@ -257,9 +249,17 @@ public class ProfileActivity extends BaseActivity {
         // Checking if MediaDetailPagerFragment is visible, If visible then show ContributionListFragment else close the ProfileActivity
         if(contributionsFragment != null && contributionsFragment.getMediaDetailPagerFragment() != null && contributionsFragment.getMediaDetailPagerFragment().isVisible()) {
             contributionsFragment.backButtonClicked();
-            tabLayout.setVisibility(View.VISIBLE);
+            binding.tabLayout.setVisibility(View.VISIBLE);
         }else {
             super.onBackPressed();
         }
+    }
+
+    /**
+     * To set the visibility of tab layout
+     * @param isVisible boolean
+     */
+    public void setTabLayoutVisibility(boolean isVisible) {
+        binding.tabLayout.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
 }

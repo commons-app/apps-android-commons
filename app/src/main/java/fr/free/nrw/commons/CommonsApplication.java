@@ -9,9 +9,11 @@ import static org.acra.ReportField.STACK_TRACE;
 import static org.acra.ReportField.USER_COMMENT;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Build;
@@ -22,6 +24,7 @@ import androidx.multidex.MultiDexApplication;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
+import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsDao.Table;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
@@ -33,6 +36,7 @@ import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.language.AppLanguageLookUpTable;
 import fr.free.nrw.commons.logging.FileLoggingTree;
 import fr.free.nrw.commons.logging.LogUtils;
 import fr.free.nrw.commons.media.CustomOkHttpNetworkFetcher;
@@ -57,7 +61,6 @@ import org.acra.annotation.AcraCore;
 import org.acra.annotation.AcraDialog;
 import org.acra.annotation.AcraMailSender;
 import org.acra.data.StringFormat;
-import fr.free.nrw.commons.language.AppLanguageLookUpTable;
 import timber.log.Timber;
 
 @AcraCore(
@@ -81,6 +84,9 @@ import timber.log.Timber;
 )
 
 public class CommonsApplication extends MultiDexApplication {
+
+    public static final String loginMessageIntentKey = "loginMessage";
+    public static final String loginUsernameIntentKey = "loginUsername";
 
     public static final String IS_LIMITED_CONNECTION_MODE_ENABLED = "is_limited_connection_mode_enabled";
     @Inject
@@ -137,12 +143,12 @@ public class CommonsApplication extends MultiDexApplication {
     ContributionDao contributionDao;
 
     /**
-     *  In-memory list of contributions whose uploads have been paused by the user
+     * In-memory list of contributions whose uploads have been paused by the user
      */
     public static Map<String, Boolean> pauseUploads = new HashMap<>();
 
     /**
-     *  In-memory list of uploads that have been cancelled by the user
+     * In-memory list of uploads that have been cancelled by the user
      */
     public static HashSet<String> cancelledUploads = new HashSet<>();
 
@@ -339,4 +345,96 @@ public class CommonsApplication extends MultiDexApplication {
 
         void onLogoutComplete();
     }
+
+    /**
+     * This listener is responsible for handling post-logout actions, specifically invoking the LoginActivity
+     * with relevant intent parameters. It does not perform the actual logout operation.
+     */
+    public static class BaseLogoutListener implements CommonsApplication.LogoutListener {
+
+        Context ctx;
+        String loginMessage, userName;
+
+        /**
+         * Constructor for BaseLogoutListener.
+         *
+         * @param ctx Application context
+         */
+        public BaseLogoutListener(final Context ctx) {
+            this.ctx = ctx;
+        }
+
+        /**
+         * Constructor for BaseLogoutListener
+         *
+         * @param ctx           The application context, used for invoking the LoginActivity and passing relevant intent parameters as part of the post-logout process.
+         * @param loginMessage  Message to be displayed on the login page
+         * @param loginUsername Username to be pre-filled on the login page
+         */
+        public BaseLogoutListener(final Context ctx, final String loginMessage,
+            final String loginUsername) {
+            this.ctx = ctx;
+            this.loginMessage = loginMessage;
+            this.userName = loginUsername;
+        }
+
+        @Override
+        public void onLogoutComplete() {
+            Timber.d("Logout complete callback received.");
+            final Intent loginIntent = new Intent(ctx, LoginActivity.class);
+            loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            if (loginMessage != null) {
+                loginIntent.putExtra(loginMessageIntentKey, loginMessage);
+            }
+            if (userName != null) {
+                loginIntent.putExtra(loginUsernameIntentKey, userName);
+            }
+
+            ctx.startActivity(loginIntent);
+        }
+    }
+
+    /**
+     * This class is an extension of BaseLogoutListener, providing additional functionality or customization
+     * for the logout process. It includes specific actions to be taken during logout, such as handling redirection to the login screen.
+     */
+    public static class ActivityLogoutListener extends BaseLogoutListener {
+
+        Activity activity;
+
+
+        /**
+         * Constructor for ActivityLogoutListener.
+         *
+         * @param activity The activity context from which the logout is initiated. Used to perform actions such as finishing the activity.
+         * @param ctx           The application context, used for invoking the LoginActivity and passing relevant intent parameters as part of the post-logout process.
+         */
+        public ActivityLogoutListener(final Activity activity, final Context ctx) {
+            super(ctx);
+            this.activity = activity;
+        }
+
+        /**
+         * Constructor for ActivityLogoutListener with additional parameters for the login screen.
+         *
+         * @param activity      The activity context from which the logout is initiated. Used to perform actions such as finishing the activity.
+         * @param ctx           The application context, used for invoking the LoginActivity and passing relevant intent parameters as part of the post-logout process.
+         * @param loginMessage  Message to be displayed on the login page after logout.
+         * @param loginUsername Username to be pre-filled on the login page after logout.
+         */
+        public ActivityLogoutListener(final Activity activity, final Context ctx,
+            final String loginMessage, final String loginUsername) {
+            super(activity, loginMessage, loginUsername);
+            this.activity = activity;
+        }
+
+        @Override
+        public void onLogoutComplete() {
+            super.onLogoutComplete();
+            activity.finish();
+        }
+    }
 }
+

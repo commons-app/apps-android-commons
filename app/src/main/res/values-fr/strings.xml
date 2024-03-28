@@ -110,13 +110,13 @@
   <string name="logging_in_message">Veuillez patienter...</string>
   <string name="updating_caption_title">Mise à jour des légendes et des descriptions</string>
   <string name="updating_caption_message">Veuillez patienter...</string>
-  <string name="login_success">Connexion réussie !</string>
-  <string name="login_failed">Échec de la connexion !</string>
+  <string name="login_success" fuzzy="true">Connexion réussie !</string>
+  <string name="login_failed" fuzzy="true">Échec de la connexion !</string>
   <string name="upload_failed">Fichier non trouvé. Veuillez en essayer un autre.</string>
   <string name="retry_limit_reached">Limite maximale de nouvel essai atteinte ! Veuillez annuler le téléchargement et réessayer</string>
   <string name="unrestricted_battery_mode">Désactiver l’optimisation de la batterie ?</string>
   <string name="suggest_unrestricted_mode">Le téléchargement de plus de 3 images fonctionne de façon plus fiable quand l’optimisation de la batterie est désactivée. Veuillez la désactiver pour les applications communes depuis les paramétrages, pour une expérience plus agréable. \n\nÉtapes possibles pour désactiver l’optimisation de la batterie :\n\nÉtape 1 : Taper sur le bouton \'Paramètres\' ci-dessus.\n\nÉtape 2 : Basculer sur \'Non optimisé\' à \'Toutes les applications\'.\n\nÉtape 3 : Rechercher « Communs » ou « fr.free.nrw.commons ».\n\nÉtape 4 : Taper dessus et sélectionner \'Ne pas optimiser\'.\n\nÉtape 5 : Appuyer sur \'Terminé\'.</string>
-  <string name="authentication_failed">Échec de l’authentification, veuillez vous connecter à nouveau.</string>
+  <string name="authentication_failed" fuzzy="true">Échec de l’authentification, veuillez vous connecter à nouveau.</string>
   <string name="uploading_started">Téléversement démarré !</string>
   <string name="uploading_queued">Téléversement mis en file d’attente (mode de connexion limitée activé)</string>
   <string name="upload_completed_notification_title">%1$s téléversé !</string>
@@ -143,11 +143,11 @@
   <string name="add_caption_toast">Veuillez fournir une légende pour ce fichier.</string>
   <string name="share_description_hint">Description</string>
   <string name="share_caption_hint">Légende</string>
-  <string name="login_failed_network">Impossible de se connecter — panne du réseau</string>
+  <string name="login_failed_network" fuzzy="true">Impossible de se connecter — panne du réseau</string>
   <string name="login_failed_throttled">Trop de tentatives infructueuses. Veuillez réessayer dans quelques minutes.</string>
   <string name="login_failed_blocked">Désolé, cet utilisateur a été bloqué sur Commons</string>
   <string name="login_failed_2fa_needed">Vous devez fournir votre code d’authentification à deux facteurs.</string>
-  <string name="login_failed_generic">Échec de connexion</string>
+  <string name="login_failed_generic" fuzzy="true">Échec de connexion</string>
   <string name="share_upload_button">Téléverser</string>
   <string name="multiple_share_base_title">Nommer cet ensemble</string>
   <string name="provider_modifications">Modifications</string>
@@ -304,7 +304,7 @@
   <string name="nominated_see_more">Voir la page web pour les détails</string>
   <string name="skip_login">Passer</string>
   <string name="navigation_item_login">Se connecter</string>
-  <string name="skip_login_title">Voulez-vous vraiment ne pas vous connecter ?</string>
+  <string name="skip_login_title" fuzzy="true">Voulez-vous vraiment ne pas vous connecter ?</string>
   <string name="skip_login_message">Vous aurez à vous connecter à l’avenir pour téléverser des images.</string>
   <string name="login_alert_message">Veuillez vous connecter pour utiliser cette fonctionnalité</string>
   <string name="copy_wikicode">Copier le texte wiki dans le presse-papiers</string>
@@ -371,7 +371,7 @@
   <string name="construction_event_answer">Les images qui dépeignent la technologie ou la culture sont particulièrement bienvenues sur Commons.</string>
   <string name="congratulatory_message_quiz">Vous avez %1$s des réponses correctes. Félicitations !</string>
   <string name="warning_for_no_answer">Sélectionnez l’une des deux options pour répondre à la question</string>
-  <string name="user_not_logged_in">Session expirée, veuillez vous reconnecter.</string>
+  <string name="user_not_logged_in" fuzzy="true">Session expirée, veuillez vous reconnecter.</string>
   <string name="quiz_result_share_message">Partagez votre quizz avec vos amis !</string>
   <string name="continue_message">Continuer</string>
   <string name="correct">Réponse correcte</string>
@@ -455,7 +455,7 @@
   <string name="never_ask_again">Ne plus jamais demander cela</string>
   <string name="display_location_permission_title">Demander l’autorisation de géolocalisation</string>
   <string name="display_location_permission_explanation">Demander le droit de géolocaliser quand cela est nécessaire à la fonctionnalité de notifications de proximité.</string>
-  <string name="achievements_fetch_failed">Un problème est survenu, nous n\'avons pas pu récupérer vos accomplissements</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Un problème est survenu, nous n\'avons pas pu récupérer vos accomplissements</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Vous avez effectué tellement de contributions que notre système de calcul des accomplissements est débordé. Il s’agit là de l’accomplissement ultime.</string>
   <string name="ends_on">Se termine le :</string>
   <string name="display_campaigns">Campagnes d’affichage</string>
@@ -471,7 +471,7 @@
   <string name="open_document_photo_picker_explanation">Le nouveau sélecteur de photos de Android risque de perdre des informations de localisation. Activez-le si vous semblez l’utiliser.</string>
   <string name="location_loss_warning">Le désactiver pourrait déclencher le nouveau sélecteur de photos de Android. Il risque de perdre des informations de localisation.\n\nTaper sur \'En savoir plus\' pour plus d’informations.</string>
   <string name="nearby_campaign_dismiss_message">Vous ne verrez plus les campagnes. Néanmoins, vous pouvez réactiver cette notification dans vos paramètres de configuration, si vous le souhaitez.</string>
-  <string name="this_function_needs_network_connection">Cette fonction nécessite une connexion réseau, veuillez consulter vos paramètres de connexion.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Cette fonction nécessite une connexion réseau, veuillez consulter vos paramètres de connexion.</string>
   <string name="error_processing_image">Une erreur est survenue durant le traitement de l’image. Veuillez recommencer !</string>
   <string name="getting_edit_token">Obtenir un jeton de modification</string>
   <string name="check_category_adding_template">Ajouter un modèle pour le contrôle de catégorie</string>
@@ -598,7 +598,7 @@
   <string name="place_state_needs_photo">Photo manquante</string>
   <string name="place_type">Type de lieu :</string>
   <string name="nearby_search_hint">Pont, musée, hôtel, etc.</string>
-  <string name="you_must_reset_your_passsword">Quelque chose s’est mal passé lors de la connexion, vous devez réinitialiser votre mot de passe !!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Quelque chose s’est mal passé lors de la connexion, vous devez réinitialiser votre mot de passe !!</string>
   <string name="title_for_media">MÉDIA</string>
   <string name="title_for_child_classes">CLASSES ENFANTS</string>
   <string name="title_for_parent_classes">CLASSES PARENTES</string>
@@ -734,8 +734,8 @@
   <string name="add_location">Ajouter un lieu</string>
   <string name="feedback_sharing_data_alert">Veuillez supprimer de ce courriel toute information que vous n’aimeriez pas diffuser publiquement. Également, veuillez prendre conscience du fait que votre adresse de messagerie avec laquelle vous publiez, ainsi que le nom et l’image de profil associés, seront visibles publiquement.</string>
   <string name="explore_map_details">Détails</string>
-  <string name="achievements_unavailable_beta">Les réalisations ne sont disponibles que dans la version de production, veuillez consulter la documentation du développeur.</string>
-  <string name="leaderboard_unavailable_beta">Le classement n’est disponible que dans la version de production, veuillez consulter la documentation du développeur.</string>
+  <string name="achievements_unavailable_beta" fuzzy="true">Les réalisations ne sont disponibles que dans la version de production, veuillez consulter la documentation du développeur.</string>
+  <string name="leaderboard_unavailable_beta" fuzzy="true">Le classement n’est disponible que dans la version de production, veuillez consulter la documentation du développeur.</string>
   <string name="copyright_popup">Veuillez ne téléverser que des images que vous avez créées vous-même. Ceux qui téléversent des images soumises aux droits d’auteur seront bloqués. Ceci s’applique également à la version bêta. Merci pour votre test de l’application !</string>
   <string name="select_feedback_data_choice">Veuillez désélectionner toute information que vous ne vous sentez pas à l’aise de partager publiquement.</string>
   <string name="api_level">Niveau de l’API</string>
@@ -781,6 +781,7 @@
   <string name="edit_location">Modifier l’emplacement</string>
   <string name="send_thanks_to_author">Remercier l’auteur</string>
   <string name="error_sending_thanks">Erreur en envoyant un remerciement à l’auteur.</string>
+  <string name="invalid_login_message" fuzzy="true">Votre connexion a expiré, veuillez vous reconnecter.</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d image sélectionnée</item>
     <item quantity="other">%d images sélectionnées</item>

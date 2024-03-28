@@ -9,12 +9,11 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.category.CategoryImagesCallback;
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.databinding.FragmentFeaturedRootBinding;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.categories.media.CategoriesMediaFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
@@ -26,8 +25,7 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
     private MediaDetailPagerFragment mediaDetails;
     private CategoriesMediaFragment listFragment;
 
-    @BindView(R.id.explore_container)
-    FrameLayout container;
+    private FragmentFeaturedRootBinding binding;
 
     public ExploreListRootFragment() {
         //empty constructor necessary otherwise crashes on recreate
@@ -47,9 +45,9 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
         @Nullable final ViewGroup container,
         @Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_featured_root, container, false);
-        ButterKnife.bind(this, view);
-        return view;
+
+        binding = FragmentFeaturedRootBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
@@ -109,8 +107,12 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
 
     @Override
     public void onMediaClicked(int position) {
-        container.setVisibility(View.VISIBLE);
-        ((ExploreFragment) getParentFragment()).tabLayout.setVisibility(View.GONE);
+        if (binding!=null) {
+            binding.exploreContainer.setVisibility(View.VISIBLE);
+        }
+        if (((ExploreFragment) getParentFragment()).binding!=null) {
+            ((ExploreFragment) getParentFragment()).binding.tabLayout.setVisibility(View.GONE);
+        }
         mediaDetails = MediaDetailPagerFragment.newInstance(false, true);
         ((ExploreFragment) getParentFragment()).setScroll(false);
         setFragment(mediaDetails, listFragment);
@@ -185,16 +187,29 @@ public class ExploreListRootFragment extends CommonsDaggerSupportFragment implem
      */
     public boolean backPressed() {
         if (null != mediaDetails && mediaDetails.isVisible()) {
-            ((ExploreFragment) getParentFragment()).tabLayout.setVisibility(View.VISIBLE);
+            if (((ExploreFragment) getParentFragment()).binding != null) {
+                ((ExploreFragment) getParentFragment()).binding.tabLayout.setVisibility(View.VISIBLE);
+            }
             removeFragment(mediaDetails);
             ((ExploreFragment) getParentFragment()).setScroll(true);
             setFragment(listFragment, mediaDetails);
             ((MainActivity) getActivity()).showTabs();
             return true;
         } else {
-            ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
+            if (((MainActivity) getActivity()) != null) {
+                ((MainActivity) getActivity()).setSelectedItemId(NavTab.CONTRIBUTIONS.code());
+            }
         }
-        ((MainActivity) getActivity()).showTabs();
+        if (((MainActivity) getActivity()) != null) {
+            ((MainActivity) getActivity()).showTabs();
+        }
         return false;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        binding = null;
     }
 }

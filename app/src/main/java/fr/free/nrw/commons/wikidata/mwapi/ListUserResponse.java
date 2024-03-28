@@ -6,8 +6,6 @@ import androidx.collection.ArraySet;
 
 import com.google.gson.annotations.SerializedName;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;

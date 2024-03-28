@@ -8,16 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
-import com.facebook.drawee.view.SimpleDraweeView;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.databinding.FragmentSimilarImageDialogBinding;
 import java.io.File;
 
 /**
@@ -26,16 +22,10 @@ import java.io.File;
 
 public class SimilarImageDialogFragment extends DialogFragment {
 
-    @BindView(R.id.orginalImage)
-    SimpleDraweeView originalImage;
-    @BindView(R.id.possibleImage)
-    SimpleDraweeView possibleImage;
-    @BindView(R.id.postive_button)
-    Button positiveButton;
-    @BindView(R.id.negative_button)
-    Button negativeButton;
     Callback callback;//Implemented interface from shareActivity
     Boolean gotResponse = false;
+
+    private FragmentSimilarImageDialogBinding binding;
 
     public SimilarImageDialogFragment() {
     }
@@ -51,17 +41,17 @@ public class SimilarImageDialogFragment extends DialogFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_similar_image_dialog, container, false);
-        ButterKnife.bind(this,view);
+        binding = FragmentSimilarImageDialogBinding.inflate(inflater, container, false);
 
-        originalImage.setHierarchy(GenericDraweeHierarchyBuilder
+
+        binding.orginalImage.setHierarchy(GenericDraweeHierarchyBuilder
                 .newInstance(getResources())
                 .setPlaceholderImage(VectorDrawableCompat.create(getResources(),
                         R.drawable.ic_image_black_24dp,getContext().getTheme()))
                 .setFailureImage(VectorDrawableCompat.create(getResources(),
                         R.drawable.ic_error_outline_black_24dp, getContext().getTheme()))
                 .build());
-        possibleImage.setHierarchy(GenericDraweeHierarchyBuilder
+        binding.possibleImage.setHierarchy(GenericDraweeHierarchyBuilder
                 .newInstance(getResources())
                 .setPlaceholderImage(VectorDrawableCompat.create(getResources(),
                         R.drawable.ic_image_black_24dp,getContext().getTheme()))
@@ -69,10 +59,13 @@ public class SimilarImageDialogFragment extends DialogFragment {
                         R.drawable.ic_error_outline_black_24dp, getContext().getTheme()))
                 .build());
 
-        originalImage.setImageURI(Uri.fromFile(new File(getArguments().getString("originalImagePath"))));
-        possibleImage.setImageURI(Uri.fromFile(new File(getArguments().getString("possibleImagePath"))));
+        binding.orginalImage.setImageURI(Uri.fromFile(new File(getArguments().getString("originalImagePath"))));
+        binding.possibleImage.setImageURI(Uri.fromFile(new File(getArguments().getString("possibleImagePath"))));
 
-        return view;
+        binding.postiveButton.setOnClickListener(v -> onPositiveButtonClicked());
+        binding.negativeButton.setOnClickListener(v -> onNegativeButtonClicked());
+
+        return binding.getRoot();
     }
 
     @Override
@@ -96,17 +89,21 @@ public class SimilarImageDialogFragment extends DialogFragment {
         super.onDismiss(dialog);
     }
 
-    @OnClick(R.id.negative_button)
     public void onNegativeButtonClicked() {
         callback.onNegativeResponse();
         gotResponse = true;
         dismiss();
     }
 
-    @OnClick(R.id.postive_button)
     public void onPositiveButtonClicked() {
         callback.onPositiveResponse();
         gotResponse = true;
         dismiss();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 }

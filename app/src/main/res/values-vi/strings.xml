@@ -60,10 +60,10 @@
   <string name="logging_in_title">Đang đăng nhập</string>
   <string name="logging_in_message">Vui lòng chờ…</string>
   <string name="updating_caption_message">Vui lòng chờ…</string>
-  <string name="login_success">Đã đăng nhập thành công!</string>
-  <string name="login_failed">Đăng nhập thất bại!</string>
+  <string name="login_success" fuzzy="true">Đã đăng nhập thành công!</string>
+  <string name="login_failed" fuzzy="true">Đăng nhập thất bại!</string>
   <string name="upload_failed">Không tìm thấy tập tin. Xin vui lòng thử tập tin khác.</string>
-  <string name="authentication_failed">Xác thực thất bại, vui lòng đăng nhập lại</string>
+  <string name="authentication_failed" fuzzy="true">Xác thực thất bại, vui lòng đăng nhập lại</string>
   <string name="uploading_started">Đã bắt đầu tải lên!</string>
   <string name="upload_completed_notification_title">Đã tải lên %1$s!</string>
   <string name="upload_completed_notification_text">Chạm để xem những tập tin tải lên của bạn</string>
@@ -84,11 +84,11 @@
   <string name="menu_share">Chia sẻ</string>
   <string name="share_title_hint" fuzzy="true">Tựa đề (Yêu cầu)</string>
   <string name="share_description_hint">Miêu tả</string>
-  <string name="login_failed_network">Không thể đăng nhập – có lỗi mạng</string>
+  <string name="login_failed_network" fuzzy="true">Không thể đăng nhập – có lỗi mạng</string>
   <string name="login_failed_throttled">Đã đăng nhập thất bại quá nhiều lần. Xin vui lòng thử lại trong vòng vài phút.</string>
   <string name="login_failed_blocked">Rất tiếc, người dùng này đã bị cấm tại Commons</string>
   <string name="login_failed_2fa_needed">Bạn phải cung cấp mã xác thực dùng hai nhân tố.</string>
-  <string name="login_failed_generic">Đăng nhập thất bại</string>
+  <string name="login_failed_generic" fuzzy="true">Đăng nhập thất bại</string>
   <string name="share_upload_button">Tải lên</string>
   <string name="multiple_share_base_title">Đặt tên nhóm này</string>
   <string name="provider_modifications">Sửa đổi</string>

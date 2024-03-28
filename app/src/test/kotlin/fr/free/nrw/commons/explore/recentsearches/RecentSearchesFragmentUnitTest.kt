@@ -38,20 +38,11 @@ class RecentSearchesFragmentUnitTest {
     private lateinit var fragment: RecentSearchesFragment
     private lateinit var fragmentManager: FragmentManager
     private lateinit var context: Context
-    private lateinit var view: View
     private lateinit var layoutInflater: LayoutInflater
 
     @Mock
     private lateinit var recentSearchesDao: RecentSearchesDao
 
-    @Mock
-    private lateinit var imageView: ImageView
-
-    @Mock
-    private lateinit var textView: TextView
-
-    @Mock
-    private lateinit var listView: ListView
 
     @Mock
     private lateinit var adapter: ArrayAdapter<*>
@@ -77,14 +68,9 @@ class RecentSearchesFragmentUnitTest {
         fragmentTransaction.commitNowAllowingStateLoss()
 
         layoutInflater = LayoutInflater.from(activity)
-        view = LayoutInflater.from(activity)
-            .inflate(R.layout.fragment_leaderboard, null) as View
 
         Whitebox.setInternalState(fragment, "recentSearchesDao", recentSearchesDao)
-        Whitebox.setInternalState(fragment, "recent_searches_delete_button", imageView)
-        Whitebox.setInternalState(fragment, "recent_searches_text_view", textView)
         Whitebox.setInternalState(fragment, "adapter", adapter)
-        Whitebox.setInternalState(fragment, "recentSearchesList", listView)
         Whitebox.setInternalState(fragment, "recentSearches", listOf("string"))
     }
 

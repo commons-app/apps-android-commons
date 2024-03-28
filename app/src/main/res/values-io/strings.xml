@@ -73,13 +73,13 @@
   <string name="logging_in_message">Voluntez vartar...</string>
   <string name="updating_caption_title">Aktualiganta etiketi e deskripturi</string>
   <string name="updating_caption_message">Voluntez vartar...</string>
-  <string name="login_success">Eniro sucesoza!</string>
-  <string name="login_failed">Eniro faliis!</string>
+  <string name="login_success" fuzzy="true">Eniro sucesoza!</string>
+  <string name="login_failed" fuzzy="true">Eniro faliis!</string>
   <string name="upload_failed">Arkivo ne trovita. Voluntez probar altr arkivo.</string>
   <string name="retry_limit_reached">Vu atingis la maxim granda quanto di probi por sendar arkivo permisata! Voluntez interuptar la kargajo, e probez itere!</string>
   <string name="unrestricted_battery_mode">Ka desmuntar l\'optimizo di la baterio?</string>
   <string name="suggest_unrestricted_mode">Sendar plu kam 3 imaji esas plu efikiva kande l\'optimizo di la baterio esas desmuntita. Voluntez desmuntar l\'optimizo di la baterio del ajusti dil utensilo de Commons, por plugrandigar l\'efikeso. \n\nQuale desmuntar l\'optimizo-sistemo di la baterio:\n\n#: Kliktez la butono \"ajusti\" (\'\'Settings\'\') adinfre.\n\n#: Selektez \"ne optimizita (\'\'Not optimized\'\') por omna utensili (\'\'All apps\'\').\n\n#: Serchez \"Commons\" o \"fr.free.nrw.commons\".\n\n#: Kliktez ol e selektez \"ne optimizar\" (\'\'Don\'t optimize\'\').\n\n#: Kliktez \"facita\" (\'\'Done\'\').</string>
-  <string name="authentication_failed">L\'autentikigo faliis, voluntez itere enirar.</string>
+  <string name="authentication_failed" fuzzy="true">L\'autentikigo faliis, voluntez itere enirar.</string>
   <string name="uploading_started">Komencis sendar!</string>
   <string name="uploading_queued">Sendajo ajornata (modulo \"limitizita konekto\" aktiva)</string>
   <string name="upload_completed_notification_title">%1$s sendesis!</string>
@@ -106,11 +106,11 @@
   <string name="add_caption_toast">Voluntez informar deskripto-texto por ca arkivo</string>
   <string name="share_description_hint">Deskripto</string>
   <string name="share_caption_hint">Deskripto-texto</string>
-  <string name="login_failed_network">Ne esis posibla facar \'\'log - in\'\' - la reto faliis</string>
+  <string name="login_failed_network" fuzzy="true">Ne esis posibla facar \'\'log - in\'\' - la reto faliis</string>
   <string name="login_failed_throttled">Multa sensucesa probi pri konektar. Voluntez probar itere pos kelka minuti.</string>
   <string name="login_failed_blocked">Pardonez, ca uzero blokusesis che Commons</string>
   <string name="login_failed_2fa_needed">Vu mustas uzar vua autentikigo en du etapi.</string>
-  <string name="login_failed_generic">Eniro faliis</string>
+  <string name="login_failed_generic" fuzzy="true">Eniro faliis</string>
   <string name="share_upload_button">Kargar</string>
   <string name="multiple_share_base_title">Nomizes ca ajusto</string>
   <string name="provider_modifications">Modifikuri</string>
@@ -192,6 +192,7 @@
   <string name="write_storage_permission_rationale">Demandita permiso: Skribar en extera konservilo. La programo \'\'app\'\' ne povas acesar vua kamero/galerio sen to.</string>
   <string name="location_permission_title">Demandanta permiso pri lokizo</string>
   <string name="in_app_camera_location_permission_title">Enrejistras la lokizo por imaji kaptita uzanta la programo (\'\'app\'\')</string>
+  <string name="in_app_camera_location_switch_pref_summary">Kapabligez ca funciono por enrejistrar la lokizo di la fotografuri facita per \'\'app\'\', se la fotografilo qua uzesis ne enrejistris ta informo</string>
   <string name="ok">O.K.</string>
   <string name="warning">Averto</string>
   <string name="duplicate_file_name">Trovesis duopligita nomo di arkivo</string>
@@ -239,22 +240,33 @@
   <string name="nearby_info_menu_wikidata_article">Arkivo de Wikidata</string>
   <string name="nearby_info_menu_wikipedia_article">Artiklo di Wikipedio</string>
   <string name="description_info">Voluntez deskriptar l\'artiklo tante kam posiblaː Ube vu obtenis ol? Qual esis la kuntexto? Deskriptez objekti o personi. Skribez informi qui povos esar facile verifikata, exemple la horo di la dio, se ol esas peizajo. Se l\'imajo montros ula diferanta kozo, explikez quo esas diferanta.</string>
+  <string name="caption_info">Skribez kurta deskripto pri ca imajo. L\'unesma subtexto uzesos kom titulo por l\'imajo. Limito: 255 literi.</string>
+  <string name="upload_problem_exist">Posibla problemi kun ta imajo:</string>
   <string name="upload_problem_image_dark">L\'imajo esas multe obskura.</string>
   <string name="upload_problem_image_blurry">L\'imajo esas nebuloza.</string>
   <string name="upload_problem_image_duplicate">L\'imajo ja existas che Commons.</string>
   <string name="upload_problem_different_geolocation">Ca imajo facesis en diferanta loko.</string>
+  <string name="upload_problem_fbmd">Voluntez sendar nur imaji quin vu propra facis. Ne sendez imaji quin vu trovis en Facebook, che konti di altra personi.</string>
   <string name="upload_problem_do_you_continue">Ka vu ankore deziras sendar l\'arkivo?</string>
   <string name="upload_connection_error_alert_title">Eroro pri konekto</string>
   <string name="upload_connection_error_alert_detail">Por sendar arkivi l\'Interreto mustas esar konektata. Voluntez verifikar vua Interreto-konekto.</string>
   <string name="upload_problem_image">Trovesis problemo en l\'imajo</string>
   <string name="internet_downloaded">Atencez pri nur sendar imaji quin vu propra facis. Ne sendez imaji quin vu descharjis de Interreto.</string>
+  <string name="login_to_your_account">Enirez en vua konto</string>
   <string name="send_log_file">Sendez arkivo \'\'log\'\'</string>
+  <string name="null_url">Eroro! URL ne trovita</string>
   <string name="nominate_deletion">Propozar efaco</string>
   <string name="nominated_for_deletion">Ca imajo indikesis por efaco.</string>
   <string name="nominated_see_more">Videz retpagino por detali</string>
   <string name="skip_login">Saltar</string>
+  <string name="navigation_item_login">Enirar</string>
+  <string name="skip_login_title" fuzzy="true">Ka vu deziras ne enirar?</string>
+  <string name="skip_login_message">Vu mustus facar \'\'log in\'\' por sendor imaji future.</string>
+  <string name="login_alert_message">Voluntez enirar por uzar ca utensilo</string>
   <string name="copy_wikicode">Kopiez Wiki-texto a \'clipboard\'</string>
   <string name="wikicode_copied">Wiki-texto kopiesis a \'clipboard\'</string>
+  <string name="nearby_location_not_available">Proximeso povas ne funcionar korekte, nam Lokizo ne esas disponebla.</string>
+  <string name="upload_location_access_denied">Aceso a lokizo ne permisita. Voluntez informar manuale vua lokizo por uzar ca resurso*.</string>
   <string name="nearby_directions">Quale arivar</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedio</string>
@@ -264,8 +276,10 @@
   <string name="user_guide">Guidolibro por l\'uzero</string>
   <string name="welcome_skip_button">Saltez instrukti</string>
   <string name="no_internet">Interreto ne funcionas</string>
+  <string name="no_notifications">Nula avizi trovita</string>
   <string name="about_translate">Tradukar</string>
   <string name="about_translate_title">Lingui</string>
+  <string name="about_translate_message">Selektez l\'idiomo quan vu deziros sendar tradukuri</string>
   <string name="about_translate_proceed">Durigar</string>
   <string name="about_translate_cancel">Nuligar</string>
   <string name="retry">Probar itere</string>
@@ -306,12 +320,22 @@
   <string name="selfie_answer">\'\'Selfie\'\'-imaji ne havas multa valoro che enciklopedio. Voluntez ne sendar imajo pri vu propra, ecepte se existas artiklo che Wikipedio pri vu.</string>
   <string name="taj_mahal_answer">Imaji pri monumenti ed extera peizaji esas libera por sendar en la maxim multa landi. Savez ke tempal arto-instaluri facita en libera aero freque protektesas per autoroyuro. Do, li ne povas sendesar.</string>
   <string name="screenshot_answer">Fotografuri de reto-pagini judikesas derivita verki, ed esas submisita a la sama autoroyuro kam la propra pagino. Ca imaji povas uzesar se l\'autoro permisas. Sen ca permiso, irga imajo quan vu kreos uzanta l\'imajo di la reto-pagino judikesas kom senlicenca kopiuro dil originala pagino.</string>
+  <string name="blurry_image_answer">Un ek la skopi di Commons esas asemblar imaji kun qualeso. Do, imaji nedicernebla ne devas sendesar. Probez fotografar sempre kun bona lumizo.</string>
+  <string name="construction_event_answer">Fotografuri pri teknologio o kultural aspekti esas sempre bonvenanta che Commons.</string>
+  <string name="congratulatory_message_quiz">Vu respondis korekte %1$s de la questioni. Gratuli!</string>
+  <string name="warning_for_no_answer">Selektez un ek la du opcioni por respondar la questiono</string>
+  <string name="user_not_logged_in" fuzzy="true">Sesiono di \'\'log in\'\' finis, voluntez enirar itere.</string>
+  <string name="quiz_result_share_message">Partigez vua quizo kun vua amiki!</string>
   <string name="continue_message">Durigez</string>
   <string name="correct">Korekta respondo</string>
   <string name="wrong">Nekorekta respondo</string>
   <string name="quiz_screenshot_question">Ka ica skreno-kopiuro esas \'OK\' por sendar?</string>
   <string name="share_app_title">Partigez \'\'app\'\'</string>
   <string name="rotate">Rotacar</string>
+  <string name="error_fetching_nearby_places">Eroro adportanta informi pri loki proxima.</string>
+  <string name="no_pictures_in_this_area">Nula pikturi en ca areo</string>
+  <string name="no_nearby_places_around">Nula loki proxima trovesis</string>
+  <string name="error_fetching_nearby_monuments">Eroro adportanta informi pri monumenti proxima.</string>
   <string name="no_recent_searches">Nula recenta serchado</string>
   <string name="delete_recent_searches_dialog">Ka tu fakte deziras efacar la historio-listo pri tua serchadi?</string>
   <string name="cancel_upload_dialog">Ka vu fakte deziras interuptar ca sendajo?</string>
@@ -329,6 +353,7 @@
   <string name="images_uploaded">Imaji sendita</string>
   <string name="image_reverts">Imaji ne reversionita</string>
   <string name="images_used_by_wiki">Imaji uzita</string>
+  <string name="achievements_share_message">Partigez vua sucesi kun vua amiki!</string>
   <string name="achievements_revert_limit_message">minima quanto bezonata:</string>
   <string name="images_uploaded_explanation">Quanto di imaji quin vu sendis a Commons, uzanta irga softwaro* por sendar li</string>
   <string name="images_reverted_explanation">La procento di imaji quin vu sendis a Commons, qui ne efacesis pose</string>
@@ -342,6 +367,8 @@
   <string name="notifications">Avizi</string>
   <string name="read_notifications">Avizi (lektita)</string>
   <string name="list_sheet">Listo</string>
+  <string name="storage_permission">Permiso pri enmagazinigo</string>
+  <string name="step_count">Etapo %1$d de %2$d: %3$s</string>
   <string name="next">Sequanta</string>
   <string name="previous">Antea</string>
   <string name="upload_title_duplicate">Arkivo kun la nomo %1$s ja existas. Ka vu deziras durigar?\n\nNoto: Sufixo adequata adjuntesos automatale a la nomo dil imajo.</string>
@@ -426,7 +453,7 @@
   <string name="place_state_needs_photo">Bezonas fotografuro</string>
   <string name="place_type">Tipo di lokizo:</string>
   <string name="nearby_search_hint">Ponto, muzeo, hotelo, edc.</string>
-  <string name="you_must_reset_your_passsword">Irgu ne funcionis dum \'\'log in\'\'. Vu mustos ridefinar vua pasovorto!!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Irgu ne funcionis dum \'\'log in\'\'. Vu mustos ridefinar vua pasovorto!!</string>
   <string name="title_for_media">\'\'MEDIA\'\'</string>
   <string name="title_for_child_classes">SUBKLASI</string>
   <string name="title_for_parent_classes">KLASI PLU ABSTRAKTA</string>

@@ -15,8 +15,8 @@
   <string name="signup">ⵣⵎⵎⴻⵎ</string>
   <string name="logging_in_title">ⴷⴰ ⵜⴽⵛⵛⵎⴷ</string>
   <string name="logging_in_message">ⴰⵎⵓⵔ ⵏⵏⴽ ⵇⵇⵍ...</string>
-  <string name="login_success">ⴰⴽⵛⴰⵎ !ⵉⵎⵓⵔⵙ</string>
-  <string name="login_failed">ⴰⴽⵛⴰⵎ ⵉⵣⴳⵍ!</string>
+  <string name="login_success" fuzzy="true">ⴰⴽⵛⴰⵎ !ⵉⵎⵓⵔⵙ</string>
+  <string name="login_failed" fuzzy="true">ⴰⴽⵛⴰⵎ ⵉⵣⴳⵍ!</string>
   <string name="upload_failed">ⴰⴼⴰⵢⵍⵓ ⵓⵔ ⵉⵜⵜⵢⵓⴼⴰ. ⴰⵎⵓⵔ ⵏⵏⴽ ⴰⵔⵎ ⴰⴼⴰⵢⵍⵓ ⵢⴰⴹⵏ.</string>
   <string name="uploading_started">ⴰⵙⴽⵜⵔ ⵉⵙⵙⵏⵜⵉ!</string>
   <string name="upload_completed_notification_title">ⵉⵜⵜⵓⵙⴽⵜⵔ%1$s!</string>
@@ -34,7 +34,7 @@
   <string name="share_description_hint">ⴰⴳⵍⴰⵎ</string>
   <string name="login_failed_throttled">ⵎⵏⵏⴰⵡⵜ ⵜⵓⵔⵎⵉⵡⵉⵏ ⵓⵔ ⵉⵎⵓⵔⵙⵏ. ⴰⵎⵓⵔ ⵏⵏⴽ ⴰⵔⵎ ⴷⴰⵖ ⴷⴼⴼⵉⵔ ⴽⵔⴰ ⵏ ⵜⵓⵙⴷⵉⴷⵉⵏ.</string>
   <string name="login_failed_blocked">ⴰⵙⵙⵓⵔⴼ, ⴰⵎⵙⵙⵎⵔⵙ ⴰⴷ ⵉⵜⵜⵓⴳⴷⴰⵍ ⴳ ⴽⵓⵎⵏⵣ</string>
-  <string name="login_failed_generic">ⴰⴽⵛⴰⵎ ⵉⵣⴳⵍ</string>
+  <string name="login_failed_generic" fuzzy="true">ⴰⴽⵛⴰⵎ ⵉⵣⴳⵍ</string>
   <string name="share_upload_button">ⵙⵙⴽⵜⵔ</string>
   <string name="provider_modifications">ⵜⵉⵏⵖⵎⵉⵙⵉⵏ</string>
   <string name="menu_upload_single">ⵙⵙⴽⵜⵔ</string>

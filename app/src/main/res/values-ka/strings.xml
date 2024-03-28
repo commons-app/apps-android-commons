@@ -50,10 +50,10 @@
   <string name="signup">რეგისტრაცია</string>
   <string name="logging_in_title">სისტემაში შესვლა</string>
   <string name="logging_in_message">გთხოვთ მოიცადოთ…</string>
-  <string name="login_success">სისტემაში შესვლა წარმატებით განხორციელდა!</string>
-  <string name="login_failed">სისტემაში შესვლა ვერ განხორციელდა!</string>
+  <string name="login_success" fuzzy="true">სისტემაში შესვლა წარმატებით განხორციელდა!</string>
+  <string name="login_failed" fuzzy="true">სისტემაში შესვლა ვერ განხორციელდა!</string>
   <string name="upload_failed">ფაილი არ მოიძებნა. გთხოვთ, სცადოთ სხვა ფაილი.</string>
-  <string name="authentication_failed">ავთენტიფიკაცია ვერ მოხერხდა, გთხოვთ შედით ხელახლა</string>
+  <string name="authentication_failed" fuzzy="true">ავთენტიფიკაცია ვერ მოხერხდა, გთხოვთ შედით ხელახლა</string>
   <string name="uploading_started">ატვირთვა დაიწყო!</string>
   <string name="uploading_queued">ატვირთვა რიგშია (შეზღუდული კავშირის რეჟიმი ჩართულია)</string>
   <string name="upload_completed_notification_title">%1$ ატვირთულია!</string>
@@ -80,11 +80,11 @@
   <string name="add_caption_toast">გთხოვთ, მიუთითოთ ამ ფაილის წარწერა</string>
   <string name="share_description_hint">აღწერა</string>
   <string name="share_caption_hint">წარწერა</string>
-  <string name="login_failed_network">შესვლა ვერ ხერხდება - ქსელის შეცდომა</string>
+  <string name="login_failed_network" fuzzy="true">შესვლა ვერ ხერხდება - ქსელის შეცდომა</string>
   <string name="login_failed_throttled">ძალიან ბევრი წარუმატებელი მცდელობა. გთხოვთ, რამდენიმე წუთში სცადეთ კვლავ.</string>
   <string name="login_failed_blocked">უკაცრავად, ეს მომხმარებელი დაბლოკილია ვიკისაწყობში</string>
   <string name="login_failed_2fa_needed">თქვენ უნდა შეიყვანოთ ორფაქტორიანი ავტორიზაციის კოდი.</string>
-  <string name="login_failed_generic">შესვლა ვერ მოხერხდა</string>
+  <string name="login_failed_generic" fuzzy="true">შესვლა ვერ მოხერხდა</string>
   <string name="share_upload_button">ატვირთვა</string>
   <string name="multiple_share_base_title">სერიის სახელი</string>
   <string name="provider_modifications">მოდიფიკაციები</string>
@@ -216,7 +216,7 @@
   <string name="nominated_see_more">დეტალებისთვის ვებგვერდის ნახვა</string>
   <string name="skip_login">გამოტოვება</string>
   <string name="navigation_item_login">შესვლა</string>
-  <string name="skip_login_title">ნამდვილად გსურთ შესვლის გამოტოვება?</string>
+  <string name="skip_login_title" fuzzy="true">ნამდვილად გსურთ შესვლის გამოტოვება?</string>
   <string name="nearby_wikidata">ვიკიმონაცემები</string>
   <string name="nearby_wikipedia">ვიკიპედია</string>
   <string name="nearby_commons">ვიკისაწყობი</string>

@@ -75,13 +75,13 @@
   <string name="logging_in_message">Iltimos kuting...</string>
   <string name="updating_caption_title">Sarlavhalar va tavsiflarni yangilash</string>
   <string name="updating_caption_message">Iltimos, kutib turing...</string>
-  <string name="login_success">Kirish muvaffaqiyatli bajarildi!</string>
-  <string name="login_failed">Kirish muvaffaqiyatsiz yakunlandi!</string>
+  <string name="login_success" fuzzy="true">Kirish muvaffaqiyatli bajarildi!</string>
+  <string name="login_failed" fuzzy="true">Kirish muvaffaqiyatsiz yakunlandi!</string>
   <string name="upload_failed">Fayl topilmadi. Iltimos, boshqa faylni izlab koʻring.</string>
   <string name="retry_limit_reached">Qayta urinish maksimal chegarasi yetdi! Iltimos yuklashni bekor qiling va yana urinib koʻring</string>
   <string name="unrestricted_battery_mode">Batareyani optimallashtirishni oʻchirib qoʻying?</string>
   <string name="suggest_unrestricted_mode">Batareyani optimallashtirish oʻchirilgan boʻlsa, 3 tadan ortiq rasmni yuklash yanada ishonchli ishlaydi. Yuklash muammosiz ishlashi uchun Commons ilovasi uchun batareya quvvatini optimallashtirishni sozlamalardan oʻchirib qoʻying. \n\nBatareyani optimallashtirishni oʻchirish uchun mumkin boʻlgan qadamlar:\n\n1-qadam: Quyidagi “Sozlamalar” tugmasini bosing.\n\n2-qadam: “Optimallashtirilmagan”dan “Hammasi”ga oʻting.\n\n3-qadam: “Commons” yoki “fr.free.nrw.commons” ni qidiring.\n\n4-qadam: Unga teging va “Optimallamang”ni tanlang.!N !\n5-qadam: “Bajarildi” tugmasini bosing.</string>
-  <string name="authentication_failed">Kirib boʻlmadi. Qaytadan urinib koʻring</string>
+  <string name="authentication_failed" fuzzy="true">Kirib boʻlmadi. Qaytadan urinib koʻring</string>
   <string name="uploading_started">Yuklash boshlandi!</string>
   <string name="uploading_queued">Yuklash navbatda (cheklangan ulanish sozlanmasi yoqilgan)</string>
   <string name="upload_completed_notification_title">%1$s yuklanmoqda!</string>
@@ -108,11 +108,11 @@
   <string name="add_caption_toast">Iltimos, usbu fayl uchun sarlavha tanlang</string>
   <string name="share_description_hint">Tavsif</string>
   <string name="share_caption_hint">Izoh</string>
-  <string name="login_failed_network">Tizimga kirish imkonsiz - tarmoq xatosi</string>
+  <string name="login_failed_network" fuzzy="true">Tizimga kirish imkonsiz - tarmoq xatosi</string>
   <string name="login_failed_throttled">Juda ko‘p muvaffaqiyatsiz urinishlar. Iltimos, bir necha daqiqadan so‘ng urinib ko‘ring.</string>
   <string name="login_failed_blocked">Kechirasiz, bu foydalanuvchi Commons\'da bloklangan</string>
   <string name="login_failed_2fa_needed">Ikki faktorli autentifikatsiya kodini kiritishingiz kerak.</string>
-  <string name="login_failed_generic">Kirish muvaffaqiyatsiz yakunlandi</string>
+  <string name="login_failed_generic" fuzzy="true">Kirish muvaffaqiyatsiz yakunlandi</string>
   <string name="share_upload_button">Yuklash</string>
   <string name="multiple_share_base_title">Bu toʻplamga nom bering</string>
   <string name="provider_modifications">Oʻzgarishlar</string>
@@ -264,7 +264,7 @@
   <string name="nominated_see_more">Tafsilotlar uchun veb sahifaga oʻting</string>
   <string name="skip_login">Oʻtkazib yuborish</string>
   <string name="navigation_item_login">Kirish</string>
-  <string name="skip_login_title">Haqiqatan ham kirishni oʻtkazib yubormoqchimisiz?</string>
+  <string name="skip_login_title" fuzzy="true">Haqiqatan ham kirishni oʻtkazib yubormoqchimisiz?</string>
   <string name="skip_login_message">Kelajakda rasmlarni yuklash uchun tizimga kirishingiz kerak boʻladi.</string>
   <string name="login_alert_message">Ushbu xususiyatdan foydalanish uchun tizimga kiring</string>
   <string name="copy_wikicode">Vikimatndan nusxa olish</string>

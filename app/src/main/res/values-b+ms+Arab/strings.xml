@@ -8,8 +8,8 @@
   <string name="username">نام ڤڠݢونا</string>
   <string name="password">کات لالوان</string>
   <string name="login">لوݢ ماسوق</string>
-  <string name="login_success">لوݢ ماسوق برجاي!</string>
-  <string name="login_failed">لوݢ ماسوق ݢاݢل!</string>
+  <string name="login_success" fuzzy="true">لوݢ ماسوق برجاي!</string>
+  <string name="login_failed" fuzzy="true">لوݢ ماسوق ݢاݢل!</string>
   <string name="upload_failed">فاءيل تيدق دجومڤاءي. سيلا چوبا فاءيل لاءين.</string>
   <string name="uploading_started">موات ناءيق برمولا!</string>
   <string name="title_activity_contributions">موات ناءيق ترکيني ساي</string>
@@ -18,7 +18,7 @@
   <string name="menu_share">کوڠسي</string>
   <string name="menu_view_file_page">ليهت لامن فاءيل</string>
   <string name="share_description_hint">کترڠن</string>
-  <string name="login_failed_generic">لوݢ ماسوق ݢاݢل</string>
+  <string name="login_failed_generic" fuzzy="true">لوݢ ماسوق ݢاݢل</string>
   <string name="share_upload_button">موات ناءيق</string>
   <string name="multiple_share_base_title">ناماکن سيت اين</string>
   <string name="menu_upload_single">موات ناءيق</string>

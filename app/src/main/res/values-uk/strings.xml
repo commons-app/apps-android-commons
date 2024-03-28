@@ -105,13 +105,13 @@
   <string name="logging_in_message">Будь ласка, зачекайте…</string>
   <string name="updating_caption_title">Оновлення заголовків та описів</string>
   <string name="updating_caption_message">Будь ласка, зачекайте…</string>
-  <string name="login_success">Ви успішно увійшли!</string>
-  <string name="login_failed">Не вдалося увійти</string>
+  <string name="login_success" fuzzy="true">Ви успішно увійшли!</string>
+  <string name="login_failed" fuzzy="true">Не вдалося увійти</string>
   <string name="upload_failed">Файл не знайдено. Будь ласка, спробуйте інший файл.</string>
   <string name="retry_limit_reached">Досягнуто максимальної кількості повторних спроб! Будь ласка, скасуйте завантаження і спробуйте ще раз</string>
   <string name="unrestricted_battery_mode">Вимкнути оптимізацію батареї?</string>
   <string name="suggest_unrestricted_mode">Вивантаження більше ніж 3 зображень працює надійніше, коли оптимізацію батареї вимкнено. Будь ласка, вимкніть оптимізацію батареї для програмки Commons у налаштуваннях для плавної роботи. \n\nМожливі кроки, щоб вимкнути оптимізацію акумулятора:\n\nКрок 1: Натисніть кнопку «Налаштування» нижче.\n\nКрок 2: Переключіться з «Не оптимізовано» на «Усі програми».\n\nКрок 3: Знайдіть «Commons» або «fr.free.nrw.commons».\n\nКрок 4: Натисніть на нього і виберіть «Не оптимізувати».\n\nКрок 5: Натисніть «Готово».</string>
-  <string name="authentication_failed">Помилка автентифікації. Будь ласка, увійдіть у свій обліковий запис знову</string>
+  <string name="authentication_failed" fuzzy="true">Помилка автентифікації. Будь ласка, увійдіть у свій обліковий запис знову</string>
   <string name="uploading_started">Завантаження розпочато!</string>
   <string name="uploading_queued">Завантаження додано до черги (увімкнений режим обмеженого з\'єднання)</string>
   <string name="upload_completed_notification_title">Завантажено %1$s!</string>
@@ -138,11 +138,11 @@
   <string name="add_caption_toast">Будь ласка, вкажіть підпис цьому файлу</string>
   <string name="share_description_hint">Опис</string>
   <string name="share_caption_hint">Підпис</string>
-  <string name="login_failed_network">Неможливо увійти — збій у мережі</string>
+  <string name="login_failed_network" fuzzy="true">Неможливо увійти — збій у мережі</string>
   <string name="login_failed_throttled">Надто багато невдалих спроб. Будь ласка, спробуйте знову через кілька хвилин.</string>
   <string name="login_failed_blocked">Вибачте, цього користувача було заблоковано на Вікісховищі</string>
   <string name="login_failed_2fa_needed">Ви повинні надати код двофакторної автентифікації.</string>
-  <string name="login_failed_generic">Не вдалося увійти</string>
+  <string name="login_failed_generic" fuzzy="true">Не вдалося увійти</string>
   <string name="share_upload_button">Завантажити</string>
   <string name="multiple_share_base_title">Назвіть цю серію</string>
   <string name="provider_modifications">Модифікації</string>
@@ -299,7 +299,7 @@
   <string name="nominated_see_more">Див. сторінку, щоб дізнатись більше</string>
   <string name="skip_login">Пропустити</string>
   <string name="navigation_item_login">Увійти</string>
-  <string name="skip_login_title">Ви дійсно бажаєте пропустити автентифікацію?</string>
+  <string name="skip_login_title" fuzzy="true">Ви дійсно бажаєте пропустити автентифікацію?</string>
   <string name="skip_login_message">Вам треба буде увійти в систему для завантаження зображень у майбутньому.</string>
   <string name="login_alert_message">Увійдіть, щоб використати цю функцію</string>
   <string name="copy_wikicode">Скопіювати вікі-текст у буфер обміну</string>
@@ -366,7 +366,7 @@
   <string name="construction_event_answer">Зображення технологій чи культури дуже бажані для Вікісховища.</string>
   <string name="congratulatory_message_quiz">Ви дали %1$s правильних відповідей. Вітаємо!</string>
   <string name="warning_for_no_answer">Оберіть один з двох варіантів відповіді на запитання</string>
-  <string name="user_not_logged_in">Сесія авторизації спливла. Будь ласка, авторизуйтесь знову.</string>
+  <string name="user_not_logged_in" fuzzy="true">Сесія авторизації спливла. Будь ласка, авторизуйтесь знову.</string>
   <string name="quiz_result_share_message">Поширити свій результат тесту із друзями!</string>
   <string name="continue_message">Продовжити</string>
   <string name="correct">Правильна відповідь</string>
@@ -449,7 +449,7 @@
   <string name="never_ask_again">Ніколи більше про це не запитувати</string>
   <string name="display_location_permission_title">Запитувати дозвіл на геолокацію</string>
   <string name="display_location_permission_explanation">Запитувати про дозвіл на показ місця перебування, коли це потрібно для функції перегляду місць поблизу.</string>
-  <string name="achievements_fetch_failed">Щось пішло не так. Нам не вдалося отримати Ваші досягнення</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Щось пішло не так. Нам не вдалося отримати Ваші досягнення</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Ви зробили так багато, що наша система підрахунку досягнень не може впоратись зі своїм завданням. Це — абсолютне досягнення.</string>
   <string name="ends_on">Завершується:</string>
   <string name="display_campaigns">Показати кампанії</string>
@@ -465,7 +465,7 @@
   <string name="open_document_photo_picker_explanation">Новий засіб вибору фотографій Android ризикує втратити інформацію про місцезнаходження. Увімкніть, якщо ви використовуєте його.</string>
   <string name="location_loss_warning">Якщо вимкнути, то може бути викликаний новий вибір фотографій. Що може призвести до втрати інформації про місцезнаходження.\n\nТоркніться «Докладніше», щоб дізнатись більше.</string>
   <string name="nearby_campaign_dismiss_message">Ви більше не бачитимете кампаній. Однак Ви можете увімкнути це сповіщення повторно в своїх налаштуваннях, якщо забажаєте.</string>
-  <string name="this_function_needs_network_connection">Ця функція вимагає доступу до інтернету. Будь ласка, перевірте своє з\'єднання.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Ця функція вимагає доступу до інтернету. Будь ласка, перевірте своє з\'єднання.</string>
   <string name="error_processing_image">Сталася помилка при обробці зображення. Будь ласка, спробуйте ще раз!</string>
   <string name="getting_edit_token">Отримання токена редагування</string>
   <string name="check_category_adding_template">Додавання шаблона для перевірки категорій</string>
@@ -596,7 +596,7 @@
   <string name="place_state_needs_photo">Треба фото</string>
   <string name="place_type">Тип місця:</string>
   <string name="nearby_search_hint">Міст, музей, готель тощо</string>
-  <string name="you_must_reset_your_passsword">Щось пішло не так із процесом входу, ви маєте скинути пароль !</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Щось пішло не так із процесом входу, ви маєте скинути пароль !</string>
   <string name="title_for_media">МЕДІА</string>
   <string name="title_for_child_classes">ДОЧІРНІ КЛАСИ</string>
   <string name="title_for_parent_classes">БАТЬКІВСЬКІ КЛАСИ</string>
@@ -732,8 +732,8 @@
   <string name="add_location">Додати розташування</string>
   <string name="feedback_sharing_data_alert">Будь ласка, видаліть з цього листа будь-яку інформацію, якою ви не бажаєте поділитися публічно. Також майте на увазі, що ваша адреса електронної пошти, за допомогою якої ви розміщуєте публікацію, а також пов’язане ім’я та зображення профілю будуть видимі для всіх.</string>
   <string name="explore_map_details">Деталі</string>
-  <string name="achievements_unavailable_beta">Досягнення доступні лише у версії prod, будь ласка, перегляньте документацію розробника.</string>
-  <string name="leaderboard_unavailable_beta">Таблиця лідерів доступна лише в версії prod. Будь ласка, перегляньте документацію розробника.</string>
+  <string name="achievements_unavailable_beta" fuzzy="true">Досягнення доступні лише у версії prod, будь ласка, перегляньте документацію розробника.</string>
+  <string name="leaderboard_unavailable_beta" fuzzy="true">Таблиця лідерів доступна лише в версії prod. Будь ласка, перегляньте документацію розробника.</string>
   <string name="copyright_popup">Будь ласка, завантажуйте лише фотографії, які ви зробили самі. Користувачі, які завантажують зображення, захищені авторським правом, будуть заблоковані. Це стосується і бета-аромату. Дякуємо за тестування програми!</string>
   <string name="select_feedback_data_choice">Будь ласка, зніміть прапорець з будь-якої інформації, якою ви не бажаєте ділитися публічно.</string>
   <string name="api_level">Рівень API</string>

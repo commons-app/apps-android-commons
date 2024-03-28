@@ -61,6 +61,13 @@
         android:alpha="0.15"
         android:background="@color/black"/>
 
+      <View
+        android:id="@+id/uploading_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.15"
+        android:background="@color/black"/>
+
 
       <ImageView
         android:id="@+id/uploaded_overlay_icon"
@@ -71,12 +78,28 @@
         app:srcCompat="@drawable/commons"
         />
 
+      <ImageView
+        android:id="@+id/uploading_overlay_icon"
+        android:layout_width="@dimen/dimen_50"
+        android:layout_height="@dimen/dimen_50"
+        android:rotationX="180"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/menu_ic_download_24dp" />
+
       <androidx.constraintlayout.widget.Group
         android:id="@+id/uploaded_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:constraint_referenced_ids="uploaded_overlay,uploaded_overlay_icon"/>
+
+      <androidx.constraintlayout.widget.Group
+        android:id="@+id/uploading_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="uploading_overlay,uploading_overlay_icon"/>
 
       <ImageView
         android:id="@+id/not_for_upload_overlay_icon"

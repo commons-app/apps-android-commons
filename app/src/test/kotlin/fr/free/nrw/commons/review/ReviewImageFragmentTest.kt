@@ -18,6 +18,7 @@ import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
+import fr.free.nrw.commons.databinding.FragmentReviewImageBinding
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -57,6 +58,8 @@ class ReviewImageFragmentTest {
 
     private lateinit var activity: ReviewActivity
 
+    private lateinit var binding: FragmentReviewImageBinding
+
     @Before
     fun setUp() {
 
@@ -78,16 +81,18 @@ class ReviewImageFragmentTest {
 
         view = LayoutInflater.from(activity)
             .inflate(R.layout.fragment_review_image, null) as View
+        binding = FragmentReviewImageBinding.inflate(LayoutInflater.from(activity))
 
         noButton = view.findViewById(R.id.button_no)
         yesButton = view.findViewById(R.id.button_yes)
         textViewQuestion = view.findViewById(R.id.tv_review_question)
         textViewQuestionContext = view.findViewById(R.id.tv_review_question_context)
 
-        fragment.noButton = noButton
-        fragment.yesButton = yesButton
-        fragment.textViewQuestion = textViewQuestion
-        fragment.textViewQuestionContext = textViewQuestionContext
+        Whitebox.setInternalState(fragment, "binding", binding)
+        Whitebox.setInternalState(binding, "buttonYes", yesButton)
+        Whitebox.setInternalState(binding, "buttonNo", noButton)
+        Whitebox.setInternalState(binding, "tvReviewQuestion", textViewQuestion)
+        Whitebox.setInternalState(binding, "tvReviewQuestionContext", textViewQuestionContext)
     }
 
     @Test

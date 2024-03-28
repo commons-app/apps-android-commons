@@ -15,8 +15,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.controller.BaseControllerListener
 import com.facebook.drawee.controller.ControllerListener
@@ -38,6 +36,7 @@ import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.model.Result
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorViewModel
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorViewModelFactory
+import fr.free.nrw.commons.databinding.ActivityZoomableBinding
 import fr.free.nrw.commons.media.zoomControllers.zoomable.DoubleTapGestureListener
 import fr.free.nrw.commons.media.zoomControllers.zoomable.ZoomableDraweeView
 import fr.free.nrw.commons.theme.BaseActivity
@@ -67,19 +66,9 @@ class ZoomableActivity : BaseActivity() {
      */
     private lateinit var prefs: SharedPreferences
 
-    @JvmField
-    @BindView(R.id.zoomable)
-    var photo: ZoomableDraweeView? = null
+    private lateinit var binding: ActivityZoomableBinding
     
     var photoBackgroundColor: Int? = null
-
-    @JvmField
-    @BindView(R.id.zoom_progress_bar)
-    var spinner: ProgressBar? = null
-
-    @JvmField
-    @BindView(R.id.selection_count)
-    var selectedCount: TextView? = null
 
     /**
      * Total images present in folder
@@ -145,8 +134,8 @@ class ZoomableActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_zoomable)
-        ButterKnife.bind(this)
+        binding = ActivityZoomableBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         prefs =  applicationContext.getSharedPreferences(
             ImageHelper.CUSTOM_SELECTOR_PREFERENCE_KEY,
@@ -221,7 +210,7 @@ class ZoomableActivity : BaseActivity() {
                 onSwipe()
             }
         }
-        spinner?.let {
+        binding.zoomProgressBar?.let {
             it.visibility = if (result.status is CallbackStatus.FETCHING) View.VISIBLE else View.GONE
         }
     }
@@ -236,7 +225,7 @@ class ZoomableActivity : BaseActivity() {
             sharedPreferences.getBoolean(ImageHelper.SHOW_ALREADY_ACTIONED_IMAGES_PREFERENCE_KEY, true)
 
         if (!images.isNullOrEmpty()) {
-            photo!!.setOnTouchListener(object : OnSwipeTouchListener(this) {
+            binding.zoomable!!.setOnTouchListener(object : OnSwipeTouchListener(this) {
                 // Swipe left to view next image in the folder. (if available)
                 override fun onSwipeLeft() {
                     super.onSwipeLeft()
@@ -271,7 +260,7 @@ class ZoomableActivity : BaseActivity() {
      * Handles down swipe action
      */
     private fun onDownSwiped() {
-        if (photo?.zoomableController?.isIdentity == false)
+        if (binding.zoomable?.zoomableController?.isIdentity == false)
             return
 
         scope.launch {
@@ -333,7 +322,7 @@ class ZoomableActivity : BaseActivity() {
      * Handles up swipe action
      */
     private fun onUpSwiped() {
-        if (photo?.zoomableController?.isIdentity == false)
+        if (binding.zoomable?.zoomableController?.isIdentity == false)
             return
 
         scope.launch {
@@ -398,7 +387,7 @@ class ZoomableActivity : BaseActivity() {
      * Handles right swipe action
      */
     private fun onRightSwiped(showAlreadyActionedImages: Boolean) {
-        if (photo?.zoomableController?.isIdentity == false)
+        if (binding.zoomable?.zoomableController?.isIdentity == false)
             return
 
         if (showAlreadyActionedImages) {
@@ -432,7 +421,7 @@ class ZoomableActivity : BaseActivity() {
      * Handles left swipe action
      */
     private fun onLeftSwiped(showAlreadyActionedImages: Boolean) {
-        if (photo?.zoomableController?.isIdentity == false)
+        if (binding.zoomable?.zoomableController?.isIdentity == false)
             return
 
         if (showAlreadyActionedImages) {
@@ -558,15 +547,15 @@ class ZoomableActivity : BaseActivity() {
      * Unselect item UI
      */
     private fun itemUnselected() {
-        selectedCount!!.visibility = View.INVISIBLE
+        binding.selectionCount.visibility = View.INVISIBLE
     }
 
     /**
      * Select item UI
      */
     private fun itemSelected(i: Int) {
-        selectedCount!!.visibility = View.VISIBLE
-        selectedCount!!.text = i.toString()
+        binding.selectionCount.visibility = View.VISIBLE
+        binding.selectionCount.text = i.toString()
     }
 
     /**
@@ -586,11 +575,11 @@ class ZoomableActivity : BaseActivity() {
         object : BaseControllerListener<ImageInfo?>() {
             override fun onSubmit(id: String, callerContext: Any) {
                 // Sometimes the spinner doesn't appear when rapidly switching between images, this fixes that
-                spinner!!.visibility = View.VISIBLE
+                binding.zoomProgressBar.visibility = View.VISIBLE
             }
 
             override fun onIntermediateImageSet(id: String, imageInfo: ImageInfo?) {
-                spinner!!.visibility = View.GONE
+                binding.zoomProgressBar.visibility = View.GONE
             }
 
             override fun onFinalImageSet(
@@ -598,7 +587,7 @@ class ZoomableActivity : BaseActivity() {
                 imageInfo: ImageInfo?,
                 animatable: Animatable?
             ) {
-                spinner!!.visibility = View.GONE
+                binding.zoomProgressBar.visibility = View.GONE
             }
         }
 
@@ -609,18 +598,20 @@ class ZoomableActivity : BaseActivity() {
                 .setProgressBarImage(ProgressBarDrawable())
                 .setProgressBarImageScaleType(ScalingUtils.ScaleType.FIT_CENTER)
                 .build()
-            photo!!.hierarchy = hierarchy
-            photo!!.setAllowTouchInterceptionWhileZoomed(true)
-            photo!!.setIsLongpressEnabled(false)
-            photo!!.setTapListener(DoubleTapGestureListener(photo))
+            with(binding.zoomable!!) {
+                setHierarchy(hierarchy)
+                setAllowTouchInterceptionWhileZoomed(true)
+                setIsLongpressEnabled(false)
+                setTapListener(DoubleTapGestureListener(this))
+            }
             val controller: DraweeController = Fresco.newDraweeControllerBuilder()
                 .setUri(imageUri)
                 .setControllerListener(loadingListener)
                 .build()
-            photo!!.controller = controller
+            binding.zoomable!!.controller = controller
             
             if (photoBackgroundColor != null) {
-                photo!!.setBackgroundColor(photoBackgroundColor!!)
+                binding.zoomable!!.setBackgroundColor(photoBackgroundColor!!)
             }
 
             if (!images.isNullOrEmpty()) {
