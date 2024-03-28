@@ -617,7 +617,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         } else {
             lastKnownLocation = MapUtils.defaultLatLng;
         }
-        if (mapView != null) {
+        if (binding.map != null) {
             moveCameraToPosition(
                 new GeoPoint(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()));
         }
