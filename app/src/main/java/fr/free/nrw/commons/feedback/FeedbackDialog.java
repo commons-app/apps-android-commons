@@ -4,11 +4,13 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager.LayoutParams;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.databinding.DialogFeedbackBinding;
 import fr.free.nrw.commons.feedback.model.Feedback;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.DeviceInfoUtil;
+import java.util.Objects;
 
 /**
  * Feedback dialog that asks user for message and
@@ -28,6 +30,7 @@ public class FeedbackDialog extends Dialog {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dialogFeedbackBinding = DialogFeedbackBinding.inflate(getLayoutInflater());
+        Objects.requireNonNull(getWindow()).setSoftInputMode(LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         final View view = dialogFeedbackBinding.getRoot();
         setContentView(view);
         dialogFeedbackBinding.btnSubmitFeedback.setOnClickListener(new View.OnClickListener() {
