@@ -402,6 +402,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 }
             }
         );
+        binding.progressBarEdit.setVisibility(GONE);
+        binding.descriptionEdit.setVisibility(VISIBLE);
     }
 
     @Override
@@ -967,8 +969,9 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
         bundle.putParcelableArrayList(LIST_OF_DESCRIPTION_AND_CAPTION, descriptionAndCaptions);
         bundle.putString(WIKITEXT, s);
         bundle.putString(Prefs.DESCRIPTION_LANGUAGE, applicationKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, ""));
+        bundle.putParcelable("media", media);
         intent.putExtras(bundle);
-        startActivityForResult(intent, REQUEST_CODE_EDIT_DESCRIPTION);
+        startActivity(intent);
     }
 
     /**
