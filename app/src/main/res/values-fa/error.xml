@@ -6,7 +6,7 @@
 * جواد
 -->
 <resources>
-  <string name="crash_dialog_title">ویکی‌انبار متوقف شده‌است</string>
+  <string name="crash_dialog_title">ویکی‌انبار متوقف شده است</string>
   <string name="crash_dialog_text">اوه. خطایی در کار است!</string>
   <string name="crash_dialog_comment_prompt">به ما بگویید چه کار می‌کرده‌اید، سپس با ایمیل به اشتراک بگذارید. به اصلاح آن توسط ما کمک کرده‌اید!</string>
   <string name="crash_dialog_ok_toast">با تشکر!</string>

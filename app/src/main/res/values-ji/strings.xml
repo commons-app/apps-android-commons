@@ -35,10 +35,10 @@
   <string name="signup">אײַנשרייבן</string>
   <string name="logging_in_title">ארײַנלאגירן</string>
   <string name="logging_in_message">ביטע ווארטן</string>
-  <string name="login_success">אריינלאגירט מיט הצלחה!</string>
-  <string name="login_failed">ארײַנלאגירן אדורכגעפאלן!</string>
+  <string name="login_success" fuzzy="true">אריינלאגירט מיט הצלחה!</string>
+  <string name="login_failed" fuzzy="true">ארײַנלאגירן אדורכגעפאלן!</string>
   <string name="upload_failed">טעקע נישט געראפן.  פרובירט אפשר אן אנדער טעקע.</string>
-  <string name="authentication_failed">אויטענטיפֿיצירן דורכגעפֿאלן, ביטע אריינלאגירן נאכאמאל</string>
+  <string name="authentication_failed" fuzzy="true">אויטענטיפֿיצירן דורכגעפֿאלן, ביטע אריינלאגירן נאכאמאל</string>
   <string name="uploading_started">ארויפלאדן אנגעהויבן!</string>
   <string name="upload_completed_notification_title">%1$s ארויפגעלאדן!!</string>
   <string name="upload_completed_notification_text">דרוקט צו זען אײַער ארויפֿלאד</string>
@@ -59,8 +59,8 @@
   <string name="menu_share">טיילן</string>
   <string name="share_title_hint" fuzzy="true">טיטל (געפֿאדערט)</string>
   <string name="share_description_hint">באַשרײַבונג</string>
-  <string name="login_failed_network">נישט מעגלעך אריינלאגירן – נעצווערק פֿעלער</string>
-  <string name="login_failed_generic">ארײַנלאגירן אדורכגעפאלן!</string>
+  <string name="login_failed_network" fuzzy="true">נישט מעגלעך אריינלאגירן – נעצווערק פֿעלער</string>
+  <string name="login_failed_generic" fuzzy="true">ארײַנלאגירן אדורכגעפאלן!</string>
   <string name="share_upload_button">אַרויפֿלאָדן</string>
   <string name="provider_modifications">פֿארענדערונגען</string>
   <string name="menu_upload_single">אַרויפֿלאָדן</string>

@@ -73,13 +73,13 @@
   <string name="logging_in_message">Sačekajte…</string>
   <string name="updating_caption_title">Ažuriranje natpisa i opisa</string>
   <string name="updating_caption_message">Sačekajte…</string>
-  <string name="login_success">Uspešno ste prijavljeni.</string>
-  <string name="login_failed">Prijavljivanje nije uspelo.</string>
+  <string name="login_success" fuzzy="true">Uspešno ste prijavljeni.</string>
+  <string name="login_failed" fuzzy="true">Prijavljivanje nije uspelo.</string>
   <string name="upload_failed">Datoteka nije pronađena. Pokušajte sa drugom datotekom.</string>
   <string name="retry_limit_reached">Maksimalni limit za ponovno pokušavanje je prekoračen! Otkažite otpremanje i pokušajte ponovo</string>
   <string name="unrestricted_battery_mode">Isključi optimizaciju baterije?</string>
   <string name="suggest_unrestricted_mode">Otpremanje više od 3 slike radi pouzdanije kada je isključena optimizacija baterije. Isključite optimizaciju baterije za aplikaciju Ostava u podešavanjima, za nesmetano iskustvo otpremanja.\n\nMogući koraci za isključivanje optimizacije baterije:\n\nKorak 1: Dodirnite dugme \'Podešavanja\' ispod.\n\nKorak 2: Promenite sa \'Nije optimizovano\' na \'Sve aplikacije\'.\n\nKorak 3: Potražite \'Ostava\' ili \'fr.free.nrw.commons\'.\n\nKorak 4: Dodirnite i izaberite \'Ne optimizuj\'.\n\nKorak 5: Pritisnite \'Gotovo\'.</string>
-  <string name="authentication_failed">Potvrda identiteta nije uspela. Prijavite se ponovo.</string>
+  <string name="authentication_failed" fuzzy="true">Potvrda identiteta nije uspela. Prijavite se ponovo.</string>
   <string name="uploading_started">Otpremanje je započeto.</string>
   <string name="uploading_queued">Otpremanje je u redu (omogućen režim ograničene veze)</string>
   <string name="upload_completed_notification_title">Datoteka „%1$s” je otpremljena.</string>
@@ -106,11 +106,11 @@
   <string name="add_caption_toast">Unesite natpis za ovu datoteku</string>
   <string name="share_description_hint">Opis</string>
   <string name="share_caption_hint">Natpis</string>
-  <string name="login_failed_network">Prijava nije moguća — greška na mreži</string>
+  <string name="login_failed_network" fuzzy="true">Prijava nije moguća — greška na mreži</string>
   <string name="login_failed_throttled">Previše neuspešnih pokušaja. Pokušajte ponovo za nekoliko minuta.</string>
   <string name="login_failed_blocked">Ovaj korisnik je blokiran na Ostavi</string>
   <string name="login_failed_2fa_needed">Morate da navedete svoj dvofaktorski kôd za potvrdu identiteta.</string>
-  <string name="login_failed_generic">Prijava nije uspela</string>
+  <string name="login_failed_generic" fuzzy="true">Prijava nije uspela</string>
   <string name="share_upload_button">Otpremi</string>
   <string name="multiple_share_base_title">Imenujte ovaj komplet</string>
   <string name="provider_modifications">Izmene</string>
@@ -263,7 +263,7 @@
   <string name="nominated_see_more">Pogledajte veb-stranicu za više informacija</string>
   <string name="skip_login">Preskoči</string>
   <string name="navigation_item_login">Prijavi me</string>
-  <string name="skip_login_title">Zaista želite da preskočite prijavu?</string>
+  <string name="skip_login_title" fuzzy="true">Zaista želite da preskočite prijavu?</string>
   <string name="skip_login_message">Moraćete da se prijavite da biste otpremali slike u budućnosti.</string>
   <string name="login_alert_message">Prijavite se da biste koristili ovu funkciju</string>
   <string name="copy_wikicode">Kopiraj vikitekst</string>
@@ -330,7 +330,7 @@
   <string name="construction_event_answer">Slike iz oblasti tehnologije ili kulture su dobrodošle na Ostavi.</string>
   <string name="congratulatory_message_quiz">Tačnih odgovora: %1$s. Čestitamo!</string>
   <string name="warning_for_no_answer">Izaberite jednu od dve opcije da biste odgovorili na pitanje</string>
-  <string name="user_not_logged_in">Sesija prijave je istekla. Prijavite se ponovo.</string>
+  <string name="user_not_logged_in" fuzzy="true">Sesija prijave je istekla. Prijavite se ponovo.</string>
   <string name="quiz_result_share_message">Delite kviz sa prijateljima.</string>
   <string name="continue_message">Nastavi</string>
   <string name="correct">Tačan odgovor</string>
@@ -412,7 +412,7 @@
   <string name="never_ask_again">Ne pitaj ovo ponovo</string>
   <string name="display_location_permission_title">Dozvola za prikaz lokacije</string>
   <string name="display_location_permission_explanation">Traži dozvolu za lokaciju kada je to potrebno za funkciju prikaza kartice obaveštenja u blizini.</string>
-  <string name="achievements_fetch_failed">Nešto nije u redu. Nije moguće dobaviti dostignuća.</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Nešto nije u redu. Nije moguće dobaviti dostignuća.</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Dali ste toliko doprinosa sa kojima naš sistem za izračunavanje dostignuća ne može da izađe na kraj. Ovo je krajnje dostignuće.</string>
   <string name="ends_on">Završava:</string>
   <string name="display_campaigns">Prikaži kampanje</string>
@@ -426,7 +426,7 @@
   <string name="in_app_camera_location_unavailable">Aplikacija ne bi snimala lokaciju zajedno sa snimcima pošto je GPS isključen</string>
   <string name="open_document_photo_picker_title">Koristite birač slika baziran na dokumentu</string>
   <string name="nearby_campaign_dismiss_message">Više nećete videti kampanje. Međutim, ako želite, možete ponovo da omogućite ovo obaveštenje u Podešavanjima.</string>
-  <string name="this_function_needs_network_connection">Ova funkcija zahteva mrežnu vezu. Proverite podešavanja veze.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Ova funkcija zahteva mrežnu vezu. Proverite podešavanja veze.</string>
   <string name="error_processing_image">Došlo je do greške tokom obrade slike. Molim vas, pokušajte ponovo!</string>
   <string name="getting_edit_token">Dobijanje tokena za uređivanje</string>
   <string name="check_category_adding_template">Dodavanje šablona za proveru kategorije</string>
@@ -543,7 +543,7 @@
   <string name="place_state_needs_photo">Potrebna slika</string>
   <string name="place_type">Tip mesta:</string>
   <string name="nearby_search_hint">Most, muzej, hotel itd.</string>
-  <string name="you_must_reset_your_passsword">Došlo je do greške sa prijavljivanjem, morate da promenite vašu lozinku !!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Došlo je do greške sa prijavljivanjem, morate da promenite vašu lozinku !!</string>
   <string name="upload_nearby_place_found_title">Obližnje mesto je pronađeno</string>
   <string name="upload_nearby_place_found_description">Da li je ovo fotografija %1$s?</string>
   <string name="title_app_shortcut_bookmark">Obeleživači</string>
@@ -661,8 +661,8 @@
   <string name="add_location">Dodaj lokaciju</string>
   <string name="feedback_sharing_data_alert">Uklonite iz ovog mejla bilo sve informacije koje ne želite da delite javno. Takođe, imajte na umu da će vaša imejl adresa sa koje objavljujete, i povezano ime i profilna slika, biti javno vidljivi.</string>
   <string name="explore_map_details">Detalji</string>
-  <string name="achievements_unavailable_beta">Dostignuća su dostupna samo u produkcionoj verziji, proverite dokumentaciju za programere.</string>
-  <string name="leaderboard_unavailable_beta">Tabela lidera je dostupna samo u produkcionoj verziji, proverite dokumentaciju za programere.</string>
+  <string name="achievements_unavailable_beta" fuzzy="true">Dostignuća su dostupna samo u produkcionoj verziji, proverite dokumentaciju za programere.</string>
+  <string name="leaderboard_unavailable_beta" fuzzy="true">Tabela lidera je dostupna samo u produkcionoj verziji, proverite dokumentaciju za programere.</string>
   <string name="copyright_popup">Molimo vas da otpremate samo slike koje ste sami napravili. Otpremaoci slika koji krše autorska prava će biti blokirani. Ovo se takođe odnosi na beta verziju. Hvala vam što testirate aplikaciju!</string>
   <string name="select_feedback_data_choice">Molimo vas da poništite sve informacije koje ne žečite da delite javno.</string>
   <string name="api_level">Nivo API-ja</string>

@@ -443,7 +443,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="never_ask_again">Never ask this again</string>
   <string name="display_location_permission_title">Ask for location permission</string>
   <string name="display_location_permission_explanation">Ask for location permission when needed for nearby notification card view feature.</string>
-  <string name="achievements_fetch_failed">Something went wrong, We could not fetch your achievements</string>
+  <string name="achievements_fetch_failed">Something went wrong, We could not fetch achievements</string>
   <string name="achievements_fetch_failed_ultimate_achievement">You\'ve made so many contributions our achievements calculation system can\'t cope. This is the ultimate achievement.</string>
   <string name="ends_on">Ends on:</string>
   <string name="display_campaigns">Display campaigns</string>

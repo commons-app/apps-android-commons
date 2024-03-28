@@ -41,10 +41,10 @@
   <string name="signup">Napravi korisnički račun</string>
   <string name="logging_in_title">Prijavljivanje</string>
   <string name="logging_in_message">Sačekajte…</string>
-  <string name="login_success">Prijavljivanje uspješno!</string>
-  <string name="login_failed">Prijavljivanje nije uspjelo!</string>
+  <string name="login_success" fuzzy="true">Prijavljivanje uspješno!</string>
+  <string name="login_failed" fuzzy="true">Prijavljivanje nije uspjelo!</string>
   <string name="upload_failed">Datoteka nije pronađena. Pokušajte drugu.</string>
-  <string name="authentication_failed">Provjera identiteta nije uspjela. Prijavite se ponovo.</string>
+  <string name="authentication_failed" fuzzy="true">Provjera identiteta nije uspjela. Prijavite se ponovo.</string>
   <string name="uploading_started">Postavljanje je započelo!</string>
   <string name="upload_completed_notification_title">Datoteka %1$s je postavljena!</string>
   <string name="upload_completed_notification_text">Dodirnite da biste vidjeli datoteku</string>
@@ -67,11 +67,11 @@
   <string name="menu_share">Podijeli</string>
   <string name="share_title_hint" fuzzy="true">Naslov</string>
   <string name="share_description_hint">Opis</string>
-  <string name="login_failed_network">Ne mogu Vas prijaviti – mreža ne radi</string>
+  <string name="login_failed_network" fuzzy="true">Ne mogu Vas prijaviti – mreža ne radi</string>
   <string name="login_failed_throttled">Napravili ste previše grešaka u prijavi. Pokušajte ponovo za nekoliko minuta.</string>
   <string name="login_failed_blocked">Žao nam je, korisnik je blokiran na Commonsu</string>
   <string name="login_failed_2fa_needed">Morate upisati kôd za potvrdu u 2 koraka.</string>
-  <string name="login_failed_generic">Prijava nije uspjela</string>
+  <string name="login_failed_generic" fuzzy="true">Prijava nije uspjela</string>
   <string name="share_upload_button">Postavi</string>
   <string name="multiple_share_base_title">Dajte ime ovom kompletu</string>
   <string name="provider_modifications">Izmjene</string>

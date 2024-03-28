@@ -29,7 +29,7 @@
   <string name="logging_in_title">प्रवेश होय रहलौ छौं</string>
   <string name="logging_in_message">कृपया प्रतीक्षा करौ...</string>
   <string name="updating_caption_message">कृपया प्रतीक्षा करौ...</string>
-  <string name="login_failed">प्रवेश विफल</string>
+  <string name="login_failed" fuzzy="true">प्रवेश विफल</string>
   <string name="uploading_started">अपलोड आरंभ!</string>
   <string name="title_activity_contributions">हाल केरौ अपलोड</string>
   <string name="contribution_state_queued">कतारबद्ध</string>
@@ -41,7 +41,7 @@
   <string name="menu_view_file_page">फाइल पन्ना देखौ</string>
   <string name="share_description_hint">विवरण</string>
   <string name="share_caption_hint">शीर्षक</string>
-  <string name="login_failed_generic">प्रवेश विफल</string>
+  <string name="login_failed_generic" fuzzy="true">प्रवेश विफल</string>
   <string name="share_upload_button">अपलोड</string>
   <string name="menu_upload_single">अपलोड</string>
   <string name="menu_save_categories">सहेजौ</string>

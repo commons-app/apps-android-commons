@@ -29,10 +29,10 @@
   <string name="signup">পঞ্জীয়ন কৰক</string>
   <string name="logging_in_title">লগইন হৈ আছে</string>
   <string name="logging_in_message">অনুগ্ৰহ কৰি অপেক্ষা কৰক...</string>
-  <string name="login_success">লগইন সফল হ\'ল!</string>
-  <string name="login_failed">লগইন বিফল হৈছে!</string>
+  <string name="login_success" fuzzy="true">লগইন সফল হ\'ল!</string>
+  <string name="login_failed" fuzzy="true">লগইন বিফল হৈছে!</string>
   <string name="upload_failed">ফাইল পোৱা নগ\'ল। অনুগ্ৰহ কৰি আন এটা ফাইল চেষ্টা কৰক।</string>
-  <string name="authentication_failed">প্ৰমাণীকৰণ ব্যৰ্থ হৈছে, অনুগ্ৰহ কৰি আকৌ প্ৰৱেশ কৰক</string>
+  <string name="authentication_failed" fuzzy="true">প্ৰমাণীকৰণ ব্যৰ্থ হৈছে, অনুগ্ৰহ কৰি আকৌ প্ৰৱেশ কৰক</string>
   <string name="uploading_started">আপল\'ড আৰম্ভ হৈছে!</string>
   <string name="upload_completed_notification_title">%1$s আপল\'ড কৰা হ\'ল!</string>
   <string name="upload_completed_notification_text">আপোনাৰ আপল\'ড চাবলৈ টেপ্‌ কৰক</string>
@@ -54,10 +54,10 @@
   <string name="menu_share">শ্বেয়াৰ কৰক</string>
   <string name="share_title_hint" fuzzy="true">শীৰ্ষক (প্ৰয়োজনীয়)</string>
   <string name="share_description_hint">বিৱৰণ</string>
-  <string name="login_failed_network">প্ৰৱেশ ব্যৰ্থ হৈছে - নে\'টৱৰ্ক সমস্যা</string>
+  <string name="login_failed_network" fuzzy="true">প্ৰৱেশ ব্যৰ্থ হৈছে - নে\'টৱৰ্ক সমস্যা</string>
   <string name="login_failed_throttled">অত্যাধিক অসফল প্ৰচেষ্টা। অনুগ্ৰহ কৰি অলপ সময়ৰ পাছত পুনৰ চেষ্টা কৰক।</string>
   <string name="login_failed_blocked">ক্ষমা কৰিব, এই ব্যৱহাৰকাৰী গৰাকীক ক\'ম\'ঞ্চত বাৰণ কৰা হৈছে</string>
-  <string name="login_failed_generic">প্ৰৱেশ ব্যৰ্থ হৈছে</string>
+  <string name="login_failed_generic" fuzzy="true">প্ৰৱেশ ব্যৰ্থ হৈছে</string>
   <string name="share_upload_button">আপল’ড কৰক</string>
   <string name="provider_modifications">পৰিৱৰ্তনসমূহ</string>
   <string name="menu_upload_single">আপল’ড কৰক</string>

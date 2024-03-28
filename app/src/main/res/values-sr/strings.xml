@@ -81,8 +81,8 @@
   <string name="logging_in_message">Сачекајте…</string>
   <string name="updating_caption_title">Ажурирање натписа и описа</string>
   <string name="updating_caption_message">Сачекајте…</string>
-  <string name="login_success">Успешно сте пријављени.</string>
-  <string name="login_failed">Пријављивање није успело.</string>
+  <string name="login_success">Успешно сте пријављени!</string>
+  <string name="login_failed">Пријављивање није успело!</string>
   <string name="upload_failed">Датотека није пронађена. Покушајте са другом датотеком.</string>
   <string name="retry_limit_reached">Максимални лимит за поновно покушавање је прекорачен! Откажите отпремање и покушајте поново</string>
   <string name="unrestricted_battery_mode">Искључи оптимизацију батерије?</string>
@@ -114,7 +114,7 @@
   <string name="add_caption_toast">Унесите натпис за ову датотеку</string>
   <string name="share_description_hint">Опис</string>
   <string name="share_caption_hint">Натпис</string>
-  <string name="login_failed_network">Пријава није могућа — грешка на мрежи</string>
+  <string name="login_failed_network" fuzzy="true">Пријава није могућа — грешка на мрежи</string>
   <string name="login_failed_throttled">Превише неуспешних покушаја. Покушајте поново за неколико минута.</string>
   <string name="login_failed_blocked">Овај корисник је блокиран на Остави</string>
   <string name="login_failed_2fa_needed">Морате да наведете свој двофакторски кôд за потврду идентитета.</string>
@@ -271,7 +271,7 @@
   <string name="nominated_see_more">Погледајте веб-страницу за више информација</string>
   <string name="skip_login">Прескочи</string>
   <string name="navigation_item_login">Пријави ме</string>
-  <string name="skip_login_title">Заиста желите да прескочите пријаву?</string>
+  <string name="skip_login_title" fuzzy="true">Заиста желите да прескочите пријаву?</string>
   <string name="skip_login_message">Мораћете да се пријавите да бисте отпремали слике у будућности.</string>
   <string name="login_alert_message">Пријавите се да бисте користили ову функцију</string>
   <string name="copy_wikicode">Копирај викитекст</string>
@@ -338,7 +338,7 @@
   <string name="construction_event_answer">Слике из области технологије или културе су добродошле на Остави.</string>
   <string name="congratulatory_message_quiz">Тачних одговора: %1$s. Честитамо!</string>
   <string name="warning_for_no_answer">Изаберите једну од две опције да бисте одговорили на питање</string>
-  <string name="user_not_logged_in">Сесија пријаве је истекла. Пријавите се поново.</string>
+  <string name="user_not_logged_in" fuzzy="true">Сесија пријаве је истекла. Пријавите се поново.</string>
   <string name="quiz_result_share_message">Делите квиз са пријатељима.</string>
   <string name="continue_message">Настави</string>
   <string name="correct">Тачан одговор</string>
@@ -435,7 +435,7 @@
   <string name="in_app_camera_location_unavailable">Апликација не би снимала локацију заједно са снимцима пошто је GPS искључен</string>
   <string name="open_document_photo_picker_title">Користите бирач слика базиран на документу</string>
   <string name="nearby_campaign_dismiss_message">Више нећете видети кампање. Међутим, ако желите, можете поново да омогућите ово обавештење у подешавањима.</string>
-  <string name="this_function_needs_network_connection">Ова функција захтева мрежну везу. Проверите подешавања везе.</string>
+  <string name="this_function_needs_network_connection">Ова функција захтева Интернет везу. Проверите подешавања везе.</string>
   <string name="error_processing_image">Дошло је до грешке током обраде слике. Молим вас, покушајте поново!</string>
   <string name="getting_edit_token">Добијање токена за уређивање</string>
   <string name="check_category_adding_template">Додавање шаблона за проверу категорије</string>
@@ -552,7 +552,7 @@
   <string name="place_state_needs_photo">Потребна слика</string>
   <string name="place_type">Тип места:</string>
   <string name="nearby_search_hint">Мост, музеј, хотел итд.</string>
-  <string name="you_must_reset_your_passsword">Дошло је до грешке са пријављивањем, морате да промените Вашу лозинку !!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Дошло је до грешке са пријављивањем, морате да промените Вашу лозинку !!</string>
   <string name="upload_nearby_place_found_title">Оближње место је пронађено</string>
   <string name="upload_nearby_place_found_description">Да ли је ово фотографија %1$s?</string>
   <string name="title_app_shortcut_bookmark">Обележивачи</string>
@@ -672,8 +672,8 @@
   <string name="add_location">Додај локацију</string>
   <string name="feedback_sharing_data_alert">Молимо уклоните из овог мејла све информације које не желите да делите јавно. Такође, имајте на уму да ће ваша имејл адреса са које објављујете и повезано име и профилна слика, бити јавно видљиви.</string>
   <string name="explore_map_details">Детаљи</string>
-  <string name="achievements_unavailable_beta">Достигнућа су доступна само у продукционој верзији, проверите документацију за програмере.</string>
-  <string name="leaderboard_unavailable_beta">Табела лидера је доступна само у продукционој верзији, проверите документацију за програмере.</string>
+  <string name="achievements_unavailable_beta" fuzzy="true">Достигнућа су доступна само у продукционој верзији, проверите документацију за програмере.</string>
+  <string name="leaderboard_unavailable_beta" fuzzy="true">Табела лидера је доступна само у продукционој верзији, проверите документацију за програмере.</string>
   <string name="copyright_popup">Молимо вас да отпремате само слике које сте сами направили. Отпремаоци слика који крше ауторска права ће бити блокирани. Ово се такође односи на бета верзију. Хвала вам што тестирате апликацију!</string>
   <string name="select_feedback_data_choice">Молимо вас да поништите све информације које не жечите да делите јавно.</string>
   <string name="api_level">Ниво API-ја</string>
@@ -717,6 +717,7 @@
   <string name="edit_image">Уреди слику</string>
   <string name="edit_location">Уреди локацију</string>
   <string name="send_thanks_to_author">Захвали се аутору</string>
+  <string name="invalid_login_message" fuzzy="true">Ваша пријава је истекла. Молимо пријавите се поново.</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d слика је одабрана</item>
     <item quantity="other">%d слика је одабрано</item>

@@ -53,10 +53,10 @@
   <string name="signup">Регистриране</string>
   <string name="logging_in_title">Влизане в системата</string>
   <string name="logging_in_message">Изчакайте…</string>
-  <string name="login_success">Успешно влизане.</string>
-  <string name="login_failed">Неуспешно влизане!</string>
+  <string name="login_success" fuzzy="true">Успешно влизане.</string>
+  <string name="login_failed" fuzzy="true">Неуспешно влизане!</string>
   <string name="upload_failed">Файлът не е намерен. Моля, опитайте с друг файл.</string>
-  <string name="authentication_failed">Заверката е неуспешна. Влезете отново.</string>
+  <string name="authentication_failed" fuzzy="true">Заверката е неуспешна. Влезете отново.</string>
   <string name="uploading_started">Качването започна!</string>
   <string name="upload_completed_notification_title">Файл %1$s е качен!</string>
   <string name="upload_completed_notification_text">Докоснете, за да видите качения файл</string>
@@ -75,11 +75,11 @@
   <string name="menu_share">Споделяне</string>
   <string name="share_title_hint">Описание (задълж.)</string>
   <string name="share_description_hint">Описание</string>
-  <string name="login_failed_network">Неуспешно влизане – проблем в мрежата</string>
+  <string name="login_failed_network" fuzzy="true">Неуспешно влизане – проблем в мрежата</string>
   <string name="login_failed_throttled">Твърде много неуспешни опити. Моля, опитайте пак след няколко минути.</string>
   <string name="login_failed_blocked">За съжаление, потребителят е блокиран на Общомедия</string>
   <string name="login_failed_2fa_needed">Трябва да предоставите кода на двуфакторната си автентикация.</string>
-  <string name="login_failed_generic">Грешка при влизане</string>
+  <string name="login_failed_generic" fuzzy="true">Грешка при влизане</string>
   <string name="share_upload_button">Качване</string>
   <string name="multiple_share_base_title">Дайте име на този комплект</string>
   <string name="provider_modifications">Изменения</string>
@@ -294,7 +294,7 @@
   <string name="display_campaigns">Показване на кампании</string>
   <string name="display_campaigns_explanation">Вижте текущите кампании</string>
   <string name="nearby_campaign_dismiss_message">Вече няма да ви се показват кампаниите. Ако промените решението си, ще намерите тази настройка в Настройки.</string>
-  <string name="this_function_needs_network_connection">Тази опция изисква да сте свързани към мрежата. Проверете настройките за връзка.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Тази опция изисква да сте свързани към мрежата. Проверете настройките за връзка.</string>
   <string name="error_processing_image">Възникна грешка при обработката на картината. Моля, опитайте отново!</string>
   <string name="no_image">Няма използвани изображения</string>
   <string name="no_image_reverted">Няма върнати изображения</string>

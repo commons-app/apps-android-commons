@@ -41,10 +41,10 @@
   <string name="logging_in_message">Souplé antann...</string>
   <string name="updating_caption_title">Mizajou di léjann-yan ké dèskripsyon-yan</string>
   <string name="updating_caption_message">Souplé antann...</string>
-  <string name="login_success">Konnègsyon bon !</string>
-  <string name="login_failed">Konnègsyon pabon !</string>
+  <string name="login_success" fuzzy="true">Konnègsyon bon !</string>
+  <string name="login_failed" fuzzy="true">Konnègsyon pabon !</string>
   <string name="upload_failed">Fiché pa trouvé. Souplé éséyé ké rounòt.</string>
-  <string name="authentication_failed">Lotantifikasyon pabon, souplé konnègté oukò òkò.</string>
+  <string name="authentication_failed" fuzzy="true">Lotantifikasyon pabon, souplé konnègté oukò òkò.</string>
   <string name="uploading_started">Télévèrsé koumansé !</string>
   <string name="upload_completed_notification_title">%1$s télévèrsé !</string>
   <string name="upload_completed_notification_text">Pézé pou wè kisa ou télévèrsé</string>
@@ -68,8 +68,8 @@
   <string name="add_caption_toast">Souplé ba nou roun léjann pou sa fiché</string>
   <string name="share_description_hint">Dèskripsyon</string>
   <string name="share_caption_hint">Léjann</string>
-  <string name="login_failed_network">Konnègsyon pa posib - rézo pabon</string>
-  <string name="login_failed_generic">Konnègsyon pabon</string>
+  <string name="login_failed_network" fuzzy="true">Konnègsyon pa posib - rézo pabon</string>
+  <string name="login_failed_generic" fuzzy="true">Konnègsyon pabon</string>
   <string name="share_upload_button">Télévèrsé</string>
   <string name="multiple_share_base_title">Nonmem sa ansanm</string>
   <string name="provider_modifications">Modifikasyon-yan</string>
@@ -141,7 +141,7 @@
   <string name="send_log_file">Voyé jòrnal-a</string>
   <string name="skip_login">Pasé</string>
   <string name="navigation_item_login">Konnègté sokò</string>
-  <string name="skip_login_title">Ès ou vréman pa lé konnègté oukò</string>
+  <string name="skip_login_title" fuzzy="true">Ès ou vréman pa lé konnègté oukò</string>
   <string name="login_alert_message">Souplé konnègté oukò pou itilizé sa fongsyonnalité</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipédja</string>

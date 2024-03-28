@@ -68,10 +68,10 @@
   <string name="logging_in_message">Prašome palaukti…</string>
   <string name="updating_caption_title">Antraštės ir aprašymai atnaujinami</string>
   <string name="updating_caption_message">Prašome palaukti...</string>
-  <string name="login_success">Sėkmingai prisijungėte!</string>
-  <string name="login_failed">Prisijungti nepavyko!</string>
+  <string name="login_success" fuzzy="true">Sėkmingai prisijungėte!</string>
+  <string name="login_failed" fuzzy="true">Prisijungti nepavyko!</string>
   <string name="upload_failed">Failas nerastas. Prašome pabandyti kitą failą.</string>
-  <string name="authentication_failed">Autentifikavimas nepavyko, prašome prisijungti dar kartą</string>
+  <string name="authentication_failed" fuzzy="true">Autentifikavimas nepavyko, prašome prisijungti dar kartą</string>
   <string name="uploading_started">Įkėlimas prasidėjo!</string>
   <string name="uploading_queued">Įkėlimas eilėje (įgalintas riboto ryšio režimas)</string>
   <string name="upload_completed_notification_title">%1$s įkelta!</string>
@@ -98,11 +98,11 @@
   <string name="add_caption_toast">Pateikite šio failo antraštę</string>
   <string name="share_description_hint">Aprašymas</string>
   <string name="share_caption_hint">Antraštė</string>
-  <string name="login_failed_network">Negalima prisijungti - tinklo klaida</string>
+  <string name="login_failed_network" fuzzy="true">Negalima prisijungti - tinklo klaida</string>
   <string name="login_failed_throttled">Per daug nesėkmingų bandymų. Pabandykite dar kartą po keleto minučių.</string>
   <string name="login_failed_blocked">Atsiprašome, šis vartotojas buvo užblokuotas Commons</string>
   <string name="login_failed_2fa_needed">Turite pateikti savo dviejų žingsnių patvirtinimo kodą.</string>
-  <string name="login_failed_generic">Prisijungti nepavyko</string>
+  <string name="login_failed_generic" fuzzy="true">Prisijungti nepavyko</string>
   <string name="share_upload_button">Įkelti</string>
   <string name="multiple_share_base_title">Pavadinkite šį rinkinį</string>
   <string name="provider_modifications">Pakeitimai</string>
@@ -248,7 +248,7 @@
   <string name="nominated_see_more">Žiūrėkite tinklapį dėl daugiau informacijos</string>
   <string name="skip_login">Praleisti</string>
   <string name="navigation_item_login">Prisijungti</string>
-  <string name="skip_login_title">Ar tikrai norite praleisti prisijungimą?</string>
+  <string name="skip_login_title" fuzzy="true">Ar tikrai norite praleisti prisijungimą?</string>
   <string name="skip_login_message">Norėdami ateityje įkelti nuotraukas, turėsite prisijungti.</string>
   <string name="login_alert_message">Jei norite naudotis šia funkcija, prisijunkite</string>
   <string name="copy_wikicode">Nukopijuokite vikitekstą į mainų sritį</string>
@@ -314,7 +314,7 @@
   <string name="construction_event_answer">Nuotraukos, kuriose pavaizduotos technologijos ar kultūra, yra labai laukiamos Vikitekoje.</string>
   <string name="congratulatory_message_quiz">Surinkote %1$s teisingų atsakymų. Sveikiname!</string>
   <string name="warning_for_no_answer">Norėdami atsakyti į klausimą, pasirinkite vieną iš dviejų variantų</string>
-  <string name="user_not_logged_in">Prisijungimo sesija baigėsi, prisijunkite dar kartą.</string>
+  <string name="user_not_logged_in" fuzzy="true">Prisijungimo sesija baigėsi, prisijunkite dar kartą.</string>
   <string name="quiz_result_share_message">Pasidalinkite savo apkalusa su draugais!</string>
   <string name="continue_message">Tęsti</string>
   <string name="correct">Teisingas atsakymas</string>
@@ -395,12 +395,12 @@
   <string name="never_ask_again">Niekada daugiau to neklausti</string>
   <string name="display_location_permission_title">Paprašyti vietos leidimo</string>
   <string name="display_location_permission_explanation">Jei reikia, kad būtų galima naudoti netoliese esančio pranešimų kortelės peržiūros funkciją, paprašykite leidimo nustatyti vietą.</string>
-  <string name="achievements_fetch_failed">Kažkas ne taip. Nepavyko gauti jūsų pasiekimų</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Kažkas ne taip. Nepavyko gauti jūsų pasiekimų</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Prisidėjote tiek daug, kad mūsų pasiekimų skaičiavimo sistema negali susidoroti. Tai yra didžiausias pasiekimas.</string>
   <string name="ends_on">Baigiasi:</string>
   <string name="display_campaigns_explanation">Peržiūrėkite vykstančias kampanijas</string>
   <string name="nearby_campaign_dismiss_message">Kampanijų nebematysite. Tačiau, jei norite, galite iš naujo įjungti šį pranešimą nustatymuose.</string>
-  <string name="this_function_needs_network_connection">Šiai funkcijai reikalingas tinklo ryšys, patikrinkite ryšio nustatymus.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Šiai funkcijai reikalingas tinklo ryšys, patikrinkite ryšio nustatymus.</string>
   <string name="error_processing_image">Apdorojant vaizdą įvyko klaida. Pabandykite dar kartą!</string>
   <string name="getting_edit_token">Gaunamas redagavimo prieigos raktas</string>
   <string name="check_category_adding_template">Kategorijos tikrinimo šablonas pridedamas</string>
@@ -514,7 +514,7 @@
   <string name="place_state_needs_photo">Reikia Nuotraukos</string>
   <string name="place_type">Vietos tipas:</string>
   <string name="nearby_search_hint">Tiltas, muziejus, viešbutis ir t.t.</string>
-  <string name="you_must_reset_your_passsword">Kažkas nepavyko prisijungiant, turite iš naujo nustatyti slaptažodį !!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Kažkas nepavyko prisijungiant, turite iš naujo nustatyti slaptažodį !!</string>
   <string name="title_for_media">MEDIJA</string>
   <string name="upload_nearby_place_found_title">Netoliese rasta vieta</string>
   <string name="upload_nearby_place_found_description" fuzzy="true">Ar tai vietos %1$s nuotrauka?</string>

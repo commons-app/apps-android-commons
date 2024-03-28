@@ -82,10 +82,10 @@
   <string name="logging_in_title">ログイン中</string>
   <string name="logging_in_message">お待ちください…</string>
   <string name="updating_caption_message">お待ちください…</string>
-  <string name="login_success">ログインしました!</string>
-  <string name="login_failed">ログインに失敗しました!</string>
+  <string name="login_success" fuzzy="true">ログインしました!</string>
+  <string name="login_failed" fuzzy="true">ログインに失敗しました!</string>
   <string name="upload_failed">ファイルが見つかりません。別のファイルでお試しください。</string>
-  <string name="authentication_failed">認証に失敗しました!　もう一度ログインしてください</string>
+  <string name="authentication_failed" fuzzy="true">認証に失敗しました!　もう一度ログインしてください</string>
   <string name="uploading_started">アップロードを開始しました!</string>
   <string name="uploading_queued">アップロードは待機中です（限定接続モードが有効）</string>
   <string name="upload_completed_notification_title">%1$s をアップロードしました!</string>
@@ -112,11 +112,11 @@
   <string name="add_caption_toast">キャプションを記入してください</string>
   <string name="share_description_hint">説明</string>
   <string name="share_caption_hint">キャプション</string>
-  <string name="login_failed_network">ログインできません - ネットワークのエラーです</string>
+  <string name="login_failed_network" fuzzy="true">ログインできません - ネットワークのエラーです</string>
   <string name="login_failed_throttled">失敗した回数が多すぎます。数分後にもう一度お試しください。</string>
   <string name="login_failed_blocked">申し訳ありませんが、この利用者はコモンズでブロックされています。</string>
   <string name="login_failed_2fa_needed">2段階認証コードを入力してください。</string>
-  <string name="login_failed_generic">ログイン失敗</string>
+  <string name="login_failed_generic" fuzzy="true">ログイン失敗</string>
   <string name="share_upload_button">アップロード</string>
   <string name="multiple_share_base_title">このセットに名前をつけてください</string>
   <string name="provider_modifications">変更</string>
@@ -270,7 +270,7 @@
   <string name="nominated_see_more">詳細はウェブサイトをご覧ください</string>
   <string name="skip_login">スキップ</string>
   <string name="navigation_item_login">ログイン</string>
-  <string name="skip_login_title">本当にログインをしなくてよいですか?</string>
+  <string name="skip_login_title" fuzzy="true">本当にログインをしなくてよいですか?</string>
   <string name="skip_login_message">画像の投稿には、今後、ログインが必要です。</string>
   <string name="login_alert_message">この機能を使うにはログインしてください</string>
   <string name="copy_wikicode">ウィキテキストをクリップボードにコピーする</string>
@@ -335,7 +335,7 @@
   <string name="construction_event_answer">コモンズでは技術や文化を表す画像をいつでも募集中です。</string>
   <string name="congratulatory_message_quiz">正解は %1$s でした。おめでとうございます！</string>
   <string name="warning_for_no_answer">回答するには2件のどちらかを選択</string>
-  <string name="user_not_logged_in">ログインセッションが時間切れになりました。もう一度ログインしてください。</string>
+  <string name="user_not_logged_in" fuzzy="true">ログインセッションが時間切れになりました。もう一度ログインしてください。</string>
   <string name="quiz_result_share_message">友だちとクイズを共有！</string>
   <string name="continue_message">続行</string>
   <string name="correct">正解</string>
@@ -415,13 +415,13 @@
   <string name="never_ask_again">以後、表示しない</string>
   <string name="display_location_permission_title">位置情報許可を請求</string>
   <string name="display_location_permission_explanation">通知カードで近くの場所を表示するたび、位置情報の使用を許可するかどうか尋ねる</string>
-  <string name="achievements_fetch_failed">何か問題が発生し、あなたの貢献を表示できませんでした</string>
+  <string name="achievements_fetch_failed" fuzzy="true">何か問題が発生し、あなたの貢献を表示できませんでした</string>
   <string name="achievements_fetch_failed_ultimate_achievement">たくさんの貢献をしていただいたのですが、件数が多すぎるため貢献度算出システムが処理できません。まさに究極の貢献をされました。</string>
   <string name="ends_on">終了日：</string>
   <string name="display_campaigns">キャンペーンを表示</string>
   <string name="display_campaigns_explanation">現在、実施中のキャンペーンを表示</string>
   <string name="nearby_campaign_dismiss_message">キャンペーンの通知は表示されなくなります。ただし「設定」ページでいつでも通知の表示を有効にできます。</string>
-  <string name="this_function_needs_network_connection">この機能はネットワーク接続がないと無効なため、接続設定の確認をお願いします。</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">この機能はネットワーク接続がないと無効なため、接続設定の確認をお願いします。</string>
   <string name="error_processing_image">画像の処理中にエラーが発生しました。もう一度、お願いします。</string>
   <string name="getting_edit_token">編集トークンを取得中です</string>
   <string name="check_category_adding_template">カテゴリ確認のテンプレートを付与中です</string>
@@ -529,7 +529,7 @@
   <string name="place_state_needs_photo">写真がない</string>
   <string name="place_type">場所のタイプ：</string>
   <string name="nearby_search_hint">橋・博物館・ホテルなど</string>
-  <string name="you_must_reset_your_passsword">ログインがうまくいきませんでした。パスワードを変更してください!!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">ログインがうまくいきませんでした。パスワードを変更してください!!</string>
   <string name="title_for_media">メディア</string>
   <string name="title_for_child_classes">子分類</string>
   <string name="title_for_parent_classes">親クラス</string>

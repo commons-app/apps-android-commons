@@ -70,10 +70,10 @@
   <string name="logging_in_message">مھرباني ڪري انتظار ڪريو…</string>
   <string name="updating_caption_title">عنوانن ۽ تشريحن جي تجديد ڪندي</string>
   <string name="updating_caption_message">انتظار ڪندا…</string>
-  <string name="login_success">داخل ٿيڻ ڪامياب!</string>
-  <string name="login_failed">داخل ٿيڻ ناڪام!</string>
+  <string name="login_success" fuzzy="true">داخل ٿيڻ ڪامياب!</string>
+  <string name="login_failed" fuzzy="true">داخل ٿيڻ ناڪام!</string>
   <string name="upload_failed">فائيل نہ لڌو. مھرباني ڪري ٻيو ڪو فائيل آزمايو.</string>
-  <string name="authentication_failed">تصديق ناڪام! ٻيهر داخل ٿيو</string>
+  <string name="authentication_failed" fuzzy="true">تصديق ناڪام! ٻيهر داخل ٿيو</string>
   <string name="uploading_started">چاڙھ شروع!</string>
   <string name="uploading_queued">چاڙھ کي قطار ۾ لڳايو ويو آھي (محدود ڪنيڪشن موڊ فعال ٿيل)</string>
   <string name="upload_completed_notification_title">%1$s چڙھي چڪا!</string>
@@ -100,11 +100,11 @@
   <string name="add_caption_toast">ھن فائيل لاءِ ڪيپشن ڏيو</string>
   <string name="share_description_hint">تشريح</string>
   <string name="share_caption_hint">عنوان</string>
-  <string name="login_failed_network">ناقابلِ داخل ٿيڻ - باھمڄار ناڪامي</string>
+  <string name="login_failed_network" fuzzy="true">ناقابلِ داخل ٿيڻ - باھمڄار ناڪامي</string>
   <string name="login_failed_throttled">ھيڪانديون ناڪام ڪوششون. مھرباني ڪري ڪجهہ منٽن کانپوءِ ٻيھر ڪوشش ڪريو.</string>
   <string name="login_failed_blocked">افسوس، ھي واپرائيندڙ العام تي بندشيل آھي</string>
   <string name="login_failed_2fa_needed">اوهان کي لازمي پنھنجو ٻن عنصرن وارو تصديقي ڪوڊ ڏيو.</string>
-  <string name="login_failed_generic">داخل ٿيڻ ناڪام</string>
+  <string name="login_failed_generic" fuzzy="true">داخل ٿيڻ ناڪام</string>
   <string name="share_upload_button">چاڙھيو</string>
   <string name="multiple_share_base_title">ھن سيٽ کي نالو ڏيو</string>
   <string name="provider_modifications">ردوبدل</string>
@@ -232,7 +232,7 @@
   <string name="nominated_see_more">تفصيلن لاءِ ويب-صفحو ڏسو</string>
   <string name="skip_login">ڇڏيو</string>
   <string name="navigation_item_login">داخل ٿيو</string>
-  <string name="skip_login_title">ڇا توھان سچ ۾ داخل-ٿيڻ ڇڏڻ چاھيو ٿا؟</string>
+  <string name="skip_login_title" fuzzy="true">ڇا توھان سچ ۾ داخل-ٿيڻ ڇڏڻ چاھيو ٿا؟</string>
   <string name="skip_login_message">توھان کي تصويرون چاڙھڻ لاءِ مستقبل ۾ داخل ٿيڻو پوندو.</string>
   <string name="login_alert_message">مھرباني فرمائي هن خصوصيت کي استعمال ڪرڻ لاءِ داخل ٿيو</string>
   <string name="nearby_location_not_available">\'\'\'ويجها\'\'\' ٿي سگهي ٿو صحيح طرح ڪم نہ ڪري، مڪانيت دستياب نہ آھي.</string>
@@ -269,7 +269,7 @@
   <string name="wallpaper_set_successfully">وال پيپر ڪاميابيءَ سان لڳي ويو!</string>
   <string name="question">سوال</string>
   <string name="result">نتيجو</string>
-  <string name="user_not_logged_in">داخل-ٿيڻ سيشن جو مدو پورو ٿي ويو، مھرباني ڪري وري داخل ٿيو.</string>
+  <string name="user_not_logged_in" fuzzy="true">داخل-ٿيڻ سيشن جو مدو پورو ٿي ويو، مھرباني ڪري وري داخل ٿيو.</string>
   <string name="continue_message">جاري رکو</string>
   <string name="correct">درست جواب</string>
   <string name="wrong">غلط جواب</string>
