@@ -9,6 +9,8 @@ import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 import android.Manifest;
 import android.Manifest.permission;
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -45,6 +47,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -168,6 +171,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private Place selectedPlace;
     private Place clickedMarkerPlace;
     private boolean isClickedMarkerBookmarked;
+    private ProgressDialog progressDialog;
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.005;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.004;
     private boolean isPermissionDenied;
@@ -257,6 +261,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         initNetworkBroadCastReceiver();
         presenter = new NearbyParentFragmentPresenter(bookmarkLocationDao);
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Saving in progress...");
         setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         return view;
@@ -288,8 +295,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         screenBottomLeft.getLatitude(), screenBottomLeft.getLongitude(), 0);
                     fr.free.nrw.commons.location.LatLng screenBottomLeftLatLng = new fr.free.nrw.commons.location.LatLng(
                         screenTopRight.getLatitude(), screenTopRight.getLongitude(), 0);
-                    setProgressBarVisibility(true);
-                    savePlacesAsGPX(screenTopRightLatLng,screenBottomLeftLatLng);
+                    progressDialog.setTitle(getString(R.string.saving_gpx_file));
+                    progressDialog.show();
+                    savePlacesAsGPX(screenTopRightLatLng, screenBottomLeftLatLng);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -307,8 +315,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         screenBottomLeft.getLatitude(), screenBottomLeft.getLongitude(), 0);
                     fr.free.nrw.commons.location.LatLng screenBottomLeftLatLng = new fr.free.nrw.commons.location.LatLng(
                         screenTopRight.getLatitude(), screenTopRight.getLongitude(), 0);
-                    setProgressBarVisibility(true);
-                    savePlacesAsKML(screenTopRightLatLng,screenBottomLeftLatLng);
+                    progressDialog.setTitle(getString(R.string.saving_kml_file));
+                    progressDialog.show();
+                    savePlacesAsKML(screenTopRightLatLng, screenBottomLeftLatLng);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -367,10 +376,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         binding.map.getOverlays().add(new MapEventsOverlay(new MapEventsReceiver() {
             @Override
             public boolean singleTapConfirmedHelper(GeoPoint p) {
-                if (clickedMarkerPlace != null){
+                if (clickedMarkerPlace != null) {
                     removeMarker(clickedMarkerPlace);
-                    addMarkerToMap(clickedMarkerPlace,isClickedMarkerBookmarked);
-                }else {
+                    addMarkerToMap(clickedMarkerPlace, isClickedMarkerBookmarked);
+                } else {
                     Timber.e("CLICKED MARKER IS NULL");
                 }
                 if (isListBottomSheetExpanded()) {
@@ -441,7 +450,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             final AdvanceQueryFragment fragment = new AdvanceQueryFragment();
             final Bundle bundle = new Bundle();
             try {
-                bundle.putString("query", FileUtils.readFromResource("/queries/radius_query_for_upload_wizard.rq"));
+                bundle.putString("query",
+                    FileUtils.readFromResource("/queries/radius_query_for_upload_wizard.rq"));
             } catch (IOException e) {
                 Timber.e(e);
             }
@@ -507,7 +517,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         binding.bottomSheetNearby.rvNearbyList.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new PlaceAdapter(bookmarkLocationDao,
             place -> {
-                moveCameraToPosition(new GeoPoint(place.location.getLatitude(),place.location.getLongitude()));
+                moveCameraToPosition(
+                    new GeoPoint(place.location.getLatitude(), place.location.getLongitude()));
                 return Unit.INSTANCE;
             },
             (place, isBookmarked) -> {
@@ -1166,13 +1177,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         String fileName =
                             "KML_" + timeStamp + "_" + System.currentTimeMillis() + ".kml";
                         boolean saved = saveFile(kmlString, fileName);
-                        setProgressBarVisibility(false);
+                        progressDialog.hide();
                         if (saved) {
-                            Toast.makeText(this.getContext(),
-                                "KML file saved successfully at /Downloads/" + fileName,
-                                Toast.LENGTH_SHORT).show();
+                            showOpenFileDialog(getContext(), fileName, false);
                         } else {
-                            Toast.makeText(this.getContext(), "Failed to save KML file.",
+                            Toast.makeText(this.getContext(),
+                                getString(R.string.failed_to_save_kml_file),
                                 Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -1201,13 +1211,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         String fileName =
                             "GPX_" + timeStamp + "_" + System.currentTimeMillis() + ".gpx";
                         boolean saved = saveFile(gpxString, fileName);
-                        setProgressBarVisibility(false);
+                        progressDialog.hide();
                         if (saved) {
-                            Toast.makeText(this.getContext(),
-                                "GPX file saved successfully at /Downloads/" + fileName,
-                                Toast.LENGTH_SHORT).show();
+                            showOpenFileDialog(getContext(), fileName, true);
                         } else {
-                            Toast.makeText(this.getContext(), "Failed to save KML file.",
+                            Toast.makeText(this.getContext(),
+                                getString(R.string.failed_to_save_gpx_file),
                                 Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -1240,6 +1249,38 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         } catch (IOException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    private void showOpenFileDialog(Context context, String fileName, Boolean isGPX) {
+        String title = getString(R.string.file_saved_successfully);
+        String message =
+            (isGPX) ? getString(R.string.do_you_want_to_open_gpx_file)
+                : getString(R.string.do_you_want_to_open_kml_file);
+        Runnable runnable = () -> openFile(context, fileName, isGPX);
+        DialogUtil.showAlertDialog(getActivity(), title, message, runnable,() -> {});
+    }
+
+    private void openFile(Context context, String fileName, Boolean isGPX) {
+        File file = new File(
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+            fileName);
+        Uri uri = FileProvider.getUriForFile(context,
+            context.getApplicationContext().getPackageName() + ".provider", file);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+
+        if (isGPX) {
+            intent.setDataAndType(uri, "application/gpx");
+        } else {
+            intent.setDataAndType(uri, "application/kml");
+        }
+
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        try {
+            context.startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(context, R.string.no_application_available_to_open_gpx_files,
+                Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -1486,7 +1527,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 .setMessage(R.string.login_alert_message)
                 .setPositiveButton(R.string.login, (dialog, which) -> {
                     // logout of the app
-                    BaseLogoutListener logoutListener = new BaseLogoutListener(getActivity());                    CommonsApplication app = (CommonsApplication) getActivity().getApplication();
+                    BaseLogoutListener logoutListener = new BaseLogoutListener(getActivity());
+                    CommonsApplication app = (CommonsApplication) getActivity().getApplication();
                     app.clearApplicationData(getContext(), logoutListener);
                 })
                 .show();
@@ -1557,14 +1599,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * Adds a marker for the user's current position. Adds a circle which uses the accuracy * 2, to
      * draw a circle which represents the user's position with an accuracy of 95%.
      * <p>
-     * Should be called only on creation of Map, there is other method to update markers
-     * location with users move.
+     * Should be called only on creation of Map, there is other method to update markers location
+     * with users move.
      *
      * @param currentLatLng current location
      */
     @Override
     public void addCurrentLocationMarker(final fr.free.nrw.commons.location.LatLng currentLatLng) {
-        if (null != currentLatLng && !isPermissionDenied && locationManager.isGPSProviderEnabled()) {
+        if (null != currentLatLng && !isPermissionDenied
+            && locationManager.isGPSProviderEnabled()) {
             ExecutorUtils.get().submit(() -> {
                 Timber.d("Adds current location marker");
                 recenterMarkerToPosition(
@@ -1668,9 +1711,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     /**
      * Sets marker icon according to marker status. Sets title and distance.
      *
-     * @param isBookmarked true if place is bookmarked
+     * @param isBookmarked  true if place is bookmarked
      * @param place
-     * @param currentLatLng    current location
+     * @param currentLatLng current location
      */
     public void updateMarker(final boolean isBookmarked, final Place place,
         @Nullable final fr.free.nrw.commons.location.LatLng currentLatLng) {
@@ -1691,18 +1734,18 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     /**
      * Returns drawable of marker icon for given place
      *
-     * @param place where marker is to be added
+     * @param place        where marker is to be added
      * @param isBookmarked true if place is bookmarked
      * @return returns the drawable of marker according to the place information
      */
     private @DrawableRes int getIconFor(Place place, Boolean isBookmarked) {
-        if(nearestPlace!=null) {
-            if(place.name.equals(nearestPlace.name)) {
+        if (nearestPlace != null) {
+            if (place.name.equals(nearestPlace.name)) {
                 // Highlight nearest place only when user clicks on the home nearby banner
                 highlightNearestPlace(place);
-                return (isBookmarked?
-                        R.drawable.ic_custom_map_marker_purple_bookmarked:
-                        R.drawable.ic_custom_map_marker_purple);
+                return (isBookmarked ?
+                    R.drawable.ic_custom_map_marker_purple_bookmarked :
+                    R.drawable.ic_custom_map_marker_purple);
             }
         }
         if (place.isMonument()) {
@@ -1743,10 +1786,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     hideBottomSheet();
                     if (clickedMarkerPlace != null) {
                         removeMarker(clickedMarkerPlace);
-                        addMarkerToMap(clickedMarkerPlace,isClickedMarkerBookmarked);
+                        addMarkerToMap(clickedMarkerPlace, isClickedMarkerBookmarked);
                     }
                     clickedMarkerPlace = place;
-                    isClickedMarkerBookmarked = isBookMarked ;
+                    isClickedMarkerBookmarked = isBookMarked;
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     return true;
                 }
@@ -1789,10 +1832,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     hideBottomSheet();
                     if (clickedMarkerPlace != null) {
                         removeMarker(clickedMarkerPlace);
-                        addMarkerToMap(clickedMarkerPlace,isClickedMarkerBookmarked);
+                        addMarkerToMap(clickedMarkerPlace, isClickedMarkerBookmarked);
                     }
-                    clickedMarkerPlace = place ;
-                    isClickedMarkerBookmarked = false ;
+                    clickedMarkerPlace = place;
+                    isClickedMarkerBookmarked = false;
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     return true;
                 }
@@ -2134,10 +2177,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         binding.map.getOverlays().add(new MapEventsOverlay(new MapEventsReceiver() {
             @Override
             public boolean singleTapConfirmedHelper(GeoPoint p) {
-                if (clickedMarkerPlace != null){
+                if (clickedMarkerPlace != null) {
                     removeMarker(clickedMarkerPlace);
-                    addMarkerToMap(clickedMarkerPlace,isClickedMarkerBookmarked);
-                }else {
+                    addMarkerToMap(clickedMarkerPlace, isClickedMarkerBookmarked);
+                } else {
                     Timber.e("CLICKED MARKER IS NULL");
                 }
                 if (isListBottomSheetExpanded()) {
