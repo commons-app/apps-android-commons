@@ -55,10 +55,10 @@
   <string name="signup">Notate</string>
   <string name="logging_in_title">Drio entrare</string>
   <string name="logging_in_message">Speta n\'atimo par piasere..</string>
-  <string name="login_success">Entrà co suçeso!</string>
-  <string name="login_failed">Entrada no riusìa</string>
+  <string name="login_success" fuzzy="true">Entrà co suçeso!</string>
+  <string name="login_failed" fuzzy="true">Entrada no riusìa</string>
   <string name="upload_failed">El file no\'l xé sta catà. Prova co n\'altro file.</string>
-  <string name="authentication_failed">Autenticasion no riusìa, se ve prega de riprovare</string>
+  <string name="authentication_failed" fuzzy="true">Autenticasion no riusìa, se ve prega de riprovare</string>
   <string name="uploading_started">Cargamento scumisià</string>
   <string name="upload_completed_notification_title">%1$s cargà!</string>
   <string name="upload_completed_notification_text">Schicia par vardar i to cargamenti</string>
@@ -81,11 +81,11 @@
   <string name="add_caption_toast">Par piaser, daghe na didascalia a sto file</string>
   <string name="share_description_hint">Descrision</string>
   <string name="share_caption_hint" fuzzy="true">Didascalia (màsimo 255 caràteri)</string>
-  <string name="login_failed_network">No xé posibiłe ndarghe drento - erore de rete</string>
+  <string name="login_failed_network" fuzzy="true">No xé posibiłe ndarghe drento - erore de rete</string>
   <string name="login_failed_throttled">Masa volte te ghè provà. Riprova tra on fià de minudi.</string>
   <string name="login_failed_blocked">Ne despiaxe, sto utente el xé sta blocà so Commons</string>
   <string name="login_failed_2fa_needed">Te ghè da darne el to codaxe de autenticasion a do fatori</string>
-  <string name="login_failed_generic">Entrada no riusìa</string>
+  <string name="login_failed_generic" fuzzy="true">Entrada no riusìa</string>
   <string name="share_upload_button">Carga</string>
   <string name="multiple_share_base_title">Nome de sto set</string>
   <string name="provider_modifications">Modifeghe</string>
@@ -225,7 +225,7 @@
   <string name="nominated_see_more">Varda ła pajina web par informasion detajade</string>
   <string name="skip_login">Salta</string>
   <string name="navigation_item_login">Va drento a l\'uxuario</string>
-  <string name="skip_login_title">Vuto da vero saltar l\'entrada n\'tel uxuario?</string>
+  <string name="skip_login_title" fuzzy="true">Vuto da vero saltar l\'entrada n\'tel uxuario?</string>
   <string name="skip_login_message">Te garisi da ndar drento a l\'uxuario par cargar łe foto in futuro</string>
   <string name="login_alert_message">Fa l\'entrada al uxuario par doparar sta funsion</string>
   <string name="copy_wikicode">Copia el Wikitesto n\'tel aponti</string>
@@ -283,7 +283,7 @@
   <string name="construction_event_answer">Le foto che łe mostra tecnołoxia o cultura łe xé on piasere so Commons.</string>
   <string name="congratulatory_message_quiz">Te ghè ciapà %1$s de łe risposte juste. Congratułasion!</string>
   <string name="warning_for_no_answer">Ełexi una de łe do opsion par rispondare a ła dimanda</string>
-  <string name="user_not_logged_in">Sesion de login scadesta. Va drento da novo.</string>
+  <string name="user_not_logged_in" fuzzy="true">Sesion de login scadesta. Va drento da novo.</string>
   <string name="quiz_result_share_message">Spartisi el to quiz co i to amighi!</string>
   <string name="continue_message">Sèvita</string>
   <string name="correct">Risposta justa</string>
@@ -356,13 +356,13 @@
   <string name="never_ask_again">No sta domandarmelo altro.</string>
   <string name="display_location_permission_title" fuzzy="true">Autorixasion de vedare ła poxision</string>
   <string name="display_location_permission_explanation">Domanda el parmeso de locałixasion co xé neçesario par ła funsion de vixuałixasion de ła scheda de notifega cuà rente.</string>
-  <string name="achievements_fetch_failed">Calcosa el xé ndà roerso, no semo stai boni a trar fora i to rixultai.</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Calcosa el xé ndà roerso, no semo stai boni a trar fora i to rixultai.</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Te ghè fato cusì tante contribusion che te ne ghè inbałinà el sistema de calcoło. Sto cuà el xé el to ultimo rixultà disponibiłe</string>
   <string name="ends_on">Finisi el:</string>
   <string name="display_campaigns">Varda canpagne</string>
   <string name="display_campaigns_explanation">Varda łe canpagne drio cargar</string>
   <string name="nearby_campaign_dismiss_message">No te vedarè altre canpagne. Tuta via, te połi riativar sta notifega n\'te łe inpostasion, se te vołi.</string>
-  <string name="this_function_needs_network_connection">A sta funsion ghe serve na conesion de rete, controła łe inpostasion de conesion</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">A sta funsion ghe serve na conesion de rete, controła łe inpostasion de conesion</string>
   <string name="error_processing_image">Se ga vuo on erore co se jera drio cargar l\'imajine. Par favore riproa!</string>
   <string name="getting_edit_token">Ciapate token par ła modifega</string>
   <string name="check_category_adding_template">Xonta on modèl par el controło de ła categoria</string>
@@ -452,7 +452,7 @@
   <string name="place_state_needs_photo">Ghe vołe na foto</string>
   <string name="place_type">Tipo de posto</string>
   <string name="nearby_search_hint">Ponti, muxei, alberghi etc.</string>
-  <string name="you_must_reset_your_passsword">Se ga verifegà on erore co te jeri drio entrare n\'te l\'utensa, xé neçesario rinpostar ła ciave.</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Se ga verifegà on erore co te jeri drio entrare n\'te l\'utensa, xé neçesario rinpostar ła ciave.</string>
   <string name="upload_nearby_place_found_title">Posto cuà rente catà</string>
   <string name="upload_nearby_place_found_description" fuzzy="true">Sta cuà ła xé na foto del posto %1$s?</string>
   <string name="title_app_shortcut_bookmark">Segnałibri</string>

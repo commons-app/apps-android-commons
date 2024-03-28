@@ -39,8 +39,8 @@
   <string name="signup">کھاتہ بنائیں</string>
   <string name="logging_in_title">لاگ آن</string>
   <string name="logging_in_message">براہ مہربانی کچھ دیر انتظار کریں۔۔۔</string>
-  <string name="login_success">لاگ ان کامیاب۔</string>
-  <string name="login_failed">داخل ہونے میں ناکامی ہوئی!</string>
+  <string name="login_success" fuzzy="true">لاگ ان کامیاب۔</string>
+  <string name="login_failed" fuzzy="true">داخل ہونے میں ناکامی ہوئی!</string>
   <string name="upload_failed">فائل نہیں ملی، براہ کرم دوسری فائل آزمائیں۔</string>
   <string name="authentication_failed" fuzzy="true">تصدیق ناکام!</string>
   <string name="uploading_started">اپلوڈ شروع!</string>
@@ -63,11 +63,11 @@
   <string name="menu_share">شیئر</string>
   <string name="share_title_hint" fuzzy="true">عنوان</string>
   <string name="share_description_hint">وضاحت</string>
-  <string name="login_failed_network">لاگ ان ہونے میں ناکام - نیٹ ورک ناکامی</string>
+  <string name="login_failed_network" fuzzy="true">لاگ ان ہونے میں ناکام - نیٹ ورک ناکامی</string>
   <string name="login_failed_throttled">بے شمار ناکام کوششیں کچھ منٹوں میں دوبارہ کوشش کریں۔</string>
   <string name="login_failed_blocked">معذرت، یہ صارف کومنز پر بلاک کردیا گیا ہے</string>
   <string name="login_failed_2fa_needed">آپ کو اپنے دو عامل کے تصدیق کوڈ فراہم کرنا چاہیے۔</string>
-  <string name="login_failed_generic">داخل ہونے میں ناکام</string>
+  <string name="login_failed_generic" fuzzy="true">داخل ہونے میں ناکام</string>
   <string name="share_upload_button">اپلوڈ کریں</string>
   <string name="multiple_share_base_title">سیٹ کو نام دیں</string>
   <string name="provider_modifications">اصلاحات</string>

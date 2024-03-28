@@ -64,10 +64,10 @@
   <string name="logging_in_message">Jantos dumun...</string>
   <string name="updating_caption_title">Nganyarin sesirah miwah pidarta</string>
   <string name="updating_caption_message">Jantos dumun…</string>
-  <string name="login_success">Mahasil manjing log!</string>
-  <string name="login_failed">Manjing log wangdé!</string>
+  <string name="login_success" fuzzy="true">Mahasil manjing log!</string>
+  <string name="login_failed" fuzzy="true">Manjing log wangdé!</string>
   <string name="upload_failed">Berkas nénten katemu. Durusang coba berkas liyané.</string>
-  <string name="authentication_failed">Otentikasi gagal, durusang majing malih</string>
+  <string name="authentication_failed" fuzzy="true">Otentikasi gagal, durusang majing malih</string>
   <string name="uploading_started">Ngawit unggah!</string>
   <string name="uploading_queued">Unggahan ring antrian (mode tetemon kawates kauripang)</string>
   <string name="upload_completed_notification_title">%1$s kaunggah!</string>
@@ -94,11 +94,11 @@
   <string name="add_caption_toast">Durus dagingin sesirah antuk berkas puniki</string>
   <string name="share_description_hint">Déskripsi</string>
   <string name="share_caption_hint">Sesirah</string>
-  <string name="login_failed_network">Tan prasida login - pikobet ring jaringan</string>
+  <string name="login_failed_network" fuzzy="true">Tan prasida login - pikobet ring jaringan</string>
   <string name="login_failed_throttled">Kakèhan nyoba manjing wangdé. Durusang coba malih di makudang menit</string>
   <string name="login_failed_blocked">Ampura, sang anganggé pjniki sampun kablokir ring Commons</string>
   <string name="login_failed_2fa_needed">Ida patut ngicain kode oténtikasi kalih faktor druén Idané</string>
-  <string name="login_failed_generic">Manjing log wangdé</string>
+  <string name="login_failed_generic" fuzzy="true">Manjing log wangdé</string>
   <string name="share_upload_button">Unggah</string>
   <string name="multiple_share_base_title">Ica aran sesirah puniki</string>
   <string name="provider_modifications">Uahin</string>
@@ -224,7 +224,7 @@
   <string name="nominated_see_more">Cingak kaca wéb antuk rerincian</string>
   <string name="skip_login">Liwatin</string>
   <string name="navigation_item_login">Manjing log</string>
-  <string name="skip_login_title">Napiké ragané yakti jagi ngaliwatin manjing log?</string>
+  <string name="skip_login_title" fuzzy="true">Napiké ragané yakti jagi ngaliwatin manjing log?</string>
   <string name="nearby_directions">Paarah</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipédia</string>

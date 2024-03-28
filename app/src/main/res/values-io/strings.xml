@@ -73,13 +73,13 @@
   <string name="logging_in_message">Voluntez vartar...</string>
   <string name="updating_caption_title">Aktualiganta etiketi e deskripturi</string>
   <string name="updating_caption_message">Voluntez vartar...</string>
-  <string name="login_success">Eniro sucesoza!</string>
-  <string name="login_failed">Eniro faliis!</string>
+  <string name="login_success" fuzzy="true">Eniro sucesoza!</string>
+  <string name="login_failed" fuzzy="true">Eniro faliis!</string>
   <string name="upload_failed">Arkivo ne trovita. Voluntez probar altr arkivo.</string>
   <string name="retry_limit_reached">Vu atingis la maxim granda quanto di probi por sendar arkivo permisata! Voluntez interuptar la kargajo, e probez itere!</string>
   <string name="unrestricted_battery_mode">Ka desmuntar l\'optimizo di la baterio?</string>
   <string name="suggest_unrestricted_mode">Sendar plu kam 3 imaji esas plu efikiva kande l\'optimizo di la baterio esas desmuntita. Voluntez desmuntar l\'optimizo di la baterio del ajusti dil utensilo de Commons, por plugrandigar l\'efikeso. \n\nQuale desmuntar l\'optimizo-sistemo di la baterio:\n\n#: Kliktez la butono \"ajusti\" (\'\'Settings\'\') adinfre.\n\n#: Selektez \"ne optimizita (\'\'Not optimized\'\') por omna utensili (\'\'All apps\'\').\n\n#: Serchez \"Commons\" o \"fr.free.nrw.commons\".\n\n#: Kliktez ol e selektez \"ne optimizar\" (\'\'Don\'t optimize\'\').\n\n#: Kliktez \"facita\" (\'\'Done\'\').</string>
-  <string name="authentication_failed">L\'autentikigo faliis, voluntez itere enirar.</string>
+  <string name="authentication_failed" fuzzy="true">L\'autentikigo faliis, voluntez itere enirar.</string>
   <string name="uploading_started">Komencis sendar!</string>
   <string name="uploading_queued">Sendajo ajornata (modulo \"limitizita konekto\" aktiva)</string>
   <string name="upload_completed_notification_title">%1$s sendesis!</string>
@@ -106,11 +106,11 @@
   <string name="add_caption_toast">Voluntez informar deskripto-texto por ca arkivo</string>
   <string name="share_description_hint">Deskripto</string>
   <string name="share_caption_hint">Deskripto-texto</string>
-  <string name="login_failed_network">Ne esis posibla facar \'\'log - in\'\' - la reto faliis</string>
+  <string name="login_failed_network" fuzzy="true">Ne esis posibla facar \'\'log - in\'\' - la reto faliis</string>
   <string name="login_failed_throttled">Multa sensucesa probi pri konektar. Voluntez probar itere pos kelka minuti.</string>
   <string name="login_failed_blocked">Pardonez, ca uzero blokusesis che Commons</string>
   <string name="login_failed_2fa_needed">Vu mustas uzar vua autentikigo en du etapi.</string>
-  <string name="login_failed_generic">Eniro faliis</string>
+  <string name="login_failed_generic" fuzzy="true">Eniro faliis</string>
   <string name="share_upload_button">Kargar</string>
   <string name="multiple_share_base_title">Nomizes ca ajusto</string>
   <string name="provider_modifications">Modifikuri</string>
@@ -260,7 +260,7 @@
   <string name="nominated_see_more">Videz retpagino por detali</string>
   <string name="skip_login">Saltar</string>
   <string name="navigation_item_login">Enirar</string>
-  <string name="skip_login_title">Ka vu deziras ne enirar?</string>
+  <string name="skip_login_title" fuzzy="true">Ka vu deziras ne enirar?</string>
   <string name="skip_login_message">Vu mustus facar \'\'log in\'\' por sendor imaji future.</string>
   <string name="login_alert_message">Voluntez enirar por uzar ca utensilo</string>
   <string name="copy_wikicode">Kopiez Wiki-texto a \'clipboard\'</string>
@@ -324,7 +324,7 @@
   <string name="construction_event_answer">Fotografuri pri teknologio o kultural aspekti esas sempre bonvenanta che Commons.</string>
   <string name="congratulatory_message_quiz">Vu respondis korekte %1$s de la questioni. Gratuli!</string>
   <string name="warning_for_no_answer">Selektez un ek la du opcioni por respondar la questiono</string>
-  <string name="user_not_logged_in">Sesiono di \'\'log in\'\' finis, voluntez enirar itere.</string>
+  <string name="user_not_logged_in" fuzzy="true">Sesiono di \'\'log in\'\' finis, voluntez enirar itere.</string>
   <string name="quiz_result_share_message">Partigez vua quizo kun vua amiki!</string>
   <string name="continue_message">Durigez</string>
   <string name="correct">Korekta respondo</string>
@@ -453,7 +453,7 @@
   <string name="place_state_needs_photo">Bezonas fotografuro</string>
   <string name="place_type">Tipo di lokizo:</string>
   <string name="nearby_search_hint">Ponto, muzeo, hotelo, edc.</string>
-  <string name="you_must_reset_your_passsword">Irgu ne funcionis dum \'\'log in\'\'. Vu mustos ridefinar vua pasovorto!!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Irgu ne funcionis dum \'\'log in\'\'. Vu mustos ridefinar vua pasovorto!!</string>
   <string name="title_for_media">\'\'MEDIA\'\'</string>
   <string name="title_for_child_classes">SUBKLASI</string>
   <string name="title_for_parent_classes">KLASI PLU ABSTRAKTA</string>

@@ -35,8 +35,8 @@
   <string name="signup">ලියාපදිංචි වන්න</string>
   <string name="logging_in_title">පිවිසෙමින්</string>
   <string name="logging_in_message">මදක් රැදීසිටින්න…</string>
-  <string name="login_success">පිවිසුම සාර්ථකයි!</string>
-  <string name="login_failed">පිවිසීම අසාර්ථකයි!</string>
+  <string name="login_success" fuzzy="true">පිවිසුම සාර්ථකයි!</string>
+  <string name="login_failed" fuzzy="true">පිවිසීම අසාර්ථකයි!</string>
   <string name="upload_failed">ගොනුව හමු නොවිණි. තවත් ගොනුවක් උත්සාහ කරන්න.</string>
   <string name="authentication_failed" fuzzy="true">සහතික කිරීම අසාර්ථකයි</string>
   <string name="uploading_started">උඩුගතකිරීම ආරම්හවූවා!</string>
@@ -59,11 +59,11 @@
   <string name="menu_share">හුවමාරු කරන්න</string>
   <string name="share_title_hint" fuzzy="true">මාතෘකාව</string>
   <string name="share_description_hint">විස්තරය</string>
-  <string name="login_failed_network">පිවිසීමට නොහැකිය-ජාලය ඇනහිටීමක්</string>
+  <string name="login_failed_network" fuzzy="true">පිවිසීමට නොහැකිය-ජාලය ඇනහිටීමක්</string>
   <string name="login_failed_throttled">බොහෝ අසාර්ථක උත්සාහයන් කර ඇත. කරුණාකර මිනිත්තු කිහිපයකට පසුව උත්සාහ කරන්න</string>
   <string name="login_failed_blocked">කණගාටුයි,මෙම පරිශීලක වාරණයට ලක්කර ඇත.</string>
   <string name="login_failed_2fa_needed">ඔබ ඔබගේ ද්විත්ව සහතික කිරීමේ කේතය ඇතුලත් කළ යුතුය.</string>
-  <string name="login_failed_generic">පිවිසීම අසාර්ථකයි</string>
+  <string name="login_failed_generic" fuzzy="true">පිවිසීම අසාර්ථකයි</string>
   <string name="share_upload_button">උඩුගත කරන්න</string>
   <string name="multiple_share_base_title">මේවාට පොදු නමක් යොදන්න</string>
   <string name="provider_modifications">වෙනස්කම්</string>

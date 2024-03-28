@@ -32,7 +32,7 @@
   <string name="share_license_summary" fuzzy="true">Бул сүрөт %1$s лицензияланат</string>
   <string name="preference_category_privacy">Купуялык</string>
   <string name="app_name">Викиказына</string>
-  <string name="menu_settings">Ырастоолор</string>
+  <string name="menu_settings">Параметрлер</string>
   <string name="username">Колдонуучунун аты</string>
   <string name="password">Сырсөз</string>
   <string name="login">Кирүү</string>
@@ -40,8 +40,8 @@
   <string name="logging_in_title">Кирүү</string>
   <string name="logging_in_message">Сураныч, күтө туруңуз…</string>
   <string name="updating_caption_message">Күтө туруңуз…</string>
-  <string name="login_success">Сиз ийгиликтүү кирдиңиз</string>
-  <string name="login_failed">Системага кирүүдө катачылык бар!</string>
+  <string name="login_success" fuzzy="true">Сиз ийгиликтүү кирдиңиз</string>
+  <string name="login_failed" fuzzy="true">Системага кирүүдө катачылык бар!</string>
   <string name="authentication_failed" fuzzy="true">Таану катачылыгы!</string>
   <string name="uploading_started">Жүктөө башталды!</string>
   <string name="upload_completed_notification_title">%1$s жүктөлдү !</string>
@@ -62,10 +62,10 @@
   <string name="menu_share">Бөлүшүү</string>
   <string name="share_title_hint" fuzzy="true">Аталышы</string>
   <string name="share_description_hint">Сыпаттама</string>
-  <string name="login_failed_network">Кирүүгө болбой жатат - тармакта үзгүлтүк бар</string>
+  <string name="login_failed_network" fuzzy="true">Кирүүгө болбой жатат - тармакта үзгүлтүк бар</string>
   <string name="login_failed_throttled" fuzzy="true">Өтө көп натыйжасыз иш аракет. Суранабыз, бир нече мүнөттөн кийин кайталаңыз</string>
   <string name="login_failed_blocked">Кечириңиз, бул кодонуучу Уикиказынада блокко алынган.</string>
-  <string name="login_failed_generic">Системага кирүүдө катачылык бар!</string>
+  <string name="login_failed_generic" fuzzy="true">Системага кирүүдө катачылык бар!</string>
   <string name="share_upload_button">Жүктөө</string>
   <string name="multiple_share_base_title">Файлардын бул тайпасынын аталышын жазыңыз</string>
   <string name="provider_modifications">Өзгөрүүлөр</string>
@@ -76,7 +76,7 @@
   <string name="categories_not_found">%1$s түрмөктөрү табылган жок</string>
   <string name="categories_skip_explanation" fuzzy="true">Уикиказынада Сиздин сүрөттөрдү жеңил табуу үчүн түрмөктөрдү кошуңуз.\n\nТүрмөктөрдү жазууну баштаңыз.\nБул кадамды аттап өтүү үчүн, бул билдирүүнү (же кийинкини) басыңыз.</string>
   <string name="categories_activity_title">Категориялар</string>
-  <string name="title_activity_settings">Ырастоолор</string>
+  <string name="title_activity_settings">Параметрлер</string>
   <string name="title_activity_signup">Катталуу</string>
   <string name="menu_about">Тиркеме жөнүндө</string>
   <string name="about_license" fuzzy="true">баштапкы коду ачык тиркемелер, &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; лицензиясынын негизинде чыгарылган</string>

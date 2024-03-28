@@ -48,10 +48,10 @@
   <string name="signup">Otvori račun</string>
   <string name="logging_in_title">Prijava</string>
   <string name="logging_in_message">Molimo pričekajte ...</string>
-  <string name="login_success">Prijava uspješna!</string>
-  <string name="login_failed">Prijava neuspješna!</string>
+  <string name="login_success" fuzzy="true">Prijava uspješna!</string>
+  <string name="login_failed" fuzzy="true">Prijava neuspješna!</string>
   <string name="upload_failed">Datoteka nije pronađena. Molimo probajte drugu.</string>
-  <string name="authentication_failed">Autentifikacija neuspješna. Molimo, prijavite se ponovno</string>
+  <string name="authentication_failed" fuzzy="true">Autentifikacija neuspješna. Molimo, prijavite se ponovno</string>
   <string name="uploading_started">Postavljanje započeto!</string>
   <string name="upload_completed_notification_title">%1$s postavljeno!</string>
   <string name="upload_completed_notification_text">Dodirnite da biste vidjeli datoteku</string>
@@ -74,11 +74,11 @@
   <string name="menu_share">Podijeli</string>
   <string name="share_title_hint" fuzzy="true">Naziv (obavezno)</string>
   <string name="share_description_hint">Opis</string>
-  <string name="login_failed_network">Prijava nije moguća – mrežna pogreška</string>
+  <string name="login_failed_network" fuzzy="true">Prijava nije moguća – mrežna pogreška</string>
   <string name="login_failed_throttled">Previše neuspješnih pokušaja. Molimo probajte opet za nekoliko minuta.</string>
   <string name="login_failed_blocked">Ispričavamo se, ovaj je suradnik blokiran na Zajedničkom poslužitelju</string>
   <string name="login_failed_2fa_needed">Morate upisati autetifikacijski kôd od dva faktora</string>
-  <string name="login_failed_generic">Prijava neuspješna</string>
+  <string name="login_failed_generic" fuzzy="true">Prijava neuspješna</string>
   <string name="share_upload_button">Postavljanje</string>
   <string name="multiple_share_base_title">Imenujte ovaj set</string>
   <string name="provider_modifications">Promjene</string>
@@ -216,7 +216,7 @@
   <string name="nominated_see_more">Pogledajte mrežnu stranicu za više informacija</string>
   <string name="skip_login">Preskoči</string>
   <string name="navigation_item_login">Prijavite se</string>
-  <string name="skip_login_title">Želite li zbilja preskočiti prijavu?</string>
+  <string name="skip_login_title" fuzzy="true">Želite li zbilja preskočiti prijavu?</string>
   <string name="skip_login_message">U budućnosti ćete se morati prijaviti kako biste postavili slike.</string>
   <string name="login_alert_message">Molimo da se prijavite kako biste se mogli koristiti ovom mogućnošću</string>
   <string name="nearby_location_not_available">„U blizini“ možda ne radi kako treba. Lokacija nije dostupna.</string>
@@ -259,7 +259,7 @@
   <string name="quiz_back_button">Ako nastavite postavljati slike koje je potrebno izbrisati, Vaš će račun vjerojatno biti blokiran. Jeste li sigurni da želite završiti kviz?</string>
   <string name="construction_event_answer">Slike koje prikazuju tehnologiju ili kulturu dobrodošle su na Zajedničkom poslužitelju.</string>
   <string name="warning_for_no_answer">Izaberite jednu opciju od dvije da biste odgovorili na pitanje</string>
-  <string name="user_not_logged_in">Sesija prijavljivanja istekla je, molimo Vas, prijavite se ponovo.</string>
+  <string name="user_not_logged_in" fuzzy="true">Sesija prijavljivanja istekla je, molimo Vas, prijavite se ponovo.</string>
   <string name="quiz_result_share_message">Podijelite kviz s prijateljima!</string>
   <string name="correct">Točan odgovor</string>
   <string name="wrong">Pogrešan odgovor</string>

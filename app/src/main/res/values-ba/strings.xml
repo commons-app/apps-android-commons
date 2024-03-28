@@ -65,10 +65,10 @@
   <string name="logging_in_message">Зинһар, көтөгөҙ...</string>
   <string name="updating_caption_title">Аңлатмалар һәм тасуирламалар яңыртыла</string>
   <string name="updating_caption_message">Зинһар, көтөгөҙ...</string>
-  <string name="login_success">Уңышлы танылдығыҙ!</string>
-  <string name="login_failed">Танылыу хатаһы!</string>
+  <string name="login_success" fuzzy="true">Уңышлы танылдығыҙ!</string>
+  <string name="login_failed" fuzzy="true">Танылыу хатаһы!</string>
   <string name="upload_failed">Файл табылманы. Башҡа файлды эҙләп ҡарағыҙ.</string>
-  <string name="authentication_failed">Танылыу хатаһы. Зинһар, тағы бер тапҡыр танылығыҙ.</string>
+  <string name="authentication_failed" fuzzy="true">Танылыу хатаһы. Зинһар, тағы бер тапҡыр танылығыҙ.</string>
   <string name="uploading_started">Йөкләү башланды!</string>
   <string name="upload_completed_notification_title">%1$s йөкләнде!</string>
   <string name="upload_completed_notification_text">Ошонда баҫып йөкләнгән файлды ҡара</string>
@@ -93,11 +93,11 @@
   <string name="add_caption_toast">Зинһар, был файлдың исемен күрһәтегеҙ</string>
   <string name="share_description_hint">Тасуирлама</string>
   <string name="share_caption_hint">Ҡултамға (Имза)</string>
-  <string name="login_failed_network">Инеп булмай - интернет хатаһы</string>
+  <string name="login_failed_network" fuzzy="true">Инеп булмай - интернет хатаһы</string>
   <string name="login_failed_throttled">Бик күп уңышһыҙ ынтылыштар булды. Зинһар, бер нисә минуттан тағы ла инеп ҡара.</string>
   <string name="login_failed_blocked">Ғәфү итегеҙ, әммә был ҡатнашыусы Викимилектә бикләнгән</string>
   <string name="login_failed_2fa_needed">Ике тапҡыр раҫлай торған кодты яҙырға кәрәк</string>
-  <string name="login_failed_generic">Танылыу хатаһы!</string>
+  <string name="login_failed_generic" fuzzy="true">Танылыу хатаһы!</string>
   <string name="share_upload_button">Йөкләү</string>
   <string name="multiple_share_base_title">Был файлдар төкөмөнә атама бирегеҙ</string>
   <string name="provider_modifications">Үҙгәртеүҙәр</string>

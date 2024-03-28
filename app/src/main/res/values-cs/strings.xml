@@ -76,10 +76,10 @@
   <string name="signup">Zaregistrovat se</string>
   <string name="logging_in_title">Přihlášení</string>
   <string name="logging_in_message">Čekejte prosím…</string>
-  <string name="login_success">Přihlášení uspělo!</string>
-  <string name="login_failed">Přihlášení se nezdařilo!</string>
+  <string name="login_success" fuzzy="true">Přihlášení uspělo!</string>
+  <string name="login_failed" fuzzy="true">Přihlášení se nezdařilo!</string>
   <string name="upload_failed">Soubor nebyl nalezen. Prosím, zkuste jiný soubor.</string>
-  <string name="authentication_failed">Ověření se nezdařilo, prosím přihlaste se znovu</string>
+  <string name="authentication_failed" fuzzy="true">Ověření se nezdařilo, prosím přihlaste se znovu</string>
   <string name="uploading_started">Nahrávání začalo!</string>
   <string name="upload_completed_notification_title">%1$s nahráno!</string>
   <string name="upload_completed_notification_text">Klepnutím zobrazíte upload</string>
@@ -104,11 +104,11 @@
   <string name="add_caption_toast">Prosím, zadejte titulek pro tento soubor</string>
   <string name="share_description_hint">Popis</string>
   <string name="share_caption_hint" fuzzy="true">Popisek (max. 255 znaků)</string>
-  <string name="login_failed_network">Nelze se přihlásit - selhání sítě</string>
+  <string name="login_failed_network" fuzzy="true">Nelze se přihlásit - selhání sítě</string>
   <string name="login_failed_throttled">Příliš mnoho neúspěšných pokusů. Zkuste to prosím znovu za několik minut.</string>
   <string name="login_failed_blocked">Omlouváme se, tento uživatel byl na Commons zablokován</string>
   <string name="login_failed_2fa_needed">Prosím vložte kód pro své dvoufázové ověření.</string>
-  <string name="login_failed_generic">Přihlášení se nezdařilo</string>
+  <string name="login_failed_generic" fuzzy="true">Přihlášení se nezdařilo</string>
   <string name="share_upload_button">Nahrát</string>
   <string name="multiple_share_base_title">Pojmenujte tuto sadu</string>
   <string name="provider_modifications">Úpravy</string>
@@ -252,7 +252,7 @@
   <string name="nominated_see_more">Zobrazit webovou stránku pro více informací</string>
   <string name="skip_login">Přeskočit</string>
   <string name="navigation_item_login">Přihlásit se</string>
-  <string name="skip_login_title">Opravdu chcete přeskočit přihlášení?</string>
+  <string name="skip_login_title" fuzzy="true">Opravdu chcete přeskočit přihlášení?</string>
   <string name="skip_login_message">Budete-li chtít nahrát obrázky v budoucnu, musíte se přihlásit.</string>
   <string name="login_alert_message">K použití této funkce se musíte přihlásit</string>
   <string name="copy_wikicode">Zkopírovat wikitext do schránky</string>
@@ -314,7 +314,7 @@
   <string name="construction_event_answer">Obrázky s technickou či kulturní tematikou jsou na Commons vítány.</string>
   <string name="congratulatory_message_quiz">Zodpověděli jste správně %1$s otázek. Gratulujeme!</string>
   <string name="warning_for_no_answer">Vyberte správnou možnost</string>
-  <string name="user_not_logged_in">Došlo k odhlášení, prosím přihlašte se.</string>
+  <string name="user_not_logged_in" fuzzy="true">Došlo k odhlášení, prosím přihlašte se.</string>
   <string name="quiz_result_share_message">Sdílejte váš kvíz s přáteli!</string>
   <string name="continue_message">Pokračovat</string>
   <string name="correct">Správná odpověď</string>
@@ -388,12 +388,12 @@
   <string name="never_ask_again">Znovu nezobrazovat</string>
   <string name="display_location_permission_title" fuzzy="true">Zobrazit oprávnění k umístění</string>
   <string name="display_location_permission_explanation">Požádejte o oprávnění k umístění, pokud je zapotřebí pro funkci zobrazení pohledu v blízkosti.</string>
-  <string name="achievements_fetch_failed">Nastala neočekávaná chyba. Nemohli jsme dokončit akci</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Nastala neočekávaná chyba. Nemohli jsme dokončit akci</string>
   <string name="ends_on">Končí:</string>
   <string name="display_campaigns">Zobrazovat kampaně</string>
   <string name="display_campaigns_explanation">Podívejte se na probíhající kampaně</string>
   <string name="nearby_campaign_dismiss_message">Kampaně již neuvidíte. Toto oznámení však můžete znovu zapnout v Nastavení.</string>
-  <string name="this_function_needs_network_connection">Tato funkce vyžaduje připojení k síti, zkontrolujte prosím nastavení připojení.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Tato funkce vyžaduje připojení k síti, zkontrolujte prosím nastavení připojení.</string>
   <string name="error_processing_image">Během zpracování obrázku došlo k chybě. Prosím zkuste to znovu!</string>
   <string name="getting_edit_token">Probíhá získávání tokenu pro editaci</string>
   <string name="check_category_adding_template">Probíhá přidávání šablony na zkontrolování kategorie</string>
@@ -486,7 +486,7 @@
   <string name="place_state_needs_photo">Potřebuje fotku</string>
   <string name="place_type">Typ místa:</string>
   <string name="nearby_search_hint">Most, muzeum, hotel atd.</string>
-  <string name="you_must_reset_your_passsword">Při přihlášení nastala chyba, musíte si resetovat vaše heslo!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Při přihlášení nastala chyba, musíte si resetovat vaše heslo!</string>
   <string name="upload_nearby_place_found_title">Místo v okolí nalezeno</string>
   <string name="upload_nearby_place_found_description" fuzzy="true">Je toto fotka místa %1$s?</string>
   <string name="title_app_shortcut_setting">Nastavení</string>

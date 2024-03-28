@@ -54,10 +54,10 @@
   <string name="logging_in_message">ߡߊ߬ߞߐ߬ߣߐ߲߬ߠߌ߲ ߞߍ߫ ߖߊ߰ߣߌ߲߬...</string>
   <string name="updating_caption_title">ߝߍ߬ߛߓߍߟߌ ߣߌ߫ ߞߊ߲߬ߛߓߍߟߌ ߟߊߞߎߘߦߊ ߦߴߌ ߘߐ߫</string>
   <string name="updating_caption_message">ߡߊ߬ߞߐ߬ߣߐ߲߬ߠߌ߲ ߞߍ߫ ߖߊ߰ߣߌ߲߬...</string>
-  <string name="login_success">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߓߘߊ߫ ߛߎߘߊ߲߫߹</string>
-  <string name="login_failed">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߓߘߊ߫ ߗߌߙߏ߲߫߹</string>
+  <string name="login_success" fuzzy="true">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߓߘߊ߫ ߛߎߘߊ߲߫߹</string>
+  <string name="login_failed" fuzzy="true">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߓߘߊ߫ ߗߌߙߏ߲߫߹</string>
   <string name="upload_failed">ߞߐߕߐ߮ ߡߊ߫ ߛߐ߬ߘߐ߲߬. ߘߏ߫ ߜߘߍ߫ ߡߊߝߍߣߍ߲߫ ߖߊ߰ߣߌ߲߫.</string>
-  <string name="authentication_failed">ߕߎ߬ߢߊ߬ߢߐ߲߰ߦߊ߬ߟߌ ߓߘߊ߫ ߗߌߙߏ߲߫߸ ߌ ߜߊ߲߬ߞߎ߲߬ ߕߎ߲߯ ߖߊ߰ߝߌ߲߫</string>
+  <string name="authentication_failed" fuzzy="true">ߕߎ߬ߢߊ߬ߢߐ߲߰ߦߊ߬ߟߌ ߓߘߊ߫ ߗߌߙߏ߲߫߸ ߌ ߜߊ߲߬ߞߎ߲߬ ߕߎ߲߯ ߖߊ߰ߝߌ߲߫</string>
   <string name="uploading_started">ߟߊ߬ߦߟߍ߬ߟߌ ߓߘߊ߫ ߘߊߡߌ߬ߣߊ߬߹</string>
   <string name="upload_completed_notification_title">%1$s ߟߊ߬ߦߟߍ߬ߟߌ</string>
   <string name="upload_completed_notification_text">ߊ߬ ߛߐ߲߬ߞߌ߲߫ ߞߴߌ ߟߊ߫ ߟߊ߬ߦߟߍ߬ߣߍ߲ ߠߎ߬ ߘߐߜߍ߫</string>
@@ -83,10 +83,10 @@
   <string name="add_caption_toast">ߝߍ߬ߛߓߍߟߌ ߘߏ߫ ߡߊߛߐ߫ ߞߐߕߐ߮ ߣߌ߲߬ ߠߊ߫ ߖߊ߰ߣߌ߲߫</string>
   <string name="share_description_hint">ߞߊ߲߬ߛߓߍߟߌ</string>
   <string name="share_caption_hint">ߝߍ߬ߛߓߍߟߌ</string>
-  <string name="login_failed_network">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߛߐ߲߬ߣߍ߲߫ ߕߍ߫ ߞߍ߫ ߟߊ߫ - ߞߙߏߝߏ ߟߊ߫ ߗߌߙߏ߲ߠߌ߲</string>
+  <string name="login_failed_network" fuzzy="true">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߛߐ߲߬ߣߍ߲߫ ߕߍ߫ ߞߍ߫ ߟߊ߫ - ߞߙߏߝߏ ߟߊ߫ ߗߌߙߏ߲ߠߌ߲</string>
   <string name="login_failed_throttled">ߛߊ߯ߛߊ߯ߟߌ߫ ߛߎߘߊ߲ߓߊߟߌ߫ ߛߘߍߡߊ߲߫ ߓߘߊ߫ ߞߍ߫ ߢߐ߲߮ ߞߐ߫ ߞߏߖߎ߯ߦߊ߫.ߊ߬ ߡߊߝߍߣߍ߲߫ ߡߌ߬ߛߍ߲߬ ߘߊ߲ߘߐ߫ ߞߐ߫ ߖߊ߰ߣߌ߲߫.</string>
   <string name="login_failed_blocked">ߤߊߞߍ߬ߕߏ߫߸ ߟߊ߬ߓߊ߰ߙߊ߬ߟߊ ߣߌ߲߬ ߓߘߊ߫ ߓߊ߬ߟߌ߬ ߞߐ߬ߡߐ߲ ߞߊ߲߬</string>
-  <string name="login_failed_generic">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߓߘߊ߫ ߗߌߙߏ߲߫</string>
+  <string name="login_failed_generic" fuzzy="true">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߓߘߊ߫ ߗߌߙߏ߲߫</string>
   <string name="share_upload_button">ߊ߬ ߟߊߦߟߍ߬</string>
   <string name="multiple_share_base_title">ߟߊ߬ߘߏ߲߬ߠߌ߲ ߣߌ߲߬ ߕߐ߯ߟߊ߫</string>
   <string name="provider_modifications">ߡߊ߬ߦߟߍ߬ߡߊ߲߬ߠߌ߲</string>
@@ -227,7 +227,7 @@
   <string name="nominated_see_more">ߞߍߦߙߐ߫ ߞߐߜߍ ߘߐߜߍ߫ ߝߊߙߊ߲ߝߊ߯ߛߌ߫ ߞߏ ߘߐ߫</string>
   <string name="skip_login">ߊ߬ ߟߊߜߊ߲߫</string>
   <string name="navigation_item_login">ߌ ߜߊ߲߬ߞߎ߲߬</string>
-  <string name="skip_login_title">ߌ ߦߴߊ߬ ߝߍ߬ ߓߊ߬ ߞߵߌ ߜߊ߲߫ ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߞߎ߲߬ߠߊ߫؟</string>
+  <string name="skip_login_title" fuzzy="true">ߌ ߦߴߊ߬ ߝߍ߬ ߓߊ߬ ߞߵߌ ߜߊ߲߫ ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߞߎ߲߬ߠߊ߫؟</string>
   <string name="skip_login_message">ߌ ߞߊߞߊ߲߫ ߞߵߌ ߜߊ߲߬ߞߎ߲߫ ߞߊ߬ ߖߌ߬ߦߊ߬ߓߍ ߟߊߦߍ߬ߟߍ߫ ߛߐ߲߬.</string>
   <string name="login_alert_message">ߌ ߜߊ߲߬ߞߎ߲߫ ߖߊ߰ߣߌ߲߫ ߞߊ߬ ߟߊ߬ߓߊ߰ߙߊ߬ߟߌ ߣߌ߲߬ ߠߊߓߊ߯ߙߊ߫</string>
   <string name="copy_wikicode">ߥߞߌߛߓߍߟߌ ߓߊߓߌ߬ߟߊ߬ ߛߓߍߝߌߘߊ-ߜߍ߬ߙߍ߲߬ߘߍ߬ߣߍ߲ ߘߐ߫</string>
@@ -290,7 +290,7 @@
   <string name="construction_event_answer">ߖߌ߬ߦߊ߬ߓߍ ߡߍ߲ ߠߎ߬ ߦߋ߫ ߛߋߒߞߏߟߦߊ ߦߌ߬ߘߊ߬ ߟߊ߫ ߥߟߊ߫ ߟߐ߲ߠߌ߲ߦߊ߸ ߏ߬ ߟߎ߬ ߟߊߛߣߍߣߍ߲ߓߊ ߟߋ߬ ߦߋ߫ ߞߐߡߐ߲ߛ ߞߊ߲߬.</string>
   <string name="congratulatory_message_quiz">ߌ ߓߘߊ߫  %1$s ߖߋ߬ߓߟߌ߬ ߓߘߍ ߛߐ߬ߘߐ߲߬. ߌ ߞߎߟߎ߲ߖߋ߫߹</string>
   <string name="warning_for_no_answer">ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߝߌ߬ߟߊ ߘߏ߫ ߘߐ߫ ߞߋߟߋ߲߫ ߢߣߊߕߊߟߌ ߓߊߕߐ߬ߡߐ߲߫ ߞߊ߬ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߖߋ߬ߓߌ߫</string>
-  <string name="user_not_logged_in">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߥߎ߬ߛߎ ߓߘߊ߫ ߕߊ߬ߡߌ߲߬߸ ߌ ߜߊ߲߬ߞߎ߲߬ ߕߎ߲߯ߣߌ߲߫ ߖߊ߰ߣߌ߲߫.</string>
+  <string name="user_not_logged_in" fuzzy="true">ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߥߎ߬ߛߎ ߓߘߊ߫ ߕߊ߬ߡߌ߲߬߸ ߌ ߜߊ߲߬ߞߎ߲߬ ߕߎ߲߯ߣߌ߲߫ ߖߊ߰ߣߌ߲߫.</string>
   <string name="quiz_result_share_message">ߌ ߟߊ߫ ߢߌ߬ߣߌ߲߬ߞߊ߬ߟߌ ߟߊߖߍ߲ߛߍ߲߫ ߌ ߕߋߙߌ ߟߎ߬ ߡߊ߬߹</string>
   <string name="continue_message">ߘߊߓߊ߲ߠߌ߲</string>
   <string name="correct">ߖߋ߬ߓߟߌ߬ ߢߌߡߊ</string>
@@ -474,7 +474,7 @@
   <string name="place_state_needs_photo">ߡߊ߬ߞߏ ߦߋ߫ ߖߌ߬ߦߊ߬ߓߍ ߟߊ߫</string>
   <string name="place_type">ߦߙߐ ߛߎ߯ߦߊ:</string>
   <string name="nearby_search_hint">ߛߍ߲߸ ߗߍߓߏ߲߸ ߖߌ߬ߦߊ߬ߓߏ߲ ߊ߬ ߣߌ߫.</string>
-  <string name="you_must_reset_your_passsword">ߞߏ ߘߏ߫ ߓߍ߲߬ ߣߍ߲߬ ߕߍ߫ ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߘߐ߫߸ ߌ ߦߴߌ ߟߊ߫ ߕߊ߬ߡߌ߲߬ߞߊ߲ ߡߊߝߊ߲߬ߟߋ߲߬߹߹</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">ߞߏ ߘߏ߫ ߓߍ߲߬ ߣߍ߲߬ ߕߍ߫ ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߘߐ߫߸ ߌ ߦߴߌ ߟߊ߫ ߕߊ߬ߡߌ߲߬ߞߊ߲ ߡߊߝߊ߲߬ߟߋ߲߬߹߹</string>
   <string name="title_for_media">ߡߋߘߌߦߊ</string>
   <string name="title_for_child_classes">ߘߋ߲ ߠߎ߬ ߟߊ߫ ߛߊ߯ߘߊ ߟߎ߫</string>
   <string name="title_for_parent_classes">ߡߏߦߌߓߊ߮ ߟߎ߬ ߟߊ߫ ߛߊ߯ߘߊ ߟߎ߫</string>
