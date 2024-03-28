@@ -47,10 +47,10 @@
   <string name="signup">ပတိုန် စၟတ်သမ္တီ</string>
   <string name="logging_in_title">လုပ်လံက်အေန် ဒၟံင်</string>
   <string name="logging_in_message">ပဂုန်တုဲ မင်မွဲလစုတ်...</string>
-  <string name="login_success">လုက်အေန် အာစိုပ်ဒတုဲ!</string>
-  <string name="login_failed">လံက်အေန် လီုလာ်!</string>
+  <string name="login_success" fuzzy="true">လုက်အေန် အာစိုပ်ဒတုဲ!</string>
+  <string name="login_failed" fuzzy="true">လံက်အေန် လီုလာ်!</string>
   <string name="upload_failed">ဝှာင် ဟွံဂွံဆဵု၊ ပဂုန်တုဲ ဂၠာဲ ဝှာင်တၞဟ်။</string>
-  <string name="authentication_failed">ပွမစၟဳစၟတ်ဂှ် ဟွံအံင်ဇၞး။ ပဂုန်တုဲ လံက်အေန် မွဲဝါပၠန်</string>
+  <string name="authentication_failed" fuzzy="true">ပွမစၟဳစၟတ်ဂှ် ဟွံအံင်ဇၞး။ ပဂုန်တုဲ လံက်အေန် မွဲဝါပၠန်</string>
   <string name="uploading_started">ပတိုန်ဝှာင် စဒၟံင်ရ!</string>
   <string name="upload_completed_notification_title">%1$s ပတိုန်ပၠုပ်တုဲ!</string>
   <string name="upload_completed_notification_text">ဒၞာဲမကလေင်ရံင် ဝှာင်ပတိုန်ပၠုပ် မၞး</string>
@@ -73,11 +73,11 @@
   <string name="add_caption_toast">ပဂုန်တုဲ ကဵု က္ဍိုပ်လိက် ဝှာင်ဏအ်ညိ</string>
   <string name="share_description_hint">မဗမံက်ထ္ၜး</string>
   <string name="share_caption_hint" fuzzy="true">က္ဍိုပ်လိက် (ပိုင်ခြာလဝ် လၟိဟ်မလိက် ၂၅၅)</string>
-  <string name="login_failed_network">လုပ်လံက်အေန် ဟွံဂွံ - ဇာဇၞိက် ဗၠေတ်</string>
+  <string name="login_failed_network" fuzzy="true">လုပ်လံက်အေန် ဟွံဂွံ - ဇာဇၞိက် ဗၠေတ်</string>
   <string name="login_failed_throttled">ပရေင်ဂိုတ်ဂစာန် ဟွံအံင်ဇၞး ဂၠိုင်လောန်အာရ။ ပဂုန်တုဲ မိနေတ်ညိညပၠန် ကလေင်စမ်ပၠန်။</string>
   <string name="login_failed_blocked">သၠးအခေါင်၊ ညးလွပ်ဏအ် ဒးဒုင်ကၟာတ်လဒဵုလဝ် ပ္ဍဲ ကောမ်မောန်</string>
   <string name="login_failed_2fa_needed">ကုစၟဳစၟတ်မၞးၜါဂှ် သ္ဒးပါ်လဝ် ဗွဲတၞဟ်ခြာရောင်။</string>
-  <string name="login_failed_generic">လံက်အေန် လီု</string>
+  <string name="login_failed_generic" fuzzy="true">လံက်အေန် လီု</string>
   <string name="share_upload_button">ပတိုန်</string>
   <string name="multiple_share_base_title">ကဵုယၟု လိက်ဏအ်ညိ</string>
   <string name="provider_modifications">တင်မပခိုဟ်ပတိုန်ဂမၠိုင်</string>
@@ -218,7 +218,7 @@
   <string name="nominated_see_more">ရံင် မုက်လိက် သွက်ဂွံတီ သောဲသောဲဗြောဲဗြောဲ</string>
   <string name="skip_login">ၜက်</string>
   <string name="navigation_item_login">လုပ်လံက်အေန်</string>
-  <string name="skip_login_title">မၞး မိက်ဂွံ ၜက်ထောအ် လုပ်လံက်အေန် ကွေဟ်ဟ်ရဟာ?</string>
+  <string name="skip_login_title" fuzzy="true">မၞး မိက်ဂွံ ၜက်ထောအ် လုပ်လံက်အေန် ကွေဟ်ဟ်ရဟာ?</string>
   <string name="skip_login_message">မၞး သ္ဒးလုပ်လံက်အေန်လဝ်ရောင် သွက်ဂွံပၠုပ်ပတိုန် ဗီုရုပ်ဂမၠိုင် ပ္ဍဲဂတဏအ်။</string>
   <string name="login_alert_message">ပဂုန်တုဲ လုပ်လံက်အေန် သွက်ဂွံစကာ အရပ်အရာဏအ်</string>
   <string name="copy_wikicode">ကပ်ပဳကေတ် လိက်ဝဳကဳ သွက်ကလိပ်ဗတ်</string>

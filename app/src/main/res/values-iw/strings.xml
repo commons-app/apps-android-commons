@@ -21,7 +21,7 @@
 * חיים
 -->
 <resources>
-  <string name="commons_facebook">עמוד הפייסבוק של ויקישיתוף</string>
+  <string name="commons_facebook">דף הפייסבוק של ויקישיתוף</string>
   <string name="commons_github">קוד המקור של ויקישיתוף ב־GitHub</string>
   <string name="commons_logo">סמל ויקישיתוף</string>
   <string name="commons_website">אתר ויקישיתוף</string>
@@ -111,7 +111,7 @@
   <string name="retry_limit_reached">הגעת למגבלת ניסיונות חוזרים! נא לבטל את ההעלאה ולנסות שוב</string>
   <string name="unrestricted_battery_mode">לכבות את מיטוב השימוש בסוללה?</string>
   <string name="suggest_unrestricted_mode">העלאה של יותר מ־3 תמונות אמינה יותר כשמיטוב הסוללה כבוי. נא לכבות את מיטוב הסוללה ליישום Commons מההגדרות לחוויית העלאה חלקה יותר.\n\nצעדים שעשויים לכבות את מיטוב הסוללה:\n\nשלב 1: להקיש על כפתור ‚הגדרות’ שלהלן.\n\nשלב 2: לעבור מ‚ללא ממוטבים’ ל‚כל היישומים’.\n\nשלב 3: לחפש את „Commons” או את „fr.free.nrw.commons”.\n\nשלב 4: להקיש עליו ולבחור ב‚לא למטב’.\n\nשלב 5: ללחוץ על ‚סיום’.</string>
-  <string name="authentication_failed">אימות הפרטים נכשל, נא להיכנס מחדש</string>
+  <string name="authentication_failed">אימות הפרטים נכשל, נא להיכנס מחדש.</string>
   <string name="uploading_started">ההעלאה התחילה!</string>
   <string name="uploading_queued">ההעלאות בתור (מופעל מצב חיבור מוגבל)</string>
   <string name="upload_completed_notification_title">הקובץ %1$s הועלה!</string>
@@ -142,7 +142,7 @@
   <string name="login_failed_throttled">יותר מדי ניסיונות כניסה כושלים. נא לנסות שוב בעוד כמה דקות.</string>
   <string name="login_failed_blocked">סליחה, החשבון הזה חסום בוויקישיתוף</string>
   <string name="login_failed_2fa_needed">יש לספק את קוד האימות הדו־שלבי שלך.</string>
-  <string name="login_failed_generic">כניסה נכשלה</string>
+  <string name="login_failed_generic">הכניסה נכשלה</string>
   <string name="share_upload_button">העלאה</string>
   <string name="multiple_share_base_title">שם האוסף</string>
   <string name="provider_modifications">שינויים</string>
@@ -299,7 +299,7 @@
   <string name="nominated_see_more">ר\' את האתר לפרטים</string>
   <string name="skip_login">לדלג</string>
   <string name="navigation_item_login">כניסה לחשבון</string>
-  <string name="skip_login_title">האם באמת ברצונך לדלג על הכניסה לחשבון?</string>
+  <string name="skip_login_title">לדלג על הכניסה לחשבון?</string>
   <string name="skip_login_message">יהיה עליך להיכנס כדי להעלות תמונות בעתיד.</string>
   <string name="login_alert_message">נא להיכנס לחשבון כדי להשתמש באפשרות הזאת</string>
   <string name="copy_wikicode">העתקת קוד ויקי ללוח</string>
@@ -326,9 +326,9 @@
   <string name="about_translate_cancel">ביטול</string>
   <string name="retry">לנסות שוב</string>
   <string name="showcase_view_whole_nearby_activity">אלה המקומות בסביבתך שזקוקים לתמונות כדי להמחיש את הערכים שלהם בוויקיפדיה.\n\nלחיצה על חיפוש באזור הזה נועלת את המפה ומתחילה חיפוש סביב המיקום הזה.</string>
-  <string name="showcase_view_needs_photo">מקום זה צריך תמונה.</string>
+  <string name="showcase_view_needs_photo">המקום הזה צריך תמונה.</string>
   <string name="showcase_view_has_photo">למקום הזה יש כבר תמונה.</string>
-  <string name="showcase_view_no_longer_exists">מקום זה לא קיים יותר.</string>
+  <string name="showcase_view_no_longer_exists">המקום הזה כבר לא קיים.</string>
   <string name="no_images_found">לא נמצאו תמונות!</string>
   <string name="error_loading_images">אירעה שגיאה בטעינת התמונות.</string>
   <string name="image_uploaded_by">הועלה על־ידי: %1$s</string>
@@ -381,7 +381,7 @@
   <string name="no_recent_searches">אין חיפושים אחרונים</string>
   <string name="delete_recent_searches_dialog">האם באמת ברצונך לנקות את היסטוריית החיפוש שלך?</string>
   <string name="cancel_upload_dialog">האם ברצונך באמת לבטל את ההעלאה הזאת?</string>
-  <string name="delete_search_dialog">האם ברצונך למחוק חיפוש זה?</string>
+  <string name="delete_search_dialog">האם ברצונך למחוק את החיפוש הזה?</string>
   <string name="search_history_deleted">היסטוריית החיפוש נמחקה</string>
   <string name="nominate_delete">העמדה למחיקה</string>
   <string name="delete">מחיקה</string>
@@ -450,7 +450,7 @@
   <string name="never_ask_again">לעולם לא לשאול שוב</string>
   <string name="display_location_permission_title">לבקש הרשאת מיקום</string>
   <string name="display_location_permission_explanation">לבקש הרשאות מיקום לפי הצורך, לשם קבלת התראה על מקומות בסביבה בתצוגת כרטיס.</string>
-  <string name="achievements_fetch_failed">משהו השתבש, לא הצלחנו לקבל את ההישגים שלך</string>
+  <string name="achievements_fetch_failed">משהו השתבש, לא הצלחנו לקבל את ההישגים</string>
   <string name="achievements_fetch_failed_ultimate_achievement">תרמת כל־כך הרבה שמערכת חישוב ההישגים שלנו לא מתמודדת עם זה. זה ההישג הגדול ביותר.</string>
   <string name="ends_on">מסתיים ב־:</string>
   <string name="display_campaigns">הצגת מסעי פרסום</string>
@@ -510,7 +510,7 @@
   <string name="please_wait">נא להמתין...</string>
   <string name="images_featured_explanation">תמונות מובילות הן תמונות של צלמים ומאיירים מיומנים אותם בחרה קהילת ויקישיתוף בזכות איכות התוצר שהם תורמים לאתר.</string>
   <string name="images_via_nearby_explanation">תמונות שהועלו דרך מקומות בסביבה הן התמונות שנשלחות על ידי גילוי מקומות במפה.</string>
-  <string name="thanks_received_explanation">תכונה זו מאפשרת לעורכים לשלוח מסרי תודה למשתמשים שביצעו עריכות מועילות - על ידי שימוש בקישור תודה בעמוד ההיסטוריה או עמוד ההבדלים.</string>
+  <string name="thanks_received_explanation">תכונה זו מאפשרת לעורכים לשלוח מסרי תודה למשתמשים שביצעו עריכות מועילות - על ידי שימוש בקישור תודה בדף ההיסטוריה או בדף ההבדלים.</string>
   <string name="copy_image_caption_description">העתקה למדיה הלאה</string>
   <string name="copied_successfully">הועתק</string>
   <string name="welcome_do_upload_content_description">דוגמאות של תמונות טובות להעלאה לוויקישיתוף</string>
@@ -597,7 +597,7 @@
   <string name="place_state_needs_photo">זקוק לתצלום</string>
   <string name="place_type">סוג המקום:</string>
   <string name="nearby_search_hint">גשר, מוזאון, מלון, וכו\'.</string>
-  <string name="you_must_reset_your_passsword">משהו השתבש בכניסה למערכת, עליך לאפס את הססמה שלך!</string>
+  <string name="you_must_reset_your_passsword">משהו השתבש בכניסה למערכת, עליך לאפס את הסיסמה שלך!</string>
   <string name="title_for_media">מדיה</string>
   <string name="title_for_child_classes">מחלקות יורשות</string>
   <string name="title_for_parent_classes">מחלקות מורישות</string>
@@ -780,6 +780,7 @@
   <string name="edit_location">עריכת מיקום</string>
   <string name="send_thanks_to_author">תודה למחבר</string>
   <string name="error_sending_thanks">שגיאה בשליחת תודה למחבר.</string>
+  <string name="invalid_login_message">תוקף הכניסה שלך פג, נא להתחבר שוב.</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">נבחרה תמונה אחת</item>
     <item quantity="two">נבחרו שתי תמונות</item>

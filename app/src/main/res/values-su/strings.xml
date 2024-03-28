@@ -73,10 +73,10 @@
   <string name="logging_in_message">Tungguan…</string>
   <string name="updating_caption_title">Nganyarkeun pertélaan jeung pedaran</string>
   <string name="updating_caption_message">Mangga tungguan...</string>
-  <string name="login_success">Laksana login!</string>
-  <string name="login_failed">Gagal login!</string>
+  <string name="login_success" fuzzy="true">Laksana login!</string>
+  <string name="login_failed" fuzzy="true">Gagal login!</string>
   <string name="upload_failed">Berkas teu kapanggih. Coba berkas séjén.</string>
-  <string name="authentication_failed">Oténtikasi gagal! mangga asup log deui</string>
+  <string name="authentication_failed" fuzzy="true">Oténtikasi gagal! mangga asup log deui</string>
   <string name="uploading_started">Mitembeyan ngunjal!</string>
   <string name="uploading_queued">Muatan geus ngantri (sambungan diwates dijalankeun)</string>
   <string name="upload_completed_notification_title">%1$s diunjal!</string>
@@ -103,11 +103,11 @@
   <string name="add_caption_toast">Sadiakeun pertélaan pikeun ieu berkas</string>
   <string name="share_description_hint">Pedaran</string>
   <string name="share_caption_hint">Takarir</string>
-  <string name="login_failed_network">Teu bisa login - gangguan jaringan</string>
+  <string name="login_failed_network" fuzzy="true">Teu bisa login - gangguan jaringan</string>
   <string name="login_failed_throttled">Loba teuing nu gagalna. Mangga cobian sababaraha menit deui mah</string>
   <string name="login_failed_blocked">Punten, ieu kontributor geus diblokir di Commons</string>
   <string name="login_failed_2fa_needed">Anjeun kudu nyayagakeun kodeu oténtikasi dua faktor.</string>
-  <string name="login_failed_generic">Gagal login</string>
+  <string name="login_failed_generic" fuzzy="true">Gagal login</string>
   <string name="share_upload_button">Unjal</string>
   <string name="multiple_share_base_title">Ngaranan ieu sét</string>
   <string name="provider_modifications">Modifikasi</string>
@@ -261,7 +261,7 @@
   <string name="nominated_see_more" fuzzy="true">&lt;u&gt;Témbong kaca wéb pikeun wincikan&lt;/u&gt;</string>
   <string name="skip_login">Liwatan</string>
   <string name="navigation_item_login">Asup log</string>
-  <string name="skip_login_title">Anjeun yakin rék ngaliwatan asup log?</string>
+  <string name="skip_login_title" fuzzy="true">Anjeun yakin rék ngaliwatan asup log?</string>
   <string name="skip_login_message">Anjeun kudu asup log pikeun ngunjal gambar engké mah.</string>
   <string name="login_alert_message">Mangga asup log pikeun maké ieu fitur</string>
   <string name="copy_wikicode">Tiron wikitéks kana papan klip</string>
@@ -315,7 +315,7 @@
   <string name="construction_event_answer">Gambar nu némbongkeun téhnologi atawa budaya kacida dipiharep di Commons.</string>
   <string name="congratulatory_message_quiz">Anjeun meunang %1$s tina jawaban bener. Wilujeng!</string>
   <string name="warning_for_no_answer">Pilih hiji atawa dua pilihan pikeun ngajawab patanyaan</string>
-  <string name="user_not_logged_in">Sési asup log kadaluwarsa, prak geura asup log deui.</string>
+  <string name="user_not_logged_in" fuzzy="true">Sési asup log kadaluwarsa, prak geura asup log deui.</string>
   <string name="quiz_result_share_message">Bagikeun kuis anjeun ka babaturan!</string>
   <string name="continue_message">Tuluykeun</string>
   <string name="correct">Jawaban bener</string>

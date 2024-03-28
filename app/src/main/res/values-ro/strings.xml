@@ -77,13 +77,13 @@
   <string name="logging_in_title">Se conectează</string>
   <string name="logging_in_message">Vă rugăm să așteptați ...</string>
   <string name="updating_caption_message">Vă rugăm să așteptați ...</string>
-  <string name="login_success">Autentificare reușită!</string>
-  <string name="login_failed">Autentificare nereușită!</string>
+  <string name="login_success" fuzzy="true">Autentificare reușită!</string>
+  <string name="login_failed" fuzzy="true">Autentificare nereușită!</string>
   <string name="upload_failed">Fișierul nu a fost găsit. Încercați cu un alt fișier.</string>
   <string name="retry_limit_reached">Limita maximă de reîncercări a fost atinsă! Vă rugăm să renunțați la încărcare și să încercați din nou</string>
   <string name="unrestricted_battery_mode">Opriți optimizarea bateriei?</string>
   <string name="suggest_unrestricted_mode">Încărcarea mai mult de 3 imagini funcționează mai fiabil atunci când optimizarea bateriei este oprită. Vă rugăm să dezactivați optimizarea bateriei pentru aplicația Commons din setările pentru o experiență de încărcare fluidă. \n\nPași posibili pentru a dezactiva optimizarea bateriei: \n\nPasul 1: Aplicaţi butonul \'Setări\' de mai jos. \n\nPasul 2: Treci de la \'Neoptimizat\' la \'Toate aplicațiile\'. \n\nPasul 3: Căutați \"Commons\" sau \"fr.free.nrw.commons\". \n\nPasul 4: Atingeți-l și selectați \'Nu optimiza\'. \n\nPasul 5: Apăsați pe \'Gata\'.</string>
-  <string name="authentication_failed">Autentificare nereușită, vă rugăm să încercați din nou</string>
+  <string name="authentication_failed" fuzzy="true">Autentificare nereușită, vă rugăm să încercați din nou</string>
   <string name="uploading_started">Încărcarea a început!</string>
   <string name="uploading_queued">Încărcare în coadă (modul de conexiune limitat activat)</string>
   <string name="upload_completed_notification_title">%1$s s-a încărcat!</string>
@@ -110,11 +110,11 @@
   <string name="add_caption_toast">Vă rugăm să oferiți o descriere pentru acest fișier</string>
   <string name="share_description_hint">Descriere</string>
   <string name="share_caption_hint">Descriere</string>
-  <string name="login_failed_network">Autentificare nereușită – defecțiune de rețea</string>
+  <string name="login_failed_network" fuzzy="true">Autentificare nereușită – defecțiune de rețea</string>
   <string name="login_failed_throttled">Prea multe încercări nereușite. Încercați din nou peste câteva minute.</string>
   <string name="login_failed_blocked">Ne pare rău, acest utilizator a fost blocat la Commons</string>
   <string name="login_failed_2fa_needed">Trebuie să introduceți tokenul de autentificare.</string>
-  <string name="login_failed_generic">Autentificare nereușită</string>
+  <string name="login_failed_generic" fuzzy="true">Autentificare nereușită</string>
   <string name="share_upload_button">Încărcare</string>
   <string name="multiple_share_base_title">Dați un nume acestui set</string>
   <string name="provider_modifications">Modificări</string>
@@ -268,7 +268,7 @@
   <string name="nominated_see_more">Consultați pagina web pentru detalii</string>
   <string name="skip_login">Omite</string>
   <string name="navigation_item_login">Autentificare</string>
-  <string name="skip_login_title">Chiar vrei să ignori datele de autentificare?</string>
+  <string name="skip_login_title" fuzzy="true">Chiar vrei să ignori datele de autentificare?</string>
   <string name="skip_login_message">Va trebui să vă conectați pentru a încărca imagini în viitor.</string>
   <string name="login_alert_message">Conectați-vă pentru a utiliza această caracteristică</string>
   <string name="copy_wikicode">Copiați wikitext-ul în clipboard</string>
@@ -332,7 +332,7 @@
   <string name="construction_event_answer">Imaginile care arată tehnologia sau cultura sunt foarte binevenite în Commons.</string>
   <string name="congratulatory_message_quiz">Ai raspuns corect la %1$s din răspunsuri. Felicitări!</string>
   <string name="warning_for_no_answer">Selectați una dintre cele două opțiuni pentru a răspunde la întrebare</string>
-  <string name="user_not_logged_in">Sesiunea de conectare a expirat, vă rugăm să vă autentificați din nou.</string>
+  <string name="user_not_logged_in" fuzzy="true">Sesiunea de conectare a expirat, vă rugăm să vă autentificați din nou.</string>
   <string name="quiz_result_share_message">Împărtășește-ți testul cu prietenii tăi!</string>
   <string name="continue_message">Continuați</string>
   <string name="correct">Răspuns corect</string>
@@ -412,13 +412,13 @@
   <string name="never_ask_again">Nu mai întrebați niciodată acest lucru</string>
   <string name="display_location_permission_title">Cere permisiunea de locație</string>
   <string name="display_location_permission_explanation">Solicitați permisiunea de localizare atunci când este necesar pentru a utiliza funcția notificărilor de localizare.</string>
-  <string name="achievements_fetch_failed">Ceva a mers prost, nu am reușit să ne aducem realizările</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Ceva a mers prost, nu am reușit să ne aducem realizările</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Ai făcut atâtea contribuții sistemul nostru de calcul al realizărilor nu poate face față. Aceasta este realizarea finală.</string>
   <string name="ends_on">Se încheie la:</string>
   <string name="display_campaigns">Campaniile de afișare</string>
   <string name="display_campaigns_explanation">Vedeți campaniile în curs</string>
   <string name="nearby_campaign_dismiss_message">Nu veți mai vedea campaniile. Cu toate acestea, puteți reactiva această notificare în Setări, dacă doriți.</string>
-  <string name="this_function_needs_network_connection">Această funcție necesită conectare la rețea, verificați setările de conectare.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Această funcție necesită conectare la rețea, verificați setările de conectare.</string>
   <string name="error_processing_image">A apărut o eroare la procesarea imaginii. Vă rugăm să încercați din nou!</string>
   <string name="getting_edit_token">Obținerea de jeton pentru editare</string>
   <string name="check_category_adding_template">Adăugarea formatului pentru verificarea categoriei</string>
@@ -527,7 +527,7 @@
   <string name="place_state_needs_photo">Are nevoie de foto</string>
   <string name="place_type">Tipul locului:</string>
   <string name="nearby_search_hint">Pod, muzeu, hotel etc.</string>
-  <string name="you_must_reset_your_passsword">Ceva nu a mers corect la autentificare, trebuie să vă resetați parola !!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Ceva nu a mers corect la autentificare, trebuie să vă resetați parola !!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">CLASE COPIl</string>
   <string name="title_for_parent_classes">CLASE PĂRINTE</string>

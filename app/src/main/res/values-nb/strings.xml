@@ -83,12 +83,12 @@
   <string name="logging_in_message">Vennligst vent…</string>
   <string name="updating_caption_title">Oppdaterer bildetekster og beskrivelser</string>
   <string name="updating_caption_message">Vent …</string>
-  <string name="login_success">Innloggingen var vellykket!</string>
-  <string name="login_failed">Innloggingen feilet!</string>
+  <string name="login_success" fuzzy="true">Innloggingen var vellykket!</string>
+  <string name="login_failed" fuzzy="true">Innloggingen feilet!</string>
   <string name="upload_failed">Filen ble ikke funnet. Forsøk med en annen fil.</string>
   <string name="retry_limit_reached">Maksimalt antall forsøk nådd! Avbryt opplastingen og prøv på nytt</string>
   <string name="unrestricted_battery_mode">Deaktiver batterioptimalisering?</string>
-  <string name="authentication_failed">Autentiseringen feilet, vennligst logg inn igjen</string>
+  <string name="authentication_failed" fuzzy="true">Autentiseringen feilet, vennligst logg inn igjen</string>
   <string name="uploading_started">Opplastingen startet</string>
   <string name="uploading_queued">Køede opplastinger (begrenset tilkoblingsmodus aktivert)</string>
   <string name="upload_completed_notification_title">%1$s lastet opp!</string>
@@ -115,11 +115,11 @@
   <string name="add_caption_toast">Angi en bildetekst for denne fila</string>
   <string name="share_description_hint">Beskrivelse</string>
   <string name="share_caption_hint">Bildetekst</string>
-  <string name="login_failed_network">Innlogging feilet - nettverksproblem</string>
+  <string name="login_failed_network" fuzzy="true">Innlogging feilet - nettverksproblem</string>
   <string name="login_failed_throttled">For mange misslykkede forsøk. Vennligst prøv igjen om noen få minutter.</string>
   <string name="login_failed_blocked">Beklager, denne brukeren har blitt blokkert på Commons</string>
   <string name="login_failed_2fa_needed">Du må oppgi koden din for tofaktorautentisering.</string>
-  <string name="login_failed_generic">Innlogging feilet</string>
+  <string name="login_failed_generic" fuzzy="true">Innlogging feilet</string>
   <string name="share_upload_button">Last opp</string>
   <string name="multiple_share_base_title">Navngi dette settet</string>
   <string name="provider_modifications">Endringer</string>
@@ -276,7 +276,7 @@
   <string name="nominated_see_more">Se nettsiden for detaljer</string>
   <string name="skip_login">Hopp over</string>
   <string name="navigation_item_login">Logg inn</string>
-  <string name="skip_login_title">Vil du hoppe over logg inn?</string>
+  <string name="skip_login_title" fuzzy="true">Vil du hoppe over logg inn?</string>
   <string name="skip_login_message">Du må logge inn for å laste opp bilder i fremtiden.</string>
   <string name="login_alert_message">Logg vennligst inn for å bruke denne funksjonen</string>
   <string name="copy_wikicode">Kopier wikiteksten til utklippstavlen</string>
@@ -343,7 +343,7 @@
   <string name="construction_event_answer">Bilder som viser teknologi eller kultur er veldig velkomne på Commons.</string>
   <string name="congratulatory_message_quiz">Du svarte rett på %1$s av spørsmålene. Gratulerer!</string>
   <string name="warning_for_no_answer">Velg ett av de to alternativene for å besvare spørsmålet</string>
-  <string name="user_not_logged_in">Innloggingsøkten har utløpt, logg inn på nytt.</string>
+  <string name="user_not_logged_in" fuzzy="true">Innloggingsøkten har utløpt, logg inn på nytt.</string>
   <string name="quiz_result_share_message">Del kvissen din med vennene dine!</string>
   <string name="continue_message">Fortsett</string>
   <string name="correct">Riktig svar</string>
@@ -425,7 +425,7 @@
   <string name="never_ask_again">Ikke spør meg igjen</string>
   <string name="display_location_permission_title">Be om plasseringstillatelse</string>
   <string name="display_location_permission_explanation">Ber om plasseringstillatelse som trengs når man bruker funksjonen for steder i nærheten.</string>
-  <string name="achievements_fetch_failed">Noe gikk galt. Vi kunne ikke hente prestasjonene dine.</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Noe gikk galt. Vi kunne ikke hente prestasjonene dine.</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Du har bidratt så mye at utregningssystemet vårt ikke takler det. Dette er den ultimate prestasjonen.</string>
   <string name="ends_on">Slutter:</string>
   <string name="display_campaigns">Vis kampanjer</string>
@@ -437,7 +437,7 @@
   <string name="in_app_camera_location_permission_rationale">Kameraet i appen trenger posisjonstilgang for å legge det til på bildet i tilfelle dette ikke er tilgjengelig i EXIF. La appen få tilgang til posisjonen din og prøv igjen.\n\nMerk: Opplastingen vil kanskje ikke ha posisjon dersom appen ikke kunne hente dette fra enheten i løpet av kort tid.</string>
   <string name="open_document_photo_picker_title">Bruk dokumentbasert bildevelger</string>
   <string name="nearby_campaign_dismiss_message">Du vil ikke se kampanjer lenger. Du kan slå på dette igjen i innstillingene om du ønsker.</string>
-  <string name="this_function_needs_network_connection">Denne funksjonen trenger nettverksforbindelse, sjekk tilkoblingsinnstillingene dine.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Denne funksjonen trenger nettverksforbindelse, sjekk tilkoblingsinnstillingene dine.</string>
   <string name="error_processing_image">Feil oppsto under prosessering av bildet. Prøv igjen!</string>
   <string name="getting_edit_token">Henter nøkkel for redigering</string>
   <string name="check_category_adding_template">Legger til mal for kategorisjekk</string>
@@ -549,7 +549,7 @@
   <string name="place_state_needs_photo">Trenger bilde</string>
   <string name="place_type">Stedstype:</string>
   <string name="nearby_search_hint">Bro, museum, hotell, etc.</string>
-  <string name="you_must_reset_your_passsword">Noe gikk galt under innloggingen, du må tilbakestille passordet ditt!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Noe gikk galt under innloggingen, du må tilbakestille passordet ditt!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">UNDERKLASSER</string>
   <string name="title_for_parent_classes">OVERKLASSER</string>

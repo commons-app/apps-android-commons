@@ -12,8 +12,8 @@
   <string name="login">Кир</string>
   <string name="logging_in_title">Системагъа кириу</string>
   <string name="logging_in_message">Бираз сакълагъыз…</string>
-  <string name="login_success">Авторизация тыйыншлы ётдю</string>
-  <string name="login_failed">Системагъа кириуде халат</string>
+  <string name="login_success" fuzzy="true">Авторизация тыйыншлы ётдю</string>
+  <string name="login_failed" fuzzy="true">Системагъа кириуде халат</string>
   <string name="authentication_failed" fuzzy="true">Аутентификацияда халат!</string>
   <string name="uploading_started">Джюклеу башланды!</string>
   <string name="upload_completed_notification_title">%1$s джюкленди!</string>
@@ -31,7 +31,7 @@
   <string name="provider_contributions">Джюклегенлерим</string>
   <string name="share_title_hint" fuzzy="true">Башлыкъ</string>
   <string name="share_description_hint">Ачыкълау</string>
-  <string name="login_failed_generic">Системагъа кириуде халат!</string>
+  <string name="login_failed_generic" fuzzy="true">Системагъа кириуде халат!</string>
   <string name="share_upload_button">Джюклеу</string>
   <string name="provider_modifications">Тюрлениуле</string>
   <string name="menu_upload_single">Джюклеу</string>
