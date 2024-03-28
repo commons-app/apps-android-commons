@@ -289,15 +289,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem item) {
                 try {
-                    IGeoPoint screenTopRight = binding.map.getProjection().fromPixels(binding.map.getWidth(), 0);
-                    IGeoPoint screenBottomLeft = binding.map.getProjection().fromPixels(0, binding.map.getHeight());
-                    fr.free.nrw.commons.location.LatLng screenTopRightLatLng = new fr.free.nrw.commons.location.LatLng(
-                        screenBottomLeft.getLatitude(), screenBottomLeft.getLongitude(), 0);
-                    fr.free.nrw.commons.location.LatLng screenBottomLeftLatLng = new fr.free.nrw.commons.location.LatLng(
-                        screenTopRight.getLatitude(), screenTopRight.getLongitude(), 0);
                     progressDialog.setTitle(getString(R.string.saving_gpx_file));
                     progressDialog.show();
-                    savePlacesAsGPX(screenTopRightLatLng, screenBottomLeftLatLng);
+                    savePlacesAsGPX();
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -309,15 +303,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem item) {
                 try {
-                    IGeoPoint screenTopRight = binding.map.getProjection().fromPixels(binding.map.getWidth(), 0);
-                    IGeoPoint screenBottomLeft = binding.map.getProjection().fromPixels(0, binding.map.getHeight());
-                    fr.free.nrw.commons.location.LatLng screenTopRightLatLng = new fr.free.nrw.commons.location.LatLng(
-                        screenBottomLeft.getLatitude(), screenBottomLeft.getLongitude(), 0);
-                    fr.free.nrw.commons.location.LatLng screenBottomLeftLatLng = new fr.free.nrw.commons.location.LatLng(
-                        screenTopRight.getLatitude(), screenTopRight.getLongitude(), 0);
                     progressDialog.setTitle(getString(R.string.saving_kml_file));
                     progressDialog.show();
-                    savePlacesAsKML(screenTopRightLatLng, screenBottomLeftLatLng);
+                    savePlacesAsKML();
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -1163,7 +1151,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
     }
 
-    private void savePlacesAsKML(LatLng latLng, LatLng nextlatLng) {
+    private void savePlacesAsKML() {
         final Observable<String> savePlacesObservable = Observable
             .fromCallable(() -> nearbyController
                 .getPlacesAsKML(getMapFocus()));
@@ -1197,7 +1185,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 }));
     }
 
-    private void savePlacesAsGPX(LatLng latLng, LatLng nextlatLng) {
+    private void savePlacesAsGPX() {
         final Observable<String> savePlacesObservable = Observable
             .fromCallable(() -> nearbyController
                 .getPlacesAsGPX(getMapFocus()));
