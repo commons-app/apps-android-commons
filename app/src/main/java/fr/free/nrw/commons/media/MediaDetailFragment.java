@@ -402,8 +402,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 }
             }
         );
-        progressBarEditDescription.setVisibility(GONE);
-        editDescription.setVisibility(VISIBLE);
+        binding.progressBarEdit.setVisibility(GONE);
+        binding.descriptionEdit.setVisibility(VISIBLE);
     }
 
     @Override
