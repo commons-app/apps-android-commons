@@ -412,63 +412,44 @@ public class OkHttpJsonApiClient {
             "<!--Created by Wikimedia Commons Android app -->\n" +
             "<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n" +
             "    <Document>";
+        List<PlaceBindings> placeBindings = runQuery(leftLatLng,
+            rightLatLng);
+        if (placeBindings != null) {
+            for (PlaceBindings item : placeBindings) {
+                if (item.getItem() != null && item.getLabel() != null && item.getClas() != null) {
+                    String input = item.getLocation().getValue();
+                    Pattern pattern = Pattern.compile(
+                        "Point\\(([-+]?[0-9]*\\.?[0-9]+) ([-+]?[0-9]*\\.?[0-9]+)\\)");
+                    Matcher matcher = pattern.matcher(input);
 
-        int increment = 1;
-        double longitude = leftLatLng.getLongitude();
+                    if (matcher.find()) {
+                        String longStr = matcher.group(1);
+                        String latStr = matcher.group(2);
+                        String itemUrl = item.getItem().getValue();
+                        String itemName = item.getLabel().getValue().replace("&", "&amp;");
+                        String itemLatitude = latStr;
+                        String itemLongitude = longStr;
+                        String itemClass = item.getClas().getValue();
 
-        while (longitude <= rightLatLng.getLongitude()) {
-            double NEXT_LONGITUDE =
-                (increment + longitude) >= 0.0 && (increment + longitude) <= 1.0 ? 0.0
-                    : increment + longitude;
+                        String formattedItemName =
+                            !itemClass.isEmpty() ? itemName + " (" + itemClass + ")"
+                                : itemName;
 
-            double latitude = leftLatLng.getLatitude();
-
-            while (latitude <= rightLatLng.getLatitude()) {
-                double NEXT_LATITUDE =
-                    (increment + latitude) >= 0.0 && (increment + latitude) <= 1.0 ? 0.0
-                        : increment + latitude;
-                List<PlaceBindings> placeBindings = runQuery(new LatLng(latitude, longitude, 0),
-                    new LatLng(NEXT_LATITUDE, NEXT_LONGITUDE, 0));
-                if (placeBindings != null) {
-                    for (PlaceBindings item : placeBindings) {
-                        if (item.getItem() != null && item.getLabel() != null && item.getClas() != null) {
-                            String input = item.getLocation().getValue();
-                            Pattern pattern = Pattern.compile(
-                                "Point\\(([-+]?[0-9]*\\.?[0-9]+) ([-+]?[0-9]*\\.?[0-9]+)\\)");
-                            Matcher matcher = pattern.matcher(input);
-
-                            if (matcher.find()) {
-                                String longStr = matcher.group(1);
-                                String latStr = matcher.group(2);
-                                String itemUrl = item.getItem().getValue();
-                                String itemName = item.getLabel().getValue().replace("&", "&amp;");
-                                String itemLatitude = latStr;
-                                String itemLongitude = longStr;
-                                String itemClass = item.getClas().getValue();
-
-                                String formattedItemName =
-                                    !itemClass.isEmpty() ? itemName + " (" + itemClass + ")"
-                                        : itemName;
-
-                                String kmlEntry = "\n        <Placemark>\n" +
-                                    "            <name>" + formattedItemName + "</name>\n" +
-                                    "            <description>" + itemUrl + "</description>\n" +
-                                    "            <Point>\n" +
-                                    "                <coordinates>" + itemLongitude + ","
-                                    + itemLatitude
-                                    + "</coordinates>\n" +
-                                    "            </Point>\n" +
-                                    "        </Placemark>";
-                                kmlString = kmlString + kmlEntry;
-                            } else {
-                                Timber.e("No match found");
-                            }
-                        }
+                        String kmlEntry = "\n        <Placemark>\n" +
+                            "            <name>" + formattedItemName + "</name>\n" +
+                            "            <description>" + itemUrl + "</description>\n" +
+                            "            <Point>\n" +
+                            "                <coordinates>" + itemLongitude + ","
+                            + itemLatitude
+                            + "</coordinates>\n" +
+                            "            </Point>\n" +
+                            "        </Placemark>";
+                        kmlString = kmlString + kmlEntry;
+                    } else {
+                        Timber.e("No match found");
                     }
                 }
-                latitude += increment;
             }
-            longitude += increment;
         }
         kmlString = kmlString + "\n    </Document>\n" +
             "</kml>\n";
@@ -495,60 +476,42 @@ public class OkHttpJsonApiClient {
             " xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd\">"
             + "\n<bounds minlat=\"$MIN_LATITUDE\" minlon=\"$MIN_LONGITUDE\" maxlat=\"$MAX_LATITUDE\" maxlon=\"$MAX_LONGITUDE\"/>";
 
-        int increment = 1;
-        double longitude = leftLatLng.getLongitude();
+        List<PlaceBindings> placeBindings = runQuery(leftLatLng,rightLatLng);
+        if (placeBindings != null) {
+            for (PlaceBindings item : placeBindings) {
+                if (item.getItem() != null && item.getLabel() != null && item.getClas() != null) {
+                    String input = item.getLocation().getValue();
+                    Pattern pattern = Pattern.compile(
+                        "Point\\(([-+]?[0-9]*\\.?[0-9]+) ([-+]?[0-9]*\\.?[0-9]+)\\)");
+                    Matcher matcher = pattern.matcher(input);
 
-        while (longitude <= rightLatLng.getLongitude()) {
-            double NEXT_LONGITUDE =
-                (increment + longitude) >= 0.0 && (increment + longitude) <= 1.0 ? 0.0
-                    : increment + longitude;
+                    if (matcher.find()) {
+                        String longStr = matcher.group(1);
+                        String latStr = matcher.group(2);
+                        String itemUrl = item.getItem().getValue();
+                        String itemName = item.getLabel().getValue().replace("&", "&amp;");
+                        String itemLatitude = latStr;
+                        String itemLongitude = longStr;
+                        String itemClass = item.getClas().getValue();
 
-            double latitude = leftLatLng.getLatitude();
+                        String formattedItemName =
+                            !itemClass.isEmpty() ? itemName + " (" + itemClass + ")"
+                                : itemName;
 
-            while (latitude <= rightLatLng.getLatitude()) {
-                double NEXT_LATITUDE =
-                    (increment + latitude) >= 0.0 && (increment + latitude) <= 1.0 ? 0.0
-                        : increment + latitude;
-                List<PlaceBindings> placeBindings = runQuery(new LatLng(latitude, longitude, 0),
-                    new LatLng(NEXT_LATITUDE, NEXT_LONGITUDE, 0));
-                if (placeBindings != null) {
-                    for (PlaceBindings item : placeBindings) {
-                        if (item.getItem() != null && item.getLabel() != null && item.getClas() != null) {
-                            String input = item.getLocation().getValue();
-                            Pattern pattern = Pattern.compile(
-                                "Point\\(([-+]?[0-9]*\\.?[0-9]+) ([-+]?[0-9]*\\.?[0-9]+)\\)");
-                            Matcher matcher = pattern.matcher(input);
+                        String gpxEntry =
+                            "\n    <wpt lat=\"" + itemLatitude + "\" lon=\"" + itemLongitude
+                                + "\">\n" +
+                                "        <name>" + itemName + "</name>\n" +
+                                "        <url>" + itemUrl + "</url>\n" +
+                                "    </wpt>";
+                        gpxString = gpxString + gpxEntry;
 
-                            if (matcher.find()) {
-                                String longStr = matcher.group(1);
-                                String latStr = matcher.group(2);
-                                String itemUrl = item.getItem().getValue();
-                                String itemName = item.getLabel().getValue().replace("&", "&amp;");
-                                String itemLatitude = latStr;
-                                String itemLongitude = longStr;
-                                String itemClass = item.getClas().getValue();
-
-                                String formattedItemName =
-                                    !itemClass.isEmpty() ? itemName + " (" + itemClass + ")"
-                                        : itemName;
-
-                                String gpxEntry =
-                                    "\n    <wpt lat=\"" + itemLatitude + "\" lon=\"" + itemLongitude
-                                        + "\">\n" +
-                                        "        <name>" + itemName + "</name>\n" +
-                                        "        <url>" + itemUrl + "</url>\n" +
-                                        "    </wpt>";
-                                gpxString = gpxString + gpxEntry;
-
-                            } else {
-                                Timber.e("No match found");
-                            }
-                        }
+                    } else {
+                        Timber.e("No match found");
                     }
                 }
-                latitude += increment;
             }
-            longitude += increment;
+
         }
         gpxString = gpxString + "\n</gpx>";
         return gpxString;
