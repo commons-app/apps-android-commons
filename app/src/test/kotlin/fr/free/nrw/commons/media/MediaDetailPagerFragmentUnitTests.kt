@@ -9,6 +9,7 @@ import android.view.MenuItem
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
+import androidx.work.testing.WorkManagerTestInitHelper
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
 import com.nhaarman.mockitokotlin2.any
@@ -79,7 +80,10 @@ class MediaDetailPagerFragmentUnitTests {
         
         MockitoAnnotations.openMocks(this)
 
+
         context = ApplicationProvider.getApplicationContext()
+
+        WorkManagerTestInitHelper.initializeTestWorkManager(context)
 
         OkHttpConnectionFactory.CLIENT = createTestClient()
 

@@ -3,14 +3,22 @@ package fr.free.nrw.commons.utils
 import android.app.ProgressDialog
 import android.content.Context
 import android.graphics.Bitmap
+import android.net.Uri
 import androidx.test.core.app.ApplicationProvider
+import androidx.work.Data
+import androidx.work.ListenableWorker
+import androidx.work.WorkManager
+import androidx.work.testing.TestListenableWorkerBuilder
+import androidx.work.testing.WorkManagerTestInitHelper
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.contributions.SetWallpaperWorker
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
 import io.reactivex.disposables.CompositeDisposable
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.mock
@@ -24,15 +32,13 @@ import java.lang.reflect.Field
 import java.lang.reflect.Method
 
 
+
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class ImageUtilsTest {
 
     private lateinit var context: Context
-
-    @Mock
-    private lateinit var bitmap: Bitmap
 
     @Mock
     private lateinit var progressDialogWallpaper: ProgressDialog
@@ -43,10 +49,18 @@ class ImageUtilsTest {
     @Mock
     private lateinit var compositeDisposable: CompositeDisposable
 
+    @Mock
+    private lateinit var imageUri: Uri
+
+    private lateinit var workManager: WorkManager
+
     @Before
     fun setup() {
         MockitoAnnotations.openMocks(this)
         context = ApplicationProvider.getApplicationContext()
+
+        WorkManagerTestInitHelper.initializeTestWorkManager(context)
+        workManager = WorkManager.getInstance(context)
     }
 
     @Test
@@ -87,20 +101,13 @@ class ImageUtilsTest {
     fun testSetWallpaper() {
         val mockImageUtils = mock(ImageUtils::class.java)
         val method: Method = ImageUtils::class.java.getDeclaredMethod(
-            "setWallpaper",
+            "enqueueSetWallpaperWork",
             Context::class.java,
-            Bitmap::class.java
+            Uri::class.java
         )
         method.isAccessible = true
 
-        `when`(progressDialogWallpaper.isShowing).thenReturn(true)
-
-        val progressDialogWallpaperField: Field =
-            ImageUtils::class.java.getDeclaredField("progressDialogWallpaper")
-        progressDialogWallpaperField.isAccessible = true
-        progressDialogWallpaperField.set(mockImageUtils, progressDialogWallpaper)
-
-        method.invoke(mockImageUtils, context, bitmap)
+        method.invoke(mockImageUtils, context, imageUri)
     }
 
     @Test
@@ -190,5 +197,4 @@ class ImageUtilsTest {
         method.isAccessible = true
         method.invoke(mockImageUtils, null)
     }
-
 }

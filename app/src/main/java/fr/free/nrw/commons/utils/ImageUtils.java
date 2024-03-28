@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.utils;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.app.WallpaperManager;
 import android.content.Context;
@@ -8,10 +10,14 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.exifinterface.media.ExifInterface;
+import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 import com.facebook.common.executors.CallerThreadExecutor;
 import com.facebook.common.references.CloseableReference;
 import com.facebook.datasource.DataSource;
@@ -22,6 +28,7 @@ import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.contributions.SetWallpaperWorker;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -195,37 +202,23 @@ public class ImageUtils {
      * @param imageUrl Url of the image
      */
     public static void setWallpaperFromImageUrl(Context context, Uri imageUrl) {
-        showSettingWallpaperProgressBar(context);
-        Timber.d("Trying to set wallpaper from url %s", imageUrl.toString());
-        ImageRequest imageRequest = ImageRequestBuilder
-                .newBuilderWithSource(imageUrl)
-                .setAutoRotateEnabled(true)
-                .build();
 
-        ImagePipeline imagePipeline = Fresco.getImagePipeline();
-        final DataSource<CloseableReference<CloseableImage>>
-                dataSource = imagePipeline.fetchDecodedImage(imageRequest, context);
+        enqueueSetWallpaperWork(context, imageUrl);
 
-        dataSource.subscribe(new BaseBitmapDataSubscriber() {
-
-            @Override
-            public void onNewResultImpl(@Nullable Bitmap bitmap) {
-                if (dataSource.isFinished() && bitmap != null) {
-                    Timber.d("Bitmap loaded from url %s", imageUrl.toString());
-                    setWallpaper(context, Bitmap.createBitmap(bitmap));
-                    dataSource.close();
-                }
-            }
-
-            @Override
-            public void onFailureImpl(DataSource dataSource) {
-                Timber.d("Error getting bitmap from image url %s", imageUrl.toString());
-                if (dataSource != null) {
-                    dataSource.close();
-                }
-            }
-        }, CallerThreadExecutor.getInstance());
     }
+
+    private static void createNotificationChannel(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Wallpaper Setting";
+            String description = "Notifications for wallpaper setting progress";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("set_wallpaper_channel", name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
 
     /**
      * Calls the set avatar api to set the image url as user's avatar
@@ -272,22 +265,20 @@ public class ImageUtils {
 
     }
 
-    private static void setWallpaper(Context context, Bitmap bitmap) {
-        WallpaperManager wallpaperManager = WallpaperManager.getInstance(context);
-        try {
-            wallpaperManager.setBitmap(bitmap);
-            ViewUtil.showLongToast(context, context.getString(R.string.wallpaper_set_successfully));
-            if (progressDialogWallpaper != null && progressDialogWallpaper.isShowing()) {
-                progressDialogWallpaper.dismiss();
-            }
-        } catch (IOException e) {
-            Timber.e(e, "Error setting wallpaper");
-            ViewUtil.showLongToast(context, context.getString(R.string.wallpaper_set_unsuccessfully));
-            if (progressDialogWallpaper != null) {
-                progressDialogWallpaper.cancel();
-            }
-        }
+    public static void enqueueSetWallpaperWork(Context context, Uri imageUrl) {
+        createNotificationChannel(context); // Ensure the notification channel is created
+
+        Data inputData = new Data.Builder()
+            .putString("imageUrl", imageUrl.toString())
+            .build();
+
+        OneTimeWorkRequest setWallpaperWork = new OneTimeWorkRequest.Builder(SetWallpaperWorker.class)
+            .setInputData(inputData)
+            .build();
+
+        WorkManager.getInstance(context).enqueue(setWallpaperWork);
     }
+
 
     private static void showSettingWallpaperProgressBar(Context context) {
         progressDialogWallpaper = ProgressDialog.show(context, context.getString(R.string.setting_wallpaper_dialog_title),
