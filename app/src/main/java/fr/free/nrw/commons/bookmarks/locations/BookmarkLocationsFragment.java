@@ -45,7 +45,7 @@ public class BookmarkLocationsFragment extends DaggerFragment {
                 contributionController.locationPermissionCallback.onLocationPermissionGranted();
             } else {
                 if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
-                    contributionController.handleShowRationaleFlowCameraLocation(getActivity());
+                    contributionController.handleShowRationaleFlowCameraLocation(getActivity(), inAppCameraLocationPermissionLauncher);
                 } else {
                     contributionController.locationPermissionCallback.onLocationPermissionDenied(getActivity().getString(R.string.in_app_camera_location_permission_denied));
                 }

@@ -131,7 +131,6 @@ public class ExploreMapPresenter
 
     public void onMapReady(ExploreMapController exploreMapController) {
         this.exploreMapController = exploreMapController;
-        exploreMapFragmentView.addSearchThisAreaButtonAction();
         if (null != exploreMapFragmentView) {
             exploreMapFragmentView.addSearchThisAreaButtonAction();
             initializeMapOperations();
@@ -141,7 +140,6 @@ public class ExploreMapPresenter
     public void initializeMapOperations() {
         lockUnlockNearby(false);
         updateMap(LOCATION_SIGNIFICANTLY_CHANGED);
-        exploreMapFragmentView.addSearchThisAreaButtonAction();
     }
 
     public Observable<ExplorePlacesInfo> loadAttractionsFromLocation(LatLng currentLatLng,

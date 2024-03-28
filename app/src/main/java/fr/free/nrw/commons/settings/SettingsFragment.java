@@ -93,7 +93,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 areAllGranted = areAllGranted && b;
             }
             if (!areAllGranted && shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
-                contributionController.handleShowRationaleFlowCameraLocation(getActivity());
+                contributionController.handleShowRationaleFlowCameraLocation(getActivity(), inAppCameraLocationPermissionLauncher);
             }
         }
     });

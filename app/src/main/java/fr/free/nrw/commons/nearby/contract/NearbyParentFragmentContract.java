@@ -24,7 +24,7 @@ public interface NearbyParentFragmentContract {
 
         boolean isListBottomSheetExpanded();
 
-        void checkPermissionsAndPerformAction();
+        void askForLocationPermission();
 
         void displayLoginSkippedWarning();
 

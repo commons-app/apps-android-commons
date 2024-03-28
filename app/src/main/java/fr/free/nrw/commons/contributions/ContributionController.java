@@ -17,7 +17,6 @@ import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationPermissionsHelper;
-import fr.free.nrw.commons.location.LocationPermissionsHelper.Dialog;
 import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.nearby.Place;
@@ -84,15 +83,6 @@ public class ContributionController {
      */
     private void createDialogsAndHandleLocationPermissions(Activity activity,
         ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher) {
-        LocationPermissionsHelper.Dialog locationAccessDialog = new Dialog(
-            R.string.location_permission_title,
-            R.string.in_app_camera_location_permission_rationale
-        );
-
-        LocationPermissionsHelper.Dialog locationOffDialog = new Dialog(
-            R.string.ask_to_turn_location_on,
-            R.string.in_app_camera_needs_location
-        );
         locationPermissionCallback = new LocationPermissionCallback() {
             @Override
             public void onLocationPermissionDenied(String toastMessage) {
@@ -106,7 +96,12 @@ public class ContributionController {
 
             @Override
             public void onLocationPermissionGranted() {
-                initiateCameraUpload(activity);
+                if (!locationPermissionsHelper.isLocationAccessToAppsTurnedOn()) {
+                    showLocationOffDialog(activity, R.string.in_app_camera_needs_location,
+                        R.string.in_app_camera_location_unavailable);
+                } else {
+                    initiateCameraUpload(activity);
+                }
             }
         };
 
@@ -115,22 +110,46 @@ public class ContributionController {
         if (inAppCameraLocationPermissionLauncher != null) {
             inAppCameraLocationPermissionLauncher.launch(
                 new String[]{permission.ACCESS_FINE_LOCATION});
-        } else {
-            locationPermissionsHelper.handleLocationPermissions(locationAccessDialog,
-                locationOffDialog);
         }
 
     }
 
-    public void handleShowRationaleFlowCameraLocation(Activity activity) {
+    /**
+     * Shows a dialog alerting the user about location services being off
+     * and asking them to turn it on
+     * TODO: Add a seperate callback in LocationPermissionsHelper for this.
+     *      Ref: https://github.com/commons-app/apps-android-commons/pull/5494/files#r1510553114
+     *
+     * @param activity Activity reference
+     * @param dialogTextResource Resource id of text to be shown in dialog
+     * @param toastTextResource Resource id of text to be shown in toast
+     */
+    private void showLocationOffDialog(Activity activity, int dialogTextResource,
+        int toastTextResource) {
+        DialogUtil
+            .showAlertDialog(activity,
+                activity.getString(R.string.ask_to_turn_location_on),
+                activity.getString(dialogTextResource),
+                activity.getString(R.string.title_app_shortcut_setting),
+                activity.getString(R.string.cancel),
+                () -> locationPermissionsHelper.openLocationSettings(activity),
+                () -> {
+                    Toast.makeText(activity, activity.getString(toastTextResource),
+                        Toast.LENGTH_LONG).show();
+                    initiateCameraUpload(activity);
+                }
+            );
+    }
+
+    public void handleShowRationaleFlowCameraLocation(Activity activity,
+        ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher) {
         DialogUtil.showAlertDialog(activity, activity.getString(R.string.location_permission_title),
             activity.getString(R.string.in_app_camera_location_permission_rationale),
             activity.getString(android.R.string.ok),
             activity.getString(android.R.string.cancel),
             () -> {
-                if (!locationPermissionsHelper.isLocationAccessToAppsTurnedOn()) {
-                    locationPermissionsHelper.showLocationOffDialog(activity);
-                }
+                createDialogsAndHandleLocationPermissions(activity,
+                    inAppCameraLocationPermissionLauncher);
             },
             () -> locationPermissionCallback.onLocationPermissionDenied(
                 activity.getString(R.string.in_app_camera_location_permission_denied)),
@@ -162,6 +181,7 @@ public class ContributionController {
                     inAppCameraLocationPermissionLauncher);
             },
             () -> {
+                ViewUtil.showLongToast(activity, R.string.in_app_camera_location_permission_denied);
                 defaultKvStore.putBoolean("inAppCameraLocationPref", false);
                 initiateCameraUpload(activity);
             },

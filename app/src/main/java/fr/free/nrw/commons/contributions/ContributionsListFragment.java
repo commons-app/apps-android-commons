@@ -98,26 +98,30 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     private int contributionsSize;
     private String userName;
 
-    private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
-        @Override
-        public void onActivityResult(Map<String, Boolean> result) {
-            boolean areAllGranted = true;
-            for (final boolean b : result.values()) {
-                areAllGranted = areAllGranted && b;
-            }
+    private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(
+        new ActivityResultContracts.RequestMultiplePermissions(),
+        new ActivityResultCallback<Map<String, Boolean>>() {
+            @Override
+            public void onActivityResult(Map<String, Boolean> result) {
+                boolean areAllGranted = true;
+                for (final boolean b : result.values()) {
+                    areAllGranted = areAllGranted && b;
+                }
 
-            if (areAllGranted) {
-                controller.locationPermissionCallback.onLocationPermissionGranted();
-            } else {
-                if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
-                    controller.handleShowRationaleFlowCameraLocation(getActivity());
+                if (areAllGranted) {
+                    controller.locationPermissionCallback.onLocationPermissionGranted();
                 } else {
-                    controller.locationPermissionCallback.onLocationPermissionDenied(
-                        getActivity().getString(R.string.in_app_camera_location_permission_denied));
+                    if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
+                        controller.handleShowRationaleFlowCameraLocation(getActivity(),
+                            inAppCameraLocationPermissionLauncher);
+                    } else {
+                        controller.locationPermissionCallback.onLocationPermissionDenied(
+                            getActivity().getString(
+                                R.string.in_app_camera_location_permission_denied));
+                    }
                 }
             }
-        }
-    });
+        });
 
 
     @Override
