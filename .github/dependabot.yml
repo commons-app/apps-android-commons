@@ -1,0 +1,40 @@
+updates:
+  - package-ecosystem: "github-actions"
+    commit-message:
+      prefix: "Actions"
+    directory: "/" 
+    schedule:
+      day: "saturday"
+      interval: "weekly"
+      time: "03:00"
+
+  - package-ecosystem: "gradle"
+    commit-message:
+      prefix: "Gradle"
+    directory: "/" 
+    schedule:
+      day: "saturday"
+      interval: "weekly"
+      time: "03:00"
+
+  - package-ecosystem: "gradle"
+    commit-message:
+      prefix: "Gradle"
+    directory: "/app"
+    schedule:
+      day: "saturday"
+      interval: "weekly"
+      time: "03:00"
+    ignore:
+      - dependency-name: "com.squareup.retrofit2:retrofit"
+      - dependency-name: "com.squareup.retrofit2:converter-gson"
+      - dependency-name: "com.squareup.retrofit2:adapter-rxjava2"
+      - dependency-name: "io.reactivex.rxjava2:rxandroid"
+      - dependency-name: "io.reactivex.rxjava2:rxjava"
+      - dependency-name: "com.jakewharton.rxbinding2:rxbinding"
+      - dependency-name: "com.jakewharton.rxbinding3:rxbinding-appcompat"
+      - dependency-name: "com.jakewharton.rxbinding2:rxbinding-support-v4"
+      - dependency-name: "com.jakewharton.rxbinding2:rxbinding-appcompat-v7"
+      - dependency-name: "com.jakewharton.rxbinding2:rxbinding-design"
+      
+version: 2

@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="?attr/actionBarSize"
     android:theme="?attr/more_bottom_sheet_style"
@@ -22,77 +23,77 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_margin="12dp"
-              android:drawableStart="@drawable/ic_person_black_24dp"
               android:drawablePadding="12dp"
               android:padding="8dp"
               android:text="@string/Profile"
-              android:textSize="18sp" />
+              android:textSize="18sp"
+              app:drawableStartCompat="@drawable/ic_person_black_24dp" />
 
             <TextView
               android:id="@+id/more_peer_review"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_margin="12dp"
-              android:drawableStart="@drawable/ic_check_black_24dp"
               android:drawablePadding="12dp"
               android:padding="8dp"
               android:text="@string/navigation_item_review"
-              android:textSize="18sp" />
+              android:textSize="18sp"
+              app:drawableStartCompat="@drawable/ic_check_black_24dp" />
 
             <TextView
               android:id="@+id/more_settings"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_margin="12dp"
-              android:drawableStart="@drawable/ic_settings_black_24dp"
               android:drawablePadding="12dp"
               android:padding="8dp"
               android:text="@string/menu_settings"
-              android:textSize="18sp" />
+              android:textSize="18sp"
+              app:drawableStartCompat="@drawable/ic_settings_black_24dp" />
 
             <TextView
               android:id="@+id/more_tutorial"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_margin="12dp"
-              android:drawableStart="@drawable/ic_help_black_24dp"
               android:drawablePadding="12dp"
               android:padding="8dp"
               android:text="@string/navigation_item_info"
-              android:textSize="18sp" />
+              android:textSize="18sp"
+              app:drawableStartCompat="@drawable/ic_help_black_24dp" />
 
             <TextView
               android:id="@+id/more_feedback"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_margin="12dp"
-              android:drawableLeft="@drawable/ic_feedback_black_24dp"
               android:drawablePadding="12dp"
               android:padding="8dp"
               android:text="@string/navigation_item_feedback"
-              android:textSize="18sp" />
+              android:textSize="18sp"
+              app:drawableLeftCompat="@drawable/ic_feedback_black_24dp" />
 
             <TextView
               android:id="@+id/more_about"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_margin="12dp"
-              android:drawableStart="@drawable/ic_info_outline_24dp"
               android:drawablePadding="12dp"
               android:padding="8dp"
               android:text="@string/navigation_item_about"
-              android:textSize="18sp" />
+              android:textSize="18sp"
+              app:drawableStartCompat="@drawable/ic_info_outline_24dp" />
 
             <TextView
               android:id="@+id/more_logout"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_margin="12dp"
-              android:drawableStart="@drawable/ic_exit_to_app_black_24dp"
               android:drawablePadding="12dp"
               android:padding="8dp"
               android:text="@string/navigation_item_logout"
-              android:textSize="18sp" />
+              android:textSize="18sp"
+              app:drawableStartCompat="@drawable/ic_exit_to_app_black_24dp" />
 
         </LinearLayout>
 

@@ -1,1 +1,22 @@
+pluginManagement {
+    repositories {
+        google()
+        gradlePluginPortal()
+        maven { url "https://maven.pkg.jetbrains.space/public/p/compose/dev" }
+        maven { url "https://jitpack.io" }
+        mavenCentral()
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        google()
+        maven { url "https://maven.pkg.jetbrains.space/public/p/compose/dev" }
+        maven { url "https://jitpack.io" }
+        mavenCentral()
+    }
+}
+
 include ':app'
+
+rootProject.name = "WikimediaCommons"

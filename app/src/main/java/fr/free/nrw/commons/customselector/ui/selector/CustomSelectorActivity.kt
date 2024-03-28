@@ -150,6 +150,7 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
     /**
      * When data will be send from full screen mode, it will be passed to fragment
      */
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == Constants.RequestCodes.RECEIVE_DATA_FROM_FULL_SCREEN_MODE &&
@@ -456,6 +457,7 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
      * Back pressed.
      * Change toolbar title.
      */
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         super.onBackPressed()
         val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)

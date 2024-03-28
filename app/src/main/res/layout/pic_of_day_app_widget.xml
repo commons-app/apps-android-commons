@@ -1,52 +1,51 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/black"
+  android:padding="@dimen/widget_margin"
+  android:orientation="vertical">
+
+  <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/black"
-    android:padding="@dimen/widget_margin"
-    android:orientation="vertical">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_centerHorizontal="true"
-          android:layout_marginTop="@dimen/dimen_10"
-          android:text="@string/app_widget_heading"
-          android:textColor="@color/white"
-          android:textSize="@dimen/subheading_text_size" />
-
-        <ImageView
-          android:id="@+id/camera_button"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignParentEnd="true"
-          android:padding="@dimen/dimen_20"
-          android:src="@drawable/ic_photo_camera_white_24dp" />
-
-    </RelativeLayout>
+    android:layout_height="wrap_content">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/appwidget_title"
-        android:textAlignment="center"
-        android:layout_gravity="bottom"
-        android:textColor="@color/white"
-        android:layout_marginTop="@dimen/filter_padding"
-        android:layout_marginStart="@dimen/tiny_padding"
-        android:layout_marginEnd="@dimen/tiny_padding"
-        android:textSize="@dimen/subtitle_text"/>
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="@dimen/dimen_10"
+      android:text="@string/app_widget_heading"
+      android:textColor="@color/white"
+      android:textSize="@dimen/subheading_text_size" />
 
     <ImageView
-        android:padding="@dimen/filter_padding"
-        android:id="@+id/appwidget_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-		android:contentDescription="@string/appwidget_img" />
+      android:id="@+id/camera_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentEnd="true"
+      android:padding="@dimen/dimen_20"
+      android:src="@drawable/ic_photo_camera_white_24dp" />
+
+  </RelativeLayout>
+
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/appwidget_title"
+    android:textAlignment="center"
+    android:layout_gravity="bottom"
+    android:textColor="@color/white"
+    android:layout_marginTop="@dimen/filter_padding"
+    android:layout_marginStart="@dimen/tiny_padding"
+    android:layout_marginEnd="@dimen/tiny_padding"
+    android:textSize="@dimen/subtitle_text" />
+
+  <ImageView
+    android:padding="@dimen/filter_padding"
+    android:id="@+id/appwidget_image"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:contentDescription="@string/appwidget_img" />
 
 </LinearLayout>

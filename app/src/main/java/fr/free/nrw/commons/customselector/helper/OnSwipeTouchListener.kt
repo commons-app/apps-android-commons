@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.customselector.helper
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.DisplayMetrics
 import android.view.*
@@ -16,13 +17,14 @@ open class OnSwipeTouchListener(context: Context?) : View.OnTouchListener {
     private val SWIPE_THRESHOLD_WIDTH = (getScreenResolution(context!!)).first / 3
     private val SWIPE_VELOCITY_THRESHOLD = 1000
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(view: View?, motionEvent: MotionEvent): Boolean {
         return gestureDetector.onTouchEvent(motionEvent)
     }
 
-    fun getScreenResolution(context: Context): Pair<Int, Int> {
+    private fun getScreenResolution(context: Context): Pair<Int, Int> {
         val wm: WindowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val display: Display = wm.getDefaultDisplay()
+        val display: Display = wm.defaultDisplay
         val metrics = DisplayMetrics()
         display.getMetrics(metrics)
         val width: Int = metrics.widthPixels
@@ -40,13 +42,13 @@ open class OnSwipeTouchListener(context: Context?) : View.OnTouchListener {
          * Detects the gestures
          */
         override fun onFling(
-            event1: MotionEvent,
+            event1: MotionEvent?,
             event2: MotionEvent,
             velocityX: Float,
             velocityY: Float
         ): Boolean {
             try {
-                val diffY: Float = event2.y - event1.y
+                val diffY: Float = event2.y - event1?.y!!
                 val diffX: Float = event2.x - event1.x
                 if (abs(diffX) > abs(diffY)) {
                     if (abs(diffX) > SWIPE_THRESHOLD_WIDTH && abs(velocityX) >

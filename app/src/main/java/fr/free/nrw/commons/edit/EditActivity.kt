@@ -9,6 +9,7 @@ import android.graphics.Matrix
 import android.media.ExifInterface
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import android.widget.Toast
@@ -293,6 +294,7 @@ class EditActivity : AppCompatActivity() {
         return scaleFactor
     }
 
+    fun getRotatedImage(view: View) {}
 
 
 }

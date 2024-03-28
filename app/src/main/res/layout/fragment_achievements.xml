@@ -53,8 +53,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             app:srcCompat="@drawable/ic_info_outline_24dp"
-            android:tint="@color/black"
-            android:layout_marginVertical="@dimen/activity_margin_vertical" />
+            android:layout_marginVertical="@dimen/activity_margin_vertical"
+            app:tint="@color/black" />
 
           <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/badge_layout"
@@ -123,9 +123,9 @@
                 android:layout_toRightOf="@+id/images_upload_text_param"
                 android:layout_toEndOf="@+id/images_upload_text_param"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryLightColor"
                 android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"/>
+                android:layout_marginStart="@dimen/activity_margin_horizontal"
+                app:tint="@color/primaryLightColor" />
 
             </LinearLayout>
 
@@ -210,9 +210,9 @@
                 android:layout_toRightOf="@+id/images_reverted_text"
                 android:layout_toEndOf="@+id/images_reverted_text"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryLightColor"
                 android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"/>
+                android:layout_marginStart="@dimen/activity_margin_horizontal"
+                app:tint="@color/primaryLightColor" />
 
             </LinearLayout>
 
@@ -285,9 +285,9 @@
                 android:layout_toRightOf="@+id/images_used_by_wiki_text"
                 android:layout_toEndOf="@+id/images_used_by_wiki_text"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryLightColor"
                 android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"/>
+                android:layout_marginStart="@dimen/activity_margin_horizontal"
+                app:tint="@color/primaryLightColor" />
 
             </LinearLayout>
 
@@ -414,7 +414,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryLightColor" />
+                app:tint="@color/primaryLightColor" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -493,7 +493,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_gravity="top"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryLightColor" />
+                app:tint="@color/primaryLightColor" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -571,7 +571,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_gravity="top"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryLightColor" />
+                app:tint="@color/primaryLightColor" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -650,7 +650,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_gravity="top"
                 app:srcCompat="@drawable/ic_info_outline_24dp"
-                android:tint="@color/primaryLightColor" />
+                app:tint="@color/primaryLightColor" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

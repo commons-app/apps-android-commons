@@ -259,8 +259,8 @@
                       android:textColor="?attr/mediaDetailsText"
                       android:textSize="@dimen/description_text_size"
                       android:drawablePadding="@dimen/tiny_gap"
-                      android:drawableStart="?attr/iconInfo24"
-                      tools:text="License link" />
+                      tools:text="License link"
+                      app:drawableStartCompat="?attr/iconInfo24" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -287,8 +287,8 @@
                       android:textColor="?attr/mediaDetailsText"
                       android:textSize="@dimen/description_text_size"
                       android:drawablePadding="@dimen/tiny_gap"
-                      android:drawableStart="?attr/iconMap24"
-                      tools:text="Coordinates link" />
+                      tools:text="Coordinates link"
+                      app:drawableStartCompat="?attr/iconMap24" />
 
                     <Button
                       android:id="@+id/coordinate_edit"

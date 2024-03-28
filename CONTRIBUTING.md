@@ -1,7 +1,8 @@
 Thanks for considering to contribute to this project! A few guidelines for
 people who want to contribute their code to this software are documented in
 [this project's Wiki](https://github.com/commons-app/apps-android-commons/wiki/Contributing-Guidelines).
-If you're not sure where to start head on to [this wiki page](https://github.com/commons-app/apps-android-commons/wiki/Volunteers-welcome!).
+If you're not sure where to start head on
+to [this wiki page](https://github.com/commons-app/apps-android-commons/wiki/Volunteers-welcome!).
 
 Here's a gist of the guidelines,
 
@@ -16,10 +17,10 @@ The body should provide a meaningful commit message.
 
 1. Write Javadocs
 
-    We require contributors to include Javadocs for all new methods and classes
-    submitted via PRs (after 1 May 2018). This is aimed at making it easier for
-    new contributors to dive into our codebase, especially those who are new to
-    Android development. A few things to note:
+   We require contributors to include Javadocs for all new methods and classes
+   submitted via PRs (after 1 May 2018). This is aimed at making it easier for
+   new contributors to dive into our codebase, especially those who are new to
+   Android development. A few things to note:
 
     - This should not replace the need for code that is easily-readable in
       and of itself

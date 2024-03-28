@@ -46,7 +46,9 @@ public class PickedFiles implements Constants {
      */
     private static File tempImageDirectory(@NonNull Context context) {
         File privateTempDir = new File(context.getCacheDir(), DEFAULT_FOLDER_NAME);
-        if (!privateTempDir.exists()) privateTempDir.mkdirs();
+        if (!privateTempDir.exists()) {
+            privateTempDir.mkdirs();
+        }
         return privateTempDir;
     }
 

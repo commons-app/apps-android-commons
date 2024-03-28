@@ -646,6 +646,7 @@ class ZoomableActivity : BaseActivity() {
     /**
      * Send selected images in fragment
      */
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (!images.isNullOrEmpty()) {
             val returnIntent = Intent()

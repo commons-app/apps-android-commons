@@ -41,11 +41,11 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:clickable="true"
-      android:drawableRight="@drawable/ic_baseline_arrow_drop_down_24"
       android:padding="@dimen/dimen_2"
       android:textSize="18sp"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+      app:layout_constraintTop_toTopOf="parent"
+      app:drawableRightCompat="@drawable/ic_baseline_arrow_drop_down_24" />
 
     <com.google.android.material.textfield.TextInputLayout
       android:id="@+id/caption_item_edit_text_input_layout"

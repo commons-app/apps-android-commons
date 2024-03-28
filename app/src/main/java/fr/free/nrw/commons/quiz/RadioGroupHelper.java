@@ -58,7 +58,9 @@ public class RadioGroupHelper {
      */
     View.OnClickListener onClickListener = v -> {
         for (CompoundButton rb : radioButtons) {
-            if (rb != v) rb.setChecked(false);
+            if (rb != v) {
+                rb.setChecked(false);
+            }
         }
     };
 }

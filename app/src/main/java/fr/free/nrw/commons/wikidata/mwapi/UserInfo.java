@@ -27,8 +27,10 @@ public class UserInfo {
 
     @NonNull
     public String blockexpiry() {
-        if (blockexpiry != null)
+        if (blockexpiry != null) {
             return blockexpiry;
-        else return "";
+        } else {
+            return "";
+        }
     }
 }

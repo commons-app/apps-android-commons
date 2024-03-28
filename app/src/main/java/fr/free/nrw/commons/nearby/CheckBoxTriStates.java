@@ -41,6 +41,7 @@ public class CheckBoxTriStates extends AppCompatCheckBox {
     private final OnCheckedChangeListener privateListener = new CompoundButton.OnCheckedChangeListener() {
 
         // checkbox status is changed from uncheck to checked.
+        @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             switch (state) {
                 case UNKNOWN:

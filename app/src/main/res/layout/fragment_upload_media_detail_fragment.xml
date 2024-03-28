@@ -52,7 +52,7 @@
                       android:layout_marginEnd="@dimen/standard_gap"
                       android:layout_marginRight="@dimen/tiny_gap"
                       android:gravity="center_vertical"
-                      android:textSize="18dp"
+                      android:textSize="18sp"
                       android:textStyle="bold"
                       tools:text="Step 1 of 15" />
 

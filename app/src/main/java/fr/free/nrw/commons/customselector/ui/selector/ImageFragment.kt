@@ -250,6 +250,7 @@ class ImageFragment : CommonsDaggerSupportFragment(), RefreshUIListener, PassDat
     /**
      * Attaching data listener
      */
+    @Deprecated("Deprecated in Java")
     override fun onAttach(activity: Activity) {
         super.onAttach(activity)
         try {
