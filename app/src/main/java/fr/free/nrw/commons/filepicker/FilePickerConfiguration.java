@@ -7,7 +7,7 @@ public class FilePickerConfiguration implements Constants {
 
     private Context context;
 
-    FilePickerConfiguration(Context context) {
+    public FilePickerConfiguration(Context context) {
         this.context = context;
     }
 
