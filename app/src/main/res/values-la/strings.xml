@@ -13,8 +13,8 @@
   <string name="password">Tessera</string>
   <string name="login">Nomen dare</string>
   <string name="logging_in_title">Aperiens</string>
-  <string name="login_success">Feliciter nomen dedisti</string>
-  <string name="login_failed">Non contingit nomen dare</string>
+  <string name="login_success" fuzzy="true">Feliciter nomen dedisti</string>
+  <string name="login_failed" fuzzy="true">Non contingit nomen dare</string>
   <string name="uploading_started">Immissio incepta</string>
   <string name="upload_completed_notification_title">%1$s inmissum!</string>
   <string name="upload_completed_notification_text">Tangere ad conlationem tuam videndam</string>
@@ -34,7 +34,7 @@
   <string name="menu_share">Communicare</string>
   <string name="share_title_hint" fuzzy="true">Titulus</string>
   <string name="share_description_hint">Descriptio</string>
-  <string name="login_failed_generic">Ratio aperiri non potuit</string>
+  <string name="login_failed_generic" fuzzy="true">Ratio aperiri non potuit</string>
   <string name="share_upload_button">Imaginem imponere</string>
   <string name="multiple_share_base_title">Seriem imaginum nuncupare</string>
   <string name="provider_modifications">Mutata</string>

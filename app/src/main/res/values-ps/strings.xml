@@ -22,8 +22,8 @@
   <string name="signup">نومليکنه</string>
   <string name="logging_in_title">په ننوتلو کې دی</string>
   <string name="logging_in_message">لطفاً تم شۍ …</string>
-  <string name="login_success">غونډال کې بريالی ورننوتلۍ!</string>
-  <string name="login_failed">غونډال کې ننوتنه نابريالې شوه!</string>
+  <string name="login_success" fuzzy="true">غونډال کې بريالی ورننوتلۍ!</string>
+  <string name="login_failed" fuzzy="true">غونډال کې ننوتنه نابريالې شوه!</string>
   <string name="upload_failed">دوتنه و نه موندل شوه. لطفاً د يوې بلې دوتنې د موندلو هڅه وکړئ.</string>
   <string name="uploading_started">پورته کېدنه پيل شوه!</string>
   <string name="upload_completed_notification_title">%1$s پورته شوی!</string>
@@ -40,10 +40,10 @@
   <string name="menu_share">شريکول</string>
   <string name="share_title_hint" fuzzy="true">سرليک</string>
   <string name="share_description_hint">څرگندونه</string>
-  <string name="login_failed_network">د ننوتلو توان نلري - د شبکې ناکامي</string>
+  <string name="login_failed_network" fuzzy="true">د ننوتلو توان نلري - د شبکې ناکامي</string>
   <string name="login_failed_throttled">ډیری ناکامه هڅې. لطفا څو دقیقې وروسته بیا هڅه وکړئ.</string>
   <string name="login_failed_blocked">بخښنه غواړو، په دي کارن د کامنز لخوا بنديز ولګول شو</string>
-  <string name="login_failed_generic">غونډال کې ننوتنه نابريالې شوه</string>
+  <string name="login_failed_generic" fuzzy="true">غونډال کې ننوتنه نابريالې شوه</string>
   <string name="share_upload_button">پورته کول</string>
   <string name="provider_modifications">بدلونونه</string>
   <string name="menu_upload_single">پورته کول</string>

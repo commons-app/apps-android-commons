@@ -53,10 +53,10 @@
   <string name="logging_in_title">လော့ဂ်အင် ဝင်ရောက်နေသည်...</string>
   <string name="logging_in_message">ခေတ္တစောင့်ပါ...</string>
   <string name="updating_caption_message">ကျေးဇူးပြု၍ ခဏစောင့်ပါ...</string>
-  <string name="login_success">လော့အင် အောင်မြင်သည်</string>
-  <string name="login_failed">လော့အင် မအောင်မြင်ပါ</string>
+  <string name="login_success" fuzzy="true">လော့အင် အောင်မြင်သည်</string>
+  <string name="login_failed" fuzzy="true">လော့အင် မအောင်မြင်ပါ</string>
   <string name="upload_failed">ဖိုင်မတွေ့ပါ၊ အခြးဖိုင်တစ်ခု စမ်းကြည့်ပါ။</string>
-  <string name="authentication_failed">စစ်ဆေးခြင်း မအောင်မြင်ပါ၊ ထပ်မံ၍ လော့အင်ဝင်ပါ။</string>
+  <string name="authentication_failed" fuzzy="true">စစ်ဆေးခြင်း မအောင်မြင်ပါ၊ ထပ်မံ၍ လော့အင်ဝင်ပါ။</string>
   <string name="uploading_started">Upload စတင်ပါပြီ</string>
   <string name="upload_completed_notification_title">%1$s တင်ပြီးပြီ</string>
   <string name="upload_progress_notification_title_start">ဖိုင်အက်ပလုဒ်တင်နေသည်- %1$s</string>
@@ -80,10 +80,10 @@
   <string name="add_caption_toast">ဤဖိုင်အတွက် ပုံစာသတ်မှတ်ပေးပါ</string>
   <string name="share_description_hint">ဖော်ပြချက်</string>
   <string name="share_caption_hint">ပုံစာ</string>
-  <string name="login_failed_network">လော့အင် မဝင်နိုင်ပါ - ကွန်ရက် အမှား</string>
+  <string name="login_failed_network" fuzzy="true">လော့အင် မဝင်နိုင်ပါ - ကွန်ရက် အမှား</string>
   <string name="login_failed_throttled">မအောင်မြင်သော ကြိုးပမ်းများစွာ ရှိပါပြီ။ နောက်မိနစ်အနည်းငယ်ကြာလျင် ထပ်မံစမ်းကြည့်ပါ။</string>
   <string name="login_failed_blocked">စိတ်မကောင်းပါ၊ ဤအသုံးပြုသူအား ကွန်မွန်းစ်မှ ပိတ်ပင်ထားသည်</string>
-  <string name="login_failed_generic">လော့ဂ်အင် မအောင်မြင်ပါ</string>
+  <string name="login_failed_generic" fuzzy="true">လော့ဂ်အင် မအောင်မြင်ပါ</string>
   <string name="share_upload_button">တင်ရန်</string>
   <string name="provider_modifications">ပြုပြင်မှုများ</string>
   <string name="menu_upload_single">တင်ရန်</string>
@@ -199,7 +199,7 @@
   <string name="nominated_see_more">အသေးစိတ်အတွက် ဝဘ်စာမျက်ကိုကြည့်ပါ</string>
   <string name="skip_login">ကျော်ရန်</string>
   <string name="navigation_item_login">အကောင့်ဝင်ရန်</string>
-  <string name="skip_login_title">အကောင့်ထဲဝင်ခြင်းကို အမှန်တကယ် ကျော်သွားလိုပါသလား</string>
+  <string name="skip_login_title" fuzzy="true">အကောင့်ထဲဝင်ခြင်းကို အမှန်တကယ် ကျော်သွားလိုပါသလား</string>
   <string name="skip_login_message">အနာဂတ်ကာလတွင် ရုပ်ပုံများတင်ရန် အကောင့်ထဲဝင်ရပါမည်။</string>
   <string name="login_alert_message">ဤအင်္ဂါရပ်ကို အသုံးပြုရန် အကောင့်ထဲသို့ဝင်ပါ</string>
   <string name="nearby_location_not_available">အနီးအနား ကောင်းမွန်စွာ အလုပ်မလုပ်ပါ၊ တည်နေရာ မရရှိနိုင်ပါ။</string>
@@ -246,7 +246,7 @@
   <string name="construction_event_answer">နည်းပညာ သို့မဟုတ် ယဉ်ကျေးမှုကိုပြသသော ရုပ်ပုံများသည် ကွန်မွန်းစ်ပေါ်တွင် အလွန်ကြိုဆိုပါသည်။</string>
   <string name="congratulatory_message_quiz">အဖြေများ၏ %1$s ကို မှန်ကန်စွာဖြေခဲ့သည်။ ဂုဏ်ယူပါ၏။</string>
   <string name="warning_for_no_answer">မေးခွန်းကိုဖြေဆိုရန် ရွေးစရာနှစ်ခုထဲမှ တစ်ခုကို ရွေးချယ်ပါ</string>
-  <string name="user_not_logged_in">လော့ဂ်အင်ကာလ သက်တမ်းကုန်သွားသည်၊ ထပ်မံလော့ဂ်အင်ပြန်ဝင်ပေးပါ။</string>
+  <string name="user_not_logged_in" fuzzy="true">လော့ဂ်အင်ကာလ သက်တမ်းကုန်သွားသည်၊ ထပ်မံလော့ဂ်အင်ပြန်ဝင်ပေးပါ။</string>
   <string name="quiz_result_share_message">သင်၏ဉာဏ်စမ်းများကို မိတ်ဆွေများနှင့် မျှဝေပါ။</string>
   <string name="continue_message">ဆက်လက်</string>
   <string name="correct">အဖြေမှန်</string>
@@ -298,7 +298,7 @@
   <string name="never_ask_again">နောက်တခါ ထပ်မမေးပါနှင့်</string>
   <string name="display_location_permission_title">တည်နေရာခွင့်ပြုချက်ကို တောင်းခံရန်</string>
   <string name="ends_on">ပြီးဆုံးမည်-</string>
-  <string name="this_function_needs_network_connection">ဤလုပ်ဆောင်ချက်သည် ကွန်ရက်ချိတ်ဆက်မှုကိုလိုအပ်သည်၊ သင်၏ချိတ်ဆက်မှု အပြင်အဆင်များကို စစ်ဆေးပါ။</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">ဤလုပ်ဆောင်ချက်သည် ကွန်ရက်ချိတ်ဆက်မှုကိုလိုအပ်သည်၊ သင်၏ချိတ်ဆက်မှု အပြင်အဆင်များကို စစ်ဆေးပါ။</string>
   <string name="error_processing_image">ရုပ်ပုံကို ပရိုဆက်ဆင်းလုပ်နေစဉ် အမှားဖြစ်ပွားခဲ့သည်။ ထပ်မံကြိုးစားကြည့်ပါ။</string>
   <string name="check_category_edit_summary">ကဏ္ဍစစ်ဆေးမှု တောင်းဆိုနေသည်</string>
   <string name="check_category_success_title">ကဏ္ဍစစ်ဆေးမှု တောင်းဆိုခဲ့သည်</string>

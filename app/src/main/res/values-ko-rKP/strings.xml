@@ -43,10 +43,10 @@
   <string name="signup">가입하기</string>
   <string name="logging_in_title">가입 중</string>
   <string name="logging_in_message">기다려주세요…</string>
-  <string name="login_success">가입 성공!</string>
-  <string name="login_failed">가입 실패!</string>
+  <string name="login_success" fuzzy="true">가입 성공!</string>
+  <string name="login_failed" fuzzy="true">가입 실패!</string>
   <string name="upload_failed">서류를 찾을수 없습니다. 다른 서류를 사용해주십시오.</string>
-  <string name="authentication_failed">인증을 실패하였습니다. 다시 가입해주십시오</string>
+  <string name="authentication_failed" fuzzy="true">인증을 실패하였습니다. 다시 가입해주십시오</string>
   <string name="uploading_started">올리적재를 시작했습니다!</string>
   <string name="upload_completed_notification_title">%1$s 서류를 올리적재하였습니다!</string>
   <string name="upload_completed_notification_text">당신의 올리적재를 보려면 두드리세요</string>
@@ -67,11 +67,11 @@
   <string name="menu_share">공유</string>
   <string name="share_title_hint" fuzzy="true">제목 (필수)</string>
   <string name="share_description_hint">설명</string>
-  <string name="login_failed_network">가입할수 없습니다 - 망 오유입니다</string>
+  <string name="login_failed_network" fuzzy="true">가입할수 없습니다 - 망 오유입니다</string>
   <string name="login_failed_throttled">실패한 시도가 너무 많습니다. 몇분후에 다시 시도하세요.</string>
   <string name="login_failed_blocked">죄송합니다, 이 사용자는 공용에서 차단되였습니다</string>
   <string name="login_failed_2fa_needed">두인자검증부호를 제공해야 합니다.</string>
-  <string name="login_failed_generic">가입 실패</string>
+  <string name="login_failed_generic" fuzzy="true">가입 실패</string>
   <string name="share_upload_button">올리적재</string>
   <string name="multiple_share_base_title">이 모임에 이름짓기</string>
   <string name="provider_modifications">바뀜</string>
@@ -198,7 +198,7 @@
   <string name="nominated_see_more" fuzzy="true">&lt;u&gt;상세 내용은 웨브페지를 참고하십시오&lt;/u&gt;</string>
   <string name="skip_login">건너뛰기</string>
   <string name="navigation_item_login">가입</string>
-  <string name="skip_login_title">가입을 정말로 건너뛰시겠습니까?</string>
+  <string name="skip_login_title" fuzzy="true">가입을 정말로 건너뛰시겠습니까?</string>
   <string name="skip_login_message" fuzzy="true">화상을 올리적재할수 없습니다.</string>
   <string name="login_alert_message">이 기능을 사용하려면 가입해주십시오</string>
   <string name="copy_wikicode">위키본문을 오려둠판에 복사</string>

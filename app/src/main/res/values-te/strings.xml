@@ -63,10 +63,10 @@
   <string name="logging_in_message">వేచివుండండి…</string>
   <string name="updating_caption_title">ఉల్లేఖనలను, వివరణలనూ తాజాకరిస్తున్నాం</string>
   <string name="updating_caption_message">వేచి ఉండండి…</string>
-  <string name="login_success">లాగిన్ విజయవంతమైంది!</string>
-  <string name="login_failed">లాగిన్ విఫలమైంది!</string>
+  <string name="login_success" fuzzy="true">లాగిన్ విజయవంతమైంది!</string>
+  <string name="login_failed" fuzzy="true">లాగిన్ విఫలమైంది!</string>
   <string name="upload_failed">ఫైలు కనబడలేదు. మరో ఫైలు కోసం ప్రయత్నించండి.</string>
-  <string name="authentication_failed">అథీకరణ విఫలమైంది, మళ్ళీ ప్రయత్నించండి</string>
+  <string name="authentication_failed" fuzzy="true">అథీకరణ విఫలమైంది, మళ్ళీ ప్రయత్నించండి</string>
   <string name="uploading_started">ఎక్కింపు మొదలైంది!</string>
   <string name="uploading_queued">ఎక్కింపు వరుసలో ఉంది (పరిమిత కనెక్షన్ల మోడ్ చేతనంగా ఉంది)</string>
   <string name="upload_completed_notification_title">%1$s ను ఎక్కించాం!</string>
@@ -93,11 +93,11 @@
   <string name="add_caption_toast">ఈ ఫైలుకు ఒక శీర్షిక ఇవ్వండి</string>
   <string name="share_description_hint">వివరణ</string>
   <string name="share_caption_hint">వ్యాఖ్య</string>
-  <string name="login_failed_network">లాగిన్ చెయ్యలేకపోయాం - నెట్‍వర్కు విఫలం</string>
+  <string name="login_failed_network" fuzzy="true">లాగిన్ చెయ్యలేకపోయాం - నెట్‍వర్కు విఫలం</string>
   <string name="login_failed_throttled">మరీ ఎక్కువ విఫల యత్నాలు చేసారు. కొద్ది నిముషాలాగి ప్రయత్నించండి</string>
   <string name="login_failed_blocked">ఈ వాడుకరి కామన్స్ లో నిరోధించబడ్డారు, సారీ.</string>
   <string name="login_failed_2fa_needed">మీ ద్విముఖ ఆథెంటికేషను కోడును ఇవ్వాలి.</string>
-  <string name="login_failed_generic">లాగిన్ విఫలమైంది</string>
+  <string name="login_failed_generic" fuzzy="true">లాగిన్ విఫలమైంది</string>
   <string name="share_upload_button">ఎక్కింపు</string>
   <string name="multiple_share_base_title">ఈ సమితికి పేరు పెట్టండి</string>
   <string name="provider_modifications">మార్పులు</string>
@@ -247,7 +247,7 @@
   <string name="nominated_see_more">వివరాల కోసం వెబ్‌పేజీని చూడండి</string>
   <string name="skip_login">దాటవేయి</string>
   <string name="navigation_item_login">లాగినవండి</string>
-  <string name="skip_login_title">నిజంగానే లాగినవరా?</string>
+  <string name="skip_login_title" fuzzy="true">నిజంగానే లాగినవరా?</string>
   <string name="skip_login_message">భవిష్యత్తులో మీరు బొమ్మలు ఎక్కించాలంటే, లాగినవాల్సి ఉంటుంది.</string>
   <string name="login_alert_message">ఈ అంశాన్ని వాడాలంటే లాగినవండి</string>
   <string name="copy_wikicode">వికీటెక్స్టును క్లిప్‌బోర్డుకు కాపీ చెయ్యి</string>
@@ -312,7 +312,7 @@
   <string name="construction_event_answer">సాంకేతికతకు, సంస్కృతులకూ సంబంధించిన బొమ్మలను కామన్స్ రెండు చేతులా స్వాగతిస్తుంది.</string>
   <string name="congratulatory_message_quiz">మీ సమాధానాల్లో %1$s సరైనవి. అభినందనలు!</string>
   <string name="warning_for_no_answer">ప్రశ్నకు సమాధానంగా ఇచ్చిన రెండిట్లో ఒకదాన్ని ఎంచుకోండి</string>
-  <string name="user_not_logged_in">లాగిన్ సెషను మురిగిపోయింది. మళ్ళీ లాగినవండి.</string>
+  <string name="user_not_logged_in" fuzzy="true">లాగిన్ సెషను మురిగిపోయింది. మళ్ళీ లాగినవండి.</string>
   <string name="quiz_result_share_message">మీ క్విజ్‌ను మిత్రులకు చూపించండి!</string>
   <string name="continue_message">కొనసాగించు</string>
   <string name="correct">సరైన సమాధానం</string>
@@ -392,13 +392,13 @@
   <string name="never_ask_again">దీన్ని ఇంకెప్పుడూ అడగకు</string>
   <string name="display_location_permission_title">స్థాన అనుమతి కోసం అడుగు</string>
   <string name="display_location_permission_explanation">చుట్టుపక్కల స్థలం గమనింపును చూపించేందుకు, అవసరమైనప్పుడల్లా స్థలపు అనుమతి అడుగు</string>
-  <string name="achievements_fetch_failed">ఏదో లోపం జరిగింది, మీరు సాధించిన వాటిని తేలేక పోయాం</string>
+  <string name="achievements_fetch_failed" fuzzy="true">ఏదో లోపం జరిగింది, మీరు సాధించిన వాటిని తేలేక పోయాం</string>
   <string name="achievements_fetch_failed_ultimate_achievement">మా మూల్యాంకన వ్యవస్థ అందుకోలేని స్థాయిలో మీరు తోడ్పాట్లు చేసారు. ఇది అత్యున్నత స్థాయి తోడ్పాటు.</string>
   <string name="ends_on">ముగిసే సమయం:</string>
   <string name="display_campaigns">ప్రచారాలను చూపించు</string>
   <string name="display_campaigns_explanation">ప్రస్తుతం నడుస్తున్న ప్రచారాలను చూడండి</string>
   <string name="nearby_campaign_dismiss_message">ఇక మీరు ప్రచారాలను చూడలేరు. అయితే, మీరు కావాలను కున్నపుడు సెట్టింగుల్లో మార్చుకుని ఈ గమనింపును చేతనం చేసుకోవచ్చు.</string>
-  <string name="this_function_needs_network_connection">ఈ పనికి నెట్‌వర్కు కనెక్షను కావాలి. మీ కనెక్షను సెట్టింగులను సరిచూసుకోండి.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">ఈ పనికి నెట్‌వర్కు కనెక్షను కావాలి. మీ కనెక్షను సెట్టింగులను సరిచూసుకోండి.</string>
   <string name="error_processing_image">బొమ్మను ప్రాసెస్ చేసేటపుడు లోపం దొర్లింది. మళ్ళీ ప్రయత్నించండి!</string>
   <string name="getting_edit_token">దిద్దుబాటు చేసేందుకు టోకెను తెస్తున్నాం</string>
   <string name="check_category_adding_template">వర్గాన్ని సరిచూసేందుకు మూసను చేరుస్తున్నాం</string>
@@ -512,7 +512,7 @@
   <string name="place_state_needs_photo">ఫోటో కావాలి</string>
   <string name="place_type">స్థలం రకం:</string>
   <string name="nearby_search_hint">వంతెన, మ్యూజియమ్, హోటలు వగైరా.</string>
-  <string name="you_must_reset_your_passsword">లాగినవడంలో ఏదో లోపం జరిగింది, మీ సంకేతపదాన్ని మార్చుకోవాలి !!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">లాగినవడంలో ఏదో లోపం జరిగింది, మీ సంకేతపదాన్ని మార్చుకోవాలి !!</string>
   <string name="title_for_media">మాధ్యమం</string>
   <string name="title_for_child_classes">చైల్డ్ క్లాస్</string>
   <string name="title_for_parent_classes">పేరెంట్ క్లాస్</string>

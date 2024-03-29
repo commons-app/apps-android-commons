@@ -63,10 +63,10 @@
   <string name="signup">Rexistrarse</string>
   <string name="logging_in_title">Accedendo ao sistema</string>
   <string name="logging_in_message">Por favor, agarde…</string>
-  <string name="login_success">Accedeu correctamente!</string>
-  <string name="login_failed">Erro durante o inición de sesión!</string>
+  <string name="login_success" fuzzy="true">Accedeu correctamente!</string>
+  <string name="login_failed" fuzzy="true">Erro durante o inición de sesión!</string>
   <string name="upload_failed">Ficheiro non atopado. Por favor, probe con outro.</string>
-  <string name="authentication_failed">Erro de autenticación, por favor inicia unha nova sesión</string>
+  <string name="authentication_failed" fuzzy="true">Erro de autenticación, por favor inicia unha nova sesión</string>
   <string name="uploading_started">A carga comezou!</string>
   <string name="upload_completed_notification_title">Cargouse \"%1$s\"!</string>
   <string name="upload_completed_notification_text">Prema para ollar a súa carga</string>
@@ -87,11 +87,11 @@
   <string name="menu_share">Compartir</string>
   <string name="share_title_hint">Lenda (Obrigatoria)</string>
   <string name="share_description_hint">Descrición</string>
-  <string name="login_failed_network">Erro ao acceder ao sistema: Fallou a rede</string>
+  <string name="login_failed_network" fuzzy="true">Erro ao acceder ao sistema: Fallou a rede</string>
   <string name="login_failed_throttled">Demasiados intentos incorrectos. Inténteo de novo nuns minutos.</string>
   <string name="login_failed_blocked">Sentímolo, este usuario está bloqueado en Commons</string>
   <string name="login_failed_2fa_needed">Debe proporcionar o seu código de autenticación de dous factores.</string>
-  <string name="login_failed_generic">Erro durante o inición de sesión</string>
+  <string name="login_failed_generic" fuzzy="true">Erro durante o inición de sesión</string>
   <string name="share_upload_button">Subir</string>
   <string name="multiple_share_base_title">Dea un nome a este conxunto</string>
   <string name="provider_modifications">Modificacións</string>
@@ -232,7 +232,7 @@
   <string name="nominated_see_more">Ver páxina web para máis detalles</string>
   <string name="skip_login">Omitir</string>
   <string name="navigation_item_login">Acceder ao sistema</string>
-  <string name="skip_login_title">Realmente quere saltar o inicio de sesión?</string>
+  <string name="skip_login_title" fuzzy="true">Realmente quere saltar o inicio de sesión?</string>
   <string name="skip_login_message">Terá que iniciar sesión para subir imaxes no futuro.</string>
   <string name="login_alert_message">Por favor, inicie a sesión para usar esta funcionalidade</string>
   <string name="copy_wikicode">Copiar o texto wiki ó portapapeis</string>
@@ -290,7 +290,7 @@
   <string name="construction_event_answer">Fotografiás que amosen tecnoloxía ou cultura son moi benvidas en Commons</string>
   <string name="congratulatory_message_quiz">Acadou un %1$s de respostas correctas. Parabéns!</string>
   <string name="warning_for_no_answer">Escolla unha das dúas opcións para contestar a pregunta</string>
-  <string name="user_not_logged_in">A sesión caducou, por favor inicia unha nova sesión.</string>
+  <string name="user_not_logged_in" fuzzy="true">A sesión caducou, por favor inicia unha nova sesión.</string>
   <string name="quiz_result_share_message">Comparta o seu cuestionario cos seus amigos!</string>
   <string name="continue_message">Continuar</string>
   <string name="correct">Resposta correcta</string>
@@ -363,12 +363,12 @@
   <string name="never_ask_again">Non volver a preguntar isto nunca</string>
   <string name="display_location_permission_title" fuzzy="true">Amosar permiso de localización</string>
   <string name="display_location_permission_explanation">Pedir permisos de localización cando sexa necesario para a funcionalidade de notificación de proximidade.</string>
-  <string name="achievements_fetch_failed">Algo foi mal, non puidemos obter as túas achegas</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Algo foi mal, non puidemos obter as túas achegas</string>
   <string name="ends_on">Finaliza o:</string>
   <string name="display_campaigns">Amosar campañas</string>
   <string name="display_campaigns_explanation">Ver as campañas en curso</string>
   <string name="nearby_campaign_dismiss_message">Xa non verá as campañas. Porén, pode volver habilitar esta notificación na configuración.</string>
-  <string name="this_function_needs_network_connection">Esta función require conexión de rede, verifique a súa configuración de conexión.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Esta función require conexión de rede, verifique a súa configuración de conexión.</string>
   <string name="error_processing_image">Houbo un erro ó procesar a imaxe. Por favor, ténteo de novoǃ</string>
   <string name="getting_edit_token">Obter un identificador para editar</string>
   <string name="check_category_adding_template">Engadir modelo para o control de categoría</string>

@@ -53,10 +53,10 @@
   <string name="logging_in_title">Prijava</string>
   <string name="logging_in_message">Sačekajte…</string>
   <string name="updating_caption_message">Sačekajte…</string>
-  <string name="login_success">Prijava uspješna!</string>
-  <string name="login_failed">Prijava neuspješna!</string>
+  <string name="login_success" fuzzy="true">Prijava uspješna!</string>
+  <string name="login_failed" fuzzy="true">Prijava neuspješna!</string>
   <string name="upload_failed">Nisam pronašao datoteku. Pokušajte sa drugom.</string>
-  <string name="authentication_failed">Potvrda identiteta nije uspela. Prijavite se ponovo.</string>
+  <string name="authentication_failed" fuzzy="true">Potvrda identiteta nije uspela. Prijavite se ponovo.</string>
   <string name="uploading_started">Otpremanje je započeto!</string>
   <string name="upload_completed_notification_title">Datoteka „%1$s” je otpremljena!</string>
   <string name="upload_completed_notification_text">Dodirnite da biste pogledali datoteku</string>
@@ -81,11 +81,11 @@
   <string name="share_title_hint" fuzzy="true">Naslov (obavez.)</string>
   <string name="share_description_hint">Opis</string>
   <string name="share_caption_hint">Opis</string>
-  <string name="login_failed_network">Ne mogu Vas prijaviti — mreža ne radi</string>
+  <string name="login_failed_network" fuzzy="true">Ne mogu Vas prijaviti — mreža ne radi</string>
   <string name="login_failed_throttled">Napraveni su previše neuspješnih pokušaja. Pokušajte pak za neku minutu.</string>
   <string name="login_failed_blocked">Žao nam je, korisnik je blokiran na Ostavi</string>
   <string name="login_failed_2fa_needed">Morate upisati svoj kôd za dvočiniteljsku potvrdu identiteta.</string>
-  <string name="login_failed_generic">Prijava nije uspjela</string>
+  <string name="login_failed_generic" fuzzy="true">Prijava nije uspjela</string>
   <string name="share_upload_button">Otpremi</string>
   <string name="multiple_share_base_title">Dajte ime ovom kompletu</string>
   <string name="provider_modifications">Preinačivanja</string>
@@ -210,7 +210,7 @@
   <string name="nominated_see_more">Pogledajte mrežnu stranicu za više informacija</string>
   <string name="skip_login">Preskoči</string>
   <string name="navigation_item_login">Prijavi se</string>
-  <string name="skip_login_title">Zaista želite da preskočite prijavu?</string>
+  <string name="skip_login_title" fuzzy="true">Zaista želite da preskočite prijavu?</string>
   <string name="skip_login_message">U budućnosti ćete se morati prijaviti kako biste postavili slike.</string>
   <string name="login_alert_message">Prijavite se da biste koristili ovu funkciju</string>
   <string name="nearby_location_not_available">„U blizini“ možda ne radi kako treba. Lokacija nije dostupna.</string>

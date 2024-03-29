@@ -12,8 +12,8 @@
   <string name="signup">खाता खाेल्नुहाेस्</string>
   <string name="logging_in_title">भितरीन्‍नाछ़</string>
   <string name="logging_in_message">थोक्काइ पखऽ …</string>
-  <string name="login_success">लग इन सफल!</string>
-  <string name="login_failed">लगइन असफल!</string>
+  <string name="login_success" fuzzy="true">लग इन सफल!</string>
+  <string name="login_failed" fuzzy="true">लगइन असफल!</string>
   <string name="upload_failed">फाइल नाइपायियो। कृपया दोसरो फाइल प्रयास अरऽ।</string>
   <string name="authentication_failed" fuzzy="true">प्रमाणीकरण असफल!</string>
   <string name="uploading_started">अपलोड शुरू होइग्यो!</string>
@@ -27,7 +27,7 @@
   <string name="menu_share">बाँँणऽ</string>
   <string name="share_title_hint" fuzzy="true">शीर्षक</string>
   <string name="share_description_hint">बेलिविस्तार</string>
-  <string name="login_failed_network">लगइन अद्दाइ असमर्थ - नेटवर्क असफलता</string>
+  <string name="login_failed_network" fuzzy="true">लगइन अद्दाइ असमर्थ - नेटवर्क असफलता</string>
   <string name="categories_activity_title">श्रेणीइन</string>
   <string name="title_activity_settings">मिलानअन</string>
   <string name="menu_about">बारेमी</string>

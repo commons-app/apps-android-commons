@@ -128,13 +128,13 @@
   <string name="logging_in_message">Пожалуйста, подождите…</string>
   <string name="updating_caption_title">Подписи и описания обновляются</string>
   <string name="updating_caption_message">Пожалуйста, подождите…</string>
-  <string name="login_success">Вход выполнен успешно!</string>
-  <string name="login_failed">Ошибка входа в систему!</string>
+  <string name="login_success" fuzzy="true">Вход выполнен успешно!</string>
+  <string name="login_failed" fuzzy="true">Ошибка входа в систему!</string>
   <string name="upload_failed">Файл не найден. Попробуйте другой файл.</string>
   <string name="retry_limit_reached">Достигнут максимальный лимит повторов! Пожалуйста, отмените загрузку и повторите попытку.</string>
   <string name="unrestricted_battery_mode">Выключить оптимизацию батареи?</string>
   <string name="suggest_unrestricted_mode">Загрузка более 3 изображений работает более надежно, если оптимизация заряда батареи отключена. Пожалуйста, отключите оптимизацию заряда батареи для приложения Викисклада в настройках, чтобы обеспечить плавную загрузку. \n\nВозможные действия по отключению оптимизации заряда батареи:\n\nШаг 1: Нажмите кнопку \'Настройки\' ниже.\n\nШаг 2: Переключитесь с \'Не оптимизировано\' на \'Все приложения\'.\n\nШаг 3. Найдите «Викисклад» или «fr.free.nrw.commons».\n\nШаг 4. Нажмите на него и выберите \'Не оптимизировать\'.\n\nШаг 5: Нажмите \'Готово\'.</string>
-  <string name="authentication_failed">Ошибка аутентификации. Пожалуйста, авторизуйтесь ещё раз.</string>
+  <string name="authentication_failed" fuzzy="true">Ошибка аутентификации. Пожалуйста, авторизуйтесь ещё раз.</string>
   <string name="uploading_started">Загрузка началась!</string>
   <string name="uploading_queued">Загрузка в очереди (включен режим ограниченного подключения)</string>
   <string name="upload_completed_notification_title">%1$s загружен!</string>
@@ -161,11 +161,11 @@
   <string name="add_caption_toast">Пожалуйста, укажите название этого файла</string>
   <string name="share_description_hint">Описание</string>
   <string name="share_caption_hint">Подпись</string>
-  <string name="login_failed_network">Не удаётся войти — сбой сети</string>
+  <string name="login_failed_network" fuzzy="true">Не удаётся войти — сбой сети</string>
   <string name="login_failed_throttled">Слишком много неудачных попыток. Пожалуйста, попробуйте ещё раз через несколько минут.</string>
   <string name="login_failed_blocked">Извините, но участник с таким именем был заблокирован на Викискладе</string>
   <string name="login_failed_2fa_needed">Вы должны ввести код двухфакторной аутентификации.</string>
-  <string name="login_failed_generic">Ошибка входа в систему!</string>
+  <string name="login_failed_generic" fuzzy="true">Ошибка входа в систему!</string>
   <string name="share_upload_button">Загрузка</string>
   <string name="multiple_share_base_title">Введите название для этой группы файлов</string>
   <string name="provider_modifications">Изменения</string>
@@ -322,7 +322,7 @@
   <string name="nominated_see_more">См. страницу для получения подробной информации</string>
   <string name="skip_login">Пропустить</string>
   <string name="navigation_item_login">Войти</string>
-  <string name="skip_login_title">Вы действительно хотите пропустить авторизацию?</string>
+  <string name="skip_login_title" fuzzy="true">Вы действительно хотите пропустить авторизацию?</string>
   <string name="skip_login_message">Вам следует залогиниться чтобы загружать изображения.</string>
   <string name="login_alert_message">Войдите, чтобы использовать эту функцию</string>
   <string name="copy_wikicode">Копирование викикода в буфер обмена</string>
@@ -389,7 +389,7 @@
   <string name="construction_event_answer">Изображения в области техники или культуры весьма желательны на Викискладе.</string>
   <string name="congratulatory_message_quiz">Вы дали %1$s {{PLURAL:%1$s|zero=правильных ответов|one= правильный ответ|few=правильного ответа|правильных ответов}}. Так держать!</string>
   <string name="warning_for_no_answer">Выберите один из двух вариантов ответа на вопрос</string>
-  <string name="user_not_logged_in">Сессия авторизации истекла, пожалуйста авторизуйтесь заново.</string>
+  <string name="user_not_logged_in" fuzzy="true">Сессия авторизации истекла, пожалуйста авторизуйтесь заново.</string>
   <string name="quiz_result_share_message">Поделитесь результатами опроса со своими друзьями!</string>
   <string name="continue_message">Продолжить</string>
   <string name="correct">Правильный ответ</string>
@@ -473,7 +473,7 @@
   <string name="never_ask_again">Больше не спрашивать</string>
   <string name="display_location_permission_title">Запросить разрешение на геолокацию</string>
   <string name="display_location_permission_explanation">Запрашивать разрешение на геолокацию, которое требуется для нотификаций мест поблизости.</string>
-  <string name="achievements_fetch_failed">Что-то пошло не так. Не получается получить список ваших достижений</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Что-то пошло не так. Не получается получить список ваших достижений</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Вы сделали так много, что наша система расчёта достижений не справляется. Это финальное достижение.</string>
   <string name="ends_on">Заканчивается:</string>
   <string name="display_campaigns">Показ кампаний</string>
@@ -489,7 +489,7 @@
   <string name="open_document_photo_picker_explanation">Новый инструмент выбора фотографий Android рискует потерять информацию о местоположении. Включите, если вы собираетесь его использовать</string>
   <string name="location_loss_warning">Отключение может привести к запуску нового средства выбора фотографий Android. Из-за этого может потеряться информация о местоположении.\n\nНажмите «Подробнее» для получения дополнительной информации.</string>
   <string name="nearby_campaign_dismiss_message">Вы больше не увидите кампаний. Однако, если захочете, вы сможете включить нотификации о кампаниях в настройках.</string>
-  <string name="this_function_needs_network_connection">Для этой функции требуется доступ к интернет. Пожалуйста, проверьте своё подключение.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Для этой функции требуется доступ к интернет. Пожалуйста, проверьте своё подключение.</string>
   <string name="error_processing_image">Произошла ошибка при загрузке файла. Пожалуйста, попробуйте позднее!</string>
   <string name="getting_edit_token">Получение токена редактирования</string>
   <string name="check_category_adding_template">Добавление шаблона о проверке категорий</string>
@@ -620,7 +620,7 @@
   <string name="place_state_needs_photo">Нуждается в фото</string>
   <string name="place_type">Тип места:</string>
   <string name="nearby_search_hint">Мост, музей, гостиница и т. д.</string>
-  <string name="you_must_reset_your_passsword">Что-то пошло не так со входом, вы должны сбросить пароль!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Что-то пошло не так со входом, вы должны сбросить пароль!</string>
   <string name="title_for_media">МЕДИА</string>
   <string name="title_for_child_classes">ДЕТСКИЕ КЛАССЫ</string>
   <string name="title_for_parent_classes">РОДИТЕЛЬСКИЕ КЛАССЫ</string>
@@ -756,8 +756,8 @@
   <string name="add_location">Добавить местоположение</string>
   <string name="feedback_sharing_data_alert">Пожалуйста, удалите из этого письма любую информацию, которой вы не желаете делиться с другими. Кроме того, имейте в виду, что адрес вашей электронной почты, с которого вы отправляете сообщения, а также связанное с ним имя и изображение профиля, будут видны всем.</string>
   <string name="explore_map_details">Подробности</string>
-  <string name="achievements_unavailable_beta">Достижения доступны только в версии \'\'prod\'\', пожалуйста, ознакомьтесь с документацией для разработчиков.</string>
-  <string name="leaderboard_unavailable_beta">Таблица лидеров доступна только в версии \'\'prod\'\', пожалуйста, ознакомьтесь с документацией для разработчиков.</string>
+  <string name="achievements_unavailable_beta" fuzzy="true">Достижения доступны только в версии \'\'prod\'\', пожалуйста, ознакомьтесь с документацией для разработчиков.</string>
+  <string name="leaderboard_unavailable_beta" fuzzy="true">Таблица лидеров доступна только в версии \'\'prod\'\', пожалуйста, ознакомьтесь с документацией для разработчиков.</string>
   <string name="copyright_popup">Пожалуйста, загружайте только те фотографии, которые вы сделали сами. Участники, загружающие защищённые авторским правом изображения, будут заблокированы. Это относится и к бета-флейвору. Спасибо за тестирование приложения!</string>
   <string name="select_feedback_data_choice">Пожалуйста, не отмечайте любую информации, которой вы не хотите делиться публично.</string>
   <string name="api_level">Уровень API</string>
@@ -803,6 +803,7 @@
   <string name="edit_location">Изменить местоположение</string>
   <string name="send_thanks_to_author">Поблагодарить автора</string>
   <string name="error_sending_thanks">Ошибка при отправке благодарности автору.</string>
+  <string name="invalid_login_message" fuzzy="true">Срок действия вашего логина истёк. Пожалуйста, войдите снова.</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">выбрано %d изображение</item>
     <item quantity="few">выбрано %d изображения</item>

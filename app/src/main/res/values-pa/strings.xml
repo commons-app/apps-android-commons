@@ -3,6 +3,7 @@
 * Aalam
 * Babanwalia
 * Jimidar
+* Kuldeepburjbhalaike
 * Sony dandiwal
 * ਗੁਰਪ੍ਰੀਤ ਹੁੰਦਲ
 -->
@@ -33,10 +34,10 @@
   <string name="login">ਦਾਖ਼ਲ ਹੋਵੋ</string>
   <string name="logging_in_title">ਦਾਖ਼ਲਾ ਹੋ ਰਿਹਾ ਹੈ</string>
   <string name="logging_in_message">ਉਡੀਕੋ ਜੀ…</string>
-  <string name="login_success">ਦਾਖ਼ਲਾ ਸਫ਼ਲ ਹੋਇਆ!</string>
-  <string name="login_failed">ਦਾਖ਼ਲਾ ਫੇਲ੍ਹ ਹੋਇਆ!</string>
+  <string name="login_success">ਦਾਖ਼ਲ ਹੋਣਾ ਸਫ਼ਲ!</string>
+  <string name="login_failed">ਦਾਖ਼ਲ ਹੋਣਾ ਅਸਫ਼ਲ!</string>
   <string name="upload_failed">ਫ਼ਾਇਲ ਦੀ ਖੋਜ ਨਹੀਂ ਹੋ ਸਕੀ। ਕਿਰਪਾ ਕਰਕੇ ਹੋਰ ਫ਼ਾਇਲ ਖੋਜੋ।</string>
-  <string name="authentication_failed" fuzzy="true">ਪ੍ਰਮਾਣਤਾ ਫੇਲ੍ਹ ਹੋਈ!</string>
+  <string name="authentication_failed">ਪ੍ਰਮਾਣੀਕਰਨ ਅਸਫਲ ਰਿਹਾ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਦਾਖਲ ਹੋਵੋ।</string>
   <string name="uploading_started">ਅੱਪਲੋਡ ਸ਼ੁਰੂ ਹੋਇਆ!</string>
   <string name="upload_completed_notification_title">%1$s ਅੱਪਲੋਡ ਹੋ ਗਏ!</string>
   <string name="upload_completed_notification_text">ਆਪਣਾ ਅੱਪਲੋਡ ਵੇਖਣ ਲਈ ਥਪੇੜੋ</string>
@@ -57,10 +58,10 @@
   <string name="menu_share">ਸਾਂਝਾ ਕਰੋ</string>
   <string name="share_title_hint" fuzzy="true">ਸਿਰਲੇਖ</string>
   <string name="share_description_hint">ਵੇਰਵਾ</string>
-  <string name="login_failed_network">ਦਾਖ਼ਲਾ ਨਹੀਂ ਹੋ ਰਿਹਾ - ਨੈੱਟਵਰਕ ਫੇਲ੍ਹ ਹੋਇਆ ਹੈ</string>
+  <string name="login_failed_network">ਦਾਖ਼ਲ ਹੋਣ ਵਿੱਚ ਅਸਮਰੱਥ - ਨੈੱਟਵਰਕ ਫੇਲ੍ਹ ਹੋਇਆ ਹੈ</string>
   <string name="login_failed_throttled">ਬਹੁਤ ਸਾਰੀਆਂ ਅਸਫ਼ਲ ਕੋਸ਼ਿਸ਼ਾਂ। ਥੋੜ੍ਹੀ ਦੇਰ ਬਾਅਦ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜੀ।</string>
   <string name="login_failed_blocked">ਅਫ਼ਸੋਸ, ਇਹ ਵਰਤੋਂਕਾਰ ਕਾਮਨਜ਼ ਉੱਤੇ ਬਲਾਕ ਕਰ ਦਿੱਤਾ ਗਿਆ ਹੈ</string>
-  <string name="login_failed_generic">ਦਾਖ਼ਲਾ ਫੇਲ੍ਹ ਹੋਇਆ</string>
+  <string name="login_failed_generic">ਦਾਖ਼ਲ ਹੋਣਾ ਅਸਫ਼ਲ!</string>
   <string name="share_upload_button">ਚੜ੍ਹਾਉ</string>
   <string name="multiple_share_base_title">ਇਸ ਸੈੱਟ ਨੂੰ ਨਾਂ ਦਿਓ</string>
   <string name="provider_modifications">ਸੋਧਾਂ</string>
@@ -145,4 +146,5 @@
   <string name="navigation_item_logout">ਬਾਹਰ ਆਉ</string>
   <string name="navigation_item_info">ਟਿਊਟੋਰਿਅਲ</string>
   <string name="please_wait">ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕੋ...</string>
+  <string name="invalid_login_message">ਤੁਹਾਡੇ ਦਾਖਲੇ ਦੀ ਮਿਆਦ ਪੁੱਗ ਗਈ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਦਾਖਲ ਹੋਵੋ।</string>
 </resources>

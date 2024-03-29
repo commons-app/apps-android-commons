@@ -90,13 +90,13 @@
   <string name="logging_in_message">Aguarde, por favor…</string>
   <string name="updating_caption_title">A atualizar legendas e descrições</string>
   <string name="updating_caption_message">Aguarde, por favor…</string>
-  <string name="login_success">Sessão iniciada!</string>
-  <string name="login_failed">O início de sessão falhou!</string>
+  <string name="login_success" fuzzy="true">Sessão iniciada!</string>
+  <string name="login_failed" fuzzy="true">O início de sessão falhou!</string>
   <string name="upload_failed">O ficheiro não foi encontrado. Tente outro, por favor.</string>
   <string name="retry_limit_reached">Limite máximo de novas tentativas atingido! Cancele o carregamento e tente novamente, por favor</string>
   <string name="unrestricted_battery_mode">Desligar a otimização da bateria?</string>
   <string name="suggest_unrestricted_mode">O carregamento de mais de três imagens funciona de maneira mais fiável quando a otimização da bateria está desligada. Desligue a otimização da bateria para a aplicação Commons nas configurações, de forma a ter uma experiência de carregamento mais fluida. \n\nPossíveis passos para desativar a otimização da bateria:\n\nEtapa 1: premir o botão \'Configurações\' abaixo.\n\nEtapa 2: mudar de \'Não otimizado\' para \'Todas as aplicações\'.\n\nEtapa 3: pesquisar \"Commons\" ou \"fr.free.nrw.commons\".\n\nEtapa 4: premir esta e selecionar \'Não otimizar\'.\n\nEtapa 5: pressionar \'Concluído\'.</string>
-  <string name="authentication_failed">A autenticação falhou; inicie novamente a sessão, por favor</string>
+  <string name="authentication_failed" fuzzy="true">A autenticação falhou; inicie novamente a sessão, por favor</string>
   <string name="uploading_started">Carregamento iniciado!</string>
   <string name="uploading_queued">Fila de carregamento (modo de ligação limitada ativado)</string>
   <string name="upload_completed_notification_title">%1$s carregado!</string>
@@ -123,11 +123,11 @@
   <string name="add_caption_toast">Forneça uma legenda para este ficheiro, por favor</string>
   <string name="share_description_hint">Descrição</string>
   <string name="share_caption_hint">Legenda</string>
-  <string name="login_failed_network">Não é possível iniciar uma sessão - falha de rede</string>
+  <string name="login_failed_network" fuzzy="true">Não é possível iniciar uma sessão - falha de rede</string>
   <string name="login_failed_throttled">Demasiadas tentativas mal sucedidas. Por favor, tente novamente dentro de minutos.</string>
   <string name="login_failed_blocked">Desculpe, este utilizador foi bloqueado na wiki Commons</string>
   <string name="login_failed_2fa_needed">Tem de fornecer o seu código de autenticação de dois fatores.</string>
-  <string name="login_failed_generic">Falha ao iniciar sessão</string>
+  <string name="login_failed_generic" fuzzy="true">Falha ao iniciar sessão</string>
   <string name="share_upload_button">Carregar</string>
   <string name="multiple_share_base_title">Dê um nome a este conjunto</string>
   <string name="provider_modifications">Modificações</string>
@@ -284,7 +284,7 @@
   <string name="nominated_see_more">Para obter detalhes, ver página na Internet</string>
   <string name="skip_login">Saltar</string>
   <string name="navigation_item_login">Entrar</string>
-  <string name="skip_login_title">Pretende realmente saltar o início de sessão?</string>
+  <string name="skip_login_title" fuzzy="true">Pretende realmente saltar o início de sessão?</string>
   <string name="skip_login_message">Terá de iniciar sessão para carregar fotografias mais tarde.</string>
   <string name="login_alert_message">Inicie uma sessão para usar esta funcionalidade</string>
   <string name="copy_wikicode">Copiar o texto wiki para a área de transferência</string>
@@ -351,7 +351,7 @@
   <string name="construction_event_answer">As imagens que mostram tecnologia ou cultura são muito bem-vindas na wiki Commons.</string>
   <string name="congratulatory_message_quiz">Obteve %1$s de respostas corretas. Parabéns!</string>
   <string name="warning_for_no_answer">Selecione uma das duas opções para responder à pergunta</string>
-  <string name="user_not_logged_in">A sessão expirou. Inicie uma nova sessão, por favor.</string>
+  <string name="user_not_logged_in" fuzzy="true">A sessão expirou. Inicie uma nova sessão, por favor.</string>
   <string name="quiz_result_share_message">Partilhe o seu questionário com os amigos!</string>
   <string name="continue_message">Continuar</string>
   <string name="correct">Resposta correta</string>
@@ -434,7 +434,7 @@
   <string name="never_ask_again">Não voltar a perguntar isto</string>
   <string name="display_location_permission_title">Pedir autorização de localização</string>
   <string name="display_location_permission_explanation">Pedir permissões de localização quando for necessário para a funcionalidade do cartão de notificação de proximidade.</string>
-  <string name="achievements_fetch_failed">Algo correu mal, não conseguimos obter as suas realizações</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Algo correu mal, não conseguimos obter as suas realizações</string>
   <string name="achievements_fetch_failed_ultimate_achievement">As suas contribuições foram tantas que o nosso sistema de cálculo de realizações não consegue processá-las. Essa é a realização máxima.</string>
   <string name="ends_on">Termina em:</string>
   <string name="display_campaigns">Apresentar campanhas</string>
@@ -450,7 +450,7 @@
   <string name="open_document_photo_picker_explanation">O novo seletor de fotografias do Android corre o risco de perder informações de localização. Ativar se pensa vir a usá-lo.</string>
   <string name="location_loss_warning">Desativar pode acionar o novo seletor de fotografias do Android. Este corre o risco de perder informações de localização.\n\nToque em \'Ler mais\' para mais informações.</string>
   <string name="nearby_campaign_dismiss_message">Deixará de ver as campanhas. No entanto, pode reativar esta notificação nas configurações, se desejar.</string>
-  <string name="this_function_needs_network_connection">Esta função requer uma ligação de rede. Verifique as suas configurações de ligação, por favor.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Esta função requer uma ligação de rede. Verifique as suas configurações de ligação, por favor.</string>
   <string name="error_processing_image">Ocorreu um erro ao processar a imagem. Tente novamente, por favor!</string>
   <string name="getting_edit_token">A obter chave para edição</string>
   <string name="check_category_adding_template">A adicionar predefinição para verificação da categoria</string>
@@ -577,7 +577,7 @@
   <string name="place_state_needs_photo">Necessita fotografia</string>
   <string name="place_type">Tipo de local:</string>
   <string name="nearby_search_hint">Ponte, museu, hotel, etc.</string>
-  <string name="you_must_reset_your_passsword">Ocorreu algo de errado com a sessão, tem de redefinir a sua palavra-passe!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Ocorreu algo de errado com a sessão, tem de redefinir a sua palavra-passe!</string>
   <string name="title_for_media">MULTIMÉDIA</string>
   <string name="title_for_child_classes">CLASSES DESCENDENTES</string>
   <string name="title_for_parent_classes">CLASSES PROGENITORAS</string>
@@ -711,8 +711,8 @@
   <string name="add_location">Adicionar localização</string>
   <string name="feedback_sharing_data_alert">Remova desta mensagem de correio todas as informações que não se sinta à vontade em partilhar publicamente, por favor. Adicionalmente, esteja consciente de que o seu endereço de correio eletrónico, com o qual está a fazer esta publicação, e o nome e imagem de perfil a ele associados, serão visíveis pelo público geral.</string>
   <string name="explore_map_details">Detalhes</string>
-  <string name="achievements_unavailable_beta">As realizações só estão disponíveis na versão de produção; consulte a documentação para programadores, por favor.</string>
-  <string name="leaderboard_unavailable_beta">A tabela de classificação só está disponível na versão de produção; consulte a documentação para programadores, por favor.</string>
+  <string name="achievements_unavailable_beta" fuzzy="true">As realizações só estão disponíveis na versão de produção; consulte a documentação para programadores, por favor.</string>
+  <string name="leaderboard_unavailable_beta" fuzzy="true">A tabela de classificação só está disponível na versão de produção; consulte a documentação para programadores, por favor.</string>
   <string name="copyright_popup">Carregue somente fotografias tiradas por si. Os utilizadores que carregarem imagens cujos direitos de autor estão protegidos serão bloqueados. Isto também se aplica à versão beta. Obrigado por testar a aplicação!</string>
   <string name="select_feedback_data_choice">Desmarque todas as informações que não se sente à vontade em tornar públicas.</string>
   <string name="api_level">Nível da API</string>

@@ -97,7 +97,7 @@
   <string name="retry_limit_reached">Limite massimo di tentativi raggiunto! Annulla il caricamento e riprova</string>
   <string name="unrestricted_battery_mode">Disattiva l\'ottimizzazione della batteria?</string>
   <string name="suggest_unrestricted_mode">Il caricamento di più di 3 immagini funziona in modo più affidabile quando l\'ottimizzazione della batteria è disattivata. Disattiva l\'ottimizzazione della batteria per l\'app Commons dalle impostazioni per un\'esperienza di caricamento fluida. \n\nPossibili passaggi per disattivare l\'ottimizzazione della batteria:\n\nPassaggio 1: premi il pulsante \"Impostazioni\" in basso.\n\nPassaggio 2: passa da \"Non ottimizzato\" a \"Tutte le app\".\n\nPassaggio 3: cerca \"Commons\" o \"fr.free.nrw.commons\".\n\nPassaggio 4: aprilo e seleziona \"Non ottimizzare\".\n\nPassaggio 5: premere \"Fatto\".</string>
-  <string name="authentication_failed">Autenticazione non riuscita, si prega di riprovare</string>
+  <string name="authentication_failed">Autenticazione non riuscita. Riprova.</string>
   <string name="uploading_started">Caricamento iniziato!</string>
   <string name="uploading_queued">Caricamento in coda (attivata modalità di connessione limitata)</string>
   <string name="upload_completed_notification_title">%1$s caricato!</string>
@@ -124,7 +124,7 @@
   <string name="add_caption_toast">Per favore, fornisci una didascalia per questo file</string>
   <string name="share_description_hint">Descrizione</string>
   <string name="share_caption_hint">Didascalia</string>
-  <string name="login_failed_network">Impossibile effettuare l\'accesso - errore di rete</string>
+  <string name="login_failed_network">Impossibile accedere: errore di rete</string>
   <string name="login_failed_throttled">Troppi tentativi falliti. Riprova tra alcuni minuti.</string>
   <string name="login_failed_blocked">Spiacente, questo utente è stato bloccato su Commons</string>
   <string name="login_failed_2fa_needed">Devi fornire il tuo codice di autenticazione a due fattori.</string>
@@ -352,7 +352,7 @@
   <string name="construction_event_answer">Le foto che mostrano tecnologia o cultura sono molto apprezzate su Commons.</string>
   <string name="congratulatory_message_quiz">Hai ottenuto %1$s delle risposte corrette. Congratulazioni!</string>
   <string name="warning_for_no_answer">Seleziona una delle due opzioni per rispondere alla domanda</string>
-  <string name="user_not_logged_in">Sessione scaduta, accedi nuovamente.</string>
+  <string name="user_not_logged_in">Sessione scaduta. Accedi nuovamente.</string>
   <string name="quiz_result_share_message">Condividi il tuo quiz con i tuoi amici!</string>
   <string name="continue_message">Continua</string>
   <string name="correct">Risposta corretta</string>
@@ -435,7 +435,7 @@
   <string name="never_ask_again">Non chiedermelo mai più</string>
   <string name="display_location_permission_title">Chiedi autorizzazione alla posizione</string>
   <string name="display_location_permission_explanation">Chiedi il permesso di localizzazione quando necessario per la funzione di visualizzazione della scheda di notifica nelle vicinanze.</string>
-  <string name="achievements_fetch_failed">Qualcosa è andato storto, non siamo riusciti a recuperare i tuoi risultati</string>
+  <string name="achievements_fetch_failed">Qualcosa è andato storto, non siamo riusciti a recuperare i risultati</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Hai dato così tanti contributi che il nostro sistema di conteggio di risultati non può contarli. Questo è l\'ultimo risultato.</string>
   <string name="ends_on">Termina il:</string>
   <string name="display_campaigns">Visualizza campagne</string>
@@ -450,7 +450,7 @@
   <string name="open_document_photo_picker_explanation">Il nuovo selettore di foto di Android rischia di perdere le informazioni sulla posizione. Abilita se pensi di usarlo.</string>
   <string name="location_loss_warning">La disattivazione di questa opzione potrebbe attivare il nuovo selettore di foto Android. C\'è il rischio di perdere le informazioni sulla posizione.\n\nPremi \"Leggi di più\" per ulteriori informazioni.</string>
   <string name="nearby_campaign_dismiss_message">Non vedrai più le campagne. Tuttavia, puoi riattivare questa notifica in Impostazioni, se lo desideri.</string>
-  <string name="this_function_needs_network_connection">Questa funzione richiede una connessione di rete, controlla le impostazioni di connessione.</string>
+  <string name="this_function_needs_network_connection">Questa funzione richiede una connessione di rete. Controlla le impostazioni di connessione.</string>
   <string name="error_processing_image">Si è verificato un errore durante l\'elaborazione dell\'immagine. Per favore riprova!</string>
   <string name="getting_edit_token">Ottenimento di un token per poter editare</string>
   <string name="check_category_adding_template">Aggiunta del template per la verifica della categoria</string>
@@ -573,7 +573,7 @@
   <string name="place_state_needs_photo">Necessita della fotografia</string>
   <string name="place_type">Tipo di luogo:</string>
   <string name="nearby_search_hint">Ponte, museo, albergo, ecc...</string>
-  <string name="you_must_reset_your_passsword">Si è verificato un errore durante l\'accesso, è necessario reimpostare la password!!</string>
+  <string name="you_must_reset_your_passsword">Si è verificato un errore durante l\'accesso. Devi reimpostare la password!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">CLASSI FIGLIE</string>
   <string name="title_for_parent_classes">CLASSI SUPERIORI</string>
@@ -706,7 +706,7 @@
   <string name="add_location">Aggiungi luogo</string>
   <string name="feedback_sharing_data_alert">Rimuovi da questa email tutte le informazioni che non sei disposto a condividere pubblicamente. Inoltre, tieni presente che il tuo indirizzo email con cui stai scrivendo, il nome e l\'immagine del profilo associati saranno visibili pubblicamente.</string>
   <string name="explore_map_details">Dettagli</string>
-  <string name="leaderboard_unavailable_beta">La classifica è disponibile solo nella versione prod, consulta la documentazione per gli sviluppatori.</string>
+  <string name="leaderboard_unavailable_beta">La classifica è disponibile solo nella versione prod. Consulta la documentazione per gli sviluppatori.</string>
   <string name="copyright_popup">Per favore carica solo le foto che hai scattato tu. Gli autori che caricano immagini protette da copyright verranno bloccati. Questo vale anche per la versione beta. Grazie per aver testato l\'app!</string>
   <string name="select_feedback_data_choice">Deseleziona tutte le informazioni che non ti senti a tuo agio nel condividere pubblicamente.</string>
   <string name="api_level">Livello API</string>
@@ -747,6 +747,7 @@
   <string name="learn_how_to_write_a_useful_description">Impara come scrivere una descrizione utile</string>
   <string name="learn_how_to_write_a_useful_caption">Impara come scrivere una didascalia utile</string>
   <string name="see_your_achievements">Vedi i tuoi risultati</string>
+  <string name="invalid_login_message">Sessione scaduta. Accedi nuovamente.</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d immagine selezionata</item>
     <item quantity="other">%d immagini selezionate</item>

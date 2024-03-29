@@ -2,13 +2,14 @@ package fr.free.nrw.commons.upload;
 
 import static fr.free.nrw.commons.utils.ImageUtils.EMPTY_CAPTION;
 import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_DUPLICATE;
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_KEEP;
 import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
 
 import android.content.Context;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.media.MediaClient;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.ImageUtilsWrapper;
 import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
@@ -45,13 +46,17 @@ public class ImageProcessingService {
 
     /**
      * Check image quality before upload - checks duplicate image - checks dark image - checks
-     * geolocation for image - check for valid title
+     * geolocation for image
+     *
+     * @param uploadItem UploadItem whose quality is to be checked
+     * @param inAppPictureLocation In app picture location (if any)
+     * @return Quality of UploadItem
      */
     Single<Integer> validateImage(UploadItem uploadItem, LatLng inAppPictureLocation) {
         int currentImageQuality = uploadItem.getImageQuality();
         Timber.d("Current image quality is %d", currentImageQuality);
-        if (currentImageQuality == ImageUtils.IMAGE_KEEP) {
-            return Single.just(ImageUtils.IMAGE_OK);
+        if (currentImageQuality == IMAGE_KEEP || currentImageQuality == IMAGE_OK) {
+            return Single.just(IMAGE_OK);
         }
         Timber.d("Checking the validity of image");
         String filePath = uploadItem.getMediaUri().getPath();
@@ -60,16 +65,32 @@ public class ImageProcessingService {
             checkDuplicateImage(filePath),
             checkImageGeoLocation(uploadItem.getPlace(), filePath, inAppPictureLocation),
             checkDarkImage(filePath),
-            validateItemTitle(uploadItem),
             checkFBMD(filePath),
             checkEXIF(filePath),
-            (duplicateImage, wrongGeoLocation, darkImage, itemTitle, fbmd, exif) -> {
-                Timber.d("duplicate: %d, geo: %d, dark: %d, title: %d" + "fbmd:" + fbmd + "exif:"
+            (duplicateImage, wrongGeoLocation, darkImage, fbmd, exif) -> {
+                Timber.d("duplicate: %d, geo: %d, dark: %d" + "fbmd:" + fbmd + "exif:"
                         + exif,
-                    duplicateImage, wrongGeoLocation, darkImage, itemTitle);
-                return duplicateImage | wrongGeoLocation | darkImage | itemTitle | fbmd | exif;
+                    duplicateImage, wrongGeoLocation, darkImage);
+                return duplicateImage | wrongGeoLocation | darkImage |  fbmd | exif;
             }
         );
+    }
+
+    /**
+     * Checks caption of the given UploadItem
+     *
+     * @param uploadItem UploadItem whose caption is to be verified
+     * @return Quality of caption of the UploadItem
+     */
+    Single<Integer> validateCaption(UploadItem uploadItem) {
+        int currentImageQuality = uploadItem.getImageQuality();
+        Timber.d("Current image quality is %d", currentImageQuality);
+        if (currentImageQuality == IMAGE_KEEP) {
+            return Single.just(IMAGE_OK);
+        }
+        Timber.d("Checking the validity of caption");
+
+        return validateItemTitle(uploadItem);
     }
 
     /**
@@ -126,7 +147,7 @@ public class ImageProcessingService {
             .flatMap(mediaClient::checkFileExistsUsingSha)
             .map(b -> {
                 Timber.d("Result for duplicate image %s", b);
-                return b ? ImageUtils.IMAGE_DUPLICATE : ImageUtils.IMAGE_OK;
+                return b ? IMAGE_DUPLICATE : IMAGE_OK;
             })
             .subscribeOn(Schedulers.io());
     }
@@ -152,13 +173,13 @@ public class ImageProcessingService {
     private Single<Integer> checkImageGeoLocation(Place place, String filePath, LatLng inAppPictureLocation) {
         Timber.d("Checking for image geolocation %s", filePath);
         if (place == null || StringUtils.isBlank(place.getWikiDataEntityId())) {
-            return Single.just(ImageUtils.IMAGE_OK);
+            return Single.just(IMAGE_OK);
         }
         return Single.fromCallable(() -> filePath)
             .flatMap(path -> Single.just(fileUtilsWrapper.getGeolocationOfFile(path, inAppPictureLocation)))
             .flatMap(geoLocation -> {
                 if (StringUtils.isBlank(geoLocation)) {
-                    return Single.just(ImageUtils.IMAGE_OK);
+                    return Single.just(IMAGE_OK);
                 }
                 return imageUtilsWrapper
                     .checkImageGeolocationIsDifferent(geoLocation, place.getLocation());
