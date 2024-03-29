@@ -47,10 +47,10 @@
   <string name="signup">ចុះ​ឈ្មោះ</string>
   <string name="logging_in_title">កំពុងកត់ឈ្មោះចូល</string>
   <string name="logging_in_message">សូមរង់ចាំបន្តិច…</string>
-  <string name="login_success">កត់ឈ្មោះចូលបានសម្រេច!</string>
-  <string name="login_failed">កត់ឈ្មោះចូលបានបរាជ័យ!</string>
+  <string name="login_success" fuzzy="true">កត់ឈ្មោះចូលបានសម្រេច!</string>
+  <string name="login_failed" fuzzy="true">កត់ឈ្មោះចូលបានបរាជ័យ!</string>
   <string name="upload_failed">រកមិនឃើញឯកសារទេ។ សូមសាកល្បងជាមួយឯកសារផ្សេងមួយទៀត។</string>
-  <string name="authentication_failed">ការបញ្ជាក់ទទួលស្គាល់បានបរាជ័យ! សូមកត់ឈ្មោះចូលម្ដងទៀត។</string>
+  <string name="authentication_failed" fuzzy="true">ការបញ្ជាក់ទទួលស្គាល់បានបរាជ័យ! សូមកត់ឈ្មោះចូលម្ដងទៀត។</string>
   <string name="uploading_started">ការផ្ទុកឡើងបានចាប់ផ្តើមហើយ!</string>
   <string name="uploading_queued">ជួរផ្ទុកឡើង (បានបើកម៉ូតដែនកំហិតតភ្ជាប់)</string>
   <string name="upload_completed_notification_title">បានផ្ទុកឡើង %1$s ហើយ!</string>
@@ -75,11 +75,11 @@
   <string name="share_title_hint">ចំណងជើង (ទាមទារ)</string>
   <string name="share_description_hint">ការពិពណ៌នា</string>
   <string name="share_caption_hint" fuzzy="true">ចំណងជើង (កំហិត ២៥៥តួ)</string>
-  <string name="login_failed_network">មិនអាចកត់ឈ្មោះចូលបានទេ ព្រោះបណ្ដាញកំពុងមានបញ្ហា។</string>
+  <string name="login_failed_network" fuzzy="true">មិនអាចកត់ឈ្មោះចូលបានទេ ព្រោះបណ្ដាញកំពុងមានបញ្ហា។</string>
   <string name="login_failed_throttled">ការព្យាយាមមិនបានសម្រេចច្រើនដងពេក។ សូមព្យាយាមម្តងទៀតនៅប៉ុន្មាននាទីក្រោយ។</string>
   <string name="login_failed_blocked">សូមអភ័យទោស អ្នកប្រើប្រាស់រូបនេះត្រូវបានហាមឃាត់នៅវិគីមេឌារួម</string>
   <string name="login_failed_2fa_needed">អ្នកចាំបាច់ត្រូវតែផ្ដល់លេខកូដសម្រាប់បញ្ជាក់ទទួលស្គាល់ពីរតង់។</string>
-  <string name="login_failed_generic">កត់ឈ្មោះចូលមិនបានសម្រេច</string>
+  <string name="login_failed_generic" fuzzy="true">កត់ឈ្មោះចូលមិនបានសម្រេច</string>
   <string name="share_upload_button">ផ្ទុកឡើង</string>
   <string name="multiple_share_base_title">ដាក់ឈ្មោះឲ្យសំនុំនេះ</string>
   <string name="provider_modifications">បម្រែបម្រួល</string>

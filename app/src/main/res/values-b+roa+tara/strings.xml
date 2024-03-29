@@ -43,10 +43,10 @@
   <string name="signup">Reggistrate</string>
   <string name="logging_in_title">Stoche a tràse...</string>
   <string name="logging_in_message">Aspitte...</string>
-  <string name="login_success">E\' trasute!</string>
-  <string name="login_failed">Non g\'è trasute!</string>
+  <string name="login_success" fuzzy="true">E\' trasute!</string>
+  <string name="login_failed" fuzzy="true">Non g\'è trasute!</string>
   <string name="upload_failed">File non acchiate. Pruève \'n\'otre file.</string>
-  <string name="authentication_failed">Autenticazione sciute a male, tràse arrete</string>
+  <string name="authentication_failed" fuzzy="true">Autenticazione sciute a male, tràse arrete</string>
   <string name="uploading_started">Carecamende accumenzate!</string>
   <string name="upload_completed_notification_title">%1$s carecate!</string>
   <string name="menu_share">Condivide</string>

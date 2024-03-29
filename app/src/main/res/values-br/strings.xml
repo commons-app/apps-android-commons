@@ -71,10 +71,10 @@
   <string name="logging_in_title">O kevreañ</string>
   <string name="logging_in_message">Gortozit mar plij…</string>
   <string name="updating_caption_message">Gortozit mar plij…</string>
-  <string name="login_success">Kevreet oc\'h !</string>
-  <string name="login_failed">Kudenn gevreañ !</string>
+  <string name="login_success" fuzzy="true">Kevreet oc\'h !</string>
+  <string name="login_failed" fuzzy="true">Kudenn gevreañ !</string>
   <string name="upload_failed">N\'eo ket bet kavet ar restr. Klask gant unan all.</string>
-  <string name="authentication_failed">Dilesadur c\'hwitet, kevreit en-dro mar plij</string>
+  <string name="authentication_failed" fuzzy="true">Dilesadur c\'hwitet, kevreit en-dro mar plij</string>
   <string name="uploading_started">Kroget da enporzhiañ!</string>
   <string name="upload_completed_notification_title">%1$s bet pellgaset !</string>
   <string name="upload_completed_notification_text">Pouezit evit gwelet hoc\'h enporzhiadenn</string>
@@ -98,11 +98,11 @@
   <string name="share_title_hint">Alc\'hwez (ret)</string>
   <string name="share_description_hint">Deskrivadur</string>
   <string name="share_caption_hint">Alc\'hwez</string>
-  <string name="login_failed_network">Ne c\'haller ket kevreañ - rouedad sac\'het</string>
+  <string name="login_failed_network" fuzzy="true">Ne c\'haller ket kevreañ - rouedad sac\'het</string>
   <string name="login_failed_throttled">Re a daolioù-esae. Klaskit en-dro a-benn ur pennadig amzer.</string>
   <string name="login_failed_blocked">Hon digarezit, prennet eo bet an implijer-mañ e Commons</string>
   <string name="login_failed_2fa_needed">Rankout a rit reiñ ho kod dilesa gant daou faktor.</string>
-  <string name="login_failed_generic">C\'hwitet eo ar c\'hevreañ</string>
+  <string name="login_failed_generic" fuzzy="true">C\'hwitet eo ar c\'hevreañ</string>
   <string name="share_upload_button">Pellgargañ</string>
   <string name="multiple_share_base_title">Envel ar rikoù-mañ</string>
   <string name="provider_modifications">Kemmoù</string>
@@ -242,7 +242,7 @@
   <string name="nominated_for_deletion">Meneget eo bet ar skeudenn evit lemel.</string>
   <string name="skip_login">Lezel a-gostez</string>
   <string name="navigation_item_login">Kevreañ</string>
-  <string name="skip_login_title">Ha c\'hoant ho peus, evit gwir, da gevreañ ?</string>
+  <string name="skip_login_title" fuzzy="true">Ha c\'hoant ho peus, evit gwir, da gevreañ ?</string>
   <string name="skip_login_message">Da gevreañ ho po en amzer-da-zont evit pellgargañ skeudennoù.</string>
   <string name="login_alert_message">Kevreit, mar plij, evit implijout an arc\'hwel-mañ</string>
   <string name="copy_wikicode">Eilañ an destenn wiki er golver</string>

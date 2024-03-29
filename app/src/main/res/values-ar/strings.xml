@@ -126,13 +126,13 @@
   <string name="logging_in_message">الرجاء الانتظار…</string>
   <string name="updating_caption_title">تحديث التسميات التوضيحية والأوصاف</string>
   <string name="updating_caption_message">يرجى الانتظار...</string>
-  <string name="login_success">تم الدخول بشكل صحيح!</string>
-  <string name="login_failed">فشل تسجيل الدخول</string>
+  <string name="login_success" fuzzy="true">تم الدخول بشكل صحيح!</string>
+  <string name="login_failed" fuzzy="true">فشل تسجيل الدخول</string>
   <string name="upload_failed">الملف غير موجود. فضلا اختر ملفا آخر.</string>
   <string name="retry_limit_reached">تم الوصول إلى الحد الأقصى لإعادة المحاولة! يرجى إلغاء التحميل والمحاولة مرة أخرى</string>
   <string name="unrestricted_battery_mode">هل تريد إيقاف تشغيل تحسين البطارية؟</string>
   <string name="suggest_unrestricted_mode">يعمل رفع أكثر من 3 صور بشكل أكثر موثوقية عند إيقاف تشغيل تحسين البطارية. يرجى إيقاف تشغيل تحسين البطارية لتطبيق كومنز من الإعدادات للحصول على تجربة تحميل سلسة. \n\nالخطوات الممكنة لإيقاف تشغيل تحسين البطارية:\n\nالخطوة 1: اضغط على زر \'الإعدادات\' أدناه.\n\nالخطوة 2: التبديل من \'غير محسّن\" إلى \'الكل التطبيقات\'.\n\nالخطوة 3: ابحث عن \'كومنز\' أو \'fr.free.nrw.commons\'.\n\nالخطوة 4: اضغط عليها وحدد \'عدم التحسين\'.\n\nالخطوة 5: اضغط على \'تم\'.</string>
-  <string name="authentication_failed">فشلت المصادقة; الرجاء تسجيل الدخول مرة أخرى</string>
+  <string name="authentication_failed" fuzzy="true">فشلت المصادقة; الرجاء تسجيل الدخول مرة أخرى</string>
   <string name="uploading_started">بدأ الرفع!</string>
   <string name="uploading_queued">تحميل في قائمة الانتظار (وضع الاتصال المحدود ممكّن)</string>
   <string name="upload_completed_notification_title">رُفع %1$s!</string>
@@ -159,11 +159,11 @@
   <string name="add_caption_toast">يُرجَى تقديم عنوان لهذا الملف</string>
   <string name="share_description_hint">الوصف</string>
   <string name="share_caption_hint">التعليق</string>
-  <string name="login_failed_network">لا يمكن تسجيل الدخول - فشل في شبكة الاتصال</string>
+  <string name="login_failed_network" fuzzy="true">لا يمكن تسجيل الدخول - فشل في شبكة الاتصال</string>
   <string name="login_failed_throttled">الكثير من المحاولات غير الناجحة. الرجاء المحاولة مرة أخرى في بضع دقائق.</string>
   <string name="login_failed_blocked">عذراً، لقد تم منع هذا المستخدم على كومنز</string>
   <string name="login_failed_2fa_needed">يجب توفير رمز التحقق المزدوج.</string>
-  <string name="login_failed_generic">فشل تسجيل الدخول</string>
+  <string name="login_failed_generic" fuzzy="true">فشل تسجيل الدخول</string>
   <string name="share_upload_button">ارفع</string>
   <string name="multiple_share_base_title">اسم هذه المجموعة</string>
   <string name="provider_modifications">تعديلات</string>
@@ -320,7 +320,7 @@
   <string name="nominated_see_more">انظر صفحة الويب للتفاصيل</string>
   <string name="skip_login">تجاوز</string>
   <string name="navigation_item_login">تسجيل الدخول</string>
-  <string name="skip_login_title">هل تريد حقا تخطي تسجيل الدخول؟</string>
+  <string name="skip_login_title" fuzzy="true">هل تريد حقا تخطي تسجيل الدخول؟</string>
   <string name="skip_login_message">يجب عليك تسجيل الدخول لرفع الصور في المستقبل.</string>
   <string name="login_alert_message">الرجاء تسجيل الدخول لاستخدام هذه الميزة</string>
   <string name="copy_wikicode">انسخ نص الويكي إلى الكليب بورد</string>
@@ -387,7 +387,7 @@
   <string name="construction_event_answer">الصور التي تظهر التكنولوجيا أو الثقافة موضع ترحيب كبير في كومنز.</string>
   <string name="congratulatory_message_quiz">لقد حصلت عل %1$s من الإجابات الصحيحة، تهانينا!</string>
   <string name="warning_for_no_answer">حدد أحد الخيارين للإجابة على السؤال</string>
-  <string name="user_not_logged_in">انتهت صلاحية جلسة تسجيل الدخول; يُرجَى تسجيل الدخول مرة أخرى.</string>
+  <string name="user_not_logged_in" fuzzy="true">انتهت صلاحية جلسة تسجيل الدخول; يُرجَى تسجيل الدخول مرة أخرى.</string>
   <string name="quiz_result_share_message">تبادل سؤالك مع أصدقائك!</string>
   <string name="continue_message">استمرار</string>
   <string name="correct">إجابة صحيحة</string>
@@ -471,7 +471,7 @@
   <string name="never_ask_again">لا تسأل هذا مرة أخرى</string>
   <string name="display_location_permission_title">اطلب إذن الموقع</string>
   <string name="display_location_permission_explanation">اطلب إذن الموقع عند الحاجة إلى ميزة عرض بطاقة التنبيه القريبة.</string>
-  <string name="achievements_fetch_failed">حدث خطأ ما; لم نتمكن من جلب إنجازاتك</string>
+  <string name="achievements_fetch_failed" fuzzy="true">حدث خطأ ما; لم نتمكن من جلب إنجازاتك</string>
   <string name="achievements_fetch_failed_ultimate_achievement">لقد قدمت الكثير من المساهمات لا يستطيع نظامنا لحساب الإنجازات التعامل معها. هذا هو الإنجاز النهائي.</string>
   <string name="ends_on">ينتهي في:</string>
   <string name="display_campaigns">عرض الحملات</string>
@@ -486,7 +486,7 @@
   <string name="open_document_photo_picker_explanation">يخاطر منتقي الصور الجديد لنظام Android بفقدان معلومات الموقع. قم بالتمكين إذا بدا أنك تستخدمه.</string>
   <string name="location_loss_warning">قد يؤدي إيقاف تشغيل هذا إلى تشغيل منتقي صور Android الجديد. ويخاطر بفقدان معلومات الموقع.\n\nاضغط على \"اقرأ المزيد\" لمزيد من المعلومات.</string>
   <string name="nearby_campaign_dismiss_message">لن ترى الحملات بعد الآن، ومع ذلك، يمكنك إعادة تمكين هذا الإشعار في الإعدادات إذا كنت ترغب.</string>
-  <string name="this_function_needs_network_connection">تتطلب هذه الوظيفة الاتصال بالشبكة; يُرجَى التحقق من إعدادات اتصالك.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">تتطلب هذه الوظيفة الاتصال بالشبكة; يُرجَى التحقق من إعدادات اتصالك.</string>
   <string name="error_processing_image">حدث خطأ أثناء معالجة الصورة. رجاءً حاول مرة أخرى!</string>
   <string name="getting_edit_token">الحصول على رمز للتحرير</string>
   <string name="check_category_adding_template">تجري إضافة قالب لفخص التصنيف</string>
@@ -619,7 +619,7 @@
   <string name="place_state_needs_photo">يحتاج صورة</string>
   <string name="place_type">نوع المكان:</string>
   <string name="nearby_search_hint">جسر، متحف، فندق، إلخ</string>
-  <string name="you_must_reset_your_passsword">حدث خطأ ما عند الدخول، يجب عليك إعادة تعيين كلمة المرور!!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">حدث خطأ ما عند الدخول، يجب عليك إعادة تعيين كلمة المرور!!</string>
   <string name="title_for_media">وسائل الإعلام</string>
   <string name="title_for_child_classes">تصنيف الأطفال</string>
   <string name="title_for_parent_classes">تصنيف أولياء الأمور</string>
@@ -749,8 +749,8 @@
   <string name="add_location">أضف الموقع</string>
   <string name="feedback_sharing_data_alert">يُرجى إزالة أي معلومات لا تشعر بالارتياح عند مشاركتها علنًا من هذا البريد الإلكتروني. أيضًا ، يرجى العلم أن عنوان بريدك الإلكتروني الذي تنشر به ، والاسم المرتبط وصورة الملف الشخصي ، سيكونان مرئيين للجمهور.</string>
   <string name="explore_map_details">التفاصيل</string>
-  <string name="achievements_unavailable_beta">الإنجازات متوفرة فقط في نكهة المنتج ، يرجى مراجعة وثائق المطور.</string>
-  <string name="leaderboard_unavailable_beta">لوحة الصدارة متوفرة فقط في نكهة المنتج ، يرجى مراجعة وثائق المطور.</string>
+  <string name="achievements_unavailable_beta" fuzzy="true">الإنجازات متوفرة فقط في نكهة المنتج ، يرجى مراجعة وثائق المطور.</string>
+  <string name="leaderboard_unavailable_beta" fuzzy="true">لوحة الصدارة متوفرة فقط في نكهة المنتج ، يرجى مراجعة وثائق المطور.</string>
   <string name="copyright_popup">يرجى فقط تحميل الصور التي قمت بالتقاطها بنفسك. المحملين من صور لديها حقوق النسخ سيتم منعهم من التحميل. وهذا ينطبق على مفضلي استخدام بيتا ايضا. شكرا لمشاركتكم في فحص هذ التطبيق</string>
   <string name="select_feedback_data_choice">يرجى إلغاء تحديد أي معلومات لا تشعر بالارتياح لمشاركتها علنًا.</string>
   <string name="api_level">مستوى API</string>

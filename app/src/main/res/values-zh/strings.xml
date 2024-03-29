@@ -11,6 +11,7 @@
 * Deathkon
 * Diskdance
 * Dream Star.cn
+* Googology
 * GuoPC
 * Hydra
 * Ken418
@@ -123,13 +124,13 @@
   <string name="logging_in_message">请稍候……</string>
   <string name="updating_caption_title">正在更新说明与描述</string>
   <string name="updating_caption_message">请稍候……</string>
-  <string name="login_success">登录成功！</string>
-  <string name="login_failed">登录失败！</string>
+  <string name="login_success" fuzzy="true">登录成功！</string>
+  <string name="login_failed" fuzzy="true">登录失败！</string>
   <string name="upload_failed">找不到文件。请尝试其他文件。</string>
   <string name="retry_limit_reached">已达到最大重试限制！请取消上传并重试</string>
   <string name="unrestricted_battery_mode">关闭电池优化？</string>
   <string name="suggest_unrestricted_mode">关闭电池优化后，上传3张以上图像会更可靠。请从设置中关闭共享资源应用的电池优化，以获得流畅的上传体验。 \n\n电池优化可按以下步骤关闭：\n\n第1步：点按下面的“设置”按钮。\n\n第2步：从“未优化”切换为“全部应用”。\n\n第3步：寻找“Commons”或“fr.free.nrw.commons”。\n\n第4步：点按并选择“不优化”。\n\n第5步：按“完成”。</string>
-  <string name="authentication_failed">身份验证失败，请重新登录</string>
+  <string name="authentication_failed" fuzzy="true">身份验证失败，请重新登录</string>
   <string name="uploading_started">上传开始！</string>
   <string name="uploading_queued">上传排队中（已启用连接受限模式）</string>
   <string name="upload_completed_notification_title">%1$s已上传！</string>
@@ -156,11 +157,11 @@
   <string name="add_caption_toast">请提供此文件的说明</string>
   <string name="share_description_hint">描述</string>
   <string name="share_caption_hint">说明</string>
-  <string name="login_failed_network">无法登录 - 网络故障</string>
+  <string name="login_failed_network" fuzzy="true">无法登录 - 网络故障</string>
   <string name="login_failed_throttled">失败次数过多。请在几分钟后重试。</string>
   <string name="login_failed_blocked">对不起，该用户已经被共享资源封禁</string>
   <string name="login_failed_2fa_needed">您必须提供您的双因素验证代码。</string>
-  <string name="login_failed_generic">登录失败</string>
+  <string name="login_failed_generic" fuzzy="true">登录失败</string>
   <string name="share_upload_button">上传</string>
   <string name="multiple_share_base_title">命名这组图像</string>
   <string name="provider_modifications">修改</string>
@@ -317,7 +318,7 @@
   <string name="nominated_see_more">查看网页获取详情</string>
   <string name="skip_login">跳过</string>
   <string name="navigation_item_login">登录</string>
-  <string name="skip_login_title">你真的不要登录吗？</string>
+  <string name="skip_login_title" fuzzy="true">你真的不要登录吗？</string>
   <string name="skip_login_message">您在未来将需要登陆才能上传图片。</string>
   <string name="login_alert_message">请登录后使用这个功能</string>
   <string name="copy_wikicode">复制wikitext到剪贴板</string>
@@ -384,7 +385,7 @@
   <string name="construction_event_answer">维基共享资源非常欢迎展示技术或文化的图片。</string>
   <string name="congratulatory_message_quiz">您得到%1$s的答案是正确的。祝贺您！</string>
   <string name="warning_for_no_answer">选择两个选项之一来回答问题</string>
-  <string name="user_not_logged_in">登录会话已过期，请重新登录。</string>
+  <string name="user_not_logged_in" fuzzy="true">登录会话已过期，请重新登录。</string>
   <string name="quiz_result_share_message">与朋友分享您的测验！</string>
   <string name="continue_message">继续</string>
   <string name="correct">正确答案</string>
@@ -467,7 +468,7 @@
   <string name="never_ask_again">不再询问</string>
   <string name="display_location_permission_title">申请位置权限</string>
   <string name="display_location_permission_explanation">申请附近通知卡查看功能所必需的位置权限。</string>
-  <string name="achievements_fetch_failed">有错误发生，无法获取你的成就</string>
+  <string name="achievements_fetch_failed" fuzzy="true">有错误发生，无法获取你的成就</string>
   <string name="achievements_fetch_failed_ultimate_achievement">您做出了许多贡献，我们的计算系统无法应对。这是最终的成就。</string>
   <string name="ends_on">结束于：</string>
   <string name="display_campaigns">显示活动</string>
@@ -483,7 +484,7 @@
   <string name="open_document_photo_picker_explanation">新版Android照片选择器可能会丢失位置信息。如果您正在使用它，请启用该设置。</string>
   <string name="location_loss_warning">将此关闭可能会触发新的 Android 照片选择器。这可能会有丢失位置信息的风险。\n\n点击“阅读更多”以获取更多信息。</string>
   <string name="nearby_campaign_dismiss_message">你不会再看到这个活动。如果需要可以在设置里重新启用此通知。</string>
-  <string name="this_function_needs_network_connection">这个功能需要网络连接，请检查你的网络设置。</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">这个功能需要网络连接，请检查你的网络设置。</string>
   <string name="error_processing_image">处理图像时出错。请再试一次！</string>
   <string name="getting_edit_token">获取编辑令牌</string>
   <string name="check_category_adding_template">添加类别检查模板</string>
@@ -610,7 +611,7 @@
   <string name="place_state_needs_photo">需要照片</string>
   <string name="place_type">地点类型：</string>
   <string name="nearby_search_hint">桥梁、博物馆、旅馆等</string>
-  <string name="you_must_reset_your_passsword">登录时出现一些问题，您必须重新设置您的密码！</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">登录时出现一些问题，您必须重新设置您的密码！</string>
   <string name="title_for_media">媒体</string>
   <string name="title_for_child_classes">子类别</string>
   <string name="title_for_parent_classes">父类别</string>
@@ -741,8 +742,8 @@
   <string name="add_location">添加位置</string>
   <string name="feedback_sharing_data_alert">请从此电子邮件中删除任何您不愿意公开分享的信息。另请注意，您用于发帖的电子邮件地址，以及关联的名称和个人资料图片会公开显示。</string>
   <string name="explore_map_details">详细</string>
-  <string name="achievements_unavailable_beta">成就仅在成品版本中可用，请查看开发者文档。</string>
-  <string name="leaderboard_unavailable_beta">排行榜仅在成品版本中可用，请查看开发者文档。</string>
+  <string name="achievements_unavailable_beta" fuzzy="true">成就仅在成品版本中可用，请查看开发者文档。</string>
+  <string name="leaderboard_unavailable_beta" fuzzy="true">排行榜仅在成品版本中可用，请查看开发者文档。</string>
   <string name="copyright_popup">请只上传您自己拍摄的照片。上传受版权保护图像的用户会被封禁。这也适用于测试版本。感谢您测试本应用！</string>
   <string name="select_feedback_data_choice">请取消选择任何您不愿意公开分享的信息。</string>
   <string name="api_level">API 级别</string>
@@ -781,6 +782,7 @@
   <string name="storage_permissions_denied">存储权限被拒绝</string>
   <string name="unable_to_share_upload_item">无法分享此项目</string>
   <string name="permissions_are_required_for_functionality">功能需要权限</string>
+  <string name="invalid_login_message" fuzzy="true">您的登录已过期，请重新登录。</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">已选择%d个图像</item>
     <item quantity="other">已选择%d个图像</item>

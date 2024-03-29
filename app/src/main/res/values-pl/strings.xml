@@ -109,12 +109,12 @@
   <string name="logging_in_message">Proszę czekać…</string>
   <string name="updating_caption_title">Aktualizowanie podpisów i opisów</string>
   <string name="updating_caption_message">Proszę czekać…</string>
-  <string name="login_success">Zalogowano pomyślnie!</string>
-  <string name="login_failed">Logowanie nie powiodło się!</string>
+  <string name="login_success" fuzzy="true">Zalogowano pomyślnie!</string>
+  <string name="login_failed" fuzzy="true">Logowanie nie powiodło się!</string>
   <string name="upload_failed">Nie znaleziono pliku. Spróbuj znaleźć inny.</string>
   <string name="retry_limit_reached">Osiągnięto maksymalny limit ponownych prób! Anuluj przesyłanie i spróbuj ponownie</string>
   <string name="unrestricted_battery_mode">Wyłączyć optymalizację baterii?</string>
-  <string name="authentication_failed">Uwierzytelnianie nie powiodło się, zaloguj się ponownie</string>
+  <string name="authentication_failed" fuzzy="true">Uwierzytelnianie nie powiodło się, zaloguj się ponownie</string>
   <string name="uploading_started">Wysyłanie rozpoczęte!</string>
   <string name="uploading_queued">Prześlij w kolejce (włączony tryb ograniczonego połączenia)</string>
   <string name="upload_completed_notification_title">Przesłano %1$s!</string>
@@ -141,11 +141,11 @@
   <string name="add_caption_toast">Podaj podpis dla tego pliku</string>
   <string name="share_description_hint">Opis</string>
   <string name="share_caption_hint">Podpis</string>
-  <string name="login_failed_network">Nie można zalogować - błąd sieci</string>
+  <string name="login_failed_network" fuzzy="true">Nie można zalogować - błąd sieci</string>
   <string name="login_failed_throttled">Zbyt wiele nieudanych prób zalogowania. Spróbuj ponownie za kilka minut.</string>
   <string name="login_failed_blocked">Przepraszamy, ten użytkownik został zablokowany na Commons</string>
   <string name="login_failed_2fa_needed">Wprowadź swój kod dla  dwuetapowej autoryzacji.</string>
-  <string name="login_failed_generic">Logowanie nie powiodło się</string>
+  <string name="login_failed_generic" fuzzy="true">Logowanie nie powiodło się</string>
   <string name="share_upload_button">Prześlij</string>
   <string name="multiple_share_base_title">Nazwij ten zestaw</string>
   <string name="provider_modifications">Zmiany</string>
@@ -302,7 +302,7 @@
   <string name="nominated_see_more">Szczegółowe informacje można znaleźć na stronie internetowej</string>
   <string name="skip_login">Pomiń</string>
   <string name="navigation_item_login">Zaloguj się</string>
-  <string name="skip_login_title">Czy na pewno chcesz pominąć logowanie?</string>
+  <string name="skip_login_title" fuzzy="true">Czy na pewno chcesz pominąć logowanie?</string>
   <string name="skip_login_message">Musisz się zalogować, aby przesłać zdjęcia w przyszłości</string>
   <string name="login_alert_message">Zaloguj się, aby skorzystać z tej funkcji</string>
   <string name="copy_wikicode">Skopiuj wikitext do schowka</string>
@@ -369,7 +369,7 @@
   <string name="construction_event_answer">Zdjęcia przedstawiające technologię lub kulturę są bardzo mile widziane na Commons.</string>
   <string name="congratulatory_message_quiz">Masz %1$s poprawnych odpowiedzi. Gratulacje!</string>
   <string name="warning_for_no_answer">Wybierz jedną z dwóch opcji, aby odpowiedzieć na pytanie</string>
-  <string name="user_not_logged_in">Sesja logowania wygasła, prosimy zalogować się ponownie.</string>
+  <string name="user_not_logged_in" fuzzy="true">Sesja logowania wygasła, prosimy zalogować się ponownie.</string>
   <string name="quiz_result_share_message">Podziel się quizem ze swoimi znajomymi!</string>
   <string name="continue_message">Kontynuuj</string>
   <string name="correct">Poprawna odpowiedź</string>
@@ -452,7 +452,7 @@
   <string name="never_ask_again">Nigdy więcej nie pytaj o to</string>
   <string name="display_location_permission_title">Poproś o dostęp do lokalizacji</string>
   <string name="display_location_permission_explanation">W razie potrzeby zapytaj o pozwolenie na lokalizację w przypadku funkcji widoku pobliskiej karty powiadomień.</string>
-  <string name="achievements_fetch_failed">Coś poszło nie tak, nie mogliśmy pobrać twoich osiągnięć</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Coś poszło nie tak, nie mogliśmy pobrać twoich osiągnięć</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Zrobiłeś tak wiele wkładu, że nasz system obliczania osiągnięć nie może sobie poradzić. To jest najwyższym osiągnięciem.</string>
   <string name="ends_on">Kończy się na:</string>
   <string name="display_campaigns">Wyświetl kampanie</string>
@@ -461,7 +461,7 @@
   <string name="option_dismiss">Odrzuć</string>
   <string name="location_loss_warning" fuzzy="true">Upewnij się, że ten nowy selektor Androida nie usuwa lokalizacji ze zdjęć.</string>
   <string name="nearby_campaign_dismiss_message">Kampanie już nie będą widoczne. Jednak w razie potrzeby możesz ponownie włączyć to powiadomienie w ustawieniach.</string>
-  <string name="this_function_needs_network_connection">Ta funkcja wymaga połączenia sieciowego, sprawdź ustawienia połączenia.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Ta funkcja wymaga połączenia sieciowego, sprawdź ustawienia połączenia.</string>
   <string name="error_processing_image">Wystąpił błąd podczas przetwarzania obrazu. Spróbuj ponownie!</string>
   <string name="getting_edit_token">Pobieranie tokenu do edycji</string>
   <string name="check_category_adding_template">Dodawanie szablonu do sprawdzania kategorii</string>
@@ -592,7 +592,7 @@
   <string name="place_state_needs_photo">Potrzebne Zdjęcia</string>
   <string name="place_type">Typ miejsca:</string>
   <string name="nearby_search_hint">Most, muzeum, hotel itp.</string>
-  <string name="you_must_reset_your_passsword">Coś poszło nie tak podczas logowania, musisz zresetować hasło!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Coś poszło nie tak podczas logowania, musisz zresetować hasło!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">KLASY POTOMNE</string>
   <string name="title_for_parent_classes">KLASY NADRZĘDNE</string>
@@ -725,8 +725,8 @@
   <string name="add_location">Dodaj położenie</string>
   <string name="feedback_sharing_data_alert">Usuń z tego e-maila wszelkie informacje, których nie chcesz udostępniać publicznie. Pamiętaj również, że Twój adres e-mail, z którego publikujesz, oraz powiązane imię i nazwisko i zdjęcie profilowe będą widoczne publicznie.</string>
   <string name="explore_map_details">Szczegóły</string>
-  <string name="achievements_unavailable_beta">Osiągnięcia są dostępne tylko w wersji prod, sprawdź dokumentację dla programistów.</string>
-  <string name="leaderboard_unavailable_beta">Tablica wyników jest dostępna tylko w wersji prod. Zapoznaj się z dokumentacją dla programistów.</string>
+  <string name="achievements_unavailable_beta" fuzzy="true">Osiągnięcia są dostępne tylko w wersji prod, sprawdź dokumentację dla programistów.</string>
+  <string name="leaderboard_unavailable_beta" fuzzy="true">Tablica wyników jest dostępna tylko w wersji prod. Zapoznaj się z dokumentacją dla programistów.</string>
   <string name="copyright_popup">Przesyłaj tylko zdjęcia zrobione przez siebie. Przesyłający obrazy chronione prawami autorskimi zostaną zablokowani. Dotyczy to również wersji beta. Dziękujemy za przetestowanie aplikacji!</string>
   <string name="select_feedback_data_choice">Usuń zaznaczenie wszelkich informacji, których nie chcesz udostępniać publicznie.</string>
   <string name="api_level">Poziom API</string>

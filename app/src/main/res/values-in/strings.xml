@@ -82,12 +82,12 @@
   <string name="logging_in_message">Silakan tunggu…</string>
   <string name="updating_caption_title">Memperbarui takarir dan deskripsi</string>
   <string name="updating_caption_message">Mohon tunggu...</string>
-  <string name="login_success">Berhasil masuk log!</string>
-  <string name="login_failed">Gagal masuk log!</string>
+  <string name="login_success" fuzzy="true">Berhasil masuk log!</string>
+  <string name="login_failed" fuzzy="true">Gagal masuk log!</string>
   <string name="upload_failed">Berkas tidak ditemukan. Silakan coba berkas lain.</string>
   <string name="retry_limit_reached">Batas pencobaan ulang maksimum telah tercapai! Harap batalkan pengunggahan dan coba lagi</string>
   <string name="unrestricted_battery_mode">Matikan pengoptimalan baterai?</string>
-  <string name="authentication_failed">Otentikasi gagal, silakan masuk log kembali</string>
+  <string name="authentication_failed" fuzzy="true">Otentikasi gagal, silakan masuk log kembali</string>
   <string name="uploading_started">Mulai mengunggah!</string>
   <string name="uploading_queued">Unggahan dalam antrian (mode sambungan terbatas diaktifkan)</string>
   <string name="upload_completed_notification_title">%1$s terunggah!</string>
@@ -114,11 +114,11 @@
   <string name="add_caption_toast">Berikan takarir untuk berkas ini</string>
   <string name="share_description_hint">Deskripsi</string>
   <string name="share_caption_hint">Takarir</string>
-  <string name="login_failed_network">Tidak dapat login - kesalahan pada jaringan</string>
+  <string name="login_failed_network" fuzzy="true">Tidak dapat login - kesalahan pada jaringan</string>
   <string name="login_failed_throttled">Terlalu banyak percobaan masuk yang gagal. Harap coba lagi dalam beberapa menit</string>
   <string name="login_failed_blocked">Maaf, pengguna ini telah diblokir di Commons</string>
   <string name="login_failed_2fa_needed">Anda harus memberikan kode otentikasi dua faktor milik Anda</string>
-  <string name="login_failed_generic">Gagal masuk log</string>
+  <string name="login_failed_generic" fuzzy="true">Gagal masuk log</string>
   <string name="share_upload_button">Unggah</string>
   <string name="multiple_share_base_title">Beri nama set ini</string>
   <string name="provider_modifications">Modifikasi</string>
@@ -273,7 +273,7 @@
   <string name="nominated_see_more">Lihat halaman web untuk rincian</string>
   <string name="skip_login">Lewati</string>
   <string name="navigation_item_login">Masuk</string>
-  <string name="skip_login_title">Apakah Anda benar-benar tidak ingin masuk?</string>
+  <string name="skip_login_title" fuzzy="true">Apakah Anda benar-benar tidak ingin masuk?</string>
   <string name="skip_login_message">Anda mungkin harus masuk untuk mengunggah gambar di lain waktu.</string>
   <string name="login_alert_message">Silakan masuk untuk menggunakan fitur ini</string>
   <string name="copy_wikicode">Salin wikitext ke papan klip</string>
@@ -340,7 +340,7 @@
   <string name="construction_event_answer">Gambar yang menunjukkan teknologi atau budaya sangat diharapkan di Commons.</string>
   <string name="congratulatory_message_quiz">Anda mendapat %1$s jawaban yang benar. Selamat!</string>
   <string name="warning_for_no_answer">Pilih salah satu dari dua opsi untuk menjawab pertanyaan</string>
-  <string name="user_not_logged_in">Sesi masuk telah kedaluwarsa, harap masuk log lagi.</string>
+  <string name="user_not_logged_in" fuzzy="true">Sesi masuk telah kedaluwarsa, harap masuk log lagi.</string>
   <string name="quiz_result_share_message">Bagikan hasil kuis Anda dengan teman!</string>
   <string name="continue_message">Lanjut</string>
   <string name="correct">Jawaban yang benar</string>
@@ -423,7 +423,7 @@
   <string name="never_ask_again">Jangan pernah menanyakan ini lagi</string>
   <string name="display_location_permission_title">Tanya untuk izin lokasi</string>
   <string name="display_location_permission_explanation">Minta izin lokasi ketika diperlukan untuk fitur tampilan kartu pemberitahuan sekitar.</string>
-  <string name="achievements_fetch_failed">Terjadi kesalahan. Kami tidak dapat mengambil pencapaian Anda</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Terjadi kesalahan. Kami tidak dapat mengambil pencapaian Anda</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Anda telah membuat begitu banyak kontribusi sehingga sistem perhitungan pencapaian kami tidak dapat menanggulanginya. Ini adalah pencapaian yang tertinggi.</string>
   <string name="ends_on">Berakhir pada:</string>
   <string name="display_campaigns">Sinahang penyobyahan</string>
@@ -431,7 +431,7 @@
   <string name="option_allow">Izinkan</string>
   <string name="option_dismiss">Tutup</string>
   <string name="nearby_campaign_dismiss_message">Anda tidak akan melihat kampanye ini lagi. Namun, Anda bisa mengaktifkan kembali pemberitahuan ini di Pengaturan jika diinginkan.</string>
-  <string name="this_function_needs_network_connection">Fungsi ini membutuhkan hubungan jaringan, tolong periksa pengaturan jaringan Anda.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Fungsi ini membutuhkan hubungan jaringan, tolong periksa pengaturan jaringan Anda.</string>
   <string name="error_processing_image">Terjadi masalah saat memproses gambar. Harap mengulang lagi.</string>
   <string name="getting_edit_token">Dapatkan token untuk menyunting</string>
   <string name="check_category_adding_template">Menambahkan templat untuk pemeriksaan kategori</string>
@@ -554,7 +554,7 @@
   <string name="place_state_needs_photo">Perlu foto</string>
   <string name="place_type">Jenis tempat:</string>
   <string name="nearby_search_hint">Jembatas, museum, hotel, dll.</string>
-  <string name="you_must_reset_your_passsword">Terjadi kesalahan ketika masuk log, Anda perlu mengubah kata sandi Anda !!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Terjadi kesalahan ketika masuk log, Anda perlu mengubah kata sandi Anda !!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">KELAS ANAK</string>
   <string name="title_for_parent_classes">KELAS INDUK</string>

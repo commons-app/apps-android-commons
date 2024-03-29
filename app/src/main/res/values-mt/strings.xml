@@ -10,8 +10,8 @@
   <string name="login">Idħol</string>
   <string name="logging_in_title">Dieħel</string>
   <string name="logging_in_message" fuzzy="true">Jekk jogħġbok stenna…</string>
-  <string name="login_success">Dħalt b\'suċċess!</string>
-  <string name="login_failed">Id-dħul fil-kont ma rnexxiex!</string>
+  <string name="login_success" fuzzy="true">Dħalt b\'suċċess!</string>
+  <string name="login_failed" fuzzy="true">Id-dħul fil-kont ma rnexxiex!</string>
   <string name="authentication_failed" fuzzy="true">L-awtentikar falla!</string>
   <string name="uploading_started">Beda t-tlugħ!</string>
   <string name="upload_completed_notification_title">%1$s tela\'!</string>
@@ -33,7 +33,7 @@
   <string name="share_title_hint" fuzzy="true">Titlu</string>
   <string name="share_description_hint">Deskrizzjoni</string>
   <string name="login_failed_blocked">Jiddispjaċina, dan l-utent ġie mblukkat fuq Commons</string>
-  <string name="login_failed_generic">Id-dħul fil-kont ma rnexxiex</string>
+  <string name="login_failed_generic" fuzzy="true">Id-dħul fil-kont ma rnexxiex</string>
   <string name="share_upload_button">Tella\'</string>
   <string name="multiple_share_base_title">Isem ta\' dan is-sett</string>
   <string name="provider_modifications">Modifiki</string>

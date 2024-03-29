@@ -36,8 +36,8 @@
   <string name="signup">Teiken dich in</string>
   <string name="logging_in_title">Aan \'nt melje...</string>
   <string name="logging_in_message">Wach estebleef...</string>
-  <string name="login_success">Aanmelje gelök!</string>
-  <string name="login_failed">Aanmelje mislök!</string>
+  <string name="login_success" fuzzy="true">Aanmelje gelök!</string>
+  <string name="login_failed" fuzzy="true">Aanmelje mislök!</string>
   <string name="upload_failed">Bestandj neet gevónje. Perbeer \'n anger bestandj.</string>
   <string name="authentication_failed" fuzzy="true">Verificatie mislök!</string>
   <string name="uploading_started">Upload begós!</string>
@@ -60,11 +60,11 @@
   <string name="menu_share">Deil</string>
   <string name="share_title_hint" fuzzy="true">Titel</string>
   <string name="share_description_hint">Besjrieving</string>
-  <string name="login_failed_network">Kan zich neet aanmelde - netwirkfout</string>
+  <string name="login_failed_network" fuzzy="true">Kan zich neet aanmelde - netwirkfout</string>
   <string name="login_failed_throttled">Te väöl mislökde kieëre geperbeerd. Perbeer estebleef oppernuuj euver e paar menuut.</string>
   <string name="login_failed_blocked">Deze gebroeker is geblokkeerd op Commons</string>
   <string name="login_failed_2fa_needed">Doe mós diene twieëfaktorische bevestigingscode opgaeve.</string>
-  <string name="login_failed_generic">Aanmelje mislök</string>
+  <string name="login_failed_generic" fuzzy="true">Aanmelje mislök</string>
   <string name="share_upload_button">Upload</string>
   <string name="multiple_share_base_title">Gaef dees verzameling \'ne naam</string>
   <string name="provider_modifications">Aanpassinge</string>
