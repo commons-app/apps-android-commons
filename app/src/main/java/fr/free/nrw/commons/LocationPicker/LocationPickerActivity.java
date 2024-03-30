@@ -331,7 +331,7 @@ public class LocationPickerActivity extends BaseActivity implements
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
-                    Timber.d("Inside Coordinates are removed from the image");
+                    Timber.d("Coordinates are removed from the image");
                 }));
         }
         final Intent returningIntent = new Intent();

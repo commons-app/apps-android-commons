@@ -78,6 +78,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     public static final String UPLOAD_MEDIA_DETAILS = "upload_media_detail_adapter";
 
+    /**
+     * True when user removes location from the current image
+     */
+    private boolean hasUserRemovedLocation;
+
 
     private UploadMediaDetailAdapter uploadMediaDetailAdapter;
 
@@ -296,7 +301,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         if (callback == null) {
             return;
         }
-        presenter.displayLocDialog(indexOfFragment, inAppPictureLocation);
+        presenter.displayLocDialog(indexOfFragment, inAppPictureLocation, hasUserRemovedLocation);
     }
 
     public void onPreviousButtonClicked() {
@@ -642,9 +647,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                     onNextButtonClicked();
                 }
             } else {
-                // If camera position is null means either location is removed by user or didn't exist
-                // TODO: check this, what happens abt camera posn if location was not there by default
-                // TODO: pass isRemovedByUser, to not show dialog again
+                // If camera position is null means location is removed by the user
                 removeLocation();
             }
         }
@@ -706,6 +709,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             editableUploadItem.getGpsCoords().setDecLatitude(0.0);
             editableUploadItem.getGpsCoords().setDecLongitude(0.0);
             editableUploadItem.getGpsCoords().setImageCoordsExists(false);
+            hasUserRemovedLocation = true;
 
             Toast.makeText(getContext(), getString(R.string.location_removed), Toast.LENGTH_LONG)
                 .show();

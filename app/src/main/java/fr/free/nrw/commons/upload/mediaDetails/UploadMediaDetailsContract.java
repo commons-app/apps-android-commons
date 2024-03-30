@@ -71,13 +71,16 @@ public interface UploadMediaDetailsContract {
         boolean getImageQuality(int uploadItemIndex, LatLng inAppPictureLocation, Activity activity);
 
         /**
-         * Checks if the image has a location or not. Displays a dialog alerting user that no
-         * location has been to added to the image and asking them to add one
+         * Checks if the image has a location. Displays a dialog alerting user that no location has
+         * been to added to the image and asking them to add one, if location was not removed by the
+         * user
          *
          * @param uploadItemIndex Index of the uploadItem which has no location
          * @param inAppPictureLocation In app picture location (if any)
+         * @param hasUserRemovedLocation True if user has removed location from the image
          */
-        void displayLocDialog(int uploadItemIndex, LatLng inAppPictureLocation);
+        void displayLocDialog(int uploadItemIndex, LatLng inAppPictureLocation,
+            boolean hasUserRemovedLocation);
 
         /**
          * Used to check image quality from stored qualities and display dialogs
