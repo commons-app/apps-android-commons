@@ -30,8 +30,8 @@
   <string name="signup">Iinskriiw</string>
   <string name="logging_in_title">Uunmeldin lääpt</string>
   <string name="logging_in_message">Wees so gud an teew …</string>
-  <string name="login_success">Uunmeldin hää loket!</string>
-  <string name="login_failed">Bi\'t uunmeldin as wat skiaf gingen.</string>
+  <string name="login_success" fuzzy="true">Uunmeldin hää loket!</string>
+  <string name="login_failed" fuzzy="true">Bi\'t uunmeldin as wat skiaf gingen.</string>
   <string name="upload_failed">Datei ei fünjen. Ferschük det mä en ööder datei.</string>
   <string name="authentication_failed" fuzzy="true">Dü küdst ei gudkäänd wurd!</string>
   <string name="uploading_started">Huuchschüüren hää begand!</string>
@@ -54,11 +54,11 @@
   <string name="menu_share">Skaft</string>
   <string name="share_title_hint" fuzzy="true">Tiitel</string>
   <string name="share_description_hint">Beskriiwang</string>
-  <string name="login_failed_network">Bi\'t uunmeldin as wat skiaf gingen - näätwerk-feeler</string>
+  <string name="login_failed_network" fuzzy="true">Bi\'t uunmeldin as wat skiaf gingen - näätwerk-feeler</string>
   <string name="login_failed_throttled">Tu fölsis fersoocht saner lok. Ferschük det uun hög minüüten noch ans nei.</string>
   <string name="login_failed_blocked">Didiar brüker as üüb Commons speret wurden.</string>
   <string name="login_failed_2fa_needed">Dü skel dan code för\'t tau-straal-gudkäänen (2FA) uundu.</string>
-  <string name="login_failed_generic">Bi\'t uunmeldin as wat skiaf gingen.</string>
+  <string name="login_failed_generic" fuzzy="true">Bi\'t uunmeldin as wat skiaf gingen.</string>
   <string name="share_upload_button">Huuchschüür</string>
   <string name="multiple_share_base_title">Nööm för jodiar bilen</string>
   <string name="provider_modifications">Feranrangen</string>

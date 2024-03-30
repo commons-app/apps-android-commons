@@ -6,225 +6,250 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
-  <RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
     <RelativeLayout
-      android:id="@+id/map_layout"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:background="@color/status_bar_blue">
-
-      <include
-        android:id="@+id/nearby_filter"
-        layout="@layout/nearby_filter_all_items" />
+      android:layout_height="match_parent">
 
       <RelativeLayout
-        android:id="@+id/rl_container_wlm_month_message"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/nearby_filter"
-        android:background="@color/white"
-        android:gravity="center"
-        android:padding="12dp"
-        android:visibility="gone"
-        tools:visibility="visible">
-
-        <androidx.appcompat.widget.AppCompatTextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_toStartOf="@id/tv_learn_more"
-          android:text="@string/wlm_month_message"
-          android:textColor="@color/secondaryTextColor"
-          android:textStyle="bold" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-          android:id="@+id/tv_learn_more"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignParentEnd="true"
-          android:text="@string/learn_more"
-          android:textColor="@color/status_bar_blue"
-          android:textStyle="bold">
-
-        </androidx.appcompat.widget.AppCompatTextView>
-      </RelativeLayout>
-
-      <include
-        android:id="@+id/nearby_filter_list"
-        layout="@layout/nearby_filter_list"
-        android:layout_width="@dimen/giant_height"
-        android:layout_height="@dimen/giant_height"
-        android:layout_below="@id/nearby_filter"
-        android:layout_alignParentEnd="true" />
-
-
-      <!--  I have done this intentionally, the mapview because of some elevation or something,
-      sometimes hangs over the drawer layout and sometimes draws its onPaused state over the contributions, this seems to be the probable fix  -->
-      <RelativeLayout
+        android:id="@+id/map_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/rl_container_wlm_month_message">
+        android:background="@color/status_bar_blue">
 
-        <org.osmdroid.views.MapView
-          android:id="@+id/map"
-          android:layout_width="fill_parent"
-          android:layout_height="fill_parent"
-          android:visibility="visible" />
+        <include
+          android:id="@+id/nearby_filter"
+          layout="@layout/nearby_filter_all_items" />
 
-        <View
+        <RelativeLayout
+          android:id="@+id/rl_container_wlm_month_message"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/nearby_filter"
+          android:background="@color/white"
+          android:gravity="center"
+          android:padding="12dp"
+          android:visibility="gone"
+          tools:visibility="visible">
+
+          <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/tv_learn_more"
+            android:text="@string/wlm_month_message"
+            android:textColor="@color/secondaryTextColor"
+            android:textStyle="bold" />
+
+          <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_learn_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/learn_more"
+            android:textColor="@color/status_bar_blue"
+            android:textStyle="bold">
+
+          </androidx.appcompat.widget.AppCompatTextView>
+        </RelativeLayout>
+
+        <include
+          android:id="@+id/nearby_filter_list"
+          layout="@layout/nearby_filter_list"
+          android:layout_width="@dimen/giant_height"
+          android:layout_height="@dimen/giant_height"
+          android:layout_below="@id/nearby_filter"
+          android:layout_alignParentEnd="true" />
+
+
+        <!--  I have done this intentionally, the mapview because of some elevation or something,
+        sometimes hangs over the drawer layout and sometimes draws its onPaused state over the contributions, this seems to be the probable fix  -->
+        <RelativeLayout
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          android:background="@android:color/transparent" />
+          android:layout_below="@id/rl_container_wlm_month_message">
 
-        <androidx.appcompat.widget.AppCompatTextView
-          android:id="@+id/tv_attribution"
+          <org.osmdroid.views.MapView
+            android:id="@+id/map"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="visible" />
+
+          <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent" />
+
+          <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_attribution"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/map_attribution"
+            android:textAlignment="center"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+        </RelativeLayout>
+
+
+        <Button
+          android:id="@+id/search_this_area_button"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:layout_below="@id/rl_container_wlm_month_message"
+          android:layout_centerHorizontal="true"
+          android:layout_gravity="center_horizontal"
+          android:layout_margin="@dimen/activity_margin_horizontal"
+          android:background="@color/white"
+          android:padding="@dimen/activity_margin_horizontal"
+          android:singleLine="true"
+          android:text="@string/search_this_area"
+          android:textColor="@color/status_bar_blue"
+          android:visibility="gone"
+          app:elevation="@dimen/dimen_6" />
+
+        <View
+          android:id="@+id/transparentView"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
           android:layout_alignParentLeft="true"
-          android:layout_alignParentBottom="true"
-          android:layout_marginStart="8dp"
-          android:layout_marginTop="8dp"
-          android:layout_marginEnd="8dp"
-          android:layout_marginBottom="8dp"
-          android:text="@string/map_attribution"
-          android:textAlignment="center"
-          android:textSize="10sp"
-          android:textStyle="bold" />
+          android:background="#aa969696"
+          android:elevation="@dimen/dimen_6"
+          android:visibility="gone">
+
+        </View>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+          android:id="@+id/fab_recenter"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/rl_container_wlm_month_message"
+          android:layout_alignParentEnd="true"
+          android:layout_alignParentRight="true"
+          android:clickable="true"
+          android:visibility="visible"
+          app:backgroundTint="@color/main_background_light"
+          app:elevation="@dimen/dimen_6"
+          app:fabSize="normal"
+          app:layout_anchorGravity="top|right|end"
+          app:srcCompat="@drawable/ic_my_location_black_24dp"
+          app:useCompatPadding="true" />
 
       </RelativeLayout>
 
-
-      <Button
-        android:id="@+id/search_this_area_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rl_container_wlm_month_message"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="@dimen/activity_margin_horizontal"
-        android:background="@color/white"
-        android:padding="@dimen/activity_margin_horizontal"
-        android:singleLine="true"
-        android:text="@string/search_this_area"
-        android:textColor="@color/status_bar_blue"
-        android:visibility="gone"
-        app:elevation="@dimen/dimen_6" />
-
-      <View
-        android:id="@+id/transparentView"
+      <FrameLayout
+        android:id="@+id/fl_container_nearby_children"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:background="#aa969696"
-        android:elevation="@dimen/dimen_6"
-        android:visibility="gone">
-
-      </View>
-
-      <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_recenter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rl_container_wlm_month_message"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:clickable="true"
-        android:visibility="visible"
-        app:backgroundTint="@color/main_background_light"
-        app:elevation="@dimen/dimen_6"
-        app:fabSize="normal"
-        app:layout_anchorGravity="top|right|end"
-        app:srcCompat="@drawable/ic_my_location_black_24dp"
-        app:useCompatPadding="true" />
-
+        android:layout_height="match_parent" />
     </RelativeLayout>
 
-    <FrameLayout
-      android:id="@+id/fl_container_nearby_children"
+    <include
+      android:id="@+id/bottom_sheet_nearby"
+      layout="@layout/bottom_sheet_nearby" />
+
+    <include
+      android:id="@+id/bottom_sheet_details"
+      layout="@layout/bottom_sheet_details" />
+
+    <ProgressBar
+      android:id="@+id/map_progress_bar"
       android:layout_width="match_parent"
-      android:layout_height="match_parent" />
-  </RelativeLayout>
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:visibility="gone"
+      app:elevation="@dimen/dimen_6" />
 
-  <include layout="@layout/bottom_sheet_nearby" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+      android:id="@+id/fab_plus"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentEnd="true"
+      android:layout_alignParentRight="true"
+      android:layout_alignParentBottom="true"
+      android:layout_marginEnd="@dimen/medium_height"
+      android:layout_marginRight="@dimen/medium_height"
+      android:clickable="true"
+      android:visibility="invisible"
+      app:backgroundTint="@color/button_blue"
+      app:elevation="@dimen/activity_margin_horizontal"
+      app:fabSize="normal"
+      app:layout_anchor="@id/bottom_sheet_details"
+      app:layout_anchorGravity="top|right|end"
+      app:pressedTranslationZ="@dimen/medium_height"
+      app:srcCompat="@drawable/ic_add_white_24dp"
+      app:useCompatPadding="true" />
 
-  <include
-    android:id="@+id/bottom_sheet_details"
-    layout="@layout/bottom_sheet_details" />
+    <View
+      android:id="@+id/empty_view1"
+      android:layout_width="56dp"
+      android:layout_height="285dp"
+      android:visibility="invisible"
+      app:layout_anchor="@id/fab_plus"
+      app:layout_anchorGravity="center_horizontal" />
 
-  <ProgressBar
-    android:id="@+id/map_progress_bar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:visibility="gone"
-    app:elevation="@dimen/dimen_6" />
+    <View
+      android:id="@+id/empty_view"
+      android:layout_width="56dp"
+      android:layout_height="174dp"
+      android:visibility="invisible"
+      app:layout_anchor="@id/fab_plus"
+      app:layout_anchorGravity="center_horizontal" />
 
-  <com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:id="@+id/fab_plus"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentEnd="true"
-    android:layout_alignParentRight="true"
-    android:layout_alignParentBottom="true"
-    android:layout_marginEnd="@dimen/medium_height"
-    android:layout_marginRight="@dimen/medium_height"
-    android:clickable="true"
-    android:visibility="invisible"
-    app:backgroundTint="@color/button_blue"
-    app:elevation="@dimen/activity_margin_horizontal"
-    app:fabSize="normal"
-    app:layout_anchor="@id/bottom_sheet_details"
-    app:layout_anchorGravity="top|right|end"
-    app:pressedTranslationZ="@dimen/medium_height"
-    app:srcCompat="@drawable/ic_add_white_24dp"
-    app:useCompatPadding="true" />
+    <View
+      android:id="@+id/empty_view2"
+      android:layout_width="56dp"
+      android:layout_height="46dp"
+      android:visibility="invisible"
+      app:layout_anchor="@id/fab_plus"
+      app:layout_anchorGravity="center_horizontal" />
 
-  <View
-    android:id="@+id/empty_view1"
-    android:layout_width="56dp"
-    android:layout_height="174dp"
-    android:visibility="invisible"
-    app:layout_anchor="@id/fab_plus"
-    app:layout_anchorGravity="center_horizontal" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+      android:id="@+id/fab_camera"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:scaleType="center"
+      android:tint="@color/button_blue"
+      android:visibility="invisible"
+      app:backgroundTint="@color/main_background_light"
+      app:elevation="@dimen/dimen_6"
+      app:fabSize="mini"
+      app:layout_anchor="@id/empty_view1"
+      app:layout_anchorGravity="center_horizontal"
+      app:pressedTranslationZ="@dimen/medium_height"
+      app:srcCompat="@drawable/ic_photo_camera_white_24dp" />
 
-  <View
-    android:id="@+id/empty_view"
-    android:layout_width="56dp"
-    android:layout_height="46dp"
-    android:visibility="invisible"
-    app:layout_anchor="@id/fab_plus"
-    app:layout_anchorGravity="center_horizontal" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+      android:id="@+id/fab_gallery"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:scaleType="center"
+      android:tint="@color/button_blue"
+      android:visibility="invisible"
+      app:backgroundTint="@color/main_background_light"
+      app:elevation="@dimen/dimen_6"
+      app:fabSize="mini"
+      app:layout_anchor="@id/empty_view"
+      app:layout_anchorGravity="center_horizontal"
+      app:pressedTranslationZ="@dimen/medium_height"
+      app:srcCompat="@drawable/ic_photo_white_24dp" />
 
-  <com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:id="@+id/fab_camera"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:scaleType="center"
-    android:tint="@color/button_blue"
-    android:visibility="invisible"
-    app:backgroundTint="@color/main_background_light"
-    app:elevation="@dimen/dimen_6"
-    app:fabSize="mini"
-    app:layout_anchor="@id/empty_view1"
-    app:layout_anchorGravity="center_horizontal"
-    app:pressedTranslationZ="@dimen/medium_height"
-    app:srcCompat="@drawable/ic_photo_camera_white_24dp" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+      android:id="@+id/fab_custom_gallery"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:scaleType="center"
+      android:tint="@color/button_blue"
+      android:visibility="invisible"
+      app:backgroundTint="@color/main_background_light"
+      app:elevation="@dimen/dimen_6"
+      app:fabSize="mini"
+      app:layout_anchor="@id/empty_view2"
+      app:layout_anchorGravity="center_horizontal"
+      app:pressedTranslationZ="@dimen/medium_height"
+      app:srcCompat="@drawable/ic_custom_image_picker" />
 
-  <com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:id="@+id/fab_gallery"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:scaleType="center"
-    android:tint="@color/button_blue"
-    android:visibility="invisible"
-    app:backgroundTint="@color/main_background_light"
-    app:elevation="@dimen/dimen_6"
-    app:fabSize="mini"
-    app:layout_anchor="@id/empty_view"
-    app:layout_anchorGravity="center_horizontal"
-    app:pressedTranslationZ="@dimen/medium_height"
-    app:srcCompat="@drawable/ic_photo_white_24dp" />
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+  </androidx.coordinatorlayout.widget.CoordinatorLayout>

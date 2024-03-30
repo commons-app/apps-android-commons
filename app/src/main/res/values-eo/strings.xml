@@ -82,13 +82,13 @@
   <string name="logging_in_message">Bonvolu atendi...</string>
   <string name="updating_caption_title">Ĝisdatiganta subtekstojn kaj priskribojn</string>
   <string name="updating_caption_message">Bonvolu atendi…</string>
-  <string name="login_success">Ensalutado sukcesis</string>
-  <string name="login_failed">Ensalutado malsukcesis</string>
+  <string name="login_success" fuzzy="true">Ensalutado sukcesis</string>
+  <string name="login_failed" fuzzy="true">Ensalutado malsukcesis</string>
   <string name="upload_failed">Dosiero ne trovita. Bonvolu provi alian dosieron.</string>
   <string name="retry_limit_reached">Maksimuma limo por denovaj provoj atingita! Bonvolu ĉesigi la alŝuton kaj provi denove</string>
   <string name="unrestricted_battery_mode">Ĉu malŝalti baterian optimumigon?</string>
   <string name="suggest_unrestricted_mode">Alŝuto de pli ol 3 bildoj funkcias pli fidinde kiam la bateria optimumigo estas malŝaltita. Bonvolu malŝalti baterian optimumigon por la aplikaĵo \"Commons\" de la agordoj por glata alŝutado. \n\nEblaj paŝoj por malŝalti baterian optimumigon:\n\nPaŝo 1: Premmu la butonon \'Agordoj\' sube.\n\nPaŝo 2: Ŝanĝu de \'Ne optimumigita\' al \'Ĉiuj aplikaĵoj\'.\n\nPaŝo 3: Serĉu \"Commons\" aŭ \"fr.free.nrw.commons\".\n\nPaŝo 4: Premu ĝin kaj elektu \'Ne optimumigu\'.!N !\nPaŝo 5: Premu \'Farita\'.</string>
-  <string name="authentication_failed">Aŭtentigo malsukcesis, bonvolu denove ensaluti</string>
+  <string name="authentication_failed" fuzzy="true">Aŭtentigo malsukcesis, bonvolu denove ensaluti</string>
   <string name="uploading_started">La alŝutado komenciĝis!</string>
   <string name="uploading_queued">Alŝuto atendas en vico (limigita konekta modo estas ebligita)</string>
   <string name="upload_completed_notification_title">%1$s alŝutita!</string>
@@ -115,11 +115,11 @@
   <string name="add_caption_toast">Bonvolu provizi subtekston por ĉi tiu dosiero</string>
   <string name="share_description_hint">Priskribo</string>
   <string name="share_caption_hint">Subteksto</string>
-  <string name="login_failed_network">Ne eblas ensaluti. Estas problemo pri la loka reto.</string>
+  <string name="login_failed_network" fuzzy="true">Ne eblas ensaluti. Estas problemo pri la loka reto.</string>
   <string name="login_failed_throttled">Tro da,nesukcesaj provoj. Bonvolu provi denove post kelkaj minutoj.</string>
   <string name="login_failed_blocked">Pardonon, ĉi tiu uzanto estas barita de la Vikimedia Komunejo</string>
   <string name="login_failed_2fa_needed">Vi devas provizi vian dupaŝan aŭtentigan kodon.</string>
-  <string name="login_failed_generic">Ensalutado malsukcesis</string>
+  <string name="login_failed_generic" fuzzy="true">Ensalutado malsukcesis</string>
   <string name="share_upload_button">Alŝuti</string>
   <string name="multiple_share_base_title">Nomu ĉi tiun aron</string>
   <string name="provider_modifications">Ŝanĝoj</string>
@@ -276,7 +276,7 @@
   <string name="nominated_see_more">&lt;u&gt;Rigardu la retpaĝon por pliaj detaloj&lt;/u&gt;</string>
   <string name="skip_login">Preterpasi</string>
   <string name="navigation_item_login">Ensaluti</string>
-  <string name="skip_login_title">Ĉu vere vi volas transpasi la ensalutadon?</string>
+  <string name="skip_login_title" fuzzy="true">Ĉu vere vi volas transpasi la ensalutadon?</string>
   <string name="skip_login_message">Vi devas ensaluti por alŝuti bildojn.</string>
   <string name="login_alert_message">Bonvolu ensaluti por uzi ĉi tiun eblon</string>
   <string name="copy_wikicode">Kopii la vikitekston en la tondujon</string>
@@ -343,7 +343,7 @@
   <string name="construction_event_answer">Ĉe Komunejo, ni bonvenigas bildojn prezentantajn teknologion aŭ kulturon.</string>
   <string name="congratulatory_message_quiz">%1$s el viaj respondoj estis ĝustaj. Gratulon!</string>
   <string name="warning_for_no_answer">Elektu unu el la du respondoj al la demando</string>
-  <string name="user_not_logged_in">Ensaluta sesio eksvalidiĝis; bonvolu reensaluti.</string>
+  <string name="user_not_logged_in" fuzzy="true">Ensaluta sesio eksvalidiĝis; bonvolu reensaluti.</string>
   <string name="quiz_result_share_message">Diskonigi ĉi tiun kvizon al viaj amikoj!</string>
   <string name="continue_message">Daŭrigi</string>
   <string name="correct">Ĝusta Respondo</string>
@@ -426,7 +426,7 @@
   <string name="never_ask_again">Ne plu repeti</string>
   <string name="display_location_permission_title">Montri permeson pri loko</string>
   <string name="display_location_permission_explanation">Peti por permeso de lokado, kiam ĝi estas postulata por la funkciado de la karta vido de de apudaj sciigoj.</string>
-  <string name="achievements_fetch_failed">Io misfunkciis; ni ne povis akiri viajn atingojn</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Io misfunkciis; ni ne povis akiri viajn atingojn</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Vi faris tiom da kontribuoj, ke nia atingo-kalkula sistemo ne povas elteni ion. Tio estas la plej granda atingo.</string>
   <string name="ends_on">Finiĝas je:</string>
   <string name="display_campaigns">Montri kampanjojn</string>
@@ -442,7 +442,7 @@
   <string name="open_document_photo_picker_explanation">La nova Android-foto-elektilo riskas perdi informojn pri loko. Ebligu se vi eble uzos ĝin.</string>
   <string name="location_loss_warning">Malŝalti ĉi tion povus ekigi la novan Android-foto-elektilon. Ĝi riskas perdi lokiformojn.\n\nAlklaku \'Legu pli\' por pliaj informoj.</string>
   <string name="nearby_campaign_dismiss_message">Vi ne plu vidos la kampanjojn. Tamen, vi povas reŝalti tiun sciigon en Agordoj se vi volas.</string>
-  <string name="this_function_needs_network_connection">Ĉi tiu funkcio postulas konekton al reto; bonvolu kontroli viajn agordojn pri konektado.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Ĉi tiu funkcio postulas konekton al reto; bonvolu kontroli viajn agordojn pri konektado.</string>
   <string name="error_processing_image">Eraro okazis dum traktado de la bildo. Bonvolu reprovi!</string>
   <string name="getting_edit_token">Akirante ĵetonon por redaktado</string>
   <string name="check_category_adding_template">Aldonante ŝablonon por kategoria kontrolo</string>
@@ -569,7 +569,7 @@
   <string name="place_state_needs_photo">Foto bezonata</string>
   <string name="place_type">Tipo de loko:</string>
   <string name="nearby_search_hint">Ponto, muzeo, hotelo ktp.</string>
-  <string name="you_must_reset_your_passsword">Io misfunkciis kun ensaluto, vi devas restarigi vian pasvorton !!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Io misfunkciis kun ensaluto, vi devas restarigi vian pasvorton !!</string>
   <string name="title_for_media">PLURMEDIAĴO</string>
   <string name="title_for_child_classes">SUBKLASOJ</string>
   <string name="title_for_parent_classes">PLI ALTAJ KLASOJ</string>
@@ -703,8 +703,8 @@
   <string name="add_location">Aldoni lokon</string>
   <string name="feedback_sharing_data_alert">Bonvolu forigi el ĉi tiu retpoŝto ajnajn informojn, kiujn vi ne deziras disdoni publike. Ankaŭ, bonvolu scii, ke via retadreso, kun kiu vi komentas, kaj la rilataj nomo kaj profilbildo, estos videblaj publike.</string>
   <string name="explore_map_details">Detaloj</string>
-  <string name="achievements_unavailable_beta">Atingoj haveblas nur en la produkto-versio, bonvolu konsulti la dokumentaron por programistoj.</string>
-  <string name="leaderboard_unavailable_beta">La gvidtabulo haveblas nur en la produkto-versio, bonvolu konsulti la dokumentaron por programistoj.</string>
+  <string name="achievements_unavailable_beta" fuzzy="true">Atingoj haveblas nur en la produkto-versio, bonvolu konsulti la dokumentaron por programistoj.</string>
+  <string name="leaderboard_unavailable_beta" fuzzy="true">La gvidtabulo haveblas nur en la produkto-versio, bonvolu konsulti la dokumentaron por programistoj.</string>
   <string name="copyright_popup">Bonvolu alŝuti nur bildojn, kiujn vi faris mem. Alŝutantoj de kopirajtigitaj bildoj estos blokitaj. Ĉi tio validas ankaŭ por la beta-versio. Dankon pro elprovi la aplikaĵon!</string>
   <string name="select_feedback_data_choice">Bonvolu malelekti ajnan informon, kiun vi ne deziras disdoni publike.</string>
   <string name="api_level">Nivelo de API</string>

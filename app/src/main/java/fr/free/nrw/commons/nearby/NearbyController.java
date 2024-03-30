@@ -1,8 +1,10 @@
 package fr.free.nrw.commons.nearby;
 
+import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
+
 import androidx.annotation.MainThread;
 import androidx.annotation.Nullable;
-
 import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.MapController;
 import fr.free.nrw.commons.location.LatLng;
@@ -15,9 +17,6 @@ import java.util.Locale;
 import java.util.Map;
 import javax.inject.Inject;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
-import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 public class NearbyController extends MapController {
 
@@ -39,7 +38,7 @@ public class NearbyController extends MapController {
     /**
      * Prepares Place list to make their distance information update later.
      *
-     * @param currentLatLng           current location for user
+     * @param currentLatLng       current location for user
      * @param searchLatLng        the location user wants to search around
      * @param returnClosestResult if this search is done to find closest result or all results
      * @param customQuery         if this search is done via an advanced query
@@ -118,18 +117,44 @@ public class NearbyController extends MapController {
         return nearbyPlacesInfo;
     }
 
-    public String getPlacesAsKML(LatLng leftLatLng, LatLng rightLatLng) throws Exception {
-        return nearbyPlaces.getPlacesAsKML(leftLatLng, rightLatLng);
+    public String getPlacesAsKML(LatLng currentLocation) throws Exception {
+        return nearbyPlaces.getPlacesAsKML(
+            calculateSouthWest(currentLocation.getLatitude(), currentLocation.getLongitude(), 10),
+            calculateNorthEast(currentLocation.getLatitude(), currentLocation.getLongitude(), 10)
+        );
     }
 
-    public String getPlacesAsGPX(LatLng leftLatLng, LatLng rightLatLng) throws Exception {
-        return nearbyPlaces.getPlacesAsGPX(leftLatLng, rightLatLng);
+    public String getPlacesAsGPX(LatLng currentLocation) throws Exception {
+        return nearbyPlaces.getPlacesAsGPX(
+            calculateSouthWest(currentLocation.getLatitude(), currentLocation.getLongitude(), 10),
+            calculateNorthEast(currentLocation.getLatitude(), currentLocation.getLongitude(), 10)
+        );
+    }
+
+    public static LatLng calculateNorthEast(double latitude, double longitude, double distance) {
+        double lat1 = Math.toRadians(latitude);
+        double deltaLat = distance * 0.008;
+        double deltaLon = distance / Math.cos(lat1)*0.008;
+        double lat2 = latitude + deltaLat;
+        double lon2 = longitude + deltaLon;
+
+        return new LatLng(lat2, lon2, 0);
+    }
+
+    public static LatLng calculateSouthWest(double latitude, double longitude, double distance) {
+        double lat1 = Math.toRadians(latitude);
+        double deltaLat = distance * 0.008;
+        double deltaLon = distance / Math.cos(lat1)*0.008;
+        double lat2 = latitude - deltaLat;
+        double lon2 = longitude - deltaLon;
+
+        return new LatLng(lat2, lon2, 0);
     }
 
     /**
      * Prepares Place list to make their distance information update later.
      *
-     * @param currentLatLng                     The current latitude and longitude.
+     * @param currentLatLng                 The current latitude and longitude.
      * @param screenTopRight                The top right corner of the screen (latitude,
      *                                      longitude).
      * @param screenBottomLeft              The bottom left corner of the screen (latitude,
@@ -221,7 +246,7 @@ public class NearbyController extends MapController {
     /**
      * Prepares Place list to make their distance information update later.
      *
-     * @param currentLatLng           current location for user
+     * @param currentLatLng       current location for user
      * @param searchLatLng        the location user wants to search around
      * @param returnClosestResult if this search is done to find closest result or all results
      * @return NearbyPlacesInfo a variable holds Place list without distance information and
@@ -239,12 +264,12 @@ public class NearbyController extends MapController {
      * Loads attractions from location for map view, we need to return BaseMarkerOption data type.
      *
      * @param currentLatLng users current location
-     * @param placeList list of nearby places in Place data type
+     * @param placeList     list of nearby places in Place data type
      * @return BaseMarkerOptions list that holds nearby places
      */
     public static List<BaseMarker> loadAttractionsFromLocationToBaseMarkerOptions(
-            LatLng currentLatLng,
-            List<Place> placeList) {
+        LatLng currentLatLng,
+        List<Place> placeList) {
         List<BaseMarker> baseMarkersList = new ArrayList<>();
 
         if (placeList == null) {
@@ -259,14 +284,12 @@ public class NearbyController extends MapController {
             baseMarker.setPosition(
                 new fr.free.nrw.commons.location.LatLng(
                     place.location.getLatitude(),
-                    place.location.getLongitude(),0));
+                    place.location.getLongitude(), 0));
             baseMarker.setPlace(place);
             baseMarkersList.add(baseMarker);
         }
         return baseMarkersList;
     }
-
-
 
 
     /**
@@ -280,7 +303,8 @@ public class NearbyController extends MapController {
         for (ListIterator<MarkerPlaceGroup> iter = markerLabelList.listIterator();
             iter.hasNext(); ) {
             MarkerPlaceGroup markerPlaceGroup = iter.next();
-            if (markerPlaceGroup.getPlace().getWikiDataEntityId().equals(place.getWikiDataEntityId())) {
+            if (markerPlaceGroup.getPlace().getWikiDataEntityId()
+                .equals(place.getWikiDataEntityId())) {
                 iter.set(new MarkerPlaceGroup(isBookmarked, place));
             }
         }

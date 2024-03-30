@@ -27,10 +27,10 @@
   <string name="signup">ಸೈನ್ ಅಪ್</string>
   <string name="logging_in_title">ಲಾಗಿನ್ ಆಗುತ್ತಿದ್ದೀರಿ</string>
   <string name="logging_in_message">ದಯವಿಟ್ಟು ನಿರೀಕ್ಷಿಸಿ…</string>
-  <string name="login_success">ಲಾಗಿನ್ ಯಶಸ್ವಿ!</string>
-  <string name="login_failed">ಲಾಗಿನ್ ಸಾಧ್ಯವಾಗಿಲ್ಲ!</string>
+  <string name="login_success" fuzzy="true">ಲಾಗಿನ್ ಯಶಸ್ವಿ!</string>
+  <string name="login_failed" fuzzy="true">ಲಾಗಿನ್ ಸಾಧ್ಯವಾಗಿಲ್ಲ!</string>
   <string name="upload_failed">ಈ ಕಡತ ಕಂಡುಬಂದಿಲ್ಲ. ದಯವಿಟ್ಟು ಇನ್ನೊಂದು ಕಡತ ಪ್ರಯತ್ನಿಸಿ.</string>
-  <string name="authentication_failed">ದೃಢೀಕರಣ ವಿಫಲ, ದಯವಿಟ್ಟು ಮತ್ತೊಮ್ಮೆ ಲಾಗ್ ಇನ್ ಆಗಿ</string>
+  <string name="authentication_failed" fuzzy="true">ದೃಢೀಕರಣ ವಿಫಲ, ದಯವಿಟ್ಟು ಮತ್ತೊಮ್ಮೆ ಲಾಗ್ ಇನ್ ಆಗಿ</string>
   <string name="uploading_started">ಅಪ್ಲೋಡ್ ಪ್ರಾರಂಭವಾಗಿದೆ!</string>
   <string name="upload_completed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಆಗಿದೆ!</string>
   <string name="upload_completed_notification_text">ನಿಮ್ಮ ನಕಲೇರಿಕೆಯನ್ನು ನೋಡಲು ಮೆಲ್ಲಗೆ ತಟ್ಟಿ</string>
@@ -53,11 +53,11 @@
   <string name="share_title_hint">ತಲೆಬರಹ (ಕಡ್ಡಾಯ)</string>
   <string name="share_description_hint">ವಿವರ</string>
   <string name="share_caption_hint">ತಲೆಬರಹ</string>
-  <string name="login_failed_network">ಲಾಗಿನ್ ಮಾಡಲಾಗಲಿಲ್ಲ - ನೆಟ್ವರ್ಕ್ ವೈಫಲ್ಯ</string>
+  <string name="login_failed_network" fuzzy="true">ಲಾಗಿನ್ ಮಾಡಲಾಗಲಿಲ್ಲ - ನೆಟ್ವರ್ಕ್ ವೈಫಲ್ಯ</string>
   <string name="login_failed_throttled">ಹಲವಾರು ವಿಫಲ ಪ್ರಯತ್ನಗಳು. ದಯವಿಟ್ಟು ಕೆಲವು ನಿಮಿಷಗಳಲ್ಲಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.</string>
   <string name="login_failed_blocked">ಕ್ಷಮಿಸಿ, ಈ ಬಳಕೆದಾರರನ್ನು ಕಾಮನ್ಸ್ನಲ್ಲಿ ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ</string>
   <string name="login_failed_2fa_needed">ನಿಮ್ಮ ಎರಡು ಅಂಶ ದೃಢೀಕರಣ ಕೋಡ್ ಅನ್ನು ನೀವು ಒದಗಿಸಬೇಕು.</string>
-  <string name="login_failed_generic">ಲಾಗಿನ್ ಸಾಧ್ಯವಾಗಿಲ್ಲ</string>
+  <string name="login_failed_generic" fuzzy="true">ಲಾಗಿನ್ ಸಾಧ್ಯವಾಗಿಲ್ಲ</string>
   <string name="share_upload_button">ಅಪ್ಲೋಡ್</string>
   <string name="multiple_share_base_title">ಈ ಸೆಟ್ ಹೆಸರಿಸಿ</string>
   <string name="provider_modifications">ಬದಲಾವಣೆಗಳು</string>

@@ -101,13 +101,13 @@
   <string name="logging_in_message">Lütfen bekleyin…</string>
   <string name="updating_caption_title">Altyazılar ve açıklamalar güncelleniyor</string>
   <string name="updating_caption_message">Lütfen bekleyin…</string>
-  <string name="login_success">Oturum açma başarılı!</string>
-  <string name="login_failed">Oturum açma başarısız oldu!</string>
+  <string name="login_success" fuzzy="true">Oturum açma başarılı!</string>
+  <string name="login_failed" fuzzy="true">Oturum açma başarısız oldu!</string>
   <string name="upload_failed">Dosya bulunamadı. Lütfen başka bir dosya deneyin.</string>
   <string name="retry_limit_reached">Tekrar deneme sınırına ulaşıldı! Lütfen yüklemeyi iptal edin ve tekrar deneyin.</string>
   <string name="unrestricted_battery_mode">Pil optimizasyonu kapatılsın mı ?</string>
   <string name="suggest_unrestricted_mode">Batarya optimizasyonu kapatıldığında 3\'den fazla görüntü yüklemek daha güvenilir bir yoldur. Lütfen sorunsuz bir yükleme deneyimi için Commons uygulamasının ayarlar kısmından batarya optimizasyonunu kapatın.\n\nBatarya Optimizasyonunu kapatmak için yapılabilecek adımlar:\n\nAdım 1: Aşağı kısımdan\"Ayarlar\" butonuna basın\n\nAdım 2: \"Optimizasyon yapılmamış\" seçeneğini \"Tüm uygulamalar\" olarak değiştirin\"\n\nAdım 3: \"Commons\" veya \"fr.free.nrw.commons\" olacak şekilde arama yapın\n\nAdım 4: Tıklayın ve \"Optimize Etme\" seçeneğini seçin.\n\nAdım 5: \"Yapıldı\" seçeneğine basın.</string>
-  <string name="authentication_failed">Kimlik doğrulama başarısız oldu, lütfen tekrar giriş yapın</string>
+  <string name="authentication_failed" fuzzy="true">Kimlik doğrulama başarısız oldu, lütfen tekrar giriş yapın</string>
   <string name="uploading_started">Yükleme başladı!</string>
   <string name="uploading_queued">Yükleme kuyruğunda (sınırlı bağlantı modu etkin)</string>
   <string name="upload_completed_notification_title">%1$s yüklendi!</string>
@@ -134,11 +134,11 @@
   <string name="add_caption_toast">Lütfen bu dosya için bir başlık girin</string>
   <string name="share_description_hint">Açıklama</string>
   <string name="share_caption_hint">Altyazı</string>
-  <string name="login_failed_network">Oturum açılamıyor - ağ hatası</string>
+  <string name="login_failed_network" fuzzy="true">Oturum açılamıyor - ağ hatası</string>
   <string name="login_failed_throttled">Çok sayıda başarısız girişimde bulundunuz. Birkaç dakika sonra tekrar deneyin.</string>
   <string name="login_failed_blocked">Üzgünüz, bu kullanıcı Commons\'ta engellendi</string>
   <string name="login_failed_2fa_needed">İki faktörlü kimlik doğrulama kodunu sağlamalısınız.</string>
-  <string name="login_failed_generic">Oturum açma başarısız</string>
+  <string name="login_failed_generic" fuzzy="true">Oturum açma başarısız</string>
   <string name="share_upload_button">Yükle</string>
   <string name="multiple_share_base_title">Bu ayarı adlandırın</string>
   <string name="provider_modifications">Değişiklikler</string>
@@ -295,7 +295,7 @@
   <string name="nominated_see_more">Web sayfasının detaylarını gör</string>
   <string name="skip_login">Atla</string>
   <string name="navigation_item_login">Oturum aç</string>
-  <string name="skip_login_title">Gerçekten oturum açmayı atlamak istiyor musunuz?</string>
+  <string name="skip_login_title" fuzzy="true">Gerçekten oturum açmayı atlamak istiyor musunuz?</string>
   <string name="skip_login_message">İleride resim yüklemek için giriş yapmanız gerekir.</string>
   <string name="login_alert_message">Bu özelliği kullanmak için lütfen giriş yapın</string>
   <string name="copy_wikicode">Vikimetnini panoya kopyala</string>
@@ -362,7 +362,7 @@
   <string name="construction_event_answer">Commons\'ta teknoloji veya kültür resimleri oldukça hoş karşılanır.</string>
   <string name="congratulatory_message_quiz">Doğru cevap sayınız: %1$s. Tebrikler!</string>
   <string name="warning_for_no_answer">Soruyu cevaplamak için iki seçenekten birini seçin</string>
-  <string name="user_not_logged_in">Giriş oturumunuzun süresi doldu, lütfen tekrar giriş yapın.</string>
+  <string name="user_not_logged_in" fuzzy="true">Giriş oturumunuzun süresi doldu, lütfen tekrar giriş yapın.</string>
   <string name="quiz_result_share_message">Sınavınızı arkadaşlarınızla paylaşın!</string>
   <string name="continue_message">Devam</string>
   <string name="correct">Doğru Cevap</string>
@@ -445,7 +445,7 @@
   <string name="never_ask_again">Bunu bir daha sorma</string>
   <string name="display_location_permission_title">Konum izni isteyin</string>
   <string name="display_location_permission_explanation">Yakındaki bildirim kartı görüntüleme özelliği için gerektiğinde konum izni isteyin.</string>
-  <string name="achievements_fetch_failed">Bir şeyler ters gitti, başarılarınızı getiremedik</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Bir şeyler ters gitti, başarılarınızı getiremedik</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Başarı hesaplama sistemimizin üstesinden gelemeyeceği pek çok katkı yaptınız. Bu nihai başarıdır.</string>
   <string name="ends_on">Bitiş:</string>
   <string name="display_campaigns">Kampanyaları göster</string>
@@ -461,7 +461,7 @@
   <string name="open_document_photo_picker_explanation">Yeni Android fotoğraf seçici, konum bilgilerini kaybetme riskini taşımaktadır. Kullanıyor gibi görünüyorsa etkinleştirin.</string>
   <string name="location_loss_warning">Bunu kapatmak, yeni Android fotoğraf seçiciyi etkinleştirebilir. Konum bilgisini kaybetme riski vardır.\n\nDaha fazla bilgi için \'Daha fazlasını oku\'ya dokunun.</string>
   <string name="nearby_campaign_dismiss_message">Artık çalışmaları görmeyeceksiniz. Ancak isterseniz bu bildirimi Ayarlar\'dan yeniden etkinleştirebilirsiniz.</string>
-  <string name="this_function_needs_network_connection">Bu işlev ağ bağlantısı gerektirir, lütfen bağlantı ayarlarınızı kontrol edin.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Bu işlev ağ bağlantısı gerektirir, lütfen bağlantı ayarlarınızı kontrol edin.</string>
   <string name="error_processing_image">Görüntü işlenirken hata oluştu. Lütfen tekrar deneyin!</string>
   <string name="getting_edit_token">Düzenleme için anahtar alınıyor</string>
   <string name="check_category_adding_template">Kategori kontrolü için şablon ekleme</string>
@@ -588,7 +588,7 @@
   <string name="place_state_needs_photo">Fotoğrafa İhtiyaç Var</string>
   <string name="place_type">Yer türü:</string>
   <string name="nearby_search_hint">Köprü, müze, otel vb.</string>
-  <string name="you_must_reset_your_passsword">Giriş ile ilgili bir sorun oluştu, şifrenizi sıfırlamanız gerekiyor !!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Giriş ile ilgili bir sorun oluştu, şifrenizi sıfırlamanız gerekiyor !!</string>
   <string name="title_for_media">MEDYA</string>
   <string name="title_for_child_classes">ALT SINIFLAR</string>
   <string name="title_for_parent_classes">ÜST SINIFLAR</string>

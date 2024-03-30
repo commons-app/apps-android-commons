@@ -37,10 +37,10 @@
   <string name="signup">பதிவுசெய்</string>
   <string name="logging_in_title">புகுபதிதல்</string>
   <string name="logging_in_message">காத்திரும்…</string>
-  <string name="login_success">புகுபதிகை வெற்றி!</string>
-  <string name="login_failed">புகுபதிகை தோற்றது</string>
+  <string name="login_success" fuzzy="true">புகுபதிகை வெற்றி!</string>
+  <string name="login_failed" fuzzy="true">புகுபதிகை தோற்றது</string>
   <string name="upload_failed">கோப்பு கிடைக்கவில்லை. மற்றொரு கோப்பை முயல்க.</string>
-  <string name="authentication_failed">அங்கீகாரம் தோற்றது, மீண்டும் புகுபதிக</string>
+  <string name="authentication_failed" fuzzy="true">அங்கீகாரம் தோற்றது, மீண்டும் புகுபதிக</string>
   <string name="uploading_started">பதிவேற்றம் தொடங்கியது!</string>
   <string name="uploading_queued">பதிவேற்றம் வரிசைப்படுத்தப்பட்டது (வரையறுக்கப்பட்ட இணைப்பு முறை இயக்கப்பட்டது)</string>
   <string name="upload_completed_notification_title">%1$s பதிவேற்றப்பட்டது!</string>
@@ -67,11 +67,11 @@
   <string name="add_caption_toast">இக்கோப்புக்கு ஒரு தலைப்பைத் தருக</string>
   <string name="share_description_hint">விளக்கம்</string>
   <string name="share_caption_hint">தலைப்பு</string>
-  <string name="login_failed_network">புகுபதிய முடியாது - வலையமைப்புத் தோல்வி</string>
+  <string name="login_failed_network" fuzzy="true">புகுபதிய முடியாது - வலையமைப்புத் தோல்வி</string>
   <string name="login_failed_throttled">மிதமிஞ்சிய தோற்ற முயற்சிகள். சில நிமிடங்களில் மீண்டும் முல்க.</string>
   <string name="login_failed_blocked">வருந்துகிறோம், இப்பயனர் பொதுவகத்தில் தடுக்கப்பட்டுள்ளார்</string>
   <string name="login_failed_2fa_needed">நீர் உமது இரு காரணி அங்கீகாரக் குறியீட்டை வழங்கியாக வேண்டும்.</string>
-  <string name="login_failed_generic">புகுபதிகை தோற்றது</string>
+  <string name="login_failed_generic" fuzzy="true">புகுபதிகை தோற்றது</string>
   <string name="share_upload_button">பதிவேற்று</string>
   <string name="multiple_share_base_title">இத்தொகுதிக்குப் பெயரிடு</string>
   <string name="provider_modifications">மாற்றங்கள்</string>
@@ -199,7 +199,7 @@
   <string name="nominated_see_more">விபரங்களுக்காக வலைப்பக்கத்தைப் பார்</string>
   <string name="skip_login">தவிர்</string>
   <string name="navigation_item_login">புகுபதிகை</string>
-  <string name="skip_login_title">தாங்கள் மெய்யாகவே மூடுவதற்கு விரும்புகிறீர்களா?</string>
+  <string name="skip_login_title" fuzzy="true">தாங்கள் மெய்யாகவே மூடுவதற்கு விரும்புகிறீர்களா?</string>
   <string name="skip_login_message">எதிர்காலத்தில் படங்களைப் பதிவேற்ற நீங்கள் உள்நுழைய வேண்டும்.</string>
   <string name="login_alert_message">இந்த செயலியல்பைப் பயன்படுத்த தயவுசெய்து உள்நுழைக</string>
   <string name="copy_wikicode">தற்காலிகச் சேமிப்பு இடத்திற்கு விக்கிஎழுத்தை நகலெடுக்கவும்</string>

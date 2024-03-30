@@ -205,6 +205,8 @@ public class DeleteHelper {
         });
 
         alert.setPositiveButton(context.getString(R.string.ok), (dialogInterface, i) -> {
+            reviewCallback.disableButtons();
+
 
             String reason = getLocalizedResources(context, Locale.ENGLISH).getString(R.string.delete_helper_ask_alert_set_positive_button_reason) + " ";
 
@@ -229,6 +231,7 @@ public class DeleteHelper {
                     } else {
                         reviewCallback.onFailure();
                     }
+                    reviewCallback.enableButtons();
                 });
 
         });

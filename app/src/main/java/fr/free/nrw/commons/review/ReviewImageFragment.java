@@ -181,6 +181,24 @@ public class ReviewImageFragment extends CommonsDaggerSupportFragment {
             public void onFailure() {
                 //do nothing
             }
+
+            /**
+             * This function is called when an image is being loaded
+             * to disable the review buttons
+             */
+            @Override
+            public void disableButtons() {
+                ReviewImageFragment.this.disableButtons();
+            }
+
+            /**
+             * This function is called when an image has
+             * been loaded to enable the review buttons.
+             */
+            @Override
+            public void enableButtons() {
+                ReviewImageFragment.this.enableButtons();
+            }
         };
     }
 
