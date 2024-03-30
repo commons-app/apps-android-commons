@@ -202,17 +202,21 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
     }
 
     /**
-     * Checks if the image has a location or not. Displays a dialog alerting user that no
-     * location has been to added to the image and asking them to add one
+     * Checks if the image has a location. Displays a dialog alerting user that no
+     * location has been to added to the image and asking them to add one, if location was not
+     * removed by the user
      *
      * @param uploadItemIndex Index of the uploadItem which has no location
      * @param inAppPictureLocation In app picture location (if any)
+     * @param hasUserRemovedLocation True if user has removed location from the image
      */
     @Override
-    public void displayLocDialog(int uploadItemIndex, LatLng inAppPictureLocation) {
+    public void displayLocDialog(int uploadItemIndex, LatLng inAppPictureLocation,
+        boolean hasUserRemovedLocation) {
         final List<UploadItem> uploadItems = repository.getUploads();
         UploadItem uploadItem = uploadItems.get(uploadItemIndex);
-        if (uploadItem.getGpsCoords().getDecimalCoords() == null && inAppPictureLocation == null) {
+        if (uploadItem.getGpsCoords().getDecimalCoords() == null && inAppPictureLocation == null
+            && !hasUserRemovedLocation) {
             final Runnable onSkipClicked = () -> {
                 verifyCaptionQuality(uploadItem);
             };

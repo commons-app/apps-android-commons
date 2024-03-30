@@ -790,6 +790,11 @@ Upload your first media by tapping on the add button.</string>
   <string name="see_your_achievements">See your achievements</string>
   <string name="edit_image">Edit Image</string>
   <string name="edit_location">Edit Location</string>
+  <string name="location_updated">Location updated!</string>
+  <string name="remove_location">Remove Location</string>
+  <string name="remove_location_warning_title">Remove Location Warning</string>
+  <string name="remove_location_warning_desc">Location makes pictures more useful and findable. Do you really wish to remove location from this picture?</string>
+  <string name="location_removed">Location removed!</string>
   <string name="send_thanks_to_author">Thank the author</string>
   <string name="error_sending_thanks">Error sending thanks to author.</string>
   <string name="invalid_login_message">Your log-in has expired. Please log in again.</string>
