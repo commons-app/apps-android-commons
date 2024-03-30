@@ -29,7 +29,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.work.ExistingWorkPolicy;
-import butterknife.OnClick;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.LoginActivity;
@@ -170,6 +169,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
         compositeDisposable = new CompositeDisposable();
         init();
+        binding.rlContainerTitle.setOnClickListener(v -> onRlContainerTitleClicked());
         nearbyPopupAnswers = new HashMap<>();
         //getting the current dpi of the device and if it is less than 320dp i.e. overlapping
         //threshold, thumbnails automatically minimizes
@@ -872,7 +872,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
 
-    @OnClick(R.id.rl_container_title)
+
     public void onRlContainerTitleClicked() {
         binding.rvThumbnails.setVisibility(isTitleExpanded ? View.GONE : View.VISIBLE);
         isTitleExpanded = !isTitleExpanded;
