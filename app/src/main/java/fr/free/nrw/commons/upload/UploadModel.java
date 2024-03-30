@@ -10,7 +10,6 @@ import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
-import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -93,8 +92,25 @@ public class UploadModel {
             createAndAddUploadItem(uploadableFile, place, similarImageInterface, inAppPictureLocation));
     }
 
+    /**
+     * Calls validateImage() of ImageProcessingService to check quality of image
+     *
+     * @param uploadItem UploadItem whose quality is to be checked
+     * @param inAppPictureLocation In app picture location (if any)
+     * @return Quality of UploadItem
+     */
     public Single<Integer> getImageQuality(final UploadItem uploadItem, LatLng inAppPictureLocation) {
         return imageProcessingService.validateImage(uploadItem, inAppPictureLocation);
+    }
+
+    /**
+     * Calls validateCaption() of ImageProcessingService to check caption of image
+     *
+     * @param uploadItem UploadItem whose caption is to be checked
+     * @return Quality of caption of the UploadItem
+     */
+    public Single<Integer> getCaptionQuality(final UploadItem uploadItem) {
+        return imageProcessingService.validateCaption(uploadItem);
     }
 
     private UploadItem createAndAddUploadItem(final UploadableFile uploadableFile,

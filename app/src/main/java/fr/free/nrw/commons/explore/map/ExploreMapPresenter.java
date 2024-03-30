@@ -1,15 +1,12 @@
 package fr.free.nrw.commons.explore.map;
 
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
-import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.SEARCH_CUSTOM_AREA;
 
 
 import android.location.Location;
 import android.view.View;
-import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
-import com.mapbox.mapboxsdk.geometry.LatLngBounds;
+import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.MapController;
 import fr.free.nrw.commons.MapController.ExplorePlacesInfo;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
@@ -17,8 +14,6 @@ import fr.free.nrw.commons.explore.map.ExploreMapController.NearbyBaseMarkerThum
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
-import fr.free.nrw.commons.nearby.NearbyBaseMarker;
-import fr.free.nrw.commons.utils.LocationUtils;
 import io.reactivex.Observable;
 import java.lang.reflect.Proxy;
 import java.util.List;
@@ -30,7 +25,7 @@ public class ExploreMapPresenter
 
     BookmarkLocationsDao bookmarkLocationDao;
     private boolean isNearbyLocked;
-    private LatLng curLatLng;
+    private LatLng currentLatLng;
     private ExploreMapController exploreMapController;
 
     private static final ExploreMapContract.View DUMMY = (ExploreMapContract.View) Proxy
@@ -124,7 +119,7 @@ public class ExploreMapPresenter
     @Override
     public void setActionListeners(JsonKvStore applicationKvStore) {
         exploreMapFragmentView.setFABRecenterAction(v -> {
-            exploreMapFragmentView.recenterMap(curLatLng);
+            exploreMapFragmentView.recenterMap(currentLatLng);
         });
 
     }
@@ -149,11 +144,11 @@ public class ExploreMapPresenter
         exploreMapFragmentView.addSearchThisAreaButtonAction();
     }
 
-    public Observable<ExplorePlacesInfo> loadAttractionsFromLocation(LatLng curLatLng,
+    public Observable<ExplorePlacesInfo> loadAttractionsFromLocation(LatLng currentLatLng,
         LatLng searchLatLng, boolean checkingAroundCurrent) {
         return Observable
             .fromCallable(() -> exploreMapController
-                .loadAttractionsFromLocation(curLatLng, searchLatLng, checkingAroundCurrent));
+                .loadAttractionsFromLocation(currentLatLng, searchLatLng, checkingAroundCurrent));
     }
 
     /**
@@ -163,31 +158,28 @@ public class ExploreMapPresenter
      * @param explorePlacesInfo This variable has placeToCenter list information and distances.
      */
     public void updateMapMarkers(
-        MapController.ExplorePlacesInfo explorePlacesInfo, Marker selectedMarker) {
+        MapController.ExplorePlacesInfo explorePlacesInfo) {
         if (explorePlacesInfo.mediaList != null) {
-            prepareNearbyBaseMarkers(explorePlacesInfo, selectedMarker);
+            prepareNearbyBaseMarkers(explorePlacesInfo);
         } else {
-            //TODO: SHOW SNACKBAR
             lockUnlockNearby(false); // So that new location updates wont come
             exploreMapFragmentView.setProgressBarVisibility(false);
         }
     }
 
-    void prepareNearbyBaseMarkers(MapController.ExplorePlacesInfo explorePlacesInfo,
-        Marker selectedMarker) {
+    void prepareNearbyBaseMarkers(MapController.ExplorePlacesInfo explorePlacesInfo) {
         exploreMapController
-            .loadAttractionsFromLocationToBaseMarkerOptions(explorePlacesInfo.curLatLng,
+            .loadAttractionsFromLocationToBaseMarkerOptions(explorePlacesInfo.currentLatLng,
                 // Curlatlang will be used to calculate distances
                 explorePlacesInfo.explorePlaceList,
                 exploreMapFragmentView.getContext(),
                 this,
-                selectedMarker,
                 explorePlacesInfo);
     }
 
     @Override
-    public void onNearbyBaseMarkerThumbsReady(List<NearbyBaseMarker> baseMarkers,
-        ExplorePlacesInfo explorePlacesInfo, Marker selectedMarker) {
+    public void onNearbyBaseMarkerThumbsReady(List<BaseMarker> baseMarkers,
+        ExplorePlacesInfo explorePlacesInfo) {
         if (null != exploreMapFragmentView) {
             exploreMapFragmentView.addMarkersToMap(baseMarkers);
             lockUnlockNearby(false); // So that new location updates wont come

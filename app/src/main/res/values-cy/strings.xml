@@ -59,10 +59,10 @@
   <string name="logging_in_title">Wrthi\'n mewngofnodi</string>
   <string name="logging_in_message">Disgwyliwch…</string>
   <string name="updating_caption_message">Arhoswch…</string>
-  <string name="login_success">Llwyddodd y mewngofnodi!</string>
-  <string name="login_failed">Methodd y mewngofnodi!</string>
+  <string name="login_success" fuzzy="true">Llwyddodd y mewngofnodi!</string>
+  <string name="login_failed" fuzzy="true">Methodd y mewngofnodi!</string>
   <string name="upload_failed">Ni chafwyd hyd i\'r ffeil. Ceisiwch un arall.</string>
-  <string name="authentication_failed">Methodd y dilysu! Mewngofnodwch eto.</string>
+  <string name="authentication_failed" fuzzy="true">Methodd y dilysu! Mewngofnodwch eto.</string>
   <string name="uploading_started">Dechreuodd yr uwchlwytho!</string>
   <string name="upload_completed_notification_title">Uwchlwythwyd %1$s!</string>
   <string name="upload_completed_notification_text">Tapiwch i weld eich uwchlwythiad</string>
@@ -85,11 +85,11 @@
   <string name="share_title_hint">Pennawd (Gofynnol)</string>
   <string name="share_description_hint">Disgrifiad</string>
   <string name="share_caption_hint">Pennawd</string>
-  <string name="login_failed_network">Yn methu mewngofnodi - methodd y rhwydwaith</string>
+  <string name="login_failed_network" fuzzy="true">Yn methu mewngofnodi - methodd y rhwydwaith</string>
   <string name="login_failed_throttled">Cafwyd gormod o ymgeision aflwyddiannus. Oedwch ennyd cyn ceisio eto.</string>
   <string name="login_failed_blocked">Ymddiheurwn. Mae\'r defnyddiwr hwn wedi ei flocio ar Gomin Wikimedia</string>
   <string name="login_failed_2fa_needed">Mae\'n rhaid i chi roi eich cod adnabod 2 ffactor.</string>
-  <string name="login_failed_generic">Methodd y mewngofnodi</string>
+  <string name="login_failed_generic" fuzzy="true">Methodd y mewngofnodi</string>
   <string name="share_upload_button">Uwchlwyther</string>
   <string name="multiple_share_base_title">Enwch y set hwn</string>
   <string name="provider_modifications">Newidiadau</string>
@@ -225,7 +225,7 @@
   <string name="nominated_for_deletion">Enwebwyd y ddelwedd hon ar gyfer ei Dileu</string>
   <string name="skip_login">Neidio</string>
   <string name="navigation_item_login">Mewngofnodi</string>
-  <string name="skip_login_title">Ti\'n sicr nad wyt am fewngofnodi?</string>
+  <string name="skip_login_title" fuzzy="true">Ti\'n sicr nad wyt am fewngofnodi?</string>
   <string name="skip_login_message">Bydd yn rhaid i ti fewngofnodi er mwyn uwchlwytho delweddau yn y dyfodol.</string>
   <string name="login_alert_message">Er mwyn defnyddio\'r nodwedd yma, mewngofnodwch!</string>
   <string name="nearby_location_not_available" fuzzy="true">Nid yw\'r lleoliad ar gael.</string>

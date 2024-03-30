@@ -94,10 +94,10 @@
   <string name="logging_in_message">Čakajte prosím…</string>
   <string name="updating_caption_title">Aktualizovanie tituliek a popisov</string>
   <string name="updating_caption_message">Čakajte prosím…</string>
-  <string name="login_success">Prihlásenie úspešné</string>
-  <string name="login_failed">Prihlásenie zlyhalo!</string>
+  <string name="login_success" fuzzy="true">Prihlásenie úspešné</string>
+  <string name="login_failed" fuzzy="true">Prihlásenie zlyhalo!</string>
   <string name="upload_failed">Súbor nebol nájdený. Skúste, prosím, iný súbor.</string>
-  <string name="authentication_failed">Overenie zlyhalo, prosím, prihláste sa znovu</string>
+  <string name="authentication_failed" fuzzy="true">Overenie zlyhalo, prosím, prihláste sa znovu</string>
   <string name="uploading_started">Nahrávanie začalo!</string>
   <string name="uploading_queued">Nahrávanie v poradí (je zapnuté limitované pripojenie)</string>
   <string name="upload_completed_notification_title">%1$s je nahraný!</string>
@@ -124,11 +124,11 @@
   <string name="add_caption_toast">Prosím, pridajte popisok pre tento súbor</string>
   <string name="share_description_hint">Opis</string>
   <string name="share_caption_hint">Popis</string>
-  <string name="login_failed_network">prihlásenie zlyhalo - zlyhanie siete</string>
+  <string name="login_failed_network" fuzzy="true">prihlásenie zlyhalo - zlyhanie siete</string>
   <string name="login_failed_throttled">Príliš veľa neúspešných pokusov. Skúste to znova o niekoľko minút.</string>
   <string name="login_failed_blocked">Ospravedlňujeme sa, tento užívateľ bol na Commons zablokovaný</string>
   <string name="login_failed_2fa_needed">Musíte vložiť kód pre dvojfaktorovú autentifikáciu.</string>
-  <string name="login_failed_generic">Prihlásenie zlyhalo</string>
+  <string name="login_failed_generic" fuzzy="true">Prihlásenie zlyhalo</string>
   <string name="share_upload_button">Nahrať</string>
   <string name="multiple_share_base_title">Názov tejto sady</string>
   <string name="provider_modifications">Úpravy</string>
@@ -282,7 +282,7 @@
   <string name="nominated_see_more">Zobraziť webovú stránku pre viac informácií</string>
   <string name="skip_login">Preskočiť</string>
   <string name="navigation_item_login">Prihlásiť sa</string>
-  <string name="skip_login_title">Naozaj chcete preskočiť prihlásenie?</string>
+  <string name="skip_login_title" fuzzy="true">Naozaj chcete preskočiť prihlásenie?</string>
   <string name="skip_login_message">Pokiaľ chcete v budúcnosti nahrať obrázky, musíte sa prihlásiť.</string>
   <string name="login_alert_message">Pre použitie tejto fukncie sa, prosím, prihláste.</string>
   <string name="copy_wikicode">Skopírovať wikitext do schránky</string>
@@ -348,7 +348,7 @@
   <string name="construction_event_answer">Obrázky s technickou či kultúrnou tematikou sú na Commons vítané.</string>
   <string name="congratulatory_message_quiz">Na %1$s otázok ste odpovedali správne! Gratulujeme!</string>
   <string name="warning_for_no_answer">Vyberte správnu možnosť</string>
-  <string name="user_not_logged_in">Došlo k odhláseniu. Prihláste sa, prosím, znovu.</string>
+  <string name="user_not_logged_in" fuzzy="true">Došlo k odhláseniu. Prihláste sa, prosím, znovu.</string>
   <string name="quiz_result_share_message">Zdieľajte váš kvíz s priateľmi!</string>
   <string name="continue_message">Pokračovať</string>
   <string name="correct">Správna odpoveď</string>
@@ -430,13 +430,13 @@
   <string name="never_ask_again">Znovu nezobrazovať</string>
   <string name="display_location_permission_title">Žiadať povolenie prístupu k polohe</string>
   <string name="display_location_permission_explanation">Požiada o oprávnenie k prístupu k polohe, pokiaľ je to potrebné pre funkciu zobrazenia miest v okolí.</string>
-  <string name="achievements_fetch_failed">Nastala chyba, nepodarilo sa nám načítať vaše úspechy</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Nastala chyba, nepodarilo sa nám načítať vaše úspechy</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Urobili ste toľko príspevkov, že to náš systém výpočtu úspechov nedokáže zvládnuť. Toto je konečný úspech.</string>
   <string name="ends_on">Končí:</string>
   <string name="display_campaigns">Zobraziť kampane</string>
   <string name="display_campaigns_explanation">Zobrazovať prebiehajúce kampane</string>
   <string name="nearby_campaign_dismiss_message">Kampane už neuvidíte. Znovu ich zapnúť môžete v Nastaveniach.</string>
-  <string name="this_function_needs_network_connection">Táto funkcia vyžaduje pripojenie k sieti, skontrolujte, prosím, nastavenie pripojenia.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Táto funkcia vyžaduje pripojenie k sieti, skontrolujte, prosím, nastavenie pripojenia.</string>
   <string name="error_processing_image">Počas spracovania obrázku nastala chyba. Prosím, skúste to znovu.</string>
   <string name="getting_edit_token">Získavam token pre úpravu</string>
   <string name="check_category_adding_template">Pridávam šablónu na skontrolovanie kategórie</string>
@@ -564,7 +564,7 @@
   <string name="place_state_needs_photo">Potrebuje fotku</string>
   <string name="place_type">Typ miesta:</string>
   <string name="nearby_search_hint">Most, múzeum, hotel atď.</string>
-  <string name="you_must_reset_your_passsword">Pri prihlásení nastala chyba, musíte si resetovať vaše heslo!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Pri prihlásení nastala chyba, musíte si resetovať vaše heslo!</string>
   <string name="title_for_media">MÉDIA</string>
   <string name="title_for_child_classes">DETSKÉ TRIEDY</string>
   <string name="title_for_parent_classes">RODIČOVSKÉ TRIEDY</string>
@@ -693,8 +693,8 @@
   <string name="add_location">Pridať polohu</string>
   <string name="feedback_sharing_data_alert">Prosím odstráňte z tohto emailu informácie, ktoré nechcete zverejniť. Takisto berte prosím na vedomie, že vaša emailová adresa z ktorej posielate príspevky bude zverejnená.</string>
   <string name="explore_map_details">Podrobnosti</string>
-  <string name="achievements_unavailable_beta">Úspechy sú dostupné len v prod flavor. Prosím skontrolujte vývojársku dokumentáciu.</string>
-  <string name="leaderboard_unavailable_beta">Rebríček je dostupný len v prod flavor. Prosím skontrolujte vývojársku dokumentáciu.</string>
+  <string name="achievements_unavailable_beta" fuzzy="true">Úspechy sú dostupné len v prod flavor. Prosím skontrolujte vývojársku dokumentáciu.</string>
+  <string name="leaderboard_unavailable_beta" fuzzy="true">Rebríček je dostupný len v prod flavor. Prosím skontrolujte vývojársku dokumentáciu.</string>
   <string name="copyright_popup">Prosím nahrajte len obrázky, ktoré ste urobili Vy sami. Obrázky podliehajúce autorským právam budú zablokované.</string>
   <string name="select_feedback_data_choice">Prosím odznačte každú informáciu, ktorú nechcete verejne zdieľať.</string>
   <string name="api_level">Úroveň API</string>

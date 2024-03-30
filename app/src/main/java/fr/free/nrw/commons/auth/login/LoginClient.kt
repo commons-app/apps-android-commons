@@ -28,7 +28,7 @@ class LoginClient(private val loginInterface: LoginInterface) {
      */
     private var userLanguage = ""
 
-    fun getLoginToken() = loginInterface.getLoginToken()
+    private fun getLoginToken() = loginInterface.getLoginToken()
 
     fun request(userName: String, password: String, cb: LoginCallback) {
         cancel()
@@ -106,6 +106,33 @@ class LoginClient(private val loginInterface: LoginInterface) {
         })
     }
 
+    fun doLogin(
+        username: String,
+        password: String,
+        twoFactorCode: String,
+        userLanguage: String,
+        loginCallback: LoginCallback
+    ) {
+        getLoginToken().enqueue(object :Callback<MwQueryResponse?>{
+            override fun onResponse(
+                call: Call<MwQueryResponse?>,
+                response: Response<MwQueryResponse?>
+            ) = if (response.isSuccessful){
+                val loginToken = response.body()?.query()?.loginToken()
+                loginToken?.let {
+                    login(username, password, null, twoFactorCode, it, userLanguage, loginCallback)
+                } ?: run {
+                    loginCallback.error(IOException("Failed to retrieve login token"))
+                }
+            } else {
+                loginCallback.error(IOException("Failed to retrieve login token"))
+            }
+
+            override fun onFailure(call: Call<MwQueryResponse?>, t: Throwable) {
+                loginCallback.error(t)
+            }
+        })
+    }
     @Throws(Throwable::class)
     fun loginBlocking(userName: String, password: String, twoFactorCode: String?) {
         val tokenResponse = getLoginToken().execute()

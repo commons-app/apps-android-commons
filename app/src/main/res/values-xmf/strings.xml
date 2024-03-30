@@ -63,10 +63,10 @@
   <string name="signup">რეგისტრაცია</string>
   <string name="logging_in_title">სისტემაშა მიშულა</string>
   <string name="logging_in_message">ქორთხინთ ქჷმიცადით …</string>
-  <string name="login_success">სისტემაშა მიშულაქ წჷმოძინელო გეთუ!</string>
-  <string name="login_failed">სისტემაშა მიშულაქ ვემიხუჯინუ!</string>
+  <string name="login_success" fuzzy="true">სისტემაშა მიშულაქ წჷმოძინელო გეთუ!</string>
+  <string name="login_failed" fuzzy="true">სისტემაშა მიშულაქ ვემიხუჯინუ!</string>
   <string name="upload_failed">ფაილქ ვეგორუ. ქორთხინთ, ქოცადით შხვა ფაილი.</string>
-  <string name="authentication_failed">აუთენტიფიკაციაქ ვემიხუჯინუ, ქოთხინთ ავტორიზაცია ხოლო ართშა გემკორთით.</string>
+  <string name="authentication_failed" fuzzy="true">აუთენტიფიკაციაქ ვემიხუჯინუ, ქოთხინთ ავტორიზაცია ხოლო ართშა გემკორთით.</string>
   <string name="uploading_started">ეხარგუაქ ქჷდიჭყუ!</string>
   <string name="uploading_queued">ეხარგუა რანწკის გერე (გოხურგილი რსხუშ რეჟიმი ჩართული რე)</string>
   <string name="upload_completed_notification_title">%1$ ეხარგილი რე!</string>
@@ -93,11 +93,11 @@
   <string name="add_caption_toast">ქორთხინთ, ქემიოწურეთ თე ფაილიშ ეჭარუა</string>
   <string name="share_description_hint">ეჭარუა</string>
   <string name="share_caption_hint">მუკნაჭარა</string>
-  <string name="login_failed_network">მიშულაქ ვემიხუჯინუ - რშვილიშ ჩილათა</string>
+  <string name="login_failed_network" fuzzy="true">მიშულაქ ვემიხუჯინუ - რშვილიშ ჩილათა</string>
   <string name="login_failed_throttled">ძალამ მიარე უმწუძინუ ცადება. ქორთხინ, მუხირენ წუთშა ხოლო ქოცადით.</string>
   <string name="login_failed_blocked">მორდება, თე მახვარებუ ბლოკირი რე ვიკიოწკარუეს</string>
   <string name="login_failed_2fa_needed">თქვა გემშიონათ ოკო ჟირფაქტორიანი ავტორიზაციაშ კოდი.</string>
-  <string name="login_failed_generic">მიშულაქ ვემიხუჯინუ</string>
+  <string name="login_failed_generic" fuzzy="true">მიშულაქ ვემიხუჯინუ</string>
   <string name="share_upload_button">ეხარგუა</string>
   <string name="multiple_share_base_title">სერიაშ ჯოხო</string>
   <string name="provider_modifications">მოდიფიკაციეფი</string>
@@ -242,7 +242,7 @@
   <string name="nominated_see_more">დეტალეფიშ გეშა ვებ-ხასჷლაშ ძირაფა</string>
   <string name="skip_login">გიშატება</string>
   <string name="navigation_item_login">მიშულა</string>
-  <string name="skip_login_title">ნანდულო გოკონანო მიშულაშ გიშატება?</string>
+  <string name="skip_login_title" fuzzy="true">ნანდულო გოკონანო მიშულაშ გიშატება?</string>
   <string name="skip_login_message">სურათეფიშ ეიოხარგალო თქვა ოხვილუთ ანგარიშიშა მიშულას.</string>
   <string name="login_alert_message">ქორთხინთ გენშართით თქვან ანგარიშიშა ათე ფუნქციაშ გჷმარინაფალო</string>
   <string name="nearby_location_not_available">გოხოლუაშ ფუნქციაქ შილებე თინას ვემუშუასჷნ, ლოკაცია გოთიშილი რე.</string>

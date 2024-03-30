@@ -28,12 +28,11 @@ class NearbyPlacesTest {
 
     @Test
     fun testRadiusExpander() {
-        nearbyPlaces.radiusExpander(currentLatLong, "test", true, true, "test")
+        nearbyPlaces.radiusExpander(currentLatLong, "test", true, "test")
         verify(okHttpJsonApiClient, times(5)).getNearbyPlaces(
             eq(currentLatLong),
             eq("test"),
             any(),
-            eq(true),
             eq("test")
         )
     }

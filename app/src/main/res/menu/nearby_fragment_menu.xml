@@ -6,4 +6,12 @@
     app:showAsAction="ifRoom|withText"
     android:icon="@drawable/ic_list_white_24dp"
     />
+  <item android:id="@+id/list_item_gpx"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:title="Save as GPX file" />
+  <item android:id="@+id/list_item_kml"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:title="Save as KML file" />
 </menu>

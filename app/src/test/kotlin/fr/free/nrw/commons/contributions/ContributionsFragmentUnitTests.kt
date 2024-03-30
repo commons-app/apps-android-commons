@@ -15,6 +15,7 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.campaigns.CampaignView
 import fr.free.nrw.commons.campaigns.models.Campaign
+import fr.free.nrw.commons.databinding.FragmentContributionsBinding
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient
@@ -120,21 +121,10 @@ class ContributionsFragmentUnitTests {
 
         Whitebox.setInternalState(fragment, "contributionsListFragment", contributionsListFragment)
         Whitebox.setInternalState(fragment, "store", store)
-        Whitebox.setInternalState(
-            fragment,
-            "limitedConnectionEnabledLayout",
-            limitedConnectionEnabledLayout
-        )
         Whitebox.setInternalState(fragment, "notificationCount", notificationCount)
         Whitebox.setInternalState(fragment, "notificationController", notificationController)
         Whitebox.setInternalState(fragment, "compositeDisposable", compositeDisposable)
         Whitebox.setInternalState(fragment, "okHttpJsonApiClient", okHttpJsonApiClient)
-        Whitebox.setInternalState(
-            fragment,
-            "nearbyNotificationCardView",
-            nearbyNotificationCardView
-        )
-        Whitebox.setInternalState(fragment, "campaignView", campaignView)
     }
 
     @Test

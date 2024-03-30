@@ -65,13 +65,13 @@
   <string name="logging_in_message">M bɛlimnɛ gu\'usim...</string>
   <string name="updating_caption_title">Maligim maal pian\'azut nɛ pa\'alʋg nam</string>
   <string name="updating_caption_message">M bɛlimnɛ gu\'usim...</string>
-  <string name="login_success">Kpɛn\'ɛb nyaŋya</string>
-  <string name="login_failed">Kpɛn\'ɛb gʋ\'ʋŋya</string>
+  <string name="login_success" fuzzy="true">Kpɛn\'ɛb nyaŋya</string>
+  <string name="login_failed" fuzzy="true">Kpɛn\'ɛb gʋ\'ʋŋya</string>
   <string name="upload_failed">M Pʋ nyɛ faal la. M bɛlimnɛ tiakim faal si\'a.</string>
   <string name="retry_limit_reached">Fʋ lɛm mɔnɛ ka saŋa paae! m bɛlimnɛ basim kpɛn\'ɛsʋg la ka lɛm mɔɔ nya\'aŋ ya\'as</string>
   <string name="unrestricted_battery_mode">M Kpiisim dinɛ dit batir la?</string>
   <string name="suggest_unrestricted_mode">Akpɛn\'ɛs siisa atan tʋm sʋ\'ʋŋa nɛ fʋ ya\'a kpiis dinɛ dit batir la ka di pʋ tʋmma. M bɛlimnɛ kpiisim dinɛ dit batir la Commons App la ni dɔlidi maalʋg la ni ka di nya\'ŋi kpɛn\' sʋ\'ʋŋa.\nsuobanɛ ka sɔ\' na dɔl ka kpiis dinɛ dit batir la anɛ:\nsuor 1: Si\'isim \"maalʋg\" babkanɛ bɛ teŋir la. \n\nsuor 2: Tiakim yi Dim batiri keŋ appnam wʋsa.\n\nSuor 3: Iem \"Commons\" bɛɛ \"fr.free.nrw.commons\".\n\nSuor 4: Si\'isimi di ka gaŋ da dii.\n\nSuor 5: Diim \"di naaeya\".</string>
-  <string name="authentication_failed">Suor basib gʋ\'ʋŋya, m bɛlimnɛ kpɛn\'ɛm ya\'as</string>
+  <string name="authentication_failed" fuzzy="true">Suor basib gʋ\'ʋŋya, m bɛlimnɛ kpɛn\'ɛm ya\'as</string>
   <string name="uploading_started">Kpɛn\'ɛsʋg pin\'ilʋg!</string>
   <string name="uploading_queued">Dinɛ ka fʋ zaŋi kpɛn\'ɛsid la bɛnɛ lai zug (fʋ bas suor ye di tɔ\'ɔŋim tʋm bi\'ela ma\'aa)</string>
   <string name="upload_completed_notification_title">%1$s Kpɛn\'ɛya!</string>
@@ -98,11 +98,11 @@
   <string name="add_caption_toast">M bɛlimnɛ tisim faal kaŋa pian\'azug</string>
   <string name="share_description_hint">Awiesi pa\'al</string>
   <string name="share_caption_hint">Pian\'azug</string>
-  <string name="login_failed_network">Pʋ nyaŋi kpɛn\'ɛ - nɛtwɛk gʋ\'ʋnir zug</string>
+  <string name="login_failed_network" fuzzy="true">Pʋ nyaŋi kpɛn\'ɛ - nɛtwɛk gʋ\'ʋnir zug</string>
   <string name="login_failed_throttled">Fʋ mɔ\' nɔɔrim babiga ka pʋ nyaŋi. M bɛlimnɛ mɔɔm ya\'as saŋa bi\'ela ni.</string>
   <string name="login_failed_blocked">Gafara, ba gu\' tʋmtʋm kaŋa bɛ Commons ni</string>
   <string name="login_failed_2fa_needed">Asɛɛ ka fʋ tis two factor authentication koodi</string>
-  <string name="login_failed_generic">Kpɛn\'ɛb gʋ\'ʋŋya</string>
+  <string name="login_failed_generic" fuzzy="true">Kpɛn\'ɛb gʋ\'ʋŋya</string>
   <string name="share_upload_button">Kpɛn\'ɛsim</string>
   <string name="multiple_share_base_title">Pʋdim la\'askaŋa yʋ\'ʋr</string>
   <string name="provider_modifications">Tiakirnam</string>
@@ -243,7 +243,7 @@
   <string name="nominated_for_deletion">Footo kaŋa gaŋɛ ye di yisʋg</string>
   <string name="skip_login">Gaŋim gaad</string>
   <string name="navigation_item_login">Kpɛn\'ɛm</string>
-  <string name="skip_login_title">Fʋ sid bɔɔdi fʋ gaŋ kpɛn\'ɛbɔ?</string>
+  <string name="skip_login_title" fuzzy="true">Fʋ sid bɔɔdi fʋ gaŋ kpɛn\'ɛbɔ?</string>
   <string name="skip_login_message">Di nar ye fʋ kpɛn\' nya\'aŋi kpɛn\'ɛs footonam.</string>
   <string name="login_alert_message">M bɛlimnɛ kpɛn\'ɛm pʋʋgin ka nɔk bʋnkaŋa tʋm</string>
   <string name="copy_wikicode">Kopim wikisɔbʋg la niŋ clipboard</string>
@@ -356,7 +356,7 @@
   <string name="nearby_card_permission_title">Suor basib bu\'osʋg</string>
   <string name="never_ask_again">Da lɛm bu\'os nɛ\' ya\'asa</string>
   <string name="display_location_permission_title">Bu\'osim zin\'ig suor basib yɛla</string>
-  <string name="achievements_fetch_failed">Daʋŋ si\'a kidig, ti pʋ nyaŋi gbin\'e dinɛ ka fʋ ied la</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Daʋŋ si\'a kidig, ti pʋ nyaŋi gbin\'e dinɛ ka fʋ ied la</string>
   <string name="ends_on">Naadnɛ:</string>
   <string name="display_campaigns">Niem kampeenam</string>
   <string name="display_campaigns_explanation">Gɔsim kampeen banɛ ken</string>
@@ -480,7 +480,7 @@
   <string name="place_state_needs_photo">Bɔɔdi footo</string>
   <string name="place_type">Zin\'igi buudi:</string>
   <string name="nearby_search_hint">Bridge, museum, hotel etc.</string>
-  <string name="you_must_reset_your_passsword">Daʋŋsi\'a kidig kpɛn\'ɛb suorin la, asɛɛ ka fʋ tiaki fʋ paaswɛɛd la!!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Daʋŋsi\'a kidig kpɛn\'ɛb suorin la, asɛɛ ka fʋ tiaki fʋ paaswɛɛd la!!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">CHILD\n CLASSES</string>
   <string name="title_for_parent_classes">PARENT CLASSES</string>

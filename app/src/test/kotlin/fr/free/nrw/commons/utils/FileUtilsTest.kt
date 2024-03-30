@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.utils
 
+import com.nhaarman.mockitokotlin2.mock
 import fr.free.nrw.commons.upload.FileUtils
 import fr.free.nrw.commons.upload.FileUtilsWrapper
 import org.junit.Assert.assertEquals
@@ -19,7 +20,7 @@ class FileUtilsTest {
 
     @Test
     fun testSHA1() {
-        val fileUtilsWrapper = FileUtilsWrapper()
+        val fileUtilsWrapper = FileUtilsWrapper(mock())
 
         assertEquals(
                 "907d14fb3af2b0d4f18c2d46abe8aedce17367bd",

@@ -23,8 +23,8 @@
   <string name="logging_in_title">Pieslēdzas</string>
   <string name="logging_in_message">Lūdzu, uzgaidiet…</string>
   <string name="updating_caption_message">Lūdzu, uzgaidi...</string>
-  <string name="login_success">Ieiešana veiksmīga</string>
-  <string name="login_failed">Pieteikšanās neizdevās.</string>
+  <string name="login_success" fuzzy="true">Ieiešana veiksmīga</string>
+  <string name="login_failed" fuzzy="true">Pieteikšanās neizdevās.</string>
   <string name="authentication_failed" fuzzy="true">Autentifikācija neizdevās!</string>
   <string name="uploading_started">Augšupielāde sākās!</string>
   <string name="upload_completed_notification_title">%1$s augšupielādēti!</string>
@@ -46,7 +46,7 @@
   <string name="share_title_hint" fuzzy="true">Nosaukums (obligāts)</string>
   <string name="share_description_hint">Apraksts</string>
   <string name="login_failed_blocked">Atvainojiet, šis lietotājs tika bloķēts uz Commons</string>
-  <string name="login_failed_generic">Pieteikšanās neizdevās</string>
+  <string name="login_failed_generic" fuzzy="true">Pieteikšanās neizdevās</string>
   <string name="share_upload_button">Augšupielādēt</string>
   <string name="provider_modifications">Izmaiņas</string>
   <string name="menu_upload_single">Augšupielādēt</string>

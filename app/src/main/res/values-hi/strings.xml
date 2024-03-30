@@ -70,10 +70,10 @@
   <string name="signup">खाता बनायें</string>
   <string name="logging_in_title">लॉग इन हो रहा है</string>
   <string name="logging_in_message">कृपया प्रतीक्षा करें...</string>
-  <string name="login_success">लॉग इन सफल!</string>
-  <string name="login_failed">लॉग इन विफल!</string>
+  <string name="login_success" fuzzy="true">लॉग इन सफल!</string>
+  <string name="login_failed" fuzzy="true">लॉग इन विफल!</string>
   <string name="upload_failed">फ़ाइल नहीं मिली, कृपया अन्य फ़ाइल से प्रयास करें।</string>
-  <string name="authentication_failed">प्रमाणीकरण विफल, पुनः लॉगिन करें</string>
+  <string name="authentication_failed" fuzzy="true">प्रमाणीकरण विफल, पुनः लॉगिन करें</string>
   <string name="uploading_started">अपलोड आरंभ!</string>
   <string name="upload_completed_notification_title">%1$s अपलोड हुआ!</string>
   <string name="upload_completed_notification_text">अपना अपलोड देखने के लिए टैप करें</string>
@@ -95,11 +95,11 @@
   <string name="share_title_hint" fuzzy="true">शीर्षक (आवश्यक)</string>
   <string name="share_description_hint">विवरण</string>
   <string name="share_caption_hint">शीर्षक</string>
-  <string name="login_failed_network">प्रवेश नहीं हो रहा - नेटवर्क विफल</string>
+  <string name="login_failed_network" fuzzy="true">प्रवेश नहीं हो रहा - नेटवर्क विफल</string>
   <string name="login_failed_throttled">ढेर सारे असफल प्रयास होने के कारण कुछ मिनटों के बाद प्रयास करें।</string>
   <string name="login_failed_blocked">क्षमा करें, यह सदस्य कॉमन्स में अवरोधित है</string>
   <string name="login_failed_2fa_needed">आपको अपना दो कारक प्रमाणन कोड प्रदान करना होगा।</string>
-  <string name="login_failed_generic">प्रवेश विफल</string>
+  <string name="login_failed_generic" fuzzy="true">प्रवेश विफल</string>
   <string name="share_upload_button">अपलोड</string>
   <string name="multiple_share_base_title">सूचियों को नाम दें</string>
   <string name="provider_modifications">बदलाव</string>
@@ -233,7 +233,7 @@
   <string name="nominated_see_more" fuzzy="true">&lt;u&gt;विवरण के लिये वेबपेज खोलें&lt;/u&gt;</string>
   <string name="skip_login">छोड़ें</string>
   <string name="navigation_item_login">लॉगिन</string>
-  <string name="skip_login_title">क्या आप वास्तव में लॉगिन नहीं करना चाहते?</string>
+  <string name="skip_login_title" fuzzy="true">क्या आप वास्तव में लॉगिन नहीं करना चाहते?</string>
   <string name="skip_login_message">भविष्य में चित्र अपलोड करने के लिये आपको लॉग इन कर लेना चाहिये।</string>
   <string name="login_alert_message">इस सुविधा का उपयोग करने के लिये लॉग इन करें</string>
   <string name="copy_wikicode">विकिटेक्स्ट को क्लिपबोर्ड पर कॉपी करें</string>
@@ -278,7 +278,7 @@
   <string name="result">परिणाम</string>
   <string name="selfie_answer">सेल्फी की ज्ञानकोषीय महत्ता बहुत अधिक नहीं है। कृपया अपना चित्र तब तक अपलोड न करें जबतक आपके बारे में कोई विकिपीडिया लेख पहले से उपलब्ध नहीं है।</string>
   <string name="warning_for_no_answer">उत्तर हेतु प्रश्न के दो विकल्प में से कोई एक चुने</string>
-  <string name="user_not_logged_in">लॉग इन सत्र समाप्त हो गया, कृपया पुनः लॉग इन करें।</string>
+  <string name="user_not_logged_in" fuzzy="true">लॉग इन सत्र समाप्त हो गया, कृपया पुनः लॉग इन करें।</string>
   <string name="quiz_result_share_message">अपनी प्रश्नोत्तरी अपने मित्रों के साथ साझा करें!</string>
   <string name="continue_message">जारी रखें</string>
   <string name="correct">सही उत्तर</string>

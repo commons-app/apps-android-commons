@@ -81,10 +81,11 @@
   <string name="logging_in_message">Odota…</string>
   <string name="updating_caption_title">Päivitetään kuvatekstejä ja kuvauksia</string>
   <string name="updating_caption_message">Odota...</string>
-  <string name="login_success">Kirjautuminen onnistui!</string>
-  <string name="login_failed">Kirjautuminen epäonnistui!</string>
+  <string name="login_success" fuzzy="true">Kirjautuminen onnistui!</string>
+  <string name="login_failed" fuzzy="true">Kirjautuminen epäonnistui!</string>
   <string name="upload_failed">Tiedostoa ei löytynyt. Yritä toista tiedostoa.</string>
-  <string name="authentication_failed">Tunnistautuminen epäonnistui, kirjaudu uudelleen sisään</string>
+  <string name="unrestricted_battery_mode">Poistetaanko akun optimointi käytöstä?</string>
+  <string name="authentication_failed" fuzzy="true">Tunnistautuminen epäonnistui, kirjaudu uudelleen sisään</string>
   <string name="uploading_started">Tallentaminen aloitettiin!</string>
   <string name="uploading_queued">Lataus jonossa (rajoitettu yhteystila käytössä)</string>
   <string name="upload_completed_notification_title">%1$s tallennettiin!</string>
@@ -111,11 +112,11 @@
   <string name="add_caption_toast">Anna kuvateksti tälle tiedostolle</string>
   <string name="share_description_hint">Kuvaus</string>
   <string name="share_caption_hint">Kuvateksti</string>
-  <string name="login_failed_network">Kirjautuminen epäonnistui - verkkovirhe</string>
+  <string name="login_failed_network" fuzzy="true">Kirjautuminen epäonnistui - verkkovirhe</string>
   <string name="login_failed_throttled">Liikaa epäonnistuneita yrityksiä. Yritä uudelleen parin minuutin kuluttua.</string>
   <string name="login_failed_blocked">Pahoittelut, tämä käyttäjä on estetty Commonsissa</string>
   <string name="login_failed_2fa_needed">Anna kaksivaiheisen tunnistuksen koodi.</string>
-  <string name="login_failed_generic">Kirjautuminen epäonnistui</string>
+  <string name="login_failed_generic" fuzzy="true">Kirjautuminen epäonnistui</string>
   <string name="share_upload_button">Tallenna</string>
   <string name="multiple_share_base_title">Nimeä sarja</string>
   <string name="provider_modifications">Muutokset</string>
@@ -268,7 +269,7 @@
   <string name="nominated_see_more">Katso lisätietoja verkkosivulta</string>
   <string name="skip_login">Ohita</string>
   <string name="navigation_item_login">Kirjaudu sisään</string>
-  <string name="skip_login_title">Haluatko todella ohittaa kirjautumisen?</string>
+  <string name="skip_login_title" fuzzy="true">Haluatko todella ohittaa kirjautumisen?</string>
   <string name="skip_login_message">Sinun täytyy kirjautua sisään tallentaaksesi kuvia tulevaisuudessa.</string>
   <string name="login_alert_message">Kirjaudu sisään käyttääksesi tätä ominaisuutta</string>
   <string name="copy_wikicode">Kopioi wikiteksti leikepöydälle</string>
@@ -281,6 +282,7 @@
   <string name="nearby_commons">Commons</string>
   <string name="about_rate_us">Arvostele meidät</string>
   <string name="about_faq">UKK</string>
+  <string name="user_guide">Käyttäjän opas</string>
   <string name="welcome_skip_button">Ohita opetus</string>
   <string name="no_internet">Internet ei saatavissa</string>
   <string name="error_notifications">Virhe ilmoitusten haussa</string>
@@ -313,7 +315,7 @@
   <string name="search_tab_title_categories">Luokat</string>
   <string name="search_tab_title_depictions">Kohteet</string>
   <string name="explore_tab_title_featured">Suositeltu</string>
-  <string name="explore_tab_title_mobile">Tallennettu mobiilin kautta</string>
+  <string name="explore_tab_title_mobile">Tallennettu mobiililaitteella</string>
   <string name="explore_tab_title_map">Kartta</string>
   <string name="successful_wikidata_edit">Kuva lisätty Wikidata-kohteeseen %1$s!</string>
   <string name="wikidata_edit_failure">Vastaavaa Wikidata-kohdetta ei voitu päivittää!</string>
@@ -332,13 +334,14 @@
   <string name="construction_event_answer">Kuvat, jotka esittävät teknologiaa tai kulttuuria ovat erittäin tervetulleita Commonsiin.</string>
   <string name="congratulatory_message_quiz">Sait %1$s vastausta oikein. Onnittelut!</string>
   <string name="warning_for_no_answer">Valitse yksi kahdesta vaihtoehdosta vastataksesi kysymykseen</string>
-  <string name="user_not_logged_in">Istuntosi on vanhentunut. Kirjaudu sisään uudelleen.</string>
+  <string name="user_not_logged_in" fuzzy="true">Istuntosi on vanhentunut. Kirjaudu sisään uudelleen.</string>
   <string name="quiz_result_share_message">Jaa visailusi ystäviesi kanssa!</string>
   <string name="continue_message">Jatka</string>
   <string name="correct">Oikea vastaus</string>
   <string name="wrong">Väärä vastaus</string>
   <string name="quiz_screenshot_question">Onko tämä kuvakaappaus OK tallennettavaksi?</string>
   <string name="share_app_title">Jaa sovellus</string>
+  <string name="rotate">Kierrä</string>
   <string name="error_fetching_nearby_places">Virhe paikkoja haettaessa.</string>
   <string name="error_fetching_nearby_monuments">Virhe läheisiä monumentteja haettaessa.</string>
   <string name="no_recent_searches">Ei viimeaikaisia hakuja</string>
@@ -413,13 +416,15 @@
   <string name="never_ask_again">Älä kysy tätä uudelleen</string>
   <string name="display_location_permission_title">Kysy lupaa sijainnille</string>
   <string name="display_location_permission_explanation">Pyydä sijaintilupaa tarvittaessa läheisen ilmoituksen näkymää varten.</string>
-  <string name="achievements_fetch_failed">Jotain meni pieleen. Emme voineet noutaa saavutuksiasi</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Jotain meni pieleen. Emme voineet noutaa saavutuksiasi</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Olet tehnyt niin paljon muokkauskia, että saavutusten laskentajärjestelmä ei pysty selviytymään. Tämä on perimmäinen saavutus.</string>
   <string name="ends_on">Päättyy:</string>
   <string name="display_campaigns">Näytä kilpailut</string>
   <string name="display_campaigns_explanation">Näe meneillään olevat kilpailut</string>
+  <string name="option_allow">Salli</string>
+  <string name="option_dismiss">Hylkää</string>
   <string name="nearby_campaign_dismiss_message">Et enää näe kampanjoita. Voit kuitenkin halutessasi ottaa tämän ilmoituksen uudelleen käyttöön asetuksissa.</string>
-  <string name="this_function_needs_network_connection">Tämä toiminto tarvitsee verkkoyhteyden. Tarkista yhteysasetuksesi.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Tämä toiminto tarvitsee verkkoyhteyden. Tarkista yhteysasetuksesi.</string>
   <string name="error_processing_image">Kuvan käsittelyssä tapahtui virhe. Yritä uudelleen.</string>
   <string name="getting_edit_token">Haetaan tunnusta muokkausta varten</string>
   <string name="check_category_adding_template">Mallineen lisääminen luokkatarkistusta varten</string>
@@ -531,7 +536,7 @@
   <string name="place_state_needs_photo">Kuva uupuu</string>
   <string name="place_type">Paikkatyyppi:</string>
   <string name="nearby_search_hint">Silta, museo, hotelli jne.</string>
-  <string name="you_must_reset_your_passsword">Jokin meni pieleen kirjautumisessa, sinun on nollattava salasana !!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Jokin meni pieleen kirjautumisessa, sinun on nollattava salasana !!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="upload_nearby_place_found_title">Lähipaikka löytyi</string>
   <string name="upload_nearby_place_found_description" fuzzy="true">Onko tämä kuva paikasta %1$s?</string>
@@ -647,9 +652,21 @@
   <string name="mark_as_not_for_upload">Merkitse ei-tallennettavaksi</string>
   <string name="this_image_is_already_uploaded">Tämä kuva on jo tallennettu</string>
   <string name="image_selected">Kuva valittu</string>
+  <string name="menu_view_report">Ilmoita</string>
+  <string name="menu_view_set_white_background">Aseta valkoinen tausta</string>
+  <string name="menu_view_set_black_background">Aseta musta tausta</string>
   <string name="report_user">Ilmianna käyttäjä</string>
+  <string name="report_content">Ilmianna sisältö</string>
   <string name="request_user_block">Pyydä tämän käyttäjän estämistä</string>
   <string name="welcome_to_full_screen_mode_text">Tervetuloa koko näytön valintatilaan</string>
   <string name="full_screen_mode_zoom_info">Käytä kahta sormea lähentääksesi ja loitontaaksesi.</string>
   <string name="full_screen_mode_features_info">Pyyhkäise nopeasti ja pitkään suorittaaksesi nämä toiminnot: \n- Vasen/Oikea: Siirry edelliseen/seuraavaan \n- Ylös: Valitse\n- Alas: Merkitse ei-tallennettavaksi.</string>
+  <string name="see_your_achievements">Näytä omat saavutukset</string>
+  <string name="edit_image">Muokkaa kuvaa</string>
+  <string name="edit_location">Muokkaa sijaintia</string>
+  <string name="send_thanks_to_author">Kiitä tekijää</string>
+  <plurals name="custom_picker_images_selected_title_appendix">
+    <item quantity="one">%d kuva valittu</item>
+    <item quantity="other">%d kuvaa valittu</item>
+  </plurals>
 </resources>
