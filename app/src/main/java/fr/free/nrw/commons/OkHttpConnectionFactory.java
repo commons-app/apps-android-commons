@@ -34,7 +34,7 @@ public final class OkHttpConnectionFactory {
     private static OkHttpClient createClient(final CommonsCookieJar cookieJar) {
         return new OkHttpClient.Builder()
                 .cookieJar(cookieJar)
-                .cache(new Cache(new File(CommonsApplication.getInstance().getCacheDir(), CACHE_DIR_NAME), NET_CACHE_SIZE))
+                .cache((CommonsApplication.getInstance()!=null) ? new Cache(new File(CommonsApplication.getInstance().getCacheDir(), CACHE_DIR_NAME), NET_CACHE_SIZE) : null)
                 .connectTimeout(120, TimeUnit.SECONDS)
                 .writeTimeout(120, TimeUnit.SECONDS)
                 .readTimeout(120, TimeUnit.SECONDS)
