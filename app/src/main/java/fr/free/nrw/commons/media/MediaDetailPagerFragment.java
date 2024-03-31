@@ -164,6 +164,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
         if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable", false);
             isFeaturedImage = savedInstanceState.getBoolean("isFeaturedImage", false);
+
         }
         setHasOptionsMenu(true);
         initProvider();

@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.exifinterface.media.ExifInterface;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import fr.free.nrw.commons.CameraPosition;
 import fr.free.nrw.commons.LocationPicker.LocationPicker;
@@ -76,6 +77,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public static final String UPLOADABLE_FILE = "uploadable_file";
 
     public static final String UPLOAD_MEDIA_DETAILS = "upload_media_detail_adapter";
+
+    /**
+     * True when user removes location from the current image
+     */
+    private boolean hasUserRemovedLocation;
 
 
     private UploadMediaDetailAdapter uploadMediaDetailAdapter;
@@ -295,7 +301,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         if (callback == null) {
             return;
         }
-        presenter.displayLocDialog(indexOfFragment, inAppPictureLocation);
+        presenter.displayLocDialog(indexOfFragment, inAppPictureLocation, hasUserRemovedLocation);
     }
 
     public void onPreviousButtonClicked() {
@@ -634,14 +640,15 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 final double zoom = cameraPosition.getZoom();
 
                 editLocation(latitude, longitude, zoom);
-                /*
-                       If isMissingLocationDialog is true, it means that the user has already tapped the
-                       "Next" button, so go directly to the next step.
-                 */
+                // If isMissingLocationDialog is true, it means that the user has already tapped the
+                // "Next" button, so go directly to the next step.
                 if (isMissingLocationDialog) {
                     isMissingLocationDialog = false;
                     onNextButtonClicked();
                 }
+            } else {
+                // If camera position is null means location is removed by the user
+                removeLocation();
             }
         }
         if (requestCode == REQUEST_CODE_FOR_EDIT_ACTIVITY && resultCode == RESULT_OK) {
@@ -674,6 +681,46 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
     /**
+     * Removes the location data from the image, by setting them to null
+     */
+    public void removeLocation() {
+        editableUploadItem.getGpsCoords().setDecimalCoords(null);
+        try {
+            ExifInterface sourceExif = new ExifInterface(uploadableFile.getFilePath());
+            String[] exifTags = {
+                ExifInterface.TAG_GPS_LATITUDE,
+                ExifInterface.TAG_GPS_LATITUDE_REF,
+                ExifInterface.TAG_GPS_LONGITUDE,
+                ExifInterface.TAG_GPS_LONGITUDE_REF,
+            };
+
+            for (String tag : exifTags) {
+                sourceExif.setAttribute(tag, null);
+            }
+            sourceExif.saveAttributes();
+
+            Drawable mapQuestion = getResources().getDrawable(R.drawable.ic_map_not_available_20dp);
+
+            if (binding != null) {
+                binding.locationImageView.setImageDrawable(mapQuestion);
+                binding.locationTextView.setText(R.string.add_location);
+            }
+
+            editableUploadItem.getGpsCoords().setDecLatitude(0.0);
+            editableUploadItem.getGpsCoords().setDecLongitude(0.0);
+            editableUploadItem.getGpsCoords().setImageCoordsExists(false);
+            hasUserRemovedLocation = true;
+
+            Toast.makeText(getContext(), getString(R.string.location_removed), Toast.LENGTH_LONG)
+                .show();
+        } catch (Exception e) {
+            Timber.d(e);
+            Toast.makeText(getContext(), "Location could not be removed due to internal error",
+                Toast.LENGTH_LONG).show();
+        }
+    }
+
+    /**
      * Update the old coordinates with new one
      * @param latitude new latitude
      * @param longitude new longitude
@@ -694,7 +741,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             binding.locationTextView.setText(R.string.edit_location);
         }
 
-        Toast.makeText(getContext(), "Location Updated", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), getString(R.string.location_updated), Toast.LENGTH_LONG).show();
 
     }
 
