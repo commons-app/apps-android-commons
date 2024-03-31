@@ -382,7 +382,7 @@ class UploadMediaDetailFragmentUnitTest {
         `when`(latLng.longitude).thenReturn(0.0)
         `when`(uploadItem.gpsCoords).thenReturn(imageCoordinates)
         fragment.onActivityResult(1211, Activity.RESULT_OK, intent)
-        Mockito.verify(presenter, Mockito.times(1)).displayLocDialog(0, null)
+        Mockito.verify(presenter, Mockito.times(1)).displayLocDialog(0, null, false)
     }
 
     @Test
