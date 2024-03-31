@@ -649,7 +649,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         decideButtonVisibilities();
         addActionToTitle();
         if (!Utils.isMonumentsEnabled(new Date())) {
-             binding.nearbyFilter.chipView.choiceChipWlm.setVisibility(View.GONE);
+            NearbyFilterState.setWlmSelected(false);
+            binding.nearbyFilter.chipView.choiceChipWlm.setVisibility(View.GONE);
         }
     }
 
