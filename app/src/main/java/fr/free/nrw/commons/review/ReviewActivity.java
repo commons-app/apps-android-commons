@@ -11,22 +11,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import com.facebook.drawee.view.SimpleDraweeView;
-import com.viewpagerindicator.CirclePageIndicator;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AccountUtil;
+import fr.free.nrw.commons.databinding.ActivityReviewBinding;
 import fr.free.nrw.commons.delete.DeleteHelper;
 import fr.free.nrw.commons.media.MediaDetailFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
@@ -39,27 +29,10 @@ import javax.inject.Inject;
 
 public class ReviewActivity extends BaseActivity {
 
-    @BindView(R.id.pager_indicator_review)
-    public CirclePageIndicator pagerIndicator;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.drawer_layout)
-    DrawerLayout drawerLayout;
-    @BindView(R.id.view_pager_review)
-    ReviewViewPager reviewPager;
-    @BindView(R.id.skip_image)
-    Button btnSkipImage;
-    @BindView(R.id.review_image_view)
-    SimpleDraweeView simpleDraweeView;
-    @BindView(R.id.pb_review_image)
-    ProgressBar progressBar;
-    @BindView(R.id.tv_image_caption)
-    TextView imageCaption;
-    @BindView(R.id.mediaDetailContainer)
-    FrameLayout mediaDetailContainer;
+
+    private ActivityReviewBinding binding;
+
     MediaDetailFragment mediaDetailFragment;
-    @BindView(R.id.reviewActivityContainer)
-    LinearLayout reviewContainer;
     public ReviewPagerAdapter reviewPagerAdapter;
     public ReviewController reviewController;
     @Inject
@@ -110,19 +83,20 @@ public class ReviewActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_review);
-        ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
+        binding = ActivityReviewBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        setSupportActionBar(binding.toolbarBinding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         
         reviewController = new ReviewController(deleteHelper, this);
 
         reviewPagerAdapter = new ReviewPagerAdapter(getSupportFragmentManager());
-        reviewPager.setAdapter(reviewPagerAdapter);
-        pagerIndicator.setViewPager(reviewPager);
-        progressBar.setVisibility(View.VISIBLE);
+        binding.viewPagerReview.setAdapter(reviewPagerAdapter);
+        binding.pagerIndicatorReview.setViewPager(binding.viewPagerReview);
+        binding.pbReviewImage.setVisibility(View.VISIBLE);
 
-        Drawable d[]=btnSkipImage.getCompoundDrawablesRelative();
+        Drawable d[]=binding.skipImage.getCompoundDrawablesRelative();
         d[2].setColorFilter(getApplicationContext().getResources().getColor(R.color.button_blue), PorterDuff.Mode.SRC_IN);
 
         if (savedInstanceState != null && savedInstanceState.getParcelable(SAVED_MEDIA) != null) {
@@ -132,17 +106,17 @@ public class ReviewActivity extends BaseActivity {
             runRandomizer(); //Run randomizer whenever everything is ready so that a first random image will be added
         }
 
-        btnSkipImage.setOnClickListener(view -> {
+        binding.skipImage.setOnClickListener(view -> {
             reviewImageFragment = getInstanceOfReviewImageFragment();
             reviewImageFragment.disableButtons();
             runRandomizer();
         });
 
-        simpleDraweeView.setOnClickListener(view ->setUpMediaDetailFragment());
+        binding.reviewImageView.setOnClickListener(view ->setUpMediaDetailFragment());
 
-        btnSkipImage.setOnTouchListener((view, event) -> {
+        binding.skipImage.setOnTouchListener((view, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP && event.getRawX() >= (
-                    btnSkipImage.getRight() - btnSkipImage
+                    binding.skipImage.getRight() - binding.skipImage
                             .getCompoundDrawables()[2].getBounds().width())) {
                 showSkipImageInfo();
                 return true;
@@ -160,8 +134,8 @@ public class ReviewActivity extends BaseActivity {
     @SuppressLint("CheckResult")
     public boolean runRandomizer() {
         hasNonHiddenCategories = false;
-        progressBar.setVisibility(View.VISIBLE);
-        reviewPager.setCurrentItem(0);
+        binding.pbReviewImage.setVisibility(View.VISIBLE);
+        binding.viewPagerReview.setCurrentItem(0);
         // Finds non-hidden categories from Media instance
         compositeDisposable.add(reviewHelper.getRandomMedia()
                 .subscribeOn(Schedulers.io())
@@ -213,7 +187,7 @@ public class ReviewActivity extends BaseActivity {
         this.media = media;
         String fileName = media.getFilename();
         if (fileName.length() == 0) {
-            ViewUtil.showShortSnackbar(drawerLayout, R.string.error_review);
+            ViewUtil.showShortSnackbar(binding.drawerLayout, R.string.error_review);
             return;
         }
 
@@ -223,7 +197,7 @@ public class ReviewActivity extends BaseActivity {
             return;
         }
 
-        simpleDraweeView.setImageURI(media.getImageUrl());
+        binding.reviewImageView.setImageURI(media.getImageUrl());
 
         reviewController.onImageRefreshed(media); //file name is updated
         compositeDisposable.add(reviewHelper.getFirstRevisionOfFile(fileName)
@@ -233,19 +207,19 @@ public class ReviewActivity extends BaseActivity {
                     reviewController.firstRevision = revision;
                     reviewPagerAdapter.updateFileInformation();
                     @SuppressLint({"StringFormatInvalid", "LocalSuppress"}) String caption = String.format(getString(R.string.review_is_uploaded_by), fileName, revision.getUser());
-                    imageCaption.setText(caption);
-                    progressBar.setVisibility(View.GONE);
+                    binding.tvImageCaption.setText(caption);
+                    binding.pbReviewImage.setVisibility(View.GONE);
                     reviewImageFragment = getInstanceOfReviewImageFragment();
                     reviewImageFragment.enableButtons();
                 }));
-        reviewPager.setCurrentItem(0);
+        binding.viewPagerReview.setCurrentItem(0);
     }
 
     public void swipeToNext() {
-        int nextPos = reviewPager.getCurrentItem() + 1;
+        int nextPos = binding.viewPagerReview.getCurrentItem() + 1;
         // If currently at category fragment, then check whether the media has any non-hidden category
         if (nextPos <= 3) {
-            reviewPager.setCurrentItem(nextPos);
+            binding.viewPagerReview.setCurrentItem(nextPos);
             if (nextPos == 2) {
                 // The media has no non-hidden category. Such media are already flagged by server-side bots, so no need to review manually.
                 if (!hasNonHiddenCategories) {
@@ -262,6 +236,7 @@ public class ReviewActivity extends BaseActivity {
     public void onDestroy() {
         super.onDestroy();
         compositeDisposable.clear();
+        binding = null;
     }
 
     public void showSkipImageInfo(){
@@ -306,8 +281,8 @@ public class ReviewActivity extends BaseActivity {
      * this function return the instance of  reviewImageFragment
      */
     public ReviewImageFragment getInstanceOfReviewImageFragment(){
-        int currentItemOfReviewPager = reviewPager.getCurrentItem();
-        reviewImageFragment = (ReviewImageFragment) reviewPagerAdapter.instantiateItem(reviewPager, currentItemOfReviewPager);
+        int currentItemOfReviewPager = binding.viewPagerReview.getCurrentItem();
+        reviewImageFragment = (ReviewImageFragment) reviewPagerAdapter.instantiateItem(binding.viewPagerReview, currentItemOfReviewPager);
         return reviewImageFragment;
     }
 
@@ -315,9 +290,9 @@ public class ReviewActivity extends BaseActivity {
      * set up the media detail fragment when click on the review image
      */
     private void setUpMediaDetailFragment() {
-        if (mediaDetailContainer.getVisibility() == View.GONE && media != null) {
-            mediaDetailContainer.setVisibility(View.VISIBLE);
-            reviewContainer.setVisibility(View.INVISIBLE);
+        if (binding.mediaDetailContainer.getVisibility() == View.GONE && media != null) {
+            binding.mediaDetailContainer.setVisibility(View.VISIBLE);
+            binding.reviewActivityContainer.setVisibility(View.INVISIBLE);
             FragmentManager fragmentManager = getSupportFragmentManager();
             mediaDetailFragment = new MediaDetailFragment();
             Bundle bundle = new Bundle();
@@ -334,9 +309,9 @@ public class ReviewActivity extends BaseActivity {
      */
     @Override
     public void onBackPressed() {
-        if (mediaDetailContainer.getVisibility() == View.VISIBLE) {
-            mediaDetailContainer.setVisibility(View.GONE);
-            reviewContainer.setVisibility(View.VISIBLE);
+        if (binding.mediaDetailContainer.getVisibility() == View.VISIBLE) {
+            binding.mediaDetailContainer.setVisibility(View.GONE);
+            binding.reviewActivityContainer.setVisibility(View.VISIBLE);
         }
         super.onBackPressed();
     }
@@ -348,10 +323,11 @@ public class ReviewActivity extends BaseActivity {
         Fragment mediaDetailFragment = getSupportFragmentManager()
             .findFragmentById(R.id.mediaDetailContainer);
         if (mediaDetailFragment != null) {
-            mediaDetailContainer.setVisibility(View.VISIBLE);
-            reviewContainer.setVisibility(View.INVISIBLE);
+            binding.mediaDetailContainer.setVisibility(View.VISIBLE);
+            binding.reviewActivityContainer.setVisibility(View.INVISIBLE);
             getSupportFragmentManager().beginTransaction()
                 .replace(R.id.mediaDetailContainer, mediaDetailFragment).commit();
         }
     }
+
 }

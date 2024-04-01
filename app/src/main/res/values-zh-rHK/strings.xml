@@ -56,10 +56,10 @@
   <string name="logging_in_message">請稍候…</string>
   <string name="updating_caption_title">正在更新說明與描述</string>
   <string name="updating_caption_message">請等待⋯</string>
-  <string name="login_success">登入成功！</string>
-  <string name="login_failed">登入失敗！</string>
+  <string name="login_success" fuzzy="true">登入成功！</string>
+  <string name="login_failed" fuzzy="true">登入失敗！</string>
   <string name="upload_failed">找不到檔案。請試試看其它檔案。</string>
-  <string name="authentication_failed">身份驗證失敗，請重新登入</string>
+  <string name="authentication_failed" fuzzy="true">身份驗證失敗，請重新登入</string>
   <string name="uploading_started">開始上傳！</string>
   <string name="uploading_queued">上傳已排定（限制連線模式已啟用）</string>
   <string name="upload_completed_notification_title">已上傳%1$s！</string>
@@ -86,11 +86,11 @@
   <string name="add_caption_toast">請提供此檔案的說明</string>
   <string name="share_description_hint">描述</string>
   <string name="share_caption_hint">說明</string>
-  <string name="login_failed_network">無法登入－網路故障</string>
+  <string name="login_failed_network" fuzzy="true">無法登入－網路故障</string>
   <string name="login_failed_throttled">失敗次數過多，請於幾分鐘後重試。</string>
   <string name="login_failed_blocked">很抱歉，維基共享資源已封鎖該使用者</string>
   <string name="login_failed_2fa_needed">必須提供您的雙重驗證代碼。</string>
-  <string name="login_failed_generic">登入失敗！</string>
+  <string name="login_failed_generic" fuzzy="true">登入失敗！</string>
   <string name="share_upload_button">上載</string>
   <string name="multiple_share_base_title">命名此組圖像</string>
   <string name="provider_modifications">修改</string>

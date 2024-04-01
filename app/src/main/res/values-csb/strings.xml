@@ -30,8 +30,8 @@
   <string name="signup">Wregistrëjë sã</string>
   <string name="logging_in_title">Logòwanié</string>
   <string name="logging_in_message">Proszã żdac...</string>
-  <string name="login_success">Ùdałi logòwanié!</string>
-  <string name="login_failed">Logòwanié nie darzëło sã!</string>
+  <string name="login_success" fuzzy="true">Ùdałi logòwanié!</string>
+  <string name="login_failed" fuzzy="true">Logòwanié nie darzëło sã!</string>
   <string name="upload_failed">Felënk lopka. Proszã spróbòwac znowa.</string>
   <string name="authentication_failed" fuzzy="true">Fela ùdowierzaniô!</string>
   <string name="uploading_started">Wladënk zrëszony!</string>
@@ -54,11 +54,11 @@
   <string name="menu_share">Ùprzistãpni</string>
   <string name="share_title_hint" fuzzy="true">Titel</string>
   <string name="share_description_hint">Òpisënk</string>
-  <string name="login_failed_network">Ni mòże sã wlogòwac - fela sécë</string>
+  <string name="login_failed_network" fuzzy="true">Ni mòże sã wlogòwac - fela sécë</string>
   <string name="login_failed_throttled">Za wiele nieùdałich prób wlogòwaniô. Spróbùjë znowa za czile minut.</string>
   <string name="login_failed_blocked">Nen brëkòwnik òstôł zablokòwóny na Commons</string>
   <string name="login_failed_2fa_needed">Mùszisz wpisac swój kòd dlô dwafaktorowi aùtorizacëji.</string>
-  <string name="login_failed_generic">Logòwanié nie darzëło sã</string>
+  <string name="login_failed_generic" fuzzy="true">Logòwanié nie darzëło sã</string>
   <string name="share_upload_button">Wladënk</string>
   <string name="multiple_share_base_title">Miono tegò zestôwù</string>
   <string name="provider_modifications">Zjinaczi</string>

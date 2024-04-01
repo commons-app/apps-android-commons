@@ -67,10 +67,10 @@
   <string name="signup">Eman izena</string>
   <string name="logging_in_title">Saioa hasten</string>
   <string name="logging_in_message">Mesedez itxaron…</string>
-  <string name="login_success">Saio hasiera egina</string>
-  <string name="login_failed">Saio hasieran akatsa!</string>
+  <string name="login_success" fuzzy="true">Saio hasiera egina</string>
+  <string name="login_failed" fuzzy="true">Saio hasieran akatsa!</string>
   <string name="upload_failed">Fitxategia ez da aurkitu. Mesedez saiatu beste batekin.</string>
-  <string name="authentication_failed">Autentifikazioan akatsa, mesedez saiatu berriro sartzen</string>
+  <string name="authentication_failed" fuzzy="true">Autentifikazioan akatsa, mesedez saiatu berriro sartzen</string>
   <string name="uploading_started">Igoera hasi da!</string>
   <string name="upload_completed_notification_title">%1$s igotzen!</string>
   <string name="upload_completed_notification_text">Ukitu igotakoa ikusteko</string>
@@ -93,11 +93,11 @@
   <string name="share_title_hint">Testua (beharrezkoa)</string>
   <string name="share_description_hint">Deskribapena</string>
   <string name="share_caption_hint">Irudi-oineko testua</string>
-  <string name="login_failed_network">Ezin izan da sartu - sarean akatsa</string>
+  <string name="login_failed_network" fuzzy="true">Ezin izan da sartu - sarean akatsa</string>
   <string name="login_failed_throttled">Sartzeko saiakera txar gehiegi. Mesedez saiatu zaitez minutu batzuk barru.</string>
   <string name="login_failed_blocked">Barka, baina erabiltzaile hau blokeatuta dago Commonsen</string>
   <string name="login_failed_2fa_needed">Zure bi faktoreko autentifikazio kodea eman behar duzu.</string>
-  <string name="login_failed_generic">Saio hasieran akatsa</string>
+  <string name="login_failed_generic" fuzzy="true">Saio hasieran akatsa</string>
   <string name="share_upload_button">Igo</string>
   <string name="multiple_share_base_title">Izena eman bilduma honi</string>
   <string name="provider_modifications">Aldaketak</string>
@@ -231,7 +231,7 @@
   <string name="nominated_for_deletion">Irudi hau ezabaketarako izendatua izan da.</string>
   <string name="skip_login">Jauzi</string>
   <string name="navigation_item_login">Hasi saioa</string>
-  <string name="skip_login_title">Benetan saioa hastea jauzi nahi duzula?</string>
+  <string name="skip_login_title" fuzzy="true">Benetan saioa hastea jauzi nahi duzula?</string>
   <string name="skip_login_message">Argazkiak igotzeko saioa hasi beharko duzu.</string>
   <string name="login_alert_message">Mesedez, hasi saioa funtzio hau erabili ahal izateko</string>
   <string name="nearby_location_not_available">Kokapena ez dago erabilgarri.</string>
@@ -288,7 +288,7 @@
   <string name="construction_event_answer">Teknologia edo kultura erakusten duten irudiak ongi etorriak dira Commons-en.</string>
   <string name="congratulatory_message_quiz">Erantzunetako %1$s zuzen erantzun dituzu. Zorionak!</string>
   <string name="warning_for_no_answer">Hautatu bi aukeretako bat galderari erantzuteko</string>
-  <string name="user_not_logged_in">Saioa hasteko denbora amaituta, mesedez, hasi saioa berriro.</string>
+  <string name="user_not_logged_in" fuzzy="true">Saioa hasteko denbora amaituta, mesedez, hasi saioa berriro.</string>
   <string name="quiz_result_share_message">Partekatu galdetegia zure lagunekin!</string>
   <string name="continue_message">Jarraitu</string>
   <string name="correct">Erantzun zuzena</string>

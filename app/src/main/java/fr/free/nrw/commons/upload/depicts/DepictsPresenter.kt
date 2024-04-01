@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import fr.free.nrw.commons.bookmarks.items.BookmarkItemsController
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.di.CommonsApplicationModule
 import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
@@ -218,13 +219,18 @@ class DepictsPresenter @Inject constructor(
                             view.dismissProgressDialog()
                             view.updateDepicts()
                             view.goBackToPreviousScreen()
+                        }, { error ->
+                            if (error is InvalidLoginTokenException) {
+                                view.navigateToLoginScreen();
+                            } else {
+                                Timber.e(
+                                    "Failed to update depictions"
+                                )
+                            }
                         })
-                        {
-                            Timber.e(
-                                "Failed to update depictions"
-                            )
-                        }
                 )
+
+
             }
         } else {
             repository.cleanup()

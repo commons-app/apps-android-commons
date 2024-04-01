@@ -90,13 +90,13 @@
   <string name="logging_in_message">Prosimo, počakajte ...</string>
   <string name="updating_caption_title">Posodabljam napise in opise</string>
   <string name="updating_caption_message">Prosimo, počakajte ...</string>
-  <string name="login_success">Uspešno ste se prijavili!</string>
-  <string name="login_failed">Prijava ni uspela!</string>
+  <string name="login_success" fuzzy="true">Uspešno ste se prijavili!</string>
+  <string name="login_failed" fuzzy="true">Prijava ni uspela!</string>
   <string name="upload_failed">Datoteka ni bila najdena. Prosimo, poskusite z drugo datoteko.</string>
   <string name="retry_limit_reached">Dosežena je največja omejitev ponovnih poskusov! Prekličite nalaganje in poskusite znova.</string>
   <string name="unrestricted_battery_mode">Ali želite izklopiti optimizacijo baterije?</string>
   <string name="suggest_unrestricted_mode">Nalaganje več kot 3 slik deluje bolj zanesljivo, ko je optimizacija baterije izklopljena. Za nemoteno nalaganje v nastavitvah izklopite optimizacijo baterije za aplikacijo Commons. \n\nMožni koraki za izklop optimizacije baterije:\n\n1. korak: Dotaknite se spodnjega gumba »Nastavitve«.\n\n 2. korak: Preklopite z »Ni optimizirano« na »Vse aplikacije«.\n\n3. korak: Poiščite »Commons« ali »fr.free.nrw.commons«.\n\n 4. korak: tapnite ga in izberite »Ne optimiziraj«.\n\n\n5. korak: Pritisnite »Končano«.</string>
-  <string name="authentication_failed">Avtentikacija ni uspela; prosimo, prijavite se znova</string>
+  <string name="authentication_failed" fuzzy="true">Avtentikacija ni uspela; prosimo, prijavite se znova</string>
   <string name="uploading_started">Nalaganje se je začelo!</string>
   <string name="uploading_queued">Nalaganje na čakanju (vklopljen je način omejene povezanosti)</string>
   <string name="upload_completed_notification_title">Datoteka »%1$s« je naložena!</string>
@@ -123,11 +123,11 @@
   <string name="add_caption_toast">Prosimo, dodajte sliki napis</string>
   <string name="share_description_hint">Opis</string>
   <string name="share_caption_hint">Napis</string>
-  <string name="login_failed_network">Prijava ni uspela – omrežna napaka</string>
+  <string name="login_failed_network" fuzzy="true">Prijava ni uspela – omrežna napaka</string>
   <string name="login_failed_throttled">Preveč neuspešnih nalaganj. Prosimo, poskusite znova čez nekaj minut.</string>
   <string name="login_failed_blocked">Ta uporabnik je v Zbirki žal blokiran</string>
   <string name="login_failed_2fa_needed">Navesti morate svojo dvofaktorsko avtentikacijsko kodo.</string>
-  <string name="login_failed_generic">Prijava ni uspela</string>
+  <string name="login_failed_generic" fuzzy="true">Prijava ni uspela</string>
   <string name="share_upload_button">Naloži</string>
   <string name="multiple_share_base_title">Poimenuj skupino</string>
   <string name="provider_modifications">Spremembe</string>
@@ -284,7 +284,7 @@
   <string name="nominated_see_more">Za podrobnosti glejte spletno stran</string>
   <string name="skip_login">Preskoči</string>
   <string name="navigation_item_login">Prijava</string>
-  <string name="skip_login_title">Ali res želite preskočiti prijavo?</string>
+  <string name="skip_login_title" fuzzy="true">Ali res želite preskočiti prijavo?</string>
   <string name="skip_login_message">V prihodnosti se boste morali za nalaganje slik prijaviti.</string>
   <string name="login_alert_message">Za uporabo te možnosti se prijavite</string>
   <string name="copy_wikicode">Kopiraj vikibesedilo v odložišče</string>
@@ -351,7 +351,7 @@
   <string name="construction_event_answer">V Wikimedijini zbirki so zelo dobrodošle slike, ki prikazujejo tehniko ali kulturo.</string>
   <string name="congratulatory_message_quiz">Pravilno ste odgovorili na %1$s vprašanj. Čestitamo!</string>
   <string name="warning_for_no_answer">Za odgovor na vprašanje izberite eno od dveh možnosti.</string>
-  <string name="user_not_logged_in">Seja prijave je potekla. Poskusite se prijaviti znova.</string>
+  <string name="user_not_logged_in" fuzzy="true">Seja prijave je potekla. Poskusite se prijaviti znova.</string>
   <string name="quiz_result_share_message">Delite kviz s prijatelji!</string>
   <string name="continue_message">Nadaljuj</string>
   <string name="correct">Pravilen odgovor</string>
@@ -434,7 +434,7 @@
   <string name="never_ask_again">Nikoli več ne vprašaj</string>
   <string name="display_location_permission_title">Vprašaj za dovoljenje za lokacijo</string>
   <string name="display_location_permission_explanation">Vprašaj za dovoljenje za uporabo lokacije, ko je to potrebno za ogled obvestila o bližnjih krajih.</string>
-  <string name="achievements_fetch_failed">Nekaj je šlo narobe. Vaših dosežkov nismo mogli pridobiti.</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Nekaj je šlo narobe. Vaših dosežkov nismo mogli pridobiti.</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Opravili ste toliko prispevkov, da jih naš sistem izračunavanja ne more razčleniti. To je vrhunski dosežek.</string>
   <string name="ends_on">Konec:</string>
   <string name="display_campaigns">Prikaži akcije</string>
@@ -450,7 +450,7 @@
   <string name="open_document_photo_picker_explanation">Novi izbirnik fotografij Android lahko izgubi podatke o lokaciji. Omogočite ga, če ga želite uporabljati.</string>
   <string name="location_loss_warning">Izklop te možnosti lahko aktivira novi izbirnik fotografij za Android. S tem tvegate izgubo podatkov o informacijah.\n\nZa več informacij kliknite »Preberi več«.</string>
   <string name="nearby_campaign_dismiss_message">Kampanj ne boste več videli. Če želite, lahko tovrstno obveščanje znova vklopite v nastavitvah.</string>
-  <string name="this_function_needs_network_connection">Ta možnost zahteva omrežno povezavo. Prosimo, preverite vaše nastavitve povezave.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Ta možnost zahteva omrežno povezavo. Prosimo, preverite vaše nastavitve povezave.</string>
   <string name="error_processing_image">Pri obdelavi slike je prišlo do napake. Prosimo, poskusite znova!</string>
   <string name="getting_edit_token">Pridobivam žeton za urejanje</string>
   <string name="check_category_adding_template">Dodajam predlogo za preverjanje kategorije</string>
@@ -581,7 +581,7 @@
   <string name="place_state_needs_photo">Potrebuje fotografijo</string>
   <string name="place_type">Vrsta kraja:</string>
   <string name="nearby_search_hint">Most, muzej, hotel idr.</string>
-  <string name="you_must_reset_your_passsword">Pri prijavi je šlo nekaj narobe; ponastaviti morate geslo!!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Pri prijavi je šlo nekaj narobe; ponastaviti morate geslo!!</string>
   <string name="title_for_media">MEDIJ</string>
   <string name="title_for_child_classes">PODREJENI RAZREDI</string>
   <string name="title_for_parent_classes">NADREJENI RAZREDI</string>
@@ -717,8 +717,8 @@
   <string name="add_location">Dodaj lokacijo</string>
   <string name="feedback_sharing_data_alert">Iz te e-pošte odstranite vse podatke, ki jih ne želite javno deliti. Upoštevajte, da bodo vaš e-poštni naslov ter povezano ime in profilna slika javno vidni.</string>
   <string name="explore_map_details">Podrobnosti</string>
-  <string name="achievements_unavailable_beta">Dosežki so na voljo samo v stabilni različici (preverite dokumentacijo razvijalcev).</string>
-  <string name="leaderboard_unavailable_beta">Lestvica uvrstitev je na voljo samo v stabilni različici (glejte dokumentacijo razvijalcev).</string>
+  <string name="achievements_unavailable_beta" fuzzy="true">Dosežki so na voljo samo v stabilni različici (preverite dokumentacijo razvijalcev).</string>
+  <string name="leaderboard_unavailable_beta" fuzzy="true">Lestvica uvrstitev je na voljo samo v stabilni različici (glejte dokumentacijo razvijalcev).</string>
   <string name="copyright_popup">Prosimo, nalagajte samo slike, ki ste jih ustvarili sami. Naložnike avtorsko varovanega gradiva bomo blokirali. To velja tudi za betarazličico. Hvala za preizkušanje aplikacije!</string>
   <string name="select_feedback_data_choice">Prosimo, odizberite vse podatke, ki jih ne želite deliti javno.</string>
   <string name="api_level">Raven API</string>

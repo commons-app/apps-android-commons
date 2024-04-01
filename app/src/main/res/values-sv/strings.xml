@@ -81,13 +81,13 @@
   <string name="logging_in_message">Var god vänta…</string>
   <string name="updating_caption_title">Uppdatera bildtexter och beskrivningar</string>
   <string name="updating_caption_message">Var god vänta…</string>
-  <string name="login_success">Inloggningen lyckades!</string>
-  <string name="login_failed">Det gick inte att logga in!</string>
+  <string name="login_success" fuzzy="true">Inloggningen lyckades!</string>
+  <string name="login_failed" fuzzy="true">Det gick inte att logga in!</string>
   <string name="upload_failed">Filen hittades inte. Försök med en annan fil.</string>
   <string name="retry_limit_reached">Maxgränsen för återförsök har uppnåtts! Avbryt uppladdningen och försök igen</string>
   <string name="unrestricted_battery_mode">Inaktivera batterioptimeringen?</string>
   <string name="suggest_unrestricted_mode">Att ladda upp fler än 3 bilder är mer tillförlitligt när batterioptimering har inaktiverats. Inaktivera batterioptimering för Commons-appen i inställningarna för en smidigare uppladdningsupplevelse.\n\nMöjliga steg för att inaktivera batterioptimeringen:\n\nSteg 1: Tryck på knappen \"Inställningar\" nedan.\n\nSteg 2: Ändra \"Appar inte optimerade\" till \"Allt\".\n\nSteg 3: Sök efter \"Commons\" eller \"fr.free.nrw.commons\".\n\nSteg 4: Tryck på den och välj \"Optimera inte\".\n\nSteg 5: Tryck på \"Klar\".</string>
-  <string name="authentication_failed">Autentisering misslyckades, var god logga in igen</string>
+  <string name="authentication_failed" fuzzy="true">Autentisering misslyckades, var god logga in igen</string>
   <string name="uploading_started">Överföring påbörjad!</string>
   <string name="uploading_queued">Kölagd uppladdning (begränsat anslutningsläge har aktiverats)</string>
   <string name="upload_completed_notification_title">%1$s överförd!</string>
@@ -114,11 +114,11 @@
   <string name="add_caption_toast">Var god ange en bildtext för denna fil</string>
   <string name="share_description_hint">Beskrivning</string>
   <string name="share_caption_hint">Bildtext</string>
-  <string name="login_failed_network">Det gick inte att logga in - nätverksfel</string>
+  <string name="login_failed_network" fuzzy="true">Det gick inte att logga in - nätverksfel</string>
   <string name="login_failed_throttled">För många misslyckade försök. Var god försök igen om några minuter.</string>
   <string name="login_failed_blocked">Tyvärr, denna användare har blockerats på Commons</string>
   <string name="login_failed_2fa_needed">Du måste ange din tvåstegsverifieringskod.</string>
-  <string name="login_failed_generic">Inloggningen misslyckades</string>
+  <string name="login_failed_generic" fuzzy="true">Inloggningen misslyckades</string>
   <string name="share_upload_button">Ladda upp</string>
   <string name="multiple_share_base_title">Namnge denna uppsättning</string>
   <string name="provider_modifications">Ändringar</string>
@@ -275,7 +275,7 @@
   <string name="nominated_see_more">Se webbplatsen för information</string>
   <string name="skip_login">Hoppa över</string>
   <string name="navigation_item_login">Logga in</string>
-  <string name="skip_login_title">Vill du verkligen hoppa över inloggningen?</string>
+  <string name="skip_login_title" fuzzy="true">Vill du verkligen hoppa över inloggningen?</string>
   <string name="skip_login_message">Du behöver logga in för att ladda upp bilder i framtiden.</string>
   <string name="login_alert_message">Logga in för att använda denna funktion</string>
   <string name="copy_wikicode">Kopiera wikitexten till urklipp</string>
@@ -342,7 +342,7 @@
   <string name="construction_event_answer">Bilder som skildrar teknologi eller kultur är mycket välkomna på Commons.</string>
   <string name="congratulatory_message_quiz">Du svarade rätt på %1$s av svaren. Gratulerar!</string>
   <string name="warning_for_no_answer">Välj ett av de två alternativen för att svara på frågan</string>
-  <string name="user_not_logged_in">Inloggningssessionen löpte ut, var god logga in igen.</string>
+  <string name="user_not_logged_in" fuzzy="true">Inloggningssessionen löpte ut, var god logga in igen.</string>
   <string name="quiz_result_share_message">Dela din frågesport med dina vänner!</string>
   <string name="continue_message">Fortsätt</string>
   <string name="correct">Rätt svar</string>
@@ -425,7 +425,7 @@
   <string name="never_ask_again">Fråga inte detta igen</string>
   <string name="display_location_permission_title">Be om platsbehörighet</string>
   <string name="display_location_permission_explanation">Fråga efter platsbehörighet vid behov för att visa aviseringskortet för i närheten.</string>
-  <string name="achievements_fetch_failed">Någonting gick fel. Vi kunde inte hämta dina prestationer</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Någonting gick fel. Vi kunde inte hämta dina prestationer</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Du har gjort så många bidrag att vårt system för att beräkna prestationer inte hinner med. Detta är den ultimata prestationen.</string>
   <string name="ends_on">Slutar den:</string>
   <string name="display_campaigns">Visa kampanjer</string>
@@ -441,7 +441,7 @@
   <string name="open_document_photo_picker_explanation">Androids nya fotoväljare riskerar att förlora platsinformation. Aktivera om du verkar använda den.</string>
   <string name="location_loss_warning">När detta inaktiveras kan Androids nya fotoväljare utlösas. Den riskerar att förlora platsinformation.\n\nTryck på \"Läs mer\" för mer information.</string>
   <string name="nearby_campaign_dismiss_message">Du kommer inte längre se kampanjerna. Om du vill kan du återaktivera denna avisering i inställningarna.</string>
-  <string name="this_function_needs_network_connection">Denna funktion kräver nätverksuppkoppling. Kontrollera dina anslutningsinställningar.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Denna funktion kräver nätverksuppkoppling. Kontrollera dina anslutningsinställningar.</string>
   <string name="error_processing_image">Fel uppstod när bilden behandlades. Försök igen!</string>
   <string name="getting_edit_token">Hämtar nyckel för redigering</string>
   <string name="check_category_adding_template">Lägger till mall för kategorikontroll</string>
@@ -568,7 +568,7 @@
   <string name="place_state_needs_photo">Behöver foto</string>
   <string name="place_type">Platstyp:</string>
   <string name="nearby_search_hint">Bro, museum, hotell, etc.</string>
-  <string name="you_must_reset_your_passsword">Någonting gick fel med inloggningen, du måste återställa ditt lösenord!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Någonting gick fel med inloggningen, du måste återställa ditt lösenord!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">UNDERORDNADE KLASSER</string>
   <string name="title_for_parent_classes">ÖVERORDNADE KLASSER</string>
@@ -702,8 +702,8 @@
   <string name="add_location">Lägg till plats</string>
   <string name="feedback_sharing_data_alert">Var god ta bort all information från detta e-postmeddelande som du inte är bekväm med att dela offentligt. Observera även att e-postadressen du använder samt det associerade namnet och profilbilden kommer att synas offentligt.</string>
   <string name="explore_map_details">Detaljer</string>
-  <string name="achievements_unavailable_beta">Prestationer är endast tillgängliga i produktionsversionen. Se utvecklardokumentationen.</string>
-  <string name="leaderboard_unavailable_beta">Topplistan är endast tillgänglig i produktionsversionen. Se utvecklardokumentationen.</string>
+  <string name="achievements_unavailable_beta" fuzzy="true">Prestationer är endast tillgängliga i produktionsversionen. Se utvecklardokumentationen.</string>
+  <string name="leaderboard_unavailable_beta" fuzzy="true">Topplistan är endast tillgänglig i produktionsversionen. Se utvecklardokumentationen.</string>
   <string name="copyright_popup">Var god ladda endast upp bilder du själv har tagit. Alla som laddar upp upphovsrättsskyddade bilder kommer att blockeras. Detta gäller även i betaversionen. Tack för att du testar appen!</string>
   <string name="select_feedback_data_choice">Avmarkera all information som du inte är bekväm med att dela offentligt.</string>
   <string name="api_level">API-nivå</string>

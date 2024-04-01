@@ -96,13 +96,13 @@
   <string name="logging_in_message">Een ogenblik geduld…</string>
   <string name="updating_caption_title">Bijschriften en beschrijvingen aan het bijwerken</string>
   <string name="updating_caption_message">Een ogenblik geduld…</string>
-  <string name="login_success">Aanmelden geslaagd</string>
-  <string name="login_failed">Aanmelden mislukt</string>
+  <string name="login_success" fuzzy="true">Aanmelden geslaagd</string>
+  <string name="login_failed" fuzzy="true">Aanmelden mislukt</string>
   <string name="upload_failed">Bestand niet gevonden. Probeer een ander bestand.</string>
   <string name="retry_limit_reached">Grens voor opnieuw proberen bereikt! Annuleer de upload en probeer het opnieuw</string>
   <string name="unrestricted_battery_mode">Batterijoptimalisatie uitschakelen?</string>
   <string name="suggest_unrestricted_mode">Het uploaden van meer dan 3 afbeeldingen werkt betrouwbaarder als de batterijoptimalisatie is uitgeschakeld. Schakel batterijoptimalisatie voor de Commons-app uit via de instellingen. Het uploaden gaat dan makkelijker. \n\nMogelijke stappen om batterijoptimalisatie uit te schakelen:\n\nStap 1: Tik op de knop ‘Instellingen’ hieronder.\n\nStap 2: Schakel over van ‘Niet geoptimaliseerd’ naar ‘Alle apps’.\n\nStap 3: Zoek naar “Commons” of “fr.free.nrw.commons”.\n\nStap 4: Tik erop en selecteer ‘Niet optimaliseren’.\n\nStap 5: Druk op ‘Gereed’.</string>
-  <string name="authentication_failed">De authenticatie is mislukt. Meld u opnieuw aan.</string>
+  <string name="authentication_failed" fuzzy="true">De authenticatie is mislukt. Meld u opnieuw aan.</string>
   <string name="uploading_started">Uploaden is begonnen</string>
   <string name="uploading_queued">Upload in wachtrij (beperkte verbindingsmodus ingeschakeld)</string>
   <string name="upload_completed_notification_title">%1$s geüpload</string>
@@ -129,11 +129,11 @@
   <string name="add_caption_toast">Geef een bijschrift op voor dit bestand</string>
   <string name="share_description_hint">Beschrijving</string>
   <string name="share_caption_hint">Titel</string>
-  <string name="login_failed_network">Aanmelden niet mogelijk. Er is een probleem met het netwerk</string>
+  <string name="login_failed_network" fuzzy="true">Aanmelden niet mogelijk. Er is een probleem met het netwerk</string>
   <string name="login_failed_throttled">Te veel mislukte pogingen. Probeer het over een paar minuten opnieuw.</string>
   <string name="login_failed_blocked">Deze gebruiker is helaas geblokkeerd op Wikimedia Commons</string>
   <string name="login_failed_2fa_needed">U moet uw code voor tweefactor-authenticatie opgeven.</string>
-  <string name="login_failed_generic">Aanmelden mislukt</string>
+  <string name="login_failed_generic" fuzzy="true">Aanmelden mislukt</string>
   <string name="share_upload_button">Uploaden</string>
   <string name="multiple_share_base_title">Geef deze verzameling een naam</string>
   <string name="provider_modifications">Wijzigingen</string>
@@ -290,7 +290,7 @@
   <string name="nominated_see_more">Zie webpagina voor details</string>
   <string name="skip_login">Overslaan</string>
   <string name="navigation_item_login">Aanmelden</string>
-  <string name="skip_login_title">Weet u zeker dat u het aanmelden wilt overslaan?</string>
+  <string name="skip_login_title" fuzzy="true">Weet u zeker dat u het aanmelden wilt overslaan?</string>
   <string name="skip_login_message">U moet zich dan later wel aanmelden om afbeeldingen te kunnen uploaden.</string>
   <string name="login_alert_message">Meld u aan om deze functie te gebruiken</string>
   <string name="copy_wikicode">Kopieer de wikitekst naar het klembord</string>
@@ -357,7 +357,7 @@
   <string name="construction_event_answer">Foto\'s met technologie of cultuur zijn van harte welkom op Commons.</string>
   <string name="congratulatory_message_quiz">U heeft %1$s van de antwoorden goed. Gefeliciteerd!</string>
   <string name="warning_for_no_answer">Selecteer een van de twee opties om de vraag te beantwoorden</string>
-  <string name="user_not_logged_in">De sessie is verlopen. Meld u opnieuw aan.</string>
+  <string name="user_not_logged_in" fuzzy="true">De sessie is verlopen. Meld u opnieuw aan.</string>
   <string name="quiz_result_share_message">Deel de quiz met uw vrienden!</string>
   <string name="continue_message">Doorgaan</string>
   <string name="correct">Correct antwoord</string>
@@ -441,7 +441,7 @@
   <string name="never_ask_again">Niet meer vragen</string>
   <string name="display_location_permission_title">Toestemming voor locatie vragen</string>
   <string name="display_location_permission_explanation">Naar toestemming voor locatie vragen als dat nodig is voor de functie meldingskaart dichtbij weergeven.</string>
-  <string name="achievements_fetch_failed">Er is iets misgegaan, we konden uw prestaties niet ophalen</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Er is iets misgegaan, we konden uw prestaties niet ophalen</string>
   <string name="achievements_fetch_failed_ultimate_achievement">U heeft zoveel bijdragen geleverd dat ons prestatieberekeningssysteem het niet aankan. Dit is de ultieme prestatie.</string>
   <string name="ends_on">Eindigt op:</string>
   <string name="display_campaigns">Campagnes weergeven</string>
@@ -457,7 +457,7 @@
   <string name="open_document_photo_picker_explanation">Met de nieuwe Android-fotokiezer riskeert u het verlies van locatiegegevens. Schakel dit in als u deze lijkt te gebruiken.</string>
   <string name="location_loss_warning">Als u dit uitschakelt, kan de nieuwe Android-fotokiezer worden geactiveerd. Daarbij bestaat het risico dat locatie-informatie verloren gaat.\n\nTik op \'Lees meer\' voor meer informatie.</string>
   <string name="nearby_campaign_dismiss_message">U ziet de campagnes niet meer. U kunt deze melding desgewenst echter opnieuw inschakelen in de Instellingen.</string>
-  <string name="this_function_needs_network_connection">Voor deze functie is een netwerkverbinding vereist, controleer uw verbindingsinstellingen.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Voor deze functie is een netwerkverbinding vereist, controleer uw verbindingsinstellingen.</string>
   <string name="error_processing_image">Er is een fout opgetreden tijdens het verwerken van de afbeelding. Probeer het opnieuw!</string>
   <string name="getting_edit_token">Token ophalen om te bewerken</string>
   <string name="check_category_adding_template">Sjabloon toevoegen voor categoriecontrole</string>
@@ -584,7 +584,7 @@
   <string name="place_state_needs_photo">Heeft foto nodig</string>
   <string name="place_type">Plaatstype:</string>
   <string name="nearby_search_hint">Brug, museum, hotel, enz.</string>
-  <string name="you_must_reset_your_passsword">Er is iets misgegaan bij het aanmelden. U moet uw wachtwoord opnieuw instellen.</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Er is iets misgegaan bij het aanmelden. U moet uw wachtwoord opnieuw instellen.</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">SUBKLASSEN</string>
   <string name="title_for_parent_classes">HOOFDKLASSEN</string>
@@ -720,8 +720,8 @@
   <string name="add_location">Locatie toevoegen</string>
   <string name="feedback_sharing_data_alert">Verwijder alstublieft informatie uit deze email die u liever niet openbaar wilt maken. Wees u er ook bewust dat het emailadres en de bijbehorende gebruikersnaam en profielafbeelding die u gebruikt openbaar zichtbaar zullen zijn.</string>
   <string name="explore_map_details">Details</string>
-  <string name="achievements_unavailable_beta">Prestaties zijn alleen beschikbaar in de productieversie. Sla de ontwikkelaarsdocumentatie erop na.</string>
-  <string name="leaderboard_unavailable_beta">Het scorebord is alleen beschikbaar in de productieversie. Sla de ontwikkelaarsdocumentatie erop na.</string>
+  <string name="achievements_unavailable_beta" fuzzy="true">Prestaties zijn alleen beschikbaar in de productieversie. Sla de ontwikkelaarsdocumentatie erop na.</string>
+  <string name="leaderboard_unavailable_beta" fuzzy="true">Het scorebord is alleen beschikbaar in de productieversie. Sla de ontwikkelaarsdocumentatie erop na.</string>
   <string name="copyright_popup">Upload alleen afbeeldingen die u zelf heeft gemaakt. Gebruikers die afbeeldingen met copyright uploaden worden geblokkeerd. Dit is ook van toepassing op de beta versie. Bedankt voor het testen van de app!</string>
   <string name="select_feedback_data_choice">Deselecteer alle informatie die u niet openbaar wilt delen.</string>
   <string name="api_level">API-niveau</string>
@@ -767,6 +767,7 @@
   <string name="edit_location">Locatie bewerken</string>
   <string name="send_thanks_to_author">Auteur bedanken</string>
   <string name="error_sending_thanks">Fout bij het bedanken van de auteur.</string>
+  <string name="invalid_login_message" fuzzy="true">Uw sessie is verlopen, meld u opnieuw aan.</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d afbeelding geselecteerd</item>
     <item quantity="other">%d afbeeldingen geselecteerd</item>

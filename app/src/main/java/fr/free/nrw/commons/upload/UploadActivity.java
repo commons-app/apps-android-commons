@@ -29,7 +29,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.work.ExistingWorkPolicy;
-import butterknife.OnClick;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.LoginActivity;
@@ -53,6 +52,7 @@ import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.license.MediaLicenseFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment;
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.UploadMediaDetailFragmentCallback;
+import fr.free.nrw.commons.upload.mediaDetails.UploadMediaPresenter;
 import fr.free.nrw.commons.upload.worker.WorkRequestHelper;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
@@ -70,7 +70,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import timber.log.Timber;
 
-public class UploadActivity extends BaseActivity implements UploadContract.View, UploadBaseFragment.Callback {
+public class UploadActivity extends BaseActivity implements UploadContract.View, UploadBaseFragment.Callback, ThumbnailsAdapter.OnThumbnailDeletedListener {
 
     @Inject
     ContributionController contributionController;
@@ -96,7 +96,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private DepictsFragment depictsFragment;
     private MediaLicenseFragment mediaLicenseFragment;
     private ThumbnailsAdapter thumbnailsAdapter;
-
+    BasicKvStore store;
     private Place place;
     private LatLng prevLocation;
     private LatLng currLocation;
@@ -139,6 +139,9 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
      * Whether fragments have been saved.
      */
     private boolean isFragmentsSaved = false;
+    
+    public static final String keyForCurrentUploadImagesSize = "CurrentUploadImagesSize";
+    public static final String storeNameForCurrentUploadImagesSize = "CurrentUploadImageQualities";
 
     private ActivityUploadBinding binding;
 
@@ -166,6 +169,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
         compositeDisposable = new CompositeDisposable();
         init();
+        binding.rlContainerTitle.setOnClickListener(v -> onRlContainerTitleClicked());
         nearbyPopupAnswers = new HashMap<>();
         //getting the current dpi of the device and if it is less than 320dp i.e. overlapping
         //threshold, thumbnails automatically minimizes
@@ -179,7 +183,10 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         }
         locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
         locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
+        store = new BasicKvStore(this, storeNameForCurrentUploadImagesSize);
+        store.clearAll();
         checkStoragePermissions();
+
     }
 
     private void init() {
@@ -199,6 +206,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         binding.rvThumbnails.setLayoutManager(new LinearLayoutManager(this,
             LinearLayoutManager.HORIZONTAL, false));
         thumbnailsAdapter = new ThumbnailsAdapter(() -> currentSelectedPosition);
+        thumbnailsAdapter.setOnThumbnailDeletedListener(this);
         binding.rvThumbnails.setAdapter(thumbnailsAdapter);
 
     }
@@ -454,7 +462,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                 .getQuantityString(R.plurals.upload_count_title, uploadableFiles.size(), uploadableFiles.size()));
 
 
-            if(fragments==null){
+            if(fragments == null){
                 fragments = new ArrayList<>();
             }
 
@@ -469,6 +477,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (uploadableFiles.size() > 3
                     && !defaultKvStore.getBoolean("hasAlreadyLaunchedBigMultiupload")) {
+                    // When battery-optimisation dialog is shown don't show the image quality dialog
+                    UploadMediaPresenter.isBatteryDialogShowing = true;
                     DialogUtil.showAlertDialog(
                         this,
                         getString(R.string.unrestricted_battery_mode),
@@ -489,8 +499,15 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                             Intent batteryOptimisationSettingsIntent = new Intent(
                                 Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
                             startActivity(batteryOptimisationSettingsIntent);
+                            // calling checkImageQuality after battery dialog is interacted with
+                            // so that 2 dialogs do not pop up simultaneously
+                            presenter.checkImageQuality(0);
+                            UploadMediaPresenter.isBatteryDialogShowing = false;
                         },
-                        () -> {}
+                        () -> {
+                            presenter.checkImageQuality(0);
+                            UploadMediaPresenter.isBatteryDialogShowing = false;
+                        }
                     );
                     defaultKvStore.putBoolean("hasAlreadyLaunchedBigMultiupload", true);
                 }
@@ -524,6 +541,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                 UploadMediaDetailFragmentCallback uploadMediaDetailFragmentCallback = new UploadMediaDetailFragmentCallback() {
                     @Override
                     public void deletePictureAtIndex(int index) {
+                        store.putInt(keyForCurrentUploadImagesSize,
+                            (store.getInt(keyForCurrentUploadImagesSize) - 1));
                         presenter.deletePictureAtIndex(index);
                     }
 
@@ -667,6 +686,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             binding.vpUpload.setOffscreenPageLimit(fragments.size());
 
         }
+        // Saving size of uploadableFiles
+        store.putInt(keyForCurrentUploadImagesSize, uploadableFiles.size());
     }
 
     /**
@@ -786,7 +807,11 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             binding.vpUpload.setCurrentItem(index + 1, false);
             fragments.get(index + 1).onBecameVisible();
             ((LinearLayoutManager) binding.rvThumbnails.getLayoutManager())
-                .scrollToPositionWithOffset((index > 0) ? index-1 : 0, 0);
+                .scrollToPositionWithOffset((index > 0) ? index - 1 : 0, 0);
+            if (index < fragments.size() - 4) {
+                // check image quality if next image exists
+                presenter.checkImageQuality(index + 1);
+            }
         } else {
             presenter.handleSubmit();
         }
@@ -799,7 +824,17 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             fragments.get(index - 1).onBecameVisible();
             ((LinearLayoutManager) binding.rvThumbnails.getLayoutManager())
                 .scrollToPositionWithOffset((index > 3) ? index-2 : 0, 0);
+            if ((index != 1) && ((index - 1) < uploadableFiles.size())) {
+                // Shows the top card if it was hidden because of the last image being deleted and
+                // now the user has hit previous button to go back to the media details
+                showHideTopCard(true);
+            }
         }
+    }
+
+    @Override
+    public void onThumbnailDeleted(int position) {
+        presenter.deletePictureAtIndex(position);
     }
 
     /**
@@ -837,7 +872,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     }
 
 
-    @OnClick(R.id.rl_container_title)
+
     public void onRlContainerTitleClicked() {
         binding.rvThumbnails.setVisibility(isTitleExpanded ? View.GONE : View.VISIBLE);
         isTitleExpanded = !isTitleExpanded;
@@ -847,6 +882,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        // Resetting all values in store by clearing them
+        store.clearAll();
         presenter.onDetachView();
         compositeDisposable.clear();
         fragments = null;

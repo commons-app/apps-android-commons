@@ -74,10 +74,10 @@
   <string name="logging_in_message">กรุณารอสักครู่…</string>
   <string name="updating_caption_title">กำลังอัปเดตคำบรรยายและคำอธิบาย</string>
   <string name="updating_caption_message">กรุณารอสักครู่…</string>
-  <string name="login_success">การเข้าสู่ระบบสำเร็จแล้ว!</string>
-  <string name="login_failed">การเข้าสู่ระบบล้มเหลว!</string>
+  <string name="login_success" fuzzy="true">การเข้าสู่ระบบสำเร็จแล้ว!</string>
+  <string name="login_failed" fuzzy="true">การเข้าสู่ระบบล้มเหลว!</string>
   <string name="upload_failed">ไม่พบไฟล์ กรุณาลองใช้ไฟล์อื่น</string>
-  <string name="authentication_failed">การตรวจสอบล้มเหลว โปรดเข้าสู่ระบบอีกครั้ง</string>
+  <string name="authentication_failed" fuzzy="true">การตรวจสอบล้มเหลว โปรดเข้าสู่ระบบอีกครั้ง</string>
   <string name="uploading_started">เริ่มการอัปโหลดแล้ว!</string>
   <string name="uploading_queued">อัปโหลดอยู่ในคิว (เปิดใช้งานโหมดการเชื่อมต่อแบบจำกัด)</string>
   <string name="upload_completed_notification_title">อัปโหลด %1$s แล้ว!</string>
@@ -103,11 +103,11 @@
   <string name="add_caption_toast">โปรดระบุคำอธิบายสำหรับไฟล์นี้</string>
   <string name="share_description_hint">คำอธิบาย</string>
   <string name="share_caption_hint">คำอธิบาย</string>
-  <string name="login_failed_network">ไม่สามารถเข้าสู่ระบบได้ - ความล้มเหลวของเครือข่าย</string>
+  <string name="login_failed_network" fuzzy="true">ไม่สามารถเข้าสู่ระบบได้ - ความล้มเหลวของเครือข่าย</string>
   <string name="login_failed_throttled">จำนวนครั้งที่พยายามไม่สำเร็จมากเกินไป กรุณาลองอีกครั้งในอีกสักครู่</string>
   <string name="login_failed_blocked">ขออภัย ผู้ใช้นี้ถูกบล็อกบนคอมมอนส์อยู่</string>
   <string name="login_failed_2fa_needed">คุณต้องระบุโค้ดการตรวจสอบความถูกต้องสองปัจจัยของคุณ</string>
-  <string name="login_failed_generic">การเข้าสู่ระบบล้มเหลว</string>
+  <string name="login_failed_generic" fuzzy="true">การเข้าสู่ระบบล้มเหลว</string>
   <string name="share_upload_button">อัปโหลด</string>
   <string name="multiple_share_base_title">ตั้งชื่อชุดนี้</string>
   <string name="provider_modifications">การแก้ไข</string>
@@ -261,7 +261,7 @@
   <string name="nominated_see_more">ดูที่เว็บไซต์สำหรับข้อมูลเพิ่มเติม</string>
   <string name="skip_login">ข้าม</string>
   <string name="navigation_item_login">เข้าสู่ระบบ</string>
-  <string name="skip_login_title">คุณต้องการข้ามการเข้าสู่ระบบหรือไม่?</string>
+  <string name="skip_login_title" fuzzy="true">คุณต้องการข้ามการเข้าสู่ระบบหรือไม่?</string>
   <string name="skip_login_message">คุณควรที่จะเข้าสู่ระบบก่อนที่จะอัพโหลดรูปภาพใดๆ</string>
   <string name="login_alert_message">กรุณาเข้าสู่ระบบเพื่อใช้คุณลักษณะนี้</string>
   <string name="copy_wikicode">คัดลอก Wikitext ไปที่คลิปบอร์ด</string>
@@ -325,7 +325,7 @@
   <string name="blurry_image_answer">หนึ่งในเป้าหมายของ คอมมอนส์ คือการรวบรวมภาพที่มีคุณภาพ ดังนั้น จึงไม่ควรอัปโหลดภาพที่พร่ามัว พยายามถ่ายภาพให้มีคุณภาพเสมอ</string>
   <string name="construction_event_answer">ยินดีต้อนรับรูปภาพที่แสดงเทคโนโลยีหรือวัฒนธรรมในคอมมอนส์</string>
   <string name="warning_for_no_answer">เลือกหนึ่งในสองตัวเลือกเพื่อตอบคำถาม</string>
-  <string name="user_not_logged_in">เซสชั่นการเข้าสู่ระบบหมดอายุ กรุณาเข้าสู่ระบบอีกครั้ง</string>
+  <string name="user_not_logged_in" fuzzy="true">เซสชั่นการเข้าสู่ระบบหมดอายุ กรุณาเข้าสู่ระบบอีกครั้ง</string>
   <string name="quiz_result_share_message">แบ่งปันคำถามของคุณกับเพื่อนของคุณ!</string>
   <string name="continue_message">ดำเนินการต่อ</string>
   <string name="correct">คำตอบที่ถูกต้อง</string>

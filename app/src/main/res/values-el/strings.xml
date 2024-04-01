@@ -82,10 +82,10 @@
   <string name="logging_in_message">Παρακαλούμε περιμένετε…</string>
   <string name="updating_caption_title">Ενημέρωση λεζάντων και περιγραφών</string>
   <string name="updating_caption_message">Παρακαλούμε περιμένετε…</string>
-  <string name="login_success">Επιτυχής σύνδεση!</string>
-  <string name="login_failed">Η είσοδος απέτυχε!</string>
+  <string name="login_success" fuzzy="true">Επιτυχής σύνδεση!</string>
+  <string name="login_failed" fuzzy="true">Η είσοδος απέτυχε!</string>
   <string name="upload_failed">Το αρχείο δεν βρέθηκε. Παρακαλώ δοκιμάστε ένα άλλο αρχείο.</string>
-  <string name="authentication_failed">Απέτυχε ο έλεγχος ταυτότητας, παρακαλώ συνδεθείτε ξανά</string>
+  <string name="authentication_failed" fuzzy="true">Απέτυχε ο έλεγχος ταυτότητας, παρακαλώ συνδεθείτε ξανά</string>
   <string name="uploading_started">Η αποστολή ξεκίνησε!</string>
   <string name="uploading_queued">Η μεταφόρτωση βρίσκεται σε ουρά (ενεργοποιημένη λειτουργία περιορισμένης σύνδεσης)</string>
   <string name="upload_completed_notification_title">%1$s επιφορτώθηκε!</string>
@@ -111,11 +111,11 @@
   <string name="add_caption_toast">Παρακαλούμε προσθέστε περιγραφή για αυτό το αρχείο</string>
   <string name="share_description_hint">Περιγραφή</string>
   <string name="share_caption_hint">Λεζάντα</string>
-  <string name="login_failed_network">Δεν είναι δυνατή η σύνδεση - αποτυχία του δικτύου</string>
+  <string name="login_failed_network" fuzzy="true">Δεν είναι δυνατή η σύνδεση - αποτυχία του δικτύου</string>
   <string name="login_failed_throttled">Πάρα πολλές ανεπιτυχείς προσπάθειες. Παρακαλώ δοκιμάστε ξανά σε λίγα λεπτά.</string>
   <string name="login_failed_blocked">Συγνώμη, αυτός ο χρήστης έχει αποκλειστεί από τα Commons</string>
   <string name="login_failed_2fa_needed" fuzzy="true">Πρέπει να δώσετε τον κωδικό πιστοποίησης με δύο παράγοντες</string>
-  <string name="login_failed_generic">Η είσοδος απέτυχε</string>
+  <string name="login_failed_generic" fuzzy="true">Η είσοδος απέτυχε</string>
   <string name="share_upload_button">Ανέβασμα</string>
   <string name="multiple_share_base_title">Ονομάστε το σύνολο</string>
   <string name="provider_modifications">Τροποποιήσεις</string>
@@ -258,7 +258,7 @@
   <string name="nominated_see_more">Δείτε την ιστοσελίδα για λεπτομέρειες</string>
   <string name="skip_login">Παράβλεψη</string>
   <string name="navigation_item_login">Είσοδος</string>
-  <string name="skip_login_title">Θέλετε πραγματικά να παραβλέψετε τη σύνδεση;</string>
+  <string name="skip_login_title" fuzzy="true">Θέλετε πραγματικά να παραβλέψετε τη σύνδεση;</string>
   <string name="skip_login_message">Θα χρειάζεται να συνδεθείτε για να ανεβάζετε εικόνες στο μέλλον.</string>
   <string name="login_alert_message">Παρακαλούμε συνδεθείτε για να χρησιμοποιήσετε αυτό το χαρακτηριστικό</string>
   <string name="nearby_location_not_available" fuzzy="true">Ο τόπος δεν είναι διαθέσιμος.</string>
@@ -319,7 +319,7 @@
   <string name="construction_event_answer">Οι φωτογραφίες που εμφανίζουν τεχνολογία ή πολιτισμό είναι πολύ ευσπρόδεκτες στα Κοινά.</string>
   <string name="congratulatory_message_quiz">Είχατε το %1$s των απαντήσεων σωστό. Συγχαρητήρια!</string>
   <string name="warning_for_no_answer">Επιλέξτε μια από τις δύο επιλογές για να απαντήσετε στην ερώτηση</string>
-  <string name="user_not_logged_in">Η περίοδος σύνδεσης έληξε, παρακαλούμε συνδεθείτε ξανά.</string>
+  <string name="user_not_logged_in" fuzzy="true">Η περίοδος σύνδεσης έληξε, παρακαλούμε συνδεθείτε ξανά.</string>
   <string name="quiz_result_share_message">Μοιραστείτε το κουίζ με τους φίλους σας!</string>
   <string name="continue_message">Συνέχεια</string>
   <string name="correct">Σωστή απάντηση</string>

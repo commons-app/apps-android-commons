@@ -2,28 +2,17 @@ package fr.free.nrw.commons.locationpicker
 
 import android.content.Context
 import android.os.Looper
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.mapbox.mapboxsdk.camera.CameraPosition
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
-import com.mapbox.mapboxsdk.exceptions.MapboxConfigurationException
-import com.mapbox.mapboxsdk.geometry.LatLng
-import com.mapbox.mapboxsdk.maps.MapboxMap
-import com.mapbox.mapboxsdk.maps.Style
-import com.mapbox.mapboxsdk.maps.UiSettings
-import com.mapbox.mapboxsdk.style.layers.Layer
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
+import fr.free.nrw.commons.CameraPosition
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
-import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.coordinates.CoordinateEditHelper
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM
@@ -37,7 +26,6 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
-import org.osmdroid.api.IMapController
 import org.osmdroid.util.GeoPoint
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
@@ -46,7 +34,6 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -68,6 +55,9 @@ class LocationPickerActivityUnitTests {
 
     @Mock
     private lateinit var modifyLocationButton: Button
+
+    @Mock
+    private lateinit var removeLocationButton: Button
 
     @Mock
     private lateinit var placeSelectedButton: FloatingActionButton
@@ -104,6 +94,7 @@ class LocationPickerActivityUnitTests {
         Whitebox.setInternalState(activity, "applicationKvStore", applicationKvStore)
         Whitebox.setInternalState(activity, "cameraPosition", cameraPosition)
         Whitebox.setInternalState(activity, "modifyLocationButton", modifyLocationButton)
+        Whitebox.setInternalState(activity, "removeLocationButton", removeLocationButton)
         Whitebox.setInternalState(activity, "placeSelectedButton", placeSelectedButton)
         Whitebox.setInternalState(activity, "showInMapButton", showInMapButton)
         Whitebox.setInternalState(activity, "markerImage", markerImage)
@@ -142,12 +133,23 @@ class LocationPickerActivityUnitTests {
         method.invoke(activity)
         verify(placeSelectedButton, times(1)).visibility = View.VISIBLE
         verify(modifyLocationButton, times(1)).visibility = View.GONE
+        verify(removeLocationButton, times(1)).visibility = View.GONE
         verify(showInMapButton, times(1)).visibility = View.GONE
         verify(markerImage, times(1)).visibility = View.VISIBLE
         verify(shadow, times(1)).visibility = View.VISIBLE
         verify(largeToolbarText, times(1)).text = "Choose a location"
         verify(smallToolbarText, times(1)).text = "Pan and zoom to adjust"
         verify(fabCenterOnLocation, times(1)).visibility = View.VISIBLE
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnClickRemoveLocation() {
+        val method: Method = LocationPickerActivity::class.java.getDeclaredMethod(
+            "onClickRemoveLocation"
+        )
+        method.isAccessible = true
+        method.invoke(activity)
     }
 
     @Test

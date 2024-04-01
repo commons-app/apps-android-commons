@@ -20,6 +20,7 @@
       android:weightSum="10">
 
         <include
+          android:id="@+id/show_captions_binding"
           layout="@layout/show_captions_descriptions" />
     </LinearLayout>
 

@@ -28,6 +28,8 @@ class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.ViewHolde
     List<UploadableFile> uploadableFiles;
     private Callback callback;
 
+    private OnThumbnailDeletedListener listener;
+
     private ItemUploadThumbnailBinding binding;
 
     public ThumbnailsAdapter(Callback callback) {
@@ -43,6 +45,10 @@ class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.ViewHolde
             List<UploadableFile> uploadableFiles) {
         this.uploadableFiles=uploadableFiles;
         notifyDataSetChanged();
+    }
+
+    public void setOnThumbnailDeletedListener(OnThumbnailDeletedListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -69,11 +75,14 @@ class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.ViewHolde
         SimpleDraweeView background;
         ImageView ivError;
 
+        ImageView ivCross;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             rlContainer = binding.rlContainer;
             background = binding.ivThumbnail;
             ivError = binding.ivError;
+            ivCross = binding.icCross;
         }
 
         /**
@@ -104,6 +113,12 @@ class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.ViewHolde
                     rlContainer.setElevation(0);
                 }
             }
+
+            ivCross.setOnClickListener(v -> {
+                if(listener != null) {
+                    listener.onThumbnailDeleted(position);
+                }
+            });
         }
     }
 
@@ -114,4 +129,13 @@ class ThumbnailsAdapter extends RecyclerView.Adapter<ThumbnailsAdapter.ViewHolde
 
         int getCurrentSelectedFilePosition();
     }
+
+    /**
+     * Interface to listen to thumbnail delete events
+     */
+
+    public interface OnThumbnailDeletedListener {
+        void onThumbnailDeleted(int position);
+    }
+
 }

@@ -240,8 +240,11 @@ class EditActivity : AppCompatActivity() {
         if (rotatedImage == null) {
             Toast.makeText(this, "Failed to rotate to image", Toast.LENGTH_LONG).show()
         }
-        val editedImageExif = rotatedImage?.path?.let { ExifInterface(it) }
-        copyExifData(editedImageExif)
+        val editedImageExif: ExifInterface?
+        if (rotatedImage?.path != null) {
+            editedImageExif = ExifInterface(rotatedImage.path)
+            copyExifData(editedImageExif)
+        }
         val resultIntent = Intent()
         resultIntent.putExtra("editedImageFilePath", rotatedImage?.toUri()?.path ?: "Error");
         resultIntent.putExtra("editedImageRotation",imageRotation)

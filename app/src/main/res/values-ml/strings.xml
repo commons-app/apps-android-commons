@@ -43,10 +43,10 @@
   <string name="signup">അംഗത്വമെടുക്കുക</string>
   <string name="logging_in_title">പ്രവേശിക്കുന്നു</string>
   <string name="logging_in_message">ദയവായി കാത്തിരിക്കുക…</string>
-  <string name="login_success">പ്രവേശനം വിജയകരം!</string>
-  <string name="login_failed">പ്രവേശനം പരാജയപ്പെട്ടു!</string>
+  <string name="login_success" fuzzy="true">പ്രവേശനം വിജയകരം!</string>
+  <string name="login_failed" fuzzy="true">പ്രവേശനം പരാജയപ്പെട്ടു!</string>
   <string name="upload_failed">പ്രമാണം കണ്ടെത്താനായില്ല. ദയവായി മറ്റൊരു പ്രമാണം നോക്കുക.</string>
-  <string name="authentication_failed">സാധുതാനിർണ്ണയം പരാജയപ്പെട്ടു, ദയവായി വീണ്ടും പ്രവേശിക്കുക</string>
+  <string name="authentication_failed" fuzzy="true">സാധുതാനിർണ്ണയം പരാജയപ്പെട്ടു, ദയവായി വീണ്ടും പ്രവേശിക്കുക</string>
   <string name="uploading_started">അപ്‌ലോഡ് തുടങ്ങി!</string>
   <string name="upload_completed_notification_title">%1$s  അപ്‌ലോഡ് ചെയ്തിരിക്കുന്നു!</string>
   <string name="upload_completed_notification_text">താങ്കളുടെ അപ്‌ലോഡ് കാണാനായി ടാപ് ചെയ്യുക</string>
@@ -68,11 +68,11 @@
   <string name="menu_share">പങ്ക് വെയ്ക്കുക</string>
   <string name="share_title_hint">അടിക്കുറിപ്പ് (നിർബന്ധം)</string>
   <string name="share_description_hint">വിവരണം</string>
-  <string name="login_failed_network">പ്രവേശിക്കാനായില്ല - നെറ്റ്‌വർക്ക് പരാജയപ്പെട്ടു</string>
+  <string name="login_failed_network" fuzzy="true">പ്രവേശിക്കാനായില്ല - നെറ്റ്‌വർക്ക് പരാജയപ്പെട്ടു</string>
   <string name="login_failed_throttled">നിരവധി വിജയകരമല്ലാത്ത ശ്രമങ്ങൾ നടന്നിരിക്കുന്നു. വീണ്ടും ശ്രമിക്കുന്നതിനു മുമ്പ് ഏതാനം മിനിറ്റുകൾ വിശ്രമിക്കുക.</string>
   <string name="login_failed_blocked">ക്ഷമിക്കുക, ഈ ഉപയോക്താവ് കോമൺസിൽ നിന്ന് തടയപ്പെട്ടിരിക്കുകയാണ്</string>
   <string name="login_failed_2fa_needed">താങ്കളുടെ ദ്വി-ഘടക സാധൂകരണ കോഡ് നൽകുക.</string>
-  <string name="login_failed_generic">പ്രവേശനം പരാജയപ്പെട്ടു</string>
+  <string name="login_failed_generic" fuzzy="true">പ്രവേശനം പരാജയപ്പെട്ടു</string>
   <string name="share_upload_button">അപ്‌ലോഡ്</string>
   <string name="multiple_share_base_title">ഈ ഗണത്തിന് പേരിടുക</string>
   <string name="provider_modifications">മാറ്റങ്ങൾ</string>

@@ -38,10 +38,10 @@
   <string name="logging_in_title">Sedang log masuk</string>
   <string name="logging_in_message">Sila tunggu…</string>
   <string name="updating_caption_message">Sila tunggu…</string>
-  <string name="login_success">Berjaya log masuk!</string>
-  <string name="login_failed">Gagal log masuk!</string>
+  <string name="login_success" fuzzy="true">Berjaya log masuk!</string>
+  <string name="login_failed" fuzzy="true">Gagal log masuk!</string>
   <string name="upload_failed">Fail tidak dijumpai. Sila cuba fail lain.</string>
-  <string name="authentication_failed">Pendaftaran gagal, sila log masuk lagi</string>
+  <string name="authentication_failed" fuzzy="true">Pendaftaran gagal, sila log masuk lagi</string>
   <string name="uploading_started">Pemuatnaikan telah bermula!</string>
   <string name="upload_completed_notification_title">%1$s telah dimuat naik!</string>
   <string name="upload_completed_notification_text">Ketik untuk melihat muatan naik anda</string>
@@ -64,10 +64,10 @@
   <string name="share_title_hint" fuzzy="true">Tajuk</string>
   <string name="share_description_hint">Keterangan</string>
   <string name="share_caption_hint">Kapsyen</string>
-  <string name="login_failed_network">Tidak boleh log masuk - kegagalan rangkaian</string>
+  <string name="login_failed_network" fuzzy="true">Tidak boleh log masuk - kegagalan rangkaian</string>
   <string name="login_failed_throttled" fuzzy="true">Terlalu banyak cubaan yang tidak berjaya. Sila cuba lagi dalam beberapa minit</string>
   <string name="login_failed_blocked">Maaf, pengguna ini telah disekat di Commons</string>
-  <string name="login_failed_generic">Log masuk gagal</string>
+  <string name="login_failed_generic" fuzzy="true">Log masuk gagal</string>
   <string name="share_upload_button">Muat naik</string>
   <string name="multiple_share_base_title">Namakan set ini</string>
   <string name="provider_modifications">Pengubahsuaian</string>
