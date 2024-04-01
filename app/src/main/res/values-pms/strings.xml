@@ -73,13 +73,13 @@
   <string name="logging_in_message">Ch\'a l\'abia passiensa…</string>
   <string name="updating_caption_title">Agiornament ëd le legende e le descrission</string>
   <string name="updating_caption_message">Për piasì, ch\'a speta…</string>
-  <string name="login_success" fuzzy="true">A l\'é intrà ant ël sistema!</string>
-  <string name="login_failed" fuzzy="true">Falì a rintré ant ël sistema!</string>
+  <string name="login_success">A l\'é intrà ant ël sistema!</string>
+  <string name="login_failed">Falì a rintré ant ël sistema!</string>
   <string name="upload_failed">Archivi nen trovà. Për piasì, ch\'a preuva con n\'àutr.</string>
   <string name="retry_limit_reached">Lìmit màssim ëd tentativ argionzù! Për piasì, ch\'a anula ël cariament e ch\'a preuva torna</string>
   <string name="unrestricted_battery_mode">Disativé l\'otimisassion ëd la batarìa?</string>
   <string name="suggest_unrestricted_mode">Ël cariament ëd pi che 3 plance a marcia ëd fasson pi afidàbil cand l\'otimisassion ëd la batarìa a l\'é dëstissà. Për piasì, ch\'a disativa l\'otimisassion për n\'esperiensa ëd cariament pi tranquila. \n\nTape possìbij për dëstissé l\'otimisassion ëd la batarìa:\n\nTapa 1: Sgnaché an sël boton \'Paràmeter\' sì-dzora.\n\nTapa 2: Passé da \'Nen otimisà\' a \'Tute j\'aplicassion\'.\n\nTapa 3: Sërché «Comun» o «fr.free.nrw.commons».\n\nTapa 4: Sgnacheje ansima e selessioné \'Nen otimisé\'.\n\nTapa 5: Sgnaché su \'Bele fàit\'.</string>
-  <string name="authentication_failed" fuzzy="true">Autentificassion falìa, për piasì ch\'as colega torna</string>
+  <string name="authentication_failed">Autentificassion falìa. Për piasì, ch\'as colega torna</string>
   <string name="uploading_started">Cariament ancaminà!</string>
   <string name="uploading_queued">Carié an coa (manera ëd conession limità abilità)</string>
   <string name="upload_completed_notification_title">%1$s carià!</string>
@@ -106,11 +106,11 @@
   <string name="add_caption_toast">Për piasì, ch\'a-j buta na legenda a s\'archivi</string>
   <string name="share_description_hint">Descrission</string>
   <string name="share_caption_hint">Legenda</string>
-  <string name="login_failed_network" fuzzy="true">Impossìbil rintré ant ël sistema - la rej a marcia nen</string>
+  <string name="login_failed_network">Impossìbil rintré ant ël sistema - la rej a marcia nen</string>
   <string name="login_failed_throttled">Tròpi tentativ falì. Për piasì, ch\'a preuva torna da-sì chèiche minute.</string>
   <string name="login_failed_blocked">An dëspias, s\'utent-sì a l\'é stàit blocà ansima a Commons</string>
   <string name="login_failed_2fa_needed">A dev fornì sò còdes d\'autentificassion a doi fator.</string>
-  <string name="login_failed_generic" fuzzy="true">Falì a rintré ant ël sistema</string>
+  <string name="login_failed_generic">Falì a rintré ant ël sistema</string>
   <string name="share_upload_button">Carié</string>
   <string name="multiple_share_base_title">Deje un nòm a s\'ansem</string>
   <string name="provider_modifications">Modìfiche</string>
@@ -267,7 +267,7 @@
   <string name="nominated_see_more">Vëdde la pàgina an sl\'aragnà për ij detaj</string>
   <string name="skip_login">Sauté</string>
   <string name="navigation_item_login">Intré ant ël sistema</string>
-  <string name="skip_login_title" fuzzy="true">Veul-lo për da bon sauté la procedura d\'intrada ant ël sistema?</string>
+  <string name="skip_login_title">Veul-lo për da bon sauté la procedura d\'intrada ant ël sistema?</string>
   <string name="skip_login_message">A l\'avnì a dovrà rintré ant ël sistema për carié \'d fòto.</string>
   <string name="login_alert_message">Për piasì, ch\'a rintra ant ël sistema për podèj dovré costa fonsionalità</string>
   <string name="copy_wikicode">Copié ël test wiki ant ël pògia-feuj</string>
@@ -334,7 +334,7 @@
   <string name="construction_event_answer">Fòto ch\'a mostro la tecnologìa o la coltura a son particolarman bin ëvnùe su Commons.</string>
   <string name="congratulatory_message_quiz">A l\'ha avù %1$s ëd rispòste giuste. Congratulassion!</string>
   <string name="warning_for_no_answer">Ch\'a serna un-a dle doe opsion për rësponde a la chestion</string>
-  <string name="user_not_logged_in" fuzzy="true">Session ëscadùa, për piasì ch\'a rintra torna ant ël sistema.</string>
+  <string name="user_not_logged_in">Session ëscadùa. Për piasì, ch\'a rintra torna ant ël sistema.</string>
   <string name="quiz_result_share_message">Ch\'a partagia soa preuva con ij sò amis!</string>
   <string name="continue_message">Continué</string>
   <string name="correct">Rispòsta giusta</string>
@@ -418,7 +418,7 @@
   <string name="never_ask_again">Mai pi ciamé sòn</string>
   <string name="display_location_permission_title">Ciamé l\'autorisassion ëd localisassion</string>
   <string name="display_location_permission_explanation">Ciamé ël përmess ëd localisé cand a-i na j\'é da manca për la fonsion ëd visualisassion ëd la carta dle notìfiche dë vzinansa.</string>
-  <string name="achievements_fetch_failed" fuzzy="true">Cheicòs a l\'ha nen marcià, i l\'oma nen podù arcuperé soe realisassion</string>
+  <string name="achievements_fetch_failed">Cheicòs a l\'ha nen marcià, i l\'oma nen podù arcuperé le realisassion</string>
   <string name="achievements_fetch_failed_ultimate_achievement">A l\'ha fàit tante contribussion che ël sistema ëd càlcol dj\'arzultà otnù a l\'é debordà. Cost-sì a l\'é l\'ùltim arzultà otnù.</string>
   <string name="ends_on">A finiss ai:</string>
   <string name="display_campaigns">Campagne ëd visualisassion</string>
@@ -434,7 +434,7 @@
   <string name="open_document_photo_picker_explanation">Ël neuv seletor ëd fòti d\'Android a arziga ëd perde dj\'anformassion ëd localisassion. Ch\'a lo abìlita s\'a smija ch\'a lo deuvra.</string>
   <string name="location_loss_warning">Dëstisselo a podrìa fé parte ël neuv seletor ëd fòto d\'Android. A arziga ëd perde dj\'anformassion ëd localisassion.\n\nSgnaché su \'Lese ëd pi\' për pi d\'anformassion.</string>
   <string name="nearby_campaign_dismiss_message">A vëdrà pi nen le campagna. Comsëssìa, a peul torna abilité costa notìfica ant ij paràmeter, s\'a veul.</string>
-  <string name="this_function_needs_network_connection" fuzzy="true">Sa fonsion a l\'ha damanca ëd na conession ëd rej, për piasì ch\'a contròla ij sò paràmtere ëd conession.</string>
+  <string name="this_function_needs_network_connection">Sa fonsion a l\'ha damanca ëd na conession ëd rej. Për piasì ch\'a contròla ij sò paràmeter ëd conession.</string>
   <string name="error_processing_image">A-i è staje n\'eror durant ël tratament ëd la plancia. Ch\'a ancamin-a torna, për piasì!</string>
   <string name="getting_edit_token">Oten-e un geton për modifiché</string>
   <string name="check_category_adding_template">Gionté në stamp për ël contròl ëd categorìa</string>
@@ -561,7 +561,7 @@
   <string name="place_state_needs_photo">A l\'ha damanca ëd na fòto</string>
   <string name="place_type">Sòrt ëd pòst:</string>
   <string name="nearby_search_hint">Pont, musé, obergi e via fòrt</string>
-  <string name="you_must_reset_your_passsword" fuzzy="true">Cheicòs a l\'é andàit mal con la conession, a dev torna inissialisé soa ciav!!</string>
+  <string name="you_must_reset_your_passsword">Cheicòs a l\'é andàit mal con la conession. A dev torna inissialisé soa ciav!</string>
   <string name="title_for_media">MOJEN</string>
   <string name="title_for_child_classes">CLASSE MASNÀ</string>
   <string name="title_for_parent_classes">CLASSE CE</string>
@@ -695,8 +695,8 @@
   <string name="add_location">Gionté un pòst</string>
   <string name="feedback_sharing_data_alert">Për piasì, ch\'a gava da \'s mëssage ògni anformassion ch\'a veul nen ch\'a sia spantià an manera pùblica. Ch\'a ten-a ëdcò da ment che l\'adrëssa ëd pòsta eletrònica con la qual chiel a pùblica e ël nòm e la plancia ëd profil assossià a saran visìbil publicaman.</string>
   <string name="explore_map_details">Detaj</string>
-  <string name="achievements_unavailable_beta" fuzzy="true">Le realisassion a son disponìbij mach ant la version ëd produssion; për piasì, ch\'a consulta la documentassion dël dësvlupador.</string>
-  <string name="leaderboard_unavailable_beta" fuzzy="true">La classìfica a l\'é disponìbil mach ant la version ëd produssion; për piasì, ch\'a consulta la documentassion dël dësvlupador.</string>
+  <string name="achievements_unavailable_beta">Le realisassion a son disponìbij mach ant la version ëd produssion. Për piasì, ch\'a consulta la documentassion dël dësvlupador.</string>
+  <string name="leaderboard_unavailable_beta">La classìfica a l\'é disponìbil mach ant la version ëd produssion. Për piasì, ch\'a consulta la documentassion dël dësvlupador.</string>
   <string name="copyright_popup">Për piasì, ch\'a caria mach le fòto ch\'a l\'ha fàit chiel. Coj ch\'a cario dle plance sota drit d\'autor a saran blocà. Sòn as àplica ëdcò a la version beta. Mersì për soa preuva ëd l\'aplicassion!</string>
   <string name="select_feedback_data_choice">Për piasì, ch\'a desselession-a tute j\'anformassion ch\'a l\'ha nen piasì ch\'a sio partagià an pùblich.</string>
   <string name="api_level">Livel ëd l\'API</string>
@@ -740,9 +740,22 @@
   <string name="see_your_achievements">Vëdde soe realisassion</string>
   <string name="edit_image">Modifiché la plancia</string>
   <string name="edit_location">Modifiché ël pòst</string>
+  <string name="location_updated">Posission agiornà!</string>
+  <string name="remove_location">Gavé la posission</string>
+  <string name="remove_location_warning_title">Gavé l\'avis ëd posission</string>
+  <string name="remove_location_warning_desc">La posission a rend le plance pi ùtij e trovàbij. Veul-lo për da bon gavé la posission da costa plancia?</string>
+  <string name="location_removed">Posission gavà!</string>
   <string name="send_thanks_to_author">Aringrassié l\'autor</string>
   <string name="error_sending_thanks">Eror an mandand n\'aringrassiament a l\'autor.</string>
-  <string name="invalid_login_message" fuzzy="true">Soa conession a l\'é scadùa, për piasì ch\'a rintra torna ant ël sistema.</string>
+  <string name="invalid_login_message">Soa conession a l\'é scadùa. Për piasì ch\'a rintra torna ant ël sistema.</string>
+  <string name="no_application_available_to_open_gpx_files">Gnun-a aplicassion disponìbil për duverté j\'archivi GPX</string>
+  <string name="file_saved_successfully">Archivi argistrà për da bin</string>
+  <string name="do_you_want_to_open_gpx_file">Veul-lo duverté l\'archivi GPX?</string>
+  <string name="do_you_want_to_open_kml_file">Veul-lo duverté l\'archivi KML?</string>
+  <string name="failed_to_save_kml_file">Falì a argistré l\'archivi KML.</string>
+  <string name="failed_to_save_gpx_file">Falì a argistré l\'archivi GPX.</string>
+  <string name="saving_kml_file">Argistrassion ëd l\'archivi KML</string>
+  <string name="saving_gpx_file">Argistrassion ëd l\'archivi GPX</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d plancia selessionà</item>
     <item quantity="other">%d plance selessionà</item>

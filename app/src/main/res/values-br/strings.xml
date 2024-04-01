@@ -71,7 +71,7 @@
   <string name="logging_in_title">O kevreañ</string>
   <string name="logging_in_message">Gortozit mar plij…</string>
   <string name="updating_caption_message">Gortozit mar plij…</string>
-  <string name="login_success" fuzzy="true">Kevreet oc\'h !</string>
+  <string name="login_success">Kevreet oc\'h !</string>
   <string name="login_failed" fuzzy="true">Kudenn gevreañ !</string>
   <string name="upload_failed">N\'eo ket bet kavet ar restr. Klask gant unan all.</string>
   <string name="authentication_failed" fuzzy="true">Dilesadur c\'hwitet, kevreit en-dro mar plij</string>
@@ -98,7 +98,7 @@
   <string name="share_title_hint">Alc\'hwez (ret)</string>
   <string name="share_description_hint">Deskrivadur</string>
   <string name="share_caption_hint">Alc\'hwez</string>
-  <string name="login_failed_network" fuzzy="true">Ne c\'haller ket kevreañ - rouedad sac\'het</string>
+  <string name="login_failed_network">Ne c\'haller ket kevreañ - rouedad sac\'het</string>
   <string name="login_failed_throttled">Re a daolioù-esae. Klaskit en-dro a-benn ur pennadig amzer.</string>
   <string name="login_failed_blocked">Hon digarezit, prennet eo bet an implijer-mañ e Commons</string>
   <string name="login_failed_2fa_needed">Rankout a rit reiñ ho kod dilesa gant daou faktor.</string>

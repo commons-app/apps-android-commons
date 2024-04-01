@@ -4,6 +4,7 @@
 * Aefgh39622
 * Afaz
 * Bonfire12
+* Chqaz
 * Dude1717
 * Foomin10
 * Hinaloe
@@ -82,8 +83,8 @@
   <string name="logging_in_title">ログイン中</string>
   <string name="logging_in_message">お待ちください…</string>
   <string name="updating_caption_message">お待ちください…</string>
-  <string name="login_success" fuzzy="true">ログインしました!</string>
-  <string name="login_failed" fuzzy="true">ログインに失敗しました!</string>
+  <string name="login_success">ログインに成功しました!</string>
+  <string name="login_failed">ログインに失敗しました!</string>
   <string name="upload_failed">ファイルが見つかりません。別のファイルでお試しください。</string>
   <string name="authentication_failed" fuzzy="true">認証に失敗しました!　もう一度ログインしてください</string>
   <string name="uploading_started">アップロードを開始しました!</string>
@@ -648,6 +649,8 @@
   <string name="report_content">このコンテンツを報告する</string>
   <string name="set_up_avatar_toast_string">リーダーボードのアバターを設定するには、任意の画像の 3 つのドット メニューで [アバターとして設定] をタップします。</string>
   <string name="permissions_are_required_for_functionality">この機能には権限が必要です</string>
+  <string name="edit_image">画像の編集</string>
+  <string name="edit_location">位置を編集</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="other">%d件の画像が選択されました</item>
   </plurals>

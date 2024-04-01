@@ -75,13 +75,13 @@
   <string name="logging_in_message">Почекајте…</string>
   <string name="updating_caption_title">Поднова на толкувања и описи</string>
   <string name="updating_caption_message">Почекајте...</string>
-  <string name="login_success" fuzzy="true">Најавата е успешна!</string>
-  <string name="login_failed" fuzzy="true">Најавата не успеа!</string>
+  <string name="login_success">Најавата е успешна!</string>
+  <string name="login_failed">Најавата не успеа!</string>
   <string name="upload_failed">Не ја пронајдов податотеката. Пробајте со друга.</string>
   <string name="retry_limit_reached">Го надминавте дозволениот број на обиди! Откажете го подигањето или пробајте повторно</string>
   <string name="unrestricted_battery_mode">Да ја исклучам оптимизацијата на батеријата?</string>
   <string name="suggest_unrestricted_mode">Подигањето на повеќе од 3 слики работи посигурно ако е исклучена оптимизацијата на батеријата. Исклучете ја од нагодувањата во прилогот Ризница за непречено искуство. \n\nМожни чекори за исклучување:\n\nЧекор 1: Допрете на копчето „Нагодувања“ подолу.\n\nЧекор 2: Префрлете од „Неоптимизирано“ на „Сите прилози“.\n\nЧекор 3: Пребарајте го „Ризница“ или \"fr.free.nrw.commons\".\n\nЧекор 4: Допрете го и изберете „Не оптимизирај“.\n\nЧекор 5: Допрете на „Готово“.</string>
-  <string name="authentication_failed" fuzzy="true">Заверката не успеа. Најавете се повторно.</string>
+  <string name="authentication_failed">Заверката не успеа. Најавете се повторно.</string>
   <string name="uploading_started">Подигањето започна</string>
   <string name="uploading_queued">Подигањето е во редица (овозможен режимот на ограничена врска)</string>
   <string name="upload_completed_notification_title">Податотеката „%1$s“ е подигната!</string>
@@ -108,11 +108,11 @@
   <string name="add_caption_toast">Ставете ѝ толкување на податотеката</string>
   <string name="share_description_hint">Опис</string>
   <string name="share_caption_hint">Толкување</string>
-  <string name="login_failed_network" fuzzy="true">Не можам да Ве најавам — мрежата не работи</string>
+  <string name="login_failed_network">Не можам да Ве најавам — мрежата не работи</string>
   <string name="login_failed_throttled">Направени се премногу неуспешни обиди. Обидете се пак за некоја минута.</string>
   <string name="login_failed_blocked">За жал, корисникот е блокиран на Ризницата</string>
   <string name="login_failed_2fa_needed">Мора да го укажете вашиот код за двочинителска заверка.</string>
-  <string name="login_failed_generic" fuzzy="true">Најавата не успеа</string>
+  <string name="login_failed_generic">Најавата не успеа</string>
   <string name="share_upload_button">Подигни</string>
   <string name="multiple_share_base_title">Дајте му име на овој комплет</string>
   <string name="provider_modifications">Преиначувања</string>
@@ -269,7 +269,7 @@
   <string name="nominated_see_more">Поподробно ќе најдете на мрежното место</string>
   <string name="skip_login">Прескокни</string>
   <string name="navigation_item_login">Најава</string>
-  <string name="skip_login_title" fuzzy="true">Дали навистина сакате да ја прескокнете најавата?</string>
+  <string name="skip_login_title">Дали навистина сакате да ја прескокнете најавата?</string>
   <string name="skip_login_message">Ќе морате да се најавите за да подигате слики во иднина.</string>
   <string name="login_alert_message">Најавете се за да ја користите оваа можност.</string>
   <string name="copy_wikicode">Прекопирај го викитекстот во меѓускладот</string>
@@ -336,7 +336,7 @@
   <string name="construction_event_answer">На Ризницата се добредојдени слики на кои се прикажува технологија или култура.</string>
   <string name="congratulatory_message_quiz">Дадовте %1$s точни одговори. Честитаме!</string>
   <string name="warning_for_no_answer">Изберете еден одговор</string>
-  <string name="user_not_logged_in" fuzzy="true">Најавната седница истече. Најавете се повторно.</string>
+  <string name="user_not_logged_in">Најавната седница истече. Најавете се повторно.</string>
   <string name="quiz_result_share_message">Споделете го квизов со пријателите!</string>
   <string name="continue_message">Продолжи</string>
   <string name="correct">Точен одговор</string>
@@ -420,7 +420,7 @@
   <string name="never_ask_again">Повеќе не прашувај</string>
   <string name="display_location_permission_title">Побарај дозвола за местоположба</string>
   <string name="display_location_permission_explanation">Барај дозвола за местоположба кога ќе треба да се даде известување за околно место.</string>
-  <string name="achievements_fetch_failed" fuzzy="true">Нешто не е во ред. Не можев да ги добијам вашите достигнувања</string>
+  <string name="achievements_fetch_failed">Нешто не е во ред. Не можев да ги добијам вашите достигнувања</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Имате толку многу придонеси што нашиот пресметувач на достигнувања просто не може да постигне. Ова е врховното достигнување.</string>
   <string name="ends_on">Завршува:</string>
   <string name="display_campaigns">Прикажи походи</string>
@@ -436,7 +436,7 @@
   <string name="open_document_photo_picker_explanation">Новиот избирач на слики на Андроид ризикува да ги изгуби информациите за местоположба. Овозможете ги ако го користите.</string>
   <string name="location_loss_warning">Со исклучување на ова ќе го повикате избирачот на слики на Андроид. Ризикува загуба на информации за местоположба.\n\nДопрете на „Прочитајте повеќе“ за повеќе информации.</string>
   <string name="nearby_campaign_dismiss_message">Повеќе нема да ви се прикажуваат походите. Доколку се премислите, таа поставка ќе ја најдете во Нагодувањата.</string>
-  <string name="this_function_needs_network_connection" fuzzy="true">Оваа можност бара да бидете поврзани со мрежата. Проверете ги поставките за поврзување.</string>
+  <string name="this_function_needs_network_connection">Оваа можност бара да бидете поврзани со мрежата. Проверете ги поставките за поврзување.</string>
   <string name="error_processing_image">Се појави грешка при обработката на сликата. Обидете се повторно!</string>
   <string name="getting_edit_token">Добивање на шифра за уредување</string>
   <string name="check_category_adding_template">Додавање на предлошка за категориска проверка</string>
@@ -563,7 +563,7 @@
   <string name="place_state_needs_photo">Му треба слика</string>
   <string name="place_type">Вид на место:</string>
   <string name="nearby_search_hint">Мост, музеј, хотел итн.</string>
-  <string name="you_must_reset_your_passsword" fuzzy="true">Нешто не е во ред со најавата. Ќе мора да ставите нова лозинка !!</string>
+  <string name="you_must_reset_your_passsword">Нешто не е во ред со најавата. Ќе мора да ставите нова лозинка !!</string>
   <string name="title_for_media">СЛИКИ/СНИМКИ</string>
   <string name="title_for_child_classes">ЗАВИСНИ КЛАСИ</string>
   <string name="title_for_parent_classes">МАТИЧНИ КЛАСИ</string>
@@ -699,8 +699,8 @@
   <string name="add_location">Додај местоположба</string>
   <string name="feedback_sharing_data_alert">Од оваа порака отстранете ги сите информации што не сакате да бидат јавни. Воедно, имајте на ум дека вашата е-поштенска адреса од која испраќате, името и профилна слика ќе бидат јавно видливи.</string>
   <string name="explore_map_details">Подробно</string>
-  <string name="achievements_unavailable_beta" fuzzy="true">Достигнувањата се достапни само во производниот вкус. Погледајте ја разработувачката документација.</string>
-  <string name="leaderboard_unavailable_beta" fuzzy="true">Предводниците се достапни само во производниот вкус. Погледајте ја разработувачката документација.</string>
+  <string name="achievements_unavailable_beta">Достигнувањата се достапни само во производниот вкус. Погледајте ја разработувачката документација.</string>
+  <string name="leaderboard_unavailable_beta">Предводниците се достапни само во производниот вкус. Погледајте ја разработувачката документација.</string>
   <string name="copyright_popup">Подигајте само слики што сте ги направиле самите. Подигачите на слики заштитени со авторски права ќе бидат блокирани. Ова важи и за бета-верзијата. Ви благодариме што го испробувате прилогот!</string>
   <string name="select_feedback_data_choice">Одизберете ги информациите што не сакате да ги споделите јавно.</string>
   <string name="api_level">Ниво на приложникот</string>
@@ -744,9 +744,22 @@
   <string name="see_your_achievements">Видете ги вашите достигнувања</string>
   <string name="edit_image">Уреди слика</string>
   <string name="edit_location">Уреди местоположба</string>
+  <string name="location_updated">Местоположбата е подновена!</string>
+  <string name="remove_location">Отстрани местоположба</string>
+  <string name="remove_location_warning_title">Отстрани предупредување за местоположба</string>
+  <string name="remove_location_warning_desc">Местоположбата ги прави сликите покорисни и лесни за наоѓање. Дали навистина сакате да ја отстраните местоположбата од сликава?</string>
+  <string name="location_removed">Местоположбата е отстранета!</string>
   <string name="send_thanks_to_author">Благодари му на авторот</string>
   <string name="error_sending_thanks">Грешка при испраќањето благодарност до авторот.</string>
-  <string name="invalid_login_message" fuzzy="true">Најавата ви е истечена. Најавете се повторно.</string>
+  <string name="invalid_login_message">Најавата ви е истечена. Најавете се повторно.</string>
+  <string name="no_application_available_to_open_gpx_files">Нема достапен прилог за отворање на GPX-податотеки</string>
+  <string name="file_saved_successfully">Податотеката е успешно зачувана</string>
+  <string name="do_you_want_to_open_gpx_file">Дали сакате да отворите GPX-податотека?</string>
+  <string name="do_you_want_to_open_kml_file">Дали сакате да отворите KML-податотека?</string>
+  <string name="failed_to_save_kml_file">Не можев да ја зачувам KML-податотеката.</string>
+  <string name="failed_to_save_gpx_file">Не можев да ја зачувам GPX-податотеката.</string>
+  <string name="saving_kml_file">Зачувување на KML-податотека</string>
+  <string name="saving_gpx_file">Зачувување на GPX-податотека</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">Избрана е %d слика</item>
     <item quantity="other">Избрани се %d слики</item>

@@ -120,13 +120,13 @@
   <string name="logging_in_message">Un momento…</string>
   <string name="updating_caption_title">Actualizando leyendas y descripciones</string>
   <string name="updating_caption_message">Un momento…</string>
-  <string name="login_success" fuzzy="true">Inicio de sesión exitoso</string>
+  <string name="login_success">Ha conseguido iniciar la sesión</string>
   <string name="login_failed">Falló el inicio de sesión</string>
   <string name="upload_failed">No se encontró el archivo. Por favor prueba con otro.</string>
   <string name="retry_limit_reached">¡Se alcanzó el límite máximo de reintentos! Cancela la subida e inténtalo de nuevo</string>
   <string name="unrestricted_battery_mode">¿Desactivar la optimización de la batería?</string>
   <string name="suggest_unrestricted_mode">Subir más de 3 imágenes funciona mejor cuando la optimización de la batería está desactivada. Desactiva la optimización de la batería para la aplicación Commons desde la configuración para una experiencia de subida más fluida. \n\nPosibles pasos para desactivar la optimización de la batería:\n\nPaso 1: Pulsa en el botón de \'Configuración\' mostrado a continuación.\n\nPaso 2: Navega desde \'No optimizado\' a \'Todas las apps\'.\n\nPaso 3: Busca \"Commons\" o \"fr.free.nrw.commons\".\n\nPaso 4: Púlsalo y selecciona \'No optimizar\'\n\nPaso 5: Pulsa en \'Aceptar\'.</string>
-  <string name="authentication_failed" fuzzy="true">La autenticación ha fallado, por favor prueba a acceder otra vez</string>
+  <string name="authentication_failed">La autenticación ha fallado, por favor prueba a acceder otra vez</string>
   <string name="uploading_started">¡Subiendo!</string>
   <string name="uploading_queued">Carga en cola (modo de conexión limitada activado)</string>
   <string name="upload_completed_notification_title">¡Se ha subido %1$s!</string>
@@ -153,11 +153,11 @@
   <string name="add_caption_toast">Por favor, proporciona una leyenda para este archivo</string>
   <string name="share_description_hint">Descripción</string>
   <string name="share_caption_hint">Leyenda</string>
-  <string name="login_failed_network" fuzzy="true">No se pudo iniciar sesión: error de red</string>
+  <string name="login_failed_network">No se pudo iniciar sesión: error de red</string>
   <string name="login_failed_throttled">Demasiados intentos fallidos. Inténtalo de nuevo en unos minutos.</string>
   <string name="login_failed_blocked">Lo sentimos, este usuario ha sido bloqueado en Commons</string>
   <string name="login_failed_2fa_needed">Debe proporcionar su código de autenticación de dos factores.</string>
-  <string name="login_failed_generic" fuzzy="true">Falló el inicio de sesión</string>
+  <string name="login_failed_generic">Falló el inicio de sesión</string>
   <string name="share_upload_button">Subir</string>
   <string name="multiple_share_base_title">Nombrar este conjunto</string>
   <string name="provider_modifications">Modificaciones</string>
@@ -281,6 +281,7 @@
   <string name="navigation_item_about">Acerca de</string>
   <string name="navigation_item_settings">Configuración</string>
   <string name="navigation_item_feedback">Comentarios</string>
+  <string name="navigation_item_feedback_github">Comentarios a través de GitHub</string>
   <string name="navigation_item_logout">Salir</string>
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Notificaciones</string>
@@ -314,7 +315,7 @@
   <string name="nominated_see_more">Ver página web para detalles</string>
   <string name="skip_login">Omitir</string>
   <string name="navigation_item_login">Acceder</string>
-  <string name="skip_login_title" fuzzy="true">¿Quieres realmente omitir el inicio de sesión?</string>
+  <string name="skip_login_title">¿Quieres realmente omitir el inicio de sesión?</string>
   <string name="skip_login_message">Deberías iniciar sesión para subir imágenes en el futuro.</string>
   <string name="login_alert_message">Por favor inicia sesion para usar esta característica</string>
   <string name="copy_wikicode">Copia el wikitexto al portapapeles</string>
@@ -381,7 +382,7 @@
   <string name="construction_event_answer">Las imágenes que muestran tecnología o cultura son siempre bienvenidas en Commons.</string>
   <string name="congratulatory_message_quiz">Tienes el %1$s de las respuestas correctas. ¡Felicidades!</string>
   <string name="warning_for_no_answer">Selecciona una de las dos opciones para responder a la pregunta</string>
-  <string name="user_not_logged_in" fuzzy="true">Tu sesión ha caducado, vuelve a iniciar sesión.</string>
+  <string name="user_not_logged_in">Tu sesión ha caducado, vuelve a iniciar sesión.</string>
   <string name="quiz_result_share_message">¡Comparte tu cuestionario con tus amigos!</string>
   <string name="continue_message">Continuar</string>
   <string name="correct">Respuesta correcta</string>
@@ -481,7 +482,7 @@
   <string name="open_document_photo_picker_explanation">El nuevo selector de fotos de Android corre el riesgo de perder información de la ubicación. Habilítalo si parece que lo estás usando.</string>
   <string name="location_loss_warning">Desactivar esto podría activar el nuevo selector de fotos para Android, por lo que se corre el riesgo de perder información de la ubicación.\n\nPresiona \'Más información\' para obtener más información.</string>
   <string name="nearby_campaign_dismiss_message">Ya no verás las campañas. Sin embargo, puedes volver a habilitar esta notificación en configuración.</string>
-  <string name="this_function_needs_network_connection" fuzzy="true">Esta función requiere conexión de red, verifica tus ajustes de conexión.</string>
+  <string name="this_function_needs_network_connection">Esta función requiere conexión de red, verifica tus ajustes de conexión.</string>
   <string name="error_processing_image">Se produjo un error al procesar la imagen. Inténtalo de nuevo.</string>
   <string name="getting_edit_token">Consiguiendo token para editar</string>
   <string name="check_category_adding_template">Añadiendo plantilla para control de categoría</string>
@@ -608,7 +609,7 @@
   <string name="place_state_needs_photo">Necesita fotografía</string>
   <string name="place_type">Tipo de lugar:</string>
   <string name="nearby_search_hint">Puente, museo, hotel…</string>
-  <string name="you_must_reset_your_passsword" fuzzy="true">Hubo un error con el inicio de sesión, debe restablecer su contraseña !!</string>
+  <string name="you_must_reset_your_passsword">¡Error en el inicio de sesión, debe restablecer su contraseña!</string>
   <string name="title_for_media">MULTIMEDIA</string>
   <string name="title_for_child_classes">CLASES HIJAS</string>
   <string name="title_for_parent_classes">CLASES PADRES</string>
@@ -742,7 +743,7 @@
   <string name="add_location">Añadir ubicación</string>
   <string name="feedback_sharing_data_alert">Elimine de este correo electrónico cualquier información con la que no se sienta a gusto compartiendo públicamente. Además, tenga en cuenta que su dirección de correo electrónico con la que está publicando, y el nombre asociado y la imagen de perfil, serán visibles públicamente.</string>
   <string name="explore_map_details">Detalles</string>
-  <string name="achievements_unavailable_beta" fuzzy="true">Los logros sólo están disponibles en la versión de producción, por favor consulte la documentación del desarrollador.</string>
+  <string name="achievements_unavailable_beta">Los logros sólo están disponibles en la versión de producción, por favor consulte la documentación del desarrollador.</string>
   <string name="leaderboard_unavailable_beta">La tabla de clasificación sólo está disponible en la versión de producción, por favor, consulte la documentación del desarrollador.</string>
   <string name="copyright_popup">Por favor, sólo cargue imágenes que haya tomado usted mismo. Personas que carguen imágenes con derechos de autor serán bloqueadas. Esto aplica para la versión beta también. Gracias por probar la aplicación!</string>
   <string name="select_feedback_data_choice">Por favor, desmarque cualquier información que no se sienta cómodo compartiendo públicamente.</string>
@@ -782,7 +783,20 @@
   <string name="storage_permissions_denied">Se denegaron los permisos de almacenamiento</string>
   <string name="unable_to_share_upload_item">No se puede compartir este elemento</string>
   <string name="permissions_are_required_for_functionality">Se requieren permisos para la funcionalidad</string>
-  <string name="invalid_login_message" fuzzy="true">Su sesión ha caducado. Inicie sesión de nuevo.</string>
+  <string name="location_updated">¡Ubicación actualizada!</string>
+  <string name="remove_location">Quitar ubicación</string>
+  <string name="remove_location_warning_title">Eliminar el aviso de ubicación</string>
+  <string name="remove_location_warning_desc">La ubicación hace que las imágenes sean más útiles y accesibles. ¿De verdad quieres eliminar la ubicación de esta foto?</string>
+  <string name="location_removed">¡Ubicación eliminada!</string>
+  <string name="invalid_login_message">Su sesión ha caducado. Inicie sesión de nuevo.</string>
+  <string name="no_application_available_to_open_gpx_files">No hay ninguna aplicación disponible para abrir archivos GPX</string>
+  <string name="file_saved_successfully">Guardado correctamente</string>
+  <string name="do_you_want_to_open_gpx_file">¿Quieres abrir el archivo GPX?</string>
+  <string name="do_you_want_to_open_kml_file">¿Quieres abrir el archivo KML?</string>
+  <string name="failed_to_save_kml_file">No se pudo guardar el archivo KML.</string>
+  <string name="failed_to_save_gpx_file">No se pudo guardar el archivo GPX.</string>
+  <string name="saving_kml_file">Guardar el archivo KML</string>
+  <string name="saving_gpx_file">Guardar archivo GPX</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d imagen seleccionada</item>
     <item quantity="other">%d imagenes seleccionadas</item>
