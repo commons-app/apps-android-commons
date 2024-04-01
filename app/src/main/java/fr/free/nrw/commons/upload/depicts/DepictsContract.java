@@ -73,6 +73,11 @@ public interface DepictsContract {
          * Update the depictions
          */
         void updateDepicts();
+
+        /**
+         * Navigate the user to Login Activity
+         */
+        void navigateToLoginScreen();
     }
 
     interface UserActionListener extends BasePresenter<View> {
