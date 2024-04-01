@@ -29,6 +29,7 @@ import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.databinding.FragmentUploadMediaDetailFragmentBinding;
 import fr.free.nrw.commons.edit.EditActivity;
 import fr.free.nrw.commons.filepicker.UploadableFile;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
@@ -133,7 +134,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private UploadItem editableUploadItem;
 
     private BasicKvStore basicKvStore;
-    
+
     private final String keyForShowingAlertDialog = "isNoNetworkAlertDialogShowing";
 
     private UploadMediaDetailFragmentCallback callback;
@@ -187,19 +188,18 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         }
 
         if(savedInstanceState!=null){
-            if(uploadMediaDetailAdapter.getItems().size()==0){
+            if(uploadMediaDetailAdapter.getItems().size()==0 && callback != null){
                 uploadMediaDetailAdapter.setItems(savedInstanceState.getParcelableArrayList(UPLOAD_MEDIA_DETAILS));
-                if (callback != null){
-                    presenter.setUploadMediaDetails(uploadMediaDetailAdapter.getItems(), callback.getIndexInViewFlipper(this));
-                }
+                presenter.setUploadMediaDetails(uploadMediaDetailAdapter.getItems(),
+                    indexOfFragment);
             }
         }
 
         try {
             if(!presenter.getImageQuality(indexOfFragment, inAppPictureLocation, getActivity())) {
                 startActivityWithFlags(
-                getActivity(), MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
-                Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    getActivity(), MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                    Intent.FLAG_ACTIVITY_SINGLE_TOP);
             }
         } catch (Exception e) {
         }
@@ -265,7 +265,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         binding.backgroundImage.setOnScaleChangeListener(
             (scaleFactor, focusX, focusY) -> {
                 //Whenever the uses plays with the image, lets collapse the media detail container
-                expandCollapseLlMediaDetail(false);
+                //only if it is not already collapsed, which resolves flickering of arrow
+                if (isExpanded) {
+                    expandCollapseLlMediaDetail(false);
+                }
             });
     }
 
@@ -337,16 +340,17 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                     updateMediaDetails(uploadMediaDetailAdapter.getItems());
                 }
 
-            @Override
-            public void onNegativeResponse() {
-                Timber.d("negative response from similar image fragment");
-            }
-        });
-        Bundle args = new Bundle();
-        args.putString("originalImagePath", originalFilePath);
-        args.putString("possibleImagePath", possibleFilePath);
-        newFragment.setArguments(args);
-        newFragment.show(getChildFragmentManager(), "dialog");
+                @Override
+                public void onNegativeResponse() {
+                    Timber.d("negative response from similar image fragment");
+                }
+            });
+            Bundle args = new Bundle();
+            args.putString("originalImagePath", originalFilePath);
+            args.putString("possibleImagePath", possibleFilePath);
+            newFragment.setArguments(args);
+            newFragment.show(getChildFragmentManager(), "dialog");
+        }
     }
 
     @Override

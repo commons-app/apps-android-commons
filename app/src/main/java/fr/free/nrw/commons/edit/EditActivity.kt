@@ -31,6 +31,7 @@ import java.io.File
  */
 class EditActivity : AppCompatActivity() {
     private var imageUri = ""
+    private var imageRotation = 0
     private lateinit var vm: EditViewModel
     private val sourceExifAttributeList = mutableListOf<Pair<String, String?>>()
     private lateinit var binding: ActivityEditBinding
@@ -44,6 +45,7 @@ class EditActivity : AppCompatActivity() {
         val intent = intent
         imageUri = intent.getStringExtra("image") ?: ""
         imageRotation = intent.getIntExtra("rotation",0)
+        totalRotation = imageRotation
         vm = ViewModelProvider(this).get(EditViewModel::class.java)
         val sourceExif = imageUri.toUri().path?.let { ExifInterface(it) }
         val exifTags = arrayOf(
@@ -89,7 +91,7 @@ class EditActivity : AppCompatActivity() {
     private fun init() {
         binding.iv.adjustViewBounds = true
         binding.iv.scaleType = ImageView.ScaleType.MATRIX
-        binding.iv.post(Runnable {
+        binding.iv.post {
             val options = BitmapFactory.Options()
             options.inJustDecodeBounds = true
             BitmapFactory.decodeFile(imageUri, options)
@@ -105,6 +107,8 @@ class EditActivity : AppCompatActivity() {
                 options.inJustDecodeBounds = false
                 val scaledBitmap = BitmapFactory.decodeFile(imageUri, options)
                 binding.iv.setImageBitmap(scaledBitmap)
+                binding.iv.rotation = (imageRotation % 360).toFloat()
+                imageRotation = 0
                 // Update the ImageView with the scaled bitmap
                 val scale = binding.iv.measuredWidth.toFloat() / scaledBitmap.width.toFloat()
                 binding.iv.layoutParams.height = (scale * scaledBitmap.height).toInt()
@@ -114,22 +118,20 @@ class EditActivity : AppCompatActivity() {
                 options.inJustDecodeBounds = false
                 val bitmap = BitmapFactory.decodeFile(imageUri, options)
                 binding.iv.setImageBitmap(bitmap)
-
+                binding.iv.rotation = (imageRotation % 360).toFloat()
+                imageRotation = 0
                 val scale = binding.iv.measuredWidth.toFloat() / bitmapWidth.toFloat()
                 binding.iv.layoutParams.height = (scale * bitmapHeight).toInt()
                 binding.iv.imageMatrix = scaleMatrix(scale, scale)
             }
-            animateImageHeight(false)
-        })
+        }
         binding.rotateBtn.setOnClickListener {
-            animateImageHeight(true)
+            animateImageHeight()
         }
         binding.btnSave.setOnClickListener {
             getRotatedImage()
         }
     }
-
-    var imageRotation = 0
 
     /**
      * Animates the height, rotation, and scale of an ImageView to provide a smooth
@@ -140,13 +142,13 @@ class EditActivity : AppCompatActivity() {
      * ValueAnimator. It also disables a rotate button during the animation to prevent
      * further rotation actions.
      */
-    private fun animateImageHeight(shouldRotate : Boolean) {
+    private fun animateImageHeight() {
         val drawableWidth: Float = binding.iv.getDrawable().getIntrinsicWidth().toFloat()
         val drawableHeight: Float = binding.iv.getDrawable().getIntrinsicHeight().toFloat()
         val viewWidth: Float = binding.iv.getMeasuredWidth().toFloat()
         val viewHeight: Float = binding.iv.getMeasuredHeight().toFloat()
         val rotation = imageRotation % 360
-        val newRotation = if (shouldRotate) rotation + 90 else rotation
+        val newRotation = rotation + 90
 
         val newViewHeight: Int
         val imageScale: Float
@@ -179,6 +181,8 @@ class EditActivity : AppCompatActivity() {
 
             override fun onAnimationEnd(animation: Animator) {
                 imageRotation = newRotation % 360
+                val t1 = totalRotation % 360
+                totalRotation = t1 + 90
                 binding.rotateBtn.setEnabled(true)
             }
 
@@ -236,7 +240,7 @@ class EditActivity : AppCompatActivity() {
         val file = filePath?.let { File(it) }
 
 
-        val rotatedImage = file?.let { vm.rotateImage(imageRotation, it) }
+        val rotatedImage = if(totalRotation == 360 || totalRotation == 0) file else file?.let { vm.rotateImage(totalRotation, it) }
         if (rotatedImage == null) {
             Toast.makeText(this, "Failed to rotate to image", Toast.LENGTH_LONG).show()
         }
@@ -247,7 +251,7 @@ class EditActivity : AppCompatActivity() {
         }
         val resultIntent = Intent()
         resultIntent.putExtra("editedImageFilePath", rotatedImage?.toUri()?.path ?: "Error");
-        resultIntent.putExtra("editedImageRotation",imageRotation)
+        resultIntent.putExtra("editedImageRotation",totalRotation)
         setResult(RESULT_OK, resultIntent);
         finish();
     }
