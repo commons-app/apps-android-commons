@@ -23,6 +23,7 @@ class CsrfTokenClient(
     private var retries = 0
     private var csrfTokenCall: Call<MwQueryResponse?>? = null
 
+
     @Throws(Throwable::class)
     fun getTokenBlocking(): String {
         var token = ""
@@ -47,16 +48,19 @@ class CsrfTokenClient(
 
                 token = response.body()!!.query()!!.csrfToken()!!
                 if (sessionManager.isUserLoggedIn && token == ANON_TOKEN) {
-                    throw RuntimeException("App believes we're logged in, but got anonymous token.")
+                    throw InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE)
                 }
                 break
-            } catch (t: Throwable) {
+            } catch (e: LoginFailedException) {
+               throw InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE)
+            }
+            catch (t: Throwable) {
                 Timber.w(t)
             }
         }
 
         if (token.isEmpty() || token == ANON_TOKEN) {
-            throw IOException("Invalid token, or login failure.")
+            throw InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE)
         }
         return token
     }
@@ -67,7 +71,7 @@ class CsrfTokenClient(
             override fun success(token: String?) {
                 if (sessionManager.isUserLoggedIn && token == ANON_TOKEN) {
                     retryWithLogin(cb) {
-                        RuntimeException("App believes we're logged in, but got anonymous token.")
+                        InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE)
                     }
                 } else {
                     cb.success(token)
@@ -159,5 +163,9 @@ class CsrfTokenClient(
         private const val ANON_TOKEN = "+\\"
         private const val MAX_RETRIES = 1
         private const val MAX_RETRIES_OF_LOGIN_BLOCKING = 2
+        const val INVALID_TOKEN_ERROR_MESSAGE = "Invalid token, or login failure."
+        const val ANONYMOUS_TOKEN_MESSAGE = "App believes we're logged in, but got anonymous token."
     }
 }
+class InvalidLoginTokenException(message: String) : Exception(message)
+

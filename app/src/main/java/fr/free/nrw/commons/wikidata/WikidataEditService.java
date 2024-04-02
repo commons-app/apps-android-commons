@@ -8,6 +8,7 @@ import android.content.Context;
 import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.upload.UploadResult;
@@ -123,8 +124,13 @@ public class WikidataEditService {
                 }
             })
             .doOnError(throwable -> {
-                Timber.e(throwable, "Error occurred while setting DEPICTS property");
-                ViewUtil.showLongToast(context, throwable.toString());
+                if (throwable instanceof InvalidLoginTokenException) {
+                     Observable.error(throwable);
+                } else {
+                    Timber.e(throwable, "Error occurred while setting DEPICTS property");
+                    ViewUtil.showLongToast(context, throwable.toString());
+                }
+
             })
             .subscribeOn(Schedulers.io());
     }

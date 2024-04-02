@@ -65,10 +65,10 @@
   <string name="logging_in_title">Kewno cı</string>
   <string name="logging_in_message">Kerem kerên, bıpawên...</string>
   <string name="updating_caption_message">Kerem ke, bıpawe...</string>
-  <string name="login_success">Cıkewtış hewl bi.</string>
-  <string name="login_failed">Nidekeweya de</string>
+  <string name="login_success" fuzzy="true">Cıkewtış hewl bi.</string>
+  <string name="login_failed" fuzzy="true">Nidekeweya de</string>
   <string name="upload_failed">Dosya nêvineya. Dosyê da bine bıcerebnê.</string>
-  <string name="authentication_failed">Araşt kerdışê kamiye de xırabe vıciyê, reyna cıkewe</string>
+  <string name="authentication_failed" fuzzy="true">Araşt kerdışê kamiye de xırabe vıciyê, reyna cıkewe</string>
   <string name="uploading_started">Barkerdış sertera!</string>
   <string name="upload_completed_notification_title">%1$s bar bi!</string>
   <string name="upload_completed_notification_text">Barkerdışê xo pıro bıde.</string>
@@ -93,11 +93,11 @@
   <string name="add_caption_toast">Kerem ke, seba na dosya rê yew bınnuşte cı ke</string>
   <string name="share_description_hint">Şınasnayış</string>
   <string name="share_caption_hint">Bınnuşte</string>
-  <string name="login_failed_network">Xırabiya kewten-network xeta</string>
+  <string name="login_failed_network" fuzzy="true">Xırabiya kewten-network xeta</string>
   <string name="login_failed_throttled">Şıma xeylê rayi kerd ke cı kewê, a ser nêvıst. Şıma rê zehmet 2-3 deqey ra tepeya reyna bıcerrebnên.</string>
   <string name="login_failed_blocked">Qısur mewni rê, Karber commons dı bloqe biyo.</string>
   <string name="login_failed_2fa_needed">Kodê kamiya raştkerdışi dıfaktorın gani cı kewê.</string>
-  <string name="login_failed_generic">Nidekeweya de</string>
+  <string name="login_failed_generic" fuzzy="true">Nidekeweya de</string>
   <string name="share_upload_button">Bar ke</string>
   <string name="multiple_share_base_title">Saze ne nami</string>
   <string name="provider_modifications">Modifikasyoni</string>

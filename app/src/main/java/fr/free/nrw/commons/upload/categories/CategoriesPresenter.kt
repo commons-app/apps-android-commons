@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.category.CategoryEditHelper
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.di.CommonsApplicationModule
@@ -201,8 +202,9 @@ class CategoriesPresenter @Inject constructor(
      * @param wikiText current WikiText from server
      */
     override fun updateCategories(media: Media, wikiText: String) {
+        //check if view.existingCategories is null
         if (repository.selectedCategories.isNotEmpty()
-            || repository.selectedExistingCategories.size != view.existingCategories.size
+            || (view.existingCategories != null && repository.selectedExistingCategories.size != view.existingCategories.size)
         ) {
             val selectedCategories: MutableList<String> =
                 (repository.selectedCategories.map { it.name }.toMutableList()
@@ -210,25 +212,31 @@ class CategoriesPresenter @Inject constructor(
 
             if (selectedCategories.isNotEmpty()) {
                 view.showProgressDialog()
-                compositeDisposable.add(
-                    categoryEditHelper.makeCategoryEdit(view.fragmentContext, media,
-                        selectedCategories, wikiText)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe({
-                            Timber.d("Categories are added.")
-                            media.addedCategories = selectedCategories
-                            repository.cleanup()
-                            view.dismissProgressDialog()
-                            view.refreshCategories()
-                            view.goBackToPreviousScreen()
-                        })
-                        {
-                            Timber.e(
-                                "Failed to update categories"
-                            )
-                        }
-                )
+
+                try {
+                    compositeDisposable.add(
+                        categoryEditHelper.makeCategoryEdit(
+                            view.fragmentContext, media,
+                            selectedCategories, wikiText
+                        )
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe({
+                                Timber.d("Categories are added.")
+                                media.addedCategories = selectedCategories
+                                repository.cleanup()
+                                view.dismissProgressDialog()
+                                view.refreshCategories()
+                                view.goBackToPreviousScreen()
+                            }, {
+                                Timber.e(
+                                    "Failed to update categories"
+                                )
+                            })
+                    )
+                } catch (e: InvalidLoginTokenException) {
+                    view.navigateToLoginScreen();
+                }
 
             }
         } else {

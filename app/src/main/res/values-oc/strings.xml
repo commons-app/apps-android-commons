@@ -34,8 +34,8 @@
   <string name="signup">S\'inscriure</string>
   <string name="logging_in_title">Connexion</string>
   <string name="logging_in_message">Pacientatz…</string>
-  <string name="login_success">Identificacion capitada !</string>
-  <string name="login_failed">Error de connexion !</string>
+  <string name="login_success" fuzzy="true">Identificacion capitada !</string>
+  <string name="login_failed" fuzzy="true">Error de connexion !</string>
   <string name="upload_failed">Fichièr pas trobat. Ensajatz-ne un autre.</string>
   <string name="authentication_failed" fuzzy="true">Fracàs de l’autentificacion !</string>
   <string name="uploading_started">Telecargament aviat !</string>
@@ -58,10 +58,10 @@
   <string name="menu_share">Partejar</string>
   <string name="share_title_hint" fuzzy="true">Títol</string>
   <string name="share_description_hint">Descripcion</string>
-  <string name="login_failed_network">Impossible de se connectar — pana de ret</string>
+  <string name="login_failed_network" fuzzy="true">Impossible de se connectar — pana de ret</string>
   <string name="login_failed_throttled">Tròp de temptativas infructuosas. Ensajatz tornarmai dins qualques minutas.</string>
   <string name="login_failed_blocked">O planhèm, aqueste utilizaire es estat blocat dins Commons</string>
-  <string name="login_failed_generic">Error de connexion</string>
+  <string name="login_failed_generic" fuzzy="true">Error de connexion</string>
   <string name="share_upload_button">Mandar</string>
   <string name="multiple_share_base_title">Nomenar aqueste jòc</string>
   <string name="provider_modifications">Modificacions</string>

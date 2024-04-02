@@ -73,10 +73,10 @@
   <string name="logging_in_message">Hinkraðu aðeins…</string>
   <string name="updating_caption_title">Uppfæri skýringartexta og lýsingar</string>
   <string name="updating_caption_message">Hinkraðu aðeins…</string>
-  <string name="login_success">Innskráning tókst!</string>
-  <string name="login_failed">Innskráning mistókst!</string>
+  <string name="login_success" fuzzy="true">Innskráning tókst!</string>
+  <string name="login_failed" fuzzy="true">Innskráning mistókst!</string>
   <string name="upload_failed">Skráin fannst ekki. Prófaðu aðra skrá.</string>
-  <string name="authentication_failed">Auðkenning mistókst, skráðu þig inn aftur</string>
+  <string name="authentication_failed" fuzzy="true">Auðkenning mistókst, skráðu þig inn aftur</string>
   <string name="uploading_started">Innsending í gangi!</string>
   <string name="uploading_queued">Innsending í bið (hamur fyrir takmarkaðar tengingar er virkur)</string>
   <string name="upload_completed_notification_title">%1$s var sent inn!</string>
@@ -103,11 +103,11 @@
   <string name="add_caption_toast">Gefðu upp skýringartexta fyrir þessa skrá</string>
   <string name="share_description_hint">Lýsing</string>
   <string name="share_caption_hint">Skýringatexti</string>
-  <string name="login_failed_network">Innskráning mistókst - bilun í neti</string>
+  <string name="login_failed_network" fuzzy="true">Innskráning mistókst - bilun í neti</string>
   <string name="login_failed_throttled">Of margar misteknar tilraunir. Reyndu aftur eftir nokkrar mínútur.</string>
   <string name="login_failed_blocked">Því miður, þessi notandi hefur verið bannaður á Commons</string>
   <string name="login_failed_2fa_needed">Þú verður að setja inn tveggja-þrepa auðkenningarkóðann þinn.</string>
-  <string name="login_failed_generic">Innskráning mistókst</string>
+  <string name="login_failed_generic" fuzzy="true">Innskráning mistókst</string>
   <string name="share_upload_button">Senda inn skrár</string>
   <string name="multiple_share_base_title">Settu nafn á þetta sett</string>
   <string name="provider_modifications">Breytingar</string>
@@ -262,7 +262,7 @@
   <string name="nominated_see_more">Sjá nánar á vefsíðunni</string>
   <string name="skip_login">Sleppa</string>
   <string name="navigation_item_login">Skrá inn</string>
-  <string name="skip_login_title">Viltu í alvörunni sleppa innskráningu?</string>
+  <string name="skip_login_title" fuzzy="true">Viltu í alvörunni sleppa innskráningu?</string>
   <string name="skip_login_message">Þú munt í framtíðinni þurfa að skrá þig inn til geta sent inn myndir.</string>
   <string name="login_alert_message">Skráðu þig inn til að nota þennan eiginleika</string>
   <string name="copy_wikicode">Afrita wiki-textann á klippispjaldið</string>
@@ -328,7 +328,7 @@
   <string name="construction_event_answer">Myndir sem sýna tæknileg atriði eða menningarleg eru meira en vel þegnar á Commons.</string>
   <string name="congratulatory_message_quiz">Þú varst með %1$s af svörunum rétt. Til hamingju!</string>
   <string name="warning_for_no_answer">Veldu annan af kostunum hér fyrir neðan til að svara spurningunni</string>
-  <string name="user_not_logged_in">Innskráningarsetan þín rann út, skráðu þig inn aftur.</string>
+  <string name="user_not_logged_in" fuzzy="true">Innskráningarsetan þín rann út, skráðu þig inn aftur.</string>
   <string name="quiz_result_share_message">Deildu spurningaleiknum með vinum þínum!</string>
   <string name="continue_message">Halda áfram</string>
   <string name="correct">Rétt svar</string>
@@ -410,13 +410,13 @@
   <string name="never_ask_again">Ekki spyrja þessa aftur</string>
   <string name="display_location_permission_title">Biðja um aðgang að staðsetningu</string>
   <string name="display_location_permission_explanation">Biðja um heimild til að sjá staðsetningu þegar þess er þörf fyrir tilkynningaspjald um næsta nágrenni.</string>
-  <string name="achievements_fetch_failed">Eitthvað fór úrskeiðis. Gat ekki sótt frammistöðuna þína</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Eitthvað fór úrskeiðis. Gat ekki sótt frammistöðuna þína</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Þú hefur lagt af mörkum svo mörg framlög að frammistöðuútreikningakerfið okkar ræður ekki við þetta. Það myndi teljast vera framúrskarandi frammistaða.</string>
   <string name="ends_on">Endar þann:</string>
   <string name="display_campaigns">Birta herferðir</string>
   <string name="display_campaigns_explanation">Sjá yfirstandandi herferðir</string>
   <string name="nearby_campaign_dismiss_message">Þú munt ekki lengur sjá neinar herferðir. Hinsvegar geturðu, ef þú vilt, endurvirkjað þessar tilkynningar í stillingunum.</string>
-  <string name="this_function_needs_network_connection">Þessi aðgerð krefst nettengingar, athugaðu tengistillingarnar þínar.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Þessi aðgerð krefst nettengingar, athugaðu tengistillingarnar þínar.</string>
   <string name="error_processing_image">Villa kom upp við að vinna með myndina. Prófaðu aftur!</string>
   <string name="getting_edit_token">Næ í teikn fyrir breytingar</string>
   <string name="check_category_adding_template">Bæti við sniðmáti fyrir athugun á flokkum</string>
@@ -541,7 +541,7 @@
   <string name="place_state_needs_photo">Þarf ljósmynd</string>
   <string name="place_type">Tegund staðar:</string>
   <string name="nearby_search_hint">Brú, safn, hótel o.s.frv.</string>
-  <string name="you_must_reset_your_passsword">Eitthvað fór úrskeiðis varðandi innskráningu, þú þarft að endurstilla lykilorðið þitt !!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Eitthvað fór úrskeiðis varðandi innskráningu, þú þarft að endurstilla lykilorðið þitt !!</string>
   <string name="title_for_media">GAGNAMIÐLAR</string>
   <string name="title_for_child_classes">AFLEIDDIR FLOKKAR</string>
   <string name="title_for_parent_classes">YFIRFLOKKAR</string>
@@ -672,8 +672,8 @@
   <string name="add_location">Bæta við staðsetningu</string>
   <string name="feedback_sharing_data_alert">Fjarlægðu úr þessum tölvupósti allar þær upplýsingar sem þér er ekki vel við að deila opinberlega. Hafðu líka í huga að tölvupóstfangið sem þú sendir úr, ásamt tengdu nafni og auðkennismynd, verður sýnilegt opinberlega.</string>
   <string name="explore_map_details">Nánar</string>
-  <string name="achievements_unavailable_beta">Frammistaða er aðeins í boði í vinnsluútgáfunni, skoðaðu nánari upplýsingar í hjálparskjölum þróunaraðila.</string>
-  <string name="leaderboard_unavailable_beta">Samantektarspjaldið er aðeins í boði í vinnsluútgáfunni (ekki prófunarútgáfum), skoðaðu nánari upplýsingar í hjálparskjölum þróunaraðila.</string>
+  <string name="achievements_unavailable_beta" fuzzy="true">Frammistaða er aðeins í boði í vinnsluútgáfunni, skoðaðu nánari upplýsingar í hjálparskjölum þróunaraðila.</string>
+  <string name="leaderboard_unavailable_beta" fuzzy="true">Samantektarspjaldið er aðeins í boði í vinnsluútgáfunni (ekki prófunarútgáfum), skoðaðu nánari upplýsingar í hjálparskjölum þróunaraðila.</string>
   <string name="copyright_popup">Sendu aðeins inn myndir sem þú hefur tekið sjálf/ur. Þeir sem senda inn höfundarréttarvarðar myndir verða bannaðir. Þetta á líka við í beta-prófunarútgáfum. Takk annars fyrir að prófa forritið!</string>
   <string name="select_feedback_data_choice">Afveldu allar þær upplýsingar sem þér er ekki vel við að deila opinberlega.</string>
   <string name="api_level">Stig API-viðmóts</string>

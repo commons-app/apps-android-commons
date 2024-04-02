@@ -206,15 +206,15 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
             markAsNotForUpload(arrayListOf())
             return
         }
-        var i = 0
-        while (i < selectedImages.size) {
-            val path = selectedImages[i].path
+
+        val iterator = selectedImages.iterator()
+        while (iterator.hasNext()) {
+            val image = iterator.next()
+            val path = image.path
             val file = File(path)
             if (!file.exists()) {
-                selectedImages.removeAt(i)
-                i--
+                iterator.remove()
             }
-            i++
         }
         markAsNotForUpload(selectedImages)
         toolbarBinding.imageLimitError.visibility = View.INVISIBLE
@@ -241,64 +241,64 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
      */
     private fun insertIntoNotForUpload(images: ArrayList<Image>) {
         scope.launch {
-            imageFragment!!.showMarkUnmarkProgressDialog(
-                text= progressDialogText
-            )
+            withContext(Dispatchers.Main) {
+                imageFragment?.showMarkUnmarkProgressDialog(text = progressDialogText)
+            }
 
             var allImagesAlreadyNotForUpload = true
-            images.forEach {
+            images.forEach { image ->
                 val imageSHA1 = CustomSelectorUtils.getImageSHA1(
-                    it.uri,
+                    image.uri,
                     ioDispatcher,
                     fileUtilsWrapper,
                     contentResolver
                 )
                 val exists = notForUploadStatusDao.find(imageSHA1)
-
-                // If image exists in not for upload table make allImagesAlreadyNotForUpload false
                 if (exists < 1) {
                     allImagesAlreadyNotForUpload = false
                 }
             }
 
-            // if all images is not already marked as not for upload, insert all images in
-            // not for upload table
             if (!allImagesAlreadyNotForUpload) {
-                images.forEach {
+                // Insert or delete images as necessary, but the UI updates should be posted back to the main thread
+                images.forEach { image ->
                     val imageSHA1 = CustomSelectorUtils.getImageSHA1(
-                        it.uri,
+                        image.uri,
                         ioDispatcher,
                         fileUtilsWrapper,
                         contentResolver
                     )
-                    notForUploadStatusDao.insert(
-                        NotForUploadStatus(
-                            imageSHA1
-                        )
-                    )
+                    notForUploadStatusDao.insert(NotForUploadStatus(imageSHA1))
                 }
-
-                // if all images is already marked as not for upload, delete all images from
-                // not for upload table
+                withContext(Dispatchers.Main) {
+                    images.forEach { image ->
+                        imageFragment?.removeImage(image)
+                    }
+                    imageFragment?.clearSelectedImages()
+                }
             } else {
-                images.forEach {
+                images.forEach { image ->
                     val imageSHA1 = CustomSelectorUtils.getImageSHA1(
-                        it.uri,
+                        image.uri,
                         ioDispatcher,
                         fileUtilsWrapper,
                         contentResolver
                     )
                     notForUploadStatusDao.deleteNotForUploadWithImageSHA1(imageSHA1)
                 }
+
+                withContext(Dispatchers.Main) {
+                    imageFragment?.refresh()
+                }
             }
 
-            imageFragment!!.refresh()
-            imageFragment!!.dismissMarkUnmarkProgressDialog()
-
-            val bottomLayout: ConstraintLayout = findViewById(R.id.bottom_layout)
-            bottomLayout.visibility = View.GONE
+            withContext(Dispatchers.Main) {
+                imageFragment?.dismissMarkUnmarkProgressDialog()
+                val bottomLayout: ConstraintLayout = findViewById(R.id.bottom_layout)
+                bottomLayout.visibility = View.GONE
+                changeTitle(bucketName, 0)
+            }
         }
-        changeTitle(bucketName, 0)
     }
 
     /**

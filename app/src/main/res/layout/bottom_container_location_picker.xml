@@ -55,6 +55,28 @@
     app:layout_constraintStart_toStartOf="parent">
 
     <Button
+      android:id="@+id/remove_location"
+      style="@style/Widget.AppCompat.Button"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_margin="5dp"
+      android:backgroundTint="@color/deleteRed"
+      android:text="@string/remove_location"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="@id/map_bottom_layout"
+      app:layout_constraintEnd_toStartOf="@+id/guideline2"
+      app:layout_constraintStart_toStartOf="@id/map_bottom_layout"
+      app:layout_constraintTop_toTopOf="@id/map_bottom_layout" />
+
+    <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_percent="0.35" />
+
+    <Button
       android:id="@+id/modify_location"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
@@ -64,7 +86,7 @@
       android:layout_margin="5dp"
       app:layout_constraintBottom_toBottomOf="@id/map_bottom_layout"
       app:layout_constraintEnd_toStartOf="@+id/guideline3"
-      app:layout_constraintStart_toStartOf="@id/map_bottom_layout"
+      app:layout_constraintStart_toEndOf="@+id/guideline2"
       app:layout_constraintTop_toTopOf="@id/map_bottom_layout" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -72,7 +94,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:orientation="vertical"
-      app:layout_constraintGuide_percent="0.5" />
+      app:layout_constraintGuide_percent="0.7" />
 
     <TextView
       android:id="@+id/show_in_map"

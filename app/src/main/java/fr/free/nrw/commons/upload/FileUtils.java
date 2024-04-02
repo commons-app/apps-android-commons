@@ -85,7 +85,7 @@ public class FileUtils {
     /**
      * Read and return the content of a resource filePath as string.
      *
-     * @param fileName asset filePath's path (e.g. "/queries/nearby_query.rq")
+     * @param fileName asset filePath's path (e.g. "/queries/radius_query_for_upload_wizard.rq")
      * @return the content of the filePath
      */
     public static String readFromResource(String fileName) throws IOException {

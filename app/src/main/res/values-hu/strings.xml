@@ -70,12 +70,12 @@
   <string name="signup">Regisztráció</string>
   <string name="logging_in_title">Belépés…</string>
   <string name="logging_in_message">Kérlek várj…</string>
-  <string name="login_success">Sikeres bejelentkezés</string>
-  <string name="login_failed">A bejelentkezés nem sikerült.</string>
+  <string name="login_success" fuzzy="true">Sikeres bejelentkezés</string>
+  <string name="login_failed" fuzzy="true">A bejelentkezés nem sikerült.</string>
   <string name="upload_failed">A fájl nem található. Próbálkozz másik fájllal.</string>
   <string name="retry_limit_reached">Elérted az újrapróbálkozások maximális számát. Szakítsd meg a feltöltést, és próbáld újra!</string>
   <string name="unrestricted_battery_mode">Kikapcsolod az akkumulátoroptimalizálást?</string>
-  <string name="authentication_failed">Sikertelen hitelesítés, kérlek jelentkezz be újra</string>
+  <string name="authentication_failed" fuzzy="true">Sikertelen hitelesítés, kérlek jelentkezz be újra</string>
   <string name="uploading_started">Feltöltés elindult.</string>
   <string name="uploading_queued">Feltöltések késleltetése (korlátozott kapcsolat-mód bekapcsolva)</string>
   <string name="upload_completed_notification_title">%1$s feltöltve.</string>
@@ -99,11 +99,11 @@
   <string name="menu_share">Megosztás</string>
   <string name="share_title_hint">Képaláírás (kötelező)</string>
   <string name="share_description_hint">Leírás</string>
-  <string name="login_failed_network">Nem lehet bejelentkezni - hálózati hiba</string>
+  <string name="login_failed_network" fuzzy="true">Nem lehet bejelentkezni - hálózati hiba</string>
   <string name="login_failed_throttled">Túl sok sikertelen próbálkozás. Próbálkozz újra pár perc múlva.</string>
   <string name="login_failed_blocked">Sajnáljuk, ezt a felhasználót blokkolták a Commonson</string>
   <string name="login_failed_2fa_needed">Meg kell adnod a kétlépcsős hitelesítő kódodat.</string>
-  <string name="login_failed_generic">Bejelentkezési hiba</string>
+  <string name="login_failed_generic" fuzzy="true">Bejelentkezési hiba</string>
   <string name="share_upload_button">Feltöltés</string>
   <string name="multiple_share_base_title">Nevezd el a gyűjteményt</string>
   <string name="provider_modifications">Változtatások</string>
@@ -247,7 +247,7 @@
   <string name="nominated_see_more">Weboldal megtekintése további részletekért</string>
   <string name="skip_login">Kihagyás</string>
   <string name="navigation_item_login">Bejelentkezés</string>
-  <string name="skip_login_title">Biztos ki akarod hagyni a bejelentkezést?</string>
+  <string name="skip_login_title" fuzzy="true">Biztos ki akarod hagyni a bejelentkezést?</string>
   <string name="skip_login_message">Fényképek feltöltéséhez a jövőben be kell jelentkezned.</string>
   <string name="login_alert_message">A funkció használatához kérlek jelentkezz be.</string>
   <string name="copy_wikicode">Wikiszöveg vágólapra másolása</string>
@@ -307,7 +307,7 @@
   <string name="construction_event_answer">Technológiát és kultúrát bemutató képek bármikor jöhetnek a Commons-ra.</string>
   <string name="congratulatory_message_quiz">%1$s jó válaszod van. Gratulálunk!</string>
   <string name="warning_for_no_answer">Válaszd az egyik lehetőséget a válaszhoz</string>
-  <string name="user_not_logged_in">A bejelentkezési munkamenet lejárt, kérlek jelentkezz be újra.</string>
+  <string name="user_not_logged_in" fuzzy="true">A bejelentkezési munkamenet lejárt, kérlek jelentkezz be újra.</string>
   <string name="quiz_result_share_message">Oszd meg a kvízed a barátaiddal!</string>
   <string name="continue_message">Folytatás</string>
   <string name="correct">Helyes válasz</string>
@@ -375,7 +375,7 @@
   <string name="unable_to_display_nearest_place">A helymeghatározás nélkül nem használható ez a funkció.</string>
   <string name="never_ask_again">Ne kérdezd meg többször</string>
   <string name="display_location_permission_title">Helymeghatározási engedély</string>
-  <string name="achievements_fetch_failed">Valami hiba történt, nem sikerült az eredményeid betöltése</string>
+  <string name="achievements_fetch_failed" fuzzy="true">Valami hiba történt, nem sikerült az eredményeid betöltése</string>
   <string name="display_campaigns">Kampányok megjelenítése</string>
   <string name="display_campaigns_explanation">Folyamatban lévő kampányok megjelenítése</string>
   <string name="in_app_camera_location_access_explanation">Engedélyezd az alkalmazás számára a helyszín lekérését, ha a kamera nem rögzíti azt! Egyes eszközök kamerái nem rögzítik a helyszínt. Közreműködésed hasznosabb, ha ilyen esetekben hagyod, hogy az alkalmazás lekérje és hozzárendelje a helyszínt. Ezt bármikor módosíthatod a Beállításokban</string>
@@ -386,7 +386,7 @@
   <string name="in_app_camera_location_permission_denied">Az alkalmazás helymeghatározási engedély hiányában nem rögzíti a helyszínt a felvételekkel együtt</string>
   <string name="in_app_camera_location_unavailable">Az alkalmazás nem rögzít helyszínt a felvételekkel együtt, mivel a GPS ki van kapcsolva</string>
   <string name="nearby_campaign_dismiss_message">Többé nem lesznek láthatók a kampányok. Ha akarod, visszakapcsolható a Beállításoknál.</string>
-  <string name="this_function_needs_network_connection">Ehhez a funkcióhoz hálózati kapcsolat szükséges, kérlek ellenőrizd az internetbeállításaidat.</string>
+  <string name="this_function_needs_network_connection" fuzzy="true">Ehhez a funkcióhoz hálózati kapcsolat szükséges, kérlek ellenőrizd az internetbeállításaidat.</string>
   <string name="error_processing_image">Hiba történt a kép feltöltése során. Próbáld meg újra!</string>
   <string name="getting_edit_token">Szerkesztő token beszerzése</string>
   <string name="check_category_adding_template">Kategóriaellenőrző sablon felhelyezése</string>
@@ -473,7 +473,7 @@
   <string name="place_state_needs_photo">Fénykép szükséges</string>
   <string name="place_type">Hely típusa:</string>
   <string name="nearby_search_hint">Híd, múzeum, szálloda, stb.</string>
-  <string name="you_must_reset_your_passsword">A belépés nem sikerült, kérj új jelszót.</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">A belépés nem sikerült, kérj új jelszót.</string>
   <string name="setting_wallpaper_dialog_title">Beállítás háttérképnek</string>
   <string name="setting_wallpaper_dialog_message">Beállítás háttérképnek. Kérem várjon...</string>
   <string name="theme_default_name">Rendszerbeállítás követése</string>

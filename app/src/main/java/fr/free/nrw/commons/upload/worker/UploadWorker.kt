@@ -10,16 +10,17 @@ import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.multidex.BuildConfig
 import androidx.work.CoroutineWorker
 import androidx.work.Data
-import androidx.work.WorkerParameters
-import androidx.multidex.BuildConfig
 import androidx.work.ForegroundInfo
+import androidx.work.WorkerParameters
 import dagger.android.ContributesAndroidInjector
 import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.contributions.ChunkInfo
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.contributions.ContributionDao
@@ -29,8 +30,8 @@ import fr.free.nrw.commons.customselector.database.UploadedStatusDao
 import fr.free.nrw.commons.di.ApplicationlessInjection
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.theme.BaseActivity
-import fr.free.nrw.commons.upload.StashUploadResult
 import fr.free.nrw.commons.upload.FileUtilsWrapper
+import fr.free.nrw.commons.upload.StashUploadResult
 import fr.free.nrw.commons.upload.StashUploadState
 import fr.free.nrw.commons.upload.UploadClient
 import fr.free.nrw.commons.upload.UploadResult
@@ -46,12 +47,13 @@ import timber.log.Timber
 import java.util.*
 import java.util.regex.Pattern
 import javax.inject.Inject
-import kotlin.collections.ArrayList
+
 
 class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
     CoroutineWorker(appContext, workerParams) {
 
     private var notificationManager: NotificationManagerCompat? = null
+
 
     @Inject
     lateinit var wikidataEditService: WikidataEditService
@@ -77,6 +79,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
     private val PROCESSING_UPLOADS_NOTIFICATION_TAG = BuildConfig.APPLICATION_ID + " : upload_tag"
 
     private val PROCESSING_UPLOADS_NOTIFICATION_ID = 101
+
 
 
     //Attributes of the current-upload notification
@@ -295,7 +298,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
      * Upload the contribution
      * @param contribution
      */
-    @SuppressLint("StringFormatInvalid")
+    @SuppressLint("StringFormatInvalid", "CheckResult")
     private suspend fun uploadContribution(contribution: Contribution) {
         if (contribution.localUri == null || contribution.localUri.path == null) {
             Timber.e("""upload: ${contribution.media.filename} failed, file path is null""")
@@ -338,7 +341,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             val stashUploadResult = uploadClient.uploadFileToStash(
                 filename!!, contribution, notificationProgressUpdater
             ).onErrorReturn{
-                return@onErrorReturn StashUploadResult(StashUploadState.FAILED,fileKey = null)
+                return@onErrorReturn StashUploadResult(StashUploadState.FAILED,fileKey = null,errorMessage = it.message)
             }.blockingSingle()
 
             when (stashUploadResult.state) {
@@ -402,10 +405,21 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                 }
                 else -> {
                     Timber.e("""upload file to stash failed with status: ${stashUploadResult.state}""")
-                    showFailedNotification(contribution)
+                    showInvalidLoginNotification(contribution)
                     contribution.state = Contribution.STATE_FAILED
                     contribution.chunkInfo = null
                     contributionDao.saveSynchronous(contribution)
+                    if (stashUploadResult.errorMessage.equals(CsrfTokenClient.INVALID_TOKEN_ERROR_MESSAGE)) {
+                        Timber.e("Invalid Login, logging out")
+                        val username = sessionManager.userName
+                        var logoutListener = CommonsApplication.BaseLogoutListener(
+                            appContext,
+                            appContext.getString(R.string.invalid_login_message),
+                            username
+                        )
+                        CommonsApplication.getInstance()
+                            .clearApplicationData(appContext, logoutListener)
+                    }
                 }
             }
         }catch (exception: Exception){
@@ -566,6 +580,23 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             curentNotification.build()
         )
     }
+    @SuppressLint("StringFormatInvalid")
+    private fun showInvalidLoginNotification(contribution: Contribution) {
+        val displayTitle = contribution.media.displayTitle
+        curentNotification.setContentTitle(
+            appContext.getString(
+                R.string.upload_failed_notification_title,
+                displayTitle
+            )
+        )
+            .setContentText(appContext.getString(R.string.invalid_login_message))
+            .setProgress(0, 0, false)
+            .setOngoing(false)
+        notificationManager?.notify(
+            currentNotificationTag, currentNotificationID,
+            curentNotification.build()
+        )
+    }
 
     /**
      * Notify that the current upload is paused
@@ -605,5 +636,4 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
              }
          };
     }
-
 }

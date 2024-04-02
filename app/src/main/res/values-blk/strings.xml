@@ -39,10 +39,10 @@
   <string name="signup">ဒင်ႏမတ်ပိုင်တိဉ်</string>
   <string name="logging_in_title">အဝ်ႏနွို့အကောက်ကျာꩻ</string>
   <string name="logging_in_message">အိုင်ပွေားဆောင်းတဆင်ႏသြ...</string>
-  <string name="login_success">နွို့အကောက်အောင်ႏလဲဉ်း!</string>
-  <string name="login_failed">နွို့အကောက်အောင်ႏတဝ်း!</string>
+  <string name="login_success" fuzzy="true">နွို့အကောက်အောင်ႏလဲဉ်း!</string>
+  <string name="login_failed" fuzzy="true">နွို့အကောက်အောင်ႏတဝ်း!</string>
   <string name="upload_failed">မော့ꩻတဝ်းဖုဲင်၊ စံꩻထွားစံꩻသွော့ ဖုဲင်အလင်တဗာႏသြ။</string>
-  <string name="authentication_failed">စဲစ်ထွားမုꩻအောင်ႏတဝ်းသြ၊ နွို့ထဲင်းယင်းသွော့အကောက်တလဲင်ႏဟုဲင်းသြ။</string>
+  <string name="authentication_failed" fuzzy="true">စဲစ်ထွားမုꩻအောင်ႏတဝ်းသြ၊ နွို့ထဲင်းယင်းသွော့အကောက်တလဲင်ႏဟုဲင်းသြ။</string>
   <string name="uploading_started">ဒင်ႏစလဲဉ်းအပ်လိုတ်</string>
   <string name="upload_completed_notification_title">%1$s ဒင်ႏထွူလဲဉ်း!</string>
   <string name="upload_progress_notification_title_start">အဝ်ႏဒင်ႏဖုဲင်ကျာꩻ- %s</string>
@@ -62,9 +62,9 @@
   <string name="add_caption_toast">ဖုဲင်ယိုအတာႏ တဲမ်းဖေႏသွော့ ပုင်ႏလိတ်သြ။</string>
   <string name="share_description_hint">အွောန်ႏနယ်ချက်ခရာႏ</string>
   <string name="share_caption_hint">ပုင်ႏလိတ်</string>
-  <string name="login_failed_network">နွို့နွောင်ꩻတဝ်းအကောက် - ကွန်ယဲက်လဲင်းထဲ့ထိုꩻ</string>
+  <string name="login_failed_network" fuzzy="true">နွို့နွောင်ꩻတဝ်းအကောက် - ကွန်ယဲက်လဲင်းထဲ့ထိုꩻ</string>
   <string name="login_failed_blocked">သꩻဟဝ်တဝ်းသွူ။ ကောင်မွဉ်းပေ့ꩻခါꩻ ကသွုံꩻသားယိုသွူ။</string>
-  <string name="login_failed_generic">နွို့အကောက်အောင်ႏတဝ်း</string>
+  <string name="login_failed_generic" fuzzy="true">နွို့အကောက်အောင်ႏတဝ်း</string>
   <string name="share_upload_button">ဒင်ႏထင်ႏ</string>
   <string name="provider_modifications">မွဉ်းဖျင်မုꩻဖိုင်ႏ</string>
   <string name="menu_upload_single">ဒင်ႏထင်ႏ</string>

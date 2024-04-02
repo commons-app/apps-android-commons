@@ -12,8 +12,8 @@
   <string name="login">Oonmelde</string>
   <string name="logging_in_title">Oonmelde</string>
   <string name="logging_in_message" fuzzy="true">Bittschön woorte …</string>
-  <string name="login_success">Oonmeldung erfollichreich!</string>
-  <string name="login_failed">Oonmeldung fehlgeschlooht!</string>
+  <string name="login_success" fuzzy="true">Oonmeldung erfollichreich!</string>
+  <string name="login_failed" fuzzy="true">Oonmeldung fehlgeschlooht!</string>
   <string name="authentication_failed" fuzzy="true">Authentifizierung fehlgeschlooht!</string>
   <string name="uploading_started">Hochloode oongefang!</string>
   <string name="upload_completed_notification_title">„%1$s“ hochgelood!</string>
@@ -34,10 +34,10 @@
   <string name="menu_share">Vertele</string>
   <string name="share_title_hint" fuzzy="true">Titel</string>
   <string name="share_description_hint">Beschreibung</string>
-  <string name="login_failed_network">Oonmeldung fehlgeschlooht – Netzwerrekfehler</string>
+  <string name="login_failed_network" fuzzy="true">Oonmeldung fehlgeschlooht – Netzwerrekfehler</string>
   <string name="login_failed_throttled" fuzzy="true">Zu viele erfollichlose Versuche. Bittschön in en poor Minute wieder erneit versuche.</string>
   <string name="login_failed_blocked">Der Benutzer woard leider uff Commons gesperrt</string>
-  <string name="login_failed_generic">Oonmeldung fehlgeschlooht</string>
+  <string name="login_failed_generic" fuzzy="true">Oonmeldung fehlgeschlooht</string>
   <string name="share_upload_button">Hochloode</string>
   <string name="multiple_share_base_title">Benenne den Satz</string>
   <string name="provider_modifications">Verännrunge</string>

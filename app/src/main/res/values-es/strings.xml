@@ -16,6 +16,7 @@
 * DannyS712
 * Destinid10 2
 * DiegoAmbrocio
+* Eulalio
 * Fewasser Traduce
 * Fitoschido
 * Gastonsaenz
@@ -119,7 +120,7 @@
   <string name="logging_in_message">Un momento…</string>
   <string name="updating_caption_title">Actualizando leyendas y descripciones</string>
   <string name="updating_caption_message">Un momento…</string>
-  <string name="login_success">Inicio de sesión exitoso</string>
+  <string name="login_success">Ha conseguido iniciar la sesión</string>
   <string name="login_failed">Falló el inicio de sesión</string>
   <string name="upload_failed">No se encontró el archivo. Por favor prueba con otro.</string>
   <string name="retry_limit_reached">¡Se alcanzó el límite máximo de reintentos! Cancela la subida e inténtalo de nuevo</string>
@@ -280,6 +281,7 @@
   <string name="navigation_item_about">Acerca de</string>
   <string name="navigation_item_settings">Configuración</string>
   <string name="navigation_item_feedback">Comentarios</string>
+  <string name="navigation_item_feedback_github">Comentarios a través de GitHub</string>
   <string name="navigation_item_logout">Salir</string>
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Notificaciones</string>
@@ -464,7 +466,7 @@
   <string name="never_ask_again">Nunca preguntar esto de nuevo</string>
   <string name="display_location_permission_title">Pedir permiso de ubicación</string>
   <string name="display_location_permission_explanation">Pida permiso de ubicación cuando sea necesario para ver la tarjeta de notificación cercana.</string>
-  <string name="achievements_fetch_failed">Algo salió mal, no pudimos obtener tus logros</string>
+  <string name="achievements_fetch_failed">Algo salió mal, no pudimos obtener tus aptitudes</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Has hecho tantas contribuciones que nuestro sistema de recuento de contribuciones no puede contarlas. Este es el último recuento.</string>
   <string name="ends_on">Finaliza el:</string>
   <string name="display_campaigns">Mostrar campañas</string>
@@ -607,7 +609,7 @@
   <string name="place_state_needs_photo">Necesita fotografía</string>
   <string name="place_type">Tipo de lugar:</string>
   <string name="nearby_search_hint">Puente, museo, hotel…</string>
-  <string name="you_must_reset_your_passsword">Hubo un error con el inicio de sesión, debe restablecer su contraseña !!</string>
+  <string name="you_must_reset_your_passsword">¡Error en el inicio de sesión, debe restablecer su contraseña!</string>
   <string name="title_for_media">MULTIMEDIA</string>
   <string name="title_for_child_classes">CLASES HIJAS</string>
   <string name="title_for_parent_classes">CLASES PADRES</string>
@@ -781,6 +783,20 @@
   <string name="storage_permissions_denied">Se denegaron los permisos de almacenamiento</string>
   <string name="unable_to_share_upload_item">No se puede compartir este elemento</string>
   <string name="permissions_are_required_for_functionality">Se requieren permisos para la funcionalidad</string>
+  <string name="location_updated">¡Ubicación actualizada!</string>
+  <string name="remove_location">Quitar ubicación</string>
+  <string name="remove_location_warning_title">Eliminar el aviso de ubicación</string>
+  <string name="remove_location_warning_desc">La ubicación hace que las imágenes sean más útiles y accesibles. ¿De verdad quieres eliminar la ubicación de esta foto?</string>
+  <string name="location_removed">¡Ubicación eliminada!</string>
+  <string name="invalid_login_message">Su sesión ha caducado. Inicie sesión de nuevo.</string>
+  <string name="no_application_available_to_open_gpx_files">No hay ninguna aplicación disponible para abrir archivos GPX</string>
+  <string name="file_saved_successfully">Guardado correctamente</string>
+  <string name="do_you_want_to_open_gpx_file">¿Quieres abrir el archivo GPX?</string>
+  <string name="do_you_want_to_open_kml_file">¿Quieres abrir el archivo KML?</string>
+  <string name="failed_to_save_kml_file">No se pudo guardar el archivo KML.</string>
+  <string name="failed_to_save_gpx_file">No se pudo guardar el archivo GPX.</string>
+  <string name="saving_kml_file">Guardar el archivo KML</string>
+  <string name="saving_gpx_file">Guardar archivo GPX</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d imagen seleccionada</item>
     <item quantity="other">%d imagenes seleccionadas</item>

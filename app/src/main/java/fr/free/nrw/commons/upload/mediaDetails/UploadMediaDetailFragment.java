@@ -2,13 +2,14 @@ package fr.free.nrw.commons.upload.mediaDetails;
 
 import static android.app.Activity.RESULT_OK;
 import static fr.free.nrw.commons.utils.ActivityUtils.startActivityWithFlags;
-import static fr.free.nrw.commons.utils.ImageUtils.FILE_NAME_EXISTS;
-import static fr.free.nrw.commons.utils.ImageUtils.getErrorMessageForResult;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.speech.RecognizerIntent;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -16,25 +17,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.graphics.drawable.Drawable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.exifinterface.media.ExifInterface;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import com.github.chrisbanes.photoview.PhotoView;
-import com.mapbox.mapboxsdk.camera.CameraPosition;
+import fr.free.nrw.commons.CameraPosition;
 import fr.free.nrw.commons.LocationPicker.LocationPicker;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.edit.EditActivity;
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.databinding.FragmentUploadMediaDetailFragmentBinding;
+import fr.free.nrw.commons.edit.EditActivity;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -51,6 +44,7 @@ import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.UploadMediaDetailAdapter;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ImageUtils;
+import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import java.io.File;
 import java.util.ArrayList;
@@ -59,9 +53,7 @@ import java.util.Locale;
 import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.apache.commons.lang3.StringUtils;
 import timber.log.Timber;
-import android.os.Parcelable;
 
 public class UploadMediaDetailFragment extends UploadBaseFragment implements
     UploadMediaDetailsContract.View, UploadMediaDetailAdapter.EventListener {
@@ -69,6 +61,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     private static final int REQUEST_CODE = 1211;
     private static final int REQUEST_CODE_FOR_EDIT_ACTIVITY = 1212;
     private static final int REQUEST_CODE_FOR_VOICE_INPUT = 1213;
+
+    public static Activity activity ;
+
+    private int indexOfFragment;
 
     /**
      * A key for applicationKvStore. By this key we can retrieve the location of last UploadItem ex.
@@ -81,34 +77,14 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     public static final String UPLOADABLE_FILE = "uploadable_file";
 
     public static final String UPLOAD_MEDIA_DETAILS = "upload_media_detail_adapter";
-    @BindView(R.id.tv_title)
-    TextView tvTitle;
-    @BindView(R.id.location_image_view)
-    ImageView locationImageView;
-    @BindView(R.id.location_text_view)
-    TextView locationTextView;
-    @BindView(R.id.ll_location_status)
-    LinearLayout llLocationStatus;
-    @BindView(R.id.ib_expand_collapse)
-    AppCompatImageButton ibExpandCollapse;
-    @BindView(R.id.ll_container_media_detail)
-    LinearLayout llContainerMediaDetail;
-    @BindView(R.id.rv_descriptions)
-    RecyclerView rvDescriptions;
-    @BindView(R.id.backgroundImage)
-    PhotoView photoViewBackgroundImage;
-    @BindView(R.id.btn_next)
-    AppCompatButton btnNext;
-    @BindView(R.id.btn_previous)
-    AppCompatButton btnPrevious;
-    @BindView(R.id.ll_edit_image)
-    LinearLayout llEditImage;
-    @BindView(R.id.tooltip)
-    ImageView tooltip;
+
+    /**
+     * True when user removes location from the current image
+     */
+    private boolean hasUserRemovedLocation;
+
 
     private UploadMediaDetailAdapter uploadMediaDetailAdapter;
-    @BindView(R.id.btn_copy_subsequent_media)
-    AppCompatButton btnCopyToSubsequentMedia;
 
     @Inject
     UploadMediaDetailsContract.UserActionListener presenter;
@@ -152,10 +128,17 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      */
     private UploadItem editableUploadItem;
 
+    private BasicKvStore basicKvStore;
+    
+    private final String keyForShowingAlertDialog = "isNoNetworkAlertDialogShowing";
+
     private UploadMediaDetailFragmentCallback callback;
+
+    private FragmentUploadMediaDetailFragmentBinding binding;
 
     public void setCallback(UploadMediaDetailFragmentCallback callback) {
         this.callback = callback;
+        UploadMediaPresenter.presenterCallback = callback;
     }
 
     @Override
@@ -182,65 +165,90 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
         @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_upload_media_detail_fragment, container, false);
+        binding = FragmentUploadMediaDetailFragmentBinding.inflate(inflater, container, false);
+        return binding.getRoot();
 
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
+
+        activity = getActivity();
+        basicKvStore = new BasicKvStore(activity, "CurrentUploadImageQualities");
 
         if (callback != null) {
+            indexOfFragment = callback.getIndexInViewFlipper(this);
             init();
         }
 
         if(savedInstanceState!=null){
-                if(uploadMediaDetailAdapter.getItems().size()==0){
+                if(uploadMediaDetailAdapter.getItems().size()==0 && callback != null){
                     uploadMediaDetailAdapter.setItems(savedInstanceState.getParcelableArrayList(UPLOAD_MEDIA_DETAILS));
-                    presenter.setUploadMediaDetails(uploadMediaDetailAdapter.getItems(), callback.getIndexInViewFlipper(this));
+                    presenter.setUploadMediaDetails(uploadMediaDetailAdapter.getItems(),
+                        indexOfFragment);
                 }
+        }
+
+        try {
+            if(!presenter.getImageQuality(indexOfFragment, inAppPictureLocation, getActivity())) {
+                startActivityWithFlags(
+                getActivity(), MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            }
+        } catch (Exception e) {
         }
 
     }
 
     private void init() {
-        tvTitle.setText(getString(R.string.step_count, callback.getIndexInViewFlipper(this) + 1,
+        if (binding == null) {
+            return;
+        }
+        binding.tvTitle.setText(getString(R.string.step_count, (indexOfFragment + 1),
             callback.getTotalNumberOfSteps(), getString(R.string.media_detail_step_title)));
-        tooltip.setOnClickListener(
+        binding.tooltip.setOnClickListener(
             v -> showInfoAlert(R.string.media_detail_step_title, R.string.media_details_tooltip));
         initPresenter();
         presenter.receiveImage(uploadableFile, place, inAppPictureLocation);
         initRecyclerView();
 
-        if (callback.getIndexInViewFlipper(this) == 0) {
-            btnPrevious.setEnabled(false);
-            btnPrevious.setAlpha(0.5f);
+        if (indexOfFragment == 0) {
+            binding.btnPrevious.setEnabled(false);
+            binding.btnPrevious.setAlpha(0.5f);
         } else {
-            btnPrevious.setEnabled(true);
-            btnPrevious.setAlpha(1.0f);
+            binding.btnPrevious.setEnabled(true);
+            binding.btnPrevious.setAlpha(1.0f);
         }
 
         // If the image EXIF data contains the location, show the map icon with a green tick
         if (inAppPictureLocation != null ||
                 (uploadableFile != null && uploadableFile.hasLocation())) {
             Drawable mapTick = getResources().getDrawable(R.drawable.ic_map_available_20dp);
-            locationImageView.setImageDrawable(mapTick);
-            locationTextView.setText(R.string.edit_location);
+            binding.locationImageView.setImageDrawable(mapTick);
+            binding.locationTextView.setText(R.string.edit_location);
         } else {
             // Otherwise, show the map icon with a red question mark
             Drawable mapQuestionMark =
                 getResources().getDrawable(R.drawable.ic_map_not_available_20dp);
-            locationImageView.setImageDrawable(mapQuestionMark);
-            locationTextView.setText(R.string.add_location);
+            binding.locationImageView.setImageDrawable(mapQuestionMark);
+            binding.locationTextView.setText(R.string.add_location);
         }
 
         //If this is the last media, we have nothing to copy, lets not show the button
-        if (callback.getIndexInViewFlipper(this) == callback.getTotalNumberOfSteps() - 4) {
-            btnCopyToSubsequentMedia.setVisibility(View.GONE);
+        if (indexOfFragment == callback.getTotalNumberOfSteps() - 4) {
+            binding.btnCopySubsequentMedia.setVisibility(View.GONE);
         } else {
-            btnCopyToSubsequentMedia.setVisibility(View.VISIBLE);
+            binding.btnCopySubsequentMedia.setVisibility(View.VISIBLE);
         }
+
+        binding.btnNext.setOnClickListener(v -> onNextButtonClicked());
+        binding.btnPrevious.setOnClickListener(v -> onPreviousButtonClicked());
+        binding.llEditImage.setOnClickListener(v -> onEditButtonClicked());
+        binding.llContainerTitle.setOnClickListener(v -> onLlContainerTitleClicked());
+        binding.llLocationStatus.setOnClickListener(v -> onIbMapClicked());
+        binding.btnCopySubsequentMedia.setOnClickListener(v -> onButtonCopyTitleDescToSubsequentMedia());
+
 
         attachImageViewScaleChangeListener();
     }
@@ -249,7 +257,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * Attaches the scale change listener to the image view
      */
     private void attachImageViewScaleChangeListener() {
-        photoViewBackgroundImage.setOnScaleChangeListener(
+        binding.backgroundImage.setOnScaleChangeListener(
             (scaleFactor, focusX, focusY) -> {
                 //Whenever the uses plays with the image, lets collapse the media detail container
                 //only if it is not already collapsed, which resolves flickering of arrow
@@ -274,8 +282,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             defaultKvStore.getString(Prefs.DESCRIPTION_LANGUAGE, ""), recentLanguagesDao);
         uploadMediaDetailAdapter.setCallback(this::showInfoAlert);
         uploadMediaDetailAdapter.setEventListener(this);
-        rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvDescriptions.setAdapter(uploadMediaDetailAdapter);
+        binding.rvDescriptions.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rvDescriptions.setAdapter(uploadMediaDetailAdapter);
     }
 
     /**
@@ -288,24 +296,23 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             getString(messageStringId), getString(android.R.string.ok), null, true);
     }
 
-    @OnClick(R.id.btn_next)
+
     public void onNextButtonClicked() {
-        boolean isValidUploads = presenter.verifyImageQuality(callback.getIndexInViewFlipper(this), inAppPictureLocation);
-        if (!isValidUploads) {
-            startActivityWithFlags(
-                getActivity(), MainActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
-                Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        if (callback == null) {
+            return;
         }
+        presenter.displayLocDialog(indexOfFragment, inAppPictureLocation, hasUserRemovedLocation);
     }
 
-    @OnClick(R.id.btn_previous)
     public void onPreviousButtonClicked() {
-        callback.onPreviousButtonClicked(callback.getIndexInViewFlipper(this));
+        if (callback == null) {
+            return;
+        }
+        callback.onPreviousButtonClicked(indexOfFragment);
     }
 
-    @OnClick(R.id.ll_edit_image)
     public void onEditButtonClicked() {
-        presenter.onEditButtonClicked(callback.getIndexInViewFlipper(this));
+        presenter.onEditButtonClicked(indexOfFragment);
     }
     @Override
     public void showSimilarImageFragment(String originalFilePath, String possibleFilePath,
@@ -318,7 +325,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 public void onPositiveResponse() {
                     Timber.d("positive response from similar image fragment");
                     presenter.useSimilarPictureCoordinates(similarImageCoordinates,
-                        callback.getIndexInViewFlipper(UploadMediaDetailFragment.this));
+                        indexOfFragment);
 
                     // set the description text when user selects to use coordinate from the other image
                     // which was taken within 120s
@@ -343,7 +350,10 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @Override
     public void onImageProcessed(UploadItem uploadItem, Place place) {
-        photoViewBackgroundImage.setImageURI(uploadItem.getMediaUri());
+        if (binding == null) {
+            return;
+        }
+        binding.backgroundImage.setImageURI(uploadItem.getMediaUri());
     }
 
     /**
@@ -356,12 +366,17 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         nearbyPlace = place;
         this.uploadItem = uploadItem;
         showNearbyFound = true;
-        if (callback.getIndexInViewFlipper(this) == 0) {
+        if (callback == null) {
+            return;
+        }
+        if (indexOfFragment == 0) {
             if (UploadActivity.nearbyPopupAnswers.containsKey(nearbyPlace)) {
                 final boolean response = UploadActivity.nearbyPopupAnswers.get(nearbyPlace);
                 if (response) {
-                    presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace,
-                        callback.getIndexInViewFlipper(this));
+                    if (callback != null) {
+                        presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace,
+                            indexOfFragment);
+                    }
                 }
             } else {
                 showNearbyPlaceFound(nearbyPlace);
@@ -387,7 +402,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 place.getName()),
             () -> {
                 UploadActivity.nearbyPopupAnswers.put(place, true);
-                presenter.onUserConfirmedUploadIsOfPlace(place, callback.getIndexInViewFlipper(this));
+                presenter.onUserConfirmedUploadIsOfPlace(place, indexOfFragment);
             },
             () -> {
                 UploadActivity.nearbyPopupAnswers.put(place, false);
@@ -397,12 +412,18 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
     @Override
     public void showProgress(boolean shouldShow) {
+        if (callback == null) {
+            return;
+        }
         callback.showProgress(shouldShow);
     }
 
     @Override
     public void onImageValidationSuccess() {
-        callback.onNextButtonClicked(callback.getIndexInViewFlipper(this));
+        if (callback == null) {
+            return;
+        }
+        callback.onNextButtonClicked(indexOfFragment);
     }
 
     /**
@@ -411,13 +432,16 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     @Override
     protected void onBecameVisible() {
         super.onBecameVisible();
-        presenter.fetchTitleAndDescription(callback.getIndexInViewFlipper(this));
+        if (callback == null) {
+            return;
+        }
+        presenter.fetchTitleAndDescription(indexOfFragment);
         if (showNearbyFound) {
             if (UploadActivity.nearbyPopupAnswers.containsKey(nearbyPlace)) {
                 final boolean response = UploadActivity.nearbyPopupAnswers.get(nearbyPlace);
                 if (response) {
                     presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace,
-                        callback.getIndexInViewFlipper(this));
+                        indexOfFragment);
                 }
             } else {
                 showNearbyPlaceFound(nearbyPlace);
@@ -463,51 +487,70 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 false);
         } else {
             uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
-            // Calling below, instead of onNextButtonClicked() to not show locationDialog twice
             onImageValidationSuccess();
         }
     }
 
+    /**
+     * Shows a dialog alerting the user that internet connection is required for upload process
+     * Does nothing if there is network connectivity and then the user presses okay
+     */
     @Override
-    public void showBadImagePopup(Integer errorCode,
-        UploadItem uploadItem) {
-        String errorMessageForResult = getErrorMessageForResult(getContext(), errorCode);
-        if (!StringUtils.isBlank(errorMessageForResult)) {
-            DialogUtil.showAlertDialog(getActivity(),
-                getString(R.string.upload_problem_image),
-                errorMessageForResult,
-                getString(R.string.upload),
-                getString(R.string.cancel),
-                () -> {
-                    /*
-                        User skipped the warning of low quality image, so we call
-                        onImageValidationSuccess rather than onNextButtonClicked to avoid showing
-                        other warning popups again.
-                    */
-
-                    // validate image only when same file name error does not occur
-                    // show the same file name error if exists.
-                    // If image with same file name exists check the bit in errorCode is set or not
-                    if ((errorCode & FILE_NAME_EXISTS) != 0) {
-                        Timber.d("Trying to show duplicate picture popup");
-                        showDuplicatePicturePopup(uploadItem);
-                    } else {
-                        uploadItem.setImageQuality(ImageUtils.IMAGE_KEEP);
-                        onImageValidationSuccess();
-                    }
-                },
-                () -> deleteThisPicture()
-            );
-        }
-        //If the error message is null, we will probably not show anything
-    }
-
-    @Override
-    public void showConnectionErrorPopup() {
+    public void showConnectionErrorPopupForCaptionCheck() {
         DialogUtil.showAlertDialog(getActivity(),
             getString(R.string.upload_connection_error_alert_title),
-            getString(R.string.upload_connection_error_alert_detail), getString(R.string.ok),
-            () -> {}, true);
+            getString(R.string.upload_connection_error_alert_detail),
+            getString(R.string.ok),
+            getString(R.string.cancel_upload),
+            () -> {
+                if (!NetworkUtils.isInternetConnectionEstablished(activity)) {
+                    showConnectionErrorPopupForCaptionCheck();
+                }
+            },
+            () -> {
+                activity.finish();
+            });
+    }
+
+    /**
+     * Shows a dialog alerting the user that internet connection is required for upload process
+     * Recalls UploadMediaPresenter.getImageQuality for all the next upload items,
+     * if there is network connectivity and then the user presses okay
+     */
+    @Override
+    public void showConnectionErrorPopup() {
+        try {
+            boolean FLAG_ALERT_DIALOG_SHOWING = basicKvStore.getBoolean(
+                keyForShowingAlertDialog, false);
+            if (!FLAG_ALERT_DIALOG_SHOWING) {
+                basicKvStore.putBoolean(keyForShowingAlertDialog, true);
+                DialogUtil.showAlertDialog(getActivity(),
+                    getString(R.string.upload_connection_error_alert_title),
+                    getString(R.string.upload_connection_error_alert_detail),
+                    getString(R.string.ok),
+                    getString(R.string.cancel_upload),
+                    () -> {
+                        basicKvStore.putBoolean(keyForShowingAlertDialog, false);
+                        if (NetworkUtils.isInternetConnectionEstablished(activity)) {
+                            int sizeOfUploads = basicKvStore.getInt(
+                                UploadActivity.keyForCurrentUploadImagesSize);
+                            for (int i = indexOfFragment; i < sizeOfUploads; i++) {
+                                presenter.getImageQuality(i, inAppPictureLocation, activity);
+                            }
+                        } else {
+                            showConnectionErrorPopup();
+                        }
+                    },
+                    () -> {
+                        basicKvStore.putBoolean(keyForShowingAlertDialog, false);
+                        activity.finish();
+                    },
+                    null,
+                    false
+                );
+            }
+        } catch (Exception e) {
+        }
     }
 
     @Override
@@ -555,10 +598,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             defaultLongitude = uploadItem.getGpsCoords().getDecLongitude();
             defaultZoom = uploadItem.getGpsCoords().getZoomLevel();
             startActivityForResult(new LocationPicker.IntentBuilder()
-                .defaultLocation(new CameraPosition.Builder()
-                    .target(
-                        new com.mapbox.mapboxsdk.geometry.LatLng(defaultLatitude, defaultLongitude))
-                    .zoom(defaultZoom).build())
+                .defaultLocation(new CameraPosition(defaultLatitude,defaultLongitude,defaultZoom))
                 .activityKey("UploadActivity")
                 .build(getActivity()), REQUEST_CODE);
         } else {
@@ -572,10 +612,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 defaultZoom = Double.parseDouble(defaultKvStore.getString(LAST_ZOOM));
             }
             startActivityForResult(new LocationPicker.IntentBuilder()
-                .defaultLocation(new CameraPosition.Builder()
-                    .target(
-                        new com.mapbox.mapboxsdk.geometry.LatLng(defaultLatitude, defaultLongitude))
-                    .zoom(defaultZoom).build())
+                .defaultLocation(new CameraPosition(defaultLatitude,defaultLongitude,defaultZoom))
                 .activityKey("NoLocationUploadActivity")
                 .build(getActivity()), REQUEST_CODE);
         }
@@ -598,19 +635,20 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
             if (cameraPosition != null) {
 
-                final String latitude = String.valueOf(cameraPosition.target.getLatitude());
-                final String longitude = String.valueOf(cameraPosition.target.getLongitude());
-                final double zoom = cameraPosition.zoom;
+                final String latitude = String.valueOf(cameraPosition.getLatitude());
+                final String longitude = String.valueOf(cameraPosition.getLongitude());
+                final double zoom = cameraPosition.getZoom();
 
                 editLocation(latitude, longitude, zoom);
-                /*
-                       If isMissingLocationDialog is true, it means that the user has already tapped the
-                       "Next" button, so go directly to the next step.
-                 */
+                // If isMissingLocationDialog is true, it means that the user has already tapped the
+                // "Next" button, so go directly to the next step.
                 if (isMissingLocationDialog) {
                     isMissingLocationDialog = false;
                     onNextButtonClicked();
                 }
+            } else {
+                // If camera position is null means location is removed by the user
+                removeLocation();
             }
         }
         if (requestCode == REQUEST_CODE_FOR_EDIT_ACTIVITY && resultCode == RESULT_OK) {
@@ -621,9 +659,11 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 return;
             }
             try {
-                photoViewBackgroundImage.setImageURI(Uri.fromFile(new File(result)));
+                if (binding != null){
+                    binding.backgroundImage.setImageURI(Uri.fromFile(new File(result)));
+                }
                 editableUploadItem.setContentUri(Uri.fromFile(new File(result)));
-                callback.changeThumbnail(callback.getIndexInViewFlipper(this),
+                callback.changeThumbnail(indexOfFragment,
                     result);
             } catch (Exception e) {
                 Timber.e(e);
@@ -637,6 +677,46 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             }else {
                 Timber.e("Error %s", resultCode);
             }
+        }
+    }
+
+    /**
+     * Removes the location data from the image, by setting them to null
+     */
+    public void removeLocation() {
+        editableUploadItem.getGpsCoords().setDecimalCoords(null);
+        try {
+            ExifInterface sourceExif = new ExifInterface(uploadableFile.getFilePath());
+            String[] exifTags = {
+                ExifInterface.TAG_GPS_LATITUDE,
+                ExifInterface.TAG_GPS_LATITUDE_REF,
+                ExifInterface.TAG_GPS_LONGITUDE,
+                ExifInterface.TAG_GPS_LONGITUDE_REF,
+            };
+
+            for (String tag : exifTags) {
+                sourceExif.setAttribute(tag, null);
+            }
+            sourceExif.saveAttributes();
+
+            Drawable mapQuestion = getResources().getDrawable(R.drawable.ic_map_not_available_20dp);
+
+            if (binding != null) {
+                binding.locationImageView.setImageDrawable(mapQuestion);
+                binding.locationTextView.setText(R.string.add_location);
+            }
+
+            editableUploadItem.getGpsCoords().setDecLatitude(0.0);
+            editableUploadItem.getGpsCoords().setDecLongitude(0.0);
+            editableUploadItem.getGpsCoords().setImageCoordsExists(false);
+            hasUserRemovedLocation = true;
+
+            Toast.makeText(getContext(), getString(R.string.location_removed), Toast.LENGTH_LONG)
+                .show();
+        } catch (Exception e) {
+            Timber.d(e);
+            Toast.makeText(getContext(), "Location could not be removed due to internal error",
+                Toast.LENGTH_LONG).show();
         }
     }
 
@@ -655,10 +735,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
         // Replace the map icon using the one with a green tick
         Drawable mapTick = getResources().getDrawable(R.drawable.ic_map_available_20dp);
-        locationImageView.setImageDrawable(mapTick);
-        locationTextView.setText(R.string.edit_location);
 
-        Toast.makeText(getContext(), "Location Updated", Toast.LENGTH_LONG).show();
+        if (binding != null) {
+            binding.locationImageView.setImageDrawable(mapTick);
+            binding.locationTextView.setText(R.string.edit_location);
+        }
+
+        Toast.makeText(getContext(), getString(R.string.location_updated), Toast.LENGTH_LONG).show();
 
     }
 
@@ -708,17 +791,12 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             onSkipClicked);
     }
 
-    private void deleteThisPicture() {
-        callback.deletePictureAtIndex(callback.getIndexInViewFlipper(this));
-    }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         presenter.onDetachView();
     }
 
-    @OnClick(R.id.ll_container_title)
     public void onLlContainerTitleClicked() {
         expandCollapseLlMediaDetail(!isExpanded);
     }
@@ -728,23 +806,32 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
      * @param shouldExpand
      */
     private void expandCollapseLlMediaDetail(boolean shouldExpand){
-        llContainerMediaDetail.setVisibility(shouldExpand ? View.VISIBLE : View.GONE);
+        if (binding == null) {
+            return;
+        }
+        binding.llContainerMediaDetail.setVisibility(shouldExpand ? View.VISIBLE : View.GONE);
         isExpanded = !isExpanded;
-        ibExpandCollapse.setRotation(ibExpandCollapse.getRotation() + 180);
+        binding.ibExpandCollapse.setRotation(binding.ibExpandCollapse.getRotation() + 180);
     }
 
-    @OnClick(R.id.ll_location_status) public void onIbMapClicked() {
-        presenter.onMapIconClicked(callback.getIndexInViewFlipper(this));
+    public void onIbMapClicked() {
+        if (callback == null) {
+            return;
+        }
+        presenter.onMapIconClicked(indexOfFragment);
     }
 
     @Override
     public void onPrimaryCaptionTextChange(boolean isNotEmpty) {
-        btnCopyToSubsequentMedia.setEnabled(isNotEmpty);
-        btnCopyToSubsequentMedia.setClickable(isNotEmpty);
-        btnCopyToSubsequentMedia.setAlpha(isNotEmpty ? 1.0f : 0.5f);
-        btnNext.setEnabled(isNotEmpty);
-        btnNext.setClickable(isNotEmpty);
-        btnNext.setAlpha(isNotEmpty ? 1.0f : 0.5f);
+        if (binding == null) {
+            return;
+        }
+        binding.btnCopySubsequentMedia.setEnabled(isNotEmpty);
+        binding.btnCopySubsequentMedia.setClickable(isNotEmpty);
+        binding.btnCopySubsequentMedia.setAlpha(isNotEmpty ? 1.0f : 0.5f);
+        binding.btnNext.setEnabled(isNotEmpty);
+        binding.btnNext.setClickable(isNotEmpty);
+        binding.btnNext.setAlpha(isNotEmpty ? 1.0f : 0.5f);
     }
 
     /**
@@ -755,7 +842,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         UploadMediaDetail uploadMediaDetail = new UploadMediaDetail();
         uploadMediaDetail.setManuallyAdded(true);//This was manually added by the user
         uploadMediaDetailAdapter.addDescription(uploadMediaDetail);
-        rvDescriptions.smoothScrollToPosition(uploadMediaDetailAdapter.getItemCount()-1);
+        binding.rvDescriptions.smoothScrollToPosition(uploadMediaDetailAdapter.getItemCount()-1);
     }
 
     public interface UploadMediaDetailFragmentCallback extends Callback {
@@ -766,9 +853,8 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
     }
 
 
-    @OnClick(R.id.btn_copy_subsequent_media)
     public void onButtonCopyTitleDescToSubsequentMedia(){
-        presenter.copyTitleAndDescriptionToSubsequentMedia(callback.getIndexInViewFlipper(this));
+        presenter.copyTitleAndDescriptionToSubsequentMedia(indexOfFragment);
         Toast.makeText(getContext(), getResources().getString(R.string.copied_successfully), Toast.LENGTH_SHORT).show();
     }
 
@@ -785,5 +871,9 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         }
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
+    }
 }

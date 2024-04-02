@@ -196,11 +196,21 @@ public class UploadRepository {
     /**
      * query the RemoteDataSource for image quality
      *
-     * @param uploadItem
-     * @return
+     * @param uploadItem UploadItem whose caption is to be checked
+     * @return Quality of UploadItem
      */
     public Single<Integer> getImageQuality(UploadItem uploadItem, LatLng location) {
         return uploadModel.getImageQuality(uploadItem, location);
+    }
+
+    /**
+     * query the RemoteDataSource for caption quality
+     *
+     * @param uploadItem UploadItem whose caption is to be checked
+     * @return Quality of caption of the UploadItem
+     */
+    public Single<Integer> getCaptionQuality(UploadItem uploadItem) {
+        return uploadModel.getCaptionQuality(uploadItem);
     }
 
     /**
@@ -345,6 +355,7 @@ public class UploadRepository {
 
     /**
      * Returns nearest place matching the passed latitude and longitude
+     *
      * @param decLatitude
      * @param decLongitude
      * @return
@@ -354,11 +365,11 @@ public class UploadRepository {
         try {
             final List<Place> fromWikidataQuery = nearbyPlaces.getFromWikidataQuery(new LatLng(
                     decLatitude, decLongitude, 0.0f),
-                    Locale.getDefault().getLanguage(),
-                    NEARBY_RADIUS_IN_KILO_METERS, false, null);
+                Locale.getDefault().getLanguage(),
+                NEARBY_RADIUS_IN_KILO_METERS, null);
             return (fromWikidataQuery != null && fromWikidataQuery.size() > 0) ? fromWikidataQuery
                 .get(0) : null;
-        }catch (final Exception e) {
+        } catch (final Exception e) {
             Timber.e("Error fetching nearby places: %s", e.getMessage());
             return null;
         }

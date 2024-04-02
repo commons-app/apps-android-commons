@@ -37,10 +37,10 @@
   <string name="signup">खाता खाेल्नुहाेस्</string>
   <string name="logging_in_title">प्रवेश गर्दै</string>
   <string name="logging_in_message">कृपया प्रतीक्षा गर्नुहोस् …</string>
-  <string name="login_success">प्रवेश सफल!</string>
-  <string name="login_failed">प्रवेश सफल हुन सकेन!</string>
+  <string name="login_success" fuzzy="true">प्रवेश सफल!</string>
+  <string name="login_failed" fuzzy="true">प्रवेश सफल हुन सकेन!</string>
   <string name="upload_failed">चित्र भेटिएन। कृपया अर्को चित्र प्रयास गर्नुहोस्।</string>
-  <string name="authentication_failed">प्रमाणिकरण असफल भयो, कृपया पुनः प्रवेश गर्नुहोस्!</string>
+  <string name="authentication_failed" fuzzy="true">प्रमाणिकरण असफल भयो, कृपया पुनः प्रवेश गर्नुहोस्!</string>
   <string name="uploading_started">उर्ध्वभरण सुरू भयो!</string>
   <string name="upload_completed_notification_title">%1$s उर्ध्वभरण गरियो !</string>
   <string name="upload_completed_notification_text">तपाईको उर्ध्वभरण हेर्नको लागि ट्याप गर्नुहोस्</string>
@@ -62,11 +62,11 @@
   <string name="menu_view_file_page">चित्र पृष्ठ हेर्नुहोस्</string>
   <string name="share_title_hint" fuzzy="true">शीर्षक (आवश्यक)</string>
   <string name="share_description_hint">वर्णन</string>
-  <string name="login_failed_network">प्रवेश गर्न असमर्थ - जडान खराबी</string>
+  <string name="login_failed_network" fuzzy="true">प्रवेश गर्न असमर्थ - जडान खराबी</string>
   <string name="login_failed_throttled">धेरै असफल प्रयासहरू भए। कृपया केही मिनेट पछि पुन: प्रयास गर्नुहोस</string>
   <string name="login_failed_blocked">माफ गर्नुहोस, यो प्रयोगकर्तालाई कमन्समा प्रतिबन्ध गरिएको छ</string>
   <string name="login_failed_2fa_needed">तपाईंले आफ्नो दुई कारक प्रमाणीकरण अङ्क प्रदान गर्नुपर्नेछ।</string>
-  <string name="login_failed_generic">प्रवेश सफल हुन सकेन</string>
+  <string name="login_failed_generic" fuzzy="true">प्रवेश सफल हुन सकेन</string>
   <string name="share_upload_button">उर्ध्वभरण गर्ने</string>
   <string name="multiple_share_base_title">यो सेटलाई नाम दिनुहोस्</string>
   <string name="provider_modifications">परिवर्तनहरू</string>

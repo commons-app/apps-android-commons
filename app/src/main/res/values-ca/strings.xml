@@ -59,10 +59,10 @@
   <string name="signup">Registre</string>
   <string name="logging_in_title">S’està iniciant la sessió</string>
   <string name="logging_in_message">Espereu…</string>
-  <string name="login_success">S\'ha iniciat sessió correctament!</string>
-  <string name="login_failed">Error en iniciar la sessió!</string>
+  <string name="login_success" fuzzy="true">S\'ha iniciat sessió correctament!</string>
+  <string name="login_failed" fuzzy="true">Error en iniciar la sessió!</string>
   <string name="upload_failed">No s\'ha trobat el fitxer. Proveu-ho amb un altre fitxer.</string>
-  <string name="authentication_failed">L’autenticació ha fallat. Torneu a provar d’iniciar una sessió.</string>
+  <string name="authentication_failed" fuzzy="true">L’autenticació ha fallat. Torneu a provar d’iniciar una sessió.</string>
   <string name="uploading_started">Ha començat la càrrega!</string>
   <string name="upload_completed_notification_title">S’ha pujat %1$s.</string>
   <string name="upload_completed_notification_text">Prem per veure la teva càrrega</string>
@@ -85,11 +85,11 @@
   <string name="share_title_hint">Llegenda (obligatori)</string>
   <string name="share_description_hint">Descripció</string>
   <string name="share_caption_hint">Llegenda</string>
-  <string name="login_failed_network">No s\'ha pogut iniciar la sessió – error de xarxa</string>
+  <string name="login_failed_network" fuzzy="true">No s\'ha pogut iniciar la sessió – error de xarxa</string>
   <string name="login_failed_throttled">Massa intents erronis – Proveu-ho de nou d\'aquí uns minuts.</string>
   <string name="login_failed_blocked">Ho sentim, aquest usuari ha estat blocat a Commons</string>
   <string name="login_failed_2fa_needed">Heu de proporcionar el vostre codi d\'autenticació de dos factors.</string>
-  <string name="login_failed_generic">Ha fallat l\'inici de sessió</string>
+  <string name="login_failed_generic" fuzzy="true">Ha fallat l\'inici de sessió</string>
   <string name="share_upload_button">Carrega</string>
   <string name="multiple_share_base_title">Anomena aquest conjunt</string>
   <string name="provider_modifications">Modificacions</string>
@@ -229,7 +229,7 @@
   <string name="nominated_see_more">Vegeu la pàgina web per a més detalls</string>
   <string name="skip_login">Omet</string>
   <string name="navigation_item_login">Inicia una sessió</string>
-  <string name="skip_login_title">Realment voleu ometre l\'inici de sessió?</string>
+  <string name="skip_login_title" fuzzy="true">Realment voleu ometre l\'inici de sessió?</string>
   <string name="skip_login_message">Caldrà que inicieu una sessió per carregar imatges en un futur.</string>
   <string name="login_alert_message">Inicieu una sessió per utilitzar aquesta característica</string>
   <string name="copy_wikicode">Copia el wikitext al portaretalls</string>
@@ -283,7 +283,7 @@
   <string name="result">Resultat</string>
   <string name="selfie_answer">Les autofotos no tenen molt valor enciclopèdic. No carregueu una foto vostra a menys que ja tingueu un article vostre a la Viquipèdia.</string>
   <string name="warning_for_no_answer">Seleccioneu una de les dues opcions per a respondre la pregunta</string>
-  <string name="user_not_logged_in">La sessió ha expirat. Torneu a iniciar la sessió.</string>
+  <string name="user_not_logged_in" fuzzy="true">La sessió ha expirat. Torneu a iniciar la sessió.</string>
   <string name="quiz_result_share_message">Compartiu el vostre qüestionari amb els amics!</string>
   <string name="continue_message">Continua</string>
   <string name="correct">Resposta correcta</string>
@@ -425,7 +425,7 @@
   <string name="place_state_needs_photo">Cal una foto</string>
   <string name="place_type">Tipus de lloc:</string>
   <string name="nearby_search_hint">Pont, museu, hotel, etc.</string>
-  <string name="you_must_reset_your_passsword">Quelcom ha fallat amb la vostra sessió. Reinicieu la vostra contrasenya!!</string>
+  <string name="you_must_reset_your_passsword" fuzzy="true">Quelcom ha fallat amb la vostra sessió. Reinicieu la vostra contrasenya!!</string>
   <string name="title_app_shortcut_setting">Paràmetres</string>
   <string name="theme_default_name">Seguir el sistema</string>
   <string name="theme_dark_name">Fosc</string>
