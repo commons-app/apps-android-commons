@@ -28,6 +28,7 @@
 * Tacsipacsi
 * ThisCarthing
 * Tobi 406
+* TomatoCake
 * Twistqj
 * Ubahnverleih
 * Umherirrender
@@ -107,13 +108,13 @@
   <string name="logging_in_message">Bitte warten …</string>
   <string name="updating_caption_title">Überschriften und Beschreibungen aktualisieren</string>
   <string name="updating_caption_message">Bitte warten …</string>
-  <string name="login_success" fuzzy="true">Anmeldung erfolgreich!</string>
-  <string name="login_failed" fuzzy="true">Anmeldung fehlgeschlagen!</string>
+  <string name="login_success">Anmeldung erfolgreich!</string>
+  <string name="login_failed">Anmeldung fehlgeschlagen!</string>
   <string name="upload_failed">Datei nicht gefunden. Bitte versuche es mit einer anderen Datei.</string>
   <string name="retry_limit_reached">Maximales Wiederholungslimit erreicht! Bitte brich den Upload ab und versuche es erneut</string>
   <string name="unrestricted_battery_mode">Batterieoptimierung ausschalten?</string>
   <string name="suggest_unrestricted_mode">Das Hochladen von mehr als 3 Bildern funktioniert zuverlässiger, wenn die Batterieoptimierung ausgeschaltet ist. Bitte schalten Sie die Batterieoptimierung für die Commons-App in den Einstellungen aus, um ein reibungsloses Upload-Erlebnis zu gewährleisten. \n\nMögliche Schritte zum Ausschalten der Batterieoptimierung:\n\nSchritt 1: Tippen Sie unten auf die Schaltfläche „Einstellungen“.\n\nSchritt 2: Wechseln Sie von „Nicht optimiert“ zu „Alle“. apps‘.\n\nSchritt 3: Suchen Sie nach „Commons“ oder „fr.free.nrw.commons“.\n\nSchritt 4: Tippen Sie darauf und wählen Sie „Nicht optimieren“.\n\nSchritt 5: Klicken Sie auf „Fertig“.</string>
-  <string name="authentication_failed" fuzzy="true">Authentifizierung fehlgeschlagen. Bitte erneut anmelden.</string>
+  <string name="authentication_failed">Authentifizierung fehlgeschlagen. Bitte erneut anmelden.</string>
   <string name="uploading_started">Hochladen gestartet!</string>
   <string name="uploading_queued">Hochladen in Warteschlange (eingeschränkter Verbindungsmodus aktiviert)</string>
   <string name="upload_completed_notification_title">„%1$s“ hochgeladen!</string>
@@ -140,11 +141,11 @@
   <string name="add_caption_toast">Bitte gib einen Titel für diese Datei an</string>
   <string name="share_description_hint">Beschreibung</string>
   <string name="share_caption_hint">Beschriftung</string>
-  <string name="login_failed_network" fuzzy="true">Anmeldung fehlgeschlagen – Netzwerkfehler</string>
+  <string name="login_failed_network">Anmeldung fehlgeschlagen – Netzwerkfehler</string>
   <string name="login_failed_throttled">Zu viele erfolglose Versuche. Bitte in einigen Minuten erneut versuchen.</string>
   <string name="login_failed_blocked">Dieser Benutzer wurde leider auf Commons gesperrt</string>
   <string name="login_failed_2fa_needed">Du musst deinen Code zur Zwei-Faktor-Authentifizierung angeben.</string>
-  <string name="login_failed_generic" fuzzy="true">Anmeldung fehlgeschlagen</string>
+  <string name="login_failed_generic">Anmeldung fehlgeschlagen</string>
   <string name="share_upload_button">Hochladen</string>
   <string name="multiple_share_base_title">Benenne dieses Set</string>
   <string name="provider_modifications">Anpassungen</string>
@@ -268,6 +269,7 @@
   <string name="navigation_item_about">Über</string>
   <string name="navigation_item_settings">Einstellungen</string>
   <string name="navigation_item_feedback">Rückmeldungen</string>
+  <string name="navigation_item_feedback_github">Feedback über GitHub</string>
   <string name="navigation_item_logout">Abmelden</string>
   <string name="navigation_item_info">Anleitung</string>
   <string name="navigation_item_notification">Benachrichtigungen</string>
@@ -301,7 +303,7 @@
   <string name="nominated_see_more">Siehe die Webseite für Einzelheiten</string>
   <string name="skip_login">Überspringen</string>
   <string name="navigation_item_login">Anmelden</string>
-  <string name="skip_login_title" fuzzy="true">Möchtest du wirklich die Anmeldung überspringen?</string>
+  <string name="skip_login_title">Möchtest du wirklich die Anmeldung überspringen?</string>
   <string name="skip_login_message">Du wirst dich anmelden müssen, um in Zukunft Bilder hochladen zu können.</string>
   <string name="login_alert_message">Bitte melde dich an, um diese Funktion zu nutzen.</string>
   <string name="copy_wikicode">Den Wikitext in die Zwischenablage kopieren</string>
@@ -368,7 +370,7 @@
   <string name="construction_event_answer">Bilder, die Technik oder Kultur zeigen, sind auf Commons sehr willkommen.</string>
   <string name="congratulatory_message_quiz">%1$s deiner Antworten waren korrekt. Glückwunsch!</string>
   <string name="warning_for_no_answer">Wähle eine der zwei Optionen aus, um die Frage zu beantworten.</string>
-  <string name="user_not_logged_in" fuzzy="true">Sitzung abgelaufen. Bitte erneut anmelden.</string>
+  <string name="user_not_logged_in">Sitzung abgelaufen. Bitte erneut anmelden.</string>
   <string name="quiz_result_share_message">Teile das Quiz mit deinen Freunden!</string>
   <string name="continue_message">Fortfahren</string>
   <string name="correct">Richtige Antwort</string>
@@ -377,6 +379,7 @@
   <string name="share_app_title">App teilen</string>
   <string name="rotate">Drehen</string>
   <string name="error_fetching_nearby_places">Fehler beim Abrufen der Orte in der Nähe.</string>
+  <string name="no_pictures_in_this_area">Keine Bilder in diesem Bereich</string>
   <string name="no_nearby_places_around">Keine Orte in der Nähe gefunden</string>
   <string name="error_fetching_nearby_monuments">Fehler beim Abrufen von Denkmälern in der Nähe.</string>
   <string name="no_recent_searches">Keine letzten Suchanfragen</string>
@@ -451,7 +454,7 @@
   <string name="never_ask_again">Nicht erneut fragen</string>
   <string name="display_location_permission_title">Standortberechtigung anfragen</string>
   <string name="display_location_permission_explanation">Anfrage für eine Standortberechtigung, die für die Nachbarbenachrichtigungskartenansichtsfunktion erforderlich ist.</string>
-  <string name="achievements_fetch_failed" fuzzy="true">Etwas ist schiefgelaufen. Wir konnten deine Errungenschaften nicht abrufen.</string>
+  <string name="achievements_fetch_failed">Etwas ist schiefgelaufen. Wir konnten keine Erfolge abrufen</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Du hast so viele Beiträge geleistet, dass unser Leistungsberechnungssystem damit nicht zurechtkommt. Dies ist die ultimative Leistung.</string>
   <string name="ends_on">Endet am:</string>
   <string name="display_campaigns">Kampagnen anzeigen</string>
@@ -467,7 +470,7 @@
   <string name="open_document_photo_picker_explanation">Bei der neuen Android-Fotoauswahl besteht die Gefahr, dass Standortinformationen verloren gehen. Aktivieren Sie diese Option, wenn Sie sie anscheinend verwenden.</string>
   <string name="location_loss_warning">Wenn Sie dies deaktivieren, wird möglicherweise die neue Android-Fotoauswahl aktiviert. Es besteht die Gefahr, dass Standortinformationen verloren gehen.\n\nTippen Sie auf „Weitere Informationen“, um weitere Informationen zu erhalten.</string>
   <string name="nearby_campaign_dismiss_message">Du wirst die Kampagnen nicht mehr sehen. Du kannst dennoch diese Benachrichtigung in den Einstellungen erneut aktivieren, falls du dies möchtest.</string>
-  <string name="this_function_needs_network_connection" fuzzy="true">Diese Funktion erfordert eine Netzwerkverbindung. Bitte überprüfe deine Verbindungseinstellungen.</string>
+  <string name="this_function_needs_network_connection">Diese Funktion erfordert eine Netzwerkverbindung. Bitte überprüfe deine Verbindungseinstellungen.</string>
   <string name="error_processing_image">Bei der Verarbeitung des Bildes ist ein Fehler aufgetreten. Bitte erneut versuchen!</string>
   <string name="getting_edit_token">Token zur Bearbeitung abrufen</string>
   <string name="check_category_adding_template">Vorlage zur Kategorieprüfung hinzufügen</string>
@@ -591,7 +594,7 @@
   <string name="place_state_needs_photo">Benötigt Foto</string>
   <string name="place_type">Platztyp:</string>
   <string name="nearby_search_hint">Brücke, Museum, Hotel etc.</string>
-  <string name="you_must_reset_your_passsword" fuzzy="true">Bei der Anmeldung ist etwas schiefgelaufen, du musst dein Passwort zurücksetzen!</string>
+  <string name="you_must_reset_your_passsword">Bei der Anmeldung ist etwas schiefgelaufen. Du musst dein Passwort zurücksetzen!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">CHILD CLASSES</string>
   <string name="title_for_parent_classes">PARENT CLASSES</string>
@@ -700,6 +703,8 @@
   <string name="welcome_custom_selector_ok">Großartig</string>
   <string name="custom_selector_already_uploaded_image_text">Dieses Bild ist bereits auf Commons hochgeladen worden.</string>
   <string name="custom_selector_over_limit_warning">Aus technischen Gründen kann die Anwendung nicht mehr als %1$d Bilder auf einmal verlässlich hochladen. Die Grenze für das Hochladen von %1$d wurde um %2$d überschritten.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">Ausblenden</string>
+  <string name="custom_selector_button_limit_text">Max: %1$d</string>
   <string name="custom_selector_limit_error_desc">Fehler: Grenze für das Hochladen wurde überschritten</string>
   <string name="wlm_upload_info">Dieses Bild wird am Wettbewerb Wiki Loves Monuments teilnehmen</string>
   <string name="display_monuments">Denkmäler anzeigen</string>
@@ -723,8 +728,8 @@
   <string name="add_location">Standort hinzufügen</string>
   <string name="feedback_sharing_data_alert">Bitte entferne aus dieser E-Mail alle Informationen, die du nicht öffentlich mitteilen möchtest. Bitte beachte auch, dass deine E-Mail-Adresse, mit der du schreibst, sowie der dazugehörige Name und das Profilbild öffentlich sichtbar sind.</string>
   <string name="explore_map_details">Einzelheiten</string>
-  <string name="achievements_unavailable_beta" fuzzy="true">Erfolge sind nur in der Prod-Variante verfügbar, bitte schaue in der Entwicklerdokumentation nach.</string>
-  <string name="leaderboard_unavailable_beta" fuzzy="true">Die Bestenliste ist nur in der Prod-Variante verfügbar, bitte schaue in der Entwicklerdokumentation nach.</string>
+  <string name="achievements_unavailable_beta">Erfolge sind nur in der Prod-Variante verfügbar. Bitte schaue in der Entwicklerdokumentation nach.</string>
+  <string name="leaderboard_unavailable_beta">Die Bestenliste ist nur in der Prod-Variante verfügbar. Bitte schaue in der Entwicklerdokumentation nach.</string>
   <string name="copyright_popup">Bitte lade nur Bilder hoch, die du selbst aufgenommen hast. Wer urheberrechtlich geschützte Bilder hochlädt, wird gesperrt. Dies gilt auch für die Beta-Variante. Vielen Dank, dass du die App getestet hast!</string>
   <string name="select_feedback_data_choice">Bitte hebe die Markierung aller Informationen auf, die du nicht mit der Öffentlichkeit teilen möchtest.</string>
   <string name="api_level">API-Level</string>
@@ -749,6 +754,8 @@
   <string name="image_selected">Bild ausgewählt</string>
   <string name="image_marked_as_not_for_upload">Bild als nicht zum Hochladen markiert</string>
   <string name="menu_view_report">Meldung</string>
+  <string name="menu_view_set_white_background">Weißen Hintergrund einstellen</string>
+  <string name="menu_view_set_black_background">Schwarzen Hintergrund einstellen</string>
   <string name="report_violation">Verstoß melden</string>
   <string name="report_user">Diesen Benutzer melden</string>
   <string name="report_content">Diesen Inhalt melden</string>
@@ -761,8 +768,12 @@
   <string name="storage_permissions_denied">Speicherberechtigungen verweigert</string>
   <string name="unable_to_share_upload_item">Dieser Artikel kann nicht geteilt werden</string>
   <string name="permissions_are_required_for_functionality">Für die Funktionalität sind Berechtigungen erforderlich</string>
+  <string name="see_your_achievements">Deine Erfolge ansehen</string>
   <string name="edit_image">Bild bearbeiten</string>
   <string name="edit_location">Standort beabeiten</string>
+  <string name="location_updated">Standort aktualisiert!</string>
+  <string name="remove_location">Standort entfernen</string>
+  <string name="remove_location_warning_title">Standortwarnung entfernen</string>
   <string name="send_thanks_to_author">Dem Autor danken</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d Bild ausgewählt</item>

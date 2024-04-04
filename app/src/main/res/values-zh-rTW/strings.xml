@@ -257,6 +257,7 @@
   <string name="navigation_item_about">關於</string>
   <string name="navigation_item_settings">設定</string>
   <string name="navigation_item_feedback">意見回饋</string>
+  <string name="navigation_item_feedback_github">透過 GitHub 回饋</string>
   <string name="navigation_item_logout">登出</string>
   <string name="navigation_item_info">教程</string>
   <string name="navigation_item_notification">通知</string>

@@ -290,6 +290,7 @@
   <string name="navigation_item_about">О приложении</string>
   <string name="navigation_item_settings">Настройки</string>
   <string name="navigation_item_feedback">Обратная связь</string>
+  <string name="navigation_item_feedback_github">Обратная связь через GitHub</string>
   <string name="navigation_item_logout">Выйти</string>
   <string name="navigation_item_info">Руководство</string>
   <string name="navigation_item_notification">Уведомления</string>

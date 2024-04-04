@@ -266,7 +266,7 @@
   <string name="navigation_item_about">אודות</string>
   <string name="navigation_item_settings">הגדרות</string>
   <string name="navigation_item_feedback">משוב</string>
-  <string name="navigation_item_feedback_github">משוב דרך GitHub</string>
+  <string name="navigation_item_feedback_github">משוב דרך גיטהאב</string>
   <string name="navigation_item_logout">יציאה</string>
   <string name="navigation_item_info">מדריך</string>
   <string name="navigation_item_notification">התראות</string>

@@ -236,6 +236,7 @@
   <string name="navigation_item_about">За прилогот</string>
   <string name="navigation_item_settings">Нагодувања</string>
   <string name="navigation_item_feedback">Мислења</string>
+  <string name="navigation_item_feedback_github">Мислења преку GitHub</string>
   <string name="navigation_item_logout">Одјава</string>
   <string name="navigation_item_info">Упатства</string>
   <string name="navigation_item_notification">Известувања</string>

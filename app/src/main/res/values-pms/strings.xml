@@ -234,6 +234,7 @@
   <string name="navigation_item_about">A propòsit</string>
   <string name="navigation_item_settings">Paràmeter</string>
   <string name="navigation_item_feedback">Sugeriment</string>
+  <string name="navigation_item_feedback_github">Opinion via GitHub</string>
   <string name="navigation_item_logout">Seurte dal sistema</string>
   <string name="navigation_item_info">Cors d\'antrodussion</string>
   <string name="navigation_item_notification">Notìfiche</string>
