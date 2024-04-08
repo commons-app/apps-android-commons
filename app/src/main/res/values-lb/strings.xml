@@ -61,7 +61,7 @@
   <string name="logging_in_message">Waart wgl. …</string>
   <string name="updating_caption_message">Waart wgl. ...</string>
   <string name="login_success">Umeldung huet geklappt!</string>
-  <string name="login_failed" fuzzy="true">D\'Aloggen huet net funktionéiert!</string>
+  <string name="login_failed">D\'Aloggen huet net funktionéiert!</string>
   <string name="upload_failed">Fichier net fonnt. Probéiert wgl. en anere Fichier.</string>
   <string name="authentication_failed">D\'Authentifizéierung huet net funktionéiert. Loggt Iech wgl. nach eng Kéier an.</string>
   <string name="uploading_started">D\'Eroplueden huet ugefaang!</string>
@@ -196,6 +196,7 @@
   <string name="navigation_item_about">Iwwer</string>
   <string name="navigation_item_settings">Astellungen</string>
   <string name="navigation_item_feedback">Feedback</string>
+  <string name="navigation_item_feedback_github">Feedback iwwer GitHub</string>
   <string name="navigation_item_logout">Ausloggen</string>
   <string name="navigation_item_info">Uleedung</string>
   <string name="navigation_item_notification">Notifikatiounen</string>

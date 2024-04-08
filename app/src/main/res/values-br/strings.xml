@@ -72,7 +72,7 @@
   <string name="logging_in_message">Gortozit mar plij…</string>
   <string name="updating_caption_message">Gortozit mar plij…</string>
   <string name="login_success">Kevreet oc\'h !</string>
-  <string name="login_failed" fuzzy="true">Kudenn gevreañ !</string>
+  <string name="login_failed">N\'haller ket kevreañ!</string>
   <string name="upload_failed">N\'eo ket bet kavet ar restr. Klask gant unan all.</string>
   <string name="authentication_failed" fuzzy="true">Dilesadur c\'hwitet, kevreit en-dro mar plij</string>
   <string name="uploading_started">Kroget da enporzhiañ!</string>
@@ -102,7 +102,7 @@
   <string name="login_failed_throttled">Re a daolioù-esae. Klaskit en-dro a-benn ur pennadig amzer.</string>
   <string name="login_failed_blocked">Hon digarezit, prennet eo bet an implijer-mañ e Commons</string>
   <string name="login_failed_2fa_needed">Rankout a rit reiñ ho kod dilesa gant daou faktor.</string>
-  <string name="login_failed_generic" fuzzy="true">C\'hwitet eo ar c\'hevreañ</string>
+  <string name="login_failed_generic">C\'hwitet eo ar c\'hevreañ</string>
   <string name="share_upload_button">Pellgargañ</string>
   <string name="multiple_share_base_title">Envel ar rikoù-mañ</string>
   <string name="provider_modifications">Kemmoù</string>
@@ -428,5 +428,8 @@
   <string name="see_your_achievements">Gwelet ho taolioù-kaer</string>
   <string name="edit_image">Kemmañ ar skeudenn</string>
   <string name="edit_location">Kemmañ al lec\'hiadur</string>
+  <string name="location_updated">Lec\'hiadur hizivaet!</string>
+  <string name="remove_location">Lemel al lec\'hiadur</string>
+  <string name="location_removed">Lec\'hiadur lamet!</string>
   <string name="send_thanks_to_author">Trugarekaat an aozer</string>
 </resources>

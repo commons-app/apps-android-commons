@@ -228,11 +228,11 @@
   <string name="read_storage_permission_rationale">Erforderliche Berechtigung: Externen Speicher lesen. Die App kann ohne diese Berechtigung nicht auf deine Galerie zugreifen.</string>
   <string name="write_storage_permission_rationale">Erforderliche Berechtigung: Externen Speicher beschreiben. Die App kann ohne diese Berechtigung nicht auf deine Kamera oder Galerie zugreifen.</string>
   <string name="location_permission_title">Anfordern der Standortfreigabe</string>
-  <string name="in_app_camera_location_permission_title">Zeichnen Sie den Standort für In-App-Aufnahmen auf</string>
-  <string name="in_app_camera_location_switch_pref_summary">Aktivieren Sie diese Option, um den Standort mit In-App-Aufnahmen aufzuzeichnen, falls die Kamera des Geräts ihn nicht aufzeichnet</string>
+  <string name="in_app_camera_location_permission_title">Standort für In-App-Aufnahmen aufzeichnen</string>
+  <string name="in_app_camera_location_switch_pref_summary">Aktiviere diese Option, um den Standort mit In-App-Aufnahmen aufzuzeichnen, falls die Kamera des Geräts ihn nicht aufzeichnet</string>
   <string name="ok">Okay</string>
   <string name="warning">Warnung</string>
-  <string name="duplicate_file_name">Duplizierter Dateiname gefunden</string>
+  <string name="duplicate_file_name">Doppelter Dateiname gefunden</string>
   <string name="upload">Hochladen</string>
   <string name="yes">Ja</string>
   <string name="no">Nein</string>
@@ -286,7 +286,7 @@
   <string name="upload_problem_image_duplicate">Das Bild ist bereits auf Commons.</string>
   <string name="upload_problem_different_geolocation">Dieses Bild wurde an einem anderen Ort aufgenommen.</string>
   <string name="upload_problem_fbmd">Lade bitte nur Bilder hoch, die du selber erstellt hast. Lade keine Bilder hoch, die du auf Facebook-Konten anderer Personen gefunden hast.</string>
-  <string name="upload_problem_do_you_continue">Möchtest du dieses Bild immer noch hochladen?</string>
+  <string name="upload_problem_do_you_continue">Möchtest du dieses Bild trotzdem hochladen?</string>
   <string name="upload_connection_error_alert_title">Verbindungsfehler</string>
   <string name="upload_connection_error_alert_detail">Der Hochlade-Vorgang erfordert einen aktiven Internetzugang. Bitte prüfe deine Netzwerkverbindung.</string>
   <string name="upload_problem_image">Im Bild gefundene Probleme</string>
@@ -309,7 +309,7 @@
   <string name="copy_wikicode">Den Wikitext in die Zwischenablage kopieren</string>
   <string name="wikicode_copied">Der Wikitext wurde in die Zwischenablage kopiert</string>
   <string name="nearby_location_not_available">„In der Nähe“ arbeiten möglicherwiese nicht richtig. Der Standort ist nicht verfügbar.</string>
-  <string name="upload_location_access_denied">Standortzugriff verweigert. Bitte legen Sie Ihren Standort manuell fest, um diese Funktion nutzen zu können.</string>
+  <string name="upload_location_access_denied">Standortzugriff verweigert. Bitte lege deinen Standort manuell fest, um diese Funktion nutzen zu können.</string>
   <string name="location_permission_rationale_nearby">Berechtigung zur Anzeige einer Liste mit Orten in der Nähe erforderlich</string>
   <string name="nearby_directions">Richtungen</string>
   <string name="nearby_wikidata">Wikidata</string>
@@ -346,7 +346,7 @@
   <string name="provider_searches">Letzte Suchanfragen</string>
   <string name="provider_recent_languages">Letzte Sprachabfragen</string>
   <string name="error_loading_categories">Beim Laden der Kategorien ist ein Fehler aufgetreten.</string>
-  <string name="error_loading_depictions">Beim Laden von Darstellungen ist ein Fehler aufgetreten.</string>
+  <string name="error_loading_depictions">Beim Laden der Darstellungen ist ein Fehler aufgetreten.</string>
   <string name="search_tab_title_media">Medien</string>
   <string name="search_tab_title_categories">Kategorien</string>
   <string name="search_tab_title_depictions">Objekte</string>
@@ -399,7 +399,7 @@
   <string name="images_uploaded">Hochgeladene Bilder</string>
   <string name="image_reverts">Bilder nicht zurückgesetzt</string>
   <string name="images_used_by_wiki">Verwendete Bilder</string>
-  <string name="achievements_share_message">Teile die Errungenschaften mit deinen Freunden!</string>
+  <string name="achievements_share_message">Teile deine Erfolge mit deinen Freunden!</string>
   <string name="achievements_info_message">Dein Niveau steigt mit der Erfüllung dieser Anforderungen an. Objekte im Abschnitt „Statistiken“ werden nicht auf dein Niveau angerechnet.</string>
   <string name="achievements_revert_limit_message">Mindestens erforderlich:</string>
   <string name="images_uploaded_explanation">Die Anzahl der Bilder, die du über eine Hochladesoftware auf Commons hochgeladen hast.</string>
@@ -444,7 +444,7 @@
   <string name="no_depictions_selected">Keine Motive ausgewählt</string>
   <string name="no_depictions_selected_warning_desc">Bilder mit Motive sind leichter zu finden und werden eher verwendet. Bist du sicher, dass du ohne Auswahl von Motiven fortfahren möchtest?</string>
   <string name="back_button_warning">Hochladen abbrechen</string>
-  <string name="back_button_warning_desc">Wenn du den Zurück-Button verwendest, wird das Hochladen abgebrochen und du verlierst deine bisherigen Schritte</string>
+  <string name="back_button_warning_desc">Wenn du den Zurück-Button verwendest, wird das Hochladen abgebrochen und dein Fortschritt geht verloren</string>
   <string name="back_button_continue">Hochladen fortsetzen</string>
   <string name="upload_flow_all_images_in_set">(für alle Bilder im Satz)</string>
   <string name="search_this_area">Diesen Bereich durchsuchen</string>
@@ -471,7 +471,7 @@
   <string name="location_loss_warning">Wenn Sie dies deaktivieren, wird möglicherweise die neue Android-Fotoauswahl aktiviert. Es besteht die Gefahr, dass Standortinformationen verloren gehen.\n\nTippen Sie auf „Weitere Informationen“, um weitere Informationen zu erhalten.</string>
   <string name="nearby_campaign_dismiss_message">Du wirst die Kampagnen nicht mehr sehen. Du kannst dennoch diese Benachrichtigung in den Einstellungen erneut aktivieren, falls du dies möchtest.</string>
   <string name="this_function_needs_network_connection">Diese Funktion erfordert eine Netzwerkverbindung. Bitte überprüfe deine Verbindungseinstellungen.</string>
-  <string name="error_processing_image">Bei der Verarbeitung des Bildes ist ein Fehler aufgetreten. Bitte erneut versuchen!</string>
+  <string name="error_processing_image">Bei der Verarbeitung des Bildes ist ein Fehler aufgetreten. Bitte versuche es erneut!</string>
   <string name="getting_edit_token">Token zur Bearbeitung abrufen</string>
   <string name="check_category_adding_template">Vorlage zur Kategorieprüfung hinzufügen</string>
   <string name="check_category_notification_title">Kategorieprüfung für %1$s anfordern</string>
@@ -556,7 +556,7 @@
   <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">Aussicht versperren</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">Denn es ist</string>
   <string name="category_edit_helper_make_edit_toast">Versuche, Kategorien zu aktualisieren.</string>
-  <string name="category_edit_helper_show_edit_title">Kategorie-Update</string>
+  <string name="category_edit_helper_show_edit_title">Kategorieänderung</string>
   <string name="category_edit_helper_show_edit_title_success">Erfolgreich</string>
   <plurals name="category_edit_helper_show_edit_message_if">
     <item quantity="one">Kategorie %1$s wurde hinzugefügt.</item>
@@ -620,7 +620,7 @@
   <string name="nearby_no_results">Keine Orte gefunden, versuche, deine Suchkriterien zu ändern.</string>
   <string name="todo_improve">Empfohlene Verbesserungen:</string>
   <string name="missing_category">- Füge Kategorien zu diesem Bild hinzu, um die Benutzerfreundlichkeit zu verbessern.</string>
-  <string name="missing_article">- Füge dieses Bild zu dem zugehörigen Wikipedia-Artikel hinzu, der keine Bilder hat.</string>
+  <string name="missing_article">- Füge dieses Bild dem dazugehörigen Wikipedia-Artikel hinzu, der keine Bilder enthält.</string>
   <string name="add_picture_to_wikipedia_article_title">Bild zu Wikipedia hinzufügen</string>
   <string name="add_picture_to_wikipedia_article_desc">Möchtest du dieses Bild zum Wikipedia-Artikel in der Sprache %1$s hinzufügen?</string>
   <string name="confirm">Bestätigen</string>
@@ -628,7 +628,7 @@
   <string name="wikipedia_instructions_step_1">1. Verwende den folgenden Wikitext:</string>
   <string name="wikipedia_instructions_step_2">2. Mit einem Klick auf Bestätigen wird der Wikipedia-Artikel geöffnet</string>
   <string name="wikipedia_instructions_step_3">3. Suche einen geeigneten Abschnitt im Artikel für dein Bild</string>
-  <string name="wikipedia_instructions_step_4">4. Klicken Sie auf das Symbol „Bearbeiten“ (das einem Stift ähnelt) für diesen Abschnitt.</string>
+  <string name="wikipedia_instructions_step_4">4. Klicke auf das Bearbeiten-Symbol (das einem Stift ähnelt) für den Abschnitt.</string>
   <string name="wikipedia_instructions_step_5">5. Füge den Wikitext an der entsprechenden Stelle ein.</string>
   <string name="wikipedia_instructions_step_6">6. Bearbeite den Wikitext für eine geeignete Positionierung, falls erforderlich. Weitere Informationen findest du &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;hier&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Veröffentliche den Artikel</string>
@@ -646,10 +646,10 @@
   <string name="leaderboard_column_user">Benutzer</string>
   <string name="leaderboard_column_count">Anzahl</string>
   <string name="setting_avatar_dialog_title">Als Ranglisten-Avatar festlegen</string>
-  <string name="setting_avatar_dialog_message">Einstellen als Avatar, bitte warten</string>
-  <string name="avatar_set_successfully">Avatar setzen</string>
+  <string name="setting_avatar_dialog_message">Als Avatar festlegen, bitte warten</string>
+  <string name="avatar_set_successfully">Avatar festgelegt</string>
   <string name="avatar_set_unsuccessfully">Fehler beim Setzen eines neuen Avatars, bitte versuche es erneut</string>
-  <string name="menu_set_avatar">Als Avatar einstellen</string>
+  <string name="menu_set_avatar">Als Avatar festlegen</string>
   <string name="leaderboard_yearly">Jährlich</string>
   <string name="leaderboard_weekly">Wöchentlich</string>
   <string name="leaderboard_all_time">Gesamte Zeit</string>
@@ -706,7 +706,7 @@
   <string name="custom_selector_dismiss_limit_warning_button_text">Ausblenden</string>
   <string name="custom_selector_button_limit_text">Max: %1$d</string>
   <string name="custom_selector_limit_error_desc">Fehler: Grenze für das Hochladen wurde überschritten</string>
-  <string name="wlm_upload_info">Dieses Bild wird am Wettbewerb Wiki Loves Monuments teilnehmen</string>
+  <string name="wlm_upload_info">Dieses Bild wird am Wiki-Loves-Monuments-Wettbewerb teilnehmen</string>
   <string name="display_monuments">Denkmäler anzeigen</string>
   <string name="wlm_month_message">Es ist der Wiki Loves Monuments Monat!</string>
   <string name="learn_more">MEHR ERFAHREN</string>
@@ -714,7 +714,7 @@
   <string name="need_permission">Erlaubnis erforderlich</string>
   <string name="read_phone_state_permission_message">Karten in der Nähe müssen den Telefonstatus lesen können, um richtig zu funktionieren</string>
   <string name="contributions_of_user">Beiträge von Benutzer: %s</string>
-  <string name="achievements_of_user">Leistungen von Benutzer: %s</string>
+  <string name="achievements_of_user">Erfolge des Benutzers: %s</string>
   <string name="menu_view_user_page">Benutzerseite ansehen</string>
   <string name="edit_depictions">Beschriftungen bearbeiten</string>
   <string name="edit_categories">Kategorien bearbeiten</string>
@@ -764,19 +764,32 @@
   <string name="full_screen_mode_zoom_info">Verwende zwei Finger, um hinein- und herauszuzoomen.</string>
   <string name="full_screen_mode_features_info">Wische schnell und lange, um diese Aktionen auszuführen:\n- Links/Rechts: Zum vorherigen/nächsten gehen\n- Nach oben: Auswählen\n- Nach unten: Als nicht zum Hochladen markieren.</string>
   <string name="set_up_avatar_toast_string">Um deinen Bestenlisten Avatar einzustellen, klicke \"Set as avatar\" in dem Drei-Punkte-Menü bei jedem Bild.</string>
-  <string name="similar_coordinate_description_auto_set">Die Koordinaten sind nicht exakt genug, aber der Uploader dieses Bildes denkt, sie sind nah genug.</string>
+  <string name="similar_coordinate_description_auto_set">Die Koordinaten sind nicht exakt, aber der Uploader dieses Bildes denkt, sie sind nah genug.</string>
   <string name="storage_permissions_denied">Speicherberechtigungen verweigert</string>
   <string name="unable_to_share_upload_item">Dieser Artikel kann nicht geteilt werden</string>
   <string name="permissions_are_required_for_functionality">Für die Funktionalität sind Berechtigungen erforderlich</string>
+  <string name="learn_how_to_write_a_useful_description">Erfahre, wie man eine nützliche Beschreibung schreibt</string>
+  <string name="learn_how_to_write_a_useful_caption">Erfahre, wie man eine nützliche Überschrift schreibt</string>
   <string name="see_your_achievements">Deine Erfolge ansehen</string>
   <string name="edit_image">Bild bearbeiten</string>
   <string name="edit_location">Standort beabeiten</string>
   <string name="location_updated">Standort aktualisiert!</string>
   <string name="remove_location">Standort entfernen</string>
   <string name="remove_location_warning_title">Standortwarnung entfernen</string>
+  <string name="remove_location_warning_desc">Durch die Standortangabe werden Bilder nützlicher und leichter auffindbar. Möchtest du den Standort wirklich aus diesem Bild entfernen?</string>
+  <string name="location_removed">Standort entfernt!</string>
   <string name="send_thanks_to_author">Dem Autor danken</string>
+  <string name="invalid_login_message">Deine Sitzung ist abgelaufen. Bitte melde dich erneut an.</string>
+  <string name="no_application_available_to_open_gpx_files">Keine Anwendung zum Öffnen von GPX-Dateien verfügbar</string>
+  <string name="file_saved_successfully">Datei erfolgreich gespeichert</string>
+  <string name="do_you_want_to_open_gpx_file">Möchtest du die GPX-Datei öffnen?</string>
+  <string name="do_you_want_to_open_kml_file">Möchtest du die KML-Datei öffnen?</string>
+  <string name="failed_to_save_kml_file">KML-Datei konnte nicht gespeichert werden.</string>
+  <string name="failed_to_save_gpx_file">GPX-Datei konnte nicht gespeichert werden.</string>
+  <string name="saving_kml_file">Speichere KML-Datei</string>
+  <string name="saving_gpx_file">Speichere GPX-Datei</string>
   <plurals name="custom_picker_images_selected_title_appendix">
-    <item quantity="one">%d Bild ausgewählt</item>
-    <item quantity="other"> %d Bilder ausgewählt</item>
+    <item quantity="one">Ein Bild ausgewählt</item>
+    <item quantity="other">%d Bilder ausgewählt</item>
   </plurals>
 </resources>
