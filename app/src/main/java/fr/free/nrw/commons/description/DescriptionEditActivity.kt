@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.description
 
-import android.R
+
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
@@ -76,8 +76,7 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
 
     @Inject lateinit var descriptionEditHelper: DescriptionEditHelper
 
-    @Inject
-    lateinit var sessionManager: SessionManager? = null
+    @Inject lateinit var sessionManager: SessionManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
