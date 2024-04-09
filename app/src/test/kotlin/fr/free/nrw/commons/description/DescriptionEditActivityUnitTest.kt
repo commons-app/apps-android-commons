@@ -32,6 +32,7 @@ import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
@@ -62,7 +63,7 @@ class DescriptionEditActivityUnitTest {
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        context = ApplicationProvider.getApplicationContext()
+        context = RuntimeEnvironment.getApplication().applicationContext
         uploadMediaDetails = mutableListOf(UploadMediaDetail("en", "desc"))
                 as ArrayList<UploadMediaDetail>
         media = Media("filename", "creator", "url", "thumburl",

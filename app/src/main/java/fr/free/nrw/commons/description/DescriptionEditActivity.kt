@@ -221,13 +221,14 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
             val username: String? = sessionManager?.userName
             val logoutListener = CommonsApplication.BaseLogoutListener(
                 this,
-                getString(fr.free.nrw.commons.R.string.invalid_login_message),
+                getString(R.string.invalid_login_message),
                 username
             )
 
-            CommonsApplication.getInstance().clearApplicationData(
-                this, logoutListener
-            )
+            val commonsApplication = CommonsApplication.getInstance()
+            if (commonsApplication != null ){
+                commonsApplication.clearApplicationData(this,logoutListener)
+            }
         }
 
 
@@ -248,16 +249,17 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
                         })
             }
             catch (e : InvalidLoginTokenException) {
-                val username: String? = sessionManager?.userName
+                val username = sessionManager.userName
                 val logoutListener = CommonsApplication.BaseLogoutListener(
                     this,
-                    getString(fr.free.nrw.commons.R.string.invalid_login_message),
+                    getString(R.string.invalid_login_message),
                     username
                 )
 
-                CommonsApplication.getInstance().clearApplicationData(
-                    this, logoutListener
-                )
+                val commonsApplication = CommonsApplication.getInstance()
+                if (commonsApplication != null ){
+                    commonsApplication.clearApplicationData(this,logoutListener)
+                }
             }
 
         }
