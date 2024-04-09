@@ -77,7 +77,7 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
     @Inject lateinit var descriptionEditHelper: DescriptionEditHelper
 
     @Inject
-    var sessionManager: SessionManager? = null
+    lateinit var sessionManager: SessionManager? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
