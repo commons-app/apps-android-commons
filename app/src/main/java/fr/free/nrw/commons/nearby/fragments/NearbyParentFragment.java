@@ -432,7 +432,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
         initNearbyFilter();
         addCheckBoxCallback();
-        performMapReadyActions();
         moveCameraToPosition(lastMapFocus);
         initRvNearbyList();
         onResume();
@@ -582,7 +581,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         registerNetworkReceiver();
         if (isResumed() && ((MainActivity) getActivity()).activeFragment == ActiveFragment.NEARBY) {
             if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
-                performMapReadyActions();
+                locationPermissionGranted();
             } else {
                 startMapWithoutPermission();
             }
@@ -1868,7 +1867,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
                 // this will run when user has given permission by opening app's settings
                 isPermissionDenied = false;
-                recenterMap(currentLatLng);
+                locationPermissionGranted();
+                return;
             } else {
                 askForLocationPermission();
             }
