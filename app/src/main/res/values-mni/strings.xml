@@ -20,8 +20,8 @@
   <string name="logging_in_title">ꯃꯅꯨꯡ ꯆꯪꯁꯤꯟꯂꯤ</string>
   <string name="logging_in_message">ꯉꯥꯏꯍꯥꯛ ꯉꯥꯏꯕꯤꯌꯨ</string>
   <string name="updating_caption_message">ꯉꯥꯏꯍꯥꯛꯇꯪ ꯉꯥꯏꯕꯤꯈꯣ...</string>
-  <string name="login_success">ꯃꯥꯏꯄꯥꯛꯅꯥ ꯆꯪꯁꯤꯜꯂꯦ ꯫</string>
-  <string name="login_failed">ꯆꯪꯁꯤꯟꯕ ꯃꯥꯏꯄꯥꯛꯇꯔꯦ!</string>
+  <string name="login_success" fuzzy="true">ꯃꯥꯏꯄꯥꯛꯅꯥ ꯆꯪꯁꯤꯜꯂꯦ ꯫</string>
+  <string name="login_failed" fuzzy="true">ꯆꯪꯁꯤꯟꯕ ꯃꯥꯏꯄꯥꯛꯇꯔꯦ!</string>
   <string name="upload_failed">ꯐꯥꯏꯜ ꯊꯤꯕꯥ ꯐꯪꯗꯔꯦ ꯫ ꯆꯥꯟꯕꯤꯗꯨꯅꯥ ꯑꯇꯣꯞꯄ ꯑꯃꯥ ꯇꯧꯕꯤꯔꯣ ꯫</string>
   <string name="contribution_state_starting">ꯊꯥꯒꯠꯂꯤ</string>
   <string name="menu_from_camera">ꯃꯤꯔꯦꯜ ꯂꯧ</string>
@@ -101,7 +101,7 @@
   <string name="upload_problem_different_geolocation">ꯃꯁꯤꯒꯤ ꯃꯤꯔꯦꯜꯁꯤ ꯇꯣꯉꯥꯟ ꯇꯣꯉꯥꯟꯕ ꯃꯐꯝꯗꯒꯤ ꯅꯝꯂꯛꯄꯅꯤ ꯫</string>
   <string name="skip_login">ꯆꯣꯡꯕ</string>
   <string name="navigation_item_login">ꯆꯪꯁꯤꯟꯕ ꯃꯅꯨꯪꯗ</string>
-  <string name="skip_login_title">ꯅꯪ ꯇꯁꯦꯡꯅꯥ ꯄꯥꯝꯕꯔꯥ \"ꯆꯟꯁꯤꯟꯕ\" ꯀꯥꯟꯊꯣꯛꯄ?</string>
+  <string name="skip_login_title" fuzzy="true">ꯅꯪ ꯇꯁꯦꯡꯅꯥ ꯄꯥꯝꯕꯔꯥ \"ꯆꯟꯁꯤꯟꯕ\" ꯀꯥꯟꯊꯣꯛꯄ?</string>
   <string name="nearby_directions">ꯃꯥꯏꯀꯩꯁꯤꯡ</string>
   <string name="nearby_wikidata">ꯋꯤꯀꯤꯗꯥꯇꯥ</string>
   <string name="nearby_wikipedia">ꯋꯤꯀꯤꯄꯦꯗꯤꯌꯥ</string>

@@ -41,10 +41,10 @@
   <string name="signup">Mag-ayon</string>
   <string name="logging_in_title">Maglalaog sa</string>
   <string name="logging_in_message">Pakihalat tabi…</string>
-  <string name="login_success">An paglaog mo matrayumpo!</string>
-  <string name="login_failed">An paglaog mo nagpalya!</string>
+  <string name="login_success" fuzzy="true">An paglaog mo matrayumpo!</string>
+  <string name="login_failed" fuzzy="true">An paglaog mo nagpalya!</string>
   <string name="upload_failed">Dai nahiling an file. Magporbar nin ibang file.</string>
-  <string name="authentication_failed">An awtentikasyon nagpalya! maglaog ulit</string>
+  <string name="authentication_failed" fuzzy="true">An awtentikasyon nagpalya! maglaog ulit</string>
   <string name="uploading_started">Pinagpoonan na an pagkarga!</string>
   <string name="upload_completed_notification_title">%1$s pinagkarga na!</string>
   <string name="upload_completed_notification_text">Taptapa tanganing matanaw an saimong kinarga</string>
@@ -65,10 +65,10 @@
   <string name="menu_share">Iheras</string>
   <string name="share_title_hint" fuzzy="true">Titulo (Kaipuhan)</string>
   <string name="share_description_hint">Deskripsyon</string>
-  <string name="login_failed_network">Dae makadagos sa paglaog - minapalya an kabitanahan</string>
+  <string name="login_failed_network" fuzzy="true">Dae makadagos sa paglaog - minapalya an kabitanahan</string>
   <string name="login_failed_throttled">Kadakulon na an bakong matrayumpong pagprubar. Pakiotro na sana giraray sa laog nin nagkapirang mga minutos</string>
   <string name="login_failed_blocked">Sori, ining paragamit pinagkubkob na sa Kagrugaringan</string>
-  <string name="login_failed_generic">An Paglaog nagpalya</string>
+  <string name="login_failed_generic" fuzzy="true">An Paglaog nagpalya</string>
   <string name="share_upload_button">Ikarga</string>
   <string name="multiple_share_base_title">Pangarani ining katiriponan</string>
   <string name="provider_modifications">Mga Modipikasyon</string>

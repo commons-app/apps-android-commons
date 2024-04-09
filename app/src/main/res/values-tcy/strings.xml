@@ -57,10 +57,10 @@
   <string name="signup">ಖಾತೆ ಸುರು ಮಲ್ಪುಲೆ</string>
   <string name="logging_in_title">ಇರ್ ಲಾಗ್-ಇನ್ ಅವೊಂತುಲ್ಲಾರ್</string>
   <string name="logging_in_message">ದಯಾದಿತ್ ವಂತೆ ಕಾಪುಲೆ…</string>
-  <string name="login_success">ಲಾಗಿನ್ ಅಂಡ್!</string>
-  <string name="login_failed">ಲಾಗಿನ್ ಅಯಿಜಾತ್ತ!</string>
+  <string name="login_success" fuzzy="true">ಲಾಗಿನ್ ಅಂಡ್!</string>
+  <string name="login_failed" fuzzy="true">ಲಾಗಿನ್ ಅಯಿಜಾತ್ತ!</string>
   <string name="upload_failed">ಈ ಕಡತ ತಿಕ್ಕಿಜಿ. ದಯಮಲ್ತ್ ಕುಡೊಂಜಿ ಕಡತೊನು ಪ್ರಯತ್ನ ಮಲ್ಪುಲೆ.</string>
-  <string name="authentication_failed">ದೃಢೀಕರಣ ಸರಿ ಆಯಿಜಿ! ನನೊರಾ ಲಾಗಿನ್ ಅಲೆ</string>
+  <string name="authentication_failed" fuzzy="true">ದೃಢೀಕರಣ ಸರಿ ಆಯಿಜಿ! ನನೊರಾ ಲಾಗಿನ್ ಅಲೆ</string>
   <string name="uploading_started">ದಿಂಜಪುನಾ ಸುರು ಅಂಡ್!</string>
   <string name="upload_completed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಆಂಡ್!</string>
   <string name="upload_completed_notification_text">ಇರೆನ ಅಪ್ಲೋಡ್ ತೂಯೆರೆ ಒತ್ತುಲೆ</string>
@@ -81,11 +81,11 @@
   <string name="menu_share">ಪಟ್ಟುಲೆ</string>
   <string name="share_title_hint">ತರೆಬರವು (ಬೋಡೇ)</string>
   <string name="share_description_hint">ವಿವರಣೆ</string>
-  <string name="login_failed_network">ಲಾಗಿನ್ ಅತುಜಿ - ನೆಟ್ವರ್ಕ್ ತಿಕೊಂತಿಜ್ಜಿ</string>
+  <string name="login_failed_network" fuzzy="true">ಲಾಗಿನ್ ಅತುಜಿ - ನೆಟ್ವರ್ಕ್ ತಿಕೊಂತಿಜ್ಜಿ</string>
   <string name="login_failed_throttled">ಇರ್ ಮಸ್ತ್ ಪ್ರಯತ್ನ ಮಾಲ್ತರ್. ದಯ ದಿತ್ ಕೆಲ ನಿಮಿಷಟ್ಡತ್ ಬುಕ್ಕ ಪ್ರಯತ್ನ ಮಾಲ್ಪುಲೆ.</string>
   <string name="login_failed_blocked">ಕ್ಷಮೆ ಉಪ್ಪಾಡ್, ಇ ಬಳಕೆದಾರರೆನ್ ಕಾಮನ್ಸ್‌ಟ್ ನಿರ್ಬಂಧ ಮಾಲ್ತೆರ್.</string>
   <string name="login_failed_2fa_needed">ಇರ್ ರಡ್ಡ್ ಅಂಶೊತ ದೃಢೀಕರಣ ಕೋಡ್‌ನ್ ಕೊರ್ಲೆ.</string>
-  <string name="login_failed_generic">ಲಾಗಿನ್ ಆಯಾರಾ ಅಯಿಜಿ</string>
+  <string name="login_failed_generic" fuzzy="true">ಲಾಗಿನ್ ಆಯಾರಾ ಅಯಿಜಿ</string>
   <string name="share_upload_button">ದಿಂಜಾಲೆ</string>
   <string name="multiple_share_base_title">ಈ ಪಟ್ಟಿತ ಪುದಾರ್.</string>
   <string name="provider_modifications">ಬದಲ್ ಮಂತಿನವು</string>
@@ -220,7 +220,7 @@
   <string name="nominated_see_more" fuzzy="true">&lt;u&gt;ವಿವರಗಾತ್ ವೆಬ್ಪುಟೊನ್ ತೂಲೆ&lt;/u&gt;</string>
   <string name="skip_login">ಬುಡ್ಲೆ</string>
   <string name="navigation_item_login">ಲಾಗಿನ್ ಆಲೆ</string>
-  <string name="skip_login_title">ಇರ್ ನಿಜವಾತ್ ಲಾಗಿನ್ ಬುಡಿಯರ ಬಯಸುವರಾ?</string>
+  <string name="skip_login_title" fuzzy="true">ಇರ್ ನಿಜವಾತ್ ಲಾಗಿನ್ ಬುಡಿಯರ ಬಯಸುವರಾ?</string>
   <string name="skip_login_message">ದುಂಬಗ್ ಚಿತ್ರೊಲೆನ್ ಮಿತೇರಾವರೆ ಈರ್ ಉಳಗಮನ ಮಲ್ಪೊಡಾವು.</string>
   <string name="login_alert_message">ದಯಮಾಲ್ತ್ ಲಾಗೀನ್ ಆಲೆ ಬುಕ್ಕ ಉಪಯೋಗ ಮಾಲ್ಪುಲೆ.</string>
   <string name="copy_wikicode">ವಿಕಿಪಠ್ಯೊನ್ ಪಿಡಿಪಲಾಯಿಗ್ ನಕಲ್ ಮಲ್ಪುಲೆ.</string>
@@ -274,7 +274,7 @@
   <string name="construction_event_answer">ತಂತ್ರಜ್ಞಾನ ಇಜಿಂಡ ಸಂಸ್ಕೃತಿ ತೋಜಾವುನ ಚಿತ್ರೊಲೆಗ್ ಕಾಮನ್ಸ್\'ಡು ಬಾರೀ ಸ್ವಾಗತ ಉಂಡು.</string>
   <string name="congratulatory_message_quiz">ಇರೆನ  %1$ ಉತ್ತರೊಲು ಸರಿಯಾದುಂಡು. ಧನ್ಯವಾದೊಲು!</string>
   <string name="warning_for_no_answer">ಪ್ರಶ್ನೆಗ್ ಉತ್ತರ ಕೊರಿಯರೆ ರಡ್ಡ್ ಆಯ್ಲೆಲೆಡ್ ಒಂಜೆನ್ ಪೆಜಿಲೆ.</string>
-  <string name="user_not_logged_in">ಉಳಗಮನದ ಕಲಾಪ ಮುಗಿದಿಂಡ್, ದಯಮಲ್ತ್ ಕುಡಾ ಉಳಗಮನ ಮಲ್ಪುಲೆ.</string>
+  <string name="user_not_logged_in" fuzzy="true">ಉಳಗಮನದ ಕಲಾಪ ಮುಗಿದಿಂಡ್, ದಯಮಲ್ತ್ ಕುಡಾ ಉಳಗಮನ ಮಲ್ಪುಲೆ.</string>
   <string name="quiz_result_share_message">ಇರೆನ ರಸಪ್ರಶ್ನೆನ್ ಇರೆನ ದೋಸ್ತಿಲೆಗ್ ಪಟ್ಟುಲೆ.</string>
   <string name="continue_message">ಮುಂದುವರೆಸಾಲೆ</string>
   <string name="correct">ಸರಿಯಾಯಿನುತ್ತರೊ</string>

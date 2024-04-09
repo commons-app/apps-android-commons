@@ -15,8 +15,8 @@
   <string name="signup">Иҟаҵатәуп арегистрациа</string>
   <string name="logging_in_title">Асистемахь аҭаларҭа</string>
   <string name="logging_in_message">Шәааԥшы ԥыҭрак...</string>
-  <string name="login_success">Аҭалара қәҿиарала имҩаԥысит!</string>
-  <string name="login_failed">Асистемахь аҭалараан агха!</string>
+  <string name="login_success" fuzzy="true">Аҭалара қәҿиарала имҩаԥысит!</string>
+  <string name="login_failed" fuzzy="true">Асистемахь аҭалараан агха!</string>
   <string name="upload_failed">Афаил ԥшаам. Даҽа фаилк шәахәаԥш.</string>
   <string name="authentication_failed" fuzzy="true">Аутентификациа агха!</string>
   <string name="uploading_started">Аҭагалара иалагоуп!</string>
@@ -35,7 +35,7 @@
   <string name="provider_contributions">Сара сҭагаламҭақәа</string>
   <string name="share_title_hint" fuzzy="true">Ахьӡ</string>
   <string name="share_description_hint">Ахҳәаа</string>
-  <string name="login_failed_generic">Асистемахь аҭалара агха!</string>
+  <string name="login_failed_generic" fuzzy="true">Асистемахь аҭалара агха!</string>
   <string name="share_upload_button">Аҭагалара</string>
   <string name="provider_modifications">Аԥсахрақәа</string>
   <string name="menu_upload_single">Аҭагалара</string>

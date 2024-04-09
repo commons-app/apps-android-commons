@@ -6,6 +6,7 @@
 * Butko
 * DDPAT
 * Deltaspace
+* Dirruw'o
 * Eleferen
 * Envlh
 * Facenapalm
@@ -134,7 +135,7 @@
   <string name="retry_limit_reached">Достигнут максимальный лимит повторов! Пожалуйста, отмените загрузку и повторите попытку.</string>
   <string name="unrestricted_battery_mode">Выключить оптимизацию батареи?</string>
   <string name="suggest_unrestricted_mode">Загрузка более 3 изображений работает более надежно, если оптимизация заряда батареи отключена. Пожалуйста, отключите оптимизацию заряда батареи для приложения Викисклада в настройках, чтобы обеспечить плавную загрузку. \n\nВозможные действия по отключению оптимизации заряда батареи:\n\nШаг 1: Нажмите кнопку \'Настройки\' ниже.\n\nШаг 2: Переключитесь с \'Не оптимизировано\' на \'Все приложения\'.\n\nШаг 3. Найдите «Викисклад» или «fr.free.nrw.commons».\n\nШаг 4. Нажмите на него и выберите \'Не оптимизировать\'.\n\nШаг 5: Нажмите \'Готово\'.</string>
-  <string name="authentication_failed">Ошибка аутентификации. Пожалуйста, авторизуйтесь ещё раз.</string>
+  <string name="authentication_failed">Аутентификация не прошла. Пожалуйста, авторизуйтесь ещё раз.</string>
   <string name="uploading_started">Загрузка началась!</string>
   <string name="uploading_queued">Загрузка в очереди (включен режим ограниченного подключения)</string>
   <string name="upload_completed_notification_title">%1$s загружен!</string>
@@ -165,7 +166,7 @@
   <string name="login_failed_throttled">Слишком много неудачных попыток. Пожалуйста, попробуйте ещё раз через несколько минут.</string>
   <string name="login_failed_blocked">Извините, но участник с таким именем был заблокирован на Викискладе</string>
   <string name="login_failed_2fa_needed">Вы должны ввести код двухфакторной аутентификации.</string>
-  <string name="login_failed_generic">Ошибка входа в систему!</string>
+  <string name="login_failed_generic">Ошибка входа в систему</string>
   <string name="share_upload_button">Загрузка</string>
   <string name="multiple_share_base_title">Введите название для этой группы файлов</string>
   <string name="provider_modifications">Изменения</string>
@@ -289,6 +290,7 @@
   <string name="navigation_item_about">О приложении</string>
   <string name="navigation_item_settings">Настройки</string>
   <string name="navigation_item_feedback">Обратная связь</string>
+  <string name="navigation_item_feedback_github">Обратная связь через GitHub</string>
   <string name="navigation_item_logout">Выйти</string>
   <string name="navigation_item_info">Руководство</string>
   <string name="navigation_item_notification">Уведомления</string>
@@ -489,7 +491,7 @@
   <string name="open_document_photo_picker_explanation">Новый инструмент выбора фотографий Android рискует потерять информацию о местоположении. Включите, если вы собираетесь его использовать</string>
   <string name="location_loss_warning">Отключение может привести к запуску нового средства выбора фотографий Android. Из-за этого может потеряться информация о местоположении.\n\nНажмите «Подробнее» для получения дополнительной информации.</string>
   <string name="nearby_campaign_dismiss_message">Вы больше не увидите кампаний. Однако, если захочете, вы сможете включить нотификации о кампаниях в настройках.</string>
-  <string name="this_function_needs_network_connection">Для этой функции требуется доступ к интернет. Пожалуйста, проверьте своё подключение.</string>
+  <string name="this_function_needs_network_connection">Для этой функции требуется доступ к интернет. Пожалуйста, проверьте свои настройки подключения.</string>
   <string name="error_processing_image">Произошла ошибка при загрузке файла. Пожалуйста, попробуйте позднее!</string>
   <string name="getting_edit_token">Получение токена редактирования</string>
   <string name="check_category_adding_template">Добавление шаблона о проверке категорий</string>
@@ -620,7 +622,7 @@
   <string name="place_state_needs_photo">Нуждается в фото</string>
   <string name="place_type">Тип места:</string>
   <string name="nearby_search_hint">Мост, музей, гостиница и т. д.</string>
-  <string name="you_must_reset_your_passsword">Что-то пошло не так со входом, вы должны сбросить пароль!</string>
+  <string name="you_must_reset_your_passsword">Что-то пошло не так со входом. Вы должны сбросить пароль!</string>
   <string name="title_for_media">МЕДИА</string>
   <string name="title_for_child_classes">ДЕТСКИЕ КЛАССЫ</string>
   <string name="title_for_parent_classes">РОДИТЕЛЬСКИЕ КЛАССЫ</string>
@@ -801,8 +803,22 @@
   <string name="see_your_achievements">Посмотрите свои достижения</string>
   <string name="edit_image">Редактировать изображение</string>
   <string name="edit_location">Изменить местоположение</string>
+  <string name="location_updated">Местоположение обновлено!</string>
+  <string name="remove_location">Удалить местоположение</string>
+  <string name="remove_location_warning_title">Удалить предупреждение о местоположении</string>
+  <string name="remove_location_warning_desc">Местоположение делает фотографии более полезными и доступными для поиска. Вы действительно хотите удалить местоположение с этого изображения?</string>
+  <string name="location_removed">Местоположение удалено!</string>
   <string name="send_thanks_to_author">Поблагодарить автора</string>
   <string name="error_sending_thanks">Ошибка при отправке благодарности автору.</string>
+  <string name="invalid_login_message">Срок Вашего сеанса в системе закончился. Пожалуйста, войдите снова.</string>
+  <string name="no_application_available_to_open_gpx_files">Нет доступного приложения для открытия файлов GPX.</string>
+  <string name="file_saved_successfully">Успешно сохранено</string>
+  <string name="do_you_want_to_open_gpx_file">Вы хотите открыть файл GPX?</string>
+  <string name="do_you_want_to_open_kml_file">Вы хотите открыть файл KML?</string>
+  <string name="failed_to_save_kml_file">Не удалось сохранить лексему.</string>
+  <string name="failed_to_save_gpx_file">Не удалось сохранить лексему.</string>
+  <string name="saving_kml_file">Сохранение файла KML</string>
+  <string name="saving_gpx_file">Сохранение файла GPX</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">выбрано %d изображение</item>
     <item quantity="few">выбрано %d изображения</item>

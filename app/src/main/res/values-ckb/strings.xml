@@ -28,8 +28,8 @@
   <string name="signup">خۆ تۆمارکردن</string>
   <string name="logging_in_title">چوونە ژوورەوە…</string>
   <string name="logging_in_message">تکایە چاوەڕوان بە…</string>
-  <string name="login_success">بە سەرکەوتووانە چوویتە ژوورەوە!</string>
-  <string name="login_failed">چوونە ژوورەوە شکستی ھێنا!</string>
+  <string name="login_success" fuzzy="true">بە سەرکەوتووانە چوویتە ژوورەوە!</string>
+  <string name="login_failed" fuzzy="true">چوونە ژوورەوە شکستی ھێنا!</string>
   <string name="upload_failed">پەڕگە نەدۆزرایەوە. تکایە پەڕگەیەکی تر تاقی بکەرەوە.</string>
   <string name="uploading_started">بارکردن دەستی پێکرد!</string>
   <string name="upload_completed_notification_title">%1$ بارکرا!</string>
@@ -44,7 +44,7 @@
   <string name="contribution_state_starting">بارکردن</string>
   <string name="provider_contributions">بارکردنەکانم</string>
   <string name="menu_share">هاوبەشی کردن</string>
-  <string name="login_failed_generic">چوونە ژوورەوە شکستی ھێنا</string>
+  <string name="login_failed_generic" fuzzy="true">چوونە ژوورەوە شکستی ھێنا</string>
   <string name="share_upload_button">بارکردن</string>
   <string name="menu_upload_single">بارکردن</string>
   <string name="categories_search_text_hint">پۆلەکان بگەڕێ</string>

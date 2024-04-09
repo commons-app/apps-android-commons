@@ -25,8 +25,8 @@
   <string name="signup">Номнависӣ</string>
   <string name="logging_in_title">Дар ҳоли вуруд</string>
   <string name="logging_in_message">Лутфан мунтазир шавед…</string>
-  <string name="login_success">Вуруд бо муваффақият!</string>
-  <string name="login_failed">Вуруд номуваффақ шуд!</string>
+  <string name="login_success" fuzzy="true">Вуруд бо муваффақият!</string>
+  <string name="login_failed" fuzzy="true">Вуруд номуваффақ шуд!</string>
   <string name="upload_failed">Парванда ёфта нашуд. Лутфан парвандаи дигареро интихоб кунед.</string>
   <string name="uploading_started">Боркунӣ оғоз шуд.</string>
   <string name="upload_failed_notification_subtitle">Барои дидан нохун занед</string>
@@ -42,7 +42,7 @@
   <string name="menu_share">Бо ҳам дидан</string>
   <string name="share_title_hint" fuzzy="true">Унвон</string>
   <string name="share_description_hint">Тавзеҳот</string>
-  <string name="login_failed_generic">Вуруд номуваффақ шуд</string>
+  <string name="login_failed_generic" fuzzy="true">Вуруд номуваффақ шуд</string>
   <string name="share_upload_button">Боркунӣ</string>
   <string name="provider_modifications">Тағийрот</string>
   <string name="menu_upload_single">Боркунӣ</string>

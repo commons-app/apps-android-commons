@@ -78,7 +78,7 @@
   <string name="retry_limit_reached">Limite maxime de tentativas attingite! Per favor cancella le incargamento e essaya lo de novo.</string>
   <string name="unrestricted_battery_mode">Disactivar le optimisation del batteria?</string>
   <string name="suggest_unrestricted_mode">Incargar plus de 3 imagines functiona plus solidemente quando le optimisation del batteria es disactivate. Per favor disactiva le optimisation del batteria pro le app Commons in le Parametros pro un experientia de incargamento plus fluide.\n\nPassos possibile pro disactivar le optimisation del batteria:\n\nPasso 1: Tocca le button ‘Parametros’ infra.\n\nPasso 2: Cambia de ‘Non optimisate’ a ‘Tote le apps’.\n\nPasso 3: Cerca “Commons” o “fr.free.nrw.commons”.\n\nPasso 4: Tocca lo e selige ‘Non optimizar’.\n\nPasso 5: Preme ‘Facite’.</string>
-  <string name="authentication_failed">Authentication fallite, per favor reaperi session</string>
+  <string name="authentication_failed">Authentication fallite. Per favor reaperi session.</string>
   <string name="uploading_started">Incargamento comenciate!</string>
   <string name="uploading_queued">Incargamento in cauda (modo de connexion limitate activate)</string>
   <string name="upload_completed_notification_title">%1$s incargate!</string>
@@ -328,7 +328,7 @@
   <string name="construction_event_answer">Imagines que monstra technologia o cultura es multo benvenite sur Commons.</string>
   <string name="congratulatory_message_quiz">Tu ha %1$s del responsas correcte. Felicitationes!</string>
   <string name="warning_for_no_answer">Selige un del duo optiones pro responder al question</string>
-  <string name="user_not_logged_in">Session expirate, per favor reaperi session</string>
+  <string name="user_not_logged_in">Session expirate. Per favor reaperi session.</string>
   <string name="quiz_result_share_message">Condivide tu quiz con tu amicos!</string>
   <string name="continue_message">Continuar</string>
   <string name="correct">Responsa correcte</string>
@@ -337,6 +337,7 @@
   <string name="share_app_title">Condivider app</string>
   <string name="rotate">Rotar</string>
   <string name="error_fetching_nearby_places">Error durante le obtention de locos a proximitate.</string>
+  <string name="no_pictures_in_this_area">Necun imagine in iste area</string>
   <string name="no_nearby_places_around">Necun loco a proximitate</string>
   <string name="error_fetching_nearby_monuments">Error durante le obtention de monumentos a proximitate.</string>
   <string name="no_recent_searches">Necun recerca recente</string>
@@ -411,7 +412,7 @@
   <string name="never_ask_again">Nunquam demandar isto de novo</string>
   <string name="display_location_permission_title">Demandar permission de localisation</string>
   <string name="display_location_permission_explanation">Demandar le permission de acceder al position quando es necessari pro le function de notification a proximitate.</string>
-  <string name="achievements_fetch_failed">Un problema ha occurrite. Non esseva possibile obtener tu realisationes.</string>
+  <string name="achievements_fetch_failed">Un problema ha occurrite. Non esseva possibile obtener le realisationes.</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Tu ha facite tante contributiones que nostre systema de calculo de realisationes non pote contar los. Iste es le realisation ultime!</string>
   <string name="ends_on">Termina le:</string>
   <string name="display_campaigns">Monstrar campanias</string>
@@ -728,6 +729,22 @@
   <string name="storage_permissions_denied">Permission de immagazinage refusate</string>
   <string name="unable_to_share_upload_item">Non pote condivider iste objecto</string>
   <string name="permissions_are_required_for_functionality">Permissiones es necessari pro functionalitate</string>
+  <string name="learn_how_to_write_a_useful_description">Apprende como scriber un description utile</string>
+  <string name="learn_how_to_write_a_useful_caption">Appende como scriber un legenda utile</string>
+  <string name="see_your_achievements">Vider tu realisationes</string>
+  <string name="edit_image">Modificar imagine</string>
+  <string name="edit_location">Modificar position</string>
+  <string name="send_thanks_to_author">Regratiar le autor</string>
+  <string name="error_sending_thanks">Error inviante gratias al autor.</string>
+  <string name="invalid_login_message">Tu session ha expirate. Per favor reaperi session.</string>
+  <string name="no_application_available_to_open_gpx_files">Necun application disponibile pro aperir files GPX</string>
+  <string name="file_saved_successfully">File salveguardate con successo</string>
+  <string name="do_you_want_to_open_gpx_file">Vole tu aperir le file GPX?</string>
+  <string name="do_you_want_to_open_kml_file">Vole tu aperir le file KML?</string>
+  <string name="failed_to_save_kml_file">Non poteva salveguardar le file KML.</string>
+  <string name="failed_to_save_gpx_file">Non poteva salveguardar le file GPX.</string>
+  <string name="saving_kml_file">Salveguarda file KML</string>
+  <string name="saving_gpx_file">Salveguarda file GPX</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d imagine seligite</item>
     <item quantity="other">%d imagines seligite</item>

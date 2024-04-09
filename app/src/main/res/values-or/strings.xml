@@ -12,8 +12,8 @@
   <string name="login">ଲଗ-ଇନ (Log in)</string>
   <string name="logging_in_title">ଲଗ ଇନ କରୁଛି…</string>
   <string name="logging_in_message">ଟିକେ ଅପେକ୍ଷା କରନ୍ତୁ…</string>
-  <string name="login_success">ଠିକଭାବେ ଲଗଇନ ହେଲା!</string>
-  <string name="login_failed">ଲଗଇନ ହେଲାନାହିଁ!</string>
+  <string name="login_success" fuzzy="true">ଠିକଭାବେ ଲଗଇନ ହେଲା!</string>
+  <string name="login_failed" fuzzy="true">ଲଗଇନ ହେଲାନାହିଁ!</string>
   <string name="authentication_failed" fuzzy="true">ନିଶ୍ଚିତ କରିବାରେ ବିଫଳ!</string>
   <string name="uploading_started">ଅପଲୋଡ଼ ଆରମ୍ଭ ହେଲା!</string>
   <string name="upload_completed_notification_title">%1$s ଅପଲୋଡ଼ ହୋଇଗଲା!</string>
@@ -34,10 +34,10 @@
   <string name="menu_share">ସଭିଙ୍କୁ ଜଣାନ୍ତୁ</string>
   <string name="share_title_hint" fuzzy="true">ଶିରୋନାମ</string>
   <string name="share_description_hint">ବିବରଣୀ</string>
-  <string name="login_failed_network">ଲଗ ଇନ କରିବାରେ ବିଫଳ - ନେଟୱାର୍କରେ ଅସୁବିଧା</string>
+  <string name="login_failed_network" fuzzy="true">ଲଗ ଇନ କରିବାରେ ବିଫଳ - ନେଟୱାର୍କରେ ଅସୁବିଧା</string>
   <string name="login_failed_throttled" fuzzy="true">ଖୁବ ଅଧିକ ଅସଫଳ ଚେଷ୍ଟା । ଦୟାକରି କେଇ ମିନିଟ ଛାଡ଼ି ଚେଷ୍ଟା କରନ୍ତୁ</string>
   <string name="login_failed_blocked">କ୍ଷମା ଘେନିବେ, ଏହି ସଭ୍ୟଙ୍କୁ କମନ୍ସରେ ଅଟକାଯାଇଛି</string>
-  <string name="login_failed_generic">ଲଗଇନ ହେଲାନାହିଁ</string>
+  <string name="login_failed_generic" fuzzy="true">ଲଗଇନ ହେଲାନାହିଁ</string>
   <string name="share_upload_button">ଅପଲୋଡ଼</string>
   <string name="multiple_share_base_title">ଏହି ବର୍ଗର ନାମ</string>
   <string name="provider_modifications">ସୁଧାର</string>

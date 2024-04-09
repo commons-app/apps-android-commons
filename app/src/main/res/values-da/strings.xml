@@ -66,10 +66,10 @@
   <string name="logging_in_title">Logger på</string>
   <string name="logging_in_message">Vent…</string>
   <string name="updating_caption_message">Vent venligst…</string>
-  <string name="login_success">Du er nu logget på!</string>
-  <string name="login_failed">Det mislykkedes at logge på!</string>
+  <string name="login_success" fuzzy="true">Du er nu logget på!</string>
+  <string name="login_failed" fuzzy="true">Det mislykkedes at logge på!</string>
   <string name="upload_failed">Filen blev ikke fundet. Forsøg med en anden fil.</string>
-  <string name="authentication_failed">Godkendelse mislykkedes, log venligst på igen</string>
+  <string name="authentication_failed" fuzzy="true">Godkendelse mislykkedes, log venligst på igen</string>
   <string name="uploading_started">Overførsel begyndt!</string>
   <string name="upload_completed_notification_title">%1$s overført!</string>
   <string name="upload_completed_notification_text">Tryk for at få vist din upload</string>
@@ -90,11 +90,11 @@
   <string name="menu_share">Del</string>
   <string name="share_title_hint">Billedtekst (Påkrævet)</string>
   <string name="share_description_hint">Beskrivelse</string>
-  <string name="login_failed_network">Kan ikke logge på - netværksfejl</string>
+  <string name="login_failed_network" fuzzy="true">Kan ikke logge på - netværksfejl</string>
   <string name="login_failed_throttled">Alt for mange mislykkede forsøg. Prøv igen om et par minutter.</string>
   <string name="login_failed_blocked">Beklager, denne bruger er blevet blokeret på Commons</string>
   <string name="login_failed_2fa_needed">Du skal angive din tofaktorgodkendelseskode.</string>
-  <string name="login_failed_generic">Det mislykkedes at logge på</string>
+  <string name="login_failed_generic" fuzzy="true">Det mislykkedes at logge på</string>
   <string name="share_upload_button">Upload</string>
   <string name="multiple_share_base_title">Navngiv dette sæt</string>
   <string name="provider_modifications">Ændringer</string>

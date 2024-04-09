@@ -10,8 +10,8 @@
   <string name="login">Нэвтрэх</string>
   <string name="logging_in_title">Нэвтэрч байна</string>
   <string name="logging_in_message">Түр хүлээнэ үү …</string>
-  <string name="login_success">Нэвтрэлт амжилттай боллоо!</string>
-  <string name="login_failed">Нэвтэрч чадсангүй!</string>
+  <string name="login_success" fuzzy="true">Нэвтрэлт амжилттай боллоо!</string>
+  <string name="login_failed" fuzzy="true">Нэвтэрч чадсангүй!</string>
   <string name="authentication_failed" fuzzy="true">Таныг танихад алдаа гарлаа!</string>
   <string name="uploading_started">Upload хийж эхэллээ!</string>
   <string name="upload_completed_notification_title">%1$s upload хийсэн!</string>
@@ -32,10 +32,10 @@
   <string name="menu_share">Хуваалцах</string>
   <string name="share_title_hint" fuzzy="true">Гарчиг</string>
   <string name="share_description_hint">Тайлбар</string>
-  <string name="login_failed_network">Нэвтрэхэд алдаа - сүлжээ</string>
+  <string name="login_failed_network" fuzzy="true">Нэвтрэхэд алдаа - сүлжээ</string>
   <string name="login_failed_throttled" fuzzy="true">Алдаатай оролдлогуудын тоо гүйцсэн. Түр хүлээгээд дахин оролдоно уу.</string>
   <string name="login_failed_blocked">Энэ хэрэглэгч Commons дээр блок хийгдсэн байна</string>
-  <string name="login_failed_generic">Нэвтэрч чадсангүй!</string>
+  <string name="login_failed_generic" fuzzy="true">Нэвтэрч чадсангүй!</string>
   <string name="share_upload_button">Оруулах</string>
   <string name="provider_modifications">Хийсэн өөрчлөлтүүд</string>
   <string name="menu_upload_single">Оруулах</string>
