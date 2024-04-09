@@ -388,7 +388,7 @@
   <string name="never_ask_again">Znovu nezobrazovat</string>
   <string name="display_location_permission_title" fuzzy="true">Zobrazit oprávnění k umístění</string>
   <string name="display_location_permission_explanation">Požádejte o oprávnění k umístění, pokud je zapotřebí pro funkci zobrazení pohledu v blízkosti.</string>
-  <string name="achievements_fetch_failed" fuzzy="true">Nastala neočekávaná chyba. Nemohli jsme dokončit akci</string>
+  <string name="achievements_fetch_failed">Nastala neočekávaná chyba. Nemohli jsme načíst vaše úspěchy</string>
   <string name="ends_on">Končí:</string>
   <string name="display_campaigns">Zobrazovat kampaně</string>
   <string name="display_campaigns_explanation">Podívejte se na probíhající kampaně</string>

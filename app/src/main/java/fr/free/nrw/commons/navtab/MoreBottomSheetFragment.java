@@ -56,6 +56,7 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
     @Named("commons-page-edit")
     PageEditClient pageEditClient;
 
+    private static final String GITHUB_ISSUES_URL = "https://github.com/commons-app/apps-android-commons/issues";
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater,
@@ -76,9 +77,17 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
         binding.moreSettings.setOnClickListener(v -> onSettingsClicked());
         binding.moreProfile.setOnClickListener(v -> onProfileClicked());
         binding.morePeerReview.setOnClickListener(v -> onPeerReviewClicked());
+        binding.moreFeedbackGithub.setOnClickListener(v -> onFeedbackGithubClicked());
 
         setUserName();
         return binding.getRoot();
+    }
+
+    private void onFeedbackGithubClicked() {
+        final Intent intent;
+        intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(GITHUB_ISSUES_URL));
+        startActivity(intent);
     }
 
     @Override

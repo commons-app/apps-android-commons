@@ -34,9 +34,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import fr.free.nrw.commons.CameraPosition;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient;
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException;
 import fr.free.nrw.commons.coordinates.CoordinateEditHelper;
 import fr.free.nrw.commons.filepicker.Constants;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
@@ -45,6 +49,7 @@ import fr.free.nrw.commons.location.LocationPermissionsHelper;
 import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -100,6 +105,10 @@ public class LocationPickerActivity extends BaseActivity implements
      */
     Button modifyLocationButton;
     /**
+     * removeLocationButton : button to remove location metadata
+     */
+    Button removeLocationButton;
+    /**
      * showInMapButton : button for showing in map
      */
     TextView showInMapButton;
@@ -142,6 +151,9 @@ public class LocationPickerActivity extends BaseActivity implements
     @Inject
     LocationServiceManager locationManager;
     LocationPermissionsHelper locationPermissionsHelper;
+
+    @Inject
+    SessionManager sessionManager;
 
     /**
      * Constants
@@ -212,6 +224,7 @@ public class LocationPickerActivity extends BaseActivity implements
         if ("UploadActivity".equals(activity)) {
             placeSelectedButton.setVisibility(View.GONE);
             modifyLocationButton.setVisibility(View.VISIBLE);
+            removeLocationButton.setVisibility(View.VISIBLE);
             showInMapButton.setVisibility(View.VISIBLE);
             largeToolbarText.setText(getResources().getString(R.string.image_location));
             smallToolbarText.setText(getResources().
@@ -264,6 +277,7 @@ public class LocationPickerActivity extends BaseActivity implements
         markerImage = findViewById(R.id.location_picker_image_view_marker);
         tvAttribution = findViewById(R.id.tv_attribution);
         modifyLocationButton = findViewById(R.id.modify_location);
+        removeLocationButton = findViewById(R.id.remove_location);
         showInMapButton = findViewById(R.id.show_in_map);
         showInMapButton.setText(getResources().getString(R.string.show_in_map_app).toUpperCase());
         shadow = findViewById(R.id.location_picker_image_view_shadow);
@@ -282,6 +296,7 @@ public class LocationPickerActivity extends BaseActivity implements
     private void setupMapView() {
         adjustCameraBasedOnOptions();
         modifyLocationButton.setOnClickListener(v -> onClickModifyLocation());
+        removeLocationButton.setOnClickListener(v -> onClickRemoveLocation());
         showInMapButton.setOnClickListener(v -> showInMap());
         darkThemeSetup();
         requestLocationPermissions();
@@ -293,6 +308,7 @@ public class LocationPickerActivity extends BaseActivity implements
     private void onClickModifyLocation() {
         placeSelectedButton.setVisibility(View.VISIBLE);
         modifyLocationButton.setVisibility(View.GONE);
+        removeLocationButton.setVisibility(View.GONE);
         showInMapButton.setVisibility(View.GONE);
         markerImage.setVisibility(View.VISIBLE);
         shadow.setVisibility(View.VISIBLE);
@@ -306,6 +322,35 @@ public class LocationPickerActivity extends BaseActivity implements
                     cameraPosition.getLongitude()));
             }
         }
+    }
+
+    /**
+     * Handles onclick event of removeLocationButton
+     */
+    private void onClickRemoveLocation() {
+        DialogUtil.showAlertDialog(this,
+            getString(R.string.remove_location_warning_title),
+            getString(R.string.remove_location_warning_desc),
+            getString(R.string.continue_message),
+            getString(R.string.cancel), () -> removeLocationFromImage(), null);
+    }
+
+    /**
+     * Method to remove the location from the picture
+     */
+    private void removeLocationFromImage() {
+        if (media != null) {
+            compositeDisposable.add(coordinateEditHelper.makeCoordinatesEdit(getApplicationContext()
+                    , media, "0.0", "0.0", "0.0f")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(s -> {
+                    Timber.d("Coordinates are removed from the image");
+                }));
+        }
+        final Intent returningIntent = new Intent();
+        setResult(AppCompatActivity.RESULT_OK, returningIntent);
+        finish();
     }
 
     /**
@@ -373,13 +418,29 @@ public class LocationPickerActivity extends BaseActivity implements
         if (media == null) {
             return;
         }
-        compositeDisposable.add(coordinateEditHelper.makeCoordinatesEdit(getApplicationContext(),media,
-                Latitude, Longitude, Accuracy)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(s -> {
-                Timber.d("Coordinates are added.");
-            }));
+
+        try {
+            compositeDisposable.add(
+                coordinateEditHelper.makeCoordinatesEdit(getApplicationContext(), media,
+                        Latitude, Longitude, Accuracy)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(s -> {
+                            Timber.d("Coordinates are added.");
+                        }));
+        } catch (Exception e) {
+            if (e.getLocalizedMessage().equals(CsrfTokenClient.ANONYMOUS_TOKEN_MESSAGE)) {
+                final String username = sessionManager.getUserName();
+                final CommonsApplication.BaseLogoutListener logoutListener = new CommonsApplication.BaseLogoutListener(
+                    this,
+                    getString(R.string.invalid_login_message),
+                    username
+                );
+
+                CommonsApplication.getInstance().clearApplicationData(
+                    this, logoutListener);
+            }
+        }
     }
 
     /**

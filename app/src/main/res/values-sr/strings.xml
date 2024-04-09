@@ -114,7 +114,7 @@
   <string name="add_caption_toast">Унесите натпис за ову датотеку</string>
   <string name="share_description_hint">Опис</string>
   <string name="share_caption_hint">Натпис</string>
-  <string name="login_failed_network" fuzzy="true">Пријава није могућа — грешка на мрежи</string>
+  <string name="login_failed_network">Пријава није могућа — грешка на мрежи</string>
   <string name="login_failed_throttled">Превише неуспешних покушаја. Покушајте поново за неколико минута.</string>
   <string name="login_failed_blocked">Овај корисник је блокиран на Остави</string>
   <string name="login_failed_2fa_needed">Морате да наведете свој двофакторски кôд за потврду идентитета.</string>
@@ -271,7 +271,7 @@
   <string name="nominated_see_more">Погледајте веб-страницу за више информација</string>
   <string name="skip_login">Прескочи</string>
   <string name="navigation_item_login">Пријави ме</string>
-  <string name="skip_login_title" fuzzy="true">Заиста желите да прескочите пријаву?</string>
+  <string name="skip_login_title">Заиста желите да прескочите пријаву?</string>
   <string name="skip_login_message">Мораћете да се пријавите да бисте отпремали слике у будућности.</string>
   <string name="login_alert_message">Пријавите се да бисте користили ову функцију</string>
   <string name="copy_wikicode">Копирај викитекст</string>
@@ -338,7 +338,7 @@
   <string name="construction_event_answer">Слике из области технологије или културе су добродошле на Остави.</string>
   <string name="congratulatory_message_quiz">Тачних одговора: %1$s. Честитамо!</string>
   <string name="warning_for_no_answer">Изаберите једну од две опције да бисте одговорили на питање</string>
-  <string name="user_not_logged_in" fuzzy="true">Сесија пријаве је истекла. Пријавите се поново.</string>
+  <string name="user_not_logged_in">Сесија пријаве је истекла. Пријавите се поново.</string>
   <string name="quiz_result_share_message">Делите квиз са пријатељима.</string>
   <string name="continue_message">Настави</string>
   <string name="correct">Тачан одговор</string>
@@ -552,7 +552,7 @@
   <string name="place_state_needs_photo">Потребна слика</string>
   <string name="place_type">Тип места:</string>
   <string name="nearby_search_hint">Мост, музеј, хотел итд.</string>
-  <string name="you_must_reset_your_passsword" fuzzy="true">Дошло је до грешке са пријављивањем, морате да промените Вашу лозинку !!</string>
+  <string name="you_must_reset_your_passsword">Дошло је до грешке са пријављивањем. Морате да промените Вашу лозинку!</string>
   <string name="upload_nearby_place_found_title">Оближње место је пронађено</string>
   <string name="upload_nearby_place_found_description">Да ли је ово фотографија %1$s?</string>
   <string name="title_app_shortcut_bookmark">Обележивачи</string>
@@ -716,8 +716,16 @@
   <string name="see_your_achievements">Види достигнућа</string>
   <string name="edit_image">Уреди слику</string>
   <string name="edit_location">Уреди локацију</string>
+  <string name="location_updated">Локација промењена!</string>
+  <string name="remove_location">Уклони локацију</string>
+  <string name="location_removed">Локација уклоњена!</string>
   <string name="send_thanks_to_author">Захвали се аутору</string>
   <string name="invalid_login_message" fuzzy="true">Ваша пријава је истекла. Молимо пријавите се поново.</string>
+  <string name="file_saved_successfully">Чување датотеке успешно</string>
+  <string name="failed_to_save_kml_file">Чување KML датотеке није успело.</string>
+  <string name="failed_to_save_gpx_file">Чување GPX датотеке није успело.</string>
+  <string name="saving_kml_file">Чување KML датотеке</string>
+  <string name="saving_gpx_file">Чување GPX датотеке</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d слика је одабрана</item>
     <item quantity="other">%d слика је одабрано</item>

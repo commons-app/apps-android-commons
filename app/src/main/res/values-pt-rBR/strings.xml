@@ -10,6 +10,7 @@
 * Fúlvio
 * Gusta
 * HenriqueCrang
+* Lc97
 * Legionibus
 * Leosls
 * Luckas
@@ -716,7 +717,7 @@
   <string name="feedback_sharing_data_alert">Remova deste e-mail qualquer informação que você não se sinta à vontade para compartilhar publicamente. Além disso, esteja ciente de que seu endereço de e-mail com o qual você está postando e o nome associado e a foto do perfil serão visíveis publicamente.</string>
   <string name="explore_map_details">Detalhes</string>
   <string name="achievements_unavailable_beta" fuzzy="true">As conquistas estão disponíveis apenas na versão de produção, verifique a documentação do desenvolvedor.</string>
-  <string name="leaderboard_unavailable_beta" fuzzy="true">A tabela de classificação só está disponível na versão de produção; consulte a documentação para programadores, por favor.</string>
+  <string name="leaderboard_unavailable_beta">A tabela de classificação está disponível somente na versão de produção. Consulte a documentação de desenvolvedores.</string>
   <string name="copyright_popup">Por favor, envie apenas fotos tiradas por você mesmo. Os usuários que enviarem imagens protegidas por direitos autorais serão bloqueados. Isso se aplica à versão beta também. Obrigado por testar o aplicativo!</string>
   <string name="select_feedback_data_choice">Desmarque qualquer informação que você não se sinta à vontade para compartilhar publicamente.</string>
   <string name="api_level">Nível da API</string>
@@ -752,6 +753,17 @@
   <string name="similar_coordinate_description_auto_set">As coordenadas não são exatas, mas a pessoa que carregou essa imagem crê que sejam próximas o suficiente.</string>
   <string name="storage_permissions_denied">Permissão de armazenamento negada</string>
   <string name="unable_to_share_upload_item">Incapaz de compartilhar esse item</string>
+  <string name="location_updated">Localização atualizada!</string>
+  <string name="remove_location">Remover localização</string>
+  <string name="location_removed">Localização removida!</string>
+  <string name="no_application_available_to_open_gpx_files">Não há aplicações disponíveis para abrir arquivos GPX</string>
+  <string name="file_saved_successfully">Salvo com sucesso</string>
+  <string name="do_you_want_to_open_gpx_file">Deseja abrir o arquivo GPX?</string>
+  <string name="do_you_want_to_open_kml_file">Deseja abrir o arquivo KML?</string>
+  <string name="failed_to_save_kml_file">Falha ao salvar arquivo KML.</string>
+  <string name="failed_to_save_gpx_file">Falha ao salvar o arquivo GPX.</string>
+  <string name="saving_kml_file">Salvar arquivo KML</string>
+  <string name="saving_gpx_file">Salvar arquivo GPX</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d imagem selecinada</item>
     <item quantity="other">%d imagens selecionadas</item>

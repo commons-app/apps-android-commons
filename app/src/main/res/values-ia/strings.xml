@@ -72,13 +72,13 @@
   <string name="logging_in_message">Un momento…</string>
   <string name="updating_caption_title">Actualisa legendas e descriptiones</string>
   <string name="updating_caption_message">Un momento…</string>
-  <string name="login_success" fuzzy="true">Session aperite!</string>
-  <string name="login_failed" fuzzy="true">Session fallite!</string>
+  <string name="login_success">Session aperite!</string>
+  <string name="login_failed">Session fallite!</string>
   <string name="upload_failed">File non trovate. Proba con un altere file.</string>
   <string name="retry_limit_reached">Limite maxime de tentativas attingite! Per favor cancella le incargamento e essaya lo de novo.</string>
   <string name="unrestricted_battery_mode">Disactivar le optimisation del batteria?</string>
   <string name="suggest_unrestricted_mode">Incargar plus de 3 imagines functiona plus solidemente quando le optimisation del batteria es disactivate. Per favor disactiva le optimisation del batteria pro le app Commons in le Parametros pro un experientia de incargamento plus fluide.\n\nPassos possibile pro disactivar le optimisation del batteria:\n\nPasso 1: Tocca le button ‘Parametros’ infra.\n\nPasso 2: Cambia de ‘Non optimisate’ a ‘Tote le apps’.\n\nPasso 3: Cerca “Commons” o “fr.free.nrw.commons”.\n\nPasso 4: Tocca lo e selige ‘Non optimizar’.\n\nPasso 5: Preme ‘Facite’.</string>
-  <string name="authentication_failed" fuzzy="true">Authentication fallite, per favor reaperi session</string>
+  <string name="authentication_failed">Authentication fallite. Per favor reaperi session.</string>
   <string name="uploading_started">Incargamento comenciate!</string>
   <string name="uploading_queued">Incargamento in cauda (modo de connexion limitate activate)</string>
   <string name="upload_completed_notification_title">%1$s incargate!</string>
@@ -105,11 +105,11 @@
   <string name="add_caption_toast">Per favor, forni un legenda pro iste file</string>
   <string name="share_description_hint">Description</string>
   <string name="share_caption_hint">Legenda</string>
-  <string name="login_failed_network" fuzzy="true">Impossibile aperir session; fallimento de rete</string>
+  <string name="login_failed_network">Impossibile aperir session; fallimento de rete</string>
   <string name="login_failed_throttled">Troppo de tentativas fallite. Per favor reproba in alcun minutas.</string>
   <string name="login_failed_blocked">Iste usator ha essite blocate sur Commons</string>
   <string name="login_failed_2fa_needed">Tu debe fornir tu codice de authentication bifactorial.</string>
-  <string name="login_failed_generic" fuzzy="true">Apertura de session fallite</string>
+  <string name="login_failed_generic">Apertura de session fallite</string>
   <string name="share_upload_button">Incargar</string>
   <string name="multiple_share_base_title">Nomine de iste insimul</string>
   <string name="provider_modifications">Modificationes</string>
@@ -261,7 +261,7 @@
   <string name="nominated_see_more">Vide le pagina web pro detalios</string>
   <string name="skip_login">Saltar</string>
   <string name="navigation_item_login">Aperir session</string>
-  <string name="skip_login_title" fuzzy="true">Vole tu vermente saltar le apertura de session?</string>
+  <string name="skip_login_title">Vole tu vermente saltar le apertura de session?</string>
   <string name="skip_login_message">Tu debera alora aperir session pro incargar imagines plus tarde.</string>
   <string name="login_alert_message">Per favor aperi session pro usar iste function</string>
   <string name="copy_wikicode">Copiar le wikitexto al area de transferentia</string>
@@ -328,7 +328,7 @@
   <string name="construction_event_answer">Imagines que monstra technologia o cultura es multo benvenite sur Commons.</string>
   <string name="congratulatory_message_quiz">Tu ha %1$s del responsas correcte. Felicitationes!</string>
   <string name="warning_for_no_answer">Selige un del duo optiones pro responder al question</string>
-  <string name="user_not_logged_in" fuzzy="true">Session expirate, per favor reaperi session</string>
+  <string name="user_not_logged_in">Session expirate. Per favor reaperi session.</string>
   <string name="quiz_result_share_message">Condivide tu quiz con tu amicos!</string>
   <string name="continue_message">Continuar</string>
   <string name="correct">Responsa correcte</string>
@@ -412,7 +412,7 @@
   <string name="never_ask_again">Nunquam demandar isto de novo</string>
   <string name="display_location_permission_title">Demandar permission de localisation</string>
   <string name="display_location_permission_explanation">Demandar le permission de acceder al position quando es necessari pro le function de notification a proximitate.</string>
-  <string name="achievements_fetch_failed" fuzzy="true">Un problema ha occurrite. Non esseva possibile obtener tu realisationes.</string>
+  <string name="achievements_fetch_failed">Un problema ha occurrite. Non esseva possibile obtener le realisationes.</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Tu ha facite tante contributiones que nostre systema de calculo de realisationes non pote contar los. Iste es le realisation ultime!</string>
   <string name="ends_on">Termina le:</string>
   <string name="display_campaigns">Monstrar campanias</string>
@@ -428,7 +428,7 @@
   <string name="open_document_photo_picker_explanation">Le nove selector de photos de Android risca perder le information de localisation. Activa lo su tu sembla usar lo.</string>
   <string name="location_loss_warning">Si tu disactiva isto, le nove selector de photos de Android pote esser activate. Isto involve le periculo que information de localisation pote esser perdite.\n\nTocca ‘Leger plus’ pro plus information.</string>
   <string name="nearby_campaign_dismiss_message">Tu non videra plus le campanias. Totevia, tu pote reactivar iste notification in le Parametros si tu vole.</string>
-  <string name="this_function_needs_network_connection" fuzzy="true">Iste function require un connexion al rete. Per favor verifica tu parametros de connexion.</string>
+  <string name="this_function_needs_network_connection">Iste function require un connexion al rete. Per favor verifica tu parametros de connexion.</string>
   <string name="error_processing_image">Un error ha occurrite durante le processamento del imagine. Per favor essaya lo de novo!</string>
   <string name="getting_edit_token">Obtention de un token de modification</string>
   <string name="check_category_adding_template">Addition de un patrono pro le controlo de categoria</string>
@@ -555,7 +555,7 @@
   <string name="place_state_needs_photo">Require photo</string>
   <string name="place_type">Typo de loco:</string>
   <string name="nearby_search_hint">Ponte, museo, hotel, etc.</string>
-  <string name="you_must_reset_your_passsword" fuzzy="true">Un error ha occurrite durante le apertura de session. Es necessari reinitialisar tu contrasigno.</string>
+  <string name="you_must_reset_your_passsword">Un error ha occurrite durante le apertura de session. Es necessari reinitialisar tu contrasigno.</string>
   <string name="title_for_media">MULTIMEDIA</string>
   <string name="title_for_child_classes">CLASSES FILIO</string>
   <string name="title_for_parent_classes">CLASSES GENITOR</string>
@@ -689,8 +689,8 @@
   <string name="add_location">Adder localisation</string>
   <string name="feedback_sharing_data_alert">Per favor remove de iste e-mail omne information que tu non vole condivider publicamente. In ultra, sia conscie que le adresse de e-mail que tu usa pro publicar, e le nomine e imagine de profilo associate, essera visibile publicamente.</string>
   <string name="explore_map_details">Detalios</string>
-  <string name="achievements_unavailable_beta" fuzzy="true">Le realisationes es disponibile solmente in le version de production. Per favor consulta le documentation del disveloppator.</string>
-  <string name="leaderboard_unavailable_beta" fuzzy="true">Le tabula de classamento es solmente disponibile in le version de production. Per favor consulta le documentation del disveloppator.</string>
+  <string name="achievements_unavailable_beta">Le realisationes es disponibile solmente in le version de production. Per favor consulta le documentation del disveloppator.</string>
+  <string name="leaderboard_unavailable_beta">Le tabula de classamento es solmente disponibile in le version de production. Per favor consulta le documentation del disveloppator.</string>
   <string name="copyright_popup">Per favor incarga solmente imagines que tu ha prendite tu mesme. Le incargatores de imagines con derectos de autor essera blocate. Isto se applica equalmente al version beta. Gratias pro testar le application!</string>
   <string name="select_feedback_data_choice">Per favor dismarca omne information que tu non vole condivider publicamente.</string>
   <string name="api_level">Nivello del API</string>
@@ -736,7 +736,15 @@
   <string name="edit_location">Modificar position</string>
   <string name="send_thanks_to_author">Regratiar le autor</string>
   <string name="error_sending_thanks">Error inviante gratias al autor.</string>
-  <string name="invalid_login_message" fuzzy="true">Tu session ha expirate. Per favor reaperi session.</string>
+  <string name="invalid_login_message">Tu session ha expirate. Per favor reaperi session.</string>
+  <string name="no_application_available_to_open_gpx_files">Necun application disponibile pro aperir files GPX</string>
+  <string name="file_saved_successfully">File salveguardate con successo</string>
+  <string name="do_you_want_to_open_gpx_file">Vole tu aperir le file GPX?</string>
+  <string name="do_you_want_to_open_kml_file">Vole tu aperir le file KML?</string>
+  <string name="failed_to_save_kml_file">Non poteva salveguardar le file KML.</string>
+  <string name="failed_to_save_gpx_file">Non poteva salveguardar le file GPX.</string>
+  <string name="saving_kml_file">Salveguarda file KML</string>
+  <string name="saving_gpx_file">Salveguarda file GPX</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d imagine seligite</item>
     <item quantity="other">%d imagines seligite</item>
