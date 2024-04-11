@@ -15,7 +15,9 @@
   <string name="add_new_contribution">Neie Bäitrag derbäiasetzen</string>
   <string name="add_contribution_from_camera">Bäitrag vun der Kamera derbäisetzen</string>
   <string name="add_contribution_from_photos">Bäitrag vun de Fotoen derbäisetzen</string>
+  <string name="show_captions">Beschreiwungen</string>
   <string name="row_item_language_description">Sprooch-Beschreiwung</string>
+  <string name="row_item_caption">Beschreiwung</string>
   <string name="show_captions_description">Beschreiwung</string>
   <string name="nearby_row_image">Bild</string>
   <string name="nearby_all">All</string>
@@ -264,6 +266,7 @@
   <string name="search_tab_title_depictions">Elementer</string>
   <string name="explore_tab_title_mobile">mobil eropgelueden</string>
   <string name="explore_tab_title_map">Kaart</string>
+  <string name="successful_wikidata_edit">Bild bei %1$s op Wikidata derbäigesat!</string>
   <string name="wikidata_edit_failure">Déi entspriechend Wikidata-Entitéit konnt net aktualiséiert ginn!</string>
   <string name="menu_set_wallpaper">Als Hannergrondbild festleeën</string>
   <string name="wallpaper_set_successfully">Hannergrondbild festgeluecht</string>

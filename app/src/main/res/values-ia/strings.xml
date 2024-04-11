@@ -228,6 +228,7 @@
   <string name="navigation_item_about">A proposito</string>
   <string name="navigation_item_settings">Parametros</string>
   <string name="navigation_item_feedback">Commentario</string>
+  <string name="navigation_item_feedback_github">Retroaction per GitHub</string>
   <string name="navigation_item_logout">Clauder session</string>
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Notificationes</string>
@@ -734,6 +735,11 @@
   <string name="see_your_achievements">Vider tu realisationes</string>
   <string name="edit_image">Modificar imagine</string>
   <string name="edit_location">Modificar position</string>
+  <string name="location_updated">Position actualisate!</string>
+  <string name="remove_location">Remover position</string>
+  <string name="remove_location_warning_title">Remover le advertimento de position</string>
+  <string name="remove_location_warning_desc">Le position rende le imagines plus utile e trovabile. Es tu secur de voler remover le position de iste imagine?</string>
+  <string name="location_removed">Position removite!</string>
   <string name="send_thanks_to_author">Regratiar le autor</string>
   <string name="error_sending_thanks">Error inviante gratias al autor.</string>
   <string name="invalid_login_message">Tu session ha expirate. Per favor reaperi session.</string>

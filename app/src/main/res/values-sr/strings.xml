@@ -673,7 +673,7 @@
   <string name="feedback_sharing_data_alert">Молимо уклоните из овог мејла све информације које не желите да делите јавно. Такође, имајте на уму да ће ваша имејл адреса са које објављујете и повезано име и профилна слика, бити јавно видљиви.</string>
   <string name="explore_map_details">Детаљи</string>
   <string name="achievements_unavailable_beta" fuzzy="true">Достигнућа су доступна само у продукционој верзији, проверите документацију за програмере.</string>
-  <string name="leaderboard_unavailable_beta" fuzzy="true">Табела лидера је доступна само у продукционој верзији, проверите документацију за програмере.</string>
+  <string name="leaderboard_unavailable_beta">Табела лидера је доступна само у продукционој верзији, проверите документацију за програмере.</string>
   <string name="copyright_popup">Молимо вас да отпремате само слике које сте сами направили. Отпремаоци слика који крше ауторска права ће бити блокирани. Ово се такође односи на бета верзију. Хвала вам што тестирате апликацију!</string>
   <string name="select_feedback_data_choice">Молимо вас да поништите све информације које не жечите да делите јавно.</string>
   <string name="api_level">Ниво API-ја</string>
@@ -720,7 +720,7 @@
   <string name="remove_location">Уклони локацију</string>
   <string name="location_removed">Локација уклоњена!</string>
   <string name="send_thanks_to_author">Захвали се аутору</string>
-  <string name="invalid_login_message" fuzzy="true">Ваша пријава је истекла. Молимо пријавите се поново.</string>
+  <string name="invalid_login_message">Ваша пријава је истекла. Молимо пријавите се поново.</string>
   <string name="file_saved_successfully">Чување датотеке успешно</string>
   <string name="failed_to_save_kml_file">Чување KML датотеке није успело.</string>
   <string name="failed_to_save_gpx_file">Чување GPX датотеке није успело.</string>

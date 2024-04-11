@@ -10,6 +10,7 @@
 * Jimkats
 * KATRINE1992
 * KATRINE1993
+* Karyotakisg
 * ManosHacker
 * McDutchie
 * MnLsVt
@@ -20,19 +21,29 @@
 * Panos78
 * Protnet
 * Tgkarounos
+* Vtalos
 -->
 <resources>
   <string name="commons_facebook">Σελίδα των Κοινών στο Facebook</string>
   <string name="commons_github">Κώδικας πηγής των Κοινών στο GitHub</string>
-  <string name="commons_logo" fuzzy="true">Κοινό Λογότυπο</string>
+  <string name="commons_logo">Λογότυπο Commons</string>
   <string name="commons_website">Ιστοσελίδα των Κοινών</string>
+  <string name="exit_location_picker">Έξοδος από το εργαλείο επιλογής τοποθεσίας</string>
   <string name="submit">Υποβολή</string>
+  <string name="add_another_description">Επιλέξτε άλλη περιγραφή</string>
+  <string name="add_new_contribution">Προσθέστε νέα συνεισφορά</string>
+  <string name="add_contribution_from_camera">Προσθέστε συνεισφορά από την κάμερα</string>
+  <string name="add_contribution_from_photos">Προσθέστε συνεισφορά από τις Φωτογραφίες</string>
+  <string name="add_contribution_from_contributions_gallery">Προσθέστε συνεισφορά από προηγούμενη συλλογή συνεισφορών</string>
   <string name="show_captions">Λεζάντες</string>
   <string name="row_item_language_description">Περιγραφή Γλώσσας</string>
   <string name="row_item_caption">Λεζάντα</string>
   <string name="show_captions_description">Περιγραφή</string>
   <string name="nearby_row_image">Εικόνα</string>
   <string name="nearby_all">Όλα</string>
+  <string name="nearby_filter_toggle">Ενεργοποιήστε</string>
+  <string name="nearby_filter_search">Προβολή αναζήτησης</string>
+  <string name="nearby_filter_state">Κατάσταση τοποθεσίας</string>
   <string name="appwidget_img">Φωτογραφία της Ημέρας</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">1 αρχείο επιφορτώνεται</item>
@@ -72,6 +83,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Ρυθμίσεις</string>
   <string name="intent_share_upload_label">Ανέβασμα στα Κοινά</string>
+  <string name="upload_in_progress">Ανέβασμα σε εξέλιξη...</string>
   <string name="username">Όνομα χρήστη</string>
   <string name="password">Κωδικός πρόσβασης</string>
   <string name="login_credential">Συνδεθείτε στο λογαριασμό σας στο Commons Beta</string>
@@ -82,10 +94,13 @@
   <string name="logging_in_message">Παρακαλούμε περιμένετε…</string>
   <string name="updating_caption_title">Ενημέρωση λεζάντων και περιγραφών</string>
   <string name="updating_caption_message">Παρακαλούμε περιμένετε…</string>
-  <string name="login_success" fuzzy="true">Επιτυχής σύνδεση!</string>
-  <string name="login_failed" fuzzy="true">Η είσοδος απέτυχε!</string>
+  <string name="login_success">Επιτυχής σύνδεση!</string>
+  <string name="login_failed">Η είσοδος απέτυχε!</string>
   <string name="upload_failed">Το αρχείο δεν βρέθηκε. Παρακαλώ δοκιμάστε ένα άλλο αρχείο.</string>
-  <string name="authentication_failed" fuzzy="true">Απέτυχε ο έλεγχος ταυτότητας, παρακαλώ συνδεθείτε ξανά</string>
+  <string name="retry_limit_reached">Συμπληρώθηκε το μέγιστο όριο επανάληψης! Ακυρώστε τη μεταφόρτωση και προσπαθήστε ξανά</string>
+  <string name="unrestricted_battery_mode">Απενεργοποίηση βελτιστοποίησης μπαταρίας;</string>
+  <string name="suggest_unrestricted_mode">Η μεταφόρτωση περισσότερων από 3 εικόνων λειτουργεί πιο αξιόπιστα όταν η βελτιστοποίηση μπαταρίας είναι απενεργοποιημένη. Απενεργοποιήστε τη βελτιστοποίηση μπαταρίας για την εφαρμογή Commons από τις ρυθμίσεις για μια ομαλή εμπειρία μεταφόρτωσης. \n\nΠιθανά βήματα για να απενεργοποιήσετε τη βελτιστοποίηση μπαταρίας:\n\nΒήμα 1: Πατήστε στο κουμπί \"Ρυθμίσεις\" παρακάτω.\n\nΒήμα 2: Εναλλαγή από \"Μη βελτιστοποιημένη\" σε \"Σε όλες τις  εφαρμογές\".\n\nΒήμα 3: Αναζήτηση για \"Commons\" ή \"fr.free.nrw.commons\".\n\nΒήμα 4: Πατήστε το και επιλέξτε \"Να μην γίνει βελτιστοποίηση\".\n\nΒήμα 5: Πατήστε \'Τέλος\'.</string>
+  <string name="authentication_failed">Απέτυχε ο έλεγχος ταυτότητας, παρακαλώ συνδεθείτε ξανά.</string>
   <string name="uploading_started">Η αποστολή ξεκίνησε!</string>
   <string name="uploading_queued">Η μεταφόρτωση βρίσκεται σε ουρά (ενεργοποιημένη λειτουργία περιορισμένης σύνδεσης)</string>
   <string name="upload_completed_notification_title">%1$s επιφορτώθηκε!</string>
@@ -96,7 +111,8 @@
   <string name="upload_failed_notification_title">Απέτυχε η μεταφόρτωση του %1$s</string>
   <string name="upload_paused_notification_title">Η μεταφόρτωση %1$s τέθηκε σε παύση</string>
   <string name="upload_failed_notification_subtitle">Πατήστε για να δείτε</string>
-  <string name="title_activity_contributions" fuzzy="true">Οι Πρόσφατες Φορτώσεις Μου</string>
+  <string name="upload_paused_notification_subtitle">Πατήστε για προβολή</string>
+  <string name="title_activity_contributions">Οι Πρόσφατες Μεταφορτώσεις μου</string>
   <string name="contribution_state_queued">Στην ουρά</string>
   <string name="contribution_state_failed">Απέτυχε</string>
   <string name="contribution_state_in_progress">%1$d%% ολοκληρώθηκε</string>
@@ -111,32 +127,36 @@
   <string name="add_caption_toast">Παρακαλούμε προσθέστε περιγραφή για αυτό το αρχείο</string>
   <string name="share_description_hint">Περιγραφή</string>
   <string name="share_caption_hint">Λεζάντα</string>
-  <string name="login_failed_network" fuzzy="true">Δεν είναι δυνατή η σύνδεση - αποτυχία του δικτύου</string>
+  <string name="login_failed_network">Δεν είναι δυνατή η σύνδεση - αποτυχία του δικτύου</string>
   <string name="login_failed_throttled">Πάρα πολλές ανεπιτυχείς προσπάθειες. Παρακαλώ δοκιμάστε ξανά σε λίγα λεπτά.</string>
   <string name="login_failed_blocked">Συγνώμη, αυτός ο χρήστης έχει αποκλειστεί από τα Commons</string>
-  <string name="login_failed_2fa_needed" fuzzy="true">Πρέπει να δώσετε τον κωδικό πιστοποίησης με δύο παράγοντες</string>
-  <string name="login_failed_generic" fuzzy="true">Η είσοδος απέτυχε</string>
+  <string name="login_failed_2fa_needed">Πρέπει να δώσετε τον κωδικό ελέγχου ταυτότητας δύο παραγόντων.</string>
+  <string name="login_failed_generic">Η είσοδος απέτυχε</string>
   <string name="share_upload_button">Ανέβασμα</string>
   <string name="multiple_share_base_title">Ονομάστε το σύνολο</string>
   <string name="provider_modifications">Τροποποιήσεις</string>
   <string name="menu_upload_single">Ανέβασμα</string>
   <string name="categories_search_text_hint">Αναζήτηση κατηγοριών</string>
+  <string name="depicts_search_text_hint">Αναζητήστε αντικείμενα που απεικονίζουν τα μέσα σας (βουνό, Ταζ Μαχάλ κ.λπ.)</string>
   <string name="menu_save_categories">Αποθήκευση</string>
   <string name="refresh_button">Ανανέωση</string>
   <string name="display_list_button">Κατάλογος</string>
   <string name="contributions_subtitle_zero">(Καμία μεταφόρτωση ακόμα)</string>
   <string name="categories_not_found">Δεν βρέθηκαν κατηγορίες που ταιριάζουν %1$s</string>
+  <string name="depictions_not_found">Δεν βρέθηκαν στοιχεία Wikidata που να ταιριάζουν στο %1$s</string>
   <string name="categories_skip_explanation">Προσθέστε κατηγορίες για να κάνετε τις εικόνες σας πιο ανιχνεύσιμες στα Wikimedia Commons.\n\nΑρχίστε να γράφετε για να προσθέσετε κατηγορίες.\nΠατήστε αυτό το μήνυμα (ή πατήστε επιστροφή) για να παραλείψετε αυτό το βήμα.</string>
   <string name="categories_activity_title">Κατηγορίες</string>
   <string name="title_activity_settings">Ρυθμίσεις</string>
   <string name="title_activity_signup">Εγγραφή</string>
   <string name="title_activity_featured_images">Προβεβλημμένες εικόνες</string>
+  <string name="title_activity_custom_selector">Προσαρμοσμένος Επιλογέας</string>
   <string name="title_activity_category_details">Κατηγορία</string>
+  <string name="title_activity_review">Αναθεώρηση από Ομότιμους</string>
   <string name="menu_about">Σχετικά</string>
   <string name="about_license" fuzzy="true">Λογισμικό ανοικτού κωδικού που κυκλοφορεί υπό την &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Άδεια Apache v2&lt;/a&gt;. Το Wikimedia Commons και το λογότυπο είναι εμπορικά σήματα του Ιδρύματος Wikimedia και χρησιμοποιούνται με άδεια από το Ίδρυμα Wikimedia. Δεν συμμετέχουμε  στην δημιουργία, ανάπτυξη ή συντήρηση  του Ιδρύματος  Wikimedia.</string>
   <string name="about_improve">Δημιουργήστε ένα νέο &lt;a href=\"%1$s\"&gt;GitHub θέμα&lt;/a&gt; για αναφορές σφαλμάτων και προτάσεις.</string>
   <string name="about_privacy_policy">Πολιτική ιδιωτικότητας</string>
-  <string name="about_credits" fuzzy="true">&lt;u&gt;Συντελεστές&lt;/u&gt;</string>
+  <string name="about_credits">&lt;u&gt;Συντελεστές&lt;/u&gt;</string>
   <string name="title_activity_about">Σχετικά</string>
   <string name="menu_feedback">Αποστολή σχολίων (μέσω Email)</string>
   <string name="no_email_client">Δεν υπάρχει εγκατεστημένη εφαρμογή ηλεκτρονικού ταχυδρομείου</string>
@@ -148,7 +168,7 @@
   <string name="media_upload_policy" fuzzy="true">Αποστέλλοντας αυτήν την εικόνα, δηλώνω πως αυτή η εργασία είναι δική μου, και δεν περιέχει υλικό άλλου συγγραφέα, και εκτός αυτού πρόσκειται στο , thathref=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Κοινές πολιτικές της Wikipedia&lt;/a&gt;.</string>
   <string name="menu_download">Λήψη</string>
   <string name="preference_license">Προεπιλεγμένη άδεια</string>
-  <string name="use_previous" fuzzy="true">Χρήση προηγούμενου τίτλου/περιγραφής</string>
+  <string name="use_previous">Χρήση προηγούμενου τίτλου και περιγραφής</string>
   <string name="preference_theme">Θέμα</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
@@ -192,8 +212,11 @@
   <string name="read_storage_permission_rationale">Απαιτούμενη άδεια: Ανάγνωση εξωτερικής αποθήκευσης. Η εφαρμογή δεν μπορεί να έχει πρόσβαση στην συλλογή σας χωρίς αυτή.</string>
   <string name="write_storage_permission_rationale">Απαιτούμενη άδεια: Εγγραφή σε εξωτερική αποθήκευση. Το πρόγραμμα δεν θα έχει πρόσβαση στην κάμερα/συλλογή σας χωρίς αυτήν.</string>
   <string name="location_permission_title">Αιτείται Άδεια Τοποθεσίας</string>
+  <string name="in_app_camera_location_permission_title">Καταγραφή τοποθεσίας για λήψεις εντός εφαρμογής</string>
+  <string name="in_app_camera_location_switch_pref_summary">Ενεργοποιήστε το για να καταγράψετε την τοποθεσία με λήψεις εντός εφαρμογής σε περίπτωση που η κάμερα της συσκευής δεν την καταγράψει</string>
   <string name="ok">Εντάξει</string>
   <string name="warning">Προειδοποίηση</string>
+  <string name="duplicate_file_name">Βρέθηκαν αρχεία με ίδιο όνομα</string>
   <string name="upload">Μεταφόρτωση</string>
   <string name="yes">Ναι</string>
   <string name="no">Όχι</string>
@@ -203,49 +226,55 @@
   <string name="media_detail_description">Περιγραφή</string>
   <string name="media_detail_discussion">Συζήτηση</string>
   <string name="media_detail_author">Συγγραφέας</string>
-  <string name="media_detail_uploaded_date" fuzzy="true">Ημερομηνία φόρτωσης</string>
-  <string name="media_detail_license" fuzzy="true">Άδεια</string>
-  <string name="media_detail_coordinates" fuzzy="true">Συντεταγμένες</string>
+  <string name="media_detail_uploaded_date">Ημερομηνία μεταφόρτωσης</string>
+  <string name="media_detail_license">Άδεια</string>
+  <string name="media_detail_coordinates">Συντεταγμένες</string>
   <string name="media_detail_coordinates_empty" fuzzy="true">Δεν δόθηκε τίποτα</string>
   <string name="become_a_tester_title">Γίνετε Δοκιμαστής Beta</string>
   <string name="become_a_tester_description">Συμμετέχετε στο κανάλι beta μας στο Google Play και αποκτήστε πρώιμη πρόσβαση σε νέες λειτουργίες και διορθώσεις σφαλμάτων</string>
-  <string name="_2fa_code" fuzzy="true">Κωδικός 2FA</string>
-  <string name="logout_verification" fuzzy="true">Θέλετε πράγματι να αποσυνδεθείτε;</string>
-  <string name="mediaimage_failed" fuzzy="true">Η Εικόνα των Μέσων Απέτυχε (δεν μπορεί να φορτωθεί)</string>
+  <string name="_2fa_code">Κωδικός 2FA</string>
+  <string name="logout_verification">Θέλετε σίγουρα να αποσυνδεθείτε;</string>
+  <string name="mediaimage_failed">Η Εικόνα των Μέσων Απέτυχε (δεν μπορεί να φορτωθεί)</string>
   <string name="no_subcategory_found">Δεν βρέθηκαν υποκατηγορίες</string>
   <string name="no_parentcategory_found">Δεν βρέθηκαν γονικές κατηγορίες</string>
-  <string name="welcome_image_mount_zao" fuzzy="true">Mount Zao</string>
+  <string name="welcome_image_mount_zao">Όρος Ζάο</string>
   <string name="welcome_image_llamas" fuzzy="true">Llamas</string>
-  <string name="welcome_image_rainbow_bridge" fuzzy="true">Γέφυρα Ουρανίου Τόξου</string>
-  <string name="welcome_image_tulip" fuzzy="true">Τουλίπα</string>
+  <string name="welcome_image_rainbow_bridge">Γέφυρα Ουρανίου Τόξου</string>
+  <string name="welcome_image_tulip">Τουλίπα</string>
   <string name="welcome_image_welcome_wikipedia" fuzzy="true"> Καλωσόρισες Βικιπαίδεια</string>
   <string name="welcome_image_welcome_copyright" fuzzy="true">Καλωσορίστε το Δικαίωμα Αντιγραφής</string>
   <string name="welcome_image_sydney_opera_house" fuzzy="true">Κτίρια Όπερας Sidney</string>
-  <string name="cancel" fuzzy="true">Ακυρώστε</string>
-  <string name="navigation_drawer_open" fuzzy="true">Ανοίξετε</string>
-  <string name="navigation_drawer_close" fuzzy="true">Κλείσετε</string>
-  <string name="navigation_item_home" fuzzy="true">Αρχική Σελίδα</string>
-  <string name="navigation_item_upload" fuzzy="true">Φορτώστε</string>
-  <string name="navigation_item_nearby" fuzzy="true">Εδώ Κοντά</string>
+  <string name="cancel">Ακυρώστε</string>
+  <string name="navigation_drawer_open">Ανοίξτε</string>
+  <string name="navigation_drawer_close">Κλείστε</string>
+  <string name="navigation_item_home">Αρχική Σελίδα</string>
+  <string name="navigation_item_upload">Ανέβασμα αρχείου</string>
+  <string name="navigation_item_nearby">Κοντά σας</string>
   <string name="navigation_item_about">Σχετικά</string>
-  <string name="navigation_item_settings" fuzzy="true">Ρυθμίσεις</string>
-  <string name="navigation_item_feedback" fuzzy="true">Σχόλια</string>
-  <string name="navigation_item_logout" fuzzy="true">Αποσύνδεση</string>
+  <string name="navigation_item_settings">Ρυθμίσεις</string>
+  <string name="navigation_item_feedback">Ανατροφοδότηση</string>
+  <string name="navigation_item_feedback_github">Ανατροφοδότηση μέσω Github</string>
+  <string name="navigation_item_logout">Αποσύνδεση</string>
   <string name="navigation_item_info" fuzzy="true">Σεμινάριο</string>
   <string name="navigation_item_notification">Ενημερώσεις</string>
+  <string name="navigation_item_review">Επιθεώρηση</string>
   <string name="no_description_found" fuzzy="true">δεν βρέθηκε περιγραφή</string>
   <string name="nearby_info_menu_commons_article" fuzzy="true">Σελίδα φακέλλου κοινής χρήσης</string>
   <string name="nearby_info_menu_wikidata_article" fuzzy="true">Τεμάχιο Wikidata</string>
   <string name="nearby_info_menu_wikipedia_article">Λήμμα Βικιπαίδειας</string>
-  <string name="description_info" fuzzy="true">Παρακαλώ περιγράψετε τα μέσα το δυνατό περισσότερο : Πού οδηγήθηκε αυτό; Τι δείχνει; Ποιο είναι το περιεχόμενο του; Παρακαλώ περιγράψετε τα αντικείμενα ή τα πρόσωπα. Αποκαλύψετε πληροφορίες που δεν μπορούν εύκολο να μαντέψει κανείς, για παράδειγμα την ώρα εντός της ημέρας αν πρόκειται για τοπίο. Αν τα μέσα δείξουν κάτι ασύνηθες, παρακαλώ εξηγήστε τι το καθιστά μη συνηθισμένα.</string>
+  <string name="description_info">Παρακαλώ περιγράψετε τα μέσα όσο το δυνατόν περισσότερο : Πού λήφθηκε; Τι δείχνει; Ποιο είναι το περιεχόμενο του; Παρακαλώ περιγράψετε τα αντικείμενα ή τα πρόσωπα. Αποκαλύψετε πληροφορίες που δεν είναι εύκολο να μαντέψει κανείς, για παράδειγμα την ώρα εντός της ημέρας αν πρόκειται για τοπίο. Αν τα μέσα δείξουν κάτι ασύνηθες, παρακαλώ εξηγήστε τι το καθιστούν μη συνηθισμένα.</string>
+  <string name="caption_info">Γράψτε μια σύντομη περιγραφή της εικόνας. Η πρώτη λεζάντα θα χρησιμοποιηθεί ως τίτλος για την εικόνα. Όριο 255 χαρακτήρες.</string>
   <string name="upload_problem_exist">Πιθανά προβλήματα με αυτήν την εικόνα:</string>
   <string name="upload_problem_image_dark">Η εικόνα είναι πολύ σκοτεινή.</string>
   <string name="upload_problem_image_blurry">Η εικόνα είναι θολή.</string>
   <string name="upload_problem_image_duplicate">Η εικόνα βρίσκεται ήδη στα Commons.</string>
   <string name="upload_problem_different_geolocation">Η εικόνα λήφθηκε σε διαφορετική τοποθεσία.</string>
+  <string name="upload_problem_fbmd">Ανεβάστε μόνο φωτογραφίες που έχετε τραβήξει μόνοι σας. Μην ανεβάζετε φωτογραφίες που έχετε βρει σε λογαριασμούς άλλων ατόμων στο Facebook.</string>
   <string name="upload_problem_do_you_continue">Θέλετε ακόμη να ανεβάσετε αυτή την εικόνα;</string>
   <string name="upload_connection_error_alert_title">Σφάλμα Σύνδεσης</string>
+  <string name="upload_connection_error_alert_detail">Η διαδικασία μεταφόρτωσης απαιτεί ενεργή πρόσβαση στο Διαδίκτυο. Ελέγξτε τη σύνδεσή σας στο δίκτυο.</string>
   <string name="upload_problem_image">Βρέθηκαν προβλήματα στην εικόνα</string>
+  <string name="internet_downloaded">Ανεβάστε μόνο φωτογραφίες που έχετε τραβήξει μόνοι σας. Μην ανεβάζετε φωτογραφίες που έχετε κατεβάσει από το Διαδίκτυο.</string>
   <string name="use_external_storage">Αποθηκεύστε φωτογραφίες εντός εφαρμογής</string>
   <string name="use_external_storage_summary">Αποθηκεύστε φωτογραφίες που τραβήξατε με την κάμερα εντός εφαρμογής στο χώρο αποθήκευσης της συσκευής σας</string>
   <string name="login_to_your_account">Συνδεθείτε στο λογαριασμό σας.</string>
@@ -261,7 +290,9 @@
   <string name="skip_login_title" fuzzy="true">Θέλετε πραγματικά να παραβλέψετε τη σύνδεση;</string>
   <string name="skip_login_message">Θα χρειάζεται να συνδεθείτε για να ανεβάζετε εικόνες στο μέλλον.</string>
   <string name="login_alert_message">Παρακαλούμε συνδεθείτε για να χρησιμοποιήσετε αυτό το χαρακτηριστικό</string>
-  <string name="nearby_location_not_available" fuzzy="true">Ο τόπος δεν είναι διαθέσιμος.</string>
+  <string name="copy_wikicode">Αντιγράψτε το wikitext στο πρόχειρο</string>
+  <string name="nearby_location_not_available">Ο τόπος δεν είναι διαθέσιμος.</string>
+  <string name="upload_location_access_denied">Δεν επιτρέπεται η πρόσβαση στην τοποθεσία. Ρυθμίστε την τοποθεσία σας με χειροκίνητο τρόπο για να χρησιμοποιήσετε αυτήν τη δυνατότητα.</string>
   <string name="location_permission_rationale_nearby">Απαιτείται άδεια για την εμφάνιση λίστας κοντινών σημείων</string>
   <string name="nearby_directions">Κατευθύνσεις</string>
   <string name="nearby_wikidata">Δεδομένα wiki</string>
@@ -273,6 +304,7 @@
   <string name="welcome_skip_button">Παράβλεψη εισαγωγής</string>
   <string name="no_internet">Το διαδίκτυο δεν είναι διαθέσιμο</string>
   <string name="error_notifications">Σφάλμα κατά την συγκέντρωση ειδοποιήσεων</string>
+  <string name="error_review">Σφάλμα κατά την ανάκτηση της εικόνας για έλεγχο. Πατήστε το refresh για να προσπαθήσετε ξανά.</string>
   <string name="no_notifications">Δεν βρέθηκαν ειδοποιήσεις</string>
   <string name="about_translate">Μετάφραση</string>
   <string name="about_translate_title">Γλώσσες</string>
@@ -280,7 +312,7 @@
   <string name="about_translate_proceed">Συνέχεια</string>
   <string name="about_translate_cancel">Ακύρωση</string>
   <string name="retry">Ξαναπροσπαθήστε</string>
-  <string name="showcase_view_whole_nearby_activity" fuzzy="true">Αυτά είναι τα μέρη κοντά σας που χρειάζονται φωτογραφίες για να εικονογραφηθούν τα λήμματά τους στη Βικιπαίδεια</string>
+  <string name="showcase_view_whole_nearby_activity">Αυτά είναι τα μέρη κοντά σας που χρειάζονται φωτογραφίες για να εικονογραφηθούν τα λήμματά τους στη Βικιπαίδεια.\n\nΚάνοντας κλικ στην \"ΑΝΑΖΗΤΗΣΗ ΣΕ ΑΥΤΉ ΤΗΝ ΠΕΡΙΟΧΗ\" κλειδώνει ο χάρτης και ξεκινά μια κοντινή αναζήτηση γύρω από αυτή την τοποθεσία.</string>
   <string name="showcase_view_needs_photo">Αυτή η τοποθεσία χρειάζεται φωτογραφία.</string>
   <string name="showcase_view_has_photo">Αυτή η τοποθεσία έχει ήδη φωτογραφία.</string>
   <string name="showcase_view_no_longer_exists">Η τοποθεσία δεν υπάρχει πλέον.</string>
@@ -302,7 +334,7 @@
   <string name="search_tab_title_depictions">Αντικείμενα</string>
   <string name="explore_tab_title_mobile">Μεταφορτώθηκε μέσω κινητού</string>
   <string name="explore_tab_title_map">Χάρτης</string>
-  <string name="successful_wikidata_edit" fuzzy="true">Η εικόνα προστέθηκε επιτυχώς στο %1$s στο Wikidata!</string>
+  <string name="successful_wikidata_edit">Η εικόνα προστέθηκε επιτυχώς στο %1$s στο Wikidata!</string>
   <string name="wikidata_edit_failure">Αποτυχία ενημέρωσης της αντιστοιχούσας οντότητας του Wikidata!</string>
   <string name="menu_set_wallpaper">Ρύθμιση ως ταπετσαρία</string>
   <string name="wallpaper_set_successfully">Η ταπετσαρία ρυθμίστηκε επιτυχώς!</string>
@@ -319,16 +351,22 @@
   <string name="construction_event_answer">Οι φωτογραφίες που εμφανίζουν τεχνολογία ή πολιτισμό είναι πολύ ευσπρόδεκτες στα Κοινά.</string>
   <string name="congratulatory_message_quiz">Είχατε το %1$s των απαντήσεων σωστό. Συγχαρητήρια!</string>
   <string name="warning_for_no_answer">Επιλέξτε μια από τις δύο επιλογές για να απαντήσετε στην ερώτηση</string>
-  <string name="user_not_logged_in" fuzzy="true">Η περίοδος σύνδεσης έληξε, παρακαλούμε συνδεθείτε ξανά.</string>
+  <string name="user_not_logged_in">Η περίοδος σύνδεσης έληξε, παρακαλούμε συνδεθείτε ξανά.</string>
   <string name="quiz_result_share_message">Μοιραστείτε το κουίζ με τους φίλους σας!</string>
   <string name="continue_message">Συνέχεια</string>
   <string name="correct">Σωστή απάντηση</string>
   <string name="wrong">Λάθος απάντηση</string>
   <string name="quiz_screenshot_question">Αυτό το στιγμιότυπο είναι εντάξει για ανέβασμα;</string>
   <string name="share_app_title">Κοινοποίηση εφαρμογής</string>
+  <string name="rotate">Γυρίστε</string>
   <string name="error_fetching_nearby_places">Σφάλμα κατά την εύρεση κοντινών μερών.</string>
+  <string name="no_pictures_in_this_area">Δεν υπάρχουν φωτογραφίες σε αυτήν την περιοχή</string>
+  <string name="no_nearby_places_around">Δεν υπάρχουν μέρη κοντά</string>
+  <string name="error_fetching_nearby_monuments">Σφάλμα κατά την εύρεση κοντινών μνημείων.</string>
   <string name="no_recent_searches">Καμία πρόσφατη αναζήτηση</string>
   <string name="delete_recent_searches_dialog">Είστε σίγουρος ότι θέλετε να καθαρίσετε το ιστορικό αναζήτησης;</string>
+  <string name="cancel_upload_dialog">Είστε σίγουροι ότι θέλετε να ακυρώσετε αυτό το ανέβασμα;</string>
+  <string name="delete_search_dialog">Θέλετε να διαγράψετε αυτήν την αναζήτηση;</string>
   <string name="search_history_deleted">Το ιστορικό αναζήτησης διεγράφη</string>
   <string name="nominate_delete">Ορίστε για Αφαίρεση</string>
   <string name="delete">Διαγραφή</string>
@@ -337,6 +375,7 @@
   <string name="statistics">Στατιστικά</string>
   <string name="statistics_thanks">Ευχαριστίες που έχουν ληφθεί</string>
   <string name="statistics_featured">Προβεβλημμένες εικόνες</string>
+  <string name="statistics_wikidata_edits">Εικόνες μέσω \"Κοντινά μέρη\"</string>
   <string name="level">Επίπεδο</string>
   <string name="images_uploaded">Εικόνες που ανέβηκαν</string>
   <string name="image_reverts">Εικόνες που δεν ανεστράφησαν</string>
@@ -349,13 +388,18 @@
   <string name="images_used_explanation">Ο αριθμός εικόνων που ανεβάσατε στα Κοινά που χρησιμοποιήθηκαν σε λήμματα του Wikimedia</string>
   <string name="error_occurred">Συνέβη σφάλμα!</string>
   <string name="notifications_channel_name_all">Ειδοποίηση Κοινών</string>
+  <string name="preference_author_name_toggle">Χρησιμοποιήστε προσαρμοσμένο όνομα δημιουργού</string>
+  <string name="preference_author_name_toggle_summary">Χρησιμοποιήστε ένα προσαρμοσμένο όνομα δημιουργού αντί για το όνομα χρήστη σας κατά τη μεταφόρτωση φωτογραφιών</string>
+  <string name="preference_author_name">Προσαρμοσμένο όνομα δημιουργού</string>
   <string name="contributions_fragment">Συνεισφορές</string>
   <string name="nearby_fragment">Κοντά σας</string>
   <string name="notifications">Ενημερώσεις</string>
   <string name="read_notifications">Ειδοποιήσεις (ανάγνωση)</string>
-  <string name="display_nearby_notification_summary" fuzzy="true">Πατήστε εδώ για να δείτε την πιο κοντινή θέση που χρειάζεται εικόνες</string>
+  <string name="display_nearby_notification">Εμφάνιση ειδοποίησης σε κοντινή απόσταση</string>
+  <string name="display_nearby_notification_summary">Πατήστε εδώ για να δείτε την πιο κοντινή θέση που χρειάζεται εικόνες</string>
   <string name="list_sheet">Λίστα</string>
   <string name="storage_permission">Άδεια Αποθήκευσης</string>
+  <string name="write_storage_permission_rationale_for_image_share">Χρειαζόμαστε την άδειά σας για πρόσβαση στον εξωτερικό χώρο αποθήκευσης της συσκευής σας προκειμένου να ανεβάσουμε εικόνες.</string>
   <string name="nearby_notification_dismiss_message">Δεν θα δείτε την πιο κοντινή τοποθεσία που χρειάζεται επιπλέον εικόνες. Ωστόσο, μπορείτε να ενεργοποιήσετε ξανά αυτή την ειδοποίηση στις Ρυθμίσεις αν θέλετε.</string>
   <string name="step_count">Βήμα %1$d από %2$d: %3$s</string>
   <string name="next">Επόμενο</string>
@@ -366,36 +410,119 @@
   <string name="title_page_bookmarks_locations">Τοποθεσίες</string>
   <string name="menu_bookmark">Προσθήκη/Κατάργηση σε σελιδοδείκτες</string>
   <string name="provider_bookmarks">Σελιδοδείκτες</string>
+  <string name="bookmark_empty">Δεν έχετε προσθέσει σελιδοδείκτες</string>
   <string name="provider_bookmarks_location">Σελιδοδείκτες</string>
+  <string name="log_collection_started">Η συλλογή αρχείων καταγραφής ξεκίνησε. ΕΠΑΝΑΚΙΝΗΣΤΕ την εφαρμογή, εκτελέστε την ενέργεια που θέλετε να καταγράψετε και, στη συνέχεια, πατήστε ξανά \"Αποστολή αρχείου καταγραφής\"</string>
   <string name="deletion_reason_uploaded_by_mistake">Το ανέβασα κατά λάθος</string>
   <string name="deletion_reason_publicly_visible">Δεν ήξερα ότι θα δημοσιευόταν</string>
   <string name="deletion_reason_bad_for_my_privacy">Κατάλαβα πως δεν προστατεύονται τα ατομικά μου στοιχεία</string>
   <string name="deletion_reason_no_longer_want_public">Άλλαξα γνώμη, δεν θέλω να προβάλλεται πλέον δημόσια</string>
   <string name="deletion_reason_not_interesting">Λυπάμαι αυτή η εικόνα δεν έχει ενδιαφέρον για εγκυκλοπαίδεια</string>
-  <string name="uploaded_by_myself" fuzzy="true">Φορτώθηκε από μένα σε</string>
-  <string name="no_categories_selected_warning_desc" fuzzy="true">Εικόνες χωρίς κατηγορίες χρησιμοποιούνται σπάνια. Θέλετε πράγματι να στείλετε δίχως να επιλέξετε κατηγορίες?</string>
+  <string name="uploaded_by_myself">Ανέβηκε από εμένα στο %1$s, χρησιμοποιήθηκε σε %2$d άρθρο(α)</string>
+  <string name="no_uploads">Καλώς ήρθατε στα Commons!\n\nΑνεβάστε τα πρώτα σας πολυμέσα πατώντας το κουμπί προσθήκης.</string>
+  <string name="no_categories_selected">Δεν επιλέχθηκαν κατηγορίες</string>
+  <string name="no_categories_selected_warning_desc">Εικόνες χωρίς κατηγορίες χρησιμοποιούνται σπάνια. Θέλετε πράγματι να συνεχίσετε δίχως να επιλέξετε κατηγορίες?</string>
+  <string name="no_depictions_selected">Δεν έχουν επιλεγεί αποτυπώσεις</string>
   <string name="back_button_warning">Ακύρωση Μεταφόρτωσης</string>
+  <string name="back_button_warning_desc">Η χρήση του κουμπιού \"πίσω\" θα ακυρώσει αυτήν τη μεταφόρτωση και θα χάσετε την πρόοδό σας</string>
   <string name="back_button_continue">Συνέχιση Μεταφόρτωσης</string>
   <string name="upload_flow_all_images_in_set">(Για όλες τις εικόνες στο σετ)</string>
   <string name="search_this_area">Αναζήτηση στην περιοχή</string>
   <string name="nearby_card_permission_title">Αίτημα Άδειας</string>
+  <string name="nearby_card_permission_explanation">Θα θέλατε να χρησιμοποιήσουμε την τρέχουσα τοποθεσία σας για να εμφανίσουμε το πλησιέστερο μέρος που χρειάζεται φωτογραφίες;</string>
+  <string name="unable_to_display_nearest_place">Δεν είναι δυνατή η εμφάνιση του πλησιέστερου μέρους που χρειάζεται φωτογραφίες χωρίς δικαιώματα τοποθεσίας</string>
   <string name="never_ask_again">Μην το ρωτήσετε ξανά αυτό</string>
   <string name="display_location_permission_title">Ζητήστε άδεια τοποθεσίας</string>
+  <string name="display_location_permission_explanation">Ζητήστε άδεια τοποθεσίας όταν χρειάζεται για τη λειτουργία προβολής κοντινής κάρτας ειδοποιήσεων.</string>
+  <string name="achievements_fetch_failed_ultimate_achievement">Έχετε κάνει τόσες πολλές συνεισφορές που δεν μπορεί να αντεπεξέλθει το σύστημα υπολογισμού των επιτευγμάτων μας. Αυτό είναι το απόλυτο επίτευγμα.</string>
   <string name="ends_on">Τελειώνει σε:</string>
+  <string name="display_campaigns">Προβολή καμπανιών</string>
+  <string name="display_campaigns_explanation">Δείτε τις τρέχουσες καμπάνιες</string>
+  <string name="in_app_camera_location_access_explanation">Επιτρέψτε στην εφαρμογή να ανακτήσει τοποθεσία σε περίπτωση που η κάμερα δεν την καταγράψει. Ορισμένες κάμερες συσκευών δεν καταγράφουν τοποθεσία. Σε τέτοιες περιπτώσεις, το να αφήσετε την εφαρμογή να ανακτήσει και να επισυνάψει τοποθεσία καθιστά τη συνεισφορά σας πιο χρήσιμη. Μπορείτε να το αλλάξετε ανά πάσα στιγμή από τις Ρυθμίσεις</string>
+  <string name="option_allow">Επιτρέψτε</string>
+  <string name="option_dismiss">Απόρριψη</string>
+  <string name="in_app_camera_needs_location">Ενεργοποιήστε την πρόσβαση τοποθεσίας από τις Ρυθμίσεις και δοκιμάστε ξανά. \n\nΣημείωση: Η μεταφόρτωση ενδέχεται να μην έχει τοποθεσία, εάν η εφαρμογή δεν μπορεί να ανακτήσει την τοποθεσία από τη συσκευή σε σύντομο χρονικό διάστημα.</string>
+  <string name="in_app_camera_location_permission_rationale">Η κάμερα εντός εφαρμογής χρειάζεται άδεια τοποθεσίας για να την επισυνάψει στις εικόνες σας σε περίπτωση που η τοποθεσία δεν είναι διαθέσιμη στο EXIF. Επιτρέψτε στην εφαρμογή να αποκτήσει πρόσβαση στην τοποθεσία σας και δοκιμάστε ξανά.\n\nΣημείωση: Η μεταφόρτωση ενδέχεται να μην έχει τοποθεσία εάν η εφαρμογή δεν μπορεί να ανακτήσει την τοποθεσία από τη συσκευή σε σύντομο χρονικό διάστημα.</string>
+  <string name="in_app_camera_location_permission_denied">Η εφαρμογή δεν θα καταγράψει την τοποθεσία μαζί με τις φωτογραφίες λόγω έλλειψης άδειας τοποθεσίας</string>
+  <string name="in_app_camera_location_unavailable">Η εφαρμογή δεν θα καταγράψει την τοποθεσία μαζί με τις φωτογραφίες καθώς το GPS είναι απενεργοποιημένο</string>
+  <string name="open_document_photo_picker_title">Χρησιμοποιήστε εργαλείο επιλογής φωτογραφιών βάσει εγγράφων</string>
+  <string name="open_document_photo_picker_explanation">Το νέο εργαλείο επιλογής φωτογραφιών Android κινδυνεύει να χάσει τις πληροφορίες τοποθεσίας. Ενεργοποιήστε εάν φαίνεται ότι το χρησιμοποιείτε.</string>
   <string name="location_loss_warning" fuzzy="true">Παρακαλώ σιγουρευτείτε ότι αύτος ο κανούριος επιλογέας Android δεν αφαιρεί την τοποθεσία από τις εικόνες.</string>
-  <string name="review_thanks_yes_button_text" fuzzy="true">Ναι, γιατί όχι</string>
-  <string name="review_thanks_no_button_text" fuzzy="true">Επόμενη εικόνα</string>
+  <string name="nearby_campaign_dismiss_message">Δεν θα βλέπετε πλέον τις καμπάνιες. Ωστόσο, μπορείτε να ενεργοποιήσετε ξανά αυτήν την ειδοποίηση στις Ρυθμίσεις εάν το επιθυμείτε.</string>
+  <string name="this_function_needs_network_connection">Αυτή η λειτουργία απαιτεί σύνδεση δικτύου. Ελέγξτε τις ρυθμίσεις της σύνδεσής σας.</string>
+  <string name="error_processing_image">Παρουσιάστηκε σφάλμα κατά την επεξεργασία της εικόνας. Παρακαλώ προσπαθησε ξανα!</string>
+  <string name="getting_edit_token">Λήψη διακριτικού για επεξεργασία</string>
+  <string name="check_category_adding_template">Προσθήκη υποδείγματος για έλεγχο κατηγορίας</string>
+  <string name="check_category_notification_title">Αίτημα ελέγχου κατηγορίας για %1$s</string>
+  <string name="check_category_edit_summary">Αίτημα ελέγχου κατηγορίας</string>
+  <string name="check_category_success_title">Ζητήθηκε έλεγχος κατηγορίας</string>
+  <string name="check_category_failure_title">Το αίτημα ελέγχου κατηγορίας δεν λειτούργησε</string>
+  <string name="check_category_success_message">Ζητήθηκε έλεγχος κατηγορίας για %1$s</string>
+  <string name="check_category_failure_message">Δεν ήταν δυνατή η αίτηση ελέγχου κατηγορίας για %1$s</string>
+  <string name="check_category_toast">Αίτημα ελέγχου κατηγορίας για %1$s</string>
+  <string name="nominate_for_deletion_done">Έγινε</string>
+  <string name="send_thank_success_title">Αποστολή Ευχαριστιών: Επιτυχία</string>
+  <string name="send_thank_success_message">Επιτυχής αποστοή ευχαριστιών προς %1$s</string>
+  <string name="send_thank_failure_message">Αποτυχία αποστολής ευχαριστιών %1$s</string>
+  <string name="send_thank_failure_title">Αποστολή Ευχαριστιών: Αποτυχία</string>
+  <string name="send_thank_toast">Αποστολή Ευχαριστιών για %1$s</string>
+  <string name="review_copyright">Ακολουθεί αυτό τους κανόνες πνευματικής ιδιοκτησίας;</string>
+  <string name="review_category">Είναι σωστά κατηγοριοποιημένο αυτό;</string>
+  <string name="review_spam">Είναι αυτό εντός πεδίου εφαρμογής;</string>
+  <string name="review_thanks">Θα θέλατε να ευχαριστήσετε τον συνεισφέροντα;</string>
+  <string name="review_spam_explanation">Κάντε κλικ στο ΟΧΙ για να ορίσετε αυτήν την εικόνα για διαγραφή εάν δεν είναι καθόλου χρήσιμη.</string>
+  <string name="review_copyright_explanation">Λογότυπα, στιγμιότυπα οθόνης, αφίσες ταινιών αποτελούν συχνά παραβιάσεις πνευματικών δικαιωμάτων. Πατήστε ΟΧΙ για να προτείνετε αυτήν την εικόνα για διαγραφή</string>
+  <string name="review_thanks_explanation">%1$s θα ενθαρρυνθεί από την εκτίμησή σας</string>
+  <string name="review_no_category">Α, αυτό δεν είναι καν κατηγοριοποιημένο!</string>
+  <string name="review_category_explanation">Αυτή η εικόνα ανήκει σε %1$s κατηγορίες.</string>
+  <string name="review_spam_report_question">Είναι εκτός πεδίου, επειδή είναι</string>
+  <string name="review_c_violation_report_question">Είναι παραβίαση πνευματικών δικαιωμάτων επειδή είναι</string>
+  <string name="review_thanks_yes_button_text">Επόμενη εικόνα</string>
+  <string name="review_thanks_no_button_text">Ναι, γιατί όχι</string>
+  <string name="skip_image_explanation">Κάνοντας κλικ σε αυτό το κουμπί θα εμφανιστεί μια άλλη πρόσφατα μεταφορτωμένη εικόνα από το Wikimedia Commons</string>
+  <string name="review_image_explanation">Μπορείτε να ελέγχετε εικόνες για να βελτιώσετε την ποιότητα του Wikimedia Commons.\nΟι τρεις παράμετροι ελέγχου είναι:\n\n- Είναι αυτή η εικόνα εντός πεδίου;N!Όταν πατάτε Όχι (εκτός πεδίου εφαρμογής), εσείς προτείνετε την διαγραφή αυτής της εικόνας.\n\n- Αυτή η εικόνα ακολουθεί τους κανόνες των πνευματικών δικαιωμάτων; Όταν πατάτε Όχι (δεν ακολουθεί τους κανόνες των πνευματικών δικαιωμάτων),  εσείς προτείνετε την διαγραφή αυτής της εικόνας.\n\n- Είναι αυτή η εικόνα σωστά κατηγοριοποιημένη;N!Όταν πατάτε Όχι (δεν είναι σωστά κατηγοριοποιημένη),  προσθέτε ένα υπόδειγμα αίτησης κατηγοριοποίησης στην εικόνα.\n\nΕάν όλα είναι εντάξει, δεν προστίθεται πρότυπο στην εικόνα και έχετε την ευκαιρία να ευχαριστήσετε τον συντελεστή.</string>
   <string name="no_image">Δεν χρησιμοποιούνται εικόνες</string>
+  <string name="no_image_reverted">Δεν έγινε επαναφορά εικόνων</string>
   <string name="no_image_uploaded">Δεν έχουν ανεβεί εικόνες</string>
   <string name="no_notification">Δεν έχετε αδιάβαστες ενημερώσεις</string>
   <string name="no_read_notification" fuzzy="true">Δεν έχετε αρχειοθετημένες ενημερώσεις</string>
+  <string name="share_logs_using">Κοινή χρήση αρχείων καταγραφής χρησιμοποιώντας</string>
+  <string name="menu_option_read">Προβολή αναγνωσμένων</string>
+  <string name="menu_option_unread">Προβολή μη αναγνωσμένων</string>
+  <string name="error_occurred_in_picking_images">Παρουσιάστηκε σφάλμα κατά την επιλογή εικόνων</string>
   <string name="please_wait">Παρακαλούμε περιμένετε…</string>
+  <string name="images_featured_explanation">Οι επιλεγμένες εικόνες είναι εικόνες από άριστα καταρτισμένους φωτογράφους και εικονογράφους που η κοινότητα του Wikimedia Commons έχει επιλέξει ως μερικές από τις υψηλότερης ποιότητας στον ιστότοπο.</string>
+  <string name="images_via_nearby_explanation">Οι εικόνες που μεταφορτώνονται μέσω κοντινών τοποθεσιών είναι οι εικόνες που μεταφορτώνονται ανακαλύπτοντας μέρη στο χάρτη.</string>
+  <string name="thanks_received_explanation">Αυτή η δυνατότητα επιτρέπει στους συντάκτες να στέλνουν μια ειδοποίηση ευχαριστιών σε χρήστες που κάνουν χρήσιμες επεξεργασίες – χρησιμοποιώντας έναν μικρό σύνδεσμο ευχαριστιών στη σελίδα ιστορικού ή στη σελίδα διαφορών.</string>
+  <string name="copy_image_caption_description">Αντιγραφή σε επόμενα μέσα</string>
+  <string name="copied_successfully">Αντιγράφηκε με επιτυχία</string>
+  <string name="welcome_dont_upload_content_description">Παραδείγματα εικόνων που δεν πρέπει να ανεβάζονται</string>
+  <string name="skip_image">Παραλείψτε αυτήν την εικόνα</string>
+  <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Η λήψη απέτυχε!!. Δεν μπορούμε να κατεβάσουμε το αρχείο χωρίς άδεια εξωτερικού χώρου αποθήκευσης.</string>
+  <string name="manage_exif_tags">Διαχείριση ετικετών EXIF</string>
+  <string name="manage_exif_tags_summary">Επιλέξτε ποιες ετικέτες EXIF θα διατηρηθούν στις μεταφορτώσεις</string>
   <string name="exif_tag_name_author">Δημιουργός</string>
   <string name="exif_tag_name_copyright">Πνευματικά δικαιώματα</string>
   <string name="exif_tag_name_location">Τοποθεσία</string>
+  <string name="exif_tag_name_cameraModel">Μοντέλο φωτογραφικής μηχανής</string>
+  <string name="exif_tag_name_lensModel">Μοντέλο φακού</string>
+  <string name="exif_tag_name_serialNumbers">Σειριακός αριθμός</string>
   <string name="exif_tag_name_software">Λογισμικό</string>
+  <string name="media_location_permission_denied">Δεν επιτρέπεται η πρόσβαση στην τοποθεσία πολυμέσων</string>
   <string name="image_info">Πληροφορίες Εικόνας</string>
+  <string name="upload_cancelled">Ακυρώθηκε η μεταφόρτωση</string>
+  <string name="previous_image_title_description_not_found">Δεν υπάρχουν δεδομένα για τον τίτλο ή την περιγραφή της προηγούμενης εικόνας</string>
+  <string name="dialog_box_text_nomination">Γιατί πρέπει να διαγραφεί το %1$s;</string>
+  <string name="review_is_uploaded_by">%1$s μεταφορτώνεται από: %2$s</string>
   <string name="delete_helper_show_deletion_title_failed">Απέτυχε</string>
+  <string name="title_app_shortcut_setting">Ρυθμίσεις</string>
+  <string name="theme_dark_name">Σκοτεινό</string>
+  <string name="theme_light_name">Φωτεινό</string>
+  <string name="cannot_open_location_settings">Αποτυχία ανοίγματος ρυθμίσεων τοποθεσίας. Παρακαλούμε ενεργοποιήστε την τοποθεσία χειροκίνητα</string>
+  <string name="recommend_high_accuracy_mode">Για καλύτερα αποτελέσματα, επιλέξτε τη λειτουργία υψηλής ακρίβειας.</string>
+  <string name="ask_to_turn_location_on">Ενεργοποίηση τοποθεσίας;</string>
+  <string name="load_more">Εμφάνιση περισσότερων</string>
+  <string name="todo_improve">Προτεινόμενες βελτιώσεις:</string>
   <string name="achievements_tab_title">Κατορθώματα</string>
   <string name="leaderboard_tab_title">Λίστα κατάταξης</string>
   <string name="rank_prefix">Κατάταξη:</string>
@@ -409,7 +536,17 @@
   <string name="leaderboard_upload">Ανέβασμα</string>
   <string name="leaderboard_nearby">Γειτονικά</string>
   <string name="leaderboard_used">Σε χρήση</string>
+  <string name="cancel_upload">Ακύρωση Μεταφόρτωσης</string>
   <string name="media_detail_in_all_languages">Για όλες τις γλώσσες</string>
+  <string name="apply">Εφαρμογή</string>
+  <string name="reset">Επαναφορά</string>
+  <string name="no_location_found_title">Δεν βρέθηκε τοποθεσία</string>
+  <string name="add_location">Προσθήκη τοποθεσίας</string>
+  <string name="explore_map_details">Λεπτομέρειες</string>
+  <string name="achievements_unavailable_beta">Τα επιτεύγματα είναι διαθέσιμα μόνο στο prod flavor. Ελέγξτε την τεκμηρίωση προγραμματιστή.</string>
+  <string name="leaderboard_unavailable_beta">Το leaderboard είναι διαθέσιμο μόνο στο prod flavor. Ελέγξτε την τεκμηρίωση προγραμματιστή.</string>
+  <string name="copyright_popup">Ανεβάστε μόνο φωτογραφίες που έχετε τραβήξει μόνοι σας. Οι χρήστες που ανεβάζουν εικόνες που προστατεύονται από πνευματικά δικαιώματα θα αποκλειστούν. Αυτό ισχύει και για το beta flavor. Σας ευχαριστούμε που δοκιμάσατε την εφαρμογή!</string>
+  <string name="select_feedback_data_choice">Παρακαλούμε να διαγράψετε οποιαδήποτε πληροφορία δεν θα θέλατε να μοιραστείτε δημόσια.</string>
   <string name="api_level">Επίπεδο API</string>
   <string name="android_version">Έκδοση android</string>
   <string name="device_manufacturer">Κατασκευαστής συσκευής</string>
@@ -418,5 +555,57 @@
   <string name="network_type">Τύπος δικτύου</string>
   <string name="thanks_feedback">Ευχαριστούμε για την υποβολή σχολίων</string>
   <string name="error_feedback">Σφάλμα κατά την αποστολή σχολίων</string>
+  <string name="enter_description">Ποια είναι τα σχόλιά σας;</string>
   <string name="your_feedback">Τα σχόλια σας</string>
+  <string name="mark_as_not_for_upload">Επισήμανση ως όχι για μεταφόρτωση</string>
+  <string name="unmark_as_not_for_upload">Καταργήστε την επισήμανση ως όχι για μεταφόρτωση</string>
+  <string name="marking_as_not_for_upload">Επισήμανση ως όχι για μεταφόρτωση</string>
+  <string name="unmarking_as_not_for_upload">Κατάργηση επισήμανσης ως όχι για μεταφόρτωση</string>
+  <string name="show_already_actioned_pictures">Εμφάνιση εικόνων που έχουν ήδη ενεργοποιηθεί</string>
+  <string name="hiding_already_actioned_pictures">Απόκρυψη εικόνων που έχουν ήδη ενεργοποιηθεί</string>
+  <string name="no_more_images_found">Δεν βρέθηκαν άλλες εικόνες</string>
+  <string name="this_image_is_already_uploaded">Αυτή η εικόνα έχει ήδη μεταφορτωθεί</string>
+  <string name="can_not_select_this_image_for_upload">Δεν είναι δυνατή η επιλογή αυτής της εικόνας για μεταφόρτωση</string>
+  <string name="image_selected">Η εικόνα επιλέχθηκε</string>
+  <string name="image_marked_as_not_for_upload">Η εικόνα επισημάνθηκε ως όχι για μεταφόρτωση</string>
+  <string name="menu_view_report">Αναφορά</string>
+  <string name="menu_view_set_white_background">Ορίστε λευκό φόντο</string>
+  <string name="menu_view_set_black_background">Ορίστε μαύρο φόντο</string>
+  <string name="report_violation">Αναφορά παράβασης</string>
+  <string name="report_user">Αναφορά αυτού του χρήστη</string>
+  <string name="report_content">Αναφορά αυτού του περιεχομένου</string>
+  <string name="request_user_block">Αίτημα αποκλεισμού αυτού του χρήστη</string>
+  <string name="welcome_to_full_screen_mode_text">Καλώς ορίσατε στη λειτουργία επιλογής πλήρους οθόνης</string>
+  <string name="full_screen_mode_zoom_info">Χρησιμοποιήστε δύο δάχτυλα για μεγέθυνση και σμίκρυνση.</string>
+  <string name="full_screen_mode_features_info">Σύρετε γρήγορα και παρατεταμένα για να εκτελέσετε αυτές τις ενέργειες: \n- Αριστερά/Δεξιά: Μετάβαση στο προηγούμενο/επόμενο \n- Επάνω: Επιλογή\n- Κάτω: Επισήμανση ως όχι για μεταφόρτωση.</string>
+  <string name="set_up_avatar_toast_string">Για να ρυθμίσετε το avatar του leaderboard, πατήστε \"Ορισμός ως avatar\" στο μενού με τις τρεις κουκκίδες οποιασδήποτε εικόνας.</string>
+  <string name="similar_coordinate_description_auto_set">Οι συντεταγμένες δεν είναι οι ακριβείς συντεταγμένες, αλλά το άτομο που ανέβασε αυτήν την εικόνα πιστεύει ότι είναι αρκετά κοντά.</string>
+  <string name="storage_permissions_denied">Τα δικαιώματα αποθήκευσης απορρίφθηκαν</string>
+  <string name="unable_to_share_upload_item">Δεν είναι δυνατή η κοινή χρήση αυτού του στοιχείου</string>
+  <string name="permissions_are_required_for_functionality">Απαιτούνται δικαιώματα για τη λειτουργικότητα</string>
+  <string name="learn_how_to_write_a_useful_description">Μάθετε πώς να γράψετε μια χρήσιμη περιγραφή</string>
+  <string name="learn_how_to_write_a_useful_caption">Μάθετε πώς να γράψετε μια χρήσιμη λεζάντα</string>
+  <string name="see_your_achievements">Δείτε τα επιτεύγματά σας</string>
+  <string name="edit_image">Επεξεργασία εικόνας</string>
+  <string name="edit_location">Επεξεργασία τοποθεσίας</string>
+  <string name="location_updated">Η τοποθεσία ενημερώθηκε!</string>
+  <string name="remove_location">Κατάργηση τοποθεσίας</string>
+  <string name="remove_location_warning_title">Αφαίρεση Προειδοποίησης Τοποθεσίας</string>
+  <string name="remove_location_warning_desc">Η τοποθεσία κάνει τις φωτογραφίες πιο χρήσιμες και διευκολύνει την εύρεσή τους. Θέλετε σίγουρα να αφαιρέσετε την τοποθεσία από αυτήν την εικόνα;</string>
+  <string name="location_removed">Η τοποθεσία καταργήθηκε!</string>
+  <string name="send_thanks_to_author">Ευχαριστήστε τον συγγραφέα</string>
+  <string name="error_sending_thanks">Σφάλμα κατά την αποστολή των ευχαριστιών στον συγγραφέα.</string>
+  <string name="invalid_login_message">Η περίοδος σύνδεσης έληξε, παρακαλούμε συνδεθείτε ξανά</string>
+  <string name="no_application_available_to_open_gpx_files">Δεν υπάρχει διαθέσιμη εφαρμογή για το άνοιγμα αρχείων GPX</string>
+  <string name="file_saved_successfully">Το αρχείο αποθηκεύτηκε με επιτυχία</string>
+  <string name="do_you_want_to_open_gpx_file">Θέλετε να ανοίξετε το αρχείο GPX;</string>
+  <string name="do_you_want_to_open_kml_file">Θέλετε να ανοίξετε το αρχείο KML;</string>
+  <string name="failed_to_save_kml_file">Αποτυχία αποθήκευσης του αρχείου KML.</string>
+  <string name="failed_to_save_gpx_file">Αποτυχία αποθήκευσης του αρχείου GPX.</string>
+  <string name="saving_kml_file">Αποθήκευση αρχείου KML</string>
+  <string name="saving_gpx_file">Αποθήκευση αρχείου GPX</string>
+  <plurals name="custom_picker_images_selected_title_appendix">
+    <item quantity="one">%d επιλεγμένη εικόνα</item>
+    <item quantity="other"> Επιλέχθηκαν %d εικόνες</item>
+  </plurals>
 </resources>
