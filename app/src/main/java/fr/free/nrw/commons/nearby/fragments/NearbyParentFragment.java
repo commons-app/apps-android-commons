@@ -1883,9 +1883,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             recenterToUserLocation = true;
             return;
         }
-        addCurrentLocationMarker(currentLatLng);
-        binding.map.getController()
-            .animateTo(new GeoPoint(currentLatLng.getLatitude(), currentLatLng.getLongitude()));
         if (lastMapFocus != null) {
             Location mylocation = new Location("");
             Location dest_location = new Location("");
