@@ -542,14 +542,17 @@ public class LocationPickerActivity extends BaseActivity implements
 
     @Override
     public void onLocationPermissionGranted() {
-        if (locationPermissionsHelper.isLocationAccessToAppsTurnedOn()) {
-            locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
-            locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
-            getLocation();
-        } else {
-            getLocation();
-            locationPermissionsHelper.showLocationOffDialog(this,
-                R.string.ask_to_turn_location_on_text);
+        if (moveToCurrentLocation || !(activity.equals("MediaActivity"))) {
+            if (locationPermissionsHelper.isLocationAccessToAppsTurnedOn()) {
+                locationManager.requestLocationUpdatesFromProvider(
+                    LocationManager.NETWORK_PROVIDER);
+                locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
+                getLocation();
+            } else {
+                getLocation();
+                locationPermissionsHelper.showLocationOffDialog(this,
+                    R.string.ask_to_turn_location_on_text);
+            }
         }
     }
 
