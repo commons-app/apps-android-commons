@@ -1906,15 +1906,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void showLocationOffDialog() {
-        // This creates a dialog box that prompts the user to enable location
-        DialogUtil
-            .showAlertDialog(getActivity(), getString(R.string.ask_to_turn_location_on),
-                getString(R.string.nearby_needs_location),
-                getString(R.string.yes), getString(R.string.no), this::openLocationSettings, null);
-    }
-
-    @Override
     public void openLocationSettings() {
         // This method opens the location settings of the device along with a followup toast.
         final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
