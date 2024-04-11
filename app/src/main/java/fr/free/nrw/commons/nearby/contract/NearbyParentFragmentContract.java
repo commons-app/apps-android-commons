@@ -36,8 +36,6 @@ public interface NearbyParentFragmentContract {
 
         void recenterMap(LatLng currentLatLng);
 
-        void showLocationOffDialog();
-
         void openLocationSettings();
 
         void hideBottomSheet();
