@@ -31,10 +31,14 @@ import fr.free.nrw.commons.review.ReviewInterface;
 import fr.free.nrw.commons.upload.UploadInterface;
 import fr.free.nrw.commons.upload.WikiBaseInterface;
 import fr.free.nrw.commons.upload.depicts.DepictsInterface;
-import fr.free.nrw.commons.wikidata.CommonsServiceFactory;
+import fr.free.nrw.commons.wikidata.CoroutinesCommonsServiceFactory;
+import fr.free.nrw.commons.wikidata.GsonUtil;
+import fr.free.nrw.commons.wikidata.RxCommonsServiceFactory;
+import fr.free.nrw.commons.wikidata.WikidataConstants;
 import fr.free.nrw.commons.wikidata.WikidataInterface;
 import fr.free.nrw.commons.wikidata.cookies.CommonsCookieJar;
 import fr.free.nrw.commons.wikidata.cookies.CommonsCookieStorage;
+import fr.free.nrw.commons.wikidata.model.WikiSite;
 import java.io.File;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -45,108 +49,102 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
-import fr.free.nrw.commons.wikidata.model.WikiSite;
-import fr.free.nrw.commons.wikidata.GsonUtil;
 import timber.log.Timber;
 
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class NetworkingModule {
+
     private static final String WIKIDATA_SPARQL_QUERY_URL = "https://query.wikidata.org/sparql";
     private static final String TOOLS_FORGE_URL = "https://tools.wmflabs.org/commons-android-app/tool-commons-android-app";
-
-    public static final long OK_HTTP_CACHE_SIZE = 10 * 1024 * 1024;
-
     private static final String NAMED_WIKI_DATA_WIKI_SITE = "wikidata-wikisite";
     private static final String NAMED_WIKI_PEDIA_WIKI_SITE = "wikipedia-wikisite";
 
-    public static final String NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE = "language-wikipedia-wikisite";
-
-    public static final String NAMED_COMMONS_CSRF = "commons-csrf";
-
     @Provides
     @Singleton
-    public OkHttpClient provideOkHttpClient(Context context,
-                                            HttpLoggingInterceptor httpLoggingInterceptor) {
-        File dir = new File(context.getCacheDir(), "okHttpCache");
-        return new OkHttpClient.Builder()
-            .connectTimeout(120, TimeUnit.SECONDS)
-            .writeTimeout(120, TimeUnit.SECONDS)
-                .addInterceptor(httpLoggingInterceptor)
-            .readTimeout(120, TimeUnit.SECONDS)
-            .cache(new Cache(dir, OK_HTTP_CACHE_SIZE))
-            .build();
+    public OkHttpClient provideOkHttpClient(@NonNull final Context context,
+        @NonNull final HttpLoggingInterceptor httpLoggingInterceptor) {
+        final File dir = new File(context.getCacheDir(), "okHttpCache");
+        return new OkHttpClient.Builder().connectTimeout(120, TimeUnit.SECONDS)
+            .writeTimeout(120, TimeUnit.SECONDS).addInterceptor(httpLoggingInterceptor)
+            .readTimeout(120, TimeUnit.SECONDS).cache(new Cache(dir, 10 * 1024 * 1024)).build();
     }
 
     @Provides
     @Singleton
-    public CommonsServiceFactory serviceFactory(CommonsCookieJar cookieJar) {
-        return new CommonsServiceFactory(OkHttpConnectionFactory.getClient(cookieJar));
+    public RxCommonsServiceFactory serviceFactory(@NonNull final CommonsCookieJar cookieJar) {
+        return new RxCommonsServiceFactory(OkHttpConnectionFactory.getClient(cookieJar));
+    }
+
+    @Provides
+    @Singleton
+    public CoroutinesCommonsServiceFactory coroutinesServiceFactory(
+        @NonNull final CommonsCookieJar cookieJar) {
+        return new CoroutinesCommonsServiceFactory(OkHttpConnectionFactory.getClient(cookieJar));
     }
 
     @Provides
     @Singleton
     public HttpLoggingInterceptor provideHttpLoggingInterceptor() {
-        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(message -> {
-            Timber.tag("OkHttp").v(message);
-        });
-        httpLoggingInterceptor.setLevel(BuildConfig.DEBUG ? Level.BODY: Level.BASIC);
+        final HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(
+            message -> Timber.tag("OkHttp").v(message));
+        httpLoggingInterceptor.setLevel(BuildConfig.DEBUG ? Level.BODY : Level.BASIC);
         return httpLoggingInterceptor;
     }
 
     @Provides
     @Singleton
-    public OkHttpJsonApiClient provideOkHttpJsonApiClient(OkHttpClient okHttpClient,
-                                                          DepictsClient depictsClient,
-                                                          @Named("tools_forge") HttpUrl toolsForgeUrl,
-                                                          @Named("default_preferences") JsonKvStore defaultKvStore,
-                                                          Gson gson) {
-        return new OkHttpJsonApiClient(okHttpClient,
-                depictsClient,
-                toolsForgeUrl,
-                WIKIDATA_SPARQL_QUERY_URL,
-                BuildConfig.WIKIMEDIA_CAMPAIGNS_URL,
-            gson);
+    public OkHttpJsonApiClient provideOkHttpJsonApiClient(@NonNull final OkHttpClient okHttpClient,
+        @NonNull final DepictsClient depictsClient,
+        @NonNull @Named("tools_forge") final HttpUrl toolsForgeUrl,
+        @NonNull @Named("default_preferences") final JsonKvStore defaultKvStore,
+        @NonNull final Gson gson) {
+        return new OkHttpJsonApiClient(okHttpClient, depictsClient, toolsForgeUrl,
+            WIKIDATA_SPARQL_QUERY_URL, BuildConfig.WIKIMEDIA_CAMPAIGNS_URL, gson);
     }
 
     @Provides
     @Singleton
     public CommonsCookieStorage provideCookieStorage(
-        @Named("default_preferences") JsonKvStore preferences) {
-        CommonsCookieStorage cookieStorage = new CommonsCookieStorage(preferences);
+        @NonNull @Named("default_preferences") final JsonKvStore preferences) {
+        final CommonsCookieStorage cookieStorage = new CommonsCookieStorage(preferences);
         cookieStorage.load();
         return cookieStorage;
     }
 
     @Provides
     @Singleton
-    public CommonsCookieJar provideCookieJar(CommonsCookieStorage storage) {
+    public CommonsCookieJar provideCookieJar(@NonNull final CommonsCookieStorage storage) {
         return new CommonsCookieJar(storage);
     }
 
-    @Named(NAMED_COMMONS_CSRF)
+    @Named(WikidataConstants.NAMED_COMMONS_CSRF)
     @Provides
     @Singleton
-    public CsrfTokenClient provideCommonsCsrfTokenClient(SessionManager sessionManager,
-        CsrfTokenInterface tokenInterface, LoginClient loginClient, LogoutClient logoutClient) {
+    public CsrfTokenClient provideCommonsCsrfTokenClient(
+        @NonNull final SessionManager sessionManager,
+        @NonNull final CsrfTokenInterface tokenInterface, @NonNull final LoginClient loginClient,
+        @NonNull final LogoutClient logoutClient) {
         return new CsrfTokenClient(sessionManager, tokenInterface, loginClient, logoutClient);
     }
 
     @Provides
     @Singleton
-    public CsrfTokenInterface provideCsrfTokenInterface(CommonsServiceFactory serviceFactory) {
+    public CsrfTokenInterface provideCsrfTokenInterface(
+        @NonNull final RxCommonsServiceFactory serviceFactory) {
         return serviceFactory.create(BuildConfig.COMMONS_URL, CsrfTokenInterface.class);
     }
 
     @Provides
     @Singleton
-    public LoginInterface provideLoginInterface(CommonsServiceFactory serviceFactory) {
+    public LoginInterface provideLoginInterface(
+        @NonNull final RxCommonsServiceFactory serviceFactory) {
         return serviceFactory.create(BuildConfig.COMMONS_URL, LoginInterface.class);
     }
 
     @Provides
     @Singleton
-    public LoginClient provideLoginClient(LoginInterface loginInterface) {
+    public LoginClient provideLoginClient(@NonNull final LoginInterface loginInterface) {
         return new LoginClient(loginInterface);
     }
 
@@ -173,11 +171,6 @@ public class NetworkingModule {
         return new WikiSite(BuildConfig.WIKIDATA_URL);
     }
 
-
-    /**
-     * Gson objects are very heavy. The app should ideally be using just one instance of it instead of creating new instances everywhere.
-     * @return returns a singleton Gson instance
-     */
     @Provides
     @Singleton
     public Gson provideGson() {
@@ -186,117 +179,128 @@ public class NetworkingModule {
 
     @Provides
     @Singleton
-    public ReviewInterface provideReviewInterface(CommonsServiceFactory serviceFactory) {
+    public ReviewInterface provideReviewInterface(
+        @NonNull final RxCommonsServiceFactory serviceFactory) {
         return serviceFactory.create(BuildConfig.COMMONS_URL, ReviewInterface.class);
     }
 
     @Provides
     @Singleton
-    public DepictsInterface provideDepictsInterface(CommonsServiceFactory serviceFactory) {
+    public DepictsInterface provideDepictsInterface(
+        @NonNull final RxCommonsServiceFactory serviceFactory) {
         return serviceFactory.create(BuildConfig.WIKIDATA_URL, DepictsInterface.class);
     }
 
     @Provides
     @Singleton
-    public WikiBaseInterface provideWikiBaseInterface(CommonsServiceFactory serviceFactory) {
+    public WikiBaseInterface provideWikiBaseInterface(
+        @NonNull final RxCommonsServiceFactory serviceFactory) {
         return serviceFactory.create(BuildConfig.COMMONS_URL, WikiBaseInterface.class);
     }
 
     @Provides
     @Singleton
-    public UploadInterface provideUploadInterface(CommonsServiceFactory serviceFactory) {
+    public UploadInterface provideUploadInterface(
+        @NonNull final RxCommonsServiceFactory serviceFactory) {
         return serviceFactory.create(BuildConfig.COMMONS_URL, UploadInterface.class);
     }
 
     @Named("commons-page-edit-service")
     @Provides
     @Singleton
-    public PageEditInterface providePageEditService(CommonsServiceFactory serviceFactory) {
+    public PageEditInterface providePageEditService(
+        @NonNull final RxCommonsServiceFactory serviceFactory) {
         return serviceFactory.create(BuildConfig.COMMONS_URL, PageEditInterface.class);
     }
 
     @Named("wikidata-page-edit-service")
     @Provides
     @Singleton
-    public PageEditInterface provideWikiDataPageEditService(CommonsServiceFactory serviceFactory) {
+    public PageEditInterface provideWikiDataPageEditService(
+        @NonNull final RxCommonsServiceFactory serviceFactory) {
         return serviceFactory.create(BuildConfig.WIKIDATA_URL, PageEditInterface.class);
     }
 
     @Named("commons-page-edit")
     @Provides
     @Singleton
-    public PageEditClient provideCommonsPageEditClient(@Named(NAMED_COMMONS_CSRF) CsrfTokenClient csrfTokenClient,
-                                                       @Named("commons-page-edit-service") PageEditInterface pageEditInterface) {
+    public PageEditClient provideCommonsPageEditClient(
+        @NonNull @Named(WikidataConstants.NAMED_COMMONS_CSRF) final CsrfTokenClient csrfTokenClient,
+        @NonNull @Named("commons-page-edit-service") final PageEditInterface pageEditInterface) {
         return new PageEditClient(csrfTokenClient, pageEditInterface);
     }
 
     @Provides
     @Singleton
-    public MediaInterface provideMediaInterface(CommonsServiceFactory serviceFactory) {
+    public MediaInterface provideMediaInterface(
+        @NonNull final RxCommonsServiceFactory serviceFactory) {
         return serviceFactory.create(BuildConfig.COMMONS_URL, MediaInterface.class);
     }
 
-    /**
-     * Add provider for WikidataMediaInterface
-     * It creates a retrofit service for the commons wiki site
-     * @param commonsWikiSite commonsWikiSite
-     * @return WikidataMediaInterface
-     */
     @Provides
     @Singleton
-    public WikidataMediaInterface provideWikidataMediaInterface(CommonsServiceFactory serviceFactory) {
+    public WikidataMediaInterface provideWikidataMediaInterface(
+        @NonNull final RxCommonsServiceFactory serviceFactory) {
         return serviceFactory.create(BetaConstants.COMMONS_URL, WikidataMediaInterface.class);
     }
 
     @Provides
     @Singleton
-    public MediaDetailInterface providesMediaDetailInterface(CommonsServiceFactory serviceFactory) {
+    public MediaDetailInterface providesMediaDetailInterface(
+        @NonNull final RxCommonsServiceFactory serviceFactory) {
         return serviceFactory.create(BuildConfig.COMMONS_URL, MediaDetailInterface.class);
     }
 
     @Provides
     @Singleton
-    public CategoryInterface provideCategoryInterface(CommonsServiceFactory serviceFactory) {
+    public CategoryInterface provideCategoryInterface(
+        @NonNull final RxCommonsServiceFactory serviceFactory) {
         return serviceFactory.create(BuildConfig.COMMONS_URL, CategoryInterface.class);
     }
 
     @Provides
     @Singleton
-    public ThanksInterface provideThanksInterface(CommonsServiceFactory serviceFactory) {
+    public ThanksInterface provideThanksInterface(
+        @NonNull final RxCommonsServiceFactory serviceFactory) {
         return serviceFactory.create(BuildConfig.COMMONS_URL, ThanksInterface.class);
     }
 
     @Provides
     @Singleton
-    public NotificationInterface provideNotificationInterface(CommonsServiceFactory serviceFactory) {
+    public NotificationInterface provideNotificationInterface(
+        @NonNull final RxCommonsServiceFactory serviceFactory) {
         return serviceFactory.create(BuildConfig.COMMONS_URL, NotificationInterface.class);
     }
 
     @Provides
     @Singleton
-    public UserInterface provideUserInterface(CommonsServiceFactory serviceFactory) {
+    public UserInterface provideUserInterface(
+        @NonNull final RxCommonsServiceFactory serviceFactory) {
         return serviceFactory.create(BuildConfig.COMMONS_URL, UserInterface.class);
     }
 
     @Provides
     @Singleton
-    public WikidataInterface provideWikidataInterface(CommonsServiceFactory serviceFactory) {
+    public WikidataInterface provideWikidataInterface(
+        @NonNull final RxCommonsServiceFactory serviceFactory) {
         return serviceFactory.create(BuildConfig.WIKIDATA_URL, WikidataInterface.class);
     }
 
     /**
-     * Add provider for PageMediaInterface
-     * It creates a retrofit service for the wiki site using device's current language
+     * Add provider for PageMediaInterface It creates a retrofit service for the wiki site using
+     * device's current language
      */
     @Provides
     @Singleton
-    public PageMediaInterface providePageMediaInterface(@Named(NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE) WikiSite wikiSite, CommonsServiceFactory serviceFactory) {
+    public PageMediaInterface providePageMediaInterface(
+        @NonNull @Named(WikidataConstants.NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE) final WikiSite wikiSite,
+        @NonNull final RxCommonsServiceFactory serviceFactory) {
         return serviceFactory.create(wikiSite.url(), PageMediaInterface.class);
     }
 
     @Provides
     @Singleton
-    @Named(NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE)
+    @Named(WikidataConstants.NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE)
     public WikiSite provideLanguageWikipediaSite() {
         return WikiSite.forLanguageCode(Locale.getDefault().getLanguage());
     }
