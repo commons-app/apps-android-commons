@@ -21,12 +21,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.NavUtils;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
 import fr.free.nrw.commons.auth.login.LoginClient;
 import fr.free.nrw.commons.auth.login.LoginResult;
 import fr.free.nrw.commons.databinding.ActivityLoginBinding;
+import fr.free.nrw.commons.di.CommonsApplicationComponent;
 import fr.free.nrw.commons.utils.ActivityUtils;
 import java.util.Locale;
 import fr.free.nrw.commons.auth.login.LoginCallback;
@@ -53,7 +56,7 @@ import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
 import static fr.free.nrw.commons.CommonsApplication.loginMessageIntentKey;
 import static fr.free.nrw.commons.CommonsApplication.loginUsernameIntentKey;
 
-public class LoginActivity extends AccountAuthenticatorActivity {
+public class LoginActivity extends AppCompatActivity {
 
     @Inject
     SessionManager sessionManager;
@@ -63,28 +66,30 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     JsonKvStore applicationKvStore;
 
     @Inject
-    LoginClient loginClient;
-
-    @Inject
     SystemThemeUtils systemThemeUtils;
+
+    LoginViewModel model;
 
     private ActivityLoginBinding binding;
     ProgressDialog progressDialog;
-    private AppCompatDelegate delegate;
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     final  String saveProgressDailog="ProgressDailog_state";
     final String saveErrorMessage ="errorMessage";
     final String saveUsername="username";
     final  String savePassword="password";
+    private LoginCallback loginCallback = new LoginCallbackImpl();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ApplicationlessInjection
-                .getInstance(this.getApplicationContext())
-                .getCommonsApplicationComponent()
-                .inject(this);
+        CommonsApplicationComponent commonsApplicationComponent = ApplicationlessInjection
+            .getInstance(this.getApplicationContext())
+            .getCommonsApplicationComponent();
+        commonsApplicationComponent.inject(this);
+
+        model = new ViewModelProvider(this,
+            new LoginViewModelFactory(commonsApplicationComponent)).get(LoginViewModel.class);
 
         boolean isDarkTheme = systemThemeUtils.isDeviceInNightMode();
         setTheme(isDarkTheme ? R.style.DarkAppTheme : R.style.LightAppTheme);
@@ -208,7 +213,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         binding.loginUsername.removeTextChangedListener(textWatcher);
         binding.loginPassword.removeTextChangedListener(textWatcher);
         binding.loginTwoFactor.removeTextChangedListener(textWatcher);
-        delegate.onDestroy();
         binding = null;
         super.onDestroy();
     }
@@ -220,44 +224,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         final String twoFactorCode = Objects.requireNonNull(binding.loginTwoFactor.getText()).toString();
 
         showLoggingProgressBar();
-        loginClient.doLogin(username, password, twoFactorCode, Locale.getDefault().getLanguage(),
-            new LoginCallback() {
-                @Override
-                public void success(@NonNull LoginResult loginResult) {
-                    runOnUiThread(()->{
-                        Timber.d("Login Success");
-                        hideProgress();
-                        onLoginSuccess(loginResult);
-                    });
-                }
 
-                @Override
-                public void twoFactorPrompt(@NonNull Throwable caught, @Nullable String token) {
-                    runOnUiThread(()->{
-                        Timber.d("Requesting 2FA prompt");
-                        hideProgress();
-                        askUserForTwoFactorAuth();
-                    });
-                }
-
-                @Override
-                public void passwordResetPrompt(@Nullable String token) {
-                    runOnUiThread(()->{
-                        Timber.d("Showing password reset prompt");
-                        hideProgress();
-                        showPasswordResetPrompt();
-                    });
-                }
-
-                @Override
-                public void error(@NonNull Throwable caught) {
-                    runOnUiThread(()->{
-                        Timber.e(caught);
-                        hideProgress();
-                        showMessageAndCancelDialog(caught.getLocalizedMessage());
-                    });
-                }
-            });
+        model.doLogin(username, password, twoFactorCode, Locale.getDefault().getLanguage(), loginCallback);
     }
 
 
@@ -302,13 +270,13 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        delegate.onStart();
+        getDelegate().onStart();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        delegate.onStop();
+        getDelegate().onStop();
     }
 
     @Override
@@ -384,13 +352,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         binding.errorMessageContainer.setVisibility(VISIBLE);
     }
 
-    private AppCompatDelegate getDelegate() {
-        if (delegate == null) {
-            delegate = AppCompatDelegate.create(this, null);
-        }
-        return delegate;
-    }
-
     private class LoginTextWatcher implements TextWatcher {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
@@ -448,6 +409,44 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             showMessage(R.string.login_success, R.color.primaryDarkColor);
         } else {
             showMessage(errorMessage, R.color.secondaryDarkColor);
+        }
+    }
+
+    private class LoginCallbackImpl implements LoginCallback {
+        @Override
+        public void success(@NonNull LoginResult loginResult) {
+            runOnUiThread(() -> {
+                Timber.d("Login Success");
+                hideProgress();
+                onLoginSuccess(loginResult);
+            });
+        }
+
+        @Override
+        public void twoFactorPrompt(@NonNull Throwable caught, @Nullable String token) {
+            runOnUiThread(() -> {
+                Timber.d("Requesting 2FA prompt");
+                hideProgress();
+                askUserForTwoFactorAuth();
+            });
+        }
+
+        @Override
+        public void passwordResetPrompt(@Nullable String token) {
+            runOnUiThread(() -> {
+                Timber.d("Showing password reset prompt");
+                hideProgress();
+                showPasswordResetPrompt();
+            });
+        }
+
+        @Override
+        public void error(@NonNull Throwable caught) {
+            runOnUiThread(() -> {
+                Timber.e(caught);
+                hideProgress();
+                showMessageAndCancelDialog(caught.getLocalizedMessage());
+            });
         }
     }
 }

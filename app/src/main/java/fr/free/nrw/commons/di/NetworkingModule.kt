@@ -105,7 +105,7 @@ class NetworkingModule {
     @Provides
     @Singleton
     fun provideLoginClient(loginInterface: LoginInterface): LoginClient =
-        LoginClient(loginInterface, Dispatchers.IO)
+        LoginClient(loginInterface)
 
     @Provides
     @Singleton

@@ -4,8 +4,6 @@ import android.text.TextUtils
 import fr.free.nrw.commons.auth.login.LoginResult.OAuthResult
 import fr.free.nrw.commons.auth.login.LoginResult.ResetPasswordResult
 import fr.free.nrw.commons.wikidata.WikidataConstants.WIKIPEDIA_URL
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.runBlocking
 import retrofit2.HttpException
 import timber.log.Timber
 import java.io.IOException
@@ -13,10 +11,7 @@ import java.io.IOException
 /**
  * Responsible for making login related requests to the server.
  */
-class LoginClient(
-    private val loginInterface: LoginInterface,
-    private val dispatcher: CoroutineDispatcher
-) {
+class LoginClient(private val loginInterface: LoginInterface) {
     /**
      * userLanguage
      * It holds the value of the user's device language code.
@@ -90,13 +85,13 @@ class LoginClient(
         }
     }
 
-    fun doLogin(
+    suspend fun doLogin(
         username: String,
         password: String,
         twoFactorCode: String,
         userLanguage: String,
         loginCallback: LoginCallback
-    ) = runBlocking(dispatcher) {
+    ) {
         val tokenResponse = loginInterface.getLoginToken()
 
         if (tokenResponse.isSuccessful) {

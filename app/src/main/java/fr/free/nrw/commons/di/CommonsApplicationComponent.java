@@ -2,6 +2,7 @@ package fr.free.nrw.commons.di;
 
 import com.google.gson.Gson;
 
+import fr.free.nrw.commons.auth.LoginViewModel;
 import fr.free.nrw.commons.explore.categories.CategoriesModule;
 import fr.free.nrw.commons.navtab.MoreBottomSheetFragment;
 import fr.free.nrw.commons.navtab.MoreBottomSheetLoggedOutFragment;
@@ -72,6 +73,8 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
     void inject(PicOfDayAppWidget picOfDayAppWidget);
 
     Gson gson();
+
+    void inject(LoginViewModel viewModel);
 
     @Component.Builder
     @SuppressWarnings({"WeakerAccess", "unused"})

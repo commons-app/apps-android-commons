@@ -40,14 +40,14 @@ open class OnSwipeTouchListener(context: Context?) : View.OnTouchListener {
          * Detects the gestures
          */
         override fun onFling(
-            event1: MotionEvent,
+            event1: MotionEvent?,
             event2: MotionEvent,
             velocityX: Float,
             velocityY: Float
         ): Boolean {
             try {
-                val diffY: Float = event2.y - event1.y
-                val diffX: Float = event2.x - event1.x
+                val diffY: Float = event2.y - (event1?.y ?: 0.0f)
+                val diffX: Float = event2.x - (event1?.x ?: 0.0f)
                 if (abs(diffX) > abs(diffY)) {
                     if (abs(diffX) > SWIPE_THRESHOLD_WIDTH && abs(velocityX) >
                         SWIPE_VELOCITY_THRESHOLD) {
@@ -73,6 +73,7 @@ open class OnSwipeTouchListener(context: Context?) : View.OnTouchListener {
             return false
         }
     }
+
 
     /**
      * Swipe right to view previous image
