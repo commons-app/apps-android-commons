@@ -209,9 +209,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         binding.loginPassword.removeTextChangedListener(textWatcher);
         binding.loginTwoFactor.removeTextChangedListener(textWatcher);
         delegate.onDestroy();
-        if(null!=loginClient) {
-            loginClient.cancel();
-        }
         binding = null;
         super.onDestroy();
     }

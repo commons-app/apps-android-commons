@@ -22,6 +22,7 @@ import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.upload.FileProcessor;
 import fr.free.nrw.commons.upload.UploadModule;
 import fr.free.nrw.commons.widget.PicOfDayAppWidget;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 
 /**
@@ -32,6 +33,8 @@ import fr.free.nrw.commons.widget.PicOfDayAppWidget;
 @Component(modules = {
         CommonsApplicationModule.class,
         NetworkingModule.class,
+        ApiModule.class,
+        RxJavaApiModule.class,
         AndroidInjectionModule.class,
         AndroidSupportInjectionModule.class,
         ActivityBuilderModule.class,

@@ -2,15 +2,16 @@ package fr.free.nrw.commons.auth.csrf
 
 import androidx.annotation.VisibleForTesting
 import fr.free.nrw.commons.auth.SessionManager
-import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
-import fr.free.nrw.commons.auth.login.LoginClient
 import fr.free.nrw.commons.auth.login.LoginCallback
+import fr.free.nrw.commons.auth.login.LoginClient
 import fr.free.nrw.commons.auth.login.LoginFailedException
 import fr.free.nrw.commons.auth.login.LoginResult
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Response
 import timber.log.Timber
-import java.io.IOException
 import java.util.concurrent.Callable
 import java.util.concurrent.Executors.newSingleThreadExecutor
 
@@ -18,14 +19,15 @@ class CsrfTokenClient(
     private val sessionManager: SessionManager,
     private val csrfTokenInterface: CsrfTokenInterface,
     private val loginClient: LoginClient,
-    private val logoutClient: LogoutClient
+    private val logoutClient: LogoutClient,
+    private val dispatcher: CoroutineDispatcher
 ) {
     private var retries = 0
     private var csrfTokenCall: Call<MwQueryResponse?>? = null
 
 
     @Throws(Throwable::class)
-    fun getTokenBlocking(): String {
+    fun getTokenBlocking(): String = runBlocking {
         var token = ""
         val userName = sessionManager.userName ?: ""
         val password = sessionManager.password ?: ""
@@ -52,9 +54,8 @@ class CsrfTokenClient(
                 }
                 break
             } catch (e: LoginFailedException) {
-               throw InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE)
-            }
-            catch (t: Throwable) {
+                throw InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE)
+            } catch (t: Throwable) {
                 Timber.w(t)
             }
         }
@@ -62,7 +63,7 @@ class CsrfTokenClient(
         if (token.isEmpty() || token == ANON_TOKEN) {
             throw InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE)
         }
-        return token
+        return@runBlocking token
     }
 
     @VisibleForTesting
@@ -87,7 +88,10 @@ class CsrfTokenClient(
     fun requestToken(service: CsrfTokenInterface, cb: Callback): Call<MwQueryResponse?> {
         val call = service.getCsrfTokenCall()
         call.enqueue(object : retrofit2.Callback<MwQueryResponse?> {
-            override fun onResponse(call: Call<MwQueryResponse?>, response: Response<MwQueryResponse?>) {
+            override fun onResponse(
+                call: Call<MwQueryResponse?>,
+                response: Response<MwQueryResponse?>
+            ) {
                 if (call.isCanceled) {
                     return
                 }
@@ -125,28 +129,29 @@ class CsrfTokenClient(
         password: String,
         callback: Callback,
         retryCallback: () -> Unit
-    ) = loginClient.request(username, password, object : LoginCallback {
-        override fun success(loginResult: LoginResult) {
-            if (loginResult.pass) {
-                sessionManager.updateAccount(loginResult)
-                retryCallback()
-            } else {
-                callback.failure(LoginFailedException(loginResult.message))
+    ) = runBlocking(dispatcher) {
+        loginClient.request(username, password, object : LoginCallback {
+            override fun success(loginResult: LoginResult) {
+                if (loginResult.pass) {
+                    sessionManager.updateAccount(loginResult)
+                    retryCallback()
+                } else {
+                    callback.failure(LoginFailedException(loginResult.message))
+                }
             }
-        }
 
-        override fun twoFactorPrompt(caught: Throwable, token: String?) =
-            callback.twoFactorPrompt()
+            override fun twoFactorPrompt(caught: Throwable, token: String?) =
+                callback.twoFactorPrompt()
 
-        // Should not happen here, but call the callback just in case.
-        override fun passwordResetPrompt(token: String?) =
-            callback.failure(LoginFailedException("Logged in with temporary password."))
+            // Should not happen here, but call the callback just in case.
+            override fun passwordResetPrompt(token: String?) =
+                callback.failure(LoginFailedException("Logged in with temporary password."))
 
-        override fun error(caught: Throwable) = callback.failure(caught)
-    })
+            override fun error(caught: Throwable) = callback.failure(caught)
+        })
+    }
 
     private fun cancel() {
-        loginClient.cancel()
         if (csrfTokenCall != null) {
             csrfTokenCall!!.cancel()
             csrfTokenCall = null
@@ -167,5 +172,6 @@ class CsrfTokenClient(
         const val ANONYMOUS_TOKEN_MESSAGE = "App believes we're logged in, but got anonymous token."
     }
 }
+
 class InvalidLoginTokenException(message: String) : Exception(message)
 
