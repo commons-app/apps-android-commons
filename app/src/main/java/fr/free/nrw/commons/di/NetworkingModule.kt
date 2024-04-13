@@ -43,12 +43,18 @@ import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import okhttp3.logging.HttpLoggingInterceptor.Level.BASIC
+import okhttp3.logging.HttpLoggingInterceptor.Level.BODY
 import timber.log.Timber
 import java.io.File
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
+
+private const val WIKIDATA_SPARQL_QUERY_URL = "https://query.wikidata.org/sparql"
+private const val TOOLS_FORGE_URL = "https://tools.wmflabs.org/commons-android-app/tool-commons-android-app"
+private const val NAMED_WIKI_DATA_WIKI_SITE = "wikidata-wikisite"
 
 @Module
 @Suppress("unused")
@@ -67,24 +73,20 @@ class NetworkingModule {
 
     @Provides
     @Singleton
-    fun serviceFactory(cookieJar: CommonsCookieJar): RxCommonsServiceFactory {
-        return RxCommonsServiceFactory(OkHttpConnectionFactory.getClient(cookieJar))
-    }
+    fun serviceFactory(cookieJar: CommonsCookieJar): RxCommonsServiceFactory =
+        RxCommonsServiceFactory(OkHttpConnectionFactory.getClient(cookieJar))
 
     @Provides
     @Singleton
-    fun coroutinesServiceFactory(
-        cookieJar: CommonsCookieJar
-    ): CoroutinesCommonsServiceFactory {
-        return CoroutinesCommonsServiceFactory(OkHttpConnectionFactory.getClient(cookieJar))
-    }
+    fun coroutinesServiceFactory(cookieJar: CommonsCookieJar): CoroutinesCommonsServiceFactory =
+        CoroutinesCommonsServiceFactory(OkHttpConnectionFactory.getClient(cookieJar))
 
     @Provides
     @Singleton
-    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor { Timber.tag("OkHttp").v(it) }.also {
-            it.setLevel(if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.BASIC)
-        }
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor {
+        Timber.tag("OkHttp").v(it)
+    }.apply {
+        level = if (BuildConfig.DEBUG) BODY else BASIC
     }
 
     @Provides
@@ -94,32 +96,25 @@ class NetworkingModule {
         depictsClient: DepictsClient,
         @Named("tools_forge") toolsForgeUrl: HttpUrl,
         gson: Gson
-    ): OkHttpJsonApiClient {
-        return OkHttpJsonApiClient(
-            okHttpClient,
-            depictsClient,
-            toolsForgeUrl,
-            WIKIDATA_SPARQL_QUERY_URL,
-            BuildConfig.WIKIMEDIA_CAMPAIGNS_URL,
-            gson
-        )
-    }
+    ): OkHttpJsonApiClient = OkHttpJsonApiClient(
+        okHttpClient,
+        depictsClient,
+        toolsForgeUrl,
+        WIKIDATA_SPARQL_QUERY_URL,
+        BuildConfig.WIKIMEDIA_CAMPAIGNS_URL,
+        gson
+    )
 
     @Provides
     @Singleton
     fun provideCookieStorage(
         @Named("default_preferences") preferences: JsonKvStore
-    ): CommonsCookieStorage {
-        val cookieStorage = CommonsCookieStorage(preferences)
-        cookieStorage.load()
-        return cookieStorage
-    }
+    ): CommonsCookieStorage = CommonsCookieStorage(preferences).also { it.load() }
 
     @Provides
     @Singleton
-    fun provideCookieJar(storage: CommonsCookieStorage): CommonsCookieJar {
-        return CommonsCookieJar(storage)
-    }
+    fun provideCookieJar(storage: CommonsCookieStorage): CommonsCookieJar =
+        CommonsCookieJar(storage)
 
     @Named(WikidataConstants.NAMED_COMMONS_CSRF)
     @Provides
@@ -129,180 +124,119 @@ class NetworkingModule {
         tokenInterface: CsrfTokenInterface,
         loginClient: LoginClient,
         logoutClient: LogoutClient
-    ): CsrfTokenClient {
-        return CsrfTokenClient(sessionManager, tokenInterface, loginClient, logoutClient)
-    }
+    ): CsrfTokenClient = CsrfTokenClient(sessionManager, tokenInterface, loginClient, logoutClient)
 
     @Provides
     @Singleton
-    fun provideCsrfTokenInterface(
-        serviceFactory: RxCommonsServiceFactory
-    ): CsrfTokenInterface {
-        return serviceFactory.create(BuildConfig.COMMONS_URL, CsrfTokenInterface::class.java)
-    }
+    fun provideCsrfTokenInterface(serviceFactory: RxCommonsServiceFactory): CsrfTokenInterface =
+        serviceFactory.create(BuildConfig.COMMONS_URL, CsrfTokenInterface::class.java)
 
     @Provides
     @Singleton
-    fun provideLoginInterface(
-        serviceFactory: RxCommonsServiceFactory
-    ): LoginInterface {
-        return serviceFactory.create(BuildConfig.COMMONS_URL, LoginInterface::class.java)
-    }
+    fun provideLoginInterface(serviceFactory: RxCommonsServiceFactory): LoginInterface =
+        serviceFactory.create(BuildConfig.COMMONS_URL, LoginInterface::class.java)
 
     @Provides
     @Singleton
-    fun provideLoginClient(loginInterface: LoginInterface): LoginClient {
-        return LoginClient(loginInterface)
-    }
+    fun provideLoginClient(loginInterface: LoginInterface): LoginClient =
+        LoginClient(loginInterface)
 
     @Provides
     @Named("wikimedia_api_host")
-    fun provideMwApiUrl(): String {
-        return BuildConfig.WIKIMEDIA_API_HOST
-    }
+    fun provideMwApiUrl(): String = BuildConfig.WIKIMEDIA_API_HOST
 
     @Provides
     @Named("tools_forge")
-    fun provideToolsForgeUrl(): HttpUrl {
-        return TOOLS_FORGE_URL.toHttpUrlOrNull()!!
-    }
+    fun provideToolsForgeUrl(): HttpUrl = TOOLS_FORGE_URL.toHttpUrlOrNull()!!
 
     @Provides
     @Singleton
     @Named(NAMED_WIKI_DATA_WIKI_SITE)
-    fun provideWikidataWikiSite(): WikiSite {
-        return WikiSite(BuildConfig.WIKIDATA_URL)
-    }
+    fun provideWikidataWikiSite(): WikiSite = WikiSite(BuildConfig.WIKIDATA_URL)
 
     @Provides
     @Singleton
-    fun provideGson(): Gson {
-        return GsonUtil.getDefaultGson()
-    }
+    fun provideGson(): Gson = GsonUtil.getDefaultGson()
 
     @Provides
     @Singleton
-    fun provideReviewInterface(
-        serviceFactory: RxCommonsServiceFactory
-    ): ReviewInterface {
-        return serviceFactory.create(BuildConfig.COMMONS_URL, ReviewInterface::class.java)
-    }
+    fun provideReviewInterface(serviceFactory: RxCommonsServiceFactory): ReviewInterface =
+        serviceFactory.create(BuildConfig.COMMONS_URL, ReviewInterface::class.java)
 
     @Provides
     @Singleton
-    fun provideDepictsInterface(
-        serviceFactory: RxCommonsServiceFactory
-    ): DepictsInterface {
-        return serviceFactory.create(BuildConfig.WIKIDATA_URL, DepictsInterface::class.java)
-    }
+    fun provideDepictsInterface(serviceFactory: RxCommonsServiceFactory): DepictsInterface =
+        serviceFactory.create(BuildConfig.WIKIDATA_URL, DepictsInterface::class.java)
 
     @Provides
     @Singleton
-    fun provideWikiBaseInterface(
-        serviceFactory: RxCommonsServiceFactory
-    ): WikiBaseInterface {
-        return serviceFactory.create(BuildConfig.COMMONS_URL, WikiBaseInterface::class.java)
-    }
+    fun provideWikiBaseInterface(serviceFactory: RxCommonsServiceFactory): WikiBaseInterface =
+        serviceFactory.create(BuildConfig.COMMONS_URL, WikiBaseInterface::class.java)
 
     @Provides
     @Singleton
-    fun provideUploadInterface(
-        serviceFactory: RxCommonsServiceFactory
-    ): UploadInterface {
-        return serviceFactory.create(BuildConfig.COMMONS_URL, UploadInterface::class.java)
-    }
+    fun provideUploadInterface(serviceFactory: RxCommonsServiceFactory): UploadInterface =
+        serviceFactory.create(BuildConfig.COMMONS_URL, UploadInterface::class.java)
 
+    @Provides
+    @Singleton
     @Named("commons-page-edit-service")
+    fun providePageEditService(serviceFactory: RxCommonsServiceFactory): PageEditInterface =
+        serviceFactory.create(BuildConfig.COMMONS_URL, PageEditInterface::class.java)
+
     @Provides
     @Singleton
-    fun providePageEditService(
-        serviceFactory: RxCommonsServiceFactory
-    ): PageEditInterface {
-        return serviceFactory.create(BuildConfig.COMMONS_URL, PageEditInterface::class.java)
-    }
-
     @Named("wikidata-page-edit-service")
-    @Provides
-    @Singleton
-    fun provideWikiDataPageEditService(
-        serviceFactory: RxCommonsServiceFactory
-    ): PageEditInterface {
-        return serviceFactory.create(BuildConfig.WIKIDATA_URL, PageEditInterface::class.java)
-    }
+    fun provideWikiDataPageEditService(serviceFactory: RxCommonsServiceFactory): PageEditInterface =
+        serviceFactory.create(BuildConfig.WIKIDATA_URL, PageEditInterface::class.java)
 
-    @Named("commons-page-edit")
     @Provides
     @Singleton
+    @Named("commons-page-edit")
     fun provideCommonsPageEditClient(
         @Named(WikidataConstants.NAMED_COMMONS_CSRF) csrfTokenClient: CsrfTokenClient,
         @Named("commons-page-edit-service") pageEditInterface: PageEditInterface
-    ): PageEditClient {
-        return PageEditClient(csrfTokenClient, pageEditInterface)
-    }
+    ): PageEditClient = PageEditClient(csrfTokenClient, pageEditInterface)
 
     @Provides
     @Singleton
-    fun provideMediaInterface(
-        serviceFactory: RxCommonsServiceFactory
-    ): MediaInterface {
-        return serviceFactory.create(BuildConfig.COMMONS_URL, MediaInterface::class.java)
-    }
+    fun provideMediaInterface(serviceFactory: RxCommonsServiceFactory): MediaInterface =
+        serviceFactory.create(BuildConfig.COMMONS_URL, MediaInterface::class.java)
 
     @Provides
     @Singleton
-    fun provideWikidataMediaInterface(
-        serviceFactory: RxCommonsServiceFactory
-    ): WikidataMediaInterface {
-        return serviceFactory.create(BetaConstants.COMMONS_URL, WikidataMediaInterface::class.java)
-    }
+    fun provideWikidataMediaInterface(serviceFactory: RxCommonsServiceFactory): WikidataMediaInterface =
+        serviceFactory.create(BetaConstants.COMMONS_URL, WikidataMediaInterface::class.java)
 
     @Provides
     @Singleton
-    fun providesMediaDetailInterface(
-        serviceFactory: RxCommonsServiceFactory
-    ): MediaDetailInterface {
-        return serviceFactory.create(BuildConfig.COMMONS_URL, MediaDetailInterface::class.java)
-    }
+    fun providesMediaDetailInterface(serviceFactory: RxCommonsServiceFactory): MediaDetailInterface =
+        serviceFactory.create(BuildConfig.COMMONS_URL, MediaDetailInterface::class.java)
 
     @Provides
     @Singleton
-    fun provideCategoryInterface(
-        serviceFactory: RxCommonsServiceFactory
-    ): CategoryInterface {
-        return serviceFactory.create(BuildConfig.COMMONS_URL, CategoryInterface::class.java)
-    }
+    fun provideCategoryInterface(serviceFactory: RxCommonsServiceFactory): CategoryInterface =
+        serviceFactory.create(BuildConfig.COMMONS_URL, CategoryInterface::class.java)
 
     @Provides
     @Singleton
-    fun provideThanksInterface(
-        serviceFactory: RxCommonsServiceFactory
-    ): ThanksInterface {
-        return serviceFactory.create(BuildConfig.COMMONS_URL, ThanksInterface::class.java)
-    }
+    fun provideThanksInterface(serviceFactory: RxCommonsServiceFactory): ThanksInterface =
+        serviceFactory.create(BuildConfig.COMMONS_URL, ThanksInterface::class.java)
 
     @Provides
     @Singleton
-    fun provideNotificationInterface(
-        serviceFactory: RxCommonsServiceFactory
-    ): NotificationInterface {
-        return serviceFactory.create(BuildConfig.COMMONS_URL, NotificationInterface::class.java)
-    }
+    fun provideNotificationInterface(serviceFactory: RxCommonsServiceFactory): NotificationInterface =
+        serviceFactory.create(BuildConfig.COMMONS_URL, NotificationInterface::class.java)
 
     @Provides
     @Singleton
-    fun provideUserInterface(
-        serviceFactory: RxCommonsServiceFactory
-    ): UserInterface {
-        return serviceFactory.create(BuildConfig.COMMONS_URL, UserInterface::class.java)
-    }
+    fun provideUserInterface(serviceFactory: RxCommonsServiceFactory): UserInterface =
+        serviceFactory.create(BuildConfig.COMMONS_URL, UserInterface::class.java)
 
     @Provides
     @Singleton
-    fun provideWikidataInterface(
-        serviceFactory: RxCommonsServiceFactory
-    ): WikidataInterface {
-        return serviceFactory.create(BuildConfig.WIKIDATA_URL, WikidataInterface::class.java)
-    }
+    fun provideWikidataInterface(serviceFactory: RxCommonsServiceFactory): WikidataInterface =
+        serviceFactory.create(BuildConfig.WIKIDATA_URL, WikidataInterface::class.java)
 
     /**
      * Add provider for PageMediaInterface It creates a retrofit service for the wiki site using
@@ -313,22 +247,11 @@ class NetworkingModule {
     fun providePageMediaInterface(
         @Named(WikidataConstants.NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE) wikiSite: WikiSite,
         serviceFactory: RxCommonsServiceFactory
-    ): PageMediaInterface {
-        return serviceFactory.create(wikiSite.url(), PageMediaInterface::class.java)
-    }
+    ): PageMediaInterface = serviceFactory.create(wikiSite.url(), PageMediaInterface::class.java)
 
     @Provides
     @Singleton
     @Named(WikidataConstants.NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE)
-    fun provideLanguageWikipediaSite(): WikiSite {
-        return WikiSite.forLanguageCode(Locale.getDefault().language)
-    }
-
-    companion object {
-        private const val WIKIDATA_SPARQL_QUERY_URL = "https://query.wikidata.org/sparql"
-        private const val TOOLS_FORGE_URL =
-            "https://tools.wmflabs.org/commons-android-app/tool-commons-android-app"
-        private const val NAMED_WIKI_DATA_WIKI_SITE = "wikidata-wikisite"
-        private const val NAMED_WIKI_PEDIA_WIKI_SITE = "wikipedia-wikisite"
-    }
+    fun provideLanguageWikipediaSite(): WikiSite =
+        WikiSite.forLanguageCode(Locale.getDefault().language)
 }

@@ -5,6 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
+@Deprecated("Start migrating toward kotlin coroutines")
 class RxCommonsServiceFactory(private val okHttpClient: OkHttpClient) {
 
     private val builder: Retrofit.Builder by lazy {
