@@ -32,9 +32,9 @@
   <string name="share_title_hint" fuzzy="true">Башлыкъ</string>
   <string name="share_description_hint">Ачыкълау</string>
   <string name="login_failed_generic" fuzzy="true">Системагъа кириуде халат!</string>
-  <string name="share_upload_button">Джюклеу</string>
+  <string name="share_upload_button">Джюкле</string>
   <string name="provider_modifications">Тюрлениуле</string>
-  <string name="menu_upload_single">Джюклеу</string>
+  <string name="menu_upload_single">Джюкле</string>
   <string name="categories_search_text_hint">Категорияланы изле</string>
   <string name="menu_save_categories">Сакъла</string>
   <string name="categories_activity_title">Категорияла</string>

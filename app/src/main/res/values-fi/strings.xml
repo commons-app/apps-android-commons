@@ -240,7 +240,7 @@
   <string name="navigation_item_logout">Kirjaudu ulos</string>
   <string name="navigation_item_info">Opas</string>
   <string name="navigation_item_notification">Ilmoitukset</string>
-  <string name="navigation_item_review">Tarkasta</string>
+  <string name="navigation_item_review">Arviointi</string>
   <string name="no_description_found">kuvausta ei löytynyt</string>
   <string name="nearby_info_menu_commons_article">Commons-tiedostosivu</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-kohde</string>
