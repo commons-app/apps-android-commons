@@ -282,6 +282,8 @@
   <string name="nearby_location_not_available">Nearby might not work properly, Location not available.</string>
   <string name="upload_location_access_denied">Location access denied. Please set your location manually to use this feature.</string>
   <string name="location_permission_rationale_nearby">Permission required to display a list of nearby places</string>
+  <string name="location_permission_rationale_explore">Permission required to display a list of nearby images</string>
+
 
   <string name="nearby_directions">Directions</string>
   <string name="nearby_wikidata">Wikidata</string>
@@ -355,7 +357,7 @@
   <string name="share_app_title">Share App</string>
   <string name="rotate">Rotate</string>
 
-  <string name="error_fetching_nearby_places">Error fetching nearby places.</string>
+  <string name="error_fetching_nearby_places">Could not load nearby places</string>
   <string name="no_pictures_in_this_area">No pictures in this area</string>
   <string name="no_nearby_places_around">No nearby places around</string>
   <string name="error_fetching_nearby_monuments">Error fetching nearby monuments.</string>
@@ -586,7 +588,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="coordinates_edit_helper_edit_message_else">Could not add coordinates.</string>
   <string name="description_edit_helper_edit_message_else">Could not add descriptions.</string>
   <string name="caption_edit_helper_edit_message_else">Could not add caption.</string>
-  <string name="coordinates_picking_unsuccessful">Unable to get coordinates.</string>
+  <string name="coordinates_picking_unsuccessful">Image\'s coordinates not updated</string>
   <string name="descriptions_picking_unsuccessful">Unable to get descriptions.</string>
   <string name="description_activity_title">Edit descriptions and captions</string>
 
@@ -623,8 +625,10 @@ Upload your first media by tapping on the add button.</string>
   <string name="cannot_open_location_settings">Failed to open location settings. Please turn on location manually</string>
   <string name="recommend_high_accuracy_mode">For best results, choose the High Accuracy mode.</string>
   <string name="ask_to_turn_location_on">Turn on location?</string>
+  <string name="ask_to_turn_location_on_text">Kindly turn on location services for the app show your current location</string>
   <string name="nearby_needs_location">Nearby needs location enabled to work properly</string>
-  <string name="upload_map_location_access">You need to give access to your current location to set location automatically.</string>
+  <string name="explore_map_needs_location">Explore map needs location permission to display nearby images</string>
+  <string name="upload_map_location_access">You need to give location permission to set location automatically.</string>
   <string name="use_location_from_similar_image">Did you shoot these two pictures at the same place? Do you want to use the latitude/longitude of the picture on the right?</string>
   <string name="load_more">Load More</string>
   <string name="nearby_no_results">No places found, try changing your search criteria.</string>
