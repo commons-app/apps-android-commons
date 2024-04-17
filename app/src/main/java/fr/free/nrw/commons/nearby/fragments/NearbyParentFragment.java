@@ -1883,6 +1883,16 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             recenterToUserLocation = true;
             return;
         }
+
+        /*
+         * FIXME: With the revamp of the location permission helper in the MR
+         *  #5494[1], there is a doubt that the following code is redundant.
+         *  If we could confirm the same, the following code can be removed. If it
+         *  turns out to be necessary, we could replace this with a comment
+         *  clarifying why it is necessary.
+         *
+         * Ref: https://github.com/commons-app/apps-android-commons/pull/5494#discussion_r1560404794
+         */
         if (lastMapFocus != null) {
             Location mylocation = new Location("");
             Location dest_location = new Location("");
