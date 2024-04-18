@@ -388,6 +388,7 @@ public class CommonsApplication extends MultiDexApplication {
             if (loginMessage != null) {
                 loginIntent.putExtra(loginMessageIntentKey, loginMessage);
             }
+
             if (userName != null) {
                 loginIntent.putExtra(loginUsernameIntentKey, userName);
             }

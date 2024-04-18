@@ -71,15 +71,21 @@ class CsrfTokenClient(
         requestToken(service, object : Callback {
             override fun success(token: String?) {
                 if (sessionManager.isUserLoggedIn && token == ANON_TOKEN) {
-                    retryWithLogin(cb) {
-                        InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE)
+                    runBlocking(dispatcher) {
+                        retryWithLogin(cb) {
+                            InvalidLoginTokenException(ANONYMOUS_TOKEN_MESSAGE)
+                        }
                     }
                 } else {
                     cb.success(token)
                 }
             }
 
-            override fun failure(caught: Throwable?) = retryWithLogin(cb) { caught }
+            override fun failure(caught: Throwable?) {
+                runBlocking(dispatcher) {
+                    retryWithLogin(cb) { caught }
+                }
+            }
 
             override fun twoFactorPrompt() = cb.twoFactorPrompt()
         })
@@ -108,7 +114,7 @@ class CsrfTokenClient(
         return call
     }
 
-    private fun retryWithLogin(callback: Callback, caught: () -> Throwable?) {
+    private suspend fun retryWithLogin(callback: Callback, caught: () -> Throwable?) {
         val userName = sessionManager.userName
         val password = sessionManager.password
         if (retries < MAX_RETRIES && !userName.isNullOrEmpty() && !password.isNullOrEmpty()) {
@@ -124,12 +130,12 @@ class CsrfTokenClient(
         }
     }
 
-    private fun login(
+    private suspend fun login(
         username: String,
         password: String,
         callback: Callback,
         retryCallback: () -> Unit
-    ) = runBlocking(dispatcher) {
+    ) {
         loginClient.request(username, password, object : LoginCallback {
             override fun success(loginResult: LoginResult) {
                 if (loginResult.pass) {

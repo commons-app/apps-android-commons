@@ -14,6 +14,11 @@ import fr.free.nrw.commons.wikidata.json.PostProcessingTypeAdapter
 import fr.free.nrw.commons.wikidata.json.UriTypeAdapter
 import fr.free.nrw.commons.wikidata.json.WikiSiteTypeAdapter
 import fr.free.nrw.commons.wikidata.model.page.Namespace
+import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
+import org.junit.Assert.fail
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -48,36 +53,37 @@ class UserExtendedInfoClientTest : MockWebServerTest() {
 
     @Test
     @Throws(Throwable::class)
-    fun testRequestSuccess() {
+    fun testRequestSuccess() = runTest {
         enqueueFromFile("user_extended_info.json")
 
-        apiService!!.getUserInfo("USER").subscribe(observer)
+        val result = apiService!!.getUserInfo("USER")
 
-        observer
-            .assertComplete()
-            .assertNoErrors()
-            .assertValue { result: MwQueryResponse ->
-                result.query()!!
-                    .userInfo()!!.id() == 24531888 && result.query()!!.getUserResponse("USER")!!
-                    .name() == "USER"
-            }
+        val userInfo = result.body()?.query()?.userInfo()
+        assertEquals(24531888, userInfo?.id())
+        val userResponse = result.body()?.query()?.getUserResponse("USER")?.name()
+        assertEquals("USER", userResponse)
     }
 
     @Test
-    fun testRequestResponse404() {
+    fun testRequestResponse404() = runTest {
         enqueue404()
 
-        apiService!!.getUserInfo("USER").subscribe(observer)
+        val result = apiService!!.getUserInfo("USER")
 
-        observer.assertError(Exception::class.java)
+        assertFalse(result.isSuccessful)
+        assertEquals(404, result.code())
     }
 
     @Test
-    fun testRequestResponseMalformed() {
+    @Throws(Throwable::class)
+    fun testRequestResponseMalformed() = runTest {
         enqueueMalformed()
 
-        apiService!!.getUserInfo("USER").subscribe(observer)
-
-        observer.assertError(MalformedJsonException::class.java)
+        try {
+            apiService!!.getUserInfo("USER")
+            fail("Exception expected")
+        } catch (e: Exception) {
+            assertTrue(e is MalformedJsonException)
+        }
     }
 }

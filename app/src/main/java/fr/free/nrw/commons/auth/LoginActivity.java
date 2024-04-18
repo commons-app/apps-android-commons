@@ -1,6 +1,11 @@
 package fr.free.nrw.commons.auth;
 
-import android.accounts.AccountAuthenticatorActivity;
+import static android.view.KeyEvent.KEYCODE_ENTER;
+import static android.view.View.VISIBLE;
+import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
+import static fr.free.nrw.commons.CommonsApplication.loginMessageIntentKey;
+import static fr.free.nrw.commons.CommonsApplication.loginUsernameIntentKey;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -8,13 +13,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-
 import android.widget.TextView;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
@@ -22,39 +25,28 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.NavUtils;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
-import fr.free.nrw.commons.auth.login.LoginClient;
-import fr.free.nrw.commons.auth.login.LoginResult;
-import fr.free.nrw.commons.databinding.ActivityLoginBinding;
-import fr.free.nrw.commons.di.CommonsApplicationComponent;
-import fr.free.nrw.commons.utils.ActivityUtils;
-import java.util.Locale;
-import fr.free.nrw.commons.auth.login.LoginCallback;
-
-import java.util.Objects;
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.auth.login.LoginCallback;
+import fr.free.nrw.commons.auth.login.LoginResult;
 import fr.free.nrw.commons.contributions.MainActivity;
+import fr.free.nrw.commons.databinding.ActivityLoginBinding;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
+import fr.free.nrw.commons.di.CommonsApplicationComponent;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.utils.ActivityUtils;
 import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import io.reactivex.disposables.CompositeDisposable;
+import java.util.Locale;
+import java.util.Objects;
+import javax.inject.Inject;
+import javax.inject.Named;
 import timber.log.Timber;
-
-import static android.view.KeyEvent.KEYCODE_ENTER;
-import static android.view.View.VISIBLE;
-import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
-import static fr.free.nrw.commons.CommonsApplication.loginMessageIntentKey;
-import static fr.free.nrw.commons.CommonsApplication.loginUsernameIntentKey;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -68,16 +60,10 @@ public class LoginActivity extends AppCompatActivity {
     @Inject
     SystemThemeUtils systemThemeUtils;
 
-    LoginViewModel model;
-
+    private LoginViewModel model;
     private ActivityLoginBinding binding;
-    ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    final  String saveProgressDailog="ProgressDailog_state";
-    final String saveErrorMessage ="errorMessage";
-    final String saveUsername="username";
-    final  String savePassword="password";
     private LoginCallback loginCallback = new LoginCallbackImpl();
 
     @Override
@@ -93,23 +79,20 @@ public class LoginActivity extends AppCompatActivity {
 
         boolean isDarkTheme = systemThemeUtils.isDeviceInNightMode();
         setTheme(isDarkTheme ? R.style.DarkAppTheme : R.style.LightAppTheme);
-        getDelegate().installViewFactory();
-        getDelegate().onCreate(savedInstanceState);
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        String message = getIntent().getStringExtra(loginMessageIntentKey);
-        String username = getIntent().getStringExtra(loginUsernameIntentKey);
 
         binding.loginUsername.addTextChangedListener(textWatcher);
         binding.loginPassword.addTextChangedListener(textWatcher);
         binding.loginTwoFactor.addTextChangedListener(textWatcher);
 
         binding.skipLogin.setOnClickListener(view -> skipLogin());
-        binding.forgotPassword.setOnClickListener(view -> forgotPassword());
-        binding.aboutPrivacyPolicy.setOnClickListener(view -> onPrivacyPolicyClicked());
-        binding.signUpButton.setOnClickListener(view -> signUp());
+        binding.forgotPassword.setOnClickListener(view -> Utils.handleWebUrl(
+            this, Uri.parse(BuildConfig.FORGOT_PASSWORD_URL)));
+        binding.aboutPrivacyPolicy.setOnClickListener(view -> Utils.handleWebUrl(
+            this, Uri.parse(BuildConfig.PRIVACY_POLICY_URL)));
+        binding.signUpButton.setOnClickListener(view -> startActivity(new Intent(this, SignupActivity.class)));
         binding.loginButton.setOnClickListener(view -> performLogin());
 
         binding.loginPassword.setOnEditorActionListener(this::onEditorAction);
@@ -120,16 +103,22 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             binding.loginCredentials.setVisibility(View.GONE);
         }
+
+        String message = getIntent().getStringExtra(loginMessageIntentKey);
         if (message != null) {
             showMessage(message, R.color.secondaryDarkColor);
         }
+
+        String username = getIntent().getStringExtra(loginUsernameIntentKey);
         if (username != null) {
             binding.loginUsername.setText(username);
         }
     }
+
     /**
      * Hides the keyboard if the user's focus is not on the password (hasFocus is false).
-     * @param view The keyboard
+     *
+     * @param view     The keyboard
      * @param hasFocus Set to true if the keyboard has focus
      */
     void onPasswordFocusChanged(View view, boolean hasFocus) {
@@ -151,36 +140,16 @@ public class LoginActivity extends AppCompatActivity {
         return false;
     }
 
-
     protected void skipLogin() {
         new AlertDialog.Builder(this).setTitle(R.string.skip_login_title)
-                .setMessage(R.string.skip_login_message)
-                .setCancelable(false)
-                .setPositiveButton(R.string.yes, (dialog, which) -> {
-                    dialog.cancel();
-                    performSkipLogin();
-                })
-                .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
-                .show();
-    }
-
-    protected void forgotPassword() {
-        Utils.handleWebUrl(this, Uri.parse(BuildConfig.FORGOT_PASSWORD_URL));
-    }
-
-    protected void onPrivacyPolicyClicked() {
-        Utils.handleWebUrl(this, Uri.parse(BuildConfig.PRIVACY_POLICY_URL));
-    }
-
-    protected void signUp() {
-        Intent intent = new Intent(this, SignupActivity.class);
-        startActivity(intent);
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        getDelegate().onPostCreate(savedInstanceState);
+            .setMessage(R.string.skip_login_message)
+            .setCancelable(false)
+            .setPositiveButton(R.string.yes, (dialog, which) -> {
+                dialog.cancel();
+                performSkipLogin();
+            })
+            .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
+            .show();
     }
 
     @Override
@@ -188,7 +157,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onResume();
 
         if (sessionManager.getCurrentAccount() != null
-                && sessionManager.isUserLoggedIn()) {
+            && sessionManager.isUserLoggedIn()) {
             applicationKvStore.putBoolean("login_skipped", false);
             startMainActivity();
         }
@@ -201,47 +170,52 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        compositeDisposable.clear();
         try {
             // To prevent leaked window when finish() is called, see http://stackoverflow.com/questions/32065854/activity-has-leaked-window-at-alertdialog-show-method
             if (progressDialog != null && progressDialog.isShowing()) {
-                progressDialog.dismiss();
+                hideProgress();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         binding.loginUsername.removeTextChangedListener(textWatcher);
         binding.loginPassword.removeTextChangedListener(textWatcher);
         binding.loginTwoFactor.removeTextChangedListener(textWatcher);
+
         binding = null;
         super.onDestroy();
     }
 
     public void performLogin() {
-        Timber.d("Login to start!");
         final String username = Objects.requireNonNull(binding.loginUsername.getText()).toString();
         final String password = Objects.requireNonNull(binding.loginPassword.getText()).toString();
-        final String twoFactorCode = Objects.requireNonNull(binding.loginTwoFactor.getText()).toString();
+        final String twoFactorCode = Objects.requireNonNull(binding.loginTwoFactor.getText())
+            .toString();
 
         showLoggingProgressBar();
 
-        model.doLogin(username, password, twoFactorCode, Locale.getDefault().getLanguage(), loginCallback);
+        model.doLogin(
+            username, password, twoFactorCode, Locale.getDefault().getLanguage(), loginCallback
+        );
     }
 
-
-
     private void hideProgress() {
-        progressDialog.dismiss();
+        runOnUiThread(() -> {
+            if (progressDialog != null) {
+                progressDialog.dismiss();
+                progressDialog = null;
+            }
+        });
     }
 
     private void showPasswordResetPrompt() {
         showMessageAndCancelDialog(getString(R.string.you_must_reset_your_passsword));
     }
 
-
     /**
-     * This function is called when user skips the login.
-     * It redirects the user to Explore Activity.
+     * This function is called when user skips the login. It redirects the user to Explore
+     * Activity.
      */
     private void performSkipLogin() {
         applicationKvStore.putBoolean("login_skipped", true);
@@ -259,35 +233,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void onLoginSuccess(LoginResult loginResult) {
-        compositeDisposable.clear();
         sessionManager.setUserLoggedIn(true);
         sessionManager.updateAccount(loginResult);
-        progressDialog.dismiss();
-        showSuccessAndDismissDialog();
+        showMessage(R.string.login_success, R.color.primaryDarkColor);
+        hideProgress();
         startMainActivity();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        getDelegate().onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        getDelegate().onStop();
-    }
-
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        getDelegate().onPostResume();
-    }
-
-    @Override
-    public void setContentView(View view, ViewGroup.LayoutParams params) {
-        getDelegate().setContentView(view, params);
     }
 
     @Override
@@ -300,18 +250,13 @@ public class LoginActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    @NonNull
-    public MenuInflater getMenuInflater() {
-        return getDelegate().getMenuInflater();
-    }
-
     public void askUserForTwoFactorAuth() {
-        progressDialog.dismiss();
+        hideProgress();
         binding.twoFactorContainer.setVisibility(VISIBLE);
         binding.loginTwoFactor.setVisibility(VISIBLE);
         binding.loginTwoFactor.requestFocus();
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) getSystemService(
+            Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
         showMessageAndCancelDialog(R.string.login_failed_2fa_needed);
     }
@@ -330,13 +275,9 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void showSuccessAndDismissDialog() {
-        showMessage(R.string.login_success, R.color.primaryDarkColor);
-        progressDialog.dismiss();
-    }
-
     public void startMainActivity() {
-        ActivityUtils.startActivityWithFlags(this, MainActivity.class, Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        ActivityUtils.startActivityWithFlags(this, MainActivity.class,
+            Intent.FLAG_ACTIVITY_SINGLE_TOP);
         finish();
     }
 
@@ -353,6 +294,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private class LoginTextWatcher implements TextWatcher {
+
         @Override
         public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
         }
@@ -380,32 +322,26 @@ public class LoginActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         // if progressDialog is visible during the configuration change  then store state as  true else false so that
         // we maintain visibility of progressDailog after configuration change
-        if(progressDialog!=null&&progressDialog.isShowing()) {
-            outState.putBoolean(saveProgressDailog,true);
-        } else {
-            outState.putBoolean(saveProgressDailog,false);
-        }
-        outState.putString(saveErrorMessage,binding.errorMessage.getText().toString()); //Save the errorMessage
-        outState.putString(saveUsername,getUsername()); // Save the username
-        outState.putString(savePassword,getPassword()); // Save the password
+        outState.putBoolean("ProgressDailog_state",
+            progressDialog != null && progressDialog.isShowing());
+        outState.putString("errorMessage",
+            binding.errorMessage.getText().toString()); //Save the errorMessage
+        outState.putString("username",
+            binding.loginUsername.getText().toString()); // Save the username
+        outState.putString("password",
+            binding.loginPassword.getText().toString()); // Save the password
     }
-    private String getUsername() {
-        return binding.loginUsername.getText().toString();
-    }
-    private String getPassword(){
-        return  binding.loginPassword.getText().toString();
-  }
 
     @Override
     protected void onRestoreInstanceState(final Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        binding.loginUsername.setText(savedInstanceState.getString(saveUsername));
-        binding.loginPassword.setText(savedInstanceState.getString(savePassword));
-        if(savedInstanceState.getBoolean(saveProgressDailog)) {
+        binding.loginUsername.setText(savedInstanceState.getString("username"));
+        binding.loginPassword.setText(savedInstanceState.getString("password"));
+        if (savedInstanceState.getBoolean("ProgressDailog_state")) {
             performLogin();
         }
-        String errorMessage=savedInstanceState.getString(saveErrorMessage);
-        if(sessionManager.isUserLoggedIn()) {
+        String errorMessage = savedInstanceState.getString("errorMessage");
+        if (sessionManager.isUserLoggedIn()) {
             showMessage(R.string.login_success, R.color.primaryDarkColor);
         } else {
             showMessage(errorMessage, R.color.secondaryDarkColor);
@@ -413,8 +349,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private class LoginCallbackImpl implements LoginCallback {
+
         @Override
         public void success(@NonNull LoginResult loginResult) {
+            Log.e("###", "success = Thread = "+Thread.currentThread().getName());
             runOnUiThread(() -> {
                 Timber.d("Login Success");
                 hideProgress();
@@ -424,6 +362,7 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         public void twoFactorPrompt(@NonNull Throwable caught, @Nullable String token) {
+            Log.e("###", "twoFactorPrompt = Thread = "+Thread.currentThread().getName());
             runOnUiThread(() -> {
                 Timber.d("Requesting 2FA prompt");
                 hideProgress();
@@ -433,6 +372,7 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         public void passwordResetPrompt(@Nullable String token) {
+            Log.e("###", "passwordResetPrompt = Thread = "+Thread.currentThread().getName());
             runOnUiThread(() -> {
                 Timber.d("Showing password reset prompt");
                 hideProgress();
@@ -442,6 +382,7 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         public void error(@NonNull Throwable caught) {
+            Log.e("###", "error = Thread = "+Thread.currentThread().getName());
             runOnUiThread(() -> {
                 Timber.e(caught);
                 hideProgress();

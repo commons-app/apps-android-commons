@@ -13,18 +13,26 @@ import org.mockito.Mockito.never
 import org.mockito.Mockito.verify
 import fr.free.nrw.commons.wikidata.mwapi.MwException
 import fr.free.nrw.commons.OkHttpConnectionFactory.HttpStatusException
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestDispatcher
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
+import org.junit.Ignore
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class CsrfTokenClientTest : MockWebServerTest() {
     private val cb = mock(CsrfTokenClient.Callback::class.java)
     private val sessionManager = mock(SessionManager::class.java)
     private val tokenInterface = mock(CsrfTokenInterface::class.java)
     private val loginClient = mock(LoginClient::class.java)
     private val logoutClient = mock(LogoutClient::class.java)
-    private val subject = CsrfTokenClient(sessionManager, tokenInterface, loginClient, logoutClient)
+    private val subject = CsrfTokenClient(sessionManager, tokenInterface, loginClient, logoutClient, UnconfinedTestDispatcher())
 
     @Test
     @Throws(Throwable::class)
-    fun testRequestSuccess() {
+    fun testRequestSuccess() = runTest {
         val expected = "b6f7bd58c013ab30735cb19ecc0aa08258122cba+\\"
         enqueueFromFile("csrf_token.json")
 
@@ -36,7 +44,7 @@ class CsrfTokenClientTest : MockWebServerTest() {
 
     @Test
     @Throws(Throwable::class)
-    fun testRequestResponseApiError() {
+    fun testRequestResponseApiError() = runTest {
         enqueueFromFile("api_error.json")
 
         performRequest()
@@ -47,7 +55,7 @@ class CsrfTokenClientTest : MockWebServerTest() {
 
     @Test
     @Throws(Throwable::class)
-    fun testRequestResponseFailure() {
+    fun testRequestResponseFailure() = runTest {
         enqueue404()
 
         performRequest()
@@ -58,7 +66,7 @@ class CsrfTokenClientTest : MockWebServerTest() {
 
     @Test
     @Throws(Throwable::class)
-    fun testRequestResponseMalformed() {
+    fun testRequestResponseMalformed() = runTest {
         enqueueMalformed()
 
         performRequest()

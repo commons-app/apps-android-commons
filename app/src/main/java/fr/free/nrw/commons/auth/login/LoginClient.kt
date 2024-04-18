@@ -39,7 +39,7 @@ class LoginClient(private val loginInterface: LoginInterface) {
         userName: String, password: String, retypedPassword: String?, twoFactorCode: String?,
         loginToken: String?, userLanguage: String, cb: LoginCallback
     ) {
-        this@LoginClient.userLanguage = userLanguage
+        this.userLanguage = userLanguage
         val loginResponse = if (twoFactorCode.isNullOrEmpty() && retypedPassword.isNullOrEmpty()) {
             loginInterface.postLogIn(userName, password, loginToken, userLanguage, WIKIPEDIA_URL)
         } else {
