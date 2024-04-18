@@ -321,7 +321,7 @@
   <string name="wrong">Atsakymas neteisingas</string>
   <string name="quiz_screenshot_question">Ar šią ekrano kopiją galima įkelti?</string>
   <string name="share_app_title">Dalintis programėle</string>
-  <string name="error_fetching_nearby_places">Klaida gaunant netoliese esančias vietas.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Klaida gaunant netoliese esančias vietas.</string>
   <string name="no_nearby_places_around">Nėra šalia esančių vietų</string>
   <string name="error_fetching_nearby_monuments">Gaunant netoliese esančius paminklus įvyko klaida.</string>
   <string name="no_recent_searches">Nėra naujausių paieškų</string>
@@ -499,7 +499,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Nepavyko pridėti koordinačių.</string>
   <string name="description_edit_helper_edit_message_else">Nepavyko pridėti aprašymų.</string>
   <string name="caption_edit_helper_edit_message_else">Nepavyko pridėti antraštę.</string>
-  <string name="coordinates_picking_unsuccessful">Nepavyko gauti koordinačių.</string>
+  <string name="coordinates_picking_unsuccessful" fuzzy="true">Nepavyko gauti koordinačių.</string>
   <string name="descriptions_picking_unsuccessful">Nepavyko gauti aprašymų.</string>
   <string name="description_activity_title">Redaguokite aprašymus ir antraštes</string>
   <string name="share_image_via">Dalintis vaizdu per</string>

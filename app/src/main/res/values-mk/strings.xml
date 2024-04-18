@@ -345,7 +345,7 @@
   <string name="quiz_screenshot_question">Дали оваа екранска снимка е во ред за подигање?</string>
   <string name="share_app_title">Сподели прилог</string>
   <string name="rotate">Сврти</string>
-  <string name="error_fetching_nearby_places">Грешка при добивањето на околните места.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Грешка при добивањето на околните места.</string>
   <string name="no_pictures_in_this_area">Нема слики за ова подрачје</string>
   <string name="no_nearby_places_around">Не најдов околни места</string>
   <string name="error_fetching_nearby_monuments">Грешка при добивањето на околните споменици.</string>
@@ -549,7 +549,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Не можев да додадам координати.</string>
   <string name="description_edit_helper_edit_message_else">Не можев да додадам описи.</string>
   <string name="caption_edit_helper_edit_message_else">Не можев да додадам толкување.</string>
-  <string name="coordinates_picking_unsuccessful">Не можев да добијам координати.</string>
+  <string name="coordinates_picking_unsuccessful" fuzzy="true">Не можев да добијам координати.</string>
   <string name="descriptions_picking_unsuccessful">Не можам да добијам описи.</string>
   <string name="description_activity_title">Уреди описи и толкувања</string>
   <string name="share_image_via">Сподели ја сликата преку</string>
@@ -584,7 +584,7 @@
   <string name="recommend_high_accuracy_mode">За да добиете најдобар исход, изберете го режимот на висока уточнетост.</string>
   <string name="ask_to_turn_location_on">Да ја вклучам местоположбата?</string>
   <string name="nearby_needs_location">„Во близина“ бара местоположба за да работи</string>
-  <string name="upload_map_location_access">Ќе треба да дозволите пристап до вашата моментална местоположба за таа да може да се зададе автоматски.</string>
+  <string name="upload_map_location_access" fuzzy="true">Ќе треба да дозволите пристап до вашата моментална местоположба за таа да може да се зададе автоматски.</string>
   <string name="use_location_from_similar_image">Дали ги направивте ови две слики на истото место? Дали сакате да ја искористите географската ширина/должина од десната слика?</string>
   <string name="load_more">Вчитај уште</string>
   <string name="nearby_no_results">Не пронајдов места. Изменете ги критериумите во барањето.</string>

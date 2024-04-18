@@ -359,7 +359,7 @@
   <string name="quiz_screenshot_question">Ali je ta zaslonski posnetek primeren za naložitev?</string>
   <string name="share_app_title">Delite aplikacijo</string>
   <string name="rotate">Zasukaj</string>
-  <string name="error_fetching_nearby_places">Napaka pri pridobivanju bližnjih krajev.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Napaka pri pridobivanju bližnjih krajev.</string>
   <string name="no_nearby_places_around">Tu okoli ni bližnjih krajev</string>
   <string name="error_fetching_nearby_monuments">Napaka pri pridobivanju bližnjih spomenikov.</string>
   <string name="no_recent_searches">Ni nedavnih iskanj</string>
@@ -566,7 +566,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Ni bilo mogoče dodati koordinat.</string>
   <string name="description_edit_helper_edit_message_else">Ni bilo mogoče dodati opisov.</string>
   <string name="caption_edit_helper_edit_message_else">Napisa ni bilo mogoče dodati.</string>
-  <string name="coordinates_picking_unsuccessful">Koordinat ni bilo mogoče pridobiti.</string>
+  <string name="coordinates_picking_unsuccessful" fuzzy="true">Koordinat ni bilo mogoče pridobiti.</string>
   <string name="descriptions_picking_unsuccessful">Ni bilo mogoče pridobiti opisov.</string>
   <string name="description_activity_title">Uredi opise in napise</string>
   <string name="share_image_via">Deli slike prek ...</string>
@@ -601,7 +601,7 @@
   <string name="recommend_high_accuracy_mode">Za najboljše zadetke izberite način Visoka natančnost.</string>
   <string name="ask_to_turn_location_on">Vklopim kraj?</string>
   <string name="nearby_needs_location">Za Bližnje je trebs vklopiti kraj</string>
-  <string name="upload_map_location_access">Za samodejno nastavitev lokacije morate omogočiti dostop do vaše trenutne lokacije.</string>
+  <string name="upload_map_location_access" fuzzy="true">Za samodejno nastavitev lokacije morate omogočiti dostop do vaše trenutne lokacije.</string>
   <string name="use_location_from_similar_image">Ali ste sliki posneli na istem kraju? Ali želite uporabiti geografsko širino/dolžino desne slike?</string>
   <string name="load_more">Naloži več</string>
   <string name="nearby_no_results">Najden ni noben kraj. Poskusite spremeniti iskalne parametre.</string>

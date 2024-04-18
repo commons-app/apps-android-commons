@@ -366,7 +366,7 @@
   <string name="quiz_screenshot_question">Is deze screenshot OK om te uploaden?</string>
   <string name="share_app_title">Toepassing delen</string>
   <string name="rotate">Draaien</string>
-  <string name="error_fetching_nearby_places">Fout bij het ophalen van plaatsen in de buurt.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Fout bij het ophalen van plaatsen in de buurt.</string>
   <string name="no_pictures_in_this_area">Geen foto\'s in dit gebied.</string>
   <string name="no_nearby_places_around">Geen plaatsen in de buurt</string>
   <string name="error_fetching_nearby_monuments">Fout bij het ophalen van monumenten.</string>
@@ -570,7 +570,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Kan geen coördinaten toevoegen.</string>
   <string name="description_edit_helper_edit_message_else">Kon beschrijvingen niet toevoegen.</string>
   <string name="caption_edit_helper_edit_message_else">Kon bijschrift niet toevoegen.</string>
-  <string name="coordinates_picking_unsuccessful">Kan coördinaten niet opvragen.</string>
+  <string name="coordinates_picking_unsuccessful" fuzzy="true">Kan coördinaten niet opvragen.</string>
   <string name="descriptions_picking_unsuccessful">Kon beschrijvingen niet ophalen</string>
   <string name="description_activity_title">Bewerk beschrijvingen en bijschriften.</string>
   <string name="share_image_via">Deel afbeelding via</string>
@@ -605,7 +605,7 @@
   <string name="recommend_high_accuracy_mode">Kies voor de beste resultaten de modus van hoge nauwkeurigheid.</string>
   <string name="ask_to_turn_location_on">Locatie inschakelen?</string>
   <string name="nearby_needs_location">In de Buurt heeft locatie nodig om correct te werken</string>
-  <string name="upload_map_location_access">U moet toegang geven tot uw huidige locatie om de locatie automatisch in te stellen.</string>
+  <string name="upload_map_location_access" fuzzy="true">U moet toegang geven tot uw huidige locatie om de locatie automatisch in te stellen.</string>
   <string name="use_location_from_similar_image">Heeft u deze twee foto\'s op dezelfde plek gemaakt? Wilt u de breedtegraad/lengtegraad van de afbeelding rechts gebruiken?</string>
   <string name="load_more">Laad meer</string>
   <string name="nearby_no_results">Geen plaatsen gevonden, probeer uw zoekcriteria te wijzigen.</string>

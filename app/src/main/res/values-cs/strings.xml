@@ -321,7 +321,7 @@
   <string name="wrong">Nesprávná odpověď</string>
   <string name="quiz_screenshot_question">Je v pořádku nahrát tento snímek obrazovky?</string>
   <string name="share_app_title">Sdílet aplikaci</string>
-  <string name="error_fetching_nearby_places">Nastala chyba při hledání míst v okolí.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Nastala chyba při hledání míst v okolí.</string>
   <string name="no_recent_searches">Zatím žádné vyhledávání</string>
   <string name="delete_recent_searches_dialog">Opravdu chcete vyčistit historii vašeho hledání?</string>
   <string name="delete_search_dialog">Chcete odstranit toto hledání?</string>

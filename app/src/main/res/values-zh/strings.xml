@@ -393,7 +393,7 @@
   <string name="quiz_screenshot_question">这个屏幕截图可以上传吗？</string>
   <string name="share_app_title">分享应用</string>
   <string name="rotate">旋转</string>
-  <string name="error_fetching_nearby_places">检索附近地点时出错。</string>
+  <string name="error_fetching_nearby_places">无法加载附近地点</string>
   <string name="no_nearby_places_around">找不到附近地点</string>
   <string name="error_fetching_nearby_monuments">检索附近古迹时出错。</string>
   <string name="no_recent_searches">还没有最近搜索</string>
@@ -596,7 +596,7 @@
   <string name="coordinates_edit_helper_edit_message_else">无法添加坐标。</string>
   <string name="description_edit_helper_edit_message_else">无法添加描述。</string>
   <string name="caption_edit_helper_edit_message_else">无法添加说明。</string>
-  <string name="coordinates_picking_unsuccessful">无法获取坐标。</string>
+  <string name="coordinates_picking_unsuccessful">图像坐标未更新</string>
   <string name="descriptions_picking_unsuccessful">无法获取描述。</string>
   <string name="description_activity_title">编辑描述和说明。</string>
   <string name="share_image_via">分享图片透过</string>
@@ -631,7 +631,7 @@
   <string name="recommend_high_accuracy_mode">选择高精确度模式以获得最佳结果。</string>
   <string name="ask_to_turn_location_on">打开位置？</string>
   <string name="nearby_needs_location">附近需要启用位置才能正常工作</string>
-  <string name="upload_map_location_access">您需要授予对当前位置的访问权限才能自动设置位置。</string>
+  <string name="upload_map_location_access">您需要授予位置权限才能自动设置位置。</string>
   <string name="use_location_from_similar_image">您是在同一地点拍摄这两张图片的吗？您想要使用右侧图片的纬度/经度吗？</string>
   <string name="load_more">加载更多</string>
   <string name="nearby_no_results">未找到位置，请尝试更改您的搜索条件。</string>

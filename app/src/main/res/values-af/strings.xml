@@ -282,7 +282,7 @@
   <string name="wrong">Verkeerde antwoord</string>
   <string name="quiz_screenshot_question">Is hierdie skermkiekie OK om op te laai?</string>
   <string name="share_app_title">Toepassing dele</string>
-  <string name="error_fetching_nearby_places">Kon nie nabygeleë plekke gaan haal nie.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Kon nie nabygeleë plekke gaan haal nie.</string>
   <string name="no_recent_searches">Geen onlangse soektogte nie</string>
   <string name="delete_recent_searches_dialog">Is u seker dat u u soekgeskiedenis wil uitvee?</string>
   <string name="delete_search_dialog">Wil u hierdie soektog uitvee?</string>

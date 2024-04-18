@@ -319,7 +319,7 @@
   <string name="wrong">తప్పు సమాధానం</string>
   <string name="quiz_screenshot_question">ఈ తెరపట్టును ఎక్కించేందుకు బానే ఉందా?</string>
   <string name="share_app_title">యాప్‌ను పంచుకోండి</string>
-  <string name="error_fetching_nearby_places">చుట్టుపక్కల స్థలాలను తేవడంలో లోపం.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">చుట్టుపక్కల స్థలాలను తేవడంలో లోపం.</string>
   <string name="no_nearby_places_around">సమీపంలో స్థలాలేమీ లేవు</string>
   <string name="error_fetching_nearby_monuments">సమీపం లోని నిర్మాణాలను తేవడంలో లోపం.</string>
   <string name="no_recent_searches">ఇటీవలి వెతుకులాటలేమీ లేవు</string>
@@ -497,7 +497,7 @@
   <string name="coordinates_edit_helper_edit_message_else">నిర్దేశాంకాలను చేర్చలేకపోయాం.</string>
   <string name="description_edit_helper_edit_message_else">వివరణలను చేర్చలేకపోయాం.</string>
   <string name="caption_edit_helper_edit_message_else">వ్యాఖ్యను చేర్చలేకపోయాం.</string>
-  <string name="coordinates_picking_unsuccessful">నిర్దేశాంకాలను తేలేకపోయాం.</string>
+  <string name="coordinates_picking_unsuccessful" fuzzy="true">నిర్దేశాంకాలను తేలేకపోయాం.</string>
   <string name="descriptions_picking_unsuccessful">వివరణలను తేలేకపోయాం.</string>
   <string name="description_activity_title">వివరణలు, వ్యాఖ్యలను సరిదిద్దండి</string>
   <string name="share_image_via">బొమ్మను దీని ద్వారా పంచుకోండి</string>

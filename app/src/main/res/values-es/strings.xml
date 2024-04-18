@@ -323,6 +323,7 @@
   <string name="nearby_location_not_available">Cercanos no puede funcionar correctamente. La ubicación no está disponible.</string>
   <string name="upload_location_access_denied">Acceso a la ubicación denegado. Configura tu ubicación manualmente para utilizar esta función.</string>
   <string name="location_permission_rationale_nearby">Se necesita permiso para mostrar una lista de lugares cercanos</string>
+  <string name="location_permission_rationale_explore">Se necesita permiso para mostrar una lista de lugares cercanos</string>
   <string name="nearby_directions">Cómo llegar</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -390,7 +391,7 @@
   <string name="quiz_screenshot_question">¿Esta captura de pantalla esta bien para ser subida?</string>
   <string name="share_app_title">Compartir aplicación</string>
   <string name="rotate">Rotar</string>
-  <string name="error_fetching_nearby_places">Error al recuperar los lugares cercanos.</string>
+  <string name="error_fetching_nearby_places">No se pudieron cargar lugares cercanos</string>
   <string name="no_pictures_in_this_area">No hay fotos en esta área.</string>
   <string name="no_nearby_places_around">No hay lugares cercanos alrededor</string>
   <string name="error_fetching_nearby_monuments">Error al encontrar monumentos cercanos.</string>
@@ -594,7 +595,7 @@
   <string name="coordinates_edit_helper_edit_message_else">No se pudo añadir coordenadas.</string>
   <string name="description_edit_helper_edit_message_else">No se pudieron añadir descripciones.</string>
   <string name="caption_edit_helper_edit_message_else">No se pudo añadir la leyenda.</string>
-  <string name="coordinates_picking_unsuccessful">No se pudo conseguir las coordenadas.</string>
+  <string name="coordinates_picking_unsuccessful">Las coordenadas de la imagen no están actualizadas.</string>
   <string name="descriptions_picking_unsuccessful">No se puede obtener descripciones.</string>
   <string name="description_activity_title">Editar descripciones y leyendas</string>
   <string name="share_image_via">Compartir imagen via</string>
@@ -628,8 +629,10 @@
   <string name="cannot_open_location_settings">Falló la apertura de los ajuste de localización. Por favor enciende la localización manualmente</string>
   <string name="recommend_high_accuracy_mode">Para mejores resultados, selecciona el modo de alta precisión</string>
   <string name="ask_to_turn_location_on">¿quieres encender la localización?</string>
+  <string name="ask_to_turn_location_on_text">Por favor active los servicios de ubicación para que la aplicación muestre su ubicación actual.</string>
   <string name="nearby_needs_location">Nearby requiere habilitada la localización para trabajar apropiadamente</string>
-  <string name="upload_map_location_access">Necesitas dar acceso a tu ubicación actual para establecer la ubicación automáticamente.</string>
+  <string name="explore_map_needs_location">El mapa de exploración necesita permiso de ubicación para mostrar imágenes cercanas</string>
+  <string name="upload_map_location_access">Debe otorgar permiso de ubicación para configurar la ubicación automáticamente.</string>
   <string name="use_location_from_similar_image">¿Tomaste estas imágenes en el mismo sitio?¿quieres usar la latitud/longitud de la imagen de la derecha?</string>
   <string name="load_more">Cargar más</string>
   <string name="nearby_no_results">No se hallaron sitios, intenta cambiar tus criterios de búsqueda</string>

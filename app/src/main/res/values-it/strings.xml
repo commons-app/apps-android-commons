@@ -360,7 +360,7 @@
   <string name="quiz_screenshot_question">Questo screenshot è OK per essere caricato?</string>
   <string name="share_app_title">Condividi applicazione</string>
   <string name="rotate">Ruota</string>
-  <string name="error_fetching_nearby_places">Errore durante il recupero dei luoghi nelle vicinanze.</string>
+  <string name="error_fetching_nearby_places">Non è possibile caricare i luoghi nelle vicinanze</string>
   <string name="no_nearby_places_around">Nessun luogo trovato nelle vicinanze</string>
   <string name="error_fetching_nearby_monuments">Errore durante la ricerca di monumenti nelle vicinanze.</string>
   <string name="no_recent_searches">Nessuna ricerca recente</string>
@@ -558,7 +558,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Impossibile aggiungere le coordinate.</string>
   <string name="description_edit_helper_edit_message_else">Non è stato possibile aggiungere descrizioni.</string>
   <string name="caption_edit_helper_edit_message_else">Non è stato possibile aggiungere la didascalia.</string>
-  <string name="coordinates_picking_unsuccessful">Impossibile ottenere coordinate.</string>
+  <string name="coordinates_picking_unsuccessful">Coordinate dell\'immagine non aggiornate</string>
   <string name="descriptions_picking_unsuccessful">Impossibile ottenere descrizioni.</string>
   <string name="description_activity_title">Modifica descrizioni e didascalie</string>
   <string name="share_image_via">Condividi immagine tramite</string>
@@ -593,7 +593,7 @@
   <string name="recommend_high_accuracy_mode">Per migliori risultati, seleziona il modo Alta Precisione</string>
   <string name="ask_to_turn_location_on">Accendere la localizzazione?</string>
   <string name="nearby_needs_location">La funzione \'nelle vicinanze\' richiede l\'abilitazione della localizzazione per operare correttamente</string>
-  <string name="upload_map_location_access">Devi consentire l\'accesso alla tua posizione corrente per impostare automaticamente la posizione.</string>
+  <string name="upload_map_location_access">È necessario fornire l\'autorizzazione alla posizione per impostare automaticamente la posizione.</string>
   <string name="use_location_from_similar_image">Hai scattato queste immagini nello stesso posto? Vuoi usare la latitudine e la longitudine dell\'immagine indicate a destra?</string>
   <string name="load_more">Caricane ancora</string>
   <string name="nearby_no_results">Nessun luogo trovato, prova a cambiare i tuoi criteri di ricerca</string>

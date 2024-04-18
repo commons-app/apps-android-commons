@@ -332,7 +332,7 @@
   <string name="wrong">คำตอบที่ไม่ถูกต้อง</string>
   <string name="quiz_screenshot_question">ภาพหน้าจอนี้สามารถอัปโหลดได้หรือไม่</string>
   <string name="share_app_title">แบ่งปันแอป</string>
-  <string name="error_fetching_nearby_places">เกิดข้อผิดพลาดในการดึงข้อมูลสถานที่ใกล้เคียง</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">เกิดข้อผิดพลาดในการดึงข้อมูลสถานที่ใกล้เคียง</string>
   <string name="no_nearby_places_around">ไม่มีสถานที่ใกล้เคียง</string>
   <string name="no_recent_searches">ไม่มีการค้นหาล่าสุด</string>
   <string name="delete_recent_searches_dialog">คุณแน่ใจหรือไม่ว่าต้องการล้างประวัติการค้นหาของคุณ?</string>

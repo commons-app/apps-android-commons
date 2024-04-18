@@ -339,7 +339,7 @@
   <string name="wrong">Răspuns greșit</string>
   <string name="quiz_screenshot_question">Este această captură de ecran OK pentru încărcare?</string>
   <string name="share_app_title">Trimiteți App</string>
-  <string name="error_fetching_nearby_places">Eroare la preluarea locurilor din apropiere.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Eroare la preluarea locurilor din apropiere.</string>
   <string name="error_fetching_nearby_monuments">Eroare la preluarea monumentelor din apropiere.</string>
   <string name="no_recent_searches">Nu există căutări recente</string>
   <string name="delete_recent_searches_dialog">Sigur doriți să ștergeți istoricul căutărilor?</string>
@@ -515,7 +515,7 @@
   <string name="coordinates_edit_helper_show_edit_title_success">Succes</string>
   <string name="coordinates_edit_helper_show_edit_message">Se adaugă coordonatele %1$s.</string>
   <string name="coordinates_edit_helper_edit_message_else">Nu s-au putut adăuga coordonate.</string>
-  <string name="coordinates_picking_unsuccessful">Nu se pot obține coordonatele.</string>
+  <string name="coordinates_picking_unsuccessful" fuzzy="true">Nu se pot obține coordonatele.</string>
   <string name="share_image_via">Partajează imaginea prin</string>
   <string name="no_achievements_yet" fuzzy="true">Încă nu ați făcut contribuții</string>
   <string name="account_created">Cont creat!</string>

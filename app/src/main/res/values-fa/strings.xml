@@ -327,7 +327,7 @@
   <string name="quiz_screenshot_question">آیا این عکس از صفحه برای بارگذاری مناسب است؟</string>
   <string name="share_app_title">اشتراک اپلیکیشن</string>
   <string name="rotate">چرخاندن</string>
-  <string name="error_fetching_nearby_places">خطا در آوردن مکان‌های نزدیک.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">خطا در آوردن مکان‌های نزدیک.</string>
   <string name="error_fetching_nearby_monuments">خطا در واکشی یادمان‌های نزدیک.</string>
   <string name="no_recent_searches">جستجوهای اخیر وجود ندارد</string>
   <string name="delete_recent_searches_dialog">آیا مطمئن هستید که می‌خواهید تاریخچۀ جستجو را حذف کنید؟</string>

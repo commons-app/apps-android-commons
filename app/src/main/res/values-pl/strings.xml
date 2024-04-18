@@ -4,6 +4,7 @@
 * Chrumps
 * CiaPan
 * DeRudySoulStorm
+* IOIOI
 * InternerowyGołąb
 * Kareyac
 * Krottyianock
@@ -109,12 +110,12 @@
   <string name="logging_in_message">Proszę czekać…</string>
   <string name="updating_caption_title">Aktualizowanie podpisów i opisów</string>
   <string name="updating_caption_message">Proszę czekać…</string>
-  <string name="login_success" fuzzy="true">Zalogowano pomyślnie!</string>
-  <string name="login_failed" fuzzy="true">Logowanie nie powiodło się!</string>
+  <string name="login_success">Zalogowano pomyślnie!</string>
+  <string name="login_failed">Logowanie nie powiodło się!</string>
   <string name="upload_failed">Nie znaleziono pliku. Spróbuj znaleźć inny.</string>
   <string name="retry_limit_reached">Osiągnięto maksymalny limit ponownych prób! Anuluj przesyłanie i spróbuj ponownie</string>
   <string name="unrestricted_battery_mode">Wyłączyć optymalizację baterii?</string>
-  <string name="authentication_failed" fuzzy="true">Uwierzytelnianie nie powiodło się, zaloguj się ponownie</string>
+  <string name="authentication_failed">Uwierzytelnianie nie powiodło się, zaloguj się ponownie, proszę.</string>
   <string name="uploading_started">Wysyłanie rozpoczęte!</string>
   <string name="uploading_queued">Prześlij w kolejce (włączony tryb ograniczonego połączenia)</string>
   <string name="upload_completed_notification_title">Przesłano %1$s!</string>
@@ -141,11 +142,11 @@
   <string name="add_caption_toast">Podaj podpis dla tego pliku</string>
   <string name="share_description_hint">Opis</string>
   <string name="share_caption_hint">Podpis</string>
-  <string name="login_failed_network" fuzzy="true">Nie można zalogować - błąd sieci</string>
+  <string name="login_failed_network">Nie można zalogować - błąd sieci</string>
   <string name="login_failed_throttled">Zbyt wiele nieudanych prób zalogowania. Spróbuj ponownie za kilka minut.</string>
   <string name="login_failed_blocked">Przepraszamy, ten użytkownik został zablokowany na Commons</string>
   <string name="login_failed_2fa_needed">Wprowadź swój kod dla  dwuetapowej autoryzacji.</string>
-  <string name="login_failed_generic" fuzzy="true">Logowanie nie powiodło się</string>
+  <string name="login_failed_generic">Logowanie nie powiodło się</string>
   <string name="share_upload_button">Prześlij</string>
   <string name="multiple_share_base_title">Nazwij ten zestaw</string>
   <string name="provider_modifications">Zmiany</string>
@@ -269,6 +270,7 @@
   <string name="navigation_item_about">O aplikacji</string>
   <string name="navigation_item_settings">Ustawienia</string>
   <string name="navigation_item_feedback">Opinie</string>
+  <string name="navigation_item_feedback_github">Odpowiedź za pośrednictwem GitHub</string>
   <string name="navigation_item_logout">Wyloguj</string>
   <string name="navigation_item_info">Samouczek</string>
   <string name="navigation_item_notification">Powiadomienia</string>
@@ -302,7 +304,7 @@
   <string name="nominated_see_more">Szczegółowe informacje można znaleźć na stronie internetowej</string>
   <string name="skip_login">Pomiń</string>
   <string name="navigation_item_login">Zaloguj się</string>
-  <string name="skip_login_title" fuzzy="true">Czy na pewno chcesz pominąć logowanie?</string>
+  <string name="skip_login_title">Czy na pewno chcesz pominąć logowanie?</string>
   <string name="skip_login_message">Musisz się zalogować, aby przesłać zdjęcia w przyszłości</string>
   <string name="login_alert_message">Zaloguj się, aby skorzystać z tej funkcji</string>
   <string name="copy_wikicode">Skopiuj wikitext do schowka</string>
@@ -310,6 +312,7 @@
   <string name="nearby_location_not_available">W pobliżu może nie działać poprawnie, Lokalizacja jest niedostępna.</string>
   <string name="upload_location_access_denied">Odmowa dostępu do lokalizacji. Aby skorzystać z tej funkcji, ustaw swoją lokalizację ręcznie.</string>
   <string name="location_permission_rationale_nearby">Uprawnienie wymagane do wyświetlania listy pobliskich miejsc</string>
+  <string name="location_permission_rationale_explore">Uprawnienie wymagane do wyświetlania listy pobliskich zdjęć</string>
   <string name="nearby_directions">Wskazówki</string>
   <string name="nearby_wikidata">Wikidane</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -369,7 +372,7 @@
   <string name="construction_event_answer">Zdjęcia przedstawiające technologię lub kulturę są bardzo mile widziane na Commons.</string>
   <string name="congratulatory_message_quiz">Masz %1$s poprawnych odpowiedzi. Gratulacje!</string>
   <string name="warning_for_no_answer">Wybierz jedną z dwóch opcji, aby odpowiedzieć na pytanie</string>
-  <string name="user_not_logged_in" fuzzy="true">Sesja logowania wygasła, prosimy zalogować się ponownie.</string>
+  <string name="user_not_logged_in">Sesja logowania wygasła, prosimy zalogować się ponownie.</string>
   <string name="quiz_result_share_message">Podziel się quizem ze swoimi znajomymi!</string>
   <string name="continue_message">Kontynuuj</string>
   <string name="correct">Poprawna odpowiedź</string>
@@ -377,7 +380,8 @@
   <string name="quiz_screenshot_question">Czy ten zrzut ekranu nadaje się do przesłania?</string>
   <string name="share_app_title">Udostępnij aplikację</string>
   <string name="rotate">Obrót</string>
-  <string name="error_fetching_nearby_places">Błąd podczas pobierania pobliskich miejsc.</string>
+  <string name="error_fetching_nearby_places">Nie udało się wczytać miejsc w pobliżu</string>
+  <string name="no_pictures_in_this_area">Brak zdjęć w tym obszarze</string>
   <string name="no_nearby_places_around">Brak miejsc w pobliżu</string>
   <string name="error_fetching_nearby_monuments">Błąd pobierania pobliskich zabytków.</string>
   <string name="no_recent_searches">Brak ostatnich wyszukiwań</string>
@@ -452,7 +456,7 @@
   <string name="never_ask_again">Nigdy więcej nie pytaj o to</string>
   <string name="display_location_permission_title">Poproś o dostęp do lokalizacji</string>
   <string name="display_location_permission_explanation">W razie potrzeby zapytaj o pozwolenie na lokalizację w przypadku funkcji widoku pobliskiej karty powiadomień.</string>
-  <string name="achievements_fetch_failed" fuzzy="true">Coś poszło nie tak, nie mogliśmy pobrać twoich osiągnięć</string>
+  <string name="achievements_fetch_failed">Coś poszło nie tak. Nie mogliśmy pobrać osiągnięć</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Zrobiłeś tak wiele wkładu, że nasz system obliczania osiągnięć nie może sobie poradzić. To jest najwyższym osiągnięciem.</string>
   <string name="ends_on">Kończy się na:</string>
   <string name="display_campaigns">Wyświetl kampanie</string>
@@ -577,7 +581,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Nie można dodać koordynatów.</string>
   <string name="description_edit_helper_edit_message_else">Nie można dodać opisów.</string>
   <string name="caption_edit_helper_edit_message_else">Nie można dodać przypisu.</string>
-  <string name="coordinates_picking_unsuccessful">Nie można uzyskać koordynatów.</string>
+  <string name="coordinates_picking_unsuccessful" fuzzy="true">Nie można uzyskać koordynatów.</string>
   <string name="descriptions_picking_unsuccessful">Nie można uzyskać opisów.</string>
   <string name="description_activity_title">Edycja opisów i przypisów</string>
   <string name="share_image_via">Udostępnij obraz przez</string>
@@ -612,7 +616,7 @@
   <string name="recommend_high_accuracy_mode">Aby uzyskać najlepsze wyniki, wybierz tryb wysokiej dokładności.</string>
   <string name="ask_to_turn_location_on">Włączyć lokalizację?</string>
   <string name="nearby_needs_location">Lokalizacja W pobliżu wymaga włączonej lokalizacji, aby działać poprawnie</string>
-  <string name="upload_map_location_access">Aby ustawić lokalizację automatycznie, musisz przyznać dostęp do swojej bieżącej lokalizacji.</string>
+  <string name="upload_map_location_access" fuzzy="true">Aby ustawić lokalizację automatycznie, musisz przyznać dostęp do swojej bieżącej lokalizacji.</string>
   <string name="use_location_from_similar_image">Czy zrobiłeś te dwa zdjęcia w tym samym miejscu? Czy chcesz użyć szerokości/długości geograficznej obrazu po prawej stronie?</string>
   <string name="load_more">Wczytaj więcej</string>
   <string name="nearby_no_results">Nie znaleziono miejsc, spróbuj zmienić kryteria wyszukiwania.</string>

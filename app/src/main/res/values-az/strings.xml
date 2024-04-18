@@ -92,5 +92,8 @@
   <string name="send_thank_failure_message">Təşəkkür göndərilə bilmədi %1$s</string>
   <string name="send_thank_failure_title">Təşəkkür göndərilir: Xəta</string>
   <string name="send_thank_toast">%1$s üçün təşəkkür göndərişi</string>
+  <string name="coordinates_picking_unsuccessful">Şəklin koordinatları yenilənməyib</string>
   <string name="notification_mark_read">Bildiriş oxunmuş olaraq işarələndi</string>
+  <string name="ask_to_turn_location_on_text">Zəhmət olmasa tətbiqin cari məkanınızı göstərmək üçün məkan xidmətlərini aktiv edin</string>
+  <string name="explore_map_needs_location">Yaxınlıqdakı şəkilləri göstərmək üçün məkan icazəsi lazımdır</string>
 </resources>

@@ -297,7 +297,7 @@
   <string name="wrong">ߖߋ߬ߓߌ߬ߟߌ ߝߘߏ߬ߣߍ߲</string>
   <string name="quiz_screenshot_question">ߊ߬ ߝߐ߫ ߘߊ߬ߣߊ߲߬ߥߟߊ߬ߖߌߦߊ ߣߌ߲߬ ߓߍ߲߬ߣߍ߲߫ ߦߋ߫ ߟߊ߬ߦߟߍ߬ߟߌ ߘߐ߫ ߝߋߎ߫؟</string>
   <string name="share_app_title">ߟߥߊ߬ߟߌ߬ߟߊ߲ ߟߊ߬ߖߍ߲߬ߛߍ߲߬ߠߌ߲</string>
-  <string name="error_fetching_nearby_places">ߝߌ߬ߟߌ ߦߋ߫ ߛߌ߰ߢߐ߲߰ ߘߌ߲ߞߌߙߊ ߟߊߘߏ߲߬ߕߐ ߘߐ߫.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">ߝߌ߬ߟߌ ߦߋ߫ ߛߌ߰ߢߐ߲߰ ߘߌ߲ߞߌߙߊ ߟߊߘߏ߲߬ߕߐ ߘߐ߫.</string>
   <string name="no_nearby_places_around">ߛߌ߰ߢߐ߲߰ ߦߙߐ߫ ߡߊ߫ ߛߐ߬ߘߐ߲߫ ߟߊ߬ߡߌߣߌ߲ ߘߐ߫</string>
   <string name="error_fetching_nearby_monuments">ߝߟߌ߬ ߓߘߊ߫ ߞߍ߫ ߛߌ߰ߢߐ߲߰ ߝߙߎߕߎ ߟߊߛߐ߬ߘߐ߲ ߘߐ߫.</string>
   <string name="no_recent_searches">ߢߌߣߌ߲ߠߌ߲߫ ߠߊߓߊ߲ ߕߴߦߋ߲߬</string>
@@ -459,7 +459,7 @@
   <string name="coordinates_edit_helper_edit_message_else">ߘߏ߲߬ߖߟߎ߬ߡߊ߬ߣߍ߲ ߕߍ߫ ߛߐ߲߬ ߝߙߊ߬ ߟߊ߫.</string>
   <string name="description_edit_helper_edit_message_else">ߞߊ߲߬ߛߓߍߟߌ ߕߍ߫ ߛߐ߲߬ ߝߙߊ߬ ߟߊ߫.</string>
   <string name="caption_edit_helper_edit_message_else">ߝߍ߬ߛߓߍߟߌ ߕߍ߫ ߛߐ߲߬ ߝߙߊ߬ ߟߊ߫.</string>
-  <string name="coordinates_picking_unsuccessful">ߘߏ߲߬ߖߟߎ߬ߡߊ߬ߣߍ߲ ߕߍ߫ ߛߐ߲߬ ߡߊߛߐ߬ߘߐ߲߬ ߠߊ߫.</string>
+  <string name="coordinates_picking_unsuccessful" fuzzy="true">ߘߏ߲߬ߖߟߎ߬ߡߊ߬ߣߍ߲ ߕߍ߫ ߛߐ߲߬ ߡߊߛߐ߬ߘߐ߲߬ ߠߊ߫.</string>
   <string name="descriptions_picking_unsuccessful">ߞߊ߲߬ߛߓߍߟߌ ߕߍ߫ ߛߐ߲߬ ߡߊߛߐ߬ߘߐ߲߬ ߠߊ߫.</string>
   <string name="description_activity_title">ߞߊ߲߬ߛߓߍߟߌ ߣߌ߫ ߝߍ߬ߛߓߍߟߌ ߟߎ߫ ߡߊߦߟߍ߬ߡߊ߲߫</string>
   <string name="share_image_via">ߖߌ߬ߦߊ߬ߓߍ ߟߊߖߍ߲ߛߍ߲߫ ߞߊߕߙߍ߬</string>

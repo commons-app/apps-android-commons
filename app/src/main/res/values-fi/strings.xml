@@ -343,7 +343,7 @@
   <string name="quiz_screenshot_question">Onko tämä kuvakaappaus OK tallennettavaksi?</string>
   <string name="share_app_title">Jaa sovellus</string>
   <string name="rotate">Kierrä</string>
-  <string name="error_fetching_nearby_places">Virhe paikkoja haettaessa.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Virhe paikkoja haettaessa.</string>
   <string name="error_fetching_nearby_monuments">Virhe läheisiä monumentteja haettaessa.</string>
   <string name="no_recent_searches">Ei viimeaikaisia hakuja</string>
   <string name="delete_recent_searches_dialog">Haluatko varmasti tyhjentää hakuhistoriasi?</string>
@@ -522,7 +522,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Koordinaatteja ei voitu lisätä.</string>
   <string name="description_edit_helper_edit_message_else">Kuvauksia ei voitu lisätä.</string>
   <string name="caption_edit_helper_edit_message_else">Kuvatekstiä ei voitu lisätä.</string>
-  <string name="coordinates_picking_unsuccessful">Koordinaattien haku epäonnistui.</string>
+  <string name="coordinates_picking_unsuccessful" fuzzy="true">Koordinaattien haku epäonnistui.</string>
   <string name="descriptions_picking_unsuccessful">Kuvauksia ei voitu hakea.</string>
   <string name="description_activity_title">Muokkaa kuvauksia ja kuvatekstejä</string>
   <string name="share_image_via">Jaa kuva</string>

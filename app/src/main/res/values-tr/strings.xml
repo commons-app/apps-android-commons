@@ -370,7 +370,7 @@
   <string name="quiz_screenshot_question">Bu ekran görüntüsü yüklemeye uygun mu?</string>
   <string name="share_app_title">Uygulamayı Paylaş</string>
   <string name="rotate">Döndür</string>
-  <string name="error_fetching_nearby_places">Yakındaki yerler getirilirken hata oluştu.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Yakındaki yerler getirilirken hata oluştu.</string>
   <string name="no_nearby_places_around">Yakınlarda yer bulunamadı</string>
   <string name="error_fetching_nearby_monuments">Yakındaki anıtlar getirilirken hata oluştu.</string>
   <string name="no_recent_searches">Son arama yok</string>
@@ -573,7 +573,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Koordinatlar eklenemedi.</string>
   <string name="description_edit_helper_edit_message_else">Açıklamalar eklenemedi.</string>
   <string name="caption_edit_helper_edit_message_else">Başlık eklenemedi.</string>
-  <string name="coordinates_picking_unsuccessful">Koordinatlar alınamadı.</string>
+  <string name="coordinates_picking_unsuccessful" fuzzy="true">Koordinatlar alınamadı.</string>
   <string name="descriptions_picking_unsuccessful">Açıklamalar alınamadı.</string>
   <string name="description_activity_title">Açıklamaları ve başlıkları düzenle</string>
   <string name="share_image_via">Resmi şununla paylaş</string>
@@ -608,7 +608,7 @@
   <string name="recommend_high_accuracy_mode">En iyi sonuçlar için Yüksek Hassasiyet modunu seçin.</string>
   <string name="ask_to_turn_location_on">Konum açılsın mı?</string>
   <string name="nearby_needs_location">Yakınımdakilerin düzgün çalışması için konumun açık olması gerekiyor</string>
-  <string name="upload_map_location_access">Konumu otomatik olarak ayarlamak için mevcut konumunuza erişim izni vermeniz gerekir.</string>
+  <string name="upload_map_location_access" fuzzy="true">Konumu otomatik olarak ayarlamak için mevcut konumunuza erişim izni vermeniz gerekir.</string>
   <string name="use_location_from_similar_image">Bu iki fotoğrafı aynı yerde mi çektiniz? Sağdaki resmin enlem/boylamını kullanmak ister misiniz?</string>
   <string name="load_more">Daha Fazla Yükle</string>
   <string name="nearby_no_results">Yer bulunamadı, arama kriterlerinizi değiştirmeyi deneyin.</string>

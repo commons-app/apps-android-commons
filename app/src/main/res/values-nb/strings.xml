@@ -351,7 +351,7 @@
   <string name="quiz_screenshot_question">Kan dette skjermbildet lastes opp?</string>
   <string name="share_app_title">Del appen</string>
   <string name="rotate">Roter</string>
-  <string name="error_fetching_nearby_places">Feil under henting av steder i nærheten.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Feil under henting av steder i nærheten.</string>
   <string name="no_nearby_places_around">Ingen steder funnet i nærheten</string>
   <string name="error_fetching_nearby_monuments">Feil under henting av kulturminner i nærheten.</string>
   <string name="no_recent_searches">Ingen nylige søk</string>
@@ -534,7 +534,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Kunne ikke legge til koordinater.</string>
   <string name="description_edit_helper_edit_message_else">Kunne ikke legge til beskrivelser.</string>
   <string name="caption_edit_helper_edit_message_else">Kunne ikke legge til bildetekst.</string>
-  <string name="coordinates_picking_unsuccessful">Kunne ikke hente koordinater.</string>
+  <string name="coordinates_picking_unsuccessful" fuzzy="true">Kunne ikke hente koordinater.</string>
   <string name="descriptions_picking_unsuccessful">Kunne ikke hente beskrivelser.</string>
   <string name="description_activity_title">Rediger beskrivelser og bildetekster</string>
   <string name="share_image_via">Del bilde via</string>

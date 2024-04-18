@@ -399,7 +399,7 @@
   <string name="quiz_screenshot_question">Этот скриншот подходит для загрузки на Викисклад?</string>
   <string name="share_app_title">Поделиться приложением</string>
   <string name="rotate">Повернуть</string>
-  <string name="error_fetching_nearby_places">Ошибка получения мест поблизости</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Ошибка получения мест поблизости</string>
   <string name="no_pictures_in_this_area">Здесь нет никаких фотографий</string>
   <string name="no_nearby_places_around">Нет мест поблизости</string>
   <string name="error_fetching_nearby_monuments">Ошибка получения мест поблизости.</string>
@@ -607,7 +607,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Не удалось добавить координаты.</string>
   <string name="description_edit_helper_edit_message_else">Не удалось добавить описания.</string>
   <string name="caption_edit_helper_edit_message_else">Не удалось добавить подпись.</string>
-  <string name="coordinates_picking_unsuccessful">Не удалось получить координаты.</string>
+  <string name="coordinates_picking_unsuccessful" fuzzy="true">Не удалось получить координаты.</string>
   <string name="descriptions_picking_unsuccessful">Не удалось получить описания.</string>
   <string name="description_activity_title">Редактировать описания и подписи</string>
   <string name="share_image_via">Поделиться изображением с помощью</string>
@@ -642,7 +642,7 @@
   <string name="recommend_high_accuracy_mode">Для достижения наилучших результатов выберите режим высокой точности.</string>
   <string name="ask_to_turn_location_on">Включить местоположение?</string>
   <string name="nearby_needs_location">Рядом необходимо, чтобы местоположение было включено для правильной работы.</string>
-  <string name="upload_map_location_access">Вам необходимо предоставить доступ к вашему текущему местоположению, чтобы установить местоположение автоматически.</string>
+  <string name="upload_map_location_access" fuzzy="true">Вам необходимо предоставить доступ к вашему текущему местоположению, чтобы установить местоположение автоматически.</string>
   <string name="use_location_from_similar_image">Вы снимали эти две фотографии в одном месте? Хотите использовать широту/долготу изображения справа?</string>
   <string name="load_more">Загрузить ещё</string>
   <string name="nearby_no_results">Мест не найдено, попытайтесь изменить критерии поиска.</string>
