@@ -76,6 +76,8 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      */
     public static boolean isBatteryDialogShowing;
 
+    public static boolean isCategoriesDialogShowing;
+
     @Inject
     public UploadMediaPresenter(UploadRepository uploadRepository,
         @Named("default_preferences") JsonKvStore defaultKVStore,
@@ -410,7 +412,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
         }
 
         if (uploadItemIndex == 0) {
-            if (!isBatteryDialogShowing) {
+            if (!isBatteryDialogShowing && !isCategoriesDialogShowing) {
                 // if battery-optimisation dialog is not being shown, call checkImageQuality
                 checkImageQuality(uploadItem, uploadItemIndex);
             } else {

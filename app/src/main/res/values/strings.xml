@@ -810,4 +810,6 @@ Upload your first media by tapping on the add button.</string>
     <item quantity="one">%d image selected</item>
     <item quantity="other">%d images selected</item>
   </plurals>
+  <string name="multiple_files_depiction"> Please remember that all photos should belong to the same category/depiction!</string>
+  <string name="multiple_files_depiction_header"> A note about multiuploads</string>
 </resources>

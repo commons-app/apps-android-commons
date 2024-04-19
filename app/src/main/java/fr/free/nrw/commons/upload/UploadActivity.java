@@ -454,6 +454,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             //Show thumbnails
             if (uploadableFiles.size()
                 > 1) {//If there is only file, no need to show the image thumbnails
+                showAlertDialogForCategories();
                 thumbnailsAdapter.setUploadableFiles(uploadableFiles);
             } else {
                 binding.llContainerTopCard.setVisibility(View.GONE);
@@ -465,76 +466,10 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             if(fragments == null){
                 fragments = new ArrayList<>();
             }
-
-
-            /* Suggest users to turn battery optimisation off when uploading more than a few files.
-               That's because we have noticed that many-files uploads have
-               a much higher probability of failing than uploads with less files.
-
-               Show the dialog for Android 6 and above as
-               the ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS intent was added in API level 23
-             */
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (uploadableFiles.size() > 3
-                    && !defaultKvStore.getBoolean("hasAlreadyLaunchedBigMultiupload")) {
-                    // When battery-optimisation dialog is shown don't show the image quality dialog
-                    UploadMediaPresenter.isBatteryDialogShowing = true;
-                    DialogUtil.showAlertDialog(
-                        this,
-                        getString(R.string.unrestricted_battery_mode),
-                        getString(R.string.suggest_unrestricted_mode),
-                        getString(R.string.title_activity_settings),
-                        getString(R.string.cancel),
-                        () -> {
-                        /* Since opening the right settings page might be device dependent, using
-                           https://github.com/WaseemSabir/BatteryPermissionHelper
-                           directly appeared like a promising idea.
-                           However, this simply closed the popup and did not make
-                           the settings page appear on a Pixel as well as a Xiaomi device.
-
-                           Used the standard intent instead of using this library as
-                           it shows a list of all the apps on the device and allows users to
-                           turn battery optimisation off.
-                         */
-                            Intent batteryOptimisationSettingsIntent = new Intent(
-                                Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
-                            startActivity(batteryOptimisationSettingsIntent);
-                            // calling checkImageQuality after battery dialog is interacted with
-                            // so that 2 dialogs do not pop up simultaneously
-                            presenter.checkImageQuality(0);
-                            UploadMediaPresenter.isBatteryDialogShowing = false;
-                        },
-                        () -> {
-                            presenter.checkImageQuality(0);
-                            UploadMediaPresenter.isBatteryDialogShowing = false;
-                        }
-                    );
-                    defaultKvStore.putBoolean("hasAlreadyLaunchedBigMultiupload", true);
-                }
-            }
             for (UploadableFile uploadableFile : uploadableFiles) {
                 UploadMediaDetailFragment uploadMediaDetailFragment = new UploadMediaDetailFragment();
 
-                LocationPermissionsHelper locationPermissionsHelper = new LocationPermissionsHelper(
-                    this, locationManager, null);
-                if (locationPermissionsHelper.isLocationAccessToAppsTurnedOn()) {
-                    currLocation = locationManager.getLastLocation();
-                }
-
-                if (currLocation != null) {
-                    float locationDifference = getLocationDifference(currLocation, prevLocation);
-                    boolean isLocationTagUnchecked = isLocationTagUncheckedInTheSettings();
-                    /* Remove location if the user has unchecked the Location EXIF tag in the
-                       Manage EXIF Tags setting or turned "Record location for in-app shots" off.
-                       Also, location information is discarded if the difference between
-                       current location and location recorded just before capturing the image
-                       is greater than 100 meters */
-                    if (isLocationTagUnchecked || locationDifference > 100
-                        || !defaultKvStore.getBoolean("inAppCameraLocationPref")
-                        || !isInAppCameraUpload) {
-                        currLocation = null;
-                    }
-                }
+                handleLocation();
                 uploadMediaDetailFragment.setImageTobeUploaded(uploadableFile, place, currLocation);
                 locationManager.unregisterLocationManager();
 
@@ -929,5 +864,101 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             null,
             this::finish
         );
+    }
+
+    /**
+     * If the user uploads more than 1 file informs that
+     * depictions/categories apply to all pictures of a multi upload.
+     * This method takes no arguments and does not return any value.
+     * It shows the AlertDialog and continues the flow of uploads.
+     */
+    private void showAlertDialogForCategories(){
+        UploadMediaPresenter.isCategoriesDialogShowing = true;
+        DialogUtil.showAlertDialog(
+            this,
+            getString(R.string.multiple_files_depiction_header),
+            getString(R.string.multiple_files_depiction),
+            "OK","",
+            () -> {
+                showAlertForBattery();
+                presenter.checkImageQuality(0);
+                UploadMediaPresenter.isCategoriesDialogShowing = false;
+            },
+            () -> {});
+    }
+
+    /** Suggest users to turn battery optimisation off when uploading
+     * more than a few files. That's because we have noticed that
+     * many-files uploads have a much higher probability of failing
+     * than uploads with less files. Show the dialog for Android 6
+     * and above as the ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS
+     * intent was added in API level 23
+     */
+    private void showAlertForBattery(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (uploadableFiles.size() > 3
+                && !defaultKvStore.getBoolean("hasAlreadyLaunchedBigMultiupload")) {
+                // When battery-optimisation dialog is shown don't show the image quality dialog
+                UploadMediaPresenter.isBatteryDialogShowing = true;
+                DialogUtil.showAlertDialog(
+                    this,
+                    getString(R.string.unrestricted_battery_mode),
+                    getString(R.string.suggest_unrestricted_mode),
+                    getString(R.string.title_activity_settings),
+                    getString(R.string.cancel),
+                    () -> {
+                        /* Since opening the right settings page might be device dependent, using
+                           https://github.com/WaseemSabir/BatteryPermissionHelper
+                           directly appeared like a promising idea.
+                           However, this simply closed the popup and did not make
+                           the settings page appear on a Pixel as well as a Xiaomi device.
+
+                           Used the standard intent instead of using this library as
+                           it shows a list of all the apps on the device and allows users to
+                           turn battery optimisation off.
+                         */
+                        Intent batteryOptimisationSettingsIntent = new Intent(
+                            Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+                        startActivity(batteryOptimisationSettingsIntent);
+                        // calling checkImageQuality after battery dialog is interacted with
+                        // so that 2 dialogs do not pop up simultaneously
+                        presenter.checkImageQuality(0);
+                        UploadMediaPresenter.isBatteryDialogShowing = false;
+                    },
+                    () -> {
+                        presenter.checkImageQuality(0);
+                        UploadMediaPresenter.isBatteryDialogShowing = false;
+                    }
+                );
+                defaultKvStore.putBoolean("hasAlreadyLaunchedBigMultiupload", true);
+            }
+        }
+    }
+
+    /**
+     * If the permission for Location is turned on and certain
+     * conditions are met, returns current location of the user.
+     */
+    private void handleLocation(){
+        LocationPermissionsHelper locationPermissionsHelper = new LocationPermissionsHelper(
+            this, locationManager, null);
+        if (locationPermissionsHelper.isLocationAccessToAppsTurnedOn()) {
+            currLocation = locationManager.getLastLocation();
+        }
+
+        if (currLocation != null) {
+            float locationDifference = getLocationDifference(currLocation, prevLocation);
+            boolean isLocationTagUnchecked = isLocationTagUncheckedInTheSettings();
+                    /* Remove location if the user has unchecked the Location EXIF tag in the
+                       Manage EXIF Tags setting or turned "Record location for in-app shots" off.
+                       Also, location information is discarded if the difference between
+                       current location and location recorded just before capturing the image
+                       is greater than 100 meters */
+            if (isLocationTagUnchecked || locationDifference > 100
+                || !defaultKvStore.getBoolean("inAppCameraLocationPref")
+                || !isInAppCameraUpload) {
+                currLocation = null;
+            }
+        }
     }
 }
