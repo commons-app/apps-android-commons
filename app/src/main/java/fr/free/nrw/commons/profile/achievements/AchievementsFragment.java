@@ -64,7 +64,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     // To keep track of the number of wiki edits made by a user
-    private int numberOfEdits = 0;
+    private int numberOfEdits;
 
     private String userName;
 
@@ -88,13 +88,13 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         View rootView = binding.getRoot();
 
         binding.achievementInfo.setOnClickListener(view -> showInfoDialog());
-        binding.imagesUploadInfo.setOnClickListener(view -> showUploadInfo());
-        binding.imagesRevertedInfo.setOnClickListener(view -> showRevertedInfo());
-        binding.imagesUsedByWikiInfo.setOnClickListener(view -> showUsedByWikiInfo());
-        binding.imagesNearbyInfo.setOnClickListener(view -> showImagesViaNearbyInfo());
-        binding.imagesFeaturedInfo.setOnClickListener(view -> showFeaturedImagesInfo());
-        binding.thanksReceivedInfo.setOnClickListener(view -> showThanksReceivedInfo());
-        binding.qualityImagesInfo.setOnClickListener(view -> showQualityImagesInfo());
+        binding.imagesUploadInfoIcon.setOnClickListener(view -> showUploadInfo());
+        binding.imagesRevertedInfoIcon.setOnClickListener(view -> showRevertedInfo());
+        binding.imagesUsedByWikiInfoIcon.setOnClickListener(view -> showUsedByWikiInfo());
+        binding.imagesNearbyInfoIcon.setOnClickListener(view -> showImagesViaNearbyInfo());
+        binding.imagesFeaturedInfoIcon.setOnClickListener(view -> showFeaturedImagesInfo());
+        binding.thanksReceivedInfoIcon.setOnClickListener(view -> showThanksReceivedInfo());
+        binding.qualityImagesInfoIcon.setOnClickListener(view -> showQualityImagesInfo());
 
         // DisplayMetrics used to fetch the size of the screen
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -112,19 +112,9 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
 
         setHasOptionsMenu(true);
 
-        // Set the initial value of WikiData edits to 0
-        binding.wikidataEdits.setText("0");
-        if(sessionManager.getUserName() == null || sessionManager.getUserName().equals(userName)){
-            binding.tvAchievementsOfUser.setVisibility(View.GONE);
-        }else{
-            binding.tvAchievementsOfUser.setVisibility(View.VISIBLE);
-            binding.tvAchievementsOfUser.setText(getString(R.string.achievements_of_user,userName));
-        }
-
         // Achievements currently unimplemented in Beta flavor. Skip all API calls.
         if(ConfigUtils.isBetaFlavour()) {
             binding.progressBar.setVisibility(View.GONE);
-            binding.imagesUsedByWikiText.setText(R.string.no_image);
             binding.imagesRevertedText.setText(R.string.no_image_reverted);
             binding.imagesUploadTextParam.setText(R.string.no_image_uploaded);
             binding.wikidataEdits.setText("0");
@@ -194,7 +184,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
                                         setUploadCount(Achievements.from(response));
                                     } else {
                                         Timber.d("success");
-                                        binding.layoutImageReverts.setVisibility(View.INVISIBLE);
+                                        hideStatistics();
                                         binding.achievementBadgeImage.setVisibility(View.INVISIBLE);
                                         // If the number of edits made by the user are more than 150,000
                                         // in some cases such high number of wiki edit counts cause the
@@ -221,6 +211,41 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
                 Timber.d(e+"success");
             }
         }
+    }
+
+    /**
+     *
+     */
+    private void hideStatistics(){
+        //Nearby Places
+        binding.wikidataEditsIcon.setVisibility(View.GONE);
+        binding.imagesNearbyData.setVisibility(View.GONE);
+        binding.imagesNearbyInfoIcon.setVisibility(View.GONE);
+
+        //Featured Images
+        binding.featuredImageIcon.setVisibility(View.GONE);
+        binding.imagesFeaturedData.setVisibility(View.GONE);
+        binding.featuredImageIcon.setVisibility(View.GONE);
+        binding.wikidataEdits.setVisibility(View.GONE);
+
+        //Quality Images
+        binding.featuredImageIcon.setVisibility(View.GONE);
+        binding.imagesFeaturedData.setVisibility(View.GONE);
+        binding.featuredImageIcon.setVisibility(View.GONE);
+        binding.imageFeatured.setVisibility(View.GONE);
+
+        //Thanks Images
+        binding.qualityImageIcon.setVisibility(View.GONE);
+        binding.qualityImagesData.setVisibility(View.GONE);
+        binding.qualityImagesInfoIcon.setVisibility(View.GONE);
+        binding.qualityImages.setVisibility(View.GONE);
+
+        //Nearby Places
+        binding.thanksImageIcon.setVisibility(View.GONE);
+        binding.thanksReceivedData.setVisibility(View.GONE);
+        binding.thanksReceivedInfoIcon.setVisibility(View.GONE);
+        binding.thanksReceived.setVisibility(View.GONE);
+
     }
 
     /**
@@ -309,8 +334,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
             binding.imagesUploadedProgressbar.setVisibility(View.VISIBLE);
             binding.imagesUploadedProgressbar.setProgress
                     (100*uploadCount/levelInfo.getMaxUploadCount());
-            binding.tvUploadedImages.setText
-                (uploadCount + "/" + levelInfo.getMaxUploadCount());
+            binding.imageUploadedTVCount.setText(uploadCount+"/"+levelInfo.getMaxUploadCount());
         }
 
     }
@@ -329,7 +353,6 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         binding.imageRevertsProgressbar.setVisibility(View.INVISIBLE);
         binding.imagesUsedByWikiProgressBar.setVisibility(View.INVISIBLE);
         binding.achievementBadgeImage.setVisibility(View.INVISIBLE);
-        binding.imagesUsedByWikiText.setText(R.string.no_image);
         binding.imagesRevertedText.setText(R.string.no_image_reverted);
         binding.imagesUploadTextParam.setText(R.string.no_image_uploaded);
         binding.achievementBadgeImage.setVisibility(View.INVISIBLE);
@@ -343,7 +366,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         binding.imageRevertsProgressbar.setVisibility(View.VISIBLE);
         binding.imageRevertsProgressbar.setProgress(notRevertPercentage);
         String revertPercentage = Integer.toString(notRevertPercentage);
-        binding.imageRevertsProgressbar.setProgressTextFormatPattern(revertPercentage + "%%");
+        binding.imageRevertTVCount.setText(revertPercentage + "%");
         binding.imagesRevertLimitText.setText(getResources().getString(R.string.achievements_revert_limit_message)+ levelInfo.getMinNonRevertPercentage() + "%");
     }
 
@@ -357,10 +380,7 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         binding.thanksReceived.setText(String.valueOf(achievements.getThanksReceived()));
         binding.imagesUsedByWikiProgressBar.setProgress
                 (100 * achievements.getUniqueUsedImages() / levelInfo.getMaxUniqueImages());
-        if(binding.tvWikiPb != null) {
-            binding.tvWikiPb.setText
-                (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
-        }
+        binding.imagesUsedCount.setText(achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUploadCount());
         binding.imageFeatured.setText(String.valueOf(achievements.getFeaturedImages()));
         binding.qualityImages.setText(String.valueOf(achievements.getQualityImages()));
         String levelUpInfoString = getString(R.string.level).toUpperCase();
