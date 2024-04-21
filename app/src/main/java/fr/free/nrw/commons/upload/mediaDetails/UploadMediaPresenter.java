@@ -331,17 +331,21 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
       view.showEditActivity(repository.getUploads().get(indexInViewFlipper));
   }
 
-  @Override
-  public void onUserConfirmedUploadIsOfPlace(Place place, int uploadItemPosition) {
-    final List<UploadMediaDetail> uploadMediaDetails = repository.getUploads()
-        .get(uploadItemPosition)
-        .getUploadMediaDetails();
-    UploadItem uploadItem = repository.getUploads()
-        .get(uploadItemPosition);
-    uploadItem.setPlace(place);
-    uploadMediaDetails.set(0, new UploadMediaDetail(place));
-    view.updateMediaDetails(uploadMediaDetails);
-  }
+    @Override
+    public void onUserConfirmedUploadIsOfPlace(Place place) {
+        final List<UploadItem> uploads = repository.getUploads();
+        for (UploadItem uploadItem : uploads) {
+            uploadItem.setPlace(place);
+            final List<UploadMediaDetail> uploadMediaDetails = uploadItem.getUploadMediaDetails();
+            // Update UploadMediaDetail object for this UploadItem
+            uploadMediaDetails.set(0, new UploadMediaDetail(place));
+        }
+        // Now that all UploadItems and their associated UploadMediaDetail objects have been updated,
+        // update the view with the modified media details of the first upload item
+        view.updateMediaDetails(uploads.get(0).getUploadMediaDetails());
+        UploadActivity.uploadIsOnPlace = true;
+    }
+
 
     /**
      * Calculates the image quality

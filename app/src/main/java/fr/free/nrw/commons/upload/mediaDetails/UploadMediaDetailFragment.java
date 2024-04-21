@@ -374,8 +374,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 final boolean response = UploadActivity.nearbyPopupAnswers.get(nearbyPlace);
                 if (response) {
                     if (callback != null) {
-                        presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace,
-                            indexOfFragment);
+                        presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace);
                     }
                 }
             } else {
@@ -402,7 +401,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 place.getName()),
             () -> {
                 UploadActivity.nearbyPopupAnswers.put(place, true);
-                presenter.onUserConfirmedUploadIsOfPlace(place, indexOfFragment);
+                presenter.onUserConfirmedUploadIsOfPlace(place);
             },
             () -> {
                 UploadActivity.nearbyPopupAnswers.put(place, false);
@@ -440,8 +439,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             if (UploadActivity.nearbyPopupAnswers.containsKey(nearbyPlace)) {
                 final boolean response = UploadActivity.nearbyPopupAnswers.get(nearbyPlace);
                 if (response) {
-                    presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace,
-                        indexOfFragment);
+                    presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace);
                 }
             } else {
                 showNearbyPlaceFound(nearbyPlace);

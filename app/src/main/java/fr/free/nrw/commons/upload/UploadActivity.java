@@ -100,6 +100,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private Place place;
     private LatLng prevLocation;
     private LatLng currLocation;
+    public static boolean uploadIsOnPlace = false;
     private boolean isInAppCameraUpload;
     private List<UploadableFile> uploadableFiles = Collections.emptyList();
     private int currentSelectedPosition = 0;
@@ -466,12 +467,18 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             if(fragments == null){
                 fragments = new ArrayList<>();
             }
+
+
             for (UploadableFile uploadableFile : uploadableFiles) {
                 UploadMediaDetailFragment uploadMediaDetailFragment = new UploadMediaDetailFragment();
 
-                handleLocation();
-                uploadMediaDetailFragment.setImageTobeUploaded(uploadableFile, place, currLocation);
-                locationManager.unregisterLocationManager();
+                if (!uploadIsOnPlace) {
+                    handleLocation();
+                    uploadMediaDetailFragment.setImageTobeUploaded(uploadableFile, place, currLocation);
+                    locationManager.unregisterLocationManager();
+                } else {
+                    uploadMediaDetailFragment.setImageTobeUploaded(uploadableFile, place, currLocation);
+                }
 
                 UploadMediaDetailFragmentCallback uploadMediaDetailFragmentCallback = new UploadMediaDetailFragmentCallback() {
                     @Override
