@@ -6,6 +6,7 @@
 * Ale.salmo
 * Beta16
 * Black Sky83
+* Champ0999
 * Davio
 * Gianfranco
 * Lorelai87
@@ -747,6 +748,10 @@
   <string name="learn_how_to_write_a_useful_description">Impara come scrivere una descrizione utile</string>
   <string name="learn_how_to_write_a_useful_caption">Impara come scrivere una didascalia utile</string>
   <string name="see_your_achievements">Vedi i tuoi risultati</string>
+  <string name="edit_image">Modifica Immagine</string>
+  <string name="edit_location">Modifica Posizione</string>
+  <string name="location_updated">Posizione aggiornata!</string>
+  <string name="send_thanks_to_author">Ringrazia l\'autore</string>
   <string name="invalid_login_message">Sessione scaduta. Accedi nuovamente.</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d immagine selezionata</item>

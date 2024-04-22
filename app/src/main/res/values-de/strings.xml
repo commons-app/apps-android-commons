@@ -682,7 +682,7 @@
   <string name="read_help_link">Mehr lesen</string>
   <string name="media_detail_in_all_languages">In allen Sprachen</string>
   <string name="choose_a_location">Wähle einen Ort</string>
-  <string name="pan_and_zoom_to_adjust">Schwenken und Zoomen zum Einstellen</string>
+  <string name="pan_and_zoom_to_adjust">Schwenken und Zoomen zum Anpassen</string>
   <string name="select_location_location_picker">Ort auswählen</string>
   <string name="show_in_map_app">In Karten-App anzeigen</string>
   <string name="modify_location">Standort beabeiten</string>
