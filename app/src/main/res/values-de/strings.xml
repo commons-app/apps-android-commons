@@ -378,7 +378,7 @@
   <string name="quiz_screenshot_question">Darf dieses Bildschirmfoto hochgeladen werden?</string>
   <string name="share_app_title">App teilen</string>
   <string name="rotate">Drehen</string>
-  <string name="error_fetching_nearby_places" fuzzy="true">Fehler beim Abrufen der Orte in der Nähe.</string>
+  <string name="error_fetching_nearby_places">Konnte keine Orte in der Nähe laden</string>
   <string name="no_pictures_in_this_area">Keine Bilder in diesem Bereich</string>
   <string name="no_nearby_places_around">Keine Orte in der Nähe gefunden</string>
   <string name="error_fetching_nearby_monuments">Fehler beim Abrufen von Denkmälern in der Nähe.</string>
@@ -579,7 +579,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Koordinaten konnten nicht hinzugefügt werden.</string>
   <string name="description_edit_helper_edit_message_else">Es konnten keine Beschreibungen hinzugefügt werden.</string>
   <string name="caption_edit_helper_edit_message_else">Die Überschrift konnte nicht hinzugefügt werden.</string>
-  <string name="coordinates_picking_unsuccessful" fuzzy="true">Es können keine Koordinaten abgerufen werden.</string>
+  <string name="coordinates_picking_unsuccessful">Koordinaten des Bildes nicht aktualisiert</string>
   <string name="descriptions_picking_unsuccessful">Beschreibungen können nicht abgerufen werden</string>
   <string name="description_activity_title">Beschreibungen und Überschriften bearbeiten</string>
   <string name="share_image_via">Bild teilen via</string>
@@ -614,7 +614,7 @@
   <string name="recommend_high_accuracy_mode">Die besten Ergebnisse erzielst du, wenn du den Modus „Hohe Genauigkeit“ wählst.</string>
   <string name="ask_to_turn_location_on">Standort einschalten?</string>
   <string name="nearby_needs_location">Für die Funktion „in der Nähe“ muss der Standort aktiviert sein, um richtig zu funktionieren</string>
-  <string name="upload_map_location_access" fuzzy="true">Um den Standort automatisch festzulegen, musst du Zugriff auf deinen aktuellen Standort gewähren.</string>
+  <string name="upload_map_location_access">Um den Standort automatisch festlegen zu können, musst du die Berechtigung dazu erteilen.</string>
   <string name="use_location_from_similar_image">Hast du diese beiden Bilder am selben Ort aufgenommen? Möchtest du den Breiten- und Längengrad des rechten Bildes verwenden?</string>
   <string name="load_more">Mehr laden</string>
   <string name="nearby_no_results">Es wurden keine Orte gefunden. Versuche, deine Suchkriterien zu ändern.</string>

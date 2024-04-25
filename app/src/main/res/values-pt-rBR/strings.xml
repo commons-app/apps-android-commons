@@ -18,6 +18,7 @@
 * Maxan
 * McDutchie
 * Mello25
+* Mellogabi03
 * Re demz
 * Stephanyb76
 * TheEduGobi
@@ -717,7 +718,7 @@
   <string name="feedback_sharing_data_alert">Remova deste e-mail qualquer informação que você não se sinta à vontade para compartilhar publicamente. Além disso, esteja ciente de que seu endereço de e-mail com o qual você está postando e o nome associado e a foto do perfil serão visíveis publicamente.</string>
   <string name="explore_map_details">Detalhes</string>
   <string name="achievements_unavailable_beta" fuzzy="true">As conquistas estão disponíveis apenas na versão de produção, verifique a documentação do desenvolvedor.</string>
-  <string name="leaderboard_unavailable_beta">A tabela de classificação está disponível somente na versão de produção. Consulte a documentação de desenvolvedores.</string>
+  <string name="leaderboard_unavailable_beta">A tabela de classificação está disponível somente na versão de produção. Consulte a documentação do desenvolvedor.</string>
   <string name="copyright_popup">Por favor, envie apenas fotos tiradas por você mesmo. Os usuários que enviarem imagens protegidas por direitos autorais serão bloqueados. Isso se aplica à versão beta também. Obrigado por testar o aplicativo!</string>
   <string name="select_feedback_data_choice">Desmarque qualquer informação que você não se sinta à vontade para compartilhar publicamente.</string>
   <string name="api_level">Nível da API</string>

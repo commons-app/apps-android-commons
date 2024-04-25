@@ -12,7 +12,7 @@
   <string name="login">Кир</string>
   <string name="logging_in_title">Системагъа кириу</string>
   <string name="logging_in_message">Бираз сакълагъыз…</string>
-  <string name="login_success" fuzzy="true">Авторизация тыйыншлы ётдю</string>
+  <string name="login_success">Кириу джетишимлиди!</string>
   <string name="login_failed" fuzzy="true">Системагъа кириуде халат</string>
   <string name="authentication_failed" fuzzy="true">Аутентификацияда халат!</string>
   <string name="uploading_started">Джюклеу башланды!</string>
