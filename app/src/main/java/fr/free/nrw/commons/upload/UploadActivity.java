@@ -535,7 +535,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                         currLocation = null;
                     }
                 }
-                uploadMediaDetailFragment.setImageTobeUploaded(uploadableFile, place, currLocation);
+                uploadMediaDetailFragment.setImageToBeUploaded(uploadableFile, place, currLocation);
                 locationManager.unregisterLocationManager();
 
                 UploadMediaDetailFragmentCallback uploadMediaDetailFragmentCallback = new UploadMediaDetailFragmentCallback() {
