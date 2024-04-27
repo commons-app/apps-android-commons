@@ -154,7 +154,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
 
 
 
-    public void setImageTobeUploaded(UploadableFile uploadableFile, Place place,
+    public void setImageToBeUploaded(UploadableFile uploadableFile, Place place,
         LatLng inAppPictureLocation) {
         this.uploadableFile = uploadableFile;
         this.place = place;
