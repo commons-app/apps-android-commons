@@ -70,8 +70,8 @@
 
 What's listed here is only a subset of all the changes. Check the full-list of
 the changes in [this link](https://github.com/commons-app/apps-android-commons/compare/v4.2.1...v5.0.0).
-Alternatively, checkout this release on GitHub releases page for an exhaustive
-list of changes and the various contributors who contributed the same.
+Alternatively, checkout [this release on GitHub releases page](https://github.com/commons-app/apps-android-commons/releases/tag/v5.0.0)
+for an exhaustive list of changes and the various contributors who contributed the same.
 
 ## v4.2.1
 
