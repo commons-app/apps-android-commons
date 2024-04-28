@@ -1,5 +1,10 @@
 # Wikimedia Commons for Android
 
+## v5.0.1
+
+Same as v5.0.0 except this fixes some R8 rules to ensure that the release
+variants of the app work as intended.
+
 ## v5.0.0
 
 ### What's Changed
