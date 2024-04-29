@@ -769,7 +769,7 @@ Upload your first media by tapping on the add button.</string>
   <string name="marking_as_not_for_upload">Marking as not for upload</string>
   <string name="unmarking_as_not_for_upload">Unmarking as not for upload</string>
   <string name="show_already_actioned_pictures">Show already actioned pictures</string>
-  <string name="appreciation_text">Good Job! \n All pictures have been either uploaded or marked as not for upload</string>
+  <string name="appreciation_text">Good job!\nAll pictures of this album have been either uploaded or marked as not for upload.\nHow about going for a walk and taking pictures of nearby notable places?</string>
 
 
   <string name="hiding_already_actioned_pictures">Hiding already actioned pictures</string>
