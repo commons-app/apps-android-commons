@@ -279,6 +279,7 @@
   <string name="nearby_location_not_available">„У близини” можда не ради како треба. Локација није доступна.</string>
   <string name="upload_location_access_denied">Приступ локацији је онемогућен. Одаберите вашу локацију ручно да би сте користили ову могућност.</string>
   <string name="location_permission_rationale_nearby">Потребна је дозвола за приказивање листе локација у близини</string>
+  <string name="location_permission_rationale_explore">Потребна је дозвола за приказивање списка слика у близини</string>
   <string name="nearby_directions">Упутства</string>
   <string name="nearby_wikidata">Википодаци</string>
   <string name="nearby_wikipedia">Википедија</string>
@@ -537,7 +538,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Није могуће додавање координата.</string>
   <string name="description_edit_helper_edit_message_else">Није могуће додавање описа.</string>
   <string name="caption_edit_helper_edit_message_else">Није могуће додавање натписа.</string>
-  <string name="coordinates_picking_unsuccessful">Није могуће добити координате.</string>
+  <string name="coordinates_picking_unsuccessful">Координате слике нису ажуриране</string>
   <string name="descriptions_picking_unsuccessful">Није могуће добити описе.</string>
   <string name="description_activity_title">Уреди описе и натписе</string>
   <string name="share_image_via">Подели слику преко</string>
@@ -568,7 +569,7 @@
   <string name="cannot_open_location_settings">Дошло је до грешке приликом отварања подешавања за локацију. Укључите локацију ручно</string>
   <string name="recommend_high_accuracy_mode">За најбоље резултате, одаберите режим високе прецизности.</string>
   <string name="ask_to_turn_location_on">Укључи локацију?</string>
-  <string name="upload_map_location_access">Морате да дате приступ Вашој тренутној локацији да би локација била постављена аутоматски.</string>
+  <string name="upload_map_location_access">Морате да дате приступ Вашој локацији да би локација била постављена аутоматски.</string>
   <string name="use_location_from_similar_image">Да ли сте снимили ове две слике на истом месту? Да ли желите да користите географску ширину/дужину слике са десне стране?</string>
   <string name="load_more">Учитај још</string>
   <string name="nearby_no_results">Места нису пронађена, покушајте да промените критеријуме за претрагу.</string>

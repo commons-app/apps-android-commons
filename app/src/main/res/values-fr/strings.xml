@@ -380,7 +380,7 @@
   <string name="quiz_screenshot_question">Cette copie d’écran est-elle correcte pour être téléversée ?</string>
   <string name="share_app_title">Partager l’application</string>
   <string name="rotate">Pivoter</string>
-  <string name="error_fetching_nearby_places">Erreur durant la recherche d’endroits proches.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Erreur durant la recherche d’endroits proches.</string>
   <string name="no_pictures_in_this_area">Aucune image dans cette zone</string>
   <string name="no_nearby_places_around">Aucun lieu à proximité</string>
   <string name="error_fetching_nearby_monuments">Erreur de récupération des monuments à proximité.</string>
@@ -584,7 +584,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Impossible d’ajouter des coordonnées.</string>
   <string name="description_edit_helper_edit_message_else">Impossible d’ajouter des descriptions.</string>
   <string name="caption_edit_helper_edit_message_else">Impossible d’ajouter la légende.</string>
-  <string name="coordinates_picking_unsuccessful">Impossible d’obtenir les coordonnées.</string>
+  <string name="coordinates_picking_unsuccessful" fuzzy="true">Impossible d’obtenir les coordonnées.</string>
   <string name="descriptions_picking_unsuccessful">Impossible d’obtenir les descriptions.</string>
   <string name="description_activity_title">Modifier les descriptions et les légendes</string>
   <string name="share_image_via">Partager l’image via</string>
@@ -619,7 +619,7 @@
   <string name="recommend_high_accuracy_mode">Pour de meilleurs résultats, choisir le mode Haute Précision.</string>
   <string name="ask_to_turn_location_on">Activer la localisation ?</string>
   <string name="nearby_needs_location">« Lieux à proximité » nécessite que la localisation soit activée pour fonctionner correctement.</string>
-  <string name="upload_map_location_access">Vous devez donner accès à votre emplacement actuel pour définir automatiquement la localisation.</string>
+  <string name="upload_map_location_access" fuzzy="true">Vous devez donner accès à votre emplacement actuel pour définir automatiquement la localisation.</string>
   <string name="use_location_from_similar_image">Avez-vous pris ces deux photos au même lieu ? Voulez-vous utiliser la latitude et la longitude de l’image de droite ?</string>
   <string name="load_more">Charger davantage</string>
   <string name="nearby_no_results">Aucun lieu trouvé, essayez de modifier vos critères de recherche.</string>

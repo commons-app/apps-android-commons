@@ -252,7 +252,7 @@
   <string name="wrong">오답</string>
   <string name="quiz_screenshot_question">이 화면속사를 올리적재하시겠습니까?</string>
   <string name="share_app_title">프로그람 공유</string>
-  <string name="error_fetching_nearby_places">주변 장소를 가져오는데 오유가 있습니다.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">주변 장소를 가져오는데 오유가 있습니다.</string>
   <string name="no_recent_searches">최근 검색 없음</string>
   <string name="delete_recent_searches_dialog">검색 리력을 지우겠습니까?</string>
   <string name="search_history_deleted">검색 리력이 지워짐</string>

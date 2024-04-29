@@ -359,7 +359,7 @@
   <string name="quiz_screenshot_question">Αυτό το στιγμιότυπο είναι εντάξει για ανέβασμα;</string>
   <string name="share_app_title">Κοινοποίηση εφαρμογής</string>
   <string name="rotate">Γυρίστε</string>
-  <string name="error_fetching_nearby_places">Σφάλμα κατά την εύρεση κοντινών μερών.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Σφάλμα κατά την εύρεση κοντινών μερών.</string>
   <string name="no_pictures_in_this_area">Δεν υπάρχουν φωτογραφίες σε αυτήν την περιοχή</string>
   <string name="no_nearby_places_around">Δεν υπάρχουν μέρη κοντά</string>
   <string name="error_fetching_nearby_monuments">Σφάλμα κατά την εύρεση κοντινών μνημείων.</string>

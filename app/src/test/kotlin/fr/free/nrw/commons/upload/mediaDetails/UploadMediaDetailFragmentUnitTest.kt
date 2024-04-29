@@ -166,9 +166,9 @@ class UploadMediaDetailFragmentUnitTest {
 
     @Test
     @Throws(Exception::class)
-    fun testSetImageTobeUploaded() {
+    fun testSetImageToBeUploaded() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.setImageTobeUploaded(null, null, location)
+        fragment.setImageToBeUploaded(null, null, location)
     }
 
     @Test

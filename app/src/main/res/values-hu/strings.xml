@@ -314,7 +314,7 @@
   <string name="wrong">Rossz válasz</string>
   <string name="quiz_screenshot_question">Ez a képernyőkép feltölthető?</string>
   <string name="share_app_title">Alkalmazás megosztása</string>
-  <string name="error_fetching_nearby_places">Hiba a közeli helyek elérésekor.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Hiba a közeli helyek elérésekor.</string>
   <string name="no_recent_searches">Nincs korábbi keresés</string>
   <string name="delete_recent_searches_dialog">Biztosan törölni szeretnéd a keresési előzményeidet?</string>
   <string name="delete_search_dialog">Biztos törölni szeretnéd ezt a keresést?</string>

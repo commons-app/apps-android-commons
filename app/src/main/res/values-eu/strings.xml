@@ -295,7 +295,7 @@
   <string name="wrong">Erantzun okerra</string>
   <string name="quiz_screenshot_question">Pantaila-kaptura hau ondo al dago igotzeko?</string>
   <string name="share_app_title">Aplikazioa partekatu</string>
-  <string name="error_fetching_nearby_places">Ezin izan dira hurbileko lekuak ekarri.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Ezin izan dira hurbileko lekuak ekarri.</string>
   <string name="delete_recent_searches_dialog">Ziur zaude zure bilaketen historia garbitu nahi duzula?</string>
   <string name="search_history_deleted">Bilaketa historia ezabatuta</string>
   <string name="delete">Ezabatu</string>

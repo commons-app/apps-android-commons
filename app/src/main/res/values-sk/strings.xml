@@ -355,7 +355,7 @@
   <string name="wrong">Nesprávna odpoveď</string>
   <string name="quiz_screenshot_question">Je v poriadku nahrať túto snímku obrazovky?</string>
   <string name="share_app_title">Zdieľať aplikáciu</string>
-  <string name="error_fetching_nearby_places">Nastala chyba pri hľadaní miest v okolí.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Nastala chyba pri hľadaní miest v okolí.</string>
   <string name="no_nearby_places_around">V okolí sa nenašli žiadne miesta</string>
   <string name="error_fetching_nearby_monuments">Nastala chyba pri načítavaní miest v okolí.</string>
   <string name="no_recent_searches">Žiadne nedávne hľadania</string>
@@ -549,7 +549,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Nepodarilo sa pridať súradnice.</string>
   <string name="description_edit_helper_edit_message_else">Nepodarilo sa pridať popisy.</string>
   <string name="caption_edit_helper_edit_message_else">Nepodarilo sa pridať titulky.</string>
-  <string name="coordinates_picking_unsuccessful">Nepodarilo sa získať súradnice.</string>
+  <string name="coordinates_picking_unsuccessful" fuzzy="true">Nepodarilo sa získať súradnice.</string>
   <string name="descriptions_picking_unsuccessful">Nepodarilo sa získať popisy.</string>
   <string name="description_activity_title">Upraviť popisy a titulky</string>
   <string name="share_image_via">Zdieľať obrázok cez</string>

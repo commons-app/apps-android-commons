@@ -298,7 +298,7 @@
   <string name="quiz_screenshot_question">Footo kaŋa an sʋ\'ʋm nɛ kpɛn\'ɛsʋgɔɔ?</string>
   <string name="share_app_title">Pʋdigim App</string>
   <string name="rotate">Giligim</string>
-  <string name="error_fetching_nearby_places">Daʋŋ bɛ zin\'ibanɛ bɛ yamma paamʋg ni.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Daʋŋ bɛ zin\'ibanɛ bɛ yamma paamʋg ni.</string>
   <string name="no_nearby_places_around">Zin\'ibanɛ bɛ yamma kae</string>
   <string name="no_recent_searches">Dinɛ ka ba ia nananna kae</string>
   <string name="delete_recent_searches_dialog">Fʋ siak ye fʋ bɔɔd ye fʋ ɛɛnsi fʋ ieeb labakʋdaa?</string>
@@ -465,7 +465,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Pʋ nyaŋi paas coordinate nama.</string>
   <string name="description_edit_helper_edit_message_else">Pʋ nyaŋi paas pa\'alaa.</string>
   <string name="caption_edit_helper_edit_message_else">Pʋ nyaŋi paas piana\'azutɛ.</string>
-  <string name="coordinates_picking_unsuccessful">P nyaŋi paam coordinatenama</string>
+  <string name="coordinates_picking_unsuccessful" fuzzy="true">P nyaŋi paam coordinatenama</string>
   <string name="descriptions_picking_unsuccessful">Pʋ nyaŋi paam pa\'alaa.</string>
   <string name="description_activity_title">Dɛmisim Pa\'ala nɛ pian\'azut</string>
   <string name="share_image_via">Pʋdigim footo dɔlis</string>

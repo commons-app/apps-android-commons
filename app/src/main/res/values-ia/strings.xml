@@ -270,6 +270,7 @@
   <string name="nearby_location_not_available">“A proximitate” poterea non functionar perque le localisation non es disponibile.</string>
   <string name="upload_location_access_denied">Le accesso al localisation ha essite refusate. Per favor indica tu localisation manualmente pro usar iste function.</string>
   <string name="location_permission_rationale_nearby">Permission necessari pro monstrar un lista de locos a proximitate</string>
+  <string name="location_permission_rationale_explore">Permission necessari pro monstrar un lista de imagines a proximitate</string>
   <string name="nearby_directions">Itinerario</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -337,7 +338,7 @@
   <string name="quiz_screenshot_question">Es iste captura de schermo bon pro incargar?</string>
   <string name="share_app_title">Condivider app</string>
   <string name="rotate">Rotar</string>
-  <string name="error_fetching_nearby_places">Error durante le obtention de locos a proximitate.</string>
+  <string name="error_fetching_nearby_places">Error durante le cargamento de locos a proximitate</string>
   <string name="no_pictures_in_this_area">Necun imagine in iste area</string>
   <string name="no_nearby_places_around">Necun loco a proximitate</string>
   <string name="error_fetching_nearby_monuments">Error durante le obtention de monumentos a proximitate.</string>
@@ -541,7 +542,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Non poteva adder categorias.</string>
   <string name="description_edit_helper_edit_message_else">Non poteva adder descriptiones</string>
   <string name="caption_edit_helper_edit_message_else">Non poteva adder legenda.</string>
-  <string name="coordinates_picking_unsuccessful">Non pote obtener coordinatas.</string>
+  <string name="coordinates_picking_unsuccessful">Le coordinatas del imagine non ha essite actualisate</string>
   <string name="descriptions_picking_unsuccessful">Non pote obtener descriptiones.</string>
   <string name="description_activity_title">Modificar descriptiones e legendas</string>
   <string name="share_image_via">Condivider imagine via</string>
@@ -575,8 +576,10 @@
   <string name="cannot_open_location_settings">Fallimento de acceder al parametros de localisation. Per favor activa manualmente le localisation</string>
   <string name="recommend_high_accuracy_mode">Pro le melior resultatos, elige le modo de alte precision.</string>
   <string name="ask_to_turn_location_on">Activar localisation?</string>
+  <string name="ask_to_turn_location_on_text">Per favor activa le servicios de localisation pro permitter que le application monstra tu position actual</string>
   <string name="nearby_needs_location">‘Locos a proximitate’ require que le localisation es activate pro functionar correctemente</string>
-  <string name="upload_map_location_access">Tu debe dar accesso a tu localisation actual pro determinar automaticamente tu position.</string>
+  <string name="explore_map_needs_location">Le carta de exploration require le permission de localisation pro monstrar le imagines a proximitate</string>
+  <string name="upload_map_location_access">Tu debe dar le permission de localisation determinar automaticamente tu position.</string>
   <string name="use_location_from_similar_image">Ha tu prendite iste duo photos al mesme loco? Vole tu usar le latitude/longitude del imagine al dextra?</string>
   <string name="load_more">Cargar plus</string>
   <string name="nearby_no_results">Necun loco trovate. Tenta cambiar tu criterios de recerca.</string>

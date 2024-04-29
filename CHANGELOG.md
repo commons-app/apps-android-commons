@@ -1,5 +1,83 @@
 # Wikimedia Commons for Android
 
+## v5.0.1
+
+Same as v5.0.0 except this fixes some R8 rules to ensure that the release
+variants of the app work as intended.
+
+## v5.0.0
+
+### What's Changed
+
+- Redesigned the map feature to **replace Mapbox with the osmdroid library**.
+  Key elements like pin visualization and user-centered display are still
+  included in this redesign. This is done to guard against possible misuse of
+  the Mapbox token and, more crucially, to keep the app from becoming dependent
+  on a service that charges for usage but offers a free tier.
+
+  With this change, the app retrieves the map tiles from [Wikimedia maps](https://maps.wikimedia.org).
+- Add the ability to **export locations of nearby missing pictures in GPX and
+  KML formats**. This allows users to browse the locations with desired radius
+  for offline use in their favourite map apps like OsmAnd or Maps.me, enhancing
+  accessibility  and offline functionality.
+- **Limited the uploads via the custom image picker** to a maximum of 20.
+- Added two menu choices for **transparent image backgrounds**, giving users the
+  option of either a black or white background, increasing adaptability to
+  various theme settings.
+
+  User customization option has been provided with the
+  ability to save background color selections permanently on a per image basis.
+- Implemented functionality to **automatically resume uploads** that become
+  stuck due to app termination or device reboot.
+- Added a **compass arrow in the Nearby banner** shown in the "Contributions"
+  screen to guide users towards the nearest item, thus providing the missing
+  directional cues. The arrow dynamically adjusts based on device rotation,
+  aligning with the calculated bearing towards the  target location. Further,
+  the distance and direction are updated as the user moves.
+- Implemented **voice input feature** for caption and description fields,
+  enabling users to dictate text directly into these fields.
+- Improved various flows in the app to **redirect users to the login page** and
+  display a  persistent message **if their session becomes invalid** due to a
+  password  change, enhancing user guidance and security measures.
+
+### Revamps and refactorings
+
+- **Revamped initial upload screen layout and the description edit screen layout**
+  for enhanced user experience and ensuring better symmetry in the design.
+- **Replaced Butterknife with ViewBinding** in various places of the app.
+- Transferred essential code from **the redundant data-client module** to the
+  main Commons app code, enabling its integration and facilitating the removal
+  of the redundant module. Further, convert various parts of the code to Kotlin.
+- **Revamped the various location permission flows** to ensure consistency for
+  the sake of a better user experience.
+
+### Bug fixes and various changes
+
+- Resolved an issue where paused uploads that were subsequently cancelled were
+  still being uploaded.
+- Fixed an issue where some user information such as upload count were not
+  displayed in the "Contributions" and "Profile" screens.
+- Fixed the long-standing broken *"Picture of the Day" widget* to restore its
+  usability.
+- Resolved an issue where some categories were hidden at the top of Upload
+  Wizard suggestions.
+- Resolved an issue where there was a grey empty screen at Upload wizard when
+  the app was denied the files permission.
+- Implemented logic to bypass media in Peer Review if the current reviewer is
+  also the user who uploaded the media.
+- Corrected arrow image behaviour in the first upload screen: now displays down
+  arrow when details card is fully visible, aligning with expected user
+  interaction.
+- Updated app icon to improve visibility and recognition on F-Droid.
+- Fixed issue causing all pictures to disappear and activity to reload fully in
+  the custom image selector after marking a picture as 'not for  upload', now
+  ensuring only the selected picture is removed as expected.
+
+What's listed here is only a subset of all the changes. Check the full-list of
+the changes in [this link](https://github.com/commons-app/apps-android-commons/compare/v4.2.1...v5.0.0).
+Alternatively, checkout [this release on GitHub releases page](https://github.com/commons-app/apps-android-commons/releases/tag/v5.0.0)
+for an exhaustive list of changes and the various contributors who contributed the same.
+
 ## v4.2.1
 
 - Provide the ability to edit an image to losslessly rotate it while uploading

@@ -308,6 +308,7 @@
   <string name="nearby_location_not_available">ייתכן ש\"בסביבה\" לא יפעל כראוי, משום שהמיקום אינו זמין.</string>
   <string name="upload_location_access_denied">הגישה למיקום נדחתה. נא להגדיר את המקום שלך ידנית כדי להשתמש ביכולת הזאת.</string>
   <string name="location_permission_rationale_nearby">נדרשת הרשאה כדי להציג רשימה של מקומות בסביבה</string>
+  <string name="location_permission_rationale_explore">נדרשת הרשאה להצגת רשימת התמונות בסביבתך</string>
   <string name="nearby_directions">כיוונים</string>
   <string name="nearby_wikidata">ויקינתונים</string>
   <string name="nearby_wikipedia">ויקיפדיה</string>
@@ -375,7 +376,7 @@
   <string name="quiz_screenshot_question">האם בסדר להעלות את צילום המסך הזה?</string>
   <string name="share_app_title">שיתוף היישום</string>
   <string name="rotate">סיבוב</string>
-  <string name="error_fetching_nearby_places">שגיאה באחזור המקומות בסביבתך.</string>
+  <string name="error_fetching_nearby_places">שגיאה בטעינת המקומות בסביבתך</string>
   <string name="no_pictures_in_this_area">אין תמונות באזור הזה</string>
   <string name="no_nearby_places_around">אין מקומות בסביבה</string>
   <string name="error_fetching_nearby_monuments">שגיאה באחזור אתרים בסביבתך.</string>
@@ -583,7 +584,7 @@
   <string name="coordinates_edit_helper_edit_message_else">לא היה אפשר להוסיף נקודות ציון.</string>
   <string name="description_edit_helper_edit_message_else">לא היה אפשר להוסיף תיאורים.</string>
   <string name="caption_edit_helper_edit_message_else">לא היה אפשר להוסיף כיתוב.</string>
-  <string name="coordinates_picking_unsuccessful">לא ניתן לעדכן נקודות ציון.</string>
+  <string name="coordinates_picking_unsuccessful">לא ניתן לעדכן את נקודות הציון של התמונה</string>
   <string name="descriptions_picking_unsuccessful">אי־אפשר לקבל תיאורים.</string>
   <string name="description_activity_title">עריכת תיאורים וכיתובים</string>
   <string name="share_image_via">שיתוף תמונה דרך</string>
@@ -617,8 +618,10 @@
   <string name="cannot_open_location_settings">פתיחת הגדרות המיקום נכשלה. נא להפעיל את איתור המיקום ידנית</string>
   <string name="recommend_high_accuracy_mode">לתוצאות המיטביות יש להשתמש במצב דיוק גבוה.</string>
   <string name="ask_to_turn_location_on">להפעיל מיקום?</string>
+  <string name="ask_to_turn_location_on_text">נא להפעיל את שירותי המיקום כדי שהיישום יוכל להציג את מיקומך הנוכחי</string>
   <string name="nearby_needs_location">פעולת \"בסביבה\" זקוקה לשירותי מיקומי פועלים כדי לעבוד כמו שצריך</string>
-  <string name="upload_map_location_access">יש להעניק גישה למיקום הנוכחי שלך כדי להגדיר את המקום אוטומטית.</string>
+  <string name="explore_map_needs_location">חקירת המפה דורשת הרשאות מיקום כדי להציג תמונות בסביבתך</string>
+  <string name="upload_map_location_access">יש להעניק הרשאת מיקום כדי להגדיר את המיקום אוטומטית.</string>
   <string name="use_location_from_similar_image">האם צילמת את שתי התמונות באותו המקום? האם ברצונך להשתמש בקו הרוחב וקו האורך של התמונה משמאל?</string>
   <string name="load_more">לטעון עוד</string>
   <string name="nearby_no_results">לא נמצאו מקומות, נא לנסות לשנות את החיפוש.</string>

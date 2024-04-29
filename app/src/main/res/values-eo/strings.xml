@@ -351,7 +351,7 @@
   <string name="quiz_screenshot_question">Ĉu ĉi tiu ekrankopio estas alŝutebla?</string>
   <string name="share_app_title">Diskonigi Aplikaĵon</string>
   <string name="rotate">Turni</string>
-  <string name="error_fetching_nearby_places">Eraro dum akirado de apudaj lokoj.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Eraro dum akirado de apudaj lokoj.</string>
   <string name="no_nearby_places_around">Neniuj apudaj lokoj ĉirkaŭ</string>
   <string name="error_fetching_nearby_monuments">Eraro dum akirado de apudaj monumentoj.</string>
   <string name="no_recent_searches">Neniu ĵusa serĉo</string>
@@ -554,7 +554,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Ne eblis aldoni koordinatojn.</string>
   <string name="description_edit_helper_edit_message_else">Ne eblis aldoni priskribojn.</string>
   <string name="caption_edit_helper_edit_message_else">Ne eblis aldoni bildotekston.</string>
-  <string name="coordinates_picking_unsuccessful">Ne eblas akiri koordinatojn.</string>
+  <string name="coordinates_picking_unsuccessful" fuzzy="true">Ne eblas akiri koordinatojn.</string>
   <string name="descriptions_picking_unsuccessful">Ne eblas ricevi priskribojn.</string>
   <string name="description_activity_title">Redakti priskribojn kaj bildotekstojn</string>
   <string name="share_image_via">Disdonu bildon per</string>
@@ -589,7 +589,7 @@
   <string name="recommend_high_accuracy_mode">Por plej bonaj rezultoj, elektu la modon de Alta Precizeco.</string>
   <string name="ask_to_turn_location_on">Ĉu aktivigi lokon?</string>
   <string name="nearby_needs_location">Apude bezonas loko aktivigita por ke funkcii bone</string>
-  <string name="upload_map_location_access">Vi devas doni aliron al via nuna loko por agordi lokon aŭtomate.</string>
+  <string name="upload_map_location_access" fuzzy="true">Vi devas doni aliron al via nuna loko por agordi lokon aŭtomate.</string>
   <string name="use_location_from_similar_image">Ĉu vi filmis ĉi tiujn du bildojn en la sama loko? Ĉu vi volas uzi la latitudon/longitudon de la bildo dekstre?</string>
   <string name="load_more">Ŝargi pli</string>
   <string name="nearby_no_results">Neniuj lokoj trovitaj, provu ŝanĝi viajn serĉkriteriojn.</string>

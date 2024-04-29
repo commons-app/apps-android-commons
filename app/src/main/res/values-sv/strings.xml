@@ -351,7 +351,7 @@
   <string name="quiz_screenshot_question">Är det okej att ladda upp denna skärmdump?</string>
   <string name="share_app_title">Dela app</string>
   <string name="rotate">Rotera</string>
-  <string name="error_fetching_nearby_places">Fel uppstod när platser i närheten hämtades.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Fel uppstod när platser i närheten hämtades.</string>
   <string name="no_pictures_in_this_area">Inga bilder i detta område</string>
   <string name="no_nearby_places_around">Inga platser i närheten</string>
   <string name="error_fetching_nearby_monuments">Fel uppstod när monument i närheten hämtades.</string>
@@ -555,7 +555,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Kunde inte lägga till koordinater.</string>
   <string name="description_edit_helper_edit_message_else">Kunde inte lägga till beskrivningar.</string>
   <string name="caption_edit_helper_edit_message_else">Kunde inte lägga till bildtext.</string>
-  <string name="coordinates_picking_unsuccessful">Kunde inte hämta koordinater.</string>
+  <string name="coordinates_picking_unsuccessful" fuzzy="true">Kunde inte hämta koordinater.</string>
   <string name="descriptions_picking_unsuccessful">Kunde inte hämta beskrivningar.</string>
   <string name="description_activity_title">Redigera beskrivningar och bildtexter</string>
   <string name="share_image_via">Dela bild via</string>
@@ -590,7 +590,7 @@
   <string name="recommend_high_accuracy_mode">För bästa resultat väljer du alternativet \"Öka precisionen\".</string>
   <string name="ask_to_turn_location_on">Aktivera plats?</string>
   <string name="nearby_needs_location">\"I närheten\" behöver ha plats aktiverat för att fungera ordentligt</string>
-  <string name="upload_map_location_access">Du måste ge åtkomst till din nuvarande plats för att ange platsen automatiskt.</string>
+  <string name="upload_map_location_access" fuzzy="true">Du måste ge åtkomst till din nuvarande plats för att ange platsen automatiskt.</string>
   <string name="use_location_from_similar_image">Tog du dessa två bilder på samma plats? Vill du använda den högra bildens latitud/longitud?</string>
   <string name="load_more">Läs in fler</string>
   <string name="nearby_no_results">Inga platser hittades, försök ändra dina sökkriterier.</string>

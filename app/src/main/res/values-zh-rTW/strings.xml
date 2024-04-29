@@ -299,6 +299,7 @@
   <string name="nearby_location_not_available">位置無效，應用程式在此地附近可能無法正常運作。</string>
   <string name="upload_location_access_denied">位置存取遭拒。請手動設定您的位置才能使用此功能。</string>
   <string name="location_permission_rationale_nearby">需權限來顯示附近地點清單</string>
+  <string name="location_permission_rationale_explore">需要權限來顯示附近圖片清單</string>
   <string name="nearby_directions">方向</string>
   <string name="nearby_wikidata">維基數據</string>
   <string name="nearby_wikipedia">維基百科</string>
@@ -366,7 +367,7 @@
   <string name="quiz_screenshot_question">這張截圖可以上傳嗎？</string>
   <string name="share_app_title">分享應用程式</string>
   <string name="rotate">旋轉</string>
-  <string name="error_fetching_nearby_places">獲取附近地點時出錯。</string>
+  <string name="error_fetching_nearby_places">無法載入附近地點</string>
   <string name="no_pictures_in_this_area">此區域沒有圖片</string>
   <string name="no_nearby_places_around">找不到附近地點</string>
   <string name="error_fetching_nearby_monuments">索取附近古蹟景點時出錯。</string>
@@ -570,7 +571,7 @@
   <string name="coordinates_edit_helper_edit_message_else">無法添加座標。</string>
   <string name="description_edit_helper_edit_message_else">無法添加描述。</string>
   <string name="caption_edit_helper_edit_message_else">無法添加說明。</string>
-  <string name="coordinates_picking_unsuccessful">無法取得座標。</string>
+  <string name="coordinates_picking_unsuccessful">圖片的座標無法更新</string>
   <string name="descriptions_picking_unsuccessful">無法取得描述。</string>
   <string name="description_activity_title">編輯描述與說明</string>
   <string name="share_image_via">分享圖片透過</string>
@@ -604,8 +605,10 @@
   <string name="cannot_open_location_settings">開啟位置設定失敗，請手動打開位置</string>
   <string name="recommend_high_accuracy_mode">為了獲得最佳結果，請選擇高精準度模式。</string>
   <string name="ask_to_turn_location_on">打開位置？</string>
+  <string name="ask_to_turn_location_on_text">請開啟位置服務讓應用程式顯示您的目前位置</string>
   <string name="nearby_needs_location">附近功能需要啟用位置才能運作正常</string>
-  <string name="upload_map_location_access">您需要授予對目前位置的存取權限才能自動設定位置。</string>
+  <string name="explore_map_needs_location">探索地圖需要位置權限才能顯示附近的圖片</string>
+  <string name="upload_map_location_access">您需要授予位置權限才能自動設定位置。</string>
   <string name="use_location_from_similar_image">您是否在同一地點拍攝了這兩張圖片？您要使用圖片右側的緯度/經度嗎？</string>
   <string name="load_more">載入更多</string>
   <string name="nearby_no_results">查無地點，請嘗試更改您的搜尋條件。</string>

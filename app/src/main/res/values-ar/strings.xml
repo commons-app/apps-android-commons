@@ -395,7 +395,7 @@
   <string name="quiz_screenshot_question">هل هذه الصورة موافقة للرفع؟</string>
   <string name="share_app_title">شارك التطبيق</string>
   <string name="rotate">تدوير</string>
-  <string name="error_fetching_nearby_places">خطأ في جلب الأماكن المجاورة.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">خطأ في جلب الأماكن المجاورة.</string>
   <string name="no_pictures_in_this_area">لا توجد صور في هذه المنطقة</string>
   <string name="no_nearby_places_around">لا توجد أماكن قريبة بالجوار</string>
   <string name="error_fetching_nearby_monuments">خطأ في جلب المعالم القريبة.</string>
@@ -604,7 +604,7 @@
   <string name="coordinates_edit_helper_edit_message_else">لا يمكن إضافة الإحداثيات.</string>
   <string name="description_edit_helper_edit_message_else">تعذر إضافة الأوصاف.</string>
   <string name="caption_edit_helper_edit_message_else">تعذرت إضافة الشرح.</string>
-  <string name="coordinates_picking_unsuccessful">غير قادر على الحصول على الإحداثيات.</string>
+  <string name="coordinates_picking_unsuccessful" fuzzy="true">غير قادر على الحصول على الإحداثيات.</string>
   <string name="descriptions_picking_unsuccessful">تعذر الحصول على الأوصاف.</string>
   <string name="description_activity_title">تحرير الأوصاف والتعليقات</string>
   <string name="share_image_via">مشاركة الصور عبر</string>

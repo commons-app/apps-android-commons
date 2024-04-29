@@ -343,7 +343,7 @@
   <string name="wrong">不正解</string>
   <string name="quiz_screenshot_question">このスクリーンショットをアップロードしてもよいですか？</string>
   <string name="share_app_title">アプリをシェアする</string>
-  <string name="error_fetching_nearby_places">付近の場所を取得しようとしてエラーが発生しました。</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">付近の場所を取得しようとしてエラーが発生しました。</string>
   <string name="no_recent_searches">最近の検索はまだありません</string>
   <string name="delete_recent_searches_dialog">本当に検索履歴を消去しますか?</string>
   <string name="cancel_upload_dialog">このアップロードを本当にキャンセルしますか？</string>

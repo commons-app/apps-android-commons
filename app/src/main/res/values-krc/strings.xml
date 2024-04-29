@@ -6,13 +6,13 @@
 -->
 <resources>
   <string name="app_name" fuzzy="true">Викигёзен</string>
-  <string name="menu_settings">Джарашдырыула</string>
+  <string name="menu_settings">Джарашдырыўла</string>
   <string name="username">Хайырланыучуну аты</string>
   <string name="password">Пароль</string>
   <string name="login">Кир</string>
   <string name="logging_in_title">Системагъа кириу</string>
   <string name="logging_in_message">Бираз сакълагъыз…</string>
-  <string name="login_success" fuzzy="true">Авторизация тыйыншлы ётдю</string>
+  <string name="login_success">Кириу джетишимлиди!</string>
   <string name="login_failed" fuzzy="true">Системагъа кириуде халат</string>
   <string name="authentication_failed" fuzzy="true">Аутентификацияда халат!</string>
   <string name="uploading_started">Джюклеу башланды!</string>
@@ -36,13 +36,13 @@
   <string name="provider_modifications">Тюрлениуле</string>
   <string name="menu_upload_single">Джюкле</string>
   <string name="categories_search_text_hint">Категорияланы изле</string>
-  <string name="menu_save_categories">Сакъла</string>
+  <string name="menu_save_categories">Сакъландыр</string>
   <string name="categories_activity_title">Категорияла</string>
-  <string name="title_activity_settings">Джарашдырыула</string>
+  <string name="title_activity_settings">Джарашдырыўла</string>
   <string name="menu_about">Юсюнден</string>
   <string name="title_activity_about">Юсюнден</string>
   <string name="menu_feedback">Оюмунгу билдир (эл. почта бла)</string>
-  <string name="menu_cancel_upload">Ызына алыу</string>
+  <string name="menu_cancel_upload">Ызына ал</string>
   <string name="menu_download">Эндир</string>
   <string name="preference_license" fuzzy="true">Лицензия</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>

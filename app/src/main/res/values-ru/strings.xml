@@ -332,6 +332,7 @@
   <string name="nearby_location_not_available">Функция «Поблизости» может работать некорректно, определение местоположения недоступно.</string>
   <string name="upload_location_access_denied">Доступ к местоположению запрещён. Чтобы использовать эту функцию, укажите своё местоположение вручную.</string>
   <string name="location_permission_rationale_nearby">Необходимо разрешение для отображения списка мест поблизости</string>
+  <string name="location_permission_rationale_explore">Необходимо разрешение для отображения списка мест поблизости</string>
   <string name="nearby_directions">Направления</string>
   <string name="nearby_wikidata">Викиданные</string>
   <string name="nearby_wikipedia">Википедия</string>
@@ -641,7 +642,9 @@
   <string name="cannot_open_location_settings">Не удалось открыть настройки местоположения. Пожалуйста, включите местоположение вручную</string>
   <string name="recommend_high_accuracy_mode">Для достижения наилучших результатов выберите режим высокой точности.</string>
   <string name="ask_to_turn_location_on">Включить местоположение?</string>
+  <string name="ask_to_turn_location_on_text">Пожалуйста, включите службы определения местоположения, чтобы приложение показывало ваше текущее местоположение.</string>
   <string name="nearby_needs_location">Рядом необходимо, чтобы местоположение было включено для правильной работы.</string>
+  <string name="explore_map_needs_location">Для просмотра близлежащих изображений карте «Исследование» требуется разрешение на определение местоположения.</string>
   <string name="upload_map_location_access">Вам необходимо предоставить доступ к вашему текущему местоположению, чтобы установить местоположение автоматически.</string>
   <string name="use_location_from_similar_image">Вы снимали эти две фотографии в одном месте? Хотите использовать широту/долготу изображения справа?</string>
   <string name="load_more">Загрузить ещё</string>

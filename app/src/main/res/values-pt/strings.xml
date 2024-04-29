@@ -360,7 +360,7 @@
   <string name="quiz_screenshot_question">Esta captura de ecrã pode ser carregada?</string>
   <string name="share_app_title">Partilhar aplicação</string>
   <string name="rotate">Rodar</string>
-  <string name="error_fetching_nearby_places">Erro ao procurar locais próximos.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Erro ao procurar locais próximos.</string>
   <string name="no_nearby_places_around">Não existem locais próximos</string>
   <string name="error_fetching_nearby_monuments">Erro ao procurar monumentos próximos.</string>
   <string name="no_recent_searches">Não há pesquisas recentes</string>
@@ -563,7 +563,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Não foi possível adicionar coordenadas.</string>
   <string name="description_edit_helper_edit_message_else">Não foi possível adicionar as descrições.</string>
   <string name="caption_edit_helper_edit_message_else">Não foi possível adicionar a legenda.</string>
-  <string name="coordinates_picking_unsuccessful">Não foi possível obter coordenadas.</string>
+  <string name="coordinates_picking_unsuccessful" fuzzy="true">Não foi possível obter coordenadas.</string>
   <string name="descriptions_picking_unsuccessful">Não foi possível obter as descrições.</string>
   <string name="description_activity_title">Editar descrições e legendas</string>
   <string name="share_image_via">Partilhar imagem via</string>
@@ -598,7 +598,7 @@
   <string name="recommend_high_accuracy_mode">Para obter os melhores resultados, escolha o modo Alta Precisão.</string>
   <string name="ask_to_turn_location_on">Ativar a localização?</string>
   <string name="nearby_needs_location">A funcionalidade de proximidade precisa que a localização esteja ativada para funcionar corretamente</string>
-  <string name="upload_map_location_access">Precisa de dar acesso à sua localização atual para gravar automaticamente a localização.</string>
+  <string name="upload_map_location_access" fuzzy="true">Precisa de dar acesso à sua localização atual para gravar automaticamente a localização.</string>
   <string name="use_location_from_similar_image">Tirou estas duas fotos no mesmo lugar? Quer usar a latitude/longitude da fotografia da direita?</string>
   <string name="load_more">Carregar mais</string>
   <string name="nearby_no_results">Não foi encontrado nenhum local; tente alterar os seus critérios de pesquisa.</string>

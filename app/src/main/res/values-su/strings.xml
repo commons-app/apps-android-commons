@@ -322,7 +322,7 @@
   <string name="wrong">Jawaban salah</string>
   <string name="quiz_screenshot_question">Ieu téwakan layar geus OKÉH jang unjalkeuneun?</string>
   <string name="share_app_title">Bagikeun Aplikasi</string>
-  <string name="error_fetching_nearby_places">Éror pas nyomot tempat sabudeureun.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Éror pas nyomot tempat sabudeureun.</string>
   <string name="no_recent_searches">Taya pamaluruhan kiwari</string>
   <string name="delete_recent_searches_dialog">Anjeun yakin rék mupus jujutan pamaluruhan anjeun?</string>
   <string name="delete_search_dialog">Yakin rék miceun ieu pamaluruhan?</string>

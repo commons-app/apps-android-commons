@@ -276,6 +276,7 @@
   <string name="nearby_location_not_available">«A prossimità» a podrìa marcé nen bin, soa posission a l\'é nen disponìbil.</string>
   <string name="upload_location_access_denied">Acess a la localisassion arfudà. Për piasì, ch\'a definissa soa localisassion a man për dovré costa fonsionalità.</string>
   <string name="location_permission_rationale_nearby">A-i é da manca dël përmess pr\'ësmon-e na lista dij pòst davzin</string>
+  <string name="location_permission_rationale_explore">A-i é da manca dël përmess pr\'ësmon-e na lista dle plance pijà lì-davzin</string>
   <string name="nearby_directions">Diression</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -343,7 +344,7 @@
   <string name="quiz_screenshot_question">Costa schermà a va bin da carié?</string>
   <string name="share_app_title">Partagé j\'aplicassion</string>
   <string name="rotate">Deje na gira</string>
-  <string name="error_fetching_nearby_places">Eror durant l\'esplorassion dj\'anviron.</string>
+  <string name="error_fetching_nearby_places">Impossìbil carié j\'anviron.</string>
   <string name="no_pictures_in_this_area">Gnun-e plance an cost\'àrea</string>
   <string name="no_nearby_places_around">Gnun pòst sì-davzin</string>
   <string name="error_fetching_nearby_monuments">Eror d\'arcuperassion dij monument davzin.</string>
@@ -547,7 +548,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Impossìbil gionté lé coordinà.</string>
   <string name="description_edit_helper_edit_message_else">Impossìbil gionté le descrission.</string>
   <string name="caption_edit_helper_edit_message_else">Impossìbil gionté la legenda.</string>
-  <string name="coordinates_picking_unsuccessful">Impossìbil oten-e le coordinà.</string>
+  <string name="coordinates_picking_unsuccessful">Coordinà dla plancia nen agiornà</string>
   <string name="descriptions_picking_unsuccessful">Impossìbil oten-e le descrission.</string>
   <string name="description_activity_title">Modifiché le descrission e le legende.</string>
   <string name="share_image_via">Partagé la plancia via</string>
@@ -581,8 +582,10 @@
   <string name="cannot_open_location_settings">Falì a duverté ij paràmeter ëd localisassion. Për piasì, ch\'a anvisca la localisassion a man</string>
   <string name="recommend_high_accuracy_mode">Për dij mej arzultà, ch\'a serna ël meud Àuta precision.</string>
   <string name="ask_to_turn_location_on">Anvisché la localisassion?</string>
+  <string name="ask_to_turn_location_on_text">Për piasì, ch\'a anvisca ij servissi ëd localisassion për che l\'aplicassion a smon-a soa posission atual</string>
   <string name="nearby_needs_location">Nearby a l\'ha damanca dla localisassion abilità për marcé \'me ch\'as dev</string>
-  <string name="upload_map_location_access">A dev përmëtte l\'acess a soa posission atual për definì an automàtich la localisassion.</string>
+  <string name="explore_map_needs_location">L\'esplorassion dla carta a l\'ha damanca dij përmess ëd localisassion pr\'ësmon-s le plance pijà lì-davzin</string>
+  <string name="upload_map_location_access">A dev dé ij përmess a la localisassion për definì la localisassion an automàtich.</string>
   <string name="use_location_from_similar_image">A la fàit se doe fòto ant l\'istess pòst? A veul dovré la latitùdin e la longitùdin ëd la fòto an sla drita?</string>
   <string name="load_more">Carié \'d pi</string>
   <string name="nearby_no_results">Gnun pòst trovà, ch\'a preuva a modifiché ij sò criteri d\'arserca.</string>
