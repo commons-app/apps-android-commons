@@ -633,6 +633,7 @@
   <string name="cannot_open_location_settings">无法打开位置设置。请手动打开位置</string>
   <string name="recommend_high_accuracy_mode">选择高精确度模式以获得最佳结果。</string>
   <string name="ask_to_turn_location_on">打开位置？</string>
+  <string name="ask_to_turn_location_on_text">请开启定位服务，以便应用显示您当前的位置</string>
   <string name="nearby_needs_location">附近需要启用位置才能正常工作</string>
   <string name="upload_map_location_access">您需要授予位置权限才能自动设置位置。</string>
   <string name="use_location_from_similar_image">您是在同一地点拍摄这两张图片的吗？您想要使用右侧图片的纬度/经度吗？</string>
