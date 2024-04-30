@@ -474,10 +474,10 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
 
                 if (!uploadIsOnPlace) {
                     handleLocation();
-                    uploadMediaDetailFragment.setImageTobeUploaded(uploadableFile, place, currLocation);
+                    uploadMediaDetailFragment.setImageToBeUploaded(uploadableFile, place, currLocation);
                     locationManager.unregisterLocationManager();
                 } else {
-                    uploadMediaDetailFragment.setImageTobeUploaded(uploadableFile, place, currLocation);
+                    uploadMediaDetailFragment.setImageToBeUploaded(uploadableFile, place, currLocation);
                 }
 
                 UploadMediaDetailFragmentCallback uploadMediaDetailFragmentCallback = new UploadMediaDetailFragmentCallback() {
