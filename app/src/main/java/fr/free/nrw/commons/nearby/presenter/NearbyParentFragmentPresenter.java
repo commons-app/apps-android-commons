@@ -92,7 +92,6 @@ public class NearbyParentFragmentPresenter
     public void initializeMapOperations() {
         lockUnlockNearby(false);
         updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
-        this.nearbyParentFragmentView.addSearchThisAreaButtonAction();
         nearbyParentFragmentView.setCheckBoxAction();
     }
 

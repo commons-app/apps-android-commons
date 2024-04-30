@@ -332,7 +332,7 @@
   <string name="quiz_screenshot_question">Ka ica skreno-kopiuro esas \'OK\' por sendar?</string>
   <string name="share_app_title">Partigez \'\'app\'\'</string>
   <string name="rotate">Rotacar</string>
-  <string name="error_fetching_nearby_places">Eroro adportanta informi pri loki proxima.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Eroro adportanta informi pri loki proxima.</string>
   <string name="no_pictures_in_this_area">Nula pikturi en ca areo</string>
   <string name="no_nearby_places_around">Nula loki proxima trovesis</string>
   <string name="error_fetching_nearby_monuments">Eroro adportanta informi pri monumenti proxima.</string>

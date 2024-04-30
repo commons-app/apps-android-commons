@@ -334,7 +334,7 @@
   <string name="quiz_screenshot_question">এই স্ক্রিনশটটি কি আপলোড করা ঠিক হয়েছে?</string>
   <string name="share_app_title">অ্যাপ শেয়ার করুন</string>
   <string name="rotate">ঘোরান</string>
-  <string name="error_fetching_nearby_places">কাছাকাছি স্থানগুলি আনতে ত্রুটি।</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">কাছাকাছি স্থানগুলি আনতে ত্রুটি।</string>
   <string name="no_nearby_places_around">আশেপাশে কোনো এলাকা পাওয়া যায়নি</string>
   <string name="error_fetching_nearby_monuments">আশেপাশের স্মৃতিস্তম্ভগুলি আনায়নে ত্রুটি৷</string>
   <string name="no_recent_searches">কোনও সাম্প্রতিক অনুসন্ধান নেই</string>

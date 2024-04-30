@@ -335,7 +335,7 @@
   <string name="wrong">Rangt svar</string>
   <string name="quiz_screenshot_question">Er í lagi að senda inn þessa skjámynd?</string>
   <string name="share_app_title">Deila forriti</string>
-  <string name="error_fetching_nearby_places">Villa við að sækja nálæga staði.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Villa við að sækja nálæga staði.</string>
   <string name="no_nearby_places_around">Engir staðir fundust í nágrenninu</string>
   <string name="error_fetching_nearby_monuments">Villa við að sækja nálæg minnismerki.</string>
   <string name="no_recent_searches">Engar nýlegar leitir</string>
@@ -526,7 +526,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Gat ekki bætt við hnitum.</string>
   <string name="description_edit_helper_edit_message_else">Gat ekki bætt við lýsingum.</string>
   <string name="caption_edit_helper_edit_message_else">Gat ekki bætt við skýringatexta.</string>
-  <string name="coordinates_picking_unsuccessful">Gat ekki náð í hnit.</string>
+  <string name="coordinates_picking_unsuccessful" fuzzy="true">Gat ekki náð í hnit.</string>
   <string name="descriptions_picking_unsuccessful">Gat ekki náð í lýsingar.</string>
   <string name="description_activity_title">Breyta lýsingum og skýringatextum</string>
   <string name="share_image_via">Deila mynd með</string>

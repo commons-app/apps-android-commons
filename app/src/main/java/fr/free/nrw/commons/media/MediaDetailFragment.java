@@ -49,6 +49,7 @@ import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CameraPosition;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.LocationPicker.LocationPicker;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
@@ -57,6 +58,8 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.actions.ThanksClient;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient;
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException;
 import fr.free.nrw.commons.category.CategoryClient;
 import fr.free.nrw.commons.category.CategoryDetailsActivity;
 import fr.free.nrw.commons.category.CategoryEditHelper;
@@ -780,9 +783,23 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
                 firstRevision.getRevisionId()))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe((result) -> {
-                displayThanksToast(context, result);
-            }, Timber::e);
+            .subscribe(result -> {
+                displayThanksToast(getContext(), result);
+            }, throwable -> {
+                if (throwable instanceof InvalidLoginTokenException) {
+                    final String username = sessionManager.getUserName();
+                    final CommonsApplication.BaseLogoutListener logoutListener = new CommonsApplication.BaseLogoutListener(
+                        getActivity(),
+                        requireActivity().getString(R.string.invalid_login_message),
+                        username
+                    );
+
+                    CommonsApplication.getInstance().clearApplicationData(
+                        requireActivity(), logoutListener);
+                } else {
+                    Timber.e(throwable);
+                }
+            });
     }
 
     /**
@@ -1056,13 +1073,28 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
 
         if (requestCode == REQUEST_CODE_EDIT_DESCRIPTION && resultCode == RESULT_OK) {
             final String updatedWikiText = data.getStringExtra(UPDATED_WIKITEXT);
-            compositeDisposable.add(descriptionEditHelper.addDescription(getContext(), media,
-                updatedWikiText)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(s -> {
-                    Timber.d("Descriptions are added.");
-                }));
+
+            try {
+                compositeDisposable.add(descriptionEditHelper.addDescription(getContext(), media,
+                        updatedWikiText)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(s -> {
+                        Timber.d("Descriptions are added.");
+                    }));
+            } catch (Exception e) {
+                if (e.getLocalizedMessage().equals(CsrfTokenClient.ANONYMOUS_TOKEN_MESSAGE)) {
+                    final String username = sessionManager.getUserName();
+                    final CommonsApplication.BaseLogoutListener logoutListener = new CommonsApplication.BaseLogoutListener(
+                        getActivity(),
+                        requireActivity().getString(R.string.invalid_login_message),
+                        username
+                    );
+
+                    CommonsApplication.getInstance().clearApplicationData(
+                        requireActivity(), logoutListener);
+                }
+            }
 
             final ArrayList<UploadMediaDetail> uploadMediaDetails
                 = data.getParcelableArrayListExtra(LIST_OF_DESCRIPTION_AND_CAPTION);
@@ -1070,14 +1102,29 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             LinkedHashMap<String, String> updatedCaptions = new LinkedHashMap<>();
             for (UploadMediaDetail mediaDetail:
             uploadMediaDetails) {
-                compositeDisposable.add(descriptionEditHelper.addCaption(getContext(), media,
-                    mediaDetail.getLanguageCode(), mediaDetail.getCaptionText())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(s -> {
-                        updateCaptions(mediaDetail, updatedCaptions);
-                        Timber.d("Caption is added.");
-                    }));
+                try {
+                    compositeDisposable.add(descriptionEditHelper.addCaption(getContext(), media,
+                            mediaDetail.getLanguageCode(), mediaDetail.getCaptionText())
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(s -> {
+                                updateCaptions(mediaDetail, updatedCaptions);
+                                Timber.d("Caption is added.");
+                            }));
+
+                } catch (Exception e) {
+                    if (e.getLocalizedMessage().equals(CsrfTokenClient.ANONYMOUS_TOKEN_MESSAGE)) {
+                        final String username = sessionManager.getUserName();
+                        final CommonsApplication.BaseLogoutListener logoutListener = new CommonsApplication.BaseLogoutListener(
+                            getActivity(),
+                            requireActivity().getString(R.string.invalid_login_message),
+                            username
+                        );
+
+                        CommonsApplication.getInstance().clearApplicationData(
+                            requireActivity(), logoutListener);
+                    }
+                }
             }
             binding.progressBarEdit.setVisibility(GONE);
             binding.descriptionEdit.setVisibility(VISIBLE);

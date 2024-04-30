@@ -290,7 +290,7 @@
   <string name="wrong">Resposta incorrecta</string>
   <string name="quiz_screenshot_question">Esteu d\'acord en carregar la captura de pantalla?</string>
   <string name="share_app_title">Comparteix l\'aplicació</string>
-  <string name="error_fetching_nearby_places">S\'ha produït un error en recuperar els llocs propers.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">S\'ha produït un error en recuperar els llocs propers.</string>
   <string name="no_recent_searches">No hi ha cap cerca recent</string>
   <string name="delete_recent_searches_dialog">Esteu segur que voleu esborrar el vostre historial de cerca?</string>
   <string name="delete_search_dialog">Voleu suprimir aquesta cerca?</string>

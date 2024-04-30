@@ -71,7 +71,6 @@ class NearbyParentFragmentPresenterTest {
         verify(nearbyParentFragmentView).`setProgressBarVisibility`(true)
         assertTrue(null == nearbyParentFragmentView.mapCenter)
         verify(nearbyParentFragmentView).populatePlaces(null)
-        verify(nearbyParentFragmentView).addSearchThisAreaButtonAction()
         verify(nearbyParentFragmentView).setCheckBoxAction()
     }
 
@@ -121,7 +120,7 @@ class NearbyParentFragmentPresenterTest {
     /**
      * Test updateMapAndList method returns with zero interactions when last location is null
      */
-    @Test @Ignore
+    @Test
     fun testUpdateMapAndListWhenLastLocationIsNull() {
         whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
         whenever(nearbyParentFragmentView.getLastLocation()).thenReturn(null)

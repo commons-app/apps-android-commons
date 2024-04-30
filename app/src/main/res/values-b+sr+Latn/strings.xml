@@ -337,7 +337,7 @@
   <string name="wrong">Pogrešan odgovor</string>
   <string name="quiz_screenshot_question">Želite li da otpremite ovaj snimak ekrana?</string>
   <string name="share_app_title">Deli aplikaciju</string>
-  <string name="error_fetching_nearby_places">Greška pri dobavljanju mesta u blizini.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Greška pri dobavljanju mesta u blizini.</string>
   <string name="no_nearby_places_around">Ne postoje najbliža mesta u blizini</string>
   <string name="error_fetching_nearby_monuments">Greška pri dobavljanju spomenika u blizini.</string>
   <string name="no_recent_searches">Nema nedavnih pretraga</string>
@@ -528,7 +528,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Nije moguće dodavanje koordinata.</string>
   <string name="description_edit_helper_edit_message_else">Nije moguće dodavanje opisa.</string>
   <string name="caption_edit_helper_edit_message_else">Nije moguće dodavanje natpisa.</string>
-  <string name="coordinates_picking_unsuccessful">Nije moguće dobiti koordinate.</string>
+  <string name="coordinates_picking_unsuccessful" fuzzy="true">Nije moguće dobiti koordinate.</string>
   <string name="descriptions_picking_unsuccessful">Nije moguće dobiti opise.</string>
   <string name="description_activity_title">Uredi opise i natpise</string>
   <string name="share_image_via">Podeli sliku preko</string>
@@ -559,7 +559,7 @@
   <string name="cannot_open_location_settings">Došlo je do greške prilikom otvaranja podešavanja za lokaciju. Uključite lokaciju ručno</string>
   <string name="recommend_high_accuracy_mode">Za najbolje rezultate, odaberite režim visoke preciznosti.</string>
   <string name="ask_to_turn_location_on">Uključi lokaciju?</string>
-  <string name="upload_map_location_access">Morate da date pristup vašoj trenutnoj lokaciji da bi lokacija bila postavljena automatski.</string>
+  <string name="upload_map_location_access" fuzzy="true">Morate da date pristup vašoj trenutnoj lokaciji da bi lokacija bila postavljena automatski.</string>
   <string name="use_location_from_similar_image">Da li ste snimili ove dve slike na istom mestu? Da li želite da koristite geografsku širinu/dužinu slike sa desne strane?</string>
   <string name="load_more">Učitaj još</string>
   <string name="nearby_no_results">Mesta nisu pronađena, pokušajte da promenite kriterijume za pretragu.</string>

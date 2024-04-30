@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.actions
 
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import io.reactivex.Observable
 import io.reactivex.Single
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
@@ -28,7 +29,11 @@ class PageEditClient(
             pageEditInterface.postEdit(pageTitle, summary, text, csrfTokenClient.getTokenBlocking())
                 .map { editResponse -> editResponse.edit()!!.editSucceeded() }
         } catch (throwable: Throwable) {
-            Observable.just(false)
+            if (throwable is InvalidLoginTokenException) {
+                throw throwable
+            } else {
+                Observable.just(false)
+            }
         }
     }
 
@@ -44,7 +49,11 @@ class PageEditClient(
             pageEditInterface.postAppendEdit(pageTitle, summary, appendText, csrfTokenClient.getTokenBlocking())
                 .map { editResponse -> editResponse.edit()!!.editSucceeded() }
         } catch (throwable: Throwable) {
-            Observable.just(false)
+            if (throwable is InvalidLoginTokenException) {
+                throw throwable
+            } else {
+                Observable.just(false)
+            }
         }
     }
 
@@ -58,11 +67,16 @@ class PageEditClient(
     fun prependEdit(pageTitle: String, prependText: String, summary: String): Observable<Boolean> {
         return try {
             pageEditInterface.postPrependEdit(pageTitle, summary, prependText, csrfTokenClient.getTokenBlocking())
-                .map { editResponse -> editResponse.edit()!!.editSucceeded() }
+                .map { editResponse -> editResponse.edit()?.editSucceeded() ?: false }
         } catch (throwable: Throwable) {
-            Observable.just(false)
+            if (throwable is InvalidLoginTokenException) {
+                throw throwable
+            } else {
+                Observable.just(false)
+            }
         }
     }
+
 
     /**
      * Set new labels to Wikibase server of commons
@@ -79,7 +93,11 @@ class PageEditClient(
                 value, csrfTokenClient.getTokenBlocking()
             ).map { it.success }
         } catch (throwable: Throwable) {
-            Observable.just(0)
+            if (throwable is InvalidLoginTokenException) {
+                throw throwable
+            } else {
+                Observable.just(0)
+            }
         }
     }
 

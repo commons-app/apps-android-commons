@@ -17,8 +17,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionsFragment;
 import fr.free.nrw.commons.databinding.UploadDepictsFragmentBinding;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -62,6 +64,9 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
     private Place nearbyPlace;
 
     private UploadDepictsFragmentBinding binding;
+
+    @Inject
+    SessionManager sessionManager;
 
     @Nullable
     @Override
@@ -309,6 +314,22 @@ public class DepictsFragment extends UploadBaseFragment implements DepictsContra
         final MediaDetailFragment mediaDetailFragment = (MediaDetailFragment) getParentFragment();
         assert mediaDetailFragment != null;
         mediaDetailFragment.onResume();
+    }
+
+    /**
+     * Navigates to the login Activity
+     */
+    @Override
+    public void navigateToLoginScreen() {
+        final String username = sessionManager.getUserName();
+        final CommonsApplication.BaseLogoutListener logoutListener = new CommonsApplication.BaseLogoutListener(
+            getActivity(),
+            requireActivity().getString(R.string.invalid_login_message),
+            username
+        );
+
+        CommonsApplication.getInstance().clearApplicationData(
+            requireActivity(), logoutListener);
     }
 
     /**

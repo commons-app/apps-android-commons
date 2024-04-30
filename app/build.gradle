@@ -191,8 +191,8 @@ android {
     defaultConfig {
         //applicationId 'fr.free.nrw.commons'
 
-        versionCode 1036
-        versionName '4.2.1'
+        versionCode 1039
+        versionName '5.0.1'
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
 
         minSdkVersion 21

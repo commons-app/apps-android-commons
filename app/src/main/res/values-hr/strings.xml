@@ -265,7 +265,7 @@
   <string name="wrong">Pogrešan odgovor</string>
   <string name="quiz_screenshot_question">Želite li postaviti ovu snimku zaslona?</string>
   <string name="share_app_title">Aplikacija za dijeljenje</string>
-  <string name="error_fetching_nearby_places">Pogreška prilikom dohvaćanja mjesta u blizini.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Pogreška prilikom dohvaćanja mjesta u blizini.</string>
   <string name="delete_search_dialog">Želite li izbrisati ovu pretragu?</string>
   <string name="nominate_delete">Predloži za brisanje</string>
   <string name="delete">Izbriši</string>

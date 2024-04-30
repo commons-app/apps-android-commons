@@ -348,7 +348,7 @@
   <string name="quiz_screenshot_question">Apakah tangkapan layar ini OKE untuk diunggah?</string>
   <string name="share_app_title">Bagikan Aplikasi</string>
   <string name="rotate">Putar</string>
-  <string name="error_fetching_nearby_places">Galat saat mengambil tempat terdekat.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Galat saat mengambil tempat terdekat.</string>
   <string name="no_nearby_places_around">Tidak ditemukan tempat yang dekat</string>
   <string name="error_fetching_nearby_monuments">Galat saat mengambil monumen terdekat.</string>
   <string name="no_recent_searches">Tidak ada pencarian terbaru</string>
@@ -539,7 +539,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Tidak bisa menambahkan koordinat.</string>
   <string name="description_edit_helper_edit_message_else">Tidak bisa menambahkan deskripsi.</string>
   <string name="caption_edit_helper_edit_message_else">Tidak bisa menambahkan takarir.</string>
-  <string name="coordinates_picking_unsuccessful">Tidak bisa mendapatkan koordinat.</string>
+  <string name="coordinates_picking_unsuccessful" fuzzy="true">Tidak bisa mendapatkan koordinat.</string>
   <string name="descriptions_picking_unsuccessful">Tidak bisa memperoleh deskripsi.</string>
   <string name="description_activity_title">Sunting deskripsi dan takarir</string>
   <string name="share_image_via">Bagikan gambar melalui</string>
@@ -574,7 +574,7 @@
   <string name="recommend_high_accuracy_mode">Untuk hasil terbaik, pilih mode Akurasi Tinggi.</string>
   <string name="ask_to_turn_location_on">Nyalakan lokasi?</string>
   <string name="nearby_needs_location">Tempat sekitar perlu lokasi yang diaktifkan agar bekerja dengan benar</string>
-  <string name="upload_map_location_access">Anda perlu memberikan akses ke lokasi Anda saat ini untuk mengatur lokasi secara otomatis.</string>
+  <string name="upload_map_location_access" fuzzy="true">Anda perlu memberikan akses ke lokasi Anda saat ini untuk mengatur lokasi secara otomatis.</string>
   <string name="use_location_from_similar_image">Apakah Anda menangkap kedua gambar ini di tempat yang sama? Apakah Anda ingin menggunakan lintang/bujur dari gambar yang di kanan?</string>
   <string name="load_more">Muat Lebih Banyak</string>
   <string name="nearby_no_results">Tempat tidak ditemukan, coba ubah kriteria pencarian Anda.</string>

@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.description
 
+
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
@@ -8,8 +9,11 @@ import android.speech.RecognizerIntent
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.auth.SessionManager
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.databinding.ActivityDescriptionEditBinding
 import fr.free.nrw.commons.description.EditDescriptionConstants.LIST_OF_DESCRIPTION_AND_CAPTION
 import fr.free.nrw.commons.description.EditDescriptionConstants.WIKITEXT
@@ -24,6 +28,7 @@ import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
+
 
 /**
  * Activity for populating and editing existing description and caption
@@ -70,6 +75,9 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
     private var descriptionAndCaptions: ArrayList<UploadMediaDetail>? = null
 
     @Inject lateinit var descriptionEditHelper: DescriptionEditHelper
+
+    @Inject lateinit var sessionManager: SessionManager
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -196,32 +204,64 @@ class DescriptionEditActivity : BaseActivity(), UploadMediaDetailAdapter.EventLi
      * @param uploadMediaDetails descriptions and captions
      */
     private fun editDescription(media : Media, updatedWikiText : String, uploadMediaDetails : ArrayList<UploadMediaDetail>){
-        descriptionEditHelper?.addDescription(
-            applicationContext, media,
-            updatedWikiText
-        )
-            ?.subscribeOn(Schedulers.io())
-            ?.observeOn(AndroidSchedulers.mainThread())
-            ?.subscribe(Consumer<Boolean> { s: Boolean? -> Timber.d("Descriptions are added.") })?.let {
-                compositeDisposable.add(
-                    it
+
+        try {
+            descriptionEditHelper?.addDescription(
+                applicationContext, media,
+                updatedWikiText
             )
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.subscribe(Consumer<Boolean> { s: Boolean? -> Timber.d("Descriptions are added.") })?.let {
+                    compositeDisposable.add(
+                        it
+                    )
+                }
+        } catch (e : InvalidLoginTokenException) {
+            val username: String? = sessionManager?.userName
+            val logoutListener = CommonsApplication.BaseLogoutListener(
+                this,
+                getString(R.string.invalid_login_message),
+                username
+            )
+
+            val commonsApplication = CommonsApplication.getInstance()
+            if (commonsApplication != null ){
+                commonsApplication.clearApplicationData(this,logoutListener)
             }
+        }
+
 
         val updatedCaptions = LinkedHashMap<String, String>()
         for (mediaDetail in uploadMediaDetails) {
-            compositeDisposable.add(
-                descriptionEditHelper!!.addCaption(
-                    applicationContext, media,
-                    mediaDetail.languageCode, mediaDetail.captionText
+            try {
+                compositeDisposable.add(
+                    descriptionEditHelper!!.addCaption(
+                        applicationContext, media,
+                        mediaDetail.languageCode, mediaDetail.captionText
+                    )
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe { s: Boolean? ->
+                            updatedCaptions[mediaDetail.languageCode!!] = mediaDetail.captionText
+                            media.captions = updatedCaptions
+                            Timber.d("Caption is added.")
+                        })
+            }
+            catch (e : InvalidLoginTokenException) {
+                val username = sessionManager.userName
+                val logoutListener = CommonsApplication.BaseLogoutListener(
+                    this,
+                    getString(R.string.invalid_login_message),
+                    username
                 )
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe { s: Boolean? ->
-                        updatedCaptions[mediaDetail.languageCode!!] = mediaDetail.captionText
-                        media.captions = updatedCaptions
-                        Timber.d("Caption is added.")
-                    })
+
+                val commonsApplication = CommonsApplication.getInstance()
+                if (commonsApplication != null ){
+                    commonsApplication.clearApplicationData(this,logoutListener)
+                }
+            }
+
         }
     }
 

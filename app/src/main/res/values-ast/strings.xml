@@ -338,7 +338,7 @@
   <string name="wrong">Respuesta incorreuta</string>
   <string name="quiz_screenshot_question">¿Puede xubise esta imaxe de pantalla?</string>
   <string name="share_app_title">Compartir app</string>
-  <string name="error_fetching_nearby_places">Error al llograr los llugares cercanos.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Error al llograr los llugares cercanos.</string>
   <string name="no_nearby_places_around">Nun hay llugares cercanos alredor</string>
   <string name="error_fetching_nearby_monuments">Error al alcontrar monumentos ciercanos.</string>
   <string name="no_recent_searches">Nun hai guetes de recién</string>

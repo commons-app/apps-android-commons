@@ -13,6 +13,7 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.actions.PageEditClient;
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException;
 import fr.free.nrw.commons.notification.NotificationHelper;
 import fr.free.nrw.commons.review.ReviewController;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
@@ -66,7 +67,13 @@ public class DeleteHelper {
 
         return delete(media, reason)
                 .flatMapSingle(result -> Single.just(showDeletionNotification(context, media, result)))
-                .firstOrError();
+                .firstOrError()
+                .onErrorResumeNext(throwable -> {
+                    if (throwable instanceof InvalidLoginTokenException) {
+                        return Single.error(throwable);
+                    }
+                    return Single.error(throwable);
+                });
     }
 
     /**
@@ -104,22 +111,30 @@ public class DeleteHelper {
         }
 
         return pageEditClient.prependEdit(media.getFilename(), fileDeleteString + "\n", summary)
-                .flatMap(result -> {
-                    if (result) {
-                        return pageEditClient.edit("Commons:Deletion_requests/" + media.getFilename(), subpageString + "\n", summary);
-                    }
-                    throw new RuntimeException("Failed to nominate for deletion");
-                }).flatMap(result -> {
-                    if (result) {
-                        return pageEditClient.appendEdit("Commons:Deletion_requests/" + date, logPageString + "\n", summary);
-                    }
-                    throw new RuntimeException("Failed to nominate for deletion");
-                }).flatMap(result -> {
-                    if (result) {
-                        return pageEditClient.appendEdit("User_Talk:" + creator, userPageString + "\n", summary);
-                    }
-                    throw new RuntimeException("Failed to nominate for deletion");
-                });
+            .onErrorResumeNext(throwable -> {
+                if (throwable instanceof InvalidLoginTokenException) {
+                    return Observable.error(throwable);
+                }
+                return Observable.error(throwable);
+            })
+            .flatMap(result -> {
+                if (result) {
+                    return pageEditClient.edit("Commons:Deletion_requests/" + media.getFilename(), subpageString + "\n", summary);
+                }
+                return Observable.error(new RuntimeException("Failed to nominate for deletion"));
+            })
+            .flatMap(result -> {
+                if (result) {
+                    return pageEditClient.appendEdit("Commons:Deletion_requests/" + date, logPageString + "\n", summary);
+                }
+                return Observable.error(new RuntimeException("Failed to nominate for deletion"));
+            })
+            .flatMap(result -> {
+                if (result) {
+                    return pageEditClient.appendEdit("User_Talk:" + creator, userPageString + "\n", summary);
+                }
+                return Observable.error(new RuntimeException("Failed to nominate for deletion"));
+            });
     }
 
     private boolean showDeletionNotification(Context context, Media media, boolean result) {
@@ -226,14 +241,15 @@ public class DeleteHelper {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        reviewCallback.onSuccess();
+                    reviewCallback.onSuccess();
+                }, throwable -> {
+                    if (throwable instanceof InvalidLoginTokenException) {
+                        reviewCallback.onTokenException((InvalidLoginTokenException) throwable);
                     } else {
                         reviewCallback.onFailure();
                     }
                     reviewCallback.enableButtons();
                 });
-
         });
         alert.setNegativeButton(context.getString(R.string.cancel), (dialog, which) -> reviewCallback.onFailure());
         d = alert.create();

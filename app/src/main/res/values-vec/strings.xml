@@ -290,7 +290,7 @@
   <string name="wrong">Risposta xbajada</string>
   <string name="quiz_screenshot_question">Sta schermada ła xé bona par esare cargada?</string>
   <string name="share_app_title">Spartisi aplicasion</string>
-  <string name="error_fetching_nearby_places">Erore co se jera drio ricatar fora i posti cuà rente</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Erore co se jera drio ricatar fora i posti cuà rente</string>
   <string name="no_recent_searches">Nisuna riserca fata ultimamente</string>
   <string name="delete_recent_searches_dialog">Sito seguro de vołer scançełare el to storego de riserca?</string>
   <string name="delete_search_dialog">Vuto scançełare sta riserca?</string>

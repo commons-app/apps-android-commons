@@ -4,12 +4,14 @@ import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.
 import static fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM;
 import static fr.free.nrw.commons.utils.MapUtils.ZOOM_LEVEL;
 
+import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Html;
@@ -21,23 +23,29 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import fr.free.nrw.commons.CameraPosition;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient;
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException;
 import fr.free.nrw.commons.coordinates.CoordinateEditHelper;
 import fr.free.nrw.commons.filepicker.Constants;
+import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationPermissionsHelper;
-import fr.free.nrw.commons.location.LocationPermissionsHelper.Dialog;
 import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.theme.BaseActivity;
@@ -131,6 +139,7 @@ public class LocationPickerActivity extends BaseActivity implements
     @Named("default_preferences")
     public
     JsonKvStore applicationKvStore;
+    BasicKvStore store;
     /**
      * isDarkTheme: for keeping a track of the device theme and modifying the map theme accordingly
      */
@@ -141,6 +150,10 @@ public class LocationPickerActivity extends BaseActivity implements
 
     @Inject
     LocationServiceManager locationManager;
+    LocationPermissionsHelper locationPermissionsHelper;
+
+    @Inject
+    SessionManager sessionManager;
 
     /**
      * Constants
@@ -157,6 +170,7 @@ public class LocationPickerActivity extends BaseActivity implements
 
         isDarkTheme = systemThemeUtils.isDeviceInNightMode();
         moveToCurrentLocation = false;
+        store = new BasicKvStore(this, "LocationPermissions");
 
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         final ActionBar actionBar = getSupportActionBar();
@@ -404,13 +418,29 @@ public class LocationPickerActivity extends BaseActivity implements
         if (media == null) {
             return;
         }
-        compositeDisposable.add(coordinateEditHelper.makeCoordinatesEdit(getApplicationContext(),media,
-                Latitude, Longitude, Accuracy)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(s -> {
-                Timber.d("Coordinates are added.");
-            }));
+
+        try {
+            compositeDisposable.add(
+                coordinateEditHelper.makeCoordinatesEdit(getApplicationContext(), media,
+                        Latitude, Longitude, Accuracy)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(s -> {
+                            Timber.d("Coordinates are added.");
+                        }));
+        } catch (Exception e) {
+            if (e.getLocalizedMessage().equals(CsrfTokenClient.ANONYMOUS_TOKEN_MESSAGE)) {
+                final String username = sessionManager.getUserName();
+                final CommonsApplication.BaseLogoutListener logoutListener = new CommonsApplication.BaseLogoutListener(
+                    this,
+                    getString(R.string.invalid_login_message),
+                    username
+                );
+
+                CommonsApplication.getInstance().clearApplicationData(
+                    this, logoutListener);
+            }
+        }
     }
 
     /**
@@ -460,19 +490,10 @@ public class LocationPickerActivity extends BaseActivity implements
      * Center the map at user's current location
      */
     private void requestLocationPermissions() {
-        LocationPermissionsHelper.Dialog locationAccessDialog = new Dialog(
-            R.string.location_permission_title,
-            R.string.upload_map_location_access
-        );
-
-        LocationPermissionsHelper.Dialog locationOffDialog = new Dialog(
-            R.string.ask_to_turn_location_on,
-            R.string.upload_map_location_access
-        );
-        LocationPermissionsHelper locationPermissionsHelper = new LocationPermissionsHelper(
+        locationPermissionsHelper = new LocationPermissionsHelper(
             this, locationManager, this);
-        locationPermissionsHelper.handleLocationPermissions(locationAccessDialog,
-            locationOffDialog);
+        locationPermissionsHelper.requestForLocationAccess(R.string.location_permission_title,
+            R.string.upload_map_location_access);
     }
 
     @Override
@@ -483,7 +504,7 @@ public class LocationPickerActivity extends BaseActivity implements
             && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             onLocationPermissionGranted();
         } else {
-            onLocationPermissionDenied("");
+            onLocationPermissionDenied(getString(R.string.upload_map_location_access));
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
@@ -502,21 +523,50 @@ public class LocationPickerActivity extends BaseActivity implements
 
     @Override
     public void onLocationPermissionDenied(String toastMessage) {
-        //do nothing
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
+            permission.ACCESS_FINE_LOCATION)) {
+            if (!locationPermissionsHelper.checkLocationPermission(this)) {
+                if (store.getBoolean("isPermissionDenied", false)) {
+                    // means user has denied location permission twice or checked the "Don't show again"
+                    locationPermissionsHelper.showAppSettingsDialog(this,
+                        R.string.upload_map_location_access);
+                } else {
+                    Toast.makeText(getBaseContext(), toastMessage, Toast.LENGTH_LONG).show();
+                }
+                store.putBoolean("isPermissionDenied", true);
+            }
+        } else {
+            Toast.makeText(getBaseContext(), toastMessage, Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
     public void onLocationPermissionGranted() {
+        if (moveToCurrentLocation || !(activity.equals("MediaActivity"))) {
+            if (locationPermissionsHelper.isLocationAccessToAppsTurnedOn()) {
+                locationManager.requestLocationUpdatesFromProvider(
+                    LocationManager.NETWORK_PROVIDER);
+                locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
+                getLocation();
+            } else {
+                getLocation();
+                locationPermissionsHelper.showLocationOffDialog(this,
+                    R.string.ask_to_turn_location_on_text);
+            }
+        }
+    }
+
+    /**
+     * Gets new location if locations services are on, else gets last location
+     */
+    private void getLocation() {
         fr.free.nrw.commons.location.LatLng currLocation = locationManager.getLastLocation();
         if (currLocation != null) {
             GeoPoint currLocationGeopoint = new GeoPoint(currLocation.getLatitude(),
                 currLocation.getLongitude());
             addLocationMarker(currLocationGeopoint);
-            if (moveToCurrentLocation) {
-                mapView.getController().setCenter(currLocationGeopoint);
-                mapView.getController().animateTo(currLocationGeopoint);
-                moveToCurrentLocation = false;
-            }
+            mapView.getController().setCenter(currLocationGeopoint);
+            mapView.getController().animateTo(currLocationGeopoint);
             markerImage.setTranslationY(0);
         }
     }
