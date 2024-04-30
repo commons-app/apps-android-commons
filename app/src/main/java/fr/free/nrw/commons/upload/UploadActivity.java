@@ -100,7 +100,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private Place place;
     private LatLng prevLocation;
     private LatLng currLocation;
-    public static boolean uploadIsOnPlace = false;
+    private static boolean uploadIsOnPlace = false;
     private boolean isInAppCameraUpload;
     private List<UploadableFile> uploadableFiles = Collections.emptyList();
     private int currentSelectedPosition = 0;
@@ -437,6 +437,15 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
         if (requestCode == CommonsApplication.OPEN_APPLICATION_DETAIL_SETTINGS) {
             //TODO: Confirm if handling manual permission enabled is required
         }
+    }
+
+    /**
+     * Sets the flag indicating whether the upload is of a specific place.
+     *
+     * @param uploadOnPlace a boolean value indicating whether the upload is of place.
+     */
+    public static void setUploadOnPlace(boolean uploadOnPlace) {
+        uploadIsOnPlace = uploadOnPlace;
     }
 
     private void receiveSharedItems() {
