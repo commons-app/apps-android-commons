@@ -100,7 +100,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     private Place place;
     private LatLng prevLocation;
     private LatLng currLocation;
-    private static boolean uploadIsOnPlace = false;
+    private static boolean uploadIsOfAPlace = false;
     private boolean isInAppCameraUpload;
     private List<UploadableFile> uploadableFiles = Collections.emptyList();
     private int currentSelectedPosition = 0;
@@ -442,10 +442,10 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
     /**
      * Sets the flag indicating whether the upload is of a specific place.
      *
-     * @param uploadOnPlace a boolean value indicating whether the upload is of place.
+     * @param uploadOfAPlace a boolean value indicating whether the upload is of place.
      */
-    public static void setUploadOnPlace(boolean uploadOnPlace) {
-        uploadIsOnPlace = uploadOnPlace;
+    public static void setUploadIsOfAPlace(boolean uploadOfAPlace) {
+        uploadIsOfAPlace = uploadOfAPlace;
     }
 
     private void receiveSharedItems() {
@@ -481,7 +481,7 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             for (UploadableFile uploadableFile : uploadableFiles) {
                 UploadMediaDetailFragment uploadMediaDetailFragment = new UploadMediaDetailFragment();
 
-                if (!uploadIsOnPlace) {
+                if (!uploadIsOfAPlace) {
                     handleLocation();
                     uploadMediaDetailFragment.setImageToBeUploaded(uploadableFile, place, currLocation);
                     locationManager.unregisterLocationManager();

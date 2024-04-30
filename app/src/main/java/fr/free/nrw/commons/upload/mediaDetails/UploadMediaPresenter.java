@@ -349,7 +349,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
       // Now that all UploadItems and their associated UploadMediaDetail objects have been updated,
       // update the view with the modified media details of the first upload item
       view.updateMediaDetails(uploads.get(0).getUploadMediaDetails());
-      UploadActivity.setUploadOnPlace(true);
+      UploadActivity.setUploadIsOfAPlace(true);
   }
 
 
