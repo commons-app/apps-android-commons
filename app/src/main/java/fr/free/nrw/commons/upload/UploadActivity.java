@@ -20,8 +20,11 @@ import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -124,10 +127,8 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
      * when necessary. Initially, it is set to `true`, indicating that the permissions dialog
      * should be displayed if permissions are missing and it is first time calling
      * `checkStoragePermissions` method.
-     *
      * This variable is used in the `checkStoragePermissions` method to determine whether to
      * show a permissions dialog to the user if the required permissions are not granted.
-     *
      * If `showPermissionsDialog` is set to `true` and the necessary permissions are missing,
      * a permissions dialog will be displayed to request the required permissions. If set
      * to `false`, the dialog won't be shown.
@@ -462,9 +463,14 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
             handleNullMedia();
         } else {
             //Show thumbnails
-            if (uploadableFiles.size()
-                > 1) {//If there is only file, no need to show the image thumbnails
-                showAlertDialogForCategories();
+            if (uploadableFiles.size() > 1){
+                if(!defaultKvStore.getBoolean("hasAlreadyLaunchedCategoriesDialog")){//If there is only file, no need to show the image thumbnails
+                    showAlertDialogForCategories();
+                }
+                if (uploadableFiles.size() > 3 &&
+                    !defaultKvStore.getBoolean("hasAlreadyLaunchedBigMultiupload")){
+                    showAlertForBattery();
+                }
                 thumbnailsAdapter.setUploadableFiles(uploadableFiles);
             } else {
                 binding.llContainerTopCard.setVisibility(View.GONE);
@@ -888,20 +894,31 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
      * This method takes no arguments and does not return any value.
      * It shows the AlertDialog and continues the flow of uploads.
      */
-    private void showAlertDialogForCategories(){
+    private void showAlertDialogForCategories() {
         UploadMediaPresenter.isCategoriesDialogShowing = true;
-        DialogUtil.showAlertDialog(
-            this,
-            getString(R.string.multiple_files_depiction_header),
-            getString(R.string.multiple_files_depiction),
-            "OK","",
-            () -> {
-                showAlertForBattery();
+        // Inflate the custom layout
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.activity_upload_categories_dialog, null);
+        CheckBox checkBox = view.findViewById(R.id.categories_checkbox);
+        // Create the alert dialog
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+            .setView(view)
+            .setTitle(getString(R.string.multiple_files_depiction_header))
+            .setMessage(getString(R.string.multiple_files_depiction))
+            .setPositiveButton("OK", (dialog, which) -> {
+                if (checkBox.isChecked()) {
+                    // Save the user's choice to not show the dialog again
+                    defaultKvStore.putBoolean("hasAlreadyLaunchedCategoriesDialog", true);
+                }
                 presenter.checkImageQuality(0);
+
                 UploadMediaPresenter.isCategoriesDialogShowing = false;
-            },
-            () -> {});
-    }
+            })
+            .setNegativeButton("", null)
+            .create();
+        alertDialog.show();
+        }
+
 
     /** Suggest users to turn battery optimisation off when uploading
      * more than a few files. That's because we have noticed that
@@ -912,8 +929,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
      */
     private void showAlertForBattery(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (uploadableFiles.size() > 3
-                && !defaultKvStore.getBoolean("hasAlreadyLaunchedBigMultiupload")) {
                 // When battery-optimisation dialog is shown don't show the image quality dialog
                 UploadMediaPresenter.isBatteryDialogShowing = true;
                 DialogUtil.showAlertDialog(
@@ -928,7 +943,6 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                            directly appeared like a promising idea.
                            However, this simply closed the popup and did not make
                            the settings page appear on a Pixel as well as a Xiaomi device.
-
                            Used the standard intent instead of using this library as
                            it shows a list of all the apps on the device and allows users to
                            turn battery optimisation off.
@@ -938,18 +952,16 @@ public class UploadActivity extends BaseActivity implements UploadContract.View,
                         startActivity(batteryOptimisationSettingsIntent);
                         // calling checkImageQuality after battery dialog is interacted with
                         // so that 2 dialogs do not pop up simultaneously
-                        presenter.checkImageQuality(0);
+
                         UploadMediaPresenter.isBatteryDialogShowing = false;
                     },
                     () -> {
-                        presenter.checkImageQuality(0);
                         UploadMediaPresenter.isBatteryDialogShowing = false;
                     }
                 );
                 defaultKvStore.putBoolean("hasAlreadyLaunchedBigMultiupload", true);
             }
         }
-    }
 
     /**
      * If the permission for Location is turned on and certain
