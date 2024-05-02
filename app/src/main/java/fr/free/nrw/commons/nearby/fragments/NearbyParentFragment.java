@@ -1770,7 +1770,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         ArrayList<OverlayItem> items = new ArrayList<>();
         Drawable icon = ContextCompat.getDrawable(getContext(), getIconFor(place, isBookMarked));
         GeoPoint point = new GeoPoint(place.location.getLatitude(), place.location.getLongitude());
-        OverlayItem item = new OverlayItem(place.name, null, point);
+        OverlayItem item = new OverlayItem(place.name,
+            containsParentheses(place.getLongDescription()) ? getTextBetweenParentheses(
+                place.getLongDescription()) : place.getLongDescription(), point);
         item.setMarker(icon);
         items.add(item);
         ItemizedOverlayWithFocus overlay = new ItemizedOverlayWithFocus(items,
@@ -1813,7 +1815,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             GeoPoint point = new GeoPoint(
                 nearbyBaseMarkers.get(i).getPlace().location.getLatitude(),
                 nearbyBaseMarkers.get(i).getPlace().location.getLongitude());
-            OverlayItem item = new OverlayItem(nearbyBaseMarkers.get(i).getPlace().name, null,
+            OverlayItem item = new OverlayItem(nearbyBaseMarkers.get(i).getPlace().name,
+                containsParentheses(nearbyBaseMarkers.get(i).getPlace().getLongDescription())
+                    ? getTextBetweenParentheses(
+                    nearbyBaseMarkers.get(i).getPlace().getLongDescription())
+                    : nearbyBaseMarkers.get(i).getPlace().getLongDescription(),
                 point);
             item.setMarker(icon);
             items.add(item);
@@ -1842,6 +1848,32 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             }, getContext());
         overlay.setFocusItemsOnTap(true);
         binding.map.getOverlays().add(overlay);
+    }
+
+    /**
+     * Extracts text between the first occurrence of '(' and its corresponding ')' in the input string.
+     *
+     * @param input The input string from which to extract text between parentheses.
+     * @return The text between parentheses if found, or {@code null} if no parentheses are found.
+     */
+    public static String getTextBetweenParentheses(String input) {
+        int startIndex = input.indexOf('(');
+        int endIndex = input.indexOf(')', startIndex);
+        if (startIndex != -1 && endIndex != -1) {
+            return input.substring(startIndex + 1, endIndex);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Checks if the given text contains '(' or ')'.
+     *
+     * @param input The input text to check.
+     * @return {@code true} if '(' or ')' is found, {@code false} otherwise.
+     */
+    public static boolean containsParentheses(String input) {
+        return input.contains("(") || input.contains(")");
     }
 
     private void removeMarker(Place place){
