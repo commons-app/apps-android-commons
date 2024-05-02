@@ -374,8 +374,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                 final boolean response = UploadActivity.nearbyPopupAnswers.get(nearbyPlace);
                 if (response) {
                     if (callback != null) {
-                        presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace,
-                            indexOfFragment);
+                        presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace);
                     }
                 }
             } else {
@@ -395,19 +394,41 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
         final View customLayout = getLayoutInflater().inflate(R.layout.custom_nearby_found, null);
         ImageView nearbyFoundImage = customLayout.findViewById(R.id.nearbyItemImage);
         nearbyFoundImage.setImageURI(uploadItem.getMediaUri());
-        DialogUtil.showAlertDialog(getActivity(),
-            getString(R.string.upload_nearby_place_found_title),
-            String.format(Locale.getDefault(),
-                getString(R.string.upload_nearby_place_found_description),
-                place.getName()),
-            () -> {
-                UploadActivity.nearbyPopupAnswers.put(place, true);
-                presenter.onUserConfirmedUploadIsOfPlace(place, indexOfFragment);
-            },
-            () -> {
-                UploadActivity.nearbyPopupAnswers.put(place, false);
-            },
-            customLayout, true);
+
+        final Activity activity = getActivity();
+
+        if (activity instanceof UploadActivity) {
+            final boolean isMultipleFilesSelected = ((UploadActivity) activity).getIsMultipleFilesSelected();
+
+            // Determine the message based on the selection status
+            String message;
+            if (isMultipleFilesSelected) {
+                // Use plural message if multiple files are selected
+                message = String.format(Locale.getDefault(),
+                    getString(R.string.upload_nearby_place_found_description_plural),
+                    place.getName());
+            } else {
+                // Use singular message if only one file is selected
+                message = String.format(Locale.getDefault(),
+                    getString(R.string.upload_nearby_place_found_description_singular),
+                    place.getName());
+            }
+
+            // Show the AlertDialog with the determined message
+            DialogUtil.showAlertDialog(getActivity(),
+                getString(R.string.upload_nearby_place_found_title),
+                message,
+                () -> {
+                    // Execute when user confirms the upload is of the specified place
+                    UploadActivity.nearbyPopupAnswers.put(place, true);
+                    presenter.onUserConfirmedUploadIsOfPlace(place);
+                },
+                () -> {
+                    // Execute when user cancels the upload of the specified place
+                    UploadActivity.nearbyPopupAnswers.put(place, false);
+                },
+                customLayout, true);
+        }
     }
 
     @Override
@@ -440,8 +461,7 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
             if (UploadActivity.nearbyPopupAnswers.containsKey(nearbyPlace)) {
                 final boolean response = UploadActivity.nearbyPopupAnswers.get(nearbyPlace);
                 if (response) {
-                    presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace,
-                        indexOfFragment);
+                    presenter.onUserConfirmedUploadIsOfPlace(nearbyPlace);
                 }
             } else {
                 showNearbyPlaceFound(nearbyPlace);

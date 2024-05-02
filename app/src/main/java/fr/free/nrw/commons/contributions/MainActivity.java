@@ -142,6 +142,7 @@ public class MainActivity  extends BaseActivity
         } else {
             if (applicationKvStore.getBoolean("firstrun", true)) {
                 applicationKvStore.putBoolean("hasAlreadyLaunchedBigMultiupload", false);
+                applicationKvStore.putBoolean("hasAlreadyLaunchedCategoriesDialog", false);
             }
             if(savedInstanceState == null){
                 //starting a fresh fragment.

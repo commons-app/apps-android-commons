@@ -610,7 +610,8 @@ Upload your first media by tapping on the add button.</string>
   <string name="title_for_parent_classes">PARENT CLASSES</string>
 
   <string name="upload_nearby_place_found_title">Nearby Place Found</string>
-  <string name="upload_nearby_place_found_description">Is this a photo of %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">Are these pictures of %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">Is this a picture of %1$s?</string>
   <string name="title_app_shortcut_bookmark">Bookmarks</string>
   <string name="title_app_shortcut_setting">Settings</string>
   <string name="remove_bookmark">Removed from bookmarks</string>
@@ -815,4 +816,6 @@ Upload your first media by tapping on the add button.</string>
     <item quantity="one">%d image selected</item>
     <item quantity="other">%d images selected</item>
   </plurals>
+  <string name="multiple_files_depiction">Please remember that all images in a multi-upload get the same categories and depictions. If the images do not share depictions and categories, please perform several separate uploads.</string>
+  <string name="multiple_files_depiction_header">Note about multi-uploads</string>
 </resources>

@@ -109,7 +109,7 @@ public interface UploadMediaDetailsContract {
 
         void onEditButtonClicked(int indexInViewFlipper);
 
-        void onUserConfirmedUploadIsOfPlace(Place place, int uploadItemPosition);
+        void onUserConfirmedUploadIsOfPlace(Place place);
     }
 
 }
