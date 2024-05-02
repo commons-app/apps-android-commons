@@ -216,6 +216,7 @@
   <string name="navigation_item_about">Diwar-benn</string>
   <string name="navigation_item_settings">Arventennoù</string>
   <string name="navigation_item_feedback">Evezhiadennoù</string>
+  <string name="navigation_item_feedback_github">Reiñ hoc\'h ali gant GitHub</string>
   <string name="navigation_item_logout">Digevreañ</string>
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Kemennoù</string>
