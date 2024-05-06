@@ -624,7 +624,7 @@
   <string name="title_for_child_classes">تصنيف الأطفال</string>
   <string name="title_for_parent_classes">تصنيف أولياء الأمور</string>
   <string name="upload_nearby_place_found_title">تم العثور على مكان قريب</string>
-  <string name="upload_nearby_place_found_description" fuzzy="true">هل هذه صورة للمكان %1$؟</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">هل هذه صورة للمكان %1$؟</string>
   <string name="title_app_shortcut_bookmark">العلامات</string>
   <string name="title_app_shortcut_setting">الإعدادات</string>
   <string name="remove_bookmark">أزل من العلامات</string>

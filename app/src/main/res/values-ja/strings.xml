@@ -535,7 +535,7 @@
   <string name="title_for_child_classes">子分類</string>
   <string name="title_for_parent_classes">親クラス</string>
   <string name="upload_nearby_place_found_title">付近の場所が見つかりました</string>
-  <string name="upload_nearby_place_found_description">これは%1$sの写真ですか?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">これは%1$sの写真ですか?</string>
   <string name="title_app_shortcut_bookmark">ブックマーク</string>
   <string name="title_app_shortcut_setting">設定</string>
   <string name="remove_bookmark">ブックマークから除去</string>
@@ -622,6 +622,7 @@
   <string name="title_page_bookmarks_items">項目</string>
   <string name="done">完了</string>
   <string name="back">戻る</string>
+  <string name="need_permission">権限が必要です</string>
   <string name="edit_depictions">題材を編集する</string>
   <string name="edit_categories">カテゴリを編集</string>
   <string name="apply">適用</string>

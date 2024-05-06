@@ -180,7 +180,7 @@
   <string name="tutorial_3_subtext_3">Cuplikan layar suatu aplikasi</string>
   <string name="tutorial_4_text">Contoh unggahan:</string>
   <string name="tutorial_4_subtext_1">Judul: Gedung Opera Sydney</string>
-  <string name="tutorial_4_subtext_2">Deskripsi: Gedung Opera Sydney dilihat dari seberang teluk</string>
+  <string name="tutorial_4_subtext_2">Deskripsi: Gedung Opera Sydney yang dilihat dari seberang teluk</string>
   <string name="tutorial_4_subtext_3">Kategori: Opera House Sydney dari arah barat, pemandangan Opera House Sydney</string>
   <string name="welcome_wikipedia_text">Sumbangkan gambar-gambar Anda. Bantu hidupkan artikel Wikipedia!</string>
   <string name="welcome_wikipedia_subtext">Gambar di Wikipedia diambil dari Wikimedia Commons.</string>
@@ -559,7 +559,7 @@
   <string name="title_for_child_classes">KELAS ANAK</string>
   <string name="title_for_parent_classes">KELAS INDUK</string>
   <string name="upload_nearby_place_found_title">Tempat di sekitar ditemukan</string>
-  <string name="upload_nearby_place_found_description">Apakah ini foto %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">Apakah ini gambar %1$s?</string>
   <string name="title_app_shortcut_bookmark">Markah</string>
   <string name="title_app_shortcut_setting">Pengaturan</string>
   <string name="remove_bookmark">\nDihapus dari pembatas</string>

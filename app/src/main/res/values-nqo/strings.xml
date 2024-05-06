@@ -479,7 +479,7 @@
   <string name="title_for_child_classes">ߘߋ߲ ߠߎ߬ ߟߊ߫ ߛߊ߯ߘߊ ߟߎ߫</string>
   <string name="title_for_parent_classes">ߡߏߦߌߓߊ߮ ߟߎ߬ ߟߊ߫ ߛߊ߯ߘߊ ߟߎ߫</string>
   <string name="upload_nearby_place_found_title">ߛߌ߰ߢߐ߲߰ ߦߙߐ ߦߴߊ߬ ߘߐ߫</string>
-  <string name="upload_nearby_place_found_description">ߊ߬ ߝߐ߫ %1$s ߖߌ߬ߦߊ߬ߓߍ ߟߋ߬ ߦߋ߫ ߣߌ߲߬ ߘߌ߫؟</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">ߊ߬ ߝߐ߫ %1$s ߖߌ߬ߦߊ߬ߓߍ ߟߋ߬ ߦߋ߫ ߣߌ߲߬ ߘߌ߫؟</string>
   <string name="title_app_shortcut_bookmark">ߟߊ߬ߡߊ</string>
   <string name="title_app_shortcut_setting">ߟߊ߬ߓߍ߲߬ߢߐ߲߰ߡߦߊ߬ߘߊ</string>
   <string name="remove_bookmark">ߟߊߕߊ߲߬ߞߌ߫ ߞߊ߬ ߓߐ߫ ߟߊ߬ߡߊ ߘߐ߫</string>

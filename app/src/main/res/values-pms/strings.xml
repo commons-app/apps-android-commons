@@ -568,7 +568,8 @@
   <string name="title_for_child_classes">CLASSE MASNÀ</string>
   <string name="title_for_parent_classes">CLASSE CE</string>
   <string name="upload_nearby_place_found_title">Trovà un pòst davzin</string>
-  <string name="upload_nearby_place_found_description">É-lo na fòto ëd %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">Son-lo le fòto ëd %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">É-lo na fòto ëd %1$s?</string>
   <string name="title_app_shortcut_bookmark">Marcapàgine</string>
   <string name="title_app_shortcut_setting">Paràmeter</string>
   <string name="remove_bookmark">Gavà dai marca-pàgina</string>
@@ -764,4 +765,6 @@
     <item quantity="one">%d plancia selessionà</item>
     <item quantity="other">%d plance selessionà</item>
   </plurals>
+  <string name="multiple_files_depiction">Ch\'a ten-a da ment che tute le plance ant un cariament mùltipl a pijo j\'istesse categorìe e descrission. Si le plance a partagio nen descrission e categorìe, për piasì ch\'a fasa tanti cariament separà.</string>
+  <string name="multiple_files_depiction_header">Nòta an sij cariament mùltipl</string>
 </resources>

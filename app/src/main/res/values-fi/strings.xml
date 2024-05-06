@@ -540,7 +540,7 @@
   <string name="you_must_reset_your_passsword">Jokin meni pieleen kirjautumisessa. Sinun on nollattava salasanasi!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="upload_nearby_place_found_title">Lähipaikka löytyi</string>
-  <string name="upload_nearby_place_found_description" fuzzy="true">Onko tämä kuva paikasta %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Onko tämä kuva paikasta %1$s?</string>
   <string name="title_app_shortcut_bookmark">Kirjanmerkit</string>
   <string name="title_app_shortcut_setting">Asetukset</string>
   <string name="remove_bookmark">Poistettu kirjanmerkeistä</string>

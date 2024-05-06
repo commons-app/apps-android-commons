@@ -615,7 +615,8 @@
   <string name="title_for_child_classes">CLASES HIJAS</string>
   <string name="title_for_parent_classes">CLASES PADRES</string>
   <string name="upload_nearby_place_found_title">Lugar cercano encontrado</string>
-  <string name="upload_nearby_place_found_description">¿Esta foto es de %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">¿Son estas imágenes de %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">¿Es esta una imagen de %1$s?</string>
   <string name="title_app_shortcut_bookmark">Marcadores</string>
   <string name="title_app_shortcut_setting">Configuración</string>
   <string name="remove_bookmark">removido de marcadores</string>
@@ -804,4 +805,6 @@
     <item quantity="one">%d imagen seleccionada</item>
     <item quantity="other">%d imagenes seleccionadas</item>
   </plurals>
+  <string name="multiple_files_depiction">Recuerde que todas las imágenes en una carga múltiple tienen la misma categoría y representación. Si las imágenes no comparten representación y categoría, haga varias cargas por separado.</string>
+  <string name="multiple_files_depiction_header">Nota sobre cargas múltiples</string>
 </resources>

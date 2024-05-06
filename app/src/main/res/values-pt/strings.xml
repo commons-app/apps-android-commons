@@ -583,7 +583,7 @@
   <string name="title_for_child_classes">CLASSES DESCENDENTES</string>
   <string name="title_for_parent_classes">CLASSES PROGENITORAS</string>
   <string name="upload_nearby_place_found_title">Foi encontrado um local próximo</string>
-  <string name="upload_nearby_place_found_description">Isto é uma fotografia de %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Isto é uma fotografia de %1$s?</string>
   <string name="title_app_shortcut_bookmark">Marcadores</string>
   <string name="title_app_shortcut_setting">Definições</string>
   <string name="remove_bookmark">Removido dos marcadores</string>

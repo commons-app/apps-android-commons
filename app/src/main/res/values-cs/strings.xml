@@ -488,7 +488,7 @@
   <string name="nearby_search_hint">Most, muzeum, hotel atd.</string>
   <string name="you_must_reset_your_passsword" fuzzy="true">Při přihlášení nastala chyba, musíte si resetovat vaše heslo!</string>
   <string name="upload_nearby_place_found_title">Místo v okolí nalezeno</string>
-  <string name="upload_nearby_place_found_description" fuzzy="true">Je toto fotka místa %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Je toto fotka místa %1$s?</string>
   <string name="title_app_shortcut_setting">Nastavení</string>
   <string name="wallpaper_set_unsuccessfully">Něco se pokazilo. Tapetu se nepodařilo nastavit</string>
   <string name="setting_wallpaper_dialog_title">Nastavit jako tapetu</string>

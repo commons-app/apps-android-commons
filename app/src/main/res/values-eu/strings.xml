@@ -86,7 +86,7 @@
   <string name="contribution_state_starting">Igotzen</string>
   <string name="menu_from_gallery">Galeriatik</string>
   <string name="menu_from_camera">Argazkia egin</string>
-  <string name="menu_nearby">Gertukoak</string>
+  <string name="menu_nearby">Hurbilekoak</string>
   <string name="provider_contributions">Nire igoerak</string>
   <string name="menu_share">Partekatu</string>
   <string name="menu_view_file_page">Ikusi fitxategiaren orria</string>
@@ -202,7 +202,7 @@
   <string name="navigation_drawer_close">Itxi</string>
   <string name="navigation_item_home">Hasiera</string>
   <string name="navigation_item_upload">Igo</string>
-  <string name="navigation_item_nearby">Gertukoak</string>
+  <string name="navigation_item_nearby">Hurbilekoak</string>
   <string name="navigation_item_about">Honi buruz</string>
   <string name="navigation_item_settings">Ezarpenak</string>
   <string name="navigation_item_feedback">Feedback</string>
@@ -316,7 +316,7 @@
   <string name="error_occurred">Errorea gertatu da!</string>
   <string name="notifications_channel_name_all">Commons Jakinarazpena</string>
   <string name="contributions_fragment">Ekarpenak</string>
-  <string name="nearby_fragment">Gertukoak</string>
+  <string name="nearby_fragment">Hurbilekoak</string>
   <string name="notifications">Jakinarazpenak</string>
   <string name="read_notifications">Jakinarazpenak (irakurriak)</string>
   <string name="list_sheet">Zerrenda</string>
@@ -357,5 +357,5 @@
   <string name="leaderboard_column_user">Erabiltzailea</string>
   <string name="leaderboard_column_count">Zenbaketa</string>
   <string name="leaderboard_upload">Igo</string>
-  <string name="leaderboard_nearby">Gertukoak</string>
+  <string name="leaderboard_nearby">Hurbilekoak</string>
 </resources>

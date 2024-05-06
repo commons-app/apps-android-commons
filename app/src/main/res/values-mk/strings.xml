@@ -570,7 +570,8 @@
   <string name="title_for_child_classes">ЗАВИСНИ КЛАСИ</string>
   <string name="title_for_parent_classes">МАТИЧНИ КЛАСИ</string>
   <string name="upload_nearby_place_found_title">Пронајдено околно место</string>
-  <string name="upload_nearby_place_found_description">Дали ова е слика од %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">Дали ова се слики на %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">Дали ова е слика на %1$s?</string>
   <string name="title_app_shortcut_bookmark">Обележани</string>
   <string name="title_app_shortcut_setting">Нагодувања</string>
   <string name="remove_bookmark">Отстрането од обележани</string>
@@ -768,4 +769,6 @@
     <item quantity="one">Избрана е %d слика</item>
     <item quantity="other">Избрани се %d слики</item>
   </plurals>
+  <string name="multiple_files_depiction">Запомнете дека сите слики што ги подигате наеднаш се очекуваат да ја прикажуваат истата работа и ги добиваат истите категории и описи. Ако сликите прикажуваат различни нешта и треба да имаат различни категории, извршете неколку одделни подигања.</string>
+  <string name="multiple_files_depiction_header">Напомена за подигање повеќе слики наеднаш</string>
 </resources>

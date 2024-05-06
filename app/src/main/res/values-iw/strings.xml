@@ -604,7 +604,8 @@
   <string name="title_for_child_classes">מחלקות יורשות</string>
   <string name="title_for_parent_classes">מחלקות מורישות</string>
   <string name="upload_nearby_place_found_title">נמצא בקרבת מקום</string>
-  <string name="upload_nearby_place_found_description">האם זאת תמונה של %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">האם אלו תמונות של %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">האם זאת תמונה של %1$s?</string>
   <string name="title_app_shortcut_bookmark">סימניות</string>
   <string name="title_app_shortcut_setting">הגדרות</string>
   <string name="remove_bookmark">הוסר מסימניות</string>
@@ -679,7 +680,7 @@
   <string name="depicts_tooltip">נא למצוא ולבחור את כל העקרונות שהתמונה הזאת מתארת. נא לשמור על דיוק מרבי. אם התמונה מתארת מגוון פריטים, נא לבחור אותם בגבולות הסביר. לא לבחור תגיות גנריות אם יש תגיות יותר נקודתית זמינות.</string>
   <string name="categories_tooltip">נא לבחור את הקטגוריות המתאימות. בניגוד למאפייני \"מציג\", הקטגוריות כתובות רק באנגלית.</string>
   <string name="license_tooltip">ויקישיתוף הופך את התמונות שלך לזמינות לשימוש חוזר ולהתאמה על ידי כל אחד. בא לך לוותר על כל הזכויות? שייחסו את היצירה אליך? שההתאמות ישתמשו באותו הרישיון?</string>
-  <string name="depicts_step_title">מציג</string>
+  <string name="depicts_step_title">מוצג</string>
   <string name="license_step_title">רישיון מדיה</string>
   <string name="media_detail_step_title">פרטי מדיה</string>
   <string name="menu_view_category_page">הצגת דף הקטגוריה</string>
@@ -804,4 +805,6 @@
     <item quantity="many">נבחרו %d תמונות</item>
     <item quantity="other">נבחרו %d תמונות</item>
   </plurals>
+  <string name="multiple_files_depiction">נא לזכור שכשמועלות כמה תמונות, כולן מקבלות את אותן הקטגוריות והמוצגים. אם התמונות אינן חולקות מוצגים וקטגוריות, נא לעשות כמה העלאות נפרדות.</string>
+  <string name="multiple_files_depiction_header">הערה על העלאות מרובות</string>
 </resources>

@@ -363,5 +363,5 @@
   <string name="check_category_failure_title">Kategorie-tjekversoek het nie gewerk nie</string>
   <string name="check_category_success_message">Versoek kategorie-toets vir %1$s</string>
   <string name="upload_nearby_place_found_title">Nabygeleë plek gevind</string>
-  <string name="upload_nearby_place_found_description" fuzzy="true">Is dit \'n foto van Plek %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Is dit \'n foto van Plek %1$s?</string>
 </resources>

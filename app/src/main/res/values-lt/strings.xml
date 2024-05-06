@@ -517,7 +517,7 @@
   <string name="you_must_reset_your_passsword" fuzzy="true">Kažkas nepavyko prisijungiant, turite iš naujo nustatyti slaptažodį !!</string>
   <string name="title_for_media">MEDIJA</string>
   <string name="upload_nearby_place_found_title">Netoliese rasta vieta</string>
-  <string name="upload_nearby_place_found_description" fuzzy="true">Ar tai vietos %1$s nuotrauka?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Ar tai vietos %1$s nuotrauka?</string>
   <string name="title_app_shortcut_bookmark">Žymės</string>
   <string name="title_app_shortcut_setting">Nustatymai</string>
   <string name="remove_bookmark">Pašalinta iš žymių</string>

@@ -485,7 +485,7 @@
   <string name="title_for_child_classes">CHILD\n CLASSES</string>
   <string name="title_for_parent_classes">PARENT CLASSES</string>
   <string name="upload_nearby_place_found_title">Gban\'e zin\'ibanɛ bɛ yamma</string>
-  <string name="upload_nearby_place_found_description">Nɛ\' anɛ %1$s footo?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Nɛ\' anɛ %1$s footo?</string>
   <string name="title_app_shortcut_bookmark">Bookmark nam</string>
   <string name="title_app_shortcut_setting">Maalʋg</string>
   <string name="remove_bookmark">Yisi yi Bookmarknamin</string>

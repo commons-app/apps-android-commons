@@ -562,7 +562,7 @@
   <string name="title_for_child_classes">CLASSES FILIO</string>
   <string name="title_for_parent_classes">CLASSES GENITOR</string>
   <string name="upload_nearby_place_found_title">Loco a proximitate trovate</string>
-  <string name="upload_nearby_place_found_description">Es isto un photo de %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">Es isto un imagine de %1$s?</string>
   <string name="title_app_shortcut_bookmark">Marcapaginas</string>
   <string name="title_app_shortcut_setting">Configurationes</string>
   <string name="remove_bookmark">Removite del marcapaginas</string>

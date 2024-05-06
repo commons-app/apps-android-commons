@@ -574,7 +574,7 @@
   <string name="title_for_child_classes">SUBKLASOJ</string>
   <string name="title_for_parent_classes">PLI ALTAJ KLASOJ</string>
   <string name="upload_nearby_place_found_title">Oni trovis lokon en proksimo</string>
-  <string name="upload_nearby_place_found_description">Ĉu ĉi tio estas foto de %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Ĉu ĉi tio estas foto de %1$s?</string>
   <string name="title_app_shortcut_bookmark">Legosignoj</string>
   <string name="title_app_shortcut_setting">Agordoj</string>
   <string name="remove_bookmark">Forigi el legosignoj</string>

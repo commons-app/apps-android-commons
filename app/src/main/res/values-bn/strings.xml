@@ -430,7 +430,7 @@
   <string name="nearby_search_hint">সেতু, জাদুঘর, হোটেল ইত্যাদি।</string>
   <string name="title_for_media">মিডিয়া</string>
   <string name="upload_nearby_place_found_title">কাছাকাছি স্থান পাওয়া গেছে</string>
-  <string name="upload_nearby_place_found_description">এটি কি %1$s-এর একটি চিত্র?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">এটি কি %1$s-এর একটি চিত্র?</string>
   <string name="title_app_shortcut_bookmark">বুকমার্ক</string>
   <string name="title_app_shortcut_setting">সেটিং</string>
   <string name="remove_bookmark">বুকমার্ক থেকে সরানো হয়েছে</string>

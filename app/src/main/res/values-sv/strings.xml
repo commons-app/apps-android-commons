@@ -575,7 +575,7 @@
   <string name="title_for_child_classes">UNDERORDNADE KLASSER</string>
   <string name="title_for_parent_classes">ÖVERORDNADE KLASSER</string>
   <string name="upload_nearby_place_found_title">Hittade platser i närheten</string>
-  <string name="upload_nearby_place_found_description">Är detta ett foto på %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Är detta ett foto på %1$s?</string>
   <string name="title_app_shortcut_bookmark">Bokmärken</string>
   <string name="title_app_shortcut_setting">Inställningar</string>
   <string name="remove_bookmark">Togs bort från bokmärken</string>

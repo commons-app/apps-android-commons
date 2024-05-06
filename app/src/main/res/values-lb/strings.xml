@@ -393,7 +393,8 @@
   <string name="nearby_search_hint">Bréck, Musée, Hotel etc.</string>
   <string name="you_must_reset_your_passsword">Beim Aloggen ass eppes schif gaang. Dir musst Äert Passwuert zrécksetzen!</string>
   <string name="upload_nearby_place_found_title">Plaz nobäi fonnt</string>
-  <string name="upload_nearby_place_found_description">Ass dëst eng Foto vun %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">Sinn dëst Biller vun %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">Ass dëst e Bild vun %1$s?</string>
   <string name="title_app_shortcut_bookmark">Lieszeechen</string>
   <string name="title_app_shortcut_setting">Astellungen</string>
   <string name="remove_bookmark">Vun de Lieszeechen ewechgeholl</string>

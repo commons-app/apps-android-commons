@@ -591,7 +591,8 @@
   <string name="title_for_child_classes">SUBKLASSEN</string>
   <string name="title_for_parent_classes">HOOFDKLASSEN</string>
   <string name="upload_nearby_place_found_title">Plaats in de buurt gevonden</string>
-  <string name="upload_nearby_place_found_description">Is dit een foto van %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">Zijn dit afbeeldingen van %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">Is dit een afbeelding van %1$s?</string>
   <string name="title_app_shortcut_bookmark">Bladwijzers</string>
   <string name="title_app_shortcut_setting">Instellingen</string>
   <string name="remove_bookmark">Bladwijzer verwijderd</string>
@@ -789,4 +790,6 @@
     <item quantity="one">%d afbeelding geselecteerd</item>
     <item quantity="other">%d afbeeldingen geselecteerd</item>
   </plurals>
+  <string name="multiple_files_depiction">Houd er rekening mee dat alle afbeeldingen in een multi-upload dezelfde categorieën krijgen en geacht worden hetzelfde weer te geven. Als deze gegevens per afbeelding moeten verschillen, voer dan meerdere afzonderlijke uploads uit.</string>
+  <string name="multiple_files_depiction_header">Opmerking over multi-uploads</string>
 </resources>

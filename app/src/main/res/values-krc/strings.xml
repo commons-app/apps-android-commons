@@ -567,7 +567,7 @@
   <string name="title_for_child_classes">БАЛА КЛАССЛА</string>
   <string name="title_for_parent_classes">АНА КЛАССЛА</string>
   <string name="upload_nearby_place_found_title">Джууукъдагъы Джер Табылды</string>
-  <string name="upload_nearby_place_found_description">Бу %1$s суратмыды?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Бу %1$s суратмыды?</string>
   <string name="title_app_shortcut_bookmark">Китаб белгиле</string>
   <string name="title_app_shortcut_setting">Джарашдырыўла</string>
   <string name="remove_bookmark">Китаб белгиледен къоратылды</string>

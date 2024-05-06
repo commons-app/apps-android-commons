@@ -532,7 +532,7 @@
   <string name="title_for_child_classes">CLASE COPIl</string>
   <string name="title_for_parent_classes">CLASE PĂRINTE</string>
   <string name="upload_nearby_place_found_title">Locație Găsită în Apropiere</string>
-  <string name="upload_nearby_place_found_description" fuzzy="true">Este o fotografie a Locului %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Este o fotografie a Locului %1$s?</string>
   <string name="title_app_shortcut_bookmark">Semne de carte</string>
   <string name="title_app_shortcut_setting">Setări</string>
   <string name="remove_bookmark">Eliminat din semne de carte</string>

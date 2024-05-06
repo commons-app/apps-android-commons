@@ -458,7 +458,7 @@
   <string name="title_for_child_classes">SUBKLASI</string>
   <string name="title_for_parent_classes">KLASI PLU ABSTRAKTA</string>
   <string name="upload_nearby_place_found_title">Loko proxima trovesis</string>
-  <string name="upload_nearby_place_found_description">Ka to esas fotografuro pri %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Ka to esas fotografuro pri %1$s?</string>
   <string name="title_app_shortcut_bookmark">Marko-rubandi</string>
   <string name="title_app_shortcut_setting">Ajusti</string>
   <string name="add_bookmark">Adjuntita marko-rubandi</string>

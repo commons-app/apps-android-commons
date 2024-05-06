@@ -555,7 +555,7 @@
   <string name="nearby_search_hint">Мост, музеј, хотел итд.</string>
   <string name="you_must_reset_your_passsword">Дошло је до грешке са пријављивањем. Морате да промените Вашу лозинку!</string>
   <string name="upload_nearby_place_found_title">Оближње место је пронађено</string>
-  <string name="upload_nearby_place_found_description">Да ли је ово фотографија %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">Да ли је ово фотографија %1$s?</string>
   <string name="title_app_shortcut_bookmark">Обележивачи</string>
   <string name="title_app_shortcut_setting">Подешавања</string>
   <string name="remove_bookmark">Уклоњено из обележивача</string>

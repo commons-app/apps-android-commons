@@ -554,7 +554,7 @@
   <string name="title_for_child_classes">UNDERKLASSER</string>
   <string name="title_for_parent_classes">OVERKLASSER</string>
   <string name="upload_nearby_place_found_title">Sted i nærheten funnet</string>
-  <string name="upload_nearby_place_found_description">Er dette et bilde av %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Er dette et bilde av %1$s?</string>
   <string name="title_app_shortcut_bookmark">Bokmerker</string>
   <string name="title_app_shortcut_setting">Innstillinger</string>
   <string name="remove_bookmark">Fjernet fra bokmerker</string>

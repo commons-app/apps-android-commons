@@ -604,7 +604,7 @@
   <string name="title_for_child_classes">CLASSES ENFANTS</string>
   <string name="title_for_parent_classes">CLASSES PARENTES</string>
   <string name="upload_nearby_place_found_title">Lieu à proximité trouvé</string>
-  <string name="upload_nearby_place_found_description">Est-ce une photo de « %1$s » ?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Est-ce une photo de « %1$s » ?</string>
   <string name="title_app_shortcut_bookmark">Signets</string>
   <string name="title_app_shortcut_setting">Paramètres</string>
   <string name="remove_bookmark">Retiré des favoris</string>

@@ -517,7 +517,7 @@
   <string name="title_for_child_classes">చైల్డ్ క్లాస్</string>
   <string name="title_for_parent_classes">పేరెంట్ క్లాస్</string>
   <string name="upload_nearby_place_found_title">సమీపంలోని స్థలాలు కనబడ్డాయి</string>
-  <string name="upload_nearby_place_found_description" fuzzy="true">ఇది %1$s ప్రాంతపు ఫొటోనా?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">ఇది %1$s ప్రాంతపు ఫొటోనా?</string>
   <string name="title_app_shortcut_bookmark">ఇష్టాంశాలు</string>
   <string name="title_app_shortcut_setting">అమరికలు</string>
   <string name="remove_bookmark">బుక్‌మార్కుల నుండి తీసేసాం</string>

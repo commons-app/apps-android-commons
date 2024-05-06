@@ -569,7 +569,7 @@
   <string name="title_for_child_classes">DETSKÉ TRIEDY</string>
   <string name="title_for_parent_classes">RODIČOVSKÉ TRIEDY</string>
   <string name="upload_nearby_place_found_title">Miesto v okolí nájdené</string>
-  <string name="upload_nearby_place_found_description" fuzzy="true">Je toto fotka miesta %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Je toto fotka miesta %1$s?</string>
   <string name="title_app_shortcut_bookmark">Záložky</string>
   <string name="title_app_shortcut_setting">Nastavenia</string>
   <string name="remove_bookmark">Odstránené zo záložiek</string>

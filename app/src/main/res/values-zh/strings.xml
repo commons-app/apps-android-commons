@@ -619,7 +619,8 @@
   <string name="title_for_child_classes">子类别</string>
   <string name="title_for_parent_classes">父类别</string>
   <string name="upload_nearby_place_found_title">找到附近地点</string>
-  <string name="upload_nearby_place_found_description">这是%1$s的照片吗？</string>
+  <string name="upload_nearby_place_found_description_plural">这些是%1$s的图片吗？</string>
+  <string name="upload_nearby_place_found_description_singular">这是%1$s的图片吗？</string>
   <string name="title_app_shortcut_bookmark">书签</string>
   <string name="title_app_shortcut_setting">设置</string>
   <string name="remove_bookmark">已从书签中移除</string>

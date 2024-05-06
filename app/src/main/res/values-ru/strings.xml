@@ -628,7 +628,8 @@
   <string name="title_for_child_classes">ДЕТСКИЕ КЛАССЫ</string>
   <string name="title_for_parent_classes">РОДИТЕЛЬСКИЕ КЛАССЫ</string>
   <string name="upload_nearby_place_found_title">Место поблизости найдено</string>
-  <string name="upload_nearby_place_found_description">На этом фото %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">На этих изображениях %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">На этом изображении %1$s?</string>
   <string name="title_app_shortcut_bookmark">Закладки</string>
   <string name="title_app_shortcut_setting">Настройки</string>
   <string name="remove_bookmark">Удалено из закладок</string>
@@ -828,4 +829,6 @@
     <item quantity="many">выбрано %d изображений</item>
     <item quantity="other"/>
   </plurals>
+  <string name="multiple_files_depiction">Помните, что все изображения при мультизагрузке получают одинаковые категории и описания. Если изображения не имеют одинаковых описаний и категорий, выполните несколько отдельных загрузок.</string>
+  <string name="multiple_files_depiction_header">Замечание о мультизагрузках</string>
 </resources>

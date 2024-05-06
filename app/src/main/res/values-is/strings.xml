@@ -546,7 +546,7 @@
   <string name="title_for_child_classes">AFLEIDDIR FLOKKAR</string>
   <string name="title_for_parent_classes">YFIRFLOKKAR</string>
   <string name="upload_nearby_place_found_title">Staður í nágrenninu fannst</string>
-  <string name="upload_nearby_place_found_description">Er þetta mynd af staðnum %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Er þetta mynd af staðnum %1$s?</string>
   <string name="title_app_shortcut_bookmark">Bókamerki</string>
   <string name="title_app_shortcut_setting">Stillingar</string>
   <string name="remove_bookmark">Fjarlægt úr bókamerkjum</string>

@@ -590,7 +590,7 @@
   <string name="title_for_child_classes">CLASSES INFANTIS</string>
   <string name="title_for_parent_classes">CLASSES PAIS</string>
   <string name="upload_nearby_place_found_title">Local próximo encontrado</string>
-  <string name="upload_nearby_place_found_description">Esta é uma foto de %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Esta é uma foto de %1$s?</string>
   <string name="title_app_shortcut_bookmark">Favoritos</string>
   <string name="title_app_shortcut_setting">Configurações</string>
   <string name="remove_bookmark">Removido dos favoritos</string>

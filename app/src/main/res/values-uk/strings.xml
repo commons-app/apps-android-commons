@@ -601,7 +601,7 @@
   <string name="title_for_child_classes">ДОЧІРНІ КЛАСИ</string>
   <string name="title_for_parent_classes">БАТЬКІВСЬКІ КЛАСИ</string>
   <string name="upload_nearby_place_found_title">Знайдено місце поблизу</string>
-  <string name="upload_nearby_place_found_description">На цьому фото %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">На цьому фото %1$s?</string>
   <string name="title_app_shortcut_bookmark">Закладки</string>
   <string name="title_app_shortcut_setting">Налаштування</string>
   <string name="remove_bookmark">Вилучено з закладок</string>

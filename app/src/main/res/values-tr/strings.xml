@@ -593,7 +593,7 @@
   <string name="title_for_child_classes">ALT SINIFLAR</string>
   <string name="title_for_parent_classes">ÜST SINIFLAR</string>
   <string name="upload_nearby_place_found_title">Yakındaki Yer Bulundu</string>
-  <string name="upload_nearby_place_found_description">Bu bir %1$s fotoğrafı mı?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Bu bir %1$s fotoğrafı mı?</string>
   <string name="title_app_shortcut_bookmark">Yer imleri</string>
   <string name="title_app_shortcut_setting">Ayarlar</string>
   <string name="remove_bookmark">Yer işaretlerinden kaldırıldı</string>
