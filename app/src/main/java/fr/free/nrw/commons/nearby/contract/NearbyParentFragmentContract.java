@@ -24,7 +24,7 @@ public interface NearbyParentFragmentContract {
 
         boolean isListBottomSheetExpanded();
 
-        void checkPermissionsAndPerformAction();
+        void askForLocationPermission();
 
         void displayLoginSkippedWarning();
 
@@ -35,8 +35,6 @@ public interface NearbyParentFragmentContract {
         void animateFABs();
 
         void recenterMap(LatLng currentLatLng);
-
-        void showLocationOffDialog();
 
         void openLocationSettings();
 

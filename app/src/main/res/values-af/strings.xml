@@ -282,7 +282,7 @@
   <string name="wrong">Verkeerde antwoord</string>
   <string name="quiz_screenshot_question">Is hierdie skermkiekie OK om op te laai?</string>
   <string name="share_app_title">Toepassing dele</string>
-  <string name="error_fetching_nearby_places">Kon nie nabygeleë plekke gaan haal nie.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Kon nie nabygeleë plekke gaan haal nie.</string>
   <string name="no_recent_searches">Geen onlangse soektogte nie</string>
   <string name="delete_recent_searches_dialog">Is u seker dat u u soekgeskiedenis wil uitvee?</string>
   <string name="delete_search_dialog">Wil u hierdie soektog uitvee?</string>
@@ -363,5 +363,5 @@
   <string name="check_category_failure_title">Kategorie-tjekversoek het nie gewerk nie</string>
   <string name="check_category_success_message">Versoek kategorie-toets vir %1$s</string>
   <string name="upload_nearby_place_found_title">Nabygeleë plek gevind</string>
-  <string name="upload_nearby_place_found_description" fuzzy="true">Is dit \'n foto van Plek %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Is dit \'n foto van Plek %1$s?</string>
 </resources>

@@ -379,12 +379,4 @@ class NearbyParentFragmentUnitTest {
         Assert.assertEquals(shadowActivity.nextStartedActivityForResult, null)
     }
 
-    @Test @Ignore
-    @Throws(Exception::class)
-    fun testShowLocationOffDialog() {
-        fragment.showLocationOffDialog()
-        val dialog: AlertDialog = ShadowAlertDialog.getLatestDialog() as AlertDialog
-        Assert.assertEquals(dialog.isShowing, true)
-    }
-
 }

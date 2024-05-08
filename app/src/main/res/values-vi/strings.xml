@@ -245,7 +245,7 @@
   <string name="menu_set_wallpaper">Đặt làm hình nền</string>
   <string name="taj_mahal_answer">Hình chứa di tích và cảnh vật thiên nhiên thường được chấp nhận tải lên ở hầu hết các quốc gia. Xin lưu ý rằng các công trình nghệ thuật được trưng bày tạm thời thường có bản quyền và không được chấp nhận tải lên.</string>
   <string name="share_app_title">Chia sẻ Ứng dụng</string>
-  <string name="error_fetching_nearby_places">Lỗi khi lấy các nơi lân cận.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Lỗi khi lấy các nơi lân cận.</string>
   <string name="search_this_area">Tìm kiếm khu vực này</string>
   <string name="category_edit_helper_make_edit_toast">Đang cố gắng cập nhật danh mục.</string>
   <string name="category_edit_helper_show_edit_title">Cập nhật danh mục</string>

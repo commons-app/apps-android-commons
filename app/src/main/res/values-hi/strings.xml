@@ -285,7 +285,7 @@
   <string name="wrong">गलत उत्तर</string>
   <string name="quiz_screenshot_question">क्या यह स्क्रीनशॉट अपलोड होने के लिये तैयार है?</string>
   <string name="share_app_title">एप साझा करें</string>
-  <string name="error_fetching_nearby_places">निकट के स्थान लाने में त्रुटि हुई।</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">निकट के स्थान लाने में त्रुटि हुई।</string>
   <string name="no_recent_searches">हाल में कोई खोज नहीं</string>
   <string name="delete_recent_searches_dialog">क्या आप सचमुच अपना खोज इतिहास मिटाना चाहते हैं?</string>
   <string name="search_history_deleted">खोज इतिहास मिट गया</string>

@@ -25,6 +25,7 @@
   </plurals>
   <string name="share_license_summary" fuzzy="true">Gambar ini akan dilesenkan di bawah %1$s</string>
   <string name="navigation_item_explore">Jelajah</string>
+  <string name="preference_category_appearance">Penampilan</string>
   <string name="preference_category_feedback">Maklum balas</string>
   <string name="preference_category_privacy">Privasi</string>
   <string name="app_name">Commons</string>

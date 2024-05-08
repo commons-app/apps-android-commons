@@ -113,6 +113,7 @@
   <string name="media_detail_title">Аталыш</string>
   <string name="media_detail_description">Сыпаттама</string>
   <string name="media_detail_author">Автор</string>
+  <string name="media_detail_license">Лицензия</string>
   <string name="cancel">Жокко чыгаруу</string>
   <string name="navigation_drawer_close">Жабуу</string>
   <string name="navigation_item_upload">Жүктөө</string>

@@ -290,6 +290,7 @@
   <string name="navigation_item_about">О приложении</string>
   <string name="navigation_item_settings">Настройки</string>
   <string name="navigation_item_feedback">Обратная связь</string>
+  <string name="navigation_item_feedback_github">Обратная связь через GitHub</string>
   <string name="navigation_item_logout">Выйти</string>
   <string name="navigation_item_info">Руководство</string>
   <string name="navigation_item_notification">Уведомления</string>
@@ -331,6 +332,7 @@
   <string name="nearby_location_not_available">Функция «Поблизости» может работать некорректно, определение местоположения недоступно.</string>
   <string name="upload_location_access_denied">Доступ к местоположению запрещён. Чтобы использовать эту функцию, укажите своё местоположение вручную.</string>
   <string name="location_permission_rationale_nearby">Необходимо разрешение для отображения списка мест поблизости</string>
+  <string name="location_permission_rationale_explore">Необходимо разрешение для отображения списка мест поблизости</string>
   <string name="nearby_directions">Направления</string>
   <string name="nearby_wikidata">Викиданные</string>
   <string name="nearby_wikipedia">Википедия</string>
@@ -626,7 +628,8 @@
   <string name="title_for_child_classes">ДЕТСКИЕ КЛАССЫ</string>
   <string name="title_for_parent_classes">РОДИТЕЛЬСКИЕ КЛАССЫ</string>
   <string name="upload_nearby_place_found_title">Место поблизости найдено</string>
-  <string name="upload_nearby_place_found_description">На этом фото %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">На этих изображениях %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">На этом изображении %1$s?</string>
   <string name="title_app_shortcut_bookmark">Закладки</string>
   <string name="title_app_shortcut_setting">Настройки</string>
   <string name="remove_bookmark">Удалено из закладок</string>
@@ -640,7 +643,9 @@
   <string name="cannot_open_location_settings">Не удалось открыть настройки местоположения. Пожалуйста, включите местоположение вручную</string>
   <string name="recommend_high_accuracy_mode">Для достижения наилучших результатов выберите режим высокой точности.</string>
   <string name="ask_to_turn_location_on">Включить местоположение?</string>
+  <string name="ask_to_turn_location_on_text">Пожалуйста, включите службы определения местоположения, чтобы приложение показывало ваше текущее местоположение.</string>
   <string name="nearby_needs_location">Рядом необходимо, чтобы местоположение было включено для правильной работы.</string>
+  <string name="explore_map_needs_location">Для просмотра близлежащих изображений карте «Исследование» требуется разрешение на определение местоположения.</string>
   <string name="upload_map_location_access">Вам необходимо предоставить доступ к вашему текущему местоположению, чтобы установить местоположение автоматически.</string>
   <string name="use_location_from_similar_image">Вы снимали эти две фотографии в одном месте? Хотите использовать широту/долготу изображения справа?</string>
   <string name="load_more">Загрузить ещё</string>
@@ -824,4 +829,6 @@
     <item quantity="many">выбрано %d изображений</item>
     <item quantity="other"/>
   </plurals>
+  <string name="multiple_files_depiction">Помните, что все изображения при мультизагрузке получают одинаковые категории и описания. Если изображения не имеют одинаковых описаний и категорий, выполните несколько отдельных загрузок.</string>
+  <string name="multiple_files_depiction_header">Замечание о мультизагрузках</string>
 </resources>

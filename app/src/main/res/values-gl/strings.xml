@@ -297,7 +297,7 @@
   <string name="wrong">Resposta incorrecta</string>
   <string name="quiz_screenshot_question">Pódese subir esta captura de pantalla?</string>
   <string name="share_app_title">Compartir a aplicación</string>
-  <string name="error_fetching_nearby_places">Erro ó procurar os lugares próximos.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Erro ó procurar os lugares próximos.</string>
   <string name="no_recent_searches">Non hai procuras recentes</string>
   <string name="delete_recent_searches_dialog">Está seguro de querer borrar o seu historial de procuras?</string>
   <string name="delete_search_dialog">Queres borrar esta procura?</string>

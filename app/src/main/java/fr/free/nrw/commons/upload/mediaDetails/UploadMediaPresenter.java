@@ -76,6 +76,8 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
      */
     public static boolean isBatteryDialogShowing;
 
+    public static boolean isCategoriesDialogShowing;
+
     @Inject
     public UploadMediaPresenter(UploadRepository uploadRepository,
         @Named("default_preferences") JsonKvStore defaultKVStore,
@@ -329,17 +331,27 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
       view.showEditActivity(repository.getUploads().get(indexInViewFlipper));
   }
 
+  /**
+   * Updates the information regarding the specified place for uploads
+   * when the user confirms the suggested nearby place.
+   *
+   * @param place The place to be associated with the uploads.
+   */
   @Override
-  public void onUserConfirmedUploadIsOfPlace(Place place, int uploadItemPosition) {
-    final List<UploadMediaDetail> uploadMediaDetails = repository.getUploads()
-        .get(uploadItemPosition)
-        .getUploadMediaDetails();
-    UploadItem uploadItem = repository.getUploads()
-        .get(uploadItemPosition);
-    uploadItem.setPlace(place);
-    uploadMediaDetails.set(0, new UploadMediaDetail(place));
-    view.updateMediaDetails(uploadMediaDetails);
+  public void onUserConfirmedUploadIsOfPlace(Place place) {
+      final List<UploadItem> uploads = repository.getUploads();
+      for (UploadItem uploadItem : uploads) {
+          uploadItem.setPlace(place);
+          final List<UploadMediaDetail> uploadMediaDetails = uploadItem.getUploadMediaDetails();
+          // Update UploadMediaDetail object for this UploadItem
+          uploadMediaDetails.set(0, new UploadMediaDetail(place));
+      }
+      // Now that all UploadItems and their associated UploadMediaDetail objects have been updated,
+      // update the view with the modified media details of the first upload item
+      view.updateMediaDetails(uploads.get(0).getUploadMediaDetails());
+      UploadActivity.setUploadIsOfAPlace(true);
   }
+
 
     /**
      * Calculates the image quality
@@ -410,7 +422,7 @@ public class UploadMediaPresenter implements UserActionListener, SimilarImageInt
         }
 
         if (uploadItemIndex == 0) {
-            if (!isBatteryDialogShowing) {
+            if (!isBatteryDialogShowing && !isCategoriesDialogShowing) {
                 // if battery-optimisation dialog is not being shown, call checkImageQuality
                 checkImageQuality(uploadItem, uploadItemIndex);
             } else {

@@ -15,7 +15,9 @@
   <string name="add_new_contribution">Neie Bäitrag derbäiasetzen</string>
   <string name="add_contribution_from_camera">Bäitrag vun der Kamera derbäisetzen</string>
   <string name="add_contribution_from_photos">Bäitrag vun de Fotoen derbäisetzen</string>
+  <string name="show_captions">Beschreiwungen</string>
   <string name="row_item_language_description">Sprooch-Beschreiwung</string>
+  <string name="row_item_caption">Beschreiwung</string>
   <string name="show_captions_description">Beschreiwung</string>
   <string name="nearby_row_image">Bild</string>
   <string name="nearby_all">All</string>
@@ -61,7 +63,7 @@
   <string name="logging_in_message">Waart wgl. …</string>
   <string name="updating_caption_message">Waart wgl. ...</string>
   <string name="login_success">Umeldung huet geklappt!</string>
-  <string name="login_failed" fuzzy="true">D\'Aloggen huet net funktionéiert!</string>
+  <string name="login_failed">D\'Aloggen huet net funktionéiert!</string>
   <string name="upload_failed">Fichier net fonnt. Probéiert wgl. en anere Fichier.</string>
   <string name="authentication_failed">D\'Authentifizéierung huet net funktionéiert. Loggt Iech wgl. nach eng Kéier an.</string>
   <string name="uploading_started">D\'Eroplueden huet ugefaang!</string>
@@ -196,6 +198,7 @@
   <string name="navigation_item_about">Iwwer</string>
   <string name="navigation_item_settings">Astellungen</string>
   <string name="navigation_item_feedback">Feedback</string>
+  <string name="navigation_item_feedback_github">Feedback iwwer GitHub</string>
   <string name="navigation_item_logout">Ausloggen</string>
   <string name="navigation_item_info">Uleedung</string>
   <string name="navigation_item_notification">Notifikatiounen</string>
@@ -263,6 +266,7 @@
   <string name="search_tab_title_depictions">Elementer</string>
   <string name="explore_tab_title_mobile">mobil eropgelueden</string>
   <string name="explore_tab_title_map">Kaart</string>
+  <string name="successful_wikidata_edit">Bild bei %1$s op Wikidata derbäigesat!</string>
   <string name="wikidata_edit_failure">Déi entspriechend Wikidata-Entitéit konnt net aktualiséiert ginn!</string>
   <string name="menu_set_wallpaper">Als Hannergrondbild festleeën</string>
   <string name="wallpaper_set_successfully">Hannergrondbild festgeluecht</string>
@@ -389,7 +393,8 @@
   <string name="nearby_search_hint">Bréck, Musée, Hotel etc.</string>
   <string name="you_must_reset_your_passsword">Beim Aloggen ass eppes schif gaang. Dir musst Äert Passwuert zrécksetzen!</string>
   <string name="upload_nearby_place_found_title">Plaz nobäi fonnt</string>
-  <string name="upload_nearby_place_found_description">Ass dëst eng Foto vun %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">Sinn dëst Biller vun %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">Ass dëst e Bild vun %1$s?</string>
   <string name="title_app_shortcut_bookmark">Lieszeechen</string>
   <string name="title_app_shortcut_setting">Astellungen</string>
   <string name="remove_bookmark">Vun de Lieszeechen ewechgeholl</string>

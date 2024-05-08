@@ -282,7 +282,7 @@
   <string name="quiz_screenshot_question">ಈ ಪರದೆಚಿತ್ರನ್ ಮಿತೇರಾವರೆ ಒಪ್ಪಿಗೆ ಉಂಡಾ?</string>
   <string name="share_app_title">ಶೇರ್ ಅಪ್ಯ್</string>
   <string name="rotate">ತಿರ್ಗಲೆ</string>
-  <string name="error_fetching_nearby_places">ಕೈತಲ್ದ ಜಾಗೊಲೆನ್ ಕಣನಗ ದೋಷವಾಂಡ್.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">ಕೈತಲ್ದ ಜಾಗೊಲೆನ್ ಕಣನಗ ದೋಷವಾಂಡ್.</string>
   <string name="no_recent_searches">ಇಂಚೊಗು ನಾಡಿನವು ದಾಲಾ ಇಜ್ಜಿ</string>
   <string name="delete_recent_searches_dialog">ಇರ್ ನಾಡ್ನಾ ಇತಿಹಾಸೋನ್ ಮಾಜಾಯಾರಾ ಉಪ್ಪುವರತಾ?</string>
   <string name="search_history_deleted">ನನಾಡುನ ಇತಿಹಾಸೊ ಮಾಜಾತೆರ್.</string>
