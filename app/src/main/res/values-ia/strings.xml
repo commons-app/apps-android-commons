@@ -562,6 +562,7 @@
   <string name="title_for_child_classes">CLASSES FILIO</string>
   <string name="title_for_parent_classes">CLASSES GENITOR</string>
   <string name="upload_nearby_place_found_title">Loco a proximitate trovate</string>
+  <string name="upload_nearby_place_found_description_plural">Es istes imagines de %1$s?</string>
   <string name="upload_nearby_place_found_description_singular">Es isto un imagine de %1$s?</string>
   <string name="title_app_shortcut_bookmark">Marcapaginas</string>
   <string name="title_app_shortcut_setting">Configurationes</string>
@@ -758,4 +759,6 @@
     <item quantity="one">%d imagine seligite</item>
     <item quantity="other">%d imagines seligite</item>
   </plurals>
+  <string name="multiple_files_depiction">Nota ben que tote le imagines in un multi-incargamento habera le mesme categorias e representationes. Si le imagines non condivide representationes e categorias, per favor exeque plure incargamentos separate.</string>
+  <string name="multiple_files_depiction_header">Aviso sur le multi-incargamentos</string>
 </resources>

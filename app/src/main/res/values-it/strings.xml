@@ -579,7 +579,7 @@
   <string name="title_for_child_classes">CLASSI FIGLIE</string>
   <string name="title_for_parent_classes">CLASSI SUPERIORI</string>
   <string name="upload_nearby_place_found_title">Rinvenuto luogo nei pressi</string>
-  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Questa è una foto di %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">Questa è un\'immagine di %1$s?</string>
   <string name="title_app_shortcut_bookmark">Segnalibri</string>
   <string name="title_app_shortcut_setting">Impostazioni</string>
   <string name="remove_bookmark">Rimuovi dai preferiti</string>
