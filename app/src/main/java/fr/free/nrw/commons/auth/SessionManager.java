@@ -125,13 +125,15 @@ public class SessionManager {
      * Returns a Completable that clears existing accounts from account manager
      */
     public Completable logout() {
-        AccountManager accountManager = AccountManager.get(context);
-        Account[] allAccounts = accountManager.getAccountsByType(BuildConfig.ACCOUNT_TYPE);
-        return Completable.fromObservable(Observable.fromArray(allAccounts)
-                .map(a -> accountManager.removeAccount(a, null, null).getResult()))
-                .doOnComplete(() -> {
-                    currentAccount = null;
-                });
+        return Completable.fromObservable(
+            Observable.empty()
+                      .doOnComplete(
+                          () -> {
+                              removeAccount();
+                              currentAccount = null;
+                          }
+                      )
+        );
     }
 
     /**
