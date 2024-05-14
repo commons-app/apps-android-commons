@@ -398,6 +398,44 @@ public class OkHttpJsonApiClient {
     }
 
     /**
+     * Retrieves place based on Entity Id.
+     *
+     * @param entityId Id of Wikidata Entity
+     * @param language The language for the query.
+     * @return A nearby place.
+     * @throws Exception If an error occurs during the retrieval process.
+     */
+    @Nullable
+    public Place getNearbyPlace(
+        final String entityId, final String language)
+        throws Exception {
+        final String wikidataQuery = FileUtils.readFromResource("/queries/query_for_item.rq");
+        final String query = wikidataQuery
+            .replace("${ENTITY}", entityId)
+            .replace("${LANG}", language);
+        final HttpUrl.Builder urlBuilder = HttpUrl
+            .parse(sparqlQueryUrl)
+            .newBuilder()
+            .addQueryParameter("query", query)
+            .addQueryParameter("format", "json");
+
+        final Request request = new Request.Builder()
+            .url(urlBuilder.build())
+            .build();
+
+        final Response response = okHttpClient.newCall(request).execute();
+        if (response.body() != null && response.isSuccessful()) {
+            final String json = response.body().string();
+            final NearbyResponse nearbyResponse = gson.fromJson(json, NearbyResponse.class);
+            final List<NearbyResultItem> bindings = nearbyResponse.getResults().getBindings();
+            NearbyResultItem item = bindings.get(0);
+            final Place placeFromNearbyItem = Place.from(item);
+            return placeFromNearbyItem;
+        }
+        throw new Exception(response.message());
+    }
+
+    /**
      * Make API Call to get Places
      *
      * @param leftLatLng  Left lat long

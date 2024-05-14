@@ -68,7 +68,6 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationPermissionsHelper;
 import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
-import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.CheckBoxTriStates;
@@ -118,11 +117,9 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.util.constants.GeoConstants;
 import org.osmdroid.views.CustomZoomButtonsController;
-import org.osmdroid.views.overlay.ItemizedIconOverlay.OnItemGestureListener;
-import org.osmdroid.views.overlay.ItemizedOverlayWithFocus;
 import org.osmdroid.views.overlay.MapEventsOverlay;
+import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Overlay;
-import org.osmdroid.views.overlay.OverlayItem;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
 import org.osmdroid.views.overlay.ScaleDiskOverlay;
 import org.osmdroid.views.overlay.TilesOverlay;
@@ -172,8 +169,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private boolean isDarkTheme;
     private boolean isFABsExpanded;
     private Place selectedPlace;
-    private Place clickedMarkerPlace;
-    private boolean isClickedMarkerBookmarked;
+    private Marker clickedMarker;
     private ProgressDialog progressDialog;
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.005;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.004;
@@ -370,9 +366,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         binding.map.getOverlays().add(new MapEventsOverlay(new MapEventsReceiver() {
             @Override
             public boolean singleTapConfirmedHelper(GeoPoint p) {
-                if (clickedMarkerPlace != null) {
-                    removeMarker(clickedMarkerPlace);
-                    addMarkerToMap(clickedMarkerPlace, isClickedMarkerBookmarked);
+                if (clickedMarker != null) {
+                    clickedMarker.closeInfoWindow();
                 } else {
                     Timber.e("CLICKED MARKER IS NULL");
                 }
@@ -1282,6 +1277,36 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         return Environment.MEDIA_MOUNTED.equals(state);
     }
 
+    private void getPlaceData(String entity, Place place, Marker marker) {
+        final Observable<Place> getPlaceObservable = Observable
+            .fromCallable(() -> nearbyController
+                .getNearbyPlace(entity));
+        compositeDisposable.add(getPlaceObservable
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(p -> {
+                    Place updatedPlace = p;
+                    updatedPlace.distance = place.distance;
+                    updatedPlace.location = place.location;
+                    marker.setTitle(updatedPlace.name);
+                    marker.setSnippet(
+                        containsParentheses(updatedPlace.getLongDescription())
+                            ? getTextBetweenParentheses(
+                            updatedPlace.getLongDescription()) : updatedPlace.getLongDescription());
+                    marker.showInfoWindow();
+                    binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.GONE);
+                    binding.bottomSheetDetails.icon.setVisibility(View.VISIBLE);
+                    binding.bottomSheetDetails.wikiDataLl.setVisibility(View.VISIBLE);
+                    passInfoToSheet(updatedPlace);
+                    hideBottomSheet();
+                },
+                throwable -> {
+                    Timber.d(throwable);
+                    showErrorMessage(getString(R.string.could_not_load_place_data)
+                        + throwable.getLocalizedMessage());
+                }));
+    }
+
     private void populatePlacesForCurrentLocation(
         final fr.free.nrw.commons.location.LatLng currentLatLng,
         final fr.free.nrw.commons.location.LatLng screenTopRight,
@@ -1767,38 +1792,26 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * @param isBookMarked A Boolean flag indicating whether the place is bookmarked or not.
      */
     private void addMarkerToMap(Place place, Boolean isBookMarked) {
-        ArrayList<OverlayItem> items = new ArrayList<>();
         Drawable icon = ContextCompat.getDrawable(getContext(), getIconFor(place, isBookMarked));
         GeoPoint point = new GeoPoint(place.location.getLatitude(), place.location.getLongitude());
-        OverlayItem item = new OverlayItem(place.name,
-            containsParentheses(place.getLongDescription()) ? getTextBetweenParentheses(
-                place.getLongDescription()) : place.getLongDescription(), point);
-        item.setMarker(icon);
-        items.add(item);
-        ItemizedOverlayWithFocus overlay = new ItemizedOverlayWithFocus(items,
-            new OnItemGestureListener<OverlayItem>() {
-                @Override
-                public boolean onItemSingleTapUp(int index, OverlayItem item) {
-                    passInfoToSheet(place);
-                    hideBottomSheet();
-                    if (clickedMarkerPlace != null) {
-                        removeMarker(clickedMarkerPlace);
-                        addMarkerToMap(clickedMarkerPlace, isClickedMarkerBookmarked);
-                    }
-                    clickedMarkerPlace = place;
-                    isClickedMarkerBookmarked = isBookMarked;
-                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    return true;
-                }
-
-                @Override
-                public boolean onItemLongPress(int index, OverlayItem item) {
-                    return false;
-                }
-            }, getContext());
-
-        overlay.setFocusItemsOnTap(true);
-        binding.map.getOverlays().add(overlay); // Add the overlay to the map
+        Marker marker = new Marker(binding.map);
+        marker.setPosition(point);
+        marker.setIcon(icon);
+        marker.setTextLabelFontSize(40);
+        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_TOP);
+        marker.setOnMarkerClickListener((marker1, mapView) -> {
+            if (clickedMarker != null) {
+                clickedMarker.closeInfoWindow();
+            }
+            clickedMarker = marker1;
+            binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.VISIBLE);
+            binding.bottomSheetDetails.icon.setVisibility(View.GONE);
+            binding.bottomSheetDetails.wikiDataLl.setVisibility(View.GONE);
+            getPlaceData(place.getWikiDataEntityId(), place, marker1);
+            bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            return true;
+        });
+        binding.map.getOverlays().add(marker);
     }
 
     /**
@@ -1808,46 +1821,35 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      *                          locations.
      */
     private void addMarkersToMap(List<BaseMarker> nearbyBaseMarkers) {
-        ArrayList<OverlayItem> items = new ArrayList<>();
         for (int i = 0; i < nearbyBaseMarkers.size(); i++) {
             Drawable icon = ContextCompat.getDrawable(getContext(),
                 getIconFor(nearbyBaseMarkers.get(i).getPlace(), false));
             GeoPoint point = new GeoPoint(
                 nearbyBaseMarkers.get(i).getPlace().location.getLatitude(),
                 nearbyBaseMarkers.get(i).getPlace().location.getLongitude());
-            OverlayItem item = new OverlayItem(nearbyBaseMarkers.get(i).getPlace().name,
-                containsParentheses(nearbyBaseMarkers.get(i).getPlace().getLongDescription())
-                    ? getTextBetweenParentheses(
-                    nearbyBaseMarkers.get(i).getPlace().getLongDescription())
-                    : nearbyBaseMarkers.get(i).getPlace().getLongDescription(),
-                point);
-            item.setMarker(icon);
-            items.add(item);
+            Marker marker = new Marker(binding.map);
+            marker.setPosition(point);
+            marker.setIcon(icon);
+            marker.setTextLabelFontSize(40);
+            marker.setId(String.valueOf(i));
+            marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_TOP);
+            marker.setOnMarkerClickListener((marker1, mapView) -> {
+                marker1.showInfoWindow();
+                if (clickedMarker != null) {
+                    clickedMarker.closeInfoWindow();
+                }
+                clickedMarker = marker1;
+                int index = Integer.parseInt(marker1.getId());
+                Place place = nearbyBaseMarkers.get(index).getPlace();
+                binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.VISIBLE);
+                binding.bottomSheetDetails.icon.setVisibility(View.GONE);
+                binding.bottomSheetDetails.wikiDataLl.setVisibility(View.GONE);
+                getPlaceData(place.getWikiDataEntityId(), place, marker1);
+                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                return true;
+            });
+            binding.map.getOverlays().add(marker);
         }
-        ItemizedOverlayWithFocus overlay = new ItemizedOverlayWithFocus(items,
-            new OnItemGestureListener<OverlayItem>() {
-                @Override
-                public boolean onItemSingleTapUp(int index, OverlayItem item) {
-                    final Place place = nearbyBaseMarkers.get(index).getPlace();
-                    passInfoToSheet(place);
-                    hideBottomSheet();
-                    if (clickedMarkerPlace != null) {
-                        removeMarker(clickedMarkerPlace);
-                        addMarkerToMap(clickedMarkerPlace, isClickedMarkerBookmarked);
-                    }
-                    clickedMarkerPlace = place;
-                    isClickedMarkerBookmarked = false;
-                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    return true;
-                }
-
-                @Override
-                public boolean onItemLongPress(int index, OverlayItem item) {
-                    return false;
-                }
-            }, getContext());
-        overlay.setFocusItemsOnTap(true);
-        binding.map.getOverlays().add(overlay);
     }
 
     /**
@@ -1874,22 +1876,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     public static boolean containsParentheses(String input) {
         return input.contains("(") || input.contains(")");
-    }
-
-    private void removeMarker(Place place){
-        List<Overlay> overlays = binding.map.getOverlays();
-        for (int i = 0; i < overlays.size();i++){
-            if (overlays.get(i) instanceof ItemizedOverlayWithFocus){
-                ItemizedOverlayWithFocus item = (ItemizedOverlayWithFocus)overlays.get(i);
-                OverlayItem overlayItem = item.getItem(0);
-                fr.free.nrw.commons.location.LatLng diffLatLang = new fr.free.nrw.commons.location.LatLng(overlayItem.getPoint().getLatitude(),overlayItem.getPoint().getLongitude(),100);
-                if (place.location.getLatitude() == overlayItem.getPoint().getLatitude() && place.location.getLongitude() == overlayItem.getPoint().getLongitude()){
-                    binding.map.getOverlays().remove(i);
-                    binding.map.invalidate();
-                    break;
-                }
-            }
-        }
     }
 
     @Override
@@ -2210,9 +2196,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         binding.map.getOverlays().add(new MapEventsOverlay(new MapEventsReceiver() {
             @Override
             public boolean singleTapConfirmedHelper(GeoPoint p) {
-                if (clickedMarkerPlace != null) {
-                    removeMarker(clickedMarkerPlace);
-                    addMarkerToMap(clickedMarkerPlace, isClickedMarkerBookmarked);
+                if (clickedMarker != null) {
+                    clickedMarker.closeInfoWindow();
                 } else {
                     Timber.e("CLICKED MARKER IS NULL");
                 }

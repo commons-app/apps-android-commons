@@ -121,6 +121,20 @@ public class NearbyPlaces {
     }
 
     /**
+     * Retrieves a place from a Wikidata query based on Entity Id
+     *
+     * @param entityId Id of Wikidata Entity
+     * @param lang     The language for the query.
+     * @return A place obtained from the Wikidata query.
+     * @throws Exception If an error occurs during the retrieval process.
+     */
+    public Place getPlaceFromWikidataQuery(final String entityId,
+        final String lang) throws Exception {
+        return okHttpJsonApiClient
+            .getNearbyPlace(entityId, lang);
+    }
+
+    /**
      * Runs the Wikidata query to retrieve the KML String
      *
      * @param leftLatLng  coordinates of Left Most position

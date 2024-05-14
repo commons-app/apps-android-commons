@@ -22,7 +22,7 @@ public class Place implements Parcelable {
     public final String name;
     private final Label label;
     private final String longDescription;
-    public final LatLng location;
+    public LatLng location;
     private final String category;
     public final String pic;
     // exists boolean will tell whether the place exists or not,
