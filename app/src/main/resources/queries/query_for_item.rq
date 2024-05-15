@@ -1,6 +1,7 @@
 SELECT
   ?item
   (SAMPLE(?label) AS ?label)
+  (SAMPLE(?class) AS ?class)
   (SAMPLE(?description) AS ?description)
   (SAMPLE(?classLabel) AS ?classLabel)
   (SAMPLE(?pic) AS ?pic)
@@ -34,6 +35,9 @@ WHERE {
     BIND(COALESCE(?classLabelPreferredLanguage, ?classLabelAnyLanguage, "?") as ?classLabel)
   }
 
+  OPTIONAL {
+  ?item p:P31/ps:P31 ?class.
+  }
 
   # Get picture
   OPTIONAL {?item wdt:P18 ?pic}
