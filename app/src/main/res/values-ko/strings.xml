@@ -14,6 +14,7 @@
 * Nuevo Paso
 * Ohw0zuz4
 * Revi
+* Suleiman the Magnificent Television
 * Theshinster123
 * Ykhwong
 * YuzaTea
@@ -25,6 +26,7 @@
   <string name="commons_github">공용 GitHub 소스 코드</string>
   <string name="commons_logo">공용 로고</string>
   <string name="commons_website">공용 웹사이트</string>
+  <string name="exit_location_picker">출구 위치 선택기</string>
   <string name="submit">제출</string>
   <string name="add_another_description">다른 설명 추가</string>
   <string name="add_new_contribution">새 기여 추가</string>
