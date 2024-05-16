@@ -25,6 +25,7 @@ import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.MarkerPlaceGroup;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyFilterState;
+import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
@@ -213,19 +214,20 @@ public class NearbyParentFragmentPresenter
      * Populates places for custom location, should be used for finding nearby places around a
      * location where you are not at.
      *
-     * @param nearbyPlacesInfo This variable has placeToCenter list information and distances.
+     * @param nearbyPlaces This variable has placeToCenter list information and distances.
      */
-    public void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo, boolean shouldTrackPosition) {
+    public void updateMapMarkers(List<Place> nearbyPlaces, LatLng currentLatLng,
+        boolean shouldTrackPosition) {
         if (null != nearbyParentFragmentView) {
             nearbyParentFragmentView.clearAllMarkers();
             List<BaseMarker> baseMarkers = NearbyController
-                .loadAttractionsFromLocationToBaseMarkerOptions(nearbyPlacesInfo.currentLatLng,
+                .loadAttractionsFromLocationToBaseMarkerOptions(currentLatLng,
                     // Curlatlang will be used to calculate distances
-                    nearbyPlacesInfo.placeList);
+                    nearbyPlaces);
             nearbyParentFragmentView.updateMapMarkers(baseMarkers);
             lockUnlockNearby(false); // So that new location updates wont come
             nearbyParentFragmentView.setProgressBarVisibility(false);
-            nearbyParentFragmentView.updateListFragment(nearbyPlacesInfo.placeList);
+            nearbyParentFragmentView.updateListFragment(nearbyPlaces);
         }
     }
 

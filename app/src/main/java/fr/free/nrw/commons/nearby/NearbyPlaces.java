@@ -134,6 +134,12 @@ public class NearbyPlaces {
             .getNearbyPlace(entityId, lang);
     }
 
+    public List<Place> getPlacesFromQID(final List<Place> placeList,
+        final String lang) throws Exception {
+        return okHttpJsonApiClient
+            .getNearbyPlacesFromQID(placeList, lang);
+    }
+
     /**
      * Runs the Wikidata query to retrieve the KML String
      *

@@ -27,6 +27,7 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -35,6 +36,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
+import okhttp3.Protocol;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
@@ -411,7 +413,7 @@ public class OkHttpJsonApiClient {
         throws Exception {
         final String wikidataQuery = FileUtils.readFromResource("/queries/query_for_item.rq");
         final String query = wikidataQuery
-            .replace("${ENTITY}", entityId)
+            .replace("${ENTITY}", "wd:"+entityId)
             .replace("${LANG}", language);
         final HttpUrl.Builder urlBuilder = HttpUrl
             .parse(sparqlQueryUrl)
@@ -433,6 +435,44 @@ public class OkHttpJsonApiClient {
             return placeFromNearbyItem;
         }
         throw new Exception(response.message());
+    }
+
+    @Nullable
+    public List<Place> getNearbyPlacesFromQID(
+        final List<Place> placeList, final String language) throws IOException {
+        final String wikidataQuery = FileUtils.readFromResource("/queries/query_for_item.rq");
+        String qids = "";
+        for (final Place place : placeList) {
+            qids += "\n" + ("wd:" + place.getWikiDataEntityId());
+        }
+        final String query = wikidataQuery
+            .replace("${ENTITY}", qids)
+            .replace("${LANG}", language);
+        final HttpUrl.Builder urlBuilder = HttpUrl
+            .parse(sparqlQueryUrl)
+            .newBuilder()
+            .addQueryParameter("query", query)
+            .addQueryParameter("format", "json");
+
+        final Request request = new Request.Builder()
+            .url(urlBuilder.build())
+            .build();
+
+        try (Response response = okHttpClient.newCall(request).execute()) {
+            if (response.isSuccessful()) {
+                final String json = response.body().string();
+                final NearbyResponse nearbyResponse = gson.fromJson(json, NearbyResponse.class);
+                final List<NearbyResultItem> bindings = nearbyResponse.getResults().getBindings();
+                final List<Place> places = new ArrayList<>();
+                for (final NearbyResultItem item : bindings) {
+                    final Place placeFromNearbyItem = Place.from(item);
+                    places.add(placeFromNearbyItem);
+                }
+                return places;
+            } else {
+                throw new IOException("Unexpected response code: " + response.code());
+            }
+        }
     }
 
     /**

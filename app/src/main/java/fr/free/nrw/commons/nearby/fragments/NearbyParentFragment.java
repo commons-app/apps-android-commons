@@ -66,6 +66,7 @@ import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment;
 import fr.free.nrw.commons.databinding.FragmentNearbyParentBinding;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationPermissionsHelper;
 import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -103,6 +104,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -1326,10 +1329,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     if (nearbyPlacesInfo.placeList == null || nearbyPlacesInfo.placeList.isEmpty()) {
                         showErrorMessage(getString(R.string.no_nearby_places_around));
                     } else {
-                        updateMapMarkers(nearbyPlacesInfo, true);
+                        updateMapMarkers(nearbyPlacesInfo.placeList, nearbyPlacesInfo.currentLatLng,
+                            true);
                         lastFocusLocation = searchLatLng;
                         lastMapFocus = new GeoPoint(searchLatLng.getLatitude(),
                             searchLatLng.getLongitude());
+                        loadPlacesDataAsync(nearbyPlacesInfo.placeList, nearbyPlacesInfo.currentLatLng);
                     }
                 },
                 throwable -> {
@@ -1364,9 +1369,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         // Updating last searched location
                         applicationKvStore.putString("LastLocation",
                             searchLatLng.getLatitude() + "," + searchLatLng.getLongitude());
-                        updateMapMarkers(nearbyPlacesInfo, false);
+                        updateMapMarkers(nearbyPlacesInfo.placeList, nearbyPlacesInfo.currentLatLng,
+                            false);
                         lastMapFocus = new GeoPoint(searchLatLng.getLatitude(),
                             searchLatLng.getLongitude());
+                        loadPlacesDataAsync(nearbyPlacesInfo.placeList, nearbyPlacesInfo.currentLatLng);
                     }
                 },
                 throwable -> {
@@ -1379,15 +1386,48 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 }));
     }
 
+    public void loadPlacesDataAsync(List<Place> placeList, LatLng curLatLng) {
+        final Observable<List<Place>> nearbyPlacesInfoObservable = Observable
+            .fromCallable(() -> nearbyController
+                .getPlacesFromQID(placeList));
+        compositeDisposable.add(nearbyPlacesInfoObservable
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(p -> {
+                    List<Place> places = p;
+                    if (places == null || places.isEmpty()) {
+                        showErrorMessage(getString(R.string.no_nearby_places_around));
+                    } else {
+                        for (Place place : places) {
+                            for (Place foundPlace : placeList) {
+                                if (place.siteLinks.getWikidataLink().equals(foundPlace.siteLinks.getWikidataLink())) {
+                                    place.location = foundPlace.location;
+                                    place.distance = foundPlace.distance;
+                                    place.setMonument(foundPlace.isMonument());
+                                    break;
+                                }
+                            }
+                        }
+                        updateMapMarkers(places, curLatLng, false);
+                    }
+                },
+                throwable -> {
+                    Timber.e(throwable);
+                    showErrorMessage(getString(R.string.error_fetching_nearby_places)
+                        + throwable.getLocalizedMessage());
+                    setFilterState();
+                }));
+    }
+
     /**
      * Populates places for your location, should be used for finding nearby places around a
      * location where you are.
      *
-     * @param nearbyPlacesInfo This variable has place list information and distances.
+     * @param nearbyPlaces This variable has place list information and distances.
      */
-    private void updateMapMarkers(final NearbyController.NearbyPlacesInfo nearbyPlacesInfo,
+    private void updateMapMarkers(final List<Place> nearbyPlaces, final LatLng curLatLng,
         final boolean shouldUpdateSelectedMarker) {
-        presenter.updateMapMarkers(nearbyPlacesInfo, shouldUpdateSelectedMarker);
+        presenter.updateMapMarkers(nearbyPlaces, curLatLng, shouldUpdateSelectedMarker);
         setFilterState();
     }
 
@@ -1774,7 +1814,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             return (isBookmarked ?
                 R.drawable.ic_custom_map_marker_green_bookmarked :
                 R.drawable.ic_custom_map_marker_green);
-        } else if (!place.exists) { // Means that the topic of the Wikidata item does not exist in the real world anymore, for instance it is a past event, or a place that was destroyed
+        } else if (!place.exists || (place.name == "")) { // Means that the topic of the Wikidata item does not exist in the real world anymore, for instance it is a past event, or a place that was destroyed
             return (isBookmarked ?
                 R.drawable.ic_custom_map_marker_grey_bookmarked :
                 R.drawable.ic_custom_map_marker_grey);
@@ -1797,6 +1837,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         Marker marker = new Marker(binding.map);
         marker.setPosition(point);
         marker.setIcon(icon);
+        if (!Objects.equals(place.name, "")){
+            marker.setTitle(place.name);
+            marker.setSnippet(
+                containsParentheses(place.getLongDescription())
+                    ? getTextBetweenParentheses(
+                    place.getLongDescription()) : place.getLongDescription());
+        }
         marker.setTextLabelFontSize(40);
         marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_TOP);
         marker.setOnMarkerClickListener((marker1, mapView) -> {
@@ -1807,7 +1854,16 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.VISIBLE);
             binding.bottomSheetDetails.icon.setVisibility(View.GONE);
             binding.bottomSheetDetails.wikiDataLl.setVisibility(View.GONE);
-            getPlaceData(place.getWikiDataEntityId(), place, marker1);
+            if (Objects.equals(place.name, "")){
+                getPlaceData(place.getWikiDataEntityId(), place, marker1);
+            }else {
+                marker.showInfoWindow();
+                binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.GONE);
+                binding.bottomSheetDetails.icon.setVisibility(View.VISIBLE);
+                binding.bottomSheetDetails.wikiDataLl.setVisibility(View.VISIBLE);
+                passInfoToSheet(place);
+                hideBottomSheet();
+            }
             bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             return true;
         });
@@ -1830,6 +1886,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             Marker marker = new Marker(binding.map);
             marker.setPosition(point);
             marker.setIcon(icon);
+            Place place = nearbyBaseMarkers.get(i).getPlace();
+            if (!Objects.equals(place.name, "")){
+                marker.setTitle(place.name);
+                marker.setSnippet(
+                    containsParentheses(place.getLongDescription())
+                        ? getTextBetweenParentheses(
+                        place.getLongDescription()) : place.getLongDescription());
+            }
             marker.setTextLabelFontSize(40);
             marker.setId(String.valueOf(i));
             marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_TOP);
@@ -1840,11 +1904,20 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 }
                 clickedMarker = marker1;
                 int index = Integer.parseInt(marker1.getId());
-                Place place = nearbyBaseMarkers.get(index).getPlace();
+                Place updatedPlace = nearbyBaseMarkers.get(index).getPlace();
                 binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.VISIBLE);
                 binding.bottomSheetDetails.icon.setVisibility(View.GONE);
                 binding.bottomSheetDetails.wikiDataLl.setVisibility(View.GONE);
-                getPlaceData(place.getWikiDataEntityId(), place, marker1);
+                if (Objects.equals(updatedPlace.name, "")){
+                    getPlaceData(updatedPlace.getWikiDataEntityId(), updatedPlace, marker1);
+                }else {
+                    marker.showInfoWindow();
+                    binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.GONE);
+                    binding.bottomSheetDetails.icon.setVisibility(View.VISIBLE);
+                    binding.bottomSheetDetails.wikiDataLl.setVisibility(View.VISIBLE);
+                    passInfoToSheet(place);
+                    hideBottomSheet();
+                }
                 bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                 return true;
             });

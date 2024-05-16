@@ -13,7 +13,7 @@ SELECT
 WHERE {
   SERVICE <https://query.wikidata.org/sparql> {
     values ?item {
-      wd:${ENTITY}
+      ${ENTITY}
     }
   }
 
