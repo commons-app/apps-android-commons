@@ -18,10 +18,13 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
@@ -34,22 +37,28 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions;
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback;
 import com.google.android.material.snackbar.Snackbar;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding3.appcompat.RxSearchView;
@@ -70,6 +79,7 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationPermissionsHelper;
 import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
 import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.CheckBoxTriStates;
 import fr.free.nrw.commons.nearby.Label;
@@ -91,6 +101,7 @@ import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
+import fr.free.nrw.commons.wikidata.WikidataEditListener.WikidataP18EditListener;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -99,6 +110,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -119,7 +132,9 @@ import org.osmdroid.events.ZoomEvent;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.util.constants.GeoConstants;
+import org.osmdroid.util.constants.GeoConstants.UnitOfMeasure;
 import org.osmdroid.views.CustomZoomButtonsController;
+import org.osmdroid.views.CustomZoomButtonsController.Visibility;
 import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Overlay;
@@ -131,7 +146,7 @@ import timber.log.Timber;
 
 public class NearbyParentFragment extends CommonsDaggerSupportFragment
     implements NearbyParentFragmentContract.View,
-    WikidataEditListener.WikidataP18EditListener, LocationUpdateListener,
+    WikidataP18EditListener, LocationUpdateListener,
     LocationPermissionCallback {
 
 
@@ -181,16 +196,16 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private GeoPoint mapCenter;
     IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
     private Place lastPlaceToCenter;
-    private fr.free.nrw.commons.location.LatLng lastKnownLocation;
+    private LatLng lastKnownLocation;
     private boolean isVisibleToUser;
-    private fr.free.nrw.commons.location.LatLng lastFocusLocation;
+    private LatLng lastFocusLocation;
     private PlaceAdapter adapter;
     private GeoPoint lastMapFocus;
     private NearbyParentFragmentInstanceReadyCallback nearbyParentFragmentInstanceReadyCallback;
     private boolean isAdvancedQueryFragmentVisible = false;
     private Place nearestPlace;
     private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(
-        new ActivityResultContracts.RequestMultiplePermissions(),
+        new RequestMultiplePermissions(),
         new ActivityResultCallback<Map<String, Boolean>>() {
             @Override
             public void onActivityResult(Map<String, Boolean> result) {
@@ -214,7 +229,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         });
 
     private ActivityResultLauncher<String> locationPermissionLauncher = registerForActivityResult(
-        new ActivityResultContracts.RequestPermission(), isGranted -> {
+        new RequestPermission(), isGranted -> {
             if (isGranted) {
                 locationPermissionGranted();
             } else {
@@ -364,7 +379,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         scaleBarOverlay.setBackgroundPaint(barPaint);
         scaleBarOverlay.enableScaleBar();
         binding.map.getOverlays().add(scaleBarOverlay);
-        binding.map.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.NEVER);
+        binding.map.getZoomController().setVisibility(Visibility.NEVER);
         binding.map.getController().setZoom(ZOOM_LEVEL);
         binding.map.getOverlays().add(new MapEventsOverlay(new MapEventsReceiver() {
             @Override
@@ -552,7 +567,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         isPermissionDenied = false;
         applicationKvStore.putBoolean("doNotAskForLocationPermission", false);
         lastKnownLocation = locationManager.getLastLocation();
-        fr.free.nrw.commons.location.LatLng target = lastKnownLocation;
+        LatLng target = lastKnownLocation;
         if (lastKnownLocation != null) {
             GeoPoint targetP = new GeoPoint(target.getLatitude(), target.getLongitude());
             mapCenter = targetP;
@@ -597,7 +612,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             final String[] locationLatLng
                 = applicationKvStore.getString("LastLocation").split(",");
             lastKnownLocation
-                = new fr.free.nrw.commons.location.LatLng(Double.parseDouble(locationLatLng[0]),
+                = new LatLng(Double.parseDouble(locationLatLng[0]),
                 Double.parseDouble(locationLatLng[1]), 1f);
         } else {
             lastKnownLocation = MapUtils.defaultLatLng;
@@ -844,8 +859,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * Defines how bottom sheets will act on click
      */
     private void setBottomSheetCallbacks() {
-        bottomSheetDetailsBehavior.setBottomSheetCallback(new BottomSheetBehavior
-            .BottomSheetCallback() {
+        bottomSheetDetailsBehavior.setBottomSheetCallback(new BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull final View bottomSheet, final int newState) {
                 prepareViewsForSheetPosition(newState);
@@ -870,8 +884,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             .getDefaultDisplay().getHeight() / 16 * 9;
         bottomSheetListBehavior = BottomSheetBehavior.from(binding.bottomSheetNearby.bottomSheet);
         bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        bottomSheetListBehavior.setBottomSheetCallback(new BottomSheetBehavior
-            .BottomSheetCallback() {
+        bottomSheetListBehavior.setBottomSheetCallback(new BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull final View bottomSheet, final int newState) {
                 if (newState == BottomSheetBehavior.STATE_EXPANDED) {
@@ -951,7 +964,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             } else {
                 cameraShift = CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE;
             }
-            recenterMap(new fr.free.nrw.commons.location.LatLng(
+            recenterMap(new LatLng(
                 lastPlaceToCenter.location.getLatitude() - cameraShift,
                 lastPlaceToCenter.getLocation().getLongitude(), 0));
         }
@@ -966,13 +979,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public fr.free.nrw.commons.location.LatLng getLastLocation() {
+    public LatLng getLastLocation() {
         return lastKnownLocation;
     }
 
     @Override
-    public fr.free.nrw.commons.location.LatLng getLastMapFocus() {
-        fr.free.nrw.commons.location.LatLng latLng = new fr.free.nrw.commons.location.LatLng(
+    public LatLng getLastMapFocus() {
+        LatLng latLng = new LatLng(
             lastMapFocus.getLatitude(), lastMapFocus.getLongitude(), 100);
         return latLng;
     }
@@ -983,28 +996,28 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * @return returns the last location, if available, else returns default location
      */
     @Override
-    public fr.free.nrw.commons.location.LatLng getMapCenter() {
+    public LatLng getMapCenter() {
         if (applicationKvStore.getString("LastLocation") != null) {
             final String[] locationLatLng
                 = applicationKvStore.getString("LastLocation").split(",");
             lastKnownLocation
-                = new fr.free.nrw.commons.location.LatLng(Double.parseDouble(locationLatLng[0]),
+                = new LatLng(Double.parseDouble(locationLatLng[0]),
                 Double.parseDouble(locationLatLng[1]), 1f);
         } else {
-            lastKnownLocation = new fr.free.nrw.commons.location.LatLng(51.50550,
+            lastKnownLocation = new LatLng(51.50550,
                 -0.07520, 1f);
         }
-        fr.free.nrw.commons.location.LatLng latLnge = lastKnownLocation;
+        LatLng latLnge = lastKnownLocation;
         if (mapCenter != null) {
-            latLnge = new fr.free.nrw.commons.location.LatLng(
+            latLnge = new LatLng(
                 mapCenter.getLatitude(), mapCenter.getLongitude(), 100);
         }
         return latLnge;
     }
 
     @Override
-    public fr.free.nrw.commons.location.LatLng getMapFocus() {
-        fr.free.nrw.commons.location.LatLng mapFocusedLatLng = new fr.free.nrw.commons.location.LatLng(
+    public LatLng getMapFocus() {
+        LatLng mapFocusedLatLng = new LatLng(
             binding.map.getMapCenter().getLatitude(), binding.map.getMapCenter().getLongitude(), 100);
         return mapFocusedLatLng;
     }
@@ -1075,12 +1088,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void populatePlaces(final fr.free.nrw.commons.location.LatLng currentLatLng) {
+    public void populatePlaces(final LatLng currentLatLng) {
         IGeoPoint screenTopRight = binding.map.getProjection().fromPixels(binding.map.getWidth(), 0);
         IGeoPoint screenBottomLeft = binding.map.getProjection().fromPixels(0, binding.map.getHeight());
-        fr.free.nrw.commons.location.LatLng screenTopRightLatLng = new fr.free.nrw.commons.location.LatLng(
+        LatLng screenTopRightLatLng = new LatLng(
             screenBottomLeft.getLatitude(), screenBottomLeft.getLongitude(), 0);
-        fr.free.nrw.commons.location.LatLng screenBottomLeftLatLng = new fr.free.nrw.commons.location.LatLng(
+        LatLng screenBottomLeftLatLng = new LatLng(
             screenTopRight.getLatitude(), screenTopRight.getLongitude(), 0);
 
         // When the nearby fragment is opened immediately upon app launch, the {screenTopRightLatLng}
@@ -1099,9 +1112,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             final double westCornerLong = currentLatLng.getLongitude() - delta;
             final double eastCornerLat = currentLatLng.getLatitude() + delta;
             final double eastCornerLong = currentLatLng.getLongitude() + delta;
-            screenTopRightLatLng = new fr.free.nrw.commons.location.LatLng(westCornerLat,
+            screenTopRightLatLng = new LatLng(westCornerLat,
                 westCornerLong, 0);
-            screenBottomLeftLatLng = new fr.free.nrw.commons.location.LatLng(eastCornerLat,
+            screenBottomLeftLatLng = new LatLng(eastCornerLat,
                 eastCornerLong, 0);
             if (currentLatLng.equals(
                 getLastMapFocus())) { // Means we are checking around current location
@@ -1128,7 +1141,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void populatePlaces(final fr.free.nrw.commons.location.LatLng currentLatLng,
+    public void populatePlaces(final LatLng currentLatLng,
         @Nullable final String customQuery) {
         if (customQuery == null || customQuery.isEmpty()) {
             populatePlaces(currentLatLng);
@@ -1136,9 +1149,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
         IGeoPoint screenTopRight = binding.map.getProjection().fromPixels(binding.map.getWidth(), 0);
         IGeoPoint screenBottomLeft = binding.map.getProjection().fromPixels(0, binding.map.getHeight());
-        fr.free.nrw.commons.location.LatLng screenTopRightLatLng = new fr.free.nrw.commons.location.LatLng(
+        LatLng screenTopRightLatLng = new LatLng(
             screenBottomLeft.getLatitude(), screenBottomLeft.getLongitude(), 0);
-        fr.free.nrw.commons.location.LatLng screenBottomLeftLatLng = new fr.free.nrw.commons.location.LatLng(
+        LatLng screenBottomLeftLatLng = new LatLng(
             screenTopRight.getLatitude(), screenTopRight.getLongitude(), 0);
 
         if (currentLatLng.equals(lastFocusLocation) || lastFocusLocation == null
@@ -1311,12 +1324,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void populatePlacesForCurrentLocation(
-        final fr.free.nrw.commons.location.LatLng currentLatLng,
-        final fr.free.nrw.commons.location.LatLng screenTopRight,
-        final fr.free.nrw.commons.location.LatLng screenBottomLeft,
-        final fr.free.nrw.commons.location.LatLng searchLatLng,
+        final LatLng currentLatLng,
+        final LatLng screenTopRight,
+        final LatLng screenBottomLeft,
+        final LatLng searchLatLng,
         @Nullable final String customQuery) {
-        final Observable<NearbyController.NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
+        final Observable<NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> nearbyController
                 .loadAttractionsFromLocation(currentLatLng, screenTopRight, screenBottomLeft,
                     searchLatLng,
@@ -1348,10 +1361,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void populatePlacesForAnotherLocation(
-        final fr.free.nrw.commons.location.LatLng currentLatLng,
-        final fr.free.nrw.commons.location.LatLng screenTopRight,
-        final fr.free.nrw.commons.location.LatLng screenBottomLeft,
-        final fr.free.nrw.commons.location.LatLng searchLatLng,
+        final LatLng currentLatLng,
+        final LatLng screenTopRight,
+        final LatLng screenBottomLeft,
+        final LatLng searchLatLng,
         @Nullable final String customQuery) {
         final Observable<NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> nearbyController
@@ -1386,37 +1399,61 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 }));
     }
 
+    @SuppressLint("CheckResult")
     public void loadPlacesDataAsync(List<Place> placeList, LatLng curLatLng) {
-        final Observable<List<Place>> nearbyPlacesInfoObservable = Observable
-            .fromCallable(() -> nearbyController
-                .getPlacesFromQID(placeList));
-        compositeDisposable.add(nearbyPlacesInfoObservable
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(p -> {
-                    List<Place> places = p;
-                    if (places == null || places.isEmpty()) {
-                        showErrorMessage(getString(R.string.no_nearby_places_around));
-                    } else {
-                        for (Place place : places) {
-                            for (Place foundPlace : placeList) {
-                                if (place.siteLinks.getWikidataLink().equals(foundPlace.siteLinks.getWikidataLink())) {
-                                    place.location = foundPlace.location;
-                                    place.distance = foundPlace.distance;
-                                    place.setMonument(foundPlace.isMonument());
-                                    break;
-                                }
-                            }
-                        }
-                        updateMapMarkers(places, curLatLng, false);
+        List<Place> places = new ArrayList<>(placeList);
+        int batchSize = 150;
+        List<Place> processedPlaces = new ArrayList<>();
+        for (int i = 0; i < places.size(); i += batchSize) {
+            int endIndex = Math.min(i + batchSize, places.size());
+            List<Place> batch = places.subList(i, endIndex);
+
+            processBatch(batch)
+                .subscribe(p -> {
+                    processedPlaces.addAll(p);
+                    if (processedPlaces.size() == places.size()) {
+                        updateMapMarkers(processedPlaces, curLatLng, false);
                     }
-                },
-                throwable -> {
+                }, throwable -> {
                     Timber.e(throwable);
                     showErrorMessage(getString(R.string.error_fetching_nearby_places)
                         + throwable.getLocalizedMessage());
                     setFilterState();
-                }));
+                });
+        }
+
+    }
+
+    private Observable<List<Place>> processBatch(List<Place> batch) {
+        return Observable.fromCallable(() -> nearbyController.getPlacesFromQID(batch))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map(places -> {
+                if (places == null || places.isEmpty()) {
+                    showErrorMessage(getString(R.string.no_nearby_places_around));
+                    return Collections.<Place>emptyList();
+                } else {
+                    for (Place place : places) {
+                        for (Place foundPlace : batch) {
+                            if (place.siteLinks.getWikidataLink()
+                                .equals(foundPlace.siteLinks.getWikidataLink())) {
+                                place.location = foundPlace.location;
+                                place.distance = foundPlace.distance;
+                                place.setMonument(foundPlace.isMonument());
+                                break;
+                            }
+                        }
+                    }
+                    return places;
+                }
+            })
+            .onErrorReturn(throwable -> {
+                Timber.e(throwable);
+                showErrorMessage(getString(R.string.error_fetching_nearby_places)
+                    + " " + throwable.getLocalizedMessage());
+                setFilterState();
+                return Collections.<Place>emptyList();
+            });
     }
 
     /**
@@ -1575,7 +1612,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void displayLoginSkippedWarning() {
         if (applicationKvStore.getBoolean("login_skipped", false)) {
             // prompt the user to login
-            new AlertDialog.Builder(getContext())
+            new Builder(getContext())
                 .setMessage(R.string.login_alert_message)
                 .setPositiveButton(R.string.login, (dialog, which) -> {
                     // logout of the app
@@ -1587,15 +1624,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
     }
 
-    private void handleLocationUpdate(final fr.free.nrw.commons.location.LatLng latLng,
-        final LocationServiceManager.LocationChangeType locationChangeType) {
+    private void handleLocationUpdate(final LatLng latLng,
+        final LocationChangeType locationChangeType) {
         lastKnownLocation = latLng;
         NearbyController.currentLocation = lastKnownLocation;
         presenter.updateMapAndList(locationChangeType);
     }
 
     @Override
-    public void onLocationChangedSignificantly(final fr.free.nrw.commons.location.LatLng latLng) {
+    public void onLocationChangedSignificantly(final LatLng latLng) {
         Timber.d("Location significantly changed");
         if (latLng != null) {
             handleLocationUpdate(latLng, LOCATION_SIGNIFICANTLY_CHANGED);
@@ -1603,7 +1640,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void onLocationChangedSlightly(final fr.free.nrw.commons.location.LatLng latLng) {
+    public void onLocationChangedSlightly(final LatLng latLng) {
         Timber.d("Location slightly changed");
         if (latLng != null) {//If the map has never ever shown the current location, lets do it know
             handleLocationUpdate(latLng, LOCATION_SLIGHTLY_CHANGED);
@@ -1611,7 +1648,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void onLocationChangedMedium(final fr.free.nrw.commons.location.LatLng latLng) {
+    public void onLocationChangedMedium(final LatLng latLng) {
         Timber.d("Location changed medium");
         if (latLng != null) {//If the map has never ever shown the current location, lets do it know
             handleLocationUpdate(latLng, LOCATION_SIGNIFICANTLY_CHANGED);
@@ -1636,12 +1673,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
 
     @Override
-    public void setFABPlusAction(final View.OnClickListener onClickListener) {
+    public void setFABPlusAction(final OnClickListener onClickListener) {
         binding.fabPlus.setOnClickListener(onClickListener);
     }
 
     @Override
-    public void setFABRecenterAction(final View.OnClickListener onClickListener) {
+    public void setFABRecenterAction(final OnClickListener onClickListener) {
          binding.fabRecenter.setOnClickListener(onClickListener);
     }
 
@@ -1665,7 +1702,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * @param currentLatLng current location
      */
     @Override
-    public void addCurrentLocationMarker(final fr.free.nrw.commons.location.LatLng currentLatLng) {
+    public void addCurrentLocationMarker(final LatLng currentLatLng) {
         if (null != currentLatLng && !isPermissionDenied
             && locationManager.isGPSProviderEnabled()) {
             ExecutorUtils.get().submit(() -> {
@@ -1764,7 +1801,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public fr.free.nrw.commons.location.LatLng getCameraTarget() {
+    public LatLng getCameraTarget() {
         return binding.map == null ? null : getMapFocus();
     }
 
@@ -1776,7 +1813,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * @param currentLatLng current location
      */
     public void updateMarker(final boolean isBookmarked, final Place place,
-        @Nullable final fr.free.nrw.commons.location.LatLng currentLatLng) {
+        @Nullable final LatLng currentLatLng) {
         addMarkerToMap(place, isBookmarked);
     }
 
@@ -1952,7 +1989,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void recenterMap(fr.free.nrw.commons.location.LatLng currentLatLng) {
+    public void recenterMap(LatLng currentLatLng) {
         // if user has denied permission twice, then show dialog
         if (isPermissionDenied) {
             if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
@@ -2185,6 +2222,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void showErrorMessage(final String message) {
+        Timber.e(message);
         ViewUtil.showLongToast(getActivity(), message);
     }
 
@@ -2235,24 +2273,24 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             List<Overlay> overlays = binding.map.getOverlays();
             ScaleDiskOverlay diskOverlay =
                 new ScaleDiskOverlay(this.getContext(),
-                    geoPoint, 2000, GeoConstants.UnitOfMeasure.foot);
+                    geoPoint, 2000, UnitOfMeasure.foot);
             Paint circlePaint = new Paint();
             circlePaint.setColor(Color.rgb(128, 128, 128));
-            circlePaint.setStyle(Paint.Style.STROKE);
+            circlePaint.setStyle(Style.STROKE);
             circlePaint.setStrokeWidth(2f);
             diskOverlay.setCirclePaint2(circlePaint);
             Paint diskPaint = new Paint();
             diskPaint.setColor(Color.argb(40, 128, 128, 128));
-            diskPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+            diskPaint.setStyle(Style.FILL_AND_STROKE);
             diskOverlay.setCirclePaint1(diskPaint);
             diskOverlay.setDisplaySizeMin(900);
             diskOverlay.setDisplaySizeMax(1700);
             binding.map.getOverlays().add(diskOverlay);
-            org.osmdroid.views.overlay.Marker startMarker = new org.osmdroid.views.overlay.Marker(
+            Marker startMarker = new Marker(
                 binding.map);
             startMarker.setPosition(geoPoint);
-            startMarker.setAnchor(org.osmdroid.views.overlay.Marker.ANCHOR_CENTER,
-                org.osmdroid.views.overlay.Marker.ANCHOR_BOTTOM);
+            startMarker.setAnchor(Marker.ANCHOR_CENTER,
+                Marker.ANCHOR_BOTTOM);
             startMarker.setIcon(
                 ContextCompat.getDrawable(this.getContext(), R.drawable.current_location_marker));
             startMarker.setTitle("Your Location");
@@ -2301,7 +2339,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             binding.map.getController().setCenter(geoPoint);
             List<Overlay> overlays = binding.map.getOverlays();
             for (int i = 0; i < overlays.size(); i++) {
-                if (overlays.get(i) instanceof org.osmdroid.views.overlay.Marker) {
+                if (overlays.get(i) instanceof Marker) {
                     binding.map.getOverlays().remove(i);
                 } else if (overlays.get(i) instanceof ScaleDiskOverlay) {
                     binding.map.getOverlays().remove(i);
@@ -2309,24 +2347,24 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             }
             ScaleDiskOverlay diskOverlay =
                 new ScaleDiskOverlay(this.getContext(),
-                    geoPoint, 2000, GeoConstants.UnitOfMeasure.foot);
+                    geoPoint, 2000, UnitOfMeasure.foot);
             Paint circlePaint = new Paint();
             circlePaint.setColor(Color.rgb(128, 128, 128));
-            circlePaint.setStyle(Paint.Style.STROKE);
+            circlePaint.setStyle(Style.STROKE);
             circlePaint.setStrokeWidth(2f);
             diskOverlay.setCirclePaint2(circlePaint);
             Paint diskPaint = new Paint();
             diskPaint.setColor(Color.argb(40, 128, 128, 128));
-            diskPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+            diskPaint.setStyle(Style.FILL_AND_STROKE);
             diskOverlay.setCirclePaint1(diskPaint);
             diskOverlay.setDisplaySizeMin(900);
             diskOverlay.setDisplaySizeMax(1700);
             binding.map.getOverlays().add(diskOverlay);
-            org.osmdroid.views.overlay.Marker startMarker = new org.osmdroid.views.overlay.Marker(
+            Marker startMarker = new Marker(
                 binding.map);
             startMarker.setPosition(geoPoint);
-            startMarker.setAnchor(org.osmdroid.views.overlay.Marker.ANCHOR_CENTER,
-                org.osmdroid.views.overlay.Marker.ANCHOR_BOTTOM);
+            startMarker.setAnchor(Marker.ANCHOR_CENTER,
+                Marker.ANCHOR_BOTTOM);
             startMarker.setIcon(
                 ContextCompat.getDrawable(this.getContext(), R.drawable.current_location_marker));
             startMarker.setTitle("Your Location");
@@ -2352,7 +2390,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void onConfigurationChanged(@NonNull final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        ViewGroup.LayoutParams rlBottomSheetLayoutParams = binding.bottomSheetNearby.bottomSheet.getLayoutParams();
+        LayoutParams rlBottomSheetLayoutParams = binding.bottomSheetNearby.bottomSheet.getLayoutParams();
         rlBottomSheetLayoutParams.height =
             getActivity().getWindowManager().getDefaultDisplay().getHeight() / 16 * 9;
         binding.bottomSheetNearby.bottomSheet.setLayoutParams(rlBottomSheetLayoutParams);
