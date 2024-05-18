@@ -131,11 +131,11 @@ public class NearbyController extends MapController {
         );
     }
 
-    public List<Place> getPlacesFromQID(List<Place> placeList) throws Exception {
-        return nearbyPlaces.getPlacesFromQID(placeList, Locale.getDefault().getLanguage());
+    public List<Place> getPlaces(List<Place> placeList) throws Exception {
+        return nearbyPlaces.getPlaces(placeList, Locale.getDefault().getLanguage());
     }
 
-    public Place getNearbyPlace(String entity) throws Exception {
+    public Place getPlace(String entity) throws Exception {
         return nearbyPlaces.getPlaceFromWikidataQuery(
             entity,
             Locale.getDefault().getLanguage()

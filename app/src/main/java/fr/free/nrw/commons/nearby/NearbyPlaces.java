@@ -134,10 +134,10 @@ public class NearbyPlaces {
             .getNearbyPlace(entityId, lang);
     }
 
-    public List<Place> getPlacesFromQID(final List<Place> placeList,
+    public List<Place> getPlaces(final List<Place> placeList,
         final String lang) throws Exception {
         return okHttpJsonApiClient
-            .getNearbyPlacesFromQID(placeList, lang);
+            .getPlaces(placeList, lang);
     }
 
     /**

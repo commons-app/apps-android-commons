@@ -45,13 +45,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions;
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AlertDialog.Builder;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -110,6 +108,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -118,7 +117,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -131,9 +129,7 @@ import org.osmdroid.events.ScrollEvent;
 import org.osmdroid.events.ZoomEvent;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
-import org.osmdroid.util.constants.GeoConstants;
 import org.osmdroid.util.constants.GeoConstants.UnitOfMeasure;
-import org.osmdroid.views.CustomZoomButtonsController;
 import org.osmdroid.views.CustomZoomButtonsController.Visibility;
 import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
@@ -1296,7 +1292,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private void getPlaceData(String entity, Place place, Marker marker) {
         final Observable<Place> getPlaceObservable = Observable
             .fromCallable(() -> nearbyController
-                .getNearbyPlace(entity));
+                .getPlace(entity));
         compositeDisposable.add(getPlaceObservable
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -1399,52 +1395,67 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 }));
     }
 
-    @SuppressLint("CheckResult")
     public void loadPlacesDataAsync(List<Place> placeList, LatLng curLatLng) {
         List<Place> places = new ArrayList<>(placeList);
-        int batchSize = 150;
-        List<Place> processedPlaces = new ArrayList<>();
-        for (int i = 0; i < places.size(); i += batchSize) {
-            int endIndex = Math.min(i + batchSize, places.size());
-            List<Place> batch = places.subList(i, endIndex);
-
-            processBatch(batch)
-                .subscribe(p -> {
-                    processedPlaces.addAll(p);
-                    if (processedPlaces.size() == places.size()) {
-                        updateMapMarkers(processedPlaces, curLatLng, false);
-                    }
-                }, throwable -> {
-                    Timber.e(throwable);
-                    showErrorMessage(getString(R.string.error_fetching_nearby_places)
-                        + throwable.getLocalizedMessage());
-                    setFilterState();
-                });
+        int batchSize = 3;
+        final List<Place> updatedPlaceList = new ArrayList<>(placeList);
+        if (VERSION.SDK_INT >= VERSION_CODES.N) {
+            Collections.sort(updatedPlaceList, Comparator.comparingDouble(Place::getDistanceInDouble));
         }
-
+        processBatchesSequentially(places, batchSize, updatedPlaceList, curLatLng, 0);
     }
 
-    private Observable<List<Place>> processBatch(List<Place> batch) {
-        return Observable.fromCallable(() -> nearbyController.getPlacesFromQID(batch))
+    @SuppressLint("CheckResult")
+    private void processBatchesSequentially(List<Place> places, int batchSize, List<Place> updatedPlaceList, LatLng curLatLng, int startIndex) {
+        if (startIndex >= places.size()) {
+            return;
+        }
+        int endIndex = Math.min(startIndex + batchSize, places.size());
+        List<Place> batch = places.subList(startIndex, endIndex);
+        processBatch(batch, updatedPlaceList)
+            .subscribe(p -> {
+                if (!p.isEmpty()) {
+                    synchronized (updatedPlaceList) {
+                        updatedPlaceList.clear();
+                        updatedPlaceList.addAll((Collection<? extends Place>) p);
+                    }
+                    updateMapMarkers(new ArrayList<>(updatedPlaceList), curLatLng, false);
+                }
+                processBatchesSequentially(places, batchSize, updatedPlaceList, curLatLng, endIndex);
+            }, throwable -> {
+                Timber.e(throwable);
+                showErrorMessage(getString(R.string.error_fetching_nearby_places)
+                    + throwable.getLocalizedMessage());
+                setFilterState();
+            });
+    }
+
+    private Observable<List<?>> processBatch(List<Place> batch, List<Place> placeList) {
+        return Observable.fromCallable(() -> nearbyController.getPlaces(batch))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .map(places -> {
                 if (places == null || places.isEmpty()) {
                     showErrorMessage(getString(R.string.no_nearby_places_around));
-                    return Collections.<Place>emptyList();
+                    return Collections.emptyList();
                 } else {
+                    List<Place> updatedPlaceList = new ArrayList<>(placeList);
                     for (Place place : places) {
-                        for (Place foundPlace : batch) {
+                        for (Place foundPlace : placeList) {
                             if (place.siteLinks.getWikidataLink()
                                 .equals(foundPlace.siteLinks.getWikidataLink())) {
                                 place.location = foundPlace.location;
                                 place.distance = foundPlace.distance;
                                 place.setMonument(foundPlace.isMonument());
+                                int index = updatedPlaceList.indexOf(foundPlace);
+                                if (index != -1) {
+                                    updatedPlaceList.set(index, place);
+                                }
                                 break;
                             }
                         }
                     }
-                    return places;
+                    return updatedPlaceList;
                 }
             })
             .onErrorReturn(throwable -> {
@@ -1452,7 +1463,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 showErrorMessage(getString(R.string.error_fetching_nearby_places)
                     + " " + throwable.getLocalizedMessage());
                 setFilterState();
-                return Collections.<Place>emptyList();
+                return Collections.emptyList();
             });
     }
 

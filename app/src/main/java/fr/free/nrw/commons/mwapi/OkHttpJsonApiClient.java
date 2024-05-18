@@ -27,7 +27,6 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -36,7 +35,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
-import okhttp3.Protocol;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
@@ -438,7 +436,7 @@ public class OkHttpJsonApiClient {
     }
 
     @Nullable
-    public List<Place> getNearbyPlacesFromQID(
+    public List<Place> getPlaces(
         final List<Place> placeList, final String language) throws IOException {
         final String wikidataQuery = FileUtils.readFromResource("/queries/query_for_item.rq");
         String qids = "";
