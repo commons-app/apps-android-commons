@@ -1400,7 +1400,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         int batchSize = 3;
         final List<Place> updatedPlaceList = new ArrayList<>(placeList);
         if (VERSION.SDK_INT >= VERSION_CODES.N) {
-            Collections.sort(updatedPlaceList, Comparator.comparingDouble(Place::getDistanceInDouble));
+            Collections.sort(places, Comparator.comparingDouble(place -> place.getDistanceInDouble(curLatLng)));
         }
         processBatchesSequentially(places, batchSize, updatedPlaceList, curLatLng, 0);
     }

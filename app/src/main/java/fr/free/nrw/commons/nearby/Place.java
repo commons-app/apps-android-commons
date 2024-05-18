@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import androidx.annotation.Nullable;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
+import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.PlaceUtils;
 import org.apache.commons.lang3.StringUtils;
 import timber.log.Timber;
@@ -145,18 +146,14 @@ public class Place implements Parcelable {
     }
 
     /**
-     * Gets the name of the place
+     * Gets the distance between place and curLatLng
      *
+     * @param curLatLng
      * @return name
      */
-    public Double getDistanceInDouble() {
-        double distanceValue = 0.0;
-        if (distance.endsWith("km")) {
-            distanceValue = Double.parseDouble(distance.replace("km", ""));
-        } else if (distance.endsWith("m")) {
-            distanceValue = Double.parseDouble(distance.replace("m", "")) / 1000;
-        }
-        return distanceValue;
+    public Double getDistanceInDouble(LatLng curLatLng) {
+        return LocationUtils.calculateDistance(curLatLng.getLatitude(), curLatLng.getLongitude(),
+            getLocation().getLatitude(), getLocation().getLongitude());
     }
 
     /**
