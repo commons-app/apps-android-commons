@@ -97,6 +97,8 @@ public interface NearbyParentFragmentContract {
         boolean isAdvancedQueryFragmentVisible();
 
         void showHideAdvancedQueryFragment(boolean shouldShow);
+
+        void stopQuery();
     }
 
     interface NearbyListView {
