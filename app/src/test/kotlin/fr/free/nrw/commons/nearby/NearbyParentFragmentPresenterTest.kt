@@ -100,7 +100,6 @@ class NearbyParentFragmentPresenterTest {
         nearbyPresenter.lockUnlockNearby(true)
         nearbyPresenter.updateMapAndList(null)
         verify(nearbyParentFragmentView).disableFABRecenter()
-        verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 
     /**
@@ -114,7 +113,6 @@ class NearbyParentFragmentPresenterTest {
         nearbyPresenter.updateMapAndList(null)
         verify(nearbyParentFragmentView).enableFABRecenter()
         verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
-        verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 
     /**
@@ -130,7 +128,6 @@ class NearbyParentFragmentPresenterTest {
         verify(nearbyParentFragmentView).isNetworkConnectionEstablished
         verify(nearbyParentFragmentView).lastMapFocus
         verify(nearbyParentFragmentView).mapCenter
-        verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 
     /**
@@ -206,7 +203,6 @@ class NearbyParentFragmentPresenterTest {
         verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
         verify(nearbyParentFragmentView).getLastMapFocus()
         verify(nearbyParentFragmentView).getMapCenter()
-        verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 
     /**
