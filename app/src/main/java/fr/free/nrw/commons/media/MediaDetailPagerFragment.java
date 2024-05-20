@@ -2,6 +2,9 @@ package fr.free.nrw.commons.media;
 
 import static fr.free.nrw.commons.Utils.handleWebUrl;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.widget.ProgressBar;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -76,6 +79,8 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     private boolean isFromFeaturedRootFragment;
     private int position;
 
+    private ProgressBar imageProgressBar;
+
     private ArrayList<Integer> removedItems=new ArrayList<Integer>();
 
     public void clearRemoved(){
@@ -89,7 +94,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     /**
      * Use this factory method to create a new instance of this fragment using the provided
      * parameters.
-     * 
+     *
      * This method will create a new instance of MediaDetailPagerFragment and the arguments will be
      * saved to a bundle which will be later available in the {@link #onCreate(Bundle)}
      * @param editable
@@ -108,7 +113,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     public MediaDetailPagerFragment() {
         // Required empty public constructor
     };
-   
+
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -116,7 +121,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                              Bundle savedInstanceState) {
         binding = FragmentMediaDetailPagerBinding.inflate(inflater, container, false);
         binding.mediaDetailsPager.addOnPageChangeListener(this);
-
+        imageProgressBar = binding.getRoot().findViewById(R.id.itemProgressBar);
         adapter = new MediaDetailAdapter(getChildFragmentManager());
 
         // ActionBar is now supported in both activities - if this crashes something is quite wrong
@@ -397,7 +402,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                     } catch (Exception e) {
                         Timber.e("Cant detect media transparency");
                     }
-                    
+
                     // Initialize bookmark object
                     bookmark = new Bookmark(
                             m.getFilename(),
@@ -497,19 +502,21 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
      * @param position current item that to be shown
      */
     private void setViewPagerCurrentItem(int position) {
-        final Boolean[] currentItemNotShown = {true};
-        Runnable runnable = new Runnable() {
+        imageProgressBar.setVisibility(View.VISIBLE);
+        final Handler handler = new Handler(Looper.getMainLooper());
+        final Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                while(currentItemNotShown[0]){
-                    if(adapter.getCount() > position){
-                        binding.mediaDetailsPager.setCurrentItem(position, false);
-                        currentItemNotShown[0] = false;
-                    }
+                if(adapter.getCount() > position){
+                    binding.mediaDetailsPager.setCurrentItem(position, false);
+                    imageProgressBar.setVisibility(View.GONE);
+                } else {
+                    // If the item is not ready yet, post the Runnable again
+                    handler.post(this);
                 }
             }
         };
-        new Thread(runnable).start();
+        handler.post(runnable);
     }
 
     /**
