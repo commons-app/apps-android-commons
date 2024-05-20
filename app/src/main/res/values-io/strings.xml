@@ -73,8 +73,8 @@
   <string name="logging_in_message">Voluntez vartar...</string>
   <string name="updating_caption_title">Aktualiganta etiketi e deskripturi</string>
   <string name="updating_caption_message">Voluntez vartar...</string>
-  <string name="login_success" fuzzy="true">Eniro sucesoza!</string>
-  <string name="login_failed" fuzzy="true">Eniro faliis!</string>
+  <string name="login_success">Eniro sucesoza!</string>
+  <string name="login_failed">Eniro faliis!</string>
   <string name="upload_failed">Arkivo ne trovita. Voluntez probar altr arkivo.</string>
   <string name="retry_limit_reached">Vu atingis la maxim granda quanto di probi por sendar arkivo permisata! Voluntez interuptar la kargajo, e probez itere!</string>
   <string name="unrestricted_battery_mode">Ka desmuntar l\'optimizo di la baterio?</string>
@@ -210,6 +210,7 @@
   <string name="media_detail_coordinates">Koordinati</string>
   <string name="media_detail_coordinates_empty">Nulu furnisita</string>
   <string name="become_a_tester_title">Divenez probero di \'\'Beta\'\'-versioni</string>
+  <string name="become_a_tester_description">Enirez nia kanalo \'\'beta\'\' che Google Play ed anticipez aceso a nova resursi e korektigo di erori</string>
   <string name="_2fa_code">Kodexo 2FA</string>
   <string name="logout_verification">Ka vu deziras ekirar?</string>
   <string name="mediaimage_failed">Faliis montrar imajo</string>
@@ -231,6 +232,7 @@
   <string name="navigation_item_about">Pri</string>
   <string name="navigation_item_settings">Ajusti</string>
   <string name="navigation_item_feedback">Retro-informo</string>
+  <string name="navigation_item_feedback_github">Respondi per GitHub</string>
   <string name="navigation_item_logout">Ekirar</string>
   <string name="navigation_item_info">Helpilo</string>
   <string name="navigation_item_notification">Avizi</string>
@@ -252,21 +254,26 @@
   <string name="upload_connection_error_alert_detail">Por sendar arkivi l\'Interreto mustas esar konektata. Voluntez verifikar vua Interreto-konekto.</string>
   <string name="upload_problem_image">Trovesis problemo en l\'imajo</string>
   <string name="internet_downloaded">Atencez pri nur sendar imaji quin vu propra facis. Ne sendez imaji quin vu descharjis de Interreto.</string>
+  <string name="use_external_storage">Konservar fotografuri che \'\'app\'\'</string>
+  <string name="use_external_storage_summary">Konservar en vua enmagaziniguro la fotografuri obtenita uzanta fotografilo del utensilo (\'\'app\'\')</string>
   <string name="login_to_your_account">Enirez en vua konto</string>
   <string name="send_log_file">Sendez arkivo \'\'log\'\'</string>
+  <string name="no_web_browser">Nula retnavigilo trovita, por apertar la URL</string>
   <string name="null_url">Eroro! URL ne trovita</string>
   <string name="nominate_deletion">Propozar efaco</string>
   <string name="nominated_for_deletion">Ca imajo indikesis por efaco.</string>
   <string name="nominated_see_more">Videz retpagino por detali</string>
   <string name="skip_login">Saltar</string>
   <string name="navigation_item_login">Enirar</string>
-  <string name="skip_login_title" fuzzy="true">Ka vu deziras ne enirar?</string>
+  <string name="skip_login_title">Ka vu deziras ne enirar?</string>
   <string name="skip_login_message">Vu mustus facar \'\'log in\'\' por sendor imaji future.</string>
   <string name="login_alert_message">Voluntez enirar por uzar ca utensilo</string>
   <string name="copy_wikicode">Kopiez Wiki-texto a \'clipboard\'</string>
   <string name="wikicode_copied">Wiki-texto kopiesis a \'clipboard\'</string>
   <string name="nearby_location_not_available">Proximeso povas ne funcionar korekte, nam Lokizo ne esas disponebla.</string>
   <string name="upload_location_access_denied">Aceso a lokizo ne permisita. Voluntez informar manuale vua lokizo por uzar ca resurso*.</string>
+  <string name="location_permission_rationale_nearby">Permiso bezonata por montrar listo pri vicina loki</string>
+  <string name="location_permission_rationale_explore">Permiso bezonata por montrar listo pri vicina imaji</string>
   <string name="nearby_directions">Quale arivar</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedio</string>
@@ -276,6 +283,8 @@
   <string name="user_guide">Guidolibro por l\'uzero</string>
   <string name="welcome_skip_button">Saltez instrukti</string>
   <string name="no_internet">Interreto ne funcionas</string>
+  <string name="error_notifications">Eventis eroro dum rekupero di informi.</string>
+  <string name="error_review">Eventis eroro dum rekupero di imajo por revizo. Voluntez probar itere.</string>
   <string name="no_notifications">Nula avizi trovita</string>
   <string name="about_translate">Tradukar</string>
   <string name="about_translate_title">Lingui</string>
@@ -324,7 +333,7 @@
   <string name="construction_event_answer">Fotografuri pri teknologio o kultural aspekti esas sempre bonvenanta che Commons.</string>
   <string name="congratulatory_message_quiz">Vu respondis korekte %1$s de la questioni. Gratuli!</string>
   <string name="warning_for_no_answer">Selektez un ek la du opcioni por respondar la questiono</string>
-  <string name="user_not_logged_in" fuzzy="true">Sesiono di \'\'log in\'\' finis, voluntez enirar itere.</string>
+  <string name="user_not_logged_in">Eniro-sesiono finis, voluntez enirar itere.</string>
   <string name="quiz_result_share_message">Partigez vua quizo kun vua amiki!</string>
   <string name="continue_message">Durigez</string>
   <string name="correct">Korekta respondo</string>
@@ -332,7 +341,7 @@
   <string name="quiz_screenshot_question">Ka ica skreno-kopiuro esas \'OK\' por sendar?</string>
   <string name="share_app_title">Partigez \'\'app\'\'</string>
   <string name="rotate">Rotacar</string>
-  <string name="error_fetching_nearby_places" fuzzy="true">Eroro adportanta informi pri loki proxima.</string>
+  <string name="error_fetching_nearby_places">Ne probis montrar loki proxima.</string>
   <string name="no_pictures_in_this_area">Nula pikturi en ca areo</string>
   <string name="no_nearby_places_around">Nula loki proxima trovesis</string>
   <string name="error_fetching_nearby_monuments">Eroro adportanta informi pri monumenti proxima.</string>
