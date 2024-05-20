@@ -160,6 +160,15 @@ public class UploadMediaDetailAdapter extends
         }
     }
 
+    /**
+     * Handles the result of the speech input by processing the spoken text.
+     * If the spoken text is not empty, it capitalizes the first letter of the spoken text
+     * and updates the appropriate field (caption or description) of the current
+     * UploadMediaDetail based on the selected voice icon.
+     * Finally, it notifies the adapter that the data set has changed.
+     *
+     * @param spokenText the text input received from speech recognition.
+     */
     public void handleSpeechResult(String spokenText) {
         if (!spokenText.isEmpty()) {
             String spokenTextCapitalized =
