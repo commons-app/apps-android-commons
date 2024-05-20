@@ -79,6 +79,9 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
     private boolean isFromFeaturedRootFragment;
     private int position;
 
+    /**
+     * ProgressBar used to indicate the loading status of media items.
+     */
     private ProgressBar imageProgressBar;
 
     private ArrayList<Integer> removedItems=new ArrayList<Integer>();
@@ -121,6 +124,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                              Bundle savedInstanceState) {
         binding = FragmentMediaDetailPagerBinding.inflate(inflater, container, false);
         binding.mediaDetailsPager.addOnPageChangeListener(this);
+        // Initialize the ProgressBar by finding it in the layout
         imageProgressBar = binding.getRoot().findViewById(R.id.itemProgressBar);
         adapter = new MediaDetailAdapter(getChildFragmentManager());
 
@@ -502,13 +506,17 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
      * @param position current item that to be shown
      */
     private void setViewPagerCurrentItem(int position) {
+        // Show the ProgressBar while waiting for the item to load
         imageProgressBar.setVisibility(View.VISIBLE);
         final Handler handler = new Handler(Looper.getMainLooper());
         final Runnable runnable = new Runnable() {
             @Override
             public void run() {
+                // Check if the adapter has enough items loaded
                 if(adapter.getCount() > position){
+                    // Set the current item in the ViewPager
                     binding.mediaDetailsPager.setCurrentItem(position, false);
+                    // Hide the ProgressBar once the item is loaded
                     imageProgressBar.setVisibility(View.GONE);
                 } else {
                     // If the item is not ready yet, post the Runnable again
@@ -516,6 +524,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 }
             }
         };
+        // Start the Runnable
         handler.post(runnable);
     }
 
