@@ -166,12 +166,15 @@ public class UploadMediaDetailAdapter extends
                 spokenText.substring(0, 1).toUpperCase() + spokenText.substring(1);
             if (currentPosition < uploadMediaDetails.size()) {
                 UploadMediaDetail uploadMediaDetail = uploadMediaDetails.get(currentPosition);
-                if (selectedVoiceIcon == SelectedVoiceIcon.CAPTION) {
-                    uploadMediaDetail.setCaptionText(spokenTextCapitalized);
-                } else {
-                    uploadMediaDetail.setDescriptionText(spokenTextCapitalized);
+                switch (selectedVoiceIcon) {
+                    case CAPTION:
+                        uploadMediaDetail.setCaptionText(spokenTextCapitalized);
+                        break;
+                    case DESCRIPTION:
+                        uploadMediaDetail.setDescriptionText(spokenTextCapitalized);
+                        break;
                 }
-                notifyItemChanged(currentPosition);
+                notifyDataSetChanged();
             }
         }
     }
