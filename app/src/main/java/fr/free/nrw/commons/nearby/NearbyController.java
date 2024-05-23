@@ -131,6 +131,10 @@ public class NearbyController extends MapController {
         );
     }
 
+    public String getWikiTalk(String s) throws Exception {
+        return nearbyPlaces.getWikiTalk(s);
+    }
+
     public static LatLng calculateNorthEast(double latitude, double longitude, double distance) {
         double lat1 = Math.toRadians(latitude);
         double deltaLat = distance * 0.008;

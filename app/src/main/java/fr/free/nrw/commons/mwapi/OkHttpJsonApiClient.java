@@ -11,10 +11,10 @@ import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
-import fr.free.nrw.commons.nearby.model.PlaceBindings;
 import fr.free.nrw.commons.nearby.model.ItemsClass;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
+import fr.free.nrw.commons.nearby.model.PlaceBindings;
 import fr.free.nrw.commons.profile.achievements.FeaturedImages;
 import fr.free.nrw.commons.profile.achievements.FeedbackResponse;
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardResponse;
@@ -397,6 +397,31 @@ public class OkHttpJsonApiClient {
         throw new Exception(response.message());
     }
 
+    @Nullable
+    public String getWikidataTalk(String wikidataTitle)
+        throws Exception {
+        Timber.tag("PRINT").e(wikidataTitle);
+        final HttpUrl.Builder urlBuilder = HttpUrl
+            .parse("https://www.wikidata.org/w/api.php").newBuilder()
+            .addQueryParameter("action", "query")
+            .addQueryParameter("prop", "revisions")
+            .addQueryParameter("rvprop", "content")
+            .addQueryParameter("rvslots", "main")
+            .addQueryParameter("titles", wikidataTitle)
+            .addQueryParameter("format", "json");
+
+        final Request request = new Request.Builder()
+            .url(urlBuilder.build())
+            .build();
+
+        final Response response = okHttpClient.newCall(request).execute();
+        if (response.body() != null && response.isSuccessful()) {
+            final String json = response.body().string();
+            return json;
+        }
+        throw new Exception(response.message());
+    }
+
     /**
      * Make API Call to get Places
      *
@@ -476,7 +501,7 @@ public class OkHttpJsonApiClient {
             " xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd\">"
             + "\n<bounds minlat=\"$MIN_LATITUDE\" minlon=\"$MIN_LONGITUDE\" maxlat=\"$MAX_LATITUDE\" maxlon=\"$MAX_LONGITUDE\"/>";
 
-        List<PlaceBindings> placeBindings = runQuery(leftLatLng,rightLatLng);
+        List<PlaceBindings> placeBindings = runQuery(leftLatLng, rightLatLng);
         if (placeBindings != null) {
             for (PlaceBindings item : placeBindings) {
                 if (item.getItem() != null && item.getLabel() != null && item.getClas() != null) {

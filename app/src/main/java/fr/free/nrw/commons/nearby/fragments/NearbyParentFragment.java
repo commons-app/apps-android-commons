@@ -48,6 +48,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.snackbar.Snackbar;
@@ -68,9 +69,9 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationPermissionsHelper;
 import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
-import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
+import fr.free.nrw.commons.nearby.BottomSheetAdapter;
 import fr.free.nrw.commons.nearby.CheckBoxTriStates;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.MarkerPlaceGroup;
@@ -78,8 +79,10 @@ import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter;
 import fr.free.nrw.commons.nearby.NearbyFilterState;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.nearby.WikidataFeedback;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.fragments.AdvanceQueryFragment.Callback;
+import fr.free.nrw.commons.nearby.model.BottomSheetItem;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
 import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.utils.DialogUtil;
@@ -132,7 +135,7 @@ import timber.log.Timber;
 public class NearbyParentFragment extends CommonsDaggerSupportFragment
     implements NearbyParentFragmentContract.View,
     WikidataEditListener.WikidataP18EditListener, LocationUpdateListener,
-    LocationPermissionCallback {
+    LocationPermissionCallback, BottomSheetAdapter.ItemClickListener {
 
 
     FragmentNearbyParentBinding binding;
@@ -190,6 +193,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private NearbyParentFragmentInstanceReadyCallback nearbyParentFragmentInstanceReadyCallback;
     private boolean isAdvancedQueryFragmentVisible = false;
     private Place nearestPlace;
+    private GridLayoutManager gridLayoutManager;
+    private List<BottomSheetItem> dataList;
+    private BottomSheetAdapter bottomSheetAdapter;
     private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(
         new ActivityResultContracts.RequestMultiplePermissions(),
         new ActivityResultCallback<Map<String, Boolean>>() {
@@ -650,7 +656,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         initBottomSheets();
         loadAnimations();
         setBottomSheetCallbacks();
-        decideButtonVisibilities();
         addActionToTitle();
         if (!Utils.isMonumentsEnabled(new Date())) {
             NearbyFilterState.setWlmSelected(false);
@@ -672,6 +677,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         binding.bottomSheetDetails.getRoot().setVisibility(View.VISIBLE);
         bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+    }
+
+    private int getSpanCount() {
+        int orientation = getResources().getConfiguration().orientation;
+        if (bottomSheetAdapter != null){
+            return (orientation == Configuration.ORIENTATION_PORTRAIT) ? 3 : bottomSheetAdapter.getItemCount();
+        }else {
+            return (orientation == Configuration.ORIENTATION_PORTRAIT) ? 3 : 6;
+        }
     }
 
     public void initNearbyFilter() {
@@ -896,20 +910,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         fab_close = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_close);
         rotate_forward = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_forward);
         rotate_backward = AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_backward);
-    }
-
-    /**
-     * Fits buttons according to our layout
-     */
-    private void decideButtonVisibilities() {
-        // Remove button text if they exceed 1 line or if internal layout has not been built
-        // Only need to check for directions button because it is the longest
-        if ( binding.bottomSheetDetails.directionsButtonText.getLineCount() > 1 ||  binding.bottomSheetDetails.directionsButtonText.getLineCount() == 0) {
-            binding.bottomSheetDetails.wikipediaButtonText.setVisibility(View.GONE);
-            binding.bottomSheetDetails.wikidataButtonText.setVisibility(View.GONE);
-            binding.bottomSheetDetails.commonsButtonText.setVisibility(View.GONE);
-             binding.bottomSheetDetails.directionsButtonText.setVisibility(View.GONE);
-        }
     }
 
     /**
@@ -2006,49 +2006,32 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     private void passInfoToSheet(final Place place) {
         selectedPlace = place;
+        dataList = new ArrayList<>();
+        // TODO: Decide button text for fitting in the screen
+        dataList.add(new BottomSheetItem(R.drawable.ic_round_star_border_24px, ""));
+        dataList.add(new BottomSheetItem(R.drawable.ic_directions_black_24dp,
+            getResources().getString(R.string.nearby_directions)));
+        if (place.hasWikidataLink()) {
+            dataList.add(new BottomSheetItem(R.drawable.ic_wikidata_logo_24dp,
+                getResources().getString(R.string.nearby_wikidata)));
+        }
+        dataList.add(new BottomSheetItem(R.drawable.ic_feedback_black_24dp,
+            getResources().getString(R.string.nearby_wikitalk)));
+        if (place.hasWikipediaLink()) {
+            dataList.add(new BottomSheetItem(R.drawable.ic_wikipedia_logo_24dp,
+                getResources().getString(R.string.nearby_wikipedia)));
+        }
+        if (selectedPlace.hasCommonsLink()) {
+            dataList.add(new BottomSheetItem(R.drawable.ic_commons_icon_vector,
+                getResources().getString(R.string.nearby_commons)));
+        }
+        int spanCount = getSpanCount();
+        gridLayoutManager = new GridLayoutManager(this.getContext(), spanCount);
+        binding.bottomSheetDetails.bottomSheetRecyclerView.setLayoutManager(gridLayoutManager);
+        bottomSheetAdapter = new BottomSheetAdapter(this.getContext(), dataList);
+        bottomSheetAdapter.setClickListener(this);
+        binding.bottomSheetDetails.bottomSheetRecyclerView.setAdapter(bottomSheetAdapter);
         updateBookmarkButtonImage(selectedPlace);
-
-        binding.bottomSheetDetails.bookmarkButton.setOnClickListener(view -> {
-            final boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(selectedPlace);
-            updateBookmarkButtonImage(selectedPlace);
-            updateMarker(isBookmarked, selectedPlace, locationManager.getLastLocation());
-            binding.map.invalidate();
-        });
-        binding.bottomSheetDetails.bookmarkButton.setOnLongClickListener(view -> {
-            Toast.makeText(getContext(), R.string.menu_bookmark, Toast.LENGTH_SHORT).show();
-            return true;
-        });
-
-        binding.bottomSheetDetails.wikipediaButton.setVisibility(place.hasWikipediaLink() ? View.VISIBLE : View.GONE);
-        binding.bottomSheetDetails.wikipediaButton.setOnClickListener(
-            view -> Utils.handleWebUrl(getContext(), selectedPlace.siteLinks.getWikipediaLink()));
-        binding.bottomSheetDetails.wikipediaButton.setOnLongClickListener(view -> {
-            Toast.makeText(getContext(), R.string.nearby_wikipedia, Toast.LENGTH_SHORT).show();
-            return true;
-        });
-
-        binding.bottomSheetDetails.wikidataButton.setVisibility(place.hasWikidataLink() ? View.VISIBLE : View.GONE);
-        binding.bottomSheetDetails.wikidataButton.setOnClickListener(
-            view -> Utils.handleWebUrl(getContext(), selectedPlace.siteLinks.getWikidataLink()));
-        binding.bottomSheetDetails.wikidataButton.setOnLongClickListener(view -> {
-            Toast.makeText(getContext(), R.string.nearby_wikidata, Toast.LENGTH_SHORT).show();
-            return true;
-        });
-
-        binding.bottomSheetDetails.directionsButton.setOnClickListener(view -> Utils.handleGeoCoordinates(getActivity(),
-            selectedPlace.getLocation()));
-        binding.bottomSheetDetails.directionsButton.setOnLongClickListener(view -> {
-            Toast.makeText(getContext(), R.string.nearby_directions, Toast.LENGTH_SHORT).show();
-            return true;
-        });
-
-         binding.bottomSheetDetails.commonsButton.setVisibility(selectedPlace.hasCommonsLink() ? View.VISIBLE : View.GONE);
-         binding.bottomSheetDetails.commonsButton.setOnClickListener(
-            view -> Utils.handleWebUrl(getContext(), selectedPlace.siteLinks.getCommonsLink()));
-         binding.bottomSheetDetails.commonsButton.setOnLongClickListener(view -> {
-            Toast.makeText(getContext(), R.string.nearby_commons, Toast.LENGTH_SHORT).show();
-            return true;
-        });
 
         binding.bottomSheetDetails.icon.setImageResource(selectedPlace.getLabel().getIcon());
 
@@ -2101,9 +2084,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         } else {
             bookmarkIcon = R.drawable.ic_round_star_border_24px;
         }
-        if ( binding.bottomSheetDetails.bookmarkButtonImage != null) {
-             binding.bottomSheetDetails.bookmarkButtonImage.setImageResource(bookmarkIcon);
-        }
+        bottomSheetAdapter.updateBookmarkIcon(bookmarkIcon);
     }
 
     @Override
@@ -2281,6 +2262,77 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         binding.map.getController().animateTo(geoPoint);
     }
 
+    @Override
+    public void onBottomSheetItemClick(@Nullable View view, int position) {
+        BottomSheetItem item = dataList.get(position);
+        final boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(selectedPlace);
+        switch (item.getImageResourceId()) {
+            case R.drawable.ic_round_star_border_24px:
+                updateBookmarkButtonImage(selectedPlace);
+                updateMarker(isBookmarked, selectedPlace, locationManager.getLastLocation());
+                binding.map.invalidate();
+                break;
+            case R.drawable.ic_round_star_filled_24px:
+                updateBookmarkButtonImage(selectedPlace);
+                updateMarker(isBookmarked, selectedPlace, locationManager.getLastLocation());
+                binding.map.invalidate();
+                break;
+            case R.drawable.ic_directions_black_24dp:
+                Utils.handleGeoCoordinates(this.getContext(), selectedPlace.getLocation());
+                break;
+            case R.drawable.ic_wikidata_logo_24dp:
+                Utils.handleWebUrl(this.getContext(), selectedPlace.siteLinks.getWikidataLink());
+                break;
+            case R.drawable.ic_feedback_black_24dp:
+                Intent intent = new Intent(this.getContext(), WikidataFeedback.class);
+                intent.putExtra("place", selectedPlace.name);
+                intent.putExtra("qid", selectedPlace.getWikiDataEntityId());
+                startActivity(intent);
+                break;
+            case R.drawable.ic_wikipedia_logo_24dp:
+                Utils.handleWebUrl(this.getContext(), selectedPlace.siteLinks.getWikipediaLink());
+                break;
+            case R.drawable.ic_commons_icon_vector:
+                Utils.handleWebUrl(this.getContext(), selectedPlace.siteLinks.getCommonsLink());
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onBottomSheetItemLongClick(@Nullable View view, int position) {
+        BottomSheetItem item = dataList.get(position);
+        String message;
+        switch (item.getImageResourceId()) {
+            case R.drawable.ic_round_star_border_24px:
+                message = getString(R.string.menu_bookmark);
+                break;
+            case R.drawable.ic_round_star_filled_24px:
+                message = getString(R.string.menu_bookmark);
+                break;
+            case R.drawable.ic_directions_black_24dp:
+                message = getString(R.string.nearby_directions);
+                break;
+            case R.drawable.ic_wikidata_logo_24dp:
+                message = getString(R.string.nearby_wikidata);
+                break;
+            case R.drawable.ic_feedback_black_24dp:
+                message = getString(R.string.nearby_wikitalk);
+                break;
+            case R.drawable.ic_wikipedia_logo_24dp:
+                message = getString(R.string.nearby_wikipedia);
+                break;
+            case R.drawable.ic_commons_icon_vector:
+                message = getString(R.string.nearby_commons);
+                break;
+            default:
+                message = "Long click";
+                break;
+        }
+        Toast.makeText(this.getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
     public interface NearbyParentFragmentInstanceReadyCallback {
 
         void onReady();
@@ -2298,8 +2350,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         rlBottomSheetLayoutParams.height =
             getActivity().getWindowManager().getDefaultDisplay().getHeight() / 16 * 9;
         binding.bottomSheetNearby.bottomSheet.setLayoutParams(rlBottomSheetLayoutParams);
+        int spanCount = getSpanCount();
+        if (gridLayoutManager != null) {
+            gridLayoutManager.setSpanCount(spanCount);
+        }
     }
-
 
     public void onLearnMoreClicked() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
