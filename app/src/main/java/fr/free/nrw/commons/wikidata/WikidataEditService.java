@@ -100,43 +100,52 @@ public class WikidataEditService {
      * Takes depicts ID as a parameter and create a uploadable data with the Id
      * and send the data for POST operation
      *
-     * @param filename name of the file
-     * @param depictedItems ID of the selected depict item
+     * @param fileEntityId ID of the file
+     * @param depictedItems IDs of the selected depict item
      * @return Observable<Boolean>
      */
     @SuppressLint("CheckResult")
-    public Observable<Boolean> updateDepictsProperty(final String filename,
-        final List<String> depictedItems) {
+    public Observable<Boolean> updateDepictsProperty(
+        final String fileEntityId,
+        final List<String> depictedItems
+    ) {
+        final String entityId = PAGE_ID_PREFIX + fileEntityId;
+        final List<String> claimIds = getDepictionsClaimIds(entityId);
 
-        final EditClaim data = editClaim(
+        final RemoveClaim data = removeClaim( /* Please consider removeClaim scenario for BetaDebug */
             ConfigUtils.isBetaFlavour() ? Collections.singletonList("Q10")
                 // Wikipedia:Sandbox (Q10)
-                : depictedItems
+                : claimIds
         );
 
-        return wikiBaseClient.postEditEntityByFilename(filename,
-            gson.toJson(data))
-            .doOnNext(success -> {
-                if (success) {
-                    Timber.d("DEPICTS property was set successfully for %s", filename);
-                } else {
-                    Timber.d("Unable to set DEPICTS property for %s", filename);
-                }
-            })
+        return wikiBaseClient.postDeleteClaims(entityId, gson.toJson(data))
             .doOnError(throwable -> {
-                if (throwable instanceof InvalidLoginTokenException) {
-                     Observable.error(throwable);
+                Timber.e(throwable, "Error occurred while removing existing claims for DEPICTS property");
+                ViewUtil.showLongToast(context, context.getString(R.string.wikidata_edit_failure));
+            }).switchMap(success-> {
+                if(success) {
+                    Timber.d("DEPICTS property was deleted successfully");
+                    return addDepictsProperty(fileEntityId, depictedItems);
                 } else {
-                    Timber.e(throwable, "Error occurred while setting DEPICTS property");
-                    ViewUtil.showLongToast(context, throwable.toString());
+                    Timber.d("Unable to delete DEPICTS property");
+                    return Observable.empty();
                 }
+            });
+    }
 
-            })
-            .subscribeOn(Schedulers.io());
+    @SuppressLint("CheckResult")
+    private List<String> getDepictionsClaimIds(final String entityId) {
+        return wikiBaseClient.getClaimIdsByProperty(entityId, WikidataProperties.DEPICTS.getPropertyName())
+            .subscribeOn(Schedulers.io())
+            .blockingFirst();
     }
 
     private EditClaim editClaim(final List<String> entityIds) {
         return EditClaim.from(entityIds, WikidataProperties.DEPICTS.getPropertyName());
+    }
+
+    private RemoveClaim removeClaim(final List<String> claimIds) {
+        return RemoveClaim.from(claimIds);
     }
 
     /**
