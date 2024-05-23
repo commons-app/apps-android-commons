@@ -5,15 +5,15 @@ import com.google.gson.annotations.SerializedName
 /*"mainsnak": {
     "snaktype": "value",
     "property": "P17",
-    "datatype": "wikibase-item",
     "datavalue": {
         "value": {
-        "entity-type": "item",
-        "id": "Q30",
-        "numeric-id": 30
-    },
+            "entity-type": "item",
+            "numeric-id": 30,
+            "id": "Q30"
+        },
         "type": "wikibase-entityid"
-    }
+    },
+    "datatype": "wikibase-item",
 }*/
 data class Snak_partial(
     @SerializedName("snaktype") val snakType: String,
