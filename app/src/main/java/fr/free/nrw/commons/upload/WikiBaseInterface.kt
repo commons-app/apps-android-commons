@@ -34,7 +34,7 @@ interface WikiBaseInterface {
     </MwPostResponse> */
     @Headers("Cache-Control: no-cache")
     @FormUrlEncoded
-    @POST(WikidataConstants.MW_API_PREFIX + "action=wbeditentity&site=commonswiki&clear=1")
+    @POST(WikidataConstants.MW_API_PREFIX + "action=wbeditentity&site=commonswiki")
     fun postEditEntityByFilename(
         @Field("title") filename: String,
         @Field("token") editToken: String,
