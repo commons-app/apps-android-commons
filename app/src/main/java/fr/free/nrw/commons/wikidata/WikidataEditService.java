@@ -8,7 +8,6 @@ import android.content.Context;
 import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.upload.UploadResult;
@@ -19,9 +18,11 @@ import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.model.DataValue;
 import fr.free.nrw.commons.wikidata.model.DataValue.ValueString;
 import fr.free.nrw.commons.wikidata.model.EditClaim;
+import fr.free.nrw.commons.wikidata.model.RemoveClaim;
 import fr.free.nrw.commons.wikidata.model.Snak_partial;
 import fr.free.nrw.commons.wikidata.model.Statement_partial;
 import fr.free.nrw.commons.wikidata.model.WikiBaseMonolingualTextValue;
+import fr.free.nrw.commons.wikidata.mwapi.MwPostResponse;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 import java.util.ArrayList;
@@ -34,7 +35,6 @@ import java.util.UUID;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
-import fr.free.nrw.commons.wikidata.mwapi.MwPostResponse;
 import timber.log.Timber;
 
 /**
@@ -72,9 +72,10 @@ public class WikidataEditService {
      * to the wikibase API to set tag against the entity.
      */
     @SuppressLint("CheckResult")
-    private Observable<Boolean> addDepictsProperty(final String fileEntityId,
-        final List<String> depictedItems) {
-
+    private Observable<Boolean> addDepictsProperty(
+        final String fileEntityId,
+        final List<String> depictedItems
+    ) {
         final EditClaim data = editClaim(
             ConfigUtils.isBetaFlavour() ? Collections.singletonList("Q10")
                 // Wikipedia:Sandbox (Q10)
@@ -165,11 +166,10 @@ public class WikidataEditService {
      * @param fileEntityId
      * @return
      */
-
     @SuppressLint("CheckResult")
     private Observable<Boolean> addCaption(final long fileEntityId, final String languageCode,
         final String captionValue) {
-        return wikiBaseClient.addLabelstoWikidata(fileEntityId, languageCode, captionValue)
+        return wikiBaseClient.addLabelsToWikidata(fileEntityId, languageCode, captionValue)
             .doOnNext(mwPostResponse -> onAddCaptionResponse(fileEntityId, mwPostResponse))
             .doOnError(throwable -> {
                 Timber.e(throwable, "Error occurred while setting Captions");
@@ -229,8 +229,10 @@ public class WikidataEditService {
         }
     }
 
-    public Observable addDepictionsAndCaptions(final UploadResult uploadResult,
-        final Contribution contribution) {
+    public Observable<Boolean> addDepictionsAndCaptions(
+        final UploadResult uploadResult,
+        final Contribution contribution
+    ) {
         return wikiBaseClient.getFileEntityId(uploadResult)
             .doOnError(throwable -> {
                 Timber
