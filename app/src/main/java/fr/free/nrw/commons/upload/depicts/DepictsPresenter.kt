@@ -223,9 +223,8 @@ class DepictsPresenter @Inject constructor(
                             if (error is InvalidLoginTokenException) {
                                 view.navigateToLoginScreen();
                             } else {
-                                Timber.e(
-                                    "Failed to update depictions"
-                                )
+                                view.dismissProgressDialog()
+                                Timber.e("Failed to update depictions")
                             }
                         })
                 )
