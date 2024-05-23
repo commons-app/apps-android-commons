@@ -16,6 +16,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.processors.PublishProcessor
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.lang.reflect.Proxy
 import java.util.*
@@ -267,10 +270,13 @@ class DepictsPresenter @Inject constructor(
      */
     fun getRecentDepictedItems(): MutableList<DepictedItem> {
         val depictedItemList: MutableList<DepictedItem> = ArrayList()
-        val depictsList = depictsDao.depictsList()
-        for (i in depictsList.indices) {
-            val depictedItem = depictsList[i].item
-            depictedItemList.add(depictedItem)
+        CoroutineScope(Dispatchers.IO).launch {
+            val depictsList = depictsDao.depictsList().await()
+
+            for (i in depictsList.indices) {
+                val depictedItem = depictsList[i].item
+                depictedItemList.add(depictedItem)
+            }
         }
         return depictedItemList
     }
