@@ -11,19 +11,19 @@ data class EditClaim(val claims: List<Statement_partial>) {
             entityIds.forEach {
                 list.add(
                     Statement_partial(
-                        Snak_partial(
-                            "value",
-                            propertyName,
-                            DataValue.EntityId(
+                        mainSnak = Snak_partial(
+                            snakType = "value",
+                            property = propertyName,
+                            dataValue = DataValue.EntityId(
                                 WikiBaseEntityValue(
-                                    "item",
-                                    it,
-                                    it.removePrefix("Q").toLong()
+                                    entityType = "item",
+                                    id = it,
+                                    numericId = it.removePrefix("Q").toLong()
                                 )
                             )
                         ),
-                        "statement",
-                        "preferred"
+                        type = "statement",
+                        rank = "preferred"
                     )
                 )
             }
