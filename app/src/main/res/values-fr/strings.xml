@@ -111,7 +111,7 @@
   <string name="logging_in_message">Veuillez patienter...</string>
   <string name="updating_caption_title">Mise à jour des légendes et des descriptions</string>
   <string name="updating_caption_message">Veuillez patienter...</string>
-  <string name="login_success" fuzzy="true">Connexion réussie !</string>
+  <string name="login_success">Connexion réussie !</string>
   <string name="login_failed">Échec de la connexion !</string>
   <string name="upload_failed">Fichier non trouvé. Veuillez en essayer un autre.</string>
   <string name="retry_limit_reached">Limite maximale de nouvel essai atteinte ! Veuillez annuler le téléchargement et réessayer</string>
@@ -144,7 +144,7 @@
   <string name="add_caption_toast">Veuillez fournir une légende pour ce fichier.</string>
   <string name="share_description_hint">Description</string>
   <string name="share_caption_hint">Légende</string>
-  <string name="login_failed_network" fuzzy="true">Impossible de se connecter — panne du réseau</string>
+  <string name="login_failed_network">Impossible de se connecter — panne du réseau</string>
   <string name="login_failed_throttled">Trop de tentatives infructueuses. Veuillez réessayer dans quelques minutes.</string>
   <string name="login_failed_blocked">Désolé, cet utilisateur a été bloqué sur Commons</string>
   <string name="login_failed_2fa_needed">Vous devez fournir votre code d’authentification à deux facteurs.</string>
@@ -272,6 +272,7 @@
   <string name="navigation_item_about">À propos</string>
   <string name="navigation_item_settings">Paramètres</string>
   <string name="navigation_item_feedback">Commentaire</string>
+  <string name="navigation_item_feedback_github">Avis via GitHub</string>
   <string name="navigation_item_logout">Déconnexion</string>
   <string name="navigation_item_info">Tutoriel</string>
   <string name="navigation_item_notification">Notifications</string>
@@ -313,6 +314,7 @@
   <string name="nearby_location_not_available">« À proximité » pourrait ne pas fonctionner correctement, votre emplacement étant indisponible.</string>
   <string name="upload_location_access_denied">Refus d’accès à la localisation. Veuillez définir manuellement votre localisation pour utiliser cette fonctionnalité.</string>
   <string name="location_permission_rationale_nearby">Une permission est requise pour afficher une liste de lieux à proximité</string>
+  <string name="location_permission_rationale_explore">Permission nécessaire pour afficher une liste d’images à proximité</string>
   <string name="nearby_directions">Directions</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipédia</string>
@@ -380,7 +382,7 @@
   <string name="quiz_screenshot_question">Cette copie d’écran est-elle correcte pour être téléversée ?</string>
   <string name="share_app_title">Partager l’application</string>
   <string name="rotate">Pivoter</string>
-  <string name="error_fetching_nearby_places" fuzzy="true">Erreur durant la recherche d’endroits proches.</string>
+  <string name="error_fetching_nearby_places">Impossible de charger les endroits proches</string>
   <string name="no_pictures_in_this_area">Aucune image dans cette zone</string>
   <string name="no_nearby_places_around">Aucun lieu à proximité</string>
   <string name="error_fetching_nearby_monuments">Erreur de récupération des monuments à proximité.</string>
@@ -472,7 +474,7 @@
   <string name="open_document_photo_picker_explanation">Le nouveau sélecteur de photos de Android risque de perdre des informations de localisation. Activez-le si vous semblez l’utiliser.</string>
   <string name="location_loss_warning">Le désactiver pourrait déclencher le nouveau sélecteur de photos de Android. Il risque de perdre des informations de localisation.\n\nTaper sur \'En savoir plus\' pour plus d’informations.</string>
   <string name="nearby_campaign_dismiss_message">Vous ne verrez plus les campagnes. Néanmoins, vous pouvez réactiver cette notification dans vos paramètres de configuration, si vous le souhaitez.</string>
-  <string name="this_function_needs_network_connection" fuzzy="true">Cette fonction nécessite une connexion réseau, veuillez consulter vos paramètres de connexion.</string>
+  <string name="this_function_needs_network_connection">Cette fonction nécessite une connexion réseau. Veuillez consulter vos paramètres de connexion.</string>
   <string name="error_processing_image">Une erreur est survenue durant le traitement de l’image. Veuillez recommencer !</string>
   <string name="getting_edit_token">Obtenir un jeton de modification</string>
   <string name="check_category_adding_template">Ajouter un modèle pour le contrôle de catégorie</string>
@@ -584,7 +586,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Impossible d’ajouter des coordonnées.</string>
   <string name="description_edit_helper_edit_message_else">Impossible d’ajouter des descriptions.</string>
   <string name="caption_edit_helper_edit_message_else">Impossible d’ajouter la légende.</string>
-  <string name="coordinates_picking_unsuccessful" fuzzy="true">Impossible d’obtenir les coordonnées.</string>
+  <string name="coordinates_picking_unsuccessful">Coordonnées de l’image non mises à jour</string>
   <string name="descriptions_picking_unsuccessful">Impossible d’obtenir les descriptions.</string>
   <string name="description_activity_title">Modifier les descriptions et les légendes</string>
   <string name="share_image_via">Partager l’image via</string>
@@ -599,12 +601,13 @@
   <string name="place_state_needs_photo">Photo manquante</string>
   <string name="place_type">Type de lieu :</string>
   <string name="nearby_search_hint">Pont, musée, hôtel, etc.</string>
-  <string name="you_must_reset_your_passsword" fuzzy="true">Quelque chose s’est mal passé lors de la connexion, vous devez réinitialiser votre mot de passe !!</string>
+  <string name="you_must_reset_your_passsword">Quelque chose s’est mal passé lors de la connexion. Vous devez réinitialiser votre mot de passe !</string>
   <string name="title_for_media">MÉDIA</string>
   <string name="title_for_child_classes">CLASSES ENFANTS</string>
   <string name="title_for_parent_classes">CLASSES PARENTES</string>
   <string name="upload_nearby_place_found_title">Lieu à proximité trouvé</string>
-  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Est-ce une photo de « %1$s » ?</string>
+  <string name="upload_nearby_place_found_description_plural">Ces images sont-elles de %1$s ?</string>
+  <string name="upload_nearby_place_found_description_singular">Est-ce une image de %1$s ?</string>
   <string name="title_app_shortcut_bookmark">Signets</string>
   <string name="title_app_shortcut_setting">Paramètres</string>
   <string name="remove_bookmark">Retiré des favoris</string>
@@ -618,8 +621,10 @@
   <string name="cannot_open_location_settings">Échec d’ouverture des paramètres d’emplacement. Veuillez activer la localisation manuellement.</string>
   <string name="recommend_high_accuracy_mode">Pour de meilleurs résultats, choisir le mode Haute Précision.</string>
   <string name="ask_to_turn_location_on">Activer la localisation ?</string>
+  <string name="ask_to_turn_location_on_text">Veuillez activer la localisation des services pour l’application montrant votre emplacement actuel</string>
   <string name="nearby_needs_location">« Lieux à proximité » nécessite que la localisation soit activée pour fonctionner correctement.</string>
-  <string name="upload_map_location_access" fuzzy="true">Vous devez donner accès à votre emplacement actuel pour définir automatiquement la localisation.</string>
+  <string name="explore_map_needs_location">Explorer les cartes nécessite le droit de localisation pour afficher les images proches</string>
+  <string name="upload_map_location_access">Vous devez donner le droit de localisation pour définir automatiquement la localisation.</string>
   <string name="use_location_from_similar_image">Avez-vous pris ces deux photos au même lieu ? Voulez-vous utiliser la latitude et la longitude de l’image de droite ?</string>
   <string name="load_more">Charger davantage</string>
   <string name="nearby_no_results">Aucun lieu trouvé, essayez de modifier vos critères de recherche.</string>
@@ -735,7 +740,7 @@
   <string name="add_location">Ajouter un lieu</string>
   <string name="feedback_sharing_data_alert">Veuillez supprimer de ce courriel toute information que vous n’aimeriez pas diffuser publiquement. Également, veuillez prendre conscience du fait que votre adresse de messagerie avec laquelle vous publiez, ainsi que le nom et l’image de profil associés, seront visibles publiquement.</string>
   <string name="explore_map_details">Détails</string>
-  <string name="achievements_unavailable_beta" fuzzy="true">Les réalisations ne sont disponibles que dans la version de production, veuillez consulter la documentation du développeur.</string>
+  <string name="achievements_unavailable_beta">Les réalisations ne sont disponibles que dans la version de production. Veuillez consulter la documentation du développeur.</string>
   <string name="leaderboard_unavailable_beta">Le classement n’est disponible que dans la version de production, veuillez consulter la documentation du développeur.</string>
   <string name="copyright_popup">Veuillez ne téléverser que des images que vous avez créées vous-même. Ceux qui téléversent des images soumises aux droits d’auteur seront bloqués. Ceci s’applique également à la version bêta. Merci pour votre test de l’application !</string>
   <string name="select_feedback_data_choice">Veuillez désélectionner toute information que vous ne vous sentez pas à l’aise de partager publiquement.</string>
@@ -780,11 +785,26 @@
   <string name="see_your_achievements">Voir vos réalisations</string>
   <string name="edit_image">Modifier l’image</string>
   <string name="edit_location">Modifier l’emplacement</string>
+  <string name="location_updated">Emplacement mis à jour !</string>
+  <string name="remove_location">Supprimer l’emplacement</string>
+  <string name="remove_location_warning_title">Supprimer l’avertissement de localisation</string>
+  <string name="remove_location_warning_desc">La localisation rend les images plus utiles et faciles à trouver. Voulez-vous vraiment supprimer l’emplacement de cette image ?</string>
+  <string name="location_removed">Emplacement supprimé !</string>
   <string name="send_thanks_to_author">Remercier l’auteur</string>
   <string name="error_sending_thanks">Erreur en envoyant un remerciement à l’auteur.</string>
-  <string name="invalid_login_message" fuzzy="true">Votre connexion a expiré, veuillez vous reconnecter.</string>
+  <string name="invalid_login_message">Votre connexion a expiré. Veuillez vous reconnecter.</string>
+  <string name="no_application_available_to_open_gpx_files">Aucune application disponible pour ouvrir les fichiers GPX</string>
+  <string name="file_saved_successfully">Fichier bien enregistré</string>
+  <string name="do_you_want_to_open_gpx_file">Voulez-vous ouvrir le  fichier GPX ?</string>
+  <string name="do_you_want_to_open_kml_file">Voulez-vous ouvrir le fichier KML ?</string>
+  <string name="failed_to_save_kml_file">Échec d’enregistrement du fichier KML.</string>
+  <string name="failed_to_save_gpx_file">Échec d’enregistrement du fichier GPX.</string>
+  <string name="saving_kml_file">Fichier KML enregistré</string>
+  <string name="saving_gpx_file">Fichier GPX enregistré</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d image sélectionnée</item>
     <item quantity="other">%d images sélectionnées</item>
   </plurals>
+  <string name="multiple_files_depiction">Souvenez-vous que toutes les images dans une importation multiple prennent les mêmes catégories et descriptions. Si les images de partagent pas les descriptions et catégories, veuillez effectuer plusieurs importations séparées.</string>
+  <string name="multiple_files_depiction_header">Note au sujet des importations multiples</string>
 </resources>

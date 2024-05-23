@@ -284,6 +284,7 @@
   <string name="nearby_location_not_available">\"I närheten\" kanske inte fungerar ordentligt. Platsen är inte tillgänglig.</string>
   <string name="upload_location_access_denied">Platsåtkomst nekad. Ange din plats manuellt för att använda den här funktionen.</string>
   <string name="location_permission_rationale_nearby">Behörighet krävs för att visa en lista över platser i närheten</string>
+  <string name="location_permission_rationale_explore">Behörighet krävs för att visa en lista över bilder i närheten</string>
   <string name="nearby_directions">Vägbeskrivning</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -351,7 +352,7 @@
   <string name="quiz_screenshot_question">Är det okej att ladda upp denna skärmdump?</string>
   <string name="share_app_title">Dela app</string>
   <string name="rotate">Rotera</string>
-  <string name="error_fetching_nearby_places" fuzzy="true">Fel uppstod när platser i närheten hämtades.</string>
+  <string name="error_fetching_nearby_places">Kunde inte ladda in platser i närheten</string>
   <string name="no_pictures_in_this_area">Inga bilder i detta område</string>
   <string name="no_nearby_places_around">Inga platser i närheten</string>
   <string name="error_fetching_nearby_monuments">Fel uppstod när monument i närheten hämtades.</string>
@@ -555,7 +556,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Kunde inte lägga till koordinater.</string>
   <string name="description_edit_helper_edit_message_else">Kunde inte lägga till beskrivningar.</string>
   <string name="caption_edit_helper_edit_message_else">Kunde inte lägga till bildtext.</string>
-  <string name="coordinates_picking_unsuccessful" fuzzy="true">Kunde inte hämta koordinater.</string>
+  <string name="coordinates_picking_unsuccessful">Bildens koordinater är inte uppdaterade</string>
   <string name="descriptions_picking_unsuccessful">Kunde inte hämta beskrivningar.</string>
   <string name="description_activity_title">Redigera beskrivningar och bildtexter</string>
   <string name="share_image_via">Dela bild via</string>
@@ -575,7 +576,8 @@
   <string name="title_for_child_classes">UNDERORDNADE KLASSER</string>
   <string name="title_for_parent_classes">ÖVERORDNADE KLASSER</string>
   <string name="upload_nearby_place_found_title">Hittade platser i närheten</string>
-  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Är detta ett foto på %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">Föreställer de här bilderna %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">Är detta en bild på %1$s?</string>
   <string name="title_app_shortcut_bookmark">Bokmärken</string>
   <string name="title_app_shortcut_setting">Inställningar</string>
   <string name="remove_bookmark">Togs bort från bokmärken</string>
@@ -589,8 +591,10 @@
   <string name="cannot_open_location_settings">Misslyckades att öppna platsinställningar. Aktivera plats manuellt</string>
   <string name="recommend_high_accuracy_mode">För bästa resultat väljer du alternativet \"Öka precisionen\".</string>
   <string name="ask_to_turn_location_on">Aktivera plats?</string>
+  <string name="ask_to_turn_location_on_text">Aktivera platstjänster för appen för att visa din aktuella plats</string>
   <string name="nearby_needs_location">\"I närheten\" behöver ha plats aktiverat för att fungera ordentligt</string>
-  <string name="upload_map_location_access" fuzzy="true">Du måste ge åtkomst till din nuvarande plats för att ange platsen automatiskt.</string>
+  <string name="explore_map_needs_location">Utforska kartan behöver platsbehörighet för att visa bilder i närheten</string>
+  <string name="upload_map_location_access">Du måste ge platsbehörighet för att automatiskt ange plats.</string>
   <string name="use_location_from_similar_image">Tog du dessa två bilder på samma plats? Vill du använda den högra bildens latitud/longitud?</string>
   <string name="load_more">Läs in fler</string>
   <string name="nearby_no_results">Inga platser hittades, försök ändra dina sökkriterier.</string>
@@ -769,4 +773,6 @@
     <item quantity="one">%d markerad bild</item>
     <item quantity="other">%d markerade bilder</item>
   </plurals>
+  <string name="multiple_files_depiction">Kom ihåg att när du laddar upp flera bilder får alla bilder samma kategorier och motiv. Om bilder inte bör dela beskrivningar och motiv bör du ladda upp de en och en istället.</string>
+  <string name="multiple_files_depiction_header">Anmärkning om att ladda upp flera bilder</string>
 </resources>

@@ -16,6 +16,7 @@
 * Kghbln
 * Killarnee
 * ManuelFranz
+* Mcliquid
 * Metalhead64
 * Nekky-chan
 * Ngschaider
@@ -311,6 +312,7 @@
   <string name="nearby_location_not_available">„In der Nähe“ arbeiten möglicherwiese nicht richtig. Der Standort ist nicht verfügbar.</string>
   <string name="upload_location_access_denied">Standortzugriff verweigert. Bitte lege deinen Standort manuell fest, um diese Funktion nutzen zu können.</string>
   <string name="location_permission_rationale_nearby">Berechtigung zur Anzeige einer Liste mit Orten in der Nähe erforderlich</string>
+  <string name="location_permission_rationale_explore">Berechtigung zur Anzeige einer Liste mit Orten in der Nähe erforderlich</string>
   <string name="nearby_directions">Richtungen</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -599,7 +601,8 @@
   <string name="title_for_child_classes">CHILD CLASSES</string>
   <string name="title_for_parent_classes">PARENT CLASSES</string>
   <string name="upload_nearby_place_found_title">Ort in der Nähe gefunden</string>
-  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Ist das ein Foto von %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">Sind das Bilder von %1$s ?</string>
+  <string name="upload_nearby_place_found_description_singular">Ist das ein Foto von %1$s?</string>
   <string name="title_app_shortcut_bookmark">Lesezeichen</string>
   <string name="title_app_shortcut_setting">Einstellungen</string>
   <string name="remove_bookmark">aus den Lesezeichen entfernt</string>
@@ -613,7 +616,9 @@
   <string name="cannot_open_location_settings">Die Standorteinstellungen konnten nicht geöffnet werden. Bitte schalte den Standort manuell ein</string>
   <string name="recommend_high_accuracy_mode">Die besten Ergebnisse erzielst du, wenn du den Modus „Hohe Genauigkeit“ wählst.</string>
   <string name="ask_to_turn_location_on">Standort einschalten?</string>
+  <string name="ask_to_turn_location_on_text">Bitte aktiviere die Ortungsdienste für die App, damit Dein aktueller Standort angezeigt wird</string>
   <string name="nearby_needs_location">Für die Funktion „in der Nähe“ muss der Standort aktiviert sein, um richtig zu funktionieren</string>
+  <string name="explore_map_needs_location">Zur Anzeige von Bildern in der Nähe ist eine Standortberechtigung für die Karte „Erkunden“ erforderlich.</string>
   <string name="upload_map_location_access">Um den Standort automatisch festlegen zu können, musst du die Berechtigung dazu erteilen.</string>
   <string name="use_location_from_similar_image">Hast du diese beiden Bilder am selben Ort aufgenommen? Möchtest du den Breiten- und Längengrad des rechten Bildes verwenden?</string>
   <string name="load_more">Mehr laden</string>
@@ -793,4 +798,6 @@
     <item quantity="one">Ein Bild ausgewählt</item>
     <item quantity="other">%d Bilder ausgewählt</item>
   </plurals>
+  <string name="multiple_files_depiction">Bitte beachte, dass bei einem Multiupload alle Bilder die gleichen Kategorien und Bezeichnungen erhalten. Sollten die Bilder keine gemeinsamen Bezeichnungen und Kategorien haben, führe bitte mehrere separate Uploads durch.</string>
+  <string name="multiple_files_depiction_header">Hinweis zu Mehrfach-Uploads</string>
 </resources>

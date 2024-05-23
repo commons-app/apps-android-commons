@@ -19,6 +19,7 @@
 * Ykhwong
 * YuzaTea
 * 그냥기여자
+* 밥풀떼기
 * 아라
 -->
 <resources>
@@ -88,8 +89,9 @@
   <string name="login_success">로그인 성공!</string>
   <string name="login_failed">로그인 실패!</string>
   <string name="upload_failed">파일을 찾을 수 없습니다. 다른 파일을 사용해 주십시오.</string>
-  <string name="authentication_failed" fuzzy="true">인증을 실패했습니다. 다시 로그인해 주십시오</string>
+  <string name="authentication_failed">인증 실패. 다시 로그인해 주십시오</string>
   <string name="uploading_started">올리기를 시작했습니다!</string>
+  <string name="uploading_queued">업로드 대기 중 (제한 연결 모드 활성화됨)</string>
   <string name="upload_completed_notification_title">%1$s 파일을 올렸습니다!</string>
   <string name="upload_completed_notification_text">올린 것을 보려면 탭하세요</string>
   <string name="upload_progress_notification_title_start">%1$s 파일 올리는 중</string>
@@ -272,7 +274,7 @@
   <string name="nominated_see_more">상세 내용은 웹페이지를 참고하십시오</string>
   <string name="skip_login">건너뛰기</string>
   <string name="navigation_item_login">로그인</string>
-  <string name="skip_login_title" fuzzy="true">로그인을 정말로 건너뛰시겠습니까?</string>
+  <string name="skip_login_title">로그인을 건너뛰시겠습니까?</string>
   <string name="skip_login_message">나중에 사진을 업로드하려면 로그인해야 합니다.</string>
   <string name="login_alert_message">이 기능을 사용하려면 로그인해 주십시오</string>
   <string name="copy_wikicode">위키텍스트를 클립보드에 복사</string>
@@ -338,7 +340,7 @@
   <string name="construction_event_answer">기술이나 문화를 보여주는 사진은 공용에서 기꺼이 환영합니다.</string>
   <string name="congratulatory_message_quiz">정답 %1$s개를 맞추셨습니다. 축하드립니다!</string>
   <string name="warning_for_no_answer">질문에 답하기 위해 옵션 2개 중 하나를 선택하십시오</string>
-  <string name="user_not_logged_in" fuzzy="true">로그인 세션이 만료되었으므로 다시 로그인해 주십시오.</string>
+  <string name="user_not_logged_in">로그인 세션 만료. 다시 로그인해 주십시오.</string>
   <string name="quiz_result_share_message">친구들과 퀴즈를 공유하세요!</string>
   <string name="continue_message">계속</string>
   <string name="correct">정답</string>
@@ -347,7 +349,9 @@
   <string name="share_app_title">앱 공유</string>
   <string name="rotate">회전</string>
   <string name="error_fetching_nearby_places">주변 장소를 불러오지 못했습니다</string>
+  <string name="no_pictures_in_this_area">이 지역에는 사진이 없습니다</string>
   <string name="no_nearby_places_around">근처에 장소가 없습니다</string>
+  <string name="error_fetching_nearby_monuments">주변 명소를 가져오는 중에 오류가 발생했습니다.</string>
   <string name="no_recent_searches">최근 검색 없음</string>
   <string name="delete_recent_searches_dialog">검색 기록을 지우겠습니까?</string>
   <string name="cancel_upload_dialog">이 업로드를 취소하시겠습니까?</string>
@@ -432,7 +436,10 @@
   <string name="send_thank_failure_title">감사 표현 보내기: 실패</string>
   <string name="review_category">알맞게 분류됐습니까?</string>
   <string name="review_thanks">기여자에게 감사를 표하시겠습니까?</string>
+  <string name="review_no_category">앗, 분류가 달리지 않은 것 같습니다!</string>
   <string name="review_category_explanation">이 이미지는 %1$s 분류에 속해 있습니다.</string>
+  <string name="review_spam_report_question">범위 밖이며 사유는</string>
+  <string name="review_c_violation_report_question">저작권 위반이며 사유는</string>
   <string name="review_thanks_yes_button_text">다음 이미지</string>
   <string name="review_thanks_no_button_text">예</string>
   <string name="skip_image_explanation">이 버튼을 클릭하면 위키미디어 공용으로부터 최근 업로드된 다른 이미지를 제공합니다</string>
@@ -547,8 +554,13 @@
   <string name="leaderboard_yearly">매년</string>
   <string name="leaderboard_weekly">매주</string>
   <string name="leaderboard_upload">업로드</string>
+  <string name="leaderboard_nearby">근처</string>
   <string name="leaderboard_my_rank_button_text">내 순위</string>
   <string name="limited_connection_mode">제한된 연결 모드</string>
+  <string name="statistics_quality">고품질 사진</string>
+  <string name="quality_images_info">고품질 사진은 품질 상의 몇가지 기준 (대부분 기술적 특성)을 충족하고 위키미디어 프로젝트에 가치가 있는 사진이나 도해를 말합니다.</string>
+  <string name="resuming_upload">업로드를 재개하는 중…</string>
+  <string name="pausing_upload">업로드를 중단하는 중…</string>
   <string name="cancelling_upload">올리기를 취소하는 중…</string>
   <string name="cancel_upload">올리기 취소</string>
   <string name="limited_connection_explanation">연결 제한 모드를 사용 중입니다. 모든 업로드는 일시 중단되며 이 모드를 끄면 재개됩니다.</string>
@@ -568,6 +580,13 @@
   <string name="image_location">이미지 위치</string>
   <string name="check_whether_location_is_correct">위치가 올바른지 확인</string>
   <string name="title_page_bookmarks_items">항목</string>
+  <string name="done">완료</string>
+  <string name="back">뒤로</string>
+  <string name="welcome_custom_picture_selector_text">커스텀 사진 선택기에 오신 것을 환영합니다.</string>
+  <string name="custom_selector_info_text1">이 선택기는 당신이 지금까지 커먼즈에 업로드한 사진을 보여줍니다.</string>
+  <string name="custom_selector_info_text2">왼쪽 사진과 달리 오른쪽 사진에는 이미 업로드되었음을 나타내는 커먼즈 로고가 있습니다. \n이미지를 미리 보시려면 길게 터치하세요.</string>
+  <string name="welcome_custom_selector_ok">훌륭합니다</string>
+  <string name="custom_selector_already_uploaded_image_text">이 이미지는 이미 커먼즈에 업로드되었습니다.</string>
   <string name="need_permission">권한 필요</string>
   <string name="contributions_of_user">사용자의 기여: %s</string>
   <string name="menu_view_user_page">사용자 문서 보기</string>
@@ -575,6 +594,9 @@
   <string name="advanced_options">고급 옵션</string>
   <string name="apply">적용</string>
   <string name="reset">재설정</string>
+  <string name="no_location_found_title">위치를 찾을 수 없습니다</string>
+  <string name="no_location_found_message">이 사진을 찍은 장소를 추가해 보는 것은 어떨까요?\n위치 정보는 위키 편집자가 사진을 찾는 데 도움이 되며, 훨씬 더 유용하게 사용됩니다.\n감사합니다!</string>
+  <string name="add_location">위치 추가</string>
   <string name="explore_map_details">자세한 사항</string>
   <string name="copyright_popup">당신이 찍은 사진만 올려 주십시오. 저작권이 있는 이미지를 올린 사람은 차단됩니다. 양질의 이미지에도 해당합니다. 앱을 테스트해 주셔서 고맙습니다!</string>
   <string name="api_level">API 레벨</string>
@@ -588,9 +610,36 @@
   <string name="enter_description">당신의 피드백은 무엇입니까?</string>
   <string name="your_feedback">피드백</string>
   <string name="mark_as_not_for_upload">업로드 대상이 아닌 것으로 표시</string>
+  <string name="unmark_as_not_for_upload">업로드 대상 아님 표시 해제하기</string>
+  <string name="marking_as_not_for_upload">업로드 대상 아님으로 표시</string>
   <string name="no_more_images_found">더 이상 이미지를 찾을 수 없습니다</string>
   <string name="this_image_is_already_uploaded">이 이미지는 이미 업로드되었습니다</string>
-  <string name="invalid_login_message" fuzzy="true">로그인이 만료되었습니다. 다시 로그인해 주십시오.</string>
+  <string name="can_not_select_this_image_for_upload">이 이미지는 업로드 대상으로 선택할 수 없습니다.</string>
+  <string name="image_selected">선택한 이미지</string>
+  <string name="image_marked_as_not_for_upload">업로드 대상이 아닌 것으로 표시한 이미지</string>
+  <string name="menu_view_report">신고</string>
+  <string name="menu_view_set_white_background">흰 배경 설정</string>
+  <string name="menu_view_set_black_background">검은 배경 설정</string>
+  <string name="report_violation">규정위반 신고</string>
+  <string name="report_user">이 사용자 신고</string>
+  <string name="report_content">이 콘텐츠 신고</string>
+  <string name="request_user_block">이 사용자 차단 요청</string>
+  <string name="welcome_to_full_screen_mode_text">전체 화면 선택 모드에 오신 것을 환영합니다</string>
+  <string name="full_screen_mode_zoom_info">두 손가락으로 확대 / 축소하세요.</string>
+  <string name="full_screen_mode_features_info">다음 방향으로 길고 재빠르게 넘겨보세요. \n- 왼쪽/오른쪽: 이전/다음으로 이동 \n- 위쪽: 선택\n- 아래쪽: 비업로드용으로 표시</string>
+  <string name="learn_how_to_write_a_useful_description">유용한 설명을 추가하는 법 알아보기</string>
+  <string name="learn_how_to_write_a_useful_caption">유용한 캡션을 추가하는 법 알아보기</string>
+  <string name="see_your_achievements">업적 보기</string>
+  <string name="edit_image">그림 편집</string>
+  <string name="edit_location">위치 편집</string>
+  <string name="location_updated">위치가 갱신되었습니다!</string>
+  <string name="remove_location">위치 제거</string>
+  <string name="remove_location_warning_title">위치 경고 제거</string>
+  <string name="remove_location_warning_desc">위치를 표시하면 그림이 더욱 찾기 쉽고 유용해집니다. 정말로 이 그림에서 위치를 제거하시겠습니까?</string>
+  <string name="location_removed">위치가 삭제되었습니다!</string>
+  <string name="send_thanks_to_author">작성자에게 감사 표시하기</string>
+  <string name="error_sending_thanks">작성자에게 감사를 표하던 도중에 오류가 발생하였습니다.</string>
+  <string name="invalid_login_message">로그인 세션 만료. 다시 로그인해 주십시오.</string>
   <string name="file_saved_successfully">파일이 성공적으로 저장되었습니다</string>
   <string name="do_you_want_to_open_gpx_file">GPX 파일을 여시겠습니까?</string>
   <string name="do_you_want_to_open_kml_file">KML 파일을 여시겠습니까?</string>
