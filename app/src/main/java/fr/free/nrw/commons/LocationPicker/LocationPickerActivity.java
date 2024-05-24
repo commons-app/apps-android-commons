@@ -364,12 +364,19 @@ public class LocationPickerActivity extends BaseActivity implements
     }
 
     /**
-     * Show the location in map app
+     * Show the location in map app. Map will center on EXIF location, if available.
      */
     public void showInMap() {
-        Utils.handleGeoCoordinates(this,
-            new fr.free.nrw.commons.location.LatLng(mapView.getMapCenter().getLatitude(),
-                mapView.getMapCenter().getLongitude(), 0.0f));
+        //Check to see if EXIF location data is available
+        if(cameraPosition != null){
+            Utils.handleGeoCoordinates(this,
+                new fr.free.nrw.commons.location.LatLng(cameraPosition.getLatitude(),
+                    cameraPosition.getLongitude(), 0.0f));
+        } else {
+            Utils.handleGeoCoordinates(this,
+                new fr.free.nrw.commons.location.LatLng(mapView.getMapCenter().getLatitude(),
+                    mapView.getMapCenter().getLongitude(), 0.0f));
+        }
     }
 
     /**
