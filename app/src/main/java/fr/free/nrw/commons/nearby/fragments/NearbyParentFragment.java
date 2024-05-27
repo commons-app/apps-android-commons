@@ -68,7 +68,6 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationPermissionsHelper;
 import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
-import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.CheckBoxTriStates;
@@ -1748,7 +1747,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         } else if (!place.pic.trim().isEmpty()) {
             return (isBookmarked ?
                 R.drawable.ic_custom_map_marker_green_bookmarked :
-                R.drawable.ic_custom_map_marker_green);
+                R.drawable.ic_custom_map_marker_green_dark);
         } else if (!place.exists) { // Means that the topic of the Wikidata item does not exist in the real world anymore, for instance it is a past event, or a place that was destroyed
             return (isBookmarked ?
                 R.drawable.ic_custom_map_marker_grey_bookmarked :
@@ -1756,7 +1755,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         } else {
             return (isBookmarked ?
                 R.drawable.ic_custom_map_marker_blue_bookmarked :
-                R.drawable.ic_custom_map_marker);
+                R.drawable.ic_custom_map_marker_dark);
         }
     }
 
