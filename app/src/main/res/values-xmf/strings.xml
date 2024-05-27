@@ -8,12 +8,14 @@
   <string name="commons_github">ვიკიოწკარუეს წყუშ კოდი Github-ის</string>
   <string name="commons_logo">ვიკიოწკარუეშ ლოგო</string>
   <string name="commons_website">ვიკიოწკარუეშ ვებ-ხასჷლა</string>
+  <string name="exit_location_picker">ლოკაციაშ გიშაგორუაშ ოსინთეშე გიშულა</string>
   <string name="submit">ჯღონუა</string>
   <string name="add_another_description">შხვა ეჭარუაშ გეძინა</string>
   <string name="add_new_contribution">ახალი თიაშ გეძინა</string>
   <string name="add_contribution_from_camera">თიაშ გეძინა კამერაშე</string>
   <string name="add_contribution_from_photos">თიაშ გეძინა სურათეფშე</string>
   <string name="add_contribution_from_contributions_gallery">თიაშ გეძინა კინოხიან თიეფიშ გალარეაშე</string>
+  <string name="show_captions">მუკნაჭარეფი</string>
   <string name="row_item_language_description">ნინაშ ეჭარუა</string>
   <string name="row_item_caption">მუკნაჭარა</string>
   <string name="show_captions_description">ეჭარუა</string>
@@ -55,6 +57,7 @@
   <string name="app_name">ვიკიოწკარუე</string>
   <string name="menu_settings">პარამეტრეფი</string>
   <string name="intent_share_upload_label">ვიკიოწკარუეშა ეხარგუა</string>
+  <string name="upload_in_progress">ეთმიხარგუ...</string>
   <string name="username">მახვარებუშ ჯოხო</string>
   <string name="password">პაროლი</string>
   <string name="login_credential">გემშართით თქვანი პროფილით Commons Beta-შა</string>
@@ -63,8 +66,10 @@
   <string name="signup">რეგისტრაცია</string>
   <string name="logging_in_title">სისტემაშა მიშულა</string>
   <string name="logging_in_message">ქორთხინთ ქჷმიცადით …</string>
-  <string name="login_success" fuzzy="true">სისტემაშა მიშულაქ წჷმოძინელო გეთუ!</string>
-  <string name="login_failed" fuzzy="true">სისტემაშა მიშულაქ ვემიხუჯინუ!</string>
+  <string name="updating_caption_title">მუკნაჭარეფი დო ეჭარუეფი მითმიახალებუ</string>
+  <string name="updating_caption_message">ქორთხინთ ქჷმიცადით...</string>
+  <string name="login_success">სისტემაშა მიშულაქ წჷმოძინელო გეთუ!</string>
+  <string name="login_failed">სისტემაშა მიშულაქ ვემიხუჯინუ!</string>
   <string name="upload_failed">ფაილქ ვეგორუ. ქორთხინთ, ქოცადით შხვა ფაილი.</string>
   <string name="authentication_failed" fuzzy="true">აუთენტიფიკაციაქ ვემიხუჯინუ, ქოთხინთ ავტორიზაცია ხოლო ართშა გემკორთით.</string>
   <string name="uploading_started">ეხარგუაქ ქჷდიჭყუ!</string>
@@ -108,11 +113,14 @@
   <string name="display_list_button">ერკებული</string>
   <string name="contributions_subtitle_zero">(ეხარგუეფი ვა რე)</string>
   <string name="categories_not_found">ვეგორინჷ კატეგორიეფქ, ნამუეფით მოგენა %1$s</string>
+  <string name="no_child_classes">%1$s-ს ვა უღჷ დოჸუნელი კლასეფი</string>
+  <string name="no_parent_classes">%1$s-ს ვა უღჷ მასქერული კლასეფი</string>
   <string name="categories_skip_explanation">ქეგუძინით კატეგორიეფი, თქვანი სურათეფი უმოს მოხუჯურ მიოგორალქ იჸუას ვიკიოწკარუესჷნ.\nგემშეჸონით ჯოხო კატეგორიეფიშ გიოძინალო.</string>
   <string name="categories_activity_title">კატეგორიეფი</string>
   <string name="title_activity_settings">პარამეტრეფი</string>
   <string name="title_activity_signup">რეგისტრაცია</string>
   <string name="title_activity_featured_images">გიშნაგორა სურათეფი</string>
+  <string name="title_activity_custom_selector">მახვარებური სელექტორი</string>
   <string name="title_activity_category_details">კატეგორია</string>
   <string name="title_activity_review">ექსპერტული ფასება</string>
   <string name="menu_about">პროგრამაშ გეშა</string>
@@ -277,12 +285,15 @@
   <string name="title_activity_search">გორუა</string>
   <string name="search_recent_header">ბოლოს ნაგორუეფი:</string>
   <string name="provider_searches">ასედე გორილი მოთხირეფი</string>
+  <string name="provider_recent_languages">ბოლო ნინაშობური მოთხირეფი</string>
   <string name="error_loading_categories">კატეგორიეფიშ ინოხარგუაშის ჩილათაქ მოხვადჷ.</string>
+  <string name="error_loading_depictions">ეჭარუაშ ეხარგუაშ ბორჯის ჩილათაქ მოხვადჷ.</string>
   <string name="search_tab_title_media">მულტიმედია</string>
   <string name="search_tab_title_categories">კატეგორიეფი</string>
   <string name="search_tab_title_depictions">ელემენტეფი</string>
   <string name="explore_tab_title_featured">გიშნაგორა</string>
   <string name="explore_tab_title_mobile">მობილურით ეხარგილი</string>
+  <string name="explore_tab_title_map">რუკა</string>
   <string name="successful_wikidata_edit">სურათი გეძინელი რე %1$s-შა ვიკიმუნაჩემეფს!</string>
   <string name="menu_set_wallpaper">ფონო გერინაფა</string>
   <string name="wallpaper_set_successfully">ფონქ წუმორინელო ქეგედირთჷ!</string>
@@ -296,7 +307,12 @@
   <string name="correct">თინი გამა</string>
   <string name="wrong">გამა ჩილათირი რე</string>
   <string name="quiz_screenshot_question">თე სკრინშოტი ჯგირი რენო ეიოხარგალო?</string>
+  <string name="rotate">მუკორთაფა</string>
+  <string name="no_pictures_in_this_area">თაქ ვა რე მუთუნნერი სურათი</string>
+  <string name="no_nearby_places_around">ვა რე გოხოლუაშ აბანეფი</string>
+  <string name="no_recent_searches">ასერდეიანი მუნაგორეფი ვა რე</string>
   <string name="delete_recent_searches_dialog">დასურო გოკონანო გორილეფიშ ისტორიაშ ლასუა?</string>
+  <string name="cancel_upload_dialog">გონებნანო ეხარგუაშ გოუქვაფა?</string>
   <string name="delete_search_dialog">გონებჷნანო ათე გორუაშ ლასუა?</string>
   <string name="search_history_deleted">გორუაშ ისტორია ლასირი რე</string>
   <string name="nominate_delete">ლასუაშო ნომინირაფა</string>
@@ -306,6 +322,7 @@
   <string name="statistics">სტატისტიკა</string>
   <string name="statistics_thanks">მარდი მეღებული რე</string>
   <string name="statistics_featured">გიშნაგორა სურათეფი</string>
+  <string name="statistics_wikidata_edits">გოხოლუაშ აბანეფიშ სურათეფი</string>
   <string name="level">დონე</string>
   <string name="images_uploaded">სურათეფი ეხარგილი რე</string>
   <string name="image_reverts">სურათეფი ვადორთელენა</string>

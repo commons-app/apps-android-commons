@@ -2,6 +2,7 @@
 <!-- Authors:
 * Aalam
 * Babanwalia
+* Cabal
 * Jimidar
 * Kuldeepburjbhalaike
 * Sony dandiwal
@@ -9,6 +10,12 @@
 -->
 <resources>
   <string name="commons_logo">ਕਾਮਨਜ਼ ਲੋਗੋ</string>
+  <string name="add_another_description">ਇੱਕ ਹੋਰ ਵੇਰਵਾ ਸ਼ਾਮਲ ਕਰੋ</string>
+  <string name="add_new_contribution">ਨਵਾਂ ਯੋਗਦਾਨ ਸ਼ਾਮਲ ਕਰੋ</string>
+  <string name="show_captions_description">ਵੇਰਵਾ</string>
+  <string name="nearby_row_image">ਤਸਵੀਰ</string>
+  <string name="nearby_all">ਸਾਰੇ</string>
+  <string name="appwidget_img">ਦਿਨ ਦੀ ਤਸਵੀਰ</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">੧ ਫ਼ਾਈਲ ਚੜ੍ਹਾਈ ਜਾ ਰਹੀ ਹੈ</item>
     <item quantity="other">%1$d ਫ਼ਾਈਲਾਂ ਚੜ੍ਹਾਈਆਂ ਜਾ ਰਹੀਆਂ ਹਨ</item>
@@ -27,6 +34,9 @@
     <item quantity="other">%1$d ਅੱਪਲੋਡਾਂ</item>
   </plurals>
   <string name="share_license_summary" fuzzy="true">ਇਹ ਤਸਵੀਰ ਦਾ %1$s ਹੇਠ ਲਸੰਸ ਜਾਰੀ ਕੀਤੀ ਜਾਵੇਗਾ</string>
+  <string name="navigation_item_explore">ਪੜਚੋਲ ਕਰੋ</string>
+  <string name="preference_category_appearance">ਦਿੱਖ</string>
+  <string name="preference_category_general">ਆਮ</string>
   <string name="app_name" fuzzy="true">ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼</string>
   <string name="menu_settings">ਸੈਟਿੰਗ</string>
   <string name="username">ਵਰਤੋਂਕਾਰ ਨਾਂ</string>
@@ -34,6 +44,7 @@
   <string name="login">ਦਾਖ਼ਲ ਹੋਵੋ</string>
   <string name="logging_in_title">ਦਾਖ਼ਲਾ ਹੋ ਰਿਹਾ ਹੈ</string>
   <string name="logging_in_message">ਉਡੀਕੋ ਜੀ…</string>
+  <string name="updating_caption_message">ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕੋ...</string>
   <string name="login_success">ਦਾਖ਼ਲ ਹੋਣਾ ਸਫ਼ਲ!</string>
   <string name="login_failed">ਦਾਖ਼ਲ ਹੋਣਾ ਅਸਫ਼ਲ!</string>
   <string name="upload_failed">ਫ਼ਾਇਲ ਦੀ ਖੋਜ ਨਹੀਂ ਹੋ ਸਕੀ। ਕਿਰਪਾ ਕਰਕੇ ਹੋਰ ਫ਼ਾਇਲ ਖੋਜੋ।</string>
@@ -69,12 +80,14 @@
   <string name="categories_search_text_hint">ਸ਼੍ਰੇਣੀਆਂ ਖੋਜੋ</string>
   <string name="menu_save_categories">ਸਾਂਭੋ</string>
   <string name="refresh_button">ਤਾਜ਼ਾ ਕਰੋ</string>
+  <string name="display_list_button">ਸੂਚੀ</string>
   <string name="contributions_subtitle_zero" fuzzy="true">ਫ਼ਿਲਹਾਲ ਕੋਈ ਅੱਪਲੋਡ ਨਹੀਂ</string>
   <string name="categories_not_found">%1$s ਨਾਲ਼ ਮੇਲ ਖਾਂਦੀ ਕੋਈ ਸ਼੍ਰੇਣੀ ਨਹੀਂ ਲੱਭੀ</string>
   <string name="categories_skip_explanation" fuzzy="true">ਆਪਣੀਆਂ ਤਸਵੀਰਾਂ ਨੂੰ ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਵਿਚ ਜ਼ਿਆਦਾ ਲੱਭਣਯੋਗ ਬਣਾਉਣ ਲਈ ਸ਼੍ਰੇਣੀਆਂ ਜੋੜੋ।\n\nਸ਼੍ਰੇਣੀਆਂ ਜੋੜਨ ਲਈ ਟਾਈਪ ਕਰਨ ਅਰੰਭ ਕਰੋ।\nਇਸ ਕਾਰਜ ਨੂੰ ਅਣਡਿੱਠਾ ਕਰਨ ਲਈ ਇਹ ਸੁਨੇਹਾ ਥਪੇੜੋ (ਜਾਂ ਵਾਪਸੀ ਬਟਨ ਦਬਾਓ)।</string>
   <string name="categories_activity_title">ਸ਼੍ਰੇਣੀਆਂ</string>
   <string name="title_activity_settings">ਸੈਟਿੰਗ</string>
   <string name="title_activity_signup">ਸਾਈਨ ਅੱਪ</string>
+  <string name="title_activity_category_details">ਸ਼੍ਰੇਣੀ</string>
   <string name="menu_about">ਇਸ ਬਾਰੇ</string>
   <string name="about_license" fuzzy="true">ਅਜ਼ਾਦ ਸਰੋਤ ਸਾਫ਼ਟਵੇਅਰ ਨੂੰ &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; ਅਧੀਨ ਜਾਰੀ ਕੀਤਾ ਗਿਆ ਹੈ</string>
   <string name="about_improve" fuzzy="true">ਸਰੋਤ &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt; ਉੱਤੇ। ਮੁਸ਼ਕਲਾਂ &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; ਉੱਤੇ।</string>
@@ -117,6 +130,7 @@
   <string name="detail_panel_cats_loading">ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...</string>
   <string name="detail_panel_cats_none">ਕੋਈ ਵੀ ਨਹੀਂ ਚੁਣਿਆ</string>
   <string name="detail_description_empty">ਕੋਈ ਵੇਰਵਾ ਨਹੀਂ</string>
+  <string name="detail_discussion_empty">ਕੋਈ ਚਰਚਾ ਨਹੀਂ</string>
   <string name="detail_license_empty">ਅਣਜਾਣ ਲਸੰਸ</string>
   <string name="menu_refresh">ਤਾਜ਼ਾ ਕਰੋ</string>
   <string name="read_storage_permission_rationale" fuzzy="true">ਆਗਿਆ ਚਾਹੀਦੀ ਹੈ: ਬਾਹਰੀ ਸਟੋਰੇਜ ਬਾਰੇ। ਇਸ ਤੋਂ ਬਿਨਾਂ ਐਪ ਕਾਰਜ ਨਹੀਂ ਕਰ ਸਕੇਗੀ।</string>
@@ -126,6 +140,8 @@
   <string name="no">ਨਹੀਂ</string>
   <string name="media_detail_title">ਸਿਰਲੇਖ</string>
   <string name="media_detail_description">ਵੇਰਵਾ</string>
+  <string name="media_detail_discussion">ਚਰਚਾ</string>
+  <string name="media_detail_author">ਲਿਖਾਰੀ</string>
   <string name="media_detail_uploaded_date">ਅਪਲੋਡ ਦੀ ਮਿਤੀ</string>
   <string name="media_detail_license">ਲਸੰਸ</string>
   <string name="media_detail_coordinates">ਗੁਣਕ</string>
@@ -137,14 +153,51 @@
   <string name="cancel">ਰੱਦ ਕਰੋ</string>
   <string name="navigation_drawer_open">ਖੋਲ੍ਹੋ</string>
   <string name="navigation_drawer_close">ਬੰਦ ਕਰੋ</string>
-  <string name="navigation_item_home">ਮੁੱਖ ਸਫ਼ਾ</string>
+  <string name="navigation_item_home">ਮੁੱਢਲਾ ਸਫ਼ਾ</string>
   <string name="navigation_item_upload">ਚੜ੍ਹਾਉ</string>
   <string name="navigation_item_nearby">ਨੇੜੇ-ਤੇੜੇ</string>
   <string name="navigation_item_about">ਬਾਰੇ</string>
   <string name="navigation_item_settings">ਸੈਟਿੰਗਾਂ</string>
-  <string name="navigation_item_feedback">ਫ਼ੀਡਬੈਕ</string>
+  <string name="navigation_item_feedback">ਸੁਝਾਅ</string>
   <string name="navigation_item_logout">ਬਾਹਰ ਆਉ</string>
   <string name="navigation_item_info">ਟਿਊਟੋਰਿਅਲ</string>
+  <string name="navigation_item_notification">ਸੂਚਨਾਵਾਂ</string>
+  <string name="navigation_item_review">ਪਰਖੋ</string>
+  <string name="nearby_info_menu_wikipedia_article">ਵਿਕੀਪੀਡੀਆ ਲੇਖ</string>
+  <string name="upload_problem_image_dark">ਤਸਵੀਰ ਬਹੁਤ ਗੂੜ੍ਹੀ ਹੈ।</string>
+  <string name="upload_problem_image_blurry">ਤਸਵੀਰ ਧੁੰਦਲੀ ਹੈ।</string>
+  <string name="skip_login">ਛੱਡੋ</string>
+  <string name="nearby_wikidata">ਵਿਕੀਡੇਟਾ</string>
+  <string name="nearby_wikipedia">ਵਿਕੀਪੀਡੀਆ</string>
+  <string name="about_faq">ਅਕਸਰ ਪੁੱਛੇ ਜਾਂਦੇ ਸੁਆਲ</string>
+  <string name="welcome_skip_button">ਸਿਖਲਾਈ ਛੱਡੋ</string>
+  <string name="about_translate">ਤਰਜਮਾ ਕਰੋ</string>
+  <string name="about_translate_title">ਬੋਲੀਆਂ</string>
+  <string name="about_translate_proceed">ਅੱਗੇ ਵਧੋ</string>
+  <string name="about_translate_cancel">ਰੱਦ ਕਰੋ</string>
+  <string name="menu_search_button">ਲੱਭੋ</string>
+  <string name="title_activity_search">ਲੱਭੋ</string>
+  <string name="search_tab_title_categories">ਸ਼੍ਰੇਣੀਆਂ</string>
+  <string name="explore_tab_title_map">ਨਕਸ਼ਾ</string>
+  <string name="question">ਸਵਾਲ</string>
+  <string name="continue_message">ਜਾਰੀ ਰੱਖੋ</string>
+  <string name="delete">ਮਿਟਾਓ</string>
+  <string name="Achievements">ਪ੍ਰਾਪਤੀਆਂ</string>
+  <string name="statistics">ਅੰਕੜੇ</string>
+  <string name="statistics_thanks">ਧੰਨਵਾਦ ਪ੍ਰਾਪਤ ਹੋਏ</string>
+  <string name="read_notifications">ਸੂਚਨਾਵਾਂ (ਪੜ੍ਹਿਆਂ)</string>
+  <string name="list_sheet">ਸੂਚੀ</string>
+  <string name="next">ਅੱਗੇ</string>
+  <string name="previous">ਪਿਛਲਾ</string>
+  <string name="title_page_bookmarks_locations">ਟਿਕਾਣਾ</string>
+  <string name="ends_on">ਨੂੰ ਮਿਆਦ ਪੁਗਦੀ</string>
+  <string name="display_campaigns">ਮੁਹਿੰਮਾਂ ਵੇਖਾਓ</string>
+  <string name="option_allow">ਇਜਾਜ਼ਤ ਦਿਓ</string>
+  <string name="option_dismiss">ਖ਼ਾਰਜ ਕਰੋ</string>
+  <string name="send_thank_success_title">ਧੰਨਵਾਦ ਭੇਜਣਾ: ਸਫਲ ਹੋਇਆ</string>
   <string name="please_wait">ਕਿਰਪਾ ਕਰਕੇ ਉਡੀਕੋ...</string>
+  <string name="copied_successfully">ਉਤਾਰਾ ਕੀਤਾ</string>
+  <string name="exif_tag_name_location">ਟਿਕਾਣਾ</string>
+  <string name="wikipedia_instructions_step_7">ਲਿਖਤ ਛਾਪੋ</string>
   <string name="invalid_login_message">ਤੁਹਾਡੇ ਦਾਖਲੇ ਦੀ ਮਿਆਦ ਪੁੱਗ ਗਈ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਦੁਬਾਰਾ ਦਾਖਲ ਹੋਵੋ।</string>
 </resources>

@@ -473,7 +473,7 @@
   <string name="display_location_permission_explanation">申请附近通知卡查看功能所必需的位置权限。</string>
   <string name="achievements_fetch_failed">出了点问题，我们无法获取成就</string>
   <string name="achievements_fetch_failed_ultimate_achievement">您做出了许多贡献，我们的计算系统无法应对。这是最终的成就。</string>
-  <string name="ends_on">结束于：</string>
+  <string name="ends_on">结束时间：</string>
   <string name="display_campaigns">显示活动</string>
   <string name="display_campaigns_explanation">显示正在进行的活动</string>
   <string name="in_app_camera_location_access_explanation">允许应用获取位置，以防相机未记录位置。某些设备的相机不记录位置。在这种情况下，让应用获取位置并将其附加到照片可以让您的贡献更有用。您可以随时从“设置”中更改此设置</string>
@@ -751,7 +751,7 @@
   <string name="leaderboard_unavailable_beta">排行榜仅在成品版本中可用。请查看开发者文档。</string>
   <string name="copyright_popup">请只上传您自己拍摄的照片。上传受版权保护图像的用户会被封禁。这也适用于测试版本。感谢您测试本应用！</string>
   <string name="select_feedback_data_choice">请取消选择任何您不愿意公开分享的信息。</string>
-  <string name="api_level">API 级别</string>
+  <string name="api_level">API级别</string>
   <string name="android_version">Android版本</string>
   <string name="device_manufacturer">设备制造商</string>
   <string name="device_model">设备型号</string>
