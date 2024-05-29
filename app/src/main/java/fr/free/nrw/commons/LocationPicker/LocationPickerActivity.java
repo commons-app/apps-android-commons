@@ -267,7 +267,9 @@ public class LocationPickerActivity extends BaseActivity implements
      * @param point The GeoPoint object which contains the coordinates to move to
      */
     private void moveMapTo(GeoPoint point){
-        moveMapTo(point.getLatitude(), point.getLongitude());
+        if(point != null){
+            moveMapTo(point.getLatitude(), point.getLongitude());
+        }
     }
 
     /**
