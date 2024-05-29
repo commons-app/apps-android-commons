@@ -273,19 +273,6 @@ public class LocationPickerActivity extends BaseActivity implements
     }
 
     /**
-     * Moves the center of the map to the media's location (likely EXIF data), if that data
-     * is available.
-     */
-    private void moveMapToMediaLocation(){
-        if(cameraPosition != null){
-            double latitude = cameraPosition.getLatitude();
-            double longitude = cameraPosition.getLongitude();
-
-            moveMapTo(latitude, longitude);
-        }
-    }
-
-    /**
      * For showing credits
      */
     private void addCredits() {
@@ -340,7 +327,7 @@ public class LocationPickerActivity extends BaseActivity implements
     }
 
     private void setupMapView() {
-        adjustCameraBasedOnOptions();
+        moveMapToMediaLocation();
         modifyLocationButton.setOnClickListener(v -> onClickModifyLocation());
         removeLocationButton.setOnClickListener(v -> onClickRemoveLocation());
         showInMapButton.setOnClickListener(v -> showInMap());
@@ -416,12 +403,16 @@ public class LocationPickerActivity extends BaseActivity implements
     }
 
     /**
-     * move the location to the current media coordinates
+     * Moves the center of the map to the media's location (likely EXIF data), if that data
+     * is available.
      */
-    private void adjustCameraBasedOnOptions() {
+    private void moveMapToMediaLocation() {
         if (cameraPosition != null) {
-            mapView.getController().setCenter(new GeoPoint(cameraPosition.getLatitude(),
-                cameraPosition.getLongitude()));
+
+            GeoPoint point = new GeoPoint(cameraPosition.getLatitude(),
+                cameraPosition.getLongitude());
+
+            moveMapTo(point);
         }
     }
 
