@@ -203,6 +203,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private Place nearestPlace;
     private volatile boolean stopQuery;
 
+    private List<Place> updatedPlaceList;
+    private LatLng updatedLatLng;
+
     private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(
         new RequestMultiplePermissions(),
         new ActivityResultCallback<Map<String, Boolean>>() {
@@ -598,6 +601,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
                 if (lastFocusLocation == null && lastKnownLocation == null) {
                     locationPermissionGranted();
+                }else if (updatedPlaceList != null){
+                    loadPlacesDataAsync(updatedPlaceList, updatedLatLng);
                 }
             } else {
                 startMapWithoutPermission();
@@ -1433,7 +1438,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void loadPlacesDataAsync(List<Place> placeList, LatLng curLatLng) {
         List<Place> places = new ArrayList<>(placeList);
         int batchSize = 3;
-        final List<Place> updatedPlaceList = new ArrayList<>(placeList);
+        updatedLatLng = curLatLng;
+        updatedPlaceList = new ArrayList<>(placeList);
         if (VERSION.SDK_INT >= VERSION_CODES.N) {
             Collections.sort(places, Comparator.comparingDouble(place -> place.getDistanceInDouble(curLatLng)));
         }
@@ -1449,6 +1455,19 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
         int endIndex = Math.min(startIndex + batchSize, places.size());
         List<Place> batch = places.subList(startIndex, endIndex);
+        for (int i = 0; i< batch.size(); i++){
+            if (i == batch.size() - 1 && batch.get(i).name != ""){
+                processBatchesSequentially(places, batchSize, updatedPlaceList, curLatLng, endIndex + batchSize);
+                return;
+            }
+            if (batch.get(i).name == ""){
+                if (i == 0){
+                    break;
+                }
+                processBatchesSequentially(places, batchSize, updatedPlaceList, curLatLng, endIndex + i);
+                return;
+            }
+        }
 
         Disposable disposable = processBatch(batch, updatedPlaceList)
             .subscribe(p -> {
