@@ -596,7 +596,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         registerNetworkReceiver();
         if (isResumed() && ((MainActivity) getActivity()).activeFragment == ActiveFragment.NEARBY) {
             if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
-                locationPermissionGranted();
+                if (lastFocusLocation == null && lastKnownLocation == null) {
+                    locationPermissionGranted();
+                }
             } else {
                 startMapWithoutPermission();
             }
