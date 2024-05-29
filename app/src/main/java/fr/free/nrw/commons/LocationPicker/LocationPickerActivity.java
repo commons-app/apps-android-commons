@@ -250,6 +250,40 @@ public class LocationPickerActivity extends BaseActivity implements
     }
 
     /**
+     * Moves the center of the map to the specified coordinates
+     *
+     */
+    private void moveMapTo(double latitude, double longitude){
+        if(mapView != null && mapView.getController() != null){
+            GeoPoint point = new GeoPoint(latitude, longitude);
+
+            mapView.getController().setCenter(point);
+            mapView.getController().animateTo(point);
+        }
+    }
+
+    /**
+     * Moves the center of the map to the specified coordinates
+     * @param point The GeoPoint object which contains the coordinates to move to
+     */
+    private void moveMapTo(GeoPoint point){
+        moveMapTo(point.getLatitude(), point.getLongitude());
+    }
+
+    /**
+     * Moves the center of the map to the media's location (likely EXIF data), if that data
+     * is available.
+     */
+    private void moveMapToMediaLocation(){
+        if(cameraPosition != null){
+            double latitude = cameraPosition.getLatitude();
+            double longitude = cameraPosition.getLongitude();
+
+            moveMapTo(latitude, longitude);
+        }
+    }
+
+    /**
      * For showing credits
      */
     private void addCredits() {
