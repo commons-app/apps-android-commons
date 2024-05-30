@@ -174,7 +174,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private Animation fab_close;
     private Animation fab_open;
     private Animation rotate_forward;
-    private static final float ZOOM_LEVEL = 14f;
+    private static final float ZOOM_LEVEL = 15f;
     private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
     private BroadcastReceiver broadcastReceiver;
     private boolean isNetworkErrorOccurred;
@@ -1441,7 +1441,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         updatedLatLng = curLatLng;
         updatedPlaceList = new ArrayList<>(placeList);
         if (VERSION.SDK_INT >= VERSION_CODES.N) {
-            Collections.sort(places, Comparator.comparingDouble(place -> place.getDistanceInDouble(curLatLng)));
+            Collections.sort(places, Comparator.comparingDouble(place -> place.getDistanceInDouble(getMapFocus())));
         }
         stopQuery = false;
         processBatchesSequentially(places, batchSize, updatedPlaceList, curLatLng, 0);
