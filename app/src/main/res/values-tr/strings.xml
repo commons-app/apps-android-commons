@@ -296,7 +296,7 @@
   <string name="skip_login">Atla</string>
   <string name="navigation_item_login">Oturum aç</string>
   <string name="skip_login_title" fuzzy="true">Gerçekten oturum açmayı atlamak istiyor musunuz?</string>
-  <string name="skip_login_message">İleride resim yüklemek için giriş yapmanız gerekir.</string>
+  <string name="skip_login_message" fuzzy="true">İleride resim yüklemek için giriş yapmanız gerekir.</string>
   <string name="login_alert_message">Bu özelliği kullanmak için lütfen giriş yapın</string>
   <string name="copy_wikicode">Vikimetnini panoya kopyala</string>
   <string name="wikicode_copied">Vikimetin panoya kopyalandı</string>

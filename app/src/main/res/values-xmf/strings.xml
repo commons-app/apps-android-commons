@@ -251,7 +251,7 @@
   <string name="skip_login">გიშატება</string>
   <string name="navigation_item_login">მიშულა</string>
   <string name="skip_login_title" fuzzy="true">ნანდულო გოკონანო მიშულაშ გიშატება?</string>
-  <string name="skip_login_message">სურათეფიშ ეიოხარგალო თქვა ოხვილუთ ანგარიშიშა მიშულას.</string>
+  <string name="skip_login_message" fuzzy="true">სურათეფიშ ეიოხარგალო თქვა ოხვილუთ ანგარიშიშა მიშულას.</string>
   <string name="login_alert_message">ქორთხინთ გენშართით თქვან ანგარიშიშა ათე ფუნქციაშ გჷმარინაფალო</string>
   <string name="nearby_location_not_available">გოხოლუაშ ფუნქციაქ შილებე თინას ვემუშუასჷნ, ლოკაცია გოთიშილი რე.</string>
   <string name="location_permission_rationale_nearby">გოხოლუაშ აბანეფიშ ერკებულიშ ოძირაფალო ალობა ოხვილური რე</string>

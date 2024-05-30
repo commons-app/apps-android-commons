@@ -269,7 +269,7 @@
   <string name="skip_login">Sauté</string>
   <string name="navigation_item_login">Intré ant ël sistema</string>
   <string name="skip_login_title">Veul-lo për da bon sauté la procedura d\'intrada ant ël sistema?</string>
-  <string name="skip_login_message">A l\'avnì a dovrà rintré ant ël sistema për carié \'d fòto.</string>
+  <string name="skip_login_message" fuzzy="true">A l\'avnì a dovrà rintré ant ël sistema për carié \'d fòto.</string>
   <string name="login_alert_message">Për piasì, ch\'a rintra ant ël sistema për podèj dovré costa fonsionalità</string>
   <string name="copy_wikicode">Copié ël test wiki ant ël pògia-feuj</string>
   <string name="wikicode_copied">Ël test wiki a l\'é stàit copià ant ël pògia-feuj</string>

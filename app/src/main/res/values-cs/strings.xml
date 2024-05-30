@@ -253,7 +253,7 @@
   <string name="skip_login">Přeskočit</string>
   <string name="navigation_item_login">Přihlásit se</string>
   <string name="skip_login_title" fuzzy="true">Opravdu chcete přeskočit přihlášení?</string>
-  <string name="skip_login_message">Budete-li chtít nahrát obrázky v budoucnu, musíte se přihlásit.</string>
+  <string name="skip_login_message" fuzzy="true">Budete-li chtít nahrát obrázky v budoucnu, musíte se přihlásit.</string>
   <string name="login_alert_message">K použití této funkce se musíte přihlásit</string>
   <string name="copy_wikicode">Zkopírovat wikitext do schránky</string>
   <string name="wikicode_copied">Wikitext byl zkopírován do schránky</string>

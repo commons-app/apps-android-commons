@@ -321,7 +321,7 @@
   <string name="skip_login">تجاوز</string>
   <string name="navigation_item_login">تسجيل الدخول</string>
   <string name="skip_login_title">هل تريد حقا تخطي تسجيل الدخول؟</string>
-  <string name="skip_login_message">يجب عليك تسجيل الدخول لرفع الصور في المستقبل.</string>
+  <string name="skip_login_message" fuzzy="true">يجب عليك تسجيل الدخول لرفع الصور في المستقبل.</string>
   <string name="login_alert_message">الرجاء تسجيل الدخول لاستخدام هذه الميزة</string>
   <string name="copy_wikicode">انسخ نص الويكي إلى الكليب بورد</string>
   <string name="wikicode_copied">نص الويكي تم نسخه إلى الكليب بورد</string>

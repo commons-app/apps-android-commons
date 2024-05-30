@@ -127,7 +127,7 @@
   <string name="welcome_final_text">ਤੁਹਾਨੂੰ ਲੱਗਦਾ ਹੈ ਕਿ ਤੁਹਾਡੇ ਕੋਲ ਹੈ?</string>
   <string name="welcome_final_button_text">ਹਾਂ!</string>
   <string name="detail_panel_cats_label">ਸ਼੍ਰੇਣੀਆਂ</string>
-  <string name="detail_panel_cats_loading">ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...</string>
+  <string name="detail_panel_cats_loading">ਲੱਦ ਰਿਹਾ ਹੈ...</string>
   <string name="detail_panel_cats_none">ਕੋਈ ਵੀ ਨਹੀਂ ਚੁਣਿਆ</string>
   <string name="detail_description_empty">ਕੋਈ ਵੇਰਵਾ ਨਹੀਂ</string>
   <string name="detail_discussion_empty">ਕੋਈ ਚਰਚਾ ਨਹੀਂ</string>

@@ -211,7 +211,7 @@
   <string name="skip_login">Preskoči</string>
   <string name="navigation_item_login">Prijavi se</string>
   <string name="skip_login_title" fuzzy="true">Zaista želite da preskočite prijavu?</string>
-  <string name="skip_login_message">U budućnosti ćete se morati prijaviti kako biste postavili slike.</string>
+  <string name="skip_login_message" fuzzy="true">U budućnosti ćete se morati prijaviti kako biste postavili slike.</string>
   <string name="login_alert_message">Prijavite se da biste koristili ovu funkciju</string>
   <string name="nearby_location_not_available">„U blizini“ možda ne radi kako treba. Lokacija nije dostupna.</string>
   <string name="location_permission_rationale_nearby">Potrebna je dozvola za popis liste lokacija u blizini</string>

@@ -266,7 +266,7 @@
   <string name="skip_login">Saltar</string>
   <string name="navigation_item_login">Aniciar sesión</string>
   <string name="skip_login_title" fuzzy="true">¿Realmente quiés saltar l\'aniciu de sesión?</string>
-  <string name="skip_login_message">Tendríes d\'aniciar sesión para xubir imaxes nel futuru.</string>
+  <string name="skip_login_message" fuzzy="true">Tendríes d\'aniciar sesión para xubir imaxes nel futuru.</string>
   <string name="login_alert_message">Anicia sesión pa usar esta función</string>
   <string name="copy_wikicode">Copiar el testu wiki al cartafueyu</string>
   <string name="wikicode_copied">Copióse\'l testu wiki al cartafueyu</string>
