@@ -402,7 +402,7 @@ public class OkHttpJsonApiClient {
         throws Exception {
         Timber.tag("PRINT").e(wikidataTitle);
         final HttpUrl.Builder urlBuilder = HttpUrl
-            .parse("https://www.wikidata.org/w/api.php").newBuilder()
+            .parse("https://commons.m.wikimedia.org/w/api.php").newBuilder()
             .addQueryParameter("action", "query")
             .addQueryParameter("prop", "revisions")
             .addQueryParameter("rvprop", "content")
