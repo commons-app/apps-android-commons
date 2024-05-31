@@ -90,7 +90,6 @@ class WikidataFeedback : BaseActivity() {
     @SuppressLint("CheckResult")
     fun getWikidataFeedback(name: String, wikidataQID: String?) {
         binding.talkPageLayout.visibility = View.INVISIBLE
-        binding.activityLayout.visibility = View.INVISIBLE
         binding.progressBar.visibility = View.VISIBLE
 
         try {
@@ -176,7 +175,6 @@ class WikidataFeedback : BaseActivity() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = TitleAdapter(titles)
         binding.talkPageLayout.visibility = View.VISIBLE
-        binding.activityLayout.visibility = View.VISIBLE
         binding.progressBar.visibility = View.GONE
     }
 }
