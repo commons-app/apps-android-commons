@@ -86,18 +86,18 @@ public class PageEditHelper {
                 + "Someone using the [[Commons:Mobile_app|Commons Android app]] went to this item's geographical location ("
                 + lat + "," + lng
                 + ") and noted the following problem(s):\n"
-                + "* <nowiki>_" + description + "_</nowiki>\n"
+                + "* <i><nowiki>" + description + "</nowiki></i>\n"
                 + "\n"
-                + "Details: <nowiki>_" + details + "_</nowiki>\n"
+                + "Details: <i><nowiki>" + details + "</nowiki></i>\n"
                 + "\n"
                 + "Please anyone fix the item accordingly, then reply to mark this section as fixed. Thanks a lot for your cooperation!\n"
                 + "\n"
                 + "~~~~";
         } else {
             text = preText.substring(0, markerIndex);
-            text = text + "* <nowiki>_" + description + "_</nowiki>\n"
+            text = text + "* <i><nowiki>" + description + "</nowiki></i>\n"
                 + "\n"
-                + "Details: <nowiki>_" + details + "_</nowiki>\n"
+                + "Details: <i><nowiki>" + details + "</nowiki></i>\n"
                 + "\n"
                 + "Please anyone fix the item accordingly, then reply to mark this section as fixed. Thanks a lot for your cooperation!\n"
                 + "\n"

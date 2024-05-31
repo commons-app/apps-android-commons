@@ -54,10 +54,10 @@ class WikidataFeedback : BaseActivity() {
         binding.appCompatButton.setOnClickListener {
             var desc = binding.descriptionEditText.text.toString()
             var det = binding.detailsEditText.text.toString()
-            binding.descriptionEditText.setText("")
-            binding.detailsEditText.setText("")
 
             if (binding.descriptionEditText.text!!.isNotEmpty() && binding.detailsEditText.text!!.isNotEmpty()) {
+                binding.descriptionEditText.setText("")
+                binding.detailsEditText.setText("")
                 Single.defer<Boolean?>(Callable<SingleSource<Boolean?>> {
                     pageEditHelper.makePageEdit(
                         this, pageTitle, preText,
@@ -137,8 +137,8 @@ class WikidataFeedback : BaseActivity() {
                                 binding.lastEditTextView.text =
                                     "Last Edited by " + username + " on " + date
 
-                                val descriptionRegex = """\* <nowiki>_(.*?)_</nowiki>""".toRegex()
-                                val detailsRegex = """Details: <nowiki>_(.*?)_</nowiki>""".toRegex()
+                                val descriptionRegex = """\* <i><nowiki>(.*?)</nowiki></i>""".toRegex()
+                                val detailsRegex = """Details: <i><nowiki>(.*?)</nowiki></i>""".toRegex()
                                 val descriptions =
                                     descriptionRegex.findAll(preText).map { it.groupValues[1] }
                                         .toList()
