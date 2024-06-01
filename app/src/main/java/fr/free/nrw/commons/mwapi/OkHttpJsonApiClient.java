@@ -397,31 +397,6 @@ public class OkHttpJsonApiClient {
         throw new Exception(response.message());
     }
 
-    @Nullable
-    public String getWikidataTalk(String wikidataTitle)
-        throws Exception {
-        Timber.tag("PRINT").e(wikidataTitle);
-        final HttpUrl.Builder urlBuilder = HttpUrl
-            .parse("https://commons.m.wikimedia.org/w/api.php").newBuilder()
-            .addQueryParameter("action", "query")
-            .addQueryParameter("prop", "revisions")
-            .addQueryParameter("rvprop", "content")
-            .addQueryParameter("rvslots", "main")
-            .addQueryParameter("titles", wikidataTitle)
-            .addQueryParameter("format", "json");
-
-        final Request request = new Request.Builder()
-            .url(urlBuilder.build())
-            .build();
-
-        final Response response = okHttpClient.newCall(request).execute();
-        if (response.body() != null && response.isSuccessful()) {
-            final String json = response.body().string();
-            return json;
-        }
-        throw new Exception(response.message());
-    }
-
     /**
      * Make API Call to get Places
      *

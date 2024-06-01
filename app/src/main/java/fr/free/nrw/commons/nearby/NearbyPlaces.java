@@ -120,10 +120,6 @@ public class NearbyPlaces {
                 customQuery);
     }
 
-    public String getWikiTalk(String QID) throws Exception {
-        return okHttpJsonApiClient.getWikidataTalk(QID);
-    }
-
     /**
      * Runs the Wikidata query to retrieve the KML String
      *
