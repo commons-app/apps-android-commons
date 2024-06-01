@@ -36,7 +36,7 @@ public class PageEditHelper {
 
     @Inject
     public PageEditHelper(NotificationHelper notificationHelper,
-        @Named("commons-page-edit") PageEditClient pageEditClient,
+        @Named("wikidata-page-edit") PageEditClient pageEditClient,
         ViewUtilWrapper viewUtil,
         @Named("username") String username) {
         this.notificationHelper = notificationHelper;
@@ -116,7 +116,7 @@ public class PageEditHelper {
             message = context.getString(R.string.delete_helper_show_deletion_message_else);
         }
 
-        String url = BuildConfig.COMMONS_URL + "/wiki/" + title;
+        String url = BuildConfig.WIKIDATA_URL + "/wiki/" + title;
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         notificationHelper.showNotification(context, title, message, NOTIFICATION_DELETE,
             browserIntent);

@@ -230,6 +230,14 @@ public class NetworkingModule {
         return new PageEditClient(csrfTokenClient, pageEditInterface);
     }
 
+    @Named("wikidata-page-edit")
+    @Provides
+    @Singleton
+    public PageEditClient provideWikidataPageEditClient(@Named(NAMED_COMMONS_CSRF) CsrfTokenClient csrfTokenClient,
+        @Named("wikidata-page-edit-service") PageEditInterface pageEditInterface) {
+        return new PageEditClient(csrfTokenClient, pageEditInterface);
+    }
+
     @Provides
     @Singleton
     public MediaInterface provideMediaInterface(CommonsServiceFactory serviceFactory) {

@@ -29,11 +29,9 @@ class PageEditClient(
         return try {
             pageEditInterface.postEdit(pageTitle, summary, text, csrfTokenClient.getTokenBlocking())
                 .map { editResponse ->
-                        Timber.tag("PRINT").e(editResponse.toString())
                         editResponse.edit()!!.editSucceeded()
                     }
         } catch (throwable: Throwable) {
-            Timber.tag("PRINT").e(throwable)
             if (throwable is InvalidLoginTokenException) {
                 throw throwable
             } else {
@@ -53,10 +51,10 @@ class PageEditClient(
                 true,
                 true,
                 csrfTokenClient.getTokenBlocking()
-            ).map { editResponse -> Timber.tag("PRINT").e(editResponse.toString())
-                editResponse.edit()!!.editSucceeded() }
+            ).map { editResponse ->
+                editResponse.edit()!!.editSucceeded()
+            }
         } catch (throwable: Throwable) {
-            Timber.tag("PRINT").e(throwable)
             if (throwable is InvalidLoginTokenException) {
                 throw throwable
             } else {
@@ -77,7 +75,6 @@ class PageEditClient(
             pageEditInterface.postAppendEdit(pageTitle, summary, appendText, csrfTokenClient.getTokenBlocking())
                 .map { editResponse -> editResponse.edit()!!.editSucceeded() }
         } catch (throwable: Throwable) {
-            Timber.tag("PRINT").e(throwable)
             if (throwable is InvalidLoginTokenException) {
                 throw throwable
             } else {
@@ -98,7 +95,6 @@ class PageEditClient(
             pageEditInterface.postPrependEdit(pageTitle, summary, prependText, csrfTokenClient.getTokenBlocking())
                 .map { editResponse -> editResponse.edit()?.editSucceeded() ?: false }
         } catch (throwable: Throwable) {
-            Timber.tag("PRINT").e(throwable)
             if (throwable is InvalidLoginTokenException) {
                 throw throwable
             } else {
