@@ -274,7 +274,7 @@
   <string name="skip_login">Skip</string>
   <string name="navigation_item_login">Log in</string>
   <string name="skip_login_title">Do you really want to skip log-in?</string>
-  <string name="skip_login_message">You would have to log in to upload pictures in the future.</string>
+  <string name="skip_login_message">You will have to log in to upload pictures in the future.</string>
   <string name="login_alert_message">Please log in to use this feature</string>
 
   <string name="copy_wikicode">Copy the wikitext to the clipboard</string>

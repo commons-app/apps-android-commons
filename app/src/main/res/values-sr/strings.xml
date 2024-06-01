@@ -272,7 +272,7 @@
   <string name="skip_login">Прескочи</string>
   <string name="navigation_item_login">Пријави ме</string>
   <string name="skip_login_title">Заиста желите да прескочите пријаву?</string>
-  <string name="skip_login_message">Мораћете да се пријавите да бисте отпремали слике у будућности.</string>
+  <string name="skip_login_message" fuzzy="true">Мораћете да се пријавите да бисте отпремали слике у будућности.</string>
   <string name="login_alert_message">Пријавите се да бисте користили ову функцију</string>
   <string name="copy_wikicode">Копирај викитекст</string>
   <string name="wikicode_copied">Викитекст је копиран у привремену меморију</string>

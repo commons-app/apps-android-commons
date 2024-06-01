@@ -228,7 +228,7 @@
   <string name="skip_login">ߊ߬ ߟߊߜߊ߲߫</string>
   <string name="navigation_item_login">ߌ ߜߊ߲߬ߞߎ߲߬</string>
   <string name="skip_login_title" fuzzy="true">ߌ ߦߴߊ߬ ߝߍ߬ ߓߊ߬ ߞߵߌ ߜߊ߲߫ ߜߊ߲߬ߞߎ߲߬ߠߌ߲ ߞߎ߲߬ߠߊ߫؟</string>
-  <string name="skip_login_message">ߌ ߞߊߞߊ߲߫ ߞߵߌ ߜߊ߲߬ߞߎ߲߫ ߞߊ߬ ߖߌ߬ߦߊ߬ߓߍ ߟߊߦߍ߬ߟߍ߫ ߛߐ߲߬.</string>
+  <string name="skip_login_message" fuzzy="true">ߌ ߞߊߞߊ߲߫ ߞߵߌ ߜߊ߲߬ߞߎ߲߫ ߞߊ߬ ߖߌ߬ߦߊ߬ߓߍ ߟߊߦߍ߬ߟߍ߫ ߛߐ߲߬.</string>
   <string name="login_alert_message">ߌ ߜߊ߲߬ߞߎ߲߫ ߖߊ߰ߣߌ߲߫ ߞߊ߬ ߟߊ߬ߓߊ߰ߙߊ߬ߟߌ ߣߌ߲߬ ߠߊߓߊ߯ߙߊ߫</string>
   <string name="copy_wikicode">ߥߞߌߛߓߍߟߌ ߓߊߓߌ߬ߟߊ߬ ߛߓߍߝߌߘߊ-ߜߍ߬ߙߍ߲߬ߘߍ߬ߣߍ߲ ߘߐ߫</string>
   <string name="wikicode_copied">ߥߞߌߛߓߍߟߌ ߓߘߊ߫ ߓߊ߲߫ ߓߊߓߌ߬ߟߊ߬ ߟߊ߫ ߛߓߍߝߌߘߊ-ߜߍ߬ߙߍ߲߬ߘߍ߬ߣߍ߲ ߘߐ߫</string>

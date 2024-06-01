@@ -262,7 +262,7 @@
   <string name="skip_login">ข้าม</string>
   <string name="navigation_item_login">เข้าสู่ระบบ</string>
   <string name="skip_login_title" fuzzy="true">คุณต้องการข้ามการเข้าสู่ระบบหรือไม่?</string>
-  <string name="skip_login_message">คุณควรที่จะเข้าสู่ระบบก่อนที่จะอัพโหลดรูปภาพใดๆ</string>
+  <string name="skip_login_message" fuzzy="true">คุณควรที่จะเข้าสู่ระบบก่อนที่จะอัพโหลดรูปภาพใดๆ</string>
   <string name="login_alert_message">กรุณาเข้าสู่ระบบเพื่อใช้คุณลักษณะนี้</string>
   <string name="copy_wikicode">คัดลอก Wikitext ไปที่คลิปบอร์ด</string>
   <string name="wikicode_copied">wikitext ถูกคัดลอกไปที่คลิปบอร์ดแล้ว</string>

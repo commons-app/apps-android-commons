@@ -268,7 +268,7 @@
   <string name="skip_login">Атлат</string>
   <string name="navigation_item_login">Кир</string>
   <string name="skip_login_title">Авторизацияны керти да атлатыргъамы излейсиз?</string>
-  <string name="skip_login_message">Боллукъ заманда сурат джюклер ючюн кирирге керек боллукъсуз.</string>
+  <string name="skip_login_message" fuzzy="true">Боллукъ заманда сурат джюклер ючюн кирирге керек боллукъсуз.</string>
   <string name="login_alert_message">Бу функцияны хайырланыр ючюн, тилейбиз, киригиз</string>
   <string name="copy_wikicode">Викитекстни алмашдырыу буферге копия эт</string>
   <string name="wikicode_copied">Викитекст алмашдырыу буферге копия этилди</string>

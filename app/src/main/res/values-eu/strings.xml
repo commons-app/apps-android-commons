@@ -232,7 +232,7 @@
   <string name="skip_login">Jauzi</string>
   <string name="navigation_item_login">Hasi saioa</string>
   <string name="skip_login_title" fuzzy="true">Benetan saioa hastea jauzi nahi duzula?</string>
-  <string name="skip_login_message">Argazkiak igotzeko saioa hasi beharko duzu.</string>
+  <string name="skip_login_message" fuzzy="true">Argazkiak igotzeko saioa hasi beharko duzu.</string>
   <string name="login_alert_message">Mesedez, hasi saioa funtzio hau erabili ahal izateko</string>
   <string name="nearby_location_not_available">Kokapena ez dago erabilgarri.</string>
   <string name="location_permission_rationale_nearby">Baimena beharrezkoa da hurbil dauden lekuen zerrende ikusteko</string>
