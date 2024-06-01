@@ -63,6 +63,7 @@ public class NetworkingModule {
     public static final String NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE = "language-wikipedia-wikisite";
 
     public static final String NAMED_COMMONS_CSRF = "commons-csrf";
+    public static final String NAMED_WIKI_CSRF = "wiki-csrf";
 
     @Provides
     @Singleton
@@ -128,10 +129,26 @@ public class NetworkingModule {
     @Provides
     @Singleton
     public CsrfTokenClient provideCommonsCsrfTokenClient(SessionManager sessionManager,
-        CsrfTokenInterface tokenInterface, LoginClient loginClient, LogoutClient logoutClient) {
+        @Named("commons-csrf-interface") CsrfTokenInterface tokenInterface, LoginClient loginClient, LogoutClient logoutClient) {
         return new CsrfTokenClient(sessionManager, tokenInterface, loginClient, logoutClient);
     }
 
+    @Named(NAMED_WIKI_CSRF)
+    @Provides
+    @Singleton
+    public CsrfTokenClient provideWikiCsrfTokenClient(SessionManager sessionManager,
+        @Named("wikidata-csrf-interface") CsrfTokenInterface tokenInterface, LoginClient loginClient, LogoutClient logoutClient) {
+        return new CsrfTokenClient(sessionManager, tokenInterface, loginClient, logoutClient);
+    }
+
+    @Named("wikidata-csrf-interface")
+    @Provides
+    @Singleton
+    public CsrfTokenInterface provideWikidataCsrfTokenInterface(CommonsServiceFactory serviceFactory) {
+        return serviceFactory.create(BuildConfig.WIKIDATA_URL, CsrfTokenInterface.class);
+    }
+
+    @Named("commons-csrf-interface")
     @Provides
     @Singleton
     public CsrfTokenInterface provideCsrfTokenInterface(CommonsServiceFactory serviceFactory) {
@@ -233,7 +250,7 @@ public class NetworkingModule {
     @Named("wikidata-page-edit")
     @Provides
     @Singleton
-    public PageEditClient provideWikidataPageEditClient(@Named(NAMED_COMMONS_CSRF) CsrfTokenClient csrfTokenClient,
+    public PageEditClient provideWikidataPageEditClient(@Named(NAMED_WIKI_CSRF) CsrfTokenClient csrfTokenClient,
         @Named("wikidata-page-edit-service") PageEditInterface pageEditInterface) {
         return new PageEditClient(csrfTokenClient, pageEditInterface);
     }

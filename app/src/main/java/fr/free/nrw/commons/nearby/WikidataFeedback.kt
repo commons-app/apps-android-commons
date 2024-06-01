@@ -3,6 +3,8 @@ package fr.free.nrw.commons.nearby
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.RadioButton
+import android.widget.Toast
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.databinding.ActivityWikidataFeedbackBinding
 import fr.free.nrw.commons.theme.BaseActivity
 import io.reactivex.Single
@@ -51,23 +53,28 @@ class WikidataFeedback : BaseActivity() {
         binding.appCompatButton.setOnClickListener {
             var desc = findViewById<RadioButton>(binding.radioGroup.checkedRadioButtonId).text
             var det = binding.detailsEditText.text.toString()
-
-            binding.radioGroup.clearCheck()
-            binding.detailsEditText.setText("")
-            Single.defer<Boolean?>(Callable<SingleSource<Boolean?>> {
-                pageEditHelper.makePageEdit(
-                    this, pageTitle, preText,
-                    desc.toString(),
-                    det, lat, lng
-                )
-            } as Callable<SingleSource<Boolean?>>)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ aBoolean: Boolean? ->
-                }, { throwable: Throwable? ->
-                    Timber.e(throwable!!)
-                })
-
+            if (binding.radioGroup.checkedRadioButtonId == R.id.radioButton3 && binding.detailsEditText.text.isNullOrEmpty()) {
+                Toast.makeText(
+                    this,
+                    getString(R.string.please_enter_some_comments), Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                binding.radioGroup.clearCheck()
+                binding.detailsEditText.setText("")
+                Single.defer<Boolean?>(Callable<SingleSource<Boolean?>> {
+                    pageEditHelper.makePageEdit(
+                        this, pageTitle, preText,
+                        desc.toString(),
+                        det, lat, lng
+                    )
+                } as Callable<SingleSource<Boolean?>>)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ aBoolean: Boolean? ->
+                    }, { throwable: Throwable? ->
+                        Timber.e(throwable!!)
+                    })
+            }
         }
     }
 
