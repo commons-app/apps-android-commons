@@ -2302,15 +2302,19 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void onBottomSheetItemClick(@Nullable View view, int position) {
         BottomSheetItem item = dataList.get(position);
-        final boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(selectedPlace);
+        boolean isBookmarked = bookmarkLocationDao.findBookmarkLocation(selectedPlace);
         switch (item.getImageResourceId()) {
             case R.drawable.ic_round_star_border_24px:
+                bookmarkLocationDao.updateBookmarkLocation(selectedPlace);
                 updateBookmarkButtonImage(selectedPlace);
+                isBookmarked = bookmarkLocationDao.findBookmarkLocation(selectedPlace);
                 updateMarker(isBookmarked, selectedPlace, locationManager.getLastLocation());
                 binding.map.invalidate();
                 break;
             case R.drawable.ic_round_star_filled_24px:
+                bookmarkLocationDao.updateBookmarkLocation(selectedPlace);
                 updateBookmarkButtonImage(selectedPlace);
+                isBookmarked = bookmarkLocationDao.findBookmarkLocation(selectedPlace);
                 updateMarker(isBookmarked, selectedPlace, locationManager.getLastLocation());
                 binding.map.invalidate();
                 break;
