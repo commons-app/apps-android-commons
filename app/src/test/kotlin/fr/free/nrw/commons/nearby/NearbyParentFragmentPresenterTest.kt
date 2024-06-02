@@ -263,9 +263,6 @@ class NearbyParentFragmentPresenterTest {
         verify(nearbyParentFragmentView).filterMarkersByLabels(
             ArgumentMatchers.anyList(),
             ArgumentMatchers.anyBoolean(),
-            ArgumentMatchers.anyBoolean(),
-            ArgumentMatchers.anyBoolean(),
-            ArgumentMatchers.anyBoolean(),
             ArgumentMatchers.anyBoolean()
         );
         verify(nearbyParentFragmentView).setRecyclerViewAdapterAllSelected()
@@ -280,9 +277,6 @@ class NearbyParentFragmentPresenterTest {
         nearbyPresenter.filterByMarkerType(selectedLabels, 0, true, false)
         verify(nearbyParentFragmentView).filterMarkersByLabels(
             any(),
-            anyBoolean(),
-            anyBoolean(),
-            anyBoolean(),
             anyBoolean(),
             anyBoolean()
         );

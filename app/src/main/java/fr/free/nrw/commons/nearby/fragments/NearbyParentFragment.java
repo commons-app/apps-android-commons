@@ -491,7 +491,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         });
 
         binding.tvLearnMore.setOnClickListener(v -> onLearnMoreClicked());
-        binding.nearbyFilter.ivToggleChips.setOnClickListener(v -> onToggleChipsClicked());
 
         if (!locationPermissionsHelper.checkLocationPermission(getActivity())) {
             askForLocationPermission();
@@ -675,7 +674,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         addActionToTitle();
         if (!Utils.isMonumentsEnabled(new Date())) {
             NearbyFilterState.setWlmSelected(false);
-            binding.nearbyFilter.chipView.choiceChipWlm.setVisibility(View.GONE);
         }
     }
 
@@ -751,7 +749,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     ((NearbyFilterSearchRecyclerViewAdapter) binding.nearbyFilterList.searchListView.getAdapter()).getFilter()
                         .filter(query.toString());
                 }));
-        initFilterChips();
     }
 
     @Override
@@ -767,119 +764,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void setFilterState() {
-        binding.nearbyFilter.chipView.choiceChipNeedsPhoto.setChecked(
-            NearbyFilterState.getInstance().isNeedPhotoSelected());
-        binding.nearbyFilter.chipView.choiceChipExists.setChecked(
-            NearbyFilterState.getInstance().isExistsSelected());
-        binding.nearbyFilter.chipView.choiceChipWlm.setChecked(
-            NearbyFilterState.getInstance().isWlmSelected());
         if (NearbyController.currentLocation != null) {
             presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels,
                 binding.nearbyFilterList.checkboxTriStates.getState(), true, false);
         }
-    }
-
-    private void initFilterChips() {
-        binding.nearbyFilter.chipView.choiceChipNeedsPhoto.setOnCheckedChangeListener(
-            (buttonView, isChecked) -> {
-                if (NearbyController.currentLocation != null) {
-                    binding.nearbyFilterList.checkboxTriStates.setState(CheckBoxTriStates.CHECKED);
-                    NearbyFilterState.setNeedPhotoSelected(isChecked);
-                    presenter.filterByMarkerType(
-                        nearbyFilterSearchRecyclerViewAdapter.selectedLabels,
-                        binding.nearbyFilterList.checkboxTriStates.getState(), true, true);
-                    updatePlaceList(binding.nearbyFilter.chipView.choiceChipNeedsPhoto.isChecked(),
-                        binding.nearbyFilter.chipView.choiceChipExists.isChecked(),
-                        binding.nearbyFilter.chipView.choiceChipWlm.isChecked());
-                } else {
-                    binding.nearbyFilter.chipView.choiceChipNeedsPhoto.setChecked(!isChecked);
-                }
-            });
-
-        binding.nearbyFilter.chipView.choiceChipExists.setOnCheckedChangeListener(
-            (buttonView, isChecked) -> {
-                if (NearbyController.currentLocation != null) {
-                    binding.nearbyFilterList.checkboxTriStates.setState(CheckBoxTriStates.CHECKED);
-                    NearbyFilterState.setExistsSelected(isChecked);
-                    presenter.filterByMarkerType(
-                        nearbyFilterSearchRecyclerViewAdapter.selectedLabels,
-                        binding.nearbyFilterList.checkboxTriStates.getState(), true, true);
-                    updatePlaceList(binding.nearbyFilter.chipView.choiceChipNeedsPhoto.isChecked(),
-                        binding.nearbyFilter.chipView.choiceChipExists.isChecked(),
-                        binding.nearbyFilter.chipView.choiceChipWlm.isChecked());
-                } else {
-                    binding.nearbyFilter.chipView.choiceChipExists.setChecked(!isChecked);
-                }
-            });
-
-        binding.nearbyFilter.chipView.choiceChipWlm.setOnCheckedChangeListener(
-            (buttonView, isChecked) -> {
-                if (NearbyController.currentLocation != null) {
-                    binding.nearbyFilterList.checkboxTriStates.setState(CheckBoxTriStates.CHECKED);
-                    NearbyFilterState.setWlmSelected(isChecked);
-                    presenter.filterByMarkerType(
-                        nearbyFilterSearchRecyclerViewAdapter.selectedLabels,
-                        binding.nearbyFilterList.checkboxTriStates.getState(), true, true);
-                    updatePlaceList(binding.nearbyFilter.chipView.choiceChipNeedsPhoto.isChecked(),
-                        binding.nearbyFilter.chipView.choiceChipExists.isChecked(),
-                        binding.nearbyFilter.chipView.choiceChipWlm.isChecked());
-                } else {
-                    binding.nearbyFilter.chipView.choiceChipWlm.setChecked(!isChecked);
-                }
-            });
-    }
-
-    /**
-     * Updates Nearby place list according to available chip states
-     *
-     * @param needsPhoto is chipNeedsPhoto checked
-     * @param exists     is chipExists checked
-     * @param isWlm      is chipWlm checked
-     */
-    private void updatePlaceList(final boolean needsPhoto, final boolean exists,
-        final boolean isWlm) {
-        final List<Place> updatedPlaces = new ArrayList<>();
-
-        if (needsPhoto) {
-            for (final Place place :
-                places) {
-                if (place.pic.trim().isEmpty() && !updatedPlaces.contains(place)) {
-                    updatedPlaces.add(place);
-                }
-            }
-        } else {
-            updatedPlaces.addAll(places);
-        }
-
-        if (exists) {
-            for (final Iterator<Place> placeIterator = updatedPlaces.iterator();
-                placeIterator.hasNext(); ) {
-                final Place place = placeIterator.next();
-                if (!place.exists) {
-                    placeIterator.remove();
-                }
-            }
-        }
-
-        if (!isWlm) {
-            for (final Place place :
-                places) {
-                if (place.isMonument() && updatedPlaces.contains(place)) {
-                    updatedPlaces.remove(place);
-                }
-            }
-        } else {
-            for (final Place place :
-                places) {
-                if (place.isMonument() && !updatedPlaces.contains(place)) {
-                    updatedPlaces.add(place);
-                }
-            }
-        }
-
-        adapter.setItems(updatedPlaces);
-        binding.bottomSheetNearby.noResultsMessage.setVisibility(
-            updatedPlaces.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
     /**
@@ -1811,18 +1699,16 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * Filters markers based on selectedLabels and chips
      *
      * @param selectedLabels       label list that user clicked
-     * @param displayExists        chip for displaying only existing places
-     * @param displayNeedsPhoto    chip for displaying only places need photos
      * @param filterForPlaceState  true if we filter places for place state
      * @param filterForAllNoneType true if we filter places with all none button
      */
     @Override
     public void filterMarkersByLabels(final List<Label> selectedLabels,
-        final boolean displayExists,
-        final boolean displayNeedsPhoto,
-        final boolean displayWlm,
         final boolean filterForPlaceState,
         final boolean filterForAllNoneType) {
+        final boolean displayExists = false;
+        final boolean displayNeedsPhoto= false;
+        final boolean displayWlm = false;
         // Remove the previous markers before updating them
         clearAllMarkers();
         for (final MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
@@ -1931,15 +1817,16 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             return (isBookmarked ?
                 R.drawable.ic_custom_map_marker_green_bookmarked :
                 R.drawable.ic_custom_map_marker_green);
-        } else if (!place.exists || (place.name
-            == "")) { // Means that the topic of the Wikidata item does not exist in the real world anymore, for instance it is a past event, or a place that was destroyed
+        } else if (!place.exists) { // Means that the topic of the Wikidata item does not exist in the real world anymore, for instance it is a past event, or a place that was destroyed
+            return (R.drawable.ic_clear_black_24dp);
+        }else if (place.name == "") {
             return (isBookmarked ?
-                R.drawable.ic_custom_map_marker_grey_bookmarked :
-                R.drawable.ic_custom_map_marker_grey);
+                    R.drawable.ic_custom_map_marker_grey_bookmarked :
+                    R.drawable.ic_custom_map_marker_grey);
         } else {
             return (isBookmarked ?
                 R.drawable.ic_custom_map_marker_blue_bookmarked :
-                R.drawable.ic_custom_map_marker);
+                R.drawable.ic_custom_map_marker_red);
         }
     }
 
@@ -2257,7 +2144,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 Timber.d("Gallery button tapped. Place: %s", selectedPlace.toString());
                 storeSharedPrefs(selectedPlace);
                 controller.initiateGalleryPick(getActivity(),
-                    binding.nearbyFilter.chipView.choiceChipWlm.isChecked());
+                    false);
             }
         });
 
@@ -2490,13 +2377,4 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         startActivity(intent);
     }
 
-    public void onToggleChipsClicked() {
-        if (binding.nearbyFilter.chipView.getRoot().getVisibility() == View.VISIBLE) {
-            binding.nearbyFilter.chipView.getRoot().setVisibility(View.GONE);
-        } else {
-            binding.nearbyFilter.chipView.getRoot().setVisibility(View.VISIBLE);
-        }
-        binding.nearbyFilter.ivToggleChips.setRotation(
-            binding.nearbyFilter.ivToggleChips.getRotation() + 180);
-    }
 }

@@ -76,8 +76,7 @@ public interface NearbyParentFragmentContract {
 
         void filterOutAllMarkers();
 
-        void filterMarkersByLabels(List<Label> selectedLabels, boolean existsSelected,
-            boolean needPhotoSelected, boolean wlmSelected, boolean filterForPlaceState,
+        void filterMarkersByLabels(List<Label> selectedLabels, boolean filterForPlaceState,
             boolean filterForAllNoneType);
 
         LatLng getCameraTarget();

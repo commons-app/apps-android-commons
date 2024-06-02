@@ -281,18 +281,12 @@ public class NearbyParentFragmentPresenter
                 case CHECKED:
                     // Despite showing all labels NearbyFilterState still should be applied
                     nearbyParentFragmentView.filterMarkersByLabels(selectedLabels,
-                        NearbyFilterState.getInstance().isExistsSelected(),
-                        NearbyFilterState.getInstance().isNeedPhotoSelected(),
-                        NearbyFilterState.getInstance().isWlmSelected(),
                         filterForPlaceState, false);
                     nearbyParentFragmentView.setRecyclerViewAdapterAllSelected();
                     break;
             }
         } else {
             nearbyParentFragmentView.filterMarkersByLabels(selectedLabels,
-                NearbyFilterState.getInstance().isExistsSelected(),
-                NearbyFilterState.getInstance().isNeedPhotoSelected(),
-                NearbyFilterState.getInstance().isWlmSelected(),
                 filterForPlaceState, false);
         }
     }

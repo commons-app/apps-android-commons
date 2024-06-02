@@ -52,7 +52,7 @@ import timber.log.Timber;
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class NetworkingModule {
-    private static final String WIKIDATA_SPARQL_QUERY_URL = "https://query.wikidata.org/sparql";
+    private static final String WIKIDATA_SPARQL_QUERY_URL = "https://query.wikidata.org/bigdata/namespace/wdq/sparql";
     private static final String TOOLS_FORGE_URL = "https://tools.wmflabs.org/commons-android-app/tool-commons-android-app";
 
     public static final long OK_HTTP_CACHE_SIZE = 10 * 1024 * 1024;

@@ -18,7 +18,8 @@
 
         <include
           android:id="@+id/nearby_filter"
-          layout="@layout/nearby_filter_all_items" />
+          layout="@layout/nearby_filter_all_items"
+          android:visibility="visible" />
 
         <RelativeLayout
           android:id="@+id/rl_container_wlm_month_message"
