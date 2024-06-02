@@ -236,24 +236,6 @@ class NearbyParentFragmentUnitTest {
 
     @Test @Ignore
     @Throws(Exception::class)
-    fun testOnToggleChipsClickedCaseVisible() {
-        `when`(view.visibility).thenReturn(View.VISIBLE)
-        fragment.onToggleChipsClicked()
-        verify(view).visibility = View.GONE
-        verify(ivToggleChips).rotation = ivToggleChips.rotation + 180
-    }
-
-    @Test @Ignore
-    @Throws(Exception::class)
-    fun testOnToggleChipsClickedCaseNotVisible() {
-        `when`(view.visibility).thenReturn(View.GONE)
-        fragment.onToggleChipsClicked()
-        verify(view).visibility = View.VISIBLE
-        verify(ivToggleChips).rotation = ivToggleChips.rotation + 180
-    }
-
-    @Test @Ignore
-    @Throws(Exception::class)
     fun testOnLearnMoreClicked() {
         fragment.onLearnMoreClicked()
         val shadowActivity: ShadowActivity = Shadows.shadowOf(activity)
