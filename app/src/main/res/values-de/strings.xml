@@ -305,7 +305,7 @@
   <string name="skip_login">Überspringen</string>
   <string name="navigation_item_login">Anmelden</string>
   <string name="skip_login_title">Möchtest du wirklich die Anmeldung überspringen?</string>
-  <string name="skip_login_message" fuzzy="true">Du wirst dich anmelden müssen, um in Zukunft Bilder hochladen zu können.</string>
+  <string name="skip_login_message">In Zukunft musst du dich anmelden, um Bilder hochzuladen.</string>
   <string name="login_alert_message">Bitte melde dich an, um diese Funktion zu nutzen.</string>
   <string name="copy_wikicode">Den Wikitext in die Zwischenablage kopieren</string>
   <string name="wikicode_copied">Der Wikitext wurde in die Zwischenablage kopiert</string>

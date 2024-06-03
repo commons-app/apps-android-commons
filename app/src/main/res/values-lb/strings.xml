@@ -228,6 +228,7 @@
   <string name="skip_login">Iwwersprangen</string>
   <string name="navigation_item_login">Aloggen</string>
   <string name="skip_login_title">Wëllt Dir wierklech d\'Aloggen iwwersprangen?</string>
+  <string name="skip_login_message">An Zukunft musst Dir Iech alogge fir Biller eropzelueden.</string>
   <string name="login_alert_message">Mellt Iech wgl. u fir dës Funktioun ze benotzen</string>
   <string name="copy_wikicode">De Wikitext an den Tëschespäicher kopéieren</string>
   <string name="wikicode_copied">De Wikitext gouf an den Tëschespäicher kopéiert</string>

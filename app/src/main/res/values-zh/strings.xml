@@ -320,7 +320,7 @@
   <string name="skip_login">跳过</string>
   <string name="navigation_item_login">登录</string>
   <string name="skip_login_title">您确定要跳过登录吗？</string>
-  <string name="skip_login_message" fuzzy="true">您在未来将需要登陆才能上传图片。</string>
+  <string name="skip_login_message">您今后将需要登录才能上传图片。</string>
   <string name="login_alert_message">请登录后使用这个功能</string>
   <string name="copy_wikicode">复制wikitext到剪贴板</string>
   <string name="wikicode_copied">wikitext已经复制到剪贴板</string>
