@@ -327,12 +327,12 @@ public class LocationPickerActivity extends BaseActivity implements
     }
 
     private void setupMapView() {
+        requestLocationPermissions();
         moveMapToMediaLocation();
         modifyLocationButton.setOnClickListener(v -> onClickModifyLocation());
         removeLocationButton.setOnClickListener(v -> onClickRemoveLocation());
         showInMapButton.setOnClickListener(v -> showInMap());
         darkThemeSetup();
-        requestLocationPermissions();
     }
 
     /**
