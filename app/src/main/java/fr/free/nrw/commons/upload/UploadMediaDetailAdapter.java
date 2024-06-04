@@ -197,14 +197,7 @@ public class UploadMediaDetailAdapter extends
      */
     public void removeDescription(final UploadMediaDetail uploadMediaDetail, final int position) {
         selectedLanguages.remove(position);
-        int listPosition = 0;
-        List<Integer> keysList = new ArrayList<>(selectedLanguages.keySet());
-        for (Integer key : keysList) {
-            if (key < position) {
-                listPosition++;
-            }
-        }
-        this.uploadMediaDetails.remove(uploadMediaDetails.get(listPosition));
+        this.uploadMediaDetails.remove(uploadMediaDetail);
         int i = position + 1;
         while (selectedLanguages.containsKey(i)) {
             selectedLanguages.remove(i);
@@ -311,12 +304,10 @@ public class UploadMediaDetailAdapter extends
 
             removeButton.setOnClickListener(v -> removeDescription(uploadMediaDetail, position));
             captionListener = new AbstractTextWatcher(
-                captionText -> uploadMediaDetails.get(position)
-                    .setCaptionText(convertIdeographicSpaceToLatinSpace(
+                captionText -> uploadMediaDetail.setCaptionText(convertIdeographicSpaceToLatinSpace(
                         removeLeadingAndTrailingWhitespace(captionText))));
             descriptionListener = new AbstractTextWatcher(
-                descriptionText -> uploadMediaDetails.get(position)
-                    .setDescriptionText(descriptionText));
+                descriptionText -> uploadMediaDetail.setDescriptionText(descriptionText));
             captionItemEditText.addTextChangedListener(captionListener);
             initLanguage(position, uploadMediaDetail);
 
