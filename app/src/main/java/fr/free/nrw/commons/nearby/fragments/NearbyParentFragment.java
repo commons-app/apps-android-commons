@@ -107,6 +107,7 @@ import io.reactivex.schedulers.Schedulers;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InterruptedIOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -1263,6 +1264,16 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         compositeDisposable.add(nearbyPlacesInfoObservable
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .retryWhen(errors -> errors
+                .zipWith(Observable.range(1, 4), (throwable, retryCount) -> {
+                    if (throwable instanceof InterruptedIOException && retryCount < 4) {
+                        Timber.d("Retry attempt %d due to %s", retryCount, throwable.getMessage());
+                        return retryCount;
+                    }
+                    throw new Exception(throwable);
+                })
+                .flatMap(retryCount -> Observable.timer(5, TimeUnit.SECONDS))
+            )
             .subscribe(nearbyPlacesInfo -> {
                     if (nearbyPlacesInfo.placeList == null || nearbyPlacesInfo.placeList.isEmpty()) {
                         showErrorMessage(getString(R.string.no_nearby_places_around));
@@ -1300,6 +1311,16 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         compositeDisposable.add(nearbyPlacesInfoObservable
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .retryWhen(errors -> errors
+                .zipWith(Observable.range(1, 4), (throwable, retryCount) -> {
+                    if (throwable instanceof InterruptedIOException && retryCount < 4) {
+                        Timber.d("Retry attempt %d due to %s", retryCount, throwable.getMessage());
+                        return retryCount;
+                    }
+                    throw new Exception(throwable);
+                })
+                .flatMap(retryCount -> Observable.timer(5, TimeUnit.SECONDS))
+            )
             .subscribe(nearbyPlacesInfo -> {
                     if (nearbyPlacesInfo.placeList == null || nearbyPlacesInfo.placeList.isEmpty()) {
                         showErrorMessage(getString(R.string.no_nearby_places_around));
