@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/bookmarkButton"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_columnWeight="1"
+  android:background="@drawable/button_background_selector"
+  android:clickable="true"
+  android:orientation="vertical"
+  android:padding="@dimen/standard_gap">
+
+  <ImageView
+    android:id="@+id/buttonImage"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:tint="?attr/rowButtonColor" />
+
+  <TextView
+    android:id="@+id/buttonText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:paddingTop="@dimen/activity_margin_horizontal"
+    android:text="CAMERA"
+    android:visibility="gone" />
+</LinearLayout>

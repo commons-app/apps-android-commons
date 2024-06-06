@@ -2,9 +2,11 @@ package fr.free.nrw.commons.di;
 
 import com.google.gson.Gson;
 
+import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.explore.categories.CategoriesModule;
 import fr.free.nrw.commons.navtab.MoreBottomSheetFragment;
 import fr.free.nrw.commons.navtab.MoreBottomSheetLoggedOutFragment;
+import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.upload.worker.UploadWorker;
 import javax.inject.Singleton;
 
@@ -67,6 +69,9 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
     void inject(FileProcessor fileProcessor);
 
     void inject(PicOfDayAppWidget picOfDayAppWidget);
+
+    @Singleton
+    void inject(NearbyController nearbyController);
 
     Gson gson();
 
