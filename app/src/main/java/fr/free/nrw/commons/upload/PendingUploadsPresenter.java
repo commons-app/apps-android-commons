@@ -1,13 +1,22 @@
-package fr.free.nrw.commons.contributions;
+package fr.free.nrw.commons.upload;
 
+
+import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.paging.DataSource;
 import androidx.paging.DataSource.Factory;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
-import fr.free.nrw.commons.contributions.ContributionsListContract.UserActionListener;
+import androidx.work.ExistingWorkPolicy;
+import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.ContributionBoundaryCallback;
+import fr.free.nrw.commons.contributions.ContributionsRemoteDataSource;
+import fr.free.nrw.commons.contributions.ContributionsRepository;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
+import fr.free.nrw.commons.upload.PendingUploadsContract.UserActionListener;
+import fr.free.nrw.commons.upload.PendingUploadsContract.View;
+import fr.free.nrw.commons.upload.worker.WorkRequestHelper;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import javax.inject.Inject;
@@ -16,7 +25,7 @@ import javax.inject.Named;
 /**
  * The presenter class for Contributions
  */
-public class ContributionsListPresenter implements UserActionListener {
+public class PendingUploadsPresenter implements UserActionListener {
 
     private final ContributionBoundaryCallback contributionBoundaryCallback;
     private final ContributionsRepository repository;
@@ -25,11 +34,10 @@ public class ContributionsListPresenter implements UserActionListener {
     private final CompositeDisposable compositeDisposable;
     private final ContributionsRemoteDataSource contributionsRemoteDataSource;
 
-    LiveData<PagedList<Contribution>> contributionList;
     LiveData<PagedList<Contribution>> totalContributionList;
 
     @Inject
-    ContributionsListPresenter(
+    PendingUploadsPresenter(
         final ContributionBoundaryCallback contributionBoundaryCallback,
         final ContributionsRemoteDataSource contributionsRemoteDataSource,
         final ContributionsRepository repository,
@@ -41,9 +49,6 @@ public class ContributionsListPresenter implements UserActionListener {
         compositeDisposable = new CompositeDisposable();
     }
 
-    @Override
-    public void onAttachView(final ContributionsListContract.View view) {
-    }
 
     /**
      * Setup the paged list. This method sets the configuration for paged list and ties it up with
@@ -72,7 +77,7 @@ public class ContributionsListPresenter implements UserActionListener {
         } else {
             contributionBoundaryCallback.setUserName(userName);
             shouldSetBoundaryCallback = true;
-            factory = repository.fetchCompletedContributions();
+            factory = repository.fetchContributions();
         }
 
         LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory, pagedListConfig);
@@ -80,8 +85,14 @@ public class ContributionsListPresenter implements UserActionListener {
             livePagedListBuilder.setBoundaryCallback(contributionBoundaryCallback);
         }
 
-        contributionList = livePagedListBuilder.build();
+        totalContributionList = livePagedListBuilder.build();
     }
+
+    @Override
+    public void onAttachView(@NonNull View view) {
+
+    }
+
 
     @Override
     public void onDetachView() {
@@ -101,22 +112,15 @@ public class ContributionsListPresenter implements UserActionListener {
             .subscribe());
     }
 
-    void getTotalContribution(String userName) {
-        final PagedList.Config pagedListConfig =
-            (new PagedList.Config.Builder())
-                .setPrefetchDistance(50)
-                .setPageSize(10).build();
-        Factory<Integer, Contribution> factory;
-        boolean shouldSetBoundaryCallback;
-        contributionBoundaryCallback.setUserName(userName);
-        shouldSetBoundaryCallback = true;
-        factory = repository.fetchContributions();
-        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
-            pagedListConfig);
-        if (shouldSetBoundaryCallback) {
-            livePagedListBuilder.setBoundaryCallback(contributionBoundaryCallback);
-        }
-        totalContributionList = livePagedListBuilder.build();
+    public void saveContribution(Contribution contribution, Context context) {
+        compositeDisposable.add(repository
+            .save(contribution)
+            .subscribeOn(ioThreadScheduler)
+            .subscribe(() ->
+                WorkRequestHelper.Companion.makeOneTimeWorkRequest(
+                context, ExistingWorkPolicy.KEEP)
+
+            ));
     }
 
 }

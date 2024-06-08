@@ -19,7 +19,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
@@ -35,6 +35,7 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.contributions.ContributionsListAdapter.Callback;
 import fr.free.nrw.commons.databinding.FragmentContributionsListBinding;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.media.MediaClient;
@@ -49,6 +50,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
 import fr.free.nrw.commons.wikidata.model.WikiSite;
+import timber.log.Timber;
 
 
 /**
@@ -56,7 +58,7 @@ import fr.free.nrw.commons.wikidata.model.WikiSite;
  */
 
 public class ContributionsListFragment extends CommonsDaggerSupportFragment implements
-    ContributionsListContract.View, ContributionsListAdapter.Callback,
+    ContributionsListContract.View, Callback,
     WikipediaInstructionsDialogFragment.Callback {
 
     private static final String RV_STATE = "rv_scroll_state";
@@ -81,7 +83,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     private Animation rotate_forward;
     private Animation rotate_backward;
     private boolean isFabOpen;
-
+    public int pendingUploadsCount = 0;
+    public int uploadErrorCount = 0;
     @VisibleForTesting
     protected RecyclerView rvContributionsList;
 
@@ -99,7 +102,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     private String userName;
 
     private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(
-        new ActivityResultContracts.RequestMultiplePermissions(),
+        new RequestMultiplePermissions(),
         new ActivityResultCallback<Map<String, Boolean>>() {
             @Override
             public void onActivityResult(Map<String, Boolean> result) {
@@ -214,6 +217,21 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
         contributionsListPresenter.setup(userName,
             Objects.equals(sessionManager.getUserName(), userName));
+        contributionsListPresenter.getTotalContribution(userName);
+        contributionsListPresenter.totalContributionList.observe(getViewLifecycleOwner(), list -> {
+            uploadErrorCount = 0;
+            pendingUploadsCount = 0;
+            for (int i = 0; i< list.size(); i++){
+                if (list.get(i).getState() != Contribution.STATE_COMPLETED){
+                    if (list.get(i).getState() == Contribution.STATE_FAILED){
+                        uploadErrorCount++;
+                    }else {
+                        pendingUploadsCount++;
+                    }
+                }
+            }
+            callback.updateUploadsIcon(pendingUploadsCount, uploadErrorCount);
+        });
         contributionsListPresenter.contributionList.observe(getViewLifecycleOwner(), list -> {
             contributionsSize = list.size();
             adapter.submitList(list);
@@ -544,5 +562,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
         // Notify the viewpager that number of items have changed.
         void viewPagerNotifyDataSetChanged();
+
+        void updateUploadsIcon(int pendingCount, int errorCount);
     }
 }

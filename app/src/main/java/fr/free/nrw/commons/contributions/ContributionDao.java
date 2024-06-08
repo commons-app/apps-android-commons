@@ -20,6 +20,10 @@ public abstract class ContributionDao {
     @Query("SELECT * FROM contribution order by media_dateUploaded DESC")
     abstract DataSource.Factory<Integer, Contribution> fetchContributions();
 
+    @Query("SELECT * FROM contribution WHERE state = -1 ORDER BY media_dateUploaded DESC")
+    abstract DataSource.Factory<Integer, Contribution> fetchContributionsWithStateCompleted();
+
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public abstract void saveSynchronous(Contribution contribution);
 

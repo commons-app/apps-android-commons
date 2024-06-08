@@ -138,19 +138,6 @@ class ContributionViewHolderUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testOnPauseResumeButtonClickedCaseTrue() {
-        contributionViewHolder.onPauseResumeButtonClicked()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnPauseResumeButtonClickedCaseFalse() {
-        bindind.pauseResumeButton.tag = ""
-        contributionViewHolder.onPauseResumeButtonClicked()
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testWikipediaButtonClicked() {
         contributionViewHolder.wikipediaButtonClicked()
     }
@@ -159,18 +146,6 @@ class ContributionViewHolderUnitTests {
     @Throws(Exception::class)
     fun testImageClicked() {
         contributionViewHolder.imageClicked()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testDeleteUpload() {
-        contributionViewHolder.deleteUpload()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testRetryUpload() {
-        contributionViewHolder.retryUpload()
     }
 
     @Test

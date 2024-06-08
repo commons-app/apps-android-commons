@@ -49,6 +49,10 @@ public class ContributionsRepository {
         return localDataSource.getContributions();
     }
 
+    public Factory<Integer, Contribution> fetchCompletedContributions() {
+        return localDataSource.getCompletedContributions();
+    }
+
     public Single<List<Long>> save(List<Contribution> contributions) {
         return localDataSource.saveContributions(contributions);
     }

@@ -12,6 +12,7 @@ import android.Manifest;
 import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -25,6 +26,7 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +46,7 @@ import fr.free.nrw.commons.notification.models.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.upload.UploadProgressActivity;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -129,6 +132,10 @@ public class ContributionsFragment
 
     public TextView notificationCount;
 
+    public TextView pendingUploadsCountTextView;
+
+    public TextView uploadsErrorTextView;
+
     private Campaign wlmCampaign;
 
     String userName;
@@ -212,9 +219,7 @@ public class ContributionsFragment
         }
 
         initFragments();
-        if(isUserProfile) {
-            binding.limitedConnectionEnabledLayout.setVisibility(View.GONE);
-        }else {
+        if(!isUserProfile) {
             upDateUploadCount();
         }
         if (shouldShowMediaDetailsFragment) {
@@ -230,7 +235,6 @@ public class ContributionsFragment
             && sessionManager.getCurrentAccount() != null && !isUserProfile) {
             setUploadCount();
         }
-        binding.limitedConnectionEnabledLayout.setOnClickListener(toggleDescriptionListener);
         setHasOptionsMenu(true);
         return binding.getRoot();
     }
@@ -258,10 +262,27 @@ public class ContributionsFragment
         MenuItem notificationsMenuItem = menu.findItem(R.id.notifications);
         final View notification = notificationsMenuItem.getActionView();
         notificationCount = notification.findViewById(R.id.notification_count_badge);
+        MenuItem uploadMenuItem = menu.findItem(R.id.upload_tab);
+        final View uploadMenuItemActionView = uploadMenuItem.getActionView();
+        pendingUploadsCountTextView = uploadMenuItemActionView.findViewById(R.id.pending_uploads_count_badge);
+        uploadsErrorTextView = uploadMenuItemActionView.findViewById(R.id.uploads_error_count_badge);
+        final ImageView pendingUploadsImageView = uploadMenuItemActionView.findViewById(R.id.pending_uploads_image_view);
+
+        pendingUploadsImageView.setOnClickListener(view -> {
+            startActivity(new Intent(getContext(), UploadProgressActivity.class));
+        });
+
+        pendingUploadsCountTextView.setOnClickListener(view -> {
+            startActivity(new Intent(getContext(), UploadProgressActivity.class));
+        });
+
+        uploadsErrorTextView.setOnClickListener(view -> {
+            startActivity(new Intent(getContext(), UploadProgressActivity.class));
+        });
+
         notification.setOnClickListener(view -> {
             NotificationActivity.startYourself(getContext(), "unread");
         });
-        updateLimitedConnectionToggle(menu);
     }
 
     @SuppressLint("CheckResult")
@@ -287,29 +308,6 @@ public class ContributionsFragment
             notificationCount.setVisibility(View.VISIBLE);
             notificationCount.setText(String.valueOf(notificationList.size()));
         }
-    }
-
-    public void updateLimitedConnectionToggle(Menu menu) {
-        MenuItem checkable = menu.findItem(R.id.toggle_limited_connection_mode);
-        boolean isEnabled = store
-            .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
-
-        checkable.setChecked(isEnabled);
-        if (binding!=null) {
-            binding.limitedConnectionEnabledLayout.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
-        }
-
-        checkable.setIcon((isEnabled) ? R.drawable.ic_baseline_cloud_off_24:R.drawable.ic_baseline_cloud_queue_24);
-        checkable.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                ((MainActivity) getActivity()).toggleLimitedConnectionMode();
-                boolean isEnabled = store.getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
-                binding.limitedConnectionEnabledLayout.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
-                checkable.setIcon((isEnabled) ? R.drawable.ic_baseline_cloud_off_24:R.drawable.ic_baseline_cloud_queue_24);
-                return false;
-            }
-        });
     }
 
     @Override
@@ -747,6 +745,26 @@ public class ContributionsFragment
         }
     }
 
+    @Override
+    public void updateUploadsIcon(int pendingCount, int errorCount) {
+        if (pendingUploadsCountTextView != null){
+            if (pendingCount != 0){
+                pendingUploadsCountTextView.setVisibility(View.VISIBLE);
+                pendingUploadsCountTextView.setText(String.valueOf(pendingCount));
+            }else {
+                pendingUploadsCountTextView.setVisibility(View.INVISIBLE);
+            }
+
+            if (errorCount != 0){
+                uploadsErrorTextView.setVisibility(View.VISIBLE);
+                uploadsErrorTextView.setText(String.valueOf(errorCount));
+            }else {
+                uploadsErrorTextView.setVisibility(View.GONE);
+            }
+
+        }
+    }
+
     /**
      * Replace whatever is in the current contributionsFragmentContainer view with
      * mediaDetailPagerFragment, and preserve previous state in back stack. Called when user selects
@@ -843,21 +861,6 @@ public class ContributionsFragment
             showMediaDetailPagerFragment();
         }
     }
-
-    // click listener to toggle description that means uses can press the limited connection
-    // banner and description will hide. Tap again to show description.
-    private View.OnClickListener toggleDescriptionListener = new View.OnClickListener() {
-
-        @Override
-        public void onClick(View view) {
-            View view2 = binding.limitedConnectionDescriptionTextView;
-            if (view2.getVisibility() == View.GONE) {
-                view2.setVisibility(View.VISIBLE);
-            } else {
-                view2.setVisibility(View.GONE);
-            }
-        }
-    };
 
     /**
      * When the device rotates, rotate the Nearby banner's compass arrow in tandem.
