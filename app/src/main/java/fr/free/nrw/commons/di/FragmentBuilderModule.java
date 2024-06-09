@@ -34,6 +34,7 @@ import fr.free.nrw.commons.profile.achievements.AchievementsFragment;
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardFragment;
 import fr.free.nrw.commons.review.ReviewImageFragment;
 import fr.free.nrw.commons.settings.SettingsFragment;
+import fr.free.nrw.commons.upload.FailedUploadsFragment;
 import fr.free.nrw.commons.upload.PendingUploadsFragment;
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
 import fr.free.nrw.commons.upload.depicts.DepictsFragment;
@@ -159,4 +160,7 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract PendingUploadsFragment bindPendingUploadsFragment();
+
+    @ContributesAndroidInjector
+    abstract FailedUploadsFragment bindFailedUploadsFragment();
 }

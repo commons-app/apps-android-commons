@@ -121,7 +121,6 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
                     x++
                 }
             }
-            Timber.tag("PRINT").e(l.size.toString())
             if (l.size == 0) {
                 binding.nopendingTextView.visibility = View.VISIBLE
                 binding.pendingUplaodsLl.visibility = View.GONE

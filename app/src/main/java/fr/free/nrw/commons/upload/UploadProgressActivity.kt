@@ -3,22 +3,12 @@ package fr.free.nrw.commons.upload
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
-import androidx.work.ExistingWorkPolicy
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.ViewPagerAdapter
-import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.databinding.ActivityUploadProgressBinding
 import fr.free.nrw.commons.theme.BaseActivity
-import fr.free.nrw.commons.upload.fragments.FailedUploadsFragment
-import fr.free.nrw.commons.upload.worker.WorkRequestHelper.Companion.makeOneTimeWorkRequest
-import fr.free.nrw.commons.utils.NetworkUtils
-import fr.free.nrw.commons.utils.ViewUtil
-import io.reactivex.functions.Action
-import timber.log.Timber
-import javax.inject.Inject
 
 
 class UploadProgressActivity : BaseActivity() {
@@ -93,12 +83,9 @@ class UploadProgressActivity : BaseActivity() {
     }
 
     fun updateMenuItems(currentPosition: Int) {
+        menu!!.clear()
         if (currentPosition == 0) {
             if (isPendingIconsVisible){
-                menu!!.removeItem(R.id.retry_icon)
-                menu!!.removeItem(R.id.cancel_icon)
-                menu!!.removeItem(R.id.pause_icon)
-                menu!!.removeItem(R.id.resume_icon)
                 if (!isPaused){
                     if (menu!!.findItem(R.id.pause_icon) == null) {
                         menu!!.add(Menu.NONE, R.id.pause_icon, Menu.NONE, "Pause")
@@ -127,17 +114,19 @@ class UploadProgressActivity : BaseActivity() {
                             .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
                     }
                 }
-            }else{
-                menu!!.removeItem(R.id.retry_icon)
-                menu!!.removeItem(R.id.pause_icon)
-                menu!!.removeItem(R.id.resume_icon)
-                menu!!.removeItem(R.id.cancel_icon)
             }
         } else if (currentPosition == 1) {
-            menu!!.removeItem(R.id.pause_icon)
             if (menu!!.findItem(R.id.retry_icon) == null) {
                 menu!!.add(Menu.NONE, R.id.retry_icon, Menu.NONE, "Retry")
                     .setIcon(R.drawable.ic_refresh_white_24dp)
+                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+            }
+            if (menu!!.findItem(R.id.cancel_icon) == null) {
+                menu!!.add(Menu.NONE, R.id.cancel_icon, Menu.NONE, "Cancel")
+                    .setIcon(android.R.drawable.ic_menu_close_clear_cancel).setOnMenuItemClickListener {
+                        hidePendingIcons()
+                        true
+                    }
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
             }
         }
