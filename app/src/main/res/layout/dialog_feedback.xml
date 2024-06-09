@@ -122,6 +122,16 @@
       android:layout_margin="@dimen/dimen_6"
       />
 
+    <TextView
+      android:id="@+id/feedback_destination"
+      android:layout_margin="@dimen/dimen_6"
+      android:padding="4dp"
+      android:textSize="14sp"
+      android:textColor="?android:attr/textColorPrimary"
+      android:text="@string/feedback_destination_note"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
+
     <Button
       android:id="@+id/btn_submit_feedback"
       android:textColor="@color/white"
