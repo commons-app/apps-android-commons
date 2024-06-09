@@ -79,6 +79,28 @@ class PageEditClient(
 
 
     /**
+     * Appends a new section to the wiki page
+     * @param pageTitle   Title of the page to edit
+     * @param sectionTitle Title of the new section that needs to be created
+     * @param sectionText  The page content that is to be added to the section
+     * @param summary     Edit summary
+     * @return whether the edit was successful
+     */
+    fun createNewSection(pageTitle: String, sectionTitle: String, sectionText: String, summary: String): Observable<Boolean> {
+        return try {
+            pageEditInterface.postNewSection(pageTitle, summary, sectionTitle, sectionText, csrfTokenClient.getTokenBlocking())
+                .map { editResponse -> editResponse.edit()!!.editSucceeded() }
+        } catch (throwable: Throwable) {
+            if (throwable is InvalidLoginTokenException) {
+                throw throwable
+            } else {
+                Observable.just(false)
+            }
+        }
+    }
+
+
+    /**
      * Set new labels to Wikibase server of commons
      * @param summary   Edit summary
      * @param title Title of the page to edit

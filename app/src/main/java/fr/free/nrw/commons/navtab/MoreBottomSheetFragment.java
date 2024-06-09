@@ -153,8 +153,13 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
     void uploadFeedback(final Feedback feedback) {
         final FeedbackContentCreator feedbackContentCreator = new FeedbackContentCreator(getContext(), feedback);
 
-        Single<Boolean> single =
-            pageEditClient.prependEdit("Commons:Mobile_app/Feedback", feedbackContentCreator.toString(), "Summary")
+        final Single<Boolean> single =
+            pageEditClient.createNewSection(
+                    "Commons:Mobile_app/Feedback",
+                    feedbackContentCreator.getSectionTitle(),
+                    feedbackContentCreator.getSectionText(),
+                    "Summary"
+                )
                 .flatMapSingle(result -> Single.just(result))
                 .firstOrError();
 

@@ -74,6 +74,16 @@ interface PageEditInterface {
         @Field("token") token: String
     ): Observable<Edit>
 
+    @FormUrlEncoded
+    @Headers("Cache-Control: no-cache")
+    @POST(MW_API_PREFIX + "action=edit&section=new")
+    fun postNewSection(
+        @Field("title") title: String,
+        @Field("summary") summary: String,
+        @Field("sectiontitle") sectionTitle: String,
+        @Field("text") sectionText: String,
+        @Field("token") token: String
+    ): Observable<Edit>
 
     @FormUrlEncoded
     @Headers("Cache-Control: no-cache")
