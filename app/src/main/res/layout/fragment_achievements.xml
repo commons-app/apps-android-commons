@@ -385,7 +385,7 @@
                 android:layout_height="@dimen/overflow_icon_dimen"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_custom_map_marker" />
+                app:srcCompat="@drawable/ic_custom_map_marker_dark" />
 
               <TextView
                 android:layout_width="0dp"

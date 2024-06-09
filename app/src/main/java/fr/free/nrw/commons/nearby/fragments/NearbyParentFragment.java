@@ -68,7 +68,6 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationPermissionsHelper;
 import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
-import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.nearby.CheckBoxTriStates;
@@ -1731,9 +1730,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      *
      * @param place        where marker is to be added
      * @param isBookmarked true if place is bookmarked
+     * @param isDarkTheme true if app uses dark theme
      * @return returns the drawable of marker according to the place information
      */
-    private @DrawableRes int getIconFor(Place place, Boolean isBookmarked) {
+    private @DrawableRes int getIconFor(Place place, Boolean isBookmarked , Boolean isDarkTheme) {
         if (nearestPlace != null) {
             if (place.name.equals(nearestPlace.name)) {
                 // Highlight nearest place only when user clicks on the home nearby banner
@@ -1746,17 +1746,31 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         if (place.isMonument()) {
             return R.drawable.ic_custom_map_marker_monuments;
         } else if (!place.pic.trim().isEmpty()) {
-            return (isBookmarked ?
-                R.drawable.ic_custom_map_marker_green_bookmarked :
-                R.drawable.ic_custom_map_marker_green);
+            if (isDarkTheme) { //different icon for light and dark theme
+                return (isBookmarked ?
+                    R.drawable.ic_custom_map_marker_green_bookmarked_dark :
+                    R.drawable.ic_custom_map_marker_green_dark);
+            }
+            else{
+                return (isBookmarked ?
+                    R.drawable.ic_custom_map_marker_green_bookmarked_dark :
+                    R.drawable.ic_custom_map_marker_green);
+            }
         } else if (!place.exists) { // Means that the topic of the Wikidata item does not exist in the real world anymore, for instance it is a past event, or a place that was destroyed
             return (isBookmarked ?
                 R.drawable.ic_custom_map_marker_grey_bookmarked :
                 R.drawable.ic_custom_map_marker_grey);
         } else {
-            return (isBookmarked ?
-                R.drawable.ic_custom_map_marker_blue_bookmarked :
-                R.drawable.ic_custom_map_marker);
+            if (isDarkTheme) { //different icon for light and dark theme
+                return (isBookmarked ?
+                    R.drawable.ic_custom_map_marker_blue_bookmarked_dark :
+                    R.drawable.ic_custom_map_marker_dark);
+            }
+            else{
+                return (isBookmarked ?
+                    R.drawable.ic_custom_map_marker_blue_bookmarked_dark :
+                    R.drawable.ic_custom_map_marker);
+            }
         }
     }
 
@@ -1768,7 +1782,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     private void addMarkerToMap(Place place, Boolean isBookMarked) {
         ArrayList<OverlayItem> items = new ArrayList<>();
-        Drawable icon = ContextCompat.getDrawable(getContext(), getIconFor(place, isBookMarked));
+        Drawable icon = ContextCompat.getDrawable(getContext(), getIconFor(place, isBookMarked, isDarkTheme));
         GeoPoint point = new GeoPoint(place.location.getLatitude(), place.location.getLongitude());
         OverlayItem item = new OverlayItem(place.name,
             containsParentheses(place.getLongDescription()) ? getTextBetweenParentheses(
@@ -1811,7 +1825,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         ArrayList<OverlayItem> items = new ArrayList<>();
         for (int i = 0; i < nearbyBaseMarkers.size(); i++) {
             Drawable icon = ContextCompat.getDrawable(getContext(),
-                getIconFor(nearbyBaseMarkers.get(i).getPlace(), false));
+                getIconFor(nearbyBaseMarkers.get(i).getPlace(), false, isDarkTheme));
             GeoPoint point = new GeoPoint(
                 nearbyBaseMarkers.get(i).getPlace().location.getLatitude(),
                 nearbyBaseMarkers.get(i).getPlace().location.getLongitude());
