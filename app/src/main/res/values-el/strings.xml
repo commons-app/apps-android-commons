@@ -290,7 +290,7 @@
   <string name="skip_login">Παράβλεψη</string>
   <string name="navigation_item_login">Είσοδος</string>
   <string name="skip_login_title">Θέλετε πραγματικά να παραβλέψετε τη σύνδεση;</string>
-  <string name="skip_login_message">Θα χρειάζεται να συνδεθείτε για να ανεβάζετε εικόνες στο μέλλον.</string>
+  <string name="skip_login_message" fuzzy="true">Θα χρειάζεται να συνδεθείτε για να ανεβάζετε εικόνες στο μέλλον.</string>
   <string name="login_alert_message">Παρακαλούμε συνδεθείτε για να χρησιμοποιήσετε αυτό το χαρακτηριστικό</string>
   <string name="copy_wikicode">Αντιγράψτε το wikitext στο πρόχειρο</string>
   <string name="wikicode_copied">Το wikitext αντιγράφηκε στο πρόχειρο</string>

@@ -316,7 +316,7 @@
   <string name="skip_login">Omitir</string>
   <string name="navigation_item_login">Acceder</string>
   <string name="skip_login_title">¿Quieres realmente omitir el inicio de sesión?</string>
-  <string name="skip_login_message">Deberías iniciar sesión para subir imágenes en el futuro.</string>
+  <string name="skip_login_message" fuzzy="true">Deberías iniciar sesión para subir imágenes en el futuro.</string>
   <string name="login_alert_message">Por favor inicia sesion para usar esta característica</string>
   <string name="copy_wikicode">Copia el wikitexto al portapapeles</string>
   <string name="wikicode_copied">El wikitexto fue copiado al portapapeles</string>

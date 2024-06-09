@@ -275,7 +275,7 @@
   <string name="skip_login">건너뛰기</string>
   <string name="navigation_item_login">로그인</string>
   <string name="skip_login_title">로그인을 건너뛰시겠습니까?</string>
-  <string name="skip_login_message">나중에 사진을 업로드하려면 로그인해야 합니다.</string>
+  <string name="skip_login_message" fuzzy="true">나중에 사진을 업로드하려면 로그인해야 합니다.</string>
   <string name="login_alert_message">이 기능을 사용하려면 로그인해 주십시오</string>
   <string name="copy_wikicode">위키텍스트를 클립보드에 복사</string>
   <string name="wikicode_copied">위키텍스트를 클립보드에 복사했습니다</string>

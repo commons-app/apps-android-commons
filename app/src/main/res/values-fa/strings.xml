@@ -265,7 +265,7 @@
   <string name="skip_login">رها کردن</string>
   <string name="navigation_item_login">ورود به سامانه</string>
   <string name="skip_login_title" fuzzy="true">آیا واقعا میخواهید وارد شوید؟</string>
-  <string name="skip_login_message">برای بارگذاری تصاویر در آینده شما باید وارد حساب کاربری خود شوید.</string>
+  <string name="skip_login_message" fuzzy="true">برای بارگذاری تصاویر در آینده شما باید وارد حساب کاربری خود شوید.</string>
   <string name="login_alert_message">لطفا برای استفاده از این ویژگی وارد شوید</string>
   <string name="copy_wikicode">از ویکی واژه به کلیپ برد کپی کنید.</string>
   <string name="wikicode_copied">ویکی‌متن در کلیپ‌بورد کپی شد</string>

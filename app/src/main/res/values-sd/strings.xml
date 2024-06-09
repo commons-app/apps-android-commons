@@ -233,7 +233,7 @@
   <string name="skip_login">ڇڏيو</string>
   <string name="navigation_item_login">داخل ٿيو</string>
   <string name="skip_login_title" fuzzy="true">ڇا توھان سچ ۾ داخل-ٿيڻ ڇڏڻ چاھيو ٿا؟</string>
-  <string name="skip_login_message">توھان کي تصويرون چاڙھڻ لاءِ مستقبل ۾ داخل ٿيڻو پوندو.</string>
+  <string name="skip_login_message" fuzzy="true">توھان کي تصويرون چاڙھڻ لاءِ مستقبل ۾ داخل ٿيڻو پوندو.</string>
   <string name="login_alert_message">مھرباني فرمائي هن خصوصيت کي استعمال ڪرڻ لاءِ داخل ٿيو</string>
   <string name="nearby_location_not_available">\'\'\'ويجها\'\'\' ٿي سگهي ٿو صحيح طرح ڪم نہ ڪري، مڪانيت دستياب نہ آھي.</string>
   <string name="location_permission_rationale_nearby">ويجهين جڳھن جي فھرست ڏيکارڻ لاءِ اجازت گهربل آھي</string>

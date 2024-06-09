@@ -266,7 +266,7 @@
   <string name="skip_login">Saltar</string>
   <string name="navigation_item_login">Enirar</string>
   <string name="skip_login_title">Ka vu deziras ne enirar?</string>
-  <string name="skip_login_message">Vu mustus facar \'\'log in\'\' por sendor imaji future.</string>
+  <string name="skip_login_message" fuzzy="true">Vu mustus facar \'\'log in\'\' por sendor imaji future.</string>
   <string name="login_alert_message">Voluntez enirar por uzar ca utensilo</string>
   <string name="copy_wikicode">Kopiez Wiki-texto a \'clipboard\'</string>
   <string name="wikicode_copied">Wiki-texto kopiesis a \'clipboard\'</string>
