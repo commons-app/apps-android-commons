@@ -226,7 +226,7 @@
   <string name="skip_login">Neidio</string>
   <string name="navigation_item_login">Mewngofnodi</string>
   <string name="skip_login_title" fuzzy="true">Ti\'n sicr nad wyt am fewngofnodi?</string>
-  <string name="skip_login_message">Bydd yn rhaid i ti fewngofnodi er mwyn uwchlwytho delweddau yn y dyfodol.</string>
+  <string name="skip_login_message" fuzzy="true">Bydd yn rhaid i ti fewngofnodi er mwyn uwchlwytho delweddau yn y dyfodol.</string>
   <string name="login_alert_message">Er mwyn defnyddio\'r nodwedd yma, mewngofnodwch!</string>
   <string name="nearby_location_not_available" fuzzy="true">Nid yw\'r lleoliad ar gael.</string>
   <string name="nearby_directions">Cyfeiriadau</string>

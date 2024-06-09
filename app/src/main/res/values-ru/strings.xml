@@ -325,7 +325,7 @@
   <string name="skip_login">Пропустить</string>
   <string name="navigation_item_login">Войти</string>
   <string name="skip_login_title">Вы действительно хотите пропустить авторизацию?</string>
-  <string name="skip_login_message">Вам следует залогиниться чтобы загружать изображения.</string>
+  <string name="skip_login_message" fuzzy="true">Вам следует залогиниться чтобы загружать изображения.</string>
   <string name="login_alert_message">Войдите, чтобы использовать эту функцию</string>
   <string name="copy_wikicode">Копирование викикода в буфер обмена</string>
   <string name="wikicode_copied">Викикод скопирован в буфер обмена</string>

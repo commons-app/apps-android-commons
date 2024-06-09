@@ -293,7 +293,7 @@
   <string name="skip_login">Pular</string>
   <string name="navigation_item_login">Entrar</string>
   <string name="skip_login_title" fuzzy="true">Você realmente quer pular a entrada?</string>
-  <string name="skip_login_message">Você teria que entrar para enviar fotos no futuro.</string>
+  <string name="skip_login_message" fuzzy="true">Você teria que entrar para enviar fotos no futuro.</string>
   <string name="login_alert_message">Entre para usar esta funcionalidade</string>
   <string name="copy_wikicode">Copie o wikitexto para a área de transferência</string>
   <string name="wikicode_copied">O wikitexto foi copiado para a área de transferência</string>

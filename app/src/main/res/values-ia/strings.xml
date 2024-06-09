@@ -263,7 +263,7 @@
   <string name="skip_login">Saltar</string>
   <string name="navigation_item_login">Aperir session</string>
   <string name="skip_login_title">Vole tu vermente saltar le apertura de session?</string>
-  <string name="skip_login_message">Tu debera alora aperir session pro incargar imagines plus tarde.</string>
+  <string name="skip_login_message" fuzzy="true">Tu debera alora aperir session pro incargar imagines plus tarde.</string>
   <string name="login_alert_message">Per favor aperi session pro usar iste function</string>
   <string name="copy_wikicode">Copiar le wikitexto al area de transferentia</string>
   <string name="wikicode_copied">Le wikitexto ha essite copiate al area de transferentia</string>

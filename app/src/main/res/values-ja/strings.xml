@@ -272,7 +272,7 @@
   <string name="skip_login">スキップ</string>
   <string name="navigation_item_login">ログイン</string>
   <string name="skip_login_title" fuzzy="true">本当にログインをしなくてよいですか?</string>
-  <string name="skip_login_message">画像の投稿には、今後、ログインが必要です。</string>
+  <string name="skip_login_message" fuzzy="true">画像の投稿には、今後、ログインが必要です。</string>
   <string name="login_alert_message">この機能を使うにはログインしてください</string>
   <string name="copy_wikicode">ウィキテキストをクリップボードにコピーする</string>
   <string name="wikicode_copied">クリップボードにウィキテキストをコピー完了しました</string>
