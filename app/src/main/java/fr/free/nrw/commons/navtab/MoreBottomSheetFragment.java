@@ -160,7 +160,7 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
                     feedbackContentCreator.getSectionText(),
                     "Summary"
                 )
-                .flatMapSingle(result -> Single.just(result))
+                .flatMapSingle(Single::just)
                 .firstOrError();
 
         Single.defer((Callable<SingleSource<Boolean>>) () -> single)
