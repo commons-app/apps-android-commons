@@ -158,7 +158,7 @@ public class MoreBottomSheetFragment extends BottomSheetDialogFragment {
                     "Commons:Mobile_app/Feedback",
                     feedbackContentCreator.getSectionTitle(),
                     feedbackContentCreator.getSectionText(),
-                    "Summary"
+                    "New feedback on version " + feedback.getVersion() + " of the app"
                 )
                 .flatMapSingle(Single::just)
                 .firstOrError();
