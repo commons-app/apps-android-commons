@@ -90,6 +90,7 @@ class UploadProgressActivity : BaseActivity() {
                     if (menu!!.findItem(R.id.pause_icon) == null) {
                         menu!!.add(Menu.NONE, R.id.pause_icon, Menu.NONE, "Pause")
                             .setIcon(android.R.drawable.ic_media_pause).setOnMenuItemClickListener {
+                                pendingUploadsFragment!!.pauseUploads()
                                 setPausedIcon(true)
                                 true
                             }
@@ -107,7 +108,7 @@ class UploadProgressActivity : BaseActivity() {
                     if (menu!!.findItem(R.id.resume_icon) == null) {
                         menu!!.add(Menu.NONE, R.id.resume_icon, Menu.NONE, "Resume")
                             .setIcon(android.R.drawable.ic_media_play).setOnMenuItemClickListener {
-                                pendingUploadsFragment!!.restartUpload()
+                                pendingUploadsFragment!!.restartUploads()
                                 setPausedIcon(false)
                                 true
                             }
@@ -132,7 +133,6 @@ class UploadProgressActivity : BaseActivity() {
         }
     }
 
-
     fun hidePendingIcons() {
         isPendingIconsVisible = false
         updateMenuItems(binding.uploadProgressViewPager.currentItem)
@@ -142,6 +142,5 @@ class UploadProgressActivity : BaseActivity() {
         isPaused = paused
         updateMenuItems(binding.uploadProgressViewPager.currentItem)
     }
-
 
 }

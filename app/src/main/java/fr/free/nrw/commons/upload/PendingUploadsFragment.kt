@@ -28,7 +28,7 @@ import javax.inject.Inject
  * create an instance of this fragment.
  */
 class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsContract.View,
-    PendingUploadsAdapter.Callback {
+    PendingUploadsAdapter.Callback{
     var isPendingIconsVisible = false
 
     // TODO: Rename and change types of parameters
@@ -141,6 +141,8 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
                 binding.progressBarPending.progress = totalUploads-l.size
                 if (x == l.size) {
                     uploadProgressActivity.setPausedIcon(true)
+                }else{
+                    uploadProgressActivity.setPausedIcon(false)
                 }
             }
         }
@@ -200,10 +202,25 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
         //TODO("Not yet implemented")
     }
 
-    fun restartUpload() {
+    fun restartUploads() {
+        // TODO make the restart as in queue
         var contribution = l.get(0)
         contribution.state = Contribution.STATE_QUEUED
         pendingUploadsPresenter.saveContribution(contribution, this.requireContext().applicationContext)
         Timber.d("Restarting for %s", contribution.toString())
     }
+
+    fun pauseUploads() {
+        if (l != null){
+            l.forEach {
+                //Pause the upload in the global singleton
+                CommonsApplication.pauseUploads[it.pageId] = true
+                //Retain the paused state in DB
+                it.state = Contribution.STATE_PAUSED
+                pendingUploadsPresenter.saveContribution(it, this.requireContext().applicationContext)
+            }
+        }
+    }
+
+
 }
