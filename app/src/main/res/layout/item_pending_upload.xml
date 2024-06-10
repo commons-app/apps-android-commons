@@ -28,8 +28,7 @@
       android:id="@+id/titleTextView"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:textSize="24sp"
-      android:text="RandomTest" />
+      android:textSize="24sp" />
 
     <ProgressBar
       android:id="@+id/itemProgress"

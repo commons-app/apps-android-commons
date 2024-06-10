@@ -20,7 +20,7 @@ import java.io.File
 class PendingUploadsAdapter(items: List<Contribution>, callback: Callback) :
     RecyclerView.Adapter<PendingUploadsAdapter.ViewHolder>() {
     private val items: List<Contribution> = items
-    private var callback:Callback = callback
+    private var callback: Callback = callback
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: View =
@@ -34,7 +34,6 @@ class PendingUploadsAdapter(items: List<Contribution>, callback: Callback) :
         var imageRequest: ImageRequest? = null
 
         val imageSource: String = item.localUri.toString()
-        Timber.tag("PRINT").e("--"+imageSource)
 
         if (!TextUtils.isEmpty(imageSource)) {
             if (URLUtil.isFileUrl(imageSource)) {
@@ -48,40 +47,44 @@ class PendingUploadsAdapter(items: List<Contribution>, callback: Callback) :
                 holder.itemImage.setImageRequest(imageRequest)
             }
         }
-
+        Timber.tag("PRINT").e(item.state.toString() + " " + item)
         if (item.state == Contribution.STATE_QUEUED || item.state == Contribution.STATE_PAUSED) {
             holder.errorTextView.setText("Queued")
             holder.errorTextView.visibility = View.VISIBLE
             holder.itemProgress.visibility = View.GONE
         } else {
-            holder.errorTextView.visibility = View.GONE
-            holder.itemProgress.visibility = View.VISIBLE
-            val total: Long = item.dataLength
-            val transferred: Long = item.transferred
-            if (transferred == 0L || transferred >= total) {
-                holder.itemProgress.setIndeterminate(true)
+            if (item.chunkInfo == null) {
+                holder.errorTextView.setText("Queued")
+                holder.errorTextView.visibility = View.VISIBLE
+                holder.itemProgress.visibility = View.GONE
             } else {
-                holder.itemProgress.setIndeterminate(false)
-                holder.itemProgress.setProgress(((transferred.toDouble() / total.toDouble()) * 100).toInt())
+                holder.errorTextView.visibility = View.GONE
+                holder.itemProgress.visibility = View.VISIBLE
+                val total: Long = item.dataLength
+                val transferred: Long = item.transferred
+                if (transferred == 0L || transferred >= total) {
+                    holder.itemProgress.setIndeterminate(true)
+                } else {
+                    holder.itemProgress.setIndeterminate(false)
+                    holder.itemProgress.setProgress(((transferred.toDouble() / total.toDouble()) * 100).toInt())
+                }
             }
         }
 
         holder.itemImage.setImageRequest(imageRequest)
 
-        holder.deleteButton.setOnClickListener{
+        holder.deleteButton.setOnClickListener {
             callback!!.deleteUpload(item)
         }
     }
-
-
 
     override fun getItemCount(): Int {
         return items.size
     }
 
-
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var itemImage: com.facebook.drawee.view.SimpleDraweeView = itemView.findViewById(R.id.itemImage)
+        var itemImage: com.facebook.drawee.view.SimpleDraweeView =
+            itemView.findViewById(R.id.itemImage)
         var titleTextView: TextView = itemView.findViewById<TextView>(R.id.titleTextView)
         var itemProgress: ProgressBar = itemView.findViewById<ProgressBar>(R.id.itemProgress)
         var errorTextView: TextView = itemView.findViewById<TextView>(R.id.errorTextView)

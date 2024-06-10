@@ -222,11 +222,13 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
             uploadErrorCount = 0;
             pendingUploadsCount = 0;
             for (int i = 0; i< list.size(); i++){
-                if (list.get(i).getState() != Contribution.STATE_COMPLETED){
-                    if (list.get(i).getState() == Contribution.STATE_FAILED){
-                        uploadErrorCount++;
-                    }else {
-                        pendingUploadsCount++;
+                if (list.get(i) != null){
+                    if (list.get(i).getState() != Contribution.STATE_COMPLETED){
+                        if (list.get(i).getState() == Contribution.STATE_FAILED){
+                            uploadErrorCount++;
+                        }else {
+                            pendingUploadsCount++;
+                        }
                     }
                 }
             }

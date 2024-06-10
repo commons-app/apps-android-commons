@@ -83,8 +83,10 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(),PendingUploadsContr
         ) { list: PagedList<Contribution?> ->
             l = ArrayList()
             list.forEach {
-                if (it!!.state == Contribution.STATE_FAILED) {
-                    l.add(it)
+                if (it != null){
+                    if (it.state == Contribution.STATE_FAILED) {
+                        l.add(it)
+                    }
                 }
             }
             if (l.size == 0) {

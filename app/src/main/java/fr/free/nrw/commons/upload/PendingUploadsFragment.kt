@@ -54,6 +54,7 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
 
     private var contributionsSize = 0
     var l = ArrayList<Contribution>()
+    private var totalUploads = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,16 +110,18 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
             l = ArrayList()
             var x = 0;
             list.forEach {
-                if (it!!.state == Contribution.STATE_PAUSED
-                    || it.state == Contribution.STATE_QUEUED
-                    || it.state == Contribution.STATE_IN_PROGRESS
-                ) {
-                    l.add(it)
-                }
-                if (it!!.state == Contribution.STATE_PAUSED
-                    || it.state == Contribution.STATE_QUEUED
-                ) {
-                    x++
+                if (it != null){
+                    if (it.state == Contribution.STATE_PAUSED
+                        || it.state == Contribution.STATE_QUEUED
+                        || it.state == Contribution.STATE_IN_PROGRESS
+                    ) {
+                        l.add(it)
+                    }
+                    if (it.state == Contribution.STATE_PAUSED
+                        || it.state == Contribution.STATE_QUEUED
+                    ) {
+                        x++
+                    }
                 }
             }
             if (l.size == 0) {
@@ -126,12 +129,16 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
                 binding.pendingUplaodsLl.visibility = View.GONE
                 uploadProgressActivity.hidePendingIcons()
             } else {
+                if (totalUploads == 0){
+                    totalUploads = l.size
+                    binding.progressBarPending.max = totalUploads
+                }
                 binding.nopendingTextView.visibility = View.GONE
                 binding.pendingUplaodsLl.visibility = View.VISIBLE
                 val adapter = PendingUploadsAdapter(l, this)
                 binding.pendingUploadsRecyclerView.setAdapter(adapter)
-                binding.progressTextView.setText("0/" + l.size + " uploaded")
-
+                binding.progressTextView.setText((totalUploads-l.size).toString() + "/" + totalUploads + " uploaded")
+                binding.progressBarPending.progress = totalUploads-l.size
                 if (x == l.size) {
                     uploadProgressActivity.setPausedIcon(true)
                 }
