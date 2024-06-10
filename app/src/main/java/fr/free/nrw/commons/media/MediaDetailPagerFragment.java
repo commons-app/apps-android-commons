@@ -506,12 +506,13 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
      * @param position current item that to be shown
      */
     private void setViewPagerCurrentItem(int position) {
-        // Show the ProgressBar while waiting for the item to load
-        imageProgressBar.setVisibility(View.VISIBLE);
+
         final Handler handler = new Handler(Looper.getMainLooper());
         final Runnable runnable = new Runnable() {
             @Override
             public void run() {
+                // Show the ProgressBar while waiting for the item to load
+                imageProgressBar.setVisibility(View.VISIBLE);
                 // Check if the adapter has enough items loaded
                 if(adapter.getCount() > position){
                     // Set the current item in the ViewPager
