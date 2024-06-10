@@ -820,4 +820,5 @@ Upload your first media by tapping on the add button.</string>
   <string name="multiple_files_depiction_header">Note about multi-uploads</string>
   <!-- TODO: Remove or change this placeholder text -->
   <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="feedback_destination_note">Your feedback gets posted to the following wiki page: <![CDATA[ <a href="https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback">Commons:Mobile app/Feedback</a> ]]></string>
 </resources>
