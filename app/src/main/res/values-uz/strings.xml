@@ -265,7 +265,7 @@
   <string name="skip_login">Oʻtkazib yuborish</string>
   <string name="navigation_item_login">Kirish</string>
   <string name="skip_login_title" fuzzy="true">Haqiqatan ham kirishni oʻtkazib yubormoqchimisiz?</string>
-  <string name="skip_login_message">Kelajakda rasmlarni yuklash uchun tizimga kirishingiz kerak boʻladi.</string>
+  <string name="skip_login_message" fuzzy="true">Kelajakda rasmlarni yuklash uchun tizimga kirishingiz kerak boʻladi.</string>
   <string name="login_alert_message">Ushbu xususiyatdan foydalanish uchun tizimga kiring</string>
   <string name="copy_wikicode">Vikimatndan nusxa olish</string>
   <string name="wikicode_copied">Vikimatndan nusxa olindi</string>

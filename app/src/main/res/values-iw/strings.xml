@@ -301,7 +301,7 @@
   <string name="skip_login">לדלג</string>
   <string name="navigation_item_login">כניסה לחשבון</string>
   <string name="skip_login_title">לדלג על הכניסה לחשבון?</string>
-  <string name="skip_login_message">יהיה עליך להיכנס כדי להעלות תמונות בעתיד.</string>
+  <string name="skip_login_message">יש להיכנס כדי להעלות תמונות בעתיד.</string>
   <string name="login_alert_message">נא להיכנס לחשבון כדי להשתמש באפשרות הזאת</string>
   <string name="copy_wikicode">העתקת קוד ויקי ללוח</string>
   <string name="wikicode_copied">קוד הוויקי הועתק ללוח</string>

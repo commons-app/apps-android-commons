@@ -274,7 +274,7 @@
   <string name="skip_login">Lewati</string>
   <string name="navigation_item_login">Masuk</string>
   <string name="skip_login_title" fuzzy="true">Apakah Anda benar-benar tidak ingin masuk?</string>
-  <string name="skip_login_message">Anda mungkin harus masuk untuk mengunggah gambar di lain waktu.</string>
+  <string name="skip_login_message" fuzzy="true">Anda mungkin harus masuk untuk mengunggah gambar di lain waktu.</string>
   <string name="login_alert_message">Silakan masuk untuk menggunakan fitur ini</string>
   <string name="copy_wikicode">Salin wikitext ke papan klip</string>
   <string name="wikicode_copied">Wikitext telah disalin ke papan klip</string>

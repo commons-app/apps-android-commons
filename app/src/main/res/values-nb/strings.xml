@@ -277,7 +277,7 @@
   <string name="skip_login">Hopp over</string>
   <string name="navigation_item_login">Logg inn</string>
   <string name="skip_login_title" fuzzy="true">Vil du hoppe over logg inn?</string>
-  <string name="skip_login_message">Du må logge inn for å laste opp bilder i fremtiden.</string>
+  <string name="skip_login_message" fuzzy="true">Du må logge inn for å laste opp bilder i fremtiden.</string>
   <string name="login_alert_message">Logg vennligst inn for å bruke denne funksjonen</string>
   <string name="copy_wikicode">Kopier wikiteksten til utklippstavlen</string>
   <string name="wikicode_copied">Wikiteksten har blitt kopiert til utklippstavlen</string>

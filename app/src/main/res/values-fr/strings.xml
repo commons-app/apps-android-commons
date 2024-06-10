@@ -307,7 +307,7 @@
   <string name="skip_login">Passer</string>
   <string name="navigation_item_login">Se connecter</string>
   <string name="skip_login_title">Ne voulez-vous vraiment pas vous connecter ?</string>
-  <string name="skip_login_message">Vous aurez à vous connecter à l’avenir pour téléverser des images.</string>
+  <string name="skip_login_message" fuzzy="true">Vous aurez à vous connecter à l’avenir pour téléverser des images.</string>
   <string name="login_alert_message">Veuillez vous connecter pour utiliser cette fonctionnalité</string>
   <string name="copy_wikicode">Copier le texte wiki dans le presse-papiers</string>
   <string name="wikicode_copied">Texte wiki copié dans le presse-papiers</string>

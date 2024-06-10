@@ -287,7 +287,7 @@
   <string name="skip_login">Salta</string>
   <string name="navigation_item_login">Accedi</string>
   <string name="skip_login_title">Vuoi davvero saltare l\'accesso?</string>
-  <string name="skip_login_message">Dovresti effettuare l\'accesso per caricare le foto in futuro.</string>
+  <string name="skip_login_message">Dovrai effettuare l\'accesso per caricare le foto in futuro.</string>
   <string name="login_alert_message">Effettua l\'accesso per utilizzare questa funzione</string>
   <string name="copy_wikicode">Copia il wikitesto negli appunti</string>
   <string name="wikicode_copied">Il wikitesto è stato copiato negli appunti</string>

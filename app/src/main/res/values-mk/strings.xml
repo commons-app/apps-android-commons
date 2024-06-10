@@ -271,7 +271,7 @@
   <string name="skip_login">Прескокни</string>
   <string name="navigation_item_login">Најава</string>
   <string name="skip_login_title">Дали навистина сакате да ја прескокнете најавата?</string>
-  <string name="skip_login_message">Ќе морате да се најавите за да подигате слики во иднина.</string>
+  <string name="skip_login_message" fuzzy="true">Ќе морате да се најавите за да подигате слики во иднина.</string>
   <string name="login_alert_message">Најавете се за да ја користите оваа можност.</string>
   <string name="copy_wikicode">Прекопирај го викитекстот во меѓускладот</string>
   <string name="wikicode_copied">Викитекстот е прекопиран во меѓускладот</string>

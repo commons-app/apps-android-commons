@@ -300,7 +300,7 @@
   <string name="skip_login">Пропустити</string>
   <string name="navigation_item_login">Увійти</string>
   <string name="skip_login_title" fuzzy="true">Ви дійсно бажаєте пропустити автентифікацію?</string>
-  <string name="skip_login_message">Вам треба буде увійти в систему для завантаження зображень у майбутньому.</string>
+  <string name="skip_login_message" fuzzy="true">Вам треба буде увійти в систему для завантаження зображень у майбутньому.</string>
   <string name="login_alert_message">Увійдіть, щоб використати цю функцію</string>
   <string name="copy_wikicode">Скопіювати вікі-текст у буфер обміну</string>
   <string name="wikicode_copied">Вікі-текст скопійовано у буфер обміну</string>

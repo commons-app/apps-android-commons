@@ -244,7 +244,7 @@
   <string name="skip_login">Gaŋim gaad</string>
   <string name="navigation_item_login">Kpɛn\'ɛm</string>
   <string name="skip_login_title" fuzzy="true">Fʋ sid bɔɔdi fʋ gaŋ kpɛn\'ɛbɔ?</string>
-  <string name="skip_login_message">Di nar ye fʋ kpɛn\' nya\'aŋi kpɛn\'ɛs footonam.</string>
+  <string name="skip_login_message" fuzzy="true">Di nar ye fʋ kpɛn\' nya\'aŋi kpɛn\'ɛs footonam.</string>
   <string name="login_alert_message">M bɛlimnɛ kpɛn\'ɛm pʋʋgin ka nɔk bʋnkaŋa tʋm</string>
   <string name="copy_wikicode">Kopim wikisɔbʋg la niŋ clipboard</string>
   <string name="nearby_directions">Suoya pa\'alʋg</string>

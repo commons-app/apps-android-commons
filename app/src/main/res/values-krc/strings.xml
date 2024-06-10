@@ -162,7 +162,7 @@
   <string name="tutorial_1_text">Викигёзен, Википедияда хайырланнган суратланы кёбюсюн ичинде тутар.</string>
   <string name="tutorial_1_subtext">Суратларыгъыз, дунияны тёрт джанындагъы инсанлагъа окъуу алыуда болушлукъчу боллукъду.</string>
   <string name="tutorial_2_text">Тилейбиз, тамамы бла кесигиз алгъан неда салгъан суратланы джюклегиз:</string>
-  <string name="tutorial_2_subtext_1">Табийгъат объектле (гоккала, джаныуарла, таула)</string>
+  <string name="tutorial_2_subtext_1">Табигъат объектле (гоккала, джаныуарла, таула)</string>
   <string name="tutorial_2_subtext_2">Хайырланнган объектле (аякъ мешинала, темирджол станцияла)</string>
   <string name="tutorial_2_subtext_3">Белгили адамла (мэригиз, сиз тюбеген олимпиячы спортчула)</string>
   <string name="tutorial_3_text">Тилейбиз, быланы ДЖЮКЛЕМЕГИЗ:</string>
@@ -268,7 +268,7 @@
   <string name="skip_login">Атлат</string>
   <string name="navigation_item_login">Кир</string>
   <string name="skip_login_title">Авторизацияны керти да атлатыргъамы излейсиз?</string>
-  <string name="skip_login_message">Боллукъ заманда сурат джюклер ючюн кирирге керек боллукъсуз.</string>
+  <string name="skip_login_message" fuzzy="true">Боллукъ заманда сурат джюклер ючюн кирирге керек боллукъсуз.</string>
   <string name="login_alert_message">Бу функцияны хайырланыр ючюн, тилейбиз, киригиз</string>
   <string name="copy_wikicode">Викитекстни алмашдырыу буферге копия эт</string>
   <string name="wikicode_copied">Викитекст алмашдырыу буферге копия этилди</string>

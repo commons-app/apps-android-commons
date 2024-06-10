@@ -292,7 +292,7 @@
   <string name="skip_login">略過</string>
   <string name="navigation_item_login">登入</string>
   <string name="skip_login_title">您確定要略過登入嗎？</string>
-  <string name="skip_login_message">之後您需要登入才能上傳圖片。</string>
+  <string name="skip_login_message" fuzzy="true">之後您需要登入才能上傳圖片。</string>
   <string name="login_alert_message">請登入來使用此功能</string>
   <string name="copy_wikicode">複製 wikitext 到剪貼簿</string>
   <string name="wikicode_copied">Wikitext 已複製到剪貼簿</string>

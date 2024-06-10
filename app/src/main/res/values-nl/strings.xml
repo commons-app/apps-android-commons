@@ -292,7 +292,7 @@
   <string name="skip_login">Overslaan</string>
   <string name="navigation_item_login">Aanmelden</string>
   <string name="skip_login_title">Weet u zeker dat u het aanmelden wilt overslaan?</string>
-  <string name="skip_login_message">U moet zich dan later wel aanmelden om afbeeldingen te kunnen uploaden.</string>
+  <string name="skip_login_message" fuzzy="true">U moet zich dan later wel aanmelden om afbeeldingen te kunnen uploaden.</string>
   <string name="login_alert_message">Meld u aan om deze functie te gebruiken</string>
   <string name="copy_wikicode">Kopieer de wikitekst naar het klembord</string>
   <string name="wikicode_copied">De wikitekst is gekopieerd naar het klembord</string>
