@@ -292,7 +292,7 @@
   <string name="skip_login">Overslaan</string>
   <string name="navigation_item_login">Aanmelden</string>
   <string name="skip_login_title">Weet u zeker dat u het aanmelden wilt overslaan?</string>
-  <string name="skip_login_message" fuzzy="true">U moet zich dan later wel aanmelden om afbeeldingen te kunnen uploaden.</string>
+  <string name="skip_login_message">U moet zich dan later wel aanmelden om afbeeldingen te kunnen uploaden.</string>
   <string name="login_alert_message">Meld u aan om deze functie te gebruiken</string>
   <string name="copy_wikicode">Kopieer de wikitekst naar het klembord</string>
   <string name="wikicode_copied">De wikitekst is gekopieerd naar het klembord</string>
@@ -792,4 +792,5 @@
   </plurals>
   <string name="multiple_files_depiction">Houd er rekening mee dat alle afbeeldingen in een multi-upload dezelfde categorieën krijgen en geacht worden hetzelfde weer te geven. Als deze gegevens per afbeelding moeten verschillen, voer dan meerdere afzonderlijke uploads uit.</string>
   <string name="multiple_files_depiction_header">Opmerking over multi-uploads</string>
+  <string name="feedback_destination_note">Uw feedback wordt op de volgende wikipagina geplaatst: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
 </resources>

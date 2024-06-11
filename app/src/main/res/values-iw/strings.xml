@@ -807,4 +807,5 @@
   </plurals>
   <string name="multiple_files_depiction">נא לזכור שכשמועלות כמה תמונות, כולן מקבלות את אותן הקטגוריות והמוצגים. אם התמונות אינן חולקות מוצגים וקטגוריות, נא לעשות כמה העלאות נפרדות.</string>
   <string name="multiple_files_depiction_header">הערה על העלאות מרובות</string>
+  <string name="feedback_destination_note">המשוב שלך מתפרסם בדף הוויקי הבא: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
 </resources>
