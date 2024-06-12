@@ -159,7 +159,6 @@ public class NearbyParentFragmentPresenter
      */
     @Override
     public void updateMapAndList(LocationChangeType locationChangeType) {
-        nearbyParentFragmentView.stopQuery();
         Timber.d("Presenter updates map and list");
         if (isNearbyLocked) {
             Timber.d("Nearby is locked, so updateMapAndList returns");
@@ -326,6 +325,7 @@ public class NearbyParentFragmentPresenter
 
     public View.OnClickListener onSearchThisAreaClicked() {
         return v -> {
+            nearbyParentFragmentView.stopQuery();
             // Lock map operations during search this area operation
 //            nearbyParentFragmentView.setMapCenter();
             nearbyParentFragmentView.setSearchThisAreaButtonVisibility(false);

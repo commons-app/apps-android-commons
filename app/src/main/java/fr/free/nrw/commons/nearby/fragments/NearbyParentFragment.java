@@ -602,7 +602,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 if (lastFocusLocation == null && lastKnownLocation == null) {
                     locationPermissionGranted();
                 }else if (updatedPlaceList != null){
-                    loadPlacesDataAsync(updatedPlaceList, updatedLatLng);
+                    if (updatedPlaceList.size() != 0){
+                        loadPlacesDataAsync(updatedPlaceList, updatedLatLng);
+                    }
                 }
             } else {
                 startMapWithoutPermission();
@@ -1264,16 +1266,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         compositeDisposable.add(nearbyPlacesInfoObservable
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .retryWhen(errors -> errors
-                .zipWith(Observable.range(1, 4), (throwable, retryCount) -> {
-                    if (throwable instanceof InterruptedIOException && retryCount < 4) {
-                        Timber.d("Retry attempt %d due to %s", retryCount, throwable.getMessage());
-                        return retryCount;
-                    }
-                    throw new Exception(throwable);
-                })
-                .flatMap(retryCount -> Observable.timer(5, TimeUnit.SECONDS))
-            )
             .subscribe(nearbyPlacesInfo -> {
                     if (nearbyPlacesInfo.placeList == null || nearbyPlacesInfo.placeList.isEmpty()) {
                         showErrorMessage(getString(R.string.no_nearby_places_around));
@@ -1311,16 +1303,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         compositeDisposable.add(nearbyPlacesInfoObservable
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .retryWhen(errors -> errors
-                .zipWith(Observable.range(1, 4), (throwable, retryCount) -> {
-                    if (throwable instanceof InterruptedIOException && retryCount < 4) {
-                        Timber.d("Retry attempt %d due to %s", retryCount, throwable.getMessage());
-                        return retryCount;
-                    }
-                    throw new Exception(throwable);
-                })
-                .flatMap(retryCount -> Observable.timer(5, TimeUnit.SECONDS))
-            )
             .subscribe(nearbyPlacesInfo -> {
                     if (nearbyPlacesInfo.placeList == null || nearbyPlacesInfo.placeList.isEmpty()) {
                         showErrorMessage(getString(R.string.no_nearby_places_around));
@@ -1332,6 +1314,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                             false);
                         lastMapFocus = new GeoPoint(searchLatLng.getLatitude(),
                             searchLatLng.getLongitude());
+                        stopQuery();
                         loadPlacesDataAsync(nearbyPlacesInfo.placeList, nearbyPlacesInfo.currentLatLng);
                     }
                 },
