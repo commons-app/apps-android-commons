@@ -203,22 +203,14 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
     }
 
     fun restartUploads() {
-        // TODO make the restart as in queue
-        var contribution = l.get(0)
-        contribution.state = Contribution.STATE_QUEUED
-        pendingUploadsPresenter.saveContribution(contribution, this.requireContext().applicationContext)
-        Timber.d("Restarting for %s", contribution.toString())
+        if (l != null){
+            pendingUploadsPresenter.restartUploads(l, 0 , this.requireContext().applicationContext)
+        }
     }
 
     fun pauseUploads() {
         if (l != null){
-            l.forEach {
-                //Pause the upload in the global singleton
-                CommonsApplication.pauseUploads[it.pageId] = true
-                //Retain the paused state in DB
-                it.state = Contribution.STATE_PAUSED
-                pendingUploadsPresenter.saveContribution(it, this.requireContext().applicationContext)
-            }
+            pendingUploadsPresenter.pauseUploads(l, 0, this.requireContext().applicationContext)
         }
     }
 

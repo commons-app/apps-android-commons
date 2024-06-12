@@ -58,8 +58,6 @@ class UploadClient @Inject constructor(
             )
         }
 
-        contribution.unpause()
-
         val file = contribution.localUriPath
         val fileChunks = fileUtilsWrapper.getFileChunks(file, CHUNK_SIZE)
         val mediaType = fileUtilsWrapper.getMimeType(file).toMediaTypeOrNull()

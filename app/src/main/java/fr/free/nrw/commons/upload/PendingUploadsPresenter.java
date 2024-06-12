@@ -9,6 +9,7 @@ import androidx.paging.DataSource.Factory;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 import androidx.work.ExistingWorkPolicy;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionBoundaryCallback;
 import fr.free.nrw.commons.contributions.ContributionsRemoteDataSource;
@@ -19,8 +20,10 @@ import fr.free.nrw.commons.upload.PendingUploadsContract.View;
 import fr.free.nrw.commons.upload.worker.WorkRequestHelper;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
+import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
+import timber.log.Timber;
 
 /**
  * The presenter class for Contributions
@@ -119,7 +122,48 @@ public class PendingUploadsPresenter implements UserActionListener {
             .subscribe(() ->
                 WorkRequestHelper.Companion.makeOneTimeWorkRequest(
                 context, ExistingWorkPolicy.KEEP)
+            ));
+    }
 
+    public void pauseUploads(List<Contribution> l, int index, Context context) {
+        Timber.tag("PRINT").e(CommonsApplication.pauseUploads.toString());
+        if (index >= l.size()) {
+            return;
+        }
+        Contribution it = l.get(index);
+        CommonsApplication.pauseUploads.put(it.getPageId().toString(), true);
+        //Retain the paused state in DB
+        it.setState(Contribution.STATE_PAUSED);
+        compositeDisposable.add(repository
+            .save(it)
+            .subscribeOn(ioThreadScheduler)
+            .doOnComplete(() -> {
+                    pauseUploads(l, index + 1, context);
+                }
+            )
+            .subscribe( () ->
+                WorkRequestHelper.Companion.makeOneTimeWorkRequest(
+                    context, ExistingWorkPolicy.KEEP)
+            ));
+    }
+
+    public void restartUploads(List<Contribution> l, int index, Context context) {
+        if (index >= l.size()) {
+            return;
+        }
+        Contribution it = l.get(index);
+        it.setState(Contribution.STATE_QUEUED);
+        compositeDisposable.add(repository
+            .save(it)
+            .subscribeOn(ioThreadScheduler)
+            .doOnComplete(() -> {
+                CommonsApplication.pauseUploads.put(it.getPageId().toString(), false);
+                    restartUploads(l, index + 1, context);
+                }
+            )
+            .subscribe(() ->
+                WorkRequestHelper.Companion.makeOneTimeWorkRequest(
+                    context, ExistingWorkPolicy.KEEP)
             ));
     }
 
