@@ -1838,7 +1838,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     R.drawable.ic_custom_map_marker_grey);
         } else {
             return (isBookmarked ?
-                R.drawable.ic_custom_map_marker_blue_bookmarked :
+                R.drawable.ic_custom_map_marker_red_bookmarked :
                 R.drawable.ic_custom_map_marker_red);
         }
     }
