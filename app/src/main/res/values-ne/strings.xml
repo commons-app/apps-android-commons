@@ -12,6 +12,7 @@
 -->
 <resources>
   <string name="commons_facebook">कमन्सकाे फेसबुक पृष्ठ</string>
+  <string name="commons_github">कमन्सकाे Github स्रोत कोड</string>
   <string name="commons_logo">कमन्सकाे लाेगाे</string>
   <string name="commons_website">कमन्सकाे वेबसाइट</string>
   <string name="submit">बुझाउनुहोस्</string>
@@ -37,6 +38,7 @@
   <string name="signup">खाता खाेल्नुहाेस्</string>
   <string name="logging_in_title">प्रवेश गर्दै</string>
   <string name="logging_in_message">कृपया प्रतीक्षा गर्नुहोस् …</string>
+  <string name="updating_caption_message">कृपया प्रतीक्षा गर्नुहोस् …</string>
   <string name="login_success" fuzzy="true">प्रवेश सफल!</string>
   <string name="login_failed" fuzzy="true">प्रवेश सफल हुन सकेन!</string>
   <string name="upload_failed">चित्र भेटिएन। कृपया अर्को चित्र प्रयास गर्नुहोस्।</string>
@@ -46,9 +48,10 @@
   <string name="upload_completed_notification_text">तपाईको उर्ध्वभरण हेर्नको लागि ट्याप गर्नुहोस्</string>
   <string name="upload_progress_notification_title_start" fuzzy="true"> %1$s उर्ध्वभरण सुरू गर्दैै</string>
   <string name="upload_progress_notification_title_in_progress">%1$s उर्ध्वभरण गरिँदै</string>
-  <string name="upload_progress_notification_title_finishing"> %1$s उर्ध्वभरण सकाउँदै</string>
+  <string name="upload_progress_notification_title_finishing">%1$s उर्ध्वभरण सकाउँदै</string>
   <string name="upload_failed_notification_title" fuzzy="true"> %1$s उर्ध्वभरण असफल भयो</string>
   <string name="upload_failed_notification_subtitle">हेर्नको लागि ट्याप गर्नुहोस्</string>
+  <string name="upload_paused_notification_subtitle">हेर्नको लागि ट्याप गर्नुहोस्</string>
   <string name="title_activity_contributions">मेरा हालैका उर्ध्वभरणहरू</string>
   <string name="contribution_state_queued">लाममा राखियो</string>
   <string name="contribution_state_failed">असफल भयो</string>
@@ -205,6 +208,7 @@
   <string name="quiz">प्रश्नोत्तरी</string>
   <string name="question">प्रश्न</string>
   <string name="result">नतिजा</string>
+  <string name="user_not_logged_in">लग इनको म्याद सकियो। कृपया पुन: लग इन गर्नुहाेस्।</string>
   <string name="continue_message">निरन्तरता दिनुहोस्</string>
   <string name="wrong">गलत उत्तर</string>
   <string name="share_app_title">अनुप्रयाेग साझेदारी गर्नुहाेस्</string>
@@ -248,6 +252,8 @@
   <string name="delete_helper_ask_spam_selfie">एउटा सेल्फी जुन कुनै पनि लेखहरूमा प्रयोग गरिएको छैन्</string>
   <string name="delete_helper_ask_spam_blurry">पुरै धमिलो</string>
   <string name="delete_helper_ask_reason_copyright_logo">लोगो</string>
+  <string name="category_edit_helper_show_edit_title_success">सफल</string>
+  <string name="coordinates_edit_helper_show_edit_title_success">सफल</string>
   <string name="no_achievements_yet" fuzzy="true">तपाईले हालसम्म कुनैपनि सम्पादन गर्नु भएकाे छैन</string>
   <string name="account_created">खाता सृजना गरियो!</string>
   <string name="upload_nearby_place_found_title">नजिकैको स्थान भेटियो</string>
@@ -255,10 +261,54 @@
   <string name="title_app_shortcut_setting">मेरो अभिरुचिहरू</string>
   <string name="add_bookmark">पुस्तक चिनाेमा थपियाे</string>
   <string name="setting_wallpaper_dialog_title">भित्तेपत्रकाे रूपमा चयन गर्नुहोस्</string>
+  <string name="setting_wallpaper_dialog_message">वालपेपर सेट गर्दै। कृपया प्रतीक्षा गर्नुहोस् …</string>
   <string name="theme_default_name" fuzzy="true">पुनर्निर्धारित</string>
   <string name="theme_dark_name">गाढा</string>
   <string name="theme_light_name">हल्का</string>
+  <string name="bookmarks">पुस्तक चिनोहरू</string>
+  <string name="achievements_tab_title">उपलब्धिहरू</string>
+  <string name="leaderboard_upload">उर्ध्वभरण गर्ने</string>
+  <string name="leaderboard_nearby">निकटस्थ</string>
+  <string name="description">विवरण</string>
+  <string name="title_page_bookmarks_items">वस्तुहरू</string>
+  <string name="done">सम्पन्न भयो</string>
+  <string name="custom_selector_info_text2"/>
+  <string name="learn_more">थप जान्नुहोस्</string>
+  <string name="wlm_campaign_title">विकी लभ्स मोनुमेन्टस्</string>
+  <string name="need_permission">अनुमति आवश्यक</string>
+  <string name="menu_view_user_page">प्रयोगकर्ता पृष्ठ हेर्नुहोस्</string>
+  <string name="edit_categories">सम्पादन श्रेणीहरू</string>
+  <string name="advanced_options">उन्नत विकल्प</string>
+  <string name="advanced_query_info_text">तपाईँले निकटता क्वेरी अनुकूलन गर्न सक्नुहुन्छ। त्रुटी भएमा पूर्ववत् गर्नुभएर लागू गर्नुहोस्।</string>
+  <string name="apply">लागू गर्नुहोस्</string>
+  <string name="reset">पूर्वस्थितिमा फर्काउनुहोस्</string>
+  <string name="location_message"/>
+  <string name="no_location_found_title">कुनै पनि स्थान फेला परेन ।</string>
+  <string name="no_location_found_message">तस्विर खिचिएको स्थान थप्ने हो?\nस्थानको डेटाले विकी सम्पादकहरूलाई तस्विर भेटाउन मद्दत गर्छ र यसलाई धेरै उपयोगी गराउँछ।\nधन्यवाद!</string>
+  <string name="add_location">स्थान थप्नुहोस्</string>
+  <string name="explore_map_details">विवरणहरू</string>
+  <string name="copyright_popup">कृपया आफैँले खिच्नुभएको तस्विर मात्र अपलोड गर्नुहोस्। प्रतिलिपि अधिकार हनन् गर्ने अपलोडकर्तालाई रोकगाइने छ। यो बिटाएपमा पनि लागू हुन्छ। एप परीक्षण गर्नुभएकोमा धन्यवाद!</string>
+  <string name="android_version">एन्ड्रोइड संस्करण</string>
+  <string name="device_manufacturer">उपकरण निर्माता</string>
+  <string name="device_model">उपकरण मोडल</string>
+  <string name="device_name">उपकरणको नाम</string>
+  <string name="network_type">सञ्जालको प्रकार</string>
+  <string name="thanks_feedback">प्रतिक्रिया दिनुभएकोमा धन्यवाद</string>
+  <string name="error_feedback">प्रतिक्रिया पठाउँदा त्रुटि भयो</string>
+  <string name="enter_description">तपाईँको प्रतिक्रिया के छ?</string>
+  <string name="image_selected">छानिएको चित्र</string>
+  <string name="menu_view_report">रिपोेर्ट गर्नुहोस्</string>
   <string name="report_user">यस प्रयोगकर्तालाई उजुरी गर्नुहोस्</string>
-  <string name="report_content">यस प्रतिवेदनलाई उजुरी गर्नुहोस्</string>
+  <string name="report_content">यस सामग्रीलाई उजुरी गर्नुहोस्</string>
   <string name="request_user_block">यस प्रयोगकर्तालाई रोक लगाउन अनुरोध गर्नुहोस्</string>
+  <string name="edit_image">तस्विर सम्पादन गर्नुहोस्</string>
+  <string name="edit_location">स्थान सम्पादन गर्नुहोस्</string>
+  <string name="location_updated">स्थान अपडेट गरियो!</string>
+  <string name="remove_location">यो स्थान हटाउनुहोस्</string>
+  <string name="remove_location_warning_title">स्थान चेतावनी हटाउनुहोस्</string>
+  <string name="location_removed">स्थान हटाइयो!</string>
+  <string name="send_thanks_to_author">सर्जकलाई धन्यवाद दिनुहोस्</string>
+  <string name="error_sending_thanks">सर्जकलाई धन्यवाद पठाउँदा त्रुटि भयो।</string>
+  <string name="invalid_login_message">तपाईँको लग इनको म्याद सकियो। कृपया पुन:  लग इन गर्नुहाेस्।</string>
+  <string name="file_saved_successfully">फाइल सफलतापूर्वक सङ्ग्रह गरियो।</string>
 </resources>
