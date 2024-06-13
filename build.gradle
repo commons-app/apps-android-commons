@@ -13,6 +13,9 @@ buildscript {
     }
 }
 
+plugins {
+    id 'org.jlleitschuh.gradle.ktlint' version '11.6.1' apply false
+}
 allprojects {
     repositories {
         google()
@@ -23,6 +26,7 @@ allprojects {
     }
 }
 subprojects{
+    apply plugin: "org.jlleitschuh.gradle.ktlint"
     tasks.withType(Test).configureEach{
         jvmArgs = jvmArgs + ['--add-opens=java.base/java.lang=ALL-UNNAMED']
     }
