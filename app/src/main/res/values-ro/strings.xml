@@ -269,7 +269,7 @@
   <string name="skip_login">Omite</string>
   <string name="navigation_item_login">Autentificare</string>
   <string name="skip_login_title" fuzzy="true">Chiar vrei să ignori datele de autentificare?</string>
-  <string name="skip_login_message">Va trebui să vă conectați pentru a încărca imagini în viitor.</string>
+  <string name="skip_login_message" fuzzy="true">Va trebui să vă conectați pentru a încărca imagini în viitor.</string>
   <string name="login_alert_message">Conectați-vă pentru a utiliza această caracteristică</string>
   <string name="copy_wikicode">Copiați wikitext-ul în clipboard</string>
   <string name="wikicode_copied">Wikitext-ul a fost copiat în clipboard</string>

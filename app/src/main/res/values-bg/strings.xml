@@ -218,7 +218,7 @@
   <string name="nominated_see_more">Вижте по-подробна информация на уеб страницата</string>
   <string name="skip_login">Пропускане</string>
   <string name="navigation_item_login">Влизане</string>
-  <string name="skip_login_message">Трябва да влезете в системата, за да можете в бъдеще да качвате изображения.</string>
+  <string name="skip_login_message" fuzzy="true">Трябва да влезете в системата, за да можете в бъдеще да качвате изображения.</string>
   <string name="login_alert_message">Влезте в сметката си, за да използвате тази функционалност.</string>
   <string name="copy_wikicode">Копиране на уикитекста в кеша</string>
   <string name="wikicode_copied">Уикитекстът е копиран в кеша</string>

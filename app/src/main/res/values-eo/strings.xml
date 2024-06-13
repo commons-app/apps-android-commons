@@ -277,7 +277,7 @@
   <string name="skip_login">Preterpasi</string>
   <string name="navigation_item_login">Ensaluti</string>
   <string name="skip_login_title" fuzzy="true">Ĉu vere vi volas transpasi la ensalutadon?</string>
-  <string name="skip_login_message">Vi devas ensaluti por alŝuti bildojn.</string>
+  <string name="skip_login_message" fuzzy="true">Vi devas ensaluti por alŝuti bildojn.</string>
   <string name="login_alert_message">Bonvolu ensaluti por uzi ĉi tiun eblon</string>
   <string name="copy_wikicode">Kopii la vikitekston en la tondujon</string>
   <string name="wikicode_copied">La vikiteksto kopiiĝis en la tondujon</string>

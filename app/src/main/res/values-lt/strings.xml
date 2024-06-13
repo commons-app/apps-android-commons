@@ -249,7 +249,7 @@
   <string name="skip_login">Praleisti</string>
   <string name="navigation_item_login">Prisijungti</string>
   <string name="skip_login_title" fuzzy="true">Ar tikrai norite praleisti prisijungimą?</string>
-  <string name="skip_login_message">Norėdami ateityje įkelti nuotraukas, turėsite prisijungti.</string>
+  <string name="skip_login_message" fuzzy="true">Norėdami ateityje įkelti nuotraukas, turėsite prisijungti.</string>
   <string name="login_alert_message">Jei norite naudotis šia funkcija, prisijunkite</string>
   <string name="copy_wikicode">Nukopijuokite vikitekstą į mainų sritį</string>
   <string name="wikicode_copied">Vikitekstas buvo nukopijuotas į mainų sritį</string>

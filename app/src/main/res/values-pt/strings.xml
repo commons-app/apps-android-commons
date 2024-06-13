@@ -286,7 +286,7 @@
   <string name="skip_login">Saltar</string>
   <string name="navigation_item_login">Entrar</string>
   <string name="skip_login_title">Pretende mesmo ignorar o início de sessão?</string>
-  <string name="skip_login_message">Terá de iniciar sessão para carregar fotografias mais tarde.</string>
+  <string name="skip_login_message" fuzzy="true">Terá de iniciar sessão para carregar fotografias mais tarde.</string>
   <string name="login_alert_message">Inicie uma sessão para usar esta funcionalidade</string>
   <string name="copy_wikicode">Copiar o texto wiki para a área de transferência</string>
   <string name="wikicode_copied">O texto wiki foi copiado para a área de transferência</string>

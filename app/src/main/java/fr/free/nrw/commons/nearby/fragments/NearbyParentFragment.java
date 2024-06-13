@@ -144,7 +144,7 @@ import timber.log.Timber;
 
 public class NearbyParentFragment extends CommonsDaggerSupportFragment
     implements NearbyParentFragmentContract.View,
-    WikidataP18EditListener, LocationUpdateListener,
+    WikidataEditListener.WikidataP18EditListener, LocationUpdateListener,
     LocationPermissionCallback {
 
 
@@ -1221,7 +1221,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         return Environment.MEDIA_MOUNTED.equals(state);
     }
 
-    private void getPlaceData(String entity, Place place, Marker marker) {
+    private void getPlaceData(String entity, Place place, Marker marker, Boolean isBookMarked) {
         final Observable<Place> getPlaceObservable = Observable
             .fromCallable(() -> nearbyController
                 .getPlace(entity));
@@ -1238,6 +1238,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                             ? getTextBetweenParentheses(
                             updatedPlace.getLongDescription()) : updatedPlace.getLongDescription());
                     marker.showInfoWindow();
+                    for (int i =0; i < updatedPlaceList.size(); i++) {
+                        Place pl = updatedPlaceList.get(i);
+                        if (pl.location == updatedPlace.location){
+                            updatedPlaceList.set(i, updatedPlace);
+                        }
+                    }
+                    Drawable icon = ContextCompat.getDrawable(getContext(), getIconFor(updatedPlace, isBookMarked));
+                    marker.setIcon(icon);
+                    binding.map.invalidate();
                     binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.GONE);
                     binding.bottomSheetDetails.icon.setVisibility(View.VISIBLE);
                     binding.bottomSheetDetails.wikiDataLl.setVisibility(View.VISIBLE);
@@ -1864,7 +1873,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             binding.bottomSheetDetails.icon.setVisibility(View.GONE);
             binding.bottomSheetDetails.wikiDataLl.setVisibility(View.GONE);
             if (Objects.equals(place.name, "")) {
-                getPlaceData(place.getWikiDataEntityId(), place, marker1);
+                getPlaceData(place.getWikiDataEntityId(), place, marker1, isBookMarked);
             } else {
                 marker.showInfoWindow();
                 binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.GONE);
@@ -1918,7 +1927,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 binding.bottomSheetDetails.icon.setVisibility(View.GONE);
                 binding.bottomSheetDetails.wikiDataLl.setVisibility(View.GONE);
                 if (Objects.equals(updatedPlace.name, "")) {
-                    getPlaceData(updatedPlace.getWikiDataEntityId(), updatedPlace, marker1);
+                    getPlaceData(updatedPlace.getWikiDataEntityId(), updatedPlace, marker1, false);
                 } else {
                     marker.showInfoWindow();
                     binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.GONE);

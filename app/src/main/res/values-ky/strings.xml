@@ -129,6 +129,7 @@
   <string name="back_button_warning">Жүктөөнү жокко чыгаруу</string>
   <string name="back_button_warning_desc">Артка баскычын колдонуу менен бул жүктөө жокко чыгарылат жана сиз ийгиликти жоготосуз</string>
   <string name="back_button_continue">Жүктөөнү улантуу</string>
+  <string name="please_wait">Күтө туруңуз...</string>
   <string name="label">Аталыш</string>
   <string name="description">Сыпаттама</string>
   <string name="title_page_bookmarks_items">Элементтер</string>

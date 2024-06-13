@@ -792,4 +792,5 @@
   </plurals>
   <string name="multiple_files_depiction">Houd er rekening mee dat alle afbeeldingen in een multi-upload dezelfde categorieën krijgen en geacht worden hetzelfde weer te geven. Als deze gegevens per afbeelding moeten verschillen, voer dan meerdere afzonderlijke uploads uit.</string>
   <string name="multiple_files_depiction_header">Opmerking over multi-uploads</string>
+  <string name="feedback_destination_note">Uw feedback wordt op de volgende wikipagina geplaatst: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
 </resources>

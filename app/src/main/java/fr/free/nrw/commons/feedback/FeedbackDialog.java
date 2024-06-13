@@ -3,6 +3,9 @@ package fr.free.nrw.commons.feedback;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.view.WindowManager.LayoutParams;
 import fr.free.nrw.commons.R;
@@ -21,15 +24,20 @@ public class FeedbackDialog extends Dialog {
 
     private OnFeedbackSubmitCallback onFeedbackSubmitCallback;
 
+    private Spanned feedbackDestinationHtml;
+
     public FeedbackDialog(Context context, OnFeedbackSubmitCallback onFeedbackSubmitCallback) {
         super(context);
         this.onFeedbackSubmitCallback = onFeedbackSubmitCallback;
+        feedbackDestinationHtml = Html.fromHtml(context.getString(R.string.feedback_destination_note));
     }
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dialogFeedbackBinding = DialogFeedbackBinding.inflate(getLayoutInflater());
+        dialogFeedbackBinding.feedbackDestination.setText(feedbackDestinationHtml);
+        dialogFeedbackBinding.feedbackDestination.setMovementMethod(LinkMovementMethod.getInstance());
         Objects.requireNonNull(getWindow()).setSoftInputMode(LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         final View view = dialogFeedbackBinding.getRoot();
         setContentView(view);
