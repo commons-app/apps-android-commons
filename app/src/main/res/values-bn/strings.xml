@@ -276,7 +276,7 @@
   <string name="skip_login">এড়ান</string>
   <string name="navigation_item_login">প্রবেশ করুন</string>
   <string name="skip_login_title" fuzzy="true">আপনি কি সত্যিই প্রবেশকরণ এড়িয়ে যেতে চান?</string>
-  <string name="skip_login_message">ভবিষ্যতে চিত্র আপলোড করতে চাইলে আপনাকে প্রবেশ করতে হবে।</string>
+  <string name="skip_login_message" fuzzy="true">ভবিষ্যতে চিত্র আপলোড করতে চাইলে আপনাকে প্রবেশ করতে হবে।</string>
   <string name="login_alert_message">এই সুবিধাটি ব্যাবহার করতে প্রবেশ করুন</string>
   <string name="copy_wikicode">উইকিপাঠ্যটি ক্লিপবোর্ডে অনুলিপি করুন</string>
   <string name="wikicode_copied">উইকিপাঠ্যটি ক্লিপবোর্ডে অনুলিপি করা হয়েছে</string>

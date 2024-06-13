@@ -263,7 +263,7 @@
   <string name="skip_login">Sleppa</string>
   <string name="navigation_item_login">Skrá inn</string>
   <string name="skip_login_title" fuzzy="true">Viltu í alvörunni sleppa innskráningu?</string>
-  <string name="skip_login_message">Þú munt í framtíðinni þurfa að skrá þig inn til geta sent inn myndir.</string>
+  <string name="skip_login_message" fuzzy="true">Þú munt í framtíðinni þurfa að skrá þig inn til geta sent inn myndir.</string>
   <string name="login_alert_message">Skráðu þig inn til að nota þennan eiginleika</string>
   <string name="copy_wikicode">Afrita wiki-textann á klippispjaldið</string>
   <string name="wikicode_copied">Wiki-textinn var afritaður á klippispjaldið</string>

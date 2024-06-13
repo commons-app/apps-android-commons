@@ -248,7 +248,7 @@
   <string name="skip_login">దాటవేయి</string>
   <string name="navigation_item_login">లాగినవండి</string>
   <string name="skip_login_title" fuzzy="true">నిజంగానే లాగినవరా?</string>
-  <string name="skip_login_message">భవిష్యత్తులో మీరు బొమ్మలు ఎక్కించాలంటే, లాగినవాల్సి ఉంటుంది.</string>
+  <string name="skip_login_message" fuzzy="true">భవిష్యత్తులో మీరు బొమ్మలు ఎక్కించాలంటే, లాగినవాల్సి ఉంటుంది.</string>
   <string name="login_alert_message">ఈ అంశాన్ని వాడాలంటే లాగినవండి</string>
   <string name="copy_wikicode">వికీటెక్స్టును క్లిప్‌బోర్డుకు కాపీ చెయ్యి</string>
   <string name="wikicode_copied">వికీటెక్స్టును క్లిప్‌బోర్డుకు కాపీ చేసాం</string>

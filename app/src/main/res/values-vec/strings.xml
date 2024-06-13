@@ -226,7 +226,7 @@
   <string name="skip_login">Salta</string>
   <string name="navigation_item_login">Va drento a l\'uxuario</string>
   <string name="skip_login_title" fuzzy="true">Vuto da vero saltar l\'entrada n\'tel uxuario?</string>
-  <string name="skip_login_message">Te garisi da ndar drento a l\'uxuario par cargar łe foto in futuro</string>
+  <string name="skip_login_message" fuzzy="true">Te garisi da ndar drento a l\'uxuario par cargar łe foto in futuro</string>
   <string name="login_alert_message">Fa l\'entrada al uxuario par doparar sta funsion</string>
   <string name="copy_wikicode">Copia el Wikitesto n\'tel aponti</string>
   <string name="wikicode_copied">El Wikitesto el xé sta copià in tei aponti</string>

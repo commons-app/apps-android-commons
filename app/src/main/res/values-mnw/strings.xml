@@ -219,7 +219,7 @@
   <string name="skip_login">ၜက်</string>
   <string name="navigation_item_login">လုပ်လံက်အေန်</string>
   <string name="skip_login_title" fuzzy="true">မၞး မိက်ဂွံ ၜက်ထောအ် လုပ်လံက်အေန် ကွေဟ်ဟ်ရဟာ?</string>
-  <string name="skip_login_message">မၞး သ္ဒးလုပ်လံက်အေန်လဝ်ရောင် သွက်ဂွံပၠုပ်ပတိုန် ဗီုရုပ်ဂမၠိုင် ပ္ဍဲဂတဏအ်။</string>
+  <string name="skip_login_message" fuzzy="true">မၞး သ္ဒးလုပ်လံက်အေန်လဝ်ရောင် သွက်ဂွံပၠုပ်ပတိုန် ဗီုရုပ်ဂမၠိုင် ပ္ဍဲဂတဏအ်။</string>
   <string name="login_alert_message">ပဂုန်တုဲ လုပ်လံက်အေန် သွက်ဂွံစကာ အရပ်အရာဏအ်</string>
   <string name="copy_wikicode">ကပ်ပဳကေတ် လိက်ဝဳကဳ သွက်ကလိပ်ဗတ်</string>
   <string name="wikicode_copied">လိက်ဝဳကဳဂှ် ကပ်ပဳကေတ်လဝ်တုဲ သွက်ကလိပ်ဗတ်</string>

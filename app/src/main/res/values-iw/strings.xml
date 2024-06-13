@@ -301,7 +301,7 @@
   <string name="skip_login">לדלג</string>
   <string name="navigation_item_login">כניסה לחשבון</string>
   <string name="skip_login_title">לדלג על הכניסה לחשבון?</string>
-  <string name="skip_login_message">יהיה עליך להיכנס כדי להעלות תמונות בעתיד.</string>
+  <string name="skip_login_message">יש להיכנס כדי להעלות תמונות בעתיד.</string>
   <string name="login_alert_message">נא להיכנס לחשבון כדי להשתמש באפשרות הזאת</string>
   <string name="copy_wikicode">העתקת קוד ויקי ללוח</string>
   <string name="wikicode_copied">קוד הוויקי הועתק ללוח</string>
@@ -807,4 +807,5 @@
   </plurals>
   <string name="multiple_files_depiction">נא לזכור שכשמועלות כמה תמונות, כולן מקבלות את אותן הקטגוריות והמוצגים. אם התמונות אינן חולקות מוצגים וקטגוריות, נא לעשות כמה העלאות נפרדות.</string>
   <string name="multiple_files_depiction_header">הערה על העלאות מרובות</string>
+  <string name="feedback_destination_note">המשוב שלך מתפרסם בדף הוויקי הבא: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
 </resources>

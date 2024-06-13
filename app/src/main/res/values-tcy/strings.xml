@@ -221,7 +221,7 @@
   <string name="skip_login">ಬುಡ್ಲೆ</string>
   <string name="navigation_item_login">ಲಾಗಿನ್ ಆಲೆ</string>
   <string name="skip_login_title" fuzzy="true">ಇರ್ ನಿಜವಾತ್ ಲಾಗಿನ್ ಬುಡಿಯರ ಬಯಸುವರಾ?</string>
-  <string name="skip_login_message">ದುಂಬಗ್ ಚಿತ್ರೊಲೆನ್ ಮಿತೇರಾವರೆ ಈರ್ ಉಳಗಮನ ಮಲ್ಪೊಡಾವು.</string>
+  <string name="skip_login_message" fuzzy="true">ದುಂಬಗ್ ಚಿತ್ರೊಲೆನ್ ಮಿತೇರಾವರೆ ಈರ್ ಉಳಗಮನ ಮಲ್ಪೊಡಾವು.</string>
   <string name="login_alert_message">ದಯಮಾಲ್ತ್ ಲಾಗೀನ್ ಆಲೆ ಬುಕ್ಕ ಉಪಯೋಗ ಮಾಲ್ಪುಲೆ.</string>
   <string name="copy_wikicode">ವಿಕಿಪಠ್ಯೊನ್ ಪಿಡಿಪಲಾಯಿಗ್ ನಕಲ್ ಮಲ್ಪುಲೆ.</string>
   <string name="wikicode_copied">ವಿಕಿಪಠ್ಯೊನ್ ಪಿಡಿಪಲಾಯಿಗ್ ನಕಲ್ ಮಲ್ತ್ಂಡ್.</string>

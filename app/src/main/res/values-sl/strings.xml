@@ -285,7 +285,7 @@
   <string name="skip_login">Preskoči</string>
   <string name="navigation_item_login">Prijava</string>
   <string name="skip_login_title" fuzzy="true">Ali res želite preskočiti prijavo?</string>
-  <string name="skip_login_message">V prihodnosti se boste morali za nalaganje slik prijaviti.</string>
+  <string name="skip_login_message" fuzzy="true">V prihodnosti se boste morali za nalaganje slik prijaviti.</string>
   <string name="login_alert_message">Za uporabo te možnosti se prijavite</string>
   <string name="copy_wikicode">Kopiraj vikibesedilo v odložišče</string>
   <string name="wikicode_copied">Vikibesedilo je skopirano v odložišče</string>

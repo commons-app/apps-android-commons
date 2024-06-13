@@ -200,7 +200,7 @@
   <string name="skip_login">தவிர்</string>
   <string name="navigation_item_login">புகுபதிகை</string>
   <string name="skip_login_title" fuzzy="true">தாங்கள் மெய்யாகவே மூடுவதற்கு விரும்புகிறீர்களா?</string>
-  <string name="skip_login_message">எதிர்காலத்தில் படங்களைப் பதிவேற்ற நீங்கள் உள்நுழைய வேண்டும்.</string>
+  <string name="skip_login_message" fuzzy="true">எதிர்காலத்தில் படங்களைப் பதிவேற்ற நீங்கள் உள்நுழைய வேண்டும்.</string>
   <string name="login_alert_message">இந்த செயலியல்பைப் பயன்படுத்த தயவுசெய்து உள்நுழைக</string>
   <string name="copy_wikicode">தற்காலிகச் சேமிப்பு இடத்திற்கு விக்கிஎழுத்தை நகலெடுக்கவும்</string>
   <string name="wikicode_copied">விக்கிஎழுத்து தற்காலிகச் சேமிப்பு இடத்திற்கு நகலெடுக்கப்பட்டது</string>

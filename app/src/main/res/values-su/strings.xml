@@ -262,7 +262,7 @@
   <string name="skip_login">Liwatan</string>
   <string name="navigation_item_login">Asup log</string>
   <string name="skip_login_title" fuzzy="true">Anjeun yakin rék ngaliwatan asup log?</string>
-  <string name="skip_login_message">Anjeun kudu asup log pikeun ngunjal gambar engké mah.</string>
+  <string name="skip_login_message" fuzzy="true">Anjeun kudu asup log pikeun ngunjal gambar engké mah.</string>
   <string name="login_alert_message">Mangga asup log pikeun maké ieu fitur</string>
   <string name="copy_wikicode">Tiron wikitéks kana papan klip</string>
   <string name="wikicode_copied">Wikitéks geus ditiron kana papan klip</string>

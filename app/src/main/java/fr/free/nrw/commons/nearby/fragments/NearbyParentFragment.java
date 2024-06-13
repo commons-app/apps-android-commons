@@ -144,7 +144,7 @@ import timber.log.Timber;
 
 public class NearbyParentFragment extends CommonsDaggerSupportFragment
     implements NearbyParentFragmentContract.View,
-    WikidataP18EditListener, LocationUpdateListener,
+    WikidataEditListener.WikidataP18EditListener, LocationUpdateListener,
     LocationPermissionCallback {
 
 

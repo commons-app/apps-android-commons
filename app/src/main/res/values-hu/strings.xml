@@ -248,7 +248,7 @@
   <string name="skip_login">Kihagyás</string>
   <string name="navigation_item_login">Bejelentkezés</string>
   <string name="skip_login_title" fuzzy="true">Biztos ki akarod hagyni a bejelentkezést?</string>
-  <string name="skip_login_message">Fényképek feltöltéséhez a jövőben be kell jelentkezned.</string>
+  <string name="skip_login_message" fuzzy="true">Fényképek feltöltéséhez a jövőben be kell jelentkezned.</string>
   <string name="login_alert_message">A funkció használatához kérlek jelentkezz be.</string>
   <string name="copy_wikicode">Wikiszöveg vágólapra másolása</string>
   <string name="wikicode_copied">A wikiszöveg a vágólapra lett másolva</string>

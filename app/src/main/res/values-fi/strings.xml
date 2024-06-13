@@ -271,7 +271,7 @@
   <string name="skip_login">Ohita</string>
   <string name="navigation_item_login">Kirjaudu sisään</string>
   <string name="skip_login_title">Haluatko todella ohittaa kirjautumisen?</string>
-  <string name="skip_login_message">Sinun täytyy kirjautua sisään tallentaaksesi kuvia tulevaisuudessa.</string>
+  <string name="skip_login_message" fuzzy="true">Sinun täytyy kirjautua sisään tallentaaksesi kuvia tulevaisuudessa.</string>
   <string name="login_alert_message">Kirjaudu sisään käyttääksesi tätä ominaisuutta</string>
   <string name="copy_wikicode">Kopioi wikiteksti leikepöydälle</string>
   <string name="wikicode_copied">Wikiteksti kopioitiin leikepöydälle</string>

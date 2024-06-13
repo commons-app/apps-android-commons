@@ -305,7 +305,7 @@
   <string name="skip_login">Pomiń</string>
   <string name="navigation_item_login">Zaloguj się</string>
   <string name="skip_login_title">Czy na pewno chcesz pominąć logowanie?</string>
-  <string name="skip_login_message">Musisz się zalogować, aby przesłać zdjęcia w przyszłości</string>
+  <string name="skip_login_message" fuzzy="true">Musisz się zalogować, aby przesłać zdjęcia w przyszłości</string>
   <string name="login_alert_message">Zaloguj się, aby skorzystać z tej funkcji</string>
   <string name="copy_wikicode">Skopiuj wikitext do schowka</string>
   <string name="wikicode_copied">Wikitext został skopiowany do schowka</string>

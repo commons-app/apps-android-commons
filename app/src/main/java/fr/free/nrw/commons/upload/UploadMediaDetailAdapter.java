@@ -160,18 +160,30 @@ public class UploadMediaDetailAdapter extends
         }
     }
 
+    /**
+     * Handles the result of the speech input by processing the spoken text.
+     * If the spoken text is not empty, it capitalizes the first letter of the spoken text
+     * and updates the appropriate field (caption or description) of the current
+     * UploadMediaDetail based on the selected voice icon.
+     * Finally, it notifies the adapter that the data set has changed.
+     *
+     * @param spokenText the text input received from speech recognition.
+     */
     public void handleSpeechResult(String spokenText) {
         if (!spokenText.isEmpty()) {
             String spokenTextCapitalized =
                 spokenText.substring(0, 1).toUpperCase() + spokenText.substring(1);
             if (currentPosition < uploadMediaDetails.size()) {
                 UploadMediaDetail uploadMediaDetail = uploadMediaDetails.get(currentPosition);
-                if (selectedVoiceIcon == SelectedVoiceIcon.CAPTION) {
-                    uploadMediaDetail.setCaptionText(spokenTextCapitalized);
-                } else {
-                    uploadMediaDetail.setDescriptionText(spokenTextCapitalized);
+                switch (selectedVoiceIcon) {
+                    case CAPTION:
+                        uploadMediaDetail.setCaptionText(spokenTextCapitalized);
+                        break;
+                    case DESCRIPTION:
+                        uploadMediaDetail.setDescriptionText(spokenTextCapitalized);
+                        break;
                 }
-                notifyItemChanged(currentPosition);
+                notifyDataSetChanged();
             }
         }
     }
@@ -185,14 +197,7 @@ public class UploadMediaDetailAdapter extends
      */
     public void removeDescription(final UploadMediaDetail uploadMediaDetail, final int position) {
         selectedLanguages.remove(position);
-        int listPosition = 0;
-        List<Integer> keysList = new ArrayList<>(selectedLanguages.keySet());
-        for (Integer key : keysList) {
-            if (key < position) {
-                listPosition++;
-            }
-        }
-        this.uploadMediaDetails.remove(uploadMediaDetails.get(listPosition));
+        this.uploadMediaDetails.remove(uploadMediaDetail);
         int i = position + 1;
         while (selectedLanguages.containsKey(i)) {
             selectedLanguages.remove(i);
@@ -299,12 +304,10 @@ public class UploadMediaDetailAdapter extends
 
             removeButton.setOnClickListener(v -> removeDescription(uploadMediaDetail, position));
             captionListener = new AbstractTextWatcher(
-                captionText -> uploadMediaDetails.get(position)
-                    .setCaptionText(convertIdeographicSpaceToLatinSpace(
+                captionText -> uploadMediaDetail.setCaptionText(convertIdeographicSpaceToLatinSpace(
                         removeLeadingAndTrailingWhitespace(captionText))));
             descriptionListener = new AbstractTextWatcher(
-                descriptionText -> uploadMediaDetails.get(position)
-                    .setDescriptionText(descriptionText));
+                descriptionText -> uploadMediaDetail.setDescriptionText(descriptionText));
             captionItemEditText.addTextChangedListener(captionListener);
             initLanguage(position, uploadMediaDetail);
 

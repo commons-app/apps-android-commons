@@ -274,7 +274,7 @@
   <string name="skip_login">Skip</string>
   <string name="navigation_item_login">Log in</string>
   <string name="skip_login_title">Do you really want to skip log-in?</string>
-  <string name="skip_login_message">You would have to log in to upload pictures in the future.</string>
+  <string name="skip_login_message">You will have to log in to upload pictures in the future.</string>
   <string name="login_alert_message">Please log in to use this feature</string>
 
   <string name="copy_wikicode">Copy the wikitext to the clipboard</string>
@@ -818,5 +818,6 @@ Upload your first media by tapping on the add button.</string>
   </plurals>
   <string name="multiple_files_depiction">Please remember that all images in a multi-upload get the same categories and depictions. If the images do not share depictions and categories, please perform several separate uploads.</string>
   <string name="multiple_files_depiction_header">Note about multi-uploads</string>
+  <string name="feedback_destination_note">Your feedback gets posted to the following wiki page: <![CDATA[ <a href="https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback">Commons:Mobile app/Feedback</a> ]]></string>
   <string name="could_not_load_place_data">Could not load place data</string>
 </resources>
