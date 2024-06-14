@@ -2,6 +2,7 @@ package fr.free.nrw.commons.di;
 
 import com.google.gson.Gson;
 
+import fr.free.nrw.commons.auth.LoginViewModel;
 import fr.free.nrw.commons.explore.categories.CategoriesModule;
 import fr.free.nrw.commons.navtab.MoreBottomSheetFragment;
 import fr.free.nrw.commons.navtab.MoreBottomSheetLoggedOutFragment;
@@ -22,6 +23,7 @@ import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.upload.FileProcessor;
 import fr.free.nrw.commons.upload.UploadModule;
 import fr.free.nrw.commons.widget.PicOfDayAppWidget;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 
 /**
@@ -32,6 +34,8 @@ import fr.free.nrw.commons.widget.PicOfDayAppWidget;
 @Component(modules = {
         CommonsApplicationModule.class,
         NetworkingModule.class,
+        ApiModule.class,
+        RxJavaApiModule.class,
         AndroidInjectionModule.class,
         AndroidSupportInjectionModule.class,
         ActivityBuilderModule.class,
@@ -69,6 +73,8 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
     void inject(PicOfDayAppWidget picOfDayAppWidget);
 
     Gson gson();
+
+    void inject(LoginViewModel viewModel);
 
     @Component.Builder
     @SuppressWarnings({"WeakerAccess", "unused"})

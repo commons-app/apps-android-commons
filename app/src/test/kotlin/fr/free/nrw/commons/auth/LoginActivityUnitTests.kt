@@ -9,7 +9,10 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.Lifecycle
+import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
@@ -25,20 +28,21 @@ import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
-import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
+import org.robolectric.annotation.LooperMode
 import org.robolectric.fakes.RoboMenuItem
 import java.lang.reflect.Method
 
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(AndroidJUnit4::class)
 @Config(sdk = [21], application = TestCommonsApplication::class)
+@LooperMode(LooperMode.Mode.PAUSED)
 class LoginActivityUnitTests {
+
+    private val scenario: ActivityScenario<LoginActivity> = ActivityScenario.launch(LoginActivity::class.java)
 
     private lateinit var menuItem: MenuItem
     private lateinit var context: Context
-
-    @Mock
     private lateinit var activity: LoginActivity
 
     @Mock
@@ -57,9 +61,6 @@ class LoginActivityUnitTests {
     private lateinit var textView: TextView
 
     @Mock
-    private lateinit var bundle: Bundle
-
-    @Mock
     private lateinit var applicationKvStore: JsonKvStore
 
     @Mock
@@ -68,25 +69,19 @@ class LoginActivityUnitTests {
     @Mock
     private lateinit var account: Account
 
-    @Mock
-    private lateinit var loginResult: LoginResult
-
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         OkHttpConnectionFactory.CLIENT = createTestClient()
-        activity = Robolectric.buildActivity(LoginActivity::class.java).create().get()
-        context = ApplicationProvider.getApplicationContext()
-        menuItem = RoboMenuItem(null)
-        Whitebox.setInternalState(activity, "progressDialog", progressDialog)
-        Whitebox.setInternalState(activity, "applicationKvStore", applicationKvStore)
-        Whitebox.setInternalState(activity, "sessionManager", sessionManager)
-    }
 
-    @Test
-    @Throws(Exception::class)
-    fun checkActivityNotNull() {
-        Assert.assertNotNull(activity)
+        scenario.moveToState(Lifecycle.State.CREATED)
+
+        scenario.onActivity {
+            activity = it
+            context = it
+        }
+
+        menuItem = RoboMenuItem(null)
     }
 
     @Test
@@ -114,47 +109,6 @@ class LoginActivityUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testForgotPassword() {
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "forgotPassword"
-        )
-        method.isAccessible = true
-        method.invoke(activity)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnPrivacyPolicyClicked() {
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "onPrivacyPolicyClicked"
-        )
-        method.isAccessible = true
-        method.invoke(activity)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testSignUp() {
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "signUp"
-        )
-        method.isAccessible = true
-        method.invoke(activity)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnPostCreate() {
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "onPostCreate",
-            Bundle::class.java
-        )
-        method.isAccessible = true
-        method.invoke(activity, bundle)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testOnDestroy() {
         `when`(progressDialog.isShowing).thenReturn(true)
         val method: Method = LoginActivity::class.java.getDeclaredMethod(
@@ -173,29 +127,6 @@ class LoginActivityUnitTests {
         )
         method.isAccessible = true
         method.invoke(activity)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnLoginSuccessCaseDefault() {
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "onLoginSuccess",
-            LoginResult::class.java
-        )
-        method.isAccessible = true
-        method.invoke(activity, loginResult)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnLoginSuccess() {
-        `when`(progressDialog.isShowing).thenReturn(true)
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "onLoginSuccess",
-            LoginResult::class.java
-        )
-        method.isAccessible = true
-        method.invoke(activity, loginResult)
     }
 
     @Test
@@ -234,36 +165,6 @@ class LoginActivityUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testOnStart() {
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "onStart"
-        )
-        method.isAccessible = true
-        method.invoke(activity)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnStop() {
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "onStop"
-        )
-        method.isAccessible = true
-        method.invoke(activity)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnPostResume() {
-        val method: Method = LoginActivity::class.java.getDeclaredMethod(
-            "onPostResume"
-        )
-        method.isAccessible = true
-        method.invoke(activity)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testShowMessageAndCancelDialog() {
         activity.showMessageAndCancelDialog("")
     }
@@ -284,12 +185,6 @@ class LoginActivityUnitTests {
     @Throws(Exception::class)
     fun testAskUserForTwoFactorAuth() {
         activity.askUserForTwoFactorAuth()
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testShowSuccessAndDismissDialog() {
-        activity.showSuccessAndDismissDialog()
     }
 
     @Test

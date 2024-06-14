@@ -50,6 +50,9 @@ dependencies {
     implementation 'com.dinuscxj:circleprogressbar:1.1.1'
     implementation 'com.karumi:dexter:5.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.7.0"
 
     implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:$ADAPTER_DELEGATES_VERSION"
     implementation "com.hannesdorfmann:adapterdelegates4-pagination:$ADAPTER_DELEGATES_VERSION"
@@ -186,7 +189,7 @@ project.gradle.taskGraph.whenReady {
 }
 
 android {
-    compileSdkVersion 33
+    compileSdkVersion 34
 
     defaultConfig {
         //applicationId 'fr.free.nrw.commons'
@@ -196,7 +199,7 @@ android {
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
 
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 34
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments clearPackageData: 'true'
 

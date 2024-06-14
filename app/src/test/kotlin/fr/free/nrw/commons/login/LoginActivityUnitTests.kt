@@ -95,12 +95,6 @@ class LoginActivityUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testShowSuccessAndDismissDialog() {
-        activity.showSuccessAndDismissDialog()
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testOnOptionsItemSelected() {
         activity.onOptionsItemSelected(menuItem)
     }

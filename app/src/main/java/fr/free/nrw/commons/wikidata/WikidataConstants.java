@@ -8,4 +8,6 @@ public class WikidataConstants {
 
     public static final String MW_API_PREFIX = "w/api.php?format=json&formatversion=2&errorformat=plaintext&";
     public static final String WIKIPEDIA_URL = "https://wikipedia.org/";
+    public static final String NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE = "language-wikipedia-wikisite";
+    public static final String NAMED_COMMONS_CSRF = "commons-csrf";
 }

@@ -2,7 +2,7 @@ package fr.free.nrw.commons.contributions;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static fr.free.nrw.commons.di.NetworkingModule.NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE;
+import static fr.free.nrw.commons.wikidata.WikidataConstants.NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE;
 
 import android.Manifest.permission;
 import android.content.Context;
