@@ -10,6 +10,7 @@
 * Hedda
 * Incelemeelemani
 * JackUKElliott
+* Jelican9
 * Joseph
 * McAang
 * McDutchie
@@ -101,13 +102,13 @@
   <string name="logging_in_message">Lütfen bekleyin…</string>
   <string name="updating_caption_title">Altyazılar ve açıklamalar güncelleniyor</string>
   <string name="updating_caption_message">Lütfen bekleyin…</string>
-  <string name="login_success" fuzzy="true">Oturum açma başarılı!</string>
-  <string name="login_failed" fuzzy="true">Oturum açma başarısız oldu!</string>
+  <string name="login_success">Oturum açma başarılı!</string>
+  <string name="login_failed">Oturum açma başarısız oldu!</string>
   <string name="upload_failed">Dosya bulunamadı. Lütfen başka bir dosya deneyin.</string>
   <string name="retry_limit_reached">Tekrar deneme sınırına ulaşıldı! Lütfen yüklemeyi iptal edin ve tekrar deneyin.</string>
   <string name="unrestricted_battery_mode">Pil optimizasyonu kapatılsın mı ?</string>
   <string name="suggest_unrestricted_mode">Batarya optimizasyonu kapatıldığında 3\'den fazla görüntü yüklemek daha güvenilir bir yoldur. Lütfen sorunsuz bir yükleme deneyimi için Commons uygulamasının ayarlar kısmından batarya optimizasyonunu kapatın.\n\nBatarya Optimizasyonunu kapatmak için yapılabilecek adımlar:\n\nAdım 1: Aşağı kısımdan\"Ayarlar\" butonuna basın\n\nAdım 2: \"Optimizasyon yapılmamış\" seçeneğini \"Tüm uygulamalar\" olarak değiştirin\"\n\nAdım 3: \"Commons\" veya \"fr.free.nrw.commons\" olacak şekilde arama yapın\n\nAdım 4: Tıklayın ve \"Optimize Etme\" seçeneğini seçin.\n\nAdım 5: \"Yapıldı\" seçeneğine basın.</string>
-  <string name="authentication_failed" fuzzy="true">Kimlik doğrulama başarısız oldu, lütfen tekrar giriş yapın</string>
+  <string name="authentication_failed">Kimlik doğrulama başarısız oldu. Lütfen tekrar giriş yapın.</string>
   <string name="uploading_started">Yükleme başladı!</string>
   <string name="uploading_queued">Yükleme kuyruğunda (sınırlı bağlantı modu etkin)</string>
   <string name="upload_completed_notification_title">%1$s yüklendi!</string>
@@ -134,11 +135,11 @@
   <string name="add_caption_toast">Lütfen bu dosya için bir başlık girin</string>
   <string name="share_description_hint">Açıklama</string>
   <string name="share_caption_hint">Altyazı</string>
-  <string name="login_failed_network" fuzzy="true">Oturum açılamıyor - ağ hatası</string>
+  <string name="login_failed_network">Oturum açılamıyor - ağ hatası</string>
   <string name="login_failed_throttled">Çok sayıda başarısız girişimde bulundunuz. Birkaç dakika sonra tekrar deneyin.</string>
   <string name="login_failed_blocked">Üzgünüz, bu kullanıcı Commons\'ta engellendi</string>
   <string name="login_failed_2fa_needed">İki faktörlü kimlik doğrulama kodunu sağlamalısınız.</string>
-  <string name="login_failed_generic" fuzzy="true">Oturum açma başarısız</string>
+  <string name="login_failed_generic">Oturum açma başarısız</string>
   <string name="share_upload_button">Yükle</string>
   <string name="multiple_share_base_title">Bu ayarı adlandırın</string>
   <string name="provider_modifications">Değişiklikler</string>
@@ -262,6 +263,7 @@
   <string name="navigation_item_about">Hakkında</string>
   <string name="navigation_item_settings">Ayarlar</string>
   <string name="navigation_item_feedback">Geri bildirim</string>
+  <string name="navigation_item_feedback_github">GitHub aracılığıyla geri bildirim</string>
   <string name="navigation_item_logout">Oturumu kapat</string>
   <string name="navigation_item_info">Eğitim</string>
   <string name="navigation_item_notification">Bildirimler</string>
@@ -295,14 +297,15 @@
   <string name="nominated_see_more">Web sayfasının detaylarını gör</string>
   <string name="skip_login">Atla</string>
   <string name="navigation_item_login">Oturum aç</string>
-  <string name="skip_login_title" fuzzy="true">Gerçekten oturum açmayı atlamak istiyor musunuz?</string>
-  <string name="skip_login_message" fuzzy="true">İleride resim yüklemek için giriş yapmanız gerekir.</string>
+  <string name="skip_login_title">Gerçekten oturum açmayı atlamak istiyor musunuz?</string>
+  <string name="skip_login_message">İleride resim yüklemek için giriş yapmanız gerekecek.</string>
   <string name="login_alert_message">Bu özelliği kullanmak için lütfen giriş yapın</string>
   <string name="copy_wikicode">Vikimetnini panoya kopyala</string>
   <string name="wikicode_copied">Vikimetin panoya kopyalandı</string>
   <string name="nearby_location_not_available">Yakınımdakiler düzgün çalışmayabilir, Konum kullanılamıyor.</string>
   <string name="upload_location_access_denied">Konum erişimi reddedildi. Bu özelliği kullanmak için lütfen konumunuzu manuel olarak ayarlayın.</string>
   <string name="location_permission_rationale_nearby">Yakındaki yerler listesini görüntülemek için izin vermeniz gerekiyor</string>
+  <string name="location_permission_rationale_explore">Yakındaki resimlerin listesini görüntülemek için izin gerekli</string>
   <string name="nearby_directions">Talimatlar</string>
   <string name="nearby_wikidata">Vikiveri</string>
   <string name="nearby_wikipedia">Vikipedi</string>
@@ -362,7 +365,7 @@
   <string name="construction_event_answer">Commons\'ta teknoloji veya kültür resimleri oldukça hoş karşılanır.</string>
   <string name="congratulatory_message_quiz">Doğru cevap sayınız: %1$s. Tebrikler!</string>
   <string name="warning_for_no_answer">Soruyu cevaplamak için iki seçenekten birini seçin</string>
-  <string name="user_not_logged_in" fuzzy="true">Giriş oturumunuzun süresi doldu, lütfen tekrar giriş yapın.</string>
+  <string name="user_not_logged_in">Giriş oturumunuzun süresi doldu. Lütfen tekrar giriş yapın.</string>
   <string name="quiz_result_share_message">Sınavınızı arkadaşlarınızla paylaşın!</string>
   <string name="continue_message">Devam</string>
   <string name="correct">Doğru Cevap</string>
@@ -370,7 +373,8 @@
   <string name="quiz_screenshot_question">Bu ekran görüntüsü yüklemeye uygun mu?</string>
   <string name="share_app_title">Uygulamayı Paylaş</string>
   <string name="rotate">Döndür</string>
-  <string name="error_fetching_nearby_places" fuzzy="true">Yakındaki yerler getirilirken hata oluştu.</string>
+  <string name="error_fetching_nearby_places">Yakındaki yerler yüklenemedi</string>
+  <string name="no_pictures_in_this_area">Bu bölgede resim yok</string>
   <string name="no_nearby_places_around">Yakınlarda yer bulunamadı</string>
   <string name="error_fetching_nearby_monuments">Yakındaki anıtlar getirilirken hata oluştu.</string>
   <string name="no_recent_searches">Son arama yok</string>
@@ -445,7 +449,7 @@
   <string name="never_ask_again">Bunu bir daha sorma</string>
   <string name="display_location_permission_title">Konum izni isteyin</string>
   <string name="display_location_permission_explanation">Yakındaki bildirim kartı görüntüleme özelliği için gerektiğinde konum izni isteyin.</string>
-  <string name="achievements_fetch_failed" fuzzy="true">Bir şeyler ters gitti, başarılarınızı getiremedik</string>
+  <string name="achievements_fetch_failed">Bir şeyler ters gitti, başarıları getiremedik</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Başarı hesaplama sistemimizin üstesinden gelemeyeceği pek çok katkı yaptınız. Bu nihai başarıdır.</string>
   <string name="ends_on">Bitiş:</string>
   <string name="display_campaigns">Kampanyaları göster</string>
@@ -461,7 +465,7 @@
   <string name="open_document_photo_picker_explanation">Yeni Android fotoğraf seçici, konum bilgilerini kaybetme riskini taşımaktadır. Kullanıyor gibi görünüyorsa etkinleştirin.</string>
   <string name="location_loss_warning">Bunu kapatmak, yeni Android fotoğraf seçiciyi etkinleştirebilir. Konum bilgisini kaybetme riski vardır.\n\nDaha fazla bilgi için \'Daha fazlasını oku\'ya dokunun.</string>
   <string name="nearby_campaign_dismiss_message">Artık çalışmaları görmeyeceksiniz. Ancak isterseniz bu bildirimi Ayarlar\'dan yeniden etkinleştirebilirsiniz.</string>
-  <string name="this_function_needs_network_connection" fuzzy="true">Bu işlev ağ bağlantısı gerektirir, lütfen bağlantı ayarlarınızı kontrol edin.</string>
+  <string name="this_function_needs_network_connection">Bu işlev ağ bağlantısı gerektirir. Lütfen bağlantı ayarlarınızı kontrol edin.</string>
   <string name="error_processing_image">Görüntü işlenirken hata oluştu. Lütfen tekrar deneyin!</string>
   <string name="getting_edit_token">Düzenleme için anahtar alınıyor</string>
   <string name="check_category_adding_template">Kategori kontrolü için şablon ekleme</string>
@@ -573,7 +577,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Koordinatlar eklenemedi.</string>
   <string name="description_edit_helper_edit_message_else">Açıklamalar eklenemedi.</string>
   <string name="caption_edit_helper_edit_message_else">Başlık eklenemedi.</string>
-  <string name="coordinates_picking_unsuccessful" fuzzy="true">Koordinatlar alınamadı.</string>
+  <string name="coordinates_picking_unsuccessful">Görselin koordinatları güncellenmedi</string>
   <string name="descriptions_picking_unsuccessful">Açıklamalar alınamadı.</string>
   <string name="description_activity_title">Açıklamaları ve başlıkları düzenle</string>
   <string name="share_image_via">Resmi şununla paylaş</string>
@@ -588,12 +592,13 @@
   <string name="place_state_needs_photo">Fotoğrafa İhtiyaç Var</string>
   <string name="place_type">Yer türü:</string>
   <string name="nearby_search_hint">Köprü, müze, otel vb.</string>
-  <string name="you_must_reset_your_passsword" fuzzy="true">Giriş ile ilgili bir sorun oluştu, şifrenizi sıfırlamanız gerekiyor !!</string>
+  <string name="you_must_reset_your_passsword">Giriş ile ilgili bir sorun oluştu. Şifrenizi sıfırlamanız gerekiyor!</string>
   <string name="title_for_media">MEDYA</string>
   <string name="title_for_child_classes">ALT SINIFLAR</string>
   <string name="title_for_parent_classes">ÜST SINIFLAR</string>
   <string name="upload_nearby_place_found_title">Yakındaki Yer Bulundu</string>
-  <string name="upload_nearby_place_found_description_singular" fuzzy="true">Bu bir %1$s fotoğrafı mı?</string>
+  <string name="upload_nearby_place_found_description_plural">Bunlar %1$s resimleri mi?</string>
+  <string name="upload_nearby_place_found_description_singular">Bu bir %1$s resmi mi?</string>
   <string name="title_app_shortcut_bookmark">Yer imleri</string>
   <string name="title_app_shortcut_setting">Ayarlar</string>
   <string name="remove_bookmark">Yer işaretlerinden kaldırıldı</string>
@@ -607,8 +612,10 @@
   <string name="cannot_open_location_settings">Konum ayarları açılamadı. Lütfen konumu manuel olarak açın</string>
   <string name="recommend_high_accuracy_mode">En iyi sonuçlar için Yüksek Hassasiyet modunu seçin.</string>
   <string name="ask_to_turn_location_on">Konum açılsın mı?</string>
+  <string name="ask_to_turn_location_on_text">Uygulamanın mevcut konumunuzu göstermesi için lütfen konum hizmetlerini açın</string>
   <string name="nearby_needs_location">Yakınımdakilerin düzgün çalışması için konumun açık olması gerekiyor</string>
-  <string name="upload_map_location_access" fuzzy="true">Konumu otomatik olarak ayarlamak için mevcut konumunuza erişim izni vermeniz gerekir.</string>
+  <string name="explore_map_needs_location">Keşfet haritasının yakındaki resimleri görüntülemek için konum iznine ihtiyacı var</string>
+  <string name="upload_map_location_access">Konumu otomatik olarak ayarlamak için konum erişim izni vermeniz gerekir.</string>
   <string name="use_location_from_similar_image">Bu iki fotoğrafı aynı yerde mi çektiniz? Sağdaki resmin enlem/boylamını kullanmak ister misiniz?</string>
   <string name="load_more">Daha Fazla Yükle</string>
   <string name="nearby_no_results">Yer bulunamadı, arama kriterlerinizi değiştirmeyi deneyin.</string>
@@ -722,6 +729,8 @@
   <string name="add_location">Konum ekle</string>
   <string name="feedback_sharing_data_alert">Lütfen herkese açık olarak paylaşmaktan çekindiğiniz tüm bilgileri bu e-postadan kaldırın. Ayrıca gönderi paylaştığınız e-posta adresinizin ve ilgili ad ve profil resminizin herkese açık olarak görüneceğini lütfen unutmayın.</string>
   <string name="explore_map_details">Ayrıntılar</string>
+  <string name="achievements_unavailable_beta">Başarılar yalnızca prod sürümünde mevcuttur. Lütfen geliştirici belgelerini denetleyin.</string>
+  <string name="leaderboard_unavailable_beta">Liderlik tablosu yalnızca prod sürümünde mevcuttur. Lütfen geliştirici belgelerini denetleyin.</string>
   <string name="copyright_popup">Lütfen sadece kendi çektiğiniz fotoğrafları yükleyin. Telif hakkıyla korunan resimleri yükleyenler engellenecektir. Bu beta için de geçerlidir. Uygulamayı test ettiğiniz için teşekkür ederiz!</string>
   <string name="select_feedback_data_choice">Lütfen herkese açık olarak paylaşmaktan çekindiğiniz bilgilerin seçimini kaldırın.</string>
   <string name="api_level">API seviyesi</string>
@@ -760,8 +769,32 @@
   <string name="storage_permissions_denied">Depolama İzni Reddedildi</string>
   <string name="unable_to_share_upload_item">Bu öge paylaşılamıyor</string>
   <string name="permissions_are_required_for_functionality">İşlevsellik için izinler gereklidir</string>
+  <string name="learn_how_to_write_a_useful_description">Yararlı bir açıklamanın nasıl yazılacağını öğrenin</string>
+  <string name="learn_how_to_write_a_useful_caption">Nasıl faydalı bir alt yazı yazılacağını öğrenin</string>
+  <string name="see_your_achievements">Başarılarınızı görün</string>
+  <string name="edit_image">Görseli düzenle</string>
+  <string name="edit_location">Konumu Düzenle</string>
+  <string name="location_updated">Konum güncellendi!</string>
+  <string name="remove_location">Konumu Kaldır</string>
+  <string name="remove_location_warning_title">Konum Uyarısını Kaldır</string>
+  <string name="remove_location_warning_desc">Konum, görselleri daha kullanışlı ve bulunabilir hale getirir. Bu resimden konumu gerçekten kaldırmak istiyor musunuz?</string>
+  <string name="location_removed">Konum kaldırıldı!</string>
+  <string name="send_thanks_to_author">Yazara teşekkür et</string>
+  <string name="error_sending_thanks">Yazara teşekkür gönderme hatası.</string>
+  <string name="invalid_login_message">Oturum açma süreniz doldu. Lütfen tekrar giriş yapın.</string>
+  <string name="no_application_available_to_open_gpx_files">GPX dosyalarını açacak uygulama yok</string>
+  <string name="file_saved_successfully">Dosya Başarıyla Kaydedildi</string>
+  <string name="do_you_want_to_open_gpx_file">GPX dosyasını açmak istiyor musunuz?</string>
+  <string name="do_you_want_to_open_kml_file">KML dosyasını açmak istiyor musunuz?</string>
+  <string name="failed_to_save_kml_file">KML dosyası kaydedilemedi.</string>
+  <string name="failed_to_save_gpx_file">GPX dosyası kaydedilemedi.</string>
+  <string name="saving_kml_file">KML Dosyasını Kaydetme</string>
+  <string name="saving_gpx_file">GPX Dosyasını Kaydetme</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d resim seçildi</item>
     <item quantity="other">%d resim seçildi</item>
   </plurals>
+  <string name="multiple_files_depiction">Lütfen çoklu yüklemedeki tüm görsellerin aynı kategorilere ve tasvirlere sahip olduğunu unutmayın. Görseller tasvirleri ve kategorileri paylaşmıyorsa, lütfen birkaç ayrı yükleme gerçekleştirin.</string>
+  <string name="multiple_files_depiction_header">Çoklu yüklemelerle ilgili not</string>
+  <string name="feedback_destination_note">Geri bildiriminiz aşağıdaki wiki sayfasına gönderilir:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
 </resources>
