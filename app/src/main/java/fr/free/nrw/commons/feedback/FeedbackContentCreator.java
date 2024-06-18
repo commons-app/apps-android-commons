@@ -12,7 +12,8 @@ import java.util.Locale;
  * from feedback information
  */
 public class FeedbackContentCreator {
-    private StringBuilder stringBuilder;
+    private StringBuilder sectionTextBuilder;
+    private StringBuilder sectionTitleBuilder;
     private Feedback feedback;
     private Context context;
 
@@ -28,71 +29,80 @@ public class FeedbackContentCreator {
     public void init() {
         // Localization is not needed here, because this ends up on a page where developers read the feedback, so English is the most convenient.
 
-        stringBuilder = new StringBuilder();
-        stringBuilder.append("== ");
-        stringBuilder.append("Feedback from  ");
-        stringBuilder.append(AccountUtil.getUserName(context));
-        stringBuilder.append(" for version ");
-        stringBuilder.append(feedback.getVersion());
-        stringBuilder.append(" ==");
-        stringBuilder.append("\n");
-        stringBuilder.append(feedback.getTitle());
-        stringBuilder.append("\n");
-        stringBuilder.append("\n");
+        /*
+         * Construct the feedback section title
+         */
+        sectionTitleBuilder = new StringBuilder();
+        sectionTitleBuilder.append("Feedback from  ");
+        sectionTitleBuilder.append(AccountUtil.getUserName(context));
+        sectionTitleBuilder.append(" for version ");
+        sectionTitleBuilder.append(feedback.getVersion());
+
+        /*
+         * Construct the feedback section text
+         */
+        sectionTextBuilder = new StringBuilder();
+        sectionTextBuilder.append("\n");
+        sectionTextBuilder.append(feedback.getTitle());
+        sectionTextBuilder.append("\n");
+        sectionTextBuilder.append("\n");
         if (feedback.getApiLevel() != null) {
-            stringBuilder.append("* ");
-            stringBuilder.append(LangCodeUtils.getLocalizedResources(context,
+            sectionTextBuilder.append("* ");
+            sectionTextBuilder.append(LangCodeUtils.getLocalizedResources(context,
                 Locale.ENGLISH).getString(R.string.api_level));
-            stringBuilder.append(": ");
-            stringBuilder.append(feedback.getApiLevel());
-            stringBuilder.append("\n");
+            sectionTextBuilder.append(": ");
+            sectionTextBuilder.append(feedback.getApiLevel());
+            sectionTextBuilder.append("\n");
         }
         if (feedback.getAndroidVersion() != null) {
-            stringBuilder.append("* ");
-            stringBuilder.append(LangCodeUtils.getLocalizedResources(context,
+            sectionTextBuilder.append("* ");
+            sectionTextBuilder.append(LangCodeUtils.getLocalizedResources(context,
                 Locale.ENGLISH).getString(R.string.android_version));
-            stringBuilder.append(": ");
-            stringBuilder.append(feedback.getAndroidVersion());
-            stringBuilder.append("\n");
+            sectionTextBuilder.append(": ");
+            sectionTextBuilder.append(feedback.getAndroidVersion());
+            sectionTextBuilder.append("\n");
         }
         if (feedback.getDeviceManufacturer() != null) {
-            stringBuilder.append("* ");
-            stringBuilder.append(LangCodeUtils.getLocalizedResources(context,
+            sectionTextBuilder.append("* ");
+            sectionTextBuilder.append(LangCodeUtils.getLocalizedResources(context,
                 Locale.ENGLISH).getString(R.string.device_manufacturer));
-            stringBuilder.append(": ");
-            stringBuilder.append(feedback.getDeviceManufacturer());
-            stringBuilder.append("\n");
+            sectionTextBuilder.append(": ");
+            sectionTextBuilder.append(feedback.getDeviceManufacturer());
+            sectionTextBuilder.append("\n");
         }
         if (feedback.getDeviceModel() != null) {
-            stringBuilder.append("* ");
-            stringBuilder.append(LangCodeUtils.getLocalizedResources(context,
+            sectionTextBuilder.append("* ");
+            sectionTextBuilder.append(LangCodeUtils.getLocalizedResources(context,
                 Locale.ENGLISH).getString(R.string.device_model));
-            stringBuilder.append(": ");
-            stringBuilder.append(feedback.getDeviceModel());
-            stringBuilder.append("\n");
+            sectionTextBuilder.append(": ");
+            sectionTextBuilder.append(feedback.getDeviceModel());
+            sectionTextBuilder.append("\n");
         }
         if (feedback.getDevice() != null) {
-            stringBuilder.append("* ");
-            stringBuilder.append(LangCodeUtils.getLocalizedResources(context,
+            sectionTextBuilder.append("* ");
+            sectionTextBuilder.append(LangCodeUtils.getLocalizedResources(context,
                 Locale.ENGLISH).getString(R.string.device_name));
-            stringBuilder.append(": ");
-            stringBuilder.append(feedback.getDevice());
-            stringBuilder.append("\n");
+            sectionTextBuilder.append(": ");
+            sectionTextBuilder.append(feedback.getDevice());
+            sectionTextBuilder.append("\n");
         }
         if (feedback.getNetworkType() != null) {
-            stringBuilder.append("* ");
-            stringBuilder.append(LangCodeUtils.getLocalizedResources(context,
+            sectionTextBuilder.append("* ");
+            sectionTextBuilder.append(LangCodeUtils.getLocalizedResources(context,
                 Locale.ENGLISH).getString(R.string.network_type));
-            stringBuilder.append(": ");
-            stringBuilder.append(feedback.getNetworkType());
-            stringBuilder.append("\n");
+            sectionTextBuilder.append(": ");
+            sectionTextBuilder.append(feedback.getNetworkType());
+            sectionTextBuilder.append("\n");
         }
-        stringBuilder.append("~~~~");
-        stringBuilder.append("\n");
+        sectionTextBuilder.append("~~~~");
+        sectionTextBuilder.append("\n");
     }
 
-    @Override
-    public String toString() {
-        return stringBuilder.toString();
+    public String getSectionText() {
+        return sectionTextBuilder.toString();
+    }
+
+    public String getSectionTitle() {
+        return sectionTitleBuilder.toString();
     }
 }
