@@ -22,6 +22,7 @@ class UploadProgressActivity : BaseActivity() {
     val titleList: MutableList<String> = ArrayList()
     var isPaused = true
     var isPendingIconsVisible = true
+    var isErrorIconsVisisble = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -117,18 +118,23 @@ class UploadProgressActivity : BaseActivity() {
                 }
             }
         } else if (currentPosition == 1) {
-            if (menu!!.findItem(R.id.retry_icon) == null) {
-                menu!!.add(Menu.NONE, R.id.retry_icon, Menu.NONE, "Retry")
-                    .setIcon(R.drawable.ic_refresh_white_24dp)
-                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
-            }
-            if (menu!!.findItem(R.id.cancel_icon) == null) {
-                menu!!.add(Menu.NONE, R.id.cancel_icon, Menu.NONE, "Cancel")
-                    .setIcon(android.R.drawable.ic_menu_close_clear_cancel).setOnMenuItemClickListener {
-                        hidePendingIcons()
-                        true
-                    }
-                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+            if (isErrorIconsVisisble){
+                if (menu!!.findItem(R.id.retry_icon) == null) {
+                    menu!!.add(Menu.NONE, R.id.retry_icon, Menu.NONE, "Retry")
+                        .setIcon(R.drawable.ic_refresh_white_24dp).setOnMenuItemClickListener {
+                            failedUploadsFragment!!.restartUploads()
+                            true
+                        }
+                        .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+                }
+                if (menu!!.findItem(R.id.cancel_icon) == null) {
+                    menu!!.add(Menu.NONE, R.id.cancel_icon, Menu.NONE, "Cancel")
+                        .setIcon(android.R.drawable.ic_menu_close_clear_cancel).setOnMenuItemClickListener {
+                            hidePendingIcons()
+                            true
+                        }
+                        .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+                }
             }
         }
     }
@@ -140,6 +146,11 @@ class UploadProgressActivity : BaseActivity() {
 
     fun setPausedIcon(paused : Boolean){
         isPaused = paused
+        updateMenuItems(binding.uploadProgressViewPager.currentItem)
+    }
+
+    fun setErrorIconsVisibility(visible : Boolean){
+        isErrorIconsVisisble = visible
         updateMenuItems(binding.uploadProgressViewPager.currentItem)
     }
 

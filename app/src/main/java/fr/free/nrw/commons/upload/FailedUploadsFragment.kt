@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
-import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.databinding.FragmentFailedUploadsBinding
@@ -42,7 +41,7 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(),PendingUploadsContr
 
     lateinit var binding: FragmentFailedUploadsBinding
 
-    var l = ArrayList<Contribution>()
+    var contributionsList = ArrayList<Contribution>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,21 +80,21 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(),PendingUploadsContr
         pendingUploadsPresenter!!.totalContributionList.observe(
             viewLifecycleOwner
         ) { list: PagedList<Contribution?> ->
-            l = ArrayList()
+            contributionsList = ArrayList()
             list.forEach {
                 if (it != null){
                     if (it.state == Contribution.STATE_FAILED) {
-                        l.add(it)
+                        contributionsList.add(it)
                     }
                 }
             }
-            if (l.size == 0) {
+            if (contributionsList.size == 0) {
                 binding.nofailedTextView.visibility = View.VISIBLE
                 binding.failedUplaodsLl.visibility = View.GONE
             } else {
                 binding.nofailedTextView.visibility = View.GONE
                 binding.failedUplaodsLl.visibility = View.VISIBLE
-                val adapter = FailedUploadsAdapter(l)
+                val adapter = FailedUploadsAdapter(contributionsList)
                 binding.failedUploadsRecyclerView.setAdapter(adapter)
             }
         }
@@ -131,5 +130,11 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(),PendingUploadsContr
 
     override fun showNoContributionsUI(shouldShow: Boolean) {
         //TODO("Not yet implemented")
+    }
+
+    fun restartUploads() {
+        if (contributionsList != null){
+            pendingUploadsPresenter.restartUploads(contributionsList, 0 , this.requireContext().applicationContext)
+        }
     }
 }

@@ -53,7 +53,7 @@ class PendingUploadsAdapter(items: List<Contribution>, callback: Callback) :
             holder.errorTextView.visibility = View.VISIBLE
             holder.itemProgress.visibility = View.GONE
         } else {
-            if (item.chunkInfo == null) {
+            if (item.transferred == 0L) {
                 holder.errorTextView.setText("Queued")
                 holder.errorTextView.visibility = View.VISIBLE
                 holder.itemProgress.visibility = View.GONE

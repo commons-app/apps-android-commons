@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.upload
 
 import android.content.Context
+import android.os.Build.VERSION
+import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +23,7 @@ import org.apache.commons.lang3.StringUtils
 import timber.log.Timber
 import java.util.Locale
 import javax.inject.Inject
+
 
 /**
  * A simple [Fragment] subclass.
@@ -53,7 +56,7 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
     private lateinit var uploadProgressActivity: UploadProgressActivity
 
     private var contributionsSize = 0
-    var l = ArrayList<Contribution>()
+    var contributionsList = ArrayList<Contribution>()
     private var totalUploads = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -107,39 +110,66 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
             viewLifecycleOwner
         ) { list: PagedList<Contribution?> ->
             contributionsSize = list.size
-            l = ArrayList()
+            contributionsList = ArrayList()
             var x = 0;
+            var y = 0;
             list.forEach {
                 if (it != null){
                     if (it.state == Contribution.STATE_PAUSED
                         || it.state == Contribution.STATE_QUEUED
                         || it.state == Contribution.STATE_IN_PROGRESS
                     ) {
-                        l.add(it)
+                        contributionsList.add(it)
                     }
                     if (it.state == Contribution.STATE_PAUSED
                         || it.state == Contribution.STATE_QUEUED
                     ) {
                         x++
                     }
+                    if (it.state == Contribution.STATE_FAILED){
+                        y++
+                    }
                 }
             }
-            if (l.size == 0) {
+            if (y == 0){
+                uploadProgressActivity.setErrorIconsVisibility(false)
+            }else{
+                uploadProgressActivity.setErrorIconsVisibility(true)
+            }
+            if (contributionsList.size == 0) {
                 binding.nopendingTextView.visibility = View.VISIBLE
                 binding.pendingUplaodsLl.visibility = View.GONE
                 uploadProgressActivity.hidePendingIcons()
             } else {
                 if (totalUploads == 0){
-                    totalUploads = l.size
+                    totalUploads = contributionsList.size
                     binding.progressBarPending.max = totalUploads
                 }
                 binding.nopendingTextView.visibility = View.GONE
                 binding.pendingUplaodsLl.visibility = View.VISIBLE
-                val adapter = PendingUploadsAdapter(l, this)
+
+                val sortedContributionsList: List<Contribution> = if (VERSION.SDK_INT >= VERSION_CODES.N) {
+                    contributionsList.sortedByDescending { it.dateModifiedInMillis() }
+                } else {
+                    contributionsList.sortedBy { it.dateModifiedInMillis() }.reversed()
+                }
+
+                val newContributionList: MutableList<Contribution> = sortedContributionsList.toMutableList()
+                val listOfRemoved: MutableList<Contribution> = mutableListOf()
+                val last = sortedContributionsList.last()
+                for (i in sortedContributionsList.indices) {
+                    val current = sortedContributionsList[i]
+                    if (current.transferred == 0L && (current.dateModifiedInMillis() / 100) > (last.dateModifiedInMillis() / 100)){
+                        listOfRemoved.add(current)
+                    }
+                }
+                newContributionList.removeAll(listOfRemoved)
+                newContributionList.addAll(listOfRemoved)
+                val adapter = PendingUploadsAdapter(newContributionList, this)
                 binding.pendingUploadsRecyclerView.setAdapter(adapter)
-                binding.progressTextView.setText((totalUploads-l.size).toString() + "/" + totalUploads + " uploaded")
-                binding.progressBarPending.progress = totalUploads-l.size
-                if (x == l.size) {
+                binding.progressTextView.setText((totalUploads-contributionsList.size).toString() + "/" + totalUploads + " uploaded")
+                binding.progressBarPending.progress = totalUploads-contributionsList.size
+                if (x == contributionsList.size) {
                     uploadProgressActivity.setPausedIcon(true)
                 }else{
                     uploadProgressActivity.setPausedIcon(false)
@@ -203,14 +233,14 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
     }
 
     fun restartUploads() {
-        if (l != null){
-            pendingUploadsPresenter.restartUploads(l, 0 , this.requireContext().applicationContext)
+        if (contributionsList != null){
+            pendingUploadsPresenter.restartUploads(contributionsList, 0 , this.requireContext().applicationContext)
         }
     }
 
     fun pauseUploads() {
-        if (l != null){
-            pendingUploadsPresenter.pauseUploads(l, 0, this.requireContext().applicationContext)
+        if (contributionsList != null){
+            pendingUploadsPresenter.pauseUploads(contributionsList, 0, this.requireContext().applicationContext)
         }
     }
 

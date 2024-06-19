@@ -134,4 +134,9 @@ data class Contribution constructor(
     fun unpause() {
         CommonsApplication.pauseUploads[pageId] = false
     }
+
+    fun dateModifiedInMillis(): Long  {
+        return dateModified!!.time
+    }
+
 }
