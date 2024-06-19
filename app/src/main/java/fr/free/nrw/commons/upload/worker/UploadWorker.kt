@@ -34,6 +34,7 @@ import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.upload.StashUploadResult
 import fr.free.nrw.commons.upload.StashUploadState
 import fr.free.nrw.commons.upload.UploadClient
+import fr.free.nrw.commons.upload.UploadProgressActivity
 import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.wikidata.WikidataEditService
 import kotlinx.coroutines.Dispatchers
@@ -543,6 +544,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
     private fun showSuccessNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
         contribution.state=Contribution.STATE_COMPLETED
+        curentNotification.setContentIntent(getPendingIntent(MainActivity::class.java))
         curentNotification.setContentTitle(
             appContext.getString(
                 R.string.upload_completed_notification_title,
@@ -565,7 +567,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
     @SuppressLint("StringFormatInvalid")
     private fun showFailedNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
-        curentNotification.setContentIntent(getPendingIntent(MainActivity::class.java))
+        curentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java))
         curentNotification.setContentTitle(
             appContext.getString(
                 R.string.upload_failed_notification_title,
@@ -604,6 +606,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
      */
     private fun showPausedNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
+        curentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java))
         curentNotification.setContentTitle(
             appContext.getString(
                 R.string.upload_paused_notification_title,

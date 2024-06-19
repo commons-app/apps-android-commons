@@ -108,11 +108,14 @@ public class PendingUploadsPresenter implements UserActionListener {
      * Delete a failed contribution from the local db
      */
     @Override
-    public void deleteUpload(final Contribution contribution) {
+    public void deleteUpload(final Contribution contribution, Context context) {
         compositeDisposable.add(repository
             .deleteContributionFromDB(contribution)
             .subscribeOn(ioThreadScheduler)
-            .subscribe());
+            .subscribe(() ->
+                WorkRequestHelper.Companion.makeOneTimeWorkRequest(
+                    context, ExistingWorkPolicy.KEEP)
+            ));
     }
 
     public void saveContribution(Contribution contribution, Context context) {
@@ -126,7 +129,6 @@ public class PendingUploadsPresenter implements UserActionListener {
     }
 
     public void pauseUploads(List<Contribution> l, int index, Context context) {
-        Timber.tag("PRINT").e(CommonsApplication.pauseUploads.toString());
         if (index >= l.size()) {
             return;
         }

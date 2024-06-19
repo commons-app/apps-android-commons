@@ -193,7 +193,7 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
             String.format(Locale.getDefault(), getString(R.string.no)),
             {
                 ViewUtil.showShortToast(context, R.string.cancelling_upload)
-                pendingUploadsPresenter.deleteUpload(contribution)
+                pendingUploadsPresenter.deleteUpload(contribution, this.requireContext().applicationContext)
                 CommonsApplication.cancelledUploads.add(contribution!!.pageId)
             },
             {}
