@@ -32,7 +32,7 @@ class UploadProgressActivity : BaseActivity() {
         binding.uploadProgressViewPager.setAdapter(viewPagerAdapter)
         binding.uploadProgressViewPager.setId(R.id.upload_progress_view_pager)
         binding.uploadProgressTabLayout.setupWithViewPager(binding.uploadProgressViewPager)
-        binding.toolbarBinding.toolbar.title = "Uploads"
+        binding.toolbarBinding.toolbar.title = getString(R.string.uploads)
         setSupportActionBar(binding.toolbarBinding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -64,9 +64,9 @@ class UploadProgressActivity : BaseActivity() {
         failedUploadsFragment = FailedUploadsFragment()
 
         fragmentList.add(pendingUploadsFragment!!)
-        titleList.add("Pending")
+        titleList.add(getString(R.string.pending))
         fragmentList.add(failedUploadsFragment!!)
-        titleList.add("Failed")
+        titleList.add(getString(R.string.failed))
         viewPagerAdapter!!.setTabData(fragmentList, titleList)
         viewPagerAdapter!!.notifyDataSetChanged()
     }
@@ -89,7 +89,7 @@ class UploadProgressActivity : BaseActivity() {
             if (isPendingIconsVisible){
                 if (!isPaused){
                     if (menu!!.findItem(R.id.pause_icon) == null) {
-                        menu!!.add(Menu.NONE, R.id.pause_icon, Menu.NONE, "Pause")
+                        menu!!.add(Menu.NONE, R.id.pause_icon, Menu.NONE, getString(R.string.pause))
                             .setIcon(android.R.drawable.ic_media_pause).setOnMenuItemClickListener {
                                 pendingUploadsFragment!!.pauseUploads()
                                 setPausedIcon(true)
@@ -98,7 +98,7 @@ class UploadProgressActivity : BaseActivity() {
                             .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
                     }
                     if (menu!!.findItem(R.id.cancel_icon) == null) {
-                        menu!!.add(Menu.NONE, R.id.cancel_icon, Menu.NONE, "Cancel")
+                        menu!!.add(Menu.NONE, R.id.cancel_icon, Menu.NONE, getString(R.string.cancel))
                             .setIcon(android.R.drawable.ic_menu_close_clear_cancel).setOnMenuItemClickListener {
                                 pendingUploadsFragment!!.deleteUploads()
                                 true
@@ -107,7 +107,7 @@ class UploadProgressActivity : BaseActivity() {
                     }
                 }else{
                     if (menu!!.findItem(R.id.resume_icon) == null) {
-                        menu!!.add(Menu.NONE, R.id.resume_icon, Menu.NONE, "Resume")
+                        menu!!.add(Menu.NONE, R.id.resume_icon, Menu.NONE, getString(R.string.resume))
                             .setIcon(android.R.drawable.ic_media_play).setOnMenuItemClickListener {
                                 pendingUploadsFragment!!.restartUploads()
                                 setPausedIcon(false)
@@ -120,7 +120,7 @@ class UploadProgressActivity : BaseActivity() {
         } else if (currentPosition == 1) {
             if (isErrorIconsVisisble){
                 if (menu!!.findItem(R.id.retry_icon) == null) {
-                    menu!!.add(Menu.NONE, R.id.retry_icon, Menu.NONE, "Retry")
+                    menu!!.add(Menu.NONE, R.id.retry_icon, Menu.NONE, getString(R.string.retry))
                         .setIcon(R.drawable.ic_refresh_white_24dp).setOnMenuItemClickListener {
                             failedUploadsFragment!!.restartUploads()
                             true
@@ -128,7 +128,7 @@ class UploadProgressActivity : BaseActivity() {
                         .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
                 }
                 if (menu!!.findItem(R.id.cancel_icon) == null) {
-                    menu!!.add(Menu.NONE, R.id.cancel_icon, Menu.NONE, "Cancel")
+                    menu!!.add(Menu.NONE, R.id.cancel_icon, Menu.NONE, getString(R.string.cancel))
                         .setIcon(android.R.drawable.ic_menu_close_clear_cancel).setOnMenuItemClickListener {
                             failedUploadsFragment!!.deleteUploads()
                             true

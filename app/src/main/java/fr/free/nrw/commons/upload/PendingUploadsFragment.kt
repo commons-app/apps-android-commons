@@ -225,11 +225,11 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
                 requireActivity(),
                 String.format(
                     Locale.getDefault(),
-                    "Cancelling all the uploads..."
+                    getString(R.string.cancelling_all_the_uploads)
                 ),
                 String.format(
                     Locale.getDefault(),
-                    "Are you sure that you want cancel all the uploads?"
+                    getString(R.string.are_you_sure_that_you_want_cancel_all_the_uploads)
                 ),
                 String.format(Locale.getDefault(), getString(R.string.yes)),
                 String.format(Locale.getDefault(), getString(R.string.no)),
