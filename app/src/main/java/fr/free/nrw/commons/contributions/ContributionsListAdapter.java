@@ -72,14 +72,8 @@ public class ContributionsListAdapter extends
 
         void retryUpload(Contribution contribution);
 
-        void deleteUpload(Contribution contribution);
-
         void openMediaDetail(int contribution, boolean isWikipediaPageExists);
 
         void addImageToWikipedia(Contribution contribution);
-
-        void pauseUpload(Contribution contribution);
-
-        void resumeUpload(Contribution contribution);
     }
 }

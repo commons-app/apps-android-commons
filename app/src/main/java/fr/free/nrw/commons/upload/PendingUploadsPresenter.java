@@ -118,16 +118,6 @@ public class PendingUploadsPresenter implements UserActionListener {
             ));
     }
 
-    public void saveContribution(Contribution contribution, Context context) {
-        compositeDisposable.add(repository
-            .save(contribution)
-            .subscribeOn(ioThreadScheduler)
-            .subscribe(() ->
-                WorkRequestHelper.Companion.makeOneTimeWorkRequest(
-                context, ExistingWorkPolicy.KEEP)
-            ));
-    }
-
     public void pauseUploads(List<Contribution> l, int index, Context context) {
         if (index >= l.size()) {
             return;

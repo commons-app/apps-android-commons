@@ -189,7 +189,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                 .blockingGet()
             //Showing initial notification for the number of uploads being processed
 
-            Timber.e("Queued Contributions: " + queuedContributions.size)
+            Timber.tag("PRINT").e("Queued Contributions: " + queuedContributions.size)
 
             processingUploads.setContentTitle(appContext.getString(R.string.starting_uploads))
             processingUploads.setContentText(
@@ -344,7 +344,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             ).onErrorReturn{
                 return@onErrorReturn StashUploadResult(StashUploadState.FAILED,fileKey = null,errorMessage = it.message)
             }.blockingSingle()
-
+            Timber.tag("PRINT").e("--  "+stashUploadResult.state)
             when (stashUploadResult.state) {
                 StashUploadState.SUCCESS -> {
                     //If the stash upload succeeds
@@ -403,6 +403,9 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                     showPausedNotification(contribution)
                     contribution.state = Contribution.STATE_PAUSED
                     contributionDao.saveSynchronous(contribution)
+                }
+                StashUploadState.CANCELLED -> {
+                    showCancelledNotification(contribution)
                 }
                 else -> {
                     Timber.e("""upload file to stash failed with status: ${stashUploadResult.state}""")
@@ -614,6 +617,25 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             )
         )
             .setContentText(appContext.getString(R.string.upload_paused_notification_subtitle))
+            .setProgress(0, 0, false)
+            .setOngoing(false)
+        notificationManager!!.notify(
+            currentNotificationTag, currentNotificationID,
+            curentNotification.build()
+        )
+    }
+
+    /**
+     * Notify that the current upload is cancelled
+     * @param contribution
+     */
+    private fun showCancelledNotification(contribution: Contribution) {
+        val displayTitle = contribution.media.displayTitle
+        curentNotification.setContentIntent(getPendingIntent(UploadProgressActivity::class.java))
+        curentNotification.setContentTitle(
+            displayTitle
+        )
+            .setContentText("Upload has been cancelled!")
             .setProgress(0, 0, false)
             .setOngoing(false)
         notificationManager!!.notify(

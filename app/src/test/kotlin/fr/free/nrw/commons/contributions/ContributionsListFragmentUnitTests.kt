@@ -139,20 +139,6 @@ class ContributionsListFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testResumeUpload() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.resumeUpload(contribution)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testPauseUpload() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.pauseUpload(contribution)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testAddImageToWikipedia() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.addImageToWikipedia(contribution)

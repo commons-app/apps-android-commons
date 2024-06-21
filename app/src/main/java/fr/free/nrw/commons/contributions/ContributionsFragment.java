@@ -722,20 +722,6 @@ public class ContributionsFragment
     }
 
     /**
-     * Pauses the upload
-     *
-     * @param contribution
-     */
-    @Override
-    public void pauseUpload(Contribution contribution) {
-        //Pause the upload in the global singleton
-        CommonsApplication.pauseUploads.put(contribution.getPageId(), true);
-        //Retain the paused state in DB
-        contribution.setState(STATE_PAUSED);
-        contributionsPresenter.saveContribution(contribution);
-    }
-
-    /**
      * Notify the viewpager that number of items have changed.
      */
     @Override

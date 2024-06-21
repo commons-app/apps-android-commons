@@ -220,18 +220,6 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
             }
     }
 
-    override fun showWelcomeTip(numberOfUploads: Boolean) {
-        //TODO("Not yet implemented")
-    }
-
-    override fun showProgress(shouldShow: Boolean) {
-        //TODO("Not yet implemented")
-    }
-
-    override fun showNoContributionsUI(shouldShow: Boolean) {
-        //TODO("Not yet implemented")
-    }
-
     fun restartUploads() {
         if (contributionsList != null){
             pendingUploadsPresenter.restartUploads(contributionsList, 0 , this.requireContext().applicationContext)

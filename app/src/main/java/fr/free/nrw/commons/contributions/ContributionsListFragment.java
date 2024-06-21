@@ -443,23 +443,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     }
 
     @Override
-    public void deleteUpload(final Contribution contribution) {
-        DialogUtil.showAlertDialog(getActivity(),
-            String.format(Locale.getDefault(),
-                getString(R.string.cancelling_upload)),
-            String.format(Locale.getDefault(),
-                getString(R.string.cancel_upload_dialog)),
-            String.format(Locale.getDefault(), getString(R.string.yes)), String.format(Locale.getDefault(), getString(R.string.no)),
-            () -> {
-                ViewUtil.showShortToast(getContext(), R.string.cancelling_upload);
-                contributionsListPresenter.deleteUpload(contribution);
-                CommonsApplication.cancelledUploads.add(contribution.getPageId());
-            }, () -> {
-                // Do nothing
-            });
-    }
-
-    @Override
     public void openMediaDetail(final int position, boolean isWikipediaButtonDisplayed) {
         if (null != callback) {//Just being safe, ideally they won't be called when detached
             callback.showDetail(position, isWikipediaButtonDisplayed);
@@ -481,28 +464,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
             }, () -> {
                 // do nothing
             });
-    }
-
-    /**
-     * Pauses the current upload
-     *
-     * @param contribution
-     */
-    @Override
-    public void pauseUpload(Contribution contribution) {
-        ViewUtil.showShortToast(getContext(), R.string.pausing_upload);
-        callback.pauseUpload(contribution);
-    }
-
-    /**
-     * Resumes the current upload
-     *
-     * @param contribution
-     */
-    @Override
-    public void resumeUpload(Contribution contribution) {
-        ViewUtil.showShortToast(getContext(), R.string.resuming_upload);
-        callback.retryUpload(contribution);
     }
 
     /**
@@ -559,8 +520,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         void retryUpload(Contribution contribution);
 
         void showDetail(int position, boolean isWikipediaButtonDisplayed);
-
-        void pauseUpload(Contribution contribution);
 
         // Notify the viewpager that number of items have changed.
         void viewPagerNotifyDataSetChanged();

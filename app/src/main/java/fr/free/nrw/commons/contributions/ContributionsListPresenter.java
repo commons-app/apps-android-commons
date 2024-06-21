@@ -90,17 +90,6 @@ public class ContributionsListPresenter implements UserActionListener {
         contributionBoundaryCallback.dispose();
     }
 
-    /**
-     * Delete a failed contribution from the local db
-     */
-    @Override
-    public void deleteUpload(final Contribution contribution) {
-        compositeDisposable.add(repository
-            .deleteContributionFromDB(contribution)
-            .subscribeOn(ioThreadScheduler)
-            .subscribe());
-    }
-
     void getTotalContribution(String userName) {
         final PagedList.Config pagedListConfig =
             (new PagedList.Config.Builder())
