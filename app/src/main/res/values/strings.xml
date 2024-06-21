@@ -821,4 +821,6 @@ Upload your first media by tapping on the add button.</string>
   <!-- TODO: Remove or change this placeholder text -->
   <string name="hello_blank_fragment">Hello blank fragment</string>
   <string name="feedback_destination_note">Your feedback gets posted to the following wiki page: <![CDATA[ <a href="https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback">Commons:Mobile app/Feedback</a> ]]></string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Are you sure that you want cancel all the uploads?</string>
+  <string name="cancelling_all_the_uploads">Cancelling all the uploads...</string>
 </resources>

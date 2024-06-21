@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,13 +8,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
+import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.databinding.FragmentFailedUploadsBinding
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.profile.ProfileActivity
+import fr.free.nrw.commons.utils.DialogUtil
+import fr.free.nrw.commons.utils.ViewUtil
 import org.apache.commons.lang3.StringUtils
+import java.util.Locale
 import javax.inject.Inject
 
 /**
@@ -22,7 +27,6 @@ import javax.inject.Inject
  * create an instance of this fragment.
  */
 class FailedUploadsFragment : CommonsDaggerSupportFragment(),PendingUploadsContract.View {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private val ARG_PARAM1 = "param1"
@@ -42,6 +46,15 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(),PendingUploadsContr
     lateinit var binding: FragmentFailedUploadsBinding
 
     var contributionsList = ArrayList<Contribution>()
+
+    private lateinit var uploadProgressActivity: UploadProgressActivity
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is UploadProgressActivity) {
+            uploadProgressActivity = context
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,7 +95,7 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(),PendingUploadsContr
         ) { list: PagedList<Contribution?> ->
             contributionsList = ArrayList()
             list.forEach {
-                if (it != null){
+                if (it != null) {
                     if (it.state == Contribution.STATE_FAILED) {
                         contributionsList.add(it)
                     }
@@ -101,15 +114,6 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(),PendingUploadsContr
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FailedUploadsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             FailedUploadsFragment().apply {
@@ -121,8 +125,40 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(),PendingUploadsContr
     }
 
     fun restartUploads() {
-        if (contributionsList != null){
-            pendingUploadsPresenter.restartUploads(contributionsList, 0 , this.requireContext().applicationContext)
+        if (contributionsList != null) {
+            pendingUploadsPresenter.restartUploads(
+                contributionsList,
+                0,
+                this.requireContext().applicationContext
+            )
+        }
+    }
+
+    fun deleteUploads() {
+        if (contributionsList != null) {
+            DialogUtil.showAlertDialog(
+                requireActivity(),
+                String.format(
+                    Locale.getDefault(),
+                    getString(R.string.cancelling_all_the_uploads)
+                ),
+                String.format(
+                    Locale.getDefault(),
+                    getString(R.string.are_you_sure_that_you_want_cancel_all_the_uploads)
+                ),
+                String.format(Locale.getDefault(), getString(R.string.yes)),
+                String.format(Locale.getDefault(), getString(R.string.no)),
+                {
+                    ViewUtil.showShortToast(context, R.string.cancelling_upload)
+                    uploadProgressActivity.hidePendingIcons()
+                    pendingUploadsPresenter.deleteUploads(
+                        contributionsList,
+                        0,
+                        this.requireContext().applicationContext
+                    )
+                },
+                {}
+            )
         }
     }
 }

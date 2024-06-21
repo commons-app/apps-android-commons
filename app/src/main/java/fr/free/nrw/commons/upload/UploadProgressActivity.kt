@@ -100,7 +100,7 @@ class UploadProgressActivity : BaseActivity() {
                     if (menu!!.findItem(R.id.cancel_icon) == null) {
                         menu!!.add(Menu.NONE, R.id.cancel_icon, Menu.NONE, "Cancel")
                             .setIcon(android.R.drawable.ic_menu_close_clear_cancel).setOnMenuItemClickListener {
-                                hidePendingIcons()
+                                pendingUploadsFragment!!.deleteUploads()
                                 true
                             }
                             .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
@@ -130,7 +130,7 @@ class UploadProgressActivity : BaseActivity() {
                 if (menu!!.findItem(R.id.cancel_icon) == null) {
                     menu!!.add(Menu.NONE, R.id.cancel_icon, Menu.NONE, "Cancel")
                         .setIcon(android.R.drawable.ic_menu_close_clear_cancel).setOnMenuItemClickListener {
-                            hidePendingIcons()
+                            failedUploadsFragment!!.deleteUploads()
                             true
                         }
                         .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)

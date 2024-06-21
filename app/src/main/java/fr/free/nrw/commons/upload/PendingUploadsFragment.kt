@@ -20,7 +20,6 @@ import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
 import fr.free.nrw.commons.utils.ViewUtil
 import org.apache.commons.lang3.StringUtils
-import timber.log.Timber
 import java.util.Locale
 import javax.inject.Inject
 
@@ -32,9 +31,6 @@ import javax.inject.Inject
  */
 class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsContract.View,
     PendingUploadsAdapter.Callback{
-    var isPendingIconsVisible = false
-
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private val ARG_PARAM1 = "param1"
@@ -111,8 +107,8 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
         ) { list: PagedList<Contribution?> ->
             contributionsSize = list.size
             contributionsList = ArrayList()
-            var x = 0;
-            var y = 0;
+            var pausedOrQueuedUploads = 0
+            var failedUploads = 0
             list.forEach {
                 if (it != null){
                     if (it.state == Contribution.STATE_PAUSED
@@ -124,14 +120,14 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
                     if (it.state == Contribution.STATE_PAUSED
                         || it.state == Contribution.STATE_QUEUED
                     ) {
-                        x++
+                        pausedOrQueuedUploads++
                     }
                     if (it.state == Contribution.STATE_FAILED){
-                        y++
+                        failedUploads++
                     }
                 }
             }
-            if (y == 0){
+            if (failedUploads == 0){
                 uploadProgressActivity.setErrorIconsVisibility(false)
             }else{
                 uploadProgressActivity.setErrorIconsVisibility(true)
@@ -169,7 +165,7 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
                 binding.pendingUploadsRecyclerView.setAdapter(adapter)
                 binding.progressTextView.setText((totalUploads-contributionsList.size).toString() + "/" + totalUploads + " uploaded")
                 binding.progressBarPending.progress = totalUploads-contributionsList.size
-                if (x == contributionsList.size) {
+                if (pausedOrQueuedUploads == contributionsList.size) {
                     uploadProgressActivity.setPausedIcon(true)
                 }else{
                     uploadProgressActivity.setPausedIcon(false)
@@ -201,15 +197,6 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PendingUploadsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             PendingUploadsFragment().apply {
@@ -232,5 +219,27 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
         }
     }
 
-
+    fun deleteUploads(){
+        if (contributionsList != null){
+            showAlertDialog(
+                requireActivity(),
+                String.format(
+                    Locale.getDefault(),
+                    "Cancelling all the uploads..."
+                ),
+                String.format(
+                    Locale.getDefault(),
+                    "Are you sure that you want cancel all the uploads?"
+                ),
+                String.format(Locale.getDefault(), getString(R.string.yes)),
+                String.format(Locale.getDefault(), getString(R.string.no)),
+                {
+                    ViewUtil.showShortToast(context, R.string.cancelling_upload)
+                    uploadProgressActivity.hidePendingIcons()
+                    pendingUploadsPresenter.deleteUploads(contributionsList, 0, this.requireContext().applicationContext)
+                },
+                {}
+            )
+        }
+    }
 }

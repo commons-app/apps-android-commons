@@ -139,6 +139,25 @@ public class PendingUploadsPresenter implements UserActionListener {
             ));
     }
 
+    public void deleteUploads(List<Contribution> l, int index, Context context) {
+        if (index >= l.size()) {
+            return;
+        }
+        Contribution it = l.get(index);
+        compositeDisposable.add(repository
+            .deleteContributionFromDB(it)
+            .subscribeOn(ioThreadScheduler)
+            .doOnComplete(() -> {
+                    CommonsApplication.cancelledUploads.add(it.getPageId());
+                    deleteUploads(l, index + 1, context);
+                }
+            )
+            .subscribe(() ->
+                WorkRequestHelper.Companion.makeOneTimeWorkRequest(
+                    context, ExistingWorkPolicy.KEEP)
+            ));
+    }
+
     public void restartUploads(List<Contribution> l, int index, Context context) {
         if (index >= l.size()) {
             return;
