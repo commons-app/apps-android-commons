@@ -162,9 +162,7 @@ class UploadClientTest {
         whenever(contribution.fileKey).thenReturn(filekey)
         whenever(fileUtilsWrapper.getMimeType(anyOrNull<File>())).thenReturn("image/png")
         whenever(fileUtilsWrapper.getFileChunks(anyOrNull<File>(), eq(expectedChunkSize))).thenReturn(emptyList())
-
         val result = uploadClient.uploadFileToStash(filename, contribution, mock()).test()
-
         result.assertNoErrors()
         verify(contribution, times(1)).unpause()
     }

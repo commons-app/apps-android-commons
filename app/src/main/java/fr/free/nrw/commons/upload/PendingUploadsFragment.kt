@@ -191,6 +191,7 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
                 ViewUtil.showShortToast(context, R.string.cancelling_upload)
                 pendingUploadsPresenter.deleteUpload(contribution, this.requireContext().applicationContext)
                 CommonsApplication.cancelledUploads.add(contribution!!.pageId)
+                resetProgressBar()
             },
             {}
         )
@@ -241,5 +242,9 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
                 {}
             )
         }
+    }
+
+    fun resetProgressBar() {
+        totalUploads = 0
     }
 }

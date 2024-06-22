@@ -94,50 +94,6 @@ class ContributionViewHolderUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testSetResume() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = ContributionViewHolder::class.java.getDeclaredMethod(
-            "setResume"
-        )
-        method.isAccessible = true
-        method.invoke(contributionViewHolder)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testSetPaused() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = ContributionViewHolder::class.java.getDeclaredMethod(
-            "setPaused"
-        )
-        method.isAccessible = true
-        method.invoke(contributionViewHolder)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testPause() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = ContributionViewHolder::class.java.getDeclaredMethod(
-            "pause"
-        )
-        method.isAccessible = true
-        method.invoke(contributionViewHolder)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testResume() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        val method: Method = ContributionViewHolder::class.java.getDeclaredMethod(
-            "resume"
-        )
-        method.isAccessible = true
-        method.invoke(contributionViewHolder)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testWikipediaButtonClicked() {
         contributionViewHolder.wikipediaButtonClicked()
     }

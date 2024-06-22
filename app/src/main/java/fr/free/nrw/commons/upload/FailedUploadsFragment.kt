@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
+import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.Contribution
@@ -26,7 +27,7 @@ import javax.inject.Inject
  * Use the [FailedUploadsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class FailedUploadsFragment : CommonsDaggerSupportFragment(),PendingUploadsContract.View {
+class FailedUploadsFragment : CommonsDaggerSupportFragment(),PendingUploadsContract.View, FailedUploadsAdapter.Callback {
     private var param1: String? = null
     private var param2: String? = null
     private val ARG_PARAM1 = "param1"
@@ -107,7 +108,7 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(),PendingUploadsContr
             } else {
                 binding.nofailedTextView.visibility = View.GONE
                 binding.failedUplaodsLl.visibility = View.VISIBLE
-                val adapter = FailedUploadsAdapter(contributionsList)
+                val adapter = FailedUploadsAdapter(contributionsList, this)
                 binding.failedUploadsRecyclerView.setAdapter(adapter)
             }
         }
@@ -126,12 +127,49 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(),PendingUploadsContr
 
     fun restartUploads() {
         if (contributionsList != null) {
+            uploadProgressActivity.resetProgressBar()
             pendingUploadsPresenter.restartUploads(
                 contributionsList,
                 0,
                 this.requireContext().applicationContext
             )
         }
+    }
+
+    override fun restartUpload(index : Int) {
+        if (contributionsList != null) {
+            uploadProgressActivity.resetProgressBar()
+            pendingUploadsPresenter.restartUpload(
+                contributionsList,
+                index,
+                this.requireContext().applicationContext
+            )
+        }
+    }
+
+    override fun deleteUpload(contribution: Contribution?) {
+        DialogUtil.showAlertDialog(
+            requireActivity(),
+            String.format(
+                Locale.getDefault(),
+                getString(R.string.cancelling_upload)
+            ),
+            String.format(
+                Locale.getDefault(),
+                getString(R.string.cancel_upload_dialog)
+            ),
+            String.format(Locale.getDefault(), getString(R.string.yes)),
+            String.format(Locale.getDefault(), getString(R.string.no)),
+            {
+                ViewUtil.showShortToast(context, R.string.cancelling_upload)
+                pendingUploadsPresenter.deleteUpload(
+                    contribution,
+                    this.requireContext().applicationContext
+                )
+                CommonsApplication.cancelledUploads.add(contribution!!.pageId)
+            },
+            {}
+        )
     }
 
     fun deleteUploads() {

@@ -267,19 +267,21 @@ public class ContributionsFragment
         pendingUploadsCountTextView = uploadMenuItemActionView.findViewById(R.id.pending_uploads_count_badge);
         uploadsErrorTextView = uploadMenuItemActionView.findViewById(R.id.uploads_error_count_badge);
         final ImageView pendingUploadsImageView = uploadMenuItemActionView.findViewById(R.id.pending_uploads_image_view);
-
-        pendingUploadsImageView.setOnClickListener(view -> {
-            startActivity(new Intent(getContext(), UploadProgressActivity.class));
-        });
-
-        pendingUploadsCountTextView.setOnClickListener(view -> {
-            startActivity(new Intent(getContext(), UploadProgressActivity.class));
-        });
-
-        uploadsErrorTextView.setOnClickListener(view -> {
-            startActivity(new Intent(getContext(), UploadProgressActivity.class));
-        });
-
+        if (pendingUploadsImageView != null){
+            pendingUploadsImageView.setOnClickListener(view -> {
+                startActivity(new Intent(getContext(), UploadProgressActivity.class));
+            });
+        }
+        if (pendingUploadsCountTextView != null) {
+            pendingUploadsCountTextView.setOnClickListener(view -> {
+                startActivity(new Intent(getContext(), UploadProgressActivity.class));
+            });
+        }
+        if (uploadsErrorTextView != null) {
+            uploadsErrorTextView.setOnClickListener(view -> {
+                startActivity(new Intent(getContext(), UploadProgressActivity.class));
+            });
+        }
         notification.setOnClickListener(view -> {
             NotificationActivity.startYourself(getContext(), "unread");
         });

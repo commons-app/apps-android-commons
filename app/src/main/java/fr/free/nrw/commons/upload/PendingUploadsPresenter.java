@@ -15,6 +15,7 @@ import fr.free.nrw.commons.contributions.ContributionBoundaryCallback;
 import fr.free.nrw.commons.contributions.ContributionsRemoteDataSource;
 import fr.free.nrw.commons.contributions.ContributionsRepository;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
+import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.upload.PendingUploadsContract.UserActionListener;
 import fr.free.nrw.commons.upload.PendingUploadsContract.View;
 import fr.free.nrw.commons.upload.worker.WorkRequestHelper;
@@ -96,7 +97,6 @@ public class PendingUploadsPresenter implements UserActionListener {
 
     }
 
-
     @Override
     public void onDetachView() {
         compositeDisposable.clear();
@@ -172,6 +172,21 @@ public class PendingUploadsPresenter implements UserActionListener {
                     restartUploads(l, index + 1, context);
                 }
             )
+            .subscribe(() ->
+                WorkRequestHelper.Companion.makeOneTimeWorkRequest(
+                    context, ExistingWorkPolicy.KEEP)
+            ));
+    }
+
+    public void restartUpload(List<Contribution> l, int index, Context context) {
+        if (index >= l.size()) {
+            return;
+        }
+        Contribution it = l.get(index);
+        it.setState(Contribution.STATE_QUEUED);
+        compositeDisposable.add(repository
+            .save(it)
+            .subscribeOn(ioThreadScheduler)
             .subscribe(() ->
                 WorkRequestHelper.Companion.makeOneTimeWorkRequest(
                     context, ExistingWorkPolicy.KEEP)

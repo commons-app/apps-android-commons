@@ -154,4 +154,9 @@ class UploadProgressActivity : BaseActivity() {
         updateMenuItems(binding.uploadProgressViewPager.currentItem)
     }
 
+    fun resetProgressBar(){
+        pendingUploadsFragment!!.resetProgressBar()
+    }
+
+
 }

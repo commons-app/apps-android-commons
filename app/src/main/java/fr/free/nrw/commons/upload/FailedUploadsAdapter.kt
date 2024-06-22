@@ -17,9 +17,10 @@ import timber.log.Timber
 import java.io.File
 
 
-class FailedUploadsAdapter(items: List<Contribution>) :
+class FailedUploadsAdapter(items: List<Contribution>, callback: Callback) :
     RecyclerView.Adapter<FailedUploadsAdapter.ViewHolder>() {
     private val items: List<Contribution> = items
+    private var callback: FailedUploadsAdapter.Callback = callback
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: View =
@@ -51,6 +52,12 @@ class FailedUploadsAdapter(items: List<Contribution>) :
             holder.errorTextView.visibility = View.VISIBLE
             holder.itemProgress.visibility = View.GONE
         }
+        holder.deleteButton.setOnClickListener {
+            callback.deleteUpload(item)
+        }
+        holder.retryButton.setOnClickListener {
+            callback.restartUpload(position)
+        }
         holder.itemImage.setImageRequest(imageRequest)
     }
 
@@ -67,9 +74,11 @@ class FailedUploadsAdapter(items: List<Contribution>) :
         var itemProgress: ProgressBar = itemView.findViewById<ProgressBar>(R.id.itemProgress)
         var errorTextView: TextView = itemView.findViewById<TextView>(R.id.errorTextView)
         var deleteButton: ImageView = itemView.findViewById(R.id.deleteButton)
+        var retryButton: ImageView = itemView.findViewById(R.id.retryButton)
     }
 
     interface Callback {
         fun deleteUpload(contribution: Contribution?)
+        fun restartUpload(index : Int)
     }
 }
