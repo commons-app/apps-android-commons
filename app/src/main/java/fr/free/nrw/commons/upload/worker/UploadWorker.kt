@@ -408,13 +408,14 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                 }
                 else -> {
                     Timber.e("""upload file to stash failed with status: ${stashUploadResult.state}""")
-                    showInvalidLoginNotification(contribution)
                     contribution.state = Contribution.STATE_FAILED
                     contribution.chunkInfo = null
                     contribution.errorInfo = stashUploadResult.errorMessage
+                    showErrorNotification(contribution)
                     contributionDao.saveSynchronous(contribution)
                     if (stashUploadResult.errorMessage.equals(CsrfTokenClient.INVALID_TOKEN_ERROR_MESSAGE)) {
                         Timber.e("Invalid Login, logging out")
+                        showInvalidLoginNotification(contribution)
                         val username = sessionManager.userName
                         var logoutListener = CommonsApplication.BaseLogoutListener(
                             appContext,
@@ -595,6 +596,24 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             )
         )
             .setContentText(appContext.getString(R.string.invalid_login_message))
+            .setProgress(0, 0, false)
+            .setOngoing(false)
+        notificationManager?.notify(
+            currentNotificationTag, currentNotificationID,
+            curentNotification.build()
+        )
+    }
+
+    @SuppressLint("StringFormatInvalid")
+    private fun showErrorNotification(contribution: Contribution) {
+        val displayTitle = contribution.media.displayTitle
+        curentNotification.setContentTitle(
+            appContext.getString(
+                R.string.upload_failed_notification_title,
+                displayTitle
+            )
+        )
+            .setContentText(contribution.errorInfo)
             .setProgress(0, 0, false)
             .setOngoing(false)
         notificationManager?.notify(
