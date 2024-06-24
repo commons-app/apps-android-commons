@@ -344,7 +344,6 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             ).onErrorReturn{
                 return@onErrorReturn StashUploadResult(StashUploadState.FAILED,fileKey = null,errorMessage = it.message)
             }.blockingSingle()
-            Timber.tag("PRINT").e("--  "+stashUploadResult.state)
             when (stashUploadResult.state) {
                 StashUploadState.SUCCESS -> {
                     //If the stash upload succeeds
@@ -412,6 +411,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                     showInvalidLoginNotification(contribution)
                     contribution.state = Contribution.STATE_FAILED
                     contribution.chunkInfo = null
+                    contribution.errorInfo = stashUploadResult.errorMessage
                     contributionDao.saveSynchronous(contribution)
                     if (stashUploadResult.errorMessage.equals(CsrfTokenClient.INVALID_TOKEN_ERROR_MESSAGE)) {
                         Timber.e("Invalid Login, logging out")

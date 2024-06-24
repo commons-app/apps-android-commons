@@ -28,6 +28,7 @@ data class Contribution constructor(
     var dateCreatedSource: String? = null,
     var wikidataPlace: WikidataPlace? = null,
     var chunkInfo: ChunkInfo? = null,
+    var errorInfo: String? = null,
     /**
      * @return array list of entityids for the depictions
      */

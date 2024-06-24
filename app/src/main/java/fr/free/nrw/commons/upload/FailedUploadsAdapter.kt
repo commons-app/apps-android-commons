@@ -48,7 +48,11 @@ class FailedUploadsAdapter(items: List<Contribution>, callback: Callback) :
         }
 
         if (item.state == Contribution.STATE_FAILED) {
-            holder.errorTextView.setText("Failed")
+            if (item.errorInfo != null){
+                holder.errorTextView.setText(item.errorInfo)
+            }else{
+                holder.errorTextView.setText("Failed")
+            }
             holder.errorTextView.visibility = View.VISIBLE
             holder.itemProgress.visibility = View.GONE
         }
