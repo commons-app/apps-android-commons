@@ -40,7 +40,7 @@ class CategoriesModel @Inject constructor(
         val prevYearInString = prevYear.toString()
         Timber.d("Previous year: %s", prevYearInString)
 
-        //Check if item contains a 4-digit word anywhere within the string (.* is wildcard)
+        //Check if item contains a 4-digit word anywhere within the string (.* is wildcard) (Issue #47)
         //And that item does not equal the current year or previous year
         //And if it is an irrelevant category such as Media_needing_categories_as_of_16_June_2017(Issue #750)
         //Check if the year in the form of XX(X)0s is relevant, i.e. in the 2000s or 2010s as stated in Issue #1029
