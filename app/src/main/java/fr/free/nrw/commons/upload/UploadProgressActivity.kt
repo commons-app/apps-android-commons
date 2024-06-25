@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -7,8 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.ViewPagerAdapter
+import fr.free.nrw.commons.contributions.Contribution
+import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.databinding.ActivityUploadProgressBinding
 import fr.free.nrw.commons.theme.BaseActivity
+import io.reactivex.functions.Consumer
+import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
+import javax.inject.Inject
 
 
 class UploadProgressActivity : BaseActivity() {
@@ -18,6 +25,10 @@ class UploadProgressActivity : BaseActivity() {
     private var failedUploadsFragment: FailedUploadsFragment? = null
     var viewPagerAdapter: ViewPagerAdapter? = null
     var menu: Menu? = null
+
+    @Inject
+    lateinit var contributionDao: ContributionDao
+
     val fragmentList: MutableList<Fragment> = ArrayList()
     val titleList: MutableList<String> = ArrayList()
     var isPaused = true
@@ -158,5 +169,25 @@ class UploadProgressActivity : BaseActivity() {
         pendingUploadsFragment!!.resetProgressBar()
     }
 
+    override fun onResume() {
+        super.onResume()
+        retryAllFailedUploads()
+    }
+
+    /**
+     * Retry all failed uploads as soon as the user returns to the app
+     */
+    @SuppressLint("CheckResult")
+    private fun retryAllFailedUploads() {
+        contributionDao.getContribution(listOf(Contribution.STATE_FAILED))
+            .subscribeOn(Schedulers.io())
+            .subscribe { failedUploads: List<Contribution?> ->
+                for (contribution in failedUploads) {
+                    if (contribution != null) {
+                        pendingUploadsFragment!!.retryUpload(contribution)
+                    }
+                }
+            }
+    }
 
 }

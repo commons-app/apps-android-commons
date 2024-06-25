@@ -193,4 +193,18 @@ public class PendingUploadsPresenter implements UserActionListener {
             ));
     }
 
+    /**
+     * Update the contribution's state in the databse, upon completion, trigger the workmanager to
+     * process this contribution
+     *
+     * @param contribution
+     */
+    public void saveContribution(Contribution contribution, Context context) {
+        compositeDisposable.add(repository
+            .save(contribution)
+            .subscribeOn(ioThreadScheduler)
+            .subscribe(() -> WorkRequestHelper.Companion.makeOneTimeWorkRequest(
+                context, ExistingWorkPolicy.KEEP)));
+    }
+
 }

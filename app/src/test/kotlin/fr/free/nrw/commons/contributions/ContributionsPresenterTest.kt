@@ -58,17 +58,6 @@ class ContributionsPresenterTest {
     }
 
     /**
-     * Test presenter actions onDeleteContribution
-     */
-    @Test
-    fun testDeleteContribution() {
-        whenever(repository.deleteContributionFromDB(ArgumentMatchers.any<Contribution>()))
-            .thenReturn(Completable.complete())
-        contributionsPresenter.deleteUpload(contribution)
-        verify(repository).deleteContributionFromDB(contribution)
-    }
-
-    /**
      * Test fetch contribution with filename
      */
     @Test

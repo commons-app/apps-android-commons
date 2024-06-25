@@ -153,13 +153,6 @@ class ContributionsListFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testRetryUpload() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.retryUpload(contribution)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testOnViewStateRestored() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.onViewStateRestored(mock())

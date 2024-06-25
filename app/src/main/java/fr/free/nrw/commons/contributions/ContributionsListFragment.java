@@ -436,13 +436,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     }
 
     @Override
-    public void retryUpload(final Contribution contribution) {
-        if (null != callback) {//Just being safe, ideally they won't be called when detached
-            callback.retryUpload(contribution);
-        }
-    }
-
-    @Override
     public void openMediaDetail(final int position, boolean isWikipediaButtonDisplayed) {
         if (null != callback) {//Just being safe, ideally they won't be called when detached
             callback.showDetail(position, isWikipediaButtonDisplayed);
@@ -516,8 +509,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     public interface Callback {
 
         void notifyDataSetChanged();
-
-        void retryUpload(Contribution contribution);
 
         void showDetail(int position, boolean isWikipediaButtonDisplayed);
 
