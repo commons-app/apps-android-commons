@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload
 
+import fr.free.nrw.commons.upload.depicts.Claims
 import fr.free.nrw.commons.wikidata.WikidataConstants
 import fr.free.nrw.commons.wikidata.mwapi.MwPostResponse
 import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
@@ -34,7 +35,7 @@ interface WikiBaseInterface {
     </MwPostResponse> */
     @Headers("Cache-Control: no-cache")
     @FormUrlEncoded
-    @POST(WikidataConstants.MW_API_PREFIX + "action=wbeditentity&site=commonswiki&clear=1")
+    @POST(WikidataConstants.MW_API_PREFIX + "action=wbeditentity&site=commonswiki")
     fun postEditEntityByFilename(
         @Field("title") filename: String,
         @Field("token") editToken: String,
@@ -58,5 +59,20 @@ interface WikiBaseInterface {
         @Field("token") editToken: String?,
         @Field("language") language: String?,
         @Field("value") captionValue: String?
+    ): Observable<MwPostResponse>
+
+    @GET(WikidataConstants.MW_API_PREFIX + "action=wbgetclaims")
+    fun getClaimsByProperty(
+        @Query("entity") entityId: String,
+        @Query("property") property: String
+    ) : Observable<Claims>
+
+    @Headers("Cache-Control: no-cache")
+    @FormUrlEncoded
+    @POST(WikidataConstants.MW_API_PREFIX + "action=wbeditentity")
+    fun postDeleteClaims(
+        @Field("token") editToken: String,
+        @Field("id") entityId: String,
+        @Field("data") data: String
     ): Observable<MwPostResponse>
 }

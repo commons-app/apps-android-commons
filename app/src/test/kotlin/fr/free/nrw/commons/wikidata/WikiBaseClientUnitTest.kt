@@ -77,7 +77,7 @@ class WikiBaseClientUnitTest {
             "M123", "test", "en", "caption"
         )).thenReturn(Observable.just(mwPostResponse))
 
-        val result = wikiBaseClient.addLabelstoWikidata(123L, "en", "caption").blockingFirst()
+        val result = wikiBaseClient.addLabelsToWikidata(123L, "en", "caption").blockingFirst()
 
         assertSame(mwPostResponse, result)
     }
