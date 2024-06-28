@@ -6,18 +6,31 @@ buildscript {
         maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.0.2'
-        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
-        classpath 'org.codehaus.groovy:groovy-all:2.4.15'
+        classpath 'com.android.tools.build:gradle:8.5.0'
+        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:4.0.0'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.0'
+        classpath 'org.codehaus.groovy:groovy-all:3.0.21'
     }
 }
 
+plugins {
+    id 'com.android.application' version "8.5.0" apply false
+    id 'com.android.library' version "8.5.0" apply false
+    id 'com.getkeepsafe.dexcount' version "4.0.0" apply false
+    id 'com.google.devtools.ksp' version "2.0.0-1.0.22" apply false
+    id 'com.github.triplet.play' version "3.10.1" apply false
+    id 'org.gradle.android.cache-fix' version "3.0.1" apply false
+    id 'org.jetbrains.kotlin.android' version "2.0.0" apply false
+    id 'org.jetbrains.kotlin.kapt' version "2.0.0" apply false
+    id 'org.jetbrains.kotlin.plugin.compose' version "2.0.0" apply false
+    id 'org.jetbrains.kotlin.plugin.parcelize' version "2.0.0" apply false
+}
+
 allprojects {
-    repositories {
+     repositories {
         google()
         mavenCentral()
-        gradlePluginPortal() // potential jcenter() replacement
+        gradlePluginPortal()
         maven { url "https://jitpack.io" }
         maven { url "https://maven.google.com" }
     }
