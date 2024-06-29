@@ -42,10 +42,6 @@ public interface NearbyParentFragmentContract {
 
         void hideBottomDetailsSheet();
 
-        void addSearchThisAreaButtonAction();
-
-        void setSearchThisAreaButtonVisibility(boolean isVisible);
-
         void setProgressBarVisibility(boolean isVisible);
 
         boolean isDetailsBottomSheetVisible();

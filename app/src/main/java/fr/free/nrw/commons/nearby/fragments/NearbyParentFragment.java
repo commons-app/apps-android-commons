@@ -206,6 +206,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private List<Place> updatedPlaceList;
     private LatLng updatedLatLng;
+    private boolean searchble;
 
     private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(
         new RequestMultiplePermissions(),
@@ -423,13 +424,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         if (isNetworkConnectionEstablished() && (event.getX() > 0
                             || event.getY() > 0)) {
                             if (distance > 2000.0) {
-                                setSearchThisAreaButtonVisibility(true);
+                                searchble = true;
+                                presenter.searchInTheArea();
                             } else {
-                                setSearchThisAreaButtonVisibility(false);
+                                searchble = false;
                             }
                         }
                     } else {
-                        setSearchThisAreaButtonVisibility(false);
+                        searchble = false;
                     }
                 }
 
@@ -984,7 +986,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         if (snackbar == null) {
                             snackbar = Snackbar.make(view, R.string.no_internet,
                                 Snackbar.LENGTH_INDEFINITE);
-                            setSearchThisAreaButtonVisibility(false);
+                            searchble = false;
                             setProgressBarVisibility(false);
                         }
 
@@ -1278,6 +1280,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             .subscribe(nearbyPlacesInfo -> {
                     if (nearbyPlacesInfo.placeList == null || nearbyPlacesInfo.placeList.isEmpty()) {
                         showErrorMessage(getString(R.string.no_nearby_places_around));
+                        setProgressBarVisibility(false);
+                        presenter.lockUnlockNearby(false);
                     } else {
                         updateMapMarkers(nearbyPlacesInfo.placeList, nearbyPlacesInfo.currentLatLng,
                             true);
@@ -1315,6 +1319,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             .subscribe(nearbyPlacesInfo -> {
                     if (nearbyPlacesInfo.placeList == null || nearbyPlacesInfo.placeList.isEmpty()) {
                         showErrorMessage(getString(R.string.no_nearby_places_around));
+                        setProgressBarVisibility(false);
+                        presenter.lockUnlockNearby(false);
                     } else {
                         // Updating last searched location
                         applicationKvStore.putString("LastLocation",
@@ -1465,20 +1471,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         } else {
             bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        }
-    }
-
-    @Override
-    public void addSearchThisAreaButtonAction() {
-        binding.searchThisAreaButton.setOnClickListener(presenter.onSearchThisAreaClicked());
-    }
-
-    @Override
-    public void setSearchThisAreaButtonVisibility(final boolean isVisible) {
-        if (isVisible) {
-            binding.searchThisAreaButton.setVisibility(View.VISIBLE);
-        } else {
-            binding.searchThisAreaButton.setVisibility(View.GONE);
         }
     }
 
@@ -2014,13 +2006,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if (lastMapFocus != null) {
                 if (isNetworkConnectionEstablished()) {
                     if (distance > 2000.0) {
-                        setSearchThisAreaButtonVisibility(true);
+                        searchble = true;
                     } else {
-                        setSearchThisAreaButtonVisibility(false);
+                        searchble = false;
                     }
                 }
             } else {
-                setSearchThisAreaButtonVisibility(false);
+                searchble = false;
             }
         }
     }

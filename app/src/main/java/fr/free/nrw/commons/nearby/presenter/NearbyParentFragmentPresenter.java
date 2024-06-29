@@ -323,18 +323,12 @@ public class NearbyParentFragmentPresenter
         }
     }
 
-    public View.OnClickListener onSearchThisAreaClicked() {
-        return v -> {
-            nearbyParentFragmentView.stopQuery();
-            // Lock map operations during search this area operation
-//            nearbyParentFragmentView.setMapCenter();
-            nearbyParentFragmentView.setSearchThisAreaButtonVisibility(false);
-            if (searchCloseToCurrentLocation()) {
-                updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
-            } else {
-                updateMapAndList(SEARCH_CUSTOM_AREA);
-            }
-        };
+    public void searchInTheArea(){
+        if (searchCloseToCurrentLocation()) {
+            updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
+        } else {
+            updateMapAndList(SEARCH_CUSTOM_AREA);
+        }
     }
 
     /**
@@ -365,7 +359,6 @@ public class NearbyParentFragmentPresenter
 
     public void onMapReady() {
         if (null != nearbyParentFragmentView) {
-            nearbyParentFragmentView.addSearchThisAreaButtonAction();
             initializeMapOperations();
         }
     }
