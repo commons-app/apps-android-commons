@@ -30,7 +30,6 @@ import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
 import androidx.recyclerview.widget.RecyclerView.ItemAnimator;
 import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener;
 import androidx.recyclerview.widget.SimpleItemAnimator;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -43,14 +42,12 @@ import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
 import fr.free.nrw.commons.wikidata.model.WikiSite;
-import timber.log.Timber;
 
 
 /**
@@ -217,22 +214,15 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
         contributionsListPresenter.setup(userName,
             Objects.equals(sessionManager.getUserName(), userName));
-        contributionsListPresenter.getTotalContribution(userName);
-        contributionsListPresenter.totalContributionList.observe(getViewLifecycleOwner(), list -> {
-            uploadErrorCount = 0;
-            pendingUploadsCount = 0;
-            for (int i = 0; i< list.size(); i++){
-                if (list.get(i) != null){
-                    if (list.get(i).getState() != Contribution.STATE_COMPLETED){
-                        if (list.get(i).getState() == Contribution.STATE_FAILED){
-                            uploadErrorCount++;
-                        }else {
-                            pendingUploadsCount++;
-                        }
-                    }
-                }
-            }
-            callback.updateUploadsIcon(pendingUploadsCount, uploadErrorCount);
+        contributionsListPresenter.getPendingContributions(userName);
+        contributionsListPresenter.pendingContributionList.observe(getViewLifecycleOwner(), list -> {
+            pendingUploadsCount = list.size();
+            callback.updatePendingIcon(pendingUploadsCount);
+        });
+        contributionsListPresenter.getFailedContributions(userName);
+        contributionsListPresenter.failedContributionList.observe(getViewLifecycleOwner(), list -> {
+            uploadErrorCount = list.size();
+            callback.updateErrorIcon(uploadErrorCount);
         });
         contributionsListPresenter.contributionList.observe(getViewLifecycleOwner(), list -> {
             contributionsSize = list.size();
@@ -515,6 +505,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         // Notify the viewpager that number of items have changed.
         void viewPagerNotifyDataSetChanged();
 
-        void updateUploadsIcon(int pendingCount, int errorCount);
+        void updatePendingIcon(int pendingCount);
+
+        void updateErrorIcon(int errorCount);
     }
 }

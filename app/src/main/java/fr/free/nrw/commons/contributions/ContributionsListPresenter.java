@@ -26,7 +26,8 @@ public class ContributionsListPresenter implements UserActionListener {
     private final ContributionsRemoteDataSource contributionsRemoteDataSource;
 
     LiveData<PagedList<Contribution>> contributionList;
-    LiveData<PagedList<Contribution>> totalContributionList;
+    LiveData<PagedList<Contribution>> pendingContributionList;
+    LiveData<PagedList<Contribution>> failedContributionList;
 
     @Inject
     ContributionsListPresenter(
@@ -90,7 +91,7 @@ public class ContributionsListPresenter implements UserActionListener {
         contributionBoundaryCallback.dispose();
     }
 
-    void getTotalContribution(String userName) {
+    void getPendingContributions(String userName) {
         final PagedList.Config pagedListConfig =
             (new PagedList.Config.Builder())
                 .setPrefetchDistance(50)
@@ -99,13 +100,31 @@ public class ContributionsListPresenter implements UserActionListener {
         boolean shouldSetBoundaryCallback;
         contributionBoundaryCallback.setUserName(userName);
         shouldSetBoundaryCallback = true;
-        factory = repository.fetchContributions();
+        factory = repository.fetchInProgressContributions();
         LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
             pagedListConfig);
         if (shouldSetBoundaryCallback) {
             livePagedListBuilder.setBoundaryCallback(contributionBoundaryCallback);
         }
-        totalContributionList = livePagedListBuilder.build();
+        pendingContributionList = livePagedListBuilder.build();
+    }
+
+    void getFailedContributions(String userName) {
+        final PagedList.Config pagedListConfig =
+            (new PagedList.Config.Builder())
+                .setPrefetchDistance(50)
+                .setPageSize(10).build();
+        Factory<Integer, Contribution> factory;
+        boolean shouldSetBoundaryCallback;
+        contributionBoundaryCallback.setUserName(userName);
+        shouldSetBoundaryCallback = true;
+        factory = repository.fetchFailedContributions();
+        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
+            pagedListConfig);
+        if (shouldSetBoundaryCallback) {
+            livePagedListBuilder.setBoundaryCallback(contributionBoundaryCallback);
+        }
+        failedContributionList = livePagedListBuilder.build();
     }
 
 }

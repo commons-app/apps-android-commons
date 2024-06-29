@@ -71,6 +71,14 @@ class ContributionsLocalDataSource {
         return contributionDao.fetchContributionsWithStateCompleted();
     }
 
+    public Factory<Integer, Contribution> getInProgressContributions() {
+        return contributionDao.fetchContributionsWithStateInProgress();
+    }
+
+    public Factory<Integer, Contribution> getFailedContributions() {
+        return contributionDao.fetchContributionsWithStateFailed();
+    }
+
     public Single<List<Long>> saveContributions(final List<Contribution> contributions) {
         final List<Contribution> contributionList = new ArrayList<>();
         for(final Contribution contribution: contributions) {

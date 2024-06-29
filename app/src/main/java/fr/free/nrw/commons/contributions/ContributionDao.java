@@ -23,6 +23,11 @@ public abstract class ContributionDao {
     @Query("SELECT * FROM contribution WHERE state = -1 ORDER BY media_dateUploaded DESC")
     abstract DataSource.Factory<Integer, Contribution> fetchContributionsWithStateCompleted();
 
+    @Query("SELECT * FROM contribution WHERE state IN (2, 3, 4) ORDER BY media_dateUploaded DESC")
+    abstract DataSource.Factory<Integer, Contribution> fetchContributionsWithStateInProgress();
+
+    @Query("SELECT * FROM contribution WHERE state = 1 ORDER BY media_dateUploaded DESC")
+    abstract DataSource.Factory<Integer, Contribution> fetchContributionsWithStateFailed();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public abstract void saveSynchronous(Contribution contribution);

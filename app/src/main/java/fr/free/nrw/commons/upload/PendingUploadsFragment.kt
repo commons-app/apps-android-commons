@@ -131,18 +131,13 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
                     }
                 }
             }
-            if (failedUploads == 0){
-                uploadProgressActivity.setErrorIconsVisibility(false)
-            }else{
-                uploadProgressActivity.setErrorIconsVisibility(true)
-            }
-            if (contributionsList.size == 0) {
+            if (contributionsSize == 0) {
                 binding.nopendingTextView.visibility = View.VISIBLE
                 binding.pendingUplaodsLl.visibility = View.GONE
                 uploadProgressActivity.hidePendingIcons()
             } else {
                 if (totalUploads == 0){
-                    totalUploads = contributionsList.size
+                    totalUploads = contributionsSize
                     binding.progressBarPending.max = totalUploads
                 }
                 binding.nopendingTextView.visibility = View.GONE
@@ -167,9 +162,9 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
                 newContributionList.addAll(listOfRemoved)
                 val adapter = PendingUploadsAdapter(newContributionList, this)
                 binding.pendingUploadsRecyclerView.setAdapter(adapter)
-                binding.progressTextView.setText((totalUploads-contributionsList.size).toString() + "/" + totalUploads + " uploaded")
-                binding.progressBarPending.progress = totalUploads-contributionsList.size
-                if (pausedOrQueuedUploads == contributionsList.size) {
+                binding.progressTextView.setText((totalUploads-contributionsSize).toString() + "/" + totalUploads + " uploaded")
+                binding.progressBarPending.progress = totalUploads-contributionsSize
+                if (pausedOrQueuedUploads == contributionsSize) {
                     uploadProgressActivity.setPausedIcon(true)
                 }else{
                     uploadProgressActivity.setPausedIcon(false)

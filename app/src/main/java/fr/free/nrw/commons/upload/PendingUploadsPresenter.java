@@ -39,6 +39,7 @@ public class PendingUploadsPresenter implements UserActionListener {
     private final ContributionsRemoteDataSource contributionsRemoteDataSource;
 
     LiveData<PagedList<Contribution>> totalContributionList;
+    LiveData<PagedList<Contribution>> failedContributionList;
 
     @Inject
     PendingUploadsPresenter(
@@ -81,7 +82,7 @@ public class PendingUploadsPresenter implements UserActionListener {
         } else {
             contributionBoundaryCallback.setUserName(userName);
             shouldSetBoundaryCallback = true;
-            factory = repository.fetchContributions();
+            factory = repository.fetchInProgressContributions();
         }
 
         LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory, pagedListConfig);
@@ -90,6 +91,24 @@ public class PendingUploadsPresenter implements UserActionListener {
         }
 
         totalContributionList = livePagedListBuilder.build();
+    }
+
+    void getFailedContributions(String userName) {
+        final PagedList.Config pagedListConfig =
+            (new PagedList.Config.Builder())
+                .setPrefetchDistance(50)
+                .setPageSize(10).build();
+        Factory<Integer, Contribution> factory;
+        boolean shouldSetBoundaryCallback;
+        contributionBoundaryCallback.setUserName(userName);
+        shouldSetBoundaryCallback = true;
+        factory = repository.fetchFailedContributions();
+        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
+            pagedListConfig);
+        if (shouldSetBoundaryCallback) {
+            livePagedListBuilder.setBoundaryCallback(contributionBoundaryCallback);
+        }
+        failedContributionList = livePagedListBuilder.build();
     }
 
     @Override

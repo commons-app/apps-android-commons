@@ -87,25 +87,22 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(),PendingUploadsContr
 
     fun initRecyclerView() {
         binding.failedUploadsRecyclerView.setLayoutManager(LinearLayoutManager(this.context))
-        pendingUploadsPresenter!!.setup(
-            userName,
-            sessionManager!!.userName == userName
-        )
-        pendingUploadsPresenter!!.totalContributionList.observe(
+        pendingUploadsPresenter!!.getFailedContributions(userName)
+        pendingUploadsPresenter!!.failedContributionList.observe(
             viewLifecycleOwner
         ) { list: PagedList<Contribution?> ->
             contributionsList = ArrayList()
             list.forEach {
                 if (it != null) {
-                    if (it.state == Contribution.STATE_FAILED) {
-                        contributionsList.add(it)
-                    }
+                    contributionsList.add(it)
                 }
             }
-            if (contributionsList.size == 0) {
+            if (list.size == 0) {
+                uploadProgressActivity.setErrorIconsVisibility(false)
                 binding.nofailedTextView.visibility = View.VISIBLE
                 binding.failedUplaodsLl.visibility = View.GONE
             } else {
+                uploadProgressActivity.setErrorIconsVisibility(true)
                 binding.nofailedTextView.visibility = View.GONE
                 binding.failedUplaodsLl.visibility = View.VISIBLE
                 val adapter = FailedUploadsAdapter(contributionsList, this)

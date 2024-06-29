@@ -686,7 +686,7 @@ public class ContributionsFragment
     }
 
     @Override
-    public void updateUploadsIcon(int pendingCount, int errorCount) {
+    public void updatePendingIcon(int pendingCount) {
         if (pendingUploadsCountTextView != null){
             if (pendingCount != 0){
                 pendingUploadsCountTextView.setVisibility(View.VISIBLE);
@@ -694,14 +694,18 @@ public class ContributionsFragment
             }else {
                 pendingUploadsCountTextView.setVisibility(View.INVISIBLE);
             }
+        }
+    }
 
+    @Override
+    public void updateErrorIcon(int errorCount) {
+        if (uploadsErrorTextView != null){
             if (errorCount != 0){
                 uploadsErrorTextView.setVisibility(View.VISIBLE);
                 uploadsErrorTextView.setText(String.valueOf(errorCount));
             }else {
-                uploadsErrorTextView.setVisibility(View.GONE);
+                uploadsErrorTextView.setVisibility(View.INVISIBLE);
             }
-
         }
     }
 
