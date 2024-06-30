@@ -20,15 +20,6 @@ public abstract class ContributionDao {
     @Query("SELECT * FROM contribution order by media_dateUploaded DESC")
     abstract DataSource.Factory<Integer, Contribution> fetchContributions();
 
-    @Query("SELECT * FROM contribution WHERE state = -1 ORDER BY media_dateUploaded DESC")
-    abstract DataSource.Factory<Integer, Contribution> fetchContributionsWithStateCompleted();
-
-    @Query("SELECT * FROM contribution WHERE state IN (2, 3, 4) ORDER BY media_dateUploaded DESC")
-    abstract DataSource.Factory<Integer, Contribution> fetchContributionsWithStateInProgress();
-
-    @Query("SELECT * FROM contribution WHERE state = 1 ORDER BY media_dateUploaded DESC")
-    abstract DataSource.Factory<Integer, Contribution> fetchContributionsWithStateFailed();
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public abstract void saveSynchronous(Contribution contribution);
 
@@ -66,6 +57,9 @@ public abstract class ContributionDao {
 
     @Query("SELECT * from contribution WHERE state IN (:states) order by media_dateUploaded DESC")
     public abstract Single<List<Contribution>> getContribution(List<Integer> states);
+
+    @Query("SELECT * from contribution WHERE state IN (:states) order by media_dateUploaded DESC")
+    public abstract DataSource.Factory<Integer, Contribution> getContributions(List<Integer> states);
 
     @Query("SELECT COUNT(*) from contribution WHERE state in (:toUpdateStates)")
     public abstract Single<Integer> getPendingUploads(int[] toUpdateStates);

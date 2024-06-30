@@ -189,8 +189,6 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                 .blockingGet()
             //Showing initial notification for the number of uploads being processed
 
-            Timber.tag("PRINT").e("Queued Contributions: " + queuedContributions.size)
-
             processingUploads.setContentTitle(appContext.getString(R.string.starting_uploads))
             processingUploads.setContentText(
                 appContext.resources.getQuantityString(

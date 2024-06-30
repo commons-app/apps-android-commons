@@ -47,7 +47,6 @@ class PendingUploadsAdapter(items: List<Contribution>, callback: Callback) :
                 holder.itemImage.setImageRequest(imageRequest)
             }
         }
-        Timber.tag("PRINT").e(item.state.toString() + " " + item)
         if (item.state == Contribution.STATE_QUEUED || item.state == Contribution.STATE_PAUSED) {
             holder.errorTextView.setText("Queued")
             holder.errorTextView.visibility = View.VISIBLE

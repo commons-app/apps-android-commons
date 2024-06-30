@@ -15,16 +15,16 @@ import fr.free.nrw.commons.contributions.ContributionBoundaryCallback;
 import fr.free.nrw.commons.contributions.ContributionsRemoteDataSource;
 import fr.free.nrw.commons.contributions.ContributionsRepository;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
-import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.upload.PendingUploadsContract.UserActionListener;
 import fr.free.nrw.commons.upload.PendingUploadsContract.View;
 import fr.free.nrw.commons.upload.worker.WorkRequestHelper;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
-import timber.log.Timber;
 
 /**
  * The presenter class for Contributions
@@ -50,7 +50,7 @@ public class PendingUploadsPresenter implements UserActionListener {
         this.contributionBoundaryCallback = contributionBoundaryCallback;
         this.repository = repository;
         this.ioThreadScheduler = ioThreadScheduler;
-        this.contributionsRemoteDataSource=contributionsRemoteDataSource;
+        this.contributionsRemoteDataSource = contributionsRemoteDataSource;
         compositeDisposable = new CompositeDisposable();
     }
 
@@ -82,10 +82,13 @@ public class PendingUploadsPresenter implements UserActionListener {
         } else {
             contributionBoundaryCallback.setUserName(userName);
             shouldSetBoundaryCallback = true;
-            factory = repository.fetchInProgressContributions();
+            factory = repository.fetchContributionsWithStates(
+                Arrays.asList(Contribution.STATE_QUEUED, Contribution.STATE_IN_PROGRESS,
+                    Contribution.STATE_PAUSED));
         }
 
-        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory, pagedListConfig);
+        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
+            pagedListConfig);
         if (shouldSetBoundaryCallback) {
             livePagedListBuilder.setBoundaryCallback(contributionBoundaryCallback);
         }
@@ -102,7 +105,8 @@ public class PendingUploadsPresenter implements UserActionListener {
         boolean shouldSetBoundaryCallback;
         contributionBoundaryCallback.setUserName(userName);
         shouldSetBoundaryCallback = true;
-        factory = repository.fetchFailedContributions();
+        factory = repository.fetchContributionsWithStates(
+            Collections.singletonList(Contribution.STATE_FAILED));
         LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
             pagedListConfig);
         if (shouldSetBoundaryCallback) {
@@ -137,11 +141,11 @@ public class PendingUploadsPresenter implements UserActionListener {
             ));
     }
 
-    public void pauseUploads(List<Contribution> l, int index, Context context) {
-        if (index >= l.size()) {
+    public void pauseUploads(List<Contribution> contributionList, int index, Context context) {
+        if (index >= contributionList.size()) {
             return;
         }
-        Contribution it = l.get(index);
+        Contribution it = contributionList.get(index);
         CommonsApplication.pauseUploads.put(it.getPageId().toString(), true);
         //Retain the paused state in DB
         it.setState(Contribution.STATE_PAUSED);
@@ -149,26 +153,26 @@ public class PendingUploadsPresenter implements UserActionListener {
             .save(it)
             .subscribeOn(ioThreadScheduler)
             .doOnComplete(() -> {
-                    pauseUploads(l, index + 1, context);
+                    pauseUploads(contributionList, index + 1, context);
                 }
             )
-            .subscribe( () ->
+            .subscribe(() ->
                 WorkRequestHelper.Companion.makeOneTimeWorkRequest(
                     context, ExistingWorkPolicy.KEEP)
             ));
     }
 
-    public void deleteUploads(List<Contribution> l, int index, Context context) {
-        if (index >= l.size()) {
+    public void deleteUploads(List<Contribution> contributionList, int index, Context context) {
+        if (index >= contributionList.size()) {
             return;
         }
-        Contribution it = l.get(index);
+        Contribution it = contributionList.get(index);
         compositeDisposable.add(repository
             .deleteContributionFromDB(it)
             .subscribeOn(ioThreadScheduler)
             .doOnComplete(() -> {
                     CommonsApplication.cancelledUploads.add(it.getPageId());
-                    deleteUploads(l, index + 1, context);
+                    deleteUploads(contributionList, index + 1, context);
                 }
             )
             .subscribe(() ->
@@ -177,18 +181,18 @@ public class PendingUploadsPresenter implements UserActionListener {
             ));
     }
 
-    public void restartUploads(List<Contribution> l, int index, Context context) {
-        if (index >= l.size()) {
+    public void restartUploads(List<Contribution> contributionList, int index, Context context) {
+        if (index >= contributionList.size()) {
             return;
         }
-        Contribution it = l.get(index);
+        Contribution it = contributionList.get(index);
         it.setState(Contribution.STATE_QUEUED);
         compositeDisposable.add(repository
             .save(it)
             .subscribeOn(ioThreadScheduler)
             .doOnComplete(() -> {
-                CommonsApplication.pauseUploads.put(it.getPageId().toString(), false);
-                    restartUploads(l, index + 1, context);
+                    CommonsApplication.pauseUploads.put(it.getPageId().toString(), false);
+                    restartUploads(contributionList, index + 1, context);
                 }
             )
             .subscribe(() ->
@@ -197,11 +201,11 @@ public class PendingUploadsPresenter implements UserActionListener {
             ));
     }
 
-    public void restartUpload(List<Contribution> l, int index, Context context) {
-        if (index >= l.size()) {
+    public void restartUpload(List<Contribution> contributionList, int index, Context context) {
+        if (index >= contributionList.size()) {
             return;
         }
-        Contribution it = l.get(index);
+        Contribution it = contributionList.get(index);
         it.setState(Contribution.STATE_QUEUED);
         compositeDisposable.add(repository
             .save(it)

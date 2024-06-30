@@ -81,10 +81,19 @@ class UploadClient @Inject constructor(
                     if (CommonsApplication.cancelledUploads.contains(contribution.pageId)) {
                         compositeDisposable.clear()
                         return@forEach
-                    }else{
+                    } else {
                         processChunk(
-                            filename, contribution, notificationUpdater, chunkFile,
-                            failures, chunkInfo, index, errorMessage, mediaType!!, file!!, fileChunks.size
+                            filename,
+                            contribution,
+                            notificationUpdater,
+                            chunkFile,
+                            failures,
+                            chunkInfo,
+                            index,
+                            errorMessage,
+                            mediaType!!,
+                            file!!,
+                            fileChunks.size
                         )
                     }
                 }

@@ -49,16 +49,8 @@ public class ContributionsRepository {
         return localDataSource.getContributions();
     }
 
-    public Factory<Integer, Contribution> fetchCompletedContributions() {
-        return localDataSource.getCompletedContributions();
-    }
-
-    public Factory<Integer, Contribution> fetchInProgressContributions() {
-        return localDataSource.getInProgressContributions();
-    }
-
-    public Factory<Integer, Contribution> fetchFailedContributions() {
-        return localDataSource.getFailedContributions();
+    public Factory<Integer, Contribution> fetchContributionsWithStates(List<Integer> states) {
+        return localDataSource.getContributionsWithStates(states);
     }
 
     public Single<List<Long>> save(List<Contribution> contributions) {

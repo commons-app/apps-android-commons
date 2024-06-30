@@ -261,9 +261,7 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
      */
     fun retryUpload(contribution: Contribution) {
         if (NetworkUtils.isInternetConnectionEstablished(context)) {
-            if (contribution.state == Contribution.STATE_PAUSED
-                || contribution.state == Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE
-            ) {
+            if (contribution.state == Contribution.STATE_PAUSED) {
                 restartUpload(contribution)
             } else if (contribution.state == Contribution.STATE_FAILED) {
                 val retries = contribution.retries
