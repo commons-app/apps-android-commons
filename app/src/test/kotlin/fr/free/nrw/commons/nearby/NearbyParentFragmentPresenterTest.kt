@@ -206,21 +206,6 @@ class NearbyParentFragmentPresenterTest {
     }
 
     /**
-         * Test search this area button became visible after user moved the camera target to far
-     * away from current target. Distance between these two point is 111.19 km, so our camera target
-     * is at outside of previously searched region if we set latestSearchRadius below 111.19. Thus,
-     * setSearchThisAreaButtonVisibility(true) should be verified.
-     */
-    @Test @Ignore
-    fun testSearchThisAreaButtonVisibleWhenMoveToFarPosition() {
-        NearbyController.latestSearchLocation = Mockito.spy(LatLng(2.0, 1.0, 0.0F))
-        // Distance between these two point is 111.19 km
-        NearbyController.latestSearchRadius = 111.19 * 1000 // To meter
-        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
-        verify(nearbyParentFragmentView).setSearchThisAreaButtonVisibility(true)
-    }
-
-    /**
      * Multi selection should overwrite single selection of marker types. Ie. when user choose
      *"parks", then they multi select to display all or none, we overwrite previous "park" filter.
      *
