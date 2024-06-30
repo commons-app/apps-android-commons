@@ -86,6 +86,7 @@ import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter;
 import fr.free.nrw.commons.nearby.NearbyFilterState;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.nearby.PlacesRepository;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.fragments.AdvanceQueryFragment.Callback;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
@@ -99,7 +100,6 @@ import fr.free.nrw.commons.utils.NetworkUtils;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
-import fr.free.nrw.commons.wikidata.WikidataEditListener.WikidataP18EditListener;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -107,14 +107,12 @@ import io.reactivex.schedulers.Schedulers;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InterruptedIOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -159,6 +157,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     JsonKvStore applicationKvStore;
     @Inject
     BookmarkLocationsDao bookmarkLocationDao;
+    @Inject
+    PlacesRepository placesRepository;
     @Inject
     ContributionController controller;
     @Inject
@@ -1244,6 +1244,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         Place pl = updatedPlaceList.get(i);
                         if (pl.location == updatedPlace.location){
                             updatedPlaceList.set(i, updatedPlace);
+                            savePlaceToDB(place);
                         }
                     }
                     Drawable icon = ContextCompat.getDrawable(getContext(), getIconFor(updatedPlace, isBookMarked));
@@ -1381,13 +1382,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 if (stopQuery) {
                     return;
                 }
-                if (!p.isEmpty()) {
+                if (!p.isEmpty() && p != updatedPlaceList) {
                     synchronized (updatedPlaceList) {
                         updatedPlaceList.clear();
                         updatedPlaceList.addAll((Collection<? extends Place>) p);
                     }
-                    updateMapMarkers(new ArrayList<>(updatedPlaceList), curLatLng, false);
                 }
+                updateMapMarkers(new ArrayList<>(updatedPlaceList), curLatLng, false);
                 processBatchesSequentially(places, batchSize, updatedPlaceList, curLatLng, endIndex);
             }, throwable -> {
                 Timber.e(throwable);
@@ -1399,41 +1400,85 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private Observable<List<?>> processBatch(List<Place> batch, List<Place> placeList) {
-        return Observable.fromCallable(() -> nearbyController.getPlaces(batch))
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map(places -> {
-                if (stopQuery) {
-                    return Collections.emptyList();
-                }
-                if (places == null || places.isEmpty()) {
-                    showErrorMessage(getString(R.string.no_nearby_places_around));
-                    return Collections.emptyList();
-                } else {
-                    List<Place> updatedPlaceList = new ArrayList<>(placeList);
-                    for (Place place : places) {
-                        for (Place foundPlace : placeList) {
-                            if (place.siteLinks.getWikidataLink().equals(foundPlace.siteLinks.getWikidataLink())) {
-                                place.location = foundPlace.location;
-                                place.distance = foundPlace.distance;
-                                place.setMonument(foundPlace.isMonument());
-                                int index = updatedPlaceList.indexOf(foundPlace);
-                                if (index != -1) {
-                                    updatedPlaceList.set(index, place);
-                                }
+        List<Place> toBeProcessed = new ArrayList<>();
+
+        List<Observable<Place>> placeObservables = new ArrayList<>();
+
+        for (Place place : batch) {
+            Observable<Place> placeObservable = Observable
+                .fromCallable(() -> {
+                    Place fetchedPlace = placesRepository.fetchPlace(place.location);
+                    return fetchedPlace != null ? fetchedPlace : place;
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext(placeData -> {
+                    if (placeData.equals(place)) {
+                        toBeProcessed.add(place);
+                    } else {
+                        for (int i = 0; i < placeList.size(); i++) {
+                            Place pl = placeList.get(i);
+                            if (pl.location.equals(place.location)) {
+                                placeList.set(i, placeData);
                                 break;
                             }
                         }
                     }
-                    return updatedPlaceList;
+                });
+
+            placeObservables.add(placeObservable);
+        }
+
+        return Observable.zip(placeObservables, objects -> toBeProcessed)
+            .flatMap(processedList -> {
+                if (processedList.isEmpty()) {
+                    return Observable.just(placeList);
                 }
-            })
-            .onErrorReturn(throwable -> {
-                Timber.e(throwable);
-                showErrorMessage(getString(R.string.error_fetching_nearby_places) + " " + throwable.getLocalizedMessage());
-                setFilterState();
-                return Collections.emptyList();
+                return Observable.fromCallable(() -> nearbyController.getPlaces(processedList))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .map(places -> {
+                        if (stopQuery) {
+                            return Collections.emptyList();
+                        }
+                        if (places == null || places.isEmpty()) {
+                            return Collections.emptyList();
+                        } else {
+                            List<Place> updatedPlaceList = new ArrayList<>(placeList);
+                            for (Place place : places) {
+                                for (Place foundPlace : placeList) {
+                                    if (place.siteLinks.getWikidataLink()
+                                        .equals(foundPlace.siteLinks.getWikidataLink())) {
+                                        place.location = foundPlace.location;
+                                        place.distance = foundPlace.distance;
+                                        place.setMonument(foundPlace.isMonument());
+                                        int index = updatedPlaceList.indexOf(foundPlace);
+                                        if (index != -1) {
+                                            updatedPlaceList.set(index, place);
+                                            savePlaceToDB(place);
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                            return updatedPlaceList;
+                        }
+                    })
+                    .onErrorReturn(throwable -> {
+                        Timber.e(throwable);
+                        showErrorMessage(getString(R.string.error_fetching_nearby_places) + " "
+                            + throwable.getLocalizedMessage());
+                        setFilterState();
+                        return Collections.emptyList();
+                    });
             });
+    }
+
+    private void savePlaceToDB(Place place) {
+        compositeDisposable.add(placesRepository
+            .save(place)
+            .subscribeOn(Schedulers.io())
+            .subscribe());
     }
 
     @Override

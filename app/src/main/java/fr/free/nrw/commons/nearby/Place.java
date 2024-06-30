@@ -3,7 +3,10 @@ package fr.free.nrw.commons.nearby;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
 import fr.free.nrw.commons.utils.LocationUtils;
@@ -14,21 +17,23 @@ import timber.log.Timber;
 /**
  * A single geolocated Wikidata item
  */
+@Entity(tableName = "place")
 public class Place implements Parcelable {
 
-    public final String language;
-    public final String name;
-    private final Label label;
-    private final String longDescription;
+    public String language;
+    public String name;
+    private Label label;
+    private String longDescription;
+    @PrimaryKey @NonNull
     public LatLng location;
-    private final String category;
-    public final String pic;
+    private String category;
+    public String pic;
     // exists boolean will tell whether the place exists or not,
     // For a place to be existing both destroyed and endTime property should be null but it is also not necessary for a non-existing place to have both properties either one property is enough (in such case that not given property will be considered as null).
-    public final Boolean exists;
+    public Boolean exists;
 
     public String distance;
-    public final Sitelinks siteLinks;
+    public Sitelinks siteLinks;
     private boolean isMonument;
     private String thumb;
 
@@ -331,5 +336,17 @@ public class Place implements Parcelable {
 
     public void setThumb(String thumb) {
         this.thumb = thumb;
+    }
+
+    public void setLabel(Label label) {
+        this.label = label;
+    }
+
+    public void setLongDescription(String longDescription) {
+        this.longDescription = longDescription;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
