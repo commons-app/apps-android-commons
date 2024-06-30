@@ -24,6 +24,7 @@ import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.db.AppDatabase;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.nearby.PlaceDao;
 import fr.free.nrw.commons.review.ReviewDao;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadController;
@@ -273,6 +274,11 @@ public class CommonsApplicationModule {
     @Provides
     public ContributionDao providesContributionsDao(AppDatabase appDatabase) {
         return appDatabase.contributionDao();
+    }
+
+    @Provides
+    public PlaceDao providesPlaceDao(AppDatabase appDatabase) {
+        return appDatabase.PlaceDao();
     }
 
     /**

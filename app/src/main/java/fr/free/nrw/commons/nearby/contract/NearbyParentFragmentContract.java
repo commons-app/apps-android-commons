@@ -42,10 +42,6 @@ public interface NearbyParentFragmentContract {
 
         void hideBottomDetailsSheet();
 
-        void addSearchThisAreaButtonAction();
-
-        void setSearchThisAreaButtonVisibility(boolean isVisible);
-
         void setProgressBarVisibility(boolean isVisible);
 
         boolean isDetailsBottomSheetVisible();
@@ -76,8 +72,7 @@ public interface NearbyParentFragmentContract {
 
         void filterOutAllMarkers();
 
-        void filterMarkersByLabels(List<Label> selectedLabels, boolean existsSelected,
-            boolean needPhotoSelected, boolean wlmSelected, boolean filterForPlaceState,
+        void filterMarkersByLabels(List<Label> selectedLabels, boolean filterForPlaceState,
             boolean filterForAllNoneType);
 
         LatLng getCameraTarget();
@@ -97,6 +92,8 @@ public interface NearbyParentFragmentContract {
         boolean isAdvancedQueryFragmentVisible();
 
         void showHideAdvancedQueryFragment(boolean shouldShow);
+
+        void stopQuery();
     }
 
     interface NearbyListView {

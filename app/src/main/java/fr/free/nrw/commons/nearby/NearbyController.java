@@ -131,6 +131,17 @@ public class NearbyController extends MapController {
         );
     }
 
+    public List<Place> getPlaces(List<Place> placeList) throws Exception {
+        return nearbyPlaces.getPlaces(placeList, Locale.getDefault().getLanguage());
+    }
+
+    public Place getPlace(String entity) throws Exception {
+        return nearbyPlaces.getPlaceFromWikidataQuery(
+            entity,
+            Locale.getDefault().getLanguage()
+        );
+    }
+
     public static LatLng calculateNorthEast(double latitude, double longitude, double distance) {
         double lat1 = Math.toRadians(latitude);
         double deltaLat = distance * 0.008;
