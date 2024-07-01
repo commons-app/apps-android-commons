@@ -331,7 +331,7 @@ public class LocationPickerActivity extends BaseActivity implements
         moveMapToMediaLocation();
         modifyLocationButton.setOnClickListener(v -> onClickModifyLocation());
         removeLocationButton.setOnClickListener(v -> onClickRemoveLocation());
-        showInMapButton.setOnClickListener(v -> showInMap());
+        showInMapButton.setOnClickListener(v -> showInMapApp());
         darkThemeSetup();
     }
 
@@ -388,8 +388,9 @@ public class LocationPickerActivity extends BaseActivity implements
 
     /**
      * Show the location in map app. Map will center on EXIF location, if available.
+     * If there is no EXIF data, the map will center on the commons app map center.
      */
-    public void showInMap() {
+    private void showInMapApp() {
         //Check to see if EXIF location data is available
         if(cameraPosition != null){
             Utils.handleGeoCoordinates(this,
