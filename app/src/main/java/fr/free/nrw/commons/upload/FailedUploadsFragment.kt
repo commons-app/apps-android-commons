@@ -163,7 +163,6 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(),PendingUploadsContr
                     contribution,
                     this.requireContext().applicationContext
                 )
-                CommonsApplication.cancelledUploads.add(contribution!!.pageId)
             },
             {}
         )

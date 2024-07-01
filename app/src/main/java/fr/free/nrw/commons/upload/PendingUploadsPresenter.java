@@ -171,7 +171,6 @@ public class PendingUploadsPresenter implements UserActionListener {
             .deleteContributionFromDB(it)
             .subscribeOn(ioThreadScheduler)
             .doOnComplete(() -> {
-                    CommonsApplication.cancelledUploads.add(it.getPageId());
                     deleteUploads(contributionList, index + 1, context);
                 }
             )
