@@ -154,7 +154,7 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
                 val last = sortedContributionsList.last()
                 for (i in sortedContributionsList.indices) {
                     val current = sortedContributionsList[i]
-                    if (current.transferred == 0L && (current.dateModifiedInMillis() / 100) > (last.dateModifiedInMillis() / 100)){
+                    if (current.transferred == 0L && current.state != Contribution.STATE_QUEUED && (current.dateModifiedInMillis() / 100) > (last.dateModifiedInMillis() / 100)){
                         listOfRemoved.add(current)
                     }
                 }
@@ -189,7 +189,6 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
             {
                 ViewUtil.showShortToast(context, R.string.cancelling_upload)
                 pendingUploadsPresenter.deleteUpload(contribution, this.requireContext().applicationContext)
-                CommonsApplication.cancelledUploads.add(contribution!!.pageId)
                 resetProgressBar()
             },
             {}
