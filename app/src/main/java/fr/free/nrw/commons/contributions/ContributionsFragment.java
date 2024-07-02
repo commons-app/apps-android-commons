@@ -704,7 +704,7 @@ public class ContributionsFragment
                 uploadsErrorTextView.setVisibility(View.VISIBLE);
                 uploadsErrorTextView.setText(String.valueOf(errorCount));
             }else {
-                uploadsErrorTextView.setVisibility(View.INVISIBLE);
+                uploadsErrorTextView.setVisibility(View.GONE);
             }
         }
     }

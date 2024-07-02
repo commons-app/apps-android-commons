@@ -179,6 +179,7 @@ class UploadProgressActivity : BaseActivity() {
      */
     @SuppressLint("CheckResult")
     private fun retryAllFailedUploads() {
+        pendingUploadsFragment!!.resetProgressBar()
         contributionDao.getContribution(listOf(Contribution.STATE_FAILED))
             .subscribeOn(Schedulers.io())
             .subscribe { failedUploads: List<Contribution?> ->

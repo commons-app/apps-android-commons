@@ -399,22 +399,6 @@ public class MainActivity  extends BaseActivity
         }
     }
 
-    public void toggleLimitedConnectionMode() {
-        defaultKvStore.putBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED,
-            !defaultKvStore
-                .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false));
-        if (defaultKvStore
-            .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false)) {
-            viewUtilWrapper
-                .showShortToast(getBaseContext(), getString(R.string.limited_connection_enabled));
-        } else {
-            WorkRequestHelper.Companion.makeOneTimeWorkRequest(getApplicationContext(),
-                ExistingWorkPolicy.APPEND_OR_REPLACE);
-            viewUtilWrapper
-                .showShortToast(getBaseContext(), getString(R.string.limited_connection_disabled));
-        }
-    }
-
     public void centerMapToPlace(Place place) {
         setSelectedItemId(NavTab.NEARBY.code());
         nearbyParentFragment.setNearbyParentFragmentInstanceReadyCallback(new NearbyParentFragmentInstanceReadyCallback() {
