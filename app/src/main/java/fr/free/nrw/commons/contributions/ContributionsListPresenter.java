@@ -10,6 +10,8 @@ import fr.free.nrw.commons.contributions.ContributionsListContract.UserActionLis
 import fr.free.nrw.commons.di.CommonsApplicationModule;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
+import java.util.Arrays;
+import java.util.Collections;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -26,6 +28,8 @@ public class ContributionsListPresenter implements UserActionListener {
     private final ContributionsRemoteDataSource contributionsRemoteDataSource;
 
     LiveData<PagedList<Contribution>> contributionList;
+    LiveData<PagedList<Contribution>> pendingContributionList;
+    LiveData<PagedList<Contribution>> failedContributionList;
 
     @Inject
     ContributionsListPresenter(
@@ -36,7 +40,7 @@ public class ContributionsListPresenter implements UserActionListener {
         this.contributionBoundaryCallback = contributionBoundaryCallback;
         this.repository = repository;
         this.ioThreadScheduler = ioThreadScheduler;
-        this.contributionsRemoteDataSource=contributionsRemoteDataSource;
+        this.contributionsRemoteDataSource = contributionsRemoteDataSource;
         compositeDisposable = new CompositeDisposable();
     }
 
@@ -71,10 +75,12 @@ public class ContributionsListPresenter implements UserActionListener {
         } else {
             contributionBoundaryCallback.setUserName(userName);
             shouldSetBoundaryCallback = true;
-            factory = repository.fetchContributions();
+            factory = repository.fetchContributionsWithStates(
+                Collections.singletonList(Contribution.STATE_COMPLETED));
         }
 
-        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory, pagedListConfig);
+        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
+            pagedListConfig);
         if (shouldSetBoundaryCallback) {
             livePagedListBuilder.setBoundaryCallback(contributionBoundaryCallback);
         }
@@ -89,15 +95,45 @@ public class ContributionsListPresenter implements UserActionListener {
         contributionBoundaryCallback.dispose();
     }
 
-    /**
-     * Delete a failed contribution from the local db
-     */
-    @Override
-    public void deleteUpload(final Contribution contribution) {
-        compositeDisposable.add(repository
-            .deleteContributionFromDB(contribution)
-            .subscribeOn(ioThreadScheduler)
-            .subscribe());
+    void getPendingContributions(String userName) {
+        final PagedList.Config pagedListConfig =
+            (new PagedList.Config.Builder())
+                .setPrefetchDistance(50)
+                .setPageSize(10).build();
+        Factory<Integer, Contribution> factory;
+        boolean shouldSetBoundaryCallback;
+        contributionBoundaryCallback.setUserName(userName);
+        shouldSetBoundaryCallback = true;
+
+        factory = repository.fetchContributionsWithStates(
+            Arrays.asList(Contribution.STATE_IN_PROGRESS, Contribution.STATE_QUEUED,
+                Contribution.STATE_PAUSED));
+
+        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
+            pagedListConfig);
+        if (shouldSetBoundaryCallback) {
+            livePagedListBuilder.setBoundaryCallback(contributionBoundaryCallback);
+        }
+        pendingContributionList = livePagedListBuilder.build();
+    }
+
+    void getFailedContributions(String userName) {
+        final PagedList.Config pagedListConfig =
+            (new PagedList.Config.Builder())
+                .setPrefetchDistance(50)
+                .setPageSize(10).build();
+        Factory<Integer, Contribution> factory;
+        boolean shouldSetBoundaryCallback;
+        contributionBoundaryCallback.setUserName(userName);
+        shouldSetBoundaryCallback = true;
+        factory = repository.fetchContributionsWithStates(
+            Collections.singletonList(Contribution.STATE_FAILED));
+        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
+            pagedListConfig);
+        if (shouldSetBoundaryCallback) {
+            livePagedListBuilder.setBoundaryCallback(contributionBoundaryCallback);
+        }
+        failedContributionList = livePagedListBuilder.build();
     }
 
 }

@@ -18,36 +18,6 @@
       android:layout_marginTop="@dimen/miniscule_margin"
       android:layout_margin="@dimen/very_tiny_gap"/>
 
-  <LinearLayout
-    android:id="@+id/limited_connection_enabled_layout"
-    android:animateLayoutChanges="true"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/miniscule_margin"
-    android:padding="@dimen/standard_gap"
-    android:orientation="vertical"
-    android:clickable="true"
-    android:focusable="true"
-    android:background="@color/wikimedia_green">
-    <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:drawablePadding="5dp"
-      android:textColor="@android:color/white"
-      android:layout_marginBottom="@dimen/tiny_gap"
-      android:textSize="@dimen/subheading_text_size"
-      android:text="@string/limited_connection_is_on"
-      app:drawableTint="@color/white"
-      app:drawableStartCompat="@drawable/ic_baseline_cloud_off_24"/>
-    <TextView
-      android:id="@+id/limited_connection_description_text_view"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:textColor="@android:color/white"
-      android:textSize="@dimen/description_text_size"
-      android:text="@string/limited_connection_explanation"/>
-  </LinearLayout>
-
   <FrameLayout
     android:id="@+id/explore_container"
     android:layout_width="match_parent"

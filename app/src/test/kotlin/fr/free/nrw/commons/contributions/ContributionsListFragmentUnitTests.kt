@@ -139,20 +139,6 @@ class ContributionsListFragmentUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testResumeUpload() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.resumeUpload(contribution)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testPauseUpload() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.pauseUpload(contribution)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testAddImageToWikipedia() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.addImageToWikipedia(contribution)
@@ -163,20 +149,6 @@ class ContributionsListFragmentUnitTests {
     fun testOpenMediaDetail() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         fragment.openMediaDetail(0, true)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testDeleteUpload() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.deleteUpload(contribution)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testRetryUpload() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        fragment.retryUpload(contribution)
     }
 
     @Test

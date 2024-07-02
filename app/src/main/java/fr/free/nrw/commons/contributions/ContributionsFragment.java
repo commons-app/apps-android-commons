@@ -12,6 +12,7 @@ import android.Manifest;
 import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -25,6 +26,7 @@ import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +46,7 @@ import fr.free.nrw.commons.notification.models.Notification;
 import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.upload.UploadProgressActivity;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -111,7 +114,6 @@ public class ContributionsFragment
     private static final String CONTRIBUTION_LIST_FRAGMENT_TAG = "ContributionListFragmentTag";
     private MediaDetailPagerFragment mediaDetailPagerFragment;
     static final String MEDIA_DETAIL_PAGER_FRAGMENT_TAG = "MediaDetailFragmentTag";
-    private static final int MAX_RETRIES = 10;
 
 
     public FragmentContributionsBinding binding;
@@ -128,6 +130,10 @@ public class ContributionsFragment
     private CheckBox checkBox;
 
     public TextView notificationCount;
+
+    public TextView pendingUploadsCountTextView;
+
+    public TextView uploadsErrorTextView;
 
     private Campaign wlmCampaign;
 
@@ -212,9 +218,7 @@ public class ContributionsFragment
         }
 
         initFragments();
-        if(isUserProfile) {
-            binding.limitedConnectionEnabledLayout.setVisibility(View.GONE);
-        }else {
+        if(!isUserProfile) {
             upDateUploadCount();
         }
         if (shouldShowMediaDetailsFragment) {
@@ -230,7 +234,6 @@ public class ContributionsFragment
             && sessionManager.getCurrentAccount() != null && !isUserProfile) {
             setUploadCount();
         }
-        binding.limitedConnectionEnabledLayout.setOnClickListener(toggleDescriptionListener);
         setHasOptionsMenu(true);
         return binding.getRoot();
     }
@@ -258,10 +261,29 @@ public class ContributionsFragment
         MenuItem notificationsMenuItem = menu.findItem(R.id.notifications);
         final View notification = notificationsMenuItem.getActionView();
         notificationCount = notification.findViewById(R.id.notification_count_badge);
+        MenuItem uploadMenuItem = menu.findItem(R.id.upload_tab);
+        final View uploadMenuItemActionView = uploadMenuItem.getActionView();
+        pendingUploadsCountTextView = uploadMenuItemActionView.findViewById(R.id.pending_uploads_count_badge);
+        uploadsErrorTextView = uploadMenuItemActionView.findViewById(R.id.uploads_error_count_badge);
+        final ImageView pendingUploadsImageView = uploadMenuItemActionView.findViewById(R.id.pending_uploads_image_view);
+        if (pendingUploadsImageView != null){
+            pendingUploadsImageView.setOnClickListener(view -> {
+                startActivity(new Intent(getContext(), UploadProgressActivity.class));
+            });
+        }
+        if (pendingUploadsCountTextView != null) {
+            pendingUploadsCountTextView.setOnClickListener(view -> {
+                startActivity(new Intent(getContext(), UploadProgressActivity.class));
+            });
+        }
+        if (uploadsErrorTextView != null) {
+            uploadsErrorTextView.setOnClickListener(view -> {
+                startActivity(new Intent(getContext(), UploadProgressActivity.class));
+            });
+        }
         notification.setOnClickListener(view -> {
             NotificationActivity.startYourself(getContext(), "unread");
         });
-        updateLimitedConnectionToggle(menu);
     }
 
     @SuppressLint("CheckResult")
@@ -287,29 +309,6 @@ public class ContributionsFragment
             notificationCount.setVisibility(View.VISIBLE);
             notificationCount.setText(String.valueOf(notificationList.size()));
         }
-    }
-
-    public void updateLimitedConnectionToggle(Menu menu) {
-        MenuItem checkable = menu.findItem(R.id.toggle_limited_connection_mode);
-        boolean isEnabled = store
-            .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
-
-        checkable.setChecked(isEnabled);
-        if (binding!=null) {
-            binding.limitedConnectionEnabledLayout.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
-        }
-
-        checkable.setIcon((isEnabled) ? R.drawable.ic_baseline_cloud_off_24:R.drawable.ic_baseline_cloud_queue_24);
-        checkable.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                ((MainActivity) getActivity()).toggleLimitedConnectionMode();
-                boolean isEnabled = store.getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false);
-                binding.limitedConnectionEnabledLayout.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
-                checkable.setIcon((isEnabled) ? R.drawable.ic_baseline_cloud_off_24:R.drawable.ic_baseline_cloud_queue_24);
-                return false;
-            }
-        });
     }
 
     @Override
@@ -677,73 +676,36 @@ public class ContributionsFragment
     }
 
     /**
-     * Restarts the upload process for a contribution
-     *
-     * @param contribution
-     */
-    public void restartUpload(Contribution contribution) {
-        contribution.setState(Contribution.STATE_QUEUED);
-        contributionsPresenter.saveContribution(contribution);
-        Timber.d("Restarting for %s", contribution.toString());
-    }
-
-    /**
-     * Retry upload when it is failed
-     *
-     * @param contribution contribution to be retried
-     */
-    @Override
-    public void retryUpload(Contribution contribution) {
-        if (NetworkUtils.isInternetConnectionEstablished(getContext())) {
-            if (contribution.getState() == STATE_PAUSED
-                || contribution.getState() == Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE) {
-                restartUpload(contribution);
-            } else if (contribution.getState() == STATE_FAILED) {
-                int retries = contribution.getRetries();
-                // TODO: Improve UX. Additional details: https://github.com/commons-app/apps-android-commons/pull/5257#discussion_r1304662562
-                /* Limit the number of retries for a failed upload
-                   to handle cases like invalid filename as such uploads
-                   will never be successful */
-                if (retries < MAX_RETRIES) {
-                    contribution.setRetries(retries + 1);
-                    Timber.d("Retried uploading %s %d times", contribution.getMedia().getFilename(),
-                        retries + 1);
-                    restartUpload(contribution);
-                } else {
-                    // TODO: Show the exact reason for failure
-                    Toast.makeText(getContext(),
-                        R.string.retry_limit_reached, Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Timber.d("Skipping re-upload for non-failed %s", contribution.toString());
-            }
-        } else {
-            ViewUtil.showLongToast(getContext(), R.string.this_function_needs_network_connection);
-        }
-
-    }
-
-    /**
-     * Pauses the upload
-     *
-     * @param contribution
-     */
-    @Override
-    public void pauseUpload(Contribution contribution) {
-        //Pause the upload in the global singleton
-        CommonsApplication.pauseUploads.put(contribution.getPageId(), true);
-        //Retain the paused state in DB
-        contribution.setState(STATE_PAUSED);
-        contributionsPresenter.saveContribution(contribution);
-    }
-
-    /**
      * Notify the viewpager that number of items have changed.
      */
     @Override
     public void viewPagerNotifyDataSetChanged() {
         if (mediaDetailPagerFragment != null) {
             mediaDetailPagerFragment.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void updatePendingIcon(int pendingCount) {
+        if (pendingUploadsCountTextView != null){
+            if (pendingCount != 0){
+                pendingUploadsCountTextView.setVisibility(View.VISIBLE);
+                pendingUploadsCountTextView.setText(String.valueOf(pendingCount));
+            }else {
+                pendingUploadsCountTextView.setVisibility(View.INVISIBLE);
+            }
+        }
+    }
+
+    @Override
+    public void updateErrorIcon(int errorCount) {
+        if (uploadsErrorTextView != null){
+            if (errorCount != 0){
+                uploadsErrorTextView.setVisibility(View.VISIBLE);
+                uploadsErrorTextView.setText(String.valueOf(errorCount));
+            }else {
+                uploadsErrorTextView.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -843,21 +805,6 @@ public class ContributionsFragment
             showMediaDetailPagerFragment();
         }
     }
-
-    // click listener to toggle description that means uses can press the limited connection
-    // banner and description will hide. Tap again to show description.
-    private View.OnClickListener toggleDescriptionListener = new View.OnClickListener() {
-
-        @Override
-        public void onClick(View view) {
-            View view2 = binding.limitedConnectionDescriptionTextView;
-            if (view2.getVisibility() == View.GONE) {
-                view2.setVisibility(View.VISIBLE);
-            } else {
-                view2.setVisibility(View.GONE);
-            }
-        }
-    };
 
     /**
      * When the device rotates, rotate the Nearby banner's compass arrow in tandem.

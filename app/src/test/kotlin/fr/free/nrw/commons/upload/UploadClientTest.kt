@@ -11,7 +11,9 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.CommonsApplication.DEFAULT_EDIT_SUMMARY
+import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.contributions.ChunkInfo
 import fr.free.nrw.commons.contributions.Contribution
@@ -162,11 +164,9 @@ class UploadClientTest {
         whenever(contribution.fileKey).thenReturn(filekey)
         whenever(fileUtilsWrapper.getMimeType(anyOrNull<File>())).thenReturn("image/png")
         whenever(fileUtilsWrapper.getFileChunks(anyOrNull<File>(), eq(expectedChunkSize))).thenReturn(emptyList())
-
         val result = uploadClient.uploadFileToStash(filename, contribution, mock()).test()
-
         result.assertNoErrors()
-        verify(contribution, times(1)).unpause()
+        verify(contribution, times(1))
     }
 
     @Test

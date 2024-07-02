@@ -67,6 +67,10 @@ class ContributionsLocalDataSource {
         return contributionDao.fetchContributions();
     }
 
+    public Factory<Integer, Contribution> getContributionsWithStates(List<Integer> states) {
+        return contributionDao.getContributions(states);
+    }
+
     public Single<List<Long>> saveContributions(final List<Contribution> contributions) {
         final List<Contribution> contributionList = new ArrayList<>();
         for(final Contribution contribution: contributions) {

@@ -205,7 +205,6 @@ class ContributionsFragmentUnitTests {
         `when`(menu.findItem(anyInt())).thenReturn(menuItem)
         `when`(menuItem.actionView).thenReturn(notification)
         `when`(store.getBoolean(anyString(), anyBoolean())).thenReturn(true)
-        fragment.updateLimitedConnectionToggle(menu)
     }
 
     @Test

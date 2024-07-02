@@ -47,30 +47,4 @@ public class ContributionsPresenter implements UserActionListener {
         return repository.getContributionWithFileName(title);
     }
 
-    /**
-     * Delete a failed contribution from the local db
-     * @param contribution
-     */
-    @Override
-    public void deleteUpload(Contribution contribution) {
-        compositeDisposable.add(repository
-            .deleteContributionFromDB(contribution)
-            .subscribeOn(ioThreadScheduler)
-            .subscribe());
-    }
-
-    /**
-     * Update the contribution's state in the databse, upon completion, trigger the workmanager to
-     * process this contribution
-     *
-     * @param contribution
-     */
-    @Override
-    public void saveContribution(Contribution contribution) {
-        compositeDisposable.add(repository
-            .save(contribution)
-            .subscribeOn(ioThreadScheduler)
-            .subscribe(() -> WorkRequestHelper.Companion.makeOneTimeWorkRequest(
-                view.getContext().getApplicationContext(), ExistingWorkPolicy.KEEP)));
-    }
 }

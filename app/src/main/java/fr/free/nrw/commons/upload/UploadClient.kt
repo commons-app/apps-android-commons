@@ -58,8 +58,6 @@ class UploadClient @Inject constructor(
             )
         }
 
-        contribution.unpause()
-
         val file = contribution.localUriPath
         val fileChunks = fileUtilsWrapper.getFileChunks(file, CHUNK_SIZE)
         val mediaType = fileUtilsWrapper.getMimeType(file).toMediaTypeOrNull()
@@ -80,15 +78,32 @@ class UploadClient @Inject constructor(
         compositeDisposable.add(
             Observable.fromIterable(fileChunks).forEach { chunkFile: File ->
                 if (canProcess(contribution, failures)) {
-                    processChunk(
-                        filename, contribution, notificationUpdater, chunkFile,
-                        failures, chunkInfo, index, errorMessage, mediaType!!, file!!, fileChunks.size
-                    )
+                    if (CommonsApplication.cancelledUploads.contains(contribution.pageId)) {
+                        compositeDisposable.clear()
+                        return@forEach
+                    } else {
+                        processChunk(
+                            filename,
+                            contribution,
+                            notificationUpdater,
+                            chunkFile,
+                            failures,
+                            chunkInfo,
+                            index,
+                            errorMessage,
+                            mediaType!!,
+                            file!!,
+                            fileChunks.size
+                        )
+                    }
                 }
             }
         )
 
         return when {
+            CommonsApplication.cancelledUploads.contains(contribution.pageId) -> {
+                return Observable.just(StashUploadResult(StashUploadState.CANCELLED, null, "Upload cancelled"))
+            }
             contribution.isPaused() -> {
                 Timber.d("Upload stash paused %s", contribution.pageId)
                 Observable.just(StashUploadResult(StashUploadState.PAUSED, null, null))

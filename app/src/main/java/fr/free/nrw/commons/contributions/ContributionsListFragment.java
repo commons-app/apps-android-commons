@@ -19,7 +19,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
@@ -30,11 +30,11 @@ import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
 import androidx.recyclerview.widget.RecyclerView.ItemAnimator;
 import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener;
 import androidx.recyclerview.widget.SimpleItemAnimator;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.contributions.ContributionsListAdapter.Callback;
 import fr.free.nrw.commons.databinding.FragmentContributionsListBinding;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.media.MediaClient;
@@ -42,7 +42,6 @@ import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import javax.inject.Inject;
@@ -56,7 +55,7 @@ import fr.free.nrw.commons.wikidata.model.WikiSite;
  */
 
 public class ContributionsListFragment extends CommonsDaggerSupportFragment implements
-    ContributionsListContract.View, ContributionsListAdapter.Callback,
+    ContributionsListContract.View, Callback,
     WikipediaInstructionsDialogFragment.Callback {
 
     private static final String RV_STATE = "rv_scroll_state";
@@ -81,7 +80,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     private Animation rotate_forward;
     private Animation rotate_backward;
     private boolean isFabOpen;
-
+    public int pendingUploadsCount = 0;
+    public int uploadErrorCount = 0;
     @VisibleForTesting
     protected RecyclerView rvContributionsList;
 
@@ -99,7 +99,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     private String userName;
 
     private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(
-        new ActivityResultContracts.RequestMultiplePermissions(),
+        new RequestMultiplePermissions(),
         new ActivityResultCallback<Map<String, Boolean>>() {
             @Override
             public void onActivityResult(Map<String, Boolean> result) {
@@ -214,6 +214,16 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
         contributionsListPresenter.setup(userName,
             Objects.equals(sessionManager.getUserName(), userName));
+        contributionsListPresenter.getPendingContributions(userName);
+        contributionsListPresenter.pendingContributionList.observe(getViewLifecycleOwner(), list -> {
+            pendingUploadsCount = list.size();
+            callback.updatePendingIcon(pendingUploadsCount);
+        });
+        contributionsListPresenter.getFailedContributions(userName);
+        contributionsListPresenter.failedContributionList.observe(getViewLifecycleOwner(), list -> {
+            uploadErrorCount = list.size();
+            callback.updateErrorIcon(uploadErrorCount);
+        });
         contributionsListPresenter.contributionList.observe(getViewLifecycleOwner(), list -> {
             contributionsSize = list.size();
             adapter.submitList(list);
@@ -416,30 +426,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     }
 
     @Override
-    public void retryUpload(final Contribution contribution) {
-        if (null != callback) {//Just being safe, ideally they won't be called when detached
-            callback.retryUpload(contribution);
-        }
-    }
-
-    @Override
-    public void deleteUpload(final Contribution contribution) {
-        DialogUtil.showAlertDialog(getActivity(),
-            String.format(Locale.getDefault(),
-                getString(R.string.cancelling_upload)),
-            String.format(Locale.getDefault(),
-                getString(R.string.cancel_upload_dialog)),
-            String.format(Locale.getDefault(), getString(R.string.yes)), String.format(Locale.getDefault(), getString(R.string.no)),
-            () -> {
-                ViewUtil.showShortToast(getContext(), R.string.cancelling_upload);
-                contributionsListPresenter.deleteUpload(contribution);
-                CommonsApplication.cancelledUploads.add(contribution.getPageId());
-            }, () -> {
-                // Do nothing
-            });
-    }
-
-    @Override
     public void openMediaDetail(final int position, boolean isWikipediaButtonDisplayed) {
         if (null != callback) {//Just being safe, ideally they won't be called when detached
             callback.showDetail(position, isWikipediaButtonDisplayed);
@@ -461,28 +447,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
             }, () -> {
                 // do nothing
             });
-    }
-
-    /**
-     * Pauses the current upload
-     *
-     * @param contribution
-     */
-    @Override
-    public void pauseUpload(Contribution contribution) {
-        ViewUtil.showShortToast(getContext(), R.string.pausing_upload);
-        callback.pauseUpload(contribution);
-    }
-
-    /**
-     * Resumes the current upload
-     *
-     * @param contribution
-     */
-    @Override
-    public void resumeUpload(Contribution contribution) {
-        ViewUtil.showShortToast(getContext(), R.string.resuming_upload);
-        callback.retryUpload(contribution);
     }
 
     /**
@@ -536,13 +500,13 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
         void notifyDataSetChanged();
 
-        void retryUpload(Contribution contribution);
-
         void showDetail(int position, boolean isWikipediaButtonDisplayed);
-
-        void pauseUpload(Contribution contribution);
 
         // Notify the viewpager that number of items have changed.
         void viewPagerNotifyDataSetChanged();
+
+        void updatePendingIcon(int pendingCount);
+
+        void updateErrorIcon(int errorCount);
     }
 }

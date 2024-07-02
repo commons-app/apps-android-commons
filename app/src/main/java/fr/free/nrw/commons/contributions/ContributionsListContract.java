@@ -17,7 +17,5 @@ public class ContributionsListContract {
     }
 
     public interface UserActionListener extends BasePresenter<View> {
-
-        void deleteUpload(Contribution contribution);
     }
 }

@@ -41,6 +41,8 @@ import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.quiz.QuizChecker;
 import fr.free.nrw.commons.settings.SettingsFragment;
 import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.upload.UploadActivity;
+import fr.free.nrw.commons.upload.UploadProgressActivity;
 import fr.free.nrw.commons.upload.worker.WorkRequestHelper;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
@@ -385,43 +387,15 @@ public class MainActivity  extends BaseActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.upload_tab:
+                startActivity(new Intent(this, UploadProgressActivity.class));
+                return true;
             case R.id.notifications:
                 // Starts notification activity on click to notification icon
                 NotificationActivity.startYourself(this, "unread");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-        }
-    }
-
-    /**
-     * Retry all failed uploads as soon as the user returns to the app
-     */
-    @SuppressLint("CheckResult")
-    private void retryAllFailedUploads() {
-        contributionDao.
-            getContribution(Collections.singletonList(Contribution.STATE_FAILED))
-            .subscribeOn(Schedulers.io())
-            .subscribe(failedUploads -> {
-                for (Contribution contribution: failedUploads) {
-                    contributionsFragment.retryUpload(contribution);
-                }
-            });
-    }
-
-    public void toggleLimitedConnectionMode() {
-        defaultKvStore.putBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED,
-            !defaultKvStore
-                .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false));
-        if (defaultKvStore
-            .getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED, false)) {
-            viewUtilWrapper
-                .showShortToast(getBaseContext(), getString(R.string.limited_connection_enabled));
-        } else {
-            WorkRequestHelper.Companion.makeOneTimeWorkRequest(getApplicationContext(),
-                ExistingWorkPolicy.APPEND_OR_REPLACE);
-            viewUtilWrapper
-                .showShortToast(getBaseContext(), getString(R.string.limited_connection_disabled));
         }
     }
 
@@ -451,8 +425,6 @@ public class MainActivity  extends BaseActivity
             defaultKvStore.putBoolean("inAppCameraFirstRun", true);
             WelcomeActivity.startYourself(this);
         }
-
-        retryAllFailedUploads();
     }
 
     @Override

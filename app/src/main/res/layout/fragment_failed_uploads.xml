@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:gravity="center"
+  android:orientation="vertical"
+  tools:context=".upload.FailedUploadsFragment">
+
+  <TextView
+    android:id="@+id/nofailedTextView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:text="You do not have any failed Uploads!" />
+
+  <LinearLayout
+    android:id="@+id/failedUplaodsLl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="10dp"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/failed_uploads_recycler_view"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginHorizontal="10dp" />
+  </LinearLayout>
+
+</LinearLayout>
+

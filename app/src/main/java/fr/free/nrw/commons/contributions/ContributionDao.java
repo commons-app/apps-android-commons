@@ -58,6 +58,9 @@ public abstract class ContributionDao {
     @Query("SELECT * from contribution WHERE state IN (:states) order by media_dateUploaded DESC")
     public abstract Single<List<Contribution>> getContribution(List<Integer> states);
 
+    @Query("SELECT * from contribution WHERE state IN (:states) order by media_dateUploaded DESC")
+    public abstract DataSource.Factory<Integer, Contribution> getContributions(List<Integer> states);
+
     @Query("SELECT COUNT(*) from contribution WHERE state in (:toUpdateStates)")
     public abstract Single<Integer> getPendingUploads(int[] toUpdateStates);
 

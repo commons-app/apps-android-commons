@@ -19,8 +19,5 @@ public class ContributionsContract {
 
         Contribution getContributionsWithTitle(String uri);
 
-        void deleteUpload(Contribution contribution);
-
-        void saveContribution(Contribution contribution);
     }
 }
