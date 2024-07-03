@@ -384,6 +384,21 @@ public class MainActivity  extends BaseActivity
         //initBackButton();
     }
 
+    /**
+     * Retry all failed uploads as soon as the user returns to the app
+     */
+    @SuppressLint("CheckResult")
+    private void retryAllFailedUploads() {
+        contributionDao.
+            getContribution(Collections.singletonList(Contribution.STATE_FAILED))
+            .subscribeOn(Schedulers.io())
+            .subscribe(failedUploads -> {
+                for (Contribution contribution: failedUploads) {
+                    contributionsFragment.retryUpload(contribution);
+                }
+            });
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -425,6 +440,8 @@ public class MainActivity  extends BaseActivity
             defaultKvStore.putBoolean("inAppCameraFirstRun", true);
             WelcomeActivity.startYourself(this);
         }
+
+        retryAllFailedUploads();
     }
 
     @Override

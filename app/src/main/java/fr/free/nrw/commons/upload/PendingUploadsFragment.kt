@@ -38,7 +38,6 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
     private var param2: String? = null
     private val ARG_PARAM1 = "param1"
     private val ARG_PARAM2 = "param2"
-    private val MAX_RETRIES = 10
 
     @Inject
     lateinit var pendingUploadsPresenter: PendingUploadsPresenter
@@ -154,7 +153,7 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
                 val last = sortedContributionsList.last()
                 for (i in sortedContributionsList.indices) {
                     val current = sortedContributionsList[i]
-                    if (current.transferred == 0L && current.state != Contribution.STATE_QUEUED && (current.dateModifiedInMillis() / 100) > (last.dateModifiedInMillis() / 100)){
+                    if (current.transferred == 0L && (current.dateModifiedInMillis() / 100) > (last.dateModifiedInMillis() / 100)){
                         listOfRemoved.add(current)
                     }
                 }
@@ -239,54 +238,6 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
                 },
                 {}
             )
-        }
-    }
-
-    /**
-     * Restarts the upload process for a contribution
-     *
-     * @param contribution
-     */
-    fun restartUpload(contribution: Contribution) {
-        contribution.state = Contribution.STATE_QUEUED
-        pendingUploadsPresenter.saveContribution(contribution, this.requireContext().applicationContext)
-        Timber.d("Restarting for %s", contribution.toString())
-    }
-
-    /**
-     * Retry upload when it is failed
-     *
-     * @param contribution contribution to be retried
-     */
-    fun retryUpload(contribution: Contribution) {
-        if (NetworkUtils.isInternetConnectionEstablished(context)) {
-            if (contribution.state == Contribution.STATE_PAUSED) {
-                restartUpload(contribution)
-            } else if (contribution.state == Contribution.STATE_FAILED) {
-                val retries = contribution.retries
-                // TODO: Improve UX. Additional details: https://github.com/commons-app/apps-android-commons/pull/5257#discussion_r1304662562
-                /* Limit the number of retries for a failed upload
-                   to handle cases like invalid filename as such uploads
-                   will never be successful */
-                if (retries < MAX_RETRIES) {
-                    contribution.retries = retries + 1
-                    Timber.d(
-                        "Retried uploading %s %d times", contribution.media.filename,
-                        retries + 1
-                    )
-                    restartUpload(contribution)
-                } else {
-                    // TODO: Show the exact reason for failure
-                    Toast.makeText(
-                        context,
-                        R.string.retry_limit_reached, Toast.LENGTH_SHORT
-                    ).show()
-                }
-            } else {
-                Timber.d("Skipping re-upload for non-failed %s", contribution.toString())
-            }
-        } else {
-            ViewUtil.showLongToast(context, R.string.this_function_needs_network_connection)
         }
     }
 

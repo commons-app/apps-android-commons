@@ -47,4 +47,17 @@ public class ContributionsPresenter implements UserActionListener {
         return repository.getContributionWithFileName(title);
     }
 
+    /**
+     * Update the contribution's state in the databse, upon completion, trigger the workmanager to
+     * process this contribution
+     *
+     * @param contribution
+     */
+    public void saveContribution(Contribution contribution) {
+        compositeDisposable.add(repository
+            .save(contribution)
+            .subscribeOn(ioThreadScheduler)
+            .subscribe(() -> WorkRequestHelper.Companion.makeOneTimeWorkRequest(
+                view.getContext().getApplicationContext(), ExistingWorkPolicy.KEEP)));
+    }
 }

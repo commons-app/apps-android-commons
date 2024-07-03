@@ -169,26 +169,4 @@ class UploadProgressActivity : BaseActivity() {
         pendingUploadsFragment!!.resetProgressBar()
     }
 
-    override fun onResume() {
-        super.onResume()
-        retryAllFailedUploads()
-    }
-
-    /**
-     * Retry all failed uploads as soon as the user returns to the app
-     */
-    @SuppressLint("CheckResult")
-    private fun retryAllFailedUploads() {
-        pendingUploadsFragment!!.resetProgressBar()
-        contributionDao.getContribution(listOf(Contribution.STATE_FAILED))
-            .subscribeOn(Schedulers.io())
-            .subscribe { failedUploads: List<Contribution?> ->
-                for (contribution in failedUploads) {
-                    if (contribution != null) {
-                        pendingUploadsFragment!!.retryUpload(contribution)
-                    }
-                }
-            }
-    }
-
 }

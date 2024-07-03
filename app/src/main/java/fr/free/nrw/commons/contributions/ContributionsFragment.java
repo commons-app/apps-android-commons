@@ -114,7 +114,7 @@ public class ContributionsFragment
     private static final String CONTRIBUTION_LIST_FRAGMENT_TAG = "ContributionListFragmentTag";
     private MediaDetailPagerFragment mediaDetailPagerFragment;
     static final String MEDIA_DETAIL_PAGER_FRAGMENT_TAG = "MediaDetailFragmentTag";
-
+    private static final int MAX_RETRIES = 10;
 
     public FragmentContributionsBinding binding;
 
@@ -790,6 +790,52 @@ public class ContributionsFragment
                 });
     }
 
+
+    /**
+     * Restarts the upload process for a contribution
+     *
+     * @param contribution
+     */
+    public void restartUpload(Contribution contribution) {
+        contribution.setState(Contribution.STATE_QUEUED);
+        contributionsPresenter.saveContribution(contribution);
+        Timber.d("Restarting for %s", contribution.toString());
+    }
+
+    /**
+     * Retry upload when it is failed
+     *
+     * @param contribution contribution to be retried
+     */
+    public void retryUpload(Contribution contribution) {
+        if (NetworkUtils.isInternetConnectionEstablished(getContext())) {
+            if (contribution.getState() == STATE_PAUSED
+                || contribution.getState() == Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE) {
+                restartUpload(contribution);
+            } else if (contribution.getState() == STATE_FAILED) {
+                int retries = contribution.getRetries();
+                // TODO: Improve UX. Additional details: https://github.com/commons-app/apps-android-commons/pull/5257#discussion_r1304662562
+                /* Limit the number of retries for a failed upload
+                   to handle cases like invalid filename as such uploads
+                   will never be successful */
+                if (retries < MAX_RETRIES) {
+                    contribution.setRetries(retries + 1);
+                    Timber.d("Retried uploading %s %d times", contribution.getMedia().getFilename(),
+                        retries + 1);
+                    restartUpload(contribution);
+                } else {
+                    // TODO: Show the exact reason for failure
+                    Toast.makeText(getContext(),
+                        R.string.retry_limit_reached, Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Timber.d("Skipping re-upload for non-failed %s", contribution.toString());
+            }
+        } else {
+            ViewUtil.showLongToast(getContext(), R.string.this_function_needs_network_connection);
+        }
+
+    }
 
     /**
      * Reload media detail fragment once media is nominated
