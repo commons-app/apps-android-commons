@@ -236,6 +236,7 @@
   <string name="no_categories_selected">कुनैपनि श्रेणीहरू छानिएका छैनन्</string>
   <string name="search_this_area">यस क्षेत्रमा खोज्नुहोस्</string>
   <string name="nearby_card_permission_title">अनुमति अनुरोध</string>
+  <string name="option_allow">अनुमति दिनुहोस्</string>
   <string name="nominate_for_deletion_done">सम्पन्न</string>
   <string name="please_wait">कृपया प्रतिक्षा गर्नुहोस्…</string>
   <string name="exif_tag_name_author">लेखक</string>
