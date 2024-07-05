@@ -45,6 +45,7 @@ import fr.free.nrw.commons.coordinates.CoordinateEditHelper;
 import fr.free.nrw.commons.filepicker.Constants;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationPermissionsHelper;
 import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -328,7 +329,6 @@ public class LocationPickerActivity extends BaseActivity implements
 
     private void setupMapView() {
         requestLocationPermissions();
-        moveMapToMediaLocation();
         modifyLocationButton.setOnClickListener(v -> onClickModifyLocation());
         removeLocationButton.setOnClickListener(v -> onClickRemoveLocation());
         showInMapButton.setOnClickListener(v -> showInMapApp());
@@ -414,6 +414,21 @@ public class LocationPickerActivity extends BaseActivity implements
                 cameraPosition.getLongitude());
 
             moveMapTo(point);
+        }
+    }
+
+    /**
+     * Moves the center of the map to the device's GPS location, if that data is available.
+     */
+    private void moveMapToGPSLocation(){
+        if(locationManager != null){
+            fr.free.nrw.commons.location.LatLng location = locationManager.getLastLocation();
+
+            if(location != null){
+                GeoPoint point = new GeoPoint(location.getLatitude(), location.getLongitude());
+
+                moveMapTo(point);
+            }
         }
     }
 
