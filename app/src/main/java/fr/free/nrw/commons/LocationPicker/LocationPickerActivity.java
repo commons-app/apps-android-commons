@@ -329,6 +329,15 @@ public class LocationPickerActivity extends BaseActivity implements
 
     private void setupMapView() {
         requestLocationPermissions();
+
+        //If EXIF data is available, move map to EXIF location.
+        if(activity.equals("UploadActivity")){
+            moveMapToMediaLocation();
+        } else {
+            //EXIF data is not available. Move map to device GPS location.
+            moveMapToGPSLocation();
+        }
+
         modifyLocationButton.setOnClickListener(v -> onClickModifyLocation());
         removeLocationButton.setOnClickListener(v -> onClickRemoveLocation());
         showInMapButton.setOnClickListener(v -> showInMapApp());
