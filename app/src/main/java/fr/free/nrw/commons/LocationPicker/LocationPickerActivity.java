@@ -400,16 +400,18 @@ public class LocationPickerActivity extends BaseActivity implements
      * If there is no EXIF data, the map will center on the commons app map center.
      */
     private void showInMapApp() {
+
+        fr.free.nrw.commons.location.LatLng position = null;
         //Check to see if EXIF location data is available
-        if(cameraPosition != null){
-            Utils.handleGeoCoordinates(this,
-                new fr.free.nrw.commons.location.LatLng(cameraPosition.getLatitude(),
-                    cameraPosition.getLongitude(), 0.0f));
+        if(activity.equals("UploadActivity")){
+            position = new fr.free.nrw.commons.location.LatLng(cameraPosition.getLatitude(),
+                cameraPosition.getLongitude(), 0.0f);
         } else {
-            Utils.handleGeoCoordinates(this,
-                new fr.free.nrw.commons.location.LatLng(mapView.getMapCenter().getLatitude(),
-                    mapView.getMapCenter().getLongitude(), 0.0f));
+            position = new fr.free.nrw.commons.location.LatLng(mapView.getMapCenter().getLatitude(),
+                mapView.getMapCenter().getLongitude(), 0.0f);
         }
+
+        Utils.handleGeoCoordinates(this, position);
     }
 
     /**
