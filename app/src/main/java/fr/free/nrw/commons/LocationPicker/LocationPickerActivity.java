@@ -402,11 +402,12 @@ public class LocationPickerActivity extends BaseActivity implements
     private void showInMapApp() {
         fr.free.nrw.commons.location.LatLng position = null;
         
-        //Check to see if EXIF location data is available
         if(activity.equals("UploadActivity") && cameraPosition != null){
+            //EXIF location data is available
             position = new fr.free.nrw.commons.location.LatLng(cameraPosition.getLatitude(),
                 cameraPosition.getLongitude(), 0.0f);
         } else if(mapView != null){
+            //EXIF location data is not available
             position = new fr.free.nrw.commons.location.LatLng(mapView.getMapCenter().getLatitude(),
                 mapView.getMapCenter().getLongitude(), 0.0f);
         }
