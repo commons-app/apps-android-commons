@@ -263,7 +263,7 @@
   <string name="skip_login">Saltar</string>
   <string name="navigation_item_login">Aperir session</string>
   <string name="skip_login_title">Vole tu vermente saltar le apertura de session?</string>
-  <string name="skip_login_message" fuzzy="true">Tu debera alora aperir session pro incargar imagines plus tarde.</string>
+  <string name="skip_login_message">Tu debera aperir session pro incargar imagines in le futuro.</string>
   <string name="login_alert_message">Per favor aperi session pro usar iste function</string>
   <string name="copy_wikicode">Copiar le wikitexto al area de transferentia</string>
   <string name="wikicode_copied">Le wikitexto ha essite copiate al area de transferentia</string>
@@ -761,4 +761,5 @@
   </plurals>
   <string name="multiple_files_depiction">Nota ben que tote le imagines in un multi-incargamento habera le mesme categorias e representationes. Si le imagines non condivide representationes e categorias, per favor exeque plure incargamentos separate.</string>
   <string name="multiple_files_depiction_header">Aviso sur le multi-incargamentos</string>
+  <string name="feedback_destination_note">Tu retroaction apparera sur le sequente pagina wiki: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
 </resources>

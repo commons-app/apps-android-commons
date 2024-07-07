@@ -4,6 +4,7 @@
 * Aurora
 * Hakimi97
 * Muhdnurhidayat
+* Stress 043
 * Tofeiku
 -->
 <resources>
@@ -11,6 +12,22 @@
   <string name="commons_github">Kod Sumber Github Commons</string>
   <string name="commons_logo">Logo Commons</string>
   <string name="commons_website">Tapak Sesawang Commons</string>
+  <string name="exit_location_picker">Keluar dari pemilih lokasi</string>
+  <string name="submit">Hantar</string>
+  <string name="add_another_description">Tambah penerangan lain</string>
+  <string name="add_new_contribution">Tambah sumbangan baru</string>
+  <string name="add_contribution_from_camera">Tambah sumbangan dari kamera</string>
+  <string name="add_contribution_from_photos">Tambah sumbangan dari Foto</string>
+  <string name="add_contribution_from_contributions_gallery">Tambah sumbangan dari galeri sumbangan sebelumnya</string>
+  <string name="show_captions">Kapsyen</string>
+  <string name="row_item_language_description">Keterangan Bahasa</string>
+  <string name="row_item_caption">Kapsyen</string>
+  <string name="show_captions_description">Keterangan</string>
+  <string name="nearby_row_image">Imej</string>
+  <string name="nearby_all">Semua</string>
+  <string name="nearby_filter_toggle">Togol Atas</string>
+  <string name="nearby_filter_search">Paparan Carian</string>
+  <string name="appwidget_img">Gambar untuk Hari ini</string>
   <string name="uploads_pending_notification_indicator" fuzzy="true">%d fail sedang dimuat naik</string>
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Belum ada muatnaik</item>
@@ -26,31 +43,41 @@
   <string name="share_license_summary" fuzzy="true">Gambar ini akan dilesenkan di bawah %1$s</string>
   <string name="navigation_item_explore">Jelajah</string>
   <string name="preference_category_appearance">Penampilan</string>
+  <string name="preference_category_general">Umum</string>
   <string name="preference_category_feedback">Maklum balas</string>
   <string name="preference_category_privacy">Privasi</string>
   <string name="app_name">Commons</string>
   <string name="menu_settings">Tetapan</string>
   <string name="intent_share_upload_label">Muat naik ke Commons</string>
+  <string name="upload_in_progress">Muat naik sedang dijalankan</string>
   <string name="username">Nama pengguna</string>
   <string name="password">Kata laluan</string>
   <string name="login_credential">Log masuk ke akaun Commons Beta anda</string>
   <string name="login">Log masuk</string>
   <string name="forgot_password">Lupa Kata Laluan?</string>
+  <string name="signup">Daftar masuk</string>
   <string name="logging_in_title">Sedang log masuk</string>
   <string name="logging_in_message">Sila tunggu…</string>
+  <string name="updating_caption_title">Mengemas kini kapsyen dan keterangan</string>
   <string name="updating_caption_message">Sila tunggu…</string>
-  <string name="login_success" fuzzy="true">Berjaya log masuk!</string>
-  <string name="login_failed" fuzzy="true">Gagal log masuk!</string>
+  <string name="login_success">Log masuk berjaya!</string>
+  <string name="login_failed">Log masuk gagal!</string>
   <string name="upload_failed">Fail tidak dijumpai. Sila cuba fail lain.</string>
-  <string name="authentication_failed" fuzzy="true">Pendaftaran gagal, sila log masuk lagi</string>
+  <string name="retry_limit_reached">Had percubaan maksimum dicapai! Sila batalkan muat naik dan cuba semula</string>
+  <string name="unrestricted_battery_mode">Matikan pengoptimuman bateri?</string>
+  <string name="suggest_unrestricted_mode">Muat naik lebih dari 3 imej berfungsi dengan lebih berkesan jika mod pengoptimuman bateri dimatikan. Sila matikan mod pengoptimuman bateri bagi aplikasi Commons dari tetapan untuk pengalaman muat naik yang lebih lancar.\n\nLangkah-langkah mungkin bagi mematikan pengoptimuman bateri:\n\nLangkah 1: Sentuh pada butang \'Settings\' di bawah.\n\nLangkah 2: Tukar dari \'Not optimized\' ke \'All apps\'\n\nLangkah 3: Cari \"Commons\" atau \"fr.free.nrw.commons\".\n\nLangkah 4: Sentuh padanya dan pilih \'Don\'t optimize\'.\n\nLangkah 5: Tekan \'Done\'</string>
+  <string name="authentication_failed">Pengesahan gagal. Sila log masuk semula.</string>
   <string name="uploading_started">Pemuatnaikan telah bermula!</string>
+  <string name="uploading_queued">Muat naik menunggu (mod sambungan terhad diaktifkan)</string>
   <string name="upload_completed_notification_title">%1$s telah dimuat naik!</string>
   <string name="upload_completed_notification_text">Ketik untuk melihat muatan naik anda</string>
-  <string name="upload_progress_notification_title_start" fuzzy="true">Mula memuat naik %1$s</string>
+  <string name="upload_progress_notification_title_start">Memuat naik fail: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s sedang dimuat naik</string>
   <string name="upload_progress_notification_title_finishing">%1$s akan siap dimuat naik</string>
-  <string name="upload_failed_notification_title" fuzzy="true">%1$s gagal dimuat naik</string>
+  <string name="upload_failed_notification_title">Gagal untuk muat naik %1$s</string>
+  <string name="upload_paused_notification_title">Muat naik %1$s tertunda</string>
   <string name="upload_failed_notification_subtitle">Ketik untuk lihat</string>
+  <string name="upload_paused_notification_subtitle">Sentuh untuk lihat</string>
   <string name="title_activity_contributions">Muat Naik Terbaru Saya</string>
   <string name="contribution_state_queued">Dibaris gilir</string>
   <string name="contribution_state_failed">Gagal</string>
@@ -62,31 +89,37 @@
   <string name="provider_contributions">Muatan naik saya</string>
   <string name="menu_share">Kongsi</string>
   <string name="menu_view_file_page">Lihat laman fail</string>
-  <string name="share_title_hint" fuzzy="true">Tajuk</string>
+  <string name="share_title_hint">Kapsyen (wajib)</string>
+  <string name="add_caption_toast">Sila berikan kapsyen untuk fail ini</string>
   <string name="share_description_hint">Keterangan</string>
   <string name="share_caption_hint">Kapsyen</string>
-  <string name="login_failed_network" fuzzy="true">Tidak boleh log masuk - kegagalan rangkaian</string>
-  <string name="login_failed_throttled" fuzzy="true">Terlalu banyak cubaan yang tidak berjaya. Sila cuba lagi dalam beberapa minit</string>
+  <string name="login_failed_network">Tidak boleh log masuk - kegagalan rangkaian</string>
+  <string name="login_failed_throttled">Terlalu banyak cubaan yang tidak berjaya. Sila cuba lagi dalam beberapa minit.</string>
   <string name="login_failed_blocked">Maaf, pengguna ini telah disekat di Commons</string>
-  <string name="login_failed_generic" fuzzy="true">Log masuk gagal</string>
+  <string name="login_failed_2fa_needed">Anda perlu berikan kod penyahihan dua-faktor anda.</string>
+  <string name="login_failed_generic">Log masuk gagal</string>
   <string name="share_upload_button">Muat naik</string>
   <string name="multiple_share_base_title">Namakan set ini</string>
   <string name="provider_modifications">Pengubahsuaian</string>
   <string name="menu_upload_single">Muat naik</string>
   <string name="categories_search_text_hint">Cari dalam kategori</string>
   <string name="menu_save_categories">Simpan</string>
+  <string name="refresh_button">Segarkan</string>
   <string name="display_list_button">Senarai</string>
+  <string name="contributions_subtitle_zero">(Tiada muat naik lagi)</string>
   <string name="categories_not_found">Tiada kategori yang sepadan dengan %1$s dijumpai</string>
   <string name="categories_skip_explanation" fuzzy="true">Tambahkan kategori supaya gambar-gambar anda lebih senang ditemui di Wikimedia Commons.\n\nMula menaip untuk menambahkan kategori.\nKetik mesej ini (atau tekan butang undur) untuk melangkau langkah ini.</string>
   <string name="categories_activity_title">Kategori</string>
   <string name="title_activity_settings">Tetapan</string>
   <string name="title_activity_category_details">Kategori</string>
   <string name="menu_about">Perihal</string>
-  <string name="about_license" fuzzy="true">Perisian Sumber Terbuka yang dikeluarkan dengan &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Lesen Apache v2&lt;/a&gt;</string>
-  <string name="about_improve" fuzzy="true">Sumber di &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Pepijat di &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
-  <string name="about_privacy_policy" fuzzy="true">Wikimedia:Commons-android-strings-about privacy policy/ms</string>
+  <string name="about_license">Aplikasi Wikimedia Commons ialah aplikasi sumber terbuka yang dicipta dan diselenggara oleh penerima geran dan sukarelawan komuniti Wikimedia. Yayasan Wikimedia tidak terlibat dalam penciptaan, pembangunan atau penyelenggaraan aplikasi ini.</string>
+  <string name="about_improve">Cipta &lt;a href=\"%1$s\"&gt;isu GitHub&lt;/a&gt; baru bagi melaporkan pepijat dan cadangan.</string>
+  <string name="about_privacy_policy">Dasar privasi</string>
+  <string name="about_credits">Kredit</string>
   <string name="title_activity_about">Perihal</string>
   <string name="menu_feedback">Hantar Maklum Balas (secara e-mel)</string>
+  <string name="no_email_client">Tiada klien emel dipasang</string>
   <string name="provider_categories">Kategori yang baru digunakan</string>
   <string name="waiting_first_sync">Menunggu penyegerakan pertama…</string>
   <string name="no_uploads_yet">Anda belum memuat naik sebarang gambar.</string>
@@ -211,6 +244,7 @@
   <string name="ends_on">Tamat pada:</string>
   <string name="review_thanks_yes_button_text">Imej berikutnya</string>
   <string name="review_thanks_no_button_text">Ya, kenapa tidak</string>
+  <string name="exif_tag_name_author">Pengarang</string>
   <string name="media_location_permission_denied">Akses lokasi media ditolak</string>
   <string name="add_location_manually">Kami mungkin tidak dapat memperolehi data tempat dari gambar yang anda muat naik secara automatik. Sila tambah tempat sewajarnya pada setiap gambar sebelum menyerahnya</string>
   <string name="category_edit_helper_show_edit_title">Kemas kini kategori</string>

@@ -10,7 +10,6 @@ import fr.free.nrw.commons.auth.login.LoginResult
 import retrofit2.Call
 import retrofit2.Response
 import timber.log.Timber
-import java.io.IOException
 import java.util.concurrent.Callable
 import java.util.concurrent.Executors.newSingleThreadExecutor
 

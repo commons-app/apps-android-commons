@@ -74,6 +74,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">設定</string>
   <string name="intent_share_upload_label">コモンズにアップロード</string>
+  <string name="upload_in_progress">アップロード中</string>
   <string name="username">利用者名</string>
   <string name="password">パスワード</string>
   <string name="login_credential">コモンズのベータ版アカウントにログイン</string>
@@ -82,11 +83,12 @@
   <string name="signup">利用者登録</string>
   <string name="logging_in_title">ログイン中</string>
   <string name="logging_in_message">お待ちください…</string>
+  <string name="updating_caption_title">キャプションと説明を更新</string>
   <string name="updating_caption_message">お待ちください…</string>
   <string name="login_success">ログインに成功しました!</string>
   <string name="login_failed">ログインに失敗しました!</string>
   <string name="upload_failed">ファイルが見つかりません。別のファイルでお試しください。</string>
-  <string name="authentication_failed" fuzzy="true">認証に失敗しました!　もう一度ログインしてください</string>
+  <string name="authentication_failed">認証に失敗しました。もう一度ログインしてください。</string>
   <string name="uploading_started">アップロードを開始しました!</string>
   <string name="uploading_queued">アップロードは待機中です（限定接続モードが有効）</string>
   <string name="upload_completed_notification_title">%1$s をアップロードしました!</string>
@@ -106,18 +108,18 @@
   <string name="menu_from_gallery">ギャラリーから選択</string>
   <string name="menu_from_camera">写真を撮影</string>
   <string name="menu_nearby">付近</string>
-  <string name="provider_contributions">投稿記録</string>
+  <string name="provider_contributions">自分のアップロード</string>
   <string name="menu_share">共有</string>
   <string name="menu_view_file_page">ファイルのページを表示</string>
   <string name="share_title_hint">キャプション (必須)</string>
   <string name="add_caption_toast">キャプションを記入してください</string>
   <string name="share_description_hint">説明</string>
   <string name="share_caption_hint">キャプション</string>
-  <string name="login_failed_network" fuzzy="true">ログインできません - ネットワークのエラーです</string>
+  <string name="login_failed_network">ログインできません - ネットワークのエラーです</string>
   <string name="login_failed_throttled">失敗した回数が多すぎます。数分後にもう一度お試しください。</string>
   <string name="login_failed_blocked">申し訳ありませんが、この利用者はコモンズでブロックされています。</string>
   <string name="login_failed_2fa_needed">2段階認証コードを入力してください。</string>
-  <string name="login_failed_generic" fuzzy="true">ログイン失敗</string>
+  <string name="login_failed_generic">ログイン失敗</string>
   <string name="share_upload_button">アップロード</string>
   <string name="multiple_share_base_title">このセットに名前をつけてください</string>
   <string name="provider_modifications">変更</string>
@@ -238,6 +240,7 @@
   <string name="navigation_item_about">このアプリについて</string>
   <string name="navigation_item_settings">設定</string>
   <string name="navigation_item_feedback">フィードバック</string>
+  <string name="navigation_item_feedback_github">GitHub 経由でフィードバック</string>
   <string name="navigation_item_logout">ログアウト</string>
   <string name="navigation_item_info">チュートリアル</string>
   <string name="navigation_item_notification">通知</string>
@@ -271,8 +274,8 @@
   <string name="nominated_see_more">詳細はウェブサイトをご覧ください</string>
   <string name="skip_login">スキップ</string>
   <string name="navigation_item_login">ログイン</string>
-  <string name="skip_login_title" fuzzy="true">本当にログインをしなくてよいですか?</string>
-  <string name="skip_login_message" fuzzy="true">画像の投稿には、今後、ログインが必要です。</string>
+  <string name="skip_login_title">本当にログインをしなくてよいですか?</string>
+  <string name="skip_login_message">画像のアップロードには、今後、ログインが必要になります。</string>
   <string name="login_alert_message">この機能を使うにはログインしてください</string>
   <string name="copy_wikicode">ウィキテキストをクリップボードにコピーする</string>
   <string name="wikicode_copied">クリップボードにウィキテキストをコピー完了しました</string>
@@ -336,14 +339,14 @@
   <string name="construction_event_answer">コモンズでは技術や文化を表す画像をいつでも募集中です。</string>
   <string name="congratulatory_message_quiz">正解は %1$s でした。おめでとうございます！</string>
   <string name="warning_for_no_answer">回答するには2件のどちらかを選択</string>
-  <string name="user_not_logged_in" fuzzy="true">ログインセッションが時間切れになりました。もう一度ログインしてください。</string>
+  <string name="user_not_logged_in">ログインが期限切れになりました。もう一度ログインしてください。</string>
   <string name="quiz_result_share_message">友だちとクイズを共有！</string>
   <string name="continue_message">続行</string>
   <string name="correct">正解</string>
   <string name="wrong">不正解</string>
   <string name="quiz_screenshot_question">このスクリーンショットをアップロードしてもよいですか？</string>
   <string name="share_app_title">アプリをシェアする</string>
-  <string name="error_fetching_nearby_places" fuzzy="true">付近の場所を取得しようとしてエラーが発生しました。</string>
+  <string name="error_fetching_nearby_places">付近の場所を読み込めません</string>
   <string name="no_recent_searches">最近の検索はまだありません</string>
   <string name="delete_recent_searches_dialog">本当に検索履歴を消去しますか?</string>
   <string name="cancel_upload_dialog">このアップロードを本当にキャンセルしますか？</string>
@@ -422,7 +425,7 @@
   <string name="display_campaigns">キャンペーンを表示</string>
   <string name="display_campaigns_explanation">現在、実施中のキャンペーンを表示</string>
   <string name="nearby_campaign_dismiss_message">キャンペーンの通知は表示されなくなります。ただし「設定」ページでいつでも通知の表示を有効にできます。</string>
-  <string name="this_function_needs_network_connection" fuzzy="true">この機能はネットワーク接続がないと無効なため、接続設定の確認をお願いします。</string>
+  <string name="this_function_needs_network_connection">この機能はネットワーク接続が必要です。接続設定の確認をお願いします。</string>
   <string name="error_processing_image">画像の処理中にエラーが発生しました。もう一度、お願いします。</string>
   <string name="getting_edit_token">編集トークンを取得中です</string>
   <string name="check_category_adding_template">カテゴリ確認のテンプレートを付与中です</string>
@@ -453,7 +456,7 @@
   <string name="review_thanks_yes_button_text">次の画像</string>
   <string name="review_thanks_no_button_text">はい、もちろんです</string>
   <string name="skip_image_explanation">このボタンをクリックすると、ウィキメディアコモンズに最近、投稿された別の写真をお見せします</string>
-  <string name="review_image_explanation" fuzzy="true">ウィキメディアコモンズの質を高めるため、画像のレビューをお願いします。\nレビューの指針は4点あります。\n - これはコモンズの目的に合っていますか？\n - 著作権のルールをきちんと守っていますか？\n - カテゴリは正しいですか？\n - これらの条件をクリアしたら、投稿者に感謝を送信しませんか。</string>
+  <string name="review_image_explanation">ウィキメディアコモンズの質を高めるため、画像のレビューをお願いします。\nレビューの指針は3点あります。\n - この画像はコモンズの守備範囲内ですか？\nいいえ（守備範囲外）をタップすると、削除依頼テンプレートをこの画像に追加します。\n\n - この画像は著作権のルールに従っていますか？\nいいえ（著作権のルールに従っていない）をタップすると、削除依頼テンプレートをこの画像に追加します。\n\n - この画像は適切にカテゴリ分類されていますか？\nいいえ（適切にカテゴリ分類されていない）をタップすると、カテゴリ分類依頼テンプレートをこの画像に追加します。\n\n全て問題なければ画像にテンプレートは追加されず、投稿者に感謝を送信する機会を得ます。</string>
   <string name="no_image">使用された画像はありません</string>
   <string name="no_image_reverted">却下された画像はありません</string>
   <string name="no_image_uploaded">投稿した画像はありません</string>
@@ -467,6 +470,8 @@
   <string name="images_featured_explanation">秀逸な画像とは、技術力の高い写真家や作画家による作品で、ウィキメディアコモンズのコミュニティから最高の品質を誇るものとして選出されています。</string>
   <string name="images_via_nearby_explanation">「近くの場所でアップロードした画像」とは、地図上で検索した結果に基づいてアップロードした画像のことです。</string>
   <string name="thanks_received_explanation">この機能は、変更履歴や差分のページに表示される小さな感謝リンクで、有用な編集を行った利用者に感謝を伝えられるようにします。</string>
+  <string name="copy_image_caption_description">次のメディアにコピー</string>
+  <string name="copied_successfully">コピーしました</string>
   <string name="welcome_do_upload_content_description">コモンズへの投稿画像の良い例</string>
   <string name="welcome_dont_upload_content_description">投稿に適さない画像のサンプル</string>
   <string name="skip_image">この画像をスキップ</string>
@@ -516,10 +521,22 @@
     <item quantity="other">題材 %1$s が追加されました。</item>
   </plurals>
   <string name="depictions_edit_helper_edit_message_else">題材を追加できませんでした。</string>
+  <string name="coordinates_edit_helper_make_edit_toast">座標を更新しようとしています。</string>
+  <string name="coordinates_edit_helper_show_edit_title">座標の更新</string>
+  <string name="description_edit_helper_show_edit_title">説明の更新</string>
+  <string name="caption_edit_helper_show_edit_title">キャプションの更新</string>
   <string name="coordinates_edit_helper_show_edit_title_success">成功</string>
   <string name="coordinates_edit_helper_show_edit_message">座標%1$sは追加されました。</string>
   <string name="description_edit_helper_show_edit_message">説明が追加されました。</string>
+  <string name="caption_edit_helper_show_edit_message">キャプションが追加されました。</string>
+  <string name="coordinates_edit_helper_edit_message_else">座標を追加できませんでした。</string>
+  <string name="description_edit_helper_edit_message_else">説明を追加できませんでした。</string>
+  <string name="caption_edit_helper_edit_message_else">キャプションを追加できませんでした。</string>
+  <string name="coordinates_picking_unsuccessful">画像の座標は更新されていません</string>
+  <string name="descriptions_picking_unsuccessful">説明を取得できません。</string>
+  <string name="description_activity_title">説明とキャプションを編集する</string>
   <string name="share_image_via">画像をシェア</string>
+  <string name="you_have_no_achievements_yet">あなたはまだ投稿をしたことがありません</string>
   <string name="no_achievements_yet">%sはまだ投稿をしたことがありません</string>
   <string name="account_created">アカウントを作成しました</string>
   <string name="text_copy">テキストをクリップボードにコピー済み</string>
@@ -530,12 +547,13 @@
   <string name="place_state_needs_photo">写真がない</string>
   <string name="place_type">場所のタイプ：</string>
   <string name="nearby_search_hint">橋・博物館・ホテルなど</string>
-  <string name="you_must_reset_your_passsword" fuzzy="true">ログインがうまくいきませんでした。パスワードを変更してください!!</string>
+  <string name="you_must_reset_your_passsword">ログインがうまくいきませんでした。パスワードをリセットする必要があります!</string>
   <string name="title_for_media">メディア</string>
   <string name="title_for_child_classes">子分類</string>
   <string name="title_for_parent_classes">親クラス</string>
   <string name="upload_nearby_place_found_title">付近の場所が見つかりました</string>
-  <string name="upload_nearby_place_found_description_singular" fuzzy="true">これは%1$sの写真ですか?</string>
+  <string name="upload_nearby_place_found_description_plural">これらは%1$sの写真ですか?</string>
+  <string name="upload_nearby_place_found_description_singular">これは%1$sの写真ですか?</string>
   <string name="title_app_shortcut_bookmark">ブックマーク</string>
   <string name="title_app_shortcut_setting">設定</string>
   <string name="remove_bookmark">ブックマークから除去</string>
@@ -620,9 +638,11 @@
   <string name="label">ラベル</string>
   <string name="description">説明</string>
   <string name="title_page_bookmarks_items">項目</string>
+  <string name="custom_selector_empty_text">画像なし</string>
   <string name="done">完了</string>
   <string name="back">戻る</string>
   <string name="need_permission">権限が必要です</string>
+  <string name="menu_view_user_page">利用者ページを表示</string>
   <string name="edit_depictions">題材を編集する</string>
   <string name="edit_categories">カテゴリを編集</string>
   <string name="apply">適用</string>
@@ -645,13 +665,21 @@
   <string name="can_not_select_this_image_for_upload">この画像をアップロード用に選択できません</string>
   <string name="image_selected">画像が選択されました</string>
   <string name="menu_view_report">報告</string>
+  <string name="menu_view_set_white_background">白色背景を設定</string>
+  <string name="menu_view_set_black_background">黒色背景を設定</string>
   <string name="report_violation">違反を報告</string>
   <string name="report_user">この利用者を報告</string>
   <string name="report_content">このコンテンツを報告する</string>
+  <string name="request_user_block">この利用者のブロックを依頼</string>
+  <string name="welcome_to_full_screen_mode_text">全画面選択モードへようこそ</string>
   <string name="set_up_avatar_toast_string">リーダーボードのアバターを設定するには、任意の画像の 3 つのドット メニューで [アバターとして設定] をタップします。</string>
   <string name="permissions_are_required_for_functionality">この機能には権限が必要です</string>
   <string name="edit_image">画像の編集</string>
   <string name="edit_location">位置を編集</string>
+  <string name="send_thanks_to_author">作者に感謝する</string>
+  <string name="error_sending_thanks">作者への感謝の送信エラー。</string>
+  <string name="invalid_login_message">ログインが期限切れになりました。もう一度ログインしてください。</string>
+  <string name="no_application_available_to_open_gpx_files">GPXファイルを開くことができるアプリケーションがありません</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="other">%d件の画像が選択されました</item>
   </plurals>

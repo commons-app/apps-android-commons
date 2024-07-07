@@ -294,6 +294,7 @@ public class CommonsApplication extends MultiDexApplication {
         }
 
         sessionManager.logout()
+            .andThen(Completable.fromAction(() -> cookieJar.clear()))
             .andThen(Completable.fromAction(() -> {
                     Timber.d("All accounts have been removed");
                     clearImageCache();

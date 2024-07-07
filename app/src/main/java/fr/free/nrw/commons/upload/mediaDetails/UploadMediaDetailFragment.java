@@ -333,6 +333,13 @@ public class UploadMediaDetailFragment extends UploadBaseFragment implements
                     uploadMediaDetailAdapter.getItems().get(0).setDescriptionText(
                         getString(R.string.similar_coordinate_description_auto_set));
                     updateMediaDetails(uploadMediaDetailAdapter.getItems());
+
+                    // Replace the 'Add location' button with 'Edit location' button when user clicks
+                    // yes in similar image dialog
+                    // fixing: https://github.com/commons-app/apps-android-commons/issues/5669
+                    Drawable mapTick = getResources().getDrawable(R.drawable.ic_map_available_20dp);
+                    binding.locationImageView.setImageDrawable(mapTick);
+                    binding.locationTextView.setText(R.string.edit_location);
                 }
 
                 @Override

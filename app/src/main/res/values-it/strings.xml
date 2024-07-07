@@ -253,6 +253,7 @@
   <string name="navigation_item_about">Informazioni</string>
   <string name="navigation_item_settings">Impostazioni</string>
   <string name="navigation_item_feedback">Feedback</string>
+  <string name="navigation_item_feedback_github">Feedback tramite GitHub</string>
   <string name="navigation_item_logout">Esci</string>
   <string name="navigation_item_info">Tutorial</string>
   <string name="navigation_item_notification">Notifiche</string>
@@ -362,6 +363,7 @@
   <string name="share_app_title">Condividi applicazione</string>
   <string name="rotate">Ruota</string>
   <string name="error_fetching_nearby_places">Non è possibile caricare i luoghi nelle vicinanze</string>
+  <string name="no_pictures_in_this_area">Nessuna immagine in quest\'area</string>
   <string name="no_nearby_places_around">Nessun luogo trovato nelle vicinanze</string>
   <string name="error_fetching_nearby_monuments">Errore durante la ricerca di monumenti nelle vicinanze.</string>
   <string name="no_recent_searches">Nessuna ricerca recente</string>
@@ -752,6 +754,7 @@
   <string name="edit_location">Modifica Posizione</string>
   <string name="location_updated">Posizione aggiornata!</string>
   <string name="send_thanks_to_author">Ringrazia l\'autore</string>
+  <string name="error_sending_thanks">Errore nell\'invio di ringraziamenti all\'autore.</string>
   <string name="invalid_login_message">Sessione scaduta. Accedi nuovamente.</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">%d immagine selezionata</item>
