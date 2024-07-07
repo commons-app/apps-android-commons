@@ -143,7 +143,7 @@ public class ExploreMapController extends MapController {
         VectorDrawableCompat vectorDrawable = null;
         try {
             vectorDrawable = VectorDrawableCompat.create(
-                context.getResources(), R.drawable.ic_custom_map_marker, context.getTheme());
+                context.getResources(), R.drawable.ic_custom_map_marker_dark, context.getTheme());
 
         } catch (Resources.NotFoundException e) {
             // ignore when running tests.

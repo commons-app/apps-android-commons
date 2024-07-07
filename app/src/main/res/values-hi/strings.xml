@@ -28,6 +28,7 @@
   <string name="commons_logo">कॉमन्स का प्रतीक चिन्ह</string>
   <string name="commons_website">कॉमन्स का जालस्थान</string>
   <string name="submit">जमा करें</string>
+  <string name="row_item_caption">कैप्शन</string>
   <string name="show_captions_description">विवरण</string>
   <string name="nearby_row_image">चित्र</string>
   <string name="nearby_all">सभी</string>
@@ -70,6 +71,7 @@
   <string name="signup">खाता बनायें</string>
   <string name="logging_in_title">लॉग इन हो रहा है</string>
   <string name="logging_in_message">कृपया प्रतीक्षा करें...</string>
+  <string name="updating_caption_message">कृपया प्रतीक्षा करें...</string>
   <string name="login_success" fuzzy="true">लॉग इन सफल!</string>
   <string name="login_failed" fuzzy="true">लॉग इन विफल!</string>
   <string name="upload_failed">फ़ाइल नहीं मिली, कृपया अन्य फ़ाइल से प्रयास करें।</string>
@@ -178,6 +180,7 @@
   <string name="no">नहीं</string>
   <string name="media_detail_title">शीर्षक</string>
   <string name="media_detail_description">विवरण</string>
+  <string name="media_detail_discussion">चर्चा</string>
   <string name="media_detail_author">लेखक</string>
   <string name="media_detail_uploaded_date">अपलोड की गई दिनांक</string>
   <string name="media_detail_license">लाइसेंस</string>
@@ -269,6 +272,7 @@
   <string name="search_tab_title_media" fuzzy="true">मीडिया</string>
   <string name="search_tab_title_categories">श्रेणियाँ</string>
   <string name="explore_tab_title_featured">निर्वाचित</string>
+  <string name="explore_tab_title_map">नक्शा</string>
   <string name="successful_wikidata_edit" fuzzy="true">चित्र सफ़लतापूर्वक विकिडाटा के %1$s पर सफलतापूर्वक जोड़ दिया गया है।</string>
   <string name="menu_set_wallpaper">वॉलपेपर के रूप में लगायें</string>
   <string name="wallpaper_set_successfully">वॉलपेपर सफलतापूर्वक लग गया!</string>
@@ -285,6 +289,7 @@
   <string name="wrong">गलत उत्तर</string>
   <string name="quiz_screenshot_question">क्या यह स्क्रीनशॉट अपलोड होने के लिये तैयार है?</string>
   <string name="share_app_title">एप साझा करें</string>
+  <string name="rotate">घुमाएँ</string>
   <string name="error_fetching_nearby_places" fuzzy="true">निकट के स्थान लाने में त्रुटि हुई।</string>
   <string name="no_recent_searches">हाल में कोई खोज नहीं</string>
   <string name="delete_recent_searches_dialog">क्या आप सचमुच अपना खोज इतिहास मिटाना चाहते हैं?</string>

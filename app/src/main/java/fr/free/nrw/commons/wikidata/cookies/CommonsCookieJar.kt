@@ -95,4 +95,9 @@ class CommonsCookieJar(private val cookieStorage: CommonsCookieStorage) : Cookie
 
     private fun Cookie.domainSpec(url: HttpUrl): String =
         domain.ifEmpty { url.toUri().getAuthority() }
+
+    fun clear() {
+        cookieStorage.clear()
+    }
+
 }

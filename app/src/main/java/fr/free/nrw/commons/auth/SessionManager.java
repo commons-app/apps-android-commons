@@ -122,18 +122,18 @@ public class SessionManager {
     }
 
     /**
-     * 1. Clears existing accounts from account manager
-     * 2. Calls MediaWikiApi's logout function to clear cookies
-     * @return
+     * Returns a Completable that clears existing accounts from account manager
      */
     public Completable logout() {
-        AccountManager accountManager = AccountManager.get(context);
-        Account[] allAccounts = accountManager.getAccountsByType(BuildConfig.ACCOUNT_TYPE);
-        return Completable.fromObservable(Observable.fromArray(allAccounts)
-                .map(a -> accountManager.removeAccount(a, null, null).getResult()))
-                .doOnComplete(() -> {
-                    currentAccount = null;
-                });
+        return Completable.fromObservable(
+            Observable.empty()
+                      .doOnComplete(
+                          () -> {
+                              removeAccount();
+                              currentAccount = null;
+                          }
+                      )
+        );
     }
 
     /**

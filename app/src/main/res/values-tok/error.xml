@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Authors:
+* Faian36
+-->
+<resources>
+  <string name="crash_dialog_title">ilo Commons li pakala</string>
+  <string name="crash_dialog_text">ijo li pakala a!</string>
+  <string name="crash_dialog_comment_prompt">o pana e sona ni lon lipu Email: sina pali e seme? pana la mi ken pona e pakala.</string>
+  <string name="crash_dialog_ok_toast">sina pona a!</string>
+</resources>

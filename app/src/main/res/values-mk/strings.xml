@@ -271,7 +271,7 @@
   <string name="skip_login">Прескокни</string>
   <string name="navigation_item_login">Најава</string>
   <string name="skip_login_title">Дали навистина сакате да ја прескокнете најавата?</string>
-  <string name="skip_login_message" fuzzy="true">Ќе морате да се најавите за да подигате слики во иднина.</string>
+  <string name="skip_login_message">Ќе морате да се најавите за да подигате слики во иднина.</string>
   <string name="login_alert_message">Најавете се за да ја користите оваа можност.</string>
   <string name="copy_wikicode">Прекопирај го викитекстот во меѓускладот</string>
   <string name="wikicode_copied">Викитекстот е прекопиран во меѓускладот</string>
@@ -771,4 +771,5 @@
   </plurals>
   <string name="multiple_files_depiction">Запомнете дека сите слики што ги подигате наеднаш се очекуваат да ја прикажуваат истата работа и ги добиваат истите категории и описи. Ако сликите прикажуваат различни нешта и треба да имаат различни категории, извршете неколку одделни подигања.</string>
   <string name="multiple_files_depiction_header">Напомена за подигање повеќе слики наеднаш</string>
+  <string name="feedback_destination_note">Вашите мислења се објавуваат на следнава викистраница:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
 </resources>

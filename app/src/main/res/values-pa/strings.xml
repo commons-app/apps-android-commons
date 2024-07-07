@@ -130,7 +130,7 @@
   <string name="detail_panel_cats_loading">ਲੱਦ ਰਿਹਾ ਹੈ...</string>
   <string name="detail_panel_cats_none">ਕੋਈ ਵੀ ਨਹੀਂ ਚੁਣਿਆ</string>
   <string name="detail_description_empty">ਕੋਈ ਵੇਰਵਾ ਨਹੀਂ</string>
-  <string name="detail_discussion_empty">ਕੋਈ ਚਰਚਾ ਨਹੀਂ</string>
+  <string name="detail_discussion_empty">ਕੋਈ ਗੱਲਬਾਤ ਨਹੀਂ</string>
   <string name="detail_license_empty">ਅਣਜਾਣ ਲਸੰਸ</string>
   <string name="menu_refresh">ਤਾਜ਼ਾ ਕਰੋ</string>
   <string name="read_storage_permission_rationale" fuzzy="true">ਆਗਿਆ ਚਾਹੀਦੀ ਹੈ: ਬਾਹਰੀ ਸਟੋਰੇਜ ਬਾਰੇ। ਇਸ ਤੋਂ ਬਿਨਾਂ ਐਪ ਕਾਰਜ ਨਹੀਂ ਕਰ ਸਕੇਗੀ।</string>
@@ -140,7 +140,7 @@
   <string name="no">ਨਹੀਂ</string>
   <string name="media_detail_title">ਸਿਰਲੇਖ</string>
   <string name="media_detail_description">ਵੇਰਵਾ</string>
-  <string name="media_detail_discussion">ਚਰਚਾ</string>
+  <string name="media_detail_discussion">ਗੱਲਬਾਤ</string>
   <string name="media_detail_author">ਲਿਖਾਰੀ</string>
   <string name="media_detail_uploaded_date">ਅਪਲੋਡ ਦੀ ਮਿਤੀ</string>
   <string name="media_detail_license">ਲਸੰਸ</string>
@@ -153,7 +153,7 @@
   <string name="cancel">ਰੱਦ ਕਰੋ</string>
   <string name="navigation_drawer_open">ਖੋਲ੍ਹੋ</string>
   <string name="navigation_drawer_close">ਬੰਦ ਕਰੋ</string>
-  <string name="navigation_item_home">ਮੁੱਢਲਾ ਸਫ਼ਾ</string>
+  <string name="navigation_item_home">ਘਰ</string>
   <string name="navigation_item_upload">ਚੜ੍ਹਾਉ</string>
   <string name="navigation_item_nearby">ਨੇੜੇ-ਤੇੜੇ</string>
   <string name="navigation_item_about">ਬਾਰੇ</string>

@@ -30,6 +30,7 @@
 * Patrick Star
 * Robins7
 * Sherbrooke
+* SleaY
 * Tektasc
 * Thibaut120094
 * Tomri5
@@ -307,7 +308,7 @@
   <string name="skip_login">Passer</string>
   <string name="navigation_item_login">Se connecter</string>
   <string name="skip_login_title">Ne voulez-vous vraiment pas vous connecter ?</string>
-  <string name="skip_login_message" fuzzy="true">Vous aurez à vous connecter à l’avenir pour téléverser des images.</string>
+  <string name="skip_login_message">Vous aurez à vous connecter à l’avenir pour téléverser des images.</string>
   <string name="login_alert_message">Veuillez vous connecter pour utiliser cette fonctionnalité</string>
   <string name="copy_wikicode">Copier le texte wiki dans le presse-papiers</string>
   <string name="wikicode_copied">Texte wiki copié dans le presse-papiers</string>
@@ -807,4 +808,5 @@
   </plurals>
   <string name="multiple_files_depiction">Souvenez-vous que toutes les images dans une importation multiple prennent les mêmes catégories et descriptions. Si les images de partagent pas les descriptions et catégories, veuillez effectuer plusieurs importations séparées.</string>
   <string name="multiple_files_depiction_header">Note au sujet des importations multiples</string>
+  <string name="feedback_destination_note">Vos commentaires sont publiés sur la page wiki suivante : &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
 </resources>
