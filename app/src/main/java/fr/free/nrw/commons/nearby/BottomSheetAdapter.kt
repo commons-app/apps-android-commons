@@ -13,7 +13,13 @@ import androidx.recyclerview.widget.RecyclerView
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.nearby.model.BottomSheetItem
 
-
+/**
+ * RecyclerView Adapter for displaying items in a bottom sheet.
+ *
+ * @property context The context used for inflating layout resources.
+ * @property itemList The list of BottomSheetItem objects to display.
+ * @constructor Creates an instance of BottomSheetAdapter.
+ */
 class BottomSheetAdapter(context: Context?, private val itemList: List<BottomSheetItem>) :
     RecyclerView.Adapter<BottomSheetAdapter.ViewHolder>() {
     private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
@@ -36,10 +42,20 @@ class BottomSheetAdapter(context: Context?, private val itemList: List<BottomShe
         holder.title.setText(item.title)
     }
 
+    /**
+     * Returns the total number of items in the data set held by the adapter.
+     *
+     * @return The total number of items in this adapter.
+     */
     override fun getItemCount(): Int {
         return itemList.size
     }
 
+    /**
+     * Updates the icon for bookmark item.
+     *
+     * @param icon The resource ID of the new icon to set.
+     */
     fun updateBookmarkIcon(icon: Int) {
         itemList.forEachIndexed { index, item ->
             if (item.imageResourceId == R.drawable.ic_round_star_filled_24px || item.imageResourceId == R.drawable.ic_round_star_border_24px) {

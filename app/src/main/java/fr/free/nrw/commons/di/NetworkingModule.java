@@ -133,6 +133,15 @@ public class NetworkingModule {
         return new CsrfTokenClient(sessionManager, tokenInterface, loginClient, logoutClient);
     }
 
+    /**
+     * Provides a singleton instance of CsrfTokenClient for Wikidata.
+     *
+     * @param sessionManager The session manager to manage user sessions.
+     * @param tokenInterface The interface for obtaining CSRF tokens.
+     * @param loginClient    The client for handling login operations.
+     * @param logoutClient   The client for handling logout operations.
+     * @return A singleton instance of CsrfTokenClient.
+     */
     @Named(NAMED_WIKI_CSRF)
     @Provides
     @Singleton
@@ -141,6 +150,12 @@ public class NetworkingModule {
         return new CsrfTokenClient(sessionManager, tokenInterface, loginClient, logoutClient);
     }
 
+    /**
+     * Provides a singleton instance of CsrfTokenInterface for Wikidata.
+     *
+     * @param serviceFactory The factory used to create service interfaces.
+     * @return A singleton instance of CsrfTokenInterface for Wikidata.
+     */
     @Named("wikidata-csrf-interface")
     @Provides
     @Singleton
@@ -247,6 +262,13 @@ public class NetworkingModule {
         return new PageEditClient(csrfTokenClient, pageEditInterface);
     }
 
+    /**
+     * Provides a singleton instance of PageEditClient for Wikidata.
+     *
+     * @param csrfTokenClient    The client used to manage CSRF tokens.
+     * @param pageEditInterface  The interface for page edit operations.
+     * @return A singleton instance of PageEditClient for Wikidata.
+     */
     @Named("wikidata-page-edit")
     @Provides
     @Singleton

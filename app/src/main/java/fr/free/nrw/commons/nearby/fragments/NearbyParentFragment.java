@@ -681,6 +681,12 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
 
+    /**
+     * Determines the number of spans (columns) in the RecyclerView based on device orientation
+     * and adapter item count.
+     *
+     * @return The number of spans to be used in the RecyclerView.
+     */
     private int getSpanCount() {
         int orientation = getResources().getConfiguration().orientation;
         if (bottomSheetAdapter != null) {

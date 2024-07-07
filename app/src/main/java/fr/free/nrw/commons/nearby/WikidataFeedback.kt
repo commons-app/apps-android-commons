@@ -15,7 +15,9 @@ import timber.log.Timber
 import java.util.concurrent.Callable
 import javax.inject.Inject
 
-
+/**
+ * Activity for providing feedback about Wikidata items.
+ */
 class WikidataFeedback : BaseActivity() {
     private lateinit var binding: ActivityWikidataFeedbackBinding
     var place: String = ""
@@ -40,13 +42,21 @@ class WikidataFeedback : BaseActivity() {
         lng = intent.getDoubleExtra("lng", 0.0)
         place = intent.getStringExtra("place") ?: ""
         wikidataQId = intent.getStringExtra("qid") ?: ""
-        pageTitle = "Talk:" + wikidataQId
+        pageTitle = getString(R.string.talk) + ":" + wikidataQId
         binding.toolbarBinding.toolbar.title = pageTitle
         binding.textHeader.text =
-            "Write something about the " + "'$place'" + " item. It will be publicly visible."
-        binding.radioButton1.setText("'$place' does not exist anymore, no picture can ever be taken of it.")
-        binding.radioButton2.setText("'$place' is at a different place (please specify the correct place below, if possible tell us the correct latitude/longitude).")
-        binding.radioButton3.setText("Other problem or information (please explain below).")
+            getString(R.string.write_something_about_the) + "'$place'" + getString(R.string.item_it_will_be_publicly_visible)
+        binding.radioButton1.setText(
+            getString(
+                R.string.does_not_exist_anymore_no_picture_can_ever_be_taken_of_it,
+                place
+            ))
+        binding.radioButton2.setText(
+            getString(
+                R.string.is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude,
+                place
+            ))
+        binding.radioButton3.setText(getString(R.string.other_problem_or_information_please_explain_below))
         setSupportActionBar(binding.toolbarBinding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 

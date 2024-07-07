@@ -22,7 +22,13 @@ import javax.inject.Singleton;
 import timber.log.Timber;
 
 /**
- * Refactored async task to Rx
+ * Singleton class for making edits to wiki pages asynchronously using RxJava.
+ *
+ * @property notificationHelper A helper class for displaying notifications.
+ * @property pageEditClient      A client for making page edit requests.
+ * @property viewUtil            A utility class for common view operations.
+ * @property username            The username used for page edits.
+ * @constructor Initializes the PageEditHelper with required dependencies.
  */
 @Singleton
 public class PageEditHelper {
@@ -46,18 +52,23 @@ public class PageEditHelper {
     }
 
     /**
-     * Public interface to nominate a particular media file for deletion
+     * Public interface to make a page edit request asynchronously.
      *
-     * @param context
-     * @param title
-     * @return
+     * @param context     The context for displaying messages.
+     * @param title       The title of the page to edit.
+     * @param preText     The existing content of the page.
+     * @param description The description of the issue to be fixed.
+     * @param details     Additional details about the issue.
+     * @param lat         The latitude of the location related to the page.
+     * @param lng         The longitude of the location related to the page.
+     * @return A Single emitting true if the edit was successful, false otherwise.
      */
     public Single<Boolean> makePageEdit(Context context, String title, String preText,
         String description,
         String details, Double lat, Double lng) {
         viewUtil.showShortToast(context, "Trying to edit " + title);
 
-        return create(title, preText, description, details, lat, lng)
+        return editPage(title, preText, description, details, lat, lng)
             .flatMapSingle(result -> Single.just(showNotification(context, title, result)))
             .firstOrError()
             .onErrorResumeNext(throwable -> {
@@ -69,12 +80,17 @@ public class PageEditHelper {
     }
 
     /**
-     * Makes several API calls to nominate the file for deletion
+     * Creates the text content for the page edit based on provided parameters.
      *
-     * @param title
-     * @return
+     * @param title       The title of the page to edit.
+     * @param preText     The existing content of the page.
+     * @param description The description of the issue to be fixed.
+     * @param details     Additional details about the issue.
+     * @param lat         The latitude of the location related to the page.
+     * @param lng         The longitude of the location related to the page.
+     * @return An Observable emitting true if the edit was successful, false otherwise.
      */
-    private Observable<Boolean> create(String title, String preText, String description,
+    private Observable<Boolean> editPage(String title, String preText, String description,
         String details, Double lat, Double lng) {
         Timber.d("thread is edit %s", Thread.currentThread().getName());
         String summary = "Please fix this item";
@@ -107,6 +123,14 @@ public class PageEditHelper {
         return pageEditClient.postCreate(title, text, summary);
     }
 
+    /**
+     * Displays a notification based on the result of the page edit.
+     *
+     * @param context The context for displaying the notification.
+     * @param title   The title of the page edited.
+     * @param result  The result of the edit operation.
+     * @return true if the edit was successful, false otherwise.
+     */
     private boolean showNotification(Context context, String title, boolean result) {
         String message;
 
