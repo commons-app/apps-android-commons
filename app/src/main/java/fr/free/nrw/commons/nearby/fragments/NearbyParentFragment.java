@@ -1224,14 +1224,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void getPlaceData(String entity, Place place, Marker marker, Boolean isBookMarked) {
-        final Observable<Place> getPlaceObservable = Observable
+        final Observable<List<Place>> getPlaceObservable = Observable
             .fromCallable(() -> nearbyController
-                .getPlace(entity));
+                .getPlaces(List.of(place)));
         compositeDisposable.add(getPlaceObservable
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(p -> {
-                    Place updatedPlace = p;
+            .subscribe(placeList -> {
+                    Place updatedPlace = placeList.get(0);
                     updatedPlace.distance = place.distance;
                     updatedPlace.location = place.location;
                     marker.setTitle(updatedPlace.name);
@@ -1240,14 +1240,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                             ? getTextBetweenParentheses(
                             updatedPlace.getLongDescription()) : updatedPlace.getLongDescription());
                     marker.showInfoWindow();
-                    for (int i =0; i < updatedPlaceList.size(); i++) {
+                    for (int i = 0; i < updatedPlaceList.size(); i++) {
                         Place pl = updatedPlaceList.get(i);
-                        if (pl.location == updatedPlace.location){
+                        if (pl.location == updatedPlace.location) {
                             updatedPlaceList.set(i, updatedPlace);
                             savePlaceToDB(place);
                         }
                     }
-                    Drawable icon = ContextCompat.getDrawable(getContext(), getIconFor(updatedPlace, isBookMarked));
+                    Drawable icon = ContextCompat.getDrawable(getContext(),
+                        getIconFor(updatedPlace, isBookMarked));
                     marker.setIcon(icon);
                     binding.map.invalidate();
                     binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.GONE);
@@ -1343,6 +1344,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                     setFilterState();
                 }));
     }
+
     public void loadPlacesDataAsync(List<Place> placeList, LatLng curLatLng) {
         List<Place> places = new ArrayList<>(placeList);
         int batchSize = 3;

@@ -121,19 +121,15 @@ public class NearbyPlaces {
     }
 
     /**
-     * Retrieves a place from a Wikidata query based on Entity Id
+     * Retrieves a list of places based on the provided list of places and language.
      *
-     * @param entityId Id of Wikidata Entity
-     * @param lang     The language for the query.
-     * @return A place obtained from the Wikidata query.
+     * This method fetches place information from a Wikidata query using the specified language.
+     *
+     * @param placeList A list of Place objects for which to fetch information.
+     * @param lang      The language code to use for the query.
+     * @return A list of Place objects obtained from the Wikidata query.
      * @throws Exception If an error occurs during the retrieval process.
      */
-    public Place getPlaceFromWikidataQuery(final String entityId,
-        final String lang) throws Exception {
-        return okHttpJsonApiClient
-            .getNearbyPlace(entityId, lang);
-    }
-
     public List<Place> getPlaces(final List<Place> placeList,
         final String lang) throws Exception {
         return okHttpJsonApiClient
