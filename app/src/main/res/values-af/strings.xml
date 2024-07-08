@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Fugithora
 * Fwolff
 * Joris Darlington Quarshie
 * Naudefj
@@ -11,6 +12,10 @@
   <string name="commons_logo">Commons logo</string>
   <string name="commons_website">Commons webwerf</string>
   <string name="submit">Indien</string>
+  <string name="add_another_description">Tilføj en anden beskrivelse</string>
+  <string name="add_new_contribution">Tilføj nyt bidrag</string>
+  <string name="add_contribution_from_camera">Tilføj bidrag fra kamera</string>
+  <string name="add_contribution_from_photos">Tilføj bidrag fra fotos</string>
   <string name="appwidget_img">Foto van die dag</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d lêer aan die uploaden</item>
@@ -364,4 +369,5 @@
   <string name="check_category_success_message">Versoek kategorie-toets vir %1$s</string>
   <string name="upload_nearby_place_found_title">Nabygeleë plek gevind</string>
   <string name="upload_nearby_place_found_description_singular" fuzzy="true">Is dit \'n foto van Plek %1$s?</string>
+  <string name="full_screen_mode_zoom_info">Brug to fingre for at zoome ind og ud.</string>
 </resources>

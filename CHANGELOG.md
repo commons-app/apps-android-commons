@@ -1,5 +1,32 @@
 # Wikimedia Commons for Android
 
+## v5.0.2
+
+- Enhanced multi-upload functionality with user prompts to clarify that all images would share the
+  same category and depictions.
+- Show Wikidata description on currently active Nearby pin to provide more useful information.
+- Improve the visibility of map markers by dynamically adjusting their colors based on the app's
+  theme. The map markers will now appear lighter when the app is in dark mode and darker when the
+  app is in light mode. This change aims to enhance marker visibility and improve the overall user
+  experience.
+- Added information on where user feedback is posted, helping users track existing feedback and
+  monitor their own submissions.
+- Enhanced the edit location screen of the upload screen by centering the map on the picture's
+  location from metadata when editing, or on the device's GPS location if metadata is unavailable,
+  improving accuracy and user experience.
+- Ensured the 'Add Location' button is renamed to 'Edit Location' when copying the location of a
+  recently uploaded image, enhancing clarity and user experience.
+- Added a ProgressBar to the media detail screen to indicate image loading status, enhancing user
+  experience by showing loading progress until the image is fully loaded.
+- Fixed an issue where caption and description fields would intermittently disappear when using
+  voice input, ensuring text remains visible and stable across all entries.
+- Fixed a crash that occurred when attempting to remove multiple instances of caption/description
+  fields after initially adding them.
+- Improve the text in the prompt shown when skipping login to sound more natural.
+- Modified feedback addition logic to append new sections at the bottom of the page, ensuring
+  auto-archiving of sections functions correctly on the feedback page.
+- Resolved issue where the app failed to clear cookies upon logout.
+
 ## v5.0.1
 
 Same as v5.0.0 except this fixes some R8 rules to ensure that the release

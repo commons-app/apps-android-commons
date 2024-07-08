@@ -11,6 +11,7 @@
 * FF11
 * Ferdinand0101
 * Icke
+* Ignatgg
 * Inkowik
 * Justman10000
 * Kghbln
@@ -800,4 +801,5 @@
   </plurals>
   <string name="multiple_files_depiction">Bitte beachte, dass bei einem Multiupload alle Bilder die gleichen Kategorien und Bezeichnungen erhalten. Sollten die Bilder keine gemeinsamen Bezeichnungen und Kategorien haben, führe bitte mehrere separate Uploads durch.</string>
   <string name="multiple_files_depiction_header">Hinweis zu Mehrfach-Uploads</string>
+  <string name="feedback_destination_note">Ihr Feedback wird auf der folgenden Wiki-Seite veröffentlicht: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile App/Feedback&lt;/a&gt;</string>
 </resources>

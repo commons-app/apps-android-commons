@@ -15,9 +15,9 @@
   <string name="add_new_contribution">Neie Bäitrag derbäiasetzen</string>
   <string name="add_contribution_from_camera">Bäitrag vun der Kamera derbäisetzen</string>
   <string name="add_contribution_from_photos">Bäitrag vun de Fotoen derbäisetzen</string>
-  <string name="show_captions">Beschreiwungen</string>
+  <string name="show_captions">Beschrëftungen</string>
   <string name="row_item_language_description">Sprooch-Beschreiwung</string>
-  <string name="row_item_caption">Beschreiwung</string>
+  <string name="row_item_caption">Beschrëftung</string>
   <string name="show_captions_description">Beschreiwung</string>
   <string name="nearby_row_image">Bild</string>
   <string name="nearby_all">All</string>
@@ -61,6 +61,7 @@
   <string name="signup">Schreift Iech an</string>
   <string name="logging_in_title">Aloggen</string>
   <string name="logging_in_message">Waart wgl. …</string>
+  <string name="updating_caption_title">Beschrëftungen a Beschreiwungen aktualiséieren</string>
   <string name="updating_caption_message">Waart wgl. ...</string>
   <string name="login_success">Umeldung huet geklappt!</string>
   <string name="login_failed">D\'Aloggen huet net funktionéiert!</string>
@@ -85,8 +86,10 @@
   <string name="menu_nearby">Nobäi</string>
   <string name="provider_contributions">Meng eropgeluede Fichieren</string>
   <string name="menu_share">Deelen</string>
-  <string name="share_title_hint">Erklärung (Obligatoresch)</string>
+  <string name="share_title_hint">Beschrëftung (obligatoresch)</string>
+  <string name="add_caption_toast">Gitt wgl. eng Beschrëftung fir dëse Fichier un</string>
   <string name="share_description_hint">Beschreiwung</string>
+  <string name="share_caption_hint">Beschrëftung</string>
   <string name="login_failed_network">Aloggen huet net funktionéiert – Problemer mam Reseau</string>
   <string name="login_failed_throttled">Ze dacks ouni Succès probéiert. Probéiert wgl. an e puer Minutten nach eng Kéier.</string>
   <string name="login_failed_blocked">Pardon, dëse Benotzer ass op Commons gespaart</string>
@@ -158,6 +161,7 @@
   <string name="detail_panel_cats_label">Kategorien</string>
   <string name="detail_panel_cats_loading">Lueden…</string>
   <string name="detail_panel_cats_none">Näischt ausgewielt</string>
+  <string name="detail_caption_empty">Keng Beschrëftung</string>
   <string name="detail_description_empty">Keng Beschreiwung</string>
   <string name="detail_discussion_empty">Keng Diskussioun</string>
   <string name="detail_license_empty">Onbekannt Lizenz</string>
@@ -169,6 +173,7 @@
   <string name="upload">Eroplueden</string>
   <string name="yes">Jo</string>
   <string name="no">Neen</string>
+  <string name="media_detail_caption">Beschrëftung</string>
   <string name="media_detail_title">Titel</string>
   <string name="media_detail_description">Beschreiwung</string>
   <string name="media_detail_discussion">Diskussioun</string>
@@ -379,8 +384,12 @@
   <string name="category_edit_helper_edit_message_else">Kategorie konnten net derbäigesat ginn.</string>
   <string name="category_edit_button_text">Kategorien aktualiséieren</string>
   <string name="coordinates_edit_helper_show_edit_title">Aktualiséierung vun de Koordinaten</string>
+  <string name="caption_edit_helper_show_edit_title">Aktualiséierung vun der Beschrëftung</string>
   <string name="coordinates_edit_helper_show_edit_title_success">Succès</string>
   <string name="coordinates_edit_helper_show_edit_message">Koordinaten %1$s ginn derbäigesat.</string>
+  <string name="caption_edit_helper_show_edit_message">D\'Beschrëftung gouf derbäigesat.</string>
+  <string name="caption_edit_helper_edit_message_else">D\'Beschrëftung konnt net derbäigesat ginn.</string>
+  <string name="description_activity_title">Beschreiwungen a Beschrëftungen änneren</string>
   <string name="share_image_via">Bild deelen iwwer</string>
   <string name="you_have_no_achievements_yet">Dir hutt nach keng Kontributioune gemaach</string>
   <string name="no_achievements_yet">%s huet nach keng Kontributioune gemaach</string>
@@ -449,6 +458,7 @@
   <string name="cancel_upload">Eroplueden ofbriechen</string>
   <string name="menu_view_category_page">Kategoriesäit weisen</string>
   <string name="app_ui_language">Sprooch vum Interface vum Benotzer vun der App</string>
+  <string name="remove">Hëlt eng Beschrëftung a Beschreiwung ewech</string>
   <string name="read_help_link">Liest méi</string>
   <string name="media_detail_in_all_languages">An alle Sproochen</string>
   <string name="choose_a_location">Eng Plaz eraussichen</string>
@@ -487,6 +497,7 @@
   <string name="report_user">Dëse Benotzer mellen</string>
   <string name="report_content">Dësen Inhalt mellen</string>
   <string name="request_user_block">Ufroe fir dëse Benotzer ze spären</string>
+  <string name="learn_how_to_write_a_useful_caption">Léiert, wéi een nëtzlech Beschrëftunge schreift</string>
   <string name="location_updated">Plaz aktualiséiert!</string>
   <string name="remove_location">Plaz ewechhuelen</string>
   <string name="remove_location_warning_title">Plaz-Ewechhuele-Warnung</string>

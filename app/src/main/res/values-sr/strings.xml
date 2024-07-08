@@ -731,4 +731,6 @@
     <item quantity="one">%d слика је одабрана</item>
     <item quantity="other">%d слика је одабрано</item>
   </plurals>
+  <string name="talk">Разговор</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">„%1$s” не постоји више, и није га могуће више сликати.</string>
 </resources>

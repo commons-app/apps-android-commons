@@ -818,6 +818,14 @@ Upload your first media by tapping on the add button.</string>
   </plurals>
   <string name="multiple_files_depiction">Please remember that all images in a multi-upload get the same categories and depictions. If the images do not share depictions and categories, please perform several separate uploads.</string>
   <string name="multiple_files_depiction_header">Note about multi-uploads</string>
+  <string name="nearby_wikitalk">Report a problem about this item to Wikidata</string>
+  <string name="please_enter_some_comments">Please enter some comments</string>
+  <string name="talk">Talk</string>
+  <string name="write_something_about_the">"Write something about the "</string>
+  <string name="item_it_will_be_publicly_visible">" item. It will be publicly visible."</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' does not exist anymore, no picture can ever be taken of it.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' is at a different place. Please specify the correct place below, and if possible, write the correct latitude and longitude.</string>
+  <string name="other_problem_or_information_please_explain_below">Other problem or information (please explain below).</string>
   <string name="feedback_destination_note">Your feedback gets posted to the following wiki page: <![CDATA[ <a href="https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback">Commons:Mobile app/Feedback</a> ]]></string>
   <string name="could_not_load_place_data">Could not load place data</string>
 </resources>

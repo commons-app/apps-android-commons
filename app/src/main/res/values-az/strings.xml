@@ -88,6 +88,7 @@
   <string name="media_detail_discussion">Müzakirə</string>
   <string name="media_detail_author">Müəllif</string>
   <string name="media_detail_license">Lisenziya</string>
+  <string name="nearby_wikidata">Vikidata</string>
   <string name="nearby_wikipedia">Vikipediya</string>
   <string name="send_thank_success_title">Təşəkkür uğurla göndərildi</string>
   <string name="send_thank_failure_message">Təşəkkür göndərilə bilmədi %1$s</string>

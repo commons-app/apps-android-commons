@@ -707,7 +707,7 @@
   <string name="back">חזרה</string>
   <string name="welcome_custom_picture_selector_text">ברוך בואך לבוחר התמונות המותאמות</string>
   <string name="custom_selector_info_text1">הבורר מציג לך אילו תמונות כבר העלית לוויקישיתוף.</string>
-  <string name="custom_selector_info_text2">בניגוד לתמונה מימין, על התמונה שמשמאל יש את הלוגו של ויקישיתוף שמעיד שהיא כבר הועלתה. יש לגעת ולהחזיר לקבלת תצוגה מקדימה של התמונה.</string>
+  <string name="custom_selector_info_text2">בניגוד לתמונה מימין, על התמונה שמשמאל מופיע הסמל של ויקישיתוף שמציין שהיא כבר הועלתה. יש לגעת ולהחזיק לקבלת תצוגה מקדימה של התמונה.</string>
   <string name="welcome_custom_selector_ok">מגניב</string>
   <string name="custom_selector_already_uploaded_image_text">התמונה הזאת כבר הועלתה לוויקישיתוף.</string>
   <string name="custom_selector_over_limit_warning">מסיבות טכניות, היישום לא יכול להעלות יותר מ־%1$d תמונות בבת אחת בצורה מהימנה. חרגת ממגבלת ההעלאה על סך %1$d ב־%2$d.</string>
@@ -807,5 +807,11 @@
   </plurals>
   <string name="multiple_files_depiction">נא לזכור שכשמועלות כמה תמונות, כולן מקבלות את אותן הקטגוריות והמוצגים. אם התמונות אינן חולקות מוצגים וקטגוריות, נא לעשות כמה העלאות נפרדות.</string>
   <string name="multiple_files_depiction_header">הערה על העלאות מרובות</string>
+  <string name="nearby_wikitalk">דווח על בעיה בפריט הזה לוויקינתונים</string>
+  <string name="please_enter_some_comments">נא להזין הערות כלשהן</string>
+  <string name="talk">שיחה</string>
+  <string name="write_something_about_the">\"נא לכתוב משהו על הפריט \"</string>
+  <string name="item_it_will_be_publicly_visible">\" . זה יהיה גלוי לציבור.\"</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\"%1$s\" כבר לא קיים, אי־אפשר לצלם אותו.</string>
   <string name="feedback_destination_note">המשוב שלך מתפרסם בדף הוויקי הבא: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
 </resources>
