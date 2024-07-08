@@ -358,12 +358,7 @@ public class LocationPickerActivity extends BaseActivity implements
         smallToolbarText.setText(getResources().getString(R.string.pan_and_zoom_to_adjust));
         fabCenterOnLocation.setVisibility(View.VISIBLE);
         removeSelectedLocationMarker();
-        if (cameraPosition != null && mapView != null) {
-            if (mapView.getController() != null) {
-                mapView.getController().animateTo(new GeoPoint(cameraPosition.getLatitude(),
-                    cameraPosition.getLongitude()));
-            }
-        }
+        moveMapToMediaLocation();
     }
 
     /**
@@ -401,7 +396,7 @@ public class LocationPickerActivity extends BaseActivity implements
      */
     private void showInMapApp() {
         fr.free.nrw.commons.location.LatLng position = null;
-        
+
         if(activity.equals("UploadActivity") && cameraPosition != null){
             //EXIF location data is available
             position = new fr.free.nrw.commons.location.LatLng(cameraPosition.getLatitude(),
