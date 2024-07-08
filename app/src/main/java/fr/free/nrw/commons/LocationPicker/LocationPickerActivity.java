@@ -238,16 +238,6 @@ public class LocationPickerActivity extends BaseActivity implements
                 cameraPosition.getLongitude()));
         }
         setupMapView();
-        
-        if("UploadActivity".equals(activity)){
-            if(mapView != null && mapView.getController() != null && cameraPosition != null){
-                GeoPoint cameraGeoPoint = new GeoPoint(cameraPosition.getLatitude(),
-                    cameraPosition.getLongitude());
-
-                mapView.getController().setCenter(cameraGeoPoint);
-                mapView.getController().animateTo(cameraGeoPoint);
-            }
-        }
     }
 
     /**
