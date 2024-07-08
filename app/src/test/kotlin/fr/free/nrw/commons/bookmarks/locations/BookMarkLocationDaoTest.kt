@@ -64,7 +64,7 @@ class BookMarkLocationDaoTest {
 
 
         examplePlaceBookmark = Place("en", "placeName", exampleLabel, "placeDescription"
-                , exampleLocation, "placeCategory", builder.build(),"picName",false)
+                , exampleLocation, "placeCategory", builder.build(),"picName",false, "entityID")
         testObject = BookmarkLocationsDao { client }
     }
 

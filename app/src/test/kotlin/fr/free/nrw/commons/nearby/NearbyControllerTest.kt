@@ -132,7 +132,8 @@ class NearbyControllerTest {
             "placeCategory",
             Sitelinks.Builder().build(),
             "picName",
-            false
+            false,
+            "entityID"
         )
         val place2 = Place(
             "en",
@@ -143,7 +144,8 @@ class NearbyControllerTest {
             "placeCategory",
             Sitelinks.Builder().build(),
             "picName",
-            false
+            false,
+            "entityID"
         )
         `when`(
             nearbyPlaces.radiusExpander(
@@ -183,7 +185,8 @@ class NearbyControllerTest {
             "placeCategory",
             Sitelinks.Builder().build(),
             "picName",
-            false
+            false,
+            "entityID"
         )
         val place2 = Place(
             "en",
@@ -194,7 +197,8 @@ class NearbyControllerTest {
             "placeCategory",
             Sitelinks.Builder().build(),
             "picName",
-            false
+            false,
+            "entityID"
         )
         `when`(
             nearbyPlaces.radiusExpander(
@@ -224,7 +228,8 @@ class NearbyControllerTest {
             "placeCategory",
             Sitelinks.Builder().build(),
             "picName",
-            false
+            false,
+            "entityID"
         )
         val place2 = Place(
             "en",
@@ -235,7 +240,8 @@ class NearbyControllerTest {
             "placeCategory",
             Sitelinks.Builder().build(),
             "picName",
-            false
+            false,
+            "entityID"
         )
         `when`(
             nearbyPlaces.radiusExpander(
@@ -275,7 +281,8 @@ class NearbyControllerTest {
             "placeCategory",
             Sitelinks.Builder().build(),
             "picName",
-            false
+            false,
+            "entityID"
         )
         place.isMonument = true
         `when`(currentLatLng.latitude).thenReturn(0.0)
@@ -299,7 +306,8 @@ class NearbyControllerTest {
             "placeCategory",
             Sitelinks.Builder().build(),
             "picName",
-            false
+            false,
+            "entityID"
         )
         place.isMonument = false
         `when`(currentLatLng.latitude).thenReturn(0.0)
@@ -323,7 +331,8 @@ class NearbyControllerTest {
             "placeCategory",
             Sitelinks.Builder().build(),
             "",
-            false
+            false,
+            "entityID"
         )
         place.isMonument = false
         `when`(currentLatLng.latitude).thenReturn(0.0)
@@ -347,7 +356,8 @@ class NearbyControllerTest {
             "placeCategory",
             Sitelinks.Builder().build(),
             "",
-            true
+            true,
+            "entityID"
         )
         place.isMonument = false
         `when`(currentLatLng.latitude).thenReturn(0.0)
