@@ -63,6 +63,7 @@ public class NetworkingModule {
     public static final String NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE = "language-wikipedia-wikisite";
 
     public static final String NAMED_COMMONS_CSRF = "commons-csrf";
+    public static final String NAMED_WIKI_CSRF = "wiki-csrf";
 
     @Provides
     @Singleton
@@ -128,10 +129,41 @@ public class NetworkingModule {
     @Provides
     @Singleton
     public CsrfTokenClient provideCommonsCsrfTokenClient(SessionManager sessionManager,
-        CsrfTokenInterface tokenInterface, LoginClient loginClient, LogoutClient logoutClient) {
+        @Named("commons-csrf-interface") CsrfTokenInterface tokenInterface, LoginClient loginClient, LogoutClient logoutClient) {
         return new CsrfTokenClient(sessionManager, tokenInterface, loginClient, logoutClient);
     }
 
+    /**
+     * Provides a singleton instance of CsrfTokenClient for Wikidata.
+     *
+     * @param sessionManager The session manager to manage user sessions.
+     * @param tokenInterface The interface for obtaining CSRF tokens.
+     * @param loginClient    The client for handling login operations.
+     * @param logoutClient   The client for handling logout operations.
+     * @return A singleton instance of CsrfTokenClient.
+     */
+    @Named(NAMED_WIKI_CSRF)
+    @Provides
+    @Singleton
+    public CsrfTokenClient provideWikiCsrfTokenClient(SessionManager sessionManager,
+        @Named("wikidata-csrf-interface") CsrfTokenInterface tokenInterface, LoginClient loginClient, LogoutClient logoutClient) {
+        return new CsrfTokenClient(sessionManager, tokenInterface, loginClient, logoutClient);
+    }
+
+    /**
+     * Provides a singleton instance of CsrfTokenInterface for Wikidata.
+     *
+     * @param serviceFactory The factory used to create service interfaces.
+     * @return A singleton instance of CsrfTokenInterface for Wikidata.
+     */
+    @Named("wikidata-csrf-interface")
+    @Provides
+    @Singleton
+    public CsrfTokenInterface provideWikidataCsrfTokenInterface(CommonsServiceFactory serviceFactory) {
+        return serviceFactory.create(BuildConfig.WIKIDATA_URL, CsrfTokenInterface.class);
+    }
+
+    @Named("commons-csrf-interface")
     @Provides
     @Singleton
     public CsrfTokenInterface provideCsrfTokenInterface(CommonsServiceFactory serviceFactory) {
@@ -227,6 +259,21 @@ public class NetworkingModule {
     @Singleton
     public PageEditClient provideCommonsPageEditClient(@Named(NAMED_COMMONS_CSRF) CsrfTokenClient csrfTokenClient,
                                                        @Named("commons-page-edit-service") PageEditInterface pageEditInterface) {
+        return new PageEditClient(csrfTokenClient, pageEditInterface);
+    }
+
+    /**
+     * Provides a singleton instance of PageEditClient for Wikidata.
+     *
+     * @param csrfTokenClient    The client used to manage CSRF tokens.
+     * @param pageEditInterface  The interface for page edit operations.
+     * @return A singleton instance of PageEditClient for Wikidata.
+     */
+    @Named("wikidata-page-edit")
+    @Provides
+    @Singleton
+    public PageEditClient provideWikidataPageEditClient(@Named(NAMED_WIKI_CSRF) CsrfTokenClient csrfTokenClient,
+        @Named("wikidata-page-edit-service") PageEditInterface pageEditInterface) {
         return new PageEditClient(csrfTokenClient, pageEditInterface);
     }
 

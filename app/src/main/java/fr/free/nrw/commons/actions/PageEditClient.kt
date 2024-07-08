@@ -4,6 +4,7 @@ import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import io.reactivex.Observable
 import io.reactivex.Single
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
+import timber.log.Timber
 
 /**
  * This class acts as a Client to facilitate wiki page editing
@@ -27,7 +28,41 @@ class PageEditClient(
     fun edit(pageTitle: String, text: String, summary: String): Observable<Boolean> {
         return try {
             pageEditInterface.postEdit(pageTitle, summary, text, csrfTokenClient.getTokenBlocking())
-                .map { editResponse -> editResponse.edit()!!.editSucceeded() }
+                .map { editResponse ->
+                        editResponse.edit()!!.editSucceeded()
+                    }
+        } catch (throwable: Throwable) {
+            if (throwable is InvalidLoginTokenException) {
+                throw throwable
+            } else {
+                Observable.just(false)
+            }
+        }
+    }
+
+    /**
+     * Creates a new page with the given title, text, and summary.
+     *
+     * @param pageTitle The title of the page to be created.
+     * @param text      The content of the page in wikitext format.
+     * @param summary   The edit summary for the page creation.
+     * @return An observable that emits true if the page creation succeeded, false otherwise.
+     * @throws InvalidLoginTokenException If an invalid login token is encountered during the process.
+     */
+    fun postCreate(pageTitle: String, text: String, summary: String): Observable<Boolean> {
+        return try {
+            pageEditInterface.postCreate(
+                pageTitle,
+                summary,
+                text,
+                "text/x-wiki",
+                "wikitext",
+                true,
+                true,
+                csrfTokenClient.getTokenBlocking()
+            ).map { editResponse ->
+                editResponse.edit()!!.editSucceeded()
+            }
         } catch (throwable: Throwable) {
             if (throwable is InvalidLoginTokenException) {
                 throw throwable
