@@ -64,7 +64,7 @@
   <string name="navigation_item_explore">Udforsk</string>
   <string name="preference_category_appearance">Udseende</string>
   <string name="preference_category_general">Generelt</string>
-  <string name="preference_category_feedback">Tilbagemelding</string>
+  <string name="preference_category_feedback">Feedback</string>
   <string name="preference_category_privacy">Privatliv</string>
   <string name="app_name">Commons</string>
   <string name="bullet">•</string>
@@ -90,11 +90,11 @@
   <string name="authentication_failed">Godkendelse mislykkedes. Log venligst ind igen.</string>
   <string name="uploading_started">Upload påbegyndt!</string>
   <string name="uploading_queued">Upload i kø (begrænset forbindelsestilstand aktiveret)</string>
-  <string name="upload_completed_notification_title">%1$s overført!</string>
+  <string name="upload_completed_notification_title">%1$s uploadet!</string>
   <string name="upload_completed_notification_text">Tryk for at få vist dit upload</string>
   <string name="upload_progress_notification_title_start">Uploader fil: %s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s overføres</string>
-  <string name="upload_progress_notification_title_finishing">Afslutter uploadning af %1$s</string>
+  <string name="upload_progress_notification_title_in_progress">%1$s uploades</string>
+  <string name="upload_progress_notification_title_finishing">Afslutter upload af %1$s</string>
   <string name="upload_failed_notification_title">Upload af %1$s mislykkedes</string>
   <string name="upload_paused_notification_title">Upload af %1$s sat på pause</string>
   <string name="upload_failed_notification_subtitle">Tryk for at se</string>
@@ -103,8 +103,8 @@
   <string name="contribution_state_queued">I kø</string>
   <string name="contribution_state_failed">Mislykkedes</string>
   <string name="contribution_state_in_progress">%1$d%% færdig</string>
-  <string name="contribution_state_starting">Overfører</string>
-  <string name="menu_from_gallery">Fra galleriet</string>
+  <string name="contribution_state_starting">Uploader</string>
+  <string name="menu_from_gallery">Fra galleri</string>
   <string name="menu_from_camera">Tag billede</string>
   <string name="menu_nearby">I nærheden</string>
   <string name="provider_contributions">Mine uploads</string>
@@ -147,7 +147,7 @@
   <string name="about_privacy_policy">Privatlivspolitik</string>
   <string name="about_credits">Tak til</string>
   <string name="title_activity_about">Om</string>
-  <string name="menu_feedback">Send tilbagemelding (med e-mail)</string>
+  <string name="menu_feedback">Send feedback (via e-mail)</string>
   <string name="no_email_client">Ingen e-mail-klient installeret</string>
   <string name="provider_categories">Nyligt anvendte kategorier</string>
   <string name="waiting_first_sync">Venter på den første synkronisering…</string>
@@ -203,7 +203,7 @@
   <string name="location_permission_title">Anmoder om placeringstilladelse</string>
   <string name="in_app_camera_location_permission_title">Registrer placering for billeder, der tages i appen</string>
   <string name="in_app_camera_location_switch_pref_summary">Aktiver dette for at registrere placering for billeder i appen, i tilfælde af at enhedens kamera ikke gør det</string>
-  <string name="ok">O.k.</string>
+  <string name="ok">Ok</string>
   <string name="warning">Advarsel</string>
   <string name="duplicate_file_name">Dublet filnavn fundet</string>
   <string name="upload">Overfør</string>
@@ -214,7 +214,7 @@
   <string name="media_detail_depiction">Afbildning</string>
   <string name="media_detail_description">Beskrivelse</string>
   <string name="media_detail_discussion">Diskussion</string>
-  <string name="media_detail_author">Ophavsmand</string>
+  <string name="media_detail_author">Forfatter</string>
   <string name="media_detail_uploaded_date">Upload-dato</string>
   <string name="media_detail_license">Licens</string>
   <string name="media_detail_coordinates">Koordinater</string>
@@ -241,7 +241,7 @@
   <string name="navigation_item_nearby">I nærheden</string>
   <string name="navigation_item_about">Om</string>
   <string name="navigation_item_settings">Indstillinger</string>
-  <string name="navigation_item_feedback">Tilbagemelding</string>
+  <string name="navigation_item_feedback">Feedback</string>
   <string name="navigation_item_feedback_github">Feedback via GitHub</string>
   <string name="navigation_item_logout">Log af</string>
   <string name="navigation_item_info">Vejledning</string>
@@ -381,9 +381,9 @@
   <string name="images_used_explanation">Antallet af billeder, du har uploadet til Commons, som blev brugt i Wikimedia-artikler</string>
   <string name="error_occurred">Der opstod en fejl!</string>
   <string name="notifications_channel_name_all">Commons-notifikationer</string>
-  <string name="preference_author_name_toggle">Brug brugerdefineret navn for ophavsmand</string>
-  <string name="preference_author_name_toggle_summary">Brug et brugerdefineret navn for ophavsmand i stedet for dit brugernavn, når du uploader billeder</string>
-  <string name="preference_author_name">Brugerdefineret ophavsmandsnavn</string>
+  <string name="preference_author_name_toggle">Brug brugerdefineret forfatternavn</string>
+  <string name="preference_author_name_toggle_summary">Brug et brugerdefineret forfatternavn i stedet for dit brugernavn, når du uploader billeder</string>
+  <string name="preference_author_name">Brugerdefineret forfatternavn</string>
   <string name="contributions_fragment">Bidrag</string>
   <string name="nearby_fragment">I nærheden</string>
   <string name="notifications">Notifikationer</string>
@@ -413,7 +413,7 @@
   <string name="deletion_reason_not_interesting">Beklager dette billede er ikke interessant for en encyklopædi</string>
   <string name="uploaded_by_myself">Uploadet af mig selv på %1$s , brugt i %2$d artikel(er).</string>
   <string name="no_uploads">Velkommen til Commons!\n\nUpload dit første medie ved at trykke på Tilføj-knappen.</string>
-  <string name="no_categories_selected">Ingen valgte kategorier</string>
+  <string name="no_categories_selected">Ingen kategorier valgt</string>
   <string name="no_categories_selected_warning_desc">Billeder uden kategorier er sjældent brugbare. Er du sikker på, at du vil fortsætte uden at vælge kategorier?</string>
   <string name="no_depictions_selected">Ingen afbildninger valgt</string>
   <string name="no_depictions_selected_warning_desc">Billeder med afbildninger er lettere at finde og mere tilbøjelige til at blive brugt. Er du sikker på, at du vil fortsætte uden at vælge afbildninger?</string>
@@ -497,7 +497,7 @@
   <string name="download_failed_we_cannot_download_the_file_without_storage_permission">Download mislykkedes!!. Vi kan ikke downloade filen uden tilladelse til ekstern lagring.</string>
   <string name="manage_exif_tags">Administrer EXIF-tags</string>
   <string name="manage_exif_tags_summary">Vælg hvilke EXIF-tags, der skal beholdes i uploads</string>
-  <string name="exif_tag_name_author">Ophavsmand</string>
+  <string name="exif_tag_name_author">Forfatter</string>
   <string name="exif_tag_name_copyright">Ophavsret</string>
   <string name="exif_tag_name_location">Placering</string>
   <string name="exif_tag_name_cameraModel">Kameramodel</string>
@@ -609,7 +609,7 @@
   <string name="wikipedia_instructions_step_2">2. Hvis du klikker på Bekræft, åbnes Wikipedia-artiklen</string>
   <string name="wikipedia_instructions_step_3">3. Find en passende sektion i artiklen til dit billede</string>
   <string name="wikipedia_instructions_step_4">4. Klik på Rediger-ikonet (det som ligner en blyant) for den sektion.</string>
-  <string name="wikipedia_instructions_step_5">5. Indsæt wikiteksten på det rigtige sted.</string>
+  <string name="wikipedia_instructions_step_5">5. Indsæt wikiteksten på det rette sted.</string>
   <string name="wikipedia_instructions_step_6">6. Rediger wikiteksten for passende placering, hvis det er nødvendigt. For mere information, se &lt;a href=\"https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Images#How_to_place_an_image\"&gt;her&lt;/a&gt;.</string>
   <string name="wikipedia_instructions_step_7">7. Udgiv artiklen</string>
   <string name="copy_wikicode_to_clipboard">Kopier wikikode til udklipsholder</string>
@@ -660,7 +660,7 @@
   <string name="app_ui_language">Appens brugergrænsefladesprog</string>
   <string name="remove">Fjerner en billedtekst og beskrivelse</string>
   <string name="read_help_link">Læs mere</string>
-  <string name="media_detail_in_all_languages">For alle sprog</string>
+  <string name="media_detail_in_all_languages">På alle sprog</string>
   <string name="choose_a_location">Vælg en placering</string>
   <string name="pan_and_zoom_to_adjust">Panorer og zoom for at justere</string>
   <string name="select_location_location_picker">Vælg placering</string>
@@ -718,7 +718,7 @@
   <string name="device_model">Enhedsmodel</string>
   <string name="device_name">Enhedsnavn</string>
   <string name="network_type">Netværkstype</string>
-  <string name="thanks_feedback">Tak for tilbagemeldingen</string>
+  <string name="thanks_feedback">Tak for din feedback</string>
   <string name="error_feedback">Fejl under afsendelse af feedback</string>
   <string name="enter_description">Hvad er din feedback?</string>
   <string name="your_feedback">Din feedback</string>
@@ -758,8 +758,8 @@
   <string name="remove_location_warning_title">Fjern placering-advarsel</string>
   <string name="remove_location_warning_desc">Placering gør billeder mere nyttige og nemmere at finde. Ønsker du virkelig at fjerne placering fra dette billede?</string>
   <string name="location_removed">Placering fjernet!</string>
-  <string name="send_thanks_to_author">Tak ophavsmanden</string>
-  <string name="error_sending_thanks">Fejl ved afsendelse af tak til ophavsmand.</string>
+  <string name="send_thanks_to_author">Tak forfatteren</string>
+  <string name="error_sending_thanks">Fejl ved afsendelse af tak til forfatter.</string>
   <string name="invalid_login_message">Login udløb. Log venligst ind igen.</string>
   <string name="no_application_available_to_open_gpx_files">Der er ingen tilgængelig applikation til at åbne GPX-filer</string>
   <string name="file_saved_successfully">Fil gemt</string>
@@ -775,5 +775,13 @@
   </plurals>
   <string name="multiple_files_depiction">Husk, at alle billeder i et multi-upload får de samme kategorier og afbildninger. Hvis billederne ikke deler afbildninger og kategorier, skal du udføre flere separate uploads.</string>
   <string name="multiple_files_depiction_header">Bemærkning om at uploade flere billeder</string>
+  <string name="nearby_wikitalk">Rapporter et problem med dette element til Wikidata</string>
+  <string name="please_enter_some_comments">Skriv nogle kommentarer</string>
+  <string name="talk">Tal</string>
+  <string name="write_something_about_the">\"Skriv noget om\"</string>
+  <string name="item_it_will_be_publicly_visible">\" elementet. Det vil være offentligt synligt.\"</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' eksisterer ikke længere, der kan aldrig tages et billede af det.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' ligger et andet sted (angiv venligst det korrekte sted nedenfor, fortæl os om muligt den korrekte breddegrad/længdegrad).</string>
+  <string name="other_problem_or_information_please_explain_below">Andet problem eller anden information (forklar venligst nedenfor).</string>
   <string name="feedback_destination_note">Din feedback bliver slået op på følgende wiki-side:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
 </resources>
