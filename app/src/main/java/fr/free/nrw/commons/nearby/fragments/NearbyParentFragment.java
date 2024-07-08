@@ -853,21 +853,6 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Fits buttons according to our layout
-     */
-    private void decideButtonVisibilities() {
-        // Remove button text if they exceed 1 line or if internal layout has not been built
-        // Only need to check for directions button because it is the longest
-        if (binding.bottomSheetDetails.directionsButtonText.getLineCount() > 1
-            || binding.bottomSheetDetails.directionsButtonText.getLineCount() == 0) {
-            binding.bottomSheetDetails.wikipediaButtonText.setVisibility(View.GONE);
-            binding.bottomSheetDetails.wikidataButtonText.setVisibility(View.GONE);
-            binding.bottomSheetDetails.commonsButtonText.setVisibility(View.GONE);
-            binding.bottomSheetDetails.directionsButtonText.setVisibility(View.GONE);
-        }
-    }
-
-    /**
      *
      */
     private void addActionToTitle() {
@@ -2171,55 +2156,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         bottomSheetAdapter.setClickListener(this);
         binding.bottomSheetDetails.bottomSheetRecyclerView.setAdapter(bottomSheetAdapter);
         updateBookmarkButtonImage(selectedPlace);
-
-        binding.bottomSheetDetails.bookmarkButton.setOnClickListener(view -> {
-            final boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(selectedPlace);
-            updateBookmarkButtonImage(selectedPlace);
-            updateMarker(isBookmarked, selectedPlace, locationManager.getLastLocation());
-            binding.map.invalidate();
-        });
-        binding.bottomSheetDetails.bookmarkButton.setOnLongClickListener(view -> {
-            Toast.makeText(getContext(), R.string.menu_bookmark, Toast.LENGTH_SHORT).show();
-            return true;
-        });
-
-        binding.bottomSheetDetails.wikipediaButton.setVisibility(
-            place.hasWikipediaLink() ? View.VISIBLE : View.GONE);
-        binding.bottomSheetDetails.wikipediaButton.setOnClickListener(
-            view -> Utils.handleWebUrl(getContext(), selectedPlace.siteLinks.getWikipediaLink()));
-        binding.bottomSheetDetails.wikipediaButton.setOnLongClickListener(view -> {
-            Toast.makeText(getContext(), R.string.nearby_wikipedia, Toast.LENGTH_SHORT).show();
-            return true;
-        });
-
-        binding.bottomSheetDetails.wikidataButton.setVisibility(
-            place.hasWikidataLink() ? View.VISIBLE : View.GONE);
-        binding.bottomSheetDetails.wikidataButton.setOnClickListener(
-            view -> Utils.handleWebUrl(getContext(), selectedPlace.siteLinks.getWikidataLink()));
-        binding.bottomSheetDetails.wikidataButton.setOnLongClickListener(view -> {
-            Toast.makeText(getContext(), R.string.nearby_wikidata, Toast.LENGTH_SHORT).show();
-            return true;
-        });
-
-        binding.bottomSheetDetails.directionsButton.setOnClickListener(
-            view -> Utils.handleGeoCoordinates(getActivity(),
-                selectedPlace.getLocation()));
-        binding.bottomSheetDetails.directionsButton.setOnLongClickListener(view -> {
-            Toast.makeText(getContext(), R.string.nearby_directions, Toast.LENGTH_SHORT).show();
-            return true;
-        });
-
-        binding.bottomSheetDetails.commonsButton.setVisibility(
-            selectedPlace.hasCommonsLink() ? View.VISIBLE : View.GONE);
-        binding.bottomSheetDetails.commonsButton.setOnClickListener(
-            view -> Utils.handleWebUrl(getContext(), selectedPlace.siteLinks.getCommonsLink()));
-        binding.bottomSheetDetails.commonsButton.setOnLongClickListener(view -> {
-            Toast.makeText(getContext(), R.string.nearby_commons, Toast.LENGTH_SHORT).show();
-            return true;
-        });
-
         binding.bottomSheetDetails.icon.setImageResource(selectedPlace.getLabel().getIcon());
-
         binding.bottomSheetDetails.title.setText(selectedPlace.name);
         binding.bottomSheetDetails.category.setText(selectedPlace.distance);
         // Remove label since it is double information
@@ -2270,9 +2207,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         } else {
             bookmarkIcon = R.drawable.ic_round_star_border_24px;
         }
-        if (binding.bottomSheetDetails.bookmarkButtonImage != null) {
-            binding.bottomSheetDetails.bookmarkButtonImage.setImageResource(bookmarkIcon);
-        }
+        bottomSheetAdapter.updateBookmarkIcon(bookmarkIcon);
     }
 
     @Override
