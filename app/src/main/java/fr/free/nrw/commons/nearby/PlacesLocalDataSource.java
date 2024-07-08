@@ -14,8 +14,8 @@ public class PlacesLocalDataSource {
         this.placeDao = placeDao;
     }
 
-    public Place fetchPlace(LatLng latLng){
-        return placeDao.getPlace(latLng);
+    public Place fetchPlace(String entityID){
+        return placeDao.getPlace(entityID);
     }
 
     public Completable savePlace(Place place) {

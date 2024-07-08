@@ -1409,7 +1409,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         for (Place place : batch) {
             Observable<Place> placeObservable = Observable
                 .fromCallable(() -> {
-                    Place fetchedPlace = placesRepository.fetchPlace(place.location);
+                    Place fetchedPlace = placesRepository.fetchPlace(place.entityID);
                     return fetchedPlace != null ? fetchedPlace : place;
                 })
                 .subscribeOn(Schedulers.io())

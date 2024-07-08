@@ -18,8 +18,8 @@ public class PlacesRepository {
         return localDataSource.savePlace(place);
     }
 
-    public Place fetchPlace(LatLng latLng){
-        return localDataSource.fetchPlace(latLng);
+    public Place fetchPlace(String entityID){
+        return localDataSource.fetchPlace(entityID);
     }
 
 }

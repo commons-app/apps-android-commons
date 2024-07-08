@@ -12,8 +12,8 @@ public abstract class PlaceDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public abstract void saveSynchronous(Place place);
 
-    @Query("SELECT * from place WHERE location=:l")
-    public abstract Place getPlace(LatLng l);
+    @Query("SELECT * from place WHERE entityID=:entity")
+    public abstract Place getPlace(String entity);
 
     public Completable save(final Place place) {
         return Completable

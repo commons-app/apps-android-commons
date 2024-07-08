@@ -24,8 +24,9 @@ public class Place implements Parcelable {
     public String name;
     private Label label;
     private String longDescription;
-    @PrimaryKey @NonNull
     public LatLng location;
+    @PrimaryKey @NonNull
+    public String entityID;
     private String category;
     public String pic;
     // exists boolean will tell whether the place exists or not,
@@ -47,10 +48,11 @@ public class Place implements Parcelable {
         pic = null;
         exists = null;
         siteLinks = null;
+        entityID = null;
     }
 
     public Place(String language, String name, Label label, String longDescription, LatLng location,
-        String category, Sitelinks siteLinks, String pic, Boolean exists) {
+        String category, Sitelinks siteLinks, String pic, Boolean exists, String entityID) {
         this.language = language;
         this.name = name;
         this.label = label;
@@ -60,10 +62,11 @@ public class Place implements Parcelable {
         this.siteLinks = siteLinks;
         this.pic = (pic == null) ? "" : pic;
         this.exists = exists;
+        this.entityID = entityID;
     }
 
     public Place(String name, String longDescription, LatLng location, String category,
-        Sitelinks siteLinks, String pic, String thumb) {
+        Sitelinks siteLinks, String pic, String thumb, String entityID) {
         this.name = name;
         this.longDescription = longDescription;
         this.location = location;
@@ -74,6 +77,7 @@ public class Place implements Parcelable {
         this.language = null;
         this.label = null;
         this.exists = true;
+        this.entityID = entityID;
     }
 
     public Place(Parcel in) {
@@ -89,6 +93,7 @@ public class Place implements Parcelable {
         String existString = in.readString();
         this.exists = Boolean.parseBoolean(existString);
         this.isMonument = in.readInt() == 1;
+        this.entityID = in.readString();
     }
 
     public static Place from(NearbyResultItem item) {
@@ -96,6 +101,10 @@ public class Place implements Parcelable {
         String classEntityId = "";
         if (!StringUtils.isBlank(itemClass)) {
             classEntityId = itemClass.replace("http://www.wikidata.org/entity/", "");
+        }
+        String entityId = "";
+        if (!StringUtils.isBlank(item.getItem().getValue())){
+            entityId = item.getItem().getValue().replace("http://www.wikidata.org/entity/", "");
         }
         // Set description when not null and not empty
         String description =
@@ -129,7 +138,7 @@ public class Place implements Parcelable {
                 .build(),
             item.getPic().getValue(),
             // Checking if the place exists or not
-            (item.getDestroyed().getValue() == "") && (item.getEndTime().getValue() == ""));
+            (item.getDestroyed().getValue() == "") && (item.getEndTime().getValue() == ""), entityId);
     }
 
     /**
@@ -296,6 +305,7 @@ public class Place implements Parcelable {
             ", siteLinks='" + siteLinks.toString() + '\'' +
             ", pic='" + pic + '\'' +
             ", exists='" + exists.toString() + '\'' +
+            ", entityID='" + entityID + '\'' +
             '}';
     }
 
@@ -314,6 +324,7 @@ public class Place implements Parcelable {
         dest.writeString(category);
         dest.writeParcelable(siteLinks, 0);
         dest.writeString(pic);
+        dest.writeString(entityID);
         dest.writeString(exists.toString());
         dest.writeInt(isMonument ? 1 : 0);
     }
