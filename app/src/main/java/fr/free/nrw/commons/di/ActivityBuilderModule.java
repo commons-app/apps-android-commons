@@ -84,5 +84,7 @@ public abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector
     abstract UploadProgressActivity bindUploadProgressActivity();
+
+    @ContributesAndroidInjector
     abstract WikidataFeedback bindWikiFeedback();
 }
