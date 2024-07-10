@@ -613,6 +613,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 }else if (updatedPlaceList != null){
                     if (updatedPlaceList.size() != 0){
                         loadPlacesDataAsync(updatedPlaceList, updatedLatLng);
+                    }else {
+                        updateMapMarkers(updatedPlaceList, getLastMapFocus(), false);
                     }
                 }
             } else {
