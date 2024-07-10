@@ -14,6 +14,7 @@ import fr.free.nrw.commons.description.DescriptionEditActivity;
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.explore.SearchActivity;
 import fr.free.nrw.commons.media.ZoomableActivity;
+import fr.free.nrw.commons.nearby.WikidataFeedback;
 import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.review.ReviewActivity;
@@ -83,4 +84,5 @@ public abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector
     abstract UploadProgressActivity bindUploadProgressActivity();
+    abstract WikidataFeedback bindWikiFeedback();
 }

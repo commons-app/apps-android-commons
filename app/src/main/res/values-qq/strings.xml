@@ -204,4 +204,6 @@
   <string name="explore_map_details">{{Identical|Detail}}</string>
   <string name="set_up_avatar_toast_string">\"Set as avatar\" should be translated the same as {{msg-wm|Commons-android-strings-menu set avatar}}.</string>
   <string name="multiple_files_depiction">{{Doc-commons-app-depicts}}</string>
+  <string name="write_something_about_the">Shown before {{msg-wm|Commons-android-strings-item it will be publicly visible}}. Between them, the item name is shown.</string>
+  <string name="item_it_will_be_publicly_visible">Shown after {{msg-wm|Commons-android-strings-write something about the}}. Between them, the item name is shown.</string>
 </resources>
