@@ -27,19 +27,20 @@ import org.robolectric.annotation.Config
 @Config(sdk = [21], application = TestCommonsApplication::class)
 class BookMarkLocationDaoTest {
     private val columns = arrayOf(COLUMN_NAME,
-            COLUMN_LANGUAGE,
-            COLUMN_DESCRIPTION,
-            COLUMN_CATEGORY,
-            COLUMN_LABEL_TEXT,
-            COLUMN_LABEL_ICON,
-            COLUMN_IMAGE_URL,
-            COLUMN_WIKIPEDIA_LINK,
-            COLUMN_WIKIDATA_LINK,
-            COLUMN_COMMONS_LINK,
-            COLUMN_LAT,
-            COLUMN_LONG,
-            COLUMN_PIC,
-            COLUMN_EXISTS)
+        COLUMN_LANGUAGE,
+        COLUMN_DESCRIPTION,
+        COLUMN_CATEGORY,
+        COLUMN_LABEL_TEXT,
+        COLUMN_LABEL_ICON,
+        COLUMN_IMAGE_URL,
+        COLUMN_WIKIPEDIA_LINK,
+        COLUMN_WIKIDATA_LINK,
+        COLUMN_COMMONS_LINK,
+        COLUMN_LAT,
+        COLUMN_LONG,
+        COLUMN_PIC,
+        COLUMN_EXISTS,
+        COLUMN_ENTITY_ID)  
     private val client: ContentProviderClient = mock()
     private val database: SQLiteDatabase = mock()
     private val captor = argumentCaptor<ContentValues>()
@@ -64,7 +65,7 @@ class BookMarkLocationDaoTest {
 
 
         examplePlaceBookmark = Place("en", "placeName", exampleLabel, "placeDescription"
-                , exampleLocation, "placeCategory", builder.build(),"picName",false, "entityID")
+            , exampleLocation, "placeCategory", builder.build(),"picName",false, "entityID")
         testObject = BookmarkLocationsDao { client }
     }
 
@@ -98,8 +99,9 @@ class BookMarkLocationDaoTest {
                 assertEquals(builder.build().wikipediaLink, it.siteLinks.wikipediaLink)
                 assertEquals(builder.build().wikidataLink, it.siteLinks.wikidataLink)
                 assertEquals(builder.build().commonsLink, it.siteLinks.commonsLink)
-                assertEquals("picName",it.pic)
+                assertEquals("picName", it.pic)
                 assertEquals(false, it.exists)
+                assertEquals("entityID", it.entityID)
             }
         }
     }
@@ -110,8 +112,7 @@ class BookMarkLocationDaoTest {
 
         var result = testObject.allBookmarksLocations
 
-        assertEquals(14,(result.size))
-
+        assertEquals(14, result.size)
     }
 
     @Test(expected = RuntimeException::class)
@@ -143,7 +144,6 @@ class BookMarkLocationDaoTest {
         verify(mockCursor).close()
     }
 
-
     @Test
     fun updateNewLocationBookmark() {
         whenever(client.insert(any(), any())).thenReturn(Uri.EMPTY)
@@ -152,7 +152,7 @@ class BookMarkLocationDaoTest {
         assertTrue(testObject.updateBookmarkLocation(examplePlaceBookmark))
         verify(client).insert(eq(BASE_URI), captor.capture())
         captor.firstValue.let { cv ->
-            assertEquals(13, cv.size())
+            assertEquals(14, cv.size())
             assertEquals(examplePlaceBookmark.name, cv.getAsString(COLUMN_NAME))
             assertEquals(examplePlaceBookmark.language, cv.getAsString(COLUMN_LANGUAGE))
             assertEquals(examplePlaceBookmark.longDescription, cv.getAsString(COLUMN_DESCRIPTION))
@@ -163,8 +163,9 @@ class BookMarkLocationDaoTest {
             assertEquals(examplePlaceBookmark.siteLinks.wikipediaLink.toString(), cv.getAsString(COLUMN_WIKIPEDIA_LINK))
             assertEquals(examplePlaceBookmark.siteLinks.wikidataLink.toString(), cv.getAsString(COLUMN_WIKIDATA_LINK))
             assertEquals(examplePlaceBookmark.siteLinks.commonsLink.toString(), cv.getAsString(COLUMN_COMMONS_LINK))
-            assertEquals(examplePlaceBookmark.pic.toString(), cv.getAsString(COLUMN_PIC))
+            assertEquals(examplePlaceBookmark.pic, cv.getAsString(COLUMN_PIC))
             assertEquals(examplePlaceBookmark.exists.toString(), cv.getAsString(COLUMN_EXISTS))
+            assertEquals(examplePlaceBookmark.entityID, cv.getAsString(COLUMN_ENTITY_ID))
         }
     }
 
@@ -204,7 +205,7 @@ class BookMarkLocationDaoTest {
     @Test
     fun cursorsAreClosedAfterFindLocationBookmarkQuery() {
         val mockCursor: Cursor = mock()
-        whenever(client.query(any(), any(), any(), any(), anyOrNull())).thenReturn(mockCursor)
+        whenever(client.query(any(), any(), anyOrNull(), any(), anyOrNull())).thenReturn(mockCursor)
         whenever(mockCursor.moveToFirst()).thenReturn(false)
 
         testObject.findBookmarkLocation(examplePlaceBookmark)
@@ -215,14 +216,14 @@ class BookMarkLocationDaoTest {
     @Test
     fun migrateTableVersionFrom_v1_to_v2() {
         onUpdate(database, 1, 2)
-        // Table didnt exist before v5
+        // Table didn't exist before v5
         verifyNoInteractions(database)
     }
 
     @Test
     fun migrateTableVersionFrom_v2_to_v3() {
         onUpdate(database, 2, 3)
-        // Table didnt exist before v5
+        // Table didn't exist before v5
         verifyNoInteractions(database)
     }
 
@@ -278,13 +279,27 @@ class BookMarkLocationDaoTest {
         verify(database).execSQL("ALTER TABLE bookmarksLocations ADD COLUMN location_exists STRING;")
     }
 
-
-    private fun createCursor(rowCount: Int) = MatrixCursor(columns, rowCount).apply {
-
-        for (i in 0 until rowCount) {
-            addRow(listOf("placeName", "en", "placeDescription", "placeCategory", exampleLabel.text, exampleLabel.icon,
-                    exampleUri, builder.build().wikipediaLink, builder.build().wikidataLink, builder.build().commonsLink,
-                    exampleLocation.latitude, exampleLocation.longitude, "picName", "placeExists"))
+    private fun createCursor(rows: Int): Cursor {
+        return MatrixCursor(columns, rows).apply {
+            repeat(rows) {
+                newRow().apply {
+                    add("placeName")
+                    add("en")
+                    add("placeDescription")
+                    add("placeCategory")
+                    add(Label.FOREST.text)
+                    add(Label.FOREST.icon)
+                    add("placeImage")
+                    add("wikipediaLink")
+                    add("wikidataLink")
+                    add("commonsLink")
+                    add(40.0)
+                    add(51.4)
+                    add("picName")
+                    add(false)
+                    add("entityID")
+                }
+            }
         }
     }
 }
