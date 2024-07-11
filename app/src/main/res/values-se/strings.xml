@@ -47,10 +47,10 @@
   <string name="logging_in_message">Vuordil...</string>
   <string name="updating_caption_title">Ođasmáhttá govvateavsttaid ja govvádusaid</string>
   <string name="updating_caption_message">Vuordil...</string>
-  <string name="login_success" fuzzy="true">Sisačáliheapmi lihkostuvai!</string>
-  <string name="login_failed" fuzzy="true">Sisačáliheapmi ii lihkostuvvan!</string>
+  <string name="login_success">Sisačáliheapmi lihkostuvai!</string>
+  <string name="login_failed">Sisačáliheapmi ii lihkostuvvan!</string>
   <string name="upload_failed">Fiila ii gávdnon. Geahččal áinnas eará fiilla.</string>
-  <string name="authentication_failed" fuzzy="true">Autentiseren ii doaibman, čálit mes oktii vel sisa</string>
+  <string name="authentication_failed">Autentiseren ii doaibman. Čálit mes oktii vel sisa.</string>
   <string name="uploading_started">Bajásluđen álggahuvvui!</string>
   <string name="uploading_queued">Bajásluđen ráiduduvvon (ráddjejuvvon čatnasanvuohki doaimmas)</string>
   <string name="upload_completed_notification_title">%1$s bajásluđejuvvon!</string>
@@ -77,11 +77,11 @@
   <string name="add_caption_toast">Atte mes govvateavstta dán fiilii</string>
   <string name="share_description_hint">Govvádus</string>
   <string name="share_caption_hint">Govvateaksta</string>
-  <string name="login_failed_network" fuzzy="true">Ii sáhte čálihit sisa - fierpmádagas feaila</string>
+  <string name="login_failed_network">Ii sáhte čálihit sisa - fierpmádagas feaila</string>
   <string name="login_failed_throttled">Beare máŋga eahpelihkostuvvan geahččaleami. Geahččal mat fas moatti minuvtta geahčen</string>
   <string name="login_failed_blocked">Dađibahábuht, dát geavaheaddji lea hehttejuvvon Commons:is</string>
   <string name="login_failed_2fa_needed">Fertet addit iežat guovtteceahkat dovddaldatkoda.</string>
-  <string name="login_failed_generic" fuzzy="true">Sisačáliheapmi ii lihkostuvvan</string>
+  <string name="login_failed_generic">Sisačáliheapmi ii lihkostuvvan</string>
   <string name="share_upload_button">Vurke</string>
   <string name="multiple_share_base_title">Nammat dán ráiddu</string>
   <string name="provider_modifications">Rievdadusat</string>
@@ -190,7 +190,7 @@
   <string name="nearby_info_menu_wikipedia_article">Wikipedia-artihkal</string>
   <string name="login_to_your_account">Čálit sisa du dovddaldahkii</string>
   <string name="navigation_item_login">Čálit sisa</string>
-  <string name="skip_login_title" fuzzy="true">Áiggutgo don duođaid joatkit čálitkeahttá sisa?</string>
+  <string name="skip_login_title">Áiggutgo don duođaid joatkit čálitkeahttá sisa?</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
   <string name="nearby_commons">Commons</string>

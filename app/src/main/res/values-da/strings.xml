@@ -133,7 +133,7 @@
   <string name="depictions_not_found">Der blev ikke fundet nogen Wikidata-elementer, der matcher %1$s</string>
   <string name="no_child_classes">%1$s har ingen underklasser</string>
   <string name="no_parent_classes">%1$s har ingen forældreklasser</string>
-  <string name="categories_skip_explanation">Tilføj kategorier for at gøre billederne mere synlig på Wikimedia Commons. Tast for at tilføje kategorier.</string>
+  <string name="categories_skip_explanation">Tilføj kategorier for at gøre dine billeder mere synlig på Wikimedia Commons. Begynd at taste for at tilføje kategorier.</string>
   <string name="categories_activity_title">Kategorier</string>
   <string name="title_activity_settings">Indstillinger</string>
   <string name="title_activity_signup">Opret konto</string>
@@ -142,7 +142,7 @@
   <string name="title_activity_category_details">Kategori</string>
   <string name="title_activity_review">Gennemsyn</string>
   <string name="menu_about">Om</string>
-  <string name="about_license">Wikimedia Commons-programmet oprettet og udviklet af frivillige i Wikimediafællesskabet. Wikimedia Foundation er ikke involveret i oprettelse, udvikling eller vedligeholdelse af programmet.</string>
+  <string name="about_license">Wikimedia Commons-appen oprettet og udviklet af frivillige i Wikimedia-fællesskabet. Wikimedia Foundation er ikke involveret i oprettelse, udvikling eller vedligeholdelse af appen.</string>
   <string name="about_improve">Opret en ny &lt;a href=\"%1$s\"&gt;GitHub-sag&lt;/a&gt; for fejlrapporter og forslag.</string>
   <string name="about_privacy_policy">Privatlivspolitik</string>
   <string name="about_credits">Tak til</string>
@@ -775,13 +775,13 @@
   </plurals>
   <string name="multiple_files_depiction">Husk, at alle billeder i et multi-upload får de samme kategorier og afbildninger. Hvis billederne ikke deler afbildninger og kategorier, skal du udføre flere separate uploads.</string>
   <string name="multiple_files_depiction_header">Bemærkning om at uploade flere billeder</string>
-  <string name="nearby_wikitalk">Rapporter et problem med dette element til Wikidata</string>
+  <string name="nearby_wikitalk">Rapporter et problem omkring dette element til Wikidata</string>
   <string name="please_enter_some_comments">Skriv nogle kommentarer</string>
   <string name="talk">Tal</string>
   <string name="write_something_about_the">\"Skriv noget om\"</string>
   <string name="item_it_will_be_publicly_visible">\" elementet. Det vil være offentligt synligt.\"</string>
-  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' eksisterer ikke længere, der kan aldrig tages et billede af det.</string>
-  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' ligger et andet sted (angiv venligst det korrekte sted nedenfor, fortæl os om muligt den korrekte breddegrad/længdegrad).</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' eksisterer ikke længere, der vil aldrig kunne tages et billede af det.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' ligger et andet sted. Angiv venligst det korrekte sted nedenfor, og skriv om muligt den korrekte bredde- og længdegrad.</string>
   <string name="other_problem_or_information_please_explain_below">Andet problem eller anden information (forklar venligst nedenfor).</string>
   <string name="feedback_destination_note">Din feedback bliver slået op på følgende wiki-side:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
 </resources>

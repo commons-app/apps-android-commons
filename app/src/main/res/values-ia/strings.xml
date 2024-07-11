@@ -761,5 +761,13 @@
   </plurals>
   <string name="multiple_files_depiction">Nota ben que tote le imagines in un multi-incargamento habera le mesme categorias e representationes. Si le imagines non condivide representationes e categorias, per favor exeque plure incargamentos separate.</string>
   <string name="multiple_files_depiction_header">Aviso sur le multi-incargamentos</string>
+  <string name="nearby_wikitalk">Signalar a Wikidata un problema sur iste elemento</string>
+  <string name="please_enter_some_comments">Per favor insere alcun commentos</string>
+  <string name="talk">Discussion</string>
+  <string name="write_something_about_the">\"Scribe qualcosa sur le elemento \"</string>
+  <string name="item_it_will_be_publicly_visible">\". Illo essera visibile publicamente.\"</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">‘%1$s’ non existe plus, necun imagine pote jammais esser prendite de illo.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude" fuzzy="true">\'%1$s\' es in un altere loco (per favor specifica le loco correcte hic infra, si possibile indica le latitude/longitude correcte).</string>
+  <string name="other_problem_or_information_please_explain_below">Altere problema o information (per favor explica hic infra).</string>
   <string name="feedback_destination_note">Tu retroaction apparera sur le sequente pagina wiki: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
 </resources>
