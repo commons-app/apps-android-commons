@@ -792,5 +792,13 @@
   </plurals>
   <string name="multiple_files_depiction">Houd er rekening mee dat alle afbeeldingen in een multi-upload dezelfde categorieën krijgen en geacht worden hetzelfde weer te geven. Als deze gegevens per afbeelding moeten verschillen, voer dan meerdere afzonderlijke uploads uit.</string>
   <string name="multiple_files_depiction_header">Opmerking over multi-uploads</string>
+  <string name="nearby_wikitalk">Een probleem met dit item melden aan Wikidata</string>
+  <string name="please_enter_some_comments">Voer enkele opmerkingen in</string>
+  <string name="talk">Overleg</string>
+  <string name="write_something_about_the">\"Schrijf iets over het item \"</string>
+  <string name="item_it_will_be_publicly_visible">\". Het zal publiekelijk zichtbaar zijn.\"</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">‘%1$s’ bestaat niet meer, er kan nooit een foto van gemaakt worden.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">‘%1$s’ bevindt zich ergens anders. Geef hieronder de juiste plaats aan en noteer, indien mogelijk, de juiste breedte- en lengtegraad.</string>
+  <string name="other_problem_or_information_please_explain_below">Ander probleem of andere informatie (verklaar hieronder).</string>
   <string name="feedback_destination_note">Uw feedback wordt op de volgende wikipagina geplaatst: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
 </resources>

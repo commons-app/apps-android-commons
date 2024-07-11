@@ -268,6 +268,9 @@
   <string name="theme_light_name">हल्का</string>
   <string name="bookmarks">पुस्तक चिनोहरू</string>
   <string name="achievements_tab_title">उपलब्धिहरू</string>
+  <string name="rank_prefix">क्रम:</string>
+  <string name="leaderboard_column_rank">क्रम</string>
+  <string name="leaderboard_yearly">वार्षिक</string>
   <string name="leaderboard_upload">उर्ध्वभरण गर्ने</string>
   <string name="leaderboard_nearby">निकटस्थ</string>
   <string name="description">विवरण</string>
