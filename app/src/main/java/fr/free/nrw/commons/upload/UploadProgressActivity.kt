@@ -95,56 +95,82 @@ class UploadProgressActivity : BaseActivity() {
     }
 
     fun updateMenuItems(currentPosition: Int) {
-        menu!!.clear()
-        if (currentPosition == 0) {
-            if (isPendingIconsVisible){
-                if (!isPaused){
-                    if (menu!!.findItem(R.id.pause_icon) == null) {
-                        menu!!.add(Menu.NONE, R.id.pause_icon, Menu.NONE, getString(R.string.pause))
-                            .setIcon(android.R.drawable.ic_media_pause).setOnMenuItemClickListener {
-                                pendingUploadsFragment!!.pauseUploads()
-                                setPausedIcon(true)
+        if (menu != null) {
+            menu!!.clear()
+            if (currentPosition == 0) {
+                if (isPendingIconsVisible) {
+                    if (!isPaused) {
+                        if (menu!!.findItem(R.id.pause_icon) == null) {
+                            menu!!.add(
+                                Menu.NONE,
+                                R.id.pause_icon,
+                                Menu.NONE,
+                                getString(R.string.pause)
+                            )
+                                .setIcon(android.R.drawable.ic_media_pause)
+                                .setOnMenuItemClickListener {
+                                    pendingUploadsFragment!!.pauseUploads()
+                                    setPausedIcon(true)
+                                    true
+                                }
+                                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+                        }
+                        if (menu!!.findItem(R.id.cancel_icon) == null) {
+                            menu!!.add(
+                                Menu.NONE,
+                                R.id.cancel_icon,
+                                Menu.NONE,
+                                getString(R.string.cancel)
+                            )
+                                .setIcon(android.R.drawable.ic_menu_close_clear_cancel)
+                                .setOnMenuItemClickListener {
+                                    pendingUploadsFragment!!.deleteUploads()
+                                    true
+                                }
+                                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+                        }
+                    } else {
+                        if (menu!!.findItem(R.id.resume_icon) == null) {
+                            menu!!.add(
+                                Menu.NONE,
+                                R.id.resume_icon,
+                                Menu.NONE,
+                                getString(R.string.resume)
+                            )
+                                .setIcon(android.R.drawable.ic_media_play)
+                                .setOnMenuItemClickListener {
+                                    pendingUploadsFragment!!.restartUploads()
+                                    setPausedIcon(false)
+                                    true
+                                }
+                                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+                        }
+                    }
+                }
+            } else if (currentPosition == 1) {
+                if (isErrorIconsVisisble) {
+                    if (menu!!.findItem(R.id.retry_icon) == null) {
+                        menu!!.add(Menu.NONE, R.id.retry_icon, Menu.NONE, getString(R.string.retry))
+                            .setIcon(R.drawable.ic_refresh_white_24dp).setOnMenuItemClickListener {
+                                failedUploadsFragment!!.restartUploads()
                                 true
                             }
                             .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
                     }
                     if (menu!!.findItem(R.id.cancel_icon) == null) {
-                        menu!!.add(Menu.NONE, R.id.cancel_icon, Menu.NONE, getString(R.string.cancel))
-                            .setIcon(android.R.drawable.ic_menu_close_clear_cancel).setOnMenuItemClickListener {
-                                pendingUploadsFragment!!.deleteUploads()
+                        menu!!.add(
+                            Menu.NONE,
+                            R.id.cancel_icon,
+                            Menu.NONE,
+                            getString(R.string.cancel)
+                        )
+                            .setIcon(android.R.drawable.ic_menu_close_clear_cancel)
+                            .setOnMenuItemClickListener {
+                                failedUploadsFragment!!.deleteUploads()
                                 true
                             }
                             .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
                     }
-                }else{
-                    if (menu!!.findItem(R.id.resume_icon) == null) {
-                        menu!!.add(Menu.NONE, R.id.resume_icon, Menu.NONE, getString(R.string.resume))
-                            .setIcon(android.R.drawable.ic_media_play).setOnMenuItemClickListener {
-                                pendingUploadsFragment!!.restartUploads()
-                                setPausedIcon(false)
-                                true
-                            }
-                            .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
-                    }
-                }
-            }
-        } else if (currentPosition == 1) {
-            if (isErrorIconsVisisble){
-                if (menu!!.findItem(R.id.retry_icon) == null) {
-                    menu!!.add(Menu.NONE, R.id.retry_icon, Menu.NONE, getString(R.string.retry))
-                        .setIcon(R.drawable.ic_refresh_white_24dp).setOnMenuItemClickListener {
-                            failedUploadsFragment!!.restartUploads()
-                            true
-                        }
-                        .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
-                }
-                if (menu!!.findItem(R.id.cancel_icon) == null) {
-                    menu!!.add(Menu.NONE, R.id.cancel_icon, Menu.NONE, getString(R.string.cancel))
-                        .setIcon(android.R.drawable.ic_menu_close_clear_cancel).setOnMenuItemClickListener {
-                            failedUploadsFragment!!.deleteUploads()
-                            true
-                        }
-                        .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
                 }
             }
         }
