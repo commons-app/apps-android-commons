@@ -831,5 +831,9 @@
   </plurals>
   <string name="multiple_files_depiction">Помните, что все изображения при мультизагрузке получают одинаковые категории и описания. Если изображения не имеют одинаковых описаний и категорий, выполните несколько отдельных загрузок.</string>
   <string name="multiple_files_depiction_header">Замечание о мультизагрузках</string>
+  <string name="nearby_wikitalk">Сообщить о проблеме с этим элементом в Викиданные</string>
+  <string name="please_enter_some_comments">Пожалуйста, добавьте какие-то комментарии</string>
+  <string name="talk">Обсуждение</string>
+  <string name="other_problem_or_information_please_explain_below">Другая проблема или информация (пожалуйста, объясните ниже).</string>
   <string name="feedback_destination_note">Ваш отзыв будет опубликован на следующей вики-странице: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
 </resources>

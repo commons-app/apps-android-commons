@@ -770,4 +770,5 @@
     <item quantity="few">%d izbranih slik</item>
     <item quantity="other">%d izbranih slik</item>
   </plurals>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">»%1$s« je na drugem kraju. Spodaj navedite pravi kraj in, če je mogoče, napišite pravilno zemljepisno širino in dolžino.</string>
 </resources>
