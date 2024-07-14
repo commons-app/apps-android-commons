@@ -73,18 +73,20 @@ import fr.free.nrw.commons.description.DescriptionEditHelper;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.explore.depictions.WikidataItemDetailsActivity;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.language.AppLanguageLookUpTable;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.review.ReviewHelper;
 import fr.free.nrw.commons.settings.Prefs;
-import fr.free.nrw.commons.ui.widget.HtmlTextView;
+import fr.free.nrw.commons.upload.UploadMediaDetail;
 import fr.free.nrw.commons.upload.categories.UploadCategoriesFragment;
 import fr.free.nrw.commons.upload.depicts.DepictsFragment;
-import fr.free.nrw.commons.upload.UploadMediaDetail;
+import fr.free.nrw.commons.utils.DateUtil;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.Single;
@@ -105,9 +107,6 @@ import java.util.regex.Pattern;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
-import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage;
-import fr.free.nrw.commons.language.AppLanguageLookUpTable;
-import fr.free.nrw.commons.utils.DateUtil;
 import timber.log.Timber;
 
 public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
@@ -487,12 +486,18 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
     }
 
     private void onDeletionPageExists(Boolean deletionPageExists) {
-        if (deletionPageExists){
-            if(applicationKvStore.getBoolean(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), false)) {
-                applicationKvStore.remove(String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()));
+        if (AccountUtil.getUserName(getContext()) == null && !AccountUtil.getUserName(getContext()).equals(media.getAuthor())) {
+            binding.nominateDeletion.setVisibility(GONE);
+            binding.nominatedDeletionBanner.setVisibility(GONE);
+        } else if (deletionPageExists) {
+            if (applicationKvStore.getBoolean(
+                String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()), false)) {
+                applicationKvStore.remove(
+                    String.format(NOMINATING_FOR_DELETION_MEDIA, media.getImageUrl()));
                 binding.progressBarDeletion.setVisibility(GONE);
             }
             binding.nominateDeletion.setVisibility(GONE);
+
             binding.nominatedDeletionBanner.setVisibility(VISIBLE);
         } else if (!isCategoryImage) {
             binding.nominateDeletion.setVisibility(VISIBLE);
@@ -1174,7 +1179,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment implements
             //Reviewer correct me if i have misunderstood something over here
             //But how does this  if (delete.getVisibility() == View.VISIBLE) {
             //            enableDeleteButton(true);   makes sense ?
-            else {
+            else if (AccountUtil.getUserName(getContext()) != null) {
                 final EditText input = new EditText(getActivity());
                 input.requestFocus();
                 AlertDialog d = DialogUtil.showAlertDialog(getActivity(),
