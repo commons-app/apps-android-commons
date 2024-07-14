@@ -58,7 +58,7 @@ class CategoriesModel @Inject constructor(
             // anywhere within the string (.* is wildcard) (Issue #47)
             // And that item does not equal the current year or previous year
             return item.matches(".*(19|20)\\d{2}.*".toRegex())
-                    && !item.contains(yearInString)
+                    && !item.contains(curYearInString)
                     && !item.contains(prevYearInString)
         }
     }
