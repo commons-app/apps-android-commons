@@ -40,10 +40,10 @@ class CategoriesModel @Inject constructor(
         val prevYearInString = prevYear.toString()
         Timber.d("Previous year: %s", prevYearInString)
 
-        val is20xxsYear = item.matches(".*0s.*".toRegex())
+        val mentionsDecade = item.matches(".*0s.*".toRegex())
 
-        if (is20xxsYear) {
-            //Check if the year in the form of XX(X)0s is relevant, i.e. in the 2000s or 2010s as stated in Issue #1029
+        if (mentionsDecade) {
+            //Check if the year in the form of XX(X)0s is relevant, i.e. in the 2000s or 2010s (or 2020s) as stated in Issue #1029
             // If not, check if it is an irrelevant category such as Media_needing_categories_as_of_16_June_2017(Issue #750)
             return !item.matches(".*20[0-2]0s.*".toRegex())
                     || item.matches("(.*)needing(.*)".toRegex())
