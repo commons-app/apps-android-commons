@@ -27,7 +27,7 @@ class CategoriesModel @Inject constructor(
     private var selectedExistingCategories: MutableList<String> = mutableListOf()
 
     /**
-     * Returns if the item contains an year
+     * Returns if the item contains an year which should be ignored
      * @param item
      * @return
      */
