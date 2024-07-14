@@ -34,9 +34,9 @@ class CategoriesModel @Inject constructor(
     fun containsYear(item: String): Boolean {
         //Check for current and previous year to exclude these categories from removal
         val now = Calendar.getInstance()
-        val year = now[Calendar.YEAR]
-        val yearInString = year.toString()
-        val prevYear = year - 1
+        val curYear = now[Calendar.YEAR]
+        val curYearInString = curYear.toString()
+        val prevYear = curYear - 1
         val prevYearInString = prevYear.toString()
         Timber.d("Previous year: %s", prevYearInString)
 
@@ -45,7 +45,7 @@ class CategoriesModel @Inject constructor(
         //And if it is an irrelevant category such as Media_needing_categories_as_of_16_June_2017(Issue #750)
         //Check if the year in the form of XX(X)0s is relevant, i.e. in the 2000s or 2010s as stated in Issue #1029
         return item.matches(".*(19|20)\\d{2}.*".toRegex())
-                && !item.contains(yearInString)
+                && !item.contains(curYearInString)
                 && !item.contains(prevYearInString)
                 || item.matches("(.*)needing(.*)".toRegex())
                 || item.matches("(.*)taken on(.*)".toRegex())
