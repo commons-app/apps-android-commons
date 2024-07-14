@@ -46,19 +46,21 @@ class CategoriesModel @Inject constructor(
         val spammyCategory = item.matches("(.*)needing(.*)".toRegex())
                           || item.matches("(.*)taken on(.*)".toRegex())
 
+        // always skip irrelevant categories such as Media_needing_categories_as_of_16_June_2017(Issue #750)
+        if (spammyCategory) {
+            return true
+        }
+
         if (mentionsDecade) {
             //Check if the year in the form of XX(X)0s is recent/relevant, i.e. in the 2000s or 2010s/2020s as stated in Issue #1029
-            // If not, check if it is an irrelevant category such as Media_needing_categories_as_of_16_June_2017(Issue #750)
-            return oldDecade || spammyCategory
+            return oldDecade
         } else {
             // If it is not an year in 20xxs form, then check if item contains a 4-digit word
             // anywhere within the string (.* is wildcard) (Issue #47)
             // And that item does not equal the current year or previous year
-            // And if it is an irrelevant category such as Media_needing_categories_as_of_16_June_2017(Issue #750)
             return item.matches(".*(19|20)\\d{2}.*".toRegex())
                     && !item.contains(yearInString)
                     && !item.contains(prevYearInString)
-                    || spammyCategory
         }
     }
 
