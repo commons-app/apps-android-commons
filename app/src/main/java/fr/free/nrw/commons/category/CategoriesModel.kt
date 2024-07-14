@@ -51,10 +51,11 @@ class CategoriesModel @Inject constructor(
         }
 
         if (mentionsDecade) {
-            //Check if the year in the form of XX(X)0s is recent/relevant, i.e. in the 2000s or 2010s/2020s as stated in Issue #1029
+            // Check if the year in the form of XX(X)0s is recent/relevant, i.e. in the 2000s or 2010s/2020s as stated in Issue #1029
+            // Example: "2020s" is OK, but "1920s" is not (and should be skipped)
             return !recentDecade
         } else {
-            // If it is not an year in 20xxs form, then check if item contains a 4-digit word
+            // If it is not an year in decade form (e.g. 19xxs/20xxs), then check if item contains a 4-digit year
             // anywhere within the string (.* is wildcard) (Issue #47)
             // And that item does not equal the current year or previous year
             return item.matches(".*(19|20)\\d{2}.*".toRegex())
