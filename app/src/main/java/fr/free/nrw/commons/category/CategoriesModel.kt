@@ -27,7 +27,7 @@ class CategoriesModel @Inject constructor(
     private var selectedExistingCategories: MutableList<String> = mutableListOf()
 
     /**
-     * Returns if the item contains an year which should be ignored
+     * Returns true if the item contains an year which should be ignored
      * @param item
      * @return
      */
@@ -41,16 +41,16 @@ class CategoriesModel @Inject constructor(
         Timber.d("Previous year: %s", prevYearInString)
 
         val mentionsDecade = item.matches(".*0s.*".toRegex())
+        val recentDecade = item.matches(".*20[0-2]0s.*".toRegex())
+        val oldDecade = !recentDecade
         val spammyCategory = item.matches("(.*)needing(.*)".toRegex())
                           || item.matches("(.*)taken on(.*)".toRegex())
 
         if (mentionsDecade) {
             //Check if the year in the form of XX(X)0s is recent/relevant, i.e. in the 2000s or 2010s/2020s as stated in Issue #1029
             // If not, check if it is an irrelevant category such as Media_needing_categories_as_of_16_June_2017(Issue #750)
-            return !item.matches(".*20[0-2]0s.*".toRegex())
-                    || spammyCategory
-        }
-        else {
+            return oldDecade || spammyCategory
+        } else {
             // If it is not an year in 20xxs form, then check if item contains a 4-digit word
             // anywhere within the string (.* is wildcard) (Issue #47)
             // And that item does not equal the current year or previous year
