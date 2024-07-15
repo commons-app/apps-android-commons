@@ -220,7 +220,7 @@
   <string name="media_detail_coordinates">Koordinater</string>
   <string name="media_detail_coordinates_empty">Ingen angivet</string>
   <string name="become_a_tester_title">Bliv betatester</string>
-  <string name="become_a_tester_description">Registrer dig på vores betakanal på Google Play og få tidlig tilgang til nye funktioner og feilrettelser</string>
+  <string name="become_a_tester_description">Registrer dig på vores betakanal på Google Play og få tidlig adgang til nye funktioner og fejlrettelser</string>
   <string name="_2fa_code">2FA-kode</string>
   <string name="logout_verification">Ønsker du at logge ud?</string>
   <string name="mediaimage_failed">Mediebillede mislykkedes</string>
@@ -265,7 +265,7 @@
   <string name="upload_problem_image">Problemer fundet på billedet</string>
   <string name="internet_downloaded">Upload kun billeder, som du selv har taget. Upload ikke billeder, som du har downloadet fra internettet.</string>
   <string name="use_external_storage">Gem billeder taget i appen</string>
-  <string name="use_external_storage_summary">Gem billeder, taget med kameraet i appen, på din enhed</string>
+  <string name="use_external_storage_summary">Gem billeder taget med kameraet i appen på din enhed</string>
   <string name="login_to_your_account">Log ind på din konto</string>
   <string name="send_log_file">Send logfil</string>
   <string name="send_log_file_description">Send logfilen til udviklerne via e-mail for at hjælpe med at fejlfinde problemer med appen. Bemærk: logfiler kan potentielt indeholde identificerende oplysninger</string>
