@@ -47,7 +47,6 @@ class ContributionBoundaryCallback @Inject constructor(
      * fetched from the network
      */
     override fun onItemAtEndLoaded(itemAtEnd: Contribution) {
-        Timber.tag("PRINT").e("fetching2")
         fetchContributions()
     }
 
