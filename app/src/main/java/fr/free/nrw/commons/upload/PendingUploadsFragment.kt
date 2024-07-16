@@ -1,16 +1,17 @@
 package fr.free.nrw.commons.upload
 
 import android.content.Context
+import android.os.AsyncTask
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.paging.PagedList
+import androidx.paging.PositionalDataSource
 import androidx.recyclerview.widget.LinearLayoutManager
-import fr.free.nrw.commons.CommonsApplication
+import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.Contribution
@@ -19,7 +20,6 @@ import fr.free.nrw.commons.di.CommonsDaggerSupportFragment
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.utils.DialogUtil.showAlertDialog
-import fr.free.nrw.commons.utils.NetworkUtils
 import fr.free.nrw.commons.utils.ViewUtil
 import org.apache.commons.lang3.StringUtils
 import timber.log.Timber
@@ -33,7 +33,7 @@ import javax.inject.Inject
  * create an instance of this fragment.
  */
 class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsContract.View,
-    PendingUploadsAdapter.Callback{
+    PendingUploadsAdapter.Callback {
     private var param1: String? = null
     private var param2: String? = null
     private val ARG_PARAM1 = "param1"
@@ -53,6 +53,8 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
     private lateinit var binding: FragmentPendingUploadsBinding
 
     private lateinit var uploadProgressActivity: UploadProgressActivity
+
+    private lateinit var adapter: PendingUploadsAdapter
 
     private var contributionsSize = 0
     var contributionsList = ArrayList<Contribution>()
@@ -90,17 +92,22 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
         super.onCreate(savedInstanceState)
         binding = FragmentPendingUploadsBinding.inflate(inflater, container, false)
         pendingUploadsPresenter.onAttachView(this)
-        initRecyclerView()
+        initAdapter()
         return binding.root
     }
 
+    fun initAdapter() {
+        adapter = PendingUploadsAdapter(this)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initRecyclerView()
     }
 
     fun initRecyclerView() {
         binding.pendingUploadsRecyclerView.setLayoutManager(LinearLayoutManager(this.context))
+        binding.pendingUploadsRecyclerView.adapter = adapter
         pendingUploadsPresenter!!.setup(
             userName,
             sessionManager!!.userName == userName
@@ -111,9 +118,8 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
             contributionsSize = list.size
             contributionsList = ArrayList()
             var pausedOrQueuedUploads = 0
-            var failedUploads = 0
             list.forEach {
-                if (it != null){
+                if (it != null) {
                     if (it.state == Contribution.STATE_PAUSED
                         || it.state == Contribution.STATE_QUEUED
                         || it.state == Contribution.STATE_IN_PROGRESS
@@ -125,9 +131,6 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
                     ) {
                         pausedOrQueuedUploads++
                     }
-                    if (it.state == Contribution.STATE_FAILED){
-                        failedUploads++
-                    }
                 }
             }
             if (contributionsSize == 0) {
@@ -135,37 +138,64 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
                 binding.pendingUplaodsLl.visibility = View.GONE
                 uploadProgressActivity.hidePendingIcons()
             } else {
-                if (totalUploads == 0){
+                if (totalUploads == 0) {
                     totalUploads = contributionsSize
                     binding.progressBarPending.max = totalUploads
                 }
                 binding.nopendingTextView.visibility = View.GONE
                 binding.pendingUplaodsLl.visibility = View.VISIBLE
 
-                val sortedContributionsList: List<Contribution> = if (VERSION.SDK_INT >= VERSION_CODES.N) {
-                    contributionsList.sortedByDescending { it.dateModifiedInMillis() }
-                } else {
-                    contributionsList.sortedBy { it.dateModifiedInMillis() }.reversed()
-                }
+                val sortedContributionsList: List<Contribution> =
+                    if (VERSION.SDK_INT >= VERSION_CODES.N) {
+                        contributionsList.sortedByDescending { it.dateModifiedInMillis() }
+                    } else {
+                        contributionsList.sortedBy { it.dateModifiedInMillis() }.reversed()
+                    }
 
-                val newContributionList: MutableList<Contribution> = sortedContributionsList.toMutableList()
+                val newContributionList: MutableList<Contribution> =
+                    sortedContributionsList.toMutableList()
                 val listOfRemoved: MutableList<Contribution> = mutableListOf()
                 val last = sortedContributionsList.last()
                 for (i in sortedContributionsList.indices) {
                     val current = sortedContributionsList[i]
-                    if (current.transferred == 0L && (current.dateModifiedInMillis() / 100) > (last.dateModifiedInMillis() / 100)){
+                    if (current.transferred == 0L && (current.dateModifiedInMillis() / 100) > (last.dateModifiedInMillis() / 100)) {
                         listOfRemoved.add(current)
                     }
                 }
                 newContributionList.removeAll(listOfRemoved)
                 newContributionList.addAll(listOfRemoved)
-                val adapter = PendingUploadsAdapter(newContributionList, this)
-                binding.pendingUploadsRecyclerView.setAdapter(adapter)
-                binding.progressTextView.setText((totalUploads-contributionsSize).toString() + "/" + totalUploads + " uploaded")
-                binding.progressBarPending.progress = totalUploads-contributionsSize
+
+                // TODO: WORK ON THE SORTING ISSUE
+                val dataSource = object : PositionalDataSource<Contribution>() {
+                    override fun loadInitial(
+                        params: LoadInitialParams,
+                        callback: LoadInitialCallback<Contribution>
+                    ) {
+                        callback.onResult(newContributionList, 0, newContributionList.size)
+                    }
+
+                    override fun loadRange(
+                        params: LoadRangeParams,
+                        callback: LoadRangeCallback<Contribution>
+                    ) {
+                        val start = params.startPosition
+                        val end = Math.min(start + params.loadSize, newContributionList.size)
+                        callback.onResult(newContributionList.subList(start, end))
+                    }
+                }
+
+                val pagedList = PagedList.Builder(dataSource, 10)
+                    .setFetchExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+                    .setNotifyExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+                    .build()
+
+                adapter.submitList(pagedList)
+
+                binding.progressTextView.setText((totalUploads - contributionsSize).toString() + "/" + totalUploads + " uploaded")
+                binding.progressBarPending.progress = totalUploads - contributionsSize
                 if (pausedOrQueuedUploads == contributionsSize) {
                     uploadProgressActivity.setPausedIcon(true)
-                }else{
+                } else {
                     uploadProgressActivity.setPausedIcon(false)
                 }
             }
@@ -187,7 +217,10 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
             String.format(Locale.getDefault(), getString(R.string.no)),
             {
                 ViewUtil.showShortToast(context, R.string.cancelling_upload)
-                pendingUploadsPresenter.deleteUpload(contribution, this.requireContext().applicationContext)
+                pendingUploadsPresenter.deleteUpload(
+                    contribution,
+                    this.requireContext().applicationContext
+                )
                 resetProgressBar()
             },
             {}
@@ -206,19 +239,27 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
     }
 
     fun restartUploads() {
-        if (contributionsList != null){
-            pendingUploadsPresenter.restartUploads(contributionsList, 0 , this.requireContext().applicationContext)
+        if (contributionsList != null) {
+            pendingUploadsPresenter.restartUploads(
+                contributionsList,
+                0,
+                this.requireContext().applicationContext
+            )
         }
     }
 
     fun pauseUploads() {
-        if (contributionsList != null){
-            pendingUploadsPresenter.pauseUploads(contributionsList, 0, this.requireContext().applicationContext)
+        if (contributionsList != null) {
+            pendingUploadsPresenter.pauseUploads(
+                contributionsList,
+                0,
+                this.requireContext().applicationContext
+            )
         }
     }
 
-    fun deleteUploads(){
-        if (contributionsList != null){
+    fun deleteUploads() {
+        if (contributionsList != null) {
             showAlertDialog(
                 requireActivity(),
                 String.format(
@@ -234,7 +275,11 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
                 {
                     ViewUtil.showShortToast(context, R.string.cancelling_upload)
                     uploadProgressActivity.hidePendingIcons()
-                    pendingUploadsPresenter.deleteUploads(contributionsList, 0, this.requireContext().applicationContext)
+                    pendingUploadsPresenter.deleteUploads(
+                        contributionsList,
+                        0,
+                        this.requireContext().applicationContext
+                    )
                 },
                 {}
             )

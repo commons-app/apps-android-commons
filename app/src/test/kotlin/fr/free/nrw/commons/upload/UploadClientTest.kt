@@ -18,6 +18,7 @@ import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.contributions.ChunkInfo
 import fr.free.nrw.commons.contributions.Contribution
 import fr.free.nrw.commons.upload.UploadClient.TimeProvider
+import fr.free.nrw.commons.upload.worker.UploadWorker
 import fr.free.nrw.commons.wikidata.mwapi.MwException
 import fr.free.nrw.commons.wikidata.mwapi.MwServiceError
 import io.reactivex.Observable
@@ -171,6 +172,16 @@ class UploadClientTest {
 
     @Test
     fun uploadFileToStash_returnsFailureIfNothingToUpload() {
+//        val tempFile = File.createTempFile("tempFile", ".tmp")
+//        tempFile.deleteOnExit()
+//        whenever(contribution.isCompleted()).thenReturn(false)
+//        whenever(contribution.fileKey).thenReturn(filekey)
+//        whenever(contribution.localUriPath).thenReturn(tempFile)
+//        whenever(fileUtilsWrapper.getMimeType(anyOrNull<File>())).thenReturn("image/png")
+//        whenever(fileUtilsWrapper.getFileChunks(anyOrNull<File>(), eq(expectedChunkSize))).thenReturn(emptyList())
+//        val result = uploadClient.uploadFileToStash(filename, contribution, mock() ).test()
+//        result.assertNoErrors()
+//        assertEquals(StashUploadState.FAILED, result.values()[0].state)
         whenever(contribution.isCompleted()).thenReturn(false)
         whenever(contribution.fileKey).thenReturn(filekey)
         whenever(fileUtilsWrapper.getMimeType(anyOrNull<File>())).thenReturn("image/png")

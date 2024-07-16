@@ -27,7 +27,8 @@ import javax.inject.Inject
  * Use the [FailedUploadsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class FailedUploadsFragment : CommonsDaggerSupportFragment(),PendingUploadsContract.View, FailedUploadsAdapter.Callback {
+class FailedUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsContract.View,
+    FailedUploadsAdapter.Callback {
     private var param1: String? = null
     private var param2: String? = null
     private val ARG_PARAM1 = "param1"
@@ -45,6 +46,8 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(),PendingUploadsContr
     private var userName: String? = null
 
     lateinit var binding: FragmentFailedUploadsBinding
+
+    private lateinit var adapter: FailedUploadsAdapter
 
     var contributionsList = ArrayList<Contribution>()
 
@@ -81,16 +84,27 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(),PendingUploadsContr
     ): View? {
         binding = FragmentFailedUploadsBinding.inflate(layoutInflater)
         pendingUploadsPresenter.onAttachView(this)
-        initRecyclerView()
+        initAdapter()
         return binding.root
+    }
+
+    fun initAdapter() {
+        adapter = FailedUploadsAdapter(this)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initRecyclerView()
     }
 
     fun initRecyclerView() {
         binding.failedUploadsRecyclerView.setLayoutManager(LinearLayoutManager(this.context))
+        binding.failedUploadsRecyclerView.adapter = adapter
         pendingUploadsPresenter!!.getFailedContributions(userName)
         pendingUploadsPresenter!!.failedContributionList.observe(
             viewLifecycleOwner
         ) { list: PagedList<Contribution?> ->
+            adapter.submitList(list)
             contributionsList = ArrayList()
             list.forEach {
                 if (it != null) {
@@ -105,7 +119,6 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(),PendingUploadsContr
                 uploadProgressActivity.setErrorIconsVisibility(true)
                 binding.nofailedTextView.visibility = View.GONE
                 binding.failedUplaodsLl.visibility = View.VISIBLE
-                val adapter = FailedUploadsAdapter(contributionsList, this)
                 binding.failedUploadsRecyclerView.setAdapter(adapter)
             }
         }
@@ -133,7 +146,7 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(),PendingUploadsContr
         }
     }
 
-    override fun restartUpload(index : Int) {
+    override fun restartUpload(index: Int) {
         if (contributionsList != null) {
             uploadProgressActivity.resetProgressBar()
             pendingUploadsPresenter.restartUpload(
