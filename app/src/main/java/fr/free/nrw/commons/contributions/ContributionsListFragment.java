@@ -214,12 +214,12 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
         contributionsListPresenter.setup(userName,
             Objects.equals(sessionManager.getUserName(), userName));
-        contributionsListPresenter.getPendingContributions(userName);
+        contributionsListPresenter.getPendingContributions();
         contributionsListPresenter.pendingContributionList.observe(getViewLifecycleOwner(), list -> {
             pendingUploadsCount = list.size();
             callback.updatePendingIcon(pendingUploadsCount);
         });
-        contributionsListPresenter.getFailedContributions(userName);
+        contributionsListPresenter.getFailedContributions();
         contributionsListPresenter.failedContributionList.observe(getViewLifecycleOwner(), list -> {
             uploadErrorCount = list.size();
             callback.updateErrorIcon(uploadErrorCount);
