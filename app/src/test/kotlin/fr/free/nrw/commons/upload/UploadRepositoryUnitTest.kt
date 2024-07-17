@@ -156,7 +156,7 @@ class UploadRepositoryUnitTest {
     @Test
     fun testContainsYear() {
         assertEquals(
-            repository.containsYear(""), categoriesModel.isSpammyCategory("")
+            repository.isSpammyCategory(""), categoriesModel.isSpammyCategory("")
         )
     }
 

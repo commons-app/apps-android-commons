@@ -148,7 +148,7 @@ public class UploadRepository {
      * @param name
      * @return
      */
-    public boolean containsYear(String name) {
+    public boolean isSpammyCategory(String name) {
         return categoriesModel.isSpammyCategory(name);
     }
 
