@@ -27,11 +27,12 @@ class CategoriesModel @Inject constructor(
     private var selectedExistingCategories: MutableList<String> = mutableListOf()
 
     /**
-     * Returns true if the item contains an year which should be ignored
-     * @param item
+     * Returns true if an item is considered to be a spammy category which should be ignored
+     *
+     * @param item a category item that needs to be validated to know if it is spammy or not
      * @return
      */
-    fun containsYear(item: String): Boolean {
+    fun isSpammyCategory(item: String): Boolean {
         //Check for current and previous year to exclude these categories from removal
         val now = Calendar.getInstance()
         val curYear = now[Calendar.YEAR]

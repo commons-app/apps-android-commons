@@ -149,7 +149,7 @@ public class UploadRepository {
      * @return
      */
     public boolean containsYear(String name) {
-        return categoriesModel.containsYear(name);
+        return categoriesModel.isSpammyCategory(name);
     }
 
     /**
