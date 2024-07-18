@@ -798,10 +798,6 @@ public class ContributionsFragment
      */
     public void restartUpload(Contribution contribution) {
         contribution.setState(Contribution.STATE_QUEUED);
-        if (contribution.getErrorInfo() == null){
-            contribution.setChunkInfo(null);
-            contribution.setTransferred(0);
-        }
         contributionsPresenter.saveContribution(contribution);
         Timber.d("Restarting for %s", contribution.toString());
     }
@@ -826,6 +822,10 @@ public class ContributionsFragment
                     contribution.setRetries(retries + 1);
                     Timber.d("Retried uploading %s %d times", contribution.getMedia().getFilename(),
                         retries + 1);
+                    if (contribution.getErrorInfo() == null){
+                        contribution.setChunkInfo(null);
+                        contribution.setTransferred(0);
+                    }
                     restartUpload(contribution);
                 } else {
                     // TODO: Show the exact reason for failure
