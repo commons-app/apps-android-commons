@@ -798,6 +798,10 @@ public class ContributionsFragment
      */
     public void restartUpload(Contribution contribution) {
         contribution.setState(Contribution.STATE_QUEUED);
+        if (contribution.getErrorInfo() == null){
+            contribution.setChunkInfo(null);
+            contribution.setTransferred(0);
+        }
         contributionsPresenter.saveContribution(contribution);
         Timber.d("Restarting for %s", contribution.toString());
     }
