@@ -60,58 +60,31 @@ public class PendingUploadsPresenter implements UserActionListener {
      * the live data object. This method can be tweaked to update the lazy loading behavior of the
      * contributions list
      */
-    void setup(String userName, boolean isSelf) {
+    void setup() {
         final PagedList.Config pagedListConfig =
             (new PagedList.Config.Builder())
                 .setPrefetchDistance(50)
                 .setPageSize(10).build();
         Factory<Integer, Contribution> factory;
-        boolean shouldSetBoundaryCallback;
-        if (!isSelf) {
-            //We don't want to persist contributions for other user's, therefore
-            // creating a new DataSource for them
-            contributionsRemoteDataSource.setUserName(userName);
-            factory = new Factory<Integer, Contribution>() {
-                @NonNull
-                @Override
-                public DataSource<Integer, Contribution> create() {
-                    return contributionsRemoteDataSource;
-                }
-            };
-            shouldSetBoundaryCallback = false;
-        } else {
-            contributionBoundaryCallback.setUserName(userName);
-            shouldSetBoundaryCallback = true;
-            factory = repository.fetchContributionsWithStates(
-                Arrays.asList(Contribution.STATE_QUEUED, Contribution.STATE_IN_PROGRESS,
-                    Contribution.STATE_PAUSED));
-        }
 
+        factory = repository.fetchContributionsWithStates(
+            Arrays.asList(Contribution.STATE_QUEUED, Contribution.STATE_IN_PROGRESS,
+                Contribution.STATE_PAUSED));
         LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
             pagedListConfig);
-        if (shouldSetBoundaryCallback) {
-            livePagedListBuilder.setBoundaryCallback(contributionBoundaryCallback);
-        }
-
         totalContributionList = livePagedListBuilder.build();
     }
 
-    void getFailedContributions(String userName) {
+    void getFailedContributions() {
         final PagedList.Config pagedListConfig =
             (new PagedList.Config.Builder())
                 .setPrefetchDistance(50)
                 .setPageSize(10).build();
         Factory<Integer, Contribution> factory;
-        boolean shouldSetBoundaryCallback;
-        contributionBoundaryCallback.setUserName(userName);
-        shouldSetBoundaryCallback = true;
         factory = repository.fetchContributionsWithStates(
             Collections.singletonList(Contribution.STATE_FAILED));
         LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
             pagedListConfig);
-        if (shouldSetBoundaryCallback) {
-            livePagedListBuilder.setBoundaryCallback(contributionBoundaryCallback);
-        }
         failedContributionList = livePagedListBuilder.build();
     }
 
@@ -186,6 +159,10 @@ public class PendingUploadsPresenter implements UserActionListener {
         }
         Contribution it = contributionList.get(index);
         it.setState(Contribution.STATE_QUEUED);
+        if (it.getErrorInfo() == null){
+            it.setChunkInfo(null);
+            it.setTransferred(0);
+        }
         compositeDisposable.add(repository
             .save(it)
             .subscribeOn(ioThreadScheduler)
@@ -205,6 +182,10 @@ public class PendingUploadsPresenter implements UserActionListener {
             return;
         }
         Contribution it = contributionList.get(index);
+        if (it.getErrorInfo() == null){
+            it.setChunkInfo(null);
+            it.setTransferred(0);
+        }
         it.setState(Contribution.STATE_QUEUED);
         compositeDisposable.add(repository
             .save(it)

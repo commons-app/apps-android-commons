@@ -108,10 +108,7 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
     fun initRecyclerView() {
         binding.pendingUploadsRecyclerView.setLayoutManager(LinearLayoutManager(this.context))
         binding.pendingUploadsRecyclerView.adapter = adapter
-        pendingUploadsPresenter!!.setup(
-            userName,
-            sessionManager!!.userName == userName
-        )
+        pendingUploadsPresenter!!.setup()
         pendingUploadsPresenter!!.totalContributionList.observe(
             viewLifecycleOwner
         ) { list: PagedList<Contribution?> ->

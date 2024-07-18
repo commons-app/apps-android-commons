@@ -100,7 +100,7 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCont
     fun initRecyclerView() {
         binding.failedUploadsRecyclerView.setLayoutManager(LinearLayoutManager(this.context))
         binding.failedUploadsRecyclerView.adapter = adapter
-        pendingUploadsPresenter!!.getFailedContributions(userName)
+        pendingUploadsPresenter!!.getFailedContributions()
         pendingUploadsPresenter!!.failedContributionList.observe(
             viewLifecycleOwner
         ) { list: PagedList<Contribution?> ->
