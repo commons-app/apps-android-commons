@@ -25,6 +25,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
+import timber.log.Timber;
 
 /**
  * The presenter class for Contributions
@@ -173,7 +174,11 @@ public class PendingUploadsPresenter implements UserActionListener {
             )
             .subscribe(() ->
                 WorkRequestHelper.Companion.makeOneTimeWorkRequest(
-                    context, ExistingWorkPolicy.KEEP)
+                    context, ExistingWorkPolicy.KEEP),
+                throwable -> {
+                    Timber.e(throwable);
+                    restartUploads(contributionList, index + 1, context);
+                }
             ));
     }
 
@@ -192,7 +197,10 @@ public class PendingUploadsPresenter implements UserActionListener {
             .subscribeOn(ioThreadScheduler)
             .subscribe(() ->
                 WorkRequestHelper.Companion.makeOneTimeWorkRequest(
-                    context, ExistingWorkPolicy.KEEP)
+                    context, ExistingWorkPolicy.KEEP),
+                throwable -> {
+                    Timber.e(throwable);
+                }
             ));
     }
 
