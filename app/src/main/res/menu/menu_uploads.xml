@@ -22,7 +22,7 @@
   <item
     android:id="@+id/retry_icon"
     android:title="Retry"
-    android:icon="@drawable/ic_refresh_white_24dp"
+    android:icon="?attr/refresh_icon_drawable"
     android:orderInCategory="1"
     app:showAsAction="ifRoom"
     />

@@ -429,6 +429,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             Timber.e(exception)
             Timber.e("Stash upload failed for contribution: $filename")
             showFailedNotification(contribution)
+            contribution.errorInfo=exception.message
             contribution.state=Contribution.STATE_FAILED
             clearChunks(contribution)
         }
