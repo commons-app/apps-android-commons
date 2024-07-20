@@ -32,9 +32,9 @@ class PendingUploadsAdapter(private val callback: Callback) :
             when (val latestPayload = payloads.lastOrNull()) {
                 is ContributionChangePayload.Progress -> holder.bindProgress(
                     latestPayload.transferred,
-                    latestPayload.total
+                    latestPayload.total,
+                    getItem(position)!!.state
                 )
-
                 is ContributionChangePayload.State -> holder.bindState(latestPayload.state)
                 else -> onBindViewHolder(holder, position)
             }
@@ -81,7 +81,7 @@ class PendingUploadsAdapter(private val callback: Callback) :
             }
 
             bindState(contribution.state)
-            bindProgress(contribution.transferred, contribution.dataLength)
+            bindProgress(contribution.transferred, contribution.dataLength, contribution.state)
         }
 
         fun bindState(state: Int) {
@@ -95,20 +95,26 @@ class PendingUploadsAdapter(private val callback: Callback) :
             }
         }
 
-        fun bindProgress(transferred: Long, total: Long) {
+        fun bindProgress(transferred: Long, total: Long, state: Int) {
             if (transferred == 0L) {
                 errorTextView.text = "Queued"
                 errorTextView.visibility = View.VISIBLE
                 itemProgress.visibility = View.GONE
             } else {
-                errorTextView.visibility = View.GONE
-                itemProgress.visibility = View.VISIBLE
-                if (transferred >= total) {
-                    itemProgress.isIndeterminate = true
-                } else {
-                    itemProgress.isIndeterminate = false
-                    itemProgress.progress =
-                        ((transferred.toDouble() / total.toDouble()) * 100).toInt()
+                if (state == Contribution.STATE_QUEUED){
+                    errorTextView.text = "Queued"
+                    errorTextView.visibility = View.VISIBLE
+                    itemProgress.visibility = View.GONE
+                } else{
+                    errorTextView.visibility = View.GONE
+                    itemProgress.visibility = View.VISIBLE
+                    if (transferred >= total) {
+                        itemProgress.isIndeterminate = true
+                    } else {
+                        itemProgress.isIndeterminate = false
+                        itemProgress.progress =
+                            ((transferred.toDouble() / total.toDouble()) * 100).toInt()
+                    }
                 }
             }
         }
