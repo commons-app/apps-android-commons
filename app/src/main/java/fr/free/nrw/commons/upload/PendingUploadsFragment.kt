@@ -58,7 +58,6 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
 
     private var contributionsSize = 0
     var contributionsList = ArrayList<Contribution>()
-    private var totalUploads = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -135,10 +134,6 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
                 binding.pendingUplaodsLl.visibility = View.GONE
                 uploadProgressActivity.hidePendingIcons()
             } else {
-                if (totalUploads == 0) {
-                    totalUploads = contributionsSize
-                    binding.progressBarPending.max = totalUploads
-                }
                 binding.nopendingTextView.visibility = View.GONE
                 binding.pendingUplaodsLl.visibility = View.VISIBLE
 
@@ -188,8 +183,7 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
 
                 adapter.submitList(pagedList)
 
-                binding.progressTextView.setText((totalUploads - contributionsSize).toString() + "/" + totalUploads + " uploaded")
-                binding.progressBarPending.progress = totalUploads - contributionsSize
+                binding.progressTextView.setText(contributionsSize.toString() + " uploads left")
                 if (pausedOrQueuedUploads == contributionsSize) {
                     uploadProgressActivity.setPausedIcon(true)
                 } else {
@@ -218,7 +212,6 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
                     contribution,
                     this.requireContext().applicationContext
                 )
-                resetProgressBar()
             },
             {}
         )
@@ -281,9 +274,5 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
                 {}
             )
         }
-    }
-
-    fun resetProgressBar() {
-        totalUploads = 0
     }
 }

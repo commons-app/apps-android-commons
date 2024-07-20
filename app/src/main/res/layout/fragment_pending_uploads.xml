@@ -12,14 +12,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:text="You do not have any pending Uploads!" />
+    android:text="You do not have any pending Uploads!"
+    android:visibility="gone" />
 
   <LinearLayout
     android:id="@+id/pendingUplaodsLl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:visibility="gone">
+    android:visibility="visible">
 
     <LinearLayout
       android:layout_width="match_parent"
@@ -39,19 +40,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:gravity="center"
         android:orientation="vertical">
 
         <TextView
           android:id="@+id/progress_text_view"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="0/2 uploaded" />
-
-        <ProgressBar
-          android:id="@+id/progressBarPending"
-          style="?android:attr/progressBarStyleHorizontal"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content" />
+          android:gravity="right"
+          android:text=""
+          android:textSize="21sp" />
 
       </LinearLayout>
 

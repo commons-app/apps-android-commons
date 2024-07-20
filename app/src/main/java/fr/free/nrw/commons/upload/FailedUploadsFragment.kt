@@ -137,7 +137,6 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCont
 
     fun restartUploads() {
         if (contributionsList != null) {
-            uploadProgressActivity.resetProgressBar()
             pendingUploadsPresenter.restartUploads(
                 contributionsList,
                 0,
@@ -148,7 +147,6 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCont
 
     override fun restartUpload(index: Int) {
         if (contributionsList != null) {
-            uploadProgressActivity.resetProgressBar()
             pendingUploadsPresenter.restartUpload(
                 contributionsList,
                 index,
