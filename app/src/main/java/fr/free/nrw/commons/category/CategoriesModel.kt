@@ -27,30 +27,42 @@ class CategoriesModel @Inject constructor(
     private var selectedExistingCategories: MutableList<String> = mutableListOf()
 
     /**
-     * Returns if the item contains an year
-     * @param item
+     * Returns true if an item is considered to be a spammy category which should be ignored
+     *
+     * @param item a category item that needs to be validated to know if it is spammy or not
      * @return
      */
-    fun containsYear(item: String): Boolean {
+    fun isSpammyCategory(item: String): Boolean {
         //Check for current and previous year to exclude these categories from removal
         val now = Calendar.getInstance()
-        val year = now[Calendar.YEAR]
-        val yearInString = year.toString()
-        val prevYear = year - 1
+        val curYear = now[Calendar.YEAR]
+        val curYearInString = curYear.toString()
+        val prevYear = curYear - 1
         val prevYearInString = prevYear.toString()
         Timber.d("Previous year: %s", prevYearInString)
 
-        //Check if item contains a 4-digit word anywhere within the string (.* is wildcard)
-        //And that item does not equal the current year or previous year
-        //And if it is an irrelevant category such as Media_needing_categories_as_of_16_June_2017(Issue #750)
-        //Check if the year in the form of XX(X)0s is relevant, i.e. in the 2000s or 2010s as stated in Issue #1029
-        return item.matches(".*(19|20)\\d{2}.*".toRegex())
-                && !item.contains(yearInString)
-                && !item.contains(prevYearInString)
-                || item.matches("(.*)needing(.*)".toRegex())
-                || item.matches("(.*)taken on(.*)".toRegex())
-                || item.matches(".*0s.*".toRegex())
-                && !item.matches(".*(200|201)0s.*".toRegex())
+        val mentionsDecade = item.matches(".*0s.*".toRegex())
+        val recentDecade = item.matches(".*20[0-2]0s.*".toRegex())
+        val spammyCategory = item.matches("(.*)needing(.*)".toRegex())
+                          || item.matches("(.*)taken on(.*)".toRegex())
+
+        // always skip irrelevant categories such as Media_needing_categories_as_of_16_June_2017(Issue #750)
+        if (spammyCategory) {
+            return true
+        }
+
+        if (mentionsDecade) {
+            // Check if the year in the form of XX(X)0s is recent/relevant, i.e. in the 2000s or 2010s/2020s as stated in Issue #1029
+            // Example: "2020s" is OK, but "1920s" is not (and should be skipped)
+            return !recentDecade
+        } else {
+            // If it is not an year in decade form (e.g. 19xxs/20xxs), then check if item contains a 4-digit year
+            // anywhere within the string (.* is wildcard) (Issue #47)
+            // And that item does not equal the current year or previous year
+            return item.matches(".*(19|20)\\d{2}.*".toRegex())
+                    && !item.contains(curYearInString)
+                    && !item.contains(prevYearInString)
+        }
     }
 
     /**

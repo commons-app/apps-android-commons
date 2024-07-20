@@ -14,7 +14,6 @@ import media
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
 import java.lang.reflect.Method
 
@@ -97,8 +96,8 @@ class CategoriesPresenterTest {
                     )
                 )
             )
-        whenever(repository.containsYear("selected")).thenReturn(false)
-        whenever(repository.containsYear("doesContainYear")).thenReturn(true)
+        whenever(repository.isSpammyCategory("selected")).thenReturn(false)
+        whenever(repository.isSpammyCategory("doesContainYear")).thenReturn(true)
         whenever(repository.selectedCategories).thenReturn(listOf(
             categoryItem("selected", "", "",true)))
         categoriesPresenter.searchForCategories("test")
