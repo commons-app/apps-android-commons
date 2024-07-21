@@ -136,9 +136,9 @@ public class PendingUploadsPresenter implements UserActionListener {
             ));
     }
 
-    public void deleteUploads(List<Contribution> contributionList, Context context) {
+    public void deleteUploads(List<Integer> states, Context context) {
         compositeDisposable.add(repository
-            .deleteContributionsFromDB(contributionList)
+            .deleteContributionsFromDBWithStates(states)
             .subscribeOn(ioThreadScheduler)
             .subscribe(() ->
                 WorkRequestHelper.Companion.makeOneTimeWorkRequest(

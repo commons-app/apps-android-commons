@@ -177,6 +177,8 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL
         )!!
         withContext(Dispatchers.IO) {
+
+            //TODO: Implement Worker Flags
             /*
                 queuedContributions receives the results from a one-shot query.
                 This means that once the list has been fetched from the database,
@@ -187,46 +189,50 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                 https://github.com/commons-app/apps-android-commons/issues/5136
                 https://github.com/commons-app/apps-android-commons/issues/5346
              */
-            val queuedContributions = contributionDao.getContribution(statesToProcess)
-                .blockingGet()
-            //Showing initial notification for the number of uploads being processed
+            while (contributionDao.getContribution(statesToProcess)
+                    .blockingGet().size > 0
+            ) {
+                val queuedContributions = contributionDao.getContribution(statesToProcess)
+                    .blockingGet()
+                //Showing initial notification for the number of uploads being processed
 
-            processingUploads.setContentTitle(appContext.getString(R.string.starting_uploads))
-            processingUploads.setContentText(
-                appContext.resources.getQuantityString(
+                processingUploads.setContentTitle(appContext.getString(R.string.starting_uploads))
+                processingUploads.setContentText(
+                    appContext.resources.getQuantityString(
                         R.plurals.starting_multiple_uploads,
                         queuedContributions.size,
                         queuedContributions.size
                     )
-            )
-            notificationManager?.notify(
-                PROCESSING_UPLOADS_NOTIFICATION_TAG,
-                PROCESSING_UPLOADS_NOTIFICATION_ID,
-                processingUploads.build()
-            )
+                )
+                notificationManager?.notify(
+                    PROCESSING_UPLOADS_NOTIFICATION_TAG,
+                    PROCESSING_UPLOADS_NOTIFICATION_ID,
+                    processingUploads.build()
+                )
 
-            val sortedQueuedContributionsList: List<Contribution> = queuedContributions.sortedBy { it.dateUploadStartedInMillis() }
+                val sortedQueuedContributionsList: List<Contribution> =
+                    queuedContributions.sortedBy { it.dateUploadStartedInMillis() }
 
-            /**
-             * To avoid race condition when multiple of these workers are working, assign this state
-            so that the next one does not process these contribution again
-             */
+                /**
+                 * To avoid race condition when multiple of these workers are working, assign this state
+                so that the next one does not process these contribution again
+                 */
 //            sortedQueuedContributionsList.forEach {
 //                it.state = Contribution.STATE_IN_PROGRESS
 //                contributionDao.saveSynchronous(it)
 //            }
 
-            var contribution = sortedQueuedContributionsList.first()
+                var contribution = sortedQueuedContributionsList.first()
 
-            if (contributionDao.getContribution(contribution.pageId) != null) {
-                contribution.transferred = 0
-                contribution.state = Contribution.STATE_IN_PROGRESS
-                contributionDao.saveSynchronous(contribution)
-                setProgressAsync(Data.Builder().putInt("progress", countUpload).build())
-                countUpload++
-                uploadContribution(contribution = contribution)
+                if (contributionDao.getContribution(contribution.pageId) != null) {
+                    contribution.transferred = 0
+                    contribution.state = Contribution.STATE_IN_PROGRESS
+                    contributionDao.saveSynchronous(contribution)
+                    setProgressAsync(Data.Builder().putInt("progress", countUpload).build())
+                    countUpload++
+                    uploadContribution(contribution = contribution)
+                }
             }
-
             //Dismiss the global notification
             notificationManager?.cancel(
                 PROCESSING_UPLOADS_NOTIFICATION_TAG,

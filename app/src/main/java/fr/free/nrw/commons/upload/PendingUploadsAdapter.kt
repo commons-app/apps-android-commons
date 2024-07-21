@@ -86,7 +86,6 @@ class PendingUploadsAdapter(private val callback: Callback) :
         }
 
         fun bindState(state: Int) {
-            Timber.tag("PRINT").e("State is: "+state)
             if (state == Contribution.STATE_QUEUED || state == Contribution.STATE_PAUSED) {
                 errorTextView.text = "Queued"
                 errorTextView.visibility = View.VISIBLE
@@ -98,7 +97,6 @@ class PendingUploadsAdapter(private val callback: Callback) :
         }
 
         fun bindProgress(transferred: Long, total: Long, state: Int) {
-            Timber.tag("PRINT").e("State is2: "+state)
             if (transferred == 0L) {
                 errorTextView.text = "Queued"
                 errorTextView.visibility = View.VISIBLE

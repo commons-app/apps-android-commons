@@ -220,7 +220,7 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
                     ViewUtil.showShortToast(context, R.string.cancelling_upload)
                     uploadProgressActivity.hidePendingIcons()
                     pendingUploadsPresenter.deleteUploads(
-                        contributionsList,
+                        listOf(Contribution.STATE_QUEUED, Contribution.STATE_IN_PROGRESS, Contribution.STATE_PAUSED),
                         this.requireContext().applicationContext
                     )
                 },

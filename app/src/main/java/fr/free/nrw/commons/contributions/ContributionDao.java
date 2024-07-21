@@ -47,17 +47,17 @@ public abstract class ContributionDao {
     @Delete
     public abstract void deleteSynchronous(Contribution contribution);
 
-    @Delete
-    public abstract void deleteContributionsSynchronous(List<Contribution> contributions);
+    @Query("DELETE FROM contribution WHERE state IN (:states)")
+    public abstract void deleteContributionsWithStatesSynchronous(List<Integer> states) throws SQLiteException;
 
     public Completable delete(final Contribution contribution) {
         return Completable
             .fromAction(() -> deleteSynchronous(contribution));
     }
 
-    public Completable deleteContributions(final List<Contribution> contributions) {
+    public Completable deleteContributionsWithStates(List<Integer> states) {
         return Completable
-            .fromAction(() -> deleteContributionsSynchronous(contributions));
+            .fromAction(() -> deleteContributionsWithStatesSynchronous(states));
     }
 
     @Query("SELECT * from contribution WHERE media_filename=:fileName")
