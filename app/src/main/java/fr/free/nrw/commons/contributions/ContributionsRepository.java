@@ -57,6 +57,10 @@ public class ContributionsRepository {
         return localDataSource.getContributionsWithStates(states);
     }
 
+    public Factory<Integer, Contribution> fetchContributionsWithStatesSortedByDateUploadStarted(List<Integer> states) {
+        return localDataSource.getContributionsWithStatesSortedByDateUploadStarted(states);
+    }
+
     public Single<List<Long>> save(List<Contribution> contributions) {
         return localDataSource.saveContributions(contributions);
     }

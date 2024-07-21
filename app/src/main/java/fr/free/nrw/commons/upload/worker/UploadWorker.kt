@@ -8,6 +8,8 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
+import android.os.Build.VERSION
+import android.os.Build.VERSION_CODES
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.multidex.BuildConfig
@@ -203,25 +205,27 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                 processingUploads.build()
             )
 
+            val sortedQueuedContributionsList: List<Contribution> = queuedContributions.sortedBy { it.dateUploadStartedInMillis() }
+
             /**
              * To avoid race condition when multiple of these workers are working, assign this state
             so that the next one does not process these contribution again
              */
-            queuedContributions.forEach {
-                it.state = Contribution.STATE_IN_PROGRESS
-                contributionDao.saveSynchronous(it)
-            }
+//            sortedQueuedContributionsList.forEach {
+//                it.state = Contribution.STATE_IN_PROGRESS
+//                contributionDao.saveSynchronous(it)
+//            }
 
-            queuedContributions.asFlow().map { contribution ->
-                if (contributionDao.getContribution(contribution.pageId) != null) {
-                    contribution.transferred = 0
-                    contribution.state = Contribution.STATE_IN_PROGRESS
-                    contributionDao.saveSynchronous(contribution)
-                    setProgressAsync(Data.Builder().putInt("progress", countUpload).build())
-                    countUpload++
-                    uploadContribution(contribution = contribution)
-                }
-            }.collect()
+            var contribution = sortedQueuedContributionsList.first()
+
+            if (contributionDao.getContribution(contribution.pageId) != null) {
+                contribution.transferred = 0
+                contribution.state = Contribution.STATE_IN_PROGRESS
+                contributionDao.saveSynchronous(contribution)
+                setProgressAsync(Data.Builder().putInt("progress", countUpload).build())
+                countUpload++
+                uploadContribution(contribution = contribution)
+            }
 
             //Dismiss the global notification
             notificationManager?.cancel(

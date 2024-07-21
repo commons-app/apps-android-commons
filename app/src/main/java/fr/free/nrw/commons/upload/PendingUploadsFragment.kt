@@ -136,53 +136,7 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
             } else {
                 binding.nopendingTextView.visibility = View.GONE
                 binding.pendingUplaodsLl.visibility = View.VISIBLE
-
-                val sortedContributionsList: List<Contribution> =
-                    if (VERSION.SDK_INT >= VERSION_CODES.N) {
-                        contributionsList.sortedByDescending { it.dateModifiedInMillis() }
-                    } else {
-                        contributionsList.sortedBy { it.dateModifiedInMillis() }.reversed()
-                    }
-
-                val newContributionList: MutableList<Contribution> =
-                    sortedContributionsList.toMutableList()
-//                val listOfRemoved: MutableList<Contribution> = mutableListOf()
-//                val last = sortedContributionsList.last()
-//                for (i in sortedContributionsList.indices) {
-//                    val current = sortedContributionsList[i]
-//                    if (current.transferred == 0L && (current.dateModifiedInMillis() / 100) > (last.dateModifiedInMillis() / 100)) {
-//                        listOfRemoved.add(current)
-//                    }
-//                }
-//                newContributionList.removeAll(listOfRemoved)
-//                newContributionList.addAll(listOfRemoved)
-
-                // TODO: WORK ON THE SORTING ISSUE
-                val dataSource = object : PositionalDataSource<Contribution>() {
-                    override fun loadInitial(
-                        params: LoadInitialParams,
-                        callback: LoadInitialCallback<Contribution>
-                    ) {
-                        callback.onResult(newContributionList, 0, newContributionList.size)
-                    }
-
-                    override fun loadRange(
-                        params: LoadRangeParams,
-                        callback: LoadRangeCallback<Contribution>
-                    ) {
-                        val start = params.startPosition
-                        val end = Math.min(start + params.loadSize, newContributionList.size)
-                        callback.onResult(newContributionList.subList(start, end))
-                    }
-                }
-
-                val pagedList = PagedList.Builder(dataSource, 10)
-                    .setFetchExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
-                    .setNotifyExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
-                    .build()
-
-                adapter.submitList(pagedList)
-
+                adapter.submitList(list)
                 binding.progressTextView.setText(contributionsSize.toString() + " uploads left")
                 if (pausedOrQueuedUploads == contributionsSize) {
                     uploadProgressActivity.setPausedIcon(true)

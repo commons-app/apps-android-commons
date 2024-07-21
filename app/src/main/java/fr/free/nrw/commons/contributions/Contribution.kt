@@ -43,6 +43,7 @@ data class Contribution constructor(
     var dateCreated: Date? = null,
     var dateCreatedString: String? = null,
     var dateModified: Date? = null,
+    var dateUploadStarted: Date? = null,
     var hasInvalidLocation : Int =  0,
     var contentUri: Uri? = null,
     var countryCode : String? = null,
@@ -138,6 +139,10 @@ data class Contribution constructor(
 
     fun dateModifiedInMillis(): Long  {
         return dateModified!!.time
+    }
+
+    fun dateUploadStartedInMillis(): Long {
+        return dateUploadStarted!!.time
     }
 
 }

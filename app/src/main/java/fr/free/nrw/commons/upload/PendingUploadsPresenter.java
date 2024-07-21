@@ -20,6 +20,7 @@ import fr.free.nrw.commons.upload.worker.WorkRequestHelper;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
@@ -67,7 +68,7 @@ public class PendingUploadsPresenter implements UserActionListener {
                 .setPageSize(10).build();
         Factory<Integer, Contribution> factory;
 
-        factory = repository.fetchContributionsWithStates(
+        factory = repository.fetchContributionsWithStatesSortedByDateUploadStarted(
             Arrays.asList(Contribution.STATE_QUEUED, Contribution.STATE_IN_PROGRESS,
                 Contribution.STATE_PAUSED));
         LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
@@ -81,7 +82,7 @@ public class PendingUploadsPresenter implements UserActionListener {
                 .setPrefetchDistance(50)
                 .setPageSize(10).build();
         Factory<Integer, Contribution> factory;
-        factory = repository.fetchContributionsWithStates(
+        factory = repository.fetchContributionsWithStatesSortedByDateUploadStarted(
             Collections.singletonList(Contribution.STATE_FAILED));
         LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
             pagedListConfig);
@@ -150,9 +151,12 @@ public class PendingUploadsPresenter implements UserActionListener {
             return;
         }
         Contribution it = contributionList.get(index);
-        if (it.getErrorInfo() == null && it.getState() == Contribution.STATE_FAILED) {
-            it.setChunkInfo(null);
-            it.setTransferred(0);
+        if (it.getState() == Contribution.STATE_FAILED) {
+            it.setDateUploadStarted(Calendar.getInstance().getTime());
+            if (it.getErrorInfo() == null){
+                it.setChunkInfo(null);
+                it.setTransferred(0);
+            }
         }
         it.setState(Contribution.STATE_QUEUED);
         compositeDisposable.add(repository
@@ -178,9 +182,12 @@ public class PendingUploadsPresenter implements UserActionListener {
             return;
         }
         Contribution it = contributionList.get(index);
-        if (it.getErrorInfo() == null && it.getState() == Contribution.STATE_FAILED) {
-            it.setChunkInfo(null);
-            it.setTransferred(0);
+        if (it.getState() == Contribution.STATE_FAILED) {
+            it.setDateUploadStarted(Calendar.getInstance().getTime());
+            if (it.getErrorInfo() == null){
+                it.setChunkInfo(null);
+                it.setTransferred(0);
+            }
         }
         it.setState(Contribution.STATE_QUEUED);
         compositeDisposable.add(repository

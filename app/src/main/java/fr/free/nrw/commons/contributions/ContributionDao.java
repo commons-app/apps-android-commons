@@ -27,6 +27,9 @@ public abstract class ContributionDao {
         return Completable
             .fromAction(() -> {
                 contribution.setDateModified(Calendar.getInstance().getTime());
+                if (contribution.getDateUploadStarted() == null) {
+                    contribution.setDateUploadStarted(Calendar.getInstance().getTime());
+                }
                 saveSynchronous(contribution);
             });
     }
@@ -67,7 +70,12 @@ public abstract class ContributionDao {
     public abstract Single<List<Contribution>> getContribution(List<Integer> states);
 
     @Query("SELECT * from contribution WHERE state IN (:states) order by media_dateUploaded DESC")
-    public abstract DataSource.Factory<Integer, Contribution> getContributions(List<Integer> states);
+    public abstract DataSource.Factory<Integer, Contribution> getContributions(
+        List<Integer> states);
+
+    @Query("SELECT * from contribution WHERE state IN (:states) order by dateUploadStarted ASC")
+    public abstract DataSource.Factory<Integer, Contribution> getContributionsSortedByDateUploadStarted(
+        List<Integer> states);
 
     @Query("SELECT COUNT(*) from contribution WHERE state in (:toUpdateStates)")
     public abstract Single<Integer> getPendingUploads(int[] toUpdateStates);
