@@ -146,16 +146,16 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
 
                 val newContributionList: MutableList<Contribution> =
                     sortedContributionsList.toMutableList()
-                val listOfRemoved: MutableList<Contribution> = mutableListOf()
-                val last = sortedContributionsList.last()
-                for (i in sortedContributionsList.indices) {
-                    val current = sortedContributionsList[i]
-                    if (current.transferred == 0L && (current.dateModifiedInMillis() / 100) > (last.dateModifiedInMillis() / 100)) {
-                        listOfRemoved.add(current)
-                    }
-                }
-                newContributionList.removeAll(listOfRemoved)
-                newContributionList.addAll(listOfRemoved)
+//                val listOfRemoved: MutableList<Contribution> = mutableListOf()
+//                val last = sortedContributionsList.last()
+//                for (i in sortedContributionsList.indices) {
+//                    val current = sortedContributionsList[i]
+//                    if (current.transferred == 0L && (current.dateModifiedInMillis() / 100) > (last.dateModifiedInMillis() / 100)) {
+//                        listOfRemoved.add(current)
+//                    }
+//                }
+//                newContributionList.removeAll(listOfRemoved)
+//                newContributionList.addAll(listOfRemoved)
 
                 // TODO: WORK ON THE SORTING ISSUE
                 val dataSource = object : PositionalDataSource<Contribution>() {

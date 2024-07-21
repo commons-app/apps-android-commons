@@ -50,12 +50,12 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginEnd="@dimen/dimen_10"
-    android:src="?attr/refresh_icon_drawable" />
+    android:src="@drawable/ic_refresh_24dp" />
 
   <ImageView
     android:id="@+id/deleteButton"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:src="@android:drawable/ic_menu_close_clear_cancel" />
+    android:src="@drawable/ic_cancel_upload" />
 
 </LinearLayout>

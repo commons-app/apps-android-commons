@@ -101,7 +101,7 @@ class PendingUploadsAdapter(private val callback: Callback) :
                 errorTextView.visibility = View.VISIBLE
                 itemProgress.visibility = View.GONE
             } else {
-                if (state == Contribution.STATE_QUEUED){
+                if (state == Contribution.STATE_QUEUED || state == Contribution.STATE_PAUSED){
                     errorTextView.text = "Queued"
                     errorTextView.visibility = View.VISIBLE
                     itemProgress.visibility = View.GONE

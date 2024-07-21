@@ -56,7 +56,7 @@
     android:id="@+id/deleteButton"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:src="@android:drawable/ic_menu_close_clear_cancel"
+    android:src="@drawable/ic_cancel_upload"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent" />

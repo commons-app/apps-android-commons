@@ -107,7 +107,7 @@ class UploadProgressActivity : BaseActivity() {
                                 Menu.NONE,
                                 getString(R.string.pause)
                             )
-                                .setIcon(android.R.drawable.ic_media_pause)
+                                .setIcon(R.drawable.pause_icon)
                                 .setOnMenuItemClickListener {
                                     pendingUploadsFragment!!.pauseUploads()
                                     setPausedIcon(true)
@@ -122,7 +122,7 @@ class UploadProgressActivity : BaseActivity() {
                                 Menu.NONE,
                                 getString(R.string.cancel)
                             )
-                                .setIcon(android.R.drawable.ic_menu_close_clear_cancel)
+                                .setIcon(R.drawable.ic_cancel_upload)
                                 .setOnMenuItemClickListener {
                                     pendingUploadsFragment!!.deleteUploads()
                                     true
@@ -137,7 +137,7 @@ class UploadProgressActivity : BaseActivity() {
                                 Menu.NONE,
                                 getString(R.string.resume)
                             )
-                                .setIcon(android.R.drawable.ic_media_play)
+                                .setIcon(R.drawable.play_icon)
                                 .setOnMenuItemClickListener {
                                     pendingUploadsFragment!!.restartUploads()
                                     setPausedIcon(false)
@@ -151,7 +151,7 @@ class UploadProgressActivity : BaseActivity() {
                 if (isErrorIconsVisisble) {
                     if (menu!!.findItem(R.id.retry_icon) == null) {
                         menu!!.add(Menu.NONE, R.id.retry_icon, Menu.NONE, getString(R.string.retry))
-                            .setIcon(R.drawable.ic_refresh_white_24dp).setOnMenuItemClickListener {
+                            .setIcon(R.drawable.ic_refresh_24dp).setOnMenuItemClickListener {
                                 failedUploadsFragment!!.restartUploads()
                                 true
                             }
@@ -164,7 +164,7 @@ class UploadProgressActivity : BaseActivity() {
                             Menu.NONE,
                             getString(R.string.cancel)
                         )
-                            .setIcon(android.R.drawable.ic_menu_close_clear_cancel)
+                            .setIcon(R.drawable.ic_cancel_upload)
                             .setOnMenuItemClickListener {
                                 failedUploadsFragment!!.deleteUploads()
                                 true
