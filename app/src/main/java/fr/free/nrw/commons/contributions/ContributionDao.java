@@ -44,9 +44,17 @@ public abstract class ContributionDao {
     @Delete
     public abstract void deleteSynchronous(Contribution contribution);
 
+    @Delete
+    public abstract void deleteContributionsSynchronous(List<Contribution> contributions);
+
     public Completable delete(final Contribution contribution) {
         return Completable
             .fromAction(() -> deleteSynchronous(contribution));
+    }
+
+    public Completable deleteContributions(final List<Contribution> contributions) {
+        return Completable
+            .fromAction(() -> deleteContributionsSynchronous(contributions));
     }
 
     @Query("SELECT * from contribution WHERE media_filename=:fileName")

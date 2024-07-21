@@ -6,6 +6,7 @@ import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.contributions.ChunkInfo
 import fr.free.nrw.commons.contributions.Contribution
+import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.upload.worker.UploadWorker.NotificationUpdateProgressListener
 import fr.free.nrw.commons.wikidata.mwapi.MwException
 import io.reactivex.Observable
@@ -33,7 +34,8 @@ class UploadClient @Inject constructor(
     private val csrfTokenClient: CsrfTokenClient,
     private val pageContentsCreator: PageContentsCreator,
     private val fileUtilsWrapper: FileUtilsWrapper,
-    private val gson: Gson, private val timeProvider: TimeProvider
+    private val gson: Gson, private val timeProvider: TimeProvider,
+    private val contributionDao: ContributionDao
 ) {
     private val CHUNK_SIZE = 512 * 1024 // 512 KB
 
@@ -78,7 +80,7 @@ class UploadClient @Inject constructor(
         compositeDisposable.add(
             Observable.fromIterable(fileChunks).forEach { chunkFile: File ->
                 if (canProcess(contribution, failures)) {
-                    if (CommonsApplication.cancelledUploads.contains(contribution.pageId)) {
+                    if (contributionDao.getContribution(contribution.pageId) == null) {
                         compositeDisposable.clear()
                         return@forEach
                     } else {
@@ -101,7 +103,7 @@ class UploadClient @Inject constructor(
         )
 
         return when {
-            CommonsApplication.cancelledUploads.contains(contribution.pageId) -> {
+            contributionDao.getContribution(contribution.pageId) == null -> {
                 return Observable.just(StashUploadResult(StashUploadState.CANCELLED, null, "Upload cancelled"))
             }
             contribution.isPaused() -> {

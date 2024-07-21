@@ -198,7 +198,6 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCont
                     uploadProgressActivity.hidePendingIcons()
                     pendingUploadsPresenter.deleteUploads(
                         contributionsList,
-                        0,
                         this.requireContext().applicationContext
                     )
                 },

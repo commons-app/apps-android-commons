@@ -4,7 +4,6 @@ package fr.free.nrw.commons.upload;
 import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
-import androidx.paging.DataSource;
 import androidx.paging.DataSource.Factory;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
@@ -136,18 +135,10 @@ public class PendingUploadsPresenter implements UserActionListener {
             ));
     }
 
-    public void deleteUploads(List<Contribution> contributionList, int index, Context context) {
-        if (index >= contributionList.size()) {
-            return;
-        }
-        Contribution it = contributionList.get(index);
+    public void deleteUploads(List<Contribution> contributionList, Context context) {
         compositeDisposable.add(repository
-            .deleteContributionFromDB(it)
+            .deleteContributionsFromDB(contributionList)
             .subscribeOn(ioThreadScheduler)
-            .doOnComplete(() -> {
-                    deleteUploads(contributionList, index + 1, context);
-                }
-            )
             .subscribe(() ->
                 WorkRequestHelper.Companion.makeOneTimeWorkRequest(
                     context, ExistingWorkPolicy.KEEP)
@@ -159,11 +150,11 @@ public class PendingUploadsPresenter implements UserActionListener {
             return;
         }
         Contribution it = contributionList.get(index);
-        it.setState(Contribution.STATE_QUEUED);
-        if (it.getErrorInfo() == null){
+        if (it.getErrorInfo() == null && it.getState() == Contribution.STATE_FAILED) {
             it.setChunkInfo(null);
             it.setTransferred(0);
         }
+        it.setState(Contribution.STATE_QUEUED);
         compositeDisposable.add(repository
             .save(it)
             .subscribeOn(ioThreadScheduler)
@@ -173,8 +164,8 @@ public class PendingUploadsPresenter implements UserActionListener {
                 }
             )
             .subscribe(() ->
-                WorkRequestHelper.Companion.makeOneTimeWorkRequest(
-                    context, ExistingWorkPolicy.KEEP),
+                    WorkRequestHelper.Companion.makeOneTimeWorkRequest(
+                        context, ExistingWorkPolicy.KEEP),
                 throwable -> {
                     Timber.e(throwable);
                     restartUploads(contributionList, index + 1, context);
@@ -187,7 +178,7 @@ public class PendingUploadsPresenter implements UserActionListener {
             return;
         }
         Contribution it = contributionList.get(index);
-        if (it.getErrorInfo() == null){
+        if (it.getErrorInfo() == null && it.getState() == Contribution.STATE_FAILED) {
             it.setChunkInfo(null);
             it.setTransferred(0);
         }
@@ -196,8 +187,8 @@ public class PendingUploadsPresenter implements UserActionListener {
             .save(it)
             .subscribeOn(ioThreadScheduler)
             .subscribe(() ->
-                WorkRequestHelper.Companion.makeOneTimeWorkRequest(
-                    context, ExistingWorkPolicy.KEEP),
+                    WorkRequestHelper.Companion.makeOneTimeWorkRequest(
+                        context, ExistingWorkPolicy.KEEP),
                 throwable -> {
                     Timber.e(throwable);
                 }

@@ -63,6 +63,10 @@ class ContributionsLocalDataSource {
         return contributionDao.delete(contribution);
     }
 
+    public Completable deleteContributions(final List<Contribution> contributions) {
+        return contributionDao.deleteContributions(contributions);
+    }
+
     public Factory<Integer, Contribution> getContributions() {
         return contributionDao.fetchContributions();
     }

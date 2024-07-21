@@ -213,32 +213,13 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             }
 
             queuedContributions.asFlow().map { contribution ->
-                // Upload the contribution if it has not been cancelled by the user
-                if (!CommonsApplication.cancelledUploads.contains(contribution.pageId)) {
-                    /**
-                     * If the limited connection mode is on, lets iterate through the queued
-                     * contributions
-                     * and set the state as STATE_QUEUED_LIMITED_CONNECTION_MODE ,
-                     * otherwise proceed with the upload
-                     */
-                    if (isLimitedConnectionModeEnabled()) {
-                        if (contribution.state == Contribution.STATE_QUEUED) {
-                            contribution.state = Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE
-                            contributionDao.saveSynchronous(contribution)
-                        }
-                    } else {
-                        contribution.transferred = 0
-                        contribution.state = Contribution.STATE_IN_PROGRESS
-                        contributionDao.saveSynchronous(contribution)
-                        setProgressAsync(Data.Builder().putInt("progress", countUpload).build())
-                        countUpload++
-                        uploadContribution(contribution = contribution)
-                    }
-                } else {
-                    /* We can remove the cancelled upload from the hashset
-                       as this contribution will not be processed again
-                     */
-                    removeUploadFromInMemoryHashSet(contribution)
+                if (contributionDao.getContribution(contribution.pageId) != null) {
+                    contribution.transferred = 0
+                    contribution.state = Contribution.STATE_IN_PROGRESS
+                    contributionDao.saveSynchronous(contribution)
+                    setProgressAsync(Data.Builder().putInt("progress", countUpload).build())
+                    countUpload++
+                    uploadContribution(contribution = contribution)
                 }
             }.collect()
 
@@ -260,13 +241,6 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
     }
 
     /**
-     * Removes the processed contribution from the cancelledUploads in-memory hashset
-     */
-    private fun removeUploadFromInMemoryHashSet(contribution: Contribution) {
-        CommonsApplication.cancelledUploads.remove(contribution.pageId)
-    }
-
-    /**
      * Create new notification for foreground service
      */
     private fun createForegroundInfo(): ForegroundInfo {
@@ -285,12 +259,6 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL)!!
             .setContentTitle(appContext.getString(R.string.upload_in_progress))
             .build()
-    }
-    /**
-     * Returns true is the limited connection mode is enabled
-     */
-    private fun isLimitedConnectionModeEnabled(): Boolean {
-        return sessionManager.getPreference(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED)
     }
 
     /**

@@ -36,6 +36,10 @@ public class ContributionsRepository {
         return localDataSource.deleteContribution(contribution);
     }
 
+    public Completable deleteContributionsFromDB(List<Contribution> contributions) {
+        return localDataSource.deleteContributions(contributions);
+    }
+
     /**
      * Get contribution object with title
      * @param fileName
