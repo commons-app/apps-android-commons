@@ -662,7 +662,7 @@
   <string name="need_permission">Потребна је дозвола</string>
   <string name="contributions_of_user">Доприноси корисника/це: %s</string>
   <string name="achievements_of_user">Достигнућа корисника/це: %s</string>
-  <string name="menu_view_user_page">Прикажи корисничку страницу</string>
+  <string name="menu_view_user_page" fuzzy="true">Прикажи корисничку страницу</string>
   <string name="edit_categories">Измени категорије</string>
   <string name="advanced_options">Напредне опције</string>
   <string name="apply">Примени</string>

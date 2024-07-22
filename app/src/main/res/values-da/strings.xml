@@ -211,7 +211,7 @@
   <string name="no">Nej</string>
   <string name="media_detail_caption">Billedtekst</string>
   <string name="media_detail_title">Titel</string>
-  <string name="media_detail_depiction">Afbildning</string>
+  <string name="media_detail_depiction">Afbilder</string>
   <string name="media_detail_description">Beskrivelse</string>
   <string name="media_detail_discussion">Diskussion</string>
   <string name="media_detail_author">Forfatter</string>
@@ -303,7 +303,7 @@
   <string name="about_translate_proceed">Fortsæt</string>
   <string name="about_translate_cancel">Annullér</string>
   <string name="retry">Prøv igen</string>
-  <string name="showcase_view_whole_nearby_activity">Det er de steder i nærheden af dig, der har brug for billeder til at illustrere deres Wikipedia-artikler.\n\nKlikker du på \'SØG DETTE OMRÅDE\' låser kortet og starter en søgning i nærheden omkring det pågældende sted.</string>
+  <string name="showcase_view_whole_nearby_activity">Det er de steder i nærheden af dig, der har brug for billeder til at illustrere deres Wikipedia-artikler.\n\nKlikker du på \'SØG DETTE OMRÅDE\' låser kortet og starter en søgning i området omkring det pågældende sted.</string>
   <string name="showcase_view_needs_photo">Dette sted mangler et billede.</string>
   <string name="showcase_view_has_photo">Dette sted har allerede et billede.</string>
   <string name="showcase_view_no_longer_exists">Dette sted findes ikke længere.</string>
@@ -565,7 +565,7 @@
   <string name="account_created">Konto oprettet!</string>
   <string name="text_copy">Tekst kopieret til udklipsholder</string>
   <string name="notification_mark_read">Notifikation markeret som læst</string>
-  <string name="some_error">Der var en fejl!</string>
+  <string name="some_error">Der opstod en fejl</string>
   <string name="place_state">Stedstatus:</string>
   <string name="place_state_exists">Findes</string>
   <string name="place_state_needs_photo">Mangler et billede</string>
@@ -695,7 +695,7 @@
   <string name="read_phone_state_permission_message">\"I nærheden\"-kort har brug for at aflæse TELEFON TILSTAND for at fungere ordentlig</string>
   <string name="contributions_of_user">Bidrag fra bruger: %s</string>
   <string name="achievements_of_user">Præstationer af bruger: %s</string>
-  <string name="menu_view_user_page">Vis brugerside</string>
+  <string name="menu_view_user_page">Vis brugerprofil</string>
   <string name="edit_depictions">Rediger afbildninger</string>
   <string name="edit_categories">Rediger kategorier</string>
   <string name="advanced_options">Avancerede indstillinger</string>
@@ -778,8 +778,7 @@
   <string name="nearby_wikitalk">Rapporter et problem omkring dette element til Wikidata</string>
   <string name="please_enter_some_comments">Skriv nogle kommentarer</string>
   <string name="talk">Tal</string>
-  <string name="write_something_about_the">\"Skriv noget om\"</string>
-  <string name="item_it_will_be_publicly_visible">\" elementet. Det vil være offentligt synligt.\"</string>
+  <string name="write_something_about_the_item">Skriv noget om elementet \'%1$s\'. Det vil være offentligt synligt.</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' eksisterer ikke længere, der vil aldrig kunne tages et billede af det.</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' ligger et andet sted. Angiv venligst det korrekte sted nedenfor, og skriv om muligt den korrekte bredde- og længdegrad.</string>
   <string name="other_problem_or_information_please_explain_below">Andet problem eller anden information (forklar venligst nedenfor).</string>

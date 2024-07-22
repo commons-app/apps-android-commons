@@ -503,7 +503,7 @@
   <string name="need_permission">অনুমতি দরকার</string>
   <string name="contributions_of_user">ব্যবহারকারীর অবদান: %s</string>
   <string name="achievements_of_user">ব্যবহারকারীর অর্জন: %s</string>
-  <string name="menu_view_user_page">ব্যবহারকারীর পাতা দেখুন</string>
+  <string name="menu_view_user_page" fuzzy="true">ব্যবহারকারীর পাতা দেখুন</string>
   <string name="advanced_options">উচ্চতর বিকল্প</string>
   <string name="apply">প্রয়োগ করুন</string>
   <string name="reset">পুনঃস্থাপন</string>

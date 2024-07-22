@@ -721,7 +721,7 @@
   <string name="read_phone_state_permission_message">Karten in der Nähe müssen den Telefonstatus lesen können, um richtig zu funktionieren</string>
   <string name="contributions_of_user">Beiträge von Benutzer: %s</string>
   <string name="achievements_of_user">Erfolge des Benutzers: %s</string>
-  <string name="menu_view_user_page">Benutzerseite ansehen</string>
+  <string name="menu_view_user_page" fuzzy="true">Benutzerseite ansehen</string>
   <string name="edit_depictions">Beschriftungen bearbeiten</string>
   <string name="edit_categories">Kategorien bearbeiten</string>
   <string name="advanced_options">Erweiterte Optionen</string>

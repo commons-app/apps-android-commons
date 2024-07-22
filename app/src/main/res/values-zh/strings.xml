@@ -734,7 +734,7 @@
   <string name="read_phone_state_permission_message">附近地图需要读取手机状态权限以正常运行</string>
   <string name="contributions_of_user">用户贡献：%s</string>
   <string name="achievements_of_user">用户成就：%s</string>
-  <string name="menu_view_user_page">查看用户页面</string>
+  <string name="menu_view_user_page" fuzzy="true">查看用户页面</string>
   <string name="edit_depictions">编辑描述</string>
   <string name="edit_categories">编辑分类</string>
   <string name="advanced_options">高级选项</string>

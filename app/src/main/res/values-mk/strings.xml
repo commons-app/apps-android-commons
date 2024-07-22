@@ -691,7 +691,7 @@
   <string name="read_phone_state_permission_message">Картите со блиски места треба можат да ја прочитаат СОСТОЈБАТА НА ТЕЛЕФОНОТ за да работат правилно</string>
   <string name="contributions_of_user">Придонеси на корисникот: %s</string>
   <string name="achievements_of_user">Достигнувања на корисникот: %s</string>
-  <string name="menu_view_user_page">Преглед на корисничката страница</string>
+  <string name="menu_view_user_page" fuzzy="true">Преглед на корисничката страница</string>
   <string name="edit_depictions">Уреди прикази</string>
   <string name="edit_categories">Уреди категории</string>
   <string name="advanced_options">Напредни можности</string>
@@ -774,10 +774,9 @@
   <string name="nearby_wikitalk">Пријавете проблем со овој предмет на Википодатоци</string>
   <string name="please_enter_some_comments">Внесете коментар</string>
   <string name="talk">Разговор</string>
-  <string name="write_something_about_the">„Напишете нешто за предметот “</string>
-  <string name="item_it_will_be_publicly_visible">“. Ова ќе биде јавно видливо.“</string>
+  <string name="write_something_about_the_item" fuzzy="true">„Напишете нешто за предметот „%1$s“. Ова ќе биде јавно видливо.“</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">„%1$s“ повеќе не постои, нема да може да се фотографира.</string>
-  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude" fuzzy="true">„%1$s“ се наоѓа на друго место (подолу укажете го сегашното место, ако е можно со географска ширина и должина).</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">„%1$s“ се наоѓа на друго место. Подолу укажете го исправното место и, ако е можно, ставете исправна географска ширина и должина.</string>
   <string name="other_problem_or_information_please_explain_below">Друг проблем или информација (објаснете подолу).</string>
   <string name="feedback_destination_note">Вашите мислења се објавуваат на следнава викистраница:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
 </resources>

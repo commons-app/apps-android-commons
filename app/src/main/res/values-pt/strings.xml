@@ -699,7 +699,7 @@
   <string name="read_phone_state_permission_message">Os mapas de locais próximos precisam de ler ESTADO DO TELEFONE para funcionar devidamente</string>
   <string name="contributions_of_user">Contribuições do utilizador: %s</string>
   <string name="achievements_of_user">Realizações do utilizador: %s</string>
-  <string name="menu_view_user_page">Ver página de utilizador</string>
+  <string name="menu_view_user_page" fuzzy="true">Ver página de utilizador</string>
   <string name="edit_depictions">Editar elementos retratados</string>
   <string name="edit_categories">Editar categorias</string>
   <string name="advanced_options">Opções avançadas</string>

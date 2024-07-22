@@ -734,7 +734,7 @@
   <string name="read_phone_state_permission_message">Los mapas cercanos necesitan leer ESTADO DEL TELÉFONO para funcionar correctamente</string>
   <string name="contributions_of_user">Contribuciones del usuario: %s</string>
   <string name="achievements_of_user">Logros del usuario: %s</string>
-  <string name="menu_view_user_page">Ver página de usuario</string>
+  <string name="menu_view_user_page" fuzzy="true">Ver página de usuario</string>
   <string name="edit_depictions">Editar las descripciones</string>
   <string name="edit_categories">Editar categorías</string>
   <string name="advanced_options">Opciones avanzadas</string>

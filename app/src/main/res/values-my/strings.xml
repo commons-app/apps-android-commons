@@ -398,7 +398,7 @@
   <string name="need_permission">ခွင့်ပြုချက် လိုအပ်</string>
   <string name="contributions_of_user">အသုံးပြုသူ၏ ပံ့ပိုးမှုများ- %s</string>
   <string name="achievements_of_user">အသုံးပြုသူ၏ အောင်မြင်မှုများ- %s</string>
-  <string name="menu_view_user_page">အသုံးပြုသူ၏ စာမျက်နှာကို ကြည့်ရန်</string>
+  <string name="menu_view_user_page" fuzzy="true">အသုံးပြုသူ၏ စာမျက်နှာကို ကြည့်ရန်</string>
   <string name="edit_categories">ကဏ္ဍများ တည်းဖြတ်ရန်</string>
   <string name="advanced_options">အဆင့်မြင့်ရွေးချယ်ရန်များ</string>
   <string name="no_location_found_title">တည်နေရာမတွေ့ပါ</string>

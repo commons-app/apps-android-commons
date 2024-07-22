@@ -659,7 +659,7 @@
   <string name="read_phone_state_permission_message">Kort í nágrenninu þurfa að geta lesið STÖÐU SÍMANS til að virka almennilega</string>
   <string name="contributions_of_user">Framlög notanda: %s</string>
   <string name="achievements_of_user">Frammistaða notanda: %s</string>
-  <string name="menu_view_user_page">Skoða notandasíðu</string>
+  <string name="menu_view_user_page" fuzzy="true">Skoða notandasíðu</string>
   <string name="edit_depictions">Breyta myndlýsingum</string>
   <string name="edit_categories">Breyta flokkum</string>
   <string name="advanced_options">Ítarlegir valkostir</string>

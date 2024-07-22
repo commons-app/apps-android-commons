@@ -479,7 +479,7 @@
   <string name="need_permission">Autorisatioun gëtt gebraucht</string>
   <string name="contributions_of_user">Kontributioune vum Benotzer: %s</string>
   <string name="achievements_of_user">Leeschtunge vum Benotzer: %s</string>
-  <string name="menu_view_user_page">Benotzersäit weisen</string>
+  <string name="menu_view_user_page" fuzzy="true">Benotzersäit weisen</string>
   <string name="edit_categories">Kategorien änneren</string>
   <string name="advanced_options">Erweidert Optiounen</string>
   <string name="advanced_query_info_text">Dir kënnt d\'Nobäi-Ufroen upassen. Falls Dir eng Feelermeldung kritt, setzt zeréck a probéiert nach eng Kéier.</string>

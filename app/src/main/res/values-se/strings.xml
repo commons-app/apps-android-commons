@@ -242,7 +242,7 @@
   <string name="media_detail_in_all_languages">Buot gielaide</string>
   <string name="description">Govvádus</string>
   <string name="learn_more">LASSEDIEĐUT</string>
-  <string name="menu_view_user_page">Čájet geavaheaddjisiiddu</string>
+  <string name="menu_view_user_page" fuzzy="true">Čájet geavaheaddjisiiddu</string>
   <string name="edit_categories">Rievdat kategoriijaid</string>
   <string name="advanced_options">Lasseásahusat</string>
   <string name="apply">Geavat</string>
