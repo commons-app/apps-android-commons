@@ -47,6 +47,7 @@ import fr.free.nrw.commons.notification.NotificationController;
 import fr.free.nrw.commons.profile.ProfileActivity;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.upload.UploadProgressActivity;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -798,6 +799,7 @@ public class ContributionsFragment
      */
     public void restartUpload(Contribution contribution) {
         contribution.setState(Contribution.STATE_QUEUED);
+        contribution.setDateUploadStarted(Calendar.getInstance().getTime());
         contributionsPresenter.saveContribution(contribution);
         Timber.d("Restarting for %s", contribution.toString());
     }

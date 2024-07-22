@@ -48,6 +48,7 @@ import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtilWrapper;
 import io.reactivex.Completable;
 import io.reactivex.schedulers.Schedulers;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
@@ -299,6 +300,7 @@ public class MainActivity  extends BaseActivity
         if(!stuckUploads.isEmpty()) {
             for(Contribution contribution: stuckUploads) {
                 contribution.setState(Contribution.STATE_QUEUED);
+                contribution.setDateUploadStarted(Calendar.getInstance().getTime());
                 Completable.fromAction(() -> contributionDao.saveSynchronous(contribution))
                     .subscribeOn(Schedulers.io())
                     .subscribe();
