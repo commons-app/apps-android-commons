@@ -42,14 +42,6 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
     @Inject
     lateinit var pendingUploadsPresenter: PendingUploadsPresenter
 
-    @Inject
-    lateinit var mediaClient: MediaClient
-
-    @Inject
-    lateinit var sessionManager: SessionManager
-
-    private var userName: String? = null
-
     private lateinit var binding: FragmentPendingUploadsBinding
 
     private lateinit var uploadProgressActivity: UploadProgressActivity
@@ -64,16 +56,6 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
-        }
-
-        //Now that we are allowing this fragment to be started for
-        // any userName- we expect it to be passed as an argument
-        if (arguments != null) {
-            userName = requireArguments().getString(ProfileActivity.KEY_USERNAME)
-        }
-
-        if (StringUtils.isEmpty(userName)) {
-            userName = sessionManager!!.getUserName()
         }
     }
 
@@ -193,39 +175,39 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
     }
 
     fun pauseUploads() {
-        if (contributionsList != null) {
-            pendingUploadsPresenter.pauseUploads(
-                contributionsList,
-                0,
-                this.requireContext().applicationContext
-            )
-        }
+        pendingUploadsPresenter.pauseUploads(
+            listOf(Contribution.STATE_QUEUED, Contribution.STATE_IN_PROGRESS),
+            Contribution.STATE_PAUSED
+        )
+
     }
 
     fun deleteUploads() {
-        if (contributionsList != null) {
-            showAlertDialog(
-                requireActivity(),
-                String.format(
-                    Locale.getDefault(),
-                    getString(R.string.cancelling_all_the_uploads)
-                ),
-                String.format(
-                    Locale.getDefault(),
-                    getString(R.string.are_you_sure_that_you_want_cancel_all_the_uploads)
-                ),
-                String.format(Locale.getDefault(), getString(R.string.yes)),
-                String.format(Locale.getDefault(), getString(R.string.no)),
-                {
-                    ViewUtil.showShortToast(context, R.string.cancelling_upload)
-                    uploadProgressActivity.hidePendingIcons()
-                    pendingUploadsPresenter.deleteUploads(
-                        listOf(Contribution.STATE_QUEUED, Contribution.STATE_IN_PROGRESS, Contribution.STATE_PAUSED),
-                        this.requireContext().applicationContext
+        showAlertDialog(
+            requireActivity(),
+            String.format(
+                Locale.getDefault(),
+                getString(R.string.cancelling_all_the_uploads)
+            ),
+            String.format(
+                Locale.getDefault(),
+                getString(R.string.are_you_sure_that_you_want_cancel_all_the_uploads)
+            ),
+            String.format(Locale.getDefault(), getString(R.string.yes)),
+            String.format(Locale.getDefault(), getString(R.string.no)),
+            {
+                ViewUtil.showShortToast(context, R.string.cancelling_upload)
+                uploadProgressActivity.hidePendingIcons()
+                pendingUploadsPresenter.deleteUploads(
+                    listOf(
+                        Contribution.STATE_QUEUED,
+                        Contribution.STATE_IN_PROGRESS,
+                        Contribution.STATE_PAUSED
                     )
-                },
-                {}
-            )
-        }
+                )
+            },
+            {}
+        )
+
     }
 }

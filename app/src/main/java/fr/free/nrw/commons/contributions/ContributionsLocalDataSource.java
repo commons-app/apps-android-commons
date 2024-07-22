@@ -105,4 +105,8 @@ class ContributionsLocalDataSource {
     public Completable updateContribution(final Contribution contribution) {
         return contributionDao.update(contribution);
     }
+
+    public Completable updateContributionsWithStates(List<Integer> states, int newState) {
+        return contributionDao.updateContributionsWithStates(states, newState);
+    }
 }

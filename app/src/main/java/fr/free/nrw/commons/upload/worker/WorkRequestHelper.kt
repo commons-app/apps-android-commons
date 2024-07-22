@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload.worker
 import android.content.Context
 import androidx.work.*
 import androidx.work.WorkRequest.Companion.MIN_BACKOFF_MILLIS
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 /**
@@ -11,7 +12,16 @@ import java.util.concurrent.TimeUnit
 class WorkRequestHelper {
 
     companion object {
+        @Volatile
+        private var isUploadWorkerRunning = false
+
         fun makeOneTimeWorkRequest(context: Context, existingWorkPolicy: ExistingWorkPolicy) {
+
+            if (isUploadWorkerRunning) {
+                Timber.e("UploadWorker is already running. Cannot start another instance.")
+                return
+            }
+
             /* Set backoff criteria for the work request
            The default backoff policy is EXPONENTIAL, but while testing we found that it
            too long for the uploads to finish. So, set the backoff policy as LINEAR with the
@@ -35,7 +45,13 @@ class WorkRequestHelper {
             WorkManager.getInstance(context).enqueueUniqueWork(
                 UploadWorker::class.java.simpleName, existingWorkPolicy, uploadRequest
             )
+
+            isUploadWorkerRunning = true
+        }
+
+        fun markUploadWorkerAsStopped() {
+            isUploadWorkerRunning = false
         }
     }
-
 }
+

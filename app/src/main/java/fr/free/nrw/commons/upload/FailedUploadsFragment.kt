@@ -197,8 +197,7 @@ class FailedUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCont
                     ViewUtil.showShortToast(context, R.string.cancelling_upload)
                     uploadProgressActivity.hidePendingIcons()
                     pendingUploadsPresenter.deleteUploads(
-                        listOf(Contribution.STATE_FAILED),
-                        this.requireContext().applicationContext
+                        listOf(Contribution.STATE_FAILED)
                     )
                 },
                 {}

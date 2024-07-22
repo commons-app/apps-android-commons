@@ -809,8 +809,7 @@ public class ContributionsFragment
      */
     public void retryUpload(Contribution contribution) {
         if (NetworkUtils.isInternetConnectionEstablished(getContext())) {
-            if (contribution.getState() == STATE_PAUSED
-                || contribution.getState() == Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE) {
+            if (contribution.getState() == STATE_PAUSED) {
                 restartUpload(contribution);
             } else if (contribution.getState() == STATE_FAILED) {
                 int retries = contribution.getRetries();

@@ -13,6 +13,7 @@ import io.reactivex.Completable;
 import io.reactivex.Single;
 import java.util.Calendar;
 import java.util.List;
+import timber.log.Timber;
 
 @Dao
 public abstract class ContributionDao {
@@ -86,11 +87,21 @@ public abstract class ContributionDao {
     @Update
     public abstract void updateSynchronous(Contribution contribution);
 
+    @Query("UPDATE contribution SET state = :newState WHERE state IN (:states)")
+    public abstract void updateContributionsState(List<Integer> states, int newState);
+
     public Completable update(final Contribution contribution) {
         return Completable
             .fromAction(() -> {
                 contribution.setDateModified(Calendar.getInstance().getTime());
                 updateSynchronous(contribution);
+            });
+    }
+
+    public Completable updateContributionsWithStates(List<Integer> states, int newState) {
+        return Completable
+            .fromAction(() -> {
+                updateContributionsState(states, newState);
             });
     }
 }

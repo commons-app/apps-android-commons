@@ -79,7 +79,7 @@ class UploadClient @Inject constructor(
         val errorMessage = AtomicReference<String>()
         compositeDisposable.add(
             Observable.fromIterable(fileChunks).forEach { chunkFile: File ->
-                if (canProcess(contribution, failures)) {
+                if (canProcess(contributionDao, contribution, failures)) {
                     if (contributionDao.getContribution(contribution.pageId) == null) {
                         compositeDisposable.clear()
                         return@forEach
@@ -106,8 +106,8 @@ class UploadClient @Inject constructor(
             contributionDao.getContribution(contribution.pageId) == null -> {
                 return Observable.just(StashUploadResult(StashUploadState.CANCELLED, null, "Upload cancelled"))
             }
-            contribution.isPaused() -> {
-                Timber.d("Upload stash paused %s", contribution.pageId)
+            contributionDao.getContribution(contribution.pageId).state == Contribution.STATE_PAUSED -> {
+                Timber.tag("PRINT").d("Upload stash paused %s", contribution.pageId)
                 Observable.just(StashUploadResult(StashUploadState.PAUSED, null, null))
             }
             failures.get() -> {
@@ -265,10 +265,16 @@ class UploadClient @Inject constructor(
     }
 }
 
-private fun canProcess(contribution: Contribution, failures: AtomicBoolean): Boolean {
+private fun canProcess(
+    contributionDao: ContributionDao,
+    contribution: Contribution,
+    failures: AtomicBoolean
+): Boolean {
     // As long as the contribution hasn't been paused and there are no errors,
     // we can process the current chunk.
-    return !(contribution.isPaused() || failures.get())
+    Timber.tag("PRINT").e("oyee" + contributionDao.getContribution(contribution.pageId).state)
+    return !(contributionDao.getContribution(contribution.pageId).state == Contribution.STATE_PAUSED
+            || failures.get())
 }
 
 private fun shouldSkip(

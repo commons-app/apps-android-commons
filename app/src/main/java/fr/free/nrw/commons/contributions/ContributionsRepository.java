@@ -76,4 +76,8 @@ public class ContributionsRepository {
     public Completable updateContribution(Contribution contribution) {
         return localDataSource.updateContribution(contribution);
     }
+
+    public Completable updateContributionWithStates(List<Integer> states, int newState) {
+        return localDataSource.updateContributionsWithStates(states, newState);
+    }
 }

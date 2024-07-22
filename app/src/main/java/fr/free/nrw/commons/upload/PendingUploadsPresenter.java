@@ -101,49 +101,26 @@ public class PendingUploadsPresenter implements UserActionListener {
         contributionBoundaryCallback.dispose();
     }
 
-    /**
-     * Delete a failed contribution from the local db
-     */
     @Override
     public void deleteUpload(final Contribution contribution, Context context) {
         compositeDisposable.add(repository
             .deleteContributionFromDB(contribution)
             .subscribeOn(ioThreadScheduler)
-            .subscribe(() ->
-                WorkRequestHelper.Companion.makeOneTimeWorkRequest(
-                    context, ExistingWorkPolicy.KEEP)
-            ));
+            .subscribe());
     }
 
-    public void pauseUploads(List<Contribution> contributionList, int index, Context context) {
-        if (index >= contributionList.size()) {
-            return;
-        }
-        Contribution it = contributionList.get(index);
-        CommonsApplication.pauseUploads.put(it.getPageId().toString(), true);
-        //Retain the paused state in DB
-        it.setState(Contribution.STATE_PAUSED);
+    public void pauseUploads(List<Integer> states, int newState) {
         compositeDisposable.add(repository
-            .save(it)
+            .updateContributionWithStates(states, newState)
             .subscribeOn(ioThreadScheduler)
-            .doOnComplete(() -> {
-                    pauseUploads(contributionList, index + 1, context);
-                }
-            )
-            .subscribe(() ->
-                WorkRequestHelper.Companion.makeOneTimeWorkRequest(
-                    context, ExistingWorkPolicy.KEEP)
-            ));
+            .subscribe());
     }
 
-    public void deleteUploads(List<Integer> states, Context context) {
+    public void deleteUploads(List<Integer> states) {
         compositeDisposable.add(repository
             .deleteContributionsFromDBWithStates(states)
             .subscribeOn(ioThreadScheduler)
-            .subscribe(() ->
-                WorkRequestHelper.Companion.makeOneTimeWorkRequest(
-                    context, ExistingWorkPolicy.KEEP)
-            ));
+            .subscribe());
     }
 
     public void restartUploads(List<Contribution> contributionList, int index, Context context) {
@@ -163,7 +140,6 @@ public class PendingUploadsPresenter implements UserActionListener {
             .save(it)
             .subscribeOn(ioThreadScheduler)
             .doOnComplete(() -> {
-                    CommonsApplication.pauseUploads.put(it.getPageId().toString(), false);
                     restartUploads(contributionList, index + 1, context);
                 }
             )
@@ -200,20 +176,6 @@ public class PendingUploadsPresenter implements UserActionListener {
                     Timber.e(throwable);
                 }
             ));
-    }
-
-    /**
-     * Update the contribution's state in the databse, upon completion, trigger the workmanager to
-     * process this contribution
-     *
-     * @param contribution
-     */
-    public void saveContribution(Contribution contribution, Context context) {
-        compositeDisposable.add(repository
-            .save(contribution)
-            .subscribeOn(ioThreadScheduler)
-            .subscribe(() -> WorkRequestHelper.Companion.makeOneTimeWorkRequest(
-                context, ExistingWorkPolicy.KEEP)));
     }
 
 }

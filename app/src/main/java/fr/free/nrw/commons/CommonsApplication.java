@@ -143,11 +143,6 @@ public class CommonsApplication extends MultiDexApplication {
     ContributionDao contributionDao;
 
     /**
-     * In-memory list of contributions whose uploads have been paused by the user
-     */
-    public static Map<String, Boolean> pauseUploads = new HashMap<>();
-
-    /**
      * Used to declare and initialize various components and dependencies
      */
     @Override

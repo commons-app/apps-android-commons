@@ -173,17 +173,6 @@ class ContributionViewHolderUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testInitCaseNonNull_STATE_QUEUED_LIMITED_CONNECTION_MODE() {
-        Shadows.shadowOf(Looper.getMainLooper()).idle()
-        `when`(contribution.state).thenReturn(Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE)
-        `when`(contribution.media).thenReturn(media)
-        `when`(media.mostRelevantCaption).thenReturn("")
-        `when`(media.author).thenReturn("")
-        contributionViewHolder.init(0, contribution)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testInitCaseNonNull_STATE_IN_PROGRESS() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         `when`(contribution.state).thenReturn(Contribution.STATE_IN_PROGRESS)

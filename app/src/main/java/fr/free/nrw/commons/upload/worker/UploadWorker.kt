@@ -109,7 +109,6 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             getNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL)!!
 
         statesToProcess.add(Contribution.STATE_QUEUED)
-        statesToProcess.add(Contribution.STATE_QUEUED_LIMITED_CONNECTION_MODE)
     }
 
     @dagger.Module
@@ -169,85 +168,81 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
     }
 
     override suspend fun doWork(): Result {
-        var countUpload = 0
-        // Start a foreground service
-        setForeground(createForegroundInfo())
-        notificationManager = NotificationManagerCompat.from(appContext)
-        val processingUploads = getNotificationBuilder(
-            CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL
-        )!!
-        withContext(Dispatchers.IO) {
+        try {
+            var countUpload = 0
+            // Start a foreground service
+            setForeground(createForegroundInfo())
+            notificationManager = NotificationManagerCompat.from(appContext)
+            val processingUploads = getNotificationBuilder(
+                CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL
+            )!!
+            withContext(Dispatchers.IO) {
+                while (contributionDao.getContribution(statesToProcess)
+                        .blockingGet().size > 0
+                ) {
+                    /*
+                    queuedContributions receives the results from a one-shot query.
+                    This means that once the list has been fetched from the database,
+                    it does not get updated even if some changes (insertions, deletions, etc.)
+                    are made to the contribution table afterwards.
 
-            //TODO: Implement Worker Flags
-            /*
-                queuedContributions receives the results from a one-shot query.
-                This means that once the list has been fetched from the database,
-                it does not get updated even if some changes (insertions, deletions, etc.)
-                are made to the contribution table afterwards.
-
-                Related issues (fixed):
-                https://github.com/commons-app/apps-android-commons/issues/5136
-                https://github.com/commons-app/apps-android-commons/issues/5346
-             */
-            while (contributionDao.getContribution(statesToProcess)
-                    .blockingGet().size > 0
-            ) {
-                val queuedContributions = contributionDao.getContribution(statesToProcess)
-                    .blockingGet()
-                //Showing initial notification for the number of uploads being processed
-
-                processingUploads.setContentTitle(appContext.getString(R.string.starting_uploads))
-                processingUploads.setContentText(
-                    appContext.resources.getQuantityString(
-                        R.plurals.starting_multiple_uploads,
-                        queuedContributions.size,
-                        queuedContributions.size
-                    )
-                )
-                notificationManager?.notify(
-                    PROCESSING_UPLOADS_NOTIFICATION_TAG,
-                    PROCESSING_UPLOADS_NOTIFICATION_ID,
-                    processingUploads.build()
-                )
-
-                val sortedQueuedContributionsList: List<Contribution> =
-                    queuedContributions.sortedBy { it.dateUploadStartedInMillis() }
-
-                /**
-                 * To avoid race condition when multiple of these workers are working, assign this state
-                so that the next one does not process these contribution again
+                    Related issues (fixed):
+                    https://github.com/commons-app/apps-android-commons/issues/5136
+                    https://github.com/commons-app/apps-android-commons/issues/5346
                  */
-//            sortedQueuedContributionsList.forEach {
-//                it.state = Contribution.STATE_IN_PROGRESS
-//                contributionDao.saveSynchronous(it)
-//            }
+                    val queuedContributions = contributionDao.getContribution(statesToProcess)
+                        .blockingGet()
+                    //Showing initial notification for the number of uploads being processed
 
-                var contribution = sortedQueuedContributionsList.first()
+                    processingUploads.setContentTitle(appContext.getString(R.string.starting_uploads))
+                    processingUploads.setContentText(
+                        appContext.resources.getQuantityString(
+                            R.plurals.starting_multiple_uploads,
+                            queuedContributions.size,
+                            queuedContributions.size
+                        )
+                    )
+                    notificationManager?.notify(
+                        PROCESSING_UPLOADS_NOTIFICATION_TAG,
+                        PROCESSING_UPLOADS_NOTIFICATION_ID,
+                        processingUploads.build()
+                    )
 
-                if (contributionDao.getContribution(contribution.pageId) != null) {
-                    contribution.transferred = 0
-                    contribution.state = Contribution.STATE_IN_PROGRESS
-                    contributionDao.saveSynchronous(contribution)
-                    setProgressAsync(Data.Builder().putInt("progress", countUpload).build())
-                    countUpload++
-                    uploadContribution(contribution = contribution)
+                    val sortedQueuedContributionsList: List<Contribution> =
+                        queuedContributions.sortedBy { it.dateUploadStartedInMillis() }
+
+                    var contribution = sortedQueuedContributionsList.first()
+
+                    if (contributionDao.getContribution(contribution.pageId) != null) {
+                        contribution.transferred = 0
+                        contribution.state = Contribution.STATE_IN_PROGRESS
+                        contributionDao.saveSynchronous(contribution)
+                        setProgressAsync(Data.Builder().putInt("progress", countUpload).build())
+                        countUpload++
+                        uploadContribution(contribution = contribution)
+                    }
                 }
+                //Dismiss the global notification
+                notificationManager?.cancel(
+                    PROCESSING_UPLOADS_NOTIFICATION_TAG,
+                    PROCESSING_UPLOADS_NOTIFICATION_ID
+                )
             }
-            //Dismiss the global notification
-            notificationManager?.cancel(
-                PROCESSING_UPLOADS_NOTIFICATION_TAG,
-                PROCESSING_UPLOADS_NOTIFICATION_ID
-            )
-        }
-        // Trigger WorkManager to process any new contributions that may have been added to the queue
-        val updatedContributionQueue = withContext(Dispatchers.IO) {
-            contributionDao.getContribution(statesToProcess).blockingGet()
-        }
-        if (updatedContributionQueue.isNotEmpty()) {
-            return Result.retry()
-        }
+            // Trigger WorkManager to process any new contributions that may have been added to the queue
+            val updatedContributionQueue = withContext(Dispatchers.IO) {
+                contributionDao.getContribution(statesToProcess).blockingGet()
+            }
+            if (updatedContributionQueue.isNotEmpty()) {
+                return Result.retry()
+            }
 
-        return Result.success()
+            return Result.success()
+        } catch (e: Exception) {
+            Timber.e(e, "UploadWorker encountered an error.")
+            return Result.failure()
+        } finally {
+            WorkRequestHelper.markUploadWorkerAsStopped()
+        }
     }
 
     /**

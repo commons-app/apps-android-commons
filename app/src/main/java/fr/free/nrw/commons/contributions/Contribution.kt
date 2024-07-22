@@ -101,7 +101,6 @@ data class Contribution constructor(
         const val STATE_QUEUED = 2
         const val STATE_IN_PROGRESS = 3
         const val STATE_PAUSED = 4
-        const val STATE_QUEUED_LIMITED_CONNECTION_MODE=5
 
         /**
          * Formatting captions to the Wikibase format for sending labels
@@ -127,18 +126,6 @@ data class Contribution constructor(
 
     fun isCompleted(): Boolean {
         return chunkInfo != null && chunkInfo!!.totalChunks == chunkInfo!!.indexOfNextChunkToUpload
-    }
-
-    fun isPaused(): Boolean {
-        return CommonsApplication.pauseUploads[pageId] ?: false
-    }
-
-    fun unpause() {
-        CommonsApplication.pauseUploads[pageId] = false
-    }
-
-    fun dateModifiedInMillis(): Long  {
-        return dateModified!!.time
     }
 
     fun dateUploadStartedInMillis(): Long {
