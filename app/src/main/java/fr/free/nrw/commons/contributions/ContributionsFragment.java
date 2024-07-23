@@ -136,6 +136,8 @@ public class ContributionsFragment
 
     public TextView uploadsErrorTextView;
 
+    public ImageView pendingUploadsImageView;
+
     private Campaign wlmCampaign;
 
     String userName;
@@ -266,7 +268,7 @@ public class ContributionsFragment
         final View uploadMenuItemActionView = uploadMenuItem.getActionView();
         pendingUploadsCountTextView = uploadMenuItemActionView.findViewById(R.id.pending_uploads_count_badge);
         uploadsErrorTextView = uploadMenuItemActionView.findViewById(R.id.uploads_error_count_badge);
-        final ImageView pendingUploadsImageView = uploadMenuItemActionView.findViewById(R.id.pending_uploads_image_view);
+        pendingUploadsImageView = uploadMenuItemActionView.findViewById(R.id.pending_uploads_image_view);
         if (pendingUploadsImageView != null){
             pendingUploadsImageView.setOnClickListener(view -> {
                 startActivity(new Intent(getContext(), UploadProgressActivity.class));
@@ -706,6 +708,17 @@ public class ContributionsFragment
                 uploadsErrorTextView.setText(String.valueOf(errorCount));
             }else {
                 uploadsErrorTextView.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    @Override
+    public void updateUploadIcon(int count) {
+        if (pendingUploadsImageView != null){
+            if (count != 0){
+                pendingUploadsImageView.setVisibility(View.VISIBLE);
+            }else {
+                pendingUploadsImageView.setVisibility(View.GONE);
             }
         }
     }

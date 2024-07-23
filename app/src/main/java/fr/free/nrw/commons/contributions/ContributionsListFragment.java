@@ -224,6 +224,10 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
             uploadErrorCount = list.size();
             callback.updateErrorIcon(uploadErrorCount);
         });
+        contributionsListPresenter.getFailedAndPendingContributions();
+        contributionsListPresenter.failedAndPendingContributionList.observe(getViewLifecycleOwner(), list -> {
+            callback.updateUploadIcon(list.size());
+        });
         contributionsListPresenter.contributionList.observe(getViewLifecycleOwner(), list -> {
             contributionsSize = list.size();
             adapter.submitList(list);
@@ -508,5 +512,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         void updatePendingIcon(int pendingCount);
 
         void updateErrorIcon(int errorCount);
+
+        void updateUploadIcon(int count);
     }
 }
