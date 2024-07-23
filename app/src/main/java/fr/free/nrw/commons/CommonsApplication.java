@@ -142,6 +142,8 @@ public class CommonsApplication extends MultiDexApplication {
     @Inject
     ContributionDao contributionDao;
 
+    public static Boolean isPaused = false;
+
     /**
      * Used to declare and initialize various components and dependencies
      */

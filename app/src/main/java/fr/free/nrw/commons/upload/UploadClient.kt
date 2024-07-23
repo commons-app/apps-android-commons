@@ -106,7 +106,8 @@ class UploadClient @Inject constructor(
             contributionDao.getContribution(contribution.pageId) == null -> {
                 return Observable.just(StashUploadResult(StashUploadState.CANCELLED, null, "Upload cancelled"))
             }
-            contributionDao.getContribution(contribution.pageId).state == Contribution.STATE_PAUSED -> {
+            contributionDao.getContribution(contribution.pageId).state == Contribution.STATE_PAUSED
+                    || CommonsApplication.isPaused -> {
                 Timber.d("Upload stash paused %s", contribution.pageId)
                 Observable.just(StashUploadResult(StashUploadState.PAUSED, null, null))
             }
@@ -273,7 +274,7 @@ private fun canProcess(
     // As long as the contribution hasn't been paused and there are no errors,
     // we can process the current chunk.
     return !(contributionDao.getContribution(contribution.pageId).state == Contribution.STATE_PAUSED
-            || failures.get())
+            || failures.get() || CommonsApplication.isPaused)
 }
 
 private fun shouldSkip(

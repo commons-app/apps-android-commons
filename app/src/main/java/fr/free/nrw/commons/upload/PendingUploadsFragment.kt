@@ -12,6 +12,7 @@ import androidx.paging.PagedList
 import androidx.paging.PositionalDataSource
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
+import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.contributions.Contribution
@@ -120,7 +121,7 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
                 binding.pendingUplaodsLl.visibility = View.VISIBLE
                 adapter.submitList(list)
                 binding.progressTextView.setText(contributionsSize.toString() + " uploads left")
-                if (pausedOrQueuedUploads == contributionsSize) {
+                if ((pausedOrQueuedUploads == contributionsSize) || CommonsApplication.isPaused) {
                     uploadProgressActivity.setPausedIcon(true)
                 } else {
                     uploadProgressActivity.setPausedIcon(false)

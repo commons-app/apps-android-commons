@@ -110,6 +110,7 @@ public class PendingUploadsPresenter implements UserActionListener {
     }
 
     public void pauseUploads(List<Integer> states, int newState) {
+        CommonsApplication.isPaused = true ;
         compositeDisposable.add(repository
             .updateContributionWithStates(states, newState)
             .subscribeOn(ioThreadScheduler)
@@ -124,6 +125,7 @@ public class PendingUploadsPresenter implements UserActionListener {
     }
 
     public void restartUploads(List<Contribution> contributionList, int index, Context context) {
+        CommonsApplication.isPaused = false;
         if (index >= contributionList.size()) {
             return;
         }
@@ -154,6 +156,7 @@ public class PendingUploadsPresenter implements UserActionListener {
     }
 
     public void restartUpload(List<Contribution> contributionList, int index, Context context) {
+        CommonsApplication.isPaused = false;
         if (index >= contributionList.size()) {
             return;
         }
