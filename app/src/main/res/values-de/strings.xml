@@ -23,6 +23,7 @@
 * Ngschaider
 * Pyscowicz
 * Reedy
+* RucolaSpacecat
 * Sebastian Wallroth
 * SpaceEnergy
 * Sujan
@@ -91,7 +92,7 @@
     <item quantity="other">Der geteilte Inhalt wird abgerufen. Die Verarbeitung der Bilder kann einige Zeit in Anspruch nehmen, abhängig von der Größe der Bilder und deines Gerätes.</item>
   </plurals>
   <string name="navigation_item_explore">Entdecken</string>
-  <string name="preference_category_appearance">Erscheinung</string>
+  <string name="preference_category_appearance">Aussehen</string>
   <string name="preference_category_general">Allgemein</string>
   <string name="preference_category_feedback">Rückmeldung</string>
   <string name="preference_category_privacy">Datenschutz</string>
@@ -721,7 +722,7 @@
   <string name="read_phone_state_permission_message">Karten in der Nähe müssen den Telefonstatus lesen können, um richtig zu funktionieren</string>
   <string name="contributions_of_user">Beiträge von Benutzer: %s</string>
   <string name="achievements_of_user">Erfolge des Benutzers: %s</string>
-  <string name="menu_view_user_page" fuzzy="true">Benutzerseite ansehen</string>
+  <string name="menu_view_user_page">Benutzerseite ansehen</string>
   <string name="edit_depictions">Beschriftungen bearbeiten</string>
   <string name="edit_categories">Kategorien bearbeiten</string>
   <string name="advanced_options">Erweiterte Optionen</string>
@@ -801,5 +802,6 @@
   </plurals>
   <string name="multiple_files_depiction">Bitte beachte, dass bei einem Multiupload alle Bilder die gleichen Kategorien und Bezeichnungen erhalten. Sollten die Bilder keine gemeinsamen Bezeichnungen und Kategorien haben, führe bitte mehrere separate Uploads durch.</string>
   <string name="multiple_files_depiction_header">Hinweis zu Mehrfach-Uploads</string>
+  <string name="nearby_wikitalk">Melde ein Problem mit diesem Datenobjekt an Wikidata</string>
   <string name="feedback_destination_note">Ihr Feedback wird auf der folgenden Wiki-Seite veröffentlicht: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile App/Feedback&lt;/a&gt;</string>
 </resources>

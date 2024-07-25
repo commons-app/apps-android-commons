@@ -602,7 +602,7 @@
   <string name="missing_category">- Tilføj kategorier til dette billede for at forbedre brugbarheden.</string>
   <string name="missing_article">- Føj dette billede til den tilknyttede Wikipedia-artikel, der ikke har nogen billeder.</string>
   <string name="add_picture_to_wikipedia_article_title">Tilføj billede til Wikipedia</string>
-  <string name="add_picture_to_wikipedia_article_desc">Vil du tilføje dette billede til Wikipedia-artiklen på sproget %1$s?</string>
+  <string name="add_picture_to_wikipedia_article_desc">Vil du tilføje dette billede til Wikipedia-artiklen på sproget %1$s ?</string>
   <string name="confirm">Bekræft</string>
   <string name="instructions_title">Instruktioner</string>
   <string name="wikipedia_instructions_step_1">1. Brug følgende wikitekst:</string>

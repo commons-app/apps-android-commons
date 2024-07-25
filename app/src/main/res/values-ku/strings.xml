@@ -73,10 +73,10 @@
   <string name="logging_in_title">Têdikeve</string>
   <string name="logging_in_message">Ji kerema xwe piçek bisekine ...</string>
   <string name="updating_caption_message">Xêra xwe hinek bisekine...</string>
-  <string name="login_success" fuzzy="true">Têketin biserkeftî ye!</string>
-  <string name="login_failed" fuzzy="true">Têketin biser neket!</string>
+  <string name="login_success">Têketin bi ser ket!</string>
+  <string name="login_failed">Têketin bi ser neket!</string>
   <string name="upload_failed">Dosye nehat dîtin. Ji kerema xwe re dosyeyek din biceribîne.</string>
-  <string name="authentication_failed" fuzzy="true">Teyîdkirina nasnameyê bi ser neket, ji kerema xwe cardin têkeve</string>
+  <string name="authentication_failed">Teyîdkirina nasnameyê bi ser neket, ji kerema xwe cardin têkeve.</string>
   <string name="uploading_started">Barkirin dest pê kir!</string>
   <string name="upload_completed_notification_title">%1$s hat barkirin!</string>
   <string name="upload_completed_notification_text">Bo barkirina xwe bibînî bitikîne.</string>
@@ -92,7 +92,7 @@
   <string name="menu_share">Parve bike</string>
   <string name="share_title_hint">Sernav (Hewce ye)</string>
   <string name="share_description_hint">Danasîn</string>
-  <string name="login_failed_generic" fuzzy="true">Têketin têk çû</string>
+  <string name="login_failed_generic">Têketin têk çû</string>
   <string name="share_upload_button">Bar bike</string>
   <string name="multiple_share_base_title">Nav bide vê desteyê</string>
   <string name="menu_upload_single">Bar bike</string>
@@ -143,7 +143,7 @@
   <string name="navigation_item_logout">Derkeve</string>
   <string name="skip_login">Derbas bike</string>
   <string name="navigation_item_login">Têkeve</string>
-  <string name="skip_login_title" fuzzy="true">Tu bi rastî dixwazî têketinê derbas bikî?</string>
+  <string name="skip_login_title">Tu bi rastî dixwazî têketinê derbas bikî?</string>
   <string name="nearby_directions">Talîmat</string>
   <string name="nearby_wikidata">Wîkîdane</string>
   <string name="nearby_wikipedia">Wîkîpediya</string>

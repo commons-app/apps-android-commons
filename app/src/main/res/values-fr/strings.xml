@@ -3,6 +3,7 @@
 * Adehertogh
 * Ajeje Brazorf
 * Alno
+* Assorted-Interests
 * BaRaN6161 TURK
 * BlueCamille
 * Cigaryno
@@ -728,7 +729,7 @@
   <string name="read_phone_state_permission_message">Les cartes de proximité doivent pouvoir lire l’ÉTAT DU TÉLÉPHONE pour fonctionner correctement</string>
   <string name="contributions_of_user">Contributions de l’utilisateur : %s</string>
   <string name="achievements_of_user">Réussites de l’utilisateur : %s</string>
-  <string name="menu_view_user_page" fuzzy="true">Afficher la page utilisateur</string>
+  <string name="menu_view_user_page">Afficher le profil de l\'utilisateur</string>
   <string name="edit_depictions">Modifier les descriptions</string>
   <string name="edit_categories">Modifier les catégories</string>
   <string name="advanced_options">Options avancées</string>
