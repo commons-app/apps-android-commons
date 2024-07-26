@@ -28,9 +28,6 @@ public class ContributionsListPresenter implements UserActionListener {
     private final ContributionsRemoteDataSource contributionsRemoteDataSource;
 
     LiveData<PagedList<Contribution>> contributionList;
-    LiveData<PagedList<Contribution>> pendingContributionList;
-    LiveData<PagedList<Contribution>> failedContributionList;
-    LiveData<PagedList<Contribution>> failedAndPendingContributionList;
 
     @Inject
     ContributionsListPresenter(
@@ -94,50 +91,6 @@ public class ContributionsListPresenter implements UserActionListener {
         compositeDisposable.clear();
         contributionsRemoteDataSource.dispose();
         contributionBoundaryCallback.dispose();
-    }
-
-    void getPendingContributions() {
-        final PagedList.Config pagedListConfig =
-            (new PagedList.Config.Builder())
-                .setPrefetchDistance(50)
-                .setPageSize(10).build();
-        Factory<Integer, Contribution> factory;
-        factory = repository.fetchContributionsWithStates(
-            Arrays.asList(Contribution.STATE_IN_PROGRESS, Contribution.STATE_QUEUED,
-                Contribution.STATE_PAUSED));
-
-        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
-            pagedListConfig);
-        pendingContributionList = livePagedListBuilder.build();
-    }
-
-    void getFailedContributions() {
-        final PagedList.Config pagedListConfig =
-            (new PagedList.Config.Builder())
-                .setPrefetchDistance(50)
-                .setPageSize(10).build();
-        Factory<Integer, Contribution> factory;
-        factory = repository.fetchContributionsWithStates(
-            Collections.singletonList(Contribution.STATE_FAILED));
-
-        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
-            pagedListConfig);
-        failedContributionList = livePagedListBuilder.build();
-    }
-
-    void getFailedAndPendingContributions() {
-        final PagedList.Config pagedListConfig =
-            (new PagedList.Config.Builder())
-                .setPrefetchDistance(50)
-                .setPageSize(10).build();
-        Factory<Integer, Contribution> factory;
-        factory = repository.fetchContributionsWithStates(
-            Arrays.asList(Contribution.STATE_IN_PROGRESS, Contribution.STATE_QUEUED,
-                Contribution.STATE_PAUSED, Contribution.STATE_FAILED));
-
-        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
-            pagedListConfig);
-        failedAndPendingContributionList = livePagedListBuilder.build();
     }
 
 }

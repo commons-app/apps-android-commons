@@ -108,6 +108,8 @@ public class ContributionsFragment
     LocationServiceManager locationManager;
     @Inject
     NotificationController notificationController;
+    @Inject
+    ContributionController contributionController;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -296,6 +298,25 @@ public class ContributionsFragment
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(this::initNotificationViews,
                 throwable -> Timber.e(throwable, "Error occurred while loading notifications")));
+    }
+
+    public void setUploadIconVisibility() {
+        contributionController.getFailedAndPendingContributions();
+        contributionController.failedAndPendingContributionList.observe(getViewLifecycleOwner(), list -> {
+            updateUploadIcon(list.size());
+        });
+    }
+
+    public void setUploadIconCount() {
+        contributionController.getPendingContributions();
+        contributionController.pendingContributionList.observe(getViewLifecycleOwner(),
+            list -> {
+                updatePendingIcon(list.size());
+            });
+        contributionController.getFailedContributions();
+        contributionController.failedContributionList.observe(getViewLifecycleOwner(), list -> {
+            updateErrorIcon(list.size());
+        });
     }
 
     public void scrollToTop() {
@@ -499,6 +520,8 @@ public class ContributionsFragment
             if(!isUserProfile) {
                 setNotificationCount();
                 fetchCampaigns();
+                setUploadIconVisibility();
+                setUploadIconCount();
             }
         }
         mSensorManager.registerListener(this, mLight, SensorManager.SENSOR_DELAY_UI);
@@ -688,7 +711,6 @@ public class ContributionsFragment
         }
     }
 
-    @Override
     public void updatePendingIcon(int pendingCount) {
         if (pendingUploadsCountTextView != null){
             if (pendingCount != 0){
@@ -700,7 +722,6 @@ public class ContributionsFragment
         }
     }
 
-    @Override
     public void updateErrorIcon(int errorCount) {
         if (uploadsErrorTextView != null){
             if (errorCount != 0){
@@ -712,7 +733,6 @@ public class ContributionsFragment
         }
     }
 
-    @Override
     public void updateUploadIcon(int count) {
         if (pendingUploadsImageView != null){
             if (count != 0){

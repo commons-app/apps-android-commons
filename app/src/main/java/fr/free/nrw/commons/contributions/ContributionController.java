@@ -9,6 +9,10 @@ import android.content.Intent;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.paging.DataSource.Factory;
+import androidx.paging.LivePagedListBuilder;
+import androidx.paging.PagedList;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.filepicker.DefaultCallback;
 import fr.free.nrw.commons.filepicker.FilePicker;
@@ -25,6 +29,8 @@ import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -39,9 +45,15 @@ public class ContributionController {
     private boolean isInAppCameraUpload;
     public LocationPermissionCallback locationPermissionCallback;
     private LocationPermissionsHelper locationPermissionsHelper;
+    LiveData<PagedList<Contribution>> failedAndPendingContributionList;
+    LiveData<PagedList<Contribution>> pendingContributionList;
+    LiveData<PagedList<Contribution>> failedContributionList;
 
     @Inject
     LocationServiceManager locationManager;
+
+    @Inject
+    ContributionsRepository repository;
 
     @Inject
     public ContributionController(@Named("default_preferences") JsonKvStore defaultKvStore) {
@@ -306,5 +318,49 @@ public class ContributionController {
         );
         isInAppCameraUpload = false;    // reset the flag for next use
         return shareIntent;
+    }
+
+    void getPendingContributions() {
+        final PagedList.Config pagedListConfig =
+            (new PagedList.Config.Builder())
+                .setPrefetchDistance(50)
+                .setPageSize(10).build();
+        Factory<Integer, Contribution> factory;
+        factory = repository.fetchContributionsWithStates(
+            Arrays.asList(Contribution.STATE_IN_PROGRESS, Contribution.STATE_QUEUED,
+                Contribution.STATE_PAUSED));
+
+        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
+            pagedListConfig);
+        pendingContributionList = livePagedListBuilder.build();
+    }
+
+    void getFailedContributions() {
+        final PagedList.Config pagedListConfig =
+            (new PagedList.Config.Builder())
+                .setPrefetchDistance(50)
+                .setPageSize(10).build();
+        Factory<Integer, Contribution> factory;
+        factory = repository.fetchContributionsWithStates(
+            Collections.singletonList(Contribution.STATE_FAILED));
+
+        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
+            pagedListConfig);
+        failedContributionList = livePagedListBuilder.build();
+    }
+
+    void getFailedAndPendingContributions() {
+        final PagedList.Config pagedListConfig =
+            (new PagedList.Config.Builder())
+                .setPrefetchDistance(50)
+                .setPageSize(10).build();
+        Factory<Integer, Contribution> factory;
+        factory = repository.fetchContributionsWithStates(
+            Arrays.asList(Contribution.STATE_IN_PROGRESS, Contribution.STATE_QUEUED,
+                Contribution.STATE_PAUSED, Contribution.STATE_FAILED));
+
+        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
+            pagedListConfig);
+        failedAndPendingContributionList = livePagedListBuilder.build();
     }
 }

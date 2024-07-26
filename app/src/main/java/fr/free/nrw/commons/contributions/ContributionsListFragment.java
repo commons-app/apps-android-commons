@@ -214,20 +214,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
         contributionsListPresenter.setup(userName,
             Objects.equals(sessionManager.getUserName(), userName));
-        contributionsListPresenter.getPendingContributions();
-        contributionsListPresenter.pendingContributionList.observe(getViewLifecycleOwner(), list -> {
-            pendingUploadsCount = list.size();
-            callback.updatePendingIcon(pendingUploadsCount);
-        });
-        contributionsListPresenter.getFailedContributions();
-        contributionsListPresenter.failedContributionList.observe(getViewLifecycleOwner(), list -> {
-            uploadErrorCount = list.size();
-            callback.updateErrorIcon(uploadErrorCount);
-        });
-        contributionsListPresenter.getFailedAndPendingContributions();
-        contributionsListPresenter.failedAndPendingContributionList.observe(getViewLifecycleOwner(), list -> {
-            callback.updateUploadIcon(list.size());
-        });
         contributionsListPresenter.contributionList.observe(getViewLifecycleOwner(), list -> {
             contributionsSize = list.size();
             adapter.submitList(list);
@@ -509,10 +495,5 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         // Notify the viewpager that number of items have changed.
         void viewPagerNotifyDataSetChanged();
 
-        void updatePendingIcon(int pendingCount);
-
-        void updateErrorIcon(int errorCount);
-
-        void updateUploadIcon(int count);
     }
 }
