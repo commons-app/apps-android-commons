@@ -310,6 +310,9 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
 
         try {
             //Upload the file to stash
+            if (filename!!.contains("fail")) {
+                throw Exception("fake exception for tests");
+            }
             val stashUploadResult = uploadClient.uploadFileToStash(
                 filename!!, contribution, notificationProgressUpdater
             ).onErrorReturn{
