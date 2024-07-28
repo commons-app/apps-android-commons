@@ -328,6 +328,11 @@ public class NearbyParentFragmentPresenter
         }
     }
 
+    /**
+     * Initiates a search for places within the area. Depending on whether the search
+     * is close to the current location, the map and list are updated
+     * accordingly.
+     */
     public void searchInTheArea(){
         if (searchCloseToCurrentLocation()) {
             updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);

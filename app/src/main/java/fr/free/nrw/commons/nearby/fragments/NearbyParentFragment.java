@@ -210,7 +210,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     private List<Place> updatedPlaceList;
     private LatLng updatedLatLng;
-    private boolean searchble;
+    private boolean searchable;
 
     private GridLayoutManager gridLayoutManager;
     private List<BottomSheetItem> dataList;
@@ -431,14 +431,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         if (isNetworkConnectionEstablished() && (event.getX() > 0
                             || event.getY() > 0)) {
                             if (distance > 2000.0) {
-                                searchble = true;
+                                searchable = true;
                                 presenter.searchInTheArea();
                             } else {
-                                searchble = false;
+                                searchable = false;
                             }
                         }
                     } else {
-                        searchble = false;
+                        searchable = false;
                     }
                 }
 
@@ -610,10 +610,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
                 if (lastFocusLocation == null && lastKnownLocation == null) {
                     locationPermissionGranted();
-                }else if (updatedPlaceList != null){
-                    if (updatedPlaceList.size() != 0){
+                } else if (updatedPlaceList != null) {
+                    if (updatedPlaceList.size() != 0) {
                         loadPlacesDataAsync(updatedPlaceList, updatedLatLng);
-                    }else {
+                    } else {
                         updateMapMarkers(updatedPlaceList, getLastMapFocus(), false);
                     }
                 }
@@ -995,7 +995,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         if (snackbar == null) {
                             snackbar = Snackbar.make(view, R.string.no_internet,
                                 Snackbar.LENGTH_INDEFINITE);
-                            searchble = false;
+                            searchable = false;
                             setProgressBarVisibility(false);
                         }
 
@@ -1232,6 +1232,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         return Environment.MEDIA_MOUNTED.equals(state);
     }
 
+    /**
+     * Fetches and updates the data for a specific place, then updates the corresponding marker on the map.
+     *
+     * @param entity       The entity ID of the place.
+     * @param place        The Place object containing the initial place data.
+     * @param marker       The Marker object on the map representing the place.
+     * @param isBookMarked A boolean indicating if the place is bookmarked.
+     */
     private void getPlaceData(String entity, Place place, Marker marker, Boolean isBookMarked) {
         final Observable<List<Place>> getPlaceObservable = Observable
             .fromCallable(() -> nearbyController
@@ -1253,7 +1261,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         Place pl = updatedPlaceList.get(i);
                         if (pl.location == updatedPlace.location) {
                             updatedPlaceList.set(i, updatedPlace);
-                            savePlaceToDB(place);
+                            savePlaceToDatabase(place);
                         }
                     }
                     Drawable icon = ContextCompat.getDrawable(getContext(),
@@ -1336,6 +1344,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         // Updating last searched location
                         applicationKvStore.putString("LastLocation",
                             searchLatLng.getLatitude() + "," + searchLatLng.getLongitude());
+
+                        // curLatLng is used to calculate distance from the current location to the place
+                        // and distance is later on populated to the place
                         updateMapMarkers(nearbyPlacesInfo.placeList, nearbyPlacesInfo.currentLatLng,
                             false);
                         lastMapFocus = new GeoPoint(searchLatLng.getLatitude(),
@@ -1356,34 +1367,55 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     public void loadPlacesDataAsync(List<Place> placeList, LatLng curLatLng) {
         List<Place> places = new ArrayList<>(placeList);
+
+        // Instead of loading all pins in a single SPARQL query, we query in batches.
+        // This variable controls the number of pins queried per batch.
         int batchSize = 3;
+
         updatedLatLng = curLatLng;
         updatedPlaceList = new ArrayList<>(placeList);
+
+        // Sorts the places by distance to ensure the nearest pins are ready for the user as soon
+        // as possible.
         if (VERSION.SDK_INT >= VERSION_CODES.N) {
-            Collections.sort(places, Comparator.comparingDouble(place -> place.getDistanceInDouble(getMapFocus())));
+            Collections.sort(places,
+                Comparator.comparingDouble(place -> place.getDistanceInDouble(getMapFocus())));
         }
         stopQuery = false;
         processBatchesSequentially(places, batchSize, updatedPlaceList, curLatLng, 0);
     }
 
+    /**
+     * Processes a list of places in batches sequentially. This method handles the asynchronous
+     * processing of places, updating the map markers and updates the list of updated places accordingly.
+     *
+     * @param places           The list of Place objects to be processed.
+     * @param batchSize        The size of each batch to be processed.
+     * @param updatedPlaceList The list of Place objects to be updated.
+     * @param curLatLng        The current location of the user.
+     * @param startIndex       The starting index for the current batch.
+     */
     @SuppressLint("CheckResult")
-    private void processBatchesSequentially(List<Place> places, int batchSize, List<Place> updatedPlaceList, LatLng curLatLng, int startIndex) {
+    private void processBatchesSequentially(List<Place> places, int batchSize,
+        List<Place> updatedPlaceList, LatLng curLatLng, int startIndex) {
         if (startIndex >= places.size() || stopQuery) {
             return;
         }
 
         int endIndex = Math.min(startIndex + batchSize, places.size());
         List<Place> batch = places.subList(startIndex, endIndex);
-        for (int i = 0; i< batch.size(); i++){
-            if (i == batch.size() - 1 && batch.get(i).name != ""){
-                processBatchesSequentially(places, batchSize, updatedPlaceList, curLatLng, endIndex + batchSize);
+        for (int i = 0; i < batch.size(); i++) {
+            if (i == batch.size() - 1 && batch.get(i).name != "") {
+                processBatchesSequentially(places, batchSize, updatedPlaceList, curLatLng,
+                    endIndex + batchSize);
                 return;
             }
-            if (batch.get(i).name == ""){
-                if (i == 0){
+            if (batch.get(i).name == "") {
+                if (i == 0) {
                     break;
                 }
-                processBatchesSequentially(places, batchSize, updatedPlaceList, curLatLng, endIndex + i);
+                processBatchesSequentially(places, batchSize, updatedPlaceList, curLatLng,
+                    endIndex + i);
                 return;
             }
         }
@@ -1410,6 +1442,14 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         compositeDisposable.add(disposable);
     }
 
+    /**
+     * Processes a batch of places, updating the provided place list with fetched or updated data.
+     * This method handles the asynchronous fetching and updating of places from the repository.
+     *
+     * @param batch     The batch of Place objects to be processed.
+     * @param placeList The list of Place objects to be updated.
+     * @return An Observable emitting the updated list of Place objects.
+     */
     private Observable<List<?>> processBatch(List<Place> batch, List<Place> placeList) {
         List<Place> toBeProcessed = new ArrayList<>();
 
@@ -1466,7 +1506,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                                         int index = updatedPlaceList.indexOf(foundPlace);
                                         if (index != -1) {
                                             updatedPlaceList.set(index, place);
-                                            savePlaceToDB(place);
+                                            savePlaceToDatabase(place);
                                         }
                                         break;
                                     }
@@ -1485,13 +1525,18 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             });
     }
 
-    private void savePlaceToDB(Place place) {
+    private void savePlaceToDatabase(Place place) {
         compositeDisposable.add(placesRepository
             .save(place)
             .subscribeOn(Schedulers.io())
             .subscribe());
     }
 
+    /**
+     * Stops any ongoing queries and clears all disposables.
+     * This method sets the stopQuery flag to true and clears the compositeDisposable
+     * to prevent any further processing.
+     */
     @Override
     public void stopQuery() {
         stopQuery = true;
@@ -2062,13 +2107,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if (lastMapFocus != null) {
                 if (isNetworkConnectionEstablished()) {
                     if (distance > 2000.0) {
-                        searchble = true;
+                        searchable = true;
                     } else {
-                        searchble = false;
+                        searchable = false;
                     }
                 }
             } else {
-                searchble = false;
+                searchable = false;
             }
         }
     }

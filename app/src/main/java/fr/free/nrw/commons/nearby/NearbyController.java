@@ -131,6 +131,13 @@ public class NearbyController extends MapController {
         );
     }
 
+    /**
+     * Retrieves a list of places based on the provided list of places and language.
+     *
+     * @param placeList A list of Place objects for which to fetch information.
+     * @return A list of Place objects obtained from the Wikidata query.
+     * @throws Exception If an error occurs during the retrieval process.
+     */
     public List<Place> getPlaces(List<Place> placeList) throws Exception {
         return nearbyPlaces.getPlaces(placeList, Locale.getDefault().getLanguage());
     }
