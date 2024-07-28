@@ -621,7 +621,7 @@
   <string name="need_permission">Trenger tillatelse</string>
   <string name="contributions_of_user">Bidrag til bruker: %s</string>
   <string name="achievements_of_user">Prestasjoner til bruker: %s</string>
-  <string name="menu_view_user_page">Vis brukerside</string>
+  <string name="menu_view_user_page" fuzzy="true">Vis brukerside</string>
   <string name="edit_depictions">Rediger avbildninger</string>
   <string name="edit_categories">Rediger kategorier</string>
   <string name="advanced_options">Avanserte alternativer</string>

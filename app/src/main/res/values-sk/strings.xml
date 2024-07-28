@@ -680,7 +680,7 @@
   <string name="read_phone_state_permission_message">Blízke mapy potrebujú mať prístup k polohe telefónu, aby správne fungovali</string>
   <string name="contributions_of_user">Príspevky používateľa:  %s</string>
   <string name="achievements_of_user">Úspechy používateľa: %s</string>
-  <string name="menu_view_user_page">Zobraziť stránku používateľa</string>
+  <string name="menu_view_user_page" fuzzy="true">Zobraziť stránku používateľa</string>
   <string name="edit_depictions">Upraviť vyobrazenia</string>
   <string name="edit_categories">Upraviť kategórie</string>
   <string name="advanced_options">Rozšírené možnosti</string>

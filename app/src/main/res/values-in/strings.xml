@@ -677,7 +677,7 @@
   <string name="read_phone_state_permission_message">Peta Sekitar harus membaca STATUS TELEPON untuk berfungsi dengan benar</string>
   <string name="contributions_of_user">Kontribusi Pengguna: %s</string>
   <string name="achievements_of_user">Pencapaian Pengguna: %s</string>
-  <string name="menu_view_user_page">Lihat halaman pengguna</string>
+  <string name="menu_view_user_page" fuzzy="true">Lihat halaman pengguna</string>
   <string name="edit_depictions">Sunting penggambaran</string>
   <string name="edit_categories">Sunting kategori</string>
   <string name="advanced_options">Opsi Lanjutan</string>

@@ -589,7 +589,7 @@
   <string name="custom_selector_already_uploaded_image_text">이 이미지는 이미 커먼즈에 업로드되었습니다.</string>
   <string name="need_permission">권한 필요</string>
   <string name="contributions_of_user">사용자의 기여: %s</string>
-  <string name="menu_view_user_page">사용자 문서 보기</string>
+  <string name="menu_view_user_page" fuzzy="true">사용자 문서 보기</string>
   <string name="edit_categories">분류 편집</string>
   <string name="advanced_options">고급 옵션</string>
   <string name="apply">적용</string>

@@ -749,7 +749,7 @@
   <string name="read_phone_state_permission_message">Для правильной работы картам поблизости необходимо иметь доступ к СОСТОЯНИЮ ТЕЛЕФОНА.</string>
   <string name="contributions_of_user">Вклад участника: %s</string>
   <string name="achievements_of_user">Достижения участника: %s</string>
-  <string name="menu_view_user_page">Посмотреть страницу участника</string>
+  <string name="menu_view_user_page" fuzzy="true">Посмотреть страницу участника</string>
   <string name="edit_depictions">Редактировать описания</string>
   <string name="edit_categories">Изменить категории</string>
   <string name="advanced_options">Расширенные настройки</string>
@@ -834,6 +834,7 @@
   <string name="nearby_wikitalk">Сообщить о проблеме с этим элементом в Викиданные</string>
   <string name="please_enter_some_comments">Пожалуйста, добавьте какие-то комментарии</string>
   <string name="talk">Обсуждение</string>
+  <string name="write_something_about_the_item">Напишите что-нибудь об элементе \'%1$s\'. Это будет видно всем.</string>
   <string name="other_problem_or_information_please_explain_below">Другая проблема или информация (пожалуйста, объясните ниже).</string>
   <string name="feedback_destination_note">Ваш отзыв будет опубликован на следующей вики-странице: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
 </resources>

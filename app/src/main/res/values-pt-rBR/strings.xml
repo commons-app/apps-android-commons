@@ -7,6 +7,7 @@
 * Eduardoaddad
 * Felipe L. Ewald
 * Fitoschido
+* Flaviane da Silva
 * Fúlvio
 * Gusta
 * HenriqueCrang
@@ -704,7 +705,7 @@
   <string name="read_phone_state_permission_message">Os mapas próximos precisam ler ESTADO DO TELEFONE para funcionar corretamente</string>
   <string name="contributions_of_user">Contribuições do usuário: %s</string>
   <string name="achievements_of_user">Conquistas do usuário: %s</string>
-  <string name="menu_view_user_page">Ver página de usuário</string>
+  <string name="menu_view_user_page" fuzzy="true">Ver página de usuário</string>
   <string name="edit_depictions">Editar representações</string>
   <string name="edit_categories">Editar categorias</string>
   <string name="advanced_options">Opções avançadas</string>
@@ -769,4 +770,5 @@
     <item quantity="one">%d imagem selecinada</item>
     <item quantity="other">%d imagens selecionadas</item>
   </plurals>
+  <string name="write_something_about_the_item">Escreva algo sobre o item %1$s. Isso será visivel publicamente.</string>
 </resources>

@@ -712,7 +712,7 @@
   <string name="read_phone_state_permission_message">Kaarten in de buurt moeten TELEFOONSTATUS lezen om goed te kunnen werken</string>
   <string name="contributions_of_user">Bijdragen door Gebruiker: %s</string>
   <string name="achievements_of_user">Prestaties van Gebruiker: %s</string>
-  <string name="menu_view_user_page">Gebruikerspagina bekijken</string>
+  <string name="menu_view_user_page" fuzzy="true">Gebruikerspagina bekijken</string>
   <string name="edit_depictions">Wijzig items</string>
   <string name="edit_categories">Categorieën bewerken</string>
   <string name="advanced_options">Geavanceerde opties</string>
@@ -795,8 +795,6 @@
   <string name="nearby_wikitalk">Een probleem met dit item melden aan Wikidata</string>
   <string name="please_enter_some_comments">Voer enkele opmerkingen in</string>
   <string name="talk">Overleg</string>
-  <string name="write_something_about_the">\"Schrijf iets over het item \"</string>
-  <string name="item_it_will_be_publicly_visible">\". Het zal publiekelijk zichtbaar zijn.\"</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">‘%1$s’ bestaat niet meer, er kan nooit een foto van gemaakt worden.</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">‘%1$s’ bevindt zich ergens anders. Geef hieronder de juiste plaats aan en noteer, indien mogelijk, de juiste breedte- en lengtegraad.</string>
   <string name="other_problem_or_information_please_explain_below">Ander probleem of andere informatie (verklaar hieronder).</string>

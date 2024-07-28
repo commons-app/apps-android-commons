@@ -642,7 +642,7 @@
   <string name="done">完了</string>
   <string name="back">戻る</string>
   <string name="need_permission">権限が必要です</string>
-  <string name="menu_view_user_page">利用者ページを表示</string>
+  <string name="menu_view_user_page" fuzzy="true">利用者ページを表示</string>
   <string name="edit_depictions">題材を編集する</string>
   <string name="edit_categories">カテゴリを編集</string>
   <string name="apply">適用</string>

@@ -348,4 +348,5 @@
   <string name="category_edit_helper_show_edit_title_success">सफल</string>
   <string name="leaderboard_column_count">गणना</string>
   <string name="custom_selector_dismiss_limit_warning_button_text">रद्द करें</string>
+  <string name="talk">वार्ता</string>
 </resources>

@@ -2,6 +2,7 @@
 <!-- Authors:
 * Eleassar
 * HairyFotr
+* Kaartic
 * McDutchie
 * Upwinxp
 -->
@@ -111,7 +112,7 @@
   <string name="title_activity_contributions">Moje nedavne naložitve</string>
   <string name="contribution_state_queued">V čakalni vrsti</string>
   <string name="contribution_state_failed">Spodletelo</string>
-  <string name="contribution_state_in_progress">Opravljeno %1$d%&amp;nbsp;% nalaganja</string>
+  <string name="contribution_state_in_progress">Opravljeno %1$d%&amp;nbsp;%% nalaganja</string>
   <string name="contribution_state_starting">Nalagam</string>
   <string name="menu_from_gallery">Iz galerije</string>
   <string name="menu_from_camera">Posnemi fotografijo</string>
@@ -704,7 +705,7 @@
   <string name="read_phone_state_permission_message">Bližnji zemljevidi morajo za pravilno delovanje prebrati STANJE TELEFONA</string>
   <string name="contributions_of_user">Prispevki uporabnika: %s</string>
   <string name="achievements_of_user">Dosežki uporabnika: %s</string>
-  <string name="menu_view_user_page">Ogled uporabniške strani</string>
+  <string name="menu_view_user_page" fuzzy="true">Ogled uporabniške strani</string>
   <string name="edit_depictions">Uredi slike</string>
   <string name="edit_categories">Uredi kategorije</string>
   <string name="advanced_options">Napredne možnosti</string>

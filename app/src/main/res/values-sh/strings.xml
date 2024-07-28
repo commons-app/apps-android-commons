@@ -253,7 +253,7 @@
   <string name="delete_helper_show_deletion_title_failed">Nije uspelo</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="contributions_of_user">Doprinosi korisnika: %s</string>
-  <string name="menu_view_user_page">Pregled korisničke stranice</string>
+  <string name="menu_view_user_page" fuzzy="true">Pregled korisničke stranice</string>
   <string name="edit_categories">Uredi kategorije</string>
   <string name="advanced_options">Napredne opcije</string>
   <string name="advanced_query_info_text">Možete prilagoditi upit \'\'U blizini\'\'. Ako dobijete pogreške, poništite i primijenite.</string>
