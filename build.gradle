@@ -17,9 +17,9 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        gradlePluginPortal() // potential jcenter() replacement
         maven { url "https://jitpack.io" }
         maven { url "https://maven.google.com" }
-        gradlePluginPortal() // potential jcenter() replacement
     }
 }
 subprojects{
