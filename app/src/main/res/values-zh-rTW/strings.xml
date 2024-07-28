@@ -792,5 +792,13 @@
   </plurals>
   <string name="multiple_files_depiction">請記住，多重上傳中的所有圖片都會取得相同的分類和描述。如果圖片不要共享描述和分類，請執行多次單筆上傳。</string>
   <string name="multiple_files_depiction_header">關於多次上傳的註釋</string>
+  <string name="nearby_wikitalk">向維基數據回報關於此項目的問題</string>
+  <string name="please_enter_some_comments">請輸入一些意見。</string>
+  <string name="talk">討論</string>
+  <string name="write_something_about_the">\"寫一些關於\"</string>
+  <string name="item_it_will_be_publicly_visible">\"項目。這將公開可見。\"</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">「%1$s」已不存在，無法拍攝它的照片。</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude" fuzzy="true">「%1$s」位於不同的位置（請在下面指定正確的位置，可以的話請告訴我們正確的經緯度）。</string>
+  <string name="other_problem_or_information_please_explain_below">其他問題或資訊（請在下方解釋）。</string>
   <string name="feedback_destination_note">您的回饋已發布到以下 wiki 頁面：&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
 </resources>

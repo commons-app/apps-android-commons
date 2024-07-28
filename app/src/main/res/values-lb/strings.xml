@@ -509,4 +509,5 @@
     <item quantity="one">%d Bild ausgewielt</item>
     <item quantity="other">%d Biller ausgewielt</item>
   </plurals>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' gëtt et net méi, et kann keng Foto méi dovunner gemaach ginn.</string>
 </resources>
