@@ -1035,7 +1035,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         // When the nearby fragment is opened immediately upon app launch, the {screenTopRightLatLng}
         // and {screenBottomLeftLatLng} variables return {LatLng(0.0,0.0)} as output.
         // To address this issue, A small delta value {delta = 0.02} is used to adjust the latitude
-        // and longitude values for {ZOOM_LEVEL = 14f}.
+        // and longitude values for {ZOOM_LEVEL = 15f}.
         // This adjustment helps in calculating the east and west corner LatLng accurately.
         // Note: This only happens when the nearby fragment is opened immediately upon app launch,
         // otherwise {screenTopRightLatLng} and {screenBottomLeftLatLng} are used to determine
@@ -1043,7 +1043,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         if (screenTopRightLatLng.getLatitude() == 0.0 && screenTopRightLatLng.getLongitude() == 0.0
             && screenBottomLeftLatLng.getLatitude() == 0.0
             && screenBottomLeftLatLng.getLongitude() == 0.0) {
-            final double delta = 0.02;
+            final double delta = 0.009;
             final double westCornerLat = currentLatLng.getLatitude() - delta;
             final double westCornerLong = currentLatLng.getLongitude() - delta;
             final double eastCornerLat = currentLatLng.getLatitude() + delta;
