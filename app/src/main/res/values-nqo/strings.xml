@@ -571,7 +571,7 @@
   <string name="read_phone_state_permission_message">ߞߙߍ߬ߝߍ߬ ߔߊߔߘߊ (ߡߊߔߛ) ߡߊ߬ߞߏ ߦߋ߫ ߜߋߟߋ߲ߜߋߟߋ߲ ߞߊ߬ߝߏ ߘߐߞߊ߬ߙߊ߲ ߠߊ߫ ߞߊ߬ ߛߋ߫ ߓߊ߯ߙߊ߫ ߟߴߊ߬ ߢߊߓߘߍ ߡߊ߬</string>
   <string name="contributions_of_user">ߟߊ߬ߓߊ߰ߙߊ߬ߟߊ %s: ߟߊ߫ ߓߟߏߡߊߜߍ߲</string>
   <string name="achievements_of_user">ߟߊ߬ߓߊ߰ߙߊ߬ߟߊ %s: ߟߊ߫ ߞߎ߲߬ߝߊ߰ߟߌ ߟߎ߬</string>
-  <string name="menu_view_user_page">ߟߊ߬ߓߊ߰ߙߊ߬ߟߌ߫ ߞߐߜߍ ߦߋ߫</string>
+  <string name="menu_view_user_page" fuzzy="true">ߟߊ߬ߓߊ߰ߙߊ߬ߟߌ߫ ߞߐߜߍ ߦߋ߫</string>
   <string name="edit_depictions">ߞߊ߲߬ߛߓߍ߬ߟߌ ߟߎ߬ ߡߊߦߟߍ߬ߡߊ߲߫</string>
   <string name="edit_categories">ߦߌߟߡߊ ߟߎ߬ ߡߊߦߟߍ߬ߡߊ߲߫</string>
   <string name="advanced_options">ߢߣߊߕߊߟߌ ߖߊ߲߬ߝߊ߬ߣߍ߲</string>

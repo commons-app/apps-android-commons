@@ -45,7 +45,7 @@ class WikidataFeedback : BaseActivity() {
         pageTitle = getString(R.string.talk) + ":" + wikidataQId
         binding.toolbarBinding.toolbar.title = pageTitle
         binding.textHeader.text =
-            getString(R.string.write_something_about_the) + "'$place'" + getString(R.string.item_it_will_be_publicly_visible)
+            getString(R.string.write_something_about_the_item, place)
         binding.radioButton1.setText(
             getString(
                 R.string.does_not_exist_anymore_no_picture_can_ever_be_taken_of_it,

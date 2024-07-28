@@ -8,6 +8,7 @@
 * DDPAT
 * Fifty Pro
 * Ice bulldog
+* Ignatgg
 * Movses
 * Mykola Swarnyk
 * Piramidion
@@ -105,13 +106,13 @@
   <string name="logging_in_message">Будь ласка, зачекайте…</string>
   <string name="updating_caption_title">Оновлення заголовків та описів</string>
   <string name="updating_caption_message">Будь ласка, зачекайте…</string>
-  <string name="login_success" fuzzy="true">Ви успішно увійшли!</string>
-  <string name="login_failed" fuzzy="true">Не вдалося увійти</string>
+  <string name="login_success">Ви успішно увійшли!</string>
+  <string name="login_failed">Не вдалося увійти</string>
   <string name="upload_failed">Файл не знайдено. Будь ласка, спробуйте інший файл.</string>
   <string name="retry_limit_reached">Досягнуто максимальної кількості повторних спроб! Будь ласка, скасуйте завантаження і спробуйте ще раз</string>
   <string name="unrestricted_battery_mode">Вимкнути оптимізацію батареї?</string>
   <string name="suggest_unrestricted_mode">Вивантаження більше ніж 3 зображень працює надійніше, коли оптимізацію батареї вимкнено. Будь ласка, вимкніть оптимізацію батареї для програмки Commons у налаштуваннях для плавної роботи. \n\nМожливі кроки, щоб вимкнути оптимізацію акумулятора:\n\nКрок 1: Натисніть кнопку «Налаштування» нижче.\n\nКрок 2: Переключіться з «Не оптимізовано» на «Усі програми».\n\nКрок 3: Знайдіть «Commons» або «fr.free.nrw.commons».\n\nКрок 4: Натисніть на нього і виберіть «Не оптимізувати».\n\nКрок 5: Натисніть «Готово».</string>
-  <string name="authentication_failed" fuzzy="true">Помилка автентифікації. Будь ласка, увійдіть у свій обліковий запис знову</string>
+  <string name="authentication_failed">Помилка автентифікації. Будь ласка, увійдіть у свій обліковий запис знову.</string>
   <string name="uploading_started">Завантаження розпочато!</string>
   <string name="uploading_queued">Завантаження додано до черги (увімкнений режим обмеженого з\'єднання)</string>
   <string name="upload_completed_notification_title">Завантажено %1$s!</string>
@@ -138,11 +139,11 @@
   <string name="add_caption_toast">Будь ласка, вкажіть підпис цьому файлу</string>
   <string name="share_description_hint">Опис</string>
   <string name="share_caption_hint">Підпис</string>
-  <string name="login_failed_network" fuzzy="true">Неможливо увійти — збій у мережі</string>
+  <string name="login_failed_network">Неможливо увійти — збій у мережі</string>
   <string name="login_failed_throttled">Надто багато невдалих спроб. Будь ласка, спробуйте знову через кілька хвилин.</string>
   <string name="login_failed_blocked">Вибачте, цього користувача було заблоковано на Вікісховищі</string>
   <string name="login_failed_2fa_needed">Ви повинні надати код двофакторної автентифікації.</string>
-  <string name="login_failed_generic" fuzzy="true">Не вдалося увійти</string>
+  <string name="login_failed_generic">Не вдалося увійти</string>
   <string name="share_upload_button">Завантажити</string>
   <string name="multiple_share_base_title">Назвіть цю серію</string>
   <string name="provider_modifications">Модифікації</string>
@@ -266,6 +267,7 @@
   <string name="navigation_item_about">Опис</string>
   <string name="navigation_item_settings">Налаштування</string>
   <string name="navigation_item_feedback">Зворотний зв\'язок</string>
+  <string name="navigation_item_feedback_github">Зворотний зв\'язок через GitHub</string>
   <string name="navigation_item_logout">Вийти</string>
   <string name="navigation_item_info">Керівництво</string>
   <string name="navigation_item_notification">Сповіщення</string>
@@ -299,14 +301,15 @@
   <string name="nominated_see_more">Див. сторінку, щоб дізнатись більше</string>
   <string name="skip_login">Пропустити</string>
   <string name="navigation_item_login">Увійти</string>
-  <string name="skip_login_title" fuzzy="true">Ви дійсно бажаєте пропустити автентифікацію?</string>
-  <string name="skip_login_message" fuzzy="true">Вам треба буде увійти в систему для завантаження зображень у майбутньому.</string>
+  <string name="skip_login_title">Ви дійсно бажаєте пропустити автентифікацію?</string>
+  <string name="skip_login_message">Вам треба буде увійти в систему для завантаження зображень у майбутньому.</string>
   <string name="login_alert_message">Увійдіть, щоб використати цю функцію</string>
   <string name="copy_wikicode">Скопіювати вікі-текст у буфер обміну</string>
   <string name="wikicode_copied">Вікі-текст скопійовано у буфер обміну</string>
   <string name="nearby_location_not_available">Функція «Поблизу» може працювати некоректно, «Розташування» недоступне.</string>
   <string name="upload_location_access_denied">Доступ до місцезнаходження заборонено. Щоб скористатися цією функцією, будь ласка, вкажіть  своє місцезнаходження вручну.</string>
   <string name="location_permission_rationale_nearby">Потрібний дозвіл для показу списку місць поблизу</string>
+  <string name="location_permission_rationale_explore">Потрібний дозвіл для показу зображень місць поблизу</string>
   <string name="nearby_directions">Напрямки</string>
   <string name="nearby_wikidata">Вікідані</string>
   <string name="nearby_wikipedia">Вікіпедія</string>
@@ -366,7 +369,7 @@
   <string name="construction_event_answer">Зображення технологій чи культури дуже бажані для Вікісховища.</string>
   <string name="congratulatory_message_quiz">Ви дали %1$s правильних відповідей. Вітаємо!</string>
   <string name="warning_for_no_answer">Оберіть один з двох варіантів відповіді на запитання</string>
-  <string name="user_not_logged_in" fuzzy="true">Сесія авторизації спливла. Будь ласка, авторизуйтесь знову.</string>
+  <string name="user_not_logged_in">Сесія авторизації спливла. Будь ласка, авторизуйтеся знову.</string>
   <string name="quiz_result_share_message">Поширити свій результат тесту із друзями!</string>
   <string name="continue_message">Продовжити</string>
   <string name="correct">Правильна відповідь</string>
@@ -374,7 +377,8 @@
   <string name="quiz_screenshot_question">Чи можна завантажувати цей знімок?</string>
   <string name="share_app_title">Поширити програму</string>
   <string name="rotate">Повернути</string>
-  <string name="error_fetching_nearby_places" fuzzy="true">Помилка отримання місць поблизу.</string>
+  <string name="error_fetching_nearby_places">Не вдалося завантажити місця поблизу</string>
+  <string name="no_pictures_in_this_area">Немає зображень з цієї місцевості</string>
   <string name="no_nearby_places_around">Не знайдено місць поблизу</string>
   <string name="error_fetching_nearby_monuments">Помилка отримання пам\'ятників поблизу.</string>
   <string name="no_recent_searches">Історія пошуку порожня</string>
@@ -449,7 +453,7 @@
   <string name="never_ask_again">Ніколи більше про це не запитувати</string>
   <string name="display_location_permission_title">Запитувати дозвіл на геолокацію</string>
   <string name="display_location_permission_explanation">Запитувати про дозвіл на показ місця перебування, коли це потрібно для функції перегляду місць поблизу.</string>
-  <string name="achievements_fetch_failed" fuzzy="true">Щось пішло не так. Нам не вдалося отримати Ваші досягнення</string>
+  <string name="achievements_fetch_failed">Щось пішло не так. Нам не вдалося отримати досягнення</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Ви зробили так багато, що наша система підрахунку досягнень не може впоратись зі своїм завданням. Це — абсолютне досягнення.</string>
   <string name="ends_on">Завершується:</string>
   <string name="display_campaigns">Показати кампанії</string>
@@ -465,7 +469,7 @@
   <string name="open_document_photo_picker_explanation">Новий засіб вибору фотографій Android ризикує втратити інформацію про місцезнаходження. Увімкніть, якщо ви використовуєте його.</string>
   <string name="location_loss_warning">Якщо вимкнути, то може бути викликаний новий вибір фотографій. Що може призвести до втрати інформації про місцезнаходження.\n\nТоркніться «Докладніше», щоб дізнатись більше.</string>
   <string name="nearby_campaign_dismiss_message">Ви більше не бачитимете кампаній. Однак Ви можете увімкнути це сповіщення повторно в своїх налаштуваннях, якщо забажаєте.</string>
-  <string name="this_function_needs_network_connection" fuzzy="true">Ця функція вимагає доступу до інтернету. Будь ласка, перевірте своє з\'єднання.</string>
+  <string name="this_function_needs_network_connection">Ця функція вимагає доступу до інтернету. Будь ласка, перевірте своє з\'єднання.</string>
   <string name="error_processing_image">Сталася помилка при обробці зображення. Будь ласка, спробуйте ще раз!</string>
   <string name="getting_edit_token">Отримання токена редагування</string>
   <string name="check_category_adding_template">Додавання шаблона для перевірки категорій</string>
@@ -581,7 +585,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Не вдалося додати координати.</string>
   <string name="description_edit_helper_edit_message_else">Не вдалося додати описи.</string>
   <string name="caption_edit_helper_edit_message_else">Не вдалося додати заголовок.</string>
-  <string name="coordinates_picking_unsuccessful" fuzzy="true">Не вдалося отримати координати.</string>
+  <string name="coordinates_picking_unsuccessful">Координати зображення не оновлено</string>
   <string name="descriptions_picking_unsuccessful">Не вдається отримати описи.</string>
   <string name="description_activity_title">Редагувати описи та заголовки</string>
   <string name="share_image_via">Поширити зображення через</string>
@@ -596,12 +600,13 @@
   <string name="place_state_needs_photo">Треба фото</string>
   <string name="place_type">Тип місця:</string>
   <string name="nearby_search_hint">Міст, музей, готель тощо</string>
-  <string name="you_must_reset_your_passsword" fuzzy="true">Щось пішло не так із процесом входу, ви маєте скинути пароль !</string>
+  <string name="you_must_reset_your_passsword">Щось пішло не так із процесом входу. Вам треба скинути пароль!</string>
   <string name="title_for_media">МЕДІА</string>
   <string name="title_for_child_classes">ДОЧІРНІ КЛАСИ</string>
   <string name="title_for_parent_classes">БАТЬКІВСЬКІ КЛАСИ</string>
   <string name="upload_nearby_place_found_title">Знайдено місце поблизу</string>
-  <string name="upload_nearby_place_found_description_singular" fuzzy="true">На цьому фото %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">Тут зображено %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">На цьому зображенні %1$s?</string>
   <string name="title_app_shortcut_bookmark">Закладки</string>
   <string name="title_app_shortcut_setting">Налаштування</string>
   <string name="remove_bookmark">Вилучено з закладок</string>
@@ -615,8 +620,10 @@
   <string name="cannot_open_location_settings">Не вдалося відкрити налаштування місця розташування. Будь ласка, увімкніть визначення місця розташування вручну</string>
   <string name="recommend_high_accuracy_mode">Щоб отримати кращі результати, виберіть режим високої точності.</string>
   <string name="ask_to_turn_location_on">Увімкнути визначення місця розташування?</string>
+  <string name="ask_to_turn_location_on_text">Будь ласка, увімкніть службу визначення розташування, щоб застосунок показав ваше поточне розташування</string>
   <string name="nearby_needs_location">«Поблизу» потребує увімкненого визначення місця розташування, щоб працювати належним чином</string>
-  <string name="upload_map_location_access" fuzzy="true">Вам потрібно надати доступ до вашого поточного місцезнаходження, щоб місцезнаходження встановлювалось автоматично.</string>
+  <string name="explore_map_needs_location">Функції огляду карти потрібен дозвіл на ваше розташування, щоб показати зображення поблизу</string>
+  <string name="upload_map_location_access">Вам потрібно надати доступ до місцезнаходження, щоб місцезнаходження встановлювалось автоматично.</string>
   <string name="use_location_from_similar_image">Ви зробили ці два знімки в одному й тому ж місці? Хочете використати широту/довготу зображення справа?</string>
   <string name="load_more">Завантажити більше</string>
   <string name="nearby_no_results">Місць не знайдено, спробуйте змінити критерії пошуку.</string>
@@ -719,7 +726,7 @@
   <string name="read_phone_state_permission_message">Для належної роботи мапи поблизу мають відображати стан PHONE STATE</string>
   <string name="contributions_of_user">Внесок користувача: %s</string>
   <string name="achievements_of_user">Досягнення користувача: %s</string>
-  <string name="menu_view_user_page">Переглянути сторінку користувача</string>
+  <string name="menu_view_user_page" fuzzy="true">Переглянути сторінку користувача</string>
   <string name="edit_depictions">Редагувати описи</string>
   <string name="edit_categories">Редагувати категорії</string>
   <string name="advanced_options">Розширені параметри</string>
@@ -732,8 +739,8 @@
   <string name="add_location">Додати розташування</string>
   <string name="feedback_sharing_data_alert">Будь ласка, видаліть з цього листа будь-яку інформацію, якою ви не бажаєте поділитися публічно. Також майте на увазі, що ваша адреса електронної пошти, за допомогою якої ви розміщуєте публікацію, а також пов’язане ім’я та зображення профілю будуть видимі для всіх.</string>
   <string name="explore_map_details">Деталі</string>
-  <string name="achievements_unavailable_beta" fuzzy="true">Досягнення доступні лише у версії prod, будь ласка, перегляньте документацію розробника.</string>
-  <string name="leaderboard_unavailable_beta" fuzzy="true">Таблиця лідерів доступна лише в версії prod. Будь ласка, перегляньте документацію розробника.</string>
+  <string name="achievements_unavailable_beta">Досягнення доступні лише у версії prod. Будь ласка, перегляньте документацію розробників.</string>
+  <string name="leaderboard_unavailable_beta">Таблиця лідерів доступна лише в версії prod. Будь ласка, перегляньте документацію розробників.</string>
   <string name="copyright_popup">Будь ласка, завантажуйте лише фотографії, які ви зробили самі. Користувачі, які завантажують зображення, захищені авторським правом, будуть заблоковані. Це стосується і бета-аромату. Дякуємо за тестування програми!</string>
   <string name="select_feedback_data_choice">Будь ласка, зніміть прапорець з будь-якої інформації, якою ви не бажаєте ділитися публічно.</string>
   <string name="api_level">Рівень API</string>
@@ -775,10 +782,38 @@
   <string name="learn_how_to_write_a_useful_description">Дізнайтеся, як написати корисний опис</string>
   <string name="learn_how_to_write_a_useful_caption">Дізнайтеся, як написати корисний підпис</string>
   <string name="see_your_achievements">Перегляньте свої досягнення</string>
+  <string name="edit_image">Редагувати зображення</string>
+  <string name="edit_location">Редагувати розташування</string>
+  <string name="location_updated">Розташування оновлено</string>
+  <string name="remove_location">Вилучити розташування</string>
+  <string name="remove_location_warning_title">Попередження про вилучення розташування</string>
+  <string name="remove_location_warning_desc">Завдяки розташуванню зображення стають кориснішими і доступнішими для пошуку. Ви справді бажаєте прибрати розташування з цього зображення?</string>
+  <string name="location_removed">Розташування вилучено!</string>
+  <string name="send_thanks_to_author">Подякувати автору</string>
+  <string name="error_sending_thanks">Помилка при надсиланні подяки автору.</string>
+  <string name="invalid_login_message">Сесія авторизації спливла. Будь ласка, увійдіть наново.</string>
+  <string name="no_application_available_to_open_gpx_files">Немає доступного застосунку для відкриття файлів GPX</string>
+  <string name="file_saved_successfully">Файл успішно збережено</string>
+  <string name="do_you_want_to_open_gpx_file">Бажаєте відкрити файл GPX?</string>
+  <string name="do_you_want_to_open_kml_file">Бажаєте відкрити файл KML?</string>
+  <string name="failed_to_save_kml_file">Не вдалося зберегти файл KML.</string>
+  <string name="failed_to_save_gpx_file">Не вдалося зберегти файл GPX.</string>
+  <string name="saving_kml_file">Збереження файлу KML</string>
+  <string name="saving_gpx_file">Збереження файлу GPX</string>
   <plurals name="custom_picker_images_selected_title_appendix">
     <item quantity="one">Вибрано %d зображення</item>
     <item quantity="few">Вибрано %d зображення</item>
     <item quantity="many">Вибрано %d зображень</item>
     <item quantity="other">Вибрано %d зображень</item>
   </plurals>
+  <string name="multiple_files_depiction">Пам\'ятайте, що усі зображення, вивантажені разом, отримають ті самі категорії і підписи. Якщо ці зображення повинні мати різні підписи і категорії, будь ласка, завантажуйте їх окремо.</string>
+  <string name="multiple_files_depiction_header">Примітка про завантаження груп файлів</string>
+  <string name="nearby_wikitalk">Повідомити у Вікідані про проблему з цим елементом</string>
+  <string name="please_enter_some_comments">Будь ласка, додайте якийсь коментар</string>
+  <string name="talk">Обговорення</string>
+  <string name="write_something_about_the_item">Напишіть щось про елемент \"%1$s\". Це буде загальнодоступно.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">«%1$s» більше не існує, фотографій цього більше не можливо зробити.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">«%1$s» — це інше місце. Будь ласка, вкажіть правильне місце нижче і, якщо можна, напишіть правильні широту і довготу.</string>
+  <string name="other_problem_or_information_please_explain_below">Інша проблема або інформація (поясніть нижче).</string>
+  <string name="feedback_destination_note">Ваші відгуки розміщуються на ось цій вікісторінці: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
 </resources>

@@ -627,7 +627,7 @@
   <string name="read_phone_state_permission_message">Netoliese žemėlapiai turi perskaityti TELENFONO BŪSENĄ, kad tinkamai funkcionuotų</string>
   <string name="contributions_of_user">Naudotojo indėlis: %s</string>
   <string name="achievements_of_user">Naudotojo pasiekimai: %s</string>
-  <string name="menu_view_user_page">Žiūrėti naudotojo puslapį</string>
+  <string name="menu_view_user_page" fuzzy="true">Žiūrėti naudotojo puslapį</string>
   <string name="edit_depictions">Redaguoti vaizdus</string>
   <string name="edit_categories">Redaguoti kategorijas</string>
   <string name="advanced_options">Išplėstiniai nustatymai</string>

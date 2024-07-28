@@ -417,7 +417,7 @@
   <string name="learn_more">GOUZOUT HIROC\'H</string>
   <string name="contributions_of_user">Degasadennoù an implijer: %s</string>
   <string name="achievements_of_user">Taolioù-kaer an implijer: %s</string>
-  <string name="menu_view_user_page">Gwelet pajenn an implijer</string>
+  <string name="menu_view_user_page" fuzzy="true">Gwelet pajenn an implijer</string>
   <string name="edit_categories">Kemmañ ar rummadoù</string>
   <string name="advanced_options">Dibarzhioù araokaet</string>
   <string name="no_location_found_title">Lec\'hiadur ebet kavet</string>

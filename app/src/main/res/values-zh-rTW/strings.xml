@@ -712,7 +712,7 @@
   <string name="read_phone_state_permission_message">附近地圖需要讀取手機狀態來正常運作</string>
   <string name="contributions_of_user">使用者貢獻：%s</string>
   <string name="achievements_of_user">使用者成果：%s</string>
-  <string name="menu_view_user_page">檢視使用者頁面</string>
+  <string name="menu_view_user_page" fuzzy="true">檢視使用者頁面</string>
   <string name="edit_depictions">編輯描寫</string>
   <string name="edit_categories">編輯分類</string>
   <string name="advanced_options">進階選項</string>
@@ -795,10 +795,9 @@
   <string name="nearby_wikitalk">向維基數據回報關於此項目的問題</string>
   <string name="please_enter_some_comments">請輸入一些意見。</string>
   <string name="talk">討論</string>
-  <string name="write_something_about_the">\"寫一些關於\"</string>
-  <string name="item_it_will_be_publicly_visible">\"項目。這將公開可見。\"</string>
+  <string name="write_something_about_the_item" fuzzy="true">「填寫一些關於『%1$s』項目的事物。內容將公開可見。」</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">「%1$s」已不存在，無法拍攝它的照片。</string>
-  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude" fuzzy="true">「%1$s」位於不同的位置（請在下面指定正確的位置，可以的話請告訴我們正確的經緯度）。</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">「%1$s」位於不同的位置。請在下面指定正確的位置，可以的話請填寫正確的經緯度。</string>
   <string name="other_problem_or_information_please_explain_below">其他問題或資訊（請在下方解釋）。</string>
   <string name="feedback_destination_note">您的回饋已發布到以下 wiki 頁面：&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
 </resources>

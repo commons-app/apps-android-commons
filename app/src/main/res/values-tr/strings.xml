@@ -716,7 +716,7 @@
   <string name="read_phone_state_permission_message">Yakındaki haritalar düzgün çalışmak için TELEFON DURUMUNU okumaya ihtiyaç duyuyor</string>
   <string name="contributions_of_user">Kullanıcının katkıları: %s</string>
   <string name="achievements_of_user">Kullanıcının başarıları: %s</string>
-  <string name="menu_view_user_page">Kullanıcı sayfasını görüntüle</string>
+  <string name="menu_view_user_page" fuzzy="true">Kullanıcı sayfasını görüntüle</string>
   <string name="edit_depictions">Betimlemeleri düzenle</string>
   <string name="edit_categories">Kategorileri düzenle</string>
   <string name="advanced_options">Gelişmiş Seçenekler</string>

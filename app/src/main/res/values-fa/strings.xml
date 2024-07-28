@@ -482,7 +482,7 @@
   <string name="display_monuments">نمایش یادمان‌ها</string>
   <string name="wlm_month_message">این ماه، ماه «ویکی دوست‌دار یادمان‌ها» است!</string>
   <string name="learn_more">بیشتر بدانید</string>
-  <string name="menu_view_user_page">نمایش صفحهٔ کاربر</string>
+  <string name="menu_view_user_page" fuzzy="true">نمایش صفحهٔ کاربر</string>
   <string name="advanced_options">گزینه‌های پیشرفته</string>
   <string name="apply">اعمال</string>
   <string name="reset">بازنشانی</string>

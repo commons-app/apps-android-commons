@@ -650,7 +650,7 @@
   <string name="need_permission">Potrebna je dozvola</string>
   <string name="contributions_of_user">Doprinosi korisnika/ce: %s</string>
   <string name="achievements_of_user">Dostignuća korisnika/ce: %s</string>
-  <string name="menu_view_user_page">Prikaži korisničku stranicu</string>
+  <string name="menu_view_user_page" fuzzy="true">Prikaži korisničku stranicu</string>
   <string name="edit_categories">Izmeni kategorije</string>
   <string name="advanced_options">Napredne opcije</string>
   <string name="apply">Primeni</string>

@@ -631,7 +631,7 @@
   <string name="need_permission">Tarvitaan käyttöoikeus</string>
   <string name="contributions_of_user">Käyttäjän muokkaukset: %s</string>
   <string name="achievements_of_user">Käyttäjän saavutukset: %s</string>
-  <string name="menu_view_user_page">Näytä käyttäjäsivu</string>
+  <string name="menu_view_user_page" fuzzy="true">Näytä käyttäjäsivu</string>
   <string name="edit_categories">Muokkaa luokkia</string>
   <string name="advanced_options">Lisäasetukset</string>
   <string name="apply">Käytä</string>

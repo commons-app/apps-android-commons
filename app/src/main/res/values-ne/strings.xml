@@ -280,7 +280,7 @@
   <string name="learn_more">थप जान्नुहोस्</string>
   <string name="wlm_campaign_title">विकी लभ्स मोनुमेन्टस्</string>
   <string name="need_permission">अनुमति आवश्यक</string>
-  <string name="menu_view_user_page">प्रयोगकर्ता पृष्ठ हेर्नुहोस्</string>
+  <string name="menu_view_user_page" fuzzy="true">प्रयोगकर्ता पृष्ठ हेर्नुहोस्</string>
   <string name="edit_categories">सम्पादन श्रेणीहरू</string>
   <string name="advanced_options">उन्नत विकल्प</string>
   <string name="advanced_query_info_text">तपाईँले निकटता क्वेरी अनुकूलन गर्न सक्नुहुन्छ। त्रुटी भएमा पूर्ववत् गर्नुभएर लागू गर्नुहोस्।</string>

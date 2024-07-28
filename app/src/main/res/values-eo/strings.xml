@@ -690,7 +690,7 @@
   <string name="read_phone_state_permission_message">Mapoj de Apude bezonas legi TELEFONAN STATON por funkcii bone</string>
   <string name="contributions_of_user">Kontribuoj de Uzanto: %s</string>
   <string name="achievements_of_user">Atingoj de Uzanto: %s</string>
-  <string name="menu_view_user_page">Vidi la uzantopaĝon</string>
+  <string name="menu_view_user_page" fuzzy="true">Vidi la uzantopaĝon</string>
   <string name="edit_depictions">Redakti priskribojn</string>
   <string name="edit_categories">Redakti kategoriojn</string>
   <string name="advanced_options">Elekteblecoj kromaj</string>
