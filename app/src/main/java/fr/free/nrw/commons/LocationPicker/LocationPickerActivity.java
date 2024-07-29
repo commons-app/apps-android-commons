@@ -45,6 +45,7 @@ import fr.free.nrw.commons.coordinates.CoordinateEditHelper;
 import fr.free.nrw.commons.filepicker.Constants;
 import fr.free.nrw.commons.kvstore.BasicKvStore;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationPermissionsHelper;
 import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -237,15 +238,28 @@ public class LocationPickerActivity extends BaseActivity implements
                 cameraPosition.getLongitude()));
         }
         setupMapView();
-        
-        if("UploadActivity".equals(activity)){
-            if(mapView != null && mapView.getController() != null && cameraPosition != null){
-                GeoPoint cameraGeoPoint = new GeoPoint(cameraPosition.getLatitude(),
-                    cameraPosition.getLongitude());
+    }
 
-                mapView.getController().setCenter(cameraGeoPoint);
-                mapView.getController().animateTo(cameraGeoPoint);
-            }
+    /**
+     * Moves the center of the map to the specified coordinates
+     *
+     */
+    private void moveMapTo(double latitude, double longitude){
+        if(mapView != null && mapView.getController() != null){
+            GeoPoint point = new GeoPoint(latitude, longitude);
+
+            mapView.getController().setCenter(point);
+            mapView.getController().animateTo(point);
+        }
+    }
+
+    /**
+     * Moves the center of the map to the specified coordinates
+     * @param point The GeoPoint object which contains the coordinates to move to
+     */
+    private void moveMapTo(GeoPoint point){
+        if(point != null){
+            moveMapTo(point.getLatitude(), point.getLongitude());
         }
     }
 
@@ -304,12 +318,20 @@ public class LocationPickerActivity extends BaseActivity implements
     }
 
     private void setupMapView() {
-        adjustCameraBasedOnOptions();
+        requestLocationPermissions();
+
+        //If EXIF data is available, move map to EXIF location.
+        if(activity.equals("UploadActivity")){
+            moveMapToMediaLocation();
+        } else {
+            //EXIF data is not available. Move map to device GPS location.
+            moveMapToGPSLocation();
+        }
+
         modifyLocationButton.setOnClickListener(v -> onClickModifyLocation());
         removeLocationButton.setOnClickListener(v -> onClickRemoveLocation());
-        showInMapButton.setOnClickListener(v -> showInMap());
+        showInMapButton.setOnClickListener(v -> showInMapApp());
         darkThemeSetup();
-        requestLocationPermissions();
     }
 
     /**
@@ -326,12 +348,7 @@ public class LocationPickerActivity extends BaseActivity implements
         smallToolbarText.setText(getResources().getString(R.string.pan_and_zoom_to_adjust));
         fabCenterOnLocation.setVisibility(View.VISIBLE);
         removeSelectedLocationMarker();
-        if (cameraPosition != null && mapView != null) {
-            if (mapView.getController() != null) {
-                mapView.getController().animateTo(new GeoPoint(cameraPosition.getLatitude(),
-                    cameraPosition.getLongitude()));
-            }
-        }
+        moveMapToMediaLocation();
     }
 
     /**
@@ -364,21 +381,53 @@ public class LocationPickerActivity extends BaseActivity implements
     }
 
     /**
-     * Show the location in map app
+     * Show the location in map app. Map will center on EXIF location, if available.
+     * If there is no EXIF data, the map will center on the commons app map center.
      */
-    public void showInMap() {
-        Utils.handleGeoCoordinates(this,
-            new fr.free.nrw.commons.location.LatLng(mapView.getMapCenter().getLatitude(),
-                mapView.getMapCenter().getLongitude(), 0.0f));
+    private void showInMapApp() {
+        fr.free.nrw.commons.location.LatLng position = null;
+
+        if(activity.equals("UploadActivity") && cameraPosition != null){
+            //EXIF location data is available
+            position = new fr.free.nrw.commons.location.LatLng(cameraPosition.getLatitude(),
+                cameraPosition.getLongitude(), 0.0f);
+        } else if(mapView != null){
+            //EXIF location data is not available
+            position = new fr.free.nrw.commons.location.LatLng(mapView.getMapCenter().getLatitude(),
+                mapView.getMapCenter().getLongitude(), 0.0f);
+        }
+
+        if(position != null){
+            Utils.handleGeoCoordinates(this, position);
+        }
     }
 
     /**
-     * move the location to the current media coordinates
+     * Moves the center of the map to the media's location (likely EXIF data), if that data
+     * is available.
      */
-    private void adjustCameraBasedOnOptions() {
+    private void moveMapToMediaLocation() {
         if (cameraPosition != null) {
-            mapView.getController().setCenter(new GeoPoint(cameraPosition.getLatitude(),
-                cameraPosition.getLongitude()));
+
+            GeoPoint point = new GeoPoint(cameraPosition.getLatitude(),
+                cameraPosition.getLongitude());
+
+            moveMapTo(point);
+        }
+    }
+
+    /**
+     * Moves the center of the map to the device's GPS location, if that data is available.
+     */
+    private void moveMapToGPSLocation(){
+        if(locationManager != null){
+            fr.free.nrw.commons.location.LatLng location = locationManager.getLastLocation();
+
+            if(location != null){
+                GeoPoint point = new GeoPoint(location.getLatitude(), location.getLongitude());
+
+                moveMapTo(point);
+            }
         }
     }
 
