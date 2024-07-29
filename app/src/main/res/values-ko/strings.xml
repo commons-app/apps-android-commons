@@ -76,6 +76,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">설정</string>
   <string name="intent_share_upload_label">공용에 업로드</string>
+  <string name="upload_in_progress">업로드 진행 중</string>
   <string name="username">사용자 이름</string>
   <string name="password">비밀번호</string>
   <string name="login_credential">공용 베타 계정으로 로그인합니다</string>
@@ -89,6 +90,7 @@
   <string name="login_success">로그인 성공!</string>
   <string name="login_failed">로그인 실패!</string>
   <string name="upload_failed">파일을 찾을 수 없습니다. 다른 파일을 사용해 주십시오.</string>
+  <string name="unrestricted_battery_mode">배터리 최적화를 끌까요?</string>
   <string name="authentication_failed">인증 실패. 다시 로그인해 주십시오</string>
   <string name="uploading_started">올리기를 시작했습니다!</string>
   <string name="uploading_queued">업로드 대기 중 (제한 연결 모드 활성화됨)</string>
@@ -140,6 +142,7 @@
   <string name="title_activity_settings">설정</string>
   <string name="title_activity_signup">가입하기</string>
   <string name="title_activity_featured_images">알찬 그림</string>
+  <string name="title_activity_custom_selector">사용자 지정 셀렉터</string>
   <string name="title_activity_category_details">분류</string>
   <string name="title_activity_review">동료평가</string>
   <string name="menu_about">정보</string>
@@ -204,6 +207,7 @@
   <string name="location_permission_title">위치 권한 요청 중</string>
   <string name="ok">확인</string>
   <string name="warning">경고</string>
+  <string name="duplicate_file_name">중복 파일 이름이 있습니다</string>
   <string name="upload">업로드</string>
   <string name="yes">예</string>
   <string name="no">아니오</string>
@@ -275,7 +279,7 @@
   <string name="skip_login">건너뛰기</string>
   <string name="navigation_item_login">로그인</string>
   <string name="skip_login_title">로그인을 건너뛰시겠습니까?</string>
-  <string name="skip_login_message" fuzzy="true">나중에 사진을 업로드하려면 로그인해야 합니다.</string>
+  <string name="skip_login_message">나중에 사진을 업로드하려면 로그인해야 합니다.</string>
   <string name="login_alert_message">이 기능을 사용하려면 로그인해 주십시오</string>
   <string name="copy_wikicode">위키텍스트를 클립보드에 복사</string>
   <string name="wikicode_copied">위키텍스트를 클립보드에 복사했습니다</string>
@@ -420,6 +424,8 @@
   <string name="achievements_fetch_failed" fuzzy="true">무언가가 잘못되어, 저희는 당신의 업적을 가져올 수 없었습니다</string>
   <string name="display_campaigns">캠페인 표시</string>
   <string name="display_campaigns_explanation">진행되고 있는 캠페인 보기</string>
+  <string name="option_allow">허용</string>
+  <string name="option_dismiss">숨기기</string>
   <string name="this_function_needs_network_connection" fuzzy="true">이 기능에는 네트워크 연결이 필요합니다. 연결 설정을 확인해 주십시오.</string>
   <string name="error_processing_image">이미지를 처리하는 동안 오류가 발생했습니다. 다시 시도해 주십시오!</string>
   <string name="getting_edit_token">편집을 위한 토큰을 가져옵니다</string>
@@ -478,7 +484,7 @@
   <string name="delete_helper_show_deletion_title_failed">실패</string>
   <string name="delete_helper_show_deletion_message_else">삭제를 요청하지 못했습니다.</string>
   <string name="delete_helper_ask_spam_selfie" fuzzy="true">셀카</string>
-  <string name="delete_helper_ask_spam_blurry" fuzzy="true">흐림</string>
+  <string name="delete_helper_ask_spam_blurry">완전히 흐림</string>
   <string name="delete_helper_ask_reason_copyright_press_photo">보도 사진</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">인터넷상의 무작위 이미지</string>
   <string name="delete_helper_ask_reason_copyright_logo">로고</string>
@@ -545,9 +551,11 @@
   <string name="resume">계속하기</string>
   <string name="paused">일시 중단됨</string>
   <string name="bookmarks">책갈피</string>
+  <string name="leaderboard_tab_title">리더보드</string>
   <string name="rank_prefix">순위:</string>
   <string name="leaderboard_column_rank">순위</string>
   <string name="leaderboard_column_user">사용자</string>
+  <string name="setting_avatar_dialog_title">리더보드 아바타로 설정</string>
   <string name="setting_avatar_dialog_message">아바타로 설정 중이니 기다려 주십시오</string>
   <string name="avatar_set_unsuccessfully">새 아바타를 설정하는 중 오류가 발생했습니다. 다시 시도해 주십시오</string>
   <string name="menu_set_avatar">아바타로 설정</string>
@@ -579,7 +587,11 @@
   <string name="modify_location">위치 편집</string>
   <string name="image_location">이미지 위치</string>
   <string name="check_whether_location_is_correct">위치가 올바른지 확인</string>
+  <string name="label">레이블</string>
+  <string name="description">설명</string>
   <string name="title_page_bookmarks_items">항목</string>
+  <string name="custom_selector_title">사용자 지정 셀렉터</string>
+  <string name="custom_selector_empty_text">이미지 없음</string>
   <string name="done">완료</string>
   <string name="back">뒤로</string>
   <string name="welcome_custom_picture_selector_text">커스텀 사진 선택기에 오신 것을 환영합니다.</string>
@@ -587,9 +599,15 @@
   <string name="custom_selector_info_text2">왼쪽 사진과 달리 오른쪽 사진에는 이미 업로드되었음을 나타내는 커먼즈 로고가 있습니다. \n이미지를 미리 보시려면 길게 터치하세요.</string>
   <string name="welcome_custom_selector_ok">훌륭합니다</string>
   <string name="custom_selector_already_uploaded_image_text">이 이미지는 이미 커먼즈에 업로드되었습니다.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">숨기기</string>
+  <string name="custom_selector_button_limit_text">최대: %1$d</string>
+  <string name="custom_selector_limit_error_desc">오류: 업로드 제한에 도달했습니다</string>
+  <string name="learn_more">더 알아보기</string>
   <string name="need_permission">권한 필요</string>
   <string name="contributions_of_user">사용자의 기여: %s</string>
-  <string name="menu_view_user_page" fuzzy="true">사용자 문서 보기</string>
+  <string name="achievements_of_user">사용자 달성도: %s</string>
+  <string name="menu_view_user_page">사용자 프로필 보기</string>
+  <string name="edit_depictions">묘사된 항목 편집하기</string>
   <string name="edit_categories">분류 편집</string>
   <string name="advanced_options">고급 옵션</string>
   <string name="apply">적용</string>
@@ -648,4 +666,7 @@
   <string name="saving_kml_file">KML 파일을 저장 중</string>
   <string name="saving_gpx_file">GPX 파일을 저장 중</string>
   <string name="multiple_files_depiction_header">다중 업로드에 대한 참고사항</string>
+  <string name="nearby_wikitalk">이 항목에 관한 문제를 위키데이터에 보고하기</string>
+  <string name="talk">토론</string>
+  <string name="other_problem_or_information_please_explain_below">기타 문제 또는 정보 (아래에 설명해 주십시오)</string>
 </resources>

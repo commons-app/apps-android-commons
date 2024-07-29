@@ -749,7 +749,7 @@
   <string name="read_phone_state_permission_message">Для правильной работы картам поблизости необходимо иметь доступ к СОСТОЯНИЮ ТЕЛЕФОНА.</string>
   <string name="contributions_of_user">Вклад участника: %s</string>
   <string name="achievements_of_user">Достижения участника: %s</string>
-  <string name="menu_view_user_page" fuzzy="true">Посмотреть страницу участника</string>
+  <string name="menu_view_user_page">Посмотреть профиль участника</string>
   <string name="edit_depictions">Редактировать описания</string>
   <string name="edit_categories">Изменить категории</string>
   <string name="advanced_options">Расширенные настройки</string>

@@ -23,6 +23,7 @@
 * أَحمد
 * ترجمان05
 * ديفيد
+* عبد الإله صديقي
 * علاء
 * محمد أحمد عبد الفتاح
 * مشعل الحربي
@@ -287,6 +288,7 @@
   <string name="navigation_item_about">حول</string>
   <string name="navigation_item_settings">الإعدادات</string>
   <string name="navigation_item_feedback">تعليقات</string>
+  <string name="navigation_item_feedback_github">ردود الفعل عبر \"غيت هاب\"</string>
   <string name="navigation_item_logout">تسجيل الخروج</string>
   <string name="navigation_item_info">مقدمة تعليمية</string>
   <string name="navigation_item_notification">إشعارات</string>
@@ -321,7 +323,7 @@
   <string name="skip_login">تجاوز</string>
   <string name="navigation_item_login">تسجيل الدخول</string>
   <string name="skip_login_title">هل تريد حقا تخطي تسجيل الدخول؟</string>
-  <string name="skip_login_message" fuzzy="true">يجب عليك تسجيل الدخول لرفع الصور في المستقبل.</string>
+  <string name="skip_login_message">سيتعين عليك في المستقبل تسجيل الدخول لتحميل الصور.</string>
   <string name="login_alert_message">الرجاء تسجيل الدخول لاستخدام هذه الميزة</string>
   <string name="copy_wikicode">انسخ نص الويكي إلى الكليب بورد</string>
   <string name="wikicode_copied">نص الويكي تم نسخه إلى الكليب بورد</string>
@@ -748,7 +750,7 @@
   <string name="read_phone_state_permission_message">تحتاج الخرائط المجاورة لقراءة PHONE STATE لتعمل بشكل صحيح</string>
   <string name="contributions_of_user">مساهمات المستخدم: %s</string>
   <string name="achievements_of_user">إنجازات المستخدم: %s</string>
-  <string name="menu_view_user_page" fuzzy="true">اعرض صفحة المستخدم</string>
+  <string name="menu_view_user_page">اعرض صفحة المستخدم</string>
   <string name="edit_depictions">تحرير الصور</string>
   <string name="edit_categories">تحرير الفئات</string>
   <string name="advanced_options">خيارات متقدمة</string>
@@ -778,6 +780,7 @@
   <string name="mark_as_not_for_upload">وضع علامة على أنه ليس للتحميل</string>
   <string name="unmark_as_not_for_upload">إلغاء علامة على أنه ليس للتحميل</string>
   <string name="marking_as_not_for_upload">إلغاء علامة على أنه ليس للرفع</string>
+  <string name="unmarking_as_not_for_upload">إلغاء علامة على أنه ليس للرفع</string>
   <string name="show_already_actioned_pictures">عرض الصور بالفعل</string>
   <string name="hiding_already_actioned_pictures">إخفاء الصور بالفعل</string>
   <string name="no_more_images_found">لم يتم العثور على المزيد من الصور</string>
