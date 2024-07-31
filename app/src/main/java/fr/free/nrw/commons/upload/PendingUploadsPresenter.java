@@ -154,7 +154,8 @@ public class PendingUploadsPresenter implements UserActionListener {
                             .doOnComplete(() -> {
                                 restartUploads(contributionList, index + 1, context);
                             })
-                            .subscribe());
+                            .subscribe(() -> WorkRequestHelper.Companion.makeOneTimeWorkRequest(
+                                context, ExistingWorkPolicy.KEEP)));
                     } else {
                         Timber.e("Contribution already exists");
                         compositeDisposable.add(contributionsRepository
@@ -176,7 +177,8 @@ public class PendingUploadsPresenter implements UserActionListener {
                 .doOnComplete(() -> {
                     restartUploads(contributionList, index + 1, context);
                 })
-                .subscribe());
+                .subscribe(() -> WorkRequestHelper.Companion.makeOneTimeWorkRequest(
+                    context, ExistingWorkPolicy.KEEP)));
         }
     }
 
@@ -201,7 +203,8 @@ public class PendingUploadsPresenter implements UserActionListener {
                         compositeDisposable.add(contributionsRepository
                             .save(it)
                             .subscribeOn(ioThreadScheduler)
-                            .subscribe());
+                            .subscribe(() -> WorkRequestHelper.Companion.makeOneTimeWorkRequest(
+                                context, ExistingWorkPolicy.KEEP)));
                     }else {
                         Timber.e("Contribution already exists");
                         compositeDisposable.add(contributionsRepository
@@ -215,7 +218,8 @@ public class PendingUploadsPresenter implements UserActionListener {
             compositeDisposable.add(contributionsRepository
                 .save(it)
                 .subscribeOn(ioThreadScheduler)
-                .subscribe());
+                .subscribe(() -> WorkRequestHelper.Companion.makeOneTimeWorkRequest(
+                    context, ExistingWorkPolicy.KEEP)));
         }
     }
 
