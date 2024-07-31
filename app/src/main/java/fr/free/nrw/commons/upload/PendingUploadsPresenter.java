@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.upload;
 
 
+import static fr.free.nrw.commons.utils.ImageUtils.IMAGE_OK;
+
 import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -14,6 +16,7 @@ import fr.free.nrw.commons.contributions.ContributionBoundaryCallback;
 import fr.free.nrw.commons.contributions.ContributionsRemoteDataSource;
 import fr.free.nrw.commons.contributions.ContributionsRepository;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
+import fr.free.nrw.commons.repository.UploadRepository;
 import fr.free.nrw.commons.upload.PendingUploadsContract.UserActionListener;
 import fr.free.nrw.commons.upload.PendingUploadsContract.View;
 import fr.free.nrw.commons.upload.worker.WorkRequestHelper;
@@ -33,7 +36,8 @@ import timber.log.Timber;
 public class PendingUploadsPresenter implements UserActionListener {
 
     private final ContributionBoundaryCallback contributionBoundaryCallback;
-    private final ContributionsRepository repository;
+    private final ContributionsRepository contributionsRepository;
+    private final UploadRepository uploadRepository;
     private final Scheduler ioThreadScheduler;
 
     private final CompositeDisposable compositeDisposable;
@@ -46,10 +50,12 @@ public class PendingUploadsPresenter implements UserActionListener {
     PendingUploadsPresenter(
         final ContributionBoundaryCallback contributionBoundaryCallback,
         final ContributionsRemoteDataSource contributionsRemoteDataSource,
-        final ContributionsRepository repository,
+        final ContributionsRepository contributionsRepository,
+        final UploadRepository uploadRepository,
         @Named(CommonsApplicationModule.IO_THREAD) final Scheduler ioThreadScheduler) {
         this.contributionBoundaryCallback = contributionBoundaryCallback;
-        this.repository = repository;
+        this.contributionsRepository = contributionsRepository;
+        this.uploadRepository = uploadRepository;
         this.ioThreadScheduler = ioThreadScheduler;
         this.contributionsRemoteDataSource = contributionsRemoteDataSource;
         compositeDisposable = new CompositeDisposable();
@@ -68,7 +74,7 @@ public class PendingUploadsPresenter implements UserActionListener {
                 .setPageSize(10).build();
         Factory<Integer, Contribution> factory;
 
-        factory = repository.fetchContributionsWithStatesSortedByDateUploadStarted(
+        factory = contributionsRepository.fetchContributionsWithStatesSortedByDateUploadStarted(
             Arrays.asList(Contribution.STATE_QUEUED, Contribution.STATE_IN_PROGRESS,
                 Contribution.STATE_PAUSED));
         LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
@@ -82,7 +88,7 @@ public class PendingUploadsPresenter implements UserActionListener {
                 .setPrefetchDistance(50)
                 .setPageSize(10).build();
         Factory<Integer, Contribution> factory;
-        factory = repository.fetchContributionsWithStatesSortedByDateUploadStarted(
+        factory = contributionsRepository.fetchContributionsWithStatesSortedByDateUploadStarted(
             Collections.singletonList(Contribution.STATE_FAILED));
         LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
             pagedListConfig);
@@ -103,7 +109,7 @@ public class PendingUploadsPresenter implements UserActionListener {
 
     @Override
     public void deleteUpload(final Contribution contribution, Context context) {
-        compositeDisposable.add(repository
+        compositeDisposable.add(contributionsRepository
             .deleteContributionFromDB(contribution)
             .subscribeOn(ioThreadScheduler)
             .subscribe());
@@ -111,14 +117,14 @@ public class PendingUploadsPresenter implements UserActionListener {
 
     public void pauseUploads(List<Integer> states, int newState) {
         CommonsApplication.isPaused = true ;
-        compositeDisposable.add(repository
+        compositeDisposable.add(contributionsRepository
             .updateContributionWithStates(states, newState)
             .subscribeOn(ioThreadScheduler)
             .subscribe());
     }
 
     public void deleteUploads(List<Integer> states) {
-        compositeDisposable.add(repository
+        compositeDisposable.add(contributionsRepository
             .deleteContributionsFromDBWithStates(states)
             .subscribeOn(ioThreadScheduler)
             .subscribe());
@@ -132,27 +138,46 @@ public class PendingUploadsPresenter implements UserActionListener {
         Contribution it = contributionList.get(index);
         if (it.getState() == Contribution.STATE_FAILED) {
             it.setDateUploadStarted(Calendar.getInstance().getTime());
-            if (it.getErrorInfo() == null){
+            if (it.getErrorInfo() == null) {
                 it.setChunkInfo(null);
                 it.setTransferred(0);
             }
-        }
-        it.setState(Contribution.STATE_QUEUED);
-        compositeDisposable.add(repository
-            .save(it)
-            .subscribeOn(ioThreadScheduler)
-            .doOnComplete(() -> {
-                    restartUploads(contributionList, index + 1, context);
-                }
-            )
-            .subscribe(() ->
-                    WorkRequestHelper.Companion.makeOneTimeWorkRequest(
-                        context, ExistingWorkPolicy.KEEP),
-                throwable -> {
+            compositeDisposable.add(uploadRepository
+                .checkDuplicateImage(it.getLocalUriPath().getPath())
+                .subscribeOn(ioThreadScheduler)
+                .subscribe(imageCheckResult -> {
+                    if (imageCheckResult == IMAGE_OK) {
+                        it.setState(Contribution.STATE_QUEUED);
+                        compositeDisposable.add(contributionsRepository
+                            .save(it)
+                            .subscribeOn(ioThreadScheduler)
+                            .doOnComplete(() -> {
+                                restartUploads(contributionList, index + 1, context);
+                            })
+                            .subscribe());
+                    } else {
+                        Timber.e("Contribution already exists");
+                        compositeDisposable.add(contributionsRepository
+                            .deleteContributionFromDB(it)
+                            .subscribeOn(ioThreadScheduler).doOnComplete(() -> {
+                                restartUploads(contributionList, index + 1, context);
+                            })
+                            .subscribe());
+                    }
+                }, throwable -> {
                     Timber.e(throwable);
                     restartUploads(contributionList, index + 1, context);
-                }
-            ));
+                }));
+        } else {
+            it.setState(Contribution.STATE_QUEUED);
+            compositeDisposable.add(contributionsRepository
+                .save(it)
+                .subscribeOn(ioThreadScheduler)
+                .doOnComplete(() -> {
+                    restartUploads(contributionList, index + 1, context);
+                })
+                .subscribe());
+        }
     }
 
     public void restartUpload(List<Contribution> contributionList, int index, Context context) {
@@ -167,18 +192,31 @@ public class PendingUploadsPresenter implements UserActionListener {
                 it.setChunkInfo(null);
                 it.setTransferred(0);
             }
+            compositeDisposable.add(uploadRepository
+                .checkDuplicateImage(it.getLocalUriPath().getPath())
+                .subscribeOn(ioThreadScheduler)
+                .subscribe(imageCheckResult -> {
+                    if (imageCheckResult == IMAGE_OK) {
+                        it.setState(Contribution.STATE_QUEUED);
+                        compositeDisposable.add(contributionsRepository
+                            .save(it)
+                            .subscribeOn(ioThreadScheduler)
+                            .subscribe());
+                    }else {
+                        Timber.e("Contribution already exists");
+                        compositeDisposable.add(contributionsRepository
+                            .deleteContributionFromDB(it)
+                            .subscribeOn(ioThreadScheduler)
+                            .subscribe());
+                    }
+                }));
+        } else {
+            it.setState(Contribution.STATE_QUEUED);
+            compositeDisposable.add(contributionsRepository
+                .save(it)
+                .subscribeOn(ioThreadScheduler)
+                .subscribe());
         }
-        it.setState(Contribution.STATE_QUEUED);
-        compositeDisposable.add(repository
-            .save(it)
-            .subscribeOn(ioThreadScheduler)
-            .subscribe(() ->
-                    WorkRequestHelper.Companion.makeOneTimeWorkRequest(
-                        context, ExistingWorkPolicy.KEEP),
-                throwable -> {
-                    Timber.e(throwable);
-                }
-            ));
     }
 
 }
