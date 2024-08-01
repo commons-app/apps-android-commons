@@ -14,6 +14,7 @@
 * Dream Star.cn
 * Googology
 * GuoPC
+* Huajing
 * Hydra
 * Ken418
 * Kuailong
@@ -636,6 +637,7 @@
   <string name="ask_to_turn_location_on">打开位置？</string>
   <string name="ask_to_turn_location_on_text">请开启定位服务，以便应用显示您当前的位置</string>
   <string name="nearby_needs_location">附近需要启用位置才能正常工作</string>
+  <string name="explore_map_needs_location">探索地图需要定位权限才能显示附近图片</string>
   <string name="upload_map_location_access">您需要授予位置权限才能自动设置位置。</string>
   <string name="use_location_from_similar_image">您是在同一地点拍摄这两张图片的吗？您想要使用右侧图片的纬度/经度吗？</string>
   <string name="load_more">加载更多</string>
@@ -724,6 +726,10 @@
   <string name="custom_selector_info_text2">右边的图片与左边的不同，它具有已上传至维基共享资源的标志。\n点击并长按来预览图像。</string>
   <string name="welcome_custom_selector_ok">棒极了</string>
   <string name="custom_selector_already_uploaded_image_text">此图像已上传至维基共享资源。</string>
+  <string name="custom_selector_over_limit_warning">出于技术原因，该应用无法可靠地一次性上传超过%1$d张照片。%2$d张已经超过%1$d张的上传限制。</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">关闭</string>
+  <string name="custom_selector_button_limit_text">最大：%1$d</string>
+  <string name="custom_selector_limit_error_desc">错误：超出上传限制</string>
   <string name="wlm_upload_info">此图像将会进入维基爱古迹竞赛</string>
   <string name="display_monuments">显示古迹</string>
   <string name="wlm_month_message">维基爱古迹的月份！</string>
@@ -787,12 +793,15 @@
   <string name="storage_permissions_denied">存储权限被拒绝</string>
   <string name="unable_to_share_upload_item">无法分享此项目</string>
   <string name="permissions_are_required_for_functionality">功能需要权限</string>
+  <string name="learn_how_to_write_a_useful_description">了解如何写出有用的描述</string>
+  <string name="learn_how_to_write_a_useful_caption">了解如何写出有用的注释</string>
   <string name="see_your_achievements">查看您的成果</string>
   <string name="edit_image">编辑图片</string>
   <string name="edit_location">编辑位置</string>
   <string name="location_updated">位置已更新！</string>
   <string name="remove_location">移除位置</string>
   <string name="remove_location_warning_title">移除位置警告</string>
+  <string name="remove_location_warning_desc">定位信息使图片更加有用、更容易被找到。您真的希望从这张图片中删除定位信息吗？</string>
   <string name="location_removed">位置已移除！</string>
   <string name="send_thanks_to_author">感谢作者</string>
   <string name="error_sending_thanks">向作者发送感谢时出错。</string>
@@ -809,4 +818,14 @@
     <item quantity="one">已选择%d个图像</item>
     <item quantity="other">已选择%d个图像</item>
   </plurals>
+  <string name="multiple_files_depiction">请记住，每次多图片上传会为其中的所有图片标注相同的分类和描述。如果这些图片并不共享同样的描述和分类，请分别进行多次上传。</string>
+  <string name="multiple_files_depiction_header">关于多图片上传的提醒</string>
+  <string name="nearby_wikitalk">向维基数据报告关于该项的问题</string>
+  <string name="please_enter_some_comments">请输入一些评论。</string>
+  <string name="talk">讨论</string>
+  <string name="write_something_about_the_item">请写一些关于项目“%1$s”的信息。所写的内容是公开可见的。</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">“%1$s”已不再存在，无法拍摄它的照片。</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">“%1$s”位于一个不同的位置。请在下方给出正确的位置，可以的话请填写正确的经纬度。</string>
+  <string name="other_problem_or_information_please_explain_below">其他问题或信息（请在下方解释）。</string>
+  <string name="feedback_destination_note">您的反馈已经发布在以下wiki页面：&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
 </resources>
