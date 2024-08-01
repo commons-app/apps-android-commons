@@ -9,6 +9,8 @@ import io.reactivex.Completable;
 
 /**
  * Data Access Object (DAO) for accessing the Place entity in the database.
+ * This class provides methods for storing and retrieving Place objects,
+ * utilized for the caching of places in the Nearby Map feature.
  */
 @Dao
 public abstract class PlaceDao {

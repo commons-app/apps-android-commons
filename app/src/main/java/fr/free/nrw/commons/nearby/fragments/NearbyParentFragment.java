@@ -208,7 +208,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private Place nearestPlace;
     private volatile boolean stopQuery;
 
-    private List<Place> updatedPlaceList;
+    private List<Place> updatedPlacesList;
     private LatLng updatedLatLng;
     private boolean searchable;
 
@@ -610,11 +610,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
                 if (lastFocusLocation == null && lastKnownLocation == null) {
                     locationPermissionGranted();
-                } else if (updatedPlaceList != null) {
-                    if (updatedPlaceList.size() != 0) {
-                        loadPlacesDataAsync(updatedPlaceList, updatedLatLng);
+                } else if (updatedPlacesList != null) {
+                    if (updatedPlacesList.size() != 0) {
+                        loadPlacesDataAsync(updatedPlacesList, updatedLatLng);
                     } else {
-                        updateMapMarkers(updatedPlaceList, getLastMapFocus(), false);
+                        updateMapMarkers(updatedPlacesList, getLastMapFocus(), false);
                     }
                 }
             } else {
@@ -1257,10 +1257,10 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                             ? getTextBetweenParentheses(
                             updatedPlace.getLongDescription()) : updatedPlace.getLongDescription());
                     marker.showInfoWindow();
-                    for (int i = 0; i < updatedPlaceList.size(); i++) {
-                        Place pl = updatedPlaceList.get(i);
+                    for (int i = 0; i < updatedPlacesList.size(); i++) {
+                        Place pl = updatedPlacesList.get(i);
                         if (pl.location == updatedPlace.location) {
-                            updatedPlaceList.set(i, updatedPlace);
+                            updatedPlacesList.set(i, updatedPlace);
                             savePlaceToDatabase(place);
                         }
                     }
@@ -1373,7 +1373,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         int batchSize = 3;
 
         updatedLatLng = curLatLng;
-        updatedPlaceList = new ArrayList<>(placeList);
+        updatedPlacesList = new ArrayList<>(placeList);
 
         // Sorts the places by distance to ensure the nearest pins are ready for the user as soon
         // as possible.
@@ -1382,7 +1382,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 Comparator.comparingDouble(place -> place.getDistanceInDouble(getMapFocus())));
         }
         stopQuery = false;
-        processBatchesSequentially(places, batchSize, updatedPlaceList, curLatLng, 0);
+        processBatchesSequentially(places, batchSize, updatedPlacesList, curLatLng, 0);
     }
 
     /**

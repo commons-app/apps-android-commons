@@ -65,6 +65,19 @@ public class Place implements Parcelable {
         this.entityID = entityID;
     }
 
+    public Place(String language, String name, Label label, String longDescription, LatLng location,
+        String category, Sitelinks siteLinks, String pic, Boolean exists) {
+        this.language = language;
+        this.name = name;
+        this.label = label;
+        this.longDescription = longDescription;
+        this.location = location;
+        this.category = category;
+        this.siteLinks = siteLinks;
+        this.pic = (pic == null) ? "" : pic;
+        this.exists = exists;
+    }
+
     public Place(String name, String longDescription, LatLng location, String category,
         Sitelinks siteLinks, String pic, String thumb, String entityID) {
         this.name = name;
@@ -345,19 +358,40 @@ public class Place implements Parcelable {
         return thumb;
     }
 
+    /**
+     * Sets the thumbnail URL for the place.
+     *
+     * @param thumb the thumbnail URL to set
+     */
     public void setThumb(String thumb) {
         this.thumb = thumb;
     }
 
+    /**
+     * Sets the label for the place.
+     *
+     * @param label the label to set
+     */
     public void setLabel(Label label) {
         this.label = label;
     }
 
+    /**
+     * Sets the long description for the place.
+     *
+     * @param longDescription the long description to set
+     */
     public void setLongDescription(String longDescription) {
         this.longDescription = longDescription;
     }
 
+    /**
+     * Sets the Commons category for the place.
+     *
+     * @param category the category to set
+     */
     public void setCategory(String category) {
         this.category = category;
     }
+
 }
