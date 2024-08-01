@@ -64,7 +64,7 @@ class BookMarkLocationDaoTest {
 
 
         examplePlaceBookmark = Place("en", "placeName", exampleLabel, "placeDescription"
-            , exampleLocation, "placeCategory", builder.build(),"picName",false, "entityID")
+            , exampleLocation, "placeCategory", builder.build(),"picName",false)
         testObject = BookmarkLocationsDao { client }
     }
 
@@ -100,7 +100,6 @@ class BookMarkLocationDaoTest {
                 assertEquals(builder.build().commonsLink, it.siteLinks.commonsLink)
                 assertEquals("picName", it.pic)
                 assertEquals(false, it.exists)
-                assertEquals("entityID", it.entityID)
             }
         }
     }
@@ -151,7 +150,7 @@ class BookMarkLocationDaoTest {
         assertTrue(testObject.updateBookmarkLocation(examplePlaceBookmark))
         verify(client).insert(eq(BASE_URI), captor.capture())
         captor.firstValue.let { cv ->
-            assertEquals(14, cv.size())
+            assertEquals(13, cv.size())
             assertEquals(examplePlaceBookmark.name, cv.getAsString(COLUMN_NAME))
             assertEquals(examplePlaceBookmark.language, cv.getAsString(COLUMN_LANGUAGE))
             assertEquals(examplePlaceBookmark.longDescription, cv.getAsString(COLUMN_DESCRIPTION))
@@ -295,7 +294,6 @@ class BookMarkLocationDaoTest {
                     add(51.4)
                     add("picName")
                     add(false)
-                    add("entityID")
                 }
             }
         }
