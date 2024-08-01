@@ -39,8 +39,7 @@ class BookMarkLocationDaoTest {
         COLUMN_LAT,
         COLUMN_LONG,
         COLUMN_PIC,
-        COLUMN_EXISTS,
-        COLUMN_ENTITY_ID)  
+        COLUMN_EXISTS)
     private val client: ContentProviderClient = mock()
     private val database: SQLiteDatabase = mock()
     private val captor = argumentCaptor<ContentValues>()
@@ -165,7 +164,6 @@ class BookMarkLocationDaoTest {
             assertEquals(examplePlaceBookmark.siteLinks.commonsLink.toString(), cv.getAsString(COLUMN_COMMONS_LINK))
             assertEquals(examplePlaceBookmark.pic, cv.getAsString(COLUMN_PIC))
             assertEquals(examplePlaceBookmark.exists.toString(), cv.getAsString(COLUMN_EXISTS))
-            assertEquals(examplePlaceBookmark.entityID, cv.getAsString(COLUMN_ENTITY_ID))
         }
     }
 
