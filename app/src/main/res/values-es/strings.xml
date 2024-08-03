@@ -16,6 +16,7 @@
 * DannyS712
 * Destinid10 2
 * DiegoAmbrocio
+* EmicraftNoob
 * Eulalio
 * Fewasser Traduce
 * Fitoschido
@@ -316,7 +317,7 @@
   <string name="skip_login">Omitir</string>
   <string name="navigation_item_login">Acceder</string>
   <string name="skip_login_title">¿Quieres realmente omitir el inicio de sesión?</string>
-  <string name="skip_login_message" fuzzy="true">Deberías iniciar sesión para subir imágenes en el futuro.</string>
+  <string name="skip_login_message">Debes iniciar sesión para subir imágenes en el futuro.</string>
   <string name="login_alert_message">Por favor inicia sesion para usar esta característica</string>
   <string name="copy_wikicode">Copia el wikitexto al portapapeles</string>
   <string name="wikicode_copied">El wikitexto fue copiado al portapapeles</string>
@@ -734,7 +735,7 @@
   <string name="read_phone_state_permission_message">Los mapas cercanos necesitan leer ESTADO DEL TELÉFONO para funcionar correctamente</string>
   <string name="contributions_of_user">Contribuciones del usuario: %s</string>
   <string name="achievements_of_user">Logros del usuario: %s</string>
-  <string name="menu_view_user_page" fuzzy="true">Ver página de usuario</string>
+  <string name="menu_view_user_page">Ver perfil de usuario</string>
   <string name="edit_depictions">Editar las descripciones</string>
   <string name="edit_categories">Editar categorías</string>
   <string name="advanced_options">Opciones avanzadas</string>
@@ -787,6 +788,8 @@
   <string name="storage_permissions_denied">Se denegaron los permisos de almacenamiento</string>
   <string name="unable_to_share_upload_item">No se puede compartir este elemento</string>
   <string name="permissions_are_required_for_functionality">Se requieren permisos para la funcionalidad</string>
+  <string name="edit_image">Editar Imagen</string>
+  <string name="edit_location">Editar Ubicación</string>
   <string name="location_updated">¡Ubicación actualizada!</string>
   <string name="remove_location">Quitar ubicación</string>
   <string name="remove_location_warning_title">Eliminar el aviso de ubicación</string>
