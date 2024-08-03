@@ -610,11 +610,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
                 if (lastFocusLocation == null && lastKnownLocation == null) {
                     locationPermissionGranted();
-                } else if (updatedPlacesList != null) {
-                    if (updatedPlacesList.size() != 0) {
-                        loadPlacesDataAsync(updatedPlacesList, updatedLatLng);
-                    } else {
-                        updateMapMarkers(updatedPlacesList, getLastMapFocus(), false);
+                } else{
+                    if (updatedPlacesList != null) {
+                        if (!updatedPlacesList.isEmpty()) {
+                            loadPlacesDataAsync(updatedPlacesList, updatedLatLng);
+                        } else {
+                            updateMapMarkers(updatedPlacesList, getLastMapFocus(), false);
+                        }
+                    }else {
+                        locationPermissionGranted();
                     }
                 }
             } else {
