@@ -8,8 +8,10 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.contributions.ChunkInfo;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.nearby.Sitelinks;
 import fr.free.nrw.commons.upload.WikidataPlace;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
+import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -132,6 +134,18 @@ public class Converters {
     @TypeConverter
     public static List<DepictedItem> stringToList(String depictedItems) {
         return readObjectWithTypeToken(depictedItems, new TypeToken<List<DepictedItem>>() {});
+    }
+
+    @TypeConverter
+    public static Sitelinks sitelinksFromString(String value) {
+        Type type = new TypeToken<Sitelinks>() {}.getType();
+        return new Gson().fromJson(value, type);
+    }
+
+    @TypeConverter
+    public static String fromSitelinks(Sitelinks sitelinks) {
+        Gson gson = new Gson();
+        return gson.toJson(sitelinks);
     }
 
     private static String writeObjectToString(Object object) {

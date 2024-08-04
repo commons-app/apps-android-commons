@@ -25,6 +25,7 @@
   <string name="nearby_row_image">Рәсем</string>
   <string name="nearby_all">Барыһы ла</string>
   <string name="nearby_filter_toggle">Өҫкә күсерергә</string>
+  <string name="nearby_filter_search">Эҙләү күренеше</string>
   <string name="appwidget_img">Көн рәсеме</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d файл йөкләнә</item>
@@ -35,10 +36,9 @@
     <item quantity="other">(%1$d)</item>
   </plurals>
   <string name="starting_uploads">Йөкләүҙе башлау</string>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">%1$d тейәү башлана</item>
-    <item quantity="few">%1$d тейәү башлана</item>
-    <item quantity="other">%1$d тейәүҙәр башлана</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">%d файлды эшкәртеү</item>
+    <item quantity="other">%d файлды эшкәртеү</item>
   </plurals>
   <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d тейәү</item>
@@ -65,17 +65,22 @@
   <string name="logging_in_message">Зинһар, көтөгөҙ...</string>
   <string name="updating_caption_title">Аңлатмалар һәм тасуирламалар яңыртыла</string>
   <string name="updating_caption_message">Зинһар, көтөгөҙ...</string>
-  <string name="login_success" fuzzy="true">Уңышлы танылдығыҙ!</string>
-  <string name="login_failed" fuzzy="true">Танылыу хатаһы!</string>
+  <string name="login_success">Системаға инеү уңышлы!</string>
+  <string name="login_failed">Системаға инеү уңышһыҙ!</string>
   <string name="upload_failed">Файл табылманы. Башҡа файлды эҙләп ҡарағыҙ.</string>
-  <string name="authentication_failed" fuzzy="true">Танылыу хатаһы. Зинһар, тағы бер тапҡыр танылығыҙ.</string>
+  <string name="retry_limit_reached">Ҡабатлап ҡарауҙың иң күп һаны етте! Зинһар, йөкләүҙе кире алығыҙ һәм яңынан ҡабатлап ҡарағыҙ</string>
+  <string name="unrestricted_battery_mode">Батарея оптимизацияһын һүндерергәме?</string>
+  <string name="suggest_unrestricted_mode">Башҡортсаға тәржемә:\n\n3-тән артыҡ һүрәтте йөкләү батарея оптимизацияһы һүндерелгәндә ышаныслыраҡ эшләй. Зинһар, Commons ҡушымтаһы өсөн көйләүҙәрҙән батарея оптимизацияһын һүндерегеҙ, был йөкләү тәжрибәһен яҡшыртасаҡ.\n\nБатарея оптимизацияһын һүндереү өсөн мөмкин булған аҙымдар:\n\n1-се аҙым: Түбәндәге \'Көйләүҙәр\' төймәһенә баҫығыҙ.\n\n2-се аҙым: \'Оптимизацияланмаған\'дан \'Бөтә ҡушымталар\'ға күсегеҙ.\n\n3-сө аҙым: \"Commons\" йәки \"fr.free.nrw.commons\" тип эҙләгеҙ.\n\n4-се аҙым: Уға баҫығыҙ һәм \'Оптимизацияламаҫҡа\' һайлағыҙ.\n\n5-се аҙым: \'Әҙер\' төймәһенә баҫығыҙ.</string>
+  <string name="authentication_failed">Аутентификация үтәлмәне. Зинһар, ҡабаттан системаға инегеҙ.</string>
   <string name="uploading_started">Йөкләү башланды!</string>
+  <string name="uploading_queued">Йөкләү сиратҡа ҡуйылды (сикләнгән бәйләнеш режимы эшләтеп ебәрелде).</string>
   <string name="upload_completed_notification_title">%1$s йөкләнде!</string>
   <string name="upload_completed_notification_text">Ошонда баҫып йөкләнгән файлды ҡара</string>
   <string name="upload_progress_notification_title_start">Файлды йөкләү: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s йөкләнә</string>
   <string name="upload_progress_notification_title_finishing">Йөкләү %1$s тамамланды</string>
   <string name="upload_failed_notification_title">%1$s йөкләп булманы</string>
+  <string name="upload_paused_notification_title">%1$s йөкләү туҡтатылды</string>
   <string name="upload_failed_notification_subtitle">Ҡарау өсөн баҫығыҙ</string>
   <string name="upload_paused_notification_subtitle">Ҡарау өсөн баҫығыҙ</string>
   <string name="title_activity_contributions">Һуңғы йөкләүҙәрем</string>
@@ -93,11 +98,11 @@
   <string name="add_caption_toast">Зинһар, был файлдың исемен күрһәтегеҙ</string>
   <string name="share_description_hint">Тасуирлама</string>
   <string name="share_caption_hint">Ҡултамға (Имза)</string>
-  <string name="login_failed_network" fuzzy="true">Инеп булмай - интернет хатаһы</string>
+  <string name="login_failed_network">Системаға инеп булмай - селтәр хатаһы</string>
   <string name="login_failed_throttled">Бик күп уңышһыҙ ынтылыштар булды. Зинһар, бер нисә минуттан тағы ла инеп ҡара.</string>
   <string name="login_failed_blocked">Ғәфү итегеҙ, әммә был ҡатнашыусы Викимилектә бикләнгән</string>
   <string name="login_failed_2fa_needed">Ике тапҡыр раҫлай торған кодты яҙырға кәрәк</string>
-  <string name="login_failed_generic" fuzzy="true">Танылыу хатаһы!</string>
+  <string name="login_failed_generic">Системаға инеү уңышһыҙ!</string>
   <string name="share_upload_button">Йөкләү</string>
   <string name="multiple_share_base_title">Был файлдар төкөмөнә атама бирегеҙ</string>
   <string name="provider_modifications">Үҙгәртеүҙәр</string>

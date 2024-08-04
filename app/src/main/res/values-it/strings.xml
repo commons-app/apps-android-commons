@@ -696,7 +696,7 @@
   <string name="read_phone_state_permission_message">Le mappe vicine hanno bisogno di leggere lo STATO DEL TELEFONO per funzionare correttamente</string>
   <string name="contributions_of_user">Contributi dell\'utente: %s</string>
   <string name="achievements_of_user">Traguardi dell\'utente: %s</string>
-  <string name="menu_view_user_page">Vedi la pagina utente</string>
+  <string name="menu_view_user_page">Vedi il profilo utente</string>
   <string name="edit_depictions">Modifica le descrizioni</string>
   <string name="edit_categories">Modifica le categorie</string>
   <string name="advanced_options">Opzioni avanzate</string>

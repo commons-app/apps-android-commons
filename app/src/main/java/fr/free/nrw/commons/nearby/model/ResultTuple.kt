@@ -6,7 +6,7 @@ class ResultTuple {
     @SerializedName("xml:lang")
     val language: String
     val type: String
-    val value: String
+    var value: String
 
     constructor(lang: String, type: String, value: String) {
         this.language = lang

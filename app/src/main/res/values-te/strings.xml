@@ -611,7 +611,7 @@
   <string name="need_permission">అనుమతి కావాలి</string>
   <string name="contributions_of_user">వాడుకరి తోడ్పాట్లు: %s</string>
   <string name="achievements_of_user">వాడుకరి సాధించినవి: %s</string>
-  <string name="menu_view_user_page">వాడుకరి పేజీ చూడండి</string>
+  <string name="menu_view_user_page" fuzzy="true">వాడుకరి పేజీ చూడండి</string>
   <string name="edit_categories">వర్గాల్లో దిద్దుబాట్లు</string>
   <string name="advanced_options">ఉన్నత ఎంపికలు</string>
   <string name="advanced_query_info_text">సమీపంలోని క్వెరీని మీరు ఇష్టానుసారం పెట్టుకోవచ్చు. లోపాలేమైనా ఎదురైతే, రిసెట్ చేసి, అప్లై చెయ్యండి.</string>

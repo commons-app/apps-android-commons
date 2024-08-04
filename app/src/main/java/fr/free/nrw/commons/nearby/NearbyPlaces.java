@@ -121,6 +121,22 @@ public class NearbyPlaces {
     }
 
     /**
+     * Retrieves a list of places based on the provided list of places and language.
+     *
+     * This method fetches place information from a Wikidata query using the specified language.
+     *
+     * @param placeList A list of Place objects for which to fetch information.
+     * @param lang      The language code to use for the query.
+     * @return A list of Place objects obtained from the Wikidata query.
+     * @throws Exception If an error occurs during the retrieval process.
+     */
+    public List<Place> getPlaces(final List<Place> placeList,
+        final String lang) throws Exception {
+        return okHttpJsonApiClient
+            .getPlaces(placeList, lang);
+    }
+
+    /**
      * Runs the Wikidata query to retrieve the KML String
      *
      * @param leftLatLng  coordinates of Left Most position

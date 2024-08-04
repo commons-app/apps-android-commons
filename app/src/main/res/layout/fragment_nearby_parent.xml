@@ -18,7 +18,8 @@
 
         <include
           android:id="@+id/nearby_filter"
-          layout="@layout/nearby_filter_all_items" />
+          layout="@layout/nearby_filter_all_items"
+          android:visibility="visible" />
 
         <RelativeLayout
           android:id="@+id/rl_container_wlm_month_message"
@@ -95,22 +96,6 @@
 
         </RelativeLayout>
 
-
-        <Button
-          android:id="@+id/search_this_area_button"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_below="@id/rl_container_wlm_month_message"
-          android:layout_centerHorizontal="true"
-          android:layout_gravity="center_horizontal"
-          android:layout_margin="@dimen/activity_margin_horizontal"
-          android:background="@color/white"
-          android:padding="@dimen/activity_margin_horizontal"
-          android:singleLine="true"
-          android:text="@string/search_this_area"
-          android:textColor="@color/status_bar_blue"
-          android:visibility="gone"
-          app:elevation="@dimen/dimen_6" />
 
         <View
           android:id="@+id/transparentView"

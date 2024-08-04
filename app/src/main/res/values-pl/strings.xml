@@ -4,6 +4,7 @@
 * Chrumps
 * CiaPan
 * DeRudySoulStorm
+* Frozengeist
 * IOIOI
 * InternerowyGołąb
 * Kareyac
@@ -716,7 +717,7 @@
   <string name="read_phone_state_permission_message">Mapy znajdujące się w pobliżu muszą odczytywać STAN TELEFONU, aby działały poprawnie</string>
   <string name="contributions_of_user">Wkład użytkownika: %s</string>
   <string name="achievements_of_user">Osiągnięcia użytkownika: %s</string>
-  <string name="menu_view_user_page">Wyświetl stronę użytkownika</string>
+  <string name="menu_view_user_page" fuzzy="true">Wyświetl stronę użytkownika</string>
   <string name="edit_depictions">Edycja przedstawień</string>
   <string name="edit_categories">Edycja kategorii</string>
   <string name="advanced_options">Opcje zaawansowane</string>
@@ -771,4 +772,9 @@
   <string name="edit_location">Edytuj lokalizację</string>
   <string name="send_thanks_to_author">Dziękuję autorowi</string>
   <string name="error_sending_thanks">Błąd wysyłania podziękowań do autora.</string>
+  <string name="file_saved_successfully">Pomyślnie zapisano</string>
+  <string name="do_you_want_to_open_gpx_file">Chcesz otworzyć plik GPX?</string>
+  <string name="do_you_want_to_open_kml_file">Chcesz otworzyć plik KML?</string>
+  <string name="failed_to_save_kml_file">Nie udało się zapisać pliku KML.</string>
+  <string name="failed_to_save_gpx_file">Nie udało się zapisać pliku GPX.</string>
 </resources>

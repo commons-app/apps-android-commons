@@ -239,7 +239,7 @@ class UploadMediaPresenterTest {
     fun setCorrectCountryCodeForReceivedImage() {
 
         val germanyAsPlace =
-            Place(null, null, null, null, LatLng(50.1, 10.2, 1.0f), null, null, null, true)
+            Place(null, null, null, null, LatLng(50.1, 10.2, 1.0f), null, null, null, true, null)
         germanyAsPlace.isMonument = true
 
         whenever(

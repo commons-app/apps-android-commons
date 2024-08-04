@@ -577,7 +577,7 @@
   <string name="read_phone_state_permission_message">Map banɛ bɛ yamma bɔɔd ye ba karim Moba zi\'esim ka nyaŋi tʋm sʋ\'ʋŋa</string>
   <string name="contributions_of_user">Tʋmtʋm tʋʋma: %s</string>
   <string name="achievements_of_user">Tʋmtʋm nyɔɔd: %s</string>
-  <string name="menu_view_user_page">Gɔsim tʋmtʋm lakir zin\'ig</string>
+  <string name="menu_view_user_page" fuzzy="true">Gɔsim tʋmtʋm lakir zin\'ig</string>
   <string name="edit_depictions">Dɛmisim nwɛnnɛmnam</string>
   <string name="edit_categories">Dɛmisim buudinam</string>
   <string name="advanced_options">Tuon ken gaansʋg</string>

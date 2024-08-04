@@ -524,7 +524,7 @@
   <string name="display_monuments">Montrez monumenti</string>
   <string name="learn_more">SAVEZ PLUSE</string>
   <string name="need_permission">Bezonas permiso</string>
-  <string name="menu_view_user_page">Vidar uzeropagino</string>
+  <string name="menu_view_user_page" fuzzy="true">Vidar uzeropagino</string>
   <string name="image_selected">Imajo selektita</string>
   <string name="image_marked_as_not_for_upload">Ca imajo indikesis por ne sendesar</string>
   <string name="menu_view_report">Raporto</string>

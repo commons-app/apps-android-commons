@@ -1,16 +1,6 @@
 SELECT
   ?item
   (SAMPLE(?location) as ?location)
-  (SAMPLE(?label) AS ?label)
-  (SAMPLE(?description) AS ?description)
-  (SAMPLE(?class) AS ?class)
-  (SAMPLE(?classLabel) AS ?classLabel)
-  (SAMPLE(?pic) AS ?pic)
-  (SAMPLE(?destroyed) AS ?destroyed)
-  (SAMPLE(?endTime) AS ?endTime)
-  (SAMPLE(?wikipediaArticle) AS ?wikipediaArticle)
-  (SAMPLE(?commonsArticle) AS ?commonsArticle)
-  (SAMPLE(?commonsCategory) AS ?commonsCategory)
 WHERE {
   # Around given location
   SERVICE wikibase:box {
@@ -19,38 +9,5 @@ WHERE {
      bd:serviceParam wikibase:cornerEast "Point(${LONG_EAST} ${LAT_EAST})"^^geo:wktLiteral.
   }
 
-  OPTIONAL {
-  ?item p:P31/ps:P31 ?class.
-  }
-
-  # Get picture
-  OPTIONAL {?item wdt:P18 ?pic}
-
-  # Get existence
-  OPTIONAL {?item wdt:P576 ?destroyed}
-  OPTIONAL {?item wdt:P582 ?endTime}
-
-  # Get Commons category
-  OPTIONAL {?item wdt:P373 ?commonsCategory}
-
-  # Get Wikipedia article
-  OPTIONAL {
-    ?wikipediaArticle schema:about ?item.
-    ?wikipediaArticle schema:isPartOf <https://${LANG}.wikipedia.org/>.
-  }
-
-  # Get Commons article
-  OPTIONAL {
-    ?commonsArticle schema:about ?item.
-    ?commonsArticle schema:isPartOf <https://commons.wikimedia.org/>.
-  }
-
-  # Labels and descriptions
-  SERVICE wikibase:label {
-    bd:serviceParam wikibase:language "${LANG},en,fr,de,es,ja,ru,it,zh,pt,ar,fa,pl,nl,id,uk,he,sv,cs,ko,vi,ca,no,fi,hu,tr,th,hi,bn,ceb,ro,sw,kk,da,eo,sr,lt,sk,bg,sl,eu,et,hr,ms,el,arz,ur,ta,te,nn,gl,az,af,bs,be,ml,ka,is,sq,uz,la,br,mk,lv,azb,mr,sh,tl,cy,ckb,ast,be-tarask,zh-yue,hy,pa,as,my,kn,ne,si,tt,ha,war,zh-min-nan,vo,min,lmo,ht,lb,gu,tg,sco,ku,new,bpy,nds,io,pms,su,oc,jv,nap,ba,scn,wa,bar,an,ksh,szl,fy,frr,als,ia,ga,yi,mg,gd,vec,ce,sa,mai,xmf,sd,wuu,mrj,mhr,km,roa-tara,am,roa-rup,map-bms,bh,mnw,shn,bcl,co,cv,dv,nds-nl,fo,hif,fur,gan,glk,hak,ilo,pam,csb,avk,lij,li,gv,mi,mt,nah,nrm,se,nov,qu,os,pi,pag,ps,pdc,rm,bat-smg,sc,to,tk,hsb,fiu-vro,vls,yo,diq,zh-classical,frp,lad,kw,mn,haw,ang,ln,ie,wo,tpi,ty,crh,nv,jbo,ay,pcd,zea,eml,ky,ig,or,cbk-zam,kg,arc,rmy,ab,gn,so,kab,ug,stq,udm,ext,mzn,pap,cu,sah,tet,sn,lo,pnb,iu,na,got,bo,dsb,chr,cdo,om,sm,ee,ti,av,bm,zu,pnt,cr,pih,ss,ve,bi,rw,ch,xh,kl,ik,bug,dz,ts,tn,kv,tum,xal,st,tw,bxr,ak,ny,fj,lbe,za,ks,ff,lg,sg,rn,chy,mwl,lez,bjn,gom,tyv,vep,nso,kbd,ltg,rue,pfl,gag,koi,krc,ace,olo,kaa,mdf,myv,srn,ady,jam,tcy,dty,atj,kbp,din,lfn,gor,inh,sat,hyw,nqo,ban,szy,awa,ary,lld,smn,skr,mad,dag,shi,nia,ki,gcr".
-    ?item rdfs:label ?label.
-    ?item schema:description ?description.
-    ?class rdfs:label ?classLabel.
-  }
 }
 GROUP BY ?item

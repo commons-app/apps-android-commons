@@ -86,7 +86,8 @@ class BookmarkLocationFragmentUnitTests {
                     "a cat",
                     null,
                     null,
-                    true)
+                    true,
+                    "entityID")
             )
             return list
         }
