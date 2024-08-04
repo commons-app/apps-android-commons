@@ -46,11 +46,11 @@ public class BookmarkLocationsDao {
         ContentProviderClient db = clientProvider.get();
         try {
             cursor = db.query(
-                    BookmarkLocationsContentProvider.BASE_URI,
-                    Table.ALL_FIELDS,
-                    null,
-                    new String[]{},
-                    null);
+                BookmarkLocationsContentProvider.BASE_URI,
+                Table.ALL_FIELDS,
+                null,
+                new String[]{},
+                null);
             while (cursor != null && cursor.moveToNext()) {
                 items.add(fromCursor(cursor));
             }
@@ -126,11 +126,11 @@ public class BookmarkLocationsDao {
         ContentProviderClient db = clientProvider.get();
         try {
             cursor = db.query(
-                    BookmarkLocationsContentProvider.BASE_URI,
-                    Table.ALL_FIELDS,
-                    Table.COLUMN_NAME + "=?",
-                    new String[]{bookmarkLocation.name},
-                    null);
+                BookmarkLocationsContentProvider.BASE_URI,
+                Table.ALL_FIELDS,
+                Table.COLUMN_NAME + "=?",
+                new String[]{bookmarkLocation.name},
+                null);
             if (cursor != null && cursor.moveToFirst()) {
                 return true;
             }
@@ -149,7 +149,7 @@ public class BookmarkLocationsDao {
     @NonNull
     Place fromCursor(final Cursor cursor) {
         final LatLng location = new LatLng(cursor.getDouble(cursor.getColumnIndex(Table.COLUMN_LAT)),
-                cursor.getDouble(cursor.getColumnIndex(Table.COLUMN_LONG)), 1F);
+            cursor.getDouble(cursor.getColumnIndex(Table.COLUMN_LONG)), 1F);
 
         final Sitelinks.Builder builder = new Sitelinks.Builder();
         builder.setWikipediaLink(cursor.getString(cursor.getColumnIndex(Table.COLUMN_WIKIPEDIA_LINK)));
@@ -207,40 +207,40 @@ public class BookmarkLocationsDao {
 
         // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
         public static final String[] ALL_FIELDS = {
-                COLUMN_NAME,
-                COLUMN_LANGUAGE,
-                COLUMN_DESCRIPTION,
-                COLUMN_CATEGORY,
-                COLUMN_LABEL_TEXT,
-                COLUMN_LABEL_ICON,
-                COLUMN_LAT,
-                COLUMN_LONG,
-                COLUMN_IMAGE_URL,
-                COLUMN_WIKIPEDIA_LINK,
-                COLUMN_WIKIDATA_LINK,
-                COLUMN_COMMONS_LINK,
-                COLUMN_PIC,
-                COLUMN_EXISTS,
+            COLUMN_NAME,
+            COLUMN_LANGUAGE,
+            COLUMN_DESCRIPTION,
+            COLUMN_CATEGORY,
+            COLUMN_LABEL_TEXT,
+            COLUMN_LABEL_ICON,
+            COLUMN_LAT,
+            COLUMN_LONG,
+            COLUMN_IMAGE_URL,
+            COLUMN_WIKIPEDIA_LINK,
+            COLUMN_WIKIDATA_LINK,
+            COLUMN_COMMONS_LINK,
+            COLUMN_PIC,
+            COLUMN_EXISTS,
         };
 
         static final String DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS " + TABLE_NAME;
 
         static final String CREATE_TABLE_STATEMENT = "CREATE TABLE " + TABLE_NAME + " ("
-                + COLUMN_NAME + " STRING PRIMARY KEY,"
-                + COLUMN_LANGUAGE + " STRING,"
-                + COLUMN_DESCRIPTION + " STRING,"
-                + COLUMN_CATEGORY + " STRING,"
-                + COLUMN_LABEL_TEXT + " STRING,"
-                + COLUMN_LABEL_ICON + " INTEGER,"
-                + COLUMN_LAT + " DOUBLE,"
-                + COLUMN_LONG + " DOUBLE,"
-                + COLUMN_IMAGE_URL + " STRING,"
-                + COLUMN_WIKIPEDIA_LINK + " STRING,"
-                + COLUMN_WIKIDATA_LINK + " STRING,"
-                + COLUMN_COMMONS_LINK + " STRING,"
-                + COLUMN_PIC + " STRING,"
-                + COLUMN_EXISTS + " STRING"
-                + ");";
+            + COLUMN_NAME + " STRING PRIMARY KEY,"
+            + COLUMN_LANGUAGE + " STRING,"
+            + COLUMN_DESCRIPTION + " STRING,"
+            + COLUMN_CATEGORY + " STRING,"
+            + COLUMN_LABEL_TEXT + " STRING,"
+            + COLUMN_LABEL_ICON + " INTEGER,"
+            + COLUMN_LAT + " DOUBLE,"
+            + COLUMN_LONG + " DOUBLE,"
+            + COLUMN_IMAGE_URL + " STRING,"
+            + COLUMN_WIKIPEDIA_LINK + " STRING,"
+            + COLUMN_WIKIDATA_LINK + " STRING,"
+            + COLUMN_COMMONS_LINK + " STRING,"
+            + COLUMN_PIC + " STRING,"
+            + COLUMN_EXISTS + " STRING"
+            + ");";
 
         public static void onCreate(SQLiteDatabase db) {
             db.execSQL(CREATE_TABLE_STATEMENT);

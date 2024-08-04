@@ -49,6 +49,10 @@
     <item quantity="one">%1$d ეხარგუა</item>
     <item quantity="other">%1$d ეხარგუა</item>
   </plurals>
+  <plurals name="receiving_shared_content">
+    <item quantity="one">ართამი დინორეშ მეღება. სურათიშ დამუშება იკორინუანს მუზმარენ ბორჯის, ნამუთ გაჩქუ სურათეფიშ ზჷმაშ დო თქვანი მონწყილობაშ მოდელს</item>
+    <item quantity="other">ართამი დინორეშ მეღება. სურათეფიშ დამუშება იკორინუანს მუზმარენ ბორჯის, ნამუთ გაჩქუ სურათეფიშ ზჷმაშ დო თქვანი მონწყილობაშ მოდელს</item>
+  </plurals>
   <string name="navigation_item_explore">გჷნოჯინა</string>
   <string name="preference_category_appearance">მიოჯინი</string>
   <string name="preference_category_general">თარი</string>
@@ -71,7 +75,9 @@
   <string name="login_success">სისტემაშა მიშულაქ წჷმოძინელო გეთუ!</string>
   <string name="login_failed">სისტემაშა მიშულაქ ვემიხუჯინუ!</string>
   <string name="upload_failed">ფაილქ ვეგორუ. ქორთხინთ, ქოცადით შხვა ფაილი.</string>
-  <string name="authentication_failed" fuzzy="true">აუთენტიფიკაციაქ ვემიხუჯინუ, ქოთხინთ ავტორიზაცია ხოლო ართშა გემკორთით.</string>
+  <string name="retry_limit_reached">გომაჟირაფაშ მაქსიმალურ ლიმიტი რე გიმორინაფილი! ქორთინთ, გაუქვათ ეხარგუა დო კჷნი ქოცადით.</string>
+  <string name="unrestricted_battery_mode">გობთიშათო ბატარეაშ ოპტიმიზაცია?</string>
+  <string name="authentication_failed">ავთენტიფიკაციაქ ვემიხუჯინუ, ქოთხინთ კჷნი გენშართით.</string>
   <string name="uploading_started">ეხარგუაქ ქჷდიჭყუ!</string>
   <string name="uploading_queued">ეხარგუა რანწკის გერე (გოხურგილი რსხუშ რეჟიმი ჩართული რე)</string>
   <string name="upload_completed_notification_title">%1$ ეხარგილი რე!</string>
@@ -79,7 +85,7 @@
   <string name="upload_progress_notification_title_start">ეთმიხარგუ ფაილი: %s</string>
   <string name="upload_progress_notification_title_in_progress">%1$ იხარგუ</string>
   <string name="upload_progress_notification_title_finishing">ეხარგუაშ თება %1$</string>
-  <string name="upload_failed_notification_title" fuzzy="true">%1$ ეხარგუაქ ვემიხუჯინუ</string>
+  <string name="upload_failed_notification_title">%1$s ეხარგუაქ ვემიხუჯინუ</string>
   <string name="upload_paused_notification_title">%1$s-აშ ეხარგუა გაჩემებული რე</string>
   <string name="upload_failed_notification_subtitle">ოძირაფალო ქეგუწკანტეთ</string>
   <string name="upload_paused_notification_subtitle">ოძირაფალო ქეგუწკანტეთ</string>
@@ -98,21 +104,23 @@
   <string name="add_caption_toast">ქორთხინთ, ქემიოწურეთ თე ფაილიშ ეჭარუა</string>
   <string name="share_description_hint">ეჭარუა</string>
   <string name="share_caption_hint">მუკნაჭარა</string>
-  <string name="login_failed_network" fuzzy="true">მიშულაქ ვემიხუჯინუ - რშვილიშ ჩილათა</string>
+  <string name="login_failed_network">მიშულაქ ვემიხუჯინუ - რშვილიშ ჩილათა</string>
   <string name="login_failed_throttled">ძალამ მიარე უმწუძინუ ცადება. ქორთხინ, მუხირენ წუთშა ხოლო ქოცადით.</string>
   <string name="login_failed_blocked">მორდება, თე მახვარებუ ბლოკირი რე ვიკიოწკარუეს</string>
   <string name="login_failed_2fa_needed">თქვა გემშიონათ ოკო ჟირფაქტორიანი ავტორიზაციაშ კოდი.</string>
-  <string name="login_failed_generic" fuzzy="true">მიშულაქ ვემიხუჯინუ</string>
+  <string name="login_failed_generic">მიშულაქ ვემიხუჯინუ</string>
   <string name="share_upload_button">ეხარგუა</string>
   <string name="multiple_share_base_title">სერიაშ ჯოხო</string>
   <string name="provider_modifications">მოდიფიკაციეფი</string>
   <string name="menu_upload_single">ეხარგუა</string>
   <string name="categories_search_text_hint">კატეგორიაშ გიშაგორუა</string>
+  <string name="depicts_search_text_hint">დოგორით ელემენტეფი, ნამუეფით მოჩამილი რე თქვანი სურათის (გვალა, ტაჯ-მაჰალი დო თ.უ.)</string>
   <string name="menu_save_categories">ჩუალა</string>
   <string name="refresh_button">გოახალაფა</string>
   <string name="display_list_button">ერკებული</string>
   <string name="contributions_subtitle_zero">(ეხარგუეფი ვა რე)</string>
   <string name="categories_not_found">ვეგორინჷ კატეგორიეფქ, ნამუეფით მოგენა %1$s</string>
+  <string name="depictions_not_found">%1$s-შ მოგვენი ვიკიმუნაჩემეფიშ ელემენტიქ ვეგორუ</string>
   <string name="no_child_classes">%1$s-ს ვა უღჷ დოჸუნელი კლასეფი</string>
   <string name="no_parent_classes">%1$s-ს ვა უღჷ მასქერული კლასეფი</string>
   <string name="categories_skip_explanation">ქეგუძინით კატეგორიეფი, თქვანი სურათეფი უმოს მოხუჯურ მიოგორალქ იჸუას ვიკიოწკარუესჷნ.\nგემშეჸონით ჯოხო კატეგორიეფიშ გიოძინალო.</string>
@@ -308,6 +316,7 @@
   <string name="wrong">გამა ჩილათირი რე</string>
   <string name="quiz_screenshot_question">თე სკრინშოტი ჯგირი რენო ეიოხარგალო?</string>
   <string name="rotate">მუკორთაფა</string>
+  <string name="error_fetching_nearby_places">ვემიხუჯინჷ გოხოლუაშ აბანეფიშ ინოხარგუაქ</string>
   <string name="no_pictures_in_this_area">თაქ ვა რე მუთუნნერი სურათი</string>
   <string name="no_nearby_places_around">ვა რე გოხოლუაშ აბანეფი</string>
   <string name="no_recent_searches">ასერდეიანი მუნაგორეფი ვა რე</string>
@@ -361,9 +370,20 @@
   <string name="nearby_card_permission_title">ალობაშ მოთხირი</string>
   <string name="never_ask_again">თენა კჷნ დღას ვაბკითხა</string>
   <string name="display_location_permission_title">ორენიშ ალობაშ მოთხირი</string>
+  <string name="ends_on">ითებუ:</string>
+  <string name="option_allow">ალობაშ მეჩამა</string>
+  <string name="option_dismiss">გოუქვაფა</string>
   <string name="nominate_for_deletion_done">ღოლამირჷ რე</string>
+  <string name="no_image">ვა რე გუმორინაფილი სურათეფი</string>
   <string name="error_occurred_in_picking_images">სურათიშ ეხარგუაშ ბორჯის ჩილათაქ მოხვადჷ</string>
   <string name="please_wait">ქორთხინთ ქჷმიცადით …</string>
+  <string name="exif_tag_name_author">ავტორი</string>
+  <string name="exif_tag_name_location">ორენი</string>
+  <string name="exif_tag_name_cameraModel">კამერაშ მოდელი</string>
+  <string name="exif_tag_name_lensModel">ლინზაშ მოდელი</string>
+  <string name="exif_tag_name_serialNumbers">სერიული ნომერი</string>
+  <string name="exif_tag_name_software">პროგრამული უნარღელჸუა</string>
+  <string name="image_info">სურათიშ ინფორმაცია</string>
   <string name="delete_helper_ask_spam_selfie" fuzzy="true">სელფი</string>
   <string name="delete_helper_ask_spam_blurry" fuzzy="true">ჸურილი</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">თიშენ ნამჷ-და თინა რე</string>

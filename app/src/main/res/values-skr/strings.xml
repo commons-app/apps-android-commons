@@ -253,7 +253,7 @@
   <string name="custom_selector_dismiss_limit_warning_button_text">مکاؤ</string>
   <string name="learn_more">ٻیا سکھو</string>
   <string name="need_permission">اجازت دی لوڑ ہے</string>
-  <string name="menu_view_user_page">ورتݨ آلے دا ورقہ ݙیکھو</string>
+  <string name="menu_view_user_page" fuzzy="true">ورتݨ آلے دا ورقہ ݙیکھو</string>
   <string name="edit_categories">ونکیاں وچ تبدیلی کرو</string>
   <string name="advanced_options">اعلیٰ اختیارات</string>
   <string name="apply">لاڳو کرو</string>
@@ -269,4 +269,5 @@
   <string name="image_selected">تصویر چݨیج ڳئی</string>
   <string name="menu_view_report">رپورٹ</string>
   <string name="error_sending_thanks">مصنف کوں شکریہ بھیڄݨ وچ خرابی۔</string>
+  <string name="talk">ڳالھ مہاڑ</string>
 </resources>

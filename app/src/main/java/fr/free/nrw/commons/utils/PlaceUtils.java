@@ -47,7 +47,8 @@ public class PlaceUtils {
                     .setWikidataLink("") // we don't necessarily have them, can be fetched later
                     .build(),
                 media.getImageUrl(),
-                media.getThumbUrl()));
+                media.getThumbUrl(),
+                ""));
         }
         return explorePlaceList;
     }

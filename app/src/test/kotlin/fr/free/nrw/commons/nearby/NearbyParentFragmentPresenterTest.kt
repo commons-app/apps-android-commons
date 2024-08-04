@@ -100,7 +100,6 @@ class NearbyParentFragmentPresenterTest {
         nearbyPresenter.lockUnlockNearby(true)
         nearbyPresenter.updateMapAndList(null)
         verify(nearbyParentFragmentView).disableFABRecenter()
-        verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 
     /**
@@ -114,7 +113,6 @@ class NearbyParentFragmentPresenterTest {
         nearbyPresenter.updateMapAndList(null)
         verify(nearbyParentFragmentView).enableFABRecenter()
         verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
-        verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 
     /**
@@ -130,7 +128,6 @@ class NearbyParentFragmentPresenterTest {
         verify(nearbyParentFragmentView).isNetworkConnectionEstablished
         verify(nearbyParentFragmentView).lastMapFocus
         verify(nearbyParentFragmentView).mapCenter
-        verifyNoMoreInteractions(nearbyParentFragmentView)
     }
 
     /**
@@ -206,22 +203,6 @@ class NearbyParentFragmentPresenterTest {
         verify(nearbyParentFragmentView).isNetworkConnectionEstablished()
         verify(nearbyParentFragmentView).getLastMapFocus()
         verify(nearbyParentFragmentView).getMapCenter()
-        verifyNoMoreInteractions(nearbyParentFragmentView)
-    }
-
-    /**
-         * Test search this area button became visible after user moved the camera target to far
-     * away from current target. Distance between these two point is 111.19 km, so our camera target
-     * is at outside of previously searched region if we set latestSearchRadius below 111.19. Thus,
-     * setSearchThisAreaButtonVisibility(true) should be verified.
-     */
-    @Test @Ignore
-    fun testSearchThisAreaButtonVisibleWhenMoveToFarPosition() {
-        NearbyController.latestSearchLocation = Mockito.spy(LatLng(2.0, 1.0, 0.0F))
-        // Distance between these two point is 111.19 km
-        NearbyController.latestSearchRadius = 111.19 * 1000 // To meter
-        whenever(nearbyParentFragmentView.isNetworkConnectionEstablished()).thenReturn(true)
-        verify(nearbyParentFragmentView).setSearchThisAreaButtonVisibility(true)
     }
 
     /**
@@ -267,9 +248,6 @@ class NearbyParentFragmentPresenterTest {
         verify(nearbyParentFragmentView).filterMarkersByLabels(
             ArgumentMatchers.anyList(),
             ArgumentMatchers.anyBoolean(),
-            ArgumentMatchers.anyBoolean(),
-            ArgumentMatchers.anyBoolean(),
-            ArgumentMatchers.anyBoolean(),
             ArgumentMatchers.anyBoolean()
         );
         verify(nearbyParentFragmentView).setRecyclerViewAdapterAllSelected()
@@ -284,9 +262,6 @@ class NearbyParentFragmentPresenterTest {
         nearbyPresenter.filterByMarkerType(selectedLabels, 0, true, false)
         verify(nearbyParentFragmentView).filterMarkersByLabels(
             any(),
-            anyBoolean(),
-            anyBoolean(),
-            anyBoolean(),
             anyBoolean(),
             anyBoolean()
         );
@@ -482,7 +457,7 @@ class NearbyParentFragmentPresenterTest {
         nearbyPlacesInfo.placeList = null
 
         whenever(bookmarkLocationsDao.allBookmarksLocations).thenReturn(Collections.emptyList())
-        nearbyPresenter.updateMapMarkers(nearbyPlacesInfo, true)
+        nearbyPresenter.updateMapMarkers(nearbyPlacesInfo.placeList, latestLocation, true)
         Mockito.verify(nearbyParentFragmentView).updateMapMarkers(any())
         Mockito.verify(nearbyParentFragmentView).setProgressBarVisibility(false)
         Mockito.verify(nearbyParentFragmentView).updateListFragment(nearbyPlacesInfo.placeList)

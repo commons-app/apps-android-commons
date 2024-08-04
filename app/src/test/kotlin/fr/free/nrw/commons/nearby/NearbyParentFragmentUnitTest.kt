@@ -236,48 +236,6 @@ class NearbyParentFragmentUnitTest {
 
     @Test @Ignore
     @Throws(Exception::class)
-    fun `test getIconFor bookmarked place in light theme`() {
-        val place = mock(Place::class.java).apply {
-            `when`(isMonument()).thenReturn(false)
-            `when`(pic).thenReturn("")
-            `when`(exists).thenReturn(true)
-        }
-
-        val icon = Whitebox.invokeMethod<Int>(fragment, "getIconFor", place, true, false)
-        Assert.assertEquals(R.drawable.ic_custom_map_marker_blue_bookmarked_dark, icon)
-    }
-
-    @Test @Ignore
-    @Throws(Exception::class)
-    fun `test getIconFor non-bookmarked monument place`() {
-        val place = mock(Place::class.java).apply {
-            `when`(isMonument()).thenReturn(true)
-        }
-
-        val icon = Whitebox.invokeMethod<Int>(fragment, "getIconFor", place, false, false)
-        Assert.assertEquals(R.drawable.ic_custom_map_marker_monuments, icon)
-    }
-
-    @Test @Ignore
-    @Throws(Exception::class)
-    fun testOnToggleChipsClickedCaseVisible() {
-        `when`(view.visibility).thenReturn(View.VISIBLE)
-        fragment.onToggleChipsClicked()
-        verify(view).visibility = View.GONE
-        verify(ivToggleChips).rotation = ivToggleChips.rotation + 180
-    }
-
-    @Test @Ignore
-    @Throws(Exception::class)
-    fun testOnToggleChipsClickedCaseNotVisible() {
-        `when`(view.visibility).thenReturn(View.GONE)
-        fragment.onToggleChipsClicked()
-        verify(view).visibility = View.VISIBLE
-        verify(ivToggleChips).rotation = ivToggleChips.rotation + 180
-    }
-
-    @Test @Ignore
-    @Throws(Exception::class)
     fun testOnLearnMoreClicked() {
         fragment.onLearnMoreClicked()
         val shadowActivity: ShadowActivity = Shadows.shadowOf(activity)

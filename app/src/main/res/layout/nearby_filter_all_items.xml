@@ -1,38 +1,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
   android:background="@color/status_bar_blue">
 
-  <include
-    android:id="@+id/chip_view"
-    layout="@layout/filter_chip_view"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_toStartOf="@+id/iv_toggle_chips"
-    android:background="@color/deleteRed"
-    android:contentDescription="@string/nearby_filter_state" />
 
   <include
     android:id="@+id/search_view_layout"
     layout="@layout/filter_search_view_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@id/chip_view"
-    android:layout_toStartOf="@+id/iv_toggle_chips"
     android:contentDescription="@string/nearby_filter_search" />
 
-  <androidx.appcompat.widget.AppCompatImageView
-    android:id="@+id/iv_toggle_chips"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentEnd="true"
-    android:layout_centerVertical="true"
-    android:layout_gravity="center"
-    android:contentDescription="@string/nearby_filter_toggle"
-    android:padding="12dp"
-    android:scaleType="centerCrop"
-    android:tint="@color/white"
-    app:srcCompat="@drawable/arrow_up" />
 
 </RelativeLayout>

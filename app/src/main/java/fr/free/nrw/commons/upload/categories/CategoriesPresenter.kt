@@ -89,7 +89,7 @@ class CategoriesPresenter @Inject constructor(
         if (media == null) {
             return repository.searchAll(term, getImageTitleList(), repository.selectedDepictions)
                 .subscribeOn(ioScheduler)
-                .map { it.filter { categoryItem -> !repository.containsYear(categoryItem.name)
+                .map { it.filter { categoryItem -> !repository.isSpammyCategory(categoryItem.name)
                         || categoryItem.name==term } }
         } else {
             return Observable.zip(
@@ -103,7 +103,7 @@ class CategoriesPresenter @Inject constructor(
                 it1 + it2
             }
                 .subscribeOn(ioScheduler)
-                .map { it.filter { categoryItem -> !repository.containsYear(categoryItem.name)
+                .map { it.filter { categoryItem -> !repository.isSpammyCategory(categoryItem.name)
                         || categoryItem.name==term } }
                 .map { it.filterNot { categoryItem -> categoryItem.thumbnail == "hidden" } }
         }

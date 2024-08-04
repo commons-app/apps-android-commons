@@ -673,7 +673,7 @@
   <string name="add_location">Додај локацију</string>
   <string name="feedback_sharing_data_alert">Молимо уклоните из овог мејла све информације које не желите да делите јавно. Такође, имајте на уму да ће ваша имејл адреса са које објављујете и повезано име и профилна слика, бити јавно видљиви.</string>
   <string name="explore_map_details">Детаљи</string>
-  <string name="achievements_unavailable_beta" fuzzy="true">Достигнућа су доступна само у продукционој верзији, проверите документацију за програмере.</string>
+  <string name="achievements_unavailable_beta">Достигнућа су доступна само у продукционој верзији, проверите документацију за програмере.</string>
   <string name="leaderboard_unavailable_beta">Табела лидера је доступна само у продукционој верзији, проверите документацију за програмере.</string>
   <string name="copyright_popup">Молимо вас да отпремате само слике које сте сами направили. Отпремаоци слика који крше ауторска права ће бити блокирани. Ово се такође односи на бета верзију. Хвала вам што тестирате апликацију!</string>
   <string name="select_feedback_data_choice">Молимо вас да поништите све информације које не жечите да делите јавно.</string>
@@ -722,6 +722,7 @@
   <string name="location_removed">Локација уклоњена!</string>
   <string name="send_thanks_to_author">Захвали се аутору</string>
   <string name="invalid_login_message">Ваша пријава је истекла. Молимо пријавите се поново.</string>
+  <string name="no_application_available_to_open_gpx_files">Нема апликације за отварање GPX датотека</string>
   <string name="file_saved_successfully">Чување датотеке успешно</string>
   <string name="failed_to_save_kml_file">Чување KML датотеке није успело.</string>
   <string name="failed_to_save_gpx_file">Чување GPX датотеке није успело.</string>
@@ -731,6 +732,7 @@
     <item quantity="one">%d слика је одабрана</item>
     <item quantity="other">%d слика је одабрано</item>
   </plurals>
+  <string name="please_enter_some_comments">Унесите коментар</string>
   <string name="talk">Разговор</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">„%1$s” не постоји више, и није га могуће више сликати.</string>
 </resources>

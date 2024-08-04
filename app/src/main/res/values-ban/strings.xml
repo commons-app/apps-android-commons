@@ -54,6 +54,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Setélan</string>
   <string name="intent_share_upload_label">Unggah nuju Commons</string>
+  <string name="upload_in_progress">Pangunggahan kantun mamargi</string>
   <string name="username">Peséngan sang anganggé</string>
   <string name="password">Kruna sandi</string>
   <string name="login_credential">Majing nuju akun Commons Béta Ida</string>
@@ -64,10 +65,10 @@
   <string name="logging_in_message">Jantos dumun...</string>
   <string name="updating_caption_title">Nganyarin sesirah miwah pidarta</string>
   <string name="updating_caption_message">Jantos dumun…</string>
-  <string name="login_success" fuzzy="true">Mahasil manjing log!</string>
-  <string name="login_failed" fuzzy="true">Manjing log wangdé!</string>
+  <string name="login_success">Mahasil manjing log!</string>
+  <string name="login_failed">Manjing log wangdé!</string>
   <string name="upload_failed">Berkas nénten katemu. Durusang coba berkas liyané.</string>
-  <string name="authentication_failed" fuzzy="true">Otentikasi gagal, durusang majing malih</string>
+  <string name="authentication_failed">Otentikasi gagal, durusang majing malih</string>
   <string name="uploading_started">Ngawit unggah!</string>
   <string name="uploading_queued">Unggahan ring antrian (mode tetemon kawates kauripang)</string>
   <string name="upload_completed_notification_title">%1$s kaunggah!</string>
@@ -94,11 +95,11 @@
   <string name="add_caption_toast">Durus dagingin sesirah antuk berkas puniki</string>
   <string name="share_description_hint">Déskripsi</string>
   <string name="share_caption_hint">Sesirah</string>
-  <string name="login_failed_network" fuzzy="true">Tan prasida login - pikobet ring jaringan</string>
+  <string name="login_failed_network">Tan prasida login - pikobet ring jaringan</string>
   <string name="login_failed_throttled">Kakèhan nyoba manjing wangdé. Durusang coba malih di makudang menit</string>
   <string name="login_failed_blocked">Ampura, sang anganggé pjniki sampun kablokir ring Commons</string>
   <string name="login_failed_2fa_needed">Ida patut ngicain kode oténtikasi kalih faktor druén Idané</string>
-  <string name="login_failed_generic" fuzzy="true">Manjing log wangdé</string>
+  <string name="login_failed_generic">Manjing log wangdé</string>
   <string name="share_upload_button">Unggah</string>
   <string name="multiple_share_base_title">Ica aran sesirah puniki</string>
   <string name="provider_modifications">Uahin</string>
@@ -224,7 +225,7 @@
   <string name="nominated_see_more">Cingak kaca wéb antuk rerincian</string>
   <string name="skip_login">Liwatin</string>
   <string name="navigation_item_login">Manjing log</string>
-  <string name="skip_login_title" fuzzy="true">Napiké ragané yakti jagi ngaliwatin manjing log?</string>
+  <string name="skip_login_title">Napiké ragané yakti jagi ngaliwatin manjing log?</string>
   <string name="nearby_directions">Paarah</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipédia</string>
@@ -263,7 +264,7 @@
   <string name="delete_recent_searches_dialog">Napiké Ida jagi ngaresikin lelintihan parerehan Ida?</string>
   <string name="delete_search_dialog">Napiké ragané jagi ngusap parerehan puniki?</string>
   <string name="search_history_deleted">Lelintihan parerehan kausap</string>
-  <string name="nominate_delete">Usulan Pangusapan</string>
+  <string name="nominate_delete">Usulan Antuk Kaapus</string>
   <string name="delete">Usap</string>
   <string name="Achievements">Panghargaan</string>
   <string name="Profile">Profil</string>
@@ -307,6 +308,7 @@
   <string name="image_info">Pidarta Gambar</string>
   <string name="upload_cancelled">Pangunggahan Kawangdé</string>
   <string name="review_is_uploaded_by">%1$s kaunggah olih: %2$s</string>
+  <string name="delete_helper_show_deletion_title">Pangusulan antuk kaapus</string>
   <string name="delete_helper_show_deletion_title_success">Suksés</string>
   <string name="delete_helper_ask_reason_copyright_logo">Logo</string>
   <string name="category_edit_helper_show_edit_title">Panganyaran kategori</string>

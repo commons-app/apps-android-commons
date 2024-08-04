@@ -1,0 +1,64 @@
+SELECT
+  ?item
+  (SAMPLE(?label) AS ?label)
+  (SAMPLE(?class) AS ?class)
+  (SAMPLE(?description) AS ?description)
+  (SAMPLE(?classLabel) AS ?classLabel)
+  (SAMPLE(?pic) AS ?pic)
+  (SAMPLE(?destroyed) AS ?destroyed)
+  (SAMPLE(?endTime) AS ?endTime)
+  (SAMPLE(?wikipediaArticle) AS ?wikipediaArticle)
+  (SAMPLE(?commonsArticle) AS ?commonsArticle)
+  (SAMPLE(?commonsCategory) AS ?commonsCategory)
+WHERE {
+  SERVICE <https://query.wikidata.org/sparql> {
+    values ?item {
+      ${ENTITY}
+    }
+  }
+
+  # Get the label in the preferred language of the user, or any other language if no label is available in that language.
+  OPTIONAL {?item rdfs:label ?itemLabelPreferredLanguage. FILTER (lang(?itemLabelPreferredLanguage) = "en")}
+  OPTIONAL {?item rdfs:label ?itemLabelAnyLanguage}
+  BIND(COALESCE(?itemLabelPreferredLanguage, ?itemLabelAnyLanguage, "?") as ?label)
+
+  # Get the description in the preferred language of the user, or any other language if no description is available in that language.
+  OPTIONAL {?item schema:description ?itemDescriptionPreferredLanguage. FILTER (lang(?itemDescriptionPreferredLanguage) = "${LANG}")}
+  OPTIONAL {?item schema:description ?itemDescriptionAnyLanguage}
+  BIND(COALESCE(?itemDescriptionPreferredLanguage, ?itemDescriptionAnyLanguage, "?") as ?description)
+
+  # Get the class label in the preferred language of the user, or any other language if no label is available in that language.
+  OPTIONAL {
+  ?item p:P31/ps:P31 ?class.
+    OPTIONAL {?class rdfs:label ?classLabelPreferredLanguage. FILTER (lang(?classLabelPreferredLanguage) = "${LANG}")}
+    OPTIONAL {?class rdfs:label ?classLabelAnyLanguage}
+    BIND(COALESCE(?classLabelPreferredLanguage, ?classLabelAnyLanguage, "?") as ?classLabel)
+  }
+
+  OPTIONAL {
+  ?item p:P31/ps:P31 ?class.
+  }
+
+  # Get picture
+  OPTIONAL {?item wdt:P18 ?pic}
+
+  # Get existence
+  OPTIONAL {?item wdt:P576 ?destroyed}
+  OPTIONAL {?item wdt:P582 ?endTime}
+
+  # Get Commons category
+  OPTIONAL {?item wdt:P373 ?commonsCategory}
+
+  # Get Wikipedia article
+  OPTIONAL {
+    ?wikipediaArticle schema:about ?item.
+    ?wikipediaArticle schema:isPartOf <https://en.wikipedia.org/>. # TODO internationalization
+  }
+
+  # Get Commons article
+  OPTIONAL {
+    ?commonsArticle schema:about ?item.
+    ?commonsArticle schema:isPartOf <https://commons.wikimedia.org/>.
+  }
+}
+GROUP BY ?item

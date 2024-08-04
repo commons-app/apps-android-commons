@@ -708,7 +708,7 @@
   <string name="read_phone_state_permission_message">Οι κοντινοί χάρτες πρέπει να διαβάζουν PHONE STATE για να λειτουργούν σωστά</string>
   <string name="contributions_of_user">Συνεισφορές χρήστη: %s</string>
   <string name="achievements_of_user">Επιτεύγματα χρήστη: %s</string>
-  <string name="menu_view_user_page">Προβολή σελίδας χρήστη</string>
+  <string name="menu_view_user_page" fuzzy="true">Προβολή σελίδας χρήστη</string>
   <string name="edit_depictions">Επεξεργασία απεικονίσεων</string>
   <string name="edit_categories">Επεξεργασία κατηγοριών</string>
   <string name="advanced_options">Σύνθετες Επιλογές</string>
