@@ -398,6 +398,54 @@ public class OkHttpJsonApiClient {
     }
 
     /**
+     * Retrieves a list of places based on the provided list of places and language.
+     *
+     * @param placeList A list of Place objects for which to fetch information.
+     * @param language  The language code to use for the query.
+     * @return A list of Place objects with additional information retrieved from Wikidata, or null
+     * if an error occurs.
+     * @throws IOException If there is an issue with reading the resource file or executing the HTTP
+     *                     request.
+     */
+    @Nullable
+    public List<Place> getPlaces(
+        final List<Place> placeList, final String language) throws IOException {
+        final String wikidataQuery = FileUtils.readFromResource("/queries/query_for_item.rq");
+        String qids = "";
+        for (final Place place : placeList) {
+            qids += "\n" + ("wd:" + place.getWikiDataEntityId());
+        }
+        final String query = wikidataQuery
+            .replace("${ENTITY}", qids)
+            .replace("${LANG}", language);
+        final HttpUrl.Builder urlBuilder = HttpUrl
+            .parse(sparqlQueryUrl)
+            .newBuilder()
+            .addQueryParameter("query", query)
+            .addQueryParameter("format", "json");
+
+        final Request request = new Request.Builder()
+            .url(urlBuilder.build())
+            .build();
+
+        try (Response response = okHttpClient.newCall(request).execute()) {
+            if (response.isSuccessful()) {
+                final String json = response.body().string();
+                final NearbyResponse nearbyResponse = gson.fromJson(json, NearbyResponse.class);
+                final List<NearbyResultItem> bindings = nearbyResponse.getResults().getBindings();
+                final List<Place> places = new ArrayList<>();
+                for (final NearbyResultItem item : bindings) {
+                    final Place placeFromNearbyItem = Place.from(item);
+                    places.add(placeFromNearbyItem);
+                }
+                return places;
+            } else {
+                throw new IOException("Unexpected response code: " + response.code());
+            }
+        }
+    }
+
+    /**
      * Make API Call to get Places
      *
      * @param leftLatLng  Left lat long

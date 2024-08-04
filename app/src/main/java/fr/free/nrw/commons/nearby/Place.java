@@ -3,34 +3,38 @@ package fr.free.nrw.commons.nearby;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
-
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import org.apache.commons.lang3.StringUtils;
-
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
+import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.utils.PlaceUtils;
+import org.apache.commons.lang3.StringUtils;
 import timber.log.Timber;
 
 /**
  * A single geolocated Wikidata item
  */
+@Entity(tableName = "place")
 public class Place implements Parcelable {
 
-    public final String language;
-    public final String name;
-    private final Label label;
-    private final String longDescription;
-    public final LatLng location;
-    private final String category;
-    public final String pic;
+    public String language;
+    public String name;
+    private Label label;
+    private String longDescription;
+    public LatLng location;
+    @PrimaryKey @NonNull
+    public String entityID;
+    private String category;
+    public String pic;
     // exists boolean will tell whether the place exists or not,
     // For a place to be existing both destroyed and endTime property should be null but it is also not necessary for a non-existing place to have both properties either one property is enough (in such case that not given property will be considered as null).
-    public final Boolean exists;
+    public Boolean exists;
 
     public String distance;
-    public final Sitelinks siteLinks;
+    public Sitelinks siteLinks;
     private boolean isMonument;
     private String thumb;
 
@@ -44,9 +48,11 @@ public class Place implements Parcelable {
         pic = null;
         exists = null;
         siteLinks = null;
+        entityID = null;
     }
 
-    public Place(String language,String name, Label label, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, Boolean exists) {
+    public Place(String language, String name, Label label, String longDescription, LatLng location,
+        String category, Sitelinks siteLinks, String pic, Boolean exists, String entityID) {
         this.language = language;
         this.name = name;
         this.label = label;
@@ -54,21 +60,37 @@ public class Place implements Parcelable {
         this.location = location;
         this.category = category;
         this.siteLinks = siteLinks;
-        this.pic = (pic == null) ? "":pic;
+        this.pic = (pic == null) ? "" : pic;
+        this.exists = exists;
+        this.entityID = entityID;
+    }
+
+    public Place(String language, String name, Label label, String longDescription, LatLng location,
+        String category, Sitelinks siteLinks, String pic, Boolean exists) {
+        this.language = language;
+        this.name = name;
+        this.label = label;
+        this.longDescription = longDescription;
+        this.location = location;
+        this.category = category;
+        this.siteLinks = siteLinks;
+        this.pic = (pic == null) ? "" : pic;
         this.exists = exists;
     }
 
-    public Place(String name, String longDescription, LatLng location, String category, Sitelinks siteLinks, String pic, String thumb) {
+    public Place(String name, String longDescription, LatLng location, String category,
+        Sitelinks siteLinks, String pic, String thumb, String entityID) {
         this.name = name;
         this.longDescription = longDescription;
         this.location = location;
         this.category = category;
         this.siteLinks = siteLinks;
-        this.pic = (pic == null) ? "":pic;
+        this.pic = (pic == null) ? "" : pic;
         this.thumb = thumb;
         this.language = null;
         this.label = null;
         this.exists = true;
+        this.entityID = entityID;
     }
 
     public Place(Parcel in) {
@@ -80,19 +102,27 @@ public class Place implements Parcelable {
         this.category = in.readString();
         this.siteLinks = in.readParcelable(Sitelinks.class.getClassLoader());
         String picString = in.readString();
-        this.pic = (picString == null) ? "":picString;
+        this.pic = (picString == null) ? "" : picString;
         String existString = in.readString();
         this.exists = Boolean.parseBoolean(existString);
         this.isMonument = in.readInt() == 1;
+        this.entityID = in.readString();
     }
+
     public static Place from(NearbyResultItem item) {
         String itemClass = item.getClassName().getValue();
         String classEntityId = "";
-        if(!StringUtils.isBlank(itemClass)) {
+        if (!StringUtils.isBlank(itemClass)) {
             classEntityId = itemClass.replace("http://www.wikidata.org/entity/", "");
         }
+        String entityId = "";
+        if (!StringUtils.isBlank(item.getItem().getValue())){
+            entityId = item.getItem().getValue().replace("http://www.wikidata.org/entity/", "");
+        }
         // Set description when not null and not empty
-        String description = (item.getDescription().getValue() != null && !item.getDescription().getValue().isEmpty()) ? item.getDescription().getValue() : "";
+        String description =
+            (item.getDescription().getValue() != null && !item.getDescription().getValue()
+                .isEmpty()) ? item.getDescription().getValue() : "";
         // When description is "?" but we have a valid label, just use the label. So replace "?" by "" in description
         description = (description.equals("?")
             && (item.getLabel().getValue() != null
@@ -104,8 +134,8 @@ public class Place implements Parcelable {
          */
         description = ((item.getLabel().getValue() != null && !item.getLabel().getValue().isEmpty())
             ? item.getLabel().getValue()
-                + ((description != null && !description.isEmpty())
-                ? " (" + description + ")" : "")
+            + ((description != null && !description.isEmpty())
+            ? " (" + description + ")" : "")
             : description);
         return new Place(
             item.getLabel().getLanguage(),
@@ -121,11 +151,12 @@ public class Place implements Parcelable {
                 .build(),
             item.getPic().getValue(),
             // Checking if the place exists or not
-            (item.getDestroyed().getValue() == "") && (item.getEndTime().getValue() == ""));
+            (item.getDestroyed().getValue() == "") && (item.getEndTime().getValue() == ""), entityId);
     }
 
     /**
      * Gets the language of the caption ie name.
+     *
      * @return language
      */
     public String getLanguage() {
@@ -134,12 +165,27 @@ public class Place implements Parcelable {
 
     /**
      * Gets the name of the place
+     *
      * @return name
      */
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
-    /** Gets the label of the place
-     * e.g. "building", "city", etc
+    /**
+     * Gets the distance between place and curLatLng
+     *
+     * @param curLatLng
+     * @return name
+     */
+    public Double getDistanceInDouble(LatLng curLatLng) {
+        return LocationUtils.calculateDistance(curLatLng.getLatitude(), curLatLng.getLongitude(),
+            getLocation().getLatitude(), getLocation().getLongitude());
+    }
+
+    /**
+     * Gets the label of the place e.g. "building", "city", etc
+     *
      * @return label
      */
     public Label getLabel() {
@@ -152,6 +198,7 @@ public class Place implements Parcelable {
 
     /**
      * Gets the long description of the place
+     *
      * @return long description
      */
     public String getLongDescription() {
@@ -160,12 +207,16 @@ public class Place implements Parcelable {
 
     /**
      * Gets the Commons category of the place
+     *
      * @return Commons category
      */
-    public String getCategory() {return category; }
+    public String getCategory() {
+        return category;
+    }
 
     /**
      * Sets the distance of the place from the user's location
+     *
      * @param distance distance of place from user's location
      */
     public void setDistance(String distance) {
@@ -174,6 +225,7 @@ public class Place implements Parcelable {
 
     /**
      * Extracts the entity id from the wikidata link
+     *
      * @return returns the entity id if wikidata link destroyed
      */
     @Nullable
@@ -189,6 +241,7 @@ public class Place implements Parcelable {
 
     /**
      * Checks if the Wikidata item has a Wikipedia page associated with it
+     *
      * @return true if there is a Wikipedia link
      */
     public boolean hasWikipediaLink() {
@@ -197,6 +250,7 @@ public class Place implements Parcelable {
 
     /**
      * Checks if the Wikidata item has a Wikidata page associated with it
+     *
      * @return true if there is a Wikidata link
      */
     public boolean hasWikidataLink() {
@@ -205,6 +259,7 @@ public class Place implements Parcelable {
 
     /**
      * Checks if the Wikidata item has a Commons page associated with it
+     *
      * @return true if there is a Commons link
      */
     public boolean hasCommonsLink() {
@@ -213,6 +268,7 @@ public class Place implements Parcelable {
 
     /**
      * Sets that this place in nearby is a WikiData monument
+     *
      * @param monument
      */
     public void setMonument(final boolean monument) {
@@ -221,6 +277,7 @@ public class Place implements Parcelable {
 
     /**
      * Returns if this place is a WikiData monument
+     *
      * @return
      */
     public boolean isMonument() {
@@ -229,6 +286,7 @@ public class Place implements Parcelable {
 
     /**
      * Check if we already have the exact same Place
+     *
      * @param o Place being tested
      * @return true if name and location of Place is exactly the same
      */
@@ -250,17 +308,18 @@ public class Place implements Parcelable {
     @Override
     public String toString() {
         return "Place{" +
-                "name='" + name + '\'' +
-                ", lang='" + language + '\'' +
-                ", label='" + label + '\'' +
-                ", longDescription='" + longDescription + '\'' +
-                ", location='" + location + '\'' +
-                ", category='" + category + '\'' +
-                ", distance='" + distance + '\'' +
-                ", siteLinks='" + siteLinks.toString() + '\'' +
-                ", pic='" + pic + '\'' +
-                ", exists='" + exists.toString() + '\'' +
-                '}';
+            "name='" + name + '\'' +
+            ", lang='" + language + '\'' +
+            ", label='" + label + '\'' +
+            ", longDescription='" + longDescription + '\'' +
+            ", location='" + location + '\'' +
+            ", category='" + category + '\'' +
+            ", distance='" + distance + '\'' +
+            ", siteLinks='" + siteLinks.toString() + '\'' +
+            ", pic='" + pic + '\'' +
+            ", exists='" + exists.toString() + '\'' +
+            ", entityID='" + entityID + '\'' +
+            '}';
     }
 
     @Override
@@ -278,6 +337,7 @@ public class Place implements Parcelable {
         dest.writeString(category);
         dest.writeParcelable(siteLinks, 0);
         dest.writeString(pic);
+        dest.writeString(entityID);
         dest.writeString(exists.toString());
         dest.writeInt(isMonument ? 1 : 0);
     }
@@ -298,7 +358,40 @@ public class Place implements Parcelable {
         return thumb;
     }
 
+    /**
+     * Sets the thumbnail URL for the place.
+     *
+     * @param thumb the thumbnail URL to set
+     */
     public void setThumb(String thumb) {
         this.thumb = thumb;
     }
+
+    /**
+     * Sets the label for the place.
+     *
+     * @param label the label to set
+     */
+    public void setLabel(Label label) {
+        this.label = label;
+    }
+
+    /**
+     * Sets the long description for the place.
+     *
+     * @param longDescription the long description to set
+     */
+    public void setLongDescription(String longDescription) {
+        this.longDescription = longDescription;
+    }
+
+    /**
+     * Sets the Commons category for the place.
+     *
+     * @param category the category to set
+     */
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
 }

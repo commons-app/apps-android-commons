@@ -14,8 +14,10 @@ import android.location.Location;
 import android.view.View;
 import androidx.annotation.MainThread;
 import androidx.annotation.Nullable;
+import androidx.work.ExistingWorkPolicy;
 import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
+import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
@@ -25,9 +27,13 @@ import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.MarkerPlaceGroup;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyFilterState;
+import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.nearby.PlaceDao;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
+import fr.free.nrw.commons.upload.worker.WorkRequestHelper;
 import fr.free.nrw.commons.utils.LocationUtils;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
+import io.reactivex.disposables.CompositeDisposable;
 import java.lang.reflect.Proxy;
 import java.util.List;
 import timber.log.Timber;
@@ -213,19 +219,20 @@ public class NearbyParentFragmentPresenter
      * Populates places for custom location, should be used for finding nearby places around a
      * location where you are not at.
      *
-     * @param nearbyPlacesInfo This variable has placeToCenter list information and distances.
+     * @param nearbyPlaces This variable has placeToCenter list information and distances.
      */
-    public void updateMapMarkers(NearbyController.NearbyPlacesInfo nearbyPlacesInfo, boolean shouldTrackPosition) {
+    public void updateMapMarkers(List<Place> nearbyPlaces, LatLng currentLatLng,
+        boolean shouldTrackPosition) {
         if (null != nearbyParentFragmentView) {
             nearbyParentFragmentView.clearAllMarkers();
             List<BaseMarker> baseMarkers = NearbyController
-                .loadAttractionsFromLocationToBaseMarkerOptions(nearbyPlacesInfo.currentLatLng,
+                .loadAttractionsFromLocationToBaseMarkerOptions(currentLatLng,
                     // Curlatlang will be used to calculate distances
-                    nearbyPlacesInfo.placeList);
+                    nearbyPlaces);
             nearbyParentFragmentView.updateMapMarkers(baseMarkers);
             lockUnlockNearby(false); // So that new location updates wont come
             nearbyParentFragmentView.setProgressBarVisibility(false);
-            nearbyParentFragmentView.updateListFragment(nearbyPlacesInfo.placeList);
+            nearbyParentFragmentView.updateListFragment(nearbyPlaces);
         }
     }
 
@@ -278,18 +285,12 @@ public class NearbyParentFragmentPresenter
                 case CHECKED:
                     // Despite showing all labels NearbyFilterState still should be applied
                     nearbyParentFragmentView.filterMarkersByLabels(selectedLabels,
-                        NearbyFilterState.getInstance().isExistsSelected(),
-                        NearbyFilterState.getInstance().isNeedPhotoSelected(),
-                        NearbyFilterState.getInstance().isWlmSelected(),
                         filterForPlaceState, false);
                     nearbyParentFragmentView.setRecyclerViewAdapterAllSelected();
                     break;
             }
         } else {
             nearbyParentFragmentView.filterMarkersByLabels(selectedLabels,
-                NearbyFilterState.getInstance().isExistsSelected(),
-                NearbyFilterState.getInstance().isNeedPhotoSelected(),
-                NearbyFilterState.getInstance().isWlmSelected(),
                 filterForPlaceState, false);
         }
     }
@@ -327,17 +328,17 @@ public class NearbyParentFragmentPresenter
         }
     }
 
-    public View.OnClickListener onSearchThisAreaClicked() {
-        return v -> {
-            // Lock map operations during search this area operation
-//            nearbyParentFragmentView.setMapCenter();
-            nearbyParentFragmentView.setSearchThisAreaButtonVisibility(false);
-            if (searchCloseToCurrentLocation()) {
-                updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
-            } else {
-                updateMapAndList(SEARCH_CUSTOM_AREA);
-            }
-        };
+    /**
+     * Initiates a search for places within the area. Depending on whether the search
+     * is close to the current location, the map and list are updated
+     * accordingly.
+     */
+    public void searchInTheArea(){
+        if (searchCloseToCurrentLocation()) {
+            updateMapAndList(LOCATION_SIGNIFICANTLY_CHANGED);
+        } else {
+            updateMapAndList(SEARCH_CUSTOM_AREA);
+        }
     }
 
     /**
@@ -368,7 +369,6 @@ public class NearbyParentFragmentPresenter
 
     public void onMapReady() {
         if (null != nearbyParentFragmentView) {
-            nearbyParentFragmentView.addSearchThisAreaButtonAction();
             initializeMapOperations();
         }
     }
