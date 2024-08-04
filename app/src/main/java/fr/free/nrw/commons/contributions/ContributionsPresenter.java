@@ -34,13 +34,13 @@ public class ContributionsPresenter implements UserActionListener {
         @Named(CommonsApplicationModule.IO_THREAD) Scheduler ioThreadScheduler) {
         this.contributionsRepository = repository;
         this.uploadRepository = uploadRepository;
-        this.ioThreadScheduler=ioThreadScheduler;
+        this.ioThreadScheduler = ioThreadScheduler;
     }
 
     @Override
     public void onAttachView(ContributionsContract.View view) {
         this.view = view;
-        compositeDisposable=new CompositeDisposable();
+        compositeDisposable = new CompositeDisposable();
     }
 
     @Override
@@ -54,7 +54,12 @@ public class ContributionsPresenter implements UserActionListener {
         return contributionsRepository.getContributionWithFileName(title);
     }
 
-    public void checkDuplicateImageAndRestartContribution(Contribution contribution){
+    /**
+     * Checks if a contribution is a duplicate and restarts the contribution process if it is not.
+     *
+     * @param contribution The contribution to check and potentially restart.
+     */
+    public void checkDuplicateImageAndRestartContribution(Contribution contribution) {
         compositeDisposable.add(uploadRepository
             .checkDuplicateImage(contribution.getLocalUriPath().getPath())
             .subscribeOn(ioThreadScheduler)
@@ -62,7 +67,7 @@ public class ContributionsPresenter implements UserActionListener {
                 if (imageCheckResult == IMAGE_OK) {
                     contribution.setState(Contribution.STATE_QUEUED);
                     saveContribution(contribution);
-                }else {
+                } else {
                     Timber.e("Contribution already exists");
                     compositeDisposable.add(contributionsRepository
                         .deleteContributionFromDB(contribution)

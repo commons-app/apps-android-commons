@@ -8,8 +8,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
-import android.os.Build.VERSION
-import android.os.Build.VERSION_CODES
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.multidex.BuildConfig
@@ -41,9 +39,6 @@ import fr.free.nrw.commons.upload.UploadResult
 import fr.free.nrw.commons.wikidata.WikidataEditService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -169,7 +164,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
 
     override suspend fun doWork(): Result {
         try {
-            var countUpload = 0
+            var totalUploadsStarted = 0
             // Start a foreground service
             setForeground(createForegroundInfo())
             notificationManager = NotificationManagerCompat.from(appContext)
@@ -217,8 +212,8 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                         contribution.transferred = 0
                         contribution.state = Contribution.STATE_IN_PROGRESS
                         contributionDao.saveSynchronous(contribution)
-                        setProgressAsync(Data.Builder().putInt("progress", countUpload).build())
-                        countUpload++
+                        setProgressAsync(Data.Builder().putInt("progress", totalUploadsStarted).build())
+                        totalUploadsStarted++
                         uploadContribution(contribution = contribution)
                     }
                 }
@@ -576,6 +571,9 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
         )
     }
 
+    /**
+     * Shows a notification for a failed contribution upload.
+     */
     @SuppressLint("StringFormatInvalid")
     private fun showErrorNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle

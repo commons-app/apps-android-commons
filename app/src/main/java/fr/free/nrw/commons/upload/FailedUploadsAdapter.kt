@@ -22,12 +22,19 @@ class FailedUploadsAdapter(callback: Callback) :
     PagedListAdapter<Contribution, FailedUploadsAdapter.ViewHolder>(ContributionDiffCallback()) {
     private var callback: Callback = callback
 
+    /**
+     * Creates a new ViewHolder instance. Inflates the layout for each item in the list.
+     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view: View =
             LayoutInflater.from(parent.context).inflate(R.layout.item_failed_upload, parent, false)
         return ViewHolder(view)
     }
 
+    /**
+     * Binds data to the provided ViewHolder. Sets up the item view with data from the
+     * contribution at the specified position.
+     */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item: Contribution? = getItem(position)
         if (item != null) {
@@ -69,6 +76,9 @@ class FailedUploadsAdapter(callback: Callback) :
         holder.itemImage.setImageRequest(imageRequest)
     }
 
+    /**
+     * ViewHolder for the failed upload item. Holds references to the views for each item.
+     */
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var itemImage: com.facebook.drawee.view.SimpleDraweeView =
             itemView.findViewById(R.id.itemImage)
@@ -79,10 +89,18 @@ class FailedUploadsAdapter(callback: Callback) :
         var retryButton: ImageView = itemView.findViewById(R.id.retryButton)
     }
 
+    /**
+     * Returns the ID of the item at the specified position. Uses the pageId of the contribution
+     * for unique identification.
+     */
     override fun getItemId(position: Int): Long {
         return getItem(position)?.pageId?.hashCode()?.toLong() ?: position.toLong()
     }
 
+    /**
+     * Uses DiffUtil to calculate the changes in the list
+     * It has methods that check pageId and the content of the items to determine if its a new item
+     */
     class ContributionDiffCallback : DiffUtil.ItemCallback<Contribution>() {
         override fun areItemsTheSame(oldItem: Contribution, newItem: Contribution): Boolean {
             return oldItem.pageId.hashCode() == newItem.pageId.hashCode()
@@ -93,8 +111,22 @@ class FailedUploadsAdapter(callback: Callback) :
         }
     }
 
+    /**
+     * Callback interface for handling actions related to failed uploads.
+     */
     interface Callback {
+        /**
+         * Deletes the failed upload item.
+         *
+         * @param contribution to be deleted.
+         */
         fun deleteUpload(contribution: Contribution?)
+
+        /**
+         * Restarts the upload for the item at the specified index.
+         *
+         * @param index The position of the item in the list.
+         */
         fun restartUpload(index: Int)
     }
 }

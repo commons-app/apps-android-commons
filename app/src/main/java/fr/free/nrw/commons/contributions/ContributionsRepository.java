@@ -29,6 +29,7 @@ public class ContributionsRepository {
 
     /**
      * Deletes a failed upload from DB
+     *
      * @param contribution
      * @return
      */
@@ -36,12 +37,19 @@ public class ContributionsRepository {
         return localDataSource.deleteContribution(contribution);
     }
 
+    /**
+     * Deletes contributions from the database with specific states.
+     *
+     * @param states The states of the contributions to delete.
+     * @return A Completable indicating the result of the operation.
+     */
     public Completable deleteContributionsFromDBWithStates(List<Integer> states) {
         return localDataSource.deleteContributionsWithStates(states);
     }
 
     /**
      * Get contribution object with title
+     *
      * @param fileName
      * @return
      */
@@ -53,11 +61,25 @@ public class ContributionsRepository {
         return localDataSource.getContributions();
     }
 
+    /**
+     * Fetches contributions with specific states.
+     *
+     * @param states The states of the contributions to fetch.
+     * @return A DataSource factory for paginated contributions with the specified states.
+     */
     public Factory<Integer, Contribution> fetchContributionsWithStates(List<Integer> states) {
         return localDataSource.getContributionsWithStates(states);
     }
 
-    public Factory<Integer, Contribution> fetchContributionsWithStatesSortedByDateUploadStarted(List<Integer> states) {
+    /**
+     * Fetches contributions with specific states sorted by the date the upload started.
+     *
+     * @param states The states of the contributions to fetch.
+     * @return A DataSource factory for paginated contributions with the specified states sorted by
+     * date upload started.
+     */
+    public Factory<Integer, Contribution> fetchContributionsWithStatesSortedByDateUploadStarted(
+        List<Integer> states) {
         return localDataSource.getContributionsWithStatesSortedByDateUploadStarted(states);
     }
 
@@ -65,19 +87,26 @@ public class ContributionsRepository {
         return localDataSource.saveContributions(contributions);
     }
 
-    public Completable save(Contribution contributions){
+    public Completable save(Contribution contributions) {
         return localDataSource.saveContributions(contributions);
     }
 
     public void set(String key, long value) {
-        localDataSource.set(key,value);
+        localDataSource.set(key, value);
     }
 
     public Completable updateContribution(Contribution contribution) {
         return localDataSource.updateContribution(contribution);
     }
 
-    public Completable updateContributionWithStates(List<Integer> states, int newState) {
+    /**
+     * Updates the state of contributions with specific states.
+     *
+     * @param states   The current states of the contributions to update.
+     * @param newState The new state to set.
+     * @return A Completable indicating the result of the operation.
+     */
+    public Completable updateContributionsWithStates(List<Integer> states, int newState) {
         return localDataSource.updateContributionsWithStates(states, newState);
     }
 }

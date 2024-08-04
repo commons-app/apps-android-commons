@@ -17,6 +17,7 @@ import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.contributions.ChunkInfo
 import fr.free.nrw.commons.contributions.Contribution
+import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.upload.UploadClient.TimeProvider
 import fr.free.nrw.commons.upload.worker.UploadWorker
 import fr.free.nrw.commons.wikidata.mwapi.MwException
@@ -44,8 +45,17 @@ class UploadClientTest {
     private val pageContentsCreator = mock<PageContentsCreator>()
     private val fileUtilsWrapper = mock<FileUtilsWrapper>()
     private val gson = mock<Gson>()
+    private val contributionDao = mock<ContributionDao> { }
     private val timeProvider = mock<TimeProvider>()
-    private val uploadClient = UploadClient(uploadInterface, csrfTokenClient, pageContentsCreator, fileUtilsWrapper, gson, timeProvider)
+    private val uploadClient = UploadClient(
+        uploadInterface,
+        csrfTokenClient,
+        pageContentsCreator,
+        fileUtilsWrapper,
+        gson,
+        timeProvider,
+        contributionDao
+    )
 
     private val expectedChunkSize = 512 * 1024
     private val testToken = "test-token"
@@ -67,7 +77,15 @@ class UploadClientTest {
     @Test
     fun testUploadFileFromStash_NoErrors() {
         whenever(gson.fromJson(uploadJson, UploadResponse::class.java)).thenReturn(uploadResponse)
-        whenever(uploadInterface.uploadFileFromStash(testToken, createdContent, DEFAULT_EDIT_SUMMARY, filename, filekey)).thenReturn(Observable.just(uploadJson))
+        whenever(
+            uploadInterface.uploadFileFromStash(
+                testToken,
+                createdContent,
+                DEFAULT_EDIT_SUMMARY,
+                filename,
+                filekey
+            )
+        ).thenReturn(Observable.just(uploadJson))
 
         val result = uploadClient.uploadFileFromStash(contribution, filename, filekey).test()
 
@@ -83,7 +101,15 @@ class UploadClientTest {
 
         whenever(gson.fromJson(uploadJson, UploadResponse::class.java)).thenReturn(errorResponse)
         whenever(gson.fromJson(uploadJson, MwException::class.java)).thenReturn(uploadException)
-        whenever(uploadInterface.uploadFileFromStash(testToken, createdContent, DEFAULT_EDIT_SUMMARY, filename, filekey)).thenReturn(Observable.just(uploadJson))
+        whenever(
+            uploadInterface.uploadFileFromStash(
+                testToken,
+                createdContent,
+                DEFAULT_EDIT_SUMMARY,
+                filename,
+                filekey
+            )
+        ).thenReturn(Observable.just(uploadJson))
 
         val result = uploadClient.uploadFileFromStash(contribution, filename, filekey).test()
 
@@ -94,7 +120,15 @@ class UploadClientTest {
     @Test
     fun testUploadFileFromStash_Failure() {
         val exception = Exception("test")
-        whenever(uploadInterface.uploadFileFromStash(testToken, createdContent, DEFAULT_EDIT_SUMMARY, filename, filekey))
+        whenever(
+            uploadInterface.uploadFileFromStash(
+                testToken,
+                createdContent,
+                DEFAULT_EDIT_SUMMARY,
+                filename,
+                filekey
+            )
+        )
             .thenReturn(Observable.error(exception))
 
         val result = uploadClient.uploadFileFromStash(contribution, filename, filekey).test()
@@ -107,7 +141,8 @@ class UploadClientTest {
     fun testUploadChunkToStash_Success() {
         val fileContent = "content"
         val requestBody: RequestBody = fileContent.toRequestBody("text/plain".toMediaType())
-        val countingRequestBody = CountingRequestBody(requestBody, mock(), 0, fileContent.length.toLong())
+        val countingRequestBody =
+            CountingRequestBody(requestBody, mock(), 0, fileContent.length.toLong())
 
         val filenameCaptor: KArgumentCaptor<RequestBody> = argumentCaptor<RequestBody>()
         val totalFileSizeCaptor = argumentCaptor<RequestBody>()
@@ -116,12 +151,15 @@ class UploadClientTest {
         val tokenCaptor = argumentCaptor<RequestBody>()
         val fileCaptor = argumentCaptor<MultipartBody.Part>()
 
-        whenever(uploadInterface.uploadFileToStash(
-            filenameCaptor.capture(), totalFileSizeCaptor.capture(), offsetCaptor.capture(),
-            fileKeyCaptor.capture(), tokenCaptor.capture(), fileCaptor.capture()
-        )).thenReturn(Observable.just(uploadResponse))
+        whenever(
+            uploadInterface.uploadFileToStash(
+                filenameCaptor.capture(), totalFileSizeCaptor.capture(), offsetCaptor.capture(),
+                fileKeyCaptor.capture(), tokenCaptor.capture(), fileCaptor.capture()
+            )
+        ).thenReturn(Observable.just(uploadResponse))
 
-        val result = uploadClient.uploadChunkToStash(filename, 100, 10, filekey, countingRequestBody).test()
+        val result =
+            uploadClient.uploadChunkToStash(filename, 100, 10, filekey, countingRequestBody).test()
 
         result.assertNoErrors()
         assertSame(uploadResult, result.values()[0])
@@ -164,7 +202,12 @@ class UploadClientTest {
         whenever(contribution.isCompleted()).thenReturn(false)
         whenever(contribution.fileKey).thenReturn(filekey)
         whenever(fileUtilsWrapper.getMimeType(anyOrNull<File>())).thenReturn("image/png")
-        whenever(fileUtilsWrapper.getFileChunks(anyOrNull<File>(), eq(expectedChunkSize))).thenReturn(emptyList())
+        whenever(
+            fileUtilsWrapper.getFileChunks(
+                anyOrNull<File>(),
+                eq(expectedChunkSize)
+            )
+        ).thenReturn(emptyList())
         val result = uploadClient.uploadFileToStash(filename, contribution, mock()).test()
         result.assertNoErrors()
         verify(contribution, times(1))
@@ -185,7 +228,12 @@ class UploadClientTest {
         whenever(contribution.isCompleted()).thenReturn(false)
         whenever(contribution.fileKey).thenReturn(filekey)
         whenever(fileUtilsWrapper.getMimeType(anyOrNull<File>())).thenReturn("image/png")
-        whenever(fileUtilsWrapper.getFileChunks(anyOrNull<File>(), eq(expectedChunkSize))).thenReturn(emptyList())
+        whenever(
+            fileUtilsWrapper.getFileChunks(
+                anyOrNull<File>(),
+                eq(expectedChunkSize)
+            )
+        ).thenReturn(emptyList())
 
         val result = uploadClient.uploadFileToStash(filename, contribution, mock()).test()
 
@@ -201,8 +249,22 @@ class UploadClientTest {
         whenever(contribution.isCompleted()).thenReturn(false)
         whenever(contribution.fileKey).thenReturn(filekey)
         whenever(fileUtilsWrapper.getMimeType(anyOrNull<File>())).thenReturn("image/png")
-        whenever(fileUtilsWrapper.getFileChunks(anyOrNull<File>(), eq(expectedChunkSize))).thenReturn(listOf(mockFile))
-        whenever(uploadInterface.uploadFileToStash(any(), any(), any(), any(), any(), any())).thenReturn(Observable.just(uploadResponse))
+        whenever(
+            fileUtilsWrapper.getFileChunks(
+                anyOrNull<File>(),
+                eq(expectedChunkSize)
+            )
+        ).thenReturn(listOf(mockFile))
+        whenever(
+            uploadInterface.uploadFileToStash(
+                any(),
+                any(),
+                any(),
+                any(),
+                any(),
+                any()
+            )
+        ).thenReturn(Observable.just(uploadResponse))
 
         val result = uploadClient.uploadFileToStash(filename, contribution, mock()).test()
 
@@ -228,10 +290,19 @@ class UploadClientTest {
         whenever(contribution.fileKey).thenReturn(filekey)
 
         whenever(fileUtilsWrapper.getMimeType(anyOrNull<File>())).thenReturn("image/png")
-        whenever(fileUtilsWrapper.getFileChunks(anyOrNull<File>(), eq(expectedChunkSize))).thenReturn(listOf(mockFile))
+        whenever(
+            fileUtilsWrapper.getFileChunks(
+                anyOrNull<File>(),
+                eq(expectedChunkSize)
+            )
+        ).thenReturn(listOf(mockFile))
 
-        whenever(uploadInterface.uploadFileToStash(anyOrNull(), anyOrNull(), anyOrNull(),
-            anyOrNull(), anyOrNull(), anyOrNull())).thenReturn(Observable.just(uploadResponse))
+        whenever(
+            uploadInterface.uploadFileToStash(
+                anyOrNull(), anyOrNull(), anyOrNull(),
+                anyOrNull(), anyOrNull(), anyOrNull()
+            )
+        ).thenReturn(Observable.just(uploadResponse))
 
         val result = uploadClient.uploadFileToStash(filename, contribution, mock()).test()
 

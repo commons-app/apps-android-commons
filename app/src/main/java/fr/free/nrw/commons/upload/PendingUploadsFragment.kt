@@ -27,18 +27,12 @@ import timber.log.Timber
 import java.util.Locale
 import javax.inject.Inject
 
-
 /**
- * A simple [Fragment] subclass.
- * Use the [PendingUploadsFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * Fragment for showing pending uploads in Upload Progress Activity. This fragment provides
+ * functionality for the user to pause uploads.
  */
 class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsContract.View,
     PendingUploadsAdapter.Callback {
-    private var param1: String? = null
-    private var param2: String? = null
-    private val ARG_PARAM1 = "param1"
-    private val ARG_PARAM2 = "param2"
 
     @Inject
     lateinit var pendingUploadsPresenter: PendingUploadsPresenter
@@ -51,14 +45,6 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
 
     private var contributionsSize = 0
     var contributionsList = ArrayList<Contribution>()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -87,6 +73,9 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
         initRecyclerView()
     }
 
+    /**
+     * Initializes the recycler view.
+     */
     fun initRecyclerView() {
         binding.pendingUploadsRecyclerView.setLayoutManager(LinearLayoutManager(this.context))
         binding.pendingUploadsRecyclerView.adapter = adapter
@@ -130,19 +119,22 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
         }
     }
 
+    /**
+     * Cancels a specific upload after getting a confirmation from the user using Dialog.
+     */
     override fun deleteUpload(contribution: Contribution?) {
         showAlertDialog(
             requireActivity(),
             String.format(
                 Locale.getDefault(),
-                getString(R.string.cancelling_upload)
+                requireActivity().getString(R.string.cancelling_upload)
             ),
             String.format(
                 Locale.getDefault(),
-                getString(R.string.cancel_upload_dialog)
+                requireActivity().getString(R.string.cancel_upload_dialog)
             ),
-            String.format(Locale.getDefault(), getString(R.string.yes)),
-            String.format(Locale.getDefault(), getString(R.string.no)),
+            String.format(Locale.getDefault(), requireActivity().getString(R.string.yes)),
+            String.format(Locale.getDefault(), requireActivity().getString(R.string.no)),
             {
                 ViewUtil.showShortToast(context, R.string.cancelling_upload)
                 pendingUploadsPresenter.deleteUpload(
@@ -154,17 +146,9 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
         )
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PendingUploadsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
-
+    /**
+     * Restarts all the paused uploads.
+     */
     fun restartUploads() {
         if (contributionsList != null) {
             pendingUploadsPresenter.restartUploads(
@@ -175,27 +159,29 @@ class PendingUploadsFragment : CommonsDaggerSupportFragment(), PendingUploadsCon
         }
     }
 
+    /**
+     * Pauses all the ongoing uploads.
+     */
     fun pauseUploads() {
-        pendingUploadsPresenter.pauseUploads(
-            listOf(Contribution.STATE_QUEUED, Contribution.STATE_IN_PROGRESS),
-            Contribution.STATE_PAUSED
-        )
-
+        pendingUploadsPresenter.pauseUploads()
     }
 
+    /**
+     * Cancels all the uploads after getting a confirmation from the user using Dialog.
+     */
     fun deleteUploads() {
         showAlertDialog(
             requireActivity(),
             String.format(
                 Locale.getDefault(),
-                getString(R.string.cancelling_all_the_uploads)
+                requireActivity().getString(R.string.cancelling_all_the_uploads)
             ),
             String.format(
                 Locale.getDefault(),
-                getString(R.string.are_you_sure_that_you_want_cancel_all_the_uploads)
+                requireActivity().getString(R.string.are_you_sure_that_you_want_cancel_all_the_uploads)
             ),
-            String.format(Locale.getDefault(), getString(R.string.yes)),
-            String.format(Locale.getDefault(), getString(R.string.no)),
+            String.format(Locale.getDefault(), requireActivity().getString(R.string.yes)),
+            String.format(Locale.getDefault(), requireActivity().getString(R.string.no)),
             {
                 ViewUtil.showShortToast(context, R.string.cancelling_upload)
                 uploadProgressActivity.hidePendingIcons()

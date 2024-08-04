@@ -64,6 +64,12 @@ class ContributionsLocalDataSource {
         return contributionDao.delete(contribution);
     }
 
+    /**
+     * Deletes contributions with specific states.
+     *
+     * @param states The states of the contributions to delete.
+     * @return A Completable indicating the result of the operation.
+     */
     public Completable deleteContributionsWithStates(List<Integer> states) {
         return contributionDao.deleteContributionsWithStates(states);
     }
@@ -72,10 +78,23 @@ class ContributionsLocalDataSource {
         return contributionDao.fetchContributions();
     }
 
+    /**
+     * Fetches contributions with specific states.
+     *
+     * @param states The states of the contributions to fetch.
+     * @return A DataSource factory for paginated contributions with the specified states.
+     */
     public Factory<Integer, Contribution> getContributionsWithStates(List<Integer> states) {
         return contributionDao.getContributions(states);
     }
 
+    /**
+     * Fetches contributions with specific states sorted by the date the upload started.
+     *
+     * @param states The states of the contributions to fetch.
+     * @return A DataSource factory for paginated contributions with the specified states sorted by
+     * date upload started.
+     */
     public Factory<Integer, Contribution> getContributionsWithStatesSortedByDateUploadStarted(
         List<Integer> states) {
         return contributionDao.getContributionsSortedByDateUploadStarted(states);

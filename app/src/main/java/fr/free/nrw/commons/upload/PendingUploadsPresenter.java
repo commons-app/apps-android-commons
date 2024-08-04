@@ -22,6 +22,7 @@ import fr.free.nrw.commons.upload.PendingUploadsContract.View;
 import fr.free.nrw.commons.upload.worker.WorkRequestHelper;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
@@ -31,7 +32,7 @@ import javax.inject.Named;
 import timber.log.Timber;
 
 /**
- * The presenter class for Contributions
+ * The presenter class for PendingUploadsFragment and FailedUploadsFragment
  */
 public class PendingUploadsPresenter implements UserActionListener {
 
@@ -61,11 +62,10 @@ public class PendingUploadsPresenter implements UserActionListener {
         compositeDisposable = new CompositeDisposable();
     }
 
-
     /**
-     * Setup the paged list. This method sets the configuration for paged list and ties it up with
-     * the live data object. This method can be tweaked to update the lazy loading behavior of the
-     * contributions list
+     * Setups the paged list of Pending Uploads. This method sets the configuration for paged list
+     * and ties it up with the live data object. This method can be tweaked to update the lazy
+     * loading behavior of the contributions list
      */
     void setup() {
         final PagedList.Config pagedListConfig =
@@ -82,6 +82,11 @@ public class PendingUploadsPresenter implements UserActionListener {
         totalContributionList = livePagedListBuilder.build();
     }
 
+    /**
+     * Setups the paged list of Failed Uploads. This method sets the configuration for paged list
+     * and ties it up with the live data object. This method can be tweaked to update the lazy
+     * loading behavior of the contributions list
+     */
     void getFailedContributions() {
         final PagedList.Config pagedListConfig =
             (new PagedList.Config.Builder())
@@ -107,6 +112,12 @@ public class PendingUploadsPresenter implements UserActionListener {
         contributionBoundaryCallback.dispose();
     }
 
+    /**
+     * Deletes the specified upload (contribution) from the database.
+     *
+     * @param contribution The contribution object representing the upload to be deleted.
+     * @param context      The context in which the operation is being performed.
+     */
     @Override
     public void deleteUpload(final Contribution contribution, Context context) {
         compositeDisposable.add(contributionsRepository
@@ -115,14 +126,25 @@ public class PendingUploadsPresenter implements UserActionListener {
             .subscribe());
     }
 
-    public void pauseUploads(List<Integer> states, int newState) {
-        CommonsApplication.isPaused = true ;
+    /**
+     * Pauses all the uploads by changing the state of contributions from STATE_QUEUED and
+     * STATE_IN_PROGRESS to STATE_PAUSED in the database.
+     */
+    public void pauseUploads() {
+        CommonsApplication.isPaused = true;
         compositeDisposable.add(contributionsRepository
-            .updateContributionWithStates(states, newState)
+            .updateContributionsWithStates(
+                List.of(Contribution.STATE_QUEUED, Contribution.STATE_IN_PROGRESS),
+                Contribution.STATE_PAUSED)
             .subscribeOn(ioThreadScheduler)
             .subscribe());
     }
 
+    /**
+     * Deletes contributions from the database that match the specified states.
+     *
+     * @param states A list of integers representing the states of the contributions to be deleted.
+     */
     public void deleteUploads(List<Integer> states) {
         compositeDisposable.add(contributionsRepository
             .deleteContributionsFromDBWithStates(states)
@@ -130,6 +152,13 @@ public class PendingUploadsPresenter implements UserActionListener {
             .subscribe());
     }
 
+    /**
+     * Restarts the uploads for the specified list of contributions starting from the given index.
+     *
+     * @param contributionList The list of contributions to be restarted.
+     * @param index            The starting index in the list from which to restart uploads.
+     * @param context          The context in which the operation is being performed.
+     */
     public void restartUploads(List<Contribution> contributionList, int index, Context context) {
         CommonsApplication.isPaused = false;
         if (index >= contributionList.size()) {
@@ -182,6 +211,13 @@ public class PendingUploadsPresenter implements UserActionListener {
         }
     }
 
+    /**
+     * Restarts the upload for the specified list of contributions for the given index.
+     *
+     * @param contributionList The list of contributions.
+     * @param index            The index in the list which to be restarted.
+     * @param context          The context in which the operation is being performed.
+     */
     public void restartUpload(List<Contribution> contributionList, int index, Context context) {
         CommonsApplication.isPaused = false;
         if (index >= contributionList.size()) {
@@ -190,7 +226,7 @@ public class PendingUploadsPresenter implements UserActionListener {
         Contribution it = contributionList.get(index);
         if (it.getState() == Contribution.STATE_FAILED) {
             it.setDateUploadStarted(Calendar.getInstance().getTime());
-            if (it.getErrorInfo() == null){
+            if (it.getErrorInfo() == null) {
                 it.setChunkInfo(null);
                 it.setTransferred(0);
             }
@@ -205,7 +241,7 @@ public class PendingUploadsPresenter implements UserActionListener {
                             .subscribeOn(ioThreadScheduler)
                             .subscribe(() -> WorkRequestHelper.Companion.makeOneTimeWorkRequest(
                                 context, ExistingWorkPolicy.KEEP)));
-                    }else {
+                    } else {
                         Timber.e("Contribution already exists");
                         compositeDisposable.add(contributionsRepository
                             .deleteContributionFromDB(it)

@@ -17,7 +17,12 @@ import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
 
-
+/**
+ * Activity to manage the progress of uploads. It includes tabs to show pending and failed uploads,
+ * and provides menu options to pause, resume, cancel, and retry uploads. Also, it contains ViewPager
+ * which holds Pending Uploads Fragment and Failed Uploads Fragment to show list of pending and
+ * failed uploads respectively.
+ */
 class UploadProgressActivity : BaseActivity() {
 
     private lateinit var binding: ActivityUploadProgressBinding
@@ -70,6 +75,11 @@ class UploadProgressActivity : BaseActivity() {
         setTabs()
     }
 
+    /**
+     * Initializes and sets up the tabs data by creating instances of `PendingUploadsFragment`
+     * and `FailedUploadsFragment`, adds them to the `fragmentList`, and assigns corresponding
+     * titles from resources to the `titleList`.
+     */
     fun setTabs() {
         pendingUploadsFragment = PendingUploadsFragment()
         failedUploadsFragment = FailedUploadsFragment()
@@ -83,7 +93,7 @@ class UploadProgressActivity : BaseActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_uploads,menu)
+        menuInflater.inflate(R.menu.menu_uploads, menu)
         this.menu = menu
         updateMenuItems(0)
         return super.onCreateOptionsMenu(menu)
@@ -176,17 +186,28 @@ class UploadProgressActivity : BaseActivity() {
         }
     }
 
+    /**
+     * Hides the menu icons related to pending uploads.
+     */
     fun hidePendingIcons() {
         isPendingIconsVisible = false
         updateMenuItems(binding.uploadProgressViewPager.currentItem)
     }
 
-    fun setPausedIcon(paused : Boolean){
+    /**
+     * Sets the paused state and updates the menu items accordingly.
+     * @param paused A boolean indicating whether all the uploads are paused.
+     */
+    fun setPausedIcon(paused: Boolean) {
         isPaused = paused
         updateMenuItems(binding.uploadProgressViewPager.currentItem)
     }
 
-    fun setErrorIconsVisibility(visible : Boolean){
+    /**
+     * Sets the visibility of the menu icons related to failed uploads.
+     * @param visible A boolean indicating whether the error icons should be visible.
+     */
+    fun setErrorIconsVisibility(visible: Boolean) {
         isErrorIconsVisisble = visible
         updateMenuItems(binding.uploadProgressViewPager.currentItem)
     }

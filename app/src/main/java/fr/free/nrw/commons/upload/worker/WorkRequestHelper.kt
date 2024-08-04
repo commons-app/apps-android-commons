@@ -49,6 +49,9 @@ class WorkRequestHelper {
             isUploadWorkerRunning = true
         }
 
+        /**
+         * Sets the flag isUploadWorkerRunning to`false` allowing new worker to be started.
+         */
         fun markUploadWorkerAsStopped() {
             isUploadWorkerRunning = false
         }

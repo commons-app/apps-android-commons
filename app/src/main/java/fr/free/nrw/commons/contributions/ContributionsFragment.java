@@ -122,7 +122,8 @@ public class ContributionsFragment
 
     public FragmentContributionsBinding binding;
 
-    @Inject ContributionsPresenter contributionsPresenter;
+    @Inject
+    ContributionsPresenter contributionsPresenter;
 
     @Inject
     SessionManager sessionManager;
@@ -159,20 +160,22 @@ public class ContributionsFragment
                     areAllGranted = areAllGranted && b;
                 }
 
-            if (areAllGranted) {
-                onLocationPermissionGranted();
-            } else {
-                if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
-                    && store.getBoolean("displayLocationPermissionForCardView", true)
-                    && !store.getBoolean("doNotAskForLocationPermission", false)
-                    && (((MainActivity) getActivity()).activeFragment == ActiveFragment.CONTRIBUTIONS)) {
-                    binding.cardViewNearby.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
+                if (areAllGranted) {
+                    onLocationPermissionGranted();
                 } else {
-                    displayYouWontSeeNearbyMessage();
+                    if (shouldShowRequestPermissionRationale(
+                        Manifest.permission.ACCESS_FINE_LOCATION)
+                        && store.getBoolean("displayLocationPermissionForCardView", true)
+                        && !store.getBoolean("doNotAskForLocationPermission", false)
+                        && (((MainActivity) getActivity()).activeFragment
+                        == ActiveFragment.CONTRIBUTIONS)) {
+                        binding.cardViewNearby.permissionType = NearbyNotificationCardView.PermissionType.ENABLE_LOCATION_PERMISSION;
+                    } else {
+                        displayYouWontSeeNearbyMessage();
+                    }
                 }
             }
-        }
-    });
+        });
 
     @NonNull
     public static ContributionsFragment newInstance() {
@@ -210,10 +213,9 @@ public class ContributionsFragment
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 // Do not ask for permission on activity start again
-                store.putBoolean("displayLocationPermissionForCardView",false);
+                store.putBoolean("displayLocationPermissionForCardView", false);
             }
         });
-
 
         if (savedInstanceState != null) {
             mediaDetailPagerFragment = (MediaDetailPagerFragment) getChildFragmentManager()
@@ -224,7 +226,7 @@ public class ContributionsFragment
         }
 
         initFragments();
-        if(!isUserProfile) {
+        if (!isUserProfile) {
             upDateUploadCount();
         }
         if (shouldShowMediaDetailsFragment) {
@@ -269,10 +271,13 @@ public class ContributionsFragment
         notificationCount = notification.findViewById(R.id.notification_count_badge);
         MenuItem uploadMenuItem = menu.findItem(R.id.upload_tab);
         final View uploadMenuItemActionView = uploadMenuItem.getActionView();
-        pendingUploadsCountTextView = uploadMenuItemActionView.findViewById(R.id.pending_uploads_count_badge);
-        uploadsErrorTextView = uploadMenuItemActionView.findViewById(R.id.uploads_error_count_badge);
-        pendingUploadsImageView = uploadMenuItemActionView.findViewById(R.id.pending_uploads_image_view);
-        if (pendingUploadsImageView != null){
+        pendingUploadsCountTextView = uploadMenuItemActionView.findViewById(
+            R.id.pending_uploads_count_badge);
+        uploadsErrorTextView = uploadMenuItemActionView.findViewById(
+            R.id.uploads_error_count_badge);
+        pendingUploadsImageView = uploadMenuItemActionView.findViewById(
+            R.id.pending_uploads_image_view);
+        if (pendingUploadsImageView != null) {
             pendingUploadsImageView.setOnClickListener(view -> {
                 startActivity(new Intent(getContext(), UploadProgressActivity.class));
             });
@@ -301,13 +306,21 @@ public class ContributionsFragment
                 throwable -> Timber.e(throwable, "Error occurred while loading notifications")));
     }
 
+    /**
+     * Sets the visibility of the upload icon based on the number of failed and pending
+     * contributions.
+     */
     public void setUploadIconVisibility() {
         contributionController.getFailedAndPendingContributions();
-        contributionController.failedAndPendingContributionList.observe(getViewLifecycleOwner(), list -> {
-            updateUploadIcon(list.size());
-        });
+        contributionController.failedAndPendingContributionList.observe(getViewLifecycleOwner(),
+            list -> {
+                updateUploadIcon(list.size());
+            });
     }
 
+    /**
+     * Sets the count for the upload icon based on the number of pending and failed contributions.
+     */
     public void setUploadIconCount() {
         contributionController.getPendingContributions();
         contributionController.pendingContributionList.observe(getViewLifecycleOwner(),
@@ -379,7 +392,7 @@ public class ContributionsFragment
     }
 
     private void setupViewForMediaDetails() {
-        if (binding!=null) {
+        if (binding != null) {
             binding.campaignsView.setVisibility(View.GONE);
         }
     }
@@ -489,7 +502,7 @@ public class ContributionsFragment
         contributionsPresenter.onAttachView(this);
         locationManager.addLocationListener(this);
 
-        if (binding==null) {
+        if (binding == null) {
             return;
         }
 
@@ -508,7 +521,8 @@ public class ContributionsFragment
                 } catch (Exception e) {
                     Timber.e(e);
                 }
-                if (binding.cardViewNearby.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
+                if (binding.cardViewNearby.cardViewVisibilityState
+                    == NearbyNotificationCardView.CardViewVisibilityState.READY) {
                     binding.cardViewNearby.setVisibility(View.VISIBLE);
                 }
 
@@ -518,7 +532,7 @@ public class ContributionsFragment
             }
 
             // Notification Count and Campaigns should not be set, if it is used in User Profile
-            if(!isUserProfile) {
+            if (!isUserProfile) {
                 setNotificationCount();
                 fetchCampaigns();
                 setUploadIconVisibility();
@@ -529,7 +543,8 @@ public class ContributionsFragment
     }
 
     private void checkPermissionsAndShowNearbyCardView() {
-        if (PermissionUtils.hasPermission(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION})) {
+        if (PermissionUtils.hasPermission(getActivity(),
+            new String[]{Manifest.permission.ACCESS_FINE_LOCATION})) {
             onLocationPermissionGranted();
         } else if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
             && store.getBoolean("displayLocationPermissionForCardView", true)
@@ -662,14 +677,14 @@ public class ContributionsFragment
      */
     private void fetchCampaigns() {
         if (Utils.isMonumentsEnabled(new Date())) {
-            if (binding!=null) {
+            if (binding != null) {
                 binding.campaignsView.setCampaign(wlmCampaign);
                 binding.campaignsView.setVisibility(View.VISIBLE);
             }
         } else if (store.getBoolean(CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE, true)) {
             presenter.getCampaigns();
         } else {
-            if (binding!=null) {
+            if (binding != null) {
                 binding.campaignsView.setVisibility(View.GONE);
             }
         }
@@ -683,7 +698,7 @@ public class ContributionsFragment
     @Override
     public void showCampaigns(Campaign campaign) {
         if (campaign != null && !isUserProfile) {
-            if (binding!=null) {
+            if (binding != null) {
                 binding.campaignsView.setCampaign(campaign);
             }
         }
@@ -712,33 +727,49 @@ public class ContributionsFragment
         }
     }
 
+    /**
+     * Updates the visibility and text of the pending uploads count TextView based on the given
+     * count.
+     *
+     * @param pendingCount The number of pending uploads.
+     */
     public void updatePendingIcon(int pendingCount) {
-        if (pendingUploadsCountTextView != null){
-            if (pendingCount != 0){
+        if (pendingUploadsCountTextView != null) {
+            if (pendingCount != 0) {
                 pendingUploadsCountTextView.setVisibility(View.VISIBLE);
                 pendingUploadsCountTextView.setText(String.valueOf(pendingCount));
-            }else {
+            } else {
                 pendingUploadsCountTextView.setVisibility(View.INVISIBLE);
             }
         }
     }
 
+    /**
+     * Updates the visibility and text of the error uploads TextView based on the given count.
+     *
+     * @param errorCount The number of error uploads.
+     */
     public void updateErrorIcon(int errorCount) {
-        if (uploadsErrorTextView != null){
-            if (errorCount != 0){
+        if (uploadsErrorTextView != null) {
+            if (errorCount != 0) {
                 uploadsErrorTextView.setVisibility(View.VISIBLE);
                 uploadsErrorTextView.setText(String.valueOf(errorCount));
-            }else {
+            } else {
                 uploadsErrorTextView.setVisibility(View.GONE);
             }
         }
     }
 
+    /**
+     * Updates the visibility of the pending uploads ImageView based on the given count.
+     *
+     * @param count The number of pending uploads.
+     */
     public void updateUploadIcon(int count) {
-        if (pendingUploadsImageView != null){
-            if (count != 0){
+        if (pendingUploadsImageView != null) {
+            if (count != 0) {
                 pendingUploadsImageView.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 pendingUploadsImageView.setVisibility(View.GONE);
             }
         }
@@ -779,7 +810,8 @@ public class ContributionsFragment
     public boolean backButtonClicked() {
         if (mediaDetailPagerFragment != null && mediaDetailPagerFragment.isVisible()) {
             if (store.getBoolean("displayNearbyCardView", true) && !isUserProfile) {
-                if (binding.cardViewNearby.cardViewVisibilityState == NearbyNotificationCardView.CardViewVisibilityState.READY) {
+                if (binding.cardViewNearby.cardViewVisibilityState
+                    == NearbyNotificationCardView.CardViewVisibilityState.READY) {
                     binding.cardViewNearby.setVisibility(View.VISIBLE);
                 }
             } else {
@@ -834,7 +866,7 @@ public class ContributionsFragment
     public void restartUpload(Contribution contribution) {
         contribution.setDateUploadStarted(Calendar.getInstance().getTime());
         if (contribution.getState() == Contribution.STATE_FAILED) {
-            if (contribution.getErrorInfo() == null){
+            if (contribution.getErrorInfo() == null) {
                 contribution.setChunkInfo(null);
                 contribution.setTransferred(0);
             }

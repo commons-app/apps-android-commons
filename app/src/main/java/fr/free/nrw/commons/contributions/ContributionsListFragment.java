@@ -80,8 +80,6 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     private Animation rotate_forward;
     private Animation rotate_backward;
     private boolean isFabOpen;
-    public int pendingUploadsCount = 0;
-    public int uploadErrorCount = 0;
     @VisibleForTesting
     protected RecyclerView rvContributionsList;
 
@@ -151,7 +149,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
         contributionsListPresenter.onAttachView(this);
         binding.fabCustomGallery.setOnClickListener(v -> launchCustomSelector());
         binding.fabCustomGallery.setOnLongClickListener(view -> {
-            ViewUtil.showShortToast(getContext(),R.string.custom_selector_title);
+            ViewUtil.showShortToast(getContext(), R.string.custom_selector_title);
             return true;
         });
 
@@ -160,7 +158,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
             binding.fabLayout.setVisibility(VISIBLE);
         } else {
             binding.tvContributionsOfUser.setVisibility(VISIBLE);
-            binding.tvContributionsOfUser.setText(getString(R.string.contributions_of_user, userName));
+            binding.tvContributionsOfUser.setText(
+                getString(R.string.contributions_of_user, userName));
             binding.fabLayout.setVisibility(GONE);
         }
 
@@ -305,8 +304,9 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     public void onConfigurationChanged(final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         // check orientation
-        binding.fabLayout.setOrientation(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE ?
-            LinearLayout.HORIZONTAL : LinearLayout.VERTICAL);
+        binding.fabLayout.setOrientation(
+            newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE ?
+                LinearLayout.HORIZONTAL : LinearLayout.VERTICAL);
         rvContributionsList
             .setLayoutManager(
                 new GridLayoutManager(getContext(), getSpanCount(newConfig.orientation)));
@@ -326,7 +326,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
             animateFAB(isFabOpen);
         });
         binding.fabCamera.setOnLongClickListener(view -> {
-            ViewUtil.showShortToast(getContext(),R.string.add_contribution_from_camera);
+            ViewUtil.showShortToast(getContext(), R.string.add_contribution_from_camera);
             return true;
         });
         binding.fabGallery.setOnClickListener(view -> {
@@ -334,7 +334,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
             animateFAB(isFabOpen);
         });
         binding.fabGallery.setOnLongClickListener(view -> {
-            ViewUtil.showShortToast(getContext(),R.string.menu_from_gallery);
+            ViewUtil.showShortToast(getContext(), R.string.menu_from_gallery);
             return true;
         });
     }

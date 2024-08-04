@@ -127,14 +127,14 @@ public class ContributionController {
     }
 
     /**
-     * Shows a dialog alerting the user about location services being off
-     * and asking them to turn it on
+     * Shows a dialog alerting the user about location services being off and asking them to turn it
+     * on
      * TODO: Add a seperate callback in LocationPermissionsHelper for this.
      *      Ref: https://github.com/commons-app/apps-android-commons/pull/5494/files#r1510553114
      *
-     * @param activity Activity reference
+     * @param activity           Activity reference
      * @param dialogTextResource Resource id of text to be shown in dialog
-     * @param toastTextResource Resource id of text to be shown in toast
+     * @param toastTextResource  Resource id of text to be shown in toast
      */
     private void showLocationOffDialog(Activity activity, int dialogTextResource,
         int toastTextResource) {
@@ -320,6 +320,10 @@ public class ContributionController {
         return shareIntent;
     }
 
+    /**
+     * Fetches the contributions with the state "IN_PROGRESS", "QUEUED" and "PAUSED" and then it
+     * populates the `pendingContributionList`.
+     **/
     void getPendingContributions() {
         final PagedList.Config pagedListConfig =
             (new PagedList.Config.Builder())
@@ -335,6 +339,10 @@ public class ContributionController {
         pendingContributionList = livePagedListBuilder.build();
     }
 
+    /**
+     * Fetches the contributions with the state "FAILED" and populates the
+     * `failedContributionList`.
+     **/
     void getFailedContributions() {
         final PagedList.Config pagedListConfig =
             (new PagedList.Config.Builder())
@@ -349,6 +357,10 @@ public class ContributionController {
         failedContributionList = livePagedListBuilder.build();
     }
 
+    /**
+     * Fetches the contributions with the state "IN_PROGRESS", "QUEUED", "PAUSED" and "FAILED" and
+     * then it populates the `failedAndPendingContributionList`.
+     **/
     void getFailedAndPendingContributions() {
         final PagedList.Config pagedListConfig =
             (new PagedList.Config.Builder())
