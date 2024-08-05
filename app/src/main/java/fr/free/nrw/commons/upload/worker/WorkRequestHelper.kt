@@ -12,14 +12,20 @@ import java.util.concurrent.TimeUnit
 class WorkRequestHelper {
 
     companion object {
-        @Volatile
+
         private var isUploadWorkerRunning = false
+        private val lock = Object()
 
         fun makeOneTimeWorkRequest(context: Context, existingWorkPolicy: ExistingWorkPolicy) {
 
-            if (isUploadWorkerRunning) {
-                Timber.e("UploadWorker is already running. Cannot start another instance.")
-                return
+            synchronized(lock) {
+                if (isUploadWorkerRunning) {
+                    Timber.e("UploadWorker is already running. Cannot start another instance.")
+                    return
+                } else {
+                    Timber.e("Setting isUploadWorkerRunning to true")
+                    isUploadWorkerRunning = true
+                }
             }
 
             /* Set backoff criteria for the work request
@@ -46,14 +52,15 @@ class WorkRequestHelper {
                 UploadWorker::class.java.simpleName, existingWorkPolicy, uploadRequest
             )
 
-            isUploadWorkerRunning = true
         }
 
         /**
          * Sets the flag isUploadWorkerRunning to`false` allowing new worker to be started.
          */
         fun markUploadWorkerAsStopped() {
-            isUploadWorkerRunning = false
+            synchronized(lock) {
+                isUploadWorkerRunning = false
+            }
         }
     }
 }
