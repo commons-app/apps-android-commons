@@ -92,7 +92,7 @@
     <item quantity="other">Der geteilte Inhalt wird abgerufen. Die Verarbeitung der Bilder kann einige Zeit in Anspruch nehmen, abhängig von der Größe der Bilder und deines Gerätes.</item>
   </plurals>
   <string name="navigation_item_explore">Entdecken</string>
-  <string name="preference_category_appearance">Aussehen</string>
+  <string name="preference_category_appearance">Erscheinungsbild</string>
   <string name="preference_category_general">Allgemein</string>
   <string name="preference_category_feedback">Rückmeldung</string>
   <string name="preference_category_privacy">Datenschutz</string>
