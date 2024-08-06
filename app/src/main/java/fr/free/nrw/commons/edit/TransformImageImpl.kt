@@ -49,10 +49,10 @@ class TransformImageImpl() : TransformImage {
                          180 -> LLJTran.ROT_180
                          270 -> LLJTran.ROT_270
                     else -> {
-                      LLJTran.ROT_90
+                      // no rotation if degree = 0 or 360 
+                      LLJTran.OPT_DEFAULTS
                     }
                 },
-                LLJTran.OPT_DEFAULTS or LLJTran.OPT_XFORM_ORIENTATION
             )
             BufferedOutputStream(FileOutputStream(output)).use { writer ->
                 lljTran.save(writer, LLJTran.OPT_WRITE_ALL )
