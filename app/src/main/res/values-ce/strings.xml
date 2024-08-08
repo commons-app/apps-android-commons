@@ -106,7 +106,7 @@
   <string name="menu_view_file_page">Хьажа файлан агӀоне</string>
   <string name="share_title_hint">Куьг йазор (ТIедилина ду)</string>
   <string name="add_caption_toast">Дехар ду, хӀокху файлан цIе гайта</string>
-  <string name="share_description_hint">Цуьнах лаьцна</string>
+  <string name="share_description_hint">Цунах лаьцна</string>
   <string name="share_caption_hint">Куьг</string>
   <string name="login_failed_network">Чувала(йала) тара цало — сетан гӀалат</string>
   <string name="login_failed_throttled">ТӀех дукха кхиаме боцу гӀертарш. Дехар ду масех минот йаьлча йуха а хьажа.</string>
@@ -135,7 +135,7 @@
   <string name="about_credits">Кхоллархой</string>
   <string name="title_activity_about">ТӀетохарх лаьцна</string>
   <string name="menu_retry_upload">Йухадан</string>
-  <string name="menu_cancel_upload">Цаоьшу</string>
+  <string name="menu_cancel_upload">ДӀадаккхар</string>
   <string name="menu_download">Схьаэца</string>
   <string name="preference_license">Ӏадйитаран кепаца йолу лицензи</string>
   <string name="preference_theme">Кечйар</string>
