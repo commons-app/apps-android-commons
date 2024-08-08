@@ -28,6 +28,7 @@ data class Contribution constructor(
     var dateCreatedSource: String? = null,
     var wikidataPlace: WikidataPlace? = null,
     var chunkInfo: ChunkInfo? = null,
+    var errorInfo: String? = null,
     /**
      * @return array list of entityids for the depictions
      */
@@ -42,6 +43,7 @@ data class Contribution constructor(
     var dateCreated: Date? = null,
     var dateCreatedString: String? = null,
     var dateModified: Date? = null,
+    var dateUploadStarted: Date? = null,
     var hasInvalidLocation : Int =  0,
     var contentUri: Uri? = null,
     var countryCode : String? = null,
@@ -99,7 +101,6 @@ data class Contribution constructor(
         const val STATE_QUEUED = 2
         const val STATE_IN_PROGRESS = 3
         const val STATE_PAUSED = 4
-        const val STATE_QUEUED_LIMITED_CONNECTION_MODE=5
 
         /**
          * Formatting captions to the Wikibase format for sending labels
@@ -127,11 +128,8 @@ data class Contribution constructor(
         return chunkInfo != null && chunkInfo!!.totalChunks == chunkInfo!!.indexOfNextChunkToUpload
     }
 
-    fun isPaused(): Boolean {
-        return CommonsApplication.pauseUploads[pageId] ?: false
+    fun dateUploadStartedInMillis(): Long {
+        return dateUploadStarted!!.time
     }
 
-    fun unpause() {
-        CommonsApplication.pauseUploads[pageId] = false
-    }
 }

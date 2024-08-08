@@ -10,6 +10,8 @@ import fr.free.nrw.commons.contributions.ContributionsListContract.UserActionLis
 import fr.free.nrw.commons.di.CommonsApplicationModule;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
+import java.util.Arrays;
+import java.util.Collections;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -36,7 +38,7 @@ public class ContributionsListPresenter implements UserActionListener {
         this.contributionBoundaryCallback = contributionBoundaryCallback;
         this.repository = repository;
         this.ioThreadScheduler = ioThreadScheduler;
-        this.contributionsRemoteDataSource=contributionsRemoteDataSource;
+        this.contributionsRemoteDataSource = contributionsRemoteDataSource;
         compositeDisposable = new CompositeDisposable();
     }
 
@@ -71,10 +73,12 @@ public class ContributionsListPresenter implements UserActionListener {
         } else {
             contributionBoundaryCallback.setUserName(userName);
             shouldSetBoundaryCallback = true;
-            factory = repository.fetchContributions();
+            factory = repository.fetchContributionsWithStates(
+                Collections.singletonList(Contribution.STATE_COMPLETED));
         }
 
-        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory, pagedListConfig);
+        LivePagedListBuilder livePagedListBuilder = new LivePagedListBuilder(factory,
+            pagedListConfig);
         if (shouldSetBoundaryCallback) {
             livePagedListBuilder.setBoundaryCallback(contributionBoundaryCallback);
         }
@@ -87,17 +91,6 @@ public class ContributionsListPresenter implements UserActionListener {
         compositeDisposable.clear();
         contributionsRemoteDataSource.dispose();
         contributionBoundaryCallback.dispose();
-    }
-
-    /**
-     * Delete a failed contribution from the local db
-     */
-    @Override
-    public void deleteUpload(final Contribution contribution) {
-        compositeDisposable.add(repository
-            .deleteContributionFromDB(contribution)
-            .subscribeOn(ioThreadScheduler)
-            .subscribe());
     }
 
 }

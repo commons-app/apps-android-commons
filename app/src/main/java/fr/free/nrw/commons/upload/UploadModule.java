@@ -5,6 +5,7 @@ import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient;
+import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.di.NetworkingModule;
 import fr.free.nrw.commons.upload.categories.CategoriesContract;
 import fr.free.nrw.commons.upload.categories.CategoriesPresenter;
@@ -50,8 +51,8 @@ public abstract class UploadModule {
     public static UploadClient provideUploadClient(final UploadInterface uploadInterface,
         @Named(NetworkingModule.NAMED_COMMONS_CSRF) final CsrfTokenClient csrfTokenClient,
         final PageContentsCreator pageContentsCreator, final FileUtilsWrapper fileUtilsWrapper,
-        final Gson gson) {
+        final Gson gson, final ContributionDao contributionDao) {
         return new UploadClient(uploadInterface, csrfTokenClient, pageContentsCreator,
-            fileUtilsWrapper, gson, System::currentTimeMillis);
+            fileUtilsWrapper, gson, System::currentTimeMillis, contributionDao);
     }
 }

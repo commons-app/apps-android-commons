@@ -204,6 +204,16 @@ public class UploadRepository {
     }
 
     /**
+     * query the RemoteDataSource for image duplicity check
+     *
+     * @param filePath file to be checked
+     * @return IMAGE_DUPLICATE or IMAGE_OK
+     */
+    public Single<Integer> checkDuplicateImage(String filePath) {
+        return uploadModel.checkDuplicateImage(filePath);
+    }
+
+    /**
      * query the RemoteDataSource for caption quality
      *
      * @param uploadItem UploadItem whose caption is to be checked

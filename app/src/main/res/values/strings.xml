@@ -826,5 +826,10 @@ Upload your first media by tapping on the add button.</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' is at a different place. Please specify the correct place below, and if possible, write the correct latitude and longitude.</string>
   <string name="other_problem_or_information_please_explain_below">Other problem or information (please explain below).</string>
   <string name="feedback_destination_note">Your feedback gets posted to the following wiki page: <![CDATA[ <a href="https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback">Commons:Mobile app/Feedback</a> ]]></string>
+  <string name="are_you_sure_that_you_want_cancel_all_the_uploads">Are you sure that you want cancel all the uploads?</string>
+  <string name="cancelling_all_the_uploads">Cancelling all the uploads...</string>
+  <string name="uploads">Uploads</string>
+  <string name="pending">Pending</string>
+  <string name="failed">Failed</string>
   <string name="could_not_load_place_data">Could not load place data</string>
 </resources>

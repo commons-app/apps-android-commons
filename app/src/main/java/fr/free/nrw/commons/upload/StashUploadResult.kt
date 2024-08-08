@@ -9,5 +9,6 @@ data class StashUploadResult(
 enum class StashUploadState {
     SUCCESS,
     PAUSED,
-    FAILED
+    FAILED,
+    CANCELLED
 }

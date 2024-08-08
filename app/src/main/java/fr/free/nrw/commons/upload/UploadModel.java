@@ -104,6 +104,16 @@ public class UploadModel {
     }
 
     /**
+     * Calls checkDuplicateImage() of ImageProcessingService to check if image is duplicate
+     *
+     * @param filePath file to be checked
+     * @return IMAGE_DUPLICATE or IMAGE_OK
+     */
+    public Single<Integer> checkDuplicateImage(String filePath){
+        return imageProcessingService.checkDuplicateImage(filePath);
+    }
+
+    /**
      * Calls validateCaption() of ImageProcessingService to check caption of image
      *
      * @param uploadItem UploadItem whose caption is to be checked

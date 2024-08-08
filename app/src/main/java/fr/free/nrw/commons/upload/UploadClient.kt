@@ -6,6 +6,7 @@ import fr.free.nrw.commons.CommonsApplication
 import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 import fr.free.nrw.commons.contributions.ChunkInfo
 import fr.free.nrw.commons.contributions.Contribution
+import fr.free.nrw.commons.contributions.ContributionDao
 import fr.free.nrw.commons.upload.worker.UploadWorker.NotificationUpdateProgressListener
 import fr.free.nrw.commons.wikidata.mwapi.MwException
 import io.reactivex.Observable
@@ -33,7 +34,8 @@ class UploadClient @Inject constructor(
     private val csrfTokenClient: CsrfTokenClient,
     private val pageContentsCreator: PageContentsCreator,
     private val fileUtilsWrapper: FileUtilsWrapper,
-    private val gson: Gson, private val timeProvider: TimeProvider
+    private val gson: Gson, private val timeProvider: TimeProvider,
+    private val contributionDao: ContributionDao
 ) {
     private val CHUNK_SIZE = 512 * 1024 // 512 KB
 
@@ -58,8 +60,6 @@ class UploadClient @Inject constructor(
             )
         }
 
-        contribution.unpause()
-
         val file = contribution.localUriPath
         val fileChunks = fileUtilsWrapper.getFileChunks(file, CHUNK_SIZE)
         val mediaType = fileUtilsWrapper.getMimeType(file).toMediaTypeOrNull()
@@ -79,17 +79,35 @@ class UploadClient @Inject constructor(
         val errorMessage = AtomicReference<String>()
         compositeDisposable.add(
             Observable.fromIterable(fileChunks).forEach { chunkFile: File ->
-                if (canProcess(contribution, failures)) {
-                    processChunk(
-                        filename, contribution, notificationUpdater, chunkFile,
-                        failures, chunkInfo, index, errorMessage, mediaType!!, file!!, fileChunks.size
-                    )
+                if (canProcess(contributionDao, contribution, failures)) {
+                    if (contributionDao.getContribution(contribution.pageId) == null) {
+                        compositeDisposable.clear()
+                        return@forEach
+                    } else {
+                        processChunk(
+                            filename,
+                            contribution,
+                            notificationUpdater,
+                            chunkFile,
+                            failures,
+                            chunkInfo,
+                            index,
+                            errorMessage,
+                            mediaType!!,
+                            file!!,
+                            fileChunks.size
+                        )
+                    }
                 }
             }
         )
 
         return when {
-            contribution.isPaused() -> {
+            contributionDao.getContribution(contribution.pageId) == null -> {
+                return Observable.just(StashUploadResult(StashUploadState.CANCELLED, null, "Upload cancelled"))
+            }
+            contributionDao.getContribution(contribution.pageId).state == Contribution.STATE_PAUSED
+                    || CommonsApplication.isPaused -> {
                 Timber.d("Upload stash paused %s", contribution.pageId)
                 Observable.just(StashUploadResult(StashUploadState.PAUSED, null, null))
             }
@@ -248,10 +266,15 @@ class UploadClient @Inject constructor(
     }
 }
 
-private fun canProcess(contribution: Contribution, failures: AtomicBoolean): Boolean {
+private fun canProcess(
+    contributionDao: ContributionDao,
+    contribution: Contribution,
+    failures: AtomicBoolean
+): Boolean {
     // As long as the contribution hasn't been paused and there are no errors,
     // we can process the current chunk.
-    return !(contribution.isPaused() || failures.get())
+    return !(contributionDao.getContribution(contribution.pageId).state == Contribution.STATE_PAUSED
+            || failures.get() || CommonsApplication.isPaused)
 }
 
 private fun shouldSkip(

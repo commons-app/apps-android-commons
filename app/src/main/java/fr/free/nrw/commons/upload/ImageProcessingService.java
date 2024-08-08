@@ -140,7 +140,7 @@ public class ImageProcessingService {
      * @param filePath file to be checked
      * @return IMAGE_DUPLICATE or IMAGE_OK
      */
-    private Single<Integer> checkDuplicateImage(String filePath) {
+    Single<Integer> checkDuplicateImage(String filePath) {
         Timber.d("Checking for duplicate image %s", filePath);
         return Single.fromCallable(() -> fileUtilsWrapper.getFileInputStream(filePath))
             .map(fileUtilsWrapper::getSHA1)

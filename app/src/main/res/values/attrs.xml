@@ -42,6 +42,7 @@
     <attr name="more_bottom_sheet_drawable_color" format="reference"/>
     <attr name="card_item_color" format="reference"/>
     <attr name="notification_icon_drawable" format="reference"/>
+    <attr name="upload_icon_drawable" format="reference"/>
     <attr name="notification_icon_text_color" format="reference"/>
     <attr name="toggle_theme" format="reference"/>
     <attr name="contributionsListTextSecondary" format="reference"/>
