@@ -687,7 +687,7 @@
   <string name="read_phone_state_permission_message">Le carte dj\'anviron a l\'han damanca ëd lese lë STAT DËL TELÉFON për marcé për da bin</string>
   <string name="contributions_of_user">Contribussion ëd l\'utent: %s</string>
   <string name="achievements_of_user">Arzultà ëd l\'utent: %s</string>
-  <string name="menu_view_user_page" fuzzy="true">Vëdde la pàgina ëd l\'utent</string>
+  <string name="menu_view_user_page">Vëdde ël profil ëd l\'utent</string>
   <string name="edit_depictions">Modifiché le descrission</string>
   <string name="edit_categories">Modifiché le categorìe</string>
   <string name="advanced_options">Opsion avansà</string>
@@ -770,9 +770,10 @@
   <string name="nearby_wikitalk">Signalé un problema su cost element a Wikidata</string>
   <string name="please_enter_some_comments">Për piasì, ch\'a buta dij coment</string>
   <string name="talk">Ciaciarade</string>
-  <string name="write_something_about_the_item" fuzzy="true">«Scrive cheicòs a propòsit ëd l\'element \'%1$s\'. Sòn a sarà visìbil për tuti.»</string>
+  <string name="write_something_about_the_item">Scrive cheicòs a propòsit ëd l\'element \'%1$s\'. Sòn a sarà visìbil për tuti.</string>
   <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\'%1$s\' a esist pi nen, a peul pa esse fotografà.</string>
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\'%1$s\' a l\'é ant un pòst diferent. Për piasì, ch\'a spessìfica ël pòst giust sì-sota e, si possìbil, ch\'a scriva latitùdin e longitùdin giuste.</string>
   <string name="other_problem_or_information_please_explain_below">Àutr problema o anformassion (për piasì, ch\'a spiega sì-sota).</string>
   <string name="feedback_destination_note">Ij sò sugeriment a saran giontà a coste pàgine wiki:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="could_not_load_place_data">Impossìbil carié ij dàit dël pòst</string>
 </resources>

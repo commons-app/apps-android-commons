@@ -815,4 +815,5 @@
   <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\"%1$s\" נמצא במקום אחר. נא לציין את המקום הנכון למטה, ואם אפשר, לכתוב את קו הרוחב ואת קו האורך הנכונים.</string>
   <string name="other_problem_or_information_please_explain_below">בעיה אחרת או מידע אחר (נא להסביר הלאה).</string>
   <string name="feedback_destination_note">המשוב שלך מתפרסם בדף הוויקי הבא: &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="could_not_load_place_data">לא היה אפשר לטעון את נתוני המקום</string>
 </resources>
