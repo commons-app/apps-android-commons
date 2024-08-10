@@ -173,7 +173,11 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             )!!
             withContext(Dispatchers.IO) {
                 while (contributionDao.getContribution(statesToProcess)
-                        .blockingGet().size > 0
+                        .blockingGet().size > 0 && contributionDao.getContribution(
+                        arrayListOf(
+                            Contribution.STATE_IN_PROGRESS
+                        )
+                    ).blockingGet().size == 0
                 ) {
                     /*
                     queuedContributions receives the results from a one-shot query.
