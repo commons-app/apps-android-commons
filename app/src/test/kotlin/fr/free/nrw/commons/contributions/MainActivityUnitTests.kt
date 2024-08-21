@@ -10,9 +10,10 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.work.Configuration
 import androidx.work.testing.WorkManagerTestInitHelper
 import fr.free.nrw.commons.CommonsApplication
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.bookmarks.BookmarkFragment
 import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment
 import fr.free.nrw.commons.explore.ExploreFragment
@@ -36,7 +37,6 @@ import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.fakes.RoboMenuItem
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 
@@ -85,7 +85,7 @@ class MainActivityUnitTests {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
 
         activity = Robolectric.buildActivity(MainActivity::class.java).create().get()
         activity.applicationKvStore = applicationKvStore

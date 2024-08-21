@@ -29,7 +29,7 @@ class AboutActivityUnitTests {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
 
         activity = Robolectric.buildActivity(AboutActivity::class.java).create().get()
 

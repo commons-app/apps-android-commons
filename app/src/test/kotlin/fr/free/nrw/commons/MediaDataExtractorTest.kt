@@ -12,7 +12,6 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
-import org.wikipedia.dataclient.mwapi.MwQueryResponse
 
 /**
  * Test methods in media data extractor
@@ -30,7 +29,7 @@ class MediaDataExtractorTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
     }
 
     /**

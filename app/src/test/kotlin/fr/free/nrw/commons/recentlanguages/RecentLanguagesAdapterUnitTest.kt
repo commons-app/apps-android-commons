@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import fr.free.nrw.commons.TestCommonsApplication
-import kotlinx.android.synthetic.main.row_item_languages_spinner.view.*
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -37,7 +36,7 @@ class RecentLanguagesAdapterUnitTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
 
         context = RuntimeEnvironment.getApplication().applicationContext
 

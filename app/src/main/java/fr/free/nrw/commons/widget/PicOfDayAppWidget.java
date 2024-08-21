@@ -51,7 +51,7 @@ public class PicOfDayAppWidget extends AppWidgetProvider {
 
         // Launch App on Button Click
         Intent viewIntent = new Intent(context, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, viewIntent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, viewIntent, PendingIntent.FLAG_IMMUTABLE);
         views.setOnClickPendingIntent(R.id.camera_button, pendingIntent);
         appWidgetManager.updateAppWidget(appWidgetId, views);
 
@@ -81,7 +81,7 @@ public class PicOfDayAppWidget extends AppWidgetProvider {
                                 Intent viewIntent = new Intent();
                                 viewIntent.setAction(ACTION_VIEW);
                                 viewIntent.setData(Uri.parse(response.getPageTitle().getMobileUri()));
-                                PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, viewIntent, 0);
+                                PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, viewIntent, PendingIntent.FLAG_IMMUTABLE);
                                 views.setOnClickPendingIntent(R.id.appwidget_image, pendingIntent);
 
                                 loadImageFromUrl(response.getThumbUrl(), context, views, appWidgetManager, appWidgetId);

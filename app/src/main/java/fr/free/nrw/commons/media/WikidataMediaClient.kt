@@ -4,10 +4,10 @@ import fr.free.nrw.commons.BetaConstants
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.category.ContinuationClient
 import fr.free.nrw.commons.explore.media.MediaConverter
+import fr.free.nrw.commons.wikidata.model.Entities
 import io.reactivex.Single
-import org.wikipedia.dataclient.mwapi.MwQueryPage
-import org.wikipedia.dataclient.mwapi.MwQueryResponse
-import org.wikipedia.wikidata.Entities
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
 import javax.inject.Inject
 import javax.inject.Singleton
 

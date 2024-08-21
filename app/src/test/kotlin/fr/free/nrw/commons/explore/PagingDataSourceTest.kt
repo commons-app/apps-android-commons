@@ -12,6 +12,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
+import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
 
 class PagingDataSourceTest {
@@ -25,7 +26,7 @@ class PagingDataSourceTest {
     @Before
     fun setUp() {
         RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         loadingStates = PublishProcessor.create()
         searchDepictionsDataSource =
             TestPagingDataSource(
@@ -88,7 +89,7 @@ class PagingDataSourceTest {
     @Test
     fun `retryFailedRequest does nothing when null`() {
         searchDepictionsDataSource.retryFailedRequest()
-        verifyNoMoreInteractions(mockGetItems)
+        verifyNoInteractions(mockGetItems)
     }
 
     @Test

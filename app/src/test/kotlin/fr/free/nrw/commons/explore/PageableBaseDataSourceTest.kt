@@ -22,7 +22,7 @@ class PageableBaseDataSourceTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         pageableBaseDataSource = object: PageableBaseDataSource<String>(liveDataConverter){
             override val loadFunction: LoadFunction<String>
                 get() = mock()

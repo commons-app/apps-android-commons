@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* HellojoeAoPS
 * Kly
 * Koala0090
 * Simon Shek
 * 烈羽
 -->
 <resources>
-  <string name="crash_dialog_title">維基共享資源已當機</string>
+  <string name="crash_dialog_title">共享資源崩潰了</string>
   <string name="crash_dialog_text">哎呀，出錯了！</string>
   <string name="crash_dialog_comment_prompt">透過電子郵件告訴我們您先前做了什麼，這將協助我們修復它！</string>
   <string name="crash_dialog_ok_toast">謝謝！</string>

@@ -29,7 +29,7 @@ class QuizResultActivityUnitTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         val intent = Intent().putExtra("QuizResult", 0)
         activity = Robolectric.buildActivity(QuizResultActivity::class.java, intent).get()
         quizResultActivity = PowerMockito.mock(QuizResultActivity::class.java)

@@ -10,11 +10,11 @@
         <item name="achievementBackground">@color/achievement_background_dark</item>
         <item name="drawerHeaderBackground">@color/drawerHeader_background_dark</item>
         <item name="tutorialBackground">@color/tutorial_background_dark</item>
-        <item name="icon">@color/primaryTextColor</item>
-        <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="colorAccent">@color/primaryColor</item>
-        <item name="colorButtonNormal">@color/primaryColor</item>
+        <item name="icon">@color/primary_color_night</item>
+        <item name="colorPrimary">@color/primary_color_night</item>
+        <item name="colorPrimaryDark">@color/primary_color_night</item>
+        <item name="colorAccent">@color/primary_color_night</item>
+        <item name="colorButtonNormal">@color/primary_color_night</item>
         <item name="bookmarkButtonColor">@color/button_blue_dark</item>
         <item name="rowButtonColor">@color/button_blue_dark</item>
         <item name="reviewHeading">@color/white</item>
@@ -157,6 +157,9 @@
 
     <style name="LightFlatNearbyPermissionButton" parent="LightAppTheme">
         <item name="colorControlHighlight">@color/primaryColor</item>
+    </style>
+    <style name="EditActivityTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/primaryColor</item>
     </style>
 
     <style name="ProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal" />

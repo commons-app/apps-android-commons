@@ -7,13 +7,14 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.gson.Gson;
-import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.campaigns.CampaignResponseDTO;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.nearby.model.ItemsClass;
 import fr.free.nrw.commons.nearby.model.NearbyResponse;
 import fr.free.nrw.commons.nearby.model.NearbyResultItem;
+import fr.free.nrw.commons.nearby.model.PlaceBindings;
 import fr.free.nrw.commons.profile.achievements.FeaturedImages;
 import fr.free.nrw.commons.profile.achievements.FeedbackResponse;
 import fr.free.nrw.commons.profile.leaderboard.LeaderboardResponse;
@@ -28,6 +29,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import okhttp3.HttpUrl;
@@ -47,7 +50,6 @@ public class OkHttpJsonApiClient {
     private final OkHttpClient okHttpClient;
     private final DepictsClient depictsClient;
     private final HttpUrl wikiMediaToolforgeUrl;
-    private final HttpUrl wikiMediaTestToolforgeUrl;
     private final String sparqlQueryUrl;
     private final String campaignsUrl;
     private final Gson gson;
@@ -57,14 +59,12 @@ public class OkHttpJsonApiClient {
     public OkHttpJsonApiClient(OkHttpClient okHttpClient,
         DepictsClient depictsClient,
         HttpUrl wikiMediaToolforgeUrl,
-        HttpUrl wikiMediaTestToolforgeUrl,
         String sparqlQueryUrl,
         String campaignsUrl,
         Gson gson) {
         this.okHttpClient = okHttpClient;
         this.depictsClient = depictsClient;
         this.wikiMediaToolforgeUrl = wikiMediaToolforgeUrl;
-        this.wikiMediaTestToolforgeUrl = wikiMediaTestToolforgeUrl;
         this.sparqlQueryUrl = sparqlQueryUrl;
         this.campaignsUrl = campaignsUrl;
         this.gson = gson;
@@ -83,7 +83,7 @@ public class OkHttpJsonApiClient {
     @NonNull
     public Observable<LeaderboardResponse> getLeaderboard(String userName, String duration,
         String category, String limit, String offset) {
-        final String fetchLeaderboardUrlTemplate = wikiMediaTestToolforgeUrl
+        final String fetchLeaderboardUrlTemplate = wikiMediaToolforgeUrl
             + LEADERBOARD_END_POINT;
         String url = String.format(Locale.ENGLISH,
             fetchLeaderboardUrlTemplate,
@@ -129,7 +129,7 @@ public class OkHttpJsonApiClient {
      */
     @NonNull
     public Single<UpdateAvatarResponse> setAvatar(String username, String avatar) {
-        final String urlTemplate = wikiMediaTestToolforgeUrl
+        final String urlTemplate = wikiMediaToolforgeUrl
             + UPDATE_AVATAR_END_POINT;
         return Single.fromCallable(() -> {
             String url = String.format(Locale.ENGLISH,
@@ -273,16 +273,15 @@ public class OkHttpJsonApiClient {
     /**
      * Make API Call to get Nearby Places
      *
-     * @param cur                     Search lat long
-     * @param language                Language
-     * @param radius                  Search Radius
-     * @param shouldQueryForMonuments : Should we query for monuments
+     * @param cur      Search lat long
+     * @param language Language
+     * @param radius   Search Radius
      * @return
      * @throws Exception
      */
     @Nullable
     public List<Place> getNearbyPlaces(final LatLng cur, final String language, final double radius,
-        final boolean shouldQueryForMonuments, final String customQuery)
+        final String customQuery)
         throws Exception {
 
         Timber.d("Fetching nearby items at radius %s", radius);
@@ -290,10 +289,9 @@ public class OkHttpJsonApiClient {
         final String wikidataQuery;
         if (customQuery != null) {
             wikidataQuery = customQuery;
-        } else if (!shouldQueryForMonuments) {
-            wikidataQuery = FileUtils.readFromResource("/queries/nearby_query.rq");
         } else {
-            wikidataQuery = FileUtils.readFromResource("/queries/nearby_query_monuments.rq");
+            wikidataQuery = FileUtils.readFromResource(
+                "/queries/radius_query_for_upload_wizard.rq");
         }
         final String query = wikidataQuery
             .replace("${RAD}", String.format(Locale.ROOT, "%.2f", radius))
@@ -301,6 +299,74 @@ public class OkHttpJsonApiClient {
             .replace("${LONG}", String.format(Locale.ROOT, "%.4f", cur.getLongitude()))
             .replace("${LANG}", language);
 
+        final HttpUrl.Builder urlBuilder = HttpUrl
+            .parse(sparqlQueryUrl)
+            .newBuilder()
+            .addQueryParameter("query", query)
+            .addQueryParameter("format", "json");
+
+        final Request request = new Request.Builder()
+            .url(urlBuilder.build())
+            .build();
+
+        final Response response = okHttpClient.newCall(request).execute();
+        if (response.body() != null && response.isSuccessful()) {
+            final String json = response.body().string();
+            final NearbyResponse nearbyResponse = gson.fromJson(json, NearbyResponse.class);
+            final List<NearbyResultItem> bindings = nearbyResponse.getResults().getBindings();
+            final List<Place> places = new ArrayList<>();
+            for (final NearbyResultItem item : bindings) {
+                final Place placeFromNearbyItem = Place.from(item);
+                placeFromNearbyItem.setMonument(false);
+                places.add(placeFromNearbyItem);
+            }
+            return places;
+        }
+        throw new Exception(response.message());
+    }
+
+    /**
+     * Retrieves nearby places based on screen coordinates and optional query parameters.
+     *
+     * @param screenTopRight          The top right corner of the screen (latitude, longitude).
+     * @param screenBottomLeft        The bottom left corner of the screen (latitude, longitude).
+     * @param language                The language for the query.
+     * @param shouldQueryForMonuments Flag indicating whether to include monuments in the query.
+     * @param customQuery             Optional custom SPARQL query to use instead of default
+     *                                queries.
+     * @return A list of nearby places.
+     * @throws Exception If an error occurs during the retrieval process.
+     */
+    @Nullable
+    public List<Place> getNearbyPlaces(
+        final fr.free.nrw.commons.location.LatLng screenTopRight,
+        final fr.free.nrw.commons.location.LatLng screenBottomLeft, final String language,
+        final boolean shouldQueryForMonuments, final String customQuery)
+        throws Exception {
+
+        Timber.d("CUSTOM_SPARQL%s", String.valueOf(customQuery != null));
+
+        final String wikidataQuery;
+        if (customQuery != null) {
+            wikidataQuery = customQuery;
+        } else if (!shouldQueryForMonuments) {
+            wikidataQuery = FileUtils.readFromResource("/queries/rectangle_query_for_nearby.rq");
+        } else {
+            wikidataQuery = FileUtils.readFromResource(
+                "/queries/rectangle_query_for_nearby_monuments.rq");
+        }
+
+        final double westCornerLat = screenTopRight.getLatitude();
+        final double westCornerLong = screenTopRight.getLongitude();
+        final double eastCornerLat = screenBottomLeft.getLatitude();
+        final double eastCornerLong = screenBottomLeft.getLongitude();
+
+        final String query = wikidataQuery
+            .replace("${LAT_WEST}", String.format(Locale.ROOT, "%.4f", westCornerLat))
+            .replace("${LONG_WEST}", String.format(Locale.ROOT, "%.4f", westCornerLong))
+            .replace("${LAT_EAST}", String.format(Locale.ROOT, "%.4f", eastCornerLat))
+            .replace("${LONG_EAST}", String.format(Locale.ROOT, "%.4f", eastCornerLong))
+            .replace("${LANG}", language);
         final HttpUrl.Builder urlBuilder = HttpUrl
             .parse(sparqlQueryUrl)
             .newBuilder()
@@ -332,20 +398,219 @@ public class OkHttpJsonApiClient {
     }
 
     /**
-     * Make API Call to get Nearby Places Implementation does not expects a custom query
+     * Retrieves a list of places based on the provided list of places and language.
      *
-     * @param cur                     Search lat long
-     * @param language                Language
-     * @param radius                  Search Radius
-     * @param shouldQueryForMonuments : Should we query for monuments
+     * @param placeList A list of Place objects for which to fetch information.
+     * @param language  The language code to use for the query.
+     * @return A list of Place objects with additional information retrieved from Wikidata, or null
+     * if an error occurs.
+     * @throws IOException If there is an issue with reading the resource file or executing the HTTP
+     *                     request.
+     */
+    @Nullable
+    public List<Place> getPlaces(
+        final List<Place> placeList, final String language) throws IOException {
+        final String wikidataQuery = FileUtils.readFromResource("/queries/query_for_item.rq");
+        String qids = "";
+        for (final Place place : placeList) {
+            qids += "\n" + ("wd:" + place.getWikiDataEntityId());
+        }
+        final String query = wikidataQuery
+            .replace("${ENTITY}", qids)
+            .replace("${LANG}", language);
+        final HttpUrl.Builder urlBuilder = HttpUrl
+            .parse(sparqlQueryUrl)
+            .newBuilder()
+            .addQueryParameter("query", query)
+            .addQueryParameter("format", "json");
+
+        final Request request = new Request.Builder()
+            .url(urlBuilder.build())
+            .build();
+
+        try (Response response = okHttpClient.newCall(request).execute()) {
+            if (response.isSuccessful()) {
+                final String json = response.body().string();
+                final NearbyResponse nearbyResponse = gson.fromJson(json, NearbyResponse.class);
+                final List<NearbyResultItem> bindings = nearbyResponse.getResults().getBindings();
+                final List<Place> places = new ArrayList<>();
+                for (final NearbyResultItem item : bindings) {
+                    final Place placeFromNearbyItem = Place.from(item);
+                    places.add(placeFromNearbyItem);
+                }
+                return places;
+            } else {
+                throw new IOException("Unexpected response code: " + response.code());
+            }
+        }
+    }
+
+    /**
+     * Make API Call to get Places
+     *
+     * @param leftLatLng  Left lat long
+     * @param rightLatLng Right lat long
      * @return
      * @throws Exception
      */
     @Nullable
-    public List<Place> getNearbyPlaces(final LatLng cur, final String language, final double radius,
-        final boolean shouldQueryForMonuments)
+    public String getPlacesAsKML(final LatLng leftLatLng, final LatLng rightLatLng)
         throws Exception {
-        return getNearbyPlaces(cur, language, radius, shouldQueryForMonuments, null);
+        String kmlString = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" +
+            "<!--Created by Wikimedia Commons Android app -->\n" +
+            "<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n" +
+            "    <Document>";
+        List<PlaceBindings> placeBindings = runQuery(leftLatLng,
+            rightLatLng);
+        if (placeBindings != null) {
+            for (PlaceBindings item : placeBindings) {
+                if (item.getItem() != null && item.getLabel() != null && item.getClas() != null) {
+                    String input = item.getLocation().getValue();
+                    Pattern pattern = Pattern.compile(
+                        "Point\\(([-+]?[0-9]*\\.?[0-9]+) ([-+]?[0-9]*\\.?[0-9]+)\\)");
+                    Matcher matcher = pattern.matcher(input);
+
+                    if (matcher.find()) {
+                        String longStr = matcher.group(1);
+                        String latStr = matcher.group(2);
+                        String itemUrl = item.getItem().getValue();
+                        String itemName = item.getLabel().getValue().replace("&", "&amp;");
+                        String itemLatitude = latStr;
+                        String itemLongitude = longStr;
+                        String itemClass = item.getClas().getValue();
+
+                        String formattedItemName =
+                            !itemClass.isEmpty() ? itemName + " (" + itemClass + ")"
+                                : itemName;
+
+                        String kmlEntry = "\n        <Placemark>\n" +
+                            "            <name>" + formattedItemName + "</name>\n" +
+                            "            <description>" + itemUrl + "</description>\n" +
+                            "            <Point>\n" +
+                            "                <coordinates>" + itemLongitude + ","
+                            + itemLatitude
+                            + "</coordinates>\n" +
+                            "            </Point>\n" +
+                            "        </Placemark>";
+                        kmlString = kmlString + kmlEntry;
+                    } else {
+                        Timber.e("No match found");
+                    }
+                }
+            }
+        }
+        kmlString = kmlString + "\n    </Document>\n" +
+            "</kml>\n";
+        return kmlString;
+    }
+
+    /**
+     * Make API Call to get Places
+     *
+     * @param leftLatLng  Left lat long
+     * @param rightLatLng Right lat long
+     * @return
+     * @throws Exception
+     */
+    @Nullable
+    public String getPlacesAsGPX(final LatLng leftLatLng, final LatLng rightLatLng)
+        throws Exception {
+        String gpxString = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" +
+            "<gpx\n" +
+            " version=\"1.0\"\n" +
+            " creator=\"Wikimedia Commons Android app\"\n" +
+            " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+            " xmlns=\"http://www.topografix.com/GPX/1/0\"\n" +
+            " xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd\">"
+            + "\n<bounds minlat=\"$MIN_LATITUDE\" minlon=\"$MIN_LONGITUDE\" maxlat=\"$MAX_LATITUDE\" maxlon=\"$MAX_LONGITUDE\"/>";
+
+        List<PlaceBindings> placeBindings = runQuery(leftLatLng, rightLatLng);
+        if (placeBindings != null) {
+            for (PlaceBindings item : placeBindings) {
+                if (item.getItem() != null && item.getLabel() != null && item.getClas() != null) {
+                    String input = item.getLocation().getValue();
+                    Pattern pattern = Pattern.compile(
+                        "Point\\(([-+]?[0-9]*\\.?[0-9]+) ([-+]?[0-9]*\\.?[0-9]+)\\)");
+                    Matcher matcher = pattern.matcher(input);
+
+                    if (matcher.find()) {
+                        String longStr = matcher.group(1);
+                        String latStr = matcher.group(2);
+                        String itemUrl = item.getItem().getValue();
+                        String itemName = item.getLabel().getValue().replace("&", "&amp;");
+                        String itemLatitude = latStr;
+                        String itemLongitude = longStr;
+                        String itemClass = item.getClas().getValue();
+
+                        String formattedItemName =
+                            !itemClass.isEmpty() ? itemName + " (" + itemClass + ")"
+                                : itemName;
+
+                        String gpxEntry =
+                            "\n    <wpt lat=\"" + itemLatitude + "\" lon=\"" + itemLongitude
+                                + "\">\n" +
+                                "        <name>" + itemName + "</name>\n" +
+                                "        <url>" + itemUrl + "</url>\n" +
+                                "    </wpt>";
+                        gpxString = gpxString + gpxEntry;
+
+                    } else {
+                        Timber.e("No match found");
+                    }
+                }
+            }
+
+        }
+        gpxString = gpxString + "\n</gpx>";
+        return gpxString;
+    }
+
+    private List<PlaceBindings> runQuery(final LatLng currentLatLng, final LatLng nextLatLng)
+        throws IOException {
+
+        final String wikidataQuery = FileUtils.readFromResource("/queries/places_query.rq");
+        final String query = wikidataQuery
+            .replace("${LONGITUDE}",
+                String.format(Locale.ROOT, "%.2f", currentLatLng.getLongitude()))
+            .replace("${LATITUDE}", String.format(Locale.ROOT, "%.4f", currentLatLng.getLatitude()))
+            .replace("${NEXT_LONGITUDE}",
+                String.format(Locale.ROOT, "%.4f", nextLatLng.getLongitude()))
+            .replace("${NEXT_LATITUDE}",
+                String.format(Locale.ROOT, "%.4f", nextLatLng.getLatitude()));
+
+        final HttpUrl.Builder urlBuilder = HttpUrl
+            .parse(sparqlQueryUrl)
+            .newBuilder()
+            .addQueryParameter("query", query)
+            .addQueryParameter("format", "json");
+
+        final Request request = new Request.Builder()
+            .url(urlBuilder.build())
+            .build();
+
+        final Response response = okHttpClient.newCall(request).execute();
+        if (response.body() != null && response.isSuccessful()) {
+            final String json = response.body().string();
+            final ItemsClass item = gson.fromJson(json, ItemsClass.class);
+            return item.getResults().getBindings();
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Make API Call to get Nearby Places Implementation does not expects a custom query
+     *
+     * @param cur      Search lat long
+     * @param language Language
+     * @param radius   Search Radius
+     * @return
+     * @throws Exception
+     */
+    @Nullable
+    public List<Place> getNearbyPlaces(final LatLng cur, final String language, final double radius)
+        throws Exception {
+        return getNearbyPlaces(cur, language, radius, null);
     }
 
     /**

@@ -10,6 +10,7 @@ import android.widget.GridLayout
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.R
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.TestUtility.setFinalStatic
 import fr.free.nrw.commons.customselector.listeners.ImageSelectListener
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.ui.selector.CustomSelectorActivity
@@ -33,6 +34,7 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import java.lang.reflect.Field
+import java.lang.reflect.Modifier
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -107,8 +109,6 @@ class ImageAdapterTest {
 
         whenever(context.contentResolver).thenReturn(mockContentResolver)
         whenever(mockContentResolver.getType(uri)).thenReturn("jpg")
-        Whitebox.setInternalState(imageAdapter, "context", context)
-
         // Parameters.
         images.add(image)
         imageAdapter.init(images, images, TreeMap())
@@ -128,8 +128,8 @@ class ImageAdapterTest {
     fun processThumbnailForActionedImage() = runBlocking {
         Whitebox.setInternalState(imageAdapter, "allImages", listOf(image))
         whenever(imageLoader.nextActionableImage(listOf(image), Dispatchers.IO, Dispatchers.Default,
-        0)).thenReturn(0)
-        imageAdapter.processThumbnailForActionedImage(holder, 0)
+        0, emptyList())).thenReturn(0)
+        imageAdapter.processThumbnailForActionedImage(holder, 0, emptyList())
     }
 
     /**
@@ -138,8 +138,8 @@ class ImageAdapterTest {
     @Test
     fun `processThumbnailForActionedImage when reached end of the folder`() = runBlocking {
         whenever(imageLoader.nextActionableImage(ArrayList(), Dispatchers.IO, Dispatchers.Default,
-            0)).thenReturn(-1)
-        imageAdapter.processThumbnailForActionedImage(holder, 0)
+            0, emptyList())).thenReturn(-1)
+        imageAdapter.processThumbnailForActionedImage(holder, 0, emptyList())
     }
 
     /**

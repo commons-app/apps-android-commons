@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.location;
 
-import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
 import android.Manifest.permission;
 import android.app.Activity;
 import android.content.Context;
@@ -9,7 +8,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import androidx.core.app.ActivityCompat;
 import java.util.HashSet;
 import java.util.List;
@@ -21,8 +19,8 @@ import timber.log.Timber;
 public class LocationServiceManager implements LocationListener {
 
     // Maybe these values can be improved for efficiency
-    private static final long MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS = 2 * 60 * 100;
-    private static final long MIN_LOCATION_UPDATE_REQUEST_DISTANCE_IN_METERS = 10;
+    private static final long MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS = 10 * 100;
+    private static final long MIN_LOCATION_UPDATE_REQUEST_DISTANCE_IN_METERS = 1;
 
     private LocationManager locationManager;
     private Location lastLocation;
@@ -30,6 +28,7 @@ public class LocationServiceManager implements LocationListener {
     private final List<LocationUpdateListener> locationListeners = new CopyOnWriteArrayList<>();
     private boolean isLocationManagerRegistered = false;
     private Set<Activity> locationExplanationDisplayed = new HashSet<>();
+    private Context context;
 
     /**
      * Constructs a new instance of LocationServiceManager.
@@ -37,6 +36,7 @@ public class LocationServiceManager implements LocationListener {
      * @param context the context
      */
     public LocationServiceManager(Context context) {
+        this.context = context;
         this.locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
     }
 
@@ -58,10 +58,10 @@ public class LocationServiceManager implements LocationListener {
         Location bestLocation = null;
         for (String provider : providers) {
             Location l=null;
-            if (ActivityCompat.checkSelfPermission(getApplicationContext(), permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(getApplicationContext(), permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(context, permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(context, permission.ACCESS_COARSE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
                 l = locationManager.getLastKnownLocation(provider);
             }
             if (l == null) {

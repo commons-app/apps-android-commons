@@ -1,8 +1,11 @@
 package fr.free.nrw.commons.upload.categories
 
 import android.text.TextUtils
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import fr.free.nrw.commons.Media
 import fr.free.nrw.commons.R
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException
 import fr.free.nrw.commons.category.CategoryEditHelper
 import fr.free.nrw.commons.category.CategoryItem
 import fr.free.nrw.commons.di.CommonsApplicationModule
@@ -36,6 +39,7 @@ class CategoriesPresenter @Inject constructor(
     var view = DUMMY
     private val compositeDisposable = CompositeDisposable()
     private val searchTerms = PublishSubject.create<String>()
+    private var categoryList: MutableLiveData<List<CategoryItem>> = MutableLiveData()
     /**
      * Current media
      */
@@ -54,8 +58,6 @@ class CategoriesPresenter @Inject constructor(
                 .observeOn(mainThreadScheduler)
                 .doOnNext {
                     view.showProgress(true)
-                    view.showError(null)
-                    view.setCategories(null)
                 }
                 .switchMap(::searchResults)
                 .map { repository.selectedCategories + it }
@@ -63,13 +65,17 @@ class CategoriesPresenter @Inject constructor(
                 .observeOn(mainThreadScheduler)
                 .subscribe(
                     {
-                        view.setCategories(it)
+                        setCategoryListValue(it)
                         view.showProgress(false)
                         if (it.isEmpty()) {
                             view.showError(R.string.no_categories_found)
                         }
                     },
-                    Timber::e
+                    { t: Throwable? ->
+                        view.showProgress(false)
+                        view.showError(R.string.no_categories_found)
+                        Timber.e(t)
+                    }
                 )
         )
     }
@@ -83,7 +89,8 @@ class CategoriesPresenter @Inject constructor(
         if (media == null) {
             return repository.searchAll(term, getImageTitleList(), repository.selectedDepictions)
                 .subscribeOn(ioScheduler)
-                .map { it.filterNot { categoryItem -> repository.containsYear(categoryItem.name) } }
+                .map { it.filter { categoryItem -> !repository.isSpammyCategory(categoryItem.name)
+                        || categoryItem.name==term } }
         } else {
             return Observable.zip(
                 repository.getCategories(repository.selectedExistingCategories)
@@ -91,13 +98,13 @@ class CategoriesPresenter @Inject constructor(
                         CategoryItem(it.name, it.description, it.thumbnail, true)
                     }
                     },
-                repository.searchAll(term, getImageTitleList(), repository.selectedDepictions),
-                { it1, it2 ->
-                    it1 + it2
-                }
-            )
+                repository.searchAll(term, getImageTitleList(), repository.selectedDepictions)
+            ) { it1, it2 ->
+                it1 + it2
+            }
                 .subscribeOn(ioScheduler)
-                .map { it.filterNot { categoryItem -> repository.containsYear(categoryItem.name) } }
+                .map { it.filter { categoryItem -> !repository.isSpammyCategory(categoryItem.name)
+                        || categoryItem.name==term } }
                 .map { it.filterNot { categoryItem -> categoryItem.thumbnail == "hidden" } }
         }
     }
@@ -159,8 +166,6 @@ class CategoriesPresenter @Inject constructor(
                 .observeOn(mainThreadScheduler)
                 .doOnNext {
                     view.showProgress(true)
-                    view.showError(null)
-                    view.setCategories(null)
                 }
                 .switchMap(::searchResults)
                 .map { repository.selectedCategories + it }
@@ -168,13 +173,17 @@ class CategoriesPresenter @Inject constructor(
                 .observeOn(mainThreadScheduler)
                 .subscribe(
                     {
-                        view.setCategories(it)
+                        setCategoryListValue(it)
                         view.showProgress(false)
                         if (it.isEmpty()) {
                             view.showError(R.string.no_categories_found)
                         }
                     },
-                    Timber::e
+                    { t: Throwable? ->
+                        view.showProgress(false)
+                        view.showError(R.string.no_categories_found)
+                        Timber.e(t)
+                    }
                 )
         )
     }
@@ -193,8 +202,9 @@ class CategoriesPresenter @Inject constructor(
      * @param wikiText current WikiText from server
      */
     override fun updateCategories(media: Media, wikiText: String) {
+        //check if view.existingCategories is null
         if (repository.selectedCategories.isNotEmpty()
-            || repository.selectedExistingCategories.size != view.existingCategories.size
+            || (view.existingCategories != null && repository.selectedExistingCategories.size != view.existingCategories.size)
         ) {
             val selectedCategories: MutableList<String> =
                 (repository.selectedCategories.map { it.name }.toMutableList()
@@ -202,30 +212,85 @@ class CategoriesPresenter @Inject constructor(
 
             if (selectedCategories.isNotEmpty()) {
                 view.showProgressDialog()
-                compositeDisposable.add(
-                    categoryEditHelper.makeCategoryEdit(view.fragmentContext, media,
-                        selectedCategories, wikiText)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe({
-                            Timber.d("Categories are added.")
-                            media.addedCategories = selectedCategories
-                            repository.cleanup()
-                            view.dismissProgressDialog()
-                            view.refreshCategories()
-                            view.goBackToPreviousScreen()
-                        })
-                        {
-                            Timber.e(
-                                "Failed to update categories"
-                            )
-                        }
-                )
+
+                try {
+                    compositeDisposable.add(
+                        categoryEditHelper.makeCategoryEdit(
+                            view.fragmentContext, media,
+                            selectedCategories, wikiText
+                        )
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe({
+                                Timber.d("Categories are added.")
+                                media.addedCategories = selectedCategories
+                                repository.cleanup()
+                                view.dismissProgressDialog()
+                                view.refreshCategories()
+                                view.goBackToPreviousScreen()
+                            }, {
+                                Timber.e(
+                                    "Failed to update categories"
+                                )
+                            })
+                    )
+                } catch (e: InvalidLoginTokenException) {
+                    view.navigateToLoginScreen();
+                }
 
             }
         } else {
             repository.cleanup()
             view.showNoCategorySelected()
         }
+    }
+
+    /**
+     * Selects each [CategoryItem] in a given list as if they were clicked by the user by calling
+     * [onCategoryItemClicked] for each category and adding the category to [categoryList]
+     */
+    private fun selectNewCategories(toSelect: List<CategoryItem>) {
+        toSelect.forEach{
+                it.isSelected = true
+                repository.onCategoryClicked(it, media)
+            }
+
+        // Add the new selections to the list of category items so that the selections appear
+        // immediately (i.e. without any search term queries)
+        categoryList.value?.toMutableList()
+            ?.let { toSelect + it }
+            ?.distinctBy(CategoryItem::name)
+            ?.let { setCategoryListValue(it) }
+    }
+
+    /**
+     * Livedata being used to observe category list inside
+     * @see UploadCategoriesFragment
+     * Any changes to category list reflect immediately to the adapter list
+     */
+    override fun getCategories(): LiveData<List<CategoryItem>> {
+        return categoryList
+    }
+
+    /**
+     * needed for tests
+     */
+    fun setCategoryList(categoryList: MutableLiveData<List<CategoryItem>>) {
+        this.categoryList = categoryList
+    }
+
+    /**
+     * needed for tests
+     */
+    fun setCategoryListValue(categoryItems: List<CategoryItem>) {
+        categoryList.postValue(categoryItems)
+    }
+
+    override fun selectCategories() {
+        compositeDisposable.add(repository.placeCategories
+            .subscribeOn(ioScheduler)
+            .observeOn(mainThreadScheduler)
+            .subscribe(::selectNewCategories)
+        )
     }
 }

@@ -3,14 +3,9 @@ package fr.free.nrw.commons.contributions
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.verifyZeroInteractions
 import com.nhaarman.mockitokotlin2.whenever
-import fr.free.nrw.commons.Media
-import fr.free.nrw.commons.auth.SessionManager
-import fr.free.nrw.commons.media.MediaClient
 import io.reactivex.Completable
 import io.reactivex.Scheduler
-import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import org.junit.Before
 import org.junit.Rule
@@ -18,7 +13,6 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.ArgumentMatchers.any
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
 

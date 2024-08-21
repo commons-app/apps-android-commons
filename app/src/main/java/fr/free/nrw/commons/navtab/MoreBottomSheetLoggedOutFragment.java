@@ -12,13 +12,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.LoginActivity;
+import fr.free.nrw.commons.databinding.FragmentMoreBottomSheetLoggedOutBinding;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.logging.CommonsLogSender;
@@ -29,6 +28,7 @@ import timber.log.Timber;
 
 public class MoreBottomSheetLoggedOutFragment extends BottomSheetDialogFragment {
 
+    private FragmentMoreBottomSheetLoggedOutBinding binding;
     @Inject
     CommonsLogSender commonsLogSender;
     @Inject
@@ -39,30 +39,40 @@ public class MoreBottomSheetLoggedOutFragment extends BottomSheetDialogFragment 
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater,
         @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        final View view = inflater.inflate(R.layout.fragment_more_bottom_sheet_logged_out, container, false);
-        ButterKnife.bind(this, view);
-        return view;
+        binding = FragmentMoreBottomSheetLoggedOutBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
+        binding.moreLogin.setOnClickListener(v -> onLogoutClicked());
+        binding.moreFeedback.setOnClickListener(v -> onFeedbackClicked());
+        binding.moreAbout.setOnClickListener(v -> onAboutClicked());
+        binding.moreSettings.setOnClickListener(v -> onSettingsClicked());
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     @Override
     public void onAttach(@NonNull final Context context) {
         super.onAttach(context);
         ApplicationlessInjection
-            .getInstance(getActivity().getApplicationContext())
+            .getInstance(requireActivity().getApplicationContext())
             .getCommonsApplicationComponent()
             .inject(this);
     }
 
-    @OnClick(R.id.more_login)
     public void onLogoutClicked() {
         applicationKvStore.putBoolean("login_skipped", false);
-        Intent intent = new Intent(getContext(), LoginActivity.class);
-        getActivity().finish();  //Kill the activity from which you will go to next activity
+        final Intent intent = new Intent(getContext(), LoginActivity.class);
+        requireActivity().finish();  //Kill the activity from which you will go to next activity
         startActivity(intent);
     }
 
-    @OnClick(R.id.more_feedback)
     public void onFeedbackClicked() {
         showAlertDialog();
     }
@@ -71,7 +81,7 @@ public class MoreBottomSheetLoggedOutFragment extends BottomSheetDialogFragment 
      * This method shows the alert dialog when a user wants to send feedback about the app.
      */
     private void showAlertDialog() {
-        new AlertDialog.Builder(getActivity())
+        new AlertDialog.Builder(requireActivity())
             .setMessage(R.string.feedback_sharing_data_alert)
             .setCancelable(false)
             .setPositiveButton(R.string.ok, (dialog, which) -> {
@@ -81,8 +91,8 @@ public class MoreBottomSheetLoggedOutFragment extends BottomSheetDialogFragment 
     }
 
     /**
-     * This method collects the feedback message and starts and activity with implicit intent
-     * to available email client.
+     * This method collects the feedback message and starts and activity with implicit intent to
+     * available email client.
      */
     private void sendFeedback() {
         final String technicalInfo = commonsLogSender.getExtraInfo();
@@ -103,18 +113,16 @@ public class MoreBottomSheetLoggedOutFragment extends BottomSheetDialogFragment 
         }
     }
 
-    @OnClick(R.id.more_about)
     public void onAboutClicked() {
         final Intent intent = new Intent(getActivity(), AboutActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        getActivity().startActivity(intent);
+        requireActivity().startActivity(intent);
     }
 
-    @OnClick(R.id.more_settings)
     public void onSettingsClicked() {
         final Intent intent = new Intent(getActivity(), SettingsActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        getActivity().startActivity(intent);
+        requireActivity().startActivity(intent);
     }
 
     private class BaseLogoutListener implements CommonsApplication.LogoutListener {
@@ -127,7 +135,7 @@ public class MoreBottomSheetLoggedOutFragment extends BottomSheetDialogFragment 
             nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(nearbyIntent);
-            getActivity().finish();
+            requireActivity().finish();
         }
     }
 }

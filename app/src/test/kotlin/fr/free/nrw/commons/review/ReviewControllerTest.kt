@@ -9,13 +9,14 @@ import com.facebook.soloader.SoLoader
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.delete.DeleteHelper
-import junit.framework.Assert.assertEquals
-import junit.framework.Assert.assertNotNull
 import media
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -29,8 +30,7 @@ import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowNotificationManager
 import org.robolectric.shadows.ShadowToast
-import org.wikipedia.AppAdapter
-import org.wikipedia.dataclient.mwapi.MwQueryPage
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
 import java.lang.reflect.Method
 import java.util.*
 
@@ -56,9 +56,9 @@ class ReviewControllerTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         context = ApplicationProvider.getApplicationContext()
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
         SoLoader.setInTestMode()
         Fresco.initialize(context)
         activity = Robolectric.buildActivity(ReviewActivity::class.java).create().get()

@@ -31,7 +31,7 @@ class PagingDataSourceFactoryTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         factory = object : PagingDataSourceFactory<String>(loadingStates) {
             override val loadFunction get() = function
         }

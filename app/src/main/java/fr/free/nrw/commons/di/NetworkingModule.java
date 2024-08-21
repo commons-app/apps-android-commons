@@ -7,8 +7,16 @@ import dagger.Module;
 import dagger.Provides;
 import fr.free.nrw.commons.BetaConstants;
 import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.OkHttpConnectionFactory;
 import fr.free.nrw.commons.actions.PageEditClient;
 import fr.free.nrw.commons.actions.PageEditInterface;
+import fr.free.nrw.commons.actions.ThanksInterface;
+import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient;
+import fr.free.nrw.commons.auth.csrf.CsrfTokenInterface;
+import fr.free.nrw.commons.auth.csrf.LogoutClient;
+import fr.free.nrw.commons.auth.login.LoginClient;
+import fr.free.nrw.commons.auth.login.LoginInterface;
 import fr.free.nrw.commons.category.CategoryInterface;
 import fr.free.nrw.commons.explore.depictions.DepictsClient;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -18,11 +26,15 @@ import fr.free.nrw.commons.media.PageMediaInterface;
 import fr.free.nrw.commons.media.WikidataMediaInterface;
 import fr.free.nrw.commons.mwapi.OkHttpJsonApiClient;
 import fr.free.nrw.commons.mwapi.UserInterface;
+import fr.free.nrw.commons.notification.NotificationInterface;
 import fr.free.nrw.commons.review.ReviewInterface;
 import fr.free.nrw.commons.upload.UploadInterface;
 import fr.free.nrw.commons.upload.WikiBaseInterface;
 import fr.free.nrw.commons.upload.depicts.DepictsInterface;
+import fr.free.nrw.commons.wikidata.CommonsServiceFactory;
 import fr.free.nrw.commons.wikidata.WikidataInterface;
+import fr.free.nrw.commons.wikidata.cookies.CommonsCookieJar;
+import fr.free.nrw.commons.wikidata.cookies.CommonsCookieStorage;
 import java.io.File;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -33,31 +45,25 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
-import org.wikipedia.csrf.CsrfTokenClient;
-import org.wikipedia.dataclient.Service;
-import org.wikipedia.dataclient.ServiceFactory;
-import org.wikipedia.dataclient.WikiSite;
-import org.wikipedia.json.GsonUtil;
-import org.wikipedia.login.LoginClient;
+import fr.free.nrw.commons.wikidata.model.WikiSite;
+import fr.free.nrw.commons.wikidata.GsonUtil;
 import timber.log.Timber;
 
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class NetworkingModule {
     private static final String WIKIDATA_SPARQL_QUERY_URL = "https://query.wikidata.org/sparql";
-    private static final String TOOLS_FORGE_URL = "https://tools.wmflabs.org/urbanecmbot/commonsmisc";
-
-    private static final String TEST_TOOLS_FORGE_URL = "https://tools.wmflabs.org/commons-android-app/tool-commons-android-app";
+    private static final String TOOLS_FORGE_URL = "https://tools.wmflabs.org/commons-android-app/tool-commons-android-app";
 
     public static final long OK_HTTP_CACHE_SIZE = 10 * 1024 * 1024;
 
-    public static final String NAMED_COMMONS_WIKI_SITE = "commons-wikisite";
     private static final String NAMED_WIKI_DATA_WIKI_SITE = "wikidata-wikisite";
     private static final String NAMED_WIKI_PEDIA_WIKI_SITE = "wikipedia-wikisite";
 
     public static final String NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE = "language-wikipedia-wikisite";
 
     public static final String NAMED_COMMONS_CSRF = "commons-csrf";
+    public static final String NAMED_WIKI_CSRF = "wiki-csrf";
 
     @Provides
     @Singleton
@@ -75,6 +81,12 @@ public class NetworkingModule {
 
     @Provides
     @Singleton
+    public CommonsServiceFactory serviceFactory(CommonsCookieJar cookieJar) {
+        return new CommonsServiceFactory(OkHttpConnectionFactory.getClient(cookieJar));
+    }
+
+    @Provides
+    @Singleton
     public HttpLoggingInterceptor provideHttpLoggingInterceptor() {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(message -> {
             Timber.tag("OkHttp").v(message);
@@ -88,29 +100,86 @@ public class NetworkingModule {
     public OkHttpJsonApiClient provideOkHttpJsonApiClient(OkHttpClient okHttpClient,
                                                           DepictsClient depictsClient,
                                                           @Named("tools_forge") HttpUrl toolsForgeUrl,
-                                                          @Named("test_tools_forge") HttpUrl testToolsForgeUrl,
                                                           @Named("default_preferences") JsonKvStore defaultKvStore,
                                                           Gson gson) {
         return new OkHttpJsonApiClient(okHttpClient,
                 depictsClient,
                 toolsForgeUrl,
-                testToolsForgeUrl,
                 WIKIDATA_SPARQL_QUERY_URL,
                 BuildConfig.WIKIMEDIA_CAMPAIGNS_URL,
             gson);
     }
 
-    @Named(NAMED_COMMONS_CSRF)
     @Provides
     @Singleton
-    public CsrfTokenClient provideCommonsCsrfTokenClient(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
-        return new CsrfTokenClient(commonsWikiSite, commonsWikiSite);
+    public CommonsCookieStorage provideCookieStorage(
+        @Named("default_preferences") JsonKvStore preferences) {
+        CommonsCookieStorage cookieStorage = new CommonsCookieStorage(preferences);
+        cookieStorage.load();
+        return cookieStorage;
     }
 
     @Provides
     @Singleton
-    public LoginClient provideLoginClient() {
-        return new LoginClient();
+    public CommonsCookieJar provideCookieJar(CommonsCookieStorage storage) {
+        return new CommonsCookieJar(storage);
+    }
+
+    @Named(NAMED_COMMONS_CSRF)
+    @Provides
+    @Singleton
+    public CsrfTokenClient provideCommonsCsrfTokenClient(SessionManager sessionManager,
+        @Named("commons-csrf-interface") CsrfTokenInterface tokenInterface, LoginClient loginClient, LogoutClient logoutClient) {
+        return new CsrfTokenClient(sessionManager, tokenInterface, loginClient, logoutClient);
+    }
+
+    /**
+     * Provides a singleton instance of CsrfTokenClient for Wikidata.
+     *
+     * @param sessionManager The session manager to manage user sessions.
+     * @param tokenInterface The interface for obtaining CSRF tokens.
+     * @param loginClient    The client for handling login operations.
+     * @param logoutClient   The client for handling logout operations.
+     * @return A singleton instance of CsrfTokenClient.
+     */
+    @Named(NAMED_WIKI_CSRF)
+    @Provides
+    @Singleton
+    public CsrfTokenClient provideWikiCsrfTokenClient(SessionManager sessionManager,
+        @Named("wikidata-csrf-interface") CsrfTokenInterface tokenInterface, LoginClient loginClient, LogoutClient logoutClient) {
+        return new CsrfTokenClient(sessionManager, tokenInterface, loginClient, logoutClient);
+    }
+
+    /**
+     * Provides a singleton instance of CsrfTokenInterface for Wikidata.
+     *
+     * @param serviceFactory The factory used to create service interfaces.
+     * @return A singleton instance of CsrfTokenInterface for Wikidata.
+     */
+    @Named("wikidata-csrf-interface")
+    @Provides
+    @Singleton
+    public CsrfTokenInterface provideWikidataCsrfTokenInterface(CommonsServiceFactory serviceFactory) {
+        return serviceFactory.create(BuildConfig.WIKIDATA_URL, CsrfTokenInterface.class);
+    }
+
+    @Named("commons-csrf-interface")
+    @Provides
+    @Singleton
+    public CsrfTokenInterface provideCsrfTokenInterface(CommonsServiceFactory serviceFactory) {
+        return serviceFactory.create(BuildConfig.COMMONS_URL, CsrfTokenInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    public LoginInterface provideLoginInterface(CommonsServiceFactory serviceFactory) {
+        return serviceFactory.create(BuildConfig.COMMONS_URL, LoginInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    public LoginClient provideLoginClient(LoginInterface loginInterface) {
+        return new LoginClient(loginInterface);
     }
 
     @Provides
@@ -127,21 +196,6 @@ public class NetworkingModule {
     @SuppressWarnings("ConstantConditions")
     public HttpUrl provideToolsForgeUrl() {
         return HttpUrl.parse(TOOLS_FORGE_URL);
-    }
-
-    @Provides
-    @Named("test_tools_forge")
-    @NonNull
-    @SuppressWarnings("ConstantConditions")
-    public HttpUrl provideTestToolsForgeUrl() {
-        return HttpUrl.parse(TEST_TOOLS_FORGE_URL);
-    }
-
-    @Provides
-    @Singleton
-    @Named(NAMED_COMMONS_WIKI_SITE)
-    public WikiSite provideCommonsWikiSite() {
-        return new WikiSite(BuildConfig.COMMONS_URL);
     }
 
     @Provides
@@ -164,54 +218,40 @@ public class NetworkingModule {
 
     @Provides
     @Singleton
-    @Named("commons-service")
-    public Service provideCommonsService(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
-        return ServiceFactory.get(commonsWikiSite);
+    public ReviewInterface provideReviewInterface(CommonsServiceFactory serviceFactory) {
+        return serviceFactory.create(BuildConfig.COMMONS_URL, ReviewInterface.class);
     }
 
     @Provides
     @Singleton
-    @Named("wikidata-service")
-    public Service provideWikidataService(@Named(NAMED_WIKI_DATA_WIKI_SITE) WikiSite wikidataWikiSite) {
-        return ServiceFactory.get(wikidataWikiSite, BuildConfig.WIKIDATA_URL, Service.class);
+    public DepictsInterface provideDepictsInterface(CommonsServiceFactory serviceFactory) {
+        return serviceFactory.create(BuildConfig.WIKIDATA_URL, DepictsInterface.class);
     }
 
     @Provides
     @Singleton
-    public ReviewInterface provideReviewInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
-        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, ReviewInterface.class);
+    public WikiBaseInterface provideWikiBaseInterface(CommonsServiceFactory serviceFactory) {
+        return serviceFactory.create(BuildConfig.COMMONS_URL, WikiBaseInterface.class);
     }
 
     @Provides
     @Singleton
-    public DepictsInterface provideDepictsInterface(@Named(NAMED_WIKI_DATA_WIKI_SITE) WikiSite wikidataWikiSite) {
-        return ServiceFactory.get(wikidataWikiSite, BuildConfig.WIKIDATA_URL, DepictsInterface.class);
-    }
-
-    @Provides
-    @Singleton
-    public WikiBaseInterface provideWikiBaseInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
-        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, WikiBaseInterface.class);
-    }
-
-    @Provides
-    @Singleton
-    public UploadInterface provideUploadInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
-        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, UploadInterface.class);
+    public UploadInterface provideUploadInterface(CommonsServiceFactory serviceFactory) {
+        return serviceFactory.create(BuildConfig.COMMONS_URL, UploadInterface.class);
     }
 
     @Named("commons-page-edit-service")
     @Provides
     @Singleton
-    public PageEditInterface providePageEditService(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
-        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, PageEditInterface.class);
+    public PageEditInterface providePageEditService(CommonsServiceFactory serviceFactory) {
+        return serviceFactory.create(BuildConfig.COMMONS_URL, PageEditInterface.class);
     }
 
     @Named("wikidata-page-edit-service")
     @Provides
     @Singleton
-    public PageEditInterface provideWikiDataPageEditService(@Named(NAMED_WIKI_DATA_WIKI_SITE) WikiSite wikiDataWikiSite) {
-        return ServiceFactory.get(wikiDataWikiSite, BuildConfig.WIKIDATA_URL, PageEditInterface.class);
+    public PageEditInterface provideWikiDataPageEditService(CommonsServiceFactory serviceFactory) {
+        return serviceFactory.create(BuildConfig.WIKIDATA_URL, PageEditInterface.class);
     }
 
     @Named("commons-page-edit")
@@ -222,10 +262,25 @@ public class NetworkingModule {
         return new PageEditClient(csrfTokenClient, pageEditInterface);
     }
 
+    /**
+     * Provides a singleton instance of PageEditClient for Wikidata.
+     *
+     * @param csrfTokenClient    The client used to manage CSRF tokens.
+     * @param pageEditInterface  The interface for page edit operations.
+     * @return A singleton instance of PageEditClient for Wikidata.
+     */
+    @Named("wikidata-page-edit")
     @Provides
     @Singleton
-    public MediaInterface provideMediaInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
-        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, MediaInterface.class);
+    public PageEditClient provideWikidataPageEditClient(@Named(NAMED_WIKI_CSRF) CsrfTokenClient csrfTokenClient,
+        @Named("wikidata-page-edit-service") PageEditInterface pageEditInterface) {
+        return new PageEditClient(csrfTokenClient, pageEditInterface);
+    }
+
+    @Provides
+    @Singleton
+    public MediaInterface provideMediaInterface(CommonsServiceFactory serviceFactory) {
+        return serviceFactory.create(BuildConfig.COMMONS_URL, MediaInterface.class);
     }
 
     /**
@@ -236,36 +291,44 @@ public class NetworkingModule {
      */
     @Provides
     @Singleton
-    public WikidataMediaInterface provideWikidataMediaInterface(
-        @Named(NAMED_COMMONS_WIKI_SITE) final WikiSite commonsWikiSite) {
-        return ServiceFactory.get(commonsWikiSite,
-            BetaConstants.COMMONS_URL, WikidataMediaInterface.class);
+    public WikidataMediaInterface provideWikidataMediaInterface(CommonsServiceFactory serviceFactory) {
+        return serviceFactory.create(BetaConstants.COMMONS_URL, WikidataMediaInterface.class);
     }
 
     @Provides
     @Singleton
-    public MediaDetailInterface providesMediaDetailInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikisite) {
-        return ServiceFactory.get(commonsWikisite, BuildConfig.COMMONS_URL, MediaDetailInterface.class);
+    public MediaDetailInterface providesMediaDetailInterface(CommonsServiceFactory serviceFactory) {
+        return serviceFactory.create(BuildConfig.COMMONS_URL, MediaDetailInterface.class);
     }
 
     @Provides
     @Singleton
-    public CategoryInterface provideCategoryInterface(
-        @Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
-        return ServiceFactory
-               .get(commonsWikiSite, BuildConfig.COMMONS_URL, CategoryInterface.class);
+    public CategoryInterface provideCategoryInterface(CommonsServiceFactory serviceFactory) {
+        return serviceFactory.create(BuildConfig.COMMONS_URL, CategoryInterface.class);
     }
 
     @Provides
     @Singleton
-    public UserInterface provideUserInterface(@Named(NAMED_COMMONS_WIKI_SITE) WikiSite commonsWikiSite) {
-        return ServiceFactory.get(commonsWikiSite, BuildConfig.COMMONS_URL, UserInterface.class);
+    public ThanksInterface provideThanksInterface(CommonsServiceFactory serviceFactory) {
+        return serviceFactory.create(BuildConfig.COMMONS_URL, ThanksInterface.class);
     }
 
     @Provides
     @Singleton
-    public WikidataInterface provideWikidataInterface(@Named(NAMED_WIKI_DATA_WIKI_SITE) WikiSite wikiDataWikiSite) {
-        return ServiceFactory.get(wikiDataWikiSite, BuildConfig.WIKIDATA_URL, WikidataInterface.class);
+    public NotificationInterface provideNotificationInterface(CommonsServiceFactory serviceFactory) {
+        return serviceFactory.create(BuildConfig.COMMONS_URL, NotificationInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    public UserInterface provideUserInterface(CommonsServiceFactory serviceFactory) {
+        return serviceFactory.create(BuildConfig.COMMONS_URL, UserInterface.class);
+    }
+
+    @Provides
+    @Singleton
+    public WikidataInterface provideWikidataInterface(CommonsServiceFactory serviceFactory) {
+        return serviceFactory.create(BuildConfig.WIKIDATA_URL, WikidataInterface.class);
     }
 
     /**
@@ -274,8 +337,8 @@ public class NetworkingModule {
      */
     @Provides
     @Singleton
-    public PageMediaInterface providePageMediaInterface(@Named(NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE) WikiSite wikiSite) {
-        return ServiceFactory.get(wikiSite, wikiSite.url(), PageMediaInterface.class);
+    public PageMediaInterface providePageMediaInterface(@Named(NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE) WikiSite wikiSite, CommonsServiceFactory serviceFactory) {
+        return serviceFactory.create(wikiSite.url(), PageMediaInterface.class);
     }
 
     @Provides

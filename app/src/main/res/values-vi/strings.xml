@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * Bluetpp
+* Caden99
 * Harriettruong3
 * Keo010122
 * Leducthn
@@ -59,10 +60,10 @@
   <string name="logging_in_title">Đang đăng nhập</string>
   <string name="logging_in_message">Vui lòng chờ…</string>
   <string name="updating_caption_message">Vui lòng chờ…</string>
-  <string name="login_success">Đã đăng nhập thành công!</string>
-  <string name="login_failed">Đăng nhập thất bại!</string>
+  <string name="login_success" fuzzy="true">Đã đăng nhập thành công!</string>
+  <string name="login_failed" fuzzy="true">Đăng nhập thất bại!</string>
   <string name="upload_failed">Không tìm thấy tập tin. Xin vui lòng thử tập tin khác.</string>
-  <string name="authentication_failed">Xác thực thất bại, vui lòng đăng nhập lại</string>
+  <string name="authentication_failed" fuzzy="true">Xác thực thất bại, vui lòng đăng nhập lại</string>
   <string name="uploading_started">Đã bắt đầu tải lên!</string>
   <string name="upload_completed_notification_title">Đã tải lên %1$s!</string>
   <string name="upload_completed_notification_text">Chạm để xem những tập tin tải lên của bạn</string>
@@ -83,11 +84,11 @@
   <string name="menu_share">Chia sẻ</string>
   <string name="share_title_hint" fuzzy="true">Tựa đề (Yêu cầu)</string>
   <string name="share_description_hint">Miêu tả</string>
-  <string name="login_failed_network">Không thể đăng nhập – có lỗi mạng</string>
+  <string name="login_failed_network" fuzzy="true">Không thể đăng nhập – có lỗi mạng</string>
   <string name="login_failed_throttled">Đã đăng nhập thất bại quá nhiều lần. Xin vui lòng thử lại trong vòng vài phút.</string>
   <string name="login_failed_blocked">Rất tiếc, người dùng này đã bị cấm tại Commons</string>
   <string name="login_failed_2fa_needed">Bạn phải cung cấp mã xác thực dùng hai nhân tố.</string>
-  <string name="login_failed_generic">Đăng nhập thất bại</string>
+  <string name="login_failed_generic" fuzzy="true">Đăng nhập thất bại</string>
   <string name="share_upload_button">Tải lên</string>
   <string name="multiple_share_base_title">Đặt tên nhóm này</string>
   <string name="provider_modifications">Sửa đổi</string>
@@ -244,7 +245,7 @@
   <string name="menu_set_wallpaper">Đặt làm hình nền</string>
   <string name="taj_mahal_answer">Hình chứa di tích và cảnh vật thiên nhiên thường được chấp nhận tải lên ở hầu hết các quốc gia. Xin lưu ý rằng các công trình nghệ thuật được trưng bày tạm thời thường có bản quyền và không được chấp nhận tải lên.</string>
   <string name="share_app_title">Chia sẻ Ứng dụng</string>
-  <string name="error_fetching_nearby_places">Lỗi khi lấy các nơi lân cận.</string>
+  <string name="error_fetching_nearby_places" fuzzy="true">Lỗi khi lấy các nơi lân cận.</string>
   <string name="search_this_area">Tìm kiếm khu vực này</string>
   <string name="category_edit_helper_make_edit_toast">Đang cố gắng cập nhật danh mục.</string>
   <string name="category_edit_helper_show_edit_title">Cập nhật danh mục</string>

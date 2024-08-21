@@ -8,22 +8,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.mapbox.mapboxsdk.camera.CameraPosition
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
-import com.mapbox.mapboxsdk.exceptions.MapboxConfigurationException
-import com.mapbox.mapboxsdk.geometry.LatLng
-import com.mapbox.mapboxsdk.maps.MapboxMap
-import com.mapbox.mapboxsdk.maps.Style
-import com.mapbox.mapboxsdk.maps.UiSettings
-import com.mapbox.mapboxsdk.style.layers.Layer
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
+import fr.free.nrw.commons.CameraPosition
 import fr.free.nrw.commons.LocationPicker.LocationPickerActivity
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_LOCATION
 import fr.free.nrw.commons.upload.mediaDetails.UploadMediaDetailFragment.LAST_ZOOM
+import io.reactivex.android.plugins.RxAndroidPlugins
+import io.reactivex.schedulers.Schedulers
 import org.junit.Assert
 import org.junit.Assert.*
 import org.junit.Before
@@ -32,6 +26,7 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
+import org.osmdroid.util.GeoPoint
 import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
@@ -39,7 +34,6 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -54,7 +48,7 @@ class LocationPickerActivityUnitTests {
     private lateinit var applicationKvStore: JsonKvStore
 
     @Mock
-    private lateinit var mapboxMap: MapboxMap
+    private lateinit var mapView: org.osmdroid.views.MapView
 
     @Mock
     private lateinit var cameraPosition: CameraPosition
@@ -63,13 +57,13 @@ class LocationPickerActivityUnitTests {
     private lateinit var modifyLocationButton: Button
 
     @Mock
+    private lateinit var removeLocationButton: Button
+
+    @Mock
     private lateinit var placeSelectedButton: FloatingActionButton
 
     @Mock
     private lateinit var showInMapButton: TextView
-
-    @Mock
-    private lateinit var droppedMarkerLayer: Layer
 
     @Mock
     private lateinit var markerImage: ImageView
@@ -89,22 +83,20 @@ class LocationPickerActivityUnitTests {
     @Mock
     private lateinit var tvAttribution: AppCompatTextView
 
-    @Mock
-    private lateinit var style: Style
-
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         context = RuntimeEnvironment.getApplication().applicationContext
         activity = Robolectric.buildActivity(LocationPickerActivity::class.java).get()
+        RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
 
-        Whitebox.setInternalState(activity, "mapboxMap", mapboxMap)
+        Whitebox.setInternalState(activity, "mapView", mapView)
         Whitebox.setInternalState(activity, "applicationKvStore", applicationKvStore)
         Whitebox.setInternalState(activity, "cameraPosition", cameraPosition)
         Whitebox.setInternalState(activity, "modifyLocationButton", modifyLocationButton)
+        Whitebox.setInternalState(activity, "removeLocationButton", removeLocationButton)
         Whitebox.setInternalState(activity, "placeSelectedButton", placeSelectedButton)
         Whitebox.setInternalState(activity, "showInMapButton", showInMapButton)
-        Whitebox.setInternalState(activity, "droppedMarkerLayer", droppedMarkerLayer)
         Whitebox.setInternalState(activity, "markerImage", markerImage)
         Whitebox.setInternalState(activity, "shadow", shadow)
         Whitebox.setInternalState(activity, "largeToolbarText", largeToolbarText)
@@ -121,42 +113,6 @@ class LocationPickerActivityUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testBindListeners() {
-        val method: Method = LocationPickerActivity::class.java.getDeclaredMethod(
-            "bindListeners"
-        )
-        method.isAccessible = true
-        method.invoke(activity)
-        verify(mapboxMap, times(1)).addOnCameraMoveStartedListener(activity)
-        verify(mapboxMap, times(1)).addOnCameraIdleListener(activity)
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnMapReady() {
-        val method: Method = LocationPickerActivity::class.java.getDeclaredMethod(
-            "onMapReady",
-            MapboxMap::class.java
-        )
-        method.isAccessible = true
-        try {
-            method.invoke(activity, mapboxMap)
-            fail("Expected an exception to be thrown")
-        } catch (e: InvocationTargetException) {
-            assertTrue((e.targetException is MapboxConfigurationException) ||
-                       (e.targetException is ExceptionInInitializerError))
-            if (e.targetException is MapboxConfigurationException) {
-                assertEquals(
-                    "\nUsing MapView requires calling Mapbox.getInstance(Context context, String apiKey,"
-                            + " WellKnownTileServer wellKnownTileServer) before inflating or creating the view.",
-                    e.targetException.message
-                )
-            }
-        }
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testAddCredits() {
         val method: Method = LocationPickerActivity::class.java.getDeclaredMethod(
             "addCredits"
@@ -169,49 +125,6 @@ class LocationPickerActivityUnitTests {
 
     @Test
     @Throws(Exception::class)
-    fun testAdjustCameraBasedOnOptions() {
-        val method: Method = LocationPickerActivity::class.java.getDeclaredMethod(
-            "adjustCameraBasedOnOptions"
-        )
-        method.isAccessible = true
-        method.invoke(activity)
-        verify(mapboxMap, times(1))
-            .moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnChanged() {
-        val method: Method = LocationPickerActivity::class.java.getDeclaredMethod(
-            "onChanged",
-            CameraPosition::class.java
-        )
-        method.isAccessible = true
-        method.invoke(activity, mock(CameraPosition::class.java))
-        verify(mapboxMap, times(0)).cameraPosition
-    }
-
-    @Test
-    @Throws(Exception::class)
-    fun testOnStyleLoaded() {
-        whenever(modifyLocationButton.visibility).thenReturn(View.INVISIBLE)
-        whenever(mapboxMap.uiSettings).thenReturn(mock(UiSettings::class.java))
-        val method: Method = LocationPickerActivity::class.java.getDeclaredMethod(
-            "onStyleLoaded",
-            Style::class.java
-        )
-        method.isAccessible = true
-        method.invoke(activity, style)
-        verify(modifyLocationButton, times(1)).visibility
-        verify(mapboxMap, times(1))
-            .moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
-        verify(mapboxMap, times(1)).uiSettings
-        verify(mapboxMap, times(1)).addOnCameraMoveStartedListener(activity)
-        verify(mapboxMap, times(1)).addOnCameraIdleListener(activity)
-    }
-
-    @Test
-    @Throws(Exception::class)
     fun testOnClickModifyLocation() {
         val method: Method = LocationPickerActivity::class.java.getDeclaredMethod(
             "onClickModifyLocation"
@@ -220,15 +133,23 @@ class LocationPickerActivityUnitTests {
         method.invoke(activity)
         verify(placeSelectedButton, times(1)).visibility = View.VISIBLE
         verify(modifyLocationButton, times(1)).visibility = View.GONE
+        verify(removeLocationButton, times(1)).visibility = View.GONE
         verify(showInMapButton, times(1)).visibility = View.GONE
         verify(markerImage, times(1)).visibility = View.VISIBLE
         verify(shadow, times(1)).visibility = View.VISIBLE
-        verify(droppedMarkerLayer, times(1)).setProperties(any())
         verify(largeToolbarText, times(1)).text = "Choose a location"
         verify(smallToolbarText, times(1)).text = "Pan and zoom to adjust"
         verify(fabCenterOnLocation, times(1)).visibility = View.VISIBLE
-        verify(mapboxMap, times(1)).addOnCameraMoveStartedListener(activity)
-        verify(mapboxMap, times(1)).addOnCameraIdleListener(activity)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testOnClickRemoveLocation() {
+        val method: Method = LocationPickerActivity::class.java.getDeclaredMethod(
+            "onClickRemoveLocation"
+        )
+        method.isAccessible = true
+        method.invoke(activity)
     }
 
     @Test
@@ -236,27 +157,21 @@ class LocationPickerActivityUnitTests {
     fun testPlaceSelected() {
         Shadows.shadowOf(Looper.getMainLooper()).idle()
         Whitebox.setInternalState(activity,"activity", "NoLocationUploadActivity")
-        val position = CameraPosition.Builder().target(
-            LatLng(
-                51.50550,
-                -0.07520,
-                0.0
-            )
-        ).zoom(15.0).build()
-        `when`(mapboxMap.cameraPosition).thenReturn(position)
+        val position = GeoPoint(51.50550, -0.07520)
         val method: Method = LocationPickerActivity::class.java.getDeclaredMethod(
             "placeSelected"
         )
+        `when`(mapView.mapCenter).thenReturn(position)
+        `when`(mapView.zoomLevel).thenReturn(15)
         method.isAccessible = true
         method.invoke(activity)
-        verify(applicationKvStore, times(1))
-            .putString(LAST_LOCATION, position.target!!.latitude.toString()
-                    + ","
-                    + position.target!!.longitude
-            )
-        verify(applicationKvStore, times(1))
-            .putString(LAST_ZOOM, position.zoom.toString())
-        verify(mapboxMap, times(4)).cameraPosition
+        verify(applicationKvStore, times(1)).putString(
+            LAST_LOCATION,
+            position.latitude.toString() + "," + position.longitude.toString()
+        )
+        verify(applicationKvStore, times(1)).putString(LAST_ZOOM, mapView.zoomLevel.toString())
     }
+
+
 
 }

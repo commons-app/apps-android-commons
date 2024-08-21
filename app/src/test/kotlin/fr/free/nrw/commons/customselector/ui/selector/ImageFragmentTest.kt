@@ -15,9 +15,11 @@ import androidx.test.core.app.ApplicationProvider
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.soloader.SoLoader
 import com.nhaarman.mockitokotlin2.whenever
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.contributions.ContributionDao
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.customselector.model.CallbackStatus
 import fr.free.nrw.commons.customselector.model.Image
 import fr.free.nrw.commons.customselector.model.Result
@@ -35,7 +37,6 @@ import org.robolectric.Shadows
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Field
 
 /**
@@ -67,6 +68,9 @@ class ImageFragmentTest {
     @Mock
     private lateinit var savedInstanceState: Bundle
 
+    @Mock
+    lateinit var contributionDao: ContributionDao
+
     /**
      * Setup the image fragment.
      */
@@ -74,7 +78,7 @@ class ImageFragmentTest {
     fun setUp(){
         MockitoAnnotations.initMocks(this)
         context = ApplicationProvider.getApplicationContext()
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
         SoLoader.setInTestMode()
         Fresco.initialize(context)
         activity = Robolectric.buildActivity(CustomSelectorActivity::class.java).create().get()
@@ -94,6 +98,7 @@ class ImageFragmentTest {
         Whitebox.setInternalState(fragment, "selectorRV", selectorRV )
         Whitebox.setInternalState(fragment, "loader", loader)
         Whitebox.setInternalState(fragment, "filteredImages", arrayListOf(image,image))
+        Whitebox.setInternalState(fragment, "contributionDao", contributionDao)
 
         viewModelField = fragment.javaClass.getDeclaredField("viewModel")
         viewModelField.isAccessible = true

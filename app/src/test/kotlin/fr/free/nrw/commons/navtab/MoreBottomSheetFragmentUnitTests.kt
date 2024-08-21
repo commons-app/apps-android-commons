@@ -8,15 +8,15 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.test.core.app.ApplicationProvider
 import fr.free.nrw.commons.CommonsApplication
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.actions.PageEditClient
 import fr.free.nrw.commons.feedback.model.Feedback
 import fr.free.nrw.commons.kvstore.JsonKvStore
@@ -38,7 +38,6 @@ import org.robolectric.annotation.LooperMode
 import org.robolectric.shadows.ShadowActivity
 import org.robolectric.shadows.ShadowAlertDialog
 import org.robolectric.shadows.ShadowDialog
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 
 
@@ -57,16 +56,13 @@ class MoreBottomSheetFragmentUnitTests {
     private lateinit var store: JsonKvStore
 
     @Mock
-    private lateinit var morePeerReview: TextView
-
-    @Mock
     private lateinit var pageEditClient: PageEditClient
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         context = ApplicationProvider.getApplicationContext()
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
 
         activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         fragment = MoreBottomSheetFragment()
@@ -76,7 +72,6 @@ class MoreBottomSheetFragmentUnitTests {
         fragmentTransaction.commitNowAllowingStateLoss()
 
         Whitebox.setInternalState(fragment, "store", store)
-        Whitebox.setInternalState(fragment, "morePeerReview", morePeerReview)
         Whitebox.setInternalState(fragment, "pageEditClient", pageEditClient)
 
         `when`(store.getBoolean(CommonsApplication.IS_LIMITED_CONNECTION_MODE_ENABLED)).thenReturn(
@@ -124,7 +119,7 @@ class MoreBottomSheetFragmentUnitTests {
         val feedback = mock(Feedback::class.java)
         val observable: Observable<Boolean> = Observable.just(false)
         val observable2: Observable<Boolean> = Observable.just(true)
-        doReturn(observable, observable2).`when`(pageEditClient).prependEdit(anyString(), anyString(), anyString())
+        doReturn(observable, observable2).`when`(pageEditClient).createNewSection(anyString(), anyString(), anyString(), anyString())
         fragment.uploadFeedback(feedback)
     }
 

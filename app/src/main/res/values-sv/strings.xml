@@ -3,6 +3,7 @@
 * Abbedabb
 * Ainali
 * Jopparn
+* Kakan spelar
 * Liuxinyu970226
 * Sabelöga
 * Skalman
@@ -27,7 +28,7 @@
   <string name="show_captions_description">Beskrivning</string>
   <string name="nearby_row_image">Bild</string>
   <string name="nearby_all">Alla</string>
-  <string name="nearby_filter_toggle">Växla upp/ned</string>
+  <string name="nearby_filter_toggle">Växla upp</string>
   <string name="nearby_filter_search">Sökningsvy</string>
   <string name="nearby_filter_state">Platsstatus</string>
   <string name="appwidget_img">Dagens bild</string>
@@ -69,6 +70,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Inställningar</string>
   <string name="intent_share_upload_label">Ladda upp till Commons</string>
+  <string name="upload_in_progress">Uppladdning pågår</string>
   <string name="username">Användarnamn</string>
   <string name="password">Lösenord</string>
   <string name="login_credential">Logga in på ditt betakonto för Commons</string>
@@ -80,9 +82,12 @@
   <string name="updating_caption_title">Uppdatera bildtexter och beskrivningar</string>
   <string name="updating_caption_message">Var god vänta…</string>
   <string name="login_success">Inloggningen lyckades!</string>
-  <string name="login_failed">Det gick inte att logga in!</string>
+  <string name="login_failed">Inloggningen misslyckades!</string>
   <string name="upload_failed">Filen hittades inte. Försök med en annan fil.</string>
-  <string name="authentication_failed">Autentisering misslyckades, var god logga in igen</string>
+  <string name="retry_limit_reached">Maxgränsen för återförsök har uppnåtts! Avbryt uppladdningen och försök igen</string>
+  <string name="unrestricted_battery_mode">Inaktivera batterioptimeringen?</string>
+  <string name="suggest_unrestricted_mode">Att ladda upp fler än 3 bilder är mer tillförlitligt när batterioptimering har inaktiverats. Inaktivera batterioptimering för Commons-appen i inställningarna för en smidigare uppladdningsupplevelse.\n\nMöjliga steg för att inaktivera batterioptimeringen:\n\nSteg 1: Tryck på knappen \"Inställningar\" nedan.\n\nSteg 2: Ändra \"Appar inte optimerade\" till \"Allt\".\n\nSteg 3: Sök efter \"Commons\" eller \"fr.free.nrw.commons\".\n\nSteg 4: Tryck på den och välj \"Optimera inte\".\n\nSteg 5: Tryck på \"Klar\".</string>
+  <string name="authentication_failed">Autentisering misslyckades. Var god logga in igen.</string>
   <string name="uploading_started">Överföring påbörjad!</string>
   <string name="uploading_queued">Kölagd uppladdning (begränsat anslutningsläge har aktiverats)</string>
   <string name="upload_completed_notification_title">%1$s överförd!</string>
@@ -196,8 +201,11 @@
   <string name="read_storage_permission_rationale">Nödvändig behörighet: Läs extern lagring. Appen kan inte komma åt ditt galleri utan detta.</string>
   <string name="write_storage_permission_rationale">Nödvändig behörighet: Skriv till extern lagring. Appen kan inte komma åt din kamera/galleri utan detta.</string>
   <string name="location_permission_title">Begär platsbehörighet</string>
+  <string name="in_app_camera_location_permission_title">Registrera platsen för bilder som tas i appen</string>
+  <string name="in_app_camera_location_switch_pref_summary">Aktivera detta för att registrera platsen med bilder som tas i appen ifall enhetens kamera inte gör det</string>
   <string name="ok">OK</string>
   <string name="warning">Varning</string>
+  <string name="duplicate_file_name">Dubblettfilnamn hittades</string>
   <string name="upload">Ladda upp</string>
   <string name="yes">Ja</string>
   <string name="no">Nej</string>
@@ -234,6 +242,7 @@
   <string name="navigation_item_about">Om</string>
   <string name="navigation_item_settings">Inställningar</string>
   <string name="navigation_item_feedback">Återkoppling</string>
+  <string name="navigation_item_feedback_github">Återkoppling via GitHub</string>
   <string name="navigation_item_logout">Logga ut</string>
   <string name="navigation_item_info">Guide</string>
   <string name="navigation_item_notification">Meddelanden</string>
@@ -268,12 +277,14 @@
   <string name="skip_login">Hoppa över</string>
   <string name="navigation_item_login">Logga in</string>
   <string name="skip_login_title">Vill du verkligen hoppa över inloggningen?</string>
-  <string name="skip_login_message">Du behöver logga in för att ladda upp bilder i framtiden.</string>
+  <string name="skip_login_message">Du kommer behöva logga in för att ladda upp bilder i framtiden.</string>
   <string name="login_alert_message">Logga in för att använda denna funktion</string>
   <string name="copy_wikicode">Kopiera wikitexten till urklipp</string>
   <string name="wikicode_copied">Wikitexten kopierades till urklipp</string>
   <string name="nearby_location_not_available">\"I närheten\" kanske inte fungerar ordentligt. Platsen är inte tillgänglig.</string>
+  <string name="upload_location_access_denied">Platsåtkomst nekad. Ange din plats manuellt för att använda den här funktionen.</string>
   <string name="location_permission_rationale_nearby">Behörighet krävs för att visa en lista över platser i närheten</string>
+  <string name="location_permission_rationale_explore">Behörighet krävs för att visa en lista över bilder i närheten</string>
   <string name="nearby_directions">Vägbeskrivning</string>
   <string name="nearby_wikidata">Wikidata</string>
   <string name="nearby_wikipedia">Wikipedia</string>
@@ -318,7 +329,7 @@
   <string name="explore_tab_title_map">Karta</string>
   <string name="successful_wikidata_edit">Bilden lades till i %1$s på Wikidata!</string>
   <string name="wikidata_edit_failure">Misslyckades att uppdatera motsvarande Wikidataentitet!</string>
-  <string name="menu_set_wallpaper">Ange som bakgrundsbild</string>
+  <string name="menu_set_wallpaper">Använd som bakgrundsbild</string>
   <string name="wallpaper_set_successfully">Bakgrundsbilden ändrades!</string>
   <string name="quiz">Frågesport</string>
   <string name="quiz_question_string">Är det okej att ladda upp denna bild?</string>
@@ -333,14 +344,16 @@
   <string name="construction_event_answer">Bilder som skildrar teknologi eller kultur är mycket välkomna på Commons.</string>
   <string name="congratulatory_message_quiz">Du svarade rätt på %1$s av svaren. Gratulerar!</string>
   <string name="warning_for_no_answer">Välj ett av de två alternativen för att svara på frågan</string>
-  <string name="user_not_logged_in">Inloggningssessionen löpte ut, var god logga in igen.</string>
+  <string name="user_not_logged_in">Inloggningssessionen löpte ut. Var god logga in igen.</string>
   <string name="quiz_result_share_message">Dela din frågesport med dina vänner!</string>
   <string name="continue_message">Fortsätt</string>
   <string name="correct">Rätt svar</string>
   <string name="wrong">Fel svar</string>
   <string name="quiz_screenshot_question">Är det okej att ladda upp denna skärmdump?</string>
   <string name="share_app_title">Dela app</string>
-  <string name="error_fetching_nearby_places">Fel uppstod när platser i närheten hämtades.</string>
+  <string name="rotate">Rotera</string>
+  <string name="error_fetching_nearby_places">Kunde inte ladda in platser i närheten</string>
+  <string name="no_pictures_in_this_area">Inga bilder i detta område</string>
   <string name="no_nearby_places_around">Inga platser i närheten</string>
   <string name="error_fetching_nearby_monuments">Fel uppstod när monument i närheten hämtades.</string>
   <string name="no_recent_searches">Inga senaste sökningar</string>
@@ -415,11 +428,21 @@
   <string name="never_ask_again">Fråga inte detta igen</string>
   <string name="display_location_permission_title">Be om platsbehörighet</string>
   <string name="display_location_permission_explanation">Fråga efter platsbehörighet vid behov för att visa aviseringskortet för i närheten.</string>
-  <string name="achievements_fetch_failed">Någonting gick fel. Vi kunde inte hämta dina prestationer</string>
+  <string name="achievements_fetch_failed">Någonting gick fel. Vi kunde inte hämta prestationer</string>
   <string name="achievements_fetch_failed_ultimate_achievement">Du har gjort så många bidrag att vårt system för att beräkna prestationer inte hinner med. Detta är den ultimata prestationen.</string>
   <string name="ends_on">Slutar den:</string>
   <string name="display_campaigns">Visa kampanjer</string>
   <string name="display_campaigns_explanation">Se pågående kampanjer</string>
+  <string name="in_app_camera_location_access_explanation">Tillåt appen att hämta platsen om kameran inte registrerar den. Vissa enhetskameror registrerar inte platsen. I sådana fall blir ditt bidrag mer användbart om du låter appen hämta och bifoga platsen. Du kan ändra detta när som helst i inställningarna</string>
+  <string name="option_allow">Tillåt</string>
+  <string name="option_dismiss">Stäng</string>
+  <string name="in_app_camera_needs_location">Aktivera platsåtkomst i inställningarna och försök igen.\n\nOBS: Uppladdningen kanske inte har någon plats om appen inte kan hämta platsen från enheten inom ett kort intervall.</string>
+  <string name="in_app_camera_location_permission_rationale">Kameran inuti appen behöver platsbehörighet för att bifoga den på dina bilder om platsen inte är tillgänglig i EXIF-informationen. Tillåt appen att komma åt din plats och försök igen.\n\nOBS: Uppladdningen kanske inte har någon plats om appen inte kan hämta platsen från enheten inom ett kort intervall.</string>
+  <string name="in_app_camera_location_permission_denied">Appen kunde inte registrera platsen tillsammans med tagna bilder på grund av bristande platsbehörighet</string>
+  <string name="in_app_camera_location_unavailable">Appen kunde inte registrera platsen tillsammans med tagna bilder eftersom GPS:en är inaktiverad</string>
+  <string name="open_document_photo_picker_title">Använd dokumentbaserad fotoväljare</string>
+  <string name="open_document_photo_picker_explanation">Androids nya fotoväljare riskerar att förlora platsinformation. Aktivera om du verkar använda den.</string>
+  <string name="location_loss_warning">När detta inaktiveras kan Androids nya fotoväljare utlösas. Den riskerar att förlora platsinformation.\n\nTryck på \"Läs mer\" för mer information.</string>
   <string name="nearby_campaign_dismiss_message">Du kommer inte längre se kampanjerna. Om du vill kan du återaktivera denna avisering i inställningarna.</string>
   <string name="this_function_needs_network_connection">Denna funktion kräver nätverksuppkoppling. Kontrollera dina anslutningsinställningar.</string>
   <string name="error_processing_image">Fel uppstod när bilden behandlades. Försök igen!</string>
@@ -533,7 +556,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Kunde inte lägga till koordinater.</string>
   <string name="description_edit_helper_edit_message_else">Kunde inte lägga till beskrivningar.</string>
   <string name="caption_edit_helper_edit_message_else">Kunde inte lägga till bildtext.</string>
-  <string name="coordinates_picking_unsuccessful">Kunde inte hämta koordinater.</string>
+  <string name="coordinates_picking_unsuccessful">Bildens koordinater är inte uppdaterade</string>
   <string name="descriptions_picking_unsuccessful">Kunde inte hämta beskrivningar.</string>
   <string name="description_activity_title">Redigera beskrivningar och bildtexter</string>
   <string name="share_image_via">Dela bild via</string>
@@ -548,12 +571,13 @@
   <string name="place_state_needs_photo">Behöver foto</string>
   <string name="place_type">Platstyp:</string>
   <string name="nearby_search_hint">Bro, museum, hotell, etc.</string>
-  <string name="you_must_reset_your_passsword">Någonting gick fel med inloggningen, du måste återställa ditt lösenord!</string>
+  <string name="you_must_reset_your_passsword">Någonting gick fel med inloggningen. Du måste återställa ditt lösenord!</string>
   <string name="title_for_media">MEDIA</string>
   <string name="title_for_child_classes">UNDERORDNADE KLASSER</string>
   <string name="title_for_parent_classes">ÖVERORDNADE KLASSER</string>
   <string name="upload_nearby_place_found_title">Hittade platser i närheten</string>
-  <string name="upload_nearby_place_found_description">Är detta ett foto av platsen %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">Föreställer de här bilderna %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">Är detta en bild på %1$s?</string>
   <string name="title_app_shortcut_bookmark">Bokmärken</string>
   <string name="title_app_shortcut_setting">Inställningar</string>
   <string name="remove_bookmark">Togs bort från bokmärken</string>
@@ -567,7 +591,10 @@
   <string name="cannot_open_location_settings">Misslyckades att öppna platsinställningar. Aktivera plats manuellt</string>
   <string name="recommend_high_accuracy_mode">För bästa resultat väljer du alternativet \"Öka precisionen\".</string>
   <string name="ask_to_turn_location_on">Aktivera plats?</string>
+  <string name="ask_to_turn_location_on_text">Aktivera platstjänster för appen för att visa din aktuella plats</string>
   <string name="nearby_needs_location">\"I närheten\" behöver ha plats aktiverat för att fungera ordentligt</string>
+  <string name="explore_map_needs_location">Utforska kartan behöver platsbehörighet för att visa bilder i närheten</string>
+  <string name="upload_map_location_access">Du måste ge platsbehörighet för att automatiskt ange plats.</string>
   <string name="use_location_from_similar_image">Tog du dessa två bilder på samma plats? Vill du använda den högra bildens latitud/longitud?</string>
   <string name="load_more">Läs in fler</string>
   <string name="nearby_no_results">Inga platser hittades, försök ändra dina sökkriterier.</string>
@@ -610,7 +637,6 @@
   <string name="leaderboard_nearby">I närheten</string>
   <string name="leaderboard_used">Använd</string>
   <string name="leaderboard_my_rank_button_text">Min rang</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Förbättra den här kartan&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Begränsat anslutningsläge har aktiverats!</string>
   <string name="limited_connection_disabled">Begränsat anslutningsläge har inaktiverats. Väntande uppladdningar kommer nu återupptas.</string>
   <string name="limited_connection_mode">Begränsat anslutningsläge</string>
@@ -656,6 +682,10 @@
   <string name="custom_selector_info_text2">Till skillnad från bilden till vänster har bilden till höger Commons-logotypen, vilket innebär att den redan är uppladdad.\n Tryck och håll ned för att förhandsgranska bilden.</string>
   <string name="welcome_custom_selector_ok">Häftigt</string>
   <string name="custom_selector_already_uploaded_image_text">Denna bild har redan laddats upp till Commons.</string>
+  <string name="custom_selector_over_limit_warning">Av tekniska skäl kan appen inte ladda upp fler än %1$d bilder samtidigt. Uppladdningsgränsen för %1$d har överskridits med %2$d.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">Stäng</string>
+  <string name="custom_selector_button_limit_text">Max: %1$d</string>
+  <string name="custom_selector_limit_error_desc">Fel: Uppladdningsgränsen har överskridits</string>
   <string name="wlm_upload_info">Denna bild kommer att skickas in till tävlingen Wiki Loves Monuments</string>
   <string name="display_monuments">Visa monument</string>
   <string name="wlm_month_message">Det är Wiki Loves Monuments-månaden!</string>
@@ -665,7 +695,7 @@
   <string name="read_phone_state_permission_message">Kartor i närheten behöver läsa TELEFONENS TILLSTÅND för att fungera ordentligt</string>
   <string name="contributions_of_user">Bidrag av användare: %s</string>
   <string name="achievements_of_user">Prestationer av användare: %s</string>
-  <string name="menu_view_user_page">Visa användarsida</string>
+  <string name="menu_view_user_page">Visa användarprofil</string>
   <string name="edit_depictions">Redigera beskrivningar</string>
   <string name="edit_categories">Redigera kategorier</string>
   <string name="advanced_options">Avancerade alternativ</string>
@@ -694,6 +724,8 @@
   <string name="your_feedback">Din återkoppling</string>
   <string name="mark_as_not_for_upload">Markera som inte för uppladdning</string>
   <string name="unmark_as_not_for_upload">Avmarkera som inte för uppladdning</string>
+  <string name="marking_as_not_for_upload">Markerar som inte för uppladdning</string>
+  <string name="unmarking_as_not_for_upload">Avmarkerar som inte för uppladdning</string>
   <string name="show_already_actioned_pictures">Visa redan åtgärdade bilder</string>
   <string name="hiding_already_actioned_pictures">Döljer redan åtgärdade bilder</string>
   <string name="no_more_images_found">Inga fler bilder hittades</string>
@@ -702,6 +734,8 @@
   <string name="image_selected">Bild markerad</string>
   <string name="image_marked_as_not_for_upload">Bild markerad som inte för uppladdning</string>
   <string name="menu_view_report">Rapportera</string>
+  <string name="menu_view_set_white_background">Ändra till vit bakgrund</string>
+  <string name="menu_view_set_black_background">Ändra till svart bakgrund</string>
   <string name="report_violation">Rapportera överträdelse</string>
   <string name="report_user">Rapportera denna användare</string>
   <string name="report_content">Rapportera detta innehåll</string>
@@ -711,4 +745,43 @@
   <string name="full_screen_mode_features_info">Svep snabbt och länge för att utföra dessa åtgärder: \n- Vänster/Höger: Gå till föregående/nästa \n- Upp: Markera\n- Ned: Markera som inte för uppladdning.</string>
   <string name="set_up_avatar_toast_string">För att ange din avatar för topplistan trycker du på \"Använd som avatar\" i menyn med de tre punkter på valfri bild.</string>
   <string name="similar_coordinate_description_auto_set">Koordinaterna är inte de exakta koordinaterna, men personen som laddade upp denna bild tycker att de är tillräckligt nära.</string>
+  <string name="storage_permissions_denied">Lagringsbehörigheter nekades</string>
+  <string name="unable_to_share_upload_item">Kunde inte dela detta objekt</string>
+  <string name="permissions_are_required_for_functionality">Behörigheter krävs för funktionalitet</string>
+  <string name="learn_how_to_write_a_useful_description">Lär dig hur du skriver en användbar beskrivning</string>
+  <string name="learn_how_to_write_a_useful_caption">Lär dig hur du skriver en användbar bildtext</string>
+  <string name="see_your_achievements">Se dina prestationer</string>
+  <string name="edit_image">Redigera bild</string>
+  <string name="edit_location">Redigera plats</string>
+  <string name="location_updated">Plats uppdaterades!</string>
+  <string name="remove_location">Ta bort plats</string>
+  <string name="remove_location_warning_title">Ta bort platsvarning</string>
+  <string name="remove_location_warning_desc">Plats gör bilder mer användbara och lättillgängliga. Vill du verkligen ta bort plats från den här bilden?</string>
+  <string name="location_removed">Plats togs bort!</string>
+  <string name="send_thanks_to_author">Tacka författaren</string>
+  <string name="error_sending_thanks">Det gick inte att skicka tack till författaren.</string>
+  <string name="invalid_login_message">Din inloggningssession löptes ut. Var god logga in igen.</string>
+  <string name="no_application_available_to_open_gpx_files">Det finns inget tillgängligt program för att öppna GPX-filer</string>
+  <string name="file_saved_successfully">Filen sparades</string>
+  <string name="do_you_want_to_open_gpx_file">Vill du öppna GPX-filen?</string>
+  <string name="do_you_want_to_open_kml_file">Vill du öppna KML-filen?</string>
+  <string name="failed_to_save_kml_file">Misslyckades att spara KML-filen.</string>
+  <string name="failed_to_save_gpx_file">Misslyckades att spara GPX-filen.</string>
+  <string name="saving_kml_file">Sparar KML-fil</string>
+  <string name="saving_gpx_file">Sparar GPX-fil</string>
+  <plurals name="custom_picker_images_selected_title_appendix">
+    <item quantity="one">%d markerad bild</item>
+    <item quantity="other">%d markerade bilder</item>
+  </plurals>
+  <string name="multiple_files_depiction">Kom ihåg att när du laddar upp flera bilder får alla bilder samma kategorier och motiv. Om bilder inte bör dela beskrivningar och motiv bör du ladda upp de en och en istället.</string>
+  <string name="multiple_files_depiction_header">Anmärkning om att ladda upp flera bilder</string>
+  <string name="nearby_wikitalk">Rapportera ett problem om detta objekt till Wikidata</string>
+  <string name="please_enter_some_comments">Skriv en kommentar</string>
+  <string name="talk">Diskussion</string>
+  <string name="write_something_about_the_item">Skriv någonting om objektet \"%1$s\". Det kommer att visas offentligt.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">\"%1$s\" finns inte längre och inga bilder kan någonsin tas på det.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">\"%1$s\" är på en annan plats. Ange den korrekta platsen nedan samt ange latitud och longitud om det är möjligt.</string>
+  <string name="other_problem_or_information_please_explain_below">Andra problem eller information (ange nedan).</string>
+  <string name="feedback_destination_note">Din återkoppling kommer att skickas till följande wikisida:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobilapp/Återkoppling&lt;/a&gt;</string>
+  <string name="could_not_load_place_data">Kunde inte läsa in platsdata</string>
 </resources>

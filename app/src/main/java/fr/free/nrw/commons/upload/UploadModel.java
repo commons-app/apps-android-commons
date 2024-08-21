@@ -7,9 +7,9 @@ import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.filepicker.UploadableFile;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.settings.Prefs;
-import fr.free.nrw.commons.upload.depicts.DepictsFragment;
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -86,18 +86,37 @@ public class UploadModel {
      */
     public Observable<UploadItem> preProcessImage(final UploadableFile uploadableFile,
         final Place place,
-        final SimilarImageInterface similarImageInterface) {
+        final SimilarImageInterface similarImageInterface,
+        LatLng inAppPictureLocation) {
         return Observable.just(
-            createAndAddUploadItem(uploadableFile, place, similarImageInterface));
+            createAndAddUploadItem(uploadableFile, place, similarImageInterface, inAppPictureLocation));
     }
 
-    public Single<Integer> getImageQuality(final UploadItem uploadItem) {
-        return imageProcessingService.validateImage(uploadItem);
+    /**
+     * Calls validateImage() of ImageProcessingService to check quality of image
+     *
+     * @param uploadItem UploadItem whose quality is to be checked
+     * @param inAppPictureLocation In app picture location (if any)
+     * @return Quality of UploadItem
+     */
+    public Single<Integer> getImageQuality(final UploadItem uploadItem, LatLng inAppPictureLocation) {
+        return imageProcessingService.validateImage(uploadItem, inAppPictureLocation);
+    }
+
+    /**
+     * Calls validateCaption() of ImageProcessingService to check caption of image
+     *
+     * @param uploadItem UploadItem whose caption is to be checked
+     * @return Quality of caption of the UploadItem
+     */
+    public Single<Integer> getCaptionQuality(final UploadItem uploadItem) {
+        return imageProcessingService.validateCaption(uploadItem);
     }
 
     private UploadItem createAndAddUploadItem(final UploadableFile uploadableFile,
         final Place place,
-        final SimilarImageInterface similarImageInterface) {
+        final SimilarImageInterface similarImageInterface,
+        LatLng inAppPictureLocation) {
         final UploadableFile.DateTimeWithSource dateTimeWithSource = uploadableFile
                 .getFileCreatedDate(context);
         long fileCreatedDate = -1;
@@ -110,7 +129,8 @@ public class UploadModel {
         }
         Timber.d("File created date is %d", fileCreatedDate);
         final ImageCoordinates imageCoordinates = fileProcessor
-                .processFileCoordinates(similarImageInterface, uploadableFile.getFilePath());
+                .processFileCoordinates(similarImageInterface, uploadableFile.getFilePath(),
+                    inAppPictureLocation);
         final UploadItem uploadItem = new UploadItem(
             Uri.parse(uploadableFile.getFilePath()),
                 uploadableFile.getMimeType(context), imageCoordinates, place, fileCreatedDate,

@@ -24,6 +24,7 @@ import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.db.AppDatabase;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
 import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.nearby.PlaceDao;
 import fr.free.nrw.commons.review.ReviewDao;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadController;
@@ -41,7 +42,6 @@ import java.util.Map;
 import java.util.Objects;
 import javax.inject.Named;
 import javax.inject.Singleton;
-import org.wikipedia.AppAdapter;
 
 /**
  * The Dependency Provider class for Commons Android.
@@ -257,8 +257,8 @@ public class CommonsApplicationModule {
 
     @Named("username")
     @Provides
-    public String provideLoggedInUsername() {
-        return Objects.toString(AppAdapter.get().getUserName(), "");
+    public String provideLoggedInUsername(SessionManager sessionManager) {
+        return Objects.toString(sessionManager.getUserName(), "");
     }
 
     @Provides
@@ -274,6 +274,11 @@ public class CommonsApplicationModule {
     @Provides
     public ContributionDao providesContributionsDao(AppDatabase appDatabase) {
         return appDatabase.contributionDao();
+    }
+
+    @Provides
+    public PlaceDao providesPlaceDao(AppDatabase appDatabase) {
+        return appDatabase.PlaceDao();
     }
 
     /**

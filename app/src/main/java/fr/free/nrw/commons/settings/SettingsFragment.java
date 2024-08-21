@@ -2,7 +2,7 @@ package fr.free.nrw.commons.settings;
 
 import static android.content.Context.MODE_PRIVATE;
 
-import android.Manifest;
+import android.Manifest.permission;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -18,6 +18,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
 import androidx.preference.Preference;
@@ -28,27 +31,31 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 import com.karumi.dexter.Dexter;
-import com.karumi.dexter.listener.PermissionGrantedResponse;
-import com.karumi.dexter.listener.single.BasePermissionListener;
-import com.mapbox.mapboxsdk.Mapbox;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.campaigns.CampaignView;
+import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.logging.CommonsLogSender;
 import fr.free.nrw.commons.recentlanguages.Language;
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesAdapter;
 import fr.free.nrw.commons.recentlanguages.RecentLanguagesDao;
 import fr.free.nrw.commons.upload.LanguagesAdapter;
+import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
+import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -64,6 +71,12 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     @Inject
     RecentLanguagesDao recentLanguagesDao;
 
+    @Inject
+    ContributionController contributionController;
+
+    @Inject
+    LocationServiceManager locationManager;
+
     private ListPreference themeListPreference;
     private Preference descriptionLanguageListPreference;
     private Preference appUiLanguageListPreference;
@@ -71,6 +84,19 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     private TextView recentLanguagesTextView;
     private View separator;
     private ListView languageHistoryListView;
+    private static final String GET_CONTENT_PICKER_HELP_URL = "https://commons-app.github.io/docs.html#get-content";
+    private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), new ActivityResultCallback<Map<String, Boolean>>() {
+        @Override
+        public void onActivityResult(Map<String, Boolean> result) {
+            boolean areAllGranted = true;
+            for (final boolean b : result.values()) {
+                areAllGranted = areAllGranted && b;
+            }
+            if (!areAllGranted && shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
+                contributionController.handleShowRationaleFlowCameraLocation(getActivity(), inAppCameraLocationPermissionLauncher);
+            }
+        }
+    });
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -95,6 +121,18 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             });
         }
 
+        Preference inAppCameraLocationPref = findPreference("inAppCameraLocationPref");
+
+        inAppCameraLocationPref.setOnPreferenceChangeListener(
+            (preference, newValue) -> {
+                boolean isInAppCameraLocationTurnedOn = (boolean) newValue;
+                if (isInAppCameraLocationTurnedOn) {
+                    createDialogsAndHandleLocationPermissions(getActivity());
+                }
+                return true;
+            }
+        );
+
         // Gets current language code from shared preferences
         String languageCode;
 
@@ -108,7 +146,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             appUiLanguageListPreference.setSummary(Locale.getDefault().getDisplayLanguage());
         } else {
             // If any language is selected by user previously, use it
-            Locale defLocale = new Locale(languageCode);
+            Locale defLocale = createLocale(languageCode);
             appUiLanguageListPreference.setSummary((defLocale).getDisplayLanguage(defLocale));
         }
         appUiLanguageListPreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -129,7 +167,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             descriptionLanguageListPreference.setSummary(Locale.getDefault().getDisplayLanguage());
         } else {
             // If any language is selected by user previously, use it
-            Locale defLocale = new Locale(languageCode);
+            Locale defLocale = createLocale(languageCode);
             descriptionLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
         }
         descriptionLanguageListPreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -150,6 +188,17 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             checkPermissionsAndSendLogs();
             return true;
         });
+
+        Preference documentBasedPickerPreference = findPreference("openDocumentPhotoPickerPref");
+        documentBasedPickerPreference.setOnPreferenceChangeListener(
+            (preference, newValue) -> {
+                boolean isGetContentPickerTurnedOn = !(boolean) newValue;
+                if (isGetContentPickerTurnedOn) {
+                    showLocationLossWarning();
+                }
+                return true;
+            }
+        );
         // Disable some settings when not logged in.
         if (defaultKvStore.getBoolean("login_skipped", false)) {
             findPreference("useExternalStorage").setEnabled(false);
@@ -159,7 +208,38 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             findPreference("displayLocationPermissionForCardView").setEnabled(false);
             findPreference(CampaignView.CAMPAIGNS_DEFAULT_PREFERENCE).setEnabled(false);
             findPreference("managed_exif_tags").setEnabled(false);
+            findPreference("openDocumentPhotoPickerPref").setEnabled(false);
+            findPreference("inAppCameraLocationPref").setEnabled(false);
         }
+    }
+
+    /**
+     * Asks users to provide location access
+     *
+     * @param activity
+     */
+    private void createDialogsAndHandleLocationPermissions(Activity activity) {
+        inAppCameraLocationPermissionLauncher.launch(new String[]{permission.ACCESS_FINE_LOCATION});
+    }
+
+    /**
+     * On some devices, the new Photo Picker with GET_CONTENT takeover
+     * redacts location tags from EXIF metadata
+     *
+     * Show warning to the user when ACTION_GET_CONTENT intent is enabled
+     */
+    private void showLocationLossWarning() {
+        DialogUtil.showAlertDialog(
+            getActivity(),
+            null,
+            getString(R.string.location_loss_warning),
+            getString(R.string.ok),
+            getString(R.string.read_help_link),
+            () -> {},
+            () -> Utils.handleWebUrl(requireContext(), Uri.parse(GET_CONTENT_PICKER_HELP_URL)),
+            null,
+            true
+        );
     }
 
     @Override
@@ -281,10 +361,10 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 }
                 recentLanguagesDao.addRecentLanguage(new Language(languageName, languageCode));
                 saveLanguageValue(languageCode, keyListPreference);
-                Locale defLocale = new Locale(languageCode);
+                Locale defLocale = createLocale(languageCode);
                 if(keyListPreference.equals("appUiDefaultLanguagePref")) {
                     appUiLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
-                    setLocale(Objects.requireNonNull(getActivity()), languageCode);
+                    setLocale(requireActivity(), languageCode);
                     getActivity().recreate();
                     final Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
@@ -323,8 +403,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             separator.setVisibility(View.VISIBLE);
             final RecentLanguagesAdapter recentLanguagesAdapter
                 = new RecentLanguagesAdapter(
-                    getActivity(),
-                    recentLanguagesDao.getRecentLanguages(),
+                getActivity(),
+                recentLanguagesDao.getRecentLanguages(),
                 selectedLanguages);
             languageHistoryListView.setAdapter(recentLanguagesAdapter);
         }
@@ -346,10 +426,10 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         recentLanguagesDao.addRecentLanguage(
             new Language(recentLanguageName, recentLanguageCode));
         saveLanguageValue(recentLanguageCode, keyListPreference);
-        final Locale defLocale = new Locale(recentLanguageCode);
+        final Locale defLocale = createLocale(recentLanguageCode);
         if (keyListPreference.equals("appUiDefaultLanguagePref")) {
             appUiLanguageListPreference.setSummary(defLocale.getDisplayLanguage(defLocale));
-            setLocale(Objects.requireNonNull(getActivity()), recentLanguageCode);
+            setLocale(requireActivity(), recentLanguageCode);
             getActivity().recreate();
             final Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
@@ -375,7 +455,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         if (userSelectedValue.equals("")) {
             userSelectedValue = Locale.getDefault().getLanguage();
         }
-        final Locale locale = new Locale(userSelectedValue);
+        final Locale locale = createLocale(userSelectedValue);
         Locale.setDefault(locale);
         final Configuration configuration = new Configuration();
         configuration.locale = locale;
@@ -385,6 +465,25 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         final SharedPreferences.Editor editor = activity.getSharedPreferences("Settings", MODE_PRIVATE).edit();
         editor.putString("language", userSelectedValue);
         editor.apply();
+    }
+
+    /**
+     * Create Locale based on different types of language codes
+     * @param languageCode
+     * @return Locale and throws error for invalid language codes
+     */
+    public static Locale createLocale(String languageCode) {
+        String[] parts = languageCode.split("-");
+        switch (parts.length) {
+            case 1:
+                return new Locale(parts[0]);
+            case 2:
+                return new Locale(parts[0], parts[1]);
+            case 3:
+                return new Locale(parts[0], parts[1], parts[2]);
+            default:
+                throw new IllegalArgumentException("Invalid language code: " + languageCode);
+        }
     }
 
     /**
@@ -419,7 +518,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
      * First checks for external storage permissions and then sends logs via email
      */
     private void checkPermissionsAndSendLogs() {
-        if (PermissionUtils.hasPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+        if (PermissionUtils.hasPermission(getActivity(), PermissionUtils.PERMISSIONS_STORAGE)) {
             commonsLogSender.send(getActivity(), null);
         } else {
             requestExternalStoragePermissions();
@@ -427,16 +526,26 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     /**
-     * Requests external storage permissions and shows a toast stating that log collection has started
+     * Requests external storage permissions and shows a toast stating that log collection has
+     * started
      */
     private void requestExternalStoragePermissions() {
         Dexter.withActivity(getActivity())
-                .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .withListener(new BasePermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse response) {
-                        ViewUtil.showLongToast(getActivity(), getResources().getString(R.string.log_collection_started));
-                    }
-                }).check();
+            .withPermissions(PermissionUtils.PERMISSIONS_STORAGE)
+            .withListener(new MultiplePermissionsListener() {
+                @Override
+                public void onPermissionsChecked(MultiplePermissionsReport report) {
+                    ViewUtil.showLongToast(getActivity(),
+                        getResources().getString(R.string.log_collection_started));
+                }
+
+                @Override
+                public void onPermissionRationaleShouldBeShown(
+                    List<PermissionRequest> permissions, PermissionToken token) {
+
+                }
+            })
+            .onSameThread()
+            .check();
     }
 }

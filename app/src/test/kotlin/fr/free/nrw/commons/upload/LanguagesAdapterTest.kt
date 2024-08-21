@@ -19,7 +19,7 @@ import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import org.wikipedia.language.AppLanguageLookUpTable
+import fr.free.nrw.commons.language.AppLanguageLookUpTable
 import java.util.*
 
 @RunWith(RobolectricTestRunner::class)
@@ -45,7 +45,7 @@ class LanguagesAdapterTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         context = ApplicationProvider.getApplicationContext()
         language = AppLanguageLookUpTable(context)
         convertView = LayoutInflater.from(context)

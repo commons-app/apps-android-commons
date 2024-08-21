@@ -8,26 +8,27 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers
 import org.mockito.Mock
+import org.mockito.MockedStatic
 import org.mockito.Mockito
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
-import org.powermock.api.mockito.PowerMockito
 import org.powermock.core.classloader.annotations.PrepareForTest
-import org.powermock.modules.junit4.PowerMockRunner
-import org.wikipedia.csrf.CsrfTokenClient
-import org.wikipedia.dataclient.Service
+import org.robolectric.RobolectricTestRunner
+import fr.free.nrw.commons.auth.csrf.CsrfTokenClient
 
-@RunWith(PowerMockRunner::class)
+@RunWith(RobolectricTestRunner::class)
 @PrepareForTest(CommonsApplication::class)
 class ThanksClientTest {
     @Mock
     private lateinit var csrfTokenClient: CsrfTokenClient
     @Mock
-    private lateinit var service: Service
+    private lateinit var service: ThanksInterface
 
     @Mock
     private lateinit var commonsApplication: CommonsApplication
 
     private lateinit var thanksClient: ThanksClient
+    private lateinit var mockedApplication: MockedStatic<CommonsApplication>
 
     /**
      * initial setup, test environment
@@ -35,9 +36,9 @@ class ThanksClientTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
-        PowerMockito.mockStatic(CommonsApplication::class.java)
-        PowerMockito.`when`(CommonsApplication.getInstance()).thenReturn(commonsApplication)
+        MockitoAnnotations.openMocks(this)
+        mockedApplication = Mockito.mockStatic(CommonsApplication::class.java)
+        `when`(CommonsApplication.getInstance()).thenReturn(commonsApplication)
         thanksClient = ThanksClient(csrfTokenClient, service)
     }
 
@@ -46,8 +47,8 @@ class ThanksClientTest {
      */
     @Test
     fun testThanks() {
-        Mockito.`when`(csrfTokenClient.tokenBlocking).thenReturn("test")
-        Mockito.`when`(commonsApplication.userAgent).thenReturn("test")
+        `when`(csrfTokenClient.getTokenBlocking()).thenReturn("test")
+        `when`(commonsApplication.userAgent).thenReturn("test")
         thanksClient.thank(1L)
         verify(service).thank(ArgumentMatchers.anyString(), ArgumentMatchers.any(), eq("test"), eq("test"))
     }

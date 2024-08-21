@@ -4,214 +4,182 @@ import static fr.free.nrw.commons.location.LocationServiceManager.LocationChange
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
 import static fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType.MAP_UPDATED;
-import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 import static fr.free.nrw.commons.wikidata.WikidataConstants.PLACE_OBJECT;
 
-import android.Manifest;
+import android.Manifest.permission;
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
+import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
-import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions;
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.app.AlertDialog.Builder;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback;
 import com.google.android.material.snackbar.Snackbar;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding3.appcompat.RxSearchView;
-import com.mapbox.mapboxsdk.annotations.Icon;
-import com.mapbox.mapboxsdk.annotations.IconFactory;
-import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.annotations.MarkerOptions;
-import com.mapbox.mapboxsdk.annotations.Polygon;
-import com.mapbox.mapboxsdk.annotations.PolygonOptions;
-import com.mapbox.mapboxsdk.camera.CameraPosition;
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
-import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.geometry.LatLngBounds;
-import com.mapbox.mapboxsdk.maps.MapView;
-import com.mapbox.mapboxsdk.maps.MapboxMap;
-import com.mapbox.mapboxsdk.maps.Style;
-import com.mapbox.mapboxsdk.maps.UiSettings;
-import com.mapbox.pluginscalebar.ScaleBarOptions;
-import com.mapbox.pluginscalebar.ScaleBarPlugin;
+import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.CommonsApplication.BaseLogoutListener;
 import fr.free.nrw.commons.MapController.NearbyPlacesInfo;
-import fr.free.nrw.commons.MapStyle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.bookmarks.locations.BookmarkLocationsDao;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.contributions.MainActivity.ActiveFragment;
+import fr.free.nrw.commons.databinding.FragmentNearbyParentBinding;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.location.LocationPermissionsHelper;
+import fr.free.nrw.commons.location.LocationPermissionsHelper.LocationPermissionCallback;
 import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.location.LocationServiceManager.LocationChangeType;
 import fr.free.nrw.commons.location.LocationUpdateListener;
+import fr.free.nrw.commons.nearby.BottomSheetAdapter;
 import fr.free.nrw.commons.nearby.CheckBoxTriStates;
 import fr.free.nrw.commons.nearby.Label;
 import fr.free.nrw.commons.nearby.MarkerPlaceGroup;
-import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.NearbyController;
 import fr.free.nrw.commons.nearby.NearbyFilterSearchRecyclerViewAdapter;
 import fr.free.nrw.commons.nearby.NearbyFilterState;
-import fr.free.nrw.commons.nearby.NearbyMarker;
 import fr.free.nrw.commons.nearby.Place;
+import fr.free.nrw.commons.nearby.PlacesRepository;
+import fr.free.nrw.commons.nearby.WikidataFeedback;
 import fr.free.nrw.commons.nearby.contract.NearbyParentFragmentContract;
 import fr.free.nrw.commons.nearby.fragments.AdvanceQueryFragment.Callback;
+import fr.free.nrw.commons.nearby.model.BottomSheetItem;
 import fr.free.nrw.commons.nearby.presenter.NearbyParentFragmentPresenter;
 import fr.free.nrw.commons.upload.FileUtils;
 import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.ExecutorUtils;
 import fr.free.nrw.commons.utils.LayoutUtils;
-import fr.free.nrw.commons.utils.LocationUtils;
+import fr.free.nrw.commons.utils.MapUtils;
 import fr.free.nrw.commons.utils.NearbyFABUtils;
 import fr.free.nrw.commons.utils.NetworkUtils;
-import fr.free.nrw.commons.utils.PermissionUtils;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
-import fr.free.nrw.commons.utils.UiUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import fr.free.nrw.commons.wikidata.WikidataEditListener;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import javax.inject.Named;
 import kotlin.Unit;
 import org.jetbrains.annotations.NotNull;
+import org.osmdroid.api.IGeoPoint;
+import org.osmdroid.events.MapEventsReceiver;
+import org.osmdroid.events.MapListener;
+import org.osmdroid.events.ScrollEvent;
+import org.osmdroid.events.ZoomEvent;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.util.constants.GeoConstants.UnitOfMeasure;
+import org.osmdroid.views.CustomZoomButtonsController.Visibility;
+import org.osmdroid.views.overlay.MapEventsOverlay;
+import org.osmdroid.views.overlay.Marker;
+import org.osmdroid.views.overlay.Overlay;
+import org.osmdroid.views.overlay.ScaleBarOverlay;
+import org.osmdroid.views.overlay.ScaleDiskOverlay;
+import org.osmdroid.views.overlay.TilesOverlay;
 import timber.log.Timber;
 
 
 public class NearbyParentFragment extends CommonsDaggerSupportFragment
-        implements NearbyParentFragmentContract.View,
-        WikidataEditListener.WikidataP18EditListener, LocationUpdateListener {
+    implements NearbyParentFragmentContract.View,
+    WikidataEditListener.WikidataP18EditListener, LocationUpdateListener,
+    LocationPermissionCallback, BottomSheetAdapter.ItemClickListener {
 
-    @BindView(R.id.bottom_sheet) RelativeLayout rlBottomSheet;
-    @BindView(R.id.bottom_sheet_details) View bottomSheetDetails;
-    @BindView(R.id.transparentView) View transparentView;
-    @BindView(R.id.directionsButtonText) TextView directionsButtonText;
-    @BindView(R.id.wikipediaButtonText) TextView wikipediaButtonText;
-    @BindView(R.id.wikidataButtonText) TextView wikidataButtonText;
-    @BindView(R.id.commonsButtonText) TextView commonsButtonText;
-    @BindView(R.id.fab_plus) FloatingActionButton fabPlus;
-    @BindView(R.id.fab_camera) FloatingActionButton fabCamera;
-    @BindView(R.id.fab_gallery) FloatingActionButton fabGallery;
-    @BindView(R.id.fab_recenter) FloatingActionButton fabRecenter;
-    @BindView(R.id.bookmarkButtonImage) ImageView bookmarkButtonImage;
-    @BindView(R.id.bookmarkButton) LinearLayout bookmarkButton;
-    @BindView(R.id.wikipediaButton) LinearLayout wikipediaButton;
-    @BindView(R.id.wikidataButton) LinearLayout wikidataButton;
-    @BindView(R.id.directionsButton) LinearLayout directionsButton;
-    @BindView(R.id.commonsButton) LinearLayout commonsButton;
-    @BindView(R.id.description) TextView description;
-    @BindView(R.id.title) TextView title;
-    @BindView(R.id.category) TextView distance;
-    @BindView(R.id.icon) ImageView icon;
-    @BindView(R.id.search_this_area_button) Button searchThisAreaButton;
-    @BindView(R.id.map_progress_bar) ProgressBar progressBar;
-    @BindView(R.id.choice_chip_exists) Chip chipExists;
-    @BindView(R.id.choice_chip_wlm) Chip chipWlm;
-    @BindView(R.id.choice_chip_needs_photo) Chip chipNeedsPhoto;
-    @BindView(R.id.choice_chip_group) ChipGroup choiceChipGroup;
-    @BindView(R.id.search_view) SearchView searchView;
-    @BindView(R.id.search_list_view) RecyclerView recyclerView;
-    @BindView(R.id.nearby_filter_list) View nearbyFilterList;
-    @BindView(R.id.checkbox_tri_states) CheckBoxTriStates checkBoxTriStates;
-    @BindView(R.id.map_view)
-    MapView mapView;
-    @BindView(R.id.rv_nearby_list)
-    RecyclerView rvNearbyList;
-    @BindView(R.id.no_results_message) TextView noResultsView;
-    @BindView(R.id.tv_attribution)
-    AppCompatTextView tvAttribution;
-    @BindView(R.id.rl_container_wlm_month_message)
-    RelativeLayout rlContainerWLMMonthMessage;
-    @BindView(R.id.tv_learn_more)
-    AppCompatTextView tvLearnMore;
-    @BindView(R.id.iv_toggle_chips)
-    AppCompatImageView ivToggleChips;
-    @BindView(R.id.chip_view)
-    View llContainerChips;
-    @BindView(R.id.btn_advanced_options)
-    AppCompatButton btnAdvancedOptions;
-    @BindView(R.id.fl_container_nearby_children)
-    FrameLayout flConainerNearbyChildren;
 
-    @Inject LocationServiceManager locationManager;
-    @Inject NearbyController nearbyController;
-    @Inject @Named("default_preferences") JsonKvStore applicationKvStore;
-    @Inject BookmarkLocationsDao bookmarkLocationDao;
-    @Inject ContributionController controller;
-    @Inject WikidataEditListener wikidataEditListener;
+    FragmentNearbyParentBinding binding;
 
+    @Inject
+    LocationServiceManager locationManager;
+    @Inject
+    NearbyController nearbyController;
+    @Inject
+    @Named("default_preferences")
+    JsonKvStore applicationKvStore;
+    @Inject
+    BookmarkLocationsDao bookmarkLocationDao;
+    @Inject
+    PlacesRepository placesRepository;
+    @Inject
+    ContributionController controller;
+    @Inject
+    WikidataEditListener wikidataEditListener;
     @Inject
     SystemThemeUtils systemThemeUtils;
     @Inject
     CommonPlaceClickActions commonPlaceClickActions;
-
+    private LocationPermissionsHelper locationPermissionsHelper;
     private NearbyFilterSearchRecyclerViewAdapter nearbyFilterSearchRecyclerViewAdapter;
-
     private BottomSheetBehavior bottomSheetListBehavior;
     private BottomSheetBehavior bottomSheetDetailsBehavior;
     private Animation rotate_backward;
     private Animation fab_close;
     private Animation fab_open;
     private Animation rotate_forward;
-
-    private static final float ZOOM_LEVEL = 14f;
-    private static final float ZOOM_OUT = 0f;
+    private static final float ZOOM_LEVEL = 15f;
     private final String NETWORK_INTENT_ACTION = "android.net.conn.CONNECTIVITY_CHANGE";
     private BroadcastReceiver broadcastReceiver;
     private boolean isNetworkErrorOccurred;
@@ -220,37 +188,85 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     private NearbyParentFragmentPresenter presenter;
     private boolean isDarkTheme;
     private boolean isFABsExpanded;
-    private Marker selectedMarker;
     private Place selectedPlace;
-
+    private Marker clickedMarker;
+    private ProgressDialog progressDialog;
     private final double CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT = 0.005;
     private final double CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE = 0.004;
-
-    private boolean isMapBoxReady;
     private boolean isPermissionDenied;
     private boolean recenterToUserLocation;
-    private MapboxMap mapBox;
+    private GeoPoint mapCenter;
     IntentFilter intentFilter = new IntentFilter(NETWORK_INTENT_ACTION);
-    private Marker currentLocationMarker;
-    private Polygon currentLocationPolygon;
     private Place lastPlaceToCenter;
-    private fr.free.nrw.commons.location.LatLng lastKnownLocation;
+    private LatLng lastKnownLocation;
     private boolean isVisibleToUser;
-    private MapboxMap.OnCameraMoveListener cameraMoveListener;
-    private fr.free.nrw.commons.location.LatLng lastFocusLocation;
-    private LatLngBounds latLngBounds;
+    private LatLng lastFocusLocation;
     private PlaceAdapter adapter;
+    private GeoPoint lastMapFocus;
     private NearbyParentFragmentInstanceReadyCallback nearbyParentFragmentInstanceReadyCallback;
     private boolean isAdvancedQueryFragmentVisible = false;
+    private Place nearestPlace;
+    private volatile boolean stopQuery;
 
-    /**
-     * Holds filtered markers that are to be shown
-     */
-    private List<NearbyBaseMarker> filteredMarkers;
-    /**
-     * Holds all the markers
-     */
-    private List<NearbyBaseMarker> allMarkers =new ArrayList<>();
+    private List<Place> updatedPlacesList;
+    private LatLng updatedLatLng;
+    private boolean searchable;
+
+    private GridLayoutManager gridLayoutManager;
+    private List<BottomSheetItem> dataList;
+    private BottomSheetAdapter bottomSheetAdapter;
+    private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(
+        new RequestMultiplePermissions(),
+        new ActivityResultCallback<Map<String, Boolean>>() {
+            @Override
+            public void onActivityResult(Map<String, Boolean> result) {
+                boolean areAllGranted = true;
+                for (final boolean b : result.values()) {
+                    areAllGranted = areAllGranted && b;
+                }
+
+                if (areAllGranted) {
+                    controller.locationPermissionCallback.onLocationPermissionGranted();
+                } else {
+                    if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
+                        controller.handleShowRationaleFlowCameraLocation(getActivity(),
+                            inAppCameraLocationPermissionLauncher);
+                    } else {
+                        controller.locationPermissionCallback.onLocationPermissionDenied(
+                            getActivity().getString(
+                                R.string.in_app_camera_location_permission_denied));
+                    }
+                }
+            }
+        });
+
+    private ActivityResultLauncher<String> locationPermissionLauncher = registerForActivityResult(
+        new RequestPermission(), isGranted -> {
+            if (isGranted) {
+                locationPermissionGranted();
+            } else {
+                if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
+                    DialogUtil.showAlertDialog(getActivity(),
+                        getActivity().getString(R.string.location_permission_title),
+                        getActivity().getString(R.string.location_permission_rationale_nearby),
+                        getActivity().getString(android.R.string.ok),
+                        getActivity().getString(android.R.string.cancel),
+                        () -> {
+                            askForLocationPermission();
+                        },
+                        null,
+                        null,
+                        false);
+                } else {
+                    if (isPermissionDenied) {
+                        locationPermissionsHelper.showAppSettingsDialog(getActivity(),
+                            R.string.nearby_needs_location);
+                    }
+                    Timber.d("The user checked 'Don't ask again' or denied the permission twice");
+                    isPermissionDenied = true;
+                }
+            }
+        });
 
     /**
      * WLM URL
@@ -259,7 +275,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     /**
      * Saves response of list of places for the first time
      */
-    private List<Place> places;
+    private List<Place> places = new ArrayList<>();
 
     @NonNull
     public static NearbyParentFragment newInstance() {
@@ -270,11 +286,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
-                             final Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_nearby_parent, container, false);
-        ButterKnife.bind(this, view);
+        final Bundle savedInstanceState) {
+        binding = FragmentNearbyParentBinding.inflate(inflater, container, false);
+        view = binding.getRoot();
+
         initNetworkBroadCastReceiver();
-        presenter=new NearbyParentFragmentPresenter(bookmarkLocationDao);
+        presenter = new NearbyParentFragmentPresenter(bookmarkLocationDao);
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Saving in progress...");
         setHasOptionsMenu(true);
         // Inflate the layout for this fragment
         return view;
@@ -282,13 +302,44 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull final Menu menu,
+        @NonNull final MenuInflater inflater) {
         inflater.inflate(R.menu.nearby_fragment_menu, menu);
         MenuItem listMenu = menu.findItem(R.id.list_sheet);
+        MenuItem saveAsGPXButton = menu.findItem(R.id.list_item_gpx);
+        MenuItem saveAsKMLButton = menu.findItem(R.id.list_item_kml);
         listMenu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 listOptionMenuItemClicked();
+                return false;
+            }
+        });
+        saveAsGPXButton.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                try {
+                    progressDialog.setTitle(getString(R.string.saving_gpx_file));
+                    progressDialog.show();
+                    savePlacesAsGPX();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                return false;
+            }
+        });
+        saveAsKMLButton.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem item) {
+                try {
+                    progressDialog.setTitle(getString(R.string.saving_kml_file));
+                    progressDialog.show();
+                    savePlacesAsKML();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
                 return false;
             }
         });
@@ -299,78 +350,127 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         super.onViewCreated(view, savedInstanceState);
         isDarkTheme = systemThemeUtils.isDeviceInNightMode();
         if (Utils.isMonumentsEnabled(new Date())) {
-            rlContainerWLMMonthMessage.setVisibility(View.VISIBLE);
+            binding.rlContainerWlmMonthMessage.setVisibility(View.VISIBLE);
         } else {
-            rlContainerWLMMonthMessage.setVisibility(View.GONE);
+            binding.rlContainerWlmMonthMessage.setVisibility(View.GONE);
         }
-
-        cameraMoveListener= () -> presenter.onCameraMove(mapBox.getCameraPosition().target);
-        addCheckBoxCallback();
+        locationPermissionsHelper = new LocationPermissionsHelper(getActivity(), locationManager,
+            this);
         presenter.attachView(this);
         isPermissionDenied = false;
         recenterToUserLocation = false;
-        initRvNearbyList();
         initThemePreferences();
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(mapBoxMap -> {
-            mapBox =mapBoxMap;
-            initViews();
-            presenter.setActionListeners(applicationKvStore);
-            initNearbyFilter();
-            mapBoxMap.setStyle(isDarkTheme? MapStyle.DARK :
-                MapStyle.OUTDOORS, style -> {
-                final UiSettings uiSettings = mapBoxMap.getUiSettings();
-                uiSettings.setCompassGravity(Gravity.BOTTOM | Gravity.LEFT);
-                uiSettings.setCompassMargins(12, 0, 0, 24);
-                uiSettings.setLogoEnabled(false);
-                uiSettings.setAttributionEnabled(false);
-                uiSettings.setRotateGesturesEnabled(false);
-                isMapBoxReady =true;
-                if(nearbyParentFragmentInstanceReadyCallback!=null){
-                    nearbyParentFragmentInstanceReadyCallback.onReady();
-                }
-                performMapReadyActions();
-                final CameraPosition cameraPosition;
-                if(applicationKvStore.getString("LastLocation")!=null) { // Checking for last searched location
-                    String[] locationLatLng = applicationKvStore.getString("LastLocation").split(",");
-                    cameraPosition = new CameraPosition.Builder()
-                        .target(new LatLng(Double.valueOf(locationLatLng[0]),
-                            Double.valueOf(locationLatLng[1])))
-                        .zoom(ZOOM_LEVEL)
-                        .build();
-                }else {
-                    cameraPosition = new CameraPosition.Builder()
-                        .target(new LatLng(51.50550, -0.07520))
-                        .zoom(ZOOM_OUT)
-                        .build();
-                }
-                mapBoxMap.setCameraPosition(cameraPosition);
+        initViews();
+        presenter.setActionListeners(applicationKvStore);
+        org.osmdroid.config.Configuration.getInstance().load(this.getContext(),
+            PreferenceManager.getDefaultSharedPreferences(this.getContext()));
 
-                final ScaleBarPlugin scaleBarPlugin = new ScaleBarPlugin(mapView, mapBoxMap);
-                final int color = isDarkTheme ? R.color.bottom_bar_light : R.color.bottom_bar_dark;
-                final ScaleBarOptions scaleBarOptions = new ScaleBarOptions(getContext())
-                    .setTextColor(color)
-                    .setTextSize(R.dimen.description_text_size)
-                    .setBarHeight(R.dimen.tiny_gap)
-                    .setBorderWidth(R.dimen.miniscule_margin)
-                    .setMarginTop(R.dimen.tiny_padding)
-                    .setMarginLeft(R.dimen.tiny_padding)
-                    .setTextBarMargin(R.dimen.tiny_padding);
-                scaleBarPlugin.create(scaleBarOptions);
-                onResume();
-            });
+        // Use the Wikimedia tile server, rather than OpenStreetMap (Mapnik) which has various
+        // restrictions that we do not satisfy.
+        binding.map.setTileSource(TileSourceFactory.WIKIMEDIA);
+        binding.map.setTilesScaledToDpi(true);
+
+        // Add referer HTTP header because the Wikimedia tile server requires it.
+        // This was suggested by Dmitry Brant within an email thread between us and WMF.
+        org.osmdroid.config.Configuration.getInstance().getAdditionalHttpRequestProperties().put(
+            "Referer", "http://maps.wikimedia.org/"
+        );
+
+        if (applicationKvStore.getString("LastLocation")
+            != null) { // Checking for last searched location
+            String[] locationLatLng = applicationKvStore.getString("LastLocation").split(",");
+            lastMapFocus = new GeoPoint(Double.valueOf(locationLatLng[0]),
+                Double.valueOf(locationLatLng[1]));
+        } else {
+            lastMapFocus = new GeoPoint(51.50550, -0.07520);
+        }
+        ScaleBarOverlay scaleBarOverlay = new ScaleBarOverlay(binding.map);
+        scaleBarOverlay.setScaleBarOffset(15, 25);
+        Paint barPaint = new Paint();
+        barPaint.setARGB(200, 255, 250, 250);
+        scaleBarOverlay.setBackgroundPaint(barPaint);
+        scaleBarOverlay.enableScaleBar();
+        binding.map.getOverlays().add(scaleBarOverlay);
+        binding.map.getZoomController().setVisibility(Visibility.NEVER);
+        binding.map.getController().setZoom(ZOOM_LEVEL);
+        binding.map.getOverlays().add(new MapEventsOverlay(new MapEventsReceiver() {
+            @Override
+            public boolean singleTapConfirmedHelper(GeoPoint p) {
+                if (clickedMarker != null) {
+                    clickedMarker.closeInfoWindow();
+                } else {
+                    Timber.e("CLICKED MARKER IS NULL");
+                }
+                if (isListBottomSheetExpanded()) {
+                    // Back should first hide the bottom sheet if it is expanded
+                    hideBottomSheet();
+                } else if (isDetailsBottomSheetVisible()) {
+                    hideBottomDetailsSheet();
+                }
+                return true;
+            }
+
+            @Override
+            public boolean longPressHelper(GeoPoint p) {
+                return false;
+            }
+        }));
+
+        binding.map.addMapListener(new MapListener() {
+            @Override
+            public boolean onScroll(ScrollEvent event) {
+                if (lastMapFocus != null) {
+                    Location mylocation = new Location("");
+                    Location dest_location = new Location("");
+                    dest_location.setLatitude(binding.map.getMapCenter().getLatitude());
+                    dest_location.setLongitude(binding.map.getMapCenter().getLongitude());
+                    mylocation.setLatitude(lastMapFocus.getLatitude());
+                    mylocation.setLongitude(lastMapFocus.getLongitude());
+                    Float distance = mylocation.distanceTo(dest_location);//in meters
+                    if (lastMapFocus != null) {
+                        if (isNetworkConnectionEstablished() && (event.getX() > 0
+                            || event.getY() > 0)) {
+                            if (distance > 2000.0) {
+                                searchable = true;
+                                presenter.searchInTheArea();
+                            } else {
+                                searchable = false;
+                            }
+                        }
+                    } else {
+                        searchable = false;
+                    }
+                }
+
+                return true;
+            }
+
+            @Override
+            public boolean onZoom(ZoomEvent event) {
+                return false;
+            }
+
         });
 
-        tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution)));
-        tvAttribution.setMovementMethod(LinkMovementMethod.getInstance());
-
-        btnAdvancedOptions.setOnClickListener(v -> {
-            searchView.clearFocus();
+        binding.map.setMultiTouchControls(true);
+        if (nearbyParentFragmentInstanceReadyCallback != null) {
+            nearbyParentFragmentInstanceReadyCallback.onReady();
+        }
+        initNearbyFilter();
+        addCheckBoxCallback();
+        moveCameraToPosition(lastMapFocus);
+        initRvNearbyList();
+        onResume();
+        binding.tvAttribution.setText(Html.fromHtml(getString(R.string.map_attribution)));
+        binding.tvAttribution.setMovementMethod(LinkMovementMethod.getInstance());
+        binding.nearbyFilterList.btnAdvancedOptions.setOnClickListener(v -> {
+            binding.nearbyFilter.searchViewLayout.searchView.clearFocus();
             showHideAdvancedQueryFragment(true);
             final AdvanceQueryFragment fragment = new AdvanceQueryFragment();
-            final Bundle bundle=new Bundle();
+            final Bundle bundle = new Bundle();
             try {
-                bundle.putString("query", FileUtils.readFromResource("/queries/nearby_query.rq"));
+                bundle.putString("query",
+                    FileUtils.readFromResource("/queries/radius_query_for_upload_wizard.rq"));
             } catch (IOException e) {
                 Timber.e(e);
             }
@@ -399,146 +499,154 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 .replace(R.id.fl_container_nearby_children, fragment)
                 .commit();
         });
+
+        binding.tvLearnMore.setOnClickListener(v -> onLearnMoreClicked());
+
+        if (!locationPermissionsHelper.checkLocationPermission(getActivity())) {
+            askForLocationPermission();
+        }
     }
 
     /**
-     * Initialise background based on theme, this should be doe ideally via styles, that would need another refactor
+     * Initialise background based on theme, this should be doe ideally via styles, that would need
+     * another refactor
      */
     private void initThemePreferences() {
-        if(isDarkTheme){
-            rvNearbyList.setBackgroundColor(getContext().getResources().getColor(R.color.contributionListDarkBackground));
-            checkBoxTriStates.setTextColor(getContext().getResources().getColor(android.R.color.white));
-            checkBoxTriStates.setTextColor(getContext().getResources().getColor(android.R.color.white));
-            nearbyFilterList.setBackgroundColor(getContext().getResources().getColor(R.color.contributionListDarkBackground));
-        }else{
-            rvNearbyList.setBackgroundColor(getContext().getResources().getColor(android.R.color.white));
-            checkBoxTriStates.setTextColor(getContext().getResources().getColor(R.color.contributionListDarkBackground));
-            nearbyFilterList.setBackgroundColor(getContext().getResources().getColor(android.R.color.white));
-            nearbyFilterList.setBackgroundColor(getContext().getResources().getColor(android.R.color.white));
+        if (isDarkTheme) {
+            binding.bottomSheetNearby.rvNearbyList.setBackgroundColor(
+                getContext().getResources().getColor(R.color.contributionListDarkBackground));
+            binding.nearbyFilterList.checkboxTriStates.setTextColor(
+                getContext().getResources().getColor(android.R.color.white));
+            binding.nearbyFilterList.checkboxTriStates.setTextColor(
+                getContext().getResources().getColor(android.R.color.white));
+            binding.nearbyFilterList.getRoot().setBackgroundColor(
+                getContext().getResources().getColor(R.color.contributionListDarkBackground));
+            binding.map.getOverlayManager().getTilesOverlay()
+                .setColorFilter(TilesOverlay.INVERT_COLORS);
+        } else {
+            binding.bottomSheetNearby.rvNearbyList.setBackgroundColor(
+                getContext().getResources().getColor(android.R.color.white));
+            binding.nearbyFilterList.checkboxTriStates.setTextColor(
+                getContext().getResources().getColor(R.color.contributionListDarkBackground));
+            binding.nearbyFilterList.getRoot().setBackgroundColor(
+                getContext().getResources().getColor(android.R.color.white));
+            binding.nearbyFilterList.getRoot().setBackgroundColor(
+                getContext().getResources().getColor(android.R.color.white));
         }
     }
 
     private void initRvNearbyList() {
-        rvNearbyList.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.bottomSheetNearby.rvNearbyList.setLayoutManager(
+            new LinearLayoutManager(getContext()));
         adapter = new PlaceAdapter(bookmarkLocationDao,
             place -> {
-                centerMapToPlace(place);
+                moveCameraToPosition(
+                    new GeoPoint(place.location.getLatitude(), place.location.getLongitude()));
                 return Unit.INSTANCE;
             },
             (place, isBookmarked) -> {
                 updateMarker(isBookmarked, place, null);
+                binding.map.invalidate();
                 return Unit.INSTANCE;
             },
-            commonPlaceClickActions
+            commonPlaceClickActions,
+            inAppCameraLocationPermissionLauncher
         );
-        rvNearbyList.setAdapter(adapter);
+        binding.bottomSheetNearby.rvNearbyList.setAdapter(adapter);
     }
 
     private void addCheckBoxCallback() {
-        checkBoxTriStates.setCallback((o, state, b, b1) -> presenter.filterByMarkerType(o,state,b,b1));
+        binding.nearbyFilterList.checkboxTriStates.setCallback(
+            (o, state, b, b1) -> presenter.filterByMarkerType(o, state, b, b1));
     }
 
     private void performMapReadyActions() {
-        if (((MainActivity)getActivity()).activeFragment == ActiveFragment.NEARBY && isMapBoxReady) {
-            if(!applicationKvStore.getBoolean("doNotAskForLocationPermission", false) ||
-                PermissionUtils.hasPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)){
-                checkPermissionsAndPerformAction();
-            }else{
+        if (((MainActivity) getActivity()).activeFragment == ActiveFragment.NEARBY) {
+            if (applicationKvStore.getBoolean("doNotAskForLocationPermission", false) &&
+                !locationPermissionsHelper.checkLocationPermission(getActivity())) {
                 isPermissionDenied = true;
-                addOnCameraMoveListener();
             }
         }
+        presenter.onMapReady();
+    }
+
+    @Override
+    public void askForLocationPermission() {
+        Timber.d("Asking for location permission");
+        locationPermissionLauncher.launch(permission.ACCESS_FINE_LOCATION);
     }
 
     private void locationPermissionGranted() {
         isPermissionDenied = false;
-
         applicationKvStore.putBoolean("doNotAskForLocationPermission", false);
         lastKnownLocation = locationManager.getLastLocation();
-        fr.free.nrw.commons.location.LatLng target=lastFocusLocation;
-        if(null==lastFocusLocation){
-            target=lastKnownLocation;
-        }
+        LatLng target = lastKnownLocation;
         if (lastKnownLocation != null) {
-            final CameraPosition position = new CameraPosition.Builder()
-                .target(LocationUtils.commonsLatLngToMapBoxLatLng(target)) // Sets the new camera position
-                .zoom(ZOOM_LEVEL) // Same zoom level
-                .build();
-            mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
-        }
-        else if(locationManager.isGPSProviderEnabled()||locationManager.isNetworkProviderEnabled()){
+            GeoPoint targetP = new GeoPoint(target.getLatitude(), target.getLongitude());
+            mapCenter = targetP;
+            binding.map.getController().setCenter(targetP);
+            recenterMarkerToPosition(targetP);
+            moveCameraToPosition(targetP);
+        } else if (locationManager.isGPSProviderEnabled()
+            || locationManager.isNetworkProviderEnabled()) {
             locationManager.requestLocationUpdatesFromProvider(LocationManager.NETWORK_PROVIDER);
             locationManager.requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
             setProgressBarVisibility(true);
-        }
-        else {
-            Toast.makeText(getContext(), getString(R.string.nearby_location_not_available), Toast.LENGTH_LONG).show();
+        } else {
+            locationPermissionsHelper.showLocationOffDialog(getActivity(),
+                R.string.ask_to_turn_location_on_text);
         }
         presenter.onMapReady();
         registerUnregisterLocationListener(false);
-        addOnCameraMoveListener();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mapView.onResume();
+        binding.map.onResume();
         presenter.attachView(this);
         registerNetworkReceiver();
-        if (isResumed() && ((MainActivity)getActivity()).activeFragment == ActiveFragment.NEARBY) {
-            if(!isPermissionDenied && !applicationKvStore.getBoolean("doNotAskForLocationPermission", false)){
-                if (!locationManager.isGPSProviderEnabled()) {
-                    startMapWithCondition("Without GPS");
-                } else {
-                    startTheMap();
+        if (isResumed() && ((MainActivity) getActivity()).activeFragment == ActiveFragment.NEARBY) {
+            if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
+                if (lastFocusLocation == null && lastKnownLocation == null) {
+                    locationPermissionGranted();
+                } else{
+                    if (updatedPlacesList != null) {
+                        if (!updatedPlacesList.isEmpty()) {
+                            loadPlacesDataAsync(updatedPlacesList, updatedLatLng);
+                        } else {
+                            updateMapMarkers(updatedPlacesList, getLastMapFocus(), false);
+                        }
+                    }else {
+                        locationPermissionGranted();
+                    }
                 }
-            }else{
-                startMapWithCondition("Without Permission");
+            } else {
+                startMapWithoutPermission();
             }
         }
     }
 
     /**
-     * Starts the map without GPS and without permission
-     * By default it points to 51.50550,-0.07520 coordinates, other than that it points to the
-     * last known location which can be get by the key "LastLocation" from applicationKvStore
-     *
-     * @param condition : for which condition the map should start
+     * Starts the map without GPS and without permission By default it points to 51.50550,-0.07520
+     * coordinates, other than that it points to the last known location which can be get by the key
+     * "LastLocation" from applicationKvStore
      */
-    private void startMapWithCondition(final String condition) {
-        mapView.onStart();
-
-        if (condition.equals("Without Permission")) {
-            applicationKvStore.putBoolean("doNotAskForLocationPermission", true);
-        }
-
-        final CameraPosition position;
-        if (applicationKvStore.getString("LastLocation")!=null) {
+    private void startMapWithoutPermission() {
+        if (applicationKvStore.getString("LastLocation") != null) {
             final String[] locationLatLng
                 = applicationKvStore.getString("LastLocation").split(",");
             lastKnownLocation
-                = new fr.free.nrw.commons.location.LatLng(Double.parseDouble(locationLatLng[0]),
+                = new LatLng(Double.parseDouble(locationLatLng[0]),
                 Double.parseDouble(locationLatLng[1]), 1f);
-            position = new CameraPosition.Builder()
-                .target(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation))
-                .zoom(ZOOM_LEVEL)
-                .build();
-
         } else {
-            lastKnownLocation = new fr.free.nrw.commons.location.LatLng(51.50550,
-                -0.07520,1f);
-            position = new CameraPosition.Builder()
-                .target(LocationUtils.commonsLatLngToMapBoxLatLng(lastKnownLocation))
-                .zoom(ZOOM_OUT)
-                .build();
+            lastKnownLocation = MapUtils.defaultLatLng;
         }
-
-        if(mapBox != null){
-            mapBox.moveCamera(CameraUpdateFactory.newCameraPosition(position));
-            addOnCameraMoveListener();
-            presenter.onMapReady();
-            removeCurrentLocationMarker();
+        if (binding.map != null) {
+            moveCameraToPosition(
+                new GeoPoint(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()));
         }
+        presenter.onMapReady();
     }
 
     private void registerNetworkReceiver() {
@@ -547,16 +655,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
     }
 
-
     @Override
     public void onPause() {
         super.onPause();
-        mapView.onPause();
+        binding.map.onPause();
         compositeDisposable.clear();
         presenter.detachView();
         registerUnregisterLocationListener(true);
         try {
-            if (broadcastReceiver != null && getActivity()!=null) {
+            if (broadcastReceiver != null && getActivity() != null) {
                 getContext().unregisterReceiver(broadcastReceiver);
             }
 
@@ -564,37 +671,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 locationManager.removeLocationListener(presenter);
                 locationManager.unregisterLocationManager();
             }
-            if (null != mapBox) {
-                mapBox.removeOnCameraMoveListener(cameraMoveListener);
-            }
-        }catch (final Exception e){
+        } catch (final Exception e) {
             Timber.e(e);
             //Broadcast receivers should always be unregistered inside catch, you never know if they were already registered or not
         }
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-        mapView.onStop();
-    }
-
-    @Override
-    public void onSaveInstanceState(final Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
-
-    @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mapView.onDestroy();
         presenter.removeNearbyPreferences(applicationKvStore);
     }
 
@@ -603,222 +688,126 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         initBottomSheets();
         loadAnimations();
         setBottomSheetCallbacks();
-        decideButtonVisibilities();
         addActionToTitle();
         if (!Utils.isMonumentsEnabled(new Date())) {
-            chipWlm.setVisibility(View.GONE);
+            NearbyFilterState.setWlmSelected(false);
         }
     }
 
     /**
-     * a) Creates bottom sheet behaviours from bottom sheets, sets initial states and visibility
-     * b) Gets the touch event on the map to perform following actions:
-     *      if fab is open then close fab.
-     *      if bottom sheet details are expanded then collapse bottom sheet details.
-     *      if bottom sheet details are collapsed then hide the bottom sheet details.
-     *      if listBottomSheet is open then hide the list bottom sheet.
+     * a) Creates bottom sheet behaviours from bottom sheets, sets initial states and visibility b)
+     * Gets the touch event on the map to perform following actions: if fab is open then close fab.
+     * if bottom sheet details are expanded then collapse bottom sheet details. if bottom sheet
+     * details are collapsed then hide the bottom sheet details. if listBottomSheet is open then
+     * hide the list bottom sheet.
      */
     @SuppressLint("ClickableViewAccessibility")
     private void initBottomSheets() {
-        bottomSheetListBehavior = BottomSheetBehavior.from(rlBottomSheet);
-        bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
+        bottomSheetListBehavior = BottomSheetBehavior.from(binding.bottomSheetNearby.bottomSheet);
+        bottomSheetDetailsBehavior = BottomSheetBehavior.from(binding.bottomSheetDetails.getRoot());
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        bottomSheetDetails.setVisibility(View.VISIBLE);
+        binding.bottomSheetDetails.getRoot().setVisibility(View.VISIBLE);
         bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+    }
 
-        mapView.setOnTouchListener((v, event) -> {
-
-            // Motion event is triggered two times on a touch event, one as ACTION_UP
-            // and other as ACTION_DOWN, we only want one trigger per touch event.
-
-            if(event.getAction() == MotionEvent.ACTION_DOWN) {
-                if (isFABsExpanded) {
-                    collapseFABs(true);
-                } else if (bottomSheetDetailsBehavior.getState()
-                    == BottomSheetBehavior.STATE_EXPANDED) {
-                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                } else if (bottomSheetDetailsBehavior.getState()
-                    == BottomSheetBehavior.STATE_COLLAPSED) {
-                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                } else if (isListBottomSheetExpanded()) {
-                    bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                }
-            }
-            return false;
-        });
+    /**
+     * Determines the number of spans (columns) in the RecyclerView based on device orientation
+     * and adapter item count.
+     *
+     * @return The number of spans to be used in the RecyclerView.
+     */
+    private int getSpanCount() {
+        int orientation = getResources().getConfiguration().orientation;
+        if (bottomSheetAdapter != null) {
+            return (orientation == Configuration.ORIENTATION_PORTRAIT) ? 3
+                : bottomSheetAdapter.getItemCount();
+        } else {
+            return (orientation == Configuration.ORIENTATION_PORTRAIT) ? 3 : 6;
+        }
     }
 
     public void initNearbyFilter() {
-        nearbyFilterList.setVisibility(View.GONE);
-
-        searchView.setOnQueryTextFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) {
-                presenter.searchViewGainedFocus();
-                nearbyFilterList.setVisibility(View.VISIBLE);
-            } else {
-                nearbyFilterList.setVisibility(View.GONE);
-            }
-        });
-
-        recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
+        binding.nearbyFilterList.getRoot().setVisibility(View.GONE);
+        hideBottomSheet();
+        binding.nearbyFilter.searchViewLayout.searchView.setOnQueryTextFocusChangeListener(
+            (v, hasFocus) -> {
+                LayoutUtils.setLayoutHeightAllignedToWidth(1.25,
+                    binding.nearbyFilterList.getRoot());
+                if (hasFocus) {
+                    binding.nearbyFilterList.getRoot().setVisibility(View.VISIBLE);
+                    presenter.searchViewGainedFocus();
+                } else {
+                    binding.nearbyFilterList.getRoot().setVisibility(View.GONE);
+                }
+            });
+        binding.nearbyFilterList.searchListView.setHasFixedSize(true);
+        binding.nearbyFilterList.searchListView.addItemDecoration(
+            new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL));
-
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        binding.nearbyFilterList.searchListView.setLayoutManager(linearLayoutManager);
+        nearbyFilterSearchRecyclerViewAdapter = new NearbyFilterSearchRecyclerViewAdapter(
+            getContext(), new ArrayList<>(Label.valuesAsList()),
+            binding.nearbyFilterList.searchListView);
+        nearbyFilterSearchRecyclerViewAdapter.setCallback(
+            new NearbyFilterSearchRecyclerViewAdapter.Callback() {
+                @Override
+                public void setCheckboxUnknown() {
+                    presenter.setCheckboxUnknown();
+                }
 
-        nearbyFilterSearchRecyclerViewAdapter = new NearbyFilterSearchRecyclerViewAdapter(getContext(), new ArrayList<>(Label.valuesAsList()), recyclerView);
-        nearbyFilterSearchRecyclerViewAdapter.setCallback(new NearbyFilterSearchRecyclerViewAdapter.Callback() {
-            @Override
-            public void setCheckboxUnknown() {
-                presenter.setCheckboxUnknown();
-            }
+                @Override
+                public void filterByMarkerType(final ArrayList<Label> selectedLabels, final int i,
+                    final boolean b, final boolean b1) {
+                    presenter.filterByMarkerType(selectedLabels, i, b, b1);
+                }
 
-            @Override
-            public void filterByMarkerType(final ArrayList<Label> selectedLabels, final int i, final boolean b, final boolean b1) {
-                presenter.filterByMarkerType(selectedLabels,i,b,b1);
-            }
-
-            @Override
-            public boolean isDarkTheme() {
-                return isDarkTheme;
-            }
-        });
-        nearbyFilterList.getLayoutParams().width = (int) LayoutUtils.getScreenWidth(getActivity(), 0.75);
-        recyclerView.setAdapter(nearbyFilterSearchRecyclerViewAdapter);
-        LayoutUtils.setLayoutHeightAllignedToWidth(1.25, nearbyFilterList);
-
-        compositeDisposable.add(RxSearchView.queryTextChanges(searchView)
-                .takeUntil(RxView.detaches(searchView))
+                @Override
+                public boolean isDarkTheme() {
+                    return isDarkTheme;
+                }
+            });
+        binding.nearbyFilterList.getRoot()
+            .getLayoutParams().width = (int) LayoutUtils.getScreenWidth(getActivity(),
+            0.75);
+        binding.nearbyFilterList.searchListView.setAdapter(nearbyFilterSearchRecyclerViewAdapter);
+        LayoutUtils.setLayoutHeightAllignedToWidth(1.25, binding.nearbyFilterList.getRoot());
+        compositeDisposable.add(
+            RxSearchView.queryTextChanges(binding.nearbyFilter.searchViewLayout.searchView)
+                .takeUntil(RxView.detaches(binding.nearbyFilter.searchViewLayout.searchView))
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe( query -> {
-                    ((NearbyFilterSearchRecyclerViewAdapter) recyclerView.getAdapter()).getFilter().filter(query.toString());
+                .subscribe(query -> {
+                    ((NearbyFilterSearchRecyclerViewAdapter) binding.nearbyFilterList.searchListView.getAdapter()).getFilter()
+                        .filter(query.toString());
                 }));
-        initFilterChips();
     }
 
     @Override
     public void setCheckBoxAction() {
-        checkBoxTriStates.addAction();
-        checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
+        binding.nearbyFilterList.checkboxTriStates.addAction();
+        binding.nearbyFilterList.checkboxTriStates.setState(CheckBoxTriStates.UNKNOWN);
     }
 
     @Override
     public void setCheckBoxState(final int state) {
-        checkBoxTriStates.setState(state);
+        binding.nearbyFilterList.checkboxTriStates.setState(state);
     }
 
     @Override
     public void setFilterState() {
-        chipNeedsPhoto.setChecked(NearbyFilterState.getInstance().isNeedPhotoSelected());
-        chipExists.setChecked(NearbyFilterState.getInstance().isExistsSelected());
-        chipWlm.setChecked(NearbyFilterState.getInstance().isWlmSelected());
         if (NearbyController.currentLocation != null) {
-            presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
+            presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels,
+                binding.nearbyFilterList.checkboxTriStates.getState(), true, false);
         }
-
-    }
-
-    private void initFilterChips() {
-        chipNeedsPhoto.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (NearbyController.currentLocation != null) {
-                checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
-                NearbyFilterState.setNeedPhotoSelected(isChecked);
-                presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
-                updatePlaceList(chipNeedsPhoto.isChecked(),
-                    chipExists.isChecked(), chipWlm.isChecked());
-            } else {
-                chipNeedsPhoto.setChecked(!isChecked);
-            }
-        });
-
-
-        chipExists.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (NearbyController.currentLocation != null) {
-                checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
-                NearbyFilterState.setExistsSelected(isChecked);
-                presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
-                updatePlaceList(chipNeedsPhoto.isChecked(),
-                    chipExists.isChecked(), chipWlm.isChecked());
-            } else {
-                chipExists.setChecked(!isChecked);
-            }
-        });
-
-
-        chipWlm.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if(NearbyController.currentLocation!=null){
-                checkBoxTriStates.setState(CheckBoxTriStates.UNKNOWN);
-                NearbyFilterState.setWlmSelected(isChecked);
-                presenter.filterByMarkerType(nearbyFilterSearchRecyclerViewAdapter.selectedLabels, checkBoxTriStates.getState(), true, false);
-                updatePlaceList(chipNeedsPhoto.isChecked(),
-                    chipExists.isChecked(), chipWlm.isChecked());
-            }else{
-                chipWlm.setChecked(!isChecked);
-            }
-        });
-    }
-
-    /**
-     * Updates Nearby place list according to available chip states
-     *
-     * @param needsPhoto is chipNeedsPhoto checked
-     * @param exists is chipExists checked
-     * @param isWlm is chipWlm checked
-     */
-    private void updatePlaceList(final boolean needsPhoto, final boolean exists,
-        final boolean isWlm) {
-        final List<Place> updatedPlaces = new ArrayList<>();
-
-        if (needsPhoto) {
-            for (final Place place :
-                places) {
-                if (place.pic.trim().isEmpty() && !updatedPlaces.contains(place)) {
-                    updatedPlaces.add(place);
-                }
-            }
-        } else {
-            updatedPlaces.addAll(places);
-        }
-
-        if (exists) {
-            for(final Iterator<Place> placeIterator = updatedPlaces.iterator();
-                placeIterator.hasNext();){
-                final Place place = placeIterator.next();
-                if (!place.exists) {
-                    placeIterator.remove();
-                }
-            }
-        }
-
-        if (!isWlm) {
-            for (final Place place :
-                places) {
-                if (place.isMonument() && updatedPlaces.contains(place)) {
-                    updatedPlaces.remove(place);
-                }
-            }
-        } else {
-            for (final Place place :
-                places) {
-                if (place.isMonument() && !updatedPlaces.contains(place)) {
-                    updatedPlaces.add(place);
-                }
-            }
-        }
-
-        adapter.setItems(updatedPlaces);
-        noResultsView.setVisibility(updatedPlaces.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
     /**
      * Defines how bottom sheets will act on click
      */
     private void setBottomSheetCallbacks() {
-        bottomSheetDetailsBehavior.setBottomSheetCallback(new BottomSheetBehavior
-                .BottomSheetCallback() {
+        bottomSheetDetailsBehavior.setBottomSheetCallback(new BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull final View bottomSheet, final int newState) {
                 prepareViewsForSheetPosition(newState);
@@ -830,20 +819,21 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             }
         });
 
-        bottomSheetDetails.setOnClickListener(v -> {
+        binding.bottomSheetDetails.getRoot().setOnClickListener(v -> {
             if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
                 bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-            } else if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+            } else if (bottomSheetDetailsBehavior.getState()
+                == BottomSheetBehavior.STATE_EXPANDED) {
                 bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             }
         });
 
-        rlBottomSheet.getLayoutParams().height = getActivity().getWindowManager()
+        binding.bottomSheetNearby.bottomSheet.getLayoutParams().height =
+            getActivity().getWindowManager()
                 .getDefaultDisplay().getHeight() / 16 * 9;
-        bottomSheetListBehavior = BottomSheetBehavior.from(rlBottomSheet);
+        bottomSheetListBehavior = BottomSheetBehavior.from(binding.bottomSheetNearby.bottomSheet);
         bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        bottomSheetListBehavior.setBottomSheetCallback(new BottomSheetBehavior
-                .BottomSheetCallback() {
+        bottomSheetListBehavior.setBottomSheetCallback(new BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull final View bottomSheet, final int newState) {
                 if (newState == BottomSheetBehavior.STATE_EXPANDED) {
@@ -869,30 +859,17 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Fits buttons according to our layout
-     */
-    private void decideButtonVisibilities() {
-        // Remove button text if they exceed 1 line or if internal layout has not been built
-        // Only need to check for directions button because it is the longest
-        if (directionsButtonText.getLineCount() > 1 || directionsButtonText.getLineCount() == 0) {
-            wikipediaButtonText.setVisibility(View.GONE);
-            wikidataButtonText.setVisibility(View.GONE);
-            commonsButtonText.setVisibility(View.GONE);
-            directionsButtonText.setVisibility(View.GONE);
-        }
-    }
-
-    /**
      *
      */
     private void addActionToTitle() {
-        title.setOnLongClickListener(view -> {
-                Utils.copy("place", title.getText().toString(), getContext());
-                Toast.makeText(getContext(), R.string.text_copy, Toast.LENGTH_SHORT).show();
-                return true;
-            });
+        binding.bottomSheetDetails.title.setOnLongClickListener(view -> {
+            Utils.copy("place", binding.bottomSheetDetails.title.getText().toString(),
+                getContext());
+            Toast.makeText(getContext(), R.string.text_copy, Toast.LENGTH_SHORT).show();
+            return true;
+        });
 
-        title.setOnClickListener(view -> {
+        binding.bottomSheetDetails.title.setOnClickListener(view -> {
             bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
                 bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
@@ -903,15 +880,17 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     /**
-     * Centers the map in nearby fragment to a given place
+     * Centers the map in nearby fragment to a given place and updates nearestPlace
+     *
      * @param place is new center of the map
      */
     @Override
     public void centerMapToPlace(@Nullable final Place place) {
         Timber.d("Map is centered to place");
         final double cameraShift;
-        if(null!=place){
-            lastPlaceToCenter=place;
+        if (null != place) {
+            lastPlaceToCenter = place;
+            nearestPlace = place;
         }
 
         if (null != lastPlaceToCenter) {
@@ -921,14 +900,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             } else {
                 cameraShift = CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE;
             }
-            final CameraPosition position = new CameraPosition.Builder()
-                    .target(LocationUtils.commonsLatLngToMapBoxLatLng(
-                            new fr.free.nrw.commons.location.LatLng(lastPlaceToCenter.location.getLatitude() - cameraShift,
-                                    lastPlaceToCenter.getLocation().getLongitude(),
-                                    0))) // Sets the new camera position
-                    .zoom(ZOOM_LEVEL) // Same zoom level
-                    .build();
-            mapBox.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
+            recenterMap(new LatLng(
+                lastPlaceToCenter.location.getLatitude() - cameraShift,
+                lastPlaceToCenter.getLocation().getLongitude(), 0));
         }
     }
 
@@ -937,33 +911,53 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void updateListFragment(final List<Place> placeList) {
         places = placeList;
         adapter.setItems(placeList);
-        noResultsView.setVisibility(placeList.isEmpty() ? View.VISIBLE : View.GONE);
+        binding.bottomSheetNearby.noResultsMessage.setVisibility(
+            placeList.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
     @Override
-    public fr.free.nrw.commons.location.LatLng getLastLocation() {
+    public LatLng getLastLocation() {
         return lastKnownLocation;
     }
 
     @Override
-    public LatLng getLastFocusLocation() {
-        return lastFocusLocation==null?null:LocationUtils.commonsLatLngToMapBoxLatLng(lastFocusLocation);
+    public LatLng getLastMapFocus() {
+        LatLng latLng = new LatLng(
+            lastMapFocus.getLatitude(), lastMapFocus.getLongitude(), 100);
+        return latLng;
     }
 
+    /**
+     * Computes location where map should be centered
+     *
+     * @return returns the last location, if available, else returns default location
+     */
     @Override
-    public boolean isCurrentLocationMarkerVisible() {
-        if (latLngBounds == null || currentLocationMarker==null) {
-            Timber.d("Map projection bounds are null");
-            return false;
+    public LatLng getMapCenter() {
+        if (applicationKvStore.getString("LastLocation") != null) {
+            final String[] locationLatLng
+                = applicationKvStore.getString("LastLocation").split(",");
+            lastKnownLocation
+                = new LatLng(Double.parseDouble(locationLatLng[0]),
+                Double.parseDouble(locationLatLng[1]), 1f);
         } else {
-            Timber.d("Current location marker %s" , latLngBounds.contains(currentLocationMarker.getPosition()) ? "visible" : "invisible");
-            return latLngBounds.contains(currentLocationMarker.getPosition());
+            lastKnownLocation = new LatLng(51.50550,
+                -0.07520, 1f);
         }
+        LatLng latLnge = lastKnownLocation;
+        if (mapCenter != null) {
+            latLnge = new LatLng(
+                mapCenter.getLatitude(), mapCenter.getLongitude(), 100);
+        }
+        return latLnge;
     }
 
     @Override
-    public void setProjectorLatLngBounds() {
-        latLngBounds = mapBox.getProjection().getVisibleRegion().latLngBounds;
+    public LatLng getMapFocus() {
+        LatLng mapFocusedLatLng = new LatLng(
+            binding.map.getMapCenter().getLatitude(), binding.map.getMapCenter().getLongitude(),
+            100);
+        return mapFocusedLatLng;
     }
 
     @Override
@@ -974,22 +968,8 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void showHideAdvancedQueryFragment(final boolean shouldShow) {
         setHasOptionsMenu(!shouldShow);
-        flConainerNearbyChildren.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
+        binding.flContainerNearbyChildren.setVisibility(shouldShow ? View.VISIBLE : View.GONE);
         isAdvancedQueryFragmentVisible = shouldShow;
-    }
-
-    @Override
-    public void centerMapToPosition(fr.free.nrw.commons.location.LatLng searchLatLng) {
-        final CameraPosition cameraPosition = mapBox.getCameraPosition();
-        if (null != searchLatLng && !(
-            cameraPosition.target.getLatitude() == searchLatLng.getLatitude()
-                && cameraPosition.target.getLongitude() == searchLatLng.getLongitude())) {
-            final CameraPosition position = new CameraPosition.Builder()
-                .target(LocationUtils.commonsLatLngToMapBoxLatLng(searchLatLng))
-                .zoom(ZOOM_LEVEL) // Same zoom level
-                .build();
-            mapBox.setCameraPosition(position);
-        }
     }
 
     @Override
@@ -1017,8 +997,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                         }
                     } else {
                         if (snackbar == null) {
-                            snackbar = Snackbar.make(view, R.string.no_internet, Snackbar.LENGTH_INDEFINITE);
-                            setSearchThisAreaButtonVisibility(false);
+                            snackbar = Snackbar.make(view, R.string.no_internet,
+                                Snackbar.LENGTH_INDEFINITE);
+                            searchable = false;
                             setProgressBarVisibility(false);
                         }
 
@@ -1036,51 +1017,284 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void listOptionMenuItemClicked() {
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        if(bottomSheetListBehavior.getState()== BottomSheetBehavior.STATE_COLLAPSED || bottomSheetListBehavior.getState()==BottomSheetBehavior.STATE_HIDDEN){
+        if (bottomSheetListBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED
+            || bottomSheetListBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN) {
             bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-        }else if(bottomSheetListBehavior.getState()==BottomSheetBehavior.STATE_EXPANDED){
+        } else if (bottomSheetListBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
             bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         }
     }
 
     @Override
-    public void populatePlaces(final fr.free.nrw.commons.location.LatLng curlatLng) {
-        if (curlatLng.equals(lastFocusLocation) || lastFocusLocation == null || recenterToUserLocation) { // Means we are checking around current location
-            populatePlacesForCurrentLocation(lastKnownLocation, curlatLng, null);
+    public void populatePlaces(final LatLng currentLatLng) {
+        IGeoPoint screenTopRight = binding.map.getProjection()
+            .fromPixels(binding.map.getWidth(), 0);
+        IGeoPoint screenBottomLeft = binding.map.getProjection()
+            .fromPixels(0, binding.map.getHeight());
+        LatLng screenTopRightLatLng = new LatLng(
+            screenBottomLeft.getLatitude(), screenBottomLeft.getLongitude(), 0);
+        LatLng screenBottomLeftLatLng = new LatLng(
+            screenTopRight.getLatitude(), screenTopRight.getLongitude(), 0);
+
+        // When the nearby fragment is opened immediately upon app launch, the {screenTopRightLatLng}
+        // and {screenBottomLeftLatLng} variables return {LatLng(0.0,0.0)} as output.
+        // To address this issue, A small delta value {delta = 0.02} is used to adjust the latitude
+        // and longitude values for {ZOOM_LEVEL = 15f}.
+        // This adjustment helps in calculating the east and west corner LatLng accurately.
+        // Note: This only happens when the nearby fragment is opened immediately upon app launch,
+        // otherwise {screenTopRightLatLng} and {screenBottomLeftLatLng} are used to determine
+        // the east and west corner LatLng.
+        if (screenTopRightLatLng.getLatitude() == 0.0 && screenTopRightLatLng.getLongitude() == 0.0
+            && screenBottomLeftLatLng.getLatitude() == 0.0
+            && screenBottomLeftLatLng.getLongitude() == 0.0) {
+            final double delta = 0.009;
+            final double westCornerLat = currentLatLng.getLatitude() - delta;
+            final double westCornerLong = currentLatLng.getLongitude() - delta;
+            final double eastCornerLat = currentLatLng.getLatitude() + delta;
+            final double eastCornerLong = currentLatLng.getLongitude() + delta;
+            screenTopRightLatLng = new LatLng(westCornerLat,
+                westCornerLong, 0);
+            screenBottomLeftLatLng = new LatLng(eastCornerLat,
+                eastCornerLong, 0);
+            if (currentLatLng.equals(
+                getLastMapFocus())) { // Means we are checking around current location
+                populatePlacesForCurrentLocation(getLastMapFocus(), screenTopRightLatLng,
+                    screenBottomLeftLatLng, currentLatLng, null);
+            } else {
+                populatePlacesForAnotherLocation(getLastMapFocus(), screenTopRightLatLng,
+                    screenBottomLeftLatLng, currentLatLng, null);
+            }
         } else {
-            populatePlacesForAnotherLocation(lastKnownLocation, curlatLng, null);
+            if (currentLatLng.equals(
+                getLastMapFocus())) { // Means we are checking around current location
+                populatePlacesForCurrentLocation(getLastMapFocus(), screenTopRightLatLng,
+                    screenBottomLeftLatLng, currentLatLng, null);
+            } else {
+                populatePlacesForAnotherLocation(getLastMapFocus(), screenTopRightLatLng,
+                    screenBottomLeftLatLng, currentLatLng, null);
+            }
         }
-        if(recenterToUserLocation) {
+
+        if (recenterToUserLocation) {
             recenterToUserLocation = false;
         }
     }
 
     @Override
-    public void populatePlaces(final fr.free.nrw.commons.location.LatLng curlatLng,
+    public void populatePlaces(final LatLng currentLatLng,
         @Nullable final String customQuery) {
         if (customQuery == null || customQuery.isEmpty()) {
-            populatePlaces(curlatLng);
+            populatePlaces(currentLatLng);
             return;
         }
+        IGeoPoint screenTopRight = binding.map.getProjection()
+            .fromPixels(binding.map.getWidth(), 0);
+        IGeoPoint screenBottomLeft = binding.map.getProjection()
+            .fromPixels(0, binding.map.getHeight());
+        LatLng screenTopRightLatLng = new LatLng(
+            screenBottomLeft.getLatitude(), screenBottomLeft.getLongitude(), 0);
+        LatLng screenBottomLeftLatLng = new LatLng(
+            screenTopRight.getLatitude(), screenTopRight.getLongitude(), 0);
 
-        if (curlatLng.equals(lastFocusLocation) || lastFocusLocation == null
+        if (currentLatLng.equals(lastFocusLocation) || lastFocusLocation == null
             || recenterToUserLocation) { // Means we are checking around current location
-            populatePlacesForCurrentLocation(lastKnownLocation, curlatLng, customQuery);
+            populatePlacesForCurrentLocation(lastKnownLocation, screenTopRightLatLng,
+                screenBottomLeftLatLng, currentLatLng, customQuery);
         } else {
-            populatePlacesForAnotherLocation(lastKnownLocation, curlatLng, customQuery);
+            populatePlacesForAnotherLocation(lastKnownLocation, screenTopRightLatLng,
+                screenBottomLeftLatLng, currentLatLng, customQuery);
         }
         if (recenterToUserLocation) {
             recenterToUserLocation = false;
         }
     }
 
-    private void populatePlacesForCurrentLocation(
-        final fr.free.nrw.commons.location.LatLng curlatLng,
-        final fr.free.nrw.commons.location.LatLng searchLatLng, @Nullable final String customQuery){
-
-        final Observable<NearbyController.NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
+    private void savePlacesAsKML() {
+        final Observable<String> savePlacesObservable = Observable
             .fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(curlatLng, searchLatLng,
+                .getPlacesAsKML(getMapFocus()));
+        compositeDisposable.add(savePlacesObservable
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(kmlString -> {
+                    if (kmlString != null) {
+                        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+                            Locale.getDefault()).format(new Date());
+                        String fileName =
+                            "KML_" + timeStamp + "_" + System.currentTimeMillis() + ".kml";
+                        boolean saved = saveFile(kmlString, fileName);
+                        progressDialog.hide();
+                        if (saved) {
+                            showOpenFileDialog(getContext(), fileName, false);
+                        } else {
+                            Toast.makeText(this.getContext(),
+                                getString(R.string.failed_to_save_kml_file),
+                                Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                throwable -> {
+                    Timber.d(throwable);
+                    showErrorMessage(getString(R.string.error_fetching_nearby_places)
+                        + throwable.getLocalizedMessage());
+                    setProgressBarVisibility(false);
+                    presenter.lockUnlockNearby(false);
+                    setFilterState();
+                }));
+    }
+
+    private void savePlacesAsGPX() {
+        final Observable<String> savePlacesObservable = Observable
+            .fromCallable(() -> nearbyController
+                .getPlacesAsGPX(getMapFocus()));
+        compositeDisposable.add(savePlacesObservable
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(gpxString -> {
+                    if (gpxString != null) {
+                        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+                            Locale.getDefault()).format(new Date());
+                        String fileName =
+                            "GPX_" + timeStamp + "_" + System.currentTimeMillis() + ".gpx";
+                        boolean saved = saveFile(gpxString, fileName);
+                        progressDialog.hide();
+                        if (saved) {
+                            showOpenFileDialog(getContext(), fileName, true);
+                        } else {
+                            Toast.makeText(this.getContext(),
+                                getString(R.string.failed_to_save_gpx_file),
+                                Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                throwable -> {
+                    Timber.d(throwable);
+                    showErrorMessage(getString(R.string.error_fetching_nearby_places)
+                        + throwable.getLocalizedMessage());
+                    setProgressBarVisibility(false);
+                    presenter.lockUnlockNearby(false);
+                    setFilterState();
+                }));
+    }
+
+    public static boolean saveFile(String string, String fileName) {
+
+        if (!isExternalStorageWritable()) {
+            return false;
+        }
+
+        File downloadsDir = Environment.getExternalStoragePublicDirectory(
+            Environment.DIRECTORY_DOWNLOADS);
+        File kmlFile = new File(downloadsDir, fileName);
+
+        try {
+            FileOutputStream fos = new FileOutputStream(kmlFile);
+            fos.write(string.getBytes());
+            fos.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private void showOpenFileDialog(Context context, String fileName, Boolean isGPX) {
+        String title = getString(R.string.file_saved_successfully);
+        String message =
+            (isGPX) ? getString(R.string.do_you_want_to_open_gpx_file)
+                : getString(R.string.do_you_want_to_open_kml_file);
+        Runnable runnable = () -> openFile(context, fileName, isGPX);
+        DialogUtil.showAlertDialog(getActivity(), title, message, runnable, () -> {
+        });
+    }
+
+    private void openFile(Context context, String fileName, Boolean isGPX) {
+        File file = new File(
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+            fileName);
+        Uri uri = FileProvider.getUriForFile(context,
+            context.getApplicationContext().getPackageName() + ".provider", file);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+
+        if (isGPX) {
+            intent.setDataAndType(uri, "application/gpx");
+        } else {
+            intent.setDataAndType(uri, "application/kml");
+        }
+
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        try {
+            context.startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(context, R.string.no_application_available_to_open_gpx_files,
+                Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private static boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        return Environment.MEDIA_MOUNTED.equals(state);
+    }
+
+    /**
+     * Fetches and updates the data for a specific place, then updates the corresponding marker on the map.
+     *
+     * @param entity       The entity ID of the place.
+     * @param place        The Place object containing the initial place data.
+     * @param marker       The Marker object on the map representing the place.
+     * @param isBookMarked A boolean indicating if the place is bookmarked.
+     */
+    private void getPlaceData(String entity, Place place, Marker marker, Boolean isBookMarked) {
+        final Observable<List<Place>> getPlaceObservable = Observable
+            .fromCallable(() -> nearbyController
+                .getPlaces(List.of(place)));
+        compositeDisposable.add(getPlaceObservable
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(placeList -> {
+                    Place updatedPlace = placeList.get(0);
+                    updatedPlace.distance = place.distance;
+                    updatedPlace.location = place.location;
+                    marker.setTitle(updatedPlace.name);
+                    marker.setSnippet(
+                        containsParentheses(updatedPlace.getLongDescription())
+                            ? getTextBetweenParentheses(
+                            updatedPlace.getLongDescription()) : updatedPlace.getLongDescription());
+                    marker.showInfoWindow();
+                    for (int i = 0; i < updatedPlacesList.size(); i++) {
+                        Place pl = updatedPlacesList.get(i);
+                        if (pl.location == updatedPlace.location) {
+                            updatedPlacesList.set(i, updatedPlace);
+                            savePlaceToDatabase(place);
+                        }
+                    }
+                    Drawable icon = ContextCompat.getDrawable(getContext(),
+                        getIconFor(updatedPlace, isBookMarked));
+                    marker.setIcon(icon);
+                    binding.map.invalidate();
+                    binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.GONE);
+                    binding.bottomSheetDetails.icon.setVisibility(View.VISIBLE);
+                    binding.bottomSheetDetails.wikiDataLl.setVisibility(View.VISIBLE);
+                    passInfoToSheet(updatedPlace);
+                    hideBottomSheet();
+                },
+                throwable -> {
+                    Timber.d(throwable);
+                    showErrorMessage(getString(R.string.could_not_load_place_data)
+                        + throwable.getLocalizedMessage());
+                }));
+    }
+
+    private void populatePlacesForCurrentLocation(
+        final LatLng currentLatLng,
+        final LatLng screenTopRight,
+        final LatLng screenBottomLeft,
+        final LatLng searchLatLng,
+        @Nullable final String customQuery) {
+        final Observable<NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
+            .fromCallable(() -> nearbyController
+                .loadAttractionsFromLocation(currentLatLng, screenTopRight, screenBottomLeft,
+                    searchLatLng,
                     false, true, Utils.isMonumentsEnabled(new Date()), customQuery));
 
         compositeDisposable.add(nearbyPlacesInfoObservable
@@ -1089,14 +1303,21 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             .subscribe(nearbyPlacesInfo -> {
                     if (nearbyPlacesInfo.placeList == null || nearbyPlacesInfo.placeList.isEmpty()) {
                         showErrorMessage(getString(R.string.no_nearby_places_around));
+                        setProgressBarVisibility(false);
+                        presenter.lockUnlockNearby(false);
                     } else {
-                        updateMapMarkers(nearbyPlacesInfo, true);
+                        updateMapMarkers(nearbyPlacesInfo.placeList, nearbyPlacesInfo.currentLatLng,
+                            true);
                         lastFocusLocation = searchLatLng;
+                        lastMapFocus = new GeoPoint(searchLatLng.getLatitude(),
+                            searchLatLng.getLongitude());
+                        loadPlacesDataAsync(nearbyPlacesInfo.placeList, nearbyPlacesInfo.currentLatLng);
                     }
                 },
                 throwable -> {
                     Timber.d(throwable);
-                    showErrorMessage(getString(R.string.error_fetching_nearby_places)+throwable.getLocalizedMessage());
+                    showErrorMessage(getString(R.string.error_fetching_nearby_places)
+                        + throwable.getLocalizedMessage());
                     setProgressBarVisibility(false);
                     presenter.lockUnlockNearby(false);
                     setFilterState();
@@ -1104,11 +1325,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void populatePlacesForAnotherLocation(
-        final fr.free.nrw.commons.location.LatLng curlatLng,
-        final fr.free.nrw.commons.location.LatLng searchLatLng, @Nullable final String customQuery){
+        final LatLng currentLatLng,
+        final LatLng screenTopRight,
+        final LatLng screenBottomLeft,
+        final LatLng searchLatLng,
+        @Nullable final String customQuery) {
         final Observable<NearbyPlacesInfo> nearbyPlacesInfoObservable = Observable
             .fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(curlatLng, searchLatLng,
+                .loadAttractionsFromLocation(currentLatLng, screenTopRight, screenBottomLeft,
+                    searchLatLng,
                     false, true, Utils.isMonumentsEnabled(new Date()), customQuery));
 
         compositeDisposable.add(nearbyPlacesInfoObservable
@@ -1117,29 +1342,220 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
             .subscribe(nearbyPlacesInfo -> {
                     if (nearbyPlacesInfo.placeList == null || nearbyPlacesInfo.placeList.isEmpty()) {
                         showErrorMessage(getString(R.string.no_nearby_places_around));
+                        setProgressBarVisibility(false);
+                        presenter.lockUnlockNearby(false);
                     } else {
                         // Updating last searched location
-                        applicationKvStore.putString("LastLocation", searchLatLng.getLatitude() + "," + searchLatLng.getLongitude());
-                        updateMapMarkers(nearbyPlacesInfo, false);
-                        lastFocusLocation = searchLatLng;
+                        applicationKvStore.putString("LastLocation",
+                            searchLatLng.getLatitude() + "," + searchLatLng.getLongitude());
+
+                        // curLatLng is used to calculate distance from the current location to the place
+                        // and distance is later on populated to the place
+                        updateMapMarkers(nearbyPlacesInfo.placeList, nearbyPlacesInfo.currentLatLng,
+                            false);
+                        lastMapFocus = new GeoPoint(searchLatLng.getLatitude(),
+                            searchLatLng.getLongitude());
+                        stopQuery();
+                        loadPlacesDataAsync(nearbyPlacesInfo.placeList, nearbyPlacesInfo.currentLatLng);
                     }
                 },
                 throwable -> {
                     Timber.e(throwable);
-                    showErrorMessage(getString(R.string.error_fetching_nearby_places)+throwable.getLocalizedMessage());
+                    showErrorMessage(getString(R.string.error_fetching_nearby_places)
+                        + throwable.getLocalizedMessage());
                     setProgressBarVisibility(false);
                     presenter.lockUnlockNearby(false);
                     setFilterState();
                 }));
     }
 
+    public void loadPlacesDataAsync(List<Place> placeList, LatLng curLatLng) {
+        List<Place> places = new ArrayList<>(placeList);
+
+        // Instead of loading all pins in a single SPARQL query, we query in batches.
+        // This variable controls the number of pins queried per batch.
+        int batchSize = 3;
+
+        updatedLatLng = curLatLng;
+        updatedPlacesList = new ArrayList<>(placeList);
+
+        // Sorts the places by distance to ensure the nearest pins are ready for the user as soon
+        // as possible.
+        if (VERSION.SDK_INT >= VERSION_CODES.N) {
+            Collections.sort(places,
+                Comparator.comparingDouble(place -> place.getDistanceInDouble(getMapFocus())));
+        }
+        stopQuery = false;
+        processBatchesSequentially(places, batchSize, updatedPlacesList, curLatLng, 0);
+    }
+
+    /**
+     * Processes a list of places in batches sequentially. This method handles the asynchronous
+     * processing of places, updating the map markers and updates the list of updated places accordingly.
+     *
+     * @param places           The list of Place objects to be processed.
+     * @param batchSize        The size of each batch to be processed.
+     * @param updatedPlaceList The list of Place objects to be updated.
+     * @param curLatLng        The current location of the user.
+     * @param startIndex       The starting index for the current batch.
+     */
+    @SuppressLint("CheckResult")
+    private void processBatchesSequentially(List<Place> places, int batchSize,
+        List<Place> updatedPlaceList, LatLng curLatLng, int startIndex) {
+        if (startIndex >= places.size() || stopQuery) {
+            return;
+        }
+
+        int endIndex = Math.min(startIndex + batchSize, places.size());
+        List<Place> batch = places.subList(startIndex, endIndex);
+        for (int i = 0; i < batch.size(); i++) {
+            if (i == batch.size() - 1 && batch.get(i).name != "") {
+                processBatchesSequentially(places, batchSize, updatedPlaceList, curLatLng,
+                    endIndex + batchSize);
+                return;
+            }
+            if (batch.get(i).name == "") {
+                if (i == 0) {
+                    break;
+                }
+                processBatchesSequentially(places, batchSize, updatedPlaceList, curLatLng,
+                    endIndex + i);
+                return;
+            }
+        }
+
+        Disposable disposable = processBatch(batch, updatedPlaceList)
+            .subscribe(p -> {
+                if (stopQuery) {
+                    return;
+                }
+                if (!p.isEmpty() && p != updatedPlaceList) {
+                    synchronized (updatedPlaceList) {
+                        updatedPlaceList.clear();
+                        updatedPlaceList.addAll((Collection<? extends Place>) p);
+                    }
+                }
+                updateMapMarkers(new ArrayList<>(updatedPlaceList), curLatLng, false);
+                processBatchesSequentially(places, batchSize, updatedPlaceList, curLatLng, endIndex);
+            }, throwable -> {
+                Timber.e(throwable);
+                showErrorMessage(getString(R.string.error_fetching_nearby_places) + throwable.getLocalizedMessage());
+                setFilterState();
+            });
+
+        compositeDisposable.add(disposable);
+    }
+
+    /**
+     * Processes a batch of places, updating the provided place list with fetched or updated data.
+     * This method handles the asynchronous fetching and updating of places from the repository.
+     *
+     * @param batch     The batch of Place objects to be processed.
+     * @param placeList The list of Place objects to be updated.
+     * @return An Observable emitting the updated list of Place objects.
+     */
+    private Observable<List<?>> processBatch(List<Place> batch, List<Place> placeList) {
+        List<Place> toBeProcessed = new ArrayList<>();
+
+        List<Observable<Place>> placeObservables = new ArrayList<>();
+
+        for (Place place : batch) {
+            Observable<Place> placeObservable = Observable
+                .fromCallable(() -> {
+                    Place fetchedPlace = placesRepository.fetchPlace(place.entityID);
+                    return fetchedPlace != null ? fetchedPlace : place;
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext(placeData -> {
+                    if (placeData.equals(place)) {
+                        toBeProcessed.add(place);
+                    } else {
+                        for (int i = 0; i < placeList.size(); i++) {
+                            Place pl = placeList.get(i);
+                            if (pl.location.equals(place.location)) {
+                                placeList.set(i, placeData);
+                                break;
+                            }
+                        }
+                    }
+                });
+
+            placeObservables.add(placeObservable);
+        }
+
+        return Observable.zip(placeObservables, objects -> toBeProcessed)
+            .flatMap(processedList -> {
+                if (processedList.isEmpty()) {
+                    return Observable.just(placeList);
+                }
+                return Observable.fromCallable(() -> nearbyController.getPlaces(processedList))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .map(places -> {
+                        if (stopQuery) {
+                            return Collections.emptyList();
+                        }
+                        if (places == null || places.isEmpty()) {
+                            return Collections.emptyList();
+                        } else {
+                            List<Place> updatedPlaceList = new ArrayList<>(placeList);
+                            for (Place place : places) {
+                                for (Place foundPlace : placeList) {
+                                    if (place.siteLinks.getWikidataLink()
+                                        .equals(foundPlace.siteLinks.getWikidataLink())) {
+                                        place.location = foundPlace.location;
+                                        place.distance = foundPlace.distance;
+                                        place.setMonument(foundPlace.isMonument());
+                                        int index = updatedPlaceList.indexOf(foundPlace);
+                                        if (index != -1) {
+                                            updatedPlaceList.set(index, place);
+                                            savePlaceToDatabase(place);
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                            return updatedPlaceList;
+                        }
+                    })
+                    .onErrorReturn(throwable -> {
+                        Timber.e(throwable);
+                        showErrorMessage(getString(R.string.error_fetching_nearby_places) + " "
+                            + throwable.getLocalizedMessage());
+                        setFilterState();
+                        return Collections.emptyList();
+                    });
+            });
+    }
+
+    private void savePlaceToDatabase(Place place) {
+        compositeDisposable.add(placesRepository
+            .save(place)
+            .subscribeOn(Schedulers.io())
+            .subscribe());
+    }
+
+    /**
+     * Stops any ongoing queries and clears all disposables.
+     * This method sets the stopQuery flag to true and clears the compositeDisposable
+     * to prevent any further processing.
+     */
+    @Override
+    public void stopQuery() {
+        stopQuery = true;
+        compositeDisposable.clear();
+    }
+
     /**
      * Populates places for your location, should be used for finding nearby places around a
      * location where you are.
-     * @param nearbyPlacesInfo This variable has place list information and distances.
+     *
+     * @param nearbyPlaces This variable has place list information and distances.
      */
-    private void updateMapMarkers(final NearbyController.NearbyPlacesInfo nearbyPlacesInfo, final boolean shouldUpdateSelectedMarker) {
-        presenter.updateMapMarkers(nearbyPlacesInfo, selectedMarker,shouldUpdateSelectedMarker);
+    private void updateMapMarkers(final List<Place> nearbyPlaces, final LatLng curLatLng,
+        final boolean shouldUpdateSelectedMarker) {
+        presenter.updateMapMarkers(nearbyPlaces, curLatLng, shouldUpdateSelectedMarker);
         setFilterState();
     }
 
@@ -1164,34 +1580,17 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     @Override
-    public void addSearchThisAreaButtonAction() {
-        searchThisAreaButton.setOnClickListener(presenter.onSearchThisAreaClicked());
-    }
-
-    @Override
-    public void setSearchThisAreaButtonVisibility(final boolean isVisible) {
-        if (isVisible) {
-            searchThisAreaButton.setVisibility(View.VISIBLE);
-        } else {
-            searchThisAreaButton.setVisibility(View.GONE);
-        }
-    }
-
-    @Override
-    public boolean isSearchThisAreaButtonVisible() {
-        return searchThisAreaButton.getVisibility() == View.VISIBLE;
-    }
-
-    @Override
     public void setRecyclerViewAdapterAllSelected() {
-        if (nearbyFilterSearchRecyclerViewAdapter != null && NearbyController.currentLocation != null) {
+        if (nearbyFilterSearchRecyclerViewAdapter != null
+            && NearbyController.currentLocation != null) {
             nearbyFilterSearchRecyclerViewAdapter.setRecyclerViewAdapterAllSelected();
         }
     }
 
     @Override
     public void setRecyclerViewAdapterItemsGreyedOut() {
-        if (nearbyFilterSearchRecyclerViewAdapter != null && NearbyController.currentLocation != null) {
+        if (nearbyFilterSearchRecyclerViewAdapter != null
+            && NearbyController.currentLocation != null) {
             nearbyFilterSearchRecyclerViewAdapter.setRecyclerViewAdapterItemsGreyedOut();
         }
     }
@@ -1199,27 +1598,15 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void setProgressBarVisibility(final boolean isVisible) {
         if (isVisible) {
-            progressBar.setVisibility(View.VISIBLE);
+            binding.mapProgressBar.setVisibility(View.VISIBLE);
         } else {
-            progressBar.setVisibility(View.GONE);
+            binding.mapProgressBar.setVisibility(View.GONE);
         }
     }
 
-    @Override
     public void setTabItemContributions() {
-        ((MainActivity)getActivity()).viewPager.setCurrentItem(0);
+        ((MainActivity) getActivity()).binding.pager.setCurrentItem(0);
         // TODO
-    }
-
-    @Override
-    public void checkPermissionsAndPerformAction() {
-        Timber.d("Checking permission and perfoming action");
-        PermissionUtils.checkPermissionsAndPerformAction(getActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                () -> locationPermissionGranted(),
-                () -> isPermissionDenied = true,
-                R.string.location_permission_title,
-                R.string.location_permission_rationale_nearby);
     }
 
     /**
@@ -1227,7 +1614,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      */
     @Override
     public void animateFABs() {
-        if (fabPlus.isShown()){
+        if (binding.fabPlus.isShown()) {
             if (isFABsExpanded) {
                 collapseFABs(isFABsExpanded);
             } else {
@@ -1237,24 +1624,32 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     }
 
     private void showFABs() {
-        NearbyFABUtils.addAnchorToBigFABs(fabPlus, bottomSheetDetails.getId());
-        fabPlus.show();
-        NearbyFABUtils.addAnchorToSmallFABs(fabGallery, getView().findViewById(R.id.empty_view).getId());
-        NearbyFABUtils.addAnchorToSmallFABs(fabCamera, getView().findViewById(R.id.empty_view1).getId());
+        NearbyFABUtils.addAnchorToBigFABs(binding.fabPlus,
+            binding.bottomSheetDetails.getRoot().getId());
+        binding.fabPlus.show();
+        NearbyFABUtils.addAnchorToSmallFABs(binding.fabGallery,
+            getView().findViewById(R.id.empty_view).getId());
+        NearbyFABUtils.addAnchorToSmallFABs(binding.fabCamera,
+            getView().findViewById(R.id.empty_view1).getId());
+        NearbyFABUtils.addAnchorToSmallFABs(binding.fabCustomGallery,
+            getView().findViewById(R.id.empty_view2).getId());
     }
 
     /**
      * Expands camera and gallery FABs, turn forward plus FAB
+     *
      * @param isFABsExpanded true if they are already expanded
      */
-    private void expandFABs(final boolean isFABsExpanded){
+    private void expandFABs(final boolean isFABsExpanded) {
         if (!isFABsExpanded) {
             showFABs();
-            fabPlus.startAnimation(rotate_forward);
-            fabCamera.startAnimation(fab_open);
-            fabGallery.startAnimation(fab_open);
-            fabCamera.show();
-            fabGallery.show();
+            binding.fabPlus.startAnimation(rotate_forward);
+            binding.fabCamera.startAnimation(fab_open);
+            binding.fabGallery.startAnimation(fab_open);
+            binding.fabCustomGallery.startAnimation(fab_open);
+            binding.fabCustomGallery.show();
+            binding.fabCamera.show();
+            binding.fabGallery.show();
             this.isFABsExpanded = true;
         }
     }
@@ -1263,25 +1658,30 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
      * Hides all fabs
      */
     private void hideFABs() {
-        NearbyFABUtils.removeAnchorFromFAB(fabPlus);
-        fabPlus.hide();
-        NearbyFABUtils.removeAnchorFromFAB(fabCamera);
-        fabCamera.hide();
-        NearbyFABUtils.removeAnchorFromFAB(fabGallery);
-        fabGallery.hide();
+        NearbyFABUtils.removeAnchorFromFAB(binding.fabPlus);
+        binding.fabPlus.hide();
+        NearbyFABUtils.removeAnchorFromFAB(binding.fabCamera);
+        binding.fabCamera.hide();
+        NearbyFABUtils.removeAnchorFromFAB(binding.fabGallery);
+        binding.fabGallery.hide();
+        NearbyFABUtils.removeAnchorFromFAB(binding.fabCustomGallery);
+        binding.fabCustomGallery.hide();
     }
 
     /**
      * Collapses camera and gallery FABs, turn back plus FAB
+     *
      * @param isFABsExpanded
      */
-    private void collapseFABs(final boolean isFABsExpanded){
+    private void collapseFABs(final boolean isFABsExpanded) {
         if (isFABsExpanded) {
-            fabPlus.startAnimation(rotate_backward);
-            fabCamera.startAnimation(fab_close);
-            fabGallery.startAnimation(fab_close);
-            fabCamera.hide();
-            fabGallery.hide();
+            binding.fabPlus.startAnimation(rotate_backward);
+            binding.fabCamera.startAnimation(fab_close);
+            binding.fabGallery.startAnimation(fab_close);
+            binding.fabCustomGallery.startAnimation(fab_close);
+            binding.fabCustomGallery.hide();
+            binding.fabCamera.hide();
+            binding.fabGallery.hide();
             this.isFABsExpanded = false;
         }
     }
@@ -1290,49 +1690,45 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     public void displayLoginSkippedWarning() {
         if (applicationKvStore.getBoolean("login_skipped", false)) {
             // prompt the user to login
-            new AlertDialog.Builder(getContext())
-                    .setMessage(R.string.login_alert_message)
-                    .setPositiveButton(R.string.login, (dialog, which) -> {
-                        // logout of the app
-                        BaseLogoutListener logoutListener = new BaseLogoutListener();
-                        CommonsApplication app = (CommonsApplication) getActivity().getApplication();
-                        app.clearApplicationData(getContext(), logoutListener);
-                    })
-                    .show();
+            new Builder(getContext())
+                .setMessage(R.string.login_alert_message)
+                .setPositiveButton(R.string.login, (dialog, which) -> {
+                    // logout of the app
+                    BaseLogoutListener logoutListener = new BaseLogoutListener(getActivity());
+                    CommonsApplication app = (CommonsApplication) getActivity().getApplication();
+                    app.clearApplicationData(getContext(), logoutListener);
+                })
+                .show();
         }
     }
 
-    private void handleLocationUpdate(final fr.free.nrw.commons.location.LatLng latLng, final LocationServiceManager.LocationChangeType locationChangeType){
+    private void handleLocationUpdate(final LatLng latLng,
+        final LocationChangeType locationChangeType) {
         lastKnownLocation = latLng;
         NearbyController.currentLocation = lastKnownLocation;
         presenter.updateMapAndList(locationChangeType);
     }
 
-    private boolean isUserBrowsing() {
-        final boolean isUserBrowsing = lastKnownLocation!=null && !presenter.areLocationsClose(getCameraTarget(), lastKnownLocation);
-        return isUserBrowsing;
-    }
-
     @Override
-    public void onLocationChangedSignificantly(final fr.free.nrw.commons.location.LatLng latLng) {
+    public void onLocationChangedSignificantly(final LatLng latLng) {
         Timber.d("Location significantly changed");
-        if (isMapBoxReady && latLng != null &&!isUserBrowsing()) {
-            handleLocationUpdate(latLng,LOCATION_SIGNIFICANTLY_CHANGED);
+        if (latLng != null) {
+            handleLocationUpdate(latLng, LOCATION_SIGNIFICANTLY_CHANGED);
         }
     }
 
     @Override
-    public void onLocationChangedSlightly(final fr.free.nrw.commons.location.LatLng latLng) {
+    public void onLocationChangedSlightly(final LatLng latLng) {
         Timber.d("Location slightly changed");
-        if (isMapBoxReady && latLng != null &&!isUserBrowsing()) {//If the map has never ever shown the current location, lets do it know
-            handleLocationUpdate(latLng,LOCATION_SLIGHTLY_CHANGED);
+        if (latLng != null) {//If the map has never ever shown the current location, lets do it know
+            handleLocationUpdate(latLng, LOCATION_SLIGHTLY_CHANGED);
         }
     }
 
     @Override
-    public void onLocationChangedMedium(final fr.free.nrw.commons.location.LatLng latLng) {
+    public void onLocationChangedMedium(final LatLng latLng) {
         Timber.d("Location changed medium");
-        if (isMapBoxReady && latLng != null && !isUserBrowsing()) {//If the map has never ever shown the current location, lets do it know
+        if (latLng != null) {//If the map has never ever shown the current location, lets do it know
             handleLocationUpdate(latLng, LOCATION_SIGNIFICANTLY_CHANGED);
         }
     }
@@ -1341,174 +1737,98 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         return presenter.backButtonClicked();
     }
 
+    @Override
+    public void onLocationPermissionDenied(String toastMessage) {
+    }
+
+    @Override
+    public void onLocationPermissionGranted() {
+    }
+
     /**
-     * onLogoutComplete is called after shared preferences and data stored in local database are cleared.
+     * onLogoutComplete is called after shared preferences and data stored in local database are
+     * cleared.
      */
-    private class BaseLogoutListener implements CommonsApplication.LogoutListener {
-        @Override
-        public void onLogoutComplete() {
-            Timber.d("Logout complete callback received.");
-            final Intent nearbyIntent = new Intent( getActivity(), LoginActivity.class);
-            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(nearbyIntent);
-            getActivity().finish();
-        }
+
+    @Override
+    public void setFABPlusAction(final OnClickListener onClickListener) {
+        binding.fabPlus.setOnClickListener(onClickListener);
     }
 
     @Override
-    public void setFABPlusAction(final View.OnClickListener onClickListener) {
-        fabPlus.setOnClickListener(onClickListener);
-    }
-
-    @Override
-    public void setFABRecenterAction(final View.OnClickListener onClickListener) {
-        fabRecenter.setOnClickListener(onClickListener);
+    public void setFABRecenterAction(final OnClickListener onClickListener) {
+        binding.fabRecenter.setOnClickListener(onClickListener);
     }
 
     @Override
     public void disableFABRecenter() {
-        fabRecenter.setEnabled(false);
+        binding.fabRecenter.setEnabled(false);
     }
 
     @Override
     public void enableFABRecenter() {
-        fabRecenter.setEnabled(true);
+        binding.fabRecenter.setEnabled(true);
     }
 
     /**
-     * Adds a marker for the user's current position. Adds a
-     * circle which uses the accuracy * 2, to draw a circle
-     * which represents the user's position with an accuracy
-     * of 95%.
+     * Adds a marker for the user's current position. Adds a circle which uses the accuracy * 2, to
+     * draw a circle which represents the user's position with an accuracy of 95%.
+     * <p>
+     * Should be called only on creation of Map, there is other method to update markers location
+     * with users move.
      *
-     * Should be called only on creation of mapboxMap, there
-     * is other method to update markers location with users
-     * move.
-     * @param curLatLng current location
+     * @param currentLatLng current location
      */
     @Override
-    public void addCurrentLocationMarker(final fr.free.nrw.commons.location.LatLng curLatLng) {
-        if (null != curLatLng && !isPermissionDenied && locationManager.isGPSProviderEnabled()) {
+    public void addCurrentLocationMarker(final LatLng currentLatLng) {
+        if (null != currentLatLng && !isPermissionDenied
+            && locationManager.isGPSProviderEnabled()) {
             ExecutorUtils.get().submit(() -> {
-                mapView.post(() -> removeCurrentLocationMarker());
                 Timber.d("Adds current location marker");
-
-                final Icon icon = IconFactory.getInstance(getContext())
-                        .fromResource(R.drawable.current_location_marker);
-
-                final MarkerOptions currentLocationMarkerOptions = new MarkerOptions()
-                        .position(new LatLng(curLatLng.getLatitude(),
-                                curLatLng.getLongitude()));
-                currentLocationMarkerOptions.setIcon(icon); // Set custom icon
-                mapView.post(
-                    () -> currentLocationMarker = mapBox.addMarker(currentLocationMarkerOptions));
-
-                final List<LatLng> circle = UiUtils
-                        .createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
-                                curLatLng.getAccuracy() * 2, 100);
-
-                final PolygonOptions currentLocationPolygonOptions = new PolygonOptions()
-                        .addAll(circle)
-                        .strokeColor(getResources().getColor(R.color.current_marker_stroke))
-                        .fillColor(getResources().getColor(R.color.current_marker_fill));
-                mapView.post(
-                    () -> currentLocationPolygon = mapBox
-                        .addPolygon(currentLocationPolygonOptions));
+                recenterMarkerToPosition(
+                    new GeoPoint(currentLatLng.getLatitude(), currentLatLng.getLongitude()));
             });
         } else {
             Timber.d("not adding current location marker..current location is null");
         }
     }
 
-    private void removeCurrentLocationMarker() {
-        if (currentLocationMarker != null && mapBox!=null) {
-            mapBox.removeMarker(currentLocationMarker);
-            if (currentLocationPolygon != null) {
-                mapBox.removePolygon(currentLocationPolygon);
-            }
-        }
-    }
-
-
-    /**
-     * Makes map camera follow users location with animation
-     * @param curLatLng current location of user
-     */
     @Override
-    public void updateMapToTrackPosition(final fr.free.nrw.commons.location.LatLng curLatLng) {
-        Timber.d("Updates map camera to track user position");
-        final CameraPosition cameraPosition;
-        if(isPermissionDenied){
-            cameraPosition = new CameraPosition.Builder().target
-                (LocationUtils.commonsLatLngToMapBoxLatLng(curLatLng)).build();
-        }else{
-            cameraPosition = new CameraPosition.Builder().target
-                (LocationUtils.commonsLatLngToMapBoxLatLng(curLatLng))
-                .zoom(ZOOM_LEVEL).build();
-        }
-        if(null!=mapBox) {
-            mapBox.setCameraPosition(cameraPosition);
-            mapBox.animateCamera(CameraUpdateFactory
-                    .newCameraPosition(cameraPosition), 1000);
-        }
-    }
-
-    @Override
-    public void updateMapMarkers(final List<NearbyBaseMarker> nearbyBaseMarkers, final Marker selectedMarker) {
-        if(mapBox!=null && isMapBoxReady){
-            mapBox.clear();
-            addNearbyMarkersToMapBoxMap(nearbyBaseMarkers, selectedMarker);
-            presenter.updateMapMarkersToController(nearbyBaseMarkers);
-            // Re-enable mapbox gestures on custom location markers load
-            mapBox.getUiSettings().setAllGesturesEnabled(true);
+    public void updateMapMarkers(final List<BaseMarker> BaseMarkers) {
+        if (binding.map != null) {
+            presenter.updateMapMarkersToController(BaseMarkers);
         }
     }
 
     @Override
     public void filterOutAllMarkers() {
-        hideAllMarkers();
-    }
-
-    /**
-     * Displays all markers
-     */
-    @Override
-    public void displayAllMarkers() {
-        for (final MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
-            updateMarker(markerPlaceGroup.getIsBookmarked(), markerPlaceGroup.getPlace(), NearbyController.currentLocation);
-        }
+        clearAllMarkers();
     }
 
     /**
      * Filters markers based on selectedLabels and chips
-     * @param selectedLabels label list that user clicked
-     * @param displayExists chip for displaying only existing places
-     * @param displayNeedsPhoto chip for displaying only places need photos
-     * @param filterForPlaceState true if we filter places for place state
+     *
+     * @param selectedLabels       label list that user clicked
+     * @param filterForPlaceState  true if we filter places for place state
      * @param filterForAllNoneType true if we filter places with all none button
      */
     @Override
     public void filterMarkersByLabels(final List<Label> selectedLabels,
-        final boolean displayExists,
-        final boolean displayNeedsPhoto,
-        final boolean displayWlm,
         final boolean filterForPlaceState,
         final boolean filterForAllNoneType) {
-
+        final boolean displayExists = false;
+        final boolean displayNeedsPhoto= false;
+        final boolean displayWlm = false;
         // Remove the previous markers before updating them
-        hideAllMarkers();
-
-        filteredMarkers = new ArrayList<>();
-
+        clearAllMarkers();
         for (final MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
             final Place place = markerPlaceGroup.getPlace();
-
             // When label filter is engaged
             // then compare it against place's label
             if (selectedLabels != null && (selectedLabels.size() != 0 || !filterForPlaceState)
                 && (!selectedLabels.contains(place.getLabel())
-                    && !(selectedLabels.contains(Label.BOOKMARKS) && markerPlaceGroup.getIsBookmarked()))) {
+                && !(selectedLabels.contains(Label.BOOKMARKS)
+                && markerPlaceGroup.getIsBookmarked()))) {
                 continue;
             }
 
@@ -1516,195 +1836,290 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 continue;
             }
 
-            boolean shouldUpdateMarker=false;
+            boolean shouldUpdateMarker = false;
 
             if (displayWlm && place.isMonument()) {
-                shouldUpdateMarker=true;
-            }
-            else if (displayExists && displayNeedsPhoto) {
+                shouldUpdateMarker = true;
+            } else if (displayExists && displayNeedsPhoto) {
                 // Exists and needs photo
                 if (place.exists && place.pic.trim().isEmpty()) {
-                    shouldUpdateMarker=true;
+                    shouldUpdateMarker = true;
                 }
             } else if (displayExists && !displayNeedsPhoto) {
                 // Exists and all included needs and doesn't needs photo
                 if (place.exists) {
-                    shouldUpdateMarker=true;
+                    shouldUpdateMarker = true;
                 }
             } else if (!displayExists && displayNeedsPhoto) {
                 // All and only needs photo
                 if (place.pic.trim().isEmpty()) {
-                    shouldUpdateMarker=true;
+                    shouldUpdateMarker = true;
                 }
             } else if (!displayExists && !displayNeedsPhoto) {
                 // all
-                shouldUpdateMarker=true;
+                shouldUpdateMarker = true;
             }
 
-            if(shouldUpdateMarker){
-                updateMarker(markerPlaceGroup.getIsBookmarked(), place, NearbyController.currentLocation);
+            if (shouldUpdateMarker) {
+                updateMarker(markerPlaceGroup.getIsBookmarked(), place,
+                    NearbyController.currentLocation);
             }
         }
-
-        mapBox.clear();
-        mapBox.addMarkers(filteredMarkers);
+        if (selectedLabels == null || selectedLabels.size() == 0) {
+            ArrayList<BaseMarker> markerArrayList = new ArrayList<>();
+            for (final MarkerPlaceGroup markerPlaceGroup : NearbyController.markerLabelList) {
+                BaseMarker nearbyBaseMarker = new BaseMarker();
+                nearbyBaseMarker.setPlace(markerPlaceGroup.getPlace());
+                markerArrayList.add(nearbyBaseMarker);
+            }
+            addMarkersToMap(markerArrayList);
+        }
     }
 
     @Override
-    public fr.free.nrw.commons.location.LatLng getCameraTarget() {
-        return mapBox==null?null:LocationUtils.mapBoxLatLngToCommonsLatLng(mapBox.getCameraPosition().target);
+    public LatLng getCameraTarget() {
+        return binding.map == null ? null : getMapFocus();
     }
 
     /**
      * Sets marker icon according to marker status. Sets title and distance.
-     * @param isBookmarked true if place is bookmarked
+     *
+     * @param isBookmarked  true if place is bookmarked
      * @param place
-     * @param curLatLng current location
+     * @param currentLatLng current location
      */
-    public void updateMarker(final boolean isBookmarked, final Place place, @Nullable final fr.free.nrw.commons.location.LatLng curLatLng) {
-        VectorDrawableCompat vectorDrawable = VectorDrawableCompat.create(
-            getContext().getResources(), getIconFor(place, isBookmarked), getContext().getTheme());
-
-        if(curLatLng != null) {
-            for (NearbyBaseMarker nearbyMarker : allMarkers) {
-                if (nearbyMarker.getMarker().getTitle() != null && nearbyMarker.getMarker().getTitle().equals(place.getName())) {
-
-                    final Bitmap icon = UiUtils.getBitmap(vectorDrawable);
-
-                    final String distance = formatDistanceBetween(curLatLng, place.location);
-                    place.setDistance(distance);
-
-                    final NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
-                    nearbyBaseMarker.title(place.name);
-                    nearbyBaseMarker.position(
-                        new com.mapbox.mapboxsdk.geometry.LatLng(
-                            place.location.getLatitude(),
-                            place.location.getLongitude()));
-                    nearbyBaseMarker.place(place);
-                    nearbyBaseMarker.icon(IconFactory.getInstance(getContext())
-                        .fromBitmap(icon));
-                    nearbyMarker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
-                    filteredMarkers.add(nearbyBaseMarker);
-                }
-            }
-        } else {
-            for (Marker marker : mapBox.getMarkers()) {
-                if (marker.getTitle() != null && marker.getTitle().equals(place.getName())) {
-
-                    final Bitmap icon = UiUtils.getBitmap(vectorDrawable);
-                    marker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
-                }
-            }
-        }
+    public void updateMarker(final boolean isBookmarked, final Place place,
+        @Nullable final LatLng currentLatLng) {
+        addMarkerToMap(place, isBookmarked);
     }
 
+    /**
+     * Highlights nearest place when user clicks on home nearby banner
+     *
+     * @param nearestPlace nearest place, which has to be highlighted
+     */
+    private void highlightNearestPlace(Place nearestPlace) {
+        passInfoToSheet(nearestPlace);
+        hideBottomSheet();
+        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+    }
+
+    /**
+     * Returns drawable of marker icon for given place
+     *
+     * @param place        where marker is to be added
+     * @param isBookmarked true if place is bookmarked
+     * @return returns the drawable of marker according to the place information
+     */
     private @DrawableRes int getIconFor(Place place, Boolean isBookmarked) {
-        if(place.isMonument()){
-            return R.drawable.ic_custom_map_marker_monuments;
+        if (nearestPlace != null) {
+            if (place.name.equals(nearestPlace.name)) {
+                // Highlight nearest place only when user clicks on the home nearby banner
+                highlightNearestPlace(place);
+                return (isBookmarked ?
+                    R.drawable.ic_custom_map_marker_purple_bookmarked :
+                    R.drawable.ic_custom_map_marker_purple);
+            }
         }
-        else if (!place.pic.trim().isEmpty()) {
+        if (place.isMonument()) {
+            return R.drawable.ic_custom_map_marker_monuments;
+        } else if (!place.pic.trim().isEmpty()) {
             return (isBookmarked ?
                 R.drawable.ic_custom_map_marker_green_bookmarked :
                 R.drawable.ic_custom_map_marker_green);
         } else if (!place.exists) { // Means that the topic of the Wikidata item does not exist in the real world anymore, for instance it is a past event, or a place that was destroyed
+            return (R.drawable.ic_clear_black_24dp);
+        }else if (place.name == "") {
             return (isBookmarked ?
-                R.drawable.ic_custom_map_marker_grey_bookmarked :
-                R.drawable.ic_custom_map_marker_grey);
+                    R.drawable.ic_custom_map_marker_grey_bookmarked :
+                    R.drawable.ic_custom_map_marker_grey);
         } else {
             return (isBookmarked ?
-                R.drawable.ic_custom_map_marker_blue_bookmarked :
-                R.drawable.ic_custom_map_marker);
+                R.drawable.ic_custom_map_marker_red_bookmarked :
+                R.drawable.ic_custom_map_marker_red);
         }
     }
 
     /**
-     * Removes all markers except current location marker, an icon has been used
-     * but it is transparent more than grey(as the name of the icon might suggest)
-     * since grey icon may lead the users to believe that it is disabled or prohibited contribution
+     * Adds a marker representing a place to the map with optional bookmark icon.
+     *
+     * @param place        The Place object containing information about the location.
+     * @param isBookMarked A Boolean flag indicating whether the place is bookmarked or not.
      */
-    private void hideAllMarkers() {
-        final VectorDrawableCompat vectorDrawable;
-        vectorDrawable = VectorDrawableCompat.create(
-                getContext().getResources(), R.drawable.ic_custom_greyed_out_marker, getContext().getTheme());
-        final Bitmap icon = UiUtils.getBitmap(vectorDrawable);
-        for (final Marker marker : mapBox.getMarkers()) {
-            if (!marker.equals(currentLocationMarker)) {
-                marker.setIcon(IconFactory.getInstance(getContext()).fromBitmap(icon));
+    private void addMarkerToMap(Place place, Boolean isBookMarked) {
+        Drawable icon = ContextCompat.getDrawable(getContext(), getIconFor(place, isBookMarked));
+        GeoPoint point = new GeoPoint(place.location.getLatitude(), place.location.getLongitude());
+        Marker marker = new Marker(binding.map);
+        marker.setPosition(point);
+        marker.setIcon(icon);
+        if (!Objects.equals(place.name, "")) {
+            marker.setTitle(place.name);
+            marker.setSnippet(
+                containsParentheses(place.getLongDescription())
+                    ? getTextBetweenParentheses(
+                    place.getLongDescription()) : place.getLongDescription());
+        }
+        marker.setTextLabelFontSize(40);
+        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_TOP);
+        marker.setOnMarkerClickListener((marker1, mapView) -> {
+            if (clickedMarker != null) {
+                clickedMarker.closeInfoWindow();
             }
-        }
-        addCurrentLocationMarker(NearbyController.currentLocation);
+            clickedMarker = marker1;
+            binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.VISIBLE);
+            binding.bottomSheetDetails.icon.setVisibility(View.GONE);
+            binding.bottomSheetDetails.wikiDataLl.setVisibility(View.GONE);
+            if (Objects.equals(place.name, "")) {
+                getPlaceData(place.getWikiDataEntityId(), place, marker1, isBookMarked);
+            } else {
+                marker.showInfoWindow();
+                binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.GONE);
+                binding.bottomSheetDetails.icon.setVisibility(View.VISIBLE);
+                binding.bottomSheetDetails.wikiDataLl.setVisibility(View.VISIBLE);
+                passInfoToSheet(place);
+                hideBottomSheet();
+            }
+            bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            return true;
+        });
+        binding.map.getOverlays().add(marker);
     }
 
-    private void addNearbyMarkersToMapBoxMap(final List<NearbyBaseMarker> nearbyBaseMarkers, final Marker selectedMarker) {
-        if (isMapBoxReady && mapBox != null) {
-            allMarkers = new ArrayList<>(nearbyBaseMarkers);
-            mapBox.addMarkers(nearbyBaseMarkers);
-            setMapMarkerActions(selectedMarker);
-            presenter.updateMapMarkersToController(nearbyBaseMarkers);
+    /**
+     * Adds multiple markers representing places to the map and handles item gestures.
+     *
+     * @param nearbyBaseMarkers The list of Place objects containing information about the
+     *                          locations.
+     */
+    private void addMarkersToMap(List<BaseMarker> nearbyBaseMarkers) {
+        for (int i = 0; i < nearbyBaseMarkers.size(); i++) {
+            Drawable icon = ContextCompat.getDrawable(getContext(),
+                getIconFor(nearbyBaseMarkers.get(i).getPlace(), false));
+            GeoPoint point = new GeoPoint(
+                nearbyBaseMarkers.get(i).getPlace().location.getLatitude(),
+                nearbyBaseMarkers.get(i).getPlace().location.getLongitude());
+            Marker marker = new Marker(binding.map);
+            marker.setPosition(point);
+            marker.setIcon(icon);
+            Place place = nearbyBaseMarkers.get(i).getPlace();
+            if (!Objects.equals(place.name, "")) {
+                marker.setTitle(place.name);
+                marker.setSnippet(
+                    containsParentheses(place.getLongDescription())
+                        ? getTextBetweenParentheses(
+                        place.getLongDescription()) : place.getLongDescription());
+            }
+            marker.setTextLabelFontSize(40);
+            marker.setId(String.valueOf(i));
+            marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_TOP);
+            marker.setOnMarkerClickListener((marker1, mapView) -> {
+                marker1.showInfoWindow();
+                if (clickedMarker != null) {
+                    clickedMarker.closeInfoWindow();
+                }
+                clickedMarker = marker1;
+                int index = Integer.parseInt(marker1.getId());
+                Place updatedPlace = nearbyBaseMarkers.get(index).getPlace();
+                binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.VISIBLE);
+                binding.bottomSheetDetails.icon.setVisibility(View.GONE);
+                binding.bottomSheetDetails.wikiDataLl.setVisibility(View.GONE);
+                if (Objects.equals(updatedPlace.name, "")) {
+                    getPlaceData(updatedPlace.getWikiDataEntityId(), updatedPlace, marker1, false);
+                } else {
+                    marker.showInfoWindow();
+                    binding.bottomSheetDetails.dataCircularProgress.setVisibility(View.GONE);
+                    binding.bottomSheetDetails.icon.setVisibility(View.VISIBLE);
+                    binding.bottomSheetDetails.wikiDataLl.setVisibility(View.VISIBLE);
+                    passInfoToSheet(place);
+                    hideBottomSheet();
+                }
+                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                return true;
+            });
+            binding.map.getOverlays().add(marker);
         }
     }
 
-    private void setMapMarkerActions(final Marker selectedMarker) {
-        if (mapBox != null) {
-            mapBox.setOnInfoWindowCloseListener(marker -> {
-                if (marker == selectedMarker) {
-                    presenter.markerUnselected();
-                }
-            });
-
-            mapBox.setOnMarkerClickListener(marker -> {
-                if (marker instanceof NearbyMarker) {
-                    presenter.markerSelected(marker);
-                }
-                return false;
-            });
+    /**
+     * Extracts text between the first occurrence of '(' and its corresponding ')' in the input
+     * string.
+     *
+     * @param input The input string from which to extract text between parentheses.
+     * @return The text between parentheses if found, or {@code null} if no parentheses are found.
+     */
+    public static String getTextBetweenParentheses(String input) {
+        int startIndex = input.indexOf('(');
+        int endIndex = input.indexOf(')', startIndex);
+        if (startIndex != -1 && endIndex != -1) {
+            return input.substring(startIndex + 1, endIndex);
+        } else {
+            return null;
         }
+    }
+
+    /**
+     * Checks if the given text contains '(' or ')'.
+     *
+     * @param input The input text to check.
+     * @return {@code true} if '(' or ')' is found, {@code false} otherwise.
+     */
+    public static boolean containsParentheses(String input) {
+        return input.contains("(") || input.contains(")");
     }
 
     @Override
-    public void recenterMap(fr.free.nrw.commons.location.LatLng curLatLng) {
-        if (isPermissionDenied || curLatLng == null) {
-            recenterToUserLocation = true;
-            checkPermissionsAndPerformAction();
-            if (!isPermissionDenied && !(locationManager.isNetworkProviderEnabled() || locationManager.isGPSProviderEnabled())) {
-                showLocationOffDialog();
+    public void recenterMap(LatLng currentLatLng) {
+        // if user has denied permission twice, then show dialog
+        if (isPermissionDenied) {
+            if (locationPermissionsHelper.checkLocationPermission(getActivity())) {
+                // this will run when user has given permission by opening app's settings
+                isPermissionDenied = false;
+                locationPermissionGranted();
+                return;
+            } else {
+                askForLocationPermission();
             }
+        } else {
+            if (!locationPermissionsHelper.checkLocationPermission(getActivity())) {
+                askForLocationPermission();
+            } else {
+                locationPermissionGranted();
+            }
+        }
+        if (currentLatLng == null) {
+            recenterToUserLocation = true;
             return;
         }
-        addCurrentLocationMarker(curLatLng);
-        final CameraPosition position;
 
-        if (ViewUtil.isPortrait(getActivity())) {
-            position = new CameraPosition.Builder()
-                    .target(isListBottomSheetExpanded() ?
-                            new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_PORTRAIT,
-                                    curLatLng.getLongitude())
-                            : new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
-                    .zoom(isListBottomSheetExpanded() ?
-                            ZOOM_LEVEL
-                            : mapBox.getCameraPosition().zoom) // Same zoom level
-                    .build();
-        } else {
-            position = new CameraPosition.Builder()
-                    .target(isListBottomSheetExpanded() ?
-                            new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR_LANDSCAPE,
-                                    curLatLng.getLongitude())
-                            : new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude(), 0)) // Sets the new camera position
-                    .zoom(isListBottomSheetExpanded() ?
-                            ZOOM_LEVEL
-                            : mapBox.getCameraPosition().zoom) // Same zoom level
-                    .build();
+        /*
+         * FIXME: With the revamp of the location permission helper in the MR
+         *  #5494[1], there is a doubt that the following code is redundant.
+         *  If we could confirm the same, the following code can be removed. If it
+         *  turns out to be necessary, we could replace this with a comment
+         *  clarifying why it is necessary.
+         *
+         * Ref: https://github.com/commons-app/apps-android-commons/pull/5494#discussion_r1560404794
+         */
+        if (lastMapFocus != null) {
+            Location mylocation = new Location("");
+            Location dest_location = new Location("");
+            dest_location.setLatitude(binding.map.getMapCenter().getLatitude());
+            dest_location.setLongitude(binding.map.getMapCenter().getLongitude());
+            mylocation.setLatitude(lastMapFocus.getLatitude());
+            mylocation.setLongitude(lastMapFocus.getLongitude());
+            Float distance = mylocation.distanceTo(dest_location);//in meters
+            if (lastMapFocus != null) {
+                if (isNetworkConnectionEstablished()) {
+                    if (distance > 2000.0) {
+                        searchable = true;
+                    } else {
+                        searchable = false;
+                    }
+                }
+            } else {
+                searchable = false;
+            }
         }
-
-        mapBox.animateCamera(CameraUpdateFactory.newCameraPosition(position), 1000);
-    }
-
-    @Override
-    public void showLocationOffDialog() {
-        // This creates a dialog box that prompts the user to enable location
-        DialogUtil
-            .showAlertDialog(getActivity(), getString(R.string.ask_to_turn_location_on), getString(R.string.nearby_needs_location),
-                getString(R.string.yes), getString(R.string.no),  this::openLocationSettings, null);
     }
 
     @Override
@@ -1713,11 +2128,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         final Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         final PackageManager packageManager = getActivity().getPackageManager();
 
-        if (intent.resolveActivity(packageManager)!= null) {
+        if (intent.resolveActivity(packageManager) != null) {
             startActivity(intent);
-            Toast.makeText(getContext(), R.string.recommend_high_accuracy_mode, Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), R.string.recommend_high_accuracy_mode, Toast.LENGTH_LONG)
+                .show();
         } else {
-            Toast.makeText(getContext(), R.string.cannot_open_location_settings, Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), R.string.cannot_open_location_settings, Toast.LENGTH_LONG)
+                .show();
         }
     }
 
@@ -1731,25 +2148,11 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
 
-    @Override
-    public void displayBottomSheetWithInfo(final Marker marker) {
-        selectedMarker = marker;
-        final NearbyMarker nearbyMarker = (NearbyMarker) marker;
-        final Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
-        passInfoToSheet(place);
-        hideBottomSheet();
-        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-    }
-
-    @Override
-    public void addOnCameraMoveListener() {
-        mapBox.addOnCameraMoveListener(cameraMoveListener);
-    }
-
     /**
-     * If nearby details bottom sheet state is collapsed: show fab plus
-     * If nearby details bottom sheet state is expanded: show fab plus
-     * If nearby details bottom sheet state is hidden: hide all fabs
+     * If nearby details bottom sheet state is collapsed: show fab plus If nearby details bottom
+     * sheet state is expanded: show fab plus If nearby details bottom sheet state is hidden: hide
+     * all fabs
+     *
      * @param bottomSheetState see bottom sheet states
      */
     public void prepareViewsForSheetPosition(final int bottomSheetState) {
@@ -1757,16 +2160,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         switch (bottomSheetState) {
             case (BottomSheetBehavior.STATE_COLLAPSED):
                 collapseFABs(isFABsExpanded);
-                if (!fabPlus.isShown()) {
+                if (!binding.fabPlus.isShown()) {
                     showFABs();
                 }
                 break;
             case (BottomSheetBehavior.STATE_HIDDEN):
-                if (null != mapBox) {
-                    mapBox.deselectMarkers();
-                }
-                transparentView.setClickable(false);
-                transparentView.setAlpha(0);
+                binding.transparentView.setClickable(false);
+                binding.transparentView.setAlpha(0);
                 collapseFABs(isFABsExpanded);
                 hideFABs();
                 break;
@@ -1776,54 +2176,70 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     /**
      * Same bottom sheet carries information for all nearby places, so we need to pass information
      * (title, description, distance and links) to view on nearby marker click
+     *
      * @param place Place of clicked nearby marker
      */
     private void passInfoToSheet(final Place place) {
         selectedPlace = place;
+        dataList = new ArrayList<>();
+        // TODO: Decide button text for fitting in the screen
+        dataList.add(new BottomSheetItem(R.drawable.ic_round_star_border_24px, ""));
+        dataList.add(new BottomSheetItem(R.drawable.ic_directions_black_24dp,
+            getResources().getString(R.string.nearby_directions)));
+        if (place.hasWikidataLink()) {
+            dataList.add(new BottomSheetItem(R.drawable.ic_wikidata_logo_24dp,
+                getResources().getString(R.string.nearby_wikidata)));
+        }
+        dataList.add(new BottomSheetItem(R.drawable.ic_feedback_black_24dp,
+            getResources().getString(R.string.nearby_wikitalk)));
+        if (place.hasWikipediaLink()) {
+            dataList.add(new BottomSheetItem(R.drawable.ic_wikipedia_logo_24dp,
+                getResources().getString(R.string.nearby_wikipedia)));
+        }
+        if (selectedPlace.hasCommonsLink()) {
+            dataList.add(new BottomSheetItem(R.drawable.ic_commons_icon_vector,
+                getResources().getString(R.string.nearby_commons)));
+        }
+        int spanCount = getSpanCount();
+        gridLayoutManager = new GridLayoutManager(this.getContext(), spanCount);
+        binding.bottomSheetDetails.bottomSheetRecyclerView.setLayoutManager(gridLayoutManager);
+        bottomSheetAdapter = new BottomSheetAdapter(this.getContext(), dataList);
+        bottomSheetAdapter.setClickListener(this);
+        binding.bottomSheetDetails.bottomSheetRecyclerView.setAdapter(bottomSheetAdapter);
         updateBookmarkButtonImage(selectedPlace);
-
-        bookmarkButton.setOnClickListener(view -> {
-            final boolean isBookmarked = bookmarkLocationDao.updateBookmarkLocation(selectedPlace);
-            updateBookmarkButtonImage(selectedPlace);
-            updateMarker(isBookmarked, selectedPlace, locationManager.getLastLocation());
-        });
-
-        wikipediaButton.setVisibility(place.hasWikipediaLink()?View.VISIBLE:View.GONE);
-        wikipediaButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), selectedPlace.siteLinks.getWikipediaLink()));
-
-        wikidataButton.setVisibility(place.hasWikidataLink()?View.VISIBLE:View.GONE);
-        wikidataButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), selectedPlace.siteLinks.getWikidataLink()));
-
-        directionsButton.setOnClickListener(view -> Utils.handleGeoCoordinates(getActivity(),
-            selectedPlace.getLocation()));
-
-        commonsButton.setVisibility(selectedPlace.hasCommonsLink()?View.VISIBLE:View.GONE);
-        commonsButton.setOnClickListener(view -> Utils.handleWebUrl(getContext(), selectedPlace.siteLinks.getCommonsLink()));
-
-        icon.setImageResource(selectedPlace.getLabel().getIcon());
-
-        title.setText(selectedPlace.name);
-        distance.setText(selectedPlace.distance);
+        binding.bottomSheetDetails.icon.setImageResource(selectedPlace.getLabel().getIcon());
+        binding.bottomSheetDetails.title.setText(selectedPlace.name);
+        binding.bottomSheetDetails.category.setText(selectedPlace.distance);
         // Remove label since it is double information
         String descriptionText = selectedPlace.getLongDescription()
-            .replace(selectedPlace.getName() + " (","");
-        descriptionText = (descriptionText.equals(selectedPlace.getLongDescription()) ? descriptionText : descriptionText.replaceFirst(".$",""));
+            .replace(selectedPlace.getName() + " (", "");
+        descriptionText = (descriptionText.equals(selectedPlace.getLongDescription())
+            ? descriptionText : descriptionText.replaceFirst(".$", ""));
         // Set the short description after we remove place name from long description
-        description.setText(descriptionText);
+        binding.bottomSheetDetails.description.setText(descriptionText);
 
-        fabCamera.setOnClickListener(view -> {
-            if (fabCamera.isShown()) {
+        binding.fabCamera.setOnClickListener(view -> {
+            if (binding.fabCamera.isShown()) {
                 Timber.d("Camera button tapped. Place: %s", selectedPlace.toString());
                 storeSharedPrefs(selectedPlace);
-                controller.initiateCameraPick(getActivity());
+                controller.initiateCameraPick(getActivity(), inAppCameraLocationPermissionLauncher);
             }
         });
 
-        fabGallery.setOnClickListener(view -> {
-            if (fabGallery.isShown()) {
+        binding.fabGallery.setOnClickListener(view -> {
+            if (binding.fabGallery.isShown()) {
                 Timber.d("Gallery button tapped. Place: %s", selectedPlace.toString());
                 storeSharedPrefs(selectedPlace);
-                controller.initiateGalleryPick(getActivity(), chipWlm.isChecked());
+                controller.initiateGalleryPick(getActivity(),
+                    false);
+            }
+        });
+
+        binding.fabCustomGallery.setOnClickListener(view -> {
+            if (binding.fabCustomGallery.isShown()) {
+                Timber.d("Gallery button tapped. Place: %s", selectedPlace.toString());
+                storeSharedPrefs(selectedPlace);
+                controller.initiateCustomGalleryPickWithPermission(getActivity());
             }
         });
     }
@@ -1842,9 +2258,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         } else {
             bookmarkIcon = R.drawable.ic_round_star_border_24px;
         }
-        if (bookmarkButtonImage != null) {
-            bookmarkButtonImage.setImageResource(bookmarkIcon);
-        }
+        bottomSheetAdapter.updateBookmarkIcon(bookmarkIcon);
     }
 
     @Override
@@ -1861,12 +2275,13 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
 
     @Override
     public void onWikidataEditSuccessful() {
-        if (mapBox != null && presenter != null && locationManager != null) {
+        if (presenter != null && locationManager != null) {
             presenter.updateMapAndList(MAP_UPDATED);
         }
     }
 
     private void showErrorMessage(final String message) {
+        Timber.e(message);
         ViewUtil.showLongToast(getActivity(), message);
     }
 
@@ -1881,7 +2296,7 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
                 locationManager.registerLocationManager();
                 Timber.d("Location service manager added and registered");
             }
-        }catch (final Exception e){
+        } catch (final Exception e) {
             Timber.e(e);
             //Broadcasts are tricky, should be catchedonR
         }
@@ -1890,9 +2305,9 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
     @Override
     public void setUserVisibleHint(final boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        this.isVisibleToUser=isVisibleToUser;
+        this.isVisibleToUser = isVisibleToUser;
         if (isResumed() && isVisibleToUser) {
-            startTheMap();
+            performMapReadyActions();
         } else {
             if (null != bottomSheetListBehavior) {
                 bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
@@ -1904,41 +2319,227 @@ public class NearbyParentFragment extends CommonsDaggerSupportFragment
         }
     }
 
-    private void startTheMap() {
-        mapView.onStart();
-        performMapReadyActions();
+    /**
+     * Clears all markers from the map and resets certain map overlays and gestures. After clearing
+     * markers, it re-adds a scale bar overlay and rotation gesture overlay to the map.
+     */
+    @Override
+    public void clearAllMarkers() {
+        binding.map.getOverlayManager().clear();
+        binding.map.invalidate();
+        GeoPoint geoPoint = mapCenter;
+        if (geoPoint != null) {
+            List<Overlay> overlays = binding.map.getOverlays();
+            ScaleDiskOverlay diskOverlay =
+                new ScaleDiskOverlay(this.getContext(),
+                    geoPoint, 2000, UnitOfMeasure.foot);
+            Paint circlePaint = new Paint();
+            circlePaint.setColor(Color.rgb(128, 128, 128));
+            circlePaint.setStyle(Style.STROKE);
+            circlePaint.setStrokeWidth(2f);
+            diskOverlay.setCirclePaint2(circlePaint);
+            Paint diskPaint = new Paint();
+            diskPaint.setColor(Color.argb(40, 128, 128, 128));
+            diskPaint.setStyle(Style.FILL_AND_STROKE);
+            diskOverlay.setCirclePaint1(diskPaint);
+            diskOverlay.setDisplaySizeMin(900);
+            diskOverlay.setDisplaySizeMax(1700);
+            binding.map.getOverlays().add(diskOverlay);
+            Marker startMarker = new Marker(
+                binding.map);
+            startMarker.setPosition(geoPoint);
+            startMarker.setAnchor(Marker.ANCHOR_CENTER,
+                Marker.ANCHOR_BOTTOM);
+            startMarker.setIcon(
+                ContextCompat.getDrawable(this.getContext(), R.drawable.current_location_marker));
+            startMarker.setTitle("Your Location");
+            startMarker.setTextLabelFontSize(24);
+            binding.map.getOverlays().add(startMarker);
+        }
+        ScaleBarOverlay scaleBarOverlay = new ScaleBarOverlay(binding.map);
+        scaleBarOverlay.setScaleBarOffset(15, 25);
+        Paint barPaint = new Paint();
+        barPaint.setARGB(200, 255, 250, 250);
+        scaleBarOverlay.setBackgroundPaint(barPaint);
+        scaleBarOverlay.enableScaleBar();
+        binding.map.getOverlays().add(scaleBarOverlay);
+        binding.map.getOverlays().add(new MapEventsOverlay(new MapEventsReceiver() {
+            @Override
+            public boolean singleTapConfirmedHelper(GeoPoint p) {
+                if (clickedMarker != null) {
+                    clickedMarker.closeInfoWindow();
+                } else {
+                    Timber.e("CLICKED MARKER IS NULL");
+                }
+                if (isListBottomSheetExpanded()) {
+                    // Back should first hide the bottom sheet if it is expanded
+                    hideBottomSheet();
+                } else if (isDetailsBottomSheetVisible()) {
+                    hideBottomDetailsSheet();
+                }
+                return true;
+            }
+
+            @Override
+            public boolean longPressHelper(GeoPoint p) {
+                return false;
+            }
+        }));
+        binding.map.setMultiTouchControls(true);
     }
 
-    public interface  NearbyParentFragmentInstanceReadyCallback{
+    /**
+     * Recenters the map to the Center and adds a scale disk overlay and a marker at the position.
+     *
+     * @param geoPoint The GeoPoint representing the new center position of the map.
+     */
+    private void recenterMarkerToPosition(GeoPoint geoPoint) {
+        if (geoPoint != null) {
+            binding.map.getController().setCenter(geoPoint);
+            List<Overlay> overlays = binding.map.getOverlays();
+            for (int i = 0; i < overlays.size(); i++) {
+                if (overlays.get(i) instanceof Marker) {
+                    binding.map.getOverlays().remove(i);
+                } else if (overlays.get(i) instanceof ScaleDiskOverlay) {
+                    binding.map.getOverlays().remove(i);
+                }
+            }
+            ScaleDiskOverlay diskOverlay =
+                new ScaleDiskOverlay(this.getContext(),
+                    geoPoint, 2000, UnitOfMeasure.foot);
+            Paint circlePaint = new Paint();
+            circlePaint.setColor(Color.rgb(128, 128, 128));
+            circlePaint.setStyle(Style.STROKE);
+            circlePaint.setStrokeWidth(2f);
+            diskOverlay.setCirclePaint2(circlePaint);
+            Paint diskPaint = new Paint();
+            diskPaint.setColor(Color.argb(40, 128, 128, 128));
+            diskPaint.setStyle(Style.FILL_AND_STROKE);
+            diskOverlay.setCirclePaint1(diskPaint);
+            diskOverlay.setDisplaySizeMin(900);
+            diskOverlay.setDisplaySizeMax(1700);
+            binding.map.getOverlays().add(diskOverlay);
+            Marker startMarker = new Marker(
+                binding.map);
+            startMarker.setPosition(geoPoint);
+            startMarker.setAnchor(Marker.ANCHOR_CENTER,
+                Marker.ANCHOR_BOTTOM);
+            startMarker.setIcon(
+                ContextCompat.getDrawable(this.getContext(), R.drawable.current_location_marker));
+            startMarker.setTitle("Your Location");
+            startMarker.setTextLabelFontSize(24);
+            binding.map.getOverlays().add(startMarker);
+        }
+    }
+
+    private void moveCameraToPosition(GeoPoint geoPoint) {
+        binding.map.getController().animateTo(geoPoint);
+    }
+
+    @Override
+    public void onBottomSheetItemClick(@Nullable View view, int position) {
+        BottomSheetItem item = dataList.get(position);
+        boolean isBookmarked = bookmarkLocationDao.findBookmarkLocation(selectedPlace);
+        switch (item.getImageResourceId()) {
+            case R.drawable.ic_round_star_border_24px:
+                bookmarkLocationDao.updateBookmarkLocation(selectedPlace);
+                updateBookmarkButtonImage(selectedPlace);
+                isBookmarked = bookmarkLocationDao.findBookmarkLocation(selectedPlace);
+                updateMarker(isBookmarked, selectedPlace, locationManager.getLastLocation());
+                binding.map.invalidate();
+                break;
+            case R.drawable.ic_round_star_filled_24px:
+                bookmarkLocationDao.updateBookmarkLocation(selectedPlace);
+                updateBookmarkButtonImage(selectedPlace);
+                isBookmarked = bookmarkLocationDao.findBookmarkLocation(selectedPlace);
+                updateMarker(isBookmarked, selectedPlace, locationManager.getLastLocation());
+                binding.map.invalidate();
+                break;
+            case R.drawable.ic_directions_black_24dp:
+                Utils.handleGeoCoordinates(this.getContext(), selectedPlace.getLocation());
+                break;
+            case R.drawable.ic_wikidata_logo_24dp:
+                Utils.handleWebUrl(this.getContext(), selectedPlace.siteLinks.getWikidataLink());
+                break;
+            case R.drawable.ic_feedback_black_24dp:
+                Intent intent = new Intent(this.getContext(), WikidataFeedback.class);
+                intent.putExtra("lat", selectedPlace.location.getLatitude());
+                intent.putExtra("lng", selectedPlace.location.getLongitude());
+                intent.putExtra("place", selectedPlace.name);
+                intent.putExtra("qid", selectedPlace.getWikiDataEntityId());
+                startActivity(intent);
+                break;
+            case R.drawable.ic_wikipedia_logo_24dp:
+                Utils.handleWebUrl(this.getContext(), selectedPlace.siteLinks.getWikipediaLink());
+                break;
+            case R.drawable.ic_commons_icon_vector:
+                Utils.handleWebUrl(this.getContext(), selectedPlace.siteLinks.getCommonsLink());
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onBottomSheetItemLongClick(@Nullable View view, int position) {
+        BottomSheetItem item = dataList.get(position);
+        String message;
+        switch (item.getImageResourceId()) {
+            case R.drawable.ic_round_star_border_24px:
+                message = getString(R.string.menu_bookmark);
+                break;
+            case R.drawable.ic_round_star_filled_24px:
+                message = getString(R.string.menu_bookmark);
+                break;
+            case R.drawable.ic_directions_black_24dp:
+                message = getString(R.string.nearby_directions);
+                break;
+            case R.drawable.ic_wikidata_logo_24dp:
+                message = getString(R.string.nearby_wikidata);
+                break;
+            case R.drawable.ic_feedback_black_24dp:
+                message = getString(R.string.nearby_wikitalk);
+                break;
+            case R.drawable.ic_wikipedia_logo_24dp:
+                message = getString(R.string.nearby_wikipedia);
+                break;
+            case R.drawable.ic_commons_icon_vector:
+                message = getString(R.string.nearby_commons);
+                break;
+            default:
+                message = "Long click";
+                break;
+        }
+        Toast.makeText(this.getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    public interface NearbyParentFragmentInstanceReadyCallback {
+
         void onReady();
     }
 
-    public void setNearbyParentFragmentInstanceReadyCallback(NearbyParentFragmentInstanceReadyCallback nearbyParentFragmentInstanceReadyCallback) {
+    public void setNearbyParentFragmentInstanceReadyCallback(
+        NearbyParentFragmentInstanceReadyCallback nearbyParentFragmentInstanceReadyCallback) {
         this.nearbyParentFragmentInstanceReadyCallback = nearbyParentFragmentInstanceReadyCallback;
     }
 
     @Override
     public void onConfigurationChanged(@NonNull final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        ViewGroup.LayoutParams rlBottomSheetLayoutParams = rlBottomSheet.getLayoutParams();
-        rlBottomSheetLayoutParams.height = getActivity().getWindowManager().getDefaultDisplay().getHeight() / 16 * 9;
-        rlBottomSheet.setLayoutParams(rlBottomSheetLayoutParams);
+        LayoutParams rlBottomSheetLayoutParams = binding.bottomSheetNearby.bottomSheet.getLayoutParams();
+        rlBottomSheetLayoutParams.height =
+            getActivity().getWindowManager().getDefaultDisplay().getHeight() / 16 * 9;
+        binding.bottomSheetNearby.bottomSheet.setLayoutParams(rlBottomSheetLayoutParams);
+        int spanCount = getSpanCount();
+        if (gridLayoutManager != null) {
+            gridLayoutManager.setSpanCount(spanCount);
         }
+    }
 
-    @OnClick(R.id.tv_learn_more)
     public void onLearnMoreClicked() {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(WLM_URL));
         startActivity(intent);
     }
 
-    @OnClick(R.id.iv_toggle_chips)
-    public void onToggleChipsClicked() {
-        if (llContainerChips.getVisibility() == View.VISIBLE) {
-            llContainerChips.setVisibility(View.GONE);
-        } else {
-            llContainerChips.setVisibility(View.VISIBLE);
-        }
-        ivToggleChips.setRotation(ivToggleChips.getRotation() + 180);
-    }
 }

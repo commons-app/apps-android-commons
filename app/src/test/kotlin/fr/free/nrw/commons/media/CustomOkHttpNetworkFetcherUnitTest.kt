@@ -68,7 +68,7 @@ class CustomOkHttpNetworkFetcherUnitTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         okHttpClient = OkHttpClient()
         fetcher = CustomOkHttpNetworkFetcher(okHttpClient, defaultKvStore)
         whenever(context.imageRequest).thenReturn(imageRequest)

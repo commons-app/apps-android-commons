@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
+* Ciaranchen
 * Liuxinyu970226
 * StarrySky
 * 捍粵者
@@ -55,10 +56,10 @@
   <string name="logging_in_message">請稍候…</string>
   <string name="updating_caption_title">正在更新說明與描述</string>
   <string name="updating_caption_message">請等待⋯</string>
-  <string name="login_success">登入成功！</string>
-  <string name="login_failed">登入失敗！</string>
+  <string name="login_success" fuzzy="true">登入成功！</string>
+  <string name="login_failed" fuzzy="true">登入失敗！</string>
   <string name="upload_failed">找不到檔案。請試試看其它檔案。</string>
-  <string name="authentication_failed">身份驗證失敗，請重新登入</string>
+  <string name="authentication_failed" fuzzy="true">身份驗證失敗，請重新登入</string>
   <string name="uploading_started">開始上傳！</string>
   <string name="uploading_queued">上傳已排定（限制連線模式已啟用）</string>
   <string name="upload_completed_notification_title">已上傳%1$s！</string>
@@ -85,11 +86,11 @@
   <string name="add_caption_toast">請提供此檔案的說明</string>
   <string name="share_description_hint">描述</string>
   <string name="share_caption_hint">說明</string>
-  <string name="login_failed_network">無法登入－網路故障</string>
+  <string name="login_failed_network" fuzzy="true">無法登入－網路故障</string>
   <string name="login_failed_throttled">失敗次數過多，請於幾分鐘後重試。</string>
   <string name="login_failed_blocked">很抱歉，維基共享資源已封鎖該使用者</string>
   <string name="login_failed_2fa_needed">必須提供您的雙重驗證代碼。</string>
-  <string name="login_failed_generic">登入失敗！</string>
+  <string name="login_failed_generic" fuzzy="true">登入失敗！</string>
   <string name="share_upload_button">上載</string>
   <string name="multiple_share_base_title">命名此組圖像</string>
   <string name="provider_modifications">修改</string>
@@ -212,4 +213,6 @@
   <string name="nearby_info_menu_wikidata_article">維基數據項目</string>
   <string name="nearby_info_menu_wikipedia_article">維基百科條目</string>
   <string name="description_info">請盡可能描述媒體內容：拍攝於何處？是顯示什麼事物？有什麼脈絡？請描述對象或人物。透露出一些較不易猜測的訊息，例如是風景的話，可以是一天裡的時間。如果媒體顯示出了一些不尋常的事物，請說明不尋常原因。</string>
+  <string name="learn_how_to_write_a_useful_description">學習如何編寫有用的描述</string>
+  <string name="learn_how_to_write_a_useful_caption">學習如何編寫有用的標題</string>
 </resources>

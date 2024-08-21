@@ -14,10 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
+import android.widget.TextView;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,31 +24,20 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.NavUtils;
 import androidx.core.content.ContextCompat;
-
-import com.google.android.material.textfield.TextInputLayout;
-
+import fr.free.nrw.commons.auth.login.LoginClient;
+import fr.free.nrw.commons.auth.login.LoginResult;
+import fr.free.nrw.commons.databinding.ActivityLoginBinding;
 import fr.free.nrw.commons.utils.ActivityUtils;
 import java.util.Locale;
-import org.wikipedia.AppAdapter;
-import org.wikipedia.dataclient.ServiceFactory;
-import org.wikipedia.dataclient.WikiSite;
-import org.wikipedia.dataclient.mwapi.MwQueryResponse;
-import org.wikipedia.login.LoginClient;
-import org.wikipedia.login.LoginClient.LoginCallback;
-import org.wikipedia.login.LoginResult;
+import fr.free.nrw.commons.auth.login.LoginCallback;
 
+import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.OnEditorAction;
-import butterknife.OnFocusChange;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.kvstore.JsonKvStore;
@@ -58,24 +45,18 @@ import fr.free.nrw.commons.utils.ConfigUtils;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.disposables.CompositeDisposable;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import timber.log.Timber;
 
 import static android.view.KeyEvent.KEYCODE_ENTER;
 import static android.view.View.VISIBLE;
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
-import static fr.free.nrw.commons.di.NetworkingModule.NAMED_COMMONS_WIKI_SITE;
+import static fr.free.nrw.commons.CommonsApplication.loginMessageIntentKey;
+import static fr.free.nrw.commons.CommonsApplication.loginUsernameIntentKey;
 
 public class LoginActivity extends AccountAuthenticatorActivity {
 
     @Inject
     SessionManager sessionManager;
-
-    @Inject
-    @Named(NAMED_COMMONS_WIKI_SITE)
-    WikiSite commonsWikiSite;
 
     @Inject
     @Named("default_preferences")
@@ -87,39 +68,16 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @Inject
     SystemThemeUtils systemThemeUtils;
 
-    @BindView(R.id.login_button)
-    Button loginButton;
-
-    @BindView(R.id.login_username)
-    EditText usernameEdit;
-
-    @BindView(R.id.login_password)
-    EditText passwordEdit;
-
-    @BindView(R.id.login_two_factor)
-    EditText twoFactorEdit;
-
-    @BindView(R.id.error_message_container)
-    ViewGroup errorMessageContainer;
-
-    @BindView(R.id.error_message)
-    TextView errorMessage;
-
-    @BindView(R.id.login_credentials)
-    TextView loginCredentials;
-
-    @BindView(R.id.two_factor_container)
-    TextInputLayout twoFactorContainer;
-
+    private ActivityLoginBinding binding;
     ProgressDialog progressDialog;
     private AppCompatDelegate delegate;
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private Call<MwQueryResponse> loginToken;
     final  String saveProgressDailog="ProgressDailog_state";
     final String saveErrorMessage ="errorMessage";
     final String saveUsername="username";
     final  String savePassword="password";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,31 +91,50 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         getDelegate().installViewFactory();
         getDelegate().onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_login);
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        ButterKnife.bind(this);
+        String message = getIntent().getStringExtra(loginMessageIntentKey);
+        String username = getIntent().getStringExtra(loginUsernameIntentKey);
 
-        usernameEdit.addTextChangedListener(textWatcher);
-        passwordEdit.addTextChangedListener(textWatcher);
-        twoFactorEdit.addTextChangedListener(textWatcher);
+        binding.loginUsername.addTextChangedListener(textWatcher);
+        binding.loginPassword.addTextChangedListener(textWatcher);
+        binding.loginTwoFactor.addTextChangedListener(textWatcher);
+
+        binding.skipLogin.setOnClickListener(view -> skipLogin());
+        binding.forgotPassword.setOnClickListener(view -> forgotPassword());
+        binding.aboutPrivacyPolicy.setOnClickListener(view -> onPrivacyPolicyClicked());
+        binding.signUpButton.setOnClickListener(view -> signUp());
+        binding.loginButton.setOnClickListener(view -> performLogin());
+
+        binding.loginPassword.setOnEditorActionListener(this::onEditorAction);
+        binding.loginPassword.setOnFocusChangeListener(this::onPasswordFocusChanged);
 
         if (ConfigUtils.isBetaFlavour()) {
-            loginCredentials.setText(getString(R.string.login_credential));
+            binding.loginCredentials.setText(getString(R.string.login_credential));
         } else {
-            loginCredentials.setVisibility(View.GONE);
+            binding.loginCredentials.setVisibility(View.GONE);
+        }
+        if (message != null) {
+            showMessage(message, R.color.secondaryDarkColor);
+        }
+        if (username != null) {
+            binding.loginUsername.setText(username);
         }
     }
-
-    @OnFocusChange(R.id.login_password)
+    /**
+     * Hides the keyboard if the user's focus is not on the password (hasFocus is false).
+     * @param view The keyboard
+     * @param hasFocus Set to true if the keyboard has focus
+     */
     void onPasswordFocusChanged(View view, boolean hasFocus) {
         if (!hasFocus) {
             ViewUtil.hideKeyboard(view);
         }
     }
 
-    @OnEditorAction(R.id.login_password)
-    boolean onEditorAction(int actionId, KeyEvent keyEvent) {
-        if (loginButton.isEnabled()) {
+    boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+        if (binding.loginButton.isEnabled()) {
             if (actionId == IME_ACTION_DONE) {
                 performLogin();
                 return true;
@@ -170,8 +147,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
 
-    @OnClick(R.id.skip_login)
-    void skipLogin() {
+    protected void skipLogin() {
         new AlertDialog.Builder(this).setTitle(R.string.skip_login_title)
                 .setMessage(R.string.skip_login_message)
                 .setCancelable(false)
@@ -183,18 +159,15 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 .show();
     }
 
-    @OnClick(R.id.forgot_password)
-    void forgotPassword() {
+    protected void forgotPassword() {
         Utils.handleWebUrl(this, Uri.parse(BuildConfig.FORGOT_PASSWORD_URL));
     }
 
-    @OnClick(R.id.about_privacy_policy)
-    void onPrivacyPolicyClicked() {
+    protected void onPrivacyPolicyClicked() {
         Utils.handleWebUrl(this, Uri.parse(BuildConfig.PRIVACY_POLICY_URL));
     }
 
-    @OnClick(R.id.sign_up_button)
-    void signUp() {
+    protected void signUp() {
         Intent intent = new Intent(this, SignupActivity.class);
         startActivity(intent);
     }
@@ -232,76 +205,65 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        usernameEdit.removeTextChangedListener(textWatcher);
-        passwordEdit.removeTextChangedListener(textWatcher);
-        twoFactorEdit.removeTextChangedListener(textWatcher);
+        binding.loginUsername.removeTextChangedListener(textWatcher);
+        binding.loginPassword.removeTextChangedListener(textWatcher);
+        binding.loginTwoFactor.removeTextChangedListener(textWatcher);
         delegate.onDestroy();
         if(null!=loginClient) {
             loginClient.cancel();
         }
+        binding = null;
         super.onDestroy();
     }
 
-    @OnClick(R.id.login_button)
     public void performLogin() {
         Timber.d("Login to start!");
-        final String username = usernameEdit.getText().toString();
-        final String rawUsername = usernameEdit.getText().toString().trim();
-        final String password = passwordEdit.getText().toString();
-        String twoFactorCode = twoFactorEdit.getText().toString();
+        final String username = Objects.requireNonNull(binding.loginUsername.getText()).toString();
+        final String password = Objects.requireNonNull(binding.loginPassword.getText()).toString();
+        final String twoFactorCode = Objects.requireNonNull(binding.loginTwoFactor.getText()).toString();
 
         showLoggingProgressBar();
-        doLogin(username, password, twoFactorCode);
+        loginClient.doLogin(username, password, twoFactorCode, Locale.getDefault().getLanguage(),
+            new LoginCallback() {
+                @Override
+                public void success(@NonNull LoginResult loginResult) {
+                    runOnUiThread(()->{
+                        Timber.d("Login Success");
+                        hideProgress();
+                        onLoginSuccess(loginResult);
+                    });
+                }
+
+                @Override
+                public void twoFactorPrompt(@NonNull Throwable caught, @Nullable String token) {
+                    runOnUiThread(()->{
+                        Timber.d("Requesting 2FA prompt");
+                        hideProgress();
+                        askUserForTwoFactorAuth();
+                    });
+                }
+
+                @Override
+                public void passwordResetPrompt(@Nullable String token) {
+                    runOnUiThread(()->{
+                        Timber.d("Showing password reset prompt");
+                        hideProgress();
+                        showPasswordResetPrompt();
+                    });
+                }
+
+                @Override
+                public void error(@NonNull Throwable caught) {
+                    runOnUiThread(()->{
+                        Timber.e(caught);
+                        hideProgress();
+                        showMessageAndCancelDialog(caught.getLocalizedMessage());
+                    });
+                }
+            });
     }
 
-    private void doLogin(String username, String password, String twoFactorCode) {
-        progressDialog.show();
-        loginToken = ServiceFactory.get(commonsWikiSite).getLoginToken();
-        loginToken.enqueue(
-                new Callback<MwQueryResponse>() {
-                    @Override
-                    public void onResponse(Call<MwQueryResponse> call,
-                                           Response<MwQueryResponse> response) {
-                        loginClient.login(commonsWikiSite, username, password, null, twoFactorCode,
-                                response.body().query().loginToken(), Locale.getDefault().getLanguage(), new LoginCallback() {
-                                    @Override
-                                    public void success(@NonNull LoginResult result) {
-                                        Timber.d("Login Success");
-                                        onLoginSuccess(result);
-                                    }
 
-                                    @Override
-                                    public void twoFactorPrompt(@NonNull Throwable caught,
-                                                                @Nullable String token) {
-                                        Timber.d("Requesting 2FA prompt");
-                                        hideProgress();
-                                        askUserForTwoFactorAuth();
-                                    }
-
-                                    @Override
-                                    public void passwordResetPrompt(@Nullable String token) {
-                                        Timber.d("Showing password reset prompt");
-                                        hideProgress();
-                                        showPasswordResetPrompt();
-                                    }
-
-                                    @Override
-                                    public void error(@NonNull Throwable caught) {
-                                        Timber.e(caught);
-                                        hideProgress();
-                                        showMessageAndCancelDialog(caught.getLocalizedMessage());
-                                    }
-                                });
-                    }
-
-                    @Override
-                    public void onFailure(Call<MwQueryResponse> call, Throwable t) {
-                        Timber.e(t);
-                        showMessageAndCancelDialog(t.getLocalizedMessage());
-                    }
-                });
-
-    }
 
     private void hideProgress() {
         progressDialog.dismiss();
@@ -332,13 +294,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     private void onLoginSuccess(LoginResult loginResult) {
-        if (!progressDialog.isShowing()) {
-            // no longer attached to activity!
-            return;
-        }
         compositeDisposable.clear();
         sessionManager.setUserLoggedIn(true);
-        AppAdapter.get().updateAccount(loginResult);
+        sessionManager.updateAccount(loginResult);
         progressDialog.dismiss();
         showSuccessAndDismissDialog();
         startMainActivity();
@@ -385,9 +343,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     public void askUserForTwoFactorAuth() {
         progressDialog.dismiss();
-        twoFactorContainer.setVisibility(VISIBLE);
-        twoFactorEdit.setVisibility(VISIBLE);
-        twoFactorEdit.requestFocus();
+        binding.twoFactorContainer.setVisibility(VISIBLE);
+        binding.loginTwoFactor.setVisibility(VISIBLE);
+        binding.loginTwoFactor.requestFocus();
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
         showMessageAndCancelDialog(R.string.login_failed_2fa_needed);
@@ -418,15 +376,15 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     private void showMessage(@StringRes int resId, @ColorRes int colorResId) {
-        errorMessage.setText(getString(resId));
-        errorMessage.setTextColor(ContextCompat.getColor(this, colorResId));
-        errorMessageContainer.setVisibility(VISIBLE);
+        binding.errorMessage.setText(getString(resId));
+        binding.errorMessage.setTextColor(ContextCompat.getColor(this, colorResId));
+        binding.errorMessageContainer.setVisibility(VISIBLE);
     }
 
     private void showMessage(String message, @ColorRes int colorResId) {
-        errorMessage.setText(message);
-        errorMessage.setTextColor(ContextCompat.getColor(this, colorResId));
-        errorMessageContainer.setVisibility(VISIBLE);
+        binding.errorMessage.setText(message);
+        binding.errorMessage.setTextColor(ContextCompat.getColor(this, colorResId));
+        binding.errorMessageContainer.setVisibility(VISIBLE);
     }
 
     private AppCompatDelegate getDelegate() {
@@ -447,9 +405,11 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
         @Override
         public void afterTextChanged(Editable editable) {
-            boolean enabled = usernameEdit.getText().length() != 0 && passwordEdit.getText().length() != 0
-                    && (BuildConfig.DEBUG || twoFactorEdit.getText().length() != 0 || twoFactorEdit.getVisibility() != VISIBLE);
-            loginButton.setEnabled(enabled);
+            boolean enabled = binding.loginUsername.getText().length() != 0 &&
+                binding.loginPassword.getText().length() != 0 &&
+                (BuildConfig.DEBUG || binding.loginTwoFactor.getText().length() != 0 ||
+                    binding.loginTwoFactor.getVisibility() != VISIBLE);
+            binding.loginButton.setEnabled(enabled);
         }
     }
 
@@ -467,22 +427,22 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         } else {
             outState.putBoolean(saveProgressDailog,false);
         }
-        outState.putString(saveErrorMessage,errorMessage.getText().toString()); //Save the errorMessage
+        outState.putString(saveErrorMessage,binding.errorMessage.getText().toString()); //Save the errorMessage
         outState.putString(saveUsername,getUsername()); // Save the username
         outState.putString(savePassword,getPassword()); // Save the password
     }
     private String getUsername() {
-        return usernameEdit.getText().toString();
+        return binding.loginUsername.getText().toString();
     }
     private String getPassword(){
-        return  passwordEdit.getText().toString();
+        return  binding.loginPassword.getText().toString();
   }
 
     @Override
     protected void onRestoreInstanceState(final Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        usernameEdit.setText(savedInstanceState.getString(saveUsername));
-        passwordEdit.setText(savedInstanceState.getString(savePassword));
+        binding.loginUsername.setText(savedInstanceState.getString(saveUsername));
+        binding.loginPassword.setText(savedInstanceState.getString(savePassword));
         if(savedInstanceState.getBoolean(saveProgressDailog)) {
             performLogin();
         }

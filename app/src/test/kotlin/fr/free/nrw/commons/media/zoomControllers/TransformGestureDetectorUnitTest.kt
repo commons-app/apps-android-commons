@@ -28,7 +28,7 @@ class TransformGestureDetectorUnitTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         detector = TransformGestureDetector(MultiPointerGestureDetector())
         detector = TransformGestureDetector.newInstance()
         detector.setListener(listener)

@@ -5,6 +5,7 @@
 * MuratTheTurkish
 * Mushviq Abdulla
 * NMW03
+* Nemoralis
 * Neriman2003
 * Toghrul Rahimli
 * Wertuose
@@ -25,10 +26,10 @@
   <string name="signup">Qeydiyyatdan keç</string>
   <string name="logging_in_title">Giriş edilir</string>
   <string name="logging_in_message">Lütfən gözləyin…</string>
-  <string name="login_success">Daxil oldunuz!</string>
+  <string name="login_success" fuzzy="true">Daxil oldunuz!</string>
   <string name="login_failed">Giriş baş tutmadı!</string>
   <string name="upload_failed">Fayl tapılmadı. Xahiş edirik başqa bir fayl üzərində cəhd edin.</string>
-  <string name="authentication_failed">Doğrulama alınmadı, xahiş edirəm yenidən daxil olun</string>
+  <string name="authentication_failed" fuzzy="true">Doğrulama alınmadı, xahiş edirəm yenidən daxil olun</string>
   <string name="uploading_started">Yükləmə başladı!</string>
   <string name="upload_completed_notification_title">%1$s yükləndi!</string>
   <string name="upload_completed_notification_text">Yüklədiyini izlə</string>
@@ -49,11 +50,11 @@
   <string name="menu_share">Paylaş</string>
   <string name="share_title_hint">Başlıq (Zəruri)</string>
   <string name="share_description_hint">Açıqlama</string>
-  <string name="login_failed_network">Daxil olmaq olmur — şəbəkə xətası</string>
+  <string name="login_failed_network" fuzzy="true">Daxil olmaq olmur — şəbəkə xətası</string>
   <string name="login_failed_throttled">Çox sayda uğursuz daxil olma. Xahiş edirik bir neçə dəqiqə sonra yenidən cəhd edin.</string>
   <string name="login_failed_blocked">Bağışlayın, bu istifadəçi Commons-da bloklanmışdır.</string>
   <string name="login_failed_2fa_needed">İki faktorlu giriş doğrulama kodunu verməlisiniz.</string>
-  <string name="login_failed_generic">Daxil olma uğursuz oldu</string>
+  <string name="login_failed_generic" fuzzy="true">Daxil olma uğursuz oldu</string>
   <string name="share_upload_button">Yüklə</string>
   <string name="multiple_share_base_title">Bu dəsti adlandırın</string>
   <string name="provider_modifications">Bildirişlər</string>
@@ -87,10 +88,14 @@
   <string name="media_detail_discussion">Müzakirə</string>
   <string name="media_detail_author">Müəllif</string>
   <string name="media_detail_license">Lisenziya</string>
+  <string name="nearby_wikidata">Vikidata</string>
   <string name="nearby_wikipedia">Vikipediya</string>
   <string name="send_thank_success_title">Təşəkkür uğurla göndərildi</string>
   <string name="send_thank_failure_message">Təşəkkür göndərilə bilmədi %1$s</string>
   <string name="send_thank_failure_title">Təşəkkür göndərilir: Xəta</string>
   <string name="send_thank_toast">%1$s üçün təşəkkür göndərişi</string>
+  <string name="coordinates_picking_unsuccessful">Şəklin koordinatları yenilənməyib</string>
   <string name="notification_mark_read">Bildiriş oxunmuş olaraq işarələndi</string>
+  <string name="ask_to_turn_location_on_text">Zəhmət olmasa tətbiqin cari məkanınızı göstərmək üçün məkan xidmətlərini aktiv edin</string>
+  <string name="explore_map_needs_location">Yaxınlıqdakı şəkilləri göstərmək üçün məkan icazəsi lazımdır</string>
 </resources>

@@ -27,7 +27,7 @@ class QuizQuestionTest {
 
     @Before
     fun setup() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         quizQuestion = QuizQuestion(
             QUESTION_NUM_SAMPLE_VALUE,
             QUESTION_SAMPLE_VALUE,

@@ -14,9 +14,9 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
-import org.wikipedia.dataclient.mwapi.MwQueryResponse
-import org.wikipedia.dataclient.mwapi.MwQueryResult
-import org.wikipedia.wikidata.Statement_partial
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResult
+import fr.free.nrw.commons.wikidata.model.Statement_partial
 
 class WikidataClientTest {
 
@@ -32,7 +32,7 @@ class WikidataClientTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         val mwQueryResponse = mock(MwQueryResponse::class.java)
         val mwQueryResult = mock(MwQueryResult::class.java)
         `when`(mwQueryResult!!.csrfToken()).thenReturn("test_token")

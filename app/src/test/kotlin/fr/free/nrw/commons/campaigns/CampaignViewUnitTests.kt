@@ -2,10 +2,11 @@ package fr.free.nrw.commons.campaigns
 
 import android.app.Activity
 import android.view.View
-import fr.free.nrw.commons.TestAppAdapter
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.TestCommonsApplication
-import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.campaigns.models.Campaign
+import fr.free.nrw.commons.contributions.MainActivity
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -16,7 +17,6 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.android.controller.ActivityController
 import org.robolectric.annotation.Config
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -35,7 +35,7 @@ class CampaignViewUnitTests {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
 
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
 
         activityController = Robolectric.buildActivity(Activity::class.java)
         activity = Robolectric.buildActivity(MainActivity::class.java).create().get()

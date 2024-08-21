@@ -64,6 +64,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">Поставки</string>
   <string name="intent_share_upload_label">Подигни на Ризницата</string>
+  <string name="upload_in_progress">Подигањето е во тек</string>
   <string name="username">Корисничко име</string>
   <string name="password">Лозинка</string>
   <string name="login_credential">Најавете се на бета-сметката</string>
@@ -77,6 +78,9 @@
   <string name="login_success">Најавата е успешна!</string>
   <string name="login_failed">Најавата не успеа!</string>
   <string name="upload_failed">Не ја пронајдов податотеката. Пробајте со друга.</string>
+  <string name="retry_limit_reached">Го надминавте дозволениот број на обиди! Откажете го подигањето или пробајте повторно</string>
+  <string name="unrestricted_battery_mode">Да ја исклучам оптимизацијата на батеријата?</string>
+  <string name="suggest_unrestricted_mode">Подигањето на повеќе од 3 слики работи посигурно ако е исклучена оптимизацијата на батеријата. Исклучете ја од нагодувањата во прилогот Ризница за непречено искуство. \n\nМожни чекори за исклучување:\n\nЧекор 1: Допрете на копчето „Нагодувања“ подолу.\n\nЧекор 2: Префрлете од „Неоптимизирано“ на „Сите прилози“.\n\nЧекор 3: Пребарајте го „Ризница“ или \"fr.free.nrw.commons\".\n\nЧекор 4: Допрете го и изберете „Не оптимизирај“.\n\nЧекор 5: Допрете на „Готово“.</string>
   <string name="authentication_failed">Заверката не успеа. Најавете се повторно.</string>
   <string name="uploading_started">Подигањето започна</string>
   <string name="uploading_queued">Подигањето е во редица (овозможен режимот на ограничена врска)</string>
@@ -191,6 +195,8 @@
   <string name="read_storage_permission_rationale">Потребна дозвола: Треба да се прочита од надворешен склад. Прилогот без ова нема пристап до вашата галерија.</string>
   <string name="write_storage_permission_rationale">Потребна дозвола: Треба да се запише на надворешен склад. Прилогот без ова нема пристап до вашата камера/галерија.</string>
   <string name="location_permission_title">Се бара дозвола за утврдување на местоположбата</string>
+  <string name="in_app_camera_location_permission_title">Заведувај местоположба за слики направени од прилогот</string>
+  <string name="in_app_camera_location_switch_pref_summary">Овозможете го ова за да се заведува местоположбата на сликите што ги правите од самиот прилог во случај камерата на уредот да не ја заведува</string>
   <string name="ok">ОК</string>
   <string name="warning">Предупредување</string>
   <string name="duplicate_file_name">Пронајдено дуплирано име на податоека</string>
@@ -230,6 +236,7 @@
   <string name="navigation_item_about">За прилогот</string>
   <string name="navigation_item_settings">Нагодувања</string>
   <string name="navigation_item_feedback">Мислења</string>
+  <string name="navigation_item_feedback_github">Мислења преку GitHub</string>
   <string name="navigation_item_logout">Одјава</string>
   <string name="navigation_item_info">Упатства</string>
   <string name="navigation_item_notification">Известувања</string>
@@ -269,7 +276,9 @@
   <string name="copy_wikicode">Прекопирај го викитекстот во меѓускладот</string>
   <string name="wikicode_copied">Викитекстот е прекопиран во меѓускладот</string>
   <string name="nearby_location_not_available">„Во близина“ може да не работи како што треба. Местоположбата е недостапна.</string>
+  <string name="upload_location_access_denied">Пристапот до местоположбата е одбиен. Задајте ја местоположбата рачно за да ја користите оваа функција.</string>
   <string name="location_permission_rationale_nearby">Се бара дозвола за приказ на список на околни места</string>
+  <string name="location_permission_rationale_explore">Се бара дозвола за приказ на список на околни слики</string>
   <string name="nearby_directions">Насоки</string>
   <string name="nearby_wikidata">Википодатоци</string>
   <string name="nearby_wikipedia">Википедија</string>
@@ -336,7 +345,9 @@
   <string name="wrong">Погрешен одговор</string>
   <string name="quiz_screenshot_question">Дали оваа екранска снимка е во ред за подигање?</string>
   <string name="share_app_title">Сподели прилог</string>
-  <string name="error_fetching_nearby_places">Грешка при добивањето на околните места.</string>
+  <string name="rotate">Сврти</string>
+  <string name="error_fetching_nearby_places">Не можам да ги вчитам околните места.</string>
+  <string name="no_pictures_in_this_area">Нема слики за ова подрачје</string>
   <string name="no_nearby_places_around">Не најдов околни места</string>
   <string name="error_fetching_nearby_monuments">Грешка при добивањето на околните споменици.</string>
   <string name="no_recent_searches">Нема скорешни пребарувања</string>
@@ -416,6 +427,16 @@
   <string name="ends_on">Завршува:</string>
   <string name="display_campaigns">Прикажи походи</string>
   <string name="display_campaigns_explanation">Погледајте ги тековните походи</string>
+  <string name="in_app_camera_location_access_explanation">Дозволете му на прилогот да презема местоположба во случај камерата да не го заведува овој податок. Камерите на некои уреди не заведуваат местоположба. Во такви случаи, овозможете му на прилогот да најде и запише местоположба за вашиот придонес да биде покорисен. Ова можете да го смените во секое време во Нагодувањата</string>
+  <string name="option_allow">Дозволи</string>
+  <string name="option_dismiss">Тргни</string>
+  <string name="in_app_camera_needs_location">Вклучете го пристапот до местоположбата во Нагодувања и обидете се пак. \n\nНапомена: Подигањето може да нема местоположба ако прилогот не може да ја добие од уредот во текот на краток интервал.</string>
+  <string name="in_app_camera_location_permission_rationale">Камерата во прилогот бара дозвола за местоположба која ќе ја става во сликите во случај истите да ги нема во EXIF. Дајте му дозвола на прилогот да пристапува до местоположбата и обидете се пак.\n\nНапомена: Подигањето може да нема местоположба ако прилогот не може да ја добие од уредот во текот на краток интервал.</string>
+  <string name="in_app_camera_location_permission_denied">Прилогот нема да заведува местоположба заедно со сликите направени од него поради немање на дозвола за тоа</string>
+  <string name="in_app_camera_location_unavailable">Прилогот нема да заведува местоположба заедно со сликите направени од него бидејќи ГПС е исклучен</string>
+  <string name="open_document_photo_picker_title">Користи избирач на слики од документи</string>
+  <string name="open_document_photo_picker_explanation">Новиот избирач на слики на Андроид ризикува да ги изгуби информациите за местоположба. Овозможете ги ако го користите.</string>
+  <string name="location_loss_warning">Со исклучување на ова ќе го повикате избирачот на слики на Андроид. Ризикува загуба на информации за местоположба.\n\nДопрете на „Прочитајте повеќе“ за повеќе информации.</string>
   <string name="nearby_campaign_dismiss_message">Повеќе нема да ви се прикажуваат походите. Доколку се премислите, таа поставка ќе ја најдете во Нагодувањата.</string>
   <string name="this_function_needs_network_connection">Оваа можност бара да бидете поврзани со мрежата. Проверете ги поставките за поврзување.</string>
   <string name="error_processing_image">Се појави грешка при обработката на сликата. Обидете се повторно!</string>
@@ -529,7 +550,7 @@
   <string name="coordinates_edit_helper_edit_message_else">Не можев да додадам координати.</string>
   <string name="description_edit_helper_edit_message_else">Не можев да додадам описи.</string>
   <string name="caption_edit_helper_edit_message_else">Не можев да додадам толкување.</string>
-  <string name="coordinates_picking_unsuccessful">Не можев да добијам координати.</string>
+  <string name="coordinates_picking_unsuccessful">Координатите на сликата не се подновени</string>
   <string name="descriptions_picking_unsuccessful">Не можам да добијам описи.</string>
   <string name="description_activity_title">Уреди описи и толкувања</string>
   <string name="share_image_via">Сподели ја сликата преку</string>
@@ -549,7 +570,8 @@
   <string name="title_for_child_classes">ЗАВИСНИ КЛАСИ</string>
   <string name="title_for_parent_classes">МАТИЧНИ КЛАСИ</string>
   <string name="upload_nearby_place_found_title">Пронајдено околно место</string>
-  <string name="upload_nearby_place_found_description">Дали ова е слика од местото %1$s?</string>
+  <string name="upload_nearby_place_found_description_plural">Дали ова се слики на %1$s?</string>
+  <string name="upload_nearby_place_found_description_singular">Дали ова е слика на %1$s?</string>
   <string name="title_app_shortcut_bookmark">Обележани</string>
   <string name="title_app_shortcut_setting">Нагодувања</string>
   <string name="remove_bookmark">Отстрането од обележани</string>
@@ -563,7 +585,10 @@
   <string name="cannot_open_location_settings">Не можев да ги отворам поставките за местоположба. Вклучете ја местоположбата рачно.</string>
   <string name="recommend_high_accuracy_mode">За да добиете најдобар исход, изберете го режимот на висока уточнетост.</string>
   <string name="ask_to_turn_location_on">Да ја вклучам местоположбата?</string>
+  <string name="ask_to_turn_location_on_text">Вклучете ги местоположбените услуги за прилогот да може да ви ја прикажува вашата тековна местоположба</string>
   <string name="nearby_needs_location">„Во близина“ бара местоположба за да работи</string>
+  <string name="explore_map_needs_location">Истражувањето на картата бара дозвола за местоположба за да прикажува околни слики</string>
+  <string name="upload_map_location_access">Ќе треба да дозволите пристап до вашата местоположба за таа да може да се задава автоматски.</string>
   <string name="use_location_from_similar_image">Дали ги направивте ови две слики на истото место? Дали сакате да ја искористите географската ширина/должина од десната слика?</string>
   <string name="load_more">Вчитај уште</string>
   <string name="nearby_no_results">Не пронајдов места. Изменете ги критериумите во барањето.</string>
@@ -606,7 +631,6 @@
   <string name="leaderboard_nearby">Во близина</string>
   <string name="leaderboard_used">Користено</string>
   <string name="leaderboard_my_rank_button_text">Мој ранг</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;Подобрете ја картава&lt;/a&gt;</string>
   <string name="limited_connection_enabled">Овозможен режимот на ограничена врска.</string>
   <string name="limited_connection_disabled">Режимот на ограничена врска е оневозоможен. Сега ќе продолжат преземањата во исчекување.</string>
   <string name="limited_connection_mode">Режим на ограничена врска</string>
@@ -652,8 +676,12 @@
   <string name="custom_selector_info_text2">За разлика од сликата лево, таа десно има лого на Ризницата, што значи дека веќе е подигната. \n Допрете и држете за да ја погледате сликата.</string>
   <string name="welcome_custom_selector_ok">Одлично</string>
   <string name="custom_selector_already_uploaded_image_text">Оваа слика е веќе подигната на Ризницата.</string>
+  <string name="custom_selector_over_limit_warning">Од технички причини прилогот не може поуздано да вчита повеќе од %1$d слики наеднап. Имате %2$d повеќе од дозволените %1$d подигања.</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">Тргни</string>
+  <string name="custom_selector_button_limit_text">Највеќе: %1$d</string>
+  <string name="custom_selector_limit_error_desc">Грешка: Надминато е ограничувањето на подигања</string>
   <string name="place_state_wlm">WLM</string>
-  <string name="wlm_upload_info">Оваа слика ќе учествува во натпреварот „Вики ги сака спомениците 2021“</string>
+  <string name="wlm_upload_info">Оваа слика ќе учествува во натпреварот „Вики ги сака спомениците“</string>
   <string name="display_monuments">Прикажи споменици</string>
   <string name="wlm_month_message">Ова е месец на „Вики ги сака спомениците“!</string>
   <string name="learn_more">ДОЗНАЈТЕ ПОВЕЌЕ</string>
@@ -663,7 +691,7 @@
   <string name="read_phone_state_permission_message">Картите со блиски места треба можат да ја прочитаат СОСТОЈБАТА НА ТЕЛЕФОНОТ за да работат правилно</string>
   <string name="contributions_of_user">Придонеси на корисникот: %s</string>
   <string name="achievements_of_user">Достигнувања на корисникот: %s</string>
-  <string name="menu_view_user_page">Преглед на корисничката страница</string>
+  <string name="menu_view_user_page">Погл. кориснички профил</string>
   <string name="edit_depictions">Уреди прикази</string>
   <string name="edit_categories">Уреди категории</string>
   <string name="advanced_options">Напредни можности</string>
@@ -692,6 +720,8 @@
   <string name="your_feedback">Ваше мислење</string>
   <string name="mark_as_not_for_upload">Означи дека не е за подигање</string>
   <string name="unmark_as_not_for_upload">Отстрани ознака дека не е за подигање</string>
+  <string name="marking_as_not_for_upload">Означи дека не е за подигање</string>
+  <string name="unmarking_as_not_for_upload">Отстрани ознака дека не е за подигање</string>
   <string name="show_already_actioned_pictures">Прикажи веќе сработени слики</string>
   <string name="hiding_already_actioned_pictures">Скривање на веќе сработени слики</string>
   <string name="no_more_images_found">Не најдов повеќе слики</string>
@@ -700,6 +730,8 @@
   <string name="image_selected">Избрана слика</string>
   <string name="image_marked_as_not_for_upload">Сликата е означена дека не за подигање</string>
   <string name="menu_view_report">Пријави</string>
+  <string name="menu_view_set_white_background">Постави бела позадина</string>
+  <string name="menu_view_set_black_background">Постави црна позадина</string>
   <string name="report_violation">Пријави прекршок</string>
   <string name="report_user">Пријави го корисников</string>
   <string name="report_content">Пријави ја содржинава</string>
@@ -709,4 +741,43 @@
   <string name="full_screen_mode_features_info">Поминувајте бргу и долго со простот за да ги извршите следниве дејства: \n- Лево/десно: Претходна/следна\n- Нагоре: Избирање\n- Надолу: Означување дека не е за подигање.</string>
   <string name="set_up_avatar_toast_string">За да го поставите вашиот аватар во табелата на предводници, допрете на „Задај како аватар“ во менито со три точки на било која слика.</string>
   <string name="similar_coordinate_description_auto_set">Наведените координати не се прецизни, но лицето што ја подигнало сликава смета дека се доволно блиску.</string>
+  <string name="storage_permissions_denied">Дозволата за складирање е одбиена</string>
+  <string name="unable_to_share_upload_item">Не може да се сподели оваа ставка</string>
+  <string name="permissions_are_required_for_functionality">Се бараат дозволи за функцијата</string>
+  <string name="learn_how_to_write_a_useful_description">Дознајте како да напишете корисен опис</string>
+  <string name="learn_how_to_write_a_useful_caption">Дознајте како да напишете корисно толкување</string>
+  <string name="see_your_achievements">Видете ги вашите достигнувања</string>
+  <string name="edit_image">Уреди слика</string>
+  <string name="edit_location">Уреди местоположба</string>
+  <string name="location_updated">Местоположбата е подновена!</string>
+  <string name="remove_location">Отстрани местоположба</string>
+  <string name="remove_location_warning_title">Отстрани предупредување за местоположба</string>
+  <string name="remove_location_warning_desc">Местоположбата ги прави сликите покорисни и лесни за наоѓање. Дали навистина сакате да ја отстраните местоположбата од сликава?</string>
+  <string name="location_removed">Местоположбата е отстранета!</string>
+  <string name="send_thanks_to_author">Благодари му на авторот</string>
+  <string name="error_sending_thanks">Грешка при испраќањето благодарност до авторот.</string>
+  <string name="invalid_login_message">Најавата ви е истечена. Најавете се повторно.</string>
+  <string name="no_application_available_to_open_gpx_files">Нема достапен прилог за отворање на GPX-податотеки</string>
+  <string name="file_saved_successfully">Податотеката е успешно зачувана</string>
+  <string name="do_you_want_to_open_gpx_file">Дали сакате да отворите GPX-податотека?</string>
+  <string name="do_you_want_to_open_kml_file">Дали сакате да отворите KML-податотека?</string>
+  <string name="failed_to_save_kml_file">Не можев да ја зачувам KML-податотеката.</string>
+  <string name="failed_to_save_gpx_file">Не можев да ја зачувам GPX-податотеката.</string>
+  <string name="saving_kml_file">Зачувување на KML-податотека</string>
+  <string name="saving_gpx_file">Зачувување на GPX-податотека</string>
+  <plurals name="custom_picker_images_selected_title_appendix">
+    <item quantity="one">Избрана е %d слика</item>
+    <item quantity="other">Избрани се %d слики</item>
+  </plurals>
+  <string name="multiple_files_depiction">Запомнете дека сите слики што ги подигате наеднаш се очекуваат да ја прикажуваат истата работа и ги добиваат истите категории и описи. Ако сликите прикажуваат различни нешта и треба да имаат различни категории, извршете неколку одделни подигања.</string>
+  <string name="multiple_files_depiction_header">Напомена за подигање повеќе слики наеднаш</string>
+  <string name="nearby_wikitalk">Пријавете проблем со овој предмет на Википодатоци</string>
+  <string name="please_enter_some_comments">Внесете коментар</string>
+  <string name="talk">Разговор</string>
+  <string name="write_something_about_the_item">Напишете нешто за предметот „%1$s“. Ова ќе биде јавно видливо.</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">„%1$s“ повеќе не постои, нема да може да се фотографира.</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">„%1$s“ се наоѓа на друго место. Подолу укажете го исправното место и, ако е можно, ставете исправна географска ширина и должина.</string>
+  <string name="other_problem_or_information_please_explain_below">Друг проблем или информација (објаснете подолу).</string>
+  <string name="feedback_destination_note">Вашите мислења се објавуваат на следнава викистраница:  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="could_not_load_place_data">Не можев да ги вчитам податоците за место</string>
 </resources>

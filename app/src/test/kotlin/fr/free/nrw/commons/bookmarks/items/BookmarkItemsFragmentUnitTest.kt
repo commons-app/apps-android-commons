@@ -12,10 +12,12 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.whenever
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.category.CategoryItem
+import fr.free.nrw.commons.databinding.FragmentBookmarksItemsBinding
 import fr.free.nrw.commons.profile.ProfileActivity
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import org.junit.Assert
@@ -24,11 +26,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import org.powermock.reflect.Whitebox
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 import java.util.*
 
@@ -45,8 +47,7 @@ class BookmarkItemsFragmentUnitTest {
     private lateinit var recyclerView: RecyclerView
     private lateinit var layoutInflater: LayoutInflater
 
-    @Mock
-    private lateinit var parentLayout: RelativeLayout
+    private lateinit var binding: FragmentBookmarksItemsBinding
 
     @Mock
     private lateinit var savedInstanceState: Bundle
@@ -76,9 +77,9 @@ class BookmarkItemsFragmentUnitTest {
      */
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         context = ApplicationProvider.getApplicationContext()
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
         val activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         fragment = BookmarkItemsFragment.newInstance()
         val fragmentManager: FragmentManager = activity.supportFragmentManager
@@ -89,16 +90,15 @@ class BookmarkItemsFragmentUnitTest {
         layoutInflater = LayoutInflater.from(activity)
         view = layoutInflater
             .inflate(R.layout.fragment_bookmarks_items, null) as View
+        binding = FragmentBookmarksItemsBinding.inflate(layoutInflater)
 
         statusTextView = view.findViewById(R.id.status_message)
         progressBar = view.findViewById(R.id.loading_images_progress_bar)
         recyclerView = view.findViewById(R.id.list_view)
 
-        fragment.statusTextView = statusTextView
-        fragment.progressBar = progressBar
-        fragment.recyclerView = recyclerView
-        fragment.parentLayout = parentLayout
         fragment.controller = controller
+
+        Whitebox.setInternalState(fragment, "binding", binding)
 
     }
 

@@ -12,10 +12,12 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.whenever
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.contributions.ContributionController
+import fr.free.nrw.commons.databinding.FragmentBookmarksLocationsBinding
 import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.fragments.CommonPlaceClickActions
@@ -32,7 +34,6 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 
 @RunWith(RobolectricTestRunner::class)
@@ -53,9 +54,6 @@ class BookmarkLocationFragmentUnitTests {
     lateinit var store: JsonKvStore
 
     @Mock
-    private lateinit var parentLayout: RelativeLayout
-
-    @Mock
     private lateinit var savedInstanceState: Bundle
 
     @Mock
@@ -69,6 +67,8 @@ class BookmarkLocationFragmentUnitTests {
 
     @Mock
     private lateinit var adapter: PlaceAdapter
+
+    private lateinit var binding: FragmentBookmarksLocationsBinding
 
     /**
      * Get Mock bookmark list.
@@ -86,7 +86,8 @@ class BookmarkLocationFragmentUnitTests {
                     "a cat",
                     null,
                     null,
-                    true)
+                    true,
+                    "entityID")
             )
             return list
         }
@@ -98,7 +99,7 @@ class BookmarkLocationFragmentUnitTests {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         context = ApplicationProvider.getApplicationContext()
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
         val activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         fragment = BookmarkLocationsFragment.newInstance()
         val fragmentManager: FragmentManager = activity.supportFragmentManager
@@ -109,20 +110,18 @@ class BookmarkLocationFragmentUnitTests {
         layoutInflater = LayoutInflater.from(activity)
         view = layoutInflater
             .inflate(R.layout.fragment_bookmarks_locations, null) as View
+        binding = FragmentBookmarksLocationsBinding.bind(view)
 
         statusTextView = view.findViewById(R.id.statusMessage)
         progressBar = view.findViewById(R.id.loadingImagesProgressBar)
         recyclerView = view.findViewById(R.id.listView)
         commonPlaceClickActions = CommonPlaceClickActions(store,activity,contributionController)
 
-        fragment.statusTextView = statusTextView
-        fragment.progressBar = progressBar
-        fragment.recyclerView = recyclerView
-        fragment.parentLayout = parentLayout
         fragment.bookmarkLocationDao = bookmarkLocationDao
         fragment.controller = controller
         fragment.commonPlaceClickActions = commonPlaceClickActions
         Whitebox.setInternalState(fragment, "adapter", adapter)
+        Whitebox.setInternalState(fragment, "binding", binding)
 
     }
 

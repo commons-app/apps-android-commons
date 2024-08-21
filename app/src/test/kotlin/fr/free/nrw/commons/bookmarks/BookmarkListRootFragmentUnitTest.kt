@@ -15,11 +15,14 @@ import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.bookmarks.pictures.BookmarkPicturesFragment
 import fr.free.nrw.commons.contributions.MainActivity
+import fr.free.nrw.commons.databinding.FragmentBookmarksBinding
+import fr.free.nrw.commons.databinding.FragmentFeaturedRootBinding
 import fr.free.nrw.commons.explore.ParentViewPager
 import fr.free.nrw.commons.media.MediaDetailPagerFragment
 import org.junit.Assert
@@ -35,7 +38,6 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Field
 
 @RunWith(RobolectricTestRunner::class)
@@ -81,10 +83,12 @@ class BookmarkListRootFragmentUnitTest {
     @Mock
     private lateinit var adapter: BookmarksPagerAdapter
 
+    private lateinit var binding: FragmentFeaturedRootBinding
+
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
-        AppAdapter.set(TestAppAdapter())
+        MockitoAnnotations.openMocks(this)
+        OkHttpConnectionFactory.CLIENT = createTestClient()
         activity = Robolectric.buildActivity(MainActivity::class.java).create().get()
         context = ApplicationProvider.getApplicationContext()
 
@@ -95,14 +99,17 @@ class BookmarkListRootFragmentUnitTest {
         fragmentTransaction.commitNowAllowingStateLoss()
 
         bookmarkFragment = BookmarkFragment()
+        bookmarkFragment.binding = FragmentBookmarksBinding.inflate(LayoutInflater.from(activity))
+
+        binding = FragmentFeaturedRootBinding.inflate(LayoutInflater.from(activity))
 
         Whitebox.setInternalState(fragment, "mChildFragmentManager", childFragmentManager)
         Whitebox.setInternalState(fragment, "mParentFragment", bookmarkFragment)
         Whitebox.setInternalState(fragment, "listFragment", listFragment)
         Whitebox.setInternalState(fragment, "mediaDetails", mediaDetails)
         Whitebox.setInternalState(fragment, "bookmarksPagerAdapter", bookmarksPagerAdapter)
-        Whitebox.setInternalState(bookmarkFragment, "tabLayout", tabLayout)
-        Whitebox.setInternalState(bookmarkFragment, "viewPager", viewPager)
+        Whitebox.setInternalState(bookmarkFragment.binding, "tabLayout", tabLayout)
+        Whitebox.setInternalState(bookmarkFragment.binding, "viewPagerBookmarks", viewPager)
         Whitebox.setInternalState(bookmarkFragment, "adapter", adapter)
 
         whenever(childFragmentManager.beginTransaction()).thenReturn(childFragmentTransaction)

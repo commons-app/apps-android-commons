@@ -2,35 +2,23 @@ package fr.free.nrw.commons.quiz;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import com.facebook.drawee.drawable.ProgressBarDrawable;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
-import com.facebook.drawee.view.SimpleDraweeView;
 
+import fr.free.nrw.commons.databinding.ActivityQuizBinding;
 import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import fr.free.nrw.commons.R;
 
 public class QuizActivity extends AppCompatActivity {
 
-    @BindView(R.id.question_image) SimpleDraweeView imageView;
-    @BindView(R.id.question_text) TextView questionText;
-    @BindView(R.id.question_title) TextView questionTitle;
-    @BindView(R.id.quiz_positive_answer) Button positiveAnswer;
-    @BindView(R.id.quiz_negative_answer) Button negativeAnswer;
-    @BindView(R.id.toolbar) Toolbar toolbar;
-
-    private QuizController quizController = new QuizController();
+    private ActivityQuizBinding binding;
+    private final QuizController quizController = new QuizController();
     private ArrayList<QuizQuestion> quiz = new ArrayList<>();
     private int questionIndex = 0;
     private int score;
@@ -44,15 +32,14 @@ public class QuizActivity extends AppCompatActivity {
     private boolean isNegativeAnswerChecked;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quiz);
+        binding = ActivityQuizBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         quizController.initialize(this);
-        ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
-        positiveAnswer = findViewById(R.id.quiz_positive_answer);
-        negativeAnswer = findViewById(R.id.quiz_negative_answer);
+        setSupportActionBar(binding.toolbar.toolbar);
+        binding.nextButton.setOnClickListener(view -> notKnowAnswer());
         displayQuestion();
     }
 
@@ -65,7 +52,6 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.next_button)
     public void notKnowAnswer(){
         customAlert("Information", quiz.get(questionIndex).getAnswerMessage());
     }
@@ -75,18 +61,18 @@ public class QuizActivity extends AppCompatActivity {
      */
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle(getResources().getString(R.string.warning));
-        alert.setMessage(getResources().getString(R.string.quiz_back_button));
-        alert.setPositiveButton(R.string.continue_message, (dialog, which) -> {
-            Intent i = new Intent(QuizActivity.this, QuizResultActivity.class);
-            dialog.dismiss();
-            i.putExtra("QuizResult",score);
-            startActivity(i);
-        });
-        alert.setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss());
-        AlertDialog dialog = alert.create();
-        dialog.show();
+        new AlertDialog.Builder(this)
+            .setTitle(getResources().getString(R.string.warning))
+            .setMessage(getResources().getString(R.string.quiz_back_button))
+            .setPositiveButton(R.string.continue_message, (dialog, which) -> {
+                final Intent intent = new Intent(this, QuizResultActivity.class);
+                dialog.dismiss();
+                intent.putExtra("QuizResult", score);
+                startActivity(intent);
+            })
+            .setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss())
+            .create()
+            .show();
     }
 
     /**
@@ -94,23 +80,26 @@ public class QuizActivity extends AppCompatActivity {
      */
     public void displayQuestion() {
         quiz = quizController.getQuiz();
-        questionText.setText(quiz.get(questionIndex).getQuestion());
-        questionTitle.setText(getResources().getString(R.string.question)+quiz.get(questionIndex).getQuestionNumber());
-        imageView.setHierarchy(GenericDraweeHierarchyBuilder
+        binding.question.questionText.setText(quiz.get(questionIndex).getQuestion());
+        binding.questionTitle.setText(
+            getResources().getString(R.string.question) +
+                quiz.get(questionIndex).getQuestionNumber()
+        );
+        binding.question.questionImage.setHierarchy(GenericDraweeHierarchyBuilder
                 .newInstance(getResources())
                 .setFailureImage(VectorDrawableCompat.create(getResources(),
                         R.drawable.ic_error_outline_black_24dp, getTheme()))
                 .setProgressBarImage(new ProgressBarDrawable())
                 .build());
 
-        imageView.setImageURI(quiz.get(questionIndex).getUrl());
+        binding.question.questionImage.setImageURI(quiz.get(questionIndex).getUrl());
         isPositiveAnswerChecked = false;
         isNegativeAnswerChecked = false;
-        positiveAnswer.setOnClickListener(view -> {
+        binding.answer.quizPositiveAnswer.setOnClickListener(view -> {
             isPositiveAnswerChecked = true;
             setNextQuestion();
         });
-        negativeAnswer.setOnClickListener(view -> {
+        binding.answer.quizNegativeAnswer.setOnClickListener(view -> {
             isNegativeAnswerChecked = true;
             setNextQuestion();
         });
@@ -122,34 +111,36 @@ public class QuizActivity extends AppCompatActivity {
     public void evaluateScore() {
         if ((quiz.get(questionIndex).isAnswer() && isPositiveAnswerChecked) ||
                 (!quiz.get(questionIndex).isAnswer() && isNegativeAnswerChecked) ){
-            customAlert(getResources().getString(R.string.correct),quiz.get(questionIndex).getAnswerMessage() );
+            customAlert(getResources().getString(R.string.correct),
+                quiz.get(questionIndex).getAnswerMessage());
             score++;
         } else {
-            customAlert(getResources().getString(R.string.wrong), quiz.get(questionIndex).getAnswerMessage());
+            customAlert(getResources().getString(R.string.wrong),
+                quiz.get(questionIndex).getAnswerMessage());
         }
     }
 
     /**
      * to display explanation after each answer, update questionIndex and move to next question
-     * @param title
-     * @param Message
+     * @param title the alert title
+     * @param Message the alert message
      */
-    public void customAlert(String title, String Message) {
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle(title);
-        alert.setMessage(Message);
-        alert.setPositiveButton(R.string.continue_message, (dialog, which) -> {
-            questionIndex++;
-            if (questionIndex == quiz.size()) {
-                Intent i = new Intent(QuizActivity.this, QuizResultActivity.class);
-                dialog.dismiss();
-                i.putExtra("QuizResult",score);
-                startActivity(i);
-            } else {
-                displayQuestion();
-            }
-        });
-        AlertDialog dialog = alert.create();
-        dialog.show();
+    public void customAlert(final String title, final String Message) {
+        new AlertDialog.Builder(this)
+            .setTitle(title)
+            .setMessage(Message)
+            .setPositiveButton(R.string.continue_message, (dialog, which) -> {
+                questionIndex++;
+                if (questionIndex == quiz.size()) {
+                    final Intent intent = new Intent(this, QuizResultActivity.class);
+                    dialog.dismiss();
+                    intent.putExtra("QuizResult", score);
+                    startActivity(intent);
+                } else {
+                    displayQuestion();
+                }
+            })
+            .create()
+            .show();
     }
 }

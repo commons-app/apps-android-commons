@@ -2,7 +2,6 @@ package fr.free.nrw.commons.contributions
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.verifyZeroInteractions
 import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.auth.SessionManager
 import fr.free.nrw.commons.media.MediaClient
@@ -17,6 +16,7 @@ import org.mockito.ArgumentMatchers.anyList
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.MockitoAnnotations
 import java.lang.reflect.Method
 
@@ -114,7 +114,7 @@ class ContributionBoundaryCallbackTest {
         )
         method.isAccessible = true
         method.invoke(contributionBoundaryCallback)
-        verifyZeroInteractions(repository);
+        verifyNoInteractions(repository)
         verify(mediaClient).getMediaListForUser(anyString());
     }
 }

@@ -46,7 +46,7 @@ class NearbyFilterSearchRecyclerViewAdapterUnitTests {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         context = ApplicationProvider.getApplicationContext()
         adapter = NearbyFilterSearchRecyclerViewAdapter(context, ArrayList<Label>(Label.valuesAsList()), recyclerView)
         viewHolder.placeTypeIcon = imageView

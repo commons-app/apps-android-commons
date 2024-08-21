@@ -20,7 +20,7 @@ class PageableParentDepictionsDataSourceTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
     }
 
     @Test

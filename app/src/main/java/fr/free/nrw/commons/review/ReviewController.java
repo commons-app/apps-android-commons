@@ -9,7 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
-import org.wikipedia.dataclient.mwapi.MwQueryPage;
+import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.auth.csrf.InvalidLoginTokenException;
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage;
 
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
@@ -39,6 +41,9 @@ public class ReviewController {
     protected static ArrayList<String> categories;
     @Inject
     ThanksClient thanksClient;
+
+    @Inject
+    SessionManager sessionManager;
     private final DeleteHelper deleteHelper;
     @Nullable
     MwQueryPage.Revision firstRevision; // TODO: maybe we can expand this class to include fileName
@@ -155,9 +160,23 @@ public class ReviewController {
         Observable.defer((Callable<ObservableSource<Boolean>>) () -> thanksClient.thank(firstRevision.getRevisionId()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((result) -> {
-                    displayThanksToast(context,result);
-                }, Timber::e);
+            .subscribe(result -> {
+                displayThanksToast(context, result);
+            }, throwable -> {
+                if (throwable instanceof InvalidLoginTokenException) {
+                    final String username = sessionManager.getUserName();
+                    final CommonsApplication.BaseLogoutListener logoutListener = new CommonsApplication.BaseLogoutListener(
+                        activity,
+                       activity.getString(R.string.invalid_login_message),
+                        username
+                    );
+
+                    CommonsApplication.getInstance().clearApplicationData(
+                       activity, logoutListener);
+                } else {
+                    Timber.e(throwable);
+                }
+            });
     }
 
     @SuppressLint("StringFormatInvalid")
@@ -191,5 +210,11 @@ public class ReviewController {
         void onSuccess();
 
         void onFailure();
+
+        void onTokenException(Exception e);
+
+        void disableButtons();
+
+        void enableButtons();
     }
 }

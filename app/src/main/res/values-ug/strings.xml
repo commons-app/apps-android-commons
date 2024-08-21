@@ -24,10 +24,10 @@
   <string name="signup">خەتلىتىش</string>
   <string name="logging_in_title">تىزىمغا كىرىۋاتىدۇ</string>
   <string name="logging_in_message">سەل كۈتۈڭ…</string>
-  <string name="login_success">تىزىمغا كىرىش مۇۋەپپەقىيەتلىك!</string>
-  <string name="login_failed">تىزىمغا كىرەلمىدى!</string>
+  <string name="login_success" fuzzy="true">تىزىمغا كىرىش مۇۋەپپەقىيەتلىك!</string>
+  <string name="login_failed" fuzzy="true">تىزىمغا كىرەلمىدى!</string>
   <string name="upload_failed">ھۆججەت تېپىلمىدى . سىناپ بېقىڭ ، باشقا ھۆججەتلەر .</string>
-  <string name="authentication_failed">سالاھىيەتنى تەكشۈرەلمىدى، قايتىدىن كىرىڭ</string>
+  <string name="authentication_failed" fuzzy="true">سالاھىيەتنى تەكشۈرەلمىدى، قايتىدىن كىرىڭ</string>
   <string name="uploading_started">يۈكلەش باشلاندى!</string>
   <string name="upload_completed_notification_title">%1$s يۈكلەندى!</string>
   <string name="upload_completed_notification_text">چېكىپ كۆرۈپ بېقىڭ ، سىزنىڭ يۇقىرىغا يوللاش</string>
@@ -49,11 +49,11 @@
   <string name="share_title_hint" fuzzy="true">ماۋزۇ</string>
   <string name="add_caption_toast">بۇ ھۆججەتنىڭ ئىزاھاتىنى تەمىنلەڭ</string>
   <string name="share_description_hint">چۈشەندۈرۈش</string>
-  <string name="login_failed_network">تىزىملىتىش - تور كاشىلىسى</string>
+  <string name="login_failed_network" fuzzy="true">تىزىملىتىش - تور كاشىلىسى</string>
   <string name="login_failed_throttled">مەغلۇپ بولغان قېتىم سانى بەك كۆپ .  نەچچە مىنۇتتىن كېيىن قايتا سىناڭ .</string>
   <string name="login_failed_blocked">كەچۈرۈڭ، بۇ ئابونت ئاللىقاچان ئورتاق بەھرىمەن بولىدىغان بايلىق مەنبەسى دائىرىلىك</string>
   <string name="login_failed_2fa_needed">سىز چوقۇم سىزنىڭ قوش ئامىل تەكشۈرۈش كودىنى تاپشۇرىسىز .</string>
-  <string name="login_failed_generic">تىزىملاش مەغلۇپ بولدى</string>
+  <string name="login_failed_generic" fuzzy="true">تىزىملاش مەغلۇپ بولدى</string>
   <string name="share_upload_button">يۈكلەڭ</string>
   <string name="multiple_share_base_title">نام بېرىش بۇ گۇرۇپپا سۈرەت</string>
   <string name="provider_modifications">ئۇقتۇرۇشلار</string>

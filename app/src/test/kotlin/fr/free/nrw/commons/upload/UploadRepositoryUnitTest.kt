@@ -63,6 +63,9 @@ class UploadRepositoryUnitTest {
     private lateinit var place: Place
 
     @Mock
+    private var location: LatLng? = null
+
+    @Mock
     private lateinit var similarImageInterface: SimilarImageInterface
 
     @Mock
@@ -79,7 +82,7 @@ class UploadRepositoryUnitTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         repository = UploadRepository(
             uploadModel,
             uploadController,
@@ -153,7 +156,7 @@ class UploadRepositoryUnitTest {
     @Test
     fun testContainsYear() {
         assertEquals(
-            repository.containsYear(""), categoriesModel.containsYear("")
+            repository.isSpammyCategory(""), categoriesModel.isSpammyCategory("")
         )
     }
 
@@ -175,18 +178,27 @@ class UploadRepositoryUnitTest {
     @Test
     fun testPreProcessImage() {
         assertEquals(
-            repository.preProcessImage(uploadableFile, place, similarImageInterface),
-            uploadModel.preProcessImage(uploadableFile, place, similarImageInterface)
+            repository.preProcessImage(uploadableFile, place, similarImageInterface, location),
+            uploadModel.preProcessImage(uploadableFile, place, similarImageInterface, location)
         )
     }
 
     @Test
     fun testGetImageQuality() {
         assertEquals(
-            repository.getImageQuality(uploadItem),
-            uploadModel.getImageQuality(uploadItem)
+            repository.getImageQuality(uploadItem, location),
+            uploadModel.getImageQuality(uploadItem, location)
         )
     }
+
+    @Test
+    fun testGetCaptionQuality() {
+        assertEquals(
+            repository.getCaptionQuality(uploadItem),
+            uploadModel.getCaptionQuality(uploadItem)
+        )
+    }
+
 
     @Test
     fun testDeletePicture() {
@@ -214,8 +226,10 @@ class UploadRepositoryUnitTest {
 
     @Test
     fun testSetSelectedExistingDepictions() {
-        assertEquals(repository.setSelectedExistingDepictions(listOf("")),
-            uploadModel.setSelectedExistingDepictions(listOf("")))
+        assertEquals(
+            repository.setSelectedExistingDepictions(listOf("")),
+            uploadModel.setSelectedExistingDepictions(listOf(""))
+        )
     }
 
     @Test
@@ -261,7 +275,7 @@ class UploadRepositoryUnitTest {
             nearbyPlaces.getFromWikidataQuery(
                 LatLng(0.0, 0.0, 0.0f),
                 java.util.Locale.getDefault().language, 0.1,
-                false, null
+                null
             )
         ).thenReturn(listOf(place))
         assertEquals(
@@ -284,7 +298,7 @@ class UploadRepositoryUnitTest {
             nearbyPlaces.getFromWikidataQuery(
                 LatLng(0.0, 0.0, 0.0f),
                 java.util.Locale.getDefault().language, 0.1,
-                false, null
+                null
             )
         ).thenThrow(Exception())
         assertEquals(
@@ -345,19 +359,25 @@ class UploadRepositoryUnitTest {
 
     @Test
     fun testGetSelectedExistingCategories() {
-        assertEquals(repository.selectedExistingCategories,
-            categoriesModel.getSelectedExistingCategories())
+        assertEquals(
+            repository.selectedExistingCategories,
+            categoriesModel.getSelectedExistingCategories()
+        )
     }
 
     @Test
     fun testSetSelectedExistingCategories() {
-        assertEquals(repository.setSelectedExistingCategories(listOf("Test")),
-            categoriesModel.setSelectedExistingCategories(mutableListOf("Test")))
+        assertEquals(
+            repository.setSelectedExistingCategories(listOf("Test")),
+            categoriesModel.setSelectedExistingCategories(mutableListOf("Test"))
+        )
     }
 
     @Test
     fun testGetCategories() {
-        assertEquals(repository.getCategories(listOf("Test")),
-            categoriesModel.getCategoriesByName(mutableListOf("Test")))
+        assertEquals(
+            repository.getCategories(listOf("Test")),
+            categoriesModel.getCategoriesByName(mutableListOf("Test"))
+        )
     }
 }

@@ -39,7 +39,7 @@ class ProfileActivityTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         mockContext = ApplicationProvider.getApplicationContext()
     }
@@ -109,7 +109,7 @@ class ProfileActivityTest {
     }
     @Test
     fun testToolbarNotNull() {
-        val toolbar = activity.findViewById<Toolbar>(R.id.toolbar)
+        val toolbar = activity.binding.toolbarBinding.toolbar
         Assert.assertNotNull(toolbar)
     }
 

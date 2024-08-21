@@ -18,11 +18,14 @@ import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import fr.free.nrw.commons.Media
+import fr.free.nrw.commons.OkHttpConnectionFactory
 import fr.free.nrw.commons.R
-import fr.free.nrw.commons.TestAppAdapter
 import fr.free.nrw.commons.TestCommonsApplication
+import fr.free.nrw.commons.createTestClient
 import fr.free.nrw.commons.category.GridViewAdapter
+import fr.free.nrw.commons.databinding.FragmentBookmarksPicturesBinding
 import fr.free.nrw.commons.media.MediaClient
 import fr.free.nrw.commons.profile.ProfileActivity
 import media
@@ -38,7 +41,6 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
-import org.wikipedia.AppAdapter
 import java.lang.reflect.Method
 
 
@@ -49,9 +51,9 @@ class BookmarkPicturesFragmentUnitTests {
 
     private lateinit var fragment: BookmarkPicturesFragment
 
-    private lateinit var context: Context
+    private lateinit var binding: FragmentBookmarksPicturesBinding
 
-    private lateinit var view: View
+    private lateinit var context: Context
 
     @Mock
     lateinit var statusTextView: TextView
@@ -89,7 +91,7 @@ class BookmarkPicturesFragmentUnitTests {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         context = ApplicationProvider.getApplicationContext()
-        AppAdapter.set(TestAppAdapter())
+        OkHttpConnectionFactory.CLIENT = createTestClient()
         val activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         fragment = BookmarkPicturesFragment.newInstance()
         val fragmentManager: FragmentManager = activity.supportFragmentManager
@@ -97,13 +99,7 @@ class BookmarkPicturesFragmentUnitTests {
         fragmentTransaction.add(fragment, null)
         fragmentTransaction.commit()
 
-        view = LayoutInflater.from(activity)
-            .inflate(R.layout.fragment_bookmarks_pictures, null) as View
-
-        fragment.statusTextView = statusTextView
-        fragment.progressBar = progressBar
-        fragment.gridView = gridView
-        fragment.parentLayout = parentLayout
+        binding = FragmentBookmarksPicturesBinding.inflate(LayoutInflater.from(activity))
 
         val bookmarkDao = BookmarkPicturesDao { client }
 
@@ -116,6 +112,12 @@ class BookmarkPicturesFragmentUnitTests {
             0,
             listOf(media())
         ))
+        Whitebox.setInternalState(fragment, "binding", binding)
+
+        Whitebox.setInternalState(binding, "statusMessage", statusTextView)
+        Whitebox.setInternalState(binding, "loadingImagesProgressBar", progressBar)
+        Whitebox.setInternalState(binding, "bookmarkedPicturesList", gridView)
+        Whitebox.setInternalState(binding, "parentLayout", parentLayout)
     }
 
     @Test
@@ -127,7 +129,7 @@ class BookmarkPicturesFragmentUnitTests {
     @Test
     @Throws(Exception::class)
     fun testOnViewCreated() {
-        fragment.onViewCreated(view, savedInstanceState)
+        fragment.onViewCreated(binding.root, savedInstanceState)
     }
 
     @Test

@@ -28,7 +28,7 @@ class LevelControllerTest {
      */
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         levelController = LevelController()
         levelInfo = LevelController.LevelInfo.from(
             IMAGES_UPLOADED_SAMPLE_VALUE,

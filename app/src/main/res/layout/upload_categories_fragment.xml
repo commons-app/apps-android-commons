@@ -89,6 +89,10 @@
       android:id="@+id/rv_categories"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:scrollbars="vertical"
+      android:fadeScrollbars="false"
+      android:scrollbarThumbVertical="@color/primaryColor"
+      android:scrollbarSize="@dimen/dimen_6"
       android:layout_above="@+id/button_divider"
       android:layout_below="@id/category_search_layout"/>
 

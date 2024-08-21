@@ -5,7 +5,7 @@ apply from: '../gitutils.gradle'
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
 apply from: "$rootDir/jacoco.gradle"
 
 def isRunningOnTravisAndIsNotPRBuild = System.getenv("CI") == "true" && file('../play.p12').exists()
@@ -16,13 +16,17 @@ if (isRunningOnTravisAndIsNotPRBuild) {
 
 dependencies {
 
-    implementation project(':wikimedia-data-client')
     // Utils
     implementation 'in.yuvi:http.fluent:1.3'
     implementation 'com.google.code.gson:gson:2.8.5'
-    implementation ("com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"){
-        force = true //API 19 support
+    implementation ("com.squareup.okhttp3:okhttp:$OKHTTP_VERSION!!"){
+        // Forcing dependency versions using force = true on a first-level dependency has been deprecated.
+        //  Ref: https://docs.gradle.org/7.5/userguide/upgrading_version_5.html#forced_dependencies
+        //force = true //API 19 support
     }
+    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
+    implementation "com.squareup.retrofit2:converter-gson:2.8.1"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.8.1"
     implementation 'com.squareup.okio:okio:2.2.2'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.3'
@@ -45,10 +49,8 @@ dependencies {
     implementation 'com.github.deano2390:MaterialShowcaseView:1.2.0'
     implementation 'com.dinuscxj:circleprogressbar:1.1.1'
     implementation 'com.karumi:dexter:5.0.0'
-    implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
-    kapt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
     implementation "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:$ADAPTER_DELEGATES_VERSION"
     implementation "com.hannesdorfmann:adapterdelegates4-pagination:$ADAPTER_DELEGATES_VERSION"
     implementation "androidx.paging:paging-runtime-ktx:$PAGING_VERSION"
@@ -73,30 +75,33 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
     annotationProcessor "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$KOTLIN_VERSION"
 
     //Mocking
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
-    testImplementation 'org.mockito:mockito-inline:2.13.0'
-    testImplementation 'org.mockito:mockito-core:2.25.1'
-    testImplementation "org.powermock:powermock-module-junit4:2.0.2"
-    testImplementation "org.powermock:powermock-api-mockito2:2.0.2"
+    testImplementation 'org.mockito:mockito-inline:5.2.0'
+    testImplementation 'org.mockito:mockito-core:5.6.0'
+    testImplementation "org.powermock:powermock-module-junit4:2.0.9"
+    testImplementation "org.powermock:powermock-api-mockito2:2.0.9"
 
     // Unit testing
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.robolectric:robolectric:4.6.1'
-    testImplementation 'androidx.test:core:1.4.0'
+    testImplementation 'org.robolectric:robolectric:4.11.1'
+    testImplementation 'androidx.test:core:1.5.0'
+    testImplementation "androidx.test:runner:1.5.2"
+    testImplementation 'androidx.test.ext:junit:1.1.5'
+    testImplementation "androidx.test:rules:1.5.0"
     testImplementation "com.squareup.okhttp3:mockwebserver:$OKHTTP_VERSION"
     testImplementation "com.jraska.livedata:testing-ktx:1.1.2"
-    testImplementation "androidx.arch.core:core-testing:2.1.0"
-    testImplementation "org.junit.jupiter:junit-jupiter-api:5.7.0"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.7.0"
-    testImplementation 'com.facebook.soloader:soloader:0.10.1'
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0"
+    testImplementation "androidx.arch.core:core-testing:2.2.0"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.10.0"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.10.0"
+    testImplementation 'com.facebook.soloader:soloader:0.10.5'
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3"
+    debugImplementation("androidx.fragment:fragment-testing:1.6.2")
+    testImplementation "commons-io:commons-io:2.6"
 
     // Android testing
-    androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0-alpha04'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.4.0'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.5.0-alpha04'
@@ -119,8 +124,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation "androidx.exifinterface:exifinterface:1.3.2"
     implementation "androidx.core:core-ktx:$CORE_KTX_VERSION"
-    implementation "androidx.multidex:multidex:2.0.1"
-    compile 'com.simplecityapps:recyclerview-fastscroll:2.0.1'
+    implementation 'com.simplecityapps:recyclerview-fastscroll:2.0.1'
 
     //swipe_layout
     implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
@@ -131,7 +135,6 @@ dependencies {
     implementation "androidx.room:room-rxjava2:$ROOM_VERSION"
     kapt "androidx.room:room-compiler:$ROOM_VERSION"
     // For Kotlin use kapt instead of annotationProcessor
-    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
     testImplementation "androidx.arch.core:core-testing:2.1.0"
 
     // Pref
@@ -139,10 +142,12 @@ dependencies {
     implementation "androidx.preference:preference:$PREFERENCE_VERSION"
     // Kotlin
     implementation "androidx.preference:preference-ktx:$PREFERENCE_VERSION"
+    //Android Media
+    implementation 'com.github.juanitobananas:AndroidMediaUtil:v1.0-1'
 
     implementation "androidx.multidex:multidex:$MULTIDEX_VERSION"
 
-    def work_version = "2.8.0"
+    def work_version = "2.8.1"
     // Kotlin + coroutines
     implementation "androidx.work:work-runtime-ktx:$work_version"
     implementation("androidx.work:work-runtime:$work_version")
@@ -151,8 +156,21 @@ dependencies {
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    kaptTest "androidx.databinding:databinding-compiler:8.0.2"
+    kaptAndroidTest "androidx.databinding:databinding-compiler:8.0.2"
 
     implementation("io.github.coordinates2country:coordinates2country-android:1.3") {  exclude group: 'com.google.android', module: 'android' }
+
+    //OSMDroid
+    implementation ("org.osmdroid:osmdroid-android:$OSMDROID_VERSION")
+    constraints {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {
+            because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
+        }
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0") {
+            because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
+        }
+    }
 }
 
 task disableAnimations(type: Exec) {
@@ -168,17 +186,17 @@ project.gradle.taskGraph.whenReady {
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
 
     defaultConfig {
         //applicationId 'fr.free.nrw.commons'
 
-        versionCode 1029
-        versionName '4.0.3'
+        versionCode 1040
+        versionName '5.0.2'
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
 
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 33
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments clearPackageData: 'true'
 
@@ -188,17 +206,23 @@ android {
 
         vectorDrawables.useSupportLibrary = true
     }
-
     packagingOptions {
-        exclude 'META-INF/androidx.*'
-        exclude 'META-INF/proguard/androidx-annotations.pro'
+        jniLibs {
+            excludes += ['META-INF/androidx.*']
+        }
+        resources {
+            excludes += ['META-INF/androidx.*', 'META-INF/proguard/androidx-annotations.pro']
+        }
     }
+
 
     testOptions {
         animationsDisabled true
 
-        unitTests.returnDefaultValues = true
-        unitTests.includeAndroidResources = true
+        unitTests {
+            returnDefaultValues = true
+            includeAndroidResources = true
+        }
 
         unitTests.all {
             jvmArgs '-noverify'
@@ -223,13 +247,14 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             testProguardFile 'test-proguard-rules.txt'
+            signingConfig signingConfigs.debug
             if (isRunningOnTravisAndIsNotPRBuild) {
                 signingConfig signingConfigs.release
             }
         }
         debug {
-            minifyEnabled false
             testCoverageEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             testProguardFile 'test-proguard-rules.txt'
             versionNameSuffix "-debug-" + getBranchName()
@@ -284,7 +309,6 @@ android {
             buildConfigField "String", "TEST_USERNAME", "\"" + getTestUserName() + "\""
             buildConfigField "String", "TEST_PASSWORD", "\"" + getTestPassword() + "\""
             buildConfigField "String", "DEPICTS_PROPERTY", "\"P180\""
-
             dimension 'tier'
         }
 
@@ -320,20 +344,17 @@ android {
             buildConfigField "String", "TEST_USERNAME", "\"" + getTestUserName() + "\""
             buildConfigField "String", "TEST_PASSWORD", "\"" + getTestPassword() + "\""
             buildConfigField "String", "DEPICTS_PROPERTY", "\"P245962\""
-
             dimension 'tier'
         }
     }
 
-    lintOptions {
-        disable 'MissingTranslation'
-        disable 'ExtraTranslation'
-        abortOnError false
-    }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 
     buildToolsVersion buildToolsVersion
@@ -341,7 +362,11 @@ android {
     buildFeatures {
         viewBinding true
     }
-
+    namespace 'fr.free.nrw.commons'
+    lint {
+        abortOnError false
+        disable 'MissingTranslation', 'ExtraTranslation'
+    }
 }
 
 String getTestUserName() {
@@ -370,8 +395,4 @@ if (isRunningOnTravisAndIsNotPRBuild) {
             versionNameOverride = "$versionNameOverride.$versionCode"
         }
     }
-}
-
-androidExtensions {
-    experimental = true
 }

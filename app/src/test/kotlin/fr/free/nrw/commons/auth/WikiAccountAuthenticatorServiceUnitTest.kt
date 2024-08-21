@@ -12,7 +12,7 @@ class WikiAccountAuthenticatorServiceUnitTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         service = WikiAccountAuthenticatorService()
         service.onBind(null)
     }

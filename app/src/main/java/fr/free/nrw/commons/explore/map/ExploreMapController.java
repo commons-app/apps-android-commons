@@ -14,13 +14,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.mapbox.mapboxsdk.annotations.IconFactory;
-import com.mapbox.mapboxsdk.annotations.Marker;
+import fr.free.nrw.commons.BaseMarker;
 import fr.free.nrw.commons.MapController;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.nearby.NearbyBaseMarker;
 import fr.free.nrw.commons.nearby.Place;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.utils.LocationUtils;
@@ -33,6 +31,7 @@ import javax.inject.Inject;
 import timber.log.Timber;
 
 public class ExploreMapController extends MapController {
+
     private final ExploreMapCalls exploreMapCalls;
     public LatLng latestSearchLocation; // Can be current and camera target on search this area button is used
     public LatLng currentLocation; // current location of user
@@ -46,13 +45,18 @@ public class ExploreMapController extends MapController {
     }
 
     /**
-     * Takes location as parameter and returns ExplorePlaces info that holds curLatLng, mediaList, explorePlaceList and boundaryCoordinates
-     * @param curLatLng is current geolocation
-     * @param searchLatLng is the location that we want to search around
-     * @param checkingAroundCurrentLocation is a boolean flag. True if we want to check around current location, false if another location
-     * @return explorePlacesInfo info that holds curLatLng, mediaList, explorePlaceList and boundaryCoordinates
+     * Takes location as parameter and returns ExplorePlaces info that holds currentLatLng, mediaList,
+     * explorePlaceList and boundaryCoordinates
+     *
+     * @param currentLatLng                     is current geolocation
+     * @param searchLatLng                  is the location that we want to search around
+     * @param checkingAroundCurrentLocation is a boolean flag. True if we want to check around
+     *                                      current location, false if another location
+     * @return explorePlacesInfo info that holds currentLatLng, mediaList, explorePlaceList and
+     * boundaryCoordinates
      */
-    public ExplorePlacesInfo loadAttractionsFromLocation(LatLng curLatLng, LatLng searchLatLng, boolean checkingAroundCurrentLocation) {
+    public ExplorePlacesInfo loadAttractionsFromLocation(LatLng currentLatLng, LatLng searchLatLng,
+        boolean checkingAroundCurrentLocation) {
 
         if (searchLatLng == null) {
             Timber.d("Loading attractions explore map, but search is null");
@@ -61,7 +65,7 @@ public class ExploreMapController extends MapController {
 
         ExplorePlacesInfo explorePlacesInfo = new ExplorePlacesInfo();
         try {
-            explorePlacesInfo.curLatLng = curLatLng;
+            explorePlacesInfo.currentLatLng = currentLatLng;
             latestSearchLocation = searchLatLng;
 
             List<Media> mediaList = exploreMapCalls.callCommonsQuery(searchLatLng);
@@ -74,18 +78,23 @@ public class ExploreMapController extends MapController {
                 Timber.d("Sorting places by distance...");
                 final Map<Media, Double> distances = new HashMap<>();
                 for (Media media : mediaList) {
-                    distances.put(media, computeDistanceBetween(media.getCoordinates(), searchLatLng));
+                    distances.put(media,
+                        computeDistanceBetween(media.getCoordinates(), searchLatLng));
                     // Find boundaries with basic find max approach
-                    if (media.getCoordinates().getLatitude() < boundaryCoordinates[0].getLatitude()) {
+                    if (media.getCoordinates().getLatitude()
+                        < boundaryCoordinates[0].getLatitude()) {
                         boundaryCoordinates[0] = media.getCoordinates();
                     }
-                    if (media.getCoordinates().getLatitude() > boundaryCoordinates[1].getLatitude()) {
+                    if (media.getCoordinates().getLatitude()
+                        > boundaryCoordinates[1].getLatitude()) {
                         boundaryCoordinates[1] = media.getCoordinates();
                     }
-                    if (media.getCoordinates().getLongitude() < boundaryCoordinates[2].getLongitude()) {
+                    if (media.getCoordinates().getLongitude()
+                        < boundaryCoordinates[2].getLongitude()) {
                         boundaryCoordinates[2] = media.getCoordinates();
                     }
-                    if (media.getCoordinates().getLongitude() > boundaryCoordinates[3].getLongitude()) {
+                    if (media.getCoordinates().getLongitude()
+                        > boundaryCoordinates[3].getLongitude()) {
                         boundaryCoordinates[3] = media.getCoordinates();
                     }
                 }
@@ -96,7 +105,8 @@ public class ExploreMapController extends MapController {
 
             // Sets latestSearchRadius to maximum distance among boundaries and search location
             for (LatLng bound : boundaryCoordinates) {
-                double distance = LocationUtils.commonsLatLngToMapBoxLatLng(bound).distanceTo(LocationUtils.commonsLatLngToMapBoxLatLng(latestSearchLocation));
+                double distance = LocationUtils.calculateDistance(bound.getLatitude(),
+                    bound.getLongitude(), searchLatLng.getLatitude(), searchLatLng.getLongitude());
                 if (distance > latestSearchRadius) {
                     latestSearchRadius = distance;
                 }
@@ -105,7 +115,7 @@ public class ExploreMapController extends MapController {
             // Our radius searched around us, will be used to understand when user search their own location, we will follow them
             if (checkingAroundCurrentLocation) {
                 currentLocationSearchRadius = latestSearchRadius;
-                currentLocation = curLatLng;
+                currentLocation = currentLatLng;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -115,42 +125,42 @@ public class ExploreMapController extends MapController {
 
     /**
      * Loads attractions from location for map view, we need to return places in Place data type
+     *
      * @return baseMarkerOptions list that holds nearby places with their icons
      */
-    public static List<NearbyBaseMarker> loadAttractionsFromLocationToBaseMarkerOptions(
-        LatLng curLatLng,
+    public static List<BaseMarker> loadAttractionsFromLocationToBaseMarkerOptions(
+        LatLng currentLatLng,
         final List<Place> placeList,
         Context context,
         NearbyBaseMarkerThumbCallback callback,
-        Marker selectedMarker,
-        boolean shouldTrackPosition,
         ExplorePlacesInfo explorePlacesInfo) {
-        List<NearbyBaseMarker> baseMarkerOptions = new ArrayList<>();
+        List<BaseMarker> baseMarkerList = new ArrayList<>();
 
         if (placeList == null) {
-            return baseMarkerOptions;
+            return baseMarkerList;
         }
 
         VectorDrawableCompat vectorDrawable = null;
         try {
             vectorDrawable = VectorDrawableCompat.create(
-                context.getResources(), R.drawable.ic_custom_map_marker, context.getTheme());
+                context.getResources(), R.drawable.ic_custom_map_marker_dark, context.getTheme());
 
         } catch (Resources.NotFoundException e) {
             // ignore when running tests.
         }
         if (vectorDrawable != null) {
             for (Place explorePlace : placeList) {
-                final NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
-                String distance = formatDistanceBetween(curLatLng, explorePlace.location);
+                final BaseMarker baseMarker = new BaseMarker();
+                String distance = formatDistanceBetween(currentLatLng, explorePlace.location);
                 explorePlace.setDistance(distance);
 
-                nearbyBaseMarker.title(explorePlace.name.substring(5, explorePlace.name.lastIndexOf(".")));
-                nearbyBaseMarker.position(
-                    new com.mapbox.mapboxsdk.geometry.LatLng(
+                baseMarker.setTitle(
+                    explorePlace.name.substring(5, explorePlace.name.lastIndexOf(".")));
+                baseMarker.setPosition(
+                    new fr.free.nrw.commons.location.LatLng(
                         explorePlace.location.getLatitude(),
-                        explorePlace.location.getLongitude()));
-                nearbyBaseMarker.place(explorePlace);
+                        explorePlace.location.getLongitude(), 0));
+                baseMarker.setPlace(explorePlace);
 
                 Glide.with(context)
                     .asBitmap()
@@ -160,12 +170,15 @@ public class ExploreMapController extends MapController {
                     .into(new CustomTarget<Bitmap>() {
                         // We add icons to markers when bitmaps are ready
                         @Override
-                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                            nearbyBaseMarker.setIcon(IconFactory.getInstance(context).fromBitmap(
-                                ImageUtils.addRedBorder(resource, 6, context)));
-                            baseMarkerOptions.add(nearbyBaseMarker);
-                            if (baseMarkerOptions.size() == placeList.size()) { // if true, we added all markers to list and can trigger thumbs ready callback
-                                callback.onNearbyBaseMarkerThumbsReady(baseMarkerOptions, explorePlacesInfo, selectedMarker, shouldTrackPosition);
+                        public void onResourceReady(@NonNull Bitmap resource,
+                            @Nullable Transition<? super Bitmap> transition) {
+                            baseMarker.setIcon(
+                                ImageUtils.addRedBorder(resource, 6, context));
+                            baseMarkerList.add(baseMarker);
+                            if (baseMarkerList.size()
+                                == placeList.size()) { // if true, we added all markers to list and can trigger thumbs ready callback
+                                callback.onNearbyBaseMarkerThumbsReady(baseMarkerList,
+                                    explorePlacesInfo);
                             }
                         }
 
@@ -177,20 +190,24 @@ public class ExploreMapController extends MapController {
                         @Override
                         public void onLoadFailed(@Nullable final Drawable errorDrawable) {
                             super.onLoadFailed(errorDrawable);
-                            nearbyBaseMarker.setIcon(IconFactory.getInstance(context).fromResource(R.drawable.image_placeholder_96));
-                            baseMarkerOptions.add(nearbyBaseMarker);
-                            if (baseMarkerOptions.size() == placeList.size()) { // if true, we added all markers to list and can trigger thumbs ready callback
-                                callback.onNearbyBaseMarkerThumbsReady(baseMarkerOptions, explorePlacesInfo, selectedMarker, shouldTrackPosition);
+                            baseMarker.fromResource(context, R.drawable.image_placeholder_96);
+                            baseMarkerList.add(baseMarker);
+                            if (baseMarkerList.size()
+                                == placeList.size()) { // if true, we added all markers to list and can trigger thumbs ready callback
+                                callback.onNearbyBaseMarkerThumbsReady(baseMarkerList,
+                                    explorePlacesInfo);
                             }
                         }
                     });
             }
         }
-        return baseMarkerOptions;
+        return baseMarkerList;
     }
 
     interface NearbyBaseMarkerThumbCallback {
+
         // Callback to notify thumbnails of explore markers are added as icons and ready
-        void onNearbyBaseMarkerThumbsReady(List<NearbyBaseMarker> baseMarkers, ExplorePlacesInfo explorePlacesInfo, Marker selectedMarker, boolean shouldTrackPosition);
+        void onNearbyBaseMarkerThumbsReady(List<BaseMarker> baseMarkers,
+            ExplorePlacesInfo explorePlacesInfo);
     }
 }

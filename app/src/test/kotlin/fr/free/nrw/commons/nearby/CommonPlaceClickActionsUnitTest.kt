@@ -39,7 +39,7 @@ class CommonPlaceClickActionsUnitTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         val activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         commonPlaceClickActions = CommonPlaceClickActions(store, activity, contributionController)
     }
@@ -55,6 +55,11 @@ class CommonPlaceClickActionsUnitTest {
         Assert.assertNotNull(commonPlaceClickActions.onGalleryClicked())
         Assert.assertNotNull(commonPlaceClickActions.onOverflowClicked())
         Assert.assertNotNull(commonPlaceClickActions.onDirectionsClicked())
+        Assert.assertNotNull(commonPlaceClickActions.onCameraLongPressed())
+        Assert.assertNotNull(commonPlaceClickActions.onGalleryLongPressed())
+        Assert.assertNotNull(commonPlaceClickActions.onBookmarkLongPressed())
+        Assert.assertNotNull(commonPlaceClickActions.onDirectionsLongPressed())
+        Assert.assertNotNull(commonPlaceClickActions.onOverflowLongPressed())
     }
 
     @Test

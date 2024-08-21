@@ -5,6 +5,7 @@ import androidx.test.core.app.ApplicationProvider
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.eq
+import fr.free.nrw.commons.BaseMarker
 import fr.free.nrw.commons.TestCommonsApplication
 import fr.free.nrw.commons.location.LatLng
 import fr.free.nrw.commons.nearby.NearbyController.loadAttractionsFromLocationToBaseMarkerOptions
@@ -35,6 +36,12 @@ class NearbyControllerTest {
     private lateinit var nearbyPlaces: NearbyPlaces
 
     @Mock
+    private lateinit var screenTopRight: LatLng
+
+    @Mock
+    private lateinit var screenBottomLeft: LatLng
+
+    @Mock
     private lateinit var searchLatLong: LatLng
 
     @Mock
@@ -48,48 +55,55 @@ class NearbyControllerTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         nearbyController = NearbyController(nearbyPlaces)
         context = ApplicationProvider.getApplicationContext()
     }
 
     @Test
     fun testLoadAttractionsForLocationTest() {
-        `when`(nearbyPlaces.radiusExpander(any(), any(), any(), any(), any()))
+        `when`(nearbyPlaces.radiusExpander(any(), any(), any(), any()))
             .thenReturn(Collections.emptyList())
         nearbyController.loadAttractionsFromLocation(
-            searchLatLong,
             currentLatLng,
-            false,
+            searchLatLong,
             false,
             true,
             customQuery
         )
+        nearbyController.loadAttractionsFromLocation(
+            currentLatLng,
+            screenTopRight,
+            screenBottomLeft,
+            searchLatLong,
+            false,
+            true,
+            false,
+            customQuery
+        )
         Mockito.verify(nearbyPlaces).radiusExpander(
-            eq(currentLatLng),
+            eq(searchLatLong),
             any(String::class.java),
             eq(false),
-            eq(true),
             eq(customQuery)
         )
     }
 
     @Test
     fun testLoadAttractionsForLocationTestNoQuery() {
-        `when`(nearbyPlaces.radiusExpander(any(), any(), any(), any(), anyOrNull()))
+        `when`(nearbyPlaces.radiusExpander(any(), any(), any(), anyOrNull()))
             .thenReturn(Collections.emptyList())
         nearbyController.loadAttractionsFromLocation(
-            searchLatLong,
             currentLatLng,
+            searchLatLong,
             false,
-            false,
-            true
+            true,
+            null
         )
         Mockito.verify(nearbyPlaces).radiusExpander(
-            eq(currentLatLng),
+            eq(searchLatLong),
             any(String::class.java),
             eq(false),
-            eq(true),
             eq(null)
         )
     }
@@ -101,8 +115,7 @@ class NearbyControllerTest {
                 currentLatLng,
                 null,
                 false,
-                false,
-                false,
+                true,
                 customQuery
             ), null
         )
@@ -119,7 +132,8 @@ class NearbyControllerTest {
             "placeCategory",
             Sitelinks.Builder().build(),
             "picName",
-            false
+            false,
+            "entityID"
         )
         val place2 = Place(
             "en",
@@ -130,12 +144,13 @@ class NearbyControllerTest {
             "placeCategory",
             Sitelinks.Builder().build(),
             "picName",
-            false
+            false,
+            "entityID"
         )
         `when`(
             nearbyPlaces.radiusExpander(
                 searchLatLong, Locale.getDefault().language, false,
-                false, customQuery
+                customQuery
             )
         ).thenReturn(mutableListOf(place1, place2))
         val result = nearbyController.loadAttractionsFromLocation(
@@ -143,10 +158,19 @@ class NearbyControllerTest {
             searchLatLong,
             false,
             true,
+            customQuery
+        )
+        nearbyController.loadAttractionsFromLocation(
+            currentLatLng,
+            screenTopRight,
+            screenBottomLeft,
+            searchLatLong,
+            false,
+            true,
             false,
             customQuery
         )
-        assertEquals(result.curLatLng, currentLatLng)
+        assertEquals(result.currentLatLng, currentLatLng)
         assertEquals(result.searchLatLng, searchLatLong)
     }
 
@@ -161,7 +185,8 @@ class NearbyControllerTest {
             "placeCategory",
             Sitelinks.Builder().build(),
             "picName",
-            false
+            false,
+            "entityID"
         )
         val place2 = Place(
             "en",
@@ -172,12 +197,13 @@ class NearbyControllerTest {
             "placeCategory",
             Sitelinks.Builder().build(),
             "picName",
-            false
+            false,
+            "entityID"
         )
         `when`(
             nearbyPlaces.radiusExpander(
                 searchLatLong, Locale.getDefault().language, false,
-                false, customQuery
+                customQuery
             )
         ).thenReturn(mutableListOf(place1, place2))
         val result = nearbyController.loadAttractionsFromLocation(
@@ -185,10 +211,9 @@ class NearbyControllerTest {
             searchLatLong,
             false,
             true,
-            false,
             customQuery
         )
-        assertEquals(result.curLatLng, currentLatLng)
+        assertEquals(result.currentLatLng, currentLatLng)
         assertEquals(result.searchLatLng, searchLatLong)
     }
 
@@ -203,7 +228,8 @@ class NearbyControllerTest {
             "placeCategory",
             Sitelinks.Builder().build(),
             "picName",
-            false
+            false,
+            "entityID"
         )
         val place2 = Place(
             "en",
@@ -214,12 +240,13 @@ class NearbyControllerTest {
             "placeCategory",
             Sitelinks.Builder().build(),
             "picName",
-            false
+            false,
+            "entityID"
         )
         `when`(
             nearbyPlaces.radiusExpander(
                 searchLatLong, Locale.getDefault().language, false,
-                false, customQuery
+                customQuery
             )
         ).thenReturn(mutableListOf(place1, place2))
         val result = nearbyController.loadAttractionsFromLocation(
@@ -227,10 +254,9 @@ class NearbyControllerTest {
             searchLatLong,
             false,
             true,
-            false,
             customQuery
         )
-        assertEquals(result.curLatLng, currentLatLng)
+        assertEquals(result.currentLatLng, currentLatLng)
         assertEquals(result.searchLatLng, searchLatLong)
     }
 
@@ -239,10 +265,8 @@ class NearbyControllerTest {
         assertEquals(
             loadAttractionsFromLocationToBaseMarkerOptions(
                 currentLatLng,
-                null,
-                context,
-                mutableListOf(place)
-            ), listOf<NearbyBaseMarker>()
+                null
+            ), listOf<BaseMarker>()
         )
     }
 
@@ -257,7 +281,8 @@ class NearbyControllerTest {
             "placeCategory",
             Sitelinks.Builder().build(),
             "picName",
-            false
+            false,
+            "entityID"
         )
         place.isMonument = true
         `when`(currentLatLng.latitude).thenReturn(0.0)
@@ -265,9 +290,7 @@ class NearbyControllerTest {
         assertEquals(
             loadAttractionsFromLocationToBaseMarkerOptions(
                 currentLatLng,
-                listOf(place),
-                context,
-                mutableListOf(place)
+                listOf(place)
             )[0].place, place
         )
     }
@@ -283,7 +306,8 @@ class NearbyControllerTest {
             "placeCategory",
             Sitelinks.Builder().build(),
             "picName",
-            false
+            false,
+            "entityID"
         )
         place.isMonument = false
         `when`(currentLatLng.latitude).thenReturn(0.0)
@@ -291,9 +315,7 @@ class NearbyControllerTest {
         assertEquals(
             loadAttractionsFromLocationToBaseMarkerOptions(
                 currentLatLng,
-                listOf(place),
-                context,
-                mutableListOf(place)
+                listOf(place)
             )[0].place, place
         )
     }
@@ -309,7 +331,8 @@ class NearbyControllerTest {
             "placeCategory",
             Sitelinks.Builder().build(),
             "",
-            false
+            false,
+            "entityID"
         )
         place.isMonument = false
         `when`(currentLatLng.latitude).thenReturn(0.0)
@@ -317,9 +340,7 @@ class NearbyControllerTest {
         assertEquals(
             loadAttractionsFromLocationToBaseMarkerOptions(
                 currentLatLng,
-                listOf(place),
-                context,
-                mutableListOf(place)
+                listOf(place)
             )[0].place, place
         )
     }
@@ -335,7 +356,8 @@ class NearbyControllerTest {
             "placeCategory",
             Sitelinks.Builder().build(),
             "",
-            true
+            true,
+            "entityID"
         )
         place.isMonument = false
         `when`(currentLatLng.latitude).thenReturn(0.0)
@@ -343,16 +365,14 @@ class NearbyControllerTest {
         assertEquals(
             loadAttractionsFromLocationToBaseMarkerOptions(
                 currentLatLng,
-                listOf(place),
-                context,
-                mutableListOf(place)
+                listOf(place)
             )[0].place, place
         )
     }
 
     @Test
     fun testUpdateMarkerLabelListBookmarkCaseTrue() {
-        markerPlaceGroup = MarkerPlaceGroup(null, true, place)
+        markerPlaceGroup = MarkerPlaceGroup(true, place)
         `when`(place.wikiDataEntityId).thenReturn("someString")
         val list = mutableListOf(markerPlaceGroup)
         Whitebox.setInternalState(
@@ -363,12 +383,11 @@ class NearbyControllerTest {
         updateMarkerLabelListBookmark(place, false)
         assertEquals(list[0].isBookmarked, false)
         assertEquals(list[0].place, place)
-        assertEquals(list[0].marker, null)
     }
 
     @Test
     fun testUpdateMarkerLabelListBookmarkCaseFalse() {
-        markerPlaceGroup = MarkerPlaceGroup(null, false, place)
+        markerPlaceGroup = MarkerPlaceGroup(false, place)
         `when`(place.wikiDataEntityId).thenReturn("someString")
         val list = mutableListOf(markerPlaceGroup)
         Whitebox.setInternalState(
@@ -379,7 +398,6 @@ class NearbyControllerTest {
         updateMarkerLabelListBookmark(place, true)
         assertEquals(list[0].isBookmarked, true)
         assertEquals(list[0].place, place)
-        assertEquals(list[0].marker, null)
     }
 
     fun <T> any(type: Class<T>): T = Mockito.any(type)

@@ -3,5 +3,6 @@
 * Saraiki
 -->
 <resources>
+  <string name="crash_dialog_text">اوہو۔ کجھ خراب تھی ڳئے!</string>
   <string name="crash_dialog_ok_toast">شکریہ!</string>
 </resources>

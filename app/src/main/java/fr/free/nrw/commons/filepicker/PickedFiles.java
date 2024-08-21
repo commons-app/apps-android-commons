@@ -56,18 +56,13 @@ public class PickedFiles implements Constants {
      * @param in input stream of source file.
      * @param file destination file
      */
-    private static void writeToFile(InputStream in, File file) {
-        try {
-            OutputStream out = new FileOutputStream(file);
+    private static void writeToFile(InputStream in, File file) throws IOException {
+        try (OutputStream out = new FileOutputStream(file)) {
             byte[] buf = new byte[1024];
             int len;
             while ((len = in.read(buf)) > 0) {
                 out.write(buf, 0, len);
             }
-            out.close();
-            in.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -79,8 +74,9 @@ public class PickedFiles implements Constants {
      * @throws IOException (File input stream exception)
      */
     private static void copyFile(File src, File dst) throws IOException {
-        InputStream in = new FileInputStream(src);
-        writeToFile(in, dst);
+        try (InputStream in = new FileInputStream(src)) {
+            writeToFile(in, dst);
+        }
     }
 
     /**
@@ -157,11 +153,12 @@ public class PickedFiles implements Constants {
      * @return Uploadable file ready for tag redaction.
      */
     public static UploadableFile pickedExistingPicture(@NonNull Context context, Uri photoUri) throws IOException, SecurityException {// SecurityException for those file providers who share URI but forget to grant necessary permissions
-        InputStream pictureInputStream = context.getContentResolver().openInputStream(photoUri);
         File directory = tempImageDirectory(context);
         File photoFile = new File(directory, UUID.randomUUID().toString() + "." + getMimeType(context, photoUri));
         if (photoFile.createNewFile()) {
-            writeToFile(pictureInputStream, photoFile);
+            try (InputStream pictureInputStream = context.getContentResolver().openInputStream(photoUri)) {
+                writeToFile(pictureInputStream, photoFile);
+            }
         } else {
             throw new IOException("could not create photoFile to write upon");
         }

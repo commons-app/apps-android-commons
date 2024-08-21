@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Authors:
 * )8
+* 410063005
 * 94rain
 * A Chinese Wikipedian
 * A Retired User
@@ -10,7 +11,10 @@
 * D41D8CD98F
 * Deathkon
 * Diskdance
+* Dream Star.cn
+* Googology
 * GuoPC
+* Huajing
 * Hydra
 * Ken418
 * Kuailong
@@ -18,6 +22,7 @@
 * LittlePaw365
 * Liuxinyu970226
 * Looong
+* McDutchie
 * NACHOgao3
 * Qiyue2001
 * Shizhao
@@ -29,11 +34,14 @@
 * Stang
 * StarrySky
 * Tranve
+* U.T.
 * Vikarna
 * VulpesVulpes825
+* Whym
 * Willy1018
 * Wxyveronica
 * XiaoGuoQuQ233
+* Xyb
 * Yfdyh000
 * Zhang8569
 * ZhaoGang
@@ -52,7 +60,7 @@
   <string name="commons_github">共享资源Github源代码</string>
   <string name="commons_logo">共享资源标志</string>
   <string name="commons_website">共享资源网站</string>
-  <string name="exit_location_picker">退出位置拾取器</string>
+  <string name="exit_location_picker">退出位置选择器</string>
   <string name="submit">提交</string>
   <string name="add_another_description">添加其他说明</string>
   <string name="add_new_contribution">新增贡献</string>
@@ -68,7 +76,7 @@
   <string name="nearby_filter_toggle">向上切换</string>
   <string name="nearby_filter_search">搜索视图</string>
   <string name="nearby_filter_state">地点状态</string>
-  <string name="appwidget_img">每日图片</string>
+  <string name="appwidget_img">今日图片</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d个文件正在上传</item>
     <item quantity="other">%1$d个文件正在上传</item>
@@ -106,6 +114,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">设置</string>
   <string name="intent_share_upload_label">上传到共享资源</string>
+  <string name="upload_in_progress">上传中</string>
   <string name="username">用户名</string>
   <string name="password">密码</string>
   <string name="login_credential">登录您的共享资源测试版账号</string>
@@ -119,7 +128,10 @@
   <string name="login_success">登录成功！</string>
   <string name="login_failed">登录失败！</string>
   <string name="upload_failed">找不到文件。请尝试其他文件。</string>
-  <string name="authentication_failed">身份验证失败，请重新登录</string>
+  <string name="retry_limit_reached">已达到最大重试限制！请取消上传并重试</string>
+  <string name="unrestricted_battery_mode">关闭电池优化？</string>
+  <string name="suggest_unrestricted_mode">关闭电池优化后，上传3张以上图像会更可靠。请从设置中关闭共享资源应用的电池优化，以获得流畅的上传体验。 \n\n电池优化可按以下步骤关闭：\n\n第1步：点按下面的“设置”按钮。\n\n第2步：从“未优化”切换为“全部应用”。\n\n第3步：寻找“Commons”或“fr.free.nrw.commons”。\n\n第4步：点按并选择“不优化”。\n\n第5步：按“完成”。</string>
+  <string name="authentication_failed">身份验证失败。请重新登录。</string>
   <string name="uploading_started">上传开始！</string>
   <string name="uploading_queued">上传排队中（已启用连接受限模式）</string>
   <string name="upload_completed_notification_title">%1$s已上传！</string>
@@ -233,8 +245,11 @@
   <string name="read_storage_permission_rationale">需要权限：读取外部存储。应用不能在没有它的情况下访问您的图册。</string>
   <string name="write_storage_permission_rationale">需要权限：写入外部存储。应用不能在没有它的情况下访问您的相机/图册。</string>
   <string name="location_permission_title">请求位置权限</string>
+  <string name="in_app_camera_location_permission_title">记录应用内拍摄的位置</string>
+  <string name="in_app_camera_location_switch_pref_summary">启用此功能可通过应用内拍摄记录位置，以防设备相机未记录位置</string>
   <string name="ok">确定</string>
   <string name="warning">警告</string>
+  <string name="duplicate_file_name">发现重复的文件名</string>
   <string name="upload">上传</string>
   <string name="yes">是</string>
   <string name="no">否</string>
@@ -271,6 +286,7 @@
   <string name="navigation_item_about">关于</string>
   <string name="navigation_item_settings">设置</string>
   <string name="navigation_item_feedback">反馈</string>
+  <string name="navigation_item_feedback_github">通过GitHub反馈</string>
   <string name="navigation_item_logout">退出</string>
   <string name="navigation_item_info">教程</string>
   <string name="navigation_item_notification">通知</string>
@@ -282,7 +298,7 @@
   <string name="description_info">请尽可能详细地描述媒体：拍摄在何地？显示什么？例文是什么？请描述对象或个人。透露一些不易猜想到的信息，例如这幅风景画的具体日期时间。如果媒体显示了一些不寻常的事物，请说明为什么它显得不寻常。</string>
   <string name="caption_info">请编写图像的简要说明。第一个标题将作为图片的题目。不能超过255个字符。</string>
   <string name="upload_problem_exist">这个图片可能的问题：</string>
-  <string name="upload_problem_image_dark">图片太暗。</string>
+  <string name="upload_problem_image_dark">图像过暗。</string>
   <string name="upload_problem_image_blurry">图片模糊。</string>
   <string name="upload_problem_image_duplicate">图像已在共享资源上存在。</string>
   <string name="upload_problem_different_geolocation">这张图片是在不同的地点拍摄的。</string>
@@ -304,13 +320,15 @@
   <string name="nominated_see_more">查看网页获取详情</string>
   <string name="skip_login">跳过</string>
   <string name="navigation_item_login">登录</string>
-  <string name="skip_login_title">你真的不要登录吗？</string>
-  <string name="skip_login_message">您在未来将需要登陆才能上传图片。</string>
+  <string name="skip_login_title">您确定要跳过登录吗？</string>
+  <string name="skip_login_message">您今后将需要登录才能上传图片。</string>
   <string name="login_alert_message">请登录后使用这个功能</string>
   <string name="copy_wikicode">复制wikitext到剪贴板</string>
   <string name="wikicode_copied">wikitext已经复制到剪贴板</string>
   <string name="nearby_location_not_available">附近可能无法正常工作，位置不可用。</string>
+  <string name="upload_location_access_denied">位置权限被拒绝。请手动设置您的位置以使用此功能。</string>
   <string name="location_permission_rationale_nearby">需要权限以显示附近地点列表</string>
+  <string name="location_permission_rationale_explore">需要权限以显示附近图片列表</string>
   <string name="nearby_directions">方向</string>
   <string name="nearby_wikidata">维基数据</string>
   <string name="nearby_wikipedia">维基百科</string>
@@ -370,14 +388,16 @@
   <string name="construction_event_answer">维基共享资源非常欢迎展示技术或文化的图片。</string>
   <string name="congratulatory_message_quiz">您得到%1$s的答案是正确的。祝贺您！</string>
   <string name="warning_for_no_answer">选择两个选项之一来回答问题</string>
-  <string name="user_not_logged_in">登录会话已过期，请重新登录。</string>
+  <string name="user_not_logged_in">登录已过期。请重新登录。</string>
   <string name="quiz_result_share_message">与朋友分享您的测验！</string>
   <string name="continue_message">继续</string>
   <string name="correct">正确答案</string>
   <string name="wrong">错误答案</string>
   <string name="quiz_screenshot_question">这个屏幕截图可以上传吗？</string>
   <string name="share_app_title">分享应用</string>
-  <string name="error_fetching_nearby_places">检索附近地点时出错。</string>
+  <string name="rotate">旋转</string>
+  <string name="error_fetching_nearby_places">无法加载附近地点</string>
+  <string name="no_pictures_in_this_area">此区域没有图片</string>
   <string name="no_nearby_places_around">找不到附近地点</string>
   <string name="error_fetching_nearby_monuments">检索附近古迹时出错。</string>
   <string name="no_recent_searches">还没有最近搜索</string>
@@ -452,13 +472,23 @@
   <string name="never_ask_again">不再询问</string>
   <string name="display_location_permission_title">申请位置权限</string>
   <string name="display_location_permission_explanation">申请附近通知卡查看功能所必需的位置权限。</string>
-  <string name="achievements_fetch_failed">有错误发生，无法获取你的成就</string>
+  <string name="achievements_fetch_failed">出了点问题，我们无法获取成就</string>
   <string name="achievements_fetch_failed_ultimate_achievement">您做出了许多贡献，我们的计算系统无法应对。这是最终的成就。</string>
-  <string name="ends_on">结束于：</string>
+  <string name="ends_on">结束时间：</string>
   <string name="display_campaigns">显示活动</string>
   <string name="display_campaigns_explanation">显示正在进行的活动</string>
+  <string name="in_app_camera_location_access_explanation">允许应用获取位置，以防相机未记录位置。某些设备的相机不记录位置。在这种情况下，让应用获取位置并将其附加到照片可以让您的贡献更有用。您可以随时从“设置”中更改此设置</string>
+  <string name="option_allow">允许</string>
+  <string name="option_dismiss">拒绝</string>
+  <string name="in_app_camera_needs_location">请从“设置”中打开位置权限，然后重试。 \n\n注意：如果应用程序无法在短时间内从设备检索位置，则上传可能没有位置。</string>
+  <string name="in_app_camera_location_permission_rationale">应用内相机需要位置权限才能将其附加到您的图像，以防EXIF中位置信息不可用。请允许应用程序访问您的位置，然后重试。\n\n请注意：如果应用程序无法在短时间内从设备检索位置，上传内容可能会没有位置信息。</string>
+  <string name="in_app_camera_location_permission_denied">由于缺少位置权限，应用程序不会随镜头记录位置</string>
+  <string name="in_app_camera_location_unavailable">当GPS关闭时，应用程序不会随镜头记录位置</string>
+  <string name="open_document_photo_picker_title">使用基于“文件”应用的照片选择器</string>
+  <string name="open_document_photo_picker_explanation">新版Android照片选择器可能会丢失位置信息。如果您正在使用它，请启用该设置。</string>
+  <string name="location_loss_warning">将此关闭可能会触发新的 Android 照片选择器。这可能会有丢失位置信息的风险。\n\n点击“阅读更多”以获取更多信息。</string>
   <string name="nearby_campaign_dismiss_message">你不会再看到这个活动。如果需要可以在设置里重新启用此通知。</string>
-  <string name="this_function_needs_network_connection">这个功能需要网络连接，请检查你的网络设置。</string>
+  <string name="this_function_needs_network_connection">这个功能需要网络连接。请检查你的网络设置。</string>
   <string name="error_processing_image">处理图像时出错。请再试一次！</string>
   <string name="getting_edit_token">获取编辑令牌</string>
   <string name="check_category_adding_template">添加类别检查模板</string>
@@ -467,11 +497,11 @@
   <string name="check_category_success_title">已请求类别检查</string>
   <string name="check_category_failure_title">类别检查请求不起作用</string>
   <string name="check_category_success_message">已请求对%1$s进行类别检查</string>
-  <string name="check_category_failure_message">%1$不能请求类别检查</string>
-  <string name="check_category_toast">正在请求对%1$进行类别检查</string>
+  <string name="check_category_failure_message">%1$s不能请求类别检查</string>
+  <string name="check_category_toast">正在请求对%1$s进行类别检查</string>
   <string name="nominate_for_deletion_done">完成</string>
   <string name="send_thank_success_title">发送感谢成功</string>
-  <string name="send_thank_success_message">成功的给%1$发送感谢</string>
+  <string name="send_thank_success_message">成功的给%1$s发送感谢</string>
   <string name="send_thank_failure_message">给%1$发送感谢失败</string>
   <string name="send_thank_failure_title">发送感谢失败</string>
   <string name="send_thank_toast">向%1$s发送感谢</string>
@@ -481,9 +511,9 @@
   <string name="review_thanks">您是否要感谢贡献者？</string>
   <string name="review_spam_explanation">如果该图片无用，点击否来提议删除该文件。</string>
   <string name="review_copyright_explanation">标志、屏幕截图和电影海报通常侵犯版权。\n提名删除候选请点击“否”。</string>
-  <string name="review_thanks_explanation">你的感谢会鼓励%1</string>
+  <string name="review_thanks_explanation">你的感谢会鼓励%1$s</string>
   <string name="review_no_category">该文件未被分类！</string>
-  <string name="review_category_explanation">该图片是在%1类别下</string>
+  <string name="review_category_explanation">该图片是在%1$s类别下</string>
   <string name="review_spam_report_question">该文件不在收录范围内，原因是</string>
   <string name="review_c_violation_report_question">该文件侵犯版权，原因是</string>
   <string name="review_thanks_yes_button_text">下一张图片</string>
@@ -518,7 +548,9 @@
   <string name="exif_tag_name_lensModel">镜头型号</string>
   <string name="exif_tag_name_serialNumbers">序列号</string>
   <string name="exif_tag_name_software">软件</string>
-  <string name="share_text">直接在您手机上的维基共享资源应用中上传照片。立即下载共享资源应用：%1</string>
+  <string name="media_location_permission_denied">已拒绝访问媒体位置</string>
+  <string name="add_location_manually">我们可能无法自动从你上传的图片中获取位置数据。提交前请为每张图片添加适当的位置</string>
+  <string name="share_text">直接在您手机上的维基共享资源应用中上传照片。立即下载共享资源应用：%1$s</string>
   <string name="share_via">分享到...</string>
   <string name="image_info">图像信息</string>
   <string name="no_categories_found">找不到分类</string>
@@ -526,7 +558,7 @@
   <string name="upload_cancelled">取消上传</string>
   <string name="previous_image_title_description_not_found">没有之前图片的标题或描述对应的数据</string>
   <string name="dialog_box_text_nomination">%1$s为何应被删除？</string>
-  <string name="review_is_uploaded_by">%1通过%2上传</string>
+  <string name="review_is_uploaded_by">%1$s通过%2$s上传</string>
   <string name="default_description_language">默认描述语言</string>
   <string name="delete_helper_show_deletion_title">正在提出删除准备</string>
   <string name="delete_helper_show_deletion_title_success">成功</string>
@@ -539,6 +571,7 @@
   <string name="delete_helper_ask_reason_copyright_press_photo">按压图片</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">来自网络的随机图片</string>
   <string name="delete_helper_ask_reason_copyright_logo">标志</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">侵犯全景自由</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">由于他是</string>
   <string name="category_edit_helper_make_edit_toast">正在尝试更新分类。</string>
   <string name="category_edit_helper_show_edit_title">分类更新</string>
@@ -567,7 +600,7 @@
   <string name="coordinates_edit_helper_edit_message_else">无法添加坐标。</string>
   <string name="description_edit_helper_edit_message_else">无法添加描述。</string>
   <string name="caption_edit_helper_edit_message_else">无法添加说明。</string>
-  <string name="coordinates_picking_unsuccessful">无法获取坐标。</string>
+  <string name="coordinates_picking_unsuccessful">图像坐标未更新</string>
   <string name="descriptions_picking_unsuccessful">无法获取描述。</string>
   <string name="description_activity_title">编辑描述和说明。</string>
   <string name="share_image_via">分享图片透过</string>
@@ -582,12 +615,13 @@
   <string name="place_state_needs_photo">需要照片</string>
   <string name="place_type">地点类型：</string>
   <string name="nearby_search_hint">桥梁、博物馆、旅馆等</string>
-  <string name="you_must_reset_your_passsword">登录时出现一些问题，您必须重新设置您的密码！</string>
+  <string name="you_must_reset_your_passsword">登录时出现一些问题。您必须重置您的密码！</string>
   <string name="title_for_media">媒体</string>
   <string name="title_for_child_classes">子类别</string>
   <string name="title_for_parent_classes">父类别</string>
   <string name="upload_nearby_place_found_title">找到附近地点</string>
-  <string name="upload_nearby_place_found_description">这是地点%1$s的照片吗？</string>
+  <string name="upload_nearby_place_found_description_plural">这些是%1$s的图片吗？</string>
+  <string name="upload_nearby_place_found_description_singular">这是%1$s的图片吗？</string>
   <string name="title_app_shortcut_bookmark">书签</string>
   <string name="title_app_shortcut_setting">设置</string>
   <string name="remove_bookmark">已从书签中移除</string>
@@ -596,12 +630,15 @@
   <string name="setting_wallpaper_dialog_title">设为壁纸</string>
   <string name="setting_wallpaper_dialog_message">正在设置壁纸。请稍等…</string>
   <string name="theme_default_name">跟随系统</string>
-  <string name="theme_dark_name">暗黑</string>
-  <string name="theme_light_name">明亮</string>
+  <string name="theme_dark_name">深色</string>
+  <string name="theme_light_name">浅色</string>
   <string name="cannot_open_location_settings">无法打开位置设置。请手动打开位置</string>
   <string name="recommend_high_accuracy_mode">选择高精确度模式以获得最佳结果。</string>
   <string name="ask_to_turn_location_on">打开位置？</string>
+  <string name="ask_to_turn_location_on_text">请开启定位服务，以便应用显示您当前的位置</string>
   <string name="nearby_needs_location">附近需要启用位置才能正常工作</string>
+  <string name="explore_map_needs_location">探索地图需要定位权限才能显示附近图片</string>
+  <string name="upload_map_location_access">您需要授予位置权限才能自动设置位置。</string>
   <string name="use_location_from_similar_image">您是在同一地点拍摄这两张图片的吗？您想要使用右侧图片的纬度/经度吗？</string>
   <string name="load_more">加载更多</string>
   <string name="nearby_no_results">未找到位置，请尝试更改您的搜索条件。</string>
@@ -609,7 +646,7 @@
   <string name="missing_category">- 为此图像添加分类以提升可用性。</string>
   <string name="missing_article">- 将此图像添加至相关的无图像的维基百科条目中。</string>
   <string name="add_picture_to_wikipedia_article_title">将图片添加到维基百科</string>
-  <string name="add_picture_to_wikipedia_article_desc">您想将此图像添加至$1s维基百科条目中吗？</string>
+  <string name="add_picture_to_wikipedia_article_desc">您想将此图像添加至%1$s维基百科条目中吗？</string>
   <string name="confirm">确认</string>
   <string name="instructions_title">说明</string>
   <string name="wikipedia_instructions_step_1">1. 使用下列wikitext：</string>
@@ -644,7 +681,6 @@
   <string name="leaderboard_nearby">附近</string>
   <string name="leaderboard_used">已使用</string>
   <string name="leaderboard_my_rank_button_text">我的排名</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;改进此地图&lt;/a&gt;</string>
   <string name="limited_connection_enabled">限制连接模式已启用！</string>
   <string name="limited_connection_disabled">限制连接模式已禁用。挂起的上传将会立即恢复。</string>
   <string name="limited_connection_mode">限制连接模式</string>
@@ -690,7 +726,11 @@
   <string name="custom_selector_info_text2">右边的图片与左边的不同，它具有已上传至维基共享资源的标志。\n点击并长按来预览图像。</string>
   <string name="welcome_custom_selector_ok">棒极了</string>
   <string name="custom_selector_already_uploaded_image_text">此图像已上传至维基共享资源。</string>
-  <string name="wlm_upload_info">此图像将会进入2021年维基爱古迹竞赛</string>
+  <string name="custom_selector_over_limit_warning">出于技术原因，该应用无法可靠地一次性上传超过%1$d张照片。%2$d张已经超过%1$d张的上传限制。</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">关闭</string>
+  <string name="custom_selector_button_limit_text">最大：%1$d</string>
+  <string name="custom_selector_limit_error_desc">错误：超出上传限制</string>
+  <string name="wlm_upload_info">此图像将会进入维基爱古迹竞赛</string>
   <string name="display_monuments">显示古迹</string>
   <string name="wlm_month_message">维基爱古迹的月份！</string>
   <string name="learn_more">了解更多</string>
@@ -700,7 +740,7 @@
   <string name="read_phone_state_permission_message">附近地图需要读取手机状态权限以正常运行</string>
   <string name="contributions_of_user">用户贡献：%s</string>
   <string name="achievements_of_user">用户成就：%s</string>
-  <string name="menu_view_user_page">查看用户页面</string>
+  <string name="menu_view_user_page">查看用户个人资料</string>
   <string name="edit_depictions">编辑描述</string>
   <string name="edit_categories">编辑分类</string>
   <string name="advanced_options">高级选项</string>
@@ -713,11 +753,11 @@
   <string name="add_location">添加位置</string>
   <string name="feedback_sharing_data_alert">请从此电子邮件中删除任何您不愿意公开分享的信息。另请注意，您用于发帖的电子邮件地址，以及关联的名称和个人资料图片会公开显示。</string>
   <string name="explore_map_details">详细</string>
-  <string name="achievements_unavailable_beta">成就仅在成品版本中可用，请查看开发者文档。</string>
-  <string name="leaderboard_unavailable_beta">排行榜仅在成品版本中可用，请查看开发者文档。</string>
+  <string name="achievements_unavailable_beta">成就仅在成品版本中可用。请查看开发者文档。</string>
+  <string name="leaderboard_unavailable_beta">排行榜仅在成品版本中可用。请查看开发者文档。</string>
   <string name="copyright_popup">请只上传您自己拍摄的照片。上传受版权保护图像的用户会被封禁。这也适用于测试版本。感谢您测试本应用！</string>
   <string name="select_feedback_data_choice">请取消选择任何您不愿意公开分享的信息。</string>
-  <string name="api_level">API 级别</string>
+  <string name="api_level">API级别</string>
   <string name="android_version">Android版本</string>
   <string name="device_manufacturer">设备制造商</string>
   <string name="device_model">设备型号</string>
@@ -729,6 +769,8 @@
   <string name="your_feedback">您的反馈</string>
   <string name="mark_as_not_for_upload">标记为不上传</string>
   <string name="unmark_as_not_for_upload">取消标记为不上传</string>
+  <string name="marking_as_not_for_upload">标记为不可上传</string>
+  <string name="unmarking_as_not_for_upload">取消标记为不可上传</string>
   <string name="show_already_actioned_pictures">显示已操作过的图片</string>
   <string name="hiding_already_actioned_pictures">隐藏已操作过的图片</string>
   <string name="no_more_images_found">未找到更多图像</string>
@@ -737,6 +779,8 @@
   <string name="image_selected">选择的图像</string>
   <string name="image_marked_as_not_for_upload">标记为不上传的图像</string>
   <string name="menu_view_report">举报</string>
+  <string name="menu_view_set_white_background">设置白色背景</string>
+  <string name="menu_view_set_black_background">设置黑色背景</string>
   <string name="report_violation">举报违规行为</string>
   <string name="report_user">举报此用户</string>
   <string name="report_content">举报此内容</string>
@@ -744,4 +788,44 @@
   <string name="welcome_to_full_screen_mode_text">欢迎使用全屏选择模式</string>
   <string name="full_screen_mode_zoom_info">用两根手指放大和缩小。</string>
   <string name="full_screen_mode_features_info">快速长距离滑动来执行以下操作：\n- 向左/右：前往上一个/下一个\n- 向上：选择\n- 向下：标记为不上传</string>
+  <string name="set_up_avatar_toast_string">要设置你的排行榜头像，请点击任意图片上三点式菜单中的\"设置为头像\"</string>
+  <string name="similar_coordinate_description_auto_set">图片坐标并不是准确的坐标，但上传这张图片的人认为它们足够接近。</string>
+  <string name="storage_permissions_denied">存储权限被拒绝</string>
+  <string name="unable_to_share_upload_item">无法分享此项目</string>
+  <string name="permissions_are_required_for_functionality">功能需要权限</string>
+  <string name="learn_how_to_write_a_useful_description">了解如何写出有用的描述</string>
+  <string name="learn_how_to_write_a_useful_caption">了解如何写出有用的注释</string>
+  <string name="see_your_achievements">查看您的成果</string>
+  <string name="edit_image">编辑图片</string>
+  <string name="edit_location">编辑位置</string>
+  <string name="location_updated">位置已更新！</string>
+  <string name="remove_location">移除位置</string>
+  <string name="remove_location_warning_title">移除位置警告</string>
+  <string name="remove_location_warning_desc">定位信息使图片更加有用、更容易被找到。您真的希望从这张图片中删除定位信息吗？</string>
+  <string name="location_removed">位置已移除！</string>
+  <string name="send_thanks_to_author">感谢作者</string>
+  <string name="error_sending_thanks">向作者发送感谢时出错。</string>
+  <string name="invalid_login_message">您的登录已过期。请重新登录。</string>
+  <string name="no_application_available_to_open_gpx_files">没有可用于开启GPX文件的应用程序</string>
+  <string name="file_saved_successfully">文件保存成功</string>
+  <string name="do_you_want_to_open_gpx_file">您想打开GPX文件吗？</string>
+  <string name="do_you_want_to_open_kml_file">您想打开KML文件吗？</string>
+  <string name="failed_to_save_kml_file">保存KML文件失败。</string>
+  <string name="failed_to_save_gpx_file">保存GPX文件失败。</string>
+  <string name="saving_kml_file">正在保存KML文件</string>
+  <string name="saving_gpx_file">正在保存GPX文件</string>
+  <plurals name="custom_picker_images_selected_title_appendix">
+    <item quantity="one">已选择%d个图像</item>
+    <item quantity="other">已选择%d个图像</item>
+  </plurals>
+  <string name="multiple_files_depiction">请记住，每次多图片上传会为其中的所有图片标注相同的分类和描述。如果这些图片并不共享同样的描述和分类，请分别进行多次上传。</string>
+  <string name="multiple_files_depiction_header">关于多图片上传的提醒</string>
+  <string name="nearby_wikitalk">向维基数据报告关于该项的问题</string>
+  <string name="please_enter_some_comments">请输入一些评论。</string>
+  <string name="talk">讨论</string>
+  <string name="write_something_about_the_item">请写一些关于项目“%1$s”的信息。所写的内容是公开可见的。</string>
+  <string name="does_not_exist_anymore_no_picture_can_ever_be_taken_of_it">“%1$s”已不再存在，无法拍摄它的照片。</string>
+  <string name="is_at_a_different_place_please_specify_the_correct_place_below_if_possible_tell_us_the_correct_latitude_longitude">“%1$s”位于一个不同的位置。请在下方给出正确的位置，可以的话请填写正确的经纬度。</string>
+  <string name="other_problem_or_information_please_explain_below">其他问题或信息（请在下方解释）。</string>
+  <string name="feedback_destination_note">您的反馈已经发布在以下wiki页面：&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
 </resources>

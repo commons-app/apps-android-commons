@@ -4,6 +4,7 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static fr.free.nrw.commons.di.NetworkingModule.NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE;
 
+import android.Manifest.permission;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -16,11 +17,12 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatTextView;
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,26 +30,25 @@ import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
 import androidx.recyclerview.widget.RecyclerView.ItemAnimator;
 import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener;
 import androidx.recyclerview.widget.SimpleItemAnimator;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.databinding.FragmentContributionsListBinding;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
-import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.media.MediaClient;
+import fr.free.nrw.commons.profile.ProfileActivity;
+import fr.free.nrw.commons.utils.DialogUtil;
 import fr.free.nrw.commons.utils.SystemThemeUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
-import org.wikipedia.dataclient.WikiSite;
-import fr.free.nrw.commons.profile.ProfileActivity;
+import fr.free.nrw.commons.wikidata.model.WikiSite;
 
 
 /**
@@ -60,63 +61,72 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
     private static final String RV_STATE = "rv_scroll_state";
 
-    @BindView(R.id.contributionsList)
-    RecyclerView rvContributionsList;
-    @BindView(R.id.loadingContributionsProgressBar)
-    ProgressBar progressBar;
-    @BindView(R.id.fab_plus)
-    FloatingActionButton fabPlus;
-    @BindView(R.id.fab_camera)
-    FloatingActionButton fabCamera;
-    @BindView(R.id.fab_gallery)
-    FloatingActionButton fabGallery;
-    @BindView(R.id.noContributionsYet)
-    TextView noContributionsYet;
-    @BindView(R.id.fab_layout)
-    LinearLayout fab_layout;
-    @BindView(R.id.fab_custom_gallery)
-    FloatingActionButton fabCustomGallery;
-
     @Inject
     SystemThemeUtils systemThemeUtils;
-    @BindView(R.id.tv_contributions_of_user)
-    AppCompatTextView tvContributionsOfUser;
-
     @Inject
     ContributionController controller;
     @Inject
     MediaClient mediaClient;
-
     @Named(NAMED_LANGUAGE_WIKI_PEDIA_WIKI_SITE)
     @Inject
     WikiSite languageWikipediaSite;
-
     @Inject
     ContributionsListPresenter contributionsListPresenter;
-
     @Inject
     SessionManager sessionManager;
 
+    private FragmentContributionsListBinding binding;
     private Animation fab_close;
     private Animation fab_open;
     private Animation rotate_forward;
     private Animation rotate_backward;
-
-
     private boolean isFabOpen;
 
-    private ContributionsListAdapter adapter;
+    @VisibleForTesting
+    protected RecyclerView rvContributionsList;
 
-    @Nullable private Callback callback;
+    @VisibleForTesting
+    protected ContributionsListAdapter adapter;
+
+    @Nullable
+    @VisibleForTesting
+    protected Callback callback;
 
     private final int SPAN_COUNT_LANDSCAPE = 3;
     private final int SPAN_COUNT_PORTRAIT = 1;
 
     private int contributionsSize;
-    String userName;
+    private String userName;
+
+    private ActivityResultLauncher<String[]> inAppCameraLocationPermissionLauncher = registerForActivityResult(
+        new ActivityResultContracts.RequestMultiplePermissions(),
+        new ActivityResultCallback<Map<String, Boolean>>() {
+            @Override
+            public void onActivityResult(Map<String, Boolean> result) {
+                boolean areAllGranted = true;
+                for (final boolean b : result.values()) {
+                    areAllGranted = areAllGranted && b;
+                }
+
+                if (areAllGranted) {
+                    controller.locationPermissionCallback.onLocationPermissionGranted();
+                } else {
+                    if (shouldShowRequestPermissionRationale(permission.ACCESS_FINE_LOCATION)) {
+                        controller.handleShowRationaleFlowCameraLocation(getActivity(),
+                            inAppCameraLocationPermissionLauncher);
+                    } else {
+                        controller.locationPermissionCallback.onLocationPermissionDenied(
+                            getActivity().getString(
+                                R.string.in_app_camera_location_permission_denied));
+                    }
+                }
+            }
+        });
+
 
     @Override
-    public void onCreate(@Nullable @org.jetbrains.annotations.Nullable final Bundle savedInstanceState) {
+    public void onCreate(
+        @Nullable @org.jetbrains.annotations.Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Now that we are allowing this fragment to be started for
         // any userName- we expect it to be passed as an argument
@@ -133,21 +143,36 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     public View onCreateView(
         final LayoutInflater inflater, @Nullable final ViewGroup container,
         @Nullable final Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_contributions_list, container, false);
-        ButterKnife.bind(this, view);
+        binding = FragmentContributionsListBinding.inflate(
+            inflater, container, false
+        );
+        rvContributionsList = binding.contributionsList;
+
         contributionsListPresenter.onAttachView(this);
+        binding.fabCustomGallery.setOnClickListener(v -> launchCustomSelector());
+        binding.fabCustomGallery.setOnLongClickListener(view -> {
+            ViewUtil.showShortToast(getContext(),R.string.custom_selector_title);
+            return true;
+        });
 
         if (Objects.equals(sessionManager.getUserName(), userName)) {
-            tvContributionsOfUser.setVisibility(GONE);
-            fab_layout.setVisibility(VISIBLE);
+            binding.tvContributionsOfUser.setVisibility(GONE);
+            binding.fabLayout.setVisibility(VISIBLE);
         } else {
-            tvContributionsOfUser.setVisibility(VISIBLE);
-            tvContributionsOfUser.setText(getString(R.string.contributions_of_user, userName));
-            fab_layout.setVisibility(GONE);
+            binding.tvContributionsOfUser.setVisibility(VISIBLE);
+            binding.tvContributionsOfUser.setText(getString(R.string.contributions_of_user, userName));
+            binding.fabLayout.setVisibility(GONE);
         }
 
         initAdapter();
-        return view;
+
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onDestroyView() {
+        binding = null;
+        super.onDestroyView();
     }
 
     @Override
@@ -280,7 +305,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     public void onConfigurationChanged(final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         // check orientation
-        fab_layout.setOrientation(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE ?
+        binding.fabLayout.setOrientation(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE ?
             LinearLayout.HORIZONTAL : LinearLayout.VERTICAL);
         rvContributionsList
             .setLayoutManager(
@@ -295,22 +320,29 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     }
 
     private void setListeners() {
-        fabPlus.setOnClickListener(view -> animateFAB(isFabOpen));
-        fabCamera.setOnClickListener(view -> {
-            controller.initiateCameraPick(getActivity());
+        binding.fabPlus.setOnClickListener(view -> animateFAB(isFabOpen));
+        binding.fabCamera.setOnClickListener(view -> {
+            controller.initiateCameraPick(getActivity(), inAppCameraLocationPermissionLauncher);
             animateFAB(isFabOpen);
         });
-        fabGallery.setOnClickListener(view -> {
+        binding.fabCamera.setOnLongClickListener(view -> {
+            ViewUtil.showShortToast(getContext(),R.string.add_contribution_from_camera);
+            return true;
+        });
+        binding.fabGallery.setOnClickListener(view -> {
             controller.initiateGalleryPick(getActivity(), true);
             animateFAB(isFabOpen);
+        });
+        binding.fabGallery.setOnLongClickListener(view -> {
+            ViewUtil.showShortToast(getContext(),R.string.menu_from_gallery);
+            return true;
         });
     }
 
     /**
      * Launch Custom Selector.
      */
-    @OnClick(R.id.fab_custom_gallery)
-    void launchCustomSelector(){
+    protected void launchCustomSelector() {
         controller.initiateCustomGalleryPickWithPermission(getActivity());
         animateFAB(isFabOpen);
     }
@@ -321,25 +353,25 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
 
     private void animateFAB(final boolean isFabOpen) {
         this.isFabOpen = !isFabOpen;
-        if (fabPlus.isShown()) {
-        if (isFabOpen) {
-            fabPlus.startAnimation(rotate_backward);
-            fabCamera.startAnimation(fab_close);
-            fabGallery.startAnimation(fab_close);
-            fabCustomGallery.startAnimation(fab_close);
-            fabCamera.hide();
-            fabGallery.hide();
-            fabCustomGallery.hide();
-        } else {
-            fabPlus.startAnimation(rotate_forward);
-            fabCamera.startAnimation(fab_open);
-            fabGallery.startAnimation(fab_open);
-            fabCustomGallery.startAnimation(fab_open);
-            fabCamera.show();
-            fabGallery.show();
-            fabCustomGallery.show();
-        }
-        this.isFabOpen = !isFabOpen;
+        if (binding.fabPlus.isShown()) {
+            if (isFabOpen) {
+                binding.fabPlus.startAnimation(rotate_backward);
+                binding.fabCamera.startAnimation(fab_close);
+                binding.fabGallery.startAnimation(fab_close);
+                binding.fabCustomGallery.startAnimation(fab_close);
+                binding.fabCamera.hide();
+                binding.fabGallery.hide();
+                binding.fabCustomGallery.hide();
+            } else {
+                binding.fabPlus.startAnimation(rotate_forward);
+                binding.fabCamera.startAnimation(fab_open);
+                binding.fabGallery.startAnimation(fab_open);
+                binding.fabCustomGallery.startAnimation(fab_open);
+                binding.fabCamera.show();
+                binding.fabGallery.show();
+                binding.fabCustomGallery.show();
+            }
+            this.isFabOpen = !isFabOpen;
         }
     }
 
@@ -348,7 +380,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
      */
     @Override
     public void showWelcomeTip(final boolean shouldShow) {
-        noContributionsYet.setVisibility(shouldShow ? VISIBLE : GONE);
+        binding.noContributionsYet.setVisibility(shouldShow ? VISIBLE : GONE);
     }
 
     /**
@@ -358,12 +390,12 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
      */
     @Override
     public void showProgress(final boolean shouldShow) {
-        progressBar.setVisibility(shouldShow ? VISIBLE : GONE);
+        binding.loadingContributionsProgressBar.setVisibility(shouldShow ? VISIBLE : GONE);
     }
 
     @Override
     public void showNoContributionsUI(final boolean shouldShow) {
-        noContributionsYet.setVisibility(shouldShow ? VISIBLE : GONE);
+        binding.noContributionsYet.setVisibility(shouldShow ? VISIBLE : GONE);
     }
 
     @Override
@@ -393,14 +425,15 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     @Override
     public void deleteUpload(final Contribution contribution) {
         DialogUtil.showAlertDialog(getActivity(),
-            String.format(getString(R.string.cancelling_upload),
-                Locale.getDefault().getDisplayLanguage()),
-            String.format(getString(R.string.cancel_upload_dialog),
-                Locale.getDefault().getDisplayLanguage()),
-            "YES", "NO",
+            String.format(Locale.getDefault(),
+                getString(R.string.cancelling_upload)),
+            String.format(Locale.getDefault(),
+                getString(R.string.cancel_upload_dialog)),
+            String.format(Locale.getDefault(), getString(R.string.yes)), String.format(Locale.getDefault(), getString(R.string.no)),
             () -> {
                 ViewUtil.showShortToast(getContext(), R.string.cancelling_upload);
                 contributionsListPresenter.deleteUpload(contribution);
+                CommonsApplication.cancelledUploads.add(contribution.getPageId());
             }, () -> {
                 // Do nothing
             });
@@ -422,8 +455,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment impl
     public void addImageToWikipedia(Contribution contribution) {
         DialogUtil.showAlertDialog(getActivity(),
             getString(R.string.add_picture_to_wikipedia_article_title),
-            String.format(getString(R.string.add_picture_to_wikipedia_article_desc),
-                Locale.getDefault().getDisplayLanguage()),
+            getString(R.string.add_picture_to_wikipedia_article_desc),
             () -> {
                 showAddImageToWikipediaInstructions(contribution);
             }, () -> {

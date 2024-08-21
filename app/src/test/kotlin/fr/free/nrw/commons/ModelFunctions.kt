@@ -8,7 +8,7 @@ import fr.free.nrw.commons.nearby.Place
 import fr.free.nrw.commons.nearby.Sitelinks
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import fr.free.nrw.commons.wikidata.model.DepictSearchItem
-import org.wikipedia.wikidata.*
+import fr.free.nrw.commons.wikidata.model.*
 import java.util.*
 
 fun depictedItem(
@@ -84,9 +84,10 @@ fun place(
     category: String = "category",
     siteLinks: Sitelinks? = null,
     pic: String = "pic",
-    exists: Boolean = false
+    exists: Boolean = false,
+    entityID: String = "entityID"
 ): Place {
-    return Place(lang, name, label, longDescription, latLng, category, siteLinks, pic, exists)
+    return Place(lang, name, label, longDescription, latLng, category, siteLinks, pic, exists, entityID)
 }
 
 fun entityId(wikiBaseEntityValue: WikiBaseEntityValue = wikiBaseEntityValue()) =

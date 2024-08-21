@@ -6,12 +6,12 @@ import fr.free.nrw.commons.upload.structure.depictions.get
 import fr.free.nrw.commons.utils.CommonsDateUtil
 import fr.free.nrw.commons.utils.MediaDataExtractorUtil
 import fr.free.nrw.commons.wikidata.WikidataProperties
+import fr.free.nrw.commons.wikidata.model.DataValue
+import fr.free.nrw.commons.wikidata.model.Entities
 import org.apache.commons.lang3.StringUtils
-import org.wikipedia.dataclient.mwapi.MwQueryPage
-import org.wikipedia.gallery.ExtMetadata
-import org.wikipedia.gallery.ImageInfo
-import org.wikipedia.wikidata.DataValue
-import org.wikipedia.wikidata.Entities
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
+import fr.free.nrw.commons.wikidata.model.gallery.ExtMetadata
+import fr.free.nrw.commons.wikidata.model.gallery.ImageInfo
 import java.text.ParseException
 import java.util.*
 import javax.inject.Inject

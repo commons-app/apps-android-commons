@@ -15,22 +15,23 @@ import io.github.coordinates2country.Coordinates2Country
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.TestScheduler
-import junit.framework.TestCase.assertEquals
+import org.junit.After
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.*
+import org.mockito.Mockito.mockStatic
 import org.mockito.Mockito.verify
-import org.powermock.api.mockito.PowerMockito
 import org.powermock.core.classloader.annotations.PrepareForTest
-import org.powermock.modules.junit4.PowerMockRunner
+import org.robolectric.RobolectricTestRunner
 import java.util.*
 
 
 /**
  * The class contains unit test cases for UploadMediaPresenter
  */
-@RunWith(PowerMockRunner::class)
+@RunWith(RobolectricTestRunner::class)
 @PrepareForTest(Coordinates2Country::class)
 class UploadMediaPresenterTest {
     @Mock
@@ -48,6 +49,9 @@ class UploadMediaPresenterTest {
     private lateinit var place: Place
 
     @Mock
+    private var location: LatLng? = null
+
+    @Mock
     private lateinit var uploadItem: UploadItem
 
     @Mock
@@ -60,9 +64,13 @@ class UploadMediaPresenterTest {
     private lateinit var testSingleImageResult: Single<Int>
 
     private lateinit var testScheduler: TestScheduler
+    private lateinit var mockedCountry: MockedStatic<Coordinates2Country>
 
     @Mock
     private lateinit var jsonKvStore: JsonKvStore
+
+    @Mock
+    lateinit var mockActivity: UploadActivity
 
     /**
      * initial setup unit test environment
@@ -70,14 +78,22 @@ class UploadMediaPresenterTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         testObservableUploadItem = Observable.just(uploadItem)
         testSingleImageResult = Single.just(1)
         testScheduler = TestScheduler()
-        uploadMediaPresenter = UploadMediaPresenter(repository,
-            jsonKvStore,testScheduler, testScheduler)
+        uploadMediaPresenter = UploadMediaPresenter(
+            repository, jsonKvStore, testScheduler, testScheduler
+        )
         uploadMediaPresenter.onAttachView(view)
+        mockedCountry = mockStatic(Coordinates2Country::class.java)
     }
+
+    @After
+    fun tearDown() {
+        mockedCountry.close()
+    }
+
 
     /**
      * unit test for method UploadMediaPresenter.receiveImage
@@ -88,77 +104,79 @@ class UploadMediaPresenterTest {
             repository.preProcessImage(
                 ArgumentMatchers.any(UploadableFile::class.java),
                 ArgumentMatchers.any(Place::class.java),
-                ArgumentMatchers.any(UploadMediaPresenter::class.java)
+                ArgumentMatchers.any(UploadMediaPresenter::class.java),
+                ArgumentMatchers.any(LatLng::class.java)
             )
         ).thenReturn(testObservableUploadItem)
-        uploadMediaPresenter.receiveImage(uploadableFile, place)
+        uploadMediaPresenter.receiveImage(uploadableFile, place, location)
         verify(view).showProgress(true)
         testScheduler.triggerActions()
         verify(view).onImageProcessed(
             ArgumentMatchers.any(UploadItem::class.java),
             ArgumentMatchers.any(Place::class.java)
         )
-        verify(view).showProgress(false)
     }
 
     /**
-     * unit test for method UploadMediaPresenter.verifyImageQuality (For else case)
+     * unit test for method UploadMediaPresenter.getImageQuality (For else case)
      */
     @Test
-    fun verifyImageQualityTest() {
+    fun getImageQualityTest() {
         whenever(repository.uploads).thenReturn(listOf(uploadItem))
-        whenever(repository.getImageQuality(uploadItem))
+        whenever(repository.getImageQuality(uploadItem, location))
             .thenReturn(testSingleImageResult)
         whenever(uploadItem.imageQuality).thenReturn(0)
         whenever(uploadItem.gpsCoords)
             .thenReturn(imageCoordinates)
         whenever(uploadItem.gpsCoords.decimalCoords)
             .thenReturn("imageCoordinates")
-        uploadMediaPresenter.verifyImageQuality(0)
+        uploadMediaPresenter.getImageQuality(0, location, mockActivity)
         verify(view).showProgress(true)
         testScheduler.triggerActions()
-        verify(view).showProgress(false)
     }
 
     /**
-     * unit test for method UploadMediaPresenter.verifyImageQuality (For if case)
+     * unit test for method UploadMediaPresenter.getImageQuality (For if case)
      */
     @Test
-    fun `verify ImageQuality Test while coordinates equals to null`() {
+    fun `get ImageQuality Test while coordinates equals to null`() {
         whenever(repository.uploads).thenReturn(listOf(uploadItem))
-        whenever(repository.getImageQuality(uploadItem))
+        whenever(repository.getImageQuality(uploadItem, location))
             .thenReturn(testSingleImageResult)
         whenever(uploadItem.imageQuality).thenReturn(0)
         whenever(uploadItem.gpsCoords)
             .thenReturn(imageCoordinates)
         whenever(uploadItem.gpsCoords.decimalCoords)
             .thenReturn(null)
-        uploadMediaPresenter.verifyImageQuality(0)
+        uploadMediaPresenter.getImageQuality(0, location, mockActivity)
         testScheduler.triggerActions()
     }
 
     /**
-     * unit test for method UploadMediaPresenter.handleImageResult
+     * Test for empty file name when the user presses the NEXT button
      */
     @Test
-    fun handleImageResult() {
-        //Positive case test
-        uploadMediaPresenter.handleImageResult(IMAGE_KEEP, uploadItem)
-        verify(view).onImageValidationSuccess()
-
-        //Duplicate file name
-        uploadMediaPresenter.handleImageResult(FILE_NAME_EXISTS, uploadItem)
-        verify(view).showDuplicatePicturePopup(uploadItem)
-
-        //Empty Caption test
-        uploadMediaPresenter.handleImageResult(EMPTY_CAPTION, uploadItem)
+    fun emptyFileNameTest() {
+        uploadMediaPresenter.handleCaptionResult(EMPTY_CAPTION, uploadItem);
         verify(view).showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
+    }
 
-        //Bad Picture test
-        //Empty Caption test
-        uploadMediaPresenter.handleImageResult(-7, uploadItem)
-        verify(view)?.showBadImagePopup(ArgumentMatchers.anyInt(), ArgumentMatchers.eq(uploadItem))
+    /**
+     * Test for duplicate file name when the user presses the NEXT button
+     */
+    @Test
+    fun duplicateFileNameTest() {
+        uploadMediaPresenter.handleCaptionResult(FILE_NAME_EXISTS, uploadItem)
+        verify(view).showDuplicatePicturePopup(uploadItem)
+    }
 
+    /**
+     * Test for correct file name when the user presses the NEXT button
+     */
+    @Test
+    fun correctFileNameTest() {
+        uploadMediaPresenter.handleCaptionResult(IMAGE_OK, uploadItem)
+        verify(view).onImageValidationSuccess()
     }
 
     @Test
@@ -169,7 +187,7 @@ class UploadMediaPresenterTest {
         val uploadMediaDetailList: ArrayList<UploadMediaDetail> = ArrayList()
         uploadMediaDetailList.add(uploadMediaDetail)
         uploadItem.setMediaDetails(uploadMediaDetailList)
-        Mockito.`when`(repository.getImageQuality(uploadItem)).then {
+        Mockito.`when`(repository.getImageQuality(uploadItem, location)).then {
             verify(view).showProgress(true)
             testScheduler.triggerActions()
             verify(view).showProgress(true)
@@ -185,7 +203,7 @@ class UploadMediaPresenterTest {
         uploadMediaDetail.captionText = "added caption"
         uploadMediaDetail.languageCode = "eo"
         uploadItem.setMediaDetails(Collections.singletonList(uploadMediaDetail))
-        Mockito.`when`(repository.getImageQuality(uploadItem)).then {
+        Mockito.`when`(repository.getImageQuality(uploadItem, location)).then {
             verify(view).showProgress(true)
             testScheduler.triggerActions()
             verify(view).showProgress(true)
@@ -208,34 +226,6 @@ class UploadMediaPresenterTest {
     }
 
     /**
-     * Test bad image invalid location
-     */
-    @Test
-    fun handleBadImageBaseTestInvalidLocation() {
-        uploadMediaPresenter.handleBadImage(8, uploadItem)
-        verify(view).showBadImagePopup(8, uploadItem)
-    }
-
-    /**
-     * Test bad image empty title
-     */
-    @Test
-    fun handleBadImageBaseTestEmptyTitle() {
-        uploadMediaPresenter.handleBadImage(-3, uploadItem)
-        verify(view).showMessage(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt())
-    }
-
-    /**
-     * Teste show file already exists
-     */
-    @Test
-    fun handleBadImageBaseTestFileNameExists() {
-        uploadMediaPresenter.handleBadImage(-4, uploadItem)
-        verify(view).showDuplicatePicturePopup(uploadItem)
-    }
-
-
-    /**
      * Test show SimilarImageFragment
      */
     @Test
@@ -248,10 +238,9 @@ class UploadMediaPresenterTest {
     @Test
     fun setCorrectCountryCodeForReceivedImage() {
 
-        val germanyAsPlace = Place(null,null, null, null, LatLng(50.1, 10.2, 1.0f), null, null, null, true)
+        val germanyAsPlace =
+            Place(null, null, null, null, LatLng(50.1, 10.2, 1.0f), null, null, null, true, null)
         germanyAsPlace.isMonument = true
-
-        PowerMockito.mockStatic(Coordinates2Country::class.java)
 
         whenever(
             Coordinates2Country.country(
@@ -260,17 +249,19 @@ class UploadMediaPresenterTest {
             )
         ).thenReturn("Germany")
 
-        val item: Observable<UploadItem> = Observable.just(UploadItem(Uri.EMPTY, null, null, germanyAsPlace, 0, null, null, null))
+        val item: Observable<UploadItem> =
+            Observable.just(UploadItem(Uri.EMPTY, null, null, germanyAsPlace, 0, null, null, null))
 
         whenever(
             repository.preProcessImage(
                 ArgumentMatchers.any(UploadableFile::class.java),
                 ArgumentMatchers.any(Place::class.java),
-                ArgumentMatchers.any(UploadMediaPresenter::class.java)
+                ArgumentMatchers.any(UploadMediaPresenter::class.java),
+                ArgumentMatchers.any(LatLng::class.java)
             )
         ).thenReturn(item)
 
-        uploadMediaPresenter.receiveImage(uploadableFile, germanyAsPlace)
+        uploadMediaPresenter.receiveImage(uploadableFile, germanyAsPlace, location)
         verify(view).showProgress(true)
         testScheduler.triggerActions()
 
@@ -281,7 +272,5 @@ class UploadMediaPresenterTest {
         )
 
         assertEquals("Exptected contry code", "de", captor.value.countryCode);
-
-        verify(view).showProgress(false)
     }
 }

@@ -10,6 +10,7 @@
 * Dr. Mohammed
 * FiberAhmed
 * Kassem7899
+* LaMagiaaa
 * Meno25
 * Mido
 * Monrokhoury
@@ -18,9 +19,12 @@
 * NancyMilad
 * OsamaK
 * Tala Ali
+* أيوب
 * أَحمد
 * ترجمان05
 * ديفيد
+* عبد الإله صديقي
+* علاء
 * محمد أحمد عبد الفتاح
 * مشعل الحربي
 -->
@@ -112,6 +116,7 @@
   <string name="bullet">•</string>
   <string name="menu_settings">الإعدادات</string>
   <string name="intent_share_upload_label">رفع إلى المشاعات</string>
+  <string name="upload_in_progress">جار الرفع</string>
   <string name="username">اسم المستخدم</string>
   <string name="password">كلمة السر</string>
   <string name="login_credential">سجل الدخول إلى حسابك في كومنز بيتا</string>
@@ -122,10 +127,13 @@
   <string name="logging_in_message">الرجاء الانتظار…</string>
   <string name="updating_caption_title">تحديث التسميات التوضيحية والأوصاف</string>
   <string name="updating_caption_message">يرجى الانتظار...</string>
-  <string name="login_success">تم الدخول بشكل صحيح!</string>
+  <string name="login_success">نجاح تسجيل الدخول!</string>
   <string name="login_failed">فشل تسجيل الدخول</string>
   <string name="upload_failed">الملف غير موجود. فضلا اختر ملفا آخر.</string>
-  <string name="authentication_failed">فشلت المصادقة; الرجاء تسجيل الدخول مرة أخرى</string>
+  <string name="retry_limit_reached">تم الوصول إلى الحد الأقصى لإعادة المحاولة! يرجى إلغاء التحميل والمحاولة مرة أخرى</string>
+  <string name="unrestricted_battery_mode">هل تريد إيقاف تشغيل تحسين البطارية؟</string>
+  <string name="suggest_unrestricted_mode">يعمل رفع أكثر من 3 صور بشكل أكثر موثوقية عند إيقاف تشغيل تحسين البطارية. يرجى إيقاف تشغيل تحسين البطارية لتطبيق كومنز من الإعدادات للحصول على تجربة تحميل سلسة. \n\nالخطوات الممكنة لإيقاف تشغيل تحسين البطارية:\n\nالخطوة 1: اضغط على زر \'الإعدادات\' أدناه.\n\nالخطوة 2: التبديل من \'غير محسّن\" إلى \'الكل التطبيقات\'.\n\nالخطوة 3: ابحث عن \'كومنز\' أو \'fr.free.nrw.commons\'.\n\nالخطوة 4: اضغط عليها وحدد \'عدم التحسين\'.\n\nالخطوة 5: اضغط على \'تم\'.</string>
+  <string name="authentication_failed">فشلت المصادقة، الرجاء تسجيل الدخول مرة أخرى</string>
   <string name="uploading_started">بدأ الرفع!</string>
   <string name="uploading_queued">تحميل في قائمة الانتظار (وضع الاتصال المحدود ممكّن)</string>
   <string name="upload_completed_notification_title">رُفع %1$s!</string>
@@ -239,8 +247,11 @@
   <string name="read_storage_permission_rationale">صلاحية مطلوبة: قراءة وحدة التخزين الخارجية، لا يمكن للتطبيق الوصول إلى معرض الصور الخاص بك بدونها.</string>
   <string name="write_storage_permission_rationale">صلاحية مطلوبة: اكتب وحدة التخزين الخارجية، لا يمكن للتطبيق الوصول إلى معرض الصور/الكاميرا الخاصة بك بدونها.</string>
   <string name="location_permission_title">جارٍ طلب إذن الموقع</string>
+  <string name="in_app_camera_location_permission_title">سجل الموقع للقطات داخل التطبيق</string>
+  <string name="in_app_camera_location_switch_pref_summary">قم بتمكين هذا لتسجيل الموقع باستخدام لقطات داخل التطبيق في حالة عدم قيام كاميرا الجهاز بتسجيله</string>
   <string name="ok">موافق</string>
   <string name="warning">تحذير</string>
+  <string name="duplicate_file_name">عُثِرَ على اسم ملف مكرر</string>
   <string name="upload">رفع</string>
   <string name="yes">نعم</string>
   <string name="no">لا</string>
@@ -277,6 +288,7 @@
   <string name="navigation_item_about">حول</string>
   <string name="navigation_item_settings">الإعدادات</string>
   <string name="navigation_item_feedback">تعليقات</string>
+  <string name="navigation_item_feedback_github">ردود الفعل عبر \"غيت هاب\"</string>
   <string name="navigation_item_logout">تسجيل الخروج</string>
   <string name="navigation_item_info">مقدمة تعليمية</string>
   <string name="navigation_item_notification">إشعارات</string>
@@ -311,12 +323,14 @@
   <string name="skip_login">تجاوز</string>
   <string name="navigation_item_login">تسجيل الدخول</string>
   <string name="skip_login_title">هل تريد حقا تخطي تسجيل الدخول؟</string>
-  <string name="skip_login_message">يجب عليك تسجيل الدخول لرفع الصور في المستقبل.</string>
+  <string name="skip_login_message">سيتعين عليك في المستقبل تسجيل الدخول لتحميل الصور.</string>
   <string name="login_alert_message">الرجاء تسجيل الدخول لاستخدام هذه الميزة</string>
   <string name="copy_wikicode">انسخ نص الويكي إلى الكليب بورد</string>
   <string name="wikicode_copied">نص الويكي تم نسخه إلى الكليب بورد</string>
   <string name="nearby_location_not_available">قد لا تعمل الأجهزة المجاورة بشكل صحيح، الموقع غير متوفر.</string>
+  <string name="upload_location_access_denied">رُفض الوصول إلى الموقع. يرجى ضبط موقعك يدويًا لاستخدام هذه الميزة.</string>
   <string name="location_permission_rationale_nearby">صلاحية مطلوبة لعرض قائمة بالأماكن القريبة</string>
+  <string name="location_permission_rationale_explore">الإذن مطلوب لعرض قائمة الصور القريبة</string>
   <string name="nearby_directions">الاتجاهات</string>
   <string name="nearby_wikidata">ويكي بيانات</string>
   <string name="nearby_wikipedia">ويكيبيديا</string>
@@ -369,21 +383,23 @@
   <string name="result">النتيجة</string>
   <string name="quiz_back_button">إذا استمر رفع الصور التي تتطلب الحذف، فمن المحتمل أن يتم من حسابك، هل أنت متأكد من أنك تريد إنهاء الاختبار؟</string>
   <string name="quiz_alert_message">تم حذف أكثر من %1$s من الصور التي رفعتها، إذا استمر تحميل الصور التي تتطلب الحذف، فمن المحتمل أن يتم منع حسابك. \n\nهل ترغب في مشاهدة البرنامج التعليمي مرة أخرى ومن ثم إجراء اختبار لمساعدتك في معرفة نوع الصور التي ينبغي أو لا ينبغي رفعا؟</string>
-  <string name="selfie_answer">الصور الشخصية ليست لها قيمة موسوعية كبيرة; يُرجَى عدم رفع صورة لنفسك ما لم تكن لديك بالفعل مقالة ويكيبيديا عنك.</string>
+  <string name="selfie_answer">الصور الشخصية ليس لها قيمة موسوعية كبيرة; يُرجَى عدم رفع صورة لنفسك ما لم تكن لديك بالفعل مقالة ويكيبيديا عنك.</string>
   <string name="taj_mahal_answer">من الأفضل رفع صور المعالم الأثرية والمناظر الخارجية في معظم البلدان، تُرجَى ملاحظة أن المنشآت الفنية المؤقتة بالخارج تكون محمية بحقوق الطبع والنشر في الغالب وليس مسموحا برفعها.</string>
   <string name="screenshot_answer">تُعتبَر لقطات شاشة المواقع الإلكترونية أعمالا مشتقة وتخضع لأي حقوق نشر على الموقع نفسه، ويمكن استخدامها بعد الحصول على إذن من المؤلف، بدون هذا الإذن، يُعتبَر أي فن تقوم بإنشائه بناءً على عملهم نسخة غير مرخصة من قبل المؤلف الأصلي.</string>
   <string name="blurry_image_answer">أحد أهداف كومنز جمع صور عالية الجودة، لذلك; لا يجب رفع صور باهتة; حاول دائما التقاط صور جميلة بإضاءة جيدة.</string>
   <string name="construction_event_answer">الصور التي تظهر التكنولوجيا أو الثقافة موضع ترحيب كبير في كومنز.</string>
   <string name="congratulatory_message_quiz">لقد حصلت عل %1$s من الإجابات الصحيحة، تهانينا!</string>
   <string name="warning_for_no_answer">حدد أحد الخيارين للإجابة على السؤال</string>
-  <string name="user_not_logged_in">انتهت صلاحية جلسة تسجيل الدخول; يُرجَى تسجيل الدخول مرة أخرى.</string>
+  <string name="user_not_logged_in">انتهت صلاحية جلسة تسجيل الدخول. يُرجَى تسجيل الدخول مرة أخرى.</string>
   <string name="quiz_result_share_message">تبادل سؤالك مع أصدقائك!</string>
   <string name="continue_message">استمرار</string>
   <string name="correct">إجابة صحيحة</string>
   <string name="wrong">إجابة خاطئة</string>
   <string name="quiz_screenshot_question">هل هذه الصورة موافقة للرفع؟</string>
   <string name="share_app_title">شارك التطبيق</string>
-  <string name="error_fetching_nearby_places">خطأ في جلب الأماكن المجاورة.</string>
+  <string name="rotate">تدوير</string>
+  <string name="error_fetching_nearby_places">تعذر تحميل الأماكن القريبة</string>
+  <string name="no_pictures_in_this_area">لا توجد صور في هذه المنطقة</string>
   <string name="no_nearby_places_around">لا توجد أماكن قريبة بالجوار</string>
   <string name="error_fetching_nearby_monuments">خطأ في جلب المعالم القريبة.</string>
   <string name="no_recent_searches">لا توجد عمليات بحث حديثة</string>
@@ -458,13 +474,23 @@
   <string name="never_ask_again">لا تسأل هذا مرة أخرى</string>
   <string name="display_location_permission_title">اطلب إذن الموقع</string>
   <string name="display_location_permission_explanation">اطلب إذن الموقع عند الحاجة إلى ميزة عرض بطاقة التنبيه القريبة.</string>
-  <string name="achievements_fetch_failed">حدث خطأ ما; لم نتمكن من جلب إنجازاتك</string>
+  <string name="achievements_fetch_failed">حدث خطأ ما، لم نتمكن من جلب إنجازاتك</string>
   <string name="achievements_fetch_failed_ultimate_achievement">لقد قدمت الكثير من المساهمات لا يستطيع نظامنا لحساب الإنجازات التعامل معها. هذا هو الإنجاز النهائي.</string>
   <string name="ends_on">ينتهي في:</string>
   <string name="display_campaigns">عرض الحملات</string>
   <string name="display_campaigns_explanation">انظر الحملات الجارية</string>
+  <string name="in_app_camera_location_access_explanation">اسمح للتطبيق بجلب الموقع في حالة عدم تسجيله بالكاميرا. بعض كاميرات الأجهزة لا تسجل الموقع. في مثل هذه الحالات، فإن السماح للتطبيق بجلب الموقع وإرفاقه به يجعل مساهمتك أكثر فائدة. يمكنك تغيير هذا في أي وقت من خلال الإعدادات</string>
+  <string name="option_allow">السماح</string>
+  <string name="option_dismiss">رفض</string>
+  <string name="in_app_camera_needs_location">يرجى تشغيل الوصول إلى الموقع من الإعدادات والمحاولة مرة أخرى. \n\nملاحظة: قد لا يكون للتحميل موقع إذا كان التطبيق غير قادر على استرداد الموقع من الجهاز خلال فترة زمنية قصيرة.</string>
+  <string name="in_app_camera_location_permission_rationale">تحتاج الكاميرا داخل التطبيق إلى إذن تحديد الموقع لإرفاقها بصورك في حالة عدم توفر الموقع في EXIF. يرجى السماح للتطبيق بالوصول إلى موقعك والمحاولة مرة أخرى.\n\nملاحظة: قد لا يكون للتحميل موقع إذا كان التطبيق غير قادر على استرداد الموقع من الجهاز خلال فترة زمنية قصيرة.</string>
+  <string name="in_app_camera_location_permission_denied">لن يسجل التطبيق الموقع مع اللقطات بسبب عدم وجود إذن بالموقع</string>
+  <string name="in_app_camera_location_unavailable">لن يسجل التطبيق الموقع مع اللقطات أثناء إيقاف تشغيل نظام تحديد المواقع (GPS).</string>
+  <string name="open_document_photo_picker_title">استخدم منتقي ألوان الصور القائم على المستندات</string>
+  <string name="open_document_photo_picker_explanation">يخاطر منتقي الصور الجديد لنظام Android بفقدان معلومات الموقع. قم بالتمكين إذا بدا أنك تستخدمه.</string>
+  <string name="location_loss_warning">قد يؤدي إيقاف تشغيل هذا إلى تشغيل منتقي صور Android الجديد. ويخاطر بفقدان معلومات الموقع.\n\nاضغط على \"اقرأ المزيد\" لمزيد من المعلومات.</string>
   <string name="nearby_campaign_dismiss_message">لن ترى الحملات بعد الآن، ومع ذلك، يمكنك إعادة تمكين هذا الإشعار في الإعدادات إذا كنت ترغب.</string>
-  <string name="this_function_needs_network_connection">تتطلب هذه الوظيفة الاتصال بالشبكة; يُرجَى التحقق من إعدادات اتصالك.</string>
+  <string name="this_function_needs_network_connection">تتطلب هذه الوظيفة الاتصال بالشبكة. يُرجَى التحقق من إعدادات اتصالك.</string>
   <string name="error_processing_image">حدث خطأ أثناء معالجة الصورة. رجاءً حاول مرة أخرى!</string>
   <string name="getting_edit_token">الحصول على رمز للتحرير</string>
   <string name="check_category_adding_template">تجري إضافة قالب لفخص التصنيف</string>
@@ -499,8 +525,8 @@
   <string name="no_image">لا صور مستخدمة</string>
   <string name="no_image_reverted">لم يتم إرجاع أية صور</string>
   <string name="no_image_uploaded">لا توجد صور مرفوعة</string>
-  <string name="no_notification">ليست لديك إشعارات غير مقروءة</string>
-  <string name="no_read_notification">ليست لديك إشعارات مقروءة</string>
+  <string name="no_notification">ليس لديك أي إشعارات غير مقروءة</string>
+  <string name="no_read_notification">ليس لديك أي إشعاراتٍ غير مقروءة</string>
   <string name="share_logs_using">مشاركة السجلات باستخدام</string>
   <string name="menu_option_read">عرض المقروءة</string>
   <string name="menu_option_unread">عرض غير المقروءة</string>
@@ -524,6 +550,8 @@
   <string name="exif_tag_name_lensModel">طراز العدسة</string>
   <string name="exif_tag_name_serialNumbers">الأرقام التسلسلية</string>
   <string name="exif_tag_name_software">برمجية</string>
+  <string name="media_location_permission_denied">رفض الوصول إلى موقع الوسائط</string>
+  <string name="add_location_manually">قد لا نتمكن من الحصول تلقائيًا على بيانات الموقع من الصور التي تقوم برفعها. يرجى إضافة الموقع المناسب لكل صورة قبل الإرسال</string>
   <string name="share_text">ارفع الصور لويكيميديا ​​كومنز مباشرة من هاتفك. قم بتنزيل تطبيق كومنز الآن: %1$s</string>
   <string name="share_via">مشاركة التطبيق عبر...</string>
   <string name="image_info">معلومات الصورة</string>
@@ -545,6 +573,7 @@
   <string name="delete_helper_ask_reason_copyright_press_photo">اضغط على الصورة</string>
   <string name="delete_helper_ask_reason_copyright_internet_photo">صورة عشوائية من الإنترنت</string>
   <string name="delete_helper_ask_reason_copyright_logo">شعار</string>
+  <string name="delete_helper_ask_reason_copyright_no_freedom_of_panorama">انتهاك حرية البانوراما</string>
   <string name="delete_helper_ask_alert_set_positive_button_reason">لأنها</string>
   <string name="category_edit_helper_make_edit_toast">محاولة تحديث التصنيفات.</string>
   <string name="category_edit_helper_show_edit_title">تحديث التصنيف</string>
@@ -581,7 +610,7 @@
   <string name="coordinates_edit_helper_edit_message_else">لا يمكن إضافة الإحداثيات.</string>
   <string name="description_edit_helper_edit_message_else">تعذر إضافة الأوصاف.</string>
   <string name="caption_edit_helper_edit_message_else">تعذرت إضافة الشرح.</string>
-  <string name="coordinates_picking_unsuccessful">غير قادر على الحصول على الإحداثيات.</string>
+  <string name="coordinates_picking_unsuccessful">لم تُحدث إحداثيات الصورة</string>
   <string name="descriptions_picking_unsuccessful">تعذر الحصول على الأوصاف.</string>
   <string name="description_activity_title">تحرير الأوصاف والتعليقات</string>
   <string name="share_image_via">مشاركة الصور عبر</string>
@@ -596,12 +625,13 @@
   <string name="place_state_needs_photo">يحتاج صورة</string>
   <string name="place_type">نوع المكان:</string>
   <string name="nearby_search_hint">جسر، متحف، فندق، إلخ</string>
-  <string name="you_must_reset_your_passsword">حدث خطأ ما عند الدخول، يجب عليك إعادة تعيين كلمة المرور!!</string>
+  <string name="you_must_reset_your_passsword">حدث خطأ ما أثناء تسجيل الدخول. يجب عليك إعادة تعيين كلمة المرور الخاصة بك!</string>
   <string name="title_for_media">وسائل الإعلام</string>
   <string name="title_for_child_classes">تصنيف الأطفال</string>
   <string name="title_for_parent_classes">تصنيف أولياء الأمور</string>
   <string name="upload_nearby_place_found_title">تم العثور على مكان قريب</string>
-  <string name="upload_nearby_place_found_description">هل هذه صورة للمكان %1$؟</string>
+  <string name="upload_nearby_place_found_description_plural">هل هذه الصور لـ %1$s ؟</string>
+  <string name="upload_nearby_place_found_description_singular">هل هذه صورة %1$s ؟</string>
   <string name="title_app_shortcut_bookmark">العلامات</string>
   <string name="title_app_shortcut_setting">الإعدادات</string>
   <string name="remove_bookmark">أزل من العلامات</string>
@@ -615,7 +645,10 @@
   <string name="cannot_open_location_settings">فشل في فتح إعدادات الموقع. يرجى تشغيل الموقع يدويا</string>
   <string name="recommend_high_accuracy_mode">للحصول على أفضل النتائج، اختر وضع High Accuracy.</string>
   <string name="ask_to_turn_location_on">تشغيل الموقع؟</string>
+  <string name="ask_to_turn_location_on_text">يرجى تشغيل خدمات الموقع ليظهر التطبيق موقعك الحالي</string>
   <string name="nearby_needs_location">خدمة قريب من هنا تحتاج إلى تفعيل خدمة الموقع للعمل بشكل صحيح</string>
+  <string name="explore_map_needs_location">يحتاج استكشاف الخريطة إلى إذن الموقع لعرض الصور القريبة</string>
+  <string name="upload_map_location_access">تحتاج إلى منح إذن الموقع لتعيين الموقع تلقائيًا.</string>
   <string name="use_location_from_similar_image">هل قمت بتصوير هاتين الصورتين في نفس المكان؟ هل تريد استخدام دائرة العرض / خط الطول للصورة على اليمين؟</string>
   <string name="load_more">تحميل المزيد</string>
   <string name="nearby_no_results">لم يتم العثور على أي أماكن، جرب تغيير محددات بحثك.</string>
@@ -658,7 +691,6 @@
   <string name="leaderboard_nearby">مجاور</string>
   <string name="leaderboard_used">مستخدَم</string>
   <string name="leaderboard_my_rank_button_text">ترتيبي</string>
-  <string name="map_attribution">&amp;#169; &lt;a href=\"https://www.mapbox.com/about/maps/\"&gt;Mapbox&lt;/a&gt; &amp;#169; &lt;a href=\"https://www.openstreetmap.org/copyright\"&gt;OpenStreetMap&lt;/a&gt; &lt;a href=\"https://www.mapbox.com/map-feedback/\"&gt;تحسين هذه الخريطة&lt;/a&gt;</string>
   <string name="limited_connection_enabled">وضع الاتصال المحدود مُمَكَّن!</string>
   <string name="limited_connection_disabled">وضع الاتصال المحدود مُعطل. سيجري استئناف التحميلات المعلقة الآن.</string>
   <string name="limited_connection_mode">وضع الاتصال المحدود</string>
@@ -704,6 +736,10 @@
   <string name="custom_selector_info_text2">على عكس الصورة الموجودة على اليسار ، فإن الصورة الموجودة على اليمين بها شعار كومنز يشير إلى أنه تم تحميلها بالفعل. !ن! المس مع الاستمرار لمعاينة الصورة.</string>
   <string name="welcome_custom_selector_ok">رائع</string>
   <string name="custom_selector_already_uploaded_image_text">تم تحميل هذه الصورة بالفعل إلى العموم.</string>
+  <string name="custom_selector_over_limit_warning">لأسباب فنية، لا يمكن للتطبيق تحميل أكثر من %1$d من الصور مرة واحدة بشكل موثوق. تم تجاوز حد التحميل %1$d بواسطة %2$d .</string>
+  <string name="custom_selector_dismiss_limit_warning_button_text">رفض</string>
+  <string name="custom_selector_button_limit_text">الحد الأقصى: %1$d</string>
+  <string name="custom_selector_limit_error_desc">خطأ: تجاوز حد التحميل</string>
   <string name="wlm_upload_info">سيتم إدخال هذه الصورة في مسابقة Wiki Loves Monuments</string>
   <string name="display_monuments">عرض الآثار</string>
   <string name="wlm_month_message">إنه شهر Wiki Loves Monuments!</string>
@@ -721,14 +757,14 @@
   <string name="advanced_query_info_text">يمكنك تخصيص استعلام قريب. إذا حصلت على أخطاء ، قم بإعادة التعيين والتطبيق.</string>
   <string name="apply">تطبيق</string>
   <string name="reset">إعادة ضبط</string>
-  <string name="location_message">تساعد بيانات الموقع محرري Wiki في العثور على صورتك ، مما يجعلها أكثر فائدة.! N! لا يوجد موقع لعمليات التحميل الأخيرة.! N! نقترح عليك تشغيل الموقع في إعدادات تطبيق الكاميرا.</string>
+  <string name="location_message">تساعد بيانات الموقع محرري ويكي في العثور على صورتك، مما يجعلها أكثر فائدة.\nلا تحتوي مرفوعاتك الأخيرة على موقع.\nنقترح عليك تشغيل الموقع في إعدادات تطبيق الكاميرا.\nشكرًا لك على الرفع!</string>
   <string name="no_location_found_title">لم يتم العثور على موقع</string>
-  <string name="no_location_found_message">ماذا عن إضافة المكان الذي تم التقاط هذه الصورة فيه؟! N! تساعد بيانات الموقع محرري Wiki في العثور على صورتك ، مما يجعلها أكثر فائدة.! N! شكرًا لك!</string>
+  <string name="no_location_found_message">ماذا عن إضافة المكان الذي التقطت فيه هذه الصورة؟\nتساعد بيانات الموقع محرري ويكي في العثور على صورتك، مما يجعلها أكثر فائدة.\nشكرًا لك!</string>
   <string name="add_location">أضف الموقع</string>
   <string name="feedback_sharing_data_alert">يُرجى إزالة أي معلومات لا تشعر بالارتياح عند مشاركتها علنًا من هذا البريد الإلكتروني. أيضًا ، يرجى العلم أن عنوان بريدك الإلكتروني الذي تنشر به ، والاسم المرتبط وصورة الملف الشخصي ، سيكونان مرئيين للجمهور.</string>
   <string name="explore_map_details">التفاصيل</string>
-  <string name="achievements_unavailable_beta">الإنجازات متوفرة فقط في نكهة المنتج ، يرجى مراجعة وثائق المطور.</string>
-  <string name="leaderboard_unavailable_beta">لوحة الصدارة متوفرة فقط في نكهة المنتج ، يرجى مراجعة وثائق المطور.</string>
+  <string name="achievements_unavailable_beta">الإنجازات متوفرة فقط في نكهة المنتج. يرجى مراجعة وثائق المطور.</string>
+  <string name="leaderboard_unavailable_beta">لوحة الصدارة متوفرة فقط في نكهة المنتج. يرجى مراجعة وثائق المطور.</string>
   <string name="copyright_popup">يرجى فقط تحميل الصور التي قمت بالتقاطها بنفسك. المحملين من صور لديها حقوق النسخ سيتم منعهم من التحميل. وهذا ينطبق على مفضلي استخدام بيتا ايضا. شكرا لمشاركتكم في فحص هذ التطبيق</string>
   <string name="select_feedback_data_choice">يرجى إلغاء تحديد أي معلومات لا تشعر بالارتياح لمشاركتها علنًا.</string>
   <string name="api_level">مستوى API</string>
@@ -743,6 +779,8 @@
   <string name="your_feedback">تعليقاتك</string>
   <string name="mark_as_not_for_upload">وضع علامة على أنه ليس للتحميل</string>
   <string name="unmark_as_not_for_upload">إلغاء علامة على أنه ليس للتحميل</string>
+  <string name="marking_as_not_for_upload">إلغاء علامة على أنه ليس للرفع</string>
+  <string name="unmarking_as_not_for_upload">إلغاء علامة على أنه ليس للرفع</string>
   <string name="show_already_actioned_pictures">عرض الصور بالفعل</string>
   <string name="hiding_already_actioned_pictures">إخفاء الصور بالفعل</string>
   <string name="no_more_images_found">لم يتم العثور على المزيد من الصور</string>
@@ -757,5 +795,10 @@
   <string name="request_user_block">طلب منع هذا المستخدم</string>
   <string name="welcome_to_full_screen_mode_text">مرحبًا بك في وضع التحديد بملء الشاشة</string>
   <string name="full_screen_mode_zoom_info">استخدم إصبعين للتكبير والتصغير.</string>
-  <string name="full_screen_mode_features_info">مرر سريعًا وطويلًا لتنفيذ هذه الإجراءات:! N! - يسار / يمين: انتقل إلى السابق / التالي! N! - لأعلى: حدد! N! - أسفل: وضع علامة على أنه ليس للتحميل.</string>
+  <string name="full_screen_mode_features_info" fuzzy="true">مرر سريعًا وطويلًا لتنفيذ هذه الإجراءات:! N! - يسار / يمين: انتقل إلى السابق / التالي! N! - لأعلى: حدد! N! - أسفل: وضع علامة على أنه ليس للتحميل.</string>
+  <string name="storage_permissions_denied">رُفض إذن التخزين</string>
+  <string name="unable_to_share_upload_item">تعذر مشاركة هذا العنصر</string>
+  <string name="permissions_are_required_for_functionality">الإذن مطلوب لهذه الوظيفة</string>
+  <string name="send_thanks_to_author">اشكر المؤلف</string>
+  <string name="error_sending_thanks">حدث خطأ أثناء إرسال الشكر للمؤلف.</string>
 </resources>

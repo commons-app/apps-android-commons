@@ -16,7 +16,7 @@ open class OnSwipeTouchListener(context: Context?) : View.OnTouchListener {
     private val SWIPE_THRESHOLD_WIDTH = (getScreenResolution(context!!)).first / 3
     private val SWIPE_VELOCITY_THRESHOLD = 1000
 
-    override fun onTouch(view: View?, motionEvent: MotionEvent?): Boolean {
+    override fun onTouch(view: View?, motionEvent: MotionEvent): Boolean {
         return gestureDetector.onTouchEvent(motionEvent)
     }
 
@@ -32,7 +32,7 @@ open class OnSwipeTouchListener(context: Context?) : View.OnTouchListener {
 
     inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
 
-        override fun onDown(e: MotionEvent?): Boolean {
+        override fun onDown(e: MotionEvent): Boolean {
             return true
         }
 

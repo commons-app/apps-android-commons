@@ -30,6 +30,7 @@ import fr.free.nrw.commons.upload.FileUtilsWrapper
 import fr.free.nrw.commons.utils.CustomSelectorUtils
 import kotlinx.coroutines.*
 import java.io.File
+import java.lang.Integer.max
 import javax.inject.Inject
 
 
@@ -67,6 +68,22 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
     private lateinit var prefs: SharedPreferences
 
     /**
+     * Maximum number of images that can be selected.
+     */
+    private val uploadLimit: Int = 20
+
+    /**
+     * Flag that is marked true when the amount
+     * of selected images is greater than the upload limit.
+     */
+    private var uploadLimitExceeded: Boolean = false
+
+    /**
+     * Tracks the amount by which the upload limit has been exceeded.
+     */
+    private var uploadLimitExceededBy: Int = 0
+
+    /**
      * View Model Factory.
      */
     @Inject
@@ -94,6 +111,8 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
      * Image Fragment instance
      */
     var imageFragment: ImageFragment? = null
+
+    private var progressDialogText:String=""
 
     /**
      * onCreate Activity, sets theme, initialises the view model, setup view.
@@ -140,7 +159,7 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
                 data!!
                     .getParcelableArrayListExtra(CustomSelectorConstants.NEW_SELECTED_IMAGES)!!
             val shouldRefresh = data.getBooleanExtra(SHOULD_REFRESH, false)
-            imageFragment!!.passSelectedImages(selectedImages, shouldRefresh)
+            imageFragment?.passSelectedImages(selectedImages, shouldRefresh)
         }
     }
 
@@ -187,17 +206,18 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
             markAsNotForUpload(arrayListOf())
             return
         }
-        var i = 0
-        while (i < selectedImages.size) {
-            val path = selectedImages[i].path
+
+        val iterator = selectedImages.iterator()
+        while (iterator.hasNext()) {
+            val image = iterator.next()
+            val path = image.path
             val file = File(path)
             if (!file.exists()) {
-                selectedImages.removeAt(i)
-                i--
+                iterator.remove()
             }
-            i++
         }
         markAsNotForUpload(selectedImages)
+        toolbarBinding.imageLimitError.visibility = View.INVISIBLE
     }
 
     /**
@@ -221,56 +241,63 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
      */
     private fun insertIntoNotForUpload(images: ArrayList<Image>) {
         scope.launch {
+            withContext(Dispatchers.Main) {
+                imageFragment?.showMarkUnmarkProgressDialog(text = progressDialogText)
+            }
+
             var allImagesAlreadyNotForUpload = true
-            images.forEach {
+            images.forEach { image ->
                 val imageSHA1 = CustomSelectorUtils.getImageSHA1(
-                    it.uri,
+                    image.uri,
                     ioDispatcher,
                     fileUtilsWrapper,
                     contentResolver
                 )
                 val exists = notForUploadStatusDao.find(imageSHA1)
-
-                // If image exists in not for upload table make allImagesAlreadyNotForUpload false
                 if (exists < 1) {
                     allImagesAlreadyNotForUpload = false
                 }
             }
 
-            // if all images is not already marked as not for upload, insert all images in
-            // not for upload table
             if (!allImagesAlreadyNotForUpload) {
-                images.forEach {
+                // Insert or delete images as necessary, but the UI updates should be posted back to the main thread
+                images.forEach { image ->
                     val imageSHA1 = CustomSelectorUtils.getImageSHA1(
-                        it.uri,
+                        image.uri,
                         ioDispatcher,
                         fileUtilsWrapper,
                         contentResolver
                     )
-                    notForUploadStatusDao.insert(
-                        NotForUploadStatus(
-                            imageSHA1
-                        )
-                    )
+                    notForUploadStatusDao.insert(NotForUploadStatus(imageSHA1))
                 }
-
-                // if all images is already marked as not for upload, delete all images from
-                // not for upload table
+                withContext(Dispatchers.Main) {
+                    images.forEach { image ->
+                        imageFragment?.removeImage(image)
+                    }
+                    imageFragment?.clearSelectedImages()
+                }
             } else {
-                images.forEach {
+                images.forEach { image ->
                     val imageSHA1 = CustomSelectorUtils.getImageSHA1(
-                        it.uri,
+                        image.uri,
                         ioDispatcher,
                         fileUtilsWrapper,
                         contentResolver
                     )
                     notForUploadStatusDao.deleteNotForUploadWithImageSHA1(imageSHA1)
                 }
+
+                withContext(Dispatchers.Main) {
+                    imageFragment?.refresh()
+                }
             }
 
-            imageFragment!!.refresh()
-            val bottomLayout: ConstraintLayout = findViewById(R.id.bottom_layout)
-            bottomLayout.visibility = View.GONE
+            withContext(Dispatchers.Main) {
+                imageFragment?.dismissMarkUnmarkProgressDialog()
+                val bottomLayout: ConstraintLayout = findViewById(R.id.bottom_layout)
+                bottomLayout.visibility = View.GONE
+                changeTitle(bucketName, 0)
+            }
         }
     }
 
@@ -284,10 +311,17 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
     /**
      * Change the title of the toolbar.
      */
-    private fun changeTitle(title: String) {
-        val titleText = findViewById<TextView>(R.id.title)
-        if (titleText != null) {
-            titleText.text = title
+    private fun changeTitle(title: String, selectedImageCount:Int) {
+        if (title.isNotEmpty()){
+            val titleText = findViewById<TextView>(R.id.title)
+            var titleWithAppendedImageCount = title
+            if (selectedImageCount > 0) {
+                titleWithAppendedImageCount += " (${resources.getQuantityString(R.plurals.custom_picker_images_selected_title_appendix, 
+                    selectedImageCount, selectedImageCount)})"
+            }
+            if (titleText != null) {
+                titleText.text = titleWithAppendedImageCount
+            }
         }
     }
 
@@ -297,6 +331,10 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
     private fun setUpToolbar() {
         val back: ImageButton = findViewById(R.id.back)
         back.setOnClickListener { onBackPressed() }
+
+        val limitError: ImageButton = findViewById(R.id.image_limit_error)
+        limitError.visibility = View.INVISIBLE
+        limitError.setOnClickListener { displayUploadLimitWarning() }
     }
 
     /**
@@ -308,7 +346,7 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
             .addToBackStack(null)
             .commit()
 
-        changeTitle(folderName)
+        changeTitle(folderName, 0)
 
         bucketId = folderId
         bucketName = folderName
@@ -323,8 +361,21 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
         selectedNotForUploadImages: Int
     ) {
         viewModel.selectedImages.value = selectedImages
+        changeTitle(bucketName, selectedImages.size)
 
-        if (selectedNotForUploadImages > 0) {
+        uploadLimitExceeded = selectedImages.size > uploadLimit
+        uploadLimitExceededBy = max(selectedImages.size - uploadLimit,0)
+
+        if (uploadLimitExceeded && selectedNotForUploadImages == 0) {
+            toolbarBinding.imageLimitError.visibility = View.VISIBLE
+            bottomSheetBinding.upload.text = resources.getString(
+                R.string.custom_selector_button_limit_text, uploadLimit)
+        } else {
+            toolbarBinding.imageLimitError.visibility = View.INVISIBLE
+            bottomSheetBinding.upload.text = resources.getString(R.string.upload)
+        }
+
+        if (uploadLimitExceeded || selectedNotForUploadImages > 0) {
             bottomSheetBinding.upload.isEnabled = false
             bottomSheetBinding.upload.alpha = 0.5f
         } else {
@@ -334,8 +385,14 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
 
         bottomSheetBinding.notForUpload.text =
             when (selectedImages.size == selectedNotForUploadImages) {
-                true -> getString(R.string.unmark_as_not_for_upload)
-                else -> getString(R.string.mark_as_not_for_upload)
+                true -> {
+                    progressDialogText=getString(R.string.unmarking_as_not_for_upload)
+                    getString(R.string.unmark_as_not_for_upload)
+                }
+                else -> {
+                    progressDialogText=getString(R.string.marking_as_not_for_upload)
+                    getString(R.string.mark_as_not_for_upload)
+                }
             }
 
         val bottomLayout: ConstraintLayout = findViewById(R.id.bottom_layout)
@@ -366,22 +423,22 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
      * Get the selected images. Remove any non existent file, forward the data to finish selector.
      */
     fun onDone() {
-        val selectedImages = viewModel.selectedImages.value
-        if (selectedImages.isNullOrEmpty()) {
-            finishPickImages(arrayListOf())
-            return
-        }
-        var i = 0
-        while (i < selectedImages.size) {
-            val path = selectedImages[i].path
-            val file = File(path)
-            if (!file.exists()) {
-                selectedImages.removeAt(i)
-                i--
+            val selectedImages = viewModel.selectedImages.value
+            if (selectedImages.isNullOrEmpty()) {
+                finishPickImages(arrayListOf())
+                return
             }
-            i++
-        }
-        finishPickImages(selectedImages)
+            var i = 0
+            while (i < selectedImages.size) {
+                val path = selectedImages[i].path
+                val file = File(path)
+                if (!file.exists()) {
+                    selectedImages.removeAt(i)
+                    i--
+                }
+                i++
+            }
+            finishPickImages(selectedImages)
     }
 
     /**
@@ -404,8 +461,22 @@ class CustomSelectorActivity : BaseActivity(), FolderClickListener, ImageSelectL
         val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (fragment != null && fragment is FolderFragment) {
             isImageFragmentOpen = false
-            changeTitle(getString(R.string.custom_selector_title))
+            changeTitle(getString(R.string.custom_selector_title), 0)
         }
+    }
+
+    /**
+     * Displays a dialog explaining the upload limit warning.
+     */
+    private fun displayUploadLimitWarning() {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.custom_selector_limit_dialog)
+        (dialog.findViewById(R.id.btn_dismiss_limit_warning) as Button).setOnClickListener()
+        { dialog.dismiss() }
+        (dialog.findViewById(R.id.upload_limit_warning) as TextView).text = resources.getString(
+            R.string.custom_selector_over_limit_warning, uploadLimit, uploadLimitExceededBy)
+        dialog.show()
     }
 
     /**

@@ -10,9 +10,9 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
-import org.wikipedia.dataclient.mwapi.MwQueryPage
-import org.wikipedia.dataclient.mwapi.MwQueryResponse
-import org.wikipedia.dataclient.mwapi.MwQueryResult
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryPage
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResponse
+import fr.free.nrw.commons.wikidata.mwapi.MwQueryResult
 
 class CategoryClientTest {
     @Mock
@@ -24,7 +24,7 @@ class CategoryClientTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
     }
 
     @Test
