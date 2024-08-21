@@ -495,4 +495,5 @@
   <string name="enter_description">بازخورد شما چیست؟</string>
   <string name="your_feedback">بازخورد شما</string>
   <string name="see_your_achievements">دستاوردهای خود را ببینید</string>
+  <string name="could_not_load_place_data">ناتوان از بارگیری داده‌های مکانی</string>
 </resources>

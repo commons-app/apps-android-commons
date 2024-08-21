@@ -25,6 +25,7 @@
 * Melissadeba95
 * Metroitendo
 * Mirzali
+* Méthodes Bulebe Hangi
 * Nicolas Raoul
 * Orikrin1998
 * Paraboule
@@ -809,5 +810,7 @@
   </plurals>
   <string name="multiple_files_depiction">Souvenez-vous que toutes les images dans une importation multiple prennent les mêmes catégories et descriptions. Si les images de partagent pas les descriptions et catégories, veuillez effectuer plusieurs importations séparées.</string>
   <string name="multiple_files_depiction_header">Note au sujet des importations multiples</string>
+  <string name="write_something_about_the_item">Ecrivez quelque chose sur l\'article \"%1$s\". Il sera visible par le public\nAjouter une définition terminologique pour ce terme</string>
   <string name="feedback_destination_note">Vos commentaires sont publiés sur la page wiki suivante : &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Mobile_app/Feedback\"&gt;Commons:Mobile app/Feedback&lt;/a&gt;</string>
+  <string name="could_not_load_place_data">Ne peut pas supporter les données</string>
 </resources>

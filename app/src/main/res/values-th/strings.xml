@@ -99,7 +99,7 @@
   <string name="provider_contributions">การอัปโหลดของฉัน</string>
   <string name="menu_share">แชร์</string>
   <string name="menu_view_file_page">ดูหน้าไฟล์</string>
-  <string name="share_title_hint">คำบรรยาย (จำเป็น)</string>
+  <string name="share_title_hint">คำอธิบาย (จำเป็น)</string>
   <string name="add_caption_toast">โปรดระบุคำอธิบายสำหรับไฟล์นี้</string>
   <string name="share_description_hint">คำอธิบาย</string>
   <string name="share_caption_hint">คำอธิบาย</string>
