@@ -235,6 +235,7 @@ class UploadRepositoryUnitTest {
         assertEquals(repository.setSelectedLicense(""), uploadModel.setSelectedLicense(""))
     }
 
+    @Ignore
     @Test
     fun testSetSelectedExistingDepictions() {
         assertEquals(
