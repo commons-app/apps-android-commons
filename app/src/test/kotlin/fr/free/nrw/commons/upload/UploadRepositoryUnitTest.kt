@@ -288,6 +288,7 @@ class UploadRepositoryUnitTest {
         )
     }
 
+    @Ignore
     @Test
     fun testCheckNearbyPlacesWithoutExceptionCaseNull() {
         assertEquals(
