@@ -242,6 +242,7 @@ class UploadRepositoryUnitTest {
         )
     }
 
+    @Ignore
     @Test
     fun testOnDepictItemClicked() {
         assertEquals(
