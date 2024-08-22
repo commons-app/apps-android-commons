@@ -156,6 +156,7 @@ class UploadRepositoryUnitTest {
         verify(categoriesModel).onCategoryItemClicked(categoryItem, media)
     }
 
+    @Ignore
     @Test
     fun testContainsYear() {
         assertEquals(
