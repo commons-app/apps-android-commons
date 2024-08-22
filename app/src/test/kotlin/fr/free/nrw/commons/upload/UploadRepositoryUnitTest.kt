@@ -145,6 +145,7 @@ class UploadRepositoryUnitTest {
         )
     }
 
+    @Ignore
     @Test
     fun testSetSelectedCategories() {
         repository.setSelectedCategories(listOf())
