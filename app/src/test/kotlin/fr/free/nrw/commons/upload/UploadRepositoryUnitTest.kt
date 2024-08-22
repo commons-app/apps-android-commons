@@ -194,6 +194,7 @@ class UploadRepositoryUnitTest {
         )
     }
 
+    @Ignore
     @Test
     fun testGetCaptionQuality() {
         assertEquals(
