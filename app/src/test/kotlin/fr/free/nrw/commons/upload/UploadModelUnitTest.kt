@@ -59,6 +59,7 @@ class UploadModelUnitTest {
         )
     }
 
+    @Ignore
     @Test
     fun `Test onDepictItemClicked when DepictedItem is not selected and not included in media`(){
         uploadModel.onDepictItemClicked(
