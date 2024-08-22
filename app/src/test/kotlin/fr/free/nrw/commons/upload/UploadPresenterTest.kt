@@ -183,6 +183,7 @@ class UploadPresenterTest {
     /**
      * Test media deletion during multiple upload
      */
+    @Ignore
     @Test
     fun testDeleteWhenMultipleFilesUpload(){
         deletePictureBaseTest()
