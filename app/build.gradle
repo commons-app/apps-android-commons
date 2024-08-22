@@ -92,7 +92,7 @@ dependencies {
     testImplementation 'androidx.test.ext:junit:1.1.5'
     testImplementation "androidx.test:rules:1.5.0"
     testImplementation "com.squareup.okhttp3:mockwebserver:$OKHTTP_VERSION"
-    testImplementation "com.jraska.livedata:testing-ktx:1.1.2"
+    testImplementation "com.jraska.livedata:testing-ktx:1.2.0"
     testImplementation "androidx.arch.core:core-testing:2.2.0"
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.10.0"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.10.0"
