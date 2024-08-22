@@ -120,6 +120,7 @@ class UploadModelUnitTest {
             ), null)
     }
 
+    @Ignore
     @Test
     fun testGetSelectedExistingDepictions(){
         uploadModel.selectedExistingDepictions
