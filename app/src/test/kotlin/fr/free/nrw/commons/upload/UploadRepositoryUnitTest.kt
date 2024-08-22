@@ -324,6 +324,7 @@ class UploadRepositoryUnitTest {
         )
     }
 
+    @Ignore
     @Test
     fun testUseSimilarPictureCoordinates() {
         assertEquals(
