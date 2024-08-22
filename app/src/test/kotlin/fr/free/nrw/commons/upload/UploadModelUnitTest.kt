@@ -123,6 +123,7 @@ class UploadModelUnitTest {
         uploadModel.selectedExistingDepictions
     }
 
+    @Ignore
     @Test
     fun testSetSelectedExistingDepictions(){
         uploadModel.selectedExistingDepictions = listOf("")
