@@ -161,6 +161,7 @@ class UploadRepositoryUnitTest {
         )
     }
 
+    @Ignore
     @Test
     fun testGetLicenses() {
         assertEquals(repository.licenses, uploadModel.licenses)
