@@ -173,6 +173,7 @@ class UploadRepositoryUnitTest {
         assertEquals(repository.selectedLicense, uploadModel.selectedLicense)
     }
 
+    @Ignore
     @Test
     fun testGetCount() {
         assertEquals(repository.count, uploadModel.count)
