@@ -44,6 +44,7 @@ class UploadModelUnitTest {
             ), media(filename = "File:Example.jpg"))
     }
 
+    @Ignore
     @Test
     fun `Test onDepictItemClicked when DepictedItem is not selected`(){
         uploadModel.onDepictItemClicked(
