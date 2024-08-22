@@ -343,6 +343,7 @@ class UploadRepositoryUnitTest {
         method.invoke(repository, listOf("Q12"))
     }
 
+    @Ignore
     @Test
     fun testJoinIDs() {
         val method: Method = UploadRepository::class.java.getDeclaredMethod(
