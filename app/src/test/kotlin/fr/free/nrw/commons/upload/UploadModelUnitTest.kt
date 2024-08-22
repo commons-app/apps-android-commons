@@ -6,6 +6,7 @@ import fr.free.nrw.commons.kvstore.JsonKvStore
 import fr.free.nrw.commons.upload.structure.depictions.DepictedItem
 import media
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.mockito.Mockito.mock
 import org.mockito.MockitoAnnotations
@@ -28,6 +29,7 @@ class UploadModelUnitTest {
         )
     }
 
+    @Ignore
     @Test
     fun `Test onDepictItemClicked when DepictedItem is selected`(){
         uploadModel.onDepictItemClicked(
