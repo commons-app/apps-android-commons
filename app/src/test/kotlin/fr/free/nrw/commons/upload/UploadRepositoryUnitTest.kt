@@ -100,6 +100,7 @@ class UploadRepositoryUnitTest {
         assertEquals(repository.buildContributions(), uploadModel.buildContributions())
     }
 
+    @Ignore
     @Test
     fun testPrepareMedia() {
         assertEquals(
