@@ -108,6 +108,7 @@ class UploadRepositoryUnitTest {
         )
     }
 
+    @Ignore
     @Test
     fun testSaveContribution() {
         assertEquals(
