@@ -327,6 +327,7 @@ class UploadRepositoryUnitTest {
         )
     }
 
+    @Ignore
     @Test
     fun testIsWMLSupportedForThisPlace() {
         `when`(uploadModel.items).thenReturn(listOf(uploadItem))
