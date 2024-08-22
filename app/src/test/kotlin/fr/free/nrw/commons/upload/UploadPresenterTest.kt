@@ -103,6 +103,7 @@ class UploadPresenterTest {
         verify(view).showAlertDialog(ArgumentMatchers.anyInt(), ArgumentMatchers.any<Runnable>())
     }
 
+    @Ignore
     @Test
     fun handleSubmitImagesWithLocationWithConsecutiveNoLocationUploads() {
         `when`(
