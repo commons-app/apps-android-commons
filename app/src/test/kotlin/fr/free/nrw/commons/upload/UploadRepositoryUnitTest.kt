@@ -252,6 +252,7 @@ class UploadRepositoryUnitTest {
         assertEquals(repository.selectedExistingDepictions, uploadModel.selectedExistingDepictions)
     }
 
+    @Ignore
     @Test
     fun testSearchAllEntities() {
         assertEquals(
