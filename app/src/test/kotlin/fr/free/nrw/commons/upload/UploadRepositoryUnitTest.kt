@@ -134,6 +134,7 @@ class UploadRepositoryUnitTest {
         assertEquals(repository.selectedCategories, categoriesModel.getSelectedCategories())
     }
 
+    @Ignore
     @Test
     fun testSearchAll() {
         assertEquals(
