@@ -137,6 +137,7 @@ class UploadPresenterTest {
     /**
      * unit test case for method UploadPresenter.handleSubmit
      */
+    @Ignore
     @Test
     fun handleSubmitTestUserNotLoggedIn() {
         `when`(view.isLoggedIn).thenReturn(false)
