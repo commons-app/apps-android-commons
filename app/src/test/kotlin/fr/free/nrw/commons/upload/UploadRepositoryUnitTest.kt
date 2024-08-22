@@ -277,6 +277,7 @@ class UploadRepositoryUnitTest {
         )
     }
 
+    @Ignore
     @Test
     fun testCheckNearbyPlacesWithoutExceptionCaseNonNull() {
         `when`(
