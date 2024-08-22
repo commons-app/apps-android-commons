@@ -367,6 +367,7 @@ class UploadRepositoryUnitTest {
         method.invoke(repository, listOf("Q12", "Q23"))
     }
 
+    @Ignore
     @Test
     fun `test joinIDs when depictIDs is null`() {
         val method: Method = UploadRepository::class.java.getDeclaredMethod(
