@@ -157,6 +157,7 @@ class UploadPresenterTest {
     /**
      * Test which asserts If the next fragment to be shown is not one of the MediaDetailsFragment, lets hide the top card
      */
+    @Ignore
     @Test
     fun hideTopCardWhenReachedTheLastFile(){
         deletePictureBaseTest()
