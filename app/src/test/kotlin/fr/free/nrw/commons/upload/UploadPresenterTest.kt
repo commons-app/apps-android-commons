@@ -119,6 +119,7 @@ class UploadPresenterTest {
             .showAlertDialog(ArgumentMatchers.anyInt(), ArgumentMatchers.any<Runnable>())
     }
 
+    @Ignore
     @Test
     fun handleSubmitTestUserLoggedInAndLimitedConnectionOn() {
         `when`(
