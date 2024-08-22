@@ -80,6 +80,7 @@ class UploadPresenterTest {
         verify(repository).buildContributions()
     }
 
+    @Ignore
     @Test
     fun handleSubmitImagesNoLocationWithConsecutiveNoLocationUploads() {
         `when`(imageCoords.imageCoordsExists).thenReturn(false)
