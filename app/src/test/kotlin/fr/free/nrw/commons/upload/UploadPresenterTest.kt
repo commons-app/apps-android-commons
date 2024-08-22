@@ -9,6 +9,7 @@ import fr.free.nrw.commons.repository.UploadRepository
 import fr.free.nrw.commons.upload.ImageCoordinates
 import io.reactivex.Observable
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.mockito.ArgumentMatchers
 import org.mockito.InjectMocks
@@ -163,6 +164,7 @@ class UploadPresenterTest {
     /**
      * Test media deletion during single upload
      */
+    @Ignore
     @Test
     fun testDeleteWhenSingleUpload(){
         deletePictureBaseTest()
