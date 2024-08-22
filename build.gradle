@@ -4,9 +4,6 @@ buildscript {
         google()
         mavenCentral()
         maven { url "https://plugins.gradle.org/m2/" }
-
-        // Temporary fix for `Could not find com.dinuscxj:circleprogressbar:1.1.1`
-        jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.0.2'
@@ -23,7 +20,6 @@ allprojects {
         gradlePluginPortal() // potential jcenter() replacement
         maven { url "https://jitpack.io" }
         maven { url "https://maven.google.com" }
-        jcenter()
     }
 }
 subprojects{

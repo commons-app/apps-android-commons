@@ -306,9 +306,9 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
         if (uploadCount==0){
             setZeroAchievements();
         }else {
-            binding.imagesUploadedProgressbar.setVisibility(View.VISIBLE);
-            binding.imagesUploadedProgressbar.setProgress
-                    (100*uploadCount/levelInfo.getMaxUploadCount());
+//            binding.imagesUploadedProgressbar.setVisibility(View.VISIBLE);
+//            binding.imagesUploadedProgressbar.setProgress
+//                    (100*uploadCount/levelInfo.getMaxUploadCount());
             binding.tvUploadedImages.setText
                 (uploadCount + "/" + levelInfo.getMaxUploadCount());
         }
@@ -325,9 +325,9 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
             getString(R.string.ok),
             () -> {},
             true);
-        binding.imagesUploadedProgressbar.setVisibility(View.INVISIBLE);
-        binding.imageRevertsProgressbar.setVisibility(View.INVISIBLE);
-        binding.imagesUsedByWikiProgressBar.setVisibility(View.INVISIBLE);
+//        binding.imagesUploadedProgressbar.setVisibility(View.INVISIBLE);
+//        binding.imageRevertsProgressbar.setVisibility(View.INVISIBLE);
+//        binding.imagesUsedByWikiProgressBar.setVisibility(View.INVISIBLE);
         binding.achievementBadgeImage.setVisibility(View.INVISIBLE);
         binding.imagesUsedByWikiText.setText(R.string.no_image);
         binding.imagesRevertedText.setText(R.string.no_image_reverted);
@@ -340,10 +340,10 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
      * @param notRevertPercentage
      */
     private void setImageRevertPercentage(int notRevertPercentage){
-        binding.imageRevertsProgressbar.setVisibility(View.VISIBLE);
-        binding.imageRevertsProgressbar.setProgress(notRevertPercentage);
-        String revertPercentage = Integer.toString(notRevertPercentage);
-        binding.imageRevertsProgressbar.setProgressTextFormatPattern(revertPercentage + "%%");
+//        binding.imageRevertsProgressbar.setVisibility(View.VISIBLE);
+//        binding.imageRevertsProgressbar.setProgress(notRevertPercentage);
+//        String revertPercentage = Integer.toString(notRevertPercentage);
+//        binding.imageRevertsProgressbar.setProgressTextFormatPattern(revertPercentage + "%%");
         binding.imagesRevertLimitText.setText(getResources().getString(R.string.achievements_revert_limit_message)+ levelInfo.getMinNonRevertPercentage() + "%");
     }
 
@@ -353,10 +353,10 @@ public class AchievementsFragment extends CommonsDaggerSupportFragment {
      * @param achievements
      */
     private void inflateAchievements(Achievements achievements) {
-        binding.imagesUsedByWikiProgressBar.setVisibility(View.VISIBLE);
+//        binding.imagesUsedByWikiProgressBar.setVisibility(View.VISIBLE);
         binding.thanksReceived.setText(String.valueOf(achievements.getThanksReceived()));
-        binding.imagesUsedByWikiProgressBar.setProgress
-                (100 * achievements.getUniqueUsedImages() / levelInfo.getMaxUniqueImages());
+//        binding.imagesUsedByWikiProgressBar.setProgress
+//                (100 * achievements.getUniqueUsedImages() / levelInfo.getMaxUniqueImages());
         if(binding.tvWikiPb != null) {
             binding.tvWikiPb.setText
                 (achievements.getUniqueUsedImages() + "/" + levelInfo.getMaxUniqueImages());
