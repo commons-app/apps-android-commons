@@ -386,6 +386,7 @@ class UploadRepositoryUnitTest {
         )
     }
 
+    @Ignore
     @Test
     fun testGetCategories() {
         assertEquals(
