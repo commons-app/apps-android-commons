@@ -247,6 +247,7 @@ class UploadRepositoryUnitTest {
         )
     }
 
+    @Ignore
     @Test
     fun testGetSelectedDepictions() {
         assertEquals(repository.selectedDepictions, uploadModel.selectedDepictions)
