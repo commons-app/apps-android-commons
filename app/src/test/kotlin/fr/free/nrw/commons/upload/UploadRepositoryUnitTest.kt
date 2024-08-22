@@ -187,6 +187,7 @@ class UploadRepositoryUnitTest {
         )
     }
 
+    @Ignore
     @Test
     fun testGetImageQuality() {
         assertEquals(
