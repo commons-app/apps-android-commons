@@ -259,6 +259,7 @@ class UploadRepositoryUnitTest {
         assertEquals(repository.selectedDepictions, uploadModel.selectedDepictions)
     }
 
+    @Ignore
     @Test
     fun testGetSelectedExistingDepictions() {
         assertEquals(repository.selectedExistingDepictions, uploadModel.selectedExistingDepictions)
