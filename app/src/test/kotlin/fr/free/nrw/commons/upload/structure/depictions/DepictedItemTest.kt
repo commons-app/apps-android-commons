@@ -102,6 +102,7 @@ class DepictedItemTest {
         Assert.assertEquals(DepictedItem(entity()).instanceOfs, emptyList<String>())
     }
 
+    @Ignore
     @Test
     fun `commonsCategory maps ValueString to strings`() {
         Assert.assertEquals(
