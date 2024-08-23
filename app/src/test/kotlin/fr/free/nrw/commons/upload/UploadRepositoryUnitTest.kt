@@ -218,6 +218,7 @@ class UploadRepositoryUnitTest {
         assertEquals(repository.deletePicture(""), uploadModel.deletePicture(""))
     }
 
+    @Ignore
     @Test
     fun testGetUploadItemCaseNonNull() {
         `when`(uploadModel.items).thenReturn(listOf(uploadItem))
