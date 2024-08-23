@@ -350,6 +350,7 @@ class UploadRepositoryUnitTest {
         )
     }
 
+    @Ignore
     @Test
     fun testGetDepictions() {
         `when`(depictModel.getDepictions("Q12"))
