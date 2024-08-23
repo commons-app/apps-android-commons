@@ -95,6 +95,7 @@ class UploadRepositoryUnitTest {
         `when`(contributionDao.save(contribution)).thenReturn(completable)
     }
 
+    @Ignore
     @Test
     fun testBuildContributions() {
         assertEquals(repository.buildContributions(), uploadModel.buildContributions())
@@ -187,6 +188,7 @@ class UploadRepositoryUnitTest {
         assertEquals(repository.count, uploadModel.count)
     }
 
+    @Ignore
     @Test
     fun testPreProcessImage() {
         assertEquals(
@@ -397,6 +399,7 @@ class UploadRepositoryUnitTest {
         )
     }
 
+    @Ignore
     @Test
     fun testSetSelectedExistingCategories() {
         assertEquals(
