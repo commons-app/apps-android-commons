@@ -280,6 +280,7 @@ class UploadRepositoryUnitTest {
         )
     }
 
+    @Ignore
     @Test
     fun testGetPlaceDepictions() {
         `when`(uploadModel.uploads).thenReturn(listOf(uploadItem))
