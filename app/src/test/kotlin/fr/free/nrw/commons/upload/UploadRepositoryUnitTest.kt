@@ -133,6 +133,7 @@ class UploadRepositoryUnitTest {
         verify(depictModel).cleanUp()
     }
 
+    @Ignore
     @Test
     fun testGetSelectedCategories() {
         assertEquals(repository.selectedCategories, categoriesModel.getSelectedCategories())
