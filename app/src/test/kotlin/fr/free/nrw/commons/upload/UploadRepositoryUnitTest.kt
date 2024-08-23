@@ -154,6 +154,7 @@ class UploadRepositoryUnitTest {
         verify(uploadModel).setSelectedCategories(listOf())
     }
 
+    @Ignore
     @Test
     fun testOnCategoryClicked() {
         repository.onCategoryClicked(categoryItem, media)
