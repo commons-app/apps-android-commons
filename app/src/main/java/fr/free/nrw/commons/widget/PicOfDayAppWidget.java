@@ -9,10 +9,9 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.net.Uri;
+import android.os.Build;
 import android.widget.RemoteViews;
-
 import androidx.annotation.Nullable;
-
 import com.facebook.common.executors.CallerThreadExecutor;
 import com.facebook.common.references.CloseableReference;
 import com.facebook.datasource.DataSource;
@@ -22,10 +21,8 @@ import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber;
 import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
-
 import fr.free.nrw.commons.media.MediaClient;
 import javax.inject.Inject;
-
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.MainActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
@@ -148,32 +145,37 @@ public class PicOfDayAppWidget extends AppWidgetProvider {
             }
 
             @Override
-            protected void onFailureImpl(DataSource<CloseableReference<CloseableImage>> dataSource) {
+            protected void onFailureImpl(
+                final DataSource<CloseableReference<CloseableImage>> dataSource
+            ) {
                 // Ignore failure for now.
             }
         }, CallerThreadExecutor.getInstance());
     }
 
     @Override
-    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+    public void onUpdate(
+        final Context context,
+        final AppWidgetManager appWidgetManager,
+        final int[] appWidgetIds
+    ) {
         ApplicationlessInjection
-                .getInstance(context
-                        .getApplicationContext())
+                .getInstance(context.getApplicationContext())
                 .getCommonsApplicationComponent()
                 .inject(this);
         // There may be multiple widgets active, so update all of them
-        for (int appWidgetId : appWidgetIds) {
+        for (final int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
     }
 
     @Override
-    public void onEnabled(Context context) {
+    public void onEnabled(final Context context) {
         // Enter relevant functionality for when the first widget is created
     }
 
     @Override
-    public void onDisabled(Context context) {
+    public void onDisabled(final Context context) {
         // Enter relevant functionality for when the last widget is disabled
     }
 }

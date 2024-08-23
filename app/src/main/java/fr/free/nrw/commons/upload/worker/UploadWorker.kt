@@ -48,12 +48,11 @@ import java.util.*
 import java.util.regex.Pattern
 import javax.inject.Inject
 
-
-class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
-    CoroutineWorker(appContext, workerParams) {
+class UploadWorker(
+    private var appContext: Context, workerParams: WorkerParameters
+): CoroutineWorker(appContext, workerParams) {
 
     private var notificationManager: NotificationManagerCompat? = null
-
 
     @Inject
     lateinit var wikidataEditService: WikidataEditService
@@ -83,14 +82,13 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
 
 
     //Attributes of the current-upload notification
-    private var currentNotificationID: Int = -1// lateinit is not allowed with primitives
+    private var currentNotificationID: Int = -1// late init is not allowed with primitives
     private lateinit var currentNotificationTag: String
-    private var curentNotification: NotificationCompat.Builder
+    private var currentNotification: NotificationCompat.Builder
 
     private val statesToProcess= ArrayList<Int>()
 
-    private val STASH_ERROR_CODES = Arrays
-        .asList(
+    private val STASH_ERROR_CODES = listOf(
             "uploadstash-file-not-found",
             "stashfailed",
             "verification-error",
@@ -102,7 +100,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             .getInstance(appContext)
             .commonsApplicationComponent
             .inject(this)
-        curentNotification =
+        currentNotification =
             getNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL)!!
 
         statesToProcess.add(Contribution.STATE_QUEUED)
@@ -123,21 +121,23 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
         fun onProgress(transferred: Long, total: Long) {
             if (transferred == total) {
                 // Completed!
-                curentNotification.setContentTitle(notificationFinishingTitle)
+                currentNotification.setContentTitle(notificationFinishingTitle)
                     .setProgress(0, 100, true)
             } else {
-                curentNotification
+                currentNotification
                     .setProgress(
                         100,
                         (transferred.toDouble() / total.toDouble() * 100).toInt(),
                         false
                     )
             }
-            notificationManager?.cancel(PROCESSING_UPLOADS_NOTIFICATION_TAG, PROCESSING_UPLOADS_NOTIFICATION_ID)
+            notificationManager?.cancel(
+                PROCESSING_UPLOADS_NOTIFICATION_TAG, PROCESSING_UPLOADS_NOTIFICATION_ID
+            )
             notificationManager?.notify(
                 currentNotificationTag,
                 currentNotificationID,
-                curentNotification.build()!!
+                currentNotification.build()
             )
             contribution!!.transferred = transferred
             contributionDao.update(contribution).blockingAwait()
@@ -188,7 +188,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                 .blockingGet()
             //Showing initial notification for the number of uploads being processed
 
-            Timber.e("Queued Contributions: " + queuedContributions.size)
+            Timber.e("Queued Contributions: %s", queuedContributions.size)
 
             processingUploads.setContentTitle(appContext.getString(R.string.starting_uploads))
             processingUploads.setContentText(
@@ -249,7 +249,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                 PROCESSING_UPLOADS_NOTIFICATION_ID
             )
         }
-        // Trigger WorkManager to process any new contributions that may have been added to the queue
+        //Trigger WorkManager to process any new contributions that may have been added to the queue
         val updatedContributionQueue = withContext(Dispatchers.IO) {
             contributionDao.getContribution(statesToProcess).blockingGet()
         }
@@ -311,9 +311,9 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
         currentNotificationID =
             (contribution.localUri.toString() + contribution.media.filename).hashCode()
 
-        curentNotification
+        currentNotification
         getNotificationBuilder(CommonsApplication.NOTIFICATION_CHANNEL_ID_ALL)!!
-        curentNotification.setContentTitle(
+        currentNotification.setContentTitle(
             appContext.getString(
                 R.string.upload_progress_notification_title_start,
                 displayTitle
@@ -323,7 +323,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
         notificationManager?.notify(
             currentNotificationTag,
             currentNotificationID,
-            curentNotification.build()!!
+            currentNotification.build()
         )
 
         val filename = media.filename
@@ -341,15 +341,17 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             val stashUploadResult = uploadClient.uploadFileToStash(
                 filename!!, contribution, notificationProgressUpdater
             ).onErrorReturn{
-                return@onErrorReturn StashUploadResult(StashUploadState.FAILED,fileKey = null,errorMessage = it.message)
+                return@onErrorReturn StashUploadResult(
+                    StashUploadState.FAILED,fileKey = null,errorMessage = it.message
+                )
             }.blockingSingle()
 
             when (stashUploadResult.state) {
                 StashUploadState.SUCCESS -> {
                     //If the stash upload succeeds
                     Timber.d("Upload to stash success for fileName: $filename")
-                    Timber.d("Ensure uniqueness of filename");
-                    val uniqueFileName = findUniqueFileName(filename!!)
+                    Timber.d("Ensure uniqueness of filename")
+                    val uniqueFileName = findUniqueFileName(filename)
 
                     try {
                         //Upload the file from stash
@@ -365,7 +367,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                             )
 
                             wikidataEditService.addDepictionsAndCaptions(uploadResult, contribution)
-                                .blockingSubscribe();
+                                .blockingSubscribe()
                             if(contribution.wikidataPlace==null){
                                 Timber.d(
                                     "WikiDataEdit not required, upload success"
@@ -404,12 +406,14 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                     contributionDao.saveSynchronous(contribution)
                 }
                 else -> {
-                    Timber.e("""upload file to stash failed with status: ${stashUploadResult.state}""")
+                    Timber.e("Upload file to stash failed with status: ${stashUploadResult.state}")
                     showInvalidLoginNotification(contribution)
                     contribution.state = Contribution.STATE_FAILED
                     contribution.chunkInfo = null
                     contributionDao.saveSynchronous(contribution)
-                    if (stashUploadResult.errorMessage.equals(CsrfTokenClient.INVALID_TOKEN_ERROR_MESSAGE)) {
+                    if (stashUploadResult.errorMessage.equals(
+                            CsrfTokenClient.INVALID_TOKEN_ERROR_MESSAGE)
+                        ) {
                         Timber.e("Invalid Login, logging out")
                         val username = sessionManager.userName
                         var logoutListener = CommonsApplication.BaseLogoutListener(
@@ -499,7 +503,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
                         imageSha1 == modifiedSha1,
                         true
                     )
-                );
+                )
             }
         }
     }
@@ -543,7 +547,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
     private fun showSuccessNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
         contribution.state=Contribution.STATE_COMPLETED
-        curentNotification.setContentTitle(
+        currentNotification.setContentTitle(
             appContext.getString(
                 R.string.upload_completed_notification_title,
                 displayTitle
@@ -554,7 +558,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             .setOngoing(false)
         notificationManager?.notify(
             currentNotificationTag, currentNotificationID,
-            curentNotification.build()
+            currentNotification.build()
         )
     }
 
@@ -565,8 +569,8 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
     @SuppressLint("StringFormatInvalid")
     private fun showFailedNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
-        curentNotification.setContentIntent(getPendingIntent(MainActivity::class.java))
-        curentNotification.setContentTitle(
+        currentNotification.setContentIntent(getPendingIntent(MainActivity::class.java))
+        currentNotification.setContentTitle(
             appContext.getString(
                 R.string.upload_failed_notification_title,
                 displayTitle
@@ -577,13 +581,13 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             .setOngoing(false)
         notificationManager?.notify(
             currentNotificationTag, currentNotificationID,
-            curentNotification.build()
+            currentNotification.build()
         )
     }
     @SuppressLint("StringFormatInvalid")
     private fun showInvalidLoginNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
-        curentNotification.setContentTitle(
+        currentNotification.setContentTitle(
             appContext.getString(
                 R.string.upload_failed_notification_title,
                 displayTitle
@@ -594,7 +598,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             .setOngoing(false)
         notificationManager?.notify(
             currentNotificationTag, currentNotificationID,
-            curentNotification.build()
+            currentNotification.build()
         )
     }
 
@@ -604,7 +608,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
      */
     private fun showPausedNotification(contribution: Contribution) {
         val displayTitle = contribution.media.displayTitle
-        curentNotification.setContentTitle(
+        currentNotification.setContentTitle(
             appContext.getString(
                 R.string.upload_paused_notification_title,
                 displayTitle
@@ -615,7 +619,7 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
             .setOngoing(false)
         notificationManager!!.notify(
             currentNotificationTag, currentNotificationID,
-            curentNotification.build()
+            currentNotification.build()
         )
     }
 
@@ -634,6 +638,6 @@ class UploadWorker(var appContext: Context, workerParams: WorkerParameters) :
              } else {
                  getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
              }
-         };
+         }
     }
 }
