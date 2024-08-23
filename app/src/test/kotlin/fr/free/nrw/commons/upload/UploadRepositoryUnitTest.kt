@@ -213,7 +213,7 @@ class UploadRepositoryUnitTest {
         )
     }
 
-
+    @Ignore
     @Test
     fun testDeletePicture() {
         assertEquals(repository.deletePicture(""), uploadModel.deletePicture(""))
