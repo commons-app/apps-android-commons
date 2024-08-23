@@ -41,17 +41,28 @@ import static android.content.Intent.ACTION_VIEW;
  */
 public class PicOfDayAppWidget extends AppWidgetProvider {
 
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Inject
     MediaClient mediaClient;
 
-    void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.pic_of_day_app_widget);
+    void updateAppWidget(
+        final Context context,
+        final AppWidgetManager appWidgetManager,
+        final int appWidgetId
+    ) {
+        final RemoteViews views = new RemoteViews(
+            context.getPackageName(), R.layout.pic_of_day_app_widget);
 
         // Launch App on Button Click
-        Intent viewIntent = new Intent(context, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, viewIntent, PendingIntent.FLAG_IMMUTABLE);
+        final Intent viewIntent = new Intent(context, MainActivity.class);
+        int flags = PendingIntent.FLAG_UPDATE_CURRENT;
+        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.M) {
+            flags |= PendingIntent.FLAG_IMMUTABLE;
+        }
+        final PendingIntent pendingIntent = PendingIntent.getActivity(
+            context, 0, viewIntent, flags);
+
         views.setOnClickPendingIntent(R.id.camera_button, pendingIntent);
         appWidgetManager.updateAppWidget(appWidgetId, views);
 
@@ -60,61 +71,76 @@ public class PicOfDayAppWidget extends AppWidgetProvider {
 
     /**
      * Loads the picture of the day using media wiki API
-     * @param context
-     * @param views
-     * @param appWidgetManager
-     * @param appWidgetId
+     * @param context The application context.
+     * @param views The RemoteViews object used to update the App Widget UI.
+     * @param appWidgetManager The AppWidgetManager instance for managing the widget.
+     * @param appWidgetId he ID of the App Widget to update.
      */
-    private void loadPictureOfTheDay(Context context,
-                                     RemoteViews views,
-                                     AppWidgetManager appWidgetManager,
-                                     int appWidgetId) {
+    private void loadPictureOfTheDay(
+        final Context context,
+        final RemoteViews views,
+        final AppWidgetManager appWidgetManager,
+        final int appWidgetId
+    ) {
         compositeDisposable.add(mediaClient.getPictureOfTheDay()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        response -> {
-                            if (response != null) {
-                                views.setTextViewText(R.id.appwidget_title, response.getDisplayTitle());
+                    response -> {
+                        if (response != null) {
+                            views.setTextViewText(R.id.appwidget_title, response.getDisplayTitle());
 
-                                // View in browser
-                                Intent viewIntent = new Intent();
-                                viewIntent.setAction(ACTION_VIEW);
-                                viewIntent.setData(Uri.parse(response.getPageTitle().getMobileUri()));
-                                PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, viewIntent, PendingIntent.FLAG_IMMUTABLE);
-                                views.setOnClickPendingIntent(R.id.appwidget_image, pendingIntent);
+                            // View in browser
+                            final Intent viewIntent = new Intent();
+                            viewIntent.setAction(ACTION_VIEW);
+                            viewIntent.setData(Uri.parse(response.getPageTitle().getMobileUri()));
 
-                                loadImageFromUrl(response.getThumbUrl(), context, views, appWidgetManager, appWidgetId);
+                            int flags = PendingIntent.FLAG_UPDATE_CURRENT;
+                            if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.M) {
+                                flags |= PendingIntent.FLAG_IMMUTABLE;
                             }
-                        },
-                        t -> Timber.e(t, "Fetching picture of the day failed")
+                            final PendingIntent pendingIntent = PendingIntent.getActivity(
+                                context, 0, viewIntent, flags);
+
+                            views.setOnClickPendingIntent(R.id.appwidget_image, pendingIntent);
+                            loadImageFromUrl(response.getThumbUrl(),
+                                context, views, appWidgetManager, appWidgetId);
+                        }
+                    },
+                    t -> Timber.e(t, "Fetching picture of the day failed")
                 ));
     }
 
     /**
      * Uses Fresco to load an image from Url
-     * @param imageUrl
-     * @param context
-     * @param views
-     * @param appWidgetManager
-     * @param appWidgetId
+     * @param imageUrl The URL of the image to load.
+     * @param context The application context.
+     * @param views The RemoteViews object used to update the App Widget UI.
+     * @param appWidgetManager The AppWidgetManager instance for managing the widget.
+     * @param appWidgetId he ID of the App Widget to update.
      */
-    private void loadImageFromUrl(String imageUrl,
-                                  Context context,
-                                  RemoteViews views,
-                                  AppWidgetManager appWidgetManager,
-                                  int appWidgetId) {
-        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageUrl)).build();
-        ImagePipeline imagePipeline = Fresco.getImagePipeline();
-        DataSource<CloseableReference<CloseableImage>> dataSource
-                = imagePipeline.fetchDecodedImage(request, context);
+    private void loadImageFromUrl(
+        final String imageUrl,
+        final Context context,
+        final RemoteViews views,
+        final AppWidgetManager appWidgetManager,
+        final int appWidgetId
+    ) {
+        final ImageRequest request = ImageRequestBuilder
+            .newBuilderWithSource(Uri.parse(imageUrl)).build();
+        final ImagePipeline imagePipeline = Fresco.getImagePipeline();
+        final DataSource<CloseableReference<CloseableImage>> dataSource = imagePipeline
+            .fetchDecodedImage(request, context);
+
         dataSource.subscribe(new BaseBitmapDataSubscriber() {
             @Override
-            protected void onNewResultImpl(@Nullable Bitmap tempBitmap) {
+            protected void onNewResultImpl(@Nullable final Bitmap tempBitmap) {
                 Bitmap bitmap = null;
                 if (tempBitmap != null) {
-                    bitmap = Bitmap.createBitmap(tempBitmap.getWidth(), tempBitmap.getHeight(), Bitmap.Config.ARGB_8888);
-                    Canvas canvas = new Canvas(bitmap);
+                    bitmap = Bitmap.createBitmap(
+                        tempBitmap.getWidth(), tempBitmap.getHeight(), Bitmap.Config.ARGB_8888
+                    );
+                    final Canvas canvas = new Canvas(bitmap);
                     canvas.drawBitmap(tempBitmap, 0f, 0f, new Paint());
                 }
                 views.setImageViewBitmap(R.id.appwidget_image, bitmap);

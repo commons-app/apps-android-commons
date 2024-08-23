@@ -65,14 +65,11 @@ public class NotificationHelper {
             .setPriority(PRIORITY_HIGH);
 
         int flags = PendingIntent.FLAG_UPDATE_CURRENT;
-
-        // Check if the API level is 31 or higher to modify the flag
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            // For API level 31 or above, PendingIntent requires either FLAG_IMMUTABLE or FLAG_MUTABLE to be set
-            flags |= PendingIntent.FLAG_IMMUTABLE;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            flags |= PendingIntent.FLAG_IMMUTABLE; // This flag was introduced in API 23
         }
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, intent, flags);
+        final PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, intent, flags);
         notificationBuilder.setContentIntent(pendingIntent);
         notificationManager.notify(notificationId, notificationBuilder.build());
     }
