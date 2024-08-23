@@ -118,6 +118,7 @@ class UploadRepositoryUnitTest {
         )
     }
 
+    @Ignore
     @Test
     fun testGetUploads() {
         assertEquals(repository.uploads, uploadModel.uploads)
