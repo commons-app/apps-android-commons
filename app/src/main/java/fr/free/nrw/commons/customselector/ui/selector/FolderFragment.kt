@@ -116,10 +116,13 @@ class FolderFragment : CommonsDaggerSupportFragment() {
     private fun handleResult(result: Result) {
         if(result.status is CallbackStatus.SUCCESS){
             val images = result.images
-            if(images.isNullOrEmpty())
-            {
+            if(images.isEmpty()){
                 binding?.emptyText?.let {
                     it.visibility = View.VISIBLE
+                }
+            } else {
+                binding?.emptyText?.let {
+                    it.visibility = View.GONE
                 }
             }
             folders = ImageHelper.folderListFromImages(result.images)
