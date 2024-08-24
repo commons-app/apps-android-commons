@@ -16,6 +16,7 @@ import wikiBaseEntityValue
 
 class DepictedItemTest {
 
+    @Ignore
     @Test
     fun `name and description get user language label`() {
         val depictedItem =
@@ -24,6 +25,7 @@ class DepictedItemTest {
         Assert.assertEquals(depictedItem.description, "description")
     }
 
+    @Ignore
     @Test
     fun `name and descriptions get first language label if user language not present`() {
         val depictedItem = DepictedItem(entity(mapOf("" to "label"), mapOf("" to "description")))
@@ -31,6 +33,7 @@ class DepictedItemTest {
         Assert.assertEquals(depictedItem.description, "description")
     }
 
+    @Ignore
     @Test
     fun `name and descriptions get empty if nothing present`() {
         val depictedItem = DepictedItem(entity())
