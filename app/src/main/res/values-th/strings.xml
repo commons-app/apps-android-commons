@@ -342,7 +342,7 @@
   <string name="nominate_delete">เสนอให้ลบ</string>
   <string name="delete">ลบ</string>
   <string name="Achievements">ความสำเร็จ</string>
-  <string name="Profile">โปรไฟล์</string>
+  <string name="Profile">โพรไฟล์</string>
   <string name="statistics">สถิติ</string>
   <string name="statistics_thanks">คำขอบคุณที่ได้รับแล้ว</string>
   <string name="statistics_featured">ภาพคัดสรร</string>
@@ -354,7 +354,7 @@
   <string name="achievements_share_message">แชร์ความสำเร็จให้กับเพื่อนของคุณ!</string>
   <string name="achievements_revert_limit_message">ที่ต้องการขั้นต่ำ:</string>
   <string name="error_occurred">เกิดข้อผิดพลาด!</string>
-  <string name="contributions_fragment">การมีส่วนร่วม</string>
+  <string name="contributions_fragment">ส่วนร่วม</string>
   <string name="nearby_fragment">ใกล้เคียง</string>
   <string name="notifications">การแจ้งเตือน</string>
   <string name="list_sheet">รายการ</string>
