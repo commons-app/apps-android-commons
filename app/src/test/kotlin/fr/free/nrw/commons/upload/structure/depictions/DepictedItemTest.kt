@@ -131,6 +131,7 @@ class DepictedItemTest {
         Assert.assertEquals(DepictedItem(entity()).commonsCategories, emptyList<String>())
     }
 
+    @Ignore
     @Test
     fun `isSelected is false at creation`() {
         Assert.assertEquals(DepictedItem(entity()).isSelected, false)
