@@ -95,13 +95,11 @@ class UploadRepositoryUnitTest {
         `when`(contributionDao.save(contribution)).thenReturn(completable)
     }
 
-    @Ignore
     @Test
     fun testBuildContributions() {
         assertEquals(repository.buildContributions(), uploadModel.buildContributions())
     }
 
-    @Ignore
     @Test
     fun testPrepareMedia() {
         assertEquals(
@@ -110,7 +108,6 @@ class UploadRepositoryUnitTest {
         )
     }
 
-    @Ignore
     @Test
     fun testSaveContribution() {
         assertEquals(
@@ -119,13 +116,11 @@ class UploadRepositoryUnitTest {
         )
     }
 
-    @Ignore
     @Test
     fun testGetUploads() {
         assertEquals(repository.uploads, uploadModel.uploads)
     }
 
-    @Ignore
     @Test
     fun testCleanup() {
         repository.cleanup()
@@ -134,13 +129,11 @@ class UploadRepositoryUnitTest {
         verify(depictModel).cleanUp()
     }
 
-    @Ignore
     @Test
     fun testGetSelectedCategories() {
         assertEquals(repository.selectedCategories, categoriesModel.getSelectedCategories())
     }
 
-    @Ignore
     @Test
     fun testSearchAll() {
         assertEquals(
@@ -149,21 +142,18 @@ class UploadRepositoryUnitTest {
         )
     }
 
-    @Ignore
     @Test
     fun testSetSelectedCategories() {
         repository.setSelectedCategories(listOf())
         verify(uploadModel).setSelectedCategories(listOf())
     }
 
-    @Ignore
     @Test
     fun testOnCategoryClicked() {
         repository.onCategoryClicked(categoryItem, media)
         verify(categoriesModel).onCategoryItemClicked(categoryItem, media)
     }
 
-    @Ignore
     @Test
     fun testContainsYear() {
         assertEquals(
@@ -171,25 +161,21 @@ class UploadRepositoryUnitTest {
         )
     }
 
-    @Ignore
     @Test
     fun testGetLicenses() {
         assertEquals(repository.licenses, uploadModel.licenses)
     }
 
-    @Ignore
     @Test
     fun testGetSelectedLicense() {
         assertEquals(repository.selectedLicense, uploadModel.selectedLicense)
     }
 
-    @Ignore
     @Test
     fun testGetCount() {
         assertEquals(repository.count, uploadModel.count)
     }
 
-    @Ignore
     @Test
     fun testPreProcessImage() {
         assertEquals(
@@ -198,7 +184,6 @@ class UploadRepositoryUnitTest {
         )
     }
 
-    @Ignore
     @Test
     fun testGetImageQuality() {
         assertEquals(
@@ -207,7 +192,6 @@ class UploadRepositoryUnitTest {
         )
     }
 
-    @Ignore
     @Test
     fun testGetCaptionQuality() {
         assertEquals(
@@ -216,13 +200,11 @@ class UploadRepositoryUnitTest {
         )
     }
 
-    @Ignore
     @Test
     fun testDeletePicture() {
         assertEquals(repository.deletePicture(""), uploadModel.deletePicture(""))
     }
 
-    @Ignore
     @Test
     fun testGetUploadItemCaseNonNull() {
         `when`(uploadModel.items).thenReturn(listOf(uploadItem))
@@ -232,19 +214,16 @@ class UploadRepositoryUnitTest {
         )
     }
 
-    @Ignore
     @Test
     fun testGetUploadItemCaseNull() {
         assertEquals(repository.getUploadItem(-1), null)
     }
 
-    @Ignore
     @Test
     fun testSetSelectedLicense() {
         assertEquals(repository.setSelectedLicense(""), uploadModel.setSelectedLicense(""))
     }
 
-    @Ignore
     @Test
     fun testSetSelectedExistingDepictions() {
         assertEquals(
@@ -253,7 +232,6 @@ class UploadRepositoryUnitTest {
         )
     }
 
-    @Ignore
     @Test
     fun testOnDepictItemClicked() {
         assertEquals(
@@ -262,19 +240,16 @@ class UploadRepositoryUnitTest {
         )
     }
 
-    @Ignore
     @Test
     fun testGetSelectedDepictions() {
         assertEquals(repository.selectedDepictions, uploadModel.selectedDepictions)
     }
 
-    @Ignore
     @Test
     fun testGetSelectedExistingDepictions() {
         assertEquals(repository.selectedExistingDepictions, uploadModel.selectedExistingDepictions)
     }
 
-    @Ignore
     @Test
     fun testSearchAllEntities() {
         assertEquals(
@@ -283,7 +258,6 @@ class UploadRepositoryUnitTest {
         )
     }
 
-    @Ignore
     @Test
     fun testGetPlaceDepictions() {
         `when`(uploadModel.uploads).thenReturn(listOf(uploadItem))
@@ -295,7 +269,6 @@ class UploadRepositoryUnitTest {
         )
     }
 
-    @Ignore
     @Test
     fun testCheckNearbyPlacesWithoutExceptionCaseNonNull() {
         `when`(
@@ -311,7 +284,6 @@ class UploadRepositoryUnitTest {
         )
     }
 
-    @Ignore
     @Test
     fun testCheckNearbyPlacesWithoutExceptionCaseNull() {
         assertEquals(
@@ -320,7 +292,6 @@ class UploadRepositoryUnitTest {
         )
     }
 
-    @Ignore
     @Test
     fun testCheckNearbyPlacesWithException() {
         `when`(
@@ -336,7 +307,6 @@ class UploadRepositoryUnitTest {
         )
     }
 
-    @Ignore
     @Test
     fun testUseSimilarPictureCoordinates() {
         assertEquals(
@@ -345,7 +315,6 @@ class UploadRepositoryUnitTest {
         )
     }
 
-    @Ignore
     @Test
     fun testIsWMLSupportedForThisPlace() {
         `when`(uploadModel.items).thenReturn(listOf(uploadItem))
@@ -356,7 +325,6 @@ class UploadRepositoryUnitTest {
         )
     }
 
-    @Ignore
     @Test
     fun testGetDepictions() {
         `when`(depictModel.getDepictions("Q12"))
@@ -369,7 +337,6 @@ class UploadRepositoryUnitTest {
         method.invoke(repository, listOf("Q12"))
     }
 
-    @Ignore
     @Test
     fun testJoinIDs() {
         val method: Method = UploadRepository::class.java.getDeclaredMethod(
@@ -380,7 +347,6 @@ class UploadRepositoryUnitTest {
         method.invoke(repository, listOf("Q12", "Q23"))
     }
 
-    @Ignore
     @Test
     fun `test joinIDs when depictIDs is null`() {
         val method: Method = UploadRepository::class.java.getDeclaredMethod(
@@ -391,7 +357,6 @@ class UploadRepositoryUnitTest {
         method.invoke(repository, null)
     }
 
-    @Ignore
     @Test
     fun testGetSelectedExistingCategories() {
         assertEquals(
@@ -400,7 +365,6 @@ class UploadRepositoryUnitTest {
         )
     }
 
-    @Ignore
     @Test
     fun testSetSelectedExistingCategories() {
         assertEquals(
@@ -409,7 +373,6 @@ class UploadRepositoryUnitTest {
         )
     }
 
-    @Ignore
     @Test
     fun testGetCategories() {
         assertEquals(

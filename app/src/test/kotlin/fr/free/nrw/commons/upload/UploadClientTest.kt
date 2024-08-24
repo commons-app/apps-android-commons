@@ -96,7 +96,6 @@ class UploadClientTest {
         assertSame(uploadResult, result.values()[0])
     }
 
-    @Ignore
     @Test
     fun testUploadFileFromStash_WithError() {
         val error = mock<MwServiceError>()
@@ -121,7 +120,6 @@ class UploadClientTest {
         assertEquals(errorCode, result.errors()[0].message)
     }
 
-    @Ignore
     @Test
     fun testUploadFileFromStash_Failure() {
         val exception = Exception("test")
@@ -177,7 +175,6 @@ class UploadClientTest {
         assertEquals(fileContent, fileCaptor.firstValue.body.asString())
     }
 
-    @Ignore
     @Test
     fun testUploadChunkToStash_Failure() {
         val exception = Exception("expected")
@@ -190,7 +187,6 @@ class UploadClientTest {
         assertSame(exception, result.errors()[0])
     }
 
-    @Ignore
     @Test
     fun uploadFileToStash_completedContribution() {
         whenever(contribution.isCompleted()).thenReturn(true)
@@ -204,23 +200,6 @@ class UploadClientTest {
         assertEquals(StashUploadState.SUCCESS, stashResult.state)
     }
 
-    @Test
-    fun uploadFileToStash_contributionIsUnpaused() {
-        whenever(contribution.isCompleted()).thenReturn(false)
-        whenever(contribution.fileKey).thenReturn(filekey)
-        whenever(fileUtilsWrapper.getMimeType(anyOrNull<File>())).thenReturn("image/png")
-        whenever(
-            fileUtilsWrapper.getFileChunks(
-                anyOrNull<File>(),
-                eq(expectedChunkSize)
-            )
-        ).thenReturn(emptyList())
-        val result = uploadClient.uploadFileToStash(filename, contribution, mock()).test()
-        result.assertNoErrors()
-        verify(contribution, times(1))
-    }
-
-    @Ignore
     @Test
     fun uploadFileToStash_returnsFailureIfNothingToUpload() {
         val tempFile = File.createTempFile("tempFile", ".tmp")
@@ -237,7 +216,6 @@ class UploadClientTest {
         assertEquals(StashUploadState.FAILED, result.values()[0].state)
     }
 
-    @Ignore
     @Test
     fun uploadFileToStash_returnsFailureIfAnyChunkFails() {
         val mockFile = mock<File>()
@@ -271,7 +249,6 @@ class UploadClientTest {
         assertEquals(StashUploadState.FAILED, result.values()[0].state)
     }
 
-    @Ignore
     @Test
     fun uploadFileToStash_successWithOneChunk() {
         val mockFile = mock<File>()

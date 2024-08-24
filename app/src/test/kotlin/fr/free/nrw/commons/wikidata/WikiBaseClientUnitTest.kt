@@ -29,7 +29,6 @@ class WikiBaseClientUnitTest {
         whenever(csrfTokenClient.getTokenBlocking()).thenReturn("test")
     }
 
-    @Ignore
     @Test
     fun testPostEditEntity() {
         val response = mock<MwPostResponse>()
@@ -42,7 +41,6 @@ class WikiBaseClientUnitTest {
         assertTrue(result)
     }
 
-    @Ignore
     @Test
     fun testPostEditEntityByFilename() {
         val response = mock<MwPostResponse>()
@@ -55,7 +53,6 @@ class WikiBaseClientUnitTest {
         assertTrue(result)
     }
 
-    @Ignore
     @Test
     fun getFileEntityId() {
         val upload = UploadResult("result", "key", 0, "Example.jpg")
@@ -74,7 +71,6 @@ class WikiBaseClientUnitTest {
         assertEquals(123L, result)
     }
 
-    @Ignore
     @Test
     fun addLabelstoWikidata() {
         val mwPostResponse = mock<MwPostResponse>()

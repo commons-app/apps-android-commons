@@ -42,7 +42,6 @@ class WikidataClientTest {
             .thenReturn(Observable.just(mwQueryResponse))
     }
 
-    @Ignore
     @Test
     fun addEditTag() {
         val response = mock(WbCreateClaimResponse::class.java)

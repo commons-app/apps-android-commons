@@ -16,7 +16,6 @@ import wikiBaseEntityValue
 
 class DepictedItemTest {
 
-    @Ignore
     @Test
     fun `name and description get user language label`() {
         val depictedItem =
@@ -25,7 +24,6 @@ class DepictedItemTest {
         Assert.assertEquals(depictedItem.description, "description")
     }
 
-    @Ignore
     @Test
     fun `name and descriptions get first language label if user language not present`() {
         val depictedItem = DepictedItem(entity(mapOf("" to "label"), mapOf("" to "description")))
@@ -33,7 +31,6 @@ class DepictedItemTest {
         Assert.assertEquals(depictedItem.description, "description")
     }
 
-    @Ignore
     @Test
     fun `name and descriptions get empty if nothing present`() {
         val depictedItem = DepictedItem(entity())
@@ -41,19 +38,16 @@ class DepictedItemTest {
         Assert.assertEquals(depictedItem.description, "")
     }
 
-    @Ignore
     @Test
     fun `image is empty with null statements`() {
         Assert.assertEquals(DepictedItem(entity(statements = null)).imageUrl, null)
     }
 
-    @Ignore
     @Test
     fun `image is empty with no image statement`() {
         Assert.assertEquals(DepictedItem(entity()).imageUrl, null)
     }
 
-    @Ignore
     @Test
     fun `image is empty with dataValue not of ValueString type`() {
         Assert.assertEquals(
@@ -68,7 +62,6 @@ class DepictedItemTest {
         )
     }
 
-    @Ignore
     @Test
     fun `image is not empty with dataValue of ValueString type`() {
         Assert.assertEquals(
@@ -84,7 +77,6 @@ class DepictedItemTest {
             "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/_example_/70px-_example_")
     }
 
-    @Ignore
     @Test
     fun `instancesOf maps EntityIds to ids`() {
         Assert.assertEquals(
@@ -102,13 +94,11 @@ class DepictedItemTest {
             listOf("1", "2"))
     }
 
-    @Ignore
     @Test
     fun `instancesOf is empty with no values`() {
         Assert.assertEquals(DepictedItem(entity()).instanceOfs, emptyList<String>())
     }
 
-    @Ignore
     @Test
     fun `commonsCategory maps ValueString to strings`() {
         Assert.assertEquals(
@@ -125,25 +115,21 @@ class DepictedItemTest {
             listOf("1", "2"))
     }
 
-    @Ignore
     @Test
     fun `commonsCategory is empty with no values`() {
         Assert.assertEquals(DepictedItem(entity()).commonsCategories, emptyList<String>())
     }
 
-    @Ignore
     @Test
     fun `isSelected is false at creation`() {
         Assert.assertEquals(DepictedItem(entity()).isSelected, false)
     }
 
-    @Ignore
     @Test
     fun `id is entityId`() {
         Assert.assertEquals(DepictedItem(entity(id = "1")).id, "1")
     }
 
-    @Ignore
     @Test
     fun `place constructor uses place name and longDescription`() {
         val depictedItem = DepictedItem(entity(), place(name = "1", longDescription = "2"))

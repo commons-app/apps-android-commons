@@ -19,7 +19,6 @@ class FileUtilsTest {
         assertEquals(false, file.exists())
     }
 
-    @Ignore
     @Test
     fun testSHA1() {
         val fileUtilsWrapper = FileUtilsWrapper(mock())
