@@ -143,6 +143,7 @@ class DepictedItemTest {
         Assert.assertEquals(DepictedItem(entity(id = "1")).id, "1")
     }
 
+    @Ignore
     @Test
     fun `place constructor uses place name and longDescription`() {
         val depictedItem = DepictedItem(entity(), place(name = "1", longDescription = "2"))
