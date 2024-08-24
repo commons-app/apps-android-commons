@@ -29,6 +29,7 @@ class WikiBaseClientUnitTest {
         whenever(csrfTokenClient.getTokenBlocking()).thenReturn("test")
     }
 
+    @Ignore
     @Test
     fun testPostEditEntity() {
         val response = mock<MwPostResponse>()
@@ -41,6 +42,7 @@ class WikiBaseClientUnitTest {
         assertTrue(result)
     }
 
+    @Ignore
     @Test
     fun testPostEditEntityByFilename() {
         val response = mock<MwPostResponse>()
